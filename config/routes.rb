@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  #
 
-  get('status' => 'status#index')
-  post('legalaidapplications' => 'legalaid_applicaton#create')
+  namespace 'api' do
+    namespace 'v1' do
+
+      resources :status, only: [:index]
+      resources :applications, only: [:create]
+    end
+  end
+
 end
