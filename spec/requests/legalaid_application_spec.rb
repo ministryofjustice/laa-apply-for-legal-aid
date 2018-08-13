@@ -7,7 +7,7 @@ RSpec.describe 'Legal aid applications' do
     it 'returns an application reference' do
 
       post '/api/v1/applications'
-      expect(response_json['data']['attributes']['application_ref']).to be
+      expect(response_json['data']['attributes']['application_ref']).not_to be_empty
       expect(response.status).to eql(201)
     end
   end
