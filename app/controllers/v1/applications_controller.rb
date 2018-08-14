@@ -1,4 +1,4 @@
-class Api::V1::ApplicationsController < ApplicationController
+class V1::ApplicationsController < ApplicationController
 
 
   def create

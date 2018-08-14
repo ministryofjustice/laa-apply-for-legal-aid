@@ -1,4 +1,4 @@
-class Api::V1::StatusController < ApplicationController
+class V1::StatusController < ApplicationController
 
   def index
     render(json: {'status' => 'ok'})
