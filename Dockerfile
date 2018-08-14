@@ -7,7 +7,7 @@ RUN apk --update add --virtual build-dependencies \
                                     libxslt-dev \
 #                                    postgresql-dev \
                                     sqlite-dev \
-                                    nodejs \
+
                                     tzdata \
                                     && rm -rf /var/cache/apk/*
 
