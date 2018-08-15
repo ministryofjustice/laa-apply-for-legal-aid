@@ -17,8 +17,6 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-RUN gem update bundler
-
 RUN  bundle install
 
 ENTRYPOINT ["bundle", "exec"]
