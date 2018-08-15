@@ -1,4 +1,4 @@
-#LAA apply for legal aid
+# LAA apply for legal aid
 
 This is the service api for persisting application related information to the back end database and
 may well be used to fire requests to other services.
@@ -40,7 +40,7 @@ may well be used to fire requests to other services.
         * Only GET is supported at the moment not sure anything else is needed here
 
 
-#Docker
+## Docker
 
 The docker file is created against a ruby alpine image using version 2.5.1 which is consistent
 with the latest version at the time of writing.
@@ -55,5 +55,4 @@ In order to create a local build you can run
 And then run the image using
 
 ```docker container run  -d -p 3000:3000 laa-apply-for-legalaid-api```
-
 
