@@ -1,9 +1,4 @@
-# laa-apply-for-legalaid-api
-This api will povide various services to create a legal aid application
-
-
-#LAA apply for legal aid
-
+# LAA apply for legal aid
 
 This is the service api for persisting application related information to the back end database and
 may well be used to fire requests to other services.
@@ -44,4 +39,20 @@ may well be used to fire requests to other services.
     * ``http://localhost:3000/api/v1/status``
         * Only GET is supported at the moment not sure anything else is needed here
 
+
+## Docker
+
+The docker file is created against a ruby alpine image using version 2.5.1 which is consistent
+with the latest version at the time of writing.
+
+Alpine images are usually very lightweight and such are preferred choice for deploying containers.
+
+In order to create a local build you can run
+
+```docker build -t laa-apply-for-legalaid-api .```
+
+
+And then run the image using
+
+```docker container run  -d -p 3000:3000 laa-apply-for-legalaid-api```
 
