@@ -6,8 +6,6 @@ RUN apk --update add --virtual build-dependencies \
                                     libxml2-dev \
                                     libxslt-dev \
                                     postgresql-dev \
-#                                    sqlite-dev \
-
                                     tzdata \
                                     && rm -rf /var/cache/apk/*
 
@@ -18,8 +16,6 @@ RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
-
-RUN gem update bundler
 
 RUN  bundle install
 
