@@ -6,6 +6,7 @@
 #
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
@@ -20,15 +21,15 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: apply_for_legal_aid_dev
+  database: apply_for_legal_aid_test
   host: localhost
   username: postgres
 
 
 staging:
   <<: *default
-  database: laa-apply-for-legalaid-prod
+  database: apply_for_legal_aid_staging
 
 production:
   <<: *default
-  database: laa-apply-for-legalaid-prod
+  database: apply_for_legal_aid_production
