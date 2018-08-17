@@ -56,11 +56,11 @@ Benefit of this is you dont have to build container everytime you make a change 
 
 * Post an application 
 
-```http://localhost:3000/api/v1/applications```    
+```http://localhost:3000/v1/applications```    
 
 * Get status of the service 
 
-```http://localhost:3000/api/v1/status```
+```http://localhost:3000/v1/status```
 
         
         
