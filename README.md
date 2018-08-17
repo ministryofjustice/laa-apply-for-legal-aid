@@ -9,16 +9,14 @@ may well be used to fire requests to other services.
 
 
 * System dependencies
-    * none
+    * postgres 10.5  -> see setup below
 
 * Configuration
-    * ```bundle install```
+   
+    ```brew install postgres```
+    
+    ```bundle install```
 
-* Database creation
-   * not needed yet
-
-* Database initialization
-    * ```rake db:migrate```
 
 * How to run the test suite
     * ```bundle exec rspec spec```
@@ -56,3 +54,34 @@ And then run the image using
 
 ```docker container run  -d -p 3000:3000 laa-apply-for-legalaid-api```
 
+
+## Postgres Sql
+
+If you already have an installation of postgres you might want to use it.
+For development mode i am going for the simplest setup without setting any specific roles or users
+
+If you dont have postgres installed then you can run the following command to get up and running quickly
+
+```docker run  -d -v pg-data:/var/lib/postgresql/data -p 5432:5432  --name postgres  postgres:10.5```
+ 
+ the 10.5 version appears to be the latest and most likely the one we will be using in RDS.
+ 
+ The above will start a postgres server and expose it on ```localhost:5432```
+ 
+ 
+ If you are running this for the first time you will have to run the following commands form within the project
+ 
+ ```rake db:setup```
+ 
+ ```rake db:migrate```
+ 
+ 
+For every other time you do a pull it might be a good idea to 
+```rake db:migrate```
+
+It's also good idea at this pint to rerun the tests.
+
+```bundle exec rspec spec```
+
+If all is well the tests will now work with postgres database
+The tests will create a test schema and delete the data  once its done.
