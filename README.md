@@ -31,7 +31,8 @@ In order to run the tests run
 
  * ```make test```
  
- This is currently setup to run all rspec tests
+ This is currently setup to run all rspec tests and will run them in docker containers, which means
+ it will take longer to run.
 
 ## Running the application
 

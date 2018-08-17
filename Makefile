@@ -16,11 +16,11 @@ setup-local-db:
 	docker-compose run api rake db:setup db:migrate
 
 destroy-local-db:
-	@docker container stop postgres || true
-	@docker container rm postgres || true
+	docker container stop postgres || true
+	docker container rm postgres || true
 
 start-local-server: destroy-local-db setup-local-db
-	rails s
+	./bin/rails s
 
 
 serve: docker-stop docker-build update-db
