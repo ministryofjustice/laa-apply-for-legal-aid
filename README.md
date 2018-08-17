@@ -12,17 +12,10 @@ may well be used to fire requests to other services.
     * postgres 10.5  -> see setup below
 
 * Configuration
-    you may have to install postgres gem if you dont already have it 
-    
-    ```brew install libpq ```                                         # needed for the pg gem's native extensions
    
-    ```PATH=$PATH:/usr/local/opt/libpq/bin```        # so that the pg gem can find the pq library
+    ```brew install postgres```
     
-    ```gem install pg```
-    
-    ```rbenv rehash```
-    
-    * ```bundle install```
+    ```bundle install```
 
 
 * How to run the test suite
