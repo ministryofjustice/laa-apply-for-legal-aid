@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_08_07_211758) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "legal_aid_applications", force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
