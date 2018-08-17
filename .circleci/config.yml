@@ -9,6 +9,11 @@ references:
         GITHUB_TEAM_NAME_SLUG: apply-for-legalaid
     - image: postgres:10.5
 
+  build_docker_image: &build_docker_image
+    run:
+      name: Build laa-apply-for-legalaid-api  docker image
+      command: docker build -t app .
+
 jobs:
   build_and_test:
     <<: *build_container_config
@@ -28,6 +33,7 @@ jobs:
     - run:
         name: Run Tests
         command: bundle exec rake
+    - *build_docker_image
 
 
 workflows:
