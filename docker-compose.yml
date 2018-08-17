@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:10.5
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+  api:
+    environment:
+    - DB_HOST=postgres
+    build: .
+    command: rails server -p 3000 -b '0.0.0.0'
+    ports:
+    - "3000:3000"
+    depends_on:
+    - postgres
+
+volumes:
+  pgdata:
