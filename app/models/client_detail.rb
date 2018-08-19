@@ -1,15 +1,16 @@
+require 'date'
+
 class ClientDetail < ApplicationRecord
 
-  validates :name,  presence: true
+  validates :name, :date_of_birth, presence: true
 
-  validates :dob_day, numericality: {
-                    greater_than_or_equal_to: 1, less_than_or_equal_to: 31,
-                  }
-  validates :dob_month, numericality: {
-                    greater_than_or_equal_to: 1, less_than_or_equal_to: 12,
-                   }
-   validates :dob_year, numericality: {
-                    greater_than_or_equal_to: 1900, less_than_or_equal_to: 2099,
-                  }
+  validate :validate_date_of_birth
 
+  private
+
+  def validate_date_of_birth
+    if date_of_birth.present? && (date_of_birth < "01/01/1900".to_date || date_of_birth > Date.today)
+       errors.add(:date_of_birth, "Date of birth is not valid")
+    end
+  end
 end

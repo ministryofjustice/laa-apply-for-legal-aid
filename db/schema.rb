@@ -14,9 +14,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_100710) do
 
   create_table "client_details", force: :cascade do |t|
     t.string "name"
-    t.integer "dob_day"
-    t.integer "dob_month"
-    t.integer "dob_year"
+    t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

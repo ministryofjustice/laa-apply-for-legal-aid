@@ -1,13 +1,12 @@
 require 'rails_helper'
+require 'date'
 
 RSpec.describe ClientDetail, type: :model do
   subject { described_class.new }
 
   before do
     subject.name = "John Doe"
-    subject.dob_day = "01"
-    subject.dob_month = "02"
-    subject.dob_year = "1988"
+    subject.date_of_birth = "01/02/1988"
   end
 
   it "is valid with all valid attributes" do
@@ -19,19 +18,18 @@ RSpec.describe ClientDetail, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a dob_day" do
-    subject.dob_day = ""
-    expect(subject).to_not be_valid
-    print subject.errors.to_a
-  end
-
-  it "is not valid without a dob_month" do
-    subject.dob_month = ""
+  it "is not valid without a date of birth" do
+    subject.date_of_birth = nil
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a dob_year" do
-    subject.dob_year = ""
+  it "is not valid if the date of birth is in the future" do
+    subject.date_of_birth = Date.today + 1
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid if the date of birth is before 01/01/1900" do
+    subject.date_of_birth = "31/12/1899".to_date
     expect(subject).to_not be_valid
   end
 
