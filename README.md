@@ -1,9 +1,4 @@
-# laa-apply-for-legalaid-api
-This api will povide various services to create a legal aid application
-
-
-#LAA apply for legal aid
-
+# LAA apply for legal aid
 
 This is the service api for persisting application related information to the back end database and
 may well be used to fire requests to other services.
@@ -14,34 +9,63 @@ may well be used to fire requests to other services.
 
 
 * System dependencies
-    * none
+    * postgres 10.5  -> see setup below
 
 * Configuration
-    * ```bundle install```
-
-* Database creation
-   * not needed yet
-
-* Database initialization
-    * ```rake db:migrate```
-
-* How to run the test suite
-    * ```bundle exec rspec spec```
-
-* Services (job queues, cache servers, search engines, etc.)
+   
+    ```brew install postgres```
     
+    ```bundle install```
 
-* Deployment instructions
-    * check the code out and run ```rails s```
 
-* play with application
-    Once the server is started you can actualy use postman to fire requests using the endpoints below
+
+## Initial setup
+
+Run ```make initial-setup```
+
+This will create the db schema  and run a  migration. you shouldn't have to run this again.
+
+## Running the tests
+
+In order to run the tests run
+
+ * ```make test```
+ 
+ This is currently setup to run all rspec tests and will run them in docker containers, which means
+ it will take longer to run.
+
+## Running the application
+
+ * ```make serve```
+ 
+ This will use docker compose to start postgres and the api project.
+ requests will be served on port localhost:3000
+ 
+
+## Other options
+
+There are other configurations in the makefile which you can use if you want 
+
+i.e. ```start-local-server```
+
+This will start a server without docker and setup a postgres db exposed at localhost:5432.  
+Benefit of this is you dont have to build container everytime you make a change to a file.  handy for the html/css changes.
+
+
+
+## Developer local Endpoints
+
+* Post an application 
+
+```http://localhost:3002/v1/applications```    
+
+* Get status of the service 
+
+```http://localhost:3002/v1/status```
+
+        
+        
+
     
-
-* Developer local Endpoints
-    * ``http://localhost:3000/api/v1/applications``
-        * Only POST is supported at the moment so this wil create an application and retrun application ref
-    * ``http://localhost:3000/api/v1/status``
-        * Only GET is supported at the moment not sure anything else is needed here
-
-
+ 
+   

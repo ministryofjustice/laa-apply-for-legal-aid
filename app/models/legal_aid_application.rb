@@ -6,7 +6,7 @@ class LegalAidApplication < ApplicationRecord
 
   private
 
-   def create_app_ref
-     self.application_ref = SecureRandom.uuid
-   end
+  def create_app_ref
+    self.application_ref = SecureRandom.uuid
+  end
 end

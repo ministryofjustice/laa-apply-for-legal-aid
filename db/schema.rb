@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2018_08_20_112730) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "applicants", force: :cascade do |t|
     t.string "name"
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "legal_aid_application_id"
+    t.bigint "legal_aid_application_id"
     t.index ["legal_aid_application_id"], name: "index_applicants_on_legal_aid_application_id"
   end
 
