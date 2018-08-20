@@ -42,9 +42,20 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
     - *setup_test_env
+    - restore_cache:
+        keys:
+          - laa-apply-for-legalaid-api-{{ checksum "Gemfile.lock" }}
+          - laa-apply-for-legalaid-api
+
     - run:
-        name: Install gems
-        command: bundle install
+        name: Bundle Install
+        command: bundle check || bundle install
+
+      # Store bundle cache
+    - save_cache:
+        key: laa-apply-for-legalaid-api-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
     - run: sudo apt install -y postgresql-client || true
     - run:
         name: Database Setup

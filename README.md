@@ -61,7 +61,7 @@ Benefit of this is you dont have to build container everytime you make a change 
 
 * Get status of the service 
 
-```http://localhost:3002/v1/status```
+```http://localhost:3002/v1/status``` 
 
         
         
