@@ -9,7 +9,7 @@ class ClientDetail < ApplicationRecord
   private
 
   def validate_date_of_birth
-    if date_of_birth.present? && (date_of_birth < "01/01/1900".to_date || date_of_birth > Date.today)
+    if date_of_birth.present? && (date_of_birth < Date.new(1900, 01, 01) || date_of_birth > Date.today)
        errors.add(:date_of_birth, "Date of birth is not valid")
     end
   end

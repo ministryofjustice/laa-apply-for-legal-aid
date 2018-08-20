@@ -6,7 +6,7 @@ RSpec.describe ClientDetail, type: :model do
 
   before do
     subject.name = "John Doe"
-    subject.date_of_birth = "01/02/1988"
+    subject.date_of_birth = Date.new(1988, 02, 01)
   end
 
   it "is valid with all valid attributes" do
@@ -28,8 +28,8 @@ RSpec.describe ClientDetail, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid if the date of birth is before 01/01/1900" do
-    subject.date_of_birth = "31/12/1899".to_date
+  it "is not valid if the date of birth is before 1900-01-01" do
+    subject.date_of_birth = Date.new(1899, 12, 31)
     expect(subject).to_not be_valid
   end
 
