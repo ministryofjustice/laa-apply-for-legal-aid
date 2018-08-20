@@ -1,6 +1,8 @@
 require 'date'
 
-class ClientDetail < ApplicationRecord
+class Applicant < ApplicationRecord
+
+  belongs_to :legal_aid_application
 
   validates :name, :date_of_birth, presence: true
 

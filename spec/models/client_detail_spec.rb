@@ -1,12 +1,14 @@
 require 'rails_helper'
 require 'date'
 
-RSpec.describe ClientDetail, type: :model do
+RSpec.describe Applicant, type: :model do
   subject { described_class.new }
 
   before do
+    LegalAidApplication.create
     subject.name = "John Doe"
     subject.date_of_birth = Date.new(1988, 02, 01)
+    subject.legal_aid_application_id = 1
   end
 
   it "is valid with all valid attributes" do

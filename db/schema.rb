@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_100710) do
+ActiveRecord::Schema.define(version: 2018_08_20_112730) do
 
-  create_table "client_details", force: :cascade do |t|
+  create_table "applicants", force: :cascade do |t|
     t.string "name"
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legal_aid_application_id"
+    t.index ["legal_aid_application_id"], name: "index_applicants_on_legal_aid_application_id"
   end
 
   create_table "legal_aid_applications", force: :cascade do |t|
