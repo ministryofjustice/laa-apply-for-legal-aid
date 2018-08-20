@@ -11,9 +11,9 @@ initial-setup:
 update-db:
 	docker-compose run api rake db:migrate
 
-setup-local-db:
+setup-local-db: destroy-local-db
 	docker run  -d -v pg-data:/var/lib/postgresql/data -p 5432:5432  --name postgres  postgres:10.5
-	docker-compose run api rake db:setup db:migrate
+	bundle exec rake db:setup db:migrate
 
 destroy-local-db:
 	docker container stop postgres || true
