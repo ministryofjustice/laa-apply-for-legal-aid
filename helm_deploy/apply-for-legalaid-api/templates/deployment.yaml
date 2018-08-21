@@ -41,9 +41,11 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legalaid-api.fullname" . }}
                 key: postgresDatabase
+          - name: RAILS_ENV
+            value: staging
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 3002
               protocol: TCP
           livenessProbe:
             httpGet:
