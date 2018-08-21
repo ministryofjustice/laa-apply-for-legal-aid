@@ -28,8 +28,14 @@ test:
 
 staging:
   <<: *default
+  host: <%= ENV['PG_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
   database: apply_for_legal_aid_staging
 
 production:
   <<: *default
+  host: <%= ENV['POSTGRES_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
   database: apply_for_legal_aid_production
