@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_211758) do
+ActiveRecord::Schema.define(version: 2018_08_21_122427) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applicants", force: :cascade do |t|
+    t.string "name"
+    t.date "date_of_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "legal_aid_applications", force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "applicant_id"
+    t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
+
 end
