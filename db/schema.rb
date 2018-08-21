@@ -20,14 +20,14 @@ ActiveRecord::Schema.define(version: 2018_08_20_112730) do
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "legal_aid_application_id"
-    t.index ["legal_aid_application_id"], name: "index_applicants_on_legal_aid_application_id"
   end
 
   create_table "legal_aid_applications", force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "applicant_id"
+    t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 
 end

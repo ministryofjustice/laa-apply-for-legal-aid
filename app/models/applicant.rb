@@ -2,7 +2,7 @@ require 'date'
 
 class Applicant < ApplicationRecord
 
-  belongs_to :legal_aid_application
+  has_one :legal_aid_application
 
   validates :name, :date_of_birth, presence: true
 
