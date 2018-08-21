@@ -4,3 +4,7 @@ AllCops:
   Exclude:
   - 'db/schema.rb'
   - 'vendor/**/*'
+
+Style/Documentation:
+  Exclude:
+  - '**/*'
