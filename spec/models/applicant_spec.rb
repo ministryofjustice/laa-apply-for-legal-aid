@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'date'
 
 RSpec.describe Applicant, type: :model do
   subject { described_class.new }

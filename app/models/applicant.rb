@@ -1,5 +1,3 @@
-require 'date'
-
 class Applicant < ApplicationRecord
 
   has_one :legal_aid_application
