@@ -42,7 +42,7 @@ spec:
                 name: {{ template "apply-for-legalaid-api.fullname" . }}
                 key: postgresDatabase
           - name: RAILS_ENV
-            value: staging
+            value: production
           ports:
             - name: http
               containerPort: 3002
