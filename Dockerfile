@@ -17,10 +17,10 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-RUN  bundle install
+RUN bundle install
 
-EXPOSE 3002
+ENV PORT 3002
 
-ENTRYPOINT ["bundle", "exec"]
+EXPOSE $PORT
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
