@@ -51,11 +51,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /v1/status.json
+              path: /status.json
               port: http
           readinessProbe:
             httpGet:
-              path: /v1/status.json
+              path: /status.json
               port: http
           resources:
 {{ toYaml .Values.resources | indent 12 }}
