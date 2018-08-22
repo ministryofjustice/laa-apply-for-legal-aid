@@ -43,6 +43,8 @@ spec:
                 key: postgresDatabase
           - name: RAILS_ENV
             value: production
+          - name: RAILS_LOG_TO_STDOUT
+            value: "true"
           ports:
             - name: http
               containerPort: 3002
