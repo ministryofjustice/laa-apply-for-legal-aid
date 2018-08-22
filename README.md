@@ -29,10 +29,9 @@ This will create the db schema  and run a  migration. you shouldn't have to run 
 
 In order to run the tests run
 
- * ```make test```
+ * ```./bin/rake```
  
- This is currently setup to run all rspec tests and will run them in docker containers, which means
- it will take longer to run.
+ This runs rubocop and the specs. You can also run ```make test``` which builds a docker image and runs this inside it, but it takes longer.
 
 ## Running the application
 
