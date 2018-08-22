@@ -6,21 +6,29 @@ RUN apk --update add --virtual build-dependencies \
                                libxml2-dev \
                                libxslt-dev \
                                postgresql-dev \
+                               postgresql-client \
                                tzdata \
                                && rm -rf /var/cache/apk/*
 
 RUN bundle config build.nokogiri --use-system-libraries
 
+# Copy helper scripts
+COPY docker/* /usr/bin/
+
 RUN mkdir /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY . /usr/src/app
-
+# Copy Gemfile & Gemfile.lock separately,
+# so that Docker will cache the 'bundle install'
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
+
+COPY . /usr/src/app
 
 ENV PORT 3002
 
 EXPOSE $PORT
 
+ENTRYPOINT ["/usr/bin/entrypoint"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

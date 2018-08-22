@@ -1,0 +1,17 @@
+#!/bin/bash
+# Usage: setup_pg <database_name>
+# expected ENV: POSTGRES_HOST, POSTGRES_USER, POSTGRES_PASSWORD
+# Description:
+# Setup the database if it doesn't exist.
+
+export PGPASSWORD=$POSTGRES_PASSWORD
+
+if echo "\c $1; \dt" | psql -h ${POSTGRES_HOST:-postgres} -U${POSTGRES_USER:-postgres} | grep schema_migrations 2>&1 >/dev/null
+then
+  echo "🐘 Database exists, doing nothing."
+else
+  echo "🐘 Setup Database"
+  bundle exec rake db:setup
+fi
+
+unset $PGPASSWORD
