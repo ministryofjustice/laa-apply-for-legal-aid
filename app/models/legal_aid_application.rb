@@ -1,5 +1,4 @@
 class LegalAidApplication < ApplicationRecord
-
   before_create :create_app_ref
 
   private

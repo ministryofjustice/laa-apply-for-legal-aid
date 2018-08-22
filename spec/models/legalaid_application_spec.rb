@@ -9,11 +9,11 @@ RSpec.describe LegalAidApplication, type: :model do
     subject.applicant_id = applicant.id
   end
 
-  it "is valid with all valid attributes" do
+  it 'is valid with all valid attributes' do
     expect(subject).to be_valid
   end
 
-  it "should belong to an applicant" do
+  it 'should belong to an applicant' do
     expect(subject.applicant_id).to eq(applicant.id)
   end
 end
