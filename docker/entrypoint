@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-wait_for_pg
-# setup_pg postgres
-
-# Prevent zombies
-exec $@

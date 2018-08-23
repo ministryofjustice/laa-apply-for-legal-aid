@@ -12,9 +12,6 @@ RUN apk --update add --virtual build-dependencies \
 
 RUN bundle config build.nokogiri --use-system-libraries
 
-# Copy helper scripts
-COPY docker/* /usr/bin/
-
 RUN mkdir /usr/src/app
 
 WORKDIR /usr/src/app
@@ -26,9 +23,11 @@ RUN bundle install
 
 COPY . /usr/src/app
 
+# Copy helper scripts
+COPY ./docker/* /usr/src/app/bin/
+
 ENV PORT 3002
 
 EXPOSE $PORT
 
-ENTRYPOINT ["/usr/bin/entrypoint"]
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["bin/run"]
