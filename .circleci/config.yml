@@ -1,12 +1,18 @@
 version: 2.0
 
 references:
-
   deploy_container_config: &deploy_container_config
     docker:
     - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
       environment:
         GITHUB_TEAM_NAME_SLUG: apply-for-legalaid
+
+  decrypt_secrets: &decrypt_secrets
+    run:
+      name: Decrypt secrets file
+      command: |
+        echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
+        git-crypt unlock git-crypt.key
 
   build_containers_config: &build_container_config
     docker:
@@ -87,6 +93,7 @@ jobs:
           $(aws ecr get-login --region eu-west-1 --no-include-email)
           setup-kube-auth
           kubectl config use-context staging
+    - *decrypt_secrets
     - deploy:
         name: Helm deployment to staging
         command: |
@@ -114,6 +121,7 @@ jobs:
           $(aws ecr get-login --region eu-west-1 --no-include-email)
           setup-kube-auth
           kubectl config use-context production
+    - *decrypt_secrets
     - deploy:
         name: Helm deployment to production
         command: |
@@ -128,7 +136,6 @@ jobs:
                         --set ingress.hosts="{${PRODUCTION_HOST}}" \
                         --set replicaCount="2" \
                         --debug
-
 
 workflows:
   version: 2
