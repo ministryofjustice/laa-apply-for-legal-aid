@@ -1,0 +1,1 @@
+helm_deploy/apply-for-legalaid-api/values-*.yaml filter=git-crypt diff=git-crypt
