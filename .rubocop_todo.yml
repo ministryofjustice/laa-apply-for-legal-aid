@@ -65,13 +65,11 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'app/controllers/v1/applications_controller.rb'
     - 'app/controllers/v1/status_controller.rb'
-    - 'test/test_helper.rb'
 
 # Offense count: 8
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
-    - 'test/**/*'
     - 'app/controllers/v1/applications_controller.rb'
     - 'app/controllers/v1/status_controller.rb'
     - 'app/mailers/application_mailer.rb'
