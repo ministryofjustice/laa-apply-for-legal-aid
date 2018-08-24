@@ -2,6 +2,12 @@ version: 2.0
 
 references:
 
+  deploy_container_config: &deploy_container_config
+    docker:
+    - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      environment:
+        GITHUB_TEAM_NAME_SLUG: apply-for-legalaid
+
   build_containers_config: &build_container_config
     docker:
     - image: circleci/ruby:2.5.1
@@ -33,6 +39,7 @@ references:
           docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
         fi
+
 
 jobs:
   build_and_test:
@@ -68,8 +75,89 @@ jobs:
     - *build_docker_image
     - *push_to_ecr
 
+  deploy_staging:
+    <<: *deploy_container_config
+    steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Kubectl deployment setup staging
+        command: |
+          $(aws ecr get-login --region eu-west-1 --no-include-email)
+          setup-kube-auth
+          kubectl config use-context staging
+    - deploy:
+        name: Helm deployment to staging
+        command: |
+
+          helm upgrade ${APPLICATON_DEPLOY_NAME} ./helm_deploy/apply-for-legalaid-api/. \
+                        --install \
+                        --tiller-namespace=${KUBE_ENV_STAGING_NAMESPACE} \
+                        --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
+                        --values ./helm_deploy/apply-for-legalaid-api/values-staging.yaml
+                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.tag="${CIRCLE_SHA1}" \
+                        --set ingress.hosts="{${STAGING_HOST}}" \
+                        --set replicaCount="2" \
+                        --debug
+
+  deploy_production:
+    <<: *deploy_container_config
+    steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Kubectl deployment setup production
+        command: |
+          $(aws ecr get-login --region eu-west-1 --no-include-email)
+          setup-kube-auth
+          kubectl config use-context production
+    - deploy:
+        name: Helm deployment to production
+        command: |
+
+          helm upgrade ${APPLICATON_DEPLOY_NAME} ./helm_deploy/apply-for-legalaid-api/. \
+                        --install \
+                        --tiller-namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
+                        --namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
+                        --values ./helm_deploy/apply-for-legalaid-api/values-production.yaml
+                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.tag="${CIRCLE_SHA1}" \
+                        --set ingress.hosts="{${PRODUCTION_HOST}}" \
+                        --set replicaCount="2" \
+                        --debug
+
+
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build_and_test
+    - build_and_test
+    - hold_staging:
+        type: approval
+        requires:
+        - build_and_test
+        filters:
+          branches:
+            only: master
+    - deploy_staging:
+        requires:
+        - hold_staging
+        filters:
+          branches:
+            only: master
+    - hold_production:
+        type: approval
+        requires:
+        - deploy_staging
+        filters:
+          branches:
+            only: master
+    - deploy_production:
+        requires:
+        - hold_production
+        filters:
+          branches:
+            only: master
