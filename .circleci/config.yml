@@ -102,12 +102,11 @@ jobs:
                         --install \
                         --tiller-namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legalaid-api/values-staging.yaml
+                        --values ./helm_deploy/apply-for-legalaid-api/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${STAGING_HOST}}" \
-                        --set replicaCount="2" \
-                        --debug
+                        --set replicaCount="2"
 
   deploy_production:
     <<: *deploy_container_config
@@ -130,12 +129,11 @@ jobs:
                         --install \
                         --tiller-namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
                         --namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legalaid-api/values-production.yaml
+                        --values ./helm_deploy/apply-for-legalaid-api/values-production.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${PRODUCTION_HOST}}" \
-                        --set replicaCount="2" \
-                        --debug
+                        --set replicaCount="2"
 
 workflows:
   version: 2
