@@ -1,15 +1,17 @@
 class V1::ApplicationsController < ApplicationController
   def create
-    legalaid_application = LegalAidApplication.new
+    application = LegalAidApplication.new
 
-    if legalaid_application.save
-      # TODO: figure out why this render function doesnt automatically use  the serializer.
-      render json: LegalAidApplicationSerializer.new(legalaid_application).serialized_json, status: :created, serializer: LegalAidApplicationSerializer
+    if application.save
+      render json: LegalAidApplicationSerializer.new(application).serialized_json, status: :created
     else
-      # TODO: probably a better way to do this error return something like a global errrors handler if save fails
-      render json: { status: 'ERROR', message: 'Failed to create application', data: legalaid_application.errors }, status: :bad_request
+      render json: { status: 'ERROR', message: 'Failed to create application', data: application.errors }, status: :bad_request
     end
+  end
 
-    # respond_with @legalaid_application
+  def show
+    application = LegalAidApplication.find_by!(application_ref: params[:id])
+    options = { include: [:applicant] }
+    render json: LegalAidApplicationSerializer.new(application, options).serialized_json
   end
 end
