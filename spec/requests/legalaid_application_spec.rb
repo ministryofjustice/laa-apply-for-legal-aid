@@ -57,5 +57,19 @@ RSpec.describe 'Legal aid applications' do
       expect(response.status).to eql(200)
       expect(response.content_type).to eql('application/json')
     end
+
+    context 'when proceedings are saved along with application' do
+      it 'creates a new legal aid application' do
+        expect do
+          post '/v1/applications', params: { proceedings_attributes: [{ code: 'PR0001' }] }
+        end.to change { LegalAidApplication.count }.by(1)
+      end
+
+      xit 'associates provided proceedings with newly created legal aid application' do
+        post '/v1/applications', params: { proceedings_attributes: [{ code: 'PR0001' }] }
+        application_ref = response_json['data']['attributes']['application_ref']
+        expect(LegalAidApplication.find_by(application_ref: application_ref).proceedings.size).to eq(1)
+      end
+    end
   end
 end
