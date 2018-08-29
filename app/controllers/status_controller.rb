@@ -1,6 +1,5 @@
 class StatusController < ApplicationController
   def index
-    result = Healthcheck.perform
-    render json: { status: 'ok', healthcheck: result }
+    render json: { status: 'ok' }
   end
 end

@@ -7,13 +7,7 @@ RSpec.describe 'status requests' do
     it 'returns a status message' do
       get('/status')
       expect(response).to be_successful
-      expected_response_body = {
-        'status' => 'ok',
-        'healthcheck' => {
-          'database' => true
-        }
-      }
-      expect(response_json).to eq(expected_response_body)
+      expect(response_json).to eq('status' => 'ok')
     end
   end
 end
