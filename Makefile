@@ -28,4 +28,4 @@ serve: docker-stop docker-build update-db
 
 
 test: docker-stop docker-build update-db
-	docker-compose run -e "RAILS_ENV=test" api rake  spec
+	docker-compose run -e "RAILS_ENV=test" api rake

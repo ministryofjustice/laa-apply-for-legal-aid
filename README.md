@@ -7,7 +7,6 @@ may well be used to fire requests to other services.
     * Ruby version 2.5.1
     * Rails 5
 
-
 * System dependencies
     * postgres 10.5  -> see setup below
 
@@ -16,8 +15,6 @@ may well be used to fire requests to other services.
     ```brew install postgres```
     
     ```bundle install```
-
-
 
 ## Initial setup
 
@@ -29,10 +26,9 @@ This will create the db schema  and run a  migration. you shouldn't have to run 
 
 In order to run the tests run
 
- * ```make test```
+ * ```./bin/rake```
  
- This is currently setup to run all rspec tests and will run them in docker containers, which means
- it will take longer to run.
+ This runs rubocop and the specs. You can also run ```make test``` which builds a docker image and runs this inside it, but it takes longer.
 
 ## Running the application
 
@@ -41,7 +37,6 @@ In order to run the tests run
  This will use docker compose to start postgres and the api project.
  requests will be served on port localhost:3000
  
-
 ## Other options
 
 There are other configurations in the makefile which you can use if you want 
@@ -50,8 +45,6 @@ i.e. ```start-local-server```
 
 This will start a server without docker and setup a postgres db exposed at localhost:5432.  
 Benefit of this is you dont have to build container everytime you make a change to a file.  handy for the html/css changes.
-
-
 
 ## Developer local Endpoints
 
@@ -63,9 +56,3 @@ Benefit of this is you dont have to build container everytime you make a change 
 
 ```http://localhost:3002/v1/status```
 
-        
-        
-
-    
- 
-   
