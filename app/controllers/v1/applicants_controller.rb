@@ -1,3 +1,5 @@
+require 'save_applicant'
+
 class V1::ApplicantsController < ApplicationController
     before_action :set_applicant, only: [:show, :update, :destroy]
 
@@ -24,8 +26,8 @@ class V1::ApplicantsController < ApplicationController
     # end
 
     def create
-      @applicant = Applicant.new(params[:applicant])
-      if @applicant.save
+      @applicant , success = SaveApplicant.new.save_applicant(name: params["data"]["attributes"]["name"] , date_of_birth: params["data"]["attributes"]["date_of_birth"] )
+      if success
         redirect_to @applicant
       else
         render json: @applicant.errors, status: :unprocessable_entity
