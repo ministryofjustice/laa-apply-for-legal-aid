@@ -9,7 +9,7 @@ services:
     environment:
     - DB_HOST=postgres
     build: .
-    command: rails server -p 3002 -b '0.0.0.0'
+    command: bin/run
     ports:
     - "3002:3002"
     depends_on:

@@ -6,6 +6,7 @@ RUN apk --update add --virtual build-dependencies \
                                libxml2-dev \
                                libxslt-dev \
                                postgresql-dev \
+                               postgresql-client \
                                tzdata \
                                && rm -rf /var/cache/apk/*
 
@@ -15,10 +16,18 @@ RUN mkdir /usr/src/app
 
 WORKDIR /usr/src/app
 
+# Copy Gemfile & Gemfile.lock separately,
+# so that Docker will cache the 'bundle install'
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
 COPY . /usr/src/app
 
-RUN  bundle install
+# Copy helper scripts
+COPY ./docker/* /usr/src/app/bin/
 
-ENTRYPOINT ["bundle", "exec"]
+ENV PORT 3002
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+EXPOSE $PORT
+
+CMD ["bin/run"]

@@ -1,0 +1,73 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "apply-for-legalaid-api.fullname" . }}
+  labels:
+    app: {{ template "apply-for-legalaid-api.name" . }}
+    chart: {{ template "apply-for-legalaid-api.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "apply-for-legalaid-api.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "apply-for-legalaid-api.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                key: postgresUser
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                key: postgresPassword
+          - name: POSTGRES_HOST
+            value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
+          - name: POSTGRES_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                key: postgresDatabase
+          - name: RAILS_ENV
+            value: production
+          - name: RAILS_LOG_TO_STDOUT
+            value: "true"
+          ports:
+            - name: http
+              containerPort: 3002
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /status.json
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /status.json
+              port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

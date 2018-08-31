@@ -26,10 +26,9 @@ test:
   username: postgres
 
 
-staging:
-  <<: *default
-  database: apply_for_legal_aid_staging
-
 production:
   <<: *default
-  database: apply_for_legal_aid_production
+  host: <%= ENV['POSTGRES_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: <%= ENV['POSTGRES_DATABASE'] %>

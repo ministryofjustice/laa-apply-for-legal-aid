@@ -1,0 +1,40 @@
+#!/bin/sh
+# Usage: wait_for_pg
+# expected ENV: POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASSWORD
+# Description:
+# Waits for postgres to be fully up and running
+
+export PGPASSWORD=${POSTGRES_PASSWORD-postgres}
+
+PROBE_TIMEOUT=${PROBE_TIMEOUT-15}
+POSTGRES_HOST=${POSTGRES_HOST-postgres}
+POSTGRES_PORT=${POSTGRES_PORT-5432}
+POSTGRES_USER=${POSTGRES_USER-postgres}
+
+log() {
+  echo "[wait-for] [`date +'%Y%m%d%H%M%S'`] $@"
+}
+
+wait_for() {
+  timeout=$1
+  log "wait '$POSTGRES_HOST':'$POSTGRES_PORT' up to '$timeout'"
+  for i in `seq $timeout` ; do
+    if probe; then
+      log "wait finish '$POSTGRES_HOST:$POSTGRES_PORT'"
+      exit 0
+    fi
+    log "wait attempt '${POSTGRES_HOST}:${POSTGRES_PORT}' [$i]"
+    sleep 1
+  done
+  log "[ERROR] wait timeout of '$timeout' on '$POSTGRES_HOST:$POSTGRES_PORT'"
+  exit 1
+}
+
+probe() {
+  echo "select 'ping';" | psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -U "$POSTGRES_USER" 2>/dev/null >/dev/null
+  return $?
+}
+
+wait_for "$PROBE_TIMEOUT"
+
+unset PGPASSWORD
