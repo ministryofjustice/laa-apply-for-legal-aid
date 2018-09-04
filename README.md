@@ -49,6 +49,12 @@ Benefit of this is you dont have to build container everytime you make a change 
 ## Developer local Endpoints
 
 * Post an application 
+ ##### you can post with or without proceeding types, example
+    
+    {
+    "proceeding_types":["PR0001", "PR0002","PR0003"]
+    }
+    
 
 ```http://localhost:3002/v1/applications```    
 

@@ -1,5 +1,13 @@
 require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe ApplicationProceeding, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe ApplicationProceedingType, type: :model do
+  subject { described_class.new }
+
+  let!(:applicationProceedingType) { ApplicationProceedingType.create }
+
+  it 'should belong to an proceeding_type and legal_aid_application' do
+    expect(subject.legal_aid_application_id).to eq(applicationProceedingType.id)
+    expect(subject.proceeding_type_id).to eq(applicationProceedingType.id)
+  end
 end
