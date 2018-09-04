@@ -1,8 +1,10 @@
 class SaveApplicant
-
-  def save_applicant(name: ,date_of_birth:)
-    applicant = Applicant.new(name: name , date_of_birth: date_of_birth )
-    return applicant , applicant.save
+  def self.call(*args)
+    new.call(*args)
   end
 
+  def call(name:, date_of_birth:)
+    applicant = Applicant.new(name: name, date_of_birth: date_of_birth)
+    [applicant, applicant.save]
+  end
 end
