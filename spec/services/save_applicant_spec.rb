@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'save_applicant'
 
 RSpec.describe SaveApplicant do
   let(:valid_name) { 'Rich' }

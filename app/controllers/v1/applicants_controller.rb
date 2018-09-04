@@ -1,5 +1,3 @@
-require 'save_applicant'
-
 class V1::ApplicantsController < ApplicationController
   before_action :set_applicant, only: [:show, :update, :destroy]
 
