@@ -30,6 +30,12 @@ In order to run the tests run
  
  This runs rubocop and the specs. You can also run ```make test``` which builds a docker image and runs this inside it, but it takes longer.
 
+ * ```make test```
+
+ This is currently setup to run all rspec tests and will run them in docker containers, which means
+ it will take longer to run.
+
+
 ## Running the application
 
  * ```make serve```
@@ -62,3 +68,8 @@ Benefit of this is you dont have to build container everytime you make a change 
 
 ```http://localhost:3002/v1/status```
 
+## Deployment
+
+The deployment is currently triggered **only** on master builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api) and require approval both for **staging** and **production** environments.
+
+**NOTE:** We use **git-crypt** to store secrets required for **staging** and **production** environments. To be able to modify those secrets, **git-crypt** needs to be set up according to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/03-other-topics/001-git-crypt-setup/#git-crypt).
