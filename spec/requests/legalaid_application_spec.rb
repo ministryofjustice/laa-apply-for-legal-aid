@@ -84,9 +84,16 @@ RSpec.describe 'create Legal aid applications with or without proceedings' do
         expect(LegalAidApplication.find_by(application_ref: application_ref).proceeding_types.size).to eq(2)
       end
 
-      it 'creates a new legal aid application when proceeding_type_codes param is not valid, response should be bad data ' do
+      expected_json = {
+        "status": 'ERROR',
+        "message": 'Invalid proceeding types',
+        "data": {}
+      }
+
+      it ' response should be bad data when proceeding_type_codes param is not valid ' do
         post '/v1/applications', params: { proceeding_type_codes: ['invalid_proceeding_type_code'] }
         expect(response.status).to eql(400)
+        expect(response.body).to match_json_expression(expected_json)
       end
     end
   end
