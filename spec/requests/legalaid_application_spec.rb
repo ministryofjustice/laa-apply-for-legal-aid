@@ -2,17 +2,6 @@ require 'rails_helper'
 require 'json_expressions/rspec'
 
 RSpec.describe 'Legal aid applications' do
-  let(:response_json) { JSON.parse(response.body) }
-
-  describe 'POST /v1/applications' do
-    it 'returns an application reference' do
-      post '/v1/applications'
-      expect(response_json['data']['attributes']['application_ref']).not_to be_empty
-      expect(response.status).to eql(201)
-      expect(response.content_type).to eql('application/json')
-    end
-  end
-
   describe 'GET /v1/applications/:id' do
     let(:applicant_name) { Faker::Name.name }
     let(:applicant_date_of_birth) { Faker::Date.birthday(18, 100) }
@@ -40,7 +29,9 @@ RSpec.describe 'Legal aid applications' do
             'attributes' =>
               { 'application_ref' => application_ref },
             'relationships' =>
-                { 'applicant' =>
+                { 'proceeding_types' =>
+                     { 'data' => [] },
+                  'applicant' =>
                   { 'data' =>
                     { 'id' => applicant.id.to_s,
                       'type' => 'applicant' } } } },
@@ -56,6 +47,54 @@ RSpec.describe 'Legal aid applications' do
       expect(response.body).to match_json_expression(expected_json)
       expect(response.status).to eql(200)
       expect(response.content_type).to eql('application/json')
+    end
+  end
+end
+
+RSpec.describe 'create Legal aid applications with or without proceedings' do
+  let(:response_json) { JSON.parse(response.body) }
+
+  describe 'POST /v1/applications' do
+    it 'returns an application reference' do
+      post '/v1/applications'
+      expect(response_json['data']['attributes']['application_ref']).not_to be_empty
+      expect(response.status).to eql(201)
+      expect(response.content_type).to eql('application/json')
+    end
+
+    context 'when proceedings are saved along with application reference' do
+      let(:proceeding_type_first) { ProceedingType.create(code: 'PR0001', ccms_code: 'PBM23', meaning: 'test meaning1', description: 'test desc1') }
+      let(:proceeding_type_second) { ProceedingType.create(code: 'PR0002', ccms_code: 'PBM24', meaning: 'test meaning2', description: 'test desc2') }
+
+      it 'creates a new legal aid application without proceeding_type_codes ' do
+        expect do
+          post '/v1/applications'
+        end.to change { LegalAidApplication.count }.by(1)
+      end
+
+      it 'creates a new legal aid application with proceeding_type_codes' do
+        post '/v1/applications', params: { proceeding_type_codes: [proceeding_type_first.code] }
+        application_ref = response_json['data']['attributes']['application_ref']
+        expect(LegalAidApplication.find_by(application_ref: application_ref).proceeding_types.size).to eq(1)
+      end
+
+      it 'creates a new legal aid application with more than one proceeding_type_codes' do
+        post '/v1/applications', params: { proceeding_type_codes: [proceeding_type_first.code, proceeding_type_second.code] }
+        application_ref = response_json['data']['attributes']['application_ref']
+        expect(LegalAidApplication.find_by(application_ref: application_ref).proceeding_types.size).to eq(2)
+      end
+
+      expected_json = {
+        "status": 'ERROR',
+        "message": 'Invalid proceeding types',
+        "data": {}
+      }
+
+      it ' response should be bad data when proceeding_type_codes param is not valid ' do
+        post '/v1/applications', params: { proceeding_type_codes: ['invalid_proceeding_type_code'] }
+        expect(response.status).to eql(400)
+        expect(response.body).to match_json_expression(expected_json)
+      end
     end
   end
 end
