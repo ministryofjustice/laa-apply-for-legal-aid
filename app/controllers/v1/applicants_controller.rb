@@ -11,11 +11,11 @@ class V1::ApplicantsController < ApplicationController
   end
 
   def create
-    @applicant, success = SaveApplicant.call(name: params['data']['attributes']['name'], date_of_birth: params['data']['attributes']['date_of_birth'])
+    @applicant, success = SaveApplicant.call(**applicant_params.to_h.symbolize_keys)
     if success
-      redirect_to @applicant
+      render json: ApplicantSerializer.new(@applicant).serialized_json, status: :created
     else
-      render json: @applicant.errors, status: :unprocessable_entity
+      render json: @applicant.errors, status: :bad_request
     end
   end
 
@@ -32,12 +32,12 @@ class V1::ApplicantsController < ApplicationController
   end
 
   private
-  .
+
   def set_applicant
     @applicant = Applicant.find(params[:id])
   end
 
   def applicant_params
-    params.require(:applicant).permit(:name, :date_of_birth)
+    params.require(:data).require(:attributes).permit(:name, :date_of_birth, :application_ref)
   end
 end
