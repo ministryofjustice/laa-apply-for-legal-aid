@@ -13,7 +13,6 @@ module V1
 
     def create
       result = SaveApplicant.call(**applicant_params.to_h.symbolize_keys)
-
       if result.success?
         render json: ApplicantSerializer.new(result).serialized_json, status: :created
       else
