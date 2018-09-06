@@ -12,10 +12,10 @@ module V1
     end
 
     def create
-      result= SaveApplicant.call(**applicant_params.to_h.symbolize_keys)
-      result.success?
-      if success
-        render json: ApplicantSerializer.new(result.).serialized_json, status: :created
+      result = SaveApplicant.call(**applicant_params.to_h.symbolize_keys)
+      
+      if result.success?
+        render json: ApplicantSerializer.new(result).serialized_json, status: :created
       else
         render json: result.errors, status: :bad_request
       end

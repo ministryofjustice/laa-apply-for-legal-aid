@@ -8,6 +8,6 @@ class Applicant < ApplicationRecord
   private
 
   def validate_date_of_birth
-    errors.add(:date_of_birth, 'Date of birth is not valid') if date_of_birth.present? && (date_of_birth < Date.new(1900, 0o1, 0o1) || date_of_birth > Date.today)
+    errors.add(:date_of_birth, 'is not valid') if date_of_birth.present? && (date_of_birth < Date.new(1900, 0o1, 0o1) || date_of_birth > Date.today)
   end
 end
