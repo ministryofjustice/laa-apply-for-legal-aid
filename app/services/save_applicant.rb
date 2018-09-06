@@ -6,15 +6,15 @@ class SaveApplicant
   def call(name:, date_of_birth:, application_ref:)
     applicant = Applicant.new(name: name, date_of_birth: date_of_birth)
     app = LegalAidApplication.find_by(application_ref: application_ref)
-      result = false
-      if app
-        app.applicant = applicant
-        app.save
-        result = true
-      else
-        result = false
-        errors = ['invalid application reference']
-      end
+    result = false
+
+    if app
+      app.applicant = applicant
+      app.save
+      result = true
+    else
+      [['invalid application reference'], result]
+    end
     [applicant, result]
   end
 end
