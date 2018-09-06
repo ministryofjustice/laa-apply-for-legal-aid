@@ -3,16 +3,16 @@ require 'json_expressions/rspec'
 
 RSpec.describe 'Legal aid applications' do
   let(:response_json) { JSON.parse(response.body) }
-  let(:application_ref) {'f4729006-dd96-4fe5-b2f4-42ef9190c796'}
+  let(:application_ref) { 'f4729006-dd96-4fe5-b2f4-42ef9190c796' }
 
   describe 'POST /v1/applicants' do
     it 'returns a successful applicant payload' do
-    existing_ref = LegalAidApplication.create.application_ref
+      existing_ref = LegalAidApplication.create.application_ref
       headers = {
-      "ACCEPT" => "application/json",
-      "HTTP_ACCEPT" => "application/json",
-      'Content-Type' => 'application/json'
-    }
+        'ACCEPT' => 'application/json',
+        'HTTP_ACCEPT' => 'application/json',
+        'Content-Type' => 'application/json'
+      }
       post '/v1/applicants', params:
       {
         'data': {
@@ -23,8 +23,8 @@ RSpec.describe 'Legal aid applications' do
             'application_ref': existing_ref
           }
         }
-      }.to_json ,
-      headers: headers
+      }.to_json,
+                             headers: headers
       expect(response.status).to eql(201)
       expect(response.content_type).to eql('application/json')
       expect(response_json['data']['attributes']['name']).to eq('John Doe')
@@ -34,12 +34,12 @@ RSpec.describe 'Legal aid applications' do
 
     it 'creates a new applicant' do
       headers = {
-      "ACCEPT" => "application/json",
-      "HTTP_ACCEPT" => "application/json",
-      'Content-Type' => 'application/json'
-    }
+        'ACCEPT' => 'application/json',
+        'HTTP_ACCEPT' => 'application/json',
+        'Content-Type' => 'application/json'
+      }
 
-    body =  {
+      body = {
         'data': {
           'type': 'legal_aid_applicant',
           'attributes': {
