@@ -21,10 +21,11 @@ RSpec.describe SaveApplicant do
       result = described_class.call(name: name, date_of_birth: date_of_birth, application_ref: application_ref)
       expect(result).not_to be_success
       expect(existing_application.reload.applicant).to be_nil
-      expect(result.errors).to match(["Date of birth is not valid"])
+      expect(result.errors).to match(['Date of birth is not valid'])
     end
+    # rubocop:disable AmbiguousBlockAssociation
     it 'does not create a new applicant record' do
-      expect { described_class.call(name: name, date_of_birth: date_of_birth, application_ref: application_ref) }.not_to change { Applicant.count }
+      expect { described_class.call(name: name, date_of_birth: date_of_birth, application_ref: application_ref) }.to_not change { Applicant.count }
     end
   end
 
@@ -37,7 +38,8 @@ RSpec.describe SaveApplicant do
     end
 
     it 'does not create a new applicant record' do
-      expect { described_class.call(name: name, date_of_birth: date_of_birth, application_ref: application_ref) }.not_to change { Applicant.count } 
+      expect { described_class.call(name: name, date_of_birth: date_of_birth, application_ref: application_ref) }.to_not change { Applicant.count }
     end
+    # rubocop:enable AmbiguousBlockAssociation
   end
 end
