@@ -37,6 +37,7 @@ group :development, :test do
   gem 'json_expressions'
   gem 'rspec-rails', '~> 3.7'
   gem 'rubocop', require: false
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do

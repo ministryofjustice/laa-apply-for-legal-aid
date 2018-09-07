@@ -16,4 +16,8 @@ RSpec.describe LegalAidApplication, type: :model do
   it 'should belong to an applicant' do
     expect(subject.applicant_id).to eq(applicant.id)
   end
+
+  describe 'should have Association with proceeding_types' do
+    it { should have_many(:proceeding_types) }
+  end
 end
