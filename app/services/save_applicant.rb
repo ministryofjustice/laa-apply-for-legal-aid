@@ -1,5 +1,4 @@
 class SaveApplicant
-
   def self.call(name:, date_of_birth:, application_ref:)
     new.call(name: name, date_of_birth: date_of_birth, application_ref: application_ref)
   end
@@ -7,8 +6,7 @@ class SaveApplicant
   def call(name:, date_of_birth:, application_ref:)
     applicant = Applicant.new(name: name, date_of_birth: date_of_birth)
     app = LegalAidApplication.find_by(application_ref: application_ref)
-
-    if (applicant.valid? && app)
+    if applicant.valid? && app
       applicant.save
       app.applicant = applicant
       app.save
@@ -22,7 +20,7 @@ class SaveApplicant
 
   class Result
     attr_reader :applicant, :errors
-    def initialize(errors, success, applicant=nil)
+    def initialize(errors, success, applicant = nil)
       @errors = errors
       @success = success
       @applicant = applicant
