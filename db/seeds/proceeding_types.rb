@@ -11,5 +11,9 @@ data.each do |row|
     proceeding_type.ccms_code = ccms_code
     proceeding_type.meaning = meaning
     proceeding_type.description = description
+    proceeding_type.ccms_category_law = _ccms_category_of_law
+    proceeding_type.ccms_category_law_code = _ccms_category_of_law_code
+    proceeding_type.ccms_matter = _ccms_matter_type
+    proceeding_type.ccms_matter_code = _ccms_matter_type_code
   end
 end
