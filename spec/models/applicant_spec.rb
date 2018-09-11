@@ -20,6 +20,7 @@ RSpec.describe Applicant, type: :model do
   it 'is not valid without a date of birth' do
     subject.date_of_birth = nil
     expect(subject).to_not be_valid
+    expect(subject.errors[:date_of_birth]).to include("can't be blank")
   end
 
   it 'is not valid if the date of birth is in the future' do
