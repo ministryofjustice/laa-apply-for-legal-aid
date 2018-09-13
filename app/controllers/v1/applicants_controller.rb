@@ -40,7 +40,7 @@ module V1
     end
 
     def applicant_params
-      params.require(:data).require(:attributes).permit(:name, :date_of_birth, :application_ref)
+      params.require(:data).require(:attributes).permit(:first_name, :last_name, :date_of_birth, :application_ref)
     end
   end
 end
