@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_150801) do
+ActiveRecord::Schema.define(version: 2018_09_11_143012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,10 @@ ActiveRecord::Schema.define(version: 2018_08_29_150801) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ccms_category_law"
+    t.string "ccms_category_law_code"
+    t.string "ccms_matter"
+    t.string "ccms_matter_code"
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 

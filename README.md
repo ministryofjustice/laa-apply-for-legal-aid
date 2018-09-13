@@ -60,11 +60,15 @@ Benefit of this is you dont have to build container everytime you make a change 
  ##### you can post with or without proceeding types, example
     
     {
-    "proceeding_types":["PR0001", "PR0002","PR0003"]
+    "proceeding_type_codes":["PR0001", "PR0002","PR0003"]
     }
     
 
 ```http://localhost:3002/v1/applications```
+
+* Get proceeding_types
+
+```http://localhost:3002/v1/proceeding_types```
 
 * Get status of the service
 
