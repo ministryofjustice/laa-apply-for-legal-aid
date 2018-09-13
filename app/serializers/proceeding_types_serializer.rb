@@ -1,9 +1,13 @@
 class ProceedingTypesSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :ccms_category_law, :ccms_matter, :meaning, :description
+  attributes :code, :meaning, :description
 
-  attribute :proceeding_type_code do |object|
-    object.code.to_s
+  attribute :category_law do |object|
+    object.ccms_category_law.to_s
+  end
+
+  attribute :matter do |object|
+    object.ccms_matter.to_s
   end
 end
