@@ -3,9 +3,10 @@ require 'json_expressions/rspec'
 
 RSpec.describe 'Legal aid applications' do
   describe 'GET /v1/applications/:id' do
-    let(:applicant_name) { Faker::Name.name }
+    let(:applicant_first_name) { Faker::Name.first_name }
+    let(:applicant_last_name) { Faker::Name.last_name }
     let(:applicant_date_of_birth) { Faker::Date.birthday(18, 100) }
-    let(:applicant) { Applicant.create(name: applicant_name, date_of_birth: applicant_date_of_birth) }
+    let(:applicant) { Applicant.create(first_name: applicant_first_name, last_name: applicant_last_name, date_of_birth: applicant_date_of_birth) }
     let(:legal_aid_application) { LegalAidApplication.create(applicant: applicant) }
     let(:application_ref) { legal_aid_application.application_ref }
 
@@ -39,7 +40,8 @@ RSpec.describe 'Legal aid applications' do
           { 'id' => applicant.id.to_s,
             'type' => 'applicant',
             'attributes' =>
-            { 'name' => applicant_name,
+            { 'first_name' => applicant_first_name,
+              'last_name' => applicant_last_name,
               'date_of_birth' => applicant_date_of_birth.to_s } }
         ]
       }

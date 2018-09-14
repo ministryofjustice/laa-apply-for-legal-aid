@@ -4,7 +4,8 @@ RSpec.describe Applicant, type: :model do
   subject { described_class.new }
 
   before do
-    subject.name = 'John Doe'
+    subject.first_name = 'John'
+    subject.last_name = 'Doe'
     subject.date_of_birth = Date.new(1988, 0o2, 0o1)
   end
 
@@ -12,9 +13,16 @@ RSpec.describe Applicant, type: :model do
     expect(subject).to be_valid
   end
 
-  it 'is not valid without a name' do
-    subject.name = ''
+  it 'is not valid without a first name' do
+    subject.first_name = ''
     expect(subject).to_not be_valid
+    expect(subject.errors[:first_name]).to include("can't be blank")
+  end
+
+  it 'is not valid without a last name' do
+    subject.last_name = ''
+    expect(subject).to_not be_valid
+    expect(subject.errors[:last_name]).to include("can't be blank")
   end
 
   it 'is not valid without a date of birth' do

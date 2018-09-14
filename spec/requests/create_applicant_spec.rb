@@ -17,7 +17,8 @@ RSpec.describe 'Legal aid applications' do
       'data': {
         'type': 'legal_aid_applicant',
         'attributes': {
-          'name': 'John Doe',
+          'first_name': 'John',
+          'last_name': 'Doe',
           'date_of_birth': '1991-12-01',
           'application_ref': application.application_ref
         }
@@ -30,8 +31,9 @@ RSpec.describe 'Legal aid applications' do
       post '/v1/applicants', params: body, headers: headers
       expect(response.status).to eql(201)
       expect(response.content_type).to eql('application/json')
-      expect(response_json['data']['attributes']['name']).to eq('John Doe')
-      expect(response_json['data']['attributes']['date_of_birth']).to eq('1991-12-01')
+      expect(response_json.dig('data', 'attributes', 'first_name')).to eq('John')
+      expect(response_json.dig('data', 'attributes', 'last_name')).to eq('Doe')
+      expect(response_json.dig('data', 'attributes', 'date_of_birth')).to eq('1991-12-01')
     end
 
     it 'creates a new applicant' do
@@ -46,7 +48,8 @@ RSpec.describe 'Legal aid applications' do
           'data': {
             'type': 'legal_aid_applicant',
             'attributes': {
-              'name': 'John Doe',
+              'first_name': 'John',
+              'last_name': 'Doe',
               'date_of_birth': '11-12-01',
               'application_ref': application.application_ref
             }

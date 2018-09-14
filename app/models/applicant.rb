@@ -1,7 +1,7 @@
 class Applicant < ApplicationRecord
   has_one :legal_aid_application
 
-  validates :name, :date_of_birth, presence: true
+  validates :first_name, :last_name, :date_of_birth, presence: true
 
   validate :validate_date_of_birth
 
