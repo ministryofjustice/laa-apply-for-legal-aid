@@ -26,7 +26,7 @@ RSpec.describe 'Proceeding types' do
     end
 
     it 'returns a proceeding types' do
-      get '/proceeding_types'
+      get '/v1/proceeding_types'
 
       expected_json =
 
