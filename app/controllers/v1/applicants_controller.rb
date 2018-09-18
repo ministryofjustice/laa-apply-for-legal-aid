@@ -1,6 +1,6 @@
 module V1
   class ApplicantsController < ApplicationController
-    before_action :set_applicant, only: [:show, :update, :destroy]
+    before_action :set_application, only: [:update, :destroy]
 
     def index
       @applicant = Applicant.all
@@ -8,6 +8,7 @@ module V1
     end
 
     def show
+      @applicant = Applicant.find(params[:id])
       render json: @applicant
     end
 
@@ -22,10 +23,11 @@ module V1
     end
 
     def update
-      if @applicant.update(applicant_params)
-        render json: @applicant
+      applicant = @application.applicant
+      if applicant.update(applicant_params)
+        render json: ApplicantSerializer.new(applicant).serialized_json
       else
-        render json: @applicant.errors.messages, status: :unprocessable_entity
+        render json: applicant.errors.messages, status: :bad_request
       end
     end
 
@@ -35,12 +37,18 @@ module V1
 
     private
 
-    def set_applicant
-      @applicant = Applicant.find(params[:id])
+    def set_application
+      @application = LegalAidApplication.find_by(application_ref: params[:application_ref])
+
+      if @application.nil?
+        render json: { message: "Failed to find application with ref #{params[:application_ref]}" }, status: :unprocessable_entity
+      elsif @application.applicant.nil?
+        render json: { message: "Failed to find applicant for application with ref #{params[:application_ref]}" }, status: :not_found
+      end
     end
 
     def applicant_params
-      params.require(:data).require(:attributes).permit(:first_name, :last_name, :date_of_birth, :application_ref)
+      params.require(:data).require(:attributes).permit(:first_name, :last_name, :date_of_birth, :application_ref, :email_address)
     end
   end
 end

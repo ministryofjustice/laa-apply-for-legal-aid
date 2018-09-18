@@ -1,9 +1,13 @@
+require 'uri'
+
 class Applicant < ApplicationRecord
   has_one :legal_aid_application
 
   validates :first_name, :last_name, :date_of_birth, presence: true
 
   validate :validate_date_of_birth
+
+  validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
 
   private
 

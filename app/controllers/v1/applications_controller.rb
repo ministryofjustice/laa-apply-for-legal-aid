@@ -15,7 +15,7 @@ class V1::ApplicationsController < ApplicationController
   end
 
   def show
-    application = LegalAidApplication.find_by!(application_ref: params[:id])
+    application = LegalAidApplication.find_by!(application_ref: params[:ref])
     options = { include: [:applicant] }
     render json: LegalAidApplicationSerializer.new(application, options).serialized_json
   end

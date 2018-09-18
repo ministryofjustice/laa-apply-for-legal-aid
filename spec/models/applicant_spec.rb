@@ -40,4 +40,21 @@ RSpec.describe Applicant, type: :model do
     subject.date_of_birth = Date.new(1899, 12, 31)
     expect(subject).to_not be_valid
   end
+
+  it 'is not valid if the email entered is not in the correct form' do
+    subject.email_address = 'asdfgh'
+    expect(subject).to_not  be_valid
+
+    expect(subject.errors[:email_address]).to include('Enter an email address in the right format')
+  end
+
+  it 'is valid when the email address provided is in the correct format' do
+    subject.email_address = 'test@test.com'
+    expect(subject).to be_valid
+  end
+
+  it 'is valid  when email address is not provided' do
+    subject.email_address = nil
+    expect(subject).to be_valid
+  end
 end

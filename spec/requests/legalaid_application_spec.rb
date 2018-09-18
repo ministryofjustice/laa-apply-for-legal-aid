@@ -6,7 +6,8 @@ RSpec.describe 'Legal aid applications' do
     let(:applicant_first_name) { Faker::Name.first_name }
     let(:applicant_last_name) { Faker::Name.last_name }
     let(:applicant_date_of_birth) { Faker::Date.birthday(18, 100) }
-    let(:applicant) { Applicant.create(first_name: applicant_first_name, last_name: applicant_last_name, date_of_birth: applicant_date_of_birth) }
+    let(:applicant_email_address) { Faker::Internet.email }
+    let(:applicant) { Applicant.create(first_name: applicant_first_name, last_name: applicant_last_name, date_of_birth: applicant_date_of_birth, email_address: applicant_email_address) }
     let(:legal_aid_application) { LegalAidApplication.create(applicant: applicant) }
     let(:application_ref) { legal_aid_application.application_ref }
 
@@ -42,7 +43,8 @@ RSpec.describe 'Legal aid applications' do
             'attributes' =>
             { 'first_name' => applicant_first_name,
               'last_name' => applicant_last_name,
-              'date_of_birth' => applicant_date_of_birth.to_s } }
+              'date_of_birth' => applicant_date_of_birth.to_s,
+              'email_address' => applicant_email_address } }
         ]
       }
 
