@@ -120,7 +120,7 @@ RSpec.describe 'Update Legal aid applications' do
       patch "/v1/applications/#{application.application_ref}/applicants/", params: body_invalid_email, headers: headers
       expect(response.status).to eql(400)
       expect(response.content_type).to eql('application/json')
-      expect(response_json['email_address'][0]).to eq('Enter an email address in the right format')
+      expect(response_json[0]).to eq('Email address is not in the right format')
     end
 
     it 'returns a 422 if a application is not found' do

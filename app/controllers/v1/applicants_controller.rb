@@ -27,7 +27,7 @@ module V1
       if applicant.update(applicant_params)
         render json: ApplicantSerializer.new(applicant).serialized_json
       else
-        render json: applicant.errors.messages, status: :bad_request
+        render json: applicant.errors.full_messages, status: :bad_request
       end
     end
 

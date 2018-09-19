@@ -36,4 +36,4 @@ en:
         applicant:
           attributes:
             email_address:
-              invalid: 'Enter an email address in the right format'
+              invalid: 'is not in the right format'

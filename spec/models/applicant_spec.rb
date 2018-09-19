@@ -44,8 +44,7 @@ RSpec.describe Applicant, type: :model do
   it 'is not valid if the email entered is not in the correct form' do
     subject.email_address = 'asdfgh'
     expect(subject).to_not  be_valid
-
-    expect(subject.errors[:email_address]).to include('Enter an email address in the right format')
+    expect(subject.errors[:email_address]).to include('is not in the right format')
   end
 
   it 'is valid when the email address provided is in the correct format' do
