@@ -1,11 +1,11 @@
 class SaveApplicant
-  def self.call(first_name:, last_name:, date_of_birth:, application_ref:)
-    new.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth, application_ref: application_ref)
+  def self.call(**applicant_details)
+    new.call(**applicant_details)
   end
 
-  def call(first_name:, last_name:, date_of_birth:, application_ref:)
-    applicant = Applicant.new(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth)
-    app = LegalAidApplication.find_by(application_ref: application_ref)
+  def call(**applicant_details)
+    applicant = Applicant.new(applicant_details.except(:application_ref))
+    app = LegalAidApplication.find_by(application_ref: applicant_details[:application_ref])
     if applicant.valid? && app
       applicant.save
       app.applicant = applicant

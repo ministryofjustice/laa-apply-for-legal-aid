@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        applicant:
+          attributes:
+            email_address:
+              invalid: 'is not in the right format'
