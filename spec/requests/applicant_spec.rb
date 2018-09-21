@@ -78,7 +78,7 @@ RSpec.describe 'Update Legal aid applications' do
     }
   end
 
-  describe 'PATCH /v1/applicants' do
+  describe 'PATCH /v1/applications/{app_ref}/applicant' do
     body = {
       'data': {
         'type': 'legal_aid_applicant',
@@ -102,7 +102,7 @@ RSpec.describe 'Update Legal aid applications' do
         }
       }
 
-      patch "/v1/applications/#{application.application_ref}/applicants/", params: body, headers: headers
+      patch "/v1/applications/#{application.application_ref}/applicant/", params: body, headers: headers
 
       expect(response.status).to eql(200)
       expect(response_json).to match_json_expression(expected_json)
@@ -117,20 +117,20 @@ RSpec.describe 'Update Legal aid applications' do
           }
         }
       }.to_json
-      patch "/v1/applications/#{application.application_ref}/applicants/", params: body_invalid_email, headers: headers
+      patch "/v1/applications/#{application.application_ref}/applicant/", params: body_invalid_email, headers: headers
       expect(response.status).to eql(400)
       expect(response.content_type).to eql('application/json')
       expect(response_json[0]).to eq('Email address is not in the right format')
     end
 
     it 'returns a 422 if a application is not found' do
-      patch "/v1/applications/this-ref-doesn't-exist/applicants/", params: body, headers: headers
+      patch "/v1/applications/this-ref-doesn't-exist/applicant/", params: body, headers: headers
       expect(response.status).to eql(422)
       expect(response_json['message']).to eql("Failed to find application with ref this-ref-doesn't-exist")
     end
 
     it 'returns a 404 if a applicant for application is not found' do
-      patch "/v1/applications/#{application_without_applicant.application_ref}/applicants/", params: body, headers: headers
+      patch "/v1/applications/#{application_without_applicant.application_ref}/applicant/", params: body, headers: headers
       expect(response.status).to eql(404)
       expect(response_json['message']).to eql("Failed to find applicant for application with ref #{application_without_applicant.application_ref}")
     end
