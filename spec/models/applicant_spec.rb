@@ -7,6 +7,7 @@ RSpec.describe Applicant, type: :model do
     subject.first_name = 'John'
     subject.last_name = 'Doe'
     subject.date_of_birth = Date.new(1988, 0o2, 0o1)
+    subject.national_insurance_number = 'AB123456D'
   end
 
   it 'is valid with all valid attributes' do
@@ -52,8 +53,13 @@ RSpec.describe Applicant, type: :model do
     expect(subject).to be_valid
   end
 
-  it 'is valid  when email address is not provided' do
+  it 'is valid when email address is not provided' do
     subject.email_address = nil
     expect(subject).to be_valid
+  end
+
+  it 'is not valid when a national insurance number is not provided' do
+    subject.national_insurance_number = nil
+    expect(subject).to_not be_valid
   end
 end
