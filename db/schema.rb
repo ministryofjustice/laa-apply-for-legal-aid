@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_084624) do
+ActiveRecord::Schema.define(version: 2018_09_29_123828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "address_line_one"
+    t.string "address_line_two"
+    t.string "town"
+    t.string "county"
+    t.string "postcode"
+    t.bigint "applicant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["applicant_id"], name: "index_addresses_on_applicant_id"
+  end
 
   create_table "applicants", force: :cascade do |t|
     t.string "first_name"
@@ -22,6 +34,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_084624) do
     t.datetime "updated_at", null: false
     t.string "last_name"
     t.string "email_address"
+    t.string "national_insurance_number"
   end
 
   create_table "application_proceeding_types", force: :cascade do |t|
@@ -55,4 +68,5 @@ ActiveRecord::Schema.define(version: 2018_09_17_084624) do
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
+  add_foreign_key "addresses", "applicants"
 end
