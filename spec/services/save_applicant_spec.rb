@@ -4,29 +4,36 @@ RSpec.describe SaveApplicant do
   let(:first_name) { 'Rich' }
   let(:last_name) { 'Ford' }
   let(:date_of_birth) { '1991-12-01' }
+  let(:national_insurance_number) { 'AB123456D' }
   let(:existing_application) { LegalAidApplication.create }
   let(:application_ref) { existing_application.application_ref }
 
   context 'When given valid values' do
     it 'should save the model' do
-      result = described_class.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth, application_ref: application_ref)
+      result = described_class.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth,
+                                    national_insurance_number: national_insurance_number, application_ref: application_ref)
       expect(result.success?).to eq true
       expect(existing_application.reload.applicant).to eq result.applicant
       expect(result.applicant.first_name).to eq first_name
       expect(result.applicant.last_name).to eq last_name
+      expect(result.applicant.national_insurance_number).to eq national_insurance_number
     end
   end
 
   context 'When given invalid values' do
     let(:date_of_birth) { '11-11-11' }
     it 'should throw an error' do
-      result = described_class.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth, application_ref: application_ref)
+      result = described_class.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth,
+                                    national_insurance_number: national_insurance_number, application_ref: application_ref)
       expect(result).not_to be_success
       expect(existing_application.reload.applicant).to be_nil
-      expect(result.errors).to match(['Date of birth is not valid'])
+      expect(result.errors).to include('Date of birth is not valid')
     end
     it 'does not create a new applicant record' do
-      expect { described_class.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth, application_ref: application_ref) }.to_not change(Applicant, :count)
+      expect do
+        described_class.call(first_name: first_name, last_name: last_name, date_of_birth: date_of_birth,
+                             national_insurance_number: national_insurance_number, application_ref: application_ref)
+      end.to_not change(Applicant, :count)
     end
   end
 
