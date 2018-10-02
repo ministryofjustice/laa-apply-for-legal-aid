@@ -61,6 +61,7 @@ RSpec.describe Applicant, type: :model do
   it 'is not valid when a national insurance number is not provided' do
     subject.national_insurance_number = nil
     expect(subject).to_not be_valid
+    expect(subject.errors[:national_insurance_number]).to include("can't be blank")
   end
 
   it 'is not valid if the national insurance number entered is not in the correct form' do
