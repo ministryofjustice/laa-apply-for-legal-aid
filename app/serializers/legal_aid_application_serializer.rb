@@ -1,6 +1,6 @@
-class LegalAidApplicationSerializer
-  include FastJsonapi::ObjectSerializer
-  attribute :application_ref
-  has_many :proceeding_types
+class LegalAidApplicationSerializer < ActiveModel::Serializer
+  attribute :application_ref, key: :id
+
   belongs_to :applicant
+  has_many :proceeding_types
 end
