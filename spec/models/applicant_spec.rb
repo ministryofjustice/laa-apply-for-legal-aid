@@ -62,4 +62,10 @@ RSpec.describe Applicant, type: :model do
     subject.national_insurance_number = nil
     expect(subject).to_not be_valid
   end
+
+  it 'is not valid if the national insurance number entered is not in the correct form' do
+    subject.national_insurance_number = 'QQ12AS23RR'
+    expect(subject).to_not be_valid
+    expect(subject.errors[:national_insurance_number]).to include('is not in the right format')
+  end
 end
