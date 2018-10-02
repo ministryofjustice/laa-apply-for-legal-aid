@@ -105,7 +105,6 @@ RSpec.describe 'Update Legal aid applications' do
             "email_address": 'test@test.com',
             "national_insurance_number": existing_applicant.national_insurance_number,
             "date_of_birth": existing_applicant.date_of_birth.to_s
-
           }
         }
       }

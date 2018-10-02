@@ -1,6 +1,8 @@
 require 'uri'
 
 class Applicant < ApplicationRecord
+  NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
+
   has_one :legal_aid_application
 
   validates :first_name, :last_name, :date_of_birth, :national_insurance_number, presence: true
@@ -23,8 +25,7 @@ class Applicant < ApplicationRecord
 
   def validate_national_insurance_number
     return if national_insurance_number.blank?
-    national_insurance_number_regex = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     normalise_national_insurance_number
-    errors.add(:national_insurance_number, :invalid) if (national_insurance_number_regex =~ national_insurance_number).nil?
+    errors.add(:national_insurance_number, :invalid) unless NINO_REGEXP =~ national_insurance_number
   end
 end
