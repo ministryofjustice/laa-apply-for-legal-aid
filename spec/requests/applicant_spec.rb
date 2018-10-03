@@ -20,6 +20,7 @@ RSpec.describe 'Create Legal aid applications' do
           'first_name': 'John',
           'last_name': 'Doe',
           'date_of_birth': '1991-12-01',
+          'national_insurance_number': 'AB123456D',
           'application_ref': application.application_ref
         }
       }
@@ -34,6 +35,7 @@ RSpec.describe 'Create Legal aid applications' do
       expect(response_json.dig('data', 'attributes', 'first_name')).to eq('John')
       expect(response_json.dig('data', 'attributes', 'last_name')).to eq('Doe')
       expect(response_json.dig('data', 'attributes', 'date_of_birth')).to eq('1991-12-01')
+      expect(response_json.dig('data', 'attributes', 'national_insurance_number')).to eq('AB123456D')
     end
 
     it 'creates a new applicant' do
@@ -51,6 +53,7 @@ RSpec.describe 'Create Legal aid applications' do
               'first_name': 'John',
               'last_name': 'Doe',
               'date_of_birth': '11-12-01',
+              'national_insurance_number': 'AB123456D',
               'application_ref': application.application_ref
             }
           }
@@ -66,7 +69,10 @@ end
 
 RSpec.describe 'Update Legal aid applications' do
   let(:response_json) { JSON.parse(response.body) }
-  let!(:existing_applicant) { Applicant.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, date_of_birth: Faker::Date.birthday(18, 100)) }
+  let!(:existing_applicant) do
+    Applicant.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name,
+                     date_of_birth: Faker::Date.birthday(18, 100), national_insurance_number: 'AB123456D')
+  end
   let!(:application) { LegalAidApplication.create(applicant: existing_applicant) }
   let!(:application_without_applicant) { LegalAidApplication.create }
 
@@ -97,6 +103,7 @@ RSpec.describe 'Update Legal aid applications' do
             "first_name": existing_applicant.first_name,
             "last_name": existing_applicant.last_name,
             "email_address": 'test@test.com',
+            "national_insurance_number": existing_applicant.national_insurance_number,
             "date_of_birth": existing_applicant.date_of_birth.to_s
           }
         }

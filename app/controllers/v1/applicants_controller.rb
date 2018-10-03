@@ -48,7 +48,7 @@ module V1
     end
 
     def applicant_params
-      params.require(:data).require(:attributes).permit(:first_name, :last_name, :date_of_birth, :application_ref, :email_address)
+      params.require(:data).require(:attributes).permit(:first_name, :last_name, :date_of_birth, :application_ref, :email_address, :national_insurance_number)
     end
   end
 end
