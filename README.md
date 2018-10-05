@@ -3,6 +3,8 @@
 This is the service api for persisting application related information to the back end database and
 may well be used to fire requests to other services.
 
+[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api)
+
 * Ruby version
     * Ruby version 2.5.1
     * Rails 5
@@ -28,7 +30,7 @@ In order to run the tests run
 
 
  * ```./bin/rake```
- 
+
  This runs rubocop and the specs. You can also run ```make test``` which builds a docker image and runs this inside it, but it takes longer.
 
  * ```make test```
@@ -56,13 +58,13 @@ Benefit of this is you dont have to build container everytime you make a change 
 
 ## Developer local Endpoints
 
-* Post an application 
+* Post an application
  ##### you can post with or without proceeding types, example
-    
+
     {
     "proceeding_type_codes":["PR0001", "PR0002","PR0003"]
     }
-    
+
 
 ```http://localhost:3002/v1/applications```
 
