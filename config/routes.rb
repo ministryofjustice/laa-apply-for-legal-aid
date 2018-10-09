@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   namespace 'v1' do
     resources :proceeding_types, only: [:index]
-    resources :applications, only: [:create, :show], param: :ref do
-      resource :applicant, only: [:update]
+    resources :applications, only: %i[create show] do
+      resource :applicant, only: %i[create update]
     end
-    resources :applicants, only: [:create, :show]
+    resources :applicants, only: [:show]
   end
 end

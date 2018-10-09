@@ -35,7 +35,14 @@ en:
       models:
         applicant:
           attributes:
+            date_of_birth:
+              invalid: 'is not valid'
             email_address:
               invalid: 'is not in the right format'
             national_insurance_number:
               invalid: 'is not in the right format'
+  api:
+    errors:
+      codes:
+        blank: blank
+        invalid: invalid

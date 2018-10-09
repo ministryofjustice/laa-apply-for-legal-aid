@@ -1,54 +1,40 @@
 module V1
   class ApplicantsController < ApplicationController
-    before_action :set_application, only: [:update, :destroy]
-
-    def index
-      @applicant = Applicant.all
-      render json: @applicant
-    end
-
     def show
       @applicant = Applicant.find(params[:id])
       render json: @applicant
     end
 
     def create
-      result = SaveApplicant.call(**applicant_params.to_h.symbolize_keys)
+      applicant = application.build_applicant(applicant_params)
 
-      if result.success?
-        render json: ApplicantSerializer.new(result.applicant).serialized_json, status: :created
+      if applicant.save
+        render json: applicant, status: :created
       else
-        render json: result.errors, status: :bad_request
+        render_400 applicant.errors
       end
     end
 
     def update
-      applicant = @application.applicant
       if applicant.update(applicant_params)
-        render json: ApplicantSerializer.new(applicant).serialized_json
+        render json: applicant
       else
-        render json: applicant.errors.full_messages, status: :bad_request
+        render_400 applicant.errors
       end
-    end
-
-    def destroy
-      @applicant.destroy
     end
 
     private
 
-    def set_application
-      @application = LegalAidApplication.find_by(application_ref: params[:application_ref])
+    def application
+      @application ||= LegalAidApplication.find_by!(application_ref: params[:application_id])
+    end
 
-      if @application.nil?
-        render json: { message: "Failed to find application with ref #{params[:application_ref]}" }, status: :unprocessable_entity
-      elsif @application.applicant.nil?
-        render json: { message: "Failed to find applicant for application with ref #{params[:application_ref]}" }, status: :not_found
-      end
+    def applicant
+      @applicant ||= application.applicant || raise(ActiveRecord::RecordNotFound)
     end
 
     def applicant_params
-      params.require(:data).require(:attributes).permit(:first_name, :last_name, :date_of_birth, :application_ref, :email_address, :national_insurance_number)
+      params.require(:applicant).permit(:first_name, :last_name, :date_of_birth, :email_address, :national_insurance_number)
     end
   end
 end

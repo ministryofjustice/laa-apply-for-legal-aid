@@ -1,10 +1,21 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  TargetRubyVersion: 2.5
   Exclude:
   - 'db/schema.rb'
   - 'vendor/**/*'
 
+Metrics/BlockLength:
+  Exclude:
+  - 'spec/**/*'
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
 Style/Documentation:
   Exclude:
   - '**/*'
+
+Style/SymbolArray:
+  EnforcedStyle: percent
