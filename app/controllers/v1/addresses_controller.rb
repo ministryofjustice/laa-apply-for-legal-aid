@@ -1,6 +1,5 @@
 module V1
   class AddressesController < ApplicationController
-
     def create
       applicant = Applicant.find(params[:applicant_id])
       address = applicant.addresses.build(address_params)

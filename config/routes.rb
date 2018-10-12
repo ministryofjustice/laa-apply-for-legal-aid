@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :applications, only: %i[create show] do
       resource :applicant, only: %i[create update]
     end
-    resources :applicants, only: [:show]
+    resources :applicants, only: [:show] do
+      resources :addresses, only: [:create]
+    end
   end
 end
