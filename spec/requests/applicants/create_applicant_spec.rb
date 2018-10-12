@@ -56,6 +56,7 @@ RSpec.describe 'POST /v1/applications/:application_id/applicant', type: :request
     post_request.call
 
     expected_json = {
+      id: Applicant.last.id,
       first_name: 'John',
       last_name: 'Doe',
       date_of_birth: '1991-12-01',

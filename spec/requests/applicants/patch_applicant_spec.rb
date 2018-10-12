@@ -53,6 +53,7 @@ RSpec.describe 'PATCH /v1/applications/{app_ref}/applicant', type: :request do
     patch_request.call
 
     expected_json = {
+      id: applicant.id,
       first_name: applicant.first_name,
       last_name: applicant.last_name,
       email_address: 'new_email@test.com',
