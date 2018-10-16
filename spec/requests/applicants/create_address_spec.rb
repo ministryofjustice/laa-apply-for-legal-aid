@@ -45,7 +45,6 @@ RSpec.describe 'POST /v1/applicants/:applicant_id/addresses', type: :request do
 
       expected_json = {
         errors: [
-          { field: 'address_line_one', code: 'blank' },
           { field: 'postcode', code: 'invalid' }
         ]
       }

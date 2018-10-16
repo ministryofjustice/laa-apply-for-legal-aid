@@ -7,17 +7,23 @@ RSpec.describe Address, type: :model do
     expect(subject).to be_valid
   end
 
-  it 'is not valid without a building name' do
+  it 'is not valid without a building name and street address' do
     subject.address_line_one = ''
+    subject.address_line_two = ''
     expect(subject).to_not be_valid
     expect(subject.errors[:address_line_one]).to include("can't be blank")
   end
 
-  it 'is not valid without a street address' do
-    subject.address_line_two = ''
-    expect(subject).to_not be_valid
-    expect(subject.errors[:address_line_two]).to include("can't be blank")
+  it 'is valid without a building name' do
+    subject.address_line_one = ''
+    expect(subject).to be_valid
   end
+
+  it 'is valid without a street address' do
+    subject.address_line_two = ''
+    expect(subject).to be_valid
+  end
+
   it 'is not valid without a town or city' do
     subject.city = nil
     expect(subject).to_not be_valid

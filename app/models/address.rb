@@ -9,13 +9,19 @@ class Address < ApplicationRecord
 
   belongs_to :applicant
 
-  validates :address_line_one, :address_line_two, :city, :postcode, presence: true
+  validates :city, :postcode, presence: true
 
   before_validation :normalize_postcode
 
   validates :postcode, format: { with: POSTCODE_REGEXP }
+  validate :validate_address_lines
 
   private
+
+  def validate_address_lines
+    return if address_line_one.present? || address_line_two.present?
+    errors.add(:address_line_one, :blank)
+  end
 
   def normalize_postcode
     return if postcode.blank?
