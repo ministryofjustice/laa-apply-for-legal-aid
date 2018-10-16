@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 2018_10_11_143410) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "address_line_one", null: false
+    t.string "address_line_one"
     t.string "address_line_two"
     t.string "city"
     t.string "county"
-    t.string "postcode", null: false
+    t.string "postcode"
     t.bigint "applicant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
