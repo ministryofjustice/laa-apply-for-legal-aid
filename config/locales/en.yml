@@ -1,7 +1,5 @@
 en:
   activerecord:
-    postcode:
-      invalid: 'is not in the right format'
     errors:
       models:
         applicant:

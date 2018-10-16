@@ -19,7 +19,7 @@ RSpec.describe 'POST /v1/applicants/:applicant_id/addresses', type: :request do
   end
 
   context 'when there is no applicant with the provided reference' do
-    let(:applicant_id) { SecureRandom.uuid }
+    let(:applicant_id) { '0000' }
 
     it 'returns a 404 response' do
       post_request.call
@@ -59,12 +59,21 @@ RSpec.describe 'POST /v1/applicants/:applicant_id/addresses', type: :request do
   it 'returns a successful address payload' do
     post_request.call
 
+    expected_json = {
+      id: Integer,
+      address_line_one: '123',
+      address_line_two: 'High Street',
+      city: 'London',
+      county: 'Greater London',
+      postcode: 'SW1H9AJ',
+      applicant_id: applicant_id,
+      created_at: String,
+      updated_at: String
+    }
+
     expect(response).to have_http_status(201)
-    expect(response.content_type).to eql('application/json')
-    json = JSON.parse response.body
-    expect(json['address_line_one']).to eq params[:address_line_one]
-    expect(json['city']).to eq params[:city]
-    expect(json['postcode']).to eq params[:postcode]
+    expect(response.content_type).to eq('application/json')
+    expect(response.body).to match_json_expression(expected_json)
   end
 
   it 'creates a new address' do

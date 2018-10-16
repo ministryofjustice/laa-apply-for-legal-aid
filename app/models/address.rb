@@ -5,20 +5,21 @@ class Address < ApplicationRecord
   # of the validation process we are changing postcode to uppercase and removing spaces this allows
   # for some simplification of the regular expression
 
-  POSTCODE_REGEXP = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/
+  POSTCODE_REGEXP = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})/
 
   belongs_to :applicant
 
   validates :address_line_one, :address_line_two, :city, :postcode, presence: true
 
-  validate :validate_postcode
+  before_validation :normalize_postcode
+
+  validates :postcode, format: { with: POSTCODE_REGEXP }
 
   private
 
-  def validate_postcode
+  def normalize_postcode
     return if postcode.blank?
     postcode.delete!(' ')
     postcode.upcase!
-    errors.add(:postcode, :invalid) unless POSTCODE_REGEXP =~ postcode
   end
 end
