@@ -59,15 +59,12 @@ RSpec.describe 'POST /v1/applicants/:applicant_id/addresses', type: :request do
     post_request.call
 
     expected_json = {
-      id: Integer,
       address_line_one: '123',
       address_line_two: 'High Street',
       city: 'London',
       county: 'Greater London',
       postcode: 'SW1H9AJ',
-      applicant_id: applicant_id,
-      created_at: String,
-      updated_at: String
+      applicant_id: applicant_id
     }
 
     expect(response).to have_http_status(201)
