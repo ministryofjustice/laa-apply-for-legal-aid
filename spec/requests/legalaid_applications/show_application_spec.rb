@@ -25,6 +25,7 @@ RSpec.describe 'GET /v1/applications/:id', type: :request do
     expected_json = {
       id: application_ref,
       applicant: {
+        id: applicant.id,
         first_name: applicant.first_name,
         last_name: applicant.last_name,
         date_of_birth: applicant.date_of_birth.to_s,
