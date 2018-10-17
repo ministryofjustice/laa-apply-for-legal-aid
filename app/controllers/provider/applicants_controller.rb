@@ -39,7 +39,9 @@ module Provider
         params.require(:applicant).permit(
           :first_name, :last_name, :dob_day, :dob_month, :dob_year, :national_insurance_number
         ).tap do |hash|
-          hash[:date_of_birth] = Time.parse("#{hash[:dob_day]}-#{hash[:dob_month]}-#{hash[:dob_year]}")
+          date_elements = [hash[:dob_day], hash[:dob_month], hash[:dob_year]]
+          return if date_elements.any?(&:blank?)
+          hash[:date_of_birth] = Time.parse(date_elements.join('-'))
           hash.delete_if { |k, _v| /dob_/ =~ k.to_s }
         end
       end
