@@ -44,4 +44,33 @@
   </div>
 </fieldset>
 
+<fieldset class="govuk-fieldset">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <%= simple_form_for @applicant, url: provider_legal_aid_application_applicant_path do |f|  %>
+        <div class="govuk-!-padding-bottom-2"></div>
+        <%= f.input :first_name %>
+        <div class="govuk-!-padding-bottom-1"></div>
+        <%= f.input :last_name %>
+        <div class="govuk-!-padding-bottom-4"></div>
+        <%=
+          f.input(
+            :date_of_birth,
+            order: [:day, :month, :year],
+            start_year: Date.today.year,
+            end_year: Date.today.year - 120,
+            use_short_month: true,
+            prompt: {day: 'DD', month: 'MMM', year: 'YYYY'},
+            input_html: { class: 'govuk-input govuk-date-input__input govuk-input--width-3' }
+          )
+        %>
+        <div class="govuk-!-padding-bottom-6"></div>
+        <%= f.input :national_insurance_number %>
+        <div class="govuk-!-padding-bottom-2"></div>
+        <%= f.submit 'Continue', class: 'govuk-button' %>
+      <% end %>
+    </div>
+  </div>
+</fieldset>
+
 
