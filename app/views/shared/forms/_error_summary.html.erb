@@ -7,7 +7,7 @@
       <ul class="govuk-list govuk-error-summary__list">
         <% model.errors.each do |attribute, message| %>
           <li>
-            <%= link_to message, "##{attribute}" %>
+            <%= link_to "#{attribute.to_s.humanize} #{message}", "##{attribute}" %>
           </li>
         <% end %>
       </ul>

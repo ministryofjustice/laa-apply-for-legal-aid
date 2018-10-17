@@ -1,8 +1,8 @@
-<% field_error_class = form.object.errors[:dob].any? ? 'govuk-input--error': '' %>
+<% field_error_class = form.object.errors[:date_of_birth].any? ? 'govuk-input--error': '' %>
 <% width = field_name !=:dob_year ? '2' : '4'  %>
   <div class="govuk-date-input__item">
     <div class="govuk-form-group">
       <%= form.label field_name, class: ["govuk-date-input__label govuk-label"] %>
-      <%= form.text_field field_name, id: :dob, class: ["govuk-input govuk-date-input__input govuk-input--width-#{width} #{field_error_class}"] %>
+      <%= form.text_field field_name, id: :date_of_birth, class: ["govuk-input govuk-date-input__input govuk-input--width-#{width} #{field_error_class}"] %>
     </div>
   </div>
