@@ -5,7 +5,7 @@ class Address < ApplicationRecord
   # of the validation process we are changing postcode to uppercase and removing spaces this allows
   # for some simplification of the regular expression
 
-  POSTCODE_REGEXP = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})/
+  POSTCODE_REGEXP = /\A([A-Z][A-HJ-Y]?[0-9][A-Z0-9]?[0-9][A-Z]{2}|GIR ?0A{2})\z/
 
   belongs_to :applicant
 

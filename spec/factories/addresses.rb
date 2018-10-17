@@ -5,6 +5,6 @@ FactoryBot.define do
     address_line_two { Faker::Address.street_address }
     city { Faker::Address.city }
     county { Faker::Address.city }
-    postcode { Faker::Base.regexify(Address::POSTCODE_REGEXP) }
+    postcode { Faker::Address.zip }
   end
 end
