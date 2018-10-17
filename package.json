@@ -1,0 +1,7 @@
+{
+  "name": "laa-apply-for-legal-aid-provider-frontend",
+  "private": true,
+  "dependencies": {
+    "govuk-frontend": "^1.1.1"
+  }
+}

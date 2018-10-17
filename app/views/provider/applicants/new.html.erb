@@ -1,0 +1,47 @@
+<% content_for :navigation do %>
+  <%= link_to 'Back', new_provider_legal_aid_application_applicant_path %>
+<% end %>
+<%= render partial: 'shared/forms/error_summary', locals: { model: @applicant } %>
+
+<fieldset class="govuk-fieldset">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 class="govuk-fieldset__heading">
+          Enter your client's details
+        </h1>
+      </legend>
+    </div>
+  </div>
+
+  <div class="govuk-!-padding-bottom-2"></div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <%= form_with(model: @applicant, url: provider_legal_aid_application_applicant_path, local: true) do |form| %>
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :first_name, form: form } %>
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :last_name, form: form } %>
+
+        <div class="govuk-!-padding-bottom-4"></div>
+
+        <%= render partial: 'shared/forms/date_input_fields', locals: { field_name: :dob, form: form } %>
+
+        <div class="govuk-!-padding-bottom-6"></div>
+
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :national_insurance_number, form: form } %>
+
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <%= form.submit "Continue", id: 'continue', :class=>"govuk-button govuk-button" %>
+          <% end %>
+         </div>
+       </div>
+    </div>
+  </div>
+</fieldset>
+
+
