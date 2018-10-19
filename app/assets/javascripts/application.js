@@ -14,6 +14,5 @@
 //= require activestorage
 //= require "govuk-frontend/all"
 //= require jquery
-//= require templates/proceeding_result_template.js
-//= require civil_applications/civil_applications.js
+//= require_tree .
 
