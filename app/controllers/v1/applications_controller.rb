@@ -1,4 +1,4 @@
-class V1::ApplicationsController < ApplicationController
+class V1::ApplicationsController < ApiController
   def create
     application = LegalAidApplication.new(application_params)
 

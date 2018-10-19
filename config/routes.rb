@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
+
   resources :status, only: [:index]
 
   namespace 'v1' do
