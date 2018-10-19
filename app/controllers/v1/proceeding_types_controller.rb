@@ -1,5 +1,5 @@
 module V1
-  class ProceedingTypesController < ApplicationController
+  class ProceedingTypesController < ApiController
     def index
       render json: ProceedingType.all
     end

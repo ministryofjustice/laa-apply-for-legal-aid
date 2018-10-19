@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class ApiController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound do
     render json: {}, status: :not_found
   end
