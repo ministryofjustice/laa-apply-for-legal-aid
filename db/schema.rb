@@ -10,24 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_143410) do
+ActiveRecord::Schema.define(version: 2018_10_18_165537) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "address_line_one"
     t.string "address_line_two"
     t.string "city"
     t.string "county"
     t.string "postcode"
-    t.bigint "applicant_id", null: false
+    t.uuid "applicant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["applicant_id"], name: "index_addresses_on_applicant_id"
   end
 
-  create_table "applicants", force: :cascade do |t|
+  create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.date "date_of_birth"
     t.datetime "created_at", null: false
@@ -37,24 +38,24 @@ ActiveRecord::Schema.define(version: 2018_10_11_143410) do
     t.string "national_insurance_number"
   end
 
-  create_table "application_proceeding_types", force: :cascade do |t|
-    t.bigint "legal_aid_application_id"
-    t.bigint "proceeding_type_id"
+  create_table "application_proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "proceeding_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
-  create_table "legal_aid_applications", force: :cascade do |t|
+  create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "applicant_id"
+    t.uuid "applicant_id"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 
-  create_table "proceeding_types", force: :cascade do |t|
+  create_table "proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "ccms_code"
     t.string "meaning"
@@ -69,4 +70,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_143410) do
   end
 
   add_foreign_key "addresses", "applicants"
+  add_foreign_key "application_proceeding_types", "legal_aid_applications"
+  add_foreign_key "application_proceeding_types", "proceeding_types"
+  add_foreign_key "legal_aid_applications", "applicants"
 end

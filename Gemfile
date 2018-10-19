@@ -23,6 +23,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'rubocop', require: false
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'webdack-uuid_migration'
 end
 
 group :development do
