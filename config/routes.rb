@@ -18,4 +18,8 @@ Rails.application.routes.draw do
     resource :consent, only: [:show]
     resource :information, only: [:show]
   end
+
+  namespace :providers do
+    root to: 'start#index'
+  end
 end
