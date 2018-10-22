@@ -34,3 +34,4 @@ config/master.key
 # dotenv
 # Ignore environment variables
 .env.*
+.env
