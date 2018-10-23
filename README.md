@@ -78,6 +78,8 @@ Benefit of this is you dont have to build container everytime you make a change 
 
 ## Deployment
 
-The deployment is currently triggered **only** on master builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api) and require approval both for **staging** and **production** environments.
+The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api) but requires approval to the desired environment.
 
-**NOTE:** We use **git-crypt** to store secrets required for **staging** and **production** environments. To be able to modify those secrets, **git-crypt** needs to be set up according to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/03-other-topics/001-git-crypt-setup/#git-crypt).
+**NOTE:** **git-crypt** is required to store secrets required for **uat**, **staging** and **production** environments. To be able to modify those secrets, **git-crypt** needs to be set up according to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/03-other-topics/001-git-crypt-setup/#git-crypt).
+
+For more deployment information refer to the specific [README](./helm_deploy/apply-for-legalaid-api/README.md)
