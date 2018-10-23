@@ -81,11 +81,7 @@
           </p>
         </div>
 
-        <% content_for :default_navigation do %>
-          <%= link_to 'Home', root_path, class: 'govuk-back-link', id: 'back-top', method: 'get' %>
-        <% end %>
-
-        <%= content_for?(:navigation) ? yield(:navigation) :  yield(:default_navigation) %>
+        <%= content_for(:navigation) %>
 
         <main class="govuk-main-wrapper " id="main-content" role="main">
           <% if flash[:error] %>

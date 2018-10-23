@@ -12,4 +12,10 @@ Rails.application.routes.draw do
       resources :addresses, only: [:create]
     end
   end
+
+  namespace :citizens do
+    resources :legal_aid_applications, only: [:show]
+    resource :consent, only: [:show]
+    resource :information, only: [:show]
+  end
 end
