@@ -1,0 +1,28 @@
+<h1 class="govuk-heading-xl">Complete your legal aid financial assessment</h1>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <p class="govuk-body">
+      Name:
+      <b><%= @applicant.first_name %></b>
+      <b><%= @applicant.last_name %></b>
+      <br>
+      Case reference:
+      <b><%= @application_ref %></b>
+    </p>
+
+    <p class="govuk-body">Find out if you can get legal aid because of your financial situation.</p>
+
+    <p class="govuk-body">You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.</p>
+
+    <p class="govuk-body govuk-!-font-weight-bold">What you will need</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>your online banking log in details</li>
+    </ul>
+
+    <%= link_to 'Start', citizens_information_path, class: 'govuk-button govuk-button--start', id: 'start' %>
+
+  </div>
+</div>
