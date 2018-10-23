@@ -41,10 +41,16 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legalaid-api.fullname" . }}
                 key: postgresDatabase
+          - name: RAILS_MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                key: railsMasterKey
           - name: RAILS_ENV
             value: production
           - name: RAILS_LOG_TO_STDOUT
             value: "true"
+
           ports:
             - name: http
               containerPort: 3002

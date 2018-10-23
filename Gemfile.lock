@@ -294,7 +294,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
   uglifier (>= 1.3.0)
-  webdack-uuid_migration
+  webdack-uuid_migration (~> 1.2.0)
   webmock
 
 RUBY VERSION
