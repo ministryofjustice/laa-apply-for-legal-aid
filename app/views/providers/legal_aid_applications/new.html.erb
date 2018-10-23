@@ -1,0 +1,30 @@
+<% content_for :navigation do %>
+  <%= link_to 'Home', providers_root_path, class: 'govuk-back-link' %>
+<% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">What does your client want legal aid for?</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-0">Search for legal proceedings</h2>
+    <span class="govuk-caption-m">For example by category of law, matter type or legal proceeding.</span>
+  </div>
+</div>
+
+<div class="govuk-grid-row search-field">
+  <div class="govuk-grid-column-two-thirds">
+    <input class="govuk-input" id="proceeding-search" name="proceeding-search-input" type="input" aria-describedby="offence-hint">
+  </div>
+  <div id="clear-search-div" class="govuk-grid-column-one-third">
+      <a id="clearSearch" href="#" class="govuk-link govuk-!-font-size-19">Clear search</a>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <%= form_with(model: [:providers, @legal_aid_application], local: true, html: { id: "proceeding-form" }) do |form| %>
+    <div id="proceeding-list" class="govuk-grid-column-full"></div>
+  <% end %>
+</div>

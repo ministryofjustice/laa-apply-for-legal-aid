@@ -21,5 +21,8 @@ Rails.application.routes.draw do
 
   namespace :providers do
     root to: 'start#index'
+    resources :legal_aid_applications, path: 'applications', only: %i[index new create] do
+      resource :applicant
+    end
   end
 end

@@ -13,8 +13,8 @@ default: &default
 development:
   <<: *default
   database: apply_for_legal_aid_dev
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
-  username: postgres
+#  host: <%= ENV['DB_HOST'] || 'localhost' %>
+#  username: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,8 +22,8 @@ development:
 test:
   <<: *default
   database: apply_for_legal_aid_test
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
-  username: postgres
+#  host: <%= ENV['DB_HOST'] || 'localhost' %>
+#  username: postgres
 
 
 production:
