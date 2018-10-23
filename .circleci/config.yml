@@ -101,14 +101,16 @@ jobs:
         name: Helm deployment to UAT
         command: |
 
-          helm upgrade ${APPLICATON_DEPLOY_NAME}-${CIRCLE_BRANCH} ./helm_deploy/apply-for-legalaid-api/. \
+          echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | tr -s ' _/[]()' -)\"" >> $BASH_ENV
+          source $BASH_ENV
+          helm upgrade ${APPLICATON_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legalaid-api/. \
                         --install \
                         --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legalaid-api/values-uat.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
-                        --set ingress.hosts="{${CIRCLE_BRANCH}-${UAT_HOST}}" \
+                        --set ingress.hosts="{${RELEASE_BRANCH}-${UAT_HOST}}" \
                         --set replicaCount="2"
 
   deploy_staging:
