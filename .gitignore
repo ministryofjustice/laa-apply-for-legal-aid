@@ -25,3 +25,7 @@
 
 # Ignore node_modules
 node_modules/
+
+# Ignore git-crypt key and Rails master key
+git-crypt.key
+config/master.key
