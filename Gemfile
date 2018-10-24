@@ -40,6 +40,8 @@ group :test do
   gem 'faker', '>=1.9.1'
   gem 'rspec-rails', '~> 3.7'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov'
   gem 'webmock'
 end
 

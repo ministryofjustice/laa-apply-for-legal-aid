@@ -35,3 +35,6 @@ config/master.key
 # Ignore environment variables
 .env.*
 .env
+
+# Ignore simplecov coverage stats
+/coverage/
