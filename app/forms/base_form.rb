@@ -22,8 +22,8 @@ module BaseForm
     end
   end
 
-  def initialize(params={})
-    @params = params.symbolize_keys
+  def initialize(params = {})
+    @params = params
     super params[self.class.model_class.to_s.underscore.to_sym]
   end
 
@@ -36,7 +36,7 @@ module BaseForm
   end
 
   def save
-    return false unless self.valid?
+    return false unless valid?
     model.attributes = attributes.except(*exclude_from_model.map(&:to_s))
     model.save(validate: false)
   end
@@ -57,8 +57,10 @@ module BaseForm
   private
 
   # Over-riding ActiveModel::AttributeAssignment method to store attributes as they are built
+  # rubocop:disable Naming/UncommunicativeMethodParamName
   def _assign_attribute(k, v)
     attributes[k] = v
     super
   end
+  # rubocop:enable Naming/UncommunicativeMethodParamName
 end

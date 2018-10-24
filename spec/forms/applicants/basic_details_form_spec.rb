@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rubocop:disable Lint/AmbiguousBlockAssociation
 RSpec.describe Applicants::BasicDetailsForm, type: :form do
   describe '.model_name' do
     it 'should be "Applicant"' do
@@ -11,9 +11,9 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
   let(:legal_aid_application) { create :legal_aid_application }
 
   let(:attr_list) do
-    [
-      :first_name, :last_name, :email_address, :national_insurance_number,
-      :date_of_birth
+    %i[
+      first_name last_name national_insurance_number
+      date_of_birth
     ]
   end
 
@@ -79,26 +79,13 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context 'with an invalid email' do
-      before { attributes[:email_address] = 'foobar' }
-      it 'does not persist model' do
-        expect { subject.save }.not_to change { Applicant.count }
-      end
-
-      it 'errors to be present' do
-        subject.save
-        expect(subject.errors[:email_address]).to be_present
-      end
-    end
-
     context 'with dob elements' do
-        let(:params) do
+      let(:params) do
         {
           applicant: {
             first_name: attributes[:first_name],
             last_name: attributes[:last_name],
             national_insurance_number: attributes[:national_insurance_number],
-            email_address: attributes[:email_address],
             dob_year: attributes[:date_of_birth].year.to_s,
             dob_month: attributes[:date_of_birth].month.to_s,
             dob_day: attributes[:date_of_birth].day.to_s
@@ -118,13 +105,12 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
 
     context 'with invalid dob elements' do
-        let(:params) do
+      let(:params) do
         {
           applicant: {
             first_name: attributes[:first_name],
             last_name: attributes[:last_name],
             national_insurance_number: attributes[:national_insurance_number],
-            email_address: attributes[:email_address],
             dob_year: '10',
             dob_month: '21',
             dob_day: '44'
@@ -133,18 +119,15 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         }
       end
 
-      it 'is valid' do
+      it 'is not valid' do
         expect { subject.save }.not_to change { Applicant.count }
       end
 
       it 'sets errors' do
         subject.save
-        expect(subject.errors[:dob_year]).to be_present
-        expect(subject.errors[:dob_month]).to be_present
-        expect(subject.errors[:dob_day]).to be_present
+        expect(subject.errors[:date_of_birth]).to be_present
       end
     end
-
   end
 
   describe '#model' do
@@ -168,5 +151,5 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       expect(subject.legal_aid_application).to eq(legal_aid_application)
     end
   end
-
 end
+# rubocop:enable Lint/AmbiguousBlockAssociation

@@ -1,7 +1,7 @@
 module Providers
   class LegalAidApplicationsController < BaseController
     # GET /provider/applications
-    def index;end
+    def index; end
 
     # GET /provider/applications/new
     def new
