@@ -46,6 +46,11 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legalaid-api.fullname" . }}
                 key: railsMasterKey
+          - name: SENTRY_DSN
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                key: sentryDsn
           - name: RAILS_ENV
             value: production
           - name: RAILS_LOG_TO_STDOUT
