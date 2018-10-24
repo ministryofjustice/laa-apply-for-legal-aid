@@ -1,23 +1,23 @@
 module Providers
   class ApplicantsController < BaseController
     STEPS = {
-      new: { form: :form_name, next_action: :foo }
+      new: Applicant::BasicDetailsForm
     }
 
 
     # GET /providers/applications/:legal_aid_application_id/applicant/new
     def new
-      @applicant = legal_aid_application.build_applicant
+      @applicant = form_for(:new)
     end
 
     private
 
-    def applicant
-      @applicant = legal_aid_application.applicant
+    def form_for(applicant, step)
+      STEPS[step].new(params)
     end
 
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(params[:legal_aid_application_id])
+    def applicant
+      @applicant = legal_aid_application.applicant
     end
   end
 end

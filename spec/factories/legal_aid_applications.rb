@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :application, class: LegalAidApplication do
+  factory :legal_aid_application, aliases: [:application] do
     trait :with_applicant do
       applicant
     end
