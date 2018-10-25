@@ -1,13 +1,7 @@
 <% field_with_error = local_assigns[:field_with_error] ? field_with_error : field_name %>
 <% group_error_class = form.object.errors[field_with_error].any? ? 'govuk-form-group--error': '' %>
 
-<% class_width = "one-half" if local_assigns[:class_width].nil? %>
-
-<% dash = "-input--width-" %>
-
-<% if class_width.to_i == 0 %>
-  <% dash = "-!-width-" %>
-<% end %>
+<% custom_classes = local_assigns[:class].nil? ? '' : local_assigns[:class] %>
 
 <div class="govuk-form-group <%= group_error_class %>">
   <%= form.label field_name, class: ["govuk-label"] %>
@@ -19,5 +13,5 @@
     <%= content_tag(:span, form.object.errors[field_name].first, class: ["govuk-error-message"]) %>
   <% end %>
   <% input_error_class = form.object.errors[field_with_error].any? ? 'govuk-input--error' : '' %>
-  <%= form.text_field field_name, id: field_name, class: "govuk-input govuk#{dash}#{class_width} #{input_error_class}" %>
+  <%= form.text_field field_name, id: field_name, class: "govuk-input #{custom_classes} #{input_error_class}" %>
 </div>

@@ -13,6 +13,12 @@ en:
         date_of_birth_hint: 'For example, 31 3 1980'
   activemodel:
     attributes:
+      address: &address_attrs
+        address_line_one: 'Building and street'
+        address_line_two: ''
+        city: 'Town or city'
+        county: 'County'
+        postcode: 'Postcode'
       applicant: &applicant_attrs
         first_name: 'First name'
         last_name: 'Last name'
@@ -21,11 +27,7 @@ en:
         dob_year: 'Year'
         national_insurance_number: 'National Insurance number'
       applicants/address_form:
-        line_one: 'Building and street'
-        line_two: ''
-        city: 'Town or city'
-        county: 'County'
-        postcode: 'Postcode'
+        <<: *address_attrs
       applicants/basic_details_form:
         <<: *applicant_attrs
     errors:
@@ -49,13 +51,19 @@ en:
               email_address:
                 blank: 'Enter email address'
                 invalid: 'Enter an email address in the right format'
+        applicants/address_selection_form:
+          attributes:
+            address:
+              blank: 'Please select an address from the list'
         applications/proceedings_form:
           attributes:
               code:
                 blank: 'A proceeding must be selected'
         address: &address_errors
          attributes:
-           line_one:
+           address:
+              blank: 'Please select an address from the list'
+           address_line_one:
              blank: 'Enter a building and street'
            city:
              blank: 'Enter a town or city'
@@ -64,6 +72,11 @@ en:
              invalid: 'Enter a postcode in the right format'
         applicants/address_form:
          <<: *address_errors
+        applicants/address_lookup_form:
+          attributes:
+            postcode:
+              blank: 'Enter a postcode'
+              invalid: 'Enter a postcode in the right format'
   activerecord:
     errors:
       models:
@@ -79,3 +92,16 @@ en:
           attributes:
             postcode:
               invalid: 'is not in the right format'
+  forms:
+    address:
+      errors:
+        no_results: &postcode_no_results "Sorry - we couldn't find any addresses for that postcode, please enter the address manually."
+        unsuccessful: *postcode_no_results
+    address_lookup:
+      heading: "Enter your client's home address"
+      postcode_hint: 'Postcode must be a valid UK postcode.'
+    address_selection:
+      heading: "Enter your client's home address"
+    client_detail:
+      dob_hint: 'For example, 31 3 1980'
+      national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"

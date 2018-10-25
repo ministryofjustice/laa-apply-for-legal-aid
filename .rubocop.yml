@@ -6,6 +6,10 @@ AllCops:
   - 'db/schema.rb'
   - 'vendor/**/*'
 
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+  - 'spec/**/*'
+
 Metrics/BlockLength:
   Exclude:
   - 'spec/**/*'

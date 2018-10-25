@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
+require 'webmock/rspec'
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
@@ -21,6 +22,24 @@ unless ENV['NOCOVERAGE']
     add_filter 'config/initializers/'
     add_filter 'spec/'
   end
+end
+
+WebMock.disable_net_connect!
+
+require 'vcr'
+
+vcr_debug = ENV['VCR_DEBUG'].to_s == 'true'
+record_mode = ENV['VCR_RECORD_MODE'] ? ENV['VCR_RECORD_MODE'].to_sym : :once
+
+VCR.configure do |vcr_config|
+  vcr_config.cassette_library_dir = 'spec/cassettes'
+  vcr_config.hook_into :webmock
+  vcr_config.default_cassette_options = {
+    record: record_mode,
+    match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)]
+  }
+  vcr_config.configure_rspec_metadata!
+  vcr_config.debug_logger = STDOUT if vcr_debug
 end
 
 RSpec.configure do |config|

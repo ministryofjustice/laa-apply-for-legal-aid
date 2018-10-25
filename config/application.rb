@@ -11,5 +11,9 @@ module LaaApplyForLegalaidApi
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    config.govuk_notify_templates = config_for(
+      :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
+    ).symbolize_keys
   end
 end

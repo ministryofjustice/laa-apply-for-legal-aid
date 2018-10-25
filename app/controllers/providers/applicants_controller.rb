@@ -1,40 +1,61 @@
 module Providers
   class ApplicantsController < BaseController
-    STEPS = {
-      new: Applicants::BasicDetailsForm,
-      edit: Applicants::EmailForm
-    }.freeze
+    include Providers::ApplicationDependable
+    include Providers::Steppable
+
+    before_action :set_current_step
 
     def new
-      @applicant = form_for(:new)
+      @form = Applicants::BasicDetailsForm.new
     end
 
     def create
-      @applicant = form_for(:new)
-      if @applicant.save
-        redirect_to edit_providers_legal_aid_application_applicant_path(@applicant.legal_aid_application)
+      @form = Applicants::BasicDetailsForm.new(new_params)
+      if @form.save
+        redirect_to action_for_next_step(options: { applicant: @form.model })
       else
         render :new
       end
     end
 
     def edit
-      @applicant = form_for(:edit)
+      @form = Applicants::EmailForm.new(model: applicant)
     end
 
-    # def update
-    #   @applicant = form_for(:edit)
-    #   if @applicant.save
-    #     render json: { message: 'Write next action!' }
-    #   else
-    #     render :edit
-    #   end
-    # end
+    def update
+      @form = Applicants::EmailForm.new(edit_params)
+
+      if @form.save
+        redirect_to action_for_next_step(options: { application: legal_aid_application, applicant: @form.model })
+      else
+        render :edit
+      end
+    end
 
     private
 
-    def form_for(step)
-      STEPS[step].new(params.permit!)
+    def applicant_params
+      params.require(:applicant).permit(:first_name, :last_name, :dob_day, :dob_month, :dob_year, :national_insurance_number)
+    end
+
+    def new_params
+      applicant_params.merge(legal_aid_application_id: params[:legal_aid_application_id])
+    end
+
+    def edit_params
+      email_params.merge(model: applicant)
+    end
+
+    def email_params
+      params.require(:applicant).permit(:email_address)
+    end
+
+    def applicant
+      @applicant ||= legal_aid_application.applicant
+    end
+
+    def set_current_step
+      @current_step = %w[edit update].include?(params[:action]) ? :email : :basic_details
     end
   end
 end

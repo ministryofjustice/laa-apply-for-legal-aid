@@ -12,6 +12,10 @@ class Applicant < ApplicationRecord
 
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
 
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   private
 
   def validate_date_of_birth

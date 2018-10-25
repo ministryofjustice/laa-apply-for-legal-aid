@@ -16,6 +16,24 @@ class Address < ApplicationRecord
   validates :postcode, format: { with: POSTCODE_REGEXP }
   validate :validate_address_lines
 
+  def self.from_json(json)
+    attrs = JSON.parse(json)
+    new(attrs.slice('address_line_one', 'address_line_two', 'city', 'postcode'))
+  end
+
+  def full_address
+    [address_line_one, address_line_two, city, postcode].compact.join(', ')
+  end
+
+  def to_json
+    {
+      address_line_one: address_line_one,
+      address_line_two: address_line_two,
+      city: city,
+      postcode: postcode
+    }.to_json
+  end
+
   private
 
   def validate_address_lines

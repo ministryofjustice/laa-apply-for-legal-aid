@@ -1,5 +1,5 @@
 require 'rails_helper'
-# rubocop:disable Lint/AmbiguousBlockAssociation
+
 RSpec.describe Applicants::BasicDetailsForm, type: :form do
   describe '.model_name' do
     it 'should be "Applicant"' do
@@ -9,6 +9,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
   let(:attributes) { attributes_for :applicant }
   let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application_id) { legal_aid_application.id }
 
   let(:attr_list) do
     %i[
@@ -17,16 +18,13 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     ]
   end
 
-  let(:params) do
-    {
-      applicant:  attributes.slice(*attr_list),
-      legal_aid_application_id: legal_aid_application.id
-    }
-  end
+  let(:params) { attributes.slice(*attr_list).merge(legal_aid_application_id: legal_aid_application_id) }
+
   subject { described_class.new(params) }
 
   describe '#save' do
     let(:applicant) { Applicant.last }
+
     it 'creates a new applicant' do
       expect { subject.save }.to change { Applicant.count }
     end
@@ -82,14 +80,12 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     context 'with dob elements' do
       let(:params) do
         {
-          applicant: {
-            first_name: attributes[:first_name],
-            last_name: attributes[:last_name],
-            national_insurance_number: attributes[:national_insurance_number],
-            dob_year: attributes[:date_of_birth].year.to_s,
-            dob_month: attributes[:date_of_birth].month.to_s,
-            dob_day: attributes[:date_of_birth].day.to_s
-          },
+          first_name: attributes[:first_name],
+          last_name: attributes[:last_name],
+          national_insurance_number: attributes[:national_insurance_number],
+          dob_year: attributes[:date_of_birth].year.to_s,
+          dob_month: attributes[:date_of_birth].month.to_s,
+          dob_day: attributes[:date_of_birth].day.to_s,
           legal_aid_application_id: legal_aid_application.id
         }
       end
@@ -107,14 +103,12 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     context 'with invalid dob elements' do
       let(:params) do
         {
-          applicant: {
-            first_name: attributes[:first_name],
-            last_name: attributes[:last_name],
-            national_insurance_number: attributes[:national_insurance_number],
-            dob_year: '10',
-            dob_month: '21',
-            dob_day: '44'
-          },
+          first_name: attributes[:first_name],
+          last_name: attributes[:last_name],
+          national_insurance_number: attributes[:national_insurance_number],
+          dob_year: '10',
+          dob_month: '21',
+          dob_day: '44',
           legal_aid_application_id: legal_aid_application.id
         }
       end
@@ -145,11 +139,4 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
   end
-
-  describe '#legal_aid_application' do
-    it 'returns the passed in item' do
-      expect(subject.legal_aid_application).to eq(legal_aid_application)
-    end
-  end
 end
-# rubocop:enable Lint/AmbiguousBlockAssociation

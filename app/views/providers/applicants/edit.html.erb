@@ -1,7 +1,7 @@
 <% content_for :navigation do %>
   <%= link_to 'Back', new_providers_legal_aid_application_applicant_path, class: 'govuk-back-link' %>
 <% end %>
-<%= render partial: 'shared/forms/error_summary', locals: { model: @applicant } %>
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -12,7 +12,7 @@
       </h1>
     </legend>
 
-    <%= form_for(@applicant, url: providers_legal_aid_application_applicant_path(@applicant.legal_aid_application), method: 'put') do |form| %>
+    <%= form_for(@form, url: providers_legal_aid_application_applicant_path(@legal_aid_application), method: 'put') do |form| %>
 
       <div class="govuk-!-padding-bottom-6"></div>
 
@@ -22,7 +22,7 @@
 
       <div class="govuk-!-padding-bottom-2"></div>
 
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :email_address,  class_width: "three-quarters", form: form }%>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :email_address, class: 'govuk-!-width-three-quarters', form: form }%>
 
       <%= form.submit "Continue", id: 'continue', class: "govuk-button" %>
     <% end %>

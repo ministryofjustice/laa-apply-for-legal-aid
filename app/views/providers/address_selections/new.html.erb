@@ -1,0 +1,48 @@
+<% content_for :navigation do %>
+  <%= link_to 'Back', url_for(:back), class: 'govuk-back-link', id: 'back-top', method: 'get' %>
+<% end %>
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+<div class="govuk-grid-row">
+  <div class='govuk-grid-column-two-thirds'>
+    <%= form_with(model: @form, scope: :address_selection, url: providers_applicant_address_selections_path(@applicant), local: true) do |f| %>
+      <div class='govuk-form-group'>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            <%= t('forms.address_selection.heading').html_safe %>
+          </h1>
+        </legend>
+        <div class="govuk-!-padding-bottom-8"></div>
+
+        <%= label_tag 'postcode', class: 'govuk-label' do %>
+          Postcode
+          <p class='govuk-body govuk-!-font-weight-bold'>
+            <%= @form.postcode %>
+            <%= link_to 'Change', new_providers_applicant_address_lookups_path(@applicant), class: 'govuk-body change-link change-postcode-link' %>
+          </p>
+        <% end %>
+        <%= f.hidden_field :postcode %>
+
+        <% @addresses.each do |address| %>
+          <%= hidden_field_tag 'address_selection[list][]', address.to_json %>
+        <% end %>
+
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <% group_error_class = @form.errors[:address].any? ? 'govuk-form-group--error': '' %>
+        <div class="govuk-form-group <%= group_error_class %>">
+          <%= f.label :address, 'Select an address', class: 'govuk-label' %>
+          <% if @form.errors[:address].any? %>
+            <%= content_tag(:span, @form.errors[:address].first, class: ["govuk-error-message"]) %>
+          <% end %>
+          <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
+          <%= f.select(:address, @addresses.collect { |a| [a.full_address, a.to_json] }, { include_blank: "#{@addresses.size} addresses found" }, { class: "govuk-select govuk-!-width-two-thirds #{input_error_class}" }) %>
+        </div>
+      </div>
+
+      <p><%= link_to "I can't find the address in the list", new_providers_applicant_addresses_path, class: 'govuk-link' %></p>
+
+      <%= f.submit "Continue", id: 'select-address-button', class: "govuk-button" %>
+    <% end %>
+  </div>
+</div>

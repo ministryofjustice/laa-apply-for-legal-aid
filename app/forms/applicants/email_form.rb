@@ -1,9 +1,6 @@
 module Applicants
   class EmailForm
-    include ActiveModel::Model
-    include ActiveModel::Validations::Callbacks
     include BaseForm
-    extend BaseForm::ClassMethods
 
     form_for Applicant
 
@@ -11,9 +8,5 @@ module Applicants
 
     validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
     validates :email_address, presence: true
-
-    def model
-      legal_aid_application.applicant
-    end
   end
 end

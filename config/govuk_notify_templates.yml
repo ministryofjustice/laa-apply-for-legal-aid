@@ -1,0 +1,15 @@
+# We use 2 different GOV.UK Notify services, one for development/integration
+# purposes and another one for production. This is so we can test changes
+# to the templates in a controlled environment, before these changes make their
+# way to production (and real users can see them).
+#
+# As these are 2 separate services in GOV.UK Notify, the template IDs are also
+# different, so we declare them in this file. We use the value of the variable
+# ENV['GOVUK_NOTIFY_ENV'] if defined to know which group to load, otherwise
+# we default to 'integration' group.
+#
+development:
+  citizen_start_application: '570e1b9d-6238-45fd-b75c-96f2f39db8e9'
+
+production:
+  citizen_start_application: '66865f0d-6410-40e2-b862-98724eb6e33a'

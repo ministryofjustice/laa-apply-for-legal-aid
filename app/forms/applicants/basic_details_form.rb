@@ -1,14 +1,12 @@
 module Applicants
   class BasicDetailsForm
-    include ActiveModel::Model
-    include ActiveModel::Validations::Callbacks
     include BaseForm
-    extend BaseForm::ClassMethods
 
     form_for Applicant
 
     attr_accessor :first_name, :last_name, :national_insurance_number,
-                  :date_of_birth, :dob_year, :dob_month, :dob_day
+                  :date_of_birth, :dob_year, :dob_month, :dob_day,
+                  :legal_aid_application_id
 
     NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
 
@@ -46,7 +44,13 @@ module Applicants
     end
 
     def exclude_from_model
-      %i[dob_year dob_month dob_day]
+      %i[dob_year dob_month dob_day legal_aid_application_id]
+    end
+
+    private
+
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(legal_aid_application_id)
     end
   end
 end

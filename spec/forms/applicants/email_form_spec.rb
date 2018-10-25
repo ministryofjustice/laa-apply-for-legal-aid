@@ -13,10 +13,11 @@ RSpec.describe Applicants::EmailForm, type: :form do
 
   let(:params) do
     {
-      applicant:  { email_address: email_address },
-      legal_aid_application_id: legal_aid_application.id
+      email_address: email_address,
+      model: applicant
     }
   end
+
   subject { described_class.new(params) }
 
   describe '#save' do
