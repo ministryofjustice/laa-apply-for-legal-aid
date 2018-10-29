@@ -41,6 +41,16 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legalaid-api.fullname" . }}
                 key: postgresDatabase
+          - name: GOVUK_NOTIFY_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "provider-frontend.fullname" . }}
+                key: govukNotifyApiKey
+          - name: ORDNANACE_SURVEY_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "provider-frontend.fullname" . }}
+                key: ordnanaceSurveyApiKey
           - name: RAILS_MASTER_KEY
             valueFrom:
               secretKeyRef:
