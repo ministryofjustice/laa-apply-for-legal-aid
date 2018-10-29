@@ -17,14 +17,19 @@ allowed_sites = [
 
 WebMock.disable_net_connect!(allow: allowed_sites)
 
-Capybara.register_driver :headless_chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: %w[headless disable-gpu])
+require_relative 'vcr'
 
-  Capybara::Selenium::Driver.new app,
-                                 browser: :chrome,
-                                 options: options
+Capybara.register_driver :headless_chrome do |app|
+  browser_options = Selenium::WebDriver::Chrome::Options.new(args: %w[start-maximized headless disable-gpu no-sandbox])
+  chrome_options = {
+    browser: :chrome,
+    options: browser_options
+  }
+
+  Capybara::Selenium::Driver.new app, chrome_options.merge(clear_local_storage: true, clear_session_storage: true)
 end
 
+Capybara.default_driver = :headless_chrome
 Capybara.javascript_driver = :headless_chrome
 
 if ENV['BROWSER'] == 'poltergeist'
@@ -95,3 +100,7 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Before do |_scenario|
+  load Rails.root.join('db/seeds.rb')
+end

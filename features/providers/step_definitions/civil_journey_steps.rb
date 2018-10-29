@@ -41,7 +41,7 @@ And(/^I click link "([^"]*)"$/) do |link_name|
 end
 
 Then(/^I select and continue$/) do
-  find('#proceeding-list').first(:link, 'Select and continue').click
+  find('#proceeding-list').first(:button, 'Select and continue').click
 end
 
 Then(/^I see the client details page$/) do
@@ -55,9 +55,9 @@ end
 
 Then(/^I enter the date of birth '(.*)'$/) do |dob|
   dob_day, dob_month, dob_year = dob.split('-')
-  fill_in('dob', with: dob_day, name: 'client_detail[dob_day]')
-  fill_in('dob', with: dob_month, name: 'client_detail[dob_month]')
-  fill_in('dob', with: dob_year, name: 'client_detail[dob_year]')
+  fill_in('dob_day', with: dob_day)
+  fill_in('dob_month', with: dob_month)
+  fill_in('dob_year', with: dob_year)
 end
 
 Then(/^I enter national insurance number '(.*)'$/) do |nino|

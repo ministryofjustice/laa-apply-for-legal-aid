@@ -1,7 +1,5 @@
 Feature: Civil application journeys
   @javascript
-  @localhost_request
-  @vcr
   Scenario: No results returned is seen on screen when invalid search entered
     Given I visit the application service
     And I click link "Start"
@@ -10,8 +8,6 @@ Feature: Civil application journeys
     Then the result list on page returns a "No results found." message
 
   @javascript
-  @localhost_request
-  @vcr
   Scenario: I am able to clear proceeding on the proceeding page
     Given I visit the application service
     And I click link "Start"
@@ -22,9 +18,7 @@ Feature: Civil application journeys
     Then the results section is empty
     Then proceeding search field is empty
 
-  @javascript
-  @localhost_request
-  @vcr
+  @javascript @vcr
   Scenario: Completes the application using address lookup
     Given I visit the application service
     And I click link "Start"
@@ -46,9 +40,7 @@ Feature: Civil application journeys
     When I click continue
     Then I see coming soon page
 
-  @javascript
-  @localhost_request
-  @vcr
+  @localhost_request @javascript @vcr
   Scenario: Completes the application using manual address
     Given I visit the application service
     And I click link "Start"
