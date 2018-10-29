@@ -65,15 +65,29 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context 'with an invalid dob' do
-      before { attributes[:date_of_birth] = 3.days.from_now }
+    context 'with an invalid date' do
+      before { attributes[:date_of_birth] = 'invalid-date' }
+
       it 'does not persist model' do
         expect { subject.save }.not_to change { Applicant.count }
       end
 
       it 'errors to be present' do
         subject.save
-        expect(subject.errors[:date_of_birth]).to be_present
+        expect(subject.errors[:date_of_birth]).to match_array(['Enter a valid date of birth'])
+      end
+    end
+
+    context 'with dob in the future' do
+      before { attributes[:date_of_birth] = 3.days.from_now }
+
+      it 'does not persist model' do
+        expect { subject.save }.not_to change { Applicant.count }
+      end
+
+      it 'errors to be present' do
+        subject.save
+        expect(subject.errors[:date_of_birth]).to match_array(['Enter a valid date of birth'])
       end
     end
 

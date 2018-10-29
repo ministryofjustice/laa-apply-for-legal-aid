@@ -48,6 +48,23 @@ RSpec.describe 'address lookup requests', type: :request do
       end
     end
 
+    context 'with an invalid postcode' do
+      let(:postcode) { 'invalid-postcode' }
+
+      it 'does NOT perform an address lookup with the provided postcode' do
+        expect(AddressLookupService).not_to receive(:call)
+
+        post_request
+      end
+
+      it 're-renders the form with the validation errors' do
+        post_request
+
+        expect(unescaped_response_body).to include('There is a problem')
+        expect(unescaped_response_body).to include('Enter a postcode in the right format')
+      end
+    end
+
     context 'with a valid postcode', :vcr do
       let(:postcode) { 'DA7 4NG' }
 

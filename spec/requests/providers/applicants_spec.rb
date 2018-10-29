@@ -105,4 +105,60 @@ RSpec.describe 'providers applicant requests', type: :request do
       expect(response.body).to include("What is your client's email address?")
     end
   end
+
+  describe 'PATCH /providers/applications/:legal_aid_application_id/applicant' do
+    let(:applicant) { create(:applicant, email_address: original_email) }
+    let(:application) { create(:legal_aid_application, applicant: applicant) }
+    let(:original_email) { 'original.email@test.com' }
+    let(:new_email) { 'new.email@test.com' }
+    let(:params) do
+      {
+        applicant: {
+          email_address: new_email
+        }
+      }
+    end
+    let(:patch_request) { patch "/providers/applications/#{application_id}/applicant", params: params }
+
+    context 'when the application does not exist' do
+      let(:application_id) { SecureRandom.uuid }
+
+      it 'redirects the user to the applications page with an error message' do
+        patch_request
+
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'does NOT update the applicant' do
+        expect { patch_request }.not_to change { applicant.reload.email_address }
+      end
+    end
+
+    context 'when params are not valid' do
+      let(:new_email) { 'not-a-valid-email' }
+
+      it 'does NOT update the applicant' do
+        expect { patch_request }.not_to change { applicant.reload.email_address }
+      end
+
+      it 're-renders the form with the validation errors' do
+        patch_request
+
+        expect(unescaped_response_body).to include('There is a problem')
+        expect(unescaped_response_body).to include('Enter an email address in the right format')
+      end
+    end
+
+    it 'updates the applicant' do
+      expect { patch_request }
+        .to change { applicant.reload.email_address }
+        .from(original_email).to(new_email)
+    end
+
+    it 'redirects to the check your answers page' do
+      patch_request
+
+      expect(response).to redirect_to(providers_legal_aid_application_check_your_answers_path(application))
+    end
+  end
 end

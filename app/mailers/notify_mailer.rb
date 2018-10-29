@@ -1,7 +1,7 @@
 class NotifyMailer < GovukNotifyRails::Mailer
-  def citizen_start_email(app_ref, email, application_url, client_name)
+  def citizen_start_email(app_id, email, application_url, client_name)
     set_template_conf
-    set_personalisation(application_url: application_url, client_name: client_name, ref_number: app_ref)
+    set_personalisation(application_url: application_url, client_name: client_name, ref_number: app_id)
     mail(to: email)
   end
 
