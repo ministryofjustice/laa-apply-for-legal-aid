@@ -13,7 +13,7 @@ module Providers
       @legal_aid_application = LegalAidApplication.new(app_params)
 
       if @legal_aid_application.save
-        redirect_to new_providers_legal_aid_application_applicant_path(@legal_aid_application), notice: "Legal aid application was successfully created.#{params}"
+        redirect_to new_providers_legal_aid_application_applicant_path(@legal_aid_application)
       else
         render :new
       end
