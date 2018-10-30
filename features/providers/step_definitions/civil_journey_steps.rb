@@ -64,8 +64,8 @@ Then(/^I enter national insurance number '(.*)'$/) do |nino|
   fill_in('national_insurance_number', with: nino)
 end
 
-Then(/^I see coming soon page$/) do
-  page.should have_content('Coming soon')
+Then(/^I see a notice confirming an e-mail was sent to the citizen$/) do
+  page.should have_content('Application completed. An e-mail will be sent to the citizen.')
 end
 
 When(/^I click continue$/) do
@@ -77,7 +77,7 @@ Then(/^I enter a valid email address '(.*)'$/) do |email_address|
 end
 
 Then(/^I enter address line one '(.*)'$/) do |address_line_one|
-  fill_in('line_one', with: address_line_one)
+  fill_in('address_line_one', with: address_line_one)
 end
 
 Then(/^I enter city '(.*)'$/) do |city|

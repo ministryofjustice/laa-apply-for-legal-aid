@@ -7,11 +7,11 @@ Then('I see the start link') do
 end
 
 Given('a solicitor has created an application') do
-  @application_ref = legal_aid_application.application_ref
+  @application_id = legal_aid_application.id
 end
 
 And('I am on the citizen start page for that application') do
-  visit("citizens/legal_aid_applications/#{@application_ref}")
+  visit("citizens/legal_aid_applications/#{@application_id}")
 end
 
 When('I click the start link') do

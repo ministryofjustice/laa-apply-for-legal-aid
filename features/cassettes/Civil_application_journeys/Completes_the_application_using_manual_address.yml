@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=OvltQCeDASvuxteFuyaScEhO6GTKq05d&postcode=SW1H9AJ
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 30 Oct 2018 10:19:07 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Status:
+      - success
+      Tx-Id:
+      - 1540894747942:942
+      Content-Length:
+      - '334'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "header" : {
+            "uri" : "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?postcode=SW1H9AJ",
+            "query" : "postcode=SW1H9AJ",
+            "offset" : 0,
+            "totalresults" : 0,
+            "format" : "JSON",
+            "dataset" : "DPA",
+            "lr" : "EN,CY",
+            "maxresults" : 100,
+            "epoch" : "61",
+            "output_srs" : "EPSG:27700"
+          }
+        }
+    http_version: 
+  recorded_at: Tue, 30 Oct 2018 10:19:07 GMT
+recorded_with: VCR 4.0.0
