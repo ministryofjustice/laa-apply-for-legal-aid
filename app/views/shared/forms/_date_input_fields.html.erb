@@ -19,7 +19,6 @@
         <% form.object.errors[field_name].each do |message| %>
             <%= content_tag(:span, message, id: "#{field_name}-error".dasherize, class: 'govuk-error-message') if form.object.errors[field_name].any? %>
         <% end %>
-        <!-- <%= content_tag(:span, form.object.errors[field_name].first, id: "#{field_name}-error".dasherize, class: 'govuk-error-message') if form.object.errors[field_name].any? %> -->
 
         <fieldset class="govuk-fieldset">
           <div class="govuk-date-input">
