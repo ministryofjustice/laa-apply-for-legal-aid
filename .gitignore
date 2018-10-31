@@ -38,3 +38,5 @@ config/master.key
 
 # Ignore simplecov coverage stats
 /coverage/
+
+.DS_Store
