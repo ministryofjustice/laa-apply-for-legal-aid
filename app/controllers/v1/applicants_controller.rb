@@ -1,10 +1,5 @@
 module V1
   class ApplicantsController < ApiController
-    def show
-      @applicant = Applicant.find(params[:id])
-      render json: @applicant
-    end
-
     def create
       applicant = application.build_applicant(applicant_params)
 

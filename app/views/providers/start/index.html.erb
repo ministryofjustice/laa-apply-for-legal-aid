@@ -1,0 +1,46 @@
+  <% content_for :navigation do %>
+    <!-- no nav needed here -->
+  <% end %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Apply for Legal Aid</h1>
+      <p class="govuk-body">Use this service to apply for civil legal aid for cases involving:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>public family law</li>
+        <li>domestic violence or abuse</li>
+      </ul>
+
+      <p class="govuk-body">Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.</p>
+
+      <h2 class="govuk-heading-m">Who can use this service?</h2>
+
+      <p class="govuk-body">You can only use this service if your client:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>has a National Insurance number</li>
+        <li>uses online banking</li>
+        <li>is single, does not have an income, or their partner is the opponent in the case</li>
+      </ul>
+      <p class="govuk-body">You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.</p>
+
+      <%= link_to "Start", providers_legal_aid_applications_path , class: "govuk-button govuk-button--start" , id: 'start' %>
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+
+    <div class="govuk-header__container govuk-width-container"></div>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <h3 class="govuk-heading-m">Related content</h3>
+    <ul class="govuk-list">
+      <li>
+        <a href="#" class="govuk-link govuk-body govuk-!-font-size-16">Legal aid</a>
+      </li>
+      <li>
+        <a href="#" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">More</a>
+      </li>
+    </ul>
+    </div>
+  </div>
+

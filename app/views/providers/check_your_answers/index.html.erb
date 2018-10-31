@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Check your answers</h1>
+    <h2 class="govuk-heading-l">Coming soon</h2>
+    <p class="govuk_body">This doesn't exist yet, but click Continue to send an email with a link to the citizen application</p>
+  </div>
+</div>
+
+<%= button_to "Continue", confirm_providers_legal_aid_application_check_your_answers_path(@legal_aid_application) , class: "govuk-button govuk-button" , id: 'continue' , method: 'get' %>

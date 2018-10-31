@@ -1,6 +1,7 @@
 module RequestHelpers
   def self.included(base)
     base.include(JsonHelpers)
+    base.include(ResponseHelpers)
   end
 
   module JsonHelpers
@@ -14,6 +15,12 @@ module RequestHelpers
 
     def json
       JSON.parse(response.body)
+    end
+  end
+
+  module ResponseHelpers
+    def unescaped_response_body
+      CGI.unescapeHTML(response.body)
     end
   end
 end

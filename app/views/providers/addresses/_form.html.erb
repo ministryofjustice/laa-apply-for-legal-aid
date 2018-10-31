@@ -1,0 +1,47 @@
+<% content_for :navigation do %>
+  <%= link_to 'Back', url_for(:back), class: 'govuk-back-link', id: 'back-top', method: 'get' %>
+<% end %>
+
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+      Enter your client's address manually
+    </h1>
+
+    <%= form_with(model: @form, scope: :address, url: providers_applicant_addresses_path(@applicant), local: true) do |form| %>
+      <% if @lookup_postcode %>
+        <div class='govuk-form-group'>
+          <%= label_tag 'postcode', class: 'govuk-label' do %>
+            Postcode
+            <p class='govuk-body govuk-!-font-weight-bold'>
+              <%= @lookup_postcode %>
+              <%= link_to 'Change', new_providers_applicant_address_lookups_path(@applicant), class: 'govuk-body change-link change-postcode-link' %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @lookup_error %>
+        <div class='govuk-inset-text'>
+          <%= t("forms.address.errors.#{@lookup_error}") %>
+        </div>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <% group_error_class = @form.errors[:address_line_one].any? ? 'govuk-form-group--error': '' %>
+      <div class="govuk-form-group <%= group_error_class %>">
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_one, form: form }%>
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_two, field_with_error: :address_line_one, form: form }%>
+      </div>
+
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :city, class: 'govuk-!-width-two-thirds', form: form }%>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :county, class: 'govuk-!-width-two-thirds', form: form }%>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode, class: 'govuk-input--width-10', form: form }%>
+
+      <%= form.submit "Continue", id: 'continue', class: "govuk-button" %>
+    <% end %>
+  </div>
+</div>
