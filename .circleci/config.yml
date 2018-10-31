@@ -12,7 +12,6 @@ references:
       name: Decrypt secrets file
       command: |
         echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
-        echo "${GIT_CRYPT_KEY}" | base64 -d > config/master.key
         git-crypt unlock git-crypt.key
 
   build_containers_config: &build_container_config
