@@ -10,16 +10,13 @@ may well be used to fire requests to other services.
     * Rails 5
 
 * System dependencies
-    * postgres 10.5  -> see setup below
-    * npm  -> see setup below
-
-* Configuration
-
-    ```brew install postgres```
-
-    ```brew install npm```
-
-    ```bundle install```
+    * postgres 10.5
+    * npm
+    
+Install dependencies with homebrew:
+```
+brew bundle
+```
 
 ## Initial setup
 
@@ -48,25 +45,6 @@ bin/rake
 VCR_RECORD_MODE=all bin/rake
 ```
 [There is an alternative setup procedure, using the makefile, which can be found here](README_alt.md)
-## Developer local Endpoints
-
-* Post an application
- ##### you can post with or without proceeding types, example
-
-    {
-    "proceeding_type_codes":["PR0001", "PR0002","PR0003"]
-    }
-
-
-```http://localhost:3002/v1/applications```
-
-* Get proceeding_types
-
-```http://localhost:3002/v1/proceeding_types```
-
-* Get status of the service
-
-```http://localhost:3002/status```
 
 ## Deployment
 

@@ -1,4 +1,5 @@
 tap 'homebrew/cask'
-brew 'chromedriver'
+brew 'postgresql'
 brew 'node'
+cask 'chromedriver'
 cask 'phantomjs'
