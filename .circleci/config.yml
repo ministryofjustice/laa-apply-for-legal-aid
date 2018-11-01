@@ -104,7 +104,7 @@ jobs:
           echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' -)\"" >> $BASH_ENV
           source $BASH_ENV
           helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
-                        --install \
+                        --install --force \
                         --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
