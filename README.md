@@ -11,10 +11,13 @@ may well be used to fire requests to other services.
 
 * System dependencies
     * postgres 10.5  -> see setup below
+    * npm  -> see setup below
 
 * Configuration
 
     ```brew install postgres```
+
+    ```brew install npm```
 
     ```bundle install```
 
@@ -63,7 +66,7 @@ VCR_RECORD_MODE=all bin/rake
 
 * Get status of the service
 
-```http://localhost:3002/v1/status```
+```http://localhost:3002/status```
 
 ## Deployment
 
