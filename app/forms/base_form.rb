@@ -42,7 +42,7 @@ module BaseForm
 
     # List of form attributes not to be passed to model
     def exclude_from_model
-      %i[lookup_postcode lookup_error]
+      []
     end
 
     def assignable_attributes

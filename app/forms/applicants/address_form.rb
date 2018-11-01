@@ -15,6 +15,10 @@ module Applicants
 
     validate :validate_building_and_street
 
+    def exclude_from_model
+      %i[lookup_postcode lookup_error]
+    end
+
     private
 
     def applicant
