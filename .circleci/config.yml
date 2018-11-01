@@ -31,7 +31,7 @@ references:
 
   build_docker_image: &build_docker_image
     run:
-      name: Build laa-apply-for-legalaid-api  docker image
+      name: Build laa-apply-for-legal-aid  docker image
       command: docker build -t app .
 
   push_to_ecr: &push_to_ecr
@@ -46,7 +46,6 @@ references:
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
         fi
 
-
 jobs:
   build_and_test:
     <<: *build_container_config
@@ -57,8 +56,8 @@ jobs:
     - *setup_test_env
     - restore_cache:
         keys:
-          - laa-apply-for-legalaid-api-{{ checksum "Gemfile.lock" }}
-          - laa-apply-for-legalaid-api
+          - laa-apply-for-legal-aid-{{ checksum "Gemfile.lock" }}
+          - laa-apply-for-legal-aid
 
     - run:
         name: Bundle Install
@@ -66,7 +65,7 @@ jobs:
 
       # Store bundle cache
     - save_cache:
-        key: laa-apply-for-legalaid-api-{{ checksum "Gemfile.lock" }}
+        key: laa-apply-for-legal-aid-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
     - run: sudo apt install -y postgresql-client || true
@@ -103,11 +102,11 @@ jobs:
 
           echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' -)\"" >> $BASH_ENV
           source $BASH_ENV
-          helm upgrade ${APPLICATON_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legalaid-api/. \
-                        --install \
+          helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
+                        --install --force --wait \
                         --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --namespace=${KUBE_ENV_UAT_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legalaid-api/values-uat.yaml \
+                        --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
                         --set deploy.host="${RELEASE_BRANCH}-${UAT_HOST}" \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
@@ -131,11 +130,11 @@ jobs:
         name: Helm deployment to staging
         command: |
 
-          helm upgrade ${APPLICATON_DEPLOY_NAME} ./helm_deploy/apply-for-legalaid-api/. \
+          helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install \
                         --tiller-namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legalaid-api/values-staging.yaml \
+                        --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${STAGING_HOST}}" \
@@ -158,11 +157,11 @@ jobs:
         name: Helm deployment to production
         command: |
 
-          helm upgrade ${APPLICATON_DEPLOY_NAME} ./helm_deploy/apply-for-legalaid-api/. \
+          helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install \
                         --tiller-namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
                         --namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legalaid-api/values-production.yaml \
+                        --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${PRODUCTION_HOST}}" \

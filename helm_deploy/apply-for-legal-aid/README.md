@@ -6,7 +6,7 @@ This describes the setup for helm and what is required to be in place to perform
 
 In order for a deploy to be successful, a set of configurations need to be in place:
 
-* `APPLICATON_DEPLOY_NAME` - name of the deployable app
+* `APPLICATION_DEPLOY_NAME` - name of the deployable app
 * `<ENV>_HOST` - base hostname for the deployable app
 * `GIT_CRYPT_KEY` - key to allow the decription of secrets required for deploy
 * `KUBE_ENV_<ENV>_NAME`

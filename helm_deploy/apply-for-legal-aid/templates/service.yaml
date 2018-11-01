@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "apply-for-legalaid-api.fullname" . }}
+  name: {{ template "apply-for-legal-aid.fullname" . }}
   labels:
-    app: {{ template "apply-for-legalaid-api.name" . }}
-    chart: {{ template "apply-for-legalaid-api.chart" . }}
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "apply-for-legalaid-api.name" . }}
+    app: {{ template "apply-for-legal-aid.name" . }}
     release: {{ .Release.Name }}

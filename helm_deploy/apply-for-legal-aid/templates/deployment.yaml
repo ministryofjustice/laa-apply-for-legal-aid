@@ -1,22 +1,22 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "apply-for-legalaid-api.fullname" . }}
+  name: {{ template "apply-for-legal-aid.fullname" . }}
   labels:
-    app: {{ template "apply-for-legalaid-api.name" . }}
-    chart: {{ template "apply-for-legalaid-api.chart" . }}
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "apply-for-legalaid-api.name" . }}
+      app: {{ template "apply-for-legal-aid.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "apply-for-legalaid-api.name" . }}
+        app: {{ template "apply-for-legal-aid.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -27,39 +27,39 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: postgresUser
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: postgresPassword
           - name: POSTGRES_HOST
             value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
           - name: POSTGRES_DATABASE
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: postgresDatabase
           - name: GOVUK_NOTIFY_API_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: govukNotifyApiKey
           - name: ORDNANACE_SURVEY_API_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: ordnanaceSurveyApiKey
           - name: RAILS_MASTER_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: railsMasterKey
           - name: SENTRY_DSN
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: sentryDsn
           - name: RAILS_ENV
             value: production
@@ -68,7 +68,7 @@ spec:
           - name: HOST
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legalaid-api.fullname" . }}
+                name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: deployHost
           ports:
             - name: http
