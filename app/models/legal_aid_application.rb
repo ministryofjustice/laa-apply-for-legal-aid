@@ -2,7 +2,8 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :applicant, optional: true
   has_many :application_proceeding_types
   has_many :proceeding_types, through: :application_proceeding_types
-
+  has_one :benefit_check_result
+  
   before_create :create_app_ref
 
   attr_reader :proceeding_type_codes
