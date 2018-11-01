@@ -7,7 +7,7 @@ module Providers
 
     def index
       create_benefit_check unless legal_aid_application.benefit_check_result
-      @next_step_link = action_for_next_step(options: {application: legal_aid_application})
+      @next_step_link = action_for_next_step(options: { application: legal_aid_application })
     end
 
     def create_benefit_check
