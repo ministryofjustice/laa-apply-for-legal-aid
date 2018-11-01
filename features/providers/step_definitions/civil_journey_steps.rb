@@ -14,6 +14,7 @@ end
 
 And(/^I search for proceeding '(.*)'$/) do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
+  wait_for_ajax
 end
 
 When(/^I click clear search$/) do
