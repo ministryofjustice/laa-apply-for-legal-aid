@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 2018_11_01_115246) do
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
-  create_table "benefit_check_results", force: :cascade do |t|
-    t.bigint "legal_aid_application_id"
+  create_table "benefit_check_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
     t.string "result"
     t.string "dwp_ref"
     t.datetime "created_at", null: false
@@ -81,5 +81,6 @@ ActiveRecord::Schema.define(version: 2018_11_01_115246) do
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"
+  add_foreign_key "benefit_check_results", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
 end
