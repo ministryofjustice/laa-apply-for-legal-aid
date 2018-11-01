@@ -4,7 +4,7 @@ module Applicants
 
     form_for Address
 
-    attr_accessor :applicant_id, :address_line_one, :address_line_two, :city, :county, :postcode
+    attr_accessor :applicant_id, :address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode
 
     before_validation :normalise_postcode
 

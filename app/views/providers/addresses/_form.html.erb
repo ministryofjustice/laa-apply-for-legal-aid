@@ -11,12 +11,13 @@
     </h1>
 
     <%= form_with(model: @form, scope: :address, url: providers_applicant_addresses_path(@applicant), local: true) do |form| %>
-      <% if @lookup_postcode %>
+      <% if form.object.lookup_postcode.present? %>
+        <%= form.hidden_field :lookup_postcode %>
         <div class='govuk-form-group'>
           <%= label_tag 'postcode', class: 'govuk-label' do %>
             Postcode
             <p class='govuk-body govuk-!-font-weight-bold'>
-              <%= @lookup_postcode %>
+              <%= form.object.lookup_postcode %>
               <%= link_to 'Change', new_providers_applicant_address_lookups_path(@applicant), class: 'govuk-body change-link change-postcode-link' %>
             </p>
           <% end %>
