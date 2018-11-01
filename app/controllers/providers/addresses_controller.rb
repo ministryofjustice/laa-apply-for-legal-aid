@@ -16,6 +16,7 @@ module Providers
         redirect_to action_for_next_step(options: { application: applicant.legal_aid_application })
       else
         @lookup_postcode = params[:address][:lookup_postcode]
+        @lookup_error = params[:address][:lookup_error]
         render :new
       end
     end
@@ -23,7 +24,7 @@ module Providers
     private
 
     def address_params
-      params.require(:address).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode)
+      params.require(:address).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode, :lookup_error)
     end
 
     def form_params
