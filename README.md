@@ -3,7 +3,7 @@
 This is the service api for persisting application related information to the back end database and
 may well be used to fire requests to other services.
 
-[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api)
+[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid/tree/master)
 
 * Ruby version
     * Ruby version 2.5.1
@@ -70,8 +70,8 @@ VCR_RECORD_MODE=all bin/rake
 
 ## Deployment
 
-The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid-api) but requires approval to the desired environment.
+The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legalaid) but requires approval to the desired environment.
 
 **NOTE:** **git-crypt** is required to store secrets required for **uat**, **staging** and **production** environments. To be able to modify those secrets, **git-crypt** needs to be set up according to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/03-other-topics/001-git-crypt-setup/#git-crypt).
 
-For more deployment information refer to the specific [README](./helm_deploy/apply-for-legalaid-api/README.md)
+For more deployment information refer to the specific [README](./helm_deploy/apply-for-legalaid/README.md)
