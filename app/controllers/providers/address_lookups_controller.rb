@@ -30,8 +30,6 @@ module Providers
         @form = Applicants::AddressSelectionForm.new(postcode: @form.postcode)
         render template: 'providers/address_selections/new'
       else
-        # @lookup_error = outcome.errors[:lookup].first
-        # @lookup_postcode = @form.postcode
         @form = Applicants::AddressForm.new(lookup_postcode: @form.postcode, lookup_error: outcome.errors[:lookup].first)
         render template: 'providers/addresses/new'
       end
