@@ -1,0 +1,199 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Thu, 01 Nov 2018 15:38:38 GMT
+      Content-Type:
+      - text/xml;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Amzn-Trace-Id:
+      - Root=1-5bdb1dfe-79c39d688b22c2208fd0c760;
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <wsdl:definitions targetNamespace="https://lsc.gov.uk/benefitchecker/service/1.0" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="https://lsc.gov.uk/benefitchecker/service/1.0" xmlns:intf="https://lsc.gov.uk/benefitchecker/service/1.0" xmlns:tns1="http://lsc.gov.uk/benefitchecker/data/1.0" xmlns:tns2="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <!--WSDL created by Apache Axis version: 1.4
+        Built on Apr 22, 2006 (06:55:48 PDT)-->
+         <wsdl:types>
+          <schema elementFormDefault="qualified" targetNamespace="http://lsc.gov.uk/benefitchecker/data/1.0" xmlns="http://www.w3.org/2001/XMLSchema">
+           <complexType name="benefitCheckerRequest">
+            <sequence>
+             <element name="clientOrgId" type="xsd:string"/>
+             <element name="clientUserId" type="xsd:string"/>
+             <element name="clientReference" type="xsd:string"/>
+             <element name="lscServiceName" type="xsd:string"/>
+             <element name="nino" type="xsd:string"/>
+             <element name="surname" type="xsd:string"/>
+             <element name="dateOfBirth" type="xsd:string"/>
+             <element name="dateOfAward" nillable="true" type="xsd:string"/>
+            </sequence>
+           </complexType>
+           <complexType name="benefitCheckerResponse">
+            <sequence>
+             <element name="originalClientRef" type="xsd:string"/>
+             <element name="benefitCheckerStatus" type="xsd:string"/>
+             <element name="confirmationRef" type="xsd:string"/>
+            </sequence>
+           </complexType>
+           <complexType name="benefitCheckerFaultException">
+            <sequence>
+             <element name="MessageCode" nillable="true" type="xsd:string"/>
+             <element name="MessageText" nillable="true" type="xsd:string"/>
+            </sequence>
+           </complexType>
+          </schema>
+          <schema elementFormDefault="qualified" targetNamespace="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check" xmlns="http://www.w3.org/2001/XMLSchema">
+           <import namespace="http://lsc.gov.uk/benefitchecker/data/1.0"/>
+           <element name="benefitCheckerRequest" type="tns1:benefitCheckerRequest"/>
+           <element name="benefitCheckerResponse" type="tns1:benefitCheckerResponse"/>
+           <element name="benefitCheckerFaultException" type="tns1:benefitCheckerFaultException"/>
+          </schema>
+         </wsdl:types>
+
+           <wsdl:message name="BenefitCheckerFaultException">
+
+              <wsdl:part element="tns2:benefitCheckerFaultException" name="benefitCheckerFaultException"/>
+
+           </wsdl:message>
+
+           <wsdl:message name="checkRequest">
+
+              <wsdl:part element="tns2:benefitCheckerRequest" name="benefitCheckerRequest"/>
+
+           </wsdl:message>
+
+           <wsdl:message name="checkResponse">
+
+              <wsdl:part element="tns2:benefitCheckerResponse" name="benefitCheckerResponse"/>
+
+           </wsdl:message>
+
+           <wsdl:portType name="benefitChecker">
+
+              <wsdl:operation name="check" parameterOrder="benefitCheckerRequest">
+
+                 <wsdl:input message="impl:checkRequest" name="checkRequest"/>
+
+                 <wsdl:output message="impl:checkResponse" name="checkResponse"/>
+
+                 <wsdl:fault message="impl:BenefitCheckerFaultException" name="BenefitCheckerFaultException"/>
+
+              </wsdl:operation>
+
+           </wsdl:portType>
+
+           <wsdl:binding name="benefitCheckerSoapBinding" type="impl:benefitChecker">
+
+              <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+              <wsdl:operation name="check">
+
+                 <wsdlsoap:operation soapAction=""/>
+
+                 <wsdl:input name="checkRequest">
+
+                    <wsdlsoap:body use="literal"/>
+
+                 </wsdl:input>
+
+                 <wsdl:output name="checkResponse">
+
+                    <wsdlsoap:body use="literal"/>
+
+                 </wsdl:output>
+
+                 <wsdl:fault name="BenefitCheckerFaultException">
+
+                    <wsdlsoap:fault name="BenefitCheckerFaultException" use="literal"/>
+
+                 </wsdl:fault>
+
+              </wsdl:operation>
+
+           </wsdl:binding>
+
+           <wsdl:service name="benefitCheckerWS">
+
+              <wsdl:port binding="impl:benefitCheckerSoapBinding" name="benefitChecker">
+
+                 <wsdlsoap:address location="https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker"/>
+
+              </wsdl:port>
+
+           </wsdl:service>
+
+        </wsdl:definitions>
+    http_version: 
+  recorded_at: Thu, 01 Nov 2018 15:38:39 GMT
+- request:
+    method: post
+    uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns2="https://lsc.gov.uk/benefitchecker/service/1.0"
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:lscServiceName>eP_9_Tk</ins0:lscServiceName><ins0:clientOrgId>hr_5d_f_s433S</ins0:clientOrgId><ins0:clientUserId>9g_kt6rv65D_qsF</ins0:clientUserId><ins0:clientReference>4e91763f-9ede-454f-bc27-2e2805cbc52a</ins0:clientReference><ins0:nino>JA293483A</ins0:nino><ins0:surname>WALKER</ins0:surname><ins0:dateOfBirth>19800110</ins0:dateOfBirth><ins0:dateOfAward>20181101</ins0:dateOfAward></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
+    headers:
+      Soapaction:
+      - '"check"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '842'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Thu, 01 Nov 2018 15:38:38 GMT
+      Content-Type:
+      - text/xml;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Amzn-Trace-Id:
+      - Root=1-5bdb1dfe-2fa358b4041dfccdbe758515;
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
+        xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">4e91763f-9ede-454f-bc27-2e2805cbc52a</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1541086718499</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+    http_version: 
+  recorded_at: Thu, 01 Nov 2018 15:38:39 GMT
+recorded_with: VCR 4.0.0

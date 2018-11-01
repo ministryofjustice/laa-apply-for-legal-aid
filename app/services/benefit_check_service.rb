@@ -15,14 +15,19 @@ class BenefitCheckService
 
   def benefit_checker_params
     {
-      lscServiceName: ENV['BC_LSC_SERVICE_NAME'],
-      clientOrgId: ENV['BC_CLIENT_ORG_ID'],
-      clientUserId: ENV['BC_CLIENT_USER_ID'],
       clientReference: application.id,
       nino: applicant.national_insurance_number,
-      surname: applicant.last_name,
+      surname: applicant.last_name.strip.upcase,
       dateOfBirth: applicant.date_of_birth.strftime('%Y%m%d'),
       dateOfAward: Date.today.strftime('%Y%m%d')
+    }.merge(credential_params)
+  end
+
+  def credential_params
+    {
+      lscServiceName: Rails.configuration.x.benefit_check.service_name,
+      clientOrgId: Rails.configuration.x.benefit_check.client_org_id,
+      clientUserId: Rails.configuration.x.benefit_check.client_user_id
     }
   end
 
@@ -33,7 +38,7 @@ class BenefitCheckService
   def soap_client
     @soap_client ||= Savon.client(
       env_namespace: :soapenv,
-      wsdl: ENV['BC_WSDL_URL'],
+      wsdl: Rails.configuration.x.benefit_check.wsdl_url,
       namespaces: { 'xmlns:ins0' => BENEFIT_CHECKER_NAMESPACE }
     )
   end
