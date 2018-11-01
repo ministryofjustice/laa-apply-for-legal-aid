@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       resources :check_your_answers, only: [:index] do
         get :confirm, on: :collection
       end
+
+      resources :check_benefits, only: [:index]
     end
 
     resources :applicants, only: [] do
