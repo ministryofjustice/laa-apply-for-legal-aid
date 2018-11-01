@@ -70,6 +70,26 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: deployHost
+          - name: BC_LSC_SERVICE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid.fullname" . }}
+                key: benefitCheckerLscServiceName
+          - name: BC_CLIENT_ORG_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid.fullname" . }}
+                key: benefitCheckerClientOrgId
+          - name: BC_CLIENT_USER_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid.fullname" . }}
+                key: benefitCheckerClientUserId
+          - name: BC_WSDL_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legalaid.fullname" . }}
+                key: benefitCheckerWsdlUrl
           ports:
             - name: http
               containerPort: 3002
