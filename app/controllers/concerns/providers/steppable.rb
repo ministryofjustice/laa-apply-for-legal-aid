@@ -6,7 +6,7 @@ module Providers
       { step: :proceedings, action: :new_providers_legal_aid_application_path },
       { step: :basic_details, action: :new_providers_legal_aid_application_applicant, args: [:application] },
       { step: :address, action: :new_providers_applicant_address_lookups_path, args: [:applicant] },
-      { step: :check_benefits, action: :providers_legal_aid_application_check_benefits_path, args: [:application] },    
+      { step: :check_benefits, action: :providers_legal_aid_application_check_benefits_path, args: [:application] },
       { step: :email, action: :edit_providers_legal_aid_application_applicant_path, args: [:application] },
       { step: :submission_completed, action: :providers_legal_aid_application_check_your_answers_path, args: [:application] }
     ].freeze

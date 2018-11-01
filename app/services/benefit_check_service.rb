@@ -8,23 +8,26 @@ class BenefitCheckService
   end
 
   def check_benefits
-    benefit_checker_params =
-      { lscServiceName: ENV['BC_LSC_SERVICE_NAME'],
-        clientOrgId: ENV['BC_CLIENT_ORG_ID'],
-        clientUserId: ENV['BC_CLIENT_USER_ID'],
-        clientReference: application.id,
-        nino: applicant.national_insurance_number,
-        surname: applicant.last_name,
-        dateOfBirth: applicant.date_of_birth.strftime("%Y%m%d"),
-        dateOfAward: Date.today.strftime("%Y%m%d") }
-
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
   end
 
   private
 
+  def benefit_checker_params
+    {
+      lscServiceName: ENV['BC_LSC_SERVICE_NAME'],
+      clientOrgId: ENV['BC_CLIENT_ORG_ID'],
+      clientUserId: ENV['BC_CLIENT_USER_ID'],
+      clientReference: application.id,
+      nino: applicant.national_insurance_number,
+      surname: applicant.last_name,
+      dateOfBirth: applicant.date_of_birth.strftime('%Y%m%d'),
+      dateOfAward: Date.today.strftime('%Y%m%d')
+    }
+  end
+
   def applicant
-    @applicant ||= application.applicant
+    application.applicant
   end
 
   def soap_client
