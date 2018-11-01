@@ -46,7 +46,6 @@ references:
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
         fi
 
-
 jobs:
   build_and_test:
     <<: *build_container_config
@@ -104,7 +103,7 @@ jobs:
           echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' -)\"" >> $BASH_ENV
           source $BASH_ENV
           helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
-                        --install --force \
+                        --install --force --wait \
                         --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
