@@ -1,4 +1,4 @@
-# LAA apply for legal aid
+# LAA Apply for legal aid
 
 This is the service api for persisting application related information to the back end database and
 may well be used to fire requests to other services.
