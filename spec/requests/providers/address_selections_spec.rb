@@ -69,7 +69,7 @@ RSpec.describe 'address selections requests', type: :request do
     it 'redirects to next submission step' do
       post_request
 
-      expect(response).to redirect_to(edit_providers_legal_aid_application_applicant_path(application))
+      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
     end
   end
 end
