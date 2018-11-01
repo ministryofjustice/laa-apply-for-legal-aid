@@ -103,7 +103,7 @@ jobs:
 
           echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' -)\"" >> $BASH_ENV
           source $BASH_ENV
-          helm upgrade ${APPLICATON_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
+          helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
                         --install \
                         --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                         --namespace=${KUBE_ENV_UAT_NAMESPACE} \
@@ -131,7 +131,7 @@ jobs:
         name: Helm deployment to staging
         command: |
 
-          helm upgrade ${APPLICATON_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
+          helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install \
                         --tiller-namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
@@ -158,7 +158,7 @@ jobs:
         name: Helm deployment to production
         command: |
 
-          helm upgrade ${APPLICATON_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
+          helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install \
                         --tiller-namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
                         --namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
