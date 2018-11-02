@@ -79,6 +79,8 @@ jobs:
         command: npm install
     - run:
         name: Run Tests
+        environment:
+          BC_WSDL_URL: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
         command: bundle exec rake
     - *build_docker_image
     - *push_to_ecr
