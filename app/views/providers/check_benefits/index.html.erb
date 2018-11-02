@@ -8,13 +8,6 @@
       Your applicant's benefit check result: <%= @legal_aid_application.benefit_check_result.result %>
     </p>
 
-    <%=
-      link_to(
-        "Continue",
-        @next_step_link,
-        class: "govuk-button govuk-button",
-        id: 'continue'
-      )
-    %>
+    <%= button_to "Continue", @next_step_link , class: "govuk-button govuk-button" , id: 'continue' , method: 'get' %>
   </div>
 </div>
