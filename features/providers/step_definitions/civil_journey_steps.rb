@@ -94,7 +94,7 @@ Then('I am on the postcode entry page') do
 end
 
 Then('I am on the benefit check results page') do
-  page.should have_content("Benefit check results")
+  page.should have_content('Benefit check results')
 end
 
 Then(/^I enter a valid postcode '(.*)'$/) do |postcode|
