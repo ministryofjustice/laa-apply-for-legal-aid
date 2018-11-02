@@ -1,7 +1,7 @@
 <%= form_with(model: check_your_answers, local: true) do |form| %>
   <% if check_your_answers.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(cheeck_your_answers.errors.count, 'error') %> prohibited this check_your_answers from being saved:</h2>
+      <h2><%= pluralize(check_your_answers.errors.count, 'error') %> prohibited this check_your_answers from being saved:</h2>
 
       <ul>
       <% check_your_answers.errors.full_messages.each do |message| %>
