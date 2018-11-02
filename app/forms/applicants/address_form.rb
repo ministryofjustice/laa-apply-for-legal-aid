@@ -4,7 +4,7 @@ module Applicants
 
     form_for Address
 
-    attr_accessor :applicant_id, :address_line_one, :address_line_two, :city, :county, :postcode
+    attr_accessor :applicant_id, :address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode, :lookup_error
 
     before_validation :normalise_postcode
 
@@ -14,6 +14,10 @@ module Applicants
     validates :postcode, format: { with: POSTCODE_REGEXP, if: proc { |a| a.postcode.present? } }
 
     validate :validate_building_and_street
+
+    def exclude_from_model
+      %i[lookup_postcode lookup_error]
+    end
 
     private
 

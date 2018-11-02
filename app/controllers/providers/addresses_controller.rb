@@ -22,7 +22,7 @@ module Providers
     private
 
     def address_params
-      params.require(:address).permit(:address_line_one, :address_line_two, :city, :county, :postcode)
+      params.require(:address).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode, :lookup_error)
     end
 
     def form_params
