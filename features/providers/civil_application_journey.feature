@@ -35,6 +35,8 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click continue
+    Then I am on the benefit check results page
+    Then I click continue
     Then I enter a valid email address 'test@test.com'
     Then I click continue
     When I click continue
@@ -58,6 +60,8 @@ Feature: Civil application journeys
     Then I enter address line one '102 Petty France'
     Then I enter city 'London'
     Then I enter postcode 'SW1H 9AJ'
+    Then I click continue
+    Then I am on the benefit check results page
     Then I click continue
     Then I enter a valid email address 'test@test.com'
     Then I click continue
