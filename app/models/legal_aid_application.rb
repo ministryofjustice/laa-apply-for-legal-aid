@@ -15,6 +15,14 @@ class LegalAidApplication < ApplicationRecord
     self.proceeding_types = ProceedingType.where(code: codes)
   end
 
+  def add_benefit_check_result
+    benefit_check_response = BenefitCheckService.new(self).check_benefits
+    create_benefit_check_result!(
+      result: benefit_check_response.dig(:benefit_checker_status),
+      dwp_ref: benefit_check_response.dig(:confirmation_ref)
+    )
+  end
+
   private
 
   def proceeding_type_codes_existence
