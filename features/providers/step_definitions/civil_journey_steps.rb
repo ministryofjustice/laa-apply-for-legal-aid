@@ -9,7 +9,7 @@ When(/^the search for (.*) is not successful$/) do |proceeding_search|
 end
 
 Then('the result list on page returns a {string} message') do |string|
-  page.should have_content(string)
+  expect(page).to have_content(string)
 end
 
 And(/^I search for proceeding '(.*)'$/) do |proceeding_search|
@@ -22,15 +22,15 @@ When(/^I click clear search$/) do
 end
 
 Then(/^proceeding search field is empty$/) do
-  page.should have_field('proceeding-search-input', with: '')
+  expect(page).to have_field('proceeding-search-input', with: '')
 end
 
 Then(/^the results section is empty$/) do
-  page.should_not have_css('#proceeding-list > .proceeding-item')
+  expect(page).to_not have_css('#proceeding-list > .proceeding-item')
 end
 
 Then(/^proceeding suggestions has results$/) do
-  page.should have_css('#proceeding-list > .proceeding-item')
+  expect(page).to have_css('#proceeding-list > .proceeding-item')
 end
 
 And(/^I click "([^"]*)"$/) do |button_name|
@@ -46,7 +46,7 @@ Then(/^I select and continue$/) do
 end
 
 Then(/^I see the client details page$/) do
-  page.should have_content("Enter your client's details")
+  expect(page).to have_content("Enter your client's details")
 end
 
 Then(/^I enter name '(.*)', '(.*)'$/) do |first_name, last_name|
@@ -66,7 +66,7 @@ Then(/^I enter national insurance number '(.*)'$/) do |nino|
 end
 
 Then(/^I see a notice confirming an e-mail was sent to the citizen$/) do
-  page.should have_content('Application completed. An e-mail will be sent to the citizen.')
+  expect(page).to have_content('Application completed. An e-mail will be sent to the citizen.')
 end
 
 When(/^I click continue$/) do
@@ -90,7 +90,7 @@ Then(/^I enter postcode '(.*)'$/) do |postcode|
 end
 
 Then('I am on the postcode entry page') do
-  page.should have_content("Enter your client's home address")
+  expect(page).to have_content("Enter your client's home address")
 end
 
 Then(/^I enter a valid postcode '(.*)'$/) do |postcode|

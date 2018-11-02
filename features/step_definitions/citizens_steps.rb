@@ -1,5 +1,5 @@
 Then('I see {string}') do |string|
-  page.should have_content(string)
+  expect(page).to have_content(string)
 end
 
 Then('I see the start link') do
@@ -31,7 +31,7 @@ Then('I see the start page') do
 end
 
 Then('I see the open banking information page') do
-  page.should have_content('Give one-time access to your bank accounts')
+  expect(page).to have_content('Give one-time access to your bank accounts')
 end
 
 When('I click the continue link') do
