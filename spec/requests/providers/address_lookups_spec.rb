@@ -22,7 +22,7 @@ RSpec.describe 'address lookup requests', type: :request do
       get_request
 
       expect(response).to be_successful
-      expect(response.body).to include(I18n.t('forms.address_lookup.heading'))
+      expect(unescaped_response_body).to include(I18n.t('forms.address_lookup.heading'))
     end
   end
 

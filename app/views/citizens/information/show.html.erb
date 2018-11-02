@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= link_to 'Back', citizens_legal_aid_application_path(id: session[:current_application_ref]), class: 'govuk-back-link' , id: 'back' %>
+  <%= link_to 'Back', citizens_legal_aid_application_path(id: session[:current_application_ref]), class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
 <h1 class="govuk-heading-xl">Give one-time access to your bank accounts</h1>
@@ -9,7 +9,7 @@
 
     <p class="govuk-body">You will be redirected to a secure service to sign in to your online banking.</p>
     <p class="govuk-body">You will need to share all of your bank accounts, including any in joint names or with no money.</p>
-    <br>
+    <br />
     <div class="govuk-warning-text">
       <span class="govuk-warning-text__icon" aria-hidden="true">i</span>
       <strong class="govuk-warning-text__text">
@@ -26,7 +26,7 @@
       </ul>
     </p>
 
-    <%= link_to 'Continue', citizens_consent_path, class: 'govuk-button govuk-button' , id: 'continue' %>
+    <%= link_to 'Continue', citizens_consent_path, class: 'govuk-button govuk-button', id: 'continue' %>
 
   </div>
 </div>

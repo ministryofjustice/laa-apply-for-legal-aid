@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= link_to 'Back', citizens_information_path, class: 'govuk-back-link' , id: 'back' %>
+  <%= link_to 'Back', citizens_information_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
 <h1 class="govuk-heading-xl">Do you agree to share your bank transactions with us?</h1>
@@ -28,16 +28,16 @@
        <fieldset class="govuk-fieldset" aria-describedby="open-banking-consent">
          <div class="govuk-checkboxes">
            <div class="govuk-checkboxes__item">
-             <input class="govuk-checkboxes__input" id="open-banking-consent" name="open-banking-consent" type="checkbox" value="consent">
+             <input class="govuk-checkboxes__input" id="open-banking-consent" name="open-banking-consent" type="checkbox" value="consent" />
              <label class="govuk-label govuk-checkboxes__label" for="open-banking-1">
-               <b>I agree for you to check 3 months of bank transactions</b> <br> using temporary access to my online banking
+               <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
              </label>
            </div>
          </div>
       </fieldset>
     </div>
 
-    <button  type="submit" class="govuk-button" >Continue</button>
+    <button type="submit" class="govuk-button">Continue</button>
 
   </div>
 </div>

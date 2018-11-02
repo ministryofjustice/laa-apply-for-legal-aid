@@ -33,17 +33,17 @@
 
       <div class="govuk-!-padding-bottom-2"></div>
 
-      <% group_error_class = @form.errors[:address_line_one].any? ? 'govuk-form-group--error': '' %>
+      <% group_error_class = @form.errors[:address_line_one].any? ? 'govuk-form-group--error' : '' %>
       <div class="govuk-form-group <%= group_error_class %>">
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_one, form: form }%>
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_two, field_with_error: :address_line_one, form: form }%>
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_one, form: form } %>
+        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_two, field_with_error: :address_line_one, form: form } %>
       </div>
 
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :city, class: 'govuk-!-width-two-thirds', form: form }%>
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :county, class: 'govuk-!-width-two-thirds', form: form }%>
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode, class: 'govuk-input--width-10', form: form }%>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :city, class: 'govuk-!-width-two-thirds', form: form } %>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :county, class: 'govuk-!-width-two-thirds', form: form } %>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode, class: 'govuk-input--width-10', form: form } %>
 
-      <%= form.submit "Continue", id: 'continue', class: "govuk-button" %>
+      <%= form.submit 'Continue', id: 'continue', class: 'govuk-button' %>
     <% end %>
   </div>
 </div>

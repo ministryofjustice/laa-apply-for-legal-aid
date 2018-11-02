@@ -9,7 +9,7 @@
       <div class='govuk-form-group'>
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading">
-            <%= t('forms.address_selection.heading').html_safe %>
+            <%= t('forms.address_selection.heading') %>
           </h1>
         </legend>
         <div class="govuk-!-padding-bottom-8"></div>
@@ -29,20 +29,20 @@
 
         <div class="govuk-!-padding-bottom-2"></div>
 
-        <% group_error_class = @form.errors[:address].any? ? 'govuk-form-group--error': '' %>
+        <% group_error_class = @form.errors[:address].any? ? 'govuk-form-group--error' : '' %>
         <div class="govuk-form-group <%= group_error_class %>">
           <%= f.label :address, 'Select an address', class: 'govuk-label' %>
           <% if @form.errors[:address].any? %>
-            <%= content_tag(:span, @form.errors[:address].first, class: ["govuk-error-message"]) %>
+            <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
           <% end %>
           <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
-          <%= f.select(:address, @addresses.collect { |a| [a.full_address, a.to_json] }, { include_blank: "#{@addresses.size} addresses found" }, { class: "govuk-select govuk-!-width-two-thirds #{input_error_class}" }) %>
+          <%= f.select(:address, @addresses.collect { |a| [a.full_address, a.to_json] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select govuk-!-width-two-thirds #{input_error_class}") %>
         </div>
       </div>
 
       <p><%= link_to "I can't find the address in the list", new_providers_applicant_addresses_path, class: 'govuk-link' %></p>
 
-      <%= f.submit "Continue", id: 'select-address-button', class: "govuk-button" %>
+      <%= f.submit 'Continue', id: 'select-address-button', class: 'govuk-button' %>
     <% end %>
   </div>
 </div>

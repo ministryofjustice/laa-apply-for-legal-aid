@@ -4,17 +4,16 @@
 
     <% if form.object.errors[field_name].any? %>
       <% group_error_class = 'govuk-form-group--error' %>
-    <% end%>
+    <% end %>
 
     <div class="govuk-form-group">
       <div class="govuk-date-input__item <%= group_error_class %>" id="<%= field_name %>">
 
-        <%= content_tag(:label, t(".#{field_name}_label"), default: '', id: "#{field_name}-label".dasherize, class: ["govuk-label"])  %>
+        <%= content_tag(:label, t(".#{field_name}_label"), default: '', id: "#{field_name}-label".dasherize, class: ['govuk-label']) %>
         <% hint = t(".#{field_name}_hint", default: '') %>
           <% if hint.present? %>
-            <%= content_tag(:span, t(".#{field_name}_hint"), default: '', id: "#{field_name}-hint".dasherize, class: ["govuk-hint"])  %>
+            <%= content_tag(:span, t(".#{field_name}_hint"), default: '', id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
         <% end %>
-
 
         <% form.object.errors[field_name].each do |message| %>
             <%= content_tag(:span, message, id: "#{field_name}-error".dasherize, class: 'govuk-error-message') if form.object.errors[field_name].any? %>
