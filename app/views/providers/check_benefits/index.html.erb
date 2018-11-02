@@ -1,12 +1,44 @@
 <% content_for :navigation do %>
   <%= link_to 'Back', new_providers_applicant_address_lookups_path(@legal_aid_application.applicant), class: 'govuk-back-link' %>
 <% end %>
+
+<%
+  copies = {
+    positive: {
+      heading: 'receives a qualifying benefit',
+      body: 'Your client receives benefits that qualify for legal aid.',
+      next: 'Your client will have to declare whether they have any savings, own a home or anything else that can pay for legal aid.'
+    },
+    negative: {
+      heading: 'must complete a financial assessment',
+      body: 'Your client does not receive benefits that qualify for legal aid.',
+      next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
+    }
+  }
+
+  copy = @legal_aid_application.applicant_receives_benefit? ? copies[:positive] : copies[:negative]
+%>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h2 class="govuk-panel__title">
+        <%= @legal_aid_application.applicant.full_name %>
+        <br>
+        <%= copy[:heading] %>
+      </h2>
+    </div>
+
     <div class="govuk-!-padding-top-4"></div>
-    <h1 class="govuk-heading-xl">Benefit check results</h1>
-    <p class="govuk_body">
-      Your applicant's benefit check result: <%= @legal_aid_application.benefit_check_result.result %>
+
+    <h3 class="govuk-heading-m">Your client's tax and benefits status</h3>
+
+    <p class="govuk-body"><%= copy[:body] %></p>
+
+    <h3 class="govuk-heading-m">What happens next</h3>
+
+    <p class="govuk-body">
+      <%= copy[:next] %>
     </p>
 
     <%= button_to 'Continue', @next_step_link, class: 'govuk-button govuk-button', id: 'continue', method: 'get' %>

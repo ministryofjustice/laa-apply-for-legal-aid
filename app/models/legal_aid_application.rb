@@ -23,6 +23,10 @@ class LegalAidApplication < ApplicationRecord
     )
   end
 
+  def applicant_receives_benefit?
+    benefit_check_result.positive?
+  end
+
   private
 
   def proceeding_type_codes_existence
