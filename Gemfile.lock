@@ -162,7 +162,7 @@ GEM
     multi_test (0.1.2)
     multipart-post (2.0.0)
     nio4r (2.3.1)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     notifications-ruby-client (2.9.0)
       jwt (>= 1.5, < 3)
