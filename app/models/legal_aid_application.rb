@@ -16,7 +16,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def add_benefit_check_result
-    benefit_check_response = BenefitCheckService.new(self).check_benefits
+    benefit_check_response = BenefitCheckService.new(self).call
     create_benefit_check_result!(
       result: benefit_check_response.dig(:benefit_checker_status),
       dwp_ref: benefit_check_response.dig(:confirmation_ref)

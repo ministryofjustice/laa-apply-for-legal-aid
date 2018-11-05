@@ -82,7 +82,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     it 'creates a check_benefit_result with the right values' do
-      expect(benefit_check_service).to receive(:check_benefits).and_return(benefit_check_response)
+      expect(benefit_check_service).to receive(:call).and_return(benefit_check_response)
 
       application.add_benefit_check_result
       expect(application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])

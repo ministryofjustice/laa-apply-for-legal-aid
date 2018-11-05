@@ -22,7 +22,7 @@ RSpec.describe BenefitCheckService do
 
     context 'when the call is successful' do
       it 'returns the right parameters' do
-        result = subject.check_benefits
+        result = subject.call
         expect(result[:benefit_checker_status]).to eq('Yes')
         expect(result[:original_client_ref]).not_to be_empty
         expect(result[:confirmation_ref]).not_to be_empty
@@ -34,14 +34,14 @@ RSpec.describe BenefitCheckService do
           .with(:check, expected_params)
           .and_call_original
 
-        subject.check_benefits
+        subject.call
       end
 
       context 'when the last name is not in upper case' do
         let(:last_name) { ' walker ' }
 
         it 'normalizes the last name' do
-          result = subject.check_benefits
+          result = subject.call
           expect(result[:benefit_checker_status]).to eq('Yes')
         end
 
@@ -51,7 +51,7 @@ RSpec.describe BenefitCheckService do
             .with(:check, expected_params)
             .and_call_original
 
-          subject.check_benefits
+          subject.call
         end
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe BenefitCheckService do
       let(:last_name) { 'SERVICEEXCEPTION' }
 
       it 'raises an error' do
-        expect { subject.check_benefits }.to raise_error(Savon::SOAPFault)
+        expect { subject.call }.to raise_error(Savon::SOAPFault)
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it 'raises an error' do
-        expect { subject.check_benefits }.to raise_error(Savon::SOAPFault)
+        expect { subject.call }.to raise_error(Savon::SOAPFault)
       end
     end
   end

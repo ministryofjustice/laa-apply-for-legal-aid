@@ -6,7 +6,7 @@ class BenefitCheckService
     @config = Rails.configuration.x.benefit_check
   end
 
-  def check_benefits
+  def call
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
   end
 
