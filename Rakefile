@@ -5,5 +5,7 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-task(:default).clear
-task default: %i[rubocop spec cucumber]
+unless Rails.env.production?
+  task(:default).clear
+  task default: %i[rubocop erblint spec cucumber]
+end

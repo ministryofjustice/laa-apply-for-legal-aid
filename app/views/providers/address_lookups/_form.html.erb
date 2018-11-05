@@ -8,7 +8,7 @@
 
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
       <h1 class="govuk-fieldset__heading">
-        <%= t('forms.address_lookup.heading').html_safe %>
+        <%= t('forms.address_lookup.heading') %>
       </h1>
     </legend>
 
@@ -23,7 +23,7 @@
                                                                 form: form,
                                                                 hint: :postcode_hint } %>
 
-      <%= form.submit "Find address", id: 'find-address', class: "govuk-button" %>
+      <%= form.submit 'Find address', id: 'find-address', class: 'govuk-button' %>
 
       <p><%= link_to 'Enter address manually', new_providers_applicant_addresses_path, class: 'govuk-link' %></p>
     <% end %>

@@ -22,6 +22,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+  gem 'erb_lint', require: false
   gem 'json_expressions'
   gem 'pry-byebug'
   gem 'rubocop', require: false

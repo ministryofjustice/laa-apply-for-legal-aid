@@ -16,7 +16,7 @@
 
 <div class="govuk-grid-row search-field">
   <div class="govuk-grid-column-two-thirds">
-    <input class="govuk-input" id="proceeding-search" name="proceeding-search-input" type="input" aria-describedby="offence-hint">
+    <input class="govuk-input" id="proceeding-search" name="proceeding-search-input" type="input" aria-describedby="offence-hint" />
   </div>
   <div id="clear-search-div" class="govuk-grid-column-one-third">
       <a id="clearSearch" href="#" class="govuk-link govuk-!-font-size-19">Clear search</a>
@@ -24,7 +24,7 @@
 </div>
 
 <div class="govuk-grid-row">
-  <%= form_with(model: [:providers, @legal_aid_application], local: true, html: { id: "proceeding-form" }) do |form| %>
+  <%= form_with(model: [:providers, @legal_aid_application], local: true, html: { id: 'proceeding-form' }) do |form| %>
     <div id="proceeding-list" class="govuk-grid-column-full"></div>
   <% end %>
 </div>

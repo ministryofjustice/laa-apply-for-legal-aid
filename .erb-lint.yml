@@ -1,0 +1,21 @@
+---
+linters:
+  ErbSafety:
+    enabled: true
+  HardCodedString:
+    enabled: false
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
+      Layout/InitialIndentation:
+        Enabled: false
+      Layout/TrailingBlankLines:
+        Enabled: false
+      Layout/TrailingWhitespace:
+        Enabled: false
+      Lint/UselessAssignment:
+        Enabled: false
+      Metrics/LineLength:
+        Enabled: false
