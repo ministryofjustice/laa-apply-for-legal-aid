@@ -1,10 +1,9 @@
 class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
 
-  attr_reader :application
-
   def initialize(application)
     @application = application
+    @config = Rails.configuration.x.benefit_check
   end
 
   def check_benefits
@@ -12,6 +11,8 @@ class BenefitCheckService
   end
 
   private
+
+  attr_reader :application, :config
 
   def benefit_checker_params
     {
@@ -25,9 +26,9 @@ class BenefitCheckService
 
   def credential_params
     {
-      lscServiceName: Rails.configuration.x.benefit_check.service_name,
-      clientOrgId: Rails.configuration.x.benefit_check.client_org_id,
-      clientUserId: Rails.configuration.x.benefit_check.client_user_id
+      lscServiceName: config.service_name,
+      clientOrgId: config.client_org_id,
+      clientUserId: config.client_user_id
     }
   end
 
@@ -38,7 +39,7 @@ class BenefitCheckService
   def soap_client
     @soap_client ||= Savon.client(
       env_namespace: :soapenv,
-      wsdl: Rails.configuration.x.benefit_check.wsdl_url,
+      wsdl: config.wsdl_url,
       namespaces: { 'xmlns:ins0' => BENEFIT_CHECKER_NAMESPACE }
     )
   end
