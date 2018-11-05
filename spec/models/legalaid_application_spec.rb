@@ -66,4 +66,27 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#add_benefit_check_result' do
+    let(:benefit_check_service) { spy(BenefitCheckService) }
+    let(:benefit_check_response) do
+      {
+        benefit_checker_status: Faker::Lorem.word,
+        confirmation_ref: SecureRandom.hex
+      }
+    end
+
+    before do
+      application.save!
+      allow(BenefitCheckService).to receive(:new).with(application).and_return(benefit_check_service)
+    end
+
+    it 'creates a check_benefit_result with the right values' do
+      expect(benefit_check_service).to receive(:call).and_return(benefit_check_response)
+
+      application.add_benefit_check_result
+      expect(application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
+      expect(application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
+    end
+  end
 end

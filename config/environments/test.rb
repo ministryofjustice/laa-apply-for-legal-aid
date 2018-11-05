@@ -41,6 +41,8 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.x.benefit_check.wsdl_url = 'https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl'
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   Rails.application.routes.default_url_options[:host] = 'www.example.com'

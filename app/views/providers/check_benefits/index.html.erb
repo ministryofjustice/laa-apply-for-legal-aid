@@ -1,0 +1,14 @@
+<% content_for :navigation do %>
+  <%= link_to 'Back', new_providers_applicant_address_lookups_path(@legal_aid_application.applicant), class: 'govuk-back-link' %>
+<% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-!-padding-top-4"></div>
+    <h1 class="govuk-heading-xl">Benefit check results</h1>
+    <p class="govuk_body">
+      Your applicant's benefit check result: <%= @legal_aid_application.benefit_check_result.result %>
+    </p>
+
+    <%= button_to 'Continue', @next_step_link, class: 'govuk-button govuk-button', id: 'continue', method: 'get' %>
+  </div>
+</div>

@@ -2,37 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=%3Cordnanace-survey-api-key-goes-here%3E&postcode=SW1H9AJ
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Fri, 02 Nov 2018 09:23:18 GMT
-      Content-Length:
-      - '90'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"fault":{"faultstring":"Invalid ApiKey","detail":{"errorcode":"oauth.v2.InvalidApiKey"}}}'
-    http_version: 
-  recorded_at: Fri, 02 Nov 2018 09:23:18 GMT
-- request:
-    method: get
     uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
     body:
       encoding: US-ASCII
@@ -50,7 +19,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Fri, 02 Nov 2018 09:23:20 GMT
+      - Thu, 01 Nov 2018 15:38:38 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -58,7 +27,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5bdc1788-e8d2c88bc3e77b7c8870fd05;
+      - Root=1-5bdb1dfe-d5bee86fe74dfa20fc0e3ce4;
       Vary:
       - Accept-Encoding
     body:
@@ -178,7 +147,7 @@ http_interactions:
 
         </wsdl:definitions>
     http_version: 
-  recorded_at: Fri, 02 Nov 2018 09:23:20 GMT
+  recorded_at: Thu, 01 Nov 2018 15:38:39 GMT
 - request:
     method: post
     uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker
@@ -186,14 +155,14 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns2="https://lsc.gov.uk/benefitchecker/service/1.0"
-        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:clientReference>e107046a-4998-4d7d-9e07-bdcaa2253754</ins0:clientReference><ins0:nino>CB987654A</ins0:nino><ins0:surname>USER</ins0:surname><ins0:dateOfBirth>19990403</ins0:dateOfBirth><ins0:dateOfAward>20181102</ins0:dateOfAward><ins0:lscServiceName>eP_9_Tk</ins0:lscServiceName><ins0:clientOrgId>hr_5d_f_s433S</ins0:clientOrgId><ins0:clientUserId>9g_kt6rv65D_qsF</ins0:clientUserId></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:lscServiceName>eP_9_Tk</ins0:lscServiceName><ins0:clientOrgId>hr_5d_f_s433S</ins0:clientOrgId><ins0:clientUserId>9g_kt6rv65D_qsF</ins0:clientUserId><ins0:clientReference>7c28088f-aa73-4673-867e-d3c010a00204</ins0:clientReference><ins0:nino>JA293483A</ins0:nino><ins0:surname>WALKER</ins0:surname><ins0:dateOfBirth>19800110</ins0:dateOfBirth><ins0:dateOfAward>20181101</ins0:dateOfAward></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
     headers:
       Soapaction:
       - '"check"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '840'
+      - '842'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -206,7 +175,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Fri, 02 Nov 2018 09:23:20 GMT
+      - Thu, 01 Nov 2018 15:38:38 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -214,7 +183,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5bdc1788-e6e97e4c426424000d0f859c;
+      - Root=1-5bdb1dfe-171b9808f1af5760e0185aa8;
       Vary:
       - Accept-Encoding
     body:
@@ -222,9 +191,9 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
-        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">e107046a-4998-4d7d-9e07-bdcaa2253754</ns1:originalClientRef><ns2:benefitCheckerStatus
-        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1541150600515</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">7c28088f-aa73-4673-867e-d3c010a00204</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1541086718381</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Fri, 02 Nov 2018 09:23:20 GMT
+  recorded_at: Thu, 01 Nov 2018 15:38:39 GMT
 recorded_with: VCR 4.0.0

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_165537) do
+ActiveRecord::Schema.define(version: 2018_11_01_115246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 2018_10_18_165537) do
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
+  create_table "benefit_check_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "result"
+    t.string "dwp_ref"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
+  end
+
   create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
@@ -72,5 +81,6 @@ ActiveRecord::Schema.define(version: 2018_10_18_165537) do
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"
+  add_foreign_key "benefit_check_results", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
 end

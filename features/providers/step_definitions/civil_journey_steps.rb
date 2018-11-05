@@ -93,6 +93,10 @@ Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's home address")
 end
 
+Then('I am on the benefit check results page') do
+  page.should have_content('Benefit check results')
+end
+
 Then(/^I enter a valid postcode '(.*)'$/) do |postcode|
   fill_in('postcode', with: postcode)
 end
