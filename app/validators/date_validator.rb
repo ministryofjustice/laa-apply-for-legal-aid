@@ -6,7 +6,6 @@ class DateValidator < ActiveModel::EachValidator
     value = parse_date(value, options[:format]) if value.is_a?(String)
     return unless valid_date(record, attribute, value)
     validate_not_in_future(record, attribute, value)
-    validate_four_digit_year(record, attribute, value)
     validate_not_too_early(record, attribute, value)
   end
 
@@ -49,13 +48,5 @@ class DateValidator < ActiveModel::EachValidator
     date_options = options[:earliest_allowed_date]
     date = date_options.is_a?(Hash) && date_options[:date] ? date_options[:date] : DEFAULT_EARLIEST_DATE
     parse_date(date, options[:format])
-  end
-
-  def validate_four_digit_year(record, attribute, value)
-    required = options[:not_four_digit_year]
-    return unless required.present?
-    message = required[:message] if required.is_a?(Hash)
-    message ||= :year_is_not_four_digits
-    record.errors.add(attribute, message) if value < parse_date('1000-01-01', options[:format])
   end
 end
