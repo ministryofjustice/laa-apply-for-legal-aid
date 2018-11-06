@@ -60,7 +60,7 @@ RSpec.describe 'POST /v1/applications/:application_id/applicant', type: :request
       first_name: 'John',
       last_name: 'Doe',
       date_of_birth: '1991-12-01',
-      email_address: nil,
+      email: nil,
       national_insurance_number: 'BH134435M'
     }
 

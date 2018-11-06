@@ -5,7 +5,6 @@ class AddDeviseToApplicants < ActiveRecord::Migration[5.2]
     change_table :applicants do |t|
       ## Database authenticatable
       t.rename :email_address, :email
-      t.string :encrypted_password, null: false, default: ''
 
       ## Confirmable
       t.string   :confirmation_token

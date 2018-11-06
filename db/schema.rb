@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2018_11_01_115246) do
     t.string "last_name"
     t.string "email"
     t.string "national_insurance_number"
-    t.string "encrypted_password", default: "", null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

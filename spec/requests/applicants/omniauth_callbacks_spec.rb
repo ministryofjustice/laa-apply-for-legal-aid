@@ -12,9 +12,9 @@ RSpec.describe 'applicants omniauth call back', type: :request do
   let(:expires_at) { 1.hour.from_now.round }
   let(:true_layer_expires_at) { expires_at.to_i }
   let(:applicant) { create :applicant }
-  let(:identification_tool) { double applicant: applicant }
 
   before do
+    sign_in applicant if applicant
     OmniAuth.config.add_mock(
       :true_layer,
       credentials: {
@@ -22,10 +22,6 @@ RSpec.describe 'applicants omniauth call back', type: :request do
         expires_at: true_layer_expires_at
       }
     )
-    allow(TrueLayer::IdentifyApplicant)
-      .to receive(:new)
-      .with(token)
-      .and_return(identification_tool)
   end
 
   describe 'GET /applicants/auth/true_layer/callback' do
@@ -61,8 +57,8 @@ RSpec.describe 'applicants omniauth call back', type: :request do
       end
     end
 
-    context 'on lookup failure' do
-      let(:identification_tool) { double applicant: nil, error: 'foo' }
+    context 'without applicant' do
+      let(:applicant) { nil }
 
       it 'should redirect to root' do
         expect(subject).to redirect_to(root_path)

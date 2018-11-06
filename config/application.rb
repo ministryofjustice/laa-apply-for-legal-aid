@@ -20,7 +20,5 @@ module LaaApplyForLegalAid
     config.govuk_notify_templates = config_for(
       :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
     ).symbolize_keys
-
-    config.eager_load_paths << Rails.root.join('lib/omniauth')
   end
 end

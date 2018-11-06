@@ -18,7 +18,8 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  # This should be over-written if we configure Devise to send via Notify
+  config.mailer_sender = 'apply@digital.justice.gov.uk'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -168,7 +169,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.email_regexp = URI::MailTo::EMAIL_REGEXP
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -256,7 +257,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  require 'omniauth-true-layer'
+  require Rails.root.join 'app/lib/omniauth/omniauth_true_layer'
   config.omniauth :true_layer, ENV['TRUE_LAYER_CLIENT_ID'], ENV['TRUE_LAYER_CLIENT_SECRET'], scope: 'info'
 
   # ==> Warden configuration

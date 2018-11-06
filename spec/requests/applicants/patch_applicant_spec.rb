@@ -4,7 +4,7 @@ RSpec.describe 'PATCH /v1/applications/{app_ref}/applicant', type: :request do
   let(:applicant) { application.applicant }
   let(:application) { create(:application, :with_applicant) }
   let(:application_id) { application.application_ref }
-  let(:params) { { applicant: { email_address: 'new_email@test.com' } } }
+  let(:params) { { applicant: { email: 'new_email@example.com' } } }
   let(:patch_request) do
     -> { patch "/v1/applications/#{application_id}/applicant/", params: params.to_json, headers: json_headers }
   end
@@ -32,14 +32,14 @@ RSpec.describe 'PATCH /v1/applications/{app_ref}/applicant', type: :request do
   end
 
   context 'when some of the params are not valid' do
-    let(:params) { { applicant: { email_address: 'this-is-not-a-valid-email' } } }
+    let(:params) { { applicant: { email: 'this-is-not-a-valid-email' } } }
 
     it 'returns a 400 response with the validation errors' do
       patch_request.call
 
       expected_json = {
         errors: [
-          { field: 'email_address', code: 'invalid' }
+          { field: 'email', code: 'invalid' }
         ]
       }
 
@@ -56,7 +56,7 @@ RSpec.describe 'PATCH /v1/applications/{app_ref}/applicant', type: :request do
       id: applicant.id,
       first_name: applicant.first_name,
       last_name: applicant.last_name,
-      email_address: 'new_email@test.com',
+      email: 'new_email@example.com',
       date_of_birth: applicant.date_of_birth.to_s,
       national_insurance_number: applicant.national_insurance_number
     }
