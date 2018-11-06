@@ -17,7 +17,6 @@ module Applicants
       :date_of_birth,
       date: {
         not_in_the_future: true,
-        not_four_digit_year: true,
         earliest_allowed_date: { date: '1900-01-01' }
       }
     )

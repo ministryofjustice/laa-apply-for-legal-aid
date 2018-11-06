@@ -43,7 +43,6 @@ en:
               date_of_birth:
                 date_not_valid: 'Enter a valid date of birth'
                 date_is_in_the_future: 'Date of birth must be in the past'
-                year_is_not_four_digits: 'Enter a four-digit year of birth'
                 earliest_allowed_date: 'Date of birth cannot be before %{date}'
               national_insurance_number:
                 blank: 'Enter a National Insurance number'
