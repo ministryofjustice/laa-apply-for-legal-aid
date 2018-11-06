@@ -67,3 +67,44 @@ Feature: Civil application journeys
     Then I click continue
     When I click continue
     Then I see a notice confirming an e-mail was sent to the citizen
+
+  @javascript @vcr
+  Scenario: I can see that the applicant receives benefits
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Start now"
+    And I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
+    Then I enter name 'Test', 'Walker'
+    Then I enter the date of birth '10-01-1980'
+    Then I enter national insurance number 'JA293483A'
+    Then I click continue
+    Then I am on the postcode entry page
+    Then I enter a valid postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click continue
+    Then I am on the benefit check results page
+    Then I see a notice saying that the citizen receives benefits
+
+  @javascript @vcr
+  Scenario: I can see that the applicant does not receive benefits
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Start now"
+    And I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
+    Then I enter name 'Test', 'Paul'
+    Then I enter the date of birth '10-12-1961'
+    Then I enter national insurance number 'JA293483B'
+    Then I click continue
+    Then I am on the postcode entry page
+    Then I enter a valid postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click continue
+    Then I am on the benefit check results page
+    Then I see a notice saying that the citizen does not receive benefits
+

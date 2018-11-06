@@ -94,7 +94,7 @@ Then('I am on the postcode entry page') do
 end
 
 Then('I am on the benefit check results page') do
-  page.should have_content('Benefit check results')
+  expect(page).to have_content("Your client's tax and benefits status")
 end
 
 Then(/^I enter a valid postcode '(.*)'$/) do |postcode|
@@ -107,4 +107,12 @@ end
 
 Then(/^I select an address '(.*)'$/) do |address|
   select(address, from: 'address_selection[address]')
+end
+
+Then(/^I see a notice saying that the citizen receives benefits$/) do
+  expect(page).to have_content('Your client receives benefits that qualify for legal aid.')
+end
+
+Then(/^I see a notice saying that the citizen does not receive benefits$/) do
+  expect(page).to have_content('Your client does not receive benefits that qualify for legal aid.')
 end
