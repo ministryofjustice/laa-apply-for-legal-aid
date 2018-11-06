@@ -19,8 +19,8 @@
       <div class="govuk-!-padding-bottom-2"></div>
 
       <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode,
-                                                                class: 'govuk-input--width-10',
-                                                                form: form } %>
+                                                                form: form,
+                                                                class: 'govuk-input--width-10' } %>
 
       <%= form.submit 'Find address', id: 'find-address', class: 'govuk-button' %>
 
