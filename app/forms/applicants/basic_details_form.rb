@@ -12,7 +12,8 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
-    validates :first_name, :last_name, :national_insurance_number, presence: true
+    validates :first_name, :last_name, presence: true
+
     validates(
       :date_of_birth,
       date: {
@@ -20,6 +21,9 @@ module Applicants
         earliest_allowed_date: { date: '1900-01-01' }
       }
     )
+
+    validates :national_insurance_number, presence: true
+
     validates :national_insurance_number, format: { with: NINO_REGEXP, message: :not_valid }, allow_blank: true
 
     # rubocop:disable Lint/DuplicateMethods

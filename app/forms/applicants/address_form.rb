@@ -8,12 +8,12 @@ module Applicants
 
     before_validation :normalise_postcode
 
+    validate :validate_building_and_street
+
     validates :city, :postcode,
               presence: true
 
     validates :postcode, format: { with: POSTCODE_REGEXP, if: proc { |a| a.postcode.present? } }
-
-    validate :validate_building_and_street
 
     def exclude_from_model
       %i[lookup_postcode lookup_error]
