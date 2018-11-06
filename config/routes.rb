@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
+
   resources :status, only: [:index]
 
   namespace 'v1' do
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: [:show]
     resource :consent, only: [:show]
     resource :information, only: [:show]
+    resources :accounts, only: [:index]
   end
 
   namespace :providers do

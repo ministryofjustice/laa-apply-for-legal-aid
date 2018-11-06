@@ -1,6 +1,9 @@
 require 'uri'
+require 'omniauth'
 
 class Applicant < ApplicationRecord
+  devise :omniauthable, omniauth_providers: [:true_layer]
+
   NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
 
   has_one :legal_aid_application
@@ -10,7 +13,11 @@ class Applicant < ApplicationRecord
 
   validate :validate_date_of_birth, :validate_national_insurance_number
 
-  validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
+
+  def email_address
+    email
+  end
 
   def full_name
     "#{first_name} #{last_name}".strip

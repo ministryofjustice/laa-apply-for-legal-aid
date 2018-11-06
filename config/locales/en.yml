@@ -47,7 +47,7 @@ en:
               national_insurance_number:
                 blank: 'Enter a National Insurance number'
                 not_valid: 'Enter a valid National Insurance number'
-              email_address:
+              email:
                 blank: 'Enter email address'
                 invalid: 'Enter an email address in the right format'
         applicants/address_selection_form:
@@ -83,8 +83,8 @@ en:
           attributes:
             date_of_birth:
               invalid: 'is not valid'
-            email_address:
-              invalid: 'is not in the right format'
+            email:
+              invalid: 'address is not in the right format'
             national_insurance_number:
               invalid: 'is not in the right format'
         address:

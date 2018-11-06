@@ -47,7 +47,7 @@ module Providers
     end
 
     def email_params
-      params.require(:applicant).permit(:email_address)
+      params.require(:applicant).permit(:email)
     end
 
     def applicant

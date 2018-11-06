@@ -4,9 +4,9 @@ module Applicants
 
     form_for Applicant
 
-    attr_accessor :email_address
+    attr_accessor :email
 
-    validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
-    validates :email_address, presence: true
+    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+    validates :email, presence: true
   end
 end

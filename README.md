@@ -65,3 +65,12 @@ helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-fo
 # delete a specific release
 helm delete <name-of-the-release> --tiller-namespace=laa-apply-for-legalaid-uat --purge
 ```
+
+## True Layer
+
+To connect the True Layer API, a client ID and client SECRET must be supplied. They can be
+set via the environment variables `TRUE_LAYER_CLIENT_ID` and `TRUE_LAYER_CLIENT_SECRET`
+respectively. Visit https://console.truelayer.com to get a client ID and client SECRET.
+
+True Layer offer a Mock Bank option (see https://docs.truelayer.com/#mock-users). To enable
+this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"true"`.

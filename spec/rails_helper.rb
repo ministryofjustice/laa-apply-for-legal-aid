@@ -6,6 +6,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'json_expressions/rspec'
+require 'webmock/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -64,6 +65,11 @@ RSpec.configure do |config|
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
   end
+
+  # Add support for Devise authentication helpers
+  # https://github.com/plataformatec/devise#controller-tests
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end
 
 Shoulda::Matchers.configure do |config|
@@ -74,4 +80,10 @@ Shoulda::Matchers.configure do |config|
     # Choose one or more libraries:
     with.library :rails
   end
+end
+
+# Modify ENV variables within a spec. See:
+#   https://github.com/thoughtbot/climate_control
+def with_modified_env(options, &block)
+  ClimateControl.modify(options, &block)
 end

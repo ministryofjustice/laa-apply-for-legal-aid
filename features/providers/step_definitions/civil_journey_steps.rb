@@ -74,7 +74,7 @@ When(/^I click continue$/) do
 end
 
 Then(/^I enter a valid email address '(.*)'$/) do |email_address|
-  fill_in('email_address', with: email_address)
+  fill_in('email', with: email_address)
 end
 
 Then(/^I enter address line one '(.*)'$/) do |address_line_one|

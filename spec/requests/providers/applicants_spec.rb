@@ -107,14 +107,14 @@ RSpec.describe 'providers applicant requests', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/applicant' do
-    let(:applicant) { create(:applicant, email_address: original_email) }
+    let(:applicant) { create(:applicant, email: original_email) }
     let(:application) { create(:legal_aid_application, applicant: applicant) }
     let(:original_email) { 'original.email@test.com' }
     let(:new_email) { 'new.email@test.com' }
     let(:params) do
       {
         applicant: {
-          email_address: new_email
+          email: new_email
         }
       }
     end
@@ -130,7 +130,7 @@ RSpec.describe 'providers applicant requests', type: :request do
       end
 
       it 'does NOT update the applicant' do
-        expect { patch_request }.not_to change { applicant.reload.email_address }
+        expect { patch_request }.not_to change { applicant.reload.email }
       end
     end
 
@@ -138,7 +138,7 @@ RSpec.describe 'providers applicant requests', type: :request do
       let(:new_email) { 'not-a-valid-email' }
 
       it 'does NOT update the applicant' do
-        expect { patch_request }.not_to change { applicant.reload.email_address }
+        expect { patch_request }.not_to change { applicant.reload.email }
       end
 
       it 're-renders the form with the validation errors' do
@@ -151,7 +151,7 @@ RSpec.describe 'providers applicant requests', type: :request do
 
     it 'updates the applicant' do
       expect { patch_request }
-        .to change { applicant.reload.email_address }
+        .to change { applicant.reload.email }
         .from(original_email).to(new_email)
     end
 

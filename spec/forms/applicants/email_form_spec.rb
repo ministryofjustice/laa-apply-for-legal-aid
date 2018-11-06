@@ -7,13 +7,13 @@ RSpec.describe Applicants::EmailForm, type: :form do
     end
   end
 
-  let(:email_address) { Faker::Internet.safe_email }
-  let(:applicant) { create :applicant, email_address: nil }
+  let(:email) { Faker::Internet.safe_email }
+  let(:applicant) { create :applicant, email: nil }
   let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
 
   let(:params) do
     {
-      email_address: email_address,
+      email: email,
       model: applicant
     }
   end
@@ -27,18 +27,18 @@ RSpec.describe Applicants::EmailForm, type: :form do
     end
 
     it 'updates the email address' do
-      expect(applicant.email_address).to eq(email_address)
+      expect(applicant.email).to eq(email)
     end
 
     context 'with an invalid email' do
-      let(:email_address) { 'invalid' }
+      let(:email) { 'invalid' }
 
       it 'does not update the email address' do
-        expect(applicant.email_address).not_to eq(email_address)
+        expect(applicant.email).not_to eq(email)
       end
 
       it 'address errors' do
-        expect(subject.errors[:email_address]).to be_present
+        expect(subject.errors[:email]).to be_present
       end
     end
   end

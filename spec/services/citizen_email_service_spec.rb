@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CitizenEmailService do
-  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email_address: 'test@example.com') }
+  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: 'test@example.com') }
   let(:application) { create(:application, applicant: applicant) }
   let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{application.id}" }
 

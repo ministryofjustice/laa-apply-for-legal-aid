@@ -6,7 +6,7 @@ module V1
       if applicant.save
         render json: applicant, status: :created
       else
-        render_400 applicant.errors
+        render_400 applicant_errors
       end
     end
 
@@ -14,11 +14,16 @@ module V1
       if applicant.update(applicant_params)
         render json: applicant
       else
-        render_400 applicant.errors
+        render_400 applicant_errors
       end
     end
 
     private
+
+    def applicant_errors
+      applicant.errors.details[:email_address] = applicant.errors.details.delete(:email) if applicant.errors.details[:email]
+      applicant.errors
+    end
 
     def application
       @application ||= LegalAidApplication.find_by!(application_ref: params[:application_id])
@@ -29,7 +34,9 @@ module V1
     end
 
     def applicant_params
-      params.require(:applicant).permit(:first_name, :last_name, :date_of_birth, :email_address, :national_insurance_number)
+      params[:applicant][:email] = params.dig(:applicant, :email_address) if params[:applicant]
+      params.require(:applicant)
+            .permit(:first_name, :last_name, :email, :date_of_birth, :national_insurance_number)
     end
   end
 end
