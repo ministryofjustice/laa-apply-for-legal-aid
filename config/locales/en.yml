@@ -8,6 +8,7 @@ en:
     forms:
       text_fields:
         national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
+        postcode_hint: 'Postcode must be a valid UK postcode.'
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
