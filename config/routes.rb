@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :consent, only: [:show]
     resource :information, only: [:show]
     resources :accounts, only: [:index]
+    resources :additional_accounts, only: %i[index create new update]
   end
 
   namespace :providers do
