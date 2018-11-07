@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: [:show]
     resource :consent, only: [:show]
     resource :information, only: [:show]
+    resources :additional_accounts, only: %i[index create new update]
   end
 
   namespace :providers do
