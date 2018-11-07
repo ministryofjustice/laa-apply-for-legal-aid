@@ -61,7 +61,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
       let(:applicant) { nil }
 
       it 'should redirect to root' do
-        expect(subject).to redirect_to(root_path)
+        expect(subject).to redirect_to(citizens_consent_path)
       end
     end
 
@@ -77,7 +77,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
         allow_any_instance_of(Logger).to receive(:add)
         subject
         follow_redirect!
-        expect(request.env['REQUEST_URI']).to eq(root_path)
+        expect(request.env['REQUEST_URI']).to eq(citizens_consent_path)
       end
     end
   end

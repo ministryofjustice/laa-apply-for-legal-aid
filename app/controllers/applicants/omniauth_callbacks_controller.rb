@@ -14,12 +14,13 @@ module Applicants
         redirect_to citizens_accounts_path
       else
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
-        redirect_to root_path
+        redirect_to citizens_consent_path
       end
     end
 
     def failure
-      redirect_to root_path
+      set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Process cancelled')
+      redirect_to citizens_consent_path
     end
 
     private
