@@ -6,7 +6,6 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    
     <%= form_with(model: @form, scope: :address, url: providers_applicant_addresses_path(@applicant), local: true) do |form| %>
 
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
@@ -18,7 +17,6 @@
         <% end %>
       </h1>
     </legend>
-
 
       <% if form.object.lookup_postcode.present? %>
         <%= form.hidden_field :lookup_postcode %>
