@@ -1,19 +1,39 @@
 #!/bin/sh
 
-RELEASES=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q)
-RELEASE_COUNT=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q | wc -l)
-RELEASES_TO_KEEP=2
-DIFF=$((RELEASE_COUNT-RELEASES_TO_KEEP))
+clean_old_releases() {
+  RELEASES=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q)
+  RELEASE_COUNT=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q | wc -l)
+  RELEASES_TO_KEEP=2
+  DIFF=$((RELEASE_COUNT-RELEASES_TO_KEEP))
 
-echo "There are currently $RELEASE_COUNT releases."
+  echo "There are currently $RELEASE_COUNT releases."
 
-if [[ $DIFF -gt -0 ]]; then
-  RELEASES_TO_DELETE=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q | tail -n $DIFF)
+  if [[ $DIFF -gt -0 ]]; then
+    RELEASES_TO_DELETE=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q | tail -n $DIFF)
 
-  echo "Cleaning the $DIFF most old ones..."
-  for release in $RELEASES_TO_DELETE; do
-    echo "Deleting release $release..."
-  done
-else
-  echo "No old releases to clean. Yay!"
-fi
+    echo "Cleaning the $DIFF most old ones..."
+    for release in $RELEASES_TO_DELETE; do
+      echo "Deleting release $release..."
+    done
+  else
+    echo "No old releases to clean. Yay!"
+  fi
+}
+
+deploy() {
+  RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()')
+
+  helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
+                --install --force --wait \
+                --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
+                --namespace=${KUBE_ENV_UAT_NAMESPACE} \
+                --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
+                --set deploy.host="${RELEASE_BRANCH}-${UAT_HOST}" \
+                --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                --set image.tag="${CIRCLE_SHA1}" \
+                --set ingress.hosts="{${RELEASE_BRANCH}-${UAT_HOST}}" \
+                --set replicaCount="2"
+}
+
+clean_old_releases
+deploy

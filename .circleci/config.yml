@@ -101,18 +101,18 @@ jobs:
         command: |
 
           ./bin/uat_deploy
-          echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' -)\"" >> $BASH_ENV
-          source $BASH_ENV
-          helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
-                        --install --force --wait \
-                        --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
-                        --namespace=${KUBE_ENV_UAT_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
-                        --set deploy.host="${RELEASE_BRANCH}-${UAT_HOST}" \
-                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
-                        --set image.tag="${CIRCLE_SHA1}" \
-                        --set ingress.hosts="{${RELEASE_BRANCH}-${UAT_HOST}}" \
-                        --set replicaCount="2"
+          # echo "export RELEASE_BRANCH=\"$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' -)\"" >> $BASH_ENV
+          # source $BASH_ENV
+          # helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
+          #               --install --force --wait \
+          #               --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
+          #               --namespace=${KUBE_ENV_UAT_NAMESPACE} \
+          #               --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
+          #               --set deploy.host="${RELEASE_BRANCH}-${UAT_HOST}" \
+          #               --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+          #               --set image.tag="${CIRCLE_SHA1}" \
+          #               --set ingress.hosts="{${RELEASE_BRANCH}-${UAT_HOST}}" \
+          #               --set replicaCount="2"
 
   deploy_staging:
     <<: *deploy_container_config
