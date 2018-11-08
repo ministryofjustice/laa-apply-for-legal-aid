@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_093419) do
+
+ActiveRecord::Schema.define(version: 2018_11_07_110620) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -58,6 +60,53 @@ ActiveRecord::Schema.define(version: 2018_11_07_093419) do
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
+  create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "bank_provider_id", null: false
+    t.json "true_layer_response"
+    t.string "full_name"
+    t.string "full_address"
+    t.date "date_of_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bank_provider_id"], name: "index_bank_account_holders_on_bank_provider_id"
+  end
+
+  create_table "bank_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "bank_provider_id", null: false
+    t.json "true_layer_response"
+    t.json "true_layer_balance_response"
+    t.string "true_layer_id"
+    t.string "name"
+    t.string "currency"
+    t.string "account_number"
+    t.string "sort_code"
+    t.decimal "balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bank_provider_id"], name: "index_bank_accounts_on_bank_provider_id"
+  end
+
+  create_table "bank_providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "applicant_id", null: false
+    t.json "true_layer_response"
+    t.string "credentials_id"
+    t.string "token"
+    t.string "name"
+    t.string "true_layer_provider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["applicant_id"], name: "index_bank_providers_on_applicant_id"
+  end
+
+  create_table "bank_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "bank_account_id", null: false
+    t.json "true_layer_response"
+    t.string "true_layer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bank_account_id"], name: "index_bank_transactions_on_bank_account_id"
+  end
+
   create_table "benefit_check_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "result"
@@ -93,6 +142,10 @@ ActiveRecord::Schema.define(version: 2018_11_07_093419) do
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"
+  add_foreign_key "bank_account_holders", "bank_providers"
+  add_foreign_key "bank_accounts", "bank_providers"
+  add_foreign_key "bank_providers", "applicants"
+  add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
 end

@@ -8,6 +8,7 @@ class Applicant < ApplicationRecord
 
   has_one :legal_aid_application
   has_many :addresses
+  has_many :bank_providers
 
   validates :first_name, :last_name, :date_of_birth, :national_insurance_number, presence: true
 

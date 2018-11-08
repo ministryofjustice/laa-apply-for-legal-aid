@@ -10,9 +10,17 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
 
+Metrics/AbcSize:
+  Exclude:
+  - 'db/migrate/*'
+
 Metrics/BlockLength:
   Exclude:
   - 'spec/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+  - 'db/migrate/*'
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
