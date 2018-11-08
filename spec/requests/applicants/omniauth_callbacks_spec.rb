@@ -25,36 +25,24 @@ RSpec.describe 'applicants omniauth call back', type: :request do
   end
 
   describe 'GET /applicants/auth/true_layer/callback' do
+    let(:bank_data_import_service) { spy(TrueLayer::BankDataImportService) }
+
     subject { get applicant_true_layer_omniauth_callback_path }
+
+    before do
+      allow(TrueLayer::BankDataImportService)
+        .to receive(:new)
+        .with(applicant: applicant, token: token)
+        .and_return(bank_data_import_service)
+    end
 
     it 'should redirect to next page' do
       expect(subject).to redirect_to(citizens_accounts_path)
     end
 
-    it 'should persist token in applicant' do
+    it 'should import bank data' do
+      expect(bank_data_import_service).to receive(:call)
       subject
-      expect(applicant.reload.true_layer_token).to eq(token)
-    end
-
-    it 'should persist expires at in applicant' do
-      subject
-      expect(applicant.reload.true_layer_token_expires_at).to eq(expires_at)
-    end
-
-    context 'with a string time' do
-      let(:true_layer_expires_at) { expires_at.to_json }
-      it 'should persist expires at in applicant' do
-        subject
-        expect(applicant.reload.true_layer_token_expires_at).to eq(expires_at)
-      end
-    end
-
-    context 'with nil time' do
-      let(:true_layer_expires_at) { nil }
-      it 'should persist expires at in applicant' do
-        subject
-        expect(applicant.reload.true_layer_token_expires_at).to be_nil
-      end
     end
 
     context 'without applicant' do

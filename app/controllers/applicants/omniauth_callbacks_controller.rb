@@ -6,10 +6,7 @@ module Applicants
 
     def true_layer
       if applicant
-        applicant.update!(
-          true_layer_token: token,
-          true_layer_token_expires_at: token_expires_at
-        )
+        import_bank_data
         set_flash_message(:notice, :success, kind: 'TrueLayer')
         redirect_to citizens_accounts_path
       else
@@ -25,25 +22,15 @@ module Applicants
 
     private
 
+    def import_bank_data
+      TrueLayer::BankDataImportService.new(
+        applicant: applicant,
+        token: credentials.token
+      ).call
+    end
+
     def credentials
       @credentials ||= request.env['omniauth.auth'].credentials
-    end
-
-    def token
-      credentials.token
-    end
-
-    def token_expires_at
-      expires_at = credentials.expires_at
-      case expires_at
-      when Integer
-        Time.at(expires_at)
-      when String
-        Time.parse(expires_at)
-      else
-        Rails.logger.info 'Unable to determine expiry'
-        nil
-      end
     end
 
     def applicant
