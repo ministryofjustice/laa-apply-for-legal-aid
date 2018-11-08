@@ -21,17 +21,22 @@ clean_old_releases() {
 }
 
 deploy() {
+  IMG_REPO="$ECR_ENDPOINT/$GITHUB_TEAM_NAME_SLUG/$REPO_NAME"
   RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()')
+  RELEASE_NAME="$APPLICATION_DEPLOY_NAME-$RELEASE_BRANCH"
+  RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
 
-  helm upgrade ${APPLICATION_DEPLOY_NAME}-${RELEASE_BRANCH} ./helm_deploy/apply-for-legal-aid/. \
+  echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
+
+  helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
                 --install --force --wait \
                 --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                 --namespace=${KUBE_ENV_UAT_NAMESPACE} \
                 --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
-                --set deploy.host="${RELEASE_BRANCH}-${UAT_HOST}" \
-                --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                --set deploy.host="$RELEASE_HOST" \
+                --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set ingress.hosts="{${RELEASE_BRANCH}-${UAT_HOST}}" \
+                --set ingress.hosts="{$RELEASE_HOST}" \
                 --set replicaCount="2"
 }
 
