@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_153145) do
+ActiveRecord::Schema.define(version: 2018_11_08_115540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -150,6 +150,12 @@ ActiveRecord::Schema.define(version: 2018_11_13_153145) do
     t.string "ccms_matter"
     t.string "ccms_matter_code"
     t.index ["code"], name: "index_proceeding_types_on_code"
+  end
+
+  create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "addresses", "applicants"
