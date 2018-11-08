@@ -20,7 +20,8 @@
 
       <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode,
                                                                 form: form,
-                                                                class: 'govuk-input--width-10' } %>
+                                                                class: 'govuk-input--width-10',
+                                                                hint?: true } %>
 
       <%= form.submit 'Find address', id: 'find-address', class: 'govuk-button' %>
 

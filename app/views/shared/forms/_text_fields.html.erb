@@ -6,8 +6,10 @@
 <div class="govuk-form-group <%= group_error_class %>">
   <%= form.label field_name, class: ['govuk-label'] %>
   <% hint = t(".#{field_name}_hint", default: '') %>
-    <% if hint.present? %>
-      <%= content_tag(:span, hint, id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
+    <% if local_assigns[:hint?] == true %>
+      <% if hint.present? %>
+        <%= content_tag(:span, hint, id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
+      <% end %>
     <% end %>
   <% if form.object.errors[field_with_error].any? %>
     <%= content_tag(:span, form.object.errors[field_name].first, class: ['govuk-error-message']) %>
