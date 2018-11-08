@@ -16,6 +16,11 @@ VCR.configure do |vcr_config|
     uri = URI(request.uri)
     uri.to_s =~ /__identify__/ || uri.to_s =~ /127.0.0.1.*(session|shutdown)/
   end
+  vcr_config.filter_sensitive_data('<GOVUK_NOTIFY_API_KEY>') { ENV['GOVUK_NOTIFY_API_KEY'] }
+  vcr_config.filter_sensitive_data('<ORDNANACE_SURVEY_API_KEY>') { ENV['ORDNANACE_SURVEY_API_KEY'] }
+  vcr_config.filter_sensitive_data('<BC_LSC_SERVICE_NAME>') { ENV['BC_LSC_SERVICE_NAME'] }
+  vcr_config.filter_sensitive_data('<BC_CLIENT_ORG_ID>') { ENV['BC_CLIENT_ORG_ID'] }
+  vcr_config.filter_sensitive_data('<BC_CLIENT_USER_ID>') { ENV['BC_CLIENT_USER_ID'] }
 end
 
 VCR.cucumber_tags do |t|
