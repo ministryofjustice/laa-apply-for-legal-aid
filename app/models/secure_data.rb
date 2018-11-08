@@ -1,5 +1,4 @@
 class SecureData < ApplicationRecord
-
   def self.create_and_store(hash)
     secure_data = new
     secure_data.store(hash)
@@ -18,5 +17,4 @@ class SecureData < ApplicationRecord
   def retrieve
     JWT.decode(data, nil, false).first.symbolize_keys
   end
-
 end

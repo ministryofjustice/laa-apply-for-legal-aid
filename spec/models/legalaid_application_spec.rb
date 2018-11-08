@@ -89,4 +89,25 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
     end
   end
+
+  describe '#generate_secure_id' do
+    let(:legal_aid_application) { create :legal_aid_application }
+    let(:secure_data) { SecureData.last }
+
+    subject { legal_aid_application.generate_secure_id }
+
+    it 'generates a new secure data object' do
+      expect { subject }.to change { SecureData.count }.by(1)
+    end
+
+    it 'returns the generated id' do
+      expect(subject).to eq(secure_data.id)
+    end
+
+    it 'generates data that can be used to find application' do
+      id = subject
+      secure_data = SecureData.find(id)
+      expect(described_class.find_by(secure_data.retrieve)).to eq(legal_aid_application)
+    end
+  end
 end

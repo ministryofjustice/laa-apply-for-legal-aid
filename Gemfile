@@ -38,8 +38,8 @@ group :development, :test do
   gem 'rubocop', require: false
 
   # Available in dev env for generators
-  gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do

@@ -27,6 +27,13 @@ class LegalAidApplication < ApplicationRecord
     benefit_check_result.positive?
   end
 
+  def generate_secure_id
+    SecureData.create_and_store(
+      id: id,
+      applicant_id: applicant_id
+    )
+  end
+
   private
 
   def proceeding_type_codes_existence
