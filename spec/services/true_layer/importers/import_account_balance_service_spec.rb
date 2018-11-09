@@ -1,36 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
-  let(:bank_account) { create :bank_account }
+  let(:mock_account) { TrueLayerHelpers::MOCK_DATA[:accounts].first }
+  let(:mock_result) { mock_account[:balance] }
+  let(:bank_account) { create :bank_account, true_layer_id: mock_account[:account_id] }
   let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
 
   subject { described_class.new(api_client, bank_account) }
 
   describe '#call' do
-    let(:path) { "/data/v1/accounts/#{bank_account.true_layer_id}/balance" }
-    let(:endpoint) { TrueLayer::ApiClient::TRUE_LAYER_URL + path }
-    let(:result) { { current: Faker::Number.decimal(2).to_f } }
-    let(:response_body) { { results: [result] }.to_json }
+    context 'request is successful' do
+      before do
+        stub_true_layer_account_balances
+      end
 
-    before do
-      stub_request(:get, endpoint).to_return(body: response_body)
-    end
-
-    it 'updates the balance of the account' do
-      expect { subject.call }.to change { bank_account.balance.to_s }.to(result[:current].to_s)
+      it 'updates the balance of the account' do
+        expect { subject.call }.to change { bank_account.balance.to_s }.to(mock_result[:current].to_s)
+      end
     end
 
     context 'request is not successful' do
-      let(:response_body) do
-        {
-          error_description: 'Feature not supported by the provider',
-          error: :endpoint_not_supported,
-          error_details: {}
-        }.to_json
-      end
-
       before do
-        stub_request(:get, endpoint).to_return(body: response_body, status: 501)
+        stub_true_layer_error
       end
 
       it 'does not change the balance of the account' do

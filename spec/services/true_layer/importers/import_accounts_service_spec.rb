@@ -7,70 +7,41 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
   subject { described_class.new(api_client, bank_provider) }
 
   describe '#call' do
-    let(:path) { '/data/v1/accounts' }
-    let(:endpoint) { TrueLayer::ApiClient::TRUE_LAYER_URL + path }
-    let(:result_1) do
-      {
-        account_id: SecureRandom.hex,
-        display_name: Faker::Bank.name,
-        currency: Faker::Currency.code,
-        account_number: {
-          number: Faker::Number.number(10),
-          sort_code: Faker::Number.number(6)
-        }
-      }
-    end
-    let(:result_2) do
-      {
-        account_id: SecureRandom.hex,
-        display_name: Faker::Bank.name,
-        currency: Faker::Currency.code,
-        account_number: {
-          number: Faker::Number.number(10),
-          sort_code: Faker::Number.number(6)
-        }
-      }
-    end
-    let(:results) { [result_1, result_2] }
-    let(:response_body) { { results: results }.to_json }
-    let(:bank_account_1) { bank_provider.bank_accounts.find_by(true_layer_id: result_1[:account_id]) }
-    let(:bank_account_2) { bank_provider.bank_accounts.find_by(true_layer_id: result_2[:account_id]) }
+    let(:mock_account_1) { TrueLayerHelpers::MOCK_DATA[:accounts][0] }
+    let(:mock_account_2) { TrueLayerHelpers::MOCK_DATA[:accounts][1] }
+    let(:bank_account_1) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account_1[:account_id]) }
+    let(:bank_account_2) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account_2[:account_id]) }
+    let!(:existing_bank_account) { create :bank_account_holder, bank_provider: bank_provider }
     let!(:existing_bank_account) { create :bank_account, bank_provider: bank_provider }
     let!(:existing_bank_account_transaction) { create :bank_transaction, bank_account: existing_bank_account }
 
-    before do
-      stub_request(:get, endpoint).to_return(body: response_body)
-    end
+    context 'request is successful' do
+      before do
+        stub_true_layer_accounts
+      end
 
-    it 'adds the bank accounts to the bank_provider' do
-      subject.call
-      expect(bank_account_1.true_layer_response).to eq(result_1.deep_stringify_keys)
-      expect(bank_account_1.true_layer_id).to eq(result_1[:account_id])
-      expect(bank_account_1.name).to eq(result_1[:display_name])
-      expect(bank_account_1.currency).to eq(result_1[:currency])
-      expect(bank_account_1.account_number).to eq(result_1[:account_number][:number])
-      expect(bank_account_1.sort_code).to eq(result_1[:account_number][:sort_code])
-      expect(bank_account_2.true_layer_response).to eq(result_2.deep_stringify_keys)
-      expect(bank_account_2.true_layer_id).to eq(result_2[:account_id])
-    end
+      it 'adds the bank accounts to the bank_provider' do
+        subject.call
+        expect(bank_account_1.true_layer_response).to eq(mock_account_1.deep_stringify_keys)
+        expect(bank_account_1.true_layer_id).to eq(mock_account_1[:account_id])
+        expect(bank_account_1.name).to eq(mock_account_1[:display_name])
+        expect(bank_account_1.currency).to eq(mock_account_1[:currency])
+        expect(bank_account_1.account_number).to eq(mock_account_1[:account_number][:number])
+        expect(bank_account_1.sort_code).to eq(mock_account_1[:account_number][:sort_code])
+        expect(bank_account_2.true_layer_response).to eq(mock_account_2.deep_stringify_keys)
+        expect(bank_account_2.true_layer_id).to eq(mock_account_2[:account_id])
+      end
 
-    it 'removes existing bank account and transactions' do
-      subject.call
-      expect { existing_bank_account.reload }.to raise_error ActiveRecord::RecordNotFound
-      expect { existing_bank_account_transaction.reload }.to raise_error ActiveRecord::RecordNotFound
+      it 'removes existing bank account and transactions' do
+        subject.call
+        expect { existing_bank_account.reload }.to raise_error ActiveRecord::RecordNotFound
+        expect { existing_bank_account_transaction.reload }.to raise_error ActiveRecord::RecordNotFound
+      end
     end
 
     context 'request is not successful' do
-      let(:response_body) do
-        {
-          error_description: 'Feature not supported by the provider',
-          error: :endpoint_not_supported,
-          error_details: {}
-        }.to_json
-      end
-
       before do
-        stub_request(:get, endpoint).to_return(body: response_body, status: 501)
+        stub_true_layer_error
       end
 
       it 'leaves the list of bank accounts empty' do
