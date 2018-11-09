@@ -102,8 +102,6 @@ en:
       postcode_hint: 'Postcode must be a valid UK postcode.'
     address_manual:
       heading: "Enter your client's address manually"
-    address_manual:
-      heading: "Enter your client's address manually"
     address_selection:
       heading: "Enter your client's home address"
     client_detail:
