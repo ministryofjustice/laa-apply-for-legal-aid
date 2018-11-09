@@ -34,7 +34,7 @@ RSpec.describe 'address requests', type: :request do
       get_request
 
       expect(response).to be_successful
-      expect(response.body).to include(CGI.escapeHTML("Enter your client's address manually"))
+      expect(unescaped_response_body).to include("Enter your client's address manually")
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe 'address requests', type: :request do
 
       it 'renders the form again if validation fails' do
         post_request
-        expect(response.body).to include(CGI.escapeHTML("Enter your client's address manually"))
+        expect(unescaped_response_body).to include("Enter your client's address manually")
         expect(response.body).to include('Enter a postcode')
       end
     end
