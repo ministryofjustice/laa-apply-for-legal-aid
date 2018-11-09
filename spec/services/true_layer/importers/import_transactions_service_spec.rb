@@ -7,8 +7,11 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   subject { described_class.new(api_client, bank_account) }
 
   describe '#call' do
+    let(:now) { '6/11/2018 15:10:00 +0000'.to_time }
+    let(:now_minus_3_month) { '5/08/2018 00:00:00 +0000'.to_time }
     let(:path) { "/data/v1/accounts/#{bank_account.true_layer_id}/transactions" }
-    let(:endpoint) { TrueLayer::ApiClient::TRUE_LAYER_URL + path }
+    let(:params) { { to: now.utc.iso8601, from: now_minus_3_month.utc.iso8601 }.to_query }
+    let(:endpoint) { "#{TrueLayer::ApiClient::TRUE_LAYER_URL}#{path}?#{params}" }
     let(:result_1) do
       {
         transaction_id: SecureRandom.hex
@@ -26,6 +29,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let!(:existing_transaction) { create :bank_transaction, bank_account: bank_account }
 
     before do
+      allow(Time).to receive(:now).and_return(now)
       stub_request(:get, endpoint).to_return(body: response_body)
     end
 
@@ -40,6 +44,14 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     it 'removes existing transactions' do
       subject.call
       expect { existing_transaction.reload }.to raise_error ActiveRecord::RecordNotFound
+    end
+
+    it 'requests 3 months of transactions' do
+      expect(api_client)
+        .to receive(:transactions)
+        .with(bank_account.true_layer_id, now_minus_3_month, now)
+        .and_call_original
+      subject.call
     end
 
     context 'request is not successful' do

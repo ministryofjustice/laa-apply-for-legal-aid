@@ -25,7 +25,15 @@ module TrueLayer
       end
 
       def true_layer_resources
-        @true_layer_resources ||= api_client.transactions(bank_account.true_layer_id)
+        @true_layer_resources ||= api_client.transactions(bank_account.true_layer_id, date_from, date_to)
+      end
+
+      def date_to
+        @date_to ||= Time.now
+      end
+
+      def date_from
+        @date_from ||= (date_to - 3.months - 1.day).beginning_of_day
       end
     end
   end

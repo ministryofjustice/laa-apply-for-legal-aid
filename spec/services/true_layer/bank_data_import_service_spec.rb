@@ -65,7 +65,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       subject.call
     end
 
-    it 'imports the bank account balances' do
+    it 'imports the transactions' do
       expect(import_transactions_service_1).to receive(:call)
       expect(import_transactions_service_2).to receive(:call)
       subject.call

@@ -18,8 +18,12 @@ module TrueLayer
       perform_lookup('/data/v1/accounts')
     end
 
-    def transactions(account_id)
-      perform_lookup("/data/v1/accounts/#{account_id}/transactions")
+    def transactions(account_id, date_from, date_to)
+      params = {
+        from: date_from.utc.iso8601,
+        to: date_to.utc.iso8601
+      }
+      perform_lookup("/data/v1/accounts/#{account_id}/transactions?#{params.to_query}")
     end
 
     def account_balance(account_id)

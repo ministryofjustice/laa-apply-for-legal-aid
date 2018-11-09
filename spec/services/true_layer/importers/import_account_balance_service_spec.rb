@@ -9,11 +9,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
   describe '#call' do
     let(:path) { "/data/v1/accounts/#{bank_account.true_layer_id}/balance" }
     let(:endpoint) { TrueLayer::ApiClient::TRUE_LAYER_URL + path }
-    let(:result) do
-      {
-        current: Faker::Number.decimal(2).to_f
-      }
-    end
+    let(:result) { { current: Faker::Number.decimal(2).to_f } }
     let(:response_body) { { results: [result] }.to_json }
 
     before do
