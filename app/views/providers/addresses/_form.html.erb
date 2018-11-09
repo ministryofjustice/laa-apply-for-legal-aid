@@ -48,7 +48,7 @@
 
       <%= render partial: 'shared/forms/text_fields', locals: { field_name: :city, class: 'govuk-!-width-two-thirds', form: form } %>
       <%= render partial: 'shared/forms/text_fields', locals: { field_name: :county, class: 'govuk-!-width-two-thirds', form: form } %>
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode, class: 'govuk-input--width-10', form: form } %>
+      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode, class: 'govuk-input--width-10', form: form, hide_hint?: true } %>
 
       <%= form.submit 'Continue', id: 'continue', class: 'govuk-button' %>
     <% end %>
