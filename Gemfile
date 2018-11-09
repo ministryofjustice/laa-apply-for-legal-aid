@@ -20,6 +20,11 @@ gem 'webdack-uuid_migration', '~> 1.2.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Authentication
+gem 'devise' # User authentication
+gem 'omniauth'
+gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
@@ -39,6 +44,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'chromedriver-helper'
+  gem 'climate_control' # Allows environment variables to be modified within specs
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'

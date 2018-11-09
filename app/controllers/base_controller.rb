@@ -1,3 +1,3 @@
-class BaseController < ActionController::Base
+class BaseController < ApplicationController
   layout 'application'
 end

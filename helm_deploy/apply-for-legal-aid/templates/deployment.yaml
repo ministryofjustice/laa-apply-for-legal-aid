@@ -90,6 +90,21 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: benefitCheckerWsdlUrl
+          - name: TRUE_LAYER_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: trueLayerClientId
+          - name: TRUE_LAYER_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: trueLayerClientSecret
+          - name: TRUE_LAYER_ENABLE_MOCK
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: trueLayerEnableMock
           ports:
             - name: http
               containerPort: 3002

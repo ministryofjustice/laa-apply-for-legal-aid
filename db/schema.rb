@@ -34,8 +34,19 @@ ActiveRecord::Schema.define(version: 2018_11_01_115246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "last_name"
-    t.string "email_address"
+    t.string "email"
     t.string "national_insurance_number"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.text "true_layer_token"
+    t.datetime "true_layer_token_expires_at"
+    t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_applicants_on_email", unique: true
+    t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
   end
 
   create_table "application_proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
