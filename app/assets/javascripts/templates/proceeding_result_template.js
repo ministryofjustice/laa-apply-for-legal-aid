@@ -3,9 +3,9 @@ var templates = (function(){
 
     return `<div class="govuk-grid-row proceeding-item" style="display: block;">
               <div class="govuk-grid-column-two-thirds">
-                <a class="govuk-caption-m">
+                <div class="govuk-caption-m">
                   ` + categoryOfLaw + ' > ' + matterType + `
-                </a>
+                </div>
                 <span class="govuk-body">` + proceedingMeaning + `</span>
               </div>
 
@@ -14,6 +14,7 @@ var templates = (function(){
                         name="proceeding_type"
                         value="` + proceedingCode + `"
                         id="proceedingType` + proceedingCode + `" />
+                <div class="govuk-!-padding-bottom-2"></div>
                 <input  type="button"
                         value="Select and continue"
                         class="govuk-button proceeding-link"
