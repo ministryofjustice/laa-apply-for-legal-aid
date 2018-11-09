@@ -4,38 +4,13 @@
 
   <%= form_tag(citizens_additional_account_path(id: :update), method: :patch) do %>
 
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-          <h1 class="govuk-fieldset__heading">
-            Do you have online access to your accounts with other banks?
-          </h1>
-        </legend>
-        <br />
-        <span class="govuk-hint">
-          If you do not, you will need to provide paper evidence for these accounts.
-        </span>
-        <% if flash[:alert] %>
-          <%= flash[:alert] %>
-        <% end %>
-        <div class="govuk-radios">
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="additional-account-1" name="additional_account" type="radio" value="yes" />
-            <label class="govuk-label govuk-radios__label" for="additional-account-1">
-              Yes
-            </label>
-          </div>
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="additional-account-2" name="additional_account" type="radio" value="no" />
-            <label class="govuk-label govuk-radios__label" for="additional-account-2">
-              No
-            </label>
-          </div>
-        </div>
-      </fieldset>
-    </div>
+    <%= govuk_form_group do %>
+      <%= govuk_fieldset_header 'Do you have online access to your accounts with other banks?', padding_below: 6 %>
+      <%= govuk_hint 'If you do not, you will need to provide paper evidence for these accounts.' %>
+      <%= govuk_radio_inputs :has_offline_accounts, yes: 'Yes', no: 'No' %>
+    <% end %>
 
-    <%= submit_tag 'Continue', class: 'govuk-button govuk-button' %>
+    <%= govuk_submit_button 'Continue' %>
 
   <% end %>
 
