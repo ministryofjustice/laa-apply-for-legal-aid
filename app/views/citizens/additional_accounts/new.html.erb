@@ -1,0 +1,43 @@
+<% content_for :navigation do %>
+  <%#= link_to 'Back', path-to-be-determined, class: 'govuk-back-link', id: 'back' %>
+<% end %>
+
+  <%= form_tag(citizens_additional_account_path(id: :update), method: :patch) do %>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            Do you have online access to your accounts with other banks?
+          </h1>
+        </legend>
+        <br />
+        <span class="govuk-hint">
+          If you do not, you will need to provide paper evidence for these accounts.
+        </span>
+        <% if flash[:alert] %>
+          <%= flash[:alert] %>
+        <% end %>
+        <div class="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="additional-account-1" name="additional_account" type="radio" value="yes" />
+            <label class="govuk-label govuk-radios__label" for="additional-account-1">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="additional-account-2" name="additional_account" type="radio" value="no" />
+            <label class="govuk-label govuk-radios__label" for="additional-account-2">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <%= submit_tag 'Continue', class: 'govuk-button govuk-button' %>
+
+  <% end %>
+
+  </div>
+</div>
