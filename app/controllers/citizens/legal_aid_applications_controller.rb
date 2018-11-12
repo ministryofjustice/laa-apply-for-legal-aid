@@ -1,10 +1,10 @@
 module Citizens
   class LegalAidApplicationsController < BaseController
     def show
-      @application_ref = params[:id]
-      session[:current_application_ref] = @application_ref
-      application = LegalAidApplication.find(@application_ref)
-      @applicant = application.applicant
+      secure_id = params[:id]
+      legal_aid_application = LegalAidApplication.find_by_secure_id(secure_id)
+      session[:current_application_ref] = legal_aid_application.id
+      @applicant = legal_aid_application&.applicant
 
       # TODO: Use an independent token to identify application
       # (e.g. A Devise generated one rather than legal_aid_applicantion.application_ref)

@@ -10,6 +10,22 @@ class LegalAidApplication < ApplicationRecord
 
   validate :proceeding_type_codes_existence
 
+  def self.find_by_secure_id(secure_id)
+    secure_data = SecureData.find(secure_id)
+    find_by! secure_data.retrieve[:find_by]
+  end
+
+  def generate_secure_id
+    SecureData.create_and_store(
+      find_by: {
+        id: id,
+        applicant_id: applicant_id
+      },
+      # Timestamp so token unique for each secure id. May not be needed if token signed
+      timestamp: Time.now.to_s
+    )
+  end
+
   def proceeding_type_codes=(codes)
     @proceeding_type_codes = codes
     self.proceeding_types = ProceedingType.where(code: codes)
@@ -25,13 +41,6 @@ class LegalAidApplication < ApplicationRecord
 
   def applicant_receives_benefit?
     benefit_check_result.positive?
-  end
-
-  def generate_secure_id
-    SecureData.create_and_store(
-      id: id,
-      applicant_id: applicant_id
-    )
   end
 
   private

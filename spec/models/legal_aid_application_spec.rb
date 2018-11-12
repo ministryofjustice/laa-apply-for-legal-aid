@@ -110,4 +110,13 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(described_class.find_by(secure_data.retrieve)).to eq(legal_aid_application)
     end
   end
+
+  describe '.find_by_secure_id' do
+    let(:legal_aid_application) { create :legal_aid_application }
+    let(:secure_id) { legal_aid_application.generate_secure_id }
+
+    it 'should return matching legal aid application' do
+      expect(described_class.find_by_secure_id(secure_id)).to eq(legal_aid_application)
+    end
+  end
 end

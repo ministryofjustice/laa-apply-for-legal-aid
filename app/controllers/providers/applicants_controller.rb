@@ -26,7 +26,10 @@ module Providers
       @form = Applicants::EmailForm.new(edit_params)
 
       if @form.save
-        redirect_to action_for_next_step(options: { application: legal_aid_application, applicant: @form.model })
+        redirect_to(
+          action_for_next_step(options: { application: legal_aid_application, applicant: @form.model }),
+          notice: "Email link will be to: #{citizens_legal_aid_application_url(secure_id)}"
+        )
       else
         render :edit
       end
@@ -56,6 +59,10 @@ module Providers
 
     def set_current_step
       @current_step = %w[edit update].include?(params[:action]) ? :email : :basic_details
+    end
+
+    def secure_id
+      legal_aid_application.generate_secure_id
     end
   end
 end
