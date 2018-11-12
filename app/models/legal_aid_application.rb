@@ -21,7 +21,7 @@ class LegalAidApplication < ApplicationRecord
         id: id,
         applicant_id: applicant_id
       },
-      # Timestamp so token unique for each secure id. May not be needed if token signed
+      # Timestamp so token unique for each secure id
       timestamp: Time.now.to_s
     )
   end

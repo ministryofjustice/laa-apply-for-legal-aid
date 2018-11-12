@@ -107,7 +107,7 @@ RSpec.describe LegalAidApplication, type: :model do
     it 'generates data that can be used to find application' do
       id = subject
       secure_data = SecureData.find(id)
-      expect(described_class.find_by(secure_data.retrieve)).to eq(legal_aid_application)
+      expect(described_class.find_by(secure_data.retrieve[:find_by])).to eq(legal_aid_application)
     end
   end
 
