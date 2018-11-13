@@ -4,8 +4,6 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
   let(:bank_provider) { create :bank_provider }
   let(:api_client) { TrueLayer::ApiClient.new(bank_provider.token) }
 
-  subject { described_class.new(api_client, bank_provider) }
-
   describe '#call' do
     let(:mock_account_holder_1) { TrueLayerHelpers::MOCK_DATA[:account_holders][0] }
     let(:mock_account_holder_2) { TrueLayerHelpers::MOCK_DATA[:account_holders][1] }
@@ -13,13 +11,15 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
     let(:bank_account_holder_2) { bank_provider.bank_account_holders.find_by(full_name: mock_account_holder_2[:full_name]) }
     let!(:existing_bank_account_holder) { create :bank_account_holder, bank_provider: bank_provider }
 
+    subject { described_class.call(api_client, bank_provider) }
+
     context 'request is successful' do
       before do
         stub_true_layer_account_holders
       end
 
       it 'adds the bank account holders to the bank_provider' do
-        subject.call
+        subject
         expect(bank_account_holder_1.full_name).to eq(mock_account_holder_1[:full_name])
         expect(bank_account_holder_1.true_layer_response).to eq(mock_account_holder_1.deep_stringify_keys)
         expected_full_address = mock_account_holder_1[:addresses]&.map do |address|
@@ -31,8 +31,12 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
       end
 
       it 'removes existing bank account holders' do
-        subject.call
+        subject
         expect { existing_bank_account_holder.reload }.to raise_error ActiveRecord::RecordNotFound
+      end
+
+      it 'is successful' do
+        expect(subject.success?).to eq(true)
       end
     end
 
@@ -41,8 +45,12 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
         stub_true_layer_error
       end
 
-      it 'leaves the list of bank account holders empty' do
-        expect { subject.call }.to change { bank_provider.bank_account_holders.count }.to(0)
+      it 'does not change anything' do
+        expect { subject }.not_to change { bank_provider.bank_account_holders.count }
+      end
+
+      it 'returns an error' do
+        expect(subject.errors.keys.first).to eq(:import_account_holders)
       end
     end
   end

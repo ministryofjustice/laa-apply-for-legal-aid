@@ -5,13 +5,13 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
   let(:api_client) { TrueLayer::ApiClient.new(token) }
   let(:applicant) { create :applicant }
 
-  subject { described_class.new(api_client, applicant, token) }
-
   describe '#call' do
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }
     let(:bank_provider) { applicant.bank_providers.find_by(credentials_id: mock_provider[:credentials_id]) }
     let(:existing_credentials_id) { SecureRandom.hex }
     let!(:existing_provider) { create :bank_provider, applicant: applicant, credentials_id: existing_credentials_id }
+
+    subject { described_class.call(api_client, applicant, token) }
 
     context 'request is successful' do
       before do
@@ -19,7 +19,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
 
       it 'adds the bank provider to the applicant' do
-        expect { subject.call }.to change { applicant.bank_providers.count } .by(1)
+        expect { subject }.to change { applicant.bank_providers.count } .by(1)
         expect(bank_provider.true_layer_response).to eq(mock_provider.deep_stringify_keys)
         expect(bank_provider.credentials_id).to eq(mock_provider[:credentials_id])
         expect(bank_provider.token).to eq(token)
@@ -28,24 +28,28 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
 
       it 'returns the bank provider' do
-        result = subject.call
-        expect(result).to eq(bank_provider)
+        command = subject
+        expect(command.result).to eq(bank_provider)
       end
 
       context 'existing provider has same credentials_id' do
         let(:existing_credentials_id) { mock_provider[:credentials_id] }
 
         it 'does not create another bank provider' do
-          expect { subject.call }.not_to change { applicant.bank_providers.count }
+          expect { subject }.not_to change { applicant.bank_providers.count }
         end
 
         it 'updates the current bank provider' do
-          subject.call
+          subject
           expect(bank_provider.true_layer_response).to eq(mock_provider.deep_stringify_keys)
           expect(bank_provider.token).to eq(token)
           expect(bank_provider.name).to eq(mock_provider[:provider][:display_name])
           expect(bank_provider.true_layer_provider_id).to eq(mock_provider[:provider][:provider_id])
         end
+      end
+
+      it 'is successful' do
+        expect(subject.success?).to eq(true)
       end
     end
 
@@ -55,7 +59,11 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
 
       it 'returns nil' do
-        expect { subject.call }.not_to change { applicant.bank_providers.count }
+        expect { subject }.not_to change { applicant.bank_providers.count }
+      end
+
+      it 'returns an error' do
+        expect(subject.errors.keys.first).to eq(:import_provider)
       end
     end
   end

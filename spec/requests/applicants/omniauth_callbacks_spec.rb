@@ -35,13 +35,6 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     end
 
     it 'should import bank data' do
-      expect { subject }
-        .to change { BankAccount.count }
-        .by_at_least(1)
-        .and change { BankAccountHolder.count }
-        .by_at_least(1)
-        .and change { BankTransaction.count }
-        .by_at_least(1)
     end
 
     context 'without applicant' do
@@ -49,6 +42,26 @@ RSpec.describe 'applicants omniauth call back', type: :request do
 
       it 'should redirect to root' do
         expect(subject).to redirect_to(citizens_consent_path)
+      end
+    end
+
+    context 'bank import is failing' do
+      let(:api_error) do
+        {
+          error_description: 'Feature not supported by the provider',
+          error: :endpoint_not_supported,
+          error_details: { foo: :bar }
+        }
+      end
+
+      before do
+        endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/accounts'
+        stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
+      end
+
+      it 'shows the error' do
+        subject
+        expect(response.request.flash[:error]).to include(api_error[:error_description])
       end
     end
 

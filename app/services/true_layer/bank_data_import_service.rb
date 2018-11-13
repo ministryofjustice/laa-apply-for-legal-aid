@@ -1,45 +1,85 @@
 module TrueLayer
   class BankDataImportService
+    prepend SimpleCommand
+
     def initialize(applicant:, token:)
       @applicant = applicant
       @token = token
     end
 
     def call
-      return unless bank_provider
-
-      import_bank_accounts
-      import_account_holders
-      import_transactions
+      ActiveRecord::Base.transaction do
+        import_bank_data
+        raise ActiveRecord::Rollback if error
+      end
+      save_error if error
     end
 
     private
 
-    attr_reader :applicant, :token
+    attr_accessor :applicant, :token, :bank_provider, :bank_name, :error
 
-    def bank_provider
-      @bank_provider ||= Importers::ImportProviderService.new(api_client, applicant, token).call
+    def import_bank_data
+      import_bank_provider
+      import_account_holders unless error
+      import_bank_accounts unless error
+      import_bank_account_balances unless error
+      import_transactions unless error
     end
 
-    def import_bank_accounts
-      Importers::ImportAccountsService.new(api_client, bank_provider).call
-      bank_provider.bank_accounts.each do |account|
-        Importers::ImportAccountBalanceService.new(api_client, account).call
+    def import_bank_provider
+      command = Importers::ImportProviderService.call(api_client, applicant, token)
+      if command.success?
+        self.bank_provider = command.result
+        self.bank_name = bank_provider.name
+      else
+        self.error = command.errors.first
       end
     end
 
     def import_account_holders
-      Importers::ImportAccountHoldersService.new(api_client, bank_provider).call
+      command = Importers::ImportAccountHoldersService.call(api_client, bank_provider)
+      self.error = command.errors.first unless command.success?
+    end
+
+    def import_bank_accounts
+      command = Importers::ImportAccountsService.call(api_client, bank_provider)
+      self.error = command.errors.first unless command.success?
+    end
+
+    def import_bank_account_balances
+      bank_provider.bank_accounts.each do |account|
+        import_account_balance(account) unless error
+      end
     end
 
     def import_transactions
       bank_provider.bank_accounts.each do |account|
-        Importers::ImportTransactionsService.new(api_client, account).call
+        import_account_transactions(account) unless error
       end
+    end
+
+    def import_account_balance(account)
+      command = Importers::ImportAccountBalanceService.call(api_client, account)
+      self.error = command.errors.first unless command.success?
+    end
+
+    def import_account_transactions(account)
+      command = Importers::ImportTransactionsService.call(api_client, account)
+      self.error = command.errors.first unless command.success?
     end
 
     def api_client
       @api_client ||= ApiClient.new(token)
+    end
+
+    def save_error
+      BankError.create!(
+        applicant: applicant,
+        bank_name: bank_name,
+        error: error
+      )
+      errors.add(:bank_data_import, error)
     end
   end
 end

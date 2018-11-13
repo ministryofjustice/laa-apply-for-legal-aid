@@ -1,5 +1,6 @@
 module TrueLayer
   class ApiClient
+    ApiError = Class.new(StandardError)
     TRUE_LAYER_URL = 'https://api.truelayer.com'.freeze
 
     def initialize(token)
@@ -7,7 +8,7 @@ module TrueLayer
     end
 
     def provider
-      perform_lookup('/data/v1/me').first
+      perform_lookup('/data/v1/me')
     end
 
     def account_holders
@@ -27,7 +28,7 @@ module TrueLayer
     end
 
     def account_balance(account_id)
-      perform_lookup("/data/v1/accounts/#{account_id}/balance").first
+      perform_lookup("/data/v1/accounts/#{account_id}/balance")
     end
 
     private
@@ -36,17 +37,32 @@ module TrueLayer
 
     def perform_lookup(path)
       response = connection.get(path)
-
+      parsed_response = parsed_response(response)
       if response.success?
-        JSON.parse(response.body).deep_symbolize_keys[:results]
+        SimpleResult.new(value: parsed_response.deep_symbolize_keys[:results])
       else
-        # TODO: implement better logic in dealing with errors
+        # TODO: implement white list of inevitable errors
         # some errors are inevitable (like "Feature not supported by the provider")
-        # while others need to be addressed
+        # standard errors should be logged in Sentry
 
-        Rails.logger.warn("TrueLayer Error : #{response.body}")
-        []
+        raise ApiError, "TrueLayer Error : #{response.body}"
+        simple_error(parsed_response)
       end
+    rescue JSON::ParserError => e
+      simple_error(e)
+    rescue Faraday::ConnectionFailed => e
+      simple_error(e)
+    rescue ApiError => e
+      simple_error(e)
+    end
+
+    def parsed_response(response)
+      JSON.parse(response.body)
+    end
+
+    def simple_error(error)
+      Raven.capture_exception(error)
+      SimpleResult.new(error: error)
     end
 
     def connection

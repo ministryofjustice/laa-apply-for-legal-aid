@@ -14,7 +14,6 @@ class CreateTrueLayerModels < ActiveRecord::Migration[5.2]
       t.belongs_to :bank_provider, foreign_key: true, null: false, type: :uuid
       t.json :true_layer_response
       t.string :full_name
-      t.string :full_address
       t.date :date_of_birth
       t.timestamps
     end
@@ -36,6 +35,13 @@ class CreateTrueLayerModels < ActiveRecord::Migration[5.2]
       t.belongs_to :bank_account, foreign_key: true, null: false, type: :uuid
       t.json :true_layer_response
       t.string :true_layer_id
+      t.timestamps
+    end
+
+    create_table :bank_errors, id: :uuid do |t|
+      t.belongs_to :applicant, foreign_key: true, null: false, type: :uuid
+      t.string :bank_name
+      t.text :error
       t.timestamps
     end
   end

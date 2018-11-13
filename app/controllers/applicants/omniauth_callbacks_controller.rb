@@ -5,14 +5,14 @@ module Applicants
     before_action :authenticate_applicant!, only: [:true_layer]
 
     def true_layer
-      if applicant
-        import_bank_data
-        set_flash_message(:notice, :success, kind: 'TrueLayer')
-        redirect_to citizens_accounts_path
-      else
+      unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
         redirect_to citizens_consent_path
+        return
       end
+
+      import_bank_data
+      redirect_to citizens_accounts_path
     end
 
     def failure
@@ -23,10 +23,17 @@ module Applicants
     private
 
     def import_bank_data
-      TrueLayer::BankDataImportService.new(
+      command = TrueLayer::BankDataImportService.call(
         applicant: applicant,
         token: credentials.token
-      ).call
+      )
+
+      if command.success?
+        set_flash_message(:notice, :success, kind: 'TrueLayer')
+      else
+        # TODO: Show better error message to the user
+        flash[:error] = command.errors.to_a.flatten.join(', ')
+      end
     end
 
     def credentials
