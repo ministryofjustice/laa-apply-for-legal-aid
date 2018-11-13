@@ -29,8 +29,21 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         subject
         expect(transaction_1.true_layer_response).to eq(mock_transaction_1.deep_stringify_keys)
         expect(transaction_1.true_layer_id).to eq(mock_transaction_1[:transaction_id])
+        expect(transaction_1.description).to eq(mock_transaction_1[:description])
+        expect(transaction_1.merchant).to eq(mock_transaction_1[:merchant_name])
+        expect(transaction_1.currency).to eq(mock_transaction_1[:currency])
+        expect(transaction_1.amount.to_s).to eq(mock_transaction_1[:amount].to_s)
+        expect(transaction_1.happened_at).to eq(mock_transaction_1[:timestamp].to_time)
+        expect(transaction_1.operation).to eq(mock_transaction_1[:transaction_type].downcase)
+
         expect(transaction_2.true_layer_response).to eq(mock_transaction_2.deep_stringify_keys)
         expect(transaction_2.true_layer_id).to eq(mock_transaction_2[:transaction_id])
+        expect(transaction_2.description).to eq(mock_transaction_2[:description])
+        expect(transaction_2.merchant).to eq(mock_transaction_2[:merchant_name])
+        expect(transaction_2.currency).to eq(mock_transaction_2[:currency])
+        expect(transaction_2.amount.to_s).to eq(mock_transaction_2[:amount].to_s)
+        expect(transaction_2.happened_at).to eq(mock_transaction_2[:timestamp].to_time)
+        expect(transaction_2.operation).to eq(mock_transaction_2[:transaction_type].downcase)
       end
 
       it 'removes existing transactions' do

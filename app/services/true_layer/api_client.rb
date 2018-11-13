@@ -38,16 +38,13 @@ module TrueLayer
     def perform_lookup(path)
       response = connection.get(path)
       parsed_response = parsed_response(response)
-      if response.success?
-        SimpleResult.new(value: parsed_response.deep_symbolize_keys[:results])
-      else
-        # TODO: implement white list of inevitable errors
-        # some errors are inevitable (like "Feature not supported by the provider")
-        # standard errors should be logged in Sentry
 
-        raise ApiError, "TrueLayer Error : #{response.body}"
-        simple_error(parsed_response)
-      end
+      # TODO: implement white list of inevitable errors
+      # some errors are inevitable (like "Feature not supported by the provider")
+      # standard errors should be logged in Sentry
+      raise ApiError, "TrueLayer Error : #{response.body}" unless response.success?
+
+      SimpleResult.new(value: parsed_response.deep_symbolize_keys[:results])
     rescue JSON::ParserError => e
       simple_error(e)
     rescue Faraday::ConnectionFailed => e
@@ -68,7 +65,7 @@ module TrueLayer
     def connection
       @connection ||= Faraday.new(url: TRUE_LAYER_URL) do |conn|
         conn.authorization :Bearer, token
-        conn.response :logger if Rails.env.development?
+        conn.response :logger if Rails.configuration.x.logs_faraday_response
         conn.adapter Faraday.default_adapter
       end
     end

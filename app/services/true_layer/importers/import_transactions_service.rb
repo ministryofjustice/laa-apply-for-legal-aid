@@ -25,7 +25,13 @@ module TrueLayer
         transactions.map do |transaction|
           {
             true_layer_response: transaction,
-            true_layer_id: transaction[:transaction_id]
+            true_layer_id: transaction[:transaction_id],
+            description: transaction[:description],
+            merchant: transaction[:merchant_name],
+            currency: transaction[:currency],
+            amount: transaction[:amount],
+            happened_at: transaction[:timestamp],
+            operation: transaction[:transaction_type]&.downcase
           }
         end
       end

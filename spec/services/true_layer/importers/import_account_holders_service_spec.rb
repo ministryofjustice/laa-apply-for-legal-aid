@@ -22,10 +22,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
         subject
         expect(bank_account_holder_1.full_name).to eq(mock_account_holder_1[:full_name])
         expect(bank_account_holder_1.true_layer_response).to eq(mock_account_holder_1.deep_stringify_keys)
-        expected_full_address = mock_account_holder_1[:addresses]&.map do |address|
-                                  address.values.join(', ')
-                                end&.join('; ')
-        expect(bank_account_holder_1.full_address).to eq(expected_full_address)
+        expect(bank_account_holder_1.addresses).to eq(mock_account_holder_1[:addresses].map(&:deep_stringify_keys))
         expect(bank_account_holder_1.date_of_birth).to eq(mock_account_holder_1[:date_of_birth].to_date)
         expect(bank_account_holder_2.full_name).to eq(mock_account_holder_2[:full_name])
       end

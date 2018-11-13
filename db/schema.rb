@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_095753) do
     t.uuid "bank_provider_id", null: false
     t.json "true_layer_response"
     t.string "full_name"
-    t.string "full_address"
+    t.json "addresses"
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -107,6 +107,12 @@ ActiveRecord::Schema.define(version: 2018_11_09_095753) do
     t.uuid "bank_account_id", null: false
     t.json "true_layer_response"
     t.string "true_layer_id"
+    t.string "description"
+    t.decimal "amount"
+    t.string "currency"
+    t.string "operation"
+    t.string "merchant"
+    t.datetime "happened_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bank_account_id"], name: "index_bank_transactions_on_bank_account_id"

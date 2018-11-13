@@ -26,9 +26,7 @@ module TrueLayer
           {
             true_layer_response: account_holder,
             full_name: account_holder[:full_name],
-            full_address: account_holder[:addresses]&.map do |address|
-              address.values.join(', ')
-            end&.join('; '),
+            addresses: account_holder[:addresses],
             date_of_birth: account_holder[:date_of_birth]&.to_date
           }
         end

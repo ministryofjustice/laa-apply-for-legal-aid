@@ -43,6 +43,8 @@ Rails.application.configure do
 
   config.x.benefit_check.wsdl_url = 'https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl'
 
+  config.x.logs_faraday_response = false
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   Rails.application.routes.default_url_options[:host] = 'www.example.com'
