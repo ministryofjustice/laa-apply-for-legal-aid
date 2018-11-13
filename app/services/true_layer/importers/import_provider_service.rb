@@ -3,10 +3,11 @@ module TrueLayer
     class ImportProviderService
       prepend SimpleCommand
 
-      def initialize(api_client, applicant, token)
+      def initialize(api_client:, applicant:, token:, token_expires_at:)
         @api_client = api_client
         @applicant = applicant
         @token = token
+        @token_expires_at = token_expires_at
       end
 
       def call
@@ -19,7 +20,7 @@ module TrueLayer
 
       private
 
-      attr_reader :api_client, :applicant, :token
+      attr_reader :api_client, :applicant, :token, :token_expires_at
 
       def import_provider
         bank_provider = applicant.bank_providers.find_or_create_by!(
@@ -35,6 +36,7 @@ module TrueLayer
           true_layer_response: provider,
           credentials_id: provider[:credentials_id],
           token: token,
+          token_expires_at: token_expires_at,
           name: provider[:provider][:display_name],
           true_layer_provider_id: provider[:provider][:provider_id]
         }

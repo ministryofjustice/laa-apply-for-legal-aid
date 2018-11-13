@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TrueLayer::Importers::ImportProviderService do
   let(:token) { SecureRandom.hex }
+  let(:token_expires_at) { Time.now + 1.hour }
   let(:api_client) { TrueLayer::ApiClient.new(token) }
   let(:applicant) { create :applicant }
 
@@ -11,7 +12,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
     let(:existing_credentials_id) { SecureRandom.hex }
     let!(:existing_provider) { create :bank_provider, applicant: applicant, credentials_id: existing_credentials_id }
 
-    subject { described_class.call(api_client, applicant, token) }
+    subject { described_class.call(api_client: api_client, applicant: applicant, token: token, token_expires_at: token_expires_at) }
 
     context 'request is successful' do
       before do
@@ -23,6 +24,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
         expect(bank_provider.true_layer_response).to eq(mock_provider.deep_stringify_keys)
         expect(bank_provider.credentials_id).to eq(mock_provider[:credentials_id])
         expect(bank_provider.token).to eq(token)
+        expect(bank_provider.token_expires_at.utc.to_s).to eq(token_expires_at.utc.to_s)
         expect(bank_provider.name).to eq(mock_provider[:provider][:display_name])
         expect(bank_provider.true_layer_provider_id).to eq(mock_provider[:provider][:provider_id])
       end

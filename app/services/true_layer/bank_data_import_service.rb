@@ -2,9 +2,10 @@ module TrueLayer
   class BankDataImportService
     prepend SimpleCommand
 
-    def initialize(applicant:, token:)
+    def initialize(applicant:, token:, token_expires_at:)
       @applicant = applicant
       @token = token
+      @token_expires_at = token_expires_at
     end
 
     def call
@@ -17,7 +18,7 @@ module TrueLayer
 
     private
 
-    attr_accessor :applicant, :token, :bank_provider, :bank_name, :error
+    attr_accessor :applicant, :token, :token_expires_at, :bank_provider, :bank_name, :error
 
     def import_bank_data
       import_bank_provider
@@ -28,7 +29,12 @@ module TrueLayer
     end
 
     def import_bank_provider
-      command = Importers::ImportProviderService.call(api_client, applicant, token)
+      command = Importers::ImportProviderService.call(
+        api_client: api_client,
+        applicant: applicant,
+        token: token,
+        token_expires_at: token_expires_at
+      )
       if command.success?
         self.bank_provider = command.result
         self.bank_name = bank_provider.name

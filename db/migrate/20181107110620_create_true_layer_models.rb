@@ -5,6 +5,7 @@ class CreateTrueLayerModels < ActiveRecord::Migration[5.2]
       t.json :true_layer_response
       t.string :credentials_id
       t.string :token
+      t.datetime :token_expires_at
       t.string :name
       t.string :true_layer_provider_id
       t.timestamps

@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_095753) do
     t.json "true_layer_response"
     t.string "credentials_id"
     t.string "token"
+    t.datetime "token_expires_at"
     t.string "name"
     t.string "true_layer_provider_id"
     t.datetime "created_at", null: false

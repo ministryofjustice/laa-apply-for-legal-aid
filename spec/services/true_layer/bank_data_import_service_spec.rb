@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe TrueLayer::BankDataImportService do
   let(:token) { SecureRandom.hex }
+  let(:token_expires_at) { Time.now + 1.hour }
   let(:applicant) { create :applicant }
   let(:bank_provider) { applicant.bank_providers.find_by(token: token) }
   let(:mock_data) { TrueLayerHelpers::MOCK_DATA }
 
-  subject { described_class.call(applicant: applicant, token: token) }
+  subject { described_class.call(applicant: applicant, token: token, token_expires_at: token_expires_at) }
 
   describe '#call' do
     before { stub_true_layer }
@@ -14,6 +15,7 @@ RSpec.describe TrueLayer::BankDataImportService do
     it 'imports the bank provider' do
       expect { subject }.to change { applicant.bank_providers.count }.by(1)
       expect(bank_provider.credentials_id).to eq(mock_data[:provider][:credentials_id])
+      expect(bank_provider.token_expires_at.utc.to_s).to eq(token_expires_at.utc.to_s)
     end
 
     it 'imports the bank accounts' do

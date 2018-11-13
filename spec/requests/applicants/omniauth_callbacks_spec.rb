@@ -9,6 +9,8 @@ RSpec.describe 'applicants omniauth call back', type: :request do
   end
 
   let(:token) { SecureRandom.uuid }
+  let(:expires_at) { 1.hour.from_now.round }
+  let(:true_layer_expires_at) { expires_at.to_i }
   let(:applicant) { create :applicant }
   let(:bank_provider) { applicant.bank_providers.find_by(token: token) }
 
@@ -16,7 +18,10 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     sign_in applicant if applicant
     OmniAuth.config.add_mock(
       :true_layer,
-      credentials: { token: token }
+      credentials: {
+        token: token,
+        expires_at: true_layer_expires_at
+      }
     )
 
     stub_true_layer
@@ -31,10 +36,30 @@ RSpec.describe 'applicants omniauth call back', type: :request do
 
     it 'should import bank provider' do
       expect { subject }.to change { applicant.bank_providers.count }.by(1)
-      expect(bank_provider).not_to be_nil
+      expect(bank_provider.token).to eq(token)
+      expect(bank_provider.token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
     end
 
-    it 'should import bank data' do
+    it 'should import bank transactions' do
+      expect { subject }.to change { BankTransaction.count }.by_at_least(1)
+    end
+
+    context 'with a string time' do
+      let(:true_layer_expires_at) { expires_at.to_json }
+
+      it 'should persist expires_at' do
+        subject
+        expect(bank_provider.token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
+      end
+    end
+
+    context 'with nil time' do
+      let(:true_layer_expires_at) { nil }
+
+      it 'should not persist expires_at' do
+        subject
+        expect(bank_provider.token_expires_at).to be_nil
+      end
     end
 
     context 'without applicant' do

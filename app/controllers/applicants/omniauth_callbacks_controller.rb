@@ -25,7 +25,8 @@ module Applicants
     def import_bank_data
       command = TrueLayer::BankDataImportService.call(
         applicant: applicant,
-        token: credentials.token
+        token: token,
+        token_expires_at: token_expires_at
       )
 
       if command.success?
@@ -33,6 +34,23 @@ module Applicants
       else
         # TODO: Show better error message to the user
         flash[:error] = command.errors.to_a.flatten.join(', ')
+      end
+    end
+
+    def token
+      credentials.token
+    end
+
+    def token_expires_at
+      expires_at = credentials.expires_at
+      case expires_at
+      when Integer
+        Time.at(expires_at)
+      when String
+        Time.parse(expires_at)
+      else
+        Rails.logger.info 'Unable to determine expiry'
+        nil
       end
     end
 
