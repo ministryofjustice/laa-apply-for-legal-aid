@@ -23,6 +23,6 @@ class SecureData < ApplicationRecord
   private
 
   def secret
-    'BuwOxiMCPE$h'
+    @secret = ENV.fetch('SECURE_DATA_SECRET', 'someSecret')
   end
 end

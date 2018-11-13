@@ -105,6 +105,11 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: trueLayerEnableMock
+          - name: SECURE_DATA_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: secureDataSecret
           ports:
             - name: http
               containerPort: 3002
