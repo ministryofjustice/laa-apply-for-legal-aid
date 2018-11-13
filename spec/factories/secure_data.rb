@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :secure_data, class: 'SecureData' do
-    data { JWT.encode({ data: Faker::Lorem.sentence }, nil, 'none') }
+    after(:build) do |secure_data|
+      secure_data.store(data: Faker::Lorem.sentence)
+    end
   end
 end

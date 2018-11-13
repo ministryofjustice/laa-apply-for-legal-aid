@@ -35,16 +35,22 @@ RSpec.describe SecureData, type: :model do
       expect { subject }.to change { secure_data.data }
     end
 
-    it 'should not match the data' do
+    it 'does not match the data' do
       subject
       expect(data).not_to match(secure_data.data)
     end
   end
 
   describe '#retrieve' do
-    it 'should retrieve stored data' do
+    it 'retrieves stored data' do
       secure_data.store(data)
       expect(secure_data.retrieve).to eq(data)
+    end
+
+    it 'raises errors if data tampered with' do
+      subject
+      secure_data.update data: JWT.encode(secure_data.data, 'invalid', 'HS256')
+      expect { secure_data.retrieve }.to raise_error(JWT::VerificationError)
     end
   end
 end
