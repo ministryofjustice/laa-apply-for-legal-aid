@@ -5,17 +5,14 @@ module Applicants
     before_action :authenticate_applicant!, only: [:true_layer]
 
     def true_layer
-      if applicant
-        applicant.update!(
-          true_layer_token: token,
-          true_layer_token_expires_at: token_expires_at
-        )
-        set_flash_message(:notice, :success, kind: 'TrueLayer')
-        redirect_to citizens_accounts_path
-      else
+      unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
         redirect_to citizens_consent_path
+        return
       end
+
+      import_bank_data
+      redirect_to citizens_accounts_path
     end
 
     def failure
@@ -25,8 +22,19 @@ module Applicants
 
     private
 
-    def credentials
-      @credentials ||= request.env['omniauth.auth'].credentials
+    def import_bank_data
+      command = TrueLayer::BankDataImportService.call(
+        applicant: applicant,
+        token: token,
+        token_expires_at: token_expires_at
+      )
+
+      if command.success?
+        set_flash_message(:notice, :success, kind: 'TrueLayer')
+      else
+        # TODO: Show better error message to the user
+        flash[:error] = command.errors.to_a.flatten.join(', ')
+      end
     end
 
     def token
@@ -44,6 +52,10 @@ module Applicants
         Rails.logger.info 'Unable to determine expiry'
         nil
       end
+    end
+
+    def credentials
+      @credentials ||= request.env['omniauth.auth'].credentials
     end
 
     def applicant

@@ -56,5 +56,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.x.logs_faraday_response = true
+
   Rails.application.routes.default_url_options[:host] = ENV['HOST'] || 'localhost:3002'
 end
