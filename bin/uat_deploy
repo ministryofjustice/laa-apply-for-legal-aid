@@ -22,7 +22,7 @@ clean_old_releases() {
 
 deploy() {
   IMG_REPO="$ECR_ENDPOINT/$GITHUB_TEAM_NAME_SLUG/$REPO_NAME"
-  RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()')
+  RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | rev | cut -c1-30 | rev | tr -s ' _/[]()' '-' | sed "s/^-//")
   RELEASE_NAME="$APPLICATION_DEPLOY_NAME-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
 
