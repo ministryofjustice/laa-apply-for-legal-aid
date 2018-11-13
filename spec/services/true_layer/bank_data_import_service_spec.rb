@@ -4,12 +4,21 @@ RSpec.describe TrueLayer::BankDataImportService do
   let(:token) { SecureRandom.hex }
   let(:token_expires_at) { Time.now + 1.hour }
   let(:applicant) { create :applicant }
-  let(:bank_provider) { applicant.bank_providers.find_by(token: token) }
-  let(:mock_data) { TrueLayerHelpers::MOCK_DATA }
 
   subject { described_class.call(applicant: applicant, token: token, token_expires_at: token_expires_at) }
 
   describe '#call' do
+    let(:bank_provider) { applicant.bank_providers.find_by(token: token) }
+    let(:mock_data) { TrueLayerHelpers::MOCK_DATA }
+    let(:bank_error) { applicant.bank_errors.first }
+    let(:api_error) do
+      {
+        error_description: 'Feature not supported by the provider',
+        error: :endpoint_not_supported,
+        error_details: { foo: :bar }
+      }
+    end
+
     before { stub_true_layer }
 
     it 'imports the bank provider' do
@@ -47,16 +56,18 @@ RSpec.describe TrueLayer::BankDataImportService do
       expect(subject.success?).to eq(true)
     end
 
-    context 'one API call is not successsful' do
-      let(:bank_error) { applicant.bank_errors.first }
-      let(:api_error) do
-        {
-          error_description: 'Feature not supported by the provider',
-          error: :endpoint_not_supported,
-          error_details: { foo: :bar }
-        }
+    context 'the provider API call is failing' do
+      before do
+        endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/me'
+        stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
       end
 
+      it 'returns an error' do
+        expect(subject.errors.keys.first).to eq(:bank_data_import)
+      end
+    end
+
+    context 'a aubsequent API call is failing' do
       before do
         endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/accounts'
         stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
