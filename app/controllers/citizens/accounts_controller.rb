@@ -3,7 +3,7 @@ module Citizens
     before_action :authenticate_applicant!
 
     def index
-      @applicant = current_applicant
+      @applicant_banks = current_applicant.bank_providers
     end
   end
 end

@@ -127,6 +127,15 @@ en:
           body: 'Your client does not receive benefits that qualify for legal aid.'
           next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
   citizens:
+    accounts:
+      index:
+        acount_holder_name_heading: Account holder name
+        account_holder_address_heading: Account holder address
+        type_heading: Type
+        account_number_heading: Account Number
+        sort_code_heading: Sort Code
+        balance_heading: Balance
+        your_accounts: Your account(s)
     additional_accounts:
       index:
         field_set_header: Do you have accounts with other banks?
