@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe CitizenEmailService do
   let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: 'test@example.com') }
   let(:application) { create(:application, applicant: applicant) }
-  let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{application.id}" }
+  let(:secure_id) { SecureRandom.uuid }
+  let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}" }
 
   subject { described_class.new(application) }
 
@@ -14,6 +15,7 @@ RSpec.describe CitizenEmailService do
         .with(application.id, 'test@example.com', citizen_url, 'John Doe')
         .and_return(message_delivery)
       allow(message_delivery).to receive(:deliver_later)
+      allow(application).to receive(:generate_secure_id).and_return(secure_id)
 
       subject.send_email
     end

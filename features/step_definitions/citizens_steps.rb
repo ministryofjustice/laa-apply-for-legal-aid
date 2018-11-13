@@ -7,7 +7,7 @@ Then('I see the start link') do
 end
 
 Given('a solicitor has created an application') do
-  @application_id = legal_aid_application.id
+  @application_id = legal_aid_application.generate_secure_id
 end
 
 And('I am on the citizen start page for that application') do
