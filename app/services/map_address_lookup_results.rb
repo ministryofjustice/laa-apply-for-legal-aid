@@ -16,13 +16,12 @@ class MapAddressLookupResults
       mem << result[part]
     end
 
-    attributes = {
+    Address.new(
+      organisation: result['ORGANISATION_NAME'],
       address_line_one: line_one_parts.compact.join(', '),
       address_line_two: line_two_parts.compact.join(', '),
       city: result['POST_TOWN'],
       postcode: result['POSTCODE']
-    }
-
-    Address.new(attributes)
+    )
   end
 end

@@ -4,7 +4,7 @@ module Applicants
 
     form_for Address
 
-    attr_accessor :applicant_id, :address, :postcode, :address_line_one, :address_line_two, :city
+    attr_accessor :applicant_id, :address, :postcode, :address_line_one, :address_line_two, :city, :organisation
 
     before_validation :deserialize_address
 
@@ -23,6 +23,7 @@ module Applicants
     def deserialize_address
       return unless address.present?
       hash = JSON.parse(address)
+      attributes[:organisation] = hash['organisation']
       attributes[:address_line_one] = hash['address_line_one']
       attributes[:address_line_two] = hash['address_line_two']
       attributes[:city] = hash['city']
