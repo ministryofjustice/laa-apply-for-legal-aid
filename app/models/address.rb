@@ -18,15 +18,16 @@ class Address < ApplicationRecord
 
   def self.from_json(json)
     attrs = JSON.parse(json)
-    new(attrs.slice('address_line_one', 'address_line_two', 'city', 'postcode'))
+    new(attrs.slice('organisation', 'address_line_one', 'address_line_two', 'city', 'postcode'))
   end
 
   def full_address
-    [address_line_one, address_line_two, city, postcode].compact.join(', ')
+    [organisation, address_line_one, address_line_two, city, postcode].compact.reject(&:blank?).join(', ')
   end
 
   def to_json
     {
+      organisation: organisation,
       address_line_one: address_line_one,
       address_line_two: address_line_two,
       city: city,
