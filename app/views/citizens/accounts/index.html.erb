@@ -2,14 +2,11 @@
   <%= link_to 'Back', citizens_consent_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<h1 class="govuk-heading-xl">You have successfully shared your account information</h1>
-
 <p>
-  We have downloaded 3 months of your transaction history.
+  <%= t '.intro_text' %>
 </p>
 <p>
-  We will show your statement from the last 30 days so you can tell us
-  more about your financial situation
+  <%= t '.balance_text' %>
 </p>
 <div class="govuk-!-padding-bottom-5">
   <h2 class="govuk-heading-m"><%= t '.your_accounts' %></h2>
@@ -20,12 +17,12 @@
   <table class="govuk-table">
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t '.acount_holder_name_heading' %></th>
-        <td class="govuk-table__cell"><%= applicant_bank.bank_account_holders.last.full_name %></td>
+        <th class="govuk-table__header" scope="row"><%= t '.account_holder_name_heading' %></th>
+        <td class="govuk-table__cell"><%= applicant_bank.main_account_holder_name %></td>
       </tr>
       <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="row"><%= t '.account_holder_address_heading' %></th>
-        <td class="govuk-table__cell"><%= applicant_bank.bank_account_holders.last.addresses.first.values.join(', ') %></td>
+        <td class="govuk-table__cell"><%= applicant_bank.main_account_holder_address %></td>
       </tr>
     </tbody>
   </table>
@@ -36,7 +33,7 @@
         <th class="govuk-table__header" scope="col"><%= t '.type_heading' %></th>
         <th class="govuk-table__header" scope="col"><%= t '.account_number_heading' %></th>
         <th class="govuk-table__header" scope="col"><%= t '.sort_code_heading' %></th>
-        <th class="govuk-table__header" scope="col"><%= t '.balance_heading' %></th>
+        <th class="govuk-table__header govuk-table__header--numeric" scope="col"><%= t '.balance_heading' %></th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
@@ -45,7 +42,7 @@
           <td class="govuk-table__cell"><%= "#{applicant_bank.name} #{bank_account.name}" %></td>
           <td class="govuk-table__cell"><%= bank_account.account_number %></td>
           <td class="govuk-table__cell"><%= bank_account.sort_code %></td>
-          <td class="govuk-table__cell"><%= display_value_with_symbol(bank_account.balance, bank_account.currency) %></td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><%= value_with_currency_unit(bank_account.balance, bank_account.currency) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -54,5 +51,5 @@
 <% end %>
 
 <div class="govuk-!-padding-top-3">
-<%= link_to 'Continue', new_citizens_additional_account_path, class: 'govuk-button', id: 'continue' %>
+  <%= link_to 'Continue', new_citizens_additional_account_path, class: 'govuk-button', id: 'continue' %>
 </div>
