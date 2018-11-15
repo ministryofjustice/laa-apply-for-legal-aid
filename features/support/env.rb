@@ -8,6 +8,7 @@ require 'cucumber/rails'
 require 'capybara'
 require 'capybara/cucumber'
 require 'capybara/poltergeist'
+require 'factory_bot'
 require 'selenium/webdriver'
 require 'webmock/cucumber'
 
@@ -101,4 +102,12 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Before do |_scenario|
   load Rails.root.join('db/seeds.rb')
+  Warden.test_mode!
 end
+
+After do |_scenario|
+  Warden.test_reset!
+end
+
+World(FactoryBot::Syntax::Methods)
+World(Warden::Test::Helpers)

@@ -58,5 +58,6 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = true
 
-  Rails.application.routes.default_url_options[:host] = ENV['HOST'] || 'localhost:3002'
+  config.x.application.host = ENV['HOST'] || 'localhost:3002'
+  Rails.application.routes.default_url_options[:host] = config.x.application.host
 end

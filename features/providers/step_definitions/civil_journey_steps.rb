@@ -1,5 +1,10 @@
 # features/step_definitions/civil_application_journey.feature
 
+Given(/^I am logged in as a provider$/) do
+  @registered_provider = create(:provider, username: 'test_provider')
+  login_as @registered_provider
+end
+
 Given(/^I visit the application service$/) do
   visit providers_root_path
 end

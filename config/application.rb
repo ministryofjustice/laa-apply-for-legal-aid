@@ -14,10 +14,17 @@ module LaaApplyForLegalAid
       g.test_framework :rspec
     end
 
+    config.x.application.host             = ENV['HOST']
     config.x.benefit_check.service_name   = ENV['BC_LSC_SERVICE_NAME']
     config.x.benefit_check.client_org_id  = ENV['BC_CLIENT_ORG_ID']
     config.x.benefit_check.client_user_id = ENV['BC_CLIENT_USER_ID']
     config.x.benefit_check.wsdl_url       = ENV['BC_WSDL_URL']
+
+    config.x.laa_portal.idp_slo_target_url             = ENV['LAA_PORTAL_IDP_SLO_TARGET_URL']
+    config.x.laa_portal.idp_sso_target_url             = ENV['LAA_PORTAL_IDP_SSO_TARGET_URL']
+    config.x.laa_portal.idp_cert = ENV['LAA_PORTAL_IDP_CERT']
+    # config.x.laa_portal.idp_cert_fingerprint           = ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT']
+    config.x.laa_portal.idp_cert_fingerprint_algorithm = ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM']
 
     config.govuk_notify_templates = config_for(
       :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')

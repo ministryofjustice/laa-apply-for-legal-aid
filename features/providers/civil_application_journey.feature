@@ -14,7 +14,8 @@ Feature: Civil application journeys
 
   @javascript
   Scenario: No results returned is seen on screen when invalid search entered
-    Given I visit the application service
+    Given I am logged in as a provider
+    And I visit the application service
     And I click link "Start"
     And I click link "Start now"
     When the search for "cakes" is not successful
@@ -22,7 +23,8 @@ Feature: Civil application journeys
 
   @javascript
   Scenario: I am able to clear proceeding on the proceeding page
-    Given I visit the application service
+    Given I am logged in as a provider
+    And I visit the application service
     And I click link "Start"
     And I click link "Start now"
     And I search for proceeding 'app'
@@ -33,7 +35,8 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: Completes the application using address lookup
-    Given I visit the application service
+    Given I am logged in as a provider
+    And I visit the application service
     And I click link "Start"
     And I click link "Start now"
     And I search for proceeding 'Application for a care order'
@@ -57,7 +60,8 @@ Feature: Civil application journeys
 
   @localhost_request @javascript @vcr
   Scenario: Completes the application using manual address
-    Given I visit the application service
+    Given I am logged in as a provider
+    And I visit the application service
     And I click link "Start"
     And I click link "Start now"
     And I search for proceeding 'Application for a care order'
@@ -83,7 +87,8 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I can see that the applicant receives benefits
-    Given I visit the application service
+    Given I am logged in as a provider
+    And I visit the application service
     And I click link "Start"
     And I click link "Start now"
     And I search for proceeding 'Application for a care order'
@@ -103,7 +108,8 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I can see that the applicant does not receive benefits
-    Given I visit the application service
+    Given I am logged in as a provider
+    And I visit the application service
     And I click link "Start"
     And I click link "Start now"
     And I search for proceeding 'Application for a care order'

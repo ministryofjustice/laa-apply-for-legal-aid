@@ -9,46 +9,53 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:address_lookup_used) { true }
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
-    let(:get_request) { get "/providers/applications/#{application.id}/check_benefits" }
+    let(:perform_request) { get "/providers/applications/#{application.id}/check_benefits" }
 
-    before do
-      create :address, applicant: applicant, lookup_used: address_lookup_used
-    end
+    it_behaves_like 'a provider not authenticated'
 
-    it 'returns http success' do
-      get_request
-      expect(response).to have_http_status(:ok)
-    end
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
 
-    context "the applicant's address used the lookup service" do
-      let(:address_lookup_used) { true }
-
-      it 'has a back link to the address lookup page' do
-        get_request
-        expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_selections_path)
+      before do
+        create :address, applicant: applicant, lookup_used: address_lookup_used
+        login_as provider
       end
-    end
 
-    context "the applicant's address used manual entry" do
-      let(:address_lookup_used) { false }
-
-      it 'has a back link to the address lookup page' do
-        get_request
-        expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_path)
+      it 'returns http success' do
+        perform_request
+        expect(response).to have_http_status(:ok)
       end
-    end
 
-    context 'when the check_benefit_result does not exist' do
-      it 'generates a new check_benefit_result' do
-        expect { get_request }.to change { BenefitCheckResult.count }.by(1)
+      context "the applicant's address used the lookup service" do
+        let(:address_lookup_used) { true }
+
+        it 'has a back link to the address lookup page' do
+          perform_request
+          expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_selections_path)
+        end
       end
-    end
 
-    context 'when the check_benefit_result already exists' do
-      let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
+      context "the applicant's address used manual entry" do
+        let(:address_lookup_used) { false }
 
-      it 'does not generate a new one' do
-        expect { get_request }.to_not change { BenefitCheckResult.count }
+        it 'has a back link to the address lookup page' do
+          perform_request
+          expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_path)
+        end
+      end
+
+      context 'when the check_benefit_result does not exist' do
+        it 'generates a new check_benefit_result' do
+          expect { get_request }.to change { BenefitCheckResult.count }.by(1)
+        end
+      end
+
+      context 'when the check_benefit_result already exists' do
+        let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
+
+        it 'does not generate a new one' do
+          expect { perform_request }.to_not change { BenefitCheckResult.count }
+        end
       end
     end
   end

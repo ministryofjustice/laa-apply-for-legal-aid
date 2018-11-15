@@ -162,12 +162,18 @@ ActiveRecord::Schema.define(version: 2018_11_26_110330) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", null: false
+    t.string "username", null: false
     t.string "type"
+    t.text "roles"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["type"], name: "index_users_on_type"
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "addresses", "applicants"

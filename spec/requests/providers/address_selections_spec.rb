@@ -5,47 +5,55 @@ RSpec.describe 'address selections requests', type: :request do
   let(:applicant) { legal_aid_application.applicant }
 
   describe 'GET /providers/applications/:legal_aid_application_id/address_selections/edit' do
-    let(:get_request) { get edit_providers_legal_aid_application_address_selections_path(legal_aid_application) }
+    let(:perform_request) { get edit_providers_legal_aid_application_address_selections_path(legal_aid_application) }
 
-    context 'a postcode have been entered before', :vcr do
-      let(:postcode) { 'DA7 4NG' }
-      let!(:address) { create :address, postcode: postcode, applicant: applicant }
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
 
-      it 'performs an address lookup with the provided postcode' do
-        expect(AddressLookupService)
-          .to receive(:call).with(address.postcode).and_call_original
-
-        get_request
+      before do
+        login_as provider
       end
 
-      it 'renders the address selection page' do
-        get_request
+      context 'a postcode have been entered before', :vcr do
+        let(:postcode) { 'DA7 4NG' }
+        let!(:address) { create :address, postcode: postcode, applicant: applicant }
 
-        expect(response).to be_successful
-        expect(unescaped_response_body).to match('Select an address')
-        expect(unescaped_response_body).to match('[1-9]{1}[0-9]? addresses found')
-      end
+        it 'performs an address lookup with the provided postcode' do
+          expect(AddressLookupService)
+            .to receive(:call).with(address.postcode).and_call_original
 
-      context 'but the lookup does not return any valid results' do
-        let(:postcode) { 'SW1H 9AJ' } # NOTE: test account does not return any results for this postcode
-        let(:form_heading) { "Enter your client's home address" }
-        let(:error_message) { "Sorry - we couldn't find any addresses for that postcode, please enter the address manually" }
+          perform_request
+        end
 
-        it 'renders the manual address selection page' do
-          get_request
+        it 'renders the address selection page' do
+          perform_request
 
           expect(response).to be_successful
-          expect(unescaped_response_body).to match(form_heading)
-          expect(unescaped_response_body).to match(error_message)
+          expect(unescaped_response_body).to match('Select an address')
+          expect(unescaped_response_body).to match('[1-9]{1}[0-9]? addresses found')
+        end
+
+        context 'but the lookup does not return any valid results' do
+          let(:postcode) { 'SW1H 9AJ' } # NOTE: test account does not return any results for this postcode
+          let(:form_heading) { "Enter your client's home address" }
+          let(:error_message) { "Sorry - we couldn't find any addresses for that postcode, please enter the address manually" }
+
+          it 'renders the manual address selection page' do
+            perform_request
+
+            expect(response).to be_successful
+            expect(unescaped_response_body).to match(form_heading)
+            expect(unescaped_response_body).to match(error_message)
+          end
         end
       end
-    end
 
-    context 'no postcode have been entered yet' do
-      it 'redirects to the postcode entering page' do
-        get_request
+      context 'no postcode have been entered yet' do
+        it 'redirects to the postcode entering page' do
+          perform_request
 
-        expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path)
+          expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path)
+        end
       end
     end
   end
@@ -79,63 +87,73 @@ RSpec.describe 'address selections requests', type: :request do
         }
       }
     end
-    let(:patch_request) { patch providers_legal_aid_application_address_selections_path(legal_aid_application), params: params }
+    let(:perform_request) { patch providers_legal_aid_application_address_selections_path(legal_aid_application), params: params }
 
-    context 'when the applicant does not exist' do
-      let(:legal_aid_application) { SecureRandom.uuid }
+    it_behaves_like 'a provider not authenticated'
 
-      it 'redirects the user to the applications page with an error message' do
-        patch_request
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
 
-        expect(response).to redirect_to(providers_legal_aid_applications_path)
-      end
-    end
-
-    context 'when no address was selected from the list' do
-      let(:lookup_id) { '' }
-
-      it 'does not create a new address record' do
-        expect { patch_request }.not_to change { Address.count }
+      before do
+        login_as provider
       end
 
-      it 'renders the address selection page' do
-        patch_request
+      context 'when the applicant does not exist' do
+        let(:legal_aid_application) { SecureRandom.uuid }
 
-        expect(response).to be_successful
-        expect(unescaped_response_body).to match('Please select an address from the list')
-        expect(unescaped_response_body).to match('Select an address')
-        expect(unescaped_response_body).to match('[1-9]{1}[0-9]? addresses found')
-      end
-    end
+        it 'redirects the user to the applications page with an error message' do
+          perform_request
 
-    it 'creates a new address record associated with the applicant' do
-      expect { patch_request }.to change { applicant.reload.addresses.count }.by(1)
-      expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
-      expect(applicant.address.lookup_id).to eq(lookup_id)
-    end
-
-    it 'redirects to next submission step' do
-      patch_request
-
-      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(legal_aid_application))
-    end
-
-    it 'records that the lookup service was used' do
-      patch_request
-      expect(applicant.address.lookup_used).to eq(true)
-    end
-
-    context 'when an address already exists' do
-      before { create :address, applicant: applicant }
-
-      it 'does not create a new address record' do
-        expect { patch_request }.to_not change { applicant.addresses.count }
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
       end
 
-      it 'updates the current address' do
-        patch_request
+      context 'when no address was selected from the list' do
+        let(:lookup_id) { '' }
+
+        it 'does not create a new address record' do
+          expect { perform_request }.not_to change { Address.count }
+        end
+
+        it 'renders the address selection page' do
+          perform_request
+
+          expect(response).to be_successful
+          expect(unescaped_response_body).to match('Please select an address from the list')
+          expect(unescaped_response_body).to match('Select an address')
+          expect(unescaped_response_body).to match('[1-9]{1}[0-9]? addresses found')
+        end
+      end
+
+      it 'creates a new address record associated with the applicant' do
+        expect { perform_request }.to change { applicant.reload.addresses.count }.by(1)
         expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
         expect(applicant.address.lookup_id).to eq(lookup_id)
+      end
+
+      it 'redirects to next submission step' do
+        perform_request
+
+        expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(legal_aid_application))
+      end
+
+      it 'records that the lookup service was used' do
+        perform_request
+        expect(applicant.address.lookup_used).to eq(true)
+      end
+
+      context 'when an address already exists' do
+        before { create :address, applicant: applicant }
+
+        it 'does not create a new address record' do
+          expect { perform_request }.to_not change { applicant.addresses.count }
+        end
+
+        it 'updates the current address' do
+          perform_request
+          expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
+          expect(applicant.address.lookup_id).to eq(lookup_id)
+        end
       end
     end
   end
