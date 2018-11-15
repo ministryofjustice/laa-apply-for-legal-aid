@@ -107,6 +107,12 @@ en:
     client_detail:
       dob_hint: 'For example, 31 3 1980'
       national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
+  generic:
+    'yes': 'Yes' # needs quotes as yes renders as true without them
+    'no': 'No'   # needs quotes as no renders as false without them
+    continue: Continue
+    errors:
+      yes_or_no: You must select either Yes or No
   providers:
     check_benefits:
       index:
@@ -120,3 +126,11 @@ en:
           title: 'must complete a financial assessment'
           body: 'Your client does not receive benefits that qualify for legal aid.'
           next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
+  citizens:
+    additional_accounts:
+      index:
+        field_set_header: Do you have accounts with other banks?
+        hint: Share details of any accounts you have with another bank or building society
+      new:
+        field_set_header: Do you have online access to your accounts with other banks?
+        hint: If you do not, you will need to provide paper evidence for these accounts.
