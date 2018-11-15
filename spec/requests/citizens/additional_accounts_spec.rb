@@ -18,7 +18,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     it 'should display an error' do
-      expect(response.body).to match('govuk-error-summary')
+      expect(response.body).to match('govuk-error-message')
     end
 
     context 'with Yes submitted' do
@@ -69,11 +69,11 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     it 'should display an error' do
-      expect(response.body).to match('govuk-error-summary')
+      expect(response.body).to match('govuk-error-message')
     end
 
     context 'with Yes submitted' do
-      let(:params) { { additional_account: 'yes' } }
+      let(:params) { { has_offline_accounts: 'yes' } }
 
       xit 'redirects to back to the True Layer steps' do
         # TODO: - set redirect path when known
@@ -92,7 +92,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     context 'with No submitted' do
-      let(:params) { { additional_account: 'no' } }
+      let(:params) { { has_offline_accounts: 'no' } }
 
       xit 'redirects to the next step in Citizen jouney' do
         # TODO: - set redirect path when known

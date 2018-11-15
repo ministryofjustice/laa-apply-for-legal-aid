@@ -10,7 +10,7 @@ module Citizens
         # TODO: - set redirect path when known
         render plain: 'Landing page: Next step in Citizen journey'
       else
-        flash[:error] = 'You must select either Yes or No'
+        @error = I18n.t('generic.errors.yes_or_no')
         render :index
       end
     end
@@ -18,18 +18,24 @@ module Citizens
     def new; end
 
     def update
-      case params[:additional_account]
+      case params[:has_offline_accounts]
       when 'yes'
         # TODO: - set redirect path when known
         render plain: 'Landing page: Return to True Layer steps'
       when 'no'
-        current_legal_aid_application&.update(has_offline_accounts: true)
+        legal_aid_application.update(has_offline_accounts: true)
         # TODO: - set redirect path when known
         render plain: 'Landing page: Next step in Citizen journey'
       else
-        flash[:error] = 'You must select either Yes or No'
-        render :index
+        @error = I18n.t('generic.errors.yes_or_no')
+        render :new
       end
+    end
+
+    private
+
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end
