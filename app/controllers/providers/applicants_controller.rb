@@ -26,7 +26,11 @@ module Providers
       @form = Applicants::EmailForm.new(edit_params)
 
       if @form.save
-        redirect_to action_for_next_step(options: { application: legal_aid_application, applicant: @form.model })
+        redirect_to(
+          action_for_next_step(options: { application: legal_aid_application, applicant: @form.model }),
+          # TODO: Remove this - currently just a way of displaying a usable link
+          notice: "Email link will be to: #{citizens_legal_aid_application_url(legal_aid_application.generate_secure_id)}"
+        )
       else
         render :edit
       end

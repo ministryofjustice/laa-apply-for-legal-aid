@@ -10,6 +10,19 @@ class LegalAidApplication < ApplicationRecord
 
   validate :proceeding_type_codes_existence
 
+  def self.find_by_secure_id!(secure_id)
+    secure_data = SecureData.for(secure_id)
+    find_by! secure_data[:legal_aid_application]
+  end
+
+  def generate_secure_id
+    SecureData.create_and_store!(
+      legal_aid_application: { id: id },
+      # So each secure data payload is unique
+      token: SecureRandom.hex
+    )
+  end
+
   def proceeding_type_codes=(codes)
     @proceeding_type_codes = codes
     self.proceeding_types = ProceedingType.where(code: codes)

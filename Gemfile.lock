@@ -389,6 +389,7 @@ DEPENDENCIES
   govuk_notify_rails (~> 2.0.0)
   jquery-rails (~> 4.3, >= 4.3.3)
   json_expressions
+  jwt
   listen (>= 3.0.5, < 3.2)
   loofah (>= 2.2.3)
   omniauth
@@ -420,4 +421,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.6
+   1.17.1

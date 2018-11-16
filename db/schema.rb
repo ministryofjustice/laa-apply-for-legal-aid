@@ -152,6 +152,12 @@ ActiveRecord::Schema.define(version: 2018_11_13_153145) do
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
+  create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"

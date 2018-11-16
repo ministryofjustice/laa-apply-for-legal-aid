@@ -23,7 +23,7 @@ class CitizenEmailService
   end
 
   def application_url
-    @application_url ||= citizens_legal_aid_application_url(application)
+    @application_url ||= citizens_legal_aid_application_url(secure_id)
   end
 
   def applicant
@@ -31,5 +31,9 @@ class CitizenEmailService
     # does not exist as the citizen won't be able to start the
     # application.
     @applicant ||= application&.applicant
+  end
+
+  def secure_id
+    application.generate_secure_id
   end
 end

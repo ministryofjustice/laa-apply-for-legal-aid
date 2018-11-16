@@ -25,6 +25,9 @@ gem 'devise' # User authentication
 gem 'omniauth'
 gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
 
+# Used to encrypt JSON stored in SecureData
+gem 'jwt'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
@@ -32,6 +35,10 @@ group :development, :test do
   gem 'json_expressions'
   gem 'pry-byebug'
   gem 'rubocop', require: false
+
+  # Available in dev env for generators
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
@@ -47,10 +54,8 @@ group :test do
   gem 'climate_control' # Allows environment variables to be modified within specs
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
   gem 'faker', '>=1.9.1'
   gem 'poltergeist'
-  gem 'rspec-rails', '~> 3.7'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
