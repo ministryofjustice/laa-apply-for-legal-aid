@@ -2,7 +2,7 @@ module Citizens
   class LegalAidApplicationsController < BaseController
     def show
       secure_id = params[:id]
-      legal_aid_application = LegalAidApplication.find_by_secure_id(secure_id)
+      legal_aid_application = LegalAidApplication.find_by_secure_id!(secure_id)
       session[:current_application_ref] = legal_aid_application.id
       @applicant = legal_aid_application&.applicant
 

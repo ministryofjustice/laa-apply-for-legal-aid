@@ -4,9 +4,9 @@ RSpec.describe SecureData, type: :model do
   let(:secure_data) { create :secure_data }
   let(:data) { { foo: 'bar' } }
 
-  describe '.create_and_store' do
+  describe '.create_and_store!' do
     let(:secure_data) { described_class.last }
-    subject { described_class.create_and_store(data) }
+    subject { described_class.create_and_store!(data) }
 
     it 'creates a new instance' do
       expect { subject }.to change { described_class.count }

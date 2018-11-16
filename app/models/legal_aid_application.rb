@@ -10,16 +10,16 @@ class LegalAidApplication < ApplicationRecord
 
   validate :proceeding_type_codes_existence
 
-  def self.find_by_secure_id(secure_id)
-    secure_data = SecureData.find(secure_id)
-    find_by! secure_data.retrieve[:legal_aid_application]
+  def self.find_by_secure_id!(secure_id)
+    secure_data = SecureData.for(secure_id)
+    find_by! secure_data[:legal_aid_application]
   end
 
   def generate_secure_id
-    SecureData.create_and_store(
+    SecureData.create_and_store!(
       legal_aid_application: { id: id },
-      # Timestamp so token unique for each secure id
-      timestamp: Time.now.to_s
+      # So each secure data payload is unique
+      token: SecureRandom.hex
     )
   end
 
