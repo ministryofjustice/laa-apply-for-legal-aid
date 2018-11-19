@@ -16,7 +16,6 @@ gem 'sentry-raven'
 gem 'simple_command', '~> 0.0.9'
 gem 'uglifier', '>= 1.3.0'
 gem 'webdack-uuid_migration', '~> 1.2.0'
-gem 'webpacker', '~> 3.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

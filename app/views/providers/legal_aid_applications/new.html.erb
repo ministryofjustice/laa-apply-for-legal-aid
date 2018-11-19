@@ -31,12 +31,10 @@
 <div class="govuk-!-padding-bottom-4"></div>
 
 <div class="govuk-grid-row">
-  <%= form_with(model: [:providers, @legal_aid_application], local: true, html: { id: 'proceeding-form' }) do |form| %>
   <div id="proceeding-list" class="govuk-grid-column-full">
-    <%= render partial: "proceeding_type", collection: @proceeding_types %>
+    <%= render partial: 'proceeding_type', collection: @proceeding_types %>
   </div>
-  <% end %>
-  <div class="govuk-grid-row no-proceeding-items" style="display: block;">
+  <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-body">No results found.</span>
     </div>

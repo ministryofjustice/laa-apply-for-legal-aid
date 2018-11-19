@@ -40,8 +40,3 @@ config/master.key
 /coverage/
 
 .DS_Store
-/public/packs
-/public/packs-test
-/node_modules
-yarn-debug.log*
-.yarn-integrity

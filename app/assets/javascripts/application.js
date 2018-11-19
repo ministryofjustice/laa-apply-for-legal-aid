@@ -13,5 +13,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require "govuk-frontend/all"
+//= require "js-search/dist/umd/js-search"
 //= require jquery
 //= require_tree .

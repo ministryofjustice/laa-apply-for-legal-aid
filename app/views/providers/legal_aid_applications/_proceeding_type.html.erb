@@ -1,23 +1,24 @@
-<div id="<%= proceeding_type.code%>" class="govuk-grid-row proceeding-item" style="display: block;">
-  <span class="proceeding_type_description" ><%= proceeding_type.description %></span>
+<div id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item" style="display: block;">
   <div class="govuk-grid-column-two-thirds">
     <div class="govuk-caption-m">
       <%= proceeding_type.ccms_category_law %>  > <%= proceeding_type.ccms_matter %>
     </div>
-    <span class="govuk-body"><%= proceeding_type.code%> <%= proceeding_type.meaning %></span>
+    <span class="govuk-body"><%= proceeding_type.code %> <%= proceeding_type.meaning %></span>
   </div>
 
+  <%= form_for([:providers, @legal_aid_application]) do |form| %>
   <div class="govuk-grid-column-one-third" style="text-align:right;">
-    <input  type="hidden"
-            name="proceeding_type"
-            value="<%= proceeding_type.code %>"
-            id="proceedingType<%= proceeding_type.code %>" />
+    <%= hidden_field_tag :proceeding_type, proceeding_type.code %>
     <div class="govuk-!-padding-bottom-2"></div>
-    <input  type="button"
-            value="Select and continue"
-            class="govuk-button proceeding-link"
-            data-endpoint="/provider/legal_aid_applications"
-            data-method=post
-            data-input="#proceedingType` + proceedingCode+ `" />
+    <%= form.submit 'Select and continue', class: 'govuk-button proceeding-link' %>
   </div>
+  <% end %>
 </div>
+
+<script>
+  <%#
+    Hidding div as soon as possible to minimize appearance on page transition.
+    `raw ... to_json` to keep erblint happy
+  %>
+  $(<%= raw "##{proceeding_type.code}".to_json %>).hide();
+</script>

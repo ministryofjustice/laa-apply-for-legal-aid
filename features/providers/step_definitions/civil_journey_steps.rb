@@ -18,7 +18,7 @@ And(/^I search for proceeding '(.*)'$/) do |proceeding_search|
 end
 
 When(/^I click clear search$/) do
-  page.find('#clearSearch').click
+  page.find('#clear-proceeding-search').click
 end
 
 Then(/^proceeding search field is empty$/) do
