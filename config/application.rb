@@ -22,8 +22,7 @@ module LaaApplyForLegalAid
 
     config.x.laa_portal.idp_slo_target_url             = ENV['LAA_PORTAL_IDP_SLO_TARGET_URL']
     config.x.laa_portal.idp_sso_target_url             = ENV['LAA_PORTAL_IDP_SSO_TARGET_URL']
-    config.x.laa_portal.idp_cert = ENV['LAA_PORTAL_IDP_CERT']
-    # config.x.laa_portal.idp_cert_fingerprint           = ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT']
+    config.x.laa_portal.idp_cert                       = ENV['LAA_PORTAL_IDP_CERT']
     config.x.laa_portal.idp_cert_fingerprint_algorithm = ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM']
 
     config.govuk_notify_templates = config_for(

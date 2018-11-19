@@ -275,7 +275,7 @@ Devise.setup do |config|
     if laa_portal_config.idp_cert_fingerprint.present?
       settings.idp_cert_fingerprint = laa_portal_config.idp_cert_fingerprint
     else
-      settings.idp_cert = File.open(laa_portal_config.idp_cert).read
+      settings.idp_cert = laa_portal_config.idp_cert && File.open(laa_portal_config.idp_cert).read
     end
   end
 

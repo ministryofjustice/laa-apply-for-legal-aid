@@ -47,7 +47,7 @@ Rails.application.configure do
 
   # LAA Portal default configurations
   config.x.laa_portal.idp_sso_target_url = 'https://example.com/sso'
-  config.x.laa_portal.idp_cert_fingerprint = '81:B5:E1:F0:6D:7B:61:C1:DC:EF:A8:9B:DB:C2:35:CB:7A:D1:6F:B3:C6:2E:2F:39:D7:17:09:C8:2D:06:ED:9D'
+  config.x.laa_portal.idp_cert = 'laa-portal.cert'
   config.x.laa_portal.idp_cert_fingerprint_algorithm = 'http://www.w3.org/2000/09/xmldsig#sha'
 
   # Raises error for missing translations
