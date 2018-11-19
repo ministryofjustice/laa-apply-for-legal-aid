@@ -7,7 +7,8 @@ $.getJSON("/v1/proceeding_types", function (proceedings_data) {
   let search = new JsSearch.Search("code");
   search.addIndex("meaning");
   search.addIndex("description");
-  search.addIndex("code");
+  search.addIndex("category_law");
+  search.addIndex("matter");
   search.addDocuments(proceedings_data);
 
   $("#proceeding-search-input").keyup(function(){
