@@ -10,6 +10,12 @@ class LegalAidApplication < ApplicationRecord
 
   validate :proceeding_type_codes_existence
 
+  state_machine initial: :initiated do
+    event :provider_submit do
+      transition initiated: :provider_submitted
+    end
+  end
+
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)
     find_by! secure_data[:legal_aid_application]

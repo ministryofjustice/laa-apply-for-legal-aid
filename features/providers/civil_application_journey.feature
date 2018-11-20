@@ -39,7 +39,7 @@ Feature: Civil application journeys
     Then I click continue
     Then I enter a valid email address 'test@test.com'
     Then I click continue
-    When I click continue
+    When I click "Submit"
     Then I see a notice confirming an e-mail was sent to the citizen
 
   @localhost_request @javascript @vcr
@@ -65,7 +65,7 @@ Feature: Civil application journeys
     Then I click continue
     Then I enter a valid email address 'test@test.com'
     Then I click continue
-    When I click continue
+    When I click "Submit"
     Then I see a notice confirming an e-mail was sent to the citizen
 
   @javascript @vcr

@@ -119,4 +119,12 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(described_class.find_by_secure_id!(secure_id)).to eq(legal_aid_application)
     end
   end
+
+  describe 'state machine' do
+    subject(:application) { create(:legal_aid_application) }
+
+    it 'is created with a default state of "initiated"' do
+      expect(application.state).to eq('initiated')
+    end
+  end
 end
