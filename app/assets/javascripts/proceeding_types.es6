@@ -1,3 +1,8 @@
+var submitForm = proceedingItem => {
+  $('#proceeding_code').val($(proceedingItem).attr('id'));
+  $('#new_legal_aid_application').submit();
+}
+
 $.getJSON("/v1/proceeding_types", function (proceedings_data) {
 
   $("#proceeding-list .proceeding-item").hide();
@@ -39,5 +44,23 @@ $.getJSON("/v1/proceeding_types", function (proceedings_data) {
 
   $('#clear-proceeding-search').on("click", function() {
     $("#proceeding-search-input").val("").trigger("keyup");
+  });
+
+  $('.proceeding-item').on('mouseover', function(e){
+    $(this).addClass('hover');
+  });
+
+  $('.proceeding-item').on('mouseout', function(e){
+    $(this).removeClass('hover');
+  });
+
+  $('.proceeding-item').on('click', function(e){
+    submitForm(this);
+  });
+
+  $('.proceeding-item').on('keydown', function(e){
+    if (e.which == 13) {
+      submitForm(this);
+    }
   });
 });

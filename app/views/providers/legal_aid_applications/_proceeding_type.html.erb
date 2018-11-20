@@ -1,16 +1,16 @@
-<div id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item">
+<li id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item govuk-!-margin-bottom-0" tabindex="0">
   <div class="govuk-grid-column-two-thirds text-column">
-    <div class="govuk-caption-m">
+    <h3 class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-4"><%= proceeding_type.meaning %></h3>
+    <span class="govuk-caption-m">
       <%= proceeding_type.ccms_category_law %> &gt; <%= proceeding_type.ccms_matter %>
-    </div>
-    <span class="govuk-body"><%= proceeding_type.meaning %></span>
+    </span>
   </div>
 
   <%= form_for([:providers, @legal_aid_application]) do |form| %>
   <div class="govuk-grid-column-one-third control-column">
     <%= hidden_field_tag :proceeding_type, proceeding_type.code %>
-    <div class="govuk-!-padding-bottom-2"></div>
-    <%= form.submit 'Select and continue', class: 'govuk-button proceeding-link' %>
+    <%= form.submit 'Select and continue', tabindex: '-1', class: 'govuk-button proceeding-link govuk-!-margin-top-4' %>
   </div>
   <% end %>
-</div>
+  <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full govuk-!-margin-bottom-0" style="width: 100%;" />
+</li>
