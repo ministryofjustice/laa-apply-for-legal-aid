@@ -160,5 +160,21 @@ RSpec.describe 'providers applicant requests', type: :request do
 
       expect(response).to redirect_to(providers_legal_aid_application_check_your_answers_path(application))
     end
+
+    context 'with an existing applicant with the same email' do
+      let!(:existing_applicant) { create :applicant, email: new_email }
+
+      it 'updates the applicant' do
+        expect { patch_request }
+          .to change { applicant.reload.email }
+          .from(original_email).to(new_email)
+      end
+
+      it 'redirects to the check your answers page' do
+        patch_request
+
+        expect(response).to redirect_to(providers_legal_aid_application_check_your_answers_path(application))
+      end
+    end
   end
 end
