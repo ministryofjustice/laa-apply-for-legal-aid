@@ -28,6 +28,10 @@ gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
 # Used to encrypt JSON stored in SecureData
 gem 'jwt'
 
+# Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
