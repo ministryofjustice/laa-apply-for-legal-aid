@@ -26,7 +26,7 @@ $.getJSON("/v1/proceeding_types", function (proceedings_data) {
         // top and display it
         $.each(codes.reverse(), function(_i, code){
           let element = $('#' + code);
-          let parent = element.parent("div");
+          let parent = $('#proceeding-list');
           element.detach().prependTo(parent);
           element.show();
         });
@@ -41,5 +41,3 @@ $.getJSON("/v1/proceeding_types", function (proceedings_data) {
     $("#proceeding-search-input").val("").trigger("keyup");
   });
 });
-
-

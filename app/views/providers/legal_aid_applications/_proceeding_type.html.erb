@@ -14,11 +14,3 @@
   </div>
   <% end %>
 </div>
-
-<script>
-  <%#
-    Hidding div as soon as possible to minimize appearance on page transition.
-    `raw ... to_json` to keep erblint happy
-  %>
-  $(<%= raw "##{proceeding_type.code}".to_json %>).hide();
-</script>
