@@ -52,7 +52,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
         it 'raises a state transition error' do
           expect { post_request }
-            .to raise_error(StateMachines::InvalidTransition, /^Cannot transition state via :provider_submit from :provider_submitted/)
+            .to raise_error(AASM::InvalidTransition, /Event 'provider_submit' cannot transition from 'provider_submitted/)
         end
 
         it 'does not send an email to the citizen' do

@@ -1,4 +1,6 @@
 class LegalAidApplication < ApplicationRecord
+  include AASM
+
   belongs_to :applicant, optional: true
   has_many :application_proceeding_types
   has_many :proceeding_types, through: :application_proceeding_types
@@ -10,9 +12,12 @@ class LegalAidApplication < ApplicationRecord
 
   validate :proceeding_type_codes_existence
 
-  state_machine initial: :initiated do
+  aasm column: :state do
+    state :initiated, initial: true
+    state :provider_submitted
+
     event :provider_submit do
-      transition initiated: :provider_submitted
+      transitions from: :initiated, to: :provider_submitted
     end
   end
 
