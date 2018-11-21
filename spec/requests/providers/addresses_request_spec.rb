@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'address requests', type: :request do
-  let(:application) { create :application, :with_applicant }
-  let(:applicant) { application.applicant }
-  let(:applicant_id) { applicant.id }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:applicant) { legal_aid_application.applicant }
   let(:address_params) do
     {
       address:
@@ -17,11 +16,11 @@ RSpec.describe 'address requests', type: :request do
     }
   end
 
-  describe 'GET /providers/applicants/:applicant_id/addresses/new' do
-    let(:get_request) { get "/providers/applicants/#{applicant_id}/addresses/new" }
+  describe 'GET /providers/applications/:legal_aid_application_id/address/new' do
+    let(:get_request) { get new_providers_legal_aid_application_address_path(legal_aid_application) }
 
     context 'when the applicant does not exist' do
-      let(:applicant_id) { SecureRandom.uuid }
+      let(:legal_aid_application) { SecureRandom.uuid }
 
       it 'redirects the user to the applications page with an error message' do
         get_request
@@ -38,11 +37,11 @@ RSpec.describe 'address requests', type: :request do
     end
   end
 
-  describe 'POST /providers/applicants/:applicant_id/addresses' do
-    let(:post_request) { post "/providers/applicants/#{applicant_id}/addresses", params: address_params }
+  describe 'POST /providers/applications/:legal_aid_application_id/address' do
+    let(:post_request) { post providers_legal_aid_application_address_path(legal_aid_application), params: address_params }
 
-    context 'when the applicant does not exist' do
-      let(:applicant_id) { SecureRandom.uuid }
+    context 'when the legal aid application does not exist' do
+      let(:legal_aid_application) { SecureRandom.uuid }
 
       it 'redirects the user to the applications page with an error message' do
         post_request
@@ -50,15 +49,20 @@ RSpec.describe 'address requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
+      it 'displays an error if the applicant does not exist' do
+        post_request
+        expect(flash[:error]).to eq('Invalid application')
+      end
+
       it 'does NOT create an address record' do
-        expect { post_request }.not_to change { applicant.addresses.count }
+        expect { post_request }.not_to change { Address.count }
       end
     end
 
     context 'with a valid address' do
       it 'redirects successfully to the next step' do
         post_request
-        expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+        expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(legal_aid_application))
       end
 
       it 'creates an address record' do
@@ -73,20 +77,6 @@ RSpec.describe 'address requests', type: :request do
         post_request
         expect(unescaped_response_body).to include("Enter your client's address manually")
         expect(response.body).to include('Enter a postcode')
-      end
-    end
-
-    context 'with an invalid applicant' do
-      let(:applicant_id) { SecureRandom.uuid }
-
-      it 'displays an error if the applicant does not exist' do
-        post_request
-        expect(flash[:error]).to eq('Invalid applicant')
-      end
-
-      it 'redirects if the applicant does not exist' do
-        post_request
-        expect(response.body).to redirect_to(providers_legal_aid_applications_path)
       end
     end
   end

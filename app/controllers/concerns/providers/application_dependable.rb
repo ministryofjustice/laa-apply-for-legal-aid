@@ -8,6 +8,7 @@ module Providers
       def legal_aid_application
         @legal_aid_application ||= LegalAidApplication.find_by(id: params[:legal_aid_application_id])
       end
+      delegate :applicant, to: :legal_aid_application
 
       def set_legal_aid_application
         return if legal_aid_application.present?

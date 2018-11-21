@@ -1,6 +1,6 @@
 module Providers
   class AddressLookupsController < BaseController
-    include Providers::ApplicantDependable
+    include Providers::ApplicationDependable
 
     def new
       @form = Applicants::AddressLookupForm.new
@@ -24,7 +24,6 @@ module Providers
 
     def perform_and_handle_lookup
       outcome = AddressLookupService.call(@form.postcode)
-
       if outcome.success?
         @addresses = outcome.result
         @form = Applicants::AddressSelectionForm.new(postcode: @form.postcode)

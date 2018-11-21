@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'address lookup requests', type: :request do
-  let(:application) { create(:legal_aid_application, :with_applicant) }
-  let(:applicant) { application.applicant }
-  let(:applicant_id) { applicant.id }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:applicant) { legal_aid_application.applicant }
 
-  describe 'GET /providers/applicants/:applicant_id/address_lookups/new' do
-    let(:get_request) { get "/providers/applicants/#{applicant_id}/address_lookups/new" }
+  describe 'GET /providers/applications/:legal_aid_application_id/address_lookups/new' do
+    let(:get_request) { get new_providers_legal_aid_application_address_lookups_path(legal_aid_application) }
 
     context 'when the applicant does not exist' do
-      let(:applicant_id) { SecureRandom.uuid }
+      let(:legal_aid_application) { SecureRandom.uuid }
 
       it 'redirects the user to the applications page with an error message' do
         get_request
@@ -26,7 +25,7 @@ RSpec.describe 'address lookup requests', type: :request do
     end
   end
 
-  describe 'POST /providers/applicants/:applicant_id/address_lookups/' do
+  describe 'POST /providers/applications/:legal_aid_application_id/address_lookups' do
     let(:postcode) { 'DA7 4NG' }
     let(:normalized_postcode) { 'DA74NG' }
     let(:params) do
@@ -36,10 +35,10 @@ RSpec.describe 'address lookup requests', type: :request do
         }
       }
     end
-    let(:post_request) { post "/providers/applicants/#{applicant_id}/address_lookups", params: params }
+    let(:post_request) { post providers_legal_aid_application_address_lookups_path(legal_aid_application), params: params }
 
-    context 'when the applicant does not exist' do
-      let(:applicant_id) { SecureRandom.uuid }
+    context 'when the applicantion does not exist' do
+      let(:legal_aid_application) { SecureRandom.uuid }
 
       it 'redirects the user to the applications page with an error message' do
         post_request

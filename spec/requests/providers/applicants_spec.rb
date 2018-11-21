@@ -81,9 +81,7 @@ RSpec.describe 'providers applicant requests', type: :request do
     it 'redirects provider to next step of the submission' do
       post_request
 
-      new_applicant = application.reload.applicant
-
-      expect(response).to redirect_to(new_providers_applicant_address_lookups_path(new_applicant))
+      expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path(application))
     end
 
     it 'creates a new applicant associated with the application' do

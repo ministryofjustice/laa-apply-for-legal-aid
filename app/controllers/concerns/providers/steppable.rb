@@ -3,11 +3,20 @@ module Providers
     STEPS = [
       { step: :proceedings, action: :new_providers_legal_aid_application_path },
       { step: :basic_details, action: :new_providers_legal_aid_application_applicant, args: [:application] },
-      { step: :address, action: :new_providers_applicant_address_lookups_path, args: [:applicant] },
+      { step: :address, action: :new_providers_legal_aid_application_address_lookups_path, args: [:application] },
       { step: :check_benefits, action: :providers_legal_aid_application_check_benefits_path, args: [:application] },
       { step: :email, action: :providers_legal_aid_application_email_path, args: [:application] },
       { step: :submission_completed, action: :providers_legal_aid_application_check_your_answers_path, args: [:application] }
     ].freeze
+
+    ENTRY_PATH_METHODS = {
+      legal_aid_applications: :new_providers_legal_aid_application_path,
+      applications:           :new_providers_legal_aid_application_applicant_path,
+      addresses:              :new_providers_legal_aid_application_address_lookups_path,
+      check_benefits:         :providers_legal_aid_application_check_benefits_path,
+      emails:                 :providers_legal_aid_application_email_path,
+      check_your_answers:     :providers_legal_aid_application_check_your_answers_path
+    }.freeze
 
     def current_step
       @current_step || raise('@current_step needs to be set')

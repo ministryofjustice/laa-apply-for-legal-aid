@@ -1,6 +1,6 @@
 module Providers
   class AddressSelectionsController < BaseController
-    include Providers::ApplicantDependable
+    include Providers::ApplicationDependable
     include Providers::Steppable
 
     before_action :set_current_step

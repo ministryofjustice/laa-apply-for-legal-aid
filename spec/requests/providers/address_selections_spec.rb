@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'address selections requests', type: :request do
-  let(:application) { create(:legal_aid_application, :with_applicant) }
-  let(:applicant) { application.applicant }
-  let(:applicant_id) { applicant.id }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:applicant) { legal_aid_application.applicant }
 
-  describe 'POST /providers/applicants/:applicant_id/address_selections/' do
+  describe 'POST /providers/applications/:legal_aid_application_id/address_selections' do
     let(:address_list) do
       [
         { "address_line_one": '1', "address_line_two": 'LONSDALE ROAD', "city": 'BEXLEYHEATH', "postcode": 'DA7 4NG' },
@@ -33,10 +32,10 @@ RSpec.describe 'address selections requests', type: :request do
         }
       }
     end
-    let(:post_request) { post "/providers/applicants/#{applicant_id}/address_selections", params: params }
+    let(:post_request) { post providers_legal_aid_application_address_selections_path(legal_aid_application), params: params }
 
     context 'when the applicant does not exist' do
-      let(:applicant_id) { SecureRandom.uuid }
+      let(:legal_aid_application) { SecureRandom.uuid }
 
       it 'redirects the user to the applications page with an error message' do
         post_request
@@ -69,7 +68,7 @@ RSpec.describe 'address selections requests', type: :request do
     it 'redirects to next submission step' do
       post_request
 
-      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(legal_aid_application))
     end
   end
 end
