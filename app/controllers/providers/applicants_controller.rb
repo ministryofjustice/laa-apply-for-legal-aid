@@ -6,6 +6,7 @@ module Providers
     before_action :set_current_step
 
     def new
+      puts "NEXT: #{next_step_path}"
       @form = Applicants::BasicDetailsForm.new
     end
 

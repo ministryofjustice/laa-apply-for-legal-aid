@@ -11,7 +11,7 @@ module Providers
 
     ENTRY_PATH_METHODS = {
       legal_aid_applications: :new_providers_legal_aid_application_path,
-      applications:           :new_providers_legal_aid_application_applicant_path,
+      applicants:             :new_providers_legal_aid_application_applicant_path,
       addresses:              :new_providers_legal_aid_application_address_lookups_path,
       check_benefits:         :providers_legal_aid_application_check_benefits_path,
       emails:                 :providers_legal_aid_application_email_path,
@@ -32,5 +32,15 @@ module Providers
       end
       send(next_step[:action], *path_args)
     end
+
+    def next_step_path
+      send ENTRY_PATH_METHODS[next_controller_name], legal_aid_application
+    end
+
+    def next_controller_name
+      index = ENTRY_PATH_METHODS.keys.index(controller_name.to_sym)
+      return unless index
+      ENTRY_PATH_METHODS.keys[index + 1]
+     end
   end
 end
