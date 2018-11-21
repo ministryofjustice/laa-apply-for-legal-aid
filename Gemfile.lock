@@ -159,12 +159,23 @@ GEM
       builder (>= 2.1.2)
     hashdiff (0.3.7)
     hashie (3.5.7)
+    highline (2.0.0)
     html_tokenizer (0.0.7)
     httpi (2.4.4)
       rack
       socksify
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
+    i18n-tasks (0.9.28)
+      activesupport (>= 4.0.2)
+      ast (>= 2.1.0)
+      erubi
+      highline (>= 2.0.0)
+      i18n
+      parser (>= 2.2.3.0)
+      rails-i18n
+      rainbow (>= 2.2.2, < 4.0)
+      terminal-table (>= 1.5.1)
     io-like (0.3.0)
     jaro_winkler (1.5.1)
     jquery-rails (4.3.3)
@@ -256,6 +267,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails-i18n (5.1.2)
+      i18n (>= 0.7, < 2)
+      railties (>= 5.0, < 6)
     railties (5.2.0)
       actionpack (= 5.2.0)
       activesupport (= 5.2.0)
@@ -351,6 +365,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    terminal-table (1.8.0)
+      unicode-display_width (~> 1.1, >= 1.1.1)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -395,6 +411,7 @@ DEPENDENCIES
   factory_bot_rails
   faker (>= 1.9.1)
   govuk_notify_rails (~> 2.0.0)
+  i18n-tasks
   jquery-rails (~> 4.3, >= 4.3.3)
   json_expressions
   jwt
