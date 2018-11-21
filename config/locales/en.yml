@@ -127,6 +127,17 @@ en:
           body: 'Your client does not receive benefits that qualify for legal aid.'
           next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
   citizens:
+    accounts:
+      index:
+        account_holder_name_heading: Account holder name
+        account_holder_address_heading: Account holder address
+        type_heading: Type
+        account_number_heading: Account Number
+        sort_code_heading: Sort Code
+        balance_heading: Balance
+        your_accounts: Your account(s)
+        intro_text: "We have downloaded 3 months of your transaction history."
+        balance_text: "We will show your statement from the last 30 days so you can tell us more about your financial situation."
     additional_accounts:
       index:
         field_set_header: Do you have accounts with other banks?
@@ -134,3 +145,7 @@ en:
       new:
         field_set_header: Do you have online access to your accounts with other banks?
         hint: If you do not, you will need to provide paper evidence for these accounts.
+  currency:
+    gbp: £
+    eur: €
+    usd: $
