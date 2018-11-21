@@ -56,16 +56,16 @@ jobs:
     - *setup_test_env
     - restore_cache:
         keys:
-          - laa-apply-for-legal-aid-{{ checksum "Gemfile.lock" }}
-          - laa-apply-for-legal-aid
+          - laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
+          - laa-apply-for-legal-aid-v2
 
     - run:
         name: Bundle Install
-        command: bundle check || bundle install
+        command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
 
       # Store bundle cache
     - save_cache:
-        key: laa-apply-for-legal-aid-{{ checksum "Gemfile.lock" }}
+        key: laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
     - run: sudo apt install -y postgresql-client || true
