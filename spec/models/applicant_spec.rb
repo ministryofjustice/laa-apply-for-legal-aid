@@ -69,4 +69,12 @@ RSpec.describe Applicant, type: :model do
     expect(subject).to_not be_valid
     expect(subject.errors[:national_insurance_number]).to include('is not in the right format')
   end
+
+  context 'with an existing applicant' do
+    let!(:existing_applicant) { create :applicant }
+
+    it 'allows another applicant to be created with same email' do
+      expect { create :applicant, email: existing_applicant.email }.to change { Applicant.count }.by(1)
+    end
+  end
 end
