@@ -11,6 +11,7 @@ module LaaApplyForLegalAid
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
+      g.test_framework :rspec
     end
 
     config.x.benefit_check.service_name   = ENV['BC_LSC_SERVICE_NAME']
