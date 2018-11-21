@@ -36,6 +36,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'erb_lint', require: false
+  gem 'i18n-tasks'
   gem 'json_expressions'
   gem 'pry-byebug'
   gem 'rubocop', require: false
