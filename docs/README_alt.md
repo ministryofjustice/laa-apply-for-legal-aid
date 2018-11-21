@@ -1,3 +1,5 @@
+**DEPRECATED - FOLLOW AT YOUR OWN RISK**
+
 An alternative setup option exists using the makefile, which can be used by following the steps below:
 
 ## Initial setup

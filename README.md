@@ -25,6 +25,8 @@ brew bundle
 bin/setup
 ```
 
+**NOTE:** Ensure the `.env.development` settings are correctly configured.
+
 ### Run the application server
 
 ```
@@ -39,12 +41,13 @@ Runs Rubocop, RSpec specs and Cucumber features
 bin/rake
 ```
 
-**NOTE:** To ensure the recorded VCRs used in the specs are up to date, run the tests as such (this requires the a local API server to be up and running):
+**NOTE:** To ensure the recorded VCRs used in the specs are up to date, run the tests as such:
 
 ```
 VCR_RECORD_MODE=all bin/rake
 ```
-[There is an alternative setup procedure, using the makefile, which can be found here](README_alt.md)
+
+[There is an (deprecated) alternative setup procedure (not recommended), using the makefile, which can be found here](./docs/README_alt.md)
 
 ## Deployment
 
@@ -52,7 +55,8 @@ The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/
 
 **NOTE:** **git-crypt** is required to store secrets required for **uat**, **staging** and **production** environments. To be able to modify those secrets, **git-crypt** needs to be set up according to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/03-other-topics/001-git-crypt-setup/#git-crypt).
 
-For more deployment information refer to the specific [README](./helm_deploy/apply-for-legal-aid/README.md)
+* For more information on howto setup **Helm** in your local environment refer to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/002-app-deploy-helm/#installing-and-configuring-helm-and-tiller).
+* For more deployment information refer to the specific [README](./helm_deploy/apply-for-legal-aid/README.md)
 
 ### UAT Deployments
 
@@ -66,7 +70,9 @@ helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-fo
 helm delete <name-of-the-release> --tiller-namespace=laa-apply-for-legalaid-uat --purge
 ```
 
-## True Layer
+## 3rd party integrations
+
+### True Layer
 
 To connect the True Layer API, a client ID and client SECRET must be supplied. They can be
 set via the environment variables `TRUE_LAYER_CLIENT_ID` and `TRUE_LAYER_CLIENT_SECRET`
@@ -74,3 +80,7 @@ respectively. Visit https://console.truelayer.com to get a client ID and client 
 
 True Layer offer a Mock Bank option (see https://docs.truelayer.com/#mock-users). To enable
 this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"true"`.
+
+## Troubleshooting
+
+Refer to the specific [README](./docs/troubleshooting.md)
