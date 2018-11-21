@@ -132,6 +132,7 @@ en:
         account_holder_name_heading: Account holder name
         account_holder_address_heading: Account holder address
         type_heading: Type
+        heading_1: You have successfully shared your account information
         account_number_heading: Account Number
         sort_code_heading: Sort Code
         balance_heading: Balance
