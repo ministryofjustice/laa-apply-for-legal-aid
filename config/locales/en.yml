@@ -132,6 +132,22 @@ en:
           body: 'Your client does not receive benefits that qualify for legal aid.'
           next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
     check_your_answers:
+      index:
+        title: Check your answers
+        section_1:
+          heading: Scope of legal aid
+          proceeding: Proceeding
+        section_2:
+          heading: Client details
+          first_name: First name
+          last_name: Last name
+          dob: Date of birth
+          nino: National Insurance number
+          address: Correspondence address
+          email: Email address
+        section_3:
+          heading: Give your client access to the financial assessment
+          text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
       confirm:
         application_created: Application created
         sub_title: Your case reference number is
