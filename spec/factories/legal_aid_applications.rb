@@ -4,6 +4,10 @@ FactoryBot.define do
       applicant
     end
 
+    trait :provider_submitted do
+      state { 'provider_submitted' }
+    end
+
     trait :with_proceeding_types do
       transient do
         proceeding_types_count { 1 }

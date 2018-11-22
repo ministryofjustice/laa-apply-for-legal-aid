@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_160942) do
     t.datetime "updated_at", null: false
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
+    t.string "state"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 

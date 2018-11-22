@@ -1,4 +1,6 @@
 class LegalAidApplication < ApplicationRecord
+  include AASM
+
   belongs_to :applicant, optional: true
   has_many :application_proceeding_types
   has_many :proceeding_types, through: :application_proceeding_types
@@ -9,6 +11,15 @@ class LegalAidApplication < ApplicationRecord
   attr_reader :proceeding_type_codes
 
   validate :proceeding_type_codes_existence
+
+  aasm column: :state do
+    state :initiated, initial: true
+    state :provider_submitted
+
+    event :provider_submit do
+      transitions from: :initiated, to: :provider_submitted
+    end
+  end
 
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)

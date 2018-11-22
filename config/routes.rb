@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       resource :applicant
 
       resources :check_your_answers, only: [:index] do
-        get :confirm, on: :collection
+        post :confirm, on: :collection
       end
 
       resources :check_benefits, only: [:index]

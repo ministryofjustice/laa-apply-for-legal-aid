@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'aasm', '~> 5.0.1'
 gem 'active_model_serializers', '~> 0.10.7'
 gem 'govuk_notify_rails', '~> 2.0.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
