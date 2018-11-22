@@ -4,6 +4,10 @@ FactoryBot.define do
       applicant
     end
 
+    trait :with_applicant_and_address do
+      applicant { create :applicant, :with_address }
+    end
+
     trait :provider_submitted do
       state { 'provider_submitted' }
     end
