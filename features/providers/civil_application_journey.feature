@@ -10,13 +10,17 @@ Feature: Civil application journeys
   @javascript
   Scenario: I am able to clear proceeding on the proceeding page
     Given I visit the application service
+    Then the page should be accessible
     And I click link "Start"
+    Then the page should be accessible
     And I click link "Start now"
+    Then the page should be accessible
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I click clear search
     Then the results section is empty
     Then proceeding search field is empty
+    Then print accessibility report
 
   @javascript @vcr
   Scenario: Completes the application using address lookup

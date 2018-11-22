@@ -116,3 +116,19 @@ end
 Then(/^I see a notice saying that the citizen does not receive benefits$/) do
   expect(page).to have_content('Your client does not receive benefits that qualify for legal aid.')
 end
+
+# NOTE: javascript needs to be active for this step to work
+Then(/^the page should be accessible$/) do
+  @accessibility_report ||= []
+  report = page.execute_script('var results = axs.Audit.run();return axs.Audit.createReport(results);')
+  @accessibility_report << { page: page.current_url, report: report }
+end
+
+Then(/^print accessibility report$/) do
+  @accessibility_report ||= []
+  @accessibility_report.each do |report|
+    pp '*' * 30
+    pp "PAGE: #{report[:page]}"
+    print report[:report]
+  end
+end
