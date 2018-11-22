@@ -6,6 +6,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'json_expressions/rspec'
+require 'database_cleaner'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -61,9 +62,25 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include RequestHelpers, type: :request
   config.include TrueLayerHelpers
+  config.include WaitForAjaxHelpers, type: :feature
+  config.include AccessibilityTestHelpers, type: :feature
 
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do |example|
+    DatabaseCleaner.strategy = if example.metadata[:js]
+                                 :truncation
+                               else
+                                 :transaction
+                               end
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 
   # Add support for Devise authentication helpers
