@@ -3,17 +3,14 @@ module Providers
     include Providers::ApplicationDependable
     include Providers::Steppable
 
-    before_action :set_current_step
-
     def new
-      puts "NEXT: #{next_step_path}"
       @form = Applicants::BasicDetailsForm.new
     end
 
     def create
       @form = Applicants::BasicDetailsForm.new(new_params)
       if @form.save
-        redirect_to action_for_next_step(options: { applicant: @form.model })
+        redirect_to next_step_url
       else
         render :new
       end
@@ -27,10 +24,6 @@ module Providers
 
     def new_params
       applicant_params.merge(legal_aid_application_id: params[:legal_aid_application_id])
-    end
-
-    def set_current_step
-      @current_step = :basic_details
     end
   end
 end

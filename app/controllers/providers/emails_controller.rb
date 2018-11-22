@@ -12,7 +12,7 @@ module Providers
 
       if @form.save
         redirect_to(
-          action_for_next_step(options: { application: legal_aid_application, applicant: @form.model }),
+          next_step_url,
           # TODO: Remove this - currently just a way of displaying a usable link
           notice: "Email link will be to: #{citizens_legal_aid_application_url(legal_aid_application.generate_secure_id)}"
         )
@@ -33,10 +33,6 @@ module Providers
 
     def applicant
       @applicant ||= legal_aid_application.applicant
-    end
-
-    def current_step
-      :email
     end
   end
 end

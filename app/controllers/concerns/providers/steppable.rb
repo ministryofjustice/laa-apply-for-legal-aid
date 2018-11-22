@@ -1,46 +1,63 @@
 module Providers
   module Steppable
-    STEPS = [
-      { step: :proceedings, action: :new_providers_legal_aid_application_path },
-      { step: :basic_details, action: :new_providers_legal_aid_application_applicant, args: [:application] },
-      { step: :address, action: :new_providers_legal_aid_application_address_lookups_path, args: [:application] },
-      { step: :check_benefits, action: :providers_legal_aid_application_check_benefits_path, args: [:application] },
-      { step: :email, action: :providers_legal_aid_application_email_path, args: [:application] },
-      { step: :submission_completed, action: :providers_legal_aid_application_check_your_answers_path, args: [:application] }
-    ].freeze
+    extend ActiveSupport::Concern
 
-    ENTRY_PATH_METHODS = {
-      legal_aid_applications: :new_providers_legal_aid_application_path,
-      applicants:             :new_providers_legal_aid_application_applicant_path,
-      addresses:              :new_providers_legal_aid_application_address_lookups_path,
-      check_benefits:         :providers_legal_aid_application_check_benefits_path,
-      emails:                 :providers_legal_aid_application_email_path,
-      check_your_answers:     :providers_legal_aid_application_check_your_answers_path
-    }.freeze
+    included do
+      # Keys are controller names (as returned by `controller_name.to_sym`)
+      PATH_METHODS = {
+        legal_aid_applications: {
+          forward: :new_providers_legal_aid_application_applicant_path,
+          back: :providers_root_path
+        },
+        applicants: {
+          forward: :new_providers_legal_aid_application_address_lookups_path,
+          back: :new_providers_legal_aid_application_path
+        },
+        address_lookups: {
+          # Forward determined by controller action logic
+          back: :new_providers_legal_aid_application_applicant_path
+        },
+        address_selections: {
+          forward: :providers_legal_aid_application_check_benefits_path,
+          back: :new_providers_legal_aid_application_applicant_path
+        },
+        addresses: {
+          forward: :providers_legal_aid_application_check_benefits_path,
+          back: :new_providers_legal_aid_application_applicant_path
+        },
+        check_benefits: {
+          forward: :providers_legal_aid_application_email_path,
+          back: :new_providers_legal_aid_application_address_lookups_path
+        },
+        emails: {
+          forward: :providers_legal_aid_application_check_your_answers_path,
+          back: :providers_legal_aid_application_check_benefits_path
+        },
+        check_your_answers: {
+          forward: :providers_legal_aid_applications_path,
+          back: :providers_legal_aid_application_email_path
+        }
+      }.freeze
 
-    def current_step
-      @current_step || raise('@current_step needs to be set')
-    end
-
-    def action_for_next_step(step: current_step, options: {})
-      index = STEPS.index { |h| h[:step] == step.to_sym }
-      return :applications unless index
-      next_step = STEPS[index + 1]
-      return :providers_legal_aid_applications unless next_step
-      path_args = (next_step[:args] || []).each_with_object([]) do |arg, array|
-        array << options[arg] if options[arg].present?
+      def back_step_url
+        raise "back step not found for controller name #{controller_name}" unless current_next_method
+        send current_next_method, legal_aid_application
       end
-      send(next_step[:action], *path_args)
-    end
+      helper_method :back_step_url
 
-    def next_step_path
-      send ENTRY_PATH_METHODS[next_controller_name], legal_aid_application
-    end
+      def next_step_url
+        raise "forward step not found for controller name #{controller_name}" unless current_next_method
+        send current_next_method, legal_aid_application
+      end
 
-    def next_controller_name
-      index = ENTRY_PATH_METHODS.keys.index(controller_name.to_sym)
-      return unless index
-      ENTRY_PATH_METHODS.keys[index + 1]
-     end
+      private
+      def current_next_method
+        @current_next_method ||= PATH_METHODS.dig controller_name.to_sym, :forward
+      end
+
+      def current_back_method
+        @current_back_method ||= PATH_METHODS.dig controller_name.to_sym, :back
+      end
+    end
   end
 end
