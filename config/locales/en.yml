@@ -113,6 +113,11 @@ en:
     continue: Continue
     errors:
       yes_or_no: You must select either Yes or No
+  layouts:
+    application:
+      header:
+        gov_uk_link_title: Go to the GOV.UK homepage
+        title: Apply for Legal Aid
   providers:
     check_benefits:
       index:
