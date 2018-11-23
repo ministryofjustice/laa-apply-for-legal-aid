@@ -1,42 +1,43 @@
 <% content_for :navigation do %>
-  <%= link_to 'Back', citizens_information_path, class: 'govuk-back-link', id: 'back' %>
+    <%= link_to 'Back', citizens_information_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<h1 class="govuk-heading-xl">Do you agree to share your bank transactions with us?</h1>
+  <h1 class="govuk-heading-xl">Do you agree to share your bank transactions with us?</h1>
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
 
-     <p class="govuk-body">We only use your bank transactions to support your legal aid application. We do not use the information for anything else.</p>
+       <p class="govuk-body">We only use your bank transactions to support your legal aid application. We do not use the information for anything else.</p>
 
-     <details class="govuk-details">
-       <summary class="govuk-details__summary">
-         <span class="govuk-details__summary-text">
-           Find out how we use and store your personal data
-         </span>
-       </summary>
-       <div class="govuk-details__text">
-         <ul class="govuk-list govuk-list--bullet">
-           <li>We do not save your online banking username and password</li>
-           <li>We do not have any ongoing access to your bank accounts</li>
-           <li>We only use your details to assess your eligibility for legal aid</li>
-         </ul>
-       </div>
-     </details>
-
-     <div class="govuk-form-group">
-       <fieldset class="govuk-fieldset" aria-describedby="open-banking-consent">
-         <div class="govuk-checkboxes">
-           <div class="govuk-checkboxes__item">
-             <input class="govuk-checkboxes__input" id="open-banking-consent" name="open-banking-consent" type="checkbox" value="consent" />
-             <label class="govuk-label govuk-checkboxes__label" for="open-banking-1">
-               <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
-             </label>
-           </div>
+       <details class="govuk-details">
+         <summary class="govuk-details__summary">
+           <span class="govuk-details__summary-text">
+             Find out how we use and store your personal data
+           </span>
+         </summary>
+         <div class="govuk-details__text">
+           <ul class="govuk-list govuk-list--bullet">
+             <li>We do not save your online banking username and password</li>
+             <li>We do not have any ongoing access to your bank accounts</li>
+             <li>We only use your details to assess your eligibility for legal aid</li>
+           </ul>
          </div>
-      </fieldset>
-    </div>
+       </details>
 
-    <%= link_to 'Continue', applicant_true_layer_omniauth_authorize_path, class: 'govuk-button' %>
+       <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path(@applicant), local: true) do |form| %>
+
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset" aria-describedby="open-banking-consent">
+              <div class="govuk-checkboxes">
+                <div class="govuk-checkboxes__item">
+                  <%= form.check_box :open_banking_consent, { class: 'govuk-checkboxes__input' }, 'YES', 'NO' %>
+                  <%= form.label :open_banking_consent, t('.label.html'), class: 'govuk-label govuk-checkboxes__label' %>
+                </div>
+              </div>
+           </fieldset>
+         </div>
+
+         <%= submit_tag 'Continue', class: 'govuk-button' %>
+       <% end %>
+    </div>
   </div>
-</div>

@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(version: 2018_11_26_110330) do
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
     t.string "state"
+    t.string "open_banking_consent"
+    t.datetime "consented_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 
