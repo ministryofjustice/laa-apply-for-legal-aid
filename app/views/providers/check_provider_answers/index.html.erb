@@ -13,19 +13,7 @@
     </h2>
 
     <dl class="app-check-your-answers app-check-your-answers--long">
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_1.proceeding' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= @proceeding.meaning %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_1.proceeding' %></span>
-          </a>
-        </dd>
-      </div>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_1.proceeding'), answer: @proceeding.meaning } %>
     </dl>
 
     <h2 class="govuk-heading-m">
@@ -33,84 +21,12 @@
     </h2>
 
     <dl class="app-check-your-answers app-check-your-answers--long">
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_2.first_name' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= @applicant.first_name %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_2.first_name' %></span>
-          </a>
-        </dd>
-      </div>
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_2.last_name' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= @applicant.last_name %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_2.last_name' %></span>
-          </a>
-        </dd>
-      </div>
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_2.dob' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= @applicant.date_of_birth.strftime('%d/%m/%Y') %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_2.dob' %></span>
-          </a>
-        </dd>
-      </div>
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_2.nino' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= @applicant.national_insurance_number %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_2.nino' %></span>
-          </a>
-        </dd>
-      </div>
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_2.address' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= address_with_line_breaks(@address) %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_2.address' %></span>
-          </a>
-        </dd>
-      </div>
-      <div class="app-check-your-answers__contents">
-        <dt class="app-check-your-answers__question">
-          <%= t '.section_2.email' %>
-        </dt>
-        <dd class="app-check-your-answers__answer">
-          <%= @applicant.email %>
-        </dd>
-        <dd class="app-check-your-answers__change">
-          <a href="#">
-            Change<span class="govuk-visually-hidden"><%= t '.section_2.email' %></span>
-          </a>
-        </dd>
-      </div>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.first_name'), answer: @applicant.first_name } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.last_name'), answer: @applicant.last_name } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.dob'), answer: @applicant.date_of_birth.strftime('%d/%m/%Y') } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.nino'), answer: @applicant.national_insurance_number } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.address'), answer: address_with_line_breaks(@address) } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.email'), answer: @applicant.email } %>
     </dl>
 
     <h2 class="govuk-heading-m">
