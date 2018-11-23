@@ -25,7 +25,7 @@ module Citizens
     end
 
     def consent_params
-      params.require(:legal_aid_application).permit(:open_banking_consent, :consented_at)
+      params.require(:legal_aid_application).permit(:open_banking_consent, :consent_choice_timestamp)
     end
   end
 end

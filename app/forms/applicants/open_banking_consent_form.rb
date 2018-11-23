@@ -4,6 +4,6 @@ module Applicants
 
     form_for LegalAidApplication
 
-    attr_accessor :open_banking_consent, :consented_at
+    attr_accessor :open_banking_consent, :consent_choice_timestamp
   end
 end

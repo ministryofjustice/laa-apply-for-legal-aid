@@ -7,9 +7,9 @@ class LegalAidApplication < ApplicationRecord
   has_one :benefit_check_result
 
   before_create :create_app_ref
-  before_save :set_consented_date
+  before_save :set_consent_choice_date
 
-  attr_reader :proceeding_type_codes, :open_banking_consent, :consented_at
+  attr_reader :proceeding_type_codes, :open_banking_consent, :consent_choice_timestamp
   validate :proceeding_type_codes_existence
 
   aasm column: :state do
@@ -72,7 +72,7 @@ class LegalAidApplication < ApplicationRecord
     self.application_ref = SecureRandom.uuid
   end
 
-  def set_consented_date
-    self.consented_at = Time.current if will_save_change_to_open_banking_consent?
+  def set_consent_choice_date
+    self.consent_choice_timestamp = Time.current if will_save_change_to_open_banking_consent?
   end
 end
