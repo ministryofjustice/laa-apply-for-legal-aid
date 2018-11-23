@@ -111,6 +111,8 @@ en:
     'yes': 'Yes' # needs quotes as yes renders as true without them
     'no': 'No'   # needs quotes as no renders as false without them
     continue: Continue
+    back: Back
+    submit: Submit
     errors:
       yes_or_no: You must select either Yes or No
   layouts:
