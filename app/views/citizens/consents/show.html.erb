@@ -2,42 +2,19 @@
     <%= link_to 'Back', citizens_information_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-  <h1 class="govuk-heading-xl">Do you agree to share your bank transactions with us?</h1>
+  <%= form_tag(citizens_consent_path) do %>
 
-  <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
+    <%= govuk_form_group(
+          input: :open_banking_consent
+        ) do %>
+      <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
+      <%= govuk_body t('.body') %>
+      <%= render partial: 'shared/forms/detailed_list', locals: { translation_path: 'citizens.consents.show' } %>
+      <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
+        <%= render partial: 'shared/forms/check_boxes', locals: { form: form } %>
+      <% end %>
 
-       <p class="govuk-body">We only use your bank transactions to support your legal aid application. We do not use the information for anything else.</p>
+      <%= govuk_submit_button t('generic.continue') %>
 
-       <details class="govuk-details">
-         <summary class="govuk-details__summary">
-           <span class="govuk-details__summary-text">
-             Find out how we use and store your personal data
-           </span>
-         </summary>
-         <div class="govuk-details__text">
-           <ul class="govuk-list govuk-list--bullet">
-             <li>We do not save your online banking username and password</li>
-             <li>We do not have any ongoing access to your bank accounts</li>
-             <li>We only use your details to assess your eligibility for legal aid</li>
-           </ul>
-         </div>
-       </details>
-
-       <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path(@applicant), local: true) do |form| %>
-
-          <div class="govuk-form-group">
-            <fieldset class="govuk-fieldset" aria-describedby="open-banking-consent">
-              <div class="govuk-checkboxes">
-                <div class="govuk-checkboxes__item">
-                  <%= form.check_box :open_banking_consent, { class: 'govuk-checkboxes__input' }, 'YES', 'NO' %>
-                  <%= form.label :open_banking_consent, t('.label.html'), class: 'govuk-label govuk-checkboxes__label' %>
-                </div>
-              </div>
-           </fieldset>
-         </div>
-
-         <%= submit_tag 'Continue', class: 'govuk-button' %>
-       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
