@@ -4,8 +4,8 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address) }
   let(:application_id) { application.id }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/check_your_answers' do
-    let(:get_request) { get "/providers/applications/#{application_id}/check_your_answers" }
+  describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
+    let(:get_request) { get "/providers/applications/#{application_id}/check_provider_answers" }
 
     context 'when the application does not exist' do
       let(:application_id) { SecureRandom.uuid }
@@ -52,8 +52,8 @@ RSpec.describe 'check your answers requests', type: :request do
     end
   end
 
-  describe 'POST /providers/applications/:legal_aid_application_id/check_your_answers/confirm' do
-    let(:post_request) { post "/providers/applications/#{application_id}/check_your_answers/confirm" }
+  describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/confirm' do
+    let(:post_request) { post "/providers/applications/#{application_id}/check_provider_answers/confirm" }
     let(:mocked_email_service) { instance_double(CitizenEmailService) }
 
     context 'when the application does not exist' do

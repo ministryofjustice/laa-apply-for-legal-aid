@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, path: 'applications', only: %i[index new create] do
       resource :applicant, only: %i[new create]
 
-      resources :check_your_answers, only: [:index] do
+      resources :check_provider_answers, only: [:index] do
         post :confirm, on: :collection
       end
       resource :address, only: %i[new create]

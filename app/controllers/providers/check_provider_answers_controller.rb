@@ -1,5 +1,5 @@
 module Providers
-  class CheckYourAnswersController < BaseController
+  class CheckProviderAnswersController < BaseController
     include Providers::ApplicationDependable
     include Steppable
 

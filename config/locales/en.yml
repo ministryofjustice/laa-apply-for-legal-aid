@@ -131,7 +131,7 @@ en:
           title: 'must complete a financial assessment'
           body: 'Your client does not receive benefits that qualify for legal aid.'
           next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
-    check_your_answers:
+    check_provider_answers:
       index:
         title: Check your answers
         section_1:

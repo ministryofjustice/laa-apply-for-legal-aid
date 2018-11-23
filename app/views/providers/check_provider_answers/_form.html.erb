@@ -1,0 +1,17 @@
+<%= form_with(model: check_provider_answers, local: true) do |form| %>
+  <% if check_provider_answers.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(check_provider_answers.errors.count, 'error') %> prohibited this check_provider_answers from being saved:</h2>
+
+      <ul>
+      <% check_provider_answers.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
