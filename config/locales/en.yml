@@ -135,6 +135,13 @@ en:
         happen_next_heading: What happens next
         happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
         back_button: "Back to your applications"
+    legal_aid_applications:
+      new:
+        heading_1: "What does your client want legal aid for?"
+        heading_2: "Search for legal proceedings"
+        search_help_example: "For example by category of law, matter type or legal proceeding."
+        no_results: "No results found."
+        clear_search: "Clear search"
   citizens:
     accounts:
       index:
