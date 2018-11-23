@@ -79,9 +79,9 @@ RSpec.describe 'check your answers requests', type: :request do
         post_request
       end
 
-      it 'redirects to the application page' do
+      it 'display confirmation page after calling the email service' do
         post_request
-        expect(response).to redirect_to(providers_legal_aid_applications_path)
+        expect(response.body).to include(application.application_ref)
       end
     end
   end

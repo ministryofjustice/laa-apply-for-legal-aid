@@ -116,3 +116,7 @@ end
 Then(/^I see a notice saying that the citizen does not receive benefits$/) do
   expect(page).to have_content('Your client does not receive benefits that qualify for legal aid.')
 end
+
+Then('I am on the application confirmation page') do
+  expect(page).to have_content('Application created')
+end
