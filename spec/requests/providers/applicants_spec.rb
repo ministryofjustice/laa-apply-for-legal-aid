@@ -50,6 +50,19 @@ RSpec.describe 'providers applicant requests', type: :request do
     end
     let(:patch_request) { patch "/providers/applications/#{application_id}/applicant", params: params }
 
+    it 'redirects provider to next step of the submission' do
+      post_request
+
+      expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path(application))
+    end
+
+    it 'creates a new applicant associated with the application' do
+      expect { patch_request }.to change { Applicant.count }.by(1)
+
+      new_applicant = application.reload.applicant
+      expect(new_applicant).to be_instance_of(Applicant)
+    end
+
     context 'when the application does not exist' do
       let(:application_id) { SecureRandom.uuid }
 
@@ -89,19 +102,6 @@ RSpec.describe 'providers applicant requests', type: :request do
       it 'does NOT create a new applicant' do
         expect { patch_request }.not_to change { Applicant.count }
       end
-    end
-
-    it 'redirects provider to next step of the submission' do
-      patch_request
-
-      expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path(application))
-    end
-
-    it 'creates a new applicant associated with the application' do
-      expect { patch_request }.to change { Applicant.count }.by(1)
-
-      new_applicant = application.reload.applicant
-      expect(new_applicant).to be_instance_of(Applicant)
     end
   end
 end

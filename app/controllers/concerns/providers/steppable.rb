@@ -38,6 +38,8 @@ module Providers
       :providers_legal_aid_applications_path
     ].freeze
 
+    CHECK_YOUR_ANSWERS_STEP = :providers_legal_aid_application_check_your_answers_path
+
     included do
       # Define @back_step_url in controller to over-ride behaviour
       def back_step_url
@@ -54,6 +56,7 @@ module Providers
       private
 
       def current_next_method
+        return CHECK_YOUR_ANSWERS_STEP if checking_answers?
         @current_next_method ||= STEPS.dig controller_name.to_sym, :forward
       end
 
@@ -64,6 +67,11 @@ module Providers
       def with_legal_aid_application_if_needed(current_method)
         return if PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE.include?(current_method)
         legal_aid_application
+      end
+
+      def checking_answers?
+        return unless @legal_aid_application
+        legal_aid_application.checking_answers?
       end
     end
   end
