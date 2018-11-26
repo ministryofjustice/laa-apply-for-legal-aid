@@ -1,5 +1,8 @@
 module Providers
   class LegalAidApplicationsController < BaseController
+    attr_reader :legal_aid_application
+    include Providers::Steppable
+
     # GET /provider/applications
     def index; end
 
@@ -14,7 +17,7 @@ module Providers
       @legal_aid_application = LegalAidApplication.new(app_params)
 
       if @legal_aid_application.save
-        redirect_to new_providers_legal_aid_application_applicant_path(@legal_aid_application)
+        redirect_to next_step_url
       else
         proceeding_types
         render :new

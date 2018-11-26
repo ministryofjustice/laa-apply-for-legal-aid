@@ -1,6 +1,3 @@
-<% content_for :navigation do %>
-  <%= link_to 'Back', url_for(:back), class: 'govuk-back-link', id: 'back-top', method: 'get' %>
-<% end %>
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <div class="govuk-grid-row">
@@ -12,7 +9,12 @@
       </h1>
     </legend>
 
-    <%= form_with(model: @form, scope: :address_lookup, url: providers_applicant_address_lookups_path, local: true) do |form| %>
+    <%= form_with(
+          model: @form,
+          scope: :address_lookup,
+          url: providers_legal_aid_application_address_lookups_path(@legal_aid_application),
+          local: true
+        ) do |form| %>
 
       <div class="govuk-!-padding-bottom-6"></div>
 
@@ -24,7 +26,7 @@
 
       <%= form.submit 'Find address', id: 'find-address', class: 'govuk-button' %>
 
-      <p><%= link_to 'Enter address manually', new_providers_applicant_addresses_path, class: 'govuk-link' %></p>
+      <p><%= link_to 'Enter address manually', new_providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
     <% end %>
   </div>
 </div>

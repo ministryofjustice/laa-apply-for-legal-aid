@@ -1,15 +1,15 @@
 module Providers
   class AddressSelectionsController < BaseController
-    include Providers::ApplicantDependable
+    include Providers::ApplicationDependable
     include Providers::Steppable
 
-    before_action :set_current_step
+    def new; end
 
     def create
       @form = Applicants::AddressSelectionForm.new(form_params)
 
       if @form.save
-        redirect_to action_for_next_step(options: { application: applicant.legal_aid_application, applicant: applicant })
+        redirect_to next_step_url
       else
         @addresses = build_addresses_from_form_data
         render :new
@@ -34,10 +34,6 @@ module Providers
       address_list_params.to_a.map do |address_params|
         Address.from_json(address_params)
       end
-    end
-
-    def set_current_step
-      @current_step = :address
     end
   end
 end

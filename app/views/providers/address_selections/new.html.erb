@@ -1,11 +1,14 @@
-<% content_for :navigation do %>
-  <%= link_to 'Back', url_for(:back), class: 'govuk-back-link', id: 'back-top', method: 'get' %>
-<% end %>
+<% content_for(:navigation) { provider_back_link } %>
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <div class="govuk-grid-row">
   <div class='govuk-grid-column-two-thirds'>
-    <%= form_with(model: @form, scope: :address_selection, url: providers_applicant_address_selections_path(@applicant), local: true) do |f| %>
+    <%= form_with(
+          model: @form,
+          scope: :address_selection,
+          url: providers_legal_aid_application_address_selections_path(@legal_aid_application),
+          local: true
+        ) do |f| %>
       <div class='govuk-form-group'>
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading">
@@ -18,7 +21,11 @@
           Postcode
           <p class='govuk-body govuk-!-font-weight-bold'>
             <%= @form.postcode %>
-            <%= link_to 'Change', new_providers_applicant_address_lookups_path(@applicant), class: 'govuk-body change-link change-postcode-link' %>
+            <%= link_to(
+                  'Change',
+                  new_providers_legal_aid_application_address_lookups_path(@legal_aid_application),
+                  class: 'govuk-body change-link change-postcode-link'
+                ) %>
           </p>
         <% end %>
         <%= f.hidden_field :postcode %>
@@ -40,7 +47,7 @@
         </div>
       </div>
 
-      <p><%= link_to "I can't find the address in the list", new_providers_applicant_addresses_path, class: 'govuk-link' %></p>
+      <p><%= link_to "I can't find the address in the list", new_providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
 
       <%= f.submit 'Continue', id: 'select-address-button', class: 'govuk-button' %>
     <% end %>

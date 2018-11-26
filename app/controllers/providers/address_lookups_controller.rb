@@ -1,6 +1,7 @@
 module Providers
   class AddressLookupsController < BaseController
-    include Providers::ApplicantDependable
+    include Providers::ApplicationDependable
+    include Steppable
 
     def new
       @form = Applicants::AddressLookupForm.new
@@ -8,6 +9,7 @@ module Providers
 
     def create
       @form = Applicants::AddressLookupForm.new(form_params)
+      @back_step_url = new_providers_legal_aid_application_address_lookups_path
 
       if @form.valid?
         perform_and_handle_lookup
@@ -24,14 +26,13 @@ module Providers
 
     def perform_and_handle_lookup
       outcome = AddressLookupService.call(@form.postcode)
-
       if outcome.success?
         @addresses = outcome.result
         @form = Applicants::AddressSelectionForm.new(postcode: @form.postcode)
-        render template: 'providers/address_selections/new'
+        render template: 'providers/address_selections/new'.freeze
       else
         @form = Applicants::AddressForm.new(lookup_postcode: @form.postcode, lookup_error: outcome.errors[:lookup].first)
-        render template: 'providers/addresses/new'
+        render template: 'providers/addresses/new'.freeze
       end
     end
   end

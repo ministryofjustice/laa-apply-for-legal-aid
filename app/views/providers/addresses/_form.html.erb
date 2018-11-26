@@ -1,12 +1,13 @@
-<% content_for :navigation do %>
-  <%= link_to 'Back', url_for(:back), class: 'govuk-back-link', id: 'back-top', method: 'get' %>
-<% end %>
-
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= form_with(model: @form, scope: :address, url: providers_applicant_addresses_path(@applicant), local: true) do |form| %>
+    <%= form_with(
+          model: @form,
+          scope: :address,
+          url: providers_legal_aid_application_address_path(@legal_aid_application),
+          local: true
+        ) do |form| %>
 
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
       <h1 class="govuk-fieldset__heading">
@@ -25,7 +26,11 @@
             Postcode
             <p class='govuk-body govuk-!-font-weight-bold'>
               <%= form.object.lookup_postcode %>
-              <%= link_to 'Change', new_providers_applicant_address_lookups_path(@applicant), class: 'govuk-body change-link change-postcode-link' %>
+              <%= link_to(
+                    'Change',
+                    new_providers_legal_aid_application_address_lookups_path(@legal_aid_application),
+                    class: 'govuk-body change-link change-postcode-link'
+                  ) %>
             </p>
           <% end %>
         </div>
