@@ -1,6 +1,4 @@
-<% content_for :navigation do %>
-  <%= link_to 'Back', new_providers_legal_aid_application_address_lookups_path(@legal_aid_application), class: 'govuk-back-link' %>
-<% end %>
+<% content_for(:navigation) { provider_back_link } %>
 
 <%
   result_namespace = @legal_aid_application.applicant_receives_benefit? ? '.positive_result' : '.negative_result'

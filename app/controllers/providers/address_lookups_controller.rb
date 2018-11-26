@@ -1,6 +1,7 @@
 module Providers
   class AddressLookupsController < BaseController
     include Providers::ApplicationDependable
+    include Steppable
 
     def new
       @form = Applicants::AddressLookupForm.new

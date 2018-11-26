@@ -1,7 +1,3 @@
-<% content_for :navigation do %>
-  <%= link_to 'Back', url_for(:back), class: 'govuk-back-link', id: 'back-top', method: 'get' %>
-<% end %>
-
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <div class="govuk-grid-row">

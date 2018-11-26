@@ -15,6 +15,5 @@ module Providers
       # TODO: implement next_step logic. Next step depends on the result of the benefit_check.
       @next_step_link = next_step_url
     end
-
   end
 end

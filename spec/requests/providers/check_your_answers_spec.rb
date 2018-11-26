@@ -81,7 +81,8 @@ RSpec.describe 'check your answers requests', type: :request do
 
       it 'display confirmation page after calling the email service' do
         post_request
-        expect(response.body).to include(application.application_ref)
+        follow_redirect!
+        expect(response.body).to include('Application completed')
       end
     end
   end
