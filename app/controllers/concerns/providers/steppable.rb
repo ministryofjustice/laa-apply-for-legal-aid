@@ -6,7 +6,7 @@ module Providers
     STEPS = {
       legal_aid_applications: {
         forward: :new_providers_legal_aid_application_applicant_path,
-        back: :providers_root_path
+        back: :providers_legal_aid_applications_path
       },
       applicants: {
         forward: :new_providers_legal_aid_application_address_lookups_path,
@@ -18,11 +18,11 @@ module Providers
       },
       address_selections: {
         forward: :providers_legal_aid_application_check_benefits_path,
-        back: :new_providers_legal_aid_application_applicant_path
+        back: :new_providers_legal_aid_application_address_lookups_path
       },
       addresses: {
         forward: :providers_legal_aid_application_check_benefits_path,
-        back: :new_providers_legal_aid_application_applicant_path
+        back: :new_providers_legal_aid_application_address_lookups_path
       },
       check_benefits: {
         forward: :providers_legal_aid_application_email_path,
@@ -37,6 +37,10 @@ module Providers
         back: :providers_legal_aid_application_email_path
       }
     }.freeze
+
+    PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE = [
+      :providers_legal_aid_applications_path
+    ].freeze
 
     included do
       def back_step_url
@@ -61,12 +65,8 @@ module Providers
       end
 
       def with_legal_aid_application_if_needed(current_method)
-        return if paths_not_requiring_legal_aid_application_instance.include?(current_method)
+        return if PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE.include?(current_method)
         legal_aid_application
-      end
-
-      def paths_not_requiring_legal_aid_application_instance
-        %i[providers_legal_aid_applications_path providers_root_path]
       end
     end
   end

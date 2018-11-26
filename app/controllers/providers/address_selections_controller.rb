@@ -3,6 +3,8 @@ module Providers
     include Providers::ApplicationDependable
     include Providers::Steppable
 
+    def new; end
+
     def create
       @form = Applicants::AddressSelectionForm.new(form_params)
 

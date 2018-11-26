@@ -30,9 +30,5 @@ module Providers
     def email_params
       params.require(:applicant).permit(:email)
     end
-
-    def applicant
-      @applicant ||= legal_aid_application.applicant
-    end
   end
 end
