@@ -7,7 +7,7 @@ module Citizens
     def create
       @form = Applicants::OpenBankingConsentForm.new(edit_params)
 
-      case params[:legal_aid_application][:open_banking_consent]
+      case @form.open_banking_consent
       when 'YES'
         @form.save
         redirect_to applicant_true_layer_omniauth_authorize_path
@@ -25,7 +25,7 @@ module Citizens
     end
 
     def consent_params
-      params.require(:legal_aid_application).permit(:open_banking_consent, :consent_choice_timestamp)
+      params.require(:legal_aid_application).permit(:open_banking_consent, :open_banking_consent_choice_at)
     end
   end
 end

@@ -15,7 +15,6 @@ RSpec.describe Applicants::OpenBankingConsentForm, type: :request do
   describe 'POST /citizens/additional_accounts', type: :request do
     let(:applicant) { create :applicant }
     let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
-    let(:params) { { consent_choice_timestamp: Time.current } }
     before do
       sign_in applicant
       post citizens_consent_path, params: params

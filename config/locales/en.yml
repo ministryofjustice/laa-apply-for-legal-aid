@@ -196,8 +196,7 @@ en:
       show:
         label:
           html: <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
-        field_set_header: Do you agree to share your bank transactions with us?
-        heading: 'Do you agree to share your bank transactions with us?'
+        field_set_header: 'Do you agree to share your bank transactions with us?'
         body: 'We only use your bank transactions to support your legal aid application. We do not use the information for anything else.'
         list_heading: 'Find out how we use and store your personal data'
         list_1: 'We do not save your online banking username and password'
