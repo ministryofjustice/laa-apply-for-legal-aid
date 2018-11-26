@@ -43,9 +43,10 @@ module Providers
     ].freeze
 
     included do
+      # Define @back_step_url in controller to over-ride behaviour
       def back_step_url
-        raise "back step not found for controller name #{controller_name}" unless current_back_method
-        send current_back_method, with_legal_aid_application_if_needed(current_back_method)
+        raise "back step not found for controller name #{controller_name}" unless current_back_method || @back_step_url
+        @back_step_url ||= send(current_back_method, with_legal_aid_application_if_needed(current_back_method))
       end
       helper_method :back_step_url
 
