@@ -31,14 +31,20 @@ Feature: Civil application journeys
     Then the results section is empty
     Then proceeding search field is empty
 
-  @javascript @vcr
-  Scenario: Completes the application using address lookup
+  @javascript
+  Scenario: I complete each step up to the applicant page
+    # testing shared steps: Given I start the journey as far as the applicant page
     Given I visit the application service
     And I click link "Start"
     And I click link "Start now"
     And I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select and continue
+    Then I should be on the Applicant page
+
+  @javascript @vcr
+  Scenario: Completes the application using address lookup
+    Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
@@ -56,12 +62,7 @@ Feature: Civil application journeys
 
   @localhost_request @javascript @vcr
   Scenario: Completes the application using manual address
-    Given I visit the application service
-    And I click link "Start"
-    And I click link "Start now"
-    And I search for proceeding 'Application for a care order'
-    Then proceeding suggestions has results
-    Then I select and continue
+    Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
@@ -81,12 +82,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I can see that the applicant receives benefits
-    Given I visit the application service
-    And I click link "Start"
-    And I click link "Start now"
-    And I search for proceeding 'Application for a care order'
-    Then proceeding suggestions has results
-    Then I select and continue
+    Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Walker'
     Then I enter the date of birth '10-01-1980'
     Then I enter national insurance number 'JA293483A'
@@ -102,12 +98,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I can see that the applicant does not receive benefits
-    Given I visit the application service
-    And I click link "Start"
-    And I click link "Start now"
-    And I search for proceeding 'Application for a care order'
-    Then proceeding suggestions has results
-    Then I select and continue
+    Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
@@ -121,3 +112,6 @@ Feature: Civil application journeys
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen does not receive benefits
 
+  @javascript @vcr
+  Scenario: I want to make changes from the check your answers page
+    Given I complete the journey as far as check your answers

@@ -4,6 +4,38 @@ Given(/^I visit the application service$/) do
   visit providers_root_path
 end
 
+Given('I start the journey as far as the applicant page') do
+  steps %(
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Start now"
+    And I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
+    Then I should be on the Applicant page
+  )
+end
+
+Given('I complete the journey as far as check your answers') do
+  steps %(
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I click continue
+    Then I am on the postcode entry page
+    Then I enter a valid postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click continue
+    Then I am on the benefit check results page
+    Then I click continue
+    Then I enter a valid email address 'test@test.com'
+    Then I click continue
+    Then I should be on the Check Your Answers page
+  )
+end
+
 When(/^the search for (.*) is not successful$/) do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
 end
@@ -47,6 +79,14 @@ end
 
 Then(/^I see the client details page$/) do
   expect(page).to have_content("Enter your client's details")
+end
+
+Then('I should be on the Applicant page') do
+  expect(page).to have_css('input#first_name')
+end
+
+Then('I should be on the Check Your Answers page') do
+  expect(page).to have_content('Check your answers')
 end
 
 Then(/^I enter name '(.*)', '(.*)'$/) do |first_name, last_name|
