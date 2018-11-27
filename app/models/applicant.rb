@@ -26,6 +26,14 @@ class Applicant < ApplicationRecord
     "#{first_name} #{last_name}".strip
   end
 
+  def dob
+    {
+      dob_year: date_of_birth.strftime('%Y'),
+      dob_month: date_of_birth.strftime('%m'),
+      dob_day: date_of_birth.strftime('%d')
+    }
+  end
+
   private
 
   def validate_date_of_birth
