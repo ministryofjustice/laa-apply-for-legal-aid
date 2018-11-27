@@ -43,7 +43,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
       expect(unescaped_response_body).to include(applicant.first_name)
       expect(unescaped_response_body).to include(applicant.last_name)
-      expect(unescaped_response_body).to include(applicant.date_of_birth.strftime('%d/%m/%Y'))
+      expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
       expect(unescaped_response_body).to include(applicant.national_insurance_number)
       expect(unescaped_response_body).to include(applicant.email_address)
       expect(unescaped_response_body).to include(address.address_line_one)

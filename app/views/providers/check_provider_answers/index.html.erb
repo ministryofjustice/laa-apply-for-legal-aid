@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= link_to (t 'generic.back'), edit_providers_legal_aid_application_applicant_path, class: 'govuk-back-link' %>
+  <%= link_to t('generic.back'), edit_providers_legal_aid_application_applicant_path, class: 'govuk-back-link' %>
 <% end %>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -13,7 +13,7 @@
     </h2>
 
     <dl class="app-check-your-answers app-check-your-answers--long">
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_1.proceeding'), answer: @proceeding.meaning } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_1.proceeding'), answer: @proceeding.meaning } %>
     </dl>
 
     <h2 class="govuk-heading-m">
@@ -21,12 +21,12 @@
     </h2>
 
     <dl class="app-check-your-answers app-check-your-answers--long">
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.first_name'), answer: @applicant.first_name } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.last_name'), answer: @applicant.last_name } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.dob'), answer: @applicant.date_of_birth.strftime('%d/%m/%Y') } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.nino'), answer: @applicant.national_insurance_number } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.address'), answer: address_with_line_breaks(@address) } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: (t '.section_2.email'), answer: @applicant.email } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.first_name'), answer: @applicant.first_name } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.last_name'), answer: @applicant.last_name } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.dob'), answer: @applicant.date_of_birth.to_s } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.nino'), answer: @applicant.national_insurance_number } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.address'), answer: address_with_line_breaks(@address) } %>
+      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.email'), answer: @applicant.email } %>
     </dl>
 
     <h2 class="govuk-heading-m">
@@ -40,4 +40,4 @@
   </div>
 </div>
 
-<%= button_to (t 'generic.submit'), confirm_providers_legal_aid_application_check_provider_answers_path(@legal_aid_application), class: 'govuk-button' %>
+<%= button_to t('generic.submit'), confirm_providers_legal_aid_application_check_provider_answers_path(@legal_aid_application), class: 'govuk-button' %>

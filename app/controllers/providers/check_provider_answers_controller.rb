@@ -4,8 +4,8 @@ module Providers
     include Steppable
 
     def index
-      @proceeding = @legal_aid_application.proceeding_types.first
-      @applicant = @legal_aid_application.applicant
+      @proceeding = legal_aid_application.proceeding_types.first
+      @applicant = legal_aid_application.applicant
       @address = @applicant.addresses.first
     end
 
