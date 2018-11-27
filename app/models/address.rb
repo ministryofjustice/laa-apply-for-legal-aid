@@ -18,7 +18,7 @@ class Address < ApplicationRecord
 
   def self.from_json(json)
     attrs = JSON.parse(json)
-    new(attrs.slice('organisation', 'address_line_one', 'address_line_two', 'city', 'postcode'))
+    new(attrs.slice('organisation', 'address_line_one', 'address_line_two', 'city', 'postcode', 'lookup_id'))
   end
 
   def full_address
@@ -31,7 +31,8 @@ class Address < ApplicationRecord
       address_line_one: address_line_one,
       address_line_two: address_line_two,
       city: city,
-      postcode: postcode
+      postcode: postcode,
+      lookup_id: lookup_id
     }.to_json
   end
 

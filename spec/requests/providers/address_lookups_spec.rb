@@ -64,36 +64,19 @@ RSpec.describe 'address lookup requests', type: :request do
       end
     end
 
-    context 'with a valid postcode', :vcr do
+    context 'with a valid postcode' do
       let(:postcode) { 'DA7 4NG' }
 
-      it 'performs an address lookup with the provided postcode' do
-        expect(AddressLookupService)
-          .to receive(:call).with(normalized_postcode).and_call_original
-
-        post_request
-      end
-
-      it 'renders the address selection page' do
+      it 'saves the postcode' do
         post_request
 
-        expect(response).to be_successful
-        expect(unescaped_response_body).to match('Select an address')
-        expect(unescaped_response_body).to match('[1-9]{1}[0-9]? addresses found')
+        expect(applicant.address.postcode).to eq(postcode.delete(' ').upcase)
       end
 
-      context 'but the lookup does not return any valid results' do
-        let(:postcode) { 'SW1H 9AJ' } # NOTE: test account does not return any results for this postcode
-        let(:form_heading) { "Enter your client's home address" }
-        let(:error_message) { "Sorry - we couldn't find any addresses for that postcode, please enter the address manually" }
+      it 'redirects to the address selection page' do
+        post_request
 
-        it 'renders the manual address selection page' do
-          post_request
-
-          expect(response).to be_successful
-          expect(unescaped_response_body).to match(form_heading)
-          expect(unescaped_response_body).to match(error_message)
-        end
+        expect(response).to redirect_to(edit_providers_legal_aid_application_address_selections_path)
       end
     end
   end

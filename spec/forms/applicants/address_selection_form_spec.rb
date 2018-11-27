@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Applicants::AddressSelectionForm, type: :form do
   let(:postcode) { 'DA7 4NG' }
-  let(:address) { '{"line_one":"5","line_two":"LONSDALE ROAD","city":"BEXLEYHEATH","postcode":"DA7 4NG"}' }
+  let(:lookup_id) { '123456' }
   let(:applicant_id) { SecureRandom.uuid }
   let(:form_params) do
     {
-      address: address,
-      postcode: postcode
+      lookup_id: lookup_id,
+      postcode: postcode,
+      addresses: [Address.new(lookup_id: lookup_id)]
     }
   end
   subject(:form) { described_class.new(form_params.merge(applicant_id: applicant_id)) }
@@ -17,12 +18,12 @@ RSpec.describe Applicants::AddressSelectionForm, type: :form do
       expect(form).to be_valid
     end
 
-    context 'when address is blank' do
-      let(:address) { '' }
+    context 'when lookup_id is blank' do
+      let(:lookup_id) { '' }
 
-      it 'contains a presence error on the address' do
+      it 'contains a presence error on the lookup_id' do
         expect(form).not_to be_valid
-        expect(form.errors[:address]).to match_array(['Please select an address from the list'])
+        expect(form.errors[:lookup_id]).to match_array(['Please select an address from the list'])
       end
     end
   end

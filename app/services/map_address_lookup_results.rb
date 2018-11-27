@@ -9,19 +9,13 @@ class MapAddressLookupResults
   end
 
   def self.map_to_address(result)
-    line_one_parts = LINE_ONE_PARTS.each_with_object([]) do |part, mem|
-      mem << result[part]
-    end
-    line_two_parts = LINE_TWO_PARTS.each_with_object([]) do |part, mem|
-      mem << result[part]
-    end
-
     Address.new(
       organisation: result['ORGANISATION_NAME'],
-      address_line_one: line_one_parts.compact.join(', '),
-      address_line_two: line_two_parts.compact.join(', '),
+      address_line_one: result.slice(*LINE_ONE_PARTS).values.compact.join(', '),
+      address_line_two: result.slice(*LINE_TWO_PARTS).values.compact.join(', '),
       city: result['POST_TOWN'],
-      postcode: result['POSTCODE']
+      postcode: result['POSTCODE'],
+      lookup_id: result['UDPRN'] # Unique Delivery Point Reference Number
     )
   end
 end

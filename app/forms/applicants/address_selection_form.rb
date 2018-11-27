@@ -4,11 +4,16 @@ module Applicants
 
     form_for Address
 
-    attr_accessor :applicant_id, :address, :postcode, :address_line_one, :address_line_two, :city, :organisation
+    attr_accessor :applicant_id, :addresses, :postcode, :address_line_one, :address_line_two, :city, :organisation, :lookup_id
 
     before_validation :deserialize_address
 
-    validates :address, presence: true
+    validates :lookup_id, presence: true
+
+    def initialize(*args)
+      super
+      attributes[:lookup_used] = true
+    end
 
     private
 
@@ -17,20 +22,24 @@ module Applicants
     end
 
     def model
-      @model ||= applicant.addresses.build
+      @model ||= applicant.address || applicant.addresses.build
     end
 
     def deserialize_address
-      return unless address.present?
-      hash = JSON.parse(address)
-      attributes[:organisation] = hash['organisation']
-      attributes[:address_line_one] = hash['address_line_one']
-      attributes[:address_line_two] = hash['address_line_two']
-      attributes[:city] = hash['city']
+      return unless lookup_id.present?
+      attributes[:organisation] = selected_address.organisation
+      attributes[:address_line_one] = selected_address.address_line_one
+      attributes[:address_line_two] = selected_address.address_line_two
+      attributes[:city] = selected_address.city
+      attributes[:lookup_id] = selected_address.lookup_id
     end
 
     def exclude_from_model
-      %i[address]
+      %i[addresses]
+    end
+
+    def selected_address
+      @selected_address ||= addresses.find { |address| address.lookup_id == lookup_id }
     end
   end
 end

@@ -61,7 +61,7 @@ en:
                 blank: 'A proceeding must be selected'
         address: &address_errors
          attributes:
-           address:
+           lookup_id:
               blank: 'Please select an address from the list'
            address_line_one:
              blank: 'Enter a building and street'

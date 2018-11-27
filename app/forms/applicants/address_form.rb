@@ -19,6 +19,11 @@ module Applicants
       %i[lookup_postcode lookup_error]
     end
 
+    def initialize(*args)
+      super
+      attributes[:lookup_used] = lookup_postcode.present?
+    end
+
     private
 
     def applicant
@@ -26,7 +31,7 @@ module Applicants
     end
 
     def model
-      @model ||= applicant.addresses.build
+      @model ||= applicant.address || applicant.addresses.build
     end
 
     def normalise_postcode

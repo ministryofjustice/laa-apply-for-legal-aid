@@ -3,24 +3,33 @@ module Providers
     include Providers::ApplicationDependable
     include Providers::Steppable
 
-    def new
-      @form = Applicants::AddressForm.new
+    def edit
+      @form = Applicants::AddressForm.new(current_address_params)
     end
 
-    def create
+    def update
       @form = Applicants::AddressForm.new(form_params)
 
       if @form.save
         redirect_to next_step_url
       else
-        render :new
+        render :edit
       end
     end
 
     private
 
+    def address_attributes
+      %i[address_line_one address_line_two city county postcode lookup_postcode lookup_error]
+    end
+
+    def current_address_params
+      return unless applicant.address
+      applicant.address.attributes.symbolize_keys.slice(*address_attributes)
+    end
+
     def address_params
-      params.require(:address).permit(:address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode, :lookup_error)
+      params.require(:address).permit(*address_attributes)
     end
 
     def form_params
