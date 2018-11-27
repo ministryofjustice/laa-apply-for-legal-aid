@@ -7,7 +7,7 @@ module Providers
       @proceeding = legal_aid_application.proceeding_types.first
       @applicant = legal_aid_application.applicant
       @address = @applicant.addresses.first
-      legal_aid_application.check_your_answers!
+      legal_aid_application.check_your_answers! unless legal_aid_application.checking_answers?
     end
 
     def confirm

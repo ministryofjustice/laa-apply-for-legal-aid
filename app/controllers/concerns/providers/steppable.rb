@@ -61,6 +61,7 @@ module Providers
       end
 
       def current_back_method
+        return CHECK_YOUR_ANSWERS_STEP if checking_answers?
         @current_back_method ||= STEPS.dig controller_name.to_sym, :back
       end
 

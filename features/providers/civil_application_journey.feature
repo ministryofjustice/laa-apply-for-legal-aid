@@ -49,14 +49,15 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I enter a valid email address 'test@test.com'
-    Then I click continue
+    Then I click "Continue"
     Then I am on the postcode entry page
-    Then I enter a valid postcode 'DA74NG'
+    Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click continue
+    Then I click "Continue"
     Then I am on the benefit check results page
-    Then I click continue
+    Then I click "Continue"
+    Then I should be on the Check Your Answers page
     When I click "Submit"
     Then I am on the application confirmation page
 
@@ -67,16 +68,16 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I enter a valid email address 'test@test.com'
-    Then I click continue
     Then I am on the postcode entry page
-    Then I enter a valid postcode 'SW1H 9AJ'
+    Then I enter a postcode 'SW1H 9AJ'
     Then I click find address
     Then I enter address line one '102 Petty France'
     Then I enter city 'London'
     Then I enter postcode 'SW1H 9AJ'
-    Then I click continue
+    Then I click "Continue"
     Then I am on the benefit check results page
-    Then I click continue
+    Then I click "Continue"
+    Then I should be on the Check Your Answers page
     When I click "Submit"
     Then I am on the application confirmation page
 
@@ -87,12 +88,11 @@ Feature: Civil application journeys
     Then I enter the date of birth '10-01-1980'
     Then I enter national insurance number 'JA293483A'
     Then I enter a valid email address 'test@test.com'
-    Then I click continue
     Then I am on the postcode entry page
-    Then I enter a valid postcode 'DA74NG'
+    Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click continue
+    Then I click "Continue"
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen receives benefits
 
@@ -103,15 +103,29 @@ Feature: Civil application journeys
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
     Then I enter a valid email address 'test@test.com'
-    Then I click continue
+    Then I click "Continue"
     Then I am on the postcode entry page
-    Then I enter a valid postcode 'DA74NG'
+    Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click continue
+    Then I click "Continue"
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen does not receive benefits
 
   @javascript @vcr
   Scenario: I want to make changes from the check your answers page
     Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'First name'
+    Then I enter name 'Bartholomew', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I click "Continue"
+    Then I should be on the Check Your Answers page
+    And the answer for 'First name' should be 'Bartholomew'
+
+  @javascript @vcr
+  Scenario: I want to make changes from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'First name'
+    Then I click link "Back"
+    Then I should be on the Check Your Answers page
