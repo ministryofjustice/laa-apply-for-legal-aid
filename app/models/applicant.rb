@@ -8,6 +8,7 @@ class Applicant < ApplicationRecord
 
   has_one :legal_aid_application
   has_many :addresses
+  has_one :address, -> { order(created_at: :desc) }
   has_many :bank_providers
   has_many :bank_errors
 

@@ -13,7 +13,7 @@ module Providers
         back: :new_providers_legal_aid_application_path
       },
       address_lookups: {
-        # Forward determined by controller action logic
+        forward: :edit_providers_legal_aid_application_address_selections_path,
         back: :new_providers_legal_aid_application_applicant_path
       },
       address_selections: {
@@ -25,8 +25,8 @@ module Providers
         back: :new_providers_legal_aid_application_address_lookups_path
       },
       check_benefits: {
-        forward: :providers_legal_aid_application_email_path,
-        back: :new_providers_legal_aid_application_address_lookups_path
+        forward: :providers_legal_aid_application_email_path
+        # Back determined by controller action logic
       },
       emails: {
         forward: :providers_legal_aid_application_check_provider_answers_path,

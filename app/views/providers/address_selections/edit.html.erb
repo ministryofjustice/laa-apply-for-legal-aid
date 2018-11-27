@@ -7,6 +7,7 @@
           model: @form,
           scope: :address_selection,
           url: providers_legal_aid_application_address_selections_path(@legal_aid_application),
+          method: :patch,
           local: true
         ) do |f| %>
       <div class='govuk-form-group'>
@@ -43,11 +44,11 @@
             <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
           <% end %>
           <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
-          <%= f.select(:address, @addresses.collect { |a| [a.full_address, a.to_json] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select govuk-!-width-two-thirds #{input_error_class}", id: :address) %>
+          <%= f.select(:lookup_id, @addresses.collect { |a| [a.full_address, a.lookup_id] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select govuk-!-width-two-thirds #{input_error_class}", id: :address) %>
         </div>
       </div>
 
-      <p><%= link_to "I can't find the address in the list", new_providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
+      <p><%= link_to "I can't find the address in the list", edit_providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
 
       <%= f.submit 'Continue', id: 'select-address-button', class: 'govuk-button' %>
     <% end %>

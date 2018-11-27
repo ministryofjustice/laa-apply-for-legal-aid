@@ -32,9 +32,9 @@ Rails.application.routes.draw do
       resources :check_provider_answers, only: [:index] do
         post :confirm, on: :collection
       end
-      resource :address, only: %i[new create]
+      resource :address, only: %i[edit update]
       resource :address_lookups, only: %i[new create]
-      resource :address_selections, only: [:create]
+      resource :address_selections, only: %i[edit update]
       resource :email, only: %i[show update]
       resources :check_benefits, only: [:index]
     end

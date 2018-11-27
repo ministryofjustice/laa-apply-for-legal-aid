@@ -106,7 +106,7 @@ Then(/^I click find address$/) do
 end
 
 Then(/^I select an address '(.*)'$/) do |address|
-  select(address, from: 'address_selection[address]')
+  select(address, from: 'address_selection[lookup_id]')
 end
 
 Then(/^I see a notice saying that the citizen receives benefits$/) do

@@ -6,13 +6,36 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:national_insurance_number) { 'JA293483A' }
   let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
   let(:application) { create :application, applicant: applicant }
+  let(:address_lookup_used) { true }
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
     let(:get_request) { get "/providers/applications/#{application.id}/check_benefits" }
 
+    before do
+      create :address, applicant: applicant, lookup_used: address_lookup_used
+    end
+
     it 'returns http success' do
       get_request
       expect(response).to have_http_status(:ok)
+    end
+
+    context "the applicant's address used the lookup service" do
+      let(:address_lookup_used) { true }
+
+      it 'has a back link to the address lookup page' do
+        get_request
+        expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_selections_path)
+      end
+    end
+
+    context "the applicant's address used manual entry" do
+      let(:address_lookup_used) { false }
+
+      it 'has a back link to the address lookup page' do
+        get_request
+        expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_path)
+      end
     end
 
     context 'when the check_benefit_result does not exist' do
