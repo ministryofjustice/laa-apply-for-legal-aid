@@ -28,7 +28,7 @@ RSpec.describe 'GET /v1/applications/:id', type: :request do
         id: applicant.id,
         first_name: applicant.first_name,
         last_name: applicant.last_name,
-        date_of_birth: applicant.date_of_birth.to_s,
+        date_of_birth: applicant.date_of_birth.to_s(:db),
         email: applicant.email,
         national_insurance_number: applicant.national_insurance_number
       },

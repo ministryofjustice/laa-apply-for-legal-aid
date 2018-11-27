@@ -57,7 +57,7 @@ RSpec.describe 'PATCH /v1/applications/{app_ref}/applicant', type: :request do
       first_name: applicant.first_name,
       last_name: applicant.last_name,
       email: 'new_email@example.com',
-      date_of_birth: applicant.date_of_birth.to_s,
+      date_of_birth: applicant.date_of_birth.to_s(:db),
       national_insurance_number: applicant.national_insurance_number
     }
 

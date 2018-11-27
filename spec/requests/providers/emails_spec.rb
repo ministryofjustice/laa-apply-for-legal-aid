@@ -36,7 +36,7 @@ RSpec.describe 'providers email requests', type: :request do
 
     it 'redirects to the check your answers page' do
       subject
-      expect(response).to redirect_to(providers_legal_aid_application_check_your_answers_path(legal_aid_application))
+      expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
     end
 
     context 'when the application does not exist' do
@@ -78,7 +78,7 @@ RSpec.describe 'providers email requests', type: :request do
 
       it 'redirects to the check your answers page' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_check_your_answers_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
       end
     end
   end

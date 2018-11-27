@@ -1,9 +1,13 @@
 module Providers
-  class CheckYourAnswersController < BaseController
+  class CheckProviderAnswersController < BaseController
     include Providers::ApplicationDependable
     include Steppable
 
-    def index; end
+    def index
+      @proceeding = legal_aid_application.proceeding_types.first
+      @applicant = legal_aid_application.applicant
+      @address = @applicant.addresses.first
+    end
 
     def confirm
       legal_aid_application.provider_submit!
