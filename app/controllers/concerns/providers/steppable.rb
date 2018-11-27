@@ -29,10 +29,10 @@ module Providers
         back: :new_providers_legal_aid_application_address_lookups_path
       },
       emails: {
-        forward: :providers_legal_aid_application_check_your_answers_path,
+        forward: :providers_legal_aid_application_check_provider_answers_path,
         back: :providers_legal_aid_application_check_benefits_path
       },
-      check_your_answers: {
+      check_provider_answers: {
         forward: :providers_legal_aid_applications_path,
         back: :providers_legal_aid_application_email_path
       }
