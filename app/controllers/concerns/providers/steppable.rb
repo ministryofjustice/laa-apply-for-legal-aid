@@ -38,7 +38,7 @@ module Providers
       :providers_legal_aid_applications_path
     ].freeze
 
-    CHECK_YOUR_ANSWERS_STEP = :providers_legal_aid_application_check_your_answers_path
+    CHECK_YOUR_ANSWERS_STEP = :providers_legal_aid_application_check_provider_answers_path
 
     included do
       # Define @back_step_url in controller to over-ride behaviour
