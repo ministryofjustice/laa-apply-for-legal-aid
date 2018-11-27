@@ -1,5 +1,18 @@
 Feature: Civil application journeys
   @javascript
+  Scenario: I am able to return to my legal aid applications
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Start now"
+    And I search for proceeding 'app'
+    Then proceeding suggestions has results
+    When I click clear search
+    Then the results section is empty
+    Then proceeding search field is empty
+    And I click link "Apply for Legal Aid"
+    Then I am on the legal aid applications
+
+  @javascript
   Scenario: No results returned is seen on screen when invalid search entered
     Given I visit the application service
     And I click link "Start"

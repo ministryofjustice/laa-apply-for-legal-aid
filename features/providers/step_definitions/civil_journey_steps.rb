@@ -120,3 +120,7 @@ end
 Then('I am on the application confirmation page') do
   expect(page).to have_content('Application completed')
 end
+
+Then('I am on the legal aid applications') do
+  expect(page).to have_content('Your legal aid applications')
+end
