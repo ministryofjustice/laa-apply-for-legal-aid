@@ -8,19 +8,18 @@
       <%= t '.title' %>
     </h1>
 
-    <h2 class="govuk-heading-m">
-      <%= t '.section_1.heading' %>
-    </h2>
-
     <dl class="app-check-your-answers app-check-your-answers--long">
+
+      <dt class="govuk-heading-m">
+        <%= t '.section_1.heading' %>
+      </dt>
+
       <%= render partial: 'check_your_answers_item', locals: { question: t('.section_1.proceeding'), answer: @proceeding.meaning } %>
-    </dl>
 
-    <h2 class="govuk-heading-m">
-      <%= t '.section_2.heading' %>
-    </h2>
+      <dt class="govuk-heading-m govuk-!-padding-top-9">
+        <%= t '.section_2.heading' %>
+      </dt>
 
-    <dl class="app-check-your-answers app-check-your-answers--long">
       <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.first_name'), answer: @applicant.first_name } %>
       <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.last_name'), answer: @applicant.last_name } %>
       <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.dob'), answer: @applicant.date_of_birth.to_s } %>
