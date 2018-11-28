@@ -5,8 +5,9 @@ module Applicants
     form_for Applicant
 
     attr_accessor :first_name, :last_name, :national_insurance_number,
-                  :date_of_birth, :dob_year, :dob_month, :dob_day,
+                  :dob_year, :dob_month, :dob_day, :email,
                   :legal_aid_application_id
+    attr_writer :date_of_birth
 
     NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
 
@@ -23,17 +24,17 @@ module Applicants
     )
 
     validates :national_insurance_number, presence: true
-
     validates :national_insurance_number, format: { with: NINO_REGEXP, message: :not_valid }, allow_blank: true
 
-    # rubocop:disable Lint/DuplicateMethods
+    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+    validates :email, presence: true
+
     # rubocop:disable Lint/HandleExceptions
     def date_of_birth
       @date_of_birth ||= attributes[:date_of_birth] = Date.parse("#{dob_year}-#{dob_month}-#{dob_day}")
     rescue ArgumentError
       # if date can't be parsed set as nil
     end
-    # rubocop:enable Lint/DuplicateMethods
     # rubocop:enable Lint/HandleExceptions
 
     def model

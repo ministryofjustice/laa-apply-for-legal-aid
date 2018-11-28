@@ -19,7 +19,7 @@ module Providers
     private
 
     def applicant_params
-      params.require(:applicant).permit(:first_name, :last_name, :dob_day, :dob_month, :dob_year, :national_insurance_number)
+      params.require(:applicant).permit(:first_name, :last_name, :dob_day, :dob_month, :dob_year, :national_insurance_number, :email)
     end
 
     def form_params

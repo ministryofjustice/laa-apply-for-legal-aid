@@ -25,16 +25,12 @@ module Providers
         back: :new_providers_legal_aid_application_address_lookups_path
       },
       check_benefits: {
-        forward: :providers_legal_aid_application_email_path,
-        # Back determined by controller action logic
-      },
-      emails: {
         forward: :providers_legal_aid_application_check_provider_answers_path,
-        back: :providers_legal_aid_application_check_benefits_path
+        # Back determined by controller action logic
       },
       check_provider_answers: {
         forward: :providers_legal_aid_applications_path,
-        back: :providers_legal_aid_application_email_path
+        back: :providers_legal_aid_application_check_benefits_path
       }
     }.freeze
 

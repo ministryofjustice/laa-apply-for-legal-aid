@@ -35,7 +35,6 @@ Rails.application.routes.draw do
       resource :address, only: %i[edit update]
       resource :address_lookups, only: %i[new create]
       resource :address_selections, only: %i[edit update]
-      resource :email, only: %i[show update]
       resources :check_benefits, only: [:index]
     end
   end
