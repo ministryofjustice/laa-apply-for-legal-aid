@@ -113,7 +113,7 @@ Feature: Civil application journeys
     Then I see a notice saying that the citizen does not receive benefits
 
   @javascript @vcr
-  Scenario: I want to make changes from the check your answers page
+  Scenario: I want to change first name from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'First name'
     Then I enter name 'Bartholomew', 'User'
@@ -124,8 +124,27 @@ Feature: Civil application journeys
     And the answer for 'First name' should be 'Bartholomew'
 
   @javascript @vcr
-  Scenario: I want to make changes from the check your answers page
+  Scenario: I want to return to the check your answers page without changing first name
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'First name'
     Then I click link "Back"
     Then I should be on the Check Your Answers page
+
+  @javascript @vcr
+  Scenario: I want to change the proceeding type from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Proceeding Type'
+    And I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
+    Then I should be on the Check Your Answers page
+
+  @javascript @vcr
+  Scenario: I want to return to the check your answers page without changing proceeding type
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Proceeding Type'
+    And I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I click link "Back"
+    Then I should be on the Check Your Answers page
+

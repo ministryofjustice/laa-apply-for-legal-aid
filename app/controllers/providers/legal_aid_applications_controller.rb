@@ -27,7 +27,7 @@ module Providers
     private
 
     def app_params
-      { proceeding_type_codes: Array(permitted_params[:proceeding_type]) }
+      { proceeding_type_codes: [permitted_params[:proceeding_type]] }
     end
 
     def permitted_params

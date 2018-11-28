@@ -13,10 +13,10 @@
       </dt>
 
       <%= check_provider_answer_link(
+            name: 'proceeding_type',
             url: new_providers_legal_aid_application_path,
             question: t('.section_1.proceeding'),
-            answer: @proceeding.meaning,
-            name: 'proceeding_meaning'
+            answer: @proceeding.meaning
           ) %>
 
       <dt class="govuk-heading-m govuk-!-padding-top-9">
@@ -24,45 +24,45 @@
       </dt>
 
       <%= check_provider_answer_link(
+            name: 'first_name',
             url: new_providers_legal_aid_application_applicant_path,
             question: t('.section_2.first_name'),
-            answer: @applicant.first_name,
-            name: 'first_name'
+            answer: @applicant.first_name
           ) %>
 
       <%= check_provider_answer_link(
+            name: 'last_name',
             url: new_providers_legal_aid_application_applicant_path,
             question: t('.section_2.last_name'),
-            answer: @applicant.last_name,
-            name: 'last_name'
+            answer: @applicant.last_name
           ) %>
 
       <%= check_provider_answer_link(
+            name: 'date_of_birth',
             url: new_providers_legal_aid_application_applicant_path,
             question: t('.section_2.dob'),
-            answer: @applicant.date_of_birth,
-            name: 'date_of_birth'
+            answer: @applicant.date_of_birth
           ) %>
 
       <%= check_provider_answer_link(
+            name: 'national_insurance_number',
             url: new_providers_legal_aid_application_applicant_path,
             question: t('.section_2.nino'),
-            answer: @applicant.national_insurance_number,
-            name: 'national_insurance_number'
+            answer: @applicant.national_insurance_number
           ) %>
 
       <%= check_provider_answer_link(
+            name: 'address',
             url: new_providers_legal_aid_application_address_lookups_path,
             question: t('.section_2.address'),
-            answer: address_with_line_breaks(@address),
-            name: 'address'
+            answer: address_with_line_breaks(@address)
           ) %>
 
       <%= check_provider_answer_link(
+            name: 'email',
             url: providers_legal_aid_application_email_path,
             question: t('.section_2.email'),
-            answer: @applicant.email,
-            name: 'email'
+            answer: @applicant.email
           ) %>
     </dl>
 
