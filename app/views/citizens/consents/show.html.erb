@@ -10,8 +10,7 @@
     <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
     <%= govuk_body t('.body') %>
     <%= render partial: 'shared/forms/detailed_list', locals: { translation_path: 'citizens.consents.show' } %>
-    <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, form: form, checked: 'YES', unchecked: 'NO' } %>
-    <%#= render partial: 'shared/forms/check_boxes', locals: { field_names_and_choices: {  open_banking_consent: ['YES', 'NO'] } } %>
+    <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
     <% end %>
 
     <%= govuk_submit_button t('generic.continue') %>

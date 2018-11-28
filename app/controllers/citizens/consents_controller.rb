@@ -7,12 +7,12 @@ module Citizens
     def create
       @form = Applicants::OpenBankingConsentForm.new(edit_params)
 
+      @form.save
+
       case @form.open_banking_consent
-      when 'YES'
-        @form.save
+      when 'true'
         redirect_to applicant_true_layer_omniauth_authorize_path
-      when 'NO'
-        @form.save
+      when 'false'
         render plain: 'Landing page: No Consent provided'
         # redirect_to citizens_information_path
       end

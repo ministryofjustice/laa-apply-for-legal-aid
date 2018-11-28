@@ -13,9 +13,6 @@ en:
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
-      check_boxes:
-        label:
-          html: <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
   activemodel:
     attributes:
       address: &address_attrs
@@ -194,8 +191,9 @@ en:
         hint: If you do not, you will need to provide paper evidence for these accounts.
     consents:
       show:
-        label:
-          html: <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
+        open_banking_consent:
+          label:
+            html: <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
         field_set_header: 'Do you agree to share your bank transactions with us?'
         body: 'We only use your bank transactions to support your legal aid application. We do not use the information for anything else.'
         list_heading: 'Find out how we use and store your personal data'
