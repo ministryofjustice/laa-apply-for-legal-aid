@@ -77,4 +77,36 @@ RSpec.describe Applicant, type: :model do
       expect { create :applicant, email: existing_applicant.email }.to change { Applicant.count }.by(1)
     end
   end
+
+  context '#dob' do
+    let(:year) { 1990 }
+    let(:month) { 12 }
+    let(:day) { 12 }
+    let(:dob) { Date.new(year, month, day) }
+    let(:existing_applicant) { create :applicant, date_of_birth: dob }
+    let(:subject_dob_hash) { existing_applicant.dob }
+    let(:dob_hash) do
+      {
+        dob_year: year.to_s,
+        dob_month: month.to_s,
+        dob_day: day.to_s
+      }
+    end
+
+    it 'returns hash with dob_year' do
+      expect(subject_dob_hash[:dob_year]).to eq(year.to_s)
+    end
+
+    it 'returns hash with dob_month' do
+      expect(subject_dob_hash[:dob_month]).to eq(month.to_s)
+    end
+
+    it 'returns hash with dob_day' do
+      expect(subject_dob_hash[:dob_day]).to eq(day.to_s)
+    end
+
+    it 'returns hash with following keys' do
+      expect(subject_dob_hash).to include(:dob_year, :dob_month, :dob_day)
+    end
+  end
 end

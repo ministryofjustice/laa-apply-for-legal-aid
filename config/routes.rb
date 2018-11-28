@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     root to: 'start#index'
 
     resources :legal_aid_applications, path: 'applications', only: %i[index new create] do
-      resource :applicant, only: %i[new create]
+      resource :applicant, only: %i[show update]
 
       resources :check_provider_answers, only: [:index] do
         post :confirm, on: :collection

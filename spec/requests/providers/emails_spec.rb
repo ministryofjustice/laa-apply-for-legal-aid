@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'providers email requests', type: :request do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/email' do
+  describe 'GET /providers/applications/:legal_aid_application_id/email/edit' do
     subject { get providers_legal_aid_application_email_path(legal_aid_application) }
 
     it 'returns http success' do
@@ -14,6 +14,17 @@ RSpec.describe 'providers email requests', type: :request do
     it 'renders the next page' do
       subject
       expect(response.body).to include("What is your client's email address?")
+    end
+
+    context 'has already got email address' do
+      let(:email_address) { Faker::Internet.safe_email }
+      let(:applicant) { create(:applicant, email: email_address) }
+      let(:laa) { create(:legal_aid_application, applicant: applicant) }
+
+      it 'display email address' do
+        get providers_legal_aid_application_email_path(laa)
+        expect(response.body).to include(email_address)
+      end
     end
   end
 

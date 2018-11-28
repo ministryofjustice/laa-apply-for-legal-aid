@@ -37,7 +37,7 @@ module Applicants
     # rubocop:enable Lint/HandleExceptions
 
     def model
-      @model ||= legal_aid_application.build_applicant
+      @model ||= legal_aid_application.applicant || legal_aid_application.build_applicant
     end
 
     def normalise_national_insurance_number

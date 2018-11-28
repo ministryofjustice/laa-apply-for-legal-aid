@@ -4,11 +4,11 @@ module Providers
     include Steppable
 
     def show
-      @form = Applicants::EmailForm.new(model: applicant)
+      @form = Applicants::EmailForm.new(current_params)
     end
 
     def update
-      @form = Applicants::EmailForm.new(edit_params)
+      @form = Applicants::EmailForm.new(update_params)
 
       if @form.save
         redirect_to(
@@ -23,12 +23,17 @@ module Providers
 
     private
 
-    def edit_params
+    def update_params
       email_params.merge(model: applicant)
     end
 
     def email_params
       params.require(:applicant).permit(:email)
+    end
+
+    def current_params
+      return nil unless applicant
+      applicant.attributes.symbolize_keys.slice(:email)
     end
   end
 end

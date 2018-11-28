@@ -5,7 +5,7 @@ module Providers
     # Keys are controller names (as returned by `controller_name.to_sym`)
     STEPS = {
       legal_aid_applications: {
-        forward: :new_providers_legal_aid_application_applicant_path,
+        forward: :providers_legal_aid_application_applicant_path,
         back: :providers_legal_aid_applications_path
       },
       applicants: {
@@ -14,7 +14,7 @@ module Providers
       },
       address_lookups: {
         forward: :edit_providers_legal_aid_application_address_selections_path,
-        back: :new_providers_legal_aid_application_applicant_path
+        back: :providers_legal_aid_application_applicant_path
       },
       address_selections: {
         forward: :providers_legal_aid_application_check_benefits_path,
@@ -25,7 +25,7 @@ module Providers
         back: :new_providers_legal_aid_application_address_lookups_path
       },
       check_benefits: {
-        forward: :providers_legal_aid_application_email_path
+        forward: :providers_legal_aid_application_email_path,
         # Back determined by controller action logic
       },
       emails: {

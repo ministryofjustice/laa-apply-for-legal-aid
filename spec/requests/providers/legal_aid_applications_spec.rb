@@ -31,7 +31,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
       post_request
 
       new_application = LegalAidApplication.last
-      expect(response).to redirect_to(new_providers_legal_aid_application_applicant_path(new_application))
+      expect(response).to redirect_to(providers_legal_aid_application_applicant_path(new_application))
     end
 
     context 'when the params are not valid' do
