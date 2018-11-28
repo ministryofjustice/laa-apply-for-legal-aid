@@ -14,7 +14,7 @@
 
       <%= check_provider_answer_link(
             name: 'proceeding_type',
-            url: new_providers_legal_aid_application_path,
+            url: providers_legal_aid_application_proceedings_type_path,
             question: t('.section_1.proceeding'),
             answer: @proceeding.meaning
           ) %>
@@ -25,28 +25,28 @@
 
       <%= check_provider_answer_link(
             name: 'first_name',
-            url: new_providers_legal_aid_application_applicant_path,
+            url: providers_legal_aid_application_applicant_path,
             question: t('.section_2.first_name'),
             answer: @applicant.first_name
           ) %>
 
       <%= check_provider_answer_link(
             name: 'last_name',
-            url: new_providers_legal_aid_application_applicant_path,
+            url: providers_legal_aid_application_applicant_path,
             question: t('.section_2.last_name'),
             answer: @applicant.last_name
           ) %>
 
       <%= check_provider_answer_link(
             name: 'date_of_birth',
-            url: new_providers_legal_aid_application_applicant_path,
+            url: providers_legal_aid_application_applicant_path,
             question: t('.section_2.dob'),
             answer: @applicant.date_of_birth
           ) %>
 
       <%= check_provider_answer_link(
             name: 'national_insurance_number',
-            url: new_providers_legal_aid_application_applicant_path,
+            url: providers_legal_aid_application_applicant_path,
             question: t('.section_2.nino'),
             answer: @applicant.national_insurance_number
           ) %>

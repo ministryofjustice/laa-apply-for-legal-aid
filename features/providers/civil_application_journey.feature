@@ -3,7 +3,7 @@ Feature: Civil application journeys
   Scenario: I am able to return to my legal aid applications
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start now"
+    And I click "Start now"
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I click clear search
@@ -16,7 +16,7 @@ Feature: Civil application journeys
   Scenario: No results returned is seen on screen when invalid search entered
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start now"
+    And I click "Start now"
     When the search for "cakes" is not successful
     Then the result list on page returns a "No results found." message
 
@@ -24,7 +24,7 @@ Feature: Civil application journeys
   Scenario: I am able to clear proceeding on the proceeding page
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start now"
+    And I click "Start now"
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I click clear search
@@ -36,7 +36,7 @@ Feature: Civil application journeys
     # testing shared steps: Given I start the journey as far as the applicant page
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start now"
+    And I click "Start now"
     And I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select and continue
@@ -116,9 +116,7 @@ Feature: Civil application journeys
   Scenario: I want to change first name from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'First name'
-    Then I enter name 'Bartholomew', 'User'
-    Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
+    Then I enter the first name 'Bartholomew'
     Then I click "Continue"
     Then I should be on the Check Your Answers page
     And the answer for 'First name' should be 'Bartholomew'
@@ -145,6 +143,22 @@ Feature: Civil application journeys
     And I click Check Your Answers Change link for 'Proceeding Type'
     And I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
+    Then I click link "Back"
+    Then I should be on the Check Your Answers page
+
+  @javascript @vcr
+  Scenario: I want to change email from the check your answers page
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Email'
+    Then I enter an email address 'foo@example.com'
+    Then I click "Continue"
+    Then I should be on the Check Your Answers page
+    And the answer for 'Email' should be 'foo@example.com'
+
+  @javascript @vcr
+  Scenario: I want to return to the check your answers page without changing email
+    Given I complete the journey as far as check your answers
+    And I click Check Your Answers Change link for 'Email'
     Then I click link "Back"
     Then I should be on the Check Your Answers page
 

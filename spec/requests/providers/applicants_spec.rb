@@ -51,7 +51,7 @@ RSpec.describe 'providers applicant requests', type: :request do
     let(:patch_request) { patch "/providers/applications/#{application_id}/applicant", params: params }
 
     it 'redirects provider to next step of the submission' do
-      post_request
+      patch_request
 
       expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path(application))
     end
@@ -63,12 +63,11 @@ RSpec.describe 'providers applicant requests', type: :request do
       expect(new_applicant).to be_instance_of(Applicant)
     end
 
-
     context 'when the legal aid application is in checking_answers state' do
       let(:application) { create(:legal_aid_application, state: :checking_answers) }
 
       it 'redirects to check_your_answers page' do
-        post_request
+        patch_request
 
         expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path)
       end

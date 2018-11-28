@@ -5,12 +5,16 @@ module Providers
     # Keys are controller names (as returned by `controller_name.to_sym`)
     STEPS = {
       legal_aid_applications: {
+        forward: :providers_legal_aid_application_proceedings_type_path
+        # No back: start of journey
+      },
+      proceedings_types: {
         forward: :providers_legal_aid_application_applicant_path,
         back: :providers_legal_aid_applications_path
       },
       applicants: {
         forward: :new_providers_legal_aid_application_address_lookups_path,
-        back: :new_providers_legal_aid_application_path
+        back: :providers_legal_aid_application_proceedings_type_path
       },
       address_lookups: {
         forward: :edit_providers_legal_aid_application_address_selections_path,

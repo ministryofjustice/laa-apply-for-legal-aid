@@ -1,4 +1,9 @@
-<% content_for(:navigation) { provider_back_link('Home') } %>
+<%
+  content_for(:navigation) do
+    back_label = @legal_aid_application.checking_answers? ? 'Back' : 'Home'
+    provider_back_link(back_label)
+  end
+%>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t '.heading_1' %></h1>
@@ -7,7 +12,7 @@
 
 <div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0">
   <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
-    <h2 class="govuk-heading-m govuk-!-margin-bottom-0">Search for legal proceedings</h2>
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-0"><%= t '.heading_2' %></h2>
       <span class="govuk-hint govuk-!-margin-top-0">
         <%= t '.search_help_example' %>
       </span>

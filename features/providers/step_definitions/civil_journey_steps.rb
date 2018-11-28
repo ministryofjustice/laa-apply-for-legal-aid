@@ -8,7 +8,7 @@ Given('I start the journey as far as the applicant page') do
   steps %(
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start now"
+    And I click "Start now"
     And I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select and continue
