@@ -33,14 +33,6 @@ RSpec.describe Applicants::OpenBankingConsentForm, type: :request do
         expect(legal_aid_application.open_banking_consent_choice_at.to_s(be_between(2.seconds.ago, 1.second.from_now)))
       end
     end
-  end
-
-  describe 'POST /citizens/consent', type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-    before do
-      sign_in legal_aid_application.applicant
-      post citizens_consent_path, params: params
-    end
 
     context 'when consent is not granted' do
       let(:params) { { legal_aid_application: { open_banking_consent: 'false' } } }
