@@ -78,7 +78,7 @@ RSpec.describe 'providers applicant requests', type: :request do
         end
 
         it 'does NOT create a new applicant' do
-          expect { patch_request }.not_to change { Applicant.count }
+          expect { perform_request }.not_to change { Applicant.count }
         end
       end
 

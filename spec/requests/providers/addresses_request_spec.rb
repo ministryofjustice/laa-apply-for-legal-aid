@@ -157,5 +157,6 @@ RSpec.describe 'address requests', type: :request do
           expect(address.lookup_used).to eq(true)
         end
       end
+    end
   end
 end

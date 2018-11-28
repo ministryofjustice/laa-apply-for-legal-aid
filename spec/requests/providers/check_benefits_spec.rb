@@ -46,7 +46,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
       context 'when the check_benefit_result does not exist' do
         it 'generates a new check_benefit_result' do
-          expect { get_request }.to change { BenefitCheckResult.count }.by(1)
+          expect { perform_request }.to change { BenefitCheckResult.count }.by(1)
         end
       end
 

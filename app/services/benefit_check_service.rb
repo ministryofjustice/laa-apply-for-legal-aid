@@ -7,6 +7,7 @@ class BenefitCheckService
   end
 
   def call
+    # byebug
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
   end
 
