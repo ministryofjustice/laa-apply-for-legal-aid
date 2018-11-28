@@ -44,6 +44,8 @@ module Providers
 
     CHECK_YOUR_ANSWERS_STEP = :providers_legal_aid_application_check_provider_answers_path
 
+    CONTROLLERS_THAT_GO_FORWARD_NORMALLY_DURING_REVIEW = [:address_lookups].freeze
+
     included do
       # Define @back_step_url in controller to over-ride behaviour
       def back_step_url
@@ -60,7 +62,7 @@ module Providers
       private
 
       def current_next_method
-        return CHECK_YOUR_ANSWERS_STEP if checking_answers?
+        return CHECK_YOUR_ANSWERS_STEP if !ignore_checking_answers? && checking_answers?
         @current_next_method ||= STEPS.dig controller_name.to_sym, :forward
       end
 
@@ -77,6 +79,10 @@ module Providers
       def checking_answers?
         return unless @legal_aid_application
         legal_aid_application.checking_answers?
+      end
+
+      def ignore_checking_answers?
+        CONTROLLERS_THAT_GO_FORWARD_NORMALLY_DURING_REVIEW.include? controller_name.to_sym
       end
     end
   end

@@ -21,13 +21,13 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Wed, 28 Nov 2018 14:34:54 GMT
+      - Wed, 28 Nov 2018 14:35:37 GMT
       Server:
       - Apache-Coyote/1.1
       Status:
       - success
       Tx-Id:
-      - 1543415694321:321
+      - 1543415737955:955
       Transfer-Encoding:
       - chunked
       Connection:
@@ -359,7 +359,7 @@ http_interactions:
           } ]
         }
     http_version: 
-  recorded_at: Wed, 28 Nov 2018 14:34:54 GMT
+  recorded_at: Wed, 28 Nov 2018 14:35:37 GMT
 - request:
     method: get
     uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
@@ -379,7 +379,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 28 Nov 2018 14:34:54 GMT
+      - Wed, 28 Nov 2018 14:35:38 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -387,7 +387,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5bfea78e-3b428adcea2ca1a01449ee56;
+      - Root=1-5bfea7ba-3462cdce419609e4b2c29896;
       Vary:
       - Accept-Encoding
     body:
@@ -507,7 +507,7 @@ http_interactions:
 
         </wsdl:definitions>
     http_version: 
-  recorded_at: Wed, 28 Nov 2018 14:34:54 GMT
+  recorded_at: Wed, 28 Nov 2018 14:35:38 GMT
 - request:
     method: post
     uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker
@@ -515,7 +515,7 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns2="https://lsc.gov.uk/benefitchecker/service/1.0"
-        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:clientReference>38872794-bf4a-4a3a-b5ab-f5b16236b47e</ins0:clientReference><ins0:nino>CB987654A</ins0:nino><ins0:surname>USER</ins0:surname><ins0:dateOfBirth>19990403</ins0:dateOfBirth><ins0:dateOfAward>20181128</ins0:dateOfAward><ins0:lscServiceName><BC_LSC_SERVICE_NAME></ins0:lscServiceName><ins0:clientOrgId><BC_CLIENT_ORG_ID></ins0:clientOrgId><ins0:clientUserId><BC_CLIENT_USER_ID></ins0:clientUserId></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:clientReference>e05bce11-b8ef-4a08-bfc0-4f2dbc95745a</ins0:clientReference><ins0:nino>CB987654A</ins0:nino><ins0:surname>USER</ins0:surname><ins0:dateOfBirth>19990403</ins0:dateOfBirth><ins0:dateOfAward>20181128</ins0:dateOfAward><ins0:lscServiceName><BC_LSC_SERVICE_NAME></ins0:lscServiceName><ins0:clientOrgId><BC_CLIENT_ORG_ID></ins0:clientOrgId><ins0:clientUserId><BC_CLIENT_USER_ID></ins0:clientUserId></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
     headers:
       Soapaction:
       - '"check"'
@@ -535,7 +535,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 28 Nov 2018 14:34:54 GMT
+      - Wed, 28 Nov 2018 14:35:38 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -543,7 +543,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5bfea78e-f87915759458d5e28bf99291;
+      - Root=1-5bfea7ba-b86b341cf8cfdcbe498a4338;
       Vary:
       - Accept-Encoding
     body:
@@ -551,9 +551,60 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
-        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">38872794-bf4a-4a3a-b5ab-f5b16236b47e</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">e05bce11-b8ef-4a08-bfc0-4f2dbc95745a</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1543415694818</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1543415738301</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Wed, 28 Nov 2018 14:34:54 GMT
+  recorded_at: Wed, 28 Nov 2018 14:35:38 GMT
+- request:
+    method: get
+    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&postcode=SW1H9AJ
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Wed, 28 Nov 2018 14:35:39 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Status:
+      - success
+      Tx-Id:
+      - 1543415739214:214
+      Content-Length:
+      - '334'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "header" : {
+            "uri" : "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?postcode=SW1H9AJ",
+            "query" : "postcode=SW1H9AJ",
+            "offset" : 0,
+            "totalresults" : 0,
+            "format" : "JSON",
+            "dataset" : "DPA",
+            "lr" : "EN,CY",
+            "maxresults" : 100,
+            "epoch" : "62",
+            "output_srs" : "EPSG:27700"
+          }
+        }
+    http_version: 
+  recorded_at: Wed, 28 Nov 2018 14:35:39 GMT
 recorded_with: VCR 4.0.0

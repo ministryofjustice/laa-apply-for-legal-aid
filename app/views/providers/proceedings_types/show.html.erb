@@ -1,7 +1,7 @@
 <%
   content_for(:navigation) do
-    back_label = @legal_aid_application.checking_answers? ? 'Back' : 'Home'
-    provider_back_link(back_label)
+    back_label = @legal_aid_application.checking_answers? ? 'generic.back' : 'generic.home'
+    provider_back_link t(back_label)
   end
 %>
 <div class="govuk-grid-row">
