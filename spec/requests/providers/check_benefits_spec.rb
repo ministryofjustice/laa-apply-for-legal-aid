@@ -25,7 +25,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
       it 'has a back link to the address lookup page' do
         get_request
-        expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_selections_path)
+        expect(unescaped_response_body).to include(providers_legal_aid_application_address_selection_path)
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
       it 'has a back link to the address lookup page' do
         get_request
-        expect(unescaped_response_body).to include(edit_providers_legal_aid_application_address_path)
+        expect(unescaped_response_body).to include(providers_legal_aid_application_address_path)
       end
     end
 

@@ -18,7 +18,7 @@ RSpec.describe 'address requests', type: :request do
   end
 
   describe 'GET /providers/applications/:legal_aid_application_id/address/edit' do
-    let(:get_request) { get edit_providers_legal_aid_application_address_path(legal_aid_application) }
+    let(:get_request) { get providers_legal_aid_application_address_path(legal_aid_application) }
 
     context 'when the applicant does not exist' do
       let(:legal_aid_application) { SecureRandom.uuid }

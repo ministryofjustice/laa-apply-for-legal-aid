@@ -3,7 +3,7 @@ module Providers
     include Providers::ApplicationDependable
     include Providers::Steppable
 
-    def edit
+    def show
       return redirect_to back_step_url unless current_postcode
 
       outcome = AddressLookupService.call(current_postcode)
@@ -12,7 +12,7 @@ module Providers
         @form = Applicants::AddressSelectionForm.new(postcode: current_postcode, lookup_id: current_lookup_id)
       else
         @form = Applicants::AddressForm.new(lookup_postcode: current_postcode, lookup_error: outcome.errors[:lookup].first)
-        render template: 'providers/addresses/edit'.freeze
+        render template: 'providers/addresses/show'.freeze
       end
     end
 
@@ -23,7 +23,7 @@ module Providers
       if @form.save
         redirect_to next_step_url
       else
-        render :edit
+        render :show
       end
     end
 

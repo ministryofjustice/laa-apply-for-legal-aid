@@ -6,7 +6,7 @@
     <%= form_with(
           model: @form,
           scope: :address_selection,
-          url: providers_legal_aid_application_address_selections_path(@legal_aid_application),
+          url: providers_legal_aid_application_address_selection_path(@legal_aid_application),
           method: :patch,
           local: true
         ) do |f| %>
@@ -24,7 +24,7 @@
             <%= @form.postcode %>
             <%= link_to(
                   'Change',
-                  new_providers_legal_aid_application_address_lookups_path(@legal_aid_application),
+                  providers_legal_aid_application_address_lookup_path(@legal_aid_application),
                   class: 'govuk-body change-link change-postcode-link'
                 ) %>
           </p>
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <p><%= link_to "I can't find the address in the list", edit_providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
+      <p><%= link_to "I can't find the address in the list", providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
 
       <%= f.submit 'Continue', id: 'select-address-button', class: 'govuk-button' %>
     <% end %>

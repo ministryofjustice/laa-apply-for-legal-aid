@@ -53,7 +53,7 @@ RSpec.describe 'providers applicant requests', type: :request do
     it 'redirects provider to next step of the submission' do
       patch_request
 
-      expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path(application))
+      expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(application))
     end
 
     it 'creates a new applicant associated with the application' do

@@ -5,7 +5,7 @@ RSpec.describe 'address selections requests', type: :request do
   let(:applicant) { legal_aid_application.applicant }
 
   describe 'GET /providers/applications/:legal_aid_application_id/address_selections/edit' do
-    let(:get_request) { get edit_providers_legal_aid_application_address_selections_path(legal_aid_application) }
+    let(:get_request) { get providers_legal_aid_application_address_selection_path(legal_aid_application) }
 
     context 'a postcode have been entered before', :vcr do
       let(:postcode) { 'DA7 4NG' }
@@ -45,7 +45,7 @@ RSpec.describe 'address selections requests', type: :request do
       it 'redirects to the postcode entering page' do
         get_request
 
-        expect(response).to redirect_to(new_providers_legal_aid_application_address_lookups_path)
+        expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path)
       end
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe 'address selections requests', type: :request do
         }
       }
     end
-    let(:patch_request) { patch providers_legal_aid_application_address_selections_path(legal_aid_application), params: params }
+    let(:patch_request) { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: params }
 
     context 'when the applicant does not exist' do
       let(:legal_aid_application) { SecureRandom.uuid }

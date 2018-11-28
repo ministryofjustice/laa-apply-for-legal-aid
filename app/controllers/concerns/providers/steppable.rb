@@ -13,20 +13,20 @@ module Providers
         back: :providers_legal_aid_applications_path
       },
       applicants: {
-        forward: :new_providers_legal_aid_application_address_lookups_path,
+        forward: :providers_legal_aid_application_address_lookup_path,
         back: :providers_legal_aid_application_proceedings_type_path
       },
       address_lookups: {
-        forward: :edit_providers_legal_aid_application_address_selections_path,
+        forward: :providers_legal_aid_application_address_selection_path,
         back: :providers_legal_aid_application_applicant_path
       },
       address_selections: {
         forward: :providers_legal_aid_application_check_benefits_path,
-        back: :new_providers_legal_aid_application_address_lookups_path
+        back: :providers_legal_aid_application_address_lookup_path
       },
       addresses: {
         forward: :providers_legal_aid_application_check_benefits_path,
-        back: :new_providers_legal_aid_application_address_lookups_path
+        back: :providers_legal_aid_application_address_lookup_path
       },
       check_benefits: {
         forward: :providers_legal_aid_application_check_provider_answers_path,

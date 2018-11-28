@@ -14,9 +14,9 @@ module Providers
     private
 
     def back_step_path
-      return edit_providers_legal_aid_application_address_selections_path if applicant.address&.lookup_used?
+      return providers_legal_aid_application_address_selection_path if applicant.address&.lookup_used?
 
-      edit_providers_legal_aid_application_address_path
+      providers_legal_aid_application_address_path
     end
 
     def next_step
