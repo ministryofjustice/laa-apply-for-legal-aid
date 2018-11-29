@@ -58,7 +58,9 @@ Feature: Civil application journeys
     Then I am on the benefit check results page
     Then I click "Continue"
     Then I should be on the Check Your Answers page
-    When I click "Submit"
+    Then I click link "Continue"
+    Then I am on the About the Financial Assessment page
+    Then I click "Submit"
     Then I am on the application confirmation page
 
   @localhost_request @javascript @vcr
@@ -79,7 +81,9 @@ Feature: Civil application journeys
     Then I am on the benefit check results page
     Then I click "Continue"
     Then I should be on the Check Your Answers page
-    When I click "Submit"
+    Then I click link "Continue"
+    Then I am on the About the Financial Assessment page
+    Then I click "Submit"
     Then I am on the application confirmation page
 
   @javascript @vcr
