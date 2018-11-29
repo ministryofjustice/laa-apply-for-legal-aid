@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Applicants::OpenBankingConsentForm, type: :request do
+RSpec.describe Citizens::ConsentsController, type: :request do
   describe 'citizen consent request test' do
     describe 'GET /citizens/consent' do
       before { get citizens_consent_path }

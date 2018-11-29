@@ -1,18 +1,15 @@
 module Citizens
   class ConsentsController < BaseController
-    def show
-      @applicant = current_applicant
-    end
+    def show; end
 
     def create
       @form = Applicants::OpenBankingConsentForm.new(edit_params)
 
       @form.save
 
-      case @form.open_banking_consent
-      when 'true'
+      if @form.open_banking_consent == 'true'
         redirect_to applicant_true_layer_omniauth_authorize_path
-      when 'false'
+      else
         render plain: 'Landing page: No Consent provided'
         # redirect_to citizens_information_path
       end

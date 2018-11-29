@@ -194,12 +194,12 @@ en:
         open_banking_consent:
           label:
             html: <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
-        field_set_header: 'Do you agree to share your bank transactions with us?'
-        body: 'We only use your bank transactions to support your legal aid application. We do not use the information for anything else.'
-        list_heading: 'Find out how we use and store your personal data'
-        list_1: 'We do not save your online banking username and password'
-        list_2: 'We do not have any ongoing access to your bank accounts'
-        list_3: 'We only use your details to assess your eligibility for legal aid'
+        field_set_header: Do you agree to share your bank transactions with us?
+        body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
+        list_heading: Find out how we use and store your personal data
+        list_1: We do not save your online banking username and password
+        list_2: We do not have any ongoing access to your bank accounts
+        list_3: We only use your details to assess your eligibility for legal aid
   currency:
     gbp: £
     eur: €
