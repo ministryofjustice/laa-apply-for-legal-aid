@@ -22,6 +22,7 @@ Given('I complete the journey as far as check your answers') do
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
+    Then I enter an email address 'test@test.com'
     Then I click "Continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
@@ -29,8 +30,6 @@ Given('I complete the journey as far as check your answers') do
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
     Then I am on the benefit check results page
-    Then I click "Continue"
-    Then I enter an email address 'test@test.com'
     Then I click "Continue"
     Then I should be on the Check Your Answers page
   )

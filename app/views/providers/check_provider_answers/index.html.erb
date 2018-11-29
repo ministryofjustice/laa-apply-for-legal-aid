@@ -51,17 +51,17 @@
           ) %>
 
       <%= check_provider_answer_link(
+            name: :email,
+            url: providers_legal_aid_application_applicant_path(anchor: :email),
+            question: t('.section_2.email'),
+            answer: @applicant.email
+          ) %>
+
+      <%= check_provider_answer_link(
             name: :address,
             url: providers_legal_aid_application_address_lookup_path(anchor: :postcode),
             question: t('.section_2.address'),
             answer: address_with_line_breaks(@address)
-          ) %>
-
-      <%= check_provider_answer_link(
-            name: :email,
-            url: providers_legal_aid_application_email_path(anchor: :email),
-            question: t('.section_2.email'),
-            answer: @applicant.email
           ) %>
     </dl>
 

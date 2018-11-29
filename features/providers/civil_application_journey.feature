@@ -48,7 +48,7 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
-    Then I enter a valid email address 'test@test.com'
+    Then I enter an email address 'test@test.com'
     Then I click "Continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
@@ -67,7 +67,8 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
-    Then I enter a valid email address 'test@test.com'
+    Then I enter an email address 'test@test.com'
+    Then I click "Continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9AJ'
     Then I click find address
@@ -87,7 +88,8 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'Walker'
     Then I enter the date of birth '10-01-1980'
     Then I enter national insurance number 'JA293483A'
-    Then I enter a valid email address 'test@test.com'
+    Then I enter an email address 'test@test.com'
+    Then I click "Continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
@@ -102,7 +104,7 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
-    Then I enter a valid email address 'test@test.com'
+    Then I enter an email address 'test@test.com'
     Then I click "Continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'

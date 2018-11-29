@@ -27,7 +27,7 @@ module Providers
     end
 
     def applicant_attributes
-      %i[first_name last_name date_of_birth national_insurance_number]
+      %i[first_name last_name date_of_birth national_insurance_number email]
     end
 
     def current_params
