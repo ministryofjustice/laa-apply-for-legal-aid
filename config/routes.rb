@@ -35,7 +35,10 @@ Rails.application.routes.draw do
       resource :email, only: %i[show update]
       resources :check_benefits, only: [:index]
       resources :check_provider_answers, only: [:index] do
-        post :confirm, on: :collection
+        collection do
+          post :confirm
+          post :reset
+        end
       end
     end
   end

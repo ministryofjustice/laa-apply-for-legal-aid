@@ -16,5 +16,10 @@ module Providers
       flash[:notice] = 'Application completed. An e-mail will be sent to the citizen.'
       redirect_to next_step_url
     end
+
+    def reset
+      legal_aid_application.reset!
+      redirect_to back_step_url
+    end
   end
 end

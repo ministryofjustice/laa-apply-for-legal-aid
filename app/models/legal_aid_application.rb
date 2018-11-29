@@ -25,6 +25,10 @@ class LegalAidApplication < ApplicationRecord
       transitions from: :initiated, to: :provider_submitted
       transitions from: :checking_answers, to: :provider_submitted
     end
+
+    event :reset do
+      transitions from: :checking_answers, to: :initiated
+    end
   end
 
   def self.find_by_secure_id!(secure_id)
