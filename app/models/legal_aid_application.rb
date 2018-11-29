@@ -14,10 +14,20 @@ class LegalAidApplication < ApplicationRecord
 
   aasm column: :state do
     state :initiated, initial: true
+    state :checking_answers
     state :provider_submitted
+
+    event :check_your_answers do
+      transitions from: :initiated, to: :checking_answers
+    end
 
     event :provider_submit do
       transitions from: :initiated, to: :provider_submitted
+      transitions from: :checking_answers, to: :provider_submitted
+    end
+
+    event :reset do
+      transitions from: :checking_answers, to: :initiated
     end
   end
 

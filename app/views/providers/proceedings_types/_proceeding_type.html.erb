@@ -6,7 +6,7 @@
     </span>
   </div>
 
-  <%= form_for([:providers, @legal_aid_application]) do |form| %>
+  <%= form_for([:providers, @legal_aid_application], url: providers_legal_aid_application_proceedings_type_path) do |form| %>
   <div class="govuk-grid-column-one-third control-column">
     <%= hidden_field_tag :proceeding_type, proceeding_type.code %>
     <%= form.submit 'Select and continue', tabindex: '-1', class: 'govuk-button proceeding-link govuk-!-margin-top-4' %>

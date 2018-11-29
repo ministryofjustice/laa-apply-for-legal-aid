@@ -1,4 +1,4 @@
-<div class="app-check-your-answers__contents">
+<div class="app-check-your-answers__contents" id="app-check-your-answers__<%= name %>">
   <dt class="app-check-your-answers__question">
     <%= question %>
   </dt>
@@ -6,8 +6,8 @@
     <%= answer %>
   </dd>
   <dd class="app-check-your-answers__change">
-    <a href="#">
+    <%= link_to(url) do %>
       Change<span class="govuk-visually-hidden"><%= question %></span>
-    </a>
+    <% end %>
   </dd>
 </div>

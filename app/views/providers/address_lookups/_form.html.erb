@@ -12,7 +12,8 @@
     <%= form_with(
           model: @form,
           scope: :address_lookup,
-          url: providers_legal_aid_application_address_lookups_path(@legal_aid_application),
+          url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+          method: :patch,
           local: true
         ) do |form| %>
 
@@ -26,7 +27,7 @@
 
       <%= form.submit 'Find address', id: 'find-address', class: 'govuk-button' %>
 
-      <p><%= link_to 'Enter address manually', edit_providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
+      <p><%= link_to 'Enter address manually', providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
     <% end %>
   </div>
 </div>

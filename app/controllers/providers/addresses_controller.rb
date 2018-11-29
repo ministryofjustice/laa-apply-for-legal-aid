@@ -3,7 +3,7 @@ module Providers
     include Providers::ApplicationDependable
     include Providers::Steppable
 
-    def edit
+    def show
       @form = Applicants::AddressForm.new(current_address_params)
     end
 
@@ -13,7 +13,7 @@ module Providers
       if @form.save
         redirect_to next_step_url
       else
-        render :edit
+        render :show
       end
     end
 

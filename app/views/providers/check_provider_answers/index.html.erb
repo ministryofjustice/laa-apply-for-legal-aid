@@ -1,4 +1,14 @@
-<% content_for(:navigation) { provider_back_link } %>
+<%
+  content_for(:navigation) do
+    link_to(
+      t('generic.back'),
+      reset_providers_legal_aid_application_check_provider_answers_path,
+      class: 'govuk-back-link',
+      id: 'back-top',
+      method: :post
+    )
+  end
+%>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
@@ -12,18 +22,58 @@
         <%= t '.section_1.heading' %>
       </dt>
 
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_1.proceeding'), answer: @proceeding.meaning } %>
+      <%= check_provider_answer_link(
+            name: :proceeding_type,
+            url: providers_legal_aid_application_proceedings_type_path(anchor: 'proceeding-search-input'.freeze),
+            question: t('.section_1.proceeding'),
+            answer: @proceeding.meaning
+          ) %>
 
       <dt class="govuk-heading-m govuk-!-padding-top-9">
         <%= t '.section_2.heading' %>
       </dt>
 
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.first_name'), answer: @applicant.first_name } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.last_name'), answer: @applicant.last_name } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.dob'), answer: @applicant.date_of_birth.to_s } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.nino'), answer: @applicant.national_insurance_number } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.address'), answer: address_with_line_breaks(@address) } %>
-      <%= render partial: 'check_your_answers_item', locals: { question: t('.section_2.email'), answer: @applicant.email } %>
+      <%= check_provider_answer_link(
+            name: :first_name,
+            url: providers_legal_aid_application_applicant_path(anchor: :first_name),
+            question: t('.section_2.first_name'),
+            answer: @applicant.first_name
+          ) %>
+
+      <%= check_provider_answer_link(
+            name: :last_name,
+            url: providers_legal_aid_application_applicant_path(anchor: :last_name),
+            question: t('.section_2.last_name'),
+            answer: @applicant.last_name
+          ) %>
+
+      <%= check_provider_answer_link(
+            name: :date_of_birth,
+            url: providers_legal_aid_application_applicant_path(anchor: :dob_day),
+            question: t('.section_2.dob'),
+            answer: @applicant.date_of_birth
+          ) %>
+
+      <%= check_provider_answer_link(
+            name: :national_insurance_number,
+            url: providers_legal_aid_application_applicant_path(anchor: :national_insurance_number),
+            question: t('.section_2.nino'),
+            answer: @applicant.national_insurance_number
+          ) %>
+
+      <%= check_provider_answer_link(
+            name: :email,
+            url: providers_legal_aid_application_applicant_path(anchor: :email),
+            question: t('.section_2.email'),
+            answer: @applicant.email
+          ) %>
+
+      <%= check_provider_answer_link(
+            name: :address,
+            url: providers_legal_aid_application_address_lookup_path(anchor: :postcode),
+            question: t('.section_2.address'),
+            answer: address_with_line_breaks(@address)
+          ) %>
     </dl>
 
     <h2 class="govuk-heading-m">

@@ -113,4 +113,21 @@ RSpec.describe 'check your answers requests', type: :request do
       end
     end
   end
+
+  describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset' do
+    let(:post_request) { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
+
+    before do
+      application.check_your_answers!
+      post_request
+    end
+
+    it 'should redirect back' do
+      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+    end
+
+    it 'should change the stage back to "initialized' do
+      expect(application.reload.initiated?).to be_truthy
+    end
+  end
 end

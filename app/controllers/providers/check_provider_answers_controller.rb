@@ -7,6 +7,7 @@ module Providers
       @proceeding = legal_aid_application.proceeding_types.first
       @applicant = legal_aid_application.applicant
       @address = @applicant.addresses.first
+      legal_aid_application.check_your_answers! unless legal_aid_application.checking_answers?
     end
 
     def confirm
@@ -14,6 +15,11 @@ module Providers
       CitizenEmailService.new(legal_aid_application).send_email
       flash[:notice] = 'Application completed. An e-mail will be sent to the citizen.'
       redirect_to next_step_url
+    end
+
+    def reset
+      legal_aid_application.reset!
+      redirect_to back_step_url
     end
   end
 end

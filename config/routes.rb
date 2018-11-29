@@ -26,16 +26,20 @@ Rails.application.routes.draw do
   namespace :providers do
     root to: 'start#index'
 
-    resources :legal_aid_applications, path: 'applications', only: %i[index new create] do
+    resources :legal_aid_applications, path: 'applications', only: %i[index create] do
+      resource :proceedings_type, only: %i[show update]
       resource :applicant, only: %i[show update]
-
-      resources :check_provider_answers, only: [:index] do
-        post :confirm, on: :collection
-      end
-      resource :address, only: %i[edit update]
-      resource :address_lookups, only: %i[new create]
-      resource :address_selections, only: %i[edit update]
+      resource :address, only: %i[show update]
+      resource :address_lookup, only: %i[show update]
+      resource :address_selection, only: %i[show update]
+      resource :email, only: %i[show update]
       resources :check_benefits, only: [:index]
+      resources :check_provider_answers, only: [:index] do
+        collection do
+          post :confirm
+          post :reset
+        end
+      end
     end
   end
 end

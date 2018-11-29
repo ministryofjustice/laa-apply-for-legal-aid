@@ -5,24 +5,28 @@ module Providers
     # Keys are controller names (as returned by `controller_name.to_sym`)
     STEPS = {
       legal_aid_applications: {
+        forward: :providers_legal_aid_application_proceedings_type_path
+        # No back: start of journey
+      },
+      proceedings_types: {
         forward: :providers_legal_aid_application_applicant_path,
         back: :providers_legal_aid_applications_path
       },
       applicants: {
-        forward: :new_providers_legal_aid_application_address_lookups_path,
-        back: :new_providers_legal_aid_application_path
+        forward: :providers_legal_aid_application_address_lookup_path,
+        back: :providers_legal_aid_application_proceedings_type_path
       },
       address_lookups: {
-        forward: :edit_providers_legal_aid_application_address_selections_path,
+        forward: :providers_legal_aid_application_address_selection_path,
         back: :providers_legal_aid_application_applicant_path
       },
       address_selections: {
         forward: :providers_legal_aid_application_check_benefits_path,
-        back: :new_providers_legal_aid_application_address_lookups_path
+        back: :providers_legal_aid_application_address_lookup_path
       },
       addresses: {
         forward: :providers_legal_aid_application_check_benefits_path,
-        back: :new_providers_legal_aid_application_address_lookups_path
+        back: :providers_legal_aid_application_address_lookup_path
       },
       check_benefits: {
         forward: :providers_legal_aid_application_check_provider_answers_path,
@@ -37,6 +41,10 @@ module Providers
     PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE = [
       :providers_legal_aid_applications_path
     ].freeze
+
+    CHECK_YOUR_ANSWERS_STEP = :providers_legal_aid_application_check_provider_answers_path
+
+    CONTROLLERS_THAT_GO_FORWARD_NORMALLY_DURING_REVIEW = [:address_lookups].freeze
 
     included do
       # Define @back_step_url in controller to over-ride behaviour
@@ -54,16 +62,27 @@ module Providers
       private
 
       def current_next_method
+        return CHECK_YOUR_ANSWERS_STEP if !ignore_checking_answers? && checking_answers?
         @current_next_method ||= STEPS.dig controller_name.to_sym, :forward
       end
 
       def current_back_method
+        return CHECK_YOUR_ANSWERS_STEP if checking_answers?
         @current_back_method ||= STEPS.dig controller_name.to_sym, :back
       end
 
       def with_legal_aid_application_if_needed(current_method)
         return if PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE.include?(current_method)
         legal_aid_application
+      end
+
+      def checking_answers?
+        return unless @legal_aid_application
+        legal_aid_application.checking_answers?
+      end
+
+      def ignore_checking_answers?
+        CONTROLLERS_THAT_GO_FORWARD_NORMALLY_DURING_REVIEW.include? controller_name.to_sym
       end
     end
   end
