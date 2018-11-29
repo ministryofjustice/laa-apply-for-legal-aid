@@ -36,8 +36,12 @@ module Providers
         forward: :providers_legal_aid_application_check_benefits_path,
         # Back determined by controller action logic
       },
+      online_bankings: {
+        forward: :providers_legal_aid_application_about_the_financial_assessments_path,
+        back: :providers_legal_aid_application_check_benefits_path
+      },
       about_the_financial_assessments: {
-        back: :providers_legal_aid_application_check_provider_answers_path
+        back: :providers_legal_aid_application_online_bankings_path
       }
     }.freeze
 

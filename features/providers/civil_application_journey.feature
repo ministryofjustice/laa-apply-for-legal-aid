@@ -59,6 +59,9 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I am on the benefit check results page
     When I click "Continue"
+    Then I am on the client use online banking page
+    Then I choose "Yes"
+    Then I click "Continue"
     Then I am on the About the Financial Assessment page
     Then I click "Submit"
     Then I am on the application confirmation page
@@ -82,6 +85,9 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I am on the benefit check results page
     When I click "Continue"
+    Then I am on the client use online banking page
+    Then I choose "Yes"
+    Then I click "Continue"
     Then I am on the About the Financial Assessment page
     Then I click "Submit"
     Then I am on the application confirmation page
