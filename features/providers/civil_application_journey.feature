@@ -42,6 +42,7 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
+    Then I enter a valid email address 'test@test.com'
     Then I click continue
     Then I am on the postcode entry page
     Then I enter a valid postcode 'DA74NG'
@@ -49,8 +50,6 @@ Feature: Civil application journeys
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click continue
     Then I am on the benefit check results page
-    Then I click continue
-    Then I enter a valid email address 'test@test.com'
     Then I click continue
     When I click "Submit"
     Then I am on the application confirmation page
@@ -66,6 +65,7 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
+    Then I enter a valid email address 'test@test.com'
     Then I click continue
     Then I am on the postcode entry page
     Then I enter a valid postcode 'SW1H 9AJ'
@@ -75,8 +75,6 @@ Feature: Civil application journeys
     Then I enter postcode 'SW1H 9AJ'
     Then I click continue
     Then I am on the benefit check results page
-    Then I click continue
-    Then I enter a valid email address 'test@test.com'
     Then I click continue
     When I click "Submit"
     Then I am on the application confirmation page
@@ -92,6 +90,7 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'Walker'
     Then I enter the date of birth '10-01-1980'
     Then I enter national insurance number 'JA293483A'
+    Then I enter a valid email address 'test@test.com'
     Then I click continue
     Then I am on the postcode entry page
     Then I enter a valid postcode 'DA74NG'
@@ -112,6 +111,7 @@ Feature: Civil application journeys
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
+    Then I enter a valid email address 'test@test.com'
     Then I click continue
     Then I am on the postcode entry page
     Then I enter a valid postcode 'DA74NG'

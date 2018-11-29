@@ -14,7 +14,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
   let(:attr_list) do
     %i[
       first_name last_name national_insurance_number
-      date_of_birth
+      date_of_birth email
     ]
   end
 
@@ -26,7 +26,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     let(:applicant) { Applicant.last }
 
     it 'creates a new applicant' do
-      expect { subject.save }.to change { Applicant.count }
+      expect { subject.save }.to change { Applicant.count }.by(1)
     end
 
     it 'saves attributes to the new applicant' do
@@ -49,7 +49,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it 'errors to be present' do
         subject.save
-        expect(subject.errors[:first_name]).to be_present
+        expect(subject.errors[:first_name]).to match_array(['Enter first name'])
       end
     end
 
@@ -61,12 +61,25 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it 'errors to be present' do
         subject.save
-        expect(subject.errors[:national_insurance_number]).to be_present
+        expect(subject.errors[:national_insurance_number]).to match_array(['Enter a valid National Insurance number'])
+      end
+    end
+
+    context 'with an invalid email' do
+      let(:attributes) { attributes_for(:applicant).merge(email: 'not-a-valid-email') }
+
+      it 'does not persist model' do
+        expect { subject.save }.not_to change { Applicant.count }
+      end
+
+      it 'generate an error' do
+        subject.save
+        expect(subject.errors[:email]).to match_array(['Enter an email address in the right format'])
       end
     end
 
     context 'with an invalid date' do
-      before { attributes[:date_of_birth] = 'invalid-date' }
+      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: 'invalid-date') }
 
       it 'does not persist model' do
         expect { subject.save }.not_to change { Applicant.count }
@@ -79,7 +92,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
 
     context 'with dob in the future' do
-      before { attributes[:date_of_birth] = 3.days.from_now }
+      let(:attributes) { attributes_for(:applicant).merge(date_of_birth: 3.days.from_now) }
 
       it 'does not persist model' do
         expect { subject.save }.not_to change { Applicant.count }
@@ -100,7 +113,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           dob_year: attributes[:date_of_birth].year.to_s,
           dob_month: attributes[:date_of_birth].month.to_s,
           dob_day: attributes[:date_of_birth].day.to_s,
-          legal_aid_application_id: legal_aid_application.id
+          legal_aid_application_id: legal_aid_application.id,
+          email: Faker::Internet.safe_email
         }
       end
 
@@ -123,7 +137,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           dob_year: '10',
           dob_month: '21',
           dob_day: '44',
-          legal_aid_application_id: legal_aid_application.id
+          legal_aid_application_id: legal_aid_application.id,
+          email: Faker::Internet.safe_email
         }
       end
 
@@ -133,7 +148,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it 'sets errors' do
         subject.save
-        expect(subject.errors[:date_of_birth]).to be_present
+        expect(subject.errors[:date_of_birth]).to match_array(['Enter a valid date of birth'])
       end
     end
   end

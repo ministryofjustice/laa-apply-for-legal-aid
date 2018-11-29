@@ -43,7 +43,8 @@ RSpec.describe 'providers applicant requests', type: :request do
           national_insurance_number: 'AA 12 34 56 C',
           dob_year: '1981',
           dob_month: '07',
-          dob_day: '11'
+          dob_day: '11',
+          email: Faker::Internet.safe_email
         }
       }
     end
@@ -72,7 +73,8 @@ RSpec.describe 'providers applicant requests', type: :request do
             national_insurance_number: 'AA 12 34 56 C',
             dob_year: '1981',
             dob_month: '07',
-            dob_day: '11'
+            dob_day: '11',
+            email: Faker::Internet.safe_email
           }
         }
       end
