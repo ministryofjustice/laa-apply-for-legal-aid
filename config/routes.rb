@@ -35,10 +35,10 @@ Rails.application.routes.draw do
       resource :email, only: %i[show update]
       resources :check_benefits, only: [:index]
       resources :check_provider_answers, only: [:index] do
-        collection do
-          post :confirm
-          post :reset
-        end
+        post :reset, on: :collection
+      end
+      resource :about_the_financial_assessment, only: [:show] do
+        post :submit, on: :collection
       end
     end
   end

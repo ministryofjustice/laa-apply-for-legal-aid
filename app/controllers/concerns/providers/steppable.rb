@@ -33,8 +33,11 @@ module Providers
         # Back determined by controller action logic
       },
       check_provider_answers: {
-        forward: :providers_legal_aid_applications_path,
+        forward: :providers_legal_aid_application_about_the_financial_assessment_path,
         back: :providers_legal_aid_application_check_benefits_path
+      },
+      about_the_financial_assessments: {
+        back: :providers_legal_aid_application_check_provider_answers_path
       }
     }.freeze
 

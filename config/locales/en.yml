@@ -154,14 +154,6 @@ en:
         section_3:
           heading: Give your client access to the financial assessment
           text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
-      confirm:
-        application_created: Application created
-        sub_title: Your case reference number is
-        secure_link_heading: We have sent your client a secure link
-        secure_link_text: "Your client can use the link to complete the online financial assessment from home or another location."
-        happen_next_heading: What happens next
-        happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
-        back_button: "Back to your applications"
     proceedings_types:
       show:
         heading_1: "What does your client want legal aid for?"
@@ -169,6 +161,26 @@ en:
         search_help_example: "For example by category of law, matter type or legal proceeding."
         no_results: "No results found."
         clear_search: "Clear search"
+    about_the_financial_assessments:
+      show:
+        title: About the online financial assessment
+        para_1: Send an email to your client with a secure link to the online assessment.
+        para_2: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
+        para_3: Your client will need to share all bank accounts, including any in joint names or with no money.
+        list:
+          title: How we use your client's details
+          item_1: We download 3 months of bank transactions
+          item_2: We only use information for the legal aid application
+          item_3: We automatically end the bank connection after 1 hour
+          item_4: We do not save online banking details
+      submit:
+        application_created: Application created
+        sub_title: Your case reference number is
+        secure_link_heading: We have sent your client a secure link
+        secure_link_text: "Your client can use the link to complete the online financial assessment from home or another location."
+        happen_next_heading: What happens next
+        happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
+        back_button: "Back to your applications"
   citizens:
     accounts:
       index:

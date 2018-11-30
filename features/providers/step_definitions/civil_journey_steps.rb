@@ -159,9 +159,13 @@ Then(/^I see a notice saying that the citizen does not receive benefits$/) do
 end
 
 Then('I am on the application confirmation page') do
-  expect(page).to have_content('Application completed')
+  expect(page).to have_content('Application created')
 end
 
 Then('I am on the legal aid applications') do
   expect(page).to have_content('Your legal aid applications')
+end
+
+Then('I am on the About the Financial Assessment page') do
+  expect(page).to have_content('About the online financial assessment')
 end
