@@ -53,14 +53,14 @@ RSpec.describe 'check your answers requests', type: :request do
   end
 
   describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset' do
-    let(:post_request) { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
+    subject { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
 
     before do
       application.check_your_answers!
     end
 
     it 'should redirect back' do
-      post_request
+      subject
       expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
     end
 
@@ -70,7 +70,7 @@ RSpec.describe 'check your answers requests', type: :request do
       let(:address_lookup_used) { true }
 
       it 'should redirect to the address lookup page' do
-        post_request
+        subject
         expect(response).to redirect_to(providers_legal_aid_application_address_selection_path(application))
       end
     end
@@ -79,14 +79,31 @@ RSpec.describe 'check your answers requests', type: :request do
       let(:address_lookup_used) { false }
 
       it 'should redirect to manual address pagelookup page' do
-        post_request
+        subject
         expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
       end
     end
 
     it 'should change the stage back to "initialized' do
-      post_request
+      subject
       expect(application.reload.initiated?).to be_truthy
+    end
+  end
+
+  describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/continue' do
+    subject { post "/providers/applications/#{application_id}/check_provider_answers/continue" }
+
+    before do
+      application.check_your_answers!
+      subject
+    end
+
+    it 'should redirect to next step' do
+      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+    end
+
+    it 'should change the stage to "answers_checked"' do
+      expect(application.reload.answers_checked?).to be_truthy
     end
   end
 end

@@ -16,17 +16,17 @@ module Providers
       redirect_to back_step_path
     end
 
+    def continue
+      legal_aid_application.answers_checked!
+      redirect_to next_step_url
+    end
+
     private
 
     def back_step_path
       return providers_legal_aid_application_address_selection_path if applicant.address&.lookup_used?
 
       providers_legal_aid_application_address_path
-    end
-
-    def continue
-      legal_aid_application.answers_checked!
-      redirect_to next_step_url
     end
   end
 end
