@@ -7,9 +7,9 @@ class LegalAidApplication < ApplicationRecord
   has_one :benefit_check_result
 
   before_create :create_app_ref
+  before_save :set_open_banking_consent_choice_at
 
   attr_reader :proceeding_type_codes
-
   validate :proceeding_type_codes_existence
 
   aasm column: :state do
@@ -70,5 +70,9 @@ class LegalAidApplication < ApplicationRecord
 
   def create_app_ref
     self.application_ref = SecureRandom.uuid
+  end
+
+  def set_open_banking_consent_choice_at
+    self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
   end
 end
