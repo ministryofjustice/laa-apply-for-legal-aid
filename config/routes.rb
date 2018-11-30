@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
+        post :continue, on: :collection
       end
       resource :about_the_financial_assessment, only: [:show] do
         post :submit, on: :collection

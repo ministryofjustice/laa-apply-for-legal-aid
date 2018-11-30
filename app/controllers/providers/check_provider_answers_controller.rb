@@ -23,5 +23,10 @@ module Providers
 
       providers_legal_aid_application_address_path
     end
+
+    def continue
+      legal_aid_application.answers_checked!
+      redirect_to next_step_url
+    end
   end
 end
