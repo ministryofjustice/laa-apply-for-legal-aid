@@ -1,6 +1,5 @@
 var submitForm = proceedingItem => {
-  $('#proceeding_code').val($(proceedingItem).attr('id'));
-  $('#new_legal_aid_application').submit();
+  $(proceedingItem).find('form').submit();
 }
 
 $.getJSON("/v1/proceeding_types", function (proceedings_data) {
