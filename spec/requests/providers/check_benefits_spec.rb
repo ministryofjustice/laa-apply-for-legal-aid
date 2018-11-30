@@ -20,24 +20,6 @@ RSpec.describe 'check benefits requests', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    context "the applicant's address used the lookup service" do
-      let(:address_lookup_used) { true }
-
-      it 'has a back link to the address lookup page' do
-        get_request
-        expect(unescaped_response_body).to include(providers_legal_aid_application_address_selection_path)
-      end
-    end
-
-    context "the applicant's address used manual entry" do
-      let(:address_lookup_used) { false }
-
-      it 'has a back link to the address lookup page' do
-        get_request
-        expect(unescaped_response_body).to include(providers_legal_aid_application_address_path)
-      end
-    end
-
     context 'when the check_benefit_result does not exist' do
       it 'generates a new check_benefit_result' do
         expect { get_request }.to change { BenefitCheckResult.count }.by(1)
@@ -54,6 +36,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
       context 'and the applicant has since been modified' do
         before { applicant.update(first_name: Faker::Name.first_name) }
+        let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
         it 'updates check_benefit_result' do
           expect_any_instance_of(BenefitCheckService).to receive(:call).and_call_original

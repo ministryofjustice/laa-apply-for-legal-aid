@@ -9,6 +9,7 @@
     )
   end
 %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
@@ -86,5 +87,6 @@
 
   </div>
 </div>
-
-<%= link_to t('generic.continue'), providers_legal_aid_application_about_the_financial_assessment_path(@legal_aid_application), class: 'govuk-button' %>
+<%= button_to t('generic.continue'),
+              providers_legal_aid_application_check_benefits_path(@legal_aid_application),
+              class: 'govuk-button', method: 'get' %>

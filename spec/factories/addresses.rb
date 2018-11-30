@@ -6,5 +6,9 @@ FactoryBot.define do
     city { Faker::Address.city }
     county { Faker::Address.city }
     postcode { Faker::Address.zip }
+
+    trait :is_lookup_used do
+      lookup_used { true }
+    end
   end
 end
