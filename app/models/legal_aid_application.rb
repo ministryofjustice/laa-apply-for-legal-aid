@@ -51,7 +51,8 @@ class LegalAidApplication < ApplicationRecord
 
   def add_benefit_check_result
     benefit_check_response = BenefitCheckService.new(self).call
-    create_benefit_check_result!(
+    self.benefit_check_result ||= build_benefit_check_result
+    benefit_check_result.update!(
       result: benefit_check_response.dig(:benefit_checker_status),
       dwp_ref: benefit_check_response.dig(:confirmation_ref)
     )
@@ -61,7 +62,16 @@ class LegalAidApplication < ApplicationRecord
     benefit_check_result.positive?
   end
 
+  def benefit_check_result_needs_updating?
+    return true unless benefit_check_result
+    applicant_updated_after_benefit_check_result_updated?
+  end
+
   private
+
+  def applicant_updated_after_benefit_check_result_updated?
+    benefit_check_result.updated_at < applicant.updated_at
+  end
 
   def proceeding_type_codes_existence
     return unless proceeding_type_codes.present?

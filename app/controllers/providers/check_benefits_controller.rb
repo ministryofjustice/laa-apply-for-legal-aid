@@ -4,7 +4,7 @@ module Providers
     include Providers::Steppable
 
     def index
-      legal_aid_application.add_benefit_check_result unless legal_aid_application.benefit_check_result
+      legal_aid_application.add_benefit_check_result if legal_aid_application.benefit_check_result_needs_updating?
 
       @back_step_url = back_step_path
 

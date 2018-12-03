@@ -1,24 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe LegalAidApplication, type: :model do
-  let(:attributes) { {} }
-
-  subject(:application) { described_class.new(attributes) }
-
-  it { is_expected.to belong_to(:applicant) }
-  it { is_expected.to have_many(:proceeding_types) }
-
-  it 'is valid with all valid attributes' do
-    expect(application).to be_valid
-  end
+  let(:legal_aid_application) { create :legal_aid_application }
 
   describe 'validations' do
+    let(:attributes) { { proceeding_type_codes: %w[invalid_code1 invalid_code2] } }
+    let(:legal_aid_application) { described_class.new(attributes) }
     context 'when invalid proceeding type codes are provided' do
-      let(:attributes) { { proceeding_type_codes: %w[invalid_code1 invalid_code2] } }
-
       it 'contains an invalid error for proceeding type codes' do
-        expect(application).not_to be_valid
-        expect(application.errors[:proceeding_type_codes]).to match_array(['is invalid'])
+        expect(legal_aid_application).not_to be_valid
+        expect(legal_aid_application.errors[:proceeding_type_codes]).to match_array(['is invalid'])
       end
     end
 
@@ -27,7 +18,9 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:proceeding_type_codes) { proceeding_types.map(&:code) }
       let(:attributes) { { proceeding_type_codes: proceeding_type_codes } }
 
-      it { is_expected.to be_valid }
+      it 'will be valid' do
+        expect(legal_aid_application).to be_valid
+      end
     end
   end
 
@@ -38,14 +31,14 @@ RSpec.describe LegalAidApplication, type: :model do
 
       it 'assigns the provides codes' do
         expect {
-          application.proceeding_type_codes = proceeding_type_codes
-        }.to change { application.proceeding_type_codes }.from(nil).to(proceeding_type_codes)
+          legal_aid_application.proceeding_type_codes = proceeding_type_codes
+        }.to change { legal_aid_application.proceeding_type_codes }.from(nil).to(proceeding_type_codes)
       end
 
       it 'assign all providing types matching the codes' do
-        expect(application.proceeding_types).to be_empty
-        application.proceeding_type_codes = proceeding_type_codes
-        expect(application.proceeding_types).to eq(proceeding_types)
+        expect(legal_aid_application.proceeding_types).to be_empty
+        legal_aid_application.proceeding_type_codes = proceeding_type_codes
+        expect(legal_aid_application.proceeding_types).to eq(proceeding_types)
       end
     end
 
@@ -55,14 +48,14 @@ RSpec.describe LegalAidApplication, type: :model do
 
       it 'assigns the provides codes' do
         expect {
-          application.proceeding_type_codes = proceeding_type_codes
-        }.to change { application.proceeding_type_codes }.from(nil).to(proceeding_type_codes)
+          legal_aid_application.proceeding_type_codes = proceeding_type_codes
+        }.to change { legal_aid_application.proceeding_type_codes }.from(nil).to(proceeding_type_codes)
       end
 
       it 'assign only the providing types matching the codes' do
-        expect(application.proceeding_types).to be_empty
-        application.proceeding_type_codes = proceeding_type_codes
-        expect(application.proceeding_types).to eq([proceeding_type])
+        expect(legal_aid_application.proceeding_types).to be_empty
+        legal_aid_application.proceeding_type_codes = proceeding_type_codes
+        expect(legal_aid_application.proceeding_types).to eq([proceeding_type])
       end
     end
   end
@@ -77,16 +70,50 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     before do
-      application.save!
-      allow(BenefitCheckService).to receive(:new).with(application).and_return(benefit_check_service)
+      legal_aid_application.save!
+      allow(BenefitCheckService).to receive(:new).with(legal_aid_application).and_return(benefit_check_service)
     end
 
     it 'creates a check_benefit_result with the right values' do
       expect(benefit_check_service).to receive(:call).and_return(benefit_check_response)
 
-      application.add_benefit_check_result
-      expect(application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
-      expect(application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
+      legal_aid_application.add_benefit_check_result
+      expect(legal_aid_application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
+      expect(legal_aid_application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
+    end
+  end
+
+  describe 'benefit_check_result_needs_updating?' do
+    let!(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:applicant) { legal_aid_application.applicant }
+    it 'is true if no benefit check results' do
+      expect(legal_aid_application).to be_benefit_check_result_needs_updating
+    end
+
+    context 'with up to date benefit check results' do
+      let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: legal_aid_application }
+
+      it 'returns false' do
+        expect(legal_aid_application).not_to be_benefit_check_result_needs_updating
+      end
+
+      context 'but later, applicant first name updated' do
+        before { applicant.update(first_name: Faker::Name.first_name) }
+
+        it 'returns true' do
+          expect(legal_aid_application).to be_benefit_check_result_needs_updating
+        end
+      end
+
+      context 'but later, state changes' do
+        before do
+          legal_aid_application.check_your_answers!
+        end
+
+        it 'returns false' do
+          expect(legal_aid_application).not_to be_benefit_check_result_needs_updating
+        end
+      end
     end
   end
 
@@ -104,7 +131,7 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(subject).to eq(secure_data.id)
     end
 
-    it 'generates data that can be used to find application' do
+    it 'generates data that can be used to find legal_aid_application' do
       data = SecureData.for(subject)[:legal_aid_application]
       expect(data).to be_present
       expect(described_class.find_by(data)).to eq(legal_aid_application)
@@ -115,16 +142,16 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:legal_aid_application) { create :legal_aid_application }
     let(:secure_id) { legal_aid_application.generate_secure_id }
 
-    it 'should return matching legal aid application' do
+    it 'should return matching legal aid legal_aid_application' do
       expect(described_class.find_by_secure_id!(secure_id)).to eq(legal_aid_application)
     end
   end
 
   describe 'state machine' do
-    subject(:application) { create(:legal_aid_application) }
+    subject(:legal_aid_application) { create(:legal_aid_application) }
 
     it 'is created with a default state of "initiated"' do
-      expect(application.state).to eq('initiated')
+      expect(legal_aid_application.state).to eq('initiated')
     end
   end
 end
