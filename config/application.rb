@@ -22,5 +22,9 @@ module LaaApplyForLegalAid
     config.govuk_notify_templates = config_for(
       :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
     ).symbolize_keys
+
+    # Prevents surrounding of erroneous inputs with <div class="field_with_errors">
+    # https://guides.rubyonrails.org/configuring.html#configuring-action-view
+    config.action_view.field_error_proc = proc { |html_tag| html_tag.html_safe }
   end
 end

@@ -122,6 +122,10 @@ Then('I enter an email address {string}') do |email_address|
   fill_in('email', with: email_address)
 end
 
+Then('I choose {string}') do |option|
+  choose(option, allow_label_click: true)
+end
+
 # Matches:
 #   Then I enter a field name 'entry'
 #   Then I enter the field name "entry"
@@ -138,6 +142,10 @@ end
 
 Then('I am on the benefit check results page') do
   expect(page).to have_content("Your client's tax and benefits status")
+end
+
+Then('I am on the client use online banking page') do
+  expect(page).to have_content('Does your client use online banking?')
 end
 
 Then(/^I click find address$/) do

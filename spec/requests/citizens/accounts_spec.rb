@@ -27,28 +27,28 @@ RSpec.describe 'citizen accounts request test', type: :request do
     end
 
     it 'display account holder name' do
-      expect(response.body).to include(applicant_bank_account_holder.full_name)
+      expect(unescaped_response_body).to include(applicant_bank_account_holder.full_name)
     end
 
     it 'display first account holder address' do
-      expect(response.body).to include(addresses.first.values.join(', '))
+      expect(unescaped_response_body).to include(addresses.first.values.join(', '))
     end
 
     it 'display bank name and bank account type' do
       bank_name_type = "#{applicant_bank_provider.name} #{applicant_bank_account.name}"
-      expect(response.body).to include(bank_name_type)
+      expect(unescaped_response_body).to include(bank_name_type)
     end
 
     it 'display account number' do
-      expect(response.body).to include(applicant_bank_account.account_number)
+      expect(unescaped_response_body).to include(applicant_bank_account.account_number)
     end
 
     it 'display sort code' do
-      expect(response.body).to include(applicant_bank_account.sort_code)
+      expect(unescaped_response_body).to include(applicant_bank_account.sort_code)
     end
 
     it 'display balance with pound symbol' do
-      expect(response.body).to include("£#{applicant_bank_account.balance}")
+      expect(unescaped_response_body).to include("£#{applicant_bank_account.balance}")
     end
   end
 end

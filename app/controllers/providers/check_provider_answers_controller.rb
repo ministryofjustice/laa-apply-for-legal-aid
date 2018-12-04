@@ -16,6 +16,11 @@ module Providers
       redirect_to back_step_path
     end
 
+    def continue
+      legal_aid_application.answers_checked!
+      redirect_to next_step_url
+    end
+
     private
 
     def back_step_path
