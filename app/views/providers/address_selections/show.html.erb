@@ -44,7 +44,7 @@
             <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
           <% end %>
           <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
-          <%= f.select(:lookup_id, @addresses.collect { |a| [a.full_address, a.lookup_id] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select govuk-!-width-two-thirds #{input_error_class}", id: :address) %>
+          <%= f.select(:lookup_id, @addresses.collect { |a| [a.full_address, a.lookup_id] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select #{input_error_class}", id: :address) %>
         </div>
       </div>
 
