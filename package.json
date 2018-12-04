@@ -2,7 +2,7 @@
   "name": "laa-apply-for-legal-aid",
   "private": true,
   "dependencies": {
-    "govuk-frontend": "^1.1.1",
+    "govuk-frontend": "^2.4.0",
     "js-search": "^1.4.2"
   }
 }
