@@ -9,5 +9,9 @@ FactoryBot.define do
     trait :with_address do
       addresses { build_list :address, 1 }
     end
+
+    trait :with_address_lookup do
+      addresses { build_list :address, 1, :is_lookup_used }
+    end
   end
 end

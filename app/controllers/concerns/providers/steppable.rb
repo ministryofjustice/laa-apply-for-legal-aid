@@ -21,20 +21,20 @@ module Providers
         back: :providers_legal_aid_application_applicant_path
       },
       address_selections: {
-        forward: :providers_legal_aid_application_check_benefits_path,
+        forward: :providers_legal_aid_application_check_provider_answers_path,
         back: :providers_legal_aid_application_address_lookup_path
       },
       addresses: {
-        forward: :providers_legal_aid_application_check_benefits_path,
+        forward: :providers_legal_aid_application_check_provider_answers_path,
         back: :providers_legal_aid_application_address_lookup_path
       },
       check_benefits: {
-        forward: :providers_legal_aid_application_check_provider_answers_path,
-        # Back determined by controller action logic
+        # forward: :providers_legal_aid_application_check_provider_answers_path,
+        back: :providers_legal_aid_application_check_provider_answers_path
       },
       check_provider_answers: {
-        forward: :providers_legal_aid_application_about_the_financial_assessment_path,
-        back: :providers_legal_aid_application_check_benefits_path
+        forward: :providers_legal_aid_application_check_benefits_path,
+        # Back determined by controller action logic
       },
       about_the_financial_assessments: {
         back: :providers_legal_aid_application_check_provider_answers_path

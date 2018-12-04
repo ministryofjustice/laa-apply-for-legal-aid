@@ -29,8 +29,6 @@ Given('I complete the journey as far as check your answers') do
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
-    Then I am on the benefit check results page
-    Then I click "Continue"
     Then I should be on the Check Your Answers page
   )
 end

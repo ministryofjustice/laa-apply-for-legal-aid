@@ -117,7 +117,7 @@ RSpec.describe 'address selections requests', type: :request do
     it 'redirects to next submission step' do
       patch_request
 
-      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(legal_aid_application))
+      expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path)
     end
 
     it 'records that the lookup service was used' do

@@ -8,6 +8,10 @@ FactoryBot.define do
       applicant { create :applicant, :with_address }
     end
 
+    trait :with_applicant_and_address_lookup do
+      applicant { create :applicant, :with_address_lookup }
+    end
+
     trait :provider_submitted do
       state { 'provider_submitted' }
     end
