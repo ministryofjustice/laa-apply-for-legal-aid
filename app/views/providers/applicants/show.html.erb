@@ -16,11 +16,17 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <%= form_with(model: @form, url: providers_legal_aid_application_applicant_path, method: :patch, local: true) do |form| %>
+      <%= form_with(
+            model: @form,
+            url: providers_legal_aid_application_applicant_path,
+            method: :patch,
+            local: true
+          ) do |form| %>
+
         <div class="govuk-!-padding-bottom-2"></div>
 
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :first_name, form: form, class: 'govuk-!-width-one-half' } %>
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :last_name, form: form, class: 'govuk-!-width-one-half' } %>
+        <%= form.govuk_text_field :first_name, class: 'govuk-!-width-one-half' %>
+        <%= form.govuk_text_field :last_name, class: 'govuk-!-width-one-half' %>
 
         <div class="govuk-!-padding-bottom-4"></div>
 
@@ -28,18 +34,18 @@
 
         <div class="govuk-!-padding-bottom-6"></div>
 
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :national_insurance_number, form: form, class: 'govuk-!-width-one-half' } %>
-
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :email, class: 'govuk-!-width-three-quarters', form: form } %>
+        <%= form.govuk_text_field :national_insurance_number, class: 'govuk-!-width-one-half' %>
+        <%= form.govuk_text_field :email, class: 'govuk-!-width-three-quarters' %>
 
         <div class="govuk-!-padding-bottom-2"></div>
 
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
             <%= form.submit 'Continue', id: 'continue', class: 'govuk-button govuk-button' %>
-          <% end %>
          </div>
        </div>
+
+      <% end %>
     </div>
   </div>
 </fieldset>
