@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template">
   <head>
-    <title>Apply for Legal Aid</title>
+    <title><%= @page_heading || I18n.t('shared.page-title.suffix') %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

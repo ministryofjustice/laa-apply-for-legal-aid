@@ -58,6 +58,7 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
+    awesome_print (1.8.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -401,6 +402,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 5.0.1)
   active_model_serializers (~> 0.10.7)
+  awesome_print (~> 1.8.0)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15, < 4.0)

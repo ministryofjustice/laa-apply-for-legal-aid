@@ -94,15 +94,8 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     context 'with No submitted' do
       let(:params) { { has_offline_accounts: 'no' } }
 
-      xit 'redirects to the next step in Citizen jouney' do
-        # TODO: - set redirect path when known
-        expect(response).to redirect_to(:some_path)
-      end
-
-      it 'displays holding page' do
-        # TODO: Delete when redirect set
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match('Landing page')
+      it 'redirects to the next step in Citizen jouney' do
+        expect(response).to redirect_to(citizens_own_home_path)
       end
 
       it 'records choice on legal_aid_application' do

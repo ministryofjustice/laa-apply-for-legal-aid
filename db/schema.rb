@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_140032) do
+ActiveRecord::Schema.define(version: 2018_12_05_111854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2018_11_29_140032) do
     t.string "state"
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
+    t.string "own_home"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 
