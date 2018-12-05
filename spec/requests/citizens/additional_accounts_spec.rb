@@ -94,7 +94,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     context 'with No submitted' do
       let(:params) { { has_offline_accounts: 'no' } }
 
-      it 'redirects to the next step in Citizen jouney' do
+      it 'redirects to the next step in Citizen jouney' do 
         expect(response).to redirect_to(citizens_own_home_path)
       end
 

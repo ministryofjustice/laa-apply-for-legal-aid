@@ -24,7 +24,13 @@ module Citizens
         render plain: 'Landing page: Return to True Layer steps'
       when 'no'
         legal_aid_application.update(has_offline_accounts: true)
+<<<<<<< HEAD
         redirect_to citizens_own_home_path
+=======
+        # TODO: - set redirect path when known
+        # render plain: 'Landing page: Next step in Citizen journey'
+        redirect_to citizens_property_value_path
+>>>>>>> Add property value to applicant and legal aid applictions table
       else
         @error = I18n.t('generic.errors.yes_or_no')
         render :new

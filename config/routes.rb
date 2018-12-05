@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   namespace :citizens do
     resources :legal_aid_applications, only: [:show]
     resource :consent, only: %i[show create]
+    resource :property_value, only: %i[show create]
     resource :information, only: [:show]
     resources :accounts, only: [:index]
     resources :additional_accounts, only: %i[index create new update]

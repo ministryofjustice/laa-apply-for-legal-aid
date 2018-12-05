@@ -243,7 +243,11 @@ en:
           mortgage: Yes, with a mortage or loan
           owned_outright: Yes, owned outright
           not: "No"
-
+    property_values:
+      show:
+        field_set_header: How much is your home worth?
+        label: Enter the estimated value of your home
+        hint: You can use property websites to find the estimated value.
   currency:
     gbp: £
     eur: €
