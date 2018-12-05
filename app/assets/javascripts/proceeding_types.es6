@@ -1,29 +1,31 @@
-var submitForm = proceedingItem => {
-  $(proceedingItem).find('form').submit();
-}
+if ($(document).text().includes('Search for legal proceedings')){
 
-$.getJSON("/v1/proceeding_types", function (proceedings_data) {
+  var submitForm = proceedingItem => {
+    $(proceedingItem).find('form').submit();
+  }
 
-  $("#proceeding-list .proceeding-item").hide();
-  $(".no-proceeding-items").hide();
+  $.getJSON("/v1/proceeding_types", function (proceedings_data) {
 
-  // For docs see: https://github.com/bvaughn/js-search
-  let search = new JsSearch.Search("code");
-  search.addIndex("meaning");
-  search.addIndex("description");
-  search.addIndex("category_law");
-  search.addIndex("matter");
-  search.addDocuments(proceedings_data);
-
-  $("#proceeding-search-input").keyup(function(){
     $("#proceeding-list .proceeding-item").hide();
     $(".no-proceeding-items").hide();
 
-    // Get user input and filter on it.
-    let inputText = $(this).val();
+    // For docs see: https://github.com/bvaughn/js-search
+    let search = new JsSearch.Search("code");
+    search.addIndex("meaning");
+    search.addIndex("description");
+    search.addIndex("category_law");
+    search.addIndex("matter");
+    search.addDocuments(proceedings_data);
 
-    if (inputText.length > 2) {
-      let codes = search.search(inputText).map(function(obj) {return obj["code"];});
+    $("#proceeding-search-input").keyup(function(){
+      $("#proceeding-list .proceeding-item").hide();
+      $(".no-proceeding-items").hide();
+
+      // Get user input and filter on it.
+      let inputText = $(this).val();
+
+      if (inputText.length > 2) {
+        let codes = search.search(inputText).map(function(obj) {return obj["code"];});
 
       if (codes.length > 0) {
         // Iterate through each code, find the matching element, move it to the
@@ -38,28 +40,28 @@ $.getJSON("/v1/proceeding_types", function (proceedings_data) {
       else {
         $(".no-proceeding-items").show();
       }
-    }
-  });
+    });
 
-  $('#clear-proceeding-search').on("click", function() {
-    $("#proceeding-search-input").val("").trigger("keyup");
-  });
+    $('#clear-proceeding-search').on("click", function() {
+      $("#proceeding-search-input").val("").trigger("keyup");
+    });
 
-  $('.proceeding-item').on('mouseover', function(e){
-    $(this).addClass('hover');
-  });
+    $('.proceeding-item').on('mouseover', function(e){
+      $(this).addClass('hover');
+    });
 
-  $('.proceeding-item').on('mouseout', function(e){
-    $(this).removeClass('hover');
-  });
+    $('.proceeding-item').on('mouseout', function(e){
+      $(this).removeClass('hover');
+    });
 
-  $('.proceeding-item').on('click', function(e){
-    submitForm(this);
-  });
-
-  $('.proceeding-item').on('keydown', function(e){
-    if (e.which == 13) {
+    $('.proceeding-item').on('click', function(e){
       submitForm(this);
-    }
+    });
+
+    $('.proceeding-item').on('keydown', function(e){
+      if (e.which == 13) {
+        submitForm(this);
+      }
+    });
   });
-});
+}
