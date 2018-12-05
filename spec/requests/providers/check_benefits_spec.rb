@@ -45,4 +45,15 @@ RSpec.describe 'check benefits requests', type: :request do
       end
     end
   end
+
+  describe 'GET /providers/applications/:application_id/passported', :vcr do
+    let(:get_request) { get "/providers/applications/#{application.id}/check_benefits/passported" }
+
+    it 'displays holding page' do
+      # TODO: Delete when redirect set
+      get_request
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to match('Landing page')
+    end
+  end
 end
