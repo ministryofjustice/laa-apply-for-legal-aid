@@ -1,5 +1,8 @@
-if ($("#proceeding-search-input").length){
+$(function() {
+  if ($("#proceeding-search-input").length){ searchProceedingTypes() };
+});
 
+function searchProceedingTypes() {
   var submitForm = proceedingItem => {
     $(proceedingItem).find('form').submit();
   }
