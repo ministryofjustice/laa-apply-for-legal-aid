@@ -1,10 +1,10 @@
 module Citizens
   class PropertyValuesController < BaseController
     def show
-      @form = Applicants::PropertyValueForm.new # this is so errors are visible
+      @form = Applicants::PropertyValueForm.new
     end
 
-    def create
+    def update
       @form = Applicants::PropertyValueForm.new(edit_params)
 
       if @form.save
@@ -17,7 +17,7 @@ module Citizens
     private
 
     def property_value_params
-      params.fetch(:legal_aid_application, {}).permit(:property_value)
+      params.require(:legal_aid_application).permit(:property_value)
     end
 
     def edit_params
