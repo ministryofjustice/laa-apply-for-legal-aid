@@ -20,6 +20,7 @@ class LegalAidApplication < ApplicationRecord
 
     event :check_your_answers do
       transitions from: :initiated, to: :checking_answers
+      transitions from: :answers_checked, to: :checking_answers
     end
 
     event :answers_checked do

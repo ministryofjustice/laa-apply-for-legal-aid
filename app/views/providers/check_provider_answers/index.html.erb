@@ -71,7 +71,7 @@
 
       <%= check_provider_answer_link(
             name: :address,
-            url: providers_legal_aid_application_address_lookup_path(anchor: :postcode),
+            url: change_address_link(@applicant),
             question: t('.section_2.address'),
             answer: address_with_line_breaks(@address)
           ) %>
