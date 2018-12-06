@@ -7,7 +7,6 @@
   <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_property_value_path, method: :post, local: true) do |form| %>
 
   <% error = form.object.errors[:property_value].first %>
-  <% group_error_class = error ? 'govuk-form-group--error' : '' %>
   <% input_error_class = error ? 'govuk-input--error' : '' %>
 
     <%= govuk_form_group(
@@ -19,7 +18,7 @@
       <div class="govuk-currency-input">
         <div class="govuk-currency-input__inner">
           <span class="govuk-currency-input__inner__unit">£</span>
-          <%= form.text_field :property_value, class: 'govuk-input govuk-currency-input__inner__input govuk-!-width-one-third' %>
+          <%= form.text_field :property_value, class: "govuk-input govuk-currency-input__inner__input govuk-!-width-one-third #{input_error_class}", id: 'property_value' %>
         </div>
       </div>
     <% end %>

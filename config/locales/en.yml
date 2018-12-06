@@ -96,7 +96,9 @@ en:
               not_a_number: &share_must_be_percentage Share must be a percentage amount under 100, like 60
               greater_than_or_equal_to: *share_must_be_percentage
               less_than_or_equal_to: *share_must_be_percentage
-
+            property_value:
+              blank: Enter an estimated value for your home
+              not_a_number: Estimated value must be an amount of money, like 80,000
   activerecord:
     errors:
       models:
