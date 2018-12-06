@@ -41,7 +41,7 @@ RSpec.describe Citizens::OwnHomeForm, type: :form do
     end
 
     it 'leaves other attributes on the record unchanged' do
-      expected_attributes = application.attributes.symbolize_keys.except(:own_home, :updated_at)
+      expected_attributes = application.attributes.symbolize_keys.except(:own_home, :updated_at, :created_at)
       @form.save
       application.reload
       expected_attributes.each do |attr, val|
