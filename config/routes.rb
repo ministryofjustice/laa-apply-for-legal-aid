@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resource :percentage_home, only: %i[show update]
     resource :outstanding_mortgage, only: %i[show update]
     resource :savings_and_investment, only: %i[show update]
+    resource :shared_ownership, only: %i[show update]
   end
 
   namespace :providers do

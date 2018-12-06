@@ -1,0 +1,34 @@
+<% content_for :navigation do %>
+  <%= link_to t('generic.back'), '#', class: 'govuk-back-link', id: 'back' %>
+<% end %>
+
+<h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
+
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+<%= form_with(model: @form,
+              scope: :legal_aid_application,
+              url: citizens_shared_ownership_path,
+              method: :patch,
+              local: true) do |form| %>
+      <% error = form.object.errors[:shared_ownership].first %>
+      <% group_error_class = error ? 'govuk-form-group--error' : '' %>
+      <% input_error_class = error ? 'govuk-input--error' : '' %>
+
+      <div class="govuk-form-group <%= group_error_class %>">
+        <div class="govuk-radios">
+          <%= content_tag(:span, error, class: 'govuk-error-message', id: 'shared_ownership') if error %>
+          <%= render partial: 'shared_ownership_item',
+                     collection: LegalAidApplication::SHARED_OWNERSHIP_REASONS, as: :reason,
+                     locals: { form: form,
+                               group_error_class: group_error_class,
+                               input_error_class: input_error_class } %>
+        </div>
+      </div>
+
+      <div class="govuk-!-padding-bottom-6"></div>
+
+      <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+    <% end %>
+  </div>
+</div>

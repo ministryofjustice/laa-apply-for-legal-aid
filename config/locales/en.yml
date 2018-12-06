@@ -120,6 +120,8 @@ en:
               blank: Enter an estimated value for your home
               not_a_number: &property_value_nan Estimated value must be an amount of money, like 80,000
               greater_than: *property_value_nan
+            shared_ownership:
+              blank: Select yes if you own your home with someone else
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               not_a_number: &outstanding_mortgage_amount_nan 'Mortgage amount must be an amount of money, like 60,000'
@@ -318,6 +320,14 @@ en:
     outstanding_mortgages:
       show:
         outstanding_mortgage_amount_heading: What is the outstanding mortgage on your home?
+    shared_ownerships:
+      show:
+        heading_1: Do you own your home with anyone else?
+      shared_ownership_item:
+          partner_or_ex_partner:  Yes, a partner or ex-partner
+          housing_assocation_or_landlord: Yes, a housing association or landlord
+          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+          no_sole_owner: No, I am the sole owner
   currency:
     gbp: £
     eur: €

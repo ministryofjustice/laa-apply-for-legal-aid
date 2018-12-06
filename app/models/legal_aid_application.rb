@@ -1,6 +1,10 @@
 class LegalAidApplication < ApplicationRecord
   include AASM
 
+  SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
+  SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
+  SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
+
   belongs_to :applicant, optional: true
   has_many :application_proceeding_types
   has_many :proceeding_types, through: :application_proceeding_types
@@ -77,6 +81,10 @@ class LegalAidApplication < ApplicationRecord
 
   def outstanding_mortgage?
     outstanding_mortgage_amount?
+  end
+
+  def shared_ownership?
+    SHARED_OWNERSHIP_YES_REASONS.include?(shared_ownership)
   end
 
   private
