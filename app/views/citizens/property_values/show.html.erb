@@ -2,27 +2,24 @@
     <%= link_to t('generic.back'), new_citizens_additional_account_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
 
   <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_property_value_path, method: :patch, local: true) do |form| %>
 
-  <% error = form.object.errors[:property_value].first %>
-  <% group_error_class = error ? 'govuk-form-group--error' : '' %>
-  <% input_error_class = error ? 'govuk-input--error' : '' %>
+  <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
 
     <%= govuk_form_group(
           show_error_if: form.object.errors[:property_value].present?,
           input: :property_value
         ) do %>
-      <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
+
       <%= form.label :property_value, t('.label'), class: 'govuk-label' %>
       <%= govuk_hint t('.hint'), id: :property_value_hint %>
-      <div class="govuk-currency-input">
-        <div class="govuk-currency-input__inner">
-          <span class="govuk-currency-input__inner__unit">£</span>
-          <%= form.text_field :property_value, class: "govuk-input govuk-currency-input__inner__input govuk-!-width-one-third #{input_error_class}", id: 'property_value' %>
-        </div>
-      </div>
+      <%= govuk_error_message form.object.errors[:property_value].first %>
+      <%= govuk_currency_input_wrapper do %>
+        <% input_error_class = govuk_error_class(form.object.errors[:property_value]) %>
+        <%= form.text_field :property_value, class: "govuk-input govuk-!-width-one-third govuk-currency-input__inner__input #{input_error_class}" %>
+      <% end %>
     <% end %>
 
       <%= govuk_submit_button t('generic.continue') %>

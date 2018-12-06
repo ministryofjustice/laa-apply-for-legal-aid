@@ -98,7 +98,8 @@ en:
               less_than_or_equal_to: *share_must_be_percentage
             property_value:
               blank: Enter an estimated value for your home
-              not_a_number: Estimated value must be an amount of money, like 80,000
+              not_a_number: &property_value_nan Estimated value must be an amount of money, like 80,000
+              greater_than: *property_value_nan
   activerecord:
     errors:
       models:
