@@ -19,13 +19,7 @@
               hint_id: :outstanding_mortgage_amount_hint
             ) do %>
 
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-            <h1 class="govuk-fieldset__heading">
-              <%= t('.outstanding_mortgage_amount_heading') %>
-            </h1>
-          </legend>
-
-          <div class="govuk-!-padding-bottom-6"></div>
+          <%= govuk_fieldset_header t('.outstanding_mortgage_amount_heading'), padding_below: 6 %>
 
           <%= form.label :outstanding_mortgage_amount, t('.outstanding_mortgage_amount_label'), class: 'govuk-label' %>
           <%= govuk_hint t('.outstanding_mortgage_amount_hint'), id: :outstanding_mortgage_amount_hint %>
@@ -41,9 +35,9 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
             <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button govuk-button' %>
-          <% end %>
          </div>
        </div>
+      <% end %>
     </div>
   </div>
 </fieldset>
