@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_132736) do
+ActiveRecord::Schema.define(version: 2018_12_06_100314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_132736) do
     t.string "own_home"
     t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
+    t.decimal "outstanding_mortgage_amount"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 

@@ -69,6 +69,15 @@ module GovUkFormHelper
     content_tag :span, text, merge_with_class(args, 'govuk-error-message')
   end
 
+  def govuk_error_class(error)
+    return '' unless error.present?
+    'govuk-input--error'
+  end
+
+  def govuk_currency_input_wrapper(&block)
+    render 'shared/forms/currency_input_wrapper', text_field: capture(&block)
+  end
+
   # Adds or appends `class_text` to `args[:class]`. So:
   #   args = { id: 'thing' }
   #   merge_with_class(args, 'bar') => { class: 'bar', id: 'thing' }

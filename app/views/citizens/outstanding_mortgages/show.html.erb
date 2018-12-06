@@ -1,0 +1,49 @@
+<%= render 'shared/forms/error_summary', model: @form, attribute_prefix: :legal_aid_application_ %>
+
+<fieldset class="govuk-fieldset">
+  <div class="govuk-!-padding-bottom-2"></div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <%= form_with(
+            model: @form,
+            url: citizens_outstanding_mortgage_path,
+            method: :patch,
+            local: true
+          ) do |form| %>
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <%= govuk_form_group(
+              show_error_if: form.object.errors[:outstanding_mortgage_amount].present?,
+              input: :legal_aid_application_outstanding_mortgage_amount,
+              hint_id: :outstanding_mortgage_amount_hint
+            ) do %>
+
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h1 class="govuk-fieldset__heading">
+              <%= t('.outstanding_mortgage_amount_heading') %>
+            </h1>
+          </legend>
+
+          <div class="govuk-!-padding-bottom-6"></div>
+
+          <%= form.label :outstanding_mortgage_amount, t('.outstanding_mortgage_amount_label'), class: 'govuk-label' %>
+          <%= govuk_hint t('.outstanding_mortgage_amount_hint'), id: :outstanding_mortgage_amount_hint %>
+          <%= govuk_error_message form.object.errors[:outstanding_mortgage_amount].first %>
+          <%= govuk_currency_input_wrapper do %>
+            <% input_error_class = govuk_error_class(form.object.errors[:outstanding_mortgage_amount]) %>
+            <%= form.text_field :outstanding_mortgage_amount, class: "govuk-input govuk-currency-input__inner__input #{input_error_class}" %>
+          <% end %>
+        <% end %>
+
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button govuk-button' %>
+          <% end %>
+         </div>
+       </div>
+    </div>
+  </div>
+</fieldset>
