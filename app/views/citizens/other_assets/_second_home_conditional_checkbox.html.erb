@@ -1,0 +1,24 @@
+
+<%
+  check_box_attribute = 'check_box_second_home'
+  conditional_div_id = 'conditional_second_home'
+  hint = I18n.translate("helpers.hint.#{check_box_attribute}", default: nil)
+  value1 = model.second_home_value
+  value2 = model.second_home_mortgage
+  value3 = model.second_home_percentage
+  checked = value1.present? || model.send(check_box_attribute).present? ? 'checked' : ''
+%>
+
+<div class="govuk-checkboxes__item">
+  <%= form.check_box check_box_attribute, { class: 'govuk-checkboxes__input', 'data-aria-controls' => conditional_div_id, checked: checked }, 'true', '' %>
+  <%= form.label check_box_attribute, class: 'govuk-label govuk-checkboxes__label' %>
+  <%= govuk_hint(hint, class: 'govuk-checkboxes__hint') if hint %>
+</div>
+
+<div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="<%= conditional_div_id %>">
+  <%= form.govuk_text_field :second_home_value, input_prefix: t('currency.gbp'), value: number_to_currency(value1, unit: ''), class: 'govuk-!-width-one-third' %>
+
+  <%= form.govuk_text_field :second_home_mortgage, input_prefix: t('currency.gbp'), value: number_to_currency(value2, unit: ''), class: 'govuk-!-width-one-third' %>
+
+  <%= form.govuk_text_field :second_home_percentage, input_suffix: '%', value: number_to_currency(value3, unit: ''), class: 'govuk-!-width-one-third' %>
+</div>

@@ -71,6 +71,27 @@ en:
         peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all you own
         check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
         life_assurance_endowment_policy: Enter the total value of all you own
+      other_assets_declaration:
+        check_box_second_home: Second property or holiday home
+        second_home_value: Enter estimated value
+        second_home_mortgage: Enter outstanding mortgage amount
+        second_home_percentage: Enter percentage share you legally own
+        check_box_timeshare_value: Timeshare
+        timeshare_value: Enter value, minus any loan and sale costs
+        check_box_land_value: Land
+        land_value: Enter estimated value
+        check_box_jewellery_value: Jewellery, art or antiques with a value over 500
+        jewellery_value: Enter estimated value, minus any sale costs
+        check_box_vehicle_value: Car, van or motorcycle less than 3 years old
+        vehicle_value: Enter estimated value, minus any outstanding payments
+        check_box_classic_car_value: Classic car purchased as an investment
+        classic_car_value: Enter the estimated value
+        check_box_money_assets_value: Money or assets from the estate of a person who has died
+        money_assets_value: Enter estimated total value
+        check_box_money_owed_value: Money owed to you, including from a private mortgage
+        money_owed_value: Enter estimated amount owed
+        check_box_trust_value: Interest in a trust
+        trust_value: Enter estimated total value
       applicants/address_form:
         <<: *address_attrs
       applicants/basic_details_form:
@@ -172,6 +193,34 @@ en:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
               greater_than_or_equal_to: *total_must_be_positive
+
+        other_assets_declaration:
+          attributes:
+            second_home_value:
+              not_a_number: Second home or property value is not a number
+              blank: Second home or property value must be entered if checkbox is ticked
+            second_home_mortgage:
+              not_a_number: Second home or property mortgage is not a number'
+              blank: Second home or property mortgage must be entered if checkbox is ticked
+            second_home_percentage:
+              not_a_number: Second home or property percentage ownership is not a number'
+              blank: Second home or property percentage ownership must be entered if checkbox is ticked
+            timeshare_value:
+              not_a_number: Timeshare value is not a number
+            land_value:
+              not_a_number: Land value is not a number
+            jewellery_value:
+              not_a_number: Jewellery value is not a number
+            vehicle_value:
+              not_a_number: Vehicle value is not a number
+            classic_car_value:
+              not_a_number: Clasic car value is not a number
+            money_assets_value:
+              not_a_number: Money assets value is not a number
+            money_owed_value:
+              not_a_number: Money owed value is not a number
+            trust_value:
+              not_a_number: Trust value is not a number
 
   activerecord:
     errors:
@@ -365,6 +414,9 @@ en:
     property_values:
       show:
         field_set_header: How much is your home worth?
+    other_assets:
+      show:
+        h1-heading: Do you have any of the following?
     outstanding_mortgages:
       show:
         outstanding_mortgage_amount_heading: What is the outstanding mortgage on your home?
@@ -426,6 +478,26 @@ en:
     errors:
       yes_or_no: You must select either Yes or No
       problem_text: There is a problem
+    other_assets:
+      show:
+        amount_owed: Enter estimated amount owed
+        classic_car: Clasic car purchased as an investment
+        estimated_value: Enter estimated value
+        estimated_total_value: Enter estimated total value
+        h1-heading: Do you have any of the following?
+        jewellery: Jewellery, art or antiques with a value over £500
+        land: Land
+        money_assets: Money or assets from the estate of a person who has died
+        money_owed: Money owed to you, including from a private mortgage
+        mortgage: Enter outstanding mortgage amount
+        percentage: Enter percentage share you legally own
+        second_home: Second property or holiday home
+        timeshare: Timeshare
+        trust: Interest in a trust
+        value_after_loan: Enter value, minus any loan and sale costs
+        value_after_sale: Enter estimated value, minus any sale costs
+        value_after_payments: Enter estimated value, minus any outstanding payments
+        vehicle: Car, van or motorcycle less than 3 years old
   currency:
     gbp: £
     eur: €

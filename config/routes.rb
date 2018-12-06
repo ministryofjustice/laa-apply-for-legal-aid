@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resource :savings_and_investment, only: %i[show update]
     resource :shared_ownership, only: %i[show update]
     resources :restrictions, only: %i[index create] # as multiple restrictions
+    resource :other_assets, only: %i[show update]
   end
 
   namespace :providers do
