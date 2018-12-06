@@ -11,12 +11,13 @@
   <% input_error_class = error ? 'govuk-input--error' : '' %>
 
     <%= govuk_form_group(
+          show_error_if: form.object.errors[:property_value].present?,
           input: :property_value
         ) do %>
       <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
       <%= form.label :property_value, t('.label'), class: 'govuk-label' %>
       <%= govuk_hint t('.hint'), id: :property_value_hint %>
-      <div class="govuk-currency-input <%= group_error_class %>">
+      <div class="govuk-currency-input">
         <div class="govuk-currency-input__inner">
           <span class="govuk-currency-input__inner__unit">£</span>
           <%= form.text_field :property_value, class: "govuk-input govuk-currency-input__inner__input govuk-!-width-one-third #{input_error_class}", id: 'property_value' %>
