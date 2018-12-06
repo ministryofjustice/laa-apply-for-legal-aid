@@ -14,9 +14,14 @@
           input: :property_value
         ) do %>
       <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
-      <%= form.label :property_value, t('.label'),  class: 'govuk-label' %>
+      <%= form.label :property_value, t('.label'), class: 'govuk-label' %>
       <%= govuk_hint t('.hint'), id: :property_value_hint %>
-      <%= form.text_field :property_value, class: 'govuk-input govuk-currency-input__inner__input govuk-!-width-one-third' %>
+      <div class="govuk-currency-input">
+        <div class="govuk-currency-input__inner">
+          <span class="govuk-currency-input__inner__unit">£</span>
+          <%= form.text_field :property_value, class: 'govuk-input govuk-currency-input__inner__input govuk-!-width-one-third' %>
+        </div>
+      </div>
     <% end %>
 
       <%= govuk_submit_button t('generic.continue') %>
