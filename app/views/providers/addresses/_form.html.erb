@@ -48,13 +48,13 @@
 
       <% group_error_class = @form.errors[:address_line_one].any? ? 'govuk-form-group--error' : '' %>
       <div class="govuk-form-group <%= group_error_class %>">
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_one, form: form } %>
-        <%= render partial: 'shared/forms/text_fields', locals: { field_name: :address_line_two, field_with_error: :address_line_one, form: form } %>
+        <%= form.govuk_text_field :address_line_one %>
+        <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
       </div>
 
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :city, class: 'govuk-!-width-two-thirds', form: form } %>
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :county, class: 'govuk-!-width-two-thirds', form: form } %>
-      <%= render partial: 'shared/forms/text_fields', locals: { field_name: :postcode, class: 'govuk-input--width-10', form: form, hide_hint?: true } %>
+      <%= form.govuk_text_field :city, class: 'govuk-!-width-two-thirds' %>
+      <%= form.govuk_text_field :county, class: 'govuk-!-width-two-thirds' %>
+      <%= form.govuk_text_field :postcode, hide_hint?: true, class: 'govuk-input--width-10' %>
 
       <%= form.submit 'Continue', id: 'continue', class: 'govuk-button' %>
     <% end %>
