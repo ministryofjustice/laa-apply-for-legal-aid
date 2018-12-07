@@ -37,6 +37,23 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     expect(output).not_to include('<span class="govuk-hint">')
   end
 
+  context 'has an input_prefix option' do
+    let(:prefix) { '£' }
+
+    it 'includes a prefix ' do
+      output = builder.govuk_text_field(:email, input_prefix: prefix)
+
+      expected_output = [
+        '<div class="govuk-prefix-input">',
+        '<div class="govuk-prefix-input__inner">',
+        '<span class="govuk-prefix-input__inner__unit">',
+        prefix
+      ].join
+
+      expect(output).to include(expected_output)
+    end
+  end
+
   context 'when validation error on object' do
     before { resource.valid? }
 

@@ -26,7 +26,27 @@ module GovukElementsFormBuilder
       html.concat(hint_tag(attribute)) if !options[:hide_hint?] && hint_message(attribute)
       html.concat(error_tag(attribute)) if error?(attribute)
 
-      (html + text_field(attribute, options.except(:label, :label_options).merge(id: attribute))).html_safe
+      html.concat(field_tag(options, attribute))
+
+      html.html_safe
+    end
+
+    def field_tag(options, attribute)
+      input_prefix = options.delete(:input_prefix)
+      tag = text_field(attribute, options.except(:label, :label_options).merge(id: attribute))
+      return tag unless input_prefix
+
+      input_prefix_group(input_prefix) { tag }
+    end
+
+    def input_prefix_group(input_prefix)
+      content_tag :div, class: 'govuk-prefix-input' do
+        content_tag :div, class: 'govuk-prefix-input__inner' do
+          html = content_tag :span, input_prefix, class: 'govuk-prefix-input__inner__unit'
+          html.concat(yield)
+          html
+        end
+      end
     end
 
     # Given an attributes hash that could include any number of arbitrary keys, this method
@@ -42,6 +62,7 @@ module GovukElementsFormBuilder
     def field_classes!(options, attribute)
       default_classes = ['govuk-input']
       default_classes << 'govuk-input--error' if error?(options[:field_with_error] || attribute)
+      default_classes << 'govuk-prefix-input__inner__input' if options[:input_prefix]
 
       options ||= {}
       merge_attributes(options, default: { class: default_classes })
