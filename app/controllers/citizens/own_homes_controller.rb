@@ -1,7 +1,8 @@
 module Citizens
   class OwnHomesController < BaseController
+    before_action :set_page_heading
+
     def show
-      @page_heading = "#{I18n.t('citizens.own_homes.show.h1-heading')} - #{I18n.t('shared.page-title.suffix')}"
       @legal_aid_application = LegalAidApplication.find(session[:current_application_ref])
       @form = Citizens::OwnHomeForm.new(current_params)
     end
@@ -23,6 +24,10 @@ module Citizens
     end
 
     private
+
+    def set_page_heading
+      @page_heading = "#{I18n.t('citizens.own_homes.show.h1-heading')} - #{I18n.t('shared.page-title.suffix')}"
+    end
 
     def current_params
       @legal_aid_application.attributes.symbolize_keys.slice(:own_home)

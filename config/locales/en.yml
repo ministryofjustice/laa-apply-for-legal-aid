@@ -230,7 +230,7 @@ en:
         own_home:
           mortgage: Yes, with a mortage or loan
           owned_outright: Yes, owned outright
-          not: No
+          not: "No"
 
   currency:
     gbp: £
