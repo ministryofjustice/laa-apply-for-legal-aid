@@ -9,6 +9,7 @@ en:
       national_insurance_number: For example, ‘QQ 12 34 56 C'
       email: We'll use this to send your client a secure link
       postcode: Postcode must be a valid UK postcode.
+      percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
   shared:
     forms:
       date_input_fields:
@@ -32,6 +33,8 @@ en:
         dob_year: 'Year'
         national_insurance_number: 'National Insurance number'
         email: 'Email address'
+      legal_aid_application:
+        percentage_home: Enter the estimated percentage share you own
       applicants/address_form:
         <<: *address_attrs
       applicants/basic_details_form:
@@ -88,6 +91,11 @@ en:
           attributes:
             own_home:
               blank: Select yes if you own the home you live in
+            percentage_home:
+              blank: Enter the percentage (%) share you own
+              not_a_number: &share_must_be_percentage Share must be a percentage amount under 100, like 60
+              greater_than_or_equal_to: *share_must_be_percentage
+              less_than_or_equal_to: *share_must_be_percentage
 
   activerecord:
     errors:
@@ -225,6 +233,9 @@ en:
         list_1: We do not save your online banking username and password
         list_2: We do not have any ongoing access to your bank accounts
         list_3: We only use your details to assess your eligibility for legal aid
+    percentage_homes:
+      show:
+        h1-heading: What % share of your home do you legally own?
     own_homes:
       show:
         h1-heading: Do you own the home that you live in?
