@@ -9,8 +9,6 @@
 
     <p class="govuk-body"><%= t '.para_2' %></p>
 
-    <p class="govuk-body"><%= t '.para_3' %></p>
-
     <h2 class="govuk-heading-m"><%= t '.list.title' %></h2>
 
     <p class="govuk-body">
@@ -20,6 +18,14 @@
         <li><%= t '.list.item_3' %></li>
         <li><%= t '.list.item_4' %></li>
       </ul>
+    </p>
+
+    <h2 class="govuk-heading-m">
+      <%= t '.section_1.heading' %>
+    </h2>
+
+    <p>
+      <%= t '.section_1.text' %>
     </p>
 
     <%= button_to t('generic.submit'), submit_providers_legal_aid_application_about_the_financial_assessment_path, class: 'govuk-button' %>

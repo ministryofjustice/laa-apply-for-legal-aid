@@ -232,9 +232,6 @@ en:
           nino: National Insurance number
           address: Correspondence address
           email: Email address
-        section_3:
-          heading: Give your client access to the financial assessment
-          text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
     proceedings_types:
       show:
         heading_1: "What does your client want legal aid for?"
@@ -245,15 +242,17 @@ en:
     about_the_financial_assessments:
       show:
         title: About the online financial assessment
-        para_1: Send an email to your client with a secure link to the online assessment.
-        para_2: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
-        para_3: Your client will need to share all bank accounts, including any in joint names or with no money.
+        para_1: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
+        para_2: Your client will need to share all bank accounts, including any in joint names or with no money.
         list:
           title: How we use your client's details
           item_1: We download 3 months of bank transactions
           item_2: We only use information for the legal aid application
           item_3: We automatically end the bank connection after 1 hour
           item_4: We do not save online banking details
+        section_1:
+          heading: Give your client access to the financial assessment
+          text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
       submit:
         application_created: Application created
         sub_title: Your case reference number is
