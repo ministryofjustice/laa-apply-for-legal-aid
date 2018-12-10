@@ -14,6 +14,8 @@ en:
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
+    page-title:
+      suffix: Apply for legal aid
   activemodel:
     attributes:
       address: &address_attrs
@@ -82,6 +84,11 @@ en:
             postcode:
               blank: 'Enter a postcode'
               invalid: 'Enter a postcode in the right format'
+        legal_aid_application:
+          attributes:
+            own_home:
+              blank: Select yes if you own the home you live in
+
   activerecord:
     errors:
       models:
@@ -218,6 +225,14 @@ en:
         list_1: We do not save your online banking username and password
         list_2: We do not have any ongoing access to your bank accounts
         list_3: We only use your details to assess your eligibility for legal aid
+    own_homes:
+      show:
+        h1-heading: Do you own the home that you live in?
+        own_home:
+          mortgage: Yes, with a mortage or loan
+          owned_outright: Yes, owned outright
+          not: "No"
+
   currency:
     gbp: £
     eur: €

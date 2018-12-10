@@ -31,5 +31,17 @@ FactoryBot.define do
         application.save
       end
     end
+
+    trait :with_own_home_mortgaged do
+      own_home { 'mortgage' }
+    end
+
+    trait :with_own_home_owned_outright do
+      own_home { 'owned_outright' }
+    end
+
+    trait :without_own_home do
+      own_home { 'no' }
+    end
   end
 end
