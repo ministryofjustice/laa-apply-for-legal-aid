@@ -4,12 +4,13 @@ en:
       codes:
         blank: blank
         invalid: invalid
+  helpers:
+    hint:
+      national_insurance_number: For example, ‘QQ 12 34 56 C'
+      email: We'll use this to send your client a secure link
+      postcode: Postcode must be a valid UK postcode.
   shared:
     forms:
-      text_fields:
-        national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
-        postcode_hint: 'Postcode must be a valid UK postcode.'
-        email_hint: "We'll use this to send your client a secure link"
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
