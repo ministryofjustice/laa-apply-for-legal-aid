@@ -1,4 +1,4 @@
-module Applicants
+module LegalAidApplications
   class PropertyValueForm
     include BaseForm
 

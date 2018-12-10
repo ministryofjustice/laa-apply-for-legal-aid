@@ -1,11 +1,11 @@
 module Citizens
   class PropertyValuesController < BaseController
     def show
-      @form = Applicants::PropertyValueForm.new
+      @form = LegalAidApplications::PropertyValueForm.new
     end
 
     def update
-      @form = Applicants::PropertyValueForm.new(edit_params)
+      @form = LegalAidApplications::PropertyValueForm.new(edit_params)
 
       if @form.save
         render plain: 'Navigate to question 1c; What is the outstanding mortgage?'
