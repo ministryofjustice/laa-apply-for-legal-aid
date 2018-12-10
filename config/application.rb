@@ -14,6 +14,9 @@ module LaaApplyForLegalAid
       g.test_framework :rspec
     end
 
+    # config.certificate = File.open(ENV['APP_CERT']).read
+    # config.private_key = File.open(ENV['APP_SECERT']).read
+
     config.x.application.host             = ENV['HOST']
     config.x.benefit_check.service_name   = ENV['BC_LSC_SERVICE_NAME']
     config.x.benefit_check.client_org_id  = ENV['BC_CLIENT_ORG_ID']
