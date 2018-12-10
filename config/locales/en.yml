@@ -196,6 +196,10 @@ en:
     address_lookup:
       heading: "Enter your client's home address"
       postcode_hint: 'Postcode must be a valid UK postcode.'
+      submit_button: Find address
+      address_manual_link: Enter address manually
+      label_1: postcode
+      postcode: Postcode
     address_manual:
       heading: "Enter your client's address manually"
     address_selection:
@@ -208,8 +212,26 @@ en:
       header:
         gov_uk_link_title: Go to the GOV.UK homepage
         title: Apply for Legal Aid
-
+      footer:
+        heading: Support
+        case_enquiries: 'Case enquiries:'
+        case_enquiries_details: 0300 200 2020 (Monday to Friday, 09:00 - 17:00)
+        tech_support: 'Technical support:'
+        tech_support_details: 0300 200 2020 (Monday to Friday, 09:00 - 17:00) or email
+        email_address: apply@digital.justice.gov.uk
+        span_text_1: All content is available under the
+        open_gov_link_text: Open Government Licence v3.0
+        span_text_2: except where otherwise stated
+        copyright: Crown copyright
+  home:
+    index:
+      heading_1: Apply for Legal Aid
+      welcome_home: Welcome Home
   providers:
+    address_selections:
+      show:
+        select_address_label: Select an address
+        link_text: I can't find the address in the list
     check_benefits:
       index:
         heading_1: "Your client's tax and benefits status"
@@ -222,6 +244,11 @@ en:
           title: 'must complete a financial assessment'
           body: 'Your client does not receive benefits that qualify for legal aid.'
           next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
+    legal_aid_applications:
+        index:
+          heading_1: Your legal aid applications
+          make_new_application: Make a new application
+          basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
     online_bankings:
       show:
         heading: Does your client use online banking?
@@ -249,8 +276,9 @@ en:
     about_the_financial_assessments:
       show:
         title: About the online financial assessment
-        para_1: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
-        para_2: Your client will need to share all bank accounts, including any in joint names or with no money.
+        secure_link_para: Send an email to your client with a secure link to the online assessment.
+        sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
+        share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
         list:
           title: How we use your client's details
           item_1: We download 3 months of bank transactions
@@ -268,6 +296,25 @@ en:
         happen_next_heading: What happens next
         happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
         back_button: "Back to your applications"
+    start:
+      index:
+        apply_for_legal_aid_heading: Apply for Legal Aid
+        apply_civil_legal_para: "Use this service to apply for civil legal aid for cases involving:"
+        use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
+        use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
+        apply_civil_legal_list:
+          item_1: public family law
+          item_2: domestic violence or abuse
+        use_ccms_list:
+          heading: Who can use this service?
+          title:  "You can only use this service if your client:"
+          item_1: has a National Insurance number
+          item_2: uses online banking
+          item_3: is single, does not have an income, or their partner is the opponent in the case
+        related_content_list:
+          title: Related content
+          item_1: Legal aid
+          item_2: More
 
   citizens:
     accounts:
@@ -332,6 +379,26 @@ en:
     restrictions:
       index:
         h1-heading: Do any restrictions apply to your property, savings or assets?
+    information:
+      show:
+        heading_1: Give one-time access to your bank accounts
+        para_1: You will be redirected to a secure service to sign in to your online banking.
+        para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
+        list:
+          title: How we connect to your online banking
+          item_1: Sign in and authorise access to your accounts
+          item_2: We download 3 months of transactions
+          item_3: Your online banking details are not saved
+    legal_aid_applications:
+        show:
+          heading_1: Complete your legal aid financial assessment
+          name: 'Name:'
+          case_reference: 'Case reference:'
+          financial_situation_para: Find out if you can get legal aid because of your financial situation.
+          legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
+          what_you_will_need: What you will need
+          list:
+            item_1: your online banking log in
 
   restrictions:
     names:
@@ -350,8 +417,15 @@ en:
     home: Home
     submit: Submit
     change: Change
+    information: Information
+    start: Start
+    start_now: Start now
+    address:
+      postcode_label: postcode
+      postcode: Postcode
     errors:
       yes_or_no: You must select either Yes or No
+      problem_text: There is a problem
   currency:
     gbp: £
     eur: €
