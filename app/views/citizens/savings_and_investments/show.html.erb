@@ -1,0 +1,25 @@
+<% content_for :navigation do %>
+   <%= link_to 'Back', @back_link, class: 'govuk-back-link', id: 'back' %>
+<% end %>
+
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+
+<%= render partial: 'accounts_summary', locals: { bank_accounts: @bank_accounts } if @bank_accounts.any? %>
+
+<%= form_with(model: @form,
+              scope: :savings_amount,
+              url: citizens_savings_and_investment_path,
+              method: :patch,
+              local: true) do |form| %>
+
+              <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+  <div class="govuk-checkboxes" data-module="checkboxes">
+    <%= render partial: 'attribute', collection: @attributes, locals: { model: @form, form: form } %>
+  </div>
+
+  <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+
+<% end %>

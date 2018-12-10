@@ -1,0 +1,19 @@
+<%
+  check_box_attribute = "check_box_#{attribute}"
+  hint = I18n.translate("helpers.hint.check_box_#{attribute}", default: nil)
+  value = model.send(attribute)
+  checked = value.present? || model.send(check_box_attribute).present? ? 'checked' : ''
+%>
+
+<div class="govuk-checkboxes__item">
+  <%= form.check_box check_box_attribute, { class: 'govuk-checkboxes__input', 'data-aria-controls' => attribute, checked: checked }, 'true', '' %>
+  <%= form.label check_box_attribute, class: 'govuk-label govuk-checkboxes__label' %>
+  <% if hint %>
+  <span class="govuk-hint govuk-checkboxes__hint">
+    <%= hint %>
+  </span>
+  <% end %>
+</div>
+<div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="<%= attribute %>">
+  <%= form.govuk_text_field attribute, input_prefix: '£', value: number_to_currency(value, unit: '') %>
+</div>

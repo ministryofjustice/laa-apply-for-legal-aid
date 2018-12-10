@@ -43,5 +43,9 @@ FactoryBot.define do
     trait :without_own_home do
       own_home { 'no' }
     end
+
+    trait :with_savings_amount do
+      savings_amount
+    end
   end
 end

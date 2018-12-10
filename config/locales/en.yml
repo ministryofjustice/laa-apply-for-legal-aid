@@ -10,7 +10,10 @@ en:
       email: We'll use this to send your client a secure link
       postcode: Postcode must be a valid UK postcode.
       percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-      outstanding_mortgage_amount: Check the statement from your mortgage provider or lender        
+      outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
+      check_box_isa: Accounts you do not access with online banking
+      check_box_other_person_account: For example, a junior ISA for a child
+      check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
   shared:
     forms:
       date_input_fields:
@@ -37,6 +40,21 @@ en:
       legal_aid_application:
         percentage_home: Enter the estimated percentage share you own
         outstanding_mortgage_amount: Enter outstanding mortgage amount
+      savings_amount:
+        check_box_isa: Post Office, ISAs and other savings accounts
+        isa: Enter the estimated total in all accounts
+        check_box_cash: Cash savings
+        cash: Enter total amount
+        check_box_other_person_account: Signatory on another person's bank account
+        other_person_account: Enter the estimated total in all accounts
+        check_box_national_savings: National Savings Certificates and Premium Bonds
+        national_savings: Enter the total value of all you own
+        check_box_plc_shares: Shares in a PLC (public limited company)
+        plc_shares: Enter the total value of all you own
+        check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+        peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all you own
+        check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+        life_assurance_endowment_policy: Enter the total value of all you own
       applicants/address_form:
         <<: *address_attrs
       applicants/basic_details_form:
@@ -106,6 +124,37 @@ en:
               blank: Enter the outstanding mortgage amount
               not_a_number: &outstanding_mortgage_amount_nan 'Mortgage amount must be an amount of money, like 60,000'
               greater_than: *outstanding_mortgage_amount_nan
+        savings_amount:
+          attributes:
+            isa:
+              blank: &enter_total_value Enter the total value
+              not_a_number: &total_must_be_money Total value must be an amount of money, like 60,000
+              greater_than_or_equal_to: *total_must_be_money
+            cash:
+              blank: *enter_total_value
+              not_a_number: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_money
+            other_person_account:
+              blank: *enter_total_value
+              not_a_number: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_money
+            national_savings:
+              blank: *enter_total_value
+              not_a_number: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_money
+            plc_shares:
+              blank: *enter_total_value
+              not_a_number: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_money
+            peps_unit_trusts_capital_bonds_gov_stocks:
+              blank: *enter_total_value
+              not_a_number: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_money
+            life_assurance_endowment_policy:
+              blank: *enter_total_value
+              not_a_number: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_money
+
   activerecord:
     errors:
       models:
@@ -245,6 +294,15 @@ en:
     percentage_homes:
       show:
         h1-heading: What % share of your home do you legally own?
+    savings_and_investments:
+      show:
+        h1-heading: Do you have any savings and investments?
+      accounts_summary:
+        intro_text: 'You have already told us you have the following online accounts:'
+        col_type: Type
+        col_account_number: Account number
+        col_sort_code: Sort code
+        col_amount: Amount
     own_homes:
       show:
         h1-heading: Do you own the home that you live in?

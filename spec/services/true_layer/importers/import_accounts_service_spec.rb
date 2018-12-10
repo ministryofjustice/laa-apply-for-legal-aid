@@ -25,6 +25,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
         expect(bank_account_1.true_layer_response).to eq(mock_account_1.deep_stringify_keys)
         expect(bank_account_1.true_layer_id).to eq(mock_account_1[:account_id])
         expect(bank_account_1.name).to eq(mock_account_1[:display_name])
+        expect(bank_account_1.account_type).to eq(mock_account_1[:account_type])
         expect(bank_account_1.currency).to eq(mock_account_1[:currency])
         expect(bank_account_1.account_number).to eq(mock_account_1[:account_number][:number])
         expect(bank_account_1.sort_code).to eq(mock_account_1[:account_number][:sort_code])

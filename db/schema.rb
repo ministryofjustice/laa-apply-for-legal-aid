@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_132736) do
+ActiveRecord::Schema.define(version: 2018_12_11_125447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_132736) do
     t.decimal "balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "account_type"
     t.index ["bank_provider_id"], name: "index_bank_accounts_on_bank_provider_id"
   end
 
@@ -162,6 +163,20 @@ ActiveRecord::Schema.define(version: 2018_12_06_132736) do
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
+  create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.decimal "isa"
+    t.decimal "cash"
+    t.decimal "other_person_account"
+    t.decimal "national_savings"
+    t.decimal "plc_shares"
+    t.decimal "peps_unit_trusts_capital_bonds_gov_stocks"
+    t.decimal "life_assurance_endowment_policy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
+  end
+
   create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "data"
     t.datetime "created_at", null: false
@@ -178,4 +193,5 @@ ActiveRecord::Schema.define(version: 2018_12_06_132736) do
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
+  add_foreign_key "savings_amounts", "legal_aid_applications"
 end
