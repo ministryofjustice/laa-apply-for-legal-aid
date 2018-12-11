@@ -40,6 +40,7 @@ group :development, :test do
   gem 'faker', '>=1.9.1'
   gem 'i18n-tasks'
   gem 'json_expressions'
+  gem 'nokogiri'
   gem 'pry-byebug'
   gem 'rubocop', require: false
 

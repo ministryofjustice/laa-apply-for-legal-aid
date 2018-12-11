@@ -4,35 +4,13 @@
 
 <% content_for(:page_title) { t('.h1-heading') } %>
 
-<h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= form_with(model: @form, url: citizens_own_home_path, method: :patch, local: true) do |form| %>
 
-      <div class="govuk-!-padding-bottom-8"></div>
-
-      <% error = form.object.errors[:own_home].first %>
-      <% group_error_class = error ? 'govuk-form-group--error' : '' %>
-      <% input_error_class = error ? 'govuk-input--error' : '' %>
-
-      <div class="govuk-form-group <%= group_error_class %>">
-        <div class="govuk-radios">
-          <%= content_tag(:span, error, class: 'govuk-error-message', id: 'own_home') if error %>
-          <div class="govuk-radios__item">
-            <%= form.radio_button 'own_home', 'mortgage', class: "govuk-radios__input #{input_error_class}" %>
-            <%= form.label 'own_home_mortgage', t('.own_home.mortgage'), class: 'govuk-label govuk-radios__label' %>
-          </div>
-          <div class='govuk-radios__item'>
-            <%= form.radio_button 'own_home', 'owned_outright', class: "govuk-radios__input #{input_error_class}" %>
-            <%= form.label 'own_home_owned_outright', t('.own_home.owned_outright'), class: 'govuk-label govuk-radios__label' %>
-          </div>
-          <div class='govuk-radios__item'>
-            <%= form.radio_button 'own_home', 'no', class: "govuk-radios__input #{input_error_class}" %>
-            <%= form.label 'own_home_no', t('.own_home.not'), class: 'govuk-label govuk-radios__label' %>
-          </div>
-        </div>
-      </div>
+      <%= form.govuk_collection_radio_buttons(:own_home, %w[mortgage owned_outright no], title: content_for(:page_title)) %>
 
       <div class="govuk-!-padding-bottom-6"></div>
 

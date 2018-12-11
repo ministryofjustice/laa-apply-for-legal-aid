@@ -6,15 +6,29 @@ en:
         invalid: invalid
   helpers:
     hint:
-      national_insurance_number: For example, ‘QQ 12 34 56 C'
-      email: We'll use this to send your client a secure link
-      postcode: Postcode must be a valid UK postcode.
-      percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-      outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
-      check_box_isa: Accounts you do not access with online banking
-      check_box_other_person_account: For example, a junior ISA for a child
-      check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
-      property_value: You can use property websites to find the estimated value.
+      applicant:
+        national_insurance_number: For example, ‘QQ 12 34 56 C'
+        email: We'll use this to send your client a secure link
+      address_lookup:
+        postcode: Postcode must be a valid UK postcode.
+      legal_aid_application:
+        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
+        outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
+        property_value: You can use property websites to find the estimated value.
+      savings_amount:
+        check_box_isa: Accounts you do not access with online banking
+        check_box_other_person_account: For example, a junior ISA for a child
+        check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+    label:
+      applicant:
+        uses_online_banking:
+          'true': 'Yes'
+          'false': 'No'
+      legal_aid_application:
+        own_home:
+          mortgage: Yes, with a mortage or loan
+          owned_outright: Yes, owned outright
+          not: "No"
   shared:
     forms:
       date_input_fields:
@@ -301,10 +315,6 @@ en:
     own_homes:
       show:
         h1-heading: Do you own the home that you live in?
-        own_home:
-          mortgage: Yes, with a mortage or loan
-          owned_outright: Yes, owned outright
-          not: "No"
     property_values:
       show:
         field_set_header: How much is your home worth?
