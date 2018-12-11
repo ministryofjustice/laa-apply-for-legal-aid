@@ -21,7 +21,8 @@ RSpec.describe 'citizen own home requests', type: :request do
       let(:params) { { 'legal_aid_application' => { 'own_home' => 'owned_outright' } } }
 
       it 'returns http_success' do
-        expect(response).to have_http_status(:ok)
+        #  expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:found)
       end
 
       it 'updates the record' do
@@ -29,27 +30,16 @@ RSpec.describe 'citizen own home requests', type: :request do
       end
 
       context 'owned outright' do
-        # TODO: setup redirect when known
-        xit 'redirects to the value of your home page' do
-          expect(response).to redirect_to(:home_value_path)
-        end
-
-        # TODO: remove when redirect set up
-        it 'displays holding text' do
-          expect(response.body).to eq 'Navigate to question 1b: How much is your home worth?'
+        it 'redirects to the property value page' do
+          expect(response).to redirect_to(citizens_property_value_path)
         end
       end
 
       context 'mortgaged' do
         let(:params) { { 'legal_aid_application' => { 'own_home' => 'mortgage' } } }
-        # TODO: setup redirect when known
-        xit 'redirects to the value of your home page' do
-          expect(response).to redirect_to(:home_value_path)
-        end
 
-        # TODO: remove when redirect set up
-        it 'displays holding text' do
-          expect(response.body).to eq 'Navigate to question 1b: How much is your home worth?'
+        it 'redirects to the property value page' do
+          expect(response).to redirect_to(citizens_property_value_path)
         end
       end
 

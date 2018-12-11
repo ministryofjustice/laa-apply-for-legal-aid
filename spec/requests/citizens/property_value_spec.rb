@@ -7,7 +7,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(unescaped_response_body).to include('How much is your home worth')
+        expect(response.body).to include('How much is your home worth')
       end
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
       let(:params) { { legal_aid_application: { property_value: '' } } }
 
       it 'shows an error message' do
-        expect(unescaped_response_body).to include('There is a problem')
+        expect(response.body).to include('There is a problem')
       end
 
       it 'does not record the value in the legal aid application table' do
