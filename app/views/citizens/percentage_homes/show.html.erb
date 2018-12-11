@@ -1,0 +1,22 @@
+<% content_for :navigation do %>
+  <!-- TODO: navigate to "1d. shared ownership"  -->
+
+  <%= link_to 'Back', citizens_additional_accounts_path, class: 'govuk-back-link', id: 'back' %>
+<% end %>
+
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+<%= form_with(model: @form,
+              scope: :legal_aid_application,
+              url: citizens_percentage_home_path,
+              method: :patch,
+              local: true) do |form| %>
+
+  <%= form.govuk_text_field :percentage_home, input_prefix: '%', class: 'govuk-input--width-10' %>
+
+  <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+<% end %>

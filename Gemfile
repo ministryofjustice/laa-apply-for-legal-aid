@@ -37,6 +37,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'erb_lint', require: false
+  gem 'faker', '>=1.9.1'
   gem 'i18n-tasks'
   gem 'json_expressions'
   gem 'pry-byebug'
@@ -61,7 +62,6 @@ group :test do
   gem 'climate_control' # Allows environment variables to be modified within specs
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'faker', '>=1.9.1'
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.1'
