@@ -21,7 +21,6 @@ RSpec.describe 'citizen own home requests', type: :request do
       let(:params) { { 'legal_aid_application' => { 'own_home' => 'owned_outright' } } }
 
       it 'returns http_success' do
-        #  expect(response).to have_http_status(:ok)
         expect(response).to have_http_status(:found)
       end
 

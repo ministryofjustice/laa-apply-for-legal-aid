@@ -10,7 +10,7 @@ module LegalAidApplications
     validates(
       :property_value,
       presence: true,
-      numericality: { greater_than: 0 }
+      numericality: { greater_than: 0, allow_blank: true }
     )
 
     private
