@@ -13,7 +13,7 @@ module Citizens
         if @form.own_home == 'no'
           render plain: 'Navigate to question 2a; Do you have any savings or investments'
         else
-          render plain: 'Navigate to question 1b: How much is your home worth?'
+          redirect_to citizens_property_value_path
         end
       else
         @legal_aid_application = LegalAidApplication.find(session[:current_application_ref])
