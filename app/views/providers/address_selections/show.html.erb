@@ -12,9 +12,8 @@
         ) do |f| %>
       <div class='govuk-form-group'>
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-          <h1 class="govuk-fieldset__heading">
-            <%= t('forms.address_selection.heading') %>
-          </h1>
+          <% content_for(:page_title) { t('forms.address_selection.h1-heading') } %>
+          <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
         </legend>
         <div class="govuk-!-padding-bottom-8"></div>
 

@@ -194,16 +194,16 @@ en:
         no_results: &postcode_no_results "Sorry - we couldn't find any addresses for that postcode, please enter the address manually."
         unsuccessful: *postcode_no_results
     address_lookup:
-      heading: "Enter your client's home address"
+      h1-heading: "Enter your client's home address"
       postcode_hint: 'Postcode must be a valid UK postcode.'
       submit_button: Find address
       address_manual_link: Enter address manually
       label_1: postcode
       postcode: Postcode
     address_manual:
-      heading: "Enter your client's address manually"
+      h1-heading: "Enter your client's address manually"
     address_selection:
-      heading: "Enter your client's home address"
+      h1-heading: "Enter your client's home address"
     client_detail:
       dob_hint: 'For example, 31 3 1980'
       national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
@@ -251,10 +251,10 @@ en:
           basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
     online_bankings:
       show:
-        heading: Does your client use online banking?
+        h1-heading: Does your client use online banking?
     check_provider_answers:
       index:
-        title: Check your answers
+        h1-heading: Check your answers
         section_1:
           heading: Scope of legal aid
           proceeding: Proceeding
@@ -268,14 +268,14 @@ en:
           email: Email address
     proceedings_types:
       show:
-        heading_1: "What does your client want legal aid for?"
+        h1-heading: "What does your client want legal aid for?"
         heading_2: "Search for legal proceedings"
         search_help_example: "For example by category of law, matter type or legal proceeding."
         no_results: "No results found."
         clear_search: "Clear search"
     about_the_financial_assessments:
       show:
-        title: About the online financial assessment
+        h1-heading: About the online financial assessment
         secure_link_para: Send an email to your client with a secure link to the online assessment.
         sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
         share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
@@ -316,13 +316,19 @@ en:
           item_1: Legal aid
           item_2: More
 
+    legal_aid_applications:
+      index:
+         h1-heading: Your legal aid applications
+    start:
+      index:
+        h1-heading: Apply for Legal Aid
   citizens:
     accounts:
       index:
         account_holder_name_heading: Account holder name
         account_holder_address_heading: Account holder address
         type_heading: Type
-        heading_1: You have successfully shared your account information
+        h1-heading: You have successfully shared your account information
         account_number_heading: Account Number
         sort_code_heading: Sort Code
         balance_heading: Balance
@@ -347,6 +353,12 @@ en:
         list_1: We do not save your online banking username and password
         list_2: We do not have any ongoing access to your bank accounts
         list_3: We only use your details to assess your eligibility for legal aid
+    information:
+      show:
+        h1-heading: Give one-time access to your bank accounts
+    legal_aid_applications:
+      show:
+        h1-heading: Complete your legal aid financial assessment
     percentage_homes:
       show:
         h1-heading: What % share of your home do you legally own?

@@ -19,7 +19,7 @@ RSpec.describe 'address lookup requests', type: :request do
     it 'shows the postcode entry page' do
       subject
       expect(response).to be_successful
-      expect(unescaped_response_body).to include(I18n.t('forms.address_lookup.heading'))
+      expect(unescaped_response_body).to include(I18n.t('forms.address_lookup.h1-heading'))
     end
   end
 

@@ -3,8 +3,15 @@
   <% end %>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+<<<<<<< HEAD
       <h1 class="govuk-heading-xl"><%= t('.apply_for_legal_aid_heading') %></h1>
       <p class="govuk-body"><%= t('.apply_civil_legal_para') %></p>
+=======
+      <% content_for(:page_title) { t('.h1-heading') } %>
+
+      <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+      <p class="govuk-body">Use this service to apply for civil legal aid for cases involving:</p>
+>>>>>>> Changed hardcoded h1s on various pages to use the html title helper.
       <ul class="govuk-list govuk-list--bullet">
         <li><%= t('.apply_civil_legal_list.item_1') %></li>
         <li><%= t('.apply_civil_legal_list.item_2') %></li>
