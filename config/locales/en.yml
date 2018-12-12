@@ -14,6 +14,7 @@ en:
       check_box_isa: Accounts you do not access with online banking
       check_box_other_person_account: For example, a junior ISA for a child
       check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+      property_value: You can use property websites to find the estimated value.
   shared:
     forms:
       date_input_fields:
@@ -55,6 +56,7 @@ en:
         peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all you own
         check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
         life_assurance_endowment_policy: Enter the total value of all you own
+        property_value: Enter the estimated value of your home
       applicants/address_form:
         <<: *address_attrs
       applicants/basic_details_form:

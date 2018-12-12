@@ -12,13 +12,8 @@
         ) do %>
 
       <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
-      <%= form.label :property_value, t('.label'), class: 'govuk-label' %>
-      <%= govuk_hint t('.hint'), id: :property_value_hint %>
-      <%= govuk_error_message form.object.errors[:property_value].first %>
-      <%= govuk_currency_input_wrapper do %>
         <% input_error_class = govuk_error_class(form.object.errors[:property_value]) %>
-        <%= form.text_field :property_value, class: "govuk-input govuk-!-width-one-third govuk-currency-input__inner__input #{input_error_class}" %>
-      <% end %>
+      <%= form.govuk_text_field :property_value, input_prefix: '£', class: "govuk-input govuk-!-width-one-third #{input_error_class}" %>
     <% end %>
 
       <%= govuk_submit_button t('generic.continue') %>
