@@ -13,7 +13,7 @@
 
       <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
         <% input_error_class = govuk_error_class(form.object.errors[:property_value]) %>
-      <%= form.govuk_text_field :property_value, input_prefix: '£', class: "govuk-input govuk-!-width-one-third #{input_error_class}" %>
+      <%= form.govuk_text_field :property_value, input_prefix: t('currency.gbp'), class: "govuk-input govuk-!-width-one-third #{input_error_class}" %>
     <% end %>
 
       <%= govuk_submit_button t('generic.continue') %>
