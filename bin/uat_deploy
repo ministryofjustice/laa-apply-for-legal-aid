@@ -37,7 +37,7 @@ deploy() {
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
-                --set replicaCount="2"
+                --set replicaCount="1"
 }
 
 clean_old_releases
