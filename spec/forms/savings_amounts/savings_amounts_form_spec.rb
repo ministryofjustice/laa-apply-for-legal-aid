@@ -71,7 +71,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context 'amounts are less than 0' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
-        let(:expected_error) { 'Total value must be an amount of money, like 60,000' }
+        let(:expected_error) { 'Total value must be 0 or more' }
 
         it_behaves_like 'it has an error'
       end

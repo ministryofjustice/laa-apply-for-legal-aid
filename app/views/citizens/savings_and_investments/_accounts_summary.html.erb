@@ -12,7 +12,7 @@
   <tbody class="govuk-table__body">
     <% bank_accounts.each do |account| %>
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= account.account_type&.humanize %></th>
+        <th class="govuk-table__header" scope="row"><%= account.account_type_label %></th>
         <td class="govuk-table__cell"><%= account.account_number %></td>
         <td class="govuk-table__cell"><%= account.sort_code %></td>
         <td class="govuk-table__cell"><%= value_with_currency_unit(account.balance, account.currency) %></td>

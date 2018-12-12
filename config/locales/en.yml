@@ -129,31 +129,31 @@ en:
             isa:
               blank: &enter_total_value Enter the total value
               not_a_number: &total_must_be_money Total value must be an amount of money, like 60,000
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: &total_must_be_positive Total value must be 0 or more
             cash:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_positive
             other_person_account:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_positive
             national_savings:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_positive
             plc_shares:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_positive
             peps_unit_trusts_capital_bonds_gov_stocks:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_positive
             life_assurance_endowment_policy:
               blank: *enter_total_value
               not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_money
+              greater_than_or_equal_to: *total_must_be_positive
 
   activerecord:
     errors:
