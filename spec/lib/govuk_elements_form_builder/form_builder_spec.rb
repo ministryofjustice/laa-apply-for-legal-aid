@@ -28,13 +28,14 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   it 'includes a hint message' do
     output = builder.govuk_text_field(:email)
 
-    expect(output).to include('<span class="govuk-hint">')
+    expect(output).to include('class="govuk-hint"')
+    expect(output).to include('id="email_hint"')
   end
 
   it 'does not include a hint message if hide_hint? is true' do
     output = builder.govuk_text_field(:email, hide_hint?: true)
 
-    expect(output).not_to include('<span class="govuk-hint">')
+    expect(output).not_to include('class="govuk-hint"')
   end
 
   context 'has an input_prefix option' do

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :additional_accounts, only: %i[index create new update]
     resource :own_home, only: %i[show update]
     resource :percentage_home, only: %i[show update]
+    resource :outstanding_mortgage, only: %i[show update]
   end
 
   namespace :providers do

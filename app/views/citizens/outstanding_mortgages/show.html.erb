@@ -1,0 +1,36 @@
+<%= render 'shared/forms/error_summary', model: @form %>
+
+<fieldset class="govuk-fieldset">
+  <div class="govuk-!-padding-bottom-2"></div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <%= form_with(
+            model: @form,
+            url: citizens_outstanding_mortgage_path,
+            method: :patch,
+            local: true
+          ) do |form| %>
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <%= govuk_form_group(
+              show_error_if: form.object.errors[:outstanding_mortgage_amount].present?,
+              input: :outstanding_mortgage_amount,
+              hint_id: :outstanding_mortgage_amount_hint
+            ) do %>
+
+          <%= govuk_fieldset_header t('.outstanding_mortgage_amount_heading'), padding_below: 6 %>
+          <%= form.govuk_text_field :outstanding_mortgage_amount, input_prefix: t('currency.gbp'), class: 'govuk-!-width-one-third' %>
+        <% end %>
+
+        <div class="govuk-!-padding-bottom-2"></div>
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button govuk-button' %>
+         </div>
+       </div>
+      <% end %>
+    </div>
+  </div>
+</fieldset>

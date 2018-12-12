@@ -10,6 +10,7 @@ en:
       email: We'll use this to send your client a secure link
       postcode: Postcode must be a valid UK postcode.
       percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
+      outstanding_mortgage_amount: Check the statement from your mortgage provider or lender        
   shared:
     forms:
       date_input_fields:
@@ -35,6 +36,7 @@ en:
         email: 'Email address'
       legal_aid_application:
         percentage_home: Enter the estimated percentage share you own
+        outstanding_mortgage_amount: Enter outstanding mortgage amount
       applicants/address_form:
         <<: *address_attrs
       applicants/basic_details_form:
@@ -100,6 +102,10 @@ en:
               blank: Enter an estimated value for your home
               not_a_number: &property_value_nan Estimated value must be an amount of money, like 80,000
               greater_than: *property_value_nan
+            outstanding_mortgage_amount:
+              blank: Enter the outstanding mortgage amount
+              not_a_number: &outstanding_mortgage_amount_nan 'Mortgage amount must be an amount of money, like 60,000'
+              greater_than: *outstanding_mortgage_amount_nan
   activerecord:
     errors:
       models:
@@ -251,6 +257,9 @@ en:
         field_set_header: How much is your home worth?
         label: Enter the estimated value of your home
         hint: You can use property websites to find the estimated value.
+    outstanding_mortgages:
+      show:
+        outstanding_mortgage_amount_heading: What is the outstanding mortgage on your home?
   currency:
     gbp: £
     eur: €

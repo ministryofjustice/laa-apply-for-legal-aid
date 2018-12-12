@@ -74,6 +74,10 @@ class LegalAidApplication < ApplicationRecord
     applicant_updated_after_benefit_check_result_updated?
   end
 
+  def outstanding_mortgage?
+    outstanding_mortgage_amount?
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

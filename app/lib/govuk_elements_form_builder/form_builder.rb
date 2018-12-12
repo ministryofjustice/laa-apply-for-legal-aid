@@ -82,7 +82,7 @@ module GovukElementsFormBuilder
       message = hint_message(attribute)
       return unless message
 
-      content_tag(:span, message, class: 'govuk-hint')
+      content_tag(:span, message, class: 'govuk-hint', id: "#{attribute}_hint")
     end
 
     def error_tag(attribute)
