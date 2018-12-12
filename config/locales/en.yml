@@ -10,7 +10,7 @@ en:
       email: We'll use this to send your client a secure link
       postcode: Postcode must be a valid UK postcode.
       percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-      outstanding_mortgage_amount: Check the statement from your mortgage provider or lender.        
+      outstanding_mortgage_amount: Check the statement from your mortgage provider or lender        
   shared:
     forms:
       date_input_fields:

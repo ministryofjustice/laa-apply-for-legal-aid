@@ -20,7 +20,7 @@
             ) do %>
 
           <%= govuk_fieldset_header t('.outstanding_mortgage_amount_heading'), padding_below: 6 %>
-          <%= form.govuk_text_field :outstanding_mortgage_amount, input_prefix: t('currency.gbp') %>
+          <%= form.govuk_text_field :outstanding_mortgage_amount, input_prefix: t('currency.gbp'), class: 'govuk-!-width-one-third' %>
         <% end %>
 
         <div class="govuk-!-padding-bottom-2"></div>
