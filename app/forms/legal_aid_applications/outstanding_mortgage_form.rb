@@ -11,11 +11,6 @@ module LegalAidApplications
       numericality: { greater_than: 0, allow_blank: true }
     )
 
-    def initialize(*args)
-      super
-      @outstanding_mortgage_amount ||= model.outstanding_mortgage_amount
-    end
-
     private
 
     def clean_up_input

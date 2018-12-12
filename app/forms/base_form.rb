@@ -27,9 +27,26 @@ module BaseForm
     def model_name
       ActiveModel::Name.new(self, nil, model_class.to_s)
     end
+
+    # Overrides `attr_accessor` to track which attributes have been assigned within the form
+    def attr_accessor(*symbols)
+      locally_assigned << symbols
+      locally_assigned.flatten!
+      super *symbols
+    end
+
+    def locally_assigned
+      @locally_assigned ||= []
+    end
   end
 
   module InstanceMethods
+
+    def initialize(*args)
+      super
+      self.class.locally_assigned.map(&:to_s).each{ |m| instance_variable_set(:"@#{m}", model.attributes[m]) unless attributes[m]}
+    end
+
     def model
       @model ||= self.class.model_class.new
     end
