@@ -1,6 +1,6 @@
 module Citizens
   class SavingsAndInvestmentsController < BaseController
-    before_action :bank_accounts, :back_link
+    helper_method :bank_accounts, :back_link
 
     def show
       @form = SavingsAmounts::SavingsAmountsForm.new(current_params)
@@ -18,8 +18,12 @@ module Citizens
 
     private
 
+    def bank_accounts
+      @bank_accounts ||= legal_aid_application.applicant.bank_providers.flat_map(&:bank_accounts)
+    end
+
     def back_link
-      @back_link ||= citizens_own_home_path
+      citizens_own_home_path
 
       # TODO
       # 1a for people that answered No to 1a
@@ -33,10 +37,6 @@ module Citizens
 
     def check_box_attributes
       @check_box_attributes ||= SavingsAmounts::SavingsAmountsForm::CHECK_BOXES_ATTRIBUTES
-    end
-
-    def bank_accounts
-      @bank_accounts ||= legal_aid_application.applicant.bank_providers.flat_map(&:bank_accounts)
     end
 
     def current_params

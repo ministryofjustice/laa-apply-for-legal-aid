@@ -14,12 +14,18 @@ module SavingsAmounts
       life_assurance_endowment_policy
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym }
+    CHECK_BOXES_ATTRIBUTES = ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym }.freeze
+
+    ATTRIBUTES.each do |attribute|
+      check_box_attribute = "check_box_#{attribute}".to_sym
+      validates attribute, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
+      validates attribute, presence: true, if: proc { |form| form.send(check_box_attribute).present? }
+    end
 
     attr_accessor(*ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
 
-    before_validation :empty_unchecked_values, :add_validations, :normalize_amounts
+    before_validation :empty_unchecked_values, :normalize_amounts
 
     def exclude_from_model
       CHECK_BOXES_ATTRIBUTES
@@ -34,14 +40,6 @@ module SavingsAmounts
           attributes[attribute] = nil
           send("#{attribute}=", nil)
         end
-      end
-    end
-
-    def add_validations
-      ATTRIBUTES.each do |attribute|
-        check_box_attribute = "check_box_#{attribute}".to_sym
-        singleton_class.class_eval { validates attribute, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true }
-        singleton_class.class_eval { validates attribute, presence: true, if: proc { |a| a.send(check_box_attribute).present? } }
       end
     end
 
