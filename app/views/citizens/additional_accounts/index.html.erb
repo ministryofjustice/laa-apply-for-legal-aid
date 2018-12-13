@@ -2,6 +2,8 @@
   <%#= link_to 'Back', path-to-be-determined, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
+  <% content_for(:page_title) { t('.field_set_header') } %>
+
   <%= form_tag(citizens_additional_accounts_path) do %>
 
     <%= govuk_form_group(
@@ -9,7 +11,6 @@
           hint_id: :additional_account_hint,
           input: :additional_account
         ) do %>
-      <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
       <%= govuk_hint t('.hint'), id: :additional_account_hint %>
       <%= govuk_error_message @error %>
       <%= govuk_radio_inputs :additional_account, yes: t('generic.yes'), no: t('generic.no') %>

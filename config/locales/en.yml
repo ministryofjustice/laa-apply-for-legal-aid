@@ -382,10 +382,10 @@ en:
         field_set_header: How much is your home worth?
     outstanding_mortgages:
       show:
-        outstanding_mortgage_amount_heading: What is the outstanding mortgage on your home?
+        field_set_header: What is the outstanding mortgage on your home?
     shared_ownerships:
       show:
-        heading_1: Do you own your home with anyone else?
+        h1-heading: Do you own your home with anyone else?
       shared_ownership_item:
           partner_or_ex_partner:  Yes, a partner or ex-partner
           housing_assocation_or_landlord: Yes, a housing association or landlord

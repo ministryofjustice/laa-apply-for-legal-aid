@@ -10,14 +10,14 @@
           local: true
         ) do |form| %>
 
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-      <h1 class="govuk-fieldset__heading">
         <% if form.object.lookup_error.present? %>
-          <%= t('forms.address_lookup.h1-heading') %>
+          <% content_for(:page_title) { t('forms.address_lookup.h1-heading') } %>
         <% else %>
-          <%= t('forms.address_manual.h1-heading') %>
+          <% content_for(:page_title) { t('forms.address_manual.h1-heading') } %>
         <% end %>
-      </h1>
+
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
     </legend>
 
       <% if form.object.lookup_postcode.present? %>
