@@ -316,8 +316,6 @@ en:
     property_values:
       show:
         field_set_header: How much is your home worth?
-        label: Enter the estimated value of your home
-        hint: You can use property websites to find the estimated value.
     outstanding_mortgages:
       show:
         outstanding_mortgage_amount_heading: What is the outstanding mortgage on your home?
