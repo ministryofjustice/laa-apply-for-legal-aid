@@ -296,6 +296,7 @@ en:
         happen_next_heading: What happens next
         happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
         back_button: "Back to your applications"
+<<<<<<< HEAD
     start:
       index:
         apply_for_legal_aid_heading: Apply for Legal Aid
@@ -316,6 +317,8 @@ en:
           item_1: Legal aid
           item_2: More
 
+=======
+>>>>>>> Added missing title refactor and moved content to locales
     legal_aid_applications:
       index:
          h1-heading: Your legal aid applications
