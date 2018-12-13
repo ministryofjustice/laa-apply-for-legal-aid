@@ -45,7 +45,7 @@ group :development, :test do
 
   # Available in dev env for generators
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
