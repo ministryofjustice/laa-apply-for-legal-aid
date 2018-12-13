@@ -143,10 +143,10 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
-    t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
-    t.decimal "outstanding_mortgage_amount"
+    t.decimal "percentage_home"
     t.string "shared_ownership"
+    t.decimal "outstanding_mortgage_amount"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 
