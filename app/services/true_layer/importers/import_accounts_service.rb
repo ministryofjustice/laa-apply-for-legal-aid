@@ -34,6 +34,7 @@ module TrueLayer
             true_layer_response: account,
             true_layer_id: account[:account_id],
             name: account[:display_name],
+            account_type: account[:account_type],
             currency: account[:currency],
             account_number: account[:account_number][:number],
             sort_code: account[:account_number][:sort_code]

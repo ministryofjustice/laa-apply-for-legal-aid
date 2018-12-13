@@ -1,0 +1,22 @@
+<p><%= t '.intro_text' %></p>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="col"><%= t '.col_type' %></th>
+      <th class="govuk-table__header" scope="col"><%= t '.col_account_number' %></th>
+      <th class="govuk-table__header" scope="col"><%= t '.col_sort_code' %></th>
+      <th class="govuk-table__header" scope="col"><%= t '.col_amount' %></th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <% bank_accounts.each do |account| %>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row"><%= account.account_type_label %></th>
+        <td class="govuk-table__cell"><%= account.account_number %></td>
+        <td class="govuk-table__cell"><%= account.sort_code %></td>
+        <td class="govuk-table__cell"><%= value_with_currency_unit(account.balance, account.currency) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

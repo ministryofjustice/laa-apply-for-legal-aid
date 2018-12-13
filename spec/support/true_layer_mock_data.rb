@@ -23,6 +23,7 @@ module TrueLayerHelpers
     accounts: [{
       account_id: SecureRandom.hex,
       display_name: Faker::Bank.name,
+      account_type: 'TRANSACTION',
       currency: Faker::Currency.code,
       account_number: {
         number: Faker::Number.number(10),
@@ -52,6 +53,7 @@ module TrueLayerHelpers
     }, {
       account_id: SecureRandom.hex,
       display_name: Faker::Bank.name,
+      account_type: 'SAVINGS',
       currency: Faker::Currency.code,
       account_number: {
         number: Faker::Number.number(10),
