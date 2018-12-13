@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
     t.decimal "outstanding_mortgage_amount"
+    t.string "shared_ownership"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 

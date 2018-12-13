@@ -154,4 +154,23 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.state).to eq('initiated')
     end
   end
+
+  describe '#shared_ownership?' do
+    subject(:legal_aid_application) { create(:legal_aid_application, shared_ownership: shared_ownership_reason) }
+
+    context 'when applicant owns a share of a property' do
+      let(:shared_ownership_reason) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
+
+      it 'return true that the applicant owns a share of a property' do
+        expect(legal_aid_application.shared_ownership?).to eq true
+      end
+    end
+
+    context 'when applicant is the sole owner of a property' do
+      let(:shared_ownership_reason) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
+      it 'return true that the applicant owns a share of a property' do
+        expect(legal_aid_application.shared_ownership?).to eq false
+      end
+    end
+  end
 end
