@@ -37,15 +37,6 @@ module GovUkFormHelper
     )
   end
 
-  def govuk_error_class(error)
-    return '' unless error.present?
-    'govuk-input--error'
-  end
-
-  def govuk_currency_input_wrapper(&block)
-    render 'shared/forms/currency_input_wrapper', text_field: capture(&block)
-  end
-
   # `value_label_pairs should be a hash with the input values as keys, and the
   # matching labels as values. For example: `{ yes: 'I would', no: 'I would not' }`
   def govuk_radio_inputs(field_name, value_label_pairs)

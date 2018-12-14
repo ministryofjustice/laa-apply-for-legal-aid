@@ -14,6 +14,7 @@ en:
       check_box_isa: Accounts you do not access with online banking
       check_box_other_person_account: For example, a junior ISA for a child
       check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+      property_value: You can use property websites to find the estimated value.
   shared:
     forms:
       date_input_fields:
@@ -40,6 +41,7 @@ en:
       legal_aid_application:
         percentage_home: Enter the estimated percentage share you own
         outstanding_mortgage_amount: Enter outstanding mortgage amount
+        property_value: Enter the estimated value of your home
       savings_amount:
         check_box_isa: Post Office, ISAs and other savings accounts
         isa: Enter the estimated total in all accounts
@@ -314,8 +316,6 @@ en:
     property_values:
       show:
         field_set_header: How much is your home worth?
-        label: Enter the estimated value of your home
-        hint: You can use property websites to find the estimated value.
     outstanding_mortgages:
       show:
         outstanding_mortgage_amount_heading: What is the outstanding mortgage on your home?
