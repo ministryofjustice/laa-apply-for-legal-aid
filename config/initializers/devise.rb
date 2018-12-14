@@ -277,13 +277,16 @@ Devise.setup do |config|
     # else
     #   settings.idp_cert = laa_portal_config.idp_cert && File.open(laa_portal_config.idp_cert).read
     # end
+    settings.security[:digest_method]    = XMLSecurity::Document::SHA256
     settings.security[:signature_method] = XMLSecurity::Document::RSA_SHA256
     settings.security[:authn_requests_signed]   = true
-    # settings.security[:want_assertions_signed]  = true
-    settings.security[:embed_sign] = true
+    settings.security[:want_assertions_signed]  = true
+    # settings.security[:embed_sign] = true
 
-    settings.certificate = File.open(ENV['APP_CERT']).read
-    settings.private_key = File.open(ENV['APP_SECERT']).read
+    #settings.certificate = File.open(ENV['APP_CERT']).read
+    #settings.private_key = File.open(ENV['APP_SECERT']).read
+    settings.certificate = 'MIICrDCCAZQCCQCo33FiPpytOTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQKDA1MQUEsIENOPWFwcGx5MB4XDTE4MTIwMzEzMjAwNVoXDTI4MTIwMjEzMjAwNVowGDEWMBQGA1UECgwNTEFBLCBDTj1hcHBseTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRum7Sp4BuPXK2crfhOfoVYfRNV7/0QMYw2518zpB+qn23M4WlJ2KBrGTjqP8xPsBamxP5WFoB4nDdbpXxGWwGreZZPNbEFi5lbVjiwTnhG9V7Em6hYQgIU7l8uISal4ISlWtxovIB2CFydowPloWRFctjGS7P3+logkyBU0lkeduRL2zLPsG4ASoHpghQ25m0nMKOwezGHKfW2csFfoHbi5M5i7lAvf/x15MPyjxyPurY3xpxTqtdFfwXk07PH9Dwd27DVUrSJyrb4evfopFVJh3Zo5jiL1dT48HChIsIJBAUntTiYRx1mt5YR9tAmMKj2ZqRo22ALSemAPdMVJaECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAHyPpJUJzznbmXKChAZNwwsEjtp5Hleoaz8yNhp7vRnRh0OdKSfkUm2MB4mOkII67W8HLGw2Z8hSiSl21eL0ha6KVOB34BrAe+jNjIyQlhobneJkBNUbqkdJ0tfo+FQ4+DnLhtZy/I8ffjmu7gzBXc6QPqzUQjgbvFV9+u2ARsUxMXDucwLekkaZEkFLa6/L36TtEO8TXSKdldugEjx1777JrjDCJn6Xo4V3cY/bS0TmehDDaWPkzXeBu3sKvJji23uDqxOjLVyNlnyAMcL2XiaDkns+VOxHchiNQlRThmMjwxG42ruzMzyywJOqM6r/4NI4qsLkR9Ak8GDIm+Zv9Aw=='
+    settings.private_key = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEbpu0qeAbj1ytnK34Tn6FWH0TVe/9EDGMNudfM6Qfqp9tzOFpSdigaxk46j/MT7AWpsT+VhaAeJw3W6V8RlsBq3mWTzWxBYuZW1Y4sE54RvVexJuoWEICFO5fLiEmpeCEpVrcaLyAdghcnaMD5aFkRXLYxkuz9/paIJMgVNJZHnbkS9syz7BuAEqB6YIUNuZtJzCjsHsxhyn1tnLBX6B24uTOYu5QL3/8deTD8o8cj7q2N8acU6rXRX8F5NOzx/Q8Hduw1VK0icq2+Hr36KRVSYd2aOY4i9XU+PBwoSLCCQQFJ7U4mEcdZreWEfbQJjCo9makaNtgC0npgD3TFSWhAgMBAAECggEAXH1gHz7lYNSt5KkjWQlMlWjG67XJHDTlv4mSg8cC/k4OZ1rSwAqfT1leNOhHReI3nVLE6qSKT896bq5eSxetfinJRDbjpwhfZMQW4vZQ3F0853RXfnqgCe7lFjfYMCRmhM5+68z9BNeOtF0dBpa22UnB+8PSnVijrpAr9ks6B+920ODfhxdtFK43qvcvjj/zfEEtwk0jrx62SipudMVDJuXZHxvtUKMgl/2hRaOqRl6HYn4pe0RVspSfaB+hTLD13rYP5KdiGyTkvYXn3aTpYkiLozyyWwk0tBbQO0WvFLAw54KJYaXED+oRRMN/xjMyuPrEGWLlPSg+n/JcNqaV4QKBgQDq2z9Ws1m5uAp5NXkGTgd7cwXOIP++T0gcfxrh6oA1TWcbTD8XDN+uNw6L7Ty0PshBLNIUjZW84n6LGsb/GiFOpq6GQizXKzHc/yVgz9UAoUM/HZsFKADoWaVqAV5NHLrJ7h56xR/MkWjwkn1b6wNZmGYZNAdXFxBXu16FelaL9QKBgQDWHcqo97qv2EuQFOo/suBGjj4sCvh/uRgy3wyWEo6VFsrhtVWp3LgOvOgbq2np2UasDSA9t+I1YLCR88kdpxajmGwLIHLmd+nXO3YTPcoT+OYpMEzP9dl+Wn6UPRIRPdfULv/t6PdxsHWyDR1WG0jlESYN208YIxrOAf0M140zfQKBgDeSByupplpmbLv/ZhKS1fxk3APJFRpfwg1UGfVIumtiVDpGUUtP9YFQb7W2Pb3ceR/Kzi6kzcByy0R44ossEKN+lx8Xe2qyQssq6Bo/MwRCJBpEFBElRQm1ZIlvp3ORj7UGDdo42GxcH7uEvfrI4fMKN2ZRREdcIrbPk+77Yo0dAoGAIxQ0bKRReJe2IX/btN3ocobBVtPhTIOVnFgApuGZbIGUcZAU3cRkfz2hxU67Bm3rbyqjWpkyvU3+/5pyG6KRSfIh2VzSlkGVFQcP3C0mW0lO4/aezv9XR6Up0b2DpUF9h6y/j0m4qG6hia8uXDoSIj1B/8krVygBLzkSLTVvU70CgYEAvWYT+3BLmwm0N8ILOoRzBLTTU2KvLHpUjuhi1x4QI/WKTnfKQFk+KVXb5rpUJ+Z/UCn8FH0wsWHcaEAfH1Re/2VJoB5uMo2NuYDC6M56LIMhCFC/ceMxbQi+QFvLaKfAZqGz15Vu+rlHXNtyOI0hMoYhtw3+Kian/a+7tHBzAwk='
     settings.assertion_consumer_service_url     = "http://#{app_host}/providers/saml/auth"
     settings.assertion_consumer_service_binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
     settings.name_identifier_format             = 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified'
