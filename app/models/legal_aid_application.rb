@@ -10,6 +10,8 @@ class LegalAidApplication < ApplicationRecord
   has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result
   has_one :savings_amount
+  has_many :legal_aid_application_restrictions
+  has_many :restrictions, through: :legal_aid_application_restrictions
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at

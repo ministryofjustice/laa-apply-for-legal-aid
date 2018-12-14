@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resource :outstanding_mortgage, only: %i[show update]
     resource :savings_and_investment, only: %i[show update]
     resource :shared_ownership, only: %i[show update]
+    resources :restrictions, only: %i[index create] # as multiple restrictions
   end
 
   namespace :providers do

@@ -189,21 +189,12 @@ en:
     client_detail:
       dob_hint: 'For example, 31 3 1980'
       national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
-  generic:
-    'yes': 'Yes' # needs quotes as yes renders as true without them
-    'no': 'No'   # needs quotes as no renders as false without them
-    continue: Continue
-    back: Back
-    home: Home
-    submit: Submit
-    change: Change
-    errors:
-      yes_or_no: You must select either Yes or No
   layouts:
     application:
       header:
         gov_uk_link_title: Go to the GOV.UK homepage
         title: Apply for Legal Aid
+
   providers:
     check_benefits:
       index:
@@ -263,6 +254,7 @@ en:
         happen_next_heading: What happens next
         happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
         back_button: "Back to your applications"
+
   citizens:
     accounts:
       index:
@@ -327,6 +319,29 @@ en:
           housing_assocation_or_landlord: Yes, a housing association or landlord
           friend_family_member_or_other_individual: Yes, a friend, family member or other individual
           no_sole_owner: No, I am the sole owner
+    restrictions:
+      index:
+        h1-heading: Do any restrictions apply to your property, savings or assets?
+
+  restrictions:
+    names:
+      reposession_or_deferred_interest: Reposession or deferred interest in a property
+      subject_matter_of_dispute: Subject matter of dispute in other legal proceedings
+      foreign_exchange_controls: Foreign exchange controls
+      restraint_or_freezing_order: Restraint or freezing order
+      bankruptcy: Bankruptcy
+      held_overseas: Held overseas
+
+  generic:
+    'yes': 'Yes' # needs quotes as yes renders as true without them
+    'no': 'No'   # needs quotes as no renders as false without them
+    continue: Continue
+    back: Back
+    home: Home
+    submit: Submit
+    change: Change
+    errors:
+      yes_or_no: You must select either Yes or No
   currency:
     gbp: £
     eur: €

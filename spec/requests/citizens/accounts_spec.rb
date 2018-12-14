@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'citizen accounts request test', type: :request do
+RSpec.describe 'citizen accounts request', type: :request do
   describe 'GET /citizens/account' do
     let!(:applicant) { create :applicant }
     let(:addresses) do
