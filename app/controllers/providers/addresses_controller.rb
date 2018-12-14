@@ -25,6 +25,7 @@ module Providers
 
     def current_address_params
       return unless applicant.address
+
       applicant.address.attributes.symbolize_keys.slice(*address_attributes)
     end
 

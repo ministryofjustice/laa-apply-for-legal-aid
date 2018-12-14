@@ -36,6 +36,7 @@ module BaseForm
 
     def save
       return false unless valid?
+
       model.attributes = assignable_attributes
       model.save(validate: false)
     end

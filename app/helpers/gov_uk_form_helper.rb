@@ -57,6 +57,7 @@ module GovUkFormHelper
 
   def govuk_error_message(text, args = {})
     return if text.blank?
+
     content_tag :span, text, merge_with_class(args, 'govuk-error-message')
   end
 
@@ -75,6 +76,7 @@ module GovUkFormHelper
   def aria_describedby(*elements)
     elements.compact!
     return if elements.empty?
+
     %(aria-describedby="#{elements.join(' ')}")
   end
 end

@@ -16,6 +16,7 @@ module Providers
 
     def next_step
       return @next_step_link = passported_providers_legal_aid_application_check_benefits_path if legal_aid_application.benefit_check_result.positive?
+
       @next_step_link = providers_legal_aid_application_online_banking_path
     end
   end

@@ -4,7 +4,7 @@ require 'omniauth'
 class Applicant < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:true_layer]
 
-  NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
+  NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.freeze
 
   has_one :legal_aid_application
   has_many :addresses
@@ -42,12 +42,14 @@ class Applicant < ApplicationRecord
 
   def normalise_national_insurance_number
     return unless national_insurance_number
+
     national_insurance_number.delete!(' ')
     national_insurance_number.upcase!
   end
 
   def validate_national_insurance_number
     return if national_insurance_number.blank?
+
     normalise_national_insurance_number
     errors.add(:national_insurance_number, :invalid) unless NINO_REGEXP =~ national_insurance_number
   end

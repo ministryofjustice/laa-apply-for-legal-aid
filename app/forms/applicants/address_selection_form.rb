@@ -27,6 +27,7 @@ module Applicants
 
     def deserialize_address
       return unless lookup_id.present?
+
       attributes[:organisation] = selected_address.organisation
       attributes[:address_line_one] = selected_address.address_line_one
       attributes[:address_line_two] = selected_address.address_line_two
