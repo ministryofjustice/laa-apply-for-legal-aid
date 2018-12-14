@@ -1,7 +1,7 @@
 module Citizens
   class SharedOwnershipsController < BaseController
     def show
-      @form = LegalAidApplications::SharedOwnershipForm.new(current_params)
+      @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
     end
 
     def update
@@ -22,10 +22,6 @@ module Citizens
 
     def legal_aid_application
       @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
-    end
-
-    def current_params
-      legal_aid_application.attributes.symbolize_keys.slice(:shared_ownership)
     end
 
     def shared_ownership_params

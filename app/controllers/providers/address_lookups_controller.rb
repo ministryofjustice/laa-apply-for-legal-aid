@@ -4,11 +4,11 @@ module Providers
     include Steppable
 
     def show
-      @form = Applicants::AddressLookupForm.new
+      @form = Addresses::AddressLookupForm.new
     end
 
     def update
-      @form = Applicants::AddressLookupForm.new(form_params)
+      @form = Addresses::AddressLookupForm.new(form_params)
       @back_step_url = providers_legal_aid_application_address_lookup_path
 
       if @form.save
@@ -21,7 +21,11 @@ module Providers
     private
 
     def form_params
-      params.require(:address_lookup).permit(:postcode).merge(applicant_id: applicant.id)
+      params.require(:address_lookup).permit(:postcode).merge(model: address)
+    end
+
+    def address
+      applicant.address || applicant.build_address
     end
   end
 end

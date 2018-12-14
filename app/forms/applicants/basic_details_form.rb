@@ -5,8 +5,7 @@ module Applicants
     form_for Applicant
 
     attr_accessor :first_name, :last_name, :national_insurance_number,
-                  :dob_year, :dob_month, :dob_day, :email,
-                  :legal_aid_application_id
+                  :dob_year, :dob_month, :dob_day, :email
     attr_writer :date_of_birth
 
     NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/.freeze
@@ -29,6 +28,14 @@ module Applicants
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
     validates :email, presence: true
 
+    def initialize(*args)
+      super
+      set_instance_variables_for_attributes_if_not_set_but_in_model(
+        attrs: dob_fields,
+        model_attributes: dob_from_model
+      )
+    end
+
     # rubocop:disable Lint/HandleExceptions
     def date_of_birth
       @date_of_birth ||= attributes[:date_of_birth] = Date.parse("#{dob_year}-#{dob_month}-#{dob_day}")
@@ -36,10 +43,6 @@ module Applicants
       # if date can't be parsed set as nil
     end
     # rubocop:enable Lint/HandleExceptions
-
-    def model
-      @model ||= legal_aid_application.applicant || legal_aid_application.build_applicant
-    end
 
     def normalise_national_insurance_number
       return if national_insurance_number.blank?
@@ -49,13 +52,21 @@ module Applicants
     end
 
     def exclude_from_model
-      %i[dob_year dob_month dob_day legal_aid_application_id]
+      dob_fields
     end
 
-    private
+    def dob_fields
+      %i[dob_year dob_month dob_day]
+    end
 
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(legal_aid_application_id)
+    def dob_from_model
+      return unless model.date_of_birth?
+
+      {
+        dob_year: model.date_of_birth.year,
+        dob_month: model.date_of_birth.month,
+        dob_day: model.date_of_birth.day
+      }
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::OwnHomeForm, type: :form do
+RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
   let(:application) { create :legal_aid_application, :with_applicant_and_address }
   let(:attributes) { legal_aid_application.attributes }
   let(:params) { { own_home: 'mortgage' } }

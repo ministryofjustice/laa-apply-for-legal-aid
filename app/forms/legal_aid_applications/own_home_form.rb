@@ -1,4 +1,4 @@
-module Citizens
+module LegalAidApplications
   class OwnHomeForm
     include BaseForm
 

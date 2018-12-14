@@ -3,6 +3,7 @@
 #   Add the following to the form:
 #
 #       include BaseForm
+#       form_for <ModelClass>
 #
 
 module BaseForm
@@ -21,7 +22,7 @@ module BaseForm
     end
 
     def model_class
-      @model_class || raise('Model class must be defined. Use: `form_for ClassName`')
+      @model_class || raise('Model class must be defined. Use: `form_for Class`')
     end
 
     def model_name
@@ -32,7 +33,7 @@ module BaseForm
     def attr_accessor(*symbols)
       locally_assigned << symbols
       locally_assigned.flatten!
-      super *symbols
+      super(*symbols)
     end
 
     def locally_assigned
@@ -41,10 +42,22 @@ module BaseForm
   end
 
   module InstanceMethods
-
+    # Allows a form to be initiated with an existing model instance, and for the values in the
+    # model to be passed to the form.
+    #
+    #   some_model = SomeModel.find(params[:id])
+    #   some_model.foo = :bar
+    #   form = SomeForm.new(model: some_model)
+    #   form.foo == :bar
+    #
+    # Assuming SomeForm definition includes `attr_accessor :foo`
+    #
     def initialize(*args)
       super
-      self.class.locally_assigned.map(&:to_s).each{ |m| instance_variable_set(:"@#{m}", model.attributes[m]) unless attributes[m]}
+      set_instance_variables_for_attributes_if_not_set_but_in_model(
+        attrs: self.class.locally_assigned,
+        model_attributes: model&.attributes
+      )
     end
 
     def model
@@ -81,5 +94,16 @@ module BaseForm
       super
     end
     # rubocop:enable Naming/UncommunicativeMethodParamName
+
+    def set_instance_variables_for_attributes_if_not_set_but_in_model(attrs:, model_attributes:)
+      return unless model_attributes.present?
+
+      model_attributes.stringify_keys!
+
+      attrs.map(&:to_s).each do |method|
+        model_value = model_attributes[method]
+        instance_variable_set(:"@#{method}", model_value) if model_value && attributes[method].nil?
+      end
+    end
   end
 end

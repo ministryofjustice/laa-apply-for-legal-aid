@@ -13,12 +13,15 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
   let(:attr_list) do
     %i[
-      first_name last_name national_insurance_number
-      date_of_birth email
+      first_name
+      last_name
+      national_insurance_number
+      date_of_birth
+      email
     ]
   end
 
-  let(:params) { attributes.slice(*attr_list).merge(legal_aid_application_id: legal_aid_application_id) }
+  let(:params) { attributes.slice(*attr_list).merge(model: legal_aid_application.build_applicant) }
 
   subject { described_class.new(params) }
 
@@ -113,8 +116,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           dob_year: attributes[:date_of_birth].year.to_s,
           dob_month: attributes[:date_of_birth].month.to_s,
           dob_day: attributes[:date_of_birth].day.to_s,
-          legal_aid_application_id: legal_aid_application.id,
-          email: Faker::Internet.safe_email
+          email: Faker::Internet.safe_email,
+          model: applicant
         }
       end
 
@@ -137,8 +140,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           dob_year: '10',
           dob_month: '21',
           dob_day: '44',
-          legal_aid_application_id: legal_aid_application.id,
-          email: Faker::Internet.safe_email
+          email: Faker::Internet.safe_email,
+          model: applicant
         }
       end
 
@@ -157,6 +160,30 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     it 'returns a new applicant' do
       expect(subject.model).to be_a(Applicant)
       expect(subject.model).not_to be_persisted
+    end
+
+    context 'with an existing applicant passed in' do
+      let(:applicant) { create :applicant }
+      let(:params) { attributes.slice(*attr_list).merge(model: applicant) }
+      it 'returns the applicant' do
+        expect(subject.model).to eq(applicant)
+      end
+    end
+
+    context 'with no attributes but populated model' do
+      let(:applicant) { create :applicant }
+      let(:params) { { model: applicant } }
+
+      it 'populates attributes from model' do
+        expect(subject.first_name).to eq(applicant.first_name)
+        expect(subject.last_name).to eq(applicant.last_name)
+      end
+
+      it 'populates dob fields from model' do
+        expect(subject.dob_year).to eq(applicant.date_of_birth.year)
+        expect(subject.dob_month).to eq(applicant.date_of_birth.month)
+        expect(subject.dob_day).to eq(applicant.date_of_birth.day)
+      end
     end
   end
 

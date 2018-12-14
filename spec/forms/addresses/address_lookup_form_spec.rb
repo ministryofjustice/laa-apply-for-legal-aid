@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Applicants::AddressLookupForm, type: :form do
+RSpec.describe Addresses::AddressLookupForm, type: :form do
   subject(:form) { described_class.new(params) }
 
   describe 'validations' do

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Applicants::AddressSelectionForm, type: :form do
+RSpec.describe Addresses::AddressSelectionForm, type: :form do
   let(:postcode) { 'DA7 4NG' }
   let(:lookup_id) { '123456' }
-  let(:applicant_id) { SecureRandom.uuid }
+  let(:applicant) { create :applicant }
   let(:form_params) do
     {
       lookup_id: lookup_id,
@@ -11,7 +11,7 @@ RSpec.describe Applicants::AddressSelectionForm, type: :form do
       addresses: [Address.new(lookup_id: lookup_id)]
     }
   end
-  subject(:form) { described_class.new(form_params.merge(applicant_id: applicant_id)) }
+  subject(:form) { described_class.new(form_params.merge(model: applicant)) }
 
   describe 'validations' do
     it 'is valid with all the required attributes' do

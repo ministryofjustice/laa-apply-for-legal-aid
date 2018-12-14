@@ -4,7 +4,7 @@ module Providers
     include Providers::Steppable
 
     def show
-      @form = Applicants::BasicDetailsForm.new(current_params)
+      @form = Applicants::BasicDetailsForm.new(model: applicant)
     end
 
     def update
@@ -18,22 +18,16 @@ module Providers
 
     private
 
+    def applicant
+      legal_aid_application.applicant || legal_aid_application.build_applicant
+    end
+
     def applicant_params
       params.require(:applicant).permit(:first_name, :last_name, :dob_day, :dob_month, :dob_year, :national_insurance_number, :email)
     end
 
     def form_params
-      applicant_params.merge(legal_aid_application_id: params[:legal_aid_application_id])
-    end
-
-    def applicant_attributes
-      %i[first_name last_name date_of_birth national_insurance_number email]
-    end
-
-    def current_params
-      return unless applicant
-
-      applicant.attributes.symbolize_keys.slice(*applicant_attributes).merge(applicant.dob)
+      applicant_params.merge(model: applicant)
     end
   end
 end
