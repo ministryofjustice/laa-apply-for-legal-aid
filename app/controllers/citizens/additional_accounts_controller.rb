@@ -7,8 +7,7 @@ module Citizens
       when 'yes'
         redirect_to new_citizens_additional_account_path
       when 'no'
-        # TODO: - set redirect path when known
-        render plain: 'Landing page: Next step in Citizen journey'
+        redirect_to citizens_own_home_path
       else
         @error = I18n.t('generic.errors.yes_or_no')
         render :index
@@ -20,8 +19,7 @@ module Citizens
     def update
       case params[:has_offline_accounts]
       when 'yes'
-        # TODO: - set redirect path when known
-        render plain: 'Landing page: Return to True Layer steps'
+        redirect_to applicant_true_layer_omniauth_authorize_path
       when 'no'
         legal_aid_application.update(has_offline_accounts: true)
         redirect_to citizens_own_home_path
