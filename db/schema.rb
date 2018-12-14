@@ -133,6 +133,15 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
+  create_table "legal_aid_application_restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "restriction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "laa_id_laa_restriction_id"
+    t.index ["restriction_id"], name: "index_legal_aid_application_restrictions_on_restriction_id"
+  end
+
   create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
@@ -164,6 +173,12 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
+  create_table "restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "isa"
@@ -193,6 +208,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
   add_foreign_key "bank_providers", "applicants"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
+  add_foreign_key "legal_aid_application_restrictions", "legal_aid_applications"
+  add_foreign_key "legal_aid_application_restrictions", "restrictions"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "savings_amounts", "legal_aid_applications"
 end
