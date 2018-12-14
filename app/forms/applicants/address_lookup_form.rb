@@ -23,6 +23,7 @@ module Applicants
 
     def normalise_postcode
       return unless postcode.present?
+
       postcode.delete!(' ')
       postcode.upcase!
     end

@@ -36,12 +36,14 @@ module Applicants
 
     def normalise_postcode
       return unless postcode.present?
+
       postcode.delete!(' ')
       postcode.upcase!
     end
 
     def validate_building_and_street
       return if address_line_one.present? || address_line_two.present?
+
       errors.add(:address_line_one, :blank)
     end
   end

@@ -10,9 +10,9 @@ data.each do |row|
   proceeding_type = ProceedingType.where(code: code).first_or_initialize
   attrs = {
     ccms_code: ccms_code,
-    meaning:  meaning,
-    description:  description,
-    ccms_category_law:  ccms_category_of_law,
+    meaning: meaning,
+    description: description,
+    ccms_category_law: ccms_category_of_law,
     ccms_category_law_code: ccms_category_of_law_code,
     ccms_matter: ccms_matter_type,
     ccms_matter_code: ccms_matter_type_code

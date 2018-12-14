@@ -76,6 +76,7 @@ class LegalAidApplication < ApplicationRecord
 
   def benefit_check_result_needs_updating?
     return true unless benefit_check_result
+
     applicant_updated_after_benefit_check_result_updated?
   end
 
@@ -95,6 +96,7 @@ class LegalAidApplication < ApplicationRecord
 
   def proceeding_type_codes_existence
     return unless proceeding_type_codes.present?
+
     errors.add(:proceeding_type_codes, :invalid) if proceeding_types.size != proceeding_type_codes.size
   end
 

@@ -32,6 +32,7 @@ module Providers
 
     def current_params
       return unless applicant
+
       applicant.attributes.symbolize_keys.slice(*applicant_attributes).merge(applicant.dob)
     end
   end

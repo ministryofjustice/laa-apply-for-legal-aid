@@ -9,9 +9,9 @@ module OmniAuth
       option :name, :true_layer
 
       option :client_options,
-             site:          'https://auth.truelayer.com',
+             site: 'https://auth.truelayer.com',
              authorize_url: 'https://auth.truelayer.com/',
-             token_url:     'https://auth.truelayer.com/connect/token'
+             token_url: 'https://auth.truelayer.com/connect/token'
 
       def authorize_params
         super.merge(enable_mock: enable_mock)
@@ -28,6 +28,7 @@ module OmniAuth
       def enable_mock
         env_setting = ENV['TRUE_LAYER_ENABLE_MOCK']
         return false if env_setting.blank?
+
         ActiveModel::Type::Boolean.new.cast(env_setting)
       end
     end

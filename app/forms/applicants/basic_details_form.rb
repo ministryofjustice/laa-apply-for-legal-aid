@@ -9,7 +9,7 @@ module Applicants
                   :legal_aid_application_id
     attr_writer :date_of_birth
 
-    NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/
+    NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/.freeze
 
     before_validation :normalise_national_insurance_number
 
@@ -43,6 +43,7 @@ module Applicants
 
     def normalise_national_insurance_number
       return if national_insurance_number.blank?
+
       national_insurance_number.delete!(' ')
       national_insurance_number.upcase!
     end

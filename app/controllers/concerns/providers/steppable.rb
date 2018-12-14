@@ -57,12 +57,14 @@ module Providers
       # Define @back_step_url in controller to over-ride behaviour
       def back_step_url
         raise "back step not found for controller name #{controller_name}" unless current_back_method || @back_step_url
+
         @back_step_url ||= send(current_back_method, with_legal_aid_application_if_needed(current_back_method))
       end
       helper_method :back_step_url
 
       def next_step_url
         raise "forward step not found for controller name #{controller_name}" unless current_next_method
+
         send current_next_method, with_legal_aid_application_if_needed(current_next_method)
       end
 
@@ -70,21 +72,25 @@ module Providers
 
       def current_next_method
         return CHECK_YOUR_ANSWERS_STEP if !ignore_checking_answers? && checking_answers?
+
         @current_next_method ||= STEPS.dig controller_name.to_sym, :forward
       end
 
       def current_back_method
         return CHECK_YOUR_ANSWERS_STEP if checking_answers?
+
         @current_back_method ||= STEPS.dig controller_name.to_sym, :back
       end
 
       def with_legal_aid_application_if_needed(current_method)
         return if PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE.include?(current_method)
+
         legal_aid_application
       end
 
       def checking_answers?
         return unless @legal_aid_application
+
         legal_aid_application.checking_answers?
       end
 
