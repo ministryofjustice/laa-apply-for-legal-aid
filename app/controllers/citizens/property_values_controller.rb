@@ -8,7 +8,7 @@ module Citizens
       @form = LegalAidApplications::PropertyValueForm.new(edit_params)
 
       if @form.save
-        render plain: 'Navigate to question 1c; What is the outstanding mortgage?'
+        redirect_to citizens_outstanding_mortgage_path
       else
         render :show
       end

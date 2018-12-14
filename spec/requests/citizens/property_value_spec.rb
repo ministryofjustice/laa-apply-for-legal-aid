@@ -22,10 +22,8 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
     context 'when a property value is entered' do
       let(:params) { { legal_aid_application: { property_value: 123_456.78 } } }
 
-      xit 'redirects to new action' do
-        expect(response.body).to include('Navigate to')
-        # TO DO
-        # expect(response).to redirect_to(to_be_determined_path)
+      it 'redirects to new action' do
+        expect(response).to redirect_to(citizens_outstanding_mortgage_path)
       end
 
       it 'records the value in the legal aid application table' do
