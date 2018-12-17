@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
+      resource :own_home, only: %i[show update]
       resources :check_benefits, only: [:index] do
         get :passported, on: :collection
       end

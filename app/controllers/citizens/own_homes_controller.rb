@@ -8,7 +8,7 @@ module Citizens
       @form = LegalAidApplications::OwnHomeForm.new(form_params)
 
       if @form.save
-        if @form.own_home == 'no'
+        if @form.own_home_no?
           render plain: 'Navigate to question 2a; Do you have any savings or investments'
         else
           redirect_to citizens_property_value_path

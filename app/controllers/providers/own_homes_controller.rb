@@ -9,7 +9,7 @@ module Providers
       @form = LegalAidApplications::OwnHomeForm.new(form_params)
 
       if @form.save
-        if @form.own_home == 'no'
+        if @form.own_home_no?
           render plain: 'Holding page: 1b Property Value'
         else
           render plain: 'Holding page: Navigate to question 2a; Do you have any savings or investments'
