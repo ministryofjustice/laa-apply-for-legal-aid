@@ -1,5 +1,5 @@
-<% content_for(:navigation) { provider_back_link } %>
 <% content_for(:page_title) { t('.h1-heading') } %>
+<% content_for(:navigation) { provider_back_link } %>
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <fieldset class="govuk-fieldset">

@@ -1,3 +1,4 @@
+<% content_for(:page_title) { t('.field_set_header') } %>
 <% content_for :navigation do %>
     <%= link_to t('generic.back'), new_citizens_additional_account_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
@@ -13,19 +14,6 @@
           input: :property_value
         ) do %>
 
-<<<<<<< HEAD
-      <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
-      <%= form.govuk_text_field :property_value, input_prefix: t('currency.gbp'), class: 'govuk-!-width-one-third' %>
-=======
-      <%= govuk_fieldset_header content_for(:page_title), padding_below: 6 %>
-      <%= form.label :property_value, t('.label'), class: 'govuk-label' %>
-      <%= govuk_hint t('.hint'), id: :property_value_hint %>
-      <%= govuk_error_message form.object.errors[:property_value].first %>
-      <%= govuk_currency_input_wrapper do %>
-        <% input_error_class = govuk_error_class(form.object.errors[:property_value]) %>
-        <%= form.text_field :property_value, class: "govuk-input govuk-!-width-one-third govuk-currency-input__inner__input #{input_error_class}" %>
-      <% end %>
->>>>>>> Refactored the h1s on views to be at the top of the page for consistancy
     <% end %>
 
     <%= govuk_submit_button t('generic.continue') %>

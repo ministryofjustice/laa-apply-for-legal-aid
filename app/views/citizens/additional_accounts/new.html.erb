@@ -1,3 +1,4 @@
+<% content_for(:page_title) { t('.field_set_header') } %>
 <% content_for :navigation do %>
   <%#= link_to 'Back', path-to-be-determined, class: 'govuk-back-link', id: 'back' %>
 <% end %>
@@ -9,7 +10,7 @@
           hint_id: :has_offline_accounts_hint,
           input: :has_offline_accounts
         ) do %>
-      <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
+      <%= govuk_fieldset_header content_for(:page_title), padding_below: 6 %>
       <%= govuk_hint t('.hint'), id: :has_offline_accounts_hint %>
       <%= govuk_error_message(@error) %>
       <%= govuk_radio_inputs :has_offline_accounts, yes: t('generic.yes'), no: t('generic.no') %>

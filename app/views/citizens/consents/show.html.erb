@@ -1,8 +1,7 @@
+<% content_for(:page_title) { t('.field_set_header') } %>
 <% content_for :navigation do %>
     <%= link_to t('generic.back'), citizens_information_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
-
-<% content_for(:page_title) { t('.field_set_header') } %>
 
 <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
 

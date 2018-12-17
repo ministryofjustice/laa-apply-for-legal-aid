@@ -106,18 +106,18 @@ en:
               code:
                 blank: 'A proceeding must be selected'
         address: &address_errors
-         attributes:
-           lookup_id:
+          attributes:
+            lookup_id:
               blank: 'Please select an address from the list'
-           address_line_one:
-             blank: 'Enter a building and street'
-           city:
-             blank: 'Enter a town or city'
-           postcode:
-             blank: 'Enter a postcode'
-             invalid: 'Enter a postcode in the right format'
+            address_line_one:
+              blank: 'Enter a building and street'
+            city:
+              blank: 'Enter a town or city'
+            postcode:
+              blank: 'Enter a postcode'
+              invalid: 'Enter a postcode in the right format'
         applicants/address_form:
-         <<: *address_errors
+          <<: *address_errors
         applicants/address_lookup_form:
           attributes:
             postcode:
@@ -296,7 +296,6 @@ en:
         happen_next_heading: What happens next
         happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
         back_button: "Back to your applications"
-<<<<<<< HEAD
     start:
       index:
         apply_for_legal_aid_heading: Apply for Legal Aid
@@ -316,15 +315,14 @@ en:
           title: Related content
           item_1: Legal aid
           item_2: More
-
-=======
->>>>>>> Added missing title refactor and moved content to locales
     legal_aid_applications:
       index:
          h1-heading: Your legal aid applications
-    start:
-      index:
-        h1-heading: Apply for Legal Aid
+         make_new_application: Make a new application
+         basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
+    applicants:
+      show:
+        h1-heading: Enter your client's details
   citizens:
     accounts:
       index:
@@ -356,12 +354,6 @@ en:
         list_1: We do not save your online banking username and password
         list_2: We do not have any ongoing access to your bank accounts
         list_3: We only use your details to assess your eligibility for legal aid
-    information:
-      show:
-        h1-heading: Give one-time access to your bank accounts
-    legal_aid_applications:
-      show:
-        h1-heading: Complete your legal aid financial assessment
     percentage_homes:
       show:
         h1-heading: What % share of your home do you legally own?
@@ -396,7 +388,7 @@ en:
         h1-heading: Do any restrictions apply to your property, savings or assets?
     information:
       show:
-        heading_1: Give one-time access to your bank accounts
+        h1-heading: Give one-time access to your bank accounts
         para_1: You will be redirected to a secure service to sign in to your online banking.
         para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
         list:
@@ -406,7 +398,7 @@ en:
           item_3: Your online banking details are not saved
     legal_aid_applications:
         show:
-          heading_1: Complete your legal aid financial assessment
+          h1-heading: Complete your legal aid financial assessment
           name: 'Name:'
           case_reference: 'Case reference:'
           financial_situation_para: Find out if you can get legal aid because of your financial situation.
