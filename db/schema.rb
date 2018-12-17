@@ -218,6 +218,21 @@ ActiveRecord::Schema.define(version: 2019_01_02_151638) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "username", null: false
+    t.string "type"
+    t.text "roles"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_users_on_type"
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"

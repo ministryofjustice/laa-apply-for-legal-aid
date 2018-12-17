@@ -5,103 +5,110 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
-    let(:get_request) { get "/providers/applications/#{application_id}/check_provider_answers" }
+    let(:perform_request) { get "/providers/applications/#{application_id}/check_provider_answers" }
 
-    context 'when the application does not exist' do
-      let(:application_id) { SecureRandom.uuid }
+    it_behaves_like 'a provider not authenticated'
 
-      it 'redirects to the applications page with an error' do
-        get_request
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
 
-        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      before do
+        login_as provider
+        perform_request
       end
-    end
 
-    it 'returns success' do
-      get_request
+      context 'when the application does not exist' do
+        let(:application_id) { SecureRandom.uuid }
 
-      expect(response).to be_successful
-    end
+        it 'redirects to the applications page with an error' do
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+      end
 
-    it 'displays the correct page' do
-      get_request
+      it 'returns success' do
+        expect(response).to be_successful
+      end
 
-      expect(unescaped_response_body).to include('Check your answers')
-    end
+      it 'displays the correct page' do
+        expect(unescaped_response_body).to include('Check your answers')
+      end
 
-    it 'displays the correct proceeding' do
-      get_request
+      it 'displays the correct proceeding' do
+        expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
+      end
 
-      expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
-    end
+      it 'displays the correct client details' do
+        applicant = application.applicant
+        address = applicant.addresses[0]
 
-    it 'displays the correct client details' do
-      get_request
-
-      applicant = application.applicant
-      address = applicant.addresses[0]
-
-      expect(unescaped_response_body).to include(applicant.first_name)
-      expect(unescaped_response_body).to include(applicant.last_name)
-      expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
-      expect(unescaped_response_body).to include(applicant.national_insurance_number)
-      expect(unescaped_response_body).to include(applicant.email_address)
-      expect(unescaped_response_body).to include(address.address_line_one)
-      expect(unescaped_response_body).to include(address.city)
-      expect(unescaped_response_body).to include(address.postcode)
+        expect(unescaped_response_body).to include(applicant.first_name)
+        expect(unescaped_response_body).to include(applicant.last_name)
+        expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
+        expect(unescaped_response_body).to include(applicant.national_insurance_number)
+        expect(unescaped_response_body).to include(applicant.email_address)
+        expect(unescaped_response_body).to include(address.address_line_one)
+        expect(unescaped_response_body).to include(address.city)
+        expect(unescaped_response_body).to include(address.postcode)
+      end
     end
   end
 
   describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset' do
-    subject { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
+    let(:perform_request) { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
 
-    before do
-      application.check_your_answers!
-    end
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
 
-    it 'should redirect back' do
-      subject
-      expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
-    end
-
-    context "the applicant's address used s address lookup service" do
-      let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address_lookup) }
-      let(:application_id) { application.id }
-      let(:address_lookup_used) { true }
-
-      it 'should redirect to the address lookup page' do
-        subject
-        expect(response).to redirect_to(providers_legal_aid_application_address_selection_path(application))
+      before do
+        login_as provider
+        application.check_your_answers!
+        perform_request
       end
-    end
 
-    context "the applicant's address used manual entry" do
-      let(:address_lookup_used) { false }
-
-      it 'should redirect to manual address pagelookup page' do
-        subject
+      it 'should redirect back' do
         expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
       end
-    end
 
-    it 'should change the state back to "initialized"' do
-      subject
-      expect(application.reload.initiated?).to be_truthy
+      context "the applicant's address used s address lookup service" do
+        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address_lookup) }
+        let(:application_id) { application.id }
+        let(:address_lookup_used) { true }
+
+        it 'should redirect to the address lookup page' do
+          expect(response).to redirect_to(providers_legal_aid_application_address_selection_path(application))
+        end
+      end
+
+      context "the applicant's address used manual entry" do
+        let(:address_lookup_used) { false }
+
+        it 'should redirect to manual address pagelookup page' do
+          expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
+        end
+      end
+
+      it 'should change the stage back to "initialized' do
+        subject
+        expect(application.reload.initiated?).to be_truthy
+      end
     end
   end
 
   describe 'PATCH  /providers/applications/:legal_aid_application_id/check_provider_answers/continue' do
     context 'Continue' do
+      let(:provider) { create(:provider) }
       let(:params) do
         {
           continue_button: 'Continue'
         }
       end
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+
+      let(:perform_request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
+        login_as provider
         application.check_your_answers!
-        subject
+        perform_request
       end
 
       it 'should redirect to next step' do
@@ -114,16 +121,19 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     context 'Save as draft' do
+      let(:provider) { create(:provider) }
       let(:params) do
         {
           draft_button: 'Save as draft'
         }
       end
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+
+      let(:perform_request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
+        login_as provider
         application.check_your_answers!
-        subject
+        perform_request
       end
 
       it 'should redirect to provider legal applications home page' do

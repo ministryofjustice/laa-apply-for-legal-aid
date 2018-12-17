@@ -1,5 +1,5 @@
 module Citizens
-  class SharedOwnershipsController < BaseController
+  class SharedOwnershipsController < ApplicationController
     include Flowable
 
     def show

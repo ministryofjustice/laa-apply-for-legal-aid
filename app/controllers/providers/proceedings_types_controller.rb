@@ -1,5 +1,5 @@
 module Providers
-  class ProceedingsTypesController < ApplicationController
+  class ProceedingsTypesController < BaseController
     include ApplicationDependable
     include Steppable
 

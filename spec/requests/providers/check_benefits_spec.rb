@@ -10,57 +10,65 @@ RSpec.describe 'check benefits requests', type: :request do
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
     let(:get_request) { get "/providers/applications/#{application.id}/check_benefits" }
+    let(:perform_request) { get "/providers/applications/#{application.id}/check_benefits" }
 
-    before do
-      create :address, applicant: applicant, lookup_used: address_lookup_used
-    end
+    it_behaves_like 'a provider not authenticated'
 
-    it 'returns http success' do
-      get_request
-      expect(response).to have_http_status(:ok)
-    end
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
 
-    # context 'when the check_benefit_results is positive' do
-    #   before do
-    #     allow_any_instance_of(BenefitCheckResult).to receive(:positive?).and_return(true)
-    #   end
-    #   it 'displays a link to own home' do
-    #     get_request
-    #     expect(response.body).to include(providers_legal_aid_application_own_home_path(application))
-    #   end
-    # end
-
-    # context 'when the check_benefit_results is negative' do
-    #   before do
-    #     allow_any_instance_of(BenefitCheckResult).to receive(:positive?).and_return(false)
-    #   end
-    #   it 'displays a link to online banking' do
-    #     get_request
-    #     expect(response.body).to include(providers_legal_aid_application_online_banking_path(application))
-    #   end
-    # end
-
-    context 'when the check_benefit_result does not exist' do
-      it 'generates a new check_benefit_result' do
-        expect { get_request }.to change { BenefitCheckResult.count }.by(1)
-      end
-    end
-
-    context 'when the check_benefit_result already exists' do
-      let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
-
-      it 'does not generate a new one' do
-        expect_any_instance_of(BenefitCheckService).not_to receive(:call).and_call_original
-        expect { get_request }.to_not change { BenefitCheckResult.count }
+      before do
+        create :address, applicant: applicant, lookup_used: address_lookup_used
+        login_as provider
       end
 
-      context 'and the applicant has since been modified' do
-        before { applicant.update(first_name: Faker::Name.first_name) }
+      it 'returns http success' do
+        perform_request
+        expect(response).to have_http_status(:ok)
+      end
+
+      # context 'when the check_benefit_results is positive' do
+      #   before do
+      #     allow_any_instance_of(BenefitCheckResult).to receive(:positive?).and_return(true)
+      #   end
+      #   it 'displays a link to own home' do
+      #     perform_request
+      #     expect(response.body).to include(providers_legal_aid_application_own_home_path(application))
+      #   end
+      # end
+
+      # context 'when the check_benefit_results is negative' do
+      #   before do
+      #     allow_any_instance_of(BenefitCheckResult).to receive(:positive?).and_return(false)
+      #   end
+      #   it 'displays a link to online banking' do
+      #     perform_request
+      #     expect(response.body).to include(providers_legal_aid_application_online_banking_path(application))
+      #   end
+      # end
+
+      context 'when the check_benefit_result does not exist' do
+        it 'generates a new check_benefit_result' do
+          expect { perform_request }.to change { BenefitCheckResult.count }.by(1)
+        end
+      end
+
+      context 'when the check_benefit_result already exists' do
         let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
-        it 'updates check_benefit_result' do
-          expect_any_instance_of(BenefitCheckService).to receive(:call).and_call_original
-          get_request
+        it 'does not generate a new one' do
+          expect_any_instance_of(BenefitCheckService).not_to receive(:call).and_call_original
+          expect { perform_request }.to_not change { BenefitCheckResult.count }
+        end
+
+        context 'and the applicant has since been modified' do
+          before { applicant.update(first_name: Faker::Name.first_name) }
+          let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
+
+          it 'updates check_benefit_result' do
+            expect_any_instance_of(BenefitCheckService).to receive(:call).and_call_original
+            perform_request
+          end
         end
       end
     end
@@ -69,66 +77,77 @@ RSpec.describe 'check benefits requests', type: :request do
   describe 'PATCH /providers/applications/:application_id/check_benefit' do
     before { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
 
-    context 'Form submitted with Continue button' do
-      let(:params) do
-        {
-          continue_button: 'Continue'
-        }
+    let(:perform_request) { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
+
+    context 'when the provider is authenticated' do
+      let(:provider) { create(:provider) }
+
+      before do
+        login_as provider
+        perform_request
       end
 
-      context 'when the check_benefit_results is positive' do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+      context 'Form submitted with Continue button' do
+        let(:params) do
+          {
+            continue_button: 'Continue'
+          }
+        end
 
-        it 'displays the own home page' do
-          expect(response).to redirect_to providers_legal_aid_application_own_home_path(application)
+        context 'when the check_benefit_results is positive' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
+          it 'displays the own home page' do
+            expect(response).to redirect_to providers_legal_aid_application_own_home_path(application)
+          end
+        end
+
+        context 'when the check benefit result is negative' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+          it 'displays the online banking page' do
+            expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+          end
+        end
+
+        context 'when the check benefit result is undetermined' do
+          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+
+          it 'displays the online banking page' do
+            expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+          end
         end
       end
 
-      context 'when the check benefit result is negative' do
-        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-
-        it 'displays the online banking page' do
-          expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+      context 'Form submitted with Save as draft button' do
+        let(:params) do
+          {
+            draft_button: 'Save as draft'
+          }
         end
-      end
 
-      context 'when the check benefit result is undetermined' do
-        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+        context 'when the check_benefit_results is positive' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
 
-        it 'displays the online banking page' do
-          expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+          it 'displays the providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
         end
-      end
-    end
 
-    context 'Form submitted with Save as draft button' do
-      let(:params) do
-        {
-          draft_button: 'Save as draft'
-        }
-      end
+        context 'when the check benefit result is negative' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
-      context 'when the check_benefit_results is positive' do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-
-        it 'displays the providers applications page' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          it 'displays providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
         end
-      end
 
-      context 'when the check benefit result is negative' do
-        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        context 'when the check benefit result is undetermined' do
+          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
 
-        it 'displays providers applications page' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
-        end
-      end
-
-      context 'when the check benefit result is undetermined' do
-        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
-
-        it 'displays providers applications page' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          it 'displays providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
         end
       end
     end

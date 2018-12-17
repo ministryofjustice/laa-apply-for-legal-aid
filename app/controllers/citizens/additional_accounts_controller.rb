@@ -1,5 +1,5 @@
 module Citizens
-  class AdditionalAccountsController < BaseController
+  class AdditionalAccountsController < ApplicationController
     def index; end
 
     def create

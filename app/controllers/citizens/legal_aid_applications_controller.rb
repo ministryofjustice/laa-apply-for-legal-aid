@@ -1,5 +1,5 @@
 module Citizens
-  class LegalAidApplicationsController < BaseController
+  class LegalAidApplicationsController < ApplicationController
     def show
       secure_id = params[:id]
       legal_aid_application = LegalAidApplication.find_by_secure_id!(secure_id)
