@@ -119,6 +119,7 @@ module GovukElementsFormBuilder
       value_attr = args[0].is_a?(Hash) ? nil : args[0]
       label_attr = args[1].is_a?(Hash) ? nil : args[1]
       [value_attr, label_attr]
+
     end
 
     def collection_radio_buttons_classes(attribute, options)

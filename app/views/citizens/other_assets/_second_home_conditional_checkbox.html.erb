@@ -19,6 +19,7 @@
   <%= form.govuk_text_field :second_home_value, input_prefix: t('currency.gbp'), value: number_to_currency(value1, unit: ''), class: 'govuk-!-width-one-third' %>
 
   <%= form.govuk_text_field :second_home_mortgage, input_prefix: t('currency.gbp'), value: number_to_currency(value2, unit: ''), class: 'govuk-!-width-one-third' %>
-
-  <%= form.govuk_text_field :second_home_percentage, input_suffix: '%', value: number_to_currency(value3, unit: ''), class: 'govuk-!-width-one-third' %>
+  <div class="govuk-!-width-one-third">
+      <%= form.govuk_text_field :second_home_percentage, value: number_to_currency(value3, unit: ''), class: 'govuk-input govuk-input--width-5 input-percentage', suffix: ' %' %>
+  </div>
 </div>
