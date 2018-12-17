@@ -1,11 +1,5 @@
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
-    # rubocop:disable Style/SymbolProc
-    after(:create) do |application|
-      application.create_other_assets_declaration!
-    end
-    # rubocop:enable Style/SymbolProc
-
     trait :with_applicant do
       applicant
     end

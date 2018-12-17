@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'citizen other assets requests', type: :request do
   let(:application) { create :application, :with_applicant }
-  let(:oad) { application.other_assets_declaration }
+  let(:oad) { application.create_other_assets_declaration! }
   let(:application_id) { application.id }
-  let(:secure_id) { application.generate_secure_id }
+  let(:secure_id) { oad.legal_aid_application.generate_secure_id }
 
   before { get citizens_legal_aid_application_path(secure_id) }
 

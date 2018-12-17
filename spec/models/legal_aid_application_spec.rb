@@ -3,20 +3,6 @@ require 'rails_helper'
 RSpec.describe LegalAidApplication, type: :model do
   let(:legal_aid_application) { create :legal_aid_application }
 
-  describe 'after_create_hook' do
-    it 'creates an OtherAssetsDeclaration' do
-      expect { create(:legal_aid_application) }.to change { OtherAssetsDeclaration.count }.by(1)
-    end
-
-    it 'sets all the attributes to nil' do
-      oad = legal_aid_application.other_assets_declaration
-      attribute_names = oad.attributes.symbolize_keys.except(:id, :created_at, :updated_at, :legal_aid_application_id).keys
-      attribute_names.each do |attr|
-        expect(oad.__send__(attr)).to be_nil, "Expected #{attr} to be nil, was #{oad.__send__(attr)}"
-      end
-    end
-  end
-
   describe 'validations' do
     let(:attributes) { { proceeding_type_codes: %w[invalid_code1 invalid_code2] } }
     let(:legal_aid_application) { described_class.new(attributes) }

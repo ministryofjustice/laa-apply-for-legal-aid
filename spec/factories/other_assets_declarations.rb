@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :other_assets_declaration do
-    initialize_with { create(:legal_aid_application).other_assets_declaration }
+    # initialize_with { create(:legal_aid_application).other_assets_declaration }
+    legal_aid_application
 
     trait :with_second_home do
       second_home_value { 850_000.00 }
