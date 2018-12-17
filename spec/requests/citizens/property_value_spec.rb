@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::PropertyValuesController, type: :request do
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:secure_id) { legal_aid_application.generate_secure_id }
+  before { get citizens_legal_aid_application_path(secure_id) }
+
   describe 'citizen property value test' do
     describe 'GET /citizens/property_value' do
       before { get citizens_property_value_path }
@@ -13,11 +17,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
   end
 
   describe 'PATCH /citizens/property_value', type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-    before do
-      sign_in legal_aid_application.applicant
-      patch citizens_property_value_path, params: params
-    end
+    before { patch citizens_property_value_path, params: params }
 
     context 'when a property value is entered' do
       let(:params) { { legal_aid_application: { property_value: 123_456.78 } } }

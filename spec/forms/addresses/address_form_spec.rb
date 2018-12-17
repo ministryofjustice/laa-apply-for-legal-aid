@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Applicants::AddressForm, type: :form do
+RSpec.describe Addresses::AddressForm, type: :form do
   let(:address_line_one) { 'Ministry of Justice' }
   let(:address_line_two) { '102 Petty France' }
   let(:city) { 'London' }
   let(:county) { '' }
   let(:postcode) { 'SW1H 9AJ' }
   let(:applicant) { create(:applicant) }
+  let(:address) { applicant.build_address }
   let(:applicant_id) { applicant.id }
   let(:address_params) do
     {
@@ -18,7 +19,7 @@ RSpec.describe Applicants::AddressForm, type: :form do
     }
   end
 
-  subject(:form) { described_class.new(address_params.merge(applicant_id: applicant_id)) }
+  subject(:form) { described_class.new(address_params.merge(model: address)) }
 
   describe 'validations' do
     it 'is valid with all the required attributes' do

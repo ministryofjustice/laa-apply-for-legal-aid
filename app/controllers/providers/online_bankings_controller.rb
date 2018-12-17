@@ -4,7 +4,7 @@ module Providers
     include Steppable
 
     def show
-      @form = Applicants::UsesOnlineBankingForm.new(current_params)
+      @form = Applicants::UsesOnlineBankingForm.new(model: applicant)
     end
 
     def update
@@ -33,12 +33,6 @@ module Providers
 
     def form_params
       applicant_params.merge(model: applicant)
-    end
-
-    def current_params
-      return unless applicant
-
-      applicant.attributes.symbolize_keys.slice(:uses_online_banking)
     end
   end
 end

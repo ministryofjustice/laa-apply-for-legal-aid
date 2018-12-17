@@ -1,10 +1,10 @@
-module Applicants
+module Addresses
   class AddressSelectionForm
     include BaseForm
 
     form_for Address
 
-    attr_accessor :applicant_id, :addresses, :postcode, :address_line_one, :address_line_two, :city, :organisation, :lookup_id
+    attr_accessor :addresses, :postcode, :address_line_one, :address_line_two, :city, :organisation, :lookup_id
 
     before_validation :deserialize_address
 
@@ -16,14 +16,6 @@ module Applicants
     end
 
     private
-
-    def applicant
-      @applicant ||= Applicant.find(applicant_id)
-    end
-
-    def model
-      @model ||= applicant.address || applicant.addresses.build
-    end
 
     def deserialize_address
       return unless lookup_id.present?

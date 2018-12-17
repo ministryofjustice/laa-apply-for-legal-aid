@@ -1,7 +1,7 @@
 module Citizens
   class PercentageHomesController < BaseController
     def show
-      @form = LegalAidApplications::PercentageHomeForm.new(current_params)
+      @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
     end
 
     def update
@@ -18,10 +18,6 @@ module Citizens
 
     def legal_aid_application
       @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
-    end
-
-    def current_params
-      legal_aid_application.attributes.symbolize_keys.slice(:percentage_home)
     end
 
     def percentage_home_params
