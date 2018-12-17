@@ -1,7 +1,8 @@
-module Citizens
-  class OwnHomesController < BaseController
+module Providers
+  class OwnHomesController < ApplicationController
+    include Providers::ApplicationDependable
     def show
-      @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
+      @form = LegalAidApplications::OwnHomeForm.new(current_params)
     end
 
     def update
@@ -9,9 +10,9 @@ module Citizens
 
       if @form.save
         if @form.own_home == 'no'
-          render plain: 'Navigate to question 2a; Do you have any savings or investments'
+          render plain: 'Holding page: 1b Property Value'
         else
-          redirect_to citizens_property_value_path
+          render plain: 'Holding page: Navigate to question 2a; Do you have any savings or investments'
         end
       else
         render :show
@@ -20,6 +21,10 @@ module Citizens
 
     private
 
+    def current_params
+      legal_aid_application.attributes.symbolize_keys.slice(:own_home)
+    end
+
     def own_home_params
       return {} unless params[:legal_aid_application]
       params.require(:legal_aid_application).permit(:own_home)
@@ -27,10 +32,6 @@ module Citizens
 
     def form_params
       own_home_params.merge(model: legal_aid_application)
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

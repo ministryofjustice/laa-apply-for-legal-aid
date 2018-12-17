@@ -18,7 +18,7 @@ RSpec.describe 'citizen own home requests', type: :request do
     before { patch citizens_own_home_path, params: params }
 
     context 'valid params' do
-      let(:params) { { 'legal_aid_application' => { 'own_home' => 'owned_outright' } } }
+      let(:params) { { legal_aid_application: { own_home: 'owned_outright' } } }
 
       it 'updates the record' do
         expect(application.reload.own_home).to eq 'owned_outright'
@@ -31,7 +31,7 @@ RSpec.describe 'citizen own home requests', type: :request do
       end
 
       context 'mortgaged' do
-        let(:params) { { 'legal_aid_application' => { 'own_home' => 'mortgage' } } }
+        let(:params) { { legal_aid_application: { own_home: 'mortgage' } } }
 
         it 'redirects to the property value page' do
           expect(response).to redirect_to(citizens_property_value_path)
@@ -39,7 +39,7 @@ RSpec.describe 'citizen own home requests', type: :request do
       end
 
       context 'no' do
-        let(:params) { { 'legal_aid_application' => { 'own_home' => 'no' } } }
+        let(:params) { { legal_aid_application: { own_home: 'no' } } }
         # TODO: setup redirect when known
         xit 'redirects to the value of your home page' do
           expect(response).to redirect_to(:savings_or_investments_path)
