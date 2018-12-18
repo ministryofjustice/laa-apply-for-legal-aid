@@ -16,7 +16,7 @@ references:
 
   build_containers_config: &build_container_config
     docker:
-    - image: circleci/ruby:2.5.1-node-browsers
+    - image: circleci/ruby:2.5.3-node-browsers
       environment:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
     - image: postgres:10.5
