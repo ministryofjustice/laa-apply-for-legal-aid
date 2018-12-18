@@ -1,4 +1,4 @@
-FROM ministryofjustice/ruby:2.5.1-webapp-onbuild
+FROM ministryofjustice/ruby:2.5.3-webapp-onbuild
 MAINTAINER apply for legal aid team
 
 ENV RAILS_ENV production

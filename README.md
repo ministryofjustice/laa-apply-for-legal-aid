@@ -6,7 +6,7 @@ may well be used to fire requests to other services.
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master)
 
 * Ruby version
-    * Ruby version 2.5.1
+    * Ruby version 2.5.3
     * Rails 5
 
 * System dependencies
