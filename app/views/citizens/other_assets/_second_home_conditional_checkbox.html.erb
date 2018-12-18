@@ -1,4 +1,3 @@
-
 <%
   check_box_attribute = 'check_box_second_home'
   conditional_div_id = 'conditional_second_home'
@@ -20,6 +19,6 @@
 
   <%= form.govuk_text_field :second_home_mortgage, input_prefix: t('currency.gbp'), value: number_to_currency(value2, unit: ''), class: 'govuk-!-width-one-third' %>
   <div class="govuk-!-width-one-third">
-      <%= form.govuk_text_field :second_home_percentage, value: number_to_currency(value3, unit: ''), class: 'govuk-input govuk-input--width-5 input-percentage', suffix: ' %' %>
+      <%= form.govuk_text_field :second_home_percentage, value: number_to_currency(value3, unit: ''), class: 'govuk-input govuk-input--width-5 input-percentage', suffix: '%' %>
   </div>
 </div>

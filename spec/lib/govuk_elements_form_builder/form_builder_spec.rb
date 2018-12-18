@@ -69,6 +69,14 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       end
     end
 
+    context 'suffix' do
+      let(:params) { [:email, suffix: 'litres'] }
+
+      it 'shows the suffix' do
+        expect(subject).to include %(<span class="input-suffix"> litres</span></div>)
+      end
+    end
+
     context 'adding a custom class to the input' do
       let(:custom_class) { 'govuk-!-width-one-third' }
       let(:params) { [:email, class: custom_class] }

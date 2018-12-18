@@ -31,6 +31,7 @@ module GovukElementsFormBuilder
     #
     def govuk_text_field(attribute, options = {})
       options[:class] = text_field_classes(attribute, options)
+      suffix = options.delete(:suffix)
       input_text_form_group(attribute, options) do
         input_prefix = options[:input_prefix]
         tag_options = options.except(*CUSTOM_OPTIONS)
@@ -38,7 +39,8 @@ module GovukElementsFormBuilder
         tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
         tag = text_field(attribute, tag_options)
 
-        input_prefix ? input_prefix_group(input_prefix) { tag } : tag
+        tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
+        tag = suffix ? suffix_span_tag(suffix) { tag } : tag
       end
     end
 
@@ -119,7 +121,6 @@ module GovukElementsFormBuilder
       value_attr = args[0].is_a?(Hash) ? nil : args[0]
       label_attr = args[1].is_a?(Hash) ? nil : args[1]
       [value_attr, label_attr]
-
     end
 
     def collection_radio_buttons_classes(attribute, options)
@@ -143,6 +144,13 @@ module GovukElementsFormBuilder
           concat_tags(prefix, yield)
         end
       end
+    end
+
+    def suffix_span_tag(suffix)
+      span_tag = content_tag :span, class: 'input-suffix' do
+        " #{suffix}"
+      end
+      yield + span_tag
     end
 
     def input_text_form_group(attribute, options)
