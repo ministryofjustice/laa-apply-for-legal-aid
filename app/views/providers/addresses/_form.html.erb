@@ -54,7 +54,7 @@
 
       <%= form.govuk_text_field :city, class: 'govuk-!-width-two-thirds' %>
       <%= form.govuk_text_field :county, class: 'govuk-!-width-two-thirds' %>
-      <%= form.govuk_text_field :postcode, hide_hint?: true, class: 'govuk-input--width-10' %>
+      <%= form.govuk_text_field :postcode, hint: nil, class: 'govuk-input--width-10' %>
 
       <%= form.submit 'Continue', id: 'continue', class: 'govuk-button' %>
     <% end %>

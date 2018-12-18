@@ -5,7 +5,7 @@ module GovukElementsFormBuilder
     # https://guides.rubyonrails.org/configuring.html#configuring-action-view
     ActionView::Base.field_error_proc = proc { |html_tag| html_tag.html_safe }
 
-    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hide_hint? title inline].freeze
+    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline].freeze
 
     delegate :content_tag, to: :@template
     delegate :errors, to: :@object
@@ -13,17 +13,21 @@ module GovukElementsFormBuilder
     # Usage:
     # <%= form.govuk_text_field :name %>
     #
-    # A hint will be displayed if it is defined in the locale file:
+    # You can specify the label and hint copies:
+    # e.g., <%= form.govuk_text_field :name, label: 'Enter your name', hint: 'Your real name' %>
+    #
+    # Otherwise, label and hints are to be defined in the locale file:
     # 'helpers.hint.user.name'
+    # 'helpers.label.user.name'
+    #
+    # Use the "hint: nil" option to not display the hint message.
+    # e.g., <%= form.govuk_text_field :name, hint: nil %>
     #
     # Use the :input_prefix to insert a character inside and at the beginning of the input field.
     # e.g., <%= form.govuk_text_field :property_value, input_prefix: '$' %>
     #
     # Use :field_with_error to have the input be marked as erroneous when an other attribute has an error.
     # e.g., <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
-    #
-    # Use the hide_hint? option to not display the hint message.
-    # e.g., <%= form.govuk_text_field :name, hide_hint?: true %>
     #
     def govuk_text_field(attribute, options = {})
       options[:class] = text_field_classes(attribute, options)
@@ -144,7 +148,7 @@ module GovukElementsFormBuilder
       classes = ['govuk-form-group']
       classes << 'govuk-form-group--error' if error?(attribute, options)
       content_tag :div, class: classes.join(' ') do
-        label = label(attribute, class: 'govuk-label', for: attribute)
+        label = label(attribute, options[:label], class: 'govuk-label', for: attribute)
         concat_tags(label, hint_and_error_tags(attribute, options), yield)
       end
     end
@@ -174,17 +178,19 @@ module GovukElementsFormBuilder
     end
 
     def hint?(attribute, options)
-      !options[:hide_hint?] && hint_message(attribute)
+      return false if options.key?(:hint) && options[:hint].blank?
+
+      hint_message(attribute, options).present?
     end
 
-    def hint_message(attribute)
-      I18n.translate("helpers.hint.#{@object_name}.#{attribute}", default: nil)
+    def hint_message(attribute, options)
+      options[:hint].presence || I18n.translate("helpers.hint.#{@object_name}.#{attribute}", default: nil)
     end
 
     def hint_tag(attribute, options)
       return unless hint?(attribute, options)
 
-      content_tag(:span, hint_message(attribute), class: 'govuk-hint', id: "#{attribute}-hint")
+      content_tag(:span, hint_message(attribute, options), class: 'govuk-hint', id: "#{attribute}-hint")
     end
 
     def error_tag(attribute, options)

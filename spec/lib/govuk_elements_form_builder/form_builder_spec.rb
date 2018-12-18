@@ -47,12 +47,25 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       expect(input['aria-describedby']).to eq("#{attribute}-hint")
     end
 
-    context 'hide_hint?: true' do
-      let(:params) { [:email, hide_hint?: true] }
+    context 'hint: nil' do
+      let(:params) { [:email, hint: nil] }
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-hint')
         expect(input['aria-describedby']).to eq('')
+      end
+    end
+
+    context 'pass a label parameter' do
+      let(:custom_label) { "Your client's email" }
+      let(:params) { [:email, label: custom_label] }
+
+      it 'shows the custom label' do
+        label = input.parent.at_css('label')
+
+        expect(label.classes).to include('govuk-label')
+        expect(label[:for]).to eq('email')
+        expect(label.content).to eq(custom_label)
       end
     end
 
