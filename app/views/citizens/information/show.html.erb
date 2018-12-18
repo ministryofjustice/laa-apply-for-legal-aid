@@ -1,32 +1,32 @@
 <% content_for :navigation do %>
-  <%= link_to 'Back', citizens_legal_aid_application_path(id: session[:current_application_ref]), class: 'govuk-back-link', id: 'back' %>
+  <%= link_to t('generic.back'), citizens_legal_aid_application_path(id: session[:current_application_ref]), class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<h1 class="govuk-heading-xl">Give one-time access to your bank accounts</h1>
+<h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <p class="govuk-body">You will be redirected to a secure service to sign in to your online banking.</p>
-    <p class="govuk-body">You will need to share all of your bank accounts, including any in joint names or with no money.</p>
+    <p class="govuk-body"><%= t('.para_1') %></p>
+    <p class="govuk-body"><%= t('.para_2') %></p>
     <br />
     <div class="govuk-warning-text">
       <span class="govuk-warning-text__icon" aria-hidden="true">i</span>
       <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Information</span>
-        How we connect to your online banking
+        <span class="govuk-warning-text__assistive"><%= t('generic.information') %></span>
+        <%= t('.list.title') %>
       </strong>
     </div>
 
     <p class="govuk-body">
       <ul class="govuk-list govuk-list--bullet">
-        <li>Sign in and authorise access to your accounts</li>
-        <li>We download 3 months of transactions</li>
-        <li>Your online banking details are not saved</li>
+        <li> <%= t('.list.item_1') %> </li>
+        <li> <%= t('.list.item_2') %> </li>
+        <li> <%= t('.list.item_3') %> </li>
       </ul>
     </p>
 
-    <%= link_to 'Continue', citizens_consent_path, class: 'govuk-button govuk-button', id: 'continue' %>
+    <%= link_to t('generic.continue'), citizens_consent_path, class: 'govuk-button govuk-button', id: 'continue' %>
 
   </div>
 </div>

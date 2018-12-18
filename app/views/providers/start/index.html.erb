@@ -3,26 +3,26 @@
   <% end %>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">Apply for Legal Aid</h1>
-      <p class="govuk-body">Use this service to apply for civil legal aid for cases involving:</p>
+      <h1 class="govuk-heading-xl"><%= t('.apply_for_legal_aid_heading') %></h1>
+      <p class="govuk-body"><%= t('.apply_civil_legal_para') %></p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>public family law</li>
-        <li>domestic violence or abuse</li>
+        <li><%= t('.apply_civil_legal_list.item_1') %></li>
+        <li><%= t('.apply_civil_legal_list.item_2') %></li>
       </ul>
 
-      <p class="govuk-body">Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.</p>
+      <p class="govuk-body"><%= t('.use_ccms_para') %></p>
 
-      <h2 class="govuk-heading-m">Who can use this service?</h2>
+      <h2 class="govuk-heading-m"><%= t('.use_ccms_list.heading') %></h2>
 
-      <p class="govuk-body">You can only use this service if your client:</p>
+      <p class="govuk-body"><%= t('.use_ccms_list.title') %></p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>has a National Insurance number</li>
-        <li>uses online banking</li>
-        <li>is single, does not have an income, or their partner is the opponent in the case</li>
+        <li><%= t('.use_ccms_list.item_1') %></li>
+        <li><%= t('.use_ccms_list.item_2') %></li>
+        <li><%= t('.use_ccms_list.item_3') %></li>
       </ul>
-      <p class="govuk-body">You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.</p>
+      <p class="govuk-body"><%= t('.use_ccms_upload_document') %></p>
 
-      <%= link_to 'Start', providers_legal_aid_applications_path, class: 'govuk-button govuk-button--start', id: 'start' %>
+      <%= link_to t('generic.start'), providers_legal_aid_applications_path, class: 'govuk-button govuk-button--start', id: 'start' %>
 
     </div>
 
@@ -32,13 +32,13 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <h3 class="govuk-heading-m">Related content</h3>
+    <h3 class="govuk-heading-m"><%= t('.related_content_list.title') %></h3>
     <ul class="govuk-list">
       <li>
-        <a href="#" class="govuk-link govuk-body govuk-!-font-size-16">Legal aid</a>
+        <a href="#" class="govuk-link govuk-body govuk-!-font-size-16"><%= t('.related_content_list.item_1') %></a>
       </li>
       <li>
-        <a href="#" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">More</a>
+        <a href="#" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold govuk-body govuk-!-font-size-16"><%= t('.related_content_list.item_2') %></a>
       </li>
     </ul>
     </div>

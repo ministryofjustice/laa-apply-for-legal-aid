@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= link_to 'Back', citizens_consent_path, class: 'govuk-back-link', id: 'back' %>
+  <%= link_to t('generic.back'), citizens_consent_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 <h1 class="govuk-heading-xl"><%= t '.heading_1' %></h1>
 <p>
@@ -49,7 +49,6 @@
 
   </table>
 <% end %>
-
 <div class="govuk-!-padding-top-3">
-  <%= link_to 'Continue', citizens_additional_accounts_path, class: 'govuk-button', id: 'continue' %>
+  <%= link_to t('generic.continue'), citizens_additional_accounts_path, class: 'govuk-button', id: 'continue' %>
 </div>

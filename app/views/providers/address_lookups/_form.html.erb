@@ -23,9 +23,9 @@
 
       <%= form.govuk_text_field :postcode, class: 'govuk-input--width-10' %>
 
-      <%= form.submit 'Find address', id: 'find-address', class: 'govuk-button' %>
+      <%= form.submit t('forms.address_lookup.submit_button'), id: 'find-address', class: 'govuk-button' %>
 
-      <p><%= link_to 'Enter address manually', providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
+      <p><%= link_to t('forms.address_lookup.address_manual_link'), providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
     <% end %>
   </div>
 </div>
