@@ -1,7 +1,7 @@
 <%
   check_box_attribute = "check_box_#{attribute}"
   conditional_div_id = "conditional_#{attribute}"
-  hint = I18n.translate("helpers.hint.#{check_box_attribute}", default: nil)
+  hint = I18n.translate("helpers.hint.#{model.model_name.i18n_key}.#{check_box_attribute}", default: nil)
   value = model.send(attribute)
   checked = value.present? || model.send(check_box_attribute).present? ? 'checked' : ''
 %>

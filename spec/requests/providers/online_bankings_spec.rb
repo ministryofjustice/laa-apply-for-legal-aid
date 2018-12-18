@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'does client use online banking requests', type: :request do
-  let(:applicant) { create :applicant }
+  let(:applicant) { create :applicant, uses_online_banking: nil }
   let(:application) { create :legal_aid_application, applicant: applicant }
   let(:application_id) { application.id }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/applicant' do
+  describe 'GET /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
     subject { get "/providers/applications/#{application_id}/does-client-use-online-banking" }
 
     it 'returns http success' do
@@ -28,7 +28,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/applicant' do
+  describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
     let(:params) do
       {
         applicant: { uses_online_banking: uses_online_banking }
