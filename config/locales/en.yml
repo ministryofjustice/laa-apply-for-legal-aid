@@ -24,11 +24,6 @@ en:
         uses_online_banking:
           'true': 'Yes'
           'false': 'No'
-      legal_aid_application:
-        own_home:
-          mortgage: Yes, with a mortage or loan
-          owned_outright: Yes, owned outright
-          not: "No"
   shared:
     forms:
       date_input_fields:
@@ -374,11 +369,11 @@ en:
         back_button: "Back to your applications"
     own_homes:
       show:
-        h1-heading: Do you own the home that you live in?
+        h1-heading: Does your client own the home that they live in?
         own_home:
           mortgage: Yes, with a mortage or loan
           owned_outright: Yes, owned outright
-          not: "No"
+          "no": "No"
 
   citizens:
     accounts:
@@ -426,6 +421,10 @@ en:
     own_homes:
       show:
         h1-heading: Do you own the home that you live in?
+        own_home:
+          mortgage: Yes, with a mortage or loan
+          owned_outright: Yes, owned outright
+          "no": "No"
     property_values:
       show:
         field_set_header: How much is your home worth?

@@ -41,9 +41,7 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :own_home, only: %i[show update]
-      resources :check_benefits, only: [:index] do
-        get :passported, on: :collection
-      end
+      resources :check_benefits, only: [:index]
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection

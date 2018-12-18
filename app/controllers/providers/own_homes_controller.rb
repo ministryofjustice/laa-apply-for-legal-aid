@@ -1,6 +1,7 @@
 module Providers
   class OwnHomesController < ApplicationController
-    include Providers::ApplicationDependable
+    include ApplicationDependable
+    include Steppable
     def show
       @form = LegalAidApplications::OwnHomeForm.new(current_params)
     end
@@ -10,9 +11,9 @@ module Providers
 
       if @form.save
         if @form.own_home_no?
-          render plain: 'Holding page: 1b Property Value'
+          render plain: 'Holding page: 2a. Does your client have any savings or investments?'
         else
-          render plain: 'Holding page: Navigate to question 2a; Do you have any savings or investments'
+          render plain: 'Holding page: 1b. How much is your client’s home worth'
         end
       else
         render :show
@@ -27,6 +28,7 @@ module Providers
 
     def own_home_params
       return {} unless params[:legal_aid_application]
+
       params.require(:legal_aid_application).permit(:own_home)
     end
 

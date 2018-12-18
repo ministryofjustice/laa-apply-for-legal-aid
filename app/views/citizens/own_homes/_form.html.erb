@@ -1,8 +1,17 @@
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= form_with(model: @form, url: citizens_own_home_path, method: :patch, local: true) do |form| %>
+    <%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
-      <%= form.govuk_collection_radio_buttons(:own_home, %w[mortgage owned_outright no], title: content_for(:page_title)) %>
+      <%
+        options = [
+          { value: :mortgage,       label: action_t('.own_home.mortgage') },
+          { value: :owned_outright, label: action_t('.own_home.owned_outright') },
+          { value: :no,             label: action_t('.own_home.no') }
+        ]
+      %>
+
+      <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label, title: content_for(:page_title)) %>
 
       <div class="govuk-!-padding-bottom-6"></div>
 

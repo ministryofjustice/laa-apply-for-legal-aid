@@ -22,6 +22,7 @@ module Citizens
 
     def own_home_params
       return {} unless params[:legal_aid_application]
+
       params.require(:legal_aid_application).permit(:own_home)
     end
 

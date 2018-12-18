@@ -4,6 +4,4 @@
 
 <% content_for(:page_title) { t('.h1-heading') } %>
 
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
-
-<%= render 'form' %>
+<%= render 'form', form_path: citizens_own_home_path %>

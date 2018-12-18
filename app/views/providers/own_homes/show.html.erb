@@ -1,7 +1,7 @@
 <% content_for :navigation do %>
-  <%= link_to t('generic.back'), citizens_consent_path(id: session[:current_application_ref]), class: 'govuk-back-link', id: 'back' %>
+  <%= provider_back_link t('generic.back') %>
 <% end %>
 
 <% content_for(:page_title) { t('.h1-heading') } %>
 
-<%= render 'citizens/own_homes/form' %>
+<%= render 'citizens/own_homes/form', form_path: providers_legal_aid_application_own_home_path(@legal_aid_application) %>
