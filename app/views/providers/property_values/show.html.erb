@@ -1,7 +1,7 @@
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <% content_for :navigation do %>
-    <%= link_to t('generic.back'), new_citizens_additional_account_path, class: 'govuk-back-link', id: 'back' %>
+  <%= link_to t('generic.back'), passported_providers_legal_aid_application_check_benefits_path(@legal_aid_application.id), class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
 <div class="govuk-grid-row">
@@ -12,4 +12,4 @@
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
 
-<%= render partial: 'form', locals: { model: @form, url: citizens_property_value_path } %>
+<%= render partial: '/citizens/property_values/form', locals: { model: @form, url: providers_legal_aid_application_property_value_path } %>

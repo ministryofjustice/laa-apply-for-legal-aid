@@ -1,0 +1,18 @@
+<%= form_with(model: model, scope: :legal_aid_application, url: url, method: :patch, local: true) do |form| %>
+
+  <%= govuk_form_group(
+        show_error_if: form.object.errors[:property_value].present?,
+        input: :property_value
+      ) do %>
+
+    <%= form.govuk_text_field :property_value,
+                              label: controller_t('property_value'),
+                              hint: controller_t('hint.property_value'),
+                              value: number_to_currency(model.property_value, unit: ''),
+                              input_prefix: t('currency.gbp'),
+                              class: 'govuk-input govuk-!-width-one-third' %>
+  <% end %>
+
+  <%= govuk_submit_button t('generic.continue') %>
+
+<% end %>
