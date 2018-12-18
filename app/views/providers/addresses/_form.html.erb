@@ -10,6 +10,8 @@
           local: true
         ) do |form| %>
 
+      <%= hidden_field_tag :redirect_path, params[:redirect_path] if params[:redirect_path] %>
+
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
       <h1 class="govuk-fieldset__heading">
         <% if form.object.lookup_error.present? %>

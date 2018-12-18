@@ -45,17 +45,17 @@ module Providers
       }
     }.freeze
 
-    PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE = [
-      :providers_legal_aid_applications_path
+    PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE = %i[
+      providers_legal_aid_applications_path
     ].freeze
 
-    CHECK_YOUR_ANSWERS_STEP = :providers_legal_aid_application_check_provider_answers_path
-
-    CONTROLLERS_THAT_GO_FORWARD_NORMALLY_DURING_REVIEW = [:address_lookups].freeze
+    MULTI_STEPS_CONTROLLERS = %i[address_lookups].freeze
 
     included do
       # Define @back_step_url in controller to over-ride behaviour
       def back_step_url
+        return redirect_path if redirect_path
+
         raise "back step not found for controller name #{controller_name}" unless current_back_method || @back_step_url
 
         @back_step_url ||= send(current_back_method, with_legal_aid_application_if_needed(current_back_method))
@@ -63,22 +63,24 @@ module Providers
       helper_method :back_step_url
 
       def next_step_url
+        return redirect_path if redirect_path && !ignore_redirect_path?
+
         raise "forward step not found for controller name #{controller_name}" unless current_next_method
 
-        send current_next_method, with_legal_aid_application_if_needed(current_next_method)
+        options = {}
+        options[:redirect_path] = redirect_path if ignore_redirect_path? && redirect_path
+
+        send current_next_method, with_legal_aid_application_if_needed(current_next_method), options
       end
+      helper_method :next_step_url
 
       private
 
       def current_next_method
-        return CHECK_YOUR_ANSWERS_STEP if !ignore_checking_answers? && checking_answers?
-
         @current_next_method ||= STEPS.dig controller_name.to_sym, :forward
       end
 
       def current_back_method
-        return CHECK_YOUR_ANSWERS_STEP if checking_answers?
-
         @current_back_method ||= STEPS.dig controller_name.to_sym, :back
       end
 
@@ -88,14 +90,12 @@ module Providers
         legal_aid_application
       end
 
-      def checking_answers?
-        return unless @legal_aid_application
-
-        legal_aid_application.checking_answers?
+      def redirect_path
+        @redirect_path ||= params[:redirect_path].presence
       end
 
-      def ignore_checking_answers?
-        CONTROLLERS_THAT_GO_FORWARD_NORMALLY_DURING_REVIEW.include? controller_name.to_sym
+      def ignore_redirect_path?
+        MULTI_STEPS_CONTROLLERS.include? controller_name.to_sym
       end
     end
   end

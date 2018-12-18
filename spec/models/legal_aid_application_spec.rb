@@ -107,7 +107,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'but later, state changes' do
         before do
-          legal_aid_application.check_your_answers!
+          legal_aid_application.provider_submit!
         end
 
         it 'returns false' do

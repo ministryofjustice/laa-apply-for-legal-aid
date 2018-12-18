@@ -35,19 +35,18 @@ RSpec.describe 'providers applicant requests', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/applicant' do
-    let(:params) do
+    let(:applicant_params) do
       {
-        applicant: {
-          first_name: 'John',
-          last_name: 'Doe',
-          national_insurance_number: 'AA 12 34 56 C',
-          dob_year: '1981',
-          dob_month: '07',
-          dob_day: '11',
-          email: Faker::Internet.safe_email
-        }
+        first_name: 'John',
+        last_name: 'Doe',
+        national_insurance_number: 'AA 12 34 56 C',
+        dob_year: '1981',
+        dob_month: '07',
+        dob_day: '11',
+        email: Faker::Internet.safe_email
       }
     end
+    let(:params) { { applicant: applicant_params } }
     let(:patch_request) { patch "/providers/applications/#{application_id}/applicant", params: params }
 
     it 'redirects provider to next step of the submission' do
@@ -64,7 +63,12 @@ RSpec.describe 'providers applicant requests', type: :request do
     end
 
     context 'when the legal aid application is in checking_answers state' do
-      let(:application) { create(:legal_aid_application, state: :checking_answers) }
+      let(:params) do
+        {
+          applicant: applicant_params,
+          redirect_path: providers_legal_aid_application_check_provider_answers_path(application_id)
+        }
+      end
 
       it 'redirects to check_your_answers page' do
         patch_request

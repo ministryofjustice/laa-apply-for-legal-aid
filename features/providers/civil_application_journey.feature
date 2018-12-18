@@ -56,7 +56,7 @@ Feature: Civil application journeys
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
     Then I should be on the Check Your Answers page
-    Then I click "Continue"
+    Then I click link "Continue"
     Then I am on the benefit check results page
     When I click "Continue"
     Then I am on the client use online banking page
@@ -82,7 +82,7 @@ Feature: Civil application journeys
     Then I enter postcode 'SW1H 9AJ'
     Then I click "Continue"
     Then I should be on the Check Your Answers page
-    Then I click "Continue"
+    Then I click link "Continue"
     Then I am on the benefit check results page
     When I click "Continue"
     Then I am on the client use online banking page
@@ -106,7 +106,7 @@ Feature: Civil application journeys
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
     Then I should be on the Check Your Answers page
-    Then I click "Continue"
+    Then I click link "Continue"
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen receives benefits
 
@@ -124,7 +124,7 @@ Feature: Civil application journeys
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
     Then I should be on the Check Your Answers page
-    Then I click "Continue"
+    Then I click link "Continue"
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen does not receive benefits
 

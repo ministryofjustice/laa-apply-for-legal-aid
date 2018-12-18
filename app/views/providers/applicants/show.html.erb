@@ -23,6 +23,8 @@
             local: true
           ) do |form| %>
 
+        <%= hidden_field_tag :redirect_path, params[:redirect_path] if params[:redirect_path] %>
+
         <div class="govuk-!-padding-bottom-2"></div>
 
         <%= form.govuk_text_field :first_name, class: 'govuk-!-width-one-half' %>
