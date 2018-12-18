@@ -7,7 +7,6 @@
 require 'cucumber/rails'
 require 'capybara'
 require 'capybara/cucumber'
-require 'capybara/poltergeist'
 require 'selenium/webdriver'
 require 'webmock/cucumber'
 
@@ -29,14 +28,6 @@ end
 
 Capybara.default_driver = :headless_chrome
 Capybara.javascript_driver = :headless_chrome
-
-if ENV['BROWSER'] == 'poltergeist'
-  Capybara.javascript_driver = :poltergeist
-
-  Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: true)
-  end
-end
 
 if ENV['BROWSER'] == 'chrome'
   Capybara.register_driver :chrome do |app|
