@@ -4,4 +4,4 @@
 
 <% content_for(:page_title) { t('.h1-heading') } %>
 
-<%= render 'citizens/own_homes/form', form_path: providers_legal_aid_application_own_home_path(@legal_aid_application) %>
+<%= render 'shared/forms/own_home_form', form_path: providers_legal_aid_application_own_home_path(@legal_aid_application) %>

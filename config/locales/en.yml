@@ -370,7 +370,7 @@ en:
     own_homes:
       show:
         h1-heading: Does your client own the home that they live in?
-        own_home:
+        own_home: &own_home_form_labels
           mortgage: Yes, with a mortage or loan
           owned_outright: Yes, owned outright
           "no": "No"
@@ -422,9 +422,7 @@ en:
       show:
         h1-heading: Do you own the home that you live in?
         own_home:
-          mortgage: Yes, with a mortage or loan
-          owned_outright: Yes, owned outright
-          "no": "No"
+          <<: *own_home_form_labels
     property_values:
       show:
         field_set_header: How much is your home worth?
