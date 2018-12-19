@@ -173,4 +173,64 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#own_home?' do
+    context 'legal_aid_application.own_home is nil' do
+      before { legal_aid_application.update!(own_home: nil) }
+      it 'returns false' do
+        expect(legal_aid_application.own_home?).to eq(false)
+      end
+    end
+
+    context 'legal_aid_application.own_home is "no"' do
+      before { legal_aid_application.update!(own_home: 'no') }
+      it 'returns false' do
+        expect(legal_aid_application.own_home?).to eq(false)
+      end
+    end
+
+    context 'legal_aid_application.own_home is not "no"' do
+      before { legal_aid_application.update!(own_home: :mortgage) }
+      it 'returns true' do
+        expect(legal_aid_application.own_home?).to eq(true)
+      end
+    end
+  end
+
+  describe '#own_capital?' do
+    before do
+      legal_aid_application.update!(
+        own_home: nil,
+        other_assets_declaration: nil,
+        savings_amount: nil
+      )
+    end
+
+    context 'no home, savings or assets' do
+      it 'returns nil' do
+        expect(legal_aid_application.own_capital?).to eq(nil)
+      end
+    end
+
+    context 'own home' do
+      before { legal_aid_application.update!(own_home: :owned_outright) }
+      it 'returns true' do
+        expect(legal_aid_application.own_capital?).to eq(true)
+      end
+    end
+
+    context 'has some assets' do
+      before { legal_aid_application.update!(other_assets_declaration: create(:other_assets_declaration, :with_all_values)) }
+      it 'returns true' do
+        expect(legal_aid_application.own_capital?).to eq(true)
+      end
+    end
+
+    context 'has some savings' do
+      before { legal_aid_application.update!(savings_amount: create(:savings_amount, :with_values)) }
+      it 'returns true' do
+        expect(legal_aid_application.own_capital?).to eq(true)
+      end
+    end
+  end
 end

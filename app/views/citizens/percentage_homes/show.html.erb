@@ -1,9 +1,7 @@
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <% content_for :navigation do %>
-  <!-- TODO: navigate to "1d. shared ownership"  -->
-
-  <%= link_to 'Back', citizens_additional_accounts_path, class: 'govuk-back-link', id: 'back' %>
+  <%= link_to t('generic.back'), back_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>

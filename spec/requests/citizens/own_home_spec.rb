@@ -40,14 +40,9 @@ RSpec.describe 'citizen own home requests', type: :request do
 
       context 'no' do
         let(:params) { { legal_aid_application: { own_home: 'no' } } }
-        # TODO: setup redirect when known
-        xit 'redirects to the value of your home page' do
-          expect(response).to redirect_to(:savings_or_investments_path)
-        end
 
-        # TODO: remove when redirect set up
-        it 'displays holding text' do
-          expect(response.body).to eq 'Navigate to question 2a; Do you have any savings or investments'
+        it 'redirects to the value of your home page' do
+          expect(response).to redirect_to(citizens_savings_and_investment_path)
         end
       end
     end

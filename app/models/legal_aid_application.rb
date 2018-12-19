@@ -100,6 +100,14 @@ class LegalAidApplication < ApplicationRecord
     SHARED_OWNERSHIP_YES_REASONS.include?(shared_ownership)
   end
 
+  def own_home?
+    own_home.present? && !own_home_no?
+  end
+
+  def own_capital?
+    own_home? || other_assets_declaration&.positive? || savings_amount&.positive?
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

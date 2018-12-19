@@ -23,15 +23,8 @@ RSpec.describe 'citizen outstanding mortgage request', type: :request do
     end
     subject { patch citizens_outstanding_mortgage_path, params: params }
 
-    xit 'redirects to the next step in Citizen jouney' do
-      # TODO: - set redirect path when known
-      expect(response).to redirect_to(:some_path)
-    end
-
-    it 'displays holding page' do
-      # TODO: Delete when redirect set
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to match('Landing page')
+    it 'redirects to the next step in Citizen jouney' do
+      expect(response).to redirect_to(citizens_shared_ownership_path)
     end
 
     it 'updates the legal_aid_application' do

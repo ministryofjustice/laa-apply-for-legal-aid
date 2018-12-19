@@ -55,7 +55,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
       it 'displays a holding page' do
         # TODO: - replace with 'redirects to check your answers'
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Holding page')
+        expect(response.body).to include('citizens_check_answers_path')
       end
     end
 
