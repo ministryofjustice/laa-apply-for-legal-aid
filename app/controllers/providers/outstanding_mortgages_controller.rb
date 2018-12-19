@@ -1,5 +1,7 @@
 module Providers
   class OutstandingMortgagesController < BaseController
+    include Steppable
+    
     def show
       @form = LegalAidApplications::OutstandingMortgageForm.new(model: legal_aid_application)
     end
