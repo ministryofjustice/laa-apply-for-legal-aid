@@ -3,7 +3,7 @@ module Providers
     include ApplicationDependable
     include Steppable
     def show
-      @form = LegalAidApplications::OwnHomeForm.new(current_params)
+      @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
     end
 
     def update
@@ -21,10 +21,6 @@ module Providers
     end
 
     private
-
-    def current_params
-      legal_aid_application.attributes.symbolize_keys.slice(:own_home)
-    end
 
     def own_home_params
       return {} unless params[:legal_aid_application]
