@@ -29,6 +29,10 @@ en:
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
+      own_home_form:
+        mortgage: Yes, with a mortage or loan
+        owned_outright: Yes, owned outright
+        "no": "No"
     page-title:
       suffix: Apply for legal aid
   activemodel:
@@ -370,10 +374,6 @@ en:
     own_homes:
       show:
         h1-heading: Does your client own the home that they live in?
-        own_home: &own_home_form_labels
-          mortgage: Yes, with a mortage or loan
-          owned_outright: Yes, owned outright
-          "no": "No"
 
   citizens:
     accounts:
@@ -421,8 +421,6 @@ en:
     own_homes:
       show:
         h1-heading: Do you own the home that you live in?
-        own_home:
-          <<: *own_home_form_labels
     property_values:
       show:
         field_set_header: How much is your home worth?

@@ -2,6 +2,7 @@ module Providers
   class OwnHomesController < ApplicationController
     include ApplicationDependable
     include Steppable
+
     def show
       @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
     end
