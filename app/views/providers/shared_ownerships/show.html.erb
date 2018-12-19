@@ -3,4 +3,5 @@
 <% end %>
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
-<%= render 'shared/forms/shared_ownership_form', form_path: citizens_shared_ownership_path, journey_path: 'providers' %>
+
+<%= render 'shared/forms/shared_ownership_form', form_path: providers_legal_aid_application_shared_ownership_path(@legal_aid_application), journey_path: 'citizens' %>
