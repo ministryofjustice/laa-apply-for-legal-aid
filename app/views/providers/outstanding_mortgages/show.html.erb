@@ -1,0 +1,7 @@
+<% content_for :navigation do %>
+  <%# <%= link_to t('generic.back'), providers_legal_aid_application_online_banking_path(@legal_aid_application.id), class: 'govuk-back-link', id: 'back' %> %>
+<% end %>
+
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
+
+<%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form, url: providers_legal_aid_application_outstanding_mortgage_path } %>

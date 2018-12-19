@@ -21,6 +21,8 @@ en:
           'false': 'No'
   shared:
     forms:
+      outstanding_mortgage_form:
+        field_set_header: What is the outstanding mortgage on your client's home?
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'

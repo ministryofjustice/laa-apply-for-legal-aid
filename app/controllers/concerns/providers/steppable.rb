@@ -61,6 +61,10 @@ module Providers
         # forward: to be determined,
         back: :providers_legal_aid_application_check_benefits_path
       }
+      outstanding_mortgage: {
+        # forward: property share path
+        # TO DO set the correct path for back
+        back: :providers_legal_aid_application_online_banking_path
     }.freeze
 
     PATHS_NOT_REQUIRING_LEGAL_AID_APPLICATION_INSTANCE = [
