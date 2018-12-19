@@ -367,6 +367,9 @@ en:
     online_bankings:
       show:
         heading: Does your client use online banking?
+    other_assets:
+      show:
+        h1-heading: Does your client have any of the following?
     check_provider_answers:
       index:
         title: Check your answers
