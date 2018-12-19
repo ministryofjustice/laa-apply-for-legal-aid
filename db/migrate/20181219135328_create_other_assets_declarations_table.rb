@@ -14,8 +14,7 @@ class CreateOtherAssetsDeclarationsTable < ActiveRecord::Migration[5.2]
       t.decimal :money_owed_value
       t.decimal :trust_value
       t.timestamps
-      t.index [:legal_aid_application_id], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
+      t.index [:legal_aid_application_id], name: 'index_other_assets_declarations_on_legal_aid_application_id', unique: true
     end
   end
 end
-
