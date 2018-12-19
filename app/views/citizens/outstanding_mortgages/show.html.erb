@@ -1,36 +1,9 @@
-<%= render 'shared/forms/error_summary', model: @form %>
+<% content_for(:page_title) { t('.h1-heading') } %>
 
-<fieldset class="govuk-fieldset">
-  <div class="govuk-!-padding-bottom-2"></div>
+<% content_for :navigation do %>
+    <%= link_to t('generic.back'), citizens_property_value_path, class: 'govuk-back-link', id: 'back' %>
+<% end %>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <%= form_with(
-            model: @form,
-            url: citizens_outstanding_mortgage_path,
-            method: :patch,
-            local: true
-          ) do |form| %>
-        <div class="govuk-!-padding-bottom-2"></div>
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
 
-        <%= govuk_form_group(
-              show_error_if: form.object.errors[:outstanding_mortgage_amount].present?,
-              input: :outstanding_mortgage_amount,
-              hint_id: :outstanding_mortgage_amount_hint
-            ) do %>
-
-          <%= govuk_fieldset_header t('.outstanding_mortgage_amount_heading'), padding_below: 6 %>
-          <%= form.govuk_text_field :outstanding_mortgage_amount, input_prefix: t('currency.gbp'), class: 'govuk-!-width-one-third' %>
-        <% end %>
-
-        <div class="govuk-!-padding-bottom-2"></div>
-
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds">
-            <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button govuk-button' %>
-         </div>
-       </div>
-      <% end %>
-    </div>
-  </div>
-</fieldset>
+<%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form, url: citizens_outstanding_mortgage_path } %>

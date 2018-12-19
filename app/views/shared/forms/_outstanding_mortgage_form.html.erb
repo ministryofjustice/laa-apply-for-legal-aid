@@ -4,9 +4,9 @@
         show_error_if: form.object.errors[:outstanding_mortgage_amount].present?,
         input: :outstanding_mortgage_amount
       ) do %>
-    <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
+    <%= govuk_fieldset_header controller_t('.field_set_header'), padding_below: 6 %>
     <%= form.govuk_text_field :outstanding_mortgage_amount,
-                              hint: '',
+                              hint: controller_t('.hint'),
                               value: number_to_currency(model.outstanding_mortgage_amount, unit: ''),
                               input_prefix: t('currency.gbp'),
                               class: 'govuk-!-width-one-third' %>

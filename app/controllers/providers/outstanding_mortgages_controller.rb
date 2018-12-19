@@ -1,13 +1,13 @@
 module Providers
   class OutstandingMortgagesController < BaseController
     include Steppable
-    
+
     def show
       @form = LegalAidApplications::OutstandingMortgageForm.new(model: legal_aid_application)
     end
 
     def update
-      @form = LegalAidApplications::OutstandingMortgageForm.new(edit_params)
+      @form = LegalAidApplications::OutstandingMortgageForm.new(legal_aid_application_params)
 
       if @form.save
         render plain: 'Landing page: 1d. Does your client share ownership of their home?'
@@ -19,12 +19,10 @@ module Providers
 
     private
 
-    def outstanding_mortgage_params
-      params.require(:legal_aid_application).permit(:outstanding_mortgage_amount)
-    end
-
-    def edit_params
-      outstanding_mortgage_params.merge(model: legal_aid_application)
+    def legal_aid_application_params
+      params.require(:legal_aid_application).permit(:outstanding_mortgage_amount).tap do |hash|
+        hash[:model] = legal_aid_application
+      end
     end
 
     def legal_aid_application
