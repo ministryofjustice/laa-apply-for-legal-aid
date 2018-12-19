@@ -4,11 +4,7 @@
   <%= link_to t('generic.back'), passported_providers_legal_aid_application_check_benefits_path(@legal_aid_application.id), class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-  </div>
-</div>
+<%= render partial: 'shared/h1_heading' %>
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
 
