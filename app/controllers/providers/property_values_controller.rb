@@ -1,5 +1,7 @@
 module Providers
   class PropertyValuesController < BaseController
+    include Steppable
+
     def show
       @form = LegalAidApplications::PropertyValueForm.new(model: legal_aid_application)
     end
