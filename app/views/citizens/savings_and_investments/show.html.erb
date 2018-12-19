@@ -19,7 +19,7 @@
                   local: true) do |form| %>
 
       <div class="govuk-checkboxes" data-module="checkboxes">
-        <%= render partial: 'attribute', collection: @attributes, locals: { model: @form, form: form } %>
+        <%= render partial: 'shared/revealing_checkbox/attribute', collection: @attributes, locals: { model: @form, form: form } %>
       </div>
 
       <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
