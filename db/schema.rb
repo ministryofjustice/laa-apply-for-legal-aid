@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_125447) do
+ActiveRecord::Schema.define(version: 2018_12_19_135328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -152,11 +152,29 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
-    t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
-    t.decimal "outstanding_mortgage_amount"
     t.string "shared_ownership"
+    t.decimal "outstanding_mortgage_amount"
+    t.decimal "percentage_home"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
+  end
+
+  create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.decimal "second_home_value"
+    t.decimal "second_home_mortgage"
+    t.decimal "second_home_percentage"
+    t.decimal "timeshare_value"
+    t.decimal "land_value"
+    t.decimal "jewellery_value"
+    t.decimal "vehicle_value"
+    t.decimal "classic_car_value"
+    t.decimal "money_assets_value"
+    t.decimal "money_owed_value"
+    t.decimal "trust_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
 
   create_table "proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
