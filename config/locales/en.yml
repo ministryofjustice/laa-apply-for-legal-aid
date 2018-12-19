@@ -197,37 +197,37 @@ en:
         other_assets_declaration:
           attributes:
             second_home_value:
-              not_a_number: Property value is not a number
+              not_a_number: Estimated value must be an amount of money, like 60,000
               blank: Enter the estimated property value
             second_home_mortgage:
-              not_a_number: Property mortgage is not a number
+              not_a_number: Outstanding mortgage amount must be an amount of money, like 60,000
               blank: Enter outstanding mortgage amount
             second_home_percentage:
-              not_a_number: Property percentage ownership is not a number
+              not_a_number: Ownership share must be percentage, like 33.33
               blank: Enter property percentage share
             timeshare_value:
-              not_a_number: Timeshare value is not a number
+              not_a_number: Estimated timeshare value must be an amount of money, like 60,000
               blank: Enter the estimated timeshare value
             land_value:
-              not_a_number: Land value is not a number
+              not_a_number: Estimated land value must be an amount of money, like 60,000
               blank: Enter the estimated land value
             jewellery_value:
-              not_a_number: Jewellery value is not a number
+              not_a_number: Estimated valuable items value must be an amount of money, like 60,000
               blank: Enter the estimated total value of valuable items
             vehicle_value:
-              not_a_number: Vehicle value is not a number
+              not_a_number: Estimated vehicle value must be an amount of money, like 60,000
               blank: Enter the estimated vehicle value
             classic_car_value:
-              not_a_number: Clasic car value is not a number
+              not_a_number: Estimated classic car value must be an amount of money, like 60,000
               blank: Enter the estimated classic car value
             money_assets_value:
-              not_a_number: Money assets value is not a number
+              not_a_number: Estimated estate value must be an amount of money, like 60,000
               blank: Enter the estimated value of estate
             money_owed_value:
-              not_a_number: Money owed value is not a number
+              not_a_number: Estimated money owed must be an amount of money, like 60,000
               blank: Enter the estimated value of money owed
             trust_value:
-              not_a_number: Trust value is not a number
+              not_a_number: Estimated trust value must be an amount of money, like 60,000
               blank: Enter the estimated value of trust
 
   activerecord:
