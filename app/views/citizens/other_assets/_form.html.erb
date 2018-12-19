@@ -1,0 +1,16 @@
+<%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
+  <div class="govuk-!-padding-bottom-8"></div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" aria-describedby="citizenship-conditional-hint">
+      <div class="govuk-checkboxes" data-module="checkboxes">
+        <%= render partial: 'second_home_conditional_checkbox', locals: { model: model, form: form } %>
+        <%= render partial: 'shared/revealing_checkbox/attribute',
+                   collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
+                   locals: { model: model, form: form } %>
+      </div>
+    </fieldset>
+  </div>
+  <div class="govuk-!-padding-bottom-6"></div>
+  <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+<% end %>

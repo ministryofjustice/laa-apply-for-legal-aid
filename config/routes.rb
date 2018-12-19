@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       resource :outstanding_mortgage, only: %i[show update]
       resource :own_home, only: %i[show update]
       resources :check_benefits, only: [:index]
+      resource :other_assets, only: %i[show update]
+      resources :check_benefits, only: [:index] do
+        get :passported, on: :collection
+      end
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
