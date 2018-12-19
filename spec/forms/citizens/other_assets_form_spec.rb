@@ -14,7 +14,7 @@ RSpec.describe Citizens::OtherAssetsForm do
     end
 
     let(:empty_second_home_params) do
-      { check_box_second_home: 'yes',
+      { check_box_second_home: '',
         second_home_value: '',
         second_home_mortgage: '',
         second_home_percentage: '' }

@@ -197,30 +197,38 @@ en:
         other_assets_declaration:
           attributes:
             second_home_value:
-              not_a_number: Second home or property value is not a number
-              blank: Second home or property value must be entered if checkbox is ticked
+              not_a_number: Property value is not a number
+              blank: Enter the estimated property value
             second_home_mortgage:
-              not_a_number: Second home or property mortgage is not a number'
-              blank: Second home or property mortgage must be entered if checkbox is ticked
+              not_a_number: Property mortgage is not a number
+              blank: Enter outstanding mortgage amount
             second_home_percentage:
-              not_a_number: Second home or property percentage ownership is not a number'
-              blank: Second home or property percentage ownership must be entered if checkbox is ticked
+              not_a_number: Property percentage ownership is not a number
+              blank: Enter property percentage share
             timeshare_value:
               not_a_number: Timeshare value is not a number
+              blank: Enter the estimated timeshare value
             land_value:
               not_a_number: Land value is not a number
+              blank: Enter the estimated land value
             jewellery_value:
               not_a_number: Jewellery value is not a number
+              blank: Enter the estimated total value of valuable items
             vehicle_value:
               not_a_number: Vehicle value is not a number
+              blank: Enter the estimated vehicle value
             classic_car_value:
               not_a_number: Clasic car value is not a number
+              blank: Enter the estimated classic car value
             money_assets_value:
               not_a_number: Money assets value is not a number
+              blank: Enter the estimated value of estate
             money_owed_value:
               not_a_number: Money owed value is not a number
+              blank: Enter the estimated value of money owed
             trust_value:
               not_a_number: Trust value is not a number
+              blank: Enter the estimated value of trust
 
   activerecord:
     errors:

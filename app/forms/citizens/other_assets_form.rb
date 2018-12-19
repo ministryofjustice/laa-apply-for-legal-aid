@@ -25,13 +25,14 @@ module Citizens
 
     CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + [:check_box_second_home]).freeze
 
+    validates(*SECOND_HOME_ATTRIBUTES, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
+    validates(*SECOND_HOME_ATTRIBUTES, presence: true, if: proc { |form| form.check_box_second_home.present? })
+
     SINGLE_VALUE_ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
       validates attribute, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
       validates attribute, presence: true, if: proc { |form| form.__send__(check_box_attribute).present? }
     end
-
-    validates(*SECOND_HOME_ATTRIBUTES, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
 
     attr_accessor(*ALL_ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
