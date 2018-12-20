@@ -50,6 +50,12 @@ module Providers
       restrictions: {
         # forward:  figure this out later,
         back: :providers_legal_aid_applications_path
+      },
+      percentage_homes: {
+        # TODO: replace the (arbitrary) paths used here with the correct ones,
+        # currently commented out as they're being created in other stories
+        forward: :providers_legal_aid_applications_path, #:providers_legal_aid_application_savings_and_investment_path,
+        back: :providers_legal_aid_applications_path #:providers_legal_aid_application_shared_ownership_path
       }
     }.freeze
 

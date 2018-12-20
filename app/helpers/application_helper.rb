@@ -11,6 +11,11 @@ module ApplicationHelper
     default = t('shared.page-title.suffix')
     return default unless content_for?(:page_title)
 
-    "#{content_for(:page_title)} - #{default}"
+    "#{content_for(:page_title)} - #{default}".html_safe
+  end
+
+  def controller_t(lazy_t)
+    controller = controller_path.split('/')
+    t [*controller, lazy_t].join('.')
   end
 end
