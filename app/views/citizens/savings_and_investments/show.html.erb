@@ -1,30 +1,11 @@
 <% content_for :navigation do %>
-   <%= link_to t('generic.back'), back_link, class: 'govuk-back-link', id: 'back' %>
+  <%= link_to t('generic.back'), back_link, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
 <% content_for(:page_title) { t('.h1-heading') } %>
 
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-
-    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-
-    <%= render partial: 'accounts_summary', locals: { bank_accounts: bank_accounts } if bank_accounts.any? %>
-
-    <%= form_with(model: @form,
-                  url: citizens_savings_and_investment_path,
-                  method: :patch,
-                  local: true) do |form| %>
-
-      <div class="govuk-checkboxes" data-module="checkboxes">
-        <%= render partial: 'shared/revealing_checkbox/attribute', collection: @attributes, locals: { model: @form, form: form } %>
-      </div>
-
-      <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
-
-    <% end %>
-
-  </div>
-</div>
+<%= render(
+      'shared/forms/savings_and_investments_form',
+      bank_accounts: bank_accounts,
+      form_path: citizens_savings_and_investment_path
+    ) %>
