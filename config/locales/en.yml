@@ -442,7 +442,8 @@ en:
       hint:
         property_value: You can use property websites to find the estimated value.
       show:
-        field_set_header: How much is your home worth?
+        h1-heading: How much is your home worth?
+
     other_assets:
       show:
         h1-heading: Do you have any of the following?
