@@ -4,8 +4,14 @@
   <%= provider_back_link t('generic.back') %>
 <% end %>
 
-<%= render partial: 'shared/h1_heading' %>
-
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
 
-<%= render partial: '/citizens/property_values/form', locals: { model: @form, url: providers_legal_aid_application_property_value_path } %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <%= h1_for_page_title_content %>
+
+    <%= render partial: '/citizens/property_values/form', locals: { model: @form, url: providers_legal_aid_application_property_value_path } %>
+
+    </div>
+</div>

@@ -4,8 +4,14 @@
     <%= link_to t('generic.back'), new_citizens_additional_account_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<%= render partial: 'shared/h1_heading' %>
-
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
 
-<%= render partial: 'form', locals: { model: @form, url: citizens_property_value_path } %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <%= h1_for_page_title_content %>
+
+    <%= render partial: 'form', locals: { model: @form, url: citizens_property_value_path } %>
+
+  </div>
+</div>
