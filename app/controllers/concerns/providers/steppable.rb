@@ -59,7 +59,7 @@ module Providers
       },
       property_values: {
         # forward: to be determined,
-        back: :passported_providers_legal_aid_application_check_benefits_path
+        back: :providers_legal_aid_application_check_benefits_path
       }
     }.freeze
 
