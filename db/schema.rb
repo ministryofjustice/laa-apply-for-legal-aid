@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_19_135328) do
+ActiveRecord::Schema.define(version: 2018_12_11_125447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_135328) do
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
+    t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
     t.string "shared_ownership"
     t.decimal "outstanding_mortgage_amount"

@@ -1,0 +1,7 @@
+<% content_for :navigation do %>
+  <%= provider_back_link t('generic.back') %>
+<% end %>
+
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<%= render 'shared/forms/own_home_form', form_path: providers_legal_aid_application_own_home_path(@legal_aid_application) %>

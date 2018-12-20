@@ -42,6 +42,10 @@ module Providers
       },
       about_the_financial_assessments: {
         back: :providers_legal_aid_application_online_banking_path
+      },
+      own_homes: {
+        # forward: determined by controller action logic
+        back: :providers_legal_aid_application_check_benefits_path
       }
     }.freeze
 

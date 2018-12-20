@@ -19,7 +19,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Mon, 03 Dec 2018 16:51:49 GMT
+      - Tue, 18 Dec 2018 14:28:46 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -27,7 +27,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5c055f25-22a2755dfb40187e52c3598c;
+      - Root=1-5c19041e-d64b4db066b6d48027bdfa00;
       Vary:
       - Accept-Encoding
     body:
@@ -147,7 +147,7 @@ http_interactions:
 
         </wsdl:definitions>
     http_version: 
-  recorded_at: Mon, 03 Dec 2018 16:51:49 GMT
+  recorded_at: Tue, 18 Dec 2018 14:28:46 GMT
 - request:
     method: post
     uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker
@@ -155,7 +155,7 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns2="https://lsc.gov.uk/benefitchecker/service/1.0"
-        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:clientReference>d070604e-013f-4a65-a276-37c092e0fdb9</ins0:clientReference><ins0:nino>JA293483A</ins0:nino><ins0:surname>WALKER</ins0:surname><ins0:dateOfBirth>19800110</ins0:dateOfBirth><ins0:dateOfAward>20181203</ins0:dateOfAward><ins0:lscServiceName><BC_LSC_SERVICE_NAME></ins0:lscServiceName><ins0:clientOrgId><BC_CLIENT_ORG_ID></ins0:clientOrgId><ins0:clientUserId><BC_CLIENT_USER_ID></ins0:clientUserId></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><soapenv:Body><ins0:benefitCheckerRequest><ins0:clientReference>c8765530-f8a0-4939-8bf1-4be240a2ecc4</ins0:clientReference><ins0:nino>JA293483A</ins0:nino><ins0:surname>WALKER</ins0:surname><ins0:dateOfBirth>19800110</ins0:dateOfBirth><ins0:dateOfAward>20181218</ins0:dateOfAward><ins0:lscServiceName><BC_LSC_SERVICE_NAME></ins0:lscServiceName><ins0:clientOrgId><BC_CLIENT_ORG_ID></ins0:clientOrgId><ins0:clientUserId><BC_CLIENT_USER_ID></ins0:clientUserId></ins0:benefitCheckerRequest></soapenv:Body></soapenv:Envelope>
     headers:
       Soapaction:
       - '"check"'
@@ -175,7 +175,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Mon, 03 Dec 2018 16:51:49 GMT
+      - Tue, 18 Dec 2018 14:28:46 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -183,7 +183,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5c055f25-a099a4501b0388e094c85dd0;
+      - Root=1-5c19041e-ccf0abcad9a7e131be4cb11a;
       Vary:
       - Accept-Encoding
     body:
@@ -191,9 +191,9 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
-        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">d070604e-013f-4a65-a276-37c092e0fdb9</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">c8765530-f8a0-4939-8bf1-4be240a2ecc4</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1543855909720</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1545143326169</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Mon, 03 Dec 2018 16:51:49 GMT
+  recorded_at: Tue, 18 Dec 2018 14:28:46 GMT
 recorded_with: VCR 4.0.0

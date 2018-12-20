@@ -20,6 +20,15 @@ class LegalAidApplication < ApplicationRecord
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
 
+  enum(
+    own_home: {
+      no: 'no'.freeze,
+      mortgage: 'mortgage'.freeze,
+      owned_outright: 'owned_outright'.freeze
+    },
+    _prefix: true
+  )
+
   aasm column: :state do
     state :initiated, initial: true
     state :checking_answers

@@ -24,16 +24,15 @@ en:
         uses_online_banking:
           'true': 'Yes'
           'false': 'No'
-      legal_aid_application:
-        own_home:
-          mortgage: Yes, with a mortage or loan
-          owned_outright: Yes, owned outright
-          not: "No"
   shared:
     forms:
       date_input_fields:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
+      own_home_form:
+        mortgage: Yes, with a mortage or loan
+        owned_outright: Yes, owned outright
+        "no": "No"
     page-title:
       suffix: Apply for legal aid
   activemodel:
@@ -285,6 +284,25 @@ en:
       heading_1: Apply for Legal Aid
       welcome_home: Welcome Home
   providers:
+    start:
+      index:
+        apply_for_legal_aid_heading: Apply for Legal Aid
+        apply_civil_legal_para: "Use this service to apply for civil legal aid for cases involving:"
+        use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
+        use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
+        apply_civil_legal_list:
+          item_1: public family law
+          item_2: domestic violence or abuse
+        use_ccms_list:
+          heading: Who can use this service?
+          title:  "You can only use this service if your client:"
+          item_1: has a National Insurance number
+          item_2: uses online banking
+          item_3: is single, does not have an income, or their partner is the opponent in the case
+        related_content_list:
+          title: Related content
+          item_1: Legal aid
+          item_2: More
     address_selections:
       show:
         select_address_label: Select an address
@@ -353,25 +371,9 @@ en:
         happen_next_heading: What happens next
         happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
         back_button: "Back to your applications"
-    start:
-      index:
-        apply_for_legal_aid_heading: Apply for Legal Aid
-        apply_civil_legal_para: "Use this service to apply for civil legal aid for cases involving:"
-        use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
-        use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
-        apply_civil_legal_list:
-          item_1: public family law
-          item_2: domestic violence or abuse
-        use_ccms_list:
-          heading: Who can use this service?
-          title:  "You can only use this service if your client:"
-          item_1: has a National Insurance number
-          item_2: uses online banking
-          item_3: is single, does not have an income, or their partner is the opponent in the case
-        related_content_list:
-          title: Related content
-          item_1: Legal aid
-          item_2: More
+    own_homes:
+      show:
+        h1-heading: Does your client own the home that they live in?
 
   citizens:
     accounts:

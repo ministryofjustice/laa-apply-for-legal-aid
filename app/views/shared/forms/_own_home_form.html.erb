@@ -1,0 +1,21 @@
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
+
+      <%
+        options = [
+          { value: :mortgage,       label: t('.mortgage') },
+          { value: :owned_outright, label: t('.owned_outright') },
+          { value: :no,             label: t('.no') }
+        ]
+      %>
+
+      <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label, title: content_for(:page_title)) %>
+
+      <div class="govuk-!-padding-bottom-6"></div>
+
+      <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+    <% end %>
+  </div>
+</div>

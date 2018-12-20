@@ -8,16 +8,14 @@ module Providers
       next_step
     end
 
-    def passported
-      render plain: 'Landing page: Next step in providers journey'
-    end
-
     private
 
     def next_step
-      return @next_step_link = passported_providers_legal_aid_application_check_benefits_path if legal_aid_application.benefit_check_result.positive?
-
-      @next_step_link = providers_legal_aid_application_online_banking_path
+      @next_step_link = if legal_aid_application.benefit_check_result.positive?
+                          providers_legal_aid_application_own_home_path(legal_aid_application)
+                        else
+                          providers_legal_aid_application_online_banking_path(legal_aid_application)
+                        end
     end
   end
 end

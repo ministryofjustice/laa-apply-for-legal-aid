@@ -20,6 +20,26 @@ RSpec.describe 'check benefits requests', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
+    context 'when the check_benefit_results is positive' do
+      before do
+        allow_any_instance_of(BenefitCheckResult).to receive(:positive?).and_return(true)
+      end
+      it 'displays a link to own home' do
+        get_request
+        expect(response.body).to include(providers_legal_aid_application_own_home_path(application))
+      end
+    end
+
+    context 'when the check_benefit_results is negative' do
+      before do
+        allow_any_instance_of(BenefitCheckResult).to receive(:positive?).and_return(false)
+      end
+      it 'displays a link to online banking' do
+        get_request
+        expect(response.body).to include(providers_legal_aid_application_online_banking_path(application))
+      end
+    end
+
     context 'when the check_benefit_result does not exist' do
       it 'generates a new check_benefit_result' do
         expect { get_request }.to change { BenefitCheckResult.count }.by(1)
@@ -43,17 +63,6 @@ RSpec.describe 'check benefits requests', type: :request do
           get_request
         end
       end
-    end
-  end
-
-  describe 'GET /providers/applications/:application_id/passported', :vcr do
-    let(:get_request) { get "/providers/applications/#{application.id}/check_benefits/passported" }
-
-    it 'displays holding page' do
-      # TODO: Delete when redirect set
-      get_request
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to match('Landing page')
     end
   end
 end
