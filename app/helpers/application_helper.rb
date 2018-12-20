@@ -19,8 +19,8 @@ module ApplicationHelper
     t [*controller, lazy_t].join('.')
   end
 
-  def controller_t(lazy_t)
+  def controller_t(lazy_t, *args)
     controller = controller_path.split('/')
-    t ".#{[*controller, lazy_t].join('.')}"
+    t ".#{[*controller, lazy_t].join('.')}", *args
   end
 end

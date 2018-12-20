@@ -14,10 +14,6 @@ en:
       legal_aid_application:
         outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
         property_value: You can use property websites to find the estimated value.
-      savings_amount:
-        check_box_isa: Accounts you do not access with online banking
-        check_box_other_person_account: For example, a junior ISA for a child
-        check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
     label:
       applicant:
         uses_online_banking:
@@ -50,6 +46,10 @@ en:
               check_box_plc_shares: Shares in a PLC (public limited company)
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+              hint:
+                check_box_isa: Including any money in current and savings accounts
+                check_box_other_person_account: For example, a junior ISA for a child
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
           citizens:
             savings_and_investments:
               isa: Enter the estimated total in all accounts
@@ -66,6 +66,10 @@ en:
               check_box_plc_shares: Shares in a PLC (public limited company)
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+              hint:
+                check_box_isa: Accounts you do not access with online banking
+                check_box_other_person_account: For example, a junior ISA for a child
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
             other_assets:
               check_box_second_home: Second property or holiday home
               second_home_value: Enter estimated value
