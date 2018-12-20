@@ -7,7 +7,7 @@ RSpec.describe 'provider other assets requests', type: :request do
 
   before { get providers_legal_aid_application_other_assets_path(application) }
 
-  describe 'GET citizens/own_home' do
+  describe 'GET providers/applications/:id/other_assets' do
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
     end
@@ -17,7 +17,7 @@ RSpec.describe 'provider other assets requests', type: :request do
     end
   end
 
-  describe 'PATCH citizens/own_home' do
+  describe 'PATCH providers/applications/:id/other_assets' do
     before { patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params }
 
     let(:params) do

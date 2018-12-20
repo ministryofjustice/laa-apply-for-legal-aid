@@ -1,5 +1,6 @@
 module Providers
   class OtherAssetsController < BaseController
+    include Providers::ApplicationDependable
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end
@@ -14,10 +15,6 @@ module Providers
     end
 
     private
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(params[:legal_aid_application_id])
-    end
 
     def declaration
       @declaration ||= legal_aid_application.other_assets_declaration
