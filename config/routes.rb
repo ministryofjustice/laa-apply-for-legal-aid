@@ -47,6 +47,7 @@ Rails.application.routes.draw do
         post :reset, on: :collection
         post :continue, on: :collection
       end
+      resources :restrictions, only: %i[index create] # as multiple restrictions
       resource :about_the_financial_assessment, only: [:show] do
         post :submit, on: :collection
       end

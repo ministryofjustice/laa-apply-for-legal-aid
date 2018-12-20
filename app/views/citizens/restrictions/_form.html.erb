@@ -1,0 +1,13 @@
+<%= form_with(model: model, url: url, method: :post, local: true) do |form| %>
+  <%= govuk_form_group do %>
+    <div class="govuk-checkboxes">
+      <%= form.collection_check_boxes :restriction_ids, Restriction.all, :id, :label_name do |restriction_form| %>
+        <div class="govuk-checkboxes__item">
+          <%= restriction_form.check_box(class: 'govuk-checkboxes__input') %>
+          <%= restriction_form.label(class: 'govuk-label govuk-checkboxes__label') %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <%= form.submit t('generic.continue'), class: 'govuk-button' %>
+<% end %>

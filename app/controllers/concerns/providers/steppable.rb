@@ -46,6 +46,10 @@ module Providers
       own_homes: {
         # forward: determined by controller action logic
         back: :providers_legal_aid_application_check_benefits_path
+      },
+      restrictions: {
+        # forward:  figure this out later,
+        back: :providers_legal_aid_applications_path
       }
     }.freeze
 
