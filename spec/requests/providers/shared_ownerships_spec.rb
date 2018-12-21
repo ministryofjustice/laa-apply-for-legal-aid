@@ -14,7 +14,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
     it 'renders the shared ownership page' do
       expect(response).to be_successful
-      expect(unescaped_response_body).to match('Does your client own thier home with anyone else?')
+      expect(unescaped_response_body).to match('Does your client own their home with anyone else?')
       expect(unescaped_response_body).to match(LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first)
     end
   end
@@ -78,7 +78,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
         patch_request
         expect(unescaped_response_body).to include('There is a problem')
         expect(unescaped_response_body).to include('Select yes if you own your home with someone else')
-        expect(unescaped_response_body).to include('Does your client own thier home with anyone else?')
+        expect(unescaped_response_body).to include('Does your client own their home with anyone else?')
       end
     end
   end
