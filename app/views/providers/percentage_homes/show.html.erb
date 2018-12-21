@@ -1,9 +1,7 @@
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <% content_for :navigation do %>
-  <!-- TODO: navigate to "1d. shared ownership"  -->
-
-  <%= link_to 'Back', citizens_additional_accounts_path, class: 'govuk-back-link', id: 'back' %>
+  <%= link_to provider_back_link %>
 <% end %>
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
@@ -12,6 +10,6 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
 
-    <%= render partial: 'shared/forms/percentage_home_form', locals: { model: @form, url: citizens_property_value_path } %>
+    <%= render partial: 'shared/forms/percentage_home_form', locals: { model: @form, url: providers_legal_aid_application_percentage_home_path(@legal_aid_application) } %>
   </div>
 </div>

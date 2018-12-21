@@ -1,0 +1,15 @@
+<%= form_with(model: @form,
+              scope: :legal_aid_application,
+              url: url,
+              method: :patch,
+              local: true) do |form| %>
+
+              <%= form.govuk_text_field :percentage_home,
+                                        label: controller_t('percentage_home'),
+                                        hint: controller_t('hint.percentage_home'),
+                                        value: number_to_currency(model.percentage_home, unit: ''),
+                                        class: 'govuk-input--width-5 input-percentage',
+                                        suffix: '%' %>
+
+  <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+<% end %>

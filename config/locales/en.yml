@@ -12,7 +12,6 @@ en:
       address_lookup:
         postcode: Postcode must be a valid UK postcode.
       legal_aid_application:
-        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
         outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
         property_value: You can use property websites to find the estimated value.
       savings_amount:
@@ -52,7 +51,6 @@ en:
         national_insurance_number: 'National Insurance number'
         email: 'Email address'
       legal_aid_application:
-        percentage_home: Enter the estimated percentage share you own
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home
       savings_amount:
@@ -148,7 +146,7 @@ en:
             own_home:
               blank: Select yes if you own the home you live in
             percentage_home:
-              blank: Enter the percentage (%) share you own
+              blank: Enter the percentage (%) share
               not_a_number: &share_must_be_percentage Share must be a percentage amount under 100, like 60
               greater_than_or_equal_to: *share_must_be_percentage
               less_than_or_equal_to: *share_must_be_percentage
@@ -377,6 +375,12 @@ en:
     restrictions:
       index:
         h1-heading: Do any restrictions apply to your client's property, savings or assets?
+    percentage_homes:
+      percentage_home: Enter the estimated percentage share
+      hint:
+        percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
+      show:
+        h1-heading: What % share of their home does your client legally own?
 
   citizens:
     accounts:
@@ -410,6 +414,9 @@ en:
         list_2: We do not have any ongoing access to your bank accounts
         list_3: We only use your details to assess your eligibility for legal aid
     percentage_homes:
+      percentage_home: Enter the estimated percentage share you own
+      hint:
+        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
       show:
         h1-heading: What % share of your home do you legally own?
     savings_and_investments:
