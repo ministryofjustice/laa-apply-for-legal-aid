@@ -18,8 +18,4 @@ module ApplicationHelper
     controller = controller_path.split('/')
     t [*controller, lazy_t].join('.')
   end
-
-  def h1_for_page_title_content
-    content_tag :h1, content_for(:page_title), class: 'govuk-heading-xl'
-  end
 end

@@ -151,7 +151,12 @@ en:
               greater_than_or_equal_to: *share_must_be_percentage
               less_than_or_equal_to: *share_must_be_percentage
             property_value:
-              blank: Enter an estimated value for your home
+              citizen:
+                blank: Enter an estimated value for your home
+                not_a_number: The estimated value of your home must be an amount of money, like 60,000
+              provider:
+                blank: Enter an estimated value for your client's home
+                not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
               not_a_number: &property_value_nan Estimated value must be an amount of money, like 80,000
               greater_than: *property_value_nan
             shared_ownership:

@@ -29,7 +29,7 @@ module Providers
     end
 
     def edit_params
-      property_value_params.merge(model: legal_aid_application)
+      property_value_params.merge(model: legal_aid_application, mode: :provider)
     end
 
     def legal_aid_application
