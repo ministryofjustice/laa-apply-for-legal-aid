@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       resource :about_the_financial_assessment, only: [:show] do
         post :submit, on: :collection
       end
+      resource :percentage_home, only: %i[show update]
     end
   end
 end

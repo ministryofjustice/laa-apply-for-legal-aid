@@ -1,5 +1,8 @@
-module Citizens
+module Providers
   class PercentageHomesController < BaseController
+    include Providers::ApplicationDependable
+    include Steppable
+
     def show
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
     end
@@ -15,10 +18,6 @@ module Citizens
     end
 
     private
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
-    end
 
     def percentage_home_params
       return {} unless params[:legal_aid_application]
