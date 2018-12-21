@@ -7,6 +7,11 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
 
-    <%= render partial: 'shared/forms/percentage_home_form', locals: { model: @form, url: citizens_percentage_home_path } %>
+    <%= render partial: 'shared/forms/percentage_home_form',
+               locals: {
+                 model: @form,
+                 show_draft: false,
+                 url: citizens_property_value_path
+               } %>
   </div>
 </div>

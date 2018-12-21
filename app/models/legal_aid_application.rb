@@ -1,3 +1,5 @@
+# TODO: Think about how we refactor this class to make it smaller
+# rubocop:disable Metrics/ClassLength
 class LegalAidApplication < ApplicationRecord
   include AASM
 
@@ -106,7 +108,16 @@ class LegalAidApplication < ApplicationRecord
 
   def own_capital?
     own_home? || other_assets_declaration&.positive? || savings_amount&.positive?
+    own_home_mortgage? || own_home_owned_outright?
   end
+
+  # def savings_or_investments?
+  #   savings_amount.present? && savings_amount.any_value?
+  # end
+  #
+  # def other_assets?
+  #   other_assets_declaration.present? && other_assets_declaration.any_value?
+  # end
 
   private
 
@@ -128,3 +139,4 @@ class LegalAidApplication < ApplicationRecord
     self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
   end
 end
+# rubocop:enable Metrics/ClassLength

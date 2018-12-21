@@ -90,20 +90,39 @@ RSpec.describe 'check your answers requests', type: :request do
     end
   end
 
-  describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/continue' do
-    subject { post "/providers/applications/#{application_id}/check_provider_answers/continue" }
+  describe 'PATCH  /providers/applications/:legal_aid_application_id/check_provider_answers/continue' do
+    context 'Continue' do
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue?continue-button=Continue" }
 
-    before do
-      application.check_your_answers!
-      subject
+      before do
+        application.check_your_answers!
+        subject
+      end
+
+      it 'should redirect to next step' do
+        expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+      end
+
+      it 'should change the stage to "answers_checked"' do
+        expect(application.reload.answers_checked?).to be_truthy
+      end
     end
 
-    it 'should redirect to next step' do
-      expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
-    end
+    context 'Save as draft' do
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue?draft-button=Save as draft" }
 
-    it 'should change the stage to "answers_checked"' do
-      expect(application.reload.answers_checked?).to be_truthy
+      before do
+        application.check_your_answers!
+        subject
+      end
+
+      it 'should redirect to provider legal applications home page' do
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'should change the stage to "answers_checked"' do
+        expect(application.reload.answers_checked?).to be_truthy
+      end
     end
   end
 end

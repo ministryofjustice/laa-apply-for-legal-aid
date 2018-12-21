@@ -32,7 +32,7 @@ module LegalAidApplications
     end
 
     def value_not_a_number?
-      property_value.present? && valid_number_pattern !~ property_value
+      property_value.present? && valid_number_pattern !~ property_value.to_s
     end
 
     def error_message_for(error_type)

@@ -2,6 +2,7 @@ module Providers
   class SharedOwnershipsController < BaseController
     include Providers::ApplicationDependable
     include Providers::Steppable
+    include SaveAsDraftable
 
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
@@ -12,9 +13,9 @@ module Providers
 
       if @form.save
         if @form.shared_ownership?
-          render plain: 'Navigate to question 1e; What percentage of your home do you own?'
+          continue_or_save_draft(providers_legal_aid_application_percentage_home_path(legal_aid_application))
         else
-          render plain: 'Navigate to question 2a; Do you have any savings or investments'
+          continue_or_save_draft(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
         end
       else
         render :show

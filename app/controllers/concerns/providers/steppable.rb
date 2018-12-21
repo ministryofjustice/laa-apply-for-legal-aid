@@ -48,23 +48,25 @@ module Providers
         back: :providers_legal_aid_application_check_benefits_path
       },
       restrictions: {
-        # forward:  figure this out later,
+        forward: :providers_legal_aid_application_check_provider_answers_path,
         back: :providers_legal_aid_applications_path
       },
       percentage_homes: {
-        # TODO: replace the (arbitrary) paths used here with the correct ones,
-        # currently commented out as they're being created in other stories
-        forward: :providers_legal_aid_applications_path, #:providers_legal_aid_application_savings_and_investment_path,
-        back: :providers_legal_aid_applications_path #:providers_legal_aid_application_shared_ownership_path
+        forward: :providers_legal_aid_application_savings_and_investment_path,
+        back: :providers_legal_aid_applications_path
       },
       property_values: {
-        # forward: to be determined,
+        # forward: determined within the controller
         back: :providers_legal_aid_application_check_benefits_path
       },
       outstanding_mortgages: {
-        # forward: property share path
-        # TO DO set the correct path for back
+        forward: :providers_legal_aid_application_shared_ownership_path,
+        # TODO: set the correct path for back
         back: :providers_legal_aid_application_online_banking_path
+      },
+      savings_and_investments: {
+        forward: :providers_legal_aid_application_other_assets_path,
+        back: :providers_legal_aid_applications_own_home_path
       }
     }.freeze
 

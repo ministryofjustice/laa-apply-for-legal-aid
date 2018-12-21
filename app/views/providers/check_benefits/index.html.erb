@@ -30,7 +30,9 @@
     <p class="govuk-body">
       <%= t "#{result_namespace}.next" %>
     </p>
-
-    <%= button_to t('generic.continue'), @next_step_link, class: 'govuk-button govuk-button', id: 'continue', method: 'get' %>
   </div>
+  <%= render partial: 'shared/forms/continue_and_draft_button_form',
+             locals: { url: @next_step_link,
+                       method: :get,
+                       show_draft: true } %>
 </div>

@@ -6,6 +6,7 @@
   <div class="govuk-grid-column-two-thirds">
     <%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form,
                                                                              user_type: 'citizen',
+                                                                             show_draft: false,
                                                                              url: citizens_outstanding_mortgage_path } %>
   </div>
 </div>

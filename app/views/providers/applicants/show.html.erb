@@ -39,12 +39,9 @@
 
         <div class="govuk-!-padding-bottom-2"></div>
 
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds">
-            <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button govuk-button' %>
-         </div>
-       </div>
+        <%= render partial: 'shared/forms/continue_and_draft_buttons', locals: { continue_id: 'continue', show_draft: true, form: form } %>
 
+       </div>
       <% end %>
     </div>
   </div>

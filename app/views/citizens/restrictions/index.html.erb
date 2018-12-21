@@ -7,7 +7,12 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl"><%= t('.h1-heading') %></h1>
 
-        <%= render partial: 'form', locals: { model: @legal_aid_application, url: citizens_restrictions_path } %>
+        <%= render partial: 'form',
+                   locals: {
+                     model: @legal_aid_application,
+                     show_draft: false,
+                     url: citizens_restrictions_path
+                   } %>
 
     </div>
   </div>

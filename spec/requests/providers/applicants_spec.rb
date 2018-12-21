@@ -45,7 +45,8 @@ RSpec.describe 'providers applicant requests', type: :request do
           dob_month: '07',
           dob_day: '11',
           email: Faker::Internet.safe_email
-        }
+        },
+        'continue-button' => 'Continue'
       }
     end
     let(:patch_request) { patch "/providers/applications/#{application_id}/applicant", params: params }
@@ -111,6 +112,15 @@ RSpec.describe 'providers applicant requests', type: :request do
 
       it 'does NOT create a new applicant' do
         expect { patch_request }.not_to change { Applicant.count }
+      end
+    end
+
+    context 'when params dont have continue or save as draft button' do
+      it 'raises' do
+        params.delete('continue-button')
+        expect {
+          patch_request
+        }.to raise_error RuntimeError, 'No continue or Save as draft button when expected'
       end
     end
   end

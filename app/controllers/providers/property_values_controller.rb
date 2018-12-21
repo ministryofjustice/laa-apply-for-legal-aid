@@ -1,6 +1,7 @@
 module Providers
   class PropertyValuesController < BaseController
     include Steppable
+    include SaveAsDraftable
 
     def show
       @form = LegalAidApplications::PropertyValueForm.new(model: legal_aid_application)
@@ -11,11 +12,9 @@ module Providers
 
       if @form.save
         if legal_aid_application.own_home == 'mortgage'
-          render plain: 'Navigate to question 1c: Mortgage'
-          # redirect_to question_1c_path
+          continue_or_save_draft(providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application))
         else
-          render plain: 'Navigate to question 1d: Shared?'
-          # redirect_to question_1d_path
+          continue_or_save_draft(providers_legal_aid_application_shared_ownership_path(legal_aid_application))
         end
       else
         render :show

@@ -26,6 +26,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
     let(:restriction_ids) { restrictions.pluck(:id) }
     let(:params) do
       {
+        'continue-button' => 'Continue',
         legal_aid_application: {
           restriction_ids: restriction_ids
         }

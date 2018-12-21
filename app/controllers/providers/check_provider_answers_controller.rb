@@ -1,6 +1,7 @@
 module Providers
   class CheckProviderAnswersController < BaseController
     include Providers::ApplicationDependable
+    include Providers::SaveAsDraftable
     include Steppable
 
     def index
@@ -18,7 +19,7 @@ module Providers
 
     def continue
       legal_aid_application.answers_checked!
-      redirect_to next_step_url
+      continue_or_save_draft
     end
 
     private

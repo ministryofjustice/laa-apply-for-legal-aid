@@ -51,7 +51,7 @@ Rails.application.routes.draw do
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
-        post :continue, on: :collection
+        patch :continue, on: :collection
       end
       resources :restrictions, only: %i[index create] # as multiple restrictions
       resource :about_the_financial_assessment, only: [:show] do

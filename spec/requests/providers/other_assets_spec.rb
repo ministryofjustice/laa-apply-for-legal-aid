@@ -44,76 +44,226 @@ RSpec.describe 'provider other assets requests', type: :request do
           check_box_trust_value: 'true',
           trust_value: '1,234.56'
         },
-        commit: 'Continue'
+        'continue-button' => 'Continue'
       }
     end
 
-    context 'valid params' do
-      it 'returns http_success' do
-        expect(response).to have_http_status(:ok)
+    context 'Submitted with Continue button' do
+      context 'valid params' do
+        it 'updates the record' do
+          oad.reload
+          expect(oad.second_home_value).to eq 875_123
+          expect(oad.second_home_mortgage).to eq 125_345.67
+          expect(oad.second_home_percentage).to eq 64.44
+          expect(oad.timeshare_value).to eq 234_567.89
+          expect(oad.land_value).to eq 34_567.89
+          expect(oad.jewellery_value).to eq 456_789.01
+          expect(oad.vehicle_value).to eq 56_789.01
+          expect(oad.classic_car_value).to eq 67_890.12
+          expect(oad.money_assets_value).to eq 89_012.34
+          expect(oad.money_owed_value).to eq 90_123.45
+          expect(oad.trust_value).to eq 1_234.56
+        end
+
+        context 'has other_assets' do
+          before do
+            allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(true)
+            allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(false)
+            allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(false)
+            patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+          end
+          it 'redirects to capital restrictions' do
+            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
+          end
+        end
+
+        context 'has savings and investments' do
+          before do
+            allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(false)
+            allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(false)
+            allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(true)
+            patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+          end
+          it 'redirects to capital restrictions' do
+            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
+          end
+        end
+
+        context 'has own home' do
+          before do
+            allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(false)
+            allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(true)
+            allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(false)
+            patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+          end
+
+          it 'redirects to capital restrictions' do
+            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
+          end
+        end
+
+        context 'has nothing' do
+          before do
+            allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(false)
+            allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(false)
+            allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(false)
+            patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+          end
+
+          it 'redirects to capital restrictions' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application))
+          end
+        end
       end
 
-      it 'updates the record' do
-        oad.reload
-        expect(oad.second_home_value).to eq 875_123
-        expect(oad.second_home_mortgage).to eq 125_345.67
-        expect(oad.second_home_percentage).to eq 64.44
-        expect(oad.timeshare_value).to eq 234_567.89
-        expect(oad.land_value).to eq 34_567.89
-        expect(oad.jewellery_value).to eq 456_789.01
-        expect(oad.vehicle_value).to eq 56_789.01
-        expect(oad.classic_car_value).to eq 67_890.12
-        expect(oad.money_assets_value).to eq 89_012.34
-        expect(oad.money_owed_value).to eq 90_123.45
-        expect(oad.trust_value).to eq 1_234.56
+      context 'invalid params - nothing specified' do
+        let(:params) do
+          {
+            other_assets_declaration: {
+              check_box_second_home: 'true',
+              second_home_value: 'aaa'
+            },
+            commit: 'Continue'
+          }
+        end
+
+        it 'returns http_success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'does not update the record' do
+          expect(oad.second_home_value).to be_nil
+          expect(oad.second_home_mortgage).to be_nil
+          expect(oad.second_home_percentage).to be_nil
+          expect(oad.timeshare_value).to be_nil
+          expect(oad.land_value).to be_nil
+          expect(oad.jewellery_value).to be_nil
+          expect(oad.vehicle_value).to be_nil
+          expect(oad.classic_car_value).to be_nil
+          expect(oad.money_assets_value).to be_nil
+          expect(oad.money_owed_value).to be_nil
+          expect(oad.trust_value).to be_nil
+        end
+
+        it 'the response includes the error message' do
+          expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.second_home_value.not_a_number'))
+        end
+
+        it 'renders the show page' do
+          expect(response.body).to include I18n.t('providers.other_assets.show.h1-heading')
+        end
       end
 
-      # TODO: setup redirect when known
-      xit 'redirects to the next page in the flow' do
-        expect(response).to redirect_to(:next_page_in_the_flow)
-      end
+      context 'Submitted with Save as draft button' do
+        before do
+          params.delete('continue-button')
+          params['draft-button'] = 'Save as draft'
+        end
 
-      # TODO: remove when redirect set up
-      it 'displays holding text' do
-        expect(response.body).to eq 'Navigate to next question after any other assets'
-      end
-    end
+        context 'valid params' do
+          it 'updates the record' do
+            oad.reload
+            expect(oad.second_home_value).to eq 875_123
+            expect(oad.second_home_mortgage).to eq 125_345.67
+            expect(oad.second_home_percentage).to eq 64.44
+            expect(oad.timeshare_value).to eq 234_567.89
+            expect(oad.land_value).to eq 34_567.89
+            expect(oad.jewellery_value).to eq 456_789.01
+            expect(oad.vehicle_value).to eq 56_789.01
+            expect(oad.classic_car_value).to eq 67_890.12
+            expect(oad.money_assets_value).to eq 89_012.34
+            expect(oad.money_owed_value).to eq 90_123.45
+            expect(oad.trust_value).to eq 1_234.56
+          end
 
-    context 'invalid params - nothing specified' do
-      let(:params) do
-        {
-          other_assets_declaration: {
-            check_box_second_home: 'true',
-            second_home_value: 'aaa'
-          },
-          commit: 'Continue'
-        }
-      end
+          context 'has other_assets' do
+            before do
+              allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(true)
+              allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(false)
+              allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(false)
+              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+            end
+            it 'redirects to capital restrictions' do
+              expect(response).to redirect_to providers_legal_aid_applications_path
+            end
+          end
 
-      it 'returns http_success' do
-        expect(response).to have_http_status(:ok)
-      end
+          context 'has savings and investments' do
+            before do
+              allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(false)
+              allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(false)
+              allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(true)
+              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+            end
+            it 'redirects to capital restrictions' do
+              expect(response).to redirect_to providers_legal_aid_applications_path
+            end
+          end
 
-      it 'does not update the record' do
-        expect(oad.second_home_value).to be_nil
-        expect(oad.second_home_mortgage).to be_nil
-        expect(oad.second_home_percentage).to be_nil
-        expect(oad.timeshare_value).to be_nil
-        expect(oad.land_value).to be_nil
-        expect(oad.jewellery_value).to be_nil
-        expect(oad.vehicle_value).to be_nil
-        expect(oad.classic_car_value).to be_nil
-        expect(oad.money_assets_value).to be_nil
-        expect(oad.money_owed_value).to be_nil
-        expect(oad.trust_value).to be_nil
-      end
+          context 'has own home' do
+            before do
+              allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(false)
+              allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(true)
+              allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(false)
+              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+            end
 
-      it 'the response includes the error message' do
-        expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.second_home_value.not_a_number'))
-      end
+            it 'redirects to capital restrictions' do
+              expect(response).to redirect_to providers_legal_aid_applications_path
+            end
+          end
 
-      it 'renders the show page' do
-        expect(response.body).to include I18n.t('providers.other_assets.show.h1-heading')
+          context 'has nothing' do
+            before do
+              allow_any_instance_of(LegalAidApplication).to receive(:other_assets?).and_return(false)
+              allow_any_instance_of(LegalAidApplication).to receive(:own_home?).and_return(false)
+              allow_any_instance_of(LegalAidApplication).to receive(:savings_or_investments?).and_return(false)
+              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params
+            end
+
+            it 'redirects to capital restrictions' do
+              expect(response).to redirect_to providers_legal_aid_applications_path
+            end
+          end
+        end
+
+        context 'invalid params - nothing specified' do
+          let(:params) do
+            {
+              other_assets_declaration: {
+                check_box_second_home: 'true',
+                second_home_value: 'aaa'
+              },
+              commit: 'Continue'
+            }
+          end
+
+          it 'returns http_success' do
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'does not update the record' do
+            expect(oad.second_home_value).to be_nil
+            expect(oad.second_home_mortgage).to be_nil
+            expect(oad.second_home_percentage).to be_nil
+            expect(oad.timeshare_value).to be_nil
+            expect(oad.land_value).to be_nil
+            expect(oad.jewellery_value).to be_nil
+            expect(oad.vehicle_value).to be_nil
+            expect(oad.classic_car_value).to be_nil
+            expect(oad.money_assets_value).to be_nil
+            expect(oad.money_owed_value).to be_nil
+            expect(oad.trust_value).to be_nil
+          end
+
+          it 'the response includes the error message' do
+            expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.second_home_value.not_a_number'))
+          end
+
+          it 'renders the show page' do
+            expect(response.body).to include I18n.t('providers.other_assets.show.h1-heading')
+          end
+        end
       end
     end
   end

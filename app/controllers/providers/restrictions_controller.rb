@@ -2,6 +2,7 @@ module Providers
   class RestrictionsController < ApplicationController
     include Steppable
     include Providers::ApplicationDependable
+    include SaveAsDraftable
 
     def index
       legal_aid_application
@@ -9,7 +10,7 @@ module Providers
 
     def create
       legal_aid_application.update!(legal_aid_application_params)
-      render plain: 'Holding page: Redirect to check you answers'
+      continue_or_save_draft
     end
 
     private

@@ -23,46 +23,81 @@ RSpec.describe 'citizen restrictions request', type: :request do
     let(:params) do
       {
         legal_aid_application_id: legal_aid_application.id,
+        'continue-button' => 'Continue',
         legal_aid_application: {
           restriction_ids: restriction_ids
         }
       }
     end
-    subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params }
 
-    it 'creates a mapping for each restriction' do
-      expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
+    context 'Form submitted with continue button' do
+      subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params }
+
+      it 'creates a mapping for each restriction' do
+        expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
+      end
+
+      context 'after success' do
+        before do
+          subject
+          legal_aid_application.reload
+        end
+
+        it 'updates the legal_aid_application.restrictions' do
+          expect(legal_aid_application.restrictions).to match_array(restrictions)
+        end
+
+        it 'redirects to check your answers' do
+          expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        end
+      end
+
+      context 'on error' do
+        let(:restriction_ids) { %i[foo bar] }
+
+        # As I can not think of a "normal" behaviour that can cause an error.
+        # Error handling falls back to standard error handling.
+        it 'raises error' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
     end
 
-    context 'after success' do
+    context 'Form submitted with Save as draft button' do
       before do
-        subject
-        legal_aid_application.reload
+        params.delete('continue-button')
+        params['draft-button'] = 'Save as draft'
       end
 
-      it 'updates the legal_aid_application.restrictions' do
-        expect(legal_aid_application.restrictions).to match_array(restrictions)
+      subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params }
+
+      it 'creates a mapping for each restriction' do
+        expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
       end
 
-      xit 'redirects to check your answers' do
-        # TODO: - set redirect path when known
-        expect(response).to redirect_to(:some_path)
+      context 'after success' do
+        before do
+          subject
+          legal_aid_application.reload
+        end
+
+        it 'updates the legal_aid_application.restrictions' do
+          expect(legal_aid_application.restrictions).to match_array(restrictions)
+        end
+
+        it 'redirects to check your answers' do
+          expect(response).to redirect_to providers_legal_aid_applications_path
+        end
       end
 
-      it 'displays a holding page' do
-        # TODO: - replace with 'redirects to check your answers'
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Holding page')
-      end
-    end
+      context 'on error' do
+        let(:restriction_ids) { %i[foo bar] }
 
-    context 'on error' do
-      let(:restriction_ids) { %i[foo bar] }
-
-      # As I can not think of a "normal" behaviour that can cause an error.
-      # Error handling falls back to standard error handling.
-      it 'raises error' do
-        expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+        # As I can not think of a "normal" behaviour that can cause an error.
+        # Error handling falls back to standard error handling.
+        it 'raises error' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+        end
       end
     end
   end

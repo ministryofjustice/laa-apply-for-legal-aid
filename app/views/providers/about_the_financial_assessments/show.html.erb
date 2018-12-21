@@ -28,7 +28,13 @@
       <%= t '.section_1.text' %>
     </p>
 
-    <%= button_to t('generic.submit'), submit_providers_legal_aid_application_about_the_financial_assessment_path, class: 'govuk-button' %>
-
+    <div class="govuk-grid-row">
+      <%= render partial: 'shared/forms/continue_and_draft_button_form',
+                 locals: {
+                   url: submit_providers_legal_aid_application_about_the_financial_assessment_path,
+                   method: :post,
+                   show_draft: true
+                 } %>
+    </div>
   </div>
 </div>

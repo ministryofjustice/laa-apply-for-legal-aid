@@ -9,5 +9,11 @@
       <% end %>
     </div>
   <% end %>
-  <%= form.submit t('generic.continue'), class: 'govuk-button' %>
+
+  <%= render partial: 'shared/forms/continue_and_draft_buttons',
+             locals: {
+               continue_id: 'continue',
+               show_draft: show_draft,
+               form: form
+             } %>
 <% end %>
