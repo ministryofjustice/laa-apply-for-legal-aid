@@ -5,8 +5,8 @@
 <% end %>
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form, url: citizens_outstanding_mortgage_path } %>
-    </div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form, url: citizens_outstanding_mortgage_path } %>
   </div>
+</div>
