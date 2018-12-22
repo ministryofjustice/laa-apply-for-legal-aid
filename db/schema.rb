@@ -162,17 +162,17 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
 
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
-    t.decimal "second_home_value", precision: 14, scale: 2
-    t.decimal "second_home_mortgage", precision: 14, scale: 2
-    t.decimal "second_home_percentage", precision: 14, scale: 2
-    t.decimal "timeshare_value", precision: 14, scale: 2
-    t.decimal "land_value", precision: 14, scale: 2
-    t.decimal "jewellery_value", precision: 14, scale: 2
-    t.decimal "vehicle_value", precision: 14, scale: 2
-    t.decimal "classic_car_value", precision: 14, scale: 2
-    t.decimal "money_assets_value", precision: 14, scale: 2
-    t.decimal "money_owed_value", precision: 14, scale: 2
-    t.decimal "trust_value", precision: 14, scale: 2
+    t.decimal "second_home_value"
+    t.decimal "second_home_mortgage"
+    t.decimal "second_home_percentage"
+    t.decimal "timeshare_value"
+    t.decimal "land_value"
+    t.decimal "jewellery_value"
+    t.decimal "vehicle_value"
+    t.decimal "classic_car_value"
+    t.decimal "money_assets_value"
+    t.decimal "money_owed_value"
+    t.decimal "trust_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true

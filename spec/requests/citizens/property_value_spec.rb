@@ -37,7 +37,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
       let(:params) { { legal_aid_application: { property_value: '' } } }
 
       it 'shows an error message' do
-        expect(response.body).to include('There is a problem')
+        expect(response.body).to include('govuk-error-summary__title')
       end
 
       it 'does not record the value in the legal aid application table' do

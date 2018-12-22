@@ -1,7 +1,7 @@
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <% content_for :navigation do %>
-    <%= link_to t('generic.back'), new_citizens_additional_account_path, class: 'govuk-back-link', id: 'back' %>
+  <%= provider_back_link t('generic.back') %>
 <% end %>
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
@@ -9,7 +9,9 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <%= render partial: 'form', locals: { model: @form, url: citizens_property_value_path } %>
+    <%#= h1_for_page_title_content %>
 
-  </div>
+    <%= render partial: '/citizens/property_values/form', locals: { model: @form, url: providers_legal_aid_application_property_value_path } %>
+
+    </div>
 </div>

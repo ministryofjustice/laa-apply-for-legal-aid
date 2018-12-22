@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
       resource :proceedings_type, only: %i[show update]
+      resource :property_value, only: %i[show update]
       resource :applicant, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]

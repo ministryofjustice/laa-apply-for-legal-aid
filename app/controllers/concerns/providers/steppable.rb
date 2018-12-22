@@ -56,6 +56,10 @@ module Providers
         # currently commented out as they're being created in other stories
         forward: :providers_legal_aid_applications_path, #:providers_legal_aid_application_savings_and_investment_path,
         back: :providers_legal_aid_applications_path #:providers_legal_aid_application_shared_ownership_path
+      },
+      property_values: {
+        # forward: to be determined,
+        back: :providers_legal_aid_application_check_benefits_path
       }
     }.freeze
 

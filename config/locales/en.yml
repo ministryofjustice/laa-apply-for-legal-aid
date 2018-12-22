@@ -174,7 +174,12 @@ en:
               greater_than_or_equal_to: *share_must_be_percentage
               less_than_or_equal_to: *share_must_be_percentage
             property_value:
-              blank: Enter an estimated value for your home
+              citizen:
+                blank: Enter an estimated value for your home
+                not_a_number: The estimated value of your home must be an amount of money, like 60,000
+              provider:
+                blank: Enter an estimated value for your client's home
+                not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
               not_a_number: &property_value_nan Estimated value must be an amount of money, like 80,000
               greater_than: *property_value_nan
             shared_ownership:
@@ -369,6 +374,12 @@ en:
         search_help_example: "For example by category of law, matter type or legal proceeding."
         no_results: "No results found."
         clear_search: "Clear search"
+    property_values:
+      property_value: Enter the value of your client's home
+      hint:
+        property_value: You can use property websites to find the estimated value.
+      show:
+        h1-heading: How much is your client's home worth?
     about_the_financial_assessments:
       show:
         title: About the online financial assessment
@@ -458,8 +469,12 @@ en:
       show:
         h1-heading: Do you own the home that you live in?
     property_values:
+      property_value: Enter the estimated value of your home
+      hint:
+        property_value: You can use property websites to find the estimated value.
       show:
-        field_set_header: How much is your home worth?
+        h1-heading: How much is your home worth?
+
     other_assets:
       show:
         h1-heading: Do you have any of the following?
