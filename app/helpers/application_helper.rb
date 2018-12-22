@@ -14,11 +14,6 @@ module ApplicationHelper
     "#{content_for(:page_title)} - #{default}".html_safe
   end
 
-  def controller_t(lazy_t)
-    controller = controller_path.split('/')
-    t [*controller, lazy_t].join('.')
-  end
-
   def controller_t(lazy_t, *args)
     controller = controller_path.split('/')
     t ".#{[*controller, lazy_t].join('.')}", *args
