@@ -19,7 +19,7 @@
     <fieldset class="govuk-fieldset" aria-describedby="citizenship-conditional-hint">
       <div class="govuk-checkboxes" data-module="checkboxes">
         <%= render partial: 'second_home_conditional_checkbox', locals: { model: @form, form: form } %>
-        <%= render partial: 'shared/revealing_checkbox/attribute',
+        <%= render partial: 'shared/forms/revealing_checkbox/attribute',
                    collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
                    locals: { model: @form, form: form } %>
       </div>
