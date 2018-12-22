@@ -1,0 +1,12 @@
+<% content_for :navigation do %>
+  <%# TODO the back link logic needs defining %>
+  <%= link_to t('generic.back'), :back, class: 'govuk-back-link', id: 'back' %>
+<% end %>
+
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<%= render(
+      'shared/forms/savings_and_investments_form',
+      bank_accounts: [],
+      form_path: providers_legal_aid_application_savings_and_investment_path(@legal_aid_application)
+    ) %>

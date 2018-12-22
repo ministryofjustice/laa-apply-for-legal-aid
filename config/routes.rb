@@ -53,6 +53,7 @@ Rails.application.routes.draw do
         post :submit, on: :collection
       end
       resource :percentage_home, only: %i[show update]
+      resource :savings_and_investment, only: %i[show update]
     end
   end
 end

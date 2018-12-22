@@ -14,10 +14,6 @@ en:
       legal_aid_application:
         outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
         property_value: You can use property websites to find the estimated value.
-      savings_amount:
-        check_box_isa: Accounts you do not access with online banking
-        check_box_other_person_account: For example, a junior ISA for a child
-        check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
     label:
       applicant:
         uses_online_banking:
@@ -32,6 +28,69 @@ en:
         mortgage: Yes, with a mortage or loan
         owned_outright: Yes, owned outright
         "no": "No"
+      revealing_checkbox:
+        attribute:
+          providers:
+            savings_and_investments:
+              isa: Enter the estimated total in all accounts
+              cash: Enter total amount
+              other_person_account: Enter the estimated total in all accounts
+              national_savings: &enter_total_all_owned Enter the total value of all owned
+              plc_shares: *enter_total_all_owned
+              peps_unit_trusts_capital_bonds_gov_stocks: *enter_total_all_owned
+              life_assurance_endowment_policy: *enter_total_all_owned
+              check_box_isa: Bank, building society, Post Office and ISAs accounts
+              check_box_cash: Cash savings
+              check_box_other_person_account: Signatory on another person's bank account
+              check_box_national_savings: National Savings Certificates and Premium Bonds
+              check_box_plc_shares: Shares in a PLC (public limited company)
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+              check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+              hint:
+                check_box_isa: Including any money in current and savings accounts
+                check_box_other_person_account: For example, a junior ISA for a child
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+          citizens:
+            savings_and_investments:
+              isa: Enter the estimated total in all accounts
+              cash: Enter total amount
+              other_person_account: Enter the estimated total in all accounts
+              national_savings: &enter_total_you_own Enter the total value of all you own
+              plc_shares: *enter_total_you_own
+              peps_unit_trusts_capital_bonds_gov_stocks: *enter_total_you_own
+              life_assurance_endowment_policy: *enter_total_you_own
+              check_box_isa: Post Office, ISAs and other savings accounts
+              check_box_cash: Cash savings
+              check_box_other_person_account: Signatory on another person's bank account
+              check_box_national_savings: National Savings Certificates and Premium Bonds
+              check_box_plc_shares: Shares in a PLC (public limited company)
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+              check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+              hint:
+                check_box_isa: Accounts you do not access with online banking
+                check_box_other_person_account: For example, a junior ISA for a child
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+            other_assets:
+              check_box_second_home: Second property or holiday home
+              second_home_value: Enter estimated value
+              second_home_mortgage: Enter outstanding mortgage amount
+              second_home_percentage: Enter percentage share you legally own
+              check_box_timeshare_value: Timeshare
+              timeshare_value: Enter value, minus any loan and sale costs
+              check_box_land_value: Land
+              land_value: Enter estimated value
+              check_box_jewellery_value: Jewellery, art or antiques with a value over 500
+              jewellery_value: Enter estimated value, minus any sale costs
+              check_box_vehicle_value: Car, van or motorcycle less than 3 years old
+              vehicle_value: Enter estimated value, minus any outstanding payments
+              check_box_classic_car_value: Classic car purchased as an investment
+              classic_car_value: Enter the estimated value
+              check_box_money_assets_value: Money or assets from the estate of a person who has died
+              money_assets_value: Enter estimated total value
+              check_box_money_owed_value: Money owed to you, including from a private mortgage
+              money_owed_value: Enter estimated amount owed
+              check_box_trust_value: Interest in a trust
+              trust_value: Enter estimated total value
     page-title:
       suffix: Apply for legal aid
   activemodel:
@@ -53,42 +112,6 @@ en:
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home
-      savings_amount:
-        check_box_isa: Post Office, ISAs and other savings accounts
-        isa: Enter the estimated total in all accounts
-        check_box_cash: Cash savings
-        cash: Enter total amount
-        check_box_other_person_account: Signatory on another person's bank account
-        other_person_account: Enter the estimated total in all accounts
-        check_box_national_savings: National Savings Certificates and Premium Bonds
-        national_savings: Enter the total value of all you own
-        check_box_plc_shares: Shares in a PLC (public limited company)
-        plc_shares: Enter the total value of all you own
-        check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
-        peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all you own
-        check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
-        life_assurance_endowment_policy: Enter the total value of all you own
-      other_assets_declaration:
-        check_box_second_home: Second property or holiday home
-        second_home_value: Enter estimated value
-        second_home_mortgage: Enter outstanding mortgage amount
-        second_home_percentage: Enter percentage share you legally own
-        check_box_timeshare_value: Timeshare
-        timeshare_value: Enter value, minus any loan and sale costs
-        check_box_land_value: Land
-        land_value: Enter estimated value
-        check_box_jewellery_value: Jewellery, art or antiques with a value over 500
-        jewellery_value: Enter estimated value, minus any sale costs
-        check_box_vehicle_value: Car, van or motorcycle less than 3 years old
-        vehicle_value: Enter estimated value, minus any outstanding payments
-        check_box_classic_car_value: Classic car purchased as an investment
-        classic_car_value: Enter the estimated value
-        check_box_money_assets_value: Money or assets from the estate of a person who has died
-        money_assets_value: Enter estimated total value
-        check_box_money_owed_value: Money owed to you, including from a private mortgage
-        money_owed_value: Enter estimated amount owed
-        check_box_trust_value: Interest in a trust
-        trust_value: Enter estimated total value
       applicants/address_form:
         <<: *address_attrs
       applicants/basic_details_form:
@@ -392,6 +415,9 @@ en:
         percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
       show:
         h1-heading: What % share of their home does your client legally own?
+    savings_and_investments:
+      show:
+        h1-heading: Does your client have any savings and investments?
 
   citizens:
     accounts:
@@ -489,7 +515,7 @@ en:
 
   restrictions:
     names:
-      reposession_or_deferred_interest: Reposession or deferred interest in a property
+      reposession_or_deferred_interest: Repossession or deferred interest in a property
       subject_matter_of_dispute: Subject matter of dispute in other legal proceedings
       foreign_exchange_controls: Foreign exchange controls
       restraint_or_freezing_order: Restraint or freezing order
@@ -513,26 +539,6 @@ en:
     errors:
       yes_or_no: You must select either Yes or No
       problem_text: There is a problem
-    other_assets:
-      show:
-        amount_owed: Enter estimated amount owed
-        classic_car: Clasic car purchased as an investment
-        estimated_value: Enter estimated value
-        estimated_total_value: Enter estimated total value
-        h1-heading: Do you have any of the following?
-        jewellery: Jewellery, art or antiques with a value over £500
-        land: Land
-        money_assets: Money or assets from the estate of a person who has died
-        money_owed: Money owed to you, including from a private mortgage
-        mortgage: Enter outstanding mortgage amount
-        percentage: Enter percentage share you legally own
-        second_home: Second property or holiday home
-        timeshare: Timeshare
-        trust: Interest in a trust
-        value_after_loan: Enter value, minus any loan and sale costs
-        value_after_sale: Enter estimated value, minus any sale costs
-        value_after_payments: Enter estimated value, minus any outstanding payments
-        vehicle: Car, van or motorcycle less than 3 years old
   currency:
     gbp: £
     eur: €
