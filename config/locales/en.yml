@@ -425,7 +425,6 @@ en:
     own_homes:
       show:
         h1-heading: Does your client own the home that they live in?
-<<<<<<< HEAD
     restrictions:
       index:
         h1-heading: Do any restrictions apply to your client's property, savings or assets?
@@ -440,7 +439,7 @@ en:
         h1-heading: Does your client have any savings and investments?
     shared_ownerships:
       show:
-        heading_1: Does your client own thier home with anyone else?
+        heading_1: Does your client own their home with anyone else?
   citizens:
     accounts:
       index:

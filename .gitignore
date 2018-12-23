@@ -40,3 +40,6 @@ config/master.key
 /coverage/
 
 .DS_Store
+
+# ignore VScode stuff
+.vscode/*
