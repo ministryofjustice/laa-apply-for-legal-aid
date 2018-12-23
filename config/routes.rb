@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       end
       resource :percentage_home, only: %i[show update]
       resource :savings_and_investment, only: %i[show update]
+      resource :shared_ownership, only: %i[show update]
     end
   end
 end

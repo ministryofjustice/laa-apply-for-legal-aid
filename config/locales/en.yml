@@ -99,6 +99,12 @@ en:
               money_owed_value: Enter estimated amount owed
               check_box_trust_value: Interest in a trust
               trust_value: Enter estimated total value
+      shared_ownership_form:
+        shared_ownership_item:
+          partner_or_ex_partner:  Yes, a partner or ex-partner
+          housing_assocation_or_landlord: Yes, a housing association or landlord
+          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+          no_sole_owner: No, sole owner
     page-title:
       suffix: Apply for legal aid
   activemodel:
@@ -431,7 +437,9 @@ en:
     savings_and_investments:
       show:
         h1-heading: Does your client have any savings and investments?
-
+    shared_ownerships:
+      show:
+        heading_1: Does your client own their home with anyone else?
   citizens:
     accounts:
       index:
@@ -500,11 +508,6 @@ en:
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?
-      shared_ownership_item:
-          partner_or_ex_partner:  Yes, a partner or ex-partner
-          housing_assocation_or_landlord: Yes, a housing association or landlord
-          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
-          no_sole_owner: No, I am the sole owner
     restrictions:
       index:
         h1-heading: Do any restrictions apply to your property, savings or assets?
