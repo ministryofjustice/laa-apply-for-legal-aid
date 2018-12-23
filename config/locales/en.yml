@@ -29,6 +29,13 @@ en:
         mortgage: Yes, with a mortage or loan
         owned_outright: Yes, owned outright
         "no": "No"
+      outstanding_mortgage_form:
+        citizens:
+          outstanding_mortgages:
+            field_set_header: What is the outstanding mortgage on your home?
+        providers:
+          outstanding_mortgages:
+            field_set_header: What is the outstanding mortgage on your client's home?
       revealing_checkbox:
         attribute:
           providers:
