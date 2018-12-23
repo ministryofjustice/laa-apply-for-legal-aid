@@ -60,6 +60,11 @@ module Providers
       property_values: {
         # forward: to be determined,
         back: :providers_legal_aid_application_check_benefits_path
+      },
+      outstanding_mortgages: {
+        # forward: property share path
+        # TO DO set the correct path for back
+        back: :providers_legal_aid_application_online_banking_path
       }
     }.freeze
 
