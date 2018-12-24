@@ -11,7 +11,7 @@
 
     <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
 
-    <%= render partial: '/citizens/other_assets/form', locals: { model: @form, url: providers_legal_aid_application_other_assets_path(@legal_aid_application) } %>
+    <%= render partial: '/shared/forms/other_assets/form', locals: { model: @form, url: providers_legal_aid_application_other_assets_path(@legal_aid_application) } %>
 
   </div>
 </div>

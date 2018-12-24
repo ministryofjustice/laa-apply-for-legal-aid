@@ -20,6 +20,11 @@ en:
         uses_online_banking:
           'true': 'Yes'
           'false': 'No'
+      other_assets_declaration:
+        check_box_second_home: Second property or holiday home
+        second_home_value: Enter estimated value
+        second_home_mortgage: Enter outstanding mortgage amount
+        second_home_percentage: Enter percentage share you legally own
   shared:
     forms:
       date_input_fields:
@@ -79,10 +84,6 @@ en:
                 check_box_other_person_account: For example, a junior ISA for a child
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
             other_assets:
-              check_box_second_home: Second property or holiday home
-              second_home_value: Enter estimated value
-              second_home_mortgage: Enter outstanding mortgage amount
-              second_home_percentage: Enter percentage share you legally own
               check_box_timeshare_value: Timeshare
               timeshare_value: Enter value, minus any loan and sale costs
               check_box_land_value: Land
