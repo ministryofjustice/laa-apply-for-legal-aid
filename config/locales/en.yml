@@ -13,7 +13,9 @@ en:
         postcode: Postcode must be a valid UK postcode.
       legal_aid_application:
         percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-        outstanding_mortgage_amount: Check the statement from your mortgage provider or lender
+        outstanding_mortgage_amount:
+          citizen: Check the statement from your mortgage provider or lender
+          provider: ''
         property_value: You can use property websites to find the estimated value.
     label:
       applicant:
@@ -494,9 +496,17 @@ en:
       show:
         h1-heading: Do you own the home that you live in?
     property_values:
-      property_value: Enter the estimated value of your home
-      hint:
-        property_value: You can use property websites to find the estimated value.
+      form:
+        citizens:
+          property_values:
+            property_value: Enter the estimated value of your home
+            hint:
+              property_value: You can use property websites to find the estimated value.
+        providers:
+          property_values:
+            property_value: Enter the estimated value of your home
+            hint:
+              property_value: You can use property websites to find the estimated value.
       show:
         h1-heading: How much is your home worth?
 

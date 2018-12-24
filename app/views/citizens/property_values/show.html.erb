@@ -4,7 +4,7 @@
     <%= link_to t('generic.back'), new_citizens_additional_account_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
