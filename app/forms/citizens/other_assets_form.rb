@@ -90,7 +90,7 @@ module Citizens
       return unless any_second_home_value_present?
 
       SECOND_HOME_ATTRIBUTES.each do |attr|
-        errors.add(attr, :blank) if __send__(attr).blank?
+        errors.add(attr, :blank) if __send__(attr).blank? & errors[attr].empty?
       end
     end
 
