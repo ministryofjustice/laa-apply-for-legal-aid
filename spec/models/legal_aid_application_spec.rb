@@ -183,14 +183,14 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'legal_aid_application.own_home is "no"' do
-      before { legal_aid_application.update!(own_home: 'no') }
+      let(:legal_aid_application) { create :legal_aid_application, :without_own_home }
       it 'returns false' do
         expect(legal_aid_application.own_home?).to eq(false)
       end
     end
 
     context 'legal_aid_application.own_home is not "no"' do
-      before { legal_aid_application.update!(own_home: :mortgage) }
+      let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
       it 'returns true' do
         expect(legal_aid_application.own_home?).to eq(true)
       end
@@ -198,22 +198,15 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#own_capital?' do
-    before do
-      legal_aid_application.update!(
-        own_home: nil,
-        other_assets_declaration: nil,
-        savings_amount: nil
-      )
-    end
-
     context 'no home, savings or assets' do
+      let(:legal_aid_application) { create :legal_aid_application, own_home: nil }
       it 'returns nil' do
         expect(legal_aid_application.own_capital?).to eq(nil)
       end
     end
 
     context 'own home' do
-      before { legal_aid_application.update!(own_home: :owned_outright) }
+      let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
       it 'returns true' do
         expect(legal_aid_application.own_capital?).to eq(true)
       end

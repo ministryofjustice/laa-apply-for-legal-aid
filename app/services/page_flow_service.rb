@@ -27,7 +27,7 @@ class PageFlowService
     },
     savings_and_investments: {
       path: :citizens_savings_and_investment_path,
-      back: lambda do |application|
+      back: ->(application) do
         return :own_homes if application.own_home_no?
         return :percentage_homes if application.shared_ownership?
 
@@ -59,11 +59,11 @@ class PageFlowService
   end
 
   def back_path
-    STEPS_FLOW[back_step][:path]
+    STEPS_FLOW.dig(back_step, :path)
   end
 
   def forward_path
-    STEPS_FLOW[forward_step][:path]
+    STEPS_FLOW.dig(forward_step, :path)
   end
 
   private
@@ -79,12 +79,11 @@ class PageFlowService
   end
 
   def step(direction)
-    raise "Step #{current_step} is not defined" unless STEPS_FLOW[current_step]
-
-    step = STEPS_FLOW[current_step][direction]
-
+    step = STEPS_FLOW.dig(current_step, direction)
     raise "#{direction.to_s.humanize} step of #{current_step} is not defined" unless step
 
-    step.is_a?(Symbol) ? step : step.call(legal_aid_application)
+    return step unless step.is_a?(Proc)
+
+    step.call(legal_aid_application)
   end
 end

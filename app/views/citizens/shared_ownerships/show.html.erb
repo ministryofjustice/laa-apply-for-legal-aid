@@ -1,6 +1,5 @@
-<% content_for :navigation do %>
-  <%= link_to t('generic.back'), back_path, class: 'govuk-back-link', id: 'back' %>
-<% end %>
+<% content_for(:navigation) { back_link } %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>

@@ -5,16 +5,15 @@ RSpec.describe PageFlowService do
   subject { described_class.new(legal_aid_application, current_step) }
 
   describe '#back_path' do
-    context 'back_path has no logic' do
-      let(:current_step) { :property_values }
-      let(:expected_back_path) { :citizens_own_home_path }
+    let(:current_step) { :property_values }
+    let(:expected_back_path) { :citizens_own_home_path }
+    let(:expected_error) { "Back step of #{current_step} is not defined" }
 
-      it 'returns back path' do
-        expect(subject.back_path).to eq(expected_back_path)
-      end
+    it 'returns back path' do
+      expect(subject.back_path).to eq(expected_back_path)
     end
 
-    context 'back_path has logic' do
+    context 'with logic' do
       let(:current_step) { :shared_ownerships }
       let(:expected_back_path) { :citizens_property_value_path }
 
@@ -27,7 +26,7 @@ RSpec.describe PageFlowService do
       let(:current_step) { :foo_bar }
 
       it 'raises an error' do
-        expect { subject.back_path }.to raise_error("Step #{current_step} is not defined")
+        expect { subject.back_path }.to raise_error(expected_error)
       end
     end
 
@@ -36,22 +35,21 @@ RSpec.describe PageFlowService do
       before { stub_const("#{described_class}::STEPS_FLOW", own_homes: {}) }
 
       it 'raises an error' do
-        expect { subject.back_path }.to raise_error("Back step of #{current_step} is not defined")
+        expect { subject.back_path }.to raise_error(expected_error)
       end
     end
   end
 
   describe '#forward_path' do
-    context 'forward_path has no logic' do
-      let(:current_step) { :percentage_homes }
-      let(:expected_forward_path) { :citizens_savings_and_investment_path }
+    let(:current_step) { :percentage_homes }
+    let(:expected_forward_path) { :citizens_savings_and_investment_path }
+    let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
-      it 'returns forward path' do
-        expect(subject.forward_path).to eq(expected_forward_path)
-      end
+    it 'returns forward path' do
+      expect(subject.forward_path).to eq(expected_forward_path)
     end
 
-    context 'forward_path has logic' do
+    context 'with logic' do
       let(:current_step) { :own_homes }
       let(:expected_forward_path) { :citizens_property_value_path }
 
@@ -64,7 +62,7 @@ RSpec.describe PageFlowService do
       let(:current_step) { :foo_bar }
 
       it 'raises an error' do
-        expect { subject.forward_path }.to raise_error("Step #{current_step} is not defined")
+        expect { subject.forward_path }.to raise_error(expected_error)
       end
     end
 
@@ -73,7 +71,7 @@ RSpec.describe PageFlowService do
       before { stub_const("#{described_class}::STEPS_FLOW", own_homes: {}) }
 
       it 'raises an error' do
-        expect { subject.forward_path }.to raise_error("Forward step of #{current_step} is not defined")
+        expect { subject.forward_path }.to raise_error(expected_error)
       end
     end
   end
