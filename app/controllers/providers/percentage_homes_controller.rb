@@ -1,7 +1,7 @@
 module Providers
   class PercentageHomesController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::Steppable
+    include ApplicationDependable
+    include Steppable
     include SaveAsDraftable
 
     def show

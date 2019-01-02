@@ -11,16 +11,21 @@ RSpec.describe 'provider own home requests', type: :request do
   end
 
   describe 'PATCH providers/own_home' do
+    before { patch providers_legal_aid_application_own_home_path(legal_aid_application), params: params.merge(submit_button) }
+
     let(:own_home) { 'owned_outright' }
     let(:params) do
       {
-        legal_aid_application: { own_home: own_home },
-        'continue-button' => 'Continue'
+        legal_aid_application: { own_home: own_home }
       }
     end
 
     context 'Continue button pressed' do
-      before { patch providers_legal_aid_application_own_home_path(legal_aid_application), params: params }
+      let(:submit_button) do
+        {
+          'continue-button' => 'Continue'
+        }
+      end
 
       it 'updates the record' do
         expect(legal_aid_application.reload.own_home).to eq own_home
@@ -50,10 +55,10 @@ RSpec.describe 'provider own home requests', type: :request do
     end
 
     context 'Save as draft button pressed' do
-      before do
-        params.delete('continue-button')
-        params['draft-button'] = 'Save as draft'
-        patch providers_legal_aid_application_own_home_path(legal_aid_application), params: params
+      let(:submit_button) do
+        {
+          'draft-button' => 'Save as draft'
+        }
       end
 
       it 'updates the record' do

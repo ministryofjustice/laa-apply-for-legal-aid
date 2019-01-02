@@ -4,7 +4,7 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
       <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
-      <%= render 'shared/forms/shared_ownership_form', form_path: citizens_shared_ownership_path, show_draft: false %>
+      <%= render 'shared/forms/shared_ownership_form', form_path: citizens_shared_ownership_path %>
     </h1>
   </div>
 </div>

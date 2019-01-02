@@ -92,7 +92,12 @@ RSpec.describe 'check your answers requests', type: :request do
 
   describe 'PATCH  /providers/applications/:legal_aid_application_id/check_provider_answers/continue' do
     context 'Continue' do
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue?continue-button=Continue" }
+      let(:params) do
+        {
+          'continue-button' => 'Continue'
+        }
+      end
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
         application.check_your_answers!
@@ -109,7 +114,12 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     context 'Save as draft' do
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue?draft-button=Save as draft" }
+      let(:params) do
+        {
+          'draft-button' => 'Save as draft'
+        }
+      end
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
         application.check_your_answers!

@@ -26,13 +26,18 @@ RSpec.describe 'providers savings and investments', type: :request do
         savings_amount: {
           isa: isa,
           check_box_isa: check_box_isa
-        },
-        'continue-button' => 'Continue'
+        }
       }
     end
 
+    subject { patch providers_legal_aid_application_savings_and_investment_path(application), params: params.merge(submit_button) }
+
     context 'Submitted with Continue button' do
-      subject { patch providers_legal_aid_application_savings_and_investment_path(application), params: params }
+      let(:submit_button) do
+        {
+          'continue-button' => 'Continue'
+        }
+      end
 
       it 'updates the isa amount' do
         expect { subject }.to change { savings_amount.reload.isa.to_s }.to(isa)
@@ -73,13 +78,11 @@ RSpec.describe 'providers savings and investments', type: :request do
     end
 
     context 'Submitted with Save as draft button' do
-      before do
-        params.delete('continue-button')
-        params['draft-button'] = 'Save as draft'
-        patch providers_legal_aid_application_own_home_path(application), params: params
+      let(:submit_button) do
+        {
+          'draft-button' => 'Save as draft'
+        }
       end
-
-      subject { patch providers_legal_aid_application_savings_and_investment_path(application), params: params }
 
       it 'updates the isa amount' do
         expect { subject }.to change { savings_amount.reload.isa.to_s }.to(isa)

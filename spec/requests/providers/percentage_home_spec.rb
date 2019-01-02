@@ -15,13 +15,18 @@ RSpec.describe 'provider percentage share of home test', type: :request do
     let(:percentage_home) { '33.33' }
     let(:params) do
       {
-        legal_aid_application: { percentage_home: percentage_home },
-        'continue-button' => 'Continue'
+        legal_aid_application: { percentage_home: percentage_home }
       }
     end
 
+    subject { patch providers_legal_aid_application_percentage_home_path(application), params: params.merge(submit_button) }
+
     context 'Submitted with Continue button' do
-      subject { patch providers_legal_aid_application_percentage_home_path(application), params: params }
+      let(:submit_button) do
+        {
+          'continue-button' => 'Continue'
+        }
+      end
 
       it 'updates the legal_aid_application' do
         expect { subject }.to change { application.reload.percentage_home.to_s }.to(percentage_home)
@@ -55,11 +60,11 @@ RSpec.describe 'provider percentage share of home test', type: :request do
     end
 
     context 'Submitted with Save as draft button' do
-      before do
-        params.delete('continue-button')
-        params['draft-button'] = 'Save as draft'
+      let(:submit_button) do
+        {
+          'draft-button' => 'Save as draft'
+        }
       end
-      subject { patch providers_legal_aid_application_percentage_home_path(application), params: params }
 
       it 'updates the legal_aid_application' do
         expect { subject }.to change { application.reload.percentage_home.to_s }.to(percentage_home)

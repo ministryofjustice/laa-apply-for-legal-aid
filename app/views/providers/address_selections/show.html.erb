@@ -50,7 +50,7 @@
 
       <p><%= link_to t('.link_text'), providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
 
-      <%= render partial: 'shared/forms/continue_and_draft_buttons', locals: { continue_id: 'select-address-button', show_draft: true, form: f } %>
+      <%= render partial: 'shared/forms/next_action_buttons', locals: { continue_id: 'select-address-button', show_draft: true, form: f } %>
     <% end %>
   </div>
 </div>

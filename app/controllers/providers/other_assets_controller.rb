@@ -1,6 +1,6 @@
 module Providers
   class OtherAssetsController < BaseController
-    include Providers::ApplicationDependable
+    include ApplicationDependable
     include SaveAsDraftable
 
     def show
@@ -10,7 +10,7 @@ module Providers
     def update
       @form = Citizens::OtherAssetsForm.new(form_params)
       if @form.save
-        continue_or_save_draft(next_url)
+        continue_or_save_draft(continue_url: next_url)
       else
         render :show
       end

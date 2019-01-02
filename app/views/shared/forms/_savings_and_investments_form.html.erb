@@ -23,10 +23,10 @@
             ) %>
       </div>
 
-      <%= render partial: 'shared/forms/continue_and_draft_buttons',
+      <%= render partial: 'shared/forms/next_action_buttons',
                  locals: {
                    continue_id: 'continue',
-                   show_draft: show_draft,
+                   show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
                    form: form
                  } %>
 

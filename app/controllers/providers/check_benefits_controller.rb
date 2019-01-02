@@ -1,7 +1,7 @@
 module Providers
   class CheckBenefitsController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::Steppable
+    include ApplicationDependable
+    include Steppable
 
     def index
       legal_aid_application.add_benefit_check_result if legal_aid_application.benefit_check_result_needs_updating?

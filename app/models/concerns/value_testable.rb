@@ -5,9 +5,19 @@
 module ValueTestable
   extend ActiveSupport::Concern
 
+  class_methods do
+    def non_value_attrs
+      @non_value_attrs ||= %w[id legal_aid_application_id created_at updated_at]
+    end
+
+    def non_value_attrs=(attributes)
+      @non_value_attrs = attributes
+    end
+  end
+
   def any_value?
-    values_present = value_attrs.map { |attr| __send__(attr).present? && __send__(attr) != 0 }
-    values_present.any?
+    values = value_attrs.map { |attr| __send__(attr) }
+    values.any? { |value| value.present? && value != 0 }
   end
 
   private

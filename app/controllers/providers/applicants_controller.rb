@@ -1,8 +1,8 @@
 module Providers
   class ApplicantsController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::Steppable
-    include Providers::SaveAsDraftable
+    include ApplicationDependable
+    include Steppable
+    include SaveAsDraftable
 
     def show
       @form = Applicants::BasicDetailsForm.new(model: applicant)

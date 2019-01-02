@@ -1,7 +1,7 @@
 module Providers
   class RestrictionsController < ApplicationController
     include Steppable
-    include Providers::ApplicationDependable
+    include ApplicationDependable
     include SaveAsDraftable
 
     def index

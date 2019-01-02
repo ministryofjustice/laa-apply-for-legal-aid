@@ -1,7 +1,7 @@
 module Providers
   class CheckProviderAnswersController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::SaveAsDraftable
+    include ApplicationDependable
+    include SaveAsDraftable
     include Steppable
 
     def index

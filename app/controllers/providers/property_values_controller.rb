@@ -11,17 +11,21 @@ module Providers
       @form = LegalAidApplications::PropertyValueForm.new(edit_params)
 
       if @form.save
-        if legal_aid_application.own_home == 'mortgage'
-          continue_or_save_draft(providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application))
-        else
-          continue_or_save_draft(providers_legal_aid_application_shared_ownership_path(legal_aid_application))
-        end
+        continue_or_save_draft(continue_url: next_url)
       else
         render :show
       end
     end
 
     private
+
+    def next_url
+      if legal_aid_application.own_home_mortgage?
+        providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application)
+      else
+        providers_legal_aid_application_shared_ownership_path(legal_aid_application)
+      end
+    end
 
     def property_value_params
       params.require(:legal_aid_application).permit(:property_value)

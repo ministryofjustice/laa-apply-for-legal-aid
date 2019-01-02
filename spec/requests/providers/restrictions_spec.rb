@@ -23,15 +23,20 @@ RSpec.describe 'citizen restrictions request', type: :request do
     let(:params) do
       {
         legal_aid_application_id: legal_aid_application.id,
-        'continue-button' => 'Continue',
         legal_aid_application: {
           restriction_ids: restriction_ids
         }
       }
     end
 
+    subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params.merge(submit_button) }
+
     context 'Form submitted with continue button' do
-      subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params }
+      let(:submit_button) do
+        {
+          'continue-button' => 'Continue'
+        }
+      end
 
       it 'creates a mapping for each restriction' do
         expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
@@ -64,12 +69,11 @@ RSpec.describe 'citizen restrictions request', type: :request do
     end
 
     context 'Form submitted with Save as draft button' do
-      before do
-        params.delete('continue-button')
-        params['draft-button'] = 'Save as draft'
+      let(:submit_button) do
+        {
+          'draft-button' => 'Save as draft'
+        }
       end
-
-      subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params }
 
       it 'creates a mapping for each restriction' do
         expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
@@ -87,16 +91,6 @@ RSpec.describe 'citizen restrictions request', type: :request do
 
         it 'redirects to check your answers' do
           expect(response).to redirect_to providers_legal_aid_applications_path
-        end
-      end
-
-      context 'on error' do
-        let(:restriction_ids) { %i[foo bar] }
-
-        # As I can not think of a "normal" behaviour that can cause an error.
-        # Error handling falls back to standard error handling.
-        it 'raises error' do
-          expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
     end

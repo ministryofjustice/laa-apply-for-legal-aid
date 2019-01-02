@@ -1,7 +1,7 @@
 module Providers
   class LegalAidApplicationsController < BaseController
     attr_reader :legal_aid_application
-    include Providers::Steppable
+    include Steppable
 
     # GET /provider/applications
     def index; end
