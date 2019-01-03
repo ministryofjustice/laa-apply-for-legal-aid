@@ -31,3 +31,6 @@ Style/Documentation:
 
 Style/SymbolArray:
   EnforcedStyle: percent
+
+Style/Lambda:
+  EnforcedStyle: literal

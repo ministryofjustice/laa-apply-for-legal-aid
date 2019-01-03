@@ -49,17 +49,9 @@ RSpec.describe 'citizen savings and investments', type: :request do
       expect(response.body).not_to match('govuk-form-group--error')
     end
 
-    xit 'redirects to the next step in Citizen jouney' do
-      # TODO: - set redirect path when known
+    it 'redirects to the next step in Citizen jouney' do
       subject
-      expect(response).to redirect_to(:some_path)
-    end
-
-    it 'displays holding page' do
-      # TODO: Delete when redirect set
-      subject
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to match('Navigate to question 3a. Other capital assets')
+      expect(response).to redirect_to(citizens_other_assets_path)
     end
 
     context 'with invalid input' do

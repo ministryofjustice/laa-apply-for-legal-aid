@@ -44,11 +44,9 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
         expect { patch_request }.not_to change { LegalAidApplication.count }
       end
 
-      it 'displays holding page' do
-        # TODO: Delete when redirect set
+      it 'redirects to the next step in Citizen jouney' do
         patch_request
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match('Navigate to question 1e')
+        expect(response).to redirect_to(citizens_percentage_home_path)
       end
 
       it 'update legal_aid_application record' do
@@ -64,11 +62,9 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
         expect { patch_request }.not_to change { LegalAidApplication.count }
       end
 
-      it 'displays holding page' do
-        # TODO: Delete when redirect set
+      it 'redirects to the next step in Citizen jouney' do
         patch_request
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match('Navigate to question 2a')
+        expect(response).to redirect_to(citizens_savings_and_investment_path)
       end
 
       it 'update legal_aid_application record' do

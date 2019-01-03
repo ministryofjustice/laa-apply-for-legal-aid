@@ -18,4 +18,8 @@ module ApplicationHelper
     controller = controller_path.split('/')
     t ".#{[*controller, lazy_t].join('.')}", *args
   end
+
+  def back_link
+    link_to t('generic.back'), back_path, class: 'govuk-back-link', id: 'back'
+  end
 end
