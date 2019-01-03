@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
       resource :own_home, only: %i[show update]
-      resources :check_benefits, only: [:index]
+      resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resources :check_benefits, only: [:index] do
         get :passported, on: :collection

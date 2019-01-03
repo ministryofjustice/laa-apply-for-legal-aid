@@ -47,5 +47,17 @@ FactoryBot.define do
     trait :with_savings_amount do
       savings_amount
     end
+
+    trait :with_negative_benefit_check_result do
+      benefit_check_result { build :benefit_check_result }
+    end
+
+    trait :with_positive_benefit_check_result do
+      benefit_check_result { build :benefit_check_result, :positive }
+    end
+
+    trait :with_undetermined_benefit_check_result do
+      benefit_check_result { build :benefit_check_result, :undetermined }
+    end
   end
 end
