@@ -108,7 +108,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to capital restrictions' do
             expect(application.reload.other_assets?).to be true
             expect(application.own_home?).to be false
-            expect(application.savings_or_investments?).to be false
+            expect(application.savings_amount?).to be false
             expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
           end
         end
@@ -127,7 +127,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to capital restrictions' do
             expect(application.reload.other_assets?).to be false
             expect(application.own_home?).to be false
-            expect(application.savings_or_investments?).to be true
+            expect(application.savings_amount?).to be true
             expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
           end
         end
@@ -143,7 +143,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to capital restrictions' do
             expect(application.reload.other_assets?).to be false
             expect(application.own_home?).to be true
-            expect(application.savings_or_investments?).to be false
+            expect(application.savings_amount?).to be false
             expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
           end
         end
@@ -159,7 +159,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to check provider answers' do
             expect(application.reload.other_assets?).to be false
             expect(application.own_home?).to be false
-            expect(application.savings_or_investments?).to be false
+            expect(application.savings_amount?).to be false
             expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application))
           end
         end
@@ -180,7 +180,7 @@ RSpec.describe 'provider other assets requests', type: :request do
         end
 
         it 'does not update the record' do
-          expect(oad.any_value?).to be false
+          expect(oad.positive?).to be false
         end
 
         it 'the response includes the error message' do
@@ -231,7 +231,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to provider applications page' do
             expect(application.reload.other_assets?).to be true
             expect(application.own_home?).to be false
-            expect(application.savings_or_investments?).to be false
+            expect(application.savings_amount?).to be false
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
@@ -250,7 +250,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to provider applications page' do
             expect(application.reload.other_assets?).to be false
             expect(application.own_home?).to be false
-            expect(application.savings_or_investments?).to be true
+            expect(application.savings_amount?).to be true
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
@@ -266,7 +266,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to provider applications page' do
             expect(application.reload.other_assets?).to be false
             expect(application.own_home?).to be true
-            expect(application.savings_or_investments?).to be false
+            expect(application.savings_amount?).to be false
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
@@ -282,7 +282,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           it 'redirects to provider applications page' do
             expect(application.reload.other_assets?).to be false
             expect(application.own_home?).to be false
-            expect(application.savings_or_investments?).to be false
+            expect(application.savings_amount?).to be false
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
@@ -303,7 +303,7 @@ RSpec.describe 'provider other assets requests', type: :request do
         end
 
         it 'does not update the record' do
-          expect(oad.any_value?).to be false
+          expect(oad.positive?).to be false
         end
 
         it 'the response includes the error message' do

@@ -31,7 +31,7 @@ module Providers
     end
 
     def savings_or_investments?
-      legal_aid_application.savings_or_investments?
+      legal_aid_application.savings_amount?
     end
 
     def other_assets?
