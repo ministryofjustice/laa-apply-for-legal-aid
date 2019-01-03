@@ -51,9 +51,7 @@ When(/^I click clear search$/) do
 end
 
 Then(/^proceeding search field is empty$/) do
-  puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
   expect(page).to have_field('proceeding-search-input', with: '')
-  puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
 end
 
 Then(/^the results section is empty$/) do
