@@ -1,0 +1,13 @@
+<table class="legal_aid_applications govuk-table">
+  <caption class="govuk-table__caption">Legal Aid Applications</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="col">ID</th>
+      <th class="govuk-table__header" scope="col">Created At</th>
+      <th class="govuk-table__header" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <%= render partial: 'legal_aid_application', collection: legal_aid_applications %>
+  </tbody>
+</table>

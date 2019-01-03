@@ -615,6 +615,7 @@ en:
     information: Information
     start: Start
     start_now: Start now
+    view: View
     address:
       postcode_label: postcode
       postcode: Postcode
