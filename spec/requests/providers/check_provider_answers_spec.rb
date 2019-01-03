@@ -94,7 +94,7 @@ RSpec.describe 'check your answers requests', type: :request do
     context 'Continue' do
       let(:params) do
         {
-          'continue-button' => 'Continue'
+          continue_button: 'Continue'
         }
       end
       subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
@@ -116,7 +116,7 @@ RSpec.describe 'check your answers requests', type: :request do
     context 'Save as draft' do
       let(:params) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
       subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }

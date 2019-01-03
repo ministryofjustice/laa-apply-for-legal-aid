@@ -72,7 +72,7 @@ RSpec.describe 'check benefits requests', type: :request do
     context 'Form submitted with Continue button' do
       let(:params) do
         {
-          'continue-button' => 'Continue'
+          continue_button: 'Continue'
         }
       end
 
@@ -104,7 +104,7 @@ RSpec.describe 'check benefits requests', type: :request do
     context 'Form submitted with Save as draft button' do
       let(:params) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
 

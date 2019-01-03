@@ -77,7 +77,7 @@ RSpec.describe 'address selections requests', type: :request do
           postcode: postcode,
           lookup_id: lookup_id
         },
-        'continue-button' => 'Continue'
+        continue_button: 'Continue'
       }
     end
     let(:patch_request) { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: params }

@@ -24,16 +24,21 @@ RSpec.describe 'providers shared ownership request test', type: :request do
       {
         legal_aid_application: {
           shared_ownership: shared_ownership
-        },
-        'continue-button' => 'Continue'
+        }
       }
     end
 
     let(:patch_request) do
-      patch providers_legal_aid_application_shared_ownership_path(legal_aid_application), params: params
+      patch providers_legal_aid_application_shared_ownership_path(legal_aid_application), params: params.merge(submit_button)
     end
 
     context 'Submitted with Continue button' do
+      let(:submit_button) do
+        {
+          continue_button: 'Continue'
+        }
+      end
+
       context 'Yes path' do
         let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
         it 'does NOT create an new application record' do
@@ -82,10 +87,12 @@ RSpec.describe 'providers shared ownership request test', type: :request do
     end
 
     context 'submitted with a Save as Draft button' do
-      before do
-        params.delete('continue-button')
-        params['draft-button'] = 'Save as draft'
+      let(:submit_button) do
+        {
+          draft_button: 'Save as draft'
+        }
       end
+
       context 'Yes path' do
         let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
         it 'does NOT create an new application record' do

@@ -35,7 +35,7 @@ RSpec.describe 'providers savings and investments', type: :request do
     context 'Submitted with Continue button' do
       let(:submit_button) do
         {
-          'continue-button' => 'Continue'
+          continue_button: 'Continue'
         }
       end
 
@@ -80,7 +80,7 @@ RSpec.describe 'providers savings and investments', type: :request do
     context 'Submitted with Save as draft button' do
       let(:submit_button) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
 

@@ -54,7 +54,7 @@ RSpec.describe 'providers applicant requests', type: :request do
     context 'Form submitted using Continue button' do
       let(:submit_button) do
         {
-          'continue-button' => 'Continue'
+          continue_button: 'Continue'
         }
       end
 
@@ -125,7 +125,7 @@ RSpec.describe 'providers applicant requests', type: :request do
     context 'Form submitted using Save as draft button' do
       let(:submit_button) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
 
@@ -190,7 +190,7 @@ RSpec.describe 'providers applicant requests', type: :request do
       it 'raises' do
         expect {
           patch_request
-        }.to raise_error RuntimeError, 'No continue or Save as draft button when expected'
+        }.to raise_error RuntimeError, 'No Continue or Save as draft button when expected'
       end
     end
   end

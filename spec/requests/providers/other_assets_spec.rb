@@ -74,7 +74,7 @@ RSpec.describe 'provider other assets requests', type: :request do
 
     context 'Submitted with Continue button' do
       let(:submit_button) do
-        { 'continue-button' => 'Continue' }
+        { continue_button: 'Continue' }
       end
 
       before do
@@ -196,7 +196,7 @@ RSpec.describe 'provider other assets requests', type: :request do
     context 'Submitted with Save as draft button' do
       let(:submit_button) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
 

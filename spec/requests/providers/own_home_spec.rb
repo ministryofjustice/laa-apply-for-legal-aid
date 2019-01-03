@@ -23,7 +23,7 @@ RSpec.describe 'provider own home requests', type: :request do
     context 'Continue button pressed' do
       let(:submit_button) do
         {
-          'continue-button' => 'Continue'
+          continue_button: 'Continue'
         }
       end
 
@@ -57,7 +57,7 @@ RSpec.describe 'provider own home requests', type: :request do
     context 'Save as draft button pressed' do
       let(:submit_button) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
 

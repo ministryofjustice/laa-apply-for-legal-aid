@@ -24,7 +24,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
     before { patch providers_legal_aid_application_outstanding_mortgage_path(application), params: params.merge(submit_button) }
 
     let(:submit_button) do
-      { 'continue-button' => 'Continue' }
+      { continue_button: 'Continue' }
     end
 
     let(:outstanding_mortgage_amount) { '321,654.87' }
@@ -63,7 +63,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
     context 'Submitted with the Save as draft button' do
       let(:submit_button) do
         {
-          'draft-button' => 'Save as draft'
+          draft_button: 'Save as draft'
         }
       end
 
