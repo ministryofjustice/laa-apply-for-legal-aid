@@ -33,10 +33,10 @@
               <td class="govuk-table__cell"><%= application.applicant.full_name %></th>
               <td class="govuk-table__cell"><%= l(application.created_at.to_date) %></th>
               <td class="govuk-table__cell"><%= application.application_ref %></th>
-              <td class="govuk-table__cell">In progress</td>
+              <td class="govuk-table__cell"><%= application.model_t(:state) %></td>
             </tr>
-          <% end  %>
-        </tbody>
+          </tbody>
+        <% end %>
       </table>
     </div>
   </div>

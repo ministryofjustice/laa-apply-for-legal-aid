@@ -2,6 +2,7 @@
 # rubocop:disable Metrics/ClassLength
 class LegalAidApplication < ApplicationRecord
   include AASM
+  include TranslatableModelAttribute
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
