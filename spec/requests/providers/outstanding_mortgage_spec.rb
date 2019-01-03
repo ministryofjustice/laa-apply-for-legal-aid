@@ -76,7 +76,6 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
           it 'records the value in the legal aid application table' do
             legal_aid_application.reload
             expect(legal_aid_application.outstanding_mortgage_amount).to be_within(0.01).of(321_654.87)
-            expect(legal_aid_application.updated_at.utc.to_i).to be_within(1).of(Time.now.to_i)
           end
 
           it 'displays the provider applications home page' do

@@ -56,7 +56,6 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
           it 'records the value in the legal aid application table' do
             legal_aid_application.reload
             expect(legal_aid_application.property_value).to be_within(0.01).of(123_456.78)
-            expect(legal_aid_application.updated_at.utc.to_i).to be_within(1).of(Time.now.to_i)
           end
         end
       end
