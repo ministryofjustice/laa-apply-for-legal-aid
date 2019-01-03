@@ -574,6 +574,21 @@ en:
           what_you_will_need: What you will need
           list:
             item_1: your online banking log in
+    check_answers:
+      index:
+        h1-heading: Check your answers
+        assets:
+          heading: Property, savings and other assets
+          own_home: Own the home you live in
+          property_value: Property value
+          outstanding_mortgage: Outstanding mortgage amount
+          shared_ownership: Owned with anyone else
+          savings_and_investments: Savings and investments
+          other_assets: Other assets
+          restrictions: Do any restrictions apply?
+        submit:
+          heading: Submit your details
+          text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
 
   restrictions:
     names:

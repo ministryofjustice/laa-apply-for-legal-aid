@@ -83,13 +83,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
           }
         end
 
-        # TODO: remove when "check_answers" page is implemented
-        it 'redirects to the capital restrictions page' do
-          expect(response.body).to eq('citizens_check_answers_path')
-        end
-
-        # TODO: enable when "check_answers" page is implemented
-        xit 'redirects to the capital restrictions page' do
+        it 'redirects to check answers page' do
           expect(response).to redirect_to(citizens_check_answers_path)
         end
       end

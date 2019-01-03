@@ -37,6 +37,7 @@ class LegalAidApplication < ApplicationRecord
     state :checking_answers
     state :answers_checked
     state :provider_submitted
+    state :means_completed
 
     event :check_your_answers do
       transitions from: :initiated, to: :checking_answers
@@ -55,6 +56,10 @@ class LegalAidApplication < ApplicationRecord
 
     event :reset do
       transitions from: :checking_answers, to: :initiated
+    end
+
+    event :complete_means do
+      transitions from: :provider_submitted, to: :means_completed
     end
   end
 
