@@ -1,7 +1,8 @@
 module Providers
   class ApplicantsController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::Steppable
+    include ApplicationDependable
+    include Steppable
+    include SaveAsDraftable
 
     def show
       @form = Applicants::BasicDetailsForm.new(model: applicant)
@@ -10,7 +11,7 @@ module Providers
     def update
       @form = Applicants::BasicDetailsForm.new(form_params)
       if @form.save
-        redirect_to next_step_url
+        continue_or_save_draft
       else
         render :show
       end

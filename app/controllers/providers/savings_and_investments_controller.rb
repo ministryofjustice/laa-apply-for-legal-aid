@@ -1,6 +1,8 @@
 module Providers
   class SavingsAndInvestmentsController < ApplicationController
     include ApplicationDependable
+    include SaveAsDraftable
+    include Steppable
     helper_method :bank_accounts, :attributes
 
     def show
@@ -11,7 +13,7 @@ module Providers
       @form = SavingsAmounts::SavingsAmountsForm.new(form_params.merge(model: savings_amount))
 
       if @form.save
-        render plain: 'Holding page: Navigate to question 3a. Other capital assets'
+        continue_or_save_draft
       else
         render :show
       end

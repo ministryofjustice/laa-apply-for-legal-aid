@@ -1,7 +1,7 @@
 module Providers
   class AddressesController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::Steppable
+    include ApplicationDependable
+    include Steppable
 
     def show
       @form = Addresses::AddressForm.new(model: address)

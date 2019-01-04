@@ -63,7 +63,7 @@ Feature: Civil application journeys
     Then I choose "Yes"
     Then I click "Continue"
     Then I am on the About the Financial Assessment page
-    Then I click "Submit"
+    Then I click "Continue"
     Then I am on the application confirmation page
 
   @localhost_request @javascript @vcr
@@ -89,7 +89,7 @@ Feature: Civil application journeys
     Then I choose "Yes"
     Then I click "Continue"
     Then I am on the About the Financial Assessment page
-    Then I click "Submit"
+    Then I click "Continue"
     Then I am on the application confirmation page
 
   @javascript @vcr

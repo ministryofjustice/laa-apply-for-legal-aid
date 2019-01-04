@@ -15,6 +15,11 @@
                               class: 'govuk-!-width-one-third' %>
   <% end %>
 
-  <%= govuk_submit_button t('generic.continue') %>
+  <%= render partial: 'shared/forms/next_action_buttons',
+             locals: {
+               continue_id: 'continue',
+               show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+               form: form
+             } %>
 
 <% end %>

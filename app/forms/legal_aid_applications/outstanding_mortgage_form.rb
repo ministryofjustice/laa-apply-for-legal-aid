@@ -8,7 +8,7 @@ module LegalAidApplications
     validates(
       :outstanding_mortgage_amount,
       presence: true,
-      numericality: { greater_than: 0, allow_blank: true }
+      numericality: { greater_than_or_equal_to: 0, allow_blank: true }
     )
 
     private

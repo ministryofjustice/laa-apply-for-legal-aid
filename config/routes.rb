@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
       resource :own_home, only: %i[show update]
-      resources :check_benefits, only: [:index]
+      resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resources :check_benefits, only: [:index] do
         get :passported, on: :collection
@@ -51,7 +51,7 @@ Rails.application.routes.draw do
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
-        post :continue, on: :collection
+        patch :continue, on: :collection
       end
       resources :restrictions, only: %i[index create] # as multiple restrictions
       resource :about_the_financial_assessment, only: [:show] do

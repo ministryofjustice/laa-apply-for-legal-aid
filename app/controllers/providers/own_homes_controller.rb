@@ -2,6 +2,7 @@ module Providers
   class OwnHomesController < ApplicationController
     include ApplicationDependable
     include Steppable
+    include SaveAsDraftable
 
     def show
       @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
@@ -9,19 +10,22 @@ module Providers
 
     def update
       @form = LegalAidApplications::OwnHomeForm.new(form_params)
-
       if @form.save
-        if @form.own_home_no?
-          render plain: 'Holding page: 2a. Does your client have any savings or investments?'
-        else
-          render plain: 'Holding page: 1b. How much is your client’s home worth'
-        end
+        continue_or_save_draft(continue_url: next_url)
       else
         render :show
       end
     end
 
     private
+
+    def next_url
+      if @form.own_home_no?
+        providers_legal_aid_application_savings_and_investment_path(legal_aid_application)
+      else
+        providers_legal_aid_application_property_value_path(legal_aid_application)
+      end
+    end
 
     def own_home_params
       return {} unless params[:legal_aid_application]

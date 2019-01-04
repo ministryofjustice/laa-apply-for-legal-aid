@@ -1,7 +1,8 @@
 module Providers
   class AddressSelectionsController < BaseController
-    include Providers::ApplicationDependable
-    include Providers::Steppable
+    include ApplicationDependable
+    include Steppable
+    include SaveAsDraftable
 
     def show # rubocop:disable Metrics/AbcSize
       return redirect_to back_step_url unless address.postcode
@@ -20,7 +21,7 @@ module Providers
       @form = Addresses::AddressSelectionForm.new(permitted_params.merge(addresses: @addresses, model: address))
 
       if @form.save
-        redirect_to next_step_url
+        continue_or_save_draft
       else
         render :show
       end

@@ -1,6 +1,6 @@
 module Providers
   class AboutTheFinancialAssessmentsController < BaseController
-    include Providers::ApplicationDependable
+    include ApplicationDependable
     include Steppable
 
     def show; end

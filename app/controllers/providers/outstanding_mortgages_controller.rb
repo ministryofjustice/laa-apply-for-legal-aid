@@ -1,6 +1,7 @@
 module Providers
   class OutstandingMortgagesController < BaseController
     include Steppable
+    include SaveAsDraftable
 
     def show
       @form = LegalAidApplications::OutstandingMortgageForm.new(model: legal_aid_application)
@@ -10,8 +11,7 @@ module Providers
       @form = LegalAidApplications::OutstandingMortgageForm.new(legal_aid_application_params)
 
       if @form.save
-        render plain: 'Landing page: 1d. Does your client share ownership of their home?'
-        # redirect_to next_step_path
+        continue_or_save_draft
       else
         render :show
       end

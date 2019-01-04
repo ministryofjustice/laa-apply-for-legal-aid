@@ -9,6 +9,7 @@
   <div class="govuk-grid-column-two-thirds">
     <%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form,
                                                                              user_type: 'provider',
+                                                                             show_draft: true,
                                                                              url: providers_legal_aid_application_outstanding_mortgage_path } %>
   </div>
 </div>

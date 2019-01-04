@@ -201,7 +201,7 @@ RSpec.describe LegalAidApplication, type: :model do
     context 'no home, savings or assets' do
       let(:legal_aid_application) { create :legal_aid_application, own_home: nil }
       it 'returns nil' do
-        expect(legal_aid_application.own_capital?).to eq(nil)
+        expect(legal_aid_application.own_capital?).to be false
       end
     end
 

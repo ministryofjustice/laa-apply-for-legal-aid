@@ -8,5 +8,6 @@
 <%= render(
       'shared/forms/savings_and_investments_form',
       bank_accounts: [],
-      form_path: providers_legal_aid_application_savings_and_investment_path(@legal_aid_application)
+      form_path: providers_legal_aid_application_savings_and_investment_path(@legal_aid_application),
+      show_draft: true
     ) %>

@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Providers::OutstandingMortgagesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:params) do
+    {
+      legal_aid_application: { outstanding_mortgage_amount: outstanding_mortgage_amount },
+      legal_aid_application_id: application.id
+    }
+  end
 
   describe 'provider outstanding mortgage test' do
     describe 'GET /providers/applications/:id/outstanding_mortgage' do
@@ -9,49 +15,92 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML("What is the outstanding mortgage on your client's home?"))
+        expect(unescaped_response_body).to include("What is the outstanding mortgage on your client's home?")
       end
     end
   end
 
   describe 'PATCH /providers/applications/:id/outstanding_mortgage', type: :request do
-    let(:params) do
-      {
-        legal_aid_application: { outstanding_mortgage_amount: 321_654.87 },
-        legal_aid_application_id: application.id
-      }
+    before { patch providers_legal_aid_application_outstanding_mortgage_path(application), params: params.merge(submit_button) }
+
+    let(:submit_button) do
+      { continue_button: 'Continue' }
     end
 
-    before { patch providers_legal_aid_application_outstanding_mortgage_path(application), params: params }
+    let(:outstanding_mortgage_amount) { '321,654.87' }
 
-    context 'when an outstanding mortgage value is entered' do
-      context 'with valid values' do
+    context 'Submitted with the Continue button' do
+      context 'when an outstanding mortgage value is entered' do
+        context 'with valid values' do
+          let(:application) { legal_aid_application }
+
+          it 'records the value in the legal aid application table' do
+            legal_aid_application.reload
+            expect(legal_aid_application.outstanding_mortgage_amount).to be_within(0.01).of(321_654.87)
+          end
+
+          it 'redirects to the shared ownership page' do
+            expect(response).to redirect_to providers_legal_aid_application_shared_ownership_path(application)
+          end
+        end
+      end
+
+      context 'when an outstanding mortgage value is not entered' do
         let(:application) { legal_aid_application }
+        let(:outstanding_mortgage_amount) { '' }
 
-        it 'records the value in the legal aid application table' do
+        it 'shows an error message' do
+          expect(response.body).to include('govuk-error-summary__title')
+        end
+
+        it 'does not record the value in the legal aid application table' do
           legal_aid_application.reload
-          expect(legal_aid_application.outstanding_mortgage_amount).to be_within(0.01).of(321_654.87)
-          expect(legal_aid_application.updated_at.utc.to_i).to be_within(1).of(Time.now.to_i)
+          expect(legal_aid_application.outstanding_mortgage_amount).to be nil
         end
       end
     end
 
-    context 'when an outstanding mortgage value is not entered' do
-      let(:application) { legal_aid_application }
-      let(:params) do
+    context 'Submitted with the Save as draft button' do
+      let(:submit_button) do
         {
-          legal_aid_application: { outstanding_mortgage_amount: '' },
-          legal_aid_application_id: application.id
+          draft_button: 'Save as draft'
         }
       end
 
-      it 'shows an error message' do
-        expect(response.body).to include('govuk-error-summary__title')
+      let(:outstanding_mortgage_amount) { '321,654.87' }
+
+      context 'when an outstanding mortgage value is entered' do
+        context 'with valid values' do
+          let(:application) { legal_aid_application }
+
+          it 'records the value in the legal aid application table' do
+            legal_aid_application.reload
+            expect(legal_aid_application.outstanding_mortgage_amount).to be_within(0.01).of(321_654.87)
+          end
+
+          it 'displays the provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
       end
 
-      it 'does not record the value in the legal aid application table' do
-        legal_aid_application.reload
-        expect(legal_aid_application.outstanding_mortgage_amount).to be nil
+      context 'when an outstanding mortgage value is not entered' do
+        let(:application) { legal_aid_application }
+        let(:params) do
+          {
+            legal_aid_application: { outstanding_mortgage_amount: '' },
+            legal_aid_application_id: application.id
+          }
+        end
+
+        it 'shows an error message' do
+          expect(response.body).to include('govuk-error-summary__title')
+        end
+
+        it 'does not record the value in the legal aid application table' do
+          legal_aid_application.reload
+          expect(legal_aid_application.outstanding_mortgage_amount).to be nil
+        end
       end
     end
   end

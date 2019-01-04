@@ -12,5 +12,11 @@
     </fieldset>
   </div>
   <div class="govuk-!-padding-bottom-6"></div>
-  <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+
+  <%= render partial: 'shared/forms/next_action_buttons',
+             locals: {
+               continue_id: 'continue',
+               show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+               form: form
+             } %>
 <% end %>
