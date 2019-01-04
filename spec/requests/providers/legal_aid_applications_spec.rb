@@ -9,23 +9,8 @@ RSpec.describe 'providers legal aid application requests', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'displays the legal aid applications table' do
-      expect(response.body).to include('class="legal_aid_applications')
-    end
-
-    it 'displays the legal aid application' do
-      expect(response.body).to include(legal_aid_application.id)
-    end
-
     it "includes a link to the legal aid application's default start path" do
       expect(response.body).to include(providers_legal_aid_application_proceedings_type_path(legal_aid_application))
-    end
-
-    context 'with no legal aid applications' do
-      let!(:legal_aid_application) { nil }
-      it 'does not display the legal aid applications table' do
-        expect(response.body).not_to include('class="legal_aid_applications')
-      end
     end
 
     context 'when legal_aid_application current path set' do
