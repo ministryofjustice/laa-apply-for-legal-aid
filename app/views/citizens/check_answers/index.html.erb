@@ -22,21 +22,28 @@
             url: citizens_property_value_path(anchor: 'property_value'.freeze),
             question: t('.assets.property_value'),
             answer: number_to_currency(@legal_aid_application.property_value, unit: t('currency.gbp'))
-          ) %>
+          ) if @legal_aid_application.own_home? %>
 
       <%= check_answer_link(
             name: :outstanding_mortgage,
             url: citizens_outstanding_mortgage_path(anchor: 'outstanding_mortgage_amount'.freeze),
             question: t('.assets.outstanding_mortgage'),
             answer: number_to_currency(@legal_aid_application.outstanding_mortgage_amount, unit: t('currency.gbp'))
-          ) %>
+          ) if @legal_aid_application.own_home_mortgage? %>
 
       <%= check_answer_link(
             name: :shared_ownership,
             url: citizens_shared_ownership_path,
             question: t('.assets.shared_ownership'),
             answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}")
-          ) %>
+          ) if @legal_aid_application.own_home? %>
+
+      <%= check_answer_link(
+            name: :percentage_home,
+            url: citizens_percentage_home_path(anchor: 'percentage_home'.freeze),
+            question: t('.assets.percentage_home'),
+            answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
+          ) if @legal_aid_application.shared_ownership? %>
 
       <%= check_answer_link(
             name: :savings_and_investments,

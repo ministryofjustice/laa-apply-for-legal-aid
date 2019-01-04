@@ -44,6 +44,10 @@ FactoryBot.define do
       own_home { 'no' }
     end
 
+    trait :with_home_sole_owner do
+      shared_ownership { 'no_sole_owner' }
+    end
+
     trait :with_other_assets_declaration do
       other_assets_declaration { create :other_assets_declaration, :with_all_values }
     end
@@ -54,13 +58,14 @@ FactoryBot.define do
 
     trait :with_everything do
       with_applicant
+      provider_submitted
       with_savings_amount
       with_other_assets_declaration
+      with_own_home_mortgaged
       property_value { Faker::Number.decimal.to_d }
-      percentage_home { Faker::Number.decimal(2).to_d }
-      own_home { LegalAidApplication.own_homes.keys.sample }
-      shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_REASONS.sample }
       outstanding_mortgage_amount { Faker::Number.decimal.to_d }
+      shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
+      percentage_home { Faker::Number.decimal(2).to_d }
     end
 
     trait :with_negative_benefit_check_result do

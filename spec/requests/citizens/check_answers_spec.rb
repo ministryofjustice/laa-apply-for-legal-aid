@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'check your answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything }
+  let(:legal_aid_application) { create :legal_aid_application, :with_everything }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -21,6 +21,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(unescaped_response_body).to include(number_to_currency(legal_aid_application.property_value, unit: '£'))
       expect(unescaped_response_body).to include(number_to_currency(legal_aid_application.outstanding_mortgage_amount, unit: '£'))
       expect(unescaped_response_body).to include(I18n.translate("shared.forms.shared_ownership_form.shared_ownership_item.#{legal_aid_application.shared_ownership}"))
+      expect(unescaped_response_body).to include(number_to_percentage(legal_aid_application.percentage_home, precision: 2))
     end
 
     it 'displays the correct savings details' do
@@ -32,6 +33,31 @@ RSpec.describe 'check your answers requests', type: :request do
     it 'displays the correct assets details' do
       legal_aid_application.other_assets_declaration.amount_attributes.each do |_, amount|
         expect(unescaped_response_body).to include(number_to_currency(amount, unit: '£')), 'asset amount should be in the page'
+      end
+    end
+
+    context 'applicant does not own home' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home }
+      it 'does not display property value' do
+        expect(unescaped_response_body).not_to include(number_to_currency(legal_aid_application.property_value, unit: '£'))
+      end
+
+      it 'does not display shared ownership question' do
+        expect(unescaped_response_body).not_to include(I18n.translate("shared.forms.shared_ownership_form.shared_ownership_item.#{legal_aid_application.shared_ownership}"))
+      end
+    end
+
+    context 'applicant owns home without mortgage' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_own_home_owned_outright }
+      it 'does not display property value' do
+        expect(unescaped_response_body).not_to include(number_to_currency(legal_aid_application.outstanding_mortgage_amount, unit: '£'))
+      end
+    end
+
+    context 'applicant is sole owner of home' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_home_sole_owner }
+      it 'does not display percentage owned' do
+        expect(unescaped_response_body).not_to include(number_to_percentage(legal_aid_application.percentage_home, precision: 2))
       end
     end
   end
