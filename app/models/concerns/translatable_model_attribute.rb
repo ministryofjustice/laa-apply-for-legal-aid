@@ -12,7 +12,7 @@
 #
 module TranslatableModelAttribute
   def model_t(attribute)
-    model = self.class.name.underscore.to_sym
+    model = model_name.i18n_key
     I18n.t(__send__(attribute), scope: [:model_attribute_translations, model, attribute])
   end
 end
