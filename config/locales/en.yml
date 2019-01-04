@@ -1,4 +1,10 @@
 en:
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M:%S'
+  date:
+    formats:
+      default: '%a, %d %b %Y'
   api:
     errors:
       codes:

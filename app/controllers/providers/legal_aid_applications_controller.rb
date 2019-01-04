@@ -4,7 +4,9 @@ module Providers
     include Steppable
 
     # GET /provider/applications
-    def index; end
+    def index
+      @applications = LegalAidApplication.all
+    end
 
     # POST /provider/applications
     def create
