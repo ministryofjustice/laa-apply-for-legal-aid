@@ -1,5 +1,5 @@
 en:
-  model_attribute_translations:
+  model_enum_translations:
     legal_aid_application:
       state:
         answers_checked: Answers checked

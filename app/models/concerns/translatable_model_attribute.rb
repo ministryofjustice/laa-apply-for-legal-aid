@@ -1,18 +1,19 @@
-# provides a method to translate the CONTENTS of a model attribute.
+# provides a method to translate the values of an enum or field with a fixed number of values like state
+# machine states.
 #
-# e.g. given that record is a LegalAidApplication record with the
+# e.g. given that applicaiton is a LegalAidApplication record with the
 # state containing the string "provider_submitted", then
 #
-#  record.model_t(:state)
+#  application.enum_t(:state)
 #
 # will return the translation for the key
-# 'activerecord.models.legal_aid_application.attribute_content.state.provider_submitted'
+# 'en.model_attribute_translations.legal_aid_application.state.provider_submitted'
 #
-# Model attribute translations should be stored in /config/locales/model_attribute_contents.en.yml
+# Enum translations should be stored in /config/locales/model_enum_translations.en.yml
 #
 module TranslatableModelAttribute
-  def model_t(attribute)
+  def enum_t(attribute)
     model = model_name.i18n_key
-    I18n.t(__send__(attribute), scope: [:model_attribute_translations, model, attribute])
+    I18n.t(__send__(attribute), scope: [:model_enum_translations, model, attribute])
   end
 end
