@@ -4,6 +4,11 @@
   box-shadow: 0 2px 0 #b5babe;
 }
 
+.govuk-button.govuk-secondary-button:hover, .govuk-button.govuk-secondary-button:focus  {
+  background-color: #d0d3d6;
+  color: #0b0c0c;
+}
+
 .form-button {
   margin-right: 15px;
 }

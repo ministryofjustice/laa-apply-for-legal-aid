@@ -227,7 +227,7 @@ en:
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               not_a_number: &outstanding_mortgage_amount_nan 'Mortgage amount must be an amount of money, like 60,000'
-              greater_than: *outstanding_mortgage_amount_nan
+              greater_than_or_equal_to: Mortgage amount must be zero or an amount of money, like 60,000
         savings_amount:
           attributes:
             isa:
