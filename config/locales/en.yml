@@ -616,6 +616,7 @@ en:
     start: Start
     start_now: Start now
     view: View
+    undefined: Undefined
     address:
       postcode_label: postcode
       postcode: Postcode
@@ -626,3 +627,6 @@ en:
     gbp: £
     eur: €
     usd: $
+  time:
+    formats:
+      date: '%a, %d %b %Y'

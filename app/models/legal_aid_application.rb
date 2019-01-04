@@ -1,8 +1,7 @@
 # TODO: Think about how we refactor this class to make it smaller
-# rubocop:disable Metrics/ClassLength
 class LegalAidApplication < ApplicationRecord
-  include AASM
   include TranslatableModelAttribute
+  include LegalAidApplicationStateMachine
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
@@ -23,6 +22,8 @@ class LegalAidApplication < ApplicationRecord
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
 
+  delegate :full_name, to: :applicant, prefix: true, allow_nil: true
+
   enum(
     own_home: {
       no: 'no'.freeze,
@@ -31,37 +32,6 @@ class LegalAidApplication < ApplicationRecord
     },
     _prefix: true
   )
-
-  aasm column: :state do
-    state :initiated, initial: true
-    state :checking_answers
-    state :answers_checked
-    state :provider_submitted
-    state :means_completed
-
-    event :check_your_answers do
-      transitions from: :initiated, to: :checking_answers
-      transitions from: :answers_checked, to: :checking_answers
-    end
-
-    event :answers_checked do
-      transitions from: :checking_answers, to: :answers_checked
-    end
-
-    event :provider_submit do
-      transitions from: :initiated, to: :provider_submitted
-      transitions from: :checking_answers, to: :provider_submitted
-      transitions from: :answers_checked, to: :provider_submitted
-    end
-
-    event :reset do
-      transitions from: :checking_answers, to: :initiated
-    end
-
-    event :complete_means do
-      transitions from: :provider_submitted, to: :means_completed
-    end
-  end
 
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)
@@ -145,4 +115,3 @@ class LegalAidApplication < ApplicationRecord
     self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
   end
 end
-# rubocop:enable Metrics/ClassLength

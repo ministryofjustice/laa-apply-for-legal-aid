@@ -50,22 +50,25 @@ module Providers
       path: :providers_legal_aid_application_about_the_financial_assessment_path,
       back: :online_bankings
     },
-    own_homes: {
-      path: :providers_legal_aid_application_own_home_path,
-      # forward: determined by controller action logic
-      back: :check_benefits
-    },
     restrictions: {
       path: :providers_legal_aid_application_restrictions_path,
-      # forward:  figure this out later,
+      forward: :check_provider_answers,
       back: :legal_aid_applications
     },
     percentage_homes: {
       path: :providers_legal_aid_application_percentage_home_path,
-      # TODO: replace the (arbitrary) paths used here with the correct ones,
-      # currently commented out as they're being created in other stories
-      forward: :legal_aid_applications, #:providers_legal_aid_application_savings_and_investment_path,
-      back: :legal_aid_applications #:providers_legal_aid_application_shared_ownership_path
+      forward: :savings_and_investments,
+      back: :shared_ownerships
+    },
+    savings_and_investments: {
+      path: :providers_legal_aid_application_savings_and_investment_path,
+      forward: :other_assets,
+      back: :own_homes
+    },
+    own_homes: {
+      path: :providers_legal_aid_application_own_home_path,
+      # forward: determined by controller action logic
+      back: :check_benefits
     },
     property_values: {
       path: :providers_legal_aid_application_property_value_path,
@@ -74,14 +77,19 @@ module Providers
     },
     outstanding_mortgages: {
       path: :providers_legal_aid_application_outstanding_mortgage_path,
-      # forward: property share path
-      # TO DO set the correct path for back
+      forward: :shared_ownerships,
+      # TODO: set the correct path for back
       back: :online_bankings
     },
-    savings_and_investments: {
-      path: :providers_legal_aid_application_savings_and_investments,
-      forward: :other_assets,
-      back: :own_homes
+    shared_ownerships: {
+      path: :providers_legal_aid_application_shared_ownership_path,
+      # Forward defined by controller
+      back: :outstanding_mortgages
+    },
+    other_assets: {
+      path: :providers_legal_aid_application_other_assets_path,
+      # Forward defined by controller
+      back: :legal_aid_applications
     }
   }.freeze
 end
