@@ -5,16 +5,17 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
-    let(:perform_request) { get "/providers/applications/#{application_id}/check_provider_answers" }
+    subject { get "/providers/applications/#{application_id}/check_provider_answers" }
 
-    it_behaves_like 'a provider not authenticated'
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       context 'when the application does not exist' do
@@ -54,15 +55,13 @@ RSpec.describe 'check your answers requests', type: :request do
   end
 
   describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset' do
-    let(:perform_request) { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
+    subject { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
+        login_as create(:provider)
         application.check_your_answers!
-        perform_request
+        subject
       end
 
       it 'should redirect back' do
@@ -103,12 +102,12 @@ RSpec.describe 'check your answers requests', type: :request do
         }
       end
 
-      let(:perform_request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
         login_as provider
         application.check_your_answers!
-        perform_request
+        subject
       end
 
       it 'should redirect to next step' do
@@ -121,19 +120,18 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     context 'Save as draft' do
-      let(:provider) { create(:provider) }
       let(:params) do
         {
           draft_button: 'Save as draft'
         }
       end
 
-      let(:perform_request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
-        login_as provider
+        login_as create(:provider)
         application.check_your_answers!
-        perform_request
+        subject
       end
 
       it 'should redirect to provider legal applications home page' do

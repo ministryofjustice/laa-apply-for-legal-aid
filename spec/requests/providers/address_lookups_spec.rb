@@ -5,15 +5,17 @@ RSpec.describe 'address lookup requests', type: :request do
   let(:applicant) { legal_aid_application.applicant }
 
   describe 'GET /providers/applications/:legal_aid_application_id/address_lookup' do
-    let(:perform_request) { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
-    it_behaves_like 'a provider not authenticated'
+    subject { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
+
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       context 'when the applicant does not exist' do
@@ -41,23 +43,24 @@ RSpec.describe 'address lookup requests', type: :request do
         }
       }
     end
-    let(:perform_request) { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: params }
 
-    it_behaves_like 'a provider not authenticated'
+    subject { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: params }
+
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
+        login_as create(:provider)
       end
 
       context 'when the applicantion does not exist' do
         let(:legal_aid_application) { SecureRandom.uuid }
 
         it 'redirects the user to the applications page with an error message' do
-          perform_request
-
+          subject
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
       end
@@ -67,12 +70,11 @@ RSpec.describe 'address lookup requests', type: :request do
 
         it 'does NOT perform an address lookup with the provided postcode' do
           expect(AddressLookupService).not_to receive(:call)
-          perform_request
+          subject
         end
 
         it 're-renders the form with the validation errors' do
-          perform_request
-
+          subject
           expect(unescaped_response_body).to include('There is a problem')
           expect(unescaped_response_body).to include('Enter a postcode in the right format')
         end
@@ -82,14 +84,12 @@ RSpec.describe 'address lookup requests', type: :request do
         let(:postcode) { 'DA7 4NG' }
 
         it 'saves the postcode' do
-          perform_request
-
+          subject
           expect(applicant.address.postcode).to eq(postcode.delete(' ').upcase)
         end
 
         it 'redirects to the address selection page' do
-          perform_request
-
+          subject
           expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
         end
       end

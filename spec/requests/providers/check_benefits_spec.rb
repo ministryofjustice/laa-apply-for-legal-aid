@@ -10,20 +10,21 @@ RSpec.describe 'check benefits requests', type: :request do
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
     let(:get_request) { get "/providers/applications/#{application.id}/check_benefits" }
-    let(:perform_request) { get "/providers/applications/#{application.id}/check_benefits" }
+    subject { get "/providers/applications/#{application.id}/check_benefits" }
 
-    it_behaves_like 'a provider not authenticated'
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
         create :address, applicant: applicant, lookup_used: address_lookup_used
-        login_as provider
+        login_as create(:provider)
       end
 
       it 'returns http success' do
-        perform_request
+        subject
         expect(response).to have_http_status(:ok)
       end
 
@@ -49,7 +50,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
       context 'when the check_benefit_result does not exist' do
         it 'generates a new check_benefit_result' do
-          expect { perform_request }.to change { BenefitCheckResult.count }.by(1)
+          expect { subject }.to change { BenefitCheckResult.count }.by(1)
         end
       end
 
@@ -58,7 +59,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
         it 'does not generate a new one' do
           expect_any_instance_of(BenefitCheckService).not_to receive(:call).and_call_original
-          expect { perform_request }.to_not change { BenefitCheckResult.count }
+          expect { subject }.to_not change { BenefitCheckResult.count }
         end
 
         context 'and the applicant has since been modified' do
@@ -67,7 +68,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
           it 'updates check_benefit_result' do
             expect_any_instance_of(BenefitCheckService).to receive(:call).and_call_original
-            perform_request
+            subject
           end
         end
       end
@@ -77,14 +78,12 @@ RSpec.describe 'check benefits requests', type: :request do
   describe 'PATCH /providers/applications/:application_id/check_benefit' do
     before { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
 
-    let(:perform_request) { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
+    subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       context 'Form submitted with Continue button' do

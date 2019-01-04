@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  get '/saml/auth' => 'saml_idp#new'
+  post '/saml/auth' => 'saml_idp#create'
+
   devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
   devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
 

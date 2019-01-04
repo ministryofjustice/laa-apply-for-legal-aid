@@ -27,6 +27,9 @@ gem 'devise_saml_authenticatable'
 gem 'omniauth'
 gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
 
+# Used to mock saml request in UAT
+gem 'ruby-saml-idp'
+
 # Used to encrypt JSON stored in SecureData
 gem 'jwt'
 

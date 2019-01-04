@@ -6,16 +6,17 @@ RSpec.describe 'does client use online banking requests', type: :request do
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/applicant' do
-    let(:perform_request) { get "/providers/applications/#{application_id}/does-client-use-online-banking" }
+    subject { get "/providers/applications/#{application_id}/does-client-use-online-banking" }
 
-    it_behaves_like 'a provider not authenticated'
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       it 'returns http success' do
@@ -42,14 +43,12 @@ RSpec.describe 'does client use online banking requests', type: :request do
         applicant: { uses_online_banking: uses_online_banking }
       }
     end
-    let(:perform_request) { patch "/providers/applications/#{application_id}/does-client-use-online-banking", params: params }
+    subject { patch "/providers/applications/#{application_id}/does-client-use-online-banking", params: params }
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       context 'when no option is chosen' do

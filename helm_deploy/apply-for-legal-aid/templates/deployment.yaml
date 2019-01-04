@@ -115,6 +115,11 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: laaPortalSecretKey
+          - name: LAA_PORTAL_MOCK_SAML
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalMockSaml
           - name: TRUE_LAYER_CLIENT_ID
             valueFrom:
               secretKeyRef:

@@ -4,16 +4,17 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
   let(:legal_aid_application) { create :legal_aid_application }
 
   describe 'GET /providers/applications/:legal_aid_application_id/proceedings_type' do
-    let(:perform_request) { get providers_legal_aid_application_proceedings_type_path(legal_aid_application) }
+    subject { get providers_legal_aid_application_proceedings_type_path(legal_aid_application) }
 
-    it_behaves_like 'a provider not authenticated'
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       it 'returns http success' do
@@ -26,7 +27,7 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
     let(:code) { 'PR0001' }
     let!(:proceeding_type) { create(:proceeding_type, code: code) }
     let(:params) { { proceeding_type: code } }
-    let(:perform_request) do
+    subject do
       patch(
         providers_legal_aid_application_proceedings_type_path(legal_aid_application),
         params: params
@@ -34,15 +35,13 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
     end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
-        perform_request
+        login_as create(:provider)
+        subject
       end
 
       it 'redirects successfully to the next submission step' do
-        perform_request
+        subject
         expect(response).to redirect_to(providers_legal_aid_application_applicant_path(legal_aid_application))
       end
 

@@ -5,19 +5,20 @@ RSpec.describe 'providers applicant requests', type: :request do
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/applicant' do
-    let(:perform_request) { get "/providers/applications/#{application_id}/applicant" }
+    subject { get "/providers/applications/#{application_id}/applicant" }
 
-    it_behaves_like 'a provider not authenticated'
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
 
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
+        login_as create(:provider)
       end
 
       it 'returns http success' do
-        perform_request
+        subject
         expect(response).to have_http_status(:ok)
       end
 
@@ -25,7 +26,7 @@ RSpec.describe 'providers applicant requests', type: :request do
         let(:application_id) { SecureRandom.uuid }
 
         it 'redirects the user to the applications page with an error message' do
-          perform_request
+          subject
 
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
@@ -59,16 +60,12 @@ RSpec.describe 'providers applicant requests', type: :request do
       }
     end
 
-    it_behaves_like 'a provider not authenticated'
-
     context 'when the provider is authenticated' do
-      let(:provider) { create(:provider) }
-
       before do
-        login_as provider
+        login_as create(:provider)
       end
 
-      let(:perform_request) { patch "/providers/applications/#{application_id}/applicant", params: params }
+      subject { patch "/providers/applications/#{application_id}/applicant", params: params.merge(submit_button) }
 
       context 'Form submitted using Continue button' do
         let(:submit_button) do
@@ -78,12 +75,12 @@ RSpec.describe 'providers applicant requests', type: :request do
         end
 
         it 'redirects provider to next step of the submission' do
-          perform_request
+          subject
           expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(application))
         end
 
         it 'creates a new applicant associated with the application' do
-          expect { perform_request }.to change { Applicant.count }.by(1)
+          expect { subject }.to change { Applicant.count }.by(1)
 
           new_applicant = application.reload.applicant
           expect(new_applicant).to be_instance_of(Applicant)
@@ -93,7 +90,7 @@ RSpec.describe 'providers applicant requests', type: :request do
           let(:application) { create(:legal_aid_application, state: :checking_answers) }
 
           it 'redirects to check_your_answers page' do
-            perform_request
+            subject
 
             expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path)
           end
@@ -103,13 +100,13 @@ RSpec.describe 'providers applicant requests', type: :request do
           let(:application_id) { SecureRandom.uuid }
 
           it 'redirects the user to the applications page with an error message' do
-            perform_request
+            subject
 
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it 'does NOT create a new applicant' do
-            expect { patch_request }.not_to change { Applicant.count }
+            expect { subject }.not_to change { Applicant.count }
           end
         end
 
@@ -129,14 +126,14 @@ RSpec.describe 'providers applicant requests', type: :request do
           end
 
           it 'renders the form page displaying the errors' do
-            perform_request
+            subject
 
             expect(unescaped_response_body).to include('There is a problem')
             expect(unescaped_response_body).to include('Enter first name')
           end
 
           it 'does NOT create a new applicant' do
-            expect { perform_request }.not_to change { Applicant.count }
+            expect { subject }.not_to change { Applicant.count }
           end
         end
       end
@@ -149,12 +146,12 @@ RSpec.describe 'providers applicant requests', type: :request do
         end
 
         it 'redirects provider to next step of the submission' do
-          perform_request
+          subject
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it 'creates a new applicant associated with the application' do
-          expect { perform_request }.to change { Applicant.count }.by(1)
+          expect { subject }.to change { Applicant.count }.by(1)
 
           new_applicant = application.reload.applicant
           expect(new_applicant).to be_instance_of(Applicant)
@@ -164,13 +161,13 @@ RSpec.describe 'providers applicant requests', type: :request do
           let(:application_id) { SecureRandom.uuid }
 
           it 'redirects the user to the applications page with an error message' do
-            perform_request
+            subject
 
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it 'does NOT create a new applicant' do
-            expect { perform_request }.not_to change { Applicant.count }
+            expect { subject }.not_to change { Applicant.count }
           end
         end
 
@@ -190,14 +187,14 @@ RSpec.describe 'providers applicant requests', type: :request do
           end
 
           it 'renders the form page displaying the errors' do
-            perform_request
+            subject
 
             expect(unescaped_response_body).to include('There is a problem')
             expect(unescaped_response_body).to include('Enter first name')
           end
 
           it 'does NOT create a new applicant' do
-            expect { perform_request }.not_to change { Applicant.count }
+            expect { subject }.not_to change { Applicant.count }
           end
         end
       end
@@ -208,7 +205,7 @@ RSpec.describe 'providers applicant requests', type: :request do
         end
         it 'raises' do
           expect {
-            perform_request
+            subject
           }.to raise_error RuntimeError, 'No Continue or Save as draft button when expected'
         end
       end
