@@ -109,6 +109,9 @@ en:
                 check_box_other_person_account: For example, a junior ISA for a child
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
             other_assets:
+              check_box_second_home_value: Second property or holiday home estimated value
+              check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
+              check_box_second_home_percentage: Second property or holiday home percentage owned
               check_box_timeshare_value: Timeshare
               timeshare_value: Enter value, minus any loan and sale costs
               check_box_land_value: Land
