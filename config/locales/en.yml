@@ -109,6 +109,9 @@ en:
                 check_box_other_person_account: For example, a junior ISA for a child
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
             other_assets:
+              check_box_second_home_value: Second property or holiday home estimated value
+              check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
+              check_box_second_home_percentage: Second property or holiday home percentage owned
               check_box_timeshare_value: Timeshare
               timeshare_value: Enter value, minus any loan and sale costs
               check_box_land_value: Land
@@ -574,6 +577,22 @@ en:
           what_you_will_need: What you will need
           list:
             item_1: your online banking log in
+    check_answers:
+      index:
+        h1-heading: Check your answers
+        assets:
+          heading: Property, savings and other assets
+          own_home: Own the home you live in
+          property_value: Property value
+          outstanding_mortgage: Outstanding mortgage amount
+          shared_ownership: Owned with anyone else
+          percentage_home: Percentage owned
+          savings_and_investments: Savings and investments
+          other_assets: Other assets
+          restrictions: Do any restrictions apply?
+        submit:
+          heading: Submit your details
+          text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
 
   restrictions:
     names:

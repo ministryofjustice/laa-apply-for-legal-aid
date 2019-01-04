@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resource :shared_ownership, only: %i[show update]
     resources :restrictions, only: %i[index create] # as multiple restrictions
     resource :other_assets, only: %i[show update]
+    resources :check_answers, only: [:index] do
+      # post :reset, on: :collection # TODO: AP-258
+      post :continue, on: :collection
+    end
   end
 
   namespace :providers do

@@ -3,7 +3,16 @@
     <%= question %>
   </dt>
   <dd class="app-check-your-answers__answer">
-    <%= answer %>
+    <% if answer.kind_of?(Array) && answer.size > 0 %>
+      <% answer.each do |line| %>
+        <%= line %>
+        <br />
+      <% end %>
+    <% elsif answer.present? %>
+      <%= answer %>
+    <% else %>
+      -
+    <% end %>
   </dd>
   <dd class="app-check-your-answers__change">
     <%= link_to(url) do %>

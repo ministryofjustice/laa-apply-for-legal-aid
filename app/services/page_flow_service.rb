@@ -47,9 +47,13 @@ class PageFlowService
     },
     check_answers: {
       path: :citizens_check_answers_path,
+      forward: :application_submitted,
+      back: ->(application) { application.own_capital? ? :restrictions : :other_assets }
+    },
+    application_submitted: {
+      path: :citizens_application_submitted_path,
       forward: nil,
-      # TODO: uncomment once check_answers page is implemented
-      # back: ->(application) { application.own_capital? ? :restrictions : :other_assets }
+      back: :check_answers
     }
   }.freeze
 
