@@ -10,10 +10,15 @@ module Providers
       end
       delegate :applicant, to: :legal_aid_application
 
-      def set_legal_aid_application
-        return if legal_aid_application.present?
+      private
 
-        # TODO: Wording might need to be changed
+      def set_legal_aid_application
+        return process_invalid_application unless legal_aid_application.present?
+
+        legal_aid_application.update!(provider_step: controller_name)
+      end
+
+      def process_invalid_application
         flash[:error] = 'Invalid application'
         redirect_to providers_legal_aid_applications_path
       end
