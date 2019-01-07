@@ -33,7 +33,7 @@ module Providers
         back: :providers_legal_aid_application_check_provider_answers_path
       },
       check_provider_answers: {
-        forward: :providers_legal_aid_application_check_benefits_path,
+        forward: :providers_legal_aid_application_check_benefits_path
         # Back determined by controller action logic
       },
       online_bankings: {
