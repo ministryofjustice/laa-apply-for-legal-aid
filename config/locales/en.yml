@@ -40,7 +40,7 @@ en:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
       own_home_form:
-        mortgage: Yes, with a mortage or loan
+        mortgage: Yes, with a mortgage or loan
         owned_outright: Yes, owned outright
         "no": "No"
       outstanding_mortgage_form:

@@ -1,3 +1,4 @@
+# TODO: Think about how we refactor this class to make it smaller
 class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include LegalAidApplicationStateMachine # States are defined here

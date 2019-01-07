@@ -64,7 +64,7 @@
             url: citizens_restrictions_path,
             question: t('.assets.restrictions'),
             answer: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
-          ) %>
+          ) if @legal_aid_application.own_capital? %>
     </dl>
 
     <h2 class="govuk-heading-m"><%= t('.submit.heading') %></h2>
