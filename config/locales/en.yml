@@ -2,6 +2,7 @@ en:
   time:
     formats:
       default: '%Y-%m-%d %H:%M:%S'
+      date: '%a, %d %b %Y'
   date:
     formats:
       default: '%a, %d %b %Y'
@@ -399,6 +400,12 @@ en:
           heading_1: Your legal aid applications
           make_new_application: Make a new application
           basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
+        legal_aid_applications:
+          current_application: Current applications
+          applicant_name: Client's name
+          created_at: Date started
+          application_ref: Case reference
+          status: Status
     online_bankings:
       show:
         heading: Does your client use online banking?
@@ -627,6 +634,3 @@ en:
     gbp: £
     eur: €
     usd: $
-  time:
-    formats:
-      date: '%a, %d %b %Y'

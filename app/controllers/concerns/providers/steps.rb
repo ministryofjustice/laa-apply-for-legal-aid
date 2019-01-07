@@ -33,7 +33,7 @@ module Providers
     },
     check_provider_answers: {
       path: :providers_legal_aid_application_check_provider_answers_path,
-      forward: :check_benefits,
+      forward: :check_benefits
       # Back determined by controller action logic
     },
     check_benefits: {

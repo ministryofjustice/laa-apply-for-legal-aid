@@ -1,13 +1,13 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <table class="govuk-table">
-      <caption class="govuk-table__caption">Current applications</caption>
+      <caption class="govuk-table__caption"><%= t('.current_application') %></caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">Client's name</th>
-          <th class="govuk-table__header" scope="col">Date started</th>
-          <th class="govuk-table__header" scope="col">Case reference</th>
-          <th class="govuk-table__header" scope="col">Status</th>
+          <th class="govuk-table__header" scope="col"><%= t('.applicant_name') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.created_at') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
           <th class="govuk-table__header" scope="col"></th>
         </tr>
       </thead>

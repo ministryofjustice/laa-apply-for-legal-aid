@@ -1,6 +1,7 @@
 module Providers
   module Steppable
     extend ActiveSupport::Concern
+    # Note that STEPS is defined in ./steps.rb
 
     CHECK_YOUR_ANSWERS_STEP = :check_provider_answers
 
