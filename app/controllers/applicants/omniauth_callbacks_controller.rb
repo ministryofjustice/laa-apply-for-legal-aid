@@ -29,12 +29,8 @@ module Applicants
         token_expires_at: token_expires_at
       )
 
-      if command.success?
-        set_flash_message(:notice, :success, kind: 'TrueLayer')
-      else
-        # TODO: Show better error message to the user
-        flash[:error] = command.errors.to_a.flatten.join(', ')
-      end
+      # TODO: Show better error message to the user
+      flash[:error] = command.errors.to_a.flatten.join(', ') unless command.success?
     end
 
     def token
