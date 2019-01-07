@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'check your answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:legal_aid_application) { create :legal_aid_application, :with_everything }
+  let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -36,6 +36,10 @@ RSpec.describe 'check your answers requests', type: :request do
       end
     end
 
+    it 'should change the state to "checking_citizen_answers"' do
+      expect(legal_aid_application.reload.checking_citizen_answers?).to be_truthy
+    end
+
     context 'applicant does not own home' do
       let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home }
       it 'does not display property value' do
@@ -62,9 +66,13 @@ RSpec.describe 'check your answers requests', type: :request do
     end
   end
 
-  describe 'POST /citizens/check_answers/continue' do
-    subject { post '/citizens/check_answers/continue' }
-    before { subject }
+  describe 'PATCH /citizens/check_answers/continue' do
+    subject { patch '/citizens/check_answers/continue' }
+
+    before do
+      legal_aid_application.check_citizen_answers!
+      subject
+    end
 
     it 'should redirect to next step' do
       expect(response.body).to eq('citizens_application_submitted_path')
@@ -77,6 +85,23 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'should change the state to means_completed' do
       expect(legal_aid_application.reload.means_completed?).to be_truthy
+    end
+  end
+
+  describe 'PATCH /citizens/check_answers/reset' do
+    subject { patch '/citizens/check_answers/reset' }
+
+    before do
+      legal_aid_application.check_citizen_answers!
+      subject
+    end
+
+    it 'should redirect back' do
+      expect(response).to redirect_to(citizens_restrictions_path)
+    end
+
+    it 'should change the state back to "provider_submitted"' do
+      expect(legal_aid_application.reload.provider_submitted?).to be_truthy
     end
   end
 end

@@ -30,8 +30,8 @@ Rails.application.routes.draw do
     resources :restrictions, only: %i[index create] # as multiple restrictions
     resource :other_assets, only: %i[show update]
     resources :check_answers, only: [:index] do
-      # post :reset, on: :collection # TODO: AP-258
-      post :continue, on: :collection
+      patch :reset, on: :collection
+      patch :continue, on: :collection
     end
   end
 

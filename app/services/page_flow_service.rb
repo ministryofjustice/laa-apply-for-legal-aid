@@ -1,8 +1,11 @@
 class PageFlowService
   STEPS_FLOW = {
+    additional_accounts: {
+      path: :citizens_additional_accounts_path
+    },
     own_homes: {
       path: :citizens_own_home_path,
-      back: nil,
+      back: :additional_accounts,
       forward: ->(application) { application.own_home_no? ? :savings_and_investments : :property_values }
     },
     property_values: {

@@ -9,6 +9,7 @@ module LegalAidApplicationStateMachine
       state :checking_answers
       state :answers_checked
       state :provider_submitted
+      state :checking_citizen_answers
       state :means_completed
 
       event :check_your_answers do
@@ -28,10 +29,16 @@ module LegalAidApplicationStateMachine
 
       event :reset do
         transitions from: :checking_answers, to: :initiated
+        transitions from: :checking_citizen_answers, to: :provider_submitted
+      end
+
+      event :check_citizen_answers do
+        transitions from: :provider_submitted, to: :checking_citizen_answers
+        transitions from: :means_completed, to: :checking_citizen_answers
       end
 
       event :complete_means do
-        transitions from: :provider_submitted, to: :means_completed
+        transitions from: :checking_citizen_answers, to: :means_completed
       end
     end
   end
