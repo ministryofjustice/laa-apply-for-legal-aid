@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_125447) do
+ActiveRecord::Schema.define(version: 2019_01_02_151638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.decimal "percentage_home"
     t.string "shared_ownership"
     t.decimal "outstanding_mortgage_amount"
+    t.string "provider_step"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
   end
 
@@ -189,6 +190,21 @@ ActiveRecord::Schema.define(version: 2018_12_11_125447) do
     t.string "ccms_matter"
     t.string "ccms_matter_code"
     t.index ["code"], name: "index_proceeding_types_on_code"
+  end
+
+  create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "username", null: false
+    t.string "type"
+    t.text "roles"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_providers_on_type"
+    t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
   create_table "restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

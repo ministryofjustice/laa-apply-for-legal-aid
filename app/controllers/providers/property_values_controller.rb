@@ -1,5 +1,6 @@
 module Providers
   class PropertyValuesController < BaseController
+    include ApplicationDependable
     include Steppable
     include SaveAsDraftable
 
@@ -33,10 +34,6 @@ module Providers
 
     def edit_params
       property_value_params.merge(model: legal_aid_application, mode: :provider)
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(params[:legal_aid_application_id])
     end
   end
 end

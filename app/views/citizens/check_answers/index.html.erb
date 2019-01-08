@@ -1,4 +1,4 @@
-<% content_for(:navigation) { back_link } %>
+<% content_for(:navigation) { back_link(path: reset_citizens_check_answers_path, method: :patch) } %>
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <div class="govuk-grid-row">
@@ -64,7 +64,7 @@
             url: citizens_restrictions_path,
             question: t('.assets.restrictions'),
             answer: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
-          ) %>
+          ) if @legal_aid_application.own_capital? %>
     </dl>
 
     <h2 class="govuk-heading-m"><%= t('.submit.heading') %></h2>
@@ -74,7 +74,8 @@
     <%= button_to(
           t('generic.submit'),
           continue_citizens_check_answers_path,
-          class: 'govuk-button'
+          class: 'govuk-button',
+          method: :patch
         ) %>
 
   </div>

@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= link_to t('generic.back'), '#', class: 'govuk-back-link', id: 'back' %>
+  <%= provider_back_link %>
 <% end %>
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 

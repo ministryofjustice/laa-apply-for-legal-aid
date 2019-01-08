@@ -1,5 +1,6 @@
 module Providers
   class OutstandingMortgagesController < BaseController
+    include ApplicationDependable
     include Steppable
     include SaveAsDraftable
 
@@ -23,10 +24,6 @@ module Providers
       params.require(:legal_aid_application).permit(:outstanding_mortgage_amount).tap do |hash|
         hash[:model] = legal_aid_application
       end
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(params[:legal_aid_application_id])
     end
   end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen savings and investments', type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount }
+  let(:application) { create :legal_aid_application, :provider_submitted, :with_applicant, :with_savings_amount }
   let(:savings_amount) { application.savings_amount }
   let(:secure_id) { application.generate_secure_id }
 
@@ -67,6 +67,15 @@ RSpec.describe 'citizen savings and investments', type: :request do
         expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.isa.not_a_number'))
         expect(response.body).to match('govuk-error-message')
         expect(response.body).to match('govuk-form-group--error')
+      end
+    end
+
+    context 'while checking answers' do
+      before { application.check_citizen_answers! }
+
+      it 'redirects to the "check answers" page' do
+        subject
+        expect(response).to redirect_to(citizens_check_answers_path)
       end
     end
   end

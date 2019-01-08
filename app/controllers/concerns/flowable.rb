@@ -9,11 +9,15 @@ module Flowable
     end
 
     def back_path
+      return :citizens_check_answers if legal_aid_application.checking_citizen_answers?
+
       send flow_service.back_path
     end
     helper_method :back_path
 
     def forward_path
+      return :citizens_check_answers if legal_aid_application.checking_citizen_answers?
+
       send flow_service.forward_path
     end
 

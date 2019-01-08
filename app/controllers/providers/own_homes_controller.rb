@@ -1,5 +1,5 @@
 module Providers
-  class OwnHomesController < ApplicationController
+  class OwnHomesController < BaseController
     include ApplicationDependable
     include Steppable
     include SaveAsDraftable

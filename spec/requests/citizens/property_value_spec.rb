@@ -33,7 +33,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
       context 'home is owned with a mortgage' do
         let(:legal_aid_application) { create :legal_aid_application, :with_applicant, own_home: 'mortgage' }
 
-        it 'redirects to Outstanding mortage page' do
+        it 'redirects to Outstanding mortgage page' do
           expect(response).to redirect_to(citizens_outstanding_mortgage_path)
         end
       end

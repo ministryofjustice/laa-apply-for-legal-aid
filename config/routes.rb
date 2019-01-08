@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  get '/saml/auth' => 'saml_idp#new'
+  post '/saml/auth' => 'saml_idp#create'
+
+  devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
   devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
 
   resources :status, only: [:index]
@@ -30,8 +34,8 @@ Rails.application.routes.draw do
     resources :restrictions, only: %i[index create] # as multiple restrictions
     resource :other_assets, only: %i[show update]
     resources :check_answers, only: [:index] do
-      # post :reset, on: :collection # TODO: AP-258
-      post :continue, on: :collection
+      patch :reset, on: :collection
+      patch :continue, on: :collection
     end
   end
 

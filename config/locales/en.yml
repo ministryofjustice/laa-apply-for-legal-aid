@@ -2,6 +2,7 @@ en:
   time:
     formats:
       default: '%Y-%m-%d %H:%M:%S'
+      date: '%a, %d %b %Y'
   date:
     formats:
       default: '%a, %d %b %Y'
@@ -39,7 +40,7 @@ en:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
       own_home_form:
-        mortgage: Yes, with a mortage or loan
+        mortgage: Yes, with a mortgage or loan
         owned_outright: Yes, owned outright
         "no": "No"
       outstanding_mortgage_form:
@@ -399,6 +400,12 @@ en:
           heading_1: Your legal aid applications
           make_new_application: Make a new application
           basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
+        legal_aid_applications:
+          current_application: Current applications
+          applicant_name: Client's name
+          created_at: Date started
+          application_ref: Case reference
+          status: Status
     online_bankings:
       show:
         heading: Does your client use online banking?
@@ -615,6 +622,8 @@ en:
     information: Information
     start: Start
     start_now: Start now
+    view: View
+    undefined: Undefined
     address:
       postcode_label: postcode
       postcode: Postcode

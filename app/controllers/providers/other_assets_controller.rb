@@ -2,6 +2,7 @@ module Providers
   class OtherAssetsController < BaseController
     include ApplicationDependable
     include SaveAsDraftable
+    include Steppable
 
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)

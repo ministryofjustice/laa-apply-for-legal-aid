@@ -1,54 +1,63 @@
 <% content_for :navigation do %>
   <%= link_to t('generic.back'), citizens_consent_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
-<h1 class="govuk-heading-xl"><%= t '.heading_1' %></h1>
-<p>
-  <%= t '.intro_text' %>
-</p>
-<p>
-  <%= t '.balance_text' %>
-</p>
-<div class="govuk-!-padding-bottom-5">
-  <h2 class="govuk-heading-m"><%= t '.your_accounts' %></h2>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%= t '.heading_1' %></h1>
+    <p>
+      <%= t '.intro_text' %>
+    </p>
+    <p>
+      <%= t '.balance_text' %>
+    </p>
+    <div class="govuk-!-padding-bottom-5">
+      <h2 class="govuk-heading-m"><%= t '.your_accounts' %></h2>
+    </div>
+  </div>
 </div>
 
-<% @applicant_banks.each do |applicant_bank| %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <% @applicant_banks.each do |applicant_bank| %>
 
-  <table class="govuk-table">
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t '.account_holder_name_heading' %></th>
-        <td class="govuk-table__cell"><%= applicant_bank.main_account_holder_name %></td>
-      </tr>
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t '.account_holder_address_heading' %></th>
-        <td class="govuk-table__cell"><%= applicant_bank.main_account_holder_address %></td>
-      </tr>
-    </tbody>
-  </table>
+      <table class="govuk-table">
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="row"><%= t '.account_holder_name_heading' %></th>
+            <td class="govuk-table__cell"><%= applicant_bank.main_account_holder_name %></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="row"><%= t '.account_holder_address_heading' %></th>
+            <td class="govuk-table__cell"><%= applicant_bank.main_account_holder_address %></td>
+          </tr>
+        </tbody>
+      </table>
 
-  <table class="govuk-table">
-     <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col"><%= t '.type_heading' %></th>
-        <th class="govuk-table__header" scope="col"><%= t '.account_number_heading' %></th>
-        <th class="govuk-table__header" scope="col"><%= t '.sort_code_heading' %></th>
-        <th class="govuk-table__header govuk-table__header--numeric" scope="col"><%= t '.balance_heading' %></th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      <% applicant_bank.bank_accounts.each do |bank_account| %>
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell"><%= "#{applicant_bank.name} #{bank_account.name}" %></td>
-          <td class="govuk-table__cell"><%= bank_account.account_number %></td>
-          <td class="govuk-table__cell"><%= bank_account.sort_code %></td>
-          <td class="govuk-table__cell govuk-table__cell--numeric"><%= value_with_currency_unit(bank_account.balance, bank_account.currency) %></td>
-        </tr>
-      <% end %>
-    </tbody>
+      <table class="govuk-table">
+         <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col"><%= t '.type_heading' %></th>
+            <th class="govuk-table__header" scope="col"><%= t '.account_number_heading' %></th>
+            <th class="govuk-table__header" scope="col"><%= t '.sort_code_heading' %></th>
+            <th class="govuk-table__header govuk-table__header--numeric" scope="col"><%= t '.balance_heading' %></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% applicant_bank.bank_accounts.each do |bank_account| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell"><%= "#{applicant_bank.name} #{bank_account.name}" %></td>
+              <td class="govuk-table__cell"><%= bank_account.account_number %></td>
+              <td class="govuk-table__cell"><%= bank_account.sort_code %></td>
+              <td class="govuk-table__cell govuk-table__cell--numeric"><%= value_with_currency_unit(bank_account.balance, bank_account.currency) %></td>
+            </tr>
+          <% end %>
+        </tbody>
 
-  </table>
-<% end %>
-<div class="govuk-!-padding-top-3">
-  <%= link_to t('generic.continue'), citizens_additional_accounts_path, class: 'govuk-button', id: 'continue' %>
+      </table>
+    <% end %>
+
+    <div class="govuk-!-padding-top-3">
+      <%= link_to t('generic.continue'), citizens_additional_accounts_path, class: 'govuk-button', id: 'continue' %>
+    </div>
+  </div>
 </div>
