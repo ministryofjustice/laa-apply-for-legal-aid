@@ -22,4 +22,13 @@ module ApplicationHelper
   def back_link(path: back_path, method: nil)
     link_to t('generic.back'), path, class: 'govuk-back-link', id: 'back', method: method
   end
+
+  def user_header_link
+#    return unless respond_to?(:provider_signed_in?) && provider_signed_in?
+    html = ''
+    html << link_to('John Doe', '#', class: 'user-link govuk-header__link')
+    html << link_to('Sign out', '#', class: 'log-out govuk-header__link')
+    html = sanitize html, tags: %w(a), attributes: %w(href class)
+    content_tag :span, html, class: 'user-info'
+  end
 end
