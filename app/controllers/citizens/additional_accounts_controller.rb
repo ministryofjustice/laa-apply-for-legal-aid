@@ -1,5 +1,7 @@
 module Citizens
   class AdditionalAccountsController < ApplicationController
+    include Flowable
+
     def index; end
 
     def create
@@ -7,7 +9,7 @@ module Citizens
       when 'yes'
         redirect_to new_citizens_additional_account_path
       when 'no'
-        redirect_to citizens_own_home_path
+        go_forward
       else
         @error = I18n.t('generic.errors.yes_or_no')
         render :index
@@ -22,7 +24,7 @@ module Citizens
         redirect_to applicant_true_layer_omniauth_authorize_path
       when 'no'
         legal_aid_application.update(has_offline_accounts: true)
-        redirect_to citizens_own_home_path
+        go_forward
       else
         @error = I18n.t('generic.errors.yes_or_no')
         render :new
