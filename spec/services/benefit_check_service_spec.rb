@@ -59,8 +59,20 @@ RSpec.describe BenefitCheckService do
     context 'when the API raises an error' do
       let(:last_name) { 'SERVICEEXCEPTION' }
 
+      it 'raises a detailed error' do
+        expect { subject.call }.to raise_error(described_class::ApiError, /Service unavailable/)
+      end
+    end
+
+    context 'when the API times out' do
+      before do
+        savon_client = double(:savon_client)
+        allow(savon_client).to receive(:call).and_raise(Net::ReadTimeout)
+        allow(subject).to receive(:soap_client).and_return(savon_client)
+      end
+
       it 'raises an error' do
-        expect { subject.call }.to raise_error(Savon::SOAPFault)
+        expect { subject.call }.to raise_error(described_class::ApiError)
       end
     end
 
@@ -69,8 +81,8 @@ RSpec.describe BenefitCheckService do
         allow(Rails.configuration.x.benefit_check).to receive(:client_org_id).and_return('')
       end
 
-      it 'raises an error' do
-        expect { subject.call }.to raise_error(Savon::SOAPFault)
+      it 'raises a detailed error' do
+        expect { subject.call }.to raise_error(described_class::ApiError, /Invalid request credentials/)
       end
     end
   end

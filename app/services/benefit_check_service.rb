@@ -1,5 +1,6 @@
 class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
+  ApiError = Class.new(StandardError)
 
   def initialize(application)
     @application = application
@@ -8,6 +9,10 @@ class BenefitCheckService
 
   def call
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
+  rescue Savon::SOAPFault => error
+    raise ApiError, "HTTP #{error.http.code}, #{error.to_hash}"
+  rescue Net::ReadTimeout => error
+    raise ApiError, error
   end
 
   private
