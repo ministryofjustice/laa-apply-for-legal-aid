@@ -11,5 +11,5 @@ providers = [
 ]
 
 providers.each do |user_data|
-  Provider.create(user_data)
+  Provider.find_or_create_by(user_data)
 end
