@@ -1,5 +1,4 @@
 <%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
-  <div class="govuk-!-padding-bottom-8"></div>
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset" aria-describedby="citizenship-conditional-hint">
@@ -11,7 +10,6 @@
       </div>
     </fieldset>
   </div>
-  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= render partial: 'shared/forms/next_action_buttons',
              locals: {
