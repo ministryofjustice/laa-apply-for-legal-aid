@@ -2,17 +2,21 @@
     <%= link_to t('generic.back'), citizens_information_path, class: 'govuk-back-link', id: 'back' %>
 <% end %>
 
-<%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
 
-  <%= govuk_form_group(
-        input: :open_banking_consent
-      ) do %>
-    <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
-    <%= govuk_body t('.body') %>
-    <%= render partial: 'shared/forms/detailed_list', locals: { translation_path: 'citizens.consents.show' } %>
-    <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
+      <%= govuk_form_group(
+            input: :open_banking_consent
+          ) do %>
+        <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
+        <%= govuk_body t('.body') %>
+        <%= render partial: 'shared/forms/detailed_list', locals: { translation_path: 'citizens.consents.show' } %>
+        <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
+      <% end %>
+
+      <%= govuk_submit_button t('generic.continue') %>
+
     <% end %>
-
-    <%= govuk_submit_button t('generic.continue') %>
-
-<% end %>
+  </div>
+</div>
