@@ -5,9 +5,20 @@ RSpec.describe 'provider percentage share of home test', type: :request do
   describe 'GET #/providers/applications/:legal_aid_application_id/percentage_home' do
     subject { get providers_legal_aid_application_percentage_home_path(application) }
 
-    it 'returns http success' do
-      subject
-      expect(response).to have_http_status(:ok)
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'when the provider is authenticated' do
+      before do
+        login_as create(:provider)
+        subject
+      end
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
 
@@ -21,78 +32,84 @@ RSpec.describe 'provider percentage share of home test', type: :request do
 
     subject { patch providers_legal_aid_application_percentage_home_path(application), params: params.merge(submit_button) }
 
-    context 'Submitted with Continue button' do
-      let(:submit_button) do
-        {
-          continue_button: 'Continue'
-        }
+    context 'when the provider is authenticated' do
+      before do
+        login_as create(:provider)
       end
 
-      it 'updates the legal_aid_application' do
-        expect { subject }.to change { application.reload.percentage_home.to_s }.to(percentage_home)
-      end
-
-      it 'does not displays an error' do
-        subject
-        expect(response.body).not_to match('govuk-error-message')
-        expect(response.body).not_to match('govuk-form-group--error')
-      end
-
-      it 'redirects to the next step in Provider jouney' do
-        subject
-        expect(response).to redirect_to providers_legal_aid_application_savings_and_investment_path(application)
-      end
-      context 'with invalid input' do
-        let(:percentage_home) { 'fifty' }
-
-        it 'renders successfully' do
-          subject
-          expect(response).to have_http_status(:ok)
+      context 'Submitted with Continue button' do
+        let(:submit_button) do
+          {
+            continue_button: 'Continue'
+          }
         end
 
-        it 'displays an error' do
-          subject
-          expect(response.body).to match(I18n.t('activemodel.errors.models.legal_aid_application.attributes.percentage_home.not_a_number'))
-          expect(response.body).to match('govuk-error-message')
-          expect(response.body).to match('govuk-form-group--error')
-        end
-      end
-    end
-
-    context 'Submitted with Save as draft button' do
-      let(:submit_button) do
-        {
-          draft_button: 'Save as draft'
-        }
-      end
-
-      it 'updates the legal_aid_application' do
-        expect { subject }.to change { application.reload.percentage_home.to_s }.to(percentage_home)
-      end
-
-      it 'does not displays an error' do
-        subject
-        expect(response.body).not_to match('govuk-error-message')
-        expect(response.body).not_to match('govuk-form-group--error')
-      end
-
-      it 'redirects to the next step in Provider jouney' do
-        subject
-        expect(response).to redirect_to providers_legal_aid_applications_path
-      end
-      context 'with invalid input' do
-        let(:percentage_home) { 'fifty' }
-
-        it 'renders successfully' do
-          subject
-          expect(response).to have_http_status(:ok)
+        it 'updates the legal_aid_application' do
+          expect { subject }.to change { application.reload.percentage_home.to_s }.to(percentage_home)
         end
 
-        it 'displays an error' do
+        it 'does not displays an error' do
           subject
-          expect(response.body).to match(I18n.t('activemodel.errors.models.legal_aid_application.attributes.percentage_home.not_a_number'))
-          expect(response.body).to match('govuk-error-message')
-          expect(response.body).to match('govuk-form-group--error')
+          expect(response.body).not_to match('govuk-error-message')
+          expect(response.body).not_to match('govuk-form-group--error')
+        end
+
+        it 'redirects to the next step in Provider jouney' do
+          subject
+          expect(response).to redirect_to providers_legal_aid_application_savings_and_investment_path(application)
+        end
+        context 'with invalid input' do
+          let(:percentage_home) { 'fifty' }
+
+          it 'renders successfully' do
+            subject
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'displays an error' do
+            subject
+            expect(response.body).to match(I18n.t('activemodel.errors.models.legal_aid_application.attributes.percentage_home.not_a_number'))
+            expect(response.body).to match('govuk-error-message')
+            expect(response.body).to match('govuk-form-group--error')
+          end
+        end
+      end
+
+      context 'Submitted with Save as draft button' do
+        let(:submit_button) do
+          {
+            draft_button: 'Save as draft'
+          }
+        end
+
+        it 'updates the legal_aid_application' do
+          expect { subject }.to change { application.reload.percentage_home.to_s }.to(percentage_home)
+        end
+
+        it 'does not displays an error' do
+          subject
+          expect(response.body).not_to match('govuk-error-message')
+          expect(response.body).not_to match('govuk-form-group--error')
+        end
+
+        it 'redirects to the next step in Provider jouney' do
+          subject
+          expect(response).to redirect_to providers_legal_aid_applications_path
+        end
+        context 'with invalid input' do
+          let(:percentage_home) { 'fifty' }
+
+          it 'renders successfully' do
+            subject
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'displays an error' do
+            subject
+            expect(response.body).to match(I18n.t('activemodel.errors.models.legal_aid_application.attributes.percentage_home.not_a_number'))
+            expect(response.body).to match('govuk-error-message')
+            expect(response.body).to match('govuk-form-group--error')
+          end
         end
       end
     end

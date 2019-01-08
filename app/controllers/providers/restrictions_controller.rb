@@ -1,5 +1,5 @@
 module Providers
-  class RestrictionsController < ApplicationController
+  class RestrictionsController < BaseController
     include Steppable
     include ApplicationDependable
     include SaveAsDraftable

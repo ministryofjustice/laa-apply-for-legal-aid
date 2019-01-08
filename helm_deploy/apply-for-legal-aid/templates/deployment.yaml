@@ -90,6 +90,36 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: benefitCheckerWsdlUrl
+          - name: LAA_PORTAL_IDP_SSO_TARGET_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalIdpSsoTargetUrl
+          - name: LAA_PORTAL_IDP_CERT
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalIdpCert
+          - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalIdpCertFingerprintAlgorithm
+          - name: LAA_PORTAL_CERTIFICATE
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalCertificate
+          - name: LAA_PORTAL_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalSecretKey
+          - name: LAA_PORTAL_MOCK_SAML
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: laaPortalMockSaml
           - name: TRUE_LAYER_CLIENT_ID
             valueFrom:
               secretKeyRef:

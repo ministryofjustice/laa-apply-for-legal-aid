@@ -45,6 +45,10 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = false
 
+  config.x.laa_portal.idp_sso_target_url = 'https://example.com/sso'
+  config.x.laa_portal.idp_cert = 'laa-portal.cert'
+  config.x.laa_portal.idp_cert_fingerprint_algorithm = 'http://www.w3.org/2000/09/xmldsig#sha'
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   Rails.application.routes.default_url_options[:host] = 'www.example.com'

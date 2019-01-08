@@ -9,6 +9,7 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'selenium/webdriver'
 require 'webmock/cucumber'
+require 'factory_bot'
 
 allowed_sites = [
   ->(uri) { uri.to_s =~ /__identify__/ || uri.to_s =~ /127.0.0.1.*(session|shutdown)/ }
@@ -93,3 +94,12 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 Before do |_scenario|
   load Rails.root.join('db/seeds.rb')
 end
+
+Around do |_scenario, block|
+  Warden.test_mode!
+  block.call
+  Warden.test_reset!
+end
+
+World(FactoryBot::Syntax::Methods)
+World(Warden::Test::Helpers)

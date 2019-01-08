@@ -192,6 +192,21 @@ ActiveRecord::Schema.define(version: 2019_01_02_151638) do
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
+  create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "username", null: false
+    t.string "type"
+    t.text "roles"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_providers_on_type"
+    t.index ["username"], name: "index_providers_on_username", unique: true
+  end
+
   create_table "restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false

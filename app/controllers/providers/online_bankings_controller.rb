@@ -1,5 +1,5 @@
 module Providers
-  class OnlineBankingsController < ApplicationController
+  class OnlineBankingsController < BaseController
     include ApplicationDependable
     include Steppable
 

@@ -1,5 +1,5 @@
 module Providers
-  class SavingsAndInvestmentsController < ApplicationController
+  class SavingsAndInvestmentsController < BaseController
     include ApplicationDependable
     include SaveAsDraftable
     include Steppable
