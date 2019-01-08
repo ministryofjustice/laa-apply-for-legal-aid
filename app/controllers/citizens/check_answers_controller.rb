@@ -4,10 +4,7 @@ module Citizens
     before_action :authenticate_applicant!
 
     def index
-      # TODO: AP-258
-      # set legal_aid_application to 'applicant_check_answers' state
-
-      legal_aid_application
+      legal_aid_application.check_citizen_answers! unless legal_aid_application.checking_citizen_answers?
     end
 
     def continue
@@ -15,9 +12,10 @@ module Citizens
       go_forward
     end
 
-    # TODO: AP-258
-    # def reset
-    # end
+    def reset
+      legal_aid_application.reset!
+      redirect_to back_path
+    end
 
     private
 

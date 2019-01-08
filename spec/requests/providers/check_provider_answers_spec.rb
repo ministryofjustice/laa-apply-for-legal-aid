@@ -84,7 +84,7 @@ RSpec.describe 'check your answers requests', type: :request do
       end
     end
 
-    it 'should change the stage back to "initialized' do
+    it 'should change the state back to "initialized"' do
       subject
       expect(application.reload.initiated?).to be_truthy
     end
@@ -108,7 +108,7 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
       end
 
-      it 'should change the stage to "answers_checked"' do
+      it 'should change the state to "answers_checked"' do
         expect(application.reload.answers_checked?).to be_truthy
       end
     end
@@ -130,7 +130,7 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'should change the stage to "answers_checked"' do
+      it 'should change the state to "answers_checked"' do
         expect(application.reload.answers_checked?).to be_truthy
       end
     end

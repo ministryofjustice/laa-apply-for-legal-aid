@@ -19,7 +19,7 @@ module ApplicationHelper
     t ".#{[*controller, lazy_t].join('.')}", *args
   end
 
-  def back_link
-    link_to t('generic.back'), back_path, class: 'govuk-back-link', id: 'back'
+  def back_link(path: back_path, method: nil)
+    link_to t('generic.back'), path, class: 'govuk-back-link', id: 'back', method: method
   end
 end
