@@ -39,6 +39,17 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       shared_examples_for 'it has an error' do
+        let(:attribute_map) do
+          {
+            isa: /total in.*accounts/i,
+            cash: /total.*cash savings/i,
+            other_person_account: /other people’s accounts/,
+            national_savings: /certificates and bonds/,
+            plc_shares: /shares/,
+            peps_unit_trusts_capital_bonds_gov_stocks: /total.*of other investments/i,
+            life_assurance_endowment_policy: /total.*of life assurance policies/i
+          }
+        end
         it 'returns false' do
           expect(subject.save).to eq(false)
         end
@@ -46,7 +57,9 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         it 'generates errors' do
           subject.save
           attributes.each do |attr|
-            expect(subject.errors[attr]).to contain_exactly(expected_error)
+            error_message = subject.errors[attr].first
+            expect(error_message).to match(expected_error)
+            expect(error_message).to match(attribute_map[attr.to_sym])
           end
         end
 
@@ -57,21 +70,21 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context 'amounts are empty' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' } }
-        let(:expected_error) { 'Enter the total value' }
+        let(:expected_error) { /enter the( estimated)? total/i }
 
         it_behaves_like 'it has an error'
       end
 
       context 'amounts are not numbers' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
-        let(:expected_error) { 'Total value must be an amount of money, like 60,000' }
+        let(:expected_error) { /must be an amount of money, like 60,000/ }
 
         it_behaves_like 'it has an error'
       end
 
       context 'amounts are less than 0' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
-        let(:expected_error) { 'Total value must be 0 or more' }
+        let(:expected_error) { /must be 0 or more/ }
 
         it_behaves_like 'it has an error'
       end
