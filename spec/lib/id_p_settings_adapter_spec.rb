@@ -2,10 +2,21 @@ require 'rails_helper'
 
 RSpec.describe IdPSettingsAdapter do
   describe 'IdPSettingsAdapter.mock_saml?' do
-    it 'return false' do
-      mock_saml_setting = Rails.configuration.x.laa_portal[:mock_saml]
-      expected = mock_saml_setting.present? ? ActiveRecord::Type::Boolean.new.cast(mock_saml_setting) : false
-      expect(IdPSettingsAdapter.mock_saml?).to eq expected
+    let(:setting) { 'true' }
+    before do
+      allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(setting)
+    end
+
+    it 'returns true' do
+      expect(IdPSettingsAdapter.mock_saml?).to eq(true)
+    end
+
+    context 'when set "false"' do
+      let(:setting) { 'false' }
+
+      it 'returns false' do
+        expect(IdPSettingsAdapter.mock_saml?).to eq(false)
+      end
     end
   end
 
