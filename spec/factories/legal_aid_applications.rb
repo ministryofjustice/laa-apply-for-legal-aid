@@ -48,6 +48,10 @@ FactoryBot.define do
       shared_ownership { 'no_sole_owner' }
     end
 
+    trait :with_home_shared_with_partner do
+      shared_ownership { 'partner_or_ex_partner' }
+    end
+
     trait :with_other_assets_declaration do
       other_assets_declaration { create :other_assets_declaration, :with_all_values }
     end

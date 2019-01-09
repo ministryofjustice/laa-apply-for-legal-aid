@@ -83,8 +83,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def own_capital?
-    own_home? || other_assets? || savings_amount? ||
-      own_home_mortgage? || own_home_owned_outright?
+    own_home? || other_assets? || savings_amount?
   end
 
   def savings_amount?

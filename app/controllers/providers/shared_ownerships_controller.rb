@@ -20,6 +20,14 @@ module Providers
 
     private
 
+    def back_step_url
+      if legal_aid_application.own_home_mortgage?
+        providers_legal_aid_application_outstanding_mortgage_path
+      else
+        providers_legal_aid_application_property_value_path
+      end
+    end
+
     def next_url
       if @form.shared_ownership?
         providers_legal_aid_application_percentage_home_path(legal_aid_application)

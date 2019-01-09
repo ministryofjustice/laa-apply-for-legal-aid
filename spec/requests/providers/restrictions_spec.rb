@@ -27,6 +27,12 @@ RSpec.describe 'citizen restrictions request', type: :request do
           expect(unescaped_response_body).to include(label)
         end
       end
+
+      describe 'back liink' do
+        it 'points to other assets page' do
+          expect(response.body).to have_back_link(providers_legal_aid_application_other_assets_path(legal_aid_application))
+        end
+      end
     end
   end
 

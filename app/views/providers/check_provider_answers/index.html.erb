@@ -2,10 +2,10 @@
   content_for(:navigation) do
     link_to(
       t('generic.back'),
-      reset_providers_legal_aid_application_check_provider_answers_path,
+      @back_step_url,
       class: 'govuk-back-link',
       id: 'back-top',
-      method: :post
+      method: :get
     )
   end
 %>

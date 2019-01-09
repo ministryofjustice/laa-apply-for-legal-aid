@@ -38,6 +38,22 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
       end
 
+      describe 'back link' do
+        context 'with no capital' do
+          let(:application) { create :legal_aid_application, :with_proceeding_types, :with_applicant_and_address }
+          it 'points to the other assets page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_other_assets_path(application))
+          end
+        end
+
+        context 'with capital' do
+          let(:application) { create :legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :with_own_home_mortgaged, :with_home_sole_owner }
+          it 'points to the capital restrictions page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_restrictions_path(application))
+          end
+        end
+      end
+
       it 'displays the correct client details' do
         applicant = application.applicant
         address = applicant.addresses[0]

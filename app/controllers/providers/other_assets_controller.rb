@@ -20,23 +20,11 @@ module Providers
     private
 
     def next_url
-      if own_home? || savings_or_investments? || other_assets?
+      if legal_aid_application.own_capital?
         providers_legal_aid_application_restrictions_path(legal_aid_application)
       else
         providers_legal_aid_application_check_provider_answers_path(legal_aid_application)
       end
-    end
-
-    def own_home?
-      legal_aid_application.own_home?
-    end
-
-    def savings_or_investments?
-      legal_aid_application.savings_amount?
-    end
-
-    def other_assets?
-      legal_aid_application.other_assets?
     end
 
     def declaration

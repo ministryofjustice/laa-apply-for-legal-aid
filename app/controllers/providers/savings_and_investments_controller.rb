@@ -19,6 +19,16 @@ module Providers
       end
     end
 
+    def back_step_url
+      if legal_aid_application.own_home_no?
+        providers_legal_aid_application_own_home_path(legal_aid_application)
+      elsif legal_aid_application.shared_ownership?
+        providers_legal_aid_application_percentage_home_path(legal_aid_application)
+      else
+        providers_legal_aid_application_shared_ownership_path(legal_aid_application)
+      end
+    end
+
     private
 
     def attributes

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'providers shared ownership request test', type: :request do
-  let!(:legal_aid_application) { create :legal_aid_application }
+  let!(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
 
   describe 'GET #/providers/applications/:legal_aid_application_id/shared_ownership' do
     subject { get providers_legal_aid_application_shared_ownership_path(legal_aid_application) }
@@ -25,6 +25,22 @@ RSpec.describe 'providers shared ownership request test', type: :request do
         expect(response).to be_successful
         expect(unescaped_response_body).to match('Does your client own their home with anyone else?')
         expect(unescaped_response_body).to match(LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first)
+      end
+
+      describe 'back link' do
+        context 'applicant owns with mortgage' do
+          it 'points to property_value page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application))
+          end
+        end
+
+        context 'applicant owns home outright' do
+          let(:legal_aid_application) { create :legal_aid_application, :with_own_home_owned_outright }
+          it 'points to the outstanding mortgage page' do
+            allow(legal_aid_application).to receive(:own_home_mortgage?).and_return(true)
+            expect(response.body).to have_back_link(providers_legal_aid_application_property_value_path(legal_aid_application))
+          end
+        end
       end
     end
   end

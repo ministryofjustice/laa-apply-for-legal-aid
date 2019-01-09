@@ -22,6 +22,12 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
         expect(response).to have_http_status(:ok)
         expect(unescaped_response_body).to include("How much is your client's home worth?")
       end
+
+      describe 'back link' do
+        it 'points to the own home page' do
+          expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(legal_aid_application))
+        end
+      end
     end
   end
 
