@@ -12,23 +12,7 @@ module Providers
       back: :legal_aid_applications
     },
     applicants: {
-      path: :providers_legal_aid_application_applicant_path,
-      forward: :address_lookups,
-      back: :proceedings_types
-    },
-    address_lookups: {
-      path: :providers_legal_aid_application_address_lookup_path,
-      forward: :address_selections,
-      back: :applicants
-    },
-    address_selections: {
-      path: :providers_legal_aid_application_address_selection_path,
-      forward: :check_provider_answers,
-      back: :address_lookups
-    },
-    addresses: {
-      path: :providers_legal_aid_application_address_path,
-      forward: :check_provider_answers,
+      path: :providers_legal_aid_application_applicant_path,BFA9 3746 AB26 5BD4 E47C 72D3 44B7 50D1 7E64 F8EEvider_answers,
       back: :address_lookups
     },
     check_provider_answers: {
@@ -72,7 +56,7 @@ module Providers
     },
     property_values: {
       path: :providers_legal_aid_application_property_value_path,
-      # forward: to be determined,
+      # forward: determined in controller,
       back: :own_homes
     },
     outstanding_mortgages: {

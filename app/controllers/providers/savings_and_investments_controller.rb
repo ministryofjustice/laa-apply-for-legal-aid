@@ -19,6 +19,8 @@ module Providers
       end
     end
 
+    private
+
     def back_step_url
       if legal_aid_application.own_home_no?
         providers_legal_aid_application_own_home_path(legal_aid_application)
@@ -28,8 +30,6 @@ module Providers
         providers_legal_aid_application_shared_ownership_path(legal_aid_application)
       end
     end
-
-    private
 
     def attributes
       @attributes ||= SavingsAmounts::SavingsAmountsForm::ATTRIBUTES
