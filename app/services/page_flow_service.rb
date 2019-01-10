@@ -1,7 +1,12 @@
 class PageFlowService
   STEPS_FLOW = {
+    accounts: {
+      path: :citizens_accounts_path
+    },
     additional_accounts: {
-      path: :citizens_additional_accounts_path
+      path: :citizens_additional_accounts_path,
+      back: :accounts,
+      forward: :own_homes
     },
     own_homes: {
       path: :citizens_own_home_path,
@@ -66,16 +71,23 @@ class PageFlowService
   end
 
   def back_path
-    STEPS_FLOW.dig(back_step, :path)
+    path(back_step)
   end
 
   def forward_path
-    STEPS_FLOW.dig(forward_step, :path)
+    path(forward_step)
   end
 
   private
 
   attr_reader :legal_aid_application, :current_step
+
+  def path(step)
+    path = STEPS_FLOW.dig(step, :path)
+    raise ":path of step :#{step} is not defined" unless path
+
+    path
+  end
 
   def back_step
     @back_step ||= step(:back)
