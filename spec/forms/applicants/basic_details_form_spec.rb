@@ -77,7 +77,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it 'generate an error' do
         subject.save
-        expect(subject.errors[:email]).to match_array(['Enter an email address in the right format'])
+        expect(subject.errors[:email]).to match_array(['Enter an email address in the correct format, such as name@example.com'])
       end
     end
 
