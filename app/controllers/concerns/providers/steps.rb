@@ -36,6 +36,11 @@ module Providers
       forward: :check_benefits
       # Back determined by controller action logic
     },
+    check_passported_answers: {
+      path: :providers_legal_aid_application_check_passported_answers_path
+      # forward TBD
+      # back TBD
+    },
     check_benefits: {
       path: :providers_legal_aid_application_check_benefits_path,
       # forward: :providers_legal_aid_application_check_provider_answers_path,
@@ -52,7 +57,7 @@ module Providers
     },
     restrictions: {
       path: :providers_legal_aid_application_restrictions_path,
-      forward: :check_provider_answers,
+      forward: :check_passported_answers,
       back: :other_assets
     },
     percentage_homes: {

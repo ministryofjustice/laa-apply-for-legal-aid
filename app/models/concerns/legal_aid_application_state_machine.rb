@@ -10,6 +10,7 @@ module LegalAidApplicationStateMachine
       state :answers_checked
       state :provider_submitted
       state :checking_citizen_answers
+      state :checking_passported_answers
       state :means_completed
 
       event :check_your_answers do
@@ -19,6 +20,10 @@ module LegalAidApplicationStateMachine
 
       event :answers_checked do
         transitions from: :checking_answers, to: :answers_checked
+      end
+
+      event :check_passported_answers do
+        transitions from: :answers_checked, to: :checking_passported_answers
       end
 
       event :provider_submit do

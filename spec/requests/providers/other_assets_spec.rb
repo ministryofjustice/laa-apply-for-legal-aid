@@ -179,11 +179,11 @@ RSpec.describe 'provider other assets requests', type: :request do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
-            it 'redirects to check provider answers' do
+            it 'redirects to check passported answers' do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application))
+              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
             end
           end
         end

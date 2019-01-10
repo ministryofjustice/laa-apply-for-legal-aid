@@ -75,8 +75,8 @@ RSpec.describe 'citizen restrictions request', type: :request do
             expect(legal_aid_application.restrictions).to match_array(restrictions)
           end
 
-          it 'redirects to check your answers' do
-            expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+          it 'redirects to check passported answers' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
           end
         end
 
