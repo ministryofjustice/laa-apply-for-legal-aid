@@ -27,20 +27,23 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
-                key: postgresUser
+                name: apply-for-legal-aid-rds-instance-output
+                key: database_username
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
-                key: postgresPassword
+                name: apply-for-legal-aid-rds-instance-output
+                key: database_password
           - name: POSTGRES_HOST
-            value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
+            valueFrom:
+              secretKeyRef:
+                name: apply-for-legal-aid-rds-instance-output
+                key: rds_instance_address
           - name: POSTGRES_DATABASE
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
-                key: postgresDatabase
+                name: apply-for-legal-aid-rds-instance-output
+                key: database_name
           - name: GOVUK_NOTIFY_API_KEY
             valueFrom:
               secretKeyRef:
