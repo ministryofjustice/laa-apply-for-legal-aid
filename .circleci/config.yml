@@ -193,3 +193,13 @@ workflows:
         filters:
           branches:
             only: master
+  nightly:
+    triggers:
+    - schedule:
+        cron: "0 2 * * *"
+        filters:
+          branches:
+            only:
+            - master
+    jobs:
+    - deploy_staging
