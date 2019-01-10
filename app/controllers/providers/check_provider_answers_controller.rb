@@ -14,7 +14,7 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-      redirect_to reset_redirect_path
+      redirect_to back_step_path
     end
 
     def continue
@@ -24,18 +24,10 @@ module Providers
 
     private
 
-    def reset_redirect_path
+    def back_step_path
       return providers_legal_aid_application_address_selection_path if applicant.address&.lookup_used?
 
       providers_legal_aid_application_address_path
-    end
-
-    def back_step_path
-      if legal_aid_application.own_capital?
-        providers_legal_aid_application_restrictions_path(legal_aid_application)
-      else
-        providers_legal_aid_application_other_assets_path(legal_aid_application)
-      end
     end
   end
 end
