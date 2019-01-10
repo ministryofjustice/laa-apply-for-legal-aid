@@ -11,6 +11,7 @@ may well be used to fire requests to other services.
 
 * System dependencies
     * postgres 10.5
+    * redis
     * npm
 
 Install dependencies with homebrew:
@@ -31,6 +32,12 @@ bin/setup
 
 ```
 bin/rails s
+```
+
+NOTE: You also need to start sidekiq in another terminal window:
+
+```
+bundle exec sidekiq
 ```
 
 ### Running tests

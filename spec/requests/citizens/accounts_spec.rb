@@ -16,10 +16,15 @@ RSpec.describe 'citizen accounts request', type: :request do
     let!(:applicant_bank_account) do
       create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
     end
+    let(:worker) { {} }
+    let(:worker_id) { nil }
+
+    subject { get citizens_accounts_path(worker_id: worker_id) }
 
     before do
+      allow(Sidekiq::Status).to receive(:get_all).with(worker_id).and_return(worker)
       sign_in applicant
-      get citizens_accounts_path
+      subject
     end
 
     it 'returns http success' do
@@ -36,19 +41,51 @@ RSpec.describe 'citizen accounts request', type: :request do
 
     it 'display bank name and bank account type' do
       bank_name_type = "#{applicant_bank_provider.name} #{applicant_bank_account.name}"
-      expect(unescaped_response_body).to include(bank_name_type)
+      expect(response.body).to include(bank_name_type)
     end
 
     it 'display account number' do
-      expect(unescaped_response_body).to include(applicant_bank_account.account_number)
+      expect(response.body).to include(applicant_bank_account.account_number)
     end
 
     it 'display sort code' do
-      expect(unescaped_response_body).to include(applicant_bank_account.sort_code)
+      expect(response.body).to include(applicant_bank_account.sort_code)
     end
 
     it 'display balance with pound symbol' do
-      expect(unescaped_response_body).to include("£#{applicant_bank_account.balance}")
+      expect(response.body).to include("£#{applicant_bank_account.balance}")
+    end
+
+    context 'background worker is still working' do
+      let(:worker_id) { SecureRandom.hex }
+      let(:worker) { { 'status' => 'working' } }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'does not display account information' do
+        expect(unescaped_response_body).to_not include(applicant_bank_account_holder.full_name)
+        expect(unescaped_response_body).to_not include('Account')
+      end
+
+      it 'displays a loading message' do
+        expect(response.body).to include(I18n.t('citizens.accounts.index.retrieving_transactions'))
+      end
+    end
+
+    context 'background worker generated an error' do
+      let(:worker_id) { SecureRandom.hex }
+      let(:error) { 'something wrong' }
+      let(:worker) { { 'status' => 'complete', 'errors' => [error].to_json } }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays the error' do
+        expect(response.body).to include(error)
+      end
     end
   end
 end

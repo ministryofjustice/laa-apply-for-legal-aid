@@ -33,6 +33,10 @@ gem 'ruby-saml-idp'
 # Used to encrypt JSON stored in SecureData
 gem 'jwt'
 
+# background processing
+gem 'sidekiq'
+gem 'sidekiq-status'
+
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'

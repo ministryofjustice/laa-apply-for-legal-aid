@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe 'applicants omniauth call back', type: :request do
   around(:example) do |example|
@@ -25,13 +26,19 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     )
 
     stub_true_layer
+    ImportBankDataWorker.clear
   end
 
   describe 'GET /applicants/auth/true_layer/callback' do
-    subject { get applicant_true_layer_omniauth_callback_path }
+    subject do
+      get applicant_true_layer_omniauth_callback_path
+      ImportBankDataWorker.drain
+    end
 
     it 'should redirect to next page' do
-      expect(subject).to redirect_to(citizens_accounts_path)
+      worker_id = SecureRandom.hex
+      allow(ImportBankDataWorker).to receive(:perform_async).and_return(worker_id)
+      expect(subject).to redirect_to(citizens_accounts_path(worker_id: worker_id))
     end
 
     it 'should import bank provider' do
@@ -67,26 +74,6 @@ RSpec.describe 'applicants omniauth call back', type: :request do
 
       it 'should redirect to root' do
         expect(subject).to redirect_to(citizens_consent_path)
-      end
-    end
-
-    context 'bank import is failing' do
-      let(:api_error) do
-        {
-          error_description: 'Feature not supported by the provider',
-          error: :endpoint_not_supported,
-          error_details: { foo: :bar }
-        }
-      end
-
-      before do
-        endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/accounts'
-        stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
-      end
-
-      it 'shows the error' do
-        subject
-        expect(response.request.flash[:error]).to include(api_error[:error_description])
       end
     end
 

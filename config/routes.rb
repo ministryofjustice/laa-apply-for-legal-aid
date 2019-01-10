@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  require 'sidekiq/web'
+  require 'sidekiq-status/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == 'sidekiq' && password == ENV['SIDEKIQ_WEB_UI_PASSWORD'].to_s
+  end
+
   get '/saml/auth' => 'saml_idp#new'
   post '/saml/auth' => 'saml_idp#create'
 
@@ -11,6 +19,7 @@ Rails.application.routes.draw do
 
   namespace 'v1' do
     resources :proceeding_types, only: [:index]
+    resources :workers, only: [:show]
   end
 
   namespace :citizens do

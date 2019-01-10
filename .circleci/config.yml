@@ -20,6 +20,7 @@ references:
       environment:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
     - image: postgres:10.5
+    - image: redis:5.0
 
   setup_test_env: &setup_test_env
     run:

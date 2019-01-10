@@ -11,8 +11,8 @@ module Applicants
         return
       end
 
-      import_bank_data
-      redirect_to citizens_accounts_path
+      worker_id = import_bank_data
+      redirect_to citizens_accounts_path(worker_id: worker_id)
     end
 
     def failure
@@ -23,14 +23,7 @@ module Applicants
     private
 
     def import_bank_data
-      command = TrueLayer::BankDataImportService.call(
-        applicant: applicant,
-        token: token,
-        token_expires_at: token_expires_at
-      )
-
-      # TODO: Show better error message to the user
-      flash[:error] = command.errors.to_a.flatten.join(', ') unless command.success?
+      ImportBankDataWorker.perform_async(applicant.id, token, token_expires_at)
     end
 
     def token

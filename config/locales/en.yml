@@ -495,6 +495,8 @@ en:
   citizens:
     accounts:
       index:
+        retrieving_transactions: Retrieving bank transactions
+      accounts:
         account_holder_name_heading: Account holder name
         account_holder_address_heading: Account holder address
         type_heading: Type
