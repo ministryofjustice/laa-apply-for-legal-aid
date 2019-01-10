@@ -1,0 +1,168 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+  labels:
+    app: {{ template "apply-for-legal-aid-uat.name" . }}
+    chart: {{ template "apply-for-legal-aid-uat.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "apply-for-legal-aid-uat.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "apply-for-legal-aid-uat.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: postgresUser
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: postgresPassword
+          - name: POSTGRES_HOST
+            value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
+          - name: POSTGRES_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: postgresDatabase
+          - name: GOVUK_NOTIFY_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: govukNotifyApiKey
+          - name: ORDNANACE_SURVEY_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: ordnanaceSurveyApiKey
+          - name: RAILS_MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: railsMasterKey
+          - name: SENTRY_DSN
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: sentryDsn
+          - name: RAILS_ENV
+            value: production
+          - name: RAILS_LOG_TO_STDOUT
+            value: "true"
+          - name: HOST
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: deployHost
+          - name: BC_LSC_SERVICE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: benefitCheckerLscServiceName
+          - name: BC_CLIENT_ORG_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: benefitCheckerClientOrgId
+          - name: BC_CLIENT_USER_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: benefitCheckerClientUserId
+          - name: BC_WSDL_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: benefitCheckerWsdlUrl
+          - name: LAA_PORTAL_IDP_SSO_TARGET_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: laaPortalIdpSsoTargetUrl
+          - name: LAA_PORTAL_IDP_CERT
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: laaPortalIdpCert
+          - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: laaPortalIdpCertFingerprintAlgorithm
+          - name: LAA_PORTAL_CERTIFICATE
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: laaPortalCertificate
+          - name: LAA_PORTAL_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: laaPortalSecretKey
+          - name: LAA_PORTAL_MOCK_SAML
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: laaPortalMockSaml
+          - name: TRUE_LAYER_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: trueLayerClientId
+          - name: TRUE_LAYER_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: trueLayerClientSecret
+          - name: TRUE_LAYER_ENABLE_MOCK
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: trueLayerEnableMock
+          - name: SECURE_DATA_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: secureDataSecret
+          ports:
+            - name: http
+              containerPort: 3002
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /status.json
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /status.json
+              port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
