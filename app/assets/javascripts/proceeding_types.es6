@@ -14,6 +14,14 @@ function searchProceedingTypes() {
 
     // For docs see: https://github.com/bvaughn/js-search
     const search = new JsSearch.Search("code");
+    search.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+
+    search.tokenizer = {
+      tokenize(text) {
+        return text.replace(/[^a-zA-Z\d]/gi, '').split()
+      }
+    };
+
     search.addIndex("meaning");
     search.addIndex("description");
     search.addIndex("category_law");
