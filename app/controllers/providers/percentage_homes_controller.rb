@@ -5,10 +5,12 @@ module Providers
     include SaveAsDraftable
 
     def show
+      authorize @legal_aid_application
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
     end
 
     def update
+      authorize @legal_aid_application
       @form = LegalAidApplications::PercentageHomeForm.new(percentage_home_params.merge(model: legal_aid_application))
 
       if @form.save

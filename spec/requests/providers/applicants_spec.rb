@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'providers applicant requests', type: :request do
   let(:application) { create(:legal_aid_application) }
   let(:application_id) { application.id }
+  let(:provider) { application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/applicant' do
     subject { get "/providers/applications/#{application_id}/applicant" }
@@ -14,7 +15,7 @@ RSpec.describe 'providers applicant requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
       end
 
       it 'returns http success' do
@@ -36,6 +37,7 @@ RSpec.describe 'providers applicant requests', type: :request do
         let(:applicant) { create(:applicant) }
         let(:laa) { create(:legal_aid_application, applicant: applicant) }
         let(:get_request) { get "/providers/applications/#{laa.id}/applicant" }
+        let(:provider) { laa.provider }
 
         it 'display first_name' do
           get_request
@@ -62,7 +64,7 @@ RSpec.describe 'providers applicant requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
       end
 
       subject { patch "/providers/applications/#{application_id}/applicant", params: params.merge(submit_button) }

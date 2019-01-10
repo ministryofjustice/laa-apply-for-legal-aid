@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_151638) do
+ActiveRecord::Schema.define(version: 2019_01_10_104254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -157,7 +157,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_151638) do
     t.string "shared_ownership"
     t.decimal "outstanding_mortgage_amount"
     t.string "provider_step"
+    t.uuid "provider_id"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
+    t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -203,6 +205,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_151638) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "offices"
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
@@ -245,5 +248,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_151638) do
   add_foreign_key "legal_aid_application_restrictions", "legal_aid_applications"
   add_foreign_key "legal_aid_application_restrictions", "restrictions"
   add_foreign_key "legal_aid_applications", "applicants"
+  add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "savings_amounts", "legal_aid_applications"
 end

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::OutstandingMortgagesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:provider) { legal_aid_application.provider }
   let(:params) do
     {
       legal_aid_application: { outstanding_mortgage_amount: outstanding_mortgage_amount },
@@ -19,7 +20,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
@@ -47,7 +48,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 

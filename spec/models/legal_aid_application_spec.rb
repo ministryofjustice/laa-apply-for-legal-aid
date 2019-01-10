@@ -16,7 +16,7 @@ RSpec.describe LegalAidApplication, type: :model do
     context 'when valid proceeding type codes are provided' do
       let!(:proceeding_types) { create_list(:proceeding_type, 2) }
       let(:proceeding_type_codes) { proceeding_types.map(&:code) }
-      let(:attributes) { { proceeding_type_codes: proceeding_type_codes } }
+      let(:attributes) { { provider: create(:provider), proceeding_type_codes: proceeding_type_codes } }
 
       it 'will be valid' do
         expect(legal_aid_application).to be_valid

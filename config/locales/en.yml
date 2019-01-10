@@ -35,6 +35,11 @@ en:
         second_home_mortgage: Enter outstanding mortgage amount
         second_home_percentage: Enter percentage share you legally own
   shared:
+    access_denied:
+      heading_1: Access denied
+      permission_text: You do not have permission to
+      get_request: view this page.
+      action_request: perform this action.
     forms:
       date_input_fields:
         date_of_birth_label: 'Date of birth'

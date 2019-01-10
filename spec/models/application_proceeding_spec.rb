@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationProceedingType, type: :model do
-  let!(:application_proceeding_type) { ApplicationProceedingType.create(legal_aid_application: legal_aid_application, proceeding_type: proceeding_type) }
-  let!(:legal_aid_application) { LegalAidApplication.create }
-  let!(:proceeding_type) { ProceedingType.create(code: 'PH0001') }
+  let!(:provider) { create(:provider) }
+  let(:application_proceeding_type) { ApplicationProceedingType.create(legal_aid_application: legal_aid_application, proceeding_type: proceeding_type) }
+  let(:legal_aid_application) { LegalAidApplication.create(provider: provider) }
+  let(:proceeding_type) { ProceedingType.create(code: 'PH0001') }
 
   it 'should belong to an proceeding_type and legal_aid_application' do
     expect(application_proceeding_type.legal_aid_application_id).not_to be_nil

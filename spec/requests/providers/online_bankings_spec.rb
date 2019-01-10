@@ -4,6 +4,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
   let(:applicant) { create :applicant, uses_online_banking: nil }
   let(:application) { create :legal_aid_application, applicant: applicant }
   let(:application_id) { application.id }
+  let(:provider) { application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/applicant' do
     subject { get "/providers/applications/#{application_id}/does-client-use-online-banking" }
@@ -15,7 +16,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
@@ -47,7 +48,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 

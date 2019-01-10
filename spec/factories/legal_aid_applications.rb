@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
+    provider
+
     trait :with_applicant do
       applicant
     end

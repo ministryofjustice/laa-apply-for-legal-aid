@@ -5,10 +5,12 @@ module Providers
     include Steppable
 
     def show
+      authorize @legal_aid_application
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end
 
     def update
+      authorize @legal_aid_application
       @form = Citizens::OtherAssetsForm.new(form_params)
       if @form.save
         continue_or_save_draft(continue_url: next_url)

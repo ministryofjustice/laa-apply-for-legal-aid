@@ -4,10 +4,12 @@ module Providers
     include Steppable
 
     def show
+      authorize @legal_aid_application
       @form = Applicants::UsesOnlineBankingForm.new(model: applicant)
     end
 
     def update
+      authorize @legal_aid_application
       @form = Applicants::UsesOnlineBankingForm.new(form_params)
 
       if @form.save

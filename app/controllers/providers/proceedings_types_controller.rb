@@ -5,11 +5,13 @@ module Providers
 
     # GET /provider/applications/:legal_aid_application_id/proceedings_type
     def show
+      authorize @legal_aid_application
       proceeding_types
     end
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_type
     def update
+      authorize @legal_aid_application
       if legal_aid_application.update(app_params)
         redirect_to next_step_url
       else
