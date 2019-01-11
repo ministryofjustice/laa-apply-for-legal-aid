@@ -1,4 +1,9 @@
-<% content_for(:navigation) { back_link(path: reset_citizens_check_answers_path, method: :patch) } %>
+<%
+  content_for(:navigation) do
+    back_link(path: reset_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application), method: :patch)
+  end
+%>
+
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <div class="govuk-grid-row">

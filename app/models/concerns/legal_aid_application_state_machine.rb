@@ -35,6 +35,7 @@ module LegalAidApplicationStateMachine
       event :reset do
         transitions from: :checking_answers, to: :initiated
         transitions from: :checking_citizen_answers, to: :provider_submitted
+        transitions from: :checking_passported_answers, to: :answers_checked
       end
 
       event :check_citizen_answers do

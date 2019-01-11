@@ -70,7 +70,9 @@ Rails.application.routes.draw do
       resource :percentage_home, only: %i[show update]
       resource :savings_and_investment, only: %i[show update]
       resource :shared_ownership, only: %i[show update]
-      resource :check_passported_answers, only: [:show]
+      resource :check_passported_answers, only: [:show] do
+        patch :reset
+      end
     end
   end
 end
