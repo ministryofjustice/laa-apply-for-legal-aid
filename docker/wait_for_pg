@@ -35,6 +35,12 @@ probe() {
   return $?
 }
 
-wait_for "$PROBE_TIMEOUT"
+if [ "$POSTGRES_USER" = "postgres" ]; then
+  log "This is a local or UAT deployment, so checking for postgres container"
+  wait_for "$PROBE_TIMEOUT"
+else
+  log "This is a staging or production deployment, no need to check for postgres container"
+  exit 0
+fi
 
 unset PGPASSWORD
