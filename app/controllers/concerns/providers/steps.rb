@@ -53,7 +53,7 @@ module Providers
     restrictions: {
       path: :providers_legal_aid_application_restrictions_path,
       forward: :check_provider_answers,
-      back: :legal_aid_applications
+      back: :other_assets
     },
     percentage_homes: {
       path: :providers_legal_aid_application_percentage_home_path,
@@ -62,8 +62,8 @@ module Providers
     },
     savings_and_investments: {
       path: :providers_legal_aid_application_savings_and_investment_path,
-      forward: :other_assets,
-      back: :own_homes
+      forward: :other_assets
+      # back: defined in controller
     },
     own_homes: {
       path: :providers_legal_aid_application_own_home_path,
@@ -72,24 +72,23 @@ module Providers
     },
     property_values: {
       path: :providers_legal_aid_application_property_value_path,
-      # forward: to be determined,
-      back: :check_benefits
+      # forward: determined in controller,
+      back: :own_homes
     },
     outstanding_mortgages: {
       path: :providers_legal_aid_application_outstanding_mortgage_path,
       forward: :shared_ownerships,
-      # TODO: set the correct path for back
-      back: :online_bankings
+      back: :property_values
     },
     shared_ownerships: {
-      path: :providers_legal_aid_application_shared_ownership_path,
+      path: :providers_legal_aid_application_shared_ownership_path
       # Forward defined by controller
-      back: :outstanding_mortgages
+      # Back defined by controller
     },
     other_assets: {
       path: :providers_legal_aid_application_other_assets_path,
       # Forward defined by controller
-      back: :legal_aid_applications
+      back: :savings_and_investments
     }
   }.freeze
 end

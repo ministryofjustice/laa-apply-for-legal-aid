@@ -38,6 +38,12 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
       end
 
+      describe 'back link' do
+        it 'points to the select address page' do
+          expect(response.body).to have_back_link(reset_providers_legal_aid_application_check_provider_answers_path(application))
+        end
+      end
+
       it 'displays the correct client details' do
         applicant = application.applicant
         address = applicant.addresses[0]

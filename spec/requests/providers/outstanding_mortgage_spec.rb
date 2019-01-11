@@ -27,6 +27,12 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
         expect(response).to have_http_status(:ok)
         expect(unescaped_response_body).to include("What is the outstanding mortgage on your client's home?")
       end
+
+      describe 'back link' do
+        it 'points to the property value page' do
+          expect(response.body).to have_back_link(providers_legal_aid_application_property_value_path(legal_aid_application))
+        end
+      end
     end
   end
 

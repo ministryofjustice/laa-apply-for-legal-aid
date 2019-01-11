@@ -1,6 +1,5 @@
 <% content_for :navigation do %>
-  <%# TODO the back link logic needs defining %>
-  <%= link_to t('generic.back'), :back, class: 'govuk-back-link', id: 'back' %>
+  <%= provider_back_link t('generic.back') %>
 <% end %>
 
 <% content_for(:page_title) { t('.h1-heading') } %>

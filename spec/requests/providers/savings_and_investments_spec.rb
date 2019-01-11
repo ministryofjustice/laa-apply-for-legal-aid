@@ -27,6 +27,29 @@ RSpec.describe 'providers savings and investments', type: :request do
         subject
         expect(response.body).not_to match('Account number')
       end
+
+      describe 'back link' do
+        context 'applicant does not own home' do
+          let(:application) { create :legal_aid_application, :without_own_home }
+          it 'points to the own  home page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(application))
+          end
+        end
+
+        context 'applicant owns home with shared ownership' do
+          let(:application) { create :legal_aid_application, :with_own_home_mortgaged, :with_home_shared_with_partner }
+          it 'points to percentage owned page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_percentage_home_path(application))
+          end
+        end
+
+        context 'applicant owns home sole ownership' do
+          let(:application) { create :legal_aid_application, :with_own_home_mortgaged, :with_home_sole_owner }
+          it 'points to the shared ownership page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_shared_ownership_path(application))
+          end
+        end
+      end
     end
   end
 
