@@ -15,11 +15,19 @@ class SamlIdpController < SamlIdp::IdpController
 
   private
 
-  def idp_authenticate(_email, _password)
-    Provider.where(username: params[:email]).first
+  def idp_authenticate(email, password)
+    return unless config.usernames.include?(email) && config.password == password
+
+    Provider.find_or_create_by(username: email) do |provider|
+      provider.type = 'Provider'
+    end
   end
 
   def idp_make_saml_response(provider)
     encode_SAMLResponse(provider.username)
+  end
+
+  def config
+    Rails.configuration.x.application.mock_saml
   end
 end

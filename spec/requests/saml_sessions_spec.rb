@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'SamlSessionsController' do
+RSpec.describe 'SamlSessionsController', type: :request do
   describe 'DELETE /providers/sign_out' do
     let(:provider) { create :provider }
     before { sign_in provider }
