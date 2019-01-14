@@ -1,7 +1,7 @@
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <% content_for :navigation do %>
-  <%= provider_back_link t('generic.back') %>
+  <%= provider_back_link %>
 <% end %>
 
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>

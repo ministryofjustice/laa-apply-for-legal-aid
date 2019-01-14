@@ -1,0 +1,26 @@
+<%= provider_basic_page(
+      page_title: t('.page_title'),
+      back_link: { path: :back },
+      column_width: 'full'
+    ) do %>
+  <table class="govuk-table">
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row"><%= t('.name') %></th>
+        <td class="govuk-table__cell"><%= @provider.username %></td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row"><%= t('.email') %></th>
+        <td class="govuk-table__cell"></td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row"><%= t('.role') %></th>
+        <td class="govuk-table__cell"><%= @provider.roles %></td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="row"><%= t('.account_number') %></th>
+        <td class="govuk-table__cell"></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

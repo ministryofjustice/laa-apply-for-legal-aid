@@ -29,7 +29,7 @@ module ApplicationHelper
     html = ''
     # TODO: - set the link to point at Provider Profile page when that page exists
     #        and use the full name rather than user name when that is available
-    html << link_to(current_provider.username, '#', class: 'user-link govuk-header__link')
+    html << link_to(current_provider.username, providers_provider_path, class: 'user-link govuk-header__link')
     html << link_to('Sign out', destroy_provider_session_path, method: :delete, class: 'log-out govuk-header__link')
     html = sanitize html, tags: %w[a], attributes: %w[href class rel data-method]
     content_tag :span, html, class: 'user-info'

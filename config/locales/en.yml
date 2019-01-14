@@ -379,6 +379,13 @@ en:
           title: Related content
           item_1: Legal aid
           item_2: More
+    providers:
+      show:
+        page_title: Your profile
+        name: Name
+        email: Email address
+        role: Role
+        account_number: Account number
     address_selections:
       show:
         select_address_label: Select an address
