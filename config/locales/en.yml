@@ -246,7 +246,7 @@ en:
         savings_amount:
           attributes:
             isa:
-              blank: Enter the estimated total in your accounts
+              blank: Enter the estimated total in all accounts
               not_a_number: Total in accounts must be an amount of money, like 60,000
               greater_than_or_equal_to: Total in accounts must be 0 or more
             cash:
