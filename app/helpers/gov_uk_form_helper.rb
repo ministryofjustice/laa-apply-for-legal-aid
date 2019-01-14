@@ -30,13 +30,6 @@ module GovUkFormHelper
     )
   end
 
-  def govuk_body(text)
-    render(
-      'shared/forms/body',
-      text: text
-    )
-  end
-
   # `value_label_pairs should be a hash with the input values as keys, and the
   # matching labels as values. For example: `{ yes: 'I would', no: 'I would not' }`
   def govuk_radio_inputs(field_name, value_label_pairs)

@@ -10,7 +10,7 @@
             input: :open_banking_consent
           ) do %>
         <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
-        <%= govuk_body t('.body') %>
+        <p><%= t('.body') %></p>
         <%= render partial: 'shared/forms/detailed_list', locals: { translation_path: 'citizens.consents.show' } %>
         <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
       <% end %>
