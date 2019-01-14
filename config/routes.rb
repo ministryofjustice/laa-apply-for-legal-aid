@@ -71,6 +71,7 @@ Rails.application.routes.draw do
       resource :savings_and_investment, only: %i[show update]
       resource :shared_ownership, only: %i[show update]
       resource :check_passported_answers, only: [:show] do
+        patch :continue
         patch :reset
       end
     end

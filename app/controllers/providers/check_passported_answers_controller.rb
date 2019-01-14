@@ -12,6 +12,11 @@ module Providers
       legal_aid_application.check_passported_answers! unless legal_aid_application.checking_passported_answers?
     end
 
+    def continue
+      legal_aid_application.complete_means! unless legal_aid_application.means_completed?
+      render plain: 'End of provider-answered mean test questions for passported clients'
+    end
+
     def reset
       legal_aid_application.reset!
       redirect_to back_step_path

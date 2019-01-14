@@ -45,6 +45,7 @@ module LegalAidApplicationStateMachine
 
       event :complete_means do
         transitions from: :checking_citizen_answers, to: :means_completed
+        transitions from: :checking_passported_answers, to: :means_completed
       end
     end
   end

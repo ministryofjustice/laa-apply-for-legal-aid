@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe 'check passported answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
 
-  let(:application) do
-    create :legal_aid_application,
-           :with_everything,
-           :answers_checked
-  end
-
   describe 'GET /providers/applications/:id/check_passported_answers' do
+    let(:application) do
+      create :legal_aid_application,
+             :with_everything,
+             :answers_checked
+    end
+
     subject { get "/providers/applications/#{application.id}/check_passported_answers" }
 
     context 'unauthenticated' do
@@ -102,6 +102,78 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) { create :legal_aid_application, :provider_submitted, :with_applicant, :without_own_home, :answers_checked }
         it 'does not display capital restrictions' do
           expect(response.body).not_to include('restrictions')
+        end
+      end
+    end
+  end
+
+  describe 'PATCH /providers/applications/:id/check_passported_answers/continue' do
+    let(:application) do
+      create :legal_aid_application,
+             :with_everything,
+             :checking_passported_answers
+    end
+    subject { patch "/providers/applications/#{application.id}/check_passported_answers/continue" }
+
+    context 'logged in as an authenticated provider' do
+      before do
+        login_as create(:provider)
+        subject
+      end
+
+      it 'returns success' do
+        expect(response).to be_successful
+      end
+
+      it 'transitions to means_completed state' do
+        expect(application.reload.means_completed?).to be true
+      end
+    end
+
+    context 'unauthenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
+  end
+
+  describe 'PATCH "/providers/applications/:id/check_passported_answers/reset' do
+    let(:application) do
+      create :legal_aid_application,
+             :with_everything,
+             :checking_passported_answers
+    end
+
+    subject { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
+
+    context 'unauthenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'logged in as an authenticated provider' do
+      before do
+        login_as create(:provider)
+        subject
+      end
+
+      it 'transitions to means_completed state' do
+        expect(application.reload.answers_checked?).to be true
+      end
+
+      describe 'redirection' do
+        context 'no capital' do
+          let(:application) { create :legal_aid_application, :checking_passported_answers }
+          it 'redirects to other assets page' do
+            expect(application.own_capital?).to be false
+            expect(response).to redirect_to providers_legal_aid_application_other_assets_path(application)
+          end
+        end
+
+        context 'some capital' do
+          it 'redirects to restrictions page' do
+            expect(application.own_capital?).to be true
+            expect(response).to redirect_to providers_legal_aid_application_restrictions_path(application)
+          end
         end
       end
     end
