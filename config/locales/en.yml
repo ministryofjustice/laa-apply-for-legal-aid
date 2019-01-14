@@ -241,33 +241,33 @@ en:
         savings_amount:
           attributes:
             isa:
-              blank: &enter_total_value Enter the total value
-              not_a_number: &total_must_be_money Total value must be an amount of money, like 60,000
-              greater_than_or_equal_to: &total_must_be_positive Total value must be 0 or more
+              blank: Enter the estimated total in your accounts
+              not_a_number: Total in accounts must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total in accounts must be 0 or more
             cash:
-              blank: *enter_total_value
-              not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_positive
+              blank: Enter the total amount of cash savings
+              not_a_number: Total cash savings must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total cash savings must be 0 or more
             other_person_account:
-              blank: *enter_total_value
-              not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_positive
+              blank: Enter the estimated total in other people’s accounts
+              not_a_number: Total in other people’s accounts must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total in other people’s accounts must be 0 or more
             national_savings:
-              blank: *enter_total_value
-              not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_positive
+              blank: Enter the total value of certificates and bonds
+              not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
             plc_shares:
-              blank: *enter_total_value
-              not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_positive
+              blank: Enter the total value of shares
+              not_a_number: Total of shares must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of shares must be 0 or more
             peps_unit_trusts_capital_bonds_gov_stocks:
-              blank: *enter_total_value
-              not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_positive
+              blank: Enter the total value of other investments
+              not_a_number: Total of other investments must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of other investments must be 0 or more
             life_assurance_endowment_policy:
-              blank: *enter_total_value
-              not_a_number: *total_must_be_money
-              greater_than_or_equal_to: *total_must_be_positive
+              blank: Enter the total value of life assurance policies
+              not_a_number: Total of life assurance policies must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of life assurance policies must be 0 or more
 
         other_assets_declaration:
           attributes:
