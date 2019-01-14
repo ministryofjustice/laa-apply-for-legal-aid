@@ -94,7 +94,7 @@ GEM
       nokogiri (~> 1.8)
     climate_control (0.2.0)
     coderay (1.1.2)
-    concurrent-ruby (1.1.3)
+    concurrent-ruby (1.1.4)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
@@ -132,9 +132,9 @@ GEM
       ruby-saml (~> 1.7)
     diff-lcs (1.3)
     docile (1.3.1)
-    dotenv (2.5.0)
-    dotenv-rails (2.5.0)
-      dotenv (= 2.5.0)
+    dotenv (2.6.0)
+    dotenv-rails (2.6.0)
+      dotenv (= 2.6.0)
       railties (>= 3.2, < 6.0)
     erb_lint (0.0.28)
       activesupport
@@ -143,7 +143,7 @@ GEM
       rainbow
       rubocop (~> 0.51)
       smart_properties
-    erubi (1.7.1)
+    erubi (1.8.0)
     execjs (2.7.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -170,7 +170,7 @@ GEM
     httpi (2.4.4)
       rack
       socksify
-    i18n (1.2.0)
+    i18n (1.5.2)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.28)
       activesupport (>= 4.0.2)
