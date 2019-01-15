@@ -90,6 +90,24 @@ LAA_PORTAL_IDP_SSO_TARGET_URL=http://localhost:3002/saml/auth
 LAA_PORTAL_MOCK_SAML=true
 ```
 
+## Databases
+
+### Staging and Production
+
+Staging and production databases are RDS instances on the MOJ Cloud Platform. Connection details are held in Rattic.
+
+These databases are within the AWS VPC and are not publicly available. In order to connect
+to an RDS database from a local client, first run:
+
+`kubectl -n laa-apply-for-legalaid-staging port-forward port-forward-rds 5433:80`
+
+This will then allow you to connect to the database, eg:
+
+`psql --host=localhost --port=5433 --username=<username> --password --dbname=apply_for_legal_aid_staging`
+
+- Change `staging` to `production` in the above commands to access production.
+- Port 5433 is used in the above examples instead of the usual 5432 for postgres, as 5432 will not work if postgres is running locally.
+
 ## 3rd party integrations
 
 ### True Layer
