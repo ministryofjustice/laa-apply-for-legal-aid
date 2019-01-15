@@ -39,7 +39,7 @@ module Providers
     check_passported_answers: {
       path: :providers_legal_aid_application_check_passported_answers_path
       # forward TBD
-      # back TBD
+      # back: determined by controller action
     },
     check_benefits: {
       path: :providers_legal_aid_application_check_benefits_path,
