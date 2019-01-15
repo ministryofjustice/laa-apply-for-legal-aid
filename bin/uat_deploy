@@ -3,20 +3,25 @@
 clean_old_releases() {
   RELEASES=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q)
   RELEASE_COUNT=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q | wc -l)
-  RELEASES_TO_KEEP=2
-  DIFF=$((RELEASE_COUNT-RELEASES_TO_KEEP))
+  echo "There are currently $RELEASE_COUNT releases"
 
-  echo "There are currently $RELEASE_COUNT releases."
+  for release in $RELEASES; do
+    echo "** $release"
+  done
+
+  RELEASES_TO_KEEP=10
+  DIFF=$((RELEASE_COUNT-RELEASES_TO_KEEP))
 
   if [[ $DIFF -gt -0 ]]; then
     RELEASES_TO_DELETE=$(helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --all -d -r -q | tail -n $DIFF)
 
-    echo "Cleaning the $DIFF most old ones..."
+    echo "Cleaning the $DIFF oldest..."
     for release in $RELEASES_TO_DELETE; do
-      echo "[DRY-RUN] Deleting release $release..."
+      echo "[DELETING] Deleting release $release..."
+      $(helm delete $release --tiller-namespace=laa-apply-for-legalaid-uat --purge)
     done
   else
-    echo "No old releases to clean. Yay!"
+    echo "$RELEASES_TO_KEEP or less releases: no old releases to clean. Yay!"
   fi
 }
 
