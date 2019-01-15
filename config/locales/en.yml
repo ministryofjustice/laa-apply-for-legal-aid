@@ -345,12 +345,12 @@ en:
         gov_uk_link_title: Go to the GOV.UK homepage
         title: Apply for Legal Aid
       footer:
-        heading: Support
-        case_enquiries: 'Case enquiries:'
-        case_enquiries_details: 0300 200 2020 (Monday to Friday, 09:00 - 17:00)
-        tech_support: 'Technical support:'
-        tech_support_details: 0300 200 2020 (Monday to Friday, 09:00 - 17:00) or email
-        email_address: apply@digital.justice.gov.uk
+        support: Support Links
+        contact: Contact
+        feedback: Feedback
+        cookies: Cookies
+        terms: Terms and conditions
+        digital_services: MOJ Digital Services
         span_text_1: All content is available under the
         open_gov_link_text: Open Government Licence v3.0
         span_text_2: except where otherwise stated
