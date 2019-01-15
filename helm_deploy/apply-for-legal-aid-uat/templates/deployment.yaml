@@ -1,22 +1,22 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "apply-for-legal-aid.fullname" . }}
+  name: {{ template "apply-for-legal-aid-uat.fullname" . }}
   labels:
-    app: {{ template "apply-for-legal-aid.name" . }}
-    chart: {{ template "apply-for-legal-aid.chart" . }}
+    app: {{ template "apply-for-legal-aid-uat.name" . }}
+    chart: {{ template "apply-for-legal-aid-uat.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "apply-for-legal-aid.name" . }}
+      app: {{ template "apply-for-legal-aid-uat.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "apply-for-legal-aid.name" . }}
+        app: {{ template "apply-for-legal-aid-uat.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -27,42 +27,39 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: apply-for-legal-aid-rds-instance-output
-                key: database_username
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: postgresUser
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: apply-for-legal-aid-rds-instance-output
-                key: database_password
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: postgresPassword
           - name: POSTGRES_HOST
-            valueFrom:
-              secretKeyRef:
-                name: apply-for-legal-aid-rds-instance-output
-                key: rds_instance_address
+            value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
           - name: POSTGRES_DATABASE
             valueFrom:
               secretKeyRef:
-                name: apply-for-legal-aid-rds-instance-output
-                key: database_name
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: postgresDatabase
           - name: GOVUK_NOTIFY_API_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: govukNotifyApiKey
           - name: ORDNANACE_SURVEY_API_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: ordnanaceSurveyApiKey
           - name: RAILS_MASTER_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: railsMasterKey
           - name: SENTRY_DSN
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: sentryDsn
           - name: RAILS_ENV
             value: production
@@ -71,77 +68,77 @@ spec:
           - name: HOST
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: deployHost
           - name: BC_LSC_SERVICE_NAME
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: benefitCheckerLscServiceName
           - name: BC_CLIENT_ORG_ID
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: benefitCheckerClientOrgId
           - name: BC_CLIENT_USER_ID
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: benefitCheckerClientUserId
           - name: BC_WSDL_URL
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: benefitCheckerWsdlUrl
           - name: LAA_PORTAL_IDP_SSO_TARGET_URL
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: laaPortalIdpSsoTargetUrl
           - name: LAA_PORTAL_IDP_CERT
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: laaPortalIdpCert
           - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: laaPortalIdpCertFingerprintAlgorithm
           - name: LAA_PORTAL_CERTIFICATE
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: laaPortalCertificate
           - name: LAA_PORTAL_SECRET_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: laaPortalSecretKey
           - name: LAA_PORTAL_MOCK_SAML
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: laaPortalMockSaml
           - name: TRUE_LAYER_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: trueLayerClientId
           - name: TRUE_LAYER_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: trueLayerClientSecret
           - name: TRUE_LAYER_ENABLE_MOCK
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: trueLayerEnableMock
           - name: SECURE_DATA_SECRET
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: secureDataSecret
           ports:
             - name: http
