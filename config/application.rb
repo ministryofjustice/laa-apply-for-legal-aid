@@ -33,6 +33,8 @@ module LaaApplyForLegalAid
       :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
     ).symbolize_keys
 
+    config.x.applicant.test_level_nino_validation = ENV['TEST_LEVEL_NINO_VALIDATION']
+
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
   end

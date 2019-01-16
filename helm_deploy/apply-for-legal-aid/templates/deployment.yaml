@@ -143,6 +143,11 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: secureDataSecret
+          - name: TEST_LEVEL_NINO_VALIDATION
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: applicantTestLevelNinoValidation
           ports:
             - name: http
               containerPort: 3002
