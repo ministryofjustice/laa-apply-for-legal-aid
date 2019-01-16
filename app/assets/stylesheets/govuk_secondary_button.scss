@@ -4,11 +4,21 @@
   box-shadow: 0 2px 0 #b5babe;
 }
 
-.govuk-button.govuk-secondary-button:hover, .govuk-button.govuk-secondary-button:focus  {
+.govuk-button.govuk-secondary-button:active, 
+.govuk-button.govuk-secondary-button:hover, 
+.govuk-button.govuk-secondary-button:focus  {
   background-color: #d0d3d6;
   color: #0b0c0c;
 }
 
+.govuk-button--disabled.govuk-secondary-button:hover,
+.govuk-button.govuk-secondary-button[disabled="disabled"]:hover,
+.govuk-button.govuk-secondary-button[disabled]:hover
+.govuk-button--disabled.govuk-secondary-button,
+.govuk-button.govuk-secondary-button[disabled="disabled"],
+.govuk-button.govuk-secondary-button[disabled] {
+  background: #dee0e2;
+}
 .form-button {
   margin-right: 15px;
 }
