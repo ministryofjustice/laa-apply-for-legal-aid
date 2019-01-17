@@ -1,21 +1,19 @@
-<% content_for :navigation do %>
-  <!-- no nav needed here -->
+<%= provider_basic_page(
+      page_title: t('.heading_1'),
+      back_link: :none
+    ) do %>
+
+  <h3 class="govuk-heading-m"><%= t('.make_new_application') %></h3>
+  <p>
+    <%= t('.basic_details_para') %>
+  </p>
+  <%= button_to(
+        t('generic.start_now'),
+        providers_legal_aid_applications_path,
+        class: 'govuk-button govuk-button--start',
+        id: 'start'
+      ) %>
+
 <% end %>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <div class="govuk-!-padding-top-4"></div>
-    <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
-    <h3 class="govuk-heading-m"><%= t('.make_new_application') %></h3>
-    <p>
-      <%= t('.basic_details_para') %>
-    </p>
-    <%= button_to(
-          t('generic.start_now'),
-          providers_legal_aid_applications_path,
-          class: 'govuk-button govuk-button--start',
-          id: 'start'
-        ) %>
-  </div>
-</div>
 
 <%= render('legal_aid_applications') if @applications.present? %>
