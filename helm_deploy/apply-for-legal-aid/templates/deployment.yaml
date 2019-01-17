@@ -143,6 +143,21 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid.fullname" . }}
                 key: secureDataSecret
+          - name: SIDEKIQ_WEB_UI_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: sidekiqWebUiPassword
+          - name: REDIS_HOST
+            valueFrom:
+              secretKeyRef:
+                name: apply-for-legal-aid-elasticache-instance-output
+                key: primary_endpoint_address
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: apply-for-legal-aid-elasticache-instance-output
+                key: auth_token
           ports:
             - name: http
               containerPort: 3002
