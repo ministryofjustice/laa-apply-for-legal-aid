@@ -377,6 +377,23 @@ en:
     index:
       heading_1: Apply for Legal Aid
       welcome_home: Welcome Home
+  contacts:
+    show:
+      h1-heading: Contact us
+      page_header: "For any queries about your application, contact the following:"
+      case_inquiries:
+        header: Case enquires (Monday to Friday, 09:00 - 17:00)
+        phone:
+          text: "Phone:"
+          phone_number: 0300 200 2020
+      technical_support:
+        header: Technical support (Monday to Friday, 09:00 - 17:00)
+        email:
+          text: "Email:"
+          email_address: online-support@justice.gov.uk
+        phone:
+          text: "Phone:"
+          phone_number: 0300 200 2020
   providers:
     start:
       index:
