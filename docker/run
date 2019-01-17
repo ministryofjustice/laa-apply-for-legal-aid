@@ -2,8 +2,6 @@
 
 set -e
 
-/usr/bin/redis-server --daemonize yes
-
 ./bin/wait_for_pg
 ./bin/setup_db
 
