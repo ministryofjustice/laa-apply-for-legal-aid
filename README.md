@@ -40,6 +40,13 @@ NOTE: You also need to start sidekiq in another terminal window:
 bundle exec sidekiq
 ```
 
+You can also use foreman to start the application server and sidekiq with one command
+
+```
+gem install foreman
+foreman start -f Procfile
+```
+
 ### Running tests
 
 Runs Rubocop, RSpec specs and Cucumber features

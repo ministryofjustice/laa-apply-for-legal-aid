@@ -5,5 +5,4 @@ set -e
 ./bin/wait_for_pg
 ./bin/setup_db
 
-bundle exec sidekiq -d -L log/sidekiq.log
-bundle exec puma -C config/puma.rb
+foreman start -f Procfile

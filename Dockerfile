@@ -9,7 +9,7 @@ RUN touch /etc/inittab
 
 RUN apt-get update && apt-get install -y
 RUN apt-get install postgresql postgresql-contrib -y
-RUN apt-get install -y redis-server
+RUN gem install foreman
 
 EXPOSE $PORT
 
