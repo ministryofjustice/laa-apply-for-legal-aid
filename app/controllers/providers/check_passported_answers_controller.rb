@@ -1,5 +1,3 @@
-# Check passported answers controller - at end of capital questions
-# for passported clients on Provider journey
 module Providers
   class CheckPassportedAnswersController < BaseController
     include ApplicationDependable
