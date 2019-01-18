@@ -156,6 +156,17 @@ jobs:
                         --set ingress.hosts="{${PRODUCTION_HOST}}" \
                         --set replicaCount="2"
 
+  clean_up_ecr:
+    <<: *build_container_config
+    steps:
+    - checkout
+    - setup_remote_docker
+    - *setup_test_env
+    - run:
+        name: Delete old images from ecr repo
+        command: |
+          ./bin/clean_up_ecr
+
 workflows:
   version: 2
   build_and_deploy:
@@ -203,4 +214,5 @@ workflows:
             only:
             - master
     jobs:
+    - clean_up_ecr
     - deploy_staging

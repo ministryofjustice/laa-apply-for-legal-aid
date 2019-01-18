@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "Logging into ECR"
+
+aws configure set default.region eu-west-1
+
+docker_login=$(aws ecr get-login)
+
+eval $docker_login
+
+./bin/delete_ecr_images
