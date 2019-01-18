@@ -1,4 +1,10 @@
 <% content_for(:navigation) { back_link } %>
 <% content_for(:page_title) { t('.h1-heading') } %>
 
-<%= render 'shared/forms/own_home_form', form_path: citizens_own_home_path %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+    <%= render 'shared/forms/own_home_form', form_path: citizens_own_home_path %>
+  </div>
+</div>

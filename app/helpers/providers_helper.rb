@@ -1,6 +1,6 @@
 module ProvidersHelper
   # A wrapper for the main elements needed in a Providers page.
-  # On a simple page, this will wrap the main content:
+  # This will wrap the main content:
   #
   #   <%= provider_basic_page(page_title: 'Some Page') do %>
   #     <p>Some content</p>
@@ -11,6 +11,13 @@ module ProvidersHelper
   #
   #   <%= provider_basic_page(page_title: 'Some Page') %>
   #
+  # Where a minimal wrapper is needed (for example when the heading needs
+  # to be positioned within a form), use the :basic template
+  #
+  #   <%= provider_basic_page(page_title: 'Some Page', template: :basic) do %>
+  #     <p>Some content</p>
+  #   <% end %>
+  #
   # If the page contains a form, you can use the :form template that will put
   # the content within a fieldset and the heading into a fieldset heading:
   #
@@ -18,6 +25,14 @@ module ProvidersHelper
   #     <%= form_with(model: @form) do |form| %>
   #       ...
   #     <% end %>
+  #   <% end %>
+  #
+  # If a panel is required, declare the panel before calling this method, and
+  # it will be inserted into the page (default template only):
+  #
+  #   <% content_for(:panel) { 'Panel content } %>
+  #   <%= provider_basic_page(page_title: 'Some Page') do %>
+  #     <p>Main content</p>
   #   <% end %>
   #
   def provider_basic_page( # rubocop:disable Metrics/ParameterLists

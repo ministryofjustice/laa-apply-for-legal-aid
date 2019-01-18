@@ -1,14 +1,7 @@
-<% content_for :navigation do %>
-  <%= provider_back_link %>
+<%= provider_basic_page page_title: t('.heading_1') do %>
+  <%= render(
+        'shared/forms/shared_ownership_form',
+        form_path: providers_legal_aid_application_shared_ownership_path(@legal_aid_application),
+        show_draft: true
+      ) %>
 <% end %>
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
-
-    <%= render 'shared/forms/shared_ownership_form',
-               form_path: providers_legal_aid_application_shared_ownership_path(@legal_aid_application),
-               show_draft: true %>
-  </div>
-</div>
