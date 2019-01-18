@@ -252,6 +252,8 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.3)
     puma (3.12.0)
+    pundit (2.0.0)
+      activesupport (>= 3.0.0)
     rack (2.0.6)
     rack-protection (2.0.5)
       rack
@@ -447,6 +449,7 @@ DEPENDENCIES
   pg
   pry-byebug
   puma (~> 3.11)
+  pundit
   rails (~> 5.2.2)
   rspec-rails (~> 3.8)
   rubocop
@@ -475,4 +478,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   1.17.1
+   1.17.3

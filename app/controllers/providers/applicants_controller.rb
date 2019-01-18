@@ -5,10 +5,12 @@ module Providers
     include SaveAsDraftable
 
     def show
+      authorize @legal_aid_application
       @form = Applicants::BasicDetailsForm.new(model: applicant)
     end
 
     def update
+      authorize @legal_aid_application
       @form = Applicants::BasicDetailsForm.new(form_params)
       if @form.save
         continue_or_save_draft

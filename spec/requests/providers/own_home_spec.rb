@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'provider own home requests', type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   describe 'GET providers/own_home' do
     subject { get providers_legal_aid_application_own_home_path(legal_aid_application) }
@@ -13,7 +14,7 @@ RSpec.describe 'provider own home requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
@@ -40,7 +41,7 @@ RSpec.describe 'provider own home requests', type: :request do
     end
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 

@@ -5,6 +5,7 @@ module Providers
     include SaveAsDraftable
 
     def show # rubocop:disable Metrics/AbcSize
+      authorize @legal_aid_application
       return redirect_to back_step_url unless address.postcode
 
       if address_lookup.success?
@@ -17,6 +18,7 @@ module Providers
     end
 
     def update
+      authorize @legal_aid_application
       @addresses = build_addresses_from_form_data
       @form = Addresses::AddressSelectionForm.new(permitted_params.merge(addresses: @addresses, model: address))
 

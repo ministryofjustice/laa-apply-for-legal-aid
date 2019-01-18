@@ -8,6 +8,7 @@ class LegalAidApplication < ApplicationRecord
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
 
   belongs_to :applicant, optional: true
+  belongs_to :provider, optional: false
   has_many :application_proceeding_types
   has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result
@@ -21,6 +22,7 @@ class LegalAidApplication < ApplicationRecord
 
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
+  validates :provider, presence: true
 
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
 

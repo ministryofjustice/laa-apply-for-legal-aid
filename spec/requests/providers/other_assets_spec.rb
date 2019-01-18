@@ -4,6 +4,7 @@ RSpec.describe 'provider other assets requests', type: :request do
   let(:application) { create :application, :with_applicant }
   let(:oad) { application.create_other_assets_declaration! }
   let(:application_id) { application.id }
+  let(:provider) { application.provider }
 
   describe 'GET providers/applications/:id/other_assets' do
     subject { get providers_legal_aid_application_other_assets_path(application) }
@@ -15,7 +16,7 @@ RSpec.describe 'provider other assets requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
@@ -92,7 +93,7 @@ RSpec.describe 'provider other assets requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
       end
 
       context 'Submitted with Continue button' do

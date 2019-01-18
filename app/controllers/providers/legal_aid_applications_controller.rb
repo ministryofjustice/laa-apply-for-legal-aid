@@ -11,7 +11,7 @@ module Providers
 
     # POST /provider/applications
     def create
-      @legal_aid_application = LegalAidApplication.create
+      @legal_aid_application = LegalAidApplication.create(provider: current_provider)
       @legal_aid_application.create_other_assets_declaration!
       redirect_to next_step_url
     end

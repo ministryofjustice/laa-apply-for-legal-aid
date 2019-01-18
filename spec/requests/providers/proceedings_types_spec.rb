@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'providers legal aid application proceedings type requests', type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/proceedings_type' do
     subject { get providers_legal_aid_application_proceedings_type_path(legal_aid_application) }
@@ -13,7 +14,7 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
@@ -36,7 +37,7 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 

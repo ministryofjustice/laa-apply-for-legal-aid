@@ -5,10 +5,12 @@ module Providers
     include SaveAsDraftable
 
     def show
+      authorize @legal_aid_application
       @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
     end
 
     def update
+      authorize @legal_aid_application
       @form = LegalAidApplications::OwnHomeForm.new(form_params)
       if @form.save
         continue_or_save_draft(continue_url: next_url)
