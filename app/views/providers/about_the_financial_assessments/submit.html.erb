@@ -1,22 +1,27 @@
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <div class="govuk-panel govuk-panel--confirmation">
-      <h2 class="govuk-panel__title">
-        <%= t '.application_created' %>
-      </h2>
-      <div class="govuk-panel__body">
-        <%= t '.sub_title' %>
-        <br />
-        <strong><%= @legal_aid_application.application_ref %></strong>
-      </div>
+<% content_for(:panel) do %>
+  <div class="govuk-panel govuk-panel--confirmation">
+    <h2 class="govuk-panel__title">
+      <%= t '.application_created' %>
+    </h2>
+    <div class="govuk-panel__body">
+    <%= t '.sub_title' %>
+    <br />
+    <strong><%= @legal_aid_application.application_ref %></strong>
     </div>
-    <div class="govuk-!-padding-top-4"></div>
-    <h3 class="govuk-heading-m"><%= t '.secure_link_heading' %></h3>
+  </div>
+<% end %>
+
+<%= provider_basic_page page_title: t('.secure_link_heading') do %>
+
     <p class="govuk-body"><%= t '.secure_link_text' %></p>
     <h3 class="govuk-heading-m"><%= t '.happen_next_heading' %></h3>
     <p class="govuk-body">
      <%= t '.happen_next_text' %>
     </p>
-    <%= button_to t('.back_button'), providers_legal_aid_applications_path(@legal_aid_application), class: 'govuk-button govuk-button', id: 'continue', method: 'get' %>
-  </div>
-</div>
+    <%= link_to(
+          t('.back_button'),
+          providers_legal_aid_applications_path,
+          class: 'govuk-button govuk-button',
+          id: 'continue'
+        ) %>
+<% end %>

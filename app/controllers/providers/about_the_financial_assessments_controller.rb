@@ -6,6 +6,8 @@ module Providers
     def show; end
 
     def submit
+      return if legal_aid_application.provider_submitted?
+
       legal_aid_application.provider_submit!
       CitizenEmailService.new(legal_aid_application).send_email
     end

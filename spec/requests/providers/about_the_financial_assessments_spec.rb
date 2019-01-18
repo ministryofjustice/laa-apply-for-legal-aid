@@ -71,11 +71,6 @@ RSpec.describe 'about financial assessments requests', type: :request do
         context 'but has already been submitted by the provider' do
           let(:application) { create(:legal_aid_application, :with_applicant, :provider_submitted) }
 
-          it 'raises a state transition error' do
-            expect { subject }
-              .to raise_error(AASM::InvalidTransition, /Event 'provider_submit' cannot transition from 'provider_submitted/)
-          end
-
           it 'does not send an email to the citizen' do
             expect(CitizenEmailService).not_to receive(:new)
 

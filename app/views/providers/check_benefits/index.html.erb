@@ -1,12 +1,14 @@
 <%= content_for(:panel) do %>
-  <%= @legal_aid_application.applicant.full_name %>
-  <br />
-  <%= t "#{result_namespace}.title" %>
+  <div class="govuk-panel govuk-panel--confirmation">
+    <h2 class="govuk-panel__title">
+      <%= @legal_aid_application.applicant.full_name %>
+      <br />
+      <%= t "#{result_namespace}.title" %>
+    </h2>
+  </div>
 <% end %>
 
-<%= provider_basic_page(
-      page_title: t('.heading_1'),
-    ) do %>
+<%= provider_basic_page page_title: t('.heading_1') do %>
 
   <p class="govuk-body">
     <%= t "#{result_namespace}.body" %>

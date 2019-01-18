@@ -29,7 +29,7 @@ module ProvidersHelper
         &content
       )
     content = capture(&content) if content
-    template = :default unless %i(form basic).include?(template)
+    template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { provider_back_link(back_link) unless back_link == :none }
     content_for(:page_title) { page_title }
     render(

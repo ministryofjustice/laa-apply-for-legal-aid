@@ -2,11 +2,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-<%= column_width %>">
     <% if content_for?(:panel) %>
-      <div class="govuk-panel govuk-panel--confirmation">
-        <h2 class="govuk-panel__title">
-          <%= content_for(:panel) %>
-        </h2>
-      </div>
+      <%= content_for(:panel) %>
       <div class="govuk-!-padding-top-4"></div>
       <h3 class="govuk-heading-m">
         <%= content_for(:page_title) %>
