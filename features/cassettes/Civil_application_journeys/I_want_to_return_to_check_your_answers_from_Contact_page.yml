@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&postcode=DA74NG
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 18 Jan 2019 12:54:56 GMT
+      Content-Length:
+      - '99'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"fault":{"faultstring":"ApiKey not approved","detail":{"errorcode":"oauth.v2.ApiKeyNotApproved"}}}'
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:54:56 GMT
+recorded_with: VCR 4.0.0
