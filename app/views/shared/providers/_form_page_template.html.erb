@@ -1,9 +1,4 @@
-<% content_for :navigation do %>
-  <%= provider_back_link(back_link) unless back_link == :none %>
-<% end %>
-<% content_for(:page_title) { page_title } %>
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
-
+<%= render(partial: 'shared/forms/error_summary', locals: { model: show_errors_for }) if show_errors_for %>
 <fieldset class="govuk-fieldset">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
