@@ -1,5 +1,5 @@
 module Citizens
-  class ConsentsController < BaseController
+  class ConsentsController < ApplicationController
     def show; end
 
     def create

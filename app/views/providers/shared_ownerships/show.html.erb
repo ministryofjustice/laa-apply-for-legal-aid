@@ -1,5 +1,5 @@
 <% content_for :navigation do %>
-  <%= link_to t('generic.back'), '#', class: 'govuk-back-link', id: 'back' %>
+  <%= provider_back_link %>
 <% end %>
 <%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
 
@@ -7,6 +7,8 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
 
-    <%= render 'shared/forms/shared_ownership_form', form_path: providers_legal_aid_application_shared_ownership_path(@legal_aid_application), journey_path: 'citizens' %>
+    <%= render 'shared/forms/shared_ownership_form',
+               form_path: providers_legal_aid_application_shared_ownership_path(@legal_aid_application),
+               show_draft: true %>
   </div>
 </div>

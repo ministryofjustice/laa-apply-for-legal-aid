@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  get '/saml/auth' => 'saml_idp#new'
+  post '/saml/auth' => 'saml_idp#create'
+
+  devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
   devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
 
   resources :status, only: [:index]
@@ -29,10 +33,14 @@ Rails.application.routes.draw do
     resource :shared_ownership, only: %i[show update]
     resources :restrictions, only: %i[index create] # as multiple restrictions
     resource :other_assets, only: %i[show update]
+    resources :check_answers, only: [:index] do
+      patch :reset, on: :collection
+      patch :continue, on: :collection
+    end
   end
 
   namespace :providers do
-    root to: 'start#index'
+    root to: 'start#index' # TODO: In the live app this will point at an external url
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
       resource :proceedings_type, only: %i[show update]
@@ -43,7 +51,7 @@ Rails.application.routes.draw do
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
       resource :own_home, only: %i[show update]
-      resources :check_benefits, only: [:index]
+      resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resources :check_benefits, only: [:index] do
         get :passported, on: :collection
@@ -51,7 +59,7 @@ Rails.application.routes.draw do
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
-        post :continue, on: :collection
+        patch :continue, on: :collection
       end
       resources :restrictions, only: %i[index create] # as multiple restrictions
       resource :about_the_financial_assessment, only: [:show] do

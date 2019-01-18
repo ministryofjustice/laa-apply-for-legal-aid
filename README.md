@@ -70,6 +70,26 @@ helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-fo
 helm delete <name-of-the-release> --tiller-namespace=laa-apply-for-legalaid-uat --purge
 ```
 
+
+## LAA Portal Authentication dev setup
+
+Add the following to .env.development
+```
+LAA_PORTAL_IDP_SSO_TARGET_URL=https://portal.tst.legalservices.gov.uk/oamfed/idp/samlv20
+LAA_PORTAL_IDP_CERT=< LAA_PORTAL_IDP_CERT (dev)>
+LAA_PORTAL_CERTIFICATE=< LAA_PORTAL_CERTIFICATE (dev)>
+LAA_PORTAL_SECRET_KEY=< LAA_PORTAL_SECRET_KEY(dev)>
+LAA_PORTAL_MOCK_SAML=false
+```
+** Note the above keys can be found in rattic
+
+Mock Saml request on dev add the the following settings
+
+```
+LAA_PORTAL_IDP_SSO_TARGET_URL=http://localhost:3002/saml/auth
+LAA_PORTAL_MOCK_SAML=true
+```
+
 ## 3rd party integrations
 
 ### True Layer

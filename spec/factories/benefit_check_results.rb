@@ -3,5 +3,13 @@ FactoryBot.define do
     legal_aid_application
     result { 'No' }
     dwp_ref { SecureRandom.hex }
+
+    trait :positive do
+      result { 'Yes' }
+    end
+
+    trait :undetermined do
+      result { 'Undetermined' }
+    end
   end
 end

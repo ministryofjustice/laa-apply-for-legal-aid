@@ -1,5 +1,6 @@
 module Citizens
   class OutstandingMortgagesController < ApplicationController
+    include Flowable
     before_action :authenticate_applicant!
 
     def show
@@ -9,7 +10,7 @@ module Citizens
     def update
       @form = LegalAidApplications::OutstandingMortgageForm.new(legal_aid_application_params)
       if @form.save
-        render plain: 'Landing page: 1d. Do you share ownership of your home?'
+        go_forward
       else
         render :show
       end

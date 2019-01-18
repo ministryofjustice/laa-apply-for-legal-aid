@@ -1,5 +1,7 @@
 module Citizens
-  class PercentageHomesController < BaseController
+  class PercentageHomesController < ApplicationController
+    include Flowable
+
     def show
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
     end
@@ -8,7 +10,7 @@ module Citizens
       @form = LegalAidApplications::PercentageHomeForm.new(percentage_home_params.merge(model: legal_aid_application))
 
       if @form.save
-        render plain: 'Navigate to question 2a. Do you have any savings or investments?'
+        go_forward
       else
         render :show
       end

@@ -26,6 +26,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
     let(:restriction_ids) { restrictions.pluck(:id) }
     let(:params) do
       {
+        continue_button: 'Continue',
         legal_aid_application: {
           restriction_ids: restriction_ids
         }
@@ -47,15 +48,8 @@ RSpec.describe 'citizen restrictions request', type: :request do
         expect(legal_aid_application.restrictions).to match_array(restrictions)
       end
 
-      xit 'redirects to check your answers' do
-        # TODO: - set redirect path when known
-        expect(response).to redirect_to(:some_path)
-      end
-
-      it 'displays a holding page' do
-        # TODO: - replace with 'redirects to check your answers'
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Holding page')
+      it 'redirects to check answers page' do
+        expect(response).to redirect_to(citizens_check_answers_path)
       end
     end
 

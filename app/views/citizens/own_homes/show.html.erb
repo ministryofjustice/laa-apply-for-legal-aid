@@ -1,7 +1,4 @@
-<% content_for :navigation do %>
-  <%= link_to t('generic.back'), citizens_consent_path(id: session[:current_application_ref]), class: 'govuk-back-link', id: 'back' %>
-<% end %>
-
+<% content_for(:navigation) { back_link } %>
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <%= render 'shared/forms/own_home_form', form_path: citizens_own_home_path %>

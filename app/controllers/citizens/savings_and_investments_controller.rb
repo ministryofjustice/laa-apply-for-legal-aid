@@ -1,6 +1,8 @@
 module Citizens
-  class SavingsAndInvestmentsController < BaseController
-    helper_method :bank_accounts, :back_link, :attributes
+  class SavingsAndInvestmentsController < ApplicationController
+    include Flowable
+
+    helper_method :bank_accounts, :attributes
 
     def show
       @form = SavingsAmounts::SavingsAmountsForm.new(model: savings_amount)
@@ -10,7 +12,7 @@ module Citizens
       @form = SavingsAmounts::SavingsAmountsForm.new(form_params.merge(model: savings_amount))
 
       if @form.save
-        render plain: 'Navigate to question 3a. Other capital assets'
+        go_forward
       else
         render :show
       end
@@ -20,15 +22,6 @@ module Citizens
 
     def bank_accounts
       @bank_accounts ||= legal_aid_application.applicant.bank_providers.flat_map(&:bank_accounts)
-    end
-
-    def back_link
-      citizens_own_home_path
-
-      # TODO
-      # 1a for people that answered No to 1a
-      # 1d for people that answered either Yes on 1a and No on 1d
-      # 1e for people that answered either Yes on 1a and Yes on 1d
     end
 
     def attributes

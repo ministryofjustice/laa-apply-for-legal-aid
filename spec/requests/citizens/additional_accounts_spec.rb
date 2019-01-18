@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen additional accounts request test', type: :request do
+  let(:application) { create :application, :with_applicant }
+  let(:application_id) { application.id }
+  let(:secure_id) { application.generate_secure_id }
+
+  before { get citizens_legal_aid_application_path(secure_id) }
+
   describe 'GET /citizens/additional_accounts' do
     before { get citizens_additional_accounts_path }
 

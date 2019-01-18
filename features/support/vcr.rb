@@ -21,6 +21,9 @@ VCR.configure do |vcr_config|
   vcr_config.filter_sensitive_data('<BC_LSC_SERVICE_NAME>') { ENV['BC_LSC_SERVICE_NAME'] }
   vcr_config.filter_sensitive_data('<BC_CLIENT_ORG_ID>') { ENV['BC_CLIENT_ORG_ID'] }
   vcr_config.filter_sensitive_data('<BC_CLIENT_USER_ID>') { ENV['BC_CLIENT_USER_ID'] }
+  vcr_config.filter_sensitive_data('<LAA_PORTAL_IDP_CERT>') { ENV['LAA_PORTAL_IDP_CERT'] }
+  vcr_config.filter_sensitive_data('<LAA_PORTAL_IDP_CERT_FINGERPRINT>') { ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT'] }
+  vcr_config.filter_sensitive_data('<LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM>') { ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM'] }
 end
 
 VCR.cucumber_tags do |t|

@@ -1,5 +1,7 @@
+# TODO: Think about how we refactor this class to make it smaller
 class LegalAidApplication < ApplicationRecord
-  include AASM
+  include TranslatableModelAttribute
+  include LegalAidApplicationStateMachine # States are defined here
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
@@ -20,6 +22,8 @@ class LegalAidApplication < ApplicationRecord
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
 
+  delegate :full_name, to: :applicant, prefix: true, allow_nil: true
+
   enum(
     own_home: {
       no: 'no'.freeze,
@@ -28,32 +32,6 @@ class LegalAidApplication < ApplicationRecord
     },
     _prefix: true
   )
-
-  aasm column: :state do
-    state :initiated, initial: true
-    state :checking_answers
-    state :answers_checked
-    state :provider_submitted
-
-    event :check_your_answers do
-      transitions from: :initiated, to: :checking_answers
-      transitions from: :answers_checked, to: :checking_answers
-    end
-
-    event :answers_checked do
-      transitions from: :checking_answers, to: :answers_checked
-    end
-
-    event :provider_submit do
-      transitions from: :initiated, to: :provider_submitted
-      transitions from: :checking_answers, to: :provider_submitted
-      transitions from: :answers_checked, to: :provider_submitted
-    end
-
-    event :reset do
-      transitions from: :checking_answers, to: :initiated
-    end
-  end
 
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)
@@ -98,6 +76,23 @@ class LegalAidApplication < ApplicationRecord
 
   def shared_ownership?
     SHARED_OWNERSHIP_YES_REASONS.include?(shared_ownership)
+  end
+
+  def own_home?
+    own_home.present? && !own_home_no?
+  end
+
+  def own_capital?
+    own_home? || other_assets? || savings_amount? ||
+      own_home_mortgage? || own_home_owned_outright?
+  end
+
+  def savings_amount?
+    savings_amount.present? && savings_amount.positive?
+  end
+
+  def other_assets?
+    other_assets_declaration.present? && other_assets_declaration.positive?
   end
 
   private

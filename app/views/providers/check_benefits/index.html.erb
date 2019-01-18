@@ -31,6 +31,19 @@
       <%= t "#{result_namespace}.next" %>
     </p>
 
-    <%= button_to t('generic.continue'), @next_step_link, class: 'govuk-button govuk-button', id: 'continue', method: 'get' %>
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_check_benefit_path,
+          method: :patch,
+          local: true
+        ) do |form| %>
+
+      <%= render partial: 'shared/forms/next_action_buttons',
+                 locals: {
+                   continue_id: 'continue',
+                   show_draft: true,
+                   form: form
+                 } %>
+    <% end %>
   </div>
 </div>

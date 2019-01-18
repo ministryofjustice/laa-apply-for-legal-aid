@@ -1,5 +1,7 @@
 module Citizens
-  class OtherAssetsController < BaseController
+  class OtherAssetsController < ApplicationController
+    include Flowable
+
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end
@@ -7,7 +9,7 @@ module Citizens
     def update
       @form = Citizens::OtherAssetsForm.new(form_params)
       if @form.save
-        render plain: 'Navigate to next question after any other assets'
+        go_forward
       else
         render :show
       end

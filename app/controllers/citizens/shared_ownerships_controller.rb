@@ -1,5 +1,7 @@
 module Citizens
-  class SharedOwnershipsController < BaseController
+  class SharedOwnershipsController < ApplicationController
+    include Flowable
+
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
     end
@@ -8,11 +10,7 @@ module Citizens
       @form = LegalAidApplications::SharedOwnershipForm.new(shared_ownership_params.merge(model: legal_aid_application))
 
       if @form.save
-        if @form.shared_ownership?
-          render plain: 'Navigate to question 1e; What percentage of your home do you own?'
-        else
-          render plain: 'Navigate to question 2a; Do you have any savings or investments'
-        end
+        go_forward
       else
         render :show
       end

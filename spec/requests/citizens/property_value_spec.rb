@@ -22,8 +22,20 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
     context 'when a property value is entered' do
       let(:params) { { legal_aid_application: { property_value: 123_456.78 } } }
 
-      it 'redirects to new action' do
-        expect(response).to redirect_to(citizens_outstanding_mortgage_path)
+      context 'home is owned outright' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, own_home: 'owned_outright' }
+
+        it 'redirects to Shared ownership page' do
+          expect(response).to redirect_to(citizens_shared_ownership_path)
+        end
+      end
+
+      context 'home is owned with a mortgage' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, own_home: 'mortgage' }
+
+        it 'redirects to Outstanding mortgage page' do
+          expect(response).to redirect_to(citizens_outstanding_mortgage_path)
+        end
       end
 
       it 'records the value in the legal aid application table' do

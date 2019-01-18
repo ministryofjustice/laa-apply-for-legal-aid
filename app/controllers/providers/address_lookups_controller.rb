@@ -1,6 +1,6 @@
 module Providers
   class AddressLookupsController < BaseController
-    include Providers::ApplicationDependable
+    include ApplicationDependable
     include Steppable
 
     def show

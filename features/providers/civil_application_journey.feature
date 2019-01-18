@@ -1,6 +1,7 @@
 Feature: Civil application journeys
   @javascript
   Scenario: I am able to return to my legal aid applications
+    Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
@@ -14,6 +15,7 @@ Feature: Civil application journeys
 
   @javascript
   Scenario: No results returned is seen on screen when invalid search entered
+    Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
@@ -22,6 +24,7 @@ Feature: Civil application journeys
 
   @javascript
   Scenario: I am able to clear proceeding on the proceeding page
+    Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
@@ -34,6 +37,7 @@ Feature: Civil application journeys
   @javascript
   Scenario: I complete each step up to the applicant page
     # testing shared steps: Given I start the journey as far as the applicant page
+    Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
@@ -63,7 +67,7 @@ Feature: Civil application journeys
     Then I choose "Yes"
     Then I click "Continue"
     Then I am on the About the Financial Assessment page
-    Then I click "Submit"
+    Then I click "Continue"
     Then I am on the application confirmation page
 
   @localhost_request @javascript @vcr
@@ -89,7 +93,7 @@ Feature: Civil application journeys
     Then I choose "Yes"
     Then I click "Continue"
     Then I am on the About the Financial Assessment page
-    Then I click "Submit"
+    Then I click "Continue"
     Then I am on the application confirmation page
 
   @javascript @vcr

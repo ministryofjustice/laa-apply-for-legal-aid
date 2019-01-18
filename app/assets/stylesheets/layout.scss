@@ -1,0 +1,11 @@
+.govuk-header {
+  .govuk-header__content .user-info {
+    float: right;
+    line-height: 30px;
+    font-weight: bold;
+
+    a {
+      padding-left: 1em;
+    }
+  }
+}

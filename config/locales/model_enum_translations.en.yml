@@ -1,0 +1,10 @@
+en:
+  model_enum_translations:
+    legal_aid_application:
+      state:
+        answers_checked: Answers checked
+        initiated: In progress
+        checking_answers: Checking answers
+        provider_submitted: Submitted by provider
+        checking_citizen_answers: Applicant checking answers
+

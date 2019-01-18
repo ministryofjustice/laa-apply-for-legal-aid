@@ -1,5 +1,7 @@
 module Citizens
-  class PropertyValuesController < BaseController
+  class PropertyValuesController < ApplicationController
+    include Flowable
+
     def show
       @form = LegalAidApplications::PropertyValueForm.new(model: legal_aid_application)
     end
@@ -8,7 +10,7 @@ module Citizens
       @form = LegalAidApplications::PropertyValueForm.new(edit_params)
 
       if @form.save
-        redirect_to citizens_outstanding_mortgage_path
+        go_forward
       else
         render :show
       end

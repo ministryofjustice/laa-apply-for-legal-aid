@@ -1,5 +1,5 @@
 module Citizens
-  class InformationController < BaseController
+  class InformationController < ApplicationController
     def show; end
   end
 end

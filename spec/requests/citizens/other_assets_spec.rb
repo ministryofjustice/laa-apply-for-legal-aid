@@ -8,7 +8,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'GET citizens/own_home' do
+  describe 'GET citizens/other_assets' do
     it 'returns http success' do
       get citizens_other_assets_path
       expect(response).to have_http_status(:ok)
@@ -20,7 +20,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
     end
   end
 
-  describe 'PATCH citizens/own_home' do
+  describe 'PATCH citizens/other_assets' do
     before { patch citizens_other_assets_path, params: params }
 
     let(:params) do
@@ -52,10 +52,6 @@ RSpec.describe 'citizen other assets requests', type: :request do
     end
 
     context 'valid params' do
-      it 'returns http_success' do
-        expect(response).to have_http_status(:ok)
-      end
-
       it 'updates the record' do
         oad.reload
         expect(oad.second_home_value).to eq 875_123
@@ -71,14 +67,25 @@ RSpec.describe 'citizen other assets requests', type: :request do
         expect(oad.trust_value).to eq 1_234.56
       end
 
-      # TODO: setup redirect when known
-      xit 'redirects to the next page in the flow' do
-        expect(response).to redirect_to(:next_page_in_the_flow)
+      it 'redirects to the capital restrictions page' do
+        expect(response).to redirect_to(citizens_restrictions_path)
       end
 
-      # TODO: remove when redirect set up
-      it 'displays holding text' do
-        expect(response.body).to eq 'Navigate to next question after any other assets'
+      context 'no asset' do
+        let(:params) do
+          {
+            other_assets_declaration: {
+              check_box_second_home: 'true',
+              second_home_value: '0',
+              second_home_mortgage: '0',
+              second_home_percentage: '0'
+            }
+          }
+        end
+
+        it 'redirects to check answers page' do
+          expect(response).to redirect_to(citizens_check_answers_path)
+        end
       end
     end
 

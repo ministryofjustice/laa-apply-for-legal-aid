@@ -20,8 +20,8 @@ RSpec.describe 'citizen home requests', type: :request do
       end
 
       it 'returns the correct application' do
-        expect(response.body).to include(CGI.escapeHTML(applicant_first_name.html_safe))
-        expect(response.body).to include(CGI.escapeHTML(applicant_last_name.html_safe))
+        expect(unescaped_response_body).to include(applicant_first_name.html_safe)
+        expect(unescaped_response_body).to include(applicant_last_name.html_safe)
       end
     end
 

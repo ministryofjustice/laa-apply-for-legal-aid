@@ -1,7 +1,8 @@
 module Providers
   class PercentageHomesController < BaseController
-    include Providers::ApplicationDependable
+    include ApplicationDependable
     include Steppable
+    include SaveAsDraftable
 
     def show
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
@@ -11,7 +12,7 @@ module Providers
       @form = LegalAidApplications::PercentageHomeForm.new(percentage_home_params.merge(model: legal_aid_application))
 
       if @form.save
-        render plain: 'Navigate to question 2a. Do you have any savings or investments?'
+        continue_or_save_draft
       else
         render :show
       end

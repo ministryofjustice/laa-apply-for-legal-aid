@@ -1,5 +1,6 @@
 module Citizens
   class RestrictionsController < ApplicationController
+    include Flowable
     before_action :authenticate_applicant!
 
     def index
@@ -8,7 +9,7 @@ module Citizens
 
     def create
       legal_aid_application.update!(legal_aid_application_params)
-      render plain: 'Holding page: Redirect to check you answers'
+      go_forward
     end
 
     private

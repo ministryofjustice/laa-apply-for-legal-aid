@@ -1,7 +1,4 @@
-<% content_for :navigation do %>
-  <%= link_to t('generic.back'), back_link, class: 'govuk-back-link', id: 'back' %>
-<% end %>
-
+<% content_for(:navigation) { back_link } %>
 <% content_for(:page_title) { t('.h1-heading') } %>
 
 <%= render(

@@ -1,6 +1,9 @@
 module Providers
   class OtherAssetsController < BaseController
-    include Providers::ApplicationDependable
+    include ApplicationDependable
+    include SaveAsDraftable
+    include Steppable
+
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end
@@ -8,13 +11,33 @@ module Providers
     def update
       @form = Citizens::OtherAssetsForm.new(form_params)
       if @form.save
-        render plain: 'Navigate to next question after any other assets'
+        continue_or_save_draft(continue_url: next_url)
       else
         render :show
       end
     end
 
     private
+
+    def next_url
+      if own_home? || savings_or_investments? || other_assets?
+        providers_legal_aid_application_restrictions_path(legal_aid_application)
+      else
+        providers_legal_aid_application_check_provider_answers_path(legal_aid_application)
+      end
+    end
+
+    def own_home?
+      legal_aid_application.own_home?
+    end
+
+    def savings_or_investments?
+      legal_aid_application.savings_amount?
+    end
+
+    def other_assets?
+      legal_aid_application.other_assets?
+    end
 
     def declaration
       @declaration ||= legal_aid_application.other_assets_declaration

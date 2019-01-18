@@ -1,4 +1,11 @@
 en:
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M:%S'
+      date: '%a, %d %b %Y'
+  date:
+    formats:
+      default: '%a, %d %b %Y'
   api:
     errors:
       codes:
@@ -33,7 +40,7 @@ en:
         date_of_birth_label: 'Date of birth'
         date_of_birth_hint: 'For example, 31 3 1980'
       own_home_form:
-        mortgage: Yes, with a mortage or loan
+        mortgage: Yes, with a mortgage or loan
         owned_outright: Yes, owned outright
         "no": "No"
       outstanding_mortgage_form:
@@ -65,6 +72,23 @@ en:
                 check_box_isa: Including any money in current and savings accounts
                 check_box_other_person_account: For example, a junior ISA for a child
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+            other_assets:
+              check_box_timeshare_value: Timeshare
+              timeshare_value: Enter value, minus any loan and sale costs
+              check_box_land_value: Land
+              land_value: Enter estimated value
+              check_box_jewellery_value: Jewellery, art or antiques with a value over £500
+              jewellery_value: Enter estimated value, minus any sale costs
+              check_box_vehicle_value: Car, van or motorcycle less than 3 years old
+              vehicle_value: Enter estimated value, minus any outstanding payments
+              check_box_classic_car_value: Classic car purchased as an investment
+              classic_car_value: Enter the estimated value
+              check_box_money_assets_value: Money or assets from the estate of a person who has died
+              money_assets_value: Enter estimated total value
+              check_box_money_owed_value: Money owed to you, including from a private mortgage
+              money_owed_value: Enter estimated amount owed
+              check_box_trust_value: Interest in a trust
+              trust_value: Enter estimated total value
           citizens:
             savings_and_investments:
               isa: Enter the estimated total in all accounts
@@ -86,11 +110,14 @@ en:
                 check_box_other_person_account: For example, a junior ISA for a child
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
             other_assets:
+              check_box_second_home_value: Second property or holiday home estimated value
+              check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
+              check_box_second_home_percentage: Second property or holiday home percentage owned
               check_box_timeshare_value: Timeshare
               timeshare_value: Enter value, minus any loan and sale costs
               check_box_land_value: Land
               land_value: Enter estimated value
-              check_box_jewellery_value: Jewellery, art or antiques with a value over 500
+              check_box_jewellery_value: Jewellery, art or antiques with a value over £500
               jewellery_value: Enter estimated value, minus any sale costs
               check_box_vehicle_value: Car, van or motorcycle less than 3 years old
               vehicle_value: Enter estimated value, minus any outstanding payments
@@ -108,6 +135,12 @@ en:
           housing_assocation_or_landlord: Yes, a housing association or landlord
           friend_family_member_or_other_individual: Yes, a friend, family member or other individual
           no_sole_owner: No, sole owner
+      percentage_home_form:
+        providers:
+          percentage_homes:
+            percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
+            hint:
+              percentage_home: Enter the estimated property share
     page-title:
       suffix: Apply for legal aid
   activemodel:
@@ -204,7 +237,7 @@ en:
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               not_a_number: &outstanding_mortgage_amount_nan 'Mortgage amount must be an amount of money, like 60,000'
-              greater_than: *outstanding_mortgage_amount_nan
+              greater_than_or_equal_to: Mortgage amount must be zero or an amount of money, like 60,000
         savings_amount:
           attributes:
             isa:
@@ -367,6 +400,12 @@ en:
           heading_1: Your legal aid applications
           make_new_application: Make a new application
           basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
+        legal_aid_applications:
+          current_application: Current applications
+          applicant_name: Client's name
+          created_at: Date started
+          application_ref: Case reference
+          status: Status
     online_bankings:
       show:
         heading: Does your client use online banking?
@@ -545,6 +584,22 @@ en:
           what_you_will_need: What you will need
           list:
             item_1: your online banking log in
+    check_answers:
+      index:
+        h1-heading: Check your answers
+        assets:
+          heading: Property, savings and other assets
+          own_home: Own the home you live in
+          property_value: Property value
+          outstanding_mortgage: Outstanding mortgage amount
+          shared_ownership: Owned with anyone else
+          percentage_home: Percentage owned
+          savings_and_investments: Savings and investments
+          other_assets: Other assets
+          restrictions: Do any restrictions apply?
+        submit:
+          heading: Submit your details
+          text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
 
   restrictions:
     names:
@@ -561,11 +616,14 @@ en:
     continue: Continue
     back: Back
     home: Home
+    save_as_draft: Save as draft
     submit: Submit
     change: Change
     information: Information
     start: Start
     start_now: Start now
+    view: View
+    undefined: Undefined
     address:
       postcode_label: postcode
       postcode: Postcode
