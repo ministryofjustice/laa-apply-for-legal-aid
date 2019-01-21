@@ -3,7 +3,9 @@ module Providers
     extend ActiveSupport::Concern
 
     def continue_or_save_draft(continue_url: next_step_url, save_url: providers_legal_aid_applications_path)
-      if params.key?(:continue_button)
+      if legal_aid_application.checking_passported_answers?
+        redirect_to providers_legal_aid_application_check_passported_answers_path(legal_aid_application)
+      elsif params.key?(:continue_button)
         redirect_to continue_url
       elsif params.key?(:draft_button)
         redirect_to save_url

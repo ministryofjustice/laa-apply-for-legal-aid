@@ -32,6 +32,16 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to include('restrictions')
     end
 
+    it 'displays the correct URLs for changing values' do
+      expect(response.body).to have_change_link(:own_home, citizens_own_home_path)
+      expect(response.body).to have_change_link(:property_value, citizens_property_value_path(anchor: 'property_value'))
+      expect(response.body).to have_change_link(:shared_ownership, citizens_shared_ownership_path)
+      expect(response.body).to have_change_link(:percentage_home, citizens_percentage_home_path(anchor: 'percentage_home'))
+      expect(response.body).to have_change_link(:savings_and_investments, citizens_savings_and_investment_path)
+      expect(response.body).to have_change_link(:other_assets, citizens_other_assets_path)
+      expect(response.body).to have_change_link(:restrictions, citizens_restrictions_path)
+    end
+
     it 'displays the correct savings details' do
       legal_aid_application.savings_amount.amount_attributes.each do |_, amount|
         expect(response.body).to include(number_to_currency(amount, unit: '£')), 'saving amount should be in the page'

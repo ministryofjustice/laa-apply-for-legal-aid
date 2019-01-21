@@ -79,40 +79,51 @@ RSpec.describe 'providers savings and investments', type: :request do
           }
         end
 
-        it 'updates the isa amount' do
-          expect { subject }.to change { savings_amount.reload.isa.to_s }.to(isa)
-        end
-
-        it 'does not displays an error' do
-          subject
-          expect(response.body).not_to match('govuk-error-message')
-          expect(response.body).not_to match('govuk-form-group--error')
-        end
-
-        xit 'redirects to the next step in Citizen jouney' do
-          # TODO: - set redirect path when known
-          subject
-          expect(response).to redirect_to(:some_path)
-        end
-
-        it 'displays holding page' do
-          subject
-          expect(response).to redirect_to providers_legal_aid_application_other_assets_path(application)
-        end
-
-        context 'with invalid input' do
-          let(:isa) { 'fifty' }
-
-          it 'renders successfully' do
-            subject
-            expect(response).to have_http_status(:ok)
+        context 'not in checking passported answers state' do
+          it 'updates the isa amount' do
+            expect { subject }.to change { savings_amount.reload.isa.to_s }.to(isa)
           end
 
-          it 'displays an error' do
+          it 'does not displays an error' do
             subject
-            expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.isa.not_a_number'))
-            expect(response.body).to match('govuk-error-message')
-            expect(response.body).to match('govuk-form-group--error')
+            expect(response.body).not_to match('govuk-error-message')
+            expect(response.body).not_to match('govuk-form-group--error')
+          end
+
+          it 'redirects to the next step in Citizen jouney' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_other_assets_path(application))
+          end
+
+          context 'with invalid input' do
+            let(:isa) { 'fifty' }
+
+            it 'renders successfully' do
+              subject
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'displays an error' do
+              subject
+              expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.isa.not_a_number'))
+              expect(response.body).to match('govuk-error-message')
+              expect(response.body).to match('govuk-form-group--error')
+            end
+          end
+        end
+
+        context 'when in checking passported answers state' do
+          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :checking_passported_answers }
+
+          let(:submit_button) do
+            {
+              continue_button: 'Continue'
+            }
+          end
+
+          it 'redirects to the check passported answers page' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
           end
         end
       end
@@ -134,10 +145,9 @@ RSpec.describe 'providers savings and investments', type: :request do
           expect(response.body).not_to match('govuk-form-group--error')
         end
 
-        xit 'redirects to the next step in Citizen jouney' do
-          # TODO: - set redirect path when known
+        it 'redirects to the next step in Citizen jouney' do
           subject
-          expect(response).to redirect_to(:some_path)
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it 'displays holding page' do

@@ -25,7 +25,7 @@ module Providers
       if legal_aid_application.own_capital?
         providers_legal_aid_application_restrictions_path(legal_aid_application)
       else
-        providers_legal_aid_application_check_provider_answers_path(legal_aid_application)
+        providers_legal_aid_application_check_passported_answers_path(legal_aid_application)
       end
     end
 

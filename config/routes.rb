@@ -57,9 +57,7 @@ Rails.application.routes.draw do
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
-      resources :check_benefits, only: [:index] do
-        get :passported, on: :collection
-      end
+      resources :check_benefits, only: [:index]
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
@@ -72,6 +70,10 @@ Rails.application.routes.draw do
       resource :percentage_home, only: %i[show update]
       resource :savings_and_investment, only: %i[show update]
       resource :shared_ownership, only: %i[show update]
+      resource :check_passported_answers, only: [:show] do
+        patch :continue
+        patch :reset
+      end
     end
   end
 end

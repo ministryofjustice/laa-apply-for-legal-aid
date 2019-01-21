@@ -18,6 +18,14 @@ FactoryBot.define do
       state { 'provider_submitted' }
     end
 
+    trait :answers_checked do
+      state { 'answers_checked' }
+    end
+
+    trait :checking_passported_answers do
+      state { 'checking_passported_answers' }
+    end
+
     trait :with_proceeding_types do
       transient do
         proceeding_types_count { 1 }
