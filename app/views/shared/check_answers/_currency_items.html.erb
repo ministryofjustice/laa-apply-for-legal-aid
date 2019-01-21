@@ -1,0 +1,36 @@
+<div class="app-check-your-answers" id="app-check-your-answers__<%= name %>">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <%= question %>
+    </div>
+    <div class="govuk-grid-column-one-quarter align_right">
+      <%= link_to(url) do %>
+        <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <% answer.fetch(:items, []).each do |label, amount| %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">&nbsp;</div>
+      <div class="govuk-grid-column-one-half"><%= label %></div>
+      <div class="govuk-grid-column-one-quarter">
+        <%= number_to_currency(amount, unit: t('currency.gbp')) %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">&nbsp;</div>
+    <div class="govuk-grid-column-one-half align_right">
+      <strong>
+        <%= t('generic.total') %>:
+      </strong>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <strong>
+        <%= number_to_currency(answer[:total_value], unit: t('currency.gbp')) %>
+      </strong>
+    </div>
+  </div>
+</div>

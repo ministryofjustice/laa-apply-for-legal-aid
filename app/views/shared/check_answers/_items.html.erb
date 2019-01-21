@@ -1,0 +1,19 @@
+<div class="app-check-your-answers" id="app-check-your-answers__<%= name %>">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <%= question %>
+    </div>
+    <div class="govuk-grid-column-one-quarter align_right">
+      <%= link_to(url) do %>
+        <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <% answer.each do |line| %>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">&nbsp;</div>
+      <div class="govuk-grid-column-three-quarters"><%= line %></div>
+    </div>
+  <% end %>
+</div>

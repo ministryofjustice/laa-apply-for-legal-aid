@@ -638,6 +638,7 @@ en:
     start_now: Start now
     view: View
     undefined: Undefined
+    total: Total
     address:
       postcode_label: postcode
       postcode: Postcode

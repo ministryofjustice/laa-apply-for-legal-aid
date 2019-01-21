@@ -1,13 +1,18 @@
 module CapitalHelper
   def capital_amounts_list(capital, locale_namespace:)
-    return [] unless capital
-
-    capital.amount_attributes.map { |attribute, amount|
+    items = capital&.amount_attributes&.map do |attribute, amount|
       next unless amount
 
       label = t("#{locale_namespace}#{attribute}")
-      amount = number_to_currency(amount, unit: t('currency.gbp'))
-      "#{label} #{amount}"
-    }.compact
+      [label, amount]
+    end
+    items&.compact!
+
+    return nil unless items.present?
+
+    {
+      items: items,
+      total_value: items.map(&:last).sum
+    }
   end
 end

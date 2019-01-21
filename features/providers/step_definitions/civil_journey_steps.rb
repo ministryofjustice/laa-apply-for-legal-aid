@@ -87,7 +87,7 @@ end
 Then('the answer for {string} should be {string}') do |field_name, answer|
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
-  within "#app-check-your-answers__#{field_name} .app-check-your-answers__answer" do
+  within "#app-check-your-answers__#{field_name}" do
     have_content(answer)
   end
 end
