@@ -232,7 +232,7 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on the "Apply for Legal Aid" page
 
-  @javascript @vcr
+  @javascript
   Scenario: I want to return to applicant from Contact page
     Given I start the journey as far as the applicant page
     Then I click link "Contact"
