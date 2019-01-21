@@ -37,6 +37,7 @@ deploy() {
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
+                --debug \
                 --set replicaCount="1"
 }
 
