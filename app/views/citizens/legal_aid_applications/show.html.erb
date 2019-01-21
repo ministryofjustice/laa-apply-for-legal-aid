@@ -1,26 +1,22 @@
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
-    <p class="govuk-body">
-      <%= t('.name') %>
-      <b><%= current_applicant.first_name %></b>
-      <b><%= current_applicant.last_name %></b>
-      <br />
-      <%= t('.case_reference') %>
-      <b><%= current_applicant.legal_aid_application.id %></b>
-    </p>
+<%= citizen_page page_title: t('.heading_1'), back_link: :none do %>
+  <p class="govuk-body">
+    <%= t('.name') %>
+    <b><%= current_applicant.first_name %></b>
+    <b><%= current_applicant.last_name %></b>
+    <br />
+    <%= t('.case_reference') %>
+    <b><%= current_applicant.legal_aid_application.id %></b>
+  </p>
 
-    <p class="govuk-body"><%= t('.financial_situation_para') %></p>
+  <p class="govuk-body"><%= t('.financial_situation_para') %></p>
 
-    <p class="govuk-body"><%= t('.legal_cost_para') %></p>
+  <p class="govuk-body"><%= t('.legal_cost_para') %></p>
 
-    <p class="govuk-body govuk-!-font-weight-bold"><%= t('.what_you_will_need') %></p>
+  <p class="govuk-body govuk-!-font-weight-bold"><%= t('.what_you_will_need') %></p>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li><%= t('.list.item_1') %></li>
-    </ul>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><%= t('.list.item_1') %></li>
+  </ul>
 
-    <%= link_to t('generic.start'), citizens_information_path, class: 'govuk-button govuk-button--start', id: 'start' %>
-
-  </div>
-</div>
+  <%= link_to t('generic.start'), citizens_information_path, class: 'govuk-button govuk-button--start', id: 'start' %>
+<% end %>

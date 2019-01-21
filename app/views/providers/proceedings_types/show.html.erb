@@ -6,7 +6,7 @@
 </noscript>
 
 <% back_label = @legal_aid_application.checking_answers? ? 'generic.back' : 'generic.home' %>
-<%= provider_basic_page(
+<%= provider_page(
       page_title: t('.heading_1'),
       back_link: { text: t(back_label) }
     ) %>
