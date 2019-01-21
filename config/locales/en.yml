@@ -660,7 +660,7 @@ en:
           item_2: We download 3 months of transactions
           item_3: Your online banking details are not saved
     legal_aid_applications:
-        show:
+        index:
           heading_1: Complete your legal aid financial assessment
           name: 'Name:'
           case_reference: 'Case reference:'

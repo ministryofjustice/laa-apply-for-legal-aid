@@ -1,5 +1,13 @@
 class PageFlowService
   STEPS_FLOW = {
+    legal_aid_applications: {
+      path: :citizens_legal_aid_applications_path,
+      forward: :information
+    },
+    information: {
+      path: :citizens_information_path,
+      back: :legal_aid_applications
+    },
     accounts: {
       path: :citizens_accounts_path
     },
