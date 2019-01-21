@@ -18,7 +18,6 @@
           answer: @proceeding.meaning
         ) %>
 
-<<<<<<< 81a94a27ec68aa0737f342f7a4072c275aa81cbb
     <dt class="govuk-heading-m">
       <%= t '.section_1.heading' %>
     </dt>
@@ -81,54 +80,7 @@
       question: t('.section_2.address'),
       answer: address_with_line_breaks(@address)
     ) %>
-=======
-    <dt class="govuk-heading-m govuk-!-padding-top-9">
-      <%= t '.section_2.heading' %>
-    </dt>
 
-    <%= check_answer_link(
-          name: :first_name,
-          url: providers_legal_aid_application_applicant_path(anchor: :first_name),
-          question: t('.section_2.first_name'),
-          answer: @applicant.first_name
-        ) %>
-
-    <%= check_answer_link(
-          name: :last_name,
-          url: providers_legal_aid_application_applicant_path(anchor: :last_name),
-          question: t('.section_2.last_name'),
-          answer: @applicant.last_name
-        ) %>
-
-    <%= check_answer_link(
-          name: :date_of_birth,
-          url: providers_legal_aid_application_applicant_path(anchor: :dob_day),
-          question: t('.section_2.dob'),
-          answer: @applicant.date_of_birth
-        ) %>
-
-    <%= check_answer_link(
-          name: :national_insurance_number,
-          url: providers_legal_aid_application_applicant_path(anchor: :national_insurance_number),
-          question: t('.section_2.nino'),
-          answer: @applicant.national_insurance_number
-        ) %>
-
-    <%= check_answer_link(
-          name: :email,
-          url: providers_legal_aid_application_applicant_path(anchor: :email),
-          question: t('.section_2.email'),
-          answer: @applicant.email
-        ) %>
-
-    <%= check_answer_link(
-          name: :address,
-          url: change_address_link(@applicant),
-          question: t('.section_2.address'),
-          answer: address_with_line_breaks(@address)
-        ) %>
-  </dl>
->>>>>>> AP-291 Continue journey to check benefits
 
 <div class="govuk-grid-row">
   <%= render partial: 'shared/forms/next_action_buttons_form',

@@ -69,6 +69,8 @@ module PageTemplateHelper
   end
 
   def citizen_page(args, &content)
+    back_link_args = args.fetch(:back_link, {})
+    args[:back_link] = back_link(back_link_args) unless back_link_args == :none
     page_template(args, &content)
   end
 end

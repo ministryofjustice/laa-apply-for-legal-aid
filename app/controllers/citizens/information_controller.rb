@@ -1,7 +1,7 @@
 module Citizens
   class InformationController < ApplicationController
     include Flowable
-    
+
     def show
       legal_aid_application
     end

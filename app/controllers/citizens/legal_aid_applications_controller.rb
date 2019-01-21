@@ -18,7 +18,7 @@ module Citizens
       render plain: 'Authentication failed'
     end
 
-    def index;end
+    def index; end
 
     private
 
