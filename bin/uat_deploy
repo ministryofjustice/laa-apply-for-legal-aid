@@ -33,7 +33,7 @@ deploy() {
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
-  helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid-uat/. \
+  HELM_COMMAND="helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid-uat/. \
                 --install --force --wait \
                 --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} \
                 --namespace=${KUBE_ENV_UAT_NAMESPACE} \
@@ -43,7 +43,10 @@ deploy() {
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
                 --set replicaCount="1" \
-                --timeout 60
+                --timeout 60"
+
+  # run it twice, and if it times out, run it again
+  $HELM_COMMAND || $HELM_COMMAND
 }
 
 clean_old_releases
