@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
 
   resources :status, only: [:index]
+  resource :contact, only: [:show]
 
   namespace 'v1' do
     resources :proceeding_types, only: [:index]

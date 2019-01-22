@@ -108,6 +108,10 @@ Then('I should be on the Check Your Answers page') do
   expect(page).to have_content('Check your answers')
 end
 
+Then('I should be on the {string} page') do |title|
+  expect(page).to have_content(title)
+end
+
 Then('I enter name {string}, {string}') do |first_name, last_name|
   fill_in('first_name', with: first_name)
   fill_in('last_name', with: last_name)

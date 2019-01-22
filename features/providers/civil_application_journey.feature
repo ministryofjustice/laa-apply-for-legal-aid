@@ -223,3 +223,19 @@ Feature: Civil application journeys
     Then I click find address
     Then I click link "Back"
     Then I should be on the Check Your Answers page
+
+  Scenario: I navigate to Contact page from application service and back
+    Given I am logged in as a provider
+    Given I visit the application service
+    Then I click link "Contact"
+    Then I should be on the "Contact us" page
+    Then I click link "Back"
+    Then I should be on the "Apply for Legal Aid" page
+
+  @javascript
+  Scenario: I want to return to applicant from Contact page
+    Given I start the journey as far as the applicant page
+    Then I click link "Contact"
+    Then I should be on the "Contact us" page
+    Then I click link "Back"
+    Then I should be on the Applicant page

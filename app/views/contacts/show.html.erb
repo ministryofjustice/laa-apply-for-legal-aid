@@ -1,0 +1,32 @@
+<% content_for(:navigation) { back_link(path: :back) } %>
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+
+    <p class="govuk-body"><%= t('.page_header') %></p>
+
+    <p class="govuk-body">
+      <%= t('.case_inquiries.header') %>
+      <br />
+      <%= t('.case_inquiries.phone.text') %>
+      <a href="tel:<%= t('.case_inquiries.phone.phone_number') %>">
+        <%= t('.case_inquiries.phone.phone_number') %>
+      </a>
+    </p>
+    <p class="govuk-body">
+      <%= t('.technical_support.header') %>
+      <br />
+      <%= t('.technical_support.email.text') %>
+      <a href="mailto:<%= t('.technical_support.email.email_address') %>">
+        <%= t('.technical_support.email.email_address') %>
+      </a>
+      <br />
+      <%= t('.technical_support.phone.text') %>
+      <a href="tel:<%= t('.technical_support.phone.phone_number') %>">
+        <%= t('.technical_support.phone.phone_number') %>
+      </a>
+    </p>
+  </div>
+</div>
