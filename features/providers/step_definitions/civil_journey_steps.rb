@@ -9,6 +9,25 @@ Given(/^I visit the application service$/) do
   visit providers_root_path
 end
 
+Given(/^I visit the applications page$/) do
+  visit providers_legal_aid_applications_path
+end
+
+Given('I previously created a passported application and left on the {string} page') do |provider_step|
+  @legal_aid_application = create(
+    :application,
+    :with_everything,
+    provider: create(:provider),
+    state: :initiated,
+    provider_step: provider_step.downcase
+  )
+  login_as @legal_aid_application.provider
+end
+
+Given(/^I view the previously created application$/) do
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a", text: 'View').click
+end
+
 Given('I start the journey as far as the applicant page') do
   steps %(
     Given I am logged in as a provider
@@ -28,14 +47,31 @@ Given('I complete the journey as far as check your answers') do
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
-    Then I enter an email address 'test@test.com'
+    Then I fill 'email' with 'test@test.com'
     Then I click "Continue"
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
-    Then I should be on the Check Your Answers page
+    Then I should be on a page showing 'Check your answers'
+  )
+end
+
+Given('I complete the passported journey as far as check your answers') do
+  steps %(
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'Walker'
+    Then I enter the date of birth '10-01-1980'
+    Then I enter national insurance number 'JA293483A'
+    Then I fill 'email' with 'test@test.com'
+    Then I click "Continue"
+    Then I am on the postcode entry page
+    Then I enter a postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click "Continue"
+    Then I should be on a page showing 'Check your answers'
   )
 end
 
@@ -68,14 +104,6 @@ Then(/^proceeding suggestions has results$/) do
   expect(page).to have_css('#proceeding-list > .proceeding-item')
 end
 
-And('I click {string}') do |button_name|
-  click_button(button_name)
-end
-
-Given('I click link {string}') do |link_name|
-  click_link(link_name)
-end
-
 Given('I click Check Your Answers Change link for {string}') do |field_name|
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
@@ -104,14 +132,6 @@ Then('I should be on the Applicant page') do
   expect(page).to have_css('input#first_name')
 end
 
-Then('I should be on the Check Your Answers page') do
-  expect(page).to have_content('Check your answers')
-end
-
-Then('I should be on a page showing {string}') do |title|
-  expect(page).to have_content(title)
-end
-
 Then('I enter name {string}, {string}') do |first_name, last_name|
   fill_in('first_name', with: first_name)
   fill_in('last_name', with: last_name)
@@ -126,14 +146,6 @@ end
 
 Then(/^I see a notice confirming an e-mail was sent to the citizen$/) do
   expect(page).to have_content('Application completed. An e-mail will be sent to the citizen.')
-end
-
-Then('I enter an email address {string}') do |email_address|
-  fill_in('email', with: email_address)
-end
-
-Then('I choose {string}') do |option|
-  choose(option, allow_label_click: true)
 end
 
 # Matches:
