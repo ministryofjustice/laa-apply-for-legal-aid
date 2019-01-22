@@ -81,8 +81,8 @@ jobs:
     - run:
         name: Run Tests
         command: bundle exec rake
-    - *build_docker_image
-    - *push_to_ecr
+#    - *build_docker_image
+#    - *push_to_ecr
 
   deploy_uat:
     <<: *deploy_container_config
@@ -97,6 +97,8 @@ jobs:
           setup-kube-auth
           kubectl config use-context uat
     - *decrypt_secrets
+    - *build_docker_image
+    - *push_to_ecr
     - deploy:
         name: Helm deployment to UAT
         command: |

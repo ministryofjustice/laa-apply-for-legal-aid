@@ -43,8 +43,10 @@ deploy() {
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
                 --set replicaCount="1" \
-                --timeout 60"
+                --timeout 240"
 
+  echo "Executing helm command:"
+  echo $HELM_COMMAND
   # run it twice, and if it times out, run it again
   $HELM_COMMAND || $HELM_COMMAND
 }
