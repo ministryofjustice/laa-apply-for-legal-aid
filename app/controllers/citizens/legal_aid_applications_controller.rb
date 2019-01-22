@@ -27,10 +27,6 @@ module Citizens
       sign_in(scope, applicant, event: :authentication)
     end
 
-    def applicant
-      @applicant ||= legal_aid_application&.applicant
-    end
-
     def legal_aid_application
       @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end

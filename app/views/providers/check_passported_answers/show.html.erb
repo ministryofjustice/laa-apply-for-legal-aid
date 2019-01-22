@@ -1,17 +1,18 @@
-<%= provider_basic_page(
+<%= provider_page(
       page_title: t('.h1-heading'),
       back_link: { path: reset_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application), method: :patch }
     ) do %>
-      <h2 class="govuk-heading-m">
-        <%= t('.assets.heading') %>
-      </h2>
 
-      <%= render partial: 'shared/check_answers_assets', locals: { user_type: :provider, application: @legal_aid_application } %>
+  <h2 class="govuk-heading-m">
+    <%= t('.assets.heading') %>
+  </h2>
 
-      <%= button_to(
-            t('generic.submit'),
-            continue_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application),
-            class: 'govuk-button',
-            method: :patch
-          ) %>
+  <%= render partial: 'shared/check_answers_assets', locals: { user_type: :provider, application: @legal_aid_application } %>
+
+  <%= button_to(
+        t('generic.submit'),
+        continue_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application),
+        class: 'govuk-button',
+        method: :patch
+      ) %>
 <% end %>
