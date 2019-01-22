@@ -112,7 +112,7 @@ en:
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
               hint:
                 check_box_isa: Accounts you do not access with online banking
-                check_box_other_person_account: For example, a junior ISA for a child
+                check_box_other_person_account: For example, if you have power of attorney
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
             other_assets:
               check_box_second_home_value: Second property or holiday home estimated value
