@@ -6,9 +6,7 @@
         <h2 class="govuk-visually-hidden"><%= t('layouts.application.footer.support') %></h2>
         <ul class="govuk-footer__inline-list">
           <li class="govuk-footer__inline-list-item">
-            <a class="govuk-footer__link" href="/contact">
-              <%= t('layouts.application.footer.contact') %>
-            </a>
+            <%= link_to t('layouts.application.footer.contact'), contact_path, class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
