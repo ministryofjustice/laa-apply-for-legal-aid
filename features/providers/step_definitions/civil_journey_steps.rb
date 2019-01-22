@@ -108,7 +108,7 @@ Then('I should be on the Check Your Answers page') do
   expect(page).to have_content('Check your answers')
 end
 
-Then('I should be on the {string} page') do |title|
+Then('I should be on a page showing {string}') do |title|
   expect(page).to have_content(title)
 end
 
