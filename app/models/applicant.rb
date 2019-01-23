@@ -51,6 +51,17 @@ class Applicant < ApplicationRecord
     return if national_insurance_number.blank?
 
     normalise_national_insurance_number
+    return if test_level_validation? && known_test_ninos.include?(national_insurance_number)
+
     errors.add(:national_insurance_number, :invalid) unless NINO_REGEXP =~ national_insurance_number
+  end
+
+  # These National Insurance Numbers are used for testing but do not match NINO_REGEXP
+  def known_test_ninos
+    %w[JS130161E NX794801E JD142369D NP685623E JR468684E JF982354B JK806648E JW570102E]
+  end
+
+  def test_level_validation?
+    Rails.configuration.x.laa_portal.mock_saml == 'true'
   end
 end
