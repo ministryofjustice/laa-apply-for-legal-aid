@@ -14,6 +14,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :benefit_check_result
   has_one :other_assets_declaration
   has_one :savings_amount
+  has_one :merits_assessment
   has_many :legal_aid_application_restrictions
   has_many :restrictions, through: :legal_aid_application_restrictions
 
