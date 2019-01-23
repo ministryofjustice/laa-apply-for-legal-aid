@@ -1,15 +1,14 @@
-<% content_for(:navigation) { back_link(path: reset_citizens_check_answers_path, method: :patch) } %>
-<% content_for(:page_title) { t('.h1-heading') } %>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-
-    <h2 class="govuk-heading-m">
-      <%= t('.assets.heading') %>
-    </h2>
-  </div>
-</div>
+<%= citizen_page(
+      page_title: t('.h1-heading'),
+      back_link: {
+        path: reset_citizens_check_answers_path,
+        method: :patch
+      }
+    ) do %>
+  <h2 class="govuk-heading-m">
+    <%= t('.assets.heading') %>
+  </h2>
+<% end %>
 
 <%= check_answer_link(
       name: :own_home,
