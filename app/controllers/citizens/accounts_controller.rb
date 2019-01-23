@@ -1,6 +1,7 @@
 module Citizens
   class AccountsController < ApplicationController
     before_action :authenticate_applicant!
+    include Flowable
 
     def index
       return if worker_working?
@@ -10,6 +11,8 @@ module Citizens
         ApplicantAccountPresenter.new(bank_provider)
       end
     end
+
+    private
 
     def worker_errors
       return [] unless worker
@@ -36,6 +39,10 @@ module Citizens
 
     def worker_id
       @worker_id ||= params[:worker_id]
+    end
+
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

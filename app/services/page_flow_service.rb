@@ -8,8 +8,13 @@ class PageFlowService # rubocop:disable Metrics/ClassLength
       path: :citizens_information_path,
       back: :legal_aid_applications
     },
+    consents: {
+      path: :citizens_consent_path,
+      back: :information
+    },
     accounts: {
-      path: :citizens_accounts_path
+      path: :citizens_accounts_path,
+      back: :consents
     },
     additional_accounts: {
       path: :citizens_additional_accounts_path,

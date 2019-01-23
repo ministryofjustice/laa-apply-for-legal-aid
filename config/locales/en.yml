@@ -157,6 +157,11 @@ en:
             percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
             hint:
               percentage_home: Enter the estimated property share
+        citizens:
+          percentage_homes:
+            percentage_home: Enter the estimated percentage share you own
+            hint:
+              percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
     page-title:
       suffix: Apply for legal aid
     check_answers_assets:
@@ -551,9 +556,6 @@ en:
       index:
         h1-heading: Do any restrictions apply to your client's property, savings or assets?
     percentage_homes:
-      percentage_home: Enter the estimated percentage share
-      hint:
-        percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
       show:
         h1-heading: What % share of their home does your client legally own?
     savings_and_investments:
@@ -602,9 +604,6 @@ en:
         list_2: We do not have any ongoing access to your bank accounts
         list_3: We only use your details to assess your eligibility for legal aid
     percentage_homes:
-      percentage_home: Enter the estimated percentage share you own
-      hint:
-        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
       show:
         h1-heading: What % share of your home do you legally own?
     savings_and_investments:

@@ -13,10 +13,11 @@ RSpec.describe 'applicants omniauth call back', type: :request do
   let(:expires_at) { 1.hour.from_now.round }
   let(:true_layer_expires_at) { expires_at.to_i }
   let(:applicant) { create :applicant }
+  let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
   let(:bank_provider) { applicant.bank_providers.find_by(token: token) }
 
   before do
-    sign_in applicant if applicant
+    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) if applicant
     OmniAuth.config.add_mock(
       :true_layer,
       credentials: {

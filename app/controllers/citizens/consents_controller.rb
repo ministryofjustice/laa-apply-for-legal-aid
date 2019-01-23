@@ -1,5 +1,7 @@
 module Citizens
   class ConsentsController < ApplicationController
+    include Flowable
+
     def show; end
 
     def create
@@ -23,6 +25,10 @@ module Citizens
 
     def consent_params
       params.require(:legal_aid_application).permit(:open_banking_consent, :open_banking_consent_choice_at)
+    end
+
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end
