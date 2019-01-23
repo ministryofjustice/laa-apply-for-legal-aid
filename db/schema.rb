@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_115534) do
+ActiveRecord::Schema.define(version: 2019_01_23_111544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -162,6 +162,13 @@ ActiveRecord::Schema.define(version: 2019_01_22_115534) do
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
+  create_table "merits_assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
+  end
+
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "second_home_value"
@@ -249,5 +256,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_115534) do
   add_foreign_key "legal_aid_application_restrictions", "restrictions"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "providers"
+  add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
 end
