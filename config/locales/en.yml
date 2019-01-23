@@ -356,7 +356,7 @@ en:
       heading: "Enter your client's home address"
     client_detail:
       dob_hint: 'For example, 31 3 1980'
-      national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
+      national_insurance_number_hint: "For example, QQ 12 34 56 C"
   layouts:
     application:
       header:
