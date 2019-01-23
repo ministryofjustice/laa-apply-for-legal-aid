@@ -39,6 +39,10 @@ en:
           'true': 'Yes'
           'false': 'No'
         application_purpose: Please give details of why your client is applying for legal aid
+        proceedings_before_the_court:
+          'true': 'Yes'
+          'false': 'No'
+        details_of_proceedings_before_the_court: Please give details.
   shared:
     access_denied:
       heading_1: Access denied
@@ -267,6 +271,10 @@ en:
               blank: Enter details of why your client is applying for legal aid
             client_received_legal_help:
               blank: Select yes if your client has received legal help for the matter
+            proceedings_before_the_court:
+              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
+            details_of_proceedings_before_the_court:
+              blank: Enter details of the proceedings currently before the court
         savings_amount:
           attributes:
             isa:
@@ -546,6 +554,10 @@ en:
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
+    proceedings_before_the_courts:
+      show:
+        h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
+
   citizens:
     accounts:
       index:

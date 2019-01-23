@@ -281,6 +281,10 @@ Feature: Civil application journeys
     Then I fill "Application purpose" with "because I can't afford it"
     Then I click "Continue"
     Then I should be on a page showing "Are the proceedings, for which funding is being sought, currently, before the court?"
+    Then I choose "Yes"
+    Then I fill "Details of proceedings before the court" with "The case is already in the court"
+    Then I click "Continue"
+    Then I should be on a page showing "Statement of case"
 
   @javascript
   Scenario: Navigate back capital flow
