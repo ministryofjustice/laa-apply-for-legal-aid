@@ -68,6 +68,50 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
+    context 'with test national insurance numbers' do
+      let(:test_nino) { 'JS130161E' }
+      let(:invalid_nino) { 'QQ12AS23RR' }
+      let(:valid_nino) { Faker::Base.regexify(Applicant::NINO_REGEXP) }
+      before do
+        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
+      end
+      context 'with normal validation' do
+        let(:in_test_mode) { 'false' }
+        it 'test nino is invalid' do
+          subject.national_insurance_number = test_nino
+          expect(subject).to be_invalid
+        end
+
+        it 'invalid NINO is still invalid' do
+          subject.national_insurance_number = invalid_nino
+          expect(subject).to_not be_valid
+        end
+
+        it 'valid NINO is still valid' do
+          subject.national_insurance_number = valid_nino
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'with test level validation' do
+        let(:in_test_mode) { 'true' }
+        it 'test NINO is valid' do
+          subject.national_insurance_number = test_nino
+          expect(subject).to be_valid
+        end
+
+        it 'invalid NINO is still invalid' do
+          subject.national_insurance_number = invalid_nino
+          expect(subject).to_not be_valid
+        end
+
+        it 'valid NINO is still valid' do
+          subject.national_insurance_number = valid_nino
+          expect(subject).to be_valid
+        end
+      end
+    end
+
     context 'with an invalid email' do
       let(:attributes) { attributes_for(:applicant).merge(email: 'not-a-valid-email') }
 

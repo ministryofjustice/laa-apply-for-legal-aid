@@ -8,11 +8,9 @@ module Applicants
                   :dob_year, :dob_month, :dob_day, :email
     attr_writer :date_of_birth
 
-    NINO_REGEXP = /\A[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}\z/.freeze
-
     before_validation :normalise_national_insurance_number
 
-    validates :first_name, :last_name, presence: true
+    validates :first_name, :last_name, :national_insurance_number, presence: true
 
     validates(
       :date_of_birth,
@@ -22,8 +20,7 @@ module Applicants
       }
     )
 
-    validates :national_insurance_number, presence: true
-    validates :national_insurance_number, format: { with: NINO_REGEXP, message: :not_valid }, allow_blank: true
+    validate :validate_national_insurance_number
 
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
     validates :email, presence: true
@@ -67,6 +64,23 @@ module Applicants
         dob_month: model.date_of_birth.month,
         dob_day: model.date_of_birth.day
       }
+    end
+
+    def validate_national_insurance_number
+      return if test_level_validation? && known_test_ninos.include?(national_insurance_number)
+      return if Applicant::NINO_REGEXP =~ national_insurance_number
+
+      errors.add(:national_insurance_number, :not_valid)
+    end
+
+    # These are the test ninos known to fail validation with Applicant::NINO_REGEXP
+    # See https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/1298464776/Benefit+Checker
+    def known_test_ninos
+      %w[JS130161E NX794801E JD142369D NP685623E JR468684E JF982354B JK806648E JW570102E]
+    end
+
+    def test_level_validation?
+      Rails.configuration.x.laa_portal.mock_saml == 'true'
     end
   end
 end
