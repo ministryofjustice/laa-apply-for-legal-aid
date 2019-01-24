@@ -118,6 +118,91 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
   end
 
+  describe 'govuk_text_area' do
+    let(:attribute) { 'email' }
+    let(:params) { [:email] }
+    let(:email_label) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
+    let(:email_hint) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
+    let(:tag) { parsed_html.at_css("textarea##{attribute}") }
+
+    subject { builder.govuk_text_area(*params) }
+
+    it 'generates a text_area tag' do
+      expect(tag.name).to eq('textarea')
+      expect(tag.classes).to include('govuk-textarea')
+      expect(tag[:name]).to eq("#{resource}[#{attribute}]")
+    end
+
+    it 'surrounds the field in a div' do
+      div = tag.parent
+      expect(div.name).to eq('div')
+      expect(div.classes).to include('govuk-form-group')
+    end
+
+    it 'includes a label' do
+      label = tag.parent.at_css('label')
+
+      expect(label.classes).to include('govuk-label')
+      expect(label[:for]).to eq('email')
+      expect(label.content).to eq(email_label)
+    end
+
+    it 'includes a hint message' do
+      hint_span = tag.parent.at_css("span##{attribute}-hint")
+
+      expect(hint_span.classes).to include('govuk-hint')
+      expect(hint_span.content).to include(email_hint)
+      expect(tag['aria-describedby']).to eq("#{attribute}-hint")
+    end
+
+    context 'hint: nil' do
+      let(:params) { [:email, hint: nil] }
+
+      it 'does not include a hint message' do
+        expect(subject).not_to include('govuk-hint')
+        expect(tag['aria-describedby']).to eq('')
+      end
+    end
+
+    context 'pass a label parameter' do
+      let(:custom_label) { "Your client's email" }
+      let(:params) { [:email, label: custom_label] }
+
+      it 'shows the custom label' do
+        label = tag.parent.at_css('label')
+
+        expect(label.classes).to include('govuk-label')
+        expect(label[:for]).to eq('email')
+        expect(label.content).to eq(custom_label)
+      end
+    end
+
+    context 'adding a custom class to the input' do
+      let(:custom_class) { 'govuk-!-width-one-third' }
+      let(:params) { [:email, class: custom_class] }
+
+      it 'adds custom class to the input' do
+        expect(tag.classes).to include(custom_class)
+      end
+    end
+
+    context 'when validation error on object' do
+      let(:email_error) { I18n.t("activemodel.errors.models.#{resource}.attributes.#{attribute}.blank") }
+
+      before { resource_form.valid? }
+
+      it 'includes an error message' do
+        error_span = tag.previous_element
+        expect(error_span.content).to eq(email_error)
+        expect(error_span.name).to eq('span')
+        expect(error_span.classes).to include('govuk-error-message')
+        expect(tag.classes).to include('govuk-textarea--error')
+        expect(tag['aria-describedby'].split(' ')).to include('email-error')
+        expect(tag.parent.classes).to include('govuk-form-group--error')
+      end
+    end
+  end
+
   describe 'govuk_radio_button' do
     let(:attribute) { 'uses_online_banking' }
     let(:resource_form) { Applicants::UsesOnlineBankingForm.new }
