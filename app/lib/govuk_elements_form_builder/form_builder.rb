@@ -41,6 +41,7 @@ module GovukElementsFormBuilder
           tag_options[:id] = attribute
           tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
           tag = __send__(text_input, attribute, tag_options)
+
           tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
           tag = suffix ? suffix_span_tag(suffix) { tag } : tag
         end

@@ -3,6 +3,7 @@ module Providers
     include ApplicationDependable
     include Steppable
     include SaveAsDraftable
+    before_action :authorize_legal_aid_application
 
     def show
       @form = MeritsAssessments::ClientReceivedLegalHelpForm.new(model: merits_assessment)
@@ -31,6 +32,10 @@ module Providers
 
     def client_received_legal_help_params
       params.require(:merits_assessment).permit(:client_received_legal_help, :application_purpose)
+    end
+
+    def authorize_legal_aid_application
+      authorize legal_aid_application
     end
   end
 end
