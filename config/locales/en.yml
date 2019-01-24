@@ -443,6 +443,32 @@ en:
           title: Related content
           item_1: Legal aid
           item_2: More
+    merits_declarations:
+      show:
+        h1-heading: Client declaration
+        heading_1: Client declaration
+        body: |
+          Please ask your client or their representative to review the following declaration(s). Should they have any queries regarding the declaration(s) they should discuss this with you. The declaration(s), upon submission of the application, must be printed and signed by the relevant person(s). They must be retained on the client’s file.
+
+          <p>My solicitors have given me to keep:</p>
+
+          <ul class="govuk-list govuk-list--bullet"><li>The Legal Aid Agency’s leaflet about Legal Aid ( ‘Paying for your Legal Aid’ leaflet available at <a href="https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters">https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters</a> </li></ul>
+
+          <p>My solicitors have explained the LAA Statutory Charge to me. In particular, my solicitors have advised that if I recover or retain any property or asset, the Statutory Charge may arise, which could be payable immediately or postponed and registered as an interest - bearing charge on my home at the Legal Aid Agency’s discretion.</p>
+
+          <p>I understand:</p>
+
+          <ul class="govuk-list govuk-list--bullet">
+          <li>Legal aid is not always free.</li>
+          <li>The Legal Aid Agency may register an interest-bearing charge against my property.</li>
+          <li>I may have to pay back all or part of my legal costs at the end of my case.</li><li>The more work my solicitor does, the more I may have to pay back. </li></ul>
+
+
+          <p>As far as I know, all the information I have given is true and I have not withheld any relevant information. I understand that if I knowingly give false information or withhold relevant information or fail to disclose any change in circumstances for the duration of my funding that my Legal Aid may be stopped, and criminal proceedings may be taken against me.</p>
+
+          <p>I give my permission for the Legal Aid Agency to make any enquiries of third parties and I authorise those third parties to give any information necessary to deal with this.</p>
+
+          <p>I understand if false or inaccurate information is provided and fraud is identified, details will be passed to fraud prevention agencies to prevent fraud and money laundering. For further details explaining how the information held by fraud prevention agencies may be used contact the Counter Fraud and Investigations team on 0203 334 5588.</p>
     providers:
       show:
         page_title: Your profile
