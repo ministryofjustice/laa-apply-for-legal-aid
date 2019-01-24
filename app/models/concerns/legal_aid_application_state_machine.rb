@@ -24,6 +24,7 @@ module LegalAidApplicationStateMachine
 
       event :check_passported_answers do
         transitions from: :answers_checked, to: :checking_passported_answers
+        transitions from: :means_completed, to: :checking_passported_answers
       end
 
       event :provider_submit do

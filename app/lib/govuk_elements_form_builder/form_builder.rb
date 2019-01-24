@@ -5,7 +5,7 @@ module GovukElementsFormBuilder
     # https://guides.rubyonrails.org/configuring.html#configuring-action-view
     ActionView::Base.field_error_proc = proc { |html_tag| html_tag.html_safe }
 
-    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline legacy_method].freeze
+    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline text_input].freeze
 
     delegate :content_tag, to: :@template
     delegate :errors, to: :@object
@@ -30,9 +30,9 @@ module GovukElementsFormBuilder
     # Use :field_with_error to have the input be marked as erroneous when an other attribute has an error.
     # e.g., <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
     #
-    %w[text_field text_area].each do |legacy_method|
-      define_method("govuk_#{legacy_method}") do |attribute, options = {}|
-        options[:legacy_method] = legacy_method
+    %w[text_field text_area].each do |text_input|
+      define_method("govuk_#{text_input}") do |attribute, options = {}|
+        options[:text_input] = text_input
         options[:class] = text_input_classes(attribute, options)
         suffix = options.delete(:suffix)
         input_text_form_group(attribute, options) do
@@ -40,7 +40,7 @@ module GovukElementsFormBuilder
           tag_options = options.except(*CUSTOM_OPTIONS)
           tag_options[:id] = attribute
           tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
-          tag = __send__(legacy_method, attribute, tag_options)
+          tag = __send__(text_input, attribute, tag_options)
           tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
           tag = suffix ? suffix_span_tag(suffix) { tag } : tag
         end
@@ -134,7 +134,7 @@ module GovukElementsFormBuilder
 
     def text_input_classes(attribute, options)
       classes = [options[:class]]
-      if options[:legacy_method] == 'text_area'
+      if options[:text_input] == 'text_area'
         classes << 'govuk-textarea'
         classes << 'govuk-textarea--error' if error?(attribute, options)
       else

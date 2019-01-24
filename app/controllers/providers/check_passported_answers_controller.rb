@@ -14,7 +14,8 @@ module Providers
 
     def continue
       legal_aid_application.complete_means! unless legal_aid_application.means_completed?
-      render plain: 'End of provider-answered mean test questions for passported clients'
+
+      redirect_to next_step_url
     end
 
     def reset
