@@ -14,7 +14,7 @@ en:
   helpers:
     hint:
       applicant:
-        national_insurance_number: For example, ‘QQ 12 34 56 C'
+        national_insurance_number: For example, QQ 12 34 56 C
         email: We'll use this to send your client a secure link
       address_lookup:
         postcode: Postcode must be a valid UK postcode.
@@ -203,7 +203,7 @@ en:
                 not_valid: 'Enter a valid National Insurance number'
               email:
                 blank: 'Enter email address'
-                invalid: 'Enter an email address in the right format'
+                invalid: 'Enter an email address in the correct format, such as name@example.com'
               uses_online_banking:
                 blank: 'Please select an option'
         applicants/address_selection_form:
@@ -356,7 +356,7 @@ en:
       heading: "Enter your client's home address"
     client_detail:
       dob_hint: 'For example, 31 3 1980'
-      national_insurance_number_hint: "For example, ‘QQ 12 34 56 C'"
+      national_insurance_number_hint: "For example, QQ 12 34 56 C"
   layouts:
     application:
       header:
