@@ -1,0 +1,14 @@
+<%= provider_basic_page page_title: 'Feedback', back_link: { path: :back } do %>
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <%= form_with(model: @feedback, url: feedback_index_path) do |form| %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <%= form.govuk_text_field :improvment_suggestion, class: 'govuk-!-width-one-half' %>
+
+      <%= render partial: 'shared/forms/next_action_buttons', locals: { continue_id: 'continue', show_draft: true, form: form } %>
+
+     </div>
+    <% end %>
+<% end %>

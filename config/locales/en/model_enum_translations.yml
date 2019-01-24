@@ -10,3 +10,11 @@ en:
         initiated: In progress
         means_completed: Means test completed
         provider_submitted: Submitted by provider
+    feedback:
+      satisfaction:
+        very_dissatisfied: Very dissatisfied
+        dissatisfied: Dissatisfied
+        neither_dissatisfied_nor_satisfied: Neither satisfied nor dissatisfied
+        satisfied: Satisfied
+        very_satisfied: Very satisfied
+

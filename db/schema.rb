@@ -133,6 +133,18 @@ ActiveRecord::Schema.define(version: 2019_01_29_120515) do
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
+  create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "done_all_needed"
+    t.integer "satisfaction"
+    t.text "improvement_suggestion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "os"
+    t.string "browser"
+    t.string "browser_version"
+    t.string "source"
+  end
+
   create_table "legal_aid_application_restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "restriction_id"
