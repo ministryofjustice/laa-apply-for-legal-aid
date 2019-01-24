@@ -24,6 +24,8 @@ en:
           citizen: Check the statement from your mortgage provider or lender
           provider: ''
         property_value: You can use property websites to find the estimated value.
+      merits_assessment:
+        estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
     label:
       applicant:
         uses_online_banking:
@@ -275,6 +277,9 @@ en:
               blank: Select Yes if the proceedings for which funding is being sought are currently before the court
             details_of_proceedings_before_the_court:
               blank: Enter details of the proceedings currently before the court
+            estimated_legal_cost:
+              blank: Enter the estimated legal costs of doing the work
+              not_a_number: Estimated cost must be an amount of money, like 25,000
         savings_amount:
           attributes:
             isa:
@@ -557,7 +562,9 @@ en:
     proceedings_before_the_courts:
       show:
         h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
-
+    estimated_legal_costs:
+      show:
+        h1-heading: What are the estimated legal costs of doing the work?
   citizens:
     accounts:
       index:

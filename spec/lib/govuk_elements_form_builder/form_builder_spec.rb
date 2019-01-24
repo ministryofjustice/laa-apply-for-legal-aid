@@ -56,6 +56,15 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       end
     end
 
+    context 'Display hint and no label (label: nil, hint: email_hint)' do
+      let(:params) { [:email, label: nil, hint: email_hint] }
+
+      it 'does not include a hint message' do
+        expect(subject).not_to include('govuk-label')
+        expect(subject).to include('govuk-hint')
+      end
+    end
+
     context 'pass a label parameter' do
       let(:custom_label) { "Your client's email" }
       let(:params) { [:email, label: custom_label] }

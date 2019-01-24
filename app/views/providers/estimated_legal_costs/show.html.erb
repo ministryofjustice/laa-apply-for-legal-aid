@@ -1,0 +1,15 @@
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<% content_for :navigation do %>
+  <%= provider_back_link %>
+<% end %>
+
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render partial: 'shared/forms/estimated_legal_cost_form', locals: { model: @form,
+                                                                            url: providers_legal_aid_application_estimated_legal_costs_path,
+                                                                            show_draft: true } %>
+    </div>
+</div>
