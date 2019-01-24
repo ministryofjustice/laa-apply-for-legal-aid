@@ -448,7 +448,7 @@ en:
         h1-heading: Client declaration
         heading_1: Client declaration
         body: |
-          Please ask your client or their representative to review the following declaration(s). Should they have any queries regarding the declaration(s) they should discuss this with you. The declaration(s), upon submission of the application, must be printed and signed by the relevant person(s). They must be retained on the client’s file.
+          <p>Please ask your client or their representative to review the following declaration(s). Should they have any queries regarding the declaration(s) they should discuss this with you. The declaration(s), upon submission of the application, must be printed and signed by the relevant person(s). They must be retained on the client’s file.</p>
 
           <p>My solicitors have given me to keep:</p>
 

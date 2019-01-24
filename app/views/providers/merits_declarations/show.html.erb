@@ -2,6 +2,8 @@
   <%= provider_back_link text: t('generic.back') %>
 <% end %>
 
+<% content_for(:page_title) { t('.h1-heading') } %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
@@ -17,9 +19,8 @@
             input: :client_merits_declaration
           ) do %>
 
-        <% content_for(:page_title) { t('.h1-heading') } %>
-
-          <p><%= t('.body').html_safe %></p>  <!-- is html safe required here -->
+          <%= t('.body').html_safe %>
+          
       <% end %>
 
       <%= form.button t('generic.continue'), name: :client_merits_declaration, value: 'true', class: 'govuk-button' %>
