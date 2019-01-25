@@ -1,0 +1,804 @@
+en:
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M:%S'
+      date: '%a, %d %b %Y'
+  date:
+    formats:
+      default: '%a, %d %b %Y'
+  api:
+    errors:
+      codes:
+        blank: blank
+        invalid: invalid
+  helpers:
+    hint:
+      applicant:
+        national_insurance_number: For example, QQ 12 34 56 C
+        email: We'll use this to send your client a secure link
+      address_lookup:
+        postcode: Postcode must be a valid UK postcode.
+      legal_aid_application:
+        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
+        outstanding_mortgage_amount:
+          citizen: Check the statement from your mortgage provider or lender
+          provider: ''
+        property_value: You can use property websites to find the estimated value.
+      merits_assessment:
+        estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
+    label:
+      applicant:
+        uses_online_banking:
+          'true': 'Yes'
+          'false': 'No'
+      other_assets_declaration:
+        check_box_second_home: Second property or holiday home
+        second_home_value: Enter estimated value
+        second_home_mortgage: Enter outstanding mortgage amount
+        second_home_percentage: Enter percentage share you legally own
+      merits_assessment:
+        client_received_legal_help:
+          'true': 'Yes'
+          'false': 'No'
+        application_purpose: Please give details of why your client is applying for legal aid
+        proceedings_before_the_court:
+          'true': 'Yes'
+          'false': 'No'
+        details_of_proceedings_before_the_court: Please give details.
+        success_prospect_details: Please explain why you believe legal aid should be granted
+  shared:
+    access_denied:
+      heading_1: Access denied
+      permission_text: You do not have permission to
+      get_request: view this page.
+      action_request: perform this action.
+    forms:
+      date_input_fields:
+        date_of_birth_label: 'Date of birth'
+        date_of_birth_hint: 'For example, 31 3 1980'
+      own_home_form:
+        mortgage: Yes, with a mortgage or loan
+        owned_outright: Yes, owned outright
+        "no": "No"
+      outstanding_mortgage_form:
+        citizens:
+          outstanding_mortgages:
+            field_set_header: What is the outstanding mortgage on your home?
+        providers:
+          outstanding_mortgages:
+            field_set_header: What is the outstanding mortgage on your client's home?
+      revealing_checkbox:
+        attribute:
+          providers:
+            savings_and_investments:
+              isa: Enter the estimated total in all accounts
+              cash: Enter total amount
+              other_person_account: Enter the estimated total in all accounts
+              national_savings: &enter_total_all_owned Enter the total value of all owned
+              plc_shares: *enter_total_all_owned
+              peps_unit_trusts_capital_bonds_gov_stocks: *enter_total_all_owned
+              life_assurance_endowment_policy: *enter_total_all_owned
+              check_box_isa: Bank, building society, Post Office and ISAs accounts
+              check_box_cash: Cash savings
+              check_box_other_person_account: Signatory on another person's bank account
+              check_box_national_savings: National Savings Certificates and Premium Bonds
+              check_box_plc_shares: Shares in a PLC (public limited company)
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+              check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+              hint:
+                check_box_isa: Including any money in current and savings accounts
+                check_box_other_person_account: For example, a junior ISA for a child
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+            other_assets:
+              check_box_timeshare_value: Timeshare
+              timeshare_value: Enter value, minus any loan and sale costs
+              check_box_land_value: Land
+              land_value: Enter estimated value
+              check_box_jewellery_value: Jewellery, art or antiques with a value over £500
+              jewellery_value: Enter estimated value, minus any sale costs
+              check_box_vehicle_value: Car, van or motorcycle less than 3 years old
+              vehicle_value: Enter estimated value, minus any outstanding payments
+              check_box_classic_car_value: Classic car purchased as an investment
+              classic_car_value: Enter the estimated value
+              check_box_money_assets_value: Money or assets from the estate of a person who has died
+              money_assets_value: Enter estimated total value
+              check_box_money_owed_value: Money owed to you, including from a private mortgage
+              money_owed_value: Enter estimated amount owed
+              check_box_trust_value: Interest in a trust
+              trust_value: Enter estimated total value
+          citizens:
+            savings_and_investments:
+              isa: Enter the estimated total in all accounts
+              cash: Enter total amount
+              other_person_account: Enter the estimated total in all accounts
+              national_savings: &enter_total_you_own Enter the total value of all you own
+              plc_shares: *enter_total_you_own
+              peps_unit_trusts_capital_bonds_gov_stocks: *enter_total_you_own
+              life_assurance_endowment_policy: *enter_total_you_own
+              check_box_isa: Post Office, ISAs and other savings accounts
+              check_box_cash: Cash savings
+              check_box_other_person_account: Signatory on another person's bank account
+              check_box_national_savings: National Savings Certificates and Premium Bonds
+              check_box_plc_shares: Shares in a PLC (public limited company)
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
+              check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
+              hint:
+                check_box_isa: Accounts you do not access with online banking
+                check_box_other_person_account: For example, if you have power of attorney
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
+            other_assets:
+              check_box_second_home_value: Second property or holiday home estimated value
+              check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
+              check_box_second_home_percentage: Second property or holiday home percentage owned
+              check_box_timeshare_value: Timeshare
+              timeshare_value: Enter value, minus any loan and sale costs
+              check_box_land_value: Land
+              land_value: Enter estimated value
+              check_box_jewellery_value: Jewellery, art or antiques with a value over £500
+              jewellery_value: Enter estimated value, minus any sale costs
+              check_box_vehicle_value: Car, van or motorcycle less than 3 years old
+              vehicle_value: Enter estimated value, minus any outstanding payments
+              check_box_classic_car_value: Classic car purchased as an investment
+              classic_car_value: Enter the estimated value
+              check_box_money_assets_value: Money or assets from the estate of a person who has died
+              money_assets_value: Enter estimated total value
+              check_box_money_owed_value: Money owed to you, including from a private mortgage
+              money_owed_value: Enter estimated amount owed
+              check_box_trust_value: Interest in a trust
+              trust_value: Enter estimated total value
+      shared_ownership_form:
+        shared_ownership_item:
+          partner_or_ex_partner:  Yes, a partner or ex-partner
+          housing_assocation_or_landlord: Yes, a housing association or landlord
+          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+          no_sole_owner: No, sole owner
+      percentage_home_form:
+        providers:
+          percentage_homes:
+            percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
+            hint:
+              percentage_home: Enter the estimated property share
+      success_prospect_form:
+        likely: 50% or better
+      success_prospect:
+        success_prospect_item:
+          marginal: Marginal 45 - 50%
+          borderline: Borderline
+          uncertain: Uncertain
+          poor: Poor
+
+        citizens:
+          percentage_homes:
+            percentage_home: Enter the estimated percentage share you own
+            hint:
+              percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
+
+    page-title:
+      suffix: Apply for legal aid
+    check_answers_assets:
+      assets:
+        own_home: Own the home you live in
+        property_value: Property value
+        outstanding_mortgage: Outstanding mortgage amount
+        shared_ownership: Owned with anyone else
+        percentage_home: Percentage owned
+        savings_and_investments: Savings and investments
+        other_assets: Other assets
+        restrictions: Do any restrictions apply?
+      submit:
+        heading: Submit your details
+        text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+  activemodel:
+    attributes:
+      address: &address_attrs
+        address_line_one: 'Building and street'
+        address_line_two: ''
+        city: 'Town or city'
+        county: 'County'
+        postcode: 'Postcode'
+      applicant: &applicant_attrs
+        first_name: 'First name'
+        last_name: 'Last name'
+        dob_day: 'Day'
+        dob_month: 'Month'
+        dob_year: 'Year'
+        national_insurance_number: 'National Insurance number'
+        email: 'Email address'
+      legal_aid_application:
+        outstanding_mortgage_amount: Enter outstanding mortgage amount
+        property_value: Enter the estimated value of your home
+      applicants/address_form:
+        <<: *address_attrs
+      applicants/basic_details_form:
+        <<: *applicant_attrs
+    errors:
+      messages:
+        earliest_allowed_date: 'Date cannot be before %{date}'
+      models:
+        applicant: &applicant_errors
+          attributes:
+              first_name:
+                blank: 'Enter first name'
+              last_name:
+                blank: 'Enter last name'
+              date_of_birth:
+                date_not_valid: 'Enter a valid date of birth'
+                date_is_in_the_future: 'Date of birth must be in the past'
+                earliest_allowed_date: 'Date of birth cannot be before %{date}'
+              national_insurance_number:
+                blank: 'Enter a National Insurance number'
+                not_valid: 'Enter a valid National Insurance number'
+              email:
+                blank: 'Enter email address'
+                invalid: 'Enter an email address in the correct format, such as name@example.com'
+              uses_online_banking:
+                blank: 'Please select an option'
+        applicants/address_selection_form:
+          attributes:
+            address:
+              blank: 'Please select an address from the list'
+        applications/proceedings_form:
+          attributes:
+              code:
+                blank: 'A proceeding must be selected'
+        address: &address_errors
+         attributes:
+           lookup_id:
+              blank: 'Please select an address from the list'
+           address_line_one:
+             blank: 'Enter a building and street'
+           city:
+             blank: 'Enter a town or city'
+           postcode:
+             blank: 'Enter a postcode'
+             invalid: 'Enter a postcode in the right format'
+        applicants/address_form:
+         <<: *address_errors
+        applicants/address_lookup_form:
+          attributes:
+            postcode:
+              blank: 'Enter a postcode'
+              invalid: 'Enter a postcode in the right format'
+        legal_aid_application:
+          attributes:
+            own_home:
+              blank: Select yes if you own the home you live in
+            percentage_home:
+              blank: Enter the percentage (%) share
+              not_a_number: &share_must_be_percentage Share must be a percentage amount under 100, like 60
+              greater_than_or_equal_to: *share_must_be_percentage
+              less_than_or_equal_to: *share_must_be_percentage
+            property_value:
+              citizen:
+                blank: Enter an estimated value for your home
+                not_a_number: The estimated value of your home must be an amount of money, like 60,000
+              provider:
+                blank: Enter an estimated value for your client's home
+                not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
+              not_a_number: &property_value_nan Estimated value must be an amount of money, like 80,000
+              greater_than: *property_value_nan
+            shared_ownership:
+              blank: Select yes if you own your home with someone else
+            outstanding_mortgage_amount:
+              blank: Enter the outstanding mortgage amount
+              not_a_number: &outstanding_mortgage_amount_nan 'Mortgage amount must be an amount of money, like 60,000'
+              greater_than_or_equal_to: Mortgage amount must be zero or an amount of money, like 60,000
+        merits_assessment:
+          attributes:
+            application_purpose:
+              blank: Enter details of why your client is applying for legal aid
+            client_received_legal_help:
+              blank: Select yes if your client has received legal help for the matter
+            proceedings_before_the_court:
+              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
+            details_of_proceedings_before_the_court:
+              blank: Enter details of the proceedings currently before the court
+            estimated_legal_cost:
+              blank: Enter the estimated legal costs of doing the work
+              not_a_number: Estimated cost must be an amount of money, like 25,000
+            success_prospect_details:
+              blank: Enter explanation of why you think legal aid should be granted
+            success_prospect:
+              blank: Select the prospects of success
+        savings_amount:
+          attributes:
+            isa:
+              blank: Enter the estimated total in all accounts
+              not_a_number: Total in accounts must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total in accounts must be 0 or more
+            cash:
+              blank: Enter the total amount of cash savings
+              not_a_number: Total cash savings must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total cash savings must be 0 or more
+            other_person_account:
+              blank: Enter the estimated total in other people’s accounts
+              not_a_number: Total in other people’s accounts must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total in other people’s accounts must be 0 or more
+            national_savings:
+              blank: Enter the total value of certificates and bonds
+              not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
+            plc_shares:
+              blank: Enter the total value of shares
+              not_a_number: Total of shares must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of shares must be 0 or more
+            peps_unit_trusts_capital_bonds_gov_stocks:
+              blank: Enter the total value of other investments
+              not_a_number: Total of other investments must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of other investments must be 0 or more
+            life_assurance_endowment_policy:
+              blank: Enter the total value of life assurance policies
+              not_a_number: Total of life assurance policies must be an amount of money, like 60,000
+              greater_than_or_equal_to: Total of life assurance policies must be 0 or more
+
+        other_assets_declaration:
+          attributes:
+            second_home_value:
+              not_a_number: Estimated value must be an amount of money, like 60,000
+              blank: Enter the estimated property value
+            second_home_mortgage:
+              not_a_number: Outstanding mortgage amount must be an amount of money, like 60,000
+              blank: Enter outstanding mortgage amount
+            second_home_percentage:
+              not_a_number: Ownership share must be percentage, like 33.33
+              blank: Enter property percentage share
+            timeshare_value:
+              not_a_number: Estimated timeshare value must be an amount of money, like 60,000
+              blank: Enter the estimated timeshare value
+            land_value:
+              not_a_number: Estimated land value must be an amount of money, like 60,000
+              blank: Enter the estimated land value
+            jewellery_value:
+              not_a_number: Estimated valuable items value must be an amount of money, like 60,000
+              blank: Enter the estimated total value of valuable items
+            vehicle_value:
+              not_a_number: Estimated vehicle value must be an amount of money, like 60,000
+              blank: Enter the estimated vehicle value
+            classic_car_value:
+              not_a_number: Estimated classic car value must be an amount of money, like 60,000
+              blank: Enter the estimated classic car value
+            money_assets_value:
+              not_a_number: Estimated estate value must be an amount of money, like 60,000
+              blank: Enter the estimated value of estate
+            money_owed_value:
+              not_a_number: Estimated money owed must be an amount of money, like 60,000
+              blank: Enter the estimated value of money owed
+            trust_value:
+              not_a_number: Estimated trust value must be an amount of money, like 60,000
+              blank: Enter the estimated value of trust
+
+  activerecord:
+    errors:
+      models:
+        applicant:
+          attributes:
+            date_of_birth:
+              invalid: 'is not valid'
+            email:
+              invalid: 'address is not in the right format'
+            national_insurance_number:
+              invalid: 'is not in the right format'
+        address:
+          attributes:
+            postcode:
+              invalid: 'is not in the right format'
+        statement_of_case:
+          attributes:
+            statement:
+              blank: Enter the statement of case
+  forms:
+    address:
+      errors:
+        no_results: &postcode_no_results "Sorry - we couldn't find any addresses for that postcode, please enter the address manually."
+        unsuccessful: *postcode_no_results
+    address_lookup:
+      heading: "Enter your client's home address"
+      postcode_hint: 'Postcode must be a valid UK postcode.'
+      submit_button: Find address
+      address_manual_link: Enter address manually
+      label_1: postcode
+      postcode: Postcode
+    address_manual:
+      heading: "Enter your client's address manually"
+    address_selection:
+      heading: "Enter your client's home address"
+    client_detail:
+      dob_hint: 'For example, 31 3 1980'
+      national_insurance_number_hint: "For example, QQ 12 34 56 C"
+  layouts:
+    application:
+      header:
+        gov_uk_link_title: Go to the GOV.UK homepage
+        title: Apply for Legal Aid
+      footer:
+        support: Support Links
+        contact: Contact
+        feedback: Feedback
+        cookies: Cookies
+        terms: Terms and conditions
+        digital_services: MOJ Digital Services
+        span_text_1: All content is available under the
+        open_gov_link_text: Open Government Licence v3.0
+        span_text_2: except where otherwise stated
+        copyright: Crown copyright
+  home:
+    index:
+      heading_1: Apply for Legal Aid
+      welcome_home: Welcome Home
+  contacts:
+    show:
+      h1-heading: Contact us
+      page_header: "For any queries about your application, contact the following:"
+      case_inquiries:
+        header: Case enquires (Monday to Friday, 09:00 - 17:00)
+        phone:
+          text: "Phone:"
+          phone_number: 0300 200 2020
+      technical_support:
+        header: Technical support (Monday to Friday, 09:00 - 17:00)
+        email:
+          text: "Email:"
+          email_address: online-support@justice.gov.uk
+        phone:
+          text: "Phone:"
+          phone_number: 0300 200 2020
+  providers:
+    start:
+      index:
+        apply_for_legal_aid_heading: Apply for Legal Aid
+        apply_civil_legal_para: "Use this service to apply for civil legal aid for cases involving:"
+        use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
+        use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
+        apply_civil_legal_list:
+          list: |
+            public family law
+            domestic violence or abuse
+        use_ccms_list:
+          heading: Who can use this service?
+          title:  "You can only use this service if your client:"
+          list: |
+            has a National Insurance number
+            uses online banking
+            is single, does not have an income, or their partner is the opponent in the case
+        related_content_list:
+          title: Related content
+          item_1: Legal aid
+          item_2: More
+    merits_declarations:
+      show:
+        h1-heading: Client declaration
+        heading_1: Client declaration
+        text_1: |
+          Please ask your client or their representative to review the following declaration(s). Should they have any queries regarding the declaration(s) they should discuss this with you. The declaration(s), upon submission of the application, must be printed and signed by the relevant person(s). They must be retained on the client’s file.
+
+          My solicitors have given me to keep:
+        leaflet_link:
+          The Legal Aid Agency’s leaflet about Legal Aid ( ‘Paying for your Legal Aid’ leaflet available at <a href="https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters">https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters</a>
+        text_2: |
+          My solicitors have explained the LAA Statutory Charge to me. In particular, my solicitors have advised that if I recover or retain any property or asset, the Statutory Charge may arise, which could be payable immediately or postponed and registered as an interest - bearing charge on my home at the Legal Aid Agency’s discretion.
+
+          I understand:
+        list: |
+          Legal aid is not always free.
+          The Legal Aid Agency may register an interest-bearing charge against my property.
+          I may have to pay back all or part of my legal costs at the end of my case.
+          The more work my solicitor does, the more I may have to pay back.
+        text_3: |
+          As far as I know, all the information I have given is true and I have not withheld any relevant information. I understand that if I knowingly give false information or withhold relevant information or fail to disclose any change in circumstances for the duration of my funding that my Legal Aid may be stopped, and criminal proceedings may be taken against me.
+
+          I give my permission for the Legal Aid Agency to make any enquiries of third parties and I authorise those third parties to give any information necessary to deal with this.
+
+          I understand if false or inaccurate information is provided and fraud is identified, details will be passed to fraud prevention agencies to prevent fraud and money laundering. For further details explaining how the information held by fraud prevention agencies may be used contact the Counter Fraud and Investigations team on 0203 334 5588.
+    providers:
+      show:
+        page_title: Your profile
+        name: Name
+        email: Email address
+        role: Role
+        account_number: Account number
+    address_selections:
+      show:
+        select_address_label: Select an address
+        link_text: I can't find the address in the list
+    check_benefits:
+      index:
+        heading_1: "Your client's tax and benefits status"
+        heading_2: 'What happens next'
+        positive_result:
+          title: 'receives a qualifying benefit'
+          body: 'Your client receives benefits that qualify for legal aid.'
+          next: 'Your client will have to declare whether they have any savings, own a home or anything else that can pay for legal aid.'
+        negative_result:
+          title: 'must complete a financial assessment'
+          body: 'Your client does not receive benefits that qualify for legal aid.'
+          next: 'Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.'
+    check_passported_answers:
+      show:
+        h1-heading: Check your answers for passported client
+        assets:
+          heading: Property, savings and other assets
+    client_received_legal_helps:
+      show:
+        h1-heading: Has your client received legal help for the matter?
+    legal_aid_applications:
+        index:
+          heading_1: Your legal aid applications
+          make_new_application: Make a new application
+          basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
+        legal_aid_applications:
+          current_application: Current applications
+          applicant_name: Client's name
+          created_at: Date started
+          application_ref: Case reference
+          status: Status
+    online_bankings:
+      show:
+        heading: Does your client use online banking?
+    other_assets:
+      show:
+        h1-heading: Does your client have any of the following?
+    check_provider_answers:
+      index:
+        title: Check your answers
+        section_proceeding:
+          heading: Scope of legal aid
+          proceeding: Proceeding
+        section_client:
+          heading: Client details
+          first_name: First name
+          last_name: Last name
+          dob: Date of birth
+          nino: National Insurance number
+          address: Correspondence address
+          email: Email address
+    outstanding_mortgages:
+      show:
+        h1-heading: What is the outstanding mortgage?
+      field_set_header: What is the outstanding mortgage on your client's home?
+      outstanding_mortgage_amount: Enter the outstanding mortgage amount
+    proceedings_types:
+      show:
+        heading_1: "What does your client want legal aid for?"
+        heading_2: "Search for legal proceedings"
+        search_help_example: "For example by category of law, matter type or legal proceeding."
+        no_results: "No results found."
+        clear_search: "Clear search"
+    applicants:
+      show:
+        page_title: Enter your client's details
+    property_values:
+      property_value: Enter the value of your client's home
+      hint:
+        property_value: You can use property websites to find the estimated value.
+      show:
+        h1-heading: How much is your client's home worth?
+    about_the_financial_assessments:
+      show:
+        title: About the online financial assessment
+        secure_link_para: Send an email to your client with a secure link to the online assessment.
+        sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
+        share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
+        list:
+          title: How we use your client's details
+          list: |
+            We download 3 months of bank transactions
+            We only use information for the legal aid application
+            We automatically end the bank connection after 1 hour
+            We do not save online banking details
+        section_1:
+          heading: Give your client access to the financial assessment
+          text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
+      submit:
+        application_created: Application created
+        sub_title: Your case reference number is
+        secure_link_heading: We have sent your client a secure link
+        secure_link_text: "Your client can use the link to complete the online financial assessment from home or another location."
+        happen_next_heading: What happens next
+        happen_next_text: "You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid."
+        back_button: "Back to your applications"
+    own_homes:
+      show:
+        h1-heading: Does your client own the home that they live in?
+    restrictions:
+      index:
+        h1-heading: Do any restrictions apply to your client's property, savings or assets?
+    percentage_homes:
+      show:
+        h1-heading: What % share of their home does your client legally own?
+    savings_and_investments:
+      show:
+        h1-heading: Does your client have any savings and investments?
+    shared_ownerships:
+      show:
+        heading_1: Does your client own their home with anyone else?
+    proceedings_before_the_courts:
+      show:
+        h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
+    estimated_legal_costs:
+      show:
+        h1-heading: What are the estimated legal costs of doing the work?
+    success_prospects:
+      show:
+        h1-heading: What are the prospects of success?
+    statement_of_cases:
+      show:
+        h1-heading: Statement of case
+        h2-heading: You must include the following details
+        instructions: |
+          Please tell us about the case providing
+          sufficient information to satisfy the regulations.
+        bullet-1: What has happend so far.
+        bullet-2: Parties involved and their relationship to the applicant.
+        bullet-3: Explain why the current proceedings are necessary.
+        bullet-4: Number of clients represented.
+        bullet-5: Any other persons who might benefit who can bring or fund the case.
+        bullet-6: |
+          Details of the most recent incident, if a warning letter has been sent,
+          the police have been notified or there are any criminal charges.
+    check_merits_answers:
+      show:
+        h1-heading: Check your answers
+        h2-heading: Merits assessment
+        items:
+          client_received_legal_help: Client received legal help
+          proceedings_currently_before_court: Proceedings currently before court
+          statement_of_case: Statement of case
+          estimated_legal_costs: Estimated legal costs
+          prospects_of_success: Prospects of success
+          client_declaration: Client declaration
+          client_declaration_answer: Read & agreed
+        complete-application-heading: Complete the application
+        complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+
+  citizens:
+    accounts:
+      index:
+        retrieving_transactions: Retrieving bank transactions
+      accounts:
+        account_holder_name_heading: Account holder name
+        account_holder_address_heading: Account holder address
+        type_heading: Type
+        heading_1: You have successfully shared your account information
+        account_number_heading: Account Number
+        sort_code_heading: Sort Code
+        balance_heading: Balance
+        your_accounts: Your account(s)
+        intro_text: "We have downloaded 3 months of your transaction history."
+        balance_text: "We will show your statement from the last 30 days so you can tell us more about your financial situation."
+    additional_accounts:
+      index:
+        field_set_header: Do you have accounts with other banks?
+        hint: Share details of any accounts you have with another bank or building society
+      new:
+        field_set_header: Do you have online access to your accounts with other banks?
+        hint: If you do not, you will need to provide paper evidence for these accounts.
+    consents:
+      show:
+        open_banking_consent:
+          label:
+            html: <b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking
+        field_set_header: Do you agree to share your bank transactions with us?
+        body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
+        list_heading: Find out how we use and store your personal data
+        list: |
+          We do not save your online banking username and password
+          We do not have any ongoing access to your bank accounts
+          We only use your details to assess your eligibility for legal aid
+    percentage_homes:
+      show:
+        h1-heading: What % share of your home do you legally own?
+    savings_and_investments:
+      show:
+        h1-heading: Do you have any savings and investments?
+      accounts_summary:
+        intro_text: 'You have already told us you have the following online accounts:'
+        col_type: Type
+        col_account_number: Account number
+        col_sort_code: Sort code
+        col_amount: Amount
+    own_homes:
+      show:
+        h1-heading: Do you own the home that you live in?
+    property_values:
+      form:
+        citizens:
+          property_values:
+            property_value: Enter the estimated value of your home
+            hint:
+              property_value: You can use property websites to find the estimated value.
+        providers:
+          property_values:
+            property_value: Enter the estimated value of your home
+            hint:
+              property_value: You can use property websites to find the estimated value.
+      show:
+        h1-heading: How much is your home worth?
+
+    other_assets:
+      show:
+        h1-heading: Do you have any of the following?
+    outstanding_mortgages:
+      show:
+        h1-heading: What is the outstanding mortgage?
+      field_set_header: What is the outstanding mortgage on your home?
+      outstanding_mortgage_amount: Enter the outstanding mortgage amount
+      hint: Check the statement from your mortgage provider or lender
+    shared_ownerships:
+      show:
+        heading_1: Do you own your home with anyone else?
+    restrictions:
+      index:
+        h1-heading: Do any restrictions apply to your property, savings or assets?
+    information:
+      show:
+        heading_1: Give one-time access to your bank accounts
+        para_1: You will be redirected to a secure service to sign in to your online banking.
+        para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
+        list:
+          title: How we connect to your online banking
+          list: |
+            Sign in and authorise access to your accounts
+            We download 3 months of transactions
+            Your online banking details are not saved
+    legal_aid_applications:
+        index:
+          heading_1: Complete your legal aid financial assessment
+          name: 'Name:'
+          case_reference: 'Case reference:'
+          financial_situation_para: Find out if you can get legal aid because of your financial situation.
+          legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
+          what_you_will_need: What you will need
+          list: |
+            your online banking log in
+    check_answers:
+      index:
+        h1-heading: Check your answers
+        assets:
+          heading: Property, savings and other assets
+          own_home: Own the home you live in
+          property_value: Property value
+          outstanding_mortgage: Outstanding mortgage amount
+          shared_ownership: Owned with anyone else
+          percentage_home: Percentage owned
+          savings_and_investments: Savings and investments
+          other_assets: Other assets
+          restrictions: Do any restrictions apply?
+        submit:
+          heading: Submit your details
+          text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+
+  restrictions:
+    names:
+      reposession_or_deferred_interest: Repossession or deferred interest in a property
+      subject_matter_of_dispute: Subject matter of dispute in other legal proceedings
+      foreign_exchange_controls: Foreign exchange controls
+      restraint_or_freezing_order: Restraint or freezing order
+      bankruptcy: Bankruptcy
+      held_overseas: Held overseas
+
+  generic:
+    'yes': 'Yes' # needs quotes as yes renders as true without them
+    'no': 'No'   # needs quotes as no renders as false without them
+    continue: Continue
+    back: Back
+    home: Home
+    save_as_draft: Save as draft
+    submit: Submit
+    change: Change
+    accept_and_send: Accept and send application
+    information: Information
+    start: Start
+    start_now: Start now
+    view: View
+    undefined: Undefined
+    total: Total
+    address:
+      postcode_label: postcode
+      postcode: Postcode
+    errors:
+      yes_or_no: You must select either Yes or No
+      problem_text: There is a problem
+  currency:
+    gbp: £
+    eur: €
+    usd: $

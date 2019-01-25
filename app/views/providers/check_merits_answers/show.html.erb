@@ -1,0 +1,84 @@
+<%= provider_page(
+      page_title: t('.h1-heading'),
+      back_link: { path: reset_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application), method: :patch }
+    ) do %>
+
+    <h2 class="govuk-heading-m">
+      <%= t '.h2-heading' %>
+    </h2>
+
+    <%= check_answer_link(
+          name: :client_received_legal_help,
+          url: nil,
+          question: t('.items.client_received_legal_help'),
+          answer: @merits.client_received_legal_help ? 'Yes' : 'No',
+          is_long: true
+        ) %>
+
+    <div class='govuk-body'><%= @merits.application_purpose %></div>
+
+    <%= check_answer_link(
+          name: :proceedings_currently_before_court,
+          url: nil,
+          question: t('.items.proceedings_currently_before_court'),
+          answer: @merits.proceedings_before_the_court ? 'Yes' : 'No',
+          is_long: true
+        ) %>
+
+    <div class='govuk-body'><%= @merits.details_of_proceedings_before_the_court %></div>
+
+    <%= check_answer_link(
+          name: :statement_of_case,
+          url: nil,
+          question: t('.items.statement_of_case'),
+          answer: nil,
+          is_long: true
+        ) %>
+
+    <!--TODO: enable when statement of case screen is ready - check name of field first -->
+    <!-- <div class='govuk-body'>%= @merits.statement_of_case %></div> -->
+
+    <%= check_answer_link(
+          name: :estimated_legal_costs,
+          url: nil,
+          question: t('.items.estimated_legal_costs'),
+          answer: number_to_currency(@merits.estimated_legal_cost, unit: t('currency.gbp')),
+          is_long: true
+        ) %>
+
+    <%= check_answer_link(
+          name: :prospects_of_success,
+          url: nil,
+          question: t('.items.prospects_of_success'),
+          answer: 'TO DO', # TODO: enable when prospects of success screen is ready - merits.success_prospect
+          is_long: true
+        ) %>
+
+    <!--TODO: enable when prospects of success screen is ready -->
+    <!-- <div class='govuk-body'>%= @merits.success_prospect_details %></div> -->
+
+    <%= check_answer_link(
+          name: :client_declaration,
+          url: nil,
+          question: t('.items.client_declaration'),
+          answer: (t('.items.client_declaration_answer') if @merits.client_merits_declaration),
+          is_long: true
+        ) %>
+
+    <div class="govuk-!-padding-bottom-6"></div>
+
+    <h2 class="govuk-heading-m">
+      <%= t '.complete-application-heading' %>
+    </h2>
+
+    <p class="govuk-body">
+      <%= t '.complete-application-text' %>
+    </p>
+
+    <%= button_to(
+          t('generic.accept_and_send'),
+          continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
+          class: 'govuk-button',
+          method: :patch
+        ) %>
+<% end %>

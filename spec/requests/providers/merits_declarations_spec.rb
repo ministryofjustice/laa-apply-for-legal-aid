@@ -62,9 +62,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         end
 
         it 'redirects to next page' do
-          # TO DO update when continue action is implemented
-          # expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path)
-          expect(response.body).to include('Placeholder: Merits check')
+          expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path)
         end
       end
     end

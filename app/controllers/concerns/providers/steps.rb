@@ -121,8 +121,7 @@ module Providers
     },
     merits_declarations: {
       path: :providers_legal_aid_application_merits_declaration_path,
-      # TO DO this will point to merits_check_answers when implemented
-      forward: :merits_declarations,
+      forward: :check_merits_answers,
       # TO DO this will point to prospects_of_success when implemented
       back: :merits_declarations
     },
@@ -130,6 +129,12 @@ module Providers
       path: :providers_legal_aid_application_success_prospects_path,
       forward: :success_prospects,
       back: :estimated_legal_costs
+    },
+    check_merits_answers: {
+      path: :providers_legal_aid_application_check_merits_answers_path,
+      # TO DO implement when next step is known
+      forward: :check_merits_answers,
+      back: :merits_declarations
     }
   }.freeze
 end
