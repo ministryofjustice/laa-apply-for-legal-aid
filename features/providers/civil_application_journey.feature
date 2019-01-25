@@ -332,3 +332,32 @@ Feature: Civil application journeys
     Then I should be on a page showing "How much is your client's home worth?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own the home that they live in?"
+
+  @javascript @vcr
+  Scenario: View feedback form within provider journey
+    Given I start the journey as far as the applicant page
+    Then I click link "feedback"
+    Then I click link "Back"
+    Then I should be on the Applicant page
+
+  @javascript @vcr
+  Scenario: Enter feedback within provider journey
+    Given I start the journey as far as the applicant page
+    Then I click link "feedback"
+    Then I should be on a page showing "Help us improve this service"
+    Then I fill "improvement suggestion" with "Foo bar"
+    Then I click "Send"
+    Then I should be on a page showing "Thank you for your feedback"
+    Then I click link "Back to your application"
+    Then I should be on the Applicant page
+
+  @javascript @vcr
+  Scenario: Enter feedback within provider journey then click Back
+    Given I start the journey as far as the applicant page
+    Then I click link "feedback"
+    Then I should be on a page showing "Help us improve this service"
+    Then I fill "improvement suggestion" with "Foo bar"
+    Then I click "Send"
+    Then I should be on a page showing "Thank you for your feedback"
+    Then I click link "Back"
+    Then I should be on the Applicant page

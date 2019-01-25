@@ -1,5 +1,5 @@
-<%= provider_basic_page(page_title: t('.title'), back_link: { path: :back }) do %>
+<%= provider_basic_page(page_title: t('.title'), back_link: { path: back_path }) do %>
   <p class="govuk-body">
-    <%= link_to t('.link'), :back, class: "govuk-link govuk-link--no-visited-state" %>
+    <%= link_to t('.link'), back_path, class: 'govuk-link govuk-link--no-visited-state' %>
   </p>
 <% end %>

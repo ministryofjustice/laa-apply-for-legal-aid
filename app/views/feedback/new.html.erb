@@ -1,4 +1,4 @@
-<%= provider_basic_page page_title: t('.title'), back_link: { path: :back } do %>
+<%= provider_basic_page page_title: t('.title'), back_link: { path: back_path } do %>
 
     <%= form_for(@feedback, url: feedback_index_path) do |form| %>
 
@@ -24,15 +24,15 @@
           ) %>
 
       <%= form.govuk_text_field(
-            :improvment_suggestion,
+            :improvement_suggestion,
             label: {
-              text: t('.improvment_suggestion'),
+              text: t('.improvement_suggestion'),
               size: :m
             },
             class: 'govuk-!-width-one-half'
           ) %>
 
-      <%= form.submit t('generic.continue'), class: "govuk-button" %>
+      <%= form.submit t('generic.send'), class: 'govuk-button' %>
 
     <% end %>
 <% end %>

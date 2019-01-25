@@ -3,7 +3,7 @@ class CreateFeedbacks < ActiveRecord::Migration[5.2]
     create_table :feedbacks, id: :uuid do |t|
       t.boolean :done_all_needed
       t.integer :satisfaction
-      t.text :improvment_suggestion
+      t.text :improvement_suggestion
       t.timestamps
     end
   end
