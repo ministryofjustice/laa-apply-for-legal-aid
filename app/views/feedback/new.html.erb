@@ -1,14 +1,38 @@
-<%= provider_basic_page page_title: 'Feedback', back_link: { path: :back } do %>
-    <div class="govuk-!-padding-bottom-2"></div>
+<%= provider_basic_page page_title: t('.title'), back_link: { path: :back } do %>
 
-    <%= form_with(model: @feedback, url: feedback_index_path) do |form| %>
+    <%= form_for(@feedback, url: feedback_index_path) do |form| %>
 
-      <div class="govuk-!-padding-bottom-2"></div>
+      <%= form.govuk_collection_radio_buttons(
+            :done_all_needed,
+            %w[yes no],
+            inline: true,
+            title: {
+              text: t('.done_all_needed'),
+              size: :m
+            }
+          ) %>
 
-      <%= form.govuk_text_field :improvment_suggestion, class: 'govuk-!-width-one-half' %>
+      <%= Feedback.enum_radio_buttons(
+            form, :satisfaction,
+            order: :reverse,
+            args: {
+              title: {
+                text: t('.satisfaction'),
+                size: :m
+              }
+            }
+          ) %>
 
-      <%= render partial: 'shared/forms/next_action_buttons', locals: { continue_id: 'continue', show_draft: true, form: form } %>
+      <%= form.govuk_text_field(
+            :improvment_suggestion,
+            label: {
+              text: t('.improvment_suggestion'),
+              size: :m
+            },
+            class: 'govuk-!-width-one-half'
+          ) %>
 
-     </div>
+      <%= form.submit t('generic.continue'), class: "govuk-button" %>
+
     <% end %>
 <% end %>

@@ -91,6 +91,9 @@ module GovukElementsFormBuilder
     # You can pass a title with the :title parameter.
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: 'What is your gender?') %>
     #
+    # If you wish to specify the size of the heading pass a hash into title with text and size:
+    # <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: { text: 'What is your gender?', size: :m } ) %>
+    #
     # Use the :inline parameter to have the radio buttons displayed horizontally rather than vertically
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], inline: true) %>
     #
@@ -121,7 +124,7 @@ module GovukElementsFormBuilder
     private
 
     def concat_tags(*tags)
-      tags.compact.join('').html_safe
+      tags.compact.join.html_safe
     end
 
     def extract_value_and_label_attributes(args)
@@ -169,8 +172,7 @@ module GovukElementsFormBuilder
       classes = ['govuk-form-group']
       classes << 'govuk-form-group--error' if error?(attribute, options)
       content_tag :div, class: classes.join(' ') do
-        label = options.key?(:label) && options[:label].nil? ? '' : label(attribute, options[:label], class: 'govuk-label', for: attribute)
-        concat_tags(label, hint_and_error_tags(attribute, options), yield)
+        concat_tags(label_from_options(attribute, options), hint_and_error_tags(attribute, options), yield)
       end
     end
 
@@ -189,9 +191,23 @@ module GovukElementsFormBuilder
     end
 
     def fieldset_legend(title)
-      content_tag(:legend, class: 'govuk-fieldset__legend govuk-fieldset__legend--xl') do
-        content_tag(:h1, title, class: 'govuk-fieldset__heading')
+      title = text_hash(title)
+      size = title.fetch(:size, 'xl')
+      content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}") do
+        content_tag(:h1, title[:text], class: 'govuk-fieldset__heading')
       end
+    end
+
+    def label_from_options(attribute, options)
+      return '' if options.key?(:label) && options[:label].nil?
+      label_options = text_hash(options.fetch(:label, {}))
+      label_classes = ['govuk-label']
+      label_classes << "govuk-label--#{label_options[:size]}" if label_options[:size].present?
+      label(attribute, label_options[:text], class: label_classes.join(' '), for: attribute)
+    end
+
+    def text_hash(text)
+      text.is_a?(Hash) ? text : { text: text }
     end
 
     def hint_and_error_tags(attribute, options)

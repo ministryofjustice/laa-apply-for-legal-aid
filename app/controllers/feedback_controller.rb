@@ -1,11 +1,29 @@
 class FeedbackController < ApplicationController
   def new
-    @feedback = Feedback.new
+    feedback
   end
 
   def create
-    @feedback = Feedback.new
-    @feedback.errors.add(:improvment_suggestion, 'this is an error')
-    render :new
+    if feedback.update(feedback_params)
+      redirect_to feedback
+    else
+      render :new
+    end
+  end
+
+  def show
+    @feedback = Feedback.find(params[:id])
+  end
+
+  private
+
+  def feedback_params
+    params.require(:feedback).permit(
+      :done_all_needed, :satisfaction, :improvment_suggestion
+    )
+  end
+
+  def feedback
+    @feedback ||= Feedback.new
   end
 end

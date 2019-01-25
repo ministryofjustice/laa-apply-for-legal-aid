@@ -26,6 +26,15 @@ en:
     index:
       heading_1: Apply for Legal Aid
       welcome_home: Welcome Home
+  feedback:
+    new:
+      title: Help us improve this service
+      satisfaction: Overall, how satisfied were you with this service?
+      done_all_needed: Were you able to do what you needed today?
+      improvment_suggestion: How could we improve this service?
+    show:
+      title: Thank you for your feedback
+      link: Back to your application
   restrictions:
     names:
       bankruptcy: Bankruptcy
