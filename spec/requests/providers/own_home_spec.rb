@@ -76,6 +76,26 @@ RSpec.describe 'provider own home requests', type: :request do
           it 'updates the record to match' do
             expect(legal_aid_application.reload.own_home_mortgage?).to be_truthy
           end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to next page in the flow' do
+              expect(response).to redirect_to(providers_legal_aid_application_property_value_path(legal_aid_application))
+            end
+          end
+        end
+
+        context 'no' do
+          let(:own_home) { 'no' }
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to check answers page' do
+              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+            end
+          end
         end
       end
 
@@ -110,6 +130,14 @@ RSpec.describe 'provider own home requests', type: :request do
           it 'updates the record to match' do
             expect(legal_aid_application.reload.own_home_mortgage?).to be_truthy
           end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to the applications list page' do
+              expect(response).to redirect_to(providers_legal_aid_applications_path)
+            end
+          end
         end
 
         context 'no' do
@@ -121,6 +149,14 @@ RSpec.describe 'provider own home requests', type: :request do
 
           it 'updates the record to match' do
             expect(legal_aid_application.reload.own_home_no?).to be_truthy
+          end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to the applications list page' do
+              expect(response).to redirect_to(providers_legal_aid_applications_path)
+            end
           end
         end
 

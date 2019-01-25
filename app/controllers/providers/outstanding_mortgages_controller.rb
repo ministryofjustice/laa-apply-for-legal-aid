@@ -1,8 +1,7 @@
 module Providers
   class OutstandingMortgagesController < BaseController
     include ApplicationDependable
-    include Steppable
-    include SaveAsDraftable
+    include Flowable
 
     def show
       authorize @legal_aid_application
@@ -14,7 +13,7 @@ module Providers
       @form = LegalAidApplications::OutstandingMortgageForm.new(legal_aid_application_params)
 
       if @form.save
-        continue_or_save_draft
+        go_forward
       else
         render :show
       end

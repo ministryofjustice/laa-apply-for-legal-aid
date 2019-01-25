@@ -1,7 +1,7 @@
 module Providers
   class AddressesController < BaseController
     include ApplicationDependable
-    include Steppable
+    include Flowable
 
     def show
       @form = Addresses::AddressForm.new(model: address)
@@ -11,7 +11,7 @@ module Providers
       @form = Addresses::AddressForm.new(form_params)
 
       if @form.save
-        redirect_to next_step_url
+        go_forward
       else
         render :show
       end

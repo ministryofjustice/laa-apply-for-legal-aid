@@ -1,12 +1,11 @@
 module Providers
   class AddressSelectionsController < BaseController
     include ApplicationDependable
-    include Steppable
-    include SaveAsDraftable
+    include Flowable
 
     def show # rubocop:disable Metrics/AbcSize
       authorize @legal_aid_application
-      return redirect_to back_step_url unless address.postcode
+      return redirect_to back_path unless address.postcode
 
       if address_lookup.success?
         @addresses = address_lookup.result
@@ -23,7 +22,7 @@ module Providers
       @form = Addresses::AddressSelectionForm.new(permitted_params.merge(addresses: @addresses, model: address))
 
       if @form.save
-        continue_or_save_draft
+        go_forward
       else
         render :show
       end

@@ -2,32 +2,31 @@ module Flowable
   extend ActiveSupport::Concern
 
   included do
+    delegate :back_path, :forward_path, to: :flow_service
+    helper_method :back_path, :forward_path
+
     def go_forward
-      redirect_to forward_path
-    rescue NoMethodError
-      render plain: flow_service.forward_path
+      if path?(forward_path)
+        redirect_to forward_path
+      else
+        render plain: forward_path
+      end
     end
-
-    def back_path
-      return :citizens_check_answers if legal_aid_application.checking_citizen_answers?
-
-      send flow_service.back_path
-    end
-    helper_method :back_path
-
-    def forward_path
-      return :citizens_check_answers if legal_aid_application.checking_citizen_answers?
-
-      send flow_service.forward_path
-    end
-    helper_method :forward_path
 
     def flow_service
-      @flow_service ||= PageFlowService.new(legal_aid_application, current_step)
+      @flow_service ||= Flow::BaseFlowService.flow_service_for(flow_module).new(
+        params: params,
+        legal_aid_application: legal_aid_application,
+        current_step: controller_name.to_sym
+      )
     end
 
-    def current_step
-      controller_name.to_sym
+    def flow_module
+      @flow_module ||= self.class.parent.to_s.snakecase.to_sym
+    end
+
+    def path?(string)
+      string.starts_with?('/')
     end
   end
 end

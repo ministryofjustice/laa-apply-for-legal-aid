@@ -1,8 +1,7 @@
 module Providers
   class CheckProviderAnswersController < BaseController
     include ApplicationDependable
-    include SaveAsDraftable
-    include Steppable
+    include Flowable
 
     def index
       @proceeding_types = legal_aid_application.proceeding_types
@@ -13,12 +12,12 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-      redirect_to back_step_url
+      redirect_to back_path
     end
 
     def continue
       legal_aid_application.answers_checked!
-      continue_or_save_draft
+      go_forward
     end
   end
 end

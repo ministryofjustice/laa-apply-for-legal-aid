@@ -62,7 +62,7 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
         end
 
         it 'redirects to the next page' do
-          expect(response).to redirect_to providers_legal_aid_application_merits_declaration_path(legal_aid_application)
+          expect(response).to redirect_to(providers_legal_aid_application_merits_declaration_path(legal_aid_application))
         end
       end
 

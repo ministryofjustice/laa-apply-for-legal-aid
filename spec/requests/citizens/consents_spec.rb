@@ -16,7 +16,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
 
   describe 'POST /citizens/consent', type: :request do
     before do
-      sign_in legal_aid_application.applicant
+      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       post citizens_consent_path, params: params
     end
 

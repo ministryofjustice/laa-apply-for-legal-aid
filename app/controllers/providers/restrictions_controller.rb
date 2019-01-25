@@ -1,8 +1,7 @@
 module Providers
   class RestrictionsController < BaseController
-    include Steppable
     include ApplicationDependable
-    include SaveAsDraftable
+    include Flowable
 
     def index
       legal_aid_application
@@ -10,7 +9,7 @@ module Providers
 
     def create
       legal_aid_application.update!(legal_aid_application_params)
-      continue_or_save_draft
+      go_forward
     end
 
     private

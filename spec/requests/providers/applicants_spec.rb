@@ -200,17 +200,6 @@ RSpec.describe 'providers applicant requests', type: :request do
           end
         end
       end
-
-      context 'when params dont have continue or save as draft button' do
-        let(:submit_button) do
-          {}
-        end
-        it 'raises' do
-          expect {
-            subject
-          }.to raise_error RuntimeError, 'No Continue or Save as draft button when expected'
-        end
-      end
     end
   end
 end

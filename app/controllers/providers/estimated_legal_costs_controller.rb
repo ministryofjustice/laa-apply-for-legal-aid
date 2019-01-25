@@ -1,8 +1,7 @@
 module Providers
   class EstimatedLegalCostsController < BaseController
     include ApplicationDependable
-    include Steppable
-    include SaveAsDraftable
+    include Flowable
 
     before_action :authorize_legal_aid_application
 
@@ -14,7 +13,7 @@ module Providers
       @form = MeritsAssessments::EstimatedLegalCostForm.new(form_params.merge(model: merits_assessment))
 
       if @form.save
-        continue_or_save_draft
+        go_forward
       else
         render :show
       end

@@ -1,7 +1,7 @@
 module Providers
   class OnlineBankingsController < BaseController
     include ApplicationDependable
-    include Steppable
+    include Flowable
 
     def show
       authorize @legal_aid_application
@@ -13,21 +13,13 @@ module Providers
       @form = Applicants::UsesOnlineBankingForm.new(form_params)
 
       if @form.save
-        next_step
+        go_forward
       else
         render :show
       end
     end
 
     private
-
-    def next_step
-      if applicant.uses_online_banking?
-        redirect_to next_step_url
-      else
-        render plain: '[PLACEHOLDER] Page directing provider to use CCMS'
-      end
-    end
 
     def applicant_params
       params.permit(applicant: :uses_online_banking)[:applicant] || {}

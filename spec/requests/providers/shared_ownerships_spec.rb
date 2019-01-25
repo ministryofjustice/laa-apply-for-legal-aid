@@ -85,6 +85,15 @@ RSpec.describe 'providers shared ownership request test', type: :request do
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to the next step in flow' do
+              subject
+              expect(response).to redirect_to providers_legal_aid_application_percentage_home_path(legal_aid_application)
+            end
+          end
         end
 
         context 'No path' do
@@ -102,6 +111,15 @@ RSpec.describe 'providers shared ownership request test', type: :request do
             expect(legal_aid_application.shared_ownership).to eq nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
+          end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to check answers page' do
+              subject
+              expect(response).to redirect_to providers_legal_aid_application_check_passported_answers_path(legal_aid_application)
+            end
           end
         end
 
@@ -139,6 +157,15 @@ RSpec.describe 'providers shared ownership request test', type: :request do
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to the applications list page' do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_applications_path)
+            end
+          end
         end
 
         context 'No path' do
@@ -156,6 +183,15 @@ RSpec.describe 'providers shared ownership request test', type: :request do
             expect(legal_aid_application.shared_ownership).to eq nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
+          end
+
+          context 'while checking answers' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+
+            it 'redirects to the applications list page' do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_applications_path)
+            end
           end
         end
 
