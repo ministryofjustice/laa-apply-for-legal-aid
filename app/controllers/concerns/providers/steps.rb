@@ -114,10 +114,13 @@ module Providers
       # TODO: fix back when back page is implemented
       back: :estimated_legal_costs
     },
-    merits_declaration: {
+    merits_declarations: {
       path: :providers_legal_aid_application_merits_declaration_path,
-      forward: :check_provider_answers, #TO DO this is to go to check your answrrs, assuming this is provider_check_answers
-      back: :shared_ownerships #TO DO prospects_of_success when built
-  }.freeze
+      # TO DO this will point to merits_check_answers when implemented
+      forward: :merits_declarations,
+      # TO DO this will point to prospects_of_success when implemented
+      back: :merits_declarations
+    }
+    }.freeze
 end
 # rubocop:enable ModuleLength
