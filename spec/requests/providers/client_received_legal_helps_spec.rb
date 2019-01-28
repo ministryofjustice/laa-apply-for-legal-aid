@@ -61,14 +61,8 @@ RSpec.describe 'client received legal help', type: :request do
           expect(legal_aid_application.merits_assessment.reload.application_purpose).to eq(application_purpose)
         end
 
-        # TODO: remove this test and implement next one when next page is known
-        it 'returns next page placeholder' do
-          expect(response.body).to include('Placeholder: Are the proceedings')
-        end
-
-        # TODO: fix and implement when next page is known
-        xit 'redirects to the next page' do
-          expect(response).to redirect_to providers_legal_aid_application_xxxx_path(legal_aid_application)
+        it 'redirects to the next page' do
+          expect(response).to redirect_to providers_legal_aid_application_proceedings_before_the_court_path(legal_aid_application)
         end
       end
 

@@ -97,9 +97,14 @@ module Providers
     },
     client_received_legal_helps: {
       path: :providers_legal_aid_application_client_received_legal_help_path,
-      # TODO: fix forward when next page is implemented
-      forward: :check_passported_answers,
+      forward: :proceedings_before_the_courts,
       back: :check_passported_answers
+    },
+    proceedings_before_the_courts: {
+      path: :providers_legal_aid_application_proceedings_before_the_court_path,
+      # TODO: forward TBD, client_received_legal_helps is just a placeholder
+      forward: :client_received_legal_helps,
+      back: :client_received_legal_helps
     }
   }.freeze
 end

@@ -43,3 +43,6 @@ config/master.key
 
 # ignore VScode stuff
 .vscode/*
+
+# Ignore Redis binary dump (dump.rdb) files
+*.rdb
