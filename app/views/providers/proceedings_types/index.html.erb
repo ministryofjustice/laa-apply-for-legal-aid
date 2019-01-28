@@ -7,6 +7,20 @@
 
 <%= provider_page(page_title: t('.heading_1')) %>
 
+<% if @legal_aid_application %>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">
+        <%= t('.you_have_selected', count: pluralize(@legal_aid_application.proceeding_types.size, t('.proceeding'))) %>
+      </h2>
+    </div>
+  </div>
+
+  <%= render partial: 'proceeding_type', collection: @legal_aid_application.proceeding_types %>
+
+<% end %>
+
 <div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0">
   <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
     <h2 class="govuk-heading-m govuk-!-margin-bottom-0"><%= t '.heading_2' %></h2>
@@ -28,7 +42,7 @@
 
 <div class="govuk-grid-row govuk-!-margin-top-0">
   <ul id="proceeding-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
-    <%= render partial: 'proceeding_type', collection: @proceeding_types %>
+    <%= render partial: 'proceeding_type_form', collection: @proceeding_types, as: :proceeding_type %>
   </ul>
   <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">

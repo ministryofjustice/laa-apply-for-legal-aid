@@ -1,4 +1,8 @@
 class LegalAidApplicationPolicy < ApplicationPolicy
+  def index?
+    my_record?
+  end
+
   def show?
     my_record?
   end

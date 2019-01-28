@@ -1,23 +1,23 @@
-<div class="govuk-grid-row">
+<li id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item govuk-!-margin-bottom-0" tabindex="0">
   <div class="govuk-grid-column-two-thirds text-column">
     <h3 class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4"><%= proceeding_type.meaning %></h3>
     <span class="govuk-caption-m">
       <%= proceeding_type.ccms_category_law %> &gt; <%= proceeding_type.ccms_matter %>
     </span>
   </div>
+
   <div class="govuk-grid-column-one-third control-column">
-    <%= link_to(
-          t('generic.remove'),
+    <%= button_to(
+          t('generic.select'),
           providers_legal_aid_application_proceedings_type_path(
             legal_aid_application_id: @legal_aid_application,
             id: proceeding_type
           ),
-          method: :delete,
+          method: :patch,
+          tabindex: '-1',
+          class: 'govuk-button proceeding-link govuk-!-margin-top-4'
         ) %>
   </div>
-</div>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full text-column">
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-padding-top-1 govuk-!-padding-bottom-1">
-  </div>
-</div>
+
+  <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full govuk-!-margin-bottom-0" style="width: 100%;" />
+</li>
