@@ -5,13 +5,14 @@ module GovukElementsFormBuilder
     # https://guides.rubyonrails.org/configuring.html#configuring-action-view
     ActionView::Base.field_error_proc = proc { |html_tag| html_tag.html_safe }
 
-    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline].freeze
+    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline text_input].freeze
 
     delegate :content_tag, to: :@template
     delegate :errors, to: :@object
 
     # Usage:
     # <%= form.govuk_text_field :name %>
+    # <%= form.govuk_text_area :statement %>
     #
     # You can specify the label and hint copies:
     # e.g., <%= form.govuk_text_field :name, label: 'Enter your name', hint: 'Your real name' %>
@@ -29,18 +30,21 @@ module GovukElementsFormBuilder
     # Use :field_with_error to have the input be marked as erroneous when an other attribute has an error.
     # e.g., <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
     #
-    def govuk_text_field(attribute, options = {})
-      options[:class] = text_field_classes(attribute, options)
-      suffix = options.delete(:suffix)
-      input_text_form_group(attribute, options) do
-        input_prefix = options[:input_prefix]
-        tag_options = options.except(*CUSTOM_OPTIONS)
-        tag_options[:id] = attribute
-        tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
-        tag = text_field(attribute, tag_options)
+    %w[text_field text_area].each do |text_input|
+      define_method("govuk_#{text_input}") do |attribute, options = {}|
+        options[:text_input] = text_input
+        options[:class] = text_input_classes(attribute, options)
+        suffix = options.delete(:suffix)
+        input_text_form_group(attribute, options) do
+          input_prefix = options[:input_prefix]
+          tag_options = options.except(*CUSTOM_OPTIONS)
+          tag_options[:id] = attribute
+          tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
+          tag = __send__(text_input, attribute, tag_options)
 
-        tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
-        tag = suffix ? suffix_span_tag(suffix) { tag } : tag
+          tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
+          tag = suffix ? suffix_span_tag(suffix) { tag } : tag
+        end
       end
     end
 
@@ -129,10 +133,15 @@ module GovukElementsFormBuilder
       classes.join(' ')
     end
 
-    def text_field_classes(attribute, options)
+    def text_input_classes(attribute, options)
       classes = [options[:class]]
-      classes << 'govuk-input'
-      classes << 'govuk-input--error' if error?(attribute, options)
+      if options[:text_input] == 'text_area'
+        classes << 'govuk-textarea'
+        classes << 'govuk-textarea--error' if error?(attribute, options)
+      else
+        classes << 'govuk-input'
+        classes << 'govuk-input--error' if error?(attribute, options)
+      end
       classes << 'govuk-prefix-input__inner__input' if options[:input_prefix]
       classes.compact.join(' ')
     end
