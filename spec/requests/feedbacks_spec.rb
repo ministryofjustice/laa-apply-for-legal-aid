@@ -24,6 +24,12 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(feedback.source).to eq('Unknown')
     end
 
+    it 'sends an email' do
+      mailer = double(deliver_later: true)
+      expect(FeedbackMailer).to receive(:notify).and_return(mailer)
+      subject
+    end
+
     it 'redirects to show action' do
       subject
       expect(response).to redirect_to(feedback_path(feedback))
@@ -32,13 +38,18 @@ RSpec.describe 'FeedbacksController', type: :request do
     context 'with empty params' do
       let(:params) { { improvement_suggestion: '' } }
 
-      it 'does not create a feedback' do
-        expect { subject }.not_to change { Feedback.count }
+      it 'creates a feedback to record browser data' do
+        expect { subject }.to change { Feedback.count }.by(1)
       end
 
-      it 'renders a page' do
+      it 'does not send an email' do
+        expect(FeedbackMailer).not_to receive(:notify)
         subject
-        expect(response).to have_http_status(:ok)
+      end
+
+      it 'renders to show action a page' do
+        subject
+        expect(response).to redirect_to(feedback_path(feedback))
       end
     end
   end

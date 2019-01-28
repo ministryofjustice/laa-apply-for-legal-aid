@@ -11,8 +11,8 @@ class FeedbackMailer < GovukNotifyRails::Mailer
         feedback.source
       ].join(' - '),
       done_all_needed: feedback.done_all_needed.to_s,
-      satisfaction: feedback.satisfaction,
-      improvement_suggestion: feedback.improvement_suggestion
+      satisfaction: (feedback.satisfaction || ''),
+      improvement_suggestion: (feedback.improvement_suggestion || '')
     )
     mail to: TARGET_EMAIL
   end
