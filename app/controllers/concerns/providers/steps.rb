@@ -110,8 +110,7 @@ module Providers
     },
     estimated_legal_costs: {
       path: :providers_legal_aid_application_estimated_legal_costs_path,
-      # TODO: fix forward when next page is implemented
-      forward: :estimated_legal_costs,
+      forward: :success_prospects,
       # TODO: fix back when back page is implemented
       back: :estimated_legal_costs
     },
@@ -121,6 +120,11 @@ module Providers
       forward: :merits_declarations,
       # TO DO this will point to prospects_of_success when implemented
       back: :merits_declarations
+    },
+    success_prospects: {
+      path: :providers_legal_aid_application_success_prospects_path,
+      forward: :success_prospects,
+      back: :estimated_legal_costs
     }
   }.freeze
 end

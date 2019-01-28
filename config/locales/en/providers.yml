@@ -175,3 +175,7 @@ en:
           title: 'You can only use this service if your client:'
         use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
         use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
+    success_prospects:
+      show:
+        h1-heading: What are the prospects of success?
+

@@ -130,5 +130,13 @@ en:
           housing_assocation_or_landlord: Yes, a housing association or landlord
           no_sole_owner: No, sole owner
           partner_or_ex_partner: Yes, a partner or ex-partner
+      success_prospect_form:
+        likely: 50% or better
+      success_prospect:
+        success_prospect_item:
+          marginal: Marginal 45 - 50%
+          borderline: Borderline
+          uncertain: Uncertain
+          poor: Poor
     page-title:
       suffix: Apply for legal aid

@@ -172,6 +172,8 @@ ActiveRecord::Schema.define(version: 2019_01_29_120515) do
     t.text "details_of_proceedings_before_the_court"
     t.boolean "client_merits_declaration"
     t.decimal "estimated_legal_cost", precision: 10, scale: 2
+    t.string "success_prospect"
+    t.text "success_prospect_details"
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
   end
 
