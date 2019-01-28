@@ -1,0 +1,4 @@
+en:
+  feedback_mailer:
+    notify:
+      subject: 'Apply For Legal Aid: Feedback %{increment}'

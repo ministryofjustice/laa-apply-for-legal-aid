@@ -23,13 +23,14 @@
             }
           ) %>
 
-      <%= form.govuk_text_field(
+      <%= form.govuk_text_area(
             :improvement_suggestion,
             label: {
               text: t('.improvement_suggestion'),
               size: :m
             },
-            class: 'govuk-!-width-one-half'
+            rows: 4,
+            class: 'govuk-!-width-full'
           ) %>
 
       <%= form.submit t('generic.send'), class: 'govuk-button' %>

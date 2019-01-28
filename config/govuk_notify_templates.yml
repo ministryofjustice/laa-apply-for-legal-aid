@@ -10,6 +10,8 @@
 #
 development:
   citizen_start_application: '570e1b9d-6238-45fd-b75c-96f2f39db8e9'
+  feedback_notification: 'ac458f81-b7dd-4b2c-944c-3f17d2f2392c'
 
 production:
   citizen_start_application: '66865f0d-6410-40e2-b862-98724eb6e33a'
+  feedback_notification: '246379d9-14f5-470e-a8a4-31c4b61e64b2'

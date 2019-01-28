@@ -6,13 +6,10 @@ class FeedbackController < ApplicationController
   end
 
   def create
-    if feedback_params.values.any?(&:present?)
-      feedback.update(feedback_params)
-      redirect_to feedback
-    else
-      feedback
-      render :new
-    end
+    feedback.update(feedback_params)
+    FeedbackMailer.notify(feedback).deliver_later if feedback_submitted?
+
+    redirect_to feedback
   end
 
   def show
@@ -53,5 +50,9 @@ class FeedbackController < ApplicationController
     return :Citizen if %r{/citizens/} =~ path
 
     :Unknown
+  end
+
+  def feedback_submitted?
+    feedback_params.values.any?(&:present?)
   end
 end
