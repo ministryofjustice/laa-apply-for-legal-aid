@@ -28,7 +28,12 @@ class FeedbackController < ApplicationController
   end
 
   def feedback
-    @feedback ||= Feedback.new
+    @feedback ||= Feedback.new(
+      source: source,
+      os: browser.platform.name,
+      browser: browser.name,
+      browser_version: browser.full_version
+    )
   end
 
   def back_path
@@ -40,5 +45,13 @@ class FeedbackController < ApplicationController
     return if request.referer&.include?(feedback_index_path)
 
     session[:feedback_return_path] = request.referer
+  end
+
+  def source
+    path = session[:feedback_return_path]
+    return :Provider if %r{/providers/} =~ path
+    return :Citizen if %r{/citizens/} =~ path
+
+    :Unknown
   end
 end

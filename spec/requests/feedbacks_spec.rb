@@ -17,6 +17,13 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(feedback.improvement_suggestion).to eq(params[:improvement_suggestion])
     end
 
+    it 'gathers browser data' do
+      subject
+      expect(feedback.browser).not_to be_empty
+      expect(feedback.os).not_to be_empty
+      expect(feedback.source).to eq('Unknown')
+    end
+
     it 'redirects to show action' do
       subject
       expect(response).to redirect_to(feedback_path(feedback))
