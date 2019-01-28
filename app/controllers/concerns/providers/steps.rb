@@ -37,8 +37,8 @@ module Providers
       # Back determined by controller action logic
     },
     check_passported_answers: {
-      path: :providers_legal_aid_application_check_passported_answers_path
-      # forward TBD
+      path: :providers_legal_aid_application_check_passported_answers_path,
+      forward: :client_received_legal_helps
       # back: determined by controller action
     },
     check_benefits: {
@@ -94,6 +94,12 @@ module Providers
       path: :providers_legal_aid_application_other_assets_path,
       # Forward defined by controller
       back: :savings_and_investments
+    },
+    client_received_legal_helps: {
+      path: :providers_legal_aid_application_client_received_legal_help_path,
+      # TODO: fix forward when next page is implemented
+      forward: :check_passported_answers,
+      back: :check_passported_answers
     }
   }.freeze
 end

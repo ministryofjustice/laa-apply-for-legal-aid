@@ -1,0 +1,48 @@
+<% content_for :navigation do %>
+  <%= provider_back_link text: t('generic.back') %>
+<% end %>
+
+<% content_for(:page_title) { t('.h1-heading') } %>
+
+<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_client_received_legal_help_path,
+          method: :patch,
+          local: true
+        ) do |form| %>
+
+      <%= govuk_form_group(
+            input: :client_received_legal_help,
+            show_error_if: @form.errors.any?
+          ) do %>
+
+        <%= govuk_fieldset_header(content_for(:page_title)) %>
+
+        <%= govuk_error_message(form.object.errors[:client_received_legal_help].first) %>
+
+        <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+          <%= form.govuk_radio_button(:client_received_legal_help, true) %>
+          <%= form.govuk_radio_button(:client_received_legal_help, false,
+                                      'data-aria-controls' => 'conditional-false',
+                                      checked: @form.client_received_legal_help.to_s == 'false') %>
+          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-false">
+            <%= form.govuk_text_area :application_purpose, rows: 5 %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <%= render partial: 'shared/forms/next_action_buttons',
+                 locals: {
+                   continue_id: 'continue',
+                   show_draft: true,
+                   form: form
+                 } %>
+    <% end %>
+  </div>
+</div>

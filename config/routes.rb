@@ -75,6 +75,7 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
+      resource :client_received_legal_help, only: %i[show update]
     end
   end
 end

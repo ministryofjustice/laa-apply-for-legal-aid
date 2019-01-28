@@ -121,8 +121,8 @@ RSpec.describe 'check passported answers requests', type: :request do
         subject
       end
 
-      it 'returns success' do
-        expect(response).to be_successful
+      it 'redirects to Has your client received legal help for the matter?' do
+        expect(response).to redirect_to providers_legal_aid_application_client_received_legal_help_path(application)
       end
 
       it 'transitions to means_completed state' do

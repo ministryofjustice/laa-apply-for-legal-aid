@@ -275,6 +275,12 @@ Feature: Civil application journeys
     Then I select "Held overseas"
     Then I click "Continue"
     Then I should be on a page showing "Check your answers"
+    Then I click "Submit"
+    Then I should be on a page showing "Has your client received legal help for the matter?"
+    Then I choose "No"
+    Then I fill "Application purpose" with "because I can't afford it"
+    Then I click "Continue"
+    Then I should be on a page showing "Are the proceedings, for which funding is being sought, currently, before the court?"
 
   @javascript
   Scenario: Navigate back capital flow

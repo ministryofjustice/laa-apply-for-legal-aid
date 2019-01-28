@@ -102,7 +102,7 @@ module BaseForm
 
       attrs.map(&:to_s).each do |method|
         model_value = model_attributes[method]
-        instance_variable_set(:"@#{method}", model_value) if model_value && attributes[method].nil?
+        instance_variable_set(:"@#{method}", model_value) if !model_value.nil? && attributes[method].nil?
       end
     end
   end
