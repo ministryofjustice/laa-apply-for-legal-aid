@@ -71,25 +71,7 @@ RSpec.describe 'check your answers requests', type: :request do
       end
 
       it 'should redirect back' do
-        expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
-      end
-
-      context "the applicant's address used s address lookup service" do
-        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address_lookup) }
-        let(:application_id) { application.id }
-        let(:address_lookup_used) { true }
-
-        it 'should redirect to the address lookup page' do
-          expect(response).to redirect_to(providers_legal_aid_application_address_selection_path(application))
-        end
-      end
-
-      context "the applicant's address used manual entry" do
-        let(:address_lookup_used) { false }
-
-        it 'should redirect to manual address pagelookup page' do
-          expect(response).to redirect_to(providers_legal_aid_application_address_path(application))
-        end
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_type_path(application))
       end
 
       it 'should change the stage back to "initialized' do

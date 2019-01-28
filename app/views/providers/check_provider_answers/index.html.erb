@@ -8,73 +8,71 @@
 
   <dl class="app-check-your-answers app-check-your-answers--long">
     <dt class="govuk-heading-m">
-      <%= t '.section_1.heading' %>
-    </dt>
-
-    <%= check_answer_link(
-          name: :proceeding_type,
-          url: providers_legal_aid_application_proceedings_type_path(anchor: 'proceeding-search-input'.freeze),
-          question: t('.section_1.proceeding'),
-          answer: @proceeding.meaning
-        ) %>
-  </dl>
-<% end %>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <dt class="govuk-heading-m govuk-!-padding-top-9">
-      <%= t '.section_2.heading' %>
+      <%= t '.section_client.heading' %>
     </dt>
 
     <%= check_answer_link(
           name: :first_name,
           url: providers_legal_aid_application_applicant_path(anchor: :first_name),
-          question: t('.section_2.first_name'),
+          question: t('.section_client.first_name'),
           answer: @applicant.first_name
         ) %>
 
     <%= check_answer_link(
           name: :last_name,
           url: providers_legal_aid_application_applicant_path(anchor: :last_name),
-          question: t('.section_2.last_name'),
+          question: t('.section_client.last_name'),
           answer: @applicant.last_name
         ) %>
 
     <%= check_answer_link(
           name: :date_of_birth,
           url: providers_legal_aid_application_applicant_path(anchor: :dob_day),
-          question: t('.section_2.dob'),
+          question: t('.section_client.dob'),
           answer: @applicant.date_of_birth
         ) %>
 
     <%= check_answer_link(
           name: :national_insurance_number,
           url: providers_legal_aid_application_applicant_path(anchor: :national_insurance_number),
-          question: t('.section_2.nino'),
+          question: t('.section_client.nino'),
           answer: @applicant.national_insurance_number
         ) %>
 
     <%= check_answer_link(
           name: :email,
           url: providers_legal_aid_application_applicant_path(anchor: :email),
-          question: t('.section_2.email'),
+          question: t('.section_client.email'),
           answer: @applicant.email
         ) %>
 
     <%= check_answer_link(
           name: :address,
           url: change_address_link(@applicant),
-          question: t('.section_2.address'),
+          question: t('.section_client.address'),
           answer: address_with_line_breaks(@address)
         ) %>
+  </dl>
 
-    <%= render(
-          partial: 'shared/forms/next_action_buttons_form',
-          locals: {
-            url: continue_providers_legal_aid_application_check_provider_answers_path,
-            method: :patch,
-            show_draft: true
-          }
-        ) %>
-  </div>
-</div>
+  <dt class="govuk-heading-m govuk-!-padding-top-9">
+    <%= t '.section_proceeding.heading' %>
+  </dt>
+
+  <%= check_answer_link(
+        name: :proceeding_type,
+        url: providers_legal_aid_application_proceedings_type_path(anchor: 'proceeding-search-input'.freeze),
+        question: t('.section_proceeding.proceeding'),
+        answer: @proceeding.meaning
+      ) %>
+
+  <div class="govuk-!-padding-bottom-9"></div>
+
+  <%= render(
+        partial: 'shared/forms/next_action_buttons_form',
+        locals: {
+          url: continue_providers_legal_aid_application_check_provider_answers_path,
+          method: :patch,
+          show_draft: true
+        }
+      ) %>
+<% end %>
