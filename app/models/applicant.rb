@@ -12,45 +12,11 @@ class Applicant < ApplicationRecord
   has_many :bank_providers
   has_many :bank_errors
 
-  validates :first_name, :last_name, :date_of_birth, :national_insurance_number, presence: true
-
-  validate :validate_date_of_birth, :validate_national_insurance_number
-
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
-
   def email_address
     email
   end
 
   def full_name
     "#{first_name} #{last_name}".strip
-  end
-
-  def dob
-    {
-      dob_year: date_of_birth.strftime('%Y'),
-      dob_month: date_of_birth.strftime('%m'),
-      dob_day: date_of_birth.strftime('%d')
-    }
-  end
-
-  private
-
-  def validate_date_of_birth
-    errors.add(:date_of_birth, :invalid) if date_of_birth.present? && (date_of_birth < Date.new(1900, 0o1, 0o1) || date_of_birth > Date.today)
-  end
-
-  def normalise_national_insurance_number
-    return unless national_insurance_number
-
-    national_insurance_number.delete!(' ')
-    national_insurance_number.upcase!
-  end
-
-  def validate_national_insurance_number
-    return if national_insurance_number.blank?
-
-    normalise_national_insurance_number
-    errors.add(:national_insurance_number, :invalid) unless NINO_REGEXP =~ national_insurance_number
   end
 end
