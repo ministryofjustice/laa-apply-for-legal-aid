@@ -121,6 +121,6 @@ module Providers
       # TO DO this will point to prospects_of_success when implemented
       back: :merits_declarations
     }
-    }.freeze
+  }.freeze
 end
 # rubocop:enable ModuleLength

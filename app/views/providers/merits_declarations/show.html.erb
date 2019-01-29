@@ -8,13 +8,6 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
 
-      <%= form_with(
-            model: @form,
-            url: providers_legal_aid_application_merits_declaration_path,
-            method: :patch,
-            local: true
-          ) do |form| %>
-
         <%= govuk_form_group(
               input: :client_merits_declaration
             ) do %>
@@ -37,8 +30,6 @@
 
         <% end %>
 
-        <%= form.button t('generic.continue'), name: :client_merits_declaration, value: 'true', class: 'govuk-button' %>
-
-      <% end %>
+        <%= button_to t('generic.continue'), providers_legal_aid_application_merits_declaration_path, method: :patch, class: 'govuk-button' %>
     </div>
   </div>

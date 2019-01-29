@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_135128) do
+ActiveRecord::Schema.define(version: 2019_01_29_120515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -152,10 +152,10 @@ ActiveRecord::Schema.define(version: 2019_01_24_135128) do
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
-    t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
-    t.decimal "outstanding_mortgage_amount"
+    t.decimal "percentage_home"
     t.string "shared_ownership"
+    t.decimal "outstanding_mortgage_amount"
     t.string "provider_step"
     t.uuid "provider_id"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
@@ -166,12 +166,12 @@ ActiveRecord::Schema.define(version: 2019_01_24_135128) do
     t.uuid "legal_aid_application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "client_merits_declaration"
     t.boolean "client_received_legal_help"
     t.text "application_purpose"
     t.boolean "proceedings_before_the_court"
     t.text "details_of_proceedings_before_the_court"
     t.decimal "estimated_legal_cost", precision: 10, scale: 2
-    t.boolean "client_merits_declaration"
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
   end
 

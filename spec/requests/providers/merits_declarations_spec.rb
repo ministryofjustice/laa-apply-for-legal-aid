@@ -38,7 +38,9 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
     let(:client_merits_declaration) { true }
     let(:params) do
       {
-        client_merits_declaration: client_merits_declaration
+        merits_assessment: {
+          client_merits_declaration: client_merits_declaration
+        }
       }
     end
 
