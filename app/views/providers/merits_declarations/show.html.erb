@@ -1,0 +1,29 @@
+<% content_for :navigation do %>
+    <%= provider_back_link text: t('generic.back') %>
+  <% end %>
+
+  <% content_for(:page_title) { t('.h1-heading') } %>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
+
+        <%= simple_format t('.text_1') %>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li><%= simple_format t('.leaflet_link') %></li>
+        </ul>
+
+        <%= simple_format t('.text_2') %>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <% t('.list').each_line do |item| %>
+            <li><%= item %></li>
+          <% end %>
+        </ul>
+
+        <%= simple_format t('.text_3') %>
+
+        <%= button_to t('generic.continue'), providers_legal_aid_application_merits_declaration_path, method: :patch, class: 'govuk-button' %>
+    </div>
+  </div>

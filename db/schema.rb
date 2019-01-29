@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2019_01_29_120515) do
     t.uuid "legal_aid_application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "client_merits_declaration"
     t.boolean "client_received_legal_help"
     t.text "application_purpose"
     t.boolean "proceedings_before_the_court"

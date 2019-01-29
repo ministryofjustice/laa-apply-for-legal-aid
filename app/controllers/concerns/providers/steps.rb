@@ -113,6 +113,13 @@ module Providers
       forward: :estimated_legal_costs,
       # TODO: fix back when back page is implemented
       back: :estimated_legal_costs
+    },
+    merits_declarations: {
+      path: :providers_legal_aid_application_merits_declaration_path,
+      # TO DO this will point to merits_check_answers when implemented
+      forward: :merits_declarations,
+      # TO DO this will point to prospects_of_success when implemented
+      back: :merits_declarations
     }
   }.freeze
 end
