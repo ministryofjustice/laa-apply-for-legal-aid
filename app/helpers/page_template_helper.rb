@@ -48,10 +48,10 @@ module PageTemplateHelper
         show_errors_for: @form,
         &content
       )
-    content = capture(&content) if content
     template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { back_link unless back_link == :none }
     content_for(:page_title) { page_title }
+    content = capture(&content) if content
     render(
       "shared/page_templates/#{template}_page_template",
       page_title: page_title,
