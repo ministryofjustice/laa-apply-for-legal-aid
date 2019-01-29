@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'citizen accounts request', type: :request do
   describe 'GET /citizens/account' do
     let!(:applicant) { create :applicant }
+    let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
     let(:addresses) do
       [{ address: Faker::Address.building_number,
          city: Faker::Address.city,
@@ -23,7 +24,7 @@ RSpec.describe 'citizen accounts request', type: :request do
 
     before do
       allow(Sidekiq::Status).to receive(:get_all).with(worker_id).and_return(worker)
-      sign_in applicant
+      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       subject
     end
 

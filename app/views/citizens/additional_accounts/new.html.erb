@@ -1,22 +1,25 @@
-<% content_for(:navigation) { back_link(path: citizens_additional_accounts_path) } %>
+<%= citizen_page(
+      page_title: t('.field_set_header'),
+      back_link: {
+        path: citizens_additional_accounts_path
+      },
+      template: :form
+    ) do %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <%= form_tag(citizens_additional_account_path(id: :update), method: :patch) do %>
+  <%= form_tag(citizens_additional_account_path(id: :update), method: :patch) do %>
 
-      <%= govuk_form_group(
-            show_error_if: @error,
-            hint_id: :has_offline_accounts_hint,
-            input: :has_offline_accounts
-          ) do %>
-        <%= govuk_fieldset_header t('.field_set_header'), padding_below: 6 %>
-        <%= govuk_hint t('.hint'), id: :has_offline_accounts_hint %>
-        <%= govuk_error_message(@error) %>
-        <%= govuk_radio_inputs :has_offline_accounts, yes: t('generic.yes'), no: t('generic.no') %>
-      <% end %>
+    <%= govuk_form_group(
+          show_error_if: @error,
+          hint_id: :has_offline_accounts_hint,
+          input: :has_offline_accounts
+        ) do %>
 
-      <%= govuk_submit_button t('generic.continue') %>
-
+      <%= govuk_hint t('.hint'), id: :has_offline_accounts_hint %>
+      <%= govuk_error_message(@error) %>
+      <%= govuk_radio_inputs :has_offline_accounts, yes: t('generic.yes'), no: t('generic.no') %>
     <% end %>
-  </div>
-</div>
+
+    <%= govuk_submit_button t('generic.continue') %>
+
+  <% end %>
+<% end %>

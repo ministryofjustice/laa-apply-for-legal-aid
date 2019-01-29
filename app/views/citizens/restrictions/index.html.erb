@@ -1,18 +1,7 @@
-<% content_for(:navigation) { back_link } %>
-
-<fieldset class="govuk-fieldset">
-  <div class="govuk-!-padding-bottom-2"></div>
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl"><%= t('.h1-heading') %></h1>
-
-        <%= render partial: 'form',
-                   locals: {
-                     model: @legal_aid_application,
-                     url: citizens_restrictions_path
-                   } %>
-
-    </div>
-  </div>
-</fieldset>
+<%= citizen_page page_title: t('.h1-heading'), template: :form do %>
+  <%= render partial: 'form',
+             locals: {
+               model: @legal_aid_application,
+               url: citizens_restrictions_path
+             } %>
+<% end %>

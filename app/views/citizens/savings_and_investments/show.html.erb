@@ -1,8 +1,7 @@
-<% content_for(:navigation) { back_link } %>
-<% content_for(:page_title) { t('.h1-heading') } %>
-
-<%= render(
-      'shared/forms/savings_and_investments_form',
-      bank_accounts: bank_accounts,
-      form_path: citizens_savings_and_investment_path
-    ) %>
+<%= citizen_page page_title: t('.h1-heading') do %>
+  <%= render(
+        'shared/forms/savings_and_investments_form',
+        bank_accounts: bank_accounts,
+        form_path: citizens_savings_and_investment_path
+      ) %>
+<% end %>

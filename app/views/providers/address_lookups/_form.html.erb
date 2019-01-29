@@ -1,31 +1,22 @@
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+<%= provider_page(
+      page_title: t('forms.address_lookup.heading'),
+      template: :form
+    ) do %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <%= form_with(
+        model: @form,
+        scope: :address_lookup,
+        url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+        method: :patch,
+        local: true
+      ) do |form| %>
 
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-      <h1 class="govuk-fieldset__heading">
-        <%= t('forms.address_lookup.heading') %>
-      </h1>
-    </legend>
+    <div class="govuk-!-padding-bottom-8"></div>
 
-    <%= form_with(
-          model: @form,
-          scope: :address_lookup,
-          url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
-          method: :patch,
-          local: true
-        ) do |form| %>
+    <%= form.govuk_text_field :postcode, class: 'govuk-input--width-10' %>
 
-      <div class="govuk-!-padding-bottom-6"></div>
+    <%= form.submit t('forms.address_lookup.submit_button'), id: 'find-address', class: 'govuk-button' %>
 
-      <div class="govuk-!-padding-bottom-2"></div>
-
-      <%= form.govuk_text_field :postcode, class: 'govuk-input--width-10' %>
-
-      <%= form.submit t('forms.address_lookup.submit_button'), id: 'find-address', class: 'govuk-button' %>
-
-      <p><%= link_to t('forms.address_lookup.address_manual_link'), providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
-    <% end %>
-  </div>
-</div>
+    <p><%= link_to t('forms.address_lookup.address_manual_link'), providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
+  <% end %>
+<% end %>

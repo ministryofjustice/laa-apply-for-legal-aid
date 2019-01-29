@@ -1,48 +1,33 @@
-<% content_for(:navigation) { provider_back_link } %>
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form } %>
+<%= provider_page(
+      page_title: t('.page_title'),
+      template: :form
+    ) do %>
 
-<fieldset class="govuk-fieldset">
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-        <h1 class="govuk-fieldset__heading">
-          Enter your client's details
-        </h1>
-      </legend>
-    </div>
-  </div>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_applicant_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
 
-  <div class="govuk-!-padding-bottom-2"></div>
+    <div class="govuk-!-padding-bottom-2"></div>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <%= form_with(
-            model: @form,
-            url: providers_legal_aid_application_applicant_path,
-            method: :patch,
-            local: true
-          ) do |form| %>
+    <%= form.govuk_text_field :first_name, class: 'govuk-!-width-one-half' %>
+    <%= form.govuk_text_field :last_name, class: 'govuk-!-width-one-half' %>
 
-        <div class="govuk-!-padding-bottom-2"></div>
+    <div class="govuk-!-padding-bottom-4"></div>
 
-        <%= form.govuk_text_field :first_name, class: 'govuk-!-width-one-half' %>
-        <%= form.govuk_text_field :last_name, class: 'govuk-!-width-one-half' %>
+    <%= render partial: 'shared/forms/date_input_fields', locals: { prefix: :dob, field_name: :date_of_birth, form: form } %>
 
-        <div class="govuk-!-padding-bottom-4"></div>
+    <div class="govuk-!-padding-bottom-6"></div>
 
-        <%= render partial: 'shared/forms/date_input_fields', locals: { prefix: :dob, field_name: :date_of_birth, form: form } %>
+    <%= form.govuk_text_field :national_insurance_number, class: 'govuk-!-width-one-half' %>
+    <%= form.govuk_text_field :email, class: 'govuk-!-width-three-quarters' %>
 
-        <div class="govuk-!-padding-bottom-6"></div>
+    <div class="govuk-!-padding-bottom-2"></div>
 
-        <%= form.govuk_text_field :national_insurance_number, class: 'govuk-!-width-one-half' %>
-        <%= form.govuk_text_field :email, class: 'govuk-!-width-three-quarters' %>
+    <%= render partial: 'shared/forms/next_action_buttons', locals: { continue_id: 'continue', show_draft: true, form: form } %>
 
-        <div class="govuk-!-padding-bottom-2"></div>
-
-        <%= render partial: 'shared/forms/next_action_buttons', locals: { continue_id: 'continue', show_draft: true, form: form } %>
-
-       </div>
-      <% end %>
-    </div>
-  </div>
-</fieldset>
+   </div>
+  <% end %>
+<% end %>

@@ -5,8 +5,6 @@
         input: :property_value
       ) do %>
 
-    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-
     <%= form.govuk_text_field :property_value,
                               label: controller_t('property_value'),
                               hint: controller_t('hint.property_value'),

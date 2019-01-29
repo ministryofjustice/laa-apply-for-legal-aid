@@ -1,19 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::ConsentsController, type: :request do
-  describe 'citizen consent request test' do
-    describe 'GET /citizens/consent' do
-      before { get citizens_consent_path }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  describe 'GET /citizens/consent' do
+    before do
+      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+      get citizens_consent_path
+    end
 
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
-        expect(unescaped_response_body).to include('I agree for you to check')
-      end
+    it 'returns http success' do
+      expect(response).to have_http_status(:ok)
+      expect(unescaped_response_body).to include('I agree for you to check')
     end
   end
 
   describe 'POST /citizens/consent', type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     before do
       sign_in legal_aid_application.applicant
       post citizens_consent_path, params: params

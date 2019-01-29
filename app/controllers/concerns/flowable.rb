@@ -20,6 +20,7 @@ module Flowable
 
       send flow_service.forward_path
     end
+    helper_method :forward_path
 
     def flow_service
       @flow_service ||= PageFlowService.new(legal_aid_application, current_step)

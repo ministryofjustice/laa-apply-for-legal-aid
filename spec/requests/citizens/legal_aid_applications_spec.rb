@@ -7,8 +7,31 @@ RSpec.describe 'citizen home requests', type: :request do
   let(:applicant_first_name) { application.applicant.first_name }
   let(:applicant_last_name) { application.applicant.last_name }
 
-  describe 'GET #citizens/applications/:id' do
+  describe 'GET citizens/applications/:id' do
     before { get citizens_legal_aid_application_path(secure_id) }
+
+    it 'redirects to applications' do
+      expect(response).to redirect_to(citizens_legal_aid_applications_path)
+    end
+
+    context 'when no matching legal aid application exists' do
+      let(:secure_id) { SecureRandom.uuid }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'show a landing page' do
+        expect(response.body).to match('Authentication failed')
+      end
+    end
+  end
+
+  describe 'GET citizens/applications' do
+    before do
+      get citizens_legal_aid_application_path(secure_id)
+      get citizens_legal_aid_applications_path
+    end
 
     context 'when there is a legal aid application that matches the secure data' do
       it 'returns http success' do
@@ -22,18 +45,6 @@ RSpec.describe 'citizen home requests', type: :request do
       it 'returns the correct application' do
         expect(unescaped_response_body).to include(applicant_first_name.html_safe)
         expect(unescaped_response_body).to include(applicant_last_name.html_safe)
-      end
-    end
-
-    context 'when no matching legal aid application exists' do
-      let(:secure_id) { SecureRandom.uuid }
-
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
-      end
-
-      it 'show a landing page' do
-        expect(response.body).to match('Authentication failed')
       end
     end
   end

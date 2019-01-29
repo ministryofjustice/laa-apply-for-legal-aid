@@ -1,15 +1,11 @@
-<% content_for(:page_title) { t('.h1-heading') } %>
-
-<% content_for :navigation do %>
-    <%= provider_back_link %>
+<%= provider_page(page_title: t('.h1-heading'), template: :basic) do %>
+  <%= render(
+        partial: '/shared/forms/outstanding_mortgage_form',
+        locals: {
+          model: @form,
+          user_type: 'provider',
+          show_draft: true,
+          url: providers_legal_aid_application_outstanding_mortgage_path
+        }
+      ) %>
 <% end %>
-
-<%= render partial: 'shared/forms/error_summary', locals: { model: @form, attribute_prefix: :legal_aid_application_ } %>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <%= render partial: '/shared/forms/outstanding_mortgage_form', locals: { model: @form,
-                                                                             user_type: 'provider',
-                                                                             show_draft: true,
-                                                                             url: providers_legal_aid_application_outstanding_mortgage_path } %>
-  </div>
-</div>

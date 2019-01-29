@@ -1,49 +1,39 @@
-<% content_for(:navigation) { provider_back_link } %>
-<%
-  result_namespace = @legal_aid_application.applicant_receives_benefit? ? '.positive_result' : '.negative_result'
-%>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <div class="govuk-panel govuk-panel--confirmation">
-      <h2 class="govuk-panel__title">
-        <%= @legal_aid_application.applicant.full_name %>
-        <br />
-        <%= t "#{result_namespace}.title" %>
-      </h2>
-    </div>
-
-    <div class="govuk-!-padding-top-4"></div>
-
-    <h3 class="govuk-heading-m">
-      <%= t '.heading_1' %>
-    </h3>
-
-    <p class="govuk-body">
-      <%= t "#{result_namespace}.body" %>
-    </p>
-
-    <h3 class="govuk-heading-m">
-      <%= t '.heading_2' %>
-    </h3>
-
-    <p class="govuk-body">
-      <%= t "#{result_namespace}.next" %>
-    </p>
-
-    <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_check_benefit_path,
-          method: :patch,
-          local: true
-        ) do |form| %>
-
-      <%= render partial: 'shared/forms/next_action_buttons',
-                 locals: {
-                   continue_id: 'continue',
-                   show_draft: true,
-                   form: form
-                 } %>
-    <% end %>
+<%= content_for(:panel) do %>
+  <div class="govuk-panel govuk-panel--confirmation">
+    <h2 class="govuk-panel__title">
+      <%= @legal_aid_application.applicant.full_name %>
+      <br />
+      <%= t "#{result_namespace}.title" %>
+    </h2>
   </div>
-</div>
+<% end %>
+
+<%= provider_page page_title: t('.heading_1') do %>
+
+  <p class="govuk-body">
+    <%= t "#{result_namespace}.body" %>
+  </p>
+
+  <h3 class="govuk-heading-m">
+    <%= t '.heading_2' %>
+  </h3>
+
+  <p class="govuk-body">
+    <%= t "#{result_namespace}.next" %>
+  </p>
+
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_check_benefit_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <%= render partial: 'shared/forms/next_action_buttons',
+               locals: {
+                 continue_id: 'continue',
+                 show_draft: true,
+                 form: form
+               } %>
+  <% end %>
+<% end %>

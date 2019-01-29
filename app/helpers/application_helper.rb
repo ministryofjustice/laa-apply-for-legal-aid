@@ -19,8 +19,8 @@ module ApplicationHelper
     t ".#{[*controller, lazy_t].join('.')}", *args
   end
 
-  def back_link(path: back_path, method: nil)
-    link_to t('generic.back'), path, class: 'govuk-back-link', id: 'back', method: method
+  def back_link(text: t('generic.back'), path: back_path, method: nil)
+    link_to text, path, class: 'govuk-back-link', id: 'back', method: method
   end
 
   def user_header_link

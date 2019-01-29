@@ -1,7 +1,20 @@
-class PageFlowService
+class PageFlowService # rubocop:disable Metrics/ClassLength
   STEPS_FLOW = {
+    legal_aid_applications: {
+      path: :citizens_legal_aid_applications_path,
+      forward: :information
+    },
+    information: {
+      path: :citizens_information_path,
+      back: :legal_aid_applications
+    },
+    consents: {
+      path: :citizens_consent_path,
+      back: :information
+    },
     accounts: {
-      path: :citizens_accounts_path
+      path: :citizens_accounts_path,
+      back: :consents
     },
     additional_accounts: {
       path: :citizens_additional_accounts_path,

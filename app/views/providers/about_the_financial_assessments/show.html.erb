@@ -1,40 +1,33 @@
-<% content_for(:navigation) { provider_back_link } %>
+<%= provider_page(page_title: t('.title')) do %></h1>
+  <p class="govuk-body"><%= t '.sign_in_para' %></p>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <p class="govuk-body"><%= t '.share_bank_accounts_para' %></p>
 
-    <h1 class="govuk-heading-xl"><%= t '.title' %></h1>
+  <h2 class="govuk-heading-m"><%= t '.list.title' %></h2>
 
-    <p class="govuk-body"><%= t '.sign_in_para' %></p>
+  <p class="govuk-body">
+    <ul class="govuk-list govuk-list--bullet">
+      <li><%= t '.list.item_1' %></li>
+      <li><%= t '.list.item_2' %></li>
+      <li><%= t '.list.item_3' %></li>
+      <li><%= t '.list.item_4' %></li>
+    </ul>
+  </p>
 
-    <p class="govuk-body"><%= t '.share_bank_accounts_para' %></p>
+  <h2 class="govuk-heading-m">
+    <%= t '.section_1.heading' %>
+  </h2>
 
-    <h2 class="govuk-heading-m"><%= t '.list.title' %></h2>
+  <p>
+    <%= t '.section_1.text' %>
+  </p>
 
-    <p class="govuk-body">
-      <ul class="govuk-list govuk-list--bullet">
-        <li><%= t '.list.item_1' %></li>
-        <li><%= t '.list.item_2' %></li>
-        <li><%= t '.list.item_3' %></li>
-        <li><%= t '.list.item_4' %></li>
-      </ul>
-    </p>
-
-    <h2 class="govuk-heading-m">
-      <%= t '.section_1.heading' %>
-    </h2>
-
-    <p>
-      <%= t '.section_1.text' %>
-    </p>
-
-    <div class="govuk-grid-row">
-      <%= render partial: 'shared/forms/next_action_buttons_form',
-                 locals: {
-                   url: submit_providers_legal_aid_application_about_the_financial_assessment_path,
-                   method: :post,
-                   show_draft: true
-                 } %>
-    </div>
+  <div class="govuk-grid-row">
+    <%= render partial: 'shared/forms/next_action_buttons_form',
+               locals: {
+                 url: submit_providers_legal_aid_application_about_the_financial_assessment_path,
+                 method: :post,
+                 show_draft: true
+               } %>
   </div>
-</div>
+<% end %>

@@ -4,19 +4,12 @@
     #search-field { display: none; }
   </style>
 </noscript>
-<%
-  content_for(:navigation) do
-    back_label = @legal_aid_application.checking_answers? ? 'generic.back' : 'generic.home'
-    provider_back_link text: t(back_label)
-  end
-%>
-<% content_for(:page_title) { t('.heading_1') } %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-  </div>
-</div>
+<% back_label = @legal_aid_application.checking_answers? ? 'generic.back' : 'generic.home' %>
+<%= provider_page(
+      page_title: t('.heading_1'),
+      back_link: { text: t(back_label) }
+    ) %>
 
 <div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0">
   <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
