@@ -24,6 +24,9 @@ module GovukElementsFormBuilder
     # Use the "hint: nil" option to not display the hint message.
     # e.g., <%= form.govuk_text_field :name, hint: nil %>
     #
+    # Use the "label: nil" option to not display a label.
+    # e.g., <%= form.govuk_text_field :name, label: nil, hint: 'hint text' %>
+    #
     # Use the :input_prefix to insert a character inside and at the beginning of the input field.
     # e.g., <%= form.govuk_text_field :property_value, input_prefix: '$' %>
     #
@@ -166,7 +169,7 @@ module GovukElementsFormBuilder
       classes = ['govuk-form-group']
       classes << 'govuk-form-group--error' if error?(attribute, options)
       content_tag :div, class: classes.join(' ') do
-        label = label(attribute, options[:label], class: 'govuk-label', for: attribute)
+        label = options.key?(:label) && options[:label].nil? ? '' : label(attribute, options[:label], class: 'govuk-label', for: attribute)
         concat_tags(label, hint_and_error_tags(attribute, options), yield)
       end
     end

@@ -77,6 +77,7 @@ Rails.application.routes.draw do
       end
       resource :client_received_legal_help, only: %i[show update]
       resource :proceedings_before_the_court, only: %i[show update]
+      resource :estimated_legal_costs, only: %i[show update]
     end
   end
 end

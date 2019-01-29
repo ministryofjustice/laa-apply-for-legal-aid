@@ -1,3 +1,4 @@
+# rubocop:disable ModuleLength
 module Providers
   # Keys are controller names (as returned by `controller_name.to_sym`)
   STEPS = {
@@ -105,6 +106,14 @@ module Providers
       # TODO: forward TBD, client_received_legal_helps is just a placeholder
       forward: :client_received_legal_helps,
       back: :client_received_legal_helps
+    },
+    estimated_legal_costs: {
+      path: :providers_legal_aid_application_estimated_legal_costs_path,
+      # TODO: fix forward when next page is implemented
+      forward: :estimated_legal_costs,
+      # TODO: fix back when back page is implemented
+      back: :estimated_legal_costs
     }
   }.freeze
 end
+# rubocop:enable ModuleLength
