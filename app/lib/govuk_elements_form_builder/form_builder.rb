@@ -176,6 +176,15 @@ module GovukElementsFormBuilder
       end
     end
 
+    def label_from_options(attribute, options)
+      return '' if options.key?(:label) && options[:label].nil?
+
+      label_options = text_hash(options.fetch(:label, {}))
+      label_classes = ['govuk-label']
+      label_classes << "govuk-label--#{label_options[:size]}" if label_options[:size].present?
+      label(attribute, label_options[:text], class: label_classes.join(' '), for: attribute)
+    end
+
     def fieldset(attribute, options)
       content_tag(:fieldset, class: 'govuk-fieldset', 'aria-describedby': aria_describedby(attribute, options)) do
         legend_tag = options[:title] ? fieldset_legend(options[:title]) : nil
@@ -196,14 +205,6 @@ module GovukElementsFormBuilder
       content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}") do
         content_tag(:h1, title[:text], class: 'govuk-fieldset__heading')
       end
-    end
-
-    def label_from_options(attribute, options)
-      return '' if options.key?(:label) && options[:label].nil?
-      label_options = text_hash(options.fetch(:label, {}))
-      label_classes = ['govuk-label']
-      label_classes << "govuk-label--#{label_options[:size]}" if label_options[:size].present?
-      label(attribute, label_options[:text], class: label_classes.join(' '), for: attribute)
     end
 
     def text_hash(text)

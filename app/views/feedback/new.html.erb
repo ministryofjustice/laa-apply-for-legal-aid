@@ -1,4 +1,4 @@
-<%= provider_basic_page page_title: t('.title'), back_link: { path: back_path } do %>
+<%= page_template page_title: t('.title'), back_link: back_link(path: back_path) do %>
 
     <%= form_for(@feedback, url: feedback_index_path) do |form| %>
 
