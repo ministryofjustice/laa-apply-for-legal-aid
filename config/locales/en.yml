@@ -431,14 +431,16 @@ en:
         use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
         use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
         apply_civil_legal_list:
-          item_1: public family law
-          item_2: domestic violence or abuse
+          list: |
+            public family law
+            domestic violence or abuse
         use_ccms_list:
           heading: Who can use this service?
           title:  "You can only use this service if your client:"
-          item_1: has a National Insurance number
-          item_2: uses online banking
-          item_3: is single, does not have an income, or their partner is the opponent in the case
+          list: |
+            has a National Insurance number
+            uses online banking
+            is single, does not have an income, or their partner is the opponent in the case
         related_content_list:
           title: Related content
           item_1: Legal aid
@@ -559,10 +561,11 @@ en:
         share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
         list:
           title: How we use your client's details
-          item_1: We download 3 months of bank transactions
-          item_2: We only use information for the legal aid application
-          item_3: We automatically end the bank connection after 1 hour
-          item_4: We do not save online banking details
+          list: |
+            We download 3 months of bank transactions
+            We only use information for the legal aid application
+            We automatically end the bank connection after 1 hour
+            We do not save online banking details
         section_1:
           heading: Give your client access to the financial assessment
           text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
@@ -625,9 +628,10 @@ en:
         field_set_header: Do you agree to share your bank transactions with us?
         body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
         list_heading: Find out how we use and store your personal data
-        list_1: We do not save your online banking username and password
-        list_2: We do not have any ongoing access to your bank accounts
-        list_3: We only use your details to assess your eligibility for legal aid
+        list: |
+          We do not save your online banking username and password
+          We do not have any ongoing access to your bank accounts
+          We only use your details to assess your eligibility for legal aid
     percentage_homes:
       show:
         h1-heading: What % share of your home do you legally own?
@@ -680,9 +684,10 @@ en:
         para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
         list:
           title: How we connect to your online banking
-          item_1: Sign in and authorise access to your accounts
-          item_2: We download 3 months of transactions
-          item_3: Your online banking details are not saved
+          list: |
+            Sign in and authorise access to your accounts
+            We download 3 months of transactions
+            Your online banking details are not saved
     legal_aid_applications:
         index:
           heading_1: Complete your legal aid financial assessment
@@ -691,8 +696,8 @@ en:
           financial_situation_para: Find out if you can get legal aid because of your financial situation.
           legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
           what_you_will_need: What you will need
-          list:
-            item_1: your online banking log in
+          list: |
+            your online banking log in
     check_answers:
       index:
         h1-heading: Check your answers

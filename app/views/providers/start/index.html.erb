@@ -2,21 +2,17 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t('.apply_for_legal_aid_heading') %></h1>
     <p class="govuk-body"><%= t('.apply_civil_legal_para') %></p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li><%= t('.apply_civil_legal_list.item_1') %></li>
-      <li><%= t('.apply_civil_legal_list.item_2') %></li>
-    </ul>
+
+    <%= render partial: 'shared/forms/list_items', locals: { translation_path: 'providers.start.index.apply_civil_legal_list' } %>
 
     <p class="govuk-body"><%= t('.use_ccms_para') %></p>
 
     <h2 class="govuk-heading-m"><%= t('.use_ccms_list.heading') %></h2>
 
     <p class="govuk-body"><%= t('.use_ccms_list.title') %></p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li><%= t('.use_ccms_list.item_1') %></li>
-      <li><%= t('.use_ccms_list.item_2') %></li>
-      <li><%= t('.use_ccms_list.item_3') %></li>
-    </ul>
+
+    <%= render partial: 'shared/forms/list_items', locals: { translation_path: 'providers.start.index.use_ccms_list' } %>
+
     <p class="govuk-body"><%= t('.use_ccms_upload_document') %></p>
 
     <%= link_to t('generic.start'), providers_legal_aid_applications_path, class: 'govuk-button govuk-button--start', id: 'start' %>

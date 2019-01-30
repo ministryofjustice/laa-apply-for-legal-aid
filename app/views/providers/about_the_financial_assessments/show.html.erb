@@ -6,12 +6,7 @@
   <h2 class="govuk-heading-m"><%= t '.list.title' %></h2>
 
   <p class="govuk-body">
-    <ul class="govuk-list govuk-list--bullet">
-      <li><%= t '.list.item_1' %></li>
-      <li><%= t '.list.item_2' %></li>
-      <li><%= t '.list.item_3' %></li>
-      <li><%= t '.list.item_4' %></li>
-    </ul>
+    <%= render partial: 'shared/forms/list_items', locals: { translation_path: 'providers.about_the_financial_assessments.show.list' } %>
   </p>
 
   <h2 class="govuk-heading-m">
