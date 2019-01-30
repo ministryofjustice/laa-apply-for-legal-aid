@@ -5,7 +5,7 @@ module Providers
     include Steppable
 
     def index
-      @proceeding = legal_aid_application.proceeding_types.first
+      @proceeding_types = legal_aid_application.proceeding_types
       @applicant = legal_aid_application.applicant
       @address = @applicant.addresses.first
       legal_aid_application.check_your_answers! unless legal_aid_application.checking_answers?

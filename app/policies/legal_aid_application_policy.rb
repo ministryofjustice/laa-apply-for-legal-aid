@@ -11,6 +11,14 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     my_record?
   end
 
+  def destroy?
+    my_record?
+  end
+
+  def create?
+    my_record?
+  end
+
   private
 
   def my_record?

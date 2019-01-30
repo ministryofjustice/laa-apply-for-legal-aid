@@ -5,23 +5,33 @@
   </style>
 </noscript>
 
-<%= provider_page(page_title: t('.heading_1')) %>
+<%= provider_page(
+      page_title: t('.heading_1'),
+      show_errors_for: @legal_aid_application
+    ) %>
 
-<% if @legal_aid_application %>
+<% if @legal_aid_application.proceeding_types.present? %>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-heading-m">
         <%= t('.you_have_selected', count: pluralize(@legal_aid_application.proceeding_types.size, t('.proceeding'))) %>
       </h2>
+      <div class="selected-proceeding-types">
+        <%= render partial: 'proceeding_type', collection: @legal_aid_application.proceeding_types %>
+      </div>
     </div>
   </div>
 
-  <%= render partial: 'proceeding_type', collection: @legal_aid_application.proceeding_types %>
-
+  <div class="govuk-!-padding-bottom-7"></div>
 <% end %>
 
-<div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0">
+<%
+  error_message = @legal_aid_application.errors[:'proceeding-search-input']&.to_sentence
+  form_group_error_class = error_message.present? ? 'govuk-form-group--error' : ''
+  input_error = error_message.present? ? 'govuk-input--error' : ''
+%>
+<div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0 <%= form_group_error_class %>">
   <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
     <h2 class="govuk-heading-m govuk-!-margin-bottom-0"><%= t '.heading_2' %></h2>
       <span class="govuk-hint govuk-!-margin-top-0">
@@ -31,7 +41,8 @@
 
   <div class="govuk-grid-row search-field govuk-!-margin-top-0">
     <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
-      <input class="govuk-input" id="proceeding-search-input" name="proceeding-search-input" type="text" />
+      <%= govuk_error_message(@legal_aid_application.errors[:'proceeding-search-input']&.to_sentence) %>
+      <input class="govuk-input <%= input_error %>" id="proceeding-search-input" name="proceeding-search-input" type="text" />
     </div>
 
     <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
@@ -48,5 +59,16 @@
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-body"><%= t '.no_results' %></span>
     </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row govuk-!-margin-top-5">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render(
+          'shared/forms/next_action_buttons_form',
+          url: providers_legal_aid_application_proceedings_types_path,
+          method: :post,
+          show_draft: true
+        ) %>
   </div>
 </div>

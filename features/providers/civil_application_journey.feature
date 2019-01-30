@@ -51,6 +51,55 @@ Feature: Civil application journeys
     Then the results section is empty
     Then proceeding search field is empty
 
+  @javascript @vcr
+  Scenario: I am able to select multiple proceeding types
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I fill 'email' with 'test@test.com'
+    Then I click "Continue"
+    Then I am on the postcode entry page
+    Then I enter a postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click "Continue"
+    Then I expect to see 0 proceeding types selected
+    And I search for proceeding 'app'
+    Then proceeding suggestions has results
+    When I select proceeding type 3
+    Then I expect to see 1 proceeding types selected
+    And I search for proceeding 'child'
+    When I select proceeding type 1
+    Then I expect to see 2 proceeding types selected
+    When I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+
+  @javascript @vcr
+  Scenario: I am able to select and delete proceeding types
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I fill 'email' with 'test@test.com'
+    Then I click "Continue"
+    Then I am on the postcode entry page
+    Then I enter a postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click "Continue"
+    And I search for proceeding 'app'
+    Then proceeding suggestions has results
+    When I select proceeding type 2
+    Then I expect to see 1 proceeding types selected
+    When I click the first 'Remove' in selected proceeding types
+    Then I expect to see 0 proceeding types selected
+    And I search for proceeding 'child'
+    When I select proceeding type 4
+    Then I expect to see 1 proceeding types selected
+    When I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+
   @javascript
   Scenario: I complete each step up to the applicant page
     # testing shared steps: Given I start the journey as far as the applicant page
@@ -75,7 +124,7 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -104,7 +153,7 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -131,7 +180,7 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -152,7 +201,7 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -180,7 +229,7 @@ Feature: Civil application journeys
     And I click Check Your Answers Change link for 'Proceeding Type'
     And I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr

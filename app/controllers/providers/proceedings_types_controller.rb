@@ -3,7 +3,6 @@ module Providers
     include ApplicationDependable
     include Steppable
 
-
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
       authorize legal_aid_application
@@ -13,10 +12,11 @@ module Providers
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_types
     def create
+      authorize legal_aid_application
       if legal_aid_application.proceeding_types.present?
         redirect_to next_step_url
       else
-        legal_aid_application.errors.add(base: 'Select one')
+        legal_aid_application.errors.add(:'proceeding-search-input', t('.search_and_select'))
         proceeding_types
         render :index
       end
@@ -31,11 +31,10 @@ module Providers
 
     # PATCH /provider/applications/:legal_aid_application_id/proceedings_types/:id
     def destroy
+      authorize legal_aid_application
       legal_aid_application.proceeding_types.delete(proceeding_type)
       redirect_to providers_legal_aid_application_proceedings_types_path(legal_aid_application)
     end
-
-
 
     private
 

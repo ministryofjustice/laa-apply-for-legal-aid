@@ -28,7 +28,7 @@ module Providers
       back: :address_lookups
     },
     proceedings_types: {
-      path: :providers_legal_aid_application_proceedings_type_path,
+      path: :providers_legal_aid_application_proceedings_types_path,
       forward: :check_provider_answers,
       back: :addresses
       # Back determined by controller action logic

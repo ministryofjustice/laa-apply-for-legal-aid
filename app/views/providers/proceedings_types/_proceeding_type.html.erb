@@ -1,4 +1,4 @@
-<div class="govuk-grid-row">
+<div class="govuk-grid-row selected-proceeding-type">
   <div class="govuk-grid-column-two-thirds text-column">
     <h3 class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4"><%= proceeding_type.meaning %></h3>
     <span class="govuk-caption-m">
@@ -6,18 +6,20 @@
     </span>
   </div>
   <div class="govuk-grid-column-one-third control-column">
-    <%= link_to(
-          t('generic.remove'),
-          providers_legal_aid_application_proceedings_type_path(
-            legal_aid_application_id: @legal_aid_application,
-            id: proceeding_type
-          ),
-          method: :delete,
-        ) %>
+    <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4">
+      <%= link_to(
+            t('generic.remove'),
+            providers_legal_aid_application_proceedings_type_path(
+              legal_aid_application_id: @legal_aid_application,
+              id: proceeding_type
+            ),
+            method: :delete
+          ) %>
+    </p>
   </div>
 </div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full text-column">
-    <hr class="govuk-section-break govuk-section-break--visible govuk-!-padding-top-1 govuk-!-padding-bottom-1">
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-padding-top-1 govuk-!-padding-bottom-1" />
   </div>
 </div>
