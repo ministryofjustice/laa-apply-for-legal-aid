@@ -14,9 +14,35 @@ $govuk-fonts-path: "/assets/";
     font-weight: bold;
   }
 
+  .align_right {
+    @include govuk-media-query($from: desktop) {
+      text-align: right;
+    }
+  }
+}
+
+.app-check-your-answers--long {
+  @include govuk-font(19);
+  @include govuk-responsive-margin(3, "bottom");
+  border-top: 1px solid $govuk-border-colour;
+  @include govuk-responsive-padding(3, "top");
+
+  .govuk-grid-row div:first-child {
+    font-weight: bold;
+    width: 50%;
+  }
+
+  .govuk-grid-row div:nth-child(2) {
+    width: 25%;
+  }
+
+  .govuk-grid-row div:last-child {
+    width: 25%;
+  }
 
   .align_right {
     @include govuk-media-query($from: desktop) {
+      width: 100%;
       text-align: right;
     }
   }
