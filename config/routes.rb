@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
+      resource :statement_of_case, only: %i[show update]
       resources :check_benefits, only: [:index]
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resource :merits_declaration, only: %i[show update]

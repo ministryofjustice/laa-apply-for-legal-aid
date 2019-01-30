@@ -13,12 +13,6 @@ module Providers
       @form = MeritsAssessments::ProceedingsBeforeTheCourtForm.new(proceedings_before_the_court_params.merge(model: merits_assessment))
 
       if @form.save
-        # TODO: remove this condition once next step is implemented
-        if params.key?(:continue_button)
-          # continue_or_save_draft(continue_url: next_url)
-          render plain: 'Placeholder: Statement of case'
-          return
-        end
         continue_or_save_draft
       else
         render :show
