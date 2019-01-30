@@ -6,6 +6,7 @@ module Providers
     # GET /provider/applications/:legal_aid_application_id/proceedings_type
     def show
       authorize @legal_aid_application
+      @back_step_url = back_step_path unless legal_aid_application.checking_answers?
       proceeding_types
     end
 
@@ -32,6 +33,12 @@ module Providers
 
     def proceeding_types
       @proceeding_types ||= ProceedingType.all
+    end
+
+    def back_step_path
+      return providers_legal_aid_application_address_selection_path if applicant.address&.lookup_used?
+
+      providers_legal_aid_application_address_path
     end
   end
 end

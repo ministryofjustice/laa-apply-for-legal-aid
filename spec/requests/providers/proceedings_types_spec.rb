@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'providers legal aid application proceedings type requests', type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/proceedings_type' do
@@ -20,6 +20,22 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
+      end
+
+      describe 'back link' do
+        context "the applicant's address used s address lookup service" do
+          let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address_lookup }
+
+          it 'should redirect to the address lookup page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_address_selection_path(legal_aid_application))
+          end
+        end
+
+        context "the applicant's address used manual entry" do
+          it 'should redirect to manual address pagelookup page' do
+            expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application))
+          end
+        end
       end
     end
   end
@@ -43,7 +59,7 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
 
       it 'redirects successfully to the next submission step' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
       end
 
       it 'associates proceeding type with legal aid application' do

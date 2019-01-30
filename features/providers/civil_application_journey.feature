@@ -5,29 +5,46 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
-    And I search for proceeding 'app'
-    Then proceeding suggestions has results
-    When I click clear search
-    Then the results section is empty
-    Then proceeding search field is empty
     And I click link "Apply for Legal Aid"
     Then I am on the legal aid applications
 
-  @javascript
-  Scenario: No results returned is seen on screen when invalid search entered
+  @javascript @vcr
+  Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
+    Then I should be on the Applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I fill 'email' with 'test@test.com'
+    Then I click "Continue"
+    Then I am on the postcode entry page
+    Then I enter a postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click "Continue"
     When the search for "cakes" is not successful
     Then the result list on page returns a "No results found." message
 
-  @javascript
+  @javascript @vcr
   Scenario: I am able to clear proceeding on the proceeding page
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
+    Then I should be on the Applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I fill 'email' with 'test@test.com'
+    Then I click "Continue"
+    Then I am on the postcode entry page
+    Then I enter a postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I click "Continue"
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I click clear search
@@ -41,9 +58,6 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click "Start now"
-    And I search for proceeding 'Application for a care order'
-    Then proceeding suggestions has results
-    Then I select and continue
     Then I should be on the Applicant page
 
   @javascript @vcr
@@ -59,6 +73,9 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
+    Then I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -85,6 +102,9 @@ Feature: Civil application journeys
     Then I enter city 'London'
     Then I enter postcode 'SW1H 9AJ'
     Then I click "Continue"
+    Then I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -109,6 +129,9 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
+    Then I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -127,6 +150,9 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click "Continue"
+    Then I search for proceeding 'Application for a care order'
+    Then proceeding suggestions has results
+    Then I select and continue
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page

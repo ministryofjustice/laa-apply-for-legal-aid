@@ -4,18 +4,13 @@ module Providers
   STEPS = {
     legal_aid_applications: {
       path: :providers_legal_aid_applications_path,
-      forward: :proceedings_types
+      forward: :applicants
       # No back: start of journey
-    },
-    proceedings_types: {
-      path: :providers_legal_aid_application_proceedings_type_path,
-      forward: :applicants,
-      back: :legal_aid_applications
     },
     applicants: {
       path: :providers_legal_aid_application_applicant_path,
       forward: :address_lookups,
-      back: :proceedings_types
+      back: :legal_aid_applications
     },
     address_lookups: {
       path: :providers_legal_aid_application_address_lookup_path,
@@ -24,18 +19,24 @@ module Providers
     },
     address_selections: {
       path: :providers_legal_aid_application_address_selection_path,
-      forward: :check_provider_answers,
+      forward: :proceedings_types,
       back: :address_lookups
     },
     addresses: {
       path: :providers_legal_aid_application_address_path,
-      forward: :check_provider_answers,
+      forward: :proceedings_types,
       back: :address_lookups
+    },
+    proceedings_types: {
+      path: :providers_legal_aid_application_proceedings_type_path,
+      forward: :check_provider_answers,
+      back: :addresses
+      # Back determined by controller action logic
     },
     check_provider_answers: {
       path: :providers_legal_aid_application_check_provider_answers_path,
-      forward: :check_benefits
-      # Back determined by controller action logic
+      forward: :check_benefits,
+      back: :proceedings_types
     },
     check_passported_answers: {
       path: :providers_legal_aid_application_check_passported_answers_path,

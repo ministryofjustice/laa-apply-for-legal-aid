@@ -519,10 +519,10 @@ en:
     check_provider_answers:
       index:
         title: Check your answers
-        section_1:
+        section_proceeding:
           heading: Scope of legal aid
           proceeding: Proceeding
-        section_2:
+        section_client:
           heading: Client details
           first_name: First name
           last_name: Last name

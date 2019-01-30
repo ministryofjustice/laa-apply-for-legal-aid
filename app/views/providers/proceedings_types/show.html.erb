@@ -5,11 +5,7 @@
   </style>
 </noscript>
 
-<% back_label = @legal_aid_application.checking_answers? ? 'generic.back' : 'generic.home' %>
-<%= provider_page(
-      page_title: t('.heading_1'),
-      back_link: { text: t(back_label) }
-    ) %>
+<%= provider_page(page_title: t('.heading_1')) %>
 
 <div id="search-field" class="govuk-form-group govuk-!-margin-top-0 govuk-!-margin-bottom-0">
   <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
