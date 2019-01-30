@@ -166,11 +166,11 @@ ActiveRecord::Schema.define(version: 2019_01_29_120515) do
     t.uuid "legal_aid_application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "client_merits_declaration"
     t.boolean "client_received_legal_help"
     t.text "application_purpose"
     t.boolean "proceedings_before_the_court"
     t.text "details_of_proceedings_before_the_court"
+    t.boolean "client_merits_declaration"
     t.decimal "estimated_legal_cost", precision: 10, scale: 2
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
   end
