@@ -9,7 +9,7 @@
 # will return the translation for the key
 # 'en.model_attribute_translations.legal_aid_application.state.provider_submitted'
 #
-# Enum translations should be stored in /config/locales/model_enum_translations.default.yml
+# Enum translations should be stored in /config/locales/en/model_enum_translations.yml
 #
 module TranslatableModelAttribute
   def enum_t(attribute)
