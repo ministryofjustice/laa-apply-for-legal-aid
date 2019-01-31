@@ -1,0 +1,23 @@
+---
+en:
+  generic:
+    address:
+      postcode: Postcode
+      postcode_label: postcode
+    back: Back
+    change: Change
+    continue: Continue
+    errors:
+      problem_text: There is a problem
+      yes_or_no: You must select either Yes or No
+    home: Home
+    information: Information
+    'no': 'No'
+    save_as_draft: Save as draft
+    start: Start
+    start_now: Start now
+    submit: Submit
+    total: Total
+    undefined: Undefined
+    view: View
+    'yes': 'Yes'

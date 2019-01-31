@@ -1,0 +1,115 @@
+---
+en:
+  citizens:
+    accounts:
+      accounts:
+        account_holder_address_heading: Account holder address
+        account_holder_name_heading: Account holder name
+        account_number_heading: Account Number
+        balance_heading: Balance
+        balance_text: We will show your statement from the last 30 days so you can tell us more about your financial situation.
+        heading_1: You have successfully shared your account information
+        intro_text: We have downloaded 3 months of your transaction history.
+        sort_code_heading: Sort Code
+        type_heading: Type
+        your_accounts: Your account(s)
+      index:
+        retrieving_transactions: Retrieving bank transactions
+    additional_accounts:
+      index:
+        field_set_header: Do you have accounts with other banks?
+        hint: Share details of any accounts you have with another bank or building society
+      new:
+        field_set_header: Do you have online access to your accounts with other banks?
+        hint: If you do not, you will need to provide paper evidence for these accounts.
+    check_answers:
+      index:
+        assets:
+          heading: Property, savings and other assets
+          other_assets: Other assets
+          outstanding_mortgage: Outstanding mortgage amount
+          own_home: Own the home you live in
+          percentage_home: Percentage owned
+          property_value: Property value
+          restrictions: Do any restrictions apply?
+          savings_and_investments: Savings and investments
+          shared_ownership: Owned with anyone else
+        h1-heading: Check your answers
+        submit:
+          heading: Submit your details
+          text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+    consents:
+      show:
+        body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
+        field_set_header: Do you agree to share your bank transactions with us?
+        list_1: We do not save your online banking username and password
+        list_2: We do not have any ongoing access to your bank accounts
+        list_3: We only use your details to assess your eligibility for legal aid
+        list_heading: Find out how we use and store your personal data
+        open_banking_consent:
+          label:
+            html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
+    information:
+      show:
+        heading_1: Give one-time access to your bank accounts
+        list:
+          item_1: Sign in and authorise access to your accounts
+          item_2: We download 3 months of transactions
+          item_3: Your online banking details are not saved
+          title: How we connect to your online banking
+        para_1: You will be redirected to a secure service to sign in to your online banking.
+        para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
+    legal_aid_applications:
+      index:
+        case_reference: 'Case reference:'
+        financial_situation_para: Find out if you can get legal aid because of your financial situation.
+        heading_1: Complete your legal aid financial assessment
+        legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
+        list:
+          item_1: your online banking log in
+        name: 'Name:'
+        what_you_will_need: What you will need
+    other_assets:
+      show:
+        h1-heading: Do you have any of the following?
+    outstanding_mortgages:
+      field_set_header: What is the outstanding mortgage on your home?
+      hint: Check the statement from your mortgage provider or lender
+      outstanding_mortgage_amount: Enter the outstanding mortgage amount
+      show:
+        h1-heading: What is the outstanding mortgage?
+    own_homes:
+      show:
+        h1-heading: Do you own the home that you live in?
+    percentage_homes:
+      show:
+        h1-heading: What % share of your home do you legally own?
+    property_values:
+      form:
+        citizens:
+          property_values:
+            hint:
+              property_value: You can use property websites to find the estimated value.
+            property_value: Enter the estimated value of your home
+        providers:
+          property_values:
+            hint:
+              property_value: You can use property websites to find the estimated value.
+            property_value: Enter the estimated value of your home
+      show:
+        h1-heading: How much is your home worth?
+    restrictions:
+      index:
+        h1-heading: Do any restrictions apply to your property, savings or assets?
+    savings_and_investments:
+      accounts_summary:
+        col_account_number: Account number
+        col_amount: Amount
+        col_sort_code: Sort code
+        col_type: Type
+        intro_text: 'You have already told us you have the following online accounts:'
+      show:
+        h1-heading: Do you have any savings and investments?
+    shared_ownerships:
+      show:
+        heading_1: Do you own your home with anyone else?

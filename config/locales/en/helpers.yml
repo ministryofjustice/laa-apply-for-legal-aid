@@ -1,0 +1,36 @@
+---
+en:
+  helpers:
+    hint:
+      address_lookup:
+        postcode: Postcode must be a valid UK postcode.
+      applicant:
+        email: We'll use this to send your client a secure link
+        national_insurance_number: For example, QQ 12 34 56 C
+      legal_aid_application:
+        outstanding_mortgage_amount:
+          citizen: Check the statement from your mortgage provider or lender
+          provider: ''
+        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
+        property_value: You can use property websites to find the estimated value.
+      merits_assessment:
+        estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
+    label:
+      applicant:
+        uses_online_banking:
+          'false': 'No'
+          'true': 'Yes'
+      merits_assessment:
+        application_purpose: Please give details of why your client is applying for legal aid
+        client_received_legal_help:
+          'false': 'No'
+          'true': 'Yes'
+        details_of_proceedings_before_the_court: Please give details.
+        proceedings_before_the_court:
+          'false': 'No'
+          'true': 'Yes'
+      other_assets_declaration:
+        check_box_second_home: Second property or holiday home
+        second_home_mortgage: Enter outstanding mortgage amount
+        second_home_percentage: Enter percentage share you legally own
+        second_home_value: Enter estimated value

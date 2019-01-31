@@ -1,0 +1,18 @@
+---
+en:
+  layouts:
+    application:
+      footer:
+        contact: Contact
+        cookies: Cookies
+        copyright: Crown copyright
+        digital_services: MOJ Digital Services
+        feedback: Feedback
+        open_gov_link_text: Open Government Licence v3.0
+        span_text_1: All content is available under the
+        span_text_2: except where otherwise stated
+        support: Support Links
+        terms: Terms and conditions
+      header:
+        gov_uk_link_title: Go to the GOV.UK homepage
+        title: Apply for Legal Aid

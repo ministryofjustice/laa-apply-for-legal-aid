@@ -1,0 +1,173 @@
+---
+en:
+  providers:
+    about_the_financial_assessments:
+      show:
+        list:
+          item_1: We download 3 months of bank transactions
+          item_2: We only use information for the legal aid application
+          item_3: We automatically end the bank connection after 1 hour
+          item_4: We do not save online banking details
+          title: How we use your client's details
+        section_1:
+          heading: Give your client access to the financial assessment
+          text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
+        secure_link_para: Send an email to your client with a secure link to the online assessment.
+        share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
+        sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
+        title: About the online financial assessment
+      submit:
+        application_created: Application created
+        back_button: Back to your applications
+        happen_next_heading: What happens next
+        happen_next_text: You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid.
+        secure_link_heading: We have sent your client a secure link
+        secure_link_text: Your client can use the link to complete the online financial assessment from home or another location.
+        sub_title: Your case reference number is
+    address_selections:
+      show:
+        link_text: I can't find the address in the list
+        select_address_label: Select an address
+    applicants:
+      show:
+        page_title: Enter your client's details
+    check_benefits:
+      index:
+        heading_1: Your client's tax and benefits status
+        heading_2: What happens next
+        negative_result:
+          body: Your client does not receive benefits that qualify for legal aid.
+          next: Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.
+          title: must complete a financial assessment
+        positive_result:
+          body: Your client receives benefits that qualify for legal aid.
+          next: Your client will have to declare whether they have any savings, own a home or anything else that can pay for legal aid.
+          title: receives a qualifying benefit
+    check_passported_answers:
+      show:
+        assets:
+          heading: Property, savings and other assets
+        h1-heading: Check your answers for passported client
+    check_provider_answers:
+      index:
+        section_client:
+          address: Correspondence address
+          dob: Date of birth
+          email: Email address
+          first_name: First name
+          heading: Client details
+          last_name: Last name
+          nino: National Insurance number
+        section_proceeding:
+          heading: Scope of legal aid
+          proceeding: Proceeding
+        title: Check your answers
+    client_received_legal_helps:
+      show:
+        h1-heading: Has your client received legal help for the matter?
+    estimated_legal_costs:
+      show:
+        h1-heading: What are the estimated legal costs of doing the work?
+    legal_aid_applications:
+      index:
+        basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
+        heading_1: Your legal aid applications
+        make_new_application: Make a new application
+      legal_aid_applications:
+        applicant_name: Client's name
+        application_ref: Case reference
+        created_at: Date started
+        current_application: Current applications
+        status: Status
+    merits_declarations:
+      show:
+        h1-heading: Client declaration
+        heading_1: Client declaration
+        leaflet_link: The Legal Aid Agency’s leaflet about Legal Aid ( ‘Paying for your Legal Aid’ leaflet available at <a href="https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters">https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters</a>
+        list: |
+          Legal aid is not always free.
+          The Legal Aid Agency may register an interest-bearing charge against my property.
+          I may have to pay back all or part of my legal costs at the end of my case.
+          The more work my solicitor does, the more I may have to pay back.
+        text_1: |
+          Please ask your client or their representative to review the following declaration(s). Should they have any queries regarding the declaration(s) they should discuss this with you. The declaration(s), upon submission of the application, must be printed and signed by the relevant person(s). They must be retained on the client’s file.
+
+          My solicitors have given me to keep:
+        text_2: |
+          My solicitors have explained the LAA Statutory Charge to me. In particular, my solicitors have advised that if I recover or retain any property or asset, the Statutory Charge may arise, which could be payable immediately or postponed and registered as an interest - bearing charge on my home at the Legal Aid Agency’s discretion.
+
+          I understand:
+        text_3: |
+          As far as I know, all the information I have given is true and I have not withheld any relevant information. I understand that if I knowingly give false information or withhold relevant information or fail to disclose any change in circumstances for the duration of my funding that my Legal Aid may be stopped, and criminal proceedings may be taken against me.
+
+          I give my permission for the Legal Aid Agency to make any enquiries of third parties and I authorise those third parties to give any information necessary to deal with this.
+
+          I understand if false or inaccurate information is provided and fraud is identified, details will be passed to fraud prevention agencies to prevent fraud and money laundering. For further details explaining how the information held by fraud prevention agencies may be used contact the Counter Fraud and Investigations team on 0203 334 5588.
+    online_bankings:
+      show:
+        heading: Does your client use online banking?
+    other_assets:
+      show:
+        h1-heading: Does your client have any of the following?
+    outstanding_mortgages:
+      field_set_header: What is the outstanding mortgage on your client's home?
+      outstanding_mortgage_amount: Enter the outstanding mortgage amount
+      show:
+        h1-heading: What is the outstanding mortgage?
+    own_homes:
+      show:
+        h1-heading: Does your client own the home that they live in?
+    percentage_homes:
+      show:
+        h1-heading: What % share of their home does your client legally own?
+    proceedings_before_the_courts:
+      show:
+        h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
+    proceedings_types:
+      show:
+        clear_search: Clear search
+        heading_1: What does your client want legal aid for?
+        heading_2: Search for legal proceedings
+        no_results: No results found.
+        search_help_example: For example by category of law, matter type or legal proceeding.
+    property_values:
+      hint:
+        property_value: You can use property websites to find the estimated value.
+      property_value: Enter the value of your client's home
+      show:
+        h1-heading: How much is your client's home worth?
+    providers:
+      show:
+        account_number: Account number
+        email: Email address
+        name: Name
+        page_title: Your profile
+        role: Role
+    restrictions:
+      index:
+        h1-heading: Do any restrictions apply to your client's property, savings or assets?
+    savings_and_investments:
+      show:
+        h1-heading: Does your client have any savings and investments?
+    shared_ownerships:
+      show:
+        heading_1: Does your client own their home with anyone else?
+    start:
+      index:
+        apply_civil_legal_list:
+          item_1: public family law
+          item_2: domestic violence or abuse
+        apply_civil_legal_para: 'Use this service to apply for civil legal aid for cases involving:'
+        apply_for_legal_aid_heading: Apply for Legal Aid
+        related_content_list:
+          item_1: Legal aid
+          item_2: More
+          title: Related content
+        use_ccms_list:
+          heading: Who can use this service?
+          item_1: has a National Insurance number
+          item_2: uses online banking
+          item_3: is single, does not have an income, or their partner is the opponent in the case
+          title: 'You can only use this service if your client:'
+        use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
+        use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
