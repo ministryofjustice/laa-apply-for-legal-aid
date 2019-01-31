@@ -53,6 +53,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I am able to select multiple proceeding types
+    Given I skip the rest of this scenario until multiple proceeding types are supported
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
