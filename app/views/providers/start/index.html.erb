@@ -3,7 +3,7 @@
     <h1 class="govuk-heading-xl"><%= t('.apply_for_legal_aid_heading') %></h1>
     <p class="govuk-body"><%= t('.apply_civil_legal_para') %></p>
 
-    <%= render partial: 'shared/forms/list_items', locals: { translation_path: 'providers.start.index.apply_civil_legal_list' } %>
+    <%= list_from_translation_path 'providers.start.index.apply_civil_legal_list' %>
 
     <p class="govuk-body"><%= t('.use_ccms_para') %></p>
 
@@ -11,7 +11,7 @@
 
     <p class="govuk-body"><%= t('.use_ccms_list.title') %></p>
 
-    <%= render partial: 'shared/forms/list_items', locals: { translation_path: 'providers.start.index.use_ccms_list' } %>
+    <%= list_from_translation_path 'providers.start.index.use_ccms_list' %>
 
     <p class="govuk-body"><%= t('.use_ccms_upload_document') %></p>
 

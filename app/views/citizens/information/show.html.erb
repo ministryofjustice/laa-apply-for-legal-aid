@@ -4,7 +4,7 @@
   <h2 class="govuk-heading-m"><%= t('.list.title') %></h2>
 
   <p class="govuk-body">
-    <%= render partial: 'shared/forms/list_items', locals: { translation_path: 'citizens.information.show.list' } %>
+    <%= list_from_translation_path 'citizens.information.show.list' %>
   </p>
 
   <%= link_to t('generic.continue'), citizens_consent_path, class: 'govuk-button govuk-button', id: 'continue' %>
