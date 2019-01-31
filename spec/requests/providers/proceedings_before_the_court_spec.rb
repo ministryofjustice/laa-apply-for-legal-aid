@@ -61,7 +61,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           expect(legal_aid_application.merits_assessment.reload.details_of_proceedings_before_the_court).to eq(details_of_proceedings_before_the_court)
         end
 
-        xit 'redirects to the next page' do
+        it 'redirects to the next page' do
           expect(response).to redirect_to providers_legal_aid_application_statement_of_case_path(legal_aid_application)
         end
       end
