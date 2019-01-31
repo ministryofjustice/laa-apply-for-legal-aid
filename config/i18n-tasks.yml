@@ -33,7 +33,7 @@ data:
             forms,
             generic,
             helpers,
-            layouts, 
+            layouts,
             model_enum_translations,
             providers,
             shared}.*', 'config/locales/%{locale}/\1.yml']
