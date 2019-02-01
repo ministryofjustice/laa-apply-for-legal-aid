@@ -635,20 +635,6 @@ en:
         bullet-6: |
           Details of the most recent incident, if a warning letter has been sent,
           the police have been notified or there are any criminal charges.
-    check_merits_answers:
-      show:
-        h1-heading: Check your answers
-        h2-heading: Merits assessment
-        items:
-          client_received_legal_help: Client received legal help
-          proceedings_currently_before_court: Proceedings currently before court
-          statement_of_case: Statement of case
-          estimated_legal_costs: Estimated legal costs
-          prospects_of_success: Prospects of success
-          client_declaration: Client declaration
-          client_declaration_answer: Read & agreed
-        complete-application-heading: Complete the application
-        complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
 
   citizens:
     accounts:
@@ -785,7 +771,6 @@ en:
     save_as_draft: Save as draft
     submit: Submit
     change: Change
-    accept_and_send: Accept and send application
     information: Information
     start: Start
     start_now: Start now

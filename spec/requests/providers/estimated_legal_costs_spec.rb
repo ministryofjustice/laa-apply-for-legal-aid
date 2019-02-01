@@ -24,8 +24,7 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
 
       describe 'back link' do
         it 'points to statement of case' do
-          # TODO: update when back page is implemented
-          expect(response.body).to have_back_link(providers_legal_aid_application_estimated_legal_costs_path(legal_aid_application))
+          expect(response.body).to have_back_link(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
         end
       end
     end

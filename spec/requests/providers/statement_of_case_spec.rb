@@ -77,14 +77,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
         end
 
-        # TODO: remove this test and implement next one when next page is known
-        it 'returns next page placeholder' do
-          expect(response.body).to include('Placeholder: Costs')
-        end
-
-        # TODO: fix and implement when next page is known
-        xit 'redirects to the next page' do
-          expect(response).to redirect_to providers_legal_aid_application_xxxx_path(legal_aid_application)
+        it 'redirects to the next page' do
+          expect(response).to redirect_to providers_legal_aid_application_estimated_legal_costs_path(legal_aid_application)
         end
       end
 

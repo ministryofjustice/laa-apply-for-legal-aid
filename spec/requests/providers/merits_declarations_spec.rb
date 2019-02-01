@@ -25,8 +25,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
 
       describe 'back link' do
         it 'points to prospects of success' do
-          # TODO: update when back page is implemented
-          expect(response.body).to have_back_link(providers_legal_aid_application_merits_declaration_path(legal_aid_application))
+          expect(response.body).to have_back_link(providers_legal_aid_application_success_prospects_path(legal_aid_application))
           expect(response.body).to include('Client declaration')
         end
       end

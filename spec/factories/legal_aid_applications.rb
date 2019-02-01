@@ -86,6 +86,10 @@ FactoryBot.define do
       merits_assessment { create :merits_assessment, :with_optional_text }
     end
 
+    trait :with_merits_statement_of_case do
+      statement_of_case { create :statement_of_case }
+    end
+
     trait :with_everything do
       with_applicant
       provider_submitted
@@ -97,6 +101,7 @@ FactoryBot.define do
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { Faker::Number.decimal(2).to_d }
       with_merits_assessment
+      with_merits_statement_of_case
     end
 
     trait :with_negative_benefit_check_result do

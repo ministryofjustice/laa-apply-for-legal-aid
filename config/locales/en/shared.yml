@@ -130,10 +130,11 @@ en:
           housing_assocation_or_landlord: Yes, a housing association or landlord
           no_sole_owner: No, sole owner
           partner_or_ex_partner: Yes, a partner or ex-partner
-      success_prospect_form:
+      success_prospect_form: &likely_attrs
         likely: 50% or better
       success_prospect:
         success_prospect_item:
+          <<: *likely_attrs
           marginal: Marginal 45 - 50%
           borderline: Borderline
           uncertain: Uncertain

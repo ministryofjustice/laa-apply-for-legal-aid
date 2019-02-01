@@ -40,14 +40,13 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.client_declaration'))
       end
 
-      # TO DO: enable this when correct urls are known
-      xit 'displays the correct URLs for changing values' do
-        expect(response.body).to have_change_link(:client_received_legal_help, providers_legal_aid_application_xxx_path(application))
-        expect(response.body).to have_change_link(:proceedings_currently_before_court, providers_legal_aid_application_xxx_path(application))
-        expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_xxx_path(application))
-        expect(response.body).to have_change_link(:estimated_legal_costs, providers_legal_aid_application_xxx_path(application))
-        expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_xxx_path(application))
-        expect(response.body).to have_change_link(:client_declaration, providers_legal_aid_application_xxx_path(application))
+      it 'displays the correct URLs for changing values' do
+        expect(response.body).to have_change_link(:client_received_legal_help, providers_legal_aid_application_client_received_legal_help_path(application))
+        expect(response.body).to have_change_link(:proceedings_currently_before_court, providers_legal_aid_application_proceedings_before_the_court_path(application))
+        expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
+        expect(response.body).to have_change_link(:estimated_legal_costs, providers_legal_aid_application_estimated_legal_costs_path(application))
+        expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_prospects_path(application))
+        expect(response.body).to have_change_link(:client_declaration, providers_legal_aid_application_merits_declaration_path(application))
       end
 
       context 'client has not received legal help' do
@@ -64,20 +63,18 @@ RSpec.describe 'check merits answers requests', type: :request do
         end
       end
 
-      # enable when statement of case screen added - check correct name of field first
-      xit 'displays the statement of case' do
-        # expect(response.body).to include(application.merits_assessment.statement_of_case)
+      it 'displays the statement of case' do
+        expect(response.body).to include(application.statement_of_case.statement)
       end
 
       it 'displays the estimated legal costs' do
         expect(response.body).to include(number_to_currency(application.merits_assessment.estimated_legal_cost, unit: '£'))
       end
 
-      # enable when prospects of success screen added
       context 'prospects of success has supplementary text' do
-        xit 'displays the prospects of success and details' do
-          # expect(response.body).to include(application.merits_assessment.success_prospect)
-          # expect(response.body).to include(application.merits_assessment.success_prospect_details)
+        it 'displays the prospects of success and details' do
+          expect(response.body).to include(I18n.translate("shared.forms.success_prospect.success_prospect_item.#{application.merits_assessment.success_prospect}"))
+          expect(response.body).to include(application.merits_assessment.success_prospect_details)
         end
       end
 

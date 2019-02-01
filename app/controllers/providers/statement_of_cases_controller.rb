@@ -13,13 +13,6 @@ module Providers
       statement_of_case.statement = statement_of_case_params[:statement]
 
       if statement_of_case.save
-        # TODO: remove this condition once next step is implemented
-        if params.key?(:continue_button)
-          # continue_or_save_draft(continue_url: next_url)
-          render plain: 'Placeholder: Costs'
-          return
-        end
-
         continue_or_save_draft
       else
         render :show

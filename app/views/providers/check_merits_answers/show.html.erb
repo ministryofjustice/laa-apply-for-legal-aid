@@ -9,7 +9,7 @@
 
     <%= check_answer_link(
           name: :client_received_legal_help,
-          url: nil,
+          url: providers_legal_aid_application_client_received_legal_help_path,
           question: t('.items.client_received_legal_help'),
           answer: @merits.client_received_legal_help ? 'Yes' : 'No',
           is_long: true
@@ -19,7 +19,7 @@
 
     <%= check_answer_link(
           name: :proceedings_currently_before_court,
-          url: nil,
+          url: providers_legal_aid_application_proceedings_before_the_court_path,
           question: t('.items.proceedings_currently_before_court'),
           answer: @merits.proceedings_before_the_court ? 'Yes' : 'No',
           is_long: true
@@ -29,18 +29,17 @@
 
     <%= check_answer_link(
           name: :statement_of_case,
-          url: nil,
+          url: providers_legal_aid_application_statement_of_case_path,
           question: t('.items.statement_of_case'),
           answer: nil,
           is_long: true
         ) %>
 
-    <!--TODO: enable when statement of case screen is ready - check name of field first -->
-    <!-- <div class='govuk-body'>%= @merits.statement_of_case %></div> -->
+    <div class='govuk-body'><%= @statement_of_case.statement %></div>
 
     <%= check_answer_link(
           name: :estimated_legal_costs,
-          url: nil,
+          url: providers_legal_aid_application_estimated_legal_costs_path,
           question: t('.items.estimated_legal_costs'),
           answer: number_to_currency(@merits.estimated_legal_cost, unit: t('currency.gbp')),
           is_long: true
@@ -48,18 +47,17 @@
 
     <%= check_answer_link(
           name: :prospects_of_success,
-          url: nil,
+          url: providers_legal_aid_application_success_prospects_path,
           question: t('.items.prospects_of_success'),
-          answer: 'TO DO', # TODO: enable when prospects of success screen is ready - merits.success_prospect
+          answer: t("shared.forms.success_prospect.success_prospect_item.#{@merits.success_prospect}"),
           is_long: true
         ) %>
 
-    <!--TODO: enable when prospects of success screen is ready -->
-    <!-- <div class='govuk-body'>%= @merits.success_prospect_details %></div> -->
+    <div class='govuk-body'><%= @merits.success_prospect_details %></div>
 
     <%= check_answer_link(
           name: :client_declaration,
-          url: nil,
+          url: providers_legal_aid_application_merits_declaration_path,
           question: t('.items.client_declaration'),
           answer: (t('.items.client_declaration_answer') if @merits.client_merits_declaration),
           is_long: true
