@@ -1,4 +1,4 @@
-<header class="govuk-header " role="banner" data-module="header">
+<header class="govuk-header" role="banner" data-module="header">
   <div class="govuk-header__container govuk-width-container">
 
     <div class="govuk-header__logo">
@@ -18,7 +18,10 @@
     </div>
     <div class="govuk-header__content">
       <%= home_link %>
-      <%= user_header_link %>
+      <button type="button" role="button" class="govuk-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+      <nav>
+        <%= user_header_link %>
+      </nav>
     </div>
   </div>
 </header>

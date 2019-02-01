@@ -1,11 +1,25 @@
+@import "govuk-frontend/settings/all";
+@import "govuk-frontend/helpers/all";
+
 .govuk-header {
   .govuk-header__content .user-info {
-    float: right;
+    float: left;
     line-height: 30px;
     font-weight: bold;
 
     a {
       padding-left: 1em;
+    }
+  }
+
+  nav {
+    @include govuk-media-query($from: desktop) {
+      position: absolute;
+      top: 7px;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
     }
   }
 }
