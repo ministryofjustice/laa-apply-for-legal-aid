@@ -53,11 +53,12 @@ en:
     information:
       show:
         heading_1: Give one-time access to your bank accounts
-        list: |
-          Sign in and authorise access to your accounts
-          We download 3 months of transactions
-          Your online banking details are not saved
-        title: How we connect to your online banking
+        list:
+          list: |
+            Sign in and authorise access to your accounts
+            We download 3 months of transactions
+            Your online banking details are not saved
+          title: How we connect to your online banking
         para_1: You will be redirected to a secure service to sign in to your online banking.
         para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
     legal_aid_applications:
