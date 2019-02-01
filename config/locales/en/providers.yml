@@ -3,12 +3,12 @@ en:
   providers:
     about_the_financial_assessments:
       show:
-        list:
-          item_1: We download 3 months of bank transactions
-          item_2: We only use information for the legal aid application
-          item_3: We automatically end the bank connection after 1 hour
-          item_4: We do not save online banking details
-          title: How we use your client's details
+        list: |
+          We download 3 months of bank transactions
+          We only use information for the legal aid application
+          We automatically end the bank connection after 1 hour
+          We do not save online banking details
+          How we use your client's details
         section_1:
           heading: Give your client access to the financial assessment
           text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
@@ -155,8 +155,9 @@ en:
     start:
       index:
         apply_civil_legal_list:
-          item_1: public family law
-          item_2: domestic violence or abuse
+          list: |
+            public family law
+            domestic violence or abuse
         apply_civil_legal_para: 'Use this service to apply for civil legal aid for cases involving:'
         apply_for_legal_aid_heading: Apply for Legal Aid
         related_content_list:
@@ -165,9 +166,10 @@ en:
           title: Related content
         use_ccms_list:
           heading: Who can use this service?
-          item_1: has a National Insurance number
-          item_2: uses online banking
-          item_3: is single, does not have an income, or their partner is the opponent in the case
+          list: |
+            has a National Insurance number
+            uses online banking
+            is single, does not have an income, or their partner is the opponent in the case
           title: 'You can only use this service if your client:'
         use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
         use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.

@@ -42,9 +42,10 @@ en:
       show:
         body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
         field_set_header: Do you agree to share your bank transactions with us?
-        list_1: We do not save your online banking username and password
-        list_2: We do not have any ongoing access to your bank accounts
-        list_3: We only use your details to assess your eligibility for legal aid
+        list:
+          We do not save your online banking username and password
+          We do not have any ongoing access to your bank accounts
+          We only use your details to assess your eligibility for legal aid
         list_heading: Find out how we use and store your personal data
         open_banking_consent:
           label:
@@ -52,11 +53,11 @@ en:
     information:
       show:
         heading_1: Give one-time access to your bank accounts
-        list:
-          item_1: Sign in and authorise access to your accounts
-          item_2: We download 3 months of transactions
-          item_3: Your online banking details are not saved
-          title: How we connect to your online banking
+        list: |
+          Sign in and authorise access to your accounts
+          We download 3 months of transactions
+          Your online banking details are not saved
+        title: How we connect to your online banking
         para_1: You will be redirected to a secure service to sign in to your online banking.
         para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
     legal_aid_applications:
@@ -65,8 +66,8 @@ en:
         financial_situation_para: Find out if you can get legal aid because of your financial situation.
         heading_1: Complete your legal aid financial assessment
         legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
-        list:
-          item_1: your online banking log in
+        list: |
+          your online banking log in
         name: 'Name:'
         what_you_will_need: What you will need
     other_assets:
