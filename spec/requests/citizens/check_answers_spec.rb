@@ -61,12 +61,10 @@ RSpec.describe 'check your answers requests', type: :request do
     context 'applicant does not own home' do
       let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home }
       it 'does not display property value' do
-        expect(response.body).not_to include(number_to_currency(legal_aid_application.property_value, unit: '£'))
         expect(response.body).not_to include('Property value')
       end
 
       it 'does not display shared ownership question' do
-        expect(response.body).not_to include(I18n.translate("shared.forms.shared_ownership_form.shared_ownership_item.#{legal_aid_application.shared_ownership}"))
         expect(response.body).not_to include('Owned with anyone else')
       end
     end
@@ -82,7 +80,6 @@ RSpec.describe 'check your answers requests', type: :request do
     context 'applicant is sole owner of home' do
       let(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_home_sole_owner }
       it 'does not display percentage owned' do
-        expect(response.body).not_to include(number_to_percentage(legal_aid_application.percentage_home, precision: 2))
         expect(response.body).not_to include('Percentage')
       end
     end
