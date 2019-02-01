@@ -14,9 +14,7 @@
 
   <p class="govuk-body govuk-!-font-weight-bold"><%= t('.what_you_will_need') %></p>
 
-  <ul class="govuk-list govuk-list--bullet">
-    <li><%= t('.list.item_1') %></li>
-  </ul>
+    <%= list_from_translation_path 'citizens.legal_aid_applications.index' %>
 
   <%= link_to t('generic.start'), forward_path, class: 'govuk-button govuk-button--start', id: 'start' %>
 <% end %>

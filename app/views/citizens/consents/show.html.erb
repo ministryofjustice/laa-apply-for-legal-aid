@@ -6,7 +6,7 @@
         ) do %>
 
       <p class="govuk-body govuk-!-margin-top-3"><%= t('.body') %></p>
-      <%= render partial: 'shared/forms/detailed_list', locals: { translation_path: 'citizens.consents.show' } %>
+      <%= render 'shared/forms/detailed_list', translation_path: 'citizens.consents.show' %>
       <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
     <% end %>
 

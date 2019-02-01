@@ -5,10 +5,6 @@
     </span>
   </summary>
   <div class="govuk-details__text">
-    <ul class="govuk-list govuk-list--bullet">
-      <li><%= t "#{translation_path}.list_1" %></li>
-      <li><%= t "#{translation_path}.list_2" %></li>
-      <li><%= t "#{translation_path}.list_3" %></li>
-    </ul>
+    <%= render 'shared/forms/list_items', translation_path: translation_path %>
   </div>
 </details>

@@ -34,4 +34,8 @@ module ApplicationHelper
     html = sanitize html, tags: %w[a], attributes: %w[href class rel data-method]
     content_tag :span, html, class: 'user-info'
   end
+
+  def list_from_translation_path(translation_path)
+    render 'shared/forms/list_items', translation_path: translation_path
+  end
 end

@@ -16,11 +16,7 @@
 
         <%= simple_format t('.text_2') %>
 
-        <ul class="govuk-list govuk-list--bullet">
-          <% t('.list').each_line do |item| %>
-            <li><%= item %></li>
-          <% end %>
-        </ul>
+        <%= list_from_translation_path 'providers.merits_declarations.show' %>
 
         <%= simple_format t('.text_3') %>
 
