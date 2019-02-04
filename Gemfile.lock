@@ -148,11 +148,11 @@ GEM
       smart_properties
     erubi (1.8.0)
     execjs (2.7.0)
-    factory_bot (4.11.1)
-      activesupport (>= 3.0.0)
-    factory_bot_rails (4.11.1)
-      factory_bot (~> 4.11.1)
-      railties (>= 3.0.0)
+    factory_bot (5.0.0)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.0.0)
+      factory_bot (~> 5.0.0)
+      railties (>= 4.2.0)
     faker (1.9.1)
       i18n (>= 0.7)
     faraday (0.15.4)
@@ -173,7 +173,7 @@ GEM
     httpi (2.4.4)
       rack
       socksify
-    i18n (1.5.2)
+    i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.28)
       activesupport (>= 4.0.2)
