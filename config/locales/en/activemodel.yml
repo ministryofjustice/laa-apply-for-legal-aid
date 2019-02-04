@@ -1,0 +1,194 @@
+---
+en:
+  activemodel:
+    attributes:
+      address:
+        address_line_one: Building and street
+        address_line_two: ''
+        city: Town or city
+        county: County
+        postcode: Postcode
+      applicant:
+        dob_day: Day
+        dob_month: Month
+        dob_year: Year
+        email: Email address
+        first_name: First name
+        last_name: Last name
+        national_insurance_number: National Insurance number
+      applicants/address_form:
+        address_line_one: Building and street
+        address_line_two: ''
+        city: Town or city
+        county: County
+        postcode: Postcode
+      applicants/basic_details_form:
+        dob_day: Day
+        dob_month: Month
+        dob_year: Year
+        email: Email address
+        first_name: First name
+        last_name: Last name
+        national_insurance_number: National Insurance number
+      legal_aid_application:
+        outstanding_mortgage_amount: Enter outstanding mortgage amount
+        property_value: Enter the estimated value of your home
+    errors:
+      messages:
+        earliest_allowed_date: Date cannot be before %{date}
+      models:
+        address:
+          attributes:
+            address_line_one:
+              blank: Enter a building and street
+            city:
+              blank: Enter a town or city
+            lookup_id:
+              blank: Please select an address from the list
+            postcode:
+              blank: Enter a postcode
+              invalid: Enter a postcode in the right format
+        applicant:
+          attributes:
+            date_of_birth:
+              date_is_in_the_future: Date of birth must be in the past
+              date_not_valid: Enter a valid date of birth
+              earliest_allowed_date: Date of birth cannot be before %{date}
+            email:
+              blank: Enter email address
+              invalid: Enter an email address in the correct format, such as name@example.com
+            first_name:
+              blank: Enter first name
+            last_name:
+              blank: Enter last name
+            national_insurance_number:
+              blank: Enter a National Insurance number
+              not_valid: Enter a valid National Insurance number
+            uses_online_banking:
+              blank: Please select an option
+        applicants/address_form:
+          attributes:
+            address_line_one:
+              blank: Enter a building and street
+            city:
+              blank: Enter a town or city
+            lookup_id:
+              blank: Please select an address from the list
+            postcode:
+              blank: Enter a postcode
+              invalid: Enter a postcode in the right format
+        applicants/address_lookup_form:
+          attributes:
+            postcode:
+              blank: Enter a postcode
+              invalid: Enter a postcode in the right format
+        applicants/address_selection_form:
+          attributes:
+            address:
+              blank: Please select an address from the list
+        applications/proceedings_form:
+          attributes:
+            code:
+              blank: A proceeding must be selected
+        legal_aid_application:
+          attributes:
+            outstanding_mortgage_amount:
+              blank: Enter the outstanding mortgage amount
+              greater_than_or_equal_to: Mortgage amount must be zero or an amount of money, like 60,000
+              not_a_number: Mortgage amount must be an amount of money, like 60,000
+            own_home:
+              blank: Select yes if you own the home you live in
+            percentage_home:
+              blank: Enter the percentage (%) share
+              greater_than_or_equal_to: Share must be a percentage amount under 100, like 60
+              less_than_or_equal_to: Share must be a percentage amount under 100, like 60
+              not_a_number: Share must be a percentage amount under 100, like 60
+            property_value:
+              citizen:
+                blank: Enter an estimated value for your home
+                not_a_number: The estimated value of your home must be an amount of money, like 60,000
+              greater_than: Estimated value must be an amount of money, like 80,000
+              not_a_number: Estimated value must be an amount of money, like 80,000
+              provider:
+                blank: Enter an estimated value for your client's home
+                not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
+            shared_ownership:
+              blank: Select yes if you own your home with someone else
+        merits_assessment:
+          attributes:
+            application_purpose:
+              blank: Enter details of why your client is applying for legal aid
+            client_received_legal_help:
+              blank: Select yes if your client has received legal help for the matter
+            details_of_proceedings_before_the_court:
+              blank: Enter details of the proceedings currently before the court
+            estimated_legal_cost:
+              blank: Enter the estimated legal costs of doing the work
+              not_a_number: Estimated cost must be an amount of money, like 25,000
+            proceedings_before_the_court:
+              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
+        other_assets_declaration:
+          attributes:
+            classic_car_value:
+              blank: Enter the estimated classic car value
+              not_a_number: Estimated classic car value must be an amount of money, like 60,000
+            jewellery_value:
+              blank: Enter the estimated total value of valuable items
+              not_a_number: Estimated valuable items value must be an amount of money, like 60,000
+            land_value:
+              blank: Enter the estimated land value
+              not_a_number: Estimated land value must be an amount of money, like 60,000
+            money_assets_value:
+              blank: Enter the estimated value of estate
+              not_a_number: Estimated estate value must be an amount of money, like 60,000
+            money_owed_value:
+              blank: Enter the estimated value of money owed
+              not_a_number: Estimated money owed must be an amount of money, like 60,000
+            second_home_mortgage:
+              blank: Enter outstanding mortgage amount
+              not_a_number: Outstanding mortgage amount must be an amount of money, like 60,000
+            second_home_percentage:
+              blank: Enter property percentage share
+              not_a_number: Ownership share must be percentage, like 33.33
+            second_home_value:
+              blank: Enter the estimated property value
+              not_a_number: Estimated value must be an amount of money, like 60,000
+            timeshare_value:
+              blank: Enter the estimated timeshare value
+              not_a_number: Estimated timeshare value must be an amount of money, like 60,000
+            trust_value:
+              blank: Enter the estimated value of trust
+              not_a_number: Estimated trust value must be an amount of money, like 60,000
+            vehicle_value:
+              blank: Enter the estimated vehicle value
+              not_a_number: Estimated vehicle value must be an amount of money, like 60,000
+        savings_amount:
+          attributes:
+            cash:
+              blank: Enter the total amount of cash savings
+              greater_than_or_equal_to: Total cash savings must be 0 or more
+              not_a_number: Total cash savings must be an amount of money, like 60,000
+            isa:
+              blank: Enter the estimated total in all accounts
+              greater_than_or_equal_to: Total in accounts must be 0 or more
+              not_a_number: Total in accounts must be an amount of money, like 60,000
+            life_assurance_endowment_policy:
+              blank: Enter the total value of life assurance policies
+              greater_than_or_equal_to: Total of life assurance policies must be 0 or more
+              not_a_number: Total of life assurance policies must be an amount of money, like 60,000
+            national_savings:
+              blank: Enter the total value of certificates and bonds
+              greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
+              not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
+            other_person_account:
+              blank: Enter the estimated total in other people’s accounts
+              greater_than_or_equal_to: Total in other people’s accounts must be 0 or more
+              not_a_number: Total in other people’s accounts must be an amount of money, like 60,000
+            peps_unit_trusts_capital_bonds_gov_stocks:
+              blank: Enter the total value of other investments
+              greater_than_or_equal_to: Total of other investments must be 0 or more
+              not_a_number: Total of other investments must be an amount of money, like 60,000
+            plc_shares:
+              blank: Enter the total value of shares
+              greater_than_or_equal_to: Total of shares must be 0 or more
+              not_a_number: Total of shares must be an amount of money, like 60,000

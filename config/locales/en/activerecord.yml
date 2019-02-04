@@ -1,0 +1,17 @@
+---
+en:
+  activerecord:
+    errors:
+      models:
+        address:
+          attributes:
+            postcode:
+              invalid: is not in the right format
+        applicant:
+          attributes:
+            date_of_birth:
+              invalid: is not valid
+            email:
+              invalid: address is not in the right format
+            national_insurance_number:
+              invalid: is not in the right format

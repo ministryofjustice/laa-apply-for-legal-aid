@@ -1,0 +1,40 @@
+---
+en:
+  api:
+    errors:
+      codes:
+        blank: blank
+        invalid: invalid
+  currency:
+    eur: "€"
+    gbp: "£"
+    usd: "$"
+  date:
+    formats:
+      default: "%a, %d %b %Y"
+  errors:
+    messages:
+      already_confirmed: was already confirmed, please try signing in
+      confirmation_period_expired: needs to be confirmed within %{period}, please request a new one
+      expired: has expired, please request a new one
+      not_found: not found
+      not_locked: was not locked
+      not_saved:
+        one: '1 error prohibited this %{resource} from being saved:'
+        other: "%{count} errors prohibited this %{resource} from being saved:"
+  home:
+    index:
+      heading_1: Apply for Legal Aid
+      welcome_home: Welcome Home
+  restrictions:
+    names:
+      bankruptcy: Bankruptcy
+      foreign_exchange_controls: Foreign exchange controls
+      held_overseas: Held overseas
+      reposession_or_deferred_interest: Repossession or deferred interest in a property
+      restraint_or_freezing_order: Restraint or freezing order
+      subject_matter_of_dispute: Subject matter of dispute in other legal proceedings
+  time:
+    formats:
+      date: "%a, %d %b %Y"
+      default: "%Y-%m-%d %H:%M:%S"
