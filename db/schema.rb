@@ -286,5 +286,4 @@ ActiveRecord::Schema.define(version: 2019_01_30_110634) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
-  add_foreign_key "statement_of_cases", "legal_aid_applications"
 end

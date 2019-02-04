@@ -151,6 +151,21 @@ en:
     savings_and_investments:
       show:
         h1-heading: Does your client have any savings and investments?
+    statement_of_cases:
+      show:
+        h1-heading: Statement of case
+        h2-heading: You must include the following details
+        instructions: |
+          Please tell us about the case providing
+          sufficient information to satisfy the regulations.
+        bullet-1: What has happend so far.
+        bullet-2: Parties involved and their relationship to the applicant.
+        bullet-3: Explain why the current proceedings are necessary.
+        bullet-4: Number of clients represented.
+        bullet-5: Any other persons who might benefit who can bring or fund the case.
+        bullet-6: |
+          Details of the most recent incident, if a warning letter has been sent,
+          the police have been notified or there are any criminal charges.
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
