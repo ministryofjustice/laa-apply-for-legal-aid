@@ -30,6 +30,9 @@ gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
 # Authorization
 gem 'pundit'
 
+# Gathers data from user browser - OS and Browser name
+gem 'browser'
+
 # Used to mock saml request in UAT
 gem 'ruby-saml-idp'
 

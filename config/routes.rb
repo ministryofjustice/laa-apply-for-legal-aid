@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :status, only: [:index]
   resource :contact, only: [:show]
+  resources :feedback, only: %i[new create show]
 
   namespace 'v1' do
     resources :proceeding_types, only: [:index]

@@ -133,6 +133,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     let(:email_label) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:email_hint) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
     let(:tag) { parsed_html.at_css("textarea##{attribute}") }
+    let(:label) { tag.parent.at_css('label') }
 
     subject { builder.govuk_text_area(*params) }
 
@@ -149,8 +150,6 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     it 'includes a label' do
-      label = tag.parent.at_css('label')
-
       expect(label.classes).to include('govuk-label')
       expect(label[:for]).to eq('email')
       expect(label.content).to eq(email_label)
@@ -178,11 +177,24 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       let(:params) { [:email, label: custom_label] }
 
       it 'shows the custom label' do
-        label = tag.parent.at_css('label')
-
         expect(label.classes).to include('govuk-label')
         expect(label[:for]).to eq('email')
         expect(label.content).to eq(custom_label)
+      end
+    end
+
+    context 'pass a label parameter with text and size' do
+      let(:custom_label) { "Your client's email" }
+      let(:params) { [:email, label: { text: custom_label, size: :m }] }
+
+      it 'shows the custom label' do
+        expect(label.classes).to include('govuk-label')
+        expect(label[:for]).to eq('email')
+        expect(label.content).to eq(custom_label)
+      end
+
+      it 'includes a size class' do
+        expect(label.classes).to include('govuk-label--m')
       end
     end
 
@@ -345,6 +357,20 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
         expect(fieldset.child.child.name).to eq('h1')
         expect(legend.classes).to include('govuk-fieldset__legend')
         expect(legend.classes).to include('govuk-fieldset__legend--xl')
+        expect(h1.classes).to include('govuk-fieldset__heading')
+        expect(h1.content).to eq(title)
+      end
+    end
+
+    context 'title is passed as text and size' do
+      let(:title) { 'Pick an option' }
+      let(:params) { [:uses_online_banking, options, title: { text: title, size: :m }] }
+
+      it 'display the title in a <legend> and <h1> tag' do
+        expect(fieldset.child.name).to eq('legend')
+        expect(fieldset.child.child.name).to eq('h1')
+        expect(legend.classes).to include('govuk-fieldset__legend')
+        expect(legend.classes).to include('govuk-fieldset__legend--m')
         expect(h1.classes).to include('govuk-fieldset__heading')
         expect(h1.content).to eq(title)
       end

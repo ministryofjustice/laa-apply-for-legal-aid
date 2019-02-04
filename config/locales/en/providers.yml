@@ -4,13 +4,13 @@ en:
     about_the_financial_assessments:
       show:
         list:
-          title: How we use your client's details
           list: |
             We download 3 months of bank transactions
             We only use information for the legal aid application
             We automatically end the bank connection after 1 hour
             We do not save online banking details
             How we use your client's details
+          title: How we use your client's details
         section_1:
           heading: Give your client access to the financial assessment
           text: When you click 'Submit' we will send your client a secure link to the online financial assessment.

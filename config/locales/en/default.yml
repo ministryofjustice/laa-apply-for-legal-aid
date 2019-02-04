@@ -22,6 +22,15 @@ en:
       not_saved:
         one: '1 error prohibited this %{resource} from being saved:'
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  feedback:
+    new:
+      done_all_needed: Were you able to do what you needed today?
+      improvement_suggestion: How could we improve this service?
+      satisfaction: Overall, how satisfied were you with this service?
+      title: Help us improve this service
+    show:
+      link: Back to your application
+      title: Thank you for your feedback
   home:
     index:
       heading_1: Apply for Legal Aid

@@ -10,10 +10,7 @@
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <a class="govuk-footer__link" href="#">
-              <!-- TO DO add link -->
-              <%= t('layouts.application.footer.feedback') %>
-            </a>
+            <%= link_to t('layouts.application.footer.feedback'), new_feedback_path, class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">

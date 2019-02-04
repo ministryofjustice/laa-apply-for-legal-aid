@@ -1,0 +1,39 @@
+<%= page_template page_title: t('.title'), back_link: back_link(path: back_path) do %>
+
+    <%= form_for(@feedback, url: feedback_index_path) do |form| %>
+
+      <%= form.govuk_collection_radio_buttons(
+            :done_all_needed,
+            %w[yes no],
+            inline: true,
+            title: {
+              text: t('.done_all_needed'),
+              size: :m
+            }
+          ) %>
+
+      <%= Feedback.enum_radio_buttons(
+            form, :satisfaction,
+            order: :reverse,
+            args: {
+              title: {
+                text: t('.satisfaction'),
+                size: :m
+              }
+            }
+          ) %>
+
+      <%= form.govuk_text_area(
+            :improvement_suggestion,
+            label: {
+              text: t('.improvement_suggestion'),
+              size: :m
+            },
+            rows: 4,
+            class: 'govuk-!-width-full'
+          ) %>
+
+      <%= form.submit t('generic.send'), class: 'govuk-button' %>
+
+    <% end %>
+<% end %>

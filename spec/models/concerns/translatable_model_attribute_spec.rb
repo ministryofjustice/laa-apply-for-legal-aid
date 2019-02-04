@@ -18,4 +18,21 @@ RSpec.describe TranslatableModelAttribute do
       end
     end
   end
+
+  describe '.enum_ts' do
+    let(:klass) { Feedback }
+    let(:satisfactions) { klass.satisfactions }
+    let(:instance) { klass.new }
+    subject { klass.enum_ts(:satisfaction) }
+
+    it 'returns a hash with an entry for each state' do
+      expect(subject.keys).to match_array satisfactions.keys.map(&:to_sym)
+    end
+
+    it 'has values that match the translations' do
+      key = subject.keys.sample
+      instance.satisfaction = key
+      expect(subject[key]).to eq(instance.enum_t(:satisfaction))
+    end
+  end
 end

@@ -1,6 +1,13 @@
 ---
 en:
   model_enum_translations:
+    feedback:
+      satisfaction:
+        dissatisfied: Dissatisfied
+        neither_dissatisfied_nor_satisfied: Neither satisfied nor dissatisfied
+        satisfied: Satisfied
+        very_dissatisfied: Very dissatisfied
+        very_satisfied: Very satisfied
     legal_aid_application:
       state:
         answers_checked: Answers checked
