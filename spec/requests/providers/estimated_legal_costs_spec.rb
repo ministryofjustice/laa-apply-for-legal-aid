@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:secure_id) { legal_aid_application.generate_secure_id }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/estimated_legal_costs' do
@@ -62,9 +61,8 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
         end
 
         it 'redirects to the next page' do
-          # TODO: update when forward next page is implemented
           subject
-          expect(unescaped_response_body).to include('Placeholder: Will navigate to question What are the prospects of success?')
+          expect(response).to redirect_to(providers_legal_aid_application_success_prospects_path(legal_aid_application))
         end
 
         it 'update legal_aid_application.merits_assessment record' do

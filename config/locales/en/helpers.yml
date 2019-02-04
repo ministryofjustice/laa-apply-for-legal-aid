@@ -29,6 +29,7 @@ en:
         proceedings_before_the_court:
           'false': 'No'
           'true': 'Yes'
+        success_prospect_details: Please explain why you believe legal aid should be granted
       other_assets_declaration:
         check_box_second_home: Second property or holiday home
         second_home_mortgage: Enter outstanding mortgage amount

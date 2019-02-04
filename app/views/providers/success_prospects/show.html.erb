@@ -1,0 +1,7 @@
+<%= provider_page page_title: t('.h1-heading'), template: :basic do %>
+  <%= render(
+        'shared/forms/success_prospect_form',
+        form_path: providers_legal_aid_application_success_prospects_path(@legal_aid_application),
+        show_draft: true
+      ) %>
+<% end %>

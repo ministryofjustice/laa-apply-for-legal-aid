@@ -127,6 +127,10 @@ en:
               not_a_number: Estimated cost must be an amount of money, like 25,000
             proceedings_before_the_court:
               blank: Select Yes if the proceedings for which funding is being sought are currently before the court
+            success_prospect:
+              blank: Select the prospects of success
+            success_prospect_details:
+              blank: Enter explanation of why you think legal aid should be granted
         other_assets_declaration:
           attributes:
             classic_car_value:

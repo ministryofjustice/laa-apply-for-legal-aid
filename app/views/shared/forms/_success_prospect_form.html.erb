@@ -1,0 +1,37 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_success_prospects_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <% error = form.object.errors[:success_prospect].first %>
+  <% group_error_class = error ? 'govuk-form-group--error' : '' %>
+  <% input_error_class = error ? 'govuk-input--error' : '' %>
+
+  <%= govuk_form_group(input: :success_prospect, show_error_if: @form.errors.any?) do %>
+    <%= govuk_fieldset_header(content_for(:page_title)) %>
+    <%= govuk_error_message(form.object.errors[:client_received_legal_help].first) %>
+
+    <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+      <%= form.govuk_radio_button(:success_prospect, MeritsAssessment.prospect_likely_to_succeed, label: t('.likely')) %>
+
+      <%= render partial: 'shared/forms/success_prospect/success_prospect_item',
+                 collection: MeritsAssessment.prospects_unlikely_to_succeed, as: :success_prospects,
+                 locals: { form: form,
+                           group_error_class: group_error_class,
+                           input_error_class: input_error_class } %>
+
+    </div>
+    <div id="success-prospect-text-area">
+      <%= form.govuk_text_area :success_prospect_details,
+                               rows: 5,
+                               value: @form.success_prospect_details %>
+    </div>
+  <% end %>
+  <%= render partial: 'shared/forms/next_action_buttons',
+             locals: {
+               continue_id: 'continue',
+               show_draft: true,
+               form: form
+             } %>
+<% end %>
