@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe KeepInSync, type: :service do
+RSpec.describe CleanupCapitalAttributes, type: :service do
   describe '#sync' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, test_condition }
-    let(:keep_in_sync) { described_class.new(legal_aid_application) }
+    let(:cleanup_capital_attributes) { described_class.new(legal_aid_application) }
     before do
-      keep_in_sync.sync
+      cleanup_capital_attributes.call
       legal_aid_application.reload
     end
     context 'on own home set to no' do

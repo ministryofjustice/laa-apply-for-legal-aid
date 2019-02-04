@@ -20,7 +20,7 @@ module LegalAidApplicationStateMachine
 
       event :answers_checked do
         transitions from: :checking_answers, to: :answers_checked,
-                    after: -> { KeepInSync.application(self) }
+                    after: -> { CleanupCapitalAttributes.call(self) }
       end
 
       event :check_passported_answers do

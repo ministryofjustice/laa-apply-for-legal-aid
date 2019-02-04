@@ -108,7 +108,7 @@ RSpec.describe 'check your answers requests', type: :request do
       end
 
       it 'syncs the application' do
-        expect(KeepInSync).to receive(:application).with(application)
+        expect(CleanupCapitalAttributes).to receive(:call).with(application)
         subject
       end
     end

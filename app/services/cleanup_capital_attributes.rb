@@ -1,6 +1,6 @@
-class KeepInSync
-  def self.application(legal_aid_application)
-    new(legal_aid_application).sync
+class CleanupCapitalAttributes
+  def self.call(legal_aid_application)
+    new(legal_aid_application).call
   end
 
   attr_reader :legal_aid_application
@@ -13,11 +13,11 @@ class KeepInSync
     @legal_aid_application = legal_aid_application
   end
 
-  def sync
+  def call
     when_own_home_no
     when_own_home_owned_outright
     when_shared_ownership_no
-    legal_aid_application.save
+    legal_aid_application.save!
   end
 
   def when_own_home_no

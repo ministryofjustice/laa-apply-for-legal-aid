@@ -230,7 +230,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe 'attributes are synced on answers_checked' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
     it 'passes application to keep in sync service' do
-      expect(KeepInSync).to receive(:application).with(legal_aid_application)
+      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       legal_aid_application.answers_checked!
     end
 
