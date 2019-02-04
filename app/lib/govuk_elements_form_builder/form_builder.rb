@@ -233,7 +233,7 @@ module GovukElementsFormBuilder
     def error_tag(attribute, options)
       return unless error?(attribute, options)
 
-      message = object.errors[attribute].join(', ')
+      message = object.errors[attribute].first
       return unless message.present?
 
       content_tag(:span, message, class: 'govuk-error-message', id: "#{attribute}-error")

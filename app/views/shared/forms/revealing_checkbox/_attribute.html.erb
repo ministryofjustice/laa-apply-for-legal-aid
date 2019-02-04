@@ -12,5 +12,5 @@
   <%= govuk_hint(hint, class: 'govuk-checkboxes__hint') if hint.present? %>
 </div>
 <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="<%= conditional_div_id %>">
-  <%= form.govuk_text_field attribute, label: controller_t(attribute), input_prefix: t('currency.gbp'), value: number_to_currency(value, unit: ''), class: 'govuk-!-width-one-third' %>
+  <%= form.govuk_text_field attribute, label: controller_t(attribute), input_prefix: t('currency.gbp'), value: number_to_currency_or_original_string(value), class: 'govuk-!-width-one-third' %>
 </div>

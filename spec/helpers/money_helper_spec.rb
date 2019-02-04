@@ -25,4 +25,32 @@ RSpec.describe MoneyHelper, type: :helper do
       it { is_expected.to eq("#{currency}#{balance}") }
     end
   end
+
+  describe '#number_to_currency_or_original_string' do
+    let(:result) { number_to_currency_or_original_string(value) }
+
+    context 'is a number' do
+      let(:value) { BigDecimal(12_345.5, 12) }
+
+      it 'formats the currency' do
+        expect(result).to eq '12,345.50'
+      end
+    end
+
+    context 'invalid numeric string' do
+      let(:value) { '12345.5678' }
+
+      it 'returns original value' do
+        expect(result).to eq '12345.5678'
+      end
+    end
+
+    context 'invalid alphanumeric string' do
+      let(:value) { '123xc45.5678' }
+
+      it 'returns original value' do
+        expect(result).to eq '123xc45.5678'
+      end
+    end
+  end
 end

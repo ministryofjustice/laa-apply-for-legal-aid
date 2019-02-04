@@ -6,9 +6,9 @@
     </h2>
     <div class="govuk-error-summary__body">
       <ul class="govuk-list govuk-error-summary__list">
-        <% model.errors.each do |attribute, message| %>
+        <% model.errors.keys.each do |attribute| %>
           <li>
-            <%= link_to message, "##{attribute_prefix}#{attribute}" %>
+            <%= link_to model.errors[attribute].first, "##{attribute_prefix}#{attribute}" %>
           </li>
         <% end %>
       </ul>

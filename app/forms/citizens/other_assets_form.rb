@@ -25,12 +25,12 @@ module Citizens
 
     CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + [:check_box_second_home]).freeze
 
-    validates(*SECOND_HOME_ATTRIBUTES, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
+    validates(:second_home_percentage, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validates(*SECOND_HOME_ATTRIBUTES, presence: true, if: proc { |form| form.check_box_second_home.present? })
+    validates(*ALL_ATTRIBUTES - [:second_home_percentage], allow_blank: true, currency: { greater_than_or_equal_to: 0 })
 
     SINGLE_VALUE_ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
-      validates attribute, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
       validates attribute, presence: true, if: proc { |form| form.__send__(check_box_attribute).present? }
     end
 
@@ -38,7 +38,7 @@ module Citizens
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
     attr_accessor :check_box_second_home
 
-    before_validation :normalize_amounts, :empty_unchecked_values
+    before_validation :empty_unchecked_values
 
     validate :all_second_home_values_present_if_any_are_present
 
@@ -77,13 +77,6 @@ module Citizens
       @second_home_value = nil
       @second_home_mortgage = nil
       @second_home_percentage = nil
-    end
-
-    def normalize_amounts
-      ALL_ATTRIBUTES
-        .map { |attribute| __send__(attribute) }
-        .compact
-        .each { |value| value.delete!(',') }
     end
 
     def all_second_home_values_present_if_any_are_present

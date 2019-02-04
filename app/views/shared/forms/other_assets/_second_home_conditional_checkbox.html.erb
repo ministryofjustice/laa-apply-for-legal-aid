@@ -14,15 +14,15 @@
 <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="<%= conditional_div_id %>">
   <%= form.govuk_text_field :second_home_value,
                             input_prefix: t('currency.gbp'),
-                            value: number_to_currency(model.second_home_value, unit: ''),
+                            value: number_to_currency_or_original_string(model.second_home_value),
                             class: 'govuk-!-width-one-third' %>
 
   <%= form.govuk_text_field :second_home_mortgage,
                             input_prefix: t('currency.gbp'),
-                            value: number_to_currency(model.second_home_mortgage, unit: ''),
+                            value: number_to_currency_or_original_string(model.second_home_mortgage),
                             class: 'govuk-!-width-one-third' %>
       <%= form.govuk_text_field :second_home_percentage,
-                                value: number_to_currency(model.second_home_percentage, unit: ''),
+                                value: model.second_home_percentage,
                                 class: 'govuk-input--width-5 input-percentage',
                                 suffix: '%' %>
 </div>

@@ -8,7 +8,7 @@
     <%= form.govuk_text_field :property_value,
                               label: controller_t('property_value'),
                               hint: controller_t('hint.property_value'),
-                              value: number_to_currency(model.property_value, unit: ''),
+                              value: number_to_currency_or_original_string(model.property_value),
                               input_prefix: t('currency.gbp'),
                               class: 'govuk-!-width-one-third' %>
   <% end %>

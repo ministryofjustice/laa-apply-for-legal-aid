@@ -67,7 +67,7 @@ module BaseForm
     def save
       return false unless valid?
 
-      model.attributes = assignable_attributes
+      model.attributes = clean_attributes(assignable_attributes)
       model.save(validate: false)
     end
 
@@ -96,6 +96,10 @@ module BaseForm
     end
 
     private
+
+    def clean_attributes(hash)
+      hash.transform_values { |v| v.is_a?(String) ? v.tr('£,', '') : v }
+    end
 
     def set_blanks_to_nil
       self.class.locally_assigned.each do |attr|
