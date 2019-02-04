@@ -1,5 +1,5 @@
 # TODO: Think about how we refactor this class to make it smaller
-class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLength
+class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include LegalAidApplicationStateMachine # States are defined here
 
@@ -21,7 +21,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
-  before_save :keep_attributes_in_sync
 
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
@@ -117,32 +116,5 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def set_open_banking_consent_choice_at
     self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
-  end
-
-  def keep_attributes_in_sync
-    reset_to_match_own_home_no
-    reset_to_match_own_home_mortgage
-    reset_to_match_shared_ownership_no
-  end
-
-  def reset_to_match_own_home_no
-    return unless own_home_changed? && own_home_no?
-
-    self.property_value = nil
-    self.outstanding_mortgage_amount = nil
-    self.shared_ownership = nil
-    self.percentage_home = nil
-  end
-
-  def reset_to_match_own_home_mortgage
-    return unless own_home_changed? && own_home_mortgage?
-
-    self.outstanding_mortgage_amount = nil
-  end
-
-  def reset_to_match_shared_ownership_no
-    return unless shared_ownership_changed? && !shared_ownership?
-
-    self.percentage_home = nil
   end
 end

@@ -71,15 +71,13 @@ FactoryBot.define do
     end
 
     trait :with_everything do
-      after(:create) do |legal_aid_appliction|
-        legal_aid_appliction.update(outstanding_mortgage_amount: Faker::Number.decimal.to_d)
-      end
       with_applicant
       provider_submitted
       with_savings_amount
       with_other_assets_declaration
       with_own_home_mortgaged
       property_value { Faker::Number.decimal.to_d }
+      outstanding_mortgage_amount { Faker::Number.decimal.to_d }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { Faker::Number.decimal(2).to_d }
     end

@@ -95,15 +95,21 @@ RSpec.describe 'check your answers requests', type: :request do
       before do
         login_as provider
         application.check_your_answers!
-        subject
       end
 
-      it 'should redirect to next step' do
+      it 'redirects to next step' do
+        subject
         expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
       end
 
-      it 'should change the state to "answers_checked"' do
+      it 'changes the state to "answers_checked"' do
+        subject
         expect(application.reload.answers_checked?).to be_truthy
+      end
+
+      it 'syncs the application' do
+        expect(KeepInSync).to receive(:application).with(application)
+        subject
       end
     end
 

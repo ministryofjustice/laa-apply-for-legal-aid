@@ -227,12 +227,18 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#keep_capital_attrs_in_sync' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_everything }
+  describe 'attributes are synced on answers_checked' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
+    it 'passes application to keep in sync service' do
+      expect(KeepInSync).to receive(:application).with(legal_aid_application)
+      legal_aid_application.answers_checked!
+    end
 
-    context 'on own home set to no' do
-      before { legal_aid_application.own_home_no! }
-
+    context 'and attributes changed' do
+      before do
+        legal_aid_application.answers_checked!
+        legal_aid_application.reload
+      end
       it 'resets property values' do
         expect(legal_aid_application.property_value).to be_blank
       end
@@ -244,27 +250,6 @@ RSpec.describe LegalAidApplication, type: :model do
       end
       it 'resets percentage home' do
         expect(legal_aid_application.percentage_home).to be_blank
-      end
-    end
-
-    context 'on shared ownership set to no' do
-      let(:no) { described_class::SHARED_OWNERSHIP_NO_REASONS.sample }
-      before { legal_aid_application.update(shared_ownership: no) }
-
-      it 'resets percentage home' do
-        expect(legal_aid_application.percentage_home).to be_blank
-      end
-    end
-
-    context 'on own home set to mortgage' do
-      let(:legal_aid_application) do
-        create :legal_aid_application, outstanding_mortgage_amount: Faker::Number.decimal.to_d
-      end
-
-      before { legal_aid_application.own_home_mortgage! }
-
-      it 'resets outstanding mortgage' do
-        expect(legal_aid_application.reload.outstanding_mortgage_amount).to be_blank
       end
     end
   end
