@@ -5,6 +5,7 @@ module Citizens
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index and where the first page is displayed.
     def show
+      sign_out current_provider if provider_signed_in?
       secure_id = params[:id]
       legal_aid_application = LegalAidApplication.find_by_secure_id!(secure_id)
 
