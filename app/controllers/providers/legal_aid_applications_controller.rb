@@ -5,8 +5,8 @@ module Providers
 
     # GET /provider/applications
     def index
-      # TODO: update to return only current Provider's applications when provider can be identified
-      @applications = LegalAidApplication.limit(10)
+      # TODO: Add pagination at some point
+      @applications = current_provider.legal_aid_applications.latest.limit(10)
     end
 
     # POST /provider/applications

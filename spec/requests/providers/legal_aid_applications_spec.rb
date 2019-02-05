@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'providers legal aid application requests', type: :request do
   describe 'GET /providers/applications' do
     let!(:legal_aid_application) { create :legal_aid_application }
+    let(:provider) { legal_aid_application.provider }
+    let(:other_provider) { create(:provider) }
     subject { get providers_legal_aid_applications_path }
 
     context 'when the provider is not authenticated' do
@@ -12,7 +14,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
@@ -30,6 +32,17 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         it "includes a link to the legal aid application's current path" do
           expect(response.body).to include(providers_legal_aid_application_applicant_path(legal_aid_application))
         end
+      end
+    end
+
+    context 'when another provider is authenticated' do
+      before do
+        login_as other_provider
+        subject
+      end
+
+      it 'has no current applications' do
+        expect(response.body).not_to include('Current applications')
       end
     end
   end

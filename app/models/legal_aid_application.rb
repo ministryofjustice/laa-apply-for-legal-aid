@@ -28,6 +28,8 @@ class LegalAidApplication < ApplicationRecord
 
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
 
+  scope :latest, -> { order(created_at: :desc) }
+
   enum(
     own_home: {
       no: 'no'.freeze,
