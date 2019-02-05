@@ -14,5 +14,9 @@ RSpec.describe 'Providers::BaseController' do
     it 'returns http forbidden' do
       expect(response).to have_http_status(:forbidden)
     end
+
+    it 'display no access page' do
+      expect(unescaped_response_body).to include('You cannot view this page')
+    end
   end
 end
