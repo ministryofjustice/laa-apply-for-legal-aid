@@ -85,7 +85,32 @@ module BaseForm
       @attributes ||= {}
     end
 
+
+    def save_as_draft
+      @draft = true
+      set_blanks_to_nil
+      save unless all_entries_blank?
+    end
+
     private
+
+    def draft?
+      @draft
+    end
+
+    def set_blanks_to_nil
+      self.class.locally_assigned.each do |attr|
+        attributes[attr.to_s] = nil if attributes[attr.to_s].blank?
+      end
+    end
+
+    def all_entries_blank?
+      attributes_set_by_form.values.all? &:blank?
+    end
+
+    def attributes_set_by_form
+      attributes.slice(*self.class.locally_assigned.map(&:to_s))
+    end
 
     # Over-riding ActiveModel::AttributeAssignment method to store attributes as they are built
     # rubocop:disable Naming/UncommunicativeMethodParamName

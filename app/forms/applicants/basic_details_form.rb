@@ -10,20 +10,24 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
-    validates :first_name, :last_name, :national_insurance_number, presence: true
+    validates(
+      :email, :first_name, :last_name, :national_insurance_number, :date_of_birth,
+      presence: true,
+      unless: :draft?
+    )
 
     validates(
       :date_of_birth,
       date: {
         not_in_the_future: true,
         earliest_allowed_date: { date: '1900-01-01' }
-      }
+      },
+      allow_blank: true
     )
 
     validate :validate_national_insurance_number
 
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
-    validates :email, presence: true
 
     def initialize(*args)
       super
@@ -67,6 +71,7 @@ module Applicants
     end
 
     def validate_national_insurance_number
+      return if draft? && national_insurance_number.blank?
       return if test_level_validation? && known_test_ninos.include?(national_insurance_number)
       return if Applicant::NINO_REGEXP =~ national_insurance_number
 
