@@ -2,10 +2,8 @@
 en:
   shared:
     access_denied:
-      action_request: perform this action.
-      get_request: view this page.
-      heading_1: Access denied
-      permission_text: You do not have permission to
+      heading_1: You cannot view this page
+      permission_text: You can only view or edit this application if you created it
     check_answers_assets:
       assets:
         other_assets: Other assets
