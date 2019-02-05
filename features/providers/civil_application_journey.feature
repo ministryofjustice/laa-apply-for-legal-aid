@@ -361,6 +361,20 @@ Feature: Civil application journeys
     Then I fill "Details of proceedings before the court" with "The case is already in the court"
     Then I click "Continue"
     Then I should be on a page showing "Statement of case"
+    Then I fill "Statement" with "Statement of case"
+    Then I click "Continue"
+    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
+    Then I fill "Estimated legal cost" with "1000"
+    Then I click "Continue"
+    Then I should be on a page showing "What are the prospects of success?"
+    Then I choose "Borderline"
+    Then I fill "Success prospect details" with "Prospects of success"
+    Then I click "Continue"
+    Then I should be on a page showing "Client declaration"
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    Then I click "Accept and send application"
+    Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
 
   @javascript
   Scenario: Navigate back capital flow

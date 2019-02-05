@@ -14,10 +14,6 @@ module Providers
       @form = MeritsAssessments::SuccessProspectForm.new(form_params.merge(model: merits_assessment))
 
       if @form.save
-        if params.key?(:continue_button)
-          render plain: 'Placeholder: Will navigate to Client declaration'
-          return
-        end
         continue_or_save_draft
       else
         render :show

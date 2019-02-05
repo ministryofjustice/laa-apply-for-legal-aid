@@ -12,6 +12,8 @@ module LegalAidApplicationStateMachine
       state :checking_citizen_answers
       state :checking_passported_answers
       state :means_completed
+      state :checking_merits_answers
+      state :merits_completed
 
       event :check_your_answers do
         transitions from: :initiated, to: :checking_answers
@@ -38,6 +40,7 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_answers, to: :initiated
         transitions from: :checking_citizen_answers, to: :provider_submitted
         transitions from: :checking_passported_answers, to: :answers_checked
+        transitions from: :checking_merits_answers, to: :means_completed
       end
 
       event :check_citizen_answers do
@@ -48,6 +51,14 @@ module LegalAidApplicationStateMachine
       event :complete_means do
         transitions from: :checking_citizen_answers, to: :means_completed
         transitions from: :checking_passported_answers, to: :means_completed
+      end
+
+      event :check_merits_answers do
+        transitions from: :means_completed, to: :checking_merits_answers
+      end
+
+      event :complete_merits do
+        transitions from: :checking_merits_answers, to: :merits_completed
       end
     end
   end

@@ -9,9 +9,7 @@ module Providers
 
     def update
       merits_assessment.update!(client_merits_declaration: true)
-      # TO DO add correct redirect here when it is implemented
-      # redirect_to next_step_url
-      render plain: 'Placeholder: Merits check your answers page will go here'
+      redirect_to next_step_url
     end
 
     private

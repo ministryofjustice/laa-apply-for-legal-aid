@@ -45,6 +45,20 @@ en:
           body: Your client receives benefits that qualify for legal aid.
           next: Your client will have to declare whether they have any savings, own a home or anything else that can pay for legal aid.
           title: receives a qualifying benefit
+    check_merits_answers:
+      show:
+        h1-heading: Check your answers
+        h2-heading: Merits assessment
+        items:
+          client_received_legal_help: Client received legal help
+          proceedings_currently_before_court: Proceedings currently before court
+          statement_of_case: Statement of case
+          estimated_legal_costs: Estimated legal costs
+          prospects_of_success: Prospects of success
+          client_declaration: Client declaration
+          client_declaration_answer: Read & agreed
+        complete-application-heading: Complete the application
+        complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
     check_passported_answers:
       show:
         assets:
@@ -197,4 +211,3 @@ en:
     success_prospects:
       show:
         h1-heading: What are the prospects of success?
-

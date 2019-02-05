@@ -1,6 +1,7 @@
 ---
 en:
   generic:
+    accept_and_send: Accept and send application
     address:
       postcode: Postcode
       postcode_label: postcode

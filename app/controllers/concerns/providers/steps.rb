@@ -104,32 +104,34 @@ module Providers
     },
     proceedings_before_the_courts: {
       path: :providers_legal_aid_application_proceedings_before_the_court_path,
-      # TODO: forward TBD, client_received_legal_helps is just a placeholder
       forward: :statement_of_cases,
       back: :client_received_legal_helps
     },
     statement_of_cases: {
       path: :providers_legal_aid_application_statement_of_case_path,
-      forward: :client_received_legal_helps,
+      forward: :estimated_legal_costs,
       back: :proceedings_before_the_courts
     },
     estimated_legal_costs: {
       path: :providers_legal_aid_application_estimated_legal_costs_path,
       forward: :success_prospects,
-      # TODO: fix back when back page is implemented
+      back: :statement_of_cases
+    },
+    success_prospects: {
+      path: :providers_legal_aid_application_success_prospects_path,
+      forward: :merits_declarations,
       back: :estimated_legal_costs
     },
     merits_declarations: {
       path: :providers_legal_aid_application_merits_declaration_path,
-      # TO DO this will point to merits_check_answers when implemented
-      forward: :merits_declarations,
-      # TO DO this will point to prospects_of_success when implemented
-      back: :merits_declarations
+      forward: :check_merits_answers,
+      back: :success_prospects
     },
-    success_prospects: {
-      path: :providers_legal_aid_application_success_prospects_path,
-      forward: :success_prospects,
-      back: :estimated_legal_costs
+    check_merits_answers: {
+      path: :providers_legal_aid_application_check_merits_answers_path,
+      # TO DO implement when next step is known
+      forward: :check_merits_answers,
+      back: :merits_declarations
     }
   }.freeze
 end

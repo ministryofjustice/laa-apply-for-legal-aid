@@ -62,8 +62,7 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
         end
 
         it 'redirects to the next page' do
-          # TODO: update when forward page is implemented
-          expect(unescaped_response_body).to include('Placeholder: Will navigate to Client declaration')
+          expect(response).to redirect_to providers_legal_aid_application_merits_declaration_path(legal_aid_application)
         end
       end
 

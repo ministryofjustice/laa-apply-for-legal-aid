@@ -82,6 +82,10 @@ Rails.application.routes.draw do
       resource :proceedings_before_the_court, only: %i[show update]
       resource :estimated_legal_costs, only: %i[show update]
       resource :success_prospects, only: %i[show update]
+      resource :check_merits_answers, only: [:show] do
+        patch :continue
+        patch :reset
+      end
     end
   end
 end
