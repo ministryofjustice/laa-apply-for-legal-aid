@@ -15,3 +15,7 @@ en:
               invalid: address is not in the right format
             national_insurance_number:
               invalid: is not in the right format
+        statement_of_case:
+          attributes:
+            statement:
+              blank: Enter the statement of case

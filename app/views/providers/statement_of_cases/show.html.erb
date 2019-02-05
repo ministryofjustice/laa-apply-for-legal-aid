@@ -1,0 +1,38 @@
+<%= provider_page page_title: t('.h1-heading'), template: :basic do %>
+
+  <%= form_with(
+        model: @statement_of_case,
+        url: providers_legal_aid_application_statement_of_case_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <%= govuk_form_group(
+          input: :proceedings_before_the_court,
+          show_error_if: @statement_of_case.errors.any?
+        ) do %>
+
+      <%= govuk_fieldset_header(content_for(:page_title)) %>
+
+      <%= govuk_error_message(@statement_of_case.errors[:statement].first) %>
+
+      <label class="govuk-label" for="more-detail">
+        <p class="govuk-body-l"><%= t('.instructions') %></p>
+        <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
+        <ul class="govuk-list govuk-list--bullet">
+          <% (1..6).each do |bullet_number| %>
+            <li><%= t(".bullet-#{bullet_number}") %></li>
+          <% end %>
+        </ul>
+      </label>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <%= form.govuk_text_area :statement, label: nil, rows: 15 %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <%= render partial: 'shared/forms/next_action_buttons', locals: { continue_id: 'continue', show_draft: true, form: form } %>
+    <% end %>
+  <% end %>
+<% end %>

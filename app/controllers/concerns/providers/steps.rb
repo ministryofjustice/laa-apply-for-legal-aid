@@ -105,8 +105,13 @@ module Providers
     proceedings_before_the_courts: {
       path: :providers_legal_aid_application_proceedings_before_the_court_path,
       # TODO: forward TBD, client_received_legal_helps is just a placeholder
-      forward: :client_received_legal_helps,
+      forward: :statement_of_cases,
       back: :client_received_legal_helps
+    },
+    statement_of_cases: {
+      path: :providers_legal_aid_application_statement_of_case_path,
+      forward: :client_received_legal_helps,
+      back: :proceedings_before_the_courts
     },
     estimated_legal_costs: {
       path: :providers_legal_aid_application_estimated_legal_costs_path,
