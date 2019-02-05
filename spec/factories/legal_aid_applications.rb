@@ -119,5 +119,9 @@ FactoryBot.define do
     trait :with_undetermined_benefit_check_result do
       benefit_check_result { build :benefit_check_result, :undetermined }
     end
+
+    trait :draft do
+      draft { true }
+    end
   end
 end

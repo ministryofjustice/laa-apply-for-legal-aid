@@ -88,6 +88,19 @@ RSpec.describe 'providers applicant requests', type: :request do
           expect(new_applicant).to be_instance_of(Applicant)
         end
 
+        context 'when the application is in draft' do
+          let(:application) { create(:legal_aid_application, :draft) }
+
+          it 'redirects provider to next step of the submission' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(application))
+          end
+
+          it 'sets the application as no longer draft' do
+            expect { subject }.to change { application.reload.draft? }.from(true).to(false)
+          end
+        end
+
         context 'when the legal aid application is in checking_answers state' do
           let(:application) { create(:legal_aid_application, state: :checking_answers) }
 
@@ -147,7 +160,7 @@ RSpec.describe 'providers applicant requests', type: :request do
           }
         end
 
-        it 'redirects provider to next step of the submission' do
+        it "redirects provider to provider's applications page" do
           subject
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
@@ -157,6 +170,10 @@ RSpec.describe 'providers applicant requests', type: :request do
 
           new_applicant = application.reload.applicant
           expect(new_applicant).to be_instance_of(Applicant)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { application.reload.draft? }.from(false).to(true)
         end
 
         context 'when the application does not exist' do

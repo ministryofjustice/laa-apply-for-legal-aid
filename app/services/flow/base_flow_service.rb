@@ -31,7 +31,7 @@ module Flow
     end
 
     def forward_path
-      return urls.providers_legal_aid_applications_path if params.key?(:draft_button)
+#      return urls.providers_legal_aid_applications_path if params.key?(:draft_button)
 
       if checking_answers? && check_answers_step
         return path(forward_step) if carry_on_sub_flow?
