@@ -19,7 +19,8 @@ module LegalAidApplicationStateMachine
       end
 
       event :answers_checked do
-        transitions from: :checking_answers, to: :answers_checked
+        transitions from: :checking_answers, to: :answers_checked,
+                    after: -> { CleanupCapitalAttributes.call(self) }
       end
 
       event :check_passported_answers do

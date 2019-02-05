@@ -226,4 +226,31 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe 'attributes are synced on answers_checked' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
+    it 'passes application to keep in sync service' do
+      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
+      legal_aid_application.answers_checked!
+    end
+
+    context 'and attributes changed' do
+      before do
+        legal_aid_application.answers_checked!
+        legal_aid_application.reload
+      end
+      it 'resets property values' do
+        expect(legal_aid_application.property_value).to be_blank
+      end
+      it 'resets outstanding mortgage' do
+        expect(legal_aid_application.outstanding_mortgage_amount).to be_blank
+      end
+      it 'resets shared ownership' do
+        expect(legal_aid_application.shared_ownership).to be_blank
+      end
+      it 'resets percentage home' do
+        expect(legal_aid_application.percentage_home).to be_blank
+      end
+    end
+  end
 end
