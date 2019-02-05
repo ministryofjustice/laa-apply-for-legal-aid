@@ -1,8 +1,7 @@
 module Providers
   class SuccessProspectsController < BaseController
     include ApplicationDependable
-    include SaveAsDraftable
-    include Steppable
+    include Flowable
 
     before_action :authorize_legal_aid_application
 
@@ -14,7 +13,7 @@ module Providers
       @form = MeritsAssessments::SuccessProspectForm.new(form_params.merge(model: merits_assessment))
 
       if @form.save
-        continue_or_save_draft
+        go_forward
       else
         render :show
       end

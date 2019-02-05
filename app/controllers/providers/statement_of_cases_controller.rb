@@ -1,8 +1,7 @@
 module Providers
   class StatementOfCasesController < BaseController
     include ApplicationDependable
-    include Steppable
-    include SaveAsDraftable
+    include Flowable
     before_action :authorize_legal_aid_application
 
     def show
@@ -13,7 +12,7 @@ module Providers
       statement_of_case.statement = statement_of_case_params[:statement]
 
       if statement_of_case.save
-        continue_or_save_draft
+        go_forward
       else
         render :show
       end

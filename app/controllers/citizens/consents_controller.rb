@@ -10,17 +10,16 @@ module Citizens
       @form.save
 
       if @form.open_banking_consent == 'true'
-        redirect_to applicant_true_layer_omniauth_authorize_path
+        go_forward
       else
         render plain: 'Landing page: No Consent provided'
-        # redirect_to citizens_information_path
       end
     end
 
     private
 
     def edit_params
-      consent_params.merge(model: current_applicant.legal_aid_application)
+      consent_params.merge(model: legal_aid_application)
     end
 
     def consent_params

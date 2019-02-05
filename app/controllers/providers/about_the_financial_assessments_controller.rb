@@ -1,7 +1,7 @@
 module Providers
   class AboutTheFinancialAssessmentsController < BaseController
     include ApplicationDependable
-    include Steppable
+    include Flowable
 
     def show; end
 

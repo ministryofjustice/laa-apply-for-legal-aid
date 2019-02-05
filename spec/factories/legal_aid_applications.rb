@@ -38,6 +38,10 @@ FactoryBot.define do
       state { 'merits_completed' }
     end
 
+    trait :checking_answers do
+      state { :checking_answers }
+    end
+
     trait :with_proceeding_types do
       transient do
         proceeding_types_count { 1 }

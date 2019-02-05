@@ -1,7 +1,7 @@
 module Providers
   class AddressLookupsController < BaseController
     include ApplicationDependable
-    include Steppable
+    include Flowable
 
     def show
       @form = Addresses::AddressLookupForm.new
@@ -9,10 +9,9 @@ module Providers
 
     def update
       @form = Addresses::AddressLookupForm.new(form_params)
-      @back_step_url = providers_legal_aid_application_address_lookup_path
 
       if @form.save
-        redirect_to next_step_url
+        go_forward
       else
         render :show
       end

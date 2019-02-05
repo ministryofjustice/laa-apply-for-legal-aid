@@ -1,8 +1,7 @@
 module Providers
   class CheckMeritsAnswersController < BaseController
     include ApplicationDependable
-    include SaveAsDraftable
-    include Steppable
+    include Flowable
 
     def show
       @merits = legal_aid_application.merits_assessment
@@ -12,12 +11,12 @@ module Providers
 
     def continue
       legal_aid_application.complete_merits! unless legal_aid_application.merits_completed?
-      render plain: 'End of provider-answered merits assessment questions for passported clients'
+      go_forward
     end
 
     def reset
       legal_aid_application.reset!
-      redirect_to back_step_url
+      redirect_to back_path
     end
   end
 end

@@ -1,13 +1,11 @@
 module Providers
   class ProceedingsTypesController < BaseController
     include ApplicationDependable
-    include Steppable
-    include SaveAsDraftable
+    include Flowable
 
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
       authorize legal_aid_application
-      @back_step_url = back_step_path unless legal_aid_application.checking_answers?
       proceeding_types
     end
 
@@ -15,7 +13,7 @@ module Providers
     def create
       authorize legal_aid_application
       if legal_aid_application.proceeding_types.present?
-        continue_or_save_draft
+        go_forward
       else
         legal_aid_application.errors.add(:'proceeding-search-input', t('.search_and_select'))
         proceeding_types
@@ -46,12 +44,6 @@ module Providers
 
     def proceeding_types
       @proceeding_types ||= ProceedingType.all
-    end
-
-    def back_step_path
-      return providers_legal_aid_application_address_selection_path if applicant.address&.lookup_used?
-
-      providers_legal_aid_application_address_path
     end
   end
 end

@@ -1,7 +1,7 @@
 module Providers
   class MeritsDeclarationsController < BaseController
     include ApplicationDependable
-    include Steppable
+    include Flowable
 
     before_action :authorize_legal_aid_application
 
@@ -9,7 +9,7 @@ module Providers
 
     def update
       merits_assessment.update!(client_merits_declaration: true)
-      redirect_to next_step_url
+      go_forward
     end
 
     private

@@ -54,6 +54,15 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
         patch_request
         expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
       end
+
+      context 'while checking answers' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_answers }
+
+        it 'redirects to the next step in flow' do
+          patch_request
+          expect(response).to redirect_to(citizens_percentage_home_path)
+        end
+      end
     end
 
     context 'No path' do
@@ -71,6 +80,15 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
         expect(legal_aid_application.shared_ownership).to eq nil
         patch_request
         expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
+      end
+
+      context 'while checking answers' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_answers }
+
+        it 'redirects to check answers page' do
+          patch_request
+          expect(response).to redirect_to(citizens_check_answers_path)
+        end
       end
     end
 
