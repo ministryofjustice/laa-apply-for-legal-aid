@@ -21,7 +21,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
       end
 
       it "includes a link to the legal aid application's default start path" do
-        expect(response.body).to include(providers_legal_aid_application_proceedings_type_path(legal_aid_application))
+        expect(response.body).to include(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
 
       context 'when legal_aid_application current path set' do

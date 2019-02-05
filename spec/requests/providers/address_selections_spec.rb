@@ -142,7 +142,7 @@ RSpec.describe 'address selections requests', type: :request do
       it 'redirects to next submission step' do
         subject
 
-        expect(response).to redirect_to(providers_legal_aid_application_proceedings_type_path)
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
       end
 
       it 'records that the lookup service was used' do

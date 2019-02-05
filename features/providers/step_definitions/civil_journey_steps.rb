@@ -53,7 +53,7 @@ Given('I complete the journey as far as check your answers') do
     Then I click "Continue"
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
   )
 end
@@ -73,7 +73,7 @@ Given('I complete the passported journey as far as check your answers') do
     Then I click "Continue"
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
-    Then I select and continue
+    Then I select a proceeding type and continue
     Then I should be on a page showing 'Check your answers'
   )
 end
@@ -123,8 +123,24 @@ Then('the answer for {string} should be {string}') do |field_name, answer|
   end
 end
 
-Then(/^I select and continue$/) do
-  find('#proceeding-list').first(:button, 'Select and continue').click
+Then('I select a proceeding type and continue') do
+  find('#proceeding-list').first(:button, 'Select').click
+  click_button('Continue')
+end
+
+Then('I select proceeding type {int}') do |index|
+  find('#proceeding-list').all(:button, 'Select')[index - 1].click
+end
+
+Then('I expect to see {int} proceeding types selected') do |number|
+  expect(page).to have_selector(
+    '.selected-proceeding-types .selected-proceeding-type',
+    count: number
+  )
+end
+
+Then('I click the first {string} in selected proceeding types') do |link|
+  find('.selected-proceeding-types').first(:link, link).click
 end
 
 Then(/^I see the client details page$/) do

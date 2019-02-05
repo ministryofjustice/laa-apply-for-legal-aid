@@ -60,9 +60,9 @@
 
   <%= check_answer_link(
         name: :proceeding_type,
-        url: providers_legal_aid_application_proceedings_type_path(anchor: 'proceeding-search-input'.freeze),
+        url: providers_legal_aid_application_proceedings_types_path(anchor: 'proceeding-search-input'.freeze),
         question: t('.section_proceeding.proceeding'),
-        answer: @proceeding.meaning
+        answer: @proceeding_types.map(&:meaning)
       ) %>
 
   <div class="govuk-!-padding-bottom-9"></div>

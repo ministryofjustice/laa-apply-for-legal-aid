@@ -1,6 +1,9 @@
+@import "govuk-frontend/settings/all";
+@import "govuk-frontend/helpers/all";
+
 .proceeding-item {
   display: none;
-  
+
   .control-column {
     text-align: right;
   }
@@ -17,4 +20,12 @@
   margin-right: 1px;
   background-color: #fff2d3;
   padding: 2px 0px 0px;
+}
+
+.selected-proceeding-types {
+  .control-column {
+    @include govuk-media-query($from: desktop) {
+      text-align: right;
+    }
+  }
 }

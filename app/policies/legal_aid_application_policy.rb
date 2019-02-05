@@ -1,9 +1,21 @@
 class LegalAidApplicationPolicy < ApplicationPolicy
+  def index?
+    my_record?
+  end
+
   def show?
     my_record?
   end
 
   def update?
+    my_record?
+  end
+
+  def destroy?
+    my_record?
+  end
+
+  def create?
     my_record?
   end
 
