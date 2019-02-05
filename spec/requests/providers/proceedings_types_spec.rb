@@ -67,7 +67,12 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
   end
 
   describe 'create: POST /providers/applications/:legal_aid_application_id/proceedings_types' do
-    subject { post providers_legal_aid_application_proceedings_types_path(legal_aid_application) }
+    subject do
+      post(
+        providers_legal_aid_application_proceedings_types_path(legal_aid_application),
+        params: { continue_button: 'Continue' }
+      )
+    end
 
     before do
       login_as provider

@@ -2,6 +2,7 @@ module Providers
   class ProceedingsTypesController < BaseController
     include ApplicationDependable
     include Steppable
+    include SaveAsDraftable
 
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
@@ -14,7 +15,7 @@ module Providers
     def create
       authorize legal_aid_application
       if legal_aid_application.proceeding_types.present?
-        redirect_to next_step_url
+        continue_or_save_draft
       else
         legal_aid_application.errors.add(:'proceeding-search-input', t('.search_and_select'))
         proceeding_types

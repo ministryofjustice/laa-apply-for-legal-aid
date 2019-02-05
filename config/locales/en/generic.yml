@@ -13,7 +13,9 @@ en:
     home: Home
     information: Information
     'no': 'No'
+    remove: Remove
     save_as_draft: Save as draft
+    select: Select
     send: Send
     start: Start
     start_now: Start now
