@@ -1,3 +1,3 @@
-class ContactsController < ApplicationController
+class ContactsController < BaseController
   def show; end
 end

@@ -1,5 +1,5 @@
 module Providers
-  class OnlineBankingsController < BaseController
+  class OnlineBankingsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
 

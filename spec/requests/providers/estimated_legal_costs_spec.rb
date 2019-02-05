@@ -21,12 +21,6 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
       end
-
-      describe 'back link' do
-        it 'points to statement of case' do
-          expect(response.body).to have_back_link(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
-        end
-      end
     end
   end
 

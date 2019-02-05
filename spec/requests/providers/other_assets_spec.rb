@@ -27,12 +27,6 @@ RSpec.describe 'provider other assets requests', type: :request do
       it 'displays the show page' do
         expect(response.body).to include I18n.t('providers.other_assets.show.h1-heading')
       end
-
-      describe 'back link' do
-        it 'points to savings and investments page' do
-          expect(response.body).to have_back_link(providers_legal_aid_application_savings_and_investment_path(application))
-        end
-      end
     end
   end
 

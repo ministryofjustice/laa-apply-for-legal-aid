@@ -1,5 +1,5 @@
 module Providers
-  class CheckMeritsAnswersController < BaseController
+  class CheckMeritsAnswersController < ProviderBaseController
     include ApplicationDependable
     include Flowable
 

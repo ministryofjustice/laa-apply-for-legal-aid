@@ -129,11 +129,13 @@ RSpec.describe 'check your answers requests', type: :request do
 
     before do
       legal_aid_application.check_citizen_answers!
+      get citizens_restrictions_path
+      get citizens_check_answers_path
       subject
     end
 
     it 'should redirect back' do
-      expect(response).to redirect_to(citizens_restrictions_path)
+      expect(response).to redirect_to(citizens_restrictions_path(back: true))
     end
 
     it 'should change the state back to "provider_submitted"' do

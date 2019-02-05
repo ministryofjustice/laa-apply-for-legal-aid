@@ -1,5 +1,5 @@
 module Providers
-  class CheckPassportedAnswersController < BaseController
+  class CheckPassportedAnswersController < ProviderBaseController
     include ApplicationDependable
     include Flowable
 

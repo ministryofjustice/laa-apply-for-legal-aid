@@ -1,5 +1,5 @@
 module Providers
-  class CheckProviderAnswersController < BaseController
+  class CheckProviderAnswersController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

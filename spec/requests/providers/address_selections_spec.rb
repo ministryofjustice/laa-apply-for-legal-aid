@@ -53,10 +53,13 @@ RSpec.describe 'address selections requests', type: :request do
       end
 
       context 'no postcode have been entered yet' do
+        before do
+          get providers_legal_aid_application_address_lookup_path(legal_aid_application)
+        end
+
         it 'redirects to the postcode entering page' do
           subject
-
-          expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path)
+          expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(back: true))
         end
       end
     end

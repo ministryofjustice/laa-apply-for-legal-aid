@@ -1,5 +1,5 @@
 module Citizens
-  class RestrictionsController < ApplicationController
+  class RestrictionsController < BaseController
     include Flowable
     before_action :authenticate_applicant!
 

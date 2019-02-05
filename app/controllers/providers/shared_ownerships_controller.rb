@@ -1,5 +1,5 @@
 module Providers
-  class SharedOwnershipsController < BaseController
+  class SharedOwnershipsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

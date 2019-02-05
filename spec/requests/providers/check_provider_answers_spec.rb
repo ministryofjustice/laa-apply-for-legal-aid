@@ -67,11 +67,13 @@ RSpec.describe 'check your answers requests', type: :request do
       before do
         login_as create(:provider)
         application.check_your_answers!
+        get providers_legal_aid_application_proceedings_types_path(application)
+        get providers_legal_aid_application_check_provider_answers_path(application)
         subject
       end
 
       it 'should redirect back' do
-        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(application))
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(application, back: true))
       end
 
       it 'should change the stage back to "initialized' do

@@ -48,6 +48,9 @@ gem 'sidekiq-status'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 
+# URL and path parsing
+gem 'addressable'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

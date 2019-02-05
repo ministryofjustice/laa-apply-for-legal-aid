@@ -36,10 +36,10 @@ RSpec.describe 'about financial assessments requests', type: :request do
     end
   end
 
-  describe 'POST /providers/applications/:legal_aid_application_id/about_the_financial_assessment/submit' do
-    let(:params) { {} }
-    subject { post "/providers/applications/#{application_id}/about_the_financial_assessment/submit", params: params }
+  describe 'PATCH /providers/applications/:legal_aid_application_id/about_the_financial_assessment/submit' do
     let(:mocked_email_service) { instance_double(CitizenEmailService) }
+    let(:params) { {} }
+    subject { patch "/providers/applications/#{application_id}/about_the_financial_assessment", params: params }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -98,7 +98,7 @@ RSpec.describe 'about financial assessments requests', type: :request do
 
         it 'display confirmation page after calling the email service' do
           subject
-          expect(response.body).to include(application.application_ref)
+          expect(response).to redirect_to providers_legal_aid_application_application_confirmation_path(application_id)
         end
       end
 

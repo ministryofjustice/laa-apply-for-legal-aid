@@ -1,5 +1,5 @@
 module Citizens
-  class AdditionalAccountsController < ApplicationController
+  class AdditionalAccountsController < BaseController
     include Flowable
 
     def index; end

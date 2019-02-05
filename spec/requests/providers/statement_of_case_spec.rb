@@ -42,13 +42,6 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           expect(response.body).to have_text_area_with_id_and_content('statement', soc.statement)
         end
       end
-
-      describe 'back link' do
-        it 'points to the client has received legal help page' do
-          subject
-          expect(response.body).to have_back_link(providers_legal_aid_application_proceedings_before_the_court_path(legal_aid_application))
-        end
-      end
     end
   end
 

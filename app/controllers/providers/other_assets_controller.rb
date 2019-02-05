@@ -1,5 +1,5 @@
 module Providers
-  class OtherAssetsController < BaseController
+  class OtherAssetsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

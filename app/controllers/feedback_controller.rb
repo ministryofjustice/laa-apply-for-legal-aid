@@ -1,4 +1,4 @@
-class FeedbackController < ApplicationController
+class FeedbackController < BaseController
   before_action :update_return_path
 
   def new

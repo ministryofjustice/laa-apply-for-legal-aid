@@ -1,5 +1,5 @@
 module Providers
-  class EstimatedLegalCostsController < BaseController
+  class EstimatedLegalCostsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

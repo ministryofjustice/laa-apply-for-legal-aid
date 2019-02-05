@@ -1,5 +1,5 @@
 module Providers
-  class StatementOfCasesController < BaseController
+  class StatementOfCasesController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

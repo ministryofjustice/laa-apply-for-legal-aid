@@ -1,5 +1,5 @@
 module Providers
-  class ProceedingsBeforeTheCourtsController < BaseController
+  class ProceedingsBeforeTheCourtsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

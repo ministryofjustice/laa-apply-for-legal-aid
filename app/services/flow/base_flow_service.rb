@@ -23,12 +23,6 @@ module Flow
       @current_step = current_step
     end
 
-    def back_path
-      return path(check_answers_step) if checking_answers? && check_answers_step
-
-      path(back_step)
-    end
-
     def forward_path
       if checking_answers? && check_answers_step
         return path(forward_step) if carry_on_sub_flow?
@@ -66,10 +60,6 @@ module Flow
       return path unless path.is_a?(Proc)
 
       path.call(legal_aid_application, urls)
-    end
-
-    def back_step
-      @back_step ||= step(:back)
     end
 
     def forward_step

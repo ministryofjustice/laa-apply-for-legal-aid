@@ -1,5 +1,5 @@
 module Providers
-  class PropertyValuesController < BaseController
+  class PropertyValuesController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

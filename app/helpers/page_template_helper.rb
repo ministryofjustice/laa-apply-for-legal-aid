@@ -1,9 +1,6 @@
 module PageTemplateHelper
   # A wrapper for the main elements needed in a page.
   #
-  # Note that there are journey specific methods that call `page_template`
-  # with modifications tailored to that journey: `provider_page` and `citizen_page`
-  #
   # `page_template` will wrap the main content, and add the main elements needed
   # at the start of each page (HTML title, navigation links, and heading):
   #
@@ -49,7 +46,7 @@ module PageTemplateHelper
         &content
       )
     template = :default unless %i[form basic].include?(template)
-    content_for(:navigation) { back_link unless back_link == :none }
+    content_for(:navigation) { back_link(back_link) unless back_link == :none }
     content_for(:page_title) { page_title }
     content = capture(&content) if content
     render(
@@ -60,17 +57,5 @@ module PageTemplateHelper
       content: content,
       show_errors_for: show_errors_for
     )
-  end
-
-  def provider_page(args, &content)
-    back_link = args.fetch(:back_link, {})
-    args[:back_link] = provider_back_link(back_link) unless back_link == :none
-    page_template(args, &content)
-  end
-
-  def citizen_page(args, &content)
-    back_link_args = args.fetch(:back_link, {})
-    args[:back_link] = back_link(back_link_args) unless back_link_args == :none
-    page_template(args, &content)
   end
 end

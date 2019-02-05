@@ -1,5 +1,5 @@
 module Providers
-  class ProceedingsTypesController < BaseController
+  class ProceedingsTypesController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

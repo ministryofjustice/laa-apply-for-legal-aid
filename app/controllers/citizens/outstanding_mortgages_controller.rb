@@ -1,5 +1,5 @@
 module Citizens
-  class OutstandingMortgagesController < ApplicationController
+  class OutstandingMortgagesController < BaseController
     include Flowable
     before_action :authenticate_applicant!
 

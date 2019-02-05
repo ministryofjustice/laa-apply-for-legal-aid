@@ -2,8 +2,8 @@ module Flowable
   extend ActiveSupport::Concern
 
   included do
-    delegate :back_path, :forward_path, to: :flow_service
-    helper_method :back_path, :forward_path
+    delegate :forward_path, to: :flow_service
+    helper_method :forward_path
 
     def go_forward
       if path?(forward_path)
