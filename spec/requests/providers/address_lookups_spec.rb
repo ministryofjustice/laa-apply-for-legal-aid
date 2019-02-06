@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'address lookup requests', type: :request do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
+  let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/address_lookup' do
     subject { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
@@ -14,12 +15,13 @@ RSpec.describe 'address lookup requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
       context 'when the applicant does not exist' do
-        let(:legal_aid_application) { SecureRandom.uuid }
+        let(:invalid_legal_aid_application) { SecureRandom.uuid }
+        subject { get providers_legal_aid_application_address_lookup_path(invalid_legal_aid_application) }
 
         it 'redirects the user to the applications page with an error message' do
           expect(response).to redirect_to(providers_legal_aid_applications_path)
@@ -53,11 +55,12 @@ RSpec.describe 'address lookup requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
       end
 
       context 'when the applicantion does not exist' do
-        let(:legal_aid_application) { SecureRandom.uuid }
+        let(:invalid_legal_aid_application) { SecureRandom.uuid }
+        subject { patch providers_legal_aid_application_address_lookup_path(invalid_legal_aid_application), params: params }
 
         it 'redirects the user to the applications page with an error message' do
           subject
