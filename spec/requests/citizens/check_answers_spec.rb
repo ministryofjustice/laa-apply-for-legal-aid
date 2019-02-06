@@ -100,10 +100,10 @@ RSpec.describe 'check your answers requests', type: :request do
 
     before do
       legal_aid_application.check_citizen_answers!
-      subject
     end
 
     it 'should redirect to next step' do
+      subject
       expect(response.body).to eq('citizens_application_submitted_path')
     end
 
@@ -113,7 +113,13 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     it 'should change the state to means_completed' do
+      subject
       expect(legal_aid_application.reload.means_completed?).to be_truthy
+    end
+
+    it 'syncs the application' do
+      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
+      subject
     end
   end
 
