@@ -106,13 +106,21 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
           expect(legal_aid_application.reload.merits_assessment.estimated_legal_cost).to eq estimated_legal_cost
         end
 
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+        end
+
         context 'with an invalid param' do
           context 'value is not entered' do
             let(:params) { { merits_assessment: { estimated_legal_cost: '' } } }
-            it 're-renders the form with the validation errors' do
+            it "redirects provider to provider's applications page" do
               subject
-              expect(unescaped_response_body).to include('There is a problem')
-              expect(unescaped_response_body).to include('Enter the estimated legal costs of doing the work')
+              expect(response).to redirect_to(providers_legal_aid_applications_path)
             end
           end
 

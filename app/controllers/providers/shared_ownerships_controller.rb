@@ -2,6 +2,7 @@ module Providers
   class SharedOwnershipsController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
@@ -10,11 +11,7 @@ module Providers
     def update
       @form = LegalAidApplications::SharedOwnershipForm.new(shared_ownership_params.merge(model: legal_aid_application))
 
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private

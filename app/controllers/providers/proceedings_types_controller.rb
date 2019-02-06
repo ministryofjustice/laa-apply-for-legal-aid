@@ -2,6 +2,7 @@ module Providers
   class ProceedingsTypesController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
@@ -12,6 +13,8 @@ module Providers
     # POST /provider/applications/:legal_aid_application_id/proceedings_types
     def create
       authorize legal_aid_application
+      return continue_or_draft if draft_selected?
+
       if legal_aid_application.proceeding_types.present?
         go_forward
       else

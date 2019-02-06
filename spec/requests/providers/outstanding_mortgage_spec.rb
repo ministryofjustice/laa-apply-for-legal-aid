@@ -6,7 +6,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
   let(:params) do
     {
       legal_aid_application: { outstanding_mortgage_amount: outstanding_mortgage_amount },
-      legal_aid_application_id: application.id
+      legal_aid_application_id: legal_aid_application.id
     }
   end
 
@@ -38,7 +38,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:id/outstanding_mortgage', type: :request do
-    subject { patch providers_legal_aid_application_outstanding_mortgage_path(application), params: params.merge(submit_button) }
+    subject { patch providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:submit_button) do
       { continue_button: 'Continue' }
@@ -55,7 +55,6 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
       context 'Submitted with the Continue button' do
         context 'when an outstanding mortgage value is entered' do
           context 'with valid values' do
-            let(:application) { legal_aid_application }
 
             it 'records the value in the legal aid application table' do
               legal_aid_application.reload
@@ -63,13 +62,12 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
             end
 
             it 'redirects to the shared ownership page' do
-              expect(response).to redirect_to providers_legal_aid_application_shared_ownership_path(application)
+              expect(response).to redirect_to providers_legal_aid_application_shared_ownership_path(legal_aid_application)
             end
           end
         end
 
         context 'when an outstanding mortgage value is not entered' do
-          let(:application) { legal_aid_application }
           let(:outstanding_mortgage_amount) { '' }
 
           it 'shows an error message' do
@@ -94,7 +92,6 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
         context 'when an outstanding mortgage value is entered' do
           context 'with valid values' do
-            let(:application) { legal_aid_application }
 
             it 'records the value in the legal aid application table' do
               legal_aid_application.reload
@@ -108,11 +105,23 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
         end
 
         context 'when an outstanding mortgage value is not entered' do
-          let(:application) { legal_aid_application }
           let(:params) do
             {
               legal_aid_application: { outstanding_mortgage_amount: '' },
-              legal_aid_application_id: application.id
+              legal_aid_application_id: legal_aid_application.id
+            }
+          end
+
+          it 'displays the provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
+
+        context 'when an invalid amount is entered' do
+          let(:params) do
+            {
+              legal_aid_application: { outstanding_mortgage_amount: 'invalid' },
+              legal_aid_application_id: legal_aid_application.id
             }
           end
 

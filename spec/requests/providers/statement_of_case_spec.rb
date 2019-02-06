@@ -97,15 +97,11 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context 'invalid params - nothing specified' do
+        context 'nothing specified' do
           let(:entered_text) { nil }
 
-          it 'returns http_success' do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.statement.blank'))
+          it 'redirects to provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
       end

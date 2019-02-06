@@ -27,11 +27,6 @@
 
     <% end %>
 
-    <%= render partial: 'shared/forms/next_action_buttons',
-               locals: {
-                 continue_id: 'continue',
-                 show_draft: true,
-                 form: form
-               } %>
+    <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>

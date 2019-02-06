@@ -12,8 +12,12 @@ module Providers
       draft_selected? ? form.save_as_draft : form.save
       return false if form.invalid?
 
+      continue_or_draft
+    end
+
+    def continue_or_draft
       legal_aid_application.update!(draft: draft_selected?)
-      
+
       if legal_aid_application.draft?
         redirect_to draft_target_endpoint
       else

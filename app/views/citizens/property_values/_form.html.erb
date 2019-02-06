@@ -13,11 +13,9 @@
                               class: 'govuk-!-width-one-third' %>
   <% end %>
 
-  <%= render partial: 'shared/forms/next_action_buttons',
-             locals: {
-               continue_id: 'continue',
-               show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
-               form: form
-             } %>
+  <%= next_action_buttons(
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+        form: form
+      ) %>
 
 <% end %>

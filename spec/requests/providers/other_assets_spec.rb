@@ -217,11 +217,7 @@ RSpec.describe 'provider other assets requests', type: :request do
       end
 
       context 'Submitted with Save as draft button' do
-        let(:submit_button) do
-          {
-            draft_button: 'Save as draft'
-          }
-        end
+        let(:submit_button) { { draft_button: 'Save as draft' } }
 
         before do
           patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
@@ -243,13 +239,13 @@ RSpec.describe 'provider other assets requests', type: :request do
             expect(oad.trust_value).to eq 1_234.56
           end
 
+          it "redirects provider to provider's applications page" do
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
+          end
+
           context 'has other_assets' do
             let(:oad) { create :other_assets_declaration, land_value: Faker::Number.decimal.to_d }
             let(:application) { oad.legal_aid_application }
-
-            before do
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
-            end
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be true
@@ -267,11 +263,11 @@ RSpec.describe 'provider other assets requests', type: :request do
               application.create_savings_amount!
               application.savings_amount.cash = Faker::Number.decimal.to_d
               application.savings_amount.save!
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
+              patch providers_legal_aid_application_other_assets_path(application), params: empty_params.merge(submit_button)
             end
 
             it 'redirects to provider applications page' do
-              expect(application.reload.other_assets?).to be false
+              expect(application.reload.other_assets?).to be true
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be true
               expect(response).to redirect_to providers_legal_aid_applications_path
@@ -281,10 +277,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has own home' do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
-
-            before do
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
-            end
+            let(:params) { empty_params }
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be false
@@ -297,10 +290,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has nothing' do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
-
-            before do
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
-            end
+            let(:params) { empty_params }
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be false
@@ -311,7 +301,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
         end
 
-        context 'invalid params - nothing specified' do
+        context 'invalid params' do
           let(:params) do
             {
               other_assets_declaration: {

@@ -82,16 +82,12 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context 'invalid params - nothing specified' do
+        context 'nothing specified' do
           let(:proceedings_before_the_court) { nil }
           let(:details_of_proceedings_before_the_court) { nil }
 
-          it 'returns http_success' do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.merits_assessment.attributes.proceedings_before_the_court.blank'))
+          it "redirects provider to provider's applications page" do
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
         end
 

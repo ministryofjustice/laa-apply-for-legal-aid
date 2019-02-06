@@ -37,7 +37,8 @@ RSpec.describe 'about financial assessments requests', type: :request do
   end
 
   describe 'POST /providers/applications/:legal_aid_application_id/about_the_financial_assessment/submit' do
-    subject { post "/providers/applications/#{application_id}/about_the_financial_assessment/submit" }
+    let(:params) { {} }
+    subject { post "/providers/applications/#{application_id}/about_the_financial_assessment/submit", params: params }
     let(:mocked_email_service) { instance_double(CitizenEmailService) }
 
     context 'when the provider is not authenticated' do
@@ -98,6 +99,24 @@ RSpec.describe 'about financial assessments requests', type: :request do
         it 'display confirmation page after calling the email service' do
           subject
           expect(response.body).to include(application.application_ref)
+        end
+      end
+
+      context 'when save as draft is selected' do
+        let(:params) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { application.reload.draft? }.from(false).to(true)
+        end
+
+        it 'does not send an email' do
+          expect(CitizenEmailService).not_to receive(:new).with(application)
+          subject
         end
       end
     end

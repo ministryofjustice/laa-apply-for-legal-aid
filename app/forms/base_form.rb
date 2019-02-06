@@ -92,11 +92,11 @@ module BaseForm
       save unless all_entries_blank?
     end
 
-    private
-
     def draft?
       @draft
     end
+
+    private
 
     def set_blanks_to_nil
       self.class.locally_assigned.each do |attr|

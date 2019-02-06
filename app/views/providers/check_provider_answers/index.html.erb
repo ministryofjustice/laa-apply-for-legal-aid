@@ -67,12 +67,9 @@
   </dl>
   <div class="govuk-!-padding-bottom-9"></div>
 
-  <%= render(
-        partial: 'shared/forms/next_action_buttons_form',
-        locals: {
-          url: continue_providers_legal_aid_application_check_provider_answers_path,
-          method: :patch,
-          show_draft: true
-        }
+  <%= next_action_buttons_with_form(
+        url: continue_providers_legal_aid_application_check_provider_answers_path,
+        method: :patch,
+        show_draft: true
       ) %>
 <% end %>

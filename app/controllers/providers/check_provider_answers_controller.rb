@@ -2,6 +2,7 @@ module Providers
   class CheckProviderAnswersController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def index
       @proceeding_types = legal_aid_application.proceeding_types
@@ -16,8 +17,8 @@ module Providers
     end
 
     def continue
-      legal_aid_application.answers_checked!
-      go_forward
+      legal_aid_application.answers_checked! unless draft_selected?
+      continue_or_draft
     end
   end
 end

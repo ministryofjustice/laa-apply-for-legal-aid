@@ -100,11 +100,7 @@ RSpec.describe 'provider own home requests', type: :request do
       end
 
       context 'Save as draft button pressed' do
-        let(:submit_button) do
-          {
-            draft_button: 'Save as draft'
-          }
-        end
+        let(:submit_button) { { draft_button: 'Save as draft' } }
 
         it 'updates the record' do
           expect(legal_aid_application.reload.own_home).to eq own_home
@@ -160,19 +156,16 @@ RSpec.describe 'provider own home requests', type: :request do
           end
         end
 
-        context 'invalid params - nothing specified' do
+        context 'nothing specified' do
           let(:params) { {} }
 
-          it 'returns http_success' do
-            expect(response).to have_http_status(:ok)
+          it "redirects provider to provider's applications page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it 'does not update the record' do
             expect(legal_aid_application.reload.own_home).to be_nil
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.own_home.blank'))
           end
         end
       end

@@ -2,13 +2,14 @@ module Providers
   class CheckBenefitsController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def index
       legal_aid_application.add_benefit_check_result if legal_aid_application.benefit_check_result_needs_updating?
     end
 
     def update
-      go_forward
+      continue_or_draft
     end
   end
 end

@@ -18,11 +18,9 @@
   </p>
 
   <div class="govuk-grid-row">
-    <%= render partial: 'shared/forms/next_action_buttons_form',
-               locals: {
-                 url: submit_providers_legal_aid_application_about_the_financial_assessment_path,
-                 method: :post,
-                 show_draft: true
-               } %>
+    <%= next_action_buttons_with_form(
+          url: submit_providers_legal_aid_application_about_the_financial_assessment_path,
+          show_draft: true
+        ) %>
   </div>
 <% end %>

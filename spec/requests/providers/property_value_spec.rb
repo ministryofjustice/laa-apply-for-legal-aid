@@ -118,8 +118,8 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
           context 'property is owned outright' do
             let(:application) { create :legal_aid_application, :with_applicant, :with_own_home_owned_outright }
 
-            # TODO: replace with correct path once other controllers are ready
-            it 'redirects to the shared question' do
+
+            it "redirects provider to provider's applications page" do
               expect(response).to redirect_to providers_legal_aid_applications_path
             end
           end
@@ -137,13 +137,9 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
         context 'when a property value is not entered' do
           let(:application) { legal_aid_application }
           let(:property_value) { '' }
-          it 'shows an error message' do
-            expect(response.body).to include('govuk-error-summary__title')
-          end
 
-          it 'does not record the value in the legal aid application table' do
-            legal_aid_application.reload
-            expect(legal_aid_application.property_value).to be nil
+          it "redirects provider to provider's applications page" do
+            expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
       end

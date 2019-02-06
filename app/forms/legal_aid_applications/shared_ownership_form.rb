@@ -6,7 +6,7 @@ module LegalAidApplications
 
     attr_accessor :shared_ownership
 
-    validates :shared_ownership, presence: { message: 'blank' }
+    validates :shared_ownership, presence: { message: 'blank' }, unless: :draft?
 
     delegate :shared_ownership?, to: :model
   end

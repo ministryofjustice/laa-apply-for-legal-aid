@@ -7,10 +7,10 @@ module MeritsAssessments
     attr_accessor :success_prospect, :success_prospect_details
 
     before_validation :clear_success_prospect_details
-    validates :success_prospect, presence: true
+    validates :success_prospect, presence: true, unless: :draft?
     validates :success_prospect_details,
               presence: true,
-              unless: proc { |form| form.success_prospect.to_s == MeritsAssessment.prospect_likely_to_succeed.to_s }
+              unless: proc { |form| form.draft? || form.success_prospect.to_s == MeritsAssessment.prospect_likely_to_succeed.to_s }
 
     private
 

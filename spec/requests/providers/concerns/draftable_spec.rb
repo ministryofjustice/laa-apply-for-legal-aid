@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::Draftable do
 
-  # Using providers/applicants update to thoroughly test draftable behaviour
+  # Using providers/applicants#update to thoroughly test draftable behaviour
   describe 'PATCH /providers/applications/:legal_aid_application_id/applicant' do
     let(:application) { create :legal_aid_application }
     let(:provider) { application.provider }

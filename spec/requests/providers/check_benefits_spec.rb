@@ -131,6 +131,10 @@ RSpec.describe 'check benefits requests', type: :request do
           it 'displays the providers applications page' do
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
+
+          it 'sets the application as draft' do
+            expect(application.reload).to be_draft
+          end
         end
 
         context 'when the check benefit result is negative' do
