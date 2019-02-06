@@ -49,7 +49,8 @@ module Flow
     private
 
     def checking_answers?
-      legal_aid_application.checking_answers? || legal_aid_application.checking_citizen_answers? || legal_aid_application.checking_passported_answers?
+      legal_aid_application.checking_answers? || legal_aid_application.checking_citizen_answers? || legal_aid_application.checking_passported_answers? ||
+        legal_aid_application.checking_merits_answers?
     end
 
     def carry_on_sub_flow?

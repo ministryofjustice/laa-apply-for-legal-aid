@@ -373,6 +373,22 @@ Feature: Civil application journeys
     Then I should be on a page showing "Client declaration"
     Then I click "Continue"
     Then I should be on a page showing "Check your answers"
+    And I click Check Your Answers Change link for 'Statement of Case'
+    Then I enter the statement 'This is some test data for the statement of case'
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
+    Then I click Check Your Answers Change link for 'Client received legal help'
+    Then I choose "Yes"
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'Client received legal help' should be 'Yes'
+    Then I click Check Your Answers Change link for 'Estimated legal costs'
+    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
+    Then I fill "Estimated legal cost" with "2345"
+    And I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'Estimated legal costs' should be "£2,345.00"
     Then I click "Accept and send application"
     Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
 

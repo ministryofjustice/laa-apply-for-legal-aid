@@ -118,9 +118,11 @@ end
 Then('the answer for {string} should be {string}') do |field_name, answer|
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
-  within "#app-check-your-answers__#{field_name}" do
-    have_content(answer)
-  end
+  expect(page).to have_css("#app-check-your-answers__#{field_name}")
+  expect(page).to have_content(answer)
+  # within "#app-check-your-answers__#{field_name}" do
+  #   have_content(answer)
+  # end
 end
 
 Then('I select a proceeding type and continue') do
@@ -187,6 +189,10 @@ end
 
 Then('I am on the client use online banking page') do
   expect(page).to have_content('Does your client use online banking?')
+end
+
+Then('Then I am on the does your client own their own home page') do
+  expect(page).to have_content('Does your client own the home that they live in?')
 end
 
 Then(/^I click find address$/) do
