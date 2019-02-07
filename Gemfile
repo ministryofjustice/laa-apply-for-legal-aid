@@ -40,6 +40,7 @@ gem 'ruby-saml-idp'
 gem 'jwt'
 
 # background processing
+gem 'redis-namespace'
 gem 'sidekiq'
 gem 'sidekiq-status'
 
