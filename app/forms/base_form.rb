@@ -85,7 +85,6 @@ module BaseForm
       @attributes ||= {}
     end
 
-
     def save_as_draft
       @draft = true
       set_blanks_to_nil
@@ -105,7 +104,7 @@ module BaseForm
     end
 
     def all_entries_blank?
-      attributes_set_by_form.values.all? &:blank?
+      attributes_set_by_form.values.all?(&:blank?)
     end
 
     def attributes_set_by_form

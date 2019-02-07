@@ -118,7 +118,6 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
           context 'property is owned outright' do
             let(:application) { create :legal_aid_application, :with_applicant, :with_own_home_owned_outright }
 
-
             it "redirects provider to provider's applications page" do
               expect(response).to redirect_to providers_legal_aid_applications_path
             end

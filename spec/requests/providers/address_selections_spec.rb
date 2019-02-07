@@ -164,7 +164,6 @@ RSpec.describe 'address selections requests', type: :request do
         end
       end
 
-
       context 'Form submitted using Save as draft button' do
         let(:submit_button) { { draft_button: 'Save as draft' } }
 

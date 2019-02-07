@@ -4,14 +4,15 @@ module MeritsAssessments
 
     form_for MeritsAssessment
 
-    attr_accessor :client_received_legal_help, :application_purpose
+    before_validation :clear_application_purpose
 
+    attr_accessor :client_received_legal_help, :application_purpose
 
     validates :client_received_legal_help, presence: true, unless: :draft?
     validates(
       :application_purpose,
       presence: true,
-      if: proc { |form| !form.draft? && form.client_received_legal_help.to_s == 'false'}
+      if: proc { |form| !form.draft? && form.client_received_legal_help.to_s == 'false' }
     )
 
     private
@@ -19,7 +20,5 @@ module MeritsAssessments
     def clear_application_purpose
       application_purpose.clear if client_received_legal_help.to_s == 'true'
     end
-
-    before_validation :clear_application_purpose
   end
 end

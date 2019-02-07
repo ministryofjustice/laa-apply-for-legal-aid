@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Providers::Draftable do
-
   # Using providers/applicants#update to thoroughly test draftable behaviour
   describe 'PATCH /providers/applications/:legal_aid_application_id/applicant' do
     let(:application) { create :legal_aid_application }
@@ -76,7 +75,7 @@ RSpec.describe Providers::Draftable do
           subject
 
           expect(unescaped_response_body).to include('There is a problem')
-          expect(unescaped_response_body).to include("email-error")
+          expect(unescaped_response_body).to include('email-error')
         end
 
         it 'does NOT create a new applicant' do

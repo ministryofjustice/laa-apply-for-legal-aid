@@ -55,7 +55,6 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
       context 'Submitted with the Continue button' do
         context 'when an outstanding mortgage value is entered' do
           context 'with valid values' do
-
             it 'records the value in the legal aid application table' do
               legal_aid_application.reload
               expect(legal_aid_application.outstanding_mortgage_amount).to be_within(0.01).of(321_654.87)
@@ -92,7 +91,6 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
         context 'when an outstanding mortgage value is entered' do
           context 'with valid values' do
-
             it 'records the value in the legal aid application table' do
               legal_aid_application.reload
               expect(legal_aid_application.outstanding_mortgage_amount).to be_within(0.01).of(321_654.87)
