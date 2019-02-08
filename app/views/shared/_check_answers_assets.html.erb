@@ -1,6 +1,6 @@
 <% application = nil if local_assigns[:application].nil? %>
 
-<dl class="app-check-your-answers app-check-your-answers--long">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :own_home,
         url: check_answer_url_for(user_type, :own_home, application),
@@ -35,25 +35,27 @@
         question: t('.assets.percentage_home'),
         answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
       ) if @legal_aid_application.shared_ownership? %>
+</dl>
 
-  <%= check_answer_link(
-        name: :savings_and_investments,
-        url: check_answer_url_for(user_type, :savings_and_investments, application),
-        question: t('.assets.savings_and_investments'),
-        answer: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.savings_and_investments.check_box_')
-      ) %>
+<%= check_answer_currency_list(
+      name: :savings_and_investments,
+      url: check_answer_url_for(user_type, :savings_and_investments, application),
+      question: t('.assets.savings_and_investments'),
+      answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.savings_and_investments.check_box_')
+    ) %>
 
-  <%= check_answer_link(
-        name: :other_assets,
-        url: check_answer_url_for(user_type, :other_assets, application),
-        question: t('.assets.other_assets'),
-        answer: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.other_assets.check_box_')
-      ) %>
+<%= check_answer_currency_list(
+      name: :other_assets,
+      url: check_answer_url_for(user_type, :other_assets, application),
+      question: t('.assets.other_assets'),
+      answer_hash: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.other_assets.check_box_')
+    ) %>
 
-  <%= check_answer_link(
+<dl>
+  <%= check_answer_list(
         name: :restrictions,
         url: check_answer_url_for(user_type, :restrictions, application),
         question: t('.assets.restrictions'),
-        answer: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
+        answers: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
       ) if @legal_aid_application.own_capital? %>
 </dl>

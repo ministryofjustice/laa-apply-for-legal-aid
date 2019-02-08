@@ -6,10 +6,9 @@
       }
     ) do %>
 
-  <dl class="app-check-your-answers app-check-your-answers--long">
-    <dt class="govuk-heading-m">
-      <%= t '.section_client.heading' %>
-    </dt>
+  <h2 class="govuk-heading-m"><%= t '.section_client.heading' %></h2>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
     <%= check_answer_link(
           name: :first_name,
@@ -54,15 +53,15 @@
         ) %>
   </dl>
 
-  <dt class="govuk-heading-m govuk-!-padding-top-9">
-    <%= t '.section_proceeding.heading' %>
-  </dt>
+  <h2 class="govuk-heading-m"><%= t '.section_proceeding.heading' %></h2>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
   <%= check_answer_link(
         name: :proceeding_type,
         url: providers_legal_aid_application_proceedings_types_path(anchor: 'proceeding-search-input'.freeze),
         question: t('.section_proceeding.proceeding'),
-        answer: @proceeding_types.map(&:meaning)
+        answer: @proceeding_types.first.meaning
       ) %>
 
   <div class="govuk-!-padding-bottom-9"></div>
