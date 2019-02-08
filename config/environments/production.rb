@@ -91,4 +91,6 @@ Rails.application.configure do
   config.x.logs_faraday_response = false
 
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
+
+  config.active_storage.service = :amazon
 end

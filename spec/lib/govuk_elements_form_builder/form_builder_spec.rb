@@ -18,7 +18,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     it 'includes a label' do
       expect(label.classes).to include('govuk-label')
-      expect(label[:for]).to eq('email')
+      expect(label[:for]).to eq(attribute)
       expect(label.content).to eq(label_copy)
     end
 
@@ -30,7 +30,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'hint: nil' do
-      let(:params) { [:email, hint: nil] }
+      let(:params) { [attribute.to_sym, hint: nil] }
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-hint')
@@ -39,7 +39,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'Display hint and no label (label: nil, hint: hint_copy)' do
-      let(:params) { [:email, label: nil, hint: hint_copy] }
+      let(:params) { [attribute.to_sym, label: nil, hint: hint_copy] }
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-label')
@@ -48,12 +48,12 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'pass a label parameter' do
-      let(:custom_label) { "Your client's email" }
-      let(:params) { [:email, label: custom_label] }
+      let(:custom_label) { Faker::Lorem.sentence }
+      let(:params) { [attribute.to_sym, label: custom_label] }
 
       it 'shows the custom label' do
         expect(label.classes).to include('govuk-label')
-        expect(label[:for]).to eq('email')
+        expect(label[:for]).to eq(attribute)
         expect(label.content).to eq(custom_label)
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'adding a custom class to the input' do
       let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [:email, class: custom_class] }
+      let(:params) { [attribute.to_sym, class: custom_class] }
 
       it 'adds custom class to the input' do
         expect(tag.classes).to include(custom_class)
@@ -84,12 +84,12 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'pass a label parameter with text and size' do
-      let(:custom_label) { "Your client's email" }
-      let(:params) { [:email, label: { text: custom_label, size: :m }] }
+      let(:custom_label) { Faker::Lorem.sentence }
+      let(:params) { [attribute.to_sym, label: { text: custom_label, size: :m }] }
 
       it 'shows the custom label' do
         expect(label.classes).to include('govuk-label')
-        expect(label[:for]).to eq('email')
+        expect(label[:for]).to eq(attribute)
         expect(label.content).to eq(custom_label)
       end
 
@@ -101,7 +101,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
   describe 'govuk_text_field' do
     let(:attribute) { 'email' }
-    let(:params) { [:email] }
+    let(:params) { [attribute.to_sym] }
     let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
     let(:tag) { parsed_html.at_css("input##{attribute}") }
@@ -119,7 +119,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'suffix' do
-      let(:params) { [:email, suffix: 'litres'] }
+      let(:params) { [attribute.to_sym, suffix: 'litres'] }
 
       it 'shows the suffix' do
         expect(subject).to include %(<span class="input-suffix"> litres</span></div>)
@@ -128,7 +128,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'has an input_prefix option' do
       let(:prefix) { '£' }
-      let(:params) { [:email, input_prefix: prefix] }
+      let(:params) { [attribute.to_sym, input_prefix: prefix] }
 
       it 'includes a prefix ' do
         expect(tag.previous_element.content).to eq(prefix)
@@ -144,7 +144,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
   describe 'govuk_text_area' do
     let(:attribute) { 'email' }
-    let(:params) { [:email] }
+    let(:params) { [attribute.to_sym] }
     let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
     let(:tag) { parsed_html.at_css("textarea##{attribute}") }
@@ -164,7 +164,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
   describe 'govuk_file_field' do
     let(:attribute) { 'email' }
-    let(:params) { [:email] }
+    let(:params) { [attribute.to_sym] }
     let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
     let(:label) { tag.parent.at_css('label') }
@@ -224,7 +224,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'label is passed as a parameter' do
-      let(:custom_label) { 'Yes I use online banking' }
+      let(:custom_label) { Faker::Lorem.sentence }
       let(:params) { [:uses_online_banking, true, label: custom_label] }
 
       it 'display the custom label instead of the one in locale file' do

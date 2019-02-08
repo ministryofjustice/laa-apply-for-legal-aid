@@ -21,3 +21,7 @@ end
 Then('I fill {string} with {string}') do |field, value|
   fill_in(field.parameterize(separator: '_'), with: value)
 end
+
+Then('I upload a pdf file') do
+  attach_file('Upload a file', Rails.root.join('spec/fixtures/files/lorem_ipsum.pdf'))
+end
