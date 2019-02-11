@@ -10,12 +10,19 @@ module MeritsAssessments
     validates :success_prospect, presence: true, unless: :draft?
     validates :success_prospect_details,
               presence: true,
-              unless: proc { |form| form.draft? || form.success_prospect.to_s == MeritsAssessment.prospect_likely_to_succeed.to_s }
+              unless: :details_not_required?
 
     private
 
     def clear_success_prospect_details
-      success_prospect_details.clear if success_prospect.to_s == MeritsAssessment.prospect_likely_to_succeed.to_s
+      success_prospect_details&.clear if success_prospect.to_s == MeritsAssessment.prospect_likely_to_succeed.to_s
+    end
+
+    def details_not_required?
+      return true if success_prospect.to_s == MeritsAssessment.prospect_likely_to_succeed.to_s
+      return true if draft? && success_prospect.blank?
+
+      false
     end
   end
 end

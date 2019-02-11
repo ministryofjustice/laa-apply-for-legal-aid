@@ -82,7 +82,7 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context ' nothing specified' do
+        context 'nothing specified' do
           let(:success_prospect) { nil }
           let(:success_prospect_details) { nil }
 
@@ -91,12 +91,22 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
           end
         end
 
-        context 'invalid params - application_purpose missing' do
-          let(:success_prospect) { 'marginal' }
-          let(:success_prospect_details) { nil }
+        context 'option select that does not require details' do
+          let(:success_prospect) { MeritsAssessment.prospect_likely_to_succeed.to_s }
+          let(:success_prospect_details) { '' }
 
           it 'redirects to provider applications home page' do
             expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
+
+        context 'invalid params - application_purpose missing' do
+          let(:success_prospect) { 'marginal' }
+          let(:success_prospect_details) { '' }
+
+          it 'renders an error' do
+            expect(response).to have_http_status(:ok)
+            expect(response.body).to include('id="error_explanation"')
           end
         end
       end

@@ -96,11 +96,21 @@ RSpec.describe 'client received legal help', type: :request do
         end
 
         context 'application_purpose missing' do
-          let(:client_received_legal_help) { false }
+          let(:client_received_legal_help) { true }
           let(:application_purpose) { nil }
 
           it 'redirects to provider applications home page' do
             expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
+
+        context 'application_purpose missing' do
+          let(:client_received_legal_help) { false }
+          let(:application_purpose) { nil }
+
+          it 'renders an error' do
+            expect(response).to have_http_status(:ok)
+            expect(response.body).to include('id="error_explanation"')
           end
         end
       end

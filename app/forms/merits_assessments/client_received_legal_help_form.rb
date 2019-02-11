@@ -12,13 +12,13 @@ module MeritsAssessments
     validates(
       :application_purpose,
       presence: true,
-      if: proc { |form| !form.draft? && form.client_received_legal_help.to_s == 'false' }
+      if: proc { |form| form.client_received_legal_help.to_s == 'false' }
     )
 
     private
 
     def clear_application_purpose
-      application_purpose.clear if client_received_legal_help.to_s == 'true'
+      application_purpose&.clear if client_received_legal_help.to_s == 'true'
     end
   end
 end
