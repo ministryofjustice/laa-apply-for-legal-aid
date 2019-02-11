@@ -1,17 +1,37 @@
 module CheckAnswersHelper
-  def check_answer_link(url:, question:, answer:, name:, is_long: nil)
-    partial = case answer
-              when Hash
-                'currency_items'
-              when Array
-                'items'
-              else
-                'item'
-              end
-    is_long = '--long' if is_long
+  # Creates one dictionary list item - so needs to be used within a `govuk-summary-list` `dl`:
+  #     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  #       <%= check_answer_link ..... %>
+  #     </dl>
+  def check_answer_link(url:, question:, answer:, name:)
     render(
-      partial: "shared/check_answers/#{partial}",
-      locals: { url: url, question: question, answer: answer, name: name, is_long: is_long }
+      'shared/check_answers/item',
+      name: name,
+      url: url,
+      question: question,
+      answer: answer
+    )
+  end
+
+  # Creates both the outer `dl` and the inner list items
+  def check_answer_list(url:, question:, answers:, name:)
+    render(
+      'shared/check_answers/items',
+      name: name,
+      url: url,
+      question: question,
+      answers: answers
+    )
+  end
+
+  # Creates both the outer `dl` and the inner list items
+  def check_answer_currency_list(url:, question:, answer_hash:, name:)
+    render(
+      'shared/check_answers/currency_items',
+      name: name,
+      url: url,
+      question: question,
+      answer_hash: answer_hash
     )
   end
 end

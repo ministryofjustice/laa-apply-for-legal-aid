@@ -1,15 +1,13 @@
-<div class="app-check-your-answers<%= is_long %>" id="app-check-your-answers__<%= name %>">
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-quarter">
-      <%= question %>
-    </div>
-    <div class="govuk-grid-column-one-half">
-      <%= answer.present? ? answer : '-' %>
-    </div>
-    <div class="govuk-grid-column-one-quarter align_right">
-      <%= link_to(url) do %>
-        <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
-      <% end %>
-    </div>
+<div class="govuk-summary-list__row" id="app-check-your-answers__<%= name %>">
+  <div class="govuk-summary-list__key">
+    <%= question %>
+  </div>
+  <div class="govuk-summary-list__value">
+    <%= answer.present? ? answer : '-' %>
+  </div>
+  <div class="govuk-summary-list__actions">
+    <%= link_to(url, class: 'govuk-link') do %>
+      <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
+    <% end %>
   </div>
 </div>

@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'check your answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything }
+  let!(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything }
+  let!(:restriction) { create :restriction, legal_aid_applications: [legal_aid_application] }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -37,9 +38,9 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to have_change_link(:property_value, citizens_property_value_path(anchor: 'property_value'))
       expect(response.body).to have_change_link(:shared_ownership, citizens_shared_ownership_path)
       expect(response.body).to have_change_link(:percentage_home, citizens_percentage_home_path(anchor: 'percentage_home'))
-      expect(response.body).to have_change_link(:savings_and_investments, citizens_savings_and_investment_path)
-      expect(response.body).to have_change_link(:other_assets, citizens_other_assets_path)
-      expect(response.body).to have_change_link(:restrictions, citizens_restrictions_path)
+      expect(response.body).to include(citizens_savings_and_investment_path)
+      expect(response.body).to include(citizens_other_assets_path)
+      expect(response.body).to include(citizens_restrictions_path)
     end
 
     it 'displays the correct savings details' do
