@@ -285,6 +285,28 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         expect(subject.email).to eq(invalid_email)
       end
     end
+
+    context 'with incomplete dob elements' do
+      # Note peculiar behaviour `Date.parse '4-10-'` generates a valid date. Go figure!
+      # So need to test for that.
+      let(:params) do
+        {
+          first_name: attributes[:first_name],
+          last_name: attributes[:last_name],
+          national_insurance_number: attributes[:national_insurance_number],
+          dob_month: '10',
+          dob_day: '4',
+          email: Faker::Internet.safe_email,
+          model: applicant
+        }
+      end
+
+      before { subject.save_as_draft }
+
+      it 'generates an error' do
+        expect(subject).to be_invalid
+      end
+    end
   end
 
   describe '#model' do

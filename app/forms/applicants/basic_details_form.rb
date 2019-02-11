@@ -10,11 +10,9 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
-    validates(
-      :email, :first_name, :last_name, :national_insurance_number, :date_of_birth,
-      presence: true,
-      unless: :draft?
-    )
+    validates :email, :first_name, :last_name, :national_insurance_number, presence: true, unless: :draft?
+
+    validates :date_of_birth, presence: true, unless: :draft_and_not_incomplete_date?
 
     validates(
       :date_of_birth,
@@ -22,7 +20,7 @@ module Applicants
         not_in_the_future: true,
         earliest_allowed_date: { date: '1900-01-01' }
       },
-      allow_blank: true
+      allow_nil: true
     )
 
     validate :validate_national_insurance_number
@@ -39,7 +37,10 @@ module Applicants
 
     # rubocop:disable Lint/HandleExceptions
     def date_of_birth
-      @date_of_birth ||= attributes[:date_of_birth] = Date.parse("#{dob_year}-#{dob_month}-#{dob_day}")
+      return @date_of_birth if @date_of_birth.present?
+      return incomplete_date if dobs.any?(&:blank?)
+
+      @date_of_birth = attributes[:date_of_birth] = Date.new(*dobs.map(&:to_i))
     rescue ArgumentError
       # if date can't be parsed set as nil
     end
@@ -58,6 +59,10 @@ module Applicants
 
     def dob_fields
       %i[dob_year dob_month dob_day]
+    end
+
+    def dobs
+      @dobs ||= [dob_year, dob_month, dob_day]
     end
 
     def dob_from_model
@@ -86,6 +91,19 @@ module Applicants
 
     def test_level_validation?
       Rails.configuration.x.laa_portal.mock_saml == 'true'
+    end
+
+    def incomplete_date
+      @incomplete_date = true unless dobs.all?(&:blank?)
+      nil
+    end
+
+    def incomplete_date?
+      @incomplete_date
+    end
+
+    def draft_and_not_incomplete_date?
+      draft? && !incomplete_date?
     end
   end
 end
