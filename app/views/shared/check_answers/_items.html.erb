@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m" id="app-check-your-answers__<%= name %>"><%= question %></h2>
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-  <% answers.each do |answer| %>
-    <div class="govuk-summary-list__row">
+  <% answers.each_with_index do |answer, index| %>
+    <%= content_tag(:div, class: 'govuk-summary-list__row', id: "app-check-your-answers__#{name}_#{index}") do %>
       <div class="govuk-summary-list__key"></div>
       <div class="govuk-summary-list__value">
         <%= answer %>
@@ -11,6 +11,6 @@
           <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
         <% end %>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </dl>

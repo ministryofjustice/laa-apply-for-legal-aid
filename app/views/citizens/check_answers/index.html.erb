@@ -8,78 +8,78 @@
   <h2 class="govuk-heading-m">
     <%= t('.assets.heading') %>
   </h2>
-<% end %>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= check_answer_link(
-        name: :own_home,
-        url: citizens_own_home_path,
-        question: t('.assets.own_home'),
-        answer: @legal_aid_application.own_home.blank? ? '' : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}")
-      ) %>
-
-  <%= check_answer_link(
-        name: :property_value,
-        url: citizens_property_value_path(anchor: 'property_value'.freeze),
-        question: t('.assets.property_value'),
-        answer: number_to_currency(@legal_aid_application.property_value, unit: t('currency.gbp'))
-      ) if @legal_aid_application.own_home? %>
-
-  <%= check_answer_link(
-        name: :outstanding_mortgage,
-        url: citizens_outstanding_mortgage_path(anchor: 'outstanding_mortgage_amount'.freeze),
-        question: t('.assets.outstanding_mortgage'),
-        answer: number_to_currency(@legal_aid_application.outstanding_mortgage_amount, unit: t('currency.gbp'))
-      ) if @legal_aid_application.own_home_mortgage? %>
-
-  <%= check_answer_link(
-        name: :shared_ownership,
-        url: citizens_shared_ownership_path,
-        question: t('.assets.shared_ownership'),
-        answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}")
-      ) if @legal_aid_application.own_home? %>
-
-  <%= check_answer_link(
-        name: :percentage_home,
-        url: citizens_percentage_home_path(anchor: 'percentage_home'.freeze),
-        question: t('.assets.percentage_home'),
-        answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
-      ) if @legal_aid_application.shared_ownership? %>
-</dl>
-
-<%= check_answer_currency_list(
-      name: :savings_and_investments,
-      url: citizens_savings_and_investment_path,
-      question: t('.assets.savings_and_investments'),
-      answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.savings_and_investments.check_box_')
-    ) %>
-
-<%= check_answer_currency_list(
-      name: :other_assets,
-      url: citizens_other_assets_path,
-      question: t('.assets.other_assets'),
-      answer_hash: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.other_assets.check_box_')
-    ) %>
-
-<%= check_answer_list(
-      name: :restrictions,
-      url: citizens_restrictions_path,
-      question: t('.assets.restrictions'),
-      answers: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
-    ) if @legal_aid_application.own_capital? %>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <h2 class="govuk-heading-m"><%= t('.submit.heading') %></h2>
-
-    <p><%= t('.submit.text') %></p>
-
-    <%= button_to(
-          t('generic.submit'),
-          continue_citizens_check_answers_path,
-          class: 'govuk-button',
-          method: :patch
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :own_home,
+          url: citizens_own_home_path,
+          question: t('.assets.own_home'),
+          answer: @legal_aid_application.own_home.blank? ? '' : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}")
         ) %>
 
+    <%= check_answer_link(
+          name: :property_value,
+          url: citizens_property_value_path(anchor: 'property_value'.freeze),
+          question: t('.assets.property_value'),
+          answer: number_to_currency(@legal_aid_application.property_value, unit: t('currency.gbp'))
+        ) if @legal_aid_application.own_home? %>
+
+    <%= check_answer_link(
+          name: :outstanding_mortgage,
+          url: citizens_outstanding_mortgage_path(anchor: 'outstanding_mortgage_amount'.freeze),
+          question: t('.assets.outstanding_mortgage'),
+          answer: number_to_currency(@legal_aid_application.outstanding_mortgage_amount, unit: t('currency.gbp'))
+        ) if @legal_aid_application.own_home_mortgage? %>
+
+    <%= check_answer_link(
+          name: :shared_ownership,
+          url: citizens_shared_ownership_path,
+          question: t('.assets.shared_ownership'),
+          answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}")
+        ) if @legal_aid_application.own_home? %>
+
+    <%= check_answer_link(
+          name: :percentage_home,
+          url: citizens_percentage_home_path(anchor: 'percentage_home'.freeze),
+          question: t('.assets.percentage_home'),
+          answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
+        ) if @legal_aid_application.shared_ownership? %>
+  </dl>
+
+  <%= check_answer_currency_list(
+        name: :savings_and_investments,
+        url: citizens_savings_and_investment_path,
+        question: t('.assets.savings_and_investments'),
+        answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.savings_and_investments.check_box_')
+      ) %>
+
+  <%= check_answer_currency_list(
+        name: :other_assets,
+        url: citizens_other_assets_path,
+        question: t('.assets.other_assets'),
+        answer_hash: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.other_assets.check_box_')
+      ) %>
+
+  <%= check_answer_list(
+        name: :restrictions,
+        url: citizens_restrictions_path,
+        question: t('.assets.restrictions'),
+        answers: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
+      ) if @legal_aid_application.own_capital? %>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h2 class="govuk-heading-m"><%= t('.submit.heading') %></h2>
+
+      <p><%= t('.submit.text') %></p>
+
+      <%= button_to(
+            t('generic.submit'),
+            continue_citizens_check_answers_path,
+            class: 'govuk-button',
+            method: :patch
+          ) %>
+
+    </div>
   </div>
-</div>
+<% end %>
