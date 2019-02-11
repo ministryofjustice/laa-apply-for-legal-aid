@@ -9,6 +9,9 @@ RUN touch /etc/inittab
 
 RUN apt-get update && apt-get install -y
 RUN apt-get install postgresql postgresql-contrib -y
+RUN apt-get install clamav clamav-daemon -y
+RUN freshclam
+RUN /etc/init.d/clamav-daemon start
 RUN gem install foreman
 
 EXPOSE $PORT
