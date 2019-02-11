@@ -54,6 +54,9 @@ gem 'addressable'
 # File storage
 gem 'aws-sdk-s3'
 
+# malware scan
+gem 'clamby'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

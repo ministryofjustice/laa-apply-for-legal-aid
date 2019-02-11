@@ -21,6 +21,7 @@ class StatementOfCase < ApplicationRecord
   validate :original_file_too_big
   validate :original_file_empty
   validate :original_file_disallowed_content_type
+  validate :original_file_malware_scan
 
   def self.max_file_size
     MAX_FILE_SIZE
@@ -47,6 +48,13 @@ class StatementOfCase < ApplicationRecord
     return if original_file.blob.content_type.in?(ALLOWED_CONTENT_TYPES)
 
     errors.add(:original_file, original_file_error_for(:content_type_invalid))
+  end
+
+  def original_file_malware_scan
+    return unless file_present?
+    return if BlobMalwareScanner.new(original_file.blob).call
+
+    errors.add(:original_file, original_file_error_for(:file_virus))
   end
 
   def file_present?

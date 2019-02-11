@@ -4,7 +4,6 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
   let(:legal_aid_application) { create :legal_aid_application }
   let(:provider) { legal_aid_application.provider }
   let(:soc) { nil }
-  # let(:soc) { legal_aid_application.create_statement_of_case(statement: 'This is my case statement') }
 
   describe 'GET providers/proceedings_before_the_court' do
     subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
@@ -116,7 +115,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
       end
 
       context 'file is empty' do
-        let(:original_file) { uploaded_file('spec/fixtures/files/empty_file', nil) }
+        let(:original_file) { uploaded_file('spec/fixtures/files/empty_file') }
 
         it 'does not save the object and raise an error' do
           subject
@@ -137,6 +136,16 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'displays error' do
           subject
           expect(response.body).to match 'id="statement-error"'
+        end
+
+        context 'file contains a malware' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/malware.doc') }
+
+          it 'does not save the object and raise an error' do
+            subject
+            expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.file_virus'))
+            expect(legal_aid_application.statement_of_case).to be_nil
+          end
         end
       end
 
