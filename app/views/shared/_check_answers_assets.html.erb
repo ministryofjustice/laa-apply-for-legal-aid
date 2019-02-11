@@ -35,6 +35,21 @@
         question: t('.assets.percentage_home'),
         answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
       ) if @legal_aid_application.shared_ownership? %>
+
+  <%= check_answer_link(
+        name: :savings_and_investments,
+        url: check_answer_url_for(user_type, :savings_and_investments, application),
+        question: t('.assets.savings_and_investments'),
+        answer: 'None declared'
+      ) unless @legal_aid_application.savings_amount? %>
+
+  <%= check_answer_link(
+        name: :other_assets,
+        url: check_answer_url_for(user_type, :other_assets, application),
+        question: t('.assets.other_assets'),
+        answer: 'None declared'
+      ) unless @legal_aid_application.other_assets? %>
+
 </dl>
 
 <%= check_answer_currency_list(
@@ -42,14 +57,14 @@
       url: check_answer_url_for(user_type, :savings_and_investments, application),
       question: t('.assets.savings_and_investments'),
       answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.savings_and_investments.check_box_')
-    ) %>
+    ) if @legal_aid_application.savings_amount? %>
 
 <%= check_answer_currency_list(
       name: :other_assets,
       url: check_answer_url_for(user_type, :other_assets, application),
       question: t('.assets.other_assets'),
       answer_hash: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.other_assets.check_box_')
-    ) %>
+    ) if @legal_aid_application.other_assets? %>
 
 <dl>
   <%= check_answer_list(
