@@ -78,14 +78,6 @@ RSpec.describe Addresses::AddressForm, type: :form do
   end
 
   describe '#save' do
-    context 'when the form is not valid' do
-      let(:city) { '' }
-
-      it 'does not create a new address for the applicant' do
-        expect { form.save }.not_to change { applicant.reload.addresses.count }
-      end
-    end
-
     it 'creates a new address for the applicant with the provided attributes' do
       expect { form.save }.to change { applicant.reload.addresses.count }.by(1)
 
@@ -95,6 +87,52 @@ RSpec.describe Addresses::AddressForm, type: :form do
       expect(address.city).to eq(city)
       expect(address.county).to eq(county)
       expect(address.postcode).to eq(postcode)
+    end
+
+    context 'when the form is not valid' do
+      let(:city) { '' }
+
+      it 'does not create a new address for the applicant' do
+        expect { form.save }.not_to change { applicant.reload.addresses.count }
+      end
+    end
+  end
+
+  describe 'save_as_draft' do
+    it 'creates a new address for the applicant with the provided attributes' do
+      expect { form.save_as_draft }.to change { applicant.reload.addresses.count }.by(1)
+
+      address = applicant.addresses.last
+      expect(address.address_line_one).to eq(address_line_one)
+      expect(address.address_line_two).to eq(address_line_two)
+      expect(address.city).to eq(city)
+      expect(address.county).to be_nil
+      expect(address.postcode).to eq(postcode)
+    end
+
+    context 'when an city is empty' do
+      let(:city) { '' }
+
+      it 'creates a new address for the applicant' do
+        expect { form.save_as_draft }.to change { applicant.reload.addresses.count }.by(1)
+      end
+    end
+
+    context 'when address one and two are blank' do
+      let(:address_line_one) { '' }
+      let(:address_line_two) { '' }
+
+      it 'creates a new address for the applicant' do
+        expect { form.save_as_draft }.to change { applicant.reload.addresses.count }.by(1)
+      end
+    end
+
+    context 'when an entry is invalid' do
+      let(:postcode) { 'invalid' }
+
+      it 'does not create a new address for the applicant' do
+        expect { form.save }.not_to change { applicant.reload.addresses.count }
+      end
     end
   end
 end

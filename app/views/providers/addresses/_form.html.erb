@@ -48,6 +48,6 @@
     <%= form.govuk_text_field :county, class: 'govuk-!-width-two-thirds' %>
     <%= form.govuk_text_field :postcode, hint: nil, class: 'govuk-input--width-10' %>
 
-    <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+    <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>
