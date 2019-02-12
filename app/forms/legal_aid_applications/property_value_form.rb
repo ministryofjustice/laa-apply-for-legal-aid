@@ -24,6 +24,8 @@ module LegalAidApplications
     private
 
     def value_presence
+      return if draft?
+
       errors.add(:property_value, error_message_for(:blank)) if property_value.blank?
     end
 

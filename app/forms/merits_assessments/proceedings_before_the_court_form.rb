@@ -7,7 +7,7 @@ module MeritsAssessments
     attr_accessor :proceedings_before_the_court, :details_of_proceedings_before_the_court
 
     before_validation :clear_details_of_proceedings_before_the_court
-    validates :proceedings_before_the_court, presence: true
+    validates :proceedings_before_the_court, presence: true, unless: :draft?
     validates :details_of_proceedings_before_the_court, presence: true, if: proc { |form| form.proceedings_before_the_court.to_s == 'true' }
 
     private

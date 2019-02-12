@@ -200,6 +200,115 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
   end
 
+  describe 'save_as_draft' do
+    let(:applicant) { Applicant.last }
+    it 'creates a new applicant' do
+      expect { subject.save_as_draft }.to change { Applicant.count }.by(1)
+    end
+
+    it 'saves attributes to the new applicant' do
+      subject.save_as_draft
+      attr_list.each do |attribute|
+        expect(applicant.send(attribute)).to eq(attributes[attribute]), "Should match #{attribute}"
+      end
+    end
+
+    context 'with empty input' do
+      let(:params) do
+        {
+          first_name: '',
+          last_name: '',
+          national_insurance_number: '',
+          date_of_birth: '',
+          email: ''
+        }
+      end
+
+      it 'will be valid' do
+        subject.save_as_draft
+        expect(subject).to be_valid
+      end
+
+      it 'will not save to the database' do
+        expect { subject.save_as_draft }.not_to change { Applicant.count }
+      end
+    end
+
+    context 'with mostly empty input' do
+      let(:first_name) { Faker::Name.first_name }
+      let(:params) do
+        {
+          first_name: first_name,
+          last_name: '',
+          national_insurance_number: '',
+          date_of_birth: '',
+          email: ''
+        }
+      end
+
+      it 'will save the entered attribute' do
+        subject.save_as_draft
+        expect(Applicant.last.first_name).to eq(first_name)
+      end
+
+      it 'will not save anything to null attributes' do
+        subject.save_as_draft
+        expect(Applicant.last.last_name).to be_nil
+      end
+    end
+
+    context 'with an invalid entry input' do
+      let(:first_name) { Faker::Name.first_name }
+      let(:invalid_email) { 'invalid' }
+      let(:params) do
+        {
+          first_name: first_name,
+          last_name: '',
+          national_insurance_number: '',
+          date_of_birth: '',
+          email: invalid_email
+        }
+      end
+
+      it 'will not save to the database' do
+        expect { subject.save_as_draft }.not_to change { Applicant.count }
+      end
+
+      it 'will be invalid' do
+        subject.save_as_draft
+        expect(subject).to be_invalid
+      end
+
+      it 'will preserve the input' do
+        subject.save_as_draft
+        expect(subject.first_name).to eq(first_name)
+        expect(subject.email).to eq(invalid_email)
+      end
+    end
+
+    context 'with incomplete dob elements' do
+      # Note peculiar behaviour `Date.parse '4-10-'` generates a valid date. Go figure!
+      # So need to test for that.
+      let(:params) do
+        {
+          first_name: attributes[:first_name],
+          last_name: attributes[:last_name],
+          national_insurance_number: attributes[:national_insurance_number],
+          dob_month: '10',
+          dob_day: '4',
+          email: Faker::Internet.safe_email,
+          model: applicant
+        }
+      end
+
+      before { subject.save_as_draft }
+
+      it 'generates an error' do
+        expect(subject).to be_invalid
+      end
+    end
+  end
+
   describe '#model' do
     it 'returns a new applicant' do
       expect(subject.model).to be_a(Applicant)

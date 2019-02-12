@@ -64,10 +64,8 @@
 
 <div class="govuk-grid-row govuk-!-margin-top-5">
   <div class="govuk-grid-column-two-thirds">
-    <%= render(
-          'shared/forms/next_action_buttons_form',
+    <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_proceedings_types_path,
-          method: :post,
           show_draft: true
         ) %>
   </div>

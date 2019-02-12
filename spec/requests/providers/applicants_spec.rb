@@ -67,7 +67,9 @@ RSpec.describe 'providers applicant requests', type: :request do
         login_as provider
       end
 
-      subject { patch "/providers/applications/#{application_id}/applicant", params: params.merge(submit_button) }
+      subject do
+        patch providers_legal_aid_application_applicant_path(application), params: params
+      end
 
       context 'Form submitted using Continue button' do
         let(:submit_button) do
@@ -88,6 +90,19 @@ RSpec.describe 'providers applicant requests', type: :request do
           expect(new_applicant).to be_instance_of(Applicant)
         end
 
+        context 'when the application is in draft' do
+          let(:application) { create(:legal_aid_application, :draft) }
+
+          it 'redirects provider to next step of the submission' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(application))
+          end
+
+          it 'sets the application as no longer draft' do
+            expect { subject }.to change { application.reload.draft? }.from(true).to(false)
+          end
+        end
+
         context 'when the legal aid application is in checking_answers state' do
           let(:application) { create(:legal_aid_application, state: :checking_answers) }
 
@@ -95,20 +110,6 @@ RSpec.describe 'providers applicant requests', type: :request do
             subject
 
             expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path)
-          end
-        end
-
-        context 'when the application does not exist' do
-          let(:application_id) { SecureRandom.uuid }
-
-          it 'redirects the user to the applications page with an error message' do
-            subject
-
-            expect(response).to redirect_to(providers_legal_aid_applications_path)
-          end
-
-          it 'does NOT create a new applicant' do
-            expect { subject }.not_to change { Applicant.count }
           end
         end
 
@@ -141,63 +142,19 @@ RSpec.describe 'providers applicant requests', type: :request do
       end
 
       context 'Form submitted using Save as draft button' do
-        let(:submit_button) do
-          {
-            draft_button: 'Save as draft'
-          }
+        let(:submit_button) { { draft_button: 'Save as draft' } }
+
+        subject do
+          patch providers_legal_aid_application_applicant_path(application), params: params.merge(submit_button)
         end
 
-        it 'redirects provider to next step of the submission' do
+        it "redirects provider to provider's applications page" do
           subject
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
-        it 'creates a new applicant associated with the application' do
-          expect { subject }.to change { Applicant.count }.by(1)
-
-          new_applicant = application.reload.applicant
-          expect(new_applicant).to be_instance_of(Applicant)
-        end
-
-        context 'when the application does not exist' do
-          let(:application_id) { SecureRandom.uuid }
-
-          it 'redirects the user to the applications page with an error message' do
-            subject
-
-            expect(response).to redirect_to(providers_legal_aid_applications_path)
-          end
-
-          it 'does NOT create a new applicant' do
-            expect { subject }.not_to change { Applicant.count }
-          end
-        end
-
-        context 'when the params are not valid' do
-          let(:params) do
-            {
-              applicant: {
-                first_name: '',
-                last_name: 'Doe',
-                national_insurance_number: 'AA 12 34 56 C',
-                dob_year: '1981',
-                dob_month: '07',
-                dob_day: '11',
-                email: Faker::Internet.safe_email
-              }
-            }
-          end
-
-          it 'renders the form page displaying the errors' do
-            subject
-
-            expect(unescaped_response_body).to include('There is a problem')
-            expect(unescaped_response_body).to include('Enter first name')
-          end
-
-          it 'does NOT create a new applicant' do
-            expect { subject }.not_to change { Applicant.count }
-          end
+        it 'sets the application as draft' do
+          expect { subject }.to change { application.reload.draft? }.from(false).to(true)
         end
       end
     end

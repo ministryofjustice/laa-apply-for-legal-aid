@@ -82,29 +82,31 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context 'invalid params - nothing specified' do
+        context 'nothing specified' do
           let(:success_prospect) { nil }
           let(:success_prospect_details) { nil }
 
-          it 'returns http_success' do
-            expect(response).to have_http_status(:ok)
+          it 'redirects to provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
           end
+        end
 
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.merits_assessment.attributes.success_prospect.blank'))
+        context 'option select that does not require details' do
+          let(:success_prospect) { MeritsAssessment.prospect_likely_to_succeed.to_s }
+          let(:success_prospect_details) { '' }
+
+          it 'redirects to provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
 
         context 'invalid params - application_purpose missing' do
           let(:success_prospect) { 'marginal' }
-          let(:success_prospect_details) { nil }
+          let(:success_prospect_details) { '' }
 
-          it 'returns http_success' do
+          it 'renders an error' do
             expect(response).to have_http_status(:ok)
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.merits_assessment.attributes.success_prospect_details.blank'))
+            expect(response.body).to include('id="error_explanation"')
           end
         end
       end

@@ -25,6 +25,10 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         expect(response).to have_http_status(:ok)
       end
 
+      it 'does not display error' do
+        expect(response.body).not_to match 'id="statement-error"'
+      end
+
       context 'no statement of case record exists for the application' do
         it 'displays an empty text box' do
           expect(legal_aid_application.statement_of_case).to be nil
@@ -66,28 +70,30 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         subject
       end
 
-      context 'Continue button pressed' do
-        let(:submit_button) do
-          {
-            continue_button: 'Continue'
-          }
+      let(:submit_button) { {} }
+
+      it 'updates the record' do
+        expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
+      end
+
+      it 'redirects to the next page' do
+        expect(response).to redirect_to providers_legal_aid_application_estimated_legal_costs_path(legal_aid_application)
+      end
+
+      context 'on error' do
+        let(:entered_text) { '' }
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
         end
 
-        it 'updates the record' do
-          expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-        end
-
-        it 'redirects to the next page' do
-          expect(response).to redirect_to providers_legal_aid_application_estimated_legal_costs_path(legal_aid_application)
+        it 'displays error' do
+          expect(response.body).to match 'id="statement-error"'
         end
       end
 
-      context 'Save as draft button pressed' do
-        let(:submit_button) do
-          {
-            draft_button: 'Save as draft'
-          }
-        end
+      context 'Save as draft' do
+        let(:submit_button) { { draft_button: 'Save as draft' } }
 
         it 'updates the record' do
           expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
@@ -97,15 +103,11 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context 'invalid params - nothing specified' do
-          let(:entered_text) { nil }
+        context 'nothing specified' do
+          let(:entered_text) { '' }
 
-          it 'returns http_success' do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.statement.blank'))
+          it 'redirects to provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
       end

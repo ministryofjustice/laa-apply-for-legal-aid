@@ -16,10 +16,9 @@ module Flow
       end
     end
 
-    attr_reader :params, :legal_aid_application, :current_step
+    attr_reader :legal_aid_application, :current_step
 
-    def initialize(params: {}, legal_aid_application:, current_step:)
-      @params = params
+    def initialize(legal_aid_application:, current_step:)
       @legal_aid_application = legal_aid_application
       @current_step = current_step
     end
@@ -31,8 +30,6 @@ module Flow
     end
 
     def forward_path
-      return urls.providers_legal_aid_applications_path if params.key?(:draft_button)
-
       if checking_answers? && check_answers_step
         return path(forward_step) if carry_on_sub_flow?
 

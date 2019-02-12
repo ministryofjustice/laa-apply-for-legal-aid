@@ -2,6 +2,7 @@ module Providers
   class RestrictionsController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def index
       legal_aid_application
@@ -9,7 +10,7 @@ module Providers
 
     def create
       legal_aid_application.update!(legal_aid_application_params)
-      go_forward
+      continue_or_draft
     end
 
     private

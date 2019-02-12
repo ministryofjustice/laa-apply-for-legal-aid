@@ -15,7 +15,6 @@ module Flowable
 
     def flow_service
       @flow_service ||= Flow::BaseFlowService.flow_service_for(flow_module).new(
-        params: params,
         legal_aid_application: legal_aid_application,
         current_step: controller_name.to_sym
       )

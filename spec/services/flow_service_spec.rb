@@ -7,10 +7,8 @@ RSpec.describe Flow::BaseFlowService do
   end
   let(:steps) { Flow::Flows::CitizenStart::STEPS.deep_merge(Flow::Flows::CitizenCapital::STEPS) }
   let(:legal_aid_application) { create :legal_aid_application }
-  let(:params) { {} }
   subject do
     flow_service_class.new(
-      params: params,
       legal_aid_application: legal_aid_application,
       current_step: current_step
     )
@@ -126,14 +124,6 @@ RSpec.describe Flow::BaseFlowService do
         it 'returns forward url' do
           expect(subject.forward_path).to eq('/citizens/consent')
         end
-      end
-    end
-
-    context 'saving as draft' do
-      let(:params) { { draft_button: true } }
-
-      it 'returns applications page' do
-        expect(subject.forward_path).to eq('/providers/applications')
       end
     end
   end

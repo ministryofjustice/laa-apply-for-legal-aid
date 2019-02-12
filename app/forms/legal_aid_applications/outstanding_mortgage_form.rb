@@ -7,7 +7,7 @@ module LegalAidApplications
     before_validation :clean_up_input
     validates(
       :outstanding_mortgage_amount,
-      presence: true,
+      presence: { unless: :draft? },
       numericality: { greater_than_or_equal_to: 0, allow_blank: true }
     )
 

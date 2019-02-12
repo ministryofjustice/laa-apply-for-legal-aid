@@ -82,15 +82,15 @@ RSpec.describe 'address selections requests', type: :request do
     let(:selected_address) { address_list.sample }
     let(:lookup_id) { selected_address[:lookup_id] }
     let(:normalized_postcode) { 'DA74NG' }
+    let(:submit_button) { { continue_button: 'Continue' } }
     let(:params) do
       {
         address_selection: {
           list: address_list.map(&:to_json),
           postcode: postcode,
           lookup_id: lookup_id
-        },
-        continue_button: 'Continue'
-      }
+        }
+      }.merge(submit_button)
     end
 
     subject { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: params }
@@ -161,6 +161,19 @@ RSpec.describe 'address selections requests', type: :request do
           subject
           expect(applicant.address.address_line_one).to eq(selected_address[:address_line_one])
           expect(applicant.address.lookup_id).to eq(lookup_id)
+        end
+      end
+
+      context 'Form submitted using Save as draft button' do
+        let(:submit_button) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end

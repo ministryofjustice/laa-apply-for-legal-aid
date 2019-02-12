@@ -2,6 +2,7 @@ module Providers
   class PercentageHomesController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def show
       authorize @legal_aid_application
@@ -12,11 +13,7 @@ module Providers
       authorize @legal_aid_application
       @form = LegalAidApplications::PercentageHomeForm.new(percentage_home_params.merge(model: legal_aid_application))
 
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private

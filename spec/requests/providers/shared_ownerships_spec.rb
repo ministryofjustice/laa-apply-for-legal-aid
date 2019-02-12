@@ -147,7 +147,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
             expect { subject }.not_to change { LegalAidApplication.count }
           end
 
-          it 'redirects to the percentage page' do
+          it 'redirects to the providers applications page' do
             subject
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
@@ -195,13 +195,11 @@ RSpec.describe 'providers shared ownership request test', type: :request do
           end
         end
 
-        context 'with an invalid param' do
+        context 'with an empty entry' do
           let(:params) { { legal_aid_application: { shared_ownership: '' } } }
-          it 're-renders the form with the validation errors' do
+          it 'redirects to the applications list page' do
             subject
-            expect(unescaped_response_body).to include('There is a problem')
-            expect(unescaped_response_body).to include('Select yes if you own your home with someone else')
-            expect(unescaped_response_body).to include('Does your client own their home with anyone else?')
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
         end
       end

@@ -126,14 +126,19 @@ RSpec.describe 'check your answers requests', type: :request do
         login_as create(:provider)
         application.check_your_answers!
         subject
+        application.reload
       end
 
-      it 'should redirect to provider legal applications home page' do
+      it 'redirects to provider legal applications home page' do
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'should change the state to "answers_checked"' do
-        expect(application.reload.answers_checked?).to be_truthy
+      it 'changes the state to "answers_checked"' do
+        expect(application).not_to be_answers_checked
+      end
+
+      it 'sets application as draft' do
+        expect(application).to be_draft
       end
     end
   end

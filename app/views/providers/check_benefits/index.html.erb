@@ -22,18 +22,9 @@
     <%= t "#{result_namespace}.next" %>
   </p>
 
-  <%= form_with(
-        model: @form,
+  <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_check_benefit_path,
         method: :patch,
-        local: true
-      ) do |form| %>
-
-    <%= render partial: 'shared/forms/next_action_buttons',
-               locals: {
-                 continue_id: 'continue',
-                 show_draft: true,
-                 form: form
-               } %>
-  <% end %>
+        show_draft: true
+      ) %>
 <% end %>

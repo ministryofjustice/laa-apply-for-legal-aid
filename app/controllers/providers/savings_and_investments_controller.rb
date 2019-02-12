@@ -2,7 +2,8 @@ module Providers
   class SavingsAndInvestmentsController < BaseController
     include ApplicationDependable
     include Flowable
-    helper_method :bank_accounts, :attributes
+    include Draftable
+    helper_method :attributes
 
     def show
       @form = SavingsAmounts::SavingsAmountsForm.new(model: savings_amount)
@@ -11,12 +12,7 @@ module Providers
     def update
       @form = SavingsAmounts::SavingsAmountsForm.new(form_params.merge(model: savings_amount))
 
-      if @form.save
-        # continue_or_save_draft
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private

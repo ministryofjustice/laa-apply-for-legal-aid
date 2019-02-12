@@ -2,6 +2,7 @@ module Providers
   class ProceedingsBeforeTheCourtsController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
     before_action :authorize_legal_aid_application
 
     def show
@@ -11,11 +12,7 @@ module Providers
     def update
       @form = MeritsAssessments::ProceedingsBeforeTheCourtForm.new(proceedings_before_the_court_params.merge(model: merits_assessment))
 
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private

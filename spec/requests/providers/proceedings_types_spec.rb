@@ -67,10 +67,11 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
   end
 
   describe 'create: POST /providers/applications/:legal_aid_application_id/proceedings_types' do
+    let(:params) { { continue_button: 'Continue' } }
     subject do
       post(
         providers_legal_aid_application_proceedings_types_path(legal_aid_application),
-        params: { continue_button: 'Continue' }
+        params: params
       )
     end
 
@@ -95,6 +96,19 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
       it 'redirects to next step' do
         subject
         expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      end
+    end
+
+    context 'with save as draft' do
+      let(:params) { { draft_button: 'Save as draft' } }
+
+      it "redirects provider to provider's applications page" do
+        subject
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'sets the application as draft' do
+        expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
       end
     end
   end

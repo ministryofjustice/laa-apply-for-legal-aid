@@ -82,29 +82,35 @@ RSpec.describe 'client received legal help', type: :request do
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context 'invalid params - nothing specified' do
+        it 'sets application as draft' do
+          expect(legal_aid_application.reload).to be_draft
+        end
+
+        context 'nothing specified' do
           let(:client_received_legal_help) { nil }
           let(:application_purpose) { nil }
 
-          it 'returns http_success' do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.merits_assessment.attributes.client_received_legal_help.blank'))
+          it 'redirects to provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
 
-        context 'invalid params - application_purpose missing' do
+        context 'application_purpose missing' do
+          let(:client_received_legal_help) { true }
+          let(:application_purpose) { nil }
+
+          it 'redirects to provider applications home page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
+
+        context 'application_purpose missing' do
           let(:client_received_legal_help) { false }
           let(:application_purpose) { nil }
 
-          it 'returns http_success' do
+          it 'renders an error' do
             expect(response).to have_http_status(:ok)
-          end
-
-          it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.merits_assessment.attributes.application_purpose.blank'))
+            expect(response.body).to include('id="error_explanation"')
           end
         end
       end

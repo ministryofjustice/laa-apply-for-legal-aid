@@ -2,6 +2,7 @@ module Providers
   class AddressSelectionsController < BaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def show # rubocop:disable Metrics/AbcSize
       authorize @legal_aid_application
@@ -21,11 +22,7 @@ module Providers
       @addresses = build_addresses_from_form_data
       @form = Addresses::AddressSelectionForm.new(permitted_params.merge(addresses: @addresses, model: address))
 
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private
