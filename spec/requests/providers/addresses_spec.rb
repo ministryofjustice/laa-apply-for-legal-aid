@@ -172,7 +172,6 @@ RSpec.describe 'address requests', type: :request do
         it 'sets the application as draft' do
           expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
-
       end
     end
   end

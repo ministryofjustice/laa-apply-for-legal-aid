@@ -39,12 +39,15 @@ RSpec.describe 'does client use online banking requests', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
-    let(:params) do
-      {
-        applicant: { uses_online_banking: uses_online_banking }
-      }
+    let(:params) { { applicant: { uses_online_banking: uses_online_banking } } }
+    let(:submit_button) { {} }
+
+    subject do
+      patch(
+        "/providers/applications/#{application_id}/does-client-use-online-banking",
+        params: params.merge(submit_button)
+      )
     end
-    subject { patch "/providers/applications/#{application_id}/does-client-use-online-banking", params: params }
 
     context 'when the provider is authenticated' do
       before do
@@ -53,7 +56,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
       end
 
       context 'when no option is chosen' do
-        let(:params) { nil }
+        let(:params) { {} }
 
         it 'shows an error' do
           expect(unescaped_response_body).to include('Please select an option')
@@ -81,6 +84,27 @@ RSpec.describe 'does client use online banking requests', type: :request do
 
         it 'tells provider to use CCMS' do
           expect(unescaped_response_body).to include('use CCMS')
+        end
+      end
+
+      context 'Form submitted using Save as draft button' do
+        let(:submit_button) { { draft_button: 'Save as draft' } }
+        let(:uses_online_banking) { 'true' }
+
+        it "redirects provider to provider's applications page" do
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect(application.reload).to be_draft
+        end
+
+        context 'when no option is chosen' do
+          let(:uses_online_banking) { '' }
+
+          it "redirects provider to provider's applications page" do
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
+          end
         end
       end
     end

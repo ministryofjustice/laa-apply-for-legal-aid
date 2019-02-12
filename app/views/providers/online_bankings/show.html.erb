@@ -14,6 +14,6 @@
 
     <div class="govuk-!-padding-bottom-6"></div>
 
-    <%= form.submit t('generic.continue'), id: 'continue', class: 'govuk-button' %>
+    <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>

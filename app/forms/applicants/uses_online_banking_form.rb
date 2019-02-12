@@ -6,6 +6,6 @@ module Applicants
 
     attr_accessor :uses_online_banking
 
-    validates :uses_online_banking, presence: true
+    validates :uses_online_banking, presence: true, unless: :draft?
   end
 end

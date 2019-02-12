@@ -2,6 +2,7 @@ module Providers
   class OnlineBankingsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
+    include Draftable
 
     def show
       authorize @legal_aid_application
@@ -11,12 +12,7 @@ module Providers
     def update
       authorize @legal_aid_application
       @form = Applicants::UsesOnlineBankingForm.new(form_params)
-
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private
