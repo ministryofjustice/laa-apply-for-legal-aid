@@ -1,5 +1,5 @@
 module Providers
-  class LegalAidApplicationsController < BaseController
+  class LegalAidApplicationsController < ProviderBaseController
     attr_reader :legal_aid_application
     include Flowable
 

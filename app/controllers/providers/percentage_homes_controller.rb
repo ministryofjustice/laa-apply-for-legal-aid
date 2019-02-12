@@ -1,5 +1,5 @@
 module Providers
-  class PercentageHomesController < BaseController
+  class PercentageHomesController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

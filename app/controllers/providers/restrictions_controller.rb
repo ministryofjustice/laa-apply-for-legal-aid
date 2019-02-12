@@ -1,5 +1,5 @@
 module Providers
-  class RestrictionsController < BaseController
+  class RestrictionsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

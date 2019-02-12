@@ -1,11 +1,4 @@
-<%= citizen_page(
-      page_title: t('.field_set_header'),
-      back_link: {
-        path: citizens_additional_accounts_path
-      },
-      template: :form
-    ) do %>
-
+<%= page_template page_title: t('.field_set_header'), template: :form do %>
   <%= form_tag(citizens_additional_account_path(id: :update), method: :patch) do %>
 
     <%= govuk_form_group(

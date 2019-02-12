@@ -21,12 +21,6 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
       end
-
-      describe 'back link' do
-        it 'points to the client has received legal help page' do
-          expect(response.body).to have_back_link(providers_legal_aid_application_client_received_legal_help_path(legal_aid_application))
-        end
-      end
     end
   end
 

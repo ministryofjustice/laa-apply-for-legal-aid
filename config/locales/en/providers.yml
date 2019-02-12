@@ -18,7 +18,8 @@ en:
         share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
         sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
         title: About the online financial assessment
-      submit:
+    application_confirmations:
+      show:
         application_created: Application created
         back_button: Back to your applications
         happen_next_heading: What happens next

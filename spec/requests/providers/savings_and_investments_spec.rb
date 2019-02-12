@@ -15,7 +15,6 @@ RSpec.describe 'providers savings and investments', type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as create(:provider)
-        subject
       end
 
       it 'returns http success' do
@@ -30,23 +29,29 @@ RSpec.describe 'providers savings and investments', type: :request do
 
       describe 'back link' do
         context 'applicant does not own home' do
-          let(:application) { create :legal_aid_application, :without_own_home }
+          before { get providers_legal_aid_application_own_home_path(application) }
+
           it 'points to the own  home page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(application, back: true))
           end
         end
 
         context 'applicant owns home with shared ownership' do
-          let(:application) { create :legal_aid_application, :with_own_home_mortgaged, :with_home_shared_with_partner }
+          before { get providers_legal_aid_application_percentage_home_path(application) }
+
           it 'points to percentage owned page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_percentage_home_path(application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_percentage_home_path(application, back: true))
           end
         end
 
         context 'applicant owns home sole ownership' do
-          let(:application) { create :legal_aid_application, :with_own_home_mortgaged, :with_home_sole_owner }
+          before { get providers_legal_aid_application_shared_ownership_path(application) }
+
           it 'points to the shared ownership page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_shared_ownership_path(application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_shared_ownership_path(application, back: true))
           end
         end
       end

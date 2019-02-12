@@ -1,5 +1,5 @@
 module Providers
-  class AddressLookupsController < BaseController
+  class AddressLookupsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
 

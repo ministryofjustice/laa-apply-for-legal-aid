@@ -152,8 +152,12 @@ RSpec.describe 'check passported answers requests', type: :request do
     end
 
     context 'logged in as an authenticated provider' do
+      let(:application) { create :legal_aid_application, :with_everything, :answers_checked }
+
       before do
         login_as create(:provider)
+        get providers_legal_aid_application_other_assets_path(application)
+        get providers_legal_aid_application_check_passported_answers_path(application)
         subject
       end
 
@@ -161,21 +165,8 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(application.reload.answers_checked?).to be true
       end
 
-      describe 'redirection' do
-        context 'no capital' do
-          let(:application) { create :legal_aid_application, :checking_passported_answers }
-          it 'redirects to other assets page' do
-            expect(application.own_capital?).to be false
-            expect(response).to redirect_to providers_legal_aid_application_other_assets_path(application)
-          end
-        end
-
-        context 'some capital' do
-          it 'redirects to restrictions page' do
-            expect(application.own_capital?).to be true
-            expect(response).to redirect_to providers_legal_aid_application_restrictions_path(application)
-          end
-        end
+      it 'redirects to the previous page' do
+        expect(response).to redirect_to providers_legal_aid_application_other_assets_path(application, back: true)
       end
     end
   end

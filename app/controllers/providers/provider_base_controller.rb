@@ -1,5 +1,5 @@
 module Providers
-  class BaseController < ApplicationController
+  class ProviderBaseController < BaseController
     before_action :authenticate_provider!
     before_action :set_cache_buster
     include Pundit

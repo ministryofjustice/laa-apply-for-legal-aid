@@ -1,5 +1,5 @@
 module Citizens
-  class SavingsAndInvestmentsController < ApplicationController
+  class SavingsAndInvestmentsController < BaseController
     include Flowable
 
     helper_method :bank_accounts, :attributes

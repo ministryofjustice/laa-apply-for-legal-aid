@@ -20,12 +20,6 @@ RSpec.describe 'provider percentage share of home test', type: :request do
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
       end
-
-      describe 'back link' do
-        it 'points to the shared ownership page' do
-          expect(response.body).to have_back_link(providers_legal_aid_application_shared_ownership_path(application))
-        end
-      end
     end
   end
 

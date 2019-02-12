@@ -1,5 +1,5 @@
 <% heading_type = @form.lookup_error.present? ? :lookup : :manual %>
-<%= provider_page(
+<%= page_template(
       page_title: t("forms.address_#{heading_type}.heading"),
       template: :form
     ) do %>

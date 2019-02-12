@@ -1,5 +1,5 @@
 module Citizens
-  class CheckAnswersController < ApplicationController
+  class CheckAnswersController < BaseController
     include Flowable
     before_action :authenticate_applicant!
 

@@ -138,6 +138,8 @@ RSpec.describe 'check merits answers requests', type: :request do
     context 'logged in as an authenticated provider' do
       before do
         login_as create(:provider)
+        get providers_legal_aid_application_merits_declaration_path(application)
+        get providers_legal_aid_application_check_merits_answers_path(application)
         subject
       end
 
@@ -147,7 +149,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       describe 'redirection' do
         it 'redirects to client declaration page' do
-          expect(response).to redirect_to providers_legal_aid_application_merits_declaration_path(application)
+          expect(response).to redirect_to providers_legal_aid_application_merits_declaration_path(application, back: true)
         end
       end
     end

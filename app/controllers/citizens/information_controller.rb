@@ -1,5 +1,5 @@
 module Citizens
-  class InformationController < ApplicationController
+  class InformationController < BaseController
     include Flowable
 
     def show

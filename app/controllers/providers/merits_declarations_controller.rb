@@ -1,5 +1,5 @@
 module Providers
-  class MeritsDeclarationsController < BaseController
+  class MeritsDeclarationsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
 

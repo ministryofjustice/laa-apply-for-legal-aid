@@ -1,5 +1,5 @@
 module Providers
-  class CheckBenefitsController < BaseController
+  class CheckBenefitsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

@@ -15,14 +15,15 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
     context 'when the provider is authenticated' do
       before do
         login_as provider
-        subject
       end
 
       it 'returns http success' do
+        subject
         expect(response).to have_http_status(:ok)
       end
 
       it 'does not displays the proceeding types' do
+        subject
         expect(unescaped_response_body).not_to include('class="selected-proceeding-types"')
       end
 
@@ -33,17 +34,28 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
       end
 
       describe 'back link' do
-        context "the applicant's address used s address lookup service" do
+        context "the applicant's address used s address lookup service", :vcr do
           let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address_lookup }
 
+          before do
+            legal_aid_application.applicant.address.update!(postcode: 'YO4B0LJ')
+            get providers_legal_aid_application_address_selection_path(legal_aid_application)
+          end
+
           it 'should redirect to the address lookup page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_address_selection_path(legal_aid_application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_address_selection_path(legal_aid_application, back: true))
           end
         end
 
         context "the applicant's address used manual entry" do
+          before do
+            get providers_legal_aid_application_address_path(legal_aid_application)
+          end
+
           it 'should redirect to manual address pagelookup page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application, back: true))
           end
         end
       end

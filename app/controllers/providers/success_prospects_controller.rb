@@ -1,5 +1,5 @@
 module Providers
-  class SuccessProspectsController < BaseController
+  class SuccessProspectsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

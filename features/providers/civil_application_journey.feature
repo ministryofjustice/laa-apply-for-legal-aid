@@ -298,6 +298,7 @@ Feature: Civil application journeys
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I click link "Back"
+    Then I click link "Back"
     Then I should be on a page showing 'Check your answers'
 
   Scenario: I navigate to Contact page from application service and back
@@ -351,6 +352,30 @@ Feature: Civil application journeys
     Then I select "Held overseas"
     Then I click "Continue"
     Then I should be on a page showing "Check your answers"
+    Then I click link "Back"
+    Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
+    Then I click link "Back"
+    Then I should be on a page showing "Does your client have any of the following?"
+    Then I click link "Back"
+    Then I should be on a page showing "Does your client have any savings and investments?"
+    Then I click link "Back"
+    Then I should be on a page showing "What % share of their home does your client legally own?"
+    Then I click link "Back"
+    Then I should be on a page showing "Does your client own their home with anyone else?"
+    Then I click link "Back"
+    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
+    Then I click link "Back"
+    Then I should be on a page showing "How much is your client's home worth?"
+    Then I click link "Back"
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I click "Continue"
+    Then I click "Continue"
+    Then I click "Continue"
+    Then I click "Continue"
+    Then I click "Continue"
+    Then I click "Continue"
+    Then I click "Continue"
+    Then I click "Continue"
     Then I click "Submit"
     Then I should be on a page showing "Has your client received legal help for the matter?"
     Then I choose "No"
@@ -391,27 +416,6 @@ Feature: Civil application journeys
     And the answer for 'Estimated legal costs' should be "£2,345.00"
     Then I click "Accept and send application"
     Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
-
-  @javascript
-  Scenario: Navigate back capital flow
-    Given I previously created a passported application and left on the "Restrictions" page
-    Then I visit the applications page
-    Then I view the previously created application
-    Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client have any of the following?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client have any savings and investments?"
-    Then I click link "Back"
-    Then I should be on a page showing "What % share of their home does your client legally own?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client own their home with anyone else?"
-    Then I click link "Back"
-    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
-    Then I click link "Back"
-    Then I should be on a page showing "How much is your client's home worth?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client own the home that they live in?"
 
   @javascript @vcr
   Scenario: View feedback form within provider journey

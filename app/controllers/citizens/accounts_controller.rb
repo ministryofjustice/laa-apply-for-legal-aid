@@ -1,5 +1,5 @@
 module Citizens
-  class AccountsController < ApplicationController
+  class AccountsController < BaseController
     before_action :authenticate_applicant!
     include Flowable
 

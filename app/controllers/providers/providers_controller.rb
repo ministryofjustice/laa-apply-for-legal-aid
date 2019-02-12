@@ -1,5 +1,5 @@
 module Providers
-  class ProvidersController < BaseController
+  class ProvidersController < ProviderBaseController
     def show
       @provider = current_provider
     end

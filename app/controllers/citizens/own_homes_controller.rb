@@ -1,5 +1,5 @@
 module Citizens
-  class OwnHomesController < ApplicationController
+  class OwnHomesController < BaseController
     include Flowable
 
     def show

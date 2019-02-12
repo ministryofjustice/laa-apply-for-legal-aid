@@ -1,5 +1,5 @@
 module Providers
-  class ClientReceivedLegalHelpsController < BaseController
+  class ClientReceivedLegalHelpsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

@@ -14,14 +14,15 @@ RSpec.describe 'providers shared ownership request test', type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as create(:provider)
-        subject
       end
 
       it 'returns http success' do
+        subject
         expect(response).to have_http_status(:ok)
       end
 
       it 'renders the shared ownership page' do
+        subject
         expect(response).to be_successful
         expect(unescaped_response_body).to match('Does your client own their home with anyone else?')
         expect(unescaped_response_body).to match(LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first)
@@ -29,15 +30,20 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
       describe 'back link' do
         context 'applicant owns with mortgage' do
+          before { get providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application) }
+
           it 'points to oustanding mortgage page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application, back: true))
           end
         end
 
         context 'applicant owns home outright' do
-          let(:legal_aid_application) { create :legal_aid_application, :with_own_home_owned_outright }
+          before { get providers_legal_aid_application_property_value_path(legal_aid_application) }
+
           it 'points to the property value page' do
-            expect(response.body).to have_back_link(providers_legal_aid_application_property_value_path(legal_aid_application))
+            subject
+            expect(response.body).to have_back_link(providers_legal_aid_application_property_value_path(legal_aid_application, back: true))
           end
         end
       end

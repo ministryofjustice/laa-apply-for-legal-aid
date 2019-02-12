@@ -1,5 +1,5 @@
 module Providers
-  class OutstandingMortgagesController < BaseController
+  class OutstandingMortgagesController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

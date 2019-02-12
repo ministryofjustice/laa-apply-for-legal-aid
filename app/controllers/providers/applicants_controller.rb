@@ -1,5 +1,5 @@
 module Providers
-  class ApplicantsController < BaseController
+  class ApplicantsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

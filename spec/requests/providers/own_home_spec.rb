@@ -21,12 +21,6 @@ RSpec.describe 'provider own home requests', type: :request do
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
       end
-
-      describe 'back link' do
-        it 'points to the check benefits page' do
-          expect(response.body).to have_back_link(providers_legal_aid_application_check_benefits_path(legal_aid_application))
-        end
-      end
     end
   end
 

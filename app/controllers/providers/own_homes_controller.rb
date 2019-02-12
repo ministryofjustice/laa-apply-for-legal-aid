@@ -1,5 +1,5 @@
 module Providers
-  class OwnHomesController < BaseController
+  class OwnHomesController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable

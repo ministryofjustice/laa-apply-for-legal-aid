@@ -68,9 +68,8 @@ Rails.application.routes.draw do
         patch :continue, on: :collection
       end
       resources :restrictions, only: %i[index create] # as multiple restrictions
-      resource :about_the_financial_assessment, only: [:show] do
-        post :submit, on: :collection
-      end
+      resource :about_the_financial_assessment, only: %i[show update]
+      resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
       resource :savings_and_investment, only: %i[show update]
       resource :shared_ownership, only: %i[show update]

@@ -20,6 +20,8 @@ module ApplicationHelper
   end
 
   def back_link(text: t('generic.back'), path: back_path, method: nil)
+    return unless path
+
     link_to text, path, class: 'govuk-back-link', id: 'back', method: method
   end
 

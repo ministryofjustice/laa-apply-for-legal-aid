@@ -1,5 +1,5 @@
 module Citizens
-  class LegalAidApplicationsController < ApplicationController
+  class LegalAidApplicationsController < BaseController
     include Flowable
 
     # User passes in the Secure Id at the start of the journey. If login succeeds, they

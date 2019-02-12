@@ -1,5 +1,5 @@
 module Providers
-  class AddressSelectionsController < BaseController
+  class AddressSelectionsController < ProviderBaseController
     include ApplicationDependable
     include Flowable
     include Draftable
