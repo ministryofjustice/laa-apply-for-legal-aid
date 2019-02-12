@@ -118,9 +118,8 @@ end
 Then('the answer for {string} should be {string}') do |field_name, answer|
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
-  within "#app-check-your-answers__#{field_name}" do
-    have_content(answer)
-  end
+  expect(page).to have_css("#app-check-your-answers__#{field_name}")
+  expect(page).to have_content(answer)
 end
 
 Then('I select a proceeding type and continue') do
