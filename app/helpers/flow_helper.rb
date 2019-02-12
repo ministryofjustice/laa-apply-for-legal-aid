@@ -11,12 +11,19 @@ module FlowHelper
     end
   end
 
-  def next_action_buttons(form:, continue_id: :continue, show_draft: false)
+  def next_action_buttons(
+        form:,
+        continue_id: :continue,
+        show_draft: false,
+        continue_button_text: t('generic.continue')
+      )
+
     render(
       'shared/forms/next_action_buttons',
       continue_id: continue_id,
       form: form,
-      show_draft: show_draft
+      show_draft: show_draft,
+      continue_button_text: continue_button_text
     )
   end
 end
