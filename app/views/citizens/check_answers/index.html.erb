@@ -5,8 +5,9 @@
         method: :patch
       }
     ) do %>
+
   <h2 class="govuk-heading-m">
-    <%= t('.assets.heading') %>
+    <%= t('.assets.property') %>
   </h2>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -43,24 +44,24 @@
           url: citizens_percentage_home_path(anchor: 'percentage_home'.freeze),
           question: t('.assets.percentage_home'),
           answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
-        ) if @legal_aid_application.shared_ownership? %>
+        ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
   </dl>
 
-  <%= check_answer_currency_list(
+  <%= check_answer_one_change_link(
         name: :savings_and_investments,
         url: citizens_savings_and_investment_path,
         question: t('.assets.savings_and_investments'),
         answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.savings_and_investments.check_box_')
       ) %>
 
-  <%= check_answer_currency_list(
+  <%= check_answer_one_change_link(
         name: :other_assets,
         url: citizens_other_assets_path,
         question: t('.assets.other_assets'),
         answer_hash: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: 'shared.forms.revealing_checkbox.attribute.citizens.other_assets.check_box_')
       ) %>
 
-  <%= check_answer_list(
+  <%= check_answer_no_link_list(
         name: :restrictions,
         url: citizens_restrictions_path,
         question: t('.assets.restrictions'),

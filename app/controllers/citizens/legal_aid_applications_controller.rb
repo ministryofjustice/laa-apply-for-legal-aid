@@ -7,6 +7,7 @@ module Citizens
     def show
       sign_out current_provider if provider_signed_in?
       secure_id = params[:id]
+
       legal_aid_application = LegalAidApplication.find_by_secure_id!(secure_id)
 
       session[:current_application_ref] = legal_aid_application.id

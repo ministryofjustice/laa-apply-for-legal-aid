@@ -1,0 +1,8 @@
+<div class="govuk-summary-list__row" id="app-check-your-answers__<%= name %>">
+  <div class="govuk-summary-list__value" style="width: 90%; word-break: normal">
+    <%= question %>
+  </div>
+  <div class="govuk-summary-list__value" style="text-align: right; padding-right: 1px; word-break: normal">
+    <%= answer.present? ? answer : '-' %>
+  </div>
+</div>

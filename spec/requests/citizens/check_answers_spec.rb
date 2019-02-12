@@ -23,7 +23,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to include(number_to_currency(legal_aid_application.outstanding_mortgage_amount, unit: '£'))
       expect(response.body).to include(I18n.translate("shared.forms.shared_ownership_form.shared_ownership_item.#{legal_aid_application.shared_ownership}"))
       expect(response.body).to include(number_to_percentage(legal_aid_application.percentage_home, precision: 2))
-      expect(response.body).to include('Own the home')
+      expect(response.body).to include('Property owned')
       expect(response.body).to include('Property value')
       expect(response.body).to include('Outstanding mortgage')
       expect(response.body).to include('Owned with anyone else')
