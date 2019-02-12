@@ -75,9 +75,9 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
       end
 
       context 'with negative numbers' do
-        let(:amount) { "'#{Faker::Number.negative}'" }
+        let(:amount) { Faker::Number.negative.to_s }
         it 'generates an error' do
-          expect(subject.errors[:outstanding_mortgage_amount]).to contain_exactly('Mortgage amount must be an amount of money, like 60,000')
+          expect(subject.errors[:outstanding_mortgage_amount]).to contain_exactly('Mortgage amount must be 0 or more')
         end
       end
 
