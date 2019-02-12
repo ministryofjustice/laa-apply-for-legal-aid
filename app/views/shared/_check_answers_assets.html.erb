@@ -34,7 +34,7 @@
         url: check_answer_url_for(user_type, :percentage_home, application),
         question: t('.assets.percentage_home'),
         answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
-      ) if @legal_aid_application.shared_ownership? %>
+      ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
 
   <%= check_answer_link(
         name: :savings_and_investments,
