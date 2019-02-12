@@ -25,7 +25,7 @@ en:
     check_answers:
       index:
         assets:
-          heading: Property, savings and other assets
+          heading: Property
           other_assets: Other assets
           outstanding_mortgage: Outstanding mortgage amount
           own_home: Own the home you live in
