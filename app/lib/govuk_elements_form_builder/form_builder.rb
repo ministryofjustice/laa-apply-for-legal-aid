@@ -33,12 +33,12 @@ module GovukElementsFormBuilder
     # Use :field_with_error to have the input be marked as erroneous when an other attribute has an error.
     # e.g., <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
     #
-    %w[text_field text_area].each do |text_input|
+    %w[text_field file_field text_area].each do |text_input|
       define_method("govuk_#{text_input}") do |attribute, options = {}|
         options[:text_input] = text_input
-        options[:class] = text_input_classes(attribute, options)
+        options[:class] = input_classes(attribute, options)
         suffix = options.delete(:suffix)
-        input_text_form_group(attribute, options) do
+        input_form_group(attribute, options) do
           input_prefix = options[:input_prefix]
           tag_options = options.except(*CUSTOM_OPTIONS)
           tag_options[:id] = attribute
@@ -139,15 +139,14 @@ module GovukElementsFormBuilder
       classes.join(' ')
     end
 
-    def text_input_classes(attribute, options)
+    def input_classes(attribute, options)
       classes = [options[:class]]
-      if options[:text_input] == 'text_area'
-        classes << 'govuk-textarea'
-        classes << 'govuk-textarea--error' if error?(attribute, options)
-      else
-        classes << 'govuk-input'
-        classes << 'govuk-input--error' if error?(attribute, options)
-      end
+      input_class_type = {
+        'text_area' => 'textarea',
+        'file_field' => 'file-upload'
+      }[options[:text_input]] || 'input'
+      classes << "govuk-#{input_class_type}"
+      classes << "govuk-#{input_class_type}--error" if error?(attribute, options)
       classes << 'govuk-prefix-input__inner__input' if options[:input_prefix]
       classes.compact.join(' ')
     end
@@ -168,7 +167,7 @@ module GovukElementsFormBuilder
       yield + span_tag
     end
 
-    def input_text_form_group(attribute, options)
+    def input_form_group(attribute, options)
       classes = ['govuk-form-group']
       classes << 'govuk-form-group--error' if error?(attribute, options)
       content_tag :div, class: classes.join(' ') do

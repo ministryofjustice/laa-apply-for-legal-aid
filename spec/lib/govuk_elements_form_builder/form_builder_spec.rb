@@ -9,140 +9,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   let(:builder) { described_class.new resource.to_sym, resource_form, helper, {} }
   let(:parsed_html) { Nokogiri::HTML(subject) }
 
-  describe 'govuk_text_field' do
-    let(:attribute) { 'email' }
-    let(:params) { [:email] }
-    let(:email_label) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
-    let(:email_hint) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
-    let(:input) { parsed_html.at_css("input##{attribute}") }
-
-    subject { builder.govuk_text_field(*params) }
-
-    it 'generates a text field' do
-      expect(input.classes).to include('govuk-input')
-      expect(input[:type]).to eq('text')
-      expect(input[:name]).to eq("#{resource}[#{attribute}]")
-    end
-
-    it 'surrounds the field in a div' do
-      div = input.parent
-
-      expect(div.name).to eq('div')
-      expect(div.classes).to include('govuk-form-group')
-    end
-
-    it 'includes a label' do
-      label = input.parent.at_css('label')
-
-      expect(label.classes).to include('govuk-label')
-      expect(label[:for]).to eq('email')
-      expect(label.content).to eq(email_label)
-    end
-
-    it 'includes a hint message' do
-      hint_span = input.parent.at_css("span##{attribute}-hint")
-
-      expect(hint_span.classes).to include('govuk-hint')
-      expect(hint_span.content).to include(email_hint)
-      expect(input['aria-describedby']).to eq("#{attribute}-hint")
-    end
-
-    context 'hint: nil' do
-      let(:params) { [:email, hint: nil] }
-
-      it 'does not include a hint message' do
-        expect(subject).not_to include('govuk-hint')
-        expect(input['aria-describedby']).to eq('')
-      end
-    end
-
-    context 'Display hint and no label (label: nil, hint: email_hint)' do
-      let(:params) { [:email, label: nil, hint: email_hint] }
-
-      it 'does not include a hint message' do
-        expect(subject).not_to include('govuk-label')
-        expect(subject).to include('govuk-hint')
-      end
-    end
-
-    context 'pass a label parameter' do
-      let(:custom_label) { "Your client's email" }
-      let(:params) { [:email, label: custom_label] }
-
-      it 'shows the custom label' do
-        label = input.parent.at_css('label')
-
-        expect(label.classes).to include('govuk-label')
-        expect(label[:for]).to eq('email')
-        expect(label.content).to eq(custom_label)
-      end
-    end
-
-    context 'suffix' do
-      let(:params) { [:email, suffix: 'litres'] }
-
-      it 'shows the suffix' do
-        expect(subject).to include %(<span class="input-suffix"> litres</span></div>)
-      end
-    end
-
-    context 'adding a custom class to the input' do
-      let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [:email, class: custom_class] }
-
-      it 'adds custom class to the input' do
-        expect(input.classes).to include(custom_class)
-      end
-    end
-
-    context 'has an input_prefix option' do
-      let(:prefix) { '£' }
-      let(:params) { [:email, input_prefix: prefix] }
-
-      it 'includes a prefix ' do
-        expect(input.previous_element.content).to eq(prefix)
-        expect(input.previous_element.name).to eq('span')
-        expect(input.previous_element.classes).to contain_exactly('govuk-prefix-input__inner__unit')
-        expect(input.parent.name).to eq('div')
-        expect(input.parent.classes).to contain_exactly('govuk-prefix-input__inner')
-        expect(input.parent.parent.name).to eq('div')
-        expect(input.parent.parent.classes).to contain_exactly('govuk-prefix-input')
-      end
-    end
-
-    context 'when validation error on object' do
-      let(:email_error) { I18n.t("activemodel.errors.models.#{resource}.attributes.#{attribute}.blank") }
-
-      before { resource_form.valid? }
-
-      it 'includes an error message' do
-        error_span = input.previous_element
-        expect(error_span.content).to eq(email_error)
-        expect(error_span.name).to eq('span')
-        expect(error_span.classes).to include('govuk-error-message')
-        expect(input.classes).to include('govuk-input--error')
-        expect(input['aria-describedby'].split(' ')).to include('email-error')
-        expect(input.parent.classes).to include('govuk-form-group--error')
-      end
-    end
-  end
-
-  describe 'govuk_text_area' do
-    let(:attribute) { 'email' }
-    let(:params) { [:email] }
-    let(:email_label) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
-    let(:email_hint) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
-    let(:tag) { parsed_html.at_css("textarea##{attribute}") }
-    let(:label) { tag.parent.at_css('label') }
-
-    subject { builder.govuk_text_area(*params) }
-
-    it 'generates a text_area tag' do
-      expect(tag.name).to eq('textarea')
-      expect(tag.classes).to include('govuk-textarea')
-      expect(tag[:name]).to eq("#{resource}[#{attribute}]")
-    end
-
+  shared_examples_for 'a basic input field' do
     it 'surrounds the field in a div' do
       div = tag.parent
       expect(div.name).to eq('div')
@@ -151,20 +18,19 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     it 'includes a label' do
       expect(label.classes).to include('govuk-label')
-      expect(label[:for]).to eq('email')
-      expect(label.content).to eq(email_label)
+      expect(label[:for]).to eq(attribute)
+      expect(label.content).to eq(label_copy)
     end
 
     it 'includes a hint message' do
       hint_span = tag.parent.at_css("span##{attribute}-hint")
-
       expect(hint_span.classes).to include('govuk-hint')
-      expect(hint_span.content).to include(email_hint)
+      expect(hint_span.content).to include(hint_copy)
       expect(tag['aria-describedby']).to eq("#{attribute}-hint")
     end
 
     context 'hint: nil' do
-      let(:params) { [:email, hint: nil] }
+      let(:params) { [attribute.to_sym, hint: nil] }
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-hint')
@@ -172,38 +38,23 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       end
     end
 
+    context 'Display hint and no label (label: nil, hint: hint_copy)' do
+      let(:params) { [attribute.to_sym, label: nil, hint: hint_copy] }
+
+      it 'does not include a hint message' do
+        expect(subject).not_to include('govuk-label')
+        expect(subject).to include('govuk-hint')
+      end
+    end
+
     context 'pass a label parameter' do
-      let(:custom_label) { "Your client's email" }
-      let(:params) { [:email, label: custom_label] }
+      let(:custom_label) { Faker::Lorem.sentence }
+      let(:params) { [attribute.to_sym, label: custom_label] }
 
       it 'shows the custom label' do
         expect(label.classes).to include('govuk-label')
-        expect(label[:for]).to eq('email')
+        expect(label[:for]).to eq(attribute)
         expect(label.content).to eq(custom_label)
-      end
-    end
-
-    context 'pass a label parameter with text and size' do
-      let(:custom_label) { "Your client's email" }
-      let(:params) { [:email, label: { text: custom_label, size: :m }] }
-
-      it 'shows the custom label' do
-        expect(label.classes).to include('govuk-label')
-        expect(label[:for]).to eq('email')
-        expect(label.content).to eq(custom_label)
-      end
-
-      it 'includes a size class' do
-        expect(label.classes).to include('govuk-label--m')
-      end
-    end
-
-    context 'adding a custom class to the input' do
-      let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [:email, class: custom_class] }
-
-      it 'adds custom class to the input' do
-        expect(tag.classes).to include(custom_class)
       end
     end
 
@@ -217,10 +68,117 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
         expect(error_span.content).to eq(email_error)
         expect(error_span.name).to eq('span')
         expect(error_span.classes).to include('govuk-error-message')
-        expect(tag.classes).to include('govuk-textarea--error')
+        expect(tag.classes).to include(expected_error_class)
         expect(tag['aria-describedby'].split(' ')).to include('email-error')
         expect(tag.parent.classes).to include('govuk-form-group--error')
       end
+    end
+
+    context 'adding a custom class to the input' do
+      let(:custom_class) { 'govuk-!-width-one-third' }
+      let(:params) { [attribute.to_sym, class: custom_class] }
+
+      it 'adds custom class to the input' do
+        expect(tag.classes).to include(custom_class)
+      end
+    end
+
+    context 'pass a label parameter with text and size' do
+      let(:custom_label) { Faker::Lorem.sentence }
+      let(:params) { [attribute.to_sym, label: { text: custom_label, size: :m }] }
+
+      it 'shows the custom label' do
+        expect(label.classes).to include('govuk-label')
+        expect(label[:for]).to eq(attribute)
+        expect(label.content).to eq(custom_label)
+      end
+
+      it 'includes a size class' do
+        expect(label.classes).to include('govuk-label--m')
+      end
+    end
+  end
+
+  describe 'govuk_text_field' do
+    let(:attribute) { 'email' }
+    let(:params) { [attribute.to_sym] }
+    let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
+    let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
+    let(:tag) { parsed_html.at_css("input##{attribute}") }
+    let(:label) { tag.parent.at_css('label') }
+    let(:expected_error_class) { 'govuk-input--error' }
+
+    subject { builder.govuk_text_field(*params) }
+
+    it_behaves_like 'a basic input field'
+
+    it 'generates a text field' do
+      expect(tag.classes).to include('govuk-input')
+      expect(tag[:type]).to eq('text')
+      expect(tag[:name]).to eq("#{resource}[#{attribute}]")
+    end
+
+    context 'suffix' do
+      let(:params) { [attribute.to_sym, suffix: 'litres'] }
+
+      it 'shows the suffix' do
+        expect(subject).to include %(<span class="input-suffix"> litres</span></div>)
+      end
+    end
+
+    context 'has an input_prefix option' do
+      let(:prefix) { '£' }
+      let(:params) { [attribute.to_sym, input_prefix: prefix] }
+
+      it 'includes a prefix ' do
+        expect(tag.previous_element.content).to eq(prefix)
+        expect(tag.previous_element.name).to eq('span')
+        expect(tag.previous_element.classes).to contain_exactly('govuk-prefix-input__inner__unit')
+        expect(tag.parent.name).to eq('div')
+        expect(tag.parent.classes).to contain_exactly('govuk-prefix-input__inner')
+        expect(tag.parent.parent.name).to eq('div')
+        expect(tag.parent.parent.classes).to contain_exactly('govuk-prefix-input')
+      end
+    end
+  end
+
+  describe 'govuk_text_area' do
+    let(:attribute) { 'email' }
+    let(:params) { [attribute.to_sym] }
+    let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
+    let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
+    let(:tag) { parsed_html.at_css("textarea##{attribute}") }
+    let(:label) { tag.parent.at_css('label') }
+    let(:expected_error_class) { 'govuk-textarea--error' }
+
+    subject { builder.govuk_text_area(*params) }
+
+    it_behaves_like 'a basic input field'
+
+    it 'generates a text_area tag' do
+      expect(tag.name).to eq('textarea')
+      expect(tag.classes).to include('govuk-textarea')
+      expect(tag[:name]).to eq("#{resource}[#{attribute}]")
+    end
+  end
+
+  describe 'govuk_file_field' do
+    let(:attribute) { 'email' }
+    let(:params) { [attribute.to_sym] }
+    let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
+    let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
+    let(:label) { tag.parent.at_css('label') }
+    let(:tag) { parsed_html.at_css('input[type=file]') }
+    let(:expected_error_class) { 'govuk-file-upload--error' }
+
+    subject { builder.govuk_file_field(*params) }
+
+    it_behaves_like 'a basic input field'
+
+    it 'generates a file_field tag' do
+      expect(tag.classes).to include('govuk-file-upload')
+      expect(tag[:type]).to eq('file')
+      expect(tag[:name]).to eq("#{resource}[#{attribute}]")
     end
   end
 
@@ -266,7 +224,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'label is passed as a parameter' do
-      let(:custom_label) { 'Yes I use online banking' }
+      let(:custom_label) { Faker::Lorem.sentence }
       let(:params) { [:uses_online_banking, true, label: custom_label] }
 
       it 'display the custom label instead of the one in locale file' do

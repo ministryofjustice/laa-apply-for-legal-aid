@@ -10,9 +10,7 @@ module Providers
     end
 
     def update
-      statement_of_case.statement = statement_of_case_params[:statement]
-
-      if statement_of_case.save || draft_selected?
+      if statement_of_case.update(statement_of_case_params) || draft_selected?
         continue_or_draft
       else
         render :show
@@ -22,7 +20,7 @@ module Providers
     private
 
     def statement_of_case_params
-      params.require(:statement_of_case).permit(:statement)
+      params.require(:statement_of_case).permit(:statement, :original_file)
     end
 
     def statement_of_case

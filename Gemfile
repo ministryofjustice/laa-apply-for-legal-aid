@@ -51,6 +51,9 @@ gem 'sprockets-es6'
 # URL and path parsing
 gem 'addressable'
 
+# File storage
+gem 'aws-sdk-s3'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

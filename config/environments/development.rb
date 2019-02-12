@@ -60,4 +60,6 @@ Rails.application.configure do
 
   config.x.application.host = ENV['HOST'] || "localhost:#{ENV.fetch('PORT', 3002)}"
   Rails.application.routes.default_url_options[:host] = config.x.application.host
+
+  config.active_storage.service = :local
 end

@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.h1-heading'), template: :basic do %>
+<%= page_template page_title: t('.h1-heading'), show_errors_for: @statement_of_case, template: :form do %>
 
   <%= form_with(
         model: @statement_of_case,
@@ -12,10 +12,6 @@
           show_error_if: @statement_of_case.errors.any?
         ) do %>
 
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
-
-      <%= govuk_error_message(@statement_of_case.errors[:statement].first) %>
-
       <label class="govuk-label" for="more-detail">
         <p class="govuk-body-l"><%= t('.instructions') %></p>
         <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
@@ -25,6 +21,10 @@
           <% end %>
         </ul>
       </label>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <%= form.govuk_file_field :original_file, label: t('generic.upload_file') %>
 
       <div class="govuk-!-padding-bottom-2"></div>
 

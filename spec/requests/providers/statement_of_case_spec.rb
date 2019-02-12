@@ -48,39 +48,94 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
   describe 'PATCH providers/proceedings_before_the_court' do
     subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params.merge(submit_button) }
     let(:entered_text) { Faker::Lorem.paragraph(3) }
+    let(:original_file) { uploaded_file('spec/fixtures/files/lorem_ipsum.pdf', 'application/pdf') }
 
     let(:params) do
       {
         statement_of_case: {
-          statement: entered_text
+          statement: entered_text,
+          original_file: original_file
         }
       }
     end
 
     context 'when the provider is authenticated' do
-      before do
-        login_as provider
-        subject
-      end
+      before { login_as provider }
 
       let(:submit_button) { {} }
 
       it 'updates the record' do
+        subject
         expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
+        expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
       end
 
       it 'redirects to the next page' do
+        subject
         expect(response).to redirect_to providers_legal_aid_application_estimated_legal_costs_path(legal_aid_application)
+      end
+
+      context 'file is empty but text is entered' do
+        let(:original_file) { nil }
+
+        it 'updates the statement text' do
+          subject
+          expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
+          expect(legal_aid_application.statement_of_case.original_file.attachment).not_to be_present
+        end
+      end
+
+      context 'text is empty but file is present' do
+        let(:entered_text) { '' }
+
+        it 'updates the file' do
+          subject
+          expect(legal_aid_application.statement_of_case.reload.statement).to eq('')
+          expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+        end
+      end
+
+      context 'file is invalid content type' do
+        let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
+        it 'does not save the object and raise an error' do
+          subject
+          expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.content_type_invalid'))
+          expect(legal_aid_application.statement_of_case).to be_nil
+        end
+      end
+
+      context 'file is too big' do
+        before { allow(StatementOfCase).to receive(:max_file_size).and_return(0) }
+
+        it 'does not save the object and raise an error' do
+          subject
+          expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0))
+          expect(legal_aid_application.statement_of_case).to be_nil
+        end
+      end
+
+      context 'file is empty' do
+        let(:original_file) { uploaded_file('spec/fixtures/files/empty_file', nil) }
+
+        it 'does not save the object and raise an error' do
+          subject
+          expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.file_empty'))
+          expect(legal_aid_application.statement_of_case).to be_nil
+        end
       end
 
       context 'on error' do
         let(:entered_text) { '' }
+        let(:original_file) { nil }
 
         it 'returns http success' do
+          subject
           expect(response).to have_http_status(:ok)
         end
 
         it 'displays error' do
+          subject
           expect(response.body).to match 'id="statement-error"'
         end
       end
@@ -89,17 +144,22 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         let(:submit_button) { { draft_button: 'Save as draft' } }
 
         it 'updates the record' do
+          subject
           expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
+          expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
         end
 
         it 'redirects to provider applications home page' do
+          subject
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
         context 'nothing specified' do
           let(:entered_text) { '' }
+          let(:original_file) { nil }
 
           it 'redirects to provider applications home page' do
+            subject
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end

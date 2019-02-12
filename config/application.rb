@@ -35,5 +35,7 @@ module LaaApplyForLegalAid
 
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
