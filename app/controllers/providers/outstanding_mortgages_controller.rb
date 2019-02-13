@@ -1,9 +1,5 @@
 module Providers
   class OutstandingMortgagesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       authorize @legal_aid_application
       @form = LegalAidApplications::OutstandingMortgageForm.new(model: legal_aid_application)

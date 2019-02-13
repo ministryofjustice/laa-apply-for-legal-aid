@@ -1,8 +1,5 @@
 module Providers
   class StatementOfCasesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
     before_action :authorize_legal_aid_application
 
     def show

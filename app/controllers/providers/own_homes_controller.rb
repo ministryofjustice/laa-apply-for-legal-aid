@@ -1,9 +1,5 @@
 module Providers
   class OwnHomesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       authorize @legal_aid_application
       @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)

@@ -54,7 +54,7 @@
           question: t('.items.prospects_of_success'),
           answer: t("shared.forms.success_prospect.success_prospect_item.#{@merits.success_prospect}")
         ) %>
-  </dv>
+  </dl>
 
   <div class='govuk-body'><%= @merits.success_prospect_details %></div>
 
@@ -77,10 +77,11 @@
     <%= t '.complete-application-text' %>
   </p>
 
-  <%= button_to(
-        t('generic.accept_and_send'),
-        continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
-        class: 'govuk-button',
-        method: :patch
+  <%= next_action_buttons_with_form(
+        url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
+        method: :patch,
+        show_draft: true,
+        continue_button_text: t('generic.accept_and_send')
       ) %>
+
 <% end %>

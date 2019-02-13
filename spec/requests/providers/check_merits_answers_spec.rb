@@ -98,7 +98,10 @@ RSpec.describe 'check merits answers requests', type: :request do
              :with_everything,
              :checking_merits_answers
     end
-    subject { patch "/providers/applications/#{application.id}/check_merits_answers/continue" }
+    let(:params) { {} }
+    subject do
+      patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
+    end
 
     context 'logged in as an authenticated provider' do
       before do
@@ -112,6 +115,19 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       it 'transitions to merits_completed state' do
         expect(application.reload.merits_completed?).to be true
+      end
+
+      context 'Form submitted using Save as draft button' do
+        let(:params) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect(application.reload).to be_draft
+        end
       end
     end
 

@@ -1,9 +1,5 @@
 module Providers
   class OtherAssetsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       authorize @legal_aid_application
       @form = Citizens::OtherAssetsForm.new(model: declaration)

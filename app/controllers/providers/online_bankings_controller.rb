@@ -1,9 +1,5 @@
 module Providers
   class OnlineBankingsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       authorize @legal_aid_application
       @form = Applicants::UsesOnlineBankingForm.new(model: applicant)

@@ -11,5 +11,9 @@
 
   <%= simple_format t('.text_3') %>
 
-  <%= button_to t('generic.continue'), providers_legal_aid_application_merits_declaration_path, method: :patch, class: 'govuk-button' %>
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_merits_declaration_path,
+        method: :patch,
+        show_draft: true
+      ) %>
 <% end %>

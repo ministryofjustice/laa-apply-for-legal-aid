@@ -1,9 +1,5 @@
 module Providers
   class AddressesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       @form = Addresses::AddressForm.new(model: address)
     end

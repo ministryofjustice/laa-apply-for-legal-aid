@@ -1,9 +1,5 @@
 module Providers
   class RestrictionsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def index
       legal_aid_application
     end

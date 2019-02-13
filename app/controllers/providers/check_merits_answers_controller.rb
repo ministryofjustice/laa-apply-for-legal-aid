@@ -1,8 +1,5 @@
 module Providers
   class CheckMeritsAnswersController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-
     def show
       @merits = legal_aid_application.merits_assessment
       @statement_of_case = legal_aid_application.statement_of_case
@@ -10,8 +7,8 @@ module Providers
     end
 
     def continue
-      legal_aid_application.complete_merits! unless legal_aid_application.merits_completed?
-      go_forward
+      legal_aid_application.complete_merits! unless draft_selected? || legal_aid_application.merits_completed?
+      continue_or_draft
     end
 
     def reset

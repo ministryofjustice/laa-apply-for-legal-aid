@@ -1,13 +1,17 @@
 module FlowHelper
-  def next_action_buttons_with_form(url:, method: :post, show_draft: false)
-    form_with(
-      model: nil,
-      url: url,
-      method: method,
-      local: true
-    ) do |form|
+  def next_action_buttons_with_form(
+        url:,
+        method: :post,
+        show_draft: false,
+        continue_button_text: t('generic.continue')
+      )
 
-      next_action_buttons(show_draft: show_draft, form: form)
+    form_with(model: nil, url: url, method: method, local: true) do |form|
+      next_action_buttons(
+        show_draft: show_draft,
+        form: form,
+        continue_button_text: continue_button_text
+      )
     end
   end
 

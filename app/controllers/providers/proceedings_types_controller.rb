@@ -1,9 +1,5 @@
 module Providers
   class ProceedingsTypesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
       authorize legal_aid_application

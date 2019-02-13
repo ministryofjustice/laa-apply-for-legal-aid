@@ -1,8 +1,5 @@
 module Providers
   class SavingsAndInvestmentsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
     helper_method :attributes
 
     def show

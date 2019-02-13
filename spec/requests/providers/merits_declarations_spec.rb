@@ -43,11 +43,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
       end
 
       context 'Continue button pressed' do
-        let(:submit_button) do
-          {
-            continue_button: 'Continue'
-          }
-        end
+        let(:submit_button) { { continue_button: 'Continue' } }
 
         it 'updates the record' do
           expect(legal_aid_application.merits_assessment.reload.client_merits_declaration).to eq(client_merits_declaration)
@@ -55,6 +51,19 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
 
         it 'redirects to next page' do
           expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path)
+        end
+      end
+
+      context 'Form submitted using Save as draft button' do
+        let(:submit_button) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect(legal_aid_application.reload).to be_draft
         end
       end
     end

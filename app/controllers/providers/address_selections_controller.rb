@@ -1,9 +1,5 @@
 module Providers
   class AddressSelectionsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show # rubocop:disable Metrics/AbcSize
       authorize @legal_aid_application
       return redirect_to back_path unless address.postcode
