@@ -10,6 +10,6 @@ class CurrencyValidator < ActiveModel::Validations::NumericalityValidator
   end
 
   def clean_numeric_value(value)
-    CurrencyCleaner.new(value).clean
+    CurrencyCleaner.new(value).call
   end
 end

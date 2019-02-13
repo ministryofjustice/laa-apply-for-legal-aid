@@ -9,7 +9,7 @@ class CurrencyCleaner
 
   # will remove all commas if valid i.e. followed by 3 digits
   # if invalid, the original String is returned
-  def clean
+  def call
     clean_value = remove_commas
     PURE_NUMERIC_REGEX.match?(clean_value) ? clean_value : @original_value
   end
