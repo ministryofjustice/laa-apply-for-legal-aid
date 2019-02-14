@@ -110,7 +110,6 @@ GEM
       nokogiri (~> 1.8)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
-    clamby (1.6.1)
     climate_control (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.4)
@@ -450,7 +449,6 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
-  clamby
   climate_control
   cucumber-rails
   database_cleaner

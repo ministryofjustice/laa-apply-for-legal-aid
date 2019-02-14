@@ -4,7 +4,7 @@ module StatementOfCases
 
     form_for StatementOfCase
 
-    attr_accessor :statement, :original_file
+    attr_accessor :statement, :original_file, :provider_uploader
 
     MAX_FILE_SIZE = 50.megabytes
 
@@ -26,7 +26,7 @@ module StatementOfCases
       MAX_FILE_SIZE
     end
 
-    validates :statement, presence: true, unless: :file_present?
+    validates :statement, presence: true, unless: :file_present_or_draft?
     validate :original_file_too_big
     validate :original_file_empty
     validate :original_file_disallowed_content_type
@@ -34,9 +34,13 @@ module StatementOfCases
 
     private
 
+    def file_present_or_draft?
+      file_present? || draft?
+    end
+
     def original_file_too_big
       return unless file_present?
-      return if File.size(original_file.tempfile) <= StatementOfCaseForm.max_file_size
+      return if original_file_size <= StatementOfCaseForm.max_file_size
 
       errors.add(:original_file, original_file_error_for(:file_too_big, size: StatementOfCaseForm.max_file_size / 1.megabyte))
     end
@@ -58,7 +62,7 @@ module StatementOfCases
     def original_file_malware_scan
       return unless file_present?
 
-      return if Clamby.safe?(original_file.tempfile.path)
+      return unless malware_scan_result.virus_found?
 
       errors.add(:original_file, original_file_error_for(:file_virus))
     end
@@ -67,8 +71,24 @@ module StatementOfCases
       original_file.present?
     end
 
+    def malware_scan_result
+      @malware_scan_result ||= MalwareScanner.call(
+        file_path: original_file.tempfile.path,
+        uploader: provider_uploader,
+        file_details: {
+          size: original_file_size,
+          name: original_file.original_filename,
+          content_type: original_file.content_type
+        }
+      )
+    end
+
+    def original_file_size
+      @original_file_size ||= File.size(original_file.tempfile)
+    end
+
     def original_file_error_for(error_type, options = {})
-      I18n.t("activerecord.errors.models.statement_of_case.attributes.original_file.#{error_type}", options)
+      I18n.t("activemodel.errors.models.statement_of_case.attributes.original_file.#{error_type}", options)
     end
   end
 end

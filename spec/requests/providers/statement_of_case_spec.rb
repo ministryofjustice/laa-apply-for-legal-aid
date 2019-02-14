@@ -99,17 +99,17 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'does not save the object and raise an error' do
           subject
-          expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.content_type_invalid'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid'))
           expect(legal_aid_application.statement_of_case).to be_nil
         end
       end
 
       context 'file is too big' do
-        before { allow(StatementOfCase).to receive(:max_file_size).and_return(0) }
+        before { allow(StatementOfCases::StatementOfCaseForm).to receive(:max_file_size).and_return(0) }
 
         it 'does not save the object and raise an error' do
           subject
-          expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0))
           expect(legal_aid_application.statement_of_case).to be_nil
         end
       end
@@ -119,7 +119,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'does not save the object and raise an error' do
           subject
-          expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.file_empty'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_empty'))
           expect(legal_aid_application.statement_of_case).to be_nil
         end
       end
@@ -143,7 +143,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
           it 'does not save the object and raise an error' do
             subject
-            expect(response.body).to include(I18n.t('activerecord.errors.models.statement_of_case.attributes.original_file.file_virus'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_virus'))
             expect(legal_aid_application.statement_of_case).to be_nil
           end
         end

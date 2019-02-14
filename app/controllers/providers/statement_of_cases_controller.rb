@@ -10,7 +10,7 @@ module Providers
     end
 
     def update
-      @form = StatementOfCases::StatementOfCaseForm.new(statement_of_case_params.merge(model: statement_of_case))
+      @form = StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -18,7 +18,10 @@ module Providers
     private
 
     def statement_of_case_params
-      params.require(:statement_of_case).permit(:statement, :original_file)
+      params
+        .require(:statement_of_case)
+        .permit(:statement, :original_file)
+        .merge(model: statement_of_case, provider_uploader: current_provider)
     end
 
     def statement_of_case

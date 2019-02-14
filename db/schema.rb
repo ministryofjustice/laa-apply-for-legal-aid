@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_143628) do
+ActiveRecord::Schema.define(version: 2019_02_14_171720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -195,6 +195,17 @@ ActiveRecord::Schema.define(version: 2019_02_14_143628) do
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
+  create_table "malware_scan_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "uploader_type"
+    t.uuid "uploader_id"
+    t.boolean "virus_found", null: false
+    t.text "scan_result"
+    t.json "file_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
+  end
+
   create_table "merits_assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.datetime "created_at", null: false
@@ -289,7 +300,9 @@ ActiveRecord::Schema.define(version: 2019_02_14_143628) do
     t.text "statement"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "provider_uploader_id"
     t.index ["legal_aid_application_id"], name: "index_statement_of_cases_on_legal_aid_application_id"
+    t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -308,4 +321,6 @@ ActiveRecord::Schema.define(version: 2019_02_14_143628) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
+  add_foreign_key "statement_of_cases", "legal_aid_applications"
+  add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
 end
