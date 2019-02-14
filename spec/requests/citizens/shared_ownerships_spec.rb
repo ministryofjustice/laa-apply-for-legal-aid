@@ -85,9 +85,9 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
       context 'while checking answers' do
         let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_answers }
 
-        it 'redirects to check answers page' do
+        it 'redirects to "restrictions" page' do
           patch_request
-          expect(response).to redirect_to(citizens_check_answers_path)
+          expect(response).to redirect_to(citizens_restrictions_path)
         end
       end
     end
