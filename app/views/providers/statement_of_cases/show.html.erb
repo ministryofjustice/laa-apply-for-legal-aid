@@ -1,7 +1,7 @@
-<%= page_template page_title: t('.h1-heading'), show_errors_for: @statement_of_case, template: :form do %>
+<%= page_template page_title: t('.h1-heading'), template: :form do %>
 
   <%= form_with(
-        model: @statement_of_case,
+        model: @form,
         url: providers_legal_aid_application_statement_of_case_path,
         method: :patch,
         local: true
@@ -9,7 +9,7 @@
 
     <%= govuk_form_group(
           input: :proceedings_before_the_court,
-          show_error_if: @statement_of_case.errors.any?
+          show_error_if: @form.errors.any?
         ) do %>
 
       <label class="govuk-label" for="more-detail">

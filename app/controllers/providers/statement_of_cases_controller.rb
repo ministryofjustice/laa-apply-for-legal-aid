@@ -6,15 +6,13 @@ module Providers
     before_action :authorize_legal_aid_application
 
     def show
-      statement_of_case
+      @form = StatementOfCases::StatementOfCaseForm.new(model: statement_of_case)
     end
 
     def update
-      if statement_of_case.update(statement_of_case_params) || draft_selected?
-        continue_or_draft
-      else
-        render :show
-      end
+      @form = StatementOfCases::StatementOfCaseForm.new(statement_of_case_params.merge(model: statement_of_case))
+
+      render :show unless save_continue_or_draft(@form)
     end
 
     private
