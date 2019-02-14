@@ -14,6 +14,10 @@ Then('I select {string}') do |option|
   check(option, allow_label_click: true)
 end
 
+Then('I deselect {string}') do |option|
+  uncheck(option, allow_label_click: true)
+end
+
 Then('I click {string}') do |button_name|
   click_button(button_name)
 end
