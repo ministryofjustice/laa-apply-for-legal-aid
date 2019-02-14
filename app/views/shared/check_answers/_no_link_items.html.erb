@@ -3,7 +3,7 @@
     <h2 class="govuk-heading-m"><%= question %></h2>
   </div>
   <% if answers.present? %>
-    <div class="govuk-grid-column-one-third  govuk-summary-list--no-border" style="text-align: right;">
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-change-link-right">
       <p>
         <%= link_to(url, class: 'govuk-link') do %>
           <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
@@ -16,11 +16,11 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <% if answers.present? %>
     <% answers.each_with_index do |answer, index| %>
-      <%= content_tag(:div, class: 'govuk-summary-list__row', id: "app-check-your-answers__#{name}_#{index}") do %>
-        <div class="govuk-summary-list__value" style="width: 90%; word-break: normal">
+      <%= content_tag(:div, class: 'govuk-summary-list__row normal-word-break', id: "app-check-your-answers__#{name}_#{index}") do %>
+        <div class="govuk-summary-list__value check-your-answers-question">
           <%= answer %>
         </div>
-        <div class="govuk-summary-list__value" style="text-align: right; padding-right: 1px; word-break: normal">
+        <div class="govuk-summary-list__value check-your-answers-answer">
             <%= t('generic.yes') %>
         </div>
       <% end %>
