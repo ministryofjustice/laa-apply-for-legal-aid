@@ -1,20 +1,12 @@
 module Providers
   class AddressesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-
     def show
       @form = Addresses::AddressForm.new(model: address)
     end
 
     def update
       @form = Addresses::AddressForm.new(form_params)
-
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private

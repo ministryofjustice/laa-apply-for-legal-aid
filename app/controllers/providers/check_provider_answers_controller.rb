@@ -1,9 +1,5 @@
 module Providers
   class CheckProviderAnswersController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def index
       @proceeding_types = legal_aid_application.proceeding_types
       @applicant = legal_aid_application.applicant

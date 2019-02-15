@@ -9,10 +9,10 @@
 
   <%= render partial: 'shared/check_answers_assets', locals: { user_type: :provider, application: @legal_aid_application } %>
 
-  <%= button_to(
-        t('generic.submit'),
-        continue_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application),
-        class: 'govuk-button',
-        method: :patch
+  <%= next_action_buttons_with_form(
+        url: continue_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application),
+        method: :patch,
+        show_draft: true,
+        continue_button_text: t('generic.submit')
       ) %>
 <% end %>

@@ -114,7 +114,13 @@ RSpec.describe 'check passported answers requests', type: :request do
              :with_everything,
              :checking_passported_answers
     end
-    subject { patch "/providers/applications/#{application.id}/check_passported_answers/continue" }
+    let(:params) { {} }
+    subject do
+      patch(
+        "/providers/applications/#{application.id}/check_passported_answers/continue",
+        params: params
+      )
+    end
 
     context 'logged in as an authenticated provider' do
       before do
@@ -128,6 +134,19 @@ RSpec.describe 'check passported answers requests', type: :request do
 
       it 'transitions to means_completed state' do
         expect(application.reload.means_completed?).to be true
+      end
+
+      context 'Form submitted using Save as draft button' do
+        let(:params) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect(application.reload).to be_draft
+        end
       end
     end
 

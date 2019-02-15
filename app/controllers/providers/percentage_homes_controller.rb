@@ -1,9 +1,5 @@
 module Providers
   class PercentageHomesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       authorize @legal_aid_application
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)

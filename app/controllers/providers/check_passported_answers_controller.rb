@@ -1,8 +1,5 @@
 module Providers
   class CheckPassportedAnswersController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-
     def show
       @proceeding = legal_aid_application.proceeding_types.first
       @applicant = legal_aid_application.applicant
@@ -11,9 +8,9 @@ module Providers
     end
 
     def continue
-      legal_aid_application.complete_means! unless legal_aid_application.means_completed?
+      legal_aid_application.complete_means! unless draft_selected? || legal_aid_application.means_completed?
 
-      go_forward
+      continue_or_draft
     end
 
     def reset

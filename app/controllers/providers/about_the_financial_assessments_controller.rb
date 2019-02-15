@@ -1,9 +1,5 @@
 module Providers
   class AboutTheFinancialAssessmentsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show; end
 
     def update

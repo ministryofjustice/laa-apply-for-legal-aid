@@ -1,9 +1,5 @@
 module Providers
   class ApplicantsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       authorize @legal_aid_application
       @form = Applicants::BasicDetailsForm.new(model: applicant)

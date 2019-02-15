@@ -1,22 +1,14 @@
 module Providers
   class AddressLookupsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-
     before_action :authorize_legal_aid_application
 
     def show
-      @form = Addresses::AddressLookupForm.new
+      @form = Addresses::AddressLookupForm.new(model: address)
     end
 
     def update
       @form = Addresses::AddressLookupForm.new(form_params)
-
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private

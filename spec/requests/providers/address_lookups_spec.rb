@@ -38,12 +38,13 @@ RSpec.describe 'address lookup requests', type: :request do
   describe 'PATCH/providers/applications/:legal_aid_application_id/address_lookup' do
     let(:postcode) { 'DA7 4NG' }
     let(:normalized_postcode) { 'DA74NG' }
+    let(:submit_button) { {} }
     let(:params) do
       {
         address_lookup: {
           postcode: postcode
         }
-      }
+      }.merge(submit_button)
     end
 
     subject { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: params }
@@ -94,6 +95,19 @@ RSpec.describe 'address lookup requests', type: :request do
         it 'redirects to the address selection page' do
           subject
           expect(response).to redirect_to(providers_legal_aid_application_address_selection_path)
+        end
+      end
+
+      context 'Form submitted using Save as draft button' do
+        let(:submit_button) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end

@@ -1,9 +1,5 @@
 module Providers
   class SharedOwnershipsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
     end

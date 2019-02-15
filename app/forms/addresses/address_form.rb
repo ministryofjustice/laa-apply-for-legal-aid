@@ -11,9 +11,10 @@ module Addresses
     validate :validate_building_and_street
 
     validates :city, :postcode,
-              presence: true
+              presence: true,
+              unless: :draft?
 
-    validates :postcode, format: { with: POSTCODE_REGEXP, if: proc { |a| a.postcode.present? } }
+    validates :postcode, format: { with: POSTCODE_REGEXP, allow_blank: true }
 
     def exclude_from_model
       %i[lookup_postcode lookup_error]
@@ -34,7 +35,7 @@ module Addresses
     end
 
     def validate_building_and_street
-      return if address_line_one.present? || address_line_two.present?
+      return if draft? || address_line_one.present? || address_line_two.present?
 
       errors.add(:address_line_one, :blank)
     end

@@ -1,9 +1,5 @@
 module Providers
   class PropertyValuesController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-    include Draftable
-
     def show
       @form = LegalAidApplications::PropertyValueForm.new(model: legal_aid_application)
     end

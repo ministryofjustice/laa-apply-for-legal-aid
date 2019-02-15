@@ -1,7 +1,6 @@
 module Providers
   class LegalAidApplicationsController < ProviderBaseController
-    attr_reader :legal_aid_application
-    include Flowable
+    legal_aid_application_not_required!
 
     # GET /provider/applications
     def index

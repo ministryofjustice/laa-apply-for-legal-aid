@@ -1,15 +1,12 @@
 module Providers
   class MeritsDeclarationsController < ProviderBaseController
-    include ApplicationDependable
-    include Flowable
-
     before_action :authorize_legal_aid_application
 
     def show; end
 
     def update
-      merits_assessment.update!(client_merits_declaration: true)
-      go_forward
+      merits_assessment.update!(client_merits_declaration: true) unless draft_selected?
+      continue_or_draft
     end
 
     private

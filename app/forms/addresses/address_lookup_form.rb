@@ -8,8 +8,13 @@ module Addresses
 
     before_validation :normalise_postcode
 
-    validates :postcode, presence: true
-    validates :postcode, format: { with: POSTCODE_REGEXP, if: proc { |a| a.postcode.present? } }
+    validates :postcode, presence: true, unless: :draft?
+    validates :postcode, format: { with: POSTCODE_REGEXP, allow_blank: true }
+
+    def save_as_draft
+      @draft = true
+      save
+    end
 
     private
 
