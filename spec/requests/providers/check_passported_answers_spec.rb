@@ -44,6 +44,39 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to include('restrictions')
       end
 
+      it 'does not display None Declared if values are entered' do
+        expect(response.body).not_to include(I18n.translate('.generic.none_declared'))
+      end
+
+      context 'applicant does not have any savings' do
+        let(:application) { create :legal_aid_application, :with_everything, :with_no_savings, :answers_checked }
+        it 'displays that no savings have been declared' do
+          expect(response.body).to include(I18n.t('.generic.none_declared'))
+        end
+      end
+
+      context 'applicant does not have any other assets' do
+        let(:application) { create :legal_aid_application, :with_everything, :with_no_other_assets, :answers_checked }
+        it 'displays that no other assets have been declared' do
+          expect(response.body).to include(I18n.t('.generic.none_declared'))
+        end
+      end
+
+      context 'applicant does not have any capital restrictions' do
+        let(:application) { create :legal_aid_application, :with_everything, :answers_checked }
+        let!(:restriction) { nil }
+        it 'displays that no capital restrictions have been declared' do
+          expect(response.body).to include(I18n.t('.generic.none_declared'))
+        end
+      end
+
+      context 'applicant does not have any capital' do
+        let(:application) { create :legal_aid_application, :provider_submitted, :with_applicant, :without_own_home, :answers_checked }
+        it 'does not display capital restrictions' do
+          expect(response.body).not_to include('restrictions')
+        end
+      end
+
       it 'displays the correct URLs for changing values' do
         expect(response.body).to have_change_link(:own_home, providers_legal_aid_application_own_home_path(application))
         expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_property_value_path(application, anchor: 'property_value'))
@@ -92,17 +125,10 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant is sole owner of home' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_home_sole_owner, :answers_checked }
+        let(:application) { create :legal_aid_application, :with_everything, :with_no_other_assets, :with_home_sole_owner, :answers_checked }
         it 'does not display percentage owned' do
           expect(response.body).not_to include(number_to_percentage(application.percentage_home, precision: 2))
           expect(response.body).not_to include('Percentage')
-        end
-      end
-
-      context 'applicant does not have any capital' do
-        let(:application) { create :legal_aid_application, :provider_submitted, :with_applicant, :without_own_home, :answers_checked }
-        it 'does not display capital restrictions' do
-          expect(response.body).not_to include('restrictions')
         end
       end
     end
