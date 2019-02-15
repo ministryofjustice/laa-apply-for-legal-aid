@@ -91,6 +91,46 @@ Given('I complete the passported journey as far as check your answers') do
   )
 end
 
+Given('I complete the passported journey as far as capital check your answers') do
+  steps %(
+    Given I complete the passported journey as far as check your answers
+    Then I click "Continue"
+    Then I am on the benefit check results page
+    Then I see a notice saying that the citizen receives benefits
+    Then I click "Continue"
+    Then I should be on a page showing "Before you continue"
+    Then I click "Continue"
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I choose "Yes, with a mortgage or loan"
+    Then I click "Continue"
+    Then I should be on a page showing "How much is your client's home worth?"
+    Then I fill "Property value" with "200000"
+    Then I click "Continue"
+    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
+    Then I fill "Outstanding mortgage amount" with "100000"
+    Then I click "Continue"
+    Then I should be on a page showing "Does your client own their home with anyone else?"
+    Then I choose "Yes, a partner or ex-partner"
+    Then I click "Continue"
+    Then I should be on a page showing "What % share of their home does your client legally own?"
+    Then I fill "Percentage home" with "50"
+    Then I click "Continue"
+    Then I should be on a page showing "Does your client have any savings and investments?"
+    Then I select "Cash savings"
+    Then I fill "Cash" with "10000"
+    Then I click "Continue"
+    Then I should be on a page showing "Does your client have any of the following?"
+    Then I select "Land"
+    Then I fill "Land value" with "50000"
+    Then I click "Continue"
+    Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
+    Then I select "Bankruptcy"
+    Then I select "Held overseas"
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+  )
+end
+
 When('the search for {string} is not successful') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
 end
@@ -231,7 +271,7 @@ end
 
 Then('I am on the check your answers page for other assets') do
   expect(page).to have_content('Check your answers')
-  expect(page).to have_content('Property, savings and other assets')
+  expect(page).to have_content('Other assets')
 end
 
 # rubocop:disable Lint/Debugger
