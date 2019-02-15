@@ -16,14 +16,11 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <% if answers.present? %>
     <% answers.each_with_index do |answer, index| %>
-      <%= content_tag(:div, class: 'govuk-summary-list__row normal-word-break', id: "app-check-your-answers__#{name}_#{index}") do %>
-        <div class="govuk-summary-list__value check-your-answers-question">
-          <%= answer %>
-        </div>
-        <div class="govuk-summary-list__value check-your-answers-answer">
-            <%= t('generic.yes') %>
-        </div>
-      <% end %>
+      <%= check_answer_no_link(
+            name: "{name}_#{index}",
+            question: answer,
+            answer: t('generic.yes')
+          ) %>
     <% end %>
   <% else %>
     <%= check_answer_link(
