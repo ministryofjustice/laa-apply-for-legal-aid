@@ -62,11 +62,10 @@ en:
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
     check_passported_answers:
       show:
-        assets:
-          heading: Property, savings and other assets
-        h1-heading: Check your answers for passported client
+        h1-heading: Check your answers
         merits_assessment_h2: Merits assessment
         merits_assessment_body: You will now need to complete the merits assessment for the proceeding you are applying for.
+        property: Property
     check_provider_answers:
       index:
         section_client:
