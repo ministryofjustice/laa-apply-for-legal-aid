@@ -15,11 +15,3 @@ en:
               invalid: address is not in the right format
             national_insurance_number:
               invalid: is not in the right format
-        statement_of_case:
-          attributes:
-            statement:
-              blank: Enter the statement of case
-            original_file:
-              content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
-              file_too_big: "The selected file must be smaller than %{size}MB"
-              file_empty: The selected file is empty

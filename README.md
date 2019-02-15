@@ -28,6 +28,18 @@ bin/setup
 
 **NOTE:** Ensure the `.env.development` settings are correctly configured.
 
+### Malware check of uploaded files
+
+ClamAV is used to make sure uploaded files do not contain any malware.
+If you are on Mac, ClamAV would have been installed by running `bin/setup`
+
+On Ubuntu you can install it with:
+```
+sudo apt-get install clamav clamav-daemon -y
+sudo freshclam
+sudo /etc/init.d/clamav-daemon start
+```
+
 ### Run the application server
 
 ```
