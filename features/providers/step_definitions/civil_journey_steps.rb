@@ -110,7 +110,7 @@ end
 Given('I click Check Your Answers Change link for {string}') do |field_name|
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
-  within ("#app-check-your-answers__#{field_name}") do
+  within "#app-check-your-answers__#{field_name}" do
     click_link('Change')
   end
 end
