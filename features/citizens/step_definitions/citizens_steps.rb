@@ -69,3 +69,23 @@ Given('I complete the citizen journey as far as check your answers') do
     Then I should be on a page showing "Check your answers"
   )
 end
+
+Given('I complete the citizen journey, with no assets, as far as check your answers') do
+  steps %(
+    Given An application has been created
+    Then I visit the start of the financial assessment
+    Then I visit the accounts page
+    Then I click link 'Continue'
+    Then I should be on a page showing "Do you have accounts with other banks?"
+    Then I choose "No"
+    Then I click "Continue"
+    Then I should be on a page showing "Do you own the home that you live in?"
+    Then I choose "No"
+    Then I click "Continue"
+    Then I should be on a page showing "Do you have any savings and investments?"
+    Then I click "Continue"
+    Then I should be on a page showing "Do you have any of the following?"
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+  )
+end

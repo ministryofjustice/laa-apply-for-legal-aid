@@ -39,7 +39,7 @@ module Flow
         other_assets: {
           path: ->(_, urls) { urls.citizens_other_assets_path },
           forward: ->(application) { application.own_capital? ? :restrictions : :check_answers },
-          check_answers: ->(application) { application.other_assets_declaration? ? :restrictions : :check_answers }
+          check_answers: ->(application) { application.other_assets? ? :restrictions : :check_answers }
         },
         restrictions: {
           path: ->(_, urls) { urls.citizens_restrictions_path },

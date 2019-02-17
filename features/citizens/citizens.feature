@@ -65,6 +65,8 @@ Feature: Citizen journey
     Then I click 'Continue'
     Then I should be on a page showing 'What % share of your home do you legally own?'
     Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£500,000.00'
@@ -96,6 +98,8 @@ Feature: Citizen journey
     Then I click 'Continue'
     Then I should be on a page showing 'What % share of your home do you legally own?'
     Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000.00'
@@ -110,6 +114,8 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I fill 'Cash' with '1000'
     Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Cash savings'
     And the answer for 'Savings and investments' should be '£1,000.00'
@@ -121,6 +127,8 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I select 'Post Office, ISAs and other savings accounts'
     Then I fill 'Isa' with '5000'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Post Office, ISAs and other savings accounts'
@@ -142,6 +150,8 @@ Feature: Citizen journey
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Cash savings'
     And the answer for 'Savings and investments' should be '£10,000.00'
@@ -153,9 +163,15 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you have any of the following?'
     Then I fill 'Land value' with '1234.56'
     Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I select 'Restraint or freezing order'
+    Then I select 'Repossession or deferred interest in a property'
+    Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Land'
     And the answer for 'Other assets' should be '£1,234.56'
+    And the answer for 'Restrictions' should be 'Restraint or freezing order'
+    And the answer for 'Restrictions' should be 'Repossession or deferred interest in a property'
 
   @javascript
   Scenario: I want to add other assets via the check your answers page
@@ -164,6 +180,8 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you have any of the following?'
     Then I select 'Timeshare'
     Then I fill 'Timeshare value' with '10000'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Timeshare'
@@ -184,6 +202,8 @@ Feature: Citizen journey
     Given I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
     Then I should be on a page showing 'Do you have any of the following?'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Land'
@@ -219,3 +239,98 @@ Feature: Citizen journey
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Restrictions' should be 'Bankruptcy'
     And the answer for 'Restrictions' should be 'Held overseas'
+
+  @javascript
+  Scenario: I want to change citizen property details via the check your answers page
+    Given I complete the citizen journey, with no assets, as far as check your answers
+    And I click Check Your Answers Change link for 'Own home'
+    Then I should be on a page showing 'Do you own the home that you live in?'
+    Then I choose "Yes, with a mortgage or loan"
+    Then I click "Continue"
+    Then I should be on a page showing "How much is your home worth?"
+    Then I fill "Property value" with "325000"
+    Then I click "Continue"
+    Then I should be on a page showing 'What is the outstanding mortgage on your home?'
+    Then I fill "Outstanding mortgage amount" with "125000"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do you own your home with anyone else?'
+    Then I choose "No"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
+    And the answer for 'Property value' should be '£325,000.00'
+    And the answer for 'Outstanding mortgage' should be '£125,000.00'
+    And the answer for 'Shared ownership' should be 'No, sole owner'
+
+  @javascript
+  Scenario: I want to change citizen savings and investment details via the check your answers page
+    Given I complete the citizen journey, with no assets, as far as check your answers
+    And I select Check Your Answers Change link for 'Savings and investments'
+    Then I should be on a page showing 'Do you have any savings and investments?'
+    Then I select 'Post Office, ISAs and other savings accounts'
+    Then I fill 'Isa' with '3000'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I select "Bankruptcy"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Savings and investments' should be 'Post Office, ISAs and other savings accounts'
+    And the answer for 'Savings and investments' should be '£3,000.00'
+    And the answer for 'Restrictions' should be 'Bankruptcy'
+
+  @javascript
+  Scenario: I want to change citizen other assets details via the check your answers page
+    Given I complete the citizen journey, with no assets, as far as check your answers
+    And I select Check Your Answers Change link for 'Other assets'
+    Then I should be on a page showing 'Do you have any of the following?'
+    Then I select 'Timeshare'
+    Then I fill 'Timeshare value' with '7654.32'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I select "Bankruptcy"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Other assets' should be 'Timeshare'
+    And the answer for 'Other assets' should be '£7,654.32'
+    And the answer for 'Restrictions' should be 'Bankruptcy'
+
+  @javascript
+  Scenario: I want to leave unchanged citizen capital details via the check your answers page
+    Given I complete the citizen journey, with no assets, as far as check your answers
+    Then the answer for 'Other assets' should be 'None declared'
+    And I click Check Your Answers Change link for 'Own home'
+    Then I should be on a page showing 'Do you own the home that you live in?'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Own home' should be 'No'
+    And I click Check Your Answers Change link for 'Own home'
+    Then I should be on a page showing 'Do you own the home that you live in?'
+    Then I click link 'Back'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Own home' should be 'No'
+
+  @javascript
+  Scenario: I want to leave unchanged citizen capital details via the check your answers page
+    Given I complete the citizen journey, with no assets, as far as check your answers
+    And I click Check Your Answers Change link for 'Own home'
+    Then I should be on a page showing 'Do you own the home that you live in?'
+    Then I choose "Yes, with a mortgage or loan"
+    Then I click "Continue"
+    Then I should be on a page showing "How much is your home worth?"
+    Then I fill "Property value" with "325000"
+    Then I click "Continue"
+    Then I should be on a page showing 'What is the outstanding mortgage on your home?'
+    Then I fill "Outstanding mortgage amount" with "125000"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do you own your home with anyone else?'
+    Then I choose "No"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
+    And the answer for 'Property value' should be '£325,000.00'
+    And the answer for 'Outstanding mortgage' should be '£125,000.00'
+    And the answer for 'Shared ownership' should be 'No, sole owner'
