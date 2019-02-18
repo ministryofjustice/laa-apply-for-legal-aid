@@ -85,7 +85,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 3.1'
+  gem 'shoulda-matchers', '~> 4.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'vcr'
