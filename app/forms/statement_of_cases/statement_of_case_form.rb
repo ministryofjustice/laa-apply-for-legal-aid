@@ -29,8 +29,8 @@ module StatementOfCases
     validates :statement, presence: true, unless: :file_present_or_draft?
     validate :original_file_too_big
     validate :original_file_empty
-    validate :original_file_disallowed_content_type
     validate :original_file_malware_scan
+    validate :original_file_disallowed_content_type
 
     private
 
