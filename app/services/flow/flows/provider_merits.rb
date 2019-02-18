@@ -1,39 +1,39 @@
 module Flow
   module Flows
-    module ProviderMerits
+    class ProviderMerits < FlowSteps
       STEPS = {
         client_received_legal_helps: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_client_received_legal_help_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_client_received_legal_help_path(application) },
           forward: :proceedings_before_the_courts,
           check_answers: :check_merits_answers
         },
         proceedings_before_the_courts: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_proceedings_before_the_court_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_proceedings_before_the_court_path(application) },
           forward: :statement_of_cases,
           check_answers: :check_merits_answers
         },
         statement_of_cases: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_statement_of_case_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: :estimated_legal_costs,
           check_answers: :check_merits_answers
         },
         estimated_legal_costs: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_estimated_legal_costs_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_estimated_legal_costs_path(application) },
           forward: :success_prospects,
           check_answers: :check_merits_answers
         },
         success_prospects: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_success_prospects_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_success_prospects_path(application) },
           forward: :merits_declarations,
           check_answers: :check_merits_answers
         },
         merits_declarations: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_merits_declaration_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_merits_declaration_path(application) },
           forward: :check_merits_answers,
           check_answers: :check_merits_answers
         },
         check_merits_answers: {
-          path: ->(application, urls) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
           forward: :placeholder_end_merits,
           check_answers: :check_merits_answers
         },

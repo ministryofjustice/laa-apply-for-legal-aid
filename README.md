@@ -40,6 +40,11 @@ sudo freshclam
 sudo /etc/init.d/clamav-daemon start
 ```
 
+You may also need to run:
+```
+sudo apt install clamdscan
+```
+
 ### Run the application server
 
 ```
