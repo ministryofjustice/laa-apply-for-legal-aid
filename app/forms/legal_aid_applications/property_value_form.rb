@@ -14,6 +14,10 @@ module LegalAidApplications
       @mode = :citizen unless @mode == :provider
     end
 
+    def attributes_to_clean
+      [:property_value]
+    end
+
     private
 
     def value_presence

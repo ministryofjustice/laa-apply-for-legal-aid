@@ -76,6 +76,10 @@ module BaseForm
       []
     end
 
+    def attributes_to_clean
+      []
+    end
+
     def assignable_attributes
       exclude_attrs = exclude_from_model + [:model]
       attributes.except(*exclude_attrs.map(&:to_s))
@@ -98,7 +102,9 @@ module BaseForm
     private
 
     def clean_attributes(hash)
-      hash.transform_values { |v| v.is_a?(String) ? v.tr('£,', '') : v }
+      hash.each_with_object({}) do |(k, v), new_hash|
+        new_hash[k] = k.to_sym.in?(attributes_to_clean) ? v.to_s.tr('£,', '') : v
+      end
     end
 
     def set_blanks_to_nil

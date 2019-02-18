@@ -6,5 +6,9 @@ module LegalAidApplications
 
     validates :outstanding_mortgage_amount, presence: { unless: :draft? }
     validates :outstanding_mortgage_amount, allow_blank: true, currency: { greater_than_or_equal_to: 0.0 }
+
+    def attributes_to_clean
+      [:outstanding_mortgage_amount]
+    end
   end
 end

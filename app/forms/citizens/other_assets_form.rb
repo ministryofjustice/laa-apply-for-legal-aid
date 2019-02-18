@@ -56,6 +56,10 @@ module Citizens
       CHECK_BOXES_ATTRIBUTES
     end
 
+    def attributes_to_clean
+      ALL_ATTRIBUTES - [:second_home_percentage]
+    end
+
     private
 
     def empty_unchecked_values
