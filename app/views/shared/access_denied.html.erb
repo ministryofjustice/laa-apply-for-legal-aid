@@ -5,6 +5,8 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl"><%= t('.heading_1') %></h1>
     <p class="govuk-body"><%= t('.permission_text') %></p>
-    <p class="govuk-body"><a href="/providers/applications"><%= t('.back_to_apps_link') %></a></p>
+    <p class="govuk-body">
+      <%= link_to t('.back_to_apps_link'), providers_legal_aid_applications_path %>
+    </p>
   </div>
 </div>
