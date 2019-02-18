@@ -9,10 +9,18 @@ module Providers
     def update
       @form = StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
 
-      render :show unless save_continue_or_draft(@form)
+      if save_continue_or_draft(@form)
+        convert_new_file_to_pdf if statement_of_case_params[:original_file].present?
+      else
+        render :show
+      end
     end
 
     private
+
+    def convert_new_file_to_pdf
+      StatementOfCasePdfConverterWorker.perform_async(statement_of_case.id)
+    end
 
     def statement_of_case_params
       params

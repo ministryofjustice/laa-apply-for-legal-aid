@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe 'provider proceedings before the court requests', type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
@@ -45,10 +46,9 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
   end
 
   describe 'PATCH providers/proceedings_before_the_court' do
-    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params.merge(submit_button) }
     let(:entered_text) { Faker::Lorem.paragraph(3) }
-    let(:original_file) { uploaded_file('spec/fixtures/files/lorem_ipsum.pdf', 'application/pdf') }
-
+    let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.pdf', 'application/pdf') }
+    let(:statement_of_case) { legal_aid_application.statement_of_case }
     let(:params) do
       {
         statement_of_case: {
@@ -58,6 +58,13 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
       }
     end
 
+    subject do
+      patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params.merge(submit_button)
+      StatementOfCasePdfConverterWorker.drain
+    end
+
+    before { StatementOfCasePdfConverterWorker.clear }
+
     context 'when the provider is authenticated' do
       before { login_as provider }
 
@@ -65,8 +72,22 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
       it 'updates the record' do
         subject
-        expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-        expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+        expect(statement_of_case.reload.statement).to eq(entered_text)
+        expect(statement_of_case.original_file.attachment).to be_present
+      end
+
+      it 'copies pdf to pdf_file' do
+        subject
+        expect(statement_of_case.pdf_file.attachment).to be_present
+      end
+
+      context 'file is a word document' do
+        let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.docx', 'application/pdf') }
+
+        it 'converts if to pdf' do
+          subject
+          expect(statement_of_case.pdf_file.attachment).to be_present
+        end
       end
 
       it 'redirects to the next page' do
@@ -79,8 +100,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'updates the statement text' do
           subject
-          expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-          expect(legal_aid_application.statement_of_case.original_file.attachment).not_to be_present
+          expect(statement_of_case.reload.statement).to eq(entered_text)
+          expect(statement_of_case.original_file.attachment).not_to be_present
         end
       end
 
@@ -89,8 +110,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'updates the file' do
           subject
-          expect(legal_aid_application.statement_of_case.reload.statement).to eq('')
-          expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+          expect(statement_of_case.reload.statement).to eq('')
+          expect(statement_of_case.original_file.attachment).to be_present
         end
       end
 
@@ -100,7 +121,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'does not save the object and raise an error' do
           subject
           expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid'))
-          expect(legal_aid_application.statement_of_case).to be_nil
+          expect(statement_of_case).to be_nil
         end
       end
 
@@ -110,7 +131,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'does not save the object and raise an error' do
           subject
           expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0))
-          expect(legal_aid_application.statement_of_case).to be_nil
+          expect(statement_of_case).to be_nil
         end
       end
 
@@ -120,7 +141,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'does not save the object and raise an error' do
           subject
           expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_empty'))
-          expect(legal_aid_application.statement_of_case).to be_nil
+          expect(statement_of_case).to be_nil
         end
       end
 
@@ -144,7 +165,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           it 'does not save the object and raise an error' do
             subject
             expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_virus'))
-            expect(legal_aid_application.statement_of_case).to be_nil
+            expect(statement_of_case).to be_nil
           end
         end
       end
@@ -154,8 +175,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'updates the record' do
           subject
-          expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-          expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+          expect(statement_of_case.reload.statement).to eq(entered_text)
+          expect(statement_of_case.original_file.attachment).to be_present
         end
 
         it 'redirects to provider applications home page' do
