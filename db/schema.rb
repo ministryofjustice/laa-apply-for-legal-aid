@@ -321,12 +321,6 @@ ActiveRecord::Schema.define(version: 2019_02_14_171720) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
-<<<<<<< HEAD
   add_foreign_key "statement_of_cases", "legal_aid_applications"
-<<<<<<< HEAD
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
-=======
->>>>>>> ap-325 rebase on master
-=======
->>>>>>> AP-325 reverse schema changes
 end
