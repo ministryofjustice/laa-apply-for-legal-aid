@@ -40,7 +40,9 @@ module Flow
     private
 
     def checking_answers?
-      legal_aid_application.checking_answers? || legal_aid_application.checking_citizen_answers? || legal_aid_application.checking_passported_answers? ||
+      legal_aid_application.checking_answers? ||
+        legal_aid_application.checking_citizen_answers? ||
+        legal_aid_application.checking_passported_answers? ||
         legal_aid_application.checking_merits_answers?
     end
 
@@ -54,12 +56,7 @@ module Flow
     end
 
     def path(step)
-      path = steps.dig(step, :path)
-      raise ":path of step :#{step} is not defined" unless path
-
-      return path unless path.is_a?(Proc)
-
-      path.call(legal_aid_application, urls)
+      path_for(step, :path)
     end
 
     def forward_step
@@ -77,20 +74,20 @@ module Flow
     end
 
     def step(direction)
-      step = steps.dig(current_step, direction)
-      raise "#{direction.to_s.humanize} step of #{current_step} is not defined" unless step
+      path_for(current_step, direction)
+    end
 
-      return step unless step.is_a?(Proc)
+    def path_for(step, option)
+      path_action = steps.dig(step, option)
+      raise ":#{option} of step :#{step} is not defined" unless path_action
 
-      step.call(legal_aid_application)
+      return path_action unless path_action.is_a?(Proc)
+
+      path_action.call(legal_aid_application)
     end
 
     def steps
       self.class.steps
-    end
-
-    def urls
-      @urls ||= Rails.application.routes.url_helpers
     end
   end
 end
