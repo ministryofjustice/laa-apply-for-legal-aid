@@ -16,7 +16,7 @@
         ) %>
   </dl>
 
-  <div class='govuk-body'><%= @merits.application_purpose %></div>
+  <div class='govuk-body'><%= simple_format @merits.application_purpose %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
@@ -27,7 +27,7 @@
         ) %>
   </dl>
 
-  <div class='govuk-body'><%= @merits.details_of_proceedings_before_the_court %></div>
+  <div class='govuk-body'><%= simple_format @merits.details_of_proceedings_before_the_court %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
@@ -38,7 +38,7 @@
         ) %>
   </dl>
 
-  <div class='govuk-body'><%= @statement_of_case.statement %></div>
+  <div class='govuk-body'><%= simple_format @statement_of_case.statement %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
@@ -56,7 +56,7 @@
         ) %>
   </dl>
 
-  <div class='govuk-body'><%= @merits.success_prospect_details %></div>
+  <div class='govuk-body'><%= simple_format @merits.success_prospect_details %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
