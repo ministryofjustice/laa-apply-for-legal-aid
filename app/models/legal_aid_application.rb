@@ -18,6 +18,8 @@ class LegalAidApplication < ApplicationRecord
   has_one :statement_of_case
   has_many :legal_aid_application_restrictions
   has_many :restrictions, through: :legal_aid_application_restrictions
+  has_many :legal_aid_application_transaction_types
+  has_many :transaction_types, through: :legal_aid_application_transaction_types
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at

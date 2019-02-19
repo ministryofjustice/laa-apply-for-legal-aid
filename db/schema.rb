@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_171720) do
+ActiveRecord::Schema.define(version: 2019_02_19_150642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -141,7 +141,9 @@ ActiveRecord::Schema.define(version: 2019_02_14_171720) do
     t.datetime "happened_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "transaction_type_id"
     t.index ["bank_account_id"], name: "index_bank_transactions_on_bank_account_id"
+    t.index ["transaction_type_id"], name: "index_bank_transactions_on_transaction_type_id"
   end
 
   create_table "benefit_check_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -172,6 +174,15 @@ ActiveRecord::Schema.define(version: 2019_02_14_171720) do
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "laa_id_laa_restriction_id"
     t.index ["restriction_id"], name: "index_legal_aid_application_restrictions_on_restriction_id"
+  end
+
+  create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "transaction_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "laa_trans_type_on_legal_aid_application_id"
+    t.index ["transaction_type_id"], name: "laa_trans_type_on_transaction_type_id"
   end
 
   create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -303,6 +314,13 @@ ActiveRecord::Schema.define(version: 2019_02_14_171720) do
     t.uuid "provider_uploader_id"
     t.index ["legal_aid_application_id"], name: "index_statement_of_cases_on_legal_aid_application_id"
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
+  end
+
+  create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "operation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
