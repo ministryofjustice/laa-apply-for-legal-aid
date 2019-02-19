@@ -9,6 +9,10 @@
 
   <%= render partial: 'shared/check_answers_assets', locals: { user_type: :provider, application: @legal_aid_application } %>
 
+  <h2 class="govuk-heading-m"><%= t('.merits_assessment_h2') %></h2>
+
+  <p class="govuk-body"><%= t('.merits_assessment_body') %></p>
+
   <%= next_action_buttons_with_form(
         url: continue_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application),
         method: :patch,

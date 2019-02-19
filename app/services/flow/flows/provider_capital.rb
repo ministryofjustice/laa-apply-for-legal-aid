@@ -24,22 +24,22 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_shared_ownership_path(application) },
           forward: ->(application) { application.shared_ownership? ? :percentage_homes : :savings_and_investments },
           carry_on_sub_flow: ->(application) { application.shared_ownership? },
-          check_answers: :check_passported_answers
+          check_answers: :restrictions
         },
         percentage_homes: {
           path: ->(application) { urls.providers_legal_aid_application_percentage_home_path(application) },
           forward: :savings_and_investments,
-          check_answers: :check_passported_answers
+          check_answers: :restrictions
         },
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
           forward: :other_assets,
-          check_answers: :check_passported_answers
+          check_answers: ->(application) { application.savings_amount? ? :restrictions : :check_passported_answers }
         },
         other_assets: {
           path: ->(application) { urls.providers_legal_aid_application_other_assets_path(application) },
           forward: ->(application) { application.own_capital? ? :restrictions : :check_passported_answers },
-          check_answers: :check_passported_answers
+          check_answers: ->(application) { application.other_assets? ? :restrictions : :check_passported_answers }
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },

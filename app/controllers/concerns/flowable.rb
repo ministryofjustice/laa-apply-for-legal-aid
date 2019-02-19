@@ -14,14 +14,15 @@ module Flowable
     end
 
     def flow_service
-      @flow_service ||= Flow::BaseFlowService.flow_service_for(flow_module).new(
+      @flow_service ||= Flow::BaseFlowService.flow_service_for(
+        journey_type,
         legal_aid_application: legal_aid_application,
         current_step: controller_name.to_sym
       )
     end
 
-    def flow_module
-      @flow_module ||= self.class.parent.to_s.snakecase.to_sym
+    def journey_type
+      @journey_type ||= self.class.parent.to_s.snakecase.to_sym
     end
 
     def path?(string)
