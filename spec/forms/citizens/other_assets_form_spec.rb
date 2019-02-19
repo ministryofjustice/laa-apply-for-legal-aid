@@ -24,7 +24,7 @@ RSpec.describe Citizens::OtherAssetsForm do
       { check_box_second_home: 'yes',
         second_home_value: 'aabb',
         second_home_mortgage: '123000.00',
-        second_home_percentage: '100' }
+        second_home_percentage: '100xxx' }
     end
 
     let(:partial_second_home_params) do
@@ -80,6 +80,7 @@ RSpec.describe Citizens::OtherAssetsForm do
             it 'is not valid' do
               expect(form).not_to be_valid
               expect(form.errors[:second_home_value]).to eq [translation_for(:second_home_value, :not_a_number)]
+              expect(form.errors[:second_home_percentage]).to eq [translation_for(:second_home_percentage, :not_a_number)]
             end
           end
         end
@@ -90,7 +91,7 @@ RSpec.describe Citizens::OtherAssetsForm do
   describe 'other params' do
     let(:params) do
       { check_box_second_home: 'true',
-        second_home_value: '85,9374.00',
+        second_home_value: '859,374.00',
         second_home_mortgage: '123,000.00',
         second_home_percentage: '66.66',
         check_box_timeshare_value: 'true',

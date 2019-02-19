@@ -67,12 +67,16 @@ module BaseForm
     def save
       return false unless valid?
 
-      model.attributes = assignable_attributes
+      model.attributes = clean_attributes(assignable_attributes)
       model.save(validate: false)
     end
 
     # List of form attributes not to be passed to model
     def exclude_from_model
+      []
+    end
+
+    def attributes_to_clean
       []
     end
 
@@ -96,6 +100,12 @@ module BaseForm
     end
 
     private
+
+    def clean_attributes(hash)
+      hash.each_with_object({}) do |(k, v), new_hash|
+        new_hash[k] = k.to_sym.in?(attributes_to_clean) ? v.to_s.tr('£,', '') : v
+      end
+    end
 
     def set_blanks_to_nil
       self.class.locally_assigned.each do |attr|

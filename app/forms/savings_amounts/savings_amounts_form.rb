@@ -18,14 +18,15 @@ module SavingsAmounts
 
     ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
-      validates attribute, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
       validates attribute, presence: true, if: proc { |form| form.send(check_box_attribute).present? }
     end
 
     attr_accessor(*ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
 
-    before_validation :empty_unchecked_values, :normalize_amounts
+    validates(*ATTRIBUTES, allow_blank: true, currency: { greater_than_or_equal_to: 0.0 })
+
+    before_validation :empty_unchecked_values
 
     def exclude_from_model
       CHECK_BOXES_ATTRIBUTES
@@ -41,13 +42,6 @@ module SavingsAmounts
           send("#{attribute}=", nil)
         end
       end
-    end
-
-    def normalize_amounts
-      ATTRIBUTES
-        .map { |attribute| send(attribute) }
-        .compact
-        .each { |value| value.delete!(',') }
     end
   end
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:provider) { legal_aid_application.provider }
+  let!(:estimated_legal_cost_as_text) { '250,000.00' }
 
   describe 'GET /providers/applications/:id/estimated_legal_costs' do
     subject { get providers_legal_aid_application_estimated_legal_costs_path(legal_aid_application) }
@@ -28,7 +29,7 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
     let(:params) do
       {
         merits_assessment: {
-          estimated_legal_cost: estimated_legal_cost
+          estimated_legal_cost: estimated_legal_cost_as_text
         }
       }
     end
@@ -47,7 +48,7 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
           }
         end
 
-        let!(:estimated_legal_cost) { 250_00 }
+        let!(:estimated_legal_cost) { 250_000 }
 
         it 'does NOT create an new application record' do
           expect { subject }.not_to change { LegalAidApplication.count }
@@ -92,7 +93,7 @@ RSpec.describe Providers::EstimatedLegalCostsController, type: :request do
           }
         end
 
-        let!(:estimated_legal_cost) { 250_00 }
+        let!(:estimated_legal_cost) { 250_000 }
 
         it 'updates the estimated_legal_cost amount' do
           expect(legal_aid_application.merits_assessment).to eq nil

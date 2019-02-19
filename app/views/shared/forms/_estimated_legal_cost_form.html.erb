@@ -10,7 +10,7 @@
     <%= form.govuk_text_field :estimated_legal_cost,
                               label: nil,
                               hint: t('helpers.hint.merits_assessment.estimated_legal_cost'),
-                              value: number_to_currency(model.estimated_legal_cost, unit: ''),
+                              value: number_to_currency_or_original_string(model.estimated_legal_cost),
                               input_prefix: t('currency.gbp'),
                               class: 'govuk-!-width-one-third' %>
   <% end %>
