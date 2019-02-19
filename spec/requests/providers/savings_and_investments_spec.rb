@@ -128,7 +128,7 @@ RSpec.describe 'providers savings and investments', type: :request do
 
           it 'redirects to the check passported answers page' do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
           end
         end
       end

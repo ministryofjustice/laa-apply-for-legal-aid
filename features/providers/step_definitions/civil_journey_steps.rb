@@ -24,6 +24,19 @@ Given('I previously created a passported application and left on the {string} pa
   login_as @legal_aid_application.provider
 end
 
+Given('I previously created a passported application with no assets and left on the {string} page') do |provider_step|
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :without_own_home,
+    :with_no_other_assets,
+    :checking_passported_answers,
+    provider: create(:provider),
+    provider_step: provider_step.downcase
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given(/^I view the previously created application$/) do
   find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a", text: 'View').click
 end
@@ -215,3 +228,14 @@ end
 Then('I am on the About the Financial Assessment page') do
   expect(page).to have_content('About the online financial assessment')
 end
+
+Then('I am on the check your answers page for other assets') do
+  expect(page).to have_content('Check your answers')
+  expect(page).to have_content('Property, savings and other assets')
+end
+
+# rubocop:disable Lint/Debugger
+Then('show me the page') do
+  save_and_open_page
+end
+# rubocop:enable Lint/Debugger
