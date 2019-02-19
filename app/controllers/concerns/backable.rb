@@ -53,7 +53,7 @@ module Backable
     end
 
     def remove_old_history
-      page_history.shift while page_history.size > HISTORY_SIZE
+      session[:page_history] = page_history.last(HISTORY_SIZE)
     end
 
     def page_history
