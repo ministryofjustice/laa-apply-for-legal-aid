@@ -4,6 +4,7 @@ en:
     access_denied:
       heading_1: You cannot view this page
       permission_text: You can only view or edit this application if you created it
+      back_to_apps_link: Back to your applications
     check_answers_assets:
       assets:
         other_assets: Other assets
