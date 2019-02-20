@@ -1,5 +1,7 @@
 module Citizens
   class OtherAssetsController < BaseController
+    include ApplicationFromSession
+
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end
@@ -14,10 +16,6 @@ module Citizens
     end
 
     private
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
-    end
 
     def declaration
       @declaration ||= legal_aid_application.other_assets_declaration

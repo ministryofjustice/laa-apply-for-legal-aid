@@ -1,5 +1,6 @@
 module Citizens
   class PropertyValuesController < BaseController
+    include ApplicationFromSession
     def show
       @form = LegalAidApplications::PropertyValueForm.new(model: legal_aid_application)
     end
@@ -22,10 +23,6 @@ module Citizens
 
     def edit_params
       property_value_params.merge(model: legal_aid_application)
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

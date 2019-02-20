@@ -1,5 +1,6 @@
 module Citizens
   class AdditionalAccountsController < BaseController
+    include ApplicationFromSession
     def index; end
 
     def create
@@ -27,12 +28,6 @@ module Citizens
         @error = I18n.t('generic.errors.yes_or_no')
         render :new
       end
-    end
-
-    private
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

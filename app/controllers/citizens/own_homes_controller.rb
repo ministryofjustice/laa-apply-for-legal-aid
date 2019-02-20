@@ -1,5 +1,7 @@
 module Citizens
   class OwnHomesController < BaseController
+    include ApplicationFromSession
+
     def show
       @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
     end
@@ -24,10 +26,6 @@ module Citizens
 
     def form_params
       own_home_params.merge(model: legal_aid_application)
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

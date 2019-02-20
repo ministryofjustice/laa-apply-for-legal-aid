@@ -1,5 +1,7 @@
 module Citizens
   class SharedOwnershipsController < BaseController
+    include ApplicationFromSession
+
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
     end
@@ -15,10 +17,6 @@ module Citizens
     end
 
     private
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
-    end
 
     def shared_ownership_params
       return {} unless params[:legal_aid_application]

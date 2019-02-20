@@ -1,5 +1,6 @@
 module Citizens
   class RestrictionsController < BaseController
+    include ApplicationFromSession
     before_action :authenticate_applicant!
 
     def index
@@ -15,10 +16,6 @@ module Citizens
 
     def legal_aid_application_params
       params.require(:legal_aid_application).permit(restriction_ids: [])
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end
