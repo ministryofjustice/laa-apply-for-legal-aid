@@ -1,4 +1,5 @@
 class TransactionType < ApplicationRecord
+  # Note that names should be unique across the whole of NAMES - so both credit and debit
   NAMES = {
     credit: %i[
       salary benefits
@@ -25,5 +26,9 @@ class TransactionType < ApplicationRecord
     NAMES.each do |operation, names|
       (names - existing).each { |name| create!(name: name, operation: operation) }
     end
+  end
+
+  def label_name
+    I18n.t("transaction_types.names.#{name}")
   end
 end

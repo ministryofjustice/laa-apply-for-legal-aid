@@ -50,6 +50,11 @@ en:
         open_banking_consent:
           label:
             html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
+    identify_types_of_incomes:
+      show:
+        page_heading: Select the types of income you receive
+        no_income_message: Do not select any if you have no income
+        benefits_examples: For example, Child Benefit, Working Tax Credit or Child Tax Credit.
     information:
       show:
         heading_1: Give one-time access to your bank accounts

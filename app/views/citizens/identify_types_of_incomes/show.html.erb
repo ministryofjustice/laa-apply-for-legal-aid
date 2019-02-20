@@ -1,2 +1,17 @@
-<h1>Citizens::IdentifyTypesOfIncome#show</h1>
-<p>Find me in app/views/citizens/identify_types_of_income/show.html.erb</p>
+<%= page_template page_title: t('.page_heading'), template: :form do %>
+  <%= form_with(model: @legal_aid_application, url: citizens_identify_types_of_income_path, method: :patch, local: true) do |form| %>
+
+    <%= govuk_hint t('.no_income_message'), class: 'govuk-!-padding-bottom-5' %>
+
+    <%= transaction_type_check_boxes(
+          form: form,
+          transaction_types: TransactionType.credits,
+          hints: { benefits: t('.benefits_examples') }
+        )%>
+
+    <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form: form
+        ) %>
+  <% end %>
+<% end %>

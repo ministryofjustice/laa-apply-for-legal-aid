@@ -4,6 +4,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
   let(:application) { create :application, :with_applicant }
   let(:application_id) { application.id }
   let(:secure_id) { application.generate_secure_id }
+  let(:next_flow_step) { citizens_identify_types_of_income_path }
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
@@ -40,7 +41,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
       it 'redirects to the next step in Citizen jouney' do
         # TODO: - set redirect path when known
-        expect(response).to redirect_to(citizens_own_home_path)
+        expect(response).to redirect_to(next_flow_step)
       end
     end
   end
@@ -89,7 +90,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
       let(:params) { { has_offline_accounts: 'no' } }
 
       it 'redirects to the next step in Citizen jouney' do
-        expect(response).to redirect_to(citizens_own_home_path)
+        expect(response).to redirect_to(next_flow_step)
       end
 
       it 'records choice on legal_aid_application' do
