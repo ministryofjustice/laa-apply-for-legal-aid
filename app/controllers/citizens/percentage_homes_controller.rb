@@ -1,7 +1,5 @@
 module Citizens
   class PercentageHomesController < BaseController
-    include Flowable
-
     def show
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
     end

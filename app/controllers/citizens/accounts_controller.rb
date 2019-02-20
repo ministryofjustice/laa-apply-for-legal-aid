@@ -1,7 +1,6 @@
 module Citizens
   class AccountsController < BaseController
     before_action :authenticate_applicant!
-    include Flowable
 
     def index
       return if worker_working?

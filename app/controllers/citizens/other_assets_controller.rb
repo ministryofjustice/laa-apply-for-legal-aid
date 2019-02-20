@@ -1,7 +1,5 @@
 module Citizens
   class OtherAssetsController < BaseController
-    include Flowable
-
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end

@@ -2,7 +2,7 @@
 #       In the finished app, this page will be externally hosted
 #       When this is removed the route `providers_root` will need to point at the external url
 module Providers
-  class StartController < BaseController
+  class StartController < ApplicationController
     def index; end
   end
 end

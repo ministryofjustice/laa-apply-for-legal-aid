@@ -1,7 +1,5 @@
 module Citizens
   class SharedOwnershipsController < BaseController
-    include Flowable
-
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
     end

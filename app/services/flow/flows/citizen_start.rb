@@ -21,7 +21,7 @@ module Flow
         },
         additional_accounts: {
           path: ->(_) { urls.citizens_additional_accounts_path },
-          forward: :own_homes
+          forward: :identify_types_of_income
         }
       }.freeze
     end

@@ -1,7 +1,5 @@
 module Citizens
   class ConsentsController < BaseController
-    include Flowable
-
     def show; end
 
     def create

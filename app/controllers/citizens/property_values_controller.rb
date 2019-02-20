@@ -1,7 +1,5 @@
 module Citizens
   class PropertyValuesController < BaseController
-    include Flowable
-
     def show
       @form = LegalAidApplications::PropertyValueForm.new(model: legal_aid_application)
     end
