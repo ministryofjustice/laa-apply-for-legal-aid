@@ -90,7 +90,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts have a £ symbol' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = "£#{Faker::Number.decimal.to_s}" } }
+        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = "£#{Faker::Number.decimal}" } }
 
         it 'strips the values of £ symbols' do
           subject.save

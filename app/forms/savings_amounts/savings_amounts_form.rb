@@ -31,7 +31,7 @@ module SavingsAmounts
     def exclude_from_model
       CHECK_BOXES_ATTRIBUTES
     end
-    
+
     def attributes_to_clean
       ATTRIBUTES
     end
