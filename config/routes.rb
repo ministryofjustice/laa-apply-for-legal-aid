@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       resources :check_benefits, only: [:index]
       resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
       resource :merits_declaration, only: %i[show update]
+      resource :capital_introduction, only: %i[show update]
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
         patch :continue, on: :collection

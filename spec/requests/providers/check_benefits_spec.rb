@@ -96,8 +96,8 @@ RSpec.describe 'check benefits requests', type: :request do
         context 'when the check_benefit_results is positive' do
           let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
 
-          it 'displays the own home page' do
-            expect(response).to redirect_to providers_legal_aid_application_own_home_path(application)
+          it 'displays the capital introduction page' do
+            expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
           end
         end
 
