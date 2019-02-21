@@ -34,28 +34,4 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
       end
     end
   end
-
-  describe 'PATCH /providers/applications/:application_id/capital_introduction' do
-    subject { patch providers_legal_aid_application_check_benefit_path(legal_aid_application.id), params: params }
-
-    context 'when the provider is authenticated' do
-      before do
-        login_as provider
-        subject
-      end
-
-      context 'Form submitted using Save as draft button' do
-        let(:params) { { draft_button: 'Save as draft' } }
-
-        it "redirects provider to provider's applications page" do
-          subject
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-
-        it 'sets the application as draft' do
-          expect(legal_aid_application.reload).to be_draft
-        end
-      end
-    end
-  end
 end
