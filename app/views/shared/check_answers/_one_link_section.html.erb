@@ -1,4 +1,4 @@
-<div class="govuk-grid-row" id="app-check-your-answers__<%= name %>">
+<div class="govuk-grid-row" id="app-check-your-answers__<%= name %><%= answer_hash.present? ? '' : '_header' %>">
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m"><%= question %></h2>
   </div>
@@ -10,7 +10,7 @@
         <% end %>
       </p>
     </div>
-   <% end %>
+  <% end %>
 </div>
 
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
