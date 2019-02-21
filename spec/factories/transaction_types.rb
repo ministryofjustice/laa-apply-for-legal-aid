@@ -12,7 +12,7 @@ end
 
 FactoryBot.define do
   factory :transaction_type do
-    name { Faker::Commerce.unique.product_name.underscore }
+    name { TransactionType::NAMES.values.flatten.sample }
     operation { TransactionType::NAMES.keys.sample }
 
     trait :credit_with_standard_name do

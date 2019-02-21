@@ -8,7 +8,7 @@ class TransactionType < ApplicationRecord
       property_or_lodger
       student_loan
       pension
-      fiends_or_family
+      friends_or_family
     ],
     debit: %i[
       rent_or_mortgage
