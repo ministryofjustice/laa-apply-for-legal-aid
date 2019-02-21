@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'citizen percentage share of home', type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant }
+  let(:application) { create :legal_aid_application, :with_applicant, :provider_submitted }
   let(:secure_id) { application.generate_secure_id }
 
   before { get citizens_legal_aid_application_path(secure_id) }
@@ -47,6 +47,15 @@ RSpec.describe 'citizen percentage share of home', type: :request do
         expect(response.body).to match(I18n.t('activemodel.errors.models.legal_aid_application.attributes.percentage_home.not_a_number'))
         expect(response.body).to match('govuk-error-message')
         expect(response.body).to match('govuk-form-group--error')
+      end
+    end
+
+    context 'while checking answers' do
+      before { application.check_citizen_answers! }
+
+      it 'redirects to the "restrictions" page' do
+        subject
+        expect(response).to redirect_to(citizens_restrictions_path)
       end
     end
   end
