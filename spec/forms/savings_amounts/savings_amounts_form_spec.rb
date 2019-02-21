@@ -100,7 +100,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
             val = savings_amount.send(attr).to_s
             expected_val = params[attr]
 
-            expect("£#{val}").to eq(expected_val), "Attr #{attr}: expected #{expected_val}, got #{val}"
+            expect("£#{val}").to eq(expected_val), "Attr #{attr}: expected #{expected_val}, got £#{val}"
           end
         end
       end
