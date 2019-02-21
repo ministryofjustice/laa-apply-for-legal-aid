@@ -12,6 +12,7 @@ Given('An application has been created') do
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   create :bank_account_holder, bank_provider: bank_provider
   create :bank_account, bank_provider: bank_provider, currency: 'GBP'
+  TransactionType.populate
 end
 
 Then('I visit the start of the financial assessment') do
@@ -38,6 +39,8 @@ Given('I complete the citizen journey as far as check your answers') do
     Then I click link 'Continue'
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
+    Then I click "Continue"
+    Then I should be on a page showing "Select the types of income you receive"
     Then I click "Continue"
     Then I should be on a page showing "Do you own the home that you live in?"
     Then I choose "Yes, with a mortgage or loan"
