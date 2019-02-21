@@ -51,3 +51,27 @@ $govuk-fonts-path: "/assets/";
 .govuk-summary-list__key {
   min-width: 8em;
 }
+
+.normal-word-break {
+  .govuk-summary-list__value {
+    word-break: normal;
+    padding-right: 1px;
+  }
+
+  .govuk-summary-list__key {
+    word-break: normal;
+    padding-right: 1px;
+  }
+}
+
+.check-your-answers-question {
+  width: 90%;
+}
+
+.check-your-answers-answer {
+  text-align: right;
+}
+
+.align-change-link-right {
+  text-align: right;
+}

@@ -90,6 +90,14 @@ FactoryBot.define do
       savings_amount { create :savings_amount, :with_values }
     end
 
+    trait :with_no_savings do
+      savings_amount { create :savings_amount, :all_nil }
+    end
+
+    trait :with_no_other_assets do
+      other_assets_declaration { create :other_assets_declaration, :all_nil }
+    end
+
     trait :with_merits_assessment do
       merits_assessment { create :merits_assessment, :with_optional_text }
     end

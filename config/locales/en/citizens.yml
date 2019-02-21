@@ -25,11 +25,11 @@ en:
     check_answers:
       index:
         assets:
-          heading: Property, savings and other assets
           other_assets: Other assets
           outstanding_mortgage: Outstanding mortgage amount
-          own_home: Own the home you live in
+          own_home: Property owned
           percentage_home: Percentage owned
+          property: Property
           property_value: Property value
           restrictions: Do any restrictions apply?
           savings_and_investments: Savings and investments

@@ -23,7 +23,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to include(number_to_currency(legal_aid_application.outstanding_mortgage_amount, unit: '£'))
       expect(response.body).to include(I18n.translate("shared.forms.shared_ownership_form.shared_ownership_item.#{legal_aid_application.shared_ownership}"))
       expect(response.body).to include(number_to_percentage(legal_aid_application.percentage_home, precision: 2))
-      expect(response.body).to include('Own the home')
+      expect(response.body).to include('Property owned')
       expect(response.body).to include('Property value')
       expect(response.body).to include('Outstanding mortgage')
       expect(response.body).to include('Owned with anyone else')
@@ -31,6 +31,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to include('Savings')
       expect(response.body).to include('assets')
       expect(response.body).to include('restrictions')
+      expect(response.body).not_to include(I18n.translate('.generic.none_declared'))
     end
 
     it 'displays the correct URLs for changing values' do
@@ -85,6 +86,28 @@ RSpec.describe 'check your answers requests', type: :request do
       it 'does not display percentage owned' do
         expect(response.body).not_to include(number_to_percentage(legal_aid_application.percentage_home, precision: 2))
         expect(response.body).not_to include('Percentage')
+      end
+    end
+
+    context 'applicant does not have any savings' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_no_savings }
+      it 'displays that no savings have been declared' do
+        expect(response.body).to include(I18n.translate('.generic.none_declared'))
+      end
+    end
+
+    context 'applicant does not have any other assets' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_no_other_assets }
+      it 'displays that no other assets have been declared' do
+        expect(response.body).to include(I18n.translate('.generic.none_declared'))
+      end
+    end
+
+    context 'applicant does not have any capital restrictions' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_everything }
+      let!(:restriction) { nil }
+      it 'displays that no capital restrictions have been declared' do
+        expect(response.body).to include(I18n.translate('.generic.none_declared'))
       end
     end
 

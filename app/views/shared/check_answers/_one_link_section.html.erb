@@ -1,0 +1,36 @@
+
+<div class="govuk-grid-row" id="app-check-your-answers__<%= name %>">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m"><%= question %></h2>
+  </div>
+  <% if answer_hash.present? %>
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-change-link-right">
+      <p>
+        <%= link_to(url, class: 'govuk-link') do %>
+          <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
+        <% end %>
+      </p>
+    </div>
+   <% end %>
+</div>
+
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <% if answer_hash.present? %>
+
+      <% answer_hash&.fetch(:items, [])&.each_with_index do |(label, amount), index| %>
+        <%= check_answer_no_link(
+              name: "#{name}_#{index}",
+              question: label,
+              answer: number_to_currency(amount, unit: t('currency.gbp'))
+            ) %>
+      <% end %>
+
+  <% else %>
+    <%= check_answer_link(
+          name: name,
+          url: url,
+          question: question,
+          answer: t('generic.none_declared')
+        ) %>
+  <% end %>
+</dl>
