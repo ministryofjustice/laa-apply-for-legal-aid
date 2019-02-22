@@ -28,21 +28,12 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
   describe 'PATCH /providers/applications/:id/capital_introduction' do
     subject { patch providers_legal_aid_application_capital_introduction_path(legal_aid_application) }
 
-    context 'when the provider is authenticated' do
-      before do
-        login_as provider
-        subject
-      end
+    before do
+      login_as provider
+    end
 
-      context 'when the Continue button is pressed' do
-        subject { patch providers_legal_aid_application_capital_introduction_path(legal_aid_application) }
-        let(:submit_button) { { continue_button: 'Continue' } }
-
-        it 'redirects to next page' do
-          subject
-          expect(response).to redirect_to(providers_legal_aid_application_own_home_path(legal_aid_application))
-        end
-      end
+    it 'redirects to next page' do
+      expect(subject).to redirect_to(providers_legal_aid_application_own_home_path(legal_aid_application))
     end
   end
 end
