@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   resources :feedback, only: %i[new create show]
 
   namespace :admin do
-    resources :legal_aid_applications, only: [:index]
+    resources :legal_aid_applications, only: [:index] do
+      delete :destroy_all, on: :collection
+    end
   end
 
   namespace 'v1' do
