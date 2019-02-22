@@ -127,6 +127,20 @@ RSpec.describe 'providers shared ownership request test', type: :request do
               expect(response).to redirect_to providers_legal_aid_application_restrictions_path(legal_aid_application)
             end
           end
+
+          context 'shared ownership is changed from yes to no' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_everything, :checking_passported_answers }
+
+            it 'redirects to check answers page' do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(legal_aid_application))
+            end
+
+            it 'deletes percentage owned from the database' do
+              subject
+              expect(legal_aid_application.reload.percentage_home).to eq nil
+            end
+          end
         end
 
         context 'with an invalid param' do
