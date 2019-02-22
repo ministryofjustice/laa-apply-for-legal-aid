@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'home#index'
 
   require 'sidekiq/web'
@@ -14,10 +15,15 @@ Rails.application.routes.draw do
 
   devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
   devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
+  devise_for :admin_users
 
   resources :status, only: [:index]
   resource :contact, only: [:show]
   resources :feedback, only: %i[new create show]
+
+  namespace :admin do
+    resources :legal_aid_applications, only: [:index]
+  end
 
   namespace 'v1' do
     resources :proceeding_types, only: [:index]

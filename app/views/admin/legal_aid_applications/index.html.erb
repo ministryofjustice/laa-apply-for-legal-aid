@@ -1,0 +1,16 @@
+<%= page_template(
+      page_title: t('.heading_1'),
+      column_width: :full,
+      back_link: :none
+    ) do %>
+
+
+  <%= button_to(
+        t('.delete_all'),
+        admin_legal_aid_applications_path,
+        class: 'govuk-button'
+      ) %>
+
+<% end %>
+
+<%= render('legal_aid_applications') if @applications.present? %>
