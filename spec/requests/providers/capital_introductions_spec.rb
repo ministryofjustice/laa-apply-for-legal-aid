@@ -22,6 +22,17 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include('Before you continue')
       end
+    end
+  end
+
+  describe 'PATCH /providers/applications/:id/capital_introduction' do
+    subject { patch providers_legal_aid_application_capital_introduction_path(legal_aid_application) }
+
+    context 'when the provider is authenticated' do
+      before do
+        login_as provider
+        subject
+      end
 
       context 'when the Continue button is pressed' do
         subject { patch providers_legal_aid_application_capital_introduction_path(legal_aid_application) }

@@ -216,16 +216,17 @@ en:
         h1-heading: What are the prospects of success?
     capital_introductions:
       show:
-        list: |
-          owns a home or has a mortgage (and their values)
-          has any savings, investments or other capital (and their values)
-          has any other ways to contribute towards legal costs
-        list_2:
+        about_the_client:
+          list: |
+            owns a home or has a mortgage (and their values)
+            has any savings, investments or other capital (and their values)
+            has any other ways to contribute towards legal costs
+        items_to_be_provided:
           list: |
             a statement of case
             information about any attempts to settle
             cost estimates
             the prospects of success
         h1-heading: Before you continue
-        text_1: "You'll need to tell us if your client:"
-        text_2: "You'll also need to provide:"
+        does_your_client: "You'll need to tell us if your client:"
+        client_to_provide: "You'll also need to provide:"
