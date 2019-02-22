@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Admin::LegalAidApplicationsController, type: :request do
-  let!(:legal_aid_applications) { create_list :legal_aid_application, 3 }
+  let(:count) { 3 }
+  let!(:legal_aid_applications) { create_list :legal_aid_application, count }
   let(:admin_user) { create :admin_user }
 
   before { sign_in admin_user }
@@ -32,6 +33,24 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   end
 
   describe 'DELETE /admin/legal_aid_applications/destroy_all' do
-    subject { delete destroy_all_admin_legal_aid_applications }
+    subject { delete destroy_all_admin_legal_aid_applications_path }
+
+    it 'deletes the legal_aid_applications' do
+      expect { subject }.to change { LegalAidApplication.count }.by(-count)
+    end
+
+    it 'redirects back to index' do
+      subject
+      expect(response).to redirect_to(admin_legal_aid_applications_path)
+    end
+
+    context 'when not authenticated' do
+      before { sign_out admin_user }
+
+      it 'redirects to log in' do
+        subject
+        expect(response).to redirect_to(new_admin_user_session_path)
+      end
+    end
   end
 end

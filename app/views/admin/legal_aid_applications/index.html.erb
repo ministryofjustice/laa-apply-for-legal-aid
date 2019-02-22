@@ -7,7 +7,8 @@
 
   <%= button_to(
         t('.delete_all'),
-        admin_legal_aid_applications_path,
+        destroy_all_admin_legal_aid_applications_path,
+        method: :delete,
         class: 'govuk-button'
       ) %>
 

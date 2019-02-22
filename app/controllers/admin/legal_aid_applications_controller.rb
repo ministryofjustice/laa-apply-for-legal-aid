@@ -4,5 +4,10 @@ module Admin
     def index
       @applications = LegalAidApplication.latest.limit(25)
     end
+
+    def destroy_all
+      LegalAidApplication.destroy_all
+      redirect_to action: :index
+    end
   end
 end
