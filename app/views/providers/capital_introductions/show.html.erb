@@ -1,0 +1,18 @@
+<%= page_template page_title: t('.h1-heading') do %>
+  <%= simple_format t('.does_your_client') %>
+
+  <%= list_from_translation_path 'providers.capital_introductions.show.about_the_client' %>
+
+  <%= simple_format t('.client_to_provide') %>
+
+  <%= list_from_translation_path 'providers.capital_introductions.show.items_to_be_provided' %>
+
+  <div class="govuk-!-padding-bottom-4"></div>
+
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_capital_introduction_path,
+        method: :patch,
+        show_draft: true
+      ) %>
+
+<% end %>

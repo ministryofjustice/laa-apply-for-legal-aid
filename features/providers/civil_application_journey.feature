@@ -324,6 +324,8 @@ Feature: Civil application journeys
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen receives benefits
     Then I click "Continue"
+    Then I should be on a page showing "Before you continue"
+    Then I click "Continue"
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click "Continue"
