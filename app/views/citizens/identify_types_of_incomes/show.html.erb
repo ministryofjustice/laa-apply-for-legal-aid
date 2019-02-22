@@ -9,9 +9,6 @@
           hints: { benefits: t('.benefits_examples') }
         ) %>
 
-    <%= next_action_buttons(
-          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
-          form: form
-        ) %>
+    <%= next_action_buttons(form: form) %>
   <% end %>
 <% end %>
