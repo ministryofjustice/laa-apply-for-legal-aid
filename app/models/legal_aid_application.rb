@@ -102,6 +102,13 @@ class LegalAidApplication < ApplicationRecord
     other_assets_declaration.present? && other_assets_declaration.positive?
   end
 
+  def clear_property_details
+    self.percentage_home = nil
+    self.property_value = nil
+    self.shared_ownership = nil
+    self.outstanding_mortgage_amount = nil
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

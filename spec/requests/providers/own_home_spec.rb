@@ -90,6 +90,23 @@ RSpec.describe 'provider own home requests', type: :request do
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
             end
           end
+
+          context 'ownership is changed from yes to no' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_everything, :checking_passported_answers }
+
+            it 'redirects to check answers page' do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+            end
+
+            it 'deletes previous property values from the database' do
+              subject
+              expect(legal_aid_application.reload.property_value).to eq nil
+              expect(legal_aid_application.reload.outstanding_mortgage_amount).to eq nil
+              expect(legal_aid_application.reload.shared_ownership).to eq nil
+              expect(legal_aid_application.reload.percentage_home).to eq nil
+            end
+          end
         end
       end
 
