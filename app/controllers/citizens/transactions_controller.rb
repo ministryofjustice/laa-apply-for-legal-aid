@@ -54,7 +54,7 @@ module Citizens
         .applicant
         .bank_transactions
         .where(operation: transaction_type.operation)
-        .order(happened_at: :desc, created_at: :desc)
+        .order(happened_at: :desc, description: :desc)
     end
 
     def legal_aid_application

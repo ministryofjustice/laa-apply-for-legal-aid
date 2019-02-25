@@ -29,10 +29,12 @@ RSpec.describe Citizens::TransactionsController, type: :request do
 
     context 'When there are transactions' do
       let(:not_matching_operation) { (TransactionType::NAMES.keys.map(&:to_s) - [transaction_type.operation.to_s]).first }
+      let(:other_transaction_type) { create :transaction_type, name: (TransactionType::NAMES[transaction_type.operation.to_sym] - [transaction_type.name.to_sym]).sample }
       let!(:bank_transaction_matching) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
       let!(:bank_transaction_selected) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation, transaction_type: transaction_type }
       let!(:bank_transaction_not_matching) { create :bank_transaction, bank_account: bank_account, operation: not_matching_operation }
       let!(:bank_transaction_other_applicant) { create :bank_transaction, operation: transaction_type.operation }
+      let!(:bank_transaction_other_type) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation, transaction_type: other_transaction_type }
 
       it 'shows the transactions matching the operation on the transaction type' do
         subject
@@ -66,6 +68,13 @@ RSpec.describe Citizens::TransactionsController, type: :request do
       it 'does not show other applicants transactions' do
         subject
         expect(unescaped_response_body).not_to include(bank_transaction_other_applicant.description)
+      end
+
+      it 'does not show checkboxes for transactions already assigned to another transaction type' do
+        subject
+        checkbox = parsed_html.at_css("[value='#{bank_transaction_other_type.id}']")
+        expect(checkbox).to be_nil
+        expect(unescaped_response_body).to include(bank_transaction_other_type.description)
       end
     end
 
