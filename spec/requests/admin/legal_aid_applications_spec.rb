@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   let(:count) { 3 }
-  let!(:legal_aid_applications) { create_list :legal_aid_application, count }
+  let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant }
   let(:admin_user) { create :admin_user }
 
   before { sign_in admin_user }
@@ -37,6 +37,10 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
     it 'deletes the legal_aid_applications' do
       expect { subject }.to change { LegalAidApplication.count }.by(-count)
+    end
+
+    it 'deletes the applicants too' do
+      expect { subject }.to change { Applicant.count }.by(-count)
     end
 
     it 'redirects back to index' do

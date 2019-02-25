@@ -254,7 +254,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  # Main purpose: to ensure relationships to other object set so that destroying application destroys all objects
+  # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects
   # that then become redundant.
   describe '.destroy_all' do
     let!(:legal_aid_application) do
@@ -291,10 +291,12 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     it 'leaves object it should not affect' do
+      expect(Applicant.count).not_to be_zero
       expect(ProceedingType.count).not_to be_zero
       expect(Restriction.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
       subject
+      expect(Applicant.count).not_to be_zero
       expect(ProceedingType.count).not_to be_zero
       expect(Restriction.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero

@@ -7,6 +7,7 @@ module Admin
 
     def destroy_all
       LegalAidApplication.destroy_all
+      Applicant.destroy_all
       redirect_to action: :index
     end
   end
