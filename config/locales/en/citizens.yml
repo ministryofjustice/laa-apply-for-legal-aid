@@ -52,9 +52,10 @@ en:
             html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
     identify_types_of_incomes:
       show:
-        page_heading: Select the types of income you receive
-        no_income_message: Do not select any if you have no income.
-        benefits_examples: For example, Child Benefit, Working Tax Credit or Child Tax Credit.
+        page_heading: Select any types of income you receive
+        benefits_examples: For example, Universal Credit or Child Benefit
+        maintenance_in_examples: For example, for children or from an ex-partner
+        pension_examples: Include State, work or private pensions
     information:
       show:
         heading_1: Give one-time access to your bank accounts

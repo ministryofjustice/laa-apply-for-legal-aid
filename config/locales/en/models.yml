@@ -12,8 +12,8 @@ en:
     names:
       salary: Salary or wages
       benefits: Benefits
-      maintenance_in: Maintenance payments (for children or from an ex-partner)
+      maintenance_in: Maintenance payments
       property_or_lodger: Income from a property or lodger
       student_loan: Student loan or grant
-      pension: Pensions (State, work or private)
+      pension: Pensions
       fiends_or_family: Financial help from friends or family

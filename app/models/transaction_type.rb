@@ -2,7 +2,8 @@ class TransactionType < ApplicationRecord
   # Note that names should be unique across the whole of NAMES - so both credit and debit
   NAMES = {
     credit: %i[
-      salary benefits
+      salary
+      benefits
       maintenance_in
       property_or_lodger
       student_loan
