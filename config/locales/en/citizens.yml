@@ -53,7 +53,7 @@ en:
     identify_types_of_incomes:
       show:
         page_heading: Select the types of income you receive
-        no_income_message: Do not select any if you have no income
+        no_income_message: Do not select any if you have no income.
         benefits_examples: For example, Child Benefit, Working Tax Credit or Child Tax Credit.
     information:
       show:
