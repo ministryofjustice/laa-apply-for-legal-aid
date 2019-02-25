@@ -32,6 +32,10 @@ module SavingsAmounts
       CHECK_BOXES_ATTRIBUTES
     end
 
+    def attributes_to_clean
+      ATTRIBUTES
+    end
+
     private
 
     def empty_unchecked_values
