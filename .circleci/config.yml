@@ -30,14 +30,6 @@ references:
         sudo pip3 install awscli
         $(aws ecr get-login --region eu-west-1 --no-include-email)
 
-  install_clamav: &install_clamav
-    run:
-      name: Install Clamav
-      command: |
-        sudo apt-get install clamav clamav-daemon -y
-        sudo freshclam
-        sudo /etc/init.d/clamav-daemon start
-
   build_docker_image: &build_docker_image
     run:
       name: Build laa-apply-for-legal-aid  docker image
@@ -63,7 +55,6 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
     - *setup_test_env
-    - *install_clamav
     - restore_cache:
         keys:
           - laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
