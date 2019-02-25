@@ -35,33 +35,48 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   describe 'DELETE /admin/legal_aid_applications/destroy_all' do
     subject { delete destroy_all_admin_legal_aid_applications_path }
 
-    it 'deletes the legal_aid_applications' do
-      expect { subject }.to change { LegalAidApplication.count }.by(-count)
-    end
+    context 'when enabled' do
+      before do
+        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('true')
+      end
 
-    it 'deletes the applicants too' do
-      expect { subject }.to change { Applicant.count }.by(-count)
-    end
+      it 'deletes the legal_aid_applications' do
+        expect { subject }.to change { LegalAidApplication.count }.by(-count)
+      end
 
-    it 'redirects back to index' do
-      subject
-      expect(response).to redirect_to(admin_legal_aid_applications_path)
-    end
+      it 'deletes the applicants too' do
+        expect { subject }.to change { Applicant.count }.by(-count)
+      end
 
-    context 'when not authenticated' do
-      before { sign_out admin_user }
-
-      it 'redirects to log in' do
+      it 'redirects back to index' do
         subject
-        expect(response).to redirect_to(new_admin_user_session_path)
+        expect(response).to redirect_to(admin_legal_aid_applications_path)
+      end
+
+      context 'when not authenticated' do
+        before { sign_out admin_user }
+
+        it 'redirects to log in' do
+          subject
+          expect(response).to redirect_to(new_admin_user_session_path)
+        end
+      end
+
+      context 'with a lot of associations' do
+        let!(:another) { create :legal_aid_application, :with_everything }
+
+        it 'gets deleted too' do
+          expect { subject }.to change { LegalAidApplication.count }.to(0)
+        end
       end
     end
 
-    context 'with a lot of associations' do
-      let!(:another) { create :legal_aid_application, :with_everything }
-
-      it 'gets deleted too' do
-        expect { subject }.to change { LegalAidApplication.count }.to(0)
+    context 'when disabled' do
+      before do
+        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('false')
+      end
+      it 'raises an error' do
+        expect { subject }.to raise_error('Legal Aid Application Destroy All action disabled')
       end
     end
   end

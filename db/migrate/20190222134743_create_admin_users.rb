@@ -1,9 +1,9 @@
 class CreateAdminUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :admin_users, id: :uuid do |t|
-      t.string :username,           null: false, default: ""
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :username,           null: false, default: ''
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
 
       # Trackable
       t.integer  :sign_in_count, default: 0, null: false

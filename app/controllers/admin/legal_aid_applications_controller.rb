@@ -6,9 +6,20 @@ module Admin
     end
 
     def destroy_all
+      raise 'Legal Aid Application Destroy All action disabled' unless destroy_enabled?
+
       LegalAidApplication.destroy_all
       Applicant.destroy_all
       redirect_to action: :index
     end
+
+    protected
+
+    # Note this action uses the mock_saml setting to determine if it should be enabled
+    def destroy_enabled?
+      env_setting = Rails.configuration.x.laa_portal.mock_saml
+      ActiveRecord::Type::Boolean.new.cast(env_setting) || false
+    end
+    helper_method :destroy_enabled?
   end
 end

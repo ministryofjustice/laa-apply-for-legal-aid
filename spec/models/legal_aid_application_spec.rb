@@ -268,7 +268,6 @@ RSpec.describe LegalAidApplication, type: :model do
 
     subject { described_class.destroy_all }
 
-
     # A bit verbose, but minimises the SQL calls required to complete spec
     it 'removes everything it needs to' do
       expect(ApplicationProceedingType.count).not_to be_zero

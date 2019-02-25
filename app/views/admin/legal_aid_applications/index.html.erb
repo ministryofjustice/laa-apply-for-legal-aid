@@ -10,8 +10,11 @@
         destroy_all_admin_legal_aid_applications_path,
         method: :delete,
         class: 'govuk-button'
-      ) %>
-
+      ) if @applications.present? && destroy_enabled? %>
 <% end %>
 
-<%= render('legal_aid_applications') if @applications.present? %>
+<% if @applications.present? %>
+  <%= render('legal_aid_applications') %>
+<% else %>
+  <h2>No applications present</h2>
+<% end %>
