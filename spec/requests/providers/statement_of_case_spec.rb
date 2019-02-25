@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'provider proceedings before the court requests', type: :request do
+RSpec.describe 'provider proceedings before the§ court requests', type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:provider) { legal_aid_application.provider }
   let(:soc) { nil }
@@ -45,7 +45,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
   end
 
   describe 'PATCH providers/proceedings_before_the_court' do
-    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params.merge(submit_button) }
+    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params.merge(submit_button).merge(upload_button) }
     let(:entered_text) { Faker::Lorem.paragraph(3) }
     let(:original_file) { uploaded_file('spec/fixtures/files/lorem_ipsum.pdf', 'application/pdf') }
 
@@ -53,7 +53,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
       {
         statement_of_case: {
           statement: entered_text,
-          original_file: original_file
+          original_files: [original_file]
         }
       }
     end
@@ -62,11 +62,12 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
       before { login_as provider }
 
       let(:submit_button) { {} }
+      let(:upload_button) { {} }
 
       it 'updates the record' do
         subject
         expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-        expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+        expect(legal_aid_application.statement_of_case.original_files.first).to be_present
       end
 
       it 'redirects to the next page' do
@@ -80,7 +81,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'updates the statement text' do
           subject
           expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-          expect(legal_aid_application.statement_of_case.original_file.attachment).not_to be_present
+          expect(legal_aid_application.statement_of_case.original_files.first).not_to be_present
         end
       end
 
@@ -90,7 +91,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'updates the file' do
           subject
           expect(legal_aid_application.statement_of_case.reload.statement).to eq('')
-          expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+          expect(legal_aid_application.statement_of_case.original_files.first).to be_present
         end
       end
 
@@ -99,7 +100,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'does not save the object and raise an error' do
           subject
-          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid'))
           expect(legal_aid_application.statement_of_case).to be_nil
         end
       end
@@ -109,7 +110,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'does not save the object and raise an error' do
           subject
-          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_too_big', size: 0))
           expect(legal_aid_application.statement_of_case).to be_nil
         end
       end
@@ -119,7 +120,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
         it 'does not save the object and raise an error' do
           subject
-          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_empty'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_empty'))
           expect(legal_aid_application.statement_of_case).to be_nil
         end
       end
@@ -143,7 +144,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
 
           it 'does not save the object and raise an error' do
             subject
-            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_virus'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_virus'))
             expect(legal_aid_application.statement_of_case).to be_nil
           end
         end
@@ -155,7 +156,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         it 'updates the record' do
           subject
           expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
-          expect(legal_aid_application.statement_of_case.original_file.attachment).to be_present
+          expect(legal_aid_application.statement_of_case.original_files.first).to be_present
         end
 
         it 'redirects to provider applications home page' do
@@ -171,6 +172,18 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
             subject
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
+        end
+      end
+
+      context 'Uplaod button pressed' do
+        let(:upload_button) { { upload_button: 'Upload' } }
+        let(:submit_button) { {} }
+        let(:original_file) { nil }
+
+        it 'errors if no file is specified' do
+          subject
+          expect(response.body).to include 'There is a problem'
+          expect(response.body).to include 'You must choose at least one file'
         end
       end
     end

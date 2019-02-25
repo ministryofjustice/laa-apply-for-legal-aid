@@ -235,8 +235,9 @@ en:
           attributes:
             statement:
               blank: Enter the statement of case
-            original_file:
+            original_files:
               content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
               file_too_big: "The selected file must be smaller than %{size}MB"
               file_empty: The selected file is empty
               file_virus: The selected file contains a virus
+              no_file_chosen: You must choose at least one file
