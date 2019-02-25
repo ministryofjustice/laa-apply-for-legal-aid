@@ -1,7 +1,5 @@
 module Citizens
   class LegalAidApplicationsController < BaseController
-    include Flowable
-
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index and where the first page is displayed.
     def show

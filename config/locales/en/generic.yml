@@ -16,6 +16,7 @@ en:
     'no': 'No'
     none_declared: None declared
     remove: Remove
+    save_and_continue: Save and continue
     save_as_draft: Save as draft
     select: Select
     send: Send

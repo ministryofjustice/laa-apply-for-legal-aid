@@ -1,7 +1,6 @@
 module Citizens
   class SavingsAndInvestmentsController < BaseController
-    include Flowable
-
+    include ApplicationFromSession
     helper_method :bank_accounts, :attributes
 
     def show
@@ -34,10 +33,6 @@ module Citizens
 
     def savings_amount
       @savings_amount ||= legal_aid_application.savings_amount || legal_aid_application.build_savings_amount
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
 
     def form_params

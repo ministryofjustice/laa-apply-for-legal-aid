@@ -4,7 +4,6 @@ module Providers
     before_action :set_cache_buster
     include Pundit
     include ApplicationDependable
-    include Flowable
     include Draftable
 
     rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized

@@ -1,3 +1,3 @@
 class BaseController < ApplicationController
-  include Backable
+  include Flowable
 end

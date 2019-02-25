@@ -1,6 +1,6 @@
 module Citizens
   class OutstandingMortgagesController < BaseController
-    include Flowable
+    include ApplicationFromSession
     before_action :authenticate_applicant!
 
     def show
@@ -22,10 +22,6 @@ module Citizens
       params.require(:legal_aid_application).permit(:outstanding_mortgage_amount).tap do |hash|
         hash[:model] = legal_aid_application
       end
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

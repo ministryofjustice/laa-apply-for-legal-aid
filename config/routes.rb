@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       patch :reset, on: :collection
       patch :continue, on: :collection
     end
+    resource :identify_types_of_income, only: %i[show update]
   end
 
   namespace :providers do
