@@ -9,16 +9,16 @@ class LegalAidApplication < ApplicationRecord
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
-  has_many :application_proceeding_types
+  has_many :application_proceeding_types, dependent: :destroy
   has_many :proceeding_types, through: :application_proceeding_types
-  has_one :benefit_check_result
-  has_one :other_assets_declaration
-  has_one :savings_amount
-  has_one :merits_assessment
-  has_one :statement_of_case
-  has_many :legal_aid_application_restrictions
+  has_one :benefit_check_result, dependent: :destroy
+  has_one :other_assets_declaration, dependent: :destroy
+  has_one :savings_amount, dependent: :destroy
+  has_one :merits_assessment, dependent: :destroy
+  has_one :statement_of_case, dependent: :destroy
+  has_many :legal_aid_application_restrictions, dependent: :destroy
   has_many :restrictions, through: :legal_aid_application_restrictions
-  has_many :legal_aid_application_transaction_types
+  has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
 
   before_create :create_app_ref

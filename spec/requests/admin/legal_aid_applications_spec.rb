@@ -52,5 +52,13 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         expect(response).to redirect_to(new_admin_user_session_path)
       end
     end
+
+    context 'with a lot of associations' do
+      let!(:another) { create :legal_aid_application, :with_everything }
+
+      it 'gets deleted too' do
+        expect { subject }.to change { LegalAidApplication.count }.to(0)
+      end
+    end
   end
 end

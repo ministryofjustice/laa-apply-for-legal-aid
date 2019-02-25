@@ -253,4 +253,51 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  # Main purpose: to ensure relationships to other object set so that destroying application destroys all objects
+  # that then become redundant.
+  describe '.destroy_all' do
+    let!(:legal_aid_application) do
+      create :legal_aid_application, :with_everything, :with_proceeding_types, :with_negative_benefit_check_result
+    end
+
+    before do
+      create :legal_aid_application_restriction, legal_aid_application: legal_aid_application
+      create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application
+    end
+
+    subject { described_class.destroy_all }
+
+
+    # A bit verbose, but minimises the SQL calls required to complete spec
+    it 'removes everything it needs to' do
+      expect(ApplicationProceedingType.count).not_to be_zero
+      expect(BenefitCheckResult.count).not_to be_zero
+      expect(OtherAssetsDeclaration.count).not_to be_zero
+      expect(SavingsAmount.count).not_to be_zero
+      expect(MeritsAssessment.count).not_to be_zero
+      expect(StatementOfCase.count).not_to be_zero
+      expect(LegalAidApplicationRestriction.count).not_to be_zero
+      expect(LegalAidApplicationTransactionType.count).not_to be_zero
+      expect { subject }.to change { described_class.count }.to(0)
+      expect(ApplicationProceedingType.count).to be_zero
+      expect(BenefitCheckResult.count).to be_zero
+      expect(OtherAssetsDeclaration.count).to be_zero
+      expect(SavingsAmount.count).to be_zero
+      expect(MeritsAssessment.count).to be_zero
+      expect(StatementOfCase.count).to be_zero
+      expect(LegalAidApplicationRestriction.count).to be_zero
+      expect(LegalAidApplicationTransactionType.count).to be_zero
+    end
+
+    it 'leaves object it should not affect' do
+      expect(ProceedingType.count).not_to be_zero
+      expect(Restriction.count).not_to be_zero
+      expect(TransactionType.count).not_to be_zero
+      subject
+      expect(ProceedingType.count).not_to be_zero
+      expect(Restriction.count).not_to be_zero
+      expect(TransactionType.count).not_to be_zero
+    end
+  end
 end
