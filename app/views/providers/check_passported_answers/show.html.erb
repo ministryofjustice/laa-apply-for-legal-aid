@@ -4,7 +4,7 @@
     ) do %>
 
   <h2 class="govuk-heading-m">
-    <%= t('.assets.heading') %>
+    <%= @legal_aid_application.savings_amount? && @legal_aid_application.other_assets? ? t('.property') : t('.assets.heading') %>
   </h2>
 
   <%= render partial: 'shared/check_answers_assets', locals: { user_type: :provider, application: @legal_aid_application } %>
