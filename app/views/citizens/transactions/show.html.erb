@@ -1,0 +1,43 @@
+<%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), template: :default do %>
+
+  <h2 class="govuk-heading-m"><%= t '.sub_heading' %></h2>
+
+  <div class="govuk-!-padding-bottom-4"></div>
+
+  <%= form_with(url: citizens_transactions_path, method: :patch, local: true) do |form| %>
+
+    <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
+
+    <table class="govuk-table">
+      <%= content_tag(:caption, t('date.date_period', from: date_from, to: date_to), class: 'govuk-table__caption') if @bank_transactions.any? %>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col"><%= t '.col_select_all' %></th>
+          <th class="govuk-table__header" scope="col"><%= t '.col_date' %></th>
+          <th class="govuk-table__header" scope="col"><%= t '.col_description' %></th>
+          <th class="govuk-table__header govuk-table__header--numeric" scope="col"><%= t '.col_amount' %></th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <%= form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description do |builder| %>
+          <tr class="govuk-table__row">
+            <th class="govuk-table__cell">
+              <div class="govuk-checkboxes__item">
+                <% checked = builder.object.transaction_type_id == @transaction_type.id %>
+                <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked) %>
+                <label class="govuk-label govuk-checkboxes__label"></label>
+              </div>
+            </th>
+            <td class="govuk-table__cell"><%= l(builder.object.happened_at.to_date, format: :short_date) %></td>
+            <td class="govuk-table__cell"><%= builder.object.description %></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><%= value_with_currency_unit(builder.object.amount, builder.object.currency) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= next_action_buttons(form: form) %>
+
+  <% end %>
+
+<% end %>
