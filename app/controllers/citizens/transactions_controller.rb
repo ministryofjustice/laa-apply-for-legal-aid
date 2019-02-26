@@ -2,6 +2,7 @@ module Citizens
   class TransactionsController < BaseController
     include Flowable
     before_action :authenticate_applicant!
+    helper_method :date_from, :date_to
 
     def show
       transaction_type
@@ -15,17 +16,15 @@ module Citizens
       go_forward
     end
 
+    private
+
     def date_from
       l(bank_transactions.last.happened_at.to_date, format: :long_date)
     end
-    helper_method :date_from
 
     def date_to
       l(bank_transactions.first.happened_at.to_date, format: :long_date)
     end
-    helper_method :date_to
-
-    private
 
     def reset_selection
       bank_transactions.where(transaction_type_id: transaction_type.id).update_all(transaction_type_id: nil)
@@ -51,9 +50,11 @@ module Citizens
 
     def bank_transactions
       @bank_transactions ||=
-        BankTransaction
-        .of_applicant(legal_aid_application.applicant)
+        legal_aid_application
+        .applicant
+        .bank_transactions
         .where(operation: transaction_type.operation)
+        .order(happened_at: :desc, created_at: :desc)
     end
 
     def legal_aid_application

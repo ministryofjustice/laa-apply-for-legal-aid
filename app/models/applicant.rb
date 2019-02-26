@@ -11,6 +11,8 @@ class Applicant < ApplicationRecord
   has_one :address, -> { order(created_at: :desc) }
   has_many :bank_providers
   has_many :bank_errors
+  has_many :bank_accounts, through: :bank_providers
+  has_many :bank_transactions, through: :bank_accounts
 
   def email_address
     email
