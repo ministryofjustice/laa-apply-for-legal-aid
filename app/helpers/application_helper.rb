@@ -25,7 +25,21 @@ module ApplicationHelper
     link_to text, path, class: 'govuk-back-link', id: 'back', method: method
   end
 
+  def current_journey
+    journeys = %i[Admin Providers Citizens]
+    parent = controller.class.parent.to_s.to_sym
+    return :Unknown unless journeys.include?(parent)
+
+    parent
+  end
+
   def user_header_link
+    return admin_header_link if current_journey == :Admin
+
+    provider_header_link
+  end
+
+  def provider_header_link
     return unless provider_signed_in?
 
     html = ''
@@ -36,6 +50,12 @@ module ApplicationHelper
     html = sanitize html, tags: %w[a li], attributes: %w[href class rel data-method]
     html = content_tag :ul, html, id: 'navigation', class: 'govuk-header__navigation', 'aria-label': 'Top Level Navigation'
     content_tag :span, html, class: 'user-info'
+  end
+
+  def admin_header_link
+    return unless admin_user_signed_in?
+
+    content_tag(:li, link_to('Admin sign out', destroy_admin_user_session_path, method: :delete, class: 'govuk-header__link'), class: 'govuk-header__navigation-item')
   end
 
   def list_from_translation_path(translation_path)

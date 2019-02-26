@@ -37,7 +37,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
     context 'when enabled' do
       before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('true')
+        allow(Rails.configuration.x.admin_portal).to receive(:allow_reset).and_return(true)
       end
 
       it 'deletes the legal_aid_applications' do
@@ -48,9 +48,9 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         expect { subject }.to change { Applicant.count }.by(-count)
       end
 
-      it 'redirects back to index' do
+      it 'redirects back to admin root' do
         subject
-        expect(response).to redirect_to(admin_legal_aid_applications_path)
+        expect(response).to redirect_to(admin_root_path)
       end
 
       context 'when not authenticated' do
@@ -73,7 +73,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
     context 'when disabled' do
       before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('false')
+        allow(Rails.configuration.x.admin_portal).to receive(:allow_reset).and_return(false)
       end
       it 'raises an error' do
         expect { subject }.to raise_error('Legal Aid Application Destroy All action disabled')

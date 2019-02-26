@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :feedback, only: %i[new create show]
 
   namespace :admin do
+    root to: 'legal_aid_applications#index'
     resources :legal_aid_applications, only: [:index] do
       delete :destroy_all, on: :collection
     end

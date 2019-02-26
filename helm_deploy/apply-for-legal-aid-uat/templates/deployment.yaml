@@ -176,6 +176,16 @@ spec:
               secretKeyRef:
                 name: apply-for-legal-aid-s3-instance-output
                 key: secret_access_key
+          - name: ADMIN_ALLOW_RESET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: adminAllowReset
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid.fullname" . }}
+                key: adminPassword
           ports:
             - name: http
               containerPort: 3002

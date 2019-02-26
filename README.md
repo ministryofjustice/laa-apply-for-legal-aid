@@ -123,6 +123,15 @@ LAA_PORTAL_IDP_SSO_TARGET_URL=http://localhost:3002/saml/auth
 LAA_PORTAL_MOCK_SAML=true
 ```
 
+## Admin Portal
+
+The admin portal is at `/admin`. To access it, there must be an `AdminUser` defined.
+
+If `ENV['ADMIN_PASSWORD']` returns a password, running `rake db:seed` will create an
+admin user with username `apply_maintenance`, and that password.
+
+To allow reset mode within the admin portal, `ENV['ADMIN_ALLOW_RESET']` must return "true"
+
 ## Databases
 
 ### Staging and Production

@@ -17,8 +17,7 @@ module Admin
 
     # Note this action uses the mock_saml setting to determine if it should be enabled
     def destroy_enabled?
-      env_setting = Rails.configuration.x.laa_portal.mock_saml
-      ActiveRecord::Type::Boolean.new.cast(env_setting) || false
+      Rails.configuration.x.admin_portal.allow_reset
     end
     helper_method :destroy_enabled?
   end
