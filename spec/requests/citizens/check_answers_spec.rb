@@ -128,7 +128,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'should redirect to next step' do
       subject
-      expect(response.body).to eq('citizens_application_submitted_path')
+      expect(response.body).to eq('citizens_merits_assessment_path')
     end
 
     xit 'should redirect to next step' do
