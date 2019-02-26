@@ -179,12 +179,12 @@ spec:
           - name: ADMIN_ALLOW_RESET
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: adminAllowReset
           - name: ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ template "apply-for-legal-aid.fullname" . }}
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: adminPassword
           ports:
             - name: http
