@@ -46,7 +46,7 @@ module ApplicationHelper
     # TODO: - set the link to point at Provider Profile page when that page exists
     #        and use the full name rather than user name when that is available
     html << content_tag(:li, link_to(current_provider.username.truncate(20), providers_provider_path, class: 'govuk-header__link'), class: 'govuk-header__navigation-item')
-    html << content_tag(:li, link_to('Sign out', destroy_provider_session_path, method: :delete, class: 'govuk-header__link'), class: 'govuk-header__navigation-item')
+    html << content_tag(:li, link_to(t('layouts.logout.provider'), destroy_provider_session_path, method: :delete, class: 'govuk-header__link'), class: 'govuk-header__navigation-item')
     html = sanitize html, tags: %w[a li], attributes: %w[href class rel data-method]
     html = content_tag :ul, html, id: 'navigation', class: 'govuk-header__navigation', 'aria-label': 'Top Level Navigation'
     content_tag :span, html, class: 'user-info'
@@ -55,7 +55,7 @@ module ApplicationHelper
   def admin_header_link
     return unless admin_user_signed_in?
 
-    content_tag(:li, link_to('Admin sign out', destroy_admin_user_session_path, method: :delete, class: 'govuk-header__link'), class: 'govuk-header__navigation-item')
+    content_tag(:li, link_to(t('layouts.logout.admin'), destroy_admin_user_session_path, method: :delete, class: 'govuk-header__link'), class: 'govuk-header__navigation-item')
   end
 
   def list_from_translation_path(translation_path)

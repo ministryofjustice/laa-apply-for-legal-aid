@@ -15,5 +15,5 @@
 <% if @applications.present? %>
   <%= render('legal_aid_applications') %>
 <% else %>
-  <h2>No applications present</h2>
+  <h2><%= t('.no_applications') %></h2>
 <% end %>
