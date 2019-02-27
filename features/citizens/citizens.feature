@@ -227,3 +227,13 @@ Feature: Citizen journey
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Restrictions' should be 'None declared'
+
+  @javascript
+  Scenario: I return to the check your answers page without changing capital restrictions
+    Given I complete the citizen journey as far as check your answers
+    And I click Check Your Answers Change link for 'Restrictions'
+    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Check your answers'
+    And the answer for 'Restrictions' should be 'Bankruptcy'
+    And the answer for 'Restrictions' should be 'Held overseas'
