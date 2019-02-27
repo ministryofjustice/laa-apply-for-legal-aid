@@ -2,13 +2,13 @@
 @import "govuk-frontend/helpers/all";
 
 .govuk-header {
-	#navigation {
-		line-height: 30px; 
+  #navigation {
+    line-height: 30px; 
 		
-		a {
-			padding-left: 1em;
-		}
-	}
+    a {
+      padding-left: 1em;
+    }
+  }
 
   nav {
     @include govuk-media-query($from: desktop) {
