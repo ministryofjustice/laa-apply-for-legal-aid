@@ -51,7 +51,7 @@ module StatementOfCases
     end
 
     def file_present_or_draft?
-      model.original_files.any? || original_files.any? || draft?
+      model.original_files.any? || original_files&.any? || draft?
     end
 
     def original_file_too_big(original_file)

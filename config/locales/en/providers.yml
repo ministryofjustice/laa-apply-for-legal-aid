@@ -188,6 +188,14 @@ en:
         bullet-6: |
           Details of the most recent incident, if a warning letter has been sent,
           the police have been notified or there are any criminal charges.
+        upload: Upload
+      uploaded_files:
+        action: Action
+        delete: Delete
+        filename: Filename
+        size: Size
+        status: Status
+        uploaded: Uploaded
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
