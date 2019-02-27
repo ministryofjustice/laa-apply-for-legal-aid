@@ -3,7 +3,7 @@
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="govuk-form-group">
       <%= f.label :username, class: 'govuk-label' %>
-      <%= f.text_field :username, for: 'width-15', autofocus: true, class: 'govuk-input govuk-input--width-20' %>
+      <%= f.text_field :username, autofocus: true, class: 'govuk-input govuk-input--width-20' %>
     </div>
 
     <div class="govuk-form-group">

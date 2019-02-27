@@ -8,7 +8,7 @@
         t('.delete_all'),
         destroy_all_admin_legal_aid_applications_path,
         method: :delete,
-        class: 'govuk-button'
+        class: 'govuk-button destructive'
       ) if @applications.present? && destroy_enabled? %>
 <% end %>
 
