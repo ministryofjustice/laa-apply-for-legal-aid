@@ -17,7 +17,7 @@
   <% if answers.present? %>
     <% answers.each_with_index do |answer, index| %>
       <%= check_answer_no_link(
-            name: "{name}_#{index}",
+            name: "#{name}_#{index}",
             question: answer,
             answer: t('generic.yes')
           ) %>
