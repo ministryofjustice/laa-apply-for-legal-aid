@@ -3,8 +3,8 @@ en:
   admin:
     legal_aid_applications:
       index:
-        heading_1: 'Admin: Legal Aid Applications'
         delete_all: Delete all applications
+        heading_1: 'Admin: Legal Aid Applications'
         no_applications: No applications present
       legal_aid_applications:
         applicant_name: Client's name
@@ -15,5 +15,5 @@ en:
   admin_users:
     sessions:
       new:
-        heading: 'Admin: Log In'
         button: Log in
+        heading: 'Admin: Log In'

@@ -10,11 +10,14 @@ en:
       subject_matter_of_dispute: Subject matter of dispute in other legal proceedings
   transaction_types:
     names:
-      salary: Salary or wages
       benefits: Benefits
+      fiends_or_family: Financial help from friends or family
       maintenance_in: Maintenance payments
+      pension: Pensions
       property_or_lodger: Income from a property or lodger
+      salary: Salary or wages
       student_loan: Student loan or grant
+<<<<<<< 5fa11c4c45ace1910344943eeec2a195e744228c
       pension: Pensions
       friends_or_family: Financial help from friends or family
     page_titles:
@@ -30,3 +33,5 @@ en:
       child_care: Childcare costs to a nursery or registered provider
       maintenance_out: Maintenance payments (for children or to an ex-partner)
       legal_aid: Existing legal aid contributions
+=======
+>>>>>>> AP-341 Update locales

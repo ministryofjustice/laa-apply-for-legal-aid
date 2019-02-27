@@ -24,19 +24,7 @@ data:
   # Locale files to write new keys to, based on a list of key pattern => file rules. Matched from top to bottom:
   # `i18n-tasks normalize -p` will force move the keys according to these rules
   write:
-     - ['{
-            activemodel,
-            activerecord,
-            citizens,
-            contacts,
-            devise,
-            forms,
-            generic,
-            helpers,
-            layouts,
-            model_enum_translations,
-            providers,
-            shared}.*', 'config/locales/%{locale}/\1.yml']
+     - ['{:}.*', 'config/locales/%{locale}/\1.yml']
     ## Catch-all default:
      - config/locales/%{locale}/default.yml
 
