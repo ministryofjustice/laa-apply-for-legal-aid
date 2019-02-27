@@ -51,7 +51,10 @@ Rails.application.routes.draw do
       patch :continue, on: :collection
     end
     resource :identify_types_of_income, only: %i[show update]
-    resource :transactions, only: %i[show update]
+    resource :transactions, only: [] do
+      get '/:transaction_type', to: 'transactions#show', as: ''
+      patch '/:transaction_type', to: 'transactions#update'
+    end
   end
 
   namespace :providers do
