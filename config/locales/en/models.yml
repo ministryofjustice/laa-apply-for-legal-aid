@@ -11,12 +11,14 @@ en:
   transaction_types:
     names:
       benefits: Benefits
-      fiends_or_family: Financial help from friends or family
+      child_care: Childcare costs to a nursery or registered provider
+      council_tax: Council Tax
+      friends_or_family: Financial help from friends or family
+      legal_aid: Existing legal aid contributions
       maintenance_in: Maintenance payments
+      maintenance_out: Maintenance payments (for children or to an ex-partner)
       pension: Pensions
-      property_or_lodger: Income from a property or lodger
-      salary: Salary or wages
-      student_loan: Student loan or grant
+      rent_or_mortgage: Rent or mortgage
     page_titles:
       benefits: Your benefits
       child_care: Your childcare costs to a nursery or registered provider

@@ -59,6 +59,10 @@ en:
         maintenance_in_examples: For example, for children or from an ex-partner
         page_heading: Select any types of income you receive
         pension_examples: Include State, work or private pensions
+    identify_types_of_outgoings:
+      show:
+        page_heading: Select any regular payments you make
+        hint: Do not select any if you make no regular payments.
     information:
       show:
         heading_1: Give one-time access to your bank accounts

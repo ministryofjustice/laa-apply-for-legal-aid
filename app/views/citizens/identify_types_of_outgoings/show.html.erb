@@ -1,0 +1,17 @@
+<%= page_template page_title: t('.page_heading'), template: :form do %>
+  <%= form_with(model: @legal_aid_application, url: citizens_identify_types_of_outgoing_path, method: :patch, local: true) do |form| %>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <%= govuk_hint t('.hint') %>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <%= transaction_type_check_boxes(
+          form: form,
+          transaction_types: TransactionType.debits
+        ) %>
+
+    <%= next_action_buttons(form: form, continue_button_text: t('generic.save_and_continue')) %>
+  <% end %>
+<% end %>
