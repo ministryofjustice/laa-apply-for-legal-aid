@@ -59,8 +59,6 @@ module StatementOfCases
       errors.add(:original_file, original_file_error_for(:content_type_invalid))
     end
 
-    # TODO: re-enable when clamdscan's bug is fixed
-    # :nocov:
     def original_file_malware_scan
       return unless file_present?
 
@@ -68,7 +66,6 @@ module StatementOfCases
 
       errors.add(:original_file, original_file_error_for(:file_virus))
     end
-    # :nocov:
 
     def file_present?
       original_file.present?

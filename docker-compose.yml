@@ -5,6 +5,10 @@ services:
     image: postgres:10.5
     volumes:
     - pgdata:/var/lib/postgresql/data
+  clamav:
+    image: mkodockx/docker-clamav:latest
+    ports:
+    - "3310:3310"
   api:
     environment:
     - DB_HOST=postgres
@@ -14,6 +18,7 @@ services:
     - "3002:3002"
     depends_on:
     - postgres
+    - clamav
 
 volumes:
   pgdata:

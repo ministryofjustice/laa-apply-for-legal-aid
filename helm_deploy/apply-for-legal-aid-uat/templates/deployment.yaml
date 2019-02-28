@@ -20,6 +20,12 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
+        - name: clamav
+          image: "{{ .Values.clamav.image.repository }}:{{ .Values.clamav.image.tag }}"
+          ports:
+            - name: clamav
+              containerPort: 3310
+              protocol: TCP
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
