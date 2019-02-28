@@ -1,0 +1,24 @@
+---
+en:
+  transaction_types:
+    names:
+      benefits: Benefits
+      fiends_or_family: Financial help from friends or family
+      maintenance_in: Maintenance payments
+      pension: Pensions
+      property_or_lodger: Income from a property or lodger
+      salary: Salary or wages
+      student_loan: Student loan or grant
+    page_titles:
+      benefits: Benefits
+      child_care: Childcare costs to a nursery or registered provider
+      council_tax: Council Tax
+      friends_or_family: Financial help from friends or family
+      legal_aid: Existing legal aid contributions
+      maintenance_in: Maintenance payments (for children or from an ex-partner)
+      maintenance_out: Maintenance payments (for children or to an ex-partner)
+      pension: Pensions (State, work or private)
+      property_or_lodger: Income from a property or lodger
+      rent_or_mortgage: Rent or mortgage
+      salary: Your salary or wage payments
+      student_loan: Student loan or grant

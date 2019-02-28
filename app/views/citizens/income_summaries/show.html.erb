@@ -1,0 +1,24 @@
+<%= page_template page_title: t('.page_heading'), template: :form do %>
+
+  <p class="govuk-body"><%= t('.add_all_income') %></p>
+    <ol class="app-task-list">
+
+      <% @legal_aid_application.transaction_types.credits.each_with_index do |tt, index| %>
+
+        <%= render partial: 'income_type_item',
+                   locals: {
+                     name: tt.name,
+                     number: index + 1,
+                     link_text: t('.select')
+                   } %>
+      <% end %>
+
+      <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
+        <%= render partial: 'add_other_income' %>
+      <% end %>
+
+    </ol>
+
+  <%= link_to t('generic.continue'), forward_path, class: 'govuk-button govuk-button', id: 'continue' %>
+  <%# <%= next_action_buttons(form: form, continue_button_text: t('generic.save_and_continue')) %>
+<% end %>

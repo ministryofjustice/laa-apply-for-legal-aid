@@ -1,0 +1,20 @@
+<li>
+  <h2 class="app-task-list__section" id="<%= "income-type-#{name}" %>">
+    <span class="app-task-list__section-number"><%= "#{number}. " %></span>
+    <%= t("transaction_types.names.#{name}") %>
+    <% if translation_exists_for?("transaction_types.hints.#{name}") %>
+      <span id="nationality-1-item-hint" class="govuk-hint" style="margin-bottom: 0px">
+        <%= t("transaction_types.hints.#{name}") %>
+      </span>
+    <% end %>
+  </h2>
+  <ul class="app-task-list__items">
+    <li class="app-task-list__item" id="<%= "list-item-#{name}" %>">
+      <a class="govuk-body"
+         href="<%= citizens_transactions_path(transaction_type: name) %>"
+         aria-describedby="eligibility-completed">
+        <%= link_text %>
+      </a>
+    </li>
+  </ul>
+</li>

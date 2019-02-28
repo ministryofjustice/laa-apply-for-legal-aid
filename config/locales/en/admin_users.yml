@@ -1,0 +1,7 @@
+---
+en:
+  admin_users:
+    sessions:
+      new:
+        button: Log in
+        heading: 'Admin: Log In'
