@@ -21,7 +21,7 @@ references:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
     - image: postgres:10.5
     - image: redis:5.0
-    - image: mkodockx/docker-clamav:latest
+    - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.0
 
   setup_test_env: &setup_test_env
     run:
