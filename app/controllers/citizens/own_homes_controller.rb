@@ -18,14 +18,12 @@ module Citizens
 
     private
 
-    def own_home_params
-      return {} unless params[:legal_aid_application]
-
-      params.require(:legal_aid_application).permit(:own_home)
-    end
-
     def form_params
-      own_home_params.merge(model: legal_aid_application)
+      merge_with_model(legal_aid_application) do
+        return {} unless params[:legal_aid_application]
+
+        params.require(:legal_aid_application).permit(:own_home)
+      end
     end
   end
 end

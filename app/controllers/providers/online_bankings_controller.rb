@@ -13,12 +13,10 @@ module Providers
 
     private
 
-    def applicant_params
-      params.permit(applicant: :uses_online_banking)[:applicant] || {}
-    end
-
     def form_params
-      applicant_params.merge(model: applicant)
+      merge_with_model(applicant) do
+        params.permit(applicant: :uses_online_banking)[:applicant] || {}
+      end
     end
   end
 end

@@ -21,12 +21,11 @@ module Citizens
       @declaration ||= legal_aid_application.other_assets_declaration
     end
 
-    def other_asset_params
-      params[:other_assets_declaration].permit(*(Citizens::OtherAssetsForm::ALL_ATTRIBUTES + Citizens::OtherAssetsForm::CHECK_BOXES_ATTRIBUTES))
-    end
-
     def form_params
-      other_asset_params.merge(model: declaration)
+      merge_with_model(declaration) do
+        attrs = Citizens::OtherAssetsForm::ALL_ATTRIBUTES + Citizens::OtherAssetsForm::CHECK_BOXES_ATTRIBUTES
+        params[:other_assets_declaration].permit(*attrs)
+      end
     end
   end
 end
