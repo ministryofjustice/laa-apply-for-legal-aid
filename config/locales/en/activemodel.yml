@@ -233,7 +233,7 @@ en:
               too_many_decimals: Estimated shares value must not include more than 2 decimal numbers
         statement_of_case:
           attributes:
-            original_file:
+            original_files:
               content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
               file_empty: The selected file is empty
               file_too_big: The selected file must be smaller than %{size}MB

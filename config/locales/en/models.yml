@@ -17,21 +17,16 @@ en:
       property_or_lodger: Income from a property or lodger
       salary: Salary or wages
       student_loan: Student loan or grant
-<<<<<<< 5fa11c4c45ace1910344943eeec2a195e744228c
-      pension: Pensions
-      friends_or_family: Financial help from friends or family
     page_titles:
-      salary: Your salary or wage payments
       benefits: Benefits
-      maintenance_in: Maintenance payments (for children or from an ex-partner)
-      property_or_lodger: Income from a property or lodger
-      student_loan: Student loan or grant
-      pension: Pensions (State, work or private)
-      friends_or_family: Financial help from friends or family
-      rent_or_mortgage: Rent or mortgage
-      council_tax: Council Tax
       child_care: Childcare costs to a nursery or registered provider
-      maintenance_out: Maintenance payments (for children or to an ex-partner)
+      council_tax: Council Tax
+      friends_or_family: Financial help from friends or family
       legal_aid: Existing legal aid contributions
-=======
->>>>>>> AP-341 Update locales
+      maintenance_in: Maintenance payments (for children or from an ex-partner)
+      maintenance_out: Maintenance payments (for children or to an ex-partner)
+      pension: Pensions (State, work or private)
+      property_or_lodger: Income from a property or lodger
+      rent_or_mortgage: Rent or mortgage
+      salary: Your salary or wage payments
+      student_loan: Student loan or grant

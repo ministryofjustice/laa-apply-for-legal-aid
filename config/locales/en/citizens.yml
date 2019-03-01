@@ -123,9 +123,9 @@ en:
         heading_1: Do you own your home with anyone else?
     transactions:
       show:
-        sub_heading: Select all that apply
-        col_select_all: Select all
         col_clear_all: Clear all
+        col_amount: Amount
         col_date: Date
         col_description: Description
-        col_amount: Amount
+        col_select_all: Select all
+        sub_heading: Select all that apply

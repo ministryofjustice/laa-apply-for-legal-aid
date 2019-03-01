@@ -80,9 +80,10 @@ en:
       show:
         assets:
           heading: Property, savings and other assets
-        h1-heading: Check your answers for passported client
+        h1-heading: Check your answers
         merits_assessment_body: You will now need to complete the merits assessment for the proceeding you are applying for.
         merits_assessment_h2: Merits assessment
+        property: Property
     check_provider_answers:
       index:
         section_client:
@@ -188,32 +189,6 @@ en:
     savings_and_investments:
       show:
         h1-heading: Does your client have any savings and investments?
-<<<<<<< cd75a8c6d1a61c2c28b1ef3c674db109cc0d11ef
-    statement_of_cases:
-      show:
-        h1-heading: Statement of case
-        h2-heading: You must include the following details
-        instructions: |
-          Please tell us about the case providing
-          sufficient information to satisfy the regulations.
-        bullet-1: What has happend so far.
-        bullet-2: Parties involved and their relationship to the applicant.
-        bullet-3: Explain why the current proceedings are necessary.
-        bullet-4: Number of clients represented.
-        bullet-5: Any other persons who might benefit who can bring or fund the case.
-        bullet-6: |
-          Details of the most recent incident, if a warning letter has been sent,
-          the police have been notified or there are any criminal charges.
-        upload: Upload
-      uploaded_files:
-        action: Action
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        uploaded: Uploaded
-=======
->>>>>>> AP-341 Update locales
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
@@ -253,6 +228,14 @@ en:
         instructions: |
           Please tell us about the case providing
           sufficient information to satisfy the regulations.
+        upload: Upload
+      uploaded_files:
+        action: Action
+        delete: Delete
+        filename: Filename
+        size: Size
+        status: Status
+        uploaded: Uploaded
     success_prospects:
       show:
         h1-heading: What are the prospects of success?

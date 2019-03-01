@@ -10,11 +10,11 @@ en:
     gbp: "£"
     usd: "$"
   date:
+    date_period: "%{from} to %{to}"
     formats:
       default: "%a, %d %b %Y"
-      short_date: "%d %b %Y"
       long_date: "%d %B %Y"
-    date_period: "%{from} to %{to}"
+      short_date: "%d %b %Y"
   errors:
     messages:
       already_confirmed: was already confirmed, please try signing in
