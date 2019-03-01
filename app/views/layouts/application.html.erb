@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template">
   <head>
+    <meta charset="utf-8" />
     <title><%= html_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0c0c" />
 
@@ -78,7 +78,7 @@
 
     <%= render partial: 'layouts/footer' %>
 
-    <script type='text/javascript'>
+    <script>
       window.GOVUKFrontend.initAll();
     </script>
   </body>

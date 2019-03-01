@@ -2,11 +2,9 @@
 @import "govuk-frontend/helpers/all";
 
 .govuk-header {
-  .govuk-header__content .user-info {
-    float: left;
-    line-height: 30px;
-    font-weight: bold;
-
+  #navigation {
+    line-height: 30px; 
+		
     a {
       padding-left: 1em;
     }
