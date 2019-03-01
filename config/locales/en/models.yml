@@ -18,15 +18,15 @@ en:
       salary: Salary or wages
       student_loan: Student loan or grant
     page_titles:
-      benefits: Benefits
-      child_care: Childcare costs to a nursery or registered provider
-      council_tax: Council Tax
-      friends_or_family: Financial help from friends or family
+      benefits: Your benefits
+      child_care: Your childcare costs to a nursery or registered provider
+      council_tax: Your council Tax
+      friends_or_family: Your financial help from friends or family
       legal_aid: Existing legal aid contributions
-      maintenance_in: Maintenance payments (for children or from an ex-partner)
-      maintenance_out: Maintenance payments (for children or to an ex-partner)
-      pension: Pensions (State, work or private)
-      property_or_lodger: Income from a property or lodger
-      rent_or_mortgage: Rent or mortgage
+      maintenance_in: Your maintenance payments (for children or from an ex-partner)
+      maintenance_out: Your maintenance payments (for children or to an ex-partner)
+      pension: Your pensions (State, work or private)
+      property_or_lodger: Your income from a property or lodger
+      rent_or_mortgage: Your rent or mortgage
       salary: Your salary or wage payments
-      student_loan: Student loan or grant
+      student_loan: Your student loan or grant
