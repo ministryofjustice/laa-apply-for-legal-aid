@@ -14,7 +14,9 @@ module Providers
     private
 
     def form_params
-      params.require(:address_lookup).permit(:postcode).merge(model: address)
+      merge_with_model(address) do
+        params.require(:address_lookup).permit(:postcode)
+      end
     end
 
     def address

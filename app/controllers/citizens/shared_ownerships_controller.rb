@@ -7,7 +7,7 @@ module Citizens
     end
 
     def update
-      @form = LegalAidApplications::SharedOwnershipForm.new(shared_ownership_params.merge(model: legal_aid_application))
+      @form = LegalAidApplications::SharedOwnershipForm.new(shared_ownership_params)
 
       if @form.save
         go_forward
@@ -19,9 +19,11 @@ module Citizens
     private
 
     def shared_ownership_params
-      return {} unless params[:legal_aid_application]
+      merge_with_model(legal_aid_application) do
+        return {} unless params[:legal_aid_application]
 
-      params.require(:legal_aid_application).permit(:shared_ownership)
+        params.require(:legal_aid_application).permit(:shared_ownership)
+      end
     end
   end
 end

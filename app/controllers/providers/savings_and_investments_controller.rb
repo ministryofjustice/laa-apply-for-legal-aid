@@ -7,7 +7,7 @@ module Providers
     end
 
     def update
-      @form = SavingsAmounts::SavingsAmountsForm.new(form_params.merge(model: savings_amount))
+      @form = SavingsAmounts::SavingsAmountsForm.new(form_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -27,7 +27,9 @@ module Providers
     end
 
     def form_params
-      params.require(:savings_amount).permit(attributes + check_box_attributes)
+      merge_with_model(savings_amount) do
+        params.require(:savings_amount).permit(attributes + check_box_attributes)
+      end
     end
   end
 end

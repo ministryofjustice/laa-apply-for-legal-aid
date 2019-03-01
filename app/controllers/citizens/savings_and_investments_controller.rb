@@ -8,7 +8,7 @@ module Citizens
     end
 
     def update
-      @form = SavingsAmounts::SavingsAmountsForm.new(form_params.merge(model: savings_amount))
+      @form = SavingsAmounts::SavingsAmountsForm.new(form_params)
 
       if @form.save
         go_forward
@@ -36,7 +36,9 @@ module Citizens
     end
 
     def form_params
-      params.require(:savings_amount).permit(attributes + check_box_attributes)
+      merge_with_model(savings_amount) do
+        params.require(:savings_amount).permit(attributes + check_box_attributes)
+      end
     end
   end
 end

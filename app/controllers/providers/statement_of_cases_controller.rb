@@ -15,10 +15,9 @@ module Providers
     private
 
     def statement_of_case_params
-      params
-        .require(:statement_of_case)
-        .permit(:statement, :original_file)
-        .merge(model: statement_of_case, provider_uploader: current_provider)
+      merge_with_model(statement_of_case, provider_uploader: current_provider) do
+        params.require(:statement_of_case).permit(:statement, :original_file)
+      end
     end
 
     def statement_of_case

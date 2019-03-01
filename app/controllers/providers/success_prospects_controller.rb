@@ -7,7 +7,7 @@ module Providers
     end
 
     def update
-      @form = MeritsAssessments::SuccessProspectForm.new(form_params.merge(model: merits_assessment))
+      @form = MeritsAssessments::SuccessProspectForm.new(form_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -23,7 +23,9 @@ module Providers
     end
 
     def form_params
-      params.require(:merits_assessment).permit(:success_prospect, :success_prospect_details)
+      merge_with_model(merits_assessment) do
+        params.require(:merits_assessment).permit(:success_prospect, :success_prospect_details)
+      end
     end
   end
 end

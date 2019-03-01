@@ -17,12 +17,13 @@ module Providers
       legal_aid_application.applicant || legal_aid_application.build_applicant
     end
 
-    def applicant_params
-      params.require(:applicant).permit(:first_name, :last_name, :dob_day, :dob_month, :dob_year, :national_insurance_number, :email)
-    end
-
     def form_params
-      applicant_params.merge(model: applicant)
+      merge_with_model(applicant) do
+        params.require(:applicant).permit(
+          :first_name, :last_name, :dob_day, :dob_month, :dob_year,
+          :national_insurance_number, :email
+        )
+      end
     end
   end
 end

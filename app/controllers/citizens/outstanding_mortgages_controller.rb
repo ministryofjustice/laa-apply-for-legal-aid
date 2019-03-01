@@ -19,8 +19,8 @@ module Citizens
     private
 
     def legal_aid_application_params
-      params.require(:legal_aid_application).permit(:outstanding_mortgage_amount).tap do |hash|
-        hash[:model] = legal_aid_application
+      merge_with_model(legal_aid_application) do
+        params.require(:legal_aid_application).permit(:outstanding_mortgage_amount)
       end
     end
   end
