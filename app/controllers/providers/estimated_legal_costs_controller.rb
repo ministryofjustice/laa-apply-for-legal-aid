@@ -7,7 +7,7 @@ module Providers
     end
 
     def update
-      @form = MeritsAssessments::EstimatedLegalCostForm.new(form_params.merge(model: merits_assessment))
+      @form = MeritsAssessments::EstimatedLegalCostForm.new(form_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -15,7 +15,9 @@ module Providers
     private
 
     def form_params
-      params.require(:merits_assessment).permit(:estimated_legal_cost)
+      merge_with_model(merits_assessment) do
+        params.require(:merits_assessment).permit(:estimated_legal_cost)
+      end
     end
 
     def merits_assessment

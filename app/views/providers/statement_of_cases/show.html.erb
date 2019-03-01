@@ -24,7 +24,19 @@
 
       <div class="govuk-!-padding-bottom-2"></div>
 
-      <%= form.govuk_file_field :original_file, label: t('generic.upload_file') %>
+      <% if @form.model.original_files && @form.model.original_files.any? %>
+        <%= render partial: 'uploaded_files', locals: { original_files: @form.model.original_files } %>
+      <% end %>
+
+      <label class="govuk-heading-m" for="original_files"><%= t('generic.upload_file') %></label>
+      <%= form.govuk_file_field :original_files, multiple: true, label: nil %>
+
+      <%= form.submit(
+            t('.upload'),
+            id: 'upload',
+            name: 'upload_button',
+            class: 'govuk-button form-button'
+          ) %>
 
       <div class="govuk-!-padding-bottom-2"></div>
 

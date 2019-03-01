@@ -9,7 +9,7 @@ module Citizens
 
       @form.save
 
-      if @form.open_banking_consent == 'true'
+      if @form.open_banking_consent?
         go_forward
       else
         render plain: 'Landing page: No Consent provided'
@@ -19,11 +19,9 @@ module Citizens
     private
 
     def edit_params
-      consent_params.merge(model: legal_aid_application)
-    end
-
-    def consent_params
-      params.require(:legal_aid_application).permit(:open_banking_consent, :open_banking_consent_choice_at)
+      merge_with_model(legal_aid_application) do
+        params.require(:legal_aid_application).permit(:open_banking_consent, :open_banking_consent_choice_at)
+      end
     end
   end
 end

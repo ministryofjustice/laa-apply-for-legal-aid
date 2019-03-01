@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_150642) do
+ActiveRecord::Schema.define(version: 2019_02_22_134743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(version: 2019_02_19_150642) do
     t.boolean "lookup_used", default: false, null: false
     t.string "lookup_id"
     t.index ["applicant_id"], name: "index_addresses_on_applicant_id"
+  end
+
+  create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "username", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "locked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

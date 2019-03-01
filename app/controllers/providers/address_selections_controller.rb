@@ -16,7 +16,7 @@ module Providers
     def update
       authorize @legal_aid_application
       @addresses = build_addresses_from_form_data
-      @form = Addresses::AddressSelectionForm.new(permitted_params.merge(addresses: @addresses, model: address))
+      @form = Addresses::AddressSelectionForm.new(permitted_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -32,7 +32,9 @@ module Providers
     end
 
     def permitted_params
-      params.require(:address_selection).permit(:lookup_id, :postcode)
+      merge_with_model(address, addresses: @addresses) do
+        params.require(:address_selection).permit(:lookup_id, :postcode)
+      end
     end
 
     def address_list_params

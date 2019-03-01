@@ -1,0 +1,26 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <table class="govuk-table">
+      <caption class="govuk-table__caption"><%= t('.latest_applications') %></caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col"><%= t('.applicant_name') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.created_at') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
+        </tr>
+      </thead>
+
+      <% @applications.each do |application| %>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><%= application.applicant_full_name || t('generic.undefined') %></td>
+            <td class="govuk-table__cell"><%= l(application.created_at, format: :date) %></td>
+            <td class="govuk-table__cell"><%= application.application_ref %></td>
+            <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

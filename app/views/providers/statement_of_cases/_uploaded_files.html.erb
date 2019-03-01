@@ -1,0 +1,22 @@
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+  <tr class="govuk-table__row">
+    <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
+    <th class="govuk-table__header" scope="col"><%= t('.size') %></th>
+    <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
+    <th class="govuk-table__header" scope="col"><%= t('.action') %></th>
+  </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+
+  <% original_files.order(:created_at).each do |file| %>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell"><%= file.filename %></td>
+      <td class="govuk-table__cell no-wrap"><%= number_to_human_size(file.blob.byte_size) %></td>
+      <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
+      <td class="govuk-table__cell"><%= t('.delete') %></td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>

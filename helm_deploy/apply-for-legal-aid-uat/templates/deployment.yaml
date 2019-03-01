@@ -20,6 +20,12 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
+        - name: clamav
+          image: "{{ .Values.clamav.image.repository }}:{{ .Values.clamav.image.tag }}"
+          ports:
+            - name: clamav
+              containerPort: 3310
+              protocol: TCP
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -170,6 +176,16 @@ spec:
               secretKeyRef:
                 name: apply-for-legal-aid-s3-instance-output
                 key: secret_access_key
+          - name: ADMIN_ALLOW_RESET
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: adminAllowReset
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "apply-for-legal-aid-uat.fullname" . }}
+                key: adminPassword
           ports:
             - name: http
               containerPort: 3002

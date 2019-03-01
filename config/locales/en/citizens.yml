@@ -52,9 +52,9 @@ en:
             html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
     identify_types_of_incomes:
       show:
-        page_heading: Select any types of income you receive
         benefits_examples: For example, Universal Credit or Child Benefit
         maintenance_in_examples: For example, for children or from an ex-partner
+        page_heading: Select any types of income you receive
         pension_examples: Include State, work or private pensions
     information:
       show:
@@ -123,8 +123,9 @@ en:
         heading_1: Do you own your home with anyone else?
     transactions:
       show:
-        sub_heading: Select all that apply
-        col_select_all: Select all
+        col_clear_all: Clear all
+        col_amount: Amount
         col_date: Date
         col_description: Description
-        col_amount: Amount
+        col_select_all: Select all
+        sub_heading: Select all that apply

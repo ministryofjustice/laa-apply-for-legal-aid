@@ -8,17 +8,27 @@ module Providers
 
     def update
       @form = StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
+      if upload_button_pressed?
+        @form.upload_button_pressed = true
+        @form.save
+        render :show
+      end
+
+      return if performed?
 
       render :show unless save_continue_or_draft(@form)
     end
 
     private
 
+    def upload_button_pressed?
+      params[:upload_button].present?
+    end
+
     def statement_of_case_params
-      params
-        .require(:statement_of_case)
-        .permit(:statement, :original_file)
-        .merge(model: statement_of_case, provider_uploader: current_provider)
+      merge_with_model(statement_of_case, provider_uploader: current_provider) do
+        params.require(:statement_of_case).permit(:statement, original_files: [])
+      end
     end
 
     def statement_of_case

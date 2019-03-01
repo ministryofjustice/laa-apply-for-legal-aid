@@ -1,5 +1,6 @@
 module Citizens
   class CheckAnswersController < BaseController
+    include ApplicationFromSession
     before_action :authenticate_applicant!
 
     def index
@@ -14,12 +15,6 @@ module Citizens
     def reset
       legal_aid_application.reset!
       redirect_to back_path
-    end
-
-    private
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

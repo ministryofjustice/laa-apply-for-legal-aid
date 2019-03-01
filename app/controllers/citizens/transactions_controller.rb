@@ -1,6 +1,6 @@
 module Citizens
   class TransactionsController < BaseController
-    include Flowable
+    include ApplicationFromSession
     before_action :authenticate_applicant!
     helper_method :date_from, :date_to
 
@@ -54,11 +54,7 @@ module Citizens
         .applicant
         .bank_transactions
         .where(operation: transaction_type.operation)
-        .order(happened_at: :desc, created_at: :desc)
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
+        .order(happened_at: :desc, description: :desc)
     end
   end
 end

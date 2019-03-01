@@ -15,12 +15,10 @@ module Providers
       %i[address_line_one address_line_two city county postcode lookup_postcode lookup_error]
     end
 
-    def address_params
-      params.require(:address).permit(*address_attributes)
-    end
-
     def form_params
-      address_params.merge(model: address)
+      merge_with_model(address) do
+        params.require(:address).permit(*address_attributes)
+      end
     end
 
     def address

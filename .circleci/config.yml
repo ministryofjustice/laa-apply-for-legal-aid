@@ -21,6 +21,7 @@ references:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
     - image: postgres:10.5
     - image: redis:5.0
+    - image: mkodockx/docker-clamav:latest
 
   setup_test_env: &setup_test_env
     run:
@@ -29,6 +30,11 @@ references:
         sudo apt-get --assume-yes install python3-pip
         sudo pip3 install awscli
         $(aws ecr get-login --region eu-west-1 --no-include-email)
+
+  install_clamav: &install_clamav
+    run:
+      name: Install Clamav Client
+      command: sudo apt-get install clamav-daemon -y
 
   build_docker_image: &build_docker_image
     run:
@@ -55,6 +61,7 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
     - *setup_test_env
+    - *install_clamav
     - restore_cache:
         keys:
           - laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}

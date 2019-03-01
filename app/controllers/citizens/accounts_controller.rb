@@ -15,8 +15,7 @@ module Citizens
     private
 
     def worker_errors
-      return [] unless worker
-      return [] unless worker['errors'].present?
+      return [] unless worker && worker['errors'].present?
 
       @worker_errors ||= JSON.parse(worker['errors'])
     end

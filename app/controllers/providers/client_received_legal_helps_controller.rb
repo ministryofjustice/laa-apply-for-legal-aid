@@ -7,7 +7,7 @@ module Providers
     end
 
     def update
-      @form = MeritsAssessments::ClientReceivedLegalHelpForm.new(client_received_legal_help_params.merge(model: merits_assessment))
+      @form = MeritsAssessments::ClientReceivedLegalHelpForm.new(client_received_legal_help_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -19,7 +19,9 @@ module Providers
     end
 
     def client_received_legal_help_params
-      params.require(:merits_assessment).permit(:client_received_legal_help, :application_purpose)
+      merge_with_model(merits_assessment) do
+        params.require(:merits_assessment).permit(:client_received_legal_help, :application_purpose)
+      end
     end
 
     def authorize_legal_aid_application

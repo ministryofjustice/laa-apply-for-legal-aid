@@ -1,7 +1,8 @@
 module Citizens
   class LegalAidApplicationsController < BaseController
+    include ApplicationFromSession
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
-    # are redirected to index and where the first page is displayed.
+    # are redirected to index where the first page is displayed.
     def show
       sign_out current_provider if provider_signed_in?
       secure_id = params[:id]
@@ -25,10 +26,6 @@ module Citizens
     def sign_applicant_in_via_devise(applicant)
       scope = Devise::Mapping.find_scope!(applicant)
       sign_in(scope, applicant, event: :authentication)
-    end
-
-    def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find(session[:current_application_ref])
     end
   end
 end

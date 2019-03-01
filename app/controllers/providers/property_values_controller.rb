@@ -12,12 +12,10 @@ module Providers
 
     private
 
-    def property_value_params
-      params.require(:legal_aid_application).permit(:property_value)
-    end
-
     def edit_params
-      property_value_params.merge(model: legal_aid_application, mode: :provider)
+      merge_with_model(legal_aid_application, mode: :provider) do
+        params.require(:legal_aid_application).permit(:property_value)
+      end
     end
   end
 end
