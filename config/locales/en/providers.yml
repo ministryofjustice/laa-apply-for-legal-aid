@@ -18,6 +18,13 @@ en:
         share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
         sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
         title: About the online financial assessment
+    address_selections:
+      show:
+        link_text: I can't find the address in the list
+        select_address_label: Select an address
+    applicants:
+      show:
+        page_title: Enter your client's details
     application_confirmations:
       show:
         application_created: Application created
@@ -27,13 +34,22 @@ en:
         secure_link_heading: We have sent your client a secure link
         secure_link_text: Your client can use the link to complete the online financial assessment from home or another location.
         sub_title: Your case reference number is
-    address_selections:
+    capital_introductions:
       show:
-        link_text: I can't find the address in the list
-        select_address_label: Select an address
-    applicants:
-      show:
-        page_title: Enter your client's details
+        about_the_client:
+          list: |
+            owns a home or has a mortgage (and their values)
+            has any savings, investments or other capital (and their values)
+            has any other ways to contribute towards legal costs
+        client_to_provide: 'You''ll also need to provide:'
+        does_your_client: 'You''ll need to tell us if your client:'
+        h1-heading: Before you continue
+        items_to_be_provided:
+          list: |
+            a statement of case
+            information about any attempts to settle
+            cost estimates
+            the prospects of success
     check_benefits:
       index:
         heading_1: Your client's tax and benefits status
@@ -48,25 +64,25 @@ en:
           title: receives a qualifying benefit
     check_merits_answers:
       show:
+        complete-application-heading: Complete the application
+        complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         h1-heading: Check your answers
         h2-heading: Merits assessment
         items:
-          client_received_legal_help: Client received legal help
-          proceedings_currently_before_court: Proceedings currently before court
-          statement_of_case: Statement of case
-          estimated_legal_costs: Estimated legal costs
-          prospects_of_success: Prospects of success
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
-        complete-application-heading: Complete the application
-        complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+          client_received_legal_help: Client received legal help
+          estimated_legal_costs: Estimated legal costs
+          proceedings_currently_before_court: Proceedings currently before court
+          prospects_of_success: Prospects of success
+          statement_of_case: Statement of case
     check_passported_answers:
       show:
         assets:
           heading: Property, savings and other assets
         h1-heading: Check your answers
-        merits_assessment_h2: Merits assessment
         merits_assessment_body: You will now need to complete the merits assessment for the proceeding you are applying for.
+        merits_assessment_h2: Merits assessment
         property: Property
     check_provider_answers:
       index:
@@ -173,29 +189,6 @@ en:
     savings_and_investments:
       show:
         h1-heading: Does your client have any savings and investments?
-    statement_of_cases:
-      show:
-        h1-heading: Statement of case
-        h2-heading: You must include the following details
-        instructions: |
-          Please tell us about the case providing
-          sufficient information to satisfy the regulations.
-        bullet-1: What has happend so far.
-        bullet-2: Parties involved and their relationship to the applicant.
-        bullet-3: Explain why the current proceedings are necessary.
-        bullet-4: Number of clients represented.
-        bullet-5: Any other persons who might benefit who can bring or fund the case.
-        bullet-6: |
-          Details of the most recent incident, if a warning letter has been sent,
-          the police have been notified or there are any criminal charges.
-        upload: Upload
-      uploaded_files:
-        action: Action
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        uploaded: Uploaded
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
@@ -220,22 +213,29 @@ en:
           title: 'You can only use this service if your client:'
         use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
         use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
+    statement_of_cases:
+      show:
+        bullet-1: What has happend so far.
+        bullet-2: Parties involved and their relationship to the applicant.
+        bullet-3: Explain why the current proceedings are necessary.
+        bullet-4: Number of clients represented.
+        bullet-5: Any other persons who might benefit who can bring or fund the case.
+        bullet-6: |
+          Details of the most recent incident, if a warning letter has been sent,
+          the police have been notified or there are any criminal charges.
+        h1-heading: Statement of case
+        h2-heading: You must include the following details
+        instructions: |
+          Please tell us about the case providing
+          sufficient information to satisfy the regulations.
+        upload: Upload
+      uploaded_files:
+        action: Action
+        delete: Delete
+        filename: Filename
+        size: Size
+        status: Status
+        uploaded: Uploaded
     success_prospects:
       show:
         h1-heading: What are the prospects of success?
-    capital_introductions:
-      show:
-        about_the_client:
-          list: |
-            owns a home or has a mortgage (and their values)
-            has any savings, investments or other capital (and their values)
-            has any other ways to contribute towards legal costs
-        items_to_be_provided:
-          list: |
-            a statement of case
-            information about any attempts to settle
-            cost estimates
-            the prospects of success
-        h1-heading: Before you continue
-        does_your_client: "You'll need to tell us if your client:"
-        client_to_provide: "You'll also need to provide:"

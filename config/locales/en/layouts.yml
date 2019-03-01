@@ -16,3 +16,6 @@ en:
       header:
         gov_uk_link_title: Go to the GOV.UK homepage
         title: Apply for Legal Aid
+    logout:
+      admin: Admin sign out
+      provider: Sign out

@@ -14,10 +14,18 @@ Rails.application.routes.draw do
 
   devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
   devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
+  devise_for :admin_users
 
   resources :status, only: [:index]
   resource :contact, only: [:show]
   resources :feedback, only: %i[new create show]
+
+  namespace :admin do
+    root to: 'legal_aid_applications#index'
+    resources :legal_aid_applications, only: [:index] do
+      delete :destroy_all, on: :collection
+    end
+  end
 
   namespace 'v1' do
     resources :proceeding_types, only: [:index]

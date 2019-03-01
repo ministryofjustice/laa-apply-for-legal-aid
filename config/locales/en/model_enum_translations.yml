@@ -13,9 +13,9 @@ en:
         answers_checked: Answers checked
         checking_answers: Checking answers
         checking_citizen_answers: Applicant checking answers
+        checking_merits_answers: Provider checking merits test answers
         checking_passported_answers: Provider checking means test answers
         initiated: In progress
         means_completed: Means test completed
-        provider_submitted: Submitted by provider
-        checking_merits_answers: Provider checking merits test answers
         merits_completed: Merits test completed
+        provider_submitted: Submitted by provider

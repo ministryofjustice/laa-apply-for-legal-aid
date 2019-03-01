@@ -51,10 +51,10 @@ en:
         applicant:
           attributes:
             date_of_birth:
+              blank: Enter a valid date of birth
               date_is_in_the_future: Date of birth must be in the past
               date_not_valid: Enter a valid date of birth
               earliest_allowed_date: Date of birth cannot be before %{date}
-              blank: Enter a valid date of birth
             email:
               blank: Enter email address
               invalid: Enter an email address in the correct format, such as name@example.com
@@ -95,9 +95,9 @@ en:
           attributes:
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
+              greater_than_or_equal_to: Mortgage amount must be 0 or more
               not_a_number: Mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Mortgage amount must be 0 or more
             own_home:
               blank: Select yes if you own the home you live in
             percentage_home:
@@ -110,12 +110,12 @@ en:
                 blank: Enter an estimated value for your home
                 not_a_number: The estimated value of your home must be an amount of money, like 60,000
               greater_than: Estimated value must be 0 or more
-              not_a_number: Estimated value must be an amount of money, like 60,000
-              too_many_decimals: Estimated value must not include more than 2 decimal numbers
               greater_than_or_equal_to: Estimated value must be 0 or more
+              not_a_number: Estimated value must be an amount of money, like 60,000
               provider:
                 blank: Enter an estimated value for your client's home
                 not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
+              too_many_decimals: Estimated value must not include more than 2 decimal numbers
             shared_ownership:
               blank: Select yes if you own your home with someone else
         merits_assessment:
@@ -128,9 +128,9 @@ en:
               blank: Enter details of the proceedings currently before the court
             estimated_legal_cost:
               blank: Enter the estimated legal costs of doing the work
+              greater_than_or_equal_to: Estimated cost must be 0 or more
               not_a_number: Estimated cost must be an amount of money, like 25,000
               too_many_decimals: Estimated cost must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated cost must be 0 or more
             proceedings_before_the_court:
               blank: Select Yes if the proceedings for which funding is being sought are currently before the court
             success_prospect:
@@ -141,59 +141,59 @@ en:
           attributes:
             classic_car_value:
               blank: Enter the estimated classic car value
+              greater_than_or_equal_to: Estimated classic car value must be 0 or more
               not_a_number: Estimated classic car value must be an amount of money, like 60,000
               too_many_decimals: Estimated classic car value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated classic car value must be 0 or more
             jewellery_value:
               blank: Enter the estimated total value of valuable items
+              greater_than_or_equal_to: Estimated jewellery value must be 0 or more
               not_a_number: Estimated valuable items value must be an amount of money, like 60,000
               too_many_decimals: Estimated jewellery value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated jewellery value must be 0 or more
             land_value:
               blank: Enter the estimated land value
+              greater_than_or_equal_to: Estimated land value must be 0 or more
               not_a_number: Estimated land value must be an amount of money, like 60,000
               too_many_decimals: Estimated land value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated land value must be 0 or more
             money_assets_value:
               blank: Enter the estimated value of estate
+              greater_than_or_equal_to: Estimated money assets value must be 0 or more
               not_a_number: Estimated estate value must be an amount of money, like 60,000
               too_many_decimals: Estimated money assets value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated money assets value must be 0 or more
             money_owed_value:
               blank: Enter the estimated value of money owed
+              greater_than_or_equal_to: Estimated money owed value must be 0 or more
               not_a_number: Estimated money owed must be an amount of money, like 60,000
               too_many_decimals: Estimated money owed value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated money owed value must be 0 or more
             second_home_mortgage:
               blank: Enter outstanding mortgage amount
+              greater_than_or_equal_to: Estimated second home mortgage must be 0 or more
               not_a_number: Outstanding mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Estimated second home mortgage must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated second home mortgage must be 0 or more
             second_home_percentage:
               blank: Enter property percentage share
+              greater_than_or_equal_to: Estimated second home percentage value must be 0 or more
               not_a_number: Ownership share must be percentage, like 33.33
               too_many_decimals: Estimated second home percentage must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated second home percentage value must be 0 or more
             second_home_value:
               blank: Enter the estimated property value
+              greater_than_or_equal_to: Estimated second home value must be 0 or more
               not_a_number: Estimated value must be an amount of money, like 60,000
               too_many_decimals: Estimated second home value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated second home value must be 0 or more
             timeshare_value:
               blank: Enter the estimated timeshare value
+              greater_than_or_equal_to: Estimated timeshare value must be 0 or more
               not_a_number: Estimated timeshare value must be an amount of money, like 60,000
               too_many_decimals: Estimated timeshare value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated timeshare value must be 0 or more
             trust_value:
               blank: Enter the estimated value of trust
+              greater_than_or_equal_to: Estimated trust value must be 0 or more
               not_a_number: Estimated trust value must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated trust value must be 0 or more
             vehicle_value:
               blank: Enter the estimated vehicle value
+              greater_than_or_equal_to: Estimated vehicle value must be 0 or more
               not_a_number: Estimated vehicle value must be an amount of money, like 60,000
               too_many_decimals: Estimated vehicle value must not include more than 2 decimal numbers
-              greater_than_or_equal_to: Estimated vehicle value must be 0 or more
         savings_amount:
           attributes:
             cash:
@@ -233,11 +233,12 @@ en:
               too_many_decimals: Estimated shares value must not include more than 2 decimal numbers
         statement_of_case:
           attributes:
-            statement:
-              blank: Enter the statement of case
             original_files:
               content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
-              file_too_big: "The selected file must be smaller than %{size}MB"
               file_empty: The selected file is empty
+              file_too_big: The selected file must be smaller than %{size}MB
               file_virus: The selected file contains a virus
               no_file_chosen: You must choose at least one file
+            statement:
+              blank: Enter the statement of case
+
