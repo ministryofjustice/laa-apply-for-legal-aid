@@ -94,8 +94,13 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       it 'displays the correct assets details' do
-        application.other_assets_declaration.amount_attributes.each do |_, amount|
-          expect(response.body).to include(number_to_currency(amount, unit: '£')), 'asset amount should be in the page'
+        application.other_assets_declaration.amount_attributes.each do |attr, amount|
+          expected = if attr == 'second_home_percentage'
+                       number_to_percentage(amount, precision: 2)
+                     else
+                       number_to_currency(amount, unit: '£')
+                     end
+          expect(response.body).to include(expected), 'asset amount should be in the page'
         end
       end
 

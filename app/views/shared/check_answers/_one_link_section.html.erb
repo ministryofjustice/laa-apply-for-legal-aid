@@ -16,11 +16,11 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <% if answer_hash.present? %>
 
-      <% answer_hash&.fetch(:items, [])&.each_with_index do |(label, amount), index| %>
+      <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
         <%= check_answer_no_link(
               name: "#{name}_#{index}",
-              question: label,
-              answer: number_to_currency(amount, unit: t('currency.gbp'))
+              question: item.label,
+              answer: item.amount_text
             ) %>
       <% end %>
 
