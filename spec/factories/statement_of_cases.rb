@@ -10,8 +10,9 @@ FactoryBot.define do
 
     trait :with_attached_files do
       after :create do |soc|
-        filepath = "#{Rails.root}/spec/fixtures/files/lorem_ipsum.pdf"
-        soc.original_files.attach(io: File.open(filepath), filename: 'lorem_ipsum.pdf', content_type: 'application/pdf')
+        filepath = "#{Rails.root}/spec/fixtures/files/documents/hello_world.pdf"
+        soc.original_files.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
+        PdfFile.create!(original_file_id: soc.original_files.last.id)
       end
     end
   end

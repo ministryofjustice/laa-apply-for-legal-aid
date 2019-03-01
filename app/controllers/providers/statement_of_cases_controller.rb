@@ -16,10 +16,20 @@ module Providers
 
       return if performed?
 
-      render :show unless save_continue_or_draft(@form)
+      if save_continue_or_draft(@form)
+        convert_new_files_to_pdf
+      else
+        render :show
+      end
     end
 
     private
+
+    def convert_new_files_to_pdf
+      statement_of_case.original_files.each do |original_file|
+        PdfFile.convert_original_file(original_file.id)
+      end
+    end
 
     def upload_button_pressed?
       params[:upload_button].present?

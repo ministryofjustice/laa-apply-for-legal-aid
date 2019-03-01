@@ -36,6 +36,11 @@ references:
       name: Install Clamav Client
       command: sudo apt-get install clamav-daemon -y
 
+  install_libreoffice: &install_libreoffice
+    run:
+      name: Install LibreOffice
+      command: sudo apt-get install libreoffice -y
+
   build_docker_image: &build_docker_image
     run:
       name: Build laa-apply-for-legal-aid  docker image
@@ -62,6 +67,7 @@ jobs:
         docker_layer_caching: true
     - *setup_test_env
     - *install_clamav
+    - *install_libreoffice
     - restore_cache:
         keys:
           - laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
