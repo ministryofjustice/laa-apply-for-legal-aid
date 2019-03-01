@@ -65,6 +65,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
       let(:upload_button) { {} }
 
       it 'updates the record' do
+        puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
+        ap params
         subject
         expect(legal_aid_application.statement_of_case.reload.statement).to eq(entered_text)
         expect(legal_aid_application.statement_of_case.original_files.first).to be_present
