@@ -1,17 +1,22 @@
 class PdfConverter
-  def self.call(original_file_id)
-    new(original_file_id).call
+  def self.call(pdf_file_id)
+    new(pdf_file_id).call
   end
 
-  attr_reader :original_file_id
+  attr_reader :pdf_file_id
 
-  def initialize(original_file_id)
-    @original_file_id = original_file_id
+  def initialize(pdf_file_id)
+    @pdf_file_id = pdf_file_id
   end
 
   def call
+    return unless pdf_file # pdf_file may have been deleted on original file being deleted
+
+    file = converted_file
+    return unless PdfFile.exists?(pdf_file_id) # Check still there on completion of conversion
+
     pdf_file.file.attach(
-      io: File.open(converted_file.path),
+      io: File.open(file.path),
       filename: "#{original_attachment.filename.base}.pdf",
       content_type: 'application/pdf'
     )
@@ -20,8 +25,9 @@ class PdfConverter
   private
 
   def pdf_file
-    PdfFile.find_or_create_by!(original_file_id: original_file_id)
+    PdfFile.find_by(id: pdf_file_id)
   end
+  delegate :original_file_id, to: :pdf_file
 
   def converted_file
     return downloaded_file if original_attachment.content_type == 'application/pdf'

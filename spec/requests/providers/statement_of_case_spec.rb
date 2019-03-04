@@ -276,14 +276,15 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
     before do
       login_as provider
-      subject
     end
 
     it 'redirects to show' do
+      subject
       expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
     end
 
     it 'deletes the file' do
+      expect { subject }.to change { ActiveStorage::Attachment.count }.by(-1)
       expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(false)
     end
 
@@ -291,11 +292,30 @@ RSpec.describe 'provider statement of case requests', type: :request do
       let(:params) { { original_file_id: :unknown } }
 
       it 'redirects to show' do
+        subject
         expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
       end
 
       it 'leaves the file in place' do
+        expect { subject }.not_to change { ActiveStorage::Attachment.count }
         expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(true)
+      end
+    end
+
+    context 'when a PDF exists' do
+      let(:pdf_file) { PdfFile.find_or_create_by(original_file_id: original_file.id) }
+      before { PdfConverter.call(pdf_file.id) }
+
+      it 'deletes the PdfFile' do
+        expect { subject }.to change { PdfFile.count }.by(-1)
+      end
+
+      it 'deletes original files attachment' do
+        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'original_files').count }.by(-1)
+      end
+
+      it 'deletes the PdfFile file attachment' do
+        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count }.by(-1)
       end
     end
   end

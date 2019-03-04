@@ -24,12 +24,8 @@ module Providers
     end
 
     def destroy
-      file = statement_of_case.original_files.find_by(id: params[:original_file_id])
-      if file
-        file.purge
-      else
-        Rails.logger.error "Unable to remove original file. Not found: #{params[:original_file_id]}"
-      end
+      delete_original_file
+      delete_pdf_file
       redirect_to [:providers, legal_aid_application, :statement_of_case]
     end
 
@@ -57,6 +53,19 @@ module Providers
 
     def authorize_legal_aid_application
       authorize legal_aid_application
+    end
+
+    def delete_original_file
+      file = statement_of_case.original_files.find_by(id: params[:original_file_id])
+      if file
+        file.purge
+      else
+        Rails.logger.error "Unable to remove original file. Not found: #{params[:original_file_id]}"
+      end
+    end
+
+    def delete_pdf_file
+      PdfFile.where(original_file_id: params[:original_file_id]).destroy_all
     end
   end
 end
