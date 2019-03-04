@@ -12,8 +12,3 @@ en:
         created_at: Date started
         latest_applications: Latest Legal Aid Applications
         status: Status
-  admin_users:
-    sessions:
-      new:
-        button: Log in
-        heading: 'Admin: Log In'

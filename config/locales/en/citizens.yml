@@ -25,6 +25,7 @@ en:
     check_answers:
       index:
         assets:
+          heading: Property, savings and other assets
           other_assets: Other assets
           outstanding_mortgage: Outstanding mortgage amount
           own_home: Property owned
@@ -33,7 +34,6 @@ en:
           restrictions: Do any restrictions apply?
           savings_and_investments: Savings and investments
           shared_ownership: Owned with anyone else
-          heading: Property, savings and other assets
         h1-heading: Check your answers
         merits:
           heading: Merits assessment
@@ -61,16 +61,15 @@ en:
         pension_examples: Include State, work or private pensions
     identify_types_of_outgoings:
       show:
-        page_heading: Select any regular payments you make
         hint: Do not select any if you make no regular payments.
+        page_heading: Select any regular payments you make
     income_summaries:
       add_other_income:
         add_other_income: Add another type of income
       show:
-        select: Select from your bank statement
-        page_heading: Select your income
         add_all_income: Add all you income from your bank statements.
-
+        page_heading: Select your income
+        select: Select from your bank statement
     information:
       show:
         heading_1: Give one-time access to your bank accounts
@@ -88,8 +87,9 @@ en:
         financial_situation_para: Find out if you can get legal aid because of your financial situation.
         heading_1: Complete your legal aid financial assessment
         legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
-        list: |
-          your online banking log in
+        list: 'your online banking log in
+
+'
         name: 'Name:'
         what_you_will_need: What you will need
     other_assets:
@@ -138,8 +138,8 @@ en:
         heading_1: Do you own your home with anyone else?
     transactions:
       show:
-        col_clear_all: Clear all
         col_amount: Amount
+        col_clear_all: Clear all
         col_date: Date
         col_description: Description
         col_select_all: Select all
