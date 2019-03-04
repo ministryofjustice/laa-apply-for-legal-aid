@@ -189,7 +189,7 @@ GEM
     httpi (2.4.4)
       rack
       socksify
-    i18n (1.5.3)
+    i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.28)
       activesupport (>= 4.0.2)
@@ -375,7 +375,7 @@ GEM
       rubyzip (~> 1.2, >= 1.2.2)
     sentry-raven (2.9.0)
       faraday (>= 0.7.6, < 1.0)
-    shoulda-matchers (4.0.0)
+    shoulda-matchers (4.0.1)
       activesupport (>= 4.2.0)
     sidekiq (5.2.5)
       connection_pool (~> 2.2, >= 2.2.2)
