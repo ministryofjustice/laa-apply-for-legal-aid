@@ -245,7 +245,6 @@ en:
           sufficient information to satisfy the regulations.
         upload: Upload
       uploaded_files:
-        action: Action
         delete: Delete
         filename: Filename
         size: Size

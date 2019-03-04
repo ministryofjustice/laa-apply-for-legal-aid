@@ -65,14 +65,14 @@ module StatementOfCases
       return unless file_present?(original_file)
       return if File.size(original_file.tempfile) > 1
 
-      errors.add(:original_file, original_file_error_for(:file_empty))
+      errors.add(:original_files, original_file_error_for(:file_empty))
     end
 
     def original_file_disallowed_content_type(original_file)
       return unless file_present?(original_file)
       return if original_file.content_type.in?(ALLOWED_CONTENT_TYPES)
 
-      errors.add(:original_file, original_file_error_for(:content_type_invalid))
+      errors.add(:original_files, original_file_error_for(:content_type_invalid))
     end
 
     def original_file_malware_scan(original_file)
