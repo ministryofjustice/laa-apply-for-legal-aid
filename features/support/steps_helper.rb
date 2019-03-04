@@ -27,5 +27,5 @@ Then('I fill {string} with {string}') do |field, value|
 end
 
 Then('I upload a pdf file') do
-  attach_file('Attach a file', Rails.root.join('spec/fixtures/files/lorem_ipsum.pdf'))
+  attach_file('Attach a file', Rails.root.join('spec/fixtures/files/documents/hello_world.pdf'))
 end
