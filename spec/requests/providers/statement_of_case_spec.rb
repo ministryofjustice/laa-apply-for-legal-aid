@@ -286,5 +286,17 @@ RSpec.describe 'provider statement of case requests', type: :request do
     it 'deletes the file' do
       expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(false)
     end
+
+    context 'when file not found' do
+      let(:params) { { original_file_id: :unknown } }
+
+      it 'redirects to show' do
+        expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+      end
+
+      it 'leaves the file in place' do
+        expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(true)
+      end
+    end
   end
 end
