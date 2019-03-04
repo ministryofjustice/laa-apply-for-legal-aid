@@ -1,32 +1,33 @@
 <%= page_template page_title: t('.h1-heading'), template: :form do %>
 
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_statement_of_case_path,
-        method: :patch,
-        local: true
-      ) do |form| %>
+  <%= govuk_form_group(
+        input: :proceedings_before_the_court,
+        show_error_if: @form.errors.any?
+      ) do %>
 
-    <%= govuk_form_group(
-          input: :proceedings_before_the_court,
-          show_error_if: @form.errors.any?
-        ) do %>
+    <label class="govuk-label" for="more-detail">
+      <p class="govuk-body-l"><%= t('.instructions') %></p>
+      <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <% (1..6).each do |bullet_number| %>
+          <li><%= t(".bullet-#{bullet_number}") %></li>
+        <% end %>
+      </ul>
+    </label>
 
-      <label class="govuk-label" for="more-detail">
-        <p class="govuk-body-l"><%= t('.instructions') %></p>
-        <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
-        <ul class="govuk-list govuk-list--bullet">
-          <% (1..6).each do |bullet_number| %>
-            <li><%= t(".bullet-#{bullet_number}") %></li>
-          <% end %>
-        </ul>
-      </label>
+    <div class="govuk-!-padding-bottom-2"></div>
 
-      <div class="govuk-!-padding-bottom-2"></div>
+    <% if @form.model.original_files && @form.model.original_files.any? %>
+      <%= render partial: 'uploaded_files', locals: { original_files: @form.model.original_files } %>
+    <% end %>
 
-      <% if @form.model.original_files && @form.model.original_files.any? %>
-        <%= render partial: 'uploaded_files', locals: { original_files: @form.model.original_files } %>
-      <% end %>
+    <%# Note this form needs to start after the list of original files to avoid nesting forms %>
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_statement_of_case_path,
+          method: :patch,
+          local: true
+        ) do |form| %>
 
       <label class="govuk-heading-m" for="original_files"><%= t('generic.upload_file') %></label>
       <%= form.govuk_file_field :original_files, multiple: true, label: nil %>

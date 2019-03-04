@@ -23,6 +23,12 @@ module Providers
       end
     end
 
+    def destroy
+      file = statement_of_case.original_files.find_by(id: params[:original_file_id])
+      file.purge
+      redirect_to [:providers, legal_aid_application, :statement_of_case]
+    end
+
     private
 
     def convert_new_files_to_pdf
