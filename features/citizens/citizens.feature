@@ -47,7 +47,7 @@ Feature: Citizen journey
     # select benefits, show all the transactions, click Continue and abe taken back to the
     # same page
     Then I click on the Select from your bank statement link for income type "Benefits"
-    Then I should be on a page showing "Benefits"
+    Then I should be on a page showing "Your benefits"
     Then I click "Continue"
 
     Then I should be on a page showing "Select your income"
