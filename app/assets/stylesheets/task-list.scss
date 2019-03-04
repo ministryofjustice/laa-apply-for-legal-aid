@@ -25,8 +25,6 @@ $task-list-indent: 35px;
 
 .app-task-list__section {
   display: table;
-
-  //@include govuk-font(24, $weight: bold);
   margin: 0;
   padding-bottom: ($govuk-gutter / 6);
   font-family: "nta", "Arial", "sans-serif";
