@@ -62,7 +62,11 @@
       name: :other_assets,
       url: check_answer_url_for(user_type, :other_assets, application),
       question: t('.assets.other_assets'),
-      answer_hash: capital_amounts_list(@legal_aid_application.other_assets_declaration, locale_namespace: "shared.forms.revealing_checkbox.attribute.#{user_type}s.other_assets.check_box_")
+      answer_hash: capital_amounts_list(
+        @legal_aid_application.other_assets_declaration,
+        locale_namespace: "shared.forms.revealing_checkbox.attribute.#{user_type}s.other_assets.check_box_",
+        percentage_values: [:second_home_percentage]
+      )
     ) if @legal_aid_application.other_assets? %>
 
 <%= check_answer_no_link_list(
