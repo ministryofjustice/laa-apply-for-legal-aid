@@ -3,11 +3,11 @@
   <p class="govuk-body"><%= t('.add_all_income') %></p>
     <ol class="app-task-list">
 
-      <% @legal_aid_application.transaction_types.credits.each_with_index do |tt, index| %>
+      <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
 
         <%= render partial: 'income_type_item',
                    locals: {
-                     name: tt.name,
+                     name: transaction_type.name,
                      number: index + 1,
                      link_text: t('.select')
                    } %>
