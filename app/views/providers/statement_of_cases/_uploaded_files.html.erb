@@ -15,13 +15,13 @@
       <td class="govuk-table__cell no-wrap"><%= number_to_human_size(file.blob.byte_size) %></td>
       <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
       <td class="govuk-table__cell">
-        <%= form_tag(
+        <%= button_to(
+              t('.delete'),
               providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
-              method: :delete
-            ) do %>
-          <%= hidden_field_tag :original_file_id, file.id %>
-          <%= submit_tag t('.delete'), class: 'button-as-link' %>
-        <% end %>
+              method: :delete,
+              class: 'button-as-link',
+              params: { original_file_id: file.id }
+            ) %>
       </td>
     </tr>
   <% end %>
