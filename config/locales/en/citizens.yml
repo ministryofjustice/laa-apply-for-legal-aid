@@ -29,12 +29,15 @@ en:
           outstanding_mortgage: Outstanding mortgage amount
           own_home: Property owned
           percentage_home: Percentage owned
-          property: Property
           property_value: Property value
           restrictions: Do any restrictions apply?
           savings_and_investments: Savings and investments
           shared_ownership: Owned with anyone else
+          heading: Property, savings and other assets
         h1-heading: Check your answers
+        merits:
+          heading: Merits assessment
+          text: You will now need to complete the merits assessment for the proceeding you are applying for.
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.

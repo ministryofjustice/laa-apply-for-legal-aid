@@ -126,5 +126,13 @@ RSpec.describe 'citizen other assets requests', type: :request do
         expect(response.body).to include I18n.t('citizens.other_assets.show.h1-heading')
       end
     end
+
+    context 'while checking answers' do
+      let(:application) { create :legal_aid_application, :checking_answers, :with_applicant }
+
+      it 'redirects to the "restrictions" page' do
+        expect(response).to redirect_to(citizens_restrictions_path)
+      end
+    end
   end
 end

@@ -24,22 +24,22 @@ module Flow
           path: ->(_) { urls.citizens_shared_ownership_path },
           forward: ->(application) { application.shared_ownership? ? :percentage_homes : :savings_and_investments },
           carry_on_sub_flow: ->(application) { application.shared_ownership? },
-          check_answers: :check_answers
+          check_answers: :restrictions
         },
         percentage_homes: {
           path: ->(_) { urls.citizens_percentage_home_path },
           forward: :savings_and_investments,
-          check_answers: :check_answers
+          check_answers: :restrictions
         },
         savings_and_investments: {
           path: ->(_) { urls.citizens_savings_and_investment_path },
           forward: :other_assets,
-          check_answers: :check_answers
+          check_answers: ->(application) { application.savings_amount? ? :restrictions : :check_answers }
         },
         other_assets: {
           path: ->(_) { urls.citizens_other_assets_path },
           forward: ->(application) { application.own_capital? ? :restrictions : :check_answers },
-          check_answers: :check_answers
+          check_answers: ->(application) { application.other_assets? ? :restrictions : :check_answers }
         },
         restrictions: {
           path: ->(_) { urls.citizens_restrictions_path },
@@ -48,6 +48,10 @@ module Flow
         },
         check_answers: {
           path: ->(_) { urls.citizens_check_answers_path },
+          forward: :merits_assessments
+        },
+        merits_assessments: {
+          path: 'citizens_merits_assessment_path',
           forward: :application_submitted
         },
         application_submitted: {

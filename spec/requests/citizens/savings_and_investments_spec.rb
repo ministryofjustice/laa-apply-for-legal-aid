@@ -73,9 +73,9 @@ RSpec.describe 'citizen savings and investments', type: :request do
     context 'while checking answers' do
       before { application.check_citizen_answers! }
 
-      it 'redirects to the "check answers" page' do
+      it 'redirects to the "restrictions" page' do
         subject
-        expect(response).to redirect_to(citizens_check_answers_path)
+        expect(response).to redirect_to(citizens_restrictions_path)
       end
     end
   end
