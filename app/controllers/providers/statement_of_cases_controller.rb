@@ -56,16 +56,20 @@ module Providers
     end
 
     def delete_original_file
-      file = statement_of_case.original_files.find_by(id: params[:original_file_id])
+      file = statement_of_case.original_files.find_by(id: original_file_id)
       if file
         file.purge
       else
-        Rails.logger.error "Unable to remove original file. Not found: #{params[:original_file_id]}"
+        Rails.logger.error "Unable to remove original file. Not found: #{original_file_id}"
       end
     end
 
     def delete_pdf_file
-      PdfFile.where(original_file_id: params[:original_file_id]).destroy_all
+      PdfFile.where(original_file_id: original_file_id).destroy_all
+    end
+
+    def original_file_id
+      params[:original_file_id]
     end
   end
 end
