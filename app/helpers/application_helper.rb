@@ -60,8 +60,4 @@ module ApplicationHelper
   def list_from_translation_path(translation_path)
     render 'shared/forms/list_items', translation_path: translation_path
   end
-
-  def translation_exists_for?(key)
-    !/^translation missing/.match? I18n.t(key)
-  end
 end

@@ -28,25 +28,17 @@ class TransactionType < ApplicationRecord
 
   def self.populate
     populate_records
-    populate_sort_order(:credit, 1000)
-    populate_sort_order(:debit, 2000)
   end
 
   def self.populate_records
-    existing = pluck(:name).map(&:to_sym)
-    NAMES.each do |operation, names|
-      (names - existing).each { |name| create!(name: name, operation: operation) }
+    NAMES.each_with_index do |(operation, names), op_index|
+      names.each_with_index do |name, index|
+        start_number = (op_index * 1000) + (index * 10)
+        transaction_type = find_or_initialize_by(name: name, operation: operation)
+        transaction_type.update! sort_order: start_number
+      end
     end
   end
-
-  def self.populate_sort_order(operation, start_number)
-    NAMES[operation].each_with_index do |name, index|
-      tt = TransactionType.find_by(name: name)
-      tt.update(sort_order: start_number + (index * 100))
-    end
-  end
-
-  private_class_method :populate_records, :populate_sort_order
 
   def label_name
     I18n.t("transaction_types.names.#{name}")
