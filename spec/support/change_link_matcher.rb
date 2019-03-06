@@ -13,8 +13,7 @@ RSpec::Matchers.define :have_change_link do |field_name, expected_link|
   end
 
   def extract_link(html, field_name)
-    document = Nokogiri::HTML.parse(html)
-    links = document.css("div#app-check-your-answers__#{field_name} a")
+    links = parsed_response_body(html).css("div#app-check-your-answers__#{field_name} a")
     links.first&.attr('href')
   end
 end

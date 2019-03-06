@@ -18,7 +18,6 @@ RSpec::Matchers.define :have_text_area_with_id_and_content do |expected_id, expe
   end
 
   def extract_text_area(html, id)
-    document = Nokogiri::HTML.parse(html)
-    document.css("textarea##{id}")
+    parsed_response_body(html).css("textarea##{id}")
   end
 end

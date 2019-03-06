@@ -8,7 +8,6 @@ RSpec.describe Citizens::TransactionsController, type: :request do
   let(:transaction_type) { create :transaction_type }
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-  let(:parsed_html) { Nokogiri::HTML(response.body) }
 
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -56,7 +55,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
 
       it 'shows selected transactions' do
         subject
-        checkbox = parsed_html.at_css("[value='#{bank_transaction_selected.id}']")
+        checkbox = parsed_response_body.at_css("[value='#{bank_transaction_selected.id}']")
         expect(checkbox[:checked]).to eq('checked')
       end
 
@@ -72,7 +71,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
 
       it 'does not show checkboxes for transactions already assigned to another transaction type' do
         subject
-        checkbox = parsed_html.at_css("[value='#{bank_transaction_other_type.id}']")
+        checkbox = parsed_response_body.at_css("[value='#{bank_transaction_other_type.id}']")
         expect(checkbox).to be_nil
         expect(unescaped_response_body).to include(bank_transaction_other_type.description)
       end

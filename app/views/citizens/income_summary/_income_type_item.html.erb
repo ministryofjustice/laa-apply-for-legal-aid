@@ -3,14 +3,14 @@
     <span class="app-task-list__section-number"><%= number %>. </span>
     <%= t("transaction_types.names.#{name}") %>
     <% if I18n.exists? "transaction_types.hints.#{name}" %>
-      <span id="nationality-1-item-hint" class="govuk-hint" style="margin-bottom: 0px">
+      <span class="govuk-hint" style="margin-bottom: 0px">
         <%= t("transaction_types.hints.#{name}") %>
       </span>
     <% end %>
   </h2>
   <ul class="app-task-list__items">
     <li class="app-task-list__item" id="<%= "list-item-#{name}" %>">
-      <%= link_to link_text, citizens_transactions_path(transaction_type: name), class: 'govuk-body', 'aria-describedby' => 'eligibility-completed' %>
+      <%= link_to link_text, citizens_transactions_path(transaction_type: name), class: 'govuk-body' %>
     </li>
   </ul>
 </li>

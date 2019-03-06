@@ -13,8 +13,7 @@ RSpec::Matchers.define :have_back_link do |expected|
   end
 
   def extract_back_link(html)
-    document = Nokogiri::HTML.parse(html)
-    atag = document.css('a.govuk-back-link').first
+    atag = parsed_response_body(html).css('a.govuk-back-link').first
     atag.nil? ? nil : atag.attr('href')
   end
 end
