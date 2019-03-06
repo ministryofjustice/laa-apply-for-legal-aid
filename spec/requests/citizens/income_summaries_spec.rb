@@ -3,14 +3,17 @@ require 'rails_helper'
 RSpec.describe Citizens::IncomeSummaryController do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:secure_id) { legal_aid_application.generate_secure_id }
+  let(:salary) { create :transaction_type, name: 'salary', operation: 'credit' }
+  let(:benefits) { create :transaction_type, name: 'benefits', operation: 'credit' }
+  let(:maintenance) { create :transaction_type, name: 'maintenance_in', operation: 'credit' }
+  let(:pension) { create :transaction_type, name: 'pension', operation: 'credit' }
 
   before do
-    @salary = create :transaction_type, name: 'salary', operation: 'credit'
-    @benefits = create :transaction_type, name: 'benefits', operation: 'credit'
-    @maintenance = create :transaction_type, name: 'maintenance_in', operation: 'credit'
-    @pension = create :transaction_type, name: 'pension', operation: 'credit'
-
-    legal_aid_application.transaction_types = [@salary, @benefits]
+    salary
+    benefits
+    maintenance
+    pension
+    legal_aid_application.transaction_types = [salary, benefits]
     get citizens_legal_aid_application_path(secure_id)
   end
 
@@ -42,8 +45,8 @@ RSpec.describe Citizens::IncomeSummaryController do
 
     context 'all transaction types selected' do
       before do
-        legal_aid_application.transaction_types << @maintenance
-        legal_aid_application.transaction_types << @pension
+        legal_aid_application.transaction_types << maintenance
+        legal_aid_application.transaction_types << pension
       end
       it 'does not display an Add additional income types section' do
         get citizens_legal_aid_application_path(secure_id)
