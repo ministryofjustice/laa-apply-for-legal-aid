@@ -1,0 +1,35 @@
+<%= page_template page_title: t('.h1-heading'), template: :form do %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_respondent_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <div class="govuk-!-padding-bottom-7"></div>
+
+    <%
+      questions = %i[
+        understands_terms_of_court_order
+        warning_letter_sent
+        police_notified
+        bail_conditions_set
+      ].map do |attr|
+        OpenStruct.new(
+          title: t(".#{attr}"),
+          attribute: attr,
+          attribute_details: "#{attr}_details".to_sym,
+          show_details_when: 'false'
+        )
+      end
+
+      questions.each do |question|
+        question.show_details_when = nil if question.attribute == :bail_conditions_set
+      end
+    %>
+
+    <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form } %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

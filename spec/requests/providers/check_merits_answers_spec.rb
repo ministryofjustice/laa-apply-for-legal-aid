@@ -32,6 +32,10 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       it 'displays the correct questions' do
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.understands_terms_of_court_order'))
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.warning_letter_sent'))
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.police_notified'))
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.bail_conditions_set'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.client_received_legal_help'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.proceedings_currently_before_court'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.statement_of_case'))
@@ -41,12 +45,32 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       it 'displays the correct URLs for changing values' do
+        expect(response.body).to have_change_link(:understands_terms_of_court_order, providers_legal_aid_application_respondent_path(application, anchor: :understands_terms_of_court_order))
+        expect(response.body).to have_change_link(:warning_letter_sent, providers_legal_aid_application_respondent_path(application, anchor: :warning_letter_sent))
+        expect(response.body).to have_change_link(:police_notified, providers_legal_aid_application_respondent_path(application, anchor: :police_notified))
+        expect(response.body).to have_change_link(:bail_conditions_set, providers_legal_aid_application_respondent_path(application, anchor: :bail_conditions_set))
         expect(response.body).to have_change_link(:client_received_legal_help, providers_legal_aid_application_client_received_legal_help_path(application))
         expect(response.body).to have_change_link(:proceedings_currently_before_court, providers_legal_aid_application_proceedings_before_the_court_path(application))
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
         expect(response.body).to have_change_link(:estimated_legal_costs, providers_legal_aid_application_estimated_legal_costs_path(application))
         expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_prospects_path(application))
         expect(response.body).to have_change_link(:client_declaration, providers_legal_aid_application_merits_declaration_path(application))
+      end
+
+      it 'displays the details of wether the respondent understands the terms of court order' do
+        expect(response.body).to include(application.respondent.understands_terms_of_court_order_details)
+      end
+
+      it 'displays the details of whether a warning letter has been sent' do
+        expect(response.body).to include(application.respondent.warning_letter_sent_details)
+      end
+
+      it 'displays the details of whether the police has been notified' do
+        expect(response.body).to include(application.respondent.police_notified_details)
+      end
+
+      it 'displays the details of whether the bail conditions have been set' do
+        expect(response.body).to include(application.respondent.bail_conditions_set_details)
       end
 
       context 'client has not received legal help' do

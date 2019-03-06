@@ -1,4 +1,7 @@
 ---
+true_false: &true_false
+  'false': 'No'
+  'true': 'Yes'
 en:
   helpers:
     hint:
@@ -18,20 +21,31 @@ en:
     label:
       applicant:
         uses_online_banking:
-          'false': 'No'
-          'true': 'Yes'
+          <<: *true_false
       merits_assessment:
         application_purpose: Please give details of why your client is applying for legal aid
         client_received_legal_help:
-          'false': 'No'
-          'true': 'Yes'
+          <<: *true_false
         details_of_proceedings_before_the_court: Please give details.
         proceedings_before_the_court:
-          'false': 'No'
-          'true': 'Yes'
+          <<: *true_false
         success_prospect_details: Please explain why you believe legal aid should be granted
       other_assets_declaration:
         check_box_second_home: Second property or holiday home
         second_home_mortgage: Enter outstanding mortgage amount
         second_home_percentage: Enter percentage share you legally own
         second_home_value: Enter estimated value
+      respondent:
+        understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
+        warning_letter_sent_details: Tell us why a warning letter has not been sent
+        police_notified_details: Tell us why the police have not been notified
+        bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
+        understands_terms_of_court_order:
+          <<: *true_false
+        warning_letter_sent:
+          <<: *true_false
+        police_notified:
+          <<: *true_false
+        bail_conditions_set:
+          <<: *true_false
+

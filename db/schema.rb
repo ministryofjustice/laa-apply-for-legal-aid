@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_141732) do
+ActiveRecord::Schema.define(version: 2019_03_07_104610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -300,6 +300,21 @@ ActiveRecord::Schema.define(version: 2019_03_01_141732) do
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
+  create_table "respondents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.boolean "understands_terms_of_court_order"
+    t.text "understands_terms_of_court_order_details"
+    t.boolean "warning_letter_sent"
+    t.text "warning_letter_sent_details"
+    t.boolean "police_notified"
+    t.text "police_notified_details"
+    t.boolean "bail_conditions_set"
+    t.text "bail_conditions_set_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_respondents_on_legal_aid_application_id"
+  end
+
   create_table "restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -359,6 +374,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_141732) do
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
+  add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"

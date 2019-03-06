@@ -194,6 +194,24 @@ en:
               greater_than_or_equal_to: Estimated vehicle value must be 0 or more
               not_a_number: Estimated vehicle value must be an amount of money, like 60,000
               too_many_decimals: Estimated vehicle value must not include more than 2 decimal numbers
+        respondent:
+          attributes:
+            understands_terms_of_court_order:
+              blank: Select yes if the respondent has the mental capacity to understand the terms of a court order
+            warning_letter_sent:
+              blank: Select yes if a warning letter has been sent to the respondent
+            police_notified:
+              blank: Select yes if the police have been notified
+            bail_conditions_set:
+              blank: Select yes if bail conditions have been set
+            understands_terms_of_court_order_details:
+              blank: Tell us why you think the court would enforce a breach of an order
+            warning_letter_sent_details:
+              blank: Tell us why a warning letter has not been sent
+            police_notified_details:
+              blank: Tell us why the police have not been notified
+            bail_conditions_set_details:
+              blank: Give details of the bail conditions
         savings_amount:
           attributes:
             cash:

@@ -67,7 +67,8 @@ en:
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         h1-heading: Check your answers
-        h2-heading: Merits assessment
+        merits-heading: Merits assessment
+        respondent-heading: Respondent details
         items:
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
@@ -76,6 +77,10 @@ en:
           proceedings_currently_before_court: Proceedings currently before court
           prospects_of_success: Prospects of success
           statement_of_case: Statement of case
+          understands_terms_of_court_order: Does the respondent have the mental capacity to understand the terms of a court order?
+          warning_letter_sent: Has a warning letter been sent to the respondent?
+          police_notified: Have the police been notified?
+          bail_conditions_set: Have bail conditions been set?
     check_passported_answers:
       show:
         assets:
@@ -183,6 +188,13 @@ en:
         name: Name
         page_title: Your profile
         role: Role
+    respondents:
+      show:
+        h1-heading: Respondent details
+        understands_terms_of_court_order: Does the respondent have the mental capacity to understand the terms of a court order?
+        warning_letter_sent: Has a warning letter been sent to the respondent?
+        police_notified: Have the police been notified?
+        bail_conditions_set: Have bail conditions been set?
     restrictions:
       index:
         h1-heading: Do any restrictions apply to your client's property, savings or assets?
