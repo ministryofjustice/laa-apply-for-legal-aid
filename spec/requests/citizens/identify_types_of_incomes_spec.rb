@@ -20,6 +20,7 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
       income_types.map(&:label_name).each do |label|
         expect(unescaped_response_body).to include(label)
       end
+      expect(unescaped_response_body).not_to include('translation missing')
     end
   end
 

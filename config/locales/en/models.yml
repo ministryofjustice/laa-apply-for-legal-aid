@@ -18,7 +18,10 @@ en:
       maintenance_in: Maintenance payments
       maintenance_out: Maintenance payments (for children or to an ex-partner)
       pension: Pensions
+      property_or_lodger: Income from a property or lodger
       rent_or_mortgage: Rent or mortgage
+      salary: Salary or wages
+      student_loan: Student loan or grant
     page_titles:
       benefits: Your benefits
       child_care: Your childcare costs to a nursery or registered provider
