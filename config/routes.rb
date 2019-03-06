@@ -22,9 +22,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'legal_aid_applications#index'
-    resources :legal_aid_applications, only: [:index] do
+    resources :legal_aid_applications, only: %i[index destroy] do
       delete :destroy_all, on: :collection
-      delete :destroy
     end
   end
 

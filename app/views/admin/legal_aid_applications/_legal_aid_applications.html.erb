@@ -21,7 +21,7 @@
             <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
             <td class="govuk-table__cell"><%= button_to(
                                                 t('.delete'),
-                                                admin_legal_aid_application_destroy_path(application.id),
+                                                admin_legal_aid_application_path(application.id),
                                                 method: :delete,
                                                 class: 'govuk-button destructive'
                                               ) if destroy_enabled? %></td>

@@ -83,7 +83,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe 'DELETE /admin/legal_aid_applications/:legal_aid_application_id/destroy' do
     let(:application) { legal_aid_applications.first }
-    subject { delete admin_legal_aid_application_destroy_path(application) }
+    subject { delete admin_legal_aid_application_path(application) }
 
     context 'when enabled' do
       before do

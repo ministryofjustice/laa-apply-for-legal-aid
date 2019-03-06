@@ -16,14 +16,8 @@ module Admin
     def destroy
       raise 'Legal Aid Application Destroy action disabled' unless destroy_enabled?
 
-      applicant_id = LegalAidApplication.find(legal_aid_application_id).applicant_id
-
-      if applicant_id
-        Applicant.destroy(applicant_id)
-      else
-        LegalAidApplication.destroy(legal_aid_application_id)
-      end
-
+      legal_aid_application.applicant&.destroy
+      legal_aid_application.destroy
       redirect_to action: :index
     end
 
@@ -37,8 +31,8 @@ module Admin
 
     private
 
-    def legal_aid_application_id
-      params[:legal_aid_application_id]
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(params[:id])
     end
   end
 end
