@@ -82,7 +82,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   end
 
   describe 'DELETE /admin/legal_aid_applications/:legal_aid_application_id/destroy' do
-    let(:application) { legal_aid_applications.first.id }
+    let(:application) { legal_aid_applications.first }
     subject { delete admin_legal_aid_application_destroy_path(application) }
 
     context 'when enabled' do
@@ -90,8 +90,9 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         allow(Rails.configuration.x.admin_portal).to receive(:allow_reset).and_return(true)
       end
 
-      it 'deletes the legal_aid_applications' do
+      it 'deletes the legal_aid_application' do
         expect { subject }.to change { LegalAidApplication.count }.by(-1)
+        expect(LegalAidApplication.all).not_to include(application)
       end
 
       it 'deletes the applicant too' do
