@@ -67,7 +67,7 @@ en:
       add_other_income:
         add_other_income: Add another type of income
       index:
-        add_all_income: Add all you income from your bank statements.
+        add_all_income: Add all your income from your bank statements.
         page_heading: Select your income
         select: Select from your bank statement
     information:
