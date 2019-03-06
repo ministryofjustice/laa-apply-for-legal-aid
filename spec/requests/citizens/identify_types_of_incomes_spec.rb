@@ -25,13 +25,6 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
   end
 
   describe 'PATCH /citizens/identify_types_of_income' do
-    let(:flow) do
-      Flow::BaseFlowService.flow_service_for(
-        :citizens,
-        legal_aid_application: legal_aid_application,
-        current_step: :identify_types_of_incomes
-      )
-    end
     let(:transaction_type_ids) { [] }
     let(:params) do
       {
@@ -47,7 +40,7 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
     end
 
     it 'redirects to the next step' do
-      expect(subject).to redirect_to(flow.forward_path)
+      expect(subject).to redirect_to(flow_forward_path)
     end
 
     context 'when transaction types selected' do
@@ -59,7 +52,7 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
       end
 
       it 'should redirect to the next step' do
-        expect(subject).to redirect_to(flow.forward_path)
+        expect(subject).to redirect_to(flow_forward_path)
       end
     end
   end

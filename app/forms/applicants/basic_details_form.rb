@@ -35,16 +35,14 @@ module Applicants
       )
     end
 
-    # rubocop:disable Lint/HandleExceptions
     def date_of_birth
       return @date_of_birth if @date_of_birth.present?
       return incomplete_date if dobs.any?(&:blank?)
 
       @date_of_birth = attributes[:date_of_birth] = Date.new(*dobs.map(&:to_i))
-    rescue ArgumentError
+    rescue ArgumentError # rubocop:disable Lint/HandleExceptions
       # if date can't be parsed set as nil
     end
-    # rubocop:enable Lint/HandleExceptions
 
     def normalise_national_insurance_number
       return if national_insurance_number.blank?

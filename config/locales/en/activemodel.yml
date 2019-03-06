@@ -91,6 +91,14 @@ en:
           attributes:
             code:
               blank: A proceeding must be selected
+        incident:
+          attributes:
+            occurred_on:
+              date_not_valid: Enter a valid date for date your client contacted you
+              date_is_in_the_future: Date your client contacted you should be in the past
+              blank: Enter details of the latest incident
+            details:
+              blank: Enter details of the latest incident
         legal_aid_application:
           attributes:
             outstanding_mortgage_amount:

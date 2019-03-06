@@ -160,7 +160,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       it 'redirects to Has your client received legal help for the matter?' do
-        expect(response).to redirect_to providers_legal_aid_application_respondent_path(application)
+        expect(response).to redirect_to flow_forward_path
       end
 
       it 'transitions to means_completed state' do

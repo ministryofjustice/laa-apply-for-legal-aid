@@ -4,7 +4,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
   let(:application) { create :application, :with_applicant }
   let(:application_id) { application.id }
   let(:secure_id) { application.generate_secure_id }
-  let(:next_flow_step) { citizens_identify_types_of_income_path }
+  let(:next_flow_step) { flow_forward_path }
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
