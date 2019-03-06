@@ -8,6 +8,7 @@
           <th class="govuk-table__header" scope="col"><%= t('.created_at') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
+          <th class="govuk-table__header" scope="col"></th>
         </tr>
       </thead>
 
@@ -18,6 +19,12 @@
             <td class="govuk-table__cell"><%= l(application.created_at, format: :date) %></td>
             <td class="govuk-table__cell"><%= application.application_ref %></td>
             <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
+            <td class="govuk-table__cell"><%= button_to(
+                                                t('.delete'),
+                                                admin_legal_aid_application_destroy_path(application.id),
+                                                method: :delete,
+                                                class: 'govuk-button destructive'
+                                              ) if destroy_enabled? %></td>
           </tr>
         </tbody>
       <% end %>
