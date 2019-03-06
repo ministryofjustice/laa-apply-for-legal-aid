@@ -1,0 +1,28 @@
+<%= page_template(page_title: t('.h1-heading')) do %>
+
+  <h2 class="govuk-heading-m">
+    <%= t('.h2-heading') %>
+  </h2>
+  <div class="selected-proceeding-types">
+    <%= render partial: 'shared/forms/proceedings_types/proceeding_type', collection: @legal_aid_application.proceeding_types, locals: { translation_path: 'providers.limitations.show' } %>
+  </div>
+
+  <div class="govuk-!-padding-bottom-6"></div>
+
+  <div class="govuk-body">
+    <p><strong><%= t('.form_of_service') %></strong> <%= t('.form_of_service_type') %></p>
+    <div class="govuk-!-padding-bottom-1"></div>
+    <p><strong><%= t('.incurrable_costs') %></strong> <%= t('.incurrable_costs_value') %></p>
+    <div class="govuk-!-padding-bottom-1"></div>
+    <p><strong><%= t('.allowable_work') %></strong> <%= t('.body') %></p>
+  </div>
+
+  <div class="govuk-!-padding-bottom-6"></div>
+
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_limitations_path,
+        method: :patch,
+        show_draft: true
+      ) %>
+
+<% end %>

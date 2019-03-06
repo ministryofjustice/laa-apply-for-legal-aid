@@ -18,7 +18,7 @@
         <%= t('.you_have_selected', count: pluralize(@legal_aid_application.proceeding_types.size, t('.proceeding'))) %>
       </h2>
       <div class="selected-proceeding-types">
-        <%= render partial: 'proceeding_type', collection: @legal_aid_application.proceeding_types %>
+        <%= render partial: 'shared/forms/proceedings_types/proceeding_type', collection: @legal_aid_application.proceeding_types, locals: { translation_path: 'providers.proceedings_types.create' } %>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@
 
 <div class="govuk-grid-row govuk-!-margin-top-0">
   <ul id="proceeding-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
-    <%= render partial: 'proceeding_type_form', collection: @proceeding_types, as: :proceeding_type %>
+    <%= render partial: 'shared/forms/proceedings_types/proceeding_type_form', collection: @proceeding_types, as: :proceeding_type %>
   </ul>
   <div class="govuk-grid-row no-proceeding-items" style="display: none;">
     <div class="govuk-grid-column-two-thirds">
