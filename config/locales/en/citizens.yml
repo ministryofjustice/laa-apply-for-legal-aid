@@ -59,6 +59,7 @@ en:
         maintenance_in_examples: For example, for children or from an ex-partner
         page_heading: Select any types of income you receive
         pension_examples: Include State, work or private pensions
+        financial_help_examples: For example, money from a family member for rent or bills
     identify_types_of_outgoings:
       show:
         hint: Do not select any if you make no regular payments.
