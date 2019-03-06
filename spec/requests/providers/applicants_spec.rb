@@ -33,14 +33,12 @@ RSpec.describe 'providers applicant requests', type: :request do
         end
       end
 
-      context 'has already got applicant infro' do
+      context 'has already got applicant info' do
         let(:applicant) { create(:applicant) }
-        let(:laa) { create(:legal_aid_application, applicant: applicant) }
-        let(:get_request) { get "/providers/applications/#{laa.id}/applicant" }
-        let(:provider) { laa.provider }
+        let(:application) { create(:legal_aid_application, applicant: applicant) }
 
         it 'display first_name' do
-          get_request
+          subject
           expect(unescaped_response_body).to include(applicant.first_name)
         end
       end

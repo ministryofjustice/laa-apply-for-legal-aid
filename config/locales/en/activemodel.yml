@@ -30,6 +30,11 @@ en:
         first_name: First name
         last_name: Last name
         national_insurance_number: National Insurance number
+      incident:
+        occurred_day: Day
+        occurred_month: Month
+        occurred_year: Year
+        details: Details of the incident
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home

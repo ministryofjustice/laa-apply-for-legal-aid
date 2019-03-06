@@ -1,3 +1,18 @@
 <%= page_template page_title: t('.h1-heading'), template: :form do %>
 
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_details_latest_incident_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <%= date_input_fields prefix: :occurred, field_name: :occurred_on, width: :full, form: form %>
+
+    <%= form.govuk_text_area :details, rows: 10 %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+
+  <% end %>
+
 <% end %>
