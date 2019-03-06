@@ -54,15 +54,6 @@ Feature: Citizen journey
     Then I click link 'Continue'
 
     Then I should be on a page showing "Do you own the home that you live in?"
-
-
-
-
-
-
-
-
-
     Then I should be on a page showing "Do you own the home that you live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click "Continue"

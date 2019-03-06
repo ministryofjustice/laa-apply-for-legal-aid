@@ -21,8 +21,6 @@ class TransactionType < ApplicationRecord
     ]
   }.freeze
 
-  TRANSACTION_TYPES_WITH_HINT_TEXT = %i[benefits].freeze
-
   scope :debits, -> { where(operation: :debit) }
   scope :credits, -> { where(operation: :credit) }
 

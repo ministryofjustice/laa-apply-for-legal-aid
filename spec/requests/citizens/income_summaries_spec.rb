@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'IndentifyTypesOfIncomesController' do
+RSpec.describe Citizens::IncomeSummaryController do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:secure_id) { legal_aid_application.generate_secure_id }
 
@@ -15,7 +15,7 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
   end
 
   describe 'GET /citizens/income_summary' do
-    before { get citizens_income_summary_path }
+    before { get citizens_income_summary_index_path }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -36,7 +36,7 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
 
     context 'not all transaction types selected' do
       it 'displays an Add additional income types section' do
-        expect(response.body).to include(I18n.t('citizens.income_summaries.add_other_income.add_other_income'))
+        expect(response.body).to include(I18n.t('citizens.income_summary.add_other_income.add_other_income'))
       end
     end
 

@@ -341,7 +341,6 @@ ActiveRecord::Schema.define(version: 2019_03_01_141732) do
     t.string "operation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "show_hint_text", default: false
     t.integer "sort_order"
   end
 

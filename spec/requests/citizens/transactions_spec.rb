@@ -106,7 +106,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
 
       it 'redirects to the next page' do
         subject
-        expect(response).to redirect_to citizens_income_summary_path
+        expect(response).to redirect_to citizens_income_summary_index_path
         follow_redirect!
         expect(response.body).to include('Select your income')
       end

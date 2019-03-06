@@ -63,10 +63,10 @@ en:
       show:
         hint: Do not select any if you make no regular payments.
         page_heading: Select any regular payments you make
-    income_summaries:
+    income_summary:
       add_other_income:
         add_other_income: Add another type of income
-      show:
+      index:
         add_all_income: Add all you income from your bank statements.
         page_heading: Select your income
         select: Select from your bank statement
