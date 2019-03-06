@@ -1,3 +1,5 @@
+@import "govuk-frontend/settings/all";
+
 #clear-search-div {
   padding-left: 15px;
   padding-top: 5px;
@@ -18,4 +20,15 @@ div.no-results {
 
 .change-postcode-link {
   padding-left: .8em;
+}
+
+.button-as-link {
+  background: none !important;
+  color: $govuk-link-colour;
+  border: none;
+  padding: 0! important;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  outline: none;
 }

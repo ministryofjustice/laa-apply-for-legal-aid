@@ -4,7 +4,7 @@ RSpec.describe PdfConverter do
   let(:statement_of_case) { create :statement_of_case }
   let(:file) { OpenStruct.new(name: 'hello_world.pdf', content_type: 'application/pdf') }
   let(:original_file) { statement_of_case.original_files.first }
-  let(:pdf_file) { PdfFile.last }
+  let(:pdf_file) { PdfFile.create(original_file_id: original_file.id) }
 
   before do
     filepath = "#{Rails.root}/spec/fixtures/files/documents/#{file.name}"
@@ -12,12 +12,12 @@ RSpec.describe PdfConverter do
   end
 
   subject do
-    described_class.call(original_file.id)
+    described_class.call(pdf_file.id)
   end
 
   describe '#call' do
     it 'creates a PdfFile record with the same base name' do
-      expect { subject }.to change { PdfFile.count } .by(1)
+      expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count } .by(1)
       expect(pdf_file.file.filename.base).to eq(original_file.filename.base)
       expect(pdf_file.file.content_type).to eq('application/pdf')
     end
@@ -34,7 +34,7 @@ RSpec.describe PdfConverter do
 
       it 'converts the file to pdf' do
         expect(Libreconv).to receive(:convert)
-        expect { subject }.to change { PdfFile.count } .by(1)
+        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count } .by(1)
         expect(pdf_file.file.filename.base).to eq(original_file.filename.base)
         expect(pdf_file.file.content_type).to eq('application/pdf')
       end

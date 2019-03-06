@@ -6,7 +6,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
   let(:provider) { legal_aid_application.provider }
   let(:soc) { nil }
 
-  describe 'GET providers/proceedings_before_the_court' do
+  describe 'GET /providers/applications/:legal_aid_application_id/statement_of_case' do
     subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
 
     context 'when the provider is not authenticated' do
@@ -45,7 +45,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
     end
   end
 
-  describe 'PATCH providers/proceedings_before_the_court' do
+  describe 'PATCH /providers/applications/:legal_aid_application_id/statement_of_case' do
     let(:entered_text) { Faker::Lorem.paragraph(3) }
     let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.pdf', 'application/pdf') }
     let(:statement_of_case) { legal_aid_application.statement_of_case }
@@ -262,6 +262,60 @@ RSpec.describe 'provider statement of case requests', type: :request do
         subject
         expect(response.body).to include 'There is a problem'
         expect(response.body).to include 'You must choose at least one file'
+      end
+    end
+  end
+
+  describe 'DELETE /providers/applications/:legal_aid_application_id/statement_of_case' do
+    let(:statement_of_case) { create :statement_of_case, :with_attached_files }
+    let(:legal_aid_application) { statement_of_case.legal_aid_application }
+    let(:original_file) { statement_of_case.original_files.first }
+    let(:params) { { original_file_id: original_file.id } }
+
+    subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+
+    before do
+      login_as provider
+    end
+
+    it 'redirects to show' do
+      subject
+      expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+    end
+
+    it 'deletes the file' do
+      expect { subject }.to change { ActiveStorage::Attachment.count }.by(-1)
+      expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(false)
+    end
+
+    context 'when file not found' do
+      let(:params) { { original_file_id: :unknown } }
+
+      it 'redirects to show' do
+        subject
+        expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+      end
+
+      it 'leaves the file in place' do
+        expect { subject }.not_to change { ActiveStorage::Attachment.count }
+        expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(true)
+      end
+    end
+
+    context 'when a PDF exists' do
+      let(:pdf_file) { PdfFile.find_or_create_by(original_file_id: original_file.id) }
+      before { PdfConverter.call(pdf_file.id) }
+
+      it 'deletes the PdfFile' do
+        expect { subject }.to change { PdfFile.count }.by(-1)
+      end
+
+      it 'deletes original files attachment' do
+        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'original_files').count }.by(-1)
+      end
+
+      it 'deletes the PdfFile file attachment' do
+        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count }.by(-1)
       end
     end
   end
