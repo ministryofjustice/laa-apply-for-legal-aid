@@ -2,6 +2,7 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps
       STEPS = {
+        merits_start: :client_received_legal_helps,
         client_received_legal_helps: {
           path: ->(application) { urls.providers_legal_aid_application_client_received_legal_help_path(application) },
           forward: :proceedings_before_the_courts,

@@ -146,6 +146,11 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(legal_aid_application.reload.means_completed?).to be_truthy
     end
 
+    it 'should change the provider step to merits_start' do
+      subject
+      expect(legal_aid_application.reload.provider_step).to eq('merits_start')
+    end
+
     it 'syncs the application' do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       subject

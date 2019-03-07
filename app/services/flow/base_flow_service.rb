@@ -39,6 +39,11 @@ module Flow
       path(current_step)
     end
 
+    def start_path(step)
+      start_step = steps[step]
+      steps[start_step][:path].call(legal_aid_application)
+    end
+
     private
 
     def checking_answers?
