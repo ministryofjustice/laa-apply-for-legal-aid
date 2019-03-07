@@ -238,18 +238,18 @@ RSpec.describe 'provider statement of case requests', type: :request do
         expect(statement_of_case.original_files.first).to be_present
       end
 
-      it 'redirects to provider applications home page' do
+      it 'redirects to provider draft endpoint' do
         subject
-        expect(response).to redirect_to providers_legal_aid_applications_path
+        expect(response).to redirect_to provider_draft_endpoint
       end
 
       context 'nothing specified' do
         let(:entered_text) { '' }
         let(:original_file) { nil }
 
-        it 'redirects to provider applications home page' do
+        it 'redirects to provider draft endpoint' do
           subject
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          expect(response).to redirect_to provider_draft_endpoint
         end
       end
     end

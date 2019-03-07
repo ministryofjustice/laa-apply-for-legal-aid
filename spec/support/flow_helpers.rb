@@ -15,4 +15,8 @@ module FlowHelpers
     )
     flow.forward_path
   end
+
+  def provider_draft_endpoint
+    __send__(Providers::Draftable::ENDPOINT)
+  end
 end

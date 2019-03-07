@@ -232,6 +232,13 @@ Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   fill_in('dob_year', with: dob_year)
 end
 
+Then('I enter the occurred on date of {int} days ago') do |number|
+  date = number.days.ago
+  fill_in('occurred_day', with: date.day)
+  fill_in('occurred_month', with: date.month)
+  fill_in('occurred_year', with: date.year)
+end
+
 Then(/^I see a notice confirming an e-mail was sent to the citizen$/) do
   expect(page).to have_content('Application completed. An e-mail will be sent to the citizen.')
 end
