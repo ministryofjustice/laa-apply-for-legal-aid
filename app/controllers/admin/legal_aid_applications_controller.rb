@@ -13,6 +13,14 @@ module Admin
       redirect_to action: :index
     end
 
+    def destroy
+      raise 'Legal Aid Application Destroy action disabled' unless destroy_enabled?
+
+      legal_aid_application.applicant&.destroy
+      legal_aid_application.destroy
+      redirect_to action: :index
+    end
+
     protected
 
     # Note this action uses the mock_saml setting to determine if it should be enabled
@@ -20,5 +28,11 @@ module Admin
       Rails.configuration.x.admin_portal.allow_reset
     end
     helper_method :destroy_enabled?
+
+    private
+
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(params[:id])
+    end
   end
 end
