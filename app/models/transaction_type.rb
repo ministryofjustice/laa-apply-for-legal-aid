@@ -1,4 +1,6 @@
 class TransactionType < ApplicationRecord
+  default_scope { order(:sort_order) }
+
   # Note that names should be unique across the whole of NAMES - so both credit and debit
   NAMES = {
     credit: %i[
@@ -23,9 +25,16 @@ class TransactionType < ApplicationRecord
   scope :credits, -> { where(operation: :credit) }
 
   def self.populate
-    existing = pluck(:name).map(&:to_sym)
-    NAMES.each do |operation, names|
-      (names - existing).each { |name| create!(name: name, operation: operation) }
+    populate_records
+  end
+
+  def self.populate_records
+    NAMES.each_with_index do |(operation, names), op_index|
+      names.each_with_index do |name, index|
+        start_number = (op_index * 1000) + (index * 10)
+        transaction_type = find_or_initialize_by(name: name, operation: operation)
+        transaction_type.update! sort_order: start_number
+      end
     end
   end
 

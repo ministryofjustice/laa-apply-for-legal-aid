@@ -1,0 +1,7 @@
+---
+en:
+  api:
+    errors:
+      codes:
+        blank: blank
+        invalid: invalid

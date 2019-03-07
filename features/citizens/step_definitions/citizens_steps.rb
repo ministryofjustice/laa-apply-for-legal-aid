@@ -40,8 +40,38 @@ Given('I complete the citizen journey as far as check your answers') do
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click "Continue"
+
+    # Select the different types of income that you receive
+    #
     Then I should be on a page showing "Select any types of income you receive"
+    Then I select "Salary or wages"
+    Then I select "Benefits"
     Then I click "Save and continue"
+
+    # Show the page showing the different types of income you have selected with a
+    # link for each one to select those items from the transaction list
+    #
+    Then I should be on a page showing "Select your income"
+    Then I should be on a page showing "Salary or wages"
+    Then I should be on a page showing "Benefits"
+
+
+    # select salary, show all the transactions, click Continue and abe taken back to the
+    # same page
+    Then I click on the Select from your bank statement link for income type "Salary"
+    Then I should be on a page showing "Your salary or wage payments"
+    Then I click "Continue"
+    Then I should be on a page showing "Select your income"
+
+    # select benefits, show all the transactions, click Continue and abe taken back to the
+    # same page
+    Then I click on the Select from your bank statement link for income type "Benefits"
+    Then I should be on a page showing "Your benefits"
+    Then I click "Continue"
+
+    Then I should be on a page showing "Select your income"
+    Then I click link 'Continue'
+
     Then I should be on a page showing "Do you own the home that you live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click "Continue"
