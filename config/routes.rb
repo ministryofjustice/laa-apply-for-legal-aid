@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     resource :identify_types_of_income, only: %i[show update]
     resource :identify_types_of_outgoing, only: %i[show update]
     resources :income_summary, only: :index
+    resources :outgoings_summary, only: :index
     resource :transactions, only: [] do
       get '/:transaction_type', to: 'transactions#show', as: ''
       patch '/:transaction_type', to: 'transactions#update'

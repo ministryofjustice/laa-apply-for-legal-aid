@@ -12,7 +12,11 @@ module Flow
         },
         identify_types_of_outgoings: {
           # path: ->(_) { urls.citizens_identify_types_of_outgoing_path }, # TODO: implement when navigation from preceding page is required
-          forward: :own_homes # TODO: replace with correct page when known
+          forward: :outgoings_summary
+        },
+        outgoings_summary: {
+          path: ->(_) { urls.citizens_outgoings_summary_index_path },
+          forward: :own_homes
         },
         transactions: {
           forward: :income_summary
