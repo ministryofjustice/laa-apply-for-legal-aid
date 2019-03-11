@@ -24,7 +24,7 @@
     <% end %>
   <% else %>
     <%= check_answer_link(
-          name: name,
+          name: "#{name}_no_link",
           url: url,
           question: question,
           answer: t('generic.none_declared')
