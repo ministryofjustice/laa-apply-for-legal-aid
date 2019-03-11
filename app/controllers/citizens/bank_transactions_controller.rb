@@ -4,7 +4,7 @@ module Citizens
     before_action :authenticate_applicant!
 
     def remove_transation_type
-      bank_transaction.update transaction_type: nil
+      bank_transaction.update! transaction_type: nil
       redirect_back fallback_location: citizens_identify_types_of_income_path
     end
 
