@@ -9,7 +9,6 @@ module Citizens
 
     def continue
       legal_aid_application.complete_means! unless legal_aid_application.means_completed?
-      legal_aid_application.update!(provider_step: :merits_start)
       go_forward
     end
 

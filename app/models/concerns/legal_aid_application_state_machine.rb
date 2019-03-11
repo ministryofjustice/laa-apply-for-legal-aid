@@ -50,7 +50,10 @@ module LegalAidApplicationStateMachine
 
       event :complete_means do
         transitions from: :checking_citizen_answers, to: :means_completed,
-                    after: -> { CleanupCapitalAttributes.call(self) }
+                    after: -> do
+                      CleanupCapitalAttributes.call(self)
+                      update!(provider_step: :client_received_legal_helps)
+                    end
         transitions from: :checking_passported_answers, to: :means_completed
       end
 

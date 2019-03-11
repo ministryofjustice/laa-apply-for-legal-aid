@@ -85,11 +85,9 @@ RSpec.describe Flow::BaseFlowService do
     let(:forward) { :forward }
     let(:carry_on_sub_flow) { true }
     let(:check_answers) { :check_answers }
-    let(:merits_start) { :merits_start }
     let(:forward_url) { :forward_url }
     let(:steps) do
       {
-        merits_start => current_step,
         current_step => {
           path: path,
           forward: forward,
@@ -119,13 +117,6 @@ RSpec.describe Flow::BaseFlowService do
         it 'passes in the legal aid application' do
           expect(subject.current_path).to eq(legal_aid_application)
         end
-      end
-    end
-
-    describe '#start_path' do
-      let(:path) { proc { 'url' } }
-      it 'returns path' do
-        expect(subject.start_path(merits_start)).to eq('url')
       end
     end
 
