@@ -2,21 +2,19 @@
 
   <p class="govuk-body"><%= t('.add_all_income') %></p>
     <ol class="app-task-list">
-
       <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
-
-        <%= render partial: 'income_type_item',
-                   locals: {
-                     name: transaction_type.name,
-                     number: index + 1,
-                     link_text: t('.select')
-                   } %>
+        <%= render(
+              'income_type_item',
+              name: transaction_type.name,
+              number: index + 1,
+              link_text: t('.select'),
+              bank_transactions: @bank_transactions[transaction_type]
+            ) %>
       <% end %>
 
       <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
         <%= render partial: 'add_other_income' %>
       <% end %>
-
     </ol>
 
   <%= link_to t('generic.continue'), forward_path, class: 'govuk-button govuk-button', id: 'continue' %>

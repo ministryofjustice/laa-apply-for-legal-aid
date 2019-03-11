@@ -180,7 +180,7 @@ end
 
 Then('I click on the Select from your bank statement link for income type {string}') do |income_type|
   income_type.downcase!
-  within "#list-item-#{income_type}" do
+  within "#income-type-#{income_type}" do
     click_link('Select from your bank statement')
   end
 end

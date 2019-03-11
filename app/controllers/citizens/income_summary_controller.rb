@@ -5,6 +5,7 @@ module Citizens
 
     def index
       legal_aid_application
+      @bank_transactions = legal_aid_application.bank_transactions.by_type
     end
   end
 end

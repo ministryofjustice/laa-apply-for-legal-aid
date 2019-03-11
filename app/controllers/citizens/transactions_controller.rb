@@ -31,7 +31,7 @@ module Citizens
     end
 
     def set_selection
-      BankTransaction
+      bank_transactions
         .where(id: transaction_ids_to_select)
         .update_all(transaction_type_id: transaction_type.id)
     end
