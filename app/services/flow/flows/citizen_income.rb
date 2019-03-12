@@ -8,10 +8,10 @@ module Flow
         },
         income_summary: {
           path: ->(_) { urls.citizens_income_summary_index_path },
-          forward: :own_homes
+          forward: :identify_types_of_outgoings
         },
         identify_types_of_outgoings: {
-          # path: ->(_) { urls.citizens_identify_types_of_outgoing_path }, # TODO: implement when navigation from preceding page is required
+          path: ->(_) { urls.citizens_identify_types_of_outgoing_path },
           forward: :outgoings_summary
         },
         outgoings_summary: {
