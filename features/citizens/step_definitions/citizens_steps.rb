@@ -50,7 +50,7 @@ Given('I complete the citizen journey as far as check your answers') do
   steps %(Then I should be on a page showing "Check your answers")
 end
 
-Given("the application has the restriction {string}") do |restriction_name|
+Given('the application has the restriction {string}') do |restriction_name|
   restriction = Restriction.find_or_create_by(name: restriction_name)
   create(
     :legal_aid_application_restriction,
@@ -59,7 +59,6 @@ Given("the application has the restriction {string}") do |restriction_name|
   )
 end
 
-Given("{string} savings of {int}") do |savings_method, amount|
+Given('{string} savings of {int}') do |savings_method, amount|
   @legal_aid_application.savings_amount.update!(savings_method.to_sym => amount)
 end
-

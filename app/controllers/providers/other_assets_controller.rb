@@ -14,7 +14,7 @@ module Providers
     private
 
     def declaration
-      @declaration ||= legal_aid_application.other_assets_declaration
+      @declaration ||= legal_aid_application.other_assets_declaration || legal_aid_application.create_other_assets_declaration!
     end
 
     def form_params

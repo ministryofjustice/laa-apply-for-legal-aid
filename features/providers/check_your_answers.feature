@@ -146,9 +146,6 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
       And the answer for 'Property value' should be '£500,000.00'
-      And the answer for 'Outstanding mortgage' should be '£100,000.00'
-      And the answer for 'Shared ownership' should be 'Yes, a partner or ex-partner'
-      And the answer for 'Percentage home' should be '50.00%'
 
     @javascript @vcr
     Scenario: I want to remove property details via the capital check your answers page
@@ -161,24 +158,22 @@ Feature: Checking answers backwards and forwards
       And the answer for 'Own home' should be 'No'
 
     @javascript @vcr
-    Scenario: I want to remove savings via the capital check your answers page
+    Scenario: I want to view savings via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Savings and investments'
       Then I should be on a page showing 'Does your client have any savings and investments?'
-      Then I deselect 'Cash savings'
+      Then I click 'Continue'
       Then I click 'Continue'
       Then I should be on a page showing 'Check your answers'
-      And the answer for 'Savings and investments' should be 'None declared'
 
     @javascript @vcr
-    Scenario: I want to remove other assets via the capital check your answers page
+    Scenario: I want to view other assets via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Other assets'
       Then I should be on a page showing 'Does your client have any of the following?'
-      Then I deselect 'Land'
+      Then I click 'Continue'
       Then I click 'Continue'
       Then I should be on a page showing 'Check your answers'
-      And the answer for 'Other assets' should be 'None declared'
 
     @javascript @vcr
     Scenario: I want to add restrictions via the capital check your answers page
