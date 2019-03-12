@@ -28,6 +28,8 @@ module Incidents
       # if date can't be parsed set as nil
     end
 
+    private
+
     def exclude_from_model
       occurred_on_fields
     end

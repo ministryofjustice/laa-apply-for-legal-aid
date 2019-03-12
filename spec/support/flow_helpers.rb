@@ -1,19 +1,16 @@
 module FlowHelpers
   # Takes the last request path and uses it to determine the next step from flows
-  # Makes some assumptions so may not work with every request
-  def flow_forward_path
-    path = request.path
-    parts = path.split('/').select(&:present?)
-    journey = parts.first.to_sym
-    step_index = journey == :citizens ? 1 : 3
-    current_step = parts[step_index].pluralize.to_sym
-    legal_aid_application = journey == :citizens ? LegalAidApplication.new : LegalAidApplication.find(parts[2])
-    flow = Flow::BaseFlowService.flow_service_for(
-      journey,
-      legal_aid_application: legal_aid_application,
-      current_step: current_step
-    )
-    flow.forward_path
+  def flow_forward_path # rubocop:disable Metrics/AbcSize
+    path_details = Rails.application.routes.recognize_path(request.path, method: request.method)
+    controller_details = path_details[:controller].split('/')
+    controller_module = controller_details.first.to_sym
+    controller_name = controller_details.last.to_sym
+    legal_aid_application_id = path_details[:legal_aid_application_id]
+    Flow::BaseFlowService.flow_service_for(
+      controller_module,
+      legal_aid_application: legal_aid_application_id ? LegalAidApplication.find(legal_aid_application_id) : LegalAidApplication.new,
+      current_step: controller_name
+    ).forward_path
   end
 
   def provider_draft_endpoint
