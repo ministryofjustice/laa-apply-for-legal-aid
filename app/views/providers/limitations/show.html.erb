@@ -7,15 +7,22 @@
     <%= render partial: 'shared/forms/proceedings_types/proceeding_type', collection: @legal_aid_application.proceeding_types, locals: { translation_path: 'providers.limitations.show' } %>
   </div>
 
+
   <div class="govuk-!-padding-bottom-6"></div>
 
   <div class="govuk-body">
     <p><strong><%= t('.form_of_service') %></strong> <%= t('.form_of_service_type') %></p>
     <div class="govuk-!-padding-bottom-1"></div>
-    <p><strong><%= t('.incurrable_costs') %></strong> <%= t('.incurrable_costs_value') %></p>
-    <div class="govuk-!-padding-bottom-1"></div>
-    <p><strong><%= t('.allowable_work') %></strong> <%= t('.body') %></p>
-  </div>
+
+    <% if @legal_aid_application.proceeding_types.with_ccms_code_starting("DA").any? %>
+      <p><strong><%= t('.incurrable_costs') %></strong> <%= t('.incurrable_costs_value') %></p>
+      <div class="govuk-!-padding-bottom-1"></div>
+      <p><strong><%= t('.allowable_work') %></strong> <%= t('.body') %></p>
+    <% else %>
+      <p><strong><%= t('.incurrable_costs') %></strong></p>
+      <div class="govuk-!-padding-bottom-1"></div>
+      <p><strong><%= t('.allowable_work') %></strong></p>
+    <% end %>
 
   <div class="govuk-!-padding-bottom-6"></div>
 

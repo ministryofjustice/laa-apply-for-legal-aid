@@ -1,9 +1,7 @@
 module Providers
   class LimitationsController < ProviderBaseController
     before_action :authorize_legal_aid_application
-
-    def show; end
-
+    
     def update
       continue_or_draft
     end
