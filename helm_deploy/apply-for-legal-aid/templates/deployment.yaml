@@ -26,6 +26,8 @@ spec:
             - name: clamav
               containerPort: 3310
               protocol: TCP
+          resources:
+{{ toYaml .Values.clamav.resources | indent 12 }}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
