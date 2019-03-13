@@ -99,11 +99,11 @@ en:
         incident:
           attributes:
             occurred_on:
-              date_not_valid: Enter a valid date for date your client contacted you
-              date_is_in_the_future: Date your client contacted you should be in the past
-              blank: Enter details of the latest incident
+              date_not_valid: Enter a date in the right format
+              date_is_in_the_future: Date your client contacted you must be in the past
+              blank: Enter the date your client contacted you about the incident
             details:
-              blank: Enter details of the latest incident
+              blank: Enter details of the incident
         legal_aid_application:
           attributes:
             outstanding_mortgage_amount:

@@ -227,14 +227,14 @@ end
 
 Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   dob_day, dob_month, dob_year = dob.split('-')
-  fill_in('dob_day', with: dob_day)
+  fill_in('date_of_birth', with: dob_day)
   fill_in('dob_month', with: dob_month)
   fill_in('dob_year', with: dob_year)
 end
 
 Then('I enter the occurred on date of {int} days ago') do |number|
   date = number.days.ago
-  fill_in('occurred_day', with: date.day)
+  fill_in('occurred_on', with: date.day)
   fill_in('occurred_month', with: date.month)
   fill_in('occurred_year', with: date.year)
 end

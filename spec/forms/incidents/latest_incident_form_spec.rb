@@ -24,7 +24,14 @@ RSpec.describe Incidents::LatestIncidentForm, type: :form do
     end
 
     context 'when occurred on is invalid' do
-      let(:occurred_on) { '55-55-1955' }
+      let(:params) do
+        {
+          details: details,
+          occurred_year: occurred_on.year.to_s,
+          occurred_month: '55',
+          occurred_day: occurred_on.day.to_s
+        }
+      end
       let(:error_locale) { 'occurred_on.date_not_valid' }
 
       it 'is invalid' do
@@ -69,6 +76,26 @@ RSpec.describe Incidents::LatestIncidentForm, type: :form do
       let(:occurred_on) { '' }
       let(:incident) { create :incident, occurred_on: nil }
       let(:error_locale) { 'occurred_on.blank' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+      end
+
+      it 'generates an error' do
+        expect(subject.errors[:occurred_on].join).to match(message)
+      end
+    end
+
+    context 'with an invalid partial date' do
+      let(:error_locale) { 'occurred_on.date_not_valid' }
+      let(:params) do
+        {
+          details: details,
+          occurred_year: occurred_on.year.to_s,
+          occurred_month: '',
+          occurred_day: occurred_on.day.to_s
+        }
+      end
 
       it 'is invalid' do
         expect(subject).to be_invalid

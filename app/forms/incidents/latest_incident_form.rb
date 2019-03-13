@@ -7,9 +7,9 @@ module Incidents
     attr_accessor :occurred_year, :occurred_month, :occurred_day, :details
     attr_writer :occurred_on
 
-    validates :details, presence: true, unless: :draft?
     validates :occurred_on, presence: true, unless: :draft_and_not_incomplete_date?
     validates :occurred_on, date: { not_in_the_future: true }, allow_nil: true
+    validates :details, presence: true, unless: :draft?
 
     def initialize(*args)
       super
@@ -24,8 +24,8 @@ module Incidents
       return incomplete_date if occurred_on_methods.any?(&:blank?)
 
       @occurred_on = attributes[:occurred_on] = Date.new(*occurred_on_methods.map(&:to_i))
-    rescue ArgumentError # rubocop:disable Lint/HandleExceptions
-      # if date can't be parsed set as nil
+    rescue ArgumentError
+      :invalid
     end
 
     private
@@ -53,8 +53,10 @@ module Incidents
     end
 
     def incomplete_date
-      @incomplete_date = true unless occurred_on_methods.all?(&:blank?)
-      nil
+      return nil if occurred_on_methods.all?(&:blank?)
+
+      @incomplete_date = true
+      :invalid
     end
 
     def incomplete_date?

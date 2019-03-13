@@ -1,7 +1,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-<%= width %>">
     <div class="govuk-form-group">
-      <div class="govuk-date-input__item <%= group_error_class %>" id="<%= field_name %>">
+      <div class="govuk-date-input__item <%= group_error_class %>">
 
         <%= content_tag(:label, t(".#{field_name}_label"), default: '', id: "#{field_name}-label".dasherize, class: ['govuk-label']) %>
         <% hint = t(".#{field_name}_hint", default: '') %>
@@ -15,7 +15,7 @@
 
         <fieldset class="govuk-fieldset">
           <div class="govuk-date-input">
-            <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_day", form: form %>
+            <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_day", form: form, use_parent_as_id: true %>
             <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_month", form: form %>
             <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_year", form: form %>
           </div>

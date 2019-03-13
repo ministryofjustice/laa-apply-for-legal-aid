@@ -10,7 +10,10 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
-    validates :email, :first_name, :last_name, :national_insurance_number, presence: true, unless: :draft?
+    # Note order of validation here determines order they appear on page
+    # So validations for each field need to be in order, and presence validations
+    # split so that they occur in the right order.
+    validates :first_name, :last_name, presence: true, unless: :draft?
 
     validates :date_of_birth, presence: true, unless: :draft_and_not_incomplete_date?
 
@@ -23,8 +26,10 @@ module Applicants
       allow_nil: true
     )
 
+    validates :national_insurance_number, presence: true, unless: :draft?
     validate :validate_national_insurance_number
 
+    validates :email, presence: true, unless: :draft?
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 
     def initialize(*args)
