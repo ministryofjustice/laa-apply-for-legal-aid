@@ -5,7 +5,12 @@ module Citizens
 
     def remove_transation_type
       bank_transaction.update! transaction_type: nil
-      redirect_back fallback_location: citizens_identify_types_of_income_path
+      respond_to do |format|
+        format.html do
+          redirect_back fallback_location: citizens_identify_types_of_income_path
+        end
+        format.json { head :ok }
+      end
     end
 
     private
