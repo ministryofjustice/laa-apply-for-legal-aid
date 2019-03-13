@@ -19,7 +19,7 @@ module Flow
           forward: :own_homes
         },
         transactions: {
-          forward: :income_summary
+          forward: :outgoings_summary
         }
       }.freeze
     end
