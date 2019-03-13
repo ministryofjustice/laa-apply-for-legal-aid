@@ -1,12 +1,12 @@
 module Providers
   class ApplicantsController < ProviderBaseController
     def show
-      authorize @legal_aid_application
+      authorize legal_aid_application
       @form = Applicants::BasicDetailsForm.new(model: applicant)
     end
 
     def update
-      authorize @legal_aid_application
+      authorize legal_aid_application
       @form = Applicants::BasicDetailsForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

@@ -106,6 +106,9 @@ en:
     client_received_legal_helps:
       show:
         h1-heading: Has your client received legal help for the matter?
+    details_latest_incidents:
+      show:
+        h1-heading: Enter details of the latest incident
     estimated_legal_costs:
       show:
         h1-heading: What are the estimated legal costs of doing the work?

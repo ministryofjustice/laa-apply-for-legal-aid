@@ -182,6 +182,15 @@ ActiveRecord::Schema.define(version: 2019_03_07_104610) do
     t.string "source"
   end
 
+  create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.date "occurred_on"
+    t.text "details"
+    t.uuid "legal_aid_application_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
+  end
+
   create_table "legal_aid_application_restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "restriction_id"

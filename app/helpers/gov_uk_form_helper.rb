@@ -54,6 +54,18 @@ module GovUkFormHelper
     content_tag :span, text, merge_with_class(args, 'govuk-error-message')
   end
 
+  def date_input_fields(prefix:, field_name:, form:, width: 'two-thirds')
+    group_error_class = form.object.errors[field_name].any? ? 'govuk-form-group--error' : ''
+    render(
+      'shared/forms/date_input_fields',
+      prefix: prefix,
+      field_name: field_name,
+      form: form,
+      width: width,
+      group_error_class: group_error_class
+    )
+  end
+
   # Adds or appends `class_text` to `args[:class]`. So:
   #   args = { id: 'thing' }
   #   merge_with_class(args, 'bar') => { class: 'bar', id: 'thing' }

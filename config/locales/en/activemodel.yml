@@ -30,6 +30,11 @@ en:
         first_name: First name
         last_name: Last name
         national_insurance_number: National Insurance number
+      incident:
+        occurred_day: Day
+        occurred_month: Month
+        occurred_year: Year
+        details: Details of the incident
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home
@@ -91,6 +96,14 @@ en:
           attributes:
             code:
               blank: A proceeding must be selected
+        incident:
+          attributes:
+            occurred_on:
+              date_not_valid: Enter a date in the right format
+              date_is_in_the_future: Date your client contacted you must be in the past
+              blank: Enter the date your client contacted you about the incident
+            details:
+              blank: Enter details of the incident
         legal_aid_application:
           attributes:
             outstanding_mortgage_amount:

@@ -4,8 +4,10 @@ module Providers
   # So usually depends on `Flowable` and `ApplicationDependable` being included
   # into the host controller
   module Draftable
+    ENDPOINT = :providers_legal_aid_applications_path
+
     def draft_target_endpoint
-      providers_legal_aid_applications_path
+      __send__(ENDPOINT)
     end
 
     def save_continue_or_draft(form)
