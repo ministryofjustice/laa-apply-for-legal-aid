@@ -14,6 +14,7 @@ en:
     home: Home
     information: Information
     'no': 'No'
+    menu: Menu
     none_declared: None declared
     remove: Remove
     save_and_continue: Save and continue
@@ -24,6 +25,7 @@ en:
     start_now: Start now
     submit: Submit
     total: Total
+    toggle_navigation: Show or hide Top Level Navigation
     undefined: Undefined
     upload_file: Attach a file
     view: View

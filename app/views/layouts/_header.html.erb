@@ -18,7 +18,7 @@
     </div>
     <div class="govuk-header__content">
       <%= home_link %>
-      <button type="button" role="button" class="govuk-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+      <%= menu_button unless user_header_link.nil? %>
       <nav>
         <%= user_header_link %>
       </nav>
