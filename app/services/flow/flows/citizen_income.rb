@@ -19,7 +19,9 @@ module Flow
           forward: :own_homes
         },
         transactions: {
-          forward: :outgoings_summary
+          path: ->(_) { urls.citizens_transactions_path },
+          forward: :income_summary
+          #  forward: :outgoings_summary
         }
       }.freeze
     end
