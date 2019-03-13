@@ -8,7 +8,6 @@ module Providers
 
     def update
       @form = MeritsAssessments::ClientReceivedLegalHelpForm.new(client_received_legal_help_params)
-
       render :show unless save_continue_or_draft(@form)
     end
 

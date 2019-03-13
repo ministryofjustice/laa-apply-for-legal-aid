@@ -146,6 +146,11 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(legal_aid_application.reload.means_completed?).to be_truthy
     end
 
+    it 'should change the provider step to client_received_legal_helps' do
+      subject
+      expect(legal_aid_application.reload.provider_step).to eq('client_received_legal_helps')
+    end
+
     it 'syncs the application' do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       subject
