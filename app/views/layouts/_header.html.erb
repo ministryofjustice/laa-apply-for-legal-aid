@@ -18,7 +18,7 @@
     </div>
     <div class="govuk-header__content">
       <%= home_link %>
-      <%= menu_button unless user_header_link.nil? %>
+      <%= menu_button if user_header_link %>
       <nav>
         <%= user_header_link %>
       </nav>
