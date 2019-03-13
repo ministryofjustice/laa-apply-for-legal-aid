@@ -52,83 +52,93 @@ Given('I start the journey as far as the applicant page') do
 end
 
 Given('I complete the journey as far as check your answers') do
-  steps %(
-    Given I start the journey as far as the applicant page
-    Then I enter name 'Test', 'User'
-    Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
-    Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
-    Then I am on the postcode entry page
-    Then I enter a postcode 'DA74NG'
-    Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
-    Then I search for proceeding 'Application for a care order'
-    Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Check your answers'
+  applicant = create(
+    :applicant,
+    first_name: 'Test',
+    last_name: 'User',
+    national_insurance_number: 'CB987654A',
+    date_of_birth: '03-04-1999'
   )
+  create(
+    :address,
+    address_line_one: '3',
+    address_line_two: 'LONSDALE ROAD',
+    city: 'BEXLEYHEATH',
+    postcode: 'DA7 4NG',
+    lookup_used: true,
+    applicant: applicant
+  )
+  proceeding_type = create(:proceeding_type)
+  legal_aid_application = create(
+    :legal_aid_application,
+    applicant: applicant,
+    proceeding_types: [proceeding_type]
+  )
+  login_as legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+  steps %(Then I should be on a page showing 'Check your answers')
 end
 
 Given('I complete the passported journey as far as check your answers') do
-  steps %(
-    Given I start the journey as far as the applicant page
-    Then I enter name 'Test', 'Walker'
-    Then I enter the date of birth '10-01-1980'
-    Then I enter national insurance number 'JA293483A'
-    Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
-    Then I am on the postcode entry page
-    Then I enter a postcode 'DA74NG'
-    Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
-    Then I search for proceeding 'Application for a care order'
-    Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Check your answers'
+  applicant = create(
+    :applicant,
+    first_name: 'Test',
+    last_name: 'Walker',
+    national_insurance_number: 'JA293483A',
+    date_of_birth: '10-01-1980',
+    email: 'test@test.com'
   )
+  create(
+    :address,
+    address_line_one: '3',
+    address_line_two: 'LONSDALE ROAD',
+    city: 'BEXLEYHEATH',
+    postcode: 'DA7 4NG',
+    lookup_used: true,
+    applicant: applicant
+  )
+  legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceeding_types,
+    applicant: applicant
+  )
+  login_as legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+  steps %(Then I should be on a page showing 'Check your answers')
 end
 
 Given('I complete the passported journey as far as capital check your answers') do
-  steps %(
-    Given I complete the passported journey as far as check your answers
-    Then I click "Continue"
-    Then I am on the benefit check results page
-    Then I see a notice saying that the citizen receives benefits
-    Then I click "Continue"
-    Then I should be on a page showing "Before you continue"
-    Then I click "Continue"
-    Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I choose "Yes, with a mortgage or loan"
-    Then I click "Continue"
-    Then I should be on a page showing "How much is your client's home worth?"
-    Then I fill "Property value" with "200000"
-    Then I click "Continue"
-    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
-    Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click "Continue"
-    Then I should be on a page showing "Does your client own their home with anyone else?"
-    Then I choose "Yes, a partner or ex-partner"
-    Then I click "Continue"
-    Then I should be on a page showing "What % share of their home does your client legally own?"
-    Then I fill "Percentage home" with "50"
-    Then I click "Continue"
-    Then I should be on a page showing "Does your client have any savings and investments?"
-    Then I select "Cash savings"
-    Then I fill "Cash" with "10000"
-    Then I click "Continue"
-    Then I should be on a page showing "Does your client have any of the following?"
-    Then I select "Land"
-    Then I fill "Land value" with "50000"
-    Then I click "Continue"
-    Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-    Then I select "Bankruptcy"
-    Then I select "Held overseas"
-    Then I click "Continue"
-    Then I should be on a page showing "Check your answers"
+  applicant = create(
+    :applicant,
+    first_name: 'Test',
+    last_name: 'Walker',
+    national_insurance_number: 'JA293483A',
+    date_of_birth: '10-01-1980',
+    email: 'test@test.com'
   )
+  create(
+    :address,
+    address_line_one: '3',
+    address_line_two: 'LONSDALE ROAD',
+    city: 'BEXLEYHEATH',
+    postcode: 'DA7 4NG',
+    lookup_used: true,
+    applicant: applicant
+  )
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_everything,
+    :with_proceeding_types,
+    :answers_checked,
+    applicant: applicant
+  )
+  login_as @legal_aid_application.provider
+  steps %(
+    Given the application has the restriction 'bankruptcy'
+    And the application has the restriction 'held_overseas'
+  )
+  visit(providers_legal_aid_application_check_passported_answers_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Check your answers')
 end
 
 When('the search for {string} is not successful') do |proceeding_search|

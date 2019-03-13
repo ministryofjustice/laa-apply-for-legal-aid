@@ -60,10 +60,6 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         expect { subject }.to change { LegalAidApplication.count }.by(1)
       end
 
-      it 'creates an associated other_assets_declaration' do
-        expect { subject }.to change { OtherAssetsDeclaration.count }.by(1)
-      end
-
       it 'redirects to applicant details page ' do
         subject
         expect(response).to redirect_to(providers_legal_aid_application_applicant_path(legal_aid_application))

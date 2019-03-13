@@ -85,7 +85,8 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to change property details via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Own home'
     Then I should be on a page showing 'Do you own the home that you live in?'
     Then I click 'Continue'
@@ -103,13 +104,11 @@ Feature: Citizen journey
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£500,000.00'
-    And the answer for 'Outstanding mortgage' should be '£100,000.00'
-    And the answer for 'Shared ownership' should be 'Yes, a partner or ex-partner'
-    And the answer for 'Percentage home' should be '50.00%'
 
   @javascript
   Scenario: I want to remove property details via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Own home'
     Then I should be on a page showing 'Do you own the home that you live in?'
     Then I choose 'No'
@@ -119,7 +118,8 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to return to the check your answers page without changing property details
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Own home'
     Then I should be on a page showing 'Do you own the home that you live in?'
     Then I click 'Continue'
@@ -134,15 +134,11 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-    And the answer for 'Property value' should be '£200,000.00'
-    And the answer for 'Outstanding mortgage' should be '£100,000.00'
-    And the answer for 'Shared ownership' should be 'Yes, a partner or ex-partner'
-    And the answer for 'Percentage home' should be '50.00%'
 
   @javascript
   Scenario: I want to change savings via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I fill 'Cash' with '1000'
@@ -155,7 +151,8 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to add savings via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I select 'Post Office, ISAs and other savings accounts'
@@ -168,18 +165,10 @@ Feature: Citizen journey
     And the answer for 'Savings and investments' should be '£5,000.00'
 
   @javascript
-  Scenario: I want to remove savings via the check your answers page
-    Given I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'Do you have any savings and investments?'
-    Then I deselect 'Cash savings'
-    Then I click 'Continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'None declared'
-
-  @javascript
   Scenario: I return to the check your answers page without changing savings
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And 'cash' savings of 100
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I click 'Continue'
@@ -191,7 +180,8 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to change other assets via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
     Then I should be on a page showing 'Do you have any of the following?'
     Then I fill 'Land value' with '1234.56'
@@ -204,7 +194,8 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to add other assets via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
     Then I should be on a page showing 'Do you have any of the following?'
     Then I select 'Timeshare'
@@ -217,30 +208,21 @@ Feature: Citizen journey
     And the answer for 'Other assets' should be '£10,000.00'
 
   @javascript
-  Scenario: I want to remove other assets via the check your answers page
-    Given I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Do you have any of the following?'
-    Then I deselect 'Land'
-    Then I click 'Continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Other assets' should be 'None declared'
-
-  @javascript
   Scenario: I return to the check your answers page without changing other assets
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
     Then I should be on a page showing 'Do you have any of the following?'
     Then I click 'Continue'
     Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Other assets' should be 'Land'
-    And the answer for 'Other assets' should be '£50,000.00'
 
   @javascript
   Scenario: I want to add restrictions via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And the application has the restriction 'bankruptcy'
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
     Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I select 'Restraint or freezing order'
@@ -250,7 +232,10 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to remove capital restrictions via the check your answers page
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And the application has the restriction 'bankruptcy'
+    And the application has the restriction 'held_overseas'
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
     Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I deselect 'Bankruptcy'
@@ -261,10 +246,10 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I return to the check your answers page without changing capital restrictions
-    Given I complete the citizen journey as far as check your answers
+    Given I have completed an application
+    And the application has the restriction 'held_overseas'
+    And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
     Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
     Then I click 'Continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Restrictions' should be 'Bankruptcy'
-    And the answer for 'Restrictions' should be 'Held overseas'
