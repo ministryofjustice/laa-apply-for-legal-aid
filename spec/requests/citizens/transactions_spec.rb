@@ -13,9 +13,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
     get citizens_legal_aid_application_path(secure_id)
   end
 
-  describe 'GET #citizens/transactions' do
-    subject { get citizens_transactions_path(transaction_type: transaction_type.name) }
-
+  shared_examples_for 'GET #citizens/transactions' do
     it 'returns http success' do
       subject
       expect(response).to have_http_status(:ok)
@@ -76,38 +74,69 @@ RSpec.describe Citizens::TransactionsController, type: :request do
         expect(unescaped_response_body).to include(bank_transaction_other_type.description)
       end
     end
+  end
 
-    describe 'PATCH #citizens/transactions' do
-      let!(:bank_transaction_A) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation, transaction_type: transaction_type }
-      let!(:bank_transaction_B) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
-      let!(:bank_transaction_other_applicant) { create :bank_transaction, operation: transaction_type.operation }
-      let(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant] }
-      let(:params) do
-        {
-          transaction_type: transaction_type.name,
-          transaction_ids: selected_transactions.pluck(:id)
-        }
+  describe 'GET #citizens/incoming_transactions' do
+    subject { get citizens_incoming_transactions_path(transaction_type: transaction_type.name) }
+
+    it_behaves_like 'GET #citizens/transactions'
+  end
+
+  describe 'GET #citizens/outgoing_transactions' do
+    subject { get citizens_outgoing_transactions_path(transaction_type: transaction_type.name) }
+
+    it_behaves_like 'GET #citizens/transactions'
+  end
+
+  shared_examples_for 'PATCH #citizens/transactions' do
+    it 'unselect the previously selected' do
+      expect { subject }.to change { bank_transaction_A.reload.transaction_type }.to(nil)
+    end
+
+    it 'saves the selected transactions' do
+      expect { subject }.to change { bank_transaction_B.reload.transaction_type }.from(nil).to(transaction_type)
+    end
+
+    it 'does not change other applicants transactions' do
+      expect { subject }.not_to change { bank_transaction_other_applicant.reload.transaction_type }
+    end
+  end
+
+  describe 'PATCH #citizens/transactions' do
+    let!(:bank_transaction_A) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation, transaction_type: transaction_type }
+    let!(:bank_transaction_B) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
+    let!(:bank_transaction_other_applicant) { create :bank_transaction, operation: transaction_type.operation }
+    let(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant] }
+    let(:params) do
+      {
+        transaction_type: transaction_type.name,
+        transaction_ids: selected_transactions.pluck(:id)
+      }
+    end
+
+    describe 'PATCH #citizens/incoming_transactions' do
+      subject { patch citizens_incoming_transactions_path(params) }
+
+      it_behaves_like 'PATCH #citizens/transactions'
+
+      it 'redirects to the next page' do
+        subject
+        expect(response).to redirect_to citizens_income_summary_index_path
+        follow_redirect!
+        expect(response.body).to include('Add all your income from')
       end
+    end
 
-      subject { patch citizens_transactions_path(params) }
+    describe 'PATCH #citizens/outgoing_transactions' do
+      subject { patch citizens_outgoing_transactions_path(params) }
 
-      it 'unselect the previously selected' do
-        expect { subject }.to change { bank_transaction_A.reload.transaction_type }.to(nil)
-      end
-
-      it 'saves the selected transactions' do
-        expect { subject }.to change { bank_transaction_B.reload.transaction_type }.from(nil).to(transaction_type)
-      end
-
-      it 'does not change other applicants transactions' do
-        expect { subject }.not_to change { bank_transaction_other_applicant.reload.transaction_type }
-      end
+      it_behaves_like 'PATCH #citizens/transactions'
 
       it 'redirects to the next page' do
         subject
         expect(response).to redirect_to citizens_outgoings_summary_index_path
         follow_redirect!
-        expect(response.body).to include('Add all your regular outgoing payments')
+        expect(response.body).to include('Select your payments')
       end
     end
   end

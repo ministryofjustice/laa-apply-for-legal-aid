@@ -37,14 +37,14 @@ Feature: Citizen journey
     Then I should be on a page showing "Salary or wages"
     Then I should be on a page showing "Benefits"
 
-    # select salary, show all the transactions, click Continue and abe taken back to the
+    # select salary, show all the transactions, click Continue and be taken back to the
     # same page
     Then I click on the add payments link for income type "Salary"
     Then I should be on a page showing "Your salary or wage payments"
     Then I click "Continue"
     Then I should be on a page showing "Select your income"
 
-    # select benefits, show all the transactions, click Continue and abe taken back to the
+    # select benefits, show all the transactions, click Continue and be taken back to the
     # same page
     Then I click on the add payments link for income type "Benefits"
     Then I should be on a page showing "Your benefits"
@@ -53,7 +53,22 @@ Feature: Citizen journey
     Then I should be on a page showing "Select your income"
     Then I click link 'Continue'
 
-    Then I should be on a page showing "Do you own the home that you live in?"
+    Then I should be on a page showing "Select any regular payments you make"
+    Then I select "Rent or mortgage"
+    Then I select "Council Tax"
+    Then I click "Save and continue"
+
+    Then I should be on a page showing "Select your payments"
+    Then I should be on a page showing "Rent or mortgage"
+    Then I should be on a page showing "Council Tax"
+
+    Then I click on the Select from your bank statement link for payment type "rent_or_mortgage"
+    Then I should be on a page showing "Rent or mortgage"
+    Then I should be on a page showing "Select all that apply"
+    Then I click "Continue"
+    Then I should be on a page showing "Select your payments"
+    Then I click link "Continue"
+
     Then I should be on a page showing "Do you own the home that you live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click "Continue"

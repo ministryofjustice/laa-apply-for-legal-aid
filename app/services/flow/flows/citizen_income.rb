@@ -18,10 +18,11 @@ module Flow
           path: ->(_) { urls.citizens_outgoings_summary_index_path },
           forward: :own_homes
         },
-        transactions: {
-          path: ->(_) { urls.citizens_transactions_path },
+        incoming_transactions: {
           forward: :income_summary
-          #  forward: :outgoings_summary
+        },
+        outgoing_transactions: {
+          forward: :outgoings_summary
         }
       }.freeze
     end
