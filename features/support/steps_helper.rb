@@ -29,3 +29,7 @@ end
 Then('I upload a pdf file') do
   attach_file('Attach a file', Rails.root.join('spec/fixtures/files/documents/hello_world.pdf'))
 end
+
+Then('I choose option {string}') do |field|
+  choose(field.parameterize(separator: '_'), allow_label_click: true)
+end

@@ -3,6 +3,7 @@ module Providers
     def show
       @merits = legal_aid_application.merits_assessment
       @statement_of_case = legal_aid_application.statement_of_case
+      @respondent = legal_aid_application.respondent || legal_aid_application.create_respondent!
       legal_aid_application.check_merits_answers! unless legal_aid_application.checking_merits_answers?
     end
 

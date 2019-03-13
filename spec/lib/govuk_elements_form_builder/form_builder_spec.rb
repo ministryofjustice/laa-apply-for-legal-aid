@@ -333,5 +333,19 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
         expect(h1.content).to eq(title)
       end
     end
+
+    context 'input_attributes are passed as parameters' do
+      let(:input_attribute) { { 'data-aria-controls' => 'details' } }
+      let(:input_attributes) { { true.to_s => input_attribute } }
+      let(:params) { [:uses_online_banking, options, input_attributes: input_attributes] }
+
+      it 'adds the attribute only to the right attribute' do
+        correct_radio_button = parsed_html.at_css('input[value="true"]')
+        other_radio_button   = parsed_html.at_css('input[value="false"]')
+        correct_radio_button['data-aria-controls'] = 'details'
+        expect(correct_radio_button['data-aria-controls']).to eq('details')
+        expect(other_radio_button['data-aria-controls']).to eq(nil)
+      end
+    end
   end
 end

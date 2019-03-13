@@ -4,7 +4,53 @@
     ) do %>
 
   <h2 class="govuk-heading-m">
-    <%= t '.h2-heading' %>
+    <%= t '.respondent-heading' %>
+  </h2>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :understands_terms_of_court_order,
+          url: providers_legal_aid_application_respondent_path(anchor: :understands_terms_of_court_order),
+          question: t('.items.understands_terms_of_court_order'),
+          answer: yes_no(@respondent.understands_terms_of_court_order)
+        ) %>
+  </dl>
+  <div class='govuk-body'><%= simple_format @respondent.understands_terms_of_court_order_details %></div>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :warning_letter_sent,
+          url: providers_legal_aid_application_respondent_path(anchor: :warning_letter_sent),
+          question: t('.items.warning_letter_sent'),
+          answer: yes_no(@respondent.warning_letter_sent)
+        ) %>
+  </dl>
+  <div class='govuk-body'><%= simple_format @respondent.warning_letter_sent_details %></div>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :police_notified,
+          url: providers_legal_aid_application_respondent_path(anchor: :police_notified),
+          question: t('.items.police_notified'),
+          answer: yes_no(@respondent.police_notified)
+        ) %>
+  </dl>
+  <div class='govuk-body'><%= simple_format @respondent.police_notified_details %></div>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :bail_conditions_set,
+          url: providers_legal_aid_application_respondent_path(anchor: :bail_conditions_set),
+          question: t('.items.bail_conditions_set'),
+          answer: yes_no(@respondent.bail_conditions_set)
+        ) %>
+  </dl>
+  <div class='govuk-body'><%= simple_format @respondent.bail_conditions_set_details %></div>
+
+  <div class="govuk-!-padding-bottom-6"></div>
+
+  <h2 class="govuk-heading-m">
+    <%= t '.merits-heading' %>
   </h2>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -12,7 +58,7 @@
           name: :client_received_legal_help,
           url: providers_legal_aid_application_client_received_legal_help_path,
           question: t('.items.client_received_legal_help'),
-          answer: @merits.client_received_legal_help ? 'Yes' : 'No'
+          answer: yes_no(@merits.client_received_legal_help)
         ) %>
   </dl>
 
@@ -23,7 +69,7 @@
           name: :proceedings_currently_before_court,
           url: providers_legal_aid_application_proceedings_before_the_court_path,
           question: t('.items.proceedings_currently_before_court'),
-          answer: @merits.proceedings_before_the_court ? 'Yes' : 'No'
+          answer: yes_no(@merits.proceedings_before_the_court)
         ) %>
   </dl>
 

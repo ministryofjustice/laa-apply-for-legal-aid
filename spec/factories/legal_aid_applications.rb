@@ -106,6 +106,10 @@ FactoryBot.define do
       statement_of_case { create :statement_of_case }
     end
 
+    trait :with_respondent do
+      respondent { create :respondent }
+    end
+
     trait :with_everything do
       with_applicant
       provider_submitted
@@ -118,6 +122,7 @@ FactoryBot.define do
       percentage_home { Faker::Number.decimal(2).to_d }
       with_merits_assessment
       with_merits_statement_of_case
+      with_respondent
     end
 
     trait :with_negative_benefit_check_result do

@@ -16,6 +16,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :savings_amount, dependent: :destroy
   has_one :merits_assessment, dependent: :destroy
   has_one :statement_of_case, dependent: :destroy
+  has_one :respondent, dependent: :destroy
   has_many :legal_aid_application_restrictions, dependent: :destroy
   has_many :restrictions, through: :legal_aid_application_restrictions
   has_many :legal_aid_application_transaction_types, dependent: :destroy
