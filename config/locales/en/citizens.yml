@@ -96,6 +96,13 @@ en:
     other_assets:
       show:
         h1-heading: Do you have any of the following?
+    outgoings_summary:
+      add_other_outgoings:
+        add_other_outgoings: Add another type of regular payment
+      index:
+        add_all_outgoings: Add all your regular outgoing payments from your bank statements.
+        page_heading: Select your payments
+        select: Select from your bank statement
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your home?
       hint: Check the statement from your mortgage provider or lender
