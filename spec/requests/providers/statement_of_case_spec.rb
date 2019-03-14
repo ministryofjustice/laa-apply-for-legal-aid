@@ -59,8 +59,9 @@ RSpec.describe 'provider statement of case requests', type: :request do
     let(:upload_button) { { upload_button: 'Upload' } }
     let(:button_clicked) { {} }
     let(:params) { { statement_of_case: params_statement_of_case }.merge(button_clicked) }
+    let(:xhr) { false }
 
-    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params, xhr: xhr }
 
     before { login_as provider }
 
@@ -89,6 +90,41 @@ RSpec.describe 'provider statement of case requests', type: :request do
         statement_of_case.original_files.each do |original_file|
           pdf_file = PdfFile.find_by(original_file_id: original_file.id).file
           expect(pdf_file.filename.base).to eq(original_file.filename.base), 'Should have the same base name'
+        end
+      end
+    end
+
+    context 'uploading file with ajax request' do
+      let(:xhr) { true }
+      let(:params_statement_of_case) do
+        {
+          original_files: [original_file]
+        }
+      end
+      let(:json_response) { JSON.parse(response.body) }
+
+      it 'updates the record' do
+        subject
+        expect(statement_of_case.original_files.first).to be_present
+      end
+
+      it 'returns HTML of files table in a JSON object' do
+        subject
+        expect(json_response['uploaded_files_table']).to include('<table')
+        expect(json_response['uploaded_files_table']).to include(original_file.original_filename)
+      end
+
+      context 'and there is an error' do
+        let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
+        it 'returns HTML of error summary' do
+          subject
+          expect(json_response['error_summary']).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid'))
+        end
+
+        it 'returns hash of objects' do
+          subject
+          expect(json_response['errors']['original_files']).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid'))
         end
       end
     end
@@ -256,12 +292,20 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
     context 'Upload button pressed' do
       let(:button_clicked) { upload_button }
-      let(:original_file) { nil }
 
-      it 'errors if no file is specified' do
+      it 'redirects to the same page' do
         subject
-        expect(response.body).to include 'There is a problem'
-        expect(response.body).to include 'You must choose at least one file'
+        expect(response).to redirect_to providers_legal_aid_application_statement_of_case_path(legal_aid_application)
+      end
+
+      context 'there are errors' do
+        let(:original_file) { nil }
+
+        it 'shows errors' do
+          subject
+          expect(response.body).to include 'There is a problem'
+          expect(response.body).to include 'You must choose at least one file'
+        end
       end
     end
   end
@@ -271,21 +315,49 @@ RSpec.describe 'provider statement of case requests', type: :request do
     let(:legal_aid_application) { statement_of_case.legal_aid_application }
     let(:original_file) { statement_of_case.original_files.first }
     let(:params) { { original_file_id: original_file.id } }
-
-    subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+    let(:xhr) { false }
+    subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params, xhr: xhr }
 
     before do
       login_as provider
     end
 
+    shared_examples_for 'deleting a file' do
+      it 'deletes the file' do
+        expect { subject }.to change { ActiveStorage::Attachment.count }.by(-1)
+        expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(false)
+      end
+
+      context 'when file not found' do
+        let(:params) { { original_file_id: :unknown } }
+
+        it 'leaves the file in place' do
+          expect { subject }.not_to change { ActiveStorage::Attachment.count }
+          expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(true)
+        end
+      end
+
+      context 'when a PDF exists' do
+        let(:pdf_file) { PdfFile.find_or_create_by(original_file_id: original_file.id) }
+        before { PdfConverter.call(pdf_file.id) }
+
+        it 'deletes the PdfFile' do
+          expect { subject }.to change { PdfFile.count }.by(-1)
+        end
+
+        it 'deletes original files attachment' do
+          expect { subject }.to change { ActiveStorage::Attachment.where(name: 'original_files').count }.by(-1)
+        end
+
+        it 'deletes the PdfFile file attachment' do
+          expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count }.by(-1)
+        end
+      end
+    end
+
     it 'redirects to show' do
       subject
       expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
-    end
-
-    it 'deletes the file' do
-      expect { subject }.to change { ActiveStorage::Attachment.count }.by(-1)
-      expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(false)
     end
 
     context 'when file not found' do
@@ -295,27 +367,27 @@ RSpec.describe 'provider statement of case requests', type: :request do
         subject
         expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
       end
-
-      it 'leaves the file in place' do
-        expect { subject }.not_to change { ActiveStorage::Attachment.count }
-        expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(true)
-      end
     end
 
-    context 'when a PDF exists' do
-      let(:pdf_file) { PdfFile.find_or_create_by(original_file_id: original_file.id) }
-      before { PdfConverter.call(pdf_file.id) }
+    it_behaves_like 'deleting a file'
 
-      it 'deletes the PdfFile' do
-        expect { subject }.to change { PdfFile.count }.by(-1)
+    context 'deleting file with ajax request' do
+      let(:xhr) { true }
+
+      it_behaves_like 'deleting a file'
+
+      it 'returns http success' do
+        subject
+        expect(response).to have_http_status(:ok)
       end
 
-      it 'deletes original files attachment' do
-        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'original_files').count }.by(-1)
-      end
+      context 'when file not found' do
+        let(:params) { { original_file_id: :unknown } }
 
-      it 'deletes the PdfFile file attachment' do
-        expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count }.by(-1)
+        it 'redirects to show' do
+          subject
+          expect(response).to have_http_status(:ok)
+        end
       end
     end
   end

@@ -1,3 +1,4 @@
+<div id="files-errors-container"></div>
 <%= page_template page_title: t('.h1-heading'), template: :form do %>
 
   <%= govuk_form_group(
@@ -17,9 +18,9 @@
 
     <div class="govuk-!-padding-bottom-2"></div>
 
-    <% if @form.model.original_files && @form.model.original_files.any? %>
+    <div id="uploaded-files-table-container">
       <%= render partial: 'uploaded_files', locals: { original_files: @form.model.original_files } %>
-    <% end %>
+    </div>
 
     <%# Note this form needs to start after the list of original files to avoid nesting forms %>
     <%= form_with(
@@ -32,12 +33,14 @@
       <label class="govuk-heading-m" for="original_files"><%= t('generic.upload_file') %></label>
       <%= form.govuk_file_field :original_files, multiple: true, label: nil %>
 
-      <%= form.submit(
-            t('.upload'),
-            id: 'upload',
-            name: 'upload_button',
-            class: 'govuk-button form-button'
-          ) %>
+      <noscript>
+        <%= form.submit(
+              t('.upload'),
+              id: 'upload',
+              name: 'upload_button',
+              class: 'govuk-button form-button'
+            ) %>
+      </noscript>
 
       <div class="govuk-!-padding-bottom-2"></div>
 
@@ -49,3 +52,16 @@
     <% end %>
   <% end %>
 <% end %>
+
+<script>
+  window.LAA_VARS = {
+    images: {
+      loading_small: <%= image_path('loading-small.gif').to_json.html_safe %>
+    },
+    locales: {
+      generic: {
+        uploading: <%= t('generic.uploading').to_json.html_safe %>
+      }
+    }
+  };
+</script>

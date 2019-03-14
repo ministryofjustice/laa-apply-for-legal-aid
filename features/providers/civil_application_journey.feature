@@ -401,6 +401,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I upload a pdf file
+    Then I reload the page
+    Then I should be on a page showing "hello_world.pdf"
+    Then I should be on a page showing "UPLOADED"
     Then I click "Continue"
     Then I should be on a page showing "What are the estimated legal costs of doing the work?"
     Then I fill "Estimated legal cost" with "1000"

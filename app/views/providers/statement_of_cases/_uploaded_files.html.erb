@@ -1,10 +1,10 @@
-<table class="govuk-table">
+<table class="govuk-table <%= 'hidden' if @form.model.original_files.empty? %>">
   <thead class="govuk-table__head">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
     <th class="govuk-table__header" scope="col"><%= t('.size') %></th>
     <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
-    <th class="govuk-table__header" scope="col"><%= t('.action') %></th>
+    <th class="govuk-table__header" scope="col"></th>
   </tr>
   </thead>
   <tbody class="govuk-table__body">

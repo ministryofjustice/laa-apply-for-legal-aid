@@ -28,6 +28,11 @@ end
 
 Then('I upload a pdf file') do
   attach_file('Attach a file', Rails.root.join('spec/fixtures/files/documents/hello_world.pdf'))
+  wait_for_ajax
+end
+
+Then('I reload the page') do
+  visit current_path
 end
 
 Then('I choose option {string}') do |field|

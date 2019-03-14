@@ -7,16 +7,11 @@ module Providers
     end
 
     def update
-      @form = StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
       if upload_button_pressed?
-        @form.upload_button_pressed = true
-        @form.save
-        render :show
-      end
-
-      return if performed?
-
-      if save_continue_or_draft(@form)
+        perform_upload
+      elsif request.xhr?
+        perform_xhr_request
+      elsif save_continue_or_draft(form)
         convert_new_files_to_pdf
       else
         render :show
@@ -26,10 +21,47 @@ module Providers
     def destroy
       delete_original_file
       delete_pdf_file
-      redirect_to [:providers, legal_aid_application, :statement_of_case]
+
+      if request.xhr?
+        head :ok
+      else
+        redirect_to [:providers, legal_aid_application, :statement_of_case]
+      end
     end
 
     private
+
+    def perform_xhr_request
+      form.save
+      render json: {
+        error_summary: error_summary,
+        uploaded_files_table: uploaded_files_table,
+        errors: form.errors
+      }
+    end
+
+    def error_summary
+      render_to_string(
+        partial: 'shared/forms/error_summary',
+        locals: { model: form }
+      )
+    end
+
+    def uploaded_files_table
+      render_to_string(
+        partial: 'providers/statement_of_cases/uploaded_files',
+        locals: { original_files: form.model.original_files }
+      )
+    end
+
+    def perform_upload
+      form.upload_button_pressed = true
+      if form.save
+        redirect_to providers_legal_aid_application_statement_of_case_path
+      else
+        render :show
+      end
+    end
 
     def convert_new_files_to_pdf
       statement_of_case.original_files.each do |original_file|
@@ -39,6 +71,10 @@ module Providers
 
     def upload_button_pressed?
       params[:upload_button].present?
+    end
+
+    def form
+      @form ||= StatementOfCases::StatementOfCaseForm.new(statement_of_case_params)
     end
 
     def statement_of_case_params
