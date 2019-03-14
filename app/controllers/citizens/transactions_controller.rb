@@ -31,13 +31,9 @@ module Citizens
     end
 
     def set_selection
-      BankTransaction
-        .where(id: transaction_ids_to_select)
+      bank_transactions
+        .where(id: selected_transaction_ids)
         .update_all(transaction_type_id: transaction_type.id)
-    end
-
-    def transaction_ids_to_select
-      bank_transactions.pluck(:id) & selected_transaction_ids
     end
 
     def selected_transaction_ids

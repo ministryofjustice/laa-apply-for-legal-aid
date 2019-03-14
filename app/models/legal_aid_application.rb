@@ -22,6 +22,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :restrictions, through: :legal_aid_application_restrictions
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
+  has_many :bank_transactions, through: :applicant
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
