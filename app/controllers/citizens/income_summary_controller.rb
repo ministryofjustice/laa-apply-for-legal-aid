@@ -5,7 +5,9 @@ module Citizens
 
     def index
       legal_aid_application
-      @bank_transactions = legal_aid_application.bank_transactions.by_type
+      @bank_transactions = legal_aid_application.bank_transactions
+                                                .order(happened_at: :desc)
+                                                .by_type
     end
   end
 end
