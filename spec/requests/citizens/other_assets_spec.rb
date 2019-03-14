@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'citizen other assets requests', type: :request do
   let(:application) { create :application, :with_applicant }
-  let(:oad) { application.create_other_assets_declaration! }
   let(:application_id) { application.id }
-  let(:secure_id) { oad.legal_aid_application.generate_secure_id }
+  let(:oad) { application.other_assets_declaration }
+  let(:secure_id) { application.generate_secure_id }
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
@@ -104,18 +104,8 @@ RSpec.describe 'citizen other assets requests', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'does not update the record' do
-        expect(oad.second_home_value).to be_nil
-        expect(oad.second_home_mortgage).to be_nil
-        expect(oad.second_home_percentage).to be_nil
-        expect(oad.timeshare_value).to be_nil
-        expect(oad.land_value).to be_nil
-        expect(oad.jewellery_value).to be_nil
-        expect(oad.vehicle_value).to be_nil
-        expect(oad.classic_car_value).to be_nil
-        expect(oad.money_assets_value).to be_nil
-        expect(oad.money_owed_value).to be_nil
-        expect(oad.trust_value).to be_nil
+      it 'does not create the record' do
+        expect(oad).to be_nil
       end
 
       it 'the response includes the error message' do
