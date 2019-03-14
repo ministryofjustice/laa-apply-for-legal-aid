@@ -14,15 +14,15 @@ class TransactionType < ApplicationRecord
     ],
     debit: %i[
       rent_or_mortgage
-      council_tax
       child_care
       maintenance_out
       legal_aid
     ]
   }.freeze
 
-  scope :debits, -> { where(operation: :debit) }
-  scope :credits, -> { where(operation: :credit) }
+  scope :active, -> { where(archived_at: nil) }
+  scope :debits, -> { active.where(operation: :debit) }
+  scope :credits, -> { active.where(operation: :credit) }
 
   def self.populate
     populate_records
@@ -36,6 +36,8 @@ class TransactionType < ApplicationRecord
         transaction_type.update! sort_order: start_number
       end
     end
+
+    TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
   end
 
   def label_name
