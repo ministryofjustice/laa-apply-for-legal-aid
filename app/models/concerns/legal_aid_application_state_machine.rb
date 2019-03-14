@@ -41,6 +41,7 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_citizen_answers, to: :provider_submitted
         transitions from: :checking_passported_answers, to: :answers_checked
         transitions from: :checking_merits_answers, to: :means_completed
+        transitions from: :means_completed, to: :checking_citizen_answers
       end
 
       event :check_citizen_answers do

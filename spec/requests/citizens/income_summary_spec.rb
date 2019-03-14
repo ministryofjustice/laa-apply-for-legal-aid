@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::IncomeSummaryController do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let!(:salary) { create :transaction_type, :credit, name: 'salary' }
+  let!(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+  let!(:maintenance) { create :transaction_type, :credit, name: 'maintenance_in' }
+  let!(:pension) { create :transaction_type, :credit, name: 'pension' }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_types: [salary, benefits] }
   let(:secure_id) { legal_aid_application.generate_secure_id }
-  let!(:salary) { create :transaction_type, name: 'salary', operation: 'credit' }
-  let!(:benefits) { create :transaction_type, name: 'benefits', operation: 'credit' }
-  let!(:maintenance) { create :transaction_type, name: 'maintenance_in', operation: 'credit' }
-  let!(:pension) { create :transaction_type, name: 'pension', operation: 'credit' }
 
   before do
-    legal_aid_application.transaction_types = [salary, benefits]
     get citizens_legal_aid_application_path(secure_id)
   end
 
@@ -58,7 +57,7 @@ RSpec.describe Citizens::IncomeSummaryController do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-      let!(:bank_transaction) { create :bank_transaction, transaction_type: salary, bank_account: bank_account }
+      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: bank_account }
       let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
 
       it 'displays bank transaction' do

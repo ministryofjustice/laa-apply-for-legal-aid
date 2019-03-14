@@ -22,6 +22,12 @@ en:
       new:
         field_set_header: Do you have online access to your accounts with other banks?
         hint: If you do not, you will need to provide paper evidence for these accounts.
+    bank_transactions:
+      list_selected:
+        col_amount: Amount
+        col_date: Date
+        col_description: Description
+        remove_link: Remove
     check_answers:
       index:
         assets:
@@ -67,11 +73,6 @@ en:
     income_summary:
       add_other_income:
         add_other_income: Add another type of income
-      income_type_item:
-        col_amount: Amount
-        col_date: Date
-        col_description: Description
-        remove_link: Remove
       index:
         add_all_income: Add income you received from %{start_at} to %{finish_at}.
         page_heading: Your income

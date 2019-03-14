@@ -8,9 +8,11 @@
       </span>
     <% end %>
   </h2>
-  <ul class="app-task-list__items">
-    <li class="app-task-list__item" id="<%= "list-item-#{name}" %>">
-      <%= link_to link_text, citizens_outgoing_transactions_path(transaction_type: name), class: 'govuk-body' %>
-    </li>
-  </ul>
+  <div class="app-task-list__items">
+    <% if bank_transactions.present? %>
+      <%= render 'citizens/bank_transactions/list_selected', bank_transactions: bank_transactions %>
+    <% end %>
+
+    <%= link_to link_text, citizens_outgoing_transactions_path(transaction_type: name), class: 'govuk-body transaction-type-link' %>
+  </div>
 </li>
