@@ -28,6 +28,26 @@ spec:
               protocol: TCP
           resources:
 {{ toYaml .Values.clamav.resources | indent 12 }}
+        - name: metrics
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          command: ['sh', '-c', "bundle exec prometheus_exporter"]
+          ports:
+          - containerPort: 9394
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          resources:
+{{ toYaml .Values.metrics.resources | indent 12 }}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -193,6 +213,8 @@ spec:
               secretKeyRef:
                 name: {{ template "apply-for-legal-aid-uat.fullname" . }}
                 key: googleAnalyticsTrackingID
+          - name: KUBERNETES_DEPLOYMENT
+            value: "true"
           ports:
             - name: http
               containerPort: 3002

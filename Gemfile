@@ -57,6 +57,9 @@ gem 'aws-sdk-s3'
 # convert documnents to PDF
 gem 'libreconv'
 
+# Monitoring
+gem 'prometheus_exporter'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -29,6 +29,8 @@ module LaaApplyForLegalAid
     config.x.laa_portal.certificate = ENV['LAA_PORTAL_CERTIFICATE']
     config.x.laa_portal.secret_key = ENV['LAA_PORTAL_SECRET_KEY']
 
+    config.x.kubernetes_deployment = ENV['KUBERNETES_DEPLOYMENT'] == 'true'
+
     config.govuk_notify_templates = config_for(
       :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
     ).symbolize_keys
