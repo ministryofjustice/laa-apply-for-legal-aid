@@ -13,6 +13,7 @@ class Applicant < ApplicationRecord
   has_many :bank_errors, dependent: :destroy
   has_many :bank_accounts, through: :bank_providers
   has_many :bank_transactions, through: :bank_accounts
+  belongs_to :true_layer_secure_data, class_name: :SecureData, optional: true
 
   def email_address
     email
@@ -20,5 +21,22 @@ class Applicant < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}".strip
+  end
+
+  def store_true_layer_token(token:, expires:)
+    data = { token: token, expires: expires }
+    update!(true_layer_secure_data_id: SecureData.create_and_store!(data))
+  end
+
+  def true_layer_token
+    true_layer_token_data[:token]
+  end
+
+  def true_layer_token_expires_at
+    Time.parse true_layer_token_data[:expires]
+  end
+
+  def true_layer_token_data
+    @true_layer_token_data = true_layer_secure_data.retrieve
   end
 end

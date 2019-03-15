@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< 0c220270f5ffb960c08169ec6a872286b452a626
 ActiveRecord::Schema.define(version: 2019_03_13_174812) do
+=======
+ActiveRecord::Schema.define(version: 2019_03_15_113315) do
+>>>>>>> AP-412 Store truelayer tokens securely and associate with applicant
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -81,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_174812) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.boolean "uses_online_banking"
+    t.string "true_layer_secure_data_id"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
