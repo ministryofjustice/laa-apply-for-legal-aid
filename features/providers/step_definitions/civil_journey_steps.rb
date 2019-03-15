@@ -178,10 +178,10 @@ Given('I click Check Your Answers Change link for {string}') do |field_name|
   end
 end
 
-Then('I click on the Select from your bank statement link for income type {string}') do |income_type|
+Then('I click on the add payments link for income type {string}') do |income_type|
   income_type.downcase!
   within "#income-type-#{income_type}" do
-    click_link('Select from your bank statement')
+    click_link(I18n.t(".citizens.income_summary.index.select_#{income_type}"))
   end
 end
 
