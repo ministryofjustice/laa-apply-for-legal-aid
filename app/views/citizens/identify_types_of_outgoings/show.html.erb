@@ -9,7 +9,8 @@
 
     <%= transaction_type_check_boxes(
           form: form,
-          transaction_types: TransactionType.debits
+          transaction_types: TransactionType.debits,
+          hints: { maintenance_out: t('transaction_types.hints.maintenance_out') }
         ) %>
 
     <%= next_action_buttons(form: form, continue_button_text: t('generic.save_and_continue')) %>
