@@ -53,27 +53,29 @@
     <%= t '.merits-heading' %>
   </h2>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :client_received_legal_help,
-          url: providers_legal_aid_application_client_received_legal_help_path,
-          question: t('.items.client_received_legal_help'),
-          answer: yes_no(@merits.client_received_legal_help)
-        ) %>
-  </dl>
+  <% unless @legal_aid_application.domestic_abuse? %>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <%= check_answer_link(
+            name: :client_received_legal_help,
+            url: providers_legal_aid_application_client_received_legal_help_path,
+            question: t('.items.client_received_legal_help'),
+            answer: yes_no(@merits.client_received_legal_help)
+          ) %>
+    </dl>
 
-  <div class='govuk-body'><%= simple_format @merits.application_purpose %></div>
+    <div class='govuk-body'><%= simple_format @merits.application_purpose %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :proceedings_currently_before_court,
-          url: providers_legal_aid_application_proceedings_before_the_court_path,
-          question: t('.items.proceedings_currently_before_court'),
-          answer: yes_no(@merits.proceedings_before_the_court)
-        ) %>
-  </dl>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <%= check_answer_link(
+            name: :proceedings_currently_before_court,
+            url: providers_legal_aid_application_proceedings_before_the_court_path,
+            question: t('.items.proceedings_currently_before_court'),
+            answer: yes_no(@merits.proceedings_before_the_court)
+          ) %>
+    </dl>
 
-  <div class='govuk-body'><%= simple_format @merits.details_of_proceedings_before_the_court %></div>
+    <div class='govuk-body'><%= simple_format @merits.details_of_proceedings_before_the_court %></div>
+  <% end %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(

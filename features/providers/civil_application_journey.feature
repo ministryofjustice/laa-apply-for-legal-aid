@@ -198,6 +198,53 @@ Feature: Civil application journeys
     Then I see a notice saying that the citizen receives benefits
 
   @javascript @vcr
+  Scenario: I complete the merits assessment for an applicant with proceeding type domestic abuse
+    Given I complete the journey with proceeding type domestic abuse
+    Then I should be on a page showing "Enter details of the latest incident"
+    Then I enter the occurred on date of 2 days ago
+    Then I fill "Details" with "It happened"
+    Then I click "Continue"
+    Then I should be on a page showing "Respondent details"
+    Then I choose option "Respondent understands terms of court order True"
+    Then I choose option "Respondent warning letter sent True"
+    Then I choose option "Respondent police notified True"
+    Then I choose option "Respondent bail conditions set True"
+    Then I fill "Bail conditions set details" with "Foo bar"
+    Then I click "Continue"
+    Then I should be on a page showing "Statement of case"
+    Then I fill "Statement" with "Statement of case"
+    Then I upload a pdf file
+    Then I reload the page
+    Then I should be on a page showing "hello_world.pdf"
+    Then I should be on a page showing "UPLOADED"
+    Then I click "Continue"
+    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
+    Then I fill "Estimated legal cost" with "1000"
+    Then I click "Continue"
+    Then I should be on a page showing "What are the prospects of success?"
+    Then I choose "Borderline"
+    Then I fill "Success prospect details" with "Prospects of success"
+    Then I click "Continue"
+    Then I should be on a page showing "Client declaration"
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And I click Check Your Answers Change link for 'Statement of Case'
+    Then I enter the statement 'This is some test data for the statement of case'
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
+    Then I click Check Your Answers Change link for 'Estimated legal costs'
+    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
+    Then I fill "Estimated legal cost" with "2345"
+    And I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'Estimated legal costs' should be "£2,345.00"
+    And I should not see "Client received legal help"
+    And I should not see "Proceedings currently before court"
+    Then I click "Accept and send application"
+    Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
+
+  @javascript @vcr
   Scenario: I can see that the applicant does not receive benefits
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'

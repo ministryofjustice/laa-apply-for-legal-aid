@@ -58,6 +58,10 @@ FactoryBot.define do
       end
     end
 
+    trait :with_proceeding_type_domestic_abuse do
+      proceeding_types { [create(:proceeding_type, :domestic_abuse)] }
+    end
+
     trait :with_own_home_mortgaged do
       own_home { 'mortgage' }
     end

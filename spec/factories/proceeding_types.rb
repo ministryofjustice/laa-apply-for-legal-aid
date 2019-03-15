@@ -8,5 +8,9 @@ FactoryBot.define do
     ccms_category_law_code { 'Category law code' }
     ccms_matter { 'Matter' }
     ccms_matter_code { 'Matter code' }
+
+    trait :domestic_abuse do
+      ccms_matter_code { 'MINJN' }
+    end
   end
 end

@@ -14,7 +14,7 @@ module Flow
         },
         respondents: {
           path: ->(application) { urls.providers_legal_aid_application_respondent_path(application) },
-          forward: :client_received_legal_helps,
+          forward: ->(application) { application.domestic_abuse? ? :statement_of_cases : :client_received_legal_helps },
           check_answers: :check_merits_answers
         },
         client_received_legal_helps: {

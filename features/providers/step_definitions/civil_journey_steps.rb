@@ -79,6 +79,33 @@ Given('I complete the journey as far as check your answers') do
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
+Given('I complete the journey with proceeding type domestic abuse') do
+  applicant = create(
+    :applicant,
+    first_name: 'Test',
+    last_name: 'User',
+    national_insurance_number: 'CB987654A',
+    date_of_birth: '03-04-1999'
+  )
+  create(
+    :address,
+    address_line_one: '3',
+    address_line_two: 'LONSDALE ROAD',
+    city: 'BEXLEYHEATH',
+    postcode: 'DA7 4NG',
+    lookup_used: true,
+    applicant: applicant
+  )
+  legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceeding_type_domestic_abuse,
+    :means_completed,
+    applicant: applicant
+  )
+  login_as legal_aid_application.provider
+  visit(providers_legal_aid_application_details_latest_incident_path(legal_aid_application))
+end
+
 Given('I complete the passported journey as far as check your answers') do
   applicant = create(
     :applicant,
@@ -152,6 +179,10 @@ end
 And('I search for proceeding {string}') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
   wait_for_ajax
+end
+
+And(/^I should not see "(.*?)"$/) do |arg1|
+  page.should have_no_content(arg1)
 end
 
 When(/^I click clear search$/) do

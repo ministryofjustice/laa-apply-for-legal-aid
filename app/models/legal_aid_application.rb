@@ -105,6 +105,10 @@ class LegalAidApplication < ApplicationRecord
     other_assets_declaration.present? && other_assets_declaration.positive?
   end
 
+  def domestic_abuse?
+    proceeding_types.any?(&:domestic_abuse?)
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

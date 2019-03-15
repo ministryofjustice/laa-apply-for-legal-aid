@@ -227,6 +227,14 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#domestic_abuse?' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_type_domestic_abuse }
+
+    it 'returns true' do
+      expect(legal_aid_application.domestic_abuse?).to eq(true)
+    end
+  end
+
   describe 'attributes are synced on answers_checked' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
     it 'passes application to keep in sync service' do
