@@ -75,7 +75,13 @@ en:
       index:
         add_all_income: Add all your income from your bank statements.
         page_heading: Select your income
-        select: Select from your bank statement
+        select_benefits: Add benefits payments
+        select_friends_or_family: Add payments from friends or family
+        select_maintenance_in: Add maintenance payments
+        select_pension: Add pension payments
+        select_property_or_lodger: Add income from property or lodger
+        select_salary: Add salary or wage payments
+        select_student_loan: Add student loan or grant payments
     information:
       show:
         heading_1: Give one-time access to your bank accounts

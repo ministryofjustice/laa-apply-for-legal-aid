@@ -39,14 +39,14 @@ Feature: Citizen journey
 
     # select salary, show all the transactions, click Continue and abe taken back to the
     # same page
-    Then I click on the Select from your bank statement link for income type "Salary"
+    Then I click on the add payments link for income type "Salary"
     Then I should be on a page showing "Your salary or wage payments"
     Then I click "Continue"
     Then I should be on a page showing "Select your income"
 
     # select benefits, show all the transactions, click Continue and abe taken back to the
     # same page
-    Then I click on the Select from your bank statement link for income type "Benefits"
+    Then I click on the add payments link for income type "Benefits"
     Then I should be on a page showing "Your benefits"
     Then I click "Continue"
 
