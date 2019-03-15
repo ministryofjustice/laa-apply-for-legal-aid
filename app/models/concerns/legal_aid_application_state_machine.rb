@@ -52,7 +52,7 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_citizen_answers, to: :means_completed,
                     after: -> do
                       CleanupCapitalAttributes.call(self)
-                      update!(provider_step: :details_latest_incident)
+                      update!(provider_step: :details_latest_incidents)
                     end
         transitions from: :checking_passported_answers, to: :means_completed
       end

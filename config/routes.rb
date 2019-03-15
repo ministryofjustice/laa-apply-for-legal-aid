@@ -58,6 +58,9 @@ Rails.application.routes.draw do
       get '/:transaction_type', to: 'transactions#show', as: ''
       patch '/:transaction_type', to: 'transactions#update'
     end
+    resources :bank_transactions, only: [] do
+      patch 'remove_transation_type', on: :member
+    end
   end
 
   namespace :providers do

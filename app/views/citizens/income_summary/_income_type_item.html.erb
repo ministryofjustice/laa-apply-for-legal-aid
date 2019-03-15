@@ -1,5 +1,5 @@
-<li>
-  <h2 class="app-task-list__section" id="<%= "income-type-#{name}" %>">
+<li id="<%= "income-type-#{name}" %>">
+  <h2 class="app-task-list__section">
     <span class="app-task-list__section-number"><%= number %>. </span>
     <%= t("transaction_types.names.#{name}") %>
     <% if I18n.exists? "transaction_types.hints.#{name}" %>
@@ -8,9 +8,43 @@
       </span>
     <% end %>
   </h2>
-  <ul class="app-task-list__items">
-    <li class="app-task-list__item" id="<%= "list-item-#{name}" %>">
-      <%= link_to link_text, citizens_transactions_path(transaction_type: name), class: 'govuk-body' %>
-    </li>
-  </ul>
+  <div class="app-task-list__items">
+    <% if bank_transactions.present? %>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col"><%= t('.col_date') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.col_description') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.col_amount') %></th>
+            <th class="govuk-table__header" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% bank_transactions.each do |bank_transaction| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <%= l(bank_transaction.happened_at, format: :date) %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= bank_transaction.description %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= button_to(
+                      t('.remove_link'),
+                      remove_transation_type_citizens_bank_transaction_path(bank_transaction),
+                      method: :patch,
+                      class: 'button-as-link'
+                    ) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= link_to link_text, citizens_transactions_path(transaction_type: name), class: 'govuk-body transaction-type-link' %>
+  </div>
 </li>

@@ -11,9 +11,8 @@
           <th class="govuk-table__header" scope="col"></th>
         </tr>
       </thead>
-
-      <% @applications.each do |application| %>
-        <tbody class="govuk-table__body">
+      <tbody class="govuk-table__body">
+        <% @applications.each do |application| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell"><%= application.applicant_full_name || t('generic.undefined') %></td>
             <td class="govuk-table__cell"><%= l(application.created_at, format: :date) %></td>
@@ -26,8 +25,8 @@
                                                 class: 'govuk-button destructive'
                                               ) if destroy_enabled? %></td>
           </tr>
-        </tbody>
-      <% end %>
+        <% end %>
+      </tbody>
     </table>
   </div>
 </div>

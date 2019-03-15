@@ -223,10 +223,12 @@ spec:
             httpGet:
               path: /status.json
               port: http
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /status.json
               port: http
+            initialDelaySeconds: 60
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
