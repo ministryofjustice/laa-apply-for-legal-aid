@@ -4,6 +4,5 @@ set -e
 
 ./bin/wait_for_pg
 ./bin/setup_db
-./bin/update_virus_database
 
-foreman start -f Procfile -p 3002
+bundle exec puma -C config/puma.rb

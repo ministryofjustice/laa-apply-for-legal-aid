@@ -139,8 +139,7 @@ jobs:
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
-                        --set ingress.hosts="{${STAGING_HOST}}" \
-                        --set replicaCount="2"
+                        --set ingress.hosts="{${STAGING_HOST}}"
 
   deploy_production:
     <<: *deploy_container_config
@@ -166,8 +165,7 @@ jobs:
                         --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
-                        --set ingress.hosts="{${PRODUCTION_HOST}}" \
-                        --set replicaCount="2"
+                        --set ingress.hosts="{${PRODUCTION_HOST}}"
 
   clean_up_ecr:
     <<: *build_container_config
