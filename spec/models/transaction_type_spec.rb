@@ -36,5 +36,20 @@ RSpec.describe TransactionType, type: :model do
         }.to change { described_class.count }.by(total)
       end
     end
+
+    context 'when a transaction type has been removed from the model' do
+      let!(:old_transaction_type) { create :transaction_type, name: :council_tax }
+      it 'sets the archived_at date in the database' do
+        subject
+        expect(described_class.find_by(name: 'council_tax').archived_at).to_not eq nil
+      end
+
+      it 'does not set the archived_at date in the database for active transaction types' do
+        subject
+        names.values.flatten.each do |transaction_name|
+          expect(described_class.find_by(name: transaction_name).archived_at).to eq nil
+        end
+      end
+    end
   end
 end
