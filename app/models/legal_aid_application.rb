@@ -1,5 +1,5 @@
 # TODO: Think about how we refactor this class to make it smaller
-class LegalAidApplication < ApplicationRecord
+class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLength
   include TranslatableModelAttribute
   include LegalAidApplicationStateMachine # States are defined here
 
@@ -22,7 +22,6 @@ class LegalAidApplication < ApplicationRecord
   has_many :restrictions, through: :legal_aid_application_restrictions
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
-  has_many :bank_transactions, through: :applicant
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -44,6 +43,12 @@ class LegalAidApplication < ApplicationRecord
     _prefix: true
   )
 
+  def bank_transactions
+    applicant.bank_transactions.where(
+      happened_at: transaction_period_start_at..transaction_period_finish_at
+    )
+  end
+
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)
     find_by! secure_data[:legal_aid_application]
@@ -58,7 +63,10 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def set_transaction_period
-    update!(transaction_period_start_at: 3.months.ago.beginning_of_day, transaction_period_finish_at: Time.now.beginning_of_day)
+    update!(
+      transaction_period_start_at: 3.months.ago.beginning_of_day,
+      transaction_period_finish_at: Time.now.beginning_of_day
+    )
   end
 
   def proceeding_type_codes=(codes)
