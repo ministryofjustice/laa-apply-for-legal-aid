@@ -1,5 +1,5 @@
 <% if @worker_working %>
-  <div class="worker-waiter" data-worker-id="<%= @worker_id %>" align="center">
+  <div class="worker-waiter" data-worker-id="<%= session[:worker_id] %>" align="center">
     <%= image_tag('loading.gif') %>
     <p class="govuk-body-l"><%= t '.retrieving_transactions' %></p>
   </div>

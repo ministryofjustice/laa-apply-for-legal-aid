@@ -57,6 +57,10 @@ class LegalAidApplication < ApplicationRecord
     )
   end
 
+  def set_transaction_period
+    update!(transaction_period_start_at: 3.months.ago.beginning_of_day, transaction_period_finish_at: Time.now.beginning_of_day)
+  end
+
   def proceeding_type_codes=(codes)
     @proceeding_type_codes = codes
     self.proceeding_types = ProceedingType.where(code: codes)

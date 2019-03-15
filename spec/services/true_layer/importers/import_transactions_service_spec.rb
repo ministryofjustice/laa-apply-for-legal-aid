@@ -14,7 +14,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let(:transaction_2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction_2[:transaction_id]) }
     let!(:existing_transaction) { create :bank_transaction, bank_account: bank_account }
 
-    subject { described_class.call(api_client, bank_account) }
+    subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
 
     before do
       allow(Time).to receive(:now).and_return(now)

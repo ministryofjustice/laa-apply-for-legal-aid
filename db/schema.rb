@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< 0c220270f5ffb960c08169ec6a872286b452a626
-ActiveRecord::Schema.define(version: 2019_03_13_174812) do
-=======
-ActiveRecord::Schema.define(version: 2019_03_15_113315) do
->>>>>>> AP-412 Store truelayer tokens securely and associate with applicant
+ActiveRecord::Schema.define(version: 2019_03_15_133344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -231,6 +227,9 @@ ActiveRecord::Schema.define(version: 2019_03_15_113315) do
     t.string "provider_step"
     t.uuid "provider_id"
     t.boolean "draft"
+    t.datetime "transaction_period_start_at"
+    t.datetime "transaction_period_finish_at"
+    t.boolean "transactions_gathered"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end

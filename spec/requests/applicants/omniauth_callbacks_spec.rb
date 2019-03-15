@@ -37,19 +37,12 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     end
 
     it 'should redirect to next page' do
-      worker_id = SecureRandom.hex
-      allow(ImportBankDataWorker).to receive(:perform_async).and_return(worker_id)
-      expect(subject).to redirect_to(citizens_accounts_path(worker_id: worker_id))
+      expect(subject).to redirect_to(citizens_accounts_path)
     end
 
-    it 'should import bank provider' do
-      expect { subject }.to change { applicant.bank_providers.count }.by(1)
-      expect(bank_provider.token).to eq(token)
-      expect(bank_provider.token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
-    end
-
-    it 'should import bank transactions' do
-      expect { subject }.to change { BankTransaction.count }.by_at_least(1)
+    it 'persists the token on the applicant' do
+      subject
+      expect(applicant.reload.true_layer_token).to eq(token)
     end
 
     context 'with a string time' do
@@ -57,7 +50,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
 
       it 'should persist expires_at' do
         subject
-        expect(bank_provider.token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
+        expect(applicant.reload.true_layer_token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
       end
     end
 
@@ -66,7 +59,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
 
       it 'should not persist expires_at' do
         subject
-        expect(bank_provider.token_expires_at).to be_nil
+        expect(applicant.reload.true_layer_token_expires_at).to be_nil
       end
     end
 

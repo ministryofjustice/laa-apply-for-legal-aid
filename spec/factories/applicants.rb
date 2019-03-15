@@ -14,5 +14,14 @@ FactoryBot.define do
     trait :with_address_lookup do
       addresses { build_list :address, 1, :is_lookup_used }
     end
+
+    trait :with_true_layer_tokens do
+      after(:create) do |applicant|
+        applicant.store_true_layer_token(
+          token: SecureRandom.hex,
+          expires: 1.hour.from_now
+        )
+      end
+    end
   end
 end

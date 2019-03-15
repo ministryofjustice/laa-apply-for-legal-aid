@@ -4,9 +4,14 @@ module Citizens
     before_action :authenticate_applicant!
 
     def index
-      return if worker_working?
+      return if !legal_aid_application.transactions_gathered? && worker_working?
 
-      @errors = worker_errors.join(', ') if worker_errors.any?
+      if worker_errors.any?
+        @errors = worker_errors.join(', ')
+      else
+        legal_aid_application.update! transactions_gathered: true
+        session[:worker_id] = nil
+      end
       @applicant_banks = current_applicant.bank_providers.collect do |bank_provider|
         ApplicantAccountPresenter.new(bank_provider)
       end
@@ -31,13 +36,16 @@ module Citizens
     end
 
     def worker
-      return nil if params[:worker_id].blank?
-
       @worker ||= Sidekiq::Status.get_all(worker_id)
     end
 
     def worker_id
-      @worker_id ||= params[:worker_id]
+      session[:worker_id] ||= start_worker_to_get_transactions
+    end
+
+    def start_worker_to_get_transactions
+      legal_aid_application.set_transaction_period
+      ImportBankDataWorker.perform_async(legal_aid_application.id)
     end
   end
 end

@@ -11,8 +11,8 @@ module Applicants
         return
       end
 
-      worker_id = import_bank_data
-      redirect_to citizens_accounts_path(worker_id: worker_id)
+      store_tokens
+      redirect_to citizens_accounts_path
     end
 
     def failure
@@ -22,8 +22,8 @@ module Applicants
 
     private
 
-    def import_bank_data
-      ImportBankDataWorker.perform_async(applicant.id, token, token_expires_at)
+    def store_tokens
+      applicant.store_true_layer_token(token: token, expires: token_expires_at)
     end
 
     def token

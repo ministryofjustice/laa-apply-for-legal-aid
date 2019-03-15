@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'citizen accounts request', type: :request do
   describe 'GET /citizens/account' do
     let!(:applicant) { create :applicant }
-    let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, applicant: applicant }
     let(:addresses) do
       [{ address: Faker::Address.building_number,
          city: Faker::Address.city,
@@ -18,12 +18,11 @@ RSpec.describe 'citizen accounts request', type: :request do
       create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
     end
     let(:worker) { {} }
-    let(:worker_id) { nil }
 
-    subject { get citizens_accounts_path(worker_id: worker_id) }
+    subject { get citizens_accounts_path }
 
     before do
-      allow(Sidekiq::Status).to receive(:get_all).with(worker_id).and_return(worker)
+      allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       subject
     end
@@ -58,7 +57,6 @@ RSpec.describe 'citizen accounts request', type: :request do
     end
 
     context 'background worker is still working' do
-      let(:worker_id) { SecureRandom.hex }
       let(:worker) { { 'status' => 'working' } }
 
       it 'returns http success' do
@@ -76,7 +74,6 @@ RSpec.describe 'citizen accounts request', type: :request do
     end
 
     context 'background worker generated an error' do
-      let(:worker_id) { SecureRandom.hex }
       let(:error) { 'something wrong' }
       let(:worker) { { 'status' => 'complete', 'errors' => [error].to_json } }
 

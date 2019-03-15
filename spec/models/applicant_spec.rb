@@ -58,7 +58,8 @@ RSpec.describe Applicant, type: :model do
 
   context 'True Layer Token' do
     let(:token) { SecureRandom.uuid }
-    let(:token_expires_at) { 10.minutes.from_now }
+    # Note - JSON time doesn't include micro seconds so need to round to second to get consistent result
+    let(:token_expires_at) { 10.minutes.from_now.round(0) }
     let(:data) { { token: token, expires: token_expires_at } }
     let(:applicant) { create :applicant }
 
@@ -81,10 +82,9 @@ RSpec.describe Applicant, type: :model do
     end
 
     describe '#true_layer_token_expires_at' do
-      # Note - JSON time doesn't include micro seconds so need to round to second
       it 'returns the original expiry time' do
         subject
-        expect(applicant.true_layer_token_expires_at).to eq(token_expires_at.round(0))
+        expect(applicant.true_layer_token_expires_at).to eq(token_expires_at)
       end
     end
   end
