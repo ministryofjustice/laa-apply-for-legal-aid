@@ -10,7 +10,7 @@ FactoryBot.define do
     ccms_matter_code { 'Matter code' }
 
     trait :domestic_abuse do
-      ccms_matter_code { 'MINJN' }
+      ccms_matter_code { ProceedingType::DOMESTIC_ABUSE_CCMS_MATTER_CODE }
     end
   end
 end

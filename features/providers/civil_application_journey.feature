@@ -213,10 +213,7 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
-    Then I upload a pdf file
-    Then I reload the page
-    Then I should be on a page showing "hello_world.pdf"
-    Then I should be on a page showing "UPLOADED"
+    Then I enter the statement 'This is some test data for the statement of case'
     Then I click "Continue"
     Then I should be on a page showing "What are the estimated legal costs of doing the work?"
     Then I fill "Estimated legal cost" with "1000"
@@ -228,17 +225,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "Client declaration"
     Then I click "Continue"
     Then I should be on a page showing "Check your answers"
-    And I click Check Your Answers Change link for 'Statement of Case'
-    Then I enter the statement 'This is some test data for the statement of case'
-    Then I click "Continue"
-    Then I should be on a page showing "Check your answers"
-    And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
-    Then I click Check Your Answers Change link for 'Estimated legal costs'
-    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
-    Then I fill "Estimated legal cost" with "2345"
-    And I click "Continue"
-    Then I should be on a page showing "Check your answers"
-    And the answer for 'Estimated legal costs' should be "£2,345.00"
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
     Then I click "Accept and send application"
