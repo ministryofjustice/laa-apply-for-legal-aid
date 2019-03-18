@@ -115,6 +115,7 @@ jobs:
         command: |
           ./bin/uat_deploy
 
+
   deploy_staging:
     <<: *deploy_container_config
     steps:
@@ -167,6 +168,41 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${PRODUCTION_HOST}}"
 
+  deploy_redcjump:
+    <<: *deploy_container_config
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Kubectl deployment setup redcjump
+          command: |
+            $(aws ecr get-login --region eu-west-1 --no-include-email)
+            setup-kube-auth
+            kubectl config use-context redcjump
+      - *decrypt_secrets
+      - deploy:
+          name: Helm deployment to redcjump
+          command: |
+
+            echo "APPLICATION_DEPLOY_NAME: $APPLICATION_DEPLOY_NAME"
+            echo "KUBE_ENV_REDCJUMP_NAMESPACE: $KUBE_ENV_REDCJUMP_NAMESPACE"
+            echo "ECR_ENDPOINT: $ECR_ENDPOINT"
+            echo "GITHUB_TEAM_NAME_SLUG: $GITHUB_TEAM_NAME_SLUG"
+            echo "REPO_NAME: $REPO_NAME"
+            echo "CIRCLE_SHA1: $CIRCLE_SHA1"
+            echo "REDCJUMP_HOST: $REDCJUMP_HOST"
+
+            helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
+                          --install --wait \
+                          --tiller-namespace=${KUBE_ENV_REDCJUMP_NAMESPACE} \
+                          --namespace=${KUBE_ENV_REDCJUMP_NAMESPACE} \
+                          --values ./helm_deploy/apply-for-legal-aid/values-redcjump.yaml \
+                          --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                          --set image.tag="${CIRCLE_SHA1}" \
+                          --set ingress.hosts="{${REDCJUMP_HOST}}" \
+                          --set replicaCount="2"
+
   clean_up_ecr:
     <<: *build_container_config
     steps:
@@ -216,6 +252,13 @@ workflows:
         filters:
           branches:
             only: master
+    - hold_redcjump:
+        type: approval
+        requires:
+          - build_and_test
+    - deploy_redcjump:
+        requires:
+        - hold_redcjump
   nightly:
     triggers:
     - schedule:
