@@ -145,7 +145,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'should change the provider step to client_received_legal_helps' do
       subject
-      expect(legal_aid_application.reload.provider_step).to eq('details_latest_incidents')
+      expect(legal_aid_application.reload.provider_step).to eq('start_merits_assessment')
     end
 
     it 'syncs the application' do

@@ -2,6 +2,11 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps
       STEPS = {
+        start_merits_assessments: {
+          path: ->(application) { urls.providers_legal_aid_application_start_merits_assessment_path(application) },
+          forward: :details_latest_incidents,
+          check_answers: :check_merits_answers
+        },
         details_latest_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_details_latest_incident_path(application) },
           forward: :respondents,
