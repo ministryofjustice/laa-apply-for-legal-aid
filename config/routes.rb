@@ -37,7 +37,9 @@ Rails.application.routes.draw do
     resource :consent, only: %i[show create]
     resource :property_value, only: %i[show update]
     resource :information, only: [:show]
-    resources :accounts, only: [:index]
+    resources :accounts, only: [:index] do
+      get :gather, on: :collection
+    end
     resources :additional_accounts, only: %i[index create new update]
     resource :own_home, only: %i[show update]
     resource :percentage_home, only: %i[show update]

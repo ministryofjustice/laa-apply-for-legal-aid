@@ -3,17 +3,22 @@ module Citizens
     include ApplicationFromSession
     before_action :authenticate_applicant!
 
+    skip_back_history_for :gather
+
     def index
-      return if !legal_aid_application.transactions_gathered? && worker_working?
+      @applicant_banks = current_applicant.bank_providers.collect do |bank_provider|
+        ApplicantAccountPresenter.new(bank_provider)
+      end
+    end
+
+    def gather
+      return if worker_working?
 
       if worker_errors.any?
         @errors = worker_errors.join(', ')
       else
-        legal_aid_application.update! transactions_gathered: true
         session[:worker_id] = nil
-      end
-      @applicant_banks = current_applicant.bank_providers.collect do |bank_provider|
-        ApplicantAccountPresenter.new(bank_provider)
+        redirect_to action: :index
       end
     end
 

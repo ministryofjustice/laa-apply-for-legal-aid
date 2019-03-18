@@ -4,7 +4,11 @@ module Applicants
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     before_action :authenticate_applicant!, only: [:true_layer]
 
+    skip_back_history_for :true_layer, :failure
+
     def true_layer
+      return redirect_to(citizens_consent_path) if params.key?(:back)
+
       unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
         redirect_to citizens_consent_path
@@ -12,7 +16,7 @@ module Applicants
       end
 
       store_tokens
-      redirect_to citizens_accounts_path
+      redirect_to gather_citizens_accounts_path
     end
 
     def failure
