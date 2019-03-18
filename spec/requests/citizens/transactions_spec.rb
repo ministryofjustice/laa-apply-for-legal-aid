@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Citizens::TransactionsController, type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:applicant) { legal_aid_application.applicant }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   let(:transaction_type) { create :transaction_type }

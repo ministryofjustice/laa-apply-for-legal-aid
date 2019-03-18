@@ -73,7 +73,7 @@ en:
         col_description: Description
         remove_link: Remove
       index:
-        add_all_income: Add all your income from your bank statements.
+        add_all_income: Add income you received from %{start_at} to %{finish_at}.
         page_heading: Select your income
         select_benefits: Add benefits payments
         select_friends_or_family: Add payments from friends or family

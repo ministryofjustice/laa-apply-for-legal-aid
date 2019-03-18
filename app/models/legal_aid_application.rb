@@ -44,6 +44,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   )
 
   def bank_transactions
+    set_transaction_period unless transaction_period_start_at? && transaction_period_finish_at?
     applicant.bank_transactions.where(
       happened_at: transaction_period_start_at..transaction_period_finish_at
     )
