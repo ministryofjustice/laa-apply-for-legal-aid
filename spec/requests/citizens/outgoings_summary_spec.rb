@@ -2,20 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Citizens::OutgoingsSummaryController do
   let!(:rent_or_mortgage) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
-  let!(:child_care) { create :transaction_type, :debit, name: 'child_care' }
-  let!(:maintenance_out) { create :transaction_type, :debit, name: 'maintenance_out' }
+  let(:transaction_types) { create_list :transaction_type, 2, :debit }
+  let(:other_transaction_type) { create :transaction_type, :debit }
   let!(:legal_aid) { create :transaction_type, :debit, name: 'legal_aid' }
   let(:legal_aid_application) do
     create(
       :legal_aid_application,
       :with_applicant,
       :with_transaction_period,
-      transaction_types: [rent_or_mortgage, child_care]
+      transaction_types: transaction_types
     )
   end
   let(:secure_id) { legal_aid_application.generate_secure_id }
 
   before do
+    TransactionType.delete_all
+    other_transaction_type
     get citizens_legal_aid_application_path(secure_id)
   end
 
@@ -29,7 +31,7 @@ RSpec.describe Citizens::OutgoingsSummaryController do
 
     it 'displays a section for all transaction types linked to this application' do
       subject
-      [rent_or_mortgage, child_care].pluck(:name).each do |name|
+      transaction_types.pluck(:name).each do |name|
         legend = I18n.t("transaction_types.names.#{name}")
         expect(parsed_response_body.css("ol li h2#outgoing-type-#{name}").text).to match(/#{legend}/)
       end
@@ -37,9 +39,7 @@ RSpec.describe Citizens::OutgoingsSummaryController do
 
     it 'does not display a section for transaction types not linked to this application' do
       subject
-      [maintenance_out, legal_aid].pluck(:name).each do |name|
-        expect(parsed_response_body.css("ol li h2#outgoing-type-#{name}").size).to eq 0
-      end
+      expect(parsed_response_body.css("ol li h2#outgoing-type-#{other_transaction_type.name}").size).to be_zero
     end
 
     context 'not all transaction types selected' do
@@ -50,10 +50,12 @@ RSpec.describe Citizens::OutgoingsSummaryController do
     end
 
     context 'all transaction types selected' do
-      before do
-        legal_aid_application.transaction_types << maintenance_out
-        legal_aid_application.transaction_types << legal_aid
-        subject
+      let(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :with_applicant,
+          transaction_types: (transaction_types + [other_transaction_type])
+        )
       end
       it 'does not display an Add additional outgoing types section' do
         get citizens_legal_aid_application_path(secure_id)
@@ -65,8 +67,9 @@ RSpec.describe Citizens::OutgoingsSummaryController do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-      let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: child_care, bank_account: bank_account }
-      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [child_care] }
+      let(:transaction_type) { create :transaction_type, :debit }
+      let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: transaction_type, bank_account: bank_account }
+      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type] }
 
       it 'displays bank transaction' do
         subject
