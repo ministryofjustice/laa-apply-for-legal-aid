@@ -13,7 +13,7 @@ RSpec.describe TrueLayer::BankDataImportService do
   subject { described_class.call(legal_aid_application: legal_aid_application) }
 
   describe '#call' do
-    let(:bank_provider) { applicant.bank_providers.find_by(token: token) }
+    let(:bank_provider) { applicant.bank_providers.find_by(token: applicant.true_layer_secure_data_id) }
     let(:mock_data) { TrueLayerHelpers::MOCK_DATA }
     let(:bank_error) { applicant.bank_errors.first }
     let(:api_error) do

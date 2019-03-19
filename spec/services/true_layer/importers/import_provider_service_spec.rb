@@ -4,7 +4,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
   let(:token) { SecureRandom.hex }
   let(:token_expires_at) { Time.now + 1.hour }
   let(:api_client) { TrueLayer::ApiClient.new(token) }
-  let(:applicant) { create :applicant }
+  let(:applicant) { create :applicant, :with_true_layer_tokens }
 
   describe '#call' do
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }
@@ -12,7 +12,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
     let(:existing_credentials_id) { SecureRandom.hex }
     let!(:existing_provider) { create :bank_provider, applicant: applicant, credentials_id: existing_credentials_id }
 
-    subject { described_class.call(api_client: api_client, applicant: applicant, token: token, token_expires_at: token_expires_at) }
+    subject { described_class.call(api_client: api_client, applicant: applicant, token_expires_at: token_expires_at) }
 
     context 'request is successful' do
       before do
@@ -23,7 +23,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
         expect { subject }.to change { applicant.bank_providers.count } .by(1)
         expect(bank_provider.true_layer_response).to eq(mock_provider.deep_stringify_keys)
         expect(bank_provider.credentials_id).to eq(mock_provider[:credentials_id])
-        expect(bank_provider.token).to eq(token)
+        expect(bank_provider.token).to eq(applicant.true_layer_secure_data_id)
         expect(bank_provider.token_expires_at.utc.to_s).to eq(token_expires_at.utc.to_s)
         expect(bank_provider.name).to eq(mock_provider[:provider][:display_name])
         expect(bank_provider.true_layer_provider_id).to eq(mock_provider[:provider][:provider_id])
@@ -44,7 +44,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
         it 'updates the current bank provider' do
           subject
           expect(bank_provider.true_layer_response).to eq(mock_provider.deep_stringify_keys)
-          expect(bank_provider.token).to eq(token)
+          expect(bank_provider.token).to eq(applicant.true_layer_secure_data_id)
           expect(bank_provider.name).to eq(mock_provider[:provider][:display_name])
           expect(bank_provider.true_layer_provider_id).to eq(mock_provider[:provider][:provider_id])
         end

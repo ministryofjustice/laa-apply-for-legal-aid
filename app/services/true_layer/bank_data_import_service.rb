@@ -44,7 +44,6 @@ module TrueLayer
       command = Importers::ImportProviderService.call(
         api_client: api_client,
         applicant: applicant,
-        token: token,
         token_expires_at: token_expires_at
       )
       if command.success?
