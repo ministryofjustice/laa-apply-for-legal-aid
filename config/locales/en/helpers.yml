@@ -48,4 +48,7 @@ en:
           <<: *true_false
         bail_conditions_set:
           <<: *true_false
+      setting:
+        mock_true_layer_data:
+          <<: *true_false
 

@@ -1,0 +1,19 @@
+<%= page_template page_title: t('.heading_1'), template: :form do %>
+  <%= form_with(
+        model: @form,
+        url: admin_settings_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :mock_true_layer_data,
+          [true, false],
+          inline: true,
+          hint: t('.hints.mock_true_layer_data'),
+          title: { size: :m, text: t('.labels.mock_true_layer_data') }
+        ) %>
+
+    <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
+  <% end %>
+<% end %>

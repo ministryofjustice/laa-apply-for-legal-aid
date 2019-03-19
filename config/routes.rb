@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: %i[index destroy] do
       delete :destroy_all, on: :collection
     end
+    resource :settings, only: %i[show update]
   end
 
   namespace 'v1' do

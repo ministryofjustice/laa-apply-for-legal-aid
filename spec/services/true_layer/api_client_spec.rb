@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TrueLayer::ApiClient do
   let(:token) { SecureRandom.hex }
 
-  subject { TrueLayer::ApiClient.new(token) }
+  subject { described_class.new(token) }
 
   describe '#provider' do
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }
@@ -13,8 +13,7 @@ RSpec.describe TrueLayer::ApiClient do
     end
 
     it 'returns the bank provider' do
-      command = subject.provider
-      expect(command.value.first).to eq(mock_provider)
+      expect(subject.provider.value.first).to eq(mock_provider)
     end
 
     context 'result is not json' do
@@ -24,8 +23,7 @@ RSpec.describe TrueLayer::ApiClient do
       end
 
       it 'returns an error' do
-        command = subject.provider
-        expect(command.error).to be_a(JSON::ParserError)
+        expect(subject.provider.error).to be_a(JSON::ParserError)
       end
     end
 
@@ -36,8 +34,7 @@ RSpec.describe TrueLayer::ApiClient do
       end
 
       it 'returns an error' do
-        command = subject.provider
-        expect(command.error).to be_a(Faraday::ConnectionFailed)
+        expect(subject.provider.error).to be_a(Faraday::ConnectionFailed)
       end
     end
   end
