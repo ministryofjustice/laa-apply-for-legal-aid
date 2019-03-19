@@ -379,6 +379,8 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I click "Continue"
     Then I click "Submit"
+    Then I should be on a page showing "Provide details of the case"
+    Then I click "Continue"
     Then I should be on a page showing "Enter details of the latest incident"
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"
