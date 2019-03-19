@@ -170,6 +170,7 @@ en:
     proceedings_types:
       create:
         search_and_select: Search and select a proceeding
+        link_title: Remove
       index:
         clear_search: Clear search
         heading_1: What does your client want legal aid for?
@@ -267,3 +268,20 @@ en:
     success_prospects:
       show:
         h1-heading: What are the prospects of success?
+    limitations:
+      show:
+        h1-heading: What you're covered for
+        h2-heading: Proceeding
+        body: |
+          Injunction FLA-to final hearing -
+          As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and
+          including obtaining and serving a final order and in the event of breach leading to
+          the exercise of a power of arrest to representation on the consideration of the breach
+          by the court (but excluding applying for a warrant of arrest, if not attached,
+          and representation in contempt proceedings).
+        link_title: Change
+        form_of_service: "Form of service: "
+        form_of_service_type: Full representation
+        incurrable_costs: "Costs you can incur: "
+        incurrable_costs_value: '£5,000'
+        allowable_work: "Work you can do: "

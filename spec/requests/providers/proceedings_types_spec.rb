@@ -107,7 +107,7 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
 
       it 'redirects to next step' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
       end
     end
 

@@ -8,7 +8,7 @@
   <div class="govuk-grid-column-one-third control-column">
     <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4">
       <%= link_to(
-            t('generic.remove'),
+            I18n.t('.link_title', scope: translation_path),
             providers_legal_aid_application_proceedings_type_path(
               legal_aid_application_id: @legal_aid_application,
               id: proceeding_type
