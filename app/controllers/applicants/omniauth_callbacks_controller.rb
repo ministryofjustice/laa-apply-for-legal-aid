@@ -7,8 +7,6 @@ module Applicants
     skip_back_history_for :true_layer, :failure
 
     def true_layer
-      return redirect_to(citizens_consent_path) if params.key?(:back)
-
       unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
         redirect_to citizens_consent_path

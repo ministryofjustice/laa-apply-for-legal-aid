@@ -14,6 +14,6 @@ class ImportBankDataWorker
   end
 
   def legal_aid_application
-    @legal_aid_application ||= LegalAidApplication.find(legal_aid_application_id)
+    LegalAidApplication.find(legal_aid_application_id)
   end
 end
