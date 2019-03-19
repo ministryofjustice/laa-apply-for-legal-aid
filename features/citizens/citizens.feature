@@ -55,12 +55,10 @@ Feature: Citizen journey
 
     Then I should be on a page showing "Select any regular payments you make"
     Then I select "Rent or mortgage"
-    Then I select "Council Tax"
     Then I click "Save and continue"
 
     Then I should be on a page showing "Select your payments"
     Then I should be on a page showing "Rent or mortgage"
-    Then I should be on a page showing "Council Tax"
 
     Then I click on the Select from your bank statement link for payment type "rent_or_mortgage"
     Then I should be on a page showing "Rent or mortgage"
