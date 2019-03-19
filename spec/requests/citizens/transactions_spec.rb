@@ -102,7 +102,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
     end
   end
 
-  describe 'PATCH #citizens/transactions' do
+  describe 'updating transactions' do
     let!(:bank_transaction_A) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation, transaction_type: transaction_type }
     let!(:bank_transaction_B) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
     let!(:bank_transaction_other_applicant) { create :bank_transaction, operation: transaction_type.operation }

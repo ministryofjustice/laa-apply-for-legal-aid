@@ -74,7 +74,7 @@ en:
         remove_link: Remove
       index:
         add_all_income: Add income you received from %{start_at} to %{finish_at}.
-        page_heading: Select your income
+        page_heading: Your income
         select_benefits: Add benefits payments
         select_friends_or_family: Add payments from friends or family
         select_maintenance_in: Add maintenance payments

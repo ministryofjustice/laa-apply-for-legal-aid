@@ -33,7 +33,7 @@ Feature: Citizen journey
     # Show the page showing the different types of income you have selected with a
     # link for each one to select those items from the transaction list
     #
-    Then I should be on a page showing "Select your income"
+    Then I should be on a page showing "Your income"
     Then I should be on a page showing "Salary or wages"
     Then I should be on a page showing "Benefits"
 
@@ -42,7 +42,7 @@ Feature: Citizen journey
     Then I click on the add payments link for income type "Salary"
     Then I should be on a page showing "Your salary or wage payments"
     Then I click "Continue"
-    Then I should be on a page showing "Select your income"
+    Then I should be on a page showing "Your income"
 
     # select benefits, show all the transactions, click Continue and be taken back to the
     # same page
@@ -50,7 +50,7 @@ Feature: Citizen journey
     Then I should be on a page showing "Your benefits"
     Then I click "Continue"
 
-    Then I should be on a page showing "Select your income"
+    Then I should be on a page showing "Your income"
     Then I click link 'Continue'
 
     Then I should be on a page showing "Select any regular payments you make"
