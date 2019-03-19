@@ -1,15 +1,15 @@
-<%= page_template(
-      page_title: t('forms.address_selection.heading'),
-      template: :form
-    ) do %>
+<%= form_with(
+      model: @form,
+      scope: :address_selection,
+      url: providers_legal_aid_application_address_selection_path(@legal_aid_application),
+      method: :patch,
+      local: true
+    ) do |f| %>
 
-  <%= form_with(
-        model: @form,
-        scope: :address_selection,
-        url: providers_legal_aid_application_address_selection_path(@legal_aid_application),
-        method: :patch,
-        local: true
-      ) do |f| %>
+  <%= page_template(
+        page_title: t('forms.address_selection.heading'),
+        template: :form
+      ) do %>
 
     <div class="govuk-!-padding-bottom-8"></div>
 
