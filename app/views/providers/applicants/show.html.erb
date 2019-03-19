@@ -13,18 +13,19 @@
       ) do |form| %>
 
     <div class="govuk-!-padding-bottom-2"></div>
-
-    <%= form.govuk_text_field :first_name, class: 'govuk-!-width-one-half' %>
-    <%= form.govuk_text_field :last_name, class: 'govuk-!-width-one-half' %>
+    <%= govuk_bold_label t('.full_name') %>
+    <%= form.govuk_text_field :first_name, class: 'govuk-input govuk-!-width-three-quarters' %>
+    <%= form.govuk_text_field :last_name, class: 'govuk-input govuk-!-width-three-quarters' %>
 
     <div class="govuk-!-padding-bottom-4"></div>
 
     <%= date_input_fields prefix: :dob, field_name: :date_of_birth, form: form %>
 
     <div class="govuk-!-padding-bottom-6"></div>
-
-    <%= form.govuk_text_field :national_insurance_number, class: 'govuk-!-width-one-half' %>
-    <%= form.govuk_text_field :email, class: 'govuk-!-width-three-quarters' %>
+    <%= govuk_bold_label t('.nino_label') %>
+    <%= form.govuk_text_field :national_insurance_number, label: nil, class: 'govuk-input govuk-input--width-10' %>
+    <%= govuk_bold_label t('.email_label') %>
+    <%= form.govuk_text_field :email, label: nil, class: 'govuk-input govuk-!-width-three-quarters' %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 

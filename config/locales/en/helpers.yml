@@ -8,8 +8,8 @@ en:
       address_lookup:
         postcode: Postcode must be a valid UK postcode.
       applicant:
-        email: We'll use this to send your client a secure link
-        national_insurance_number: For example, QQ 12 34 56 C
+        email: We'll send your client a link to our service if they need to answer questions about their finances
+        national_insurance_number: For example, 'QQ 12 34 56 C'
       legal_aid_application:
         outstanding_mortgage_amount:
           citizen: Check the statement from your mortgage provider or lender
@@ -51,4 +51,3 @@ en:
       setting:
         mock_true_layer_data:
           <<: *true_false
-

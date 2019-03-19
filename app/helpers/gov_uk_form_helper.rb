@@ -44,6 +44,10 @@ module GovUkFormHelper
     content_tag :span, text, merge_with_class(args, 'govuk-hint')
   end
 
+  def govuk_bold_label(text, args = {})
+    content_tag :span, text, merge_with_class(args, 'govuk-fieldset__legend govuk-fieldset__legend--m')
+  end
+
   def govuk_submit_button(text, args = {})
     submit_tag text, merge_with_class(args, 'govuk-button')
   end

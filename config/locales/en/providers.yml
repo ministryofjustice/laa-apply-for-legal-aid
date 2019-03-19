@@ -25,6 +25,9 @@ en:
     applicants:
       show:
         page_title: Enter your client's details
+        full_name: Full name
+        email_label: Email address
+        nino_label: National Insurance number
     application_confirmations:
       show:
         application_created: Application created
