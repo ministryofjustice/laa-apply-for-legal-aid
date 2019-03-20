@@ -127,6 +127,13 @@ en:
       show:
         h1-heading: Your client has completed their financial assessment
         review-advice: You can review their answers and make corrections before their application is submitted.
+        client: Client
+        case-reference: Case reference
+        captial-section-heading: Total capital
+        credits-section-heading: Total income
+        debits-section-heading: Total outgoings
+      bank_transaction_table:
+        total: '%{text} total'
     merits_declarations:
       show:
         h1-heading: Client declaration

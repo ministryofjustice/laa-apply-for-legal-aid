@@ -1,0 +1,18 @@
+<h2 class="govuk-heading-l"><%= section_heading %></h2>
+<table class="govuk-table" style="margin-bottom: 15px;">
+  <caption class="govuk-table__caption" style="padding-bottom:10px;">
+    <%= t('date.date_period', from: date_from, to: date_to) %>
+  </caption>
+  <tbody class="govuk-table__body">
+   <% transaction_types.each do |transaction_type| %>
+     <tr class="govuk-table__row">
+       <td class="govuk-table__cell">
+         <%= t('.total', text: transaction_type.label_name) %>
+       </td>
+       <td class="govuk-table__cell govuk-table__cell--numeric">
+         <%= number_to_currency @bank_transaction_amounts.fetch(transaction_type.id, 0) %>
+       </td>
+     </tr>
+   <% end %>
+  </tbody>
+</table>
