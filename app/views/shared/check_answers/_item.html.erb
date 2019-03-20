@@ -1,3 +1,5 @@
+<% read_only = local_assigns[:read_only] ? read_only : false %>
+
 <div class="govuk-summary-list__row normal-word-break" id="app-check-your-answers__<%= name %>">
   <div class="govuk-summary-list__key govuk-!-width-one-half">
     <%= question %>
@@ -5,9 +7,11 @@
   <div class="govuk-summary-list__value">
     <%= answer.present? ? answer : '-' %>
   </div>
-  <div class="govuk-summary-list__actions">
-    <%= link_to(url, class: 'govuk-link') do %>
-      <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
-    <% end %>
-  </div>
+  <% unless read_only %>
+    <div class="govuk-summary-list__actions">
+      <%= link_to(url, class: 'govuk-link') do %>
+        <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
+      <% end %>
+    </div>
+  <% end %>
 </div>

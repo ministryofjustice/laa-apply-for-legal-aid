@@ -57,6 +57,39 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(unescaped_response_body).to include(address.city)
         expect(unescaped_response_body).to include(address.postcode)
       end
+
+      context 'when the application is in provider submitted state' do
+        before do
+          application.provider_submit!
+          get providers_legal_aid_application_check_provider_answers_path(application)
+        end
+
+        describe 'back link' do
+          it 'points to the applications page' do
+            expect(response.body).to have_back_link(providers_legal_aid_applications_path)
+          end
+        end
+
+        describe 'Back to your applications button' do
+          it 'has a back to your applications button' do
+            expect(button_value(html_body: response.body, attr: '#continue')).to eq('Back to your applications')
+          end
+        end
+
+        it 'displays the correct client details' do
+          applicant = application.applicant
+          address = applicant.addresses[0]
+
+          expect(unescaped_response_body).to include(applicant.first_name)
+          expect(unescaped_response_body).to include(applicant.last_name)
+          expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
+          expect(unescaped_response_body).to include(applicant.national_insurance_number)
+          expect(unescaped_response_body).to include(applicant.email_address)
+          expect(unescaped_response_body).to include(address.address_line_one)
+          expect(unescaped_response_body).to include(address.city)
+          expect(unescaped_response_body).to include(address.postcode)
+        end
+      end
     end
   end
 

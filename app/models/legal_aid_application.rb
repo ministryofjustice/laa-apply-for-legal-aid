@@ -120,6 +120,12 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     other_assets_declaration.present? && other_assets_declaration.positive?
   end
 
+  # Refactored into its own method because there may be multiple conditions in the future
+  # which make it read only.
+  def read_only?
+    provider_submitted?
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

@@ -205,3 +205,12 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Restrictions' should be 'Bankruptcy'
       And the answer for 'Restrictions' should be 'Held overseas'
+
+    @javascript @vcr
+    Scenario: I submit the application and view the check_your_answers page
+      Given I complete the application and view the check your answers page
+      Then I am on the read only version of the check your answers page
+      Then I click 'Back to your applications'
+      Then I should be on a page showing 'Your legal aid applications'
+      Then I click view on an application
+      Then I am on the read only version of the check your answers page

@@ -1,11 +1,11 @@
 <%= page_template(
-      page_title: t('.title'),
+      page_title: @read_only ? '' : t('.title'),
       back_link: {
-        path: reset_providers_legal_aid_application_check_provider_answers_path,
-        method: :post
+        path: @read_only ? providers_legal_aid_applications_path : reset_providers_legal_aid_application_check_provider_answers_path,
+        text: @read_only ? t('generic.home') : t('generic.back'),
+        method: @read_only ? :get : :post
       }
     ) do %>
-
   <h2 class="govuk-heading-m"><%= t '.section_client.heading' %></h2>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -14,42 +14,48 @@
           name: :first_name,
           url: providers_legal_aid_application_applicant_path(anchor: :first_name),
           question: t('.section_client.first_name'),
-          answer: @applicant.first_name
+          answer: @applicant.first_name,
+          read_only: @read_only
         ) %>
 
     <%= check_answer_link(
           name: :last_name,
           url: providers_legal_aid_application_applicant_path(anchor: :last_name),
           question: t('.section_client.last_name'),
-          answer: @applicant.last_name
+          answer: @applicant.last_name,
+          read_only: @read_only
         ) %>
 
     <%= check_answer_link(
           name: :date_of_birth,
           url: providers_legal_aid_application_applicant_path(anchor: :dob_day),
           question: t('.section_client.dob'),
-          answer: @applicant.date_of_birth
+          answer: @applicant.date_of_birth,
+          read_only: @read_only
         ) %>
 
     <%= check_answer_link(
           name: :national_insurance_number,
           url: providers_legal_aid_application_applicant_path(anchor: :national_insurance_number),
           question: t('.section_client.nino'),
-          answer: @applicant.national_insurance_number
+          answer: @applicant.national_insurance_number,
+          read_only: @read_only
         ) %>
 
     <%= check_answer_link(
           name: :email,
           url: providers_legal_aid_application_applicant_path(anchor: :email),
           question: t('.section_client.email'),
-          answer: @applicant.email
+          answer: @applicant.email,
+          read_only: @read_only
         ) %>
 
     <%= check_answer_link(
           name: :address,
           url: change_address_link(@applicant),
           question: t('.section_client.address'),
-          answer: address_with_line_breaks(@address)
+          answer: address_with_line_breaks(@address),
+          read_only: @read_only
         ) %>
   </dl>
 
@@ -61,15 +67,16 @@
         name: :proceeding_type,
         url: providers_legal_aid_application_proceedings_types_path(anchor: 'proceeding-search-input'.freeze),
         question: t('.section_proceeding.proceeding'),
-        answer: @proceeding_types.first.meaning
+        answer: @proceeding_types.first.meaning,
+        read_only: @read_only
       ) %>
 
   </dl>
-  <div class="govuk-!-padding-bottom-9"></div>
 
   <%= next_action_buttons_with_form(
-        url: continue_providers_legal_aid_application_check_provider_answers_path,
-        method: :patch,
-        show_draft: true
+        url: @read_only ? providers_legal_aid_applications_path : continue_providers_legal_aid_application_check_provider_answers_path,
+        method: @read_only ? :get : :patch,
+        show_draft: @read_only ? false : true,
+        continue_button_text: @read_only ? t('generic.back_to_your_applications') : t('generic.continue')
       ) %>
 <% end %>

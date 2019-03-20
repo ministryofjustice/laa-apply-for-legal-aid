@@ -8,6 +8,7 @@ en:
     back: Back
     change: Change
     continue: Continue
+    back_to_your_applications: Back to your applications
     errors:
       problem_text: There is a problem
       yes_or_no: You must select either Yes or No
