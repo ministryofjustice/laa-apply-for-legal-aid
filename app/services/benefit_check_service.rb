@@ -43,9 +43,8 @@ class BenefitCheckService
 
   def soap_client
     @soap_client ||= Savon.client(
-      env_namespace: :soapenv,
-      wsdl: config.wsdl_url,
-      namespaces: { 'xmlns:ins0' => BENEFIT_CHECKER_NAMESPACE }
+      endpoint: config.wsdl_url,
+      namespace: BENEFIT_CHECKER_NAMESPACE
     )
   end
 end
