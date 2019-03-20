@@ -6,14 +6,14 @@ RSpec.describe Citizens::BankTransactionsController, type: :request do
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'PATCH /citizens/bank_transactions/:id/remove_transation_type' do
+  describe 'PATCH /citizens/bank_transactions/:id/remove_transaction_type' do
     let!(:transaction_type) { create :transaction_type }
     let(:bank_transaction) { create :bank_transaction, transaction_type: transaction_type }
     let(:headers) { {} }
 
     subject do
       patch(
-        remove_transation_type_citizens_bank_transaction_path(bank_transaction),
+        remove_transaction_type_citizens_bank_transaction_path(bank_transaction),
         headers: headers
       )
     end

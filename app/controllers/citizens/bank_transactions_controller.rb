@@ -3,7 +3,7 @@ module Citizens
     include ApplicationFromSession
     before_action :authenticate_applicant!
 
-    def remove_transation_type
+    def remove_transaction_type
       bank_transaction.update! transaction_type: nil
       respond_to do |format|
         format.html do
