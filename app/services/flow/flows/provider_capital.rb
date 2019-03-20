@@ -48,7 +48,15 @@ module Flow
         },
         check_passported_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
+<<<<<<< 15caed40c71a479221637d3fb0fc837de6de58fd
           forward: :start_merits_assessments
+=======
+          forward: :details_latest_incidents
+        },
+        means_summaries: {
+          path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
+          forward: :details_latest_incidents
+>>>>>>> AP-309 Refactor check answers and use in means summary
         }
       }.freeze
     end

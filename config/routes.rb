@@ -116,6 +116,7 @@ Rails.application.routes.draw do
         patch :reset
       end
       resource :start_merits_assessment, only: %i[show update]
+      resource :means_summary, only: [:show]
     end
   end
 end

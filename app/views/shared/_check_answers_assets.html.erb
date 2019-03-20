@@ -3,35 +3,35 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :own_home,
-        url: check_answer_url_for(user_type, :own_home, application),
+        url: check_answer_url_for(user_type, :own_homes, application),
         question: t('.assets.own_home'),
         answer: @legal_aid_application.own_home.blank? ? '' : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}")
       ) %>
 
   <%= check_answer_link(
         name: :property_value,
-        url: check_answer_url_for(user_type, :property_value, application),
+        url: check_answer_url_for(user_type, :property_values, application),
         question: t('.assets.property_value'),
         answer: number_to_currency(@legal_aid_application.property_value, unit: t('currency.gbp'))
       ) if @legal_aid_application.own_home? %>
 
   <%= check_answer_link(
         name: :outstanding_mortgage,
-        url: check_answer_url_for(user_type, :outstanding_mortgage, application),
+        url: check_answer_url_for(user_type, :outstanding_mortgages, application),
         question: t('.assets.outstanding_mortgage'),
         answer: number_to_currency(@legal_aid_application.outstanding_mortgage_amount, unit: t('currency.gbp'))
       ) if @legal_aid_application.own_home_mortgage? %>
 
   <%= check_answer_link(
         name: :shared_ownership,
-        url: check_answer_url_for(user_type, :shared_ownership, application),
+        url: check_answer_url_for(user_type, :shared_ownerships, application),
         question: t('.assets.shared_ownership'),
         answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}")
       ) if @legal_aid_application.own_home? %>
 
   <%= check_answer_link(
         name: :percentage_home,
-        url: check_answer_url_for(user_type, :percentage_home, application),
+        url: check_answer_url_for(user_type, :percentage_homes, application),
         question: t('.assets.percentage_home'),
         answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2)
       ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
@@ -55,7 +55,7 @@
       name: :savings_and_investments,
       url: check_answer_url_for(user_type, :savings_and_investments, application),
       question: t('.assets.savings_and_investments'),
-      answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: "shared.forms.revealing_checkbox.attribute.#{user_type}s.savings_and_investments.check_box_")
+      answer_hash: capital_amounts_list(@legal_aid_application.savings_amount, locale_namespace: "shared.forms.revealing_checkbox.attribute.#{user_type}.savings_and_investments.check_box_")
     ) if @legal_aid_application.savings_amount? %>
 
 <%= check_answer_one_change_link(
@@ -64,7 +64,7 @@
       question: t('.assets.other_assets'),
       answer_hash: capital_amounts_list(
         @legal_aid_application.other_assets_declaration,
-        locale_namespace: "shared.forms.revealing_checkbox.attribute.#{user_type}s.other_assets.check_box_",
+        locale_namespace: "shared.forms.revealing_checkbox.attribute.#{user_type}.other_assets.check_box_",
         percentage_values: [:second_home_percentage]
       )
     ) if @legal_aid_application.other_assets? %>
