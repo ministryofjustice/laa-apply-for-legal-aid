@@ -9,7 +9,7 @@ module Citizens
         format.html do
           redirect_back fallback_location: citizens_identify_types_of_income_path
         end
-        format.json { head :ok }
+        format.js { head :ok }
       end
     end
 
