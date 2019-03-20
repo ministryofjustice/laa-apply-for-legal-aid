@@ -57,14 +57,14 @@ Feature: Citizen journey
     Then I select "Rent or mortgage"
     Then I click "Save and continue"
 
-    Then I should be on a page showing "Select your payments"
+    Then I should be on a page showing "Your regular payments"
     Then I should be on a page showing "Rent or mortgage"
 
-    Then I click on the Select from your bank statement link for payment type "rent_or_mortgage"
+    Then I click on the add payments link for outgoing type "rent_or_mortgage"
     Then I should be on a page showing "Rent or mortgage"
     Then I should be on a page showing "Select all that apply"
     Then I click "Continue"
-    Then I should be on a page showing "Select your payments"
+    Then I should be on a page showing "Your regular payments"
     Then I click link "Continue"
 
     Then I should be on a page showing "Do you own the home that you live in?"

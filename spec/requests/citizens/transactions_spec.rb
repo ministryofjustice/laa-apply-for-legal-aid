@@ -136,7 +136,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
         subject
         expect(response).to redirect_to citizens_outgoings_summary_index_path
         follow_redirect!
-        expect(response.body).to include('Select your payments')
+        expect(response.body).to include('Add payments you made from')
       end
     end
   end

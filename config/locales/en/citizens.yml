@@ -118,8 +118,11 @@ en:
         add_other_outgoings: Add another type of regular payment
       index:
         add_all_outgoings: Add payments you made from %{start_at} to %{finish_at}.
-        page_heading: Select your payments
-        select: Select from your bank statement
+        page_heading: Your regular payments
+        select_rent_or_mortgage: Add rent or mortgage payments
+        select_child_care: Add childcare costs
+        select_maintenance_out: Add maintenance payments
+        select_legal_aid: Add legal aid payments
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your home?
       hint: Check the statement from your mortgage provider or lender

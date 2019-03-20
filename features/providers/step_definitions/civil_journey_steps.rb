@@ -217,10 +217,10 @@ Then('I click on the add payments link for income type {string}') do |income_typ
   end
 end
 
-Then('I click on the Select from your bank statement link for payment type {string}') do |payment_type|
-  payment_type.downcase!
-  within "#list-item-#{payment_type}" do
-    click_link('Select from your bank statement')
+Then('I click on the add payments link for outgoing type {string}') do |outgoing_type|
+  outgoing_type.downcase!
+  within "#list-item-#{outgoing_type}" do
+    click_link(I18n.t(".citizens.outgoings_summary.index.select_#{outgoing_type}"))
   end
 end
 
