@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe Flow::KeyPoint do
   let(:journey) { :providers }
   let(:key_point) { :start_after_applicant_completes_means }
-  let(:step) { :check_merits_answers }
+  let(:step) { :means_summaries }
   let(:legal_aid_application) { create :legal_aid_application }
   let(:flow) do
     Flow::BaseFlowService.flow_service_for(
       journey,
       legal_aid_application: legal_aid_application,
-      current_step: :check_merits_answers
+      current_step: step
     )
   end
 

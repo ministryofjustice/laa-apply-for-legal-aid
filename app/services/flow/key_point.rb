@@ -3,7 +3,7 @@ module Flow
     KEY_POINTS = {
       citizens: {},
       providers: {
-        start_after_applicant_completes_means: :check_merits_answers,
+        start_after_applicant_completes_means: :means_summaries,
         start_income_update: :capital_introductions,
         start_outgoing_update: :foo
       }
@@ -41,6 +41,5 @@ module Flow
         current_step: step
       )
     end
-
   end
 end
