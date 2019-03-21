@@ -2,3 +2,4 @@
 :queues:
   - default
   - mailers
+  - sidekiq_alive

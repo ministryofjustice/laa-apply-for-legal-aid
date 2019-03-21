@@ -1,8 +1,0 @@
-#!/bin/sh
-# Usage: update_virus_database
-# Description:
-# - Set Virus database to be updated evey morning at 2AM
-# - Redirect logs to docker stdout and stderr
-
-echo "$(echo '0 2 * * * freshclam > /proc/1/fd/1 2>/proc/1/fd/2')" | crontab -
-cron

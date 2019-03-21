@@ -1,2 +1,1 @@
 helm_deploy/apply-for-legal-aid/values-*.yaml filter=git-crypt diff=git-crypt
-helm_deploy/apply-for-legal-aid-uat/values-*.yaml filter=git-crypt diff=git-crypt

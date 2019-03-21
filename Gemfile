@@ -43,6 +43,7 @@ gem 'jwt'
 gem 'redis-namespace'
 gem 'sidekiq'
 gem 'sidekiq-status'
+gem 'sidekiq_alive'
 
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
 gem 'sprockets', '>= 3.0.0'
