@@ -1,5 +1,5 @@
 module CCMS
-  class GetReferenceDataService
+  class ReferenceDataRequestor
 
     NAMESPACES = {
       'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
@@ -9,12 +9,7 @@ module CCMS
       'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIO'
     }
 
-    WSDL_LOCATION = '/Users/stephenrichards/moj/apply/app/services/ccms/wsdls/GetReferenceDataWsdl.xml'
-    SOAP_CLIENT_USERNAME = ENV['SOAP_CLIENT_USERNAME']
-    SOAP_CLIENT_PASSWORD_TYPE = ENV['SOAP_CLIENT_PASSWORD_TYPE']
-    SOAP_CLIENT_PASSWORD = ENV['SOAP_CLIENT_PASSWORD']
-    USER_LOGIN = ENV['USER_LOGIN']
-    USER_ROLE = ENV['USER_ROLE']
+    WSDL_LOCATION = "#{File.dirname(__FILE__)}/wsdls/GetReferenceDataWsdl.xml".freeze
 
     def initialize
       @soap_client ||= Savon.client(
@@ -26,37 +21,33 @@ module CCMS
         namespace_identifier: 'ns2',
         log: true
       )
+      @transaction_request_id = nil
     end
 
-
-    def operations
-      @soap_client.operations
-    end
-    
     def call
       @soap_client.call(:process, soap_header: header_message, message: body_message)
     end
 
+    def request_xml
+      request.body
+    end
 
-    def print_xml
-      request = @soap_client.build_request(:process, soap_header: header_message, message: body_message)
-      puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
-      puts request.body
-      puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
-      rexml_print(request)
+    def formatted_xml
+      result = ''
+      formatter = REXML::Formatters::Pretty.new
+      formatter.compact = true
+      formatter.write(REXML::Document.new(request.body), result)
+      result
+    end
+
+    def transaction_request_id
+      @transaction_request_id ||= Time.now.strftime('%Y%m%d%H%M%S%6N')
     end
 
     private
 
-    def rexml_print(request)
-      require 'rexml/document'
-      doc = REXML::Document.new(request.body)
-      formatter = REXML::Formatters::Pretty.new
-      formatter.compact = true
-      puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
-      formatter.write(doc, $stdout)
-      puts " "
-      puts ">>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<"
+    def request
+      @request ||= @soap_client.build_request(:process, soap_header: header_message, message: body_message)
     end
 
     def message
@@ -70,10 +61,10 @@ module CCMS
       {
         'ns1:Security' => {
           'ns1:UsernameToken' => {
-            'ns1:Username' => SOAP_CLIENT_USERNAME,
+            'ns1:Username' => ENV['SOAP_CLIENT_USERNAME'],
             'ns1:Password' => {
-              '@Type'=> SOAP_CLIENT_PASSWORD_TYPE,
-              content!: SOAP_CLIENT_PASSWORD
+              '@Type'=> ENV['SOAP_CLIENT_PASSWORD_TYPE'],
+              content!: ENV['SOAP_CLIENT_PASSWORD']
             }
           }
         }
@@ -90,10 +81,10 @@ module CCMS
 
     def header_request
       {
-        'ns3:TransactionRequestID' => generate_transaction_request_id,
+        'ns3:TransactionRequestID' => transaction_request_id,
         'ns3:Language' => 'ENG',
-        'ns3:UserLoginID' => USER_LOGIN,
-        'ns3:UserRole' => USER_ROLE
+        'ns3:UserLoginID' => ENV['USER_LOGIN'],
+        'ns3:UserRole' => ENV['USER_ROLE']
       }
     end
 
@@ -104,10 +95,6 @@ module CCMS
           'ns5:Key' => 'CaseReferenceNumber'
         }
       }
-    end
-
-    def generate_transaction_request_id
-      Time.now.strftime('%Y%m%d%H%M%S%6N')
     end
   end
 end
