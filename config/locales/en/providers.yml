@@ -132,6 +132,8 @@ en:
         captial-section-heading: Total capital
         credits-section-heading: Total income
         debits-section-heading: Total outgoings
+        change_declared_income: View/change declared income
+        change_declared_outgoings: View/change declared outgoings
       bank_transaction_table:
         total: '%{text} total'
     merits_declarations:

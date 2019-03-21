@@ -2,6 +2,10 @@ module Flow
   module Flows
     class ProviderCapital < FlowSteps
       STEPS = {
+        capital_introductions: {
+          path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
+          forward: :own_homes
+        },
         own_homes: {
           path: ->(application) { urls.providers_legal_aid_application_own_home_path(application) },
           forward: ->(application) { application.own_home_no? ? :savings_and_investments : :property_values },
@@ -48,15 +52,11 @@ module Flow
         },
         check_passported_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
-<<<<<<< 15caed40c71a479221637d3fb0fc837de6de58fd
           forward: :start_merits_assessments
-=======
-          forward: :details_latest_incidents
         },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
-          forward: :details_latest_incidents
->>>>>>> AP-309 Refactor check answers and use in means summary
+          forward: :start_merits_assessments
         }
       }.freeze
     end

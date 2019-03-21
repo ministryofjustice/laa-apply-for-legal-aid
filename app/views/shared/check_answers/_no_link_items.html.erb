@@ -3,7 +3,7 @@
     <h2 class="govuk-heading-m"><%= question %></h2>
   </div>
   <% if answers.present? %>
-    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-change-link-right">
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
       <p>
         <%= link_to(url, class: 'govuk-link') do %>
           <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
