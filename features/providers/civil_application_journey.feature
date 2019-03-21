@@ -74,6 +74,8 @@ Feature: Civil application journeys
     When I select proceeding type 1
     Then I expect to see 2 proceeding types selected
     When I click 'Continue'
+    Then I should be on a page showing "What you're covered for"
+    Then I click "Continue"
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
@@ -99,6 +101,8 @@ Feature: Civil application journeys
     When I select proceeding type 4
     Then I expect to see 1 proceeding types selected
     When I click 'Continue'
+    Then I should be on a page showing "What you're covered for"
+    Then I click "Continue"
     Then I should be on a page showing 'Check your answers'
 
   @javascript
@@ -126,6 +130,8 @@ Feature: Civil application journeys
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing "What you're covered for"
+    Then I click "Continue"
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -155,6 +161,8 @@ Feature: Civil application journeys
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing "What you're covered for"
+    Then I click "Continue"
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -182,6 +190,8 @@ Feature: Civil application journeys
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing "What you're covered for"
+    Then I click "Continue"
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -203,6 +213,8 @@ Feature: Civil application journeys
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing "What you're covered for"
+    Then I click "Continue"
     Then I should be on a page showing 'Check your answers'
     Then I click "Continue"
     Then I am on the benefit check results page
@@ -379,6 +391,8 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I click "Continue"
     Then I click "Submit"
+    Then I should be on a page showing "Provide details of the case"
+    Then I click "Continue"
     Then I should be on a page showing "Enter details of the latest incident"
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"

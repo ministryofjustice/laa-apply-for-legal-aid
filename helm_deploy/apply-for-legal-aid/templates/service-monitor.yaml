@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ .Release.Name }}-monitor
   namespace: {{ .Release.Namespace }}
 spec:
   selector:

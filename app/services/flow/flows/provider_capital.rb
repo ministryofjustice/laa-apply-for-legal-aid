@@ -48,7 +48,7 @@ module Flow
         },
         check_passported_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
-          forward: :details_latest_incidents
+          forward: :start_merits_assessments
         }
       }.freeze
     end

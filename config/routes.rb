@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
       resources :proceedings_types, only: %i[index create update destroy]
       resource :property_value, only: %i[show update]
+      resource :limitations, only: %i[show update]
       resource :applicant, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
@@ -107,6 +108,7 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
+      resource :start_merits_assessment, only: %i[show update]
     end
   end
 end
