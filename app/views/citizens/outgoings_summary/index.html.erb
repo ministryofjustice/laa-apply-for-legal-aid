@@ -1,23 +1,29 @@
 <%= page_template page_title: t('.page_heading'), template: :form do %>
 
-  <p class="govuk-body"><%= t('.add_all_outgoings') %></p>
-    <ol class="app-task-list">
+  <h2 class="govuk-heading-m">
+    <%= t(
+          '.add_all_outgoings',
+          start_at: l(@legal_aid_application.transaction_period_start_at.to_date, format: :long_date),
+          finish_at: l(@legal_aid_application.transaction_period_finish_at.to_date, format: :long_date)
+        ) %>
+  </h2>
+  <ol class="app-task-list">
 
-      <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
+    <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
 
-        <%= render partial: 'outgoing_type_item',
-                   locals: {
-                     name: transaction_type.name,
-                     number: index + 1,
-                     link_text: t('.select')
-                   } %>
-      <% end %>
+      <%= render partial: 'outgoing_type_item',
+                 locals: {
+                   name: transaction_type.name,
+                   number: index + 1,
+                   link_text: t('.select')
+                 } %>
+    <% end %>
 
-      <% if @legal_aid_application.transaction_types.debits.count < TransactionType.debits.count %>
-        <%= render partial: 'add_other_outgoings' %>
-      <% end %>
+    <% if @legal_aid_application.transaction_types.debits.count < TransactionType.debits.count %>
+      <%= render partial: 'add_other_outgoings' %>
+    <% end %>
 
-    </ol>
+  </ol>
 
   <%= link_to t('generic.continue'), forward_path, class: 'govuk-button govuk-button', id: 'continue' %>
 <% end %>

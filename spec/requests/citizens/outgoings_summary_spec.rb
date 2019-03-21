@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::OutgoingsSummaryController do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   let!(:rent_or_mortgage) { create :transaction_type, name: 'rent_or_mortgage', operation: 'debit' }
   let!(:child_care) { create :transaction_type, name: 'child_care', operation: 'debit' }
