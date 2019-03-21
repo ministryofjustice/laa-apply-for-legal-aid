@@ -4,7 +4,7 @@
     <%= t(
           '.add_all_income',
           start_at: l(@legal_aid_application.transaction_period_start_at.to_date, format: :long_date),
-          finish_at: l(@legal_aid_application.transaction_period_start_at.to_date, format: :long_date)
+          finish_at: l(@legal_aid_application.transaction_period_finish_at.to_date, format: :long_date)
         ) %>
   </h2>
     <ol class="app-task-list">
