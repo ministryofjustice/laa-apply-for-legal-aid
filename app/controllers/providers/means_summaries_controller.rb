@@ -7,6 +7,11 @@ module Providers
       @bank_transaction_amounts = bank_transactions.group(:transaction_type_id).sum(:amount)
     end
 
+    def update
+      authorize legal_aid_application
+      continue_or_draft
+    end
+
     private
 
     def date_from

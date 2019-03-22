@@ -49,4 +49,10 @@
 
   <%= render 'shared/check_answers_assets', user_type: :providers, application: @legal_aid_application %>
 
+    <%= next_action_buttons_with_form(
+          url: providers_legal_aid_application_means_summary_path,
+          method: :patch,
+          show_draft: true
+        ) %>
+
 <% end %>

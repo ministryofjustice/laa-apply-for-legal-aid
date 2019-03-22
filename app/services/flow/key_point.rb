@@ -4,8 +4,7 @@ module Flow
       citizens: {},
       providers: {
         start_after_applicant_completes_means: :means_summaries,
-        start_income_update: :capital_introductions,
-        start_outgoing_update: :foo
+        start_income_update: :capital_introductions
       }
     }.freeze
 
