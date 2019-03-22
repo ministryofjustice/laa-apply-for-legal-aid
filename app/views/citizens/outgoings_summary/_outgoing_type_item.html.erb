@@ -8,11 +8,11 @@
       </span>
     <% end %>
   </h2>
-  <div class="app-task-list__items">
+  <%= content_tag(:div, class: 'app-task-list__items', id: "list-item-#{name}") do %>
     <% if bank_transactions.present? %>
       <%= render 'citizens/bank_transactions/list_selected', bank_transactions: bank_transactions %>
     <% end %>
 
     <%= link_to link_text, citizens_outgoing_transactions_path(transaction_type: name), class: 'govuk-body transaction-type-link' %>
-  </div>
+  <% end %>
 </li>
