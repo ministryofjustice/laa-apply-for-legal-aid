@@ -65,7 +65,7 @@ Rails.application.routes.draw do
       patch '/:transaction_type', to: 'outgoing_transactions#update'
     end
     resources :bank_transactions, only: [] do
-      patch 'remove_transation_type', on: :member
+      patch 'remove_transaction_type', on: :member
     end
   end
 

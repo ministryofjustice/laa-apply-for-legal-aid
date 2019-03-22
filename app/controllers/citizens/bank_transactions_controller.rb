@@ -3,13 +3,13 @@ module Citizens
     include ApplicationFromSession
     before_action :authenticate_applicant!
 
-    def remove_transation_type
+    def remove_transaction_type
       bank_transaction.update! transaction_type: nil
       respond_to do |format|
         format.html do
           redirect_back fallback_location: citizens_identify_types_of_income_path
         end
-        format.json { head :ok }
+        format.js { head :ok }
       end
     end
 

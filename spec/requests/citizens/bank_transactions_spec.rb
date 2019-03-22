@@ -6,15 +6,17 @@ RSpec.describe Citizens::BankTransactionsController, type: :request do
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'PATCH /citizens/bank_transactions/:id/remove_transation_type' do
+  describe 'PATCH /citizens/bank_transactions/:id/remove_transaction_type' do
     let!(:transaction_type) { create :transaction_type }
     let(:bank_transaction) { create :bank_transaction, transaction_type: transaction_type }
     let(:headers) { {} }
+    let(:xhr) { false }
 
     subject do
       patch(
-        remove_transation_type_citizens_bank_transaction_path(bank_transaction),
-        headers: headers
+        remove_transaction_type_citizens_bank_transaction_path(bank_transaction),
+        headers: headers,
+        xhr: xhr
       )
     end
 
@@ -32,17 +34,17 @@ RSpec.describe Citizens::BankTransactionsController, type: :request do
       expect(response).to redirect_to(citizens_identify_types_of_income_path)
     end
 
-    context 'with JSON request' do
-      let(:headers) { { 'ACCEPT' => 'application/json' } }
+    context 'with ajax request' do
+      let(:xhr) { true }
 
       it 'removes the assocation with the transaction type' do
         subject
         expect(bank_transaction.reload.transaction_type).to be_nil
       end
 
-      it 'returns a json response' do
+      it 'returns a js response' do
         subject
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('text/javascript')
       end
 
       it 'does not redirect on success' do

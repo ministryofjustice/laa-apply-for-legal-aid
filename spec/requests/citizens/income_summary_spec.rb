@@ -54,7 +54,7 @@ RSpec.describe Citizens::IncomeSummaryController do
       end
     end
 
-    context 'with assigned (by type) transations' do
+    context 'with assigned (by type) transactions' do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
