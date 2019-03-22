@@ -5,6 +5,12 @@ $(document).ready(function(){
       row.css("height",row.height()); //we fix the row height to stop it collapsing straight away
       row.children("td").css("display","none"); //we remove the row innards to allow the row to collapse to zero height
       row.slideUp(); //invoke collapse
+
+      if (!row.siblings("tr").filter(function() {return $(this).css('display') !== 'none';}).length) { //there are no remaining siblings - all rows have been removed
+        row.parents("table").css("height",row.parents("table").height());
+        row.parents("table").children().css("display","none");
+        row.parents("table").slideUp();
+      }
     })
 
     document.body.addEventListener('ajax:error', function(event){
