@@ -44,13 +44,13 @@
           <% end %>
         </tbody>
       </table>
+      <%= transaction_link %>
+    </div>
+  <% else %>
+    <ul class="app-task-list__items">
+      <li class="app-task-list__item">
         <%= transaction_link %>
-      </div>
-    <% else %>
-      <ul class="app-task-list__items">
-        <li class="app-task-list__item">
-          <%= transaction_link %>
-        </li>
-      </ul>
-    <% end %>
+      </li>
+    </ul>
+  <% end %>
 </li>

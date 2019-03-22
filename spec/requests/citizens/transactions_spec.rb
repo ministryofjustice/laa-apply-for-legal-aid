@@ -123,7 +123,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
         subject
         expect(response).to redirect_to citizens_income_summary_index_path
         follow_redirect!
-        expect(response.body).to include('Add all your income from')
+        expect(response.body).to include('Add income you received from')
       end
     end
 
