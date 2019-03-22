@@ -13,7 +13,7 @@
       ) do |form| %>
 
     <div class="govuk-!-padding-bottom-2"></div>
-    <%= form.govuk_label(:fullname, t('.full_name')) %>
+    <span class="govuk-fieldset__legend govuk-fieldset__legend--m"><%= t('.full_name') %></span>
     <%= form.govuk_text_field :first_name, class: 'govuk-input govuk-!-width-three-quarters', 'aria-label' => 'first name' %>
     <%= form.govuk_text_field :last_name, class: 'govuk-input govuk-!-width-three-quarters', 'aria-label' => 'last name' %>
 
