@@ -20,6 +20,7 @@ Then('I visit the start of the financial assessment') do
 end
 
 Then('I visit the accounts page') do
+  @legal_aid_application.update! transactions_gathered: true
   visit citizens_accounts_path
 end
 

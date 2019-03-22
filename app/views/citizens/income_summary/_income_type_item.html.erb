@@ -1,3 +1,4 @@
+<% transaction_link = link_to link_text, citizens_incoming_transactions_path(transaction_type: name), class: 'govuk-body transaction-type-link' %>
 <li id="<%= "income-type-#{name}" %>">
   <h2 class="app-task-list__section">
     <span class="app-task-list__section-number"><%= number %>. </span>
@@ -8,8 +9,8 @@
       </span>
     <% end %>
   </h2>
-  <div class="app-task-list__items">
-    <% if bank_transactions.present? %>
+  <% if bank_transactions.present? %>
+    <div class="app-task-list__items">
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
@@ -43,8 +44,13 @@
           <% end %>
         </tbody>
       </table>
-    <% end %>
-
-    <%= link_to link_text, citizens_incoming_transactions_path(transaction_type: name), class: 'govuk-body transaction-type-link' %>
-  </div>
+      <%= transaction_link %>
+    </div>
+  <% else %>
+    <ul class="app-task-list__items">
+      <li class="app-task-list__item">
+        <%= transaction_link %>
+      </li>
+    </ul>
+  <% end %>
 </li>

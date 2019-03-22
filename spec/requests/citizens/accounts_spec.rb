@@ -1,29 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen accounts request', type: :request do
-  describe 'GET /citizens/account' do
-    let!(:applicant) { create :applicant }
-    let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
-    let(:addresses) do
-      [{ address: Faker::Address.building_number,
-         city: Faker::Address.city,
-         zip: Faker::Address.zip }]
-    end
-    let!(:applicant_bank_provider) { create(:bank_provider, applicant_id: applicant.id) }
-    let!(:applicant_bank_account_holder) do
-      create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,
-                                   addresses: addresses)
-    end
-    let!(:applicant_bank_account) do
-      create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
-    end
-    let(:worker) { {} }
-    let(:worker_id) { nil }
+  let!(:applicant) { create :applicant }
+  let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, applicant: applicant }
+  let(:addresses) do
+    [{ address: Faker::Address.building_number,
+       city: Faker::Address.city,
+       zip: Faker::Address.zip }]
+  end
+  let!(:applicant_bank_provider) { create(:bank_provider, applicant_id: applicant.id) }
+  let!(:applicant_bank_account_holder) do
+    create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,
+                                 addresses: addresses)
+  end
+  let!(:applicant_bank_account) do
+    create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
+  end
 
-    subject { get citizens_accounts_path(worker_id: worker_id) }
+  describe 'GET /citizens/account/gather' do
+    subject { get citizens_accounts_path }
 
     before do
-      allow(Sidekiq::Status).to receive(:get_all).with(worker_id).and_return(worker)
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       subject
     end
@@ -57,8 +54,31 @@ RSpec.describe 'citizen accounts request', type: :request do
       expect(response.body).to include("£#{applicant_bank_account.balance}")
     end
 
+    it 'adds its url to history' do
+      expect(session[:page_history]).to include(citizens_accounts_path)
+    end
+  end
+
+  describe 'GET /citizens/account/gather' do
+    let(:worker) { {} }
+    subject { get gather_citizens_accounts_path }
+
+    before do
+      expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id)
+      allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
+      get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+      subject
+    end
+
+    it 'redirects to index' do
+      expect(response).to redirect_to(citizens_accounts_path)
+    end
+
+    it 'does not add its url to history' do
+      expect(session[:page_history]).not_to include(gather_citizens_accounts_path)
+    end
+
     context 'background worker is still working' do
-      let(:worker_id) { SecureRandom.hex }
       let(:worker) { { 'status' => 'working' } }
 
       it 'returns http success' do
@@ -71,12 +91,11 @@ RSpec.describe 'citizen accounts request', type: :request do
       end
 
       it 'displays a loading message' do
-        expect(response.body).to include(I18n.t('citizens.accounts.index.retrieving_transactions'))
+        expect(response.body).to include(I18n.t('citizens.accounts.gather.retrieving_transactions'))
       end
     end
 
     context 'background worker generated an error' do
-      let(:worker_id) { SecureRandom.hex }
       let(:error) { 'something wrong' }
       let(:worker) { { 'status' => 'complete', 'errors' => [error].to_json } }
 

@@ -36,44 +36,42 @@ RSpec.describe 'applicants omniauth call back', type: :request do
       ImportBankDataWorker.drain
     end
 
-    it 'should redirect to next page' do
-      worker_id = SecureRandom.hex
-      allow(ImportBankDataWorker).to receive(:perform_async).and_return(worker_id)
-      expect(subject).to redirect_to(citizens_accounts_path(worker_id: worker_id))
+    it 'redirects to next page' do
+      expect(subject).to redirect_to(gather_citizens_accounts_path)
     end
 
-    it 'should import bank provider' do
-      expect { subject }.to change { applicant.bank_providers.count }.by(1)
-      expect(bank_provider.token).to eq(token)
-      expect(bank_provider.token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
+    it 'persists the token on the applicant' do
+      subject
+      expect(applicant.reload.true_layer_token).to eq(token)
     end
 
-    it 'should import bank transactions' do
-      expect { subject }.to change { BankTransaction.count }.by_at_least(1)
+    it 'does not add its url to page history' do
+      subject
+      expect(session[:page_history]).not_to include(applicant_true_layer_omniauth_callback_path)
     end
 
     context 'with a string time' do
       let(:true_layer_expires_at) { expires_at.to_json }
 
-      it 'should persist expires_at' do
+      it 'persists expires_at' do
         subject
-        expect(bank_provider.token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
+        expect(applicant.reload.true_layer_token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
       end
     end
 
     context 'with nil time' do
       let(:true_layer_expires_at) { nil }
 
-      it 'should not persist expires_at' do
+      it 'does not persist expires_at' do
         subject
-        expect(bank_provider.token_expires_at).to be_nil
+        expect(applicant.reload.true_layer_token_expires_at).to be_nil
       end
     end
 
     context 'without applicant' do
       let(:applicant) { nil }
 
-      it 'should redirect to root' do
+      it 'redirects to root' do
         expect(subject).to redirect_to(citizens_consent_path)
       end
     end
@@ -81,16 +79,21 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     context 'on authentication failure' do
       before do
         OmniAuth.config.mock_auth[:true_layer] = :invalid_credentials
+        allow_any_instance_of(Logger).to receive(:add)
       end
 
-      it 'should redirect to root' do
+      it 'redirects to root' do
         # Faraday defined within OAuth2::Client outputs to console on error
         # which then outputs into the standard rspec progress sequence rather
         # than to logs. Mocking `logger.add` silences that output for this spec
-        allow_any_instance_of(Logger).to receive(:add)
         subject
         follow_redirect!
         expect(request.env['REQUEST_URI']).to eq(citizens_consent_path)
+      end
+
+      it 'does not add page to history' do
+        subject
+        expect(session[:page_history]).not_to include(applicant_true_layer_omniauth_callback_path)
       end
     end
   end

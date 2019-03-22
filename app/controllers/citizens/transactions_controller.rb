@@ -19,11 +19,11 @@ module Citizens
     private
 
     def date_from
-      l(bank_transactions.last.happened_at.to_date, format: :long_date)
+      l(legal_aid_application.transaction_period_start_at.to_date, format: :long_date)
     end
 
     def date_to
-      l(bank_transactions.first.happened_at.to_date, format: :long_date)
+      l(legal_aid_application.transaction_period_finish_at.to_date, format: :long_date)
     end
 
     def reset_selection
@@ -47,7 +47,6 @@ module Citizens
     def bank_transactions
       @bank_transactions ||=
         legal_aid_application
-        .applicant
         .bank_transactions
         .where(operation: transaction_type.operation)
         .order(happened_at: :desc, description: :desc)

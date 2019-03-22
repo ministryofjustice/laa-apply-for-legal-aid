@@ -2,6 +2,16 @@ module Backable
   extend ActiveSupport::Concern
   HISTORY_SIZE = 20
 
+  class_methods do
+    def skip_back_history_actions
+      @skip_back_history_actions || []
+    end
+
+    def skip_back_history_for(*actions)
+      @skip_back_history_actions = actions.map(&:to_sym)
+    end
+  end
+
   included do
     before_action :update_page_history
 
@@ -18,8 +28,14 @@ module Backable
     private
 
     def update_page_history
+      return if self.class.skip_back_history_actions.include?(action_name.to_sym)
       return unless request.request_method_symbol == :get
 
+      process_history
+      remove_old_history
+    end
+
+    def process_history
       if navigated_back?
         cleanup_path
       elsif flash[:back] == true
@@ -28,8 +44,6 @@ module Backable
       elsif !same_page?
         add_page_to_history
       end
-
-      remove_old_history
     end
 
     def add_page_to_history

@@ -3,12 +3,22 @@ module Citizens
     include ApplicationFromSession
     before_action :authenticate_applicant!
 
-    def index
-      return if worker_working?
+    skip_back_history_for :gather
 
-      @errors = worker_errors.join(', ') if worker_errors.any?
+    def index
       @applicant_banks = current_applicant.bank_providers.collect do |bank_provider|
         ApplicantAccountPresenter.new(bank_provider)
+      end
+    end
+
+    def gather
+      return if worker_working?
+
+      if worker_errors.any?
+        @errors = worker_errors.join(', ')
+      else
+        session[:worker_id] = nil
+        redirect_to action: :index
       end
     end
 
@@ -31,13 +41,16 @@ module Citizens
     end
 
     def worker
-      return nil if params[:worker_id].blank?
-
       @worker ||= Sidekiq::Status.get_all(worker_id)
     end
 
     def worker_id
-      @worker_id ||= params[:worker_id]
+      session[:worker_id] ||= start_worker_to_get_transactions
+    end
+
+    def start_worker_to_get_transactions
+      legal_aid_application.set_transaction_period
+      ImportBankDataWorker.perform_async(legal_aid_application.id)
     end
   end
 end

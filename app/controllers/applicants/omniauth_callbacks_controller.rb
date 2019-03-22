@@ -4,6 +4,8 @@ module Applicants
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     before_action :authenticate_applicant!, only: [:true_layer]
 
+    skip_back_history_for :true_layer, :failure
+
     def true_layer
       unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
@@ -11,8 +13,8 @@ module Applicants
         return
       end
 
-      worker_id = import_bank_data
-      redirect_to citizens_accounts_path(worker_id: worker_id)
+      store_tokens
+      redirect_to gather_citizens_accounts_path
     end
 
     def failure
@@ -22,8 +24,8 @@ module Applicants
 
     private
 
-    def import_bank_data
-      ImportBankDataWorker.perform_async(applicant.id, token, token_expires_at)
+    def store_tokens
+      applicant.store_true_layer_token(token: token, expires: token_expires_at)
     end
 
     def token

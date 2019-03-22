@@ -4,15 +4,18 @@ require 'sidekiq/testing'
 RSpec.describe ImportBankDataWorker, type: :worker do
   let(:token) { SecureRandom.hex }
   let(:token_expires_at) { 1.hour.from_now.round }
-  let(:applicant) { create :applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
+  let(:applicant) { legal_aid_application.applicant }
+  let(:worker_id) { described_class.perform_async(legal_aid_application.id) }
 
-  subject do
-    worker_id = described_class.perform_async(applicant.id, token, token_expires_at)
-    described_class.drain
+  before do
+    described_class.clear
+    applicant.store_true_layer_token(token: token, expires: token_expires_at)
     worker_id
+    endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/me'
+    stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
+    described_class.drain
   end
-
-  before { described_class.clear }
 
   context 'it generates an error' do
     let(:api_error) do
@@ -22,14 +25,8 @@ RSpec.describe ImportBankDataWorker, type: :worker do
         error_details: { foo: :bar }
       }
     end
-    let(:worker_id) { subject }
     let(:worker_status) { Sidekiq::Status.get_all(worker_id) }
     let(:worker_errors) { JSON.parse(worker_status['errors']) }
-
-    before do
-      endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/me'
-      stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
-    end
 
     it 'saves the error' do
       subject

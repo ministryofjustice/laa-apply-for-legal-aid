@@ -1,21 +1,27 @@
 <%= page_template page_title: t('.page_heading'), template: :form do %>
 
-  <p class="govuk-body"><%= t('.add_all_income') %></p>
-    <ol class="app-task-list">
-      <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
-        <%= render(
-              'income_type_item',
-              name: transaction_type.name,
-              number: index + 1,
-              link_text: t(".select_#{transaction_type.name}"),
-              bank_transactions: @bank_transactions[transaction_type]
-            ) %>
-      <% end %>
+  <h2 class="govuk-heading-m">
+    <%= t(
+          '.add_all_income',
+          start_at: l(@legal_aid_application.transaction_period_start_at.to_date, format: :long_date),
+          finish_at: l(@legal_aid_application.transaction_period_finish_at.to_date, format: :long_date)
+        ) %>
+  </h2>
+  <ol class="app-task-list">
+    <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
+      <%= render(
+            'income_type_item',
+            name: transaction_type.name,
+            number: index + 1,
+            link_text: t(".select_#{transaction_type.name}"),
+            bank_transactions: @bank_transactions[transaction_type]
+          ) %>
+    <% end %>
 
-      <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
-        <%= render partial: 'add_other_income' %>
-      <% end %>
-    </ol>
+    <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
+      <%= render partial: 'add_other_income' %>
+    <% end %>
+  </ol>
 
   <%= link_to t('generic.continue'), forward_path, class: 'govuk-button govuk-button', id: 'continue' %>
 <% end %>

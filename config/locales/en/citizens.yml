@@ -2,7 +2,9 @@
 en:
   citizens:
     accounts:
-      accounts:
+      gather:
+        retrieving_transactions: Retrieving bank transactions
+      index:
         account_holder_address_heading: Account holder address
         account_holder_name_heading: Account holder name
         account_number_heading: Account Number
@@ -13,8 +15,6 @@ en:
         sort_code_heading: Sort Code
         type_heading: Type
         your_accounts: Your account(s)
-      index:
-        retrieving_transactions: Retrieving bank transactions
     additional_accounts:
       index:
         field_set_header: Do you have accounts with other banks?
@@ -73,8 +73,8 @@ en:
         col_description: Description
         remove_link: Remove
       index:
-        add_all_income: Add all your income from your bank statements.
-        page_heading: Select your income
+        add_all_income: Add income you received from %{start_at} to %{finish_at}.
+        page_heading: Your income
         select_benefits: Add benefits payments
         select_friends_or_family: Add payments from friends or family
         select_maintenance_in: Add maintenance payments
@@ -111,7 +111,7 @@ en:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
       index:
-        add_all_outgoings: Add all your regular outgoing payments from your bank statements.
+        add_all_outgoings: Add payments you made from %{start_at} to %{finish_at}.
         page_heading: Select your payments
         select: Select from your bank statement
     outstanding_mortgages:

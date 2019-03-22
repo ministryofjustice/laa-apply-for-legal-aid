@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Citizens::TransactionsController, type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:applicant) { legal_aid_application.applicant }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   let(:transaction_type) { create :transaction_type }
@@ -102,7 +102,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
     end
   end
 
-  describe 'PATCH #citizens/transactions' do
+  describe 'updating transactions' do
     let!(:bank_transaction_A) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation, transaction_type: transaction_type }
     let!(:bank_transaction_B) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
     let!(:bank_transaction_other_applicant) { create :bank_transaction, operation: transaction_type.operation }
@@ -123,7 +123,7 @@ RSpec.describe Citizens::TransactionsController, type: :request do
         subject
         expect(response).to redirect_to citizens_income_summary_index_path
         follow_redirect!
-        expect(response.body).to include('Add all your income from')
+        expect(response.body).to include('Add income you received from')
       end
     end
 

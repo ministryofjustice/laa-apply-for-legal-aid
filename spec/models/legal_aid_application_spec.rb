@@ -227,6 +227,20 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe 'set_transaction_period' do
+    subject { legal_aid_application.set_transaction_period }
+
+    it 'sets start' do
+      subject
+      expect(legal_aid_application.transaction_period_start_at).to eq(3.months.ago.beginning_of_day)
+    end
+
+    it 'set finish' do
+      subject
+      expect(legal_aid_application.transaction_period_finish_at).to eq(Time.now.beginning_of_day)
+    end
+  end
+
   describe 'attributes are synced on answers_checked' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
     it 'passes application to keep in sync service' do

@@ -1,0 +1,10 @@
+<% if @errors %>
+  <div class="govuk-error-summary">
+    <h2 class="govuk-error-summary__title"><%= @errors %></h2>
+  </div>
+<% else %>
+  <div class="worker-waiter" data-worker-id="<%= session[:worker_id] %>" align="center">
+    <%= image_tag('loading.gif') %>
+    <p class="govuk-body-l"><%= t '.retrieving_transactions' %></p>
+  </div>
+<% end %>

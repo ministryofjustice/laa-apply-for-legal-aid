@@ -55,4 +55,37 @@ RSpec.describe Applicant, type: :model do
       expect(BankError.count).to be_zero
     end
   end
+
+  context 'True Layer Token' do
+    let(:token) { SecureRandom.uuid }
+    # Note - JSON time doesn't include micro seconds so need to round to second to get consistent result
+    let(:token_expires_at) { 10.minutes.from_now.round(0) }
+    let(:data) { { token: token, expires: token_expires_at } }
+    let(:applicant) { create :applicant }
+
+    subject { applicant.store_true_layer_token token: token, expires: token_expires_at }
+
+    it 'stores the data securely' do
+      expect { subject }.to change { SecureData.count }.by(1)
+    end
+
+    it 'associates the applicant with the secure data' do
+      subject
+      expect(applicant.true_layer_secure_data_id).to eq(SecureData.last.id)
+    end
+
+    describe '#true_layer_token' do
+      it 'returns the original token' do
+        subject
+        expect(applicant.true_layer_token).to eq(token)
+      end
+    end
+
+    describe '#true_layer_token_expires_at' do
+      it 'returns the original expiry time' do
+        subject
+        expect(applicant.true_layer_token_expires_at).to eq(token_expires_at)
+      end
+    end
+  end
 end

@@ -3,9 +3,11 @@ module TrueLayer
     class ImportTransactionsService
       prepend SimpleCommand
 
-      def initialize(api_client, bank_account)
+      def initialize(api_client, bank_account, start_at:, finish_at:)
         @api_client = api_client
         @bank_account = bank_account
+        @start_at = start_at
+        @finish_at = finish_at
       end
 
       def call
@@ -19,7 +21,7 @@ module TrueLayer
 
       private
 
-      attr_reader :api_client, :bank_account
+      attr_reader :api_client, :bank_account, :start_at, :finish_at
 
       def mapped_resources
         transactions.map do |transaction|
@@ -45,15 +47,7 @@ module TrueLayer
       end
 
       def true_layer_resource
-        @true_layer_resource ||= api_client.transactions(bank_account.true_layer_id, date_from, date_to)
-      end
-
-      def date_to
-        @date_to ||= Time.now
-      end
-
-      def date_from
-        @date_from ||= (date_to - 3.months - 1.day).beginning_of_day
+        @true_layer_resource ||= api_client.transactions(bank_account.true_layer_id, start_at, finish_at)
       end
     end
   end

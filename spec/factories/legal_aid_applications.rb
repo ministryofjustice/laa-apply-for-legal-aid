@@ -140,5 +140,10 @@ FactoryBot.define do
     trait :draft do
       draft { true }
     end
+
+    trait :with_transaction_period do
+      transaction_period_start_at { 3.months.ago.beginning_of_day }
+      transaction_period_finish_at { Time.now.beginning_of_day }
+    end
   end
 end

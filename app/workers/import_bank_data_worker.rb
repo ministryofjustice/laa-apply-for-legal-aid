@@ -3,12 +3,17 @@ class ImportBankDataWorker
   include Sidekiq::Status::Worker
   sidekiq_options retry: false
 
-  def perform(applicant_id, token, token_expires_at)
+  attr_reader :legal_aid_application_id
+
+  def perform(legal_aid_application_id)
+    @legal_aid_application_id = legal_aid_application_id
     command = TrueLayer::BankDataImportService.call(
-      applicant: Applicant.find(applicant_id),
-      token: token,
-      token_expires_at: token_expires_at
+      legal_aid_application: legal_aid_application
     )
     store errors: command.errors.to_a.flatten.to_json unless command.success?
+  end
+
+  def legal_aid_application
+    LegalAidApplication.find(legal_aid_application_id)
   end
 end
