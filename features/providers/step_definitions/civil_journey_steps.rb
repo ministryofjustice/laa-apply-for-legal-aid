@@ -51,6 +51,17 @@ Given('I start the journey as far as the applicant page') do
   )
 end
 
+Given('I start the merits application') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :means_completed
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_details_latest_incident_path(@legal_aid_application))
+end
+
 Given('I complete the journey as far as check your answers') do
   applicant = create(
     :applicant,
@@ -208,6 +219,10 @@ Given('I click Check Your Answers Change link for {string}') do |field_name|
   within "#app-check-your-answers__#{field_name}" do
     click_link('Change')
   end
+end
+
+And(/^I should not see "(.*?)"$/) do |arg1|
+  page.should have_no_content(arg1)
 end
 
 Then('I click on the add payments link for income type {string}') do |income_type|

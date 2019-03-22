@@ -330,6 +330,40 @@ Feature: Civil application journeys
     Then I should be on the Applicant page
 
   @javascript @vcr
+  Scenario: Completes the merits application for applicant that does not receive benefits
+    Given I start the merits application
+    Then I should be on a page showing 'Enter details of the latest incident'
+    Then I enter the occurred on date of 2 days ago
+    Then I fill "Details" with "It happened"
+    Then I click "Continue"
+    Then I should be on a page showing "Respondent details"
+    Then I choose option "Respondent understands terms of court order True"
+    Then I choose option "Respondent warning letter sent True"
+    Then I choose option "Respondent police notified True"
+    Then I choose option "Respondent bail conditions set True"
+    Then I fill "Bail conditions set details" with "Foo bar"
+    Then I click "Continue"
+    And I should not see "Client received legal help"
+    And I should not see "Proceedings currently before court"
+    Then I should be on a page showing "Statement of case"
+    Then I fill "Statement" with "Statement of case"
+    Then I click "Continue"
+    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
+    Then I fill "Estimated legal cost" with "1000"
+    Then I click "Continue"
+    Then I should be on a page showing "What are the prospects of success?"
+    Then I choose "Borderline"
+    Then I fill "Success prospect details" with "Prospects of success"
+    Then I click "Continue"
+    Then I should be on a page showing "Client declaration"
+    Then I click "Continue"
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'Estimated legal costs' should be "£1,000.00"
+    Then I click "Accept and send application"
+    Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
+
+
+  @javascript @vcr
   Scenario: Receives benefits and completes the application
     Given I complete the passported journey as far as check your answers
     Then I click "Continue"
@@ -404,14 +438,8 @@ Feature: Civil application journeys
     Then I choose option "Respondent bail conditions set True"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I click "Continue"
-    Then I should be on a page showing "Has your client received legal help for the matter?"
-    Then I choose "No"
-    Then I fill "Application purpose" with "because I can't afford it"
-    Then I click "Continue"
-    Then I should be on a page showing "Are the proceedings, for which funding is being sought, currently, before the court?"
-    Then I choose "Yes"
-    Then I fill "Details of proceedings before the court" with "The case is already in the court"
-    Then I click "Continue"
+    And I should not see "Client received legal help"
+    And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I upload a pdf file
@@ -434,11 +462,6 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
-    Then I click Check Your Answers Change link for 'Client received legal help'
-    Then I choose "Yes"
-    Then I click "Continue"
-    Then I should be on a page showing "Check your answers"
-    And the answer for 'Client received legal help' should be 'Yes'
     Then I click Check Your Answers Change link for 'Estimated legal costs'
     Then I should be on a page showing "What are the estimated legal costs of doing the work?"
     Then I fill "Estimated legal cost" with "2345"
