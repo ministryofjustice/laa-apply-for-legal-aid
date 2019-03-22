@@ -1,15 +1,15 @@
-<%= page_template(
-      page_title: t('forms.address_selection.heading'),
-      template: :form
-    ) do %>
+<%= form_with(
+      model: @form,
+      scope: :address_selection,
+      url: providers_legal_aid_application_address_selection_path(@legal_aid_application),
+      method: :patch,
+      local: true
+    ) do |f| %>
 
-  <%= form_with(
-        model: @form,
-        scope: :address_selection,
-        url: providers_legal_aid_application_address_selection_path(@legal_aid_application),
-        method: :patch,
-        local: true
-      ) do |f| %>
+  <%= page_template(
+        page_title: t('forms.address_selection.heading'),
+        template: :form
+      ) do %>
 
     <div class="govuk-!-padding-bottom-8"></div>
 
@@ -39,7 +39,7 @@
         <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
       <% end %>
       <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
-      <%= f.select(:lookup_id, @addresses.collect { |a| [a.full_address, a.lookup_id] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select #{input_error_class}", id: :address) %>
+      <%= f.select(:lookup_id, @addresses.collect { |a| [a.full_address, a.lookup_id] }, { include_blank: "#{@addresses.size} addresses found" }, class: "govuk-select govuk-!-width-full #{input_error_class}", id: :address) %>
     </div>
 
     <p><%= link_to t('.link_text'), providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
