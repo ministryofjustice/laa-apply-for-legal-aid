@@ -4,7 +4,7 @@
 
   <div class="govuk-!-padding-bottom-4"></div>
 
-  <%= form_with(url: citizens_transactions_path, method: :patch, local: true) do |form| %>
+  <%= form_with(method: :patch, local: true) do |form| %>
 
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
 

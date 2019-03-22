@@ -10,7 +10,7 @@
   </h2>
   <ul class="app-task-list__items">
     <li class="app-task-list__item" id="<%= "list-item-#{name}" %>">
-      <%= link_to link_text, citizens_transactions_path(transaction_type: name), class: 'govuk-body' %>
+      <%= link_to link_text, citizens_outgoing_transactions_path(transaction_type: name), class: 'govuk-body' %>
     </li>
   </ul>
 </li>

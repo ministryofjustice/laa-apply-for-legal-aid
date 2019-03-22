@@ -54,9 +54,13 @@ Rails.application.routes.draw do
     resource :identify_types_of_outgoing, only: %i[show update]
     resources :income_summary, only: :index
     resources :outgoings_summary, only: :index
-    resource :transactions, only: [] do
-      get '/:transaction_type', to: 'transactions#show', as: ''
-      patch '/:transaction_type', to: 'transactions#update'
+    resource :incoming_transactions, only: [] do
+      get '/:transaction_type', to: 'incoming_transactions#show', as: ''
+      patch '/:transaction_type', to: 'incoming_transactions#update'
+    end
+    resource :outgoing_transactions, only: [] do
+      get '/:transaction_type', to: 'outgoing_transactions#show', as: ''
+      patch '/:transaction_type', to: 'outgoing_transactions#update'
     end
     resources :bank_transactions, only: [] do
       patch 'remove_transation_type', on: :member
