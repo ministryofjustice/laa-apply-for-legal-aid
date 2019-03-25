@@ -2,6 +2,7 @@ require 'sidekiq'
 require 'sidekiq-status'
 require 'prometheus_exporter/client'
 require 'prometheus_exporter/instrumentation'
+require 'prometheus_exporter/metric'
 
 redis_url = "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" if ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present?
 namespace = ENV.fetch('HOST', 'laa-apply')
