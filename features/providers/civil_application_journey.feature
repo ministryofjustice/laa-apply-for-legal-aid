@@ -439,7 +439,6 @@ Feature: Civil application journeys
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I click "Continue"
     And I should not see "Client received legal help"
-    And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I upload a pdf file
