@@ -1,16 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::OutgoingsSummaryController do
-  let!(:rent_or_mortgage) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
-  let(:transaction_types) { create_list :transaction_type, 2, :debit }
-  let(:other_transaction_type) { create :transaction_type, :debit }
+  let(:transaction_type) { create :transaction_type, :debit_with_standard_name }
+  let(:other_transaction_type) { create :transaction_type, :debit_with_standard_name }
   let!(:legal_aid) { create :transaction_type, :debit, name: 'legal_aid' }
   let(:legal_aid_application) do
     create(
       :legal_aid_application,
       :with_applicant,
       :with_transaction_period,
-      transaction_types: transaction_types
+      transaction_types: [transaction_type]
     )
   end
   let(:secure_id) { legal_aid_application.generate_secure_id }
@@ -31,14 +30,14 @@ RSpec.describe Citizens::OutgoingsSummaryController do
 
     it 'displays a section for all transaction types linked to this application' do
       subject
-      transaction_types.pluck(:name).each do |name|
-        legend = I18n.t("transaction_types.names.#{name}")
-        expect(parsed_response_body.css("ol li h2#outgoing-type-#{name}").text).to match(/#{legend}/)
-      end
+      name = transaction_type.name
+      legend = I18n.t("transaction_types.names.#{name}")
+      expect(parsed_response_body.css("ol li h2#outgoing-type-#{name}").text).to match(/#{legend}/)
     end
 
     it 'does not display a section for transaction types not linked to this application' do
       subject
+      p TransactionType.pluck :name
       expect(parsed_response_body.css("ol li h2#outgoing-type-#{other_transaction_type.name}").size).to be_zero
     end
 
@@ -54,7 +53,7 @@ RSpec.describe Citizens::OutgoingsSummaryController do
         create(
           :legal_aid_application,
           :with_applicant,
-          transaction_types: (transaction_types + [other_transaction_type])
+          transaction_types: [transaction_type, other_transaction_type]
         )
       end
       it 'does not display an Add additional outgoing types section' do

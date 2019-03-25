@@ -1,4 +1,10 @@
-<% transaction_link = link_to link_text, citizens_incoming_transactions_path(transaction_type: name), class: 'govuk-body transaction-type-link' %>
+<%
+  transaction_link = link_to(
+    link_text,
+    citizens_incoming_transactions_path(transaction_type: name),
+    class: 'govuk-body transaction-type-link'
+  )
+%>
 <li id="<%= "income-type-#{name}" %>">
   <h2 class="app-task-list__section">
     <span class="app-task-list__section-number"><%= number %>. </span>
@@ -9,50 +15,14 @@
       </span>
     <% end %>
   </h2>
-  <% if bank_transactions.present? %>
-    <div class="app-task-list__items">
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col"><%= t('.col_date') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.col_description') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.col_amount') %></th>
-            <th class="govuk-table__header" scope="col"></th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <% bank_transactions.each do |bank_transaction| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">
-                <%= l(bank_transaction.happened_at, format: :date) %>
-              </td>
-              <td class="govuk-table__cell">
-                <%= bank_transaction.description %>
-              </td>
-              <td class="govuk-table__cell">
-                <%= value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) %>
-              </td>
-              <td class="govuk-table__cell">
-                <%= button_to(
-                      t('.remove_link'),
-                      remove_transaction_type_citizens_bank_transaction_path(bank_transaction),
-                      method: :patch,
-                      class: 'button-as-link',
-                      form_class: 'remote-remove-transaction',
-                      remote: true
-                    ) %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <%= content_tag(:div, class: 'app-task-list__items', id: "list-item-#{name}") do %>
+    <% if bank_transactions.present? %>
+      <%= render 'citizens/bank_transactions/list_selected', bank_transactions: bank_transactions %>
       <%= transaction_link %>
-    </div>
-  <% else %>
-    <ul class="app-task-list__items">
-      <li class="app-task-list__item">
+    <% else %>
+      <p class="app-task-list__item">
         <%= transaction_link %>
-      </li>
-    </ul>
+      </p>
+    <% end %>
   <% end %>
 </li>
