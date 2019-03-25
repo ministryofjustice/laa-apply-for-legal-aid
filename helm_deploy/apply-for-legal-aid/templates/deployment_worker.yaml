@@ -20,6 +20,31 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
+        - name: metrics
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'bundle exec prometheus_exporter -a lib/prometheus_collectors/sidekiq_queue_collector.rb']
+          ports:
+          - containerPort: 9394
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
         - name: worker
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
