@@ -10,7 +10,7 @@ module PrometheusCollector
     def initialize
       @collectors = []
       QUEUE_NAMES.each do |queue_name, desription|
-        @collectors << PrometheusExporter::Metric::Gauge.new(queue_name, description)
+        @collectors << PrometheusExporter::Metric::Gauge.new(queue_name.to_s, description)
       end
     end
 
@@ -20,13 +20,13 @@ module PrometheusCollector
 
     def collect(_obj)
       @collectors.each do |collector|
-        size = Sidekiq::Queue.new(collector.name).size
+        size = Sidekiq::Queue.new(collector.name.to_s).size
         collector.observe(size)
       end
     end
 
     def metrics
-      QUEUE_NAMES.keys
+      QUEUE_NAMES.keys.map(&:to_s)
     end
   end
 end
