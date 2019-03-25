@@ -9,7 +9,7 @@
   </div>
   <% unless read_only %>
     <div class="govuk-summary-list__actions">
-      <%= link_to(url, class: 'govuk-link') do %>
+      <%= link_to(url, class: 'govuk-link change-link') do %>
         <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
       <% end %>
     </div>

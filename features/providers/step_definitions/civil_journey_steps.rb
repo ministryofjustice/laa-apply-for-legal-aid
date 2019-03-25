@@ -339,10 +339,7 @@ end
 
 Then('I am on the read only version of the check your answers page') do
   expect(page).to have_content('Home')
-  expect(page).not_to have_content('change')
-  expect(page).not_to have_content('Continue')
-  expect(page).not_to have_content('Back')
-  expect(page).not_to have_content('Check your answers')
+  expect(page).not_to have_css('.change-link')
 end
 
 Then('I click view on an application') do
