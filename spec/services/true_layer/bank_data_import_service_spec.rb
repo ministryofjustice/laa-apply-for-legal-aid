@@ -101,5 +101,22 @@ RSpec.describe TrueLayer::BankDataImportService do
         expect(bank_error.error).to include(api_error.to_json)
       end
     end
+
+    context 'mock_true_layer_data is on' do
+      let(:sample_data) { TrueLayer::SampleData }
+      before { Setting.create!(mock_true_layer_data: true) }
+
+      it 'uses the Mock ApiClient' do
+        expect(TrueLayer::ApiClient).not_to receive(:new)
+        expect(TrueLayer::ApiClientMock).to receive(:new).and_call_original
+        subject
+      end
+
+      it 'imports the sample data' do
+        expect { subject }.to change { applicant.bank_providers.count }.by(1)
+        expect(bank_provider.credentials_id).to eq(sample_data::PROVIDERS.first[:credentials_id])
+        expect(bank_provider.bank_accounts.pluck(:true_layer_id).sort).to eq(sample_data::ACCOUNTS.pluck(:account_id).sort)
+      end
+    end
   end
 end

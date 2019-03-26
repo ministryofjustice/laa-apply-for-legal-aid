@@ -4,6 +4,8 @@
       back_link: :none
     ) do %>
 
+  <p><%= link_to t('.edit_settings'), admin_settings_path, class: 'govuk-link' %></p>
+
   <%= button_to(
         t('.delete_all'),
         destroy_all_admin_legal_aid_applications_path,

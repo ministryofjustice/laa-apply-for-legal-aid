@@ -92,7 +92,11 @@ module TrueLayer
     end
 
     def api_client
-      @api_client ||= ApiClient.new(token)
+      @api_client ||= api_client_class.new(token)
+    end
+
+    def api_client_class
+      Setting.mock_true_layer_data? ? ApiClientMock : ApiClient
     end
 
     def save_error

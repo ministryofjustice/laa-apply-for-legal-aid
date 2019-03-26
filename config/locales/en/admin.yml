@@ -6,6 +6,7 @@ en:
         delete_all: Delete all applications
         heading_1: 'Admin: Legal Aid Applications'
         no_applications: No applications present
+        edit_settings: Edit Settings
       legal_aid_applications:
         applicant_name: Client's name
         application_ref: Case reference
@@ -13,3 +14,11 @@ en:
         delete: Delete
         latest_applications: Latest Legal Aid Applications
         status: Status
+    settings:
+      show:
+        heading_1: Settings
+        labels:
+          mock_true_layer_data: Mock TrueLayer Data
+        hints:
+          mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data
+

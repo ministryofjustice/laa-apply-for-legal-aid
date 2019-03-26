@@ -22,6 +22,11 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
     end
 
+    it 'has a link to settings' do
+      subject
+      expect(response.body).to include(admin_settings_path)
+    end
+
     context 'when not authenticated' do
       before { sign_out admin_user }
 
