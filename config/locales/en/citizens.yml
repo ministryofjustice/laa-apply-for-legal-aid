@@ -81,13 +81,14 @@ en:
       index:
         add_all_income: Add income you received from %{start_at} to %{finish_at}.
         page_heading: Your income
-        select_benefits: Add benefits payments
-        select_friends_or_family: Add payments from friends or family
-        select_maintenance_in: Add maintenance payments
-        select_pension: Add pension payments
-        select_property_or_lodger: Add income from property or lodger
-        select_salary: Add salary or wage payments
-        select_student_loan: Add student loan or grant payments
+        select:
+          benefits: Add benefits payments
+          friends_or_family: Add payments from friends or family
+          maintenance_in: Add maintenance payments
+          pension: Add pension payments
+          property_or_lodger: Add income from property or lodger
+          salary: Add salary or wage payments
+          student_loan: Add student loan or grant payments
     information:
       show:
         heading_1: Give one-time access to your bank accounts
@@ -119,10 +120,11 @@ en:
       index:
         add_all_outgoings: Add payments you made from %{start_at} to %{finish_at}.
         page_heading: Your regular payments
-        select_rent_or_mortgage: Add rent or mortgage payments
-        select_child_care: Add childcare costs
-        select_maintenance_out: Add maintenance payments
-        select_legal_aid: Add legal aid payments
+        select:
+          rent_or_mortgage: Add rent or mortgage payments
+          child_care: Add childcare costs
+          maintenance_out: Add maintenance payments
+          legal_aid: Add legal aid payments
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your home?
       hint: Check the statement from your mortgage provider or lender

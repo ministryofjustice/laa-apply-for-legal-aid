@@ -213,14 +213,14 @@ end
 Then('I click on the add payments link for income type {string}') do |income_type|
   income_type.downcase!
   within "#income-type-#{income_type}" do
-    click_link(I18n.t(".citizens.income_summary.index.select_#{income_type}"))
+    click_link(I18n.t(".citizens.income_summary.index.select.#{income_type}"))
   end
 end
 
 Then('I click on the add payments link for outgoing type {string}') do |outgoing_type|
   outgoing_type.downcase!
   within "#list-item-#{outgoing_type}" do
-    click_link(I18n.t(".citizens.outgoings_summary.index.select_#{outgoing_type}"))
+    click_link(I18n.t(".citizens.outgoings_summary.index.select.#{outgoing_type}"))
   end
 end
 
