@@ -8,8 +8,8 @@ spec:
     matchLabels:
       app: {{ .Chart.Name }}
   policyTypes:
-    ingress:
   - Ingress
+  ingress:
   - from:
     - namespaceSelector:
         matchLabels:
