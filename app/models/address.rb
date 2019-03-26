@@ -25,7 +25,7 @@ class Address < ApplicationRecord
     [organisation, address_line_one, address_line_two, city, postcode].compact.reject(&:blank?).join(', ')
   end
 
-  def to_json
+  def to_json(*_args)
     {
       organisation: organisation,
       address_line_one: address_line_one,
