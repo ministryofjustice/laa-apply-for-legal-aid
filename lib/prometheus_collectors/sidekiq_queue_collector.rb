@@ -2,9 +2,9 @@ module PrometheusCollector
   class SidekiqQueueCollector < PrometheusExporter::Server::TypeCollector
 
     QUEUE_NAMES = {
-      default_queue_size: 'Default Sidekiq queue size',
-      mailers_queue_size: 'Mailers Sidekiq queue size',
-      sidekiq_alive_queue_size: 'Sidekiq-Alive Sidekiq queue size'
+      default: 'Default Sidekiq queue size',
+      mailers: 'Mailers Sidekiq queue size',
+      sidekiq_alive: 'Sidekiq-Alive Sidekiq queue size'
     }
 
     def initialize
@@ -26,7 +26,7 @@ module PrometheusCollector
     end
 
     def metrics
-      QUEUE_NAMES.keys.map(&:to_s)
+      @collectors
     end
   end
 end
