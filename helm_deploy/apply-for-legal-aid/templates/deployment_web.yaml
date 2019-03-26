@@ -39,13 +39,13 @@ spec:
             httpGet:
               path: /metrics
               port: 9394
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 60
           readinessProbe:
             httpGet:
               path: /metrics
               port: 9394
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 60
           resources:
             limits:
