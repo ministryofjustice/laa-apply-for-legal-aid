@@ -54,12 +54,17 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)
-    find_by! secure_data[:legal_aid_application]
+    if secure_data[:expired_at] < Time.now
+      SimpleResult.new(error: :expired)
+    else
+      SimpleResult.new(value: find_by!(secure_data[:legal_aid_application]))
+    end
   end
 
   def generate_secure_id
     SecureData.create_and_store!(
       legal_aid_application: { id: id },
+      expired_at: Time.current.beginning_of_day + 8.days,
       # So each secure data payload is unique
       token: SecureRandom.hex
     )
