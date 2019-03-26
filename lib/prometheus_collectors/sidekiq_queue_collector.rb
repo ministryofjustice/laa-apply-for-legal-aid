@@ -9,7 +9,7 @@ module PrometheusCollector
 
     def initialize
       @collectors = []
-      QUEUE_NAMES.each do |queue_name, desription|
+      QUEUE_NAMES.each do |queue_name, description|
         @collectors << PrometheusExporter::Metric::Gauge.new(queue_name.to_s, description)
       end
     end
