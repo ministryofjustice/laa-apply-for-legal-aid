@@ -13,6 +13,7 @@ module PrometheusCollector
       end
     end
 
+    
     def type
       'sidekiq_queue_sizes'
     end
