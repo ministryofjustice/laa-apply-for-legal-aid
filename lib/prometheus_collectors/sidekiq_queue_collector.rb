@@ -1,11 +1,10 @@
 module PrometheusCollector
   class SidekiqQueueCollector < PrometheusExporter::Server::TypeCollector
-
     GAUGE_NAMES = {
       sidekiq_queue_default: 'Default Sidekiq queue size',
       sidekiq_queue_mailers: 'Mailers Sidekiq queue size',
       sidekiq_queue_sidekiq_alive: 'Sidekiq-Alive Sidekiq queue size'
-    }
+    }.freeze
 
     def initialize
       @gauges = []

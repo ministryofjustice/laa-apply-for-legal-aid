@@ -21,7 +21,7 @@ module PrometheusCollector
       end
 
       it 'has a gauge for each sidekiq queue' do
-        expect(collector.metrics.map(&:name)).to eq %w{ sidekiq_queue_default sidekiq_queue_mailers sidekiq_queue_sidekiq_alive }
+        expect(collector.metrics.map(&:name)).to eq %w[sidekiq_queue_default sidekiq_queue_mailers sidekiq_queue_sidekiq_alive]
       end
     end
 
