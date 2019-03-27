@@ -90,6 +90,14 @@ RSpec.describe 'provider own home requests', type: :request do
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
             end
           end
+
+          context 'while provider checking answers of citizen' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :provider_checking_citizens_means_answers }
+
+            it 'redirects to the means summary page' do
+              expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+            end
+          end
         end
       end
 

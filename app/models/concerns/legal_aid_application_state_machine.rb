@@ -12,6 +12,8 @@ module LegalAidApplicationStateMachine
       state :checking_citizen_answers
       state :checking_passported_answers
       state :means_completed
+      state :provider_checking_citizens_means_answers
+      state :provider_checked_citizens_means_answers
       state :checking_merits_answers
       state :merits_completed
 
@@ -51,15 +53,12 @@ module LegalAidApplicationStateMachine
 
       event :complete_means do
         transitions from: :checking_citizen_answers, to: :means_completed,
-                    after: -> do
-                      CleanupCapitalAttributes.call(self)
-                      provider_step = Flow::KeyPoint.step_for(
-                        journey: :providers,
-                        key_point: :start_after_applicant_completes_means
-                      )
-                      update!(provider_step: provider_step)
-                    end
+                    after: -> { ApplicantCompleteMeans.call(self) }
         transitions from: :checking_passported_answers, to: :means_completed
+      end
+
+      event :provider_check_citizens_means_answers do
+        transitions from: :means_completed, to: :provider_checking_citizens_means_answers
       end
 
       event :check_merits_answers do

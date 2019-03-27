@@ -166,7 +166,8 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
 
           context 'checking answers' do
-            let(:application) { create :legal_aid_application, :without_own_home, :checking_passported_answers }
+            let(:state) { :checking_passported_answers }
+            let(:application) { create :legal_aid_application, :without_own_home, state: state }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
 
             before do
@@ -178,6 +179,14 @@ RSpec.describe 'provider other assets requests', type: :request do
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(oad.legal_aid_application))
+            end
+
+            context "provider checking citizen's answers" do
+              let(:state) { :provider_checking_citizens_means_answers }
+
+              it 'redirects to means summary page' do
+                expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+              end
             end
           end
 

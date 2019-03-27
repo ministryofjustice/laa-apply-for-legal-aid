@@ -7,7 +7,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
   let(:legal_aid_application) do
-    create :legal_aid_application, applicant: applicant, provider: provider, transaction_types: [transaction_type]
+    create :legal_aid_application, applicant: applicant, provider: provider, transaction_types: [transaction_type], state: :means_completed
   end
   let(:login) { login_as provider }
 

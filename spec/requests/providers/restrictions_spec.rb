@@ -83,6 +83,24 @@ RSpec.describe 'citizen restrictions request', type: :request do
             expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
+
+        context 'provider checking their answers' do
+          let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checking_passported_answers }
+
+          it 'redirects to check passported answers' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+          end
+        end
+
+        context "provider checking citizen's answers" do
+          let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :provider_checking_citizens_means_answers }
+
+          it 'redirects to means summary page' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+          end
+        end
       end
 
       context 'Form submitted with Save as draft button' do
@@ -106,7 +124,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
             expect(legal_aid_application.restrictions).to match_array(restrictions)
           end
 
-          it 'redirects to check your answers' do
+          it 'redirects to the list of applications' do
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
