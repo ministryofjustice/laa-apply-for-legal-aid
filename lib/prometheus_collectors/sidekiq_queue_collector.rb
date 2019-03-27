@@ -1,6 +1,5 @@
 module PrometheusCollector
   class SidekiqQueueCollector < PrometheusExporter::Server::TypeCollector
-
     QUEUE_NAMES = {
       default: 'Default Sidekiq queue size',
       mailers: 'Mailers Sidekiq queue size',
