@@ -140,7 +140,7 @@ Given('I complete the passported journey as far as capital check your answers') 
     :legal_aid_application,
     :with_everything,
     :with_proceeding_types,
-    :answers_checked,
+    :client_details_answers_checked,
     applicant: applicant
   )
   login_as @legal_aid_application.provider

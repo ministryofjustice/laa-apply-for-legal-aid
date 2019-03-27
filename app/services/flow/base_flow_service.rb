@@ -26,7 +26,7 @@ module Flow
     end
 
     def forward_path
-      if checking_answers? && check_answers_step
+      if legal_aid_application.checking_answers? && check_answers_step
         return path(forward_step) if carry_on_sub_flow?
 
         return path(check_answers_step)
@@ -40,13 +40,6 @@ module Flow
     end
 
     private
-
-    def checking_answers?
-      legal_aid_application.checking_answers? ||
-        legal_aid_application.checking_citizen_answers? ||
-        legal_aid_application.checking_passported_answers? ||
-        legal_aid_application.checking_merits_answers?
-    end
 
     def carry_on_sub_flow?
       carry_on_sub_flow = steps.dig(current_step, :carry_on_sub_flow)

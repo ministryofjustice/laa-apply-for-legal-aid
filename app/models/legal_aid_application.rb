@@ -126,6 +126,13 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     provider_submitted?
   end
 
+  def checking_answers?
+    checking_client_details_answers? ||
+      checking_citizen_answers? ||
+      checking_passported_answers? ||
+      checking_merits_answers?
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

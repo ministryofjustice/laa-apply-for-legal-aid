@@ -101,8 +101,8 @@ RSpec.describe 'providers applicant requests', type: :request do
           end
         end
 
-        context 'when the legal aid application is in checking_answers state' do
-          let(:application) { create(:legal_aid_application, state: :checking_answers) }
+        context 'when the legal aid application is in checking_client_details_answers state' do
+          let(:application) { create(:legal_aid_application, state: :checking_client_details_answers) }
 
           it 'redirects to check_your_answers page' do
             subject

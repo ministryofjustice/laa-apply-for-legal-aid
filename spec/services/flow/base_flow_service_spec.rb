@@ -49,7 +49,7 @@ RSpec.describe Flow::BaseFlowService do
     end
 
     context 'checking answer' do
-      let(:legal_aid_application) { create :legal_aid_application, :checking_answers }
+      let(:legal_aid_application) { create :legal_aid_application, :checking_client_details_answers }
 
       context 'and check_answers page is defined' do
         let(:current_step) { :savings_and_investments }
@@ -59,7 +59,7 @@ RSpec.describe Flow::BaseFlowService do
         end
 
         context 'and we are in a sub flow' do
-          let(:legal_aid_application) { create :legal_aid_application, :checking_answers, :with_own_home_mortgaged }
+          let(:legal_aid_application) { create :legal_aid_application, :checking_client_details_answers, :with_own_home_mortgaged }
           let(:current_step) { :own_homes }
 
           it 'returns next page in the sub flow' do

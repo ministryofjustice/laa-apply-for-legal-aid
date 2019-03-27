@@ -257,16 +257,16 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'attributes are synced on answers_checked' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
+  describe 'attributes are synced on client_details_answers_checked' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_client_details_answers }
     it 'passes application to keep in sync service' do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
-      legal_aid_application.answers_checked!
+      legal_aid_application.client_details_answers_checked!
     end
 
     context 'and attributes changed' do
       before do
-        legal_aid_application.answers_checked!
+        legal_aid_application.client_details_answers_checked!
         legal_aid_application.reload
       end
       it 'resets property values' do

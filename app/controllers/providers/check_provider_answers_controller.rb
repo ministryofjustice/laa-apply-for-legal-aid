@@ -5,7 +5,7 @@ module Providers
       @applicant = legal_aid_application.applicant
       @read_only = legal_aid_application.read_only?
       @address = @applicant.addresses.first
-      legal_aid_application.check_your_answers! unless legal_aid_application.checking_answers? || legal_aid_application.provider_submitted?
+      legal_aid_application.check_your_answers! unless legal_aid_application.checking_client_details_answers? || legal_aid_application.provider_submitted?
     end
 
     def reset
@@ -14,7 +14,7 @@ module Providers
     end
 
     def continue
-      legal_aid_application.answers_checked! unless draft_selected?
+      legal_aid_application.client_details_answers_checked! unless draft_selected?
       continue_or_draft
     end
   end

@@ -137,9 +137,9 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
       end
 
-      it 'changes the state to "answers_checked"' do
+      it 'changes the state to "client_details_answers_checked"' do
         subject
-        expect(application.reload.answers_checked?).to be_truthy
+        expect(application.reload.client_details_answers_checked?).to be_truthy
       end
 
       it 'syncs the application' do
@@ -168,8 +168,8 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'changes the state to "answers_checked"' do
-        expect(application).not_to be_answers_checked
+      it 'changes the state to "client_details_answers_checked"' do
+        expect(application).not_to be_client_details_answers_checked
       end
 
       it 'sets application as draft' do

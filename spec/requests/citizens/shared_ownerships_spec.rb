@@ -56,7 +56,7 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
       end
 
       context 'while checking answers' do
-        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_answers }
+        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_client_details_answers }
 
         it 'redirects to the next step in flow' do
           patch_request
@@ -83,7 +83,7 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
       end
 
       context 'while checking answers' do
-        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_answers }
+        let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_client_details_answers }
 
         it 'redirects to restrictions page' do
           patch_request

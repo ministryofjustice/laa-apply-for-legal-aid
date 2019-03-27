@@ -118,7 +118,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
     end
 
     context 'while checking answers' do
-      let(:application) { create :legal_aid_application, :checking_answers, :with_applicant }
+      let(:application) { create :legal_aid_application, :checking_client_details_answers, :with_applicant }
 
       it 'redirects to the "restrictions" page' do
         expect(response).to redirect_to(citizens_restrictions_path)
