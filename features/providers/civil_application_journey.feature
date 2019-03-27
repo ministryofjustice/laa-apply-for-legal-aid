@@ -12,8 +12,11 @@ Feature: Civil application journeys
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
     Given I visit the application service
+    Then I take a snapshot of "Service start"
     And I click link "Start"
+    Then I take a snapshot of "Start page"
     And I click "Start now"
+    Then I take a snapshot of "Applicant page"
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'

@@ -76,6 +76,7 @@ group :development, :test do
   # Available in dev env for generators
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.8'
+  gem 'spectre_client', git: 'git@github.com:wearefriday/spectre_client.git'
 end
 
 group :development do
