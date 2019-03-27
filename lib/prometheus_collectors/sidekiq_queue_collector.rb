@@ -1,16 +1,16 @@
 module PrometheusCollector
   class SidekiqQueueCollector < PrometheusExporter::Server::TypeCollector
 
-    QUEUE_NAMES = {
-      default: 'Default Sidekiq queue size',
-      mailers: 'Mailers Sidekiq queue size',
-      sidekiq_alive: 'Sidekiq-Alive Sidekiq queue size'
+    GAUGE_NAMES = {
+      sidekiq_queue_default: 'Default Sidekiq queue size',
+      sidekiq_queue_mailers: 'Mailers Sidekiq queue size',
+      sidekiq_queue_sidekiq_alive: 'Sidekiq-Alive Sidekiq queue size'
     }
 
     def initialize
-      @collectors = []
-      QUEUE_NAMES.each do |queue_name, description|
-        @collectors << PrometheusExporter::Metric::Gauge.new(queue_name.to_s, description)
+      @gauges = []
+      GAUGE_NAMES.each do |gauge_name, description|
+        @gauges << PrometheusExporter::Metric::Gauge.new(gauge_name.to_s, description)
       end
     end
 
@@ -19,14 +19,20 @@ module PrometheusCollector
     end
 
     def collect(_obj)
-      @collectors.each do |collector|
-        size = Sidekiq::Queue.new(collector.name.to_s).size
-        collector.observe(size)
+      @gauges.each do |gauge|
+        size = Sidekiq::Queue.new(queue_name(gauge)).size
+        gauge.observe(size)
       end
     end
 
     def metrics
-      @collectors
+      @gauges
+    end
+
+    private
+
+    def queue_name(gauge)
+      gauge.name.sub(/^sidekiq_queue_/, '')
     end
   end
 end
