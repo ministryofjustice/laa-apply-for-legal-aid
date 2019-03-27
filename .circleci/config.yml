@@ -185,14 +185,6 @@ jobs:
           name: Helm deployment to redcjump
           command: |
 
-            echo "APPLICATION_DEPLOY_NAME: $APPLICATION_DEPLOY_NAME"
-            echo "KUBE_ENV_REDCJUMP_NAMESPACE: $KUBE_ENV_REDCJUMP_NAMESPACE"
-            echo "ECR_ENDPOINT: $ECR_ENDPOINT"
-            echo "GITHUB_TEAM_NAME_SLUG: $GITHUB_TEAM_NAME_SLUG"
-            echo "REPO_NAME: $REPO_NAME"
-            echo "CIRCLE_SHA1: $CIRCLE_SHA1"
-            echo "REDCJUMP_HOST: $REDCJUMP_HOST"
-
             helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                           --install --wait \
                           --tiller-namespace=${KUBE_ENV_REDCJUMP_NAMESPACE} \
