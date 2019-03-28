@@ -42,10 +42,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
           forward: ->(application) { application.benefit_check_result.positive? ? :capital_introductions : :online_bankings }
         },
-        capital_introductions: {
-          path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
-          forward: :own_homes
-        },
         online_bankings: {
           path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },
           forward: ->(application) { application.applicant.uses_online_banking? ? :about_the_financial_assessments : :place_holder_ccms }

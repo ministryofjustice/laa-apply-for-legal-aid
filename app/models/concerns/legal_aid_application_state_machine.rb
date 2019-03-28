@@ -53,7 +53,11 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_citizen_answers, to: :means_completed,
                     after: -> do
                       CleanupCapitalAttributes.call(self)
-                      update!(provider_step: :start_merits_assessment)
+                      provider_step = Flow::KeyPoint.step_for(
+                        journey: :providers,
+                        key_point: :start_after_applicant_completes_means
+                      )
+                      update!(provider_step: provider_step)
                     end
         transitions from: :checking_passported_answers, to: :means_completed
       end
