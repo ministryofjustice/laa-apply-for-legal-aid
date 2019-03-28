@@ -28,7 +28,7 @@ module Citizens
         render plain: 'Expired Page - missed url expiry in 7 day window'
       else
         legal_aid_application = @result.value
-        if legal_aid_application.completed_at.blank? # possibly .nil? is better here
+        if legal_aid_application.completed_at.blank?
           sign_out current_provider if provider_signed_in?
 
           session[:current_application_id] = legal_aid_application.id
@@ -36,7 +36,7 @@ module Citizens
           sign_applicant_in_via_devise(legal_aid_application.applicant)
           redirect_to citizens_legal_aid_applications_path
         else
-          render plain: 'Expired Page - completed the application '
+          render plain: 'Expired Page - completed the application'
         end
       end
     end

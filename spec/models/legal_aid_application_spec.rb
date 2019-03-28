@@ -136,6 +136,11 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(data).to be_present
       expect(described_class.find_by(data)).to eq(legal_aid_application)
     end
+
+    it 'generates data that contains a date which is in 8 days' do
+      data = SecureData.for(subject)
+      expect(data[:expired_at]).to be_between(Time.current.beginning_of_day + 8.days, Time.now + 9.days - 5.minutes)
+    end
   end
 
   describe '.find_by_secure_id!' do
@@ -143,7 +148,7 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:secure_id) { legal_aid_application.generate_secure_id }
 
     it 'should return matching legal aid legal_aid_application' do
-      expect(described_class.find_by_secure_id!(secure_id)).to eq(legal_aid_application)
+      expect(described_class.find_by_secure_id!(secure_id).value).to eq(legal_aid_application)
     end
   end
 

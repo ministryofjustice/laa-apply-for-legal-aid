@@ -356,7 +356,6 @@ ActiveRecord::Schema.define(version: 2019_04_05_151933) do
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "expired_at"
   end
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
