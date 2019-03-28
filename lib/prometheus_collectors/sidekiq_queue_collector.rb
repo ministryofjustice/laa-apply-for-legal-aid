@@ -1,7 +1,7 @@
 module PrometheusCollector
   class SidekiqQueueCollector < PrometheusExporter::Server::TypeCollector
     def initialize
-      @queue_size = PrometheusExporter::Metric::Gauge.new('sidekiq_queue_size', 'Sidekiq Queue Size')
+      @queue_size = PrometheusExporter::Metric::Gauge.new('sidekiq_default_queue_size', 'Sidekiq Default Queue Size')
     end
 
     def type
@@ -9,7 +9,7 @@ module PrometheusCollector
     end
 
     def collect(_obj)
-      @queue_size.observe(rand(5))
+      @queue_size.observe(Sidekiq::Queue.new('default').size + 15)
     end
 
     def metrics
