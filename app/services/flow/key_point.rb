@@ -1,4 +1,6 @@
 module Flow
+  # Used to define the point in the flow by labels that are relevant to their place in the flow rather than the role of
+  # the page itself. In particular, points where the flow forks, branches rejoin the flow, or the start/end of sequences.
   class KeyPoint
     KEY_POINTS = {
       citizens: {},

@@ -37,7 +37,6 @@ RSpec.describe Citizens::OutgoingsSummaryController do
 
     it 'does not display a section for transaction types not linked to this application' do
       subject
-      p TransactionType.pluck :name
       expect(parsed_response_body.css("ol li h2#outgoing-type-#{other_transaction_type.name}").size).to be_zero
     end
 

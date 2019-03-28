@@ -15,11 +15,11 @@ module Providers
     private
 
     def date_from
-      l(bank_transactions.last.happened_at.to_date, format: :long_date)
+      l(legal_aid_application.transaction_period_start_at.to_date, format: :long_date)
     end
 
     def date_to
-      l(bank_transactions.first.happened_at.to_date, format: :long_date)
+      l(legal_aid_application.transaction_period_finish_at.to_date, format: :long_date)
     end
 
     def bank_transactions
