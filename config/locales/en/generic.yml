@@ -8,6 +8,7 @@ en:
     back: Back
     change: Change
     continue: Continue
+    create_test_applications: Create test applications
     back_to_your_applications: Back to your applications
     errors:
       problem_text: There is a problem

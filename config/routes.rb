@@ -23,7 +23,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'legal_aid_applications#index'
-    resources :legal_aid_applications, only: %i[index destroy] do
+    resources :legal_aid_applications, only: %i[index update destroy] do
+      patch :create_test_applications, on: :collection
       delete :destroy_all, on: :collection
     end
     resource :settings, only: %i[show update]

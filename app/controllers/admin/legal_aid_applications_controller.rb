@@ -5,6 +5,11 @@ module Admin
       @applications = LegalAidApplication.latest.limit(25)
     end
 
+    def create_test_applications
+      TestApplicationCreationService.call
+      redirect_to action: :index
+    end
+
     def destroy_all
       raise 'Legal Aid Application Destroy All action disabled' unless destroy_enabled?
 
