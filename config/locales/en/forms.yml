@@ -10,12 +10,8 @@ en:
       heading: Enter your client's home address
       label_1: postcode
       postcode: Postcode
-      postcode_hint: Postcode must be a valid UK postcode.
       submit_button: Find address
     address_manual:
       heading: Enter your client's address manually
     address_selection:
       heading: Enter your client's home address
-    client_detail:
-      dob_hint: For example, 31 3 1980
-      national_insurance_number_hint: For example, QQ 12 34 56 C
