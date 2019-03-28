@@ -8,21 +8,19 @@
         ) %>
   </h2>
   <ol class="app-task-list">
-
     <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
-
-      <%= render partial: 'outgoing_type_item',
-                 locals: {
-                   name: transaction_type.name,
-                   number: index + 1,
-                   link_text: t('.select')
-                 } %>
+      <%= render(
+            'outgoing_type_item',
+            name: transaction_type.name,
+            number: index + 1,
+            link_text: t('.select'),
+            bank_transactions: @bank_transactions[transaction_type]
+          ) %>
     <% end %>
 
     <% if @legal_aid_application.transaction_types.debits.count < TransactionType.debits.count %>
       <%= render partial: 'add_other_outgoings' %>
     <% end %>
-
   </ol>
 
   <%= link_to t('generic.continue'), forward_path, class: 'govuk-button govuk-button', id: 'continue' %>

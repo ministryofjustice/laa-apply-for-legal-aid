@@ -15,18 +15,25 @@ FactoryBot.define do
     name { TransactionType::NAMES.values.flatten.sample }
     operation { TransactionType::NAMES.keys.sample }
 
+    trait :debit do
+      operation { :debit }
+    end
+    trait :credit do
+      operation { :credit }
+    end
+
     trait :credit_with_standard_name do
       sequence(:name) do |n|
         repeating_sequence_for_transaction_type(:credit, n)
       end
-      operation { 'credit' }
+      operation { :credit }
     end
 
     trait :debit_with_standard_name do
       sequence(:name) do |n|
         repeating_sequence_for_transaction_type(:debit, n)
       end
-      operation { 'debit' }
+      operation { :debit }
     end
   end
 end

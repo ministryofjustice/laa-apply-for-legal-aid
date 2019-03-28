@@ -22,6 +22,12 @@ en:
       new:
         field_set_header: Do you have online access to your accounts with other banks?
         hint: If you do not, you will need to provide paper evidence for these accounts.
+    bank_transactions:
+      list_selected:
+        col_amount: Amount
+        col_date: Date
+        col_description: Description
+        remove_link: Remove
     check_answers:
       index:
         assets:
