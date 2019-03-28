@@ -105,7 +105,7 @@ module GovukElementsFormBuilder
       content_tag(:div, class: collection_radio_buttons_classes(attribute, options)) do
         fieldset(attribute, options) do
           classes = ['govuk-radios']
-          classes << 'govuk-radios--inline' if options[:inline]
+          classes << (options[:inline] ? 'govuk-radios--inline' : 'govuk-!-padding-top-2')
           concat_tags(
             hint_and_error_tags(attribute, options),
             content_tag(:div, class: classes.join(' ')) do
