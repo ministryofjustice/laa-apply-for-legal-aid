@@ -3,13 +3,14 @@ module CheckAnswersHelper
   #     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   #       <%= check_answer_link ..... %>
   #     </dl>
-  def check_answer_link(url:, question:, answer:, name:)
+  def check_answer_link(url:, question:, answer:, name:, read_only: false)
     render(
       'shared/check_answers/item',
       name: name,
       url: url,
       question: question,
-      answer: answer
+      answer: answer,
+      read_only: read_only
     )
   end
 

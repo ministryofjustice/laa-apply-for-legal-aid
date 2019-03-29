@@ -141,6 +141,34 @@ Given('I complete the passported journey as far as capital check your answers') 
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
+Given('I complete the application and view the check your answers page') do
+  applicant = create(
+    :applicant,
+    first_name: 'Test',
+    last_name: 'User',
+    national_insurance_number: 'CB987654A',
+    date_of_birth: '03-04-1999'
+  )
+  create(
+    :address,
+    address_line_one: '3',
+    address_line_two: 'LONSDALE ROAD',
+    city: 'BEXLEYHEATH',
+    postcode: 'DA7 4NG',
+    lookup_used: true,
+    applicant: applicant
+  )
+  proceeding_type = create(:proceeding_type)
+  legal_aid_application = create(
+    :legal_aid_application,
+    applicant: applicant,
+    proceeding_types: [proceeding_type],
+    state: :provider_submitted
+  )
+  login_as legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+end
+
 When('the search for {string} is not successful') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
 end
@@ -152,6 +180,10 @@ end
 And('I search for proceeding {string}') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
   wait_for_ajax
+end
+
+And(/^I should not see "(.*?)"$/) do |arg1|
+  page.should have_no_content(arg1)
 end
 
 When(/^I click clear search$/) do
@@ -303,6 +335,17 @@ end
 Then('I am on the check your answers page for other assets') do
   expect(page).to have_content('Check your answers')
   expect(page).to have_content('Other assets')
+end
+
+Then('I am on the read only version of the check your answers page') do
+  expect(page).to have_content('Home')
+  expect(page).not_to have_css('.change-link')
+end
+
+Then('I click view on an application') do
+  steps %(
+    And I click link "View"
+  )
 end
 
 # rubocop:disable Lint/Debugger

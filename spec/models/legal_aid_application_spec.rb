@@ -241,6 +241,22 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#read_only?' do
+    context 'provider application not submitted' do
+      let(:legal_aid_application) { create :legal_aid_application }
+      it 'returns false' do
+        expect(legal_aid_application.read_only?).to be false
+      end
+    end
+
+    context 'provider submitted' do
+      let(:legal_aid_application) { create :legal_aid_application, :provider_submitted }
+      it 'returns true' do
+        expect(legal_aid_application.read_only?).to eq(true)
+      end
+    end
+  end
+
   describe 'attributes are synced on answers_checked' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_answers }
     it 'passes application to keep in sync service' do

@@ -3,8 +3,9 @@ module Providers
     def index
       @proceeding_types = legal_aid_application.proceeding_types
       @applicant = legal_aid_application.applicant
+      @read_only = legal_aid_application.read_only?
       @address = @applicant.addresses.first
-      legal_aid_application.check_your_answers! unless legal_aid_application.checking_answers?
+      legal_aid_application.check_your_answers! unless legal_aid_application.checking_answers? || legal_aid_application.provider_submitted?
     end
 
     def reset
