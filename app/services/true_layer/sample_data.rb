@@ -42,2075 +42,1771 @@ module TrueLayer
 
     TRANSACTIONS = [
       {
-        transaction_id: 'd325161c2c997d9b1925974d9b9d1f5a',
+        transaction_id: '404ebd7035e7c97960f3ce7a4a4f8811',
         description: 'Cash Bnkm Cooperative',
         currency: 'GBP',
         amount: -40.0,
-        timestamp: '2018-09-27T00:00:00.000+01:00',
+        timestamp: '2018-09-27 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c559da3d0632828c24f95af3b4d95df1',
-        description: 'Tombola.co.uk',
+        transaction_id: '2658d44b99cc6605d59106d9b8336e67',
+        description: 'Tombola.co.uk betting betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-09-28T00:00:00.000+01:00',
+        timestamp: '2018-09-28 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '41d46006b7fdad921e6714e343f088f2',
+        transaction_id: '32a3f714fbd462be57590998171042c9',
         description: 'McDonalds Kilburn',
         currency: 'GBP',
         amount: -8.48,
-        timestamp: '2018-09-28T00:00:00.000+01:00',
+        timestamp: '2018-09-28 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a4942e612476fcd89d3ab2a6a648d17a',
-        description: 'Work and child TC',
+        transaction_id: 'e878f6ea566d2363e9bbe2a5b613bc3c',
+        description: 'Work and child tax credit',
         currency: 'GBP',
         amount: 165.65,
-        timestamp: '2018-09-29T00:00:00.000+01:00',
+        timestamp: '2018-09-28 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '387c4a5510939fa37f523ffec19dc768',
+        transaction_id: '70f61da5bdc38978ae6b93e35e73b35c',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -11.1,
-        timestamp: '2018-09-29T00:00:00.000+01:00',
+        timestamp: '2018-09-29 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '31e38aa8ac6f36d86c5112a78797e723',
+        transaction_id: 'eccab9a273a1f411c335d4ea183e4989',
         description: 'Lloyds Pharmacy',
         currency: 'GBP',
         amount: -2.19,
-        timestamp: '2018-09-29T00:00:00.000+01:00',
+        timestamp: '2018-09-29 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '8cd7b48bde4cdb2da33e9b8824847fc6',
+        transaction_id: '28a81010ca25c35572c1c1f5b8ba8fed',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-09-29T00:00:00.000+01:00',
+        timestamp: '2018-09-29 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9e255f75d3a97609b50dc6031e0c080d',
+        transaction_id: '03885202ce2190bdfb35dea7dae4e57f',
         description: 'Just Eat London',
         currency: 'GBP',
         amount: -15.8,
-        timestamp: '2018-09-29T00:00:00.000+01:00',
+        timestamp: '2018-09-29 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9326d8bf89e279851d7f817342528637',
+        transaction_id: 'd8e84541279f7f5ee153f01337ff4050',
         description: 'Cash RB Scot Oct01 Tesco Killburn',
         currency: 'GBP',
         amount: -40.0,
-        timestamp: '2018-10-04T00:00:00.000+01:00',
+        timestamp: '2018-10-01 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '552569a75adf9f54bdcbe1a5a7084f55',
-        description: 'Creation.co.uk',
+        transaction_id: '99a9aa240e3c4f5ed88d1dba8b3c2129',
+        description: 'Creation.co.uk loan repayment',
         currency: 'GBP',
         amount: -54.8,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'bc8c404fb33f0f3d8b5031ef9e7f1aa3',
+        transaction_id: '01e55198bf47e173c2232eea0043342e',
         description: 'DVLA-REGNUM',
         currency: 'GBP',
         amount: -19.25,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '1691d2f13b5e6419518a38aacbc6bc37',
+        transaction_id: 'bcf42b1158740f86cd000de4a7de2bed',
         description: 'H3G',
         currency: 'GBP',
         amount: -34.88,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ea97ad89f99a38de2946acb3f3f76548',
+        transaction_id: '20d48c568bf9979c164d869891883626',
         description: 'Care Home Ltd Salary',
         currency: 'GBP',
         amount: 108.24,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '0b8935d1e11abfcf4b94ed03edefd99c',
+        transaction_id: '13c9007c1973012c7936c3e2a1a0b462',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -67.92,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '21776ecf98a2268253ac38fd4ab22918',
-        description: 'Tombola.co.uk',
+        transaction_id: 'aa57b16525f4aab9d41672623b30020a',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '01e086ccdb4ab45e5f1d623bde861598',
+        transaction_id: '91232676f08b29e23e3500a2e6016569',
         description: 'Garden Centre',
         currency: 'GBP',
         amount: -6.99,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '70a9a66f7e2c68a969e9caa43fb3a52d',
+        transaction_id: 'a972e5088706dd1d9cc7da9d24a45751',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -53.33,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f8f7d2b539df43d0cb2b1fd8c335718f',
+        transaction_id: 'a715f517819198607775b00a98798d8b',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -19.0,
-        timestamp: '2018-10-02T00:00:00.000+01:00',
+        timestamp: '2018-10-02 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c3deaea30957a1b422b3e940271bca16',
+        transaction_id: 'b22048b755fe3f5efee3085a607f8f68',
         description: 'Sky digital',
         currency: 'GBP',
         amount: -56.79,
-        timestamp: '2018-10-03T00:00:00.000+01:00',
+        timestamp: '2018-10-03 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9116cec8e5361462dd0699f00a62b30b',
+        transaction_id: '0239f22fd09f5f91e8686e8460f6f0aa',
         description: 'Sky digital reversal of 03-10',
         currency: 'GBP',
         amount: 56.79,
-        timestamp: '2018-10-03T00:00:00.000+01:00',
+        timestamp: '2018-10-03 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'bb1ee58951004372862ac11a3f65a0d9',
-        description: 'Work and child TC',
+        transaction_id: '3f1e17d9f5a276ca95dc39fe8b028213',
+        description: 'Work and child tax credit',
         currency: 'GBP',
         amount: 165.55,
-        timestamp: '2018-10-06T00:00:00.000+01:00',
+        timestamp: '2018-10-05 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '00534d2f15712f8ddb19c9dc3fb0f9fa',
+        transaction_id: 'f6aeabd993cc74915aa0db726a82d30f',
         description: 'Cash Natwest 06Oct',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-07T00:00:00.000+01:00',
+        timestamp: '2018-10-07 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '0114b4a5341a03f9fa8a3ef9973b1652',
+        transaction_id: '67751f3499363dace815aaf785ed7879',
         description: 'Cash Notemachine ',
         currency: 'GBP',
         amount: -30.0,
-        timestamp: '2018-10-07T00:00:00.000+01:00',
+        timestamp: '2018-10-07 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f65a8d9e0330ec21a78189368819379f',
+        transaction_id: '823c07432e749a0187a93f1e20f7b074',
         description: 'Care Home Ltd Salary',
         currency: 'GBP',
         amount: 116.4,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '929d1bdec1c1f708d3911eed45c333c3',
+        transaction_id: '90c4638555d096375a3dbf418568a9ef',
         description: 'Cash in HSBC 09Oct',
         currency: 'GBP',
         amount: 60.0,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'df6759882536d3b74f99477b7761a6f5',
+        transaction_id: '51b3d6b29e6998caa1ad3ac5803b9b7e',
         description: 'Jess Jones Rent 0735454',
         currency: 'GBP',
         amount: -1048.5,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '812f1f03f8d00d62cf591f57f8662c21',
+        transaction_id: 'c66b1358a25f92eaba9a778dbe71db6f',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'e067fb9c885137d29a5cd92b9b0711b2',
+        transaction_id: '78932bdf0d80bad6634e3ec6a1b62080',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -19.0,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a92a9b6e30d76d494b7a2865e962a3e2',
+        transaction_id: '4167b2c23d6e257c4dd421a897816c18',
         description: 'Ben Stevens Kilburn',
         currency: 'GBP',
         amount: -3.0,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'cfb7d62b1be9351d967ad9172767f3a9',
+        transaction_id: '4dc1eab5423de4608897e78827c4b650',
         description: 'Queens park',
         currency: 'GBP',
         amount: -11.11,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f7bc27e7d5cde26cbe55a152b8fcb0a6',
+        transaction_id: '49a217e2b0fcd14f049898eb2643995d',
         description: 'McDonalds Kilburn',
         currency: 'GBP',
         amount: -15.11,
-        timestamp: '2018-10-09T00:00:00.000+01:00',
+        timestamp: '2018-10-09 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '13d97152eddbdd20da56c97c4411b86a',
+        transaction_id: '7392cb21856d37d7f63639c0772cafc8',
         description: 'Sky digital',
         currency: 'GBP',
         amount: -56.79,
-        timestamp: '2018-10-11T00:00:00.000+01:00',
+        timestamp: '2018-10-11 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '2acca1297e350bcf5dc6ddeadfa7c3ac',
+        transaction_id: 'f500bc8e11ca516bb940d5c7173d530b',
         description: 'Sky digital reversal of 11-10',
         currency: 'GBP',
         amount: 56.79,
-        timestamp: '2018-10-11T00:00:00.000+01:00',
+        timestamp: '2018-10-11 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'c669caf7d173d456ab4577b7f0003fee',
-        description: 'Work and child TC',
+        transaction_id: '9c23356b7811ee03b07972b2fc486eee',
+        description: 'Work and child tax credit',
         currency: 'GBP',
         amount: 165.65,
-        timestamp: '2018-10-13T00:00:00.000+01:00',
+        timestamp: '2018-10-12 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '51a76c38395ebfdb2fe2c423a9a982a7',
+        transaction_id: '2f6d127a7f050c1a96086316cc4ae09b',
         description: 'Hastings direct',
         currency: 'GBP',
         amount: -49.73,
-        timestamp: '2018-10-13T00:00:00.000+01:00',
+        timestamp: '2018-10-13 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '69ee4c4c73157f6233e4ced57c2b7055',
+        transaction_id: '1c3d30a9dac57c799bd06a51d5d1fac6',
         description: 'Cash RB Scot Oct13 Tesco Killburn',
         currency: 'GBP',
         amount: -50.0,
-        timestamp: '2018-10-13T00:00:00.000+01:00',
+        timestamp: '2018-10-13 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '1e88ad84ef1ea37a071ac0d03966f683',
+        transaction_id: '469278a2d486b6f8a9b5c4eec332864e',
         description: 'Cash Barclay Asda Oct13',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-13T00:00:00.000+01:00',
+        timestamp: '2018-10-13 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ecf3b4de2b59d75c8c2e33175462a03e',
+        transaction_id: '685e6ac5d32b22b9d324741e08127ee1',
         description: 'Cash BNKM Cooperative Oct13',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-13T00:00:00.000+01:00',
+        timestamp: '2018-10-13 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '8cbeb9cd87dfaaaaaac2c2bb2a532390',
+        transaction_id: '452243c8960c6432e4cda99db815e984',
         description: 'Cash BNKM Cooperative Oct14',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-13T00:00:00.000+01:00',
+        timestamp: '2018-10-13 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '74dd77c90d5010916489601a6769d419',
-        description: 'Care Home Ltd Salary',
-        currency: 'GBP',
-        amount: 136.31,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '2976afbb2761fcd6eca5cd06f7fff863',
+        transaction_id: 'f496f956345d10a802856fe140db5548',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -37.52,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
+        timestamp: '2018-10-14 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f6e09a917b2232d819c73c1a90709b3d',
+        transaction_id: '44dd98cbd65454aa7e2ac1dc4b357b2e',
         description: 'Cash in HSBC 16Oct',
         currency: 'GBP',
         amount: 130.0,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
+        timestamp: '2018-10-14 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'c1f5344ebd9a0eadf41c7353ca361245',
+        transaction_id: '048b27ae963cb3b9eced11a235813de0',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.45,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
+        timestamp: '2018-10-14 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd9c57bb677e38d46287bdac94893df2c',
+        transaction_id: '761d4df896d4458b13a133b86cc18663',
         description: 'Ben Stevens Kilburn',
         currency: 'GBP',
         amount: -8.09,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
+        timestamp: '2018-10-14 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'cdc78a948fd6e8786889f1bbf1510d73',
+        transaction_id: 'e8b9ae498f0eb497bb5c62a90b074ca8',
         description: 'Golders Green Park',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
+        timestamp: '2018-10-14 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6bf8a37d87f4f224718b3dcc70954fe2',
+        transaction_id: '5c6e30e67580ad4c99d48b7fe2962c53',
         description: 'Just Eat London',
         currency: 'GBP',
         amount: -11.9,
-        timestamp: '2018-10-14T00:00:00.000+01:00',
+        timestamp: '2018-10-14 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9db85b4fae89500e5eaf1b120033380a',
-        description: 'Cash in HSBC 17Oct',
+        transaction_id: 'eacd54f6515af829b2104768c1710323',
+        description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: 250.0,
-        timestamp: '2018-10-17T00:00:00.000+01:00',
+        amount: 136.31,
+        timestamp: '2018-10-16 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'f86aadb0339fd4d75a5ce2234574c50f',
+        transaction_id: '920430193f0e9d38e27c9260a3565e8b',
+        description: 'Mum transfer in: washing machine',
+        currency: 'GBP',
+        amount: 350.0,
+        timestamp: '2018-10-17 00:00:00 +0100',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: 'fad6d687fe981d54d3b98871ad33efa0',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -48.0,
-        timestamp: '2018-10-17T00:00:00.000+01:00',
+        timestamp: '2018-10-17 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '0a8583df08d1fbffe0172fd8b3b461be',
+        transaction_id: '0f339880843fc89f85cc97afa3161124',
         description: 'BP petrol station',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-17T00:00:00.000+01:00',
+        timestamp: '2018-10-17 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '715138ea5f9257152b0892796e5c0349',
+        transaction_id: '1df72debcd8a119a080e83b2af81eadc',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -8.0,
-        timestamp: '2018-10-17T00:00:00.000+01:00',
+        timestamp: '2018-10-17 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a247efd3b928d5910a5077cc90f8c8ab',
+        transaction_id: '12894b7fdbe7039e31e9bb502a46ff2e',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -4.47,
-        timestamp: '2018-10-17T00:00:00.000+01:00',
+        timestamp: '2018-10-17 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '523f8c53b29022d1445d193bced79540',
+        transaction_id: '9f35de64548a7574989f2186d809bd4c',
         description: 'Pre-notified fees and charges',
         currency: 'GBP',
         amount: -13.0,
-        timestamp: '2018-10-18T00:00:00.000+01:00',
+        timestamp: '2018-10-18 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '294eae60578b8e49a42c09fe251c409a',
+        transaction_id: '189dc17d0aedc7ce4fe1b6787dbff5a4',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -9.0,
-        timestamp: '2018-10-18T00:00:00.000+01:00',
+        timestamp: '2018-10-18 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '1fc1dbd95d53029fae9b3f602830144e',
+        transaction_id: '68ff9bd63581a0271cce173a8184a728',
         description: 'Tesco Pump ',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-18T00:00:00.000+01:00',
+        timestamp: '2018-10-18 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c87c1e439784e7735fca4dc7723001e8',
+        transaction_id: 'a892592cd59f849b6fb085c36590f6a2',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-10-18T00:00:00.000+01:00',
+        timestamp: '2018-10-18 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '724e73de9801c3204c186cff923b68f8',
+        transaction_id: '99b0c1c504b3969cd1f290218cd48975',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-10-18T00:00:00.000+01:00',
+        timestamp: '2018-10-18 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '4db134533905918df8485cd60d139b03',
+        transaction_id: '9228a04b214d2ce66998276c58db8b87',
         description: 'Cash Natwide Oct19',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-19T00:00:00.000+01:00',
+        timestamp: '2018-10-19 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '075afc8961cd33861323db1b01595dc0',
+        transaction_id: '798f289e2d48021c2efd00a7df4486c4',
         description: 'Poundstretcher',
         currency: 'GBP',
         amount: -29.97,
-        timestamp: '2018-10-19T00:00:00.000+01:00',
+        timestamp: '2018-10-19 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '666cd8117df6403d8dbdd65168bd65a1',
+        transaction_id: 'f044b438a0545d67282968f9792f2f01',
         description: 'Halfords Kilburn',
         currency: 'GBP',
         amount: -14.99,
-        timestamp: '2018-10-19T00:00:00.000+01:00',
+        timestamp: '2018-10-19 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f543acfbe6eca730b40ef2c7ce96686f',
+        transaction_id: 'e5b014c0e8d0cbe05da675dd5c08bac9',
         description: 'Halfords Kilburn',
         currency: 'GBP',
         amount: -11.99,
-        timestamp: '2018-10-19T00:00:00.000+01:00',
+        timestamp: '2018-10-19 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '7a0bf83cab951998600e15c9c3273da2',
+        transaction_id: 'c1050030cbe62042392eaca02656f2c1',
         description: 'Shell Finchley',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-19T00:00:00.000+01:00',
+        timestamp: '2018-10-19 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c4c9efd8a3b947663ac782960bd4b194',
-        description: 'Work and child TC',
+        transaction_id: '5820229ec3085d4c90ca5dc243f0277d',
+        description: 'Work and child tax credit',
         currency: 'GBP',
         amount: 165.65,
-        timestamp: '2018-10-20T00:00:00.000+01:00',
+        timestamp: '2018-10-19 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '80f10a10b761344be1995b6703f05ce5',
+        transaction_id: '95b63b68a1adfa43e47b45aa91148b73',
         description: 'Cash bnkm Oct20',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-20T00:00:00.000+01:00',
+        timestamp: '2018-10-20 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '21e24432d83e266936e1adc2b09f08dc',
-        description: 'Tombola.co.uk',
+        transaction_id: '706915cdf8ea65feca0a8883a88dfce9',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-20T00:00:00.000+01:00',
+        timestamp: '2018-10-20 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c5b337b296495cbbca5afbccaf67b17a',
+        transaction_id: '8f952ae74cc7e5dbe9db6b3fb1a39602',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.95,
-        timestamp: '2018-10-20T00:00:00.000+01:00',
+        timestamp: '2018-10-20 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '26513150ab61569ffd1336202ed2736d',
+        transaction_id: '3d17117ced461f7b347b02297f5c79f5',
         description: 'Cash RB SCOT Oct21',
         currency: 'GBP',
         amount: -250.0,
-        timestamp: '2018-10-21T00:00:00.000+01:00',
+        timestamp: '2018-10-21 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'df2824ed5cd0819b8d4f7a054602e55b',
+        transaction_id: '4b539c1baa6d47d0b2a4b1a1c82ed454',
         description: 'Cash Barclay Asda Oct21',
         currency: 'GBP',
         amount: -50.0,
-        timestamp: '2018-10-21T00:00:00.000+01:00',
+        timestamp: '2018-10-21 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a98bf8df128edf048cdf872b71475d83',
+        transaction_id: '19f4a2bc8022e3770914e979f747b932',
         description: 'Child benefit',
         currency: 'GBP',
         amount: 82.8,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '983b8e95cb9ae64d22c7048868e0838b',
+        transaction_id: 'ddbe70d2531ebecf645e6bb9b52fa254',
         description: 'Care Home Ltd Salary',
         currency: 'GBP',
         amount: 174.77,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '159b845f5646c82c585ddf3a8ac080fd',
+        transaction_id: '1eb71d0b71269f9b54c1952810c04d27',
         description: 'Cash bnkm Oct23',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '8404260f16c59472b97d5fd1076faf2f',
-        description: 'Tombola.co.uk',
+        transaction_id: 'e0945ee3c00128b3850d187e4c3379b4',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6140a328bd9a1e5fc34ea647f6c02bb4',
+        transaction_id: '57998e6845614b908d2ea7ab61232981',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '3599cfeb09fe297305efd56f15453a1b',
+        transaction_id: '93a0875e36438075f476d7bad88daf09',
         description: 'Tesco ',
         currency: 'GBP',
         amount: -12.75,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'e5cc2c674f11103554ddd25462b5c93a',
+        transaction_id: 'b60245425cba058f33eb6359b0fab799',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -40.36,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '7d1e8829190aba3f88ede88760c3ece9',
+        transaction_id: '465203292980e4c37308b61dc33ab468',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.28,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '7352f24875893cdb9cbd39afdb16f00c',
+        transaction_id: '6e2dc04d96cc838cf665e1fd93f4e9b8',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.07,
-        timestamp: '2018-10-23T00:00:00.000+01:00',
+        timestamp: '2018-10-23 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f9b15387527fc8cc246abee00e694560',
+        transaction_id: '8af4b7c49d2341e69cd68be8b4d7d87b',
         description: 'Paypal ',
         currency: 'GBP',
         amount: -12.0,
-        timestamp: '2018-10-24T00:00:00.000+01:00',
+        timestamp: '2018-10-24 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'cc2d30ba4787389d05aa841be9b49bfb',
+        transaction_id: 'd2edb9bd38854211c810f4db922b6230',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -12.0,
-        timestamp: '2018-10-24T00:00:00.000+01:00',
+        timestamp: '2018-10-24 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd061326c9fdefea6e5687f8fe0e2cf9c',
+        transaction_id: 'c17b274dfd473e61e5bf55aefb324303',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -9.0,
-        timestamp: '2018-10-24T00:00:00.000+01:00',
+        timestamp: '2018-10-24 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '876b051fbfe88663229bce3e8f00784b',
+        transaction_id: '7299187c8389dd5a45dbbd7eb1c8aa84',
         description: 'Wickes',
         currency: 'GBP',
         amount: -28.98,
-        timestamp: '2018-10-24T00:00:00.000+01:00',
+        timestamp: '2018-10-24 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6bf8ef074f3d40082a11c67f33bc6dd3',
+        transaction_id: 'bd60c95ce4e96413814f3a4b6f41ecdb',
         description: 'Cash RB Scot Oct25',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-25T00:00:00.000+01:00',
+        timestamp: '2018-10-25 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'fa4aeb1b4ce5e7120d6b00441a8d5771',
+        transaction_id: '7694423759c754c470fd7dc553ef73d8',
         description: 'Petrol station M25',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-10-25T00:00:00.000+01:00',
+        timestamp: '2018-10-25 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '895cc2f4438ed5966bc35e130bc922a5',
+        transaction_id: '7b33e4f1d00d2a8cd1215316b6a9cd6b',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -28.23,
-        timestamp: '2018-10-25T00:00:00.000+01:00',
+        timestamp: '2018-10-25 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'aa7a15cce90dc764b53f5e95e9140926',
+        transaction_id: '68b11602acae4d1ddb53e76f4cbde4ed',
         description: 'Finchley services',
         currency: 'GBP',
         amount: -20.86,
-        timestamp: '2018-10-25T00:00:00.000+01:00',
+        timestamp: '2018-10-25 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '716405cf1c5cfd68e73eb121b432efc6',
+        transaction_id: 'c9271583124c7b53fa9d19731823991e',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-10-26T00:00:00.000+01:00',
+        timestamp: '2018-10-26 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f8b02af0b74e5cc3df4a4b78e9817bfd',
+        transaction_id: '4841e116febbb5d75a8ac0726b9ed625',
         description: 'White Swan',
         currency: 'GBP',
         amount: -7.79,
-        timestamp: '2018-10-26T00:00:00.000+01:00',
+        timestamp: '2018-10-26 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '0483270d70c2af3287b39396565fed52',
-        description: 'Work and child TC',
+        transaction_id: '307d6914b18cfd21887ae07acae5f3aa',
+        description: 'Work and child tax credit',
         currency: 'GBP',
         amount: 165.65,
-        timestamp: '2018-10-27T00:00:00.000+01:00',
+        timestamp: '2018-10-26 00:00:00 +0100',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'f176b06d6ea04d4333b0fcc6fe889e8c',
+        transaction_id: '31303c6f3a664eff2da223fc1db7156a',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-10-27T00:00:00.000+01:00',
+        timestamp: '2018-10-27 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd66328cced2fe4e374e8e8e1a5fa9ef2',
-        description: 'Masons arms ',
-        currency: 'GBP',
-        amount: -12.98,
-        timestamp: '2018-10-27T00:00:00.000+01:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'bdb9252c8eb8317976389bd5be05acbd',
+        transaction_id: '7a079a0bc069e6be7b236ce71e68c4cd',
         description: 'Cash Bnkm Cooperative',
         currency: 'GBP',
-        amount: -40.0,
-        timestamp: '2018-10-27T00:00:00.000+01:00',
+        amount: -20.0,
+        timestamp: '2018-10-27 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6587f0ea31034b59cbc1092b3fe306e3',
-        description: 'Tombola.co.uk',
-        currency: 'GBP',
-        amount: -10.0,
-        timestamp: '2018-10-28T00:00:00.000+01:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'e38893330b0442ce9e04c9a78289042e',
+        transaction_id: 'f3b0a5c116dfceb1480310b5e9bff7e9',
         description: 'McDonalds Kilburn',
         currency: 'GBP',
         amount: -8.48,
-        timestamp: '2018-10-28T00:00:00.000+01:00',
+        timestamp: '2018-10-28 00:00:00 +0100',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9d47707d47d4c18646fe9200d9b7d287',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-10-29T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: 'b26457620f0171f86333f402379f08b8',
+        transaction_id: '165ff9e48927d99e833627128dd7232f',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -11.1,
-        timestamp: '2018-10-29T00:00:00.000+00:00',
+        timestamp: '2018-10-29 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '4d15912e44bfb0b4535aac2548555e8f',
+        transaction_id: 'bbc3a2d379c51f60a726d5ccaa9f37e2',
         description: 'Lloyds Pharmacy',
         currency: 'GBP',
         amount: -2.19,
-        timestamp: '2018-10-29T00:00:00.000+00:00',
+        timestamp: '2018-10-29 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ebd2cb3c1381d5cad98924c9854ff0b7',
+        transaction_id: 'bdbebce375668bd6ce742464a3c23adc',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-10-29T00:00:00.000+00:00',
+        timestamp: '2018-10-29 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'dfb2259f7be38932443967d090865fc1',
-        description: 'Just Eat London',
+        transaction_id: '826db6f966ab3964eb0d42f1268084db',
+        description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: -15.8,
-        timestamp: '2018-10-29T00:00:00.000+00:00',
-        transaction_type: 'debit'
+        amount: 188.24,
+        timestamp: '2018-10-30 00:00:00 +0000',
+        transaction_type: 'credit'
       },
       {
-        transaction_id: '6c7b80dd315713c45c2aa799c4f01c1b',
-        description: 'Creation.co.uk',
+        transaction_id: '98bea28e66b58fd50b418f87be5cf00b',
+        description: 'Work and child tax credit',
+        currency: 'GBP',
+        amount: 165.65,
+        timestamp: '2018-11-02 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: '42405db7e6ea2f14dba178903ec73cc0',
+        description: 'Creation.co.uk loan repayment',
         currency: 'GBP',
         amount: -54.8,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '1db8bd821655cb96f94bbba9d2515c50',
-        description: 'DVLA-REGNUM',
-        currency: 'GBP',
-        amount: -19.25,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '7dfea18b78c2bfe9a3d6a2112ac035fb',
+        transaction_id: '309b8c8a427816638842a18fee5f3bd3',
         description: 'H3G',
         currency: 'GBP',
         amount: -34.88,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '93dea2ec27b642fa028ba36acaa8e531',
-        description: 'Care Home Ltd Salary',
-        currency: 'GBP',
-        amount: 108.24,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '400a366790bd07ffd8c51faac9fbcdef',
+        transaction_id: '7351a0b1c46c5a7aeb96b0a979e32fe9',
         description: 'Asda superstore',
         currency: 'GBP',
-        amount: -67.92,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        amount: -33.56,
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'e166c6487b4f799393831a7d76b51828',
-        description: 'Tombola.co.uk',
+        transaction_id: '0333977bbfec10cabd80a328ef7fe35b',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6aa135ede42d442c9cdd1a1225bd83dc',
+        transaction_id: '5e2b065b910ea1c629f72cc1836f04d1',
         description: 'Garden Centre',
         currency: 'GBP',
         amount: -6.99,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a517d5ef34912d92316cf1acd926a27d',
+        transaction_id: '046f71e596a58acfbb194c4bfb532f1e',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -53.33,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '866b47ff20660bbcaa91d5aee96aa150',
+        transaction_id: '4316779bd8923156191a0ea7241ec0e1',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -19.0,
-        timestamp: '2018-11-02T00:00:00.000+00:00',
+        timestamp: '2018-11-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ccc9f0dc0b92135e0832adf0c6bcf2b2',
-        description: 'Sky digital',
+        transaction_id: '046ff4c21d27fdb5a60e99d2cba11c8a',
+        description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: -56.79,
-        timestamp: '2018-11-03T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '4ef7a42e3ec4a95185da671caa586bf3',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.55,
-        timestamp: '2018-11-06T00:00:00.000+00:00',
+        amount: 186.4,
+        timestamp: '2018-11-06 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'c2c165c01a818005e3e90f31bd42f276',
+        transaction_id: '150f6f8f11019a1a134f744ce01986c3',
         description: 'Cash Natwest 06Oct',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-07T00:00:00.000+00:00',
+        timestamp: '2018-11-07 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'bd18fe0de52572d6c976e1ce007c487c',
-        description: 'Cash Notemachine ',
+        transaction_id: '6b5760d452b06928204a72118c790920',
+        description: 'Work and child tax credit',
         currency: 'GBP',
-        amount: -30.0,
-        timestamp: '2018-11-07T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'e75c34a47f4e81e86daabc40f9c05f53',
-        description: 'Care Home Ltd Salary',
-        currency: 'GBP',
-        amount: 116.4,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        amount: 165.65,
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '7ecc0e943393800d30f7a8048e3fcfd3',
-        description: 'Cash in HSBC 09Nov',
+        transaction_id: 'c0c96a39e612d09729a4350295e9402d',
+        description: 'Cash in from betting win',
         currency: 'GBP',
-        amount: 60.0,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        amount: 120.0,
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '74b48d90ca6f31c9f500143ef8a9bac7',
+        transaction_id: '285c8a494429d4216200ba8ed437d6bd',
         description: 'Jess Jones Rent 0735454',
         currency: 'GBP',
         amount: -1048.5,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'aeb505808bc6e7c4ab9021e4a23aa669',
+        transaction_id: '6bb946b8db3d7f4cc54094dfe77fc983',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '3c64a4738ec0093351964353246251da',
+        transaction_id: 'a074f736cc8ebc623b71683072074cbd',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -19.0,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c4419650607bd89459d13429421b7e70',
+        transaction_id: '8d8919aab790cc23653c0867c1000472',
         description: 'Ben Stevens Kilburn',
         currency: 'GBP',
         amount: -3.0,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '22aae2c9a2b551fe39a7321b3358b636',
+        transaction_id: '6e565829c4a41ffda4a9a72e9f26a0a9',
         description: 'Queens park',
         currency: 'GBP',
         amount: -11.11,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '454220c25d4018623c6b37d8a387b71f',
+        transaction_id: '800b117fae13dadc2f9d06846c6ca3a9',
         description: 'McDonalds Kilburn',
         currency: 'GBP',
         amount: -15.11,
-        timestamp: '2018-11-09T00:00:00.000+00:00',
+        timestamp: '2018-11-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '8622afd73d4d0aab2fa1172fe6c34bb9',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-11-13T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '2ebe34ce78d459076c8fb3521e9f1492',
+        transaction_id: '9c921a2392026124b84eaca48eda5471',
         description: 'Hastings direct',
         currency: 'GBP',
         amount: -49.73,
-        timestamp: '2018-11-13T00:00:00.000+00:00',
+        timestamp: '2018-11-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a1cfa47b09229e1864a9e87bd885ae3b',
+        transaction_id: '372b63e933a88bee4c9cab04ac7357d5',
         description: 'Cash RB Scot Nov13 Tesco Killburn',
         currency: 'GBP',
         amount: -50.0,
-        timestamp: '2018-11-13T00:00:00.000+00:00',
+        timestamp: '2018-11-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '4248186ed899cbfd7b1be4fd204c91db',
+        transaction_id: 'ba667625c45027b4e29fcb940236a0e9',
         description: 'Cash Barclay Asda Nov13',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-13T00:00:00.000+00:00',
+        timestamp: '2018-11-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'eef3ae0e211351985b654648802f6510',
+        transaction_id: 'c47e4cd36cc6697da57e637827242de9',
         description: 'Cash BNKM Cooperative Nov13',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-13T00:00:00.000+00:00',
+        timestamp: '2018-11-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '2bbec594745ae240b7af0ea72f2bf1fc',
+        transaction_id: '127ebc8a2c2502c4c66fd7758da2ff8a',
         description: 'Cash BNKM Cooperative Nov14',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-13T00:00:00.000+00:00',
+        timestamp: '2018-11-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd3a5fd2f47eae5481283591cf67a2d1f',
+        transaction_id: 'bf52bfa74600cfce613574648b5817e0',
         description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: 136.31,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        amount: 175.31,
+        timestamp: '2018-11-13 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'dcee8a295aee10097da773f87bd9e572',
+        transaction_id: '4726ffbae01c69f4032440c8a85a7fc7',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -37.52,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        timestamp: '2018-11-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'b7f3091d39b2471c8a1fd4ec21860158',
-        description: 'Cash in HSBC 16Nov',
+        transaction_id: '482b93b265ada66916a82934fd48c38c',
+        description: 'Friend transfer in',
         currency: 'GBP',
         amount: 130.0,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        timestamp: '2018-11-14 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '22811d8499af85de8e628208b0c02775',
+        transaction_id: 'f4640880fb75ee3767d26fdb3f9c86f9',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.45,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        timestamp: '2018-11-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'e7d7f65ac0723b99390404a8d39de611',
+        transaction_id: '41f7eb2dc98a708e5ecb0378b73b9142',
         description: 'Ben Stevens Kilburn',
         currency: 'GBP',
         amount: -8.09,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        timestamp: '2018-11-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'da19539d157ce53dd3f83817a7b01bc1',
+        transaction_id: 'f22d2505b27d374390f443862d7f4eba',
         description: 'Golders Green Park',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        timestamp: '2018-11-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '66a7b36c3a6b704e65be475430f188d0',
+        transaction_id: '41e7c12f9b548a0bde9fbb1180411ceb',
         description: 'Just Eat London',
         currency: 'GBP',
         amount: -11.9,
-        timestamp: '2018-11-14T00:00:00.000+00:00',
+        timestamp: '2018-11-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '220cb49dddef4ffbc6d9cb8c3262937f',
-        description: 'Cash in HSBC 17Nov',
+        transaction_id: 'a19ed4af22ba4ffe318ccf9e50c9c06e',
+        description: 'Work and child tax credit',
         currency: 'GBP',
-        amount: 250.0,
-        timestamp: '2018-11-17T00:00:00.000+00:00',
+        amount: 165.65,
+        timestamp: '2018-11-16 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '7755d4b2da73b3d6059afb8b8980aa3c',
+        transaction_id: '12f7e44cc05f123eb3d5ad3e2924153e',
+        description: 'Cash in HSBC 17Nov',
+        currency: 'GBP',
+        amount: 150.0,
+        timestamp: '2018-11-17 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: 'b90856277329038c79cb7108d789e5e3',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -48.0,
-        timestamp: '2018-11-17T00:00:00.000+00:00',
+        timestamp: '2018-11-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ae01159256b90ccd03956a0b4fe835c9',
+        transaction_id: '6ae432018c2e6053547a27c93c62dbce',
         description: 'BP petrol station',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-17T00:00:00.000+00:00',
+        timestamp: '2018-11-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '50f643b0637d00a1672e7c8834bf611b',
+        transaction_id: 'de07f170d71cb43118649eac2fb7f1e3',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -8.0,
-        timestamp: '2018-11-17T00:00:00.000+00:00',
+        timestamp: '2018-11-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'cc9dd56a426e7d954af00909f88e5c0a',
+        transaction_id: '192a8cf92bf62d1498588f35aa634dae',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -4.47,
-        timestamp: '2018-11-17T00:00:00.000+00:00',
+        timestamp: '2018-11-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'e5e6ad13601ca9f0ff454d59e8d82a2a',
+        transaction_id: 'ed6d00e6a65076b6edf58897ba84f2c9',
         description: 'Pre-notified fees and charges',
         currency: 'GBP',
         amount: -13.0,
-        timestamp: '2018-11-18T00:00:00.000+00:00',
+        timestamp: '2018-11-18 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a8c16bfb2b1f8c223aa5f2177c41b386',
+        transaction_id: '9b2e909e95b6dee5ae45a7be1c3bbbd7',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -9.0,
-        timestamp: '2018-11-18T00:00:00.000+00:00',
+        timestamp: '2018-11-18 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '455625f6d2ee47452dd99e267d66da8f',
+        transaction_id: '51c593c1343ad1c020006bda5a23d784',
         description: 'Tesco Pump ',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-18T00:00:00.000+00:00',
+        timestamp: '2018-11-18 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ee4bca792923bffc90b09ee18e381b66',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-11-18T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '74bf954b0d5d81f9effc3defdc7a4632',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-11-18T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '1b48fce62a113f2f61e02ffb2a46346d',
+        transaction_id: '0e7cae47496ab4b746bcc6318e7fad36',
         description: 'Cash Natwide Nov19',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-19T00:00:00.000+00:00',
+        timestamp: '2018-11-19 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'b3c937342f6671fc8206f78aae24d668',
-        description: 'Poundstretcher',
-        currency: 'GBP',
-        amount: -29.97,
-        timestamp: '2018-11-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '50b2d08e6672931d0f2594899c6e5d38',
-        description: 'Halfords Kilburn',
-        currency: 'GBP',
-        amount: -14.99,
-        timestamp: '2018-11-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '6b346ba3b5645ea43333366d2b17746c',
-        description: 'Halfords Kilburn',
-        currency: 'GBP',
-        amount: -11.99,
-        timestamp: '2018-11-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'c395ca00e912d30d00bebdbfbbdaab4a',
+        transaction_id: '9d665b6f2a04b4e98020b12c174788f4',
         description: 'Shell Finchley',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-19T00:00:00.000+00:00',
+        timestamp: '2018-11-19 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'caa7f6d0920b06c773c598265d345e9c',
-        description: 'Work and child TC',
+        transaction_id: '849a0d00e2eb099835e169dbb90ac095',
+        description: 'Work and child tax credit',
         currency: 'GBP',
         amount: 165.65,
-        timestamp: '2018-11-20T00:00:00.000+00:00',
+        timestamp: '2018-11-23 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '8c586b0fd42c552560129333711c8c85',
-        description: 'Cash bnkm Nov20',
-        currency: 'GBP',
-        amount: -20.0,
-        timestamp: '2018-11-20T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'a5312625652f789fcb3bdf4379784cb9',
-        description: 'Tombola.co.uk',
-        currency: 'GBP',
-        amount: -10.0,
-        timestamp: '2018-11-20T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '4f627fbf4250a1ef0c7f0c28c167515f',
-        description: 'Mcdonalds Kilburn',
-        currency: 'GBP',
-        amount: -8.95,
-        timestamp: '2018-11-20T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'feece392910ca88c2b085f43f15388e2',
-        description: 'Cash RB SCOT Nov21',
-        currency: 'GBP',
-        amount: -250.0,
-        timestamp: '2018-11-21T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'ea6d22270e4971b5c8919672e6b93aed',
-        description: 'Cash Barclay Asda Nov21',
-        currency: 'GBP',
-        amount: -50.0,
-        timestamp: '2018-11-21T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '3eb09ad3f366579d2dad722262245dac',
-        description: 'Child benefit',
-        currency: 'GBP',
-        amount: 82.8,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: 'ae075d9207d9e22cd4232de314837f4b',
+        transaction_id: '06d25db946831a78a1df0e8324a3c5c7',
         description: 'Care Home Ltd Salary',
         currency: 'GBP',
         amount: 174.77,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-20 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '6423a8f3643ed52035d114932c91281d',
-        description: 'Cash bnkm Nov23',
+        transaction_id: 'df8acc552b47d0ee50280fb9cc36baab',
+        description: 'Cash bnkm Nov20',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-20 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '822626cb59e6e423b4eea2b70f898b90',
-        description: 'Tombola.co.uk',
+        transaction_id: 'e21881923e9b5c3f9d8b3584cf63581a',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-20 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '10fa58144f6f5bd6bd28a8bb58b31f8f',
-        description: 'A B Ltd Dublin',
+        transaction_id: 'ab54dbb97c7422841eb2ef1cb7ecbeaf',
+        description: 'Mcdonalds Kilburn',
         currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        amount: -8.95,
+        timestamp: '2018-11-20 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '332810286ee54bd146482b197bb2c2cd',
+        transaction_id: '0ea78ca5cb1958cf251845c1c57ab261',
+        description: 'Child benefit',
+        currency: 'GBP',
+        amount: 82.8,
+        timestamp: '2018-11-20 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: '4168be17344b42f5c741a7079f16cbc0',
         description: 'Tesco ',
         currency: 'GBP',
         amount: -12.75,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '75088a93ba17b62dd0c634923477b018',
+        transaction_id: '70e1c87f553ceb86ddab878fdfc52962',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -40.36,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'deb9e12fb9823ffd00bed1ba411686a2',
+        transaction_id: '49e1921be30fb9aff37214200c2887f0',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.28,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'afed96117c7dcb7b8de43553597b91f6',
+        transaction_id: 'bf23c63a016deef9c9a24fcf49689983',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.07,
-        timestamp: '2018-11-23T00:00:00.000+00:00',
+        timestamp: '2018-11-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'f399c2ddb751b77d5518348c8489789f',
-        description: 'Paypal ',
-        currency: 'GBP',
-        amount: -12.0,
-        timestamp: '2018-11-24T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '87e078f2845ed206bb33bc9d5f0f53a5',
+        transaction_id: '98a5bfb726e89869a2f3981ad6ad655a',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -12.0,
-        timestamp: '2018-11-24T00:00:00.000+00:00',
+        timestamp: '2018-11-24 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '248181654ffba1541f8d2cbe7c0cb650',
+        transaction_id: 'dc6ddcf1c0983f13763991d5e7166674',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -9.0,
-        timestamp: '2018-11-24T00:00:00.000+00:00',
+        timestamp: '2018-11-24 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6244462fcbc474ebd643092c3245f3a4',
-        description: 'Wickes',
-        currency: 'GBP',
-        amount: -28.98,
-        timestamp: '2018-11-24T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '6729eee5bf9b61b91447dfcbb9571b90',
+        transaction_id: '6af1b8ffcbf9b26ed3ec87a7caa593d5',
         description: 'Cash RB Scot Nov25',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-25T00:00:00.000+00:00',
+        timestamp: '2018-11-25 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'c173d7092359f14730490627b248fd52',
+        transaction_id: 'e2f5ae67101d37b7107cff2274ab8347',
         description: 'Petrol station M25',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-11-25T00:00:00.000+00:00',
+        timestamp: '2018-11-25 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '0d2f51c295d1e3cadb92b291c5722bd3',
+        transaction_id: 'a810b56b9f5c69033d0d43220db94dea',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -28.23,
-        timestamp: '2018-11-25T00:00:00.000+00:00',
+        timestamp: '2018-11-25 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9ad09f93031b3dd45b15b1ff57b1ce8d',
+        transaction_id: '685ebb52654346ccffb5c5065d5b373f',
         description: 'Finchley services',
         currency: 'GBP',
         amount: -20.86,
-        timestamp: '2018-11-25T00:00:00.000+00:00',
+        timestamp: '2018-11-25 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'edc530e9bd8aeb9ed3c5fbc54252c5a2',
+        transaction_id: 'b98b581a0e4688faa1516ac603202d10',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-11-26T00:00:00.000+00:00',
+        timestamp: '2018-11-26 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'dd62e49f1b7c4a047e41d618490f3134',
+        transaction_id: '36ae1013fa04a4202ab9dd82a9b2aaa0',
         description: 'White Swan',
         currency: 'GBP',
         amount: -7.79,
-        timestamp: '2018-11-26T00:00:00.000+00:00',
+        timestamp: '2018-11-26 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ccc3dcc238b1fc25d1aba10de3260593',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '57afe1bd504f19f560d194aea395961f',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'c42ff4fdd5f3d02a4b4f5b1cc23105a1',
-        description: 'Masons arms ',
-        currency: 'GBP',
-        amount: -12.98,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'ff1d36b68b5ce3dde7a7bc3a75d27276',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '3d3a9b26cce36cd4d70ff9b890a6344b',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '41fad6ec308bbf80936e41b9d166afd3',
-        description: 'Masons arms ',
-        currency: 'GBP',
-        amount: -12.98,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'ca81d272794b44fe4db590c4516feb9a',
+        transaction_id: 'b3ef052d7602ec07fa9ac31d29843d80',
         description: 'Cash Bnkm Cooperative',
         currency: 'GBP',
-        amount: -40.0,
-        timestamp: '2018-11-27T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '4b822efffda5486bd895459d0d520664',
-        description: 'Tombola.co.uk',
-        currency: 'GBP',
-        amount: -10.0,
-        timestamp: '2018-11-28T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'ce22f6fa2eaba65a642d02bb671da9e7',
-        description: 'McDonalds Kilburn',
-        currency: 'GBP',
-        amount: -8.48,
-        timestamp: '2018-11-28T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '89c49e3ddaea451e73b86bad99973979',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-11-29T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '64c76f2a5955a912699a5cdfeba0914f',
-        description: 'Mastercard',
-        currency: 'GBP',
-        amount: -11.1,
-        timestamp: '2018-11-29T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '04b3a98db351d174816e92317e563d44',
-        description: 'Lloyds Pharmacy',
-        currency: 'GBP',
-        amount: -2.19,
-        timestamp: '2018-11-29T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '3875125641ea7168aa6c0ca8b3a19f31',
-        description: 'British Gas Trading Britishgas.co',
-        currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-11-29T00:00:00.000+00:00',
+        timestamp: '2018-11-27 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'eb0493a0fc8607ab31431833771bdfac',
-        description: 'Just Eat London',
-        currency: 'GBP',
-        amount: -15.8,
-        timestamp: '2018-11-29T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'c801403e4cf83f15b7733de45668ba01',
-        description: 'Creation.co.uk',
-        currency: 'GBP',
-        amount: -54.8,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '5c32542cee02db400803590959164965',
-        description: 'DVLA-REGNUM',
-        currency: 'GBP',
-        amount: -19.25,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '3319dbd81570f54d8bd8f7113252b4d5',
-        description: 'H3G',
-        currency: 'GBP',
-        amount: -34.88,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '78aa4f40c89f2fe0d4fc0d9af6b044a4',
+        transaction_id: 'bdb9dc9f01f245527f39034250550098',
         description: 'Care Home Ltd Salary',
         currency: 'GBP',
         amount: 108.24,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
+        timestamp: '2018-11-27 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: 'f058223bd79bfb9c4c4f94c03af2a504',
+        transaction_id: 'ec6552fd15dc0c52b2ec1eb480d7ca75',
+        description: 'Mastercard',
+        currency: 'GBP',
+        amount: -11.1,
+        timestamp: '2018-11-29 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: 'c8f7c765b297424fa20ae93ed5430564',
+        description: 'Lloyds Pharmacy',
+        currency: 'GBP',
+        amount: -2.19,
+        timestamp: '2018-11-29 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: '1b0541f418c434d8eb407999d9c71752',
+        description: 'British Gas Trading Britishgas.co',
+        currency: 'GBP',
+        amount: -20.0,
+        timestamp: '2018-11-29 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: '97520a5554a5919dacf85392aa5d480e',
+        description: 'Just Eat London',
+        currency: 'GBP',
+        amount: -15.8,
+        timestamp: '2018-11-29 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: '8264b8a2bed6069b66357d9c37c3a56c',
+        description: 'Work and child tax credit',
+        currency: 'GBP',
+        amount: 165.65,
+        timestamp: '2018-11-30 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: 'c28794ba2a0eaf0dc6d7b893503fa1ec',
+        description: 'Creation.co.uk loan repayment',
+        currency: 'GBP',
+        amount: -54.8,
+        timestamp: '2018-12-02 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: '83ddf07b29440ea083a7d508072937f5',
+        description: 'DVLA-REGNUM',
+        currency: 'GBP',
+        amount: -19.25,
+        timestamp: '2018-12-02 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: 'b5e426a2320c99dcd9926d98391e8223',
+        description: 'H3G',
+        currency: 'GBP',
+        amount: -34.88,
+        timestamp: '2018-12-02 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: '522569351629ebdfeb1f06a149ea2606',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -67.92,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
+        timestamp: '2018-12-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '06b1e200ac03be11e4ae06ede49350ac',
-        description: 'Tombola.co.uk',
+        transaction_id: '7b3205602e37c97f070f371e0250c9cb',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
+        timestamp: '2018-12-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'b450eb25c47e752f3ffa1a4598589c9a',
+        transaction_id: '99da00b660fb37b918652103cc6dfd17',
         description: 'Garden Centre',
         currency: 'GBP',
         amount: -6.99,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
+        timestamp: '2018-12-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'cbbfc0405ee715436e1b3103c229a0fc',
+        transaction_id: '237e17abc5831dcc9d24f0e89cec538a',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -53.33,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
+        timestamp: '2018-12-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '003c6c24d35cc6fd8164a37a1c503b49',
+        transaction_id: '4bb90dba33f2e2b5f8947904b739d5f2',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -19.0,
-        timestamp: '2018-12-02T00:00:00.000+00:00',
+        timestamp: '2018-12-02 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '47fd708d7742152192976e64ce69760c',
+        transaction_id: 'f95e786e6b3200756c0f024f1831719c',
         description: 'Sky digital',
         currency: 'GBP',
         amount: -56.79,
-        timestamp: '2018-12-03T00:00:00.000+00:00',
+        timestamp: '2018-12-03 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '2e05060e45e8414c5b90f2554cba20e6',
-        description: 'Work and child TC',
+        transaction_id: '9fec907b702833a96fe93caa072b22aa',
+        description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: 165.55,
-        timestamp: '2018-12-06T00:00:00.000+00:00',
+        amount: 188.3,
+        timestamp: '2018-12-04 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '28657911dba81dd4223367bb7935e6d5',
+        transaction_id: 'ce95b339c00642801089ff1fda5aa15a',
+        description: 'Work and child tax credit',
+        currency: 'GBP',
+        amount: 165.55,
+        timestamp: '2018-12-07 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: 'd68834b500cde1199d682c7a71bee843',
         description: 'Cash Natwest 06Oct',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-12-07T00:00:00.000+00:00',
+        timestamp: '2018-12-07 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '81ce3180f3db59431f40108952784aa7',
+        transaction_id: 'c6cd3347d3151a437474c6ca13381f64',
         description: 'Cash Notemachine ',
         currency: 'GBP',
         amount: -30.0,
-        timestamp: '2018-12-07T00:00:00.000+00:00',
+        timestamp: '2018-12-07 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '703139c2eb97fdeae956d7790c4a3d64',
-        description: 'Care Home Ltd Salary',
-        currency: 'GBP',
-        amount: 116.4,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '3677512400a5d7178e3a110c62d6626c',
+        transaction_id: '235259e42fd0a13cbcde4997d87216b7',
         description: 'Cash in HSBC 09Nov',
         currency: 'GBP',
-        amount: 60.0,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        amount: 80.0,
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '180782195e3828d9bf5fc677b1044b96',
+        transaction_id: '3f7c4d2b998a2939f73709ee1cf9e413',
         description: 'Jess Jones Rent 0735454',
         currency: 'GBP',
         amount: -1048.5,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a5de6ff76850b7512d38e33338baf3d0',
+        transaction_id: 'f7bb69034a32b67500ccf29d1d8b2a7e',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '208025582fa8818308c64332a57a5233',
+        transaction_id: '1ae5a722ad53be26525a4bf77f93042d',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -19.0,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '643a28006f037dc3743b0a32a0fecc94',
+        transaction_id: 'bdd717192de9bd061a26e8369f1fd24d',
         description: 'Ben Stevens Kilburn',
         currency: 'GBP',
         amount: -3.0,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '72649f47c6ff5590085872482465a57a',
+        transaction_id: 'c5eb28a1038cb707ad18c29ffdbb4664',
         description: 'Queens park',
         currency: 'GBP',
         amount: -11.11,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'eb722122c08a59cd2746d5f20ffb4f1e',
+        transaction_id: 'f9fea196283a1253abcb6266fefad416',
         description: 'McDonalds Kilburn',
         currency: 'GBP',
         amount: -15.11,
-        timestamp: '2018-12-09T00:00:00.000+00:00',
+        timestamp: '2018-12-09 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '091f915af72bf26fdb236af0f8c44653',
-        description: 'Work and child TC',
+        transaction_id: '49089576c8e6b95b26401f0b5e55fb2b',
+        description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-12-13T00:00:00.000+00:00',
+        amount: 116.4,
+        timestamp: '2018-12-11 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '101fc5ac5d5e8c40904e53f9c849ea2b',
+        transaction_id: '4df9345314abbcbfd3e4c882e0364963',
+        description: 'Work and child tax credit',
+        currency: 'GBP',
+        amount: 165.65,
+        timestamp: '2018-12-14 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: '672bdeaeb398bc4f39b5cf2a0b771ef9',
         description: 'Hastings direct',
         currency: 'GBP',
         amount: -49.73,
-        timestamp: '2018-12-13T00:00:00.000+00:00',
+        timestamp: '2018-12-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '0c7a6111d8ff7da64d514d006016f550',
-        description: 'Cash RB Scot Nov13 Tesco Killburn',
-        currency: 'GBP',
-        amount: -50.0,
-        timestamp: '2018-12-13T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '0d344c4b89b1c33507219af353dadb43',
+        transaction_id: '562009e2c2808a15b4bfee0c78e3f331',
         description: 'Cash Barclay Asda Nov13',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-12-13T00:00:00.000+00:00',
+        timestamp: '2018-12-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'cf34eb517e8f644abf7dd446fefd626a',
+        transaction_id: 'e23d4358b0a08d7928444cecffd6e6be',
         description: 'Cash BNKM Cooperative Nov13',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-12-13T00:00:00.000+00:00',
+        timestamp: '2018-12-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '63224a02f90420dcb37501d5ada05b35',
+        transaction_id: 'e8f3237a6fb56b3eaa30257e6165fcd9',
         description: 'Cash BNKM Cooperative Nov14',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-12-13T00:00:00.000+00:00',
+        timestamp: '2018-12-13 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '47c1242514fbb88328a47e8746c1ebac',
-        description: 'Care Home Ltd Salary',
-        currency: 'GBP',
-        amount: 136.31,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '268901a6f872571cc73982959895db27',
+        transaction_id: 'c5502c09b9137828e8c533224d6a692e',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -37.52,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
+        timestamp: '2018-12-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '0b152e9fbd2241848c45249787eb970c',
+        transaction_id: '8e91604136b9fafc43f3244b9bf2a614',
         description: 'Cash in HSBC 16Nov',
         currency: 'GBP',
         amount: 130.0,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
+        timestamp: '2018-12-14 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '25153803a75b7a8bd846d1a6fd3d2d10',
+        transaction_id: '81e1cdc5f21b136d4a0adc2eeaf0fc34',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.45,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
+        timestamp: '2018-12-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '8e02923a5bc08b2aee2538b864a0c741',
+        transaction_id: 'c5fa49098d481df09232840f63b4ce69',
         description: 'Ben Stevens Kilburn',
         currency: 'GBP',
         amount: -8.09,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
+        timestamp: '2018-12-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd463f69f42ea36d65a5622d8e2c2117e',
+        transaction_id: '39dd7d1c12581fa3bf3160aa87d2a5b8',
         description: 'Golders Green Park',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
+        timestamp: '2018-12-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'a82bccb215e885436e07acd8bf85d7d4',
+        transaction_id: '4a9e791683e5e383ba49ca634a90c01e',
         description: 'Just Eat London',
         currency: 'GBP',
         amount: -11.9,
-        timestamp: '2018-12-14T00:00:00.000+00:00',
+        timestamp: '2018-12-14 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '797a98564e71b0d6d3280339c5b5729f',
-        description: 'Cash in HSBC 17Nov',
-        currency: 'GBP',
-        amount: 250.0,
-        timestamp: '2018-12-17T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: '5fd31d0bd59ee9b7e000d8ac63fb8a07',
+        transaction_id: 'd75f0c3930691a6b3857e4ed0f44f91a',
         description: 'Asda superstore',
         currency: 'GBP',
         amount: -48.0,
-        timestamp: '2018-12-17T00:00:00.000+00:00',
+        timestamp: '2018-12-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6008119c068c195e9ee835f325cce067',
+        transaction_id: 'daf3bb402dffafb76d35ed80012623c7',
         description: 'BP petrol station',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-12-17T00:00:00.000+00:00',
+        timestamp: '2018-12-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '2423e62970bf9909b85214f085b89682',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -8.0,
-        timestamp: '2018-12-17T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'c42ec7bceca17b254b1540d8a646444b',
+        transaction_id: 'c7e9a226cd8fea88c8547a1d642aa623',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -4.47,
-        timestamp: '2018-12-17T00:00:00.000+00:00',
+        timestamp: '2018-12-17 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd93d8bed53dfda81ec1e249c39b0dda2',
+        transaction_id: 'ba9bec9d78b5384ca7a23d2b96f6c231',
+        description: 'Care Home Ltd Salary',
+        currency: 'GBP',
+        amount: 136.31,
+        timestamp: '2018-12-18 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: '137928c827ea254c64708b2dfe87a65e',
         description: 'Pre-notified fees and charges',
         currency: 'GBP',
         amount: -13.0,
-        timestamp: '2018-12-18T00:00:00.000+00:00',
+        timestamp: '2018-12-18 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'de488dddd2023f7d10260f47192efd4b',
+        transaction_id: 'b39eaeecb67d2ba461b7ef855ced627e',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -9.0,
-        timestamp: '2018-12-18T00:00:00.000+00:00',
+        timestamp: '2018-12-18 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'ac86251f4e72ed536905e2b3c1479f27',
+        transaction_id: 'a74c7f5d56a053900db2c9d8e7be0c5f',
         description: 'Tesco Pump ',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-12-18T00:00:00.000+00:00',
+        timestamp: '2018-12-18 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd953a558d278be5b57fb224a2602fbc9',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-12-18T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '1fa7a2c70e05ebc438bc7a6621443255',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-12-18T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '6021280059f0545cdc94386f16521193',
-        description: 'Cash Natwide Nov19',
-        currency: 'GBP',
-        amount: -20.0,
-        timestamp: '2018-12-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '1b1c4fa64d98ea3e1542a24ffbf4b5ee',
-        description: 'Poundstretcher',
-        currency: 'GBP',
-        amount: -29.97,
-        timestamp: '2018-12-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'fb9ea61ce16b3eafd0a7f926f9f42e72',
-        description: 'Halfords Kilburn',
-        currency: 'GBP',
-        amount: -14.99,
-        timestamp: '2018-12-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '59806ea8cd51dccfc8dd49cbb8b632aa',
-        description: 'Halfords Kilburn',
-        currency: 'GBP',
-        amount: -11.99,
-        timestamp: '2018-12-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '950f099f103fee62f1ec72e8bd68d7c7',
-        description: 'Shell Finchley',
-        currency: 'GBP',
-        amount: -10.0,
-        timestamp: '2018-12-19T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '8112d9ffa6b781b33f874e08c3f9e0ee',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-12-20T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: 'f8244a7d72c481c9ea07e083715546f5',
-        description: 'Cash bnkm Nov20',
-        currency: 'GBP',
-        amount: -20.0,
-        timestamp: '2018-12-20T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '0ed79939cc731a3230514d54222d8e52',
-        description: 'Tombola.co.uk',
-        currency: 'GBP',
-        amount: -10.0,
-        timestamp: '2018-12-20T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '03939353075d13ec030bad437c3a7661',
-        description: 'Mcdonalds Kilburn',
-        currency: 'GBP',
-        amount: -8.95,
-        timestamp: '2018-12-20T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '9ec20fe3f19e96c0241a1cf046c6d841',
-        description: 'Cash RB SCOT Nov21',
-        currency: 'GBP',
-        amount: -250.0,
-        timestamp: '2018-12-21T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '94b31366c745591b281cbf9e75007f95',
-        description: 'Cash Barclay Asda Nov21',
-        currency: 'GBP',
-        amount: -50.0,
-        timestamp: '2018-12-21T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'd86e129a64294de911ae28c8647e8372',
+        transaction_id: '6d053c105660fb81a101c637b2aa543e',
         description: 'Child benefit',
         currency: 'GBP',
         amount: 82.8,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-18 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '562f653ad77f75d5e68ef7c0388c6af6',
-        description: 'Care Home Ltd Salary',
+        transaction_id: 'f26b380eedc06c4417dfbd664947ffad',
+        description: 'Cash Natwide Nov19',
         currency: 'GBP',
-        amount: 174.77,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        amount: -20.0,
+        timestamp: '2018-12-19 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: 'a188e51bbe81a08f4dc4b2a675a36711',
+        description: 'Shell Finchley',
+        currency: 'GBP',
+        amount: -10.0,
+        timestamp: '2018-12-19 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: '02e19a82af9e71259cfc80b3126c7203',
+        description: 'Mum transfer in',
+        currency: 'GBP',
+        amount: 250.0,
+        timestamp: '2018-12-21 00:00:00 +0000',
         transaction_type: 'credit'
       },
       {
-        transaction_id: '9fee0d3521e029c19391c477eaf47783',
+        transaction_id: 'f31299749fef9dce38acc7c3efbbce6d',
+        description: 'Work and child tax credit',
+        currency: 'GBP',
+        amount: 165.65,
+        timestamp: '2018-12-21 00:00:00 +0000',
+        transaction_type: 'credit'
+      },
+      {
+        transaction_id: 'f972d8c956b8764abada72116853bf0d',
+        description: 'Cash bnkm Nov20',
+        currency: 'GBP',
+        amount: -20.0,
+        timestamp: '2018-12-20 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: 'c9a88198f42d81e4f96bdb3b171733b0',
+        description: 'Tombola.co.uk betting',
+        currency: 'GBP',
+        amount: -10.0,
+        timestamp: '2018-12-20 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: 'c125d46d2323b80c106d93b3223d7786',
+        description: 'Mcdonalds Kilburn',
+        currency: 'GBP',
+        amount: -8.95,
+        timestamp: '2018-12-20 00:00:00 +0000',
+        transaction_type: 'debit'
+      },
+      {
+        transaction_id: 'd37278626dce7c1a99d880c5f2e4a818',
         description: 'Cash bnkm Nov23',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9da1ad770e4262689724a97c4ae11c2b',
-        description: 'Tombola.co.uk',
+        transaction_id: '905f0038679c8d183609e4613bdbae40',
+        description: 'Tombola.co.uk betting',
         currency: 'GBP',
         amount: -10.0,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '90df155404a0faf820d550f1911d6c32',
+        transaction_id: 'c75368c31d0bfedfa304883d64ed0bf8',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '6ac79a5a38f40d24902f99734db49fb5',
+        transaction_id: '6dfa23b3431dc4be0b444ccd6a410e28',
         description: 'Tesco ',
         currency: 'GBP',
         amount: -12.75,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '34fdbb8a803d7f6ff1592cad78e5a6c8',
+        transaction_id: '7f181957baf0b5906bfb42ae83048ba6',
         description: 'Mastercard',
         currency: 'GBP',
         amount: -40.36,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '17f4d3588e67d10dfaf90aac2a044dbf',
+        transaction_id: 'e3ff0ebab58f9240d583d5355210dbff',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.28,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'd44c09ef6400f2b7aad25416d4e754ed',
+        transaction_id: '2c666f19a58dd436a21c9b9c5fa57f3b',
         description: 'Mcdonalds Kilburn',
         currency: 'GBP',
         amount: -8.07,
-        timestamp: '2018-12-23T00:00:00.000+00:00',
+        timestamp: '2018-12-23 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '48f405c50299c37886c672643832570a',
+        transaction_id: 'a850629e4acec33370d9d0e5e07d2a66',
         description: 'Paypal ',
         currency: 'GBP',
         amount: -12.0,
-        timestamp: '2018-12-24T00:00:00.000+00:00',
+        timestamp: '2018-12-24 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '3b2561b663f03bc32a7f27c376a475e7',
+        transaction_id: '40ec82bee83dae67c99632e997968fd5',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -12.0,
-        timestamp: '2018-12-24T00:00:00.000+00:00',
+        timestamp: '2018-12-24 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '916fa70affe1a946428688c25336ce61',
+        transaction_id: 'b73ae492bb9f17c2890c33094b099c6e',
         description: 'British Gas Trading Britishgas.co',
         currency: 'GBP',
         amount: -9.0,
-        timestamp: '2018-12-24T00:00:00.000+00:00',
+        timestamp: '2018-12-24 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9cdfcf990f17ded35b6c0a317536440b',
-        description: 'Wickes',
+        transaction_id: '9d09cc5b1569f4adfe93fd83c8bf1d91',
+        description: 'Care Home Ltd Salary',
         currency: 'GBP',
-        amount: -28.98,
-        timestamp: '2018-12-24T00:00:00.000+00:00',
-        transaction_type: 'debit'
+        amount: 174.77,
+        timestamp: '2018-12-25 00:00:00 +0000',
+        transaction_type: 'credit'
       },
       {
-        transaction_id: 'bdeb49bef4d411524e55f8c6beea0e9b',
+        transaction_id: 'd120b31afbde3d3b1ddaf252280933b6',
         description: 'Cash RB Scot Nov25',
         currency: 'GBP',
         amount: -20.0,
-        timestamp: '2018-12-25T00:00:00.000+00:00',
+        timestamp: '2018-12-25 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: 'dc717559f149c91f6cbaba41a9d6b3ac',
+        transaction_id: '2efca86d30c96528e76fecae339161f1',
         description: 'A B Ltd Dublin',
         currency: 'GBP',
         amount: -5.0,
-        timestamp: '2018-12-26T00:00:00.000+00:00',
+        timestamp: '2018-12-26 00:00:00 +0000',
         transaction_type: 'debit'
       },
       {
-        transaction_id: '9d8c826014870df533f852a153b2ce47',
+        transaction_id: '7c364db6519ab2f5437ff618bb386100',
         description: 'White Swan',
         currency: 'GBP',
         amount: -57.79,
-        timestamp: '2018-12-26T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: 'a9e844341235bdb100800dcda803e277',
-        description: 'Work and child TC',
-        currency: 'GBP',
-        amount: 165.65,
-        timestamp: '2018-12-27T00:00:00.000+00:00',
-        transaction_type: 'credit'
-      },
-      {
-        transaction_id: 'c77644d86550753cb65b5fb1928ce164',
-        description: 'A B Ltd Dublin',
-        currency: 'GBP',
-        amount: -5.0,
-        timestamp: '2018-12-27T00:00:00.000+00:00',
-        transaction_type: 'debit'
-      },
-      {
-        transaction_id: '0fe31de76898aa1b29f2994a85c761dd',
-        description: 'Masons arms ',
-        currency: 'GBP',
-        amount: -12.98,
-        timestamp: '2018-12-27T00:00:00.000+00:00',
+        timestamp: '2018-12-26 00:00:00 +0000',
         transaction_type: 'debit'
       }
     ].freeze
