@@ -143,7 +143,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(legal_aid_application.reload.means_completed?).to be_truthy
     end
 
-    it 'should change the provider step to client_received_legal_helps' do
+    it 'should change the provider step to start_merits_assessment' do
       subject
       expect(legal_aid_application.reload.provider_step).to eq('means_summaries')
     end

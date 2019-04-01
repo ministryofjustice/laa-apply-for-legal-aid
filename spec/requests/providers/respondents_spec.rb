@@ -81,7 +81,7 @@ RSpec.describe Providers::RespondentsController, type: :request do
 
     it 'redirects to the next page' do
       subject
-      expect(response).to redirect_to(providers_legal_aid_application_client_received_legal_help_path)
+      expect(response).to redirect_to(flow_forward_path)
     end
 
     context 'when not authenticated' do
