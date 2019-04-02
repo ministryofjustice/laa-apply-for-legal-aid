@@ -59,4 +59,5 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = config.x.application.host
 
   config.active_storage.service = :local
+  config.x.application.host_url = "http://#{config.x.application.host}"
 end

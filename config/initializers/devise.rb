@@ -260,7 +260,6 @@ Devise.setup do |config|
   # and implements a #handle method. This method can then redirect the user, return error messages, etc.
   # config.saml_failed_callback = nil
 
-  app_host = Rails.configuration.x.application.host
   laa_portal_config = Rails.configuration.x.laa_portal
   # Configure with your SAML settings (see ruby-saml's README for more information: https://github.com/onelogin/ruby-saml).
   config.saml_configure do |settings|
@@ -273,7 +272,7 @@ Devise.setup do |config|
     settings.certificate = laa_portal_config.certificate
     settings.private_key = laa_portal_config.secret_key
 
-    settings.assertion_consumer_service_url     = "http://#{app_host}/providers/saml/auth"
+    settings.assertion_consumer_service_url     = "#{Rails.configuration.x.application.host_url}/providers/saml/auth"
     settings.assertion_consumer_service_binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
     settings.name_identifier_format             = 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified'
     settings.issuer                             = 'apply'

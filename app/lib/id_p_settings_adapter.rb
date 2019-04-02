@@ -18,7 +18,7 @@ class IdPSettingsAdapter
       certificate: nil,
       private_key: nil,
       idp_cert: nil,
-      issuer: "http://#{app_host}/",
+      issuer: Rails.configuration.x.application.host_url + '/',
       idp_cert_fingerprint: '9E:65:2E:03:06:8D:80:F2:86:C7:6C:77:A1:D9:14:97:0A:4D:F4:4D',
       idp_sso_target_url: '/saml/auth'
     }
@@ -38,9 +38,5 @@ class IdPSettingsAdapter
 
   def self.mock_saml?
     ActiveRecord::Type::Boolean.new.cast(laa_portal_config.mock_saml) || false
-  end
-
-  def self.app_host
-    Rails.configuration.x.application.host || 'test'
   end
 end

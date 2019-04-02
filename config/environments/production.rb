@@ -90,4 +90,5 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
 
   config.active_storage.service = :amazon
+  config.x.application.host_url = "https://#{config.x.application.host}"
 end
