@@ -145,7 +145,7 @@ RSpec.describe 'check your answers requests', type: :request do
     it 'should change the state to means_completed' do
       subject
       expect(legal_aid_application.reload.means_completed?).to be_truthy
-      expect(legal_aid_application.completed_at).to be_within(1).of(Time.now)
+      expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 
     it 'should change the provider step to start_merits_assessment' do

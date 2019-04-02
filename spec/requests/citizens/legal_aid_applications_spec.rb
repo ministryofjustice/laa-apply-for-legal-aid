@@ -15,6 +15,18 @@ RSpec.describe 'citizen home requests', type: :request do
       expect(response).to redirect_to(citizens_legal_aid_applications_path)
     end
 
+    context 'the link is not set to expire' do
+      let(:secure_id) do
+        SecureData.create_and_store!(
+          legal_aid_application: { id: application_id }
+        )
+      end
+
+      it 'redirects to applications' do
+        expect(response).to redirect_to(citizens_legal_aid_applications_path)
+      end
+    end
+
     context 'when no matching legal aid application exists' do
       let(:secure_id) { SecureRandom.uuid }
 
@@ -24,6 +36,31 @@ RSpec.describe 'citizen home requests', type: :request do
 
       it 'show a landing page' do
         expect(response.body).to match('Authentication failed')
+      end
+    end
+
+    context 'when applicant has completed the means assessment' do
+      let(:completed_at) { Faker::Time.backward }
+
+      it 'redirects to expired page (completed_at is not null)' do
+        # TO DO when correct path is known
+        # expect(response).to redirect_to(path_to_be_determined)
+        expect(response.body).to include('Expired Page - completed the application')
+      end
+    end
+
+    context 'when applicant has not used the link within 7 days' do
+      let(:secure_id) do
+        SecureData.create_and_store!(
+          legal_aid_application: { id: application_id },
+          expired_at: Time.current - 1.minute
+        )
+      end
+
+      it 'redirects to expired page (7 days)' do
+        # TO DO when correct path is known
+        # expect(response).to redirect_to(path_to_be_determined)
+        expect(response.body).to include('Expired Page - missed url expiry in 7 day window')
       end
     end
   end
@@ -59,35 +96,6 @@ RSpec.describe 'citizen home requests', type: :request do
           subject
           expect(unescaped_response_body).not_to include(provider.username)
         end
-      end
-    end
-  end
-
-  describe 'GET citizens/applications/:id' do
-    before { get citizens_legal_aid_application_path(secure_id) }
-
-    context 'when applicant has completed the means assessment' do
-      let(:completed_at) { Faker::Time.between(2.days.ago, DateTime.now - 1.hour) }
-
-      it 'redirects to expired page (completed_at is not null)' do
-        # TO DO when correct path is known
-        # expect(response).to redirect_to(path_to_be_determined)
-        expect(response.body).to include('Expired Page - completed the application')
-      end
-    end
-
-    context 'when applicant has not used the link within 7 days' do
-      let(:secure_id) do
-        SecureData.create_and_store!(
-          legal_aid_application: { id: application_id },
-          expired_at: Time.now - 1.minute
-        )
-      end
-
-      it 'redirects to expired page (7 days)' do
-        # TO DO when correct path is known
-        # expect(response).to redirect_to(path_to_be_determined)
-        expect(response.body).to include('Expired Page - missed url expiry in 7 day window')
       end
     end
   end

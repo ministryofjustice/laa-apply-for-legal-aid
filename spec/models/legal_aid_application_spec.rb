@@ -139,7 +139,8 @@ RSpec.describe LegalAidApplication, type: :model do
 
     it 'generates data that contains a date which is in 8 days' do
       data = SecureData.for(subject)
-      expect(data[:expired_at]).to be_between(Time.current.beginning_of_day + 8.days, Time.now + 9.days - 5.minutes)
+      expire_date = (Time.current + LegalAidApplication::SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day
+      expect(data[:expired_at]).to be_between(expire_date - 1.minute, expire_date + 1.minute)
     end
   end
 
