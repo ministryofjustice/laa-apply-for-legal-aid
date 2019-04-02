@@ -22,6 +22,7 @@ module Flow
           check_answers: :check_provider_answers
         },
         addresses: {
+          path: ->(application) { urls.providers_legal_aid_application_address_path(application) },
           forward: :proceedings_types,
           check_answers: :check_provider_answers
         },
