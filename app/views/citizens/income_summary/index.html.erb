@@ -13,7 +13,7 @@
             'income_type_item',
             name: transaction_type.name,
             number: index + 1,
-            link_text: t(".select_#{transaction_type.name}"),
+            link_text: t(".select.#{transaction_type.name}"),
             bank_transactions: @bank_transactions[transaction_type]
           ) %>
     <% end %>

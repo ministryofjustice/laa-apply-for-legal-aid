@@ -13,18 +13,19 @@
       ) do |form| %>
 
     <div class="govuk-!-padding-bottom-2"></div>
-
-    <%= form.govuk_text_field :first_name, class: 'govuk-!-width-one-half' %>
-    <%= form.govuk_text_field :last_name, class: 'govuk-!-width-one-half' %>
+    <span class="govuk-fieldset__legend govuk-fieldset__legend--m"><%= t('.full_name') %></span>
+    <%= form.govuk_text_field :first_name, class: 'govuk-input govuk-!-width-three-quarters', 'aria-label' => 'first name' %>
+    <%= form.govuk_text_field :last_name, class: 'govuk-input govuk-!-width-three-quarters', 'aria-label' => 'last name' %>
 
     <div class="govuk-!-padding-bottom-4"></div>
 
     <%= date_input_fields prefix: :dob, field_name: :date_of_birth, form: form %>
 
     <div class="govuk-!-padding-bottom-6"></div>
-
-    <%= form.govuk_text_field :national_insurance_number, class: 'govuk-!-width-one-half' %>
-    <%= form.govuk_text_field :email, class: 'govuk-!-width-three-quarters' %>
+    <%= form.govuk_label(:national_insurance_number, t('.nino_label')) %>
+    <%= form.govuk_text_field :national_insurance_number, label: nil, class: 'govuk-input govuk-input--width-10' %>
+    <%= form.govuk_label(:email, t('.email_label')) %>
+    <%= form.govuk_text_field :email, label: nil, class: 'govuk-input govuk-!-width-three-quarters' %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
