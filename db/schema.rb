@@ -231,6 +231,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_151933) do
     t.datetime "transaction_period_finish_at"
     t.boolean "transactions_gathered"
     t.json "applicant_means_answers"
+    t.datetime "declaration_accepted_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"

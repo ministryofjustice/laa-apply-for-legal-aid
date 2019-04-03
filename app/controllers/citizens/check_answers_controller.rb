@@ -8,7 +8,6 @@ module Citizens
     end
 
     def continue
-      legal_aid_application.complete_means! unless legal_aid_application.means_completed?
       go_forward
     end
 

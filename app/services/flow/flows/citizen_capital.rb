@@ -48,7 +48,11 @@ module Flow
         },
         check_answers: {
           path: ->(_) { urls.citizens_check_answers_path },
-          forward: :merits_assessments
+          forward: :declarations
+        },
+        declarations: {
+          path: ->(_) { urls.citizens_declaration_path },
+          forward: nil
         },
         merits_assessments: {
           path: 'citizens_merits_assessment_path',
