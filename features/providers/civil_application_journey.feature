@@ -424,7 +424,7 @@ Feature: Civil application journeys
     Then I click "Continue"
     Then I click "Continue"
     Then I click "Continue"
-    Then I click "Submit"
+    Then I click "Continue"
     Then I should be on a page showing "Provide details of the case"
     Then I click "Continue"
     Then I should be on a page showing "Enter details of the latest incident"
