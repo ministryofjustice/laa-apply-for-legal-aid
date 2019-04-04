@@ -46,3 +46,10 @@ spec:
       annotations:
         message: More than one hundred 404 errors in one day
         runbook_url: https://kibana.apps.cloud-platform-live-0.k8s.integration.dsd.io/_plugin/kibana/app/kibana#/discover?_g=(refreshInterval:(pause:!t,value:0),time:(from:now-24h,mode:quick,to:now))&_a=(columns:!(_source),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:ec9109a0-2b35-11e9-ac82-95e56bd45b02,key:kubernetes.namespace_name,negate:!f,params:(query:laa-apply-for-legalaid-uat,type:phrase),type:phrase,value:laa-apply-for-legalaid-uat),query:(match:(kubernetes.namespace_name:(query:laa-apply-for-legalaid-uat,type:phrase))))),index:ec9109a0-2b35-11e9-ac82-95e56bd45b02,interval:auto,query:(language:lucene,query:'log:%22RoutingError%22'),sort:!('@timestamp',desc))
+    - alert: nginx-5xx-error
+      expr: sum(rate(nginx_ingress_controller_requests{exported_namespace="laa-apply-for-legalaid-production", status=~"5.."}[5m]))*270 > 0
+      for: 1m
+      labels:
+        severity: apply-for-legal-aid-prod
+      annotations:
+        message: An HTTP 5xx error has occurred
