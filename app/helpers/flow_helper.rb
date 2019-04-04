@@ -3,7 +3,7 @@ module FlowHelper
         url:,
         method: :post,
         show_draft: false,
-        continue_button_text: t('generic.continue')
+        continue_button_text: t('generic.save_and_continue')
       )
 
     form_with(model: nil, url: url, method: method, local: true) do |form|
@@ -19,7 +19,7 @@ module FlowHelper
         form:,
         continue_id: :continue,
         show_draft: false,
-        continue_button_text: t('generic.continue')
+        continue_button_text: t('generic.save_and_continue')
       )
 
     render(
@@ -29,5 +29,9 @@ module FlowHelper
       show_draft: show_draft,
       continue_button_text: continue_button_text
     )
+  end
+
+  def next_action_link(continue_id: :continue, continue_text: t('generic.save_and_continue'))
+    link_to(continue_text, forward_path, id: continue_id, class: 'govuk-button govuk-button')
   end
 end

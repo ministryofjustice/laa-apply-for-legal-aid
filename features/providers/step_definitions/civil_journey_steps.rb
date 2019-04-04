@@ -244,7 +244,7 @@ end
 
 Then('I select a proceeding type and continue') do
   find('#proceeding-list').first(:button, 'Select').click
-  click_button('Continue')
+  click_button('Save and continue')
 end
 
 Then('I select proceeding type {int}') do |index|

@@ -19,12 +19,12 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     When the search for "cakes" is not successful
     Then the result list on page returns a "No results found." message
 
@@ -39,12 +39,12 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I click clear search
@@ -59,12 +59,12 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I expect to see 0 proceeding types selected
     And I search for proceeding 'app'
     Then proceeding suggestions has results
@@ -73,9 +73,9 @@ Feature: Civil application journeys
     And I search for proceeding 'child'
     When I select proceeding type 1
     Then I expect to see 2 proceeding types selected
-    When I click 'Continue'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
@@ -85,12 +85,12 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I select proceeding type 2
@@ -100,9 +100,9 @@ Feature: Civil application journeys
     And I search for proceeding 'child'
     When I select proceeding type 4
     Then I expect to see 1 proceeding types selected
-    When I click 'Continue'
+    When I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript
@@ -121,26 +121,26 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the benefit check results page
-    When I click "Continue"
+    When I click 'Continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
-    Then I click "Continue"
+    Then I click 'Send client link'
     Then I am on the application confirmation page
 
   @localhost_request @javascript @vcr
@@ -150,28 +150,28 @@ Feature: Civil application journeys
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9AJ'
     Then I click find address
     Then I enter address line one '102 Petty France'
     Then I enter city 'London'
     Then I enter postcode 'SW1H 9AJ'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the benefit check results page
-    When I click "Continue"
+    When I click 'Continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
-    Then I click "Continue"
+    Then I click 'Send client link'
     Then I am on the application confirmation page
 
   @javascript @vcr
@@ -181,19 +181,19 @@ Feature: Civil application journeys
     Then I enter the date of birth '10-01-1980'
     Then I enter national insurance number 'JA293483A'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen receives benefits
 
@@ -204,19 +204,19 @@ Feature: Civil application journeys
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
     Then I fill 'email' with 'test@test.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I search for proceeding 'Application for a care order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen does not receive benefits
 
@@ -225,7 +225,7 @@ Feature: Civil application journeys
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'First name'
     Then I enter the first name 'Bartholomew'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'First name' should be 'Bartholomew'
 
@@ -259,7 +259,7 @@ Feature: Civil application journeys
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Email'
     Then I fill 'email' with 'foo@example.com'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Email' should be 'foo@example.com'
 
@@ -278,7 +278,7 @@ Feature: Civil application journeys
     Then I enter a postcode 'DA74NG'
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
@@ -291,7 +291,7 @@ Feature: Civil application journeys
     Then I enter address line one '102 Petty France'
     Then I enter city 'London'
     Then I enter postcode 'SW1H 9AJ'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
@@ -335,28 +335,28 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Enter details of the latest incident'
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Respondent details"
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
     Then I choose option "Respondent police notified True"
     Then I choose option "Respondent bail conditions set True"
     Then I fill "Bail conditions set details" with "Foo bar"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What are the estimated legal costs of doing the work?"
     Then I fill "Estimated legal cost" with "1000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What are the prospects of success?"
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Client declaration"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Estimated legal costs' should be "£1,000.00"
     Then I click "Accept and send application"
@@ -366,39 +366,39 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Receives benefits and completes the application
     Given I complete the passported journey as far as check your answers
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the benefit check results page
     Then I see a notice saying that the citizen receives benefits
-    Then I click "Continue"
+    Then I click 'Continue'
     Then I should be on a page showing "Before you continue"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "How much is your client's home worth?"
     Then I fill "Property value" with "200000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own their home with anyone else?"
     Then I choose "Yes, a partner or ex-partner"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I select "Cash savings"
     Then I fill "Cash" with "10000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any of the following?"
     Then I select "Land"
     Then I fill "Land value" with "50000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
     Then I select "Bankruptcy"
     Then I select "Held overseas"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click link "Back"
     Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
@@ -416,28 +416,28 @@ Feature: Civil application journeys
     Then I should be on a page showing "How much is your client's home worth?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
-    Then I click "Continue"
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
-    Then I click "Continue"
+    Then I click 'Continue'
     Then I should be on a page showing "Enter details of the latest incident"
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Respondent details"
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
     Then I choose option "Respondent police notified True"
     Then I choose option "Respondent bail conditions set True"
     Then I fill "Bail conditions set details" with "Foo bar"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     And I should not see "Client received legal help"
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
@@ -445,26 +445,26 @@ Feature: Civil application journeys
     Then I reload the page
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What are the estimated legal costs of doing the work?"
     Then I fill "Estimated legal cost" with "1000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What are the prospects of success?"
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Client declaration"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
     Then I enter the statement 'This is some test data for the statement of case'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
     Then I click Check Your Answers Change link for 'Estimated legal costs'
     Then I should be on a page showing "What are the estimated legal costs of doing the work?"
     Then I fill "Estimated legal cost" with "2345"
-    And I click "Continue"
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Estimated legal costs' should be "£2,345.00"
     Then I click "Accept and send application"
