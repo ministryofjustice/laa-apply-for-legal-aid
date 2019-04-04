@@ -111,6 +111,16 @@ en:
 '
         name: 'Name:'
         what_you_will_need: What you will need
+    means_test_results:
+      show:
+        page-heading: What happens next
+        completed_financial_assessment: You've completed your financial assessment
+        name: Name
+        reference_number: Reference number
+        solicitors-actions: Your solicitor will use your answers to help them complete your application.
+        what-happens-next: >
+          We'll confirm if you're eligible for legal aid once we've checked your financial
+          situation and the details of your case.
     other_assets:
       show:
         h1-heading: Do you have any of the following?

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     resources :bank_transactions, only: [] do
       patch 'remove_transaction_type', on: :member
     end
+    resource :means_test_result, only: [:show]
   end
 
   namespace :providers do

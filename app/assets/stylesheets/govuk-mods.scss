@@ -3,3 +3,23 @@
   background-color: #b10e1e;
   box-shadow: 0 2px 0 #0b0c0c;
 }
+
+dl.govuk-list.inline-list {
+  dt:before {
+    content: "";
+    display: block;
+  }
+  dt, dd {
+    display: inline;
+  }
+  dd {
+    margin-inline-start: 0.1em;
+  }
+}
+
+.govuk-panel {
+  dl.govuk-list {
+    color: white;
+    font-size: inherit;
+  }
+}

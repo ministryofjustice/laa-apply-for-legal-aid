@@ -13,15 +13,15 @@
 
 <%= page_template page_title: t('.secure_link_heading') do %>
 
-    <p class="govuk-body"><%= t '.secure_link_text' %></p>
-    <h3 class="govuk-heading-m"><%= t '.happen_next_heading' %></h3>
-    <p class="govuk-body">
-     <%= t '.happen_next_text' %>
-    </p>
-    <%= link_to(
-          t('.back_button'),
-          providers_legal_aid_applications_path,
-          class: 'govuk-button govuk-button',
-          id: 'continue'
-        ) %>
+  <p class="govuk-body"><%= t '.secure_link_text' %></p>
+  <h3 class="govuk-heading-m"><%= t '.happen_next_heading' %></h3>
+  <p class="govuk-body">
+   <%= t '.happen_next_text' %>
+  </p>
+  <%= link_to(
+        t('.back_button'),
+        providers_legal_aid_applications_path,
+        class: 'govuk-button govuk-button',
+        id: 'continue'
+      ) %>
 <% end %>
