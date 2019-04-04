@@ -230,21 +230,23 @@ en:
           list: |
             public family law
             domestic violence or abuse
-        apply_civil_legal_para: 'Use this service to apply for civil legal aid for cases involving:'
-        apply_for_legal_aid_heading: Apply for Legal Aid
+        apply_civil_legal_para: 'Use this service to apply for civil legal aid for:'
+        must_be_provider: You must be a civil or family legal aid provider to use this service.
+        apply_for_legal_aid_heading: Apply for legal aid
+        check_legal_aid_link: Check if you can get legal aid
+        check_legal_aid_copy: if you need help paying for legal representation.
         related_content_list:
           item_1: Legal aid
-          item_2: More
+          item_2: Check if you can get legal aid
           title: Related content
         use_ccms_list:
-          heading: Who can use this service?
+          heading: Before you start
           list: |
             has a National Insurance number
             uses online banking
-            is single, does not have an income, or their partner is the opponent in the case
+            is single, does not share an income, or their partner is the opponent in the case
           title: 'You can only use this service if your client:'
-        use_ccms_para: Use CCMS for Section 8 orders, cases involving the Special Children's Act, and all other types of civil and criminal legal aid.
-        use_ccms_upload_document: You cannot upload documents using this service. Use CCMS if you want to submit evidence to support your case.
+        use_ccms_para: Use the Client and Cost Management System (CCMS) for all other applications.
     start_merits_assessments:
       show:
         h1-heading: Provide details of the case
