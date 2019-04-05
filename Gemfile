@@ -30,6 +30,9 @@ gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
 # Authorization
 gem 'pundit'
 
+# Pagination
+gem 'pagy'
+
 # Gathers data from user browser - OS and Browser name
 gem 'browser'
 
