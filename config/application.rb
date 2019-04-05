@@ -37,6 +37,7 @@ module LaaApplyForLegalAid
 
     config.x.admin_portal.allow_reset = ENV['ADMIN_ALLOW_RESET'] == 'true'
     config.x.admin_portal.password = ENV['ADMIN_PASSWORD']
+    config.x.admin_portal.create_test_applications = ENV['ADMIN_CREATE_TEST_APPLICATIONS']
 
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
