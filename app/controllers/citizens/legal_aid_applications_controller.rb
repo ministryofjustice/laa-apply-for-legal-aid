@@ -9,7 +9,7 @@ module Citizens
 
       legal_aid_application = LegalAidApplication.find_by_secure_id!(secure_id)
 
-      session[:current_application_ref] = legal_aid_application.id
+      session[:current_application_id] = legal_aid_application.id
 
       sign_applicant_in_via_devise(legal_aid_application.applicant)
       redirect_to citizens_legal_aid_applications_path

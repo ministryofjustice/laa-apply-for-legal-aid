@@ -39,9 +39,9 @@ RSpec.describe 'citizen home requests', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'sets the application_ref session variable' do
+      it 'sets the application_id session variable' do
         subject
-        expect(session[:current_application_ref]).to eq(application_id)
+        expect(session[:current_application_id]).to eq(application_id)
       end
 
       it 'returns the correct application' do
