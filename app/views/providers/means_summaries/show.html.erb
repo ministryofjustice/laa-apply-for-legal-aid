@@ -20,11 +20,7 @@
   <p class="align-text-right">
     <%= link_to(
           t('.change_declared_income'),
-          Flow::KeyPoint.path_for(
-            journey: :providers,
-            key_point: :start_income_update,
-            legal_aid_application: @legal_aid_application
-          )
+          check_answer_url_for(:providers, :identify_types_of_incomes, @legal_aid_application)
         ) %>
   </p>
 
@@ -39,7 +35,7 @@
   <p class="align-text-right">
     <%= link_to(
           t('.change_declared_outgoings'),
-          '#'
+          check_answer_url_for(:providers, :identify_types_of_outgoings, @legal_aid_application)
         ) %>
   </p>
 

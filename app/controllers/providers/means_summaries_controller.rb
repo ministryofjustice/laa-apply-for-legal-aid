@@ -4,6 +4,7 @@ module Providers
 
     def show
       authorize legal_aid_application
+      legal_aid_application.provider_check_citizens_means_answers! unless legal_aid_application.provider_checking_citizens_means_answers?
       @bank_transaction_amounts = bank_transactions.group(:transaction_type_id).sum(:amount)
     end
 

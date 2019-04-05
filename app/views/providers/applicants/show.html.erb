@@ -1,4 +1,4 @@
-<% back_label = @legal_aid_application.checking_answers? ? 'generic.back' : 'generic.home' %>
+<% back_label = @legal_aid_application.checking_client_details_answers? ? 'generic.back' : 'generic.home' %>
 <%= page_template(
       page_title: t('.page_title'),
       back_link: { text: t(back_label) },

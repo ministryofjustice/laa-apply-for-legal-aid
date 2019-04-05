@@ -10,8 +10,8 @@ en:
         very_satisfied: Very satisfied
     legal_aid_application:
       state:
-        answers_checked: Answers checked
-        checking_answers: Checking answers
+        client_details_answers_checked: Answers checked
+        checking_client_details_answers: Checking answers
         checking_citizen_answers: Applicant checking answers
         checking_merits_answers: Provider checking merits test answers
         checking_passported_answers: Provider checking means test answers

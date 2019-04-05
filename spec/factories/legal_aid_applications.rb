@@ -18,8 +18,8 @@ FactoryBot.define do
       state { 'provider_submitted' }
     end
 
-    trait :answers_checked do
-      state { 'answers_checked' }
+    trait :client_details_answers_checked do
+      state { 'client_details_answers_checked' }
     end
 
     trait :checking_passported_answers do
@@ -38,8 +38,8 @@ FactoryBot.define do
       state { 'merits_completed' }
     end
 
-    trait :checking_answers do
-      state { :checking_answers }
+    trait :checking_client_details_answers do
+      state { :checking_client_details_answers }
     end
 
     trait :with_proceeding_types do
