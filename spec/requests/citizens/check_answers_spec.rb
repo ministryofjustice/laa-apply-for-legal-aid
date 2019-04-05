@@ -136,13 +136,6 @@ RSpec.describe 'check your answers requests', type: :request do
     it 'does not change the state' do
       expect { subject }.not_to change { legal_aid_application.reload.state }
     end
-
-    it 'saves the applicant means answers' do
-      expect(SaveApplicantMeansAnswers).to receive(:call).with(legal_aid_application).and_call_original
-      subject
-      legal_aid_application.reload
-      expect(legal_aid_application.applicant_means_answers['savings_amount']['isa']).to eq(legal_aid_application.savings_amount.isa.to_s)
-    end
   end
 
   describe 'PATCH /citizens/check_answers/reset' do

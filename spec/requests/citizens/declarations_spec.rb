@@ -49,5 +49,10 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       subject
     end
+
+    it 'saves the applicant means answers' do
+      expect(SaveApplicantMeansAnswers).to receive(:call).with(legal_aid_application)
+      subject
+    end
   end
 end

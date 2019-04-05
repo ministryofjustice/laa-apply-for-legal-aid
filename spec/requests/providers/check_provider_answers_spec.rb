@@ -90,6 +90,13 @@ RSpec.describe 'check your answers requests', type: :request do
           expect(unescaped_response_body).to include(address.postcode)
         end
       end
+
+      context 'when client has completed their journey' do
+        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :means_completed) }
+        it 'redirects to means summary' do
+          expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+        end
+      end
     end
   end
 
