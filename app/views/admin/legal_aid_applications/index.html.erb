@@ -6,14 +6,12 @@
 
   <p><%= link_to t('.edit_settings'), admin_settings_path, class: 'govuk-link' %></p>
 
-  <% if HostingEnvironment.staging? || HostingEnvironment.uat? || HostingEnvironment.development? %>
     <%= button_to(
           t('generic.create_test_applications'),
           create_test_applications_admin_legal_aid_applications_path,
-          method: :patch,
+          method: :post,
           class: 'govuk-button'
-        ) %>
-  <% end %>
+        ) if create_test_applications_enabled? %>
 
   <%= button_to(
         t('.delete_all'),

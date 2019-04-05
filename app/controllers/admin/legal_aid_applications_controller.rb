@@ -28,11 +28,15 @@ module Admin
 
     protected
 
+    def create_test_applications_enabled?
+      ENV["ADMIN_CREATE_TEST_APPLICATIONS"].present?
+    end
+
     # Note this action uses the mock_saml setting to determine if it should be enabled
     def destroy_enabled?
       Rails.configuration.x.admin_portal.allow_reset
     end
-    helper_method :destroy_enabled?
+    helper_method :destroy_enabled?, :create_test_applications_enabled?
 
     private
 

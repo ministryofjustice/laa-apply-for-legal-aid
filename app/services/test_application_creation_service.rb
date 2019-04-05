@@ -1,26 +1,24 @@
 class TestApplicationCreationService
   APPLICATION_TEST_TRAITS = %i[
-    test_application_initiated
-    test_application_checking_answers
-    test_application_checking_passported_answers
-    test_application_answers_checked
-    test_application_provider_submitted
-    test_application_means_completed
-    test_application_chekcing_merits_answers
+    at_initiated
+    at_checking_client_details_answers
+    at_checking_passported_answers
+    at_client_details_answers_checked
+    at_provider_submitted
+    at_means_completed
+    at_chekcing_merits_answers
   ].freeze
-
-  PROVIDERS = Provider.all
 
   def self.call
     new.call
   end
 
-  def initialize
-    @providers = Provider.all
+  def providers
+    Provider.all
   end
 
   def call
-    @providers.each do |provider|
+    providers.each do |provider|
       APPLICATION_TEST_TRAITS.each do |trait|
         create_test_application(provider, trait)
       end

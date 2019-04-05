@@ -183,6 +183,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminAllowReset
+  - name: ADMIN_CREATE_TEST_APPLICATIONS
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: adminCreateTestApplications
   - name: ADMIN_PASSWORD
     valueFrom:
       secretKeyRef:

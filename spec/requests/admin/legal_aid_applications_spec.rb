@@ -37,12 +37,13 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
     end
   end
 
-  describe 'PATCH /admin/legal_aid_applications/create_test_applications' do
-    subject { patch create_test_applications_admin_legal_aid_applications_path }
+  describe 'POST /admin/legal_aid_applications/create_test_applications' do
+    subject { post create_test_applications_admin_legal_aid_applications_path }
     let(:count) { 1 }
 
     it 'creates test legal_aid_applications' do
-      expect { subject }.to change { LegalAidApplication.count }.to be > 1
+      number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size
+      expect { subject }.to change { LegalAidApplication.count }.by(number_new)
     end
 
     it 'redirects back to admin root' do

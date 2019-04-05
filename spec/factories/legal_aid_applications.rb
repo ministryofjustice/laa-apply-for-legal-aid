@@ -150,42 +150,42 @@ FactoryBot.define do
       transaction_period_finish_at { Time.now.beginning_of_day }
     end
 
-    trait :test_application_initiated do
+    trait :at_initiated do
       state { :initiated }
       provider_step { :applicants }
     end
 
-    trait :test_application_checking_answers do
+    trait :at_checking_client_details_answers do
       with_proceeding_types
-      state { :checking_answers }
+      state { :checking_client_details_answers }
       provider_step { :check_provider_answers }
     end
 
-    trait :test_application_checking_passported_answers do
+    trait :at_checking_passported_answers do
       with_proceeding_types
       state { :checking_passported_answers }
       provider_step { :check_passported_answers }
     end
 
-    trait :test_application_answers_checked do
+    trait :at_client_details_answers_checked do
       with_proceeding_types
-      state { :answers_checked }
+      state { :client_details_answers_checked }
       provider_step { :check_benefits }
     end
 
-    trait :test_application_provider_submitted do
+    trait :at_provider_submitted do
       with_proceeding_types
       state { :provider_submitted }
       provider_step { :check_provider_answers }
     end
 
-    trait :test_application_means_completed do
+    trait :at_means_completed do
       with_proceeding_types
       state { :means_completed }
       provider_step { :start_merits_assessments }
     end
 
-    trait :test_application_chekcing_merits_answers do
+    trait :at_chekcing_merits_answers do
       with_proceeding_types
       with_merits_assessment
       with_merits_statement_of_case
