@@ -52,14 +52,10 @@ module Flow
         },
         declarations: {
           path: ->(_) { urls.citizens_declaration_path },
-          forward: nil
+          forward: :means_test_results
         },
-        merits_assessments: {
-          path: 'citizens_merits_assessment_path',
-          forward: :application_submitted
-        },
-        application_submitted: {
-          path: 'citizens_application_submitted_path',
+        means_test_results: {
+          path: ->(_) { urls.citizens_means_test_result_path },
           forward: nil
         }
       }.freeze

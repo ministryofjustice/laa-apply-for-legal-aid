@@ -97,6 +97,8 @@ Feature: Citizen journey
     Then I should be on a page showing "Check your answers"
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
+    Then I click "Agree and submit"
+    Then I should be on a page showing "You've completed your financial assessment"
 
   @javascript
   Scenario: I want to change property details via the check your answers page

@@ -26,6 +26,8 @@ module Providers
       @address = @applicant.addresses.first
     end
 
+    # This handles the situation where a provider is viewing providers/applications and a citizens completes their
+    # journey - causing the link to the application to be out of step with the provider step.
     def redirect_to_means_summary
       redirect_to providers_legal_aid_application_means_summary_path(legal_aid_application)
     end

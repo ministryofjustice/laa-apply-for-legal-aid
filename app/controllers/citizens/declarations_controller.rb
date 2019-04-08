@@ -8,7 +8,7 @@ module Citizens
     def update
       record_acceptance
       legal_aid_application.complete_means! unless legal_aid_application.means_completed?
-      render plain: 'next step to be defined'
+      go_forward
     end
 
     private
