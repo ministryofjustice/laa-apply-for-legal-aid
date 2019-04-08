@@ -9,10 +9,10 @@ class BenefitCheckService
 
   def call
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
-  rescue Savon::SOAPFault => error
-    raise ApiError, "HTTP #{error.http.code}, #{error.to_hash}"
-  rescue Net::ReadTimeout => error
-    raise ApiError, error
+  rescue Savon::SOAPFault => e
+    raise ApiError, "HTTP #{e.http.code}, #{e.to_hash}"
+  rescue Net::ReadTimeout => e
+    raise ApiError, e
   end
 
   private
