@@ -14,9 +14,12 @@ module CCMS
       super(WSDL_LOCATION, NAMESPACES)
     end
 
+    # temporarily ignore this until connectivity with ccms is working
+    # :nocov:
     def call
       @soap_client.call(:process, soap_header: header_message, message: body_message)
     end
+    # :nocov:
 
     private
 
