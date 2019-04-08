@@ -98,6 +98,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: laaPortalIdpSsoTargetUrl
+  - name: LAA_PORTAL_IDP_SLO_TARGET_URL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: laaPortalIdpSloTargetUrl
   - name: LAA_PORTAL_IDP_CERT
     valueFrom:
       secretKeyRef:

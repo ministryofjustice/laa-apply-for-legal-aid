@@ -6,7 +6,11 @@
 class SamlSessionsController < Devise::SamlSessionsController
   def destroy
     sign_out current_provider
-    redirect_to providers_root_url
+    if IdPSettingsAdapter.mock_saml?
+      redirect_to providers_root_url
+    else
+      redirect_to idp_sign_out_provider_session_url(SAMLRequest: 1)
+    end
   end
 
   private
