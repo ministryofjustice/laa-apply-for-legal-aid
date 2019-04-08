@@ -1,14 +1,7 @@
 module CCMS
-  class ReferenceDataParser
+  class ReferenceDataParser < BaseParser
     TRANSACTION_ID_PATH = '//Body//ReferenceDataInqRS//HeaderRS//TransactionID'.freeze
     RESULTS_PATH = '//Body//ReferenceDataInqRS//Results'.freeze
-
-    def initialize(tx_request_id, response)
-      @transaction_request_id = tx_request_id
-      @response = response
-      @doc = Nokogiri::XML(@response)
-      @doc.remove_namespaces!
-    end
 
     def parse
       raise 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
