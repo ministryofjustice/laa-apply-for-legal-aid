@@ -55,7 +55,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
 
           it 'show page information' do
             subject
-            expect(response.body).to include('Showing 1-3 of 5')
+            expect(response.body).to include('Showing 1 - 3 of 5')
           end
 
           it 'shows pagination' do

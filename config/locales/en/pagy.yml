@@ -11,7 +11,7 @@ en:
         zero: "No results"
         one: "Showing 1 of 1"
         other: "Showing %{count} of %{count} results"
-      multiple_pages: "Showing %{from}-%{to} of %{count} results"
+      multiple_pages: "Showing %{from} - %{to} of %{count} results"
       item_name:
         zero: "items"
         one: "item"
