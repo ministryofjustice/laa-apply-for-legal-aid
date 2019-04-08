@@ -9,21 +9,21 @@ Feature: Checking answers backwards and forwards
     And I click Check Your Answers Change link for 'own_home'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "How much is your client's home worth?"
     Then I fill "Property value" with "200000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own their home with anyone else?"
     Then I choose "Yes, a partner or ex-partner"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000.00'
@@ -40,18 +40,18 @@ Feature: Checking answers backwards and forwards
     And I click Check Your Answers Change link for 'own_home'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "How much is your client's home worth?"
     Then I fill "Property value" with "200000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
     Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own their home with anyone else?"
     Then I choose "No, sole owner"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000.00'
@@ -66,7 +66,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'own_home'
     Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'No'
 
@@ -80,9 +80,9 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing 'Does your client have any savings and investments?'
     Then I select 'Cash savings'
     Then I fill 'cash' with '456.33'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And I should be on a page showing "£456.33"
 
@@ -94,7 +94,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
     Then I should be on a page showing 'Does your client have any savings and investments?'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Savings and investments' should be 'None declared'
 
@@ -108,9 +108,9 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing 'Does your client have any of the following?'
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And I should be on a page showing "£20,000"
 
@@ -122,7 +122,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
     Then I should be on a page showing 'Does your client have any of the following?'
-    Then I click "Continue"
+    Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Other assets' should be 'None declared'
 
@@ -131,18 +131,18 @@ Feature: Checking answers backwards and forwards
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Own home'
       Then I should be on a page showing 'Does your client own the home that they live in?'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing "How much is your client's home worth?"
       Then I fill 'Property value' with '500000'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Does your client own their home with anyone else?'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'What % share of their home does your client legally own?'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
       And the answer for 'Property value' should be '£500,000.00'
@@ -153,7 +153,7 @@ Feature: Checking answers backwards and forwards
       And I click Check Your Answers Change link for 'Own home'
       Then I should be on a page showing 'Does your client own the home that they live in?'
       Then I choose 'No'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'No'
 
@@ -162,8 +162,8 @@ Feature: Checking answers backwards and forwards
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Savings and investments'
       Then I should be on a page showing 'Does your client have any savings and investments?'
-      Then I click 'Continue'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
 
     @javascript @vcr
@@ -171,8 +171,8 @@ Feature: Checking answers backwards and forwards
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Other assets'
       Then I should be on a page showing 'Does your client have any of the following?'
-      Then I click 'Continue'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
 
     @javascript @vcr
@@ -181,7 +181,7 @@ Feature: Checking answers backwards and forwards
       And I click Check Your Answers Change link for 'Restrictions'
       Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
       Then I select 'Restraint or freezing order'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Restrictions' should be 'Restraint or freezing order'
 
@@ -192,7 +192,7 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
       Then I deselect 'Bankruptcy'
       Then I deselect 'Held overseas'
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Restrictions' should be 'None declared'
 
@@ -201,7 +201,7 @@ Feature: Checking answers backwards and forwards
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
       Then I should be on a page showing "Do any restrictions apply to your client's property, savings or assets?"
-      Then I click 'Continue'
+      Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Restrictions' should be 'Bankruptcy'
       And the answer for 'Restrictions' should be 'Held overseas'

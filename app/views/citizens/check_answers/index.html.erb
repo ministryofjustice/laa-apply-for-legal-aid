@@ -18,13 +18,10 @@
 
       <p><%= t('.merits.text') %></p>
 
-      <%= button_to(
-            t('generic.submit'),
-            continue_citizens_check_answers_path,
-            class: 'govuk-button',
+      <%= next_action_buttons_with_form(
+            url: continue_citizens_check_answers_path,
             method: :patch
           ) %>
-
     </div>
   </div>
 <% end %>

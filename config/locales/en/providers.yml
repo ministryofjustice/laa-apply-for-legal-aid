@@ -15,6 +15,7 @@ en:
           heading: Give your client access to the financial assessment
           text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
         secure_link_para: Send an email to your client with a secure link to the online assessment.
+        send_client_link: Send client link
         share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
         sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
         title: About the online financial assessment

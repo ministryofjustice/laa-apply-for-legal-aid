@@ -1,5 +1,5 @@
 <%= page_template page_title: t('.field_set_header'), template: :form do %>
-  <%= form_tag(citizens_additional_account_path(id: :update), method: :patch) do %>
+  <%= form_with(url: citizens_additional_account_path(id: :update), method: :patch, local: true) do |form| %>
 
     <%= govuk_form_group(
           show_error_if: @error,
@@ -12,7 +12,6 @@
       <%= govuk_radio_inputs :has_offline_accounts, yes: t('generic.yes'), no: t('generic.no') %>
     <% end %>
 
-    <%= govuk_submit_button t('generic.continue') %>
-
+    <%= next_action_buttons(form: form) %>
   <% end %>
 <% end %>

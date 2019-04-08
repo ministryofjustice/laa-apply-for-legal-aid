@@ -44,10 +44,6 @@ module GovUkFormHelper
     content_tag :span, text, merge_with_class(args, 'govuk-hint')
   end
 
-  def govuk_submit_button(text, args = {})
-    submit_tag text, merge_with_class(args, 'govuk-button')
-  end
-
   def govuk_error_message(text, args = {})
     return if text.blank?
 

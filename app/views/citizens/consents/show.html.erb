@@ -10,7 +10,6 @@
       <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
     <% end %>
 
-    <%= govuk_submit_button t('generic.continue') %>
-
+    <%= next_action_buttons(form: form) %>
   <% end %>
 <% end %>
