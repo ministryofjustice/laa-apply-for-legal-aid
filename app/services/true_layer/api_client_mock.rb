@@ -13,7 +13,7 @@ module TrueLayer
     end
 
     def transactions(*)
-      SimpleResult.new(value: SampleData::TRANSACTIONS)
+      SimpleResult.new(value: SampleTransactionsCsvParser.call)
     end
 
     def account_balance(*)
