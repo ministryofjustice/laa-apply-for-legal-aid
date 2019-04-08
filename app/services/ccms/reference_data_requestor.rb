@@ -1,18 +1,17 @@
 module CCMS
   class ReferenceDataRequestor
-
     NAMESPACES = {
       'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
       'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM',
       'xmlns:ns3' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
       'xmlns:ns4' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
       'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIO'
-    }
+    }.freeze
 
     WSDL_LOCATION = "#{File.dirname(__FILE__)}/wsdls/GetReferenceDataWsdl.xml".freeze
 
     def initialize
-      @soap_client ||= Savon.client(
+      @soap_client = Savon.client(
         env_namespace: :soap,
         wsdl: WSDL_LOCATION,
         namespaces: NAMESPACES,
@@ -63,7 +62,7 @@ module CCMS
           'ns1:UsernameToken' => {
             'ns1:Username' => ENV['SOAP_CLIENT_USERNAME'],
             'ns1:Password' => {
-              '@Type'=> ENV['SOAP_CLIENT_PASSWORD_TYPE'],
+              '@Type' => ENV['SOAP_CLIENT_PASSWORD_TYPE'],
               content!: ENV['SOAP_CLIENT_PASSWORD']
             }
           }
@@ -72,12 +71,11 @@ module CCMS
     end
 
     def body_message
-     body =  {
-       'ns3:HeaderRQ' => header_request,
+      {
+        'ns3:HeaderRQ' => header_request,
         'ns2:SearchCriteria' => search_criteria
       }
     end
-
 
     def header_request
       {
