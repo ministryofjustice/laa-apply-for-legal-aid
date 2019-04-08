@@ -147,7 +147,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def create_app_ref
-    self.application_ref = SecureRandom.uuid
+    self.application_ref = ReferenceNumberCreator.call unless application_ref.present?
   end
 
   def set_open_banking_consent_choice_at

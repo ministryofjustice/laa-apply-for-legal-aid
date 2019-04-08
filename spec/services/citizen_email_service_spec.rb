@@ -12,7 +12,7 @@ RSpec.describe CitizenEmailService do
     it 'sends an email' do
       message_delivery = instance_double(ActionMailer::MessageDelivery)
       expect(NotifyMailer).to receive(:citizen_start_email)
-        .with(application.id, 'test@example.com', citizen_url, 'John Doe')
+        .with(application.application_ref, 'test@example.com', citizen_url, 'John Doe')
         .and_return(message_delivery)
       expect(message_delivery).to receive(:deliver_later)
       expect(application).to receive(:generate_secure_id).and_return(secure_id)
