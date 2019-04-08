@@ -16,4 +16,4 @@
 
 <% end %>
 
-<%= render('legal_aid_applications') if @applications.present? %>
+<%= render 'legal_aid_applications', legal_aid_applications: @legal_aid_applications, pagy: @pagy %>

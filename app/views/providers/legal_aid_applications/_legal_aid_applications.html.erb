@@ -12,7 +12,7 @@
         </tr>
       </thead>
 
-      <% @applications.each do |application| %>
+      <% legal_aid_applications.each do |application| %>
         <tbody class="govuk-table__body">
           <tr class="govuk-table__row">
             <td class="govuk-table__cell"><%= application.applicant_full_name || t('generic.undefined') %></td>
@@ -26,5 +26,11 @@
         </tbody>
       <% end %>
     </table>
+    <% if local_assigns[:pagy] %>
+      <div class="govuk-body pagination-container">
+        <%== pagy_nav(pagy) if pagy.pages > 1 %>
+        <span class="page-info"><%== pagy_info(pagy)&.chomp %></span>
+      </div>
+    <% end %>
   </div>
 </div>

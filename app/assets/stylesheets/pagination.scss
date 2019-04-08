@@ -1,0 +1,13 @@
+.pagination-container {
+  nav, .page-info {
+    display: inline;
+    line-height: 2em;
+  }
+  .page-info {
+    float: right;
+  }
+
+  .pagy-nav .page {
+    padding: 0 10px;
+  }
+}
