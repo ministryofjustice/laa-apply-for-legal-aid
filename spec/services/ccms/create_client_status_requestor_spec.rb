@@ -21,15 +21,6 @@ module CCMS
       end
     end
 
-    def modified_environment_vars
-      {
-        'SOAP_CLIENT_USERNAME' => 'my_soap_client_username',
-        'SOAP_CLIENT_PASSWORD' => 'xxxxx',
-        'USER_LOGIN' => 'my_login',
-        'USER_ROLE' => 'my_role'
-      }
-    end
-
     def expected_xml
       File.read("#{File.dirname(__FILE__)}/data/expected_create_client_status_request.xml")
     end

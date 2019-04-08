@@ -4,7 +4,7 @@
     <ns1:Security>
       <ns1:UsernameToken>
         <ns1:Username>my_soap_client_username</ns1:Username>
-        <ns1:Password Type='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText'>xxxxx</ns1:Password>
+        <ns1:Password Type='password_type'>xxxxx</ns1:Password>
       </ns1:UsernameToken>
     </ns1:Security>
   </soap:Header>
