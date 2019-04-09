@@ -59,6 +59,24 @@ en:
         open_banking_consent:
           label:
             html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
+    declarations:
+      show:
+        page_heading: Declaration
+        submission_list_summary: By submitting this assessment, you agree that
+        submission_list: |
+          you've instructed Hitchcock, Jones and King to represent you
+          we can share your information with other government departments like the Department for Work and Pensions (DWP)
+          we can check your details with your bank and credit reference agencies
+          you may have to pay towards your legal aid
+          you may have to repay the legal costs if you keep or gain property or money at the end of your case
+          the information you've given is complete and correct
+          you'll report any changes to your financial situation immediately
+        warning_list_summary: If you give wrong or incomplete information, or do not report changes, you may
+        warning_list: |
+          be prosecuted
+          need to pay a financial penalty
+          have your legal aid stopped and have to pay back the costs
+        submit_button: Agree and submit
     identify_types_of_incomes:
       show:
         benefits_examples: For example, Universal Credit or Child Benefit

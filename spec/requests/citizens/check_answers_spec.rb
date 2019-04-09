@@ -128,36 +128,13 @@ RSpec.describe 'check your answers requests', type: :request do
       legal_aid_application.check_citizen_answers!
     end
 
-    it 'should redirect to next step' do
+    it 'redirects to next step' do
       subject
-      expect(response.body).to eq('citizens_merits_assessment_path')
+      expect(response).to redirect_to(flow_forward_path)
     end
 
-    xit 'should redirect to next step' do
-      # TODO: implement when next step is known
-      # expect(response).to redirect_to(...)
-    end
-
-    it 'should change the state to means_completed' do
-      subject
-      expect(legal_aid_application.reload.means_completed?).to be_truthy
-    end
-
-    it 'should change the provider step to start_merits_assessment' do
-      subject
-      expect(legal_aid_application.reload.provider_step).to eq('means_summaries')
-    end
-
-    it 'syncs the application' do
-      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
-      subject
-    end
-
-    it 'saves the applicant means answers' do
-      expect(SaveApplicantMeansAnswers).to receive(:call).with(legal_aid_application).and_call_original
-      subject
-      legal_aid_application.reload
-      expect(legal_aid_application.applicant_means_answers['savings_amount']['isa']).to eq(legal_aid_application.savings_amount.isa.to_s)
+    it 'does not change the state' do
+      expect { subject }.not_to change { legal_aid_application.reload.state }
     end
   end
 

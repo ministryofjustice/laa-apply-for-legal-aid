@@ -123,7 +123,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   # Refactored into its own method because there may be multiple conditions in the future
   # which make it read only.
   def read_only?
-    provider_submitted?
+    provider_submitted? || checking_citizen_answers?
   end
 
   def checking_answers?

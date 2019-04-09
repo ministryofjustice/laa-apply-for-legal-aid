@@ -245,14 +245,21 @@ RSpec.describe LegalAidApplication, type: :model do
     context 'provider application not submitted' do
       let(:legal_aid_application) { create :legal_aid_application }
       it 'returns false' do
-        expect(legal_aid_application.read_only?).to be false
+        expect(legal_aid_application.read_only?).to be(false)
       end
     end
 
     context 'provider submitted' do
       let(:legal_aid_application) { create :legal_aid_application, :provider_submitted }
       it 'returns true' do
-        expect(legal_aid_application.read_only?).to eq(true)
+        expect(legal_aid_application.read_only?).to be(true)
+      end
+    end
+
+    context 'checking citizen answers?' do
+      let(:legal_aid_application) { create :legal_aid_application, state: :checking_citizen_answers }
+      it 'returns true' do
+        expect(legal_aid_application.read_only?).to be(true)
       end
     end
   end

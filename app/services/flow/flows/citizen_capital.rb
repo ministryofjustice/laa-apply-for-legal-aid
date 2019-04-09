@@ -48,14 +48,14 @@ module Flow
         },
         check_answers: {
           path: ->(_) { urls.citizens_check_answers_path },
-          forward: :merits_assessments
+          forward: :declarations
         },
-        merits_assessments: {
-          path: 'citizens_merits_assessment_path',
-          forward: :application_submitted
+        declarations: {
+          path: ->(_) { urls.citizens_declaration_path },
+          forward: :means_test_results
         },
-        application_submitted: {
-          path: 'citizens_application_submitted_path',
+        means_test_results: {
+          path: ->(_) { urls.citizens_means_test_result_path },
           forward: nil
         }
       }.freeze
