@@ -30,12 +30,8 @@ RSpec.describe 'citizen home requests', type: :request do
     context 'when no matching legal aid application exists' do
       let(:secure_id) { SecureRandom.uuid }
 
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
-      end
-
-      it 'show a landing page' do
-        expect(response.body).to match('Authentication failed')
+      it 'redirects to page not found error' do
+        expect(response).to redirect_to(error_path(:page_not_found))
       end
     end
 

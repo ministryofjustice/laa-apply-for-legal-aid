@@ -8,10 +8,6 @@ module Citizens
       return completed if application.completed_at.present?
 
       start_applicant_flow
-    rescue ActiveRecord::RecordNotFound
-      # TODO: Handle failure
-      # TODO: Modify Devise failures to handle failure to authenticate with project styled pages
-      application_not_found
     end
 
     def index; end
