@@ -12,16 +12,8 @@
 
   <%= render 'shared/check_answers_assets', user_type: :citizens %>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <h2 class="govuk-heading-m"><%= t('.merits.heading') %></h2>
-
-      <p><%= t('.merits.text') %></p>
-
-      <%= next_action_buttons_with_form(
-            url: continue_citizens_check_answers_path,
-            method: :patch
-          ) %>
-    </div>
-  </div>
+  <%= next_action_buttons_with_form(
+        url: continue_citizens_check_answers_path,
+        method: :patch
+      ) %>
 <% end %>

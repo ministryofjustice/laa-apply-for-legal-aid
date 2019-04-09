@@ -9,7 +9,7 @@ en:
         account_holder_name_heading: Account holder name
         account_number_heading: Account Number
         balance_heading: Balance
-        balance_text: We will show your statement from the last 30 days so you can tell us more about your financial situation.
+        balance_text: We'll ask you to group your transactions to help us understand your financial situation.
         heading_1: You have successfully shared your account information
         intro_text: We have downloaded 3 months of your transaction history.
         sort_code_heading: Sort Code
@@ -41,9 +41,6 @@ en:
           savings_and_investments: Savings and investments
           shared_ownership: Owned with anyone else
         h1-heading: Check your answers
-        merits:
-          heading: Merits assessment
-          text: You will now need to complete the merits assessment for the proceeding you are applying for.
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
