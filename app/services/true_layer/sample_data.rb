@@ -16,10 +16,10 @@ module TrueLayer
         full_name: 'John Doe',
         addresses: [
           {
-            address: '1 Market Street',
-            city: 'San Francisco',
-            zip: '94103',
-            country: 'USA'
+            address: '2 Denman Road',
+            city: 'London',
+            zip: 'SE15 5NP',
+            country: 'UK'
           }
         ]
       }
@@ -38,6 +38,6 @@ module TrueLayer
       }
     ].freeze
 
-    BALANCES = [{ current: 2000.0 }].freeze
+    BALANCES = [{ current: 205.79 }].freeze
   end
 end
