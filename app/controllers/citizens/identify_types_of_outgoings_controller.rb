@@ -8,7 +8,8 @@ module Citizens
     end
 
     def update
-      legal_aid_application.update!(legal_aid_application_params)
+      legal_aid_application.transaction_types.debits.destroy_all
+      legal_aid_application.transaction_types << transaction_types
       go_forward
     end
 
@@ -16,6 +17,10 @@ module Citizens
 
     def legal_aid_application_params
       params.require(:legal_aid_application).permit(transaction_type_ids: [])
+    end
+
+    def transaction_types
+      TransactionType.debits.where(id: legal_aid_application_params[:transaction_type_ids])
     end
   end
 end
