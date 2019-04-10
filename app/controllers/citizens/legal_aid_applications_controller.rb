@@ -32,7 +32,7 @@ module Citizens
 
     def start_applicant_flow
       sign_out current_provider if provider_signed_in?
-      session[:current_application_ref] = application.id
+      session[:current_application_id] = application.id
       sign_applicant_in_via_devise(application.applicant)
       redirect_to citizens_legal_aid_applications_path
     end

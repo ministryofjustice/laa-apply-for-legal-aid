@@ -33,6 +33,7 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
     it 'sets the application state to means completed' do
       subject
       expect(legal_aid_application.reload.means_completed?).to be_truthy
+      expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 
     it 'changes the provider step to start_merits_assessment' do
