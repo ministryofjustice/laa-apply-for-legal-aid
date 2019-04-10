@@ -8,9 +8,7 @@
         <%= content_for(:page_title) %>
       </h3>
     <% else %>
-      <% if content_for?(:page_title) %>
-        <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-      <% end %>
+      <%= page_heading page_heading_options %>
     <% end %>
     <%= content %>
   </div>
