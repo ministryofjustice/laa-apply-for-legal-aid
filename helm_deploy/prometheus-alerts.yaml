@@ -53,3 +53,11 @@ spec:
         severity: apply-for-legal-aid-prod
       annotations:
         message: An HTTP 5xx error has occurred
+    - alert: SidekiqQueueSize-Threshold-Reached
+      expr: sum(sidekiq_queue_size{namespace="laa-apply-for-legalaid-production"}) > 10 or absent(sidekiq_queue_size{namespace="laa-apply-for-legalaid-production"})
+      for: 1m
+      labels:
+        severity: apply-for-legal-aid-prod
+      annotations:
+        message: Sidekiq queue size is more than 10 or is not reported
+
