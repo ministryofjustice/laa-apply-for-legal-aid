@@ -5,11 +5,13 @@ true_false: &true_false
 en:
   helpers:
     hint:
+      additional_account: Share details of any accounts you have with another bank or building society
       address_lookup:
         postcode: Postcode must be a valid UK postcode.
       applicant:
         email: We'll send your client a link to our service if they need to answer questions about their finances
         national_insurance_number: For example, 'QQ 12 34 56 C'
+      has_offline_accounts: If you do not, you will need to provide paper evidence for these accounts.
       legal_aid_application:
         outstanding_mortgage_amount:
           citizen: Check the statement from your mortgage provider or lender

@@ -1,15 +1,24 @@
-<%= page_template page_title: t('.field_set_header'), template: :form do %>
-  <%= form_with(url: citizens_additional_account_path(id: :update), method: :patch, local: true) do |form| %>
+<%= page_template page_title: t('.field_set_header'), template: :basic do %>
+  <%= form_with(model: @form, url: citizens_additional_account_path(id: :update), method: :patch, local: true) do |form| %>
 
     <%= govuk_form_group(
           show_error_if: @error,
-          hint_id: :has_offline_accounts_hint,
           input: :has_offline_accounts
         ) do %>
 
-      <%= govuk_hint t('.hint'), id: :has_offline_accounts_hint %>
-      <%= govuk_error_message(@error) %>
-      <%= govuk_radio_inputs :has_offline_accounts, yes: t('generic.yes'), no: t('generic.no') %>
+      <%= govuk_error_message @error %>
+
+      <%
+        options = [
+          { value: :yes, label: t('generic.yes') },
+          { value: :no,  label: t('generic.no') }
+        ]
+      %>
+
+      <%= govuk_fieldset_header(content_for(:page_title)) %>
+
+      <%= form.govuk_collection_radio_buttons :has_offline_accounts, options, :value, :label %>
+
     <% end %>
 
     <%= next_action_buttons(form: form) %>
