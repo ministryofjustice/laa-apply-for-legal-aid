@@ -16,7 +16,7 @@ module CCMS
       it 'returns the id based on current time' do
         Timecop.freeze(2019, 1, 2, 3, 4, 5.123456) do
           requestor = described_class.new
-          expect(requestor.transaction_request_id).to eq '20190102030405123456'
+          expect(requestor.transaction_request_id).to start_with '20190102030405123456'
         end
       end
     end
