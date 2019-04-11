@@ -7,8 +7,9 @@
   <% group_error_class = error ? 'govuk-form-group--error' : '' %>
   <% input_error_class = error ? 'govuk-input--error' : '' %>
   <%= content_tag(:span, error, class: 'govuk-error-message', id: 'shared_ownership') if error %>
+  <%= govuk_fieldset_header(content_for(:page_title)) %>
   <div class="govuk-form-group <%= group_error_class %>">
-    <div class="govuk-radios">
+    <div class="govuk-radios govuk-!-padding-top-2">
       <%= render partial: 'shared/forms/shared_ownership_form/shared_ownership_item',
                  collection: LegalAidApplication::SHARED_OWNERSHIP_REASONS, as: :reason,
                  locals: { form: form,
@@ -17,8 +18,6 @@
 
     </div>
   </div>
-
-  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,

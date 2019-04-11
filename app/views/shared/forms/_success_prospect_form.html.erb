@@ -12,7 +12,7 @@
     <%= govuk_fieldset_header(content_for(:page_title)) %>
     <%= govuk_error_message(form.object.errors[:client_received_legal_help].first) %>
 
-    <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+    <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="radios">
       <%= form.govuk_radio_button(:success_prospect, MeritsAssessment.prospect_likely_to_succeed, label: t('.likely')) %>
 
       <%= render partial: 'shared/forms/success_prospect/success_prospect_item',
