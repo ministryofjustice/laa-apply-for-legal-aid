@@ -38,10 +38,8 @@ RSpec.describe 'citizen home requests', type: :request do
     context 'when applicant has completed the means assessment' do
       let(:completed_at) { Faker::Time.backward }
 
-      it 'redirects to expired page (completed_at is not null)' do
-        # TO DO when correct path is known
-        # expect(response).to redirect_to(path_to_be_determined)
-        expect(response.body).to include('Expired Page - completed the application')
+      it 'redirects to error page (assessment already completed)' do
+        expect(response).to redirect_to(error_path(:assessment_already_completed))
       end
     end
 
@@ -53,10 +51,8 @@ RSpec.describe 'citizen home requests', type: :request do
         )
       end
 
-      it 'redirects to expired page (7 days)' do
-        # TO DO when correct path is known
-        # expect(response).to redirect_to(path_to_be_determined)
-        expect(response.body).to include('Expired Page - missed url expiry in 7 day window')
+      it 'redirects to error page (link expired)' do
+        expect(response).to redirect_to(error_path(:link_expired))
       end
     end
   end

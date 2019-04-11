@@ -15,15 +15,11 @@ module Citizens
     private
 
     def expired
-      render plain: 'Expired Page - missed url expiry in 7 day window'
+      redirect_to error_path(:link_expired)
     end
 
     def completed
-      render plain: 'Expired Page - completed the application'
-    end
-
-    def application_not_found
-      render plain: 'Authentication failed'
+      redirect_to error_path(:assessment_already_completed)
     end
 
     def start_applicant_flow
