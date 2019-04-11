@@ -6,6 +6,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
+  SECURE_ID_DAYS_TO_EXPIRE = 7
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
@@ -54,12 +55,17 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def self.find_by_secure_id!(secure_id)
     secure_data = SecureData.for(secure_id)
-    find_by! secure_data[:legal_aid_application]
+    if secure_data[:expired_at] && secure_data[:expired_at] < Time.current
+      SimpleResult.new(error: :expired)
+    else
+      SimpleResult.new(value: find_by!(secure_data[:legal_aid_application]))
+    end
   end
 
   def generate_secure_id
     SecureData.create_and_store!(
       legal_aid_application: { id: id },
+      expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
       # So each secure data payload is unique
       token: SecureRandom.hex
     )

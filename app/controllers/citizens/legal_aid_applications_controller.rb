@@ -4,28 +4,50 @@ module Citizens
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index where the first page is displayed.
     def show
-      sign_out current_provider if provider_signed_in?
-      secure_id = params[:id]
+      return expired if find_legal_aid_application.error == :expired
+      return completed if application.completed_at.present?
 
-      legal_aid_application = LegalAidApplication.find_by_secure_id!(secure_id)
-
-      session[:current_application_id] = legal_aid_application.id
-
-      sign_applicant_in_via_devise(legal_aid_application.applicant)
-      redirect_to citizens_legal_aid_applications_path
+      start_applicant_flow
     rescue ActiveRecord::RecordNotFound
       # TODO: Handle failure
       # TODO: Modify Devise failures to handle failure to authenticate with project styled pages
-      render plain: 'Authentication failed'
+      application_not_found
     end
 
     def index; end
 
     private
 
+    def expired
+      render plain: 'Expired Page - missed url expiry in 7 day window'
+    end
+
+    def completed
+      render plain: 'Expired Page - completed the application'
+    end
+
+    def application_not_found
+      render plain: 'Authentication failed'
+    end
+
+    def start_applicant_flow
+      sign_out current_provider if provider_signed_in?
+      session[:current_application_id] = application.id
+      sign_applicant_in_via_devise(application.applicant)
+      redirect_to citizens_legal_aid_applications_path
+    end
+
     def sign_applicant_in_via_devise(applicant)
       scope = Devise::Mapping.find_scope!(applicant)
       sign_in(scope, applicant, event: :authentication)
+    end
+
+    def application
+      find_legal_aid_application.value
+    end
+
+    def find_legal_aid_application
+      @find_legal_aid_application ||= LegalAidApplication.find_by_secure_id!(params[:id])
     end
   end
 end
