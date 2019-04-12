@@ -79,8 +79,9 @@ RSpec.describe 'citizen restrictions request', type: :request do
 
           # As I can not think of a "normal" behaviour that can cause an error.
           # Error handling falls back to standard error handling.
-          it 'raises error' do
-            expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+          it 'displays error' do
+            subject
+            expect(response).to redirect_to(error_path(:page_not_found))
           end
         end
 
