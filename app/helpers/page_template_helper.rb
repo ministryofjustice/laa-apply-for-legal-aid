@@ -37,12 +37,13 @@ module PageTemplateHelper
   #     <p>Main content</p>
   #   <% end %>
   #
-  def page_template( # rubocop:disable Metrics/ParameterLists
+  def page_template( # rubocop:disable Metrics/ParameterLists Metrics/MethodLength
         page_title:,
         back_link: {},
         column_width: 'two-thirds',
         template: nil,
         show_errors_for: @form,
+        page_heading_options: {},
         &content
       )
     template = :default unless %i[form basic].include?(template)
@@ -55,7 +56,16 @@ module PageTemplateHelper
       back_link: back_link,
       column_width: column_width,
       content: content,
-      show_errors_for: show_errors_for
+      show_errors_for: show_errors_for,
+      page_heading_options: page_heading_options
     )
+  end
+
+  def page_heading(heading: :h1, size: :xl, margin_bottom: nil)
+    return unless content_for?(:page_title)
+
+    classes = ["govuk-heading-#{size}"]
+    classes << "govuk-!-margin-bottom-#{margin_bottom}" if margin_bottom
+    content_tag heading, content_for(:page_title), class: classes.join(' ')
   end
 end
