@@ -6,15 +6,11 @@ class TestApplicationCreationService
     at_client_details_answers_checked
     at_provider_submitted
     at_means_completed
-    at_chekcing_merits_answers
+    at_checking_merits_answers
   ].freeze
 
   def self.call
     new.call
-  end
-
-  def providers
-    Provider.all
   end
 
   def call
@@ -26,6 +22,10 @@ class TestApplicationCreationService
   end
 
   private
+
+  def providers
+    Provider.all
+  end
 
   def create_test_application(provider, trait)
     FactoryBot.create(

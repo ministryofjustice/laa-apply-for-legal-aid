@@ -67,13 +67,13 @@ gem 'prometheus_exporter'
 
 # Generating Fake applications for tests and admin user
 gem 'factory_bot_rails'
+gem 'faker', '>=1.9.1'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'erb_lint', require: false
-  gem 'faker', '>=1.9.1'
   gem 'i18n-tasks'
   gem 'json_expressions'
   gem 'nokogiri'

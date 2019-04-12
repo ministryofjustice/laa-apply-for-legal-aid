@@ -185,7 +185,7 @@ FactoryBot.define do
       provider_step { :start_merits_assessments }
     end
 
-    trait :at_chekcing_merits_answers do
+    trait :at_checking_merits_answers do
       with_proceeding_types
       with_merits_assessment
       with_merits_statement_of_case

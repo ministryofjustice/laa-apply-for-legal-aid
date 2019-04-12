@@ -29,7 +29,7 @@ module Admin
     protected
 
     def create_test_applications_enabled?
-      Rails.configuration.x.admin_portal.create_test_applications
+      Rails.configuration.x.admin_portal.allow_create_test_applications
     end
 
     # Note this action uses the mock_saml setting to determine if it should be enabled
