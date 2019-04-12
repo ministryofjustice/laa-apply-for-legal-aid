@@ -8,7 +8,7 @@ module Citizens
     end
 
     def update
-      legal_aid_application.transaction_types.credits.destroy_all
+      legal_aid_application.legal_aid_application_transaction_types.credits.destroy_all
       legal_aid_application.transaction_types << transaction_types
       go_forward
     end
