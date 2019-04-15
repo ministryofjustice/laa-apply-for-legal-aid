@@ -37,6 +37,21 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
     end
   end
 
+  describe 'POST /admin/legal_aid_applications/create_test_applications' do
+    subject { post create_test_applications_admin_legal_aid_applications_path }
+    let(:count) { 1 }
+
+    it 'creates test legal_aid_applications' do
+      number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size
+      expect { subject }.to change { LegalAidApplication.count }.by(number_new)
+    end
+
+    it 'redirects back to admin root' do
+      subject
+      expect(response).to redirect_to(admin_root_path)
+    end
+  end
+
   describe 'DELETE /admin/legal_aid_applications/destroy_all' do
     subject { delete destroy_all_admin_legal_aid_applications_path }
 

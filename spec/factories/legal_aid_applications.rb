@@ -99,11 +99,15 @@ FactoryBot.define do
     end
 
     trait :with_merits_assessment do
-      merits_assessment { create :merits_assessment, :with_optional_text }
+      after(:create) do |application|
+        create(:merits_assessment, :with_optional_text, legal_aid_application: application)
+      end
     end
 
     trait :with_merits_statement_of_case do
-      statement_of_case { create :statement_of_case }
+      after(:create) do |application|
+        create(:statement_of_case, legal_aid_application: application)
+      end
     end
 
     trait :with_respondent do
@@ -144,6 +148,49 @@ FactoryBot.define do
     trait :with_transaction_period do
       transaction_period_start_at { 3.months.ago.beginning_of_day }
       transaction_period_finish_at { Time.now.beginning_of_day }
+    end
+
+    trait :at_initiated do
+      state { :initiated }
+      provider_step { :applicants }
+    end
+
+    trait :at_checking_client_details_answers do
+      with_proceeding_types
+      state { :checking_client_details_answers }
+      provider_step { :check_provider_answers }
+    end
+
+    trait :at_checking_passported_answers do
+      with_proceeding_types
+      state { :checking_passported_answers }
+      provider_step { :check_passported_answers }
+    end
+
+    trait :at_client_details_answers_checked do
+      with_proceeding_types
+      state { :client_details_answers_checked }
+      provider_step { :check_benefits }
+    end
+
+    trait :at_provider_submitted do
+      with_proceeding_types
+      state { :provider_submitted }
+      provider_step { :check_provider_answers }
+    end
+
+    trait :at_means_completed do
+      with_proceeding_types
+      state { :means_completed }
+      provider_step { :start_merits_assessments }
+    end
+
+    trait :at_checking_merits_answers do
+      with_proceeding_types
+      with_merits_assessment
+      with_merits_statement_of_case
+      state { :checking_merits_answers }
+      provider_step { :check_merits_answers }
     end
   end
 end

@@ -5,6 +5,11 @@ module Admin
       @applications = LegalAidApplication.latest.limit(25)
     end
 
+    def create_test_applications
+      TestApplicationCreationService.call
+      redirect_to action: :index
+    end
+
     def destroy_all
       raise 'Legal Aid Application Destroy All action disabled' unless destroy_enabled?
 
@@ -23,11 +28,15 @@ module Admin
 
     protected
 
+    def create_test_applications_enabled?
+      Rails.configuration.x.admin_portal.allow_create_test_applications
+    end
+
     # Note this action uses the mock_saml setting to determine if it should be enabled
     def destroy_enabled?
       Rails.configuration.x.admin_portal.allow_reset
     end
-    helper_method :destroy_enabled?
+    helper_method :destroy_enabled?, :create_test_applications_enabled?
 
     private
 
