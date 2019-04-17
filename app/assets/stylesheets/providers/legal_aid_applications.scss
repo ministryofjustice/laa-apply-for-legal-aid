@@ -26,9 +26,18 @@ div.no-results {
   background: none !important;
   color: $govuk-link-colour;
   border: none;
-  padding: 0! important;
+  padding: 0 !important;
   font: inherit;
   text-decoration: underline;
   cursor: pointer;
   outline: none;
+}
+
+.govuk-header {
+  .button-as-link {
+    padding-left: 1em !important;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+  }
 }

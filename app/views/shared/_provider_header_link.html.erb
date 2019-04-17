@@ -1,0 +1,13 @@
+<ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
+  <li class="govuk-header__navigation-item">
+    <%= link_to(current_provider.username.truncate(20), providers_provider_path, class: 'govuk-header__link') %>
+  </li>
+  <li class="govuk-header__navigation-item">
+    <%= button = button_to(
+          t('layouts.logout.provider'),
+          destroy_provider_session_path,
+          method: :delete,
+          class: 'button-as-link govuk-header__link'
+        ) %>
+  </li>
+</ul>
