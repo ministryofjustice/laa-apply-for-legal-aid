@@ -42,18 +42,16 @@ module Flow
         },
         success_prospects: {
           path: ->(application) { urls.providers_legal_aid_application_success_prospects_path(application) },
-          forward: :merits_declarations,
-          check_answers: :check_merits_answers
-        },
-        merits_declarations: {
-          path: ->(application) { urls.providers_legal_aid_application_merits_declaration_path(application) },
           forward: :check_merits_answers,
           check_answers: :check_merits_answers
         },
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
-          forward: :placeholder_end_merits,
-          check_answers: :check_merits_answers
+          forward: :merits_declarations
+        },
+        merits_declarations: {
+          path: ->(application) { urls.providers_legal_aid_application_merits_declaration_path(application) },
+          forward: :placeholder_end_merits
         },
         placeholder_end_merits: {
           path: 'End of provider-answered merits assessment questions for passported clients'

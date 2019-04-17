@@ -39,7 +39,10 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/means_summary' do
     let(:params) { {} }
-    subject { patch providers_legal_aid_application_means_summary_path(legal_aid_application), params: params }
+    subject do
+      get providers_legal_aid_application_means_summary_path(legal_aid_application)
+      patch providers_legal_aid_application_means_summary_path(legal_aid_application), params: params
+    end
 
     before do
       login

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_151933) do
+ActiveRecord::Schema.define(version: 2019_04_17_130107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -258,9 +258,9 @@ ActiveRecord::Schema.define(version: 2019_04_05_151933) do
     t.boolean "proceedings_before_the_court"
     t.text "details_of_proceedings_before_the_court"
     t.decimal "estimated_legal_cost", precision: 10, scale: 2
-    t.boolean "client_merits_declaration"
     t.string "success_prospect"
     t.text "success_prospect_details"
+    t.datetime "submitted_at"
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
   end
 

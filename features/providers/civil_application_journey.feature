@@ -332,6 +332,10 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive benefits
     Given I start the merits application
+    Then I should be on a page showing 'Your client has completed their financial assessment'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
+    Then I click 'Continue'
     Then I should be on a page showing 'Enter details of the latest incident'
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"
@@ -355,11 +359,11 @@ Feature: Civil application journeys
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Client declaration"
-    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Estimated legal costs' should be "£1,000.00"
-    Then I click "Accept and send application"
+    Then I click "Save and continue"
+    Then I should be on a page showing "Declaration"
+    Then I click 'Submit and continue'
     Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
 
 
@@ -453,8 +457,6 @@ Feature: Civil application journeys
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Client declaration"
-    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
     Then I enter the statement 'This is some test data for the statement of case'
@@ -467,7 +469,9 @@ Feature: Civil application journeys
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Estimated legal costs' should be "£2,345.00"
-    Then I click "Accept and send application"
+    Then I click "Save and continue"
+    Then I should be on a page showing "Declaration"
+    Then I click 'Submit and continue'
     Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
 
   @javascript @vcr

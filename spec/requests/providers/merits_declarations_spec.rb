@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::MeritsDeclarationsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checked_merits_answers }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/merits_declaration' do
@@ -20,37 +20,31 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Client declaration')
+        expect(response.body).to include('Declaration')
+        expect(unescaped_response_body).to include(legal_aid_application.applicant.full_name)
       end
     end
   end
 
   describe 'PATCH providers/merits_declaration' do
-    subject { patch providers_legal_aid_application_merits_declaration_path(legal_aid_application), params: params.merge(submit_button) }
-    let(:client_merits_declaration) { true }
-    let(:params) do
-      {
-        merits_assessment: {
-          client_merits_declaration: client_merits_declaration
-        }
-      }
-    end
+    subject { patch providers_legal_aid_application_merits_declaration_path(legal_aid_application), params: submit_button }
 
     context 'when the provider is authenticated' do
       before do
         login_as provider
-        subject
       end
 
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
 
         it 'updates the record' do
-          expect(legal_aid_application.merits_assessment.reload.client_merits_declaration).to eq(client_merits_declaration)
+          legal_aid_application.create_merits_assessment!
+          expect { subject }.to change { legal_aid_application.merits_assessment.reload.submitted_at }.from(nil)
         end
 
         it 'redirects to next page' do
-          expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path)
+          subject
+          expect(response.body).to eq(Flow::Flows::ProviderMerits::STEPS[:placeholder_end_merits][:path])
         end
       end
 
@@ -63,6 +57,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         end
 
         it 'sets the application as draft' do
+          subject
           expect(legal_aid_application.reload).to be_draft
         end
       end
