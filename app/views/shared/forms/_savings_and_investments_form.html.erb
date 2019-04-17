@@ -5,16 +5,18 @@
               method: :patch,
               local: true) do |form| %>
 
-  <div class="govuk-checkboxes" data-module="checkboxes">
-    <%= render(
-          partial: 'shared/forms/revealing_checkbox/attribute',
-          collection: attributes,
-          locals: {
-            model: @form,
-            form: form
-          }
-        ) %>
-  </div>
+  <%= govuk_form_group do %>
+    <div class="govuk-checkboxes" data-module="checkboxes">
+      <%= render(
+            partial: 'shared/forms/revealing_checkbox/attribute',
+            collection: attributes,
+            locals: {
+              model: @form,
+              form: form
+            }
+          ) %>
+    </div>
+  <% end %>
 
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
