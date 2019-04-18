@@ -122,6 +122,7 @@ Rails.application.routes.draw do
         patch :reset
       end
       resource :start_merits_assessment, only: %i[show update]
+      resource :client_completed_means, only: %i[show update]
       resource :means_summary, only: %i[show update]
     end
   end

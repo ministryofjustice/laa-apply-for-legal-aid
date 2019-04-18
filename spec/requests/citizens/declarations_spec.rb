@@ -38,7 +38,7 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
 
     it 'changes the provider step to start_merits_assessment' do
       subject
-      expect(legal_aid_application.reload.provider_step).to eq('means_summaries')
+      expect(legal_aid_application.reload.provider_step).to eq('client_completed_means')
     end
 
     it 'records when the declartion accepted' do

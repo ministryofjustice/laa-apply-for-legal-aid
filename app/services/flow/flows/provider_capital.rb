@@ -65,6 +65,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
           forward: :start_merits_assessments
         },
+        client_completed_means: {
+          path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
+          forward: :means_summaries
+        },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
           forward: :start_merits_assessments
