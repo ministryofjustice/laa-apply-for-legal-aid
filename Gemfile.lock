@@ -243,7 +243,7 @@ GEM
     multipart-post (2.0.0)
     mustermann (1.0.3)
     nio4r (2.3.1)
-    nokogiri (1.10.2)
+    nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     notifications-ruby-client (2.9.0)
