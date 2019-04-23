@@ -73,6 +73,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: :means_summaries
         },
+        incoming_transactions: {
+          path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
+          forward: :income_summary
+        },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
           forward: :start_merits_assessments

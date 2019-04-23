@@ -18,11 +18,12 @@ module Flow
       end
     end
 
-    attr_reader :legal_aid_application, :current_step
+    attr_reader :legal_aid_application, :current_step, :params
 
-    def initialize(legal_aid_application:, current_step:)
+    def initialize(legal_aid_application:, current_step:, params: nil)
       @legal_aid_application = legal_aid_application
       @current_step = current_step
+      @params = params
     end
 
     def forward_path
@@ -78,7 +79,11 @@ module Flow
 
       return path_action unless path_action.is_a?(Proc)
 
-      path_action.call(legal_aid_application)
+      if path_action.arity == 2
+        path_action.call(legal_aid_application, params)
+      else
+        path_action.call(legal_aid_application)
+      end
     end
 
     def steps

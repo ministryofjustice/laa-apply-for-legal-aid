@@ -316,3 +316,10 @@ en:
         incurrable_costs: "Costs you can incur: "
         incurrable_costs_value: '£5,000'
         allowable_work: "Work you can do: "
+    transactions:
+      show:
+        col_amount: Amount
+        col_clear_all: Clear all
+        col_date: Date
+        col_description: Description
+        col_select_all: Select all

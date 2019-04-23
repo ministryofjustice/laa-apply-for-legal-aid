@@ -26,12 +26,16 @@ module Providers
         return if self.class.legal_aid_application_not_required?
         return process_invalid_application unless legal_aid_application.present?
 
-        legal_aid_application.update!(provider_step: controller_name)
+        legal_aid_application.update!(provider_step: controller_name, provider_step_params: provider_step_params)
       end
 
       def process_invalid_application
         flash[:error] = 'Invalid application'
         redirect_to providers_legal_aid_applications_path
+      end
+
+      def provider_step_params
+        params.except(:action, :controller, :legal_aid_application_id)
       end
     end
   end

@@ -7,10 +7,12 @@ RSpec.describe Flow::BaseFlowService do
   end
   let(:steps) { Flow::Flows::CitizenStart::STEPS.deep_merge(Flow::Flows::CitizenCapital::STEPS) }
   let(:legal_aid_application) { create :legal_aid_application }
+  let(:params) { nil }
   subject do
     flow_service_class.new(
       legal_aid_application: legal_aid_application,
-      current_step: current_step
+      current_step: current_step,
+      params: params
     )
   end
 
@@ -116,6 +118,15 @@ RSpec.describe Flow::BaseFlowService do
         let(:path) { ->(passed_in) { passed_in } }
         it 'passes in the legal aid application' do
           expect(subject.current_path).to eq(legal_aid_application)
+        end
+
+        context 'with params' do
+          let(:params) { { foo: :bar } }
+          let(:path) { ->(passed_in, params) { [passed_in, params] } }
+
+          it 'passes in the legal aid application and the params' do
+            expect(subject.current_path).to eq([legal_aid_application, params])
+          end
         end
       end
     end
