@@ -67,6 +67,10 @@ module Flow
         },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
+          forward: :income_summary
+        },
+        income_summary: {
+          path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: :means_summaries
         },
         means_summaries: {

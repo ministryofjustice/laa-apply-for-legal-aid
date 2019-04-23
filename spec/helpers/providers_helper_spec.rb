@@ -13,10 +13,11 @@ RSpec.describe ProvidersHelper, type: :helper do
       route.defaults[:controller].to_s.split('/')[1]
     }.uniq
   end
+  let(:excluded_controllers) { %w[bank_transactions] }
 
   describe '#url_for_application' do
     it 'should not crash' do
-      provider_controller_names.each do |controller_name|
+      (provider_controller_names - excluded_controllers).each do |controller_name|
         legal_aid_application.provider_step = controller_name
         url_for_application(legal_aid_application)
       end
