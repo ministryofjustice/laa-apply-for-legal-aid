@@ -8,7 +8,7 @@ module Providers
     end
 
     def continue
-      legal_aid_application.complete_merits! unless draft_selected? || legal_aid_application.merits_completed?
+      legal_aid_application.checked_merits_answers! unless draft_selected? || legal_aid_application.checked_merits_answers?
       continue_or_draft
     end
 

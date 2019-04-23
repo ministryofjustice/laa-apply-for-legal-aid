@@ -15,6 +15,7 @@ module LegalAidApplicationStateMachine
       state :provider_checking_citizens_means_answers
       state :provider_checked_citizens_means_answers
       state :checking_merits_answers
+      state :checked_merits_answers
       state :merits_completed
 
       event :check_your_answers do
@@ -59,14 +60,26 @@ module LegalAidApplicationStateMachine
 
       event :provider_check_citizens_means_answers do
         transitions from: :means_completed, to: :provider_checking_citizens_means_answers
+        transitions from: :provider_checked_citizens_means_answers, to: :provider_checking_citizens_means_answers
+      end
+
+      event :provider_checked_citizens_means_answers do
+        transitions from: :provider_checking_citizens_means_answers, to: :provider_checked_citizens_means_answers
       end
 
       event :check_merits_answers do
+        transitions from: :provider_checked_citizens_means_answers, to: :checking_merits_answers
+        transitions from: :checked_merits_answers, to: :checking_merits_answers
         transitions from: :means_completed, to: :checking_merits_answers
+        transitions from: :merits_completed, to: :checking_merits_answers
+      end
+
+      event :checked_merits_answers do
+        transitions from: :checking_merits_answers, to: :checked_merits_answers
       end
 
       event :complete_merits do
-        transitions from: :checking_merits_answers, to: :merits_completed
+        transitions from: :checked_merits_answers, to: :merits_completed
       end
     end
   end

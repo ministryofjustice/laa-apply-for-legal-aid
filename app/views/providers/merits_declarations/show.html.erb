@@ -1,19 +1,16 @@
 <%= page_template page_title: t('.h1-heading') do %>
-  <%= simple_format t('.text_1') %>
 
-  <ul class="govuk-list govuk-list--bullet">
-      <li><%= simple_format t('.leaflet_link') %></li>
-  </ul>
+  <p class="govuk-body"><%= t('.text') %></p>
 
-  <%= simple_format t('.text_2') %>
+  <% params = { applicant_name: @legal_aid_application.applicant.full_name } %>
+  <%= list_from_translation_path 'providers.merits_declarations.show', params: params %>
 
-  <%= list_from_translation_path 'providers.merits_declarations.show' %>
-
-  <%= simple_format t('.text_3') %>
+  <div class="govuk-!-padding-bottom-4"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_merits_declaration_path,
         method: :patch,
-        show_draft: true
+        show_draft: true,
+        continue_button_text: t('generic.submit_and_continue')
       ) %>
 <% end %>
