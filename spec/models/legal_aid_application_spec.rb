@@ -351,4 +351,14 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.application_ref).to match(/L(-[ABCDEFHJKLMNPRTUVWXY0-9]{3}){2}/)
     end
   end
+
+  describe 'state label' do
+    let(:states) { LegalAidApplication.aasm.states.map(&:name) }
+
+    it 'has a translation for all states' do
+      states.each do |state|
+        expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true), state
+      end
+    end
+  end
 end
