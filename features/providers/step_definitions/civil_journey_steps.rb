@@ -59,7 +59,7 @@ Given('I start the merits application') do
     :means_completed
   )
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_details_latest_incident_path(@legal_aid_application))
+  visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
 end
 
 Given('I complete the journey as far as check your answers') do

@@ -64,8 +64,8 @@ module ApplicationHelper
     content_tag(:li, button, class: 'govuk-header__navigation-item')
   end
 
-  def list_from_translation_path(translation_path)
-    render 'shared/forms/list_items', translation_path: translation_path
+  def list_from_translation_path(translation_path, params: {})
+    render 'shared/forms/list_items', translation_path: translation_path, params: params
   end
 
   def yes_no(boolean)

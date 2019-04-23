@@ -112,15 +112,15 @@ RSpec.describe 'check merits answers requests', type: :request do
     context 'logged in as an authenticated provider' do
       before do
         login_as create(:provider)
+      end
+
+      it 'redirects to next page' do
+        expect(subject).to redirect_to(providers_legal_aid_application_merits_declaration_path(application))
+      end
+
+      it 'transitions to checked_merits_answers state' do
         subject
-      end
-
-      it 'returns success' do
-        expect(response).to be_successful
-      end
-
-      it 'transitions to merits_completed state' do
-        expect(application.reload.merits_completed?).to be true
+        expect(application.reload.checked_merits_answers?).to be true
       end
 
       context 'Form submitted using Save as draft button' do
@@ -132,6 +132,7 @@ RSpec.describe 'check merits answers requests', type: :request do
         end
 
         it 'sets the application as draft' do
+          subject
           expect(application.reload).to be_draft
         end
       end

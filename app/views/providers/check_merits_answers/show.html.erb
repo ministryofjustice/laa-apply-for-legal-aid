@@ -89,7 +89,7 @@
           name: :client_declaration,
           url: providers_legal_aid_application_merits_declaration_path,
           question: t('.items.client_declaration'),
-          answer: (t('.items.client_declaration_answer') if @merits.client_merits_declaration)
+          answer: (t('.items.client_declaration_answer') if @merits.submitted_at?)
         ) %>
   </dl>
 
@@ -106,8 +106,7 @@
   <%= next_action_buttons_with_form(
         url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
         method: :patch,
-        show_draft: true,
-        continue_button_text: t('generic.accept_and_send')
+        show_draft: true
       ) %>
 
 <% end %>

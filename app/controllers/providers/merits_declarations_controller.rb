@@ -5,7 +5,8 @@ module Providers
     def show; end
 
     def update
-      merits_assessment.update!(client_merits_declaration: true) unless draft_selected?
+      legal_aid_application.complete_merits! unless draft_selected? || legal_aid_application.merits_completed?
+      merits_assessment.update!(submitted_at: Time.current) unless merits_assessment.submitted_at?
       continue_or_draft
     end
 

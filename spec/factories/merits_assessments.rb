@@ -10,7 +10,7 @@ FactoryBot.define do
       estimated_legal_cost { Faker::Number.decimal.to_d }
       success_prospect { 'marginal' }
       success_prospect_details { Faker::Lorem.paragraph }
-      client_merits_declaration { true }
+      submitted_at { Faker::Time.backward }
     end
 
     trait :without_optional_text do
@@ -21,7 +21,7 @@ FactoryBot.define do
       estimated_legal_cost { Faker::Number.decimal.to_d }
       success_prospect { 'likely' }
       success_prospect_details { nil }
-      client_merits_declaration { true }
+      submitted_at { Faker::Time.backward }
     end
   end
 end
