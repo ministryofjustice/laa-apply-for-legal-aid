@@ -67,9 +67,6 @@ Rails.application.routes.draw do
       get '/:transaction_type', to: 'outgoing_transactions#show', as: ''
       patch '/:transaction_type', to: 'outgoing_transactions#update'
     end
-    resources :bank_transactions, only: [] do
-      patch 'remove_transaction_type', on: :member
-    end
     resource :means_test_result, only: [:show]
     resource :declaration, only: %i[show update]
   end
@@ -129,6 +126,10 @@ Rails.application.routes.draw do
       resource :incoming_transactions, only: [] do
         get '/:transaction_type', to: 'incoming_transactions#show', as: ''
         patch '/:transaction_type', to: 'incoming_transactions#update'
+      end
+      resource :outgoing_transactions, only: [] do
+        get '/:transaction_type', to: 'outgoing_transactions#show', as: ''
+        patch '/:transaction_type', to: 'outgoing_transactions#update'
       end
       resources :bank_transactions, only: [] do
         patch 'remove_transaction_type', on: :member

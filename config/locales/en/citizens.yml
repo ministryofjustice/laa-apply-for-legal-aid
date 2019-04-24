@@ -23,12 +23,6 @@ en:
       new:
         field_set_header: Do you have online access to your accounts with other banks?
         hint: If you do not, you will need to provide paper evidence for these accounts.
-    bank_transactions:
-      list_selected:
-        col_amount: Amount
-        col_date: Date
-        col_description: Description
-        remove_link: Remove
     check_answers:
       index:
         assets:
@@ -83,25 +77,6 @@ en:
       show:
         hint: Do not select any if you make no regular payments.
         page_heading: Select any regular payments you make
-    income_summary:
-      add_other_income:
-        add_other_income: Add another type of income
-      income_type_item:
-        col_amount: Amount
-        col_date: Date
-        col_description: Description
-        remove_link: Remove
-      index:
-        add_all_income: Add income you received from %{start_at} to %{finish_at}.
-        page_heading: Your income
-        select:
-          benefits: Add benefits payments
-          friends_or_family: Add payments from friends or family
-          maintenance_in: Add maintenance payments
-          pension: Add pension payments
-          property_or_lodger: Add income from property or lodger
-          salary: Add salary or wage payments
-          student_loan: Add student loan or grant payments
     information:
       show:
         heading_1: Give one-time access to your bank accounts
@@ -140,17 +115,6 @@ en:
     other_assets:
       show:
         h1-heading: Do you have any of the following?
-    outgoings_summary:
-      add_other_outgoings:
-        add_other_outgoings: Add another type of regular payment
-      index:
-        add_all_outgoings: Add payments you made from %{start_at} to %{finish_at}.
-        page_heading: Your regular payments
-        select:
-          rent_or_mortgage: Add rent or mortgage payments
-          child_care: Add childcare costs
-          maintenance_out: Add maintenance payments
-          legal_aid: Add legal aid payments
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your home?
       hint: Check the statement from your mortgage provider or lender
@@ -194,11 +158,3 @@ en:
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?
-    transactions:
-      show:
-        col_amount: Amount
-        col_clear_all: Clear all
-        col_date: Date
-        col_description: Description
-        col_select_all: Select all
-        sub_heading: Select all that apply

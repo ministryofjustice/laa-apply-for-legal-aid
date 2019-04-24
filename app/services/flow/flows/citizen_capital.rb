@@ -2,6 +2,14 @@ module Flow
   module Flows
     class CitizenCapital < FlowSteps
       STEPS = {
+        identify_types_of_incomes: {
+          path: ->(_) { urls.citizens_identify_types_of_income_path },
+          forward: :identify_types_of_outgoings
+        },
+        identify_types_of_outgoings: {
+          path: ->(_) { urls.citizens_identify_types_of_outgoing_path },
+          forward: :own_homes
+        },
         own_homes: {
           path: ->(_) { urls.citizens_own_home_path },
           forward: ->(application) { application.own_home_no? ? :savings_and_investments : :property_values },

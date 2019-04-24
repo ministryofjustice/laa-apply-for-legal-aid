@@ -82,6 +82,12 @@ RSpec.describe Providers::TransactionsController, type: :request do
     it_behaves_like 'GET #providers/transactions'
   end
 
+  describe 'GET #citizens/outgoing_transactions' do
+    subject { get providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
+
+    it_behaves_like 'GET #providers/transactions'
+  end
+
   shared_examples_for 'PATCH #providers/transactions' do
     it 'unselect the previously selected' do
       expect { subject }.to change { bank_transaction_A.reload.transaction_type }.to(nil)
@@ -118,6 +124,19 @@ RSpec.describe Providers::TransactionsController, type: :request do
         expect(response).to redirect_to providers_legal_aid_application_income_summary_index_path
         follow_redirect!
         expect(unescaped_response_body).to include("Your client's income")
+      end
+    end
+
+    describe 'PATCH #providers/outgoing_transactions' do
+      subject { patch providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, params) }
+
+      it_behaves_like 'PATCH #providers/transactions'
+
+      it 'redirects to the next page' do
+        subject
+        expect(response).to redirect_to providers_legal_aid_application_outgoings_summary_index_path
+        follow_redirect!
+        expect(unescaped_response_body).to include("Your client's regular payments")
       end
     end
   end

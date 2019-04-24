@@ -13,7 +13,8 @@ RSpec.describe ProvidersHelper, type: :helper do
       route.defaults[:controller].to_s.split('/')[1]
     }.uniq
   end
-  let(:excluded_controllers) { %w[bank_transactions incoming_transactions] }
+  let(:controllers_with_params) { %w[incoming_transactions outgoing_transactions] }
+  let(:excluded_controllers) { %w[bank_transactions] + controllers_with_params }
 
   describe '#url_for_application' do
     it 'should not crash' do
@@ -23,10 +24,16 @@ RSpec.describe ProvidersHelper, type: :helper do
       end
     end
 
-    it 'should return the right URL with param' do
+    it 'incoming_transactions should return the right URL with param' do
       legal_aid_application.provider_step = 'incoming_transactions'
       legal_aid_application.provider_step_params = { transaction_type: :salary }
       expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/incoming_transactions/salary")
+    end
+
+    it 'outgoing_transactions should return the right URL with param' do
+      legal_aid_application.provider_step = 'outgoing_transactions'
+      legal_aid_application.provider_step_params = { transaction_type: :salary }
+      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary")
     end
   end
 end
