@@ -116,14 +116,17 @@ en:
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'
-        financial_situation_para: Find out if you can get legal aid because of your financial situation.
         heading_1: Complete your legal aid financial assessment
-        legal_cost_para: You might not have to pay legal costs if you are on certain benefits, a low income or have little or no savings.
-        list: 'your online banking log in
-
-'
+        legal_cost_para: We use this information to work out if you can get legal aid or you need to pay towards the legal costs.
         name: 'Name:'
-        what_you_will_need: What you will need
+        online_banking_details: Your online banking sign in details.
+        what_you_will_need: What you'll need
+        you_need_to_answer: 'You need to answer questions about your:'
+        list: |
+          bank accounts
+          income and regular costs
+          property, savings and other assets
+        your_solicitor: 'Your solicitor:'
     means_test_results:
       show:
         page-heading: What happens next
