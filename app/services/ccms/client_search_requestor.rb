@@ -25,11 +25,11 @@ module CCMS
     # :nocov:
 
     private
-    def request_xml
-      body_message.to_xml
-    end
+    # def request_xml
+    #   message.to_xml
+    # end
 
-    def body_message
+    def message
       Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.__send__('soap:Envelope', NAMESPACES) do
           xml.__send__('soap:Header') { soap_header(xml) }

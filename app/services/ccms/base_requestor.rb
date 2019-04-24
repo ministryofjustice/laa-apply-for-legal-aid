@@ -14,7 +14,7 @@ module CCMS
     end
 
     def request_xml
-      request.body
+      message.to_xml
     end
 
     def formatted_xml
