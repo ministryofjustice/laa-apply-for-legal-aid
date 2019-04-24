@@ -1,6 +1,6 @@
 module CCMS
   class BaseRequestor
-    def initialize(wsdl_location, namespaces)
+    def initialize
       @soap_client = Savon.client(
         env_namespace: :soap,
         wsdl: wsdl_location,
@@ -11,10 +11,6 @@ module CCMS
         log: true
       )
       @transaction_request_id = nil
-    end
-
-    def request_xml
-      message.to_xml
     end
 
     def formatted_xml
@@ -31,6 +27,15 @@ module CCMS
 
     private
 
+    def soap_envelope(namespaces)
+      Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+        xml.__send__('soap:Envelope', namespaces) do
+          xml.__send__('soap:Header') { soap_header(xml) }
+          xml.__send__('soap:Body') { soap_body(xml) }
+        end
+      end
+    end
+
     def soap_header(xml)
       xml.__send__('ns1:Security') do
         xml.__send__('ns1:UsernameToken') do
@@ -40,19 +45,11 @@ module CCMS
       end
     end
 
-
-    def header_message
-      {
-        'ns1:Security' => {
-          'ns1:UsernameToken' => {
-            'ns1:Username' => ENV['SOAP_CLIENT_USERNAME'],
-            'ns1:Password' => {
-              '@Type' => ENV['SOAP_CLIENT_PASSWORD_TYPE'],
-              content!: ENV['SOAP_CLIENT_PASSWORD']
-            }
-          }
-        }
-      }
+    def ns3_header_rq(xml)
+      xml.__send__('ns3:TransactionRequestID', transaction_request_id)
+      xml.__send__('ns3:Language', 'ENG')
+      xml.__send__('ns3:UserLoginID', ENV['USER_LOGIN'])
+      xml.__send__('ns3:UserRole', ENV['USER_ROLE'])
     end
   end
 end
