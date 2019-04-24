@@ -239,5 +239,23 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
     end
+
+    context 'private_methods' do
+      let(:requestor) { described_class.new(legal_aid_application) }
+      let(:options) { {} }
+      context '#extract_response_value' do
+        it 'raises if an unknown response type is given in the config' do
+          config = {
+            value: 4664,
+            br100_meaning: 'n/a',
+            response_type: 'numeric',
+            user_defined: true
+          }
+          expect {
+            requestor.__send__(:extract_response_value, config, options)
+          }.to raise_error RuntimeError, 'Unknown response type: numeric'
+        end
+      end
+    end
   end
 end

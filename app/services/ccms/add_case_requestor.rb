@@ -1,45 +1,44 @@
 module CCMS
-  class AddCaseRequestor # rubocop:disable Metrics/ClassLength
-    NAMESPACES = {
-      'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
-      'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO',
-      'xmlns:ns7' => 'uri',
-      'xmlns:ns0' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
-      'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO',
-      'xmlns:ns1' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
-      'xmlns:ns4' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-      'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
-    }.freeze
-
-    WSDL_LOCATION = "#{File.dirname(__FILE__)}/wsdls/CaseServicesWsdl.xml".freeze
-
+  class AddCaseRequestor < BaseRequestor # rubocop:disable Metrics/ClassLength
     CONFIG_METHOD_REGEX = /^#(\S+)/.freeze
 
     def initialize(legal_aid_application)
+      super()
       @legal_aid_application = legal_aid_application
       @transaction_time_stamp = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N')
       @ccms_attribute_keys = YAML.load_file(File.join(Rails.root, 'config', 'ccms', 'ccms_keys.yml'))
       @attribute_value_generator = AttributeValueGenerator.new(@legal_aid_application)
     end
 
-    def request
-      @request ||= build_request
+    # temporarily ignore this until connectivity with ccms is working
+    # :nocov:
+    def call
+      @soap_client.call(:add_case, xml: request_xml)
     end
+    # :nocov:
 
-    def formatted_xml
-      result = ''
-      formatter = REXML::Formatters::Pretty.new
-      formatter.compact = true
-      formatter.width = 500
-      formatter.write(REXML::Document.new(request.to_xml), result)
-      result
-    end
+    # def request
+    #   @request ||= build_request
+    # end
+
+    # def formatted_xml
+    #   result = ''
+    #   formatter = REXML::Formatters::Pretty.new
+    #   formatter.compact = true
+    #   formatter.width = 500
+    #   formatter.write(REXML::Document.new(request.to_xml), result)
+    #   result
+    # end
 
     private
 
-    def build_request
+    def request_xml
+      request.to_xml
+    end
+
+    def request
       Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-        xml.__send__('ns7:CaseAddRQ', NAMESPACES) do
+        xml.__send__('ns7:CaseAddRQ', namespaces) do
           xml.__send__('ns6:HeaderRQ') { header_request(xml) }
           xml.__send__('ns1:Case') { case_request(xml) }
         end
@@ -63,10 +62,6 @@ module CCMS
         xml.__send__('ns2:RecordHistory') { generate_record_history(xml) }
         xml.__send__('ns2:CaseDocs')
       end
-    end
-
-    def transaction_request_id
-      @transaction_request_id ||= Time.now.strftime('%Y%m%d%H%M%S%6N')
     end
 
     def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
@@ -480,6 +475,23 @@ module CCMS
 
     def wage_slips
       @wage_slips ||= @legal_aid_application.wage_slips
+    end
+
+    def namespaces
+      {
+        'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
+        'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO',
+        'xmlns:ns7' => 'uri',
+        'xmlns:ns0' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
+        'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO',
+        'xmlns:ns1' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
+        'xmlns:ns4' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
+        'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
+      }.freeze
+    end
+
+    def wsdl_location
+      "#{File.dirname(__FILE__)}/wsdls/CaseServicesWsdl.xml".freeze
     end
   end
 end
