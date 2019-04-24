@@ -49,14 +49,11 @@ en:
       show:
         body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
         field_set_header: Do you agree to share your bank transactions with us?
-        list: |
-          We do not save your online banking username and password
-          We do not have any ongoing access to your bank accounts
-          We only use your details to assess your eligibility for legal aid
-        list_heading: Find out how we use and store your personal data
         open_banking_consent:
           label:
             html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
+        what_happens_next_header: What happens next
+        what_happens_next_text: We'll hand over to a secure service for you to sign in to your online banking.
     declarations:
       show:
         page_heading: Declaration
