@@ -1,6 +1,5 @@
 module CCMS
   class CreateClientRequestor < BaseRequestor
-
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call
@@ -23,7 +22,7 @@ module CCMS
 
     def client(xml)
       xml.__send__('ns5:Name') { name(xml) }
-      xml.__send__('ns5:PersonalInformation') {personal_information(xml) }
+      xml.__send__('ns5:PersonalInformation') { personal_information(xml) }
       xml.__send__('ns5:Contacts') { contacts(xml) }
       xml.__send__('ns5:NoFixedAbode', false)
       xml.__send__('ns5:Address') { address(xml) }
@@ -32,19 +31,19 @@ module CCMS
 
     def name(xml)
       xml.__send__('ns4:Surname', 'Hurlock')
-      xml.__send__('ns4:FirstName','lenovo')
+      xml.__send__('ns4:FirstName', 'lenovo')
     end
 
     # this is all mandatory: we don't hold any of this data except date of birth
     def personal_information(xml)
-        xml.__send__('ns5:DateOfBirth', '1969-01-01')
-        xml.__send__('ns5:Gender', 'FEMALE')
-        xml.__send__('ns5:MaritalStatus', 'U')
-        xml.__send__('ns5:VulnerableClient', false)
-        xml.__send__('ns5:HighProfileClient', false)
-        xml.__send__('ns5:VexatiousLitigant', false)
-        xml.__send__('ns5:CountryOfOrigin', 'GBR')
-        xml.__send__('ns5:MentalCapacityInd', false)
+      xml.__send__('ns5:DateOfBirth', '1969-01-01')
+      xml.__send__('ns5:Gender', 'FEMALE')
+      xml.__send__('ns5:MaritalStatus', 'U')
+      xml.__send__('ns5:VulnerableClient', false)
+      xml.__send__('ns5:HighProfileClient', false)
+      xml.__send__('ns5:VexatiousLitigant', false)
+      xml.__send__('ns5:CountryOfOrigin', 'GBR')
+      xml.__send__('ns5:MentalCapacityInd', false)
     end
 
     # this is the only mandatory item of contact data. i'm not sure what it's for...

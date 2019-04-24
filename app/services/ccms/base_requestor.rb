@@ -40,7 +40,7 @@ module CCMS
       xml.__send__('ns1:Security') do
         xml.__send__('ns1:UsernameToken') do
           xml.__send__('ns1:Username', ENV['SOAP_CLIENT_USERNAME'])
-          xml.__send__('ns1:Password', 'Type' => ENV['SOAP_CLIENT_PASSWORD_TYPE'] ) { xml.text ENV['SOAP_CLIENT_PASSWORD'] }
+          xml.__send__('ns1:Password', 'Type' => ENV['SOAP_CLIENT_PASSWORD_TYPE']) { xml.text ENV['SOAP_CLIENT_PASSWORD'] }
         end
       end
     end
