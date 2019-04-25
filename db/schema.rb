@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_181011) do
+ActiveRecord::Schema.define(version: 2019_04_25_121135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(version: 2019_04_24_181011) do
 
   create_table "ccms_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
-    t.integer "applicant_ccms_reference"
-    t.integer "case_ccms_reference"
+    t.string "applicant_ccms_reference"
+    t.string "case_ccms_reference"
     t.string "aasm_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -241,8 +241,8 @@ ActiveRecord::Schema.define(version: 2019_04_24_181011) do
     t.datetime "transaction_period_start_at"
     t.datetime "transaction_period_finish_at"
     t.boolean "transactions_gathered"
-    t.datetime "completed_at"
     t.json "applicant_means_answers"
+    t.datetime "completed_at"
     t.datetime "declaration_accepted_at"
 <<<<<<< HEAD
     t.datetime "completed_at"
@@ -417,5 +417,6 @@ ActiveRecord::Schema.define(version: 2019_04_24_181011) do
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
+  add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
 end
