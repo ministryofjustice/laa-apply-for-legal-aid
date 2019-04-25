@@ -31,6 +31,9 @@ en:
         last_name: Last name
         national_insurance_number: National Insurance number
       incident:
+        told_day: Day
+        told_month: Month
+        told_year: Year
         occurred_day: Day
         occurred_month: Month
         occurred_year: Year
@@ -98,6 +101,10 @@ en:
               blank: A proceeding must be selected
         incident:
           attributes:
+            told_on:
+              date_not_valid: Enter a valid date
+              date_is_in_the_future: Date your client told you about the latest incident must be in the past
+              blank: Enter the date your client told you about the latest domestic abuse incident
             occurred_on:
               date_not_valid: Enter a date in the right format
               date_is_in_the_future: Date your client contacted you must be in the past

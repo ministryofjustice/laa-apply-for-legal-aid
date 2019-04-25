@@ -38,7 +38,7 @@ RSpec.describe Providers::StartMeritsAssessmentsController, type: :request do
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
         it 'redirects to next page' do
-          expect(subject).to redirect_to(providers_legal_aid_application_details_latest_incident_path)
+          expect(subject).to redirect_to(providers_legal_aid_application_date_client_told_incident_path)
         end
       end
 

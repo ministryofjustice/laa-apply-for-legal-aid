@@ -112,6 +112,7 @@ Rails.application.routes.draw do
       resource :identify_types_of_income, only: %i[show update]
       resource :identify_types_of_outgoing, only: %i[show update]
       resource :respondent, only: %i[show update]
+      resource :date_client_told_incident, only: %i[show update]
       resource :details_latest_incident, only: %i[show update]
       resource :client_received_legal_help, only: %i[show update]
       resource :proceedings_before_the_court, only: %i[show update]

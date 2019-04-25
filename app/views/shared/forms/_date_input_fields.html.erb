@@ -3,7 +3,9 @@
     <div class="govuk-form-group">
       <div class="govuk-date-input__item <%= group_error_class %>">
 
-        <%= form.govuk_label(field_name.to_s, t(".#{field_name}_label"), default: '', id: "#{field_name}-label".dasherize) %>
+        <% label_text = t(".#{field_name}_label", default: '') %>
+        <%= form.govuk_label(field_name.to_s, label_text, id: "#{field_name}-label".dasherize) if label_text.present? %>
+
         <% hint = t(".#{field_name}_hint", default: '') %>
           <% if hint.present? %>
             <%= content_tag(:span, t(".#{field_name}_hint"), default: '', id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
