@@ -1,0 +1,22 @@
+<%= page_template page_title: t('.h1-heading') do %>
+
+  <p class="govuk-body govuk-!-margin-bottom-0">
+    <%= t('.client') %>:
+    <strong><%= @legal_aid_application.applicant.full_name %></strong>
+  </p>
+  <p class="govuk-body">
+    <%= t('.case-reference') %>:
+    <strong><%= @legal_aid_application.application_ref %></strong>
+  </p>
+
+  <p class="govuk-body"><%= t('.review-advice') %></p>
+
+  <div class="govuk-!-padding-bottom-4"></div>
+
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_client_completed_means_path,
+        method: :patch,
+        show_draft: true,
+        continue_button_text: t('generic.continue')
+      ) %>
+<% end %>

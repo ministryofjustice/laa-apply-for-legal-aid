@@ -59,7 +59,11 @@ Given('I start the merits application') do
     :means_completed
   )
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
 end
 
 Given('I complete the journey as far as check your answers') do
