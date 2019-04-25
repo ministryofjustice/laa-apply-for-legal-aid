@@ -17,7 +17,7 @@ RSpec.describe 'citizen accounts request', type: :request do
     create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
   end
 
-  describe 'GET /citizens/account/gather' do
+  describe 'GET /citizens/account' do
     subject { get citizens_accounts_path }
 
     before do
@@ -56,6 +56,10 @@ RSpec.describe 'citizen accounts request', type: :request do
 
     it 'adds its url to history' do
       expect(session[:page_history]).to include(citizens_accounts_path)
+    end
+
+    it 'has a link to ad another account' do
+      expect(response.body).to include(applicant_true_layer_omniauth_authorize_path)
     end
   end
 

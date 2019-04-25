@@ -9,12 +9,13 @@ en:
         account_holder_name_heading: Account holder name
         account_number_heading: Account Number
         balance_heading: Balance
-        balance_text: We'll ask you to group your transactions to help us understand your financial situation.
-        heading_1: You have successfully shared your account information
-        intro_text: We have downloaded 3 months of your transaction history.
+        balance_text: We'll ask your solicitor to group your transactions to help us understand your financial situation.
+        heading_1: You've successfully shared your bank transactions
+        intro_text: We've downloaded 3 months of your transaction history.
         sort_code_heading: Sort Code
         type_heading: Type
         your_accounts: Your account(s)
+        link_other_account: Add another bank account
     additional_accounts:
       index:
         field_set_header: Do you have accounts with other banks?
