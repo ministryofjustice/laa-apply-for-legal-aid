@@ -5,7 +5,6 @@ module LegalAidApplicationStateMachine
     include AASM
 
     aasm column: :state do
-      state :initiated, initial: true
       state :checking_client_details_answers
       state :client_details_answers_checked
       state :provider_submitted

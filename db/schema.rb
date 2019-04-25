@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_131605) do
+ActiveRecord::Schema.define(version: 2019_04_24_181011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -171,6 +171,16 @@ ActiveRecord::Schema.define(version: 2019_04_25_131605) do
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
+  create_table "ccms_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.integer "applicant_ccms_reference"
+    t.integer "case_ccms_reference"
+    t.string "aasm_state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
+  end
+
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "done_all_needed"
     t.integer "satisfaction"
@@ -231,10 +241,14 @@ ActiveRecord::Schema.define(version: 2019_04_25_131605) do
     t.datetime "transaction_period_start_at"
     t.datetime "transaction_period_finish_at"
     t.boolean "transactions_gathered"
+    t.datetime "completed_at"
     t.json "applicant_means_answers"
     t.datetime "declaration_accepted_at"
+<<<<<<< HEAD
     t.datetime "completed_at"
     t.json "provider_step_params"
+=======
+>>>>>>> AP-559 Create CCMS::Submission and beginning of state machine
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
@@ -395,6 +409,7 @@ ActiveRecord::Schema.define(version: 2019_04_25_131605) do
   add_foreign_key "bank_providers", "applicants"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
+  add_foreign_key "ccms_submissions", "legal_aid_applications"
   add_foreign_key "legal_aid_application_restrictions", "legal_aid_applications"
   add_foreign_key "legal_aid_application_restrictions", "restrictions"
   add_foreign_key "legal_aid_applications", "applicants"
@@ -402,6 +417,5 @@ ActiveRecord::Schema.define(version: 2019_04_25_131605) do
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
-  add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
 end
