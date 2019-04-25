@@ -9,7 +9,7 @@
 
     <%= date_input_fields prefix: :occurred, field_name: :occurred_on, width: :full, form: form %>
 
-    <%= form.govuk_text_area :details, rows: 10 %>
+    <%= form.govuk_text_area :details, rows: 10, label: { text: t('.details_label'), size: :m } %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
 

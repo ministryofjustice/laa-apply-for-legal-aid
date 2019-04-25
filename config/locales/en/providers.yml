@@ -127,7 +127,8 @@ en:
         h1-heading: When did your client tell you about the latest domestic abuse incident?
     details_latest_incidents:
       show:
-        h1-heading: Enter details of the latest incident
+        h1-heading: Details of the latest domestic abuse incident
+        details_label: What happened during the incident?
     estimated_legal_costs:
       show:
         h1-heading: What are the estimated legal costs of doing the work?
