@@ -25,21 +25,32 @@ module CCMS
         context 'operation successful' do
           let(:response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'get_reference_data_response.xml')) }
           let(:requestor) { ReferenceDataRequestor.new }
+          let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+          let(:ccms_case_ref_in_example_response) { '300000135140' }
 
           before do
             allow(submission).to receive(:reference_data_requestor).and_return(requestor)
-            expect(requestor).to receive(:transaction_request_id).and_return('20190301030405123456')
+            expect(requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
             expect(requestor).to receive(:call).and_return(response)
           end
 
           it 'stores the reference number' do
             submission.process!
-            expect(submission.case_ccms_reference).to eq '300000135140'
+            expect(submission.case_ccms_reference).to eq ccms_case_ref_in_example_response
           end
 
           it 'changes the state to case_ref_obtained' do
             submission.process!
             expect(submission.aasm_state).to eq 'case_ref_obtained'
+          end
+
+          it 'writes a history record' do
+            expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
+            history = SubmissionHistory.find_by(submission_id: submission.id)
+            expect(history.from_state).to eq 'initialised'
+            expect(history.to_state).to eq 'case_ref_obtained'
+            expect(history.success).to be true
+            expect(history.details).to be_nil
           end
         end
 
@@ -55,7 +66,16 @@ module CCMS
             submission.process!
             expect(submission.aasm_state).to eq 'failed'
           end
-          # it records the error in the submission history
+
+          it 'records the error in the submission history' do
+            expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
+            history = SubmissionHistory.find_by(submission_id: submission.id)
+            expect(history.from_state).to eq 'initialised'
+            expect(history.to_state).to eq 'failed'
+            expect(history.success).to be false
+            expect(history.details).to match(/RuntimeError/)
+            expect(history.details).to match(/oops/)
+          end
         end
       end
     end

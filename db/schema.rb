@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_121135) do
+ActiveRecord::Schema.define(version: 2019_04_25_143403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -242,13 +242,8 @@ ActiveRecord::Schema.define(version: 2019_04_25_121135) do
     t.datetime "transaction_period_finish_at"
     t.boolean "transactions_gathered"
     t.json "applicant_means_answers"
-    t.datetime "completed_at"
     t.datetime "declaration_accepted_at"
-<<<<<<< HEAD
     t.datetime "completed_at"
-    t.json "provider_step_params"
-=======
->>>>>>> AP-559 Create CCMS::Submission and beginning of state machine
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
@@ -390,6 +385,17 @@ ActiveRecord::Schema.define(version: 2019_04_25_121135) do
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
   end
 
+  create_table "submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "submission_id", null: false
+    t.string "from_state"
+    t.string "to_state"
+    t.boolean "success"
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submission_id"], name: "index_submission_histories_on_submission_id"
+  end
+
   create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "operation"
@@ -419,4 +425,5 @@ ActiveRecord::Schema.define(version: 2019_04_25_121135) do
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
+  add_foreign_key "submission_histories", "ccms_submissions", column: "submission_id"
 end

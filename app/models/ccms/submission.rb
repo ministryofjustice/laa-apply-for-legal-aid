@@ -64,8 +64,10 @@ module CCMS
         response = reference_data_requestor.call
         result = ReferenceDataParser.new(tx_id, response).parse
         self.case_ccms_reference = result
+        create_history(self.aasm_state, :case_ref_obtained)
         self.obtain_case_ref!
       rescue => err
+        create_failure_history(self.aasm_state, err)
         self.fail!
       end
     end
@@ -73,5 +75,29 @@ module CCMS
     def reference_data_requestor
       @reference_data_requestor ||= ReferenceDataRequestor.new
     end
+
+    def create_history(from_state, to_state)
+      SubmissionHistory.create submission: self,
+                               from_state: from_state,
+                               to_state: to_state,
+                               success: true
+    end
+
+    def create_failure_history(from_state, error)
+      SubmissionHistory.create submission: self,
+                               from_state: from_state,
+                               to_state: :failed,
+                               success: false,
+                               details: format_error(error)
+    end
+
+    def format_error(error)
+      "#{error.class}\n#{error.message}\n#{error.backtrace.join("\n")}"
+    end
+
+    #
+    # def transition_and_save_history()
+    #
+    # end
   end
 end
