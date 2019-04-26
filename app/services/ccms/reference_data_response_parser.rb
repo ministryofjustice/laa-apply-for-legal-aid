@@ -1,5 +1,5 @@
 module CCMS
-  class ReferenceDataParser < BaseParser
+  class ReferenceDataResponseParser < BaseParser
     TRANSACTION_ID_PATH = '//Body//ReferenceDataInqRS//HeaderRS//TransactionID'.freeze
     RESULTS_PATH = '//Body//ReferenceDataInqRS//Results'.freeze
 

@@ -25,6 +25,7 @@
           <ns5:FirstName>lenovo</ns5:FirstName>
           <ns5:Surname>hurlock</ns5:Surname>
           <ns5:DateOfBirth>1969-01-01</ns5:DateOfBirth>
+          <ns5:NINumber>YS327299B</ns5:NINumber>
         </ns2:ClientInfo>
       </ns2:SearchCriteria>
     </ns2:ClientInqRQ>

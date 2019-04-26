@@ -1,5 +1,5 @@
 module CCMS
-  class ClientSearchRequestor < BaseRequestor
+  class ApplicantSearchRequestor < BaseRequestor
 
     def initialize(applicant)
       @applicant = applicant
@@ -32,13 +32,12 @@ module CCMS
       xml.__send__('ns4:RetriveDataOnMaxCount', false)
     end
 
-    # this is the minimum criteria for a search. nino is also a valid field
     def search_criteria(xml)
       xml.__send__('ns2:ClientInfo') do
         xml.__send__('ns5:FirstName', @applicant.first_name)
         xml.__send__('ns5:Surname', @applicant.last_name)
         xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.strftime('%Y-%m-%d'))
-        # add national insurance number here
+        xml.__send__('ns5:NINumber', @applicant.national_insurance_number)
       end
     end
 

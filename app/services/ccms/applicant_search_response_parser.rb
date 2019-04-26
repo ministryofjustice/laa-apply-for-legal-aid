@@ -1,5 +1,5 @@
 module CCMS
-  class ClientSearchParser < BaseParser
+  class ApplicantSearchResponseParser < BaseResponseParser
     TRANSACTION_ID_PATH = '//Body//ClientInqRS//HeaderRS//TransactionID'.freeze
     RECORD_COUNT_PATH = '//Body//ClientInqRS//RecordCount//RecordsFetched'.freeze
 

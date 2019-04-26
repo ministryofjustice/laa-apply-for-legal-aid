@@ -6,7 +6,8 @@ module CCMS
       double Applicant,
              first_name: 'lenovo',
              last_name: 'hurlock',
-             date_of_birth: Date.new(1969, 1, 1)
+             date_of_birth: Date.new(1969, 1, 1),
+             national_insurance_number: 'YS327299B'
     end
 
 

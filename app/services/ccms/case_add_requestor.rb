@@ -1,5 +1,5 @@
 module CCMS
-  class AddCaseRequestor < BaseRequestor # rubocop:disable Metrics/ClassLength
+  class CaseAddRequestor < BaseRequestor # rubocop:disable Metrics/ClassLength
     CONFIG_METHOD_REGEX = /^#(\S+)/.freeze
 
     def initialize(legal_aid_application)

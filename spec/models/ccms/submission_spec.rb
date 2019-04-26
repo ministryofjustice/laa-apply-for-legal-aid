@@ -93,9 +93,18 @@ module CCMS
 
         context 'operation successful' do
           let(:requestor_double) { ClientSearchRequestor.new(legal_aid_application.applicant) }
+          let(:client_add_requestor) { double ClientAddRequestor }
 
           context 'no applicant exists on the CCMS system' do
-            it 'calls the ClientAddRequestor'
+            allow(submission).to receive(:applicant_search_requestor).and_return(request_double)
+            it 'calls the ClientAddRequestor' do
+              expect(requestor_double).to receive(:call).and_return(0)
+              expect(ClientAddRequestor).to receive(:new).with(legal_aid_application.appicant).and_return(client_add_requestor)
+              expect(client_add_requestor).to receive(:call).and_returns(client_add_requestor_response)
+              expect(CreateClientParser).to receive(:new).and_return(create_client_parse)
+              expect(create_client_parser).to receive(:parse).and_return('Success')
+            end
+
             it 'sets state to applicant_submitted'
             it 'writes a history record'
           end

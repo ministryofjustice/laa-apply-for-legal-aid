@@ -1,5 +1,5 @@
 module CCMS
-  class BaseParser
+  class BaseResponseParser
     def initialize(tx_request_id, response)
       @transaction_request_id = tx_request_id
       @response = response

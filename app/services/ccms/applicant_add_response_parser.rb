@@ -1,7 +1,7 @@
 module CCMS
-  class AddCaseParser < BaseParser
-    TRANSACTION_ID_PATH = '//CaseAddRS//HeaderRS//TransactionID'.freeze
-    STATUS_PATH = '//CaseAddRS//HeaderRS//Status//Status'.freeze
+  class ApplicantAddParser < BaseResponseParser
+    TRANSACTION_ID_PATH = '//Body//ClientAddRS//HeaderRS//TransactionID'.freeze
+    STATUS_PATH = '//Body//ClientAddRS//HeaderRS//Status//Status'.freeze
 
     def parse
       raise 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
