@@ -22,7 +22,7 @@ module CCMS
     end
 
     def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/expected_create_client_status_request.xml")
+      File.read("#{File.dirname(__FILE__)}/data/applicant_add_status_request.xml")
     end
   end
 end

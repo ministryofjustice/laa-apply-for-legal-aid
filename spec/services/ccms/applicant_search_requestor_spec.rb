@@ -31,7 +31,7 @@ module CCMS
     end
 
     def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/expected_client_search_request.xml")
+      File.read("#{File.dirname(__FILE__)}/data/applicant_search_request.xml")
     end
   end
 end

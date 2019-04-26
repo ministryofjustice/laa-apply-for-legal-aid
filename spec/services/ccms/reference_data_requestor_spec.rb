@@ -22,7 +22,7 @@ module CCMS
     end
 
     def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/expected_get_reference_data_request.xml")
+      File.read("#{File.dirname(__FILE__)}/data/reference_data_request.xml")
     end
   end
 end

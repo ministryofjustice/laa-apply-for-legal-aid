@@ -3,7 +3,7 @@ require 'rails_helper'
 module CCMS
   RSpec.describe CaseAddResponseParser do
     describe '#parse' do
-      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/add_case_response.xml") }
+      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/case_add_response.xml") }
 
       it 'extracts the status' do
         parser = described_class.new('20190301030405123456', response_xml)
