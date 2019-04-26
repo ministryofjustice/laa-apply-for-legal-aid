@@ -41,4 +41,9 @@ RSpec.describe Address, type: :model do
     expect(subject).to_not be_valid
     expect(subject.errors[:postcode]).to include('is not in the right format')
   end
+
+  it 'can display the postcode with a space reinserted' do
+    subject.postcode = 'SW1H9AJ'
+    expect(subject.pretty_postcode).to eq('SW1H 9AJ')
+  end
 end
