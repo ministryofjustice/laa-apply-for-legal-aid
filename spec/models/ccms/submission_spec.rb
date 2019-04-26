@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module CCMS
+module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe Submission do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
 
@@ -117,8 +117,6 @@ module CCMS
         end
       end
     end
-
-
 
     # private methods tested here because they are mocked out above
     #

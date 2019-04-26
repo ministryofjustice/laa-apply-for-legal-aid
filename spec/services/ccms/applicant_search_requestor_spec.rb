@@ -10,7 +10,6 @@ module CCMS
              national_insurance_number: 'YS327299B'
     end
 
-
     describe 'XML request' do
       it 'generates the expected XML' do
         with_modified_env(modified_environment_vars) do

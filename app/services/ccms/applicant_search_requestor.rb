@@ -1,6 +1,5 @@
 module CCMS
   class ApplicantSearchRequestor < BaseRequestor
-
     def initialize(applicant)
       @applicant = applicant
       super()

@@ -71,7 +71,6 @@ module CCMS
       fail!
     end
 
-
     def obtain_client_reference
       # see if client exists already on CCMS,
       # if not
