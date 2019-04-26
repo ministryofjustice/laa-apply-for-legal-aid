@@ -176,7 +176,9 @@ en:
         h1-heading: How much is your home worth?
     restrictions:
       index:
-        h1-heading: Do any restrictions apply to your property, savings or assets?
+        h1-heading: Do any of the following restrictions apply to your property or other assets?
+      form:
+        sub_heading: Select all that apply
     savings_and_investments:
       accounts_summary:
         col_account_number: Account number
