@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 module CCMS # rubocop:disable Metrics/ModuleLength
-  RSpec.describe AddCaseRequestor do
+  RSpec.describe CaseAddRequestor do
     let(:scope_limitation_1) do
       double 'ScopeLimitation',
              limitation: 'CV118',

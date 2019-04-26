@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe CreateClientStatusRequestor do
+  RSpec.describe CaseAddStatusRequestor do
     describe 'XML request' do
       it 'generates the expected XML' do
         with_modified_env(modified_environment_vars) do
@@ -22,7 +22,7 @@ module CCMS
     end
 
     def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/expected_create_client_status_request.xml")
+      File.read("#{File.dirname(__FILE__)}/data/expected_add_case_status_request.xml")
     end
   end
 end

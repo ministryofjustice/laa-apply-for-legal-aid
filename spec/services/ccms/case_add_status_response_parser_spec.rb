@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe ClientSearchParser do
+  RSpec.describe CaseAddStatusResponseParser do
     describe '#parse' do
-      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/client_search_response.xml") }
+      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/add_case_status_response.xml") }
 
-      it 'extracts the number of records fetched' do
+      it 'extracts the status free text' do
         parser = described_class.new('20190301030405123456', response_xml)
-        expect(parser.parse).to eq '0'
+        expect(parser.parse).to eq 'Case successfully created.'
       end
 
       it 'raises if the transaction_request_ids dont match' do

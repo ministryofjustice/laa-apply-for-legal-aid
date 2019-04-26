@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe CreateClientStatusParser do
+  RSpec.describe CaseAddResponseParser do
     describe '#parse' do
-      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/create_client_status_response.xml") }
+      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/add_case_response.xml") }
 
-      it 'extracts the status free text' do
+      it 'extracts the status' do
         parser = described_class.new('20190301030405123456', response_xml)
-        expect(parser.parse).to eq 'User Authentication complete.'
+        expect(parser.parse).to eq 'Success'
       end
 
       it 'raises if the transaction_request_ids dont match' do

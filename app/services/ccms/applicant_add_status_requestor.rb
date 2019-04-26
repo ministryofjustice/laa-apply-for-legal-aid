@@ -1,5 +1,5 @@
 module CCMS
-  class CreateClientStatusRequestor < BaseRequestor
+  class ApplicantAddStatusRequestor < BaseRequestor
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call

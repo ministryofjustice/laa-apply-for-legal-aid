@@ -1,5 +1,5 @@
 module CCMS
-  class ApplicantAddStatusParser < BaseResponseParser
+  class ApplicantAddStatusResponseParser < BaseResponseParser
     TRANSACTION_ID_PATH = '//Body//ClientAddUpdtStatusRS//HeaderRS//TransactionID'.freeze
     STATUS_FREE_TEXT_PATH = '//Body//ClientAddUpdtStatusRS//HeaderRS//Status//StatusFreeText'.freeze
 
