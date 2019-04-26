@@ -1,6 +1,7 @@
 class BankTransaction < ApplicationRecord
   belongs_to :bank_account
   belongs_to :transaction_type, optional: true
+  has_one :legal_aid_application, through: :bank_account
 
   scope :by_type, -> do
     includes(:transaction_type)

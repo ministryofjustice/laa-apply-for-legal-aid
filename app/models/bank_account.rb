@@ -1,6 +1,7 @@
 class BankAccount < ApplicationRecord
   belongs_to :bank_provider
   has_many :bank_transactions, dependent: :destroy
+  has_one :legal_aid_application, through: :bank_provider
 
   ACCOUNT_TYPE_LABELS = {
     'TRANSACTION' => 'Current',

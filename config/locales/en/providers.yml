@@ -38,6 +38,12 @@ en:
         secure_link_heading: We have sent your client a secure link
         secure_link_text: Your client can use the link to complete the online financial assessment from home or another location.
         sub_title: Your case reference number is
+    bank_transactions:
+      list_selected:
+        col_amount: Amount
+        col_date: Date
+        col_description: Description
+        remove_link: Remove
     capital_introductions:
       show:
         about_the_client:
@@ -122,6 +128,25 @@ en:
     estimated_legal_costs:
       show:
         h1-heading: What are the estimated legal costs of doing the work?
+    income_summary:
+      add_other_income:
+        add_other_income: Add another type of income
+      income_type_item:
+        col_amount: Amount
+        col_date: Date
+        col_description: Description
+        remove_link: Remove
+      index:
+        add_all_income: Add income your client received from %{start_at} to %{finish_at}
+        page_heading: Your client's income
+        select:
+          benefits: Add benefits payments
+          friends_or_family: Add payments from friends or family
+          maintenance_in: Add maintenance payments
+          pension: Add pension payments
+          property_or_lodger: Add income from property or lodger
+          salary: Add salary or wage payments
+          student_loan: Add student loan or grant payments
     legal_aid_applications:
       index:
         basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.

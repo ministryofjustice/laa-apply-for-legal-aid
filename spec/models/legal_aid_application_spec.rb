@@ -357,7 +357,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     it 'has a translation for all states' do
       states.each do |state|
-        expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true), state
+        expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true), state.to_s
       end
     end
   end

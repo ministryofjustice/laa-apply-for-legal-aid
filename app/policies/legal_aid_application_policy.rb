@@ -19,6 +19,10 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     my_record?
   end
 
+  def remove_transaction_type?
+    my_record?
+  end
+
   private
 
   def my_record?

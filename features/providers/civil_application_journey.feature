@@ -334,6 +334,8 @@ Feature: Civil application journeys
     Given I start the merits application
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
+    Then I should be on a page showing "Your client's income"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'

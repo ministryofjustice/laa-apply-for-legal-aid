@@ -123,6 +123,10 @@ Rails.application.routes.draw do
       end
       resource :start_merits_assessment, only: %i[show update]
       resource :client_completed_means, only: %i[show update]
+      resources :income_summary, only: %i[index create]
+      resources :bank_transactions, only: [] do
+        patch 'remove_transaction_type', on: :member
+      end
       resource :means_summary, only: %i[show update]
     end
   end
