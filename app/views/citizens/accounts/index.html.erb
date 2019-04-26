@@ -50,6 +50,8 @@
       </table>
     <% end %>
 
+    <p><%= link_to t('.link_other_account'), applicant_true_layer_omniauth_authorize_path, class: 'govuk-link' %></p>
+
     <div class="govuk-!-padding-top-3">
       <%= next_action_link(continue_text: t('generic.continue')) %>
     </div>
