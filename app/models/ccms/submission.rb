@@ -50,6 +50,8 @@ module CCMS
       case aasm_state
       when 'initialised'
         obtain_case_reference
+      when 'case_ref_obtained'
+        obtain_client_reference
       else
         raise 'Unknown state'
       end
@@ -69,8 +71,22 @@ module CCMS
       fail!
     end
 
+
+    def obtain_client_reference
+      # see if client exists already on CCMS,
+      # if not
+      #    add and change state to applicant submitted
+      # else
+      #   update client reference number
+      #   change state to applicant_ref_obtained
+    end
+
     def reference_data_requestor
       @reference_data_requestor ||= ReferenceDataRequestor.new
+    end
+
+    def applicant_search_requestor
+      @applicant_search_requestor ||= ClientSearchRequestor.new(legal_aid_application.applicant)
     end
 
     def create_history(from_state, to_state)

@@ -1,5 +1,11 @@
 module CCMS
   class ClientSearchRequestor < BaseRequestor
+
+    def initialize(applicant)
+      @applicant = applicant
+      super()
+    end
+
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call
@@ -29,9 +35,10 @@ module CCMS
     # this is the minimum criteria for a search. nino is also a valid field
     def search_criteria(xml)
       xml.__send__('ns2:ClientInfo') do
-        xml.__send__('ns5:FirstName', 'lenovo')
-        xml.__send__('ns5:Surname', 'hurlock')
-        xml.__send__('ns5:DateOfBirth', '1969-01-01')
+        xml.__send__('ns5:FirstName', @applicant.first_name)
+        xml.__send__('ns5:Surname', @applicant.last_name)
+        xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.strftime('%Y-%m-%d'))
+        # add national insurance number here
       end
     end
 

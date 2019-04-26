@@ -2,7 +2,8 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe Submission do
-    let(:legal_aid_application) { create :legal_aid_application }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+
     context 'Validations' do
       it 'errors if no legal aid application id is present' do
         sub = Submission.new
@@ -86,14 +87,48 @@ module CCMS
           end
         end
       end
+
+      context 'case_ref_obtained state' do
+        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
+
+        context 'operation successful' do
+          let(:requestor_double) { ClientSearchRequestor.new(legal_aid_application.applicant) }
+
+          context 'no applicant exists on the CCMS system' do
+            it 'calls the ClientAddRequestor'
+            it 'sets state to applicant_submitted'
+            it 'writes a history record'
+          end
+
+          context 'applicant exists on the CCMS system' do
+            it 'updates the applicant_ccms_reference'
+            it 'sets the state to applicant_ref_obtained'
+            it 'writes a history record'
+          end
+        end
+      end
     end
 
+
+
+    # private methods tested here because they are mocked out above
+    #
     describe '#reference_data_requestor' do
       it 'only instantiates one copy of the ReferenceDataRequestor' do
         sub = Submission.new
         requestor1 = sub.__send__(:reference_data_requestor)
         requestor2 = sub.__send__(:reference_data_requestor)
         expect(requestor1).to be_instance_of(ReferenceDataRequestor)
+        expect(requestor1.object_id).to eq requestor2.object_id
+      end
+    end
+
+    describe '#applicant_search_requestor' do
+      it 'only instantiates one copy of the ClientSearchRequestor' do
+        sub = Submission.new(legal_aid_application: legal_aid_application)
+        requestor1 = sub.__send__(:applicant_search_requestor)
+        requestor2 = sub.__send__(:applicant_search_requestor)
+        expect(requestor1).to be_instance_of(ClientSearchRequestor)
         expect(requestor1.object_id).to eq requestor2.object_id
       end
     end

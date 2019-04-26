@@ -5,5 +5,9 @@ FactoryBot.define do
     trait :initialised do
       aasm_state { 'initialised' }
     end
+
+    trait :case_ref_obtained do
+      aasm_state { 'case_ref_obtained' }
+    end
   end
 end

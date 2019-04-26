@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
 
   create_table "ccms_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
-    t.string "applicant_ccms_reference"
-    t.string "case_ccms_reference"
+    t.integer "applicant_ccms_reference"
+    t.integer "case_ccms_reference"
     t.string "aasm_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -241,9 +241,9 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
     t.datetime "transaction_period_start_at"
     t.datetime "transaction_period_finish_at"
     t.boolean "transactions_gathered"
+    t.datetime "completed_at"
     t.json "applicant_means_answers"
     t.datetime "declaration_accepted_at"
-    t.datetime "completed_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
@@ -423,7 +423,6 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
-  add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
   add_foreign_key "submission_histories", "ccms_submissions", column: "submission_id"
 end
