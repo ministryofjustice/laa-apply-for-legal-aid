@@ -3,7 +3,7 @@ require 'rails_helper'
 module CCMS
   RSpec.describe ApplicantSearchResponseParser do
     describe '#parse' do
-      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response.xml") }
+      let(:response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_no_results.xml") }
 
       it 'extracts the number of records fetched' do
         parser = described_class.new('20190301030405123456', response_xml)

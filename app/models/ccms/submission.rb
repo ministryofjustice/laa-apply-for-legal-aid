@@ -1,5 +1,5 @@
 module CCMS
-  class Submission < ApplicationRecord
+  class Submission < ApplicationRecord # rubocop:disable Metrics/ClassLength
     include AASM
 
     self.table_name = :ccms_submissions
@@ -27,6 +27,7 @@ module CCMS
 
       event :obtain_applicant_ref do
         transitions from: :applicant_submitted, to: :applicant_ref_obtained
+        transitions from: :case_ref_obtained, to: :applicant_ref_obtained
       end
 
       event :submit_case do
@@ -51,7 +52,7 @@ module CCMS
       when 'initialised'
         obtain_case_reference
       when 'case_ref_obtained'
-        obtain_client_reference
+        obtain_applicant_reference
       else
         raise 'Unknown state'
       end
@@ -62,7 +63,7 @@ module CCMS
     def obtain_case_reference
       tx_id = reference_data_requestor.transaction_request_id
       response = reference_data_requestor.call
-      result = ReferenceDataParser.new(tx_id, response).parse
+      result = ReferenceDataResponseParser.new(tx_id, response).parse
       self.case_ccms_reference = result
       create_history(aasm_state, :case_ref_obtained)
       obtain_case_ref!
@@ -71,13 +72,35 @@ module CCMS
       fail!
     end
 
-    def obtain_client_reference
-      # see if client exists already on CCMS,
-      # if not
-      #    add and change state to applicant submitted
-      # else
-      #   update client reference number
-      #   change state to applicant_ref_obtained
+    def obtain_applicant_reference # rubocop:disable Metrics/MethodLength
+      tx_id = applicant_search_requestor.transaction_request_id
+      response = applicant_search_requestor.call
+      parser = ApplicantSearchResponseParser.new(tx_id, response)
+      result = parser.parse
+      if result == '0'
+        add_applicant
+      else
+        self.applicant_ccms_reference = parser.applicant_ccms_reference
+        create_history(aasm_state, :applicant_ref_obtained)
+        obtain_applicant_ref!
+      end
+    rescue StandardError => e
+      create_failure_history(aasm_state, e)
+      fail!
+    end
+
+    def add_applicant
+      response = applicant_add_requestor.call
+      if applicant_add_response_parser(response).parse == 'Success'
+        create_history(aasm_state, :applicant_submitted)
+        submit_applicant!
+      else
+        create_failure_history(aasm_state, response)
+        fail!
+      end
+    rescue StandardError => e
+      create_failure_history(aasm_state, e)
+      fail!
     end
 
     def reference_data_requestor
@@ -85,7 +108,15 @@ module CCMS
     end
 
     def applicant_search_requestor
-      @applicant_search_requestor ||= ClientSearchRequestor.new(legal_aid_application.applicant)
+      @applicant_search_requestor ||= ApplicantSearchRequestor.new(legal_aid_application.applicant)
+    end
+
+    def applicant_add_requestor
+      @applicant_add_requestor ||= ApplicantAddRequestor.new(legal_aid_application.applicant)
+    end
+
+    def applicant_add_response_parser(response)
+      @applicant_add_response_parser ||= ApplicantAddResponseParser.new(applicant_add_requestor.transaction_request_id, response)
     end
 
     def create_history(from_state, to_state)
@@ -100,10 +131,10 @@ module CCMS
                                from_state: from_state,
                                to_state: :failed,
                                success: false,
-                               details: format_error(error)
+                               details: error.is_a?(Exception) ? format_exception(error) : error
     end
 
-    def format_error(error)
+    def format_exception(error)
       "#{error.class}\n#{error.message}\n#{error.backtrace.join("\n")}"
     end
   end

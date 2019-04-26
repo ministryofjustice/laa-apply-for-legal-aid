@@ -1,5 +1,11 @@
 module CCMS
   class ApplicantAddRequestor < BaseRequestor
+    def initialize(applicant)
+      @applicant = applicant
+      @address = applicant.address
+      super()
+    end
+
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call
@@ -30,13 +36,13 @@ module CCMS
     end
 
     def name(xml)
-      xml.__send__('ns4:Surname', 'Hurlock')
-      xml.__send__('ns4:FirstName', 'lenovo')
+      xml.__send__('ns4:Surname', @applicant.last_name)
+      xml.__send__('ns4:FirstName', @applicant.first_name)
     end
 
     # this is all mandatory: we don't hold any of this data except date of birth
     def personal_information(xml)
-      xml.__send__('ns5:DateOfBirth', '1969-01-01')
+      xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.strftime('%Y-%m-%d'))
       xml.__send__('ns5:Gender', 'FEMALE')
       xml.__send__('ns5:MaritalStatus', 'U')
       xml.__send__('ns5:VulnerableClient', false)
@@ -52,10 +58,10 @@ module CCMS
     end
 
     def address(xml)
-      xml.__send__('ns4:AddressLine1', '102 Petty France')
-      xml.__send__('ns4:City', 'London')
+      xml.__send__('ns4:AddressLine1', @address.address_line_one + ' ' + @address.address_line_two)
+      xml.__send__('ns4:City', @address.city)
       xml.__send__('ns4:Country', 'GBR')
-      xml.__send__('ns4:PostalCode', 'SW1H 9AJ')
+      xml.__send__('ns4:PostalCode', @address.pretty_postcode)
     end
 
     def namespaces
