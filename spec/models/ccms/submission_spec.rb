@@ -2,8 +2,7 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe Submission do
-
-    let(:legal_aid_application)  { create :legal_aid_application }
+    let(:legal_aid_application) { create :legal_aid_application }
     context 'Validations' do
       it 'errors if no legal aid application id is present' do
         sub = Submission.new

@@ -46,11 +46,10 @@ module CCMS
       end
     end
 
-
     def process!
       case aasm_state
       when 'initialised'
-        get_case_reference
+        obtain_case_reference
       else
         raise 'Unknown state'
       end
@@ -58,18 +57,16 @@ module CCMS
 
     private
 
-    def get_case_reference
-      begin
-        tx_id = reference_data_requestor.transaction_request_id
-        response = reference_data_requestor.call
-        result = ReferenceDataParser.new(tx_id, response).parse
-        self.case_ccms_reference = result
-        create_history(self.aasm_state, :case_ref_obtained)
-        self.obtain_case_ref!
-      rescue => err
-        create_failure_history(self.aasm_state, err)
-        self.fail!
-      end
+    def obtain_case_reference
+      tx_id = reference_data_requestor.transaction_request_id
+      response = reference_data_requestor.call
+      result = ReferenceDataParser.new(tx_id, response).parse
+      self.case_ccms_reference = result
+      create_history(aasm_state, :case_ref_obtained)
+      obtain_case_ref!
+    rescue StandardError => e
+      create_failure_history(aasm_state, e)
+      fail!
     end
 
     def reference_data_requestor
@@ -94,10 +91,5 @@ module CCMS
     def format_error(error)
       "#{error.class}\n#{error.message}\n#{error.backtrace.join("\n")}"
     end
-
-    #
-    # def transition_and_save_history()
-    #
-    # end
   end
 end
