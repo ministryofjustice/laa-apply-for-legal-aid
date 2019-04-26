@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soap:Envelope xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:ns2='http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/' xmlns:ns1='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' xmlns:ns3='http://legalservices.gov.uk/Enterprise/Common/1.0/Header' xmlns:ns4='http://legalservices.gov.uk/Enterprise/Common/1.0/Common' xmlns:ns5='http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'>
+  <soap:Header>
+    <ns1:Security>
+      <ns1:UsernameToken>
+        <ns1:Username>my_soap_client_username</ns1:Username>
+        <ns1:Password Type='password_type'>xxxxx</ns1:Password>
+      </ns1:UsernameToken>
+    </ns1:Security>
+  </soap:Header>
+  <soap:Body>
+    <ns2:ClientAddUpdtStatusRQ>
+      <ns3:HeaderRQ>
+        <ns3:TransactionRequestID>20190101121530123456</ns3:TransactionRequestID>
+        <ns3:Language>ENG</ns3:Language>
+        <ns3:UserLoginID>my_login</ns3:UserLoginID>
+        <ns3:UserRole>my_role</ns3:UserRole>
+      </ns3:HeaderRQ>
+      <ns2:TransactionID>20190101121530123456</ns2:TransactionID>
+    </ns2:ClientAddUpdtStatusRQ>
+  </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soap:Envelope xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:ns2='http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/' xmlns:ns1='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd' xmlns:ns3='http://legalservices.gov.uk/Enterprise/Common/1.0/Header' xmlns:ns4='http://legalservices.gov.uk/Enterprise/Common/1.0/Common' xmlns:ns5='http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'>
+  <soap:Header>
+    <ns1:Security>
+      <ns1:UsernameToken>
+        <ns1:Username>my_soap_client_username</ns1:Username>
+        <ns1:Password Type='password_type'>xxxxx</ns1:Password>
+      </ns1:UsernameToken>
+    </ns1:Security>
+  </soap:Header>
+  <soap:Body>
+    <ns2:ClientAddRQ>
+      <ns3:HeaderRQ>
+        <ns3:TransactionRequestID>20190101121530123456</ns3:TransactionRequestID>
+        <ns3:Language>ENG</ns3:Language>
+        <ns3:UserLoginID>my_login</ns3:UserLoginID>
+        <ns3:UserRole>my_role</ns3:UserRole>
+      </ns3:HeaderRQ>
+      <ns2:Client>
+        <ns5:Name>
+          <ns4:Surname>Hurlock</ns4:Surname>
+          <ns4:FirstName>lenovo</ns4:FirstName>
+        </ns5:Name>
+        <ns5:PersonalInformation>
+          <ns5:DateOfBirth>1969-01-01</ns5:DateOfBirth>
+          <ns5:Gender>FEMALE</ns5:Gender>
+          <ns5:MaritalStatus>U</ns5:MaritalStatus>
+          <ns5:VulnerableClient>false</ns5:VulnerableClient>
+          <ns5:HighProfileClient>false</ns5:HighProfileClient>
+          <ns5:VexatiousLitigant>false</ns5:VexatiousLitigant>
+          <ns5:CountryOfOrigin>GBR</ns5:CountryOfOrigin>
+          <ns5:MentalCapacityInd>false</ns5:MentalCapacityInd>
+        </ns5:PersonalInformation>
+        <ns5:Contacts>
+          <ns5:Password>Testing</ns5:Password>
+        </ns5:Contacts>
+        <ns5:NoFixedAbode>false</ns5:NoFixedAbode>
+        <ns5:Address>
+          <ns4:AddressLine1>102 Petty France</ns4:AddressLine1>
+          <ns4:City>London</ns4:City>
+          <ns4:Country>GBR</ns4:Country>
+          <ns4:PostalCode>SW1H 9AJ</ns4:PostalCode>
+        </ns5:Address>
+        <ns5:EthnicMonitoring>0</ns5:EthnicMonitoring>
+      </ns2:Client>
+    </ns2:ClientAddRQ>
+  </soap:Body>
+</soap:Envelope>

@@ -63,7 +63,7 @@ RSpec.configure do |config|
   config.include RequestHelpers, type: :request
   config.include TrueLayerHelpers
   config.include FlowHelpers, type: :request
-
+  config.include CCMS
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
   end
