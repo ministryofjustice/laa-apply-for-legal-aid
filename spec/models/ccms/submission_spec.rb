@@ -19,6 +19,15 @@ module CCMS
     end
 
     describe '#process' do
+      context 'invalid state' do
+        it 'raises if state is invalid' do
+          sub = Submission.new(aasm_state: 'xxxxx')
+          expect {
+            sub.process!
+          }.to raise_error RuntimeError, 'Unknown state'
+        end
+      end
+
       context 'initialised state' do
         let(:submission) { create :submission, :initialised, legal_aid_application: legal_aid_application }
         context 'operation successful' do
@@ -76,6 +85,16 @@ module CCMS
             expect(history.details).to match(/oops/)
           end
         end
+      end
+    end
+
+    describe '#reference_data_requestor' do
+      it 'only instantiates one copy of the ReferenceDataRequestor' do
+        sub = Submission.new
+        requestor1 = sub.__send__(:reference_data_requestor)
+        requestor2 = sub.__send__(:reference_data_requestor)
+        expect(requestor1).to be_instance_of(ReferenceDataRequestor)
+        expect(requestor1.object_id).to eq requestor2.object_id
       end
     end
   end
