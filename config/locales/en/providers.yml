@@ -244,7 +244,7 @@ en:
         bail_conditions_set: Have bail conditions been set?
     restrictions:
       index:
-        h1-heading: Do any restrictions apply to your client's property, savings or assets?
+        h1-heading: Do any of the following restrictions apply to your client's property or other assets?
     savings_and_investments:
       show:
         h1-heading: Does your client have any savings and investments?

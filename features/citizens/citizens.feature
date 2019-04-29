@@ -49,7 +49,7 @@ Feature: Citizen journey
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any restrictions apply to your property, savings or assets?"
+    Then I should be on a page showing "Do any of the following restrictions apply to your property or other assets?"
     Then I select "Bankruptcy"
     Then I select "Held overseas"
     Then I click 'Save and continue'
@@ -75,7 +75,7 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I should be on a page showing 'What % share of your home do you legally own?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
@@ -107,7 +107,7 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I should be on a page showing 'What % share of your home do you legally own?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
@@ -119,7 +119,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I fill 'Cash' with '1000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Cash savings'
@@ -134,7 +134,7 @@ Feature: Citizen journey
     Then I select 'Post Office, ISAs and other savings accounts'
     Then I fill 'Isa' with '5000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Post Office, ISAs and other savings accounts'
@@ -148,7 +148,7 @@ Feature: Citizen journey
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'Do you have any savings and investments?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Cash savings'
@@ -162,7 +162,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you have any of the following?'
     Then I fill 'Land value' with '1234.56'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Land'
@@ -177,7 +177,7 @@ Feature: Citizen journey
     Then I select 'Timeshare'
     Then I fill 'Timeshare value' with '10000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Timeshare'
@@ -190,7 +190,7 @@ Feature: Citizen journey
     And I click Check Your Answers Change link for 'Other assets'
     Then I should be on a page showing 'Do you have any of the following?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
@@ -200,7 +200,7 @@ Feature: Citizen journey
     And the application has the restriction 'bankruptcy'
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I select 'Restraint or freezing order'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -213,7 +213,7 @@ Feature: Citizen journey
     And the application has the restriction 'held_overseas'
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I deselect 'Bankruptcy'
     Then I deselect 'Held overseas'
     Then I click 'Save and continue'
@@ -226,6 +226,6 @@ Feature: Citizen journey
     And the application has the restriction 'held_overseas'
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Do any restrictions apply to your property, savings or assets?'
+    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
