@@ -191,7 +191,7 @@ en:
         add_other_outgoings: Add another type of regular payment
       index:
         add_all_outgoings: Add payments your client made from %{start_at} to %{finish_at}
-        page_heading: Your client’s regular payments
+        page_heading: Your client's regular payments
         select:
           rent_or_mortgage: Add rent or mortgage payments
           child_care: Add childcare costs

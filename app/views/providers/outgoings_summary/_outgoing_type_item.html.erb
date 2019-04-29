@@ -1,7 +1,7 @@
 <%
   transaction_link = link_to(
     link_text,
-    "#todo-#{name}",
+    providers_legal_aid_application_outgoing_transactions_path(transaction_type: name),
     class: 'govuk-body transaction-type-link'
   )
 %>
