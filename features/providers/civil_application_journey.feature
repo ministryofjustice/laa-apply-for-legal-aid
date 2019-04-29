@@ -345,7 +345,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'
     Then I enter the told on date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Enter details of the latest incident'
+    Then I should be on a page showing 'Details of the latest domestic abuse incident'
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"
     Then I click 'Save and continue'
@@ -443,7 +443,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'
     Then I enter the told on date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Enter details of the latest incident"
+    Then I should be on a page showing "Details of the latest domestic abuse incident"
     Then I enter the occurred on date of 2 days ago
     Then I fill "Details" with "It happened"
     Then I click 'Save and continue'

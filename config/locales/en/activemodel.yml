@@ -37,7 +37,6 @@ en:
         occurred_day: Day
         occurred_month: Month
         occurred_year: Year
-        details: Details of the incident
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home
@@ -106,9 +105,9 @@ en:
               date_is_in_the_future: Date your client told you about the latest incident must be in the past
               blank: Enter the date your client told you about the latest domestic abuse incident
             occurred_on:
-              date_not_valid: Enter a date in the right format
-              date_is_in_the_future: Date your client contacted you must be in the past
-              blank: Enter the date your client contacted you about the incident
+              date_not_valid: Enter a valid date
+              date_is_in_the_future: Date the incident occurred must be in the past
+              blank: Enter the date the incident occurred
             details:
               blank: Enter details of the incident
         legal_aid_application:
