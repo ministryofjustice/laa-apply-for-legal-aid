@@ -6,8 +6,12 @@
         ) do %>
 
       <p class="govuk-body govuk-!-margin-top-3"><%= t('.body') %></p>
-      <%= render 'shared/forms/detailed_list', translation_path: 'citizens.consents.show' %>
       <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), form: form, checked: 'true', unchecked: 'false' } %>
+
+      <div class="govuk-!-padding-top-4"></div>
+
+      <h2 class="govuk-heading-m"><%= t('.what_happens_next_header') %></h2>
+      <p class="govuk-body govuk-!-margin-0"><%= t('.what_happens_next_text') %></p>
     <% end %>
 
     <%= next_action_buttons(form: form) %>
