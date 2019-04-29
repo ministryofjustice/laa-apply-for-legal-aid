@@ -16,14 +16,14 @@ en:
     hints:
       maintenance_out: For example, for children or to an ex-partner
     page_titles:
-      benefits: Your benefits
+      benefits: Select benefits payments
       child_care: Childcare costs to a nursery or registered provider
-      friends_or_family: Financial help from friends or family
+      friends_or_family: Select payments from friends or family
       legal_aid: Existing legal aid contributions
-      maintenance_in: Maintenance payments (for children or from an ex-partner)
+      maintenance_in: Select maintenance payments
       maintenance_out: Maintenance payments (for children or to an ex-partner)
-      pension: Pensions (State, work or private)
-      property_or_lodger: Income from a property or lodger
+      pension: Select pension payments
+      property_or_lodger: Select income from a property or lodger
       rent_or_mortgage: Rent or mortgage
-      salary: Your salary or wage payments
-      student_loan: Student loan or grant
+      salary: Select salary or wage payments
+      student_loan: Select student loan or grant payments
