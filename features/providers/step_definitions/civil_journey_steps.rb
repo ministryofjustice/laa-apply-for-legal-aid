@@ -286,6 +286,13 @@ Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   fill_in('dob_year', with: dob_year)
 end
 
+Then('I enter the told on date of {int} days ago') do |number|
+  date = number.days.ago
+  fill_in('told_on', with: date.day)
+  fill_in('told_month', with: date.month)
+  fill_in('told_year', with: date.year)
+end
+
 Then('I enter the occurred on date of {int} days ago') do |number|
   date = number.days.ago
   fill_in('occurred_on', with: date.day)

@@ -4,6 +4,11 @@ module Flow
       STEPS = {
         start_merits_assessments: {
           path: ->(application) { urls.providers_legal_aid_application_start_merits_assessment_path(application) },
+          forward: :date_client_told_incidents,
+          check_answers: :check_merits_answers
+        },
+        date_client_told_incidents: {
+          path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :details_latest_incidents,
           check_answers: :check_merits_answers
         },

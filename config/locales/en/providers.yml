@@ -122,6 +122,9 @@ en:
         review-advice: You can review their answers and make corrections before their application is submitted.
         client: Client
         case-reference: Case reference
+    date_client_told_incidents:
+      show:
+        h1-heading: When did your client tell you about the latest domestic abuse incident?
     details_latest_incidents:
       show:
         h1-heading: Enter details of the latest incident
