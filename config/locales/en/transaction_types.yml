@@ -2,17 +2,17 @@
 en:
   transaction_types:
     names:
-      benefits: Benefits
+      benefits: Benefits like Universal Credit or Child Benefit
       child_care: Childcare costs to a nursery or registered provider
       friends_or_family: Financial help from friends or family
       legal_aid: Payments towards legal aid in a criminal case
-      maintenance_in: Maintenance payments
+      maintenance_in: Maintenance payments for you or your children
       maintenance_out: Maintenance payments for children or an ex-partner
-      pension: Pensions
+      pension: Income from a State, work or private pension
       property_or_lodger: Income from a property or lodger
       rent_or_mortgage: Rent or mortgage payments
       salary: Salary or wages
-      student_loan: Student loan or grant
+      student_loan: Money from a student loan or grant
     page_titles:
       benefits: Select benefits payments
       child_care: Select childcare costs

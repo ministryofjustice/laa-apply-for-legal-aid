@@ -1,13 +1,12 @@
 <%= page_template page_title: t('.page_heading'), template: :form do %>
   <%= form_with(model: @legal_aid_application, url: citizens_identify_types_of_income_path, method: :patch, local: true) do |form| %>
 
+    <div class="govuk-!-padding-bottom-4"></div>
+
     <%= transaction_type_check_boxes(
           form: form,
           transaction_types: TransactionType.credits,
           hints: {
-            benefits: t('.benefits_examples'),
-            maintenance_in: t('.maintenance_in_examples'),
-            pension: t('.pension_examples'),
             friends_or_family: t('.financial_help_examples')
           }
         ) %>
