@@ -29,8 +29,10 @@ RSpec.describe SaveApplicantMeansAnswers do
         if value.is_a?(Time)
           got = got.to_time.to_i
           expected = value.to_i
+          expect(got).to be_within(2).of(expected), "Attr #{key}: expected #{expected}, got #{got}"
+        else
+          expect(got).to eq(expected), "Attr #{key}: expected #{expected}, got #{got}"
         end
-        expect(got).to eq(expected), "Attr #{key}: expected #{expected}, got #{got}"
       end
     end
 
