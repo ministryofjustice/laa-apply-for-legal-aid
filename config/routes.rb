@@ -125,6 +125,7 @@ Rails.application.routes.draw do
       resource :start_merits_assessment, only: %i[show update]
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
+      resources :outgoings_summary, only: %i[index create]
       resource :incoming_transactions, only: [] do
         get '/:transaction_type', to: 'incoming_transactions#show', as: ''
         patch '/:transaction_type', to: 'incoming_transactions#update'

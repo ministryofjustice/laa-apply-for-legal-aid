@@ -336,6 +336,8 @@ Feature: Civil application journeys
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Your client’s regular payments"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'

@@ -185,6 +185,17 @@ en:
     other_assets:
       show:
         h1-heading: Does your client have any of the following?
+    outgoings_summary:
+      add_other_outgoings:
+        add_other_outgoings: Add another type of regular payment
+      index:
+        add_all_outgoings: Add payments your client made from %{start_at} to %{finish_at}
+        page_heading: Your client’s regular payments
+        select:
+          rent_or_mortgage: Add rent or mortgage payments
+          child_care: Add childcare costs
+          maintenance_out: Add maintenance payments
+          legal_aid: Add legal aid payments
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your client's home?
       outstanding_mortgage_amount: Enter the outstanding mortgage amount
