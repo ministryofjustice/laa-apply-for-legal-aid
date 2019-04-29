@@ -2,21 +2,14 @@
 # Note: this page is loaded via the pagy initializer, so restart server to see changes
 en:
   pagy:
-    nav:
-      prev: "&laquo;&nbsp;Previous"
-      next: "Next&nbsp;&raquo;"
-      gap: "&hellip;"
     info:
-      single_page:
-        zero: "No results"
-        one: "Showing 1 of 1"
-        other: "Showing %{count} of %{count} results"
-      multiple_pages: "Showing %{from} - %{to} of %{count} results"
-      item_name:
-        zero: "items"
-        one: "item"
-        other: "items"
-    compact: "Page %{page_input} of %{pages}"
-    items:
-      one: "Show %{items_input} item per page"
-      other: "Show %{items_input} items per page"
+      multiple_pages: "Showing %{from} - %{to} of %{count} %{item_name}"
+      no_items: "No %{item_name}"
+      single_page: "Showing %{count} of %{count} %{item_name}"
+    item_name:
+      one: "result"
+      other: "results"
+    nav:
+      gap: "&hellip;"
+      next: "Next&nbsp;&raquo;"
+      prev: "&laquo;&nbsp;Previous"
