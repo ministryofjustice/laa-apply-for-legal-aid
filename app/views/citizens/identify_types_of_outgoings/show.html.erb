@@ -3,14 +3,9 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= govuk_hint t('.hint') %>
-
-    <div class="govuk-!-padding-bottom-4"></div>
-
     <%= transaction_type_check_boxes(
           form: form,
-          transaction_types: TransactionType.debits,
-          hints: { maintenance_out: t('transaction_types.hints.maintenance_out') }
+          transaction_types: TransactionType.debits
         ) %>
 
     <%= next_action_buttons(form: form) %>
