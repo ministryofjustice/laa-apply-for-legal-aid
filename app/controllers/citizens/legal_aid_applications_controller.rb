@@ -1,10 +1,12 @@
 module Citizens
   class LegalAidApplicationsController < BaseController
     include ApplicationFromSession
+    before_action :authenticate_applicant!, only: :index
+
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index where the first page is displayed.
     def show
-      return expired if find_legal_aid_application.error == :expired
+      return expired if application_error == :expired
       return completed if application.completed_at.present?
 
       start_applicant_flow
@@ -34,12 +36,18 @@ module Citizens
       sign_in(scope, applicant, event: :authentication)
     end
 
-    def application
-      find_legal_aid_application.value
+    def application_error
+      secure_application_finder.error
     end
 
-    def find_legal_aid_application
-      @find_legal_aid_application ||= LegalAidApplication.find_by_secure_id!(params[:id])
+    def application
+      return if application_error
+
+      @application ||= secure_application_finder.legal_aid_application
+    end
+
+    def secure_application_finder
+      @secure_application_finder ||= SecureApplicationFinder.new(params[:id])
     end
   end
 end

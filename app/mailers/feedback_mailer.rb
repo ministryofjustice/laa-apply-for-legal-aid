@@ -1,8 +1,10 @@
 class FeedbackMailer < GovukNotifyRails::Mailer
   TARGET_EMAIL = 'apply-for-legal-aid@digital.justice.gov.uk'.freeze
 
+  include NotifyTemplateMethods
+
   def notify(feedback)
-    set_template_conf
+    template_name :feedback_notification
     set_personalisation(
       created_at: feedback.created_at.to_s(:rfc822),
       user_data: [
@@ -15,16 +17,5 @@ class FeedbackMailer < GovukNotifyRails::Mailer
       improvement_suggestion: (feedback.improvement_suggestion || '')
     )
     mail to: TARGET_EMAIL
-  end
-
-  protected
-
-  def set_template_conf
-    template_id = template_ids.fetch(:feedback_notification)
-    set_template(template_id)
-  end
-
-  def template_ids
-    @template_ids ||= Rails.configuration.govuk_notify_templates
   end
 end

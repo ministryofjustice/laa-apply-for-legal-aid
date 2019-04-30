@@ -32,7 +32,8 @@ module LaaApplyForLegalAid
     config.x.kubernetes_deployment = ENV['KUBERNETES_DEPLOYMENT'] == 'true'
 
     config.govuk_notify_templates = config_for(
-      :govuk_notify_templates, env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
+      :govuk_notify_templates,
+      env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
     ).symbolize_keys
 
     config.x.admin_portal.allow_reset = ENV['ADMIN_ALLOW_RESET'] == 'true'

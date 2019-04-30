@@ -144,15 +144,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '.find_by_secure_id!' do
-    let(:legal_aid_application) { create :legal_aid_application }
-    let(:secure_id) { legal_aid_application.generate_secure_id }
-
-    it 'should return matching legal aid legal_aid_application' do
-      expect(described_class.find_by_secure_id!(secure_id).value).to eq(legal_aid_application)
-    end
-  end
-
   describe 'state machine' do
     subject(:legal_aid_application) { create(:legal_aid_application) }
 
