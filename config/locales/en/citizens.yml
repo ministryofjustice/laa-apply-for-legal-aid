@@ -67,11 +67,8 @@ en:
         submit_button: Agree and submit
     identify_types_of_incomes:
       show:
-        benefits_examples: For example, Universal Credit or Child Benefit
-        maintenance_in_examples: For example, for children or from an ex-partner
         page_heading: Select any types of income you receive
-        pension_examples: Include State, work or private pensions
-        financial_help_examples: For example, money from a family member for rent or bills
+        financial_help_examples: For example, money from a family member for rent or bills.
     identify_types_of_outgoings:
       show:
         page_heading: Select any regular payments you make

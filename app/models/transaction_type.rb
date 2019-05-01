@@ -6,11 +6,11 @@ class TransactionType < ApplicationRecord
     credit: %i[
       salary
       benefits
+      friends_or_family
       maintenance_in
       property_or_lodger
       student_loan
       pension
-      friends_or_family
     ],
     debit: %i[
       rent_or_mortgage
