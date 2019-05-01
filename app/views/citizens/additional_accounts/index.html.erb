@@ -1,15 +1,24 @@
-<%= page_template page_title: t('.field_set_header'), template: :form do %>
-  <%= form_with(url: citizens_additional_accounts_path, local: true) do |form| %>
+<%= page_template page_title: t('.field_set_header'), template: :basic do %>
+  <%= form_with(model: @form, url: citizens_additional_accounts_path, method: :post, local: true) do |form| %>
 
     <%= govuk_form_group(
           show_error_if: @error,
-          hint_id: :additional_account_hint,
           input: :additional_account
         ) do %>
-      <div class="govuk-!-padding-bottom-4"></div>
-      <%= govuk_hint t('.hint'), id: :additional_account_hint %>
+
       <%= govuk_error_message @error %>
-      <%= govuk_radio_inputs :additional_account, yes: t('generic.yes'), no: t('generic.no') %>
+
+      <%
+        options = [
+          { value: :yes, label: t('generic.yes') },
+          { value: :no,  label: t('generic.no') }
+        ]
+      %>
+
+      <%= govuk_fieldset_header(content_for(:page_title)) %>
+
+      <%= form.govuk_collection_radio_buttons :additional_account, options, :value, :label, error: @error %>
+
     <% end %>
 
     <%= next_action_buttons(form: form) %>

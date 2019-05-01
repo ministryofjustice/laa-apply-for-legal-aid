@@ -15,7 +15,7 @@
 
       <%= govuk_error_message(form.object.errors[:client_received_legal_help].first) %>
 
-      <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="radios">
         <%= form.govuk_radio_button(:client_received_legal_help, true) %>
         <%= form.govuk_radio_button(:client_received_legal_help, false,
                                     'data-aria-controls' => 'conditional-false',
