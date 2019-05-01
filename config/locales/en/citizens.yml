@@ -77,15 +77,12 @@ en:
         page_heading: Select any regular payments you make
     information:
       show:
-        heading_1: Give one-time access to your bank accounts
-        list:
-          list: |
-            Sign in and authorise access to your accounts
-            We download 3 months of transactions
-            Your online banking details are not saved
-          title: How we connect to your online banking
-        para_1: You will be redirected to a secure service to sign in to your online banking.
-        para_2: You will need to share all of your bank accounts, including any in joint names or with no money.
+        heading: Give one-time access to your bank accounts
+        secure_service_redirect_info: We'll transfer you to a secure service to sign in to your online banking.
+        what_will_need_to_be_shared: You'll need to share all of your bank accounts with us, including any in joint names or with no money.
+        online_banking_info_heading: How we connect to your online banking
+        data_download_info: After you've signed in and authorised us to access your account, we download bank transactions covering the last 3 months.
+        banking_credentials_not_saved: We do not save your online banking username and password.
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'
