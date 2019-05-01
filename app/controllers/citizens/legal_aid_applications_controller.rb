@@ -17,7 +17,7 @@ module Citizens
     private
 
     def expired
-      redirect_to error_path(:link_expired)
+      redirect_to citizens_resend_link_request_path(params[:id])
     end
 
     def completed

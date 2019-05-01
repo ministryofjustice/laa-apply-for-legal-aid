@@ -1,6 +1,4 @@
 class FeedbackMailer < GovukNotifyRails::Mailer
-  TARGET_EMAIL = 'apply-for-legal-aid@digital.justice.gov.uk'.freeze
-
   include NotifyTemplateMethods
 
   def notify(feedback)
@@ -16,6 +14,6 @@ class FeedbackMailer < GovukNotifyRails::Mailer
       satisfaction: (feedback.satisfaction || ''),
       improvement_suggestion: (feedback.improvement_suggestion || '')
     )
-    mail to: TARGET_EMAIL
+    mail to: support_email_address
   end
 end

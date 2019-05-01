@@ -14,9 +14,6 @@ en:
       assessment_already_completed:
         page_title: You've already completed your financial assessment
         contact_provider: Speak with your solicitor to check your application status.
-      link_expired:
-        page_title: This link has expired
-        new_link_request: Request a new link
       page_not_found:
         page_title: Page not found
         web_address_incorrect: If you typed the web address, check it is correct.

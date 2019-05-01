@@ -7,4 +7,8 @@ module NotifyTemplateMethods
   def template_ids
     @template_ids ||= Rails.configuration.govuk_notify_templates
   end
+
+  def support_email_address
+    Rails.configuration.x.support_email_address
+  end
 end

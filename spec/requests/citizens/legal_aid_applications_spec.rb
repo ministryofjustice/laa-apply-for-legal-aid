@@ -52,7 +52,7 @@ RSpec.describe 'citizen home requests', type: :request do
       end
 
       it 'redirects to error page (link expired)' do
-        expect(response).to redirect_to(error_path(:link_expired))
+        expect(response).to redirect_to(citizens_resend_link_request_path(secure_id))
       end
     end
   end
