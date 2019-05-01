@@ -1,0 +1,11 @@
+<%= page_template page_title: t('.heading'), template: :basic, show_errors_for: @vehicle do %>
+  <%= form_with url: providers_legal_aid_application_vehicle_path, local: true do |form| %>
+    <%= govuk_form_group show_error_if: @vehicle.errors.present? do %>
+      <%= govuk_fieldset_header page_heading, padding_below: 0 %>
+      <%= govuk_hint t('.vehicle_types_included') %>
+      <%= govuk_radio_inputs(:exists, { yes: t('generic.yes'), no: t('generic.no') }) %>
+      <div class="govuk-!-padding-bottom-4"></div>
+      <%= next_action_buttons(show_draft: true, form: form) %>
+    <% end %>
+  <% end %>
+<% end %>

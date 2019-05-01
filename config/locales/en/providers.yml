@@ -341,3 +341,8 @@ en:
         col_date: Date
         col_description: Description
         col_select_all: Select all
+    vehicles:
+      show:
+        heading: Does your client own a vehicle?
+        vehicle_types_included: This includes car, vans or motorcycles.
+        nothing_selected: Select yes if your client owns a vehicle
