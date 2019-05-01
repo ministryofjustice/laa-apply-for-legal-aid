@@ -7,14 +7,12 @@ en:
       friends_or_family: Financial help from friends or family
       legal_aid: Payments towards legal aid in a criminal case
       maintenance_in: Maintenance payments
-      maintenance_out: Maintenance payments
+      maintenance_out: Maintenance payments for children or an ex-partner
       pension: Pensions
       property_or_lodger: Income from a property or lodger
       rent_or_mortgage: Rent or mortgage payments
       salary: Salary or wages
       student_loan: Student loan or grant
-    hints:
-      maintenance_out: For example, for children or to an ex-partner
     page_titles:
       benefits: Select benefits payments
       child_care: Select childcare costs
