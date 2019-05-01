@@ -12,7 +12,7 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I am directed to TrueLayer
 
-  @javascript
+  @javascript @webhint
   Scenario: Follow citizen journey from Accounts page
     Given An application has been created
     Then I visit the start of the financial assessment
