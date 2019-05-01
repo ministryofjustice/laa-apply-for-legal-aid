@@ -6,7 +6,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Complete your legal aid financial assessment'
     Then I click link 'Start'
     Then I should be on a page showing 'Give one-time access to your bank accounts'
-    Then I click link 'Save and continue'
+    Then I click link 'Continue'
     Then I should be on a page showing 'Do you agree to share your bank transactions with us?'
     Then I select 'I agree for you to check 3 months of bank transactions'
     Then I click 'Save and continue'
