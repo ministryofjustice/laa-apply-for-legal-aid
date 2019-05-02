@@ -14,7 +14,7 @@ module Flow
         },
         own_homes: {
           path: ->(application) { urls.providers_legal_aid_application_own_home_path(application) },
-          forward: ->(application) { application.own_home_no? ? :savings_and_investments : :property_values },
+          forward: ->(application) { application.own_home_no? ? :vehicles : :property_values },
           carry_on_sub_flow: ->(application) { !application.own_home_no? },
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
         },
@@ -34,15 +34,22 @@ module Flow
             if application.shared_ownership?
               :percentage_homes
             else
-              application.checking_answers? ? :restrictions : :savings_and_investments
+              application.checking_answers? ? :restrictions : :vehicles
             end
           end,
           carry_on_sub_flow: true
         },
         percentage_homes: {
           path: ->(application) { urls.providers_legal_aid_application_percentage_home_path(application) },
-          forward: ->(application) { application.checking_answers? ? :restrictions : :savings_and_investments },
+          forward: ->(application) { application.checking_answers? ? :restrictions : :vehicles },
           carry_on_sub_flow: true
+        },
+        vehicles: {
+          path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
+          forward: ->(application) { application&.vehicle&.persisted? ? :estimated_values : :savings_and_investments }
+        },
+        estimated_values: {
+          path: ->(application) { urls.providers_legal_aid_application_vehicle_vehicles_estimated_value_path(application) }
         },
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
