@@ -28,18 +28,4 @@ RSpec.describe ErrorsController, type: :request do
       expect(response.body).to match(/already completed[\w\s]+financial assessment/)
     end
   end
-
-  describe 'GET /error/link_expired' do
-    subject { get error_path(:link_expired) }
-
-    before { subject }
-
-    it 'renders successfully' do
-      expect(response).to have_http_status(:ok)
-    end
-
-    it 'displays the correct header' do
-      expect(response.body).to match('link has expired')
-    end
-  end
 end

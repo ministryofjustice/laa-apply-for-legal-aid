@@ -53,15 +53,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     )
   end
 
-  def self.find_by_secure_id!(secure_id)
-    secure_data = SecureData.for(secure_id)
-    if secure_data[:expired_at] && secure_data[:expired_at] < Time.current
-      SimpleResult.new(error: :expired)
-    else
-      SimpleResult.new(value: find_by!(secure_data[:legal_aid_application]))
-    end
-  end
-
   def generate_secure_id
     SecureData.create_and_store!(
       legal_aid_application: { id: id },

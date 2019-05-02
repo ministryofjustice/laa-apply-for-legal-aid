@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe FeedbackMailer, type: :mailer do
+RSpec.describe ResendLinkRequestMailer, type: :mailer do
   describe 'notify' do
-    let(:feedback) { create :feedback }
-    let(:mail) { described_class.notify(feedback) }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:mail) { described_class.notify(legal_aid_application) }
 
     it 'sends to correct address' do
       expect(mail.to).to eq([Rails.configuration.x.support_email_address])

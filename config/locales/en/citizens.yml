@@ -133,6 +133,13 @@ en:
             property_value: Enter the estimated value of your home
       show:
         h1-heading: How much is your home worth?
+    resend_link_requests:
+      show:
+        page_title: This link has expired
+        new_link_request: Request a new link
+      update:
+        page_title: Your request for a new link has been sent
+        contact_provider: Speak with your solicitor to check your application status.
     restrictions:
       index:
         h1-heading: Do any of the following restrictions apply to your property or other assets?
