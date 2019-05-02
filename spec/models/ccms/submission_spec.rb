@@ -138,7 +138,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
             before do
               expect(ApplicantSearchResponseParser).to receive(:new).and_return(applicant_search_response_parser)
-              expect(applicant_search_response_parser).to receive(:parse).and_return(1)
+              expect(applicant_search_response_parser).to receive(:parse).and_return(applicant_search_response_parser)
+              expect(applicant_search_response_parser).to receive(:record_count).and_return('1')
               expect(applicant_search_response_parser).to receive(:applicant_ccms_reference).and_return(applicant_ccms_reference_in_example_response)
             end
 

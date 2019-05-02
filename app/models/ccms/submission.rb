@@ -63,8 +63,7 @@ module CCMS
     def obtain_case_reference
       tx_id = reference_data_requestor.transaction_request_id
       response = reference_data_requestor.call
-      result = ReferenceDataResponseParser.new(tx_id, response).parse
-      self.case_ccms_reference = result
+      self.case_ccms_reference = ReferenceDataResponseParser.new(tx_id, response).parse
       create_history(aasm_state, :case_ref_obtained)
       obtain_case_ref!
     rescue StandardError => e
@@ -76,8 +75,8 @@ module CCMS
       tx_id = applicant_search_requestor.transaction_request_id
       response = applicant_search_requestor.call
       parser = ApplicantSearchResponseParser.new(tx_id, response)
-      result = parser.parse
-      if result == '0'
+      parser.parse
+      if parser.record_count == '0'
         add_applicant
       else
         self.applicant_ccms_reference = parser.applicant_ccms_reference

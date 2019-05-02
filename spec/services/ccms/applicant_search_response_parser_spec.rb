@@ -17,8 +17,10 @@ module CCMS
       context 'there are no applicants returned' do
         let(:parser) { described_class.new('20190301030405123456', no_results_response_xml) }
 
+        before { parser.parse }
+
         it 'extracts the number of records fetched' do
-          expect(parser.parse).to eq '0'
+          expect(parser.record_count).to eq '0'
         end
 
         it 'does not return an applicant_ccms_reference' do
@@ -29,8 +31,10 @@ module CCMS
       context 'there is one applicant returned' do
         let(:parser) { described_class.new('20190301030405123456', one_result_response_xml) }
 
+        before { parser.parse }
+
         it 'extracts the number of records fetched' do
-          expect(parser.parse).to eq '1'
+          expect(parser.record_count).to eq '1'
         end
 
         it 'returns the applicant_ccms_reference' do
@@ -41,8 +45,10 @@ module CCMS
       context 'there are multiple applicants returned' do
         let(:parser) { described_class.new('20190301030405123456', multiple_results_response_xml) }
 
+        before { parser.parse }
+
         it 'extracts the number of records fetched' do
-          expect(parser.parse).to eq '2'
+          expect(parser.record_count).to eq '2'
         end
 
         it 'returns the first applicant_ccms_reference' do
