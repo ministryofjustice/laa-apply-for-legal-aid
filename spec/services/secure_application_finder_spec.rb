@@ -26,7 +26,7 @@ RSpec.describe SecureApplicationFinder, type: :service do
       expect(subject.legal_aid_application).to eq(legal_aid_application)
     end
 
-    it 'has no errors' do
+    it 'has :expired error' do
       expect(subject.error).to eq(:expired)
     end
   end
