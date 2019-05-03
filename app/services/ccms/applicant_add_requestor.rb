@@ -1,5 +1,8 @@
 module CCMS
   class ApplicantAddRequestor < BaseRequestor
+    attr_reader :applicant
+    delegate :address, to: :applicant
+
     def initialize(applicant)
       @applicant = applicant
       @address = applicant.address
@@ -31,18 +34,18 @@ module CCMS
       xml.__send__('ns5:PersonalInformation') { personal_information(xml) }
       xml.__send__('ns5:Contacts') { contacts(xml) }
       xml.__send__('ns5:NoFixedAbode', false)
-      xml.__send__('ns5:Address') { address(xml) }
+      xml.__send__('ns5:Address') { applicant_address(xml) }
       xml.__send__('ns5:EthnicMonitoring', 0)
     end
 
     def name(xml)
-      xml.__send__('ns4:Surname', @applicant.last_name)
-      xml.__send__('ns4:FirstName', @applicant.first_name)
+      xml.__send__('ns4:Surname', applicant.last_name)
+      xml.__send__('ns4:FirstName', applicant.first_name)
     end
 
     # this is all mandatory: we don't hold any of this data except date of birth
     def personal_information(xml)
-      xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.to_s(:ccms_date))
+      xml.__send__('ns5:DateOfBirth', applicant.date_of_birth.to_s(:ccms_date))
       xml.__send__('ns5:Gender', 'FEMALE')
       xml.__send__('ns5:MaritalStatus', 'U')
       xml.__send__('ns5:VulnerableClient', false)
@@ -57,11 +60,11 @@ module CCMS
       xml.__send__('ns5:Password', 'Testing')
     end
 
-    def address(xml)
-      xml.__send__('ns4:AddressLine1', @address.first_lines)
-      xml.__send__('ns4:City', @address.city)
+    def applicant_address(xml)
+      xml.__send__('ns4:AddressLine1', address.first_lines)
+      xml.__send__('ns4:City', address.city)
       xml.__send__('ns4:Country', 'GBR')
-      xml.__send__('ns4:PostalCode', @address.pretty_postcode)
+      xml.__send__('ns4:PostalCode', address.pretty_postcode)
     end
 
     def namespaces
