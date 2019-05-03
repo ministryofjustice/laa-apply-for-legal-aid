@@ -2,6 +2,8 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe ApplicantAddRequestor do
+    let(:expected_xml) { ccms_data_from_file 'applicant_add_request.xml' }
+
     let(:address) do
       double Address,
              address_line_one: '102',
@@ -35,10 +37,6 @@ module CCMS
           expect(requestor.transaction_request_id).to start_with '20190102030405123456'
         end
       end
-    end
-
-    def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/applicant_add_request.xml")
     end
   end
 end

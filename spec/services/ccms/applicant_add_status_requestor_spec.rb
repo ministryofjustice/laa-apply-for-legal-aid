@@ -3,6 +3,8 @@ require 'rails_helper'
 module CCMS
   RSpec.describe ApplicantAddStatusRequestor do
     describe 'XML request' do
+      let(:expected_xml) { ccms_data_from_file 'applicant_add_status_request.xml' }
+
       it 'generates the expected XML' do
         with_modified_env(modified_environment_vars) do
           requestor = described_class.new
@@ -19,10 +21,6 @@ module CCMS
           expect(requestor.transaction_request_id).to start_with '20190102030405123456'
         end
       end
-    end
-
-    def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/applicant_add_status_request.xml")
     end
   end
 end

@@ -34,7 +34,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'initialised state' do
         let(:submission) { create :submission, :initialised, legal_aid_application: legal_aid_application }
         context 'operation successful' do
-          let(:response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'reference_data_response.xml')) }
+          let(:response) { ccms_data_from_file 'reference_data_response.xml' }
           let(:requestor) { ReferenceDataRequestor.new }
           let(:transaction_request_id_in_example_response) { '20190301030405123456' }
           let(:ccms_case_ref_in_example_response) { '300000135140' }
@@ -103,8 +103,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           context 'no applicant exists on the CCMS system' do
-            let(:applicant_search_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_search_response_no_results.xml')) }
-            let(:applicant_add_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_add_response.xml')) }
+            let(:applicant_search_response) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
+            let(:applicant_add_response) { ccms_data_from_file 'applicant_add_response.xml' }
             let(:transaction_request_id_in_example_response) { '20190301030405123456' }
 
             before do
@@ -131,7 +131,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           context 'applicant exists on the CCMS system' do
             let(:applicant_search_response_parser) { double ApplicantSearchResponseParser }
-            let(:applicant_search_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_search_response_one_result.xml')) }
+            let(:applicant_search_response) { ccms_data_from_file 'applicant_search_response_one_result.xml' }
             let(:transaction_request_id_in_example_response) { '20190301030405123456' }
             let(:applicant_ccms_reference_in_example_response) { '1234567890' }
 
@@ -187,7 +187,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           context 'error when adding an applicant' do
-            let(:applicant_search_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_search_response_no_results.xml')) }
+            let(:applicant_search_response) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
             let(:transaction_request_id_in_example_response) { '20190301030405123456' }
             let(:applicant_search_requestor_double) { double ApplicantSearchRequestor }
             let(:applicant_add_requestor_double) { double ApplicantAddRequestor }
@@ -216,8 +216,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           context 'failed response from CCMS adding an applicant' do
-            let(:applicant_search_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_search_response_no_results.xml')) }
-            let(:applicant_add_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_add_response.xml')) }
+            let(:applicant_search_response) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
+            let(:applicant_add_response) { ccms_data_from_file 'applicant_add_response.xml' }
             let(:transaction_request_id_in_example_response) { '20190301030405123456' }
             let(:applicant_search_requestor) { double ApplicantSearchRequestor }
             let(:applicant_add_requestor) { double ApplicantAddRequestor }

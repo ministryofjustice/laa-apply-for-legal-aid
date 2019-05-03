@@ -3,9 +3,9 @@ require 'rails_helper'
 module CCMS
   RSpec.describe ApplicantSearchResponseParser do
     describe 'parsing applicant search responses' do
-      let(:no_results_response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_no_results.xml") }
-      let(:one_result_response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_one_result.xml") }
-      let(:multiple_results_response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_multiple_results.xml") }
+      let(:no_results_response_xml) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
+      let(:one_result_response_xml) { ccms_data_from_file 'applicant_search_response_one_result.xml' }
+      let(:multiple_results_response_xml) { ccms_data_from_file 'applicant_search_response_multiple_results.xml' }
       let(:parser) { described_class.new(Faker::Number.number(20), no_results_response_xml) }
       let(:expected_tx_id) { '20190301030405123456' }
 

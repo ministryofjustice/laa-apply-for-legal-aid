@@ -2,6 +2,7 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe ApplicantSearchRequestor do
+    let(:expected_xml) { ccms_data_from_file 'applicant_search_request.xml' }
     let(:applicant) do
       double Applicant,
              first_name: 'lenovo',
@@ -30,7 +31,7 @@ module CCMS
     end
 
     def expected_xml
-      File.read("#{File.dirname(__FILE__)}/data/applicant_search_request.xml")
+      ccms_data_from_file 'applicant_search_request.xml'
     end
   end
 end
