@@ -5,7 +5,7 @@ module CCMS
     def initialize(legal_aid_application)
       super()
       @legal_aid_application = legal_aid_application
-      @transaction_time_stamp = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N')
+      @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
       @ccms_attribute_keys = YAML.load_file(File.join(Rails.root, 'config', 'ccms', 'ccms_keys.yml'))
       @attribute_value_generator = AttributeValueGenerator.new(@legal_aid_application)
     end
@@ -124,13 +124,13 @@ module CCMS
     end
 
     def generate_record_history(xml)
-      xml.__send__('ns0:DateCreated', Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N'))
+      xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
       xml.__send__('ns0:LastUpdatedBy') do
         xml.__send__('ns0:UserLoginID', 'DAVIDGRAYLLPTWO')
         xml.__send__('ns0:UserName', 'DAVIDGRAYLLPTWO')
         xml.__send__('ns0:UserType', 'EXTERNAL')
       end
-      xml.__send__('ns0:DateLastUpdated', Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N'))
+      xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
     end
 
     def generate_lar_details(xml)

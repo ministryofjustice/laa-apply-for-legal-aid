@@ -35,7 +35,7 @@ module CCMS
       xml.__send__('ns2:ClientInfo') do
         xml.__send__('ns5:FirstName', @applicant.first_name)
         xml.__send__('ns5:Surname', @applicant.last_name)
-        xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.strftime('%Y-%m-%d'))
+        xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.to_s(:ccms_date))
         xml.__send__('ns5:NINumber', @applicant.national_insurance_number)
       end
     end

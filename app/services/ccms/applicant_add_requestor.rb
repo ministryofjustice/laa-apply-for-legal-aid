@@ -42,7 +42,7 @@ module CCMS
 
     # this is all mandatory: we don't hold any of this data except date of birth
     def personal_information(xml)
-      xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.strftime('%Y-%m-%d'))
+      xml.__send__('ns5:DateOfBirth', @applicant.date_of_birth.to_s(:ccms_date))
       xml.__send__('ns5:Gender', 'FEMALE')
       xml.__send__('ns5:MaritalStatus', 'U')
       xml.__send__('ns5:VulnerableClient', false)
