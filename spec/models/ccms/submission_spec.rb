@@ -20,6 +20,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     describe '#process' do
+      let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
+
       context 'invalid state' do
         it 'raises if state is invalid' do
           sub = Submission.new(aasm_state: 'xxxxx')
@@ -55,7 +57,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'writes a history record' do
             expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-            history = SubmissionHistory.find_by(submission_id: submission.id)
             expect(history.from_state).to eq 'initialised'
             expect(history.to_state).to eq 'case_ref_obtained'
             expect(history.success).to be true
@@ -78,7 +79,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'records the error in the submission history' do
             expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-            history = SubmissionHistory.find_by(submission_id: submission.id)
             expect(history.from_state).to eq 'initialised'
             expect(history.to_state).to eq 'failed'
             expect(history.success).to be false
@@ -122,7 +122,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
             it 'writes a history record' do
               expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-              history = SubmissionHistory.find_by(submission_id: submission.id)
               expect(history.from_state).to eq 'case_ref_obtained'
               expect(history.to_state).to eq 'applicant_submitted'
               expect(history.success).to be true
@@ -155,7 +154,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
             it 'writes a history record' do
               expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-              history = SubmissionHistory.find_by(submission_id: submission.id)
               expect(history.from_state).to eq 'case_ref_obtained'
               expect(history.to_state).to eq 'applicant_ref_obtained'
               expect(history.success).to be true
@@ -180,7 +178,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
             it 'records the error in the submission history' do
               expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-              history = SubmissionHistory.find_by(submission_id: submission.id)
               expect(history.from_state).to eq 'case_ref_obtained'
               expect(history.to_state).to eq 'failed'
               expect(history.success).to be false
@@ -192,12 +189,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           context 'error when adding an applicant' do
             let(:applicant_search_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_search_response_no_results.xml')) }
             let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+            let(:applicant_search_requestor_double) { double ApplicantSearchRequestor }
+            let(:applicant_add_requestor_double) { double ApplicantAddRequestor }
             before do
-              applicant_search_requestor_double = double ApplicantSearchRequestor
               allow(submission).to receive(:applicant_search_requestor).and_return(applicant_search_requestor_double)
               expect(applicant_search_requestor_double).to receive(:call).and_return(applicant_search_response)
               expect(applicant_search_requestor_double).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-              applicant_add_requestor_double = double ApplicantAddRequestor
               allow(applicant_add_requestor_double).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
               allow(submission).to receive(:applicant_add_requestor).and_return(applicant_add_requestor_double)
               expect(applicant_add_requestor_double).to receive(:call).and_raise(RuntimeError, 'oops when adding')
@@ -210,7 +207,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
             it 'records the error in the submission history' do
               expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-              history = SubmissionHistory.find_by(submission_id: submission.id)
               expect(history.from_state).to eq 'case_ref_obtained'
               expect(history.to_state).to eq 'failed'
               expect(history.success).to be false
@@ -223,16 +219,16 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             let(:applicant_search_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_search_response_no_results.xml')) }
             let(:applicant_add_response) { File.read(File.join(Rails.root, 'spec', 'services', 'ccms', 'data', 'applicant_add_response.xml')) }
             let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+            let(:applicant_search_requestor) { double ApplicantSearchRequestor }
+            let(:applicant_add_requestor) { double ApplicantAddRequestor }
+            let(:applicant_add_response_parser) { double ApplicantAddResponseParser }
             before do
-              applicant_search_requestor = double ApplicantSearchRequestor
               allow(submission).to receive(:applicant_search_requestor).and_return(applicant_search_requestor)
               expect(applicant_search_requestor).to receive(:call).and_return(applicant_search_response)
               expect(applicant_search_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-              applicant_add_requestor = double ApplicantAddRequestor
               expect(ApplicantAddRequestor).to receive(:new).with(legal_aid_application.applicant).and_return(applicant_add_requestor)
               expect(applicant_add_requestor).to receive(:call).and_return(applicant_add_response)
               expect(applicant_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-              applicant_add_response_parser = double ApplicantAddResponseParser
               expect(ApplicantAddResponseParser).to receive(:new).and_return(applicant_add_response_parser)
               expect(applicant_add_response_parser).to receive(:parse).and_return('Failure')
             end
@@ -244,7 +240,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
             it 'records the error in the submission history' do
               expect { submission.process! }.to change { SubmissionHistory.count }.by(1)
-              history = SubmissionHistory.find_by(submission_id: submission.id)
               expect(history.from_state).to eq 'case_ref_obtained'
               expect(history.to_state).to eq 'failed'
               expect(history.success).to be false
@@ -258,20 +253,20 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     # private methods tested here because they are mocked out above
     #
     describe '#reference_data_requestor' do
+      let(:sub) { Submission.new }
+      let(:requestor1) { sub.__send__(:reference_data_requestor) }
+      let(:requestor2) { sub.__send__(:reference_data_requestor) }
       it 'only instantiates one copy of the ReferenceDataRequestor' do
-        sub = Submission.new
-        requestor1 = sub.__send__(:reference_data_requestor)
-        requestor2 = sub.__send__(:reference_data_requestor)
         expect(requestor1).to be_instance_of(ReferenceDataRequestor)
         expect(requestor1.object_id).to eq requestor2.object_id
       end
     end
 
     describe '#applicant_search_requestor' do
+      let(:sub) { Submission.new(legal_aid_application: legal_aid_application) }
+      let(:requestor1) { sub.__send__(:applicant_search_requestor) }
+      let(:requestor2) { sub.__send__(:applicant_search_requestor) }
       it 'only instantiates one copy of the ApplicantSearchRequestor' do
-        sub = Submission.new(legal_aid_application: legal_aid_application)
-        requestor1 = sub.__send__(:applicant_search_requestor)
-        requestor2 = sub.__send__(:applicant_search_requestor)
         expect(requestor1).to be_instance_of(ApplicantSearchRequestor)
         expect(requestor1.object_id).to eq requestor2.object_id
       end
