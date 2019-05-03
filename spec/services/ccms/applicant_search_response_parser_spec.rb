@@ -6,16 +6,17 @@ module CCMS
       let(:no_results_response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_no_results.xml") }
       let(:one_result_response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_one_result.xml") }
       let(:multiple_results_response_xml) { File.read("#{File.dirname(__FILE__)}/data/applicant_search_response_multiple_results.xml") }
+      let(:parser) { described_class.new(Faker::Number.number(20), no_results_response_xml) }
+      let(:expected_tx_id) { '20190301030405123456' }
 
       it 'raises if the transaction_request_ids dont match' do
         expect {
-          parser = described_class.new('20190301030405987654', no_results_response_xml)
           parser.parse
         }.to raise_error RuntimeError, 'Invalid transaction request id'
       end
 
       context 'there are no applicants returned' do
-        let(:parser) { described_class.new('20190301030405123456', no_results_response_xml) }
+        let(:parser) { described_class.new(expected_tx_id, no_results_response_xml) }
 
         before { parser.parse }
 
@@ -29,7 +30,7 @@ module CCMS
       end
 
       context 'there is one applicant returned' do
-        let(:parser) { described_class.new('20190301030405123456', one_result_response_xml) }
+        let(:parser) { described_class.new(expected_tx_id, one_result_response_xml) }
 
         before { parser.parse }
 
@@ -43,7 +44,7 @@ module CCMS
       end
 
       context 'there are multiple applicants returned' do
-        let(:parser) { described_class.new('20190301030405123456', multiple_results_response_xml) }
+        let(:parser) { described_class.new(expected_tx_id, multiple_results_response_xml) }
 
         before { parser.parse }
 
