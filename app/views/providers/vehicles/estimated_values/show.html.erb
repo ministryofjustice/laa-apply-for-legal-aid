@@ -1,1 +1,20 @@
-Foo
+<%= page_template page_title: t('.heading'), template: :basic do %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_vehicles_estimated_value_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+    <%= govuk_form_group show_error_if: @form.errors.present? do %>
+      <%= govuk_fieldset_header page_heading, padding_below: 0 %>
+      <%= form.govuk_text_field(
+            :estimated_value,
+            hint: t('.use_car_valuation_sites'),
+            label: nil,
+            input_prefix: t('currency.gbp')
+          ) %>
+      <div class="govuk-!-padding-bottom-4"></div>
+      <%= next_action_buttons(form: form) %>
+    <% end  %>
+  <% end %>
+<% end %>

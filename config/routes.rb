@@ -101,13 +101,12 @@ Rails.application.routes.draw do
       resource :about_the_financial_assessment, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
-      resource :vehicle, only: %i[show create] do
-        namespace :vehicles, path: '' do
-          resource :estimated_value, only: %i[show update]
-          resource :remaining_payments, only: %i[show update]
-          resource :purchase_date, only: %i[show update]
-          resource :regular_use, only: %i[show update]
-        end
+      resource :vehicle, only: %i[show create]
+      namespace :vehicles do
+        resource :estimated_value, only: %i[show update]
+        resource :remaining_payments, only: %i[show update]
+        resource :purchase_date, only: %i[show update]
+        resource :regular_use, only: %i[show update]
       end
       resource :savings_and_investment, only: %i[show update]
       resource :shared_ownership, only: %i[show update]

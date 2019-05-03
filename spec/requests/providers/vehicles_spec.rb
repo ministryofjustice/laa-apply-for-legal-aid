@@ -19,7 +19,6 @@ RSpec.describe Providers::VehiclesController, type: :request do
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
-
   end
 
   describe 'POST /providers/applications/:legal_aid_application_id/vehicle' do
@@ -51,7 +50,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
     context 'with option "yes"' do
       let(:option) { 'yes' }
       let(:target_url) do
-        providers_legal_aid_application_vehicle_vehicles_estimated_value_path(legal_aid_application)
+        providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application)
       end
 
       it 'creates a vehicle' do

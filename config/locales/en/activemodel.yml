@@ -278,3 +278,9 @@ en:
               no_file_chosen: You must choose at least one file
             statement:
               blank: Enter the statement of case
+        vehicle:
+          attributes:
+            estimated_value:
+              blank: Enter the estimated value of the vehicle
+              not_a_number: Estimated value must be an amount of money, like 5,000
+              greater_than_or_equal_to: Estimated value must be 0 or more

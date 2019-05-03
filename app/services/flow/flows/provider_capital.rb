@@ -46,10 +46,14 @@ module Flow
         },
         vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
-          forward: ->(application) { application&.vehicle&.persisted? ? :estimated_values : :savings_and_investments }
+          forward: ->(application) { application&.vehicle&.persisted? ? :vehicles_estimated_values : :savings_and_investments }
         },
-        estimated_values: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicle_vehicles_estimated_value_path(application) }
+        vehicles_estimated_values: {
+          path: ->(application) { urls.providers_legal_aid_application_vehicles_estimated_value_path(application) },
+          forward: ->(application) { :vehicles_remaining_payments }
+        },
+        vehicles_remaining_payments: {
+          path: ->(application) { urls.providers_legal_aid_application_vehicles_remaining_payments_path(application) }
         },
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
