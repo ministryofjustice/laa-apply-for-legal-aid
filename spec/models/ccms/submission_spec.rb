@@ -64,9 +64,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
 
         context 'operation in error' do
+          let(:requestor_double) { double ReferenceDataRequestor }
           before do
-            requestor_double = double ReferenceDataRequestor
-            allow(requestor_double).to receive(:transaction_request_id).and_return('876876878')
+            allow(requestor_double).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
             allow(submission).to receive(:reference_data_requestor).and_return(requestor_double)
             expect(requestor_double).to receive(:call).and_raise(RuntimeError, 'oops')
           end
@@ -166,9 +166,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'operation in error' do
           context 'error when searching for applicant' do
+            let(:requestor_double) { double ApplicantSearchRequestor }
             before do
-              requestor_double = double ApplicantSearchRequestor
-              allow(requestor_double).to receive(:transaction_request_id).and_return('876876878')
+              allow(requestor_double).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
               allow(submission).to receive(:applicant_search_requestor).and_return(requestor_double)
               expect(requestor_double).to receive(:call).and_raise(RuntimeError, 'oops when searching')
             end
@@ -198,7 +198,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               expect(applicant_search_requestor_double).to receive(:call).and_return(applicant_search_response)
               expect(applicant_search_requestor_double).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
               applicant_add_requestor_double = double ApplicantAddRequestor
-              allow(applicant_add_requestor_double).to receive(:transaction_request_id).and_return('876876878')
+              allow(applicant_add_requestor_double).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
               allow(submission).to receive(:applicant_add_requestor).and_return(applicant_add_requestor_double)
               expect(applicant_add_requestor_double).to receive(:call).and_raise(RuntimeError, 'oops when adding')
             end
