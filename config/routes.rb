@@ -104,7 +104,7 @@ Rails.application.routes.draw do
       resource :vehicle, only: %i[show create]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
-        resource :remaining_payments, only: %i[show update]
+        resource :remaining_payment, only: %i[show update]
         resource :purchase_date, only: %i[show update]
         resource :regular_use, only: %i[show update]
       end

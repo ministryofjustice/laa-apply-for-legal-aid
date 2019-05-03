@@ -2,6 +2,13 @@ module Flowable
   extend ActiveSupport::Concern
 
   class_methods do
+    # Use a step prefix to avoid step name clashes.
+    # For example:
+    #
+    #    class BarsController < ProviderBaseController
+    #      prefix_step_with :foo
+    #
+    # With this modification step name will be :foo_bars rather than :bars
     def prefix_step_with(prefix)
       @step_prefix = prefix
     end
@@ -14,7 +21,6 @@ module Flowable
   included do
     delegate :forward_path, to: :flow_service
     helper_method :forward_path
-
 
     def go_forward
       if path?(forward_path)

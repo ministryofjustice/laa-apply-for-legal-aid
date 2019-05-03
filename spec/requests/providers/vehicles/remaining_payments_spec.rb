@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
+RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
   let(:vehicle) { legal_aid_application.vehicle }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/vehicle/estimated_value' do
+  describe 'GET /providers/applications/:legal_aid_application_id/vehicle/remaining_payment' do
     subject do
-      get providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application)
+      get providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application)
     end
 
     it 'renders successfully' do
@@ -24,21 +24,29 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/vehicle/estimated_value' do
-    let(:estimated_value) { Faker::Commerce.price(2000..10_000) }
-    let(:params) { { vehicle: { estimated_value: estimated_value } } }
-    let(:next_url) { providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application) }
+  describe 'PATCH /providers/applications/:legal_aid_application_id/vehicle/remaining_payment' do
+    let(:payment_remaining) { Faker::Commerce.price(100..2000) }
+    let(:payments_remain) { 'true' }
+    let(:params) do
+      {
+        vehicle: {
+          payment_remaining: payment_remaining,
+          payments_remain: payments_remain
+        }
+      }
+    end
+    let(:next_url) { providers_legal_aid_application_vehicles_purchase_date_path(legal_aid_application) }
 
     subject do
       patch(
-        providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application),
+        providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application),
         params: params
       )
     end
 
     it 'updates vehicle' do
       subject
-      expect(vehicle.reload.estimated_value).to eq(estimated_value)
+      expect(vehicle.reload.payment_remaining).to eq(payment_remaining)
     end
 
     it 'redirects to next step' do
@@ -47,7 +55,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
     end
 
     context 'without value' do
-      let(:estimated_value) { '' }
+      let(:payment_remaining) { '' }
 
       it 'renders successfully' do
         subject
@@ -55,18 +63,18 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
       end
 
       it 'does not modify vehicle' do
-        expect { subject }.not_to change { vehicle.reload.estimated_value }
+        expect { subject }.not_to change { vehicle.reload.payment_remaining }
       end
 
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Enter the estimated value of the vehicle')
+        expect(response.body).to include('Enter the amount left to pay')
       end
     end
 
     context 'with a non-numeric value' do
-      let(:estimated_value) { 'not a number' }
+      let(:payment_remaining) { 'not a number' }
 
       it 'renders successfully' do
         subject
@@ -74,13 +82,13 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
       end
 
       it 'does not modify vehicle' do
-        expect { subject }.not_to change { vehicle.reload.estimated_value }
+        expect { subject }.not_to change { vehicle.reload.payment_remaining }
       end
 
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Estimated value must be an amount of money, like 5,000')
+        expect(response.body).to include('The amount left to pay must be an amount of money, like 5,000')
       end
     end
 
