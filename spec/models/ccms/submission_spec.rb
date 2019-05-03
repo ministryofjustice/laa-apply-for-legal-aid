@@ -32,7 +32,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'initialised state' do
-        let(:submission) { create :submission, :initialised, legal_aid_application: legal_aid_application }
+        let(:submission) { create :submission, legal_aid_application: legal_aid_application }
         context 'operation successful' do
           let(:response) { ccms_data_from_file 'reference_data_response.xml' }
           let(:requestor) { ReferenceDataRequestor.new }
