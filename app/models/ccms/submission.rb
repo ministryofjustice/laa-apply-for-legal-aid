@@ -134,7 +134,7 @@ module CCMS
     end
 
     def format_exception(error)
-      "#{error.class}\n#{error.message}\n#{error.backtrace.join("\n")}"
+      [error.class, error.message, error.backtrace].flatten.join("\n")
     end
   end
 end
