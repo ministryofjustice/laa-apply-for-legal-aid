@@ -5,18 +5,19 @@ module CCMS
     let(:expected_xml) { ccms_data_from_file 'applicant_add_request.xml' }
 
     let(:address) do
-      double Address,
-             first_lines: '102 Petty France',
+      create(:address,
+             address_line_one: '102',
+             address_line_two: 'Petty France',
              city: 'London',
-             pretty_postcode: 'SW1H 9AJ'
+             postcode: 'SW1H9AJ')
     end
 
     let(:applicant) do
-      double Applicant,
+      create(:applicant,
              address: address,
              first_name: 'lenovo',
              last_name: 'Hurlock',
-             date_of_birth: Date.new(1969, 1, 1)
+             date_of_birth: Date.new(1969, 1, 1))
     end
 
     describe 'XML request' do

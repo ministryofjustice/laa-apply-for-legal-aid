@@ -4,11 +4,11 @@ module CCMS
   RSpec.describe ApplicantSearchRequestor do
     let(:expected_xml) { ccms_data_from_file 'applicant_search_request.xml' }
     let(:applicant) do
-      double Applicant,
+      create(:applicant,
              first_name: 'lenovo',
              last_name: 'hurlock',
              date_of_birth: Date.new(1969, 1, 1),
-             national_insurance_number: 'YS327299B'
+             national_insurance_number: 'YS327299B')
     end
 
     describe 'XML request' do
