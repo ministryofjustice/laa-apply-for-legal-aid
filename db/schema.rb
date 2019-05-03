@@ -171,6 +171,17 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
+  create_table "ccms_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "submission_id", null: false
+    t.string "from_state"
+    t.string "to_state"
+    t.boolean "success"
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submission_id"], name: "index_ccms_submission_histories_on_submission_id"
+  end
+
   create_table "ccms_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "applicant_ccms_reference"
@@ -386,17 +397,6 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
   end
 
-  create_table "submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "submission_id", null: false
-    t.string "from_state"
-    t.string "to_state"
-    t.boolean "success"
-    t.text "details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["submission_id"], name: "index_submission_histories_on_submission_id"
-  end
-
   create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "operation"
@@ -416,6 +416,7 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
   add_foreign_key "bank_providers", "applicants"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
+  add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications"
   add_foreign_key "legal_aid_application_restrictions", "legal_aid_applications"
   add_foreign_key "legal_aid_application_restrictions", "restrictions"
@@ -426,5 +427,4 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
-  add_foreign_key "submission_histories", "ccms_submissions", column: "submission_id"
 end
