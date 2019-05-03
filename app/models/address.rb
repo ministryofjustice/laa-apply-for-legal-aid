@@ -29,6 +29,10 @@ class Address < ApplicationRecord
     postcode.insert(-4, ' ')
   end
 
+  def first_lines
+    [address_line_one, address_line_two].select(&:present?).join(' ')
+  end
+
   def to_json(*_args)
     {
       organisation: organisation,

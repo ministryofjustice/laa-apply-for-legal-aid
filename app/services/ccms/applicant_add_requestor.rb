@@ -58,7 +58,7 @@ module CCMS
     end
 
     def address(xml)
-      xml.__send__('ns4:AddressLine1', @address.address_line_one + ' ' + @address.address_line_two)
+      xml.__send__('ns4:AddressLine1', @address.first_lines)
       xml.__send__('ns4:City', @address.city)
       xml.__send__('ns4:Country', 'GBR')
       xml.__send__('ns4:PostalCode', @address.pretty_postcode)

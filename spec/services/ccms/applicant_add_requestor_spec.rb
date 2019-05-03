@@ -6,8 +6,7 @@ module CCMS
 
     let(:address) do
       double Address,
-             address_line_one: '102',
-             address_line_two: 'Petty France',
+             first_lines: '102 Petty France',
              city: 'London',
              pretty_postcode: 'SW1H 9AJ'
     end
