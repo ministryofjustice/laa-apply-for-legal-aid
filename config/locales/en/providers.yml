@@ -353,6 +353,10 @@ en:
       purchase_dates:
         show:
           heading: When did your client buy the vehicle?
+      regular_uses:
+        show:
+          heading: Is the vehicle in regular use?
+          include_partner_use: This includes use by your client's partner (if they have one).
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?

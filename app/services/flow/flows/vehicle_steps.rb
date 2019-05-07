@@ -19,7 +19,8 @@ module Flow
           forward: ->(_application) { :vehicles_regular_uses }
         },
         vehicles_regular_uses: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicles_regular_use_path(application) }
+          path: ->(application) { urls.providers_legal_aid_application_vehicles_regular_use_path(application) },
+          forward: ->(_application) { :savings_and_investments }
         }
       }.freeze
     end

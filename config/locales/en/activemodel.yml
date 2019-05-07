@@ -298,3 +298,5 @@ en:
               blank: Enter a valid date
               date_not_valid: Enter a valid date
               date_is_in_the_future: Date your client bought the vehicle must be in the past
+            used_regularly:
+              blank: Select yes if the vehicle is in regular use
