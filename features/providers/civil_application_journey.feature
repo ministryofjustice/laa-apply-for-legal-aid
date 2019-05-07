@@ -361,15 +361,11 @@ Feature: Civil application journeys
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I click 'Save and continue'
-    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
-    Then I fill "Estimated legal cost" with "1000"
-    Then I click 'Save and continue'
     Then I should be on a page showing "What are the prospects of success?"
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    And the answer for 'Estimated legal costs' should be "£1,000.00"
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
@@ -462,9 +458,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"
     Then I click 'Save and continue'
-    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
-    Then I fill "Estimated legal cost" with "1000"
-    Then I click 'Save and continue'
     Then I should be on a page showing "What are the prospects of success?"
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
@@ -475,12 +468,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
-    Then I click Check Your Answers Change link for 'Estimated legal costs'
-    Then I should be on a page showing "What are the estimated legal costs of doing the work?"
-    Then I fill "Estimated legal cost" with "2345"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Check your answers"
-    And the answer for 'Estimated legal costs' should be "£2,345.00"
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
