@@ -40,6 +40,10 @@ en:
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home
+      vehicle:
+        purchased_on_day: Day
+        purchased_on_month: Month
+        purchased_on_year: Year
     errors:
       messages:
         earliest_allowed_date: Date cannot be before %{date}
@@ -290,3 +294,7 @@ en:
               greater_than_or_equal_to: The amount left to page must be 0 or more
             payments_remain:
               blank: Select yes if there are any payments left on the vehicle
+            purchased_on:
+              blank: Enter a valid date
+              date_not_valid: Enter a valid date
+              date_is_in_the_future: Date your client bought the vehicle must be in the past

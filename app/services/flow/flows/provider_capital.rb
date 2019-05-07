@@ -44,21 +44,7 @@ module Flow
           forward: ->(application) { application.checking_answers? ? :restrictions : :vehicles },
           carry_on_sub_flow: true
         },
-        vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
-          forward: ->(application) { application&.vehicle&.persisted? ? :vehicles_estimated_values : :savings_and_investments }
-        },
-        vehicles_estimated_values: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicles_estimated_value_path(application) },
-          forward: ->(_application) { :vehicles_remaining_payments }
-        },
-        vehicles_remaining_payments: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicles_remaining_payment_path(application) },
-          forward: ->(_application) { :vehicles_purchase_dates }
-        },
-        vehicles_purchase_dates: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicles_purchase_date_path(application) }
-        },
+        # Vehicle steps here (see VehicleSteps)
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
           forward: ->(application) { application.checking_answers? ? :restrictions : :other_assets },

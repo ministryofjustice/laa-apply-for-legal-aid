@@ -350,6 +350,9 @@ en:
         show:
           heading: What is the estimated value of the vehicle?
           use_car_valuation_sites: You can use car valuation websites to find this out.
+      purchase_dates:
+        show:
+          heading: When did your client buy the vehicle?
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?

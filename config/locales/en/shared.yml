@@ -25,6 +25,7 @@ en:
         occurred_on_hint: For example 31 3 2019
         occurred_on_label: When did the incident occur?
         told_on_hint: For example 31 3 2019
+        purchased_on_hint: For example, 31 3 1980.
       outstanding_mortgage_form:
         citizens:
           outstanding_mortgages:
