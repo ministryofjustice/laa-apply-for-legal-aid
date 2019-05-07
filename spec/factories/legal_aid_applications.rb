@@ -118,6 +118,10 @@ FactoryBot.define do
       vehicle
     end
 
+    trait :with_incident do
+      latest_incident { create :incident }
+    end
+
     trait :with_everything do
       with_applicant
       provider_submitted
@@ -131,6 +135,7 @@ FactoryBot.define do
       with_merits_assessment
       with_merits_statement_of_case
       with_respondent
+      with_incident
     end
 
     trait :with_negative_benefit_check_result do

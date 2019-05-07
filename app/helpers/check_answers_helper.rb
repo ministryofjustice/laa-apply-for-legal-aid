@@ -23,6 +23,15 @@ module CheckAnswersHelper
     )
   end
 
+  def check_answer_no_link_bold(question:, answer:, name:)
+    render(
+      'shared/check_answers/no_link_item_bold',
+      name: name,
+      question: question,
+      answer: answer
+    )
+  end
+
   # Creates both the outer `dl` and the inner list items
   def check_answer_one_change_link(url:, question:, answer_hash:, name:)
     render(
@@ -31,6 +40,15 @@ module CheckAnswersHelper
       url: url,
       question: question,
       answer_hash: answer_hash
+    )
+  end
+
+  def check_answer_change_link(name:, url:, question:)
+    render(
+      'shared/check_answers/test_section',
+      name: name,
+      url: url,
+      question: question
     )
   end
 
