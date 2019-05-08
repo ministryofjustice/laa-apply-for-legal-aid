@@ -3,7 +3,7 @@ module CCMS
     def call
       response = applicant_add_requestor.call
       if applicant_add_response_parser(response).success?
-        submission.applicant_add_tx_id = applicant_add_requestor.transaction_request_id
+        submission.applicant_add_transaction_id = applicant_add_requestor.transaction_request_id
         create_history(submission.aasm_state, :applicant_submitted)
         submission.submit_applicant!
       else

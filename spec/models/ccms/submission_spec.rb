@@ -48,6 +48,16 @@ module CCMS
           submission.process!
         end
       end
+
+      context 'applicant_submitted state' do
+        let(:sub) { create :submission, :applicant_submitted }
+        let(:check_applicant_status_service_double) { CheckApplicantStatusService.new(sub) }
+        it 'calls the obtain_applicant_reference service' do
+          expect(CheckApplicantStatusService).to receive(:new).with(sub).and_return(check_applicant_status_service_double)
+          expect(check_applicant_status_service_double).to receive(:call)
+          sub.process!
+        end
+      end
     end
   end
 end

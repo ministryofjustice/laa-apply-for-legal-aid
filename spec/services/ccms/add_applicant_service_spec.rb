@@ -28,7 +28,7 @@ RSpec.describe CCMS::AddApplicantService do
 
       it 'records the transaction id of the request' do
         subject.call
-        expect(submission.applicant_add_tx_id).to eq transaction_request_id_in_example_response
+        expect(submission.applicant_add_transaction_id).to eq transaction_request_id_in_example_response
       end
 
       it 'writes a history record' do

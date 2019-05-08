@@ -1,5 +1,12 @@
 module CCMS
   class ApplicantAddStatusRequestor < BaseRequestor
+    attr_reader :applicant_add_transaction_id
+
+    def initialize(applicant_add_transaction_id)
+      @applicant_add_transaction_id = applicant_add_transaction_id
+      super()
+    end
+
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call
@@ -16,7 +23,7 @@ module CCMS
     def soap_body(xml)
       xml.__send__('ns2:ClientAddUpdtStatusRQ') do
         xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
-        xml.__send__('ns2:TransactionID', '20190101121530123456') # this needs to be the transaction id of the create client request
+        xml.__send__('ns2:TransactionID', applicant_add_transaction_id)
       end
     end
 
