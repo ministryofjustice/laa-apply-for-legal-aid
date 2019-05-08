@@ -8,7 +8,7 @@ module CCMS
 
     validates :legal_aid_application_id, presence: true
 
-    POLL_LIMIT = 10.freeze
+    POLL_LIMIT = 10
 
     def process!
       case aasm_state

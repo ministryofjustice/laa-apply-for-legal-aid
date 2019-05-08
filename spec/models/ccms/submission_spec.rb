@@ -2,19 +2,19 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe Submission do
-    let(:sub) { create :submission }
+    let(:submission) { create :submission }
 
     context 'Validations' do
       it 'errors if no legal aid application id is present' do
-        sub.legal_aid_application = nil
-        expect(sub).not_to be_valid
-        expect(sub.errors[:legal_aid_application_id]).to eq ["can't be blank"]
+        submission.legal_aid_application = nil
+        expect(submission).not_to be_valid
+        expect(submission.errors[:legal_aid_application_id]).to eq ["can't be blank"]
       end
     end
 
     describe 'initial state' do
       it 'puts new records into the initial state' do
-        expect(sub.aasm_state).to eq 'initialised'
+        expect(submission.aasm_state).to eq 'initialised'
       end
     end
 
@@ -23,19 +23,19 @@ module CCMS
 
       context 'invalid state' do
         it 'raises if state is invalid' do
-          sub.aasm_state = 'xxxxx'
+          submission.aasm_state = 'xxxxx'
           expect {
-            sub.process!
+            submission.process!
           }.to raise_error CcmsError, 'Unknown state'
         end
       end
 
       context 'initialised state' do
-        let(:obtain_case_reference_service_double) { ObtainCaseReferenceService.new(sub) }
+        let(:obtain_case_reference_service_double) { ObtainCaseReferenceService.new(submission) }
         it 'calls the obtain_case_reference service' do
-          expect(ObtainCaseReferenceService).to receive(:new).with(sub).and_return(obtain_case_reference_service_double)
+          expect(ObtainCaseReferenceService).to receive(:new).with(submission).and_return(obtain_case_reference_service_double)
           expect(obtain_case_reference_service_double).to receive(:call)
-          sub.process!
+          submission.process!
         end
       end
 
@@ -50,12 +50,12 @@ module CCMS
       end
 
       context 'applicant_submitted state' do
-        let(:sub) { create :submission, :applicant_submitted }
-        let(:check_applicant_status_service_double) { CheckApplicantStatusService.new(sub) }
+        let(:submission) { create :submission, :applicant_submitted }
+        let(:check_applicant_status_service_double) { CheckApplicantStatusService.new(submission) }
         it 'calls the obtain_applicant_reference service' do
-          expect(CheckApplicantStatusService).to receive(:new).with(sub).and_return(check_applicant_status_service_double)
+          expect(CheckApplicantStatusService).to receive(:new).with(submission).and_return(check_applicant_status_service_double)
           expect(check_applicant_status_service_double).to receive(:call)
-          sub.process!
+          submission.process!
         end
       end
     end
