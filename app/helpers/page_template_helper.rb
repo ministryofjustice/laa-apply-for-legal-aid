@@ -38,14 +38,14 @@ module PageTemplateHelper
   #   <% end %>
   #
   def page_template( # rubocop:disable Metrics/ParameterLists Metrics/MethodLength
-        page_title:,
-        back_link: {},
-        column_width: 'two-thirds',
-        template: nil,
-        show_errors_for: @form,
-        page_heading_options: {},
-        &content
-      )
+    page_title:,
+    back_link: {},
+    column_width: 'two-thirds',
+    template: nil,
+    show_errors_for: @form,
+    page_heading_options: {},
+    &content
+  )
     template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { back_link(back_link) unless back_link == :none }
     content_for(:page_title) { page_title }
