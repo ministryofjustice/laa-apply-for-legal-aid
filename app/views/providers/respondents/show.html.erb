@@ -28,8 +28,9 @@
       end
 
       bail_conditions_titles = {
-        'yes' => t('.bail_conditions_set_yes'),
-        'no' => t('.bail_conditions_set_no')
+        yes: t('.bail_conditions_set_yes'),
+        no: t('.bail_conditions_set_no'),
+        blank_error: t('.bail_conditions_set_blank')
       }
     %>
     <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form, bail_conditions_titles: bail_conditions_titles } %>

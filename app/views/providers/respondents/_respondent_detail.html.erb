@@ -19,9 +19,10 @@
               question.attribute_details,
               id: question.attribute_details,
               rows: 5,
-              label: bail_conditions_titles['yes'],
-              'data-bail-conditions-yes' => bail_conditions_titles['yes'],
-              'data-bail-conditions-no' => bail_conditions_titles['no']
+              label: bail_conditions_titles[:yes],
+              'data-bail-conditions-yes' => bail_conditions_titles[:yes],
+              'data-bail-conditions-no' => bail_conditions_titles[:no],
+              'data-bail-conditions-blank-error' => bail_conditions_titles[:blank_error]
             ) %>
       <% else %>
         <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>

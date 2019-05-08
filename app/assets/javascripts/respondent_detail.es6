@@ -1,31 +1,39 @@
 $(document).ready(() => {
   if ($("#bail_conditions_set").length) {
-    const bailConditionOptions = "input[type = radio][name = 'respondent[bail_conditions_set]']";
-    $(bailConditionOptions).on("change", setBailConditionsLabel);
-    setBailConditionsLabel();
-    if($('#bail_conditions_set_details-error').length) updateError();
-  };
+    $("input[type=radio][name='respondent[bail_conditions_set]']").on("change", () => {
+      setBailConditionsLabel()
+      updateError()
+    })
+    setBailConditionsLabel()
+    updateError()
 
-  function setBailConditionsLabel() {
-    const bailConditionsLabel = "label[for='bail_conditions_set_details']";
-    $(bailConditionsLabel).text($('#bail_conditions_set_details').attr(`data-bail-conditions-${selectedBailOption()}`));
-  }
+    function selectedBailConditionsLabel() {
+      const optionChecked = selectedBailCondition()
+      if (optionChecked.val() == 'false') {
+        return $('#bail_conditions_set_details').data('bail-conditions-no')
+      }
+      else {
+        return $('#bail_conditions_set_details').data('bail-conditions-yes')
+      }
+    }
 
-  function selectedBailOption(){
-    let optionChecked = "input[type = radio][name = 'respondent[bail_conditions_set]']:checked";
-    let optionValue = $(optionChecked).val() == 'false' ? 'no' : 'yes'
-    return optionValue
-  }
+    function selectedBailCondition(){
+      return $("input[type=radio][name='respondent[bail_conditions_set]']:checked")
+    }
 
-  function updateError(){
-    if ($('#bail_conditions_set_details-error').length && selectedBailOption() == 'no'){
-      $('#bail_conditions_set_details-error').text($('#bail_conditions_set_details').attr(`data-bail-conditions-no`));
-      updateErrorSummary();
+    function setBailConditionsLabel() {
+      $("label[for='bail_conditions_set_details']").text(selectedBailConditionsLabel())
+    }
+
+    function updateError() {
+      if (!$('#bail_conditions_set_details-error').length) return
+
+      let label = selectedBailConditionsLabel()
+      if (selectedBailCondition().val() != 'false') {
+        label = $('#bail_conditions_set_details').data('bail-conditions-blank-error')
+      }
+      $('#bail_conditions_set_details-error').text(label)
+      $('[href="#bail_conditions_set_details"]').text(label)
     }
   }
-
-  function updateErrorSummary(){
-    const errorSummaryListText = $(document.body.querySelectorAll('*[href="#bail_conditions_set_details"]')[0]);
-    errorSummaryListText.text($('#bail_conditions_set_details').attr(`data-bail-conditions-no`));
-  }
-});
+})
