@@ -30,11 +30,12 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
       { used_regularly: used_regularly.to_s }
     end
     let(:next_url) { providers_legal_aid_application_savings_and_investment_path(legal_aid_application) }
+    let(:submit_button) { {} }
 
     subject do
       patch(
         providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application),
-        params: params
+        params: params.merge(submit_button)
       )
     end
 
@@ -78,6 +79,41 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
         subject
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include('Select yes if the vehicle is in regular use')
+      end
+    end
+
+    context 'Form submitted using Save as draft button' do
+      let(:submit_button) { { draft_button: 'Save as draft' } }
+
+      it "redirects provider to provider's applications page" do
+        subject
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'sets the application as draft' do
+        expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+      end
+
+      it 'updates vehicle' do
+        subject
+        expect(vehicle.reload).to be_used_regularly
+      end
+
+      context 'with blank entry' do
+        let(:used_regularly) { '' }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+        end
+
+        it 'leaves value blank' do
+          expect(vehicle.reload.used_regularly).to be_blank
+        end
       end
     end
 

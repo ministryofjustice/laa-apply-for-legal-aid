@@ -20,6 +20,14 @@ module VehicleForm
       @purchased_on = attributes[:purchased_on] = Date.new(*date_values.map(&:to_i))
     end
 
+    def initialize(*args)
+      super
+      set_instance_variables_for_attributes_if_not_set_but_in_model(
+        attrs: DATE_PARTS,
+        model_attributes: purchased_on_from_model
+      )
+    end
+
     private
 
     def date_values
@@ -28,6 +36,16 @@ module VehicleForm
 
     def exclude_from_model
       DATE_PARTS
+    end
+
+    def purchased_on_from_model
+      return unless model.purchased_on?
+
+      {
+        purchased_on_year: model.purchased_on.year,
+        purchased_on_month: model.purchased_on.month,
+        purchased_on_day: model.purchased_on.day
+      }
     end
 
     def incomplete_date

@@ -6,6 +6,6 @@ module VehicleForm
 
     attr_accessor :used_regularly
 
-    validates :used_regularly, presence: true
+    validates :used_regularly, presence: { unless: :draft? }
   end
 end

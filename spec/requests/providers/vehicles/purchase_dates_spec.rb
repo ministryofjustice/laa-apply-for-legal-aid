@@ -17,6 +17,25 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
       expect(response).to have_http_status(:ok)
     end
 
+    context 'with an existing purchase date' do
+      let(:purchase_date) { 5.days.ago.to_date }
+      let(:vehicle) { create :vehicle, purchased_on: purchase_date }
+      let(:legal_aid_application) { create :legal_aid_application, vehicle: vehicle  }
+
+      it 'renders successfully' do
+        subject
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'page includes date' do
+        subject
+        expect(response.body).to include(purchase_date.year.to_s)
+        expect(response.body).to include(purchase_date.month.to_s)
+        expect(response.body).to include(purchase_date.day.to_s)
+      end
+
+    end
+
     context 'when the provider is not authenticated' do
       let(:login) { nil }
       before { subject }
@@ -37,11 +56,12 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
       }
     end
     let(:next_url) { providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application) }
+    let(:submit_button) { {} }
 
     subject do
       patch(
         providers_legal_aid_application_vehicles_purchase_date_path(legal_aid_application),
-        params: params
+        params: params.merge(submit_button)
       )
     end
 
@@ -99,6 +119,50 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
         subject
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include('Date your client bought the vehicle must be in the past')
+      end
+    end
+
+    context 'Form submitted using Save as draft button' do
+      let(:submit_button) { { draft_button: 'Save as draft' } }
+
+      it "redirects provider to provider's applications page" do
+        subject
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'sets the application as draft' do
+        expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+      end
+
+      it 'updates vehicle' do
+        subject
+        expect(vehicle.reload.purchased_on).to eq(purchase_date)
+      end
+
+      context 'with blank entry' do
+        let(:params) do
+          {
+            vehicle: {
+              purchased_on_year: '',
+              purchased_on_month: '',
+              purchased_on_day: ''
+
+            }
+          }
+        end
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+        end
+
+        it 'leaves value blank' do
+          expect(vehicle.reload.purchased_on).to be_blank
+        end
       end
     end
 

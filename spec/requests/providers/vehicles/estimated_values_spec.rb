@@ -28,11 +28,12 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
     let(:estimated_value) { Faker::Commerce.price(2000..10_000) }
     let(:params) { { vehicle: { estimated_value: estimated_value } } }
     let(:next_url) { providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application) }
+    let(:submit_button) { {} }
 
     subject do
       patch(
         providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application),
-        params: params
+        params: params.merge(submit_button)
       )
     end
 
@@ -81,6 +82,41 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
         subject
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include('Estimated value must be an amount of money, like 5,000')
+      end
+    end
+
+    context 'Form submitted using Save as draft button' do
+      let(:submit_button) { { draft_button: 'Save as draft' } }
+
+      it "redirects provider to provider's applications page" do
+        subject
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'sets the application as draft' do
+        expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+      end
+
+      it 'updates vehicle' do
+        subject
+        expect(vehicle.reload.estimated_value).to eq(estimated_value)
+      end
+
+      context 'with blank entry' do
+        let(:estimated_value) { '' }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+        end
+
+        it 'leaves value blank' do
+          expect(vehicle.reload.estimated_value).to be_blank
+        end
       end
     end
 

@@ -10,7 +10,7 @@ module VehicleForm
     validates(
       :payment_remaining,
       currency: { greater_than_or_equal_to: 0, allow_blank: true },
-      presence: true,
+      presence: { unless: :draft? },
       if: :payments_remain?
     )
 
