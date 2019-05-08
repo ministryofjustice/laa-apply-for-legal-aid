@@ -58,6 +58,16 @@ module CCMS
           submission.process!
         end
       end
+
+      context 'applicant_ref_obtained state' do
+        let(:submission) { create :submission, :applicant_ref_obtained }
+        let(:add_case_service_double) { AddCaseService.new(submission) }
+        it 'calls the add_case service' do
+          expect(AddCaseService).to receive(:new).with(submission).and_return(add_case_service_double)
+          expect(add_case_service_double).to receive(:call)
+          submission.process!
+        end
+      end
     end
   end
 end

@@ -18,6 +18,8 @@ module CCMS
         ObtainApplicantReferenceService.new(self).call
       when 'applicant_submitted'
         CheckApplicantStatusService.new(self).call
+      when 'applicant_ref_obtained'
+        AddCaseService.new(self).call
       else
         raise CcmsError, 'Unknown state'
       end

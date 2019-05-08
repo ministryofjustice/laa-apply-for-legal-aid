@@ -9,6 +9,10 @@ module CCMS
       extracted_status
     end
 
+    def success?
+      parse == 'Success'
+    end
+
     private
 
     def extracted_transaction_request_id

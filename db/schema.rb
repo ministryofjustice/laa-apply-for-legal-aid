@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_094442) do
     t.datetime "updated_at", null: false
     t.string "applicant_add_transaction_id"
     t.integer "poll_count", default: 0
+    t.string "case_add_transaction_id"
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
   end
 
