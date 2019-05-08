@@ -18,12 +18,17 @@ RSpec.describe CCMS::AddApplicantService do
 
       before do
         expect(applicant_add_requestor).to receive(:call).and_return(applicant_add_response)
-        expect(applicant_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+        allow(applicant_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
       end
 
       it 'sets state to applicant_submitted' do
         subject.call
         expect(submission.aasm_state).to eq 'applicant_submitted'
+      end
+
+      it 'records the transaction id of the request' do
+        subject.call
+        expect(submission.applicant_add_tx_id).to eq transaction_request_id_in_example_response
       end
 
       it 'writes a history record' do
