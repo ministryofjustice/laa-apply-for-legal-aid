@@ -1,10 +1,10 @@
 module FlowHelper
   def next_action_buttons_with_form(
-        url:,
-        method: :post,
-        show_draft: false,
-        continue_button_text: t('generic.save_and_continue')
-      )
+    url:,
+    method: :post,
+    show_draft: false,
+    continue_button_text: t('generic.save_and_continue')
+  )
 
     form_with(model: nil, url: url, method: method, local: true) do |form|
       next_action_buttons(
@@ -16,11 +16,11 @@ module FlowHelper
   end
 
   def next_action_buttons(
-        form:,
-        continue_id: :continue,
-        show_draft: false,
-        continue_button_text: t('generic.save_and_continue')
-      )
+    form:,
+    continue_id: :continue,
+    show_draft: false,
+    continue_button_text: t('generic.save_and_continue')
+  )
 
     render(
       'shared/forms/next_action_buttons',
