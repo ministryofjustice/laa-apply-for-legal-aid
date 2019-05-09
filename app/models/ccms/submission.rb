@@ -15,7 +15,7 @@ module CCMS
       when 'case_ref_obtained'
         ObtainApplicantReferenceService.new(self).call
       else
-        raise 'Unknown state'
+        raise CcmsError, 'Unknown state'
       end
     end
   end

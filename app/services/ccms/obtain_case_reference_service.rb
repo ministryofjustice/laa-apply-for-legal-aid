@@ -6,7 +6,7 @@ module CCMS
       submission.case_ccms_reference = ReferenceDataResponseParser.new(tx_id, response).parse
       create_history(submission.aasm_state, :case_ref_obtained)
       submission.obtain_case_ref!
-    rescue StandardError => e
+    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
       handle_failure(e)
     end
 

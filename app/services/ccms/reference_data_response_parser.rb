@@ -4,7 +4,7 @@ module CCMS
     RESULTS_PATH = '//Body//ReferenceDataInqRS//Results'.freeze
 
     def parse
-      raise 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
+      raise CcmsError, 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
 
       extracted_reference_id
     end

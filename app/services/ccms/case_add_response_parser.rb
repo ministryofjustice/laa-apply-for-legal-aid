@@ -4,7 +4,7 @@ module CCMS
     STATUS_PATH = '//CaseAddRS//HeaderRS//Status//Status'.freeze
 
     def parse
-      raise 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
+      raise CcmsError, 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
 
       extracted_status
     end

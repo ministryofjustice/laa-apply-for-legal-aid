@@ -26,7 +26,7 @@ module CCMS
           sub.aasm_state = 'xxxxx'
           expect {
             sub.process!
-          }.to raise_error RuntimeError, 'Unknown state'
+          }.to raise_error CcmsError, 'Unknown state'
         end
       end
 
