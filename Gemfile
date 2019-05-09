@@ -79,6 +79,7 @@ group :development, :test do
   gem 'nokogiri'
   gem 'pry-byebug'
   gem 'rubocop', require: false
+  gem 'rubocop-performance'
 
   # Available in dev env for generators
   gem 'rspec-rails', '~> 3.8'
