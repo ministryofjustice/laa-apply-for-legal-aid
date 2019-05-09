@@ -7,7 +7,7 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>f770edb0-ca39-4a17-b7e5-12ae34ea5410</clientReference><nino>JA293483A</nino><surname>SERVICEEXCEPTION</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20190320</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>0798410b-9ed3-432b-bd8d-a95e36ec03e7</clientReference><nino>JA293483A</nino><surname>SERVICEEXCEPTION</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20190509</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
     headers:
       Soapaction:
       - '"check"'
@@ -27,7 +27,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 20 Mar 2019 16:45:02 GMT
+      - Thu, 09 May 2019 14:00:05 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -35,7 +35,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5c926e0e-b7825105aa022d8848ef6f24;
+      - Root=1-5cd43265-9cae604badb3603d0c354024;
       Vary:
       - Accept-Encoding
     body:
@@ -46,7 +46,7 @@ http_interactions:
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">LSCBC959</ns2:MessageCode><ns3:MessageText
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">Service unavailable.</ns3:MessageText></ns1:benefitCheckerFaultException><ns4:exceptionName
         xmlns:ns4="http://xml.apache.org/axis/">uk.gov.lsc.benefitchecker.data._1_0.BenefitCheckerFaultException</ns4:exceptionName><ns5:hostname
-        xmlns:ns5="http://xml.apache.org/axis/">a7ae279cd176</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
+        xmlns:ns5="http://xml.apache.org/axis/">ee806cbf782c</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 16:45:02 GMT
+  recorded_at: Thu, 09 May 2019 14:00:05 GMT
 recorded_with: VCR 4.0.0

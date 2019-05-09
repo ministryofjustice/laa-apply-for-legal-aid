@@ -1,7 +1,7 @@
 class AddressLookupService
   prepend SimpleCommand
 
-  ORDNANCE_SURVEY_URL = 'https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode'.freeze
+  ORDNANCE_SURVEY_URL = 'https://snitest.ordnancesurvey.co.uk/places/v1/addresses/postcode'.freeze
 
   attr_reader :postcode
 

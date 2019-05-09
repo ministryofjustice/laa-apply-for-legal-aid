@@ -7,7 +7,7 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>880e256e-392e-4b7b-a674-e579e4240c21</clientReference><nino>JA293483A</nino><surname>WALKER</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20190320</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>c0923781-e22f-4398-93db-a73ce8a1e191</clientReference><nino>JA293483A</nino><surname>WALKER</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20190509</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
     headers:
       Soapaction:
       - '"check"'
@@ -27,7 +27,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 20 Mar 2019 16:43:10 GMT
+      - Thu, 09 May 2019 14:00:04 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -35,7 +35,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5c926d9e-a0376ca8e9a8eaa00e51236a;
+      - Root=1-5cd43264-b69945a805ff34d4654c3a6c;
       Vary:
       - Accept-Encoding
     body:
@@ -43,9 +43,9 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
-        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">880e256e-392e-4b7b-a674-e579e4240c21</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">c0923781-e22f-4398-93db-a73ce8a1e191</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1553100190760</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1557410404517</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 16:43:10 GMT
+  recorded_at: Thu, 09 May 2019 14:00:04 GMT
 recorded_with: VCR 4.0.0
