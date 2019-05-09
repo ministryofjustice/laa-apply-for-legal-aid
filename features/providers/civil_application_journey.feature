@@ -396,6 +396,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I choose option "exists_no"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I select "Cash savings"
     Then I fill "Cash" with "10000"
@@ -416,6 +419,8 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I click link "Back"
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I click link "Back"
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own their home with anyone else?"
@@ -430,6 +435,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I choose option "exists_no"
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'

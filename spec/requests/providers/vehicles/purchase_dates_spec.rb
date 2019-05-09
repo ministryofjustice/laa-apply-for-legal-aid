@@ -20,7 +20,7 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
     context 'with an existing purchase date' do
       let(:purchase_date) { 5.days.ago.to_date }
       let(:vehicle) { create :vehicle, purchased_on: purchase_date }
-      let(:legal_aid_application) { create :legal_aid_application, vehicle: vehicle  }
+      let(:legal_aid_application) { create :legal_aid_application, vehicle: vehicle }
 
       it 'renders successfully' do
         subject
@@ -33,7 +33,6 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
         expect(response.body).to include(purchase_date.month.to_s)
         expect(response.body).to include(purchase_date.day.to_s)
       end
-
     end
 
     context 'when the provider is not authenticated' do

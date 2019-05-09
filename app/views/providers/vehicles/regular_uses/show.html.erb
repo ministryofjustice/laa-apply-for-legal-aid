@@ -11,10 +11,10 @@
       <%= govuk_radio_inputs(
             :used_regularly,
             {
-              true: t('generic.yes'),
-              false: t('generic.no')
+              'true' => t('generic.yes'),
+              'false' => t('generic.no')
             },
-            selected: (@vehicle.used_regularly.to_s.to_sym unless @vehicle.used_regularly.nil?)
+            selected: (@vehicle.used_regularly.to_s.to_sym unless @vehicle.used_regularly.nil?) # rubocop:disable Style/SafeNavigation - specifically need to check for nil as opposed to false
           ) %>
       <div class="govuk-!-padding-bottom-4"></div>
       <%= next_action_buttons(show_draft: true, form: form) %>
