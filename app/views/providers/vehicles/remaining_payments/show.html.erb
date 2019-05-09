@@ -14,7 +14,7 @@
               true,
               label: t('generic.yes'),
               'data-aria-controls' => 'conditional-true',
-              checked: @form.payments_remain?
+              checked: @form.payments_remain? || @form.model.payment_remaining?
             ) %>
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
           <%= form.govuk_text_field(
