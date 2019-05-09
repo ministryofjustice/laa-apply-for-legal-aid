@@ -25,15 +25,21 @@ $(document).ready(() => {
       $("label[for='bail_conditions_set_details']").text(selectedBailConditionsLabel())
     }
 
+    function selectedBailConditionsError() {
+      if (selectedBailCondition().val() == 'false') {
+        return $('#bail_conditions_set_details').data('bail-conditions-blank-error-no')
+      }
+      else {
+        return $('#bail_conditions_set_details').data('bail-conditions-blank-error-yes')
+      }
+    }
+
     function updateError() {
       if (!$('#bail_conditions_set_details-error').length) return
 
-      let label = selectedBailConditionsLabel()
-      if (selectedBailCondition().val() != 'false') {
-        label = $('#bail_conditions_set_details').data('bail-conditions-blank-error')
-      }
-      $('#bail_conditions_set_details-error').text(label)
-      $('[href="#bail_conditions_set_details"]').text(label)
+      const error = selectedBailConditionsError()
+      $('#bail_conditions_set_details-error').text(error)
+      $('[href="#bail_conditions_set_details"]').text(error)
     }
   }
 })
