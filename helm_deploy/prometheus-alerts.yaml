@@ -60,4 +60,17 @@ spec:
         severity: apply-for-legal-aid-prod
       annotations:
         message: Sidekiq queue size is more than 10 or is not reported
-
+    - alert: DiskSpace-Threshold-Reached
+      expr: container_fs_usage_bytes{namespace="laa-apply-for-legalaid-production"} / 1024 / 1024 > 150 or absent(container_fs_usage_bytes{namespace="laa-apply-for-legalaid-production"})
+      for: 1m
+      labels:
+        severity: apply-for-legal-aid-prod
+      annotations:
+        message: Container disk space usage is more than 150Mb or is not reported
+    - alert: Long-Request
+      expr: ruby_http_duration_seconds{namespace="laa-apply-for-legalaid-production"} > 2
+      for: 1m
+      labels:
+        severity: apply-for-legal-aid-prod
+      annotations:
+        message: Request is taking more than 2 seconds

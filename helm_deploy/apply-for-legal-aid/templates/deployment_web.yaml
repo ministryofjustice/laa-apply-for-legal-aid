@@ -39,12 +39,12 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /status.json
+              path: /status
               port: http
             initialDelaySeconds: 60
           readinessProbe:
             httpGet:
-              path: /status.json
+              path: /status
               port: http
             initialDelaySeconds: 60
           resources:
