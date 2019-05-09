@@ -200,4 +200,6 @@ env:
         key: googleAnalyticsTrackingID
   - name: KUBERNETES_DEPLOYMENT
     value: "true"
+  - name: SERVICE_HOST
+    value: {{ .Release.Name }}
 {{- end }}
