@@ -264,7 +264,7 @@ GEM
     orm_adapter (0.5.0)
     pagy (3.0.0)
     parallel (1.17.0)
-    parser (2.6.2.1)
+    parser (2.6.3.0)
       ast (~> 2.4.0)
     pg (1.1.4)
     prometheus_exporter (0.4.10)
@@ -274,7 +274,6 @@ GEM
     pry-byebug (3.7.0)
       byebug (~> 11.0)
       pry (~> 0.10)
-    psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
     pundit (2.0.1)
@@ -341,14 +340,15 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.67.2)
+    rubocop (0.68.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
-      psych (>= 3.1.0)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
+    rubocop-performance (1.2.0)
+      rubocop (>= 0.68.0)
     ruby-progressbar (1.10.0)
     ruby-saml (1.9.0)
       nokogiri (>= 1.5.10)
@@ -501,6 +501,7 @@ DEPENDENCIES
   regexp-examples
   rspec-rails (~> 3.8)
   rubocop
+  rubocop-performance
   ruby-saml-idp
   sass-rails (~> 5.0)
   savon (~> 2.12.0)

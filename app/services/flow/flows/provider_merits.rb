@@ -37,10 +37,11 @@ module Flow
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: :estimated_legal_costs,
+          forward: :success_prospects,
           check_answers: :check_merits_answers
         },
         estimated_legal_costs: {
+          # TODO: Page not being used. Remove this comment when this page is being used.
           path: ->(application) { urls.providers_legal_aid_application_estimated_legal_costs_path(application) },
           forward: :success_prospects,
           check_answers: :check_merits_answers

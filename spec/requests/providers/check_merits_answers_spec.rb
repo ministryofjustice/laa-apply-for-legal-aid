@@ -37,7 +37,6 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.police_notified'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.bail_conditions_set'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.statement_of_case'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.estimated_legal_costs'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.prospects_of_success'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.client_declaration'))
       end
@@ -48,7 +47,6 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to have_change_link(:police_notified, providers_legal_aid_application_respondent_path(application, anchor: :police_notified))
         expect(response.body).to have_change_link(:bail_conditions_set, providers_legal_aid_application_respondent_path(application, anchor: :bail_conditions_set))
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
-        expect(response.body).to have_change_link(:estimated_legal_costs, providers_legal_aid_application_estimated_legal_costs_path(application))
         expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_prospects_path(application))
         expect(response.body).to have_change_link(:client_declaration, providers_legal_aid_application_merits_declaration_path(application))
       end
@@ -71,10 +69,6 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       it 'displays the statement of case' do
         expect(response.body).to include(application.statement_of_case.statement)
-      end
-
-      it 'displays the estimated legal costs' do
-        expect(response.body).to include(number_to_currency(application.merits_assessment.estimated_legal_cost, unit: '£'))
       end
 
       context 'prospects of success has supplementary text' do
