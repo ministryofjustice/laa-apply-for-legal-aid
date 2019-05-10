@@ -58,6 +58,11 @@ references:
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
         fi
 
+  update_packages: &update_packages
+    run:
+      name: Update packages
+      command: sudo apt-get update
+
 jobs:
   build_and_test:
     <<: *build_container_config
@@ -65,7 +70,7 @@ jobs:
     - checkout
     - setup_remote_docker:
         docker_layer_caching: true
-    - run: sudo apt-get update
+    - *update_packages
     - *setup_test_env
     - *install_clamav
     - *install_libreoffice
@@ -172,6 +177,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
+    - *update_packages
     - *setup_test_env
     - run:
         name: Delete old images from ecr repo
