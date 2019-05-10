@@ -4,7 +4,7 @@ FactoryBot.define do
     true_layer_id { SecureRandom.hex }
     description { Faker::Lorem.sentence }
     merchant { Faker::Lorem.sentence }
-    happened_at { Faker::Date.backward(90) }
+    happened_at { Faker::Date.between(3.months.ago + 2.days, Time.now - 2.days) }
     currency { Faker::Currency.code }
     amount { Faker::Number.decimal(2) }
 
