@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe ReferenceDataRequestor do
-    let(:expected_xml) { ccms_data_from_file 'reference_data_request.xml' }
+  RSpec.describe CaseAddStatusRequestor do
+    let(:expected_xml) { ccms_data_from_file 'case_add_status_request.xml' }
     let(:expected_tx_id) { '20190101121530123456' }
 
     describe 'XML request' do

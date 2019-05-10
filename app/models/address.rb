@@ -25,6 +25,14 @@ class Address < ApplicationRecord
     [organisation, address_line_one, address_line_two, city, postcode].compact.reject(&:blank?).join(', ')
   end
 
+  def pretty_postcode
+    postcode.insert(-4, ' ')
+  end
+
+  def first_lines
+    [address_line_one, address_line_two].select(&:present?).join(' ')
+  end
+
   def to_json(*_args)
     {
       organisation: organisation,
