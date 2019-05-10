@@ -67,12 +67,6 @@
   <div class='govuk-body'><%= simple_format @statement_of_case.statement %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :estimated_legal_costs,
-          url: providers_legal_aid_application_estimated_legal_costs_path,
-          question: t('.items.estimated_legal_costs'),
-          answer: number_to_currency(@merits.estimated_legal_cost, unit: t('currency.gbp'))
-        ) %>
 
     <%= check_answer_link(
           name: :prospects_of_success,
