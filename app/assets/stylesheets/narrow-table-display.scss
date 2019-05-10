@@ -1,0 +1,33 @@
+th.table-combine_right_if_narrow .table-hidden_right_title {
+    display:none;
+}
+
+.govuk-checkboxes__label.table-checkbox_label {
+  /*removing padding for labels in tables*/
+  padding: 0;
+}
+@media (min-width: 350px) {
+  .select-clear-all {
+    white-space: nowrap;
+  }
+}
+@media (max-width: 435px) {
+  td.table-combine_right_if_narrow,
+  td.table-combine_right_if_narrow + td {
+    display: block;
+    border-bottom: 0px;
+  }
+  th.table-combine_right_if_narrow{
+    .table-hidden_right_title {
+      display: inline;
+      white-space:normal;
+    }
+    + th {
+      display: none;
+    }
+  }
+  .table-merge_columns tr {
+    border-bottom: 1px solid #bfc1c3;
+  }
+}
+
