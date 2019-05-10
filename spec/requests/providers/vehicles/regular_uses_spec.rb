@@ -27,7 +27,9 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
   describe 'PATCH /providers/applications/:legal_aid_application_id/vehicle/regular_use' do
     let(:used_regularly) { true }
     let(:params) do
-      { used_regularly: used_regularly.to_s }
+      {
+        vehicle: { used_regularly: used_regularly.to_s }
+      }
     end
     let(:next_url) { providers_legal_aid_application_savings_and_investment_path(legal_aid_application) }
     let(:submit_button) { {} }

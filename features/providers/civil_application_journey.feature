@@ -397,7 +397,7 @@ Feature: Civil application journeys
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose option "Exists no"
+    Then I choose option "Vehicle persisted false"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I select "Cash savings"
@@ -436,7 +436,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I choose option "Exists no"
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
@@ -513,7 +512,7 @@ Feature: Civil application journeys
   Scenario: Complete the vehicle part of the journey
     Given I start the journey as far as the start of the vehicle section
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose option "Exists yes"
+    Then I choose option "Vehicle persisted true"
     And I click "Save and continue"
     Then I should be on a page showing "What is the estimated value of the vehicle?"
     Then I fill "Estimated value" with "4000"
@@ -526,6 +525,6 @@ Feature: Civil application journeys
     Then I enter the purchase date '21-3-2002'
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose option "Used regularly true"
+    Then I choose option "Vehicle used regularly true"
     And I click "Save and continue"
     Then I should be on a page showing "Does your client have any savings and investments?"

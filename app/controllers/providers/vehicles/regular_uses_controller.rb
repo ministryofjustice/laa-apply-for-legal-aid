@@ -22,7 +22,7 @@ module Providers
 
       def form_params
         merge_with_model(vehicle) do
-          { used_regularly: params[:used_regularly] }
+          params.require(:vehicle).permit(:used_regularly)
         end
       end
     end

@@ -23,7 +23,9 @@ RSpec.describe Providers::VehiclesController, type: :request do
 
   describe 'POST /providers/applications/:legal_aid_application_id/vehicle' do
     let(:option) { 'foo' }
-    let(:params) { { exists: option } }
+    let(:params) do
+      { vehicle: { persisted: option } }
+    end
     subject do
       post(
         providers_legal_aid_application_vehicle_path(legal_aid_application),
@@ -47,8 +49,8 @@ RSpec.describe Providers::VehiclesController, type: :request do
       it_behaves_like 'a provider not authenticated'
     end
 
-    context 'with option "yes"' do
-      let(:option) { 'yes' }
+    context 'with option "true"' do
+      let(:option) { 'true' }
       let(:target_url) do
         providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application)
       end
@@ -77,8 +79,8 @@ RSpec.describe Providers::VehiclesController, type: :request do
       end
     end
 
-    context 'with option "no"' do
-      let(:option) { 'no' }
+    context 'with option "false"' do
+      let(:option) { 'false' }
       let(:target_url) do
         providers_legal_aid_application_savings_and_investment_path(legal_aid_application)
       end
