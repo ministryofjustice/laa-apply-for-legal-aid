@@ -1,0 +1,136 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <wsa:MessageID>urn:663B18706B5211E99F6F058281F6012C</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+    </wsa:ReplyTo>
+  </env:Header>
+  <env:Body>
+    <ClientInqRS xmlns:msg="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" xmlns="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <header:HeaderRS xmlns:header="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <header:TransactionID>20190301030405123456</header:TransactionID>
+        <header:RequestDetails>
+          <header:TransactionRequestID>20190301030405123456</header:TransactionRequestID>
+          <header:Language>ENG</header:Language>
+          <header:UserLoginID>my_login</header:UserLoginID>
+          <header:UserRole>my_role</header:UserRole>
+        </header:RequestDetails>
+        <header:Status>
+          <header:Status>Success</header:Status>
+          <header:StatusFreeText>End of Get Party details process.</header:StatusFreeText>
+        </header:Status>
+      </header:HeaderRS>
+      <msg:RecordCount>
+        <common:RecordsFetched xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">2</common:RecordsFetched>
+      </msg:RecordCount>
+      <msg:ClientList>
+      <msg:Client>
+        <client:ClientReferenceNumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">4390017</client:ClientReferenceNumber>
+        <client:Details xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+          <client:Name>
+            <common:Title xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">MR.</common:Title>
+            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Mercator</common:Surname>
+            <common:FirstName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Thomas</common:FirstName>
+            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">NA</common:SurnameAtBirth>
+            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Thomas Mercator</common:FullName>
+          </client:Name>
+          <client:PersonalInformation>
+            <client:DateOfBirth>1972-10-31</client:DateOfBirth>
+            <client:Gender>MALE</client:Gender>
+            <client:MaritalStatus>S</client:MaritalStatus>
+            <client:NINumber>RK699791A</client:NINumber>
+            <client:HomeOfficeNumber>XXXX</client:HomeOfficeNumber>
+            <client:VulnerableClient>false</client:VulnerableClient>
+            <client:HighProfileClient>false</client:HighProfileClient>
+            <client:VexatiousLitigant>false</client:VexatiousLitigant>
+            <client:CountryOfOrigin>GBR</client:CountryOfOrigin>
+            <client:MentalCapacityInd>false</client:MentalCapacityInd>
+          </client:PersonalInformation>
+          <client:Contacts>
+            <client:TelephoneHome>01234567890</client:TelephoneHome>
+            <client:PasswordReminder>hello</client:PasswordReminder>
+            <client:CorrespondenceMethod>LETTER</client:CorrespondenceMethod>
+            <client:CorrespondenceLanguage>ENGLISH</client:CorrespondenceLanguage>
+          </client:Contacts>
+          <client:NoFixedAbode>false</client:NoFixedAbode>
+          <client:Address>
+            <common:AddressID xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">363045</common:AddressID>
+            <common:House xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">32</common:House>
+            <common:AddressLine1 xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">111 Park street</common:AddressLine1>
+            <common:City xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Boxgrove</common:City>
+            <common:Country xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">GBR</common:Country>
+            <common:County xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">West Sussex</common:County>
+            <common:PostalCode xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">PO18 8HQ</common:PostalCode>
+          </client:Address>
+          <client:EthnicMonitoring>WB</client:EthnicMonitoring>
+        </client:Details>
+        <client:RecordHistory xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+          <common:CreatedBy xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">
+            <common:UserLoginID>created_login_id</common:UserLoginID>
+            <common:UserName>created_user_name</common:UserName>
+          </common:CreatedBy>
+          <common:DateCreated xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">2016-06-13T11:06:26.0Z</common:DateCreated>
+          <common:LastUpdatedBy xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">
+            <common:UserLoginID>updated_login_id</common:UserLoginID>
+            <common:UserName>updated_user_name</common:UserName>
+          </common:LastUpdatedBy>
+          <common:DateLastUpdated xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">2016-06-14T13:07:52.0Z</common:DateLastUpdated>
+        </client:RecordHistory>
+      </msg:Client>
+      <msg:Client>
+        <client:ClientReferenceNumber xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">4390018</client:ClientReferenceNumber>
+        <client:Details xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+          <client:Name>
+            <common:Title xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">MR.</common:Title>
+            <common:Surname xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Mercator</common:Surname>
+            <common:FirstName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Thomas</common:FirstName>
+            <common:SurnameAtBirth xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">NA</common:SurnameAtBirth>
+            <common:FullName xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Thomas Mercator</common:FullName>
+          </client:Name>
+          <client:PersonalInformation>
+            <client:DateOfBirth>1972-10-31</client:DateOfBirth>
+            <client:Gender>MALE</client:Gender>
+            <client:MaritalStatus>S</client:MaritalStatus>
+            <client:NINumber>RK699791A</client:NINumber>
+            <client:HomeOfficeNumber>XXXX</client:HomeOfficeNumber>
+            <client:VulnerableClient>false</client:VulnerableClient>
+            <client:HighProfileClient>false</client:HighProfileClient>
+            <client:VexatiousLitigant>false</client:VexatiousLitigant>
+            <client:CountryOfOrigin>GBR</client:CountryOfOrigin>
+            <client:MentalCapacityInd>false</client:MentalCapacityInd>
+          </client:PersonalInformation>
+          <client:Contacts>
+            <client:TelephoneHome>01234567890</client:TelephoneHome>
+            <client:PasswordReminder>hello</client:PasswordReminder>
+            <client:CorrespondenceMethod>LETTER</client:CorrespondenceMethod>
+            <client:CorrespondenceLanguage>ENGLISH</client:CorrespondenceLanguage>
+          </client:Contacts>
+          <client:NoFixedAbode>false</client:NoFixedAbode>
+          <client:Address>
+            <common:AddressID xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">363045</common:AddressID>
+            <common:House xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">32</common:House>
+            <common:AddressLine1 xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">111 Park street</common:AddressLine1>
+            <common:City xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">Boxgrove</common:City>
+            <common:Country xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">GBR</common:Country>
+            <common:County xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">West Sussex</common:County>
+            <common:PostalCode xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">PO18 8HQ</common:PostalCode>
+          </client:Address>
+          <client:EthnicMonitoring>WB</client:EthnicMonitoring>
+        </client:Details>
+        <client:RecordHistory xmlns:client="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO">
+          <common:CreatedBy xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">
+            <common:UserLoginID>created_login_id</common:UserLoginID>
+            <common:UserName>created_user_name</common:UserName>
+          </common:CreatedBy>
+          <common:DateCreated xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">2016-06-13T11:06:26.0Z</common:DateCreated>
+          <common:LastUpdatedBy xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">
+            <common:UserLoginID>updated_login_id</common:UserLoginID>
+            <common:UserName>updated_user_name</common:UserName>
+          </common:LastUpdatedBy>
+          <common:DateLastUpdated xmlns:common="http://legalservices.gov.uk/Enterprise/Common/1.0/Common">2016-06-14T13:07:52.0Z</common:DateLastUpdated>
+        </client:RecordHistory>
+      </msg:Client>
+      <msg:ClientList>
+    </ClientInqRS>
+  </env:Body>
+</env:Envelope>
