@@ -11,7 +11,9 @@
             :estimated_value,
             hint: t('.use_car_valuation_sites'),
             label: nil,
-            input_prefix: t('currency.gbp')
+            value: number_to_currency_or_original_string(@form.model.estimated_value),
+            input_prefix: t('currency.gbp'),
+            class: 'govuk-!-width-one-third'
           ) %>
       <div class="govuk-!-padding-bottom-4"></div>
       <%= next_action_buttons(show_draft: true, form: form) %>

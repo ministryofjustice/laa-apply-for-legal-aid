@@ -8,6 +8,8 @@
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
       <%= govuk_fieldset_header page_heading, padding_below: 0 %>
 
+      <%= govuk_hint t('.detail_of_payments_to_include') %>
+
       <div class="govuk-radios govuk-radios--conditional" data-module="radios">
         <%= form.govuk_radio_button(
               :payments_remain,
@@ -19,9 +21,10 @@
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
           <%= form.govuk_text_field(
                 :payment_remaining,
-                hint: t('.detail_of_payments_to_include'),
-                label: nil,
-                input_prefix: t('currency.gbp')
+                label: t('.enter_amount_left_to_pay'),
+                value: number_to_currency_or_original_string(@form.model.payment_remaining),
+                input_prefix: t('currency.gbp'),
+                class: 'govuk-!-width-one-third'
               ) %>
         </div>
 
