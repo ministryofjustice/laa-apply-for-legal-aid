@@ -1,5 +1,4 @@
 class NotifyMailer < GovukNotifyRails::Mailer
-
   # Require relative statement required as concern not found when loaded from sidekiq on retry
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
