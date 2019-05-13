@@ -17,7 +17,11 @@ module Providers
     # POST /provider/applications
     def create
       @legal_aid_application = LegalAidApplication.create(provider: current_provider)
-      go_forward
+      redirect_to Flow::KeyPoint.path_for(
+        journey: :providers,
+        key_point: :journey_start,
+        legal_aid_application: @legal_aid_application
+      )
     end
   end
 end

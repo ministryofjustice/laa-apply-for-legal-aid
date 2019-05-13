@@ -7,7 +7,8 @@ class FeedbackController < ApplicationController
 
   def create
     feedback.update(feedback_params)
-    FeedbackMailer.notify(feedback).deliver_later if feedback_submitted?
+    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
+    FeedbackMailer.notify(feedback).deliver_later! if feedback_submitted?
 
     redirect_to feedback
   end
