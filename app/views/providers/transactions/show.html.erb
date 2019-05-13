@@ -5,7 +5,9 @@
   <%= form_with(method: :patch, local: true) do |form| %>
 
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
-
+    
+    <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
+    
     <table class="govuk-table sortable table-merge_columns">
       <%= content_tag(:caption, t('date.date_period', from: date_from, to: date_to), class: 'govuk-table__caption') if @bank_transactions.any? %>
       <thead class="govuk-table__head">
@@ -15,22 +17,27 @@
               class="govuk-body select-clear-all"
               href=""
               data-copy-select="<%= t '.col_select_all' %>"
-              data-copy-clear="<%= t '.col_clear_all' %>"></a>
+              data-copy-clear="<%= t '.col_clear_all' %>">
+            </a>
           </th>
           <th class="govuk-table__header sort header-sort-asc table-combine_right_if_narrow" scope="col">
-            <span class="govuk-visually-hidden">Click to sort by </span><%= t('.col_date') %><span class="table-hidden_right_title"> &amp; <%= t('.col_description') %></span>
+            <span class="govuk-visually-hidden">Click to sort by </span>
+            <span class="aria-sort-description"><%= t('.col_date') %></span>
+            <span class="table-hidden_right_title"> &amp; <%= t('.col_description') %></span>
           </th>
           <th class="govuk-table__header sort" scope="col">
-            <span class="govuk-visually-hidden">Click to sort by </span><%= t('.col_description') %>
+            <span class="govuk-visually-hidden">Click to sort by </span>
+            <span class="aria-sort-description"><%= t('.col_description') %></span>
           </th>
           <th class="govuk-table__header govuk-table__header--numeric sort" scope="col">
-            <span class="govuk-visually-hidden">Click to sort by </span><%= t('.col_amount') %>
+            <span class="govuk-visually-hidden">Click to sort by </span>
+            <span class="aria-sort-description"><%= t('.col_amount') %></span>
           </th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
         <%= form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description do |builder| %>
-          <tr class="govuk-table__row">
+          <tr class="govuk-table__row" area-hidden=true>
             <td class="govuk-table__cell">
               <% if builder.object.transaction_type_id == nil || builder.object.transaction_type_id == @transaction_type.id %>
                 <div class="govuk-checkboxes__item">

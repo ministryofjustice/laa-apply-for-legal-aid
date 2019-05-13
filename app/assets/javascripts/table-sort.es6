@@ -15,7 +15,6 @@ $(document).ready(function() {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
           th.addClass(inverse ? 'header-sort-asc' : 'header-sort-desc')
-
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
           }).sortElements((a, b) => (
@@ -27,7 +26,10 @@ $(document).ready(function() {
             return this.parentNode;
           });
           inverse = !inverse;
-
+          
+          //this adds a message to the message div, stating what it is sorted by
+          $("#screen-reader-messages").text("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + $(".header-sort-desc .aria-sort-description").text() );
+          
           return false;
         });
         th.keyup(function(ev) {
