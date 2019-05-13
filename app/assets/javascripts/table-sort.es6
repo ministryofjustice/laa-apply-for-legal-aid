@@ -2,8 +2,7 @@ $(document).ready(function() {
   if ($('table.sortable')) {
     let table;
     $('th.sort')
-      .addClass("js-sortable")
-        //this class used to style as links, if JS not enabled, titles won't look clickable.
+      .addClass("js-sortable")  //this class used to style as links, if JS not enabled, titles won't look clickable.
       .attr('tabindex', 0)
       .wrapInner('<span class="sortable-column" title="sort this column"/>')
       .each(function(index) {
@@ -33,8 +32,7 @@ $(document).ready(function() {
           return false;
         });
         th.keyup(function(ev) {
-          if (ev.which==13 || ev.which==32)  {
-            //on space or return, the column is sorted
+          if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
             $(this).click();
           }
         });

@@ -1,4 +1,5 @@
 class FeedbackMailer < GovukNotifyRails::Mailer
+  require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
   def notify(feedback)

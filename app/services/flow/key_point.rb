@@ -6,7 +6,8 @@ module Flow
       citizens: {},
       providers: {
         start_after_applicant_completes_means: :client_completed_means,
-        start_income_update: :capital_introductions
+        start_income_update: :capital_introductions,
+        journey_start: :applicants
       }
     }.freeze
 

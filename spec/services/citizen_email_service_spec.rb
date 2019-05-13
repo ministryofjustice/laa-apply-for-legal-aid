@@ -14,7 +14,7 @@ RSpec.describe CitizenEmailService do
       expect(NotifyMailer).to receive(:citizen_start_email)
         .with(application.application_ref, 'test@example.com', citizen_url, 'John Doe')
         .and_return(message_delivery)
-      expect(message_delivery).to receive(:deliver_later)
+      expect(message_delivery).to receive(:deliver_later!)
       expect(application).to receive(:generate_secure_id).and_return(secure_id)
 
       subject.send_email
