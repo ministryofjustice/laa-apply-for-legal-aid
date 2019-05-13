@@ -25,7 +25,7 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
 
     it 'sends an email' do
-      mailer = double(deliver_later: true)
+      mailer = double(deliver_later!: true)
       expect(FeedbackMailer).to receive(:notify).and_return(mailer)
       subject
     end
