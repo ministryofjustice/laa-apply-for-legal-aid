@@ -1,4 +1,5 @@
 class ResendLinkRequestMailer < GovukNotifyRails::Mailer
+  require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
   def notify(legal_aid_application)

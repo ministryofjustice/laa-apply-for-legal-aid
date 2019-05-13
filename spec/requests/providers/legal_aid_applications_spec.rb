@@ -37,6 +37,20 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         end
       end
 
+      context 'when legal_aid_application current path is unknown' do
+        let!(:legal_aid_application) { create :legal_aid_application, provider_step: :unknown }
+
+        it 'links to start of journey' do
+          subject
+          start_path = Flow::KeyPoint.path_for(
+            journey: :providers,
+            key_point: :journey_start,
+            legal_aid_application: legal_aid_application
+          )
+          expect(response.body).to include(start_path)
+        end
+      end
+
       context 'with pagination' do
         it 'shows current total information' do
           subject

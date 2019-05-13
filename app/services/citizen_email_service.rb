@@ -6,7 +6,8 @@ class CitizenEmailService
   end
 
   def send_email
-    NotifyMailer.citizen_start_email(*mailer_args).deliver_later
+    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
+    NotifyMailer.citizen_start_email(*mailer_args).deliver_later!
   end
 
   private
