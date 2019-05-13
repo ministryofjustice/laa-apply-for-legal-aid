@@ -243,6 +243,9 @@ en:
         warning_letter_sent: Has a warning letter been sent to the respondent?
         police_notified: Have the police been notified?
         bail_conditions_set: Have bail conditions been set?
+        bail_conditions_set_no: Tell us why bail conditions have not been set
+        bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
+        bail_conditions_set_blank: Give details of the bail conditions
     restrictions:
       index:
         h1-heading: Do any of the following restrictions apply to your client's property or other assets?

@@ -14,7 +14,20 @@
 
     <% always_showing = question.show_details_when.nil? %>
     <%= content_tag(:div, id: conditional_id, class: always_showing ? nil : 'govuk-radios__conditional--hidden') do %>
-      <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>
+      <% if question.attribute == :bail_conditions_set %>
+        <%= form.govuk_text_area(
+              question.attribute_details,
+              id: question.attribute_details,
+              rows: 5,
+              label: bail_conditions_titles[:yes],
+              'data-bail-conditions-yes' => bail_conditions_titles[:yes],
+              'data-bail-conditions-no' => bail_conditions_titles[:no],
+              'data-bail-conditions-blank-error-yes' => bail_conditions_titles[:blank_error],
+              'data-bail-conditions-blank-error-no' => bail_conditions_titles[:no]
+            ) %>
+      <% else %>
+        <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>
+      <% end %>
     <% end %>
   </div>
 </div>

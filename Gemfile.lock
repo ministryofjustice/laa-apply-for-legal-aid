@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.0.3)
+    aasm (5.0.4)
       concurrent-ruby (~> 1.0)
     actioncable (5.2.3)
       actionpack (= 5.2.3)
@@ -375,7 +375,7 @@ GEM
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
       wasabi (~> 3.4)
-    selenium-webdriver (3.142.0)
+    selenium-webdriver (3.142.2)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
     sentry-raven (2.9.0)
@@ -459,7 +459,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aasm (~> 5.0.3)
+  aasm (~> 5.0.4)
   active_model_serializers (~> 0.10.9)
   addressable
   awesome_print (~> 1.8.0)
