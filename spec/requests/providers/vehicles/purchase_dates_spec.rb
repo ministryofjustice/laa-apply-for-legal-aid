@@ -81,7 +81,6 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
             purchased_on_year: purchase_date.year,
             purchased_on_month: '',
             purchased_on_day: purchase_date.day
-
           }
         }
       end
@@ -145,7 +144,6 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
               purchased_on_year: '',
               purchased_on_month: '',
               purchased_on_day: ''
-
             }
           }
         end

@@ -19,12 +19,12 @@ module Providers
     private
 
     def create_vehicle_and_continue
-      vehicle.save unless vehicle.persisted?
+      vehicle.save! unless vehicle.persisted?
       continue_or_draft
     end
 
     def remove_vehicle_and_continue
-      vehicle.destroy
+      vehicle.destroy!
       continue_or_draft
     end
 

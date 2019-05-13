@@ -6,13 +6,18 @@
         local: true
       ) do |form| %>
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= govuk_fieldset_header page_heading, padding_below: 0 %>
-      <%= govuk_hint t('.include_partner_use') %>
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-bottom-6 govuk-!-padding-top-2"
-           data-module="radios">
-        <%= form.govuk_radio_button :used_regularly, 'true', label: t('generic.yes') %>
-        <%= form.govuk_radio_button :used_regularly, 'false', label: t('generic.no') %>
-      </div>
+      <%= form.govuk_collection_radio_buttons(
+            :used_regularly,
+            [
+              { code: 'true', label: t('generic.yes') },
+              { code: 'false', label: t('generic.no') }
+            ],
+            :code,
+            :label,
+            title: page_heading,
+            hint: t('.include_partner_use')
+          ) %>
+      <div class="govuk-!-padding-bottom-4"></div>
       <%= next_action_buttons(show_draft: true, form: form) %>
     <% end %>
   <% end %>
