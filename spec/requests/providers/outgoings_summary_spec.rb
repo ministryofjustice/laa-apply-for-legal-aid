@@ -81,6 +81,12 @@ RSpec.describe Providers::OutgoingsSummaryController do
         expect(legal_aid_application.bank_transactions).to include(bank_transaction)
         expect(response.body).to include(bank_transaction.description)
       end
+
+      it 'displays a link to add more transaction of this type' do
+        subject
+        path = providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: transaction_type.name)
+        expect(response.body).to include(path)
+      end
     end
   end
 
