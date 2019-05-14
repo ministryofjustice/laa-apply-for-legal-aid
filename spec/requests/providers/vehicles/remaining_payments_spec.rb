@@ -55,6 +55,15 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
       expect(response).to redirect_to(next_url)
     end
 
+    context 'with payments remaining false' do
+      let(:payments_remain) { 'false' }
+
+      it 'sets vehicle payment remaining to zero' do
+        subject
+        expect(vehicle.reload.payment_remaining).to be_zero
+      end
+    end
+
     context 'without value' do
       let(:payment_remaining) { '' }
 

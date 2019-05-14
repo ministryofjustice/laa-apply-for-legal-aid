@@ -22,7 +22,7 @@
           <%= form.govuk_text_field(
                 :payment_remaining,
                 label: t('.enter_amount_left_to_pay'),
-                value: number_to_currency_or_original_string(@form.model.payment_remaining),
+                value: number_to_currency_or_original_string(@form.payment_remaining),
                 input_prefix: t('currency.gbp'),
                 class: 'govuk-!-width-one-third'
               ) %>
@@ -31,7 +31,8 @@
         <%= form.govuk_radio_button(
               :payments_remain,
               false,
-              label: t('generic.no')
+              label: t('generic.no'),
+              checked: @form.model.payment_remaining&.zero?
             ) %>
 
       <div class="govuk-!-padding-bottom-4"></div>

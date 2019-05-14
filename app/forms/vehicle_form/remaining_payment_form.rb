@@ -18,6 +18,11 @@ module VehicleForm
       payments_remain&.to_s == 'true'
     end
 
+    def save
+      attributes[:payment_remaining] = 0 if valid? && !payments_remain?
+      super
+    end
+
     private
 
     def exclude_from_model
