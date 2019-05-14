@@ -5,9 +5,7 @@
   <%= form_with(method: :patch, local: true) do |form| %>
 
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
-    
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
-    
     <table class="govuk-table sortable table-merge_columns">
       <%= content_tag(:caption, t('date.date_period', from: date_from, to: date_to), class: 'govuk-table__caption') if @bank_transactions.any? %>
       <thead class="govuk-table__head">
@@ -25,7 +23,7 @@
             <span class="aria-sort-description"><%= t('.col_date') %></span>
             <span class="table-hidden_right_title"> &amp; <%= t('.col_description') %></span>
           </th>
-          <th class="govuk-table__header sort" scope="col">
+          <th class="govuk-table__header govuk-table__cell--alphabetic sort" scope="col">
             <span class="govuk-visually-hidden">Click to sort by </span>
             <span class="aria-sort-description"><%= t('.col_description') %></span>
           </th>
@@ -42,18 +40,18 @@
               <% if builder.object.transaction_type_id == nil || builder.object.transaction_type_id == @transaction_type.id %>
                 <div class="govuk-checkboxes__item">
                   <% checked = builder.object.transaction_type_id == @transaction_type.id %>
-                  <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked, 'aria-labelled-by' => 'Date-' + @transaction_type.id + ' Description-' + @transaction_type.id + ' Amount-' + @transaction_type.id) %>
-                  <label class="govuk-label govuk-checkboxes__label table-checkbox_label"><span class="govuk-visually-hidden"><%= value_with_currency_unit(builder.object.amount, builder.object.currency) %> for <%= builder.object.description %> on <%= l(builder.object.happened_at.to_date, format: :long_date) %></span></label>
+                  <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked, 'aria-labelled-by' => 'Date-' + builder.object.id + ' Description-' + builder.object.id + ' Amount-' + builder.object.id) %>
+                  <label for="transaction_ids_<%= builder.object.id %>" class="govuk-label govuk-checkboxes__label table-checkbox_label"><span class="govuk-visually-hidden"><%= builder.object.description %>, <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %> on <%= l(builder.object.happened_at.to_date, format: :long_date) %></span></label>
                 </div>
               <% end %>
             </td>
-            <td class="govuk-table__cell table-combine_right_if_narrow" id="Date-<%= @transaction_type.id %>" data-sort-value="<%= "#{builder.object.happened_at.to_i}#{builder.object.description}" %>">
+            <td class="govuk-table__cell table-combine_right_if_narrow" id="Date-<%= builder.object.id %>" data-sort-value="<%= "#{builder.object.happened_at.to_i}#{builder.object.description}" %>">
               <%= l(builder.object.happened_at.to_date, format: :short_date) %>
             </td>
-            <td class="govuk-table__cell" id="Description-<%= @transaction_type.id %>">
+            <td class="govuk-table__cell" id="Description-<%= builder.object.id %>">
               <%= builder.object.description %>
             </td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" id="Amount-<%= @transaction_type.id %>" data-sort-value="<%= builder.object.amount %>" data-sort-type="number">
+            <td class="govuk-table__cell govuk-table__cell--numeric" id="Amount-<%= builder.object.id %>" data-sort-value="<%= builder.object.amount %>" data-sort-type="number">
               <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %>
             </td>
           </tr>

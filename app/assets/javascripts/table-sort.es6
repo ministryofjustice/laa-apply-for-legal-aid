@@ -27,8 +27,24 @@ $(document).ready(function() {
           inverse = !inverse;
           
           //this adds a message to the message div, stating what it is sorted by
-          $("#screen-reader-messages").text("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + $(".header-sort-desc .aria-sort-description").text() );
-          
+          //first - numeric fields
+          if ($(".header-sort-asc.govuk-table__header--numeric .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " from big to small");
+          } else if ($(".header-sort-desc.govuk-table__header--numeric .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " from small to big");
+          } 
+          //second - alphabetic marked fields
+          else if ($(".header-sort-asc.govuk-table__cell--alphabetic .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " in reverse order");
+          } else if ($(".header-sort-desc.govuk-table__cell--alphabetic .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " in alphabetical order");
+          } 
+          //third - all remaining fields
+          else if ($(".header-sort-asc .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " in <em>ascending</em> order");
+          } else if ($(".header-sort-desc .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " in <em>descending</em> order");
+          }
           return false;
         });
         th.keyup(function(ev) {
