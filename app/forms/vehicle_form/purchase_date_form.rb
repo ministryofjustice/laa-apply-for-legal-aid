@@ -16,6 +16,7 @@ module VehicleForm
     def purchased_on
       return @purchased_on if @purchased_on.present?
       return incomplete_date if date_values.any?(&:blank?)
+      return unless Date.valid_date?(*date_values.map(&:to_i))
 
       @purchased_on = attributes[:purchased_on] = Date.new(*date_values.map(&:to_i))
     end

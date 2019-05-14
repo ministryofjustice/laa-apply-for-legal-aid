@@ -21,9 +21,15 @@ module Providers
       end
 
       def form_params
+        return { model: vehicle } if form_submitted_without_selection?
+
         merge_with_model(vehicle) do
           params.require(:vehicle).permit(:used_regularly)
         end
+      end
+
+      def form_submitted_without_selection?
+        params[:vehicle].nil?
       end
     end
   end

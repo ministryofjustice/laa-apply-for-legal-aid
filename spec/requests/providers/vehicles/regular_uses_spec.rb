@@ -66,7 +66,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
     end
 
     context 'without value' do
-      let(:used_regularly) { '' }
+      let(:params) { {} }
 
       it 'renders successfully' do
         subject
