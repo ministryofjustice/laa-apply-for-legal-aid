@@ -15,9 +15,6 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
 require 'webmock/rspec'
-require 'chromedriver-helper'
-
-Chromedriver.set_version '2.46'
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
