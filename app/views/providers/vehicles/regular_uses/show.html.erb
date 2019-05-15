@@ -1,0 +1,24 @@
+<%= page_template page_title: t('.heading'), template: :basic do %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_vehicles_regular_use_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+    <%= govuk_form_group show_error_if: @form.errors.present? do %>
+      <%= form.govuk_collection_radio_buttons(
+            :used_regularly,
+            [
+              { code: 'true', label: t('generic.yes') },
+              { code: 'false', label: t('generic.no') }
+            ],
+            :code,
+            :label,
+            title: page_heading,
+            hint: t('.include_partner_use')
+          ) %>
+    <% end %>
+    <div class="govuk-!-padding-bottom-4"></div>
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

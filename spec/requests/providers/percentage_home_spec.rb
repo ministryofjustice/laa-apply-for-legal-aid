@@ -57,7 +57,7 @@ RSpec.describe 'provider percentage share of home test', type: :request do
 
         it 'redirects to the next step in Provider jouney' do
           subject
-          expect(response).to redirect_to providers_legal_aid_application_savings_and_investment_path(application)
+          expect(response).to redirect_to flow_forward_path
         end
         context 'with invalid input' do
           let(:percentage_home) { 'fifty' }

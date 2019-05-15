@@ -62,10 +62,14 @@ module PageTemplateHelper
   end
 
   def page_heading(heading: :h1, size: :xl, margin_bottom: nil)
-    return unless content_for?(:page_title)
+    return unless page_title
 
     classes = ["govuk-heading-#{size}"]
     classes << "govuk-!-margin-bottom-#{margin_bottom}" if margin_bottom
-    content_tag heading, content_for(:page_title), class: classes.join(' ')
+    content_tag heading, page_title, class: classes.join(' ')
+  end
+
+  def page_title
+    content_for(:page_title) if content_for?(:page_title)
   end
 end

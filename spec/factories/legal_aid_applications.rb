@@ -114,6 +114,10 @@ FactoryBot.define do
       respondent { create :respondent }
     end
 
+    trait :with_vehicle do
+      vehicle
+    end
+
     trait :with_everything do
       with_applicant
       provider_submitted
