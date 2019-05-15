@@ -1,7 +1,19 @@
 $(document).ready(function() {
   if ($('table.sortable')) {
     let table;
-    
+    const endText = {
+      asc: {
+        numeric: 'from big to small',
+        alphabetic: 'in <em>reverse</em> order',
+        undefined: 'in <em>ascending</em> order' //for when the data-sort-type is not set
+      },
+      desc: {
+        numeric: 'from small to big',
+        alphabetic: 'in <em>alphabetical</em> order',
+        undefined: 'in <em>descending</em> order' //for when the data-sort-type is not set
+      }
+    }
+
     $('th.sort')
       .addClass("js-sortable")  //this class used to style as links, if JS not enabled, titles won't look clickable.
       .attr('tabindex', 0)
@@ -10,19 +22,7 @@ $(document).ready(function() {
         const th = $(this),
           thIndex = index + 1;
         let inverse = false;
-        const endText = {
-          asc: {
-            numeric: ' from big to small',
-            alphabetic: ' in <em>reverse</em> order',
-            undefined: ' in <em>ascending</em> order' //for when the data-sort-type is not set
-          },
-          desc: {
-            numeric: ' from small to big',
-            alphabetic: ' in <em>alphabetical</em> order',
-            undefined: ' in <em>descending</em> order' //for when the data-sort-type is not set
-          }
-        }
-    
+        
         th.click(() => {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
@@ -40,7 +40,7 @@ $(document).ready(function() {
           });
           
           //this adds a message to the message div, stating what it is sorted by
-          $("#screen-reader-messages").html("Sorted by " + th.find(".aria-sort-description").text() + endText[sortDirection][th.attr("data-sort-type")]);
+          $("#screen-reader-messages").html("Sorted by " + th.find(".aria-sort-description").text() + " " + endText[sortDirection][th.attr("data-sort-type")]);
       
           inverse = !inverse;
           
