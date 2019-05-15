@@ -24,7 +24,7 @@ Feature: Citizen journey
     Then I should be on a page showing "What types of income do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Select any regular payments you make"
+    Then I should be on a page showing "What regular payments do you make?"
     Then I select "Rent or mortgage"
     Then I click 'Save and continue'
     Then I should be on a page showing "Do you own the home that you live in?"
