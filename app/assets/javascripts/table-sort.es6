@@ -1,6 +1,7 @@
 $(document).ready(function() {
   if ($('table.sortable')) {
     let table;
+    
     $('th.sort')
       .addClass("js-sortable")  //this class used to style as links, if JS not enabled, titles won't look clickable.
       .attr('tabindex', 0)
@@ -9,11 +10,24 @@ $(document).ready(function() {
         const th = $(this),
           thIndex = index + 1;
         let inverse = false;
-
+        const endText = {
+          asc: {
+            numeric: ' from big to small',
+            alphabetic: ' in <em>reverse</em> order',
+            undefined: ' in <em>ascending</em> order' //for when the data-sort-type is not set
+          },
+          desc: {
+            numeric: ' from small to big',
+            alphabetic: ' in <em>alphabetical</em> order',
+            undefined: ' in <em>descending</em> order' //for when the data-sort-type is not set
+          }
+        }
+    
         th.click(() => {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
-          th.addClass(inverse ? 'header-sort-asc' : 'header-sort-desc')
+          let sortDirection = inverse ? 'asc' : 'desc';
+          th.addClass('header-sort-' + sortDirection);
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
           }).sortElements((a, b) => (
@@ -24,27 +38,12 @@ $(document).ready(function() {
             // parentNode is the element we want to move
             return this.parentNode;
           });
-          inverse = !inverse;
           
           //this adds a message to the message div, stating what it is sorted by
-          //first - numeric fields
-          if ($(".header-sort-asc.govuk-table__header--numeric .aria-sort-description").text()) {
-            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " from big to small");
-          } else if ($(".header-sort-desc.govuk-table__header--numeric .aria-sort-description").text()) {
-            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " from small to big");
-          } 
-          //second - alphabetic marked fields
-          else if ($(".header-sort-asc.govuk-table__cell--alphabetic .aria-sort-description").text()) {
-            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " in reverse order");
-          } else if ($(".header-sort-desc.govuk-table__cell--alphabetic .aria-sort-description").text()) {
-            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " in alphabetical order");
-          } 
-          //third - all remaining fields
-          else if ($(".header-sort-asc .aria-sort-description").text()) {
-            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " in <em>ascending</em> order");
-          } else if ($(".header-sort-desc .aria-sort-description").text()) {
-            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " in <em>descending</em> order");
-          }
+          $("#screen-reader-messages").html("Sorted by " + th.find(".aria-sort-description").text() + endText[sortDirection][th.attr("data-sort-type")]);
+      
+          inverse = !inverse;
+          
           return false;
         });
         th.keyup(function(ev) {
