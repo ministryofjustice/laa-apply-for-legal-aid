@@ -1,39 +1,40 @@
-.sort {
+.sort.js-sortable {
   color:#005ea5;
   text-decoration:underline;
   cursor:pointer;
   white-space: nowrap;
+  outline: none;
 }
-.sort:hover {
+.sort.js-sortable:hover {
   color:#2b8cc4;
 }
 .sort:active > span.sortable-column, .sort:focus > span.sortable-column {
   background-color:#ffbf47;
 }
-.header-sort-desc:after, .header-sort-asc:after {
+.header-sort-desc.js-sortable:after, .header-sort-asc.js-sortable:after {
   content: ' ';
   position: relative;
   left: 6px;
   border: 6px solid transparent;
   font-size:0;
 }
-.header-sort-desc:after {
+.header-sort-desc.js-sortable:after {
   border-top-color: #005ea5;
   border-top-width: 13px;
   border-bottom-width: 0;
 }
-.header-sort-asc:after {
+.header-sort-asc.js-sortable:after {
   bottom: 12px;
   border-bottom-color: #005ea5;
   border-bottom-width: 13px;
   border-top-width: 0;
 }
-.header-sort-desc:hover:after{
+.header-sort-desc.js-sortable:hover:after{
   border-top-color: #2b8cc4;
 }
-.header-sort-asc:hover:after {
+.header-sort-asc.js-sortable:hover:after {
   border-bottom-color: #2b8cc4;
 }
-.header-sort-desc, .header-sort-asc {
+.header-sort-desc.js-sortable, .header-sort-asc.js-sortable {
   padding-right: 10px;
 }

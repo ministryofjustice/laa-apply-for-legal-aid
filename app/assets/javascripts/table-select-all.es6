@@ -15,9 +15,11 @@ $(document).ready(function() {
     $('.select-clear-all').click(function() {
       const table = $(this).parents('table');
       if($(this).hasClass('clear-all')) {
+        $("#screen-reader-messages").text("All transactions deselected.");  //this adds a message to the message div which is read out by the screen reader
         table.find('input:checked').prop('checked', false);
       } else if ($(this).hasClass('select-all')) {
         table.find('input:not(:checked)').prop('checked', true);
+        $("#screen-reader-messages").text("All transactions selected."); 
       }
       resetSelectClearLink($(this).parents('table'))
       return false;

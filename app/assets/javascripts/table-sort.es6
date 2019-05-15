@@ -2,6 +2,8 @@ $(document).ready(function() {
   if ($('table.sortable')) {
     let table;
     $('th.sort')
+      .addClass("js-sortable")  //this class used to style as links, if JS not enabled, titles won't look clickable.
+      .attr('tabindex', 0)
       .wrapInner('<span class="sortable-column" title="sort this column"/>')
       .each(function(index) {
         const th = $(this),
@@ -12,7 +14,6 @@ $(document).ready(function() {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
           th.addClass(inverse ? 'header-sort-asc' : 'header-sort-desc')
-
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
           }).sortElements((a, b) => (
@@ -24,8 +25,32 @@ $(document).ready(function() {
             return this.parentNode;
           });
           inverse = !inverse;
-
+          
+          //this adds a message to the message div, stating what it is sorted by
+          //first - numeric fields
+          if ($(".header-sort-asc.govuk-table__header--numeric .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " from big to small");
+          } else if ($(".header-sort-desc.govuk-table__header--numeric .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " from small to big");
+          } 
+          //second - alphabetic marked fields
+          else if ($(".header-sort-asc.govuk-table__cell--alphabetic .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " in reverse order");
+          } else if ($(".header-sort-desc.govuk-table__cell--alphabetic .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " in alphabetical order");
+          } 
+          //third - all remaining fields
+          else if ($(".header-sort-asc .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-asc .aria-sort-description").text() + " in <em>ascending</em> order");
+          } else if ($(".header-sort-desc .aria-sort-description").text()) {
+            $("#screen-reader-messages").html("Sorted by " + $(".header-sort-desc .aria-sort-description").text() + " in <em>descending</em> order");
+          }
           return false;
+        });
+        th.keyup(function(ev) {
+          if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
+            $(this).click();
+          }
         });
       });
 
