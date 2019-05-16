@@ -69,6 +69,15 @@ module CCMS
             expect(add_case_service_double).to receive(:call).with(no_args)
           end
         end
+
+        context 'case_submitted state' do
+          let(:check_case_status_service_double) { CheckCaseStatusService.new(submission) }
+          let(:submission) { create :submission, :case_submitted }
+          it 'calls the check_case_status service' do
+            expect(CheckCaseStatusService).to receive(:new).with(submission).and_return(check_case_status_service_double)
+            expect(check_case_status_service_double).to receive(:call)
+          end
+        end
       end
     end
   end
