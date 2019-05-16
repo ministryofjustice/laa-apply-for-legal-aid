@@ -67,7 +67,7 @@ en:
         submit_button: Agree and submit
     identify_types_of_incomes:
       show:
-        page_heading: What types of income do you receive?
+        page_heading: Which types of income do you receive?
     identify_types_of_outgoings:
       show:
         page_heading: What regular payments do you make?
@@ -105,7 +105,10 @@ en:
           situation and the details of your case.
     other_assets:
       show:
-        h1-heading: Do you have any of the following?
+        h1-heading: Which types of assets do you have?
+        h2-heading: Select all that apply
+        or_break: or
+        none_selected: None of these
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your home?
       hint: Check the statement from your mortgage provider or lender
