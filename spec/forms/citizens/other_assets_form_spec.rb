@@ -100,10 +100,6 @@ RSpec.describe Citizens::OtherAssetsForm do
         land_value: '1,234.55',
         check_box_jewellery_value: 'true',
         jewellery_value: '566.0',
-        check_box_vehicle_value: 'true',
-        vehicle_value: '7,338.0',
-        check_box_classic_car_value: 'true',
-        classic_car_value: '5,000',
         check_box_money_assets_value: 'true',
         money_assets_value: '3,500',
         check_box_money_owed_value: 'true',
@@ -145,8 +141,6 @@ RSpec.describe Citizens::OtherAssetsForm do
               expect(form.errors[:timeshare_value]).to eq [translation_for(:timeshare_value, 'not_a_number')]
               expect(form.errors[:land_value]).to eq [translation_for(:land_value, 'not_a_number')]
               expect(form.errors[:jewellery_value]).to eq [translation_for(:jewellery_value, 'not_a_number')]
-              expect(form.errors[:vehicle_value]).to eq [translation_for(:vehicle_value, 'not_a_number')]
-              expect(form.errors[:classic_car_value]).to eq [translation_for(:classic_car_value, 'not_a_number')]
               expect(form.errors[:money_assets_value]).to eq [translation_for(:money_assets_value, 'not_a_number')]
               expect(form.errors[:money_owed_value]).to eq [translation_for(:money_owed_value, 'not_a_number')]
               expect(form.errors[:trust_value]).to eq [translation_for(:trust_value, 'not_a_number')]
@@ -169,8 +163,6 @@ RSpec.describe Citizens::OtherAssetsForm do
         expect(oad.timeshare_value).to eq 67_762.0
         expect(oad.land_value).to eq 1_234.55
         expect(oad.jewellery_value).to eq 566.0
-        expect(oad.vehicle_value).to eq 7_338.0
-        expect(oad.classic_car_value).to eq 5_000.0
         expect(oad.money_assets_value).to eq 3_500.0
         expect(oad.money_owed_value).to eq 0.45
         expect(oad.trust_value).to eq 3_560_622.77

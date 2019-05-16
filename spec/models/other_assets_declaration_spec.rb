@@ -21,7 +21,7 @@ RSpec.describe OtherAssetsDeclaration, type: :model do
     end
 
     context 'has some savings' do
-      before { subject.update!(classic_car_value: Faker::Number.decimal.to_d) }
+      before { subject.update!(land_value: Faker::Number.decimal.to_d) }
 
       it 'is positive' do
         expect(subject.positive?).to eq(true)

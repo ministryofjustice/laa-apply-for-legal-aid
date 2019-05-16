@@ -162,11 +162,6 @@ en:
               blank: Enter explanation of why you think legal aid should be granted
         other_assets_declaration:
           attributes:
-            classic_car_value:
-              blank: Enter the estimated classic car value
-              greater_than_or_equal_to: Estimated classic car value must be 0 or more
-              not_a_number: Estimated classic car value must be an amount of money, like 60,000
-              too_many_decimals: Estimated classic car value must not include more than 2 decimal numbers
             jewellery_value:
               blank: Enter the estimated total value of valuable items
               greater_than_or_equal_to: Estimated jewellery value must be 0 or more
@@ -212,11 +207,6 @@ en:
               greater_than_or_equal_to: Estimated trust value must be 0 or more
               not_a_number: Estimated trust value must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
-            vehicle_value:
-              blank: Enter the estimated vehicle value
-              greater_than_or_equal_to: Estimated vehicle value must be 0 or more
-              not_a_number: Estimated vehicle value must be an amount of money, like 60,000
-              too_many_decimals: Estimated vehicle value must not include more than 2 decimal numbers
         respondent:
           attributes:
             understands_terms_of_court_order:
