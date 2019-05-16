@@ -77,6 +77,15 @@ RSpec.describe Providers::VehiclesController, type: :request do
           expect(response).to redirect_to(target_url)
         end
       end
+
+      context 'while checking answers' do
+        let(:legal_aid_application) { create :legal_aid_application, :checking_passported_answers }
+
+        it 'redirects to next page' do
+          subject
+          expect(response).to redirect_to(target_url)
+        end
+      end
     end
 
     context 'with option "false"' do
@@ -94,16 +103,25 @@ RSpec.describe Providers::VehiclesController, type: :request do
         expect(response).to redirect_to(target_url)
       end
 
-      context 'and exiting vehicle' do
+      context 'and existing vehicle' do
         let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
 
-        it 'does not create a vehicle' do
+        it 'delete existing vehicle' do
           expect { subject }.to change { Vehicle.count }.by(-1)
         end
 
         it 'redirects to savings and investment' do
           subject
           expect(response).to redirect_to(target_url)
+        end
+      end
+
+      context 'while checking answers' do
+        let(:legal_aid_application) { create :legal_aid_application, :checking_passported_answers }
+
+        it 'redirects to check answers page' do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
         end
       end
     end

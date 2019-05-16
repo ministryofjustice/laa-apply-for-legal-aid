@@ -18,6 +18,13 @@ en:
       submit:
         heading: Submit your details
         text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+    check_answers_vehicles:
+      heading: Vehicles
+      own: Does your client own a vehicle?
+      estimated_value: What is the estimated value of the vehicle?
+      payment_remaining: Are there any payments left on the vehicle?
+      purchased_on: When did your client buy the vehicle?
+      used_regularly: Is the vehicle in regular use?
     forms:
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980
