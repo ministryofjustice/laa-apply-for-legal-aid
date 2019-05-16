@@ -33,7 +33,7 @@ module GovUkFormHelper
   #   <% end %>
   #
   # Both result in the same output
-  def govuk_fieldset_header(text=nil, padding_below: nil, &block)
+  def govuk_fieldset_header(text = nil, padding_below: nil, &block)
     heading = text ? content_tag(:h1, text, class: 'govuk-fieldset__heading') : capture(&block)
     padding_class = padding_below && "govuk-!-padding-bottom-#{padding_below}"
     render(
