@@ -16,7 +16,6 @@ module CCMS
     end
 
     def process_records(parser)
-      parser.parse
       if parser.record_count.to_i.zero?
         AddApplicantService.new(submission).call
       else
