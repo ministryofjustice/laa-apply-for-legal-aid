@@ -5,19 +5,19 @@ RSpec.describe CCMS::AddCaseService do
   let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:case_add_requestor) { double CCMS::CaseAddRequestor }
+  let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   subject { described_class.new(submission) }
 
   before do
     allow(subject).to receive(:case_add_requestor).and_return(case_add_requestor)
+    allow(case_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
   end
 
   context 'operation successful' do
     let(:case_add_response) { ccms_data_from_file 'case_add_response.xml' }
-    let(:transaction_request_id_in_example_response) { '20190301030405123456' }
 
     before do
       expect(case_add_requestor).to receive(:call).and_return(case_add_response)
-      allow(case_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
     end
 
     it 'sets state to case_submitted' do
