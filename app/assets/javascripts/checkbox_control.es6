@@ -8,10 +8,12 @@ $(function() {
         and set it's "data-deselect-ctrl" to the jquery identifier for the control checkbox
   */
   $('.deselect-group').each(function() {
-    const container = $(this)
-    const control = $(container.data('deselect-ctrl'))
-    const checkboxMemory = []
-    const checkboxes = container.find("input:checkbox")
+    const container = $(this);
+    const control = $(container.data('deselect-ctrl'));
+    const checkboxMemory = [];
+    const checkboxes = container.find("input:checkbox");
+    const hiddenFieldMemory = [];
+    const hideableFields = container.find('.govuk-checkboxes__conditional');
 
     if(!control.length) return
 
@@ -25,17 +27,32 @@ $(function() {
         Set each checkbox based on its remembered state
     */
     control.change( function() {
-      const controlChecked = this.checked
+      const controlChecked = this.checked;
+
       checkboxes.each(function(index) {
         const checkbox = $(this)
         if(controlChecked) {
-          checkboxMemory[index] = this.checked
-          checkbox.prop("checked", false)
+          checkboxMemory[index] = this.checked;
+          checkbox.prop("checked", false);
         } else {
-          checkbox.prop("checked", checkboxMemory[index])
-        }
-      })
-    })
+          checkbox.prop("checked", checkboxMemory[index]);
+        };
+      });
+
+      hideableFields.each(function (index) {
+        const hideableField = $(this);
+        if (controlChecked) {
+          if (!hideableField.hasClass('govuk-checkboxes__conditional--hidden')) {
+            hideableField.addClass('govuk-checkboxes__conditional--hidden');
+            hiddenFieldMemory[index] = true
+          };
+        } else {
+          if (hiddenFieldMemory[index]) {
+            hideableField.removeClass('govuk-checkboxes__conditional--hidden');
+          };
+        };
+      });
+    });
 
     /*
       Monitor changes to the checkboxes within the container.

@@ -38,12 +38,12 @@ RSpec.describe 'provider other assets requests', type: :request do
           second_home_value: '875123',
           second_home_mortgage: '125,345.67',
           second_home_percentage: '64.440',
-          check_box_timeshare_value: 'true',
-          timeshare_value: '234,567.89',
+          check_box_timeshare_property_value: 'true',
+          timeshare_property_value: '234,567.89',
           check_box_land_value: 'true',
           land_value: '34,567.89',
-          check_box_jewellery_value: 'true',
-          jewellery_value: '456,789.01',
+          check_box_valuable_items_value: 'true',
+          valuable_items_value: '456,789.01',
           check_box_money_assets_value: 'true',
           money_assets_value: '89,012.34',
           check_box_money_owed_value: 'true',
@@ -61,21 +61,24 @@ RSpec.describe 'provider other assets requests', type: :request do
           second_home_value: '',
           second_home_mortgage: '',
           second_home_percentage: '',
-          check_box_timeshare_value: '',
-          timeshare_value: '',
+          check_box_timeshare_property_value: '',
+          timeshare_property_value: '',
           check_box_land_value: '',
           land_value: '',
-          check_box_jewellery_value: '',
-          jewellery_value: '',
+          check_box_valuable_items_value: '',
+          valuable_items_value: '',
           check_box_money_assets_value: '',
           money_assets_value: '',
           check_box_money_owed_value: '',
           money_owed_value: '',
           check_box_trust_value: '',
           trust_value: ''
-        }
+        },
+        none_selected: none_selected
       }
     end
+
+    let(:none_selected) { false }
 
     context 'when the provider is authenticated' do
       before do
@@ -86,6 +89,7 @@ RSpec.describe 'provider other assets requests', type: :request do
         let(:submit_button) do
           { continue_button: 'Continue' }
         end
+
         before do
           patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
         end
@@ -96,9 +100,9 @@ RSpec.describe 'provider other assets requests', type: :request do
             expect(oad.second_home_value).to eq 875_123
             expect(oad.second_home_mortgage).to eq 125_345.67
             expect(oad.second_home_percentage).to eq 64.44
-            expect(oad.timeshare_value).to eq 234_567.89
+            expect(oad.timeshare_property_value).to eq 234_567.89
             expect(oad.land_value).to eq 34_567.89
-            expect(oad.jewellery_value).to eq 456_789.01
+            expect(oad.valuable_items_value).to eq 456_789.01
             expect(oad.money_assets_value).to eq 89_012.34
             expect(oad.money_owed_value).to eq 90_123.45
             expect(oad.trust_value).to eq 1_234.56
@@ -123,6 +127,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has savings and investments' do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
+            let(:none_selected) { true }
 
             before do
               application.create_savings_amount!
@@ -142,6 +147,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has own home' do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:none_selected) { true }
 
             before do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
@@ -159,6 +165,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:state) { :checking_passported_answers }
             let(:application) { create :legal_aid_application, :without_own_home, state: state }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:none_selected) { true }
 
             before do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
@@ -183,16 +190,26 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has nothing' do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
+            let(:none_selected) { true }
 
             before do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
-            it 'redirects to check passported answers' do
-              expect(application.reload.other_assets?).to be false
-              expect(application.own_home?).to be false
-              expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+            context 'with none of these checkbox selected' do
+              it 'redirects to check passported answers' do
+                expect(application.reload.other_assets?).to be false
+                expect(application.own_home?).to be false
+                expect(application.savings_amount?).to be false
+                expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+              end
+            end
+            context 'and none of these checkbox is not selected' do
+              let(:none_selected) { false }
+
+              it 'the response includes the error message' do
+                expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.base.provider_none_selected'))
+              end
             end
           end
         end
@@ -238,9 +255,9 @@ RSpec.describe 'provider other assets requests', type: :request do
             expect(oad.second_home_value).to eq 875_123
             expect(oad.second_home_mortgage).to eq 125_345.67
             expect(oad.second_home_percentage).to eq 64.44
-            expect(oad.timeshare_value).to eq 234_567.89
+            expect(oad.timeshare_property_value).to eq 234_567.89
             expect(oad.land_value).to eq 34_567.89
-            expect(oad.jewellery_value).to eq 456_789.01
+            expect(oad.valuable_items_value).to eq 456_789.01
             expect(oad.money_assets_value).to eq 89_012.34
             expect(oad.money_owed_value).to eq 90_123.45
             expect(oad.trust_value).to eq 1_234.56
@@ -265,6 +282,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has savings and investments' do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
+            let(:none_selected) { true }
 
             before do
               application.create_savings_amount!
@@ -285,6 +303,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:params) { empty_params }
+            let(:none_selected) { true }
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be false
@@ -298,6 +317,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
             let(:params) { empty_params }
+            let(:none_selected) { true }
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be false

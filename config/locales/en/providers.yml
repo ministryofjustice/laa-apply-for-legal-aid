@@ -192,7 +192,10 @@ en:
         heading: Does your client use online banking?
     other_assets:
       show:
-        h1-heading: Does your client have any of the following?
+        h1-heading: Which types of assets does your client have?
+        h2-heading: Select all that apply
+        or_break: or
+        none_selected: None of these
     outgoings_summary:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment

@@ -8,7 +8,8 @@ module Providers
     def update
       authorize @legal_aid_application
       @form = Citizens::OtherAssetsForm.new(form_params)
-      render :show unless save_continue_or_draft(@form)
+      @form.errors.add :base, :provider_none_selected unless draft_selected? || none_checkbox_selected? || @form.any_checkbox_checked?
+      render :show unless !@form.errors.present? && save_continue_or_draft(@form)
     end
 
     private
@@ -22,6 +23,10 @@ module Providers
         attrs = Citizens::OtherAssetsForm::ALL_ATTRIBUTES + Citizens::OtherAssetsForm::CHECK_BOXES_ATTRIBUTES
         params[:other_assets_declaration].permit(*attrs)
       end
+    end
+
+    def none_checkbox_selected?
+      params[:none_selected] == 'true'
     end
   end
 end

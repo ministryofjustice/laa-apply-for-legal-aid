@@ -8,8 +8,6 @@ class CreateOtherAssetDeclaration < ActiveRecord::Migration[5.2]
       t.decimal :timeshare_value
       t.decimal :land_value
       t.decimal :jewellery_value
-      t.decimal :vehicle_value
-      t.decimal :classic_car_value
       t.decimal :money_assets_value
       t.decimal :money_owed_value
       t.decimal :trust_value

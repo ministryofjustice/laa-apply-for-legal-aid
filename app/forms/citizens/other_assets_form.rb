@@ -4,10 +4,11 @@ module Citizens
 
     form_for OtherAssetsDeclaration
 
+    VALUABLE_ITEMS_VALUE_ATTRIBUTE = %i[valuable_items_value].freeze
+
     SINGLE_VALUE_ATTRIBUTES = %i[
-      timeshare_value
+      timeshare_property_value
       land_value
-      jewellery_value
       money_assets_value
       money_owed_value
       trust_value
@@ -19,13 +20,14 @@ module Citizens
       second_home_percentage
     ].freeze
 
-    ALL_ATTRIBUTES = (SECOND_HOME_ATTRIBUTES + SINGLE_VALUE_ATTRIBUTES).freeze
+    ALL_ATTRIBUTES = (SECOND_HOME_ATTRIBUTES + SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).freeze
 
-    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + [:check_box_second_home]).freeze
+    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[check_box_second_home check_box_valuable_items_value]).freeze
 
     validates(:second_home_percentage, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validates(*SECOND_HOME_ATTRIBUTES, presence: true, if: proc { |form| form.check_box_second_home.present? })
     validates(*ALL_ATTRIBUTES - [:second_home_percentage], allow_blank: true, currency: { greater_than_or_equal_to: 0 })
+    validates(*VALUABLE_ITEMS_VALUE_ATTRIBUTE, presence: true, if: proc { |form| form.__send__(:check_box_valuable_items_value).present? })
 
     SINGLE_VALUE_ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
@@ -58,10 +60,14 @@ module Citizens
       ALL_ATTRIBUTES - [:second_home_percentage]
     end
 
+    def any_checkbox_checked?
+      CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.select(&:present?).any?
+    end
+
     private
 
     def empty_unchecked_values
-      SINGLE_VALUE_ATTRIBUTES.each do |attribute|
+      (SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).each do |attribute|
         check_box_attribute = "check_box_#{attribute}".to_sym
         if __send__(check_box_attribute).blank?
           attributes[attribute] = nil

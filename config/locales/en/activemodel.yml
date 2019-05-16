@@ -162,11 +162,11 @@ en:
               blank: Enter explanation of why you think legal aid should be granted
         other_assets_declaration:
           attributes:
-            jewellery_value:
+            valuable_items_value:
               blank: Enter the estimated total value of valuable items
-              greater_than_or_equal_to: Estimated jewellery value must be 0 or more
+              greater_than_or_equal_to: Estimated valuable item value must be 0 or more
               not_a_number: Estimated valuable items value must be an amount of money, like 60,000
-              too_many_decimals: Estimated jewellery value must not include more than 2 decimal numbers
+              too_many_decimals: Estimated valuable items value must not include more than 2 decimal numbers
             land_value:
               blank: Enter the estimated land value
               greater_than_or_equal_to: Estimated land value must be 0 or more
@@ -197,16 +197,19 @@ en:
               greater_than_or_equal_to: Estimated second home value must be 0 or more
               not_a_number: Estimated value must be an amount of money, like 60,000
               too_many_decimals: Estimated second home value must not include more than 2 decimal numbers
-            timeshare_value:
-              blank: Enter the estimated timeshare value
+            timeshare_property_value:
+              blank: Enter the estimated timeshare property value
               greater_than_or_equal_to: Estimated timeshare value must be 0 or more
-              not_a_number: Estimated timeshare value must be an amount of money, like 60,000
+              not_a_number: Estimated timeshare property value must be an amount of money, like 60,000
               too_many_decimals: Estimated timeshare value must not include more than 2 decimal numbers
             trust_value:
               blank: Enter the estimated value of trust
               greater_than_or_equal_to: Estimated trust value must be 0 or more
               not_a_number: Estimated trust value must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
+            base:
+              citizen_none_selected: Select if you have any of these types of assets              
+              provider_none_selected: Select if your client has any of these types of assets
         respondent:
           attributes:
             understands_terms_of_court_order:

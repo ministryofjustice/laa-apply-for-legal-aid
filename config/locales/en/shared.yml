@@ -59,21 +59,23 @@ en:
         attribute:
           citizens:
             other_assets:
-              check_box_jewellery_value: Jewellery, art or antiques with a value over £500
+              check_box_valuable_items_value: Any valuable items worth more than £500
               check_box_land_value: Land
               check_box_money_assets_value: Money or assets from the estate of a person who has died
               check_box_money_owed_value: Money owed to you, including from a private mortgage
               check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
               check_box_second_home_percentage: Second property or holiday home percentage owned
               check_box_second_home_value: Second property or holiday home estimated value
-              check_box_timeshare_value: Timeshare
+              check_box_timeshare_property_value: Timeshare property
               check_box_trust_value: Interest in a trust
-              jewellery_value: Enter estimated value, minus any sale costs
+              valuable_items_value: Enter estimated total value, minus any sale costs
               land_value: Enter estimated value
               money_assets_value: Enter estimated total value
               money_owed_value: Enter estimated amount owed
-              timeshare_value: Enter value, minus any loan and sale costs
+              timeshare_property_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
+              hint:
+                check_box_valuable_items_value: For example, jewellery, art or antiques. Do not include wedding or engagement rings, furniture, clothing or tools used for work.
             savings_and_investments:
               cash: Enter total amount
               check_box_cash: Cash savings
@@ -95,21 +97,23 @@ en:
               plc_shares: Enter the total value of all you own
           providers:
             other_assets:
-              check_box_jewellery_value: Jewellery, art or antiques with a value over £500
+              check_box_valuable_items_value: Any valuable items worth more than £500
               check_box_land_value: Land
               check_box_money_assets_value: Money or assets from the estate of a person who has died
-              check_box_money_owed_value: Money owed to you, including from a private mortgage
+              check_box_money_owed_value: Money owed to them, including from a private mortgage
               check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
               check_box_second_home_percentage: Second property or holiday home percentage owned
               check_box_second_home_value: Second property or holiday home estimated value
-              check_box_timeshare_value: Timeshare
+              check_box_timeshare_property_value: Timeshare property
               check_box_trust_value: Interest in a trust
-              jewellery_value: Enter estimated value, minus any sale costs
+              valuable_items_value: Enter estimated total value, minus any sale costs
               land_value: Enter estimated value
               money_assets_value: Enter estimated total value
               money_owed_value: Enter estimated amount owed
-              timeshare_value: Enter value, minus any loan and sale costs
+              timeshare_property_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
+              hint:
+                check_box_valuable_items_value: For example, jewellery, art or antiques. Do not include wedding or engagement rings, furniture, clothing or tools used for work.              
             savings_and_investments:
               cash: Enter total amount
               check_box_cash: Cash savings

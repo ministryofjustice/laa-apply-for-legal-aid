@@ -21,7 +21,7 @@ Feature: Citizen journey
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "What types of income do you receive?"
+    Then I should be on a page showing "Which types of income do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
     Then I should be on a page showing "What regular payments do you make?"
@@ -46,7 +46,7 @@ Feature: Citizen journey
     Then I select "Cash savings"
     Then I fill "Cash" with "100"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do you have any of the following?"
+    Then I should be on a page showing "Which types of assets do you have?"
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
@@ -160,7 +160,7 @@ Feature: Citizen journey
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Do you have any of the following?'
+    Then I should be on a page showing 'Which types of assets do you have?'
     Then I fill 'Land value' with '1234.56'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
@@ -174,14 +174,14 @@ Feature: Citizen journey
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Do you have any of the following?'
-    Then I select 'Timeshare'
-    Then I fill 'Timeshare value' with '10000'
+    Then I should be on a page showing 'Which types of assets do you have?'
+    Then I select 'Timeshare property'
+    Then I fill 'Timeshare property value' with '10000'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Other assets' should be 'Timeshare'
+    And the answer for 'Other assets' should be 'Timeshare property'
     And the answer for 'Other assets' should be '£10,000.00'
 
   @javascript
@@ -189,7 +189,7 @@ Feature: Citizen journey
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Do you have any of the following?'
+    Then I should be on a page showing 'Which types of assets do you have?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
