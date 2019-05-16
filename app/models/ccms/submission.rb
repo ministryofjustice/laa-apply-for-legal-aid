@@ -13,13 +13,13 @@ module CCMS
     def process!
       case aasm_state
       when 'initialised'
-        ObtainCaseReferenceService.new(self).call
+        ObtainCaseReferenceService.call(self)
       when 'case_ref_obtained'
-        ObtainApplicantReferenceService.new(self).call
+        ObtainApplicantReferenceService.call(self)
       when 'applicant_submitted'
-        CheckApplicantStatusService.new(self).call
+        CheckApplicantStatusService.call(self)
       when 'applicant_ref_obtained'
-        AddCaseService.new(self).call
+        AddCaseService.call(self)
       else
         raise CcmsError, 'Unknown state'
       end
