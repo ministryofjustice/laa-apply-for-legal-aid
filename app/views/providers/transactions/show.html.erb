@@ -35,7 +35,7 @@
       </thead>
       <tbody class="govuk-table__body">
         <%= form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description do |builder| %>
-          <tr class="govuk-table__row" aria-hidden=true>
+          <tr class="govuk-table__row">
             <td class="govuk-table__cell">
               <% if builder.object.transaction_type_id == nil || builder.object.transaction_type_id == @transaction_type.id %>
                 <div class="govuk-checkboxes__item">
