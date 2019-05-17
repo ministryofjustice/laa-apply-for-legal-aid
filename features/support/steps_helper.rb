@@ -2,6 +2,10 @@ Then('I should be on a page showing {string}') do |title|
   expect(page).to have_content(title)
 end
 
+Then('I should be on a page not showing {string}') do |title|
+  expect(page).not_to have_content(title)
+end
+
 Then('I choose {string}') do |option|
   choose(option, allow_label_click: true)
 end

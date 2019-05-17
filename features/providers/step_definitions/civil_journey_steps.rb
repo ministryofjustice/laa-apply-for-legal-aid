@@ -205,6 +205,21 @@ Given('I complete the application and view the check your answers page') do
   visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
 end
 
+Given('The means questions have been answered by the applicant') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :means_completed
+  )
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
 When('the search for {string} is not successful') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
 end

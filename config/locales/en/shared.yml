@@ -33,6 +33,10 @@ en:
         occurred_on_label: When did the incident occur?
         told_on_hint: For example 31 3 2019
         purchased_on_hint: For example, 31 3 1980.
+      identify_types_of_outgoings_form:
+        sub_heading: Select all that apply
+        or_break: or
+        none_selected: None of these
       outstanding_mortgage_form:
         citizens:
           outstanding_mortgages:
