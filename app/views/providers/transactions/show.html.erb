@@ -40,7 +40,7 @@
               <% if builder.object.transaction_type_id == nil || builder.object.transaction_type_id == @transaction_type.id %>
                 <div class="govuk-checkboxes__item">
                   <% checked = builder.object.transaction_type_id == @transaction_type.id %>
-                  <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked, 'aria-labelled-by' => 'Date-' + builder.object.id + ' Description-' + builder.object.id + ' Amount-' + builder.object.id) %>
+                  <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked, 'aria-labelledby' => 'Date-' + builder.object.id + ' Description-' + builder.object.id + ' Amount-' + builder.object.id) %>
                   <label for="transaction_ids_<%= builder.object.id %>" class="govuk-label govuk-checkboxes__label table-checkbox_label"><span class="govuk-visually-hidden"><%= builder.object.description %>, <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %> on <%= l(builder.object.happened_at.to_date, format: :long_date) %></span></label>
                 </div>
               <% end %>
