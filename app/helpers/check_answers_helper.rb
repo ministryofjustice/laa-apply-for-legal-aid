@@ -45,7 +45,7 @@ module CheckAnswersHelper
 
   def check_answer_change_link(name:, url:, question:)
     render(
-      'shared/check_answers/test_section',
+      'shared/check_answers/only_link_section',
       name: name,
       url: url,
       question: question
