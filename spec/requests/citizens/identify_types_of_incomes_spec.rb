@@ -93,7 +93,7 @@ RSpec.describe 'IndentifyTypesOfIncomesController' do
           create :legal_aid_application, :with_applicant, transaction_types: income_types
         end
 
-        it 'does not add transaction types to the application' do
+        it 'removes transaction types from the application' do
           expect { subject }.to change { LegalAidApplicationTransactionType.count }
             .by(-income_types.length)
         end
