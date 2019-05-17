@@ -396,6 +396,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I choose option "Vehicle persisted false"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I select "Cash savings"
     Then I fill "Cash" with "10000"
@@ -416,6 +419,8 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I click link "Back"
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I click link "Back"
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own their home with anyone else?"
@@ -425,6 +430,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "How much is your client's home worth?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
@@ -501,3 +507,24 @@ Feature: Civil application journeys
     Then I should be on a page showing "Thank you for your feedback"
     Then I click link "Back"
     Then I should be on the Applicant page
+
+  @javascript
+  Scenario: Complete the vehicle part of the journey
+    Given I start the journey as far as the start of the vehicle section
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I choose option "Vehicle persisted true"
+    And I click "Save and continue"
+    Then I should be on a page showing "What is the estimated value of the vehicle?"
+    Then I fill "Estimated value" with "4000"
+    And I click "Save and continue"
+    Then I should be on a page showing "Are there any payments left on the vehicle?"
+    Then I choose option "Vehicle payments remain true"
+    Then I fill "Payment remaining" with "2000"
+    And I click "Save and continue"
+    Then I should be on a page showing "When did your client buy the vehicle?"
+    Then I enter the purchase date '21-3-2002'
+    And I click "Save and continue"
+    Then I should be on a page showing "Is the vehicle in regular use?"
+    Then I choose option "Vehicle used regularly true"
+    And I click "Save and continue"
+    Then I should be on a page showing "Does your client have any savings and investments?"
