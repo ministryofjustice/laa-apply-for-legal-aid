@@ -1,6 +1,6 @@
 <%= page_template(
       page_title: t('forms.address_selection.heading'),
-      template: :form
+      template: :basic
     ) do %>
 
   <%= form_with(
@@ -11,42 +11,45 @@
         local: true
       ) do |f| %>
 
-    <div class="govuk-!-padding-bottom-8"></div>
+    <%= govuk_form_group show_error_if: @form.errors[:lookup_id].present? do %>
+      <%= govuk_fieldset_header page_heading %>
 
-    <%= label_tag t('generic.address.postcode_label'), class: 'govuk-label' do %>
-      <%= t('generic.address.postcode') %>
-      <p class='govuk-body govuk-!-font-weight-bold'>
-        <%= @form.postcode %>
-        <%= link_to(
-              t('generic.change'),
-              providers_legal_aid_application_address_lookup_path(@legal_aid_application),
-              class: 'govuk-body change-link change-postcode-link'
-            ) %>
-      </p>
-    <% end %>
-    <%= f.hidden_field :postcode %>
-
-    <% @addresses.each do |address| %>
-      <%= hidden_field_tag 'address_selection[list][]', address.to_json %>
-    <% end %>
-
-    <div class="govuk-!-padding-bottom-2"></div>
-
-    <% group_error_class = @form.errors[:address].any? ? 'govuk-form-group--error' : '' %>
-    <div class="govuk-form-group <%= group_error_class %>">
-      <%= f.label :address, t('.select_address_label'), class: 'govuk-label' %>
-      <% if @form.errors[:address].any? %>
-        <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
+      <%= label_tag t('generic.address.postcode_label'), class: 'govuk-label' do %>
+        <%= t('generic.address.postcode') %>
+        <p class='govuk-body govuk-!-font-weight-bold'>
+          <%= @form.postcode %>
+          <%= link_to(
+                t('generic.change'),
+                providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+                class: 'govuk-body change-link change-postcode-link'
+              ) %>
+        </p>
       <% end %>
-      <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
-      <%= f.select(
-            :lookup_id,
-            @addresses.collect { |a| [a.full_address, a.lookup_id] },
-            { include_blank: "#{@addresses.size} addresses found" },
-            class: "govuk-select govuk-!-width-full #{input_error_class}",
-            id: :address
-          ) %>
-    </div>
+      <%= f.hidden_field :postcode %>
+
+      <% @addresses.each do |address| %>
+        <%= hidden_field_tag 'address_selection[list][]', address.to_json %>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <% group_error_class = @form.errors[:address].any? ? 'govuk-form-group--error' : '' %>
+      <div class="govuk-form-group <%= group_error_class %>">
+        <%= f.label :address, t('.select_address_label'), class: 'govuk-label' %>
+        <% if @form.errors[:address].any? %>
+          <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
+        <% end %>
+        <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
+        <%= f.select(
+              :lookup_id,
+              @addresses.collect { |a| [a.full_address, a.lookup_id] },
+              { include_blank: "#{@addresses.size} addresses found" },
+              class: "govuk-select govuk-!-width-full #{input_error_class}",
+              id: :address
+            ) %>
+      </div>
+
+    <% end %>
 
     <p><%= link_to t('.link_text'), providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
 
