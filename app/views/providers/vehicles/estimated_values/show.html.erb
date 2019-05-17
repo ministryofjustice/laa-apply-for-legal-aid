@@ -1,0 +1,22 @@
+<%= page_template page_title: t('.heading'), template: :basic do %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_vehicles_estimated_value_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+    <%= govuk_form_group show_error_if: @form.errors.present? do %>
+      <%= govuk_fieldset_header page_title, padding_below: 0 %>
+      <%= form.govuk_text_field(
+            :estimated_value,
+            hint: t('.use_car_valuation_sites'),
+            label: nil,
+            value: number_to_currency_or_original_string(@form.model.estimated_value),
+            input_prefix: t('currency.gbp'),
+            class: 'govuk-!-width-one-third'
+          ) %>
+    <% end %>
+    <div class="govuk-!-padding-bottom-4"></div>
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

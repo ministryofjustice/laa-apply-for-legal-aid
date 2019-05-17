@@ -66,6 +66,16 @@ Given('I start the merits application') do
   )
 end
 
+Given('I start the journey as far as the start of the vehicle section') do
+  @legal_aid_application = create(:application)
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_vehicle_journey,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
 Given('I complete the journey as far as check your answers') do
   applicant = create(
     :applicant,
@@ -280,10 +290,17 @@ Then('I enter name {string}, {string}') do |first_name, last_name|
 end
 
 Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
-  dob_day, dob_month, dob_year = dob.split('-')
-  fill_in('date_of_birth', with: dob_day)
-  fill_in('dob_month', with: dob_month)
-  fill_in('dob_year', with: dob_year)
+  day, month, year = dob.split('-')
+  fill_in('date_of_birth', with: day)
+  fill_in('dob_month', with: month)
+  fill_in('dob_year', with: year)
+end
+
+Then(/^I enter the purchase date '(\d+-\d+-\d+)'$/) do |purchase_date|
+  day, month, year = purchase_date.split('-')
+  fill_in('purchased_on', with: day)
+  fill_in('purchased_on_month', with: month)
+  fill_in('purchased_on_year', with: year)
 end
 
 Then('I enter the told on date of {int} days ago') do |number|

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_143403) do
-
+ActiveRecord::Schema.define(version: 2019_05_14_212618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -189,6 +188,8 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
     t.string "aasm_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "applicant_add_transaction_id"
+    t.integer "poll_count", default: 0
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
   end
 
@@ -406,6 +407,17 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
     t.datetime "archived_at"
   end
 
+  create_table "vehicles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "estimated_value"
+    t.decimal "payment_remaining"
+    t.date "purchased_on"
+    t.boolean "used_regularly"
+    t.uuid "legal_aid_application_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_vehicles_on_legal_aid_application_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
@@ -427,4 +439,5 @@ ActiveRecord::Schema.define(version: 2019_04_25_143403) do
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
+  add_foreign_key "vehicles", "legal_aid_applications"
 end

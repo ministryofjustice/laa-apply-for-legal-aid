@@ -5,9 +5,10 @@ module Flow
     KEY_POINTS = {
       citizens: {},
       providers: {
+        journey_start: :applicants,
         start_after_applicant_completes_means: :client_completed_means,
         start_income_update: :capital_introductions,
-        journey_start: :applicants
+        start_vehicle_journey: :vehicles
       }
     }.freeze
 

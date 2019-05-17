@@ -5,7 +5,6 @@
 #       include BaseForm
 #       form_for <ModelClass>
 #
-
 module BaseForm
   attr_writer :model
 

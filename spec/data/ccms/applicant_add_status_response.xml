@@ -18,9 +18,10 @@
         </header:RequestDetails>
         <header:Status>
           <header:Status>Success</header:Status>
-          <header:StatusFreeText>User Authentication complete.</header:StatusFreeText>
+          <header:StatusFreeText>Party Successfully Created.</header:StatusFreeText>
         </header:Status>
       </header:HeaderRS>
+      <msg:ClientReferenceNumber>20910584</ns2:ClientReferenceNumber>
     </ClientAddUpdtStatusRS>
   </env:Body>
 </env:Envelope>
