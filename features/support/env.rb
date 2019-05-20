@@ -10,12 +10,21 @@ require 'capybara/cucumber'
 require 'selenium/webdriver'
 require 'webmock/cucumber'
 require 'factory_bot'
+require 'webdrivers'
 
 allowed_sites = [
-  ->(uri) { uri.to_s =~ /__identify__/ || uri.to_s =~ /127.0.0.1.*(session|shutdown)/ }
+  ->(uri) do
+    [
+      /__identify__/,
+      /127.0.0.1.*(session|shutdown)/,
+      /chromedriver.storage.googleapis.com/
+    ].any? { |pattern| uri.to_s =~ pattern }
+  end
 ]
 
 WebMock.disable_net_connect!(allow: allowed_sites)
+
+Webdrivers::Chromedriver.update
 
 Capybara.register_driver :headless_chrome do |app|
   browser_options = Selenium::WebDriver::Chrome::Options.new(args: %w[start-maximized headless disable-gpu no-sandbox])
