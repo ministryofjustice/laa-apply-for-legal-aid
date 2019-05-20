@@ -22,23 +22,25 @@ Sidekiq.configure_server do |config|
   # accepts :expiration (optional)
   Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
 
-  config.server_middleware do |chain|
-    chain.add PrometheusExporter::Instrumentation::Sidekiq
-  end
+  if Rails.env.production? && Rails.configuration.x.kubernetes_deployment
+    config.server_middleware do |chain|
+      chain.add PrometheusExporter::Instrumentation::Sidekiq
+    end
 
-  config.death_handlers << ->(job, _ex) do
-    PrometheusExporter::Client.default.send_json(
-      type: 'sidekiq',
-      name: job['class'],
-      dead: true
-    )
-  end
+    config.death_handlers << ->(job, _ex) do
+      PrometheusExporter::Client.default.send_json(
+        type: 'sidekiq',
+        name: job['class'],
+        dead: true
+      )
+    end
 
-  config.on :startup do
-    PrometheusExporter::Instrumentation::Process.start type: 'sidekiq'
-  end
+    config.on :startup do
+      PrometheusExporter::Instrumentation::Process.start type: 'sidekiq'
+    end
 
-  at_exit do
-    PrometheusExporter::Client.default.stop(wait_timeout_seconds: 10)
+    at_exit do
+      PrometheusExporter::Client.default.stop(wait_timeout_seconds: 10)
+    end
   end
 end
