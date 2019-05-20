@@ -51,6 +51,17 @@ Given('I start the journey as far as the applicant page') do
   )
 end
 
+Given('I start the journey as far as the client completed means page') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_everything,
+    :means_completed
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_client_completed_means_path(@legal_aid_application))
+end
+
 Given('I start the merits application') do
   @legal_aid_application = create(
     :application,

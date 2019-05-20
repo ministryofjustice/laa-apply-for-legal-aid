@@ -21,7 +21,8 @@ Feature: Citizen journey
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Select any types of income you receive"
+    Then I should be on a page showing "What types of income do you receive?"
+    And I select 'None of these'
     Then I click 'Save and continue'
     Then I should be on a page showing "Select any regular payments you make"
     Then I select "Rent or mortgage"

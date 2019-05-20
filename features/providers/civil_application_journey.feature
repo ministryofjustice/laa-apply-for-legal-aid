@@ -328,6 +328,23 @@ Feature: Civil application journeys
     Then I should be on a page showing "Contact us"
     Then I click link "Back"
     Then I should be on the Applicant page
+  
+  @javascript @vcr
+  Scenario: I am able to view the client completed means answers
+    Given I start the journey as far as the client completed means page
+    Then I should be on a page showing 'Your client has completed their financial assessment'
+    Then I click 'Continue'
+    Then I should be on a page showing "Your client's income"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Your client's regular payments"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click link 'View/change declared income'
+    Then I should be on a page showing "Your client's income"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
 
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive benefits
