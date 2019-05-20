@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.field_set_header'), template: :form do %>
+<%= page_template page_title: t('.field_set_header') do %>
 
   <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
     <%= govuk_form_group(

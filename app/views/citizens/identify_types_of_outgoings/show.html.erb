@@ -1,12 +1,14 @@
-<%= page_template page_title: t('.page_heading'), template: :form do %>
+<%= page_template page_title: t('.page_heading'), template: :basic do %>
   <%= form_with(model: @legal_aid_application, url: citizens_identify_types_of_outgoing_path, method: :patch, local: true) do |form| %>
 
-    <div class="govuk-!-padding-bottom-4"></div>
+    <%= govuk_form_group show_error_if: @legal_aid_application.errors.present? do %>
+      <%= govuk_fieldset_header page_heading, padding_below: 0 %>
 
-    <%= transaction_type_check_boxes(
-          form: form,
-          transaction_types: TransactionType.debits
-        ) %>
+      <%= transaction_type_check_boxes(
+            form: form,
+            transaction_types: TransactionType.debits
+          ) %>
+    <% end %>
 
     <%= next_action_buttons(form: form) %>
   <% end %>
