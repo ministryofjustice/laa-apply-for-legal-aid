@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
-gem 'aasm', '~> 5.0.4'
+gem 'aasm', '~> 5.0.5'
 gem 'active_model_serializers', '~> 0.10.9'
 gem 'govuk_notify_rails', '~> 2.1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
@@ -94,7 +94,6 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'chromedriver-helper'
   gem 'climate_control' # Allows environment variables to be modified within specs
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
@@ -105,6 +104,7 @@ group :test do
   gem 'simplecov-rcov'
   gem 'timecop'
   gem 'vcr'
+  gem 'webdrivers', '~> 3.9'
   gem 'webmock'
 end
 

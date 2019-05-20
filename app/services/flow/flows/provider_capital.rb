@@ -72,7 +72,8 @@ module Flow
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
-          forward: :outgoings_summary
+          forward: :outgoings_summary,
+          check_answers: :means_summaries
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },

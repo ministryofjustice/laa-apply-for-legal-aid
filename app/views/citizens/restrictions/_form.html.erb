@@ -1,8 +1,8 @@
-<div class="govuk-!-padding-bottom-4"></div>
-<h2 class="govuk-heading-m"><%= t '.sub_heading' %></h2>
-
 <%= form_with(model: model, url: url, method: :post, local: true) do |form| %>
   <%= govuk_form_group do %>
+    <%= govuk_fieldset_header page_heading %>
+    <h2 class="govuk-heading-m"><%= t '.sub_heading' %></h2>
+
     <div class="govuk-checkboxes">
       <%= form.collection_check_boxes :restriction_ids, Restriction.all, :id, :label_name do |restriction_form| %>
         <div class="govuk-checkboxes__item">
