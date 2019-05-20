@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_111339) do
-
+ActiveRecord::Schema.define(version: 2019_05_14_212618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -296,7 +295,9 @@ ActiveRecord::Schema.define(version: 2019_05_16_111339) do
     t.decimal "second_home_percentage", precision: 14, scale: 2
     t.decimal "timeshare_value", precision: 14, scale: 2
     t.decimal "land_value", precision: 14, scale: 2
-    t.decimal "valuable_items_value", precision: 14, scale: 2
+    t.decimal "jewellery_value", precision: 14, scale: 2
+    t.decimal "vehicle_value", precision: 14, scale: 2
+    t.decimal "classic_car_value", precision: 14, scale: 2
     t.decimal "money_assets_value", precision: 14, scale: 2
     t.decimal "money_owed_value", precision: 14, scale: 2
     t.decimal "trust_value", precision: 14, scale: 2
