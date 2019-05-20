@@ -1,30 +1,40 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::IdentifyTypesOfIncomesController do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:secure_id) { legal_aid_application.generate_secure_id }
+RSpec.describe Providers::IdentifyTypesOfIncomesController do
+  let(:legal_aid_application) { create :legal_aid_application }
+  let(:target_url) { providers_legal_aid_application_identify_types_of_income_path(legal_aid_application) }
+  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+  let(:provider) { legal_aid_application.provider }
+  let(:login) { login_as provider }
+
   before do
-    get citizens_legal_aid_application_path(secure_id)
+    login
   end
 
-  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
-
-  describe 'GET /citizens/identify_types_of_income' do
-    before { get citizens_identify_types_of_income_path }
+  describe 'GET /providers/applications/:legal_aid_application_id/identify_types_of_income' do
+    subject { get target_url }
 
     it 'returns http success' do
+      subject
       expect(response).to have_http_status(:ok)
     end
 
     it 'displays the income type labels' do
-      income_types.map(&:label_name).each do |label|
+      subject
+      income_types.map(&:providers_label_name).each do |label|
         expect(unescaped_response_body).to include(label)
       end
       expect(unescaped_response_body).not_to include('translation missing')
     end
+
+    context 'when the provider is not authenticated' do
+      let(:login) { nil }
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
   end
 
-  describe 'PATCH /citizens/identify_types_of_income' do
+  describe 'PATCH /providers/applications/:legal_aid_application_id/identify_types_of_income' do
     let(:transaction_type_ids) { [] }
     let(:params) do
       {
@@ -33,7 +43,8 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController do
         }
       }
     end
-    subject { patch citizens_identify_types_of_income_path, params: params }
+
+    subject { patch target_url, params: params }
 
     it 'does not add transaction types to the application' do
       expect { subject }.not_to change { LegalAidApplicationTransactionType.count }

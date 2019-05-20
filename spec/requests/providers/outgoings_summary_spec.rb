@@ -38,7 +38,7 @@ RSpec.describe Providers::OutgoingsSummaryController do
     it 'displays a section for all transaction types linked to this application' do
       subject
       name = transaction_type.name
-      legend = I18n.t("transaction_types.names.#{name}")
+      legend = I18n.t("transaction_types.names.providers.#{name}")
       expect(parsed_response_body.css("ol li h2#outgoing-type-#{name}").text).to match(/#{legend}/)
     end
 

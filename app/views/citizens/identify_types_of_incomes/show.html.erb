@@ -1,37 +1,6 @@
 <%= page_template page_title: t('.page_heading'), template: :basic, show_errors_for: @legal_aid_application do %>
-  <%= form_with(
-        model: @legal_aid_application,
-        url: citizens_identify_types_of_income_path,
-        method: :patch,
-        local: true
-      ) do |form| %>
-
-    <%= govuk_form_group show_error_if: @legal_aid_application.errors.present? do %>
-      <%= govuk_fieldset_header do %>
-        <h1 class="govuk-fieldset__heading govuk-!-padding-bottom-2"><%= page_title %></h1>
-        <h2 class="govuk-heading-m"><%= t('.sub_heading') %></h2>
-      <% end %>
-
-      <div class="deselect-group" data-deselect-ctrl="#none_selected">
-        <%= transaction_type_check_boxes(
-              form: form,
-              transaction_types: TransactionType.credits,
-              hints: {
-                friends_or_family: t('.financial_help_examples')
-              }
-            ) %>
-      </div>
-
-      <p class="govuk-!-padding-top-4"><%= t('.or_break') %></p>
-
-      <div class="govuk-checkboxes">
-        <div class="govuk-checkboxes__item">
-          <%= check_box_tag :none_selected, 'true', false, class: 'govuk-checkboxes__input' %>
-          <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
-        </div>
-      </div>
-
-    <% end %>
-    <%= next_action_buttons(form: form) %>
-  <% end %>
+  <%= render(
+        'shared/forms/types_of_income_form',
+        form_path: citizens_identify_types_of_income_path
+      ) %>
 <% end %>
