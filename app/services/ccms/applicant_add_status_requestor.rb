@@ -1,16 +1,28 @@
 module CCMS
   class ApplicantAddStatusRequestor < BaseRequestor
+    wsdl_from 'ClientProxyServiceWsdl.xml'.freeze
+
+    uses_namespaces(
+      'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
+      'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+      'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM',
+      'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
+      'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
+      'xmlns:ns3' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
+      'xmlns:ns4' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
+      'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'
+    )
+
     attr_reader :applicant_add_transaction_id
 
     def initialize(applicant_add_transaction_id)
       @applicant_add_transaction_id = applicant_add_transaction_id
-      super()
     end
 
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call
-      @soap_client.call(:get_client_txn_status, message: request_xml)
+      soap_client.call(:get_client_txn_status, message: request_xml)
     end
     # :nocov:
 
@@ -25,23 +37,6 @@ module CCMS
         xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
         xml.__send__('ns2:TransactionID', applicant_add_transaction_id)
       end
-    end
-
-    def namespaces
-      {
-        'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
-        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM',
-        'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
-        'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-        'xmlns:ns3' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
-        'xmlns:ns4' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
-        'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'
-      }.freeze
-    end
-
-    def wsdl_location
-      "#{File.dirname(__FILE__)}/wsdls/ClientProxyServiceWsdl.xml".freeze
     end
   end
 end
