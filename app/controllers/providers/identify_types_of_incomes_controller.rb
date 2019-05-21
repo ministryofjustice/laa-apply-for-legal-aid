@@ -6,7 +6,7 @@ module Providers
 
     def update
       authorize legal_aid_application
-      return go_forward if none_selected? || transactions_added
+      return continue_or_draft if draft_selected? || none_selected? || transactions_added
 
       legal_aid_application.errors.add :base, :none_selected
       render :show

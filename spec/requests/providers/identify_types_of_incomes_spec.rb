@@ -43,8 +43,9 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
         }
       }
     end
+    let(:submit_button) { {} }
 
-    subject { patch target_url, params: params }
+    subject { patch target_url, params: params.merge(submit_button) }
 
     it 'does not add transaction types to the application' do
       expect { subject }.not_to change { LegalAidApplicationTransactionType.count }
@@ -121,6 +122,15 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
 
       it 'does not add the transaction types' do
         expect { subject }.not_to change { legal_aid_application.transaction_types.count }
+      end
+    end
+
+    context 'submitted with Save as draft' do
+      let(:submit_button) { { draft_button: 'Save as draft' } }
+
+      it 'redirects to the list of applications' do
+        subject
+        expect(response).to redirect_to providers_legal_aid_applications_path
       end
     end
   end
