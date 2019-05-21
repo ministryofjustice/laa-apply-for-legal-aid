@@ -74,7 +74,10 @@ en:
         none_selected: None of these
     identify_types_of_outgoings:
       show:
-        page_heading: Select any regular payments you make
+        page_heading: What regular payments do you make?
+        sub_heading: Select all that apply
+        or_break: or
+        none_selected: None of these
     information:
       show:
         heading: Give one-time access to your bank accounts

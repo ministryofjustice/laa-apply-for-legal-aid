@@ -32,23 +32,24 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       it 'displays the correct questions' do
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.notification_of_latest_incident'))
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.date_of_latest_incident'))
+        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.details_of_latest_incident'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.understands_terms_of_court_order'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.warning_letter_sent'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.police_notified'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.bail_conditions_set'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.statement_of_case'))
         expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.prospects_of_success'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.client_declaration'))
       end
 
       it 'displays the correct URLs for changing values' do
-        expect(response.body).to have_change_link(:understands_terms_of_court_order, providers_legal_aid_application_respondent_path(application, anchor: :understands_terms_of_court_order))
-        expect(response.body).to have_change_link(:warning_letter_sent, providers_legal_aid_application_respondent_path(application, anchor: :warning_letter_sent))
-        expect(response.body).to have_change_link(:police_notified, providers_legal_aid_application_respondent_path(application, anchor: :police_notified))
-        expect(response.body).to have_change_link(:bail_conditions_set, providers_legal_aid_application_respondent_path(application, anchor: :bail_conditions_set))
+        expect(response.body).to have_change_link(:notification_of_latest_incident, providers_legal_aid_application_date_client_told_incident_path(application))
+        expect(response.body).to have_change_link(:date_of_latest_incident, providers_legal_aid_application_details_latest_incident_path(application))
+        expect(response.body).to have_change_link(:details_of_latest_incident, providers_legal_aid_application_details_latest_incident_path(application))
+        expect(response.body).to have_change_link(:respondent_details, providers_legal_aid_application_respondent_path)
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
         expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_prospects_path(application))
-        expect(response.body).to have_change_link(:client_declaration, providers_legal_aid_application_merits_declaration_path(application))
       end
 
       it 'displays the details of wether the respondent understands the terms of court order' do
@@ -76,10 +77,6 @@ RSpec.describe 'check merits answers requests', type: :request do
           expect(response.body).to include(I18n.translate("shared.forms.success_prospect.success_prospect_item.#{application.merits_assessment.success_prospect}"))
           expect(response.body).to include(application.merits_assessment.success_prospect_details)
         end
-      end
-
-      it 'displays the client declaration' do
-        expect(unescaped_response_body).to include(I18n.translate('providers.check_merits_answers.show.items.client_declaration_answer'))
       end
 
       it 'should change the state to "checking_merits_answers"' do

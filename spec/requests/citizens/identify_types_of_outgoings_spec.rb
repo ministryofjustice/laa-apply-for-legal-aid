@@ -40,8 +40,14 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController' do
       expect { subject }.not_to change { LegalAidApplicationTransactionType.count }
     end
 
-    it 'redirects to the next step' do
-      expect(subject).to redirect_to(flow_forward_path)
+    it 'should display an error' do
+      subject
+      expect(response.body).to match('govuk-error-summary')
+    end
+
+    it 'returns http success' do
+      subject
+      expect(response).to have_http_status(:ok)
     end
 
     context 'when transaction types selected' do
@@ -67,6 +73,33 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController' do
 
       it 'does not delete transaction types' do
         expect { subject }.not_to change { TransactionType.count }
+      end
+    end
+
+    context 'when "none selected" has been selected' do
+      let(:params) { { none_selected: 'true' } }
+
+      it 'does not add transaction types to the application' do
+        expect { subject }.not_to change { LegalAidApplicationTransactionType.count }
+      end
+
+      it 'redirects to the next step' do
+        expect(subject).to redirect_to(flow_forward_path)
+      end
+
+      context 'and application has transactions' do
+        let(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant, transaction_types: outgoing_types
+        end
+
+        it 'removes transaction types from the application' do
+          expect { subject }.to change { LegalAidApplicationTransactionType.count }
+            .by(-outgoing_types.length)
+        end
+
+        it 'redirects to the next step' do
+          expect(subject).to redirect_to(flow_forward_path)
+        end
       end
     end
 
