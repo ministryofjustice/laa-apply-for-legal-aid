@@ -25,14 +25,6 @@ RSpec.describe 'Providers::ApplicationDependable' do
       it 'records the current controller name' do
         expect(legal_aid_application.reload.provider_step).to eq('proceedings_types')
       end
-
-      context 'with an invalid legal_aid_application' do
-        let(:invalid_legal_aid_application) { build :legal_aid_application, id: SecureRandom.uuid }
-        subject { get providers_legal_aid_application_proceedings_types_path(invalid_legal_aid_application) }
-        it "redirects to provider's start page" do
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-      end
     end
   end
 end

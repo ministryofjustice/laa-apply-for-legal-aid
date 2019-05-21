@@ -23,16 +23,6 @@ RSpec.describe 'providers applicant requests', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      context 'when the application does not exist' do
-        let(:application_id) { SecureRandom.uuid }
-
-        it 'redirects the user to the applications page with an error message' do
-          subject
-
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-      end
-
       context 'has already got applicant info' do
         let(:applicant) { create(:applicant) }
         let(:application) { create(:legal_aid_application, applicant: applicant) }

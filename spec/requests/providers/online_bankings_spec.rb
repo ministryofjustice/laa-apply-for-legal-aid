@@ -27,14 +27,6 @@ RSpec.describe 'does client use online banking requests', type: :request do
       it 'displays the correct page' do
         expect(unescaped_response_body).to include('Does your client use online banking?')
       end
-
-      context 'when the application does not exist' do
-        let(:application_id) { SecureRandom.uuid }
-
-        it 'redirects the user to the applications page with an error message' do
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-      end
     end
   end
 

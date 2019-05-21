@@ -21,8 +21,8 @@ RSpec.describe 'about financial assessments requests', type: :request do
       context 'when the application does not exist' do
         let(:application_id) { SecureRandom.uuid }
 
-        it 'redirects to the applications page with an error' do
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        it 'redirects to an error' do
+          expect(response).to redirect_to(error_path(:page_not_found))
         end
       end
 
@@ -54,12 +54,12 @@ RSpec.describe 'about financial assessments requests', type: :request do
       context 'when the application does not exist' do
         let(:application_id) { SecureRandom.uuid }
 
-        it 'redirects to the applications page without calling the email service' do
+        it 'redirects to and error page without calling the email service' do
           expect(CitizenEmailService).not_to receive(:new)
 
           subject
 
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
+          expect(response).to redirect_to(error_path(:page_not_found))
         end
       end
 

@@ -108,17 +108,6 @@ RSpec.describe 'address selections requests', type: :request do
         login_as provider
       end
 
-      context 'when the applicant does not exist' do
-        let(:invalid_legal_aid_application) { SecureRandom.uuid }
-        subject { patch providers_legal_aid_application_address_selection_path(invalid_legal_aid_application), params: params }
-
-        it 'redirects the user to the applications page with an error message' do
-          subject
-
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-      end
-
       context 'when no address was selected from the list' do
         let(:lookup_id) { '' }
 
