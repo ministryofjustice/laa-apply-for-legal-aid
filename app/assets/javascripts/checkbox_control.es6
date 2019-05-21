@@ -1,5 +1,4 @@
 $(function() {
-
   /*
     Usage:
       Required: A group of checkboxes,
@@ -9,10 +8,10 @@ $(function() {
         and set it's "data-deselect-ctrl" to the jquery identifier for the control checkbox
   */
   $('.deselect-group').each(function() {
-    const container = $(this);
-    const control = $(container.data('deselect-ctrl'));
-    const checkboxMemory = [];
-    const checkboxes = container.find("input:checkbox");
+    const container = $(this)
+    const control = $(container.data('deselect-ctrl'))
+    const checkboxMemory = []
+    const checkboxes = container.find("input:checkbox")
 
     if(!control.length) return
 
@@ -26,24 +25,24 @@ $(function() {
         Set each checkbox based on its remembered state
     */
     control.change( function() {
-      const controlChecked = this.checked;
+      const controlChecked = this.checked
       checkboxes.each(function(index) {
-        const checkbox = $(this);
+        const checkbox = $(this)
         if(controlChecked) {
-          checkboxMemory[index] = this.checked;
-          checkbox.prop("checked", false);
+          checkboxMemory[index] = this.checked
+          checkbox.prop("checked", false)
         } else {
-          checkbox.prop("checked", checkboxMemory[index]);
-        };
-      });
-    });
+          checkbox.prop("checked", checkboxMemory[index])
+        }
+      })
+    })
 
     /*
       Monitor changes to the checkboxes within the container.
       If one is selected, deselect the control.
     */
     checkboxes.change( function() {
-      if(this.checked) { control.prop("checked", false )};
-    });
-  });
-});
+      if(this.checked) { control.prop("checked", false )}
+    })
+  })
+})

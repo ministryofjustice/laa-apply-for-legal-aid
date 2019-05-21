@@ -8,9 +8,10 @@ module Citizens
     end
 
     def update
-      legal_aid_application.legal_aid_application_transaction_types.debits.destroy_all
-      legal_aid_application.transaction_types << transaction_types
-      go_forward
+      return go_forward if none_selected? || transactions_added
+
+      legal_aid_application.errors.add :base, :none_selected
+      render :show
     end
 
     private
@@ -21,6 +22,21 @@ module Citizens
 
     def transaction_types
       TransactionType.debits.where(id: legal_aid_application_params[:transaction_type_ids])
+    end
+
+    def none_selected?
+      params[:none_selected] == 'true' && remove_existing_transaction_types
+    end
+
+    def transactions_added
+      return if transaction_types.empty?
+
+      remove_existing_transaction_types
+      legal_aid_application.transaction_types << transaction_types
+    end
+
+    def remove_existing_transaction_types
+      legal_aid_application.legal_aid_application_transaction_types.debits.destroy_all
     end
   end
 end
