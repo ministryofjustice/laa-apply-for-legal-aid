@@ -4,43 +4,77 @@
     ) do %>
 
   <h2 class="govuk-heading-m">
-    <%= t '.respondent-heading' %>
+    <%= t '.latest-incident-heading' %>
   </h2>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
+          name: :notification_of_latest_incident,
+          url: providers_legal_aid_application_date_client_told_incident_path,
+          question: t('.items.notification_of_latest_incident'),
+          answer: @incident&.told_on
+        ) %>
+  </dl>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+  <%= check_answer_link(
+        name: :date_of_latest_incident,
+        url: providers_legal_aid_application_details_latest_incident_path,
+        question: t('.items.date_of_latest_incident'),
+        answer: @incident&.occurred_on
+      ) %>
+  </dl>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_link(
+          name: :details_of_latest_incident,
+          url: providers_legal_aid_application_details_latest_incident_path,
+          question: t('.items.details_of_latest_incident'),
+          answer: nil
+        ) %>
+  </dl>
+
+  <div class='govuk-body'><%= simple_format @incident&.details %></div>
+
+  <div class="govuk-!-padding-bottom-6"></div>
+
+    <%= check_answer_change_link(
+          name: :respondent_details,
+          url: providers_legal_aid_application_respondent_path,
+          question: t('.respondent-heading')
+        ) %>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2" id="THISONE">
+    <%= check_answer_no_link_bold(
           name: :understands_terms_of_court_order,
-          url: providers_legal_aid_application_respondent_path(anchor: :understands_terms_of_court_order),
           question: t('.items.understands_terms_of_court_order'),
           answer: yes_no(@respondent.understands_terms_of_court_order)
         ) %>
   </dl>
+
   <div class='govuk-body'><%= simple_format @respondent.understands_terms_of_court_order_details %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_no_link_bold(
           name: :warning_letter_sent,
-          url: providers_legal_aid_application_respondent_path(anchor: :warning_letter_sent),
           question: t('.items.warning_letter_sent'),
           answer: yes_no(@respondent.warning_letter_sent)
         ) %>
   </dl>
   <div class='govuk-body'><%= simple_format @respondent.warning_letter_sent_details %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_no_link_bold(
           name: :police_notified,
-          url: providers_legal_aid_application_respondent_path(anchor: :police_notified),
           question: t('.items.police_notified'),
           answer: yes_no(@respondent.police_notified)
         ) %>
   </dl>
   <div class='govuk-body'><%= simple_format @respondent.police_notified_details %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_no_link_bold(
           name: :bail_conditions_set,
-          url: providers_legal_aid_application_respondent_path(anchor: :bail_conditions_set),
           question: t('.items.bail_conditions_set'),
           answer: yes_no(@respondent.bail_conditions_set)
         ) %>
@@ -55,7 +89,7 @@
 
   <div class='govuk-body'><%= simple_format @merits.details_of_proceedings_before_the_court %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
           name: :statement_of_case,
           url: providers_legal_aid_application_statement_of_case_path,
@@ -66,8 +100,7 @@
 
   <div class='govuk-body'><%= simple_format @statement_of_case.statement %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
           name: :prospects_of_success,
           url: providers_legal_aid_application_success_prospects_path,
@@ -78,24 +111,7 @@
 
   <div class='govuk-body'><%= simple_format @merits.success_prospect_details %></div>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :client_declaration,
-          url: providers_legal_aid_application_merits_declaration_path,
-          question: t('.items.client_declaration'),
-          answer: (t('.items.client_declaration_answer') if @merits.submitted_at?)
-        ) %>
-  </dl>
-
   <div class="govuk-!-padding-bottom-6"></div>
-
-  <h2 class="govuk-heading-m">
-    <%= t '.complete-application-heading' %>
-  </h2>
-
-  <p class="govuk-body">
-    <%= t '.complete-application-text' %>
-  </p>
 
   <%= next_action_buttons_with_form(
         url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),

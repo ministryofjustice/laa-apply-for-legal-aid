@@ -79,6 +79,7 @@ en:
         h1-heading: Check your answers
         merits-heading: Merits assessment
         respondent-heading: Respondent details
+        latest-incident-heading: Details of the latest incident
         items:
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
@@ -91,6 +92,9 @@ en:
           warning_letter_sent: Has a warning letter been sent to the respondent?
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
+          notification_of_latest_incident: When did your client tell you about the latest domestic abuse incident?
+          date_of_latest_incident: When did the latest incident occur?
+          details_of_latest_incident: What happened during the incident?
     check_passported_answers:
       show:
         assets:
