@@ -1,31 +1,43 @@
-<%= content_for(:panel) do %>
-  <div class="govuk-panel govuk-panel--confirmation">
-    <h2 class="govuk-panel__title">
+<div class="interruption-panel">
+  <%= page_template page_title: '', column_width: 'full'  do %>
+    <% #blank title - title dealt with below %>
+    <h1 class="govuk-heading-l">
       <%= @legal_aid_application.applicant.full_name %>
-      <br />
       <%= t "#{result_namespace}.title" %>
-    </h2>
-  </div>
-<% end %>
+    </h1>
+    
+    <div class="govuk-grid-column-two-thirds">
+      
+      <% if result_namespace == '.negative_result' %>
+        <p class="govuk-body">
+          <%= t "#{result_namespace}.paragraph" %>
+        </p>
+      <% end %>
+      
+      <h2 class="govuk-heading-m">
+        <%= t '.next_heading' %>
+      </h2>
 
-<%= page_template page_title: t('.heading_1') do %>
-
-  <p class="govuk-body">
-    <%= t "#{result_namespace}.body" %>
-  </p>
-
-  <h3 class="govuk-heading-m">
-    <%= t '.heading_2' %>
-  </h3>
-
-  <p class="govuk-body">
-    <%= t "#{result_namespace}.next" %>
-  </p>
-
-  <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_check_benefit_path,
-        method: :patch,
-        show_draft: true,
-        continue_button_text: t('generic.continue')
-      ) %>
-<% end %>
+      <% if result_namespace == '.positive_result' %>
+        <p class="govuk-body">
+          <%= t "#{result_namespace}.paragraph" %>
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li><%= t "#{result_namespace}.next_1" %></li>
+          <li><%= t "#{result_namespace}.next_2" %></li>
+        </ul>
+      <% else %>
+        <p class="govuk-body"><%= t "#{result_namespace}.next_1" %></p>
+        <p class="govuk-body"><%= t "#{result_namespace}.next_2" %></p>
+      <% end %>
+      
+    </div>
+    <%= next_action_buttons_with_form(
+          url: providers_legal_aid_application_check_benefit_path,
+          method: :patch,
+          show_draft: true,
+          continue_button_text: t('generic.continue')
+          ) %>
+       
+  <% end %>
+</div>
