@@ -1,6 +1,7 @@
 module Providers
   class CheckMeritsAnswersController < ProviderBaseController
     def show
+      @incident = legal_aid_application.latest_incident
       @merits = legal_aid_application.merits_assessment
       @statement_of_case = legal_aid_application.statement_of_case
       @respondent = legal_aid_application.respondent || legal_aid_application.create_respondent!

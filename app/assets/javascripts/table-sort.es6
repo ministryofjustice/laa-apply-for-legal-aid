@@ -1,18 +1,33 @@
 $(document).ready(function() {
   if ($('table.sortable')) {
     let table;
+    const endText = {
+      asc: {
+        numeric: 'from big to small',
+        alphabetic: 'in <em>reverse</em> order',
+        undefined: 'in <em>ascending</em> order' //for when the data-sort-type is not set
+      },
+      desc: {
+        numeric: 'from small to big',
+        alphabetic: 'in <em>alphabetical</em> order',
+        undefined: 'in <em>descending</em> order' //for when the data-sort-type is not set
+      }
+    }
+
     $('th.sort')
+      .addClass("js-sortable")  //this class used to style as links, if JS not enabled, titles won't look clickable.
+      .attr('tabindex', 0)
       .wrapInner('<span class="sortable-column" title="sort this column"/>')
       .each(function(index) {
         const th = $(this),
           thIndex = index + 1;
         let inverse = false;
-
+        
         th.click(() => {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
-          th.addClass(inverse ? 'header-sort-asc' : 'header-sort-desc')
-
+          let sortDirection = inverse ? 'asc' : 'desc';
+          th.addClass('header-sort-' + sortDirection);
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
           }).sortElements((a, b) => (
@@ -23,9 +38,18 @@ $(document).ready(function() {
             // parentNode is the element we want to move
             return this.parentNode;
           });
+          
+          //this adds a message to the message div, stating what it is sorted by
+          $("#screen-reader-messages").html("Sorted by " + th.find(".aria-sort-description").text() + " " + endText[sortDirection][th.attr("data-sort-type")]);
+      
           inverse = !inverse;
-
+          
           return false;
+        });
+        th.keyup(function(ev) {
+          if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
+            $(this).click();
+          }
         });
       });
 

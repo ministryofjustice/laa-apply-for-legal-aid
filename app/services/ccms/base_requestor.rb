@@ -1,16 +1,15 @@
 module CCMS
   class BaseRequestor
-    def initialize
-      @soap_client = Savon.client(
-        env_namespace: :soap,
-        wsdl: wsdl_location,
-        namespaces: namespaces,
-        pretty_print_xml: true,
-        convert_request_keys_to: :none,
-        namespace_identifier: 'ns2',
-        log: true
-      )
-      @transaction_request_id = nil
+    class << self
+      attr_reader :wsdl, :namespaces
+
+      def wsdl_from(filename)
+        @wsdl = filename
+      end
+
+      def uses_namespaces(namespaces)
+        @namespaces = namespaces.freeze
+      end
     end
 
     def formatted_xml
@@ -26,6 +25,21 @@ module CCMS
     end
 
     private
+
+    # temporarily ignore this until connectivity with ccms is working
+    # :nocov:
+    def soap_client
+      @soap_client ||= Savon.client(
+        env_namespace: :soap,
+        wsdl: wsdl_location,
+        namespaces: namespaces,
+        pretty_print_xml: true,
+        convert_request_keys_to: :none,
+        namespace_identifier: 'ns2',
+        log: true
+      )
+    end
+    # :nocov:
 
     def soap_envelope(namespaces)
       Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
@@ -50,6 +64,14 @@ module CCMS
       xml.__send__('ns3:Language', 'ENG')
       xml.__send__('ns3:UserLoginID', ENV['USER_LOGIN'])
       xml.__send__('ns3:UserRole', ENV['USER_ROLE'])
+    end
+
+    def wsdl_location
+      "#{File.dirname(__FILE__)}/wsdls/#{self.class.wsdl}".freeze
+    end
+
+    def namespaces
+      self.class.namespaces
     end
   end
 end
