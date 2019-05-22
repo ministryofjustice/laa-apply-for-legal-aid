@@ -134,7 +134,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I am on the benefit check results page and the benefits do not qualify
     When I click 'Continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
@@ -165,7 +165,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I am on the benefit check results page and the benefits do not qualify
     When I click 'Continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
@@ -194,7 +194,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I am on the benefit check results page and the benefits qualify
     Then I see a notice saying that the citizen receives benefits
 
   @javascript @vcr
@@ -217,7 +217,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I am on the benefit check results page and the benefits do not qualify
     Then I see a notice saying that the citizen does not receive benefits
 
   @javascript @vcr
@@ -393,7 +393,7 @@ Feature: Civil application journeys
   Scenario: Receives benefits and completes the application
     Given I complete the passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I am on the benefit check results page and the benefits qualify
     Then I see a notice saying that the citizen receives benefits
     Then I click 'Continue'
     Then I should be on a page showing "Before you continue"
