@@ -1,6 +1,8 @@
 <div class="interruption-panel">
   <%= page_template page_title: '', column_width: 'full'  do %>
-<% # blank title - title dealt with below %>
+<% 
+# blank title - title dealt with below 
+%>
     <h1 class="govuk-heading-l">
       <%= @legal_aid_application.applicant.full_name %>
       <%= t "#{result_namespace}.title" %>
@@ -28,10 +30,10 @@
       <% end %>
     </div>
     <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_check_benefit_path,
-        method: :patch,
-        show_draft: true,
-        continue_button_text: t('generic.continue')
+          url: providers_legal_aid_application_check_benefit_path,
+          method: :patch,
+          show_draft: true,
+          continue_button_text: t('generic.continue')
         ) %>
   <% end %>
 </div>
