@@ -1,0 +1,11 @@
+---
+ccms:
+  gross_income_upper:
+    children:
+      one: 1
+      two: 3
+      many: 7
+  disposable_income_lower: 1000
+  disposable_income_upper: 10000
+  capital_lower: 10
+  capital_upper: 10000
