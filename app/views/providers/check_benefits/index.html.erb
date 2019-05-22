@@ -5,19 +5,15 @@
       <%= @legal_aid_application.applicant.full_name %>
       <%= t "#{result_namespace}.title" %>
     </h1>
-    
     <div class="govuk-grid-column-two-thirds">
-      
       <% if result_namespace == '.negative_result' %>
         <p class="govuk-body">
           <%= t "#{result_namespace}.paragraph" %>
         </p>
       <% end %>
-      
       <h2 class="govuk-heading-m">
         <%= t '.next_heading' %>
       </h2>
-
       <% if result_namespace == '.positive_result' %>
         <p class="govuk-body">
           <%= t "#{result_namespace}.paragraph" %>
@@ -30,7 +26,6 @@
         <p class="govuk-body"><%= t "#{result_namespace}.next_1" %></p>
         <p class="govuk-body"><%= t "#{result_namespace}.next_2" %></p>
       <% end %>
-      
     </div>
     <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_check_benefit_path,
@@ -38,6 +33,5 @@
           show_draft: true,
           continue_button_text: t('generic.continue')
           ) %>
-       
   <% end %>
 </div>
