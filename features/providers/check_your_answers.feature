@@ -206,6 +206,32 @@ Feature: Checking answers backwards and forwards
       And the answer for 'Restrictions' should be 'Bankruptcy'
       And the answer for 'Restrictions' should be 'Held overseas'
 
+    @javascript
+    Scenario: I change vehicle answers
+      Given I complete the passported journey as far as capital check your answers
+      Then I click Check Your Answers Change link for 'Vehicles'
+      Then I should be on a page showing 'Does your client own a vehicle?'
+      Then I choose 'No'
+      Then I click 'Save and continue'
+      Then I should be on a page showing 'Check your answers'
+      Then I click Check Your Answers Change link for 'Vehicles'
+      Then I choose 'Yes'
+      Then I click 'Save and continue'
+      Then I should be on a page showing "What is the estimated value of the vehicle?"
+      Then I fill "Estimated value" with "4000"
+      And I click "Save and continue"
+      Then I should be on a page showing "Are there any payments left on the vehicle?"
+      Then I choose option "Vehicle payments remain true"
+      Then I fill "Payment remaining" with "2000"
+      And I click "Save and continue"
+      Then I should be on a page showing "When did your client buy the vehicle?"
+      Then I enter the purchase date '21-3-2002'
+      And I click "Save and continue"
+      Then I should be on a page showing "Is the vehicle in regular use?"
+      Then I choose option "Vehicle used regularly true"
+      And I click "Save and continue"
+      Then I should be on a page showing 'Check your answers'
+
     @javascript @vcr
     Scenario: I submit the application and view the check_your_answers page
       Given I complete the application and view the check your answers page

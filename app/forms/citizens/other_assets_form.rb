@@ -8,8 +8,6 @@ module Citizens
       timeshare_value
       land_value
       jewellery_value
-      vehicle_value
-      classic_car_value
       money_assets_value
       money_owed_value
       trust_value

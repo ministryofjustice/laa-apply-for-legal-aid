@@ -32,15 +32,17 @@ module ApplicationHelper
   end
 
   def current_journey
-    journeys = %i[Admin Providers Citizens]
-    parent = controller.class.parent.to_s.to_sym
-    return :Unknown unless journeys.include?(parent)
+    return journey_type if respond_to?(:journey_type)
+
+    journeys = %i[admin providers citizens]
+    parent = controller.class.parent.to_s.downcase.to_sym
+    return :unknown unless journeys.include?(parent)
 
     parent
   end
 
   def user_header_link
-    return admin_header_link if current_journey == :Admin
+    return admin_header_link if current_journey == :admin
 
     provider_header_link
   end

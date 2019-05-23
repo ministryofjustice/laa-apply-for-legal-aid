@@ -4,10 +4,12 @@ RSpec.describe 'check passported answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
 
   describe 'GET /providers/applications/:id/check_passported_answers' do
+    let(:vehicle) { create :vehicle, :populated }
     let!(:application) do
       create :legal_aid_application,
              :with_everything,
-             :client_details_answers_checked
+             :client_details_answers_checked,
+             vehicle: vehicle
     end
     let!(:restriction) { create :restriction, legal_aid_applications: [application] }
 
@@ -42,6 +44,18 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to include('Savings')
         expect(response.body).to include('assets')
         expect(response.body).to include('restrictions')
+      end
+
+      it 'displays the correct vehicles details' do
+        expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
+        expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
+        expect(response.body).to include(vehicle.purchased_on.to_s)
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.heading'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.own'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.estimated_value'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.payment_remaining'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.purchased_on'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.used_regularly'))
       end
 
       it 'does not display None Declared if values are entered' do
@@ -134,6 +148,20 @@ RSpec.describe 'check passported answers requests', type: :request do
         it 'does not display percentage owned' do
           expect(response.body).not_to include(number_to_percentage(application.percentage_home, precision: 2))
           expect(response.body).not_to include('Percentage')
+        end
+      end
+
+      context 'applicant does not have vehicle' do
+        let(:vehicle) { nil }
+        it 'displays first vehicle question' do
+          expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.own'))
+        end
+
+        it 'does not display other vehicle questions' do
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.estimated_value'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.payment_remaining'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.purchased_on'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.used_regularly'))
         end
       end
     end

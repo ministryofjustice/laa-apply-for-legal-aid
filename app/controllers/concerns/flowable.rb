@@ -20,7 +20,7 @@ module Flowable
 
   included do
     delegate :forward_path, to: :flow_service
-    helper_method :forward_path
+    helper_method :forward_path, :journey_type
 
     def go_forward
       if path?(forward_path)
