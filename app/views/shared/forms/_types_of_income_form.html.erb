@@ -31,5 +31,8 @@
     </div>
 
   <% end %>
-  <%= next_action_buttons(form: form, show_draft: current_journey?(:providers)) %>
+  <%= next_action_buttons(
+        form: form,
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false
+      ) %>
 <% end %>

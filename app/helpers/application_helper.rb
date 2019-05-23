@@ -41,10 +41,6 @@ module ApplicationHelper
     parent
   end
 
-  def current_journey?(journey)
-    current_journey == journey.to_s.downcase.to_sym
-  end
-
   def user_header_link
     return admin_header_link if current_journey == :admin
 
