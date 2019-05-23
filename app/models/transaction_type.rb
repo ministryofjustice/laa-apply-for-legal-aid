@@ -40,7 +40,15 @@ class TransactionType < ApplicationRecord
     TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
   end
 
-  def label_name
-    I18n.t("transaction_types.names.#{name}")
+  def label_name(journey: :citizens)
+    I18n.t("transaction_types.names.#{journey}.#{name}")
+  end
+
+  def citizens_label_name
+    label_name(journey: :citizens)
+  end
+
+  def providers_label_name
+    label_name(journey: :providers)
   end
 end

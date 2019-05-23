@@ -16,12 +16,6 @@ RSpec.describe Providers::IncomeSummaryController do
   describe 'GET /providers/income_summary' do
     subject { get providers_legal_aid_application_income_summary_index_path(legal_aid_application) }
 
-    context 'when the provider is not authenticated' do
-      let(:login) { nil }
-      before { subject }
-      it_behaves_like 'a provider not authenticated'
-    end
-
     it 'returns http success' do
       subject
       expect(response).to have_http_status(:ok)
@@ -30,7 +24,7 @@ RSpec.describe Providers::IncomeSummaryController do
     it 'displays a section for all transaction types linked to this application' do
       subject
       [salary, benefits].pluck(:name).each do |name|
-        legend = I18n.t("transaction_types.names.#{name}")
+        legend = I18n.t("transaction_types.names.providers.#{name}")
         expect(parsed_response_body.css("ol li#income-type-#{name} h2").text).to match(/#{legend}/)
       end
     end
@@ -40,6 +34,12 @@ RSpec.describe Providers::IncomeSummaryController do
       [maintenance, pension].pluck(:name) do |name|
         expect(parsed_response_body.css("ol li#income-type-#{name} h2").size).to eq 0
       end
+    end
+
+    context 'when the provider is not authenticated' do
+      let(:login) { nil }
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
     end
 
     context 'not all transaction types selected' do

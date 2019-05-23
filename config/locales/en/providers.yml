@@ -136,6 +136,9 @@ en:
     estimated_legal_costs:
       show:
         h1-heading: What are the estimated legal costs of doing the work?
+    identify_types_of_incomes:
+      show:
+        page_heading: Which types of income does your client receive?
     income_summary:
       add_other_income:
         add_other_income: Add another type of income

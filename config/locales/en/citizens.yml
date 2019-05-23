@@ -68,10 +68,6 @@ en:
     identify_types_of_incomes:
       show:
         page_heading: What types of income do you receive?
-        sub_heading: Select all that apply
-        financial_help_examples: For example, money from a family member for rent or bills.
-        or_break: or
-        none_selected: None of these
     identify_types_of_outgoings:
       show:
         page_heading: What regular payments do you make?
