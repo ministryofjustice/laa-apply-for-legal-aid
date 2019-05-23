@@ -15,8 +15,6 @@ FactoryBot.define do
       timeshare_value { Faker::Number.decimal(6, 2) }
       land_value { Faker::Number.decimal(6, 2) }
       jewellery_value { Faker::Number.decimal(6, 2) }
-      vehicle_value { Faker::Number.decimal(6, 2) }
-      classic_car_value { Faker::Number.decimal(6, 2) }
       money_assets_value { Faker::Number.decimal(6, 2) }
       money_owed_value { Faker::Number.decimal(6, 2) }
       trust_value { Faker::Number.decimal(6, 2) }
@@ -29,8 +27,6 @@ FactoryBot.define do
       timeshare_value { nil }
       land_value { nil }
       jewellery_value { nil }
-      vehicle_value { nil }
-      classic_car_value { nil }
       money_assets_value { nil }
       money_owed_value { nil }
       trust_value { nil }
@@ -43,8 +39,6 @@ FactoryBot.define do
       timeshare_value { 0.0 }
       land_value { 0.0 }
       jewellery_value { 0.0 }
-      vehicle_value { 0.0 }
-      classic_car_value { 0.0 }
       money_assets_value { 0.0 }
       money_owed_value { 0.0 }
       trust_value { 0.0 }
@@ -57,8 +51,6 @@ FactoryBot.define do
       timeshare_value { Faker::Number.decimal(6, 2) }
       land_value { nil }
       jewellery_value { 0.0 }
-      vehicle_value { 0.0 }
-      classic_car_value { Faker::Number.decimal(6, 2) }
       money_assets_value { 0.0 }
       money_owed_value { nil }
       trust_value { 0.0 }

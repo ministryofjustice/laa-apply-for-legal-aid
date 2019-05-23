@@ -33,6 +33,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   validates :provider, presence: true
 
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
+  delegate :persisted?, to: :vehicle, prefix: true, allow_nil: true
 
   scope :latest, -> { order(created_at: :desc) }
 
