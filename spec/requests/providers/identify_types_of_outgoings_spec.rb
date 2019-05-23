@@ -72,6 +72,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       end
 
       context 'Form submitted with Save as draft button' do
+        let(:transaction_type_ids) { [] }
         let(:submit_button) { { draft_button: 'Save as draft' } }
 
         it 'redirects to the list of applications' do

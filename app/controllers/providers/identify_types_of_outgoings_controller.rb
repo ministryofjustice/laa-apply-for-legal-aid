@@ -5,7 +5,7 @@ module Providers
     def show; end
 
     def update
-      return continue_or_draft if none_selected? || transactions_added
+      return continue_or_draft if none_selected? || transactions_added || draft_selected?
 
       legal_aid_application.errors.add :base, :none_selected
       render :show
