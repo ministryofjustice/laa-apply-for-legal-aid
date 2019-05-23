@@ -1,0 +1,25 @@
+<%= form_with(
+      model: @form,
+      url: form_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <%= form.govuk_collection_radio_buttons(
+          :used_regularly,
+          [
+            { code: 'true', label: t('generic.yes') },
+            { code: 'false', label: t('generic.no') }
+          ],
+          :code,
+          :label,
+          title: page_heading,
+          hint: t('.include_partner_use')
+        ) %>
+  <% end %>
+  <div class="govuk-!-padding-bottom-4"></div>
+  <%= next_action_buttons(
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+        form: form
+      ) %>
+<% end %>

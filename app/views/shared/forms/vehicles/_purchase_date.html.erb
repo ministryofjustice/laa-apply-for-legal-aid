@@ -1,0 +1,24 @@
+<%= form_with(
+      model: @form,
+      url: form_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <%= govuk_fieldset_header page_heading, padding_below: 0 %>
+
+    <%= date_input_fields(
+          prefix: :purchased_on,
+          field_name: :purchased_on,
+          form: form,
+          set_error_class_here: false # Error class present on form group
+        ) %>
+
+  <% end %>
+
+  <div class="govuk-!-padding-bottom-4"></div>
+  <%= next_action_buttons(
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+        form: form
+      ) %>
+<% end %>
