@@ -46,3 +46,6 @@ config/master.key
 
 # Ignore Redis binary dump (dump.rdb) files
 *.rdb
+
+# Ignore webhint reports
+hint-report/
