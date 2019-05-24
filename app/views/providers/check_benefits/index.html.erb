@@ -4,23 +4,23 @@
     <div class="govuk-grid-column-two-thirds">
       <% if result_namespace == '.negative_result' %>
         <p class="govuk-body">
-          <%= t '.central_paragraph' %>
+          <%= t '.because_not_receiving_benefits' %>
         </p>
       <% end %>
       <h2 class="govuk-heading-m">
-        <%= t '.next_heading' %>
+        <%= t '.what_happens_next' %>
       </h2>
       <% if result_namespace == '.positive_result' %>
         <p class="govuk-body">
-          <%= t '.list_intro' %>
+          <%= t '.you_need_to' %>
         </p>
         <ul class="govuk-list govuk-list--bullet">
-          <li><%= t "#{result_namespace}.next_1" %></li>
-          <li><%= t "#{result_namespace}.next_2" %></li>
+          <li><%= t "#{result_namespace}.must_answer_financial_questions" %></li>
+          <li><%= t "#{result_namespace}.provide_access/details" %></li>
         </ul>
       <% else %>
-        <p class="govuk-body"><%= t "#{result_namespace}.next_1" %></p>
-        <p class="govuk-body"><%= t "#{result_namespace}.next_2" %></p>
+        <p class="govuk-body"><%= t "#{result_namespace}.must_answer_financial_questions" %></p>
+        <p class="govuk-body"><%= t "#{result_namespace}.provide_access/details" %></p>
       <% end %>
     </div>
     <%= next_action_buttons_with_form(
