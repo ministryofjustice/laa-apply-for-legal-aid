@@ -131,7 +131,7 @@ RSpec.describe CCMS::CheckApplicantStatusService do
     let(:requestor2) { service_double.__send__(:applicant_add_status_requestor) }
     it 'only instantiates one copy of the ApplicantAddStatusRequestor' do
       expect(requestor1).to be_instance_of(CCMS::ApplicantAddStatusRequestor)
-      expect(requestor1.object_id).to eq requestor2.object_id
+      expect(requestor1).to eq requestor2
     end
   end
 end

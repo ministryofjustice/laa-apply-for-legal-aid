@@ -30,32 +30,44 @@ module CCMS
         end
       end
 
-      context 'initialised state' do
-        let(:obtain_case_reference_service_double) { ObtainCaseReferenceService.new(submission) }
-        it 'calls the obtain_case_reference service' do
-          expect(ObtainCaseReferenceService).to receive(:new).with(submission).and_return(obtain_case_reference_service_double)
-          expect(obtain_case_reference_service_double).to receive(:call)
+      context 'valid state' do
+        after(:each) do
           submission.process!
         end
-      end
 
-      context 'case_ref_obtained state' do
-        let(:submission) { create :submission, :case_ref_obtained }
-        let(:obtain_applicant_reference_service_double) { ObtainApplicantReferenceService.new(submission) }
-        it 'calls the obtain_applicant_reference service' do
-          expect(ObtainApplicantReferenceService).to receive(:new).with(submission).and_return(obtain_applicant_reference_service_double)
-          expect(obtain_applicant_reference_service_double).to receive(:call)
-          submission.process!
+        context 'initialised state' do
+          let(:obtain_case_reference_service_double) { ObtainCaseReferenceService.new(submission) }
+          it 'calls the obtain_case_reference service' do
+            expect(ObtainCaseReferenceService).to receive(:new).with(submission).and_return(obtain_case_reference_service_double)
+            expect(obtain_case_reference_service_double).to receive(:call).with(no_args)
+          end
         end
-      end
 
-      context 'applicant_submitted state' do
-        let(:submission) { create :submission, :applicant_submitted }
-        let(:check_applicant_status_service_double) { CheckApplicantStatusService.new(submission) }
-        it 'calls the obtain_applicant_reference service' do
-          expect(CheckApplicantStatusService).to receive(:new).with(submission).and_return(check_applicant_status_service_double)
-          expect(check_applicant_status_service_double).to receive(:call)
-          submission.process!
+        context 'case_ref_obtained state' do
+          let(:obtain_applicant_reference_service_double) { ObtainApplicantReferenceService.new(submission) }
+          let(:submission) { create :submission, :case_ref_obtained }
+          it 'calls the obtain_applicant_reference service' do
+            expect(ObtainApplicantReferenceService).to receive(:new).with(submission).and_return(obtain_applicant_reference_service_double)
+            expect(obtain_applicant_reference_service_double).to receive(:call).with(no_args)
+          end
+        end
+
+        context 'applicant_submitted state' do
+          let(:check_applicant_status_service_double) { CheckApplicantStatusService.new(submission) }
+          let(:submission) { create :submission, :applicant_submitted }
+          it 'calls the check_applicant_status service' do
+            expect(CheckApplicantStatusService).to receive(:new).with(submission).and_return(check_applicant_status_service_double)
+            expect(check_applicant_status_service_double).to receive(:call).with(no_args)
+          end
+        end
+
+        context 'applicant_ref_obtained state' do
+          let(:add_case_service_double) { AddCaseService.new(submission) }
+          let(:submission) { create :submission, :applicant_ref_obtained }
+          it 'calls the add_case service' do
+            expect(AddCaseService).to receive(:new).with(submission).and_return(add_case_service_double)
+            expect(add_case_service_double).to receive(:call).with(no_args)
+          end
         end
       end
     end

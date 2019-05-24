@@ -11,14 +11,12 @@ module CCMS
 
       it 'raises if the transaction_request_ids dont match' do
         expect {
-          parser.parse
+          parser.record_count
         }.to raise_error CcmsError, 'Invalid transaction request id'
       end
 
       context 'there are no applicants returned' do
         let(:parser) { described_class.new(expected_tx_id, no_results_response_xml) }
-
-        before { parser.parse }
 
         it 'extracts the number of records fetched' do
           expect(parser.record_count).to eq '0'
@@ -32,8 +30,6 @@ module CCMS
       context 'there is one applicant returned' do
         let(:parser) { described_class.new(expected_tx_id, one_result_response_xml) }
 
-        before { parser.parse }
-
         it 'extracts the number of records fetched' do
           expect(parser.record_count).to eq '1'
         end
@@ -45,8 +41,6 @@ module CCMS
 
       context 'there are multiple applicants returned' do
         let(:parser) { described_class.new(expected_tx_id, multiple_results_response_xml) }
-
-        before { parser.parse }
 
         it 'extracts the number of records fetched' do
           expect(parser.record_count).to eq '2'

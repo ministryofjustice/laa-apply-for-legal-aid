@@ -5,7 +5,6 @@ module CCMS
       submission.poll_count += 1
       response = applicant_add_status_requestor.call
       parser = ApplicantAddStatusResponseParser.new(tx_id, response)
-      parser.parse
       process_response(parser)
     rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
       handle_failure(e)
@@ -16,9 +15,8 @@ module CCMS
     def process_response(parser)
       if parser.success?
         submission.applicant_ccms_reference = parser.applicant_ccms_reference
-        create_history(submission.aasm_state, :applicant_ref_obtained)
         submission.poll_count = 0
-        submission.obtain_applicant_ref!
+        create_history(:applicant_submitted, submission.aasm_state) if submission.obtain_applicant_ref!
       elsif submission.poll_count >= Submission::POLL_LIMIT
         handle_failure('Poll limit exceeded')
       else
