@@ -10,7 +10,7 @@ module CCMS
 
     POLL_LIMIT = 10
 
-    def process!
+    def process! # rubocop:disable Metrics/MethodLength
       case aasm_state
       when 'initialised'
         ObtainCaseReferenceService.call(self)
@@ -20,6 +20,8 @@ module CCMS
         CheckApplicantStatusService.call(self)
       when 'applicant_ref_obtained'
         AddCaseService.call(self)
+      when 'case_submitted'
+        CheckCaseStatusService.call(self)
       else
         raise CcmsError, 'Unknown state'
       end

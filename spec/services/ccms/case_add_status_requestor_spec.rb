@@ -8,7 +8,7 @@ module CCMS
     describe 'XML request' do
       it 'generates the expected XML' do
         with_modified_env(modified_environment_vars) do
-          requestor = described_class.new
+          requestor = described_class.new(expected_tx_id)
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           expect(requestor.formatted_xml).to eq expected_xml.chomp
         end
@@ -18,7 +18,7 @@ module CCMS
     describe '#transaction_request_id' do
       it 'returns the id based on current time' do
         Timecop.freeze(2019, 1, 1, 12, 15, 30.123456) do
-          requestor = described_class.new
+          requestor = described_class.new(expected_tx_id)
           expect(requestor.transaction_request_id).to start_with expected_tx_id
         end
       end
