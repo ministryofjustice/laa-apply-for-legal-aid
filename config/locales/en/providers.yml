@@ -63,14 +63,14 @@ en:
     check_benefits:
       index:
         next_heading: What happens next
+        central_paragraph: This is because they do not receive benefits that qualify for legal aid.
+        list_intro: 'You''ll need to:'
         negative_result:
-          title: must complete a financial assessment
-          paragraph: 'This is because they do not receive benefits that qualify for legal aid.'
+          title: "%{name} must complete a financial assessment"
           next_1: Your client will need to answer questions about their financial situation.
           next_2: 'We''ll ask you to give them access to the online assessment which they can complete at home or at another location.'
         positive_result:
-          title: receives benefits that qualify for legal aid
-          paragraph: 'You''ll need to:'
+          title: "%{name} receives benefits that qualify for legal aid"
           next_1: 'answer questions about your client''s property, savings and other assets'
           next_2: provide details of the case
     check_merits_answers:
