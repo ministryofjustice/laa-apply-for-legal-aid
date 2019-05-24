@@ -346,14 +346,6 @@ Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's home address")
 end
 
-Then('I am on the benefit check results page and the benefits qualify') do
-  expect(page).to have_content('receives benefits that qualify for legal aid')
-end
-
-Then('I am on the benefit check results page and the benefits do not qualify') do
-  expect(page).to have_content('must complete a financial assessment')
-end
-
 Then('I am on the client use online banking page') do
   expect(page).to have_content('Does your client use online banking?')
 end
