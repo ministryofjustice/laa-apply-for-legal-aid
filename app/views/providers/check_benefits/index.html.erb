@@ -1,9 +1,9 @@
 <div class="interruption-panel">
   <%= page_template(
-          page_title: t("#{result_namespace}.title", name: @legal_aid_application.applicant.full_name), 
-          column_width: 'full',
-          template: :basic
-        ) do %>
+    page_title: t("#{result_namespace}.title", name: @legal_aid_application.applicant.full_name),
+    column_width: 'full',
+    template: :basic
+  ) do %>
     <%= page_heading(size: 'l') %>
     <div class="govuk-grid-column-two-thirds">
       <% if result_namespace == '.negative_result' %>
@@ -16,7 +16,7 @@
       </h2>
       <% if result_namespace == '.positive_result' %>
         <p class="govuk-body">
-          <%= t "list_intro" %>
+          <%= t 'list_intro' %>
         </p>
         <ul class="govuk-list govuk-list--bullet">
           <li><%= t "#{result_namespace}.next_1" %></li>
