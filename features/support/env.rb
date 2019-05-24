@@ -112,3 +112,15 @@ end
 
 World(FactoryBot::Syntax::Methods)
 World(Warden::Test::Helpers)
+
+AfterStep('@webhint') do
+  next unless ENV['SAVE_WEBHINT_STEPS'] == 'true'
+
+  # the html file will fetch assets from that URL
+  Capybara.asset_host = 'http://localhost:3004'
+
+  html_file = "apply-#{page.current_path.to_s.parameterize}.html"
+  screenshot_file = "apply-#{page.current_path.to_s.parameterize}.png"
+  page.save_page(Rails.root.join('tmp', 'webhint_inputs', html_file))
+  page.save_screenshot(Rails.root.join('tmp', 'webhint_inputs', screenshot_file))
+end

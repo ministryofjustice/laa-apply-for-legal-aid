@@ -7,7 +7,8 @@ module TransactionTypeHelper
       'shared/forms/transaction_type_check_boxes',
       form: form,
       transaction_types: transaction_types,
-      hints: hints
+      hints: hints,
+      label_method: "#{journey_type}_label_name"
     )
   end
 end

@@ -114,7 +114,7 @@ Feature: Civil application journeys
     And I click "Start now"
     Then I should be on the Applicant page
 
-  @javascript @vcr
+  @javascript @vcr @webhint
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'

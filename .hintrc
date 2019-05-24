@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "web-recommended"
+  ],
+  "connector": {
+    "name": "local"
+  },
+  "parsers": ["html", "css"],
+  "formatters": ["html"]
+}

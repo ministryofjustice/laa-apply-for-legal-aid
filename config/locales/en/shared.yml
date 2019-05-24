@@ -18,6 +18,13 @@ en:
       submit:
         heading: Submit your details
         text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+    check_answers_vehicles:
+      heading: Vehicles
+      own: Does your client own a vehicle?
+      estimated_value: What is the estimated value of the vehicle?
+      payment_remaining: Are there any payments left on the vehicle?
+      purchased_on: When did your client buy the vehicle?
+      used_regularly: Is the vehicle in regular use?
     forms:
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980
@@ -52,7 +59,6 @@ en:
         attribute:
           citizens:
             other_assets:
-              check_box_classic_car_value: Classic car purchased as an investment
               check_box_jewellery_value: Jewellery, art or antiques with a value over £500
               check_box_land_value: Land
               check_box_money_assets_value: Money or assets from the estate of a person who has died
@@ -62,15 +68,12 @@ en:
               check_box_second_home_value: Second property or holiday home estimated value
               check_box_timeshare_value: Timeshare
               check_box_trust_value: Interest in a trust
-              check_box_vehicle_value: Car, van or motorcycle less than 3 years old
-              classic_car_value: Enter the estimated value
               jewellery_value: Enter estimated value, minus any sale costs
               land_value: Enter estimated value
               money_assets_value: Enter estimated total value
               money_owed_value: Enter estimated amount owed
               timeshare_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
-              vehicle_value: Enter estimated value, minus any outstanding payments
             savings_and_investments:
               cash: Enter total amount
               check_box_cash: Cash savings
@@ -92,7 +95,6 @@ en:
               plc_shares: Enter the total value of all you own
           providers:
             other_assets:
-              check_box_classic_car_value: Classic car purchased as an investment
               check_box_jewellery_value: Jewellery, art or antiques with a value over £500
               check_box_land_value: Land
               check_box_money_assets_value: Money or assets from the estate of a person who has died
@@ -102,15 +104,12 @@ en:
               check_box_second_home_value: Second property or holiday home estimated value
               check_box_timeshare_value: Timeshare
               check_box_trust_value: Interest in a trust
-              check_box_vehicle_value: Car, van or motorcycle less than 3 years old
-              classic_car_value: Enter the estimated value
               jewellery_value: Enter estimated value, minus any sale costs
               land_value: Enter estimated value
               money_assets_value: Enter estimated total value
               money_owed_value: Enter estimated amount owed
               timeshare_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
-              vehicle_value: Enter estimated value, minus any outstanding payments
             savings_and_investments:
               cash: Enter total amount
               check_box_cash: Cash savings
@@ -145,5 +144,10 @@ en:
           uncertain: Uncertain
       success_prospect_form:
         likely: 50% or better
+      types_of_income_form:
+        select_all_that_apply: Select all that apply
+        financial_help_examples: For example, money from a family member for rent or bills.
+        or_break: or
+        none_selected: None of these
     page-title:
       suffix: Apply for legal aid

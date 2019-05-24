@@ -3,6 +3,10 @@
     <span class="app-task-list__section-number">
       <%= image_tag('plus_icon.svg') %>
     </span>
-    <%= link_to t('.add_other_income'), '#todo', class: 'govuk-body' %>
+    <%= link_to(
+          t('.add_other_income'),
+          providers_legal_aid_application_identify_types_of_income_path(@legal_aid_application),
+          class: 'govuk-body'
+        ) %>
   </h2>
 </li>

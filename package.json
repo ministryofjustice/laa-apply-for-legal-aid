@@ -1,8 +1,17 @@
 {
   "name": "laa-apply-for-legal-aid",
   "private": true,
+  "scripts": {
+    "hint": "hint"
+  },
   "dependencies": {
+    "@hint/connector-local": "^2.0.2",
     "govuk-frontend": "^2.6.0",
     "js-search": "^1.4.2"
+  },
+  "devDependencies": {
+    "@hint/configuration-web-recommended": "^6.1.0",
+    "@hint/parser-javascript": "^2.1.0",
+    "hint": "^4.5.0"
   }
 }

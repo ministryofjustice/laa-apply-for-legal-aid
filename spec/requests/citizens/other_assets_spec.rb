@@ -36,10 +36,6 @@ RSpec.describe 'citizen other assets requests', type: :request do
           land_value: '34,567.89',
           check_box_jewellery_value: 'true',
           jewellery_value: '456,789.01',
-          check_box_vehicle_value: 'true',
-          vehicle_value: '56,789.01',
-          check_box_classic_car_value: 'true',
-          classic_car_value: '67,890.12',
           check_box_money_assets_value: 'true',
           money_assets_value: '89,012.34',
           check_box_money_owed_value: 'true',
@@ -60,8 +56,6 @@ RSpec.describe 'citizen other assets requests', type: :request do
         expect(oad.timeshare_value).to eq 234_567.89
         expect(oad.land_value).to eq 34_567.89
         expect(oad.jewellery_value).to eq 456_789.01
-        expect(oad.vehicle_value).to eq 56_789.01
-        expect(oad.classic_car_value).to eq 67_890.12
         expect(oad.money_assets_value).to eq 89_012.34
         expect(oad.money_owed_value).to eq 90_123.45
         expect(oad.trust_value).to eq 1_234.56
