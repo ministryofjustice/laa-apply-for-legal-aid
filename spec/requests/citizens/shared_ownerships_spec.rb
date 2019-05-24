@@ -73,7 +73,7 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
 
       it 'redirects to the next step in Citizen jouney' do
         patch_request
-        expect(response).to redirect_to(citizens_savings_and_investment_path)
+        expect(response).to redirect_to(citizens_vehicle_path)
       end
 
       it 'update legal_aid_application record' do

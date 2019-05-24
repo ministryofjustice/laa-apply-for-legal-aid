@@ -31,7 +31,7 @@ RSpec.describe 'citizen percentage share of home', type: :request do
 
     it 'redirects to the next step in Citizen jouney' do
       subject
-      expect(response).to redirect_to(citizens_savings_and_investment_path)
+      expect(response).to redirect_to(citizens_vehicle_path)
     end
 
     context 'with invalid input' do

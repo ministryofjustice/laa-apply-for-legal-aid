@@ -41,8 +41,8 @@ RSpec.describe 'citizen own home requests', type: :request do
       context 'no' do
         let(:params) { { legal_aid_application: { own_home: 'no' } } }
 
-        it 'redirects to the value of your home page' do
-          expect(response).to redirect_to(citizens_savings_and_investment_path)
+        it 'redirects to the vehicle question' do
+          expect(response).to redirect_to(citizens_vehicle_path)
         end
       end
     end

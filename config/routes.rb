@@ -48,6 +48,13 @@ Rails.application.routes.draw do
     resource :own_home, only: %i[show update]
     resource :percentage_home, only: %i[show update]
     resource :outstanding_mortgage, only: %i[show update]
+    resource :vehicle, only: %i[show create]
+    namespace :vehicles do
+      resource :estimated_value, only: %i[show update]
+      resource :remaining_payment, only: %i[show update]
+      resource :purchase_date, only: %i[show update]
+      resource :regular_use, only: %i[show update]
+    end
     resource :savings_and_investment, only: %i[show update]
     resource :shared_ownership, only: %i[show update]
     resources :restrictions, only: %i[index create] # as multiple restrictions
