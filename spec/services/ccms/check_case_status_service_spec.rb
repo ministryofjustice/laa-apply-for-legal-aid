@@ -24,7 +24,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
 
         context 'poll count remains below limit' do
           it 'increments the poll count' do
-            expect { subject.call }.to change { submission.poll_count }.by 1
+            expect { subject.call }.to change { submission.case_poll_count }.by 1
           end
 
           it 'does not change the state' do
@@ -42,11 +42,11 @@ RSpec.describe CCMS::CheckCaseStatusService do
 
         context 'poll count reaches limit' do
           before do
-            submission.poll_count = CCMS::Submission::POLL_LIMIT - 1
+            submission.case_poll_count = CCMS::Submission::POLL_LIMIT - 1
           end
 
           it 'increments the poll count' do
-            expect { subject.call }.to change { submission.poll_count }.by 1
+            expect { subject.call }.to change { submission.case_poll_count }.by 1
           end
 
           it 'changes the state to failed' do
@@ -81,11 +81,6 @@ RSpec.describe CCMS::CheckCaseStatusService do
           expect(history.success).to be true
           expect(history.details).to be_nil
         end
-
-        it 'resets the poll count to 0' do
-          subject.call
-          expect(submission.poll_count).to eq 0
-        end
       end
     end
 
@@ -98,7 +93,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
       end
 
       it 'increments the poll count' do
-        expect { subject.call }.to change { submission.poll_count }.by 1
+        expect { subject.call }.to change { submission.case_poll_count }.by 1
       end
 
       it 'changes the state to failed' do

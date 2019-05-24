@@ -2,7 +2,7 @@ module CCMS
   class CheckCaseStatusService < BaseSubmissionService
     def call
       tx_id = case_add_status_requestor.transaction_request_id
-      submission.poll_count += 1
+      submission.case_poll_count += 1
       parser = CaseAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
     rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
@@ -13,9 +13,8 @@ module CCMS
 
     def process_response(parser)
       if parser.success?
-        submission.poll_count = 0
         create_history(:case_submitted, submission.aasm_state) if submission.confirm_case_created!
-      elsif submission.poll_count >= Submission::POLL_LIMIT
+      elsif submission.case_poll_count >= Submission::POLL_LIMIT
         handle_failure('Poll limit exceeded')
       else
         create_history(submission.aasm_state, submission.aasm_state)

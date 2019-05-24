@@ -2,7 +2,7 @@ module CCMS
   class CheckApplicantStatusService < BaseSubmissionService
     def call
       tx_id = applicant_add_status_requestor.transaction_request_id
-      submission.poll_count += 1
+      submission.applicant_poll_count += 1
       response = applicant_add_status_requestor.call
       parser = ApplicantAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
@@ -15,9 +15,8 @@ module CCMS
     def process_response(parser)
       if parser.success?
         submission.applicant_ccms_reference = parser.applicant_ccms_reference
-        submission.poll_count = 0
         create_history(:applicant_submitted, submission.aasm_state) if submission.obtain_applicant_ref!
-      elsif submission.poll_count >= Submission::POLL_LIMIT
+      elsif submission.applicant_poll_count >= Submission::POLL_LIMIT
         handle_failure('Poll limit exceeded')
       else
         create_history(submission.aasm_state, submission.aasm_state)
