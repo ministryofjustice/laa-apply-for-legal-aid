@@ -1,20 +1,22 @@
 <%= page_template(page_title: t('.title')) do %></h1>
   <p class="govuk-body"><%= t '.sign_in_para' %></p>
 
-  <p class="govuk-body"><%= t '.share_bank_accounts_para' %></p>
-
-  <h2 class="govuk-heading-m"><%= t '.list.title' %></h2>
-
   <p class="govuk-body">
     <%= list_from_translation_path 'providers.about_the_financial_assessments.show.list' %>
   </p>
 
+  <h2 class="govuk-heading-m"><%= t '.section_1.title' %></h2>
+
+  <p class="govuk-body"><%= t '.section_1.detail_use' %></p>
+
+  <p class="govuk-body"><%= t '.section_1.sign_in_save' %></p>
+
   <h2 class="govuk-heading-m">
-    <%= t '.section_1.heading' %>
+    <%= t '.section_2.heading' %>
   </h2>
 
   <p>
-    <%= t '.section_1.text' %>
+    <%= t '.section_2.text' %>
   </p>
 
   <%= next_action_buttons_with_form(
