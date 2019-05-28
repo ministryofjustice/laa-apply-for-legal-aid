@@ -268,6 +268,22 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
+  Scenario: I want to change email address from the about financial assessment page
+    Given I complete the journey as far as check your answers
+    Then I click 'Save and continue'
+    Then I am on the benefit check results page
+    Then I click 'Continue'
+    Then I should be on a page showing 'Does your client use online banking?'
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I am on the About the Financial Assessment page
+    And I click Check Your Answers Change link for 'Email'
+    Then I should be on a page showing 'Email address'
+    Then I click 'Save and continue'
+    Then I am on the application confirmation page
+
+
+  @javascript @vcr
   Scenario: I want to return to check your answers from address lookup
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
