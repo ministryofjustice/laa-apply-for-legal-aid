@@ -18,7 +18,6 @@ en:
           text: "When you click 'Send link' we'll send your client a secure link to the assessment using this email address:"
         secure_link_para: Send an email to your client with a secure link to the online assessment.
         send_client_link: Send client link
-
         title: About the online financial assessment
     address_selections:
       show:
@@ -65,7 +64,7 @@ en:
       index:
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
-        you_need_to: 'You''ll need to:' 
+        you_need_to: 'You''ll need to:'
         negative_result:
           title: "%{name} must complete a financial assessment"
           must_answer_financial_questions: Your client will need to answer questions about their financial situation.
@@ -372,3 +371,10 @@ en:
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?
+          detail_of_payments_to_include: |
+            Include any outstanding payments on loans, hire purchase (HP) or
+            personal contract purchase (PCP) agreements.
+          enter_amount_left_to_pay: Enter the amount left to pay
+    update_email_addresses:
+      show:
+        page_title: Enter your client's email address

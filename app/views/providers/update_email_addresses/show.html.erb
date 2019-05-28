@@ -1,34 +1,29 @@
-<%= page_template(page_title: t('.title')) do %></h1>
-  <p class="govuk-body"><%= t '.sign_in_para' %></p>
+<% back_label = @legal_aid_application.checking_client_details_answers? ? 'generic.back' : 'generic.home' %>
+<%= page_template(
+      page_title: t('.page_title'),
+      back_link: { text: t(back_label) },
+      page_heading_options: { margin_bottom: 3 }
+    ) do %>
 
-  <p class="govuk-body">
-    <%= list_from_translation_path 'providers.about_the_financial_assessments.show.list' %>
-  </p>
-
-  <h2 class="govuk-heading-m"><%= t '.section_1.title' %></h2>
-
-  <p class="govuk-body"><%= t '.section_1.detail_use' %></p>
-
-  <p class="govuk-body"><%= t '.section_1.sign_in_save' %></p>
-
-  <h2 class="govuk-heading-m">
-    <%= t '.section_2.heading' %>
-  </h2>
-
-  <p>
-    <%= t '.section_2.text' %>
-  </p>
-
-  <%= check_answer_email_link(
-        name: :email,
-        url: providers_legal_aid_application_update_email_address_path(anchor: :email), # currently not using anchor may need fo rnew page
-        answer: @applicant.email
-      ) %>
-
-  <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_about_the_financial_assessment_path,
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_update_email_address_path,
         method: :patch,
-        show_draft: true,
-        continue_button_text: t('.send_client_link')
-      ) %>
+        local: true
+      ) do |form| %>
+
+    <div class="govuk-!-padding-bottom-6"></div>
+
+    <%= form.govuk_text_field(
+          :email,
+          label: { text: t('providers.applicants.show.email_label'), size: :m },
+          hint: t('helpers.hint.applicant.email'), size: :m ,
+          class: 'govuk-input govuk-!-width-three-quarters'
+        ) %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+   </div>
+  <% end %>
 <% end %>
