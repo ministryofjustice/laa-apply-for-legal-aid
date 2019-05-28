@@ -39,26 +39,7 @@ module Flow
           forward: :vehicles,
           check_answers: :restrictions
         },
-        vehicles: {
-          path: ->(_) { urls.citizens_vehicle_path },
-          forward: ->(application) { application.vehicle_persisted? ? :vehicles_estimated_values : :savings_and_investments }
-        },
-        vehicles_estimated_values: {
-          path: ->(_) { urls.citizens_vehicles_estimated_value_path },
-          forward: :vehicles_remaining_payments
-        },
-        vehicles_remaining_payments: {
-          path: ->(_) { urls.citizens_vehicles_remaining_payment_path },
-          forward: :vehicles_purchase_dates
-        },
-        vehicles_purchase_dates: {
-          path: ->(_) { urls.citizens_vehicles_purchase_date_path },
-          forward: :vehicles_regular_uses
-        },
-        vehicles_regular_uses: {
-          path: ->(_) { urls.citizens_vehicles_regular_use_path },
-          forward: :savings_and_investments
-        },
+        # Vehicle steps here (see CitizenVehicle)
         savings_and_investments: {
           path: ->(_) { urls.citizens_savings_and_investment_path },
           forward: :other_assets,

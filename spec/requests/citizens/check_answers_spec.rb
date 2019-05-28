@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'check your answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
-  let!(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything }
+  let(:vehicle) { create :vehicle, :populated }
+  let!(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything, vehicle: vehicle }
   let!(:restriction) { create :restriction, legal_aid_applications: [legal_aid_application] }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
@@ -61,6 +62,18 @@ RSpec.describe 'check your answers requests', type: :request do
       end
     end
 
+    it 'displays the correct vehicles details' do
+      expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
+      expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
+      expect(response.body).to include(vehicle.purchased_on.to_s)
+      expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.heading'))
+      expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.own'))
+      expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.estimated_value'))
+      expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.payment_remaining'))
+      expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.purchased_on'))
+      expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.used_regularly'))
+    end
+
     it 'should change the state to "checking_citizen_answers"' do
       expect(legal_aid_application.reload.checking_citizen_answers?).to be_truthy
     end
@@ -117,6 +130,20 @@ RSpec.describe 'check your answers requests', type: :request do
       let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_applicant, :without_own_home }
       it 'does not display capital restrictions' do
         expect(response.body).not_to include('restrictions')
+      end
+    end
+
+    context 'applicant does not have vehicle' do
+      let(:vehicle) { nil }
+      it 'displays first vehicle question' do
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.citizens.own'))
+      end
+
+      it 'does not display other vehicle questions' do
+        expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.citizens.estimated_value'))
+        expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.citizens.payment_remaining'))
+        expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.citizens.purchased_on'))
+        expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.citizens.used_regularly'))
       end
     end
   end
