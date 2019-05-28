@@ -139,6 +139,9 @@ en:
     identify_types_of_incomes:
       show:
         page_heading: Which types of income does your client receive?
+    identify_types_of_outgoings:
+      show:
+        page_heading: Which regular payments does your client make?
     income_summary:
       add_other_income:
         add_other_income: Add another type of income
