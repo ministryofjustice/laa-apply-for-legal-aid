@@ -358,7 +358,7 @@ Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field
 end
 
 Then('I am on the postcode entry page') do
-  expect(page).to have_content("Enter your client's home address")
+  expect(page).to have_content("Enter your client's correspondence address")
 end
 
 Then('I am on the benefit check results page') do

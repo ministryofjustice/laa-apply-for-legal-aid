@@ -42,7 +42,7 @@ RSpec.describe 'address requests', type: :request do
       it 'returns success' do
         subject
         expect(response).to be_successful
-        expect(unescaped_response_body).to include("Enter your client's address manually")
+        expect(unescaped_response_body).to include("Enter your client's correspondence address manually")
       end
 
       context 'when the applicant already entered an address' do
@@ -113,7 +113,7 @@ RSpec.describe 'address requests', type: :request do
 
         it 'renders the form again if validation fails' do
           subject
-          expect(unescaped_response_body).to include("Enter your client's address manually")
+          expect(unescaped_response_body).to include("Enter your client's correspondence address manually")
           expect(response.body).to include('Enter a postcode')
         end
       end
