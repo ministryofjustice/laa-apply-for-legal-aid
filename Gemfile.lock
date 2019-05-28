@@ -206,7 +206,7 @@ GEM
     json (2.1.0)
     json_expressions (0.9.0)
     jsonapi-renderer (0.2.0)
-    jwt (2.1.0)
+    jwt (2.2.1)
     launchy (2.4.3)
       addressable (~> 2.3)
     libreconv (0.9.1)
