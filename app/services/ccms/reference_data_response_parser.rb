@@ -3,20 +3,18 @@ module CCMS
     TRANSACTION_ID_PATH = '//Body//ReferenceDataInqRS//HeaderRS//TransactionID'.freeze
     RESULTS_PATH = '//Body//ReferenceDataInqRS//Results'.freeze
 
-    def parse
-      raise CcmsError, 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
-
-      extracted_reference_id
+    def reference_id
+      @reference_id ||= parse(:extracted_reference_id)
     end
 
     private
 
     def extracted_transaction_request_id
-      @doc.xpath(TRANSACTION_ID_PATH).text
+      text_from(TRANSACTION_ID_PATH)
     end
 
     def extracted_reference_id
-      @doc.xpath(RESULTS_PATH).text
+      text_from(RESULTS_PATH)
     end
   end
 end

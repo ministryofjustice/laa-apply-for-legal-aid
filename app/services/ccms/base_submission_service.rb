@@ -6,6 +6,10 @@ module CCMS
       @submission = submission
     end
 
+    def self.call(*args)
+      new(*args).call
+    end
+
     private
 
     def create_history(from_state, to_state)

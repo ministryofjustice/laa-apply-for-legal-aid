@@ -1,7 +1,7 @@
 module CCMS
-  class CaseAddResponseParser < BaseResponseParser
-    TRANSACTION_ID_PATH = '//CaseAddRS//HeaderRS//TransactionID'.freeze
-    STATUS_PATH = '//CaseAddRS//HeaderRS//Status//Status'.freeze
+  class DocumentUploadResponseParser < BaseResponseParser
+    TRANSACTION_ID_PATH = '//Body//DocumentUploadRS//HeaderRS//TransactionRequestID'.freeze
+    STATUS_PATH = '//Body//DocumentUploadRS//HeaderRS//Status'.freeze
 
     def success?
       parse(:extracted_status) == 'Success'

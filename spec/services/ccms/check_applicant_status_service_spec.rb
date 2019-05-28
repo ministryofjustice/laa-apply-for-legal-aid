@@ -24,7 +24,7 @@ RSpec.describe CCMS::CheckApplicantStatusService do
 
         context 'poll count remains below limit' do
           it 'increments the poll count' do
-            expect { subject.call }.to change { submission.poll_count }.by 1
+            expect { subject.call }.to change { submission.applicant_poll_count }.by 1
           end
 
           it 'does not change the state' do
@@ -42,11 +42,11 @@ RSpec.describe CCMS::CheckApplicantStatusService do
 
         context 'poll count reaches limit' do
           before do
-            submission.poll_count = CCMS::Submission::POLL_LIMIT - 1
+            submission.applicant_poll_count = CCMS::Submission::POLL_LIMIT - 1
           end
 
           it 'increments the poll count' do
-            expect { subject.call }.to change { submission.poll_count }.by 1
+            expect { subject.call }.to change { submission.applicant_poll_count }.by 1
           end
 
           it 'changes the state to failed' do
@@ -88,11 +88,6 @@ RSpec.describe CCMS::CheckApplicantStatusService do
           expect(history.success).to be true
           expect(history.details).to be_nil
         end
-
-        it 'resets the poll count to 0' do
-          subject.call
-          expect(submission.poll_count).to eq 0
-        end
       end
     end
 
@@ -105,7 +100,7 @@ RSpec.describe CCMS::CheckApplicantStatusService do
       end
 
       it 'increments the poll count' do
-        expect { subject.call }.to change { submission.poll_count }.by 1
+        expect { subject.call }.to change { submission.applicant_poll_count }.by 1
       end
 
       it 'changes the state to failed' do
@@ -131,7 +126,7 @@ RSpec.describe CCMS::CheckApplicantStatusService do
     let(:requestor2) { service_double.__send__(:applicant_add_status_requestor) }
     it 'only instantiates one copy of the ApplicantAddStatusRequestor' do
       expect(requestor1).to be_instance_of(CCMS::ApplicantAddStatusRequestor)
-      expect(requestor1.object_id).to eq requestor2.object_id
+      expect(requestor1).to eq requestor2
     end
   end
 end
