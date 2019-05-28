@@ -3,20 +3,18 @@ module CCMS
     TRANSACTION_ID_PATH = '//Body//CaseAddUpdtStatusRS//HeaderRS//TransactionID'.freeze
     STATUS_FREE_TEXT_PATH = '//Body//CaseAddUpdtStatusRS//HeaderRS//Status//StatusFreeText'.freeze
 
-    def parse
-      raise CcmsError, 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
-
-      extracted_status_free_text
+    def success?
+      parse(:extracted_status_free_text) == 'Case successfully created.'
     end
 
     private
 
     def extracted_transaction_request_id
-      @doc.xpath(TRANSACTION_ID_PATH).text
+      text_from(TRANSACTION_ID_PATH)
     end
 
     def extracted_status_free_text
-      @doc.xpath(STATUS_FREE_TEXT_PATH).text
+      text_from(STATUS_FREE_TEXT_PATH)
     end
   end
 end

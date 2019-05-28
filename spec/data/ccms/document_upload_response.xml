@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<env:Envelope xmlns:env='http://schemas.xmlsoap.org/soap/envelope/' xmlns:wsa='http://www.w3.org/2005/08/addressing'>
+  <env:Body>
+    <ns6:DocumentUploadRS xmlns:ns6='http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM'>
+      <ns1:HeaderRS xmlns:ns1='http://legalservices.gov.uk/Enterprise/Common/1.0/Header'>
+        <ns1:TransactionRequestID>20190301030405123456</ns1:TransactionRequestID>
+        <ns1:RequestDetails/>
+        <ns1:ResultCount/>
+        <ns1:Status>Success</ns1:Status>
+      </ns1:HeaderRS>
+    </ns6:DocumentUploadRS>
+  </env:Body>
+</env:Envelope>

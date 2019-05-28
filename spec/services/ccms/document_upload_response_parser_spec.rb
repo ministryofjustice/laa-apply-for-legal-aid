@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe CaseAddStatusResponseParser do
+  RSpec.describe DocumentUploadResponseParser do
     describe '#success?' do
-      let(:response_xml) { ccms_data_from_file 'case_add_status_response.xml' }
+      let(:response_xml) { ccms_data_from_file 'document_upload_response.xml' }
       let(:expected_tx_id) { '20190301030405123456' }
+      let(:expected_document_id) { '4420073' }
 
-      it 'extracts the status free text' do
+      it 'extracts the status' do
         parser = described_class.new(expected_tx_id, response_xml)
         expect(parser.success?).to eq true
       end

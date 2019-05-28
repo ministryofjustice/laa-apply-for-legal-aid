@@ -5,20 +5,20 @@ RSpec.describe CCMS::AddApplicantService do
   let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:applicant_add_requestor) { double CCMS::ApplicantAddRequestor }
+  let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   subject { described_class.new(submission) }
 
   before do
     allow(subject).to receive(:applicant_add_requestor).and_return(applicant_add_requestor)
+    allow(applicant_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
   end
 
   context 'operation successful' do
     context 'no applicant exists on the CCMS system' do
       let(:applicant_add_response) { ccms_data_from_file 'applicant_add_response_success.xml' }
-      let(:transaction_request_id_in_example_response) { '20190301030405123456' }
 
       before do
         expect(applicant_add_requestor).to receive(:call).and_return(applicant_add_response)
-        allow(applicant_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
       end
 
       it 'sets state to applicant_submitted' do
@@ -64,7 +64,6 @@ RSpec.describe CCMS::AddApplicantService do
 
     context 'failed response from CCMS adding an applicant' do
       let(:applicant_add_response) { ccms_data_from_file 'applicant_add_response_failure.xml' }
-      let(:transaction_request_id_in_example_response) { '20190301030405123456' }
 
       before do
         expect(applicant_add_requestor).to receive(:call).and_return(applicant_add_response)

@@ -9,5 +9,13 @@ FactoryBot.define do
     trait :applicant_submitted do
       aasm_state { 'applicant_submitted' }
     end
+
+    trait :applicant_ref_obtained do
+      aasm_state { 'applicant_ref_obtained' }
+    end
+
+    trait :case_submitted do
+      aasm_state { 'case_submitted' }
+    end
   end
 end

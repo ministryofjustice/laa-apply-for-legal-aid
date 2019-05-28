@@ -3,24 +3,18 @@ module CCMS
     TRANSACTION_ID_PATH = '//Body//ClientAddRS//HeaderRS//TransactionID'.freeze
     STATUS_PATH = '//Body//ClientAddRS//HeaderRS//Status//Status'.freeze
 
-    def parse
-      raise CcmsError, 'Invalid transaction request id' if extracted_transaction_request_id != @transaction_request_id
-
-      extracted_status
-    end
-
     def success?
-      parse == 'Success'
+      parse(:extracted_status) == 'Success'
     end
 
     private
 
     def extracted_transaction_request_id
-      @doc.xpath(TRANSACTION_ID_PATH).text
+      text_from(TRANSACTION_ID_PATH)
     end
 
     def extracted_status
-      @doc.xpath(STATUS_PATH).text
+      text_from(STATUS_PATH)
     end
   end
 end

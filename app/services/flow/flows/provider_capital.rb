@@ -11,7 +11,8 @@ module Flow
           forward: :income_summary
         },
         identify_types_of_outgoings: {
-          path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) }
+          path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
+          forward: :outgoings_summary
         },
         own_homes: {
           path: ->(application) { urls.providers_legal_aid_application_own_home_path(application) },

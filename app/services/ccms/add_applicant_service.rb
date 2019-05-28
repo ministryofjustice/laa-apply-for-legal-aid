@@ -1,11 +1,9 @@
 module CCMS
   class AddApplicantService < BaseSubmissionService
     def call
-      response = applicant_add_requestor.call
-      if applicant_add_response_parser(response).success?
+      if applicant_add_response_parser.success?
         submission.applicant_add_transaction_id = applicant_add_requestor.transaction_request_id
-        create_history(submission.aasm_state, :applicant_submitted)
-        submission.submit_applicant!
+        create_history('case_ref_obtained', submission.aasm_state) if submission.submit_applicant!
       else
         handle_failure(response)
       end
@@ -19,8 +17,12 @@ module CCMS
       @applicant_add_requestor ||= ApplicantAddRequestor.new(submission.legal_aid_application.applicant)
     end
 
-    def applicant_add_response_parser(response)
+    def applicant_add_response_parser
       @applicant_add_response_parser ||= ApplicantAddResponseParser.new(applicant_add_requestor.transaction_request_id, response)
+    end
+
+    def response
+      @response ||= applicant_add_requestor.call
     end
   end
 end
