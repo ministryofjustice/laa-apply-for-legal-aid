@@ -1,0 +1,12 @@
+<div class="govuk-grid-row" id="app-check-your-answers__<%= name %>">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-body"><%= answer %></h2>
+  </div>
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+      <p>
+        <%= link_to(url, class: 'govuk-link change-link') do %>
+          <%= t('generic.change') %>
+      </p>
+    </div>
+  <% end %>
+</div>

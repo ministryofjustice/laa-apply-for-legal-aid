@@ -62,4 +62,13 @@ module CheckAnswersHelper
       answers: answers
     )
   end
+
+  def check_answer_email_link(url:, answer:, name:)
+    render(
+      'shared/check_answers/answer_no_question',
+      name: name,
+      url: url,
+      answer: answer
+    )
+  end
 end
