@@ -5,8 +5,6 @@ module Providers
     end
 
     def update
-
-
       return continue_or_draft if draft_selected?
 
       unless legal_aid_application.provider_submitted?
