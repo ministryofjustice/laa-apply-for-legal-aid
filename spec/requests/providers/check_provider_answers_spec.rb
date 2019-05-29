@@ -18,14 +18,6 @@ RSpec.describe 'check your answers requests', type: :request do
         subject
       end
 
-      context 'when the application does not exist' do
-        let(:application_id) { SecureRandom.uuid }
-
-        it 'redirects to the applications page with an error' do
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-      end
-
       it 'returns success' do
         expect(response).to be_successful
       end

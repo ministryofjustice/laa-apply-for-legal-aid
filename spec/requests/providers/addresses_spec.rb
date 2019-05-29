@@ -33,9 +33,9 @@ RSpec.describe 'address requests', type: :request do
       context 'when the applicant does not exist' do
         let(:legal_aid_application) { SecureRandom.uuid }
 
-        it 'redirects the user to the applications page with an error message' do
+        it 'redirects the user to an error page' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
+          expect(response).to redirect_to(error_path(:page_not_found))
         end
       end
 
@@ -82,14 +82,9 @@ RSpec.describe 'address requests', type: :request do
       context 'when the legal aid application does not exist' do
         let(:legal_aid_application) { SecureRandom.uuid }
 
-        it 'redirects the user to the applications page with an error message' do
+        it 'redirects the user to an error message' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-
-        it 'displays an error if the applicant does not exist' do
-          subject
-          expect(flash[:error]).to eq('Invalid application')
+          expect(response).to redirect_to(error_path(:page_not_found))
         end
 
         it 'does NOT create an address record' do

@@ -19,15 +19,6 @@ RSpec.describe 'address lookup requests', type: :request do
         subject
       end
 
-      context 'when the applicant does not exist' do
-        let(:invalid_legal_aid_application) { SecureRandom.uuid }
-        subject { get providers_legal_aid_application_address_lookup_path(invalid_legal_aid_application) }
-
-        it 'redirects the user to the applications page with an error message' do
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-      end
-
       it 'shows the postcode entry page' do
         expect(response).to be_successful
         expect(unescaped_response_body).to include(I18n.t('forms.address_lookup.heading'))
@@ -57,16 +48,6 @@ RSpec.describe 'address lookup requests', type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as provider
-      end
-
-      context 'when the applicantion does not exist' do
-        let(:invalid_legal_aid_application) { SecureRandom.uuid }
-        subject { patch providers_legal_aid_application_address_lookup_path(invalid_legal_aid_application), params: params }
-
-        it 'redirects the user to the applications page with an error message' do
-          subject
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
       end
 
       context 'with an invalid postcode' do
