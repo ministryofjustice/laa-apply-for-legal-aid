@@ -7,11 +7,11 @@ en:
         unsuccessful: Sorry - we couldn't find any addresses for that postcode, please enter the address manually.
     address_lookup:
       address_manual_link: Enter address manually
-      heading: Enter your client's home address
+      heading: Enter your client's correspondence address
       label_1: postcode
       postcode: Postcode
       submit_button: Find address
     address_manual:
-      heading: Enter your client's address manually
+      heading: Enter your client's correspondence address manually
     address_selection:
-      heading: Enter your client's home address
+      heading: Enter your client's correspondence address
