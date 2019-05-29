@@ -283,8 +283,7 @@ Then('the answer for {string} should be {string}') do |field_name, answer|
 end
 
 Then('I select a proceeding type and continue') do
-  find('#proceeding-list').first(:button, 'Select').click
-  click_button('Save and continue')
+  find('#proceeding-list').first(:button, 'Select and continue').click
 end
 
 Then('I select proceeding type {int}') do |index|
