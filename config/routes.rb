@@ -145,4 +145,7 @@ Rails.application.routes.draw do
       resource :means_summary, only: %i[show update]
     end
   end
+
+  # Catch all route that traps paths not defined above. Must be last route.
+  match '*path', to: redirect('error/page_not_found'), via: :all
 end

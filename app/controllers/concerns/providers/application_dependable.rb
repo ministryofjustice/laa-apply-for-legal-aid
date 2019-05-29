@@ -30,8 +30,7 @@ module Providers
       end
 
       def process_invalid_application
-        flash[:error] = 'Invalid application'
-        redirect_to providers_legal_aid_applications_path
+        redirect_to error_path(:page_not_found)
       end
 
       def provider_step_params
