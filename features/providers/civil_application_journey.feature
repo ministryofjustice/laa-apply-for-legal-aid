@@ -279,6 +279,7 @@ Feature: Civil application journeys
     Then I am on the About the Financial Assessment page
     And I click Check Your Answers Change link for 'Email'
     Then I should be on a page showing 'Email address'
+    Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the application confirmation page
 
