@@ -8,7 +8,7 @@ module CCMS
     end
 
     def doc
-      @doc ||= Nokogiri::XML(response).remove_namespaces!
+      @doc ||= Nokogiri::XML(response.to_s).remove_namespaces!
     end
 
     def parse(data_method)
