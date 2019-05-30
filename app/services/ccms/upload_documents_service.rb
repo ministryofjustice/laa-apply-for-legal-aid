@@ -20,17 +20,21 @@ module CCMS
 
     def upload_document(key)
       pdf_file = PdfFile.find_by(original_file_id: key)
-      document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference, pdf_file.ccms_document_id, pdf_file.file.download)
+      document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference, pdf_file.ccms_document_id, Base64.strict_encode64(pdf_file.file.download))
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
+      update_document_status(key, tx_id, response)
+    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+      submission.documents[key] = :failed
+      raise CcmsError, e
+    end
+
+    def update_document_status(key, tx_id, response)
       submission.documents[key] = if DocumentUploadResponseParser.new(tx_id, response).success?
                                     :uploaded
                                   else
                                     :failed
                                   end
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
-      submission.documents[key] = :failed
-      raise CcmsError, e
     end
   end
 end

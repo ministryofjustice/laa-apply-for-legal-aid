@@ -33,6 +33,11 @@ RSpec.describe CCMS::UploadDocumentsService do
       subject.call
     end
 
+    it 'encodes each document as base64' do
+      expect(Base64).to receive(:strict_encode64).exactly(submission.documents.count).times
+      subject.call
+    end
+
     it 'updates the status for each document to uploaded' do
       subject.call
       submission.documents.each do |_key, value|
