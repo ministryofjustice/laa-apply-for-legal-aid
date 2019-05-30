@@ -26,7 +26,11 @@ class Address < ApplicationRecord
   end
 
   def pretty_postcode
-    postcode.insert(-4, ' ')
+    pretty_postcode? ? postcode : postcode.insert(-4, ' ')
+  end
+
+  def pretty_postcode?
+    postcode[-4] == ' '
   end
 
   def first_lines
