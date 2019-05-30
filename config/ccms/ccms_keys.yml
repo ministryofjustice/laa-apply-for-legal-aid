@@ -1148,7 +1148,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   APPLICATION_CASE_REF:
-    :value: "#application_ccms_reference_number"
+    :value: 123456
     :br100_meaning: Application case reference
     :response_type: text
     :user_defined: true
@@ -3485,7 +3485,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   APPLICATION_CASE_REF:
-    :value: '#application_ccms_reference_number'
+    :value: 123456
     :br100_meaning: Application case reference
     :response_type: text
     :user_defined: true

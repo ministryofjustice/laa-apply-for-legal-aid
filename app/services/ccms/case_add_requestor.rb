@@ -58,7 +58,7 @@ module CCMS
 
     def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
       xml.__send__('ns2:Client') { generate_client(xml) }
-      xml.__send__('ns2:PreferredAddress', applicant.preferred_address)
+      xml.__send__('ns2:PreferredAddress', 'CLIENT')
       xml.__send__('ns2:ProviderDetails') { generate_provider_details(xml) }
       xml.__send__('ns2:CategoryOfLaw') { generate_category_of_law(xml) }
       xml.__send__('ns2:OtherParties') { generate_other_parties(xml) }
@@ -136,20 +136,20 @@ module CCMS
     end
 
     def generate_provider_details(xml)
-      xml.__send__('ns2:ProviderCaseReferenceNumber', @legal_aid_application.provider_case_reference_number)
-      xml.__send__('ns2:ProviderFirmID', provider.firm_id)
-      xml.__send__('ns2:ProviderOfficeID', provider.office_id)
+      xml.__send__('ns2:ProviderCaseReferenceNumber', '123456') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
+      xml.__send__('ns2:ProviderFirmID', 19_148) # TODO: insert provider.firm_id when it is available in Apply
+      xml.__send__('ns2:ProviderOfficeID', 137_570) # TODO: insert provider.office_id when it is available in Apply
       xml.__send__('ns2:ContactUserID') do
-        xml.__send__('ns0:UserLoginID', provider.user_login_id)
+        xml.__send__('ns0:UserLoginID', 4_953_649) # TODO: insert provider.user_login_id when it is available in Apply
       end
-      xml.__send__('ns2:SupervisorContactID', provider.supervisor_user_id)
-      xml.__send__('ns2:FeeEarnerContactID', provider.fee_earner_contact_id)
+      # xml.__send__('ns2:SupervisorContactID', 7008010) # TODO: insert provider.supervisor_user_id when it is available in Apply
+      xml.__send__('ns2:FeeEarnerContactID', 4_925_152) # TODO: insert fee_earner_contact_id when it is available in Apply
     end
 
     def generate_category_of_law(xml)
-      xml.__send__('ns2:CategoryOfLawCode', lead_proceeding.ccms_category_law_code)
-      xml.__send__('ns2:CategoryOfLawDescription', lead_proceeding.ccms_category_law)
-      xml.__send__('ns2:RequestedAmount', as_currency(@legal_aid_application.requested_amount))
+      xml.__send__('ns2:CategoryOfLawCode', 'MAT') # TODO: replace with lead_proceeding.ccms_category_law_code when it is available in Apply
+      xml.__send__('ns2:CategoryOfLawDescription', 'FAMILY') # TODO: insert lead_proceeding.ccms_category_law when it is available in Apply
+      xml.__send__('ns2:RequestedAmount', '0') # TODO: replace with as_currency(@legal_aid_application.requested_amount)) when it is available in Apply
     end
 
     def generate_proceedings(xml)
@@ -205,8 +205,8 @@ module CCMS
         xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, 1) }
         xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, 2) }
         xml.__send__('ns0:Entity') { generate_change_in_circumstance_entity(xml, 3) }
-        xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, 4) }
-        xml.__send__('ns0:Entity') { generate_wage_slip_entity(xml, 5) }
+        xml.__send__('ns0:Entity') { 'vehicles' } # TODO: replace with generate_vehicles_entity(xml, 4) when available in Apply
+        xml.__send__('ns0:Entity') { 'wage_slips' } # TODO: replace with generate_wage_slip_entity(xml, 5) when available in Apply
         xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, 6) }
         xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, 7) }
         xml.__send__('ns0:Entity') { generate_global_means_entity(xml, 8) }

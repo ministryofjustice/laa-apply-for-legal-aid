@@ -23,7 +23,8 @@ module CCMS
       submission.documents.each do |key, _value|
         tx_id = document_id_requestor.transaction_request_id
         response = document_id_requestor.call
-        PdfFile.update(original_file_id: key, ccms_document_id: DocumentIdResponseParser.new(tx_id, response).document_id)
+        pdf_file = PdfFile.find_by(original_file_id: key)
+        pdf_file.update(ccms_document_id: DocumentIdResponseParser.new(tx_id, response).document_id)
         submission.documents[key] = :id_obtained
       rescue CcmsError => e
         submission.documents[key] = :failed

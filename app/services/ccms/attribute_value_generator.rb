@@ -47,7 +47,7 @@ module CCMS
     end
 
     def application_ccms_reference_number(_options)
-      @legal_aid_application.ccms_reference_number
+      CCMS::Submission.find_by(legal_aid_application_id: @legal_aid_application.id).case_ccms_reference
     end
 
     def bank_name(options)
@@ -59,23 +59,28 @@ module CCMS
     end
 
     def means_assessment_capital_contribution(_options)
-      @legal_aid_application.means_assessment_result.capital_contribution
+      0
+      # @legal_aid_application.means_assessment_result.capital_contribution
     end
 
     def lead_proceeding_category(_options)
-      @legal_aid_application.lead_proceeding.ccms_category_law_code
+      'MAT'
+      # @legal_aid_application.lead_proceeding.ccms_category_law_code
     end
 
     def main_dwelling_third_party_name(_options)
-      @legal_aid_application.main_dwelling_third_party_name
+      'Mrs Fabby Fabby'
+      # @legal_aid_application.main_dwelling_third_party_name
     end
 
     def main_dwelling_third_party_relationship(_options)
-      @legal_aid_application.main_dwelling_third_party_relationship
+      'Ex-Partner'
+      # @legal_aid_application.main_dwelling_third_party_relationship
     end
 
     def main_dwelling_third_party_percentage(_options)
-      @legal_aid_application.main_dwelling_third_party_percentage
+      50
+      # @legal_aid_application.main_dwelling_third_party_percentage
     end
 
     private

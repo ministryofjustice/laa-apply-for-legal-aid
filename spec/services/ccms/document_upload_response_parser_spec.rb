@@ -5,7 +5,6 @@ module CCMS
     describe '#success?' do
       let(:response_xml) { ccms_data_from_file 'document_upload_response.xml' }
       let(:expected_tx_id) { '20190301030405123456' }
-      let(:expected_document_id) { '4420073' }
 
       it 'extracts the status' do
         parser = described_class.new(expected_tx_id, response_xml)
