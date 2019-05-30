@@ -14,7 +14,7 @@ module CCMS
     private
 
     def case_add_requestor
-      @case_add_requestor ||= CaseAddRequestor.new(submission.legal_aid_application.applicant)
+      @case_add_requestor ||= CaseAddRequestor.new(submission)
     end
 
     def case_add_response_parser

@@ -1,6 +1,6 @@
 module CCMS
   class CaseAddResponseParser < BaseResponseParser
-    TRANSACTION_ID_PATH = '//CaseAddRS//HeaderRS//TransactionID'.freeze
+    TRANSACTION_REQUEST_ID_PATH = '//CaseAddRS//HeaderRS//RequestDetails//TransactionRequestID'.freeze
     STATUS_PATH = '//CaseAddRS//HeaderRS//Status//Status'.freeze
 
     def success?
@@ -10,7 +10,7 @@ module CCMS
     private
 
     def extracted_transaction_request_id
-      text_from(TRANSACTION_ID_PATH)
+      text_from(TRANSACTION_REQUEST_ID_PATH)
     end
 
     def extracted_status

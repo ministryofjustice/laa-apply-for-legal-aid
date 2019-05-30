@@ -217,7 +217,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              main_dwelling_third_party_percentage: 50
     end
     let(:expected_tx_id) { '201904011604570390059770759' }
-    let(:requestor) { described_class.new(legal_aid_application) }
+    let(:submission) do
+      double Submission,
+             legal_aid_application: legal_aid_application,
+             case_ccms_reference: 1_234_567_890,
+             applicant_ccms_reference: 9_876_543_210
+    end
+    let(:requestor) { described_class.new(submission) }
 
     describe 'XML request' do
       # This test is non-functional at the moment.
@@ -242,7 +248,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       describe '#call' do
         let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
-        let(:expected_soap_operation) { :add_case }
+        let(:expected_soap_operation) { :create_case_application }
         let(:expected_xml) { requestor.__send__(:request_xml) }
 
         before do
