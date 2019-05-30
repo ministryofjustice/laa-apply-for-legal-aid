@@ -84,7 +84,7 @@ Rails.application.routes.draw do
     resource :provider, only: [:show], path: 'your_profile'
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
-      resources :proceedings_types, only: %i[index create update destroy]
+      resources :proceedings_types, only: %i[index create update]
       resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
       resource :applicant, only: %i[show update]

@@ -25,8 +25,7 @@ module Flow
         },
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
-          forward: :limitations,
-          check_answers: :check_provider_answers
+          forward: :limitations
         },
         limitations: {
           path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
