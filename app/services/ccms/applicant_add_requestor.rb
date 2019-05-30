@@ -20,12 +20,9 @@ module CCMS
       @applicant = applicant
     end
 
-    # temporarily ignore this until connectivity with ccms is working
-    # :nocov:
     def call
       soap_client.call(:create_client, xml: request_xml)
     end
-    # :nocov:
 
     private
 

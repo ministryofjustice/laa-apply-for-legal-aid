@@ -22,25 +22,9 @@ module CCMS
       @attribute_value_generator = AttributeValueGenerator.new(@legal_aid_application)
     end
 
-    # temporarily ignore this until connectivity with ccms is working
-    # :nocov:
     def call
       soap_client.call(:add_case, xml: request_xml)
     end
-    # :nocov:
-
-    # def request
-    #   @request ||= build_request
-    # end
-
-    # def formatted_xml
-    #   result = ''
-    #   formatter = REXML::Formatters::Pretty.new
-    #   formatter.compact = true
-    #   formatter.width = 500
-    #   formatter.write(REXML::Document.new(request.to_xml), result)
-    #   result
-    # end
 
     private
 

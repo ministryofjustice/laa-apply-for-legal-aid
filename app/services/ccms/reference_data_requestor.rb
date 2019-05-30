@@ -13,12 +13,9 @@ module CCMS
       'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIO'
     )
 
-    # temporarily ignore this until connectivity with ccms is working
-    # :nocov:
     def call
       soap_client.call(:process, xml: request_xml)
     end
-    # :nocov:
 
     private
 

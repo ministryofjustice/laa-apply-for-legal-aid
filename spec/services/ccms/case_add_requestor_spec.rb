@@ -217,6 +217,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              main_dwelling_third_party_percentage: 50
     end
     let(:expected_tx_id) { '201904011604570390059770759' }
+    let(:requestor) { described_class.new(legal_aid_application) }
 
     describe 'XML request' do
       # This test is non-functional at the moment.
@@ -230,7 +231,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       # - missing elements for opponents
       it 'generates the expected XML' do
         Timecop.freeze Time.new(2019, 4, 1, 16, 4, 57.039) do
-          requestor = described_class.new(legal_aid_application)
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           filename = File.join(Rails.root, 'tmp', 'generated_add_case_request.xml')
           File.open(filename, 'w') do |fp|
@@ -239,10 +239,25 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
       end
+
+      describe '#call' do
+        let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
+        let(:expected_soap_operation) { :add_case }
+        let(:expected_xml) { requestor.__send__(:request_xml) }
+
+        before do
+          Timecop.freeze
+          expect(requestor).to receive(:soap_client).and_return(soap_client_double)
+        end
+
+        it 'calls the savon soap client' do
+          expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
+          requestor.call
+        end
+      end
     end
 
     context 'private_methods' do
-      let(:requestor) { described_class.new(legal_aid_application) }
       let(:options) { {} }
       context '#extract_response_value' do
         it 'raises if an unknown response type is given in the config' do

@@ -42,7 +42,22 @@ module CCMS
 
     describe 'wsdl_location' do
       it 'points to correct location' do
-        expect(requestor.send(:wsdl_location)).to match('app/services/ccms/wsdls/ClientProxyServiceWsdl.xml')
+        expect(requestor.__send__(:wsdl_location)).to match('app/services/ccms/wsdls/ClientProxyServiceWsdl.xml')
+      end
+    end
+
+    describe '#call' do
+      let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
+      let(:expected_soap_operation) { :create_client }
+      let(:expected_xml) { requestor.__send__(:request_xml) }
+
+      before do
+        expect(requestor).to receive(:soap_client).and_return(soap_client_double)
+      end
+
+      it 'calls the savon soap client' do
+        expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
+        requestor.call
       end
     end
   end
