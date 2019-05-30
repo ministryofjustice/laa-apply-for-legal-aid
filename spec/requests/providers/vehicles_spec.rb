@@ -117,9 +117,18 @@ RSpec.describe Providers::VehiclesController, type: :request do
       end
 
       context 'while checking answers' do
+        let(:legal_aid_application) { create :legal_aid_application, :provider_checking_citizens_means_answers }
+
+        it 'redirects to non-passported check answers page' do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        end
+      end
+
+      context 'while checking passported answers' do
         let(:legal_aid_application) { create :legal_aid_application, :checking_passported_answers }
 
-        it 'redirects to check answers page' do
+        it 'redirects to passported check answers page' do
           subject
           expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
         end
