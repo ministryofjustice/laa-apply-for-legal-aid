@@ -1,6 +1,6 @@
 <wsdl:definitions name="DocumentServices" targetNamespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/DocumentServices">
   <wsdl:documentation>
-    <abstractWSDL>http://ds01za005:8650/soa-infra/services/default/DocumentServices!5.0/DocumentProxyService.wsdl</abstractWSDL>
+    <abstractWSDL>https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices!5.0/DocumentProxyService.wsdl</abstractWSDL>
   </wsdl:documentation>
   <plnk:partnerLinkType name="UploadDocument">
     <plnk:role name="UploadDocumentProvider"><plnk:portType name="tns:UploadDocument"/></plnk:role>
@@ -21,9 +21,9 @@
     </sp:SupportingTokens>
   </wsp:Policy>
   <wsdl:types>
-    <schema><import namespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" schemaLocation="http://ds01za005:8650/soa-infra/services/default/DocumentServices/apps/lsc/Schema/BusinessObjects/CCMS/CaseManagement/Case/1.0/CaseBIM.xsd"/><import
+    <schema><import namespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" schemaLocation="https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/apps/lsc/Schema/BusinessObjects/CCMS/CaseManagement/Case/1.0/CaseBIM.xsd"/><import
       namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-      schemaLocation="http://ds01za005:8650/soa-infra/services/default/DocumentServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/></schema>
+      schemaLocation="https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/></schema>
   </wsdl:types>
   <wsdl:message name="DownloadDocumentRequestMessage"><wsdl:part name="payload" element="ns1:DocumentDownloadRQ"/></wsdl:message>
   <wsdl:message name="DownloadDocumentResponseMessage"><wsdl:part name="payload" element="ns1:DocumentDownloadRS"/></wsdl:message>
@@ -52,6 +52,6 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DocumentServices_ep">
-    <wsdl:port name="DocumentServices_pt" binding="tns:DocumentServicesSOAPBinding"><soap:address location="http://ds01za005:8650/soa-infra/services/default/DocumentServices/DocumentServices_ep"/></wsdl:port>
+    <wsdl:port name="DocumentServices_pt" binding="tns:DocumentServicesSOAPBinding"><soap:address location="https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep"/></wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
