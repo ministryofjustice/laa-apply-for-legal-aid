@@ -22,7 +22,7 @@ $(document).ready(function() {
         const th = $(this),
           thIndex = index + 1;
         let inverse = false;
-        
+
         th.click(() => {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
@@ -38,12 +38,12 @@ $(document).ready(function() {
             // parentNode is the element we want to move
             return this.parentNode;
           });
-          
+
           //this adds a message to the message div, stating what it is sorted by
           $("#screen-reader-messages").html("Sorted by " + th.find(".aria-sort-description").text() + " " + endText[sortDirection][th.attr("data-sort-type")]);
-      
+
           inverse = !inverse;
-          
+
           return false;
         });
         th.keyup(function(ev) {
