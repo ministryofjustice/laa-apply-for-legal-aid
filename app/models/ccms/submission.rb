@@ -26,6 +26,8 @@ module CCMS
         CheckCaseStatusService.call(self)
       when 'case_created'
         ObtainDocumentIdService.call(self)
+      when 'document_ids_obtained'
+        UploadDocumentsService.call(self)
       else
         raise CcmsError, 'Unknown state'
       end
