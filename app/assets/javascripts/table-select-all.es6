@@ -2,6 +2,7 @@ $(document).ready(function() {
   if ($('.select-clear-all').length) {
     function resetSelectClearLink(table) {
       const link = table.find('.select-clear-all');
+      link.attr('tabindex', 0);
       link.removeClass('select-all clear-all');
 
       if (table.find('input:checked').length) {
