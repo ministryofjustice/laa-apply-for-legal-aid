@@ -10,10 +10,10 @@
       <%= content_tag(:caption, t('date.date_period', from: date_from, to: date_to), class: 'govuk-table__caption') if @bank_transactions.any? %>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th 
-            class="govuk-table__header select-clear-all" 
-            scope="col" 
-            data-copy-select="<%= t '.col_select_all' %>" 
+          <th
+            class="govuk-table__header select-clear-all"
+            scope="col"
+            data-copy-select="<%= t '.col_select_all' %>"
             data-copy-clear="<%= t '.col_clear_all' %>">
           </th>
           <th class="govuk-table__header sort header-sort-asc table-combine_right_if_narrow" scope="col">
