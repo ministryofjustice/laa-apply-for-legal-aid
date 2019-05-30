@@ -15,3 +15,15 @@ en:
               invalid: address is not in the right format
             national_insurance_number:
               invalid: is not in the right format
+        legal_aid_application:
+          attributes:
+            base:
+              none_selected: Select if you receive any types of income
+  activemodel:
+    errors:
+      models:
+        savings_amount:
+          attributes:
+            base:
+              provider:
+                none_selected: Select if you have any type of savings

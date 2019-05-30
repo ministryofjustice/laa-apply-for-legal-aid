@@ -164,7 +164,9 @@ en:
         col_type: Type
         intro_text: 'You have already told us you have the following online accounts:'
       show:
-        h1-heading: Do you have any savings and investments?
+        h1-heading: What types of savings or investments do you have?
+        none_selected: None of these
+        or_break: or
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?

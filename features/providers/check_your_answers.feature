@@ -77,7 +77,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
-    Then I should be on a page showing 'Does your client have any savings and investments?'
+    Then I should be on a page showing 'What types of savings or investments does your client have?'
     Then I select 'Cash savings'
     Then I fill 'cash' with '456.33'
     Then I click 'Save and continue'
@@ -93,7 +93,8 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
-    Then I should be on a page showing 'Does your client have any savings and investments?'
+    Then I should be on a page showing 'What types of savings or investments does your client have?'
+    Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Savings and investments' should be 'None declared'
@@ -162,7 +163,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to view savings via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Savings and investments'
-      Then I should be on a page showing 'Does your client have any savings and investments?'
+      Then I should be on a page showing 'What types of savings or investments does your client have?'
       Then I click 'Save and continue'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'

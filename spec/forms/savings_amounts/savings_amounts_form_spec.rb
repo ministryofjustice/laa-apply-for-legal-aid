@@ -108,6 +108,8 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
     context 'check boxes are unchecked' do
       let(:check_box_params) { check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' } }
+      # let(:submitted_params) { { check_box_none_selected: 'true' } }
+      # let(:expected_error) { 'Select if you have any type of savings' }
 
       shared_examples_for 'it empties amounts' do
         it 'empties amounts' do
@@ -120,8 +122,8 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           end
         end
 
-        it 'returns true' do
-          expect(subject.save).to eq(true)
+        it 'returns false' do
+          expect(subject.save).to eq(false)
         end
 
         it 'has no errors' do
