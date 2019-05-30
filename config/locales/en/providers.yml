@@ -62,16 +62,17 @@ en:
             the prospects of success
     check_benefits:
       index:
-        heading_1: Your client's tax and benefits status
-        heading_2: What happens next
+        what_happens_next: What happens next
+        because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
+        you_need_to: 'You''ll need to:' 
         negative_result:
-          body: Your client does not receive benefits that qualify for legal aid.
-          next: Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.
-          title: must complete a financial assessment
+          title: "%{name} must complete a financial assessment"
+          must_answer_financial_questions: Your client will need to answer questions about their financial situation.
+          provide_access/details: 'We''ll ask you to give them access to the online assessment which they can complete at home or at another location.'
         positive_result:
-          body: Your client receives benefits that qualify for legal aid.
-          next: Your client will have to declare whether they have any savings, own a home or anything else that can pay for legal aid.
-          title: receives a qualifying benefit
+          title: "%{name} receives benefits that qualify for legal aid"
+          must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
+          provide_access/details: provide details of the case
     check_merits_answers:
       show:
         complete-application-heading: Complete the application

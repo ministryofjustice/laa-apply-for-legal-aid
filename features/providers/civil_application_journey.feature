@@ -134,7 +134,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I should be on a page showing 'must complete a financial assessment'
     When I click 'Continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
@@ -165,7 +165,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
+    Then I should be on a page showing 'must complete a financial assessment'
     When I click 'Continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
@@ -194,8 +194,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
-    Then I see a notice saying that the citizen receives benefits
+    Then I should be on a page showing 'receives benefits that qualify for legal aid'
 
   @javascript @vcr
   Scenario: I can see that the applicant does not receive benefits
@@ -217,8 +216,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
-    Then I see a notice saying that the citizen does not receive benefits
+    Then I should be on a page showing 'must complete a financial assessment'
 
   @javascript @vcr
   Scenario: I want to change first name from the check your answers page
@@ -393,8 +391,7 @@ Feature: Civil application journeys
   Scenario: Receives benefits and completes the application
     Given I complete the passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I am on the benefit check results page
-    Then I see a notice saying that the citizen receives benefits
+    Then I should be on a page showing 'receives benefits that qualify for legal aid'
     Then I click 'Continue'
     Then I should be on a page showing "Before you continue"
     Then I click 'Save and continue'

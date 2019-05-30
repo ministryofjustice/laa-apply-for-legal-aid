@@ -361,10 +361,6 @@ Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's correspondence address")
 end
 
-Then('I am on the benefit check results page') do
-  expect(page).to have_content("Your client's tax and benefits status")
-end
-
 Then('I am on the client use online banking page') do
   expect(page).to have_content('Does your client use online banking?')
 end
@@ -375,14 +371,6 @@ end
 
 Then(/^I select an address '(.*)'$/) do |address|
   select(address, from: 'address_selection[lookup_id]')
-end
-
-Then(/^I see a notice saying that the citizen receives benefits$/) do
-  expect(page).to have_content('Your client receives benefits that qualify for legal aid.')
-end
-
-Then(/^I see a notice saying that the citizen does not receive benefits$/) do
-  expect(page).to have_content('Your client does not receive benefits that qualify for legal aid.')
 end
 
 Then('I am on the application confirmation page') do
