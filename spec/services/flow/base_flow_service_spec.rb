@@ -23,7 +23,7 @@ RSpec.describe Flow::BaseFlowService do
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
     it 'returns forward url' do
-      expect(subject.forward_path).to eq('/citizens/savings_and_investment')
+      expect(subject.forward_path).to eq('/citizens/vehicle')
     end
 
     context 'with logic' do

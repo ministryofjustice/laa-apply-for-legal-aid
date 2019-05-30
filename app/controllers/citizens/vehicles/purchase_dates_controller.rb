@@ -1,17 +1,19 @@
-module Providers
+module Citizens
   module Vehicles
-    class PurchaseDatesController < ProviderBaseController
+    class PurchaseDatesController < BaseController
+      include ApplicationFromSession
       prefix_step_with :vehicles
 
       def show
-        authorize legal_aid_application
         @form = VehicleForm::PurchaseDateForm.new(model: vehicle)
       end
 
       def update
-        authorize legal_aid_application
         @form = VehicleForm::PurchaseDateForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+
+        return go_forward if @form.save
+
+        render :show
       end
 
       private
@@ -21,7 +23,7 @@ module Providers
       end
 
       def form_params
-        merge_with_model(vehicle, mode: :provider) do
+        merge_with_model(vehicle, mode: :citizen) do
           params.require(:vehicle).permit(:purchased_on_year, :purchased_on_month, :purchased_on_day)
         end
       end
