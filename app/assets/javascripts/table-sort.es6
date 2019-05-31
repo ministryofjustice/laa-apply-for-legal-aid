@@ -4,7 +4,7 @@ $(document).ready(function() {
     const endText = {
       asc: {
         date: 'from <em>oldest</em> to <em>newest</em>',
-        numeric: 'from smallest to largest',
+        numeric: 'from <em>smallest</em> to <em>largest</em>',
         alphabetic: 'from <em>A.</em> to <em>Zed</em>',
         undefined: 'in <em>ascending</em> order' //for when the data-sort-type is not set
       },
