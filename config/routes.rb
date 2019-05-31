@@ -106,7 +106,7 @@ Rails.application.routes.draw do
       end
       resources :restrictions, only: %i[index create] # as multiple restrictions
       resource :about_the_financial_assessment, only: %i[show update]
-      resource :update_email_address, only: %i[show update]
+      resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
       resource :vehicle, only: %i[show create]

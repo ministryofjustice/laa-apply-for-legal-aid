@@ -6,7 +6,7 @@
 
   <%= form_with(
         model: @form,
-        url: providers_legal_aid_application_update_email_address_path,
+        url: providers_legal_aid_application_email_address_path,
         method: :patch,
         local: true
       ) do |form| %>
@@ -15,8 +15,7 @@
 
     <%= form.govuk_text_field(
           :email,
-          label: { text: t('providers.applicants.show.email_label'), size: :m },
-          hint: t('helpers.hint.applicant.email'), size: :m,
+          label: { size: :m },
           class: 'govuk-input govuk-!-width-three-quarters'
         ) %>
 

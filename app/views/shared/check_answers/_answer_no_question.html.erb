@@ -1,4 +1,4 @@
-<div class="govuk-grid-row" id="app-check-your-answers__<%= name %>">
+<div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-body"><%= answer %></h2>
   </div>
@@ -6,7 +6,7 @@
       <p>
         <%= link_to(url, class: 'govuk-link change-link') do %>
           <%= t('generic.change') %>
+        <% end %>
       </p>
-    </div>
-  <% end %>
+  </div>
 </div>

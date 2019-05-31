@@ -375,6 +375,6 @@ en:
             Include any outstanding payments on loans, hire purchase (HP) or
             personal contract purchase (PCP) agreements.
           enter_amount_left_to_pay: Enter the amount left to pay
-    update_email_addresses:
+    email_addresses:
       show:
         page_title: Enter your client's email address

@@ -21,7 +21,7 @@
 
   <%= check_answer_email_link(
         name: :email,
-        url: providers_legal_aid_application_update_email_address_path(anchor: :email), # currently not using anchor may need fo rnew page
+        url: providers_legal_aid_application_email_address_path(anchor: :email),
         answer: @applicant.email
       ) %>
 
