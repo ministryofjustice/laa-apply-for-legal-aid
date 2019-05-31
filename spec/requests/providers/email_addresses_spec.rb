@@ -5,8 +5,8 @@ RSpec.describe 'update client email address before application confirmation', ty
   let(:application_id) { application.id }
   let(:provider) { application.provider }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/update_email_address' do
-    subject { get "/providers/applications/#{application_id}/update_email_address" }
+  describe 'GET /providers/applications/:legal_aid_application_id/email_address' do
+    subject { get "/providers/applications/#{application_id}/email_address" }
 
     context 'when the provider is authenticated' do
       before do
@@ -26,23 +26,22 @@ RSpec.describe 'update client email address before application confirmation', ty
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/update_email_address' do
-    subject { patch "/providers/applications/#{application_id}/update_email_address", params: params }
+  describe 'PATCH /providers/applications/:legal_aid_application_id/email_address' do
+    subject { patch "/providers/applications/#{application_id}/email_address", params: params }
 
     let(:application) { create :legal_aid_application }
     let(:provider) { application.provider }
     let(:params) do
       {
         applicant: {
-          first_name: 'John',
-          last_name: 'Doe',
-          national_insurance_number: 'AA 12 34 56 C',
-          dob_year: '1981',
-          dob_month: '07',
-          dob_day: '11',
           email: Faker::Internet.safe_email
         }
       }
+    end
+
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
     end
 
     context 'when the provider is authenticated' do
@@ -55,7 +54,7 @@ RSpec.describe 'update client email address before application confirmation', ty
 
         it 'redirects to next page' do
           subject
-          expect(response.body).to redirect_to(providers_legal_aid_application_application_confirmation_path(application_id))
+          expect(response.body).to redirect_to(providers_legal_aid_application_about_the_financial_assessment_path(application_id))
         end
       end
     end
