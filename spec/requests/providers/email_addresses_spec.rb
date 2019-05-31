@@ -8,6 +8,11 @@ RSpec.describe 'update client email address before application confirmation', ty
   describe 'GET /providers/applications/:legal_aid_application_id/email_address' do
     subject { get "/providers/applications/#{application_id}/email_address" }
 
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
+
     context 'when the provider is authenticated' do
       before do
         login_as provider
