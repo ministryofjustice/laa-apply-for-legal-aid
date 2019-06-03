@@ -26,12 +26,13 @@ $(document).ready(function() {
       return false;
     });
 
-    $('.select-clear-all').keyup(function(ev) {
+    $('.select-clear-all').keypress(function(ev) {
       const returnKeyCode = 23;
       const spaceBarCode = 32;
       if (ev.which==returnKeyCode || ev.which==spaceBarCode)  { //on space or return, the column is sorted
         $(this).click();
         return false;
+        ev.preventDefault();
       }
     });
 
