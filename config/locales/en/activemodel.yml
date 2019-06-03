@@ -283,10 +283,12 @@ en:
               blank: Enter the estimated value of the vehicle
               not_a_number: Estimated value must be an amount of money, like 5,000
               greater_than_or_equal_to: Estimated value must be 0 or more
+              too_many_decimals: Estimated value must not include more than 2 decimal numbers
             payment_remaining:
               blank: Enter the amount left to pay
               not_a_number: The amount left to pay must be an amount of money, like 5,000
               greater_than_or_equal_to: The amount left to page must be 0 or more
+              too_many_decimals: Amount must not include more than 2 decimal numbers
             payments_remain:
               blank: Select yes if there are any payments left on the vehicle
             purchased_on:
