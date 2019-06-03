@@ -8,7 +8,7 @@
       ) do |form| %>
 
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= govuk_fieldset_header page_heading %>
+      <%= govuk_fieldset_header page_title %>
 
       <%= date_input_fields(
             prefix: :told,
