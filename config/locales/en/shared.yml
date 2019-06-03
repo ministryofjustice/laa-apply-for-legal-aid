@@ -153,5 +153,18 @@ en:
         financial_help_examples: For example, money from a family member for rent or bills.
         or_break: or
         none_selected: None of these
+      vehicles:
+        own_vehicle:
+          vehicle_types_included: This includes car, vans or motorcycles.
+          nothing_selected: Select yes if your client owns a vehicle
+        estimated_value:
+          use_car_valuation_sites: You can use car valuation websites to find this out.
+        remaining_payment:
+          detail_of_payments_to_include: |
+            Include any outstanding payments on loans, hire purchase (HP) or
+            personal contract purchase (PCP) agreements.
+          enter_amount_left_to_pay: Enter the amount left to pay
+        regular_use:
+          include_partner_use: This includes use by your client's partner (if they have one).
     page-title:
       suffix: Apply for legal aid

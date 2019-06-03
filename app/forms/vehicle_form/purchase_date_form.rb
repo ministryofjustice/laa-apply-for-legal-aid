@@ -7,10 +7,13 @@ module VehicleForm
     DATE_PARTS = %i[purchased_on_year purchased_on_month purchased_on_day].freeze
 
     attr_accessor(*DATE_PARTS)
+    attr_accessor :mode
     attr_writer :purchased_on
 
+    validate :date_is_in_the_future
+
     validates :purchased_on,
-              date: { not_in_the_future: true, allow_nil: true },
+              date: { allow_nil: true },
               presence: { unless: :draft_and_not_incomplete_date? }
 
     def purchased_on
@@ -36,7 +39,7 @@ module VehicleForm
     end
 
     def exclude_from_model
-      DATE_PARTS
+      DATE_PARTS + [:mode]
     end
 
     def purchased_on_from_model
@@ -60,6 +63,16 @@ module VehicleForm
 
     def draft_and_not_incomplete_date?
       draft? && !incomplete_date?
+    end
+
+    def date_is_in_the_future
+      return if draft? || !purchased_on
+
+      errors.add(:purchased_on, error_message_for(:date_is_in_the_future)) if purchased_on > Time.current
+    end
+
+    def error_message_for(error_type)
+      I18n.t("activemodel.errors.models.vehicle.attributes.purchased_on.#{mode}.#{error_type}")
     end
   end
 end

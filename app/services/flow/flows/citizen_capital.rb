@@ -12,7 +12,7 @@ module Flow
         },
         own_homes: {
           path: ->(_) { urls.citizens_own_home_path },
-          forward: ->(application) { application.own_home_no? ? :savings_and_investments : :property_values },
+          forward: ->(application) { application.own_home_no? ? :vehicles : :property_values },
           carry_on_sub_flow: ->(application) { !application.own_home_no? },
           check_answers: :check_answers
         },
@@ -30,14 +30,34 @@ module Flow
         },
         shared_ownerships: {
           path: ->(_) { urls.citizens_shared_ownership_path },
-          forward: ->(application) { application.shared_ownership? ? :percentage_homes : :savings_and_investments },
+          forward: ->(application) { application.shared_ownership? ? :percentage_homes : :vehicles },
           carry_on_sub_flow: ->(application) { application.shared_ownership? },
           check_answers: :restrictions
         },
         percentage_homes: {
           path: ->(_) { urls.citizens_percentage_home_path },
-          forward: :savings_and_investments,
+          forward: :vehicles,
           check_answers: :restrictions
+        },
+        vehicles: {
+          path: ->(_) { urls.citizens_vehicle_path },
+          forward: ->(application) { application.vehicle_persisted? ? :vehicles_estimated_values : :savings_and_investments }
+        },
+        vehicles_estimated_values: {
+          path: ->(_) { urls.citizens_vehicles_estimated_value_path },
+          forward: :vehicles_remaining_payments
+        },
+        vehicles_remaining_payments: {
+          path: ->(_) { urls.citizens_vehicles_remaining_payment_path },
+          forward: :vehicles_purchase_dates
+        },
+        vehicles_purchase_dates: {
+          path: ->(_) { urls.citizens_vehicles_purchase_date_path },
+          forward: :vehicles_regular_uses
+        },
+        vehicles_regular_uses: {
+          path: ->(_) { urls.citizens_vehicles_regular_use_path },
+          forward: :savings_and_investments
         },
         savings_and_investments: {
           path: ->(_) { urls.citizens_savings_and_investment_path },

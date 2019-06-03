@@ -25,14 +25,7 @@ module Providers
       authorize legal_aid_application
       legal_aid_application.proceeding_types.clear # Remove this when multiple proceeding types required!
       legal_aid_application.proceeding_types << proceeding_type unless legal_aid_application.proceeding_types.include?(proceeding_type)
-      redirect_to providers_legal_aid_application_proceedings_types_path(legal_aid_application)
-    end
-
-    # PATCH /provider/applications/:legal_aid_application_id/proceedings_types/:id
-    def destroy
-      authorize legal_aid_application
-      legal_aid_application.proceeding_types.delete(proceeding_type)
-      redirect_to providers_legal_aid_application_proceedings_types_path(legal_aid_application)
+      go_forward
     end
 
     private

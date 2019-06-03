@@ -283,8 +283,7 @@ Then('the answer for {string} should be {string}') do |field_name, answer|
 end
 
 Then('I select a proceeding type and continue') do
-  find('#proceeding-list').first(:button, 'Select').click
-  click_button('Save and continue')
+  find('#proceeding-list').first(:button, 'Select and continue').click
 end
 
 Then('I select proceeding type {int}') do |index|
@@ -358,11 +357,7 @@ Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field
 end
 
 Then('I am on the postcode entry page') do
-  expect(page).to have_content("Enter your client's home address")
-end
-
-Then('I am on the benefit check results page') do
-  expect(page).to have_content("Your client's tax and benefits status")
+  expect(page).to have_content("Enter your client's correspondence address")
 end
 
 Then('I am on the client use online banking page') do
@@ -375,14 +370,6 @@ end
 
 Then(/^I select an address '(.*)'$/) do |address|
   select(address, from: 'address_selection[lookup_id]')
-end
-
-Then(/^I see a notice saying that the citizen receives benefits$/) do
-  expect(page).to have_content('Your client receives benefits that qualify for legal aid.')
-end
-
-Then(/^I see a notice saying that the citizen does not receive benefits$/) do
-  expect(page).to have_content('Your client does not receive benefits that qualify for legal aid.')
 end
 
 Then('I am on the application confirmation page') do

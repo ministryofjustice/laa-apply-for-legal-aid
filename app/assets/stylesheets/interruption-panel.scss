@@ -1,0 +1,34 @@
+.interruption-panel {
+  background-color:#005ea5;
+  padding:30px;
+  
+  p,h1,h2,ul {
+    color:#fff;
+  }
+  
+  h2 {
+    font-size:28px;
+  }
+  
+  .govuk-grid-column-two-thirds {
+    padding: 1em 0;
+    float: none;
+  }
+  
+  #continue {
+    color: #005ea5;
+    background: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 0 #001526;
+    
+    &:hover {
+      background-color: #d0d3d6;
+    }
+  }
+  
+}
+@media (min-width: 769px) {
+  .interruption-panel {
+    padding:60px;
+  }
+}

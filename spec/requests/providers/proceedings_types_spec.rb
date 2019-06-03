@@ -71,10 +71,6 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
       end
-
-      it 'displays the proceeding types' do
-        expect(unescaped_response_body).to include('class="selected-proceeding-types"')
-      end
     end
   end
 
@@ -143,38 +139,12 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
       subject
     end
 
-    it 'displays the change via index' do
-      expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+    it 'redirects to the next page' do
+      expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
     end
 
     it 'associates proceeding type with legal aid application' do
       expect(legal_aid_application.reload.proceeding_types).to include(proceeding_type)
-    end
-  end
-
-  describe 'destroy: DELETE /providers/applications/:legal_aid_application_id/proceedings_type/:id' do
-    let!(:proceeding_type) { create(:proceeding_type, legal_aid_applications: [legal_aid_application]) }
-    let(:params) do
-      {
-        legal_aid_application_id: legal_aid_application,
-        id: proceeding_type
-      }
-    end
-    subject do
-      delete providers_legal_aid_application_proceedings_type_path(params)
-    end
-
-    before do
-      login_as provider
-      subject
-    end
-
-    it 'displays the change via index' do
-      expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-    end
-
-    it 'associates proceeding type with legal aid application' do
-      expect(legal_aid_application.reload.proceeding_types).not_to include(proceeding_type)
     end
   end
 end
