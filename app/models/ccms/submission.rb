@@ -8,8 +8,6 @@ module CCMS
 
     validates :legal_aid_application_id, presence: true
 
-    serialize :documents, Hash
-
     POLL_LIMIT = 10
 
     def process! # rubocop:disable Metrics/MethodLength
@@ -24,8 +22,6 @@ module CCMS
         AddCaseService.call(self)
       when 'case_submitted'
         CheckCaseStatusService.call(self)
-      when 'case_created'
-        ObtainDocumentIdService.call(self)
       else
         raise CcmsError, 'Unknown state'
       end
