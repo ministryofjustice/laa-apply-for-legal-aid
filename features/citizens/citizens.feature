@@ -246,3 +246,30 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
+
+  @javascript
+  Scenario: I change vehicle answers
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
+      Then I click Check Your Answers Change link for 'Vehicles'
+      Then I should be on a page showing 'Do you own a vehicle?'
+      Then I choose 'No'
+      Then I click 'Save and continue'
+      Then I should be on a page showing 'Check your answers'
+      Then I click Check Your Answers Change link for 'Vehicles'
+      Then I choose 'Yes'
+      Then I click 'Save and continue'
+      Then I should be on a page showing "What is the estimated value of the vehicle?"
+      Then I fill "Estimated value" with "4000"
+      And I click "Save and continue"
+      Then I should be on a page showing "Are there any payments left on the vehicle?"
+      Then I choose option "Vehicle payments remain true"
+      Then I fill "Payment remaining" with "2000"
+      And I click "Save and continue"
+      Then I should be on a page showing "When did you buy the vehicle?"
+      Then I enter the purchase date '21-3-2002'
+      And I click "Save and continue"
+      Then I should be on a page showing "Is the vehicle in regular use?"
+      Then I choose option "Vehicle used regularly true"
+      And I click "Save and continue"
+      Then I should be on a page showing 'Check your answers'

@@ -38,6 +38,15 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
       expect(response).to redirect_to(next_url)
     end
 
+    context 'while checking answers' do
+      before { legal_aid_application.check_citizen_answers! }
+
+      it 'redirects to check_answers page' do
+        subject
+        expect(response).to redirect_to(citizens_check_answers_path)
+      end
+    end
+
     context 'with false' do
       let(:used_regularly) { false }
 
