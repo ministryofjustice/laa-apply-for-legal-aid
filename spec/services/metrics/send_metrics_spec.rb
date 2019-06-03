@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Metrics::SendMetrics do
   describe '#call' do
-    let(:service_host) { Faker::Internet.domain_word }
+    let(:metrics_service_host) { Faker::Internet.domain_word }
     let(:prometheus_client) { spy(PrometheusExporter::Client) }
     let(:prometheus_thread_sleep) { rand(1..10).to_f / 1000 }
     subject { described_class.call }
@@ -10,13 +10,13 @@ RSpec.describe Metrics::SendMetrics do
     before do
       stub_const('Metrics::SendMetrics::PROMETHEUS_THREAD_SLEEP', prometheus_thread_sleep)
       allow(PrometheusExporter::Client).to receive(:new).and_return(prometheus_client)
-      allow(Rails.configuration.x).to receive(:service_host).and_return(service_host)
+      allow(Rails.configuration.x).to receive(:metrics_service_host).and_return(metrics_service_host)
     end
 
     it 'creates a prometheus client with the right settings' do
       expect(PrometheusExporter::Client)
         .to receive(:new)
-        .with(host: service_host, thread_sleep: prometheus_thread_sleep)
+        .with(host: metrics_service_host, thread_sleep: prometheus_thread_sleep)
         .and_return(prometheus_client)
       subject
     end
