@@ -1,7 +1,7 @@
 <%
   check_box_attribute = 'check_box_second_home'
   conditional_div_id = 'conditional_second_home'
-  hint = I18n.translate("helpers.hint.#{check_box_attribute}", default: nil)
+  hint = I18n.t("helpers.hint.#{check_box_attribute}", default: nil)
   checked = model.second_home_value.present? || model.send(check_box_attribute).present? ? 'checked' : ''
 %>
 

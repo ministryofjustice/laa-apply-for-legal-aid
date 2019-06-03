@@ -32,15 +32,15 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       it 'displays the correct questions' do
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.notification_of_latest_incident'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.date_of_latest_incident'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.details_of_latest_incident'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.understands_terms_of_court_order'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.warning_letter_sent'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.police_notified'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.bail_conditions_set'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.statement_of_case'))
-        expect(response.body).to include(I18n.translate('providers.check_merits_answers.show.items.prospects_of_success'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.notification_of_latest_incident'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.date_of_latest_incident'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.details_of_latest_incident'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.understands_terms_of_court_order'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.warning_letter_sent'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.police_notified'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.bail_conditions_set'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.statement_of_case'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.prospects_of_success'))
       end
 
       it 'displays the correct URLs for changing values' do
@@ -74,7 +74,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       context 'prospects of success has supplementary text' do
         it 'displays the prospects of success and details' do
-          expect(response.body).to include(I18n.translate("shared.forms.success_prospect.success_prospect_item.#{application.merits_assessment.success_prospect}"))
+          expect(response.body).to include(I18n.t("shared.forms.success_prospect.success_prospect_item.#{application.merits_assessment.success_prospect}"))
           expect(response.body).to include(application.merits_assessment.success_prospect_details)
         end
       end
