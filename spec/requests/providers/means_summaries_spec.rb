@@ -1,13 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Providers::MeansSummariesController, type: :request do
+  include ActionView::Helpers::NumberHelper
   let(:provider) { create :provider }
   let(:applicant) { create :applicant }
   let(:transaction_type) { create :transaction_type }
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+  let(:vehicle) { create :vehicle, :populated }
   let(:legal_aid_application) do
-    create :legal_aid_application, applicant: applicant, provider: provider, transaction_types: [transaction_type], state: :means_completed
+    create :legal_aid_application, vehicle: vehicle, applicant: applicant, provider: provider, transaction_types: [transaction_type], state: :means_completed
   end
   let(:login) { login_as provider }
 
@@ -31,9 +33,35 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       expect(response.body).to include(ActiveSupport::NumberHelper.number_to_currency(total_amount))
     end
 
+    it 'displays the correct vehicles details' do
+      expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
+      expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
+      expect(response.body).to include(vehicle.purchased_on.to_s)
+      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.heading'))
+      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.own'))
+      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.estimated_value'))
+      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.payment_remaining'))
+      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.purchased_on'))
+      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.used_regularly'))
+    end
+
     context 'when not logged in' do
       let(:login) {}
       it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'applicant does not have vehicle' do
+      let(:vehicle) { nil }
+      it 'displays first vehicle question' do
+        expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.own'))
+      end
+
+      it 'does not display other vehicle questions' do
+        expect(response.body).not_to include(I18n.t('shared.check_answers_vehicles.providers.estimated_value'))
+        expect(response.body).not_to include(I18n.t('shared.check_answers_vehicles.providers.payment_remaining'))
+        expect(response.body).not_to include(I18n.t('shared.check_answers_vehicles.providers.purchased_on'))
+        expect(response.body).not_to include(I18n.t('shared.check_answers_vehicles.providers.used_regularly'))
+      end
     end
   end
 

@@ -26,6 +26,10 @@ FactoryBot.define do
       state { 'checking_passported_answers' }
     end
 
+    trait :provider_checking_citizens_means_answers do
+      state { 'provider_checking_citizens_means_answers' }
+    end
+
     trait :means_completed do
       state { 'means_completed' }
     end
