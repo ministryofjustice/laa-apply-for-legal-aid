@@ -32,7 +32,7 @@
             :payments_remain,
             false,
             label: t('generic.no'),
-            checked: @form.model.payment_remaining&.zero?
+            checked: @form.model.payment_remaining&.zero? && !@form.payments_remain?
           ) %>
 
   <% end %>
