@@ -2,8 +2,7 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe Submission do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-    let(:submission) { create :submission, legal_aid_application: legal_aid_application }
+    let(:submission) { create :submission }
 
     context 'Validations' do
       it 'errors if no legal aid application id is present' do
@@ -77,15 +76,6 @@ module CCMS
           it 'calls the check_case_status service' do
             expect(CheckCaseStatusService).to receive(:new).with(submission).and_return(check_case_status_service_double)
             expect(check_case_status_service_double).to receive(:call)
-          end
-        end
-
-        context 'case_created state' do
-          let(:obtain_document_id_service_double) { ObtainDocumentIdService.new(submission) }
-          let(:submission) { create :submission, :case_created }
-          it 'calls the orchestrate_document_upload_service service' do
-            expect(ObtainDocumentIdService).to receive(:new).with(submission).and_return(obtain_document_id_service_double)
-            expect(obtain_document_id_service_double).to receive(:call)
           end
         end
       end
