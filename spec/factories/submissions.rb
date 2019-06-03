@@ -17,9 +17,5 @@ FactoryBot.define do
     trait :case_submitted do
       aasm_state { 'case_submitted' }
     end
-
-    trait :case_created do
-      aasm_state { 'case_created' }
-    end
   end
 end
