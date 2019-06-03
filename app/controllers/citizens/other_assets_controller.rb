@@ -8,11 +8,9 @@ module Citizens
 
     def update
       @form = Citizens::OtherAssetsForm.new(form_params)
-      if @form.save
-        go_forward
-      else
-        render :show
-      end
+      return go_forward if @form.save
+
+      render :show
     end
 
     private
@@ -22,7 +20,7 @@ module Citizens
     end
 
     def form_params
-      merge_with_model(declaration) do
+      merge_with_model(declaration, mode: :citizen) do
         attrs = Citizens::OtherAssetsForm::ALL_ATTRIBUTES + Citizens::OtherAssetsForm::CHECK_BOXES_ATTRIBUTES
         params[:other_assets_declaration].permit(*attrs)
       end

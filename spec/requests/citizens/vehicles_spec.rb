@@ -60,6 +60,15 @@ RSpec.describe Citizens::VehiclesController, type: :request do
           expect(response).to redirect_to(next_url)
         end
       end
+
+      context 'while checking answers' do
+        before { legal_aid_application.check_citizen_answers! }
+
+        it 'redirects to estimated value' do
+          subject
+          expect(response).to redirect_to(next_url)
+        end
+      end
     end
 
     context 'with option "false"' do
@@ -73,6 +82,15 @@ RSpec.describe Citizens::VehiclesController, type: :request do
       it 'redirects to savings and investment' do
         subject
         expect(response).to redirect_to(next_url)
+      end
+
+      context 'while checking answers' do
+        before { legal_aid_application.check_citizen_answers! }
+
+        it 'redirects to check_answers page' do
+          subject
+          expect(response).to redirect_to(citizens_check_answers_path)
+        end
       end
 
       context 'and existing vehicle' do

@@ -18,7 +18,7 @@ module Metrics
 
     def prometheus_client
       @prometheus_client ||= PrometheusExporter::Client.new(
-        host: Rails.configuration.x.service_host,
+        host: Rails.configuration.x.metrics_service_host,
         thread_sleep: PROMETHEUS_THREAD_SLEEP
       )
     end

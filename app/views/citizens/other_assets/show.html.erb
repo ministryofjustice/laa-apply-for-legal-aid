@@ -1,9 +1,10 @@
-<%= page_template page_title: t('.h1-heading') do %>
-
+<%= page_template page_title: t('.h1-heading'), template: :basic, show_errors_for: @form do %>
   <%= render partial: '/shared/forms/other_assets/form',
              locals: {
                model: @form,
-               url: citizens_other_assets_path
+               url: citizens_other_assets_path,
+               sub_heading: t('.h2-heading'),
+               or_break: t('.or_break'),
+               none_selected: t('.none_selected')
              } %>
-
 <% end %>
