@@ -26,9 +26,10 @@ $(document).ready(function() {
       return false;
     });
 
-    $('.select-clear-all').keyup(function(ev) {
+    $('.select-clear-all').keypress(function(ev) {
       if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
         $(this).click();
+        return false;
       }
     });
 
