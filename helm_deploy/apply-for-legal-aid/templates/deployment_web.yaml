@@ -29,7 +29,7 @@ spec:
               protocol: TCP
           resources:
 {{ toYaml .Values.clamav.resources | indent 12 }}
-        - name: {{ .Chart.Name }}
+        - name: web
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
 {{ include "apply-for-legal-aid.envs" . | nindent 10 }}

@@ -51,7 +51,7 @@
       ) unless @legal_aid_application.other_assets? %>
 </dl>
 
-<%= render('shared/check_answers_vehicles', user_type: user_type, application: application) if user_type == :providers %>
+<%= render('shared/check_answers_vehicles', user_type: user_type, application: @legal_aid_application) %>
 
 <%= check_answer_one_change_link(
       name: :savings_and_investments,

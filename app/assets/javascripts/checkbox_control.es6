@@ -12,6 +12,8 @@ $(function() {
     const control = $(container.data('deselect-ctrl'))
     const checkboxMemory = []
     const checkboxes = container.find("input:checkbox")
+    const hiddenFieldMemory = []
+    const hideableFields = container.find('.govuk-checkboxes__conditional')
 
     if(!control.length) return
 
@@ -26,6 +28,7 @@ $(function() {
     */
     control.change( function() {
       const controlChecked = this.checked
+
       checkboxes.each(function(index) {
         const checkbox = $(this)
         if(controlChecked) {
@@ -33,6 +36,18 @@ $(function() {
           checkbox.prop("checked", false)
         } else {
           checkbox.prop("checked", checkboxMemory[index])
+        }
+      })
+
+      hideableFields.each(function (index) {
+        const hideableField = $(this)
+        if (controlChecked) {
+          if (!hideableField.hasClass('govuk-checkboxes__conditional--hidden')) {
+            hideableField.addClass('govuk-checkboxes__conditional--hidden')
+            hiddenFieldMemory[index] = true
+          }
+        } else if (hiddenFieldMemory[index]){
+            hideableField.removeClass('govuk-checkboxes__conditional--hidden')
         }
       })
     })

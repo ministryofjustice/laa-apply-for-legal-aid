@@ -5,7 +5,11 @@ RSpec.describe Flow::BaseFlowService do
     class TestFlowService < Flow::BaseFlowService; end
     TestFlowService
   end
-  let(:steps) { Flow::Flows::CitizenStart::STEPS.deep_merge(Flow::Flows::CitizenCapital::STEPS) }
+  let(:steps) do
+    Flow::Flows::CitizenStart::STEPS
+      .deep_merge(Flow::Flows::CitizenCapital::STEPS)
+      .deep_merge(Flow::Flows::CitizenVehicle::STEPS)
+  end
   let(:legal_aid_application) { create :legal_aid_application }
   let(:params) { nil }
   subject do

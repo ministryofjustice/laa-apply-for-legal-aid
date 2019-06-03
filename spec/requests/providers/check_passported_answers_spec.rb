@@ -50,12 +50,12 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
         expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
         expect(response.body).to include(vehicle.purchased_on.to_s)
-        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.heading'))
-        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.own'))
-        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.estimated_value'))
-        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.payment_remaining'))
-        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.purchased_on'))
-        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.used_regularly'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.heading'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.own'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.estimated_value'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.payment_remaining'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.purchased_on'))
+        expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.used_regularly'))
       end
 
       it 'does not display None Declared if values are entered' do
@@ -154,14 +154,14 @@ RSpec.describe 'check passported answers requests', type: :request do
       context 'applicant does not have vehicle' do
         let(:vehicle) { nil }
         it 'displays first vehicle question' do
-          expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.own'))
+          expect(response.body).to include(I18n.translate('shared.check_answers_vehicles.providers.own'))
         end
 
         it 'does not display other vehicle questions' do
-          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.estimated_value'))
-          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.payment_remaining'))
-          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.purchased_on'))
-          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.used_regularly'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.providers.estimated_value'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.providers.payment_remaining'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.providers.purchased_on'))
+          expect(response.body).not_to include(I18n.translate('shared.check_answers_vehicles.providers.used_regularly'))
         end
       end
     end

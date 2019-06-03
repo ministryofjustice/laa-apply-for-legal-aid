@@ -17,7 +17,8 @@ RSpec.describe Citizens::OtherAssetsForm do
       { check_box_second_home: '',
         second_home_value: '',
         second_home_mortgage: '',
-        second_home_percentage: '' }
+        second_home_percentage: '',
+        check_box_none_selected: 'true' }
     end
 
     let(:alpha_second_home_params) do
@@ -94,18 +95,19 @@ RSpec.describe Citizens::OtherAssetsForm do
         second_home_value: '859,374.00',
         second_home_mortgage: '123,000.00',
         second_home_percentage: '66.66',
-        check_box_timeshare_value: 'true',
-        timeshare_value: '67762',
+        check_box_timeshare_property_value: 'true',
+        timeshare_property_value: '67762',
         check_box_land_value: 'true',
         land_value: '1,234.55',
-        check_box_jewellery_value: 'true',
-        jewellery_value: '566.0',
+        check_box_valuable_items_value: 'true',
+        valuable_items_value: '566.0',
         check_box_money_assets_value: 'true',
         money_assets_value: '3,500',
         check_box_money_owed_value: 'true',
         money_owed_value: '0.45',
         check_box_trust_value: 'true',
-        trust_value: '3,560,622.77' }
+        trust_value: '3,560,622.77',
+        check_box_none_selected: '' }
     end
 
     describe 'instantiation' do
@@ -125,7 +127,7 @@ RSpec.describe Citizens::OtherAssetsForm do
             end
 
             context 'no form fields present' do
-              let(:submitted_params) { {} }
+              let(:submitted_params) { { check_box_none_selected: 'true' } }
 
               it 'is valid' do
                 expect(form).to be_valid
@@ -138,9 +140,9 @@ RSpec.describe Citizens::OtherAssetsForm do
 
             it 'is not valid' do
               expect(form).not_to be_valid
-              expect(form.errors[:timeshare_value]).to eq [translation_for(:timeshare_value, 'not_a_number')]
+              expect(form.errors[:timeshare_property_value]).to eq [translation_for(:timeshare_property_value, 'not_a_number')]
               expect(form.errors[:land_value]).to eq [translation_for(:land_value, 'not_a_number')]
-              expect(form.errors[:jewellery_value]).to eq [translation_for(:jewellery_value, 'not_a_number')]
+              expect(form.errors[:valuable_items_value]).to eq [translation_for(:valuable_items_value, 'not_a_number')]
               expect(form.errors[:money_assets_value]).to eq [translation_for(:money_assets_value, 'not_a_number')]
               expect(form.errors[:money_owed_value]).to eq [translation_for(:money_owed_value, 'not_a_number')]
               expect(form.errors[:trust_value]).to eq [translation_for(:trust_value, 'not_a_number')]
@@ -160,9 +162,9 @@ RSpec.describe Citizens::OtherAssetsForm do
         expect(oad.second_home_value).to eq 859_374.0
         expect(oad.second_home_mortgage).to eq 123_000.0
         expect(oad.second_home_percentage).to eq 66.66
-        expect(oad.timeshare_value).to eq 67_762.0
+        expect(oad.timeshare_property_value).to eq 67_762.0
         expect(oad.land_value).to eq 1_234.55
-        expect(oad.jewellery_value).to eq 566.0
+        expect(oad.valuable_items_value).to eq 566.0
         expect(oad.money_assets_value).to eq 3_500.0
         expect(oad.money_owed_value).to eq 0.45
         expect(oad.trust_value).to eq 3_560_622.77
