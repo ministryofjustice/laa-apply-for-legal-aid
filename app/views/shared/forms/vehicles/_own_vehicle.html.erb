@@ -1,0 +1,22 @@
+<%= form_with(
+      model: @vehicle,
+      url: form_path,
+      method: :post,
+      local: true
+    ) do |form| %>
+  <%= govuk_form_group show_error_if: @vehicle.errors.present? do %>
+    <%= govuk_fieldset_header page_title, padding_below: 0 %>
+    <%= govuk_hint t('.vehicle_types_included') %>
+
+    <div class="govuk-radios govuk-radios--conditional govuk-!-padding-bottom-6 govuk-!-padding-top-2"
+         data-module="radios">
+      <%= form.govuk_radio_button :persisted?, 'true', label: t('generic.yes') %>
+      <%= form.govuk_radio_button :persisted?, 'false', label: t('generic.no') %>
+    </div>
+
+    <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form: form
+        ) %>
+  <% end %>
+<% end %>

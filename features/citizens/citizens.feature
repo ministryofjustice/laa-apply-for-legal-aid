@@ -42,6 +42,22 @@ Feature: Citizen journey
     Then I should be on a page showing "What % share of your home do you legally own?"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Do you own a vehicle?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What is the estimated value of the vehicle?"
+    Then I fill "Estimated value" with "5000"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Are there any payments left on the vehicle?"
+    Then I choose "Yes"
+    Then I fill "Payment remaining" with "1000"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "When did you buy the vehicle?"
+    Then I enter the purchase date '21-3-2002'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Is the vehicle in regular use?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Do you have any savings and investments?"
     Then I select "Cash savings"
     Then I fill "Cash" with "100"

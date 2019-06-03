@@ -62,16 +62,17 @@ en:
             the prospects of success
     check_benefits:
       index:
-        heading_1: Your client's tax and benefits status
-        heading_2: What happens next
+        what_happens_next: What happens next
+        because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
+        you_need_to: 'You''ll need to:' 
         negative_result:
-          body: Your client does not receive benefits that qualify for legal aid.
-          next: Your client will have to complete a financial means assessment. They can complete the financial assessment online from home or another location.
-          title: must complete a financial assessment
+          title: "%{name} must complete a financial assessment"
+          must_answer_financial_questions: Your client will need to answer questions about their financial situation.
+          provide_access/details: 'We''ll ask you to give them access to the online assessment which they can complete at home or at another location.'
         positive_result:
-          body: Your client receives benefits that qualify for legal aid.
-          next: Your client will have to declare whether they have any savings, own a home or anything else that can pay for legal aid.
-          title: receives a qualifying benefit
+          title: "%{name} receives benefits that qualify for legal aid"
+          must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
+          provide_access/details: provide details of the case
     check_merits_answers:
       show:
         complete-application-heading: Complete the application
@@ -224,14 +225,13 @@ en:
     proceedings_types:
       create:
         search_and_select: Search and select a proceeding
-        link_title: Remove
       index:
         clear_search: Clear search
         heading_1: What does your client want legal aid for?
         heading_2: Search for legal proceedings
         no_results: No results found.
         proceeding: proceeding
-        search_help_example: For example by category of law, matter type or legal proceeding.
+        search_help_example: For example, 'non-molestation order'. Or search by category of law or matter type.
         you_have_selected: You have selected %{count}
     property_values:
       hint:
@@ -354,12 +354,10 @@ en:
     vehicles:
       show:
         heading: Does your client own a vehicle?
-        vehicle_types_included: This includes car, vans or motorcycles.
         nothing_selected: Select yes if your client owns a vehicle
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?
-          use_car_valuation_sites: You can use car valuation websites to find this out.
       purchase_dates:
         show:
           heading: When did your client buy the vehicle?
@@ -370,7 +368,3 @@ en:
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?
-          detail_of_payments_to_include: |
-            Include any outstanding payments on loans, hire purchase (HP) or
-            personal contract purchase (PCP) agreements.
-          enter_amount_left_to_pay: Enter the amount left to pay

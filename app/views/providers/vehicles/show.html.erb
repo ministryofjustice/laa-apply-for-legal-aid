@@ -1,21 +1,7 @@
 <%= page_template page_title: t('.heading'), template: :basic, show_errors_for: @vehicle do %>
-  <%= form_with(
-        model: @vehicle,
-        url: providers_legal_aid_application_vehicle_path,
-        method: :post,
-        local: true
-      ) do |form| %>
-    <%= govuk_form_group show_error_if: @vehicle.errors.present? do %>
-      <%= govuk_fieldset_header page_heading, padding_below: 0 %>
-      <%= govuk_hint t('.vehicle_types_included') %>
-
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-bottom-6 govuk-!-padding-top-2"
-           data-module="radios">
-        <%= form.govuk_radio_button :persisted?, 'true', label: t('generic.yes') %>
-        <%= form.govuk_radio_button :persisted?, 'false', label: t('generic.no') %>
-      </div>
-
-      <%= next_action_buttons(show_draft: true, form: form) %>
-    <% end %>
-  <% end %>
+  <%= render(
+        'shared/forms/vehicles/own_vehicle',
+        form_path: providers_legal_aid_application_vehicle_path,
+        show_draft: true
+      ) %>
 <% end %>
