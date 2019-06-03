@@ -392,7 +392,7 @@ Feature: Civil application journeys
     Then I select "Cash savings"
     Then I fill "Cash" with "10000"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client have any of the following?"
+    Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
@@ -404,7 +404,7 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
     Then I click link "Back"
-    Then I should be on a page showing "Does your client have any of the following?"
+    Then I should be on a page showing "Which types of assets does your client have?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client have any savings and investments?"
     Then I click link "Back"

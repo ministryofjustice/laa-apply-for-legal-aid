@@ -200,6 +200,6 @@ env:
         key: googleAnalyticsTrackingID
   - name: KUBERNETES_DEPLOYMENT
     value: "true"
-  - name: SERVICE_HOST
-    value: {{ .Release.Name }}
+  - name: METRICS_SERVICE_HOST
+    value: {{ template "apply-for-legal-aid.fullname" . }}-metrics
 {{- end }}

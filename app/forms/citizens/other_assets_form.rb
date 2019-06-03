@@ -4,10 +4,11 @@ module Citizens
 
     form_for OtherAssetsDeclaration
 
+    VALUABLE_ITEMS_VALUE_ATTRIBUTE = %i[valuable_items_value].freeze
+
     SINGLE_VALUE_ATTRIBUTES = %i[
-      timeshare_value
+      timeshare_property_value
       land_value
-      jewellery_value
       money_assets_value
       money_owed_value
       trust_value
@@ -19,13 +20,16 @@ module Citizens
       second_home_percentage
     ].freeze
 
-    ALL_ATTRIBUTES = (SECOND_HOME_ATTRIBUTES + SINGLE_VALUE_ATTRIBUTES).freeze
+    OTHER_CHECKBOXES = %i[check_box_second_home check_box_valuable_items_value check_box_none_selected].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + [:check_box_second_home]).freeze
+    ALL_ATTRIBUTES = (SECOND_HOME_ATTRIBUTES + SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).freeze
+
+    CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + OTHER_CHECKBOXES).freeze
 
     validates(:second_home_percentage, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validates(*SECOND_HOME_ATTRIBUTES, presence: true, if: proc { |form| form.check_box_second_home.present? })
     validates(*ALL_ATTRIBUTES - [:second_home_percentage], allow_blank: true, currency: { greater_than_or_equal_to: 0 })
+    validates(*VALUABLE_ITEMS_VALUE_ATTRIBUTE, presence: true, if: proc { |form| form.__send__(:check_box_valuable_items_value).present? })
 
     SINGLE_VALUE_ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
@@ -34,11 +38,12 @@ module Citizens
 
     attr_accessor(*ALL_ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :check_box_second_home
+    attr_accessor :check_box_second_home, :check_box_none_selected, :mode
 
     before_validation :empty_unchecked_values
 
     validate :all_second_home_values_present_if_any_are_present
+    validate :any_checkbox_checked_or_draft
 
     def second_home_checkbox_status
       any_second_home_value_present? ? 'checked' : nil
@@ -51,17 +56,21 @@ module Citizens
     end
 
     def exclude_from_model
-      CHECK_BOXES_ATTRIBUTES
+      CHECK_BOXES_ATTRIBUTES + [:mode]
     end
 
     def attributes_to_clean
       ALL_ATTRIBUTES - [:second_home_percentage]
     end
 
+    def any_checkbox_checked?
+      CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
+    end
+
     private
 
     def empty_unchecked_values
-      SINGLE_VALUE_ATTRIBUTES.each do |attribute|
+      (SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).each do |attribute|
         check_box_attribute = "check_box_#{attribute}".to_sym
         if __send__(check_box_attribute).blank?
           attributes[attribute] = nil
@@ -87,6 +96,14 @@ module Citizens
       SECOND_HOME_ATTRIBUTES.each do |attr|
         errors.add(attr, :blank) if __send__(attr).blank? & errors[attr].empty?
       end
+    end
+
+    def any_checkbox_checked_or_draft
+      errors.add :base, error_message_for_none_selected unless any_checkbox_checked? || draft?
+    end
+
+    def error_message_for_none_selected
+      I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.#{mode}.none_selected")
     end
 
     def present_and_not_zero?(attr)

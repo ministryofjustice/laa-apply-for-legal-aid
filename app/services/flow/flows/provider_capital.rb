@@ -46,7 +46,7 @@ module Flow
           forward: ->(application) { application.checking_answers? ? :restrictions : :vehicles },
           carry_on_sub_flow: true
         },
-        # Vehicle steps here (see VehicleSteps)
+        # Vehicle steps here (see ProviderVehicle)
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
           forward: ->(application) { application.checking_answers? ? :restrictions : :other_assets },

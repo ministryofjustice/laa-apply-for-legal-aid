@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class VehicleSteps < FlowSteps
+    class ProviderVehicle < FlowSteps
       STEPS = {
         vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },

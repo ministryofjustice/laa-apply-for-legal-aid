@@ -105,7 +105,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
-    Then I should be on a page showing 'Does your client have any of the following?'
+    Then I should be on a page showing 'Which types of assets does your client have?'
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
     Then I click 'Save and continue'
@@ -121,7 +121,8 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
-    Then I should be on a page showing 'Does your client have any of the following?'
+    Then I should be on a page showing 'Which types of assets does your client have?'
+    Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Other assets' should be 'None declared'
@@ -170,7 +171,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to view other assets via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Other assets'
-      Then I should be on a page showing 'Does your client have any of the following?'
+      Then I should be on a page showing 'Which types of assets does your client have?'
       Then I click 'Save and continue'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
