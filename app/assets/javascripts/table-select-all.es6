@@ -26,8 +26,10 @@ $(document).ready(function() {
       return false;
     });
 
-    $('.select-clear-all').keypress(function(ev) {
-      if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
+    $('.select-clear-all').keyup(function(ev) {
+      const returnKeyCode = 23;
+      const spaceBarCode = 32;
+      if (ev.which==returnKeyCode || ev.which==spaceBarCode)  { //on space or return, the column is sorted
         $(this).click();
         return false;
       }

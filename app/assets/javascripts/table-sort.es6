@@ -51,7 +51,9 @@ $(document).ready(function() {
           return false;
         });
         th.keypress(function(ev) {
-          if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
+          const spaceBarCode = 32;
+          const returnKeyCode = 23;
+          if (ev.which==returnKeyCode || ev.which==spaceBarCode)  { //on space or return, the column is sorted
             $(this).click();
             return false;
           }

@@ -23,7 +23,6 @@
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-  
 }
 
 td.tick-box-cell,
@@ -74,6 +73,42 @@ td.sortable-cell {
   }
   &::after{
     border-bottom:none;
+  }
+}
+@media (min-width: 40.0625em) {
+  .sort.js-sortable, th.select-all, th.clear-all {
+    padding-left:8px;
+  }
+  .js-sortable .sort-direction-indicator {
+    &::before, &::after {
+      left: 6px;
+      border-width: 6px;
+    }
+    &::before { 
+      border-top-width: 6px;
+      top: 14px;
+    }
+    &::after {
+      bottom: 15px;
+      border-bottom-width: 6px
+    }
+  }
+ .header-sort-asc .sort-direction-indicator{
+    &::after{
+      bottom: 8px;
+      border-bottom-width: 11px;
+    }
+  }
+  .header-sort-desc .sort-direction-indicator{
+    &::before{
+      top: 8px;
+      border-top-width: 11px;
+    }
+  }
+  td.tick-box-cell,
+  td.sortable-cell {
+    padding-left:8px;
+    padding-right:8px;
   }
 }
 @media (min-width: 40.0625em) {
