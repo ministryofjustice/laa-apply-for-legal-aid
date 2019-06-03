@@ -7,7 +7,9 @@
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
     <table class="govuk-table sortable table-merge_columns">
-      <%= content_tag(:caption, t('date.date_period', from: date_from, to: date_to), class: 'govuk-table__caption') if @bank_transactions.any? %>
+      <caption class="govuk-table__caption">
+        <%= content_tag(:h3, t('date.date_period', from: date_from, to: date_to), class: 'govuk-heading-s') if @bank_transactions.any? %>
+      </caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header" scope="col">
