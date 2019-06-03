@@ -21,7 +21,7 @@ module CCMS
     # temporarily ignore this until connectivity with ccms is working
     # :nocov:
     def call
-      soap_client.call(:upload_document, xml: request_xml)
+      soap_client.call(:process, xml: request_xml)
     end
     # :nocov:
 
