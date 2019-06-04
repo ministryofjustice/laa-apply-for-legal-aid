@@ -1,4 +1,4 @@
-<%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), template: :default do %>
+<%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), column_width: 'full', template: :default do %>
 
   <div class="govuk-!-padding-bottom-4"></div>
 
@@ -12,33 +12,30 @@
       </caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col">
-            <a
-              class="govuk-body select-clear-all"
-              href=""
-              data-copy-select="<%= t '.col_select_all' %>"
-              data-copy-clear="<%= t '.col_clear_all' %>">
-            </a>
+          <th
+            class="govuk-table__header select-clear-all"
+            scope="col"
+            data-copy-select="<%= t '.col_select_all' %>"
+            data-copy-clear="<%= t '.col_clear_all' %>">
           </th>
-          <th class="govuk-table__header sort header-sort-asc table-combine_right_if_narrow" scope="col">
+          <th data-sort-type="date" class="govuk-table__header sort header-sort-desc table-combine_right_if_narrow" scope="col">
             <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_date') %></span>
-            <span class="table-hidden_right_title"> &amp; <%= t('.col_description') %></span>
+            <span class="aria-sort-description"><%= t('.col_date') %></span><span class="table-hidden_right_title"> &amp; <%= t('.col_description') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"> (currently sorted from newest to oldest)</span></span>
           </th>
           <th data-sort-type="alphabetic" class="govuk-table__header sort" scope="col">
             <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_description') %></span>
+            <span class="aria-sort-description"><%= t('.col_description') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"></span></span>
           </th>
           <th data-sort-type="numeric" class="govuk-table__header govuk-table__header--numeric sort" scope="col">
             <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_amount') %></span>
+            <span class="aria-sort-description"><%= t('.col_amount') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"></span></span>
           </th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
         <%= form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description do |builder| %>
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
+            <td class="govuk-table__cell tick-box-cell">
               <% if builder.object.transaction_type_id == nil || builder.object.transaction_type_id == @transaction_type.id %>
                 <div class="govuk-checkboxes__item">
                   <% checked = builder.object.transaction_type_id == @transaction_type.id %>
@@ -47,13 +44,13 @@
                 </div>
               <% end %>
             </td>
-            <td class="govuk-table__cell table-combine_right_if_narrow" id="Date-<%= builder.object.id %>" data-sort-value="<%= "#{builder.object.happened_at.to_i}#{builder.object.description}" %>">
+            <td class="govuk-table__cell sortable-cell table-combine_right_if_narrow" id="Date-<%= builder.object.id %>" data-sort-value="<%= "#{builder.object.happened_at.to_i}#{builder.object.description}" %>">
               <%= l(builder.object.happened_at.to_date, format: :short_date) %>
             </td>
-            <td class="govuk-table__cell" id="Description-<%= builder.object.id %>">
+            <td class="govuk-table__cell sortable-cell" id="Description-<%= builder.object.id %>">
               <%= builder.object.description %>
             </td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" id="Amount-<%= builder.object.id %>" data-sort-value="<%= builder.object.amount %>" data-sort-type="number">
+            <td class="govuk-table__cell sortable-cell govuk-table__cell--numeric" id="Amount-<%= builder.object.id %>" data-sort-value="<%= builder.object.amount %>" data-sort-type="number">
               <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %>
             </td>
           </tr>
