@@ -3,13 +3,15 @@ $(document).ready(function() {
     let table;
     const endText = {
       asc: {
-        numeric: 'from big to small',
-        alphabetic: 'in <em>reverse</em> order',
+        date: 'from <em>oldest</em> to <em>newest</em>',
+        numeric: 'from <em>smallest</em> to <em>largest</em>',
+        alphabetic: 'from <em>A.</em> to <em>Zed</em>',
         undefined: 'in <em>ascending</em> order' //for when the data-sort-type is not set
       },
       desc: {
-        numeric: 'from small to big',
-        alphabetic: 'in <em>alphabetical</em> order',
+        date: 'from <em>newest</em> to <em>oldest</em>',
+        numeric: 'from <em>largest</em> to <em>smallest</em>',
+        alphabetic: 'from <em>Zed</em> to <em>A</em>',
         undefined: 'in <em>descending</em> order' //for when the data-sort-type is not set
       }
     }
@@ -22,11 +24,11 @@ $(document).ready(function() {
         const th = $(this),
           thIndex = index + 1;
         let inverse = false;
-        
+
         th.click(() => {
           table = th.parents('table');
           th.parent().children().removeClass('header-sort-asc header-sort-desc')
-          let sortDirection = inverse ? 'asc' : 'desc';
+          let sortDirection = inverse ? 'desc' : 'asc';
           th.addClass('header-sort-' + sortDirection);
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
@@ -38,17 +40,22 @@ $(document).ready(function() {
             // parentNode is the element we want to move
             return this.parentNode;
           });
-          
+
           //this adds a message to the message div, stating what it is sorted by
           $("#screen-reader-messages").html("Sorted by " + th.find(".aria-sort-description").text() + " " + endText[sortDirection][th.attr("data-sort-type")]);
-      
+          $(".screen-reader-sort-indicator").html("");
+          th.find(".screen-reader-sort-indicator").html(" (currently sorted " + endText[sortDirection][th.attr("data-sort-type")] + ").");
+
           inverse = !inverse;
-          
+
           return false;
         });
-        th.keyup(function(ev) {
-          if (ev.which==13 || ev.which==32)  { //on space or return, the column is sorted
+        th.keypress(function(ev) {
+          const spaceBarCode = 32;
+          const returnKeyCode = 13;
+          if (ev.which==returnKeyCode || ev.which==spaceBarCode)  { //on space or return, the column is sorted
             $(this).click();
+            return false;
           }
         });
       });
