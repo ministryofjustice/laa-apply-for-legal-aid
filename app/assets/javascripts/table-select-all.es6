@@ -2,6 +2,7 @@ $(document).ready(function() {
   if ($('.select-clear-all').length) {
     function resetSelectClearLink(table) {
       const link = table.find('.select-clear-all');
+      link.attr('tabindex', 0);
       link.removeClass('select-all clear-all');
 
       if (table.find('input:checked').length) {
@@ -23,6 +24,15 @@ $(document).ready(function() {
       }
       resetSelectClearLink($(this).parents('table'))
       return false;
+    });
+
+    $('.select-clear-all').keypress(function(ev) {
+      const returnKeyCode = 13;
+      const spaceBarCode = 32;
+      if (ev.which==returnKeyCode || ev.which==spaceBarCode) { //on space or return
+        $(this).click(); //mimic a click
+        return false;
+      }
     });
 
     $('table input').click(function() {
