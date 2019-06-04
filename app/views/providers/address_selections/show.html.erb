@@ -33,13 +33,13 @@
 
       <div class="govuk-!-padding-bottom-2"></div>
 
-      <% group_error_class = @form.errors[:address].any? ? 'govuk-form-group--error' : '' %>
+      <% group_error_class = @form.errors[:lookup_id].any? ? 'govuk-form-group--error' : '' %>
       <div class="govuk-form-group <%= group_error_class %>">
         <%= f.label :address, t('.select_address_label'), class: 'govuk-label' %>
-        <% if @form.errors[:address].any? %>
-          <%= content_tag(:span, @form.errors[:address].first, class: ['govuk-error-message']) %>
+        <% if @form.errors[:lookup_id].any? %>
+          <%= content_tag(:span, @form.errors[:lookup_id].first, class: ['govuk-error-message']) %>
         <% end %>
-        <% input_error_class = @form.errors[:address].any? ? 'govuk-select--error' : '' %>
+        <% input_error_class = @form.errors[:lookup_id].any? ? 'govuk-select--error' : '' %>
         <%= f.select(
               :lookup_id,
               @addresses.collect { |a| [a.full_address, a.lookup_id] },

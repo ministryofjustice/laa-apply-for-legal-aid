@@ -119,7 +119,7 @@ RSpec.describe 'address selections requests', type: :request do
           subject
 
           expect(response).to be_successful
-          expect(unescaped_response_body).to match('Please select an address from the list')
+          expect(unescaped_response_body).to match('Select an address from the list')
           expect(unescaped_response_body).to match('Select an address')
           expect(unescaped_response_body).to match('[1-9]{1}[0-9]? addresses found')
         end
