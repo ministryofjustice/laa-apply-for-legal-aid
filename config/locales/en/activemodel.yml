@@ -55,7 +55,7 @@ en:
             city:
               blank: Enter a town or city
             lookup_id:
-              blank: Please select an address from the list
+              blank: Select an address from the list
             postcode:
               blank: Enter a postcode
               invalid: Enter a postcode in the right format
