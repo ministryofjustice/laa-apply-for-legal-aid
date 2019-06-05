@@ -4,22 +4,18 @@
               method: :patch,
               local: true) do |form| %>
   <% error = form.object.errors[:shared_ownership].first %>
-  <% group_error_class = error ? 'govuk-form-group--error' : '' %>
   <% input_error_class = error ? 'govuk-input--error' : '' %>
   <%= content_tag(:span, error, class: 'govuk-error-message', id: 'shared_ownership') if error %>
 
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+  <%= govuk_form_group show_error_if: error do %>
     <%= govuk_fieldset_header page_title %>
 
-    <div class="govuk-form-group <%= group_error_class %>">
-      <div class="govuk-radios govuk-!-padding-top-2">
-        <%= render partial: 'shared/forms/shared_ownership_form/shared_ownership_item',
-                   collection: LegalAidApplication::SHARED_OWNERSHIP_REASONS, as: :reason,
-                   locals: { form: form,
-                             group_error_class: group_error_class,
-                             input_error_class: input_error_class } %>
+    <div class="govuk-radios govuk-!-padding-top-2">
+      <%= render partial: 'shared/forms/shared_ownership_form/shared_ownership_item',
+                 collection: LegalAidApplication::SHARED_OWNERSHIP_REASONS, as: :reason,
+                 locals: { form: form,
+                           input_error_class: input_error_class } %>
 
-      </div>
     </div>
 
   <% end %>
