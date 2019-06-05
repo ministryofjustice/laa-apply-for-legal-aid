@@ -36,6 +36,7 @@ module LaaApplyForLegalAid
       env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
     ).symbolize_keys
     config.x.support_email_address = 'apply-for-legal-aid@digital.justice.gov.uk'.freeze
+    config.x.smoke_test_email_address = 'simulate-delivered@notifications.service.gov.uk'.freeze
 
     config.x.admin_portal.allow_reset = ENV['ADMIN_ALLOW_RESET'] == 'true'
     config.x.admin_portal.allow_create_test_applications = ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS'] == 'true'

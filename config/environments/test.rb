@@ -54,6 +54,8 @@ Rails.application.configure do
   config.x.application.host = 'test'
   config.x.application.host_url = "http://#{config.x.application.host}"
 
+  config.x.support_email_address = config.x.smoke_test_email_address
+
   # Set a css_compressor so sassc-rails does not overwrite the compressor when running the tests
   config.assets.css_compressor = nil
 end

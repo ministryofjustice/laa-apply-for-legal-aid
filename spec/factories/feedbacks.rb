@@ -7,5 +7,10 @@ FactoryBot.define do
     browser { %w[IE Chrome Safari Firefox Opera].sample }
     browser_version { Faker::App.semantic_version }
     source { %w[Providers Citizens Unknown].sample }
+
+    trait :with_timestamps do
+      created_at { Faker::Time.backward }
+      updated_at { Faker::Time.backward }
+    end
   end
 end
