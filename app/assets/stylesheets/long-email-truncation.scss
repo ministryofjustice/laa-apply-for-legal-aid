@@ -8,4 +8,8 @@ truncation to 20 characters is insufficient to prevent overlap.
   vertical-align:top;
   overflow:hidden;
   text-overflow: ellipsis;
+
+  &:focus-within {
+    color:#0b0c0c;
+  }
 }
