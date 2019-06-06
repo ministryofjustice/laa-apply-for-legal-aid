@@ -83,9 +83,18 @@ module CCMS
         context 'case_created state' do
           let(:obtain_document_id_service_double) { ObtainDocumentIdService.new(submission) }
           let(:submission) { create :submission, :case_created }
-          it 'calls the orchestrate_document_upload_service service' do
+          it 'calls the obtain_document_id service' do
             expect(ObtainDocumentIdService).to receive(:new).with(submission).and_return(obtain_document_id_service_double)
             expect(obtain_document_id_service_double).to receive(:call)
+          end
+        end
+
+        context 'document_ids_obtained state' do
+          let(:upload_documents_service_double) { UploadDocumentsService.new(submission) }
+          let(:submission) { create :submission, :document_ids_obtained }
+          it 'calls the upload_documents service' do
+            expect(UploadDocumentsService).to receive(:new).with(submission).and_return(upload_documents_service_double)
+            expect(upload_documents_service_double).to receive(:call)
           end
         end
       end

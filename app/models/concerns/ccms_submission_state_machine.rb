@@ -42,6 +42,7 @@ module CCMSSubmissionStateMachine
 
       event :complete do
         transitions from: :case_created, to: :completed
+        transitions from: :document_ids_obtained, to: :completed
       end
 
       event :fail do
@@ -51,6 +52,7 @@ module CCMSSubmissionStateMachine
         transitions from: :applicant_ref_obtained, to: :failed
         transitions from: :case_submitted, to: :failed
         transitions from: :case_created, to: :failed
+        transitions from: :document_ids_obtained, to: :failed
       end
     end
   end

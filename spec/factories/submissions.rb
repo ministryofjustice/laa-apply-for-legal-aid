@@ -21,5 +21,9 @@ FactoryBot.define do
     trait :case_created do
       aasm_state { 'case_created' }
     end
+
+    trait :document_ids_obtained do
+      aasm_state { 'document_ids_obtained' }
+    end
   end
 end
