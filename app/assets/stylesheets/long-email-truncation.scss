@@ -1,0 +1,11 @@
+/********
+Note: this is only designed to account for narrow screens where the Ruby
+truncation to 20 characters is insufficient to prevent overlap.
+/********/
+
+#navigation>li {
+  max-width:calc(50vw - 101px - 30px - 76px - 30px);
+  vertical-align:top;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
