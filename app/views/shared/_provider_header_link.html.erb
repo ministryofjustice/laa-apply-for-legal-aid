@@ -1,6 +1,6 @@
 <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
   <li class="govuk-header__navigation-item">
-    <%= link_to(current_provider.username.truncate(20), providers_provider_path, class: 'govuk-header__link') %>
+    <%= link_to(current_provider.username, providers_provider_path, class: 'govuk-header__link') %>
   </li>
   <li class="govuk-header__navigation-item">
     <%= button = button_to(
