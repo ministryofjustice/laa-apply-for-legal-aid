@@ -19,12 +19,9 @@ module CCMS
       @applicant_add_transaction_id = applicant_add_transaction_id
     end
 
-    # temporarily ignore this until connectivity with ccms is working
-    # :nocov:
     def call
-      soap_client.call(:get_client_txn_status, message: request_xml)
+      soap_client.call(:get_client_txn_status, xml: request_xml)
     end
-    # :nocov:
 
     private
 

@@ -20,12 +20,9 @@ module CCMS
       @document_encoded_base64 = document_encoded_base64
     end
 
-    # temporarily ignore this until connectivity with ccms is working
-    # :nocov:
     def call
       soap_client.call(:upload_document, xml: request_xml)
     end
-    # :nocov:
 
     private
 
