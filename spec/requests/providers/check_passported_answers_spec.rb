@@ -5,11 +5,13 @@ RSpec.describe 'check passported answers requests', type: :request do
 
   describe 'GET /providers/applications/:id/check_passported_answers' do
     let(:vehicle) { create :vehicle, :populated }
+    let(:own_vehicle) { true }
     let!(:application) do
       create :legal_aid_application,
              :with_everything,
              :client_details_answers_checked,
-             vehicle: vehicle
+             vehicle: vehicle,
+             own_vehicle: own_vehicle
     end
     let!(:restriction) { create :restriction, legal_aid_applications: [application] }
 
@@ -153,6 +155,7 @@ RSpec.describe 'check passported answers requests', type: :request do
 
       context 'applicant does not have vehicle' do
         let(:vehicle) { nil }
+        let(:own_vehicle) { false }
         it 'displays first vehicle question' do
           expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.own'))
         end

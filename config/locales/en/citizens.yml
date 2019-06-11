@@ -162,7 +162,6 @@ en:
     vehicles:
       show:
         heading: Do you own a vehicle?
-        nothing_selected: Select yes if you own a vehicle
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?

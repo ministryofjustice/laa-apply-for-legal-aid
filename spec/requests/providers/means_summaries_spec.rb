@@ -8,8 +8,15 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
   let(:vehicle) { create :vehicle, :populated }
+  let(:own_vehicle) { true }
   let(:legal_aid_application) do
-    create :legal_aid_application, vehicle: vehicle, applicant: applicant, provider: provider, transaction_types: [transaction_type], state: :means_completed
+    create :legal_aid_application,
+           vehicle: vehicle,
+           own_vehicle: own_vehicle,
+           applicant: applicant,
+           provider: provider,
+           transaction_types: [transaction_type],
+           state: :means_completed
   end
   let(:login) { login_as provider }
 
@@ -52,6 +59,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
 
     context 'applicant does not have vehicle' do
       let(:vehicle) { nil }
+      let(:own_vehicle) { false }
       it 'displays first vehicle question' do
         expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.own'))
       end

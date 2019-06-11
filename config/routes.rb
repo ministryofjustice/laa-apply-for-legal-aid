@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resource :own_home, only: %i[show update]
     resource :percentage_home, only: %i[show update]
     resource :outstanding_mortgage, only: %i[show update]
-    resource :vehicle, only: %i[show create]
+    resource :vehicle, only: %i[show update]
     namespace :vehicles do
       resource :estimated_value, only: %i[show update]
       resource :remaining_payment, only: %i[show update]
@@ -109,7 +109,7 @@ Rails.application.routes.draw do
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
-      resource :vehicle, only: %i[show create]
+      resource :vehicle, only: %i[show update]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
         resource :remaining_payment, only: %i[show update]

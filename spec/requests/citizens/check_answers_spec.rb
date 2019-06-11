@@ -3,7 +3,14 @@ require 'rails_helper'
 RSpec.describe 'check your answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
   let(:vehicle) { create :vehicle, :populated }
-  let!(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_everything, vehicle: vehicle }
+  let(:own_vehicle) { true }
+  let!(:legal_aid_application) do
+    create :legal_aid_application,
+           :provider_submitted,
+           :with_everything,
+           vehicle: vehicle,
+           own_vehicle: own_vehicle
+  end
   let!(:restriction) { create :restriction, legal_aid_applications: [legal_aid_application] }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
@@ -135,6 +142,8 @@ RSpec.describe 'check your answers requests', type: :request do
 
     context 'applicant does not have vehicle' do
       let(:vehicle) { nil }
+      let(:own_vehicle) { false }
+
       it 'displays first vehicle question' do
         expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.own'))
       end

@@ -119,6 +119,7 @@ FactoryBot.define do
     end
 
     trait :with_vehicle do
+      own_vehicle { true }
       vehicle
     end
 
