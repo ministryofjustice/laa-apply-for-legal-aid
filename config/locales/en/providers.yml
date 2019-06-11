@@ -3,21 +3,21 @@ en:
   providers:
     about_the_financial_assessments:
       show:
+        sign_in_para: "Your client will need to:"
         list:
           list: |
-            We download 3 months of bank transactions
-            We only use information for the legal aid application
-            We automatically end the bank connection after 1 hour
-            We do not save online banking details
-            How we use your client's details
-          title: How we use your client's details
+            sign in to online banking
+            authorise us to download 3 months of bank transactions from all of their accounts
+            answer questions about their income, regular costs and assets
         section_1:
+          title: How we use your client's details
+          detail_use: We only use your client's transaction history for the legal aid application.
+          sign_in_save: We do not save any sign in details.
+        section_2:
           heading: Give your client access to the financial assessment
-          text: When you click 'Submit' we will send your client a secure link to the online financial assessment.
+          text: "When you click 'Send link' we'll send your client a secure link to the assessment using this email address:"
         secure_link_para: Send an email to your client with a secure link to the online assessment.
         send_client_link: Send client link
-        share_bank_accounts_para: Your client will need to share all bank accounts, including any in joint names or with no money.
-        sign_in_para: Your client will be asked to sign in to online banking and give temporary access to their bank accounts.
         title: About the online financial assessment
     address_selections:
       show:
@@ -64,7 +64,7 @@ en:
       index:
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
-        you_need_to: 'You''ll need to:' 
+        you_need_to: 'You''ll need to:'
         negative_result:
           title: "%{name} must complete a financial assessment"
           must_answer_financial_questions: Your client will need to answer questions about their financial situation.
@@ -371,3 +371,10 @@ en:
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?
+          detail_of_payments_to_include: |
+            Include any outstanding payments on loans, hire purchase (HP) or
+            personal contract purchase (PCP) agreements.
+          enter_amount_left_to_pay: Enter the amount left to pay
+    email_addresses:
+      show:
+        page_title: Enter your client's email address

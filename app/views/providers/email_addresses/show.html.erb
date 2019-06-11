@@ -1,0 +1,26 @@
+<%= page_template(
+      page_title: t('.page_title'),
+      page_heading_options: { margin_bottom: 3 }
+    ) do %>
+
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_email_address_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <div class="govuk-!-padding-bottom-6"></div>
+
+    <%= form.govuk_text_field(
+          :email,
+          label: { size: :m },
+          class: 'govuk-!-width-three-quarters'
+        ) %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+   </div>
+  <% end %>
+<% end %>

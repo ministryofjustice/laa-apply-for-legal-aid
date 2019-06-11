@@ -268,6 +268,23 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
+  Scenario: I want to change email address from the about financial assessment page
+    Given I complete the journey as far as check your answers
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'must complete a financial assessment'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Does your client use online banking?'
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I am on the About the Financial Assessment page
+    And I click link 'Change'
+    Then I should be on a page showing 'Email address'
+    Then I fill 'email' with 'test@test.com'
+    Then I click 'Save and continue'
+    Then I am on the About the Financial Assessment page
+    Then I should be on a page showing 'test@test.com'
+
+  @javascript @vcr
   Scenario: I want to return to check your answers from address lookup
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
@@ -360,7 +377,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
     Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
-
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application
