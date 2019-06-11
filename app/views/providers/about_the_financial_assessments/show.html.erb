@@ -25,9 +25,7 @@
           <%= @applicant.email %>
         </dt>
         <dd class="govuk-summary-list__actions">
-          <%= link_to(providers_legal_aid_application_email_address_path(anchor: :email), class: 'govuk-link change-link') do %>
-          <%= t('generic.change') %>
-          <% end %>
+          <%= link_to(t('generic.change'), providers_legal_aid_application_email_address_path(anchor: :email), class: 'govuk-link change-link') %>
         </dd>
       </div>
     </dl>

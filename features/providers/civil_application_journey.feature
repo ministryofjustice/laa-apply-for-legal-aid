@@ -284,8 +284,6 @@ Feature: Civil application journeys
     Then I am on the About the Financial Assessment page
     Then I should be on a page showing 'test@test.com'
 
-
-
   @javascript @vcr
   Scenario: I want to return to check your answers from address lookup
     Given I complete the journey as far as check your answers
@@ -379,7 +377,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
     Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
-
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application
