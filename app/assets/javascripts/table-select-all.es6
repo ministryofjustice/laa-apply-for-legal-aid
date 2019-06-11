@@ -13,6 +13,14 @@ $(document).ready(function() {
       }
     }
 
+    function setCategory(row) {
+      if (row.find('input:checked').length) {
+        row.find(".table-category-vacant").addClass("table-category-preview");
+      } else {
+        row.find(".table-category-vacant").removeClass("table-category-preview");
+      }
+    }
+
     $('.select-clear-all').click(function() {
       const table = $(this).parents('table');
       if($(this).hasClass('clear-all')) {
@@ -36,7 +44,8 @@ $(document).ready(function() {
     });
 
     $('table input').click(function() {
-      resetSelectClearLink($(this).parents('table'))
+      resetSelectClearLink($(this).parents('table'));
+      setCategory($(this).parents('tr'))
     });
 
     resetSelectClearLink($('.select-clear-all').parents('table'))

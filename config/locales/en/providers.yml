@@ -349,6 +349,7 @@ en:
         allowable_work: "Work you can do: "
     transactions:
       show:
+        col_category: Category
         col_amount: Amount
         col_clear_all: Clear all
         col_date: Date
