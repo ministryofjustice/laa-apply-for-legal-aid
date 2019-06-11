@@ -22,6 +22,7 @@ class SaveApplicantMeansAnswers
         savings_amount
         other_assets_declaration
         restrictions
+        vehicle
       ]
     ).merge(bank_transactions: bank_transactions)
   end
