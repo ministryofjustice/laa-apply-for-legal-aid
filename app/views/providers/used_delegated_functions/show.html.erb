@@ -1,0 +1,16 @@
+<%= page_template page_title: t('.heading') do %>
+
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_used_delegated_functions_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, width: :full, form: form %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+
+  <% end %>
+
+<% end %>

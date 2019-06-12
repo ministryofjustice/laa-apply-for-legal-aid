@@ -365,6 +365,9 @@ en:
         sort_z_a_html: " from <em>Zed</em> to <em>A</em>"
         sort_small_large_html: " from <em>smallest</em> to <em>largest</em>"
         sort_large_small_html: "from <em>largest</em> to <em>smallest</em>"
+    used_delegated_functions:
+      show:
+        heading: Have you used delegated functions?
     vehicles:
       show:
         heading: Does your client own a vehicle?
