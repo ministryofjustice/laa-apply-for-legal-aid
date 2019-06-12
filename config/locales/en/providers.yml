@@ -350,10 +350,12 @@ en:
     transactions:
       show:
         col_category: Category
+        col_and_category: and category
         col_amount: Amount
         col_clear_all: Clear all
         col_date: Date
         col_description: Description
+        col_and_description: and description
         col_select_all: Select all
     vehicles:
       show:
