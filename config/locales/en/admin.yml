@@ -9,6 +9,8 @@ en:
         no_applications: No applications present
         edit_settings: Edit Settings
         confirm_delete: Yes, delete
+        applicant_name: Client's name
+        application_ref: Case reference
         warning: 
           delete_all: Are you sure you want to delete all applications?
           delete_consequence: This action can't be undone

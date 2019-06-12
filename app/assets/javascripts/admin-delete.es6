@@ -3,14 +3,14 @@ $(document).ready(() => {
     event.preventDefault();
 
     const action = $(this).parent("form").attr("action"); 
-    let applicationID = $(this).attr("data-application-id"); //ID code of element to delete
-    let deleteTitle = $(this).attr("data-delete-message");
-    let deleteName = $(this).attr("data-delete-name");
-    let deleteRef = $(this).attr("data-delete-ref");
+    let applicationID = $(this).data("application-id"); //ID code of element to delete
+    let deleteTitle = $(this).data("delete-message");
+    let deleteName = $(this).data("delete-name");
+    let deleteRef = $(this).data("delete-ref");
 
     //if the current error box is poised to delete the same field as is clicked,
     //we want to cancel the delete
-    if (applicationID == $("#confirm-delete-button").attr("data-application-id")) {
+    if (applicationID == $("#confirm-delete-button").data("application-id")) {
       cancelDeleteButton(this);  
     }
     //if it isn't the same, then we are trying to delete something different from current
@@ -27,7 +27,7 @@ $(document).ready(() => {
       $("#confirm-delete").attr('hidden', "true"); //restore hidden status to box
       $("#confirm-delete-button")
         .attr('disabled', "true") //restore disabled status to button
-        .removeAttr("data-application-id") //remove the attribute ID from the button - this is used for comparison - the if statement we are currently in
+        .removeData("application-id") //remove the attribute ID from the button - this is used for comparison - the if statement we are currently in
         .parent("form").attr("action", ""); //tells confirm button not to delete anything
       $(".request-delete-button").addClass("govuk-button--warning"); //add the red button style to the button (it will currently be green)
       $(clickedButton).val($(clickedButton).data("original-text")); //restore the original text to the button (it will currently say cancel delete)
@@ -38,17 +38,11 @@ $(document).ready(() => {
       $("#delete-case-ref").text(""); //removes any hangover content
       $("#confirm-delete-button")
         .removeAttr('disabled') //enable button
-        .attr("data-application-id", applicationID) //set the delete button to reference the specific case (this is for comparison, so another click on the same button will remove the box)
+        .data("application-id", applicationID) //set the delete button to reference the specific case (this is for comparison, so another click on the same button will remove the box)
         .parent("form").attr("action", action); //tells confirm button what to delete
-      console.log(applicationID);
-      $("#delete-message").text(deleteTitle); //changes title of box
-      $("#delete-case-name").text(deleteName); //changes message of box
-      $("#delete-case-ref").text(deleteRef); //changes message of box
-      if ($("#delete-case-name").text().length) {
-        $("#delete-case-details").removeAttr("hidden");
-      } else {
-        $("#delete-case-details").attr("hidden","hidden");
-      }
+      $("#delete-message").text(deleteTitle); //changes title of error box
+      $("#delete-case-name").text(deleteName); //changes name in error box
+      $("#delete-case-ref").text(deleteRef); //changes reference in error box
     }
 
     function showDeleteWarning() { 

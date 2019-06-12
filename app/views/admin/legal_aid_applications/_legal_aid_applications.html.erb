@@ -25,8 +25,8 @@
                                                 class: 'govuk-button govuk-button--warning request-delete-button',
                                                 "data-application-id": application.id,
                                                 "data-original-text": t('.delete'),
-                                                "data-delete-name": application.applicant_full_name || t('generic.undefined'),
-                                                "data-delete-ref": application.application_ref,
+                                                "data-delete-name": "#{t('.applicant_name')}: #{application.applicant_full_name || t('generic.undefined')}",
+                                                "data-delete-ref": "#{t('.application_ref')}: #{application.application_ref}",
                                                 "data-delete-message": t('.warning.delete')
                                               ) if destroy_enabled? %>
                                              </td>
