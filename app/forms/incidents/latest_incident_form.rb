@@ -1,70 +1,48 @@
 module Incidents
   class LatestIncidentForm
     include BaseForm
-
     form_for Incident
 
     attr_accessor :occurred_year, :occurred_month, :occurred_day, :details
     attr_writer :occurred_on
 
-    validates :occurred_on, presence: true, unless: :draft_and_not_incomplete_date?
+    validates :occurred_on, presence: true, unless: :draft_and_not_partially_complete_date?
     validates :occurred_on, date: { not_in_the_future: true }, allow_nil: true
     validates :details, presence: true, unless: :draft?
 
     def initialize(*args)
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: occurred_on_fields,
-        model_attributes: occurred_on_from_model
+        attrs: date_fields.fields,
+        model_attributes: date_fields.model_attributes
       )
     end
 
     def occurred_on
       return @occurred_on if @occurred_on.present?
-      return incomplete_date if occurred_on_methods.any?(&:blank?)
+      return if date_fields.blank?
+      return :invalid if date_fields.partially_complete? || date_fields.form_date_invalid?
 
-      @occurred_on = attributes[:occurred_on] = Date.new(*occurred_on_methods.map(&:to_i))
-    rescue ArgumentError
-      :invalid
+      @occurred_on = attributes[:occurred_on] = date_fields.form_date
     end
 
     private
 
     def exclude_from_model
-      occurred_on_fields
+      date_fields.fields
     end
 
-    def occurred_on_fields
-      %i[occurred_year occurred_month occurred_day]
+    def draft_and_not_partially_complete_date?
+      draft? && !date_fields.partially_complete?
     end
 
-    def occurred_on_methods
-      @occurred_on_methods ||= occurred_on_fields.map { |f| __send__(f) }
-    end
-
-    def occurred_on_from_model
-      return unless model.occurred_on?
-
-      {
-        occurred_year: model.occurred_on.year,
-        occurred_month: model.occurred_on.month,
-        occurred_day: model.occurred_on.day
-      }
-    end
-
-    def incomplete_date
-      return nil if occurred_on_methods.all?(&:blank?)
-
-      @incomplete_date = true
-      :invalid
-    end
-
-    def incomplete_date?
-      @incomplete_date
-    end
-
-    def draft_and_not_incomplete_date?
-      draft? && !incomplete_date?
+    def date_fields
+      @date_fields ||= DateFieldBuilder.new(
+        form: self,
+        model: model,
+        method: :occurred_on,
+        prefix: :occurred_
+      )
     end
   end
 end

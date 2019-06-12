@@ -5,7 +5,7 @@ RSpec.describe Incidents::LatestIncidentForm, type: :form do
   let(:occurred_on) { rand(20).days.ago.to_date }
   let(:details) { Faker::Lorem.paragraph }
   let(:i18n_scope) { 'activemodel.errors.models.incident.attributes' }
-  let(:error_locale) { :foo }
+  let(:error_locale) { :defined_in_spec }
   let(:message) { I18n.t(error_locale, scope: i18n_scope) }
 
   let(:params) { { occurred_on: occurred_on, details: details } }
