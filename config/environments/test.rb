@@ -53,4 +53,7 @@ Rails.application.configure do
   config.active_storage.service = :test
   config.x.application.host = 'test'
   config.x.application.host_url = "http://#{config.x.application.host}"
+
+  # Set a css_compressor so sassc-rails does not overwrite the compressor when running the tests
+  config.assets.css_compressor = nil
 end
