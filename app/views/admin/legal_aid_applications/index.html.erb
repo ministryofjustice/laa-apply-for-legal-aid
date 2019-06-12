@@ -6,9 +6,12 @@
 
   <div id="confirm-delete" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="error-summary" data-cancel-text="<%= t('.cancel_delete') %>" hidden>
     <h2 class="govuk-error-summary__title" id="error-summary-title">
-      <span id="delete-message"></span>
-      <span id="delete-case-details"></span>
+      <span id="delete-message"><% t('.warning.delete') %></span>
     </h2>
+    <div class="govuk-inset-text" id="delete-case-details" hidden>
+      <p id="delete-case-name" class="govuk-body-m"></p>
+      <p id="delete-case-ref" class="govuk-body-m"></p>
+    </div>
     <div class="govuk-error-summary__body">
       <%= t('.warning.delete_consequence') %>
     </div>

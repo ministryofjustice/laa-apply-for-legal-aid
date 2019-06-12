@@ -4,7 +4,9 @@ $(document).ready(() => {
 
     const action = $(this).parent("form").attr("action"); 
     let applicationID = $(this).attr("data-application-id"); //ID code of element to delete
-    let deleteDetails = $(this).attr("data-delete-message");
+    let deleteTitle = $(this).attr("data-delete-message");
+    let deleteName = $(this).attr("data-delete-name");
+    let deleteRef = $(this).attr("data-delete-ref");
 
     //if the current error box is poised to delete the same field as is clicked,
     //we want to cancel the delete
@@ -15,7 +17,7 @@ $(document).ready(() => {
     //or the box is hidden
     //so we set up the record for deletion
     else {
-      prepareDeleteWarning(action, deleteDetails, applicationID);
+      prepareDeleteWarning(action, deleteTitle, deleteName, deleteRef, applicationID);
       showDeleteWarning();
       resetAllButtons();
       changeClickedButton(this);
@@ -31,15 +33,27 @@ $(document).ready(() => {
       $(clickedButton).val($(clickedButton).data("original-text")); //restore the original text to the button (it will currently say cancel delete)
     }
 
-    function prepareDeleteWarning(action, deleteDetails, applicationID) {
+    function prepareDeleteWarning(action, deleteTitle, deleteName, deleteRef, applicationID) {
+      $("#delete-case-name").text(""); //removes any hangover content
+      $("#delete-case-ref").text(""); //removes any hangover content
       $("#confirm-delete-button")
-        .removeAttr('disabled')
+        .removeAttr('disabled') //enable button
         .attr("data-application-id", applicationID) //set the delete button to reference the specific case (this is for comparison, so another click on the same button will remove the box)
         .parent("form").attr("action", action); //tells confirm button what to delete
-      $("#delete-message").text(deleteDetails); //changes message of box
+      console.log(applicationID);
+      $("#delete-message").text(deleteTitle); //changes title of box
+      $("#delete-case-name").text(deleteName); //changes message of box
+      $("#delete-case-ref").text(deleteRef); //changes message of box
+      if ($("#delete-case-name").text().length) {
+        $("#delete-case-details").removeAttr("hidden");
+      } else {
+        $("#delete-case-details").attr("hidden","hidden");
+      }
     }
 
-    function showDeleteWarning() { $("#confirm-delete").removeAttr('hidden'); }
+    function showDeleteWarning() { 
+      $("#confirm-delete").removeAttr('hidden'); 
+    }
 
     function resetAllButtons() {
       $(".request-delete-button")
