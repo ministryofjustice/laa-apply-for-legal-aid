@@ -1,6 +1,6 @@
 module CCMS
   class CaseAddStatusRequestor < BaseRequestor
-    wsdl_from 'CaseServiceWsdl.xml'.freeze
+    wsdl_from 'CaseServicesWsdl.xml'.freeze
 
     uses_namespaces(
       'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
