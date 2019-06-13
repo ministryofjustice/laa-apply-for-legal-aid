@@ -53,10 +53,10 @@ en:
         submission_list_summary: By submitting this assessment, you agree that
         submission_list: |
           you've instructed Hitchcock, Jones and King to represent you
-          we can share your information with other government departments like the Department for Work and Pensions (DWP)
+          we can share your information with other government departments like the Department for Work and Pensions (DWP) and HM Revenue and Customs (HMRC)
           we can check your details with your bank and credit reference agencies
           you may have to pay towards your legal aid
-          you may have to repay the legal costs if you keep or gain property or money at the end of your case
+          you may have to repay the legal costs if you keep or gain property or money at the end of your case (known as the 'statutory charge')
           the information you've given is complete and correct
           you'll report any changes to your financial situation immediately
         warning_list_summary: If you give wrong or incomplete information, or do not report changes, you may
