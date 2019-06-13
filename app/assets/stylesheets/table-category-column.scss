@@ -1,5 +1,4 @@
-p.table-category,
-p.table-category-vacant {
+p.table-category {
   padding: 4px 1px 1px;
   color: #005ea5;
   border: 2px solid;
@@ -10,28 +9,23 @@ p.table-category-vacant {
   text-align:center;
 }
 
-p.table-category-vacant {
+.table-category.table-category-vacant {
   visibility: hidden;
   &.table-category-preview {
     visibility: visible;
   }
 }
-td.govuk-table__cell.tag-cell {
+.govuk-table__cell.tag-cell {
   text-align:center;
 }
 
 @media (min-width: 555px) {
-  p.table-category, p.table-category-vacant {
+  p.table-category {
     padding: 4px 3px 1px;
   }
 }
 @media (min-width: 655px) {
-  p.table-category, p.table-category-vacant {
+  p.table-category {
     padding: 4px 8px 1px;
-  }
-}
-@media (min-width: 705px) {
-  p.table-category, p.table-category-vacant {
-      white-space: nowrap;
   }
 }
