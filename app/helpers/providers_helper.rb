@@ -17,7 +17,7 @@ module ProvidersHelper
   def journey_start_path(legal_aid_application)
     Flow::KeyPoint.path_for(
       journey: :providers,
-      key_point: :journey_start,
+      key_point: :edit_applicant,
       legal_aid_application: legal_aid_application
     )
   end

@@ -1,43 +1,5 @@
-<% back_label = @legal_aid_application.checking_client_details_answers? ? 'generic.back' : 'generic.home' %>
-<%= page_template(
-      page_title: t('.page_title'),
-      back_link: { text: t(back_label) },
-      page_heading_options: { margin_bottom: 3 }
-    ) do %>
-
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_applicant_details_path,
-        method: :patch,
-        local: true
-      ) do |form| %>
-
-    <div class="govuk-!-padding-bottom-2"></div>
-    <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m"><%= t('.full_name') %></legend>
-      <%= form.govuk_text_field :first_name, class: 'govuk-!-width-three-quarters', 'aria-label' => 'first name' %>
-      <%= form.govuk_text_field :last_name, class: 'govuk-!-width-three-quarters', 'aria-label' => 'last name' %>
-    </fieldset>
-
-    <div class="govuk-!-padding-bottom-4"></div>
-
-    <%= date_input_fields prefix: :dob, field_name: :date_of_birth, form: form %>
-
-    <div class="govuk-!-padding-bottom-6"></div>
-    <%= form.govuk_text_field(
-          :national_insurance_number,
-          label: { text: t('.nino_label'), size: :m },
-          class: 'govuk-input govuk-input--width-10'
-        ) %>
-    <%= form.govuk_text_field(
-          :email,
-          label: { text: t('.email_label'), size: :m },
-          class: 'govuk-input govuk-!-width-three-quarters'
-        ) %>
-
-    <div class="govuk-!-padding-bottom-2"></div>
-
-    <%= next_action_buttons(show_draft: true, form: form) %>
-   </div>
-  <% end %>
-<% end %>
+<%= render(
+      'shared/forms/applicant_form',
+      form_url: providers_legal_aid_application_applicant_details_path,
+      form_method: :patch
+    ) %>

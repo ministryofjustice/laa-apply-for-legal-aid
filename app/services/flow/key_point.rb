@@ -5,7 +5,8 @@ module Flow
     KEY_POINTS = {
       citizens: {},
       providers: {
-        journey_start: :applicant_details,
+        journey_start: :applicants,
+        edit_applicant: :applicant_details,
         start_after_applicant_completes_means: :client_completed_means,
         start_income_update: :capital_introductions,
         start_vehicle_journey: :vehicles
@@ -16,7 +17,7 @@ module Flow
       new(journey, key_point).step
     end
 
-    def self.path_for(journey:, key_point:, legal_aid_application:)
+    def self.path_for(journey:, key_point:, legal_aid_application: nil)
       new(journey, key_point).path(legal_aid_application)
     end
 

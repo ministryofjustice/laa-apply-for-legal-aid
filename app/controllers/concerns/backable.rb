@@ -25,6 +25,12 @@ module Backable
     end
     helper_method :back_path
 
+    def replace_last_page_in_history(path)
+      return if page_history.empty?
+
+      page_history[-1] = path
+    end
+
     private
 
     def update_page_history

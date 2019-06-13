@@ -2,10 +2,12 @@ module Applicants
   class BasicDetailsForm
     include BaseForm
 
+    ATTRIBUTES = %i[first_name last_name national_insurance_number
+                    dob_year dob_month dob_day email].freeze
+
     form_for Applicant
 
-    attr_accessor :first_name, :last_name, :national_insurance_number,
-                  :dob_year, :dob_month, :dob_day, :email
+    attr_accessor(*ATTRIBUTES)
     attr_writer :date_of_birth
 
     before_validation :normalise_national_insurance_number
