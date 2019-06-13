@@ -33,7 +33,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
 
         it "includes a link to the legal aid application's current path" do
           subject
-          expect(response.body).to include(providers_legal_aid_application_applicant_path(legal_aid_application))
+          expect(response.body).to include(providers_legal_aid_application_applicant_details_path(legal_aid_application))
         end
       end
 
@@ -107,7 +107,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
 
       it 'redirects to applicant details page ' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_applicant_details_path(legal_aid_application))
       end
     end
   end

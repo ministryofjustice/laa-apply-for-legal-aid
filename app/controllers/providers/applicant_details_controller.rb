@@ -1,5 +1,5 @@
 module Providers
-  class ApplicantsController < ProviderBaseController
+  class ApplicantDetailsController < ProviderBaseController
     def show
       authorize legal_aid_application
       @form = Applicants::BasicDetailsForm.new(model: applicant)

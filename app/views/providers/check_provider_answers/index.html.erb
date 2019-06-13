@@ -21,7 +21,7 @@
 
     <%= check_answer_link(
           name: :first_name,
-          url: providers_legal_aid_application_applicant_path(anchor: :first_name),
+          url: providers_legal_aid_application_applicant_details_path(anchor: :first_name),
           question: t('.section_client.first_name'),
           answer: @applicant.first_name,
           read_only: @read_only
@@ -29,7 +29,7 @@
 
     <%= check_answer_link(
           name: :last_name,
-          url: providers_legal_aid_application_applicant_path(anchor: :last_name),
+          url: providers_legal_aid_application_applicant_details_path(anchor: :last_name),
           question: t('.section_client.last_name'),
           answer: @applicant.last_name,
           read_only: @read_only
@@ -37,7 +37,7 @@
 
     <%= check_answer_link(
           name: :date_of_birth,
-          url: providers_legal_aid_application_applicant_path(anchor: :dob_day),
+          url: providers_legal_aid_application_applicant_details_path(anchor: :dob_day),
           question: t('.section_client.dob'),
           answer: @applicant.date_of_birth,
           read_only: @read_only
@@ -45,7 +45,7 @@
 
     <%= check_answer_link(
           name: :national_insurance_number,
-          url: providers_legal_aid_application_applicant_path(anchor: :national_insurance_number),
+          url: providers_legal_aid_application_applicant_details_path(anchor: :national_insurance_number),
           question: t('.section_client.nino'),
           answer: @applicant.national_insurance_number,
           read_only: @read_only
@@ -53,7 +53,7 @@
 
     <%= check_answer_link(
           name: :email,
-          url: providers_legal_aid_application_applicant_path(anchor: :email),
+          url: providers_legal_aid_application_applicant_details_path(anchor: :email),
           question: t('.section_client.email'),
           answer: @applicant.email,
           read_only: @read_only

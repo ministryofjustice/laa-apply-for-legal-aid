@@ -2,8 +2,8 @@ module Flow
   module Flows
     class ProviderStart < FlowSteps
       STEPS = {
-        applicants: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_path(application) },
+        applicant_details: {
+          path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
           forward: :address_lookups,
           check_answers: :check_provider_answers
         },

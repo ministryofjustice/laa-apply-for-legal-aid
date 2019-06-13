@@ -87,7 +87,7 @@ Rails.application.routes.draw do
       resources :proceedings_types, only: %i[index create update]
       resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
-      resource :applicant, only: %i[show update]
+      resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]

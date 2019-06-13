@@ -6,7 +6,7 @@ RSpec.describe 'providers applicant requests', type: :request do
   let(:provider) { application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/applicant' do
-    subject { get "/providers/applications/#{application_id}/applicant" }
+    subject { get "/providers/applications/#{application_id}/applicant_details" }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -56,7 +56,7 @@ RSpec.describe 'providers applicant requests', type: :request do
       end
 
       subject do
-        patch providers_legal_aid_application_applicant_path(application), params: params
+        patch providers_legal_aid_application_applicant_details_path(application), params: params
       end
 
       context 'Form submitted using Continue button' do
@@ -133,7 +133,7 @@ RSpec.describe 'providers applicant requests', type: :request do
         let(:submit_button) { { draft_button: 'Save as draft' } }
 
         subject do
-          patch providers_legal_aid_application_applicant_path(application), params: params.merge(submit_button)
+          patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button)
         end
 
         it "redirects provider to provider's applications page" do

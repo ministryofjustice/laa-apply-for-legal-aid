@@ -23,7 +23,7 @@ RSpec.describe Providers::Draftable do
       login_as provider
     end
 
-    subject { patch providers_legal_aid_application_applicant_path(application), params: params.merge(submit_button) }
+    subject { patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button) }
 
     context 'Form submitted using Continue button' do
       let(:submit_button) { { anything: 'That is not draft_button' } }
