@@ -253,6 +253,12 @@ en:
               blank: Give details of the bail conditions
         savings_amount:
           attributes:
+            base:
+              none_selected: Select if you have any of these types of savings
+              citizens:
+                none_selected: Select if you have any of these types of savings
+              providers:
+                none_selected: Select if your client has any of these types of savings
             cash:
               blank: Enter the total amount of cash savings
               greater_than_or_equal_to: Total cash savings must be 0 or more

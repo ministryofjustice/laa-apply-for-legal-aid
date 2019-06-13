@@ -1,16 +1,14 @@
 <%= render partial: 'accounts_summary', locals: { bank_accounts: bank_accounts } if bank_accounts.any? %>
-<%
-none_selected_id = '#savings_amount_check_box_none_selected'
-%>
+
 <%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
   <%= govuk_form_group show_error_if: (@form.errors.present? && !@form.any_checkbox_checked?) do %>
     <%= govuk_fieldset_header do %>
       <h1 class="govuk-fieldset__heading govuk-!-padding-bottom-7"><%= page_title %></h1>
     <% end %>
-    <fieldset class="govuk-fieldset" aria-describedby="citizenship-conditional-hint">
+    <fieldset class="govuk-fieldset">
       <div class="govuk-checkboxes" data-module="checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="<%= none_selected_id %>">
+        <div class="deselect-group" data-deselect-ctrl="#savings_amount_check_box_none_selected">
           <%= render partial: 'shared/forms/revealing_checkbox/attribute',
                      collection: attributes,
                      locals: { model: @form, form: form } %>

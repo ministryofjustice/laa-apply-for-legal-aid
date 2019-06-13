@@ -19,11 +19,3 @@ en:
           attributes:
             base:
               none_selected: Select if you receive any types of income
-  activemodel:
-    errors:
-      models:
-        savings_amount:
-          attributes:
-            base:
-              provider:
-                none_selected: Select if you have any type of savings

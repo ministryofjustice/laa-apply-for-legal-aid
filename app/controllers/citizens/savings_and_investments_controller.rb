@@ -33,7 +33,7 @@ module Citizens
     end
 
     def form_params
-      merge_with_model(savings_amount, mode: :citizen) do
+      merge_with_model(savings_amount, journey: journey_type) do
         params.require(:savings_amount).permit(attributes + check_box_attributes)
       end
     end
