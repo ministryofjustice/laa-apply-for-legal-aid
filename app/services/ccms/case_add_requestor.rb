@@ -5,54 +5,50 @@ module CCMS
     wsdl_from 'CaseServicesWsdl.xml'.freeze
 
     uses_namespaces(
+      'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
       'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
       'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO',
-      'xmlns:ns7' => 'uri',
       'xmlns:ns0' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
       'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO',
-      'xmlns:ns1' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
-      'xmlns:ns4' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
+      'xmlns:ns4' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
+      'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
       'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
     )
 
-    def initialize(legal_aid_application)
-      @legal_aid_application = legal_aid_application
+    def initialize(submission)
+      @submission = submission
+      @legal_aid_application = submission.legal_aid_application
       @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
       @ccms_attribute_keys = YAML.load_file(File.join(Rails.root, 'config', 'ccms', 'ccms_keys.yml'))
       @attribute_value_generator = AttributeValueGenerator.new(@legal_aid_application)
     end
 
     def call
-      soap_client.call(:add_case, xml: request_xml)
+      soap_client.call(:create_case_application, xml: request_xml)
     end
 
     private
 
     def request_xml
-      request.to_xml
+      soap_envelope(namespaces).to_xml
     end
 
-    def request
-      Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-        xml.__send__('ns7:CaseAddRQ', namespaces) do
-          xml.__send__('ns6:HeaderRQ') { header_request(xml) }
-          xml.__send__('ns1:Case') { case_request(xml) }
-        end
+    def soap_body(xml)
+      xml.__send__('ns4:CaseAddRQ') do
+        xml.__send__('ns6:HeaderRQ') { header_request(xml) }
+        xml.__send__('ns4:Case') { case_request(xml) }
       end
     end
 
     def header_request(xml)
       xml.__send__('ns6:TransactionRequestID', transaction_request_id)
       xml.__send__('ns6:Language', 'ENG')
-      xml.__send__('ns6:Source', 'PUI')
-      xml.__send__('ns6:Target', 'Oracle EBusiness')
-      xml.__send__('ns6:UserLoginID', 'DAVIDGRAYLLPTWO')
+      xml.__send__('ns6:UserLoginID', 'NEETADESOR')
       xml.__send__('ns6:UserRole', 'EXTERNAL')
-      xml.__send__('ns6:TimeStamp', @transaction_time_stamp)
     end
 
     def case_request(xml)
-      xml.__send__('ns2:CaseReferenceNumber', @legal_aid_application.ccms_reference_number)
+      xml.__send__('ns2:CaseReferenceNumber', @submission.case_ccms_reference)
       xml.__send__('ns2:CaseDetails') do
         xml.__send__('ns2:ApplicationDetails') { generate_application_details(xml) }
         xml.__send__('ns2:RecordHistory') { generate_record_history(xml) }
@@ -122,8 +118,8 @@ module CCMS
     def generate_record_history(xml)
       xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
       xml.__send__('ns0:LastUpdatedBy') do
-        xml.__send__('ns0:UserLoginID', 'DAVIDGRAYLLPTWO')
-        xml.__send__('ns0:UserName', 'DAVIDGRAYLLPTWO')
+        xml.__send__('ns0:UserLoginID', 'NEETADESOR')
+        xml.__send__('ns0:UserName', 'NEETADESOR')
         xml.__send__('ns0:UserType', 'EXTERNAL')
       end
       xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
@@ -134,7 +130,7 @@ module CCMS
     end
 
     def generate_client(xml)
-      xml.__send__('ns2:ClientReferenceNumber', applicant.ccms_reference_number)
+      xml.__send__('ns2:ClientReferenceNumber', @submission.applicant_ccms_reference)
       xml.__send__('ns2:FirstName', applicant.first_name)
       xml.__send__('ns2:Surname', applicant.last_name)
     end
@@ -299,7 +295,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'global')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_reference_number)
+        xml.__send__('ns0:InstanceLabel', @submission.case_ccms_reference)
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :global_means) }
       end
     end
@@ -350,7 +346,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'global')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_reference_number)
+        xml.__send__('ns0:InstanceLabel', @submission.case_ccms_reference)
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :global_merits) }
       end
     end
