@@ -1,13 +1,12 @@
 .sort.js-sortable, th.select-all, th.clear-all {
   color:#0b0c0c;
   cursor:pointer;
-  white-space: nowrap;
   outline: none;
   background-color:#dee0e2;
   -webkit-box-shadow: 0 2px 0 #858688;
   box-shadow: 0 2px 0 #858688;
   position:relative;
-  padding-left: 6px;
+  padding: 10px 8px 10px 6px;
   border: 1px solid #bfc1c3;
 
   &:hover, &:focus {
@@ -24,7 +23,17 @@
     box-shadow: none;
   }
 }
-
+@media (min-width: 400px) {
+  th.select-clear-all {
+    white-space: nowrap;
+  }
+}
+@media (min-width: 700px) {
+  th.select-clear-all {
+    min-width: 98px;
+    box-sizing: border-box;
+  }
+}
 td.tick-box-cell,
 td.sortable-cell {
   padding-left:6px;

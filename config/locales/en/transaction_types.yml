@@ -26,6 +26,18 @@ en:
         rent_or_mortgage: Rent or mortgage payments
         salary: Salary or wages
         student_loan: Money from a student loan or grant
+    table_label:
+      benefits: Benefits
+      child_care: Childcare
+      friends_or_family: Financial help
+      legal_aid: Legal aid
+      maintenance_in: Maintenance
+      maintenance_out: Maintenance
+      pension: Pension
+      property_or_lodger: Property
+      rent_or_mortgage: Housing
+      salary: Salary
+      student_loan: Student loan
     page_titles:
       benefits: Select benefits payments
       child_care: Select childcare costs

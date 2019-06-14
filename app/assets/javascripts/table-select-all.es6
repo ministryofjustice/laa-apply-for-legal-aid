@@ -13,6 +13,15 @@ $(document).ready(function() {
       }
     }
 
+    function setCategory(row) {
+      let vacantItem = row.find(".table-category-vacant");
+      if (row.find('input:checked').length) {
+        vacantItem.addClass("table-category-preview");
+      } else {
+        vacantItem.removeClass("table-category-preview");
+      }
+    }
+
     $('.select-clear-all').click(function() {
       const table = $(this).parents('table');
       if($(this).hasClass('clear-all')) {
@@ -35,8 +44,9 @@ $(document).ready(function() {
       }
     });
 
-    $('table input').click(function() {
-      resetSelectClearLink($(this).parents('table'))
+    $('table').find("input").click(function() {
+      resetSelectClearLink($(this).parents('table'));
+      setCategory($(this).parents('tr'))
     });
 
     resetSelectClearLink($('.select-clear-all').parents('table'))

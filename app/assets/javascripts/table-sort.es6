@@ -22,7 +22,7 @@ $(document).ready(function() {
       .wrapInner('<span class="sortable-column" title="sort this column"/>')
       .each(function(index) {
         const th = $(this),
-          thIndex = index + 1;
+          thIndex = $(this).index('th');
         let inverse = false;
 
         th.click(() => {
