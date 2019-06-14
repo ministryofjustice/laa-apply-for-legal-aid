@@ -18,7 +18,7 @@
             data-copy-select="<%= t '.col_select_all' %>"
             data-copy-clear="<%= t '.col_clear_all' %>">
           </th>
-          <th data-sort-type="date" class="govuk-table__header sort header-sort-desc table-combine_right_if_narrow" scope="col">
+          <th data-sort-type="date" class="govuk-table__header sort header-sort-desc table-combine_right_if_narrow narrow_555" scope="col">
             <span class="govuk-visually-hidden">Sort by </span>
             <span class="aria-sort-description"><%= t('.col_date') %></span><span class="table-hidden_right_title"> <%= t('.col_and_description') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"> (<%= t('.sorted_currently') %> <%= t('.sort_new_old_html') %>)</span></span>
           </th>
@@ -28,7 +28,7 @@
           </th>
           <th class="nullcell">
           </th>
-          <th data-sort-type="numeric" class="govuk-table__header sort govuk-table__header--numeric table-combine_right_if_narrow_2" scope="col">
+          <th data-sort-type="numeric" class="govuk-table__header sort govuk-table__header--numeric table-combine_right_if_narrow narrow_470" scope="col">
             <span class="govuk-visually-hidden">Sort by </span>
             <span class="aria-sort-description"><%= t('.col_amount') %></span><span class="table-hidden_right_title"> <%= t('.col_and_category') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"></span></span>
           </th>
@@ -50,14 +50,14 @@
                 </div>
               <% end %>
             </td>
-            <td class="govuk-table__cell sortable-cell table-combine_right_if_narrow" id="Date-<%= builder.object.id %>" data-sort-value="<%= "#{builder.object.happened_at.to_i}#{builder.object.description}" %>">
+            <td class="govuk-table__cell sortable-cell table-combine_right_if_narrow narrow_555" id="Date-<%= builder.object.id %>" data-sort-value="<%= "#{builder.object.happened_at.to_i}#{builder.object.description}" %>">
               <%= l(builder.object.happened_at.to_date, format: :short_date) %>
             </td>
             <td class="govuk-table__cell sortable-cell" id="Description-<%= builder.object.id %>">
               <%= builder.object.description %>
             </td>
             <td class="nullcell"></td>
-            <td class="govuk-table__cell sortable-cell govuk-table__cell--numeric table-combine_right_if_narrow_2" id="Amount-<%= builder.object.id %>" data-sort-value="<%= builder.object.amount %>" data-sort-type="number">
+            <td class="govuk-table__cell sortable-cell govuk-table__cell--numeric table-combine_right_if_narrow narrow_470" id="Amount-<%= builder.object.id %>" data-sort-value="<%= builder.object.amount %>" data-sort-type="number">
               <%= value_with_currency_unit(builder.object.amount, builder.object.currency) %>
             </td>
             <% if builder.object.transaction_type_id != nil && builder.object.transaction_type_id != @transaction_type.id %>
