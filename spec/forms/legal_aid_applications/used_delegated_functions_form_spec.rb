@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
   let(:legal_aid_application) { create :legal_aid_application }
+  let(:used_delegated_functions) { true }
   let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
   let(:day) { used_delegated_functions_on.day }
   let(:month) { used_delegated_functions_on.month }
@@ -14,7 +15,8 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
     {
       used_delegated_functions_day: day.to_s,
       used_delegated_functions_month: month.to_s,
-      used_delegated_functions_year: year.to_s
+      used_delegated_functions_year: year.to_s,
+      used_delegated_functions: used_delegated_functions.to_s
     }
   end
 
@@ -28,6 +30,32 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
 
     it 'updates the application' do
       expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
+      expect(legal_aid_application.used_delegated_functions).to be used_delegated_functions
+    end
+
+    context 'when not using delegated functions selected' do
+      let(:used_delegated_functions) { false }
+
+      it 'updates the application' do
+        expect(legal_aid_application.used_delegated_functions).to be used_delegated_functions
+      end
+
+      it 'does not update the date' do
+        expect(legal_aid_application.used_delegated_functions_on).to be_nil
+      end
+    end
+
+    context 'when not using delegated functions selected and date exists on model' do
+      let(:used_delegated_functions) { false }
+      let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions_on: 1.day.ago }
+
+      it 'updates the application' do
+        expect(legal_aid_application.used_delegated_functions).to be used_delegated_functions
+      end
+
+      it 'deletes the date' do
+        expect(legal_aid_application.used_delegated_functions_on).to be_nil
+      end
     end
 
     context 'when date is invalid' do
@@ -58,8 +86,8 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
       end
     end
 
-    context 'without date' do
-      let(:params) { {} }
+    context 'with delegated function selected but without date' do
+      let(:params) { { used_delegated_functions: 'true' } }
       let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions_on: nil }
       let(:error_locale) { 'used_delegated_functions_on.blank' }
 
@@ -79,7 +107,8 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
         {
           used_delegated_functions_year: year.to_s,
           used_delegated_functions_month: '',
-          used_delegated_functions_day: day.to_s
+          used_delegated_functions_day: day.to_s,
+          used_delegated_functions: used_delegated_functions.to_s
         }
       end
 

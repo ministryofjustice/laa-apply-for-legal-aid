@@ -4,10 +4,10 @@ module LegalAidApplications
     form_for LegalAidApplication
 
     attr_accessor :used_delegated_functions_year, :used_delegated_functions_month,
-                  :used_delegated_functions_day
+                  :used_delegated_functions_day, :used_delegated_functions
     attr_writer :used_delegated_functions_on
 
-    validates :used_delegated_functions_on, presence: true, unless: :draft_and_not_partially_complete_date?
+    validates :used_delegated_functions_on, presence: { unless: :date_not_required? }
     validates :used_delegated_functions_on, date: { not_in_the_future: true }, allow_nil: true
 
     def initialize(*args)
@@ -21,6 +21,7 @@ module LegalAidApplications
     # Note that this method is first called by `validates`.
     # Without that validation, the functionality in this method will not be called before save
     def used_delegated_functions_on
+      return delete_existing_date unless used_delegated_functions_selected?
       return @used_delegated_functions_on if @used_delegated_functions_on.present?
       return if date_fields.blank?
       return :invalid if date_fields.partially_complete? || date_fields.form_date_invalid?
@@ -30,12 +31,24 @@ module LegalAidApplications
 
     private
 
+    def date_not_required?
+      !used_delegated_functions_selected? || draft_and_not_partially_complete_date?
+    end
+
+    def used_delegated_functions_selected?
+      ActiveModel::Type::Boolean.new.cast(used_delegated_functions)
+    end
+
     def exclude_from_model
       date_fields.fields
     end
 
     def draft_and_not_partially_complete_date?
       draft? && !date_fields.partially_complete?
+    end
+
+    def delete_existing_date
+      model.used_delegated_functions_on = nil
     end
 
     def date_fields

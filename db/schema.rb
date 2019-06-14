@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_134522) do
     t.json "provider_step_params"
     t.boolean "own_vehicle"
     t.date "used_delegated_functions_on"
+    t.boolean "used_delegated_functions"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"

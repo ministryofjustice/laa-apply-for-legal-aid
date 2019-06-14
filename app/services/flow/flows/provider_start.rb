@@ -37,7 +37,14 @@ module Flow
         },
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: ->(application) { application.benefit_check_result.positive? ? :capital_introductions : :online_bankings }
+          forward: ->(application) { application.benefit_check_result.positive? ? :capital_introductions : :used_delegated_functions }
+        },
+        used_delegated_functions: {
+          path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
+          forward: ->(application) { application.used_delegated_functions? ? :substantive_applications : :online_bankings }
+        },
+        substantive_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) }
         },
         online_bankings: {
           path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },
