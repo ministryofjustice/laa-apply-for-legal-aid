@@ -166,9 +166,6 @@ en:
         or_break: or
         none_selected: None of these
       vehicles:
-        own_vehicle:
-          vehicle_types_included: This includes car, vans or motorcycles.
-          nothing_selected: Select yes if your client owns a vehicle
         estimated_value:
           use_car_valuation_sites: You can use car valuation websites to find this out.
         remaining_payment:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_164413) do
+ActiveRecord::Schema.define(version: 2019_06_11_134522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(version: 2019_05_29_164413) do
     t.datetime "declaration_accepted_at"
     t.datetime "completed_at"
     t.json "provider_step_params"
+    t.boolean "own_vehicle"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"

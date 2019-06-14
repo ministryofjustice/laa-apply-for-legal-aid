@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe SaveApplicantMeansAnswers do
-  let(:application) { create :legal_aid_application, :with_everything }
+  let(:vehicle) { create :vehicle, :populated }
+  let(:application) { create :legal_aid_application, :with_everything, :with_vehicle, vehicle: vehicle }
   let(:savings_amount) { application.savings_amount }
   let(:other_assets_declaration) { application.other_assets_declaration }
   let(:bank_provider) { create :bank_provider, applicant: application.applicant }
@@ -67,6 +68,11 @@ RSpec.describe SaveApplicantMeansAnswers do
       restrictions = application.applicant_means_answers['restrictions'].pluck('name')
       expected_restrictions = application.restrictions.pluck(:name)
       expect(restrictions).to match_array(expected_restrictions)
+    end
+
+    it 'copies the vehicle of the application' do
+      subject
+      expect(application.applicant_means_answers['vehicle']).to eq(JSON.parse(application.vehicle.to_json))
     end
 
     it 'copies the bank transactions' do

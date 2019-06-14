@@ -123,6 +123,11 @@ en:
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
             own_home:
               blank: Select yes if you own the home you live in
+            own_vehicle:
+              citizen:
+                blank: Select yes if you own a vehicle
+              provider:
+                blank: Select yes if your client owns a vehicle
             percentage_home:
               blank: Enter the percentage (%) share
               greater_than_or_equal_to: Share must be a percentage amount under 100, like 60
@@ -209,7 +214,7 @@ en:
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
             base:
               citizen:
-                none_selected: Select if you have any of these types of assets              
+                none_selected: Select if you have any of these types of assets
               provider:
                 none_selected: Select if your client has any of these types of assets
         respondent:

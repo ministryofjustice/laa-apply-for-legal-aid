@@ -1,39 +1,32 @@
 module Providers
   class VehiclesController < ProviderBaseController
     def show
-      vehicle
+      @form = LegalAidApplications::OwnVehicleForm.new(model: legal_aid_application)
     end
 
-    def create
-      case form_params[:persisted]
-      when 'true'
-        create_vehicle_and_continue
-      when 'false'
-        remove_vehicle_and_continue
+    def update
+      @form = LegalAidApplications::OwnVehicleForm.new(form_params)
+
+      if @form.save
+        legal_aid_application.own_vehicle ? vehicle.save! : vehicle.destroy!
+        continue_or_draft
       else
-        vehicle.errors.add :exists_yes, I18n.t('providers.vehicles.show.nothing_selected')
         render :show
       end
     end
 
     private
 
-    def create_vehicle_and_continue
-      vehicle.save! unless vehicle.persisted?
-      continue_or_draft
-    end
+    def form_params
+      merge_with_model(legal_aid_application, mode: :provider) do
+        next {} unless params[:legal_aid_application]
 
-    def remove_vehicle_and_continue
-      vehicle.destroy!
-      continue_or_draft
+        params.require(:legal_aid_application).permit(:own_vehicle)
+      end
     end
 
     def vehicle
       @vehicle = legal_aid_application.vehicle || legal_aid_application.build_vehicle
-    end
-
-    def form_params
-      params.require(:vehicle).permit(:persisted)
     end
   end
 end

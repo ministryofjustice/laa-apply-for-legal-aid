@@ -4,9 +4,9 @@ module Flow
       STEPS = {
         vehicles: {
           path: ->(_) { urls.citizens_vehicle_path },
-          forward: ->(application) { application.vehicle_persisted? ? :vehicles_estimated_values : :savings_and_investments },
+          forward: ->(application) { application.own_vehicle? ? :vehicles_estimated_values : :savings_and_investments },
           check_answers: :check_answers,
-          carry_on_sub_flow: ->(application) { application.vehicle_persisted? }
+          carry_on_sub_flow: ->(application) { application.own_vehicle? }
         },
         vehicles_estimated_values: {
           path: ->(_) { urls.citizens_vehicles_estimated_value_path },

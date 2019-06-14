@@ -21,13 +21,13 @@ RSpec.describe Providers::VehiclesController, type: :request do
     end
   end
 
-  describe 'POST /providers/applications/:legal_aid_application_id/vehicle' do
-    let(:option) { 'foo' }
+  describe 'PATCH /providers/applications/:legal_aid_application_id/vehicle' do
+    let(:own_vehicle) { nil }
     let(:params) do
-      { vehicle: { persisted: option } }
+      { legal_aid_application: { own_vehicle: own_vehicle } }
     end
     subject do
-      post(
+      patch(
         providers_legal_aid_application_vehicle_path(legal_aid_application),
         params: params
       )
@@ -50,7 +50,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
     end
 
     context 'with option "true"' do
-      let(:option) { 'true' }
+      let(:own_vehicle) { 'true' }
       let(:target_url) do
         providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application)
       end
@@ -58,6 +58,10 @@ RSpec.describe Providers::VehiclesController, type: :request do
       it 'creates a vehicle' do
         expect { subject }.to change { Vehicle.count }.by(1)
         expect(legal_aid_application.reload.vehicle).to be_present
+      end
+
+      it 'sets own_vehicle to true' do
+        expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(true)
       end
 
       it 'redirects to estimated value' do
@@ -89,13 +93,17 @@ RSpec.describe Providers::VehiclesController, type: :request do
     end
 
     context 'with option "false"' do
-      let(:option) { 'false' }
+      let(:own_vehicle) { 'false' }
       let(:target_url) do
         providers_legal_aid_application_savings_and_investment_path(legal_aid_application)
       end
 
       it 'does not create a vehicle' do
         expect { subject }.not_to change { Vehicle.count }
+      end
+
+      it 'sets own_vehicle to false' do
+        expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(false)
       end
 
       it 'redirects to savings and investment' do
