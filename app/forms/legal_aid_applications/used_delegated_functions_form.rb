@@ -7,6 +7,7 @@ module LegalAidApplications
                   :used_delegated_functions_day, :used_delegated_functions
     attr_writer :used_delegated_functions_on
 
+    validates :used_delegated_functions, presence: { unless: :draft? }
     validates :used_delegated_functions_on, presence: { unless: :date_not_required? }
     validates :used_delegated_functions_on, date: { not_in_the_future: true }, allow_nil: true
 

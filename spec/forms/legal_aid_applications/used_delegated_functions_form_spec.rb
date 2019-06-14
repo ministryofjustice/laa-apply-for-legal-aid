@@ -58,6 +58,20 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
       end
     end
 
+    context 'when nothing selected' do
+      let(:params) { {} }
+      let(:error_locale) { 'used_delegated_functions.blank' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+      end
+
+      it 'generates the expected error message' do
+        expect(message).not_to match(/^translation missing:/)
+        expect(subject.errors[:used_delegated_functions].join).to match(message)
+      end
+    end
+
     context 'when date is invalid' do
       let(:month) { 15 }
       let(:error_locale) { 'used_delegated_functions_on.date_not_valid' }

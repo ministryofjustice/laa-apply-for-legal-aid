@@ -149,6 +149,8 @@ en:
               too_many_decimals: Estimated value must not include more than 2 decimal numbers
             shared_ownership:
               blank: Select yes if you own your home with someone else
+            used_delegated_functions:
+              blank: Please select Yes or No
             used_delegated_functions_on:
               date_not_valid: Enter a valid date
               date_is_in_the_future: The date you used delegated functions must be in the past
