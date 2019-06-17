@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_134522) do
+ActiveRecord::Schema.define(version: 2019_06_17_093116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -130,6 +130,12 @@ ActiveRecord::Schema.define(version: 2019_06_11_134522) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["applicant_id"], name: "index_bank_errors_on_applicant_id"
+  end
+
+  create_table "bank_holidays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "dates"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bank_providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -264,6 +270,8 @@ ActiveRecord::Schema.define(version: 2019_06_11_134522) do
     t.boolean "own_vehicle"
     t.date "used_delegated_functions_on"
     t.boolean "used_delegated_functions"
+    t.date "substantive_application_deadline_on"
+    t.boolean "substantive_application"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
