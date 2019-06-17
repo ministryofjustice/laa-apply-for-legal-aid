@@ -173,9 +173,11 @@ en:
             proceedings_before_the_court:
               blank: Select Yes if the proceedings for which funding is being sought are currently before the court
             success_prospect:
-              blank: Select the prospects of success
+              blank: Select the chance of a successful outcome
+            success_likely:
+              blank: Select yes if the chance of a successful outcome is 50% or better
             success_prospect_details:
-              blank: Enter explanation of why you think legal aid should be granted
+              blank: Tell us why legal aid should be granted
         other_assets_declaration:
           attributes:
             valuable_items_value:

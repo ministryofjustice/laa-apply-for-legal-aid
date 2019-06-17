@@ -73,7 +73,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
     it 'redirects to the next page' do
       subject
-      expect(response).to redirect_to providers_legal_aid_application_success_prospects_path(legal_aid_application)
+      expect(response).to redirect_to providers_legal_aid_application_success_likely_index_path(legal_aid_application)
     end
 
     context '2 files are uploaded' do

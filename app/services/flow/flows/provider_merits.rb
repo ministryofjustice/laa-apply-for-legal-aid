@@ -37,7 +37,7 @@ module Flow
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: :success_prospects,
+          forward: :success_likely,
           check_answers: :check_merits_answers
         },
         estimated_legal_costs: {
@@ -46,10 +46,13 @@ module Flow
           forward: :success_prospects,
           check_answers: :check_merits_answers
         },
+        success_likely: {
+          path: ->(application) { urls.providers_legal_aid_application_success_likely_index_path(application) },
+          forward: ->(application) { application.merits_assessment.success_likely? ? :check_merits_answers : :success_prospects }
+        },
         success_prospects: {
           path: ->(application) { urls.providers_legal_aid_application_success_prospects_path(application) },
-          forward: :check_merits_answers,
-          check_answers: :check_merits_answers
+          forward: :check_merits_answers
         },
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },

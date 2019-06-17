@@ -49,7 +49,7 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to have_change_link(:details_of_latest_incident, providers_legal_aid_application_details_latest_incident_path(application))
         expect(response.body).to have_change_link(:respondent_details, providers_legal_aid_application_respondent_path)
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
-        expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_prospects_path(application))
+        expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_likely_index_path(application))
       end
 
       it 'displays the details of wether the respondent understands the terms of court order' do

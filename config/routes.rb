@@ -131,6 +131,7 @@ Rails.application.routes.draw do
       resource :client_received_legal_help, only: %i[show update]
       resource :proceedings_before_the_court, only: %i[show update]
       resource :estimated_legal_costs, only: %i[show update]
+      resources :success_likely, only: %i[index create]
       resource :success_prospects, only: %i[show update]
       resource :check_merits_answers, only: [:show] do
         patch :continue

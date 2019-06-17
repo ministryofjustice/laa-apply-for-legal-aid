@@ -158,13 +158,16 @@ en:
           partner_or_ex_partner: Yes, a partner or ex-partner
       success_prospect:
         success_prospect_item:
-          borderline: Borderline
           likely: 50% or better
-          marginal: Marginal 45 - 50%
-          poor: Poor
-          uncertain: Uncertain
-      success_prospect_form:
-        likely: 50% or better
+          marginal: 45% to 49%
+          poor: Less than 45%
+          borderline: Borderline
+          not_known: I do not know yet
+          hint:
+            marginal: The chance of a successful outcome is marginal.
+            poor: The chance of a successful outcome is poor.
+            borderline: You cannot predict the outcome.
+            not_known: Work still needs to be done to determine the likelihood of success.
       types_of_income_form:
         select_all_that_apply: Select all that apply
         financial_help_examples: For example, money from a family member for rent or bills.

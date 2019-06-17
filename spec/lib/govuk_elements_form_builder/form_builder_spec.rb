@@ -185,16 +185,18 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   describe 'govuk_radio_button' do
     let(:attribute) { 'uses_online_banking' }
     let(:resource_form) { Applicants::UsesOnlineBankingForm.new }
-    let(:params) { [:uses_online_banking, true] }
+    let(:hint_copy) { 'hint hint' }
     let(:label_copy) { CGI.escapeHTML I18n.t("helpers.label.#{resource}.#{attribute}.true") }
     let(:input) { parsed_html.at_css("input##{resource}_#{attribute}_true") }
+    let(:value) { true }
+    let(:params) { [:uses_online_banking, value, hint: hint_copy] }
 
     subject { builder.govuk_radio_button(*params) }
 
     it 'generates a radio button' do
       expect(input.classes).to include('govuk-radios__input')
       expect(input[:type]).to eq('radio')
-      expect(input[:value]).to eq('true')
+      expect(input[:value]).to eq(value.to_s)
       expect(input[:name]).to eq("#{resource}[#{attribute}]")
     end
 
@@ -214,9 +216,15 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       expect(label.content).to eq(label_copy)
     end
 
+    it 'includes a hint message' do
+      hint_span = input.parent.at_css('span.govuk-hint')
+      expect(hint_span.content).to include(hint_copy)
+      expect(hint_span[:id]).to eq("#{attribute}-#{value}-hint")
+    end
+
     context 'adding a custom class to the input' do
       let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [:uses_online_banking, true, class: custom_class] }
+      let(:params) { [:uses_online_banking, value, class: custom_class] }
 
       it 'adds custom class to the input' do
         expect(input.classes).to include(custom_class)
@@ -225,7 +233,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'label is passed as a parameter' do
       let(:custom_label) { Faker::Lorem.sentence }
-      let(:params) { [:uses_online_banking, true, label: custom_label] }
+      let(:params) { [:uses_online_banking, value, label: custom_label] }
 
       it 'display the custom label instead of the one in locale file' do
         label = input.parent.at_css('label')
@@ -278,10 +286,8 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       let(:span_hint) { parsed_html.at_css('span.govuk-hint') }
 
       before do
-        allow(I18n)
-          .to receive(:translate)
-          .with("helpers.hint.#{resource}.#{attribute}", default: nil)
-          .and_return(hint_message)
+        en = { helpers: { hint: { resource => { attribute => hint_message } } } }
+        I18n.backend.store_translations(:en, en)
       end
 
       it 'includes a hint message' do
@@ -289,6 +295,10 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
         expect(span_hint[:id]).to eq("#{attribute}-hint")
         expect(span_hint.content).to eq(hint_message)
         expect(span_hint.parent).to eq(fieldset)
+      end
+
+      it 'the hint message appears only once' do
+        expect(parsed_html.css('span.govuk-hint').count).to eq(1)
       end
     end
 
