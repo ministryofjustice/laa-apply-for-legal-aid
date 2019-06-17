@@ -1,12 +1,10 @@
 $(document).ready(() => {
   $(".request-delete-button").click(function(event){
-    event.preventDefault();
-
     const action = $(this).parent("form").attr("action"); 
-    let applicationID = $(this).data("application-id"); //ID code of element to delete
-    let deleteTitle = $(this).data("delete-message");
-    let deleteName = $(this).data("delete-name");
-    let deleteRef = $(this).data("delete-ref");
+    const applicationID = $(this).data("application-id"); //ID code of element to delete
+    const deleteTitle = $(this).data("delete-message");
+    const deleteName = $(this).data("delete-name");
+    const deleteRef = $(this).data("delete-ref");
 
     //if the current error box is poised to delete the same field as is clicked,
     //we want to cancel the delete
@@ -63,5 +61,6 @@ $(document).ready(() => {
         .val($("#confirm-delete").data("cancel-text")); //makes this button read "cancel delete"
     }
 
+    return false;
   })
 })
