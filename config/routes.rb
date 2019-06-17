@@ -151,6 +151,8 @@ Rails.application.routes.draw do
         patch 'remove_transaction_type', on: :member
       end
       resource :means_summary, only: %i[show update]
+      resource :used_delegated_functions, only: %i[show update]
+      resource :substantive_application, only: %i[show update]
     end
   end
 

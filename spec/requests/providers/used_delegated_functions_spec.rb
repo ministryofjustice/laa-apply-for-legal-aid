@@ -1,0 +1,151 @@
+require 'rails_helper'
+RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
+  let(:legal_aid_application) { create :legal_aid_application }
+  let(:login_provider) { login_as legal_aid_application.provider }
+
+  before do
+    login_provider
+    subject
+  end
+
+  describe 'GET /providers/applications/:legal_aid_application_id/used_delegated_functions' do
+    subject do
+      get providers_legal_aid_application_used_delegated_functions_path(legal_aid_application)
+    end
+
+    it 'renders successfully' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    context 'when not authenticated' do
+      let(:login_provider) { nil }
+      it_behaves_like 'a provider not authenticated'
+    end
+  end
+
+  describe 'PATCH /providers/applications/:legal_aid_application_id/used_delegated_functions' do
+    let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
+    let(:day) { used_delegated_functions_on.day }
+    let(:month) { used_delegated_functions_on.month }
+    let(:year) { used_delegated_functions_on.year }
+    let(:used_delegated_functions) { true }
+    let(:params) do
+      {
+        legal_aid_application: {
+          used_delegated_functions_day: day.to_s,
+          used_delegated_functions_month: month.to_s,
+          used_delegated_functions_year: year.to_s,
+          used_delegated_functions: used_delegated_functions.to_s
+        }
+      }
+    end
+    let(:button_clicked) { {} }
+
+    subject do
+      patch(
+        providers_legal_aid_application_used_delegated_functions_path(legal_aid_application),
+        params: params.merge(button_clicked)
+      )
+    end
+
+    it 'updates the application' do
+      legal_aid_application.reload
+      expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
+      expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+    end
+
+    it 'redirects to the substantive application page' do
+      expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
+    end
+
+    context 'when not authenticated' do
+      let(:login_provider) { nil }
+      it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'when date incomplete' do
+      let(:month) { '' }
+
+      it 'renders show' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays error' do
+        expect(response.body).to include('govuk-error-summary')
+        expect(response.body).to include('Enter a valid date')
+      end
+    end
+
+    context 'when date not entered' do
+      let(:day) { '' }
+      let(:month) { '' }
+      let(:year) { '' }
+
+      it 'renders show' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays error' do
+        expect(response.body).to include('govuk-error-summary')
+        expect(response.body).to include('Enter the date you used delegated functions')
+      end
+    end
+
+    context 'when not using delegated functions' do
+      let(:used_delegated_functions) { false }
+
+      it 'updates the application' do
+        legal_aid_application.reload
+        expect(legal_aid_application.used_delegated_functions_on).to be_nil
+        expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+      end
+
+      it 'redirects to the online banking page' do
+        expect(response).to redirect_to(providers_legal_aid_application_online_banking_path(legal_aid_application))
+      end
+    end
+
+    context 'Form submitted using Save as draft button' do
+      let(:button_clicked) { { draft_button: 'Save as draft' } }
+
+      it "redirects provider to provider's applications page" do
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it 'updates the application' do
+        legal_aid_application.reload
+        expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
+        expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+      end
+
+      context 'when date incomplete' do
+        let(:month) { '' }
+
+        it 'renders show' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'displays error' do
+          expect(response.body).to include('govuk-error-summary')
+          expect(response.body).to include('Enter a valid date')
+        end
+      end
+
+      context 'when date not entered' do
+        let(:day) { '' }
+        let(:month) { '' }
+        let(:year) { '' }
+
+        it "redirects provider to provider's applications page" do
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'updates the application' do
+          legal_aid_application.reload
+          expect(legal_aid_application.used_delegated_functions_on).to be_nil
+          expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+        end
+      end
+    end
+  end
+end

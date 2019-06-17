@@ -64,7 +64,7 @@ en:
       index:
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
-        you_need_to: 'You''ll need to:'
+        you_need_to: "You'll need to:"
         negative_result:
           title: "%{name} must complete a financial assessment"
           must_answer_financial_questions: Your client will need to answer questions about their financial situation.
@@ -365,6 +365,11 @@ en:
         sort_z_a_html: " from <em>Zed</em> to <em>A</em>"
         sort_small_large_html: " from <em>smallest</em> to <em>largest</em>"
         sort_large_small_html: "from <em>largest</em> to <em>smallest</em>"
+    used_delegated_functions:
+      show:
+        heading: Have you used delegated functions?
+        used_delegated_functions_on: Date you used delegated functions
+        used_delegated_functions_on_hint: For example, 18 4 2019
     vehicles:
       show:
         heading: Does your client own a vehicle?

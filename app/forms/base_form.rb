@@ -1,3 +1,5 @@
+require_relative 'concerns/date_field_builder'
+
 # Add common methods to forms.
 # Usage:
 #   Add the following to the form:

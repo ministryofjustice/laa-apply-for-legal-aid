@@ -4,6 +4,7 @@
       method: :patch,
       local: true
     ) do |form| %>
+
   <%= govuk_form_group show_error_if: @form.errors.present? do %>
     <%= govuk_fieldset_header page_title %>
 
@@ -34,6 +35,7 @@
             label: t('generic.no'),
             checked: @form.model.payment_remaining&.zero? && !@form.payments_remain?
           ) %>
+    </div>
 
   <% end %>
   <div class="govuk-!-padding-bottom-4"></div>

@@ -40,6 +40,9 @@ en:
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
         property_value: Enter the estimated value of your home
+        used_delegated_functions_day: Day
+        used_delegated_functions_month: Month
+        used_delegated_functions_year: Year
       vehicle:
         purchased_on_day: Day
         purchased_on_month: Month
@@ -146,6 +149,12 @@ en:
               too_many_decimals: Estimated value must not include more than 2 decimal numbers
             shared_ownership:
               blank: Select yes if you own your home with someone else
+            used_delegated_functions:
+              blank: Please select Yes or No
+            used_delegated_functions_on:
+              date_not_valid: Enter a valid date
+              date_is_in_the_future: The date you used delegated functions must be in the past
+              blank: Enter the date you used delegated functions
         merits_assessment:
           attributes:
             application_purpose:
