@@ -91,6 +91,7 @@ GEM
       msgpack (~> 1.0)
     browser (2.5.3)
     builder (3.2.3)
+    business (1.16.0)
     byebug (11.0.1)
     capybara (3.24.0)
       addressable
@@ -460,6 +461,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   browser
+  business
   byebug
   capybara (>= 2.15, < 4.0)
   climate_control
