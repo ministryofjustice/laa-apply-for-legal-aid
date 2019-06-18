@@ -29,11 +29,11 @@ RSpec.describe 'providers legal aid application requests', type: :request do
       end
 
       context 'when legal_aid_application current path set' do
-        let!(:legal_aid_application) { create :legal_aid_application, provider_step: :applicants }
+        let!(:legal_aid_application) { create :legal_aid_application, provider_step: :applicant_details }
 
         it "includes a link to the legal aid application's current path" do
           subject
-          expect(response.body).to include(providers_legal_aid_application_applicant_path(legal_aid_application))
+          expect(response.body).to include(providers_legal_aid_application_applicant_details_path(legal_aid_application))
         end
       end
 
@@ -44,7 +44,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
           subject
           start_path = Flow::KeyPoint.path_for(
             journey: :providers,
-            key_point: :journey_start,
+            key_point: :edit_applicant,
             legal_aid_application: legal_aid_application
           )
           expect(response.body).to include(start_path)
@@ -101,13 +101,13 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         login_as create(:provider)
       end
 
-      it 'creates a new application record' do
-        expect { subject }.to change { LegalAidApplication.count }.by(1)
+      it 'does not create a new application record' do
+        expect { subject }.not_to change { LegalAidApplication.count }
       end
 
-      it 'redirects to applicant details page ' do
+      it 'redirects to new applicant page ' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_path(legal_aid_application))
+        expect(response).to redirect_to(new_providers_applicant_path)
       end
     end
   end

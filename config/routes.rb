@@ -82,12 +82,13 @@ Rails.application.routes.draw do
   namespace :providers do
     root to: 'start#index' # TODO: In the live app this will point at an external url
     resource :provider, only: [:show], path: 'your_profile'
+    resources :applicants, only: %i[new create]
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
       resources :proceedings_types, only: %i[index create update]
       resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
-      resource :applicant, only: %i[show update]
+      resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]

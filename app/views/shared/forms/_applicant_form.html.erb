@@ -1,4 +1,4 @@
-<% back_label = @legal_aid_application.checking_client_details_answers? ? 'generic.back' : 'generic.home' %>
+<% back_label = @legal_aid_application&.checking_client_details_answers? ? 'generic.back' : 'generic.home' %>
 <%= page_template(
       page_title: t('.page_title'),
       back_link: { text: t(back_label) },
@@ -7,8 +7,8 @@
 
   <%= form_with(
         model: @form,
-        url: providers_legal_aid_application_applicant_path,
-        method: :patch,
+        url: form_url,
+        method: form_method,
         local: true
       ) do |form| %>
 
