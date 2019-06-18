@@ -1,0 +1,189 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"ac458f81-b7dd-4b2c-944c-3f17d2f2392c","personalisation":{"created_at":"Sun,
+        21 Apr 2019 04:59:43 +0000","user_data":"Windows - Opera 0.0.4 - Unknown","done_all_needed":"false","satisfaction":"dissatisfied","improvement_suggestion":"Et
+        voluptate et. Sunt in minus. Quod et quis."}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/2.9.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NjAxNjMxNjN9.Nv-YQTQohA2uNKLTZBoZRrv36khoFet47tOmFygnlNY
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 Jun 2019 10:39:24 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - 56fcfa72a5514620
+      X-B3-Traceid:
+      - 56fcfa72a5514620
+      X-Vcap-Request-Id:
+      - 68c2def3-3859-41c0-71ef-821825639ff3
+      Content-Length:
+      - '929'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"# Apply for Legal Aid Feedback - DEV\r\n\r\nSun,
+        21 Apr 2019 04:59:43 +0000\r\n\r\nThe following feedback has been received:\r\n\r\n*
+        Windows - Opera 0.0.4 - Unknown\r\n* Were you able to do what you needed today?
+        false\r\n* How satisfied were you with this service? dissatisfied\r\n\r\nHow
+        could we improve this service?\r\n\r\n---\r\nEt voluptate et. Sunt in minus.
+        Quod et quis.","from_email":"apply.for.legal.aid.development@notifications.service.gov.uk","subject":"Apply
+        for Legal Aid Feedback \u2013 DEV"},"id":"d63883a5-fa07-406d-8bde-238e193778c8","reference":null,"scheduled_for":null,"template":{"id":"ac458f81-b7dd-4b2c-944c-3f17d2f2392c","uri":"https://api.notifications.service.gov.uk/services/163de143-2d34-4454-b1fc-2f41624f2771/templates/ac458f81-b7dd-4b2c-944c-3f17d2f2392c","version":9},"uri":"https://api.notifications.service.gov.uk/v2/notifications/d63883a5-fa07-406d-8bde-238e193778c8"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Jun 2019 10:39:24 GMT
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"570e1b9d-6238-45fd-b75c-96f2f39db8e9","personalisation":{"application_url":"/applications/123/citizen/start","client_name":"Virgie
+        Gerlach","ref_number":"7b015d04decddfa3d32d976f70d76532"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/2.9.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NjAxNjMxNjR9.RcaMkXN1AO7nGYGhKOwAHBlTsbvzOKROon4o-4I2O3c
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 Jun 2019 10:39:25 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - bb39d8e48b8de720
+      X-B3-Traceid:
+      - bb39d8e48b8de720
+      X-Vcap-Request-Id:
+      - e531bdae-2c7f-4ebe-6c31-5d7012c39b39
+      Content-Length:
+      - '1472'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"# Complete your legal aid financial assessment\r\n\r\nDear
+        Virgie Gerlach,\r\n \r\n^ Legal Aid Agency case reference: 7b015d04decddfa3d32d976f70d76532\r\n\r\nYou
+        need to answer questions about your financial situation as part of your legal
+        aid application.\r\n\r\nYou might not have to pay legal costs if you are on
+        certain benefits, a low income or have little or no savings.\r\n\r\n# What
+        you need to do\r\n \r\nSign in securely to your online banking and allow temporary
+        access to your bank accounts.\r\n\r\nWe\u2019ll download 3 months of bank
+        statements to support your legal aid application. We will not use the information
+        for anything else.\r\n\r\n# Start your financial assessment now\r\n /applications/123/citizen/start\r\n\r\nThis
+        link will only remain active for 7 days for security reasons.\r\n\r\nFrom
+        the Legal Aid Agency\r\n\r\nThis message is automatically generated; please
+        do not reply to this email.","from_email":"apply.for.legal.aid.development@notifications.service.gov.uk","subject":"Complete
+        your legal aid financial assessment"},"id":"05da4ffb-9151-4167-933a-26641f69dae4","reference":null,"scheduled_for":null,"template":{"id":"570e1b9d-6238-45fd-b75c-96f2f39db8e9","uri":"https://api.notifications.service.gov.uk/services/163de143-2d34-4454-b1fc-2f41624f2771/templates/570e1b9d-6238-45fd-b75c-96f2f39db8e9","version":3},"uri":"https://api.notifications.service.gov.uk/v2/notifications/05da4ffb-9151-4167-933a-26641f69dae4"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Jun 2019 10:39:25 GMT
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"a577582b-3e60-44a4-885c-d4b12bf23958","personalisation":{"applicant_name":"Harris
+        Donnelly","provider":"8aee3fff-1dc7-4dac-bea6-4ae4f4e955be","application_ref":"6e21248116a3527a7c152af1246115f1","requested_at":"10:39
+        10-Jun-2019"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/2.9.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NjAxNjMxNjV9.8cIKhddie9CzZKzqpW0oX8C_Pm9t_7s8_o_cPq_rhqY
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 Jun 2019 10:39:27 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - cc9d467da35fbc25
+      X-B3-Traceid:
+      - cc9d467da35fbc25
+      X-Vcap-Request-Id:
+      - b1a41ba2-dff3-4b6e-7c13-dd9f5dafbb4e
+      Content-Length:
+      - '808'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"# Applicant is requesting a new link to access
+        their application\r\n\r\n* name: Harris Donnelly\r\n* provider: 8aee3fff-1dc7-4dac-bea6-4ae4f4e955be\r\n*
+        application reference: 6e21248116a3527a7c152af1246115f1\r\n* requested: 10:39
+        10-Jun-2019","from_email":"apply.for.legal.aid.development@notifications.service.gov.uk","subject":"Apply
+        for Legal Aid \u2013 Applicant request for new link"},"id":"c84c15d3-42d4-406c-af01-35e73589a5c9","reference":null,"scheduled_for":null,"template":{"id":"a577582b-3e60-44a4-885c-d4b12bf23958","uri":"https://api.notifications.service.gov.uk/services/163de143-2d34-4454-b1fc-2f41624f2771/templates/a577582b-3e60-44a4-885c-d4b12bf23958","version":1},"uri":"https://api.notifications.service.gov.uk/v2/notifications/c84c15d3-42d4-406c-af01-35e73589a5c9"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Jun 2019 10:39:27 GMT
+recorded_with: VCR 5.0.0

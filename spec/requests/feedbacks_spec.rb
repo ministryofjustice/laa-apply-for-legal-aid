@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe 'FeedbacksController', type: :request do
   describe 'POST /feedback' do
@@ -33,6 +34,19 @@ RSpec.describe 'FeedbacksController', type: :request do
     it 'redirects to show action' do
       subject
       expect(response).to redirect_to(feedback_path(feedback))
+    end
+
+    context 'sending the email', :vcr do
+      before { ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear }
+
+      it 'sends an email with the right parameters' do
+        expect_any_instance_of(FeedbackMailer)
+          .to receive(:set_personalisation)
+          .with(hash_including(improvement_suggestion: params[:improvement_suggestion]))
+          .and_call_original
+        subject
+        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
+      end
     end
 
     context 'with empty params' do

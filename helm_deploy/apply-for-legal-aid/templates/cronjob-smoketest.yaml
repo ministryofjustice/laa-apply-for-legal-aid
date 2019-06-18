@@ -1,8 +1,8 @@
-{{- $schedule := include "apply-for-legal-aid.metrics-cronjob-schedule" . -}}
+{{- $schedule := include "apply-for-legal-aid.cronjob-schedule-smoketest" . -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Release.Name }}-cronjob
+  name: {{ .Release.Name }}-smoketest
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
@@ -22,10 +22,10 @@ spec:
       template:
         spec:
           containers:
-          - name: {{ .Chart.Name }}
+          - name: rake-task
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
             imagePullPolicy: IfNotPresent
-            command: ['bin/rails', 'send_metrics_to_prometheus']
+            command: ['bin/rails', 'smoke_test']
 {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
             resources:
               limits:

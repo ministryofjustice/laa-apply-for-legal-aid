@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"ac458f81-b7dd-4b2c-944c-3f17d2f2392c","personalisation":{"created_at":"Mon,
+        10 Jun 2019 10:38:54 +0000","user_data":"Other - Generic Browser 0.0 - Unknown","done_all_needed":"false","satisfaction":"dissatisfied","improvement_suggestion":"Qui
+        ducimus consequatur. Sapiente quia molestiae. Et optio aspernatur."}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/2.9.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NjAxNjMxMzR9.q7fDS74EK93cmr3UvtTv96oLJoMVm3UUgTx98Sy4b0s
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 Jun 2019 10:38:54 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - dee9d7ca7f31a777
+      X-B3-Traceid:
+      - dee9d7ca7f31a777
+      X-Vcap-Request-Id:
+      - 70e25e43-e377-47fd-5df0-06e2c74991a3
+      Content-Length:
+      - '960'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"# Apply for Legal Aid Feedback - DEV\r\n\r\nMon,
+        10 Jun 2019 10:38:54 +0000\r\n\r\nThe following feedback has been received:\r\n\r\n*
+        Other - Generic Browser 0.0 - Unknown\r\n* Were you able to do what you needed
+        today? false\r\n* How satisfied were you with this service? dissatisfied\r\n\r\nHow
+        could we improve this service?\r\n\r\n---\r\nQui ducimus consequatur. Sapiente
+        quia molestiae. Et optio aspernatur.","from_email":"apply.for.legal.aid.development@notifications.service.gov.uk","subject":"Apply
+        for Legal Aid Feedback \u2013 DEV"},"id":"7ad9b48f-4421-4a21-949f-97f96982ec2e","reference":null,"scheduled_for":null,"template":{"id":"ac458f81-b7dd-4b2c-944c-3f17d2f2392c","uri":"https://api.notifications.service.gov.uk/services/163de143-2d34-4454-b1fc-2f41624f2771/templates/ac458f81-b7dd-4b2c-944c-3f17d2f2392c","version":9},"uri":"https://api.notifications.service.gov.uk/v2/notifications/7ad9b48f-4421-4a21-949f-97f96982ec2e"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Jun 2019 10:38:54 GMT
+recorded_with: VCR 5.0.0

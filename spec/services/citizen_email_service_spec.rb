@@ -1,7 +1,9 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe CitizenEmailService do
-  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: 'test@example.com') }
+  let(:smoke_test_email) { Rails.configuration.x.smoke_test_email_address }
+  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: smoke_test_email) }
   let(:application) { create(:application, applicant: applicant) }
   let(:secure_id) { SecureRandom.uuid }
   let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}" }
@@ -12,12 +14,25 @@ RSpec.describe CitizenEmailService do
     it 'sends an email' do
       message_delivery = instance_double(ActionMailer::MessageDelivery)
       expect(NotifyMailer).to receive(:citizen_start_email)
-        .with(application.application_ref, 'test@example.com', citizen_url, 'John Doe')
+        .with(application.application_ref, applicant.email, citizen_url, 'John Doe')
         .and_return(message_delivery)
       expect(message_delivery).to receive(:deliver_later!)
       expect(application).to receive(:generate_secure_id).and_return(secure_id)
 
       subject.send_email
+    end
+
+    context 'sending the email', :vcr do
+      before { ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear }
+
+      it 'sends an email with the right parameters' do
+        expect_any_instance_of(NotifyMailer)
+          .to receive(:set_personalisation)
+          .with(hash_including(ref_number: application.application_ref))
+          .and_call_original
+        subject.send_email
+        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
+      end
     end
   end
 end

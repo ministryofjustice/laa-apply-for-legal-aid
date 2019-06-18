@@ -36,13 +36,27 @@ Create chart name and version as used by the chart label.
 Defining cron schedule for the job sending metrics to Prometheus.
 In staging and production, the job runs every minute.
 In UAT, in order to not use too much resource, we run the job only once per hour.
+https://pauladamsmith.com/blog/2011/05/go_time.html
 */}}
-{{- define "apply-for-legal-aid.metrics-cronjob-schedule" -}}
+{{- define "apply-for-legal-aid.cronjob-schedule-metrics" -}}
   {{- if contains "-uat" .Release.Namespace -}}
-    {{/* https://pauladamsmith.com/blog/2011/05/go_time.html */}}
     {{- $currentMinute := now | date "4" -}}
     {{- printf "%s * * * *" $currentMinute -}}
   {{- else -}}
     {{ "* * * * *" }}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+Defining cron schedule for smoke test rake task.
+It runs every 30 minutes.
+https://pauladamsmith.com/blog/2011/05/go_time.html
+*/}}
+{{- define "apply-for-legal-aid.cronjob-schedule-smoketest" -}}
+  {{- if contains "-uat" .Release.Namespace -}}
+    {{- $currentMinute := now | date "4" -}}
+    {{- printf "%s/30 * * * *" $currentMinute -}}
+  {{- else -}}
+    {{ "*/30 * * * *" }}
   {{- end -}}
 {{- end -}}

@@ -4,14 +4,15 @@ module Citizens
 
     def update
       ResendLinkRequestMailer.notify(
-        secure_application_finder.legal_aid_application
-      ).deliver_later
+        legal_aid_application,
+        legal_aid_application.applicant
+      ).deliver_later!
     end
 
     private
 
-    def secure_application_finder
-      @secure_application_finder ||= SecureApplicationFinder.new(params[:id])
+    def legal_aid_application
+      @legal_aid_application ||= SecureApplicationFinder.new(params[:id]).legal_aid_application
     end
   end
 end
