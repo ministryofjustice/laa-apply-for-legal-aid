@@ -194,8 +194,9 @@ en:
         text: 'By submitting this application, you agree that:'
         list: |
           you've been instructed by %{applicant_name} to represent them
-          you've gone through all parts of the application with your client
-          to the best of your knowledge, the information your client has given you is complete and correct
+          you've gone through the application with your client
+          you've explained the 'statutory charge' to your client
+          the information you have provided is complete and correct
     online_bankings:
       show:
         heading: Does your client use online banking?
