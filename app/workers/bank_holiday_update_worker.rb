@@ -17,7 +17,7 @@ class BankHolidayUpdateWorker
   end
 
   def lastest_data
-    @bank_holiday ||= begin
+    @lastest_data ||= begin
       bank_holiday = BankHoliday.new
       bank_holiday.populate_dates
       bank_holiday

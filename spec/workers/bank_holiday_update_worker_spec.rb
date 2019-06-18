@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: 'gov_uk_bank_holiday_api', allow_playback_repeats: true } do
-
   let(:bank_holiday_update_worker) { described_class.new }
   let(:stale_date) { Time.now.utc - described_class::UPDATE_INTERVAL - 2.hours }
   let!(:bank_holiday) { create :bank_holiday }
@@ -21,7 +20,6 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: 'gov_uk_bank_holid
   end
 
   context 'when outdated' do
-
     let!(:bank_holiday) { create :bank_holiday, updated_at: stale_date }
 
     it 'creates a new bank holiday instance' do
@@ -50,5 +48,4 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: 'gov_uk_bank_holid
       expect { subject }.to raise_error(BankHolidayRetriever::UnsuccessfulRetrievalError)
     end
   end
-
 end

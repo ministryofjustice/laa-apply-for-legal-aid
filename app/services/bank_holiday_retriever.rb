@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class BankHolidayRetriever
   UnsuccessfulRetrievalError = Class.new(StandardError)
   API_URL = 'https://www.gov.uk/bank-holidays.json'
@@ -10,11 +11,13 @@ class BankHolidayRetriever
 
   def data
     return raise_error unless response.is_a?(Net::HTTPOK)
+
     @data ||= JSON.parse(response.body)
   end
 
   def dates(group)
     return if data.empty?
+
     data.dig(group, 'events')&.map { |details| details['date'] }
   end
 

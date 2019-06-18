@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe BankHoliday, type: :model, vcr: { cassette_name: 'gov_uk_bank_holiday_api', allow_playback_repeats: true } do
-
   let(:api_dates) { BankHolidayRetriever.dates }
   let!(:bank_holiday) { create :bank_holiday }
 
@@ -28,10 +27,10 @@ RSpec.describe BankHoliday, type: :model, vcr: { cassette_name: 'gov_uk_bank_hol
       end
 
       it 'does not create duplicates' do
-        expect do
+        expect {
           described_class.dates
           described_class.dates
-        end.to change { described_class.count }.from(0).to(1)
+        }.to change { described_class.count }.from(0).to(1)
       end
     end
   end

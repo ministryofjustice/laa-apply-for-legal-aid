@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe WorkingDayCalculator, vcr: { cassette_name: 'gov_uk_bank_holiday_api'} do
+RSpec.describe WorkingDayCalculator, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:day) { Date.parse('17-Dec-2018') }
   let(:working_day) { described_class.new(day) }
 
@@ -31,5 +31,4 @@ RSpec.describe WorkingDayCalculator, vcr: { cassette_name: 'gov_uk_bank_holiday_
       expect(result).to eq(expected)
     end
   end
-
 end
