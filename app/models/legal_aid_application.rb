@@ -7,6 +7,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
   SECURE_ID_DAYS_TO_EXPIRE = 7
+  WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 10
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
