@@ -111,6 +111,13 @@ en:
         section_proceeding:
           heading: Scope of legal aid
           proceeding: Proceeding
+          costs: Costs you can incur
+          costs_answer: £5,000
+          work: Work you can do
+          work_answer: Injunction FLA to final hearing
+        section_next:
+          heading: What happens next
+          content: We'll check with the Department for Work and Pensions to see if your client receives benefits that make them eligible for legal aid.
         title: Check your answers
     client_received_legal_helps:
       show:
