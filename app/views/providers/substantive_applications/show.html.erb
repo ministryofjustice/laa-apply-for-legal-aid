@@ -15,11 +15,13 @@
 
       <div class="govuk-radios govuk-radios--conditional" data-module="radios">
 
+        <%= govuk_error_message(form.object.errors[:substantive_application].first) %>
+
         <%= form.govuk_radio_button(
-            :substantive_application,
-            true,
-            label: t('generic.yes')
-          ) %>
+              :substantive_application,
+              true,
+              label: t('generic.yes')
+            ) %>
 
         <%= form.govuk_radio_button(
               :substantive_application,

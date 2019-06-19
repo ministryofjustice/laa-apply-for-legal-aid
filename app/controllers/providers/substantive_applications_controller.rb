@@ -15,6 +15,8 @@ module Providers
 
     def form_params
       merge_with_model(legal_aid_application) do
+        return {} unless params.key?(:legal_aid_application)
+
         params.require(:legal_aid_application).permit(:substantive_application)
       end
     end

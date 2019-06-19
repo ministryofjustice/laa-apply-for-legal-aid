@@ -29,8 +29,9 @@ module LegalAidApplicationStateMachine
                     after: -> { CleanupCapitalAttributes.call(self) }
       end
 
-      event :used_delegated_functions do
+      event :provider_used_delegated_functions do
         transitions from: :client_details_answers_checked, to: :delegated_functions_used
+        transitions from: :provider_submitted, to: :delegated_functions_used
         transitions from: :delegated_functions_used, to: :delegated_functions_used
       end
 

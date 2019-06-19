@@ -351,7 +351,7 @@ en:
         uploaded: Uploaded
     substantive_applications:
       show:
-        heading: Do you want to continue into a full application now?
+        heading: Do you want to make a substantive application now?
         information_on_next_actions: |
           You've told us you've used delegated functions.
           You can continue into a full (or 'substantive') application now or start later.

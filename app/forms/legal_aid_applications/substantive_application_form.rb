@@ -16,7 +16,7 @@ module LegalAidApplications
     end
 
     def save
-      super && model.used_delegated_functions!
+      super && model.provider_used_delegated_functions!
     end
 
     private
