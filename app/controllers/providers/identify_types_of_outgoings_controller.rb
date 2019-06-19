@@ -7,7 +7,7 @@ module Providers
     def update
       return continue_or_draft if none_selected? || transactions_added || draft_selected?
 
-      legal_aid_application.errors.add :base, :none_selected
+      legal_aid_application.errors.add :base, t('.none_selected')
       render :show
     end
 
