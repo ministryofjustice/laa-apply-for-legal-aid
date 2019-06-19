@@ -294,10 +294,9 @@ en:
           You'll need to enter:
         do_merits_of_case_qualify_list:
           list: |
-            details about the most recent incident
+            details about the latest domestic abuse incident
             information about the respondent
             a statement of case
-            the estimated costs of doing the work
             the chances of a successful outcome
     statement_of_cases:
       show:

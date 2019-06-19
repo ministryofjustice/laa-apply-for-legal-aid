@@ -22,6 +22,12 @@ RSpec.describe Providers::StartMeritsAssessmentsController, type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include('Provide details of the case')
       end
+
+      it 'displays do merits of case qualify list' do
+        I18n.t('.providers.start_merits_assessments.show.do_merits_of_case_qualify_list.list').each_line do |item|
+          expect(response.body).to include(item)
+        end
+      end
     end
   end
 
