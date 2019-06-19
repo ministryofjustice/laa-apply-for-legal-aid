@@ -341,18 +341,17 @@ Then(/^I enter the purchase date '(\d+-\d+-\d+)'$/) do |purchase_date|
   fill_in('purchased_on_year', with: year)
 end
 
-Then('I enter the told on date of {int} days ago') do |number|
+Then('I enter the {string} date of {int} days ago') do |name, number|
+  name.gsub!(/\s+/, '_')
   date = number.days.ago
-  fill_in('told_on', with: date.day)
-  fill_in('told_month', with: date.month)
-  fill_in('told_year', with: date.year)
+  fill_in("#{name}_on", with: date.day)
+  fill_in("#{name}_month", with: date.month)
+  fill_in("#{name}_year", with: date.year)
 end
 
-Then('I enter the occurred on date of {int} days ago') do |number|
-  date = number.days.ago
-  fill_in('occurred_on', with: date.day)
-  fill_in('occurred_month', with: date.month)
-  fill_in('occurred_year', with: date.year)
+Given('a {string} exists in the database') do |model|
+  model.gsub!(/\s+/, '_')
+  create model.to_sym
 end
 
 Then(/^I see a notice confirming an e-mail was sent to the citizen$/) do

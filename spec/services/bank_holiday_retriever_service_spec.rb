@@ -9,6 +9,16 @@ RSpec.describe BankHolidayRetriever, vcr: { cassette_name: 'gov_uk_bank_holiday_
     it 'returns same as instance dates for group' do
       expect(described_class.dates).to eq(subject.dates(group))
     end
+
+    context 'on failure' do
+      let(:uri) { URI.parse(described_class::API_URL) }
+      before do
+        expect(Net::HTTP).to receive(:get_response).with(uri).and_return(OpenStruct.new)
+      end
+      it 'raises error' do
+        expect { described_class.dates }.to raise_error(described_class::UnsuccessfulRetrievalError)
+      end
+    end
   end
 
   describe '#data' do
