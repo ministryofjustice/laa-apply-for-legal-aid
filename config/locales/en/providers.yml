@@ -196,7 +196,7 @@ en:
           you've been instructed by %{applicant_name} to represent them
           you've gone through the application with your client
           you've explained the 'statutory charge' to your client
-          the information you have provided is complete and correct
+          the information you've provided is complete and correct
     online_bankings:
       show:
         heading: Does your client use online banking?
