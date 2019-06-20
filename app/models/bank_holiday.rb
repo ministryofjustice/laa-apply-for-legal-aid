@@ -8,7 +8,7 @@ class BankHoliday < ApplicationRecord
 
   def self.dates
     BankHolidayUpdateWorker.perform_in 10.seconds
-    instance = by_updated_at.last || create
+    instance = by_updated_at.last || create!
     instance.dates
   end
 

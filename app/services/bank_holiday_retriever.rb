@@ -18,7 +18,7 @@ class BankHolidayRetriever
   def dates(group)
     return if data.empty?
 
-    data.dig(group, 'events')&.map { |details| details['date'] }
+    data.dig(group, 'events')&.pluck('date')
   end
 
   private

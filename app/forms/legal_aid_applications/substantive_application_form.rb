@@ -15,10 +15,6 @@ module LegalAidApplications
       attributes['substantive_application_deadline_on'] ||= substantive_application_deadline
     end
 
-    def save
-      super && model.provider_used_delegated_functions!
-    end
-
     private
 
     def substantive_application_deadline

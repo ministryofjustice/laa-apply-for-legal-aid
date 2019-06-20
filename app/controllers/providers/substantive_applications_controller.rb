@@ -8,7 +8,11 @@ module Providers
     def update
       authorize legal_aid_application
       @form = LegalAidApplications::SubstantiveApplicationForm.new(form_params)
-      render :show unless save_continue_or_draft(@form)
+      if save_continue_or_draft(@form)
+        legal_aid_application.provider_used_delegated_functions!
+      else
+        render :show
+      end
     end
 
     private

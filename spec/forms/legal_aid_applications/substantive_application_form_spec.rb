@@ -33,10 +33,6 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form, vc
       expect(application).not_to be_substantive_application
     end
 
-    it 'changes the state' do
-      expect { subject.save }.to change { application.reload.state }.to('delegated_functions_used')
-    end
-
     context 'when a deadline is already set' do
       let(:deadline) { 3.days.from_now.to_date }
       let(:application) do
@@ -61,10 +57,6 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form, vc
         expect(subject.save).to be true
         expect(application).to be_substantive_application
       end
-
-      it 'changes the state' do
-        expect { subject.save }.to change { application.reload.state }.to('delegated_functions_used')
-      end
     end
 
     context 'with no entry' do
@@ -73,10 +65,6 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form, vc
       it 'does not update application' do
         expect(subject.save).to be false
         expect(application.substantive_application).to be_nil
-      end
-
-      it 'changes the state' do
-        expect { subject.save }.not_to change { application.reload.state }
       end
     end
   end
