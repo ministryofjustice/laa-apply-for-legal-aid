@@ -43,6 +43,8 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController' do
     it 'should display an error' do
       subject
       expect(response.body).to match('govuk-error-summary')
+      expect(unescaped_response_body).to match(I18n.t('citizens.identify_types_of_outgoings.update.none_selected'))
+      expect(unescaped_response_body).not_to include('translation missing')
     end
 
     it 'returns http success' do

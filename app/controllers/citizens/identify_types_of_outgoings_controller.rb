@@ -10,7 +10,7 @@ module Citizens
     def update
       return go_forward if none_selected? || transactions_added
 
-      legal_aid_application.errors.add :base, :none_selected
+      legal_aid_application.errors.add :base, t('.none_selected')
       render :show
     end
 

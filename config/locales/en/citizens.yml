@@ -68,9 +68,13 @@ en:
     identify_types_of_incomes:
       show:
         page_heading: Which types of income do you receive?
+      update:
+        none_selected: Select if you receive any types of income
     identify_types_of_outgoings:
       show:
         page_heading: What regular payments do you make?
+      update:
+        none_selected: Select if you make any regular payments
     information:
       show:
         heading: Give one-time access to your bank accounts
