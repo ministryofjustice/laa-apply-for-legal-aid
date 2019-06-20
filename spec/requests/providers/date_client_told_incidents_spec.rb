@@ -31,23 +31,33 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'displays incident data' do
+      it 'displays told_on incident data' do
         expect(response.body).to include(incident.told_on.day.to_s)
         expect(response.body).to include(incident.told_on.month.to_s)
         expect(response.body).to include(incident.told_on.year.to_s)
+      end
+
+      it 'displays occurred_on incident data' do
+        expect(response.body).to include(incident.occurred_on.day.to_s)
+        expect(response.body).to include(incident.occurred_on.month.to_s)
+        expect(response.body).to include(incident.occurred_on.year.to_s)
       end
     end
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/date_client_told_incident' do
     let(:told_on) { 3.days.ago.to_date }
+    let(:occurred_on) { 5.days.ago.to_date }
     let(:told_day) { told_on.day }
     let(:params) do
       {
         incident: {
           told_day: told_day,
           told_month: told_on.month,
-          told_year: told_on.year
+          told_year: told_on.year,
+          occurred_day: occurred_on.day,
+          occurred_month: occurred_on.month,
+          occurred_year: occurred_on.year
         }
       }
     end
@@ -67,6 +77,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     it 'creates a new incident with the values entered' do
       expect { subject }.to change { Incident.count }.by(1)
       expect(incident.told_on).to eq(told_on)
+      expect(incident.occurred_on).to eq(occurred_on)
     end
 
     it 'redirects to the next page' do

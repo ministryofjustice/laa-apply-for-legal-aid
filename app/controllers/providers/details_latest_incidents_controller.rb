@@ -26,3 +26,5 @@ module Providers
     end
   end
 end
+
+# this page to be deleted

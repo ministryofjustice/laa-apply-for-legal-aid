@@ -19,6 +19,12 @@
           ) %>
     <% end %>
 
+    <%= date_input_fields(
+          prefix: :occurred,
+          field_name: :occurred_on,
+          width: :full,
+          form: form
+        ) %>
     <%= next_action_buttons(show_draft: true, form: form) %>
 
   <% end %>
