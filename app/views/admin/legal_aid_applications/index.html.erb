@@ -4,8 +4,28 @@
       back_link: :none
     ) do %>
 
-  <p><%= link_to t('.edit_settings'), admin_settings_path, class: 'govuk-link' %></p>
+  <div id="confirm-delete" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="error-summary" data-cancel-text="<%= t('.cancel_delete') %>" hidden>
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      <span id="delete-message"></span>
+    </h2>
+    <div class="govuk-body-m" id="delete-case-details">
+      <p id="delete-case-name"></p>
+      <p id="delete-case-ref"></p>
+    </div>
+    <div class="govuk-error-summary__body govuk-inset-text">
+      <%= t('.warning.delete_consequence') %>
+    </div>
+    <%= button_to(
+          t('.confirm_delete'),
+          nil,
+          method: :delete,
+          class: 'govuk-button govuk-button--warning govuk-!-margin-bottom-1 govuk-!-margin-top-4',
+          id: 'confirm-delete-button',
+          disabled: 'true'
+        ) if destroy_enabled? %>
+  </div>
 
+  <p><%= link_to t('.edit_settings'), admin_settings_path, class: 'govuk-link' %></p>
     <%= button_to(
           t('generic.create_test_applications'),
           create_test_applications_admin_legal_aid_applications_path,
@@ -13,12 +33,15 @@
           class: 'govuk-button'
         ) if create_test_applications_enabled? %>
 
-  <%= button_to(
-        t('.delete_all'),
-        destroy_all_admin_legal_aid_applications_path,
-        method: :delete,
-        class: 'govuk-button destructive'
-      ) if @applications.present? && destroy_enabled? %>
+    <%= button_to(
+          t('.delete_all'),
+          destroy_all_admin_legal_aid_applications_path,
+          method: :delete,
+          class: 'govuk-button govuk-button--warning request-delete-button',
+          "data-original-text": t('.delete_all'),
+          "data-application-id": 'destroy_all',
+          "data-delete-message": t('.warning.delete_all')
+        ) if @applications.present? && destroy_enabled? %>
 <% end %>
 
 <% if @applications.present? %>
