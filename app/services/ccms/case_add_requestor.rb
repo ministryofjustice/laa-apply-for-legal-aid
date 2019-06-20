@@ -411,7 +411,7 @@ module CCMS
       when 'date'
         raw_value.is_a?(Date) ? raw_value.strftime('%d-%m-%Y') : raw_value
       else
-        raise "Unknown response type: #{config[:response_type]}"
+        raise CcmsError, "Unknown response type: #{config[:response_type]}"
       end
     end
 

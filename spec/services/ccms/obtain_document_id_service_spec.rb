@@ -82,7 +82,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
         expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/CcmsError/)
+        expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/failure populating document hash/)
       end
     end
@@ -109,7 +109,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
         expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/CcmsError/)
+        expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/failure requesting document ids/)
       end
     end

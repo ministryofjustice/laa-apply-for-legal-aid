@@ -5,7 +5,7 @@ module CCMS
       submission.case_poll_count += 1
       parser = CaseAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+    rescue CcmsError => e
       handle_failure(e)
     end
 

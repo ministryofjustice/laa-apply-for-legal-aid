@@ -58,7 +58,7 @@ RSpec.describe CCMS::ObtainApplicantReferenceService do
     context 'error when searching for applicant' do
       before do
         allow(applicant_search_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
-        expect(applicant_search_requestor).to receive(:call).and_raise(RuntimeError, 'oops')
+        expect(applicant_search_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
       end
 
       it 'puts it into failed state' do
@@ -71,7 +71,7 @@ RSpec.describe CCMS::ObtainApplicantReferenceService do
         expect(history.from_state).to eq 'case_ref_obtained'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/RuntimeError/)
+        expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
       end
     end

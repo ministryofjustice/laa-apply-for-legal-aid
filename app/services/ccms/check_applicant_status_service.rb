@@ -6,7 +6,7 @@ module CCMS
       response = applicant_add_status_requestor.call
       parser = ApplicantAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+    rescue CcmsError => e
       handle_failure(e)
     end
 

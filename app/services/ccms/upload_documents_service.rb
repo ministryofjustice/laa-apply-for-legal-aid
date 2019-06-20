@@ -12,7 +12,7 @@ module CCMS
       else
         handle_failure("#{failed_uploads.keys} failed to upload to CCMS")
       end
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+    rescue CcmsError => e
       handle_failure(e)
     end
 
@@ -24,7 +24,7 @@ module CCMS
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
       update_document_status(key, tx_id, response)
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+    rescue CcmsError => e
       submission.documents[key] = :failed
       raise CcmsError, e
     end
