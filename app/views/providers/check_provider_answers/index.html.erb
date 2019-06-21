@@ -79,8 +79,31 @@
         answer: @proceeding_types.first.meaning,
         read_only: @read_only
       ) %>
-
+    <div class="govuk-summary-list__row normal-word-break">
+      <dt class="govuk-summary-list__key govuk-!-width-one-half">
+        <%= t '.section_proceeding.costs' %>
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= t '.section_proceeding.costs_answer' %>
+      </dd>
+      <dd class="govuk-summary-list__actions"></dd>
+    </div>
+    <div class="govuk-summary-list__row normal-word-break">
+      <dt class="govuk-summary-list__key govuk-!-width-one-half">
+        <%= t '.section_proceeding.work' %>
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= t '.section_proceeding.work_answer' %>
+      </dd>
+      <dd class="govuk-summary-list__actions"></dd>
+    </div>
   </dl>
+
+  <h2 class="govuk-heading-m"><%= t '.section_next.heading' %></h2>
+
+  <p class="govuk-body govuk-!-margin-bottom-9">
+    <%= t '.section_next.content' %>
+  </p>
 
 <%
   next_button_options = {
