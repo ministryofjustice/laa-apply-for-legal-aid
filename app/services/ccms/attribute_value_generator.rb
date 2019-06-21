@@ -17,14 +17,15 @@ module CCMS
   # ==================
   # If the method begins with one of the following prefixes, and is not specifically defined in this class, then the
   # method name without the prefix is called on the appropriate object in the options hash, e.g.
-  #  'vehicle_registration_number'  will call the registraion_number method on options[:vehicle] in order to get the
+  #  'vehicle_registration_number'  will call the registration method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator
-    STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding|other_party)_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
+    OTHER_PARTY = /^other_party_(\S+)$/.freeze
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
@@ -83,6 +84,10 @@ module CCMS
       # @legal_aid_application.main_dwelling_third_party_percentage
     end
 
+    def submission_case_ccms_reference(_options)
+      @legal_aid_application.ccms_submissions.most_recent.case_ccms_reference
+    end
+
     private
 
     def standardly_named_method?(method)
@@ -99,6 +104,8 @@ module CCMS
         options[:wage_slip].send(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].send(Regexp.last_match(1))
+      when OTHER_PARTY
+        options[:other_party].send(Regexp.last_match(1))
       end
     end
   end

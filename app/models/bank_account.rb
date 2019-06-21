@@ -11,4 +11,13 @@ class BankAccount < ApplicationRecord
   def account_type_label
     ACCOUNT_TYPE_LABELS.fetch(account_type, account_type)
   end
+
+  #currently hard coded for CCMS payload integration test
+  def holders
+    'ClientSole'
+  end
+
+  def display_name
+    "#{b.bank_provider.name} Acct #{b.account_number}"
+  end
 end

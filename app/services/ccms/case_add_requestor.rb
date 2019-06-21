@@ -24,7 +24,21 @@ module CCMS
     end
 
     def call
-      soap_client.call(:create_case_application, xml: request_xml)
+      puts Rails.root.join 'spec/integration/generated/add_case_request.xml'
+      if ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
+        begin
+          File.open(Rails.root.join('spec/integration/generated/add_case_request.xml'), 'w') do |fp|
+            fp.puts request_xml
+          end
+        rescue => err
+          puts err.class
+          puts err.message
+          puts err.backtrace
+        end
+        puts ">>>>>>>>>> CALL TO CCMS COMMENTED OUT  #{__FILE__}:#{__LINE__} <<<<<<<<<<".red
+      else
+        soap_client.call(:create_case_application, xml: request_xml)
+      end
     end
 
     private
@@ -136,20 +150,20 @@ module CCMS
     end
 
     def generate_provider_details(xml)
-      xml.__send__('ns2:ProviderCaseReferenceNumber', '123456') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
+      xml.__send__('ns2:ProviderCaseReferenceNumber', 'CCMS_Apply_Test_Case') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
       xml.__send__('ns2:ProviderFirmID', 19_148) # TODO: insert provider.firm_id when it is available in Apply
       xml.__send__('ns2:ProviderOfficeID', 137_570) # TODO: insert provider.office_id when it is available in Apply
       xml.__send__('ns2:ContactUserID') do
         xml.__send__('ns0:UserLoginID', 4_953_649) # TODO: insert provider.user_login_id when it is available in Apply
       end
-      # xml.__send__('ns2:SupervisorContactID', 7008010) # TODO: insert provider.supervisor_user_id when it is available in Apply
+      xml.__send__('ns2:SupervisorContactID', '7008010') # TODO: insert provider.supervisor_user_id when it is available in Apply
       xml.__send__('ns2:FeeEarnerContactID', 4_925_152) # TODO: insert fee_earner_contact_id when it is available in Apply
     end
 
     def generate_category_of_law(xml)
       xml.__send__('ns2:CategoryOfLawCode', 'MAT') # TODO: replace with lead_proceeding.ccms_category_law_code when it is available in Apply
-      xml.__send__('ns2:CategoryOfLawDescription', 'FAMILY') # TODO: insert lead_proceeding.ccms_category_law when it is available in Apply
-      xml.__send__('ns2:RequestedAmount', '0') # TODO: replace with as_currency(@legal_aid_application.requested_amount)) when it is available in Apply
+      xml.__send__('ns2:CategoryOfLawDescription', 'Family') # TODO: insert lead_proceeding.ccms_category_law when it is available in Apply
+      xml.__send__('ns2:RequestedAmount', '5000.0') # TODO: replace with as_currency(@legal_aid_application.requested_amount)) when it is available in Apply
     end
 
     def generate_proceedings(xml)
@@ -205,8 +219,8 @@ module CCMS
         xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, 1) }
         xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, 2) }
         xml.__send__('ns0:Entity') { generate_change_in_circumstance_entity(xml, 3) }
-        xml.__send__('ns0:Entity') { 'vehicles' } # TODO: replace with generate_vehicles_entity(xml, 4) when available in Apply
-        xml.__send__('ns0:Entity') { 'wage_slips' } # TODO: replace with generate_wage_slip_entity(xml, 5) when available in Apply
+        xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, 4) }
+        xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, 5) }
         xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, 6) }
         xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, 7) }
         xml.__send__('ns0:Entity') { generate_global_means_entity(xml, 8) }
@@ -249,17 +263,17 @@ module CCMS
     def generate_vehicles_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CARS_AND_MOTOR_VEHICLES')
-      vehicles.each { |vehicle| generate_vehicle_instance(xml, vehicle) }
+      generate_vehicle_instance(xml, vehicle) if vehicle
     end
 
     def generate_vehicle_instance(xml, vehicle)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', vehicle.instance_label)
+        xml.__send__('ns0:InstanceLabel', 'the cars & motor vehicles')
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :vehicles, vehicle: vehicle) }
       end
     end
 
-    def generate_wage_slip_entity(xml, sequence_no)
+    def generate_wage_slips_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CLI_NON_HM_WAGE_SLIP')
       wage_slips.each { |slip| generate_wage_slip_instance(xml, slip) }
@@ -288,7 +302,14 @@ module CCMS
     def generate_other_parties_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-      xml.__send__('ns0:Instances')
+      xml.__send__('ns0:Instances') do
+        @legal_aid_application.opponent_other_parties.each do |party|
+          xml.__send__('ns0:InstanceLabel', party.other_party_id)
+          xml.__send__('ns0:Attributes') do
+            generate_attributes_for(xml, :other_party, other_party: party)
+          end
+        end
+      end
     end
 
     def generate_global_means_entity(xml, sequence_no)
@@ -461,8 +482,8 @@ module CCMS
       @bank_accounts ||= applicant.bank_accounts
     end
 
-    def vehicles
-      @vehicles ||= @legal_aid_application.vehicles
+    def vehicle
+      @vehicle ||= @legal_aid_application.vehicle
     end
 
     def wage_slips

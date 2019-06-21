@@ -31,7 +31,7 @@ bank_acct:
     :response_type: text
     :user_defined: true
   BANKACC_INPUT_T_7WP2_3A:
-    :value: "#bank_account_account_type"
+    :value: "#bank_account_account_type_label"
     :br100_meaning: 'Bank accounts: The type of account'
     :response_type: text
     :user_defined: true
@@ -1148,7 +1148,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   APPLICATION_CASE_REF:
-    :value: 123456
+    :value: "#submission_case_ccms_reference"
     :br100_meaning: Application case reference
     :response_type: text
     :user_defined: true
@@ -3485,7 +3485,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   APPLICATION_CASE_REF:
-    :value: 123456
+    :value: "#submission_case_ccms_reference"
     :br100_meaning: Application case reference
     :response_type: text
     :user_defined: true
@@ -3614,11 +3614,11 @@ global_merits:
     :br100_meaning: The Case Is In Relation To Clinical Negligence
     :response_type: boolean
     :user_defined: false
-  _SYSTEM_PUI_USERID:
-    :value: NEETADESOR
-    :br100_meaning: Meaning not defined in BR100
-    :response_type: text
-    :user_defined: true
+#  SYSTEM_PUI_USERID:
+#    :value: NEETADESOR
+#    :br100_meaning: Meaning not defined in BR100
+#    :response_type: text
+#    :user_defined: true
   MARITIAL_STATUS:
     :value: S
     :br100_meaning: marital status
@@ -3660,114 +3660,140 @@ global_merits:
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
+other_party:
+  OTHER_PARTY_NAME:
+    :value: '#other_party_name'
+    :br100_meaning: The name of the other party
+    :response_type: text
+    :user_defined: true
+  OTHER_PARTY_TYPE:
+    :value: '#other_party_other_party_type'
+    :br100_meaning: The other party type
+    :response_type: text
+    :user_defined: true
+  OTHER_PARTY_ID:
+    :value: '#other_party_other_party_id'
+    :br100_meaning: The CCMS id of the other party
+    :response_type: text
+    :user_defined: true
+  RELATIONSHIP_TO_CASE:
+    :value: '#other_party_relationship_to_case'
+    :br100_meaning: The relationship of the other party to the case
+    :response_type: text
+    :user_defined: true
+  RELATIONSHIP_TO_CLIENT:
+    :value: '#other_party_relationship_to_client'
+    :br100_meaning: The relationship of the other party to the applicant
+    :response_type: text
+    :user_defined: true
 opponent:
   RELATIONSHIP_CIVIL_PARTNER:
-    :value: false
+    :value: '#opponent_relationship_civil_partner?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Civil Partner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_INTERVENOR:
-    :value: false
+    :value: '#opponent_relationship_case_interventor?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Intervener
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_TENANT:
-    :value: false
+    :value: '#opponent_relationship_tenant?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Tenant
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_MEDICAL_PRO:
-    :value: false
+    :value: '#opponent_relationship_medical_professional?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Medical
       Professional
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_OPPONENT:
-    :value: false
+    :value: '#opponent_relationship_case_opponent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Opponent
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EMPLOYER:
-    :value: false
+    :value: '#opponent_relationship_employer?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Employer
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_NONE:
-    :value: false
+    :value: '#opponent_relationship_none?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is None
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_PERSON:
-    :value: true
+    :value: '#opponent_person?'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   PARTY_IS_A_CHILD:
-    :value: true
+    :value: '#opponent_child?'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_ORG:
-    :value: false
+    :value: '#opponent_organisation'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_STEP_PARENT:
-    :value: false
+    :value: '#opponent_relationship_step_parent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Step Parent
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_GAL:
-    :value: false
+    :value: '#opponent_relationship_case_guardian?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Guardian
       Ad Litem
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EX_HUSBAND_WIFE:
-    :value: false
+    :value: '#opponent_relationship_ex_husband_wife?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Husband/Wife
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_LEGAL_GUARDIAN:
-    :value: false
+    :value: '#opponent_relationship_legal_guardian?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Legal Guardian
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_SOL_BARRISTER:
-    :value: false
+    :value: '#opponent_relationship_solicitor_barrister?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Solicitor
       Or Barrister
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EX_CIVIL_PARTNER:
-    :value: false
+    :value: '#opponent_relationship_ex_civil_partner?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Civil
       Partner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_LOCAL_AUTHORITY:
-    :value: false
+    :value: '#opponent_relationship_locall_authority?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Local Authority
     :response_type: boolean
     :user_defined: false
   OPP_RELATIONSHIP_TO_CASE:
-    :value: Child
+    :value: 'opponent_relationship_to_case'
     :br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Case'
     :response_type: text
     :user_defined: false
   RELATIONSHIP_PARENT:
-    :value: false
+    :value: '#opponent_relationship_parent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Parent
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_OTHER_FAM_MEMBER:
-    :value: false
+    :value: '#opponent_relationship_other_family_member?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Other Family
       Member
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_BENEFICIARY:
-    :value: false
+    :value: '#opponent_relationship_case_beneficiary?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Beneficiary
     :response_type: boolean
     :user_defined: false
@@ -3777,99 +3803,99 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_GRANDPARENT:
-    :value: false
+    :value: '#opponent_relationship_grandparent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Grandparent
     :response_type: boolean
     :user_defined: false
   OPPONENT_DOB:
-    :value: 01-01-2015
+    :value: '#opponent_date_of_birth'
     :br100_meaning: Date of Birth
     :response_type: date
     :user_defined: true
   RELATIONSHIP_LANDLORD:
-    :value: false
+    :value: '#opponent_relationship_landlord?'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CHILD:
-    :value: true
+    :value: '#opponent_relationship_child?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Child
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME:
-    :value: Master BoBo Fabby
+    :value: '#opponent_name'
     :br100_meaning: Other Party Name
     :response_type: text
     :user_defined: true
   RELATIONSHIP_CUSTOMER:
-    :value: false
+    :value: '#opponent_relationship_customer?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Customer
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME_MERITS:
-    :value: Master BoBo Fabby
+    :value: '#opponent_name'
     :br100_meaning: 'OthPart: Other Party Name'
     :response_type: text
     :user_defined: false
   RELATIONSHIP_CASE_INT_PARTY:
-    :value: false
+    :value: '#opponent_relationship_interested_party?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Interested
       Party
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_TO_CASE:
-    :value: CHILD
+    :value: '#opponent_relationship_case_child?'
     :br100_meaning: Opponent relationship to case
     :response_type: text
     :user_defined: true
   RELATIONSHIP_PROPERTY_OWNER:
-    :value: false
+    :value: '#opponent_relationship_property_owner?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Property
       Owner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_SUPPLIER:
-    :value: false
+    :value: '#opponent_relationship_supplier?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Supplier
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EMPLOYEE:
-    :value: false
+    :value: '#opponent_relationship_employee?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Employee
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_CHILD:
-    :value: true
+    :value: '#opponent_relationship_case_child?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Child
     :response_type: boolean
     :user_defined: false
   OPPONENT_DOB_MERITS:
-    :value: 01-01-2015
+    :value: '#opponent_date_of_birth'
     :br100_meaning: 'OthPart: Date of Birth'
     :response_type: date
     :user_defined: false
   RELATIONSHIP_CASE_AGENT:
-    :value: false
+    :value: '#opponent_relationship_agent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Agent
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_TYPE:
-    :value: PERSON
+    :value: '#opponent_type'
     :br100_meaning: Other Party Type
     :response_type: text
     :user_defined: true
   OPP_RELATIONSHIP_TO_CLIENT:
-    :value: Child
+    :value: '#opponent_relationship_to_client'
     :br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Client'
     :response_type: text
     :user_defined: false
   RELATIONSHIP_TO_CLIENT:
-    :value: CHILD
+    :value: '#opponent_relationship_to_client'
     :br100_meaning: Opponent relationship to client
     :response_type: text
     :user_defined: true
   RELATIONSHIP_HUSBAND_WIFE:
-    :value: false
+    :value: '#opponent_relationship_husband_wife?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Husband/Wife
     :response_type: boolean
     :user_defined: false
@@ -3937,12 +3963,12 @@ proceeding:
     :user_defined: true
 proceeding_merits:
   MATRIMONIAL_PROCEEDING:
-    :value: 'No'
+    :value: '#proceeding_matrimonial_proceeding'
     :br100_meaning: The Proceeding Is A Matrimonial Proceeding
     :response_type: text
     :user_defined: false
   PROC_IMMIGRATION_RELATED:
-    :value: false
+    :value: '#proceeding_immigration_related'
     :br100_meaning: The Proceeding Is Immigration Related
     :response_type: boolean
     :user_defined: false
@@ -3954,7 +3980,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   FAM_PROSP_VERY_POOR:
-    :value: false
+    :value: '#proceeding_fam_prosp_very_poor'
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Very Poor
     :response_type: boolean
@@ -3965,12 +3991,12 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   REQUESTED_SCOPE:
-    :value: MULTIPLE
+    :value: '#proceeding_requested_scope'
     :br100_meaning: Requested Scope
     :response_type: text
     :user_defined: true
   FAM_PROSP_UNCERTAIN:
-    :value: false
+    :value: '#proceeding_fam_prosp_uncertain'
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Uncertain
     :response_type: boolean
@@ -3981,7 +4007,7 @@ proceeding_merits:
     :response_type: currency
     :user_defined: true
   PROC_CHILD_ABDUCTION:
-    :value: 'No'
+    :value: '#proceeding_child_abduction'
     :br100_meaning: The Proceeding Is An Action Relating To Child Abduction
     :response_type: text
     :user_defined: false
@@ -3991,23 +4017,23 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   FAM_PROSP_POOR:
-    :value: false
+    :value: '#proceeding_fam_prosp_poor'
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Poor
     :response_type: boolean
     :user_defined: false
   CLIENT_INV_TYPE_CHILD:
-    :value: false
+    :value: '#proceeding_client_inv_type_child'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Child Subject
     :response_type: boolean
     :user_defined: false
   CLIENT_INV_TYPE_PERSONAL_REP:
-    :value: false
+    :value: '#proceeding_client_inv_type_personal_rep'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Personal Rep
     :response_type: boolean
     :user_defined: false
   OVERWHELMING_IMPORTANCE:
-    :value: false
+    :value: '#proceeding_overwhelming_importance'
     :br100_meaning: The Proceeding Is Of Overwhelming Importance To The Client
     :response_type: boolean
     :user_defined: false
@@ -4017,17 +4043,17 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   PROCEEDING_TYPE:
-    :value: proc error
+    :value: '#proceeding_proceeding_type'
     :br100_meaning: The Proceeding Type
     :response_type: text
     :user_defined: false
   LEVEL_OF_SERV_FHH:
-    :value: false
+    :value: '#proceeding_level_of_service_fhh'
     :br100_meaning: The Proceeding Of Service Is Family Help (Higher)
     :response_type: boolean
     :user_defined: false
   FAM_PROSP_MARGINAL:
-    :value: false
+    :value: '#proceeding_fam_prosp_marginal'
     :br100_meaning: The Prospects of Success In The Proceeding For The Family Matter
       Are Marginal
     :response_type: boolean
@@ -4043,7 +4069,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   APPEAL_IN_SUPREME_COURT:
-    :value: false
+    :value: '#proceeding_appeal_in_supreme_court'
     :br100_meaning: The Proceeding Relates To An Appeal Or Proposed Appeal In The
       Supreme Court
     :response_type: boolean
@@ -4054,43 +4080,43 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   LEVEL_OF_SERVICE:
-    :value: '3'
+    :value: '#proceeding_level_of_service'
     :br100_meaning: Form of Service
     :response_type: text
     :user_defined: true
   LEVEL_OF_SERV_FR:
-    :value: true
+    :value: '#proceeding_level_of_service_fr'
     :br100_meaning: The Proceeding Of Service Is Full Representation
     :response_type: boolean
     :user_defined: false
   CLIENT_INV_TYPE_INTERVENOR:
-    :value: false
+    :value: '#proceeding_client_inv_type_intervenor'
     :br100_meaning: The Client's Involvement Is To Be Represented As An Intervenor
     :response_type: boolean
     :user_defined: false
   PROC_OUTCOME_NO_OUTCOME:
-    :value: true
+    :value: '#proceeding_outcome_no_outcome'
     :br100_meaning: The Proceeding Outcome Is No Outcome Recorded
     :response_type: boolean
     :user_defined: false
   CLIENT_BRINGING_OR_DEFENDING:
-    :value: false
+    :value: '#proceeding_client_bringing_or_defending'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   SCOPE_LIMIT_IS_DEFAULT:
-    :value: false
+    :value: '#proceeding_scope_limit_is_default'
     :br100_meaning: the proceeding's scope limit is default
     :response_type: boolean
     :user_defined: true
   SCA_APPEAL_FINAL_ORDER:
-    :value: false
+    :value: '#proceeding_sca_appeal_final_order'
     :br100_meaning: 'SCA: The Appeal For The Proceeding Is An Appeal Against A Final
       Order'
     :response_type: boolean
     :user_defined: false
   DAMAGES_AGAINST_POLICE:
-    :value: 'No'
+    :value: '#proceeding_damages_against_police'
     :br100_meaning: The Proceeding Is For Damages Against The Police
     :response_type: text
     :user_defined: false
@@ -4100,28 +4126,28 @@ proceeding_merits:
     :response_type: currency
     :user_defined: true
   PROCEEDING_APPLICATION_TYPE:
-    :value: Both
+    :value: '#proceeding_proceeding_application_type'
     :br100_meaning: The Proceeding Application Type
     :response_type: text
     :user_defined: false
   CLIENT_INV_TYPE_BRING_3RD_PTY:
-    :value: false
+    :value: '#proceeding_client_inv_type_bring_3rd_pty'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Party Defending
       3Rd Party
     :response_type: boolean
     :user_defined: false
   PROC_DELEGATED_FUNCTIONS_DATE:
-    :value: 01-04-2019
+    :value: '#proceeding_delegated_functions_date'
     :br100_meaning: 'Emg: The proceeding delegated functions date'
     :response_type: date
     :user_defined: false
   PROC_INVOLVING_FIN_AND_PROP:
-    :value: 'No'
+    :value: '#proceeding_proc_involving_fin_and_prop'
     :br100_meaning: The Proceeding Is An Action Involving Finance And Property
     :response_type: text
     :user_defined: false
   PROCEEDING_JUDICIAL_REVIEW:
-    :value: false
+    :value: '#proceeding_judicial_review'
     :br100_meaning: The Proceeding Is Judicial Review
     :response_type: boolean
     :user_defined: false
@@ -4136,17 +4162,17 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   SMOD_APPLICABLE:
-    :value: 'No'
+    :value: '#proceeding_smod_applicable'
     :br100_meaning: Smod Is Applicable To The Proceeding
     :response_type: text
     :user_defined: false
   FAMILY_PROSPECTS_OF_SUCCESS:
-    :value: 50% or Better
+    :value: '#proceeding_family_prospects_of_success'
     :br100_meaning: 'Fam: The Family Prospects Of Success For The Proceeding'
     :response_type: text
     :user_defined: true
   FAM_PROSP_VERY_GOOD:
-    :value: false
+    :value: '#proceeding_fam_prosp_very_good'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -4167,12 +4193,12 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   CLIENT_INV_TYPE_OTHER:
-    :value: false
+    :value: '#proceeding_client_inv_type_other'
     :br100_meaning: The Client's Involvement In The Proceeding Is Other
     :response_type: boolean
     :user_defined: false
   MATTER_TYPE_STAND_ALONE:
-    :value: 'No'
+    :value: '#proceeding_matter_type_stand_alone'
     :br100_meaning: The Proceeding Matter Type Is Stand Alone
     :response_type: text
     :user_defined: false
@@ -4182,22 +4208,22 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   NON_QUANTIFIABLE_REMEDY:
-    :value: false
+    :value: '#proceeding_non_quantifiable_remedy'
     :br100_meaning: The Client Is Primarily Seeking A Non-Quantifiable Remedy
     :response_type: boolean
     :user_defined: false
   PROC_IS_SCA_OR_RELATED:
-    :value: 'No'
+    :value: '#proceeding_proc_is_sca_or_related'
     :br100_meaning: The Proceeding Sca Or Related
     :response_type: text
     :user_defined: false
   PROCEEDING_CASE_OWNER_SCU:
-    :value: false
+    :value: '#proceeding_proceeding_case_owner_scu'
     :br100_meaning: The Proceeding Case Owner Is Scu
     :response_type: boolean
     :user_defined: false
   PRIVATE_FUNDING_APPLICABLE:
-    :value: false
+    :value: '#proceeding_private_funding_applicable'
     :br100_meaning: The Private Funding Of The Proceeding Question Is Applicable
     :response_type: boolean
     :user_defined: false
@@ -4207,7 +4233,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   PROCEEDING_LIMITATION_DESC:
-    :value: MULTIPLE
+    :value: '#proceeding_limitation_desc'
     :br100_meaning: 'Proc: The Proceeding Limitation Description'
     :response_type: text
     :user_defined: false
@@ -4223,7 +4249,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   IMMIGRATION_QUESTION_APPLIES:
-    :value: 'No'
+    :value: '#proceeding_immigration_question_applies'
     :br100_meaning: The Immigration Question Is Applicable To The Proceeding
     :response_type: text
     :user_defined: false
@@ -4233,12 +4259,12 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   ROUTING_FOR_PROCEEDING:
-    :value: Standard Family Merits
+    :value: '#proceeding_routing_for_proceeding'
     :br100_meaning: The Routing For The Proceeding
     :response_type: text
     :user_defined: false
   FAM_PROSP_GOOD:
-    :value: false
+    :value: '#proceeding_fam_prosp_good'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -4248,7 +4274,7 @@ proceeding_merits:
     :response_type: currency
     :user_defined: true
   PROC_RELATED_SCA_OR_RELATED:
-    :value: false
+    :value: '#proceeding_proc_related_sca_or_related'
     :br100_meaning: The Proceeding Is In Relation To Special Children Act Or Related
       Proceedings
     :response_type: boolean
@@ -4259,12 +4285,12 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   CLIENT_DEFENDANT_3RD_PTY:
-    :value: false
+    :value: '#proceeding_client_defendant_3rd_pty'
     :br100_meaning: 'The Client Is A Defendant Or Third Party '
     :response_type: boolean
     :user_defined: false
   FAM_PROSP_BORDER_UNCERT_POOR:
-    :value: false
+    :value: '#proceeding_fam_prosp_border_uncert_poor'
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Borderline
     :response_type: boolean
@@ -4276,27 +4302,27 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   FAM_PROSP_50_OR_BETTER:
-    :value: true
+    :value: '#proceeding_fam_prosp_50_or_better'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   PROSPECTS_OF_SUCCESS:
-    :value: FA
+    :value: '#proceeding_prospects_of_success'
     :br100_meaning: The proceeding's prospect of success
     :response_type: text
     :user_defined: false
   HIGH_COST_CASE_ROUTING:
-    :value: VHCC
+    :value: '#proceeding_high_cost_case_routing'
     :br100_meaning: The High Cost Case Routing For The Proceeding
     :response_type: text
     :user_defined: false
   NEW_OR_EXISTING:
-    :value: NEW
+    :value: '#proceeding_new_or_existing'
     :br100_meaning: New or existing
     :response_type: text
     :user_defined: true
   PROC_RELATED_PROCEEDING:
-    :value: false
+    :value: '#proceeding_related_proceeding'
     :br100_meaning: The Proceeding Is A Related Proceeding
     :response_type: boolean
     :user_defined: false
@@ -4306,23 +4332,23 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   CLIENT_INV_TYPE_BRING_COUNTER:
-    :value: false
+    :value: '#proceeding_client_inv_type_bringing_counter'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Party Defending
       Proceedings
     :response_type: boolean
     :user_defined: false
   NEW_OR_EXISTING_MERITS:
-    :value: NEW
+    :value: '#proceeding_new_or_existing_merits'
     :br100_meaning: 'Proc: New or existing'
     :response_type: text
     :user_defined: false
   PROCEEDING_LIMITATION_MEANING:
-    :value: MULTIPLE
+    :value: '#proceeding_proceeding_limitation_meaning'
     :br100_meaning: 'Proc: The Proceeding Limitation Meaning'
     :response_type: text
     :user_defined: false
   CLIENT_INV_TYPE_DEF_COUNTER:
-    :value: false
+    :value: '#proceeding_client_inv_type_def_counter'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Bringing The
       Proceeding
     :response_type: boolean
@@ -4344,7 +4370,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   SIGNIFICANT_WIDER_PUB_INTEREST:
-    :value: false
+    :value: '#proceeding_significant_wider_public_interest'
     :br100_meaning: The Proceeding Has Significant Wider Public Interest
     :response_type: boolean
     :user_defined: false
@@ -4364,27 +4390,27 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   CLIENT_INV_TYPE_APPELLANT:
-    :value: false
+    :value: '#proceeding_client_inv_type_appellant'
     :br100_meaning: The Client's Involvement In The Proceeding Is As An Appellant
     :response_type: boolean
     :user_defined: false
   PROC_AVAILABLE_AMENDMENT_ONLY:
-    :value: 'No'
+    :value: '#proceeding_available_amendment_only'
     :br100_meaning: The Proceeding Is Available On Amendment Only
     :response_type: text
     :user_defined: false
   PRIVATE_FUNDING_CONSIDERED:
-    :value: 'No'
+    :value: '#proceeding_private_funding_considered'
     :br100_meaning: Private Funding Of The Proceeding Is To Be Considered
     :response_type: text
     :user_defined: false
   MATTER_TYPE_CHILD_ABDUCTION:
-    :value: 'No'
+    :value: '#proceeding_matter_type_child_abduction'
     :br100_meaning: The Proceeding Matter Type Is Child Abduction
     :response_type: text
     :user_defined: false
   PROFIT_COST_FAMILY:
-    :value: 5000.0
+    :value: '#proceeding_profit_cost_family'
     :br100_meaning: 'Fam: The Profit Costs To Completion Of The Family Proceeding'
     :response_type: currency
     :user_defined: true
@@ -4394,7 +4420,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   PROC_OUTCOME_RECORDED:
-    :value: false
+    :value: '#proceeding_proc_outcome_recorded'
     :br100_meaning: The Proceeding Outcome Has Been Recorded
     :response_type: boolean
     :user_defined: false
@@ -4405,44 +4431,44 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   CLIENT_INV_TYPE_INTERPLEADER:
-    :value: false
+    :value: '#proceeding_client_inv_type_interpleader'
     :br100_meaning: The Client's Involvement In The Proceeding Is As An Interpleader
       Proceedings
     :response_type: boolean
     :user_defined: false
   FAM_PROSP_BORDERLINE_UNCERT:
-    :value: false
+    :value: '#proceeding_fam_prosp_borderline_uncert'
     :br100_meaning: The Prospects Of Success For The Family Matter Are Borderline
       Or Uncertain
     :response_type: boolean
     :user_defined: false
   PROC_IS_MERITS_TESTED:
-    :value: 'Yes'
+    :value: '#proceeding_proc_is_merits_tested'
     :br100_meaning: The Proceeding Is Merits Tested
     :response_type: text
     :user_defined: false
   CLIENT_INVOLVEMENT_TYPE:
-    :value: A
+    :value: '#proceeding_client_involvement_type'
     :br100_meaning: Client Involvement Type
     :response_type: text
     :user_defined: true
   CLIENT_INV_TYPE_DEFEND_PROCS:
-    :value: false
+    :value: '#proceeding_client_inv_type_defend_procs'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Party Defending
     :response_type: boolean
     :user_defined: false
   CLIENT_INV_TYPE_BRINGING_PROCS:
-    :value: true
+    :value: '#proceeding_client_inv_type_bringing_procs'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Party Bringing  Proceedings
     :response_type: boolean
     :user_defined: false
   PROC_SUBJECT_TO_MEDIATION:
-    :value: 'Yes'
+    :value: '#proceeding_proc_subject_to_mediation'
     :br100_meaning: The Proceeding Is Subject To Mediation
     :response_type: text
     :user_defined: false
   PROC_CARE_SUPERV_OR_RELATED:
-    :value: 'No'
+    :value: '#proceeding_proc_care_superv_or_related'
     :br100_meaning: The Proceeding Care/Supervision Or Related
     :response_type: text
     :user_defined: false
@@ -4452,39 +4478,39 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   CLIENT_INV_TYPE_JOINED_PARTY:
-    :value: false
+    :value: '#proceeding_client_inv_type_joined_party'
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Joined Party
       Proceedings
     :response_type: boolean
     :user_defined: false
   PROC_REGISTER_FOREIGN_ORDER:
-    :value: 'No'
+    :value: '#proceeding_proc_register_foreign_order'
     :br100_meaning: The Proceeding Is An Action Relating To Registration Of A Foreign
       Order
     :response_type: text
     :user_defined: false
   PROC_POSSESSION:
-    :value: 'No'
+    :value: '#proceeding_proc_possession'
     :br100_meaning: The Proceeding Is In Relation To Possession
     :response_type: text
     :user_defined: false
   PROC_SUBJECT_TO_DP_CHECK:
-    :value: 'Yes'
+    :value: '#proceeding_proc_subject_to_dp_check'
     :br100_meaning: The Proceeding Is Subject To A Devolved Powers Check
     :response_type: text
     :user_defined: false
   MATTER_TYPE_PUBLIC_FAMILY:
-    :value: 'No'
+    :value: '#proceeding_matter_type_public_family'
     :br100_meaning: The Proceeding Matter Type Is Public Family
     :response_type: text
     :user_defined: false
   LEVEL_OF_SERV_IH:
-    :value: false
+    :value: '#proceeding_level_of_serv_ih'
     :br100_meaning: The Proceeding Of Service Is Investigative Representation
     :response_type: boolean
     :user_defined: false
   PROC_UPPER_TRIBUNAL:
-    :value: 'No'
+    :value: '#proceeding_proc_upper_tribunal'
     :br100_meaning: Meaning not defined in BR100
     :response_type: text
     :user_defined: false
@@ -4494,37 +4520,37 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   PROCEEDING_LEVEL_OF_SERVICE:
-    :value: Full Representation
+    :value: '#proceeding_proceeding_level_of_service'
     :br100_meaning: 'Proc: The Proceeding Form Of Service'
     :response_type: text
     :user_defined: false
   PROCEEDING_STAND_ALONE:
-    :value: 'No'
+    :value: '#proceeding_proceeding_stand_alone'
     :br100_meaning: The Proceeding Is Standalone
     :response_type: text
     :user_defined: false
   LEVEL_OF_SERV_INQUEST:
-    :value: false
+    :value: '#proceeding_level_of_serv_inquest'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   CLIENT_INVOLVEMENT:
-    :value: Applicant/Claimant/Petitioner
+    :value: '#proceeding_client_involvement'
     :br100_meaning: 'Client: The Client''s Involvement In The Proceeding'
     :response_type: text
     :user_defined: false
   PROC_IS_SCA_APPEAL:
-    :value: false
+    :value: '#proceeding_proc_is_sca_appeal'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   ACTION_DAMAGES_AGAINST_POLICE:
-    :value: false
+    :value: '#proceeding_action_damages_against_police'
     :br100_meaning: The Proceeding Is An Action For Damages Against The Police
     :response_type: boolean
     :user_defined: false
   MATTER_TYPE_PRIVATE_FAMILY:
-    :value: 'Yes'
+    :value: '#proceeding_matter_type_private_family'
     :br100_meaning: The Proceeding Matter Type Is Private Family
     :response_type: text
     :user_defined: false
@@ -4541,42 +4567,42 @@ valuable_possessions:
     :user_defined: true
 vehicles:
   CARANDVEH_INPUT_B_14WP2_28A:
-    :value: "#vehicle_in_regular_use?"
+    :value: "#vehicle_used_regularly?"
     :br100_meaning: 'Cars: It is used for regular use?'
     :response_type: boolean
     :user_defined: true
   CARANDVEH_INPUT_D_14WP2_27A:
-    :value: "#vehicle_date_of_purchase"
+    :value: "#vehicle_purchased_on"
     :br100_meaning: 'Cars: Date of purchase'
     :response_type: date
     :user_defined: true
   CARANDVEH_INPUT_T_14WP2_20A:
-    :value: "#vehicle_make"
+    :value: "Make: unspecified"
     :br100_meaning: 'Cars: Make'
     :response_type: text
     :user_defined: true
   CARANDVEH_INPUT_T_14WP2_21A:
-    :value: "#vehicle_model"
+    :value: "Model: unspecified"
     :br100_meaning: 'Cars: Model'
     :response_type: text
     :user_defined: true
   CARANDVEH_INPUT_T_14WP2_22A:
-    :value: "#vehicle_registration_number"
+    :value: "Registration number: unspecified"
     :br100_meaning: 'Cars: Reg'
     :response_type: text
     :user_defined: true
   CARANDVEH_INPUT_C_14WP2_24A:
-    :value: "#vehicle_purchase_price"
+    :value: 0.0
     :br100_meaning: 'Cars: Purchase price'
     :response_type: currency
     :user_defined: true
   CARANDVEH_INPUT_C_14WP2_25A:
-    :value: "#vehicle_current_market_value"
+    :value: "#vehicle_estimated_value"
     :br100_meaning: 'Cars: Current market value'
     :response_type: currency
     :user_defined: true
   CARANDVEH_INPUT_C_14WP2_26A:
-    :value: "#vehicle_value_of_loan_outstanding"
+    :value: "#vehicle_payment_remaining"
     :br100_meaning: 'Cars: Value of loan outstanding'
     :response_type: currency
     :user_defined: true
