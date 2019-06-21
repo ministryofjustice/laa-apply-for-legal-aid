@@ -2,6 +2,9 @@ module Flow
   module Flows
     class ProviderStart < FlowSteps
       STEPS = {
+        providers_home: {
+          path: ->(_application) { urls.providers_legal_aid_applications_path }
+        },
         applicants: {
           path: ->(_) { urls.new_providers_applicant_path },
           forward: :address_lookups
@@ -48,7 +51,8 @@ module Flow
           forward: ->(application) { application.used_delegated_functions? ? :substantive_applications : :online_bankings }
         },
         substantive_applications: {
-          path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) }
+          path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
+          forward: ->(application) { application.substantive_application? ? :online_bankings : :providers_home }
         },
         online_bankings: {
           path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },

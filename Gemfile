@@ -62,6 +62,9 @@ gem 'aws-sdk-s3'
 # convert documnents to PDF
 gem 'libreconv'
 
+# Used for working day calculations
+gem 'business'
+
 # Monitoring
 gem 'prometheus_exporter'
 

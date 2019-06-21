@@ -1,13 +1,14 @@
 module LegalAidApplicationStateMachine
   extend ActiveSupport::Concern
 
-  included do
+  included do # rubocop:disable Metrics/BlockLength
     include AASM
 
     aasm column: :state do
       state :initiated, initial: true
       state :checking_client_details_answers
       state :client_details_answers_checked
+      state :delegated_functions_used
       state :provider_submitted
       state :checking_citizen_answers
       state :checking_passported_answers
@@ -28,7 +29,14 @@ module LegalAidApplicationStateMachine
                     after: -> { CleanupCapitalAttributes.call(self) }
       end
 
+      event :provider_used_delegated_functions do
+        transitions from: :client_details_answers_checked, to: :delegated_functions_used
+        transitions from: :provider_submitted, to: :delegated_functions_used
+        transitions from: :delegated_functions_used, to: :delegated_functions_used
+      end
+
       event :check_passported_answers do
+        transitions from: :delegated_functions_used, to: :checking_passported_answers
         transitions from: :client_details_answers_checked, to: :checking_passported_answers
         transitions from: :means_completed, to: :checking_passported_answers
       end
@@ -37,6 +45,7 @@ module LegalAidApplicationStateMachine
         transitions from: :initiated, to: :provider_submitted
         transitions from: :checking_client_details_answers, to: :provider_submitted
         transitions from: :client_details_answers_checked, to: :provider_submitted
+        transitions from: :delegated_functions_used, to: :provider_submitted
       end
 
       event :reset do

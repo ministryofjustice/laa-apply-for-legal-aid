@@ -178,6 +178,23 @@ en:
         created_at: Date started
         current_application: Current applications
         status: Status
+    limitations:
+      show:
+        h1-heading: What you're covered for
+        h2-heading: Proceeding
+        body: |
+          Injunction FLA-to final hearing -
+          As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and
+          including obtaining and serving a final order and in the event of breach leading to
+          the exercise of a power of arrest to representation on the consideration of the breach
+          by the court (but excluding applying for a warrant of arrest, if not attached,
+          and representation in contempt proceedings).
+        link_title: Change
+        form_of_service: "Form of service: "
+        form_of_service_type: Full representation
+        incurrable_costs: "Costs you can incur: "
+        incurrable_costs_value: '£5,000'
+        allowable_work: "Work you can do: "
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -332,26 +349,17 @@ en:
         size: Size
         status: Status
         uploaded: Uploaded
+    substantive_applications:
+      show:
+        heading: Do you want to make a substantive application now?
+        information_on_next_actions: |
+          You've told us you've used delegated functions.
+          You can continue into a full (or 'substantive') application now or start later.
+        no_start_later: No, I'll start later
+        must_submit_by: You must submit a full application by %{deadline}
     success_prospects:
       show:
         h1-heading: What are the prospects of success?
-    limitations:
-      show:
-        h1-heading: What you're covered for
-        h2-heading: Proceeding
-        body: |
-          Injunction FLA-to final hearing -
-          As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and
-          including obtaining and serving a final order and in the event of breach leading to
-          the exercise of a power of arrest to representation on the consideration of the breach
-          by the court (but excluding applying for a warrant of arrest, if not attached,
-          and representation in contempt proceedings).
-        link_title: Change
-        form_of_service: "Form of service: "
-        form_of_service_type: Full representation
-        incurrable_costs: "Costs you can incur: "
-        incurrable_costs_value: '£5,000'
-        allowable_work: "Work you can do: "
     transactions:
       show:
         col_category: Category

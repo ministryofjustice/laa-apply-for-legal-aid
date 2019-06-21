@@ -16,6 +16,7 @@ en:
         checking_merits_answers: Provider checking merits test answers
         checked_merits_answers: Provider checked merits test answers
         checking_passported_answers: Provider checking means test answers
+        delegated_functions_used: Delegated functions used
         initiated: In progress
         means_completed: Means test completed
         merits_completed: Merits test completed
