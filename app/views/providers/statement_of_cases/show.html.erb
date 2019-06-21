@@ -7,17 +7,12 @@
       ) do %>
     <%= govuk_fieldset_header page_heading, padding_below: 0 %>
 
-    <label class="govuk-label" for="more-detail">
-      <p class="govuk-body-l"><%= t('.instructions') %></p>
-      <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
-      <ul class="govuk-list govuk-list--bullet">
-        <% (1..6).each do |bullet_number| %>
-          <li><%= t(".bullet-#{bullet_number}") %></li>
-        <% end %>
-      </ul>
-    </label>
-
-    <div class="govuk-!-padding-bottom-2"></div>
+    <p class="govuk-body"><%= t("generic.tell_us") %></p>
+    <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
+      <% (1..6).each do |bullet_number| %>
+        <li><%= t(".bullet-#{bullet_number}") %></li>
+      <% end %>
+    </ul>
 
     <div id="uploaded-files-table-container">
       <%= render partial: 'uploaded_files', locals: { original_files: @form.model.original_files } %>
@@ -36,19 +31,19 @@
 
       <noscript>
         <%= form.submit(
-              t('.upload'),
+              t('generic.upload'),
               id: 'upload',
               name: 'upload_button',
               class: 'govuk-button form-button'
             ) %>
       </noscript>
 
-      <div class="govuk-!-padding-bottom-2"></div>
-
+      <p class="govuk-body"><%= t("generic.or") %></p>
+      
+      <label class="govuk-heading-m" for="statement"><%= t('generic.enter_text') %></label>
       <%= form.govuk_text_area :statement, label: nil, rows: 15 %>
 
-      <div class="govuk-!-padding-bottom-2"></div>
-
+      
       <%= next_action_buttons(show_draft: true, form: form) %>
     <% end %>
   <% end %>
