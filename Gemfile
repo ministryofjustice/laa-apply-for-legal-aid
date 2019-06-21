@@ -72,6 +72,8 @@ gem 'prometheus_exporter'
 gem 'factory_bot_rails'
 gem 'faker', '>=1.9.1'
 
+gem 'webpacker', '~> 4.x'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

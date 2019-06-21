@@ -49,3 +49,10 @@ config/master.key
 
 # Ignore webhint reports
 hint-report/
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

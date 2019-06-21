@@ -12,7 +12,7 @@ may well be used to fire requests to other services.
 * System dependencies
     * postgres 10.5
     * redis
-    * npm
+    * yarn
 
 Install dependencies with homebrew:
 ```
