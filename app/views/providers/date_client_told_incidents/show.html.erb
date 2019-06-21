@@ -10,6 +10,8 @@
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
       <%= govuk_fieldset_header page_title %>
 
+      <div class="govuk-!-padding-bottom-4"></div>
+
       <%= date_input_fields(
             prefix: :told,
             field_name: :told_on,
