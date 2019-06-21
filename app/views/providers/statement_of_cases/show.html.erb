@@ -7,7 +7,7 @@
       ) do %>
     <%= govuk_fieldset_header page_title, padding_below: 7 %>
 
-    <p class="govuk-body"><%= t("generic.tell_us") %></p>
+    <p class="govuk-body"><%= t('generic.tell_us') %></p>
     <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
       <% (1..6).each do |bullet_number| %>
         <li><%= t(".bullet-#{bullet_number}") %></li>
@@ -38,12 +38,11 @@
             ) %>
       </noscript>
 
-      <p class="govuk-body"><%= t("generic.or") %></p>
-      
+      <p class="govuk-body"><%= t('generic.or') %></p>
+
       <label class="govuk-heading-m" for="statement"><%= t('generic.enter_text') %></label>
       <%= form.govuk_text_area :statement, label: nil, rows: 15 %>
 
-      
       <%= next_action_buttons(show_draft: true, form: form) %>
     <% end %>
   <% end %>
