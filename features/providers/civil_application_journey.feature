@@ -406,7 +406,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
-    Then I should be on a page showing "Statement of case"
+    Then I should be on a page showing "Provide a statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
@@ -506,7 +506,7 @@ Feature: Civil application journeys
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
-    Then I should be on a page showing "Statement of case"
+    Then I should be on a page showing "Provide a statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I upload a pdf file
     Then I reload the page
