@@ -5,7 +5,7 @@
     "hint": "hint"
   },
   "dependencies": {
-    "@hint/connector-local": "^2.0.2",
+    "@hint/connector-local": "^3.0.2",
     "govuk-frontend": "^2.13.0",
     "js-search": "^1.4.2"
   },
