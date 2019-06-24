@@ -42,7 +42,7 @@ RSpec.describe CCMS::AddCaseService do
   context 'operation in error' do
     context 'error when adding a case' do
       before do
-        expect(case_add_requestor).to receive(:call).and_raise(RuntimeError, 'oops')
+        expect(case_add_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
       end
 
       it 'puts it into failed state' do
@@ -55,7 +55,7 @@ RSpec.describe CCMS::AddCaseService do
         expect(history.from_state).to eq 'applicant_ref_obtained'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/RuntimeError/)
+        expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
       end
     end

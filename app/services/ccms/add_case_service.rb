@@ -7,7 +7,7 @@ module CCMS
       else
         handle_failure(response)
       end
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+    rescue CcmsError => e
       handle_failure(e)
     end
 

@@ -8,7 +8,7 @@ module CCMS
         request_document_ids
         create_history('case_created', submission.aasm_state) if submission.obtain_document_ids!
       end
-    rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+    rescue CcmsError => e
       handle_failure(e)
     end
 
@@ -25,7 +25,7 @@ module CCMS
         response = document_id_requestor.call
         PdfFile.update(original_file_id: key, ccms_document_id: DocumentIdResponseParser.new(tx_id, response).document_id)
         submission.documents[key] = :id_obtained
-      rescue CcmsError, StandardError => e # TODO: Replace `StandardError` with list of known expected errors
+      rescue CcmsError => e
         submission.documents[key] = :failed
         raise CcmsError, e
       end

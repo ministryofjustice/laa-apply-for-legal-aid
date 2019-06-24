@@ -43,7 +43,7 @@ RSpec.describe CCMS::ObtainCaseReferenceService do
   context 'operation in error' do
     before do
       allow(reference_data_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
-      expect(reference_data_requestor).to receive(:call).and_raise(RuntimeError, 'oops')
+      expect(reference_data_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
     end
 
     it 'puts it into failed state' do
@@ -56,7 +56,7 @@ RSpec.describe CCMS::ObtainCaseReferenceService do
       expect(history.from_state).to eq 'initialised'
       expect(history.to_state).to eq 'failed'
       expect(history.success).to be false
-      expect(history.details).to match(/RuntimeError/)
+      expect(history.details).to match(/CCMS::CcmsError/)
       expect(history.details).to match(/oops/)
     end
   end

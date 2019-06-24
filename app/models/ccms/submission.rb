@@ -32,5 +32,9 @@ module CCMS
         raise CcmsError, 'Unknown state'
       end
     end
+
+    def process_async!
+      SubmissionProcessWorker.perform_async(id, aasm_state)
+    end
   end
 end

@@ -88,7 +88,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
       let(:transaction_request_id_in_example_response) { '20190301030405123456' }
 
       before do
-        expect(case_add_status_requestor).to receive(:call).and_raise(RuntimeError, 'oops')
+        expect(case_add_status_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
         expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
       end
 
@@ -105,7 +105,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
         expect(history.from_state).to eq 'case_submitted'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/RuntimeError/)
+        expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
       end
     end
