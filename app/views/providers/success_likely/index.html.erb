@@ -1,0 +1,17 @@
+<%= page_template page_title: t('.h1-heading'), template: :basic do %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_success_likely_index_path,
+        method: :post,
+        local: true
+      ) do |form| %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :success_likely,
+          [true, false],
+          title: content_for(:page_title)
+        ) %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

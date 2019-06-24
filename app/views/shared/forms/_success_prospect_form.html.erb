@@ -13,10 +13,8 @@
     <%= govuk_error_message(form.object.errors[:client_received_legal_help].first) %>
 
     <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="radios">
-      <%= form.govuk_radio_button(:success_prospect, MeritsAssessment.prospect_likely_to_succeed, label: t('.likely')) %>
-
       <%= render partial: 'shared/forms/success_prospect/success_prospect_item',
-                 collection: MeritsAssessment.prospects_unlikely_to_succeed, as: :success_prospects,
+                 collection: MeritsAssessment.prospects_unlikely_to_succeed, as: :prospect,
                  locals: { form: form,
                            group_error_class: group_error_class,
                            input_error_class: input_error_class } %>

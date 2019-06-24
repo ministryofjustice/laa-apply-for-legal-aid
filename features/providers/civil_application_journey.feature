@@ -409,7 +409,10 @@ Feature: Civil application journeys
     Then I should be on a page showing "Statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I click 'Save and continue'
-    Then I should be on a page showing "What are the prospects of success?"
+    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What is the chance of a successful outcome?"
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
@@ -510,7 +513,10 @@ Feature: Civil application journeys
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"
     Then I click 'Save and continue'
-    Then I should be on a page showing "What are the prospects of success?"
+    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What is the chance of a successful outcome?"
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'

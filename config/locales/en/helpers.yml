@@ -32,7 +32,9 @@ en:
         details_of_proceedings_before_the_court: Please give details.
         proceedings_before_the_court:
           <<: *true_false
-        success_prospect_details: Please explain why you believe legal aid should be granted
+        success_prospect_details: Tell us why legal aid should be granted
+        success_likely:
+          <<: *true_false
       other_assets_declaration:
         check_box_second_home: Second property or holiday home
         second_home_mortgage: Enter outstanding mortgage amount

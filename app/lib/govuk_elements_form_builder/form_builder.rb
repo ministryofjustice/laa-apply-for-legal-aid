@@ -67,9 +67,10 @@ module GovukElementsFormBuilder
 
       label_options = { value: value.to_s, class: 'govuk-label govuk-radios__label' }
       label_html = label(attribute, options[:label], label_options)
+      hint_html = hint_tag(attribute, options.merge(radio_button_value: value))
 
       content_tag(:div, class: 'govuk-radios__item') do
-        concat_tags(radio_html, label_html)
+        concat_tags(radio_html, label_html, hint_html)
       end
     end
 
@@ -227,13 +228,19 @@ module GovukElementsFormBuilder
     end
 
     def hint_message(attribute, options)
+      return options[:hint] if options.key?(:radio_button_value)
+
       options[:hint].presence || I18n.translate("helpers.hint.#{@object_name}.#{attribute}", default: nil)
     end
 
     def hint_tag(attribute, options)
       return unless hint?(attribute, options)
 
-      content_tag(:span, hint_message(attribute, options), class: 'govuk-hint', id: "#{attribute}-hint")
+      classes = ['govuk-hint']
+      classes << 'govuk-radios__hint' if options.key?(:radio_button_value)
+
+      id = [attribute, options[:radio_button_value], 'hint'].compact.join('-')
+      content_tag(:span, hint_message(attribute, options), class: classes.join(' '), id: id)
     end
 
     def error_tag(attribute, options)

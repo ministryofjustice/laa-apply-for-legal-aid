@@ -359,7 +359,10 @@ en:
         must_submit_by: You must submit a full application by %{deadline}
     success_prospects:
       show:
-        h1-heading: What are the prospects of success?
+        h1-heading: What is the chance of a successful outcome?
+    success_likely:
+      index:
+        h1-heading: Is the chance of a successful outcome 50% or better?
     transactions:
       show:
         col_category: Category
