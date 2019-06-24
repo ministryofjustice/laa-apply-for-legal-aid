@@ -329,20 +329,13 @@ en:
             the chances of a successful outcome
     statement_of_cases:
       show:
-        bullet-1: What has happened so far.
-        bullet-2: Parties involved and their relationship to the applicant.
-        bullet-3: Explain why the current proceedings are necessary.
-        bullet-4: Number of clients represented.
-        bullet-5: Any other persons who might benefit who can bring or fund the case.
-        bullet-6: |
-          Details of the most recent incident, if a warning letter has been sent,
-          the police have been notified or there are any criminal charges.
-        h1-heading: Statement of case
-        h2-heading: You must include the following details
-        instructions: |
-          Please tell us about the case providing
-          sufficient information to satisfy the regulations.
-        upload: Upload
+        bullet-1: details of the latest domestic abuse incident
+        bullet-2: what has happened in the case so far
+        bullet-3: about any other parties involved and their relationship to the applicant
+        bullet-4: how many clients you're representing
+        bullet-5: why the current proceedings are necessary
+        bullet-6: if anyone else might be able to fund this case
+        h1-heading: Provide a statement of case
       uploaded_files:
         delete: Delete
         filename: Filename

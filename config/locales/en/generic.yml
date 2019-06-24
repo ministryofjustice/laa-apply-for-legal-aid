@@ -10,6 +10,7 @@ en:
     continue: Continue
     create_test_applications: Create test applications
     back_to_your_applications: Back to your applications
+    enter_text: Enter text
     errors:
       problem_text: There is a problem
       yes_or_no: You must select either Yes or No
@@ -18,6 +19,7 @@ en:
     'no': 'No'
     menu: Menu
     none_declared: None declared
+    or: or
     remove: Remove
     save_and_continue: Save and continue
     save_as_draft: Save as draft
@@ -28,9 +30,11 @@ en:
     start_now: Start now
     submit: Submit
     submit_and_continue: Submit and continue
+    tell_us: "You need to tell us:"
     total: Total
     toggle_navigation: Show or hide Top Level Navigation
     undefined: Undefined
+    upload: Upload
     upload_file: Attach a file
     view: View
     'yes': 'Yes'
