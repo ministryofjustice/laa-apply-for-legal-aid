@@ -5,15 +5,18 @@
     "hint": "hint"
   },
   "dependencies": {
-    "@hint/connector-local": "^2.0.2",
+    "@hint/connector-local": "^3.0.2",
+    "@rails/activestorage": "^6.0.0-alpha",
+    "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
     "govuk-frontend": "^2.13.0",
+    "jquery": "^1.12.4",
     "js-search": "^1.4.2"
   },
   "devDependencies": {
     "@hint/configuration-web-recommended": "^6.2.2",
     "@hint/parser-javascript": "^3.0.2",
-    "hint": "^4.5.0",
+    "hint": "^5.0.2",
     "webpack-dev-server": "^3.7.2"
   }
 }

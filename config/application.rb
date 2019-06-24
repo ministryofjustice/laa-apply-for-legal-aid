@@ -1,7 +1,6 @@
 require_relative 'boot'
 
 require "rails/all"
-require 'sprockets/es6'
 
 Bundler.require(*Rails.groups)
 

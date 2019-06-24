@@ -1,6 +1,6 @@
 $(document).ready(() => {
   $(".request-delete-button").click(function(event){
-    const action = $(this).parent("form").attr("action"); 
+    const action = $(this).parent("form").attr("action");
     const applicationID = $(this).data("application-id"); //ID code of element to delete
     const deleteTitle = $(this).data("delete-message");
     const deleteName = $(this).data("delete-name");
@@ -9,7 +9,7 @@ $(document).ready(() => {
     //if the current error box is poised to delete the same field as is clicked,
     //we want to cancel the delete
     if (applicationID == $("#confirm-delete-button").data("application-id")) {
-      cancelDeleteButton(this);  
+      cancelDeleteButton(this);
     }
     //if it isn't the same, then we are trying to delete something different from current
     //or the box is hidden
@@ -43,8 +43,8 @@ $(document).ready(() => {
       $("#delete-case-ref").text(deleteRef); //changes reference in error box
     }
 
-    function showDeleteWarning() { 
-      $("#confirm-delete").removeAttr('hidden'); 
+    function showDeleteWarning() {
+      $("#confirm-delete").removeAttr('hidden');
     }
 
     function resetAllButtons() {

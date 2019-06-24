@@ -15,4 +15,11 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
+require("@rails/ujs").start()
+require("@rails/activestorage").start()
+
+const context = require.context("../src", true, /\.js$/)
+context.keys().forEach(key => context(key))
+
+const GOVUKFrontend = require('govuk-frontend')
+$(function() { GOVUKFrontend.initAll() })
