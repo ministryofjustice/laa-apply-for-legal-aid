@@ -37,7 +37,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              damages_against_police: 'No',
              default_level_of_service: 3,
              delegated_functions_date: Date.new(2019, 4, 1),
-             description: 'to be represented on an application for a non-molestation order',
+             description: 'to be represented on an application for a non-molestation order.',
              disbursement_cost_family: 100.0,
              dom_violence_waiver_applies: 'Yes',
              dv_gateway_applies?: false,
@@ -116,7 +116,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              proceeding_new_or_existing: 'NEW',
              proceeding_stand_alone: 'No',
              proceeding_type: 'proc error',
-             proc_care_superv_or_related: 'No',
              profit_cost_family: 5_000.0,
              proportionality_question: 'Yes',
              prospects_of_success: 'FA',
@@ -172,7 +171,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              damages_against_police: 'No',
              default_level_of_service: 1,
              delegated_functions_date: Date.new(2019, 4, 1),
-             description: 'to be represented on an application for a child arrangements order - where the child(ren) will live ',
+             description: 'to be represented on an application for a child arrangements order ?where the child(ren) will live',
              disbursement_cost_family: 0.0,
              dom_violence_waiver_applies: 'No',
              dv_gateway_applies?: true,
@@ -215,7 +214,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              level_of_service_fr: true,
              level_of_serv_ih: false,
              level_of_serv_inquest: false,
-             limitation_desc: 'MULTIIPLE',
+             limitation_desc: 'MULTIPLE',
              matrimonial_proceeding: 'No',
              matter_type_child_abduction: 'No',
              matter_type_meaning: 'Section 8 orders',
@@ -302,7 +301,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              date_of_birth: Date.new(1953, 8, 13),
              relation_to_client: 'EX_SPOUSE',
              relation_to_case: 'OPP',
-             civil_partner?: false,
+             civil_partner?: false
     end
 
     let(:opponent_2) do
@@ -315,50 +314,92 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              relation_to_case: 'CHILD'
     end
 
-    let(:other_party) do
+                    let(:other_party_1) do
+                      double 'OtherParty',
+                        child?: true,
+                        date_of_birth: '01-01-2015',
+                        name: 'Master BoBo Fabby',
+                        opp_relationship_to_client: 'Child',
+                        opp_relationship_to_case: 'Child',
+                        organisation: false,
+                        other_party_id: 'OPPONENT_11594798',
+                        other_party_type: 'PERSON',
+                        person?: true,
+                        relationship_agent?: false,
+                        relationship_case_beneficiary?: false,
+                        relationship_case_child?: true,
+                        relationship_case_guardian?: false,
+                        relationship_case_interventor?: false,
+                        relationship_case_opponent?: false,
+                        relationship_child?: true,
+                        relationship_civil_partner?: false,
+                        relationship_customer?: false,
+                        relationship_employee?: false,
+                        relationship_employer?: false,
+                        relationship_ex_civil_partner?: false,
+                        relationship_ex_husband_wife?: false,
+                        relationship_grandparent?: false,
+                        relationship_husband_wife?: false,
+                        relationship_interested_party?: false,
+                        relationship_landlord?: false,
+                        relationship_legal_guardian?: false,
+                        relationship_locall_authority?: false,
+                        relationship_medical_professional?: false,
+                        relationship_none?: false,
+                        relationship_other_family_member?: false,
+                        relationship_parent?: false,
+                        relationship_property_owner?: false,
+                        relationship_solicitor_barrister?: false,
+                        relationship_step_parent?: false,
+                        relationship_supplier?: false,
+                        relationship_tenant?: false,
+                        relationship_to_client: 'CHILD',
+                        relationship_to_case: 'CHILD'
+                    end
+
+    let(:other_party_2) do
       double 'OtherParty',
-        child?: 'xxxx',
-        date_of_birth: 'xxxx',
-        date_of_birth: 'xxxx',
-        id: 'xxxx',
-        name: 'xxxx',
-        name: 'xxxx',
-        organisation: 'xxxx',
-        person?: 'xxxx',
-        relationship_agent?: 'xxxx',
-        relationship_case_beneficiary?: 'xxxx',
-        relationship_case_child?: 'xxxx',
-        relationship_case_child?: 'xxxx',
-        relationship_case_guardian?: 'xxxx',
-        relationship_case_interventor?: 'xxxx',
-        relationship_case_opponent?: 'xxxx',
-        relationship_child?: 'xxxx',
-        relationship_civil_partner?: 'xxxx',
-        relationship_customer?: 'xxxx',
-        relationship_employee?: 'xxxx',
-        relationship_employer?: 'xxxx',
-        relationship_ex_civil_partner?: 'xxxx',
-        relationship_ex_husband_wife?: 'xxxx',
-        relationship_grandparent?: 'xxxx',
-        relationship_husband_wife?: 'xxxx',
-        relationship_interested_party?: 'xxxx',
-        relationship_landlord?: 'xxxx',
-        relationship_legal_guardian?: 'xxxx',
-        relationship_locall_authority?: 'xxxx',
-        relationship_medical_professional?: 'xxxx',
-        relationship_none?: 'xxxx',
-        relationship_other_family_member?: 'xxxx',
-        relationship_parent?: 'xxxx',
-        relationship_property_owner?: 'xxxx',
-        relationship_solicitor_barrister?: 'xxxx',
-        relationship_step_parent?: 'xxxx',
-        relationship_supplier?: 'xxxx',
-        relationship_tenant?: 'xxxx',
-        relationship_to_client: 'xxxx',
-        relationship_to_client: 'xxxx',
-        type: 'xxxx',
-        relationship_to_case: 'xxxx'
+             child?: false,
+             date_of_birth: '01-01-2015',
+             name: 'Mrs Fabby Fabby',
+             opp_relationship_to_client: 'Ex Husband/ Wife',
+             opp_relationship_to_case: 'Opponent',
+             organisation: false,
+             other_party_id: 'OPPONENT_11594796',
+             other_party_type: 'PERSON',
+             person?: true,
+             relationship_agent?: false,
+             relationship_case_beneficiary?: false,
+             relationship_case_child?: false,
+             relationship_case_guardian?: false,
+             relationship_case_interventor?: false,
+             relationship_case_opponent?: true,
+             relationship_child?: false,
+             relationship_civil_partner?: false,
+             relationship_customer?: false,
+             relationship_employee?: false,
+             relationship_employer?: false,
+             relationship_ex_civil_partner?: false,
+             relationship_ex_husband_wife?: true,
+             relationship_grandparent?: false,
+             relationship_husband_wife?: false,
+             relationship_interested_party?: false,
+             relationship_landlord?: false,
+             relationship_legal_guardian?: false,
+             relationship_locall_authority?: false,
+             relationship_medical_professional?: false,
+             relationship_none?: false,
+             relationship_other_family_member?: false,
+             relationship_parent?: false,
+             relationship_property_owner?: false,
+             relationship_solicitor_barrister?: false,
+             relationship_step_parent?: false,
+             relationship_supplier?: false,
+             relationship_tenant?: false,
+             relationship_to_client: 'EX_SPOUSE',
+             relationship_to_case: 'OPP'
     end
+
 
     let(:bank_account) do
       double BankAccount,
@@ -399,7 +440,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       # allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return(opponents)
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
-      allow_any_instance_of(LegalAidApplication).to receive(:opponent_other_parties).and_return([other_party])
+      allow_any_instance_of(LegalAidApplication).to receive(:opponent_other_parties).and_return([other_party_1, other_party_2])
       allow_any_instance_of(Applicant).to receive(:bank_accounts).and_return([bank_account])
     end
 
@@ -429,15 +470,16 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
     end
 
-    # describe 'complete sequence' do
-    #   it 'runs one thing after another' do
-    #     check_initial_state
-    #     get_case_id
-    #     create_an_applicant
-    #     poll_applicant_creation
-    #     create_case
-    #   end
-    # end
+    describe 'complete sequence' do
+      it 'runs one thing after another' do
+        check_initial_state
+        get_case_id
+        create_an_applicant
+        poll_applicant_creation
+        create_case
+        poll_case_creation_result
+      end
+    end
 
     def history
       SubmissionHistory.where(submission_id: @submission.id).order(created_at: :desc).first
@@ -487,7 +529,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     def create_case
-      print 'Submitting case...'
+      print 'Submitting case... '
       @submission.process!
       expect(@submission.aasm_state).to eq 'case_submitted'
       expect(history.from_state).to eq 'applicant_ref_obtained'
@@ -495,6 +537,27 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       expect(history.success).to be true
       expect(history.details).to be_nil
       puts 'done'.green
+    end
+
+    def poll_case_creation_result
+      poll_count = 0
+      print "Polling for case creation result"
+      while @submission.aasm_state != 'case_created'
+        print '...'
+        $stdout.flush
+        poll_count += 1
+        sleep(5)
+        @submission.reload.process!
+      end
+
+      puts " case created in #{poll_count} attempts".green
+      expect(@submission.case_poll_count).to eq poll_count
+      expect(@submission.applicant_ccms_reference).not_to be_nil
+      expect(@submission.aasm_state).to eq 'case_created'
+      expect(history.from_state).to eq 'case_submitted'
+      expect(history.to_state).to eq 'case_created'
+      expect(history.success).to be true
+      expect(history.details).to be_nil
     end
   end
 

@@ -20,12 +20,13 @@ module CCMS
   #  'vehicle_registration_number'  will call the registration method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator
-    STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding|other_party)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding|other_party|opponent)_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
+    OPPONENT = /^opponent_(\S+)$/.freeze
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
@@ -106,6 +107,8 @@ module CCMS
         options[:proceeding].send(Regexp.last_match(1))
       when OTHER_PARTY
         options[:other_party].send(Regexp.last_match(1))
+      when OPPONENT
+        options[:opponent].send(Regexp.last_match(1))
       end
     end
   end

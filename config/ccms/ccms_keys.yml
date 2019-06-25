@@ -3777,7 +3777,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OPP_RELATIONSHIP_TO_CASE:
-    :value: 'opponent_relationship_to_case'
+    :value: '#opponent_opp_relationship_to_case'
     :br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Case'
     :response_type: text
     :user_defined: false
@@ -3798,7 +3798,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_ID:
-    :value: OPPONENT_11594798
+    :value: '#opponent_other_party_id'
     :br100_meaning: Other Party Id
     :response_type: text
     :user_defined: true
@@ -3844,7 +3844,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_TO_CASE:
-    :value: '#opponent_relationship_case_child?'
+    :value: '#opponent_relationship_to_case'
     :br100_meaning: Opponent relationship to case
     :response_type: text
     :user_defined: true
@@ -3880,12 +3880,12 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_TYPE:
-    :value: '#opponent_type'
+    :value: '#opponent_other_party_type'
     :br100_meaning: Other Party Type
     :response_type: text
     :user_defined: true
   OPP_RELATIONSHIP_TO_CLIENT:
-    :value: '#opponent_relationship_to_client'
+    :value: '#opponent_opp_relationship_to_client'
     :br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Client'
     :response_type: text
     :user_defined: false

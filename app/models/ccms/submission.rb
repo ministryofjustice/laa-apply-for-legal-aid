@@ -29,7 +29,7 @@ module CCMS
       when 'document_ids_obtained'
         UploadDocumentsService.call(self)
       else
-        raise CcmsError, 'Unknown state'
+        raise CcmsError, "Unknown state: #{aasm_state}"
       end
     end
 

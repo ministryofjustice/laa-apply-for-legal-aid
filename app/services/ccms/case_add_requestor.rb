@@ -25,16 +25,17 @@ module CCMS
 
     def call
       puts Rails.root.join 'spec/integration/generated/add_case_request.xml'
-      if ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
-        begin
-          File.open(Rails.root.join('spec/integration/generated/add_case_request.xml'), 'w') do |fp|
-            fp.puts request_xml
-          end
-        rescue => err
-          puts err.class
-          puts err.message
-          puts err.backtrace
+      begin
+        File.open(Rails.root.join('spec/integration/generated/add_case_request.xml'), 'w') do |fp|
+          fp.puts request_xml
         end
+      rescue => err
+        puts err.class
+        puts err.message
+        puts err.backtrace
+      end
+
+      if ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
         puts ">>>>>>>>>> CALL TO CCMS COMMENTED OUT  #{__FILE__}:#{__LINE__} <<<<<<<<<<".red
       else
         soap_client.call(:create_case_application, xml: request_xml)
@@ -397,6 +398,12 @@ module CCMS
     def generate_opponent_other_parties(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+      @legal_aid_application.opponent_other_parties.each do |oop|
+          xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', oop.other_party_id)
+          xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :opponent, opponent: oop) }
+        end
+      end
     end
 
     def generate_attributes_for(xml, entity_name, options = {})
