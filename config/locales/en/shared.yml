@@ -48,11 +48,9 @@ en:
         purchased_on_hint: For example, 31 3 1980.
       identify_types_of_outgoings_form:
         sub_heading: Select all that apply
-        or_break: or
         none_selected: None of these
       savings_and_investments_form:
         sub_heading: Select all that apply
-        or_break: or
         none_selected: None of these
       outstanding_mortgage_form:
         citizens:
@@ -175,7 +173,6 @@ en:
       types_of_income_form:
         select_all_that_apply: Select all that apply
         financial_help_examples: For example, money from a family member for rent or bills.
-        or_break: or
         none_selected: None of these
       vehicles:
         estimated_value:

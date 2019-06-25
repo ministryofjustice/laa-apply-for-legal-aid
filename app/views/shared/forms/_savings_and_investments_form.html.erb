@@ -2,7 +2,7 @@
 
 <%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: (@form.errors.present? && !@form.any_checkbox_checked?) do %>
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
     <%= govuk_fieldset_header do %>
       <h1 class="govuk-fieldset__heading govuk-!-padding-bottom-7"><%= page_title %></h1>
     <% end %>

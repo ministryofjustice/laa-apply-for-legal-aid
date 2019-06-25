@@ -116,7 +116,6 @@ en:
       show:
         h1-heading: Which types of assets do you have?
         h2-heading: Select all that apply
-        or_break: or
         none_selected: None of these
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your home?
@@ -166,7 +165,6 @@ en:
       show:
         h1-heading: What types of savings or investments do you have?
         none_selected: None of these
-        or_break: or
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?
