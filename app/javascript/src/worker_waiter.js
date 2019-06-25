@@ -1,16 +1,28 @@
-$(function() {
-  if ($(".worker-waiter").length){ waitForWorker() };
-});
+const $ = require('jquery')
+const axios = require('axios')
 
-function waitForWorker() {
-  const worker_id = $(".worker-waiter").data('worker-id');
-  const working_statuses = ['queued', 'working'];
+function waitForWorker({ poll_interval = 1000, callback = null }) {
+  if (!$('.worker-waiter').length) {
+    callback && callback()
+    return
+  }
 
-  $.getJSON(`/v1/workers/${worker_id}`, function (worker) {
-    if(working_statuses.includes(worker.status)) {
-      setTimeout(waitForWorker, 1000);
+  const worker_id = $(".worker-waiter").data('worker-id')
+  const working_statuses = ['queued', 'working']
+
+  axios.get(`/v1/workers/${worker_id}`).then(worker_response => {
+    if(working_statuses.includes(worker_response.data.status)) {
+      setTimeout(
+        () => waitForWorker({ poll_interval, callback }),
+        poll_interval
+      )
     } else {
-      location.reload();
+      window.location.reload()
+      callback && callback()
     }
-  });
+  })
 }
+
+module.exports = waitForWorker
+
+if (process.env.NODE_ENV !== 'test') $(waitForWorker)

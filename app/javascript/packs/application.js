@@ -17,6 +17,7 @@
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+require("axios")
 
 const context = require.context("../src", true, /\.js$/)
 context.keys().forEach(key => context(key))
