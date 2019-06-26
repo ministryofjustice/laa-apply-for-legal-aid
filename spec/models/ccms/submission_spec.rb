@@ -30,7 +30,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           submission.aasm_state = 'xxxxx'
           expect {
             submission.process!
-          }.to raise_error CcmsError, 'Unknown state'
+          }.to raise_error CcmsError, 'Unknown state: xxxxx'
         end
       end
 

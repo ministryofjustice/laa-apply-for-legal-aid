@@ -24,7 +24,15 @@ module CCMS
     end
 
     def call
-      puts Rails.root.join 'spec/integration/generated/add_case_request.xml'
+      save_request unless Rails.env.production?
+
+      soap_client.call(:create_case_application, xml: request_xml) unless ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
+    end
+
+    private
+
+    def save_request
+      puts "CCMS payload saved to #{Rails.root.join('spec/integration/generated/add_case_request.xml')}"
       begin
         File.open(Rails.root.join('spec/integration/generated/add_case_request.xml'), 'w') do |fp|
           fp.puts request_xml
@@ -34,18 +42,10 @@ module CCMS
         puts e.message
         puts e.backtrace
       end
-
-      if ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
-        puts ">>>>>>>>>> CALL TO CCMS COMMENTED OUT  #{__FILE__}:#{__LINE__} <<<<<<<<<<".red
-      else
-        soap_client.call(:create_case_application, xml: request_xml)
-      end
     end
 
-    private
-
     def request_xml
-      soap_envelope(namespaces).to_xml
+      @request_xml ||= soap_envelope(namespaces).to_xml
     end
 
     def soap_body(xml)

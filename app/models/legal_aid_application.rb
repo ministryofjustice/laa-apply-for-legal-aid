@@ -25,11 +25,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :dependants, dependent: :destroy
-  has_many :ccms_submissions, -> { order :created_at }, class_name: 'CCMS::Submission', dependent: :destroy do
-    def most_recent
-      last
-    end
-  end
+  has_many :ccms_submissions, class_name: 'CCMS::Submission', dependent: :destroy
+  has_one :most_recent_ccms_submission, -> { order(:created_at) }, class_name: 'CCMS::Submission'
   has_one :vehicle
 
   before_create :create_app_ref
@@ -144,16 +141,21 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   # This is here so that this method can be stubbed in the ccms payload integration tests
+  # it will be later replaced by an opponents association to load a dummy opponent for CCMS
+  # injection
   def opponents
     nil
   end
 
   # This is here so that this method can be stubbed in the ccms payload integration tests
+  # it will later be replaced with data from the HMRC integration
   def wage_slips
     []
   end
 
   # This is here so that this method can be stubbed in the ccms payload integration tests
+  # it will be later replaced by an opponents association to load a dummy opponent for CCMS
+  # injection
   def opponent_other_parties
     []
   end

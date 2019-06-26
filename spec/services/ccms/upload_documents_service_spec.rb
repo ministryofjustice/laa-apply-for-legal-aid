@@ -8,7 +8,7 @@ RSpec.describe CCMS::UploadDocumentsService do
     create :submission,
            :document_ids_obtained,
            legal_aid_application: legal_aid_application,
-           case_ccms_reference: Faker::Number.number(10),
+           case_ccms_reference: Faker::Number.number(9),
            documents: { document_id => :id_obtained }
   end
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }

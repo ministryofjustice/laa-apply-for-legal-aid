@@ -17,7 +17,7 @@ module CCMS
   # ==================
   # If the method begins with one of the following prefixes, and is not specifically defined in this class, then the
   # method name without the prefix is called on the appropriate object in the options hash, e.g.
-  #  'vehicle_registration_number'  will call the registration method on options[:vehicle] in order to get the
+  # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator
     STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding|other_party|opponent)_(\S+)$/.freeze
@@ -49,7 +49,7 @@ module CCMS
     end
 
     def application_ccms_reference_number(_options)
-      CCMS::Submission.find_by(legal_aid_application_id: @legal_aid_application.id).case_ccms_reference
+      @legal_aid_application.most_recent_ccms_submission.case_ccms_reference
     end
 
     def bank_name(options)
@@ -86,7 +86,7 @@ module CCMS
     end
 
     def submission_case_ccms_reference(_options)
-      @legal_aid_application.ccms_submissions.most_recent.case_ccms_reference
+      @legal_aid_application.most_recent_ccms_submission.case_ccms_reference
     end
 
     private
@@ -95,7 +95,7 @@ module CCMS
       STANDARD_METHOD_NAMES.match?(method)
     end
 
-    def call_standard_method(method, options)
+    def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       case method
       when BANK_REGEX
         options[:bank_acct].send(Regexp.last_match(1))

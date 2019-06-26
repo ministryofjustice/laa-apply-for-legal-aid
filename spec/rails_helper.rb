@@ -72,6 +72,9 @@ RSpec.configure do |config|
   # https://github.com/plataformatec/devise#controller-tests
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.add_setting :run_ccms_integration_specs
+  config.run_ccms_integration_specs = ENV['RUN_CCMS_INTEGRATION_SPECS'] == '1'
 end
 
 Shoulda::Matchers.configure do |config|

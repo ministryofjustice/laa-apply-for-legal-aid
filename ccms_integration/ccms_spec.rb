@@ -1,6 +1,11 @@
 require 'rails_helper'
 
-module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/LineLength, Metrics/MethodLength
+#
+# NOTE: All of the specs here are protected with if RSpec.configuration.run_ccms_integrations_specs?
+#       which means they will only run if the RUN_CCMS_INTEGRATION_SPECS environment variable is set to 1
+#
+
+module CCMS
   RSpec.describe Submission do
     let(:proceeding_type_1) do
       double ProceedingType,
@@ -130,7 +135,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
              scope_limitations: [scope_limitation_1, scope_limitation_2],
              significant_wider_public_interest: false,
              smod_applicable: 'No',
-             status: 'draftXXXXXXXX',
+             status: 'draft',
              warning_letter_sent?: false,
              work_in_scheme_1?: nil,
              x_border_disputes_lar_criteria?: false
@@ -471,21 +476,25 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
       end
 
       it 'generates the CaseAdd payload' do
-        ENV['CCMS_PAYLOAD_GENERATION_ONLY'] = '1'
-        # stub ccms case reference as we're  not going through the whole path so it won't be generated
-        allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
-        create_case
+        if RSpec.configuration.run_ccms_integration_specs?
+          ENV['CCMS_PAYLOAD_GENERATION_ONLY'] = '1'
+          # stub ccms case reference as we're  not going through the whole path so it won't be generated
+          allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
+          create_case
+        end
       end
     end
 
     describe 'complete sequence' do
       it 'runs one thing after another' do
-        check_initial_state
-        request_case_id
-        create_an_applicant
-        poll_applicant_creation
-        create_case
-        poll_case_creation_result
+        if RSpec.configuration.run_ccms_integration_specs?
+          check_initial_state
+          request_case_id
+          create_an_applicant
+          poll_applicant_creation
+          create_case
+          poll_case_creation_result
+        end
       end
     end
 
@@ -499,7 +508,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
       puts "'initialised'".green
     end
 
-    def request_case_id # rubocop:disable Metrics/AbcSize
+    def request_case_id
       print 'Getting case id... '
       @submission.process!
       expect(@submission.case_ccms_reference).not_to be_nil
@@ -510,9 +519,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
       puts @submission.case_ccms_reference.green
     end
 
-    def create_an_applicant # rubocop:disable Metrics/AbcSize
+    def create_an_applicant
       print 'Applicant submitted... '
-      expect { @submission.process! }.not_to change { @submission.case_ccms_reference }
+      expect {
+        @submission.process!
+      }.not_to change{ @submission.case_ccms_reference }
       expect(@submission.applicant_add_transaction_id).not_to be_nil
       expect(@submission.aasm_state).to eq 'applicant_submitted'
       history.reload
@@ -523,7 +534,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
       puts 'done'.green
     end
 
-    def poll_applicant_creation # rubocop:disable Metrics/AbcSize
+    def poll_applicant_creation
       print 'Polling applicant creation result... '
       expect { @submission.process! }.to change { @submission.applicant_poll_count }.by(1) while @submission.applicant_ccms_reference.nil?
 
@@ -536,7 +547,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
       puts "Applicant reference #{@submission.applicant_ccms_reference} in #{@submission.applicant_poll_count} attempts.".green
     end
 
-    def create_case # rubocop:disable Metrics/AbcSize
+    def create_case
       print 'Submitting case... '
       @submission.process!
       expect(@submission.aasm_state).to eq 'case_submitted'
@@ -547,7 +558,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/Lin
       puts 'done'.green
     end
 
-    def poll_case_creation_result # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    def poll_case_creation_result
       poll_count = 0
       print 'Polling for case creation result'
       while @submission.aasm_state != 'case_created'
