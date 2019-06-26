@@ -3,29 +3,28 @@
       back_link: { path: reset_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application), method: :patch }
     ) do %>
 
-  <h2 class="govuk-heading-m">
-    <%= t '.latest-incident-heading' %>
-  </h2>
+    <%= check_answer_change_link(
+          name: :incident_details,
+          url: providers_legal_aid_application_date_client_told_incident_path,
+          question: t('.latest-incident-heading')
+        ) %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
+
+    <%= check_answer_no_link_bold(
           name: :notification_of_latest_incident,
-          url: providers_legal_aid_application_date_client_told_incident_path,
           question: t('.items.notification_of_latest_incident'),
           answer: @incident&.told_on
         ) %>
   </dl>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-  <%= check_answer_link(
-        name: :date_of_latest_incident,
-        url: providers_legal_aid_application_date_client_told_incident_path,
-        question: t('.items.date_of_latest_incident'),
-        answer: @incident&.occurred_on
-      ) %>
+    <%= check_answer_no_link_bold(
+          name: :date_of_latest_incident,
+          question: t('.items.date_of_latest_incident'),
+          answer: @incident&.occurred_on
+        ) %>
   </dl>
-
-  <div class='govuk-body'><%= simple_format @incident&.details %></div>
 
   <div class="govuk-!-padding-bottom-6"></div>
 
