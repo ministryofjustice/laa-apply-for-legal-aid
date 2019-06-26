@@ -74,7 +74,7 @@
   <div class="govuk-!-padding-bottom-6"></div>
 
   <h2 class="govuk-heading-m">
-    <%= t '.merits-heading' %>
+    <%= t '.case-details-heading' %>
   </h2>
 
   <div class='govuk-body'><%= simple_format @merits.details_of_proceedings_before_the_court %></div>
@@ -84,7 +84,7 @@
           name: :statement_of_case,
           url: providers_legal_aid_application_statement_of_case_path,
           question: t('.items.statement_of_case'),
-          answer: nil
+          answer: @statement_of_case&.updated_at.strftime('%d %b %Y')
         ) %>
   </dl>
 
@@ -92,9 +92,18 @@
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
-          name: :prospects_of_success,
+          name: :success_likely,
           url: providers_legal_aid_application_success_likely_index_path,
           question: t('.items.prospects_of_success'),
+          answer: yes_no(@merits.success_likely)
+        ) %>
+  </dl>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_link(
+          name: :success_prospect,
+          url: providers_legal_aid_application_success_likely_index_path,
+          question: t('.items.success_prospect'),
           answer: t("shared.forms.success_prospect.success_prospect_item.#{@merits.success_prospect}")
         ) %>
   </dl>
