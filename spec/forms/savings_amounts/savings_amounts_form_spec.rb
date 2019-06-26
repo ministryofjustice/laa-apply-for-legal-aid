@@ -143,7 +143,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       context 'amounts are not valid' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
 
-        it 'empties amounts' do
+        it 'it empties amounts' do
           subject.save
           savings_amount.reload
           attributes.each do |attr|
@@ -158,7 +158,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
       end
 
-      context 'none of these check box is checked' do
+      context 'if none of the check boxes are checked' do
         let(:check_box_params) do
           boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
           boxes[:check_box_none_selected] = ''

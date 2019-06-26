@@ -1,11 +1,9 @@
 <%= page_template page_title: t('.h1-heading'), template: :basic, show_errors_for: @form do %>
-    <%= render partial: 'shared/forms/savings_and_investments_form',
-               locals: {
-                 model: @form,
-                 show_draft: true,
-                 bank_accounts: [],
-                 or_break: t('generic.or'),
-                 none_selected: t('.none_selected'),
-                 form_path: providers_legal_aid_application_savings_and_investment_path(@legal_aid_application)
-               } %>
+    <%= render  'shared/forms/savings_and_investments_form',
+                model: @form,
+                show_draft: true,
+                bank_accounts: [],
+                or_break: t('generic.or'),
+                none_selected: t('.none_selected'),
+                form_path: providers_legal_aid_application_savings_and_investment_path(@legal_aid_application) %>
 <% end %>
