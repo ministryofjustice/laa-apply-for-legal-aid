@@ -9,10 +9,10 @@ module Incidents
     attr_accessor :occurred_year, :occurred_month, :occurred_day
     attr_writer :occurred_on
 
-    validates :told_on, presence: true, unless: :draft_and_not_partially_complete_date?
+    validates :told_on, presence: true, unless: :draft_and_not_partially_complete_told_on_date?
     validates :told_on, date: { not_in_the_future: true }, allow_nil: true
 
-    validates :occurred_on, presence: true, unless: :draft_and_not_partially_complete_date?
+    validates :occurred_on, presence: true, unless: :draft_and_not_partially_complete_occurred_on_date?
     validates :occurred_on, date: { not_in_the_future: true }, allow_nil: true
 
     validate :occurred_on_before_told_on
@@ -59,8 +59,12 @@ module Incidents
       (told_on_date_fields.fields + occurred_on_date_fields.fields)
     end
 
-    def draft_and_not_partially_complete_date?
+    def draft_and_not_partially_complete_told_on_date?
       draft? && !told_on_date_fields.partially_complete?
+    end
+
+    def draft_and_not_partially_complete_occurred_on_date?
+      draft? && !occurred_on_date_fields.partially_complete?
     end
 
     def told_on_date_fields

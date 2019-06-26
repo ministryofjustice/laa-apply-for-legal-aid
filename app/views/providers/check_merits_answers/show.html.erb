@@ -25,15 +25,6 @@
       ) %>
   </dl>
 
-  <%# <!-- <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
-          name: :details_of_latest_incident,
-          url: providers_legal_aid_application_details_latest_incident_path,
-          question: t('.items.details_of_latest_incident'),
-          answer: nil
-        ) %>
-  </dl> --> %>
-
   <div class='govuk-body'><%= simple_format @incident&.details %></div>
 
   <div class="govuk-!-padding-bottom-6"></div>
