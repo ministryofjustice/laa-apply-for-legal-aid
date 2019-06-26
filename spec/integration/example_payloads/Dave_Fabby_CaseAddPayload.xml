@@ -17,7 +17,7 @@
       <ns6:UserRole>EXTERNAL</ns6:UserRole>
       <ns6:TimeStamp>2019-04-01T16:04:57.039</ns6:TimeStamp>
    </ns6:HeaderRQ>
-   <ns1:Case>
+     <ns1:Case>
       <ns2:CaseReferenceNumber>300000333864</ns2:CaseReferenceNumber>
       <ns2:CaseDetails>
          <ns2:ApplicationDetails>

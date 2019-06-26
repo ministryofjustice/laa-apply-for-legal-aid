@@ -29,10 +29,10 @@ module CCMS
         File.open(Rails.root.join('spec/integration/generated/add_case_request.xml'), 'w') do |fp|
           fp.puts request_xml
         end
-      rescue => err
-        puts err.class
-        puts err.message
-        puts err.backtrace
+      rescue StandardError => e
+        puts e.class
+        puts e.message
+        puts e.backtrace
       end
 
       if ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
@@ -151,14 +151,15 @@ module CCMS
     end
 
     def generate_provider_details(xml)
-      xml.__send__('ns2:ProviderCaseReferenceNumber', 'CCMS_Apply_Test_Case') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
-      xml.__send__('ns2:ProviderFirmID', 19_148) # TODO: insert provider.firm_id when it is available in Apply
-      xml.__send__('ns2:ProviderOfficeID', 137_570) # TODO: insert provider.office_id when it is available in Apply
+      provider = @legal_aid_application.provider
+      xml.__send__('ns2:ProviderCaseReferenceNumber', 'PC4') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
+      xml.__send__('ns2:ProviderFirmID', provider.firm_id)
+      xml.__send__('ns2:ProviderOfficeID', provider.office_id)
       xml.__send__('ns2:ContactUserID') do
-        xml.__send__('ns0:UserLoginID', 4_953_649) # TODO: insert provider.user_login_id when it is available in Apply
+        xml.__send__('ns0:UserLoginID', provider.user_login_id)
       end
-      xml.__send__('ns2:SupervisorContactID', '7008010') # TODO: insert provider.supervisor_user_id when it is available in Apply
-      xml.__send__('ns2:FeeEarnerContactID', 4_925_152) # TODO: insert fee_earner_contact_id when it is available in Apply
+      xml.__send__('ns2:SupervisorContactID', provider.supervisor_contact_id)
+      xml.__send__('ns2:FeeEarnerContactID', provider.fee_earner_contact_id)
     end
 
     def generate_category_of_law(xml)
@@ -304,10 +305,10 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
       xml.__send__('ns0:Instances') do
-        @legal_aid_application.opponent_other_parties.each do |party|
-          xml.__send__('ns0:InstanceLabel', party.other_party_id)
+        @legal_aid_application.opponents.each do |opponent|
+          xml.__send__('ns0:InstanceLabel', opponent.other_party_id)
           xml.__send__('ns0:Attributes') do
-            generate_attributes_for(xml, :other_party, other_party: party)
+            generate_attributes_for(xml, :other_party, other_party: opponent)
           end
         end
       end
@@ -399,7 +400,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
       @legal_aid_application.opponent_other_parties.each do |oop|
-          xml.__send__('ns0:Instances') do
+        xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', oop.other_party_id)
           xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :opponent, opponent: oop) }
         end

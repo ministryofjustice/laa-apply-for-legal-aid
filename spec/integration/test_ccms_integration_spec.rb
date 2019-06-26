@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module CCMS # rubocop:disable Metrics/ModuleLength
+module CCMS # rubocop:disable Metrics/ModuleLength, Metrics/AbcSize, Metrics/LineLength, Metrics/MethodLength
   RSpec.describe Submission do
     let(:proceeding_type_1) do
       double ProceedingType,
@@ -271,23 +271,23 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     let(:scope_limitation_1) do
-        double 'ScopeLimitation',
-               limitation: 'CV118',
-               wording: 'Limited to all steps up to and including the hearing on 01/04/2019',
-               delegated_functions_apply: true
+      double 'ScopeLimitation',
+             limitation: 'CV118',
+             wording: 'Limited to all steps up to and including the hearing on 01/04/2019',
+             delegated_functions_apply: true
     end
 
     let(:scope_limitation_2) do
-        double 'ScopeLimitation',
-               limitation: 'AA019',
-               wording: 'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).',
-               delegated_functions_apply: false
+      double 'ScopeLimitation',
+             limitation: 'AA019',
+             wording: scope_limitation_wording_2,
+             delegated_functions_apply: false
     end
 
     let(:scope_limitation_3) do
       double 'ScopeLimitation',
              limitation: 'FM049',
-             wording: 'Limited to all steps up to and including trial/final hearing and any action necessary to implement (but not enforce) the judgment or order.',
+             wording: scope_limitation_wording_3,
              delegated_functions_apply: false
     end
 
@@ -314,48 +314,48 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              relation_to_case: 'CHILD'
     end
 
-                    let(:other_party_1) do
-                      double 'OtherParty',
-                        child?: true,
-                        date_of_birth: '01-01-2015',
-                        name: 'Master BoBo Fabby',
-                        opp_relationship_to_client: 'Child',
-                        opp_relationship_to_case: 'Child',
-                        organisation: false,
-                        other_party_id: 'OPPONENT_11594798',
-                        other_party_type: 'PERSON',
-                        person?: true,
-                        relationship_agent?: false,
-                        relationship_case_beneficiary?: false,
-                        relationship_case_child?: true,
-                        relationship_case_guardian?: false,
-                        relationship_case_interventor?: false,
-                        relationship_case_opponent?: false,
-                        relationship_child?: true,
-                        relationship_civil_partner?: false,
-                        relationship_customer?: false,
-                        relationship_employee?: false,
-                        relationship_employer?: false,
-                        relationship_ex_civil_partner?: false,
-                        relationship_ex_husband_wife?: false,
-                        relationship_grandparent?: false,
-                        relationship_husband_wife?: false,
-                        relationship_interested_party?: false,
-                        relationship_landlord?: false,
-                        relationship_legal_guardian?: false,
-                        relationship_locall_authority?: false,
-                        relationship_medical_professional?: false,
-                        relationship_none?: false,
-                        relationship_other_family_member?: false,
-                        relationship_parent?: false,
-                        relationship_property_owner?: false,
-                        relationship_solicitor_barrister?: false,
-                        relationship_step_parent?: false,
-                        relationship_supplier?: false,
-                        relationship_tenant?: false,
-                        relationship_to_client: 'CHILD',
-                        relationship_to_case: 'CHILD'
-                    end
+    let(:other_party_1) do
+      double 'OtherParty',
+             child?: true,
+             date_of_birth: '01-01-2015',
+             name: 'Master BoBo Fabby',
+             opp_relationship_to_client: 'Child',
+             opp_relationship_to_case: 'Child',
+             organisation: false,
+             other_party_id: 'OPPONENT_11594798',
+             other_party_type: 'PERSON',
+             person?: true,
+             relationship_agent?: false,
+             relationship_case_beneficiary?: false,
+             relationship_case_child?: true,
+             relationship_case_guardian?: false,
+             relationship_case_interventor?: false,
+             relationship_case_opponent?: false,
+             relationship_child?: true,
+             relationship_civil_partner?: false,
+             relationship_customer?: false,
+             relationship_employee?: false,
+             relationship_employer?: false,
+             relationship_ex_civil_partner?: false,
+             relationship_ex_husband_wife?: false,
+             relationship_grandparent?: false,
+             relationship_husband_wife?: false,
+             relationship_interested_party?: false,
+             relationship_landlord?: false,
+             relationship_legal_guardian?: false,
+             relationship_locall_authority?: false,
+             relationship_medical_professional?: false,
+             relationship_none?: false,
+             relationship_other_family_member?: false,
+             relationship_parent?: false,
+             relationship_property_owner?: false,
+             relationship_solicitor_barrister?: false,
+             relationship_step_parent?: false,
+             relationship_supplier?: false,
+             relationship_tenant?: false,
+             relationship_to_client: 'CHILD',
+             relationship_to_case: 'CHILD'
+    end
 
     let(:other_party_2) do
       double 'OtherParty',
@@ -400,7 +400,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              relationship_to_case: 'OPP'
     end
 
-
     let(:bank_account) do
       double BankAccount,
              bank_provider: bank_provider,
@@ -420,7 +419,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
     let(:vehicle) do
       double Vehicle,
-             purchased_on: Date.new(2015,12,1),
+             purchased_on: Date.new(2015, 12, 1),
              used_regularly?: true,
              estimated_value: 5_000.0,
              payment_remaining: 0.0
@@ -435,12 +434,22 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              description: '300000333864:EMPLOYMENT_CLIENT_001:CLI_NON_HM_WAGE_SLIP_001'
     end
 
+    let(:provider) do
+      double 'Provider',
+             firm_id: 22_381,
+             office_id: 81_693,
+             user_login_id: 2_016_472,
+             supervisor_contact_id: 3_982_723,
+             fee_earner_contact_id: 34_419
+    end
+
     before do
       allow_any_instance_of(LegalAidApplication).to receive(:proceeding_types).and_return([proceeding_type_1, proceeding_type_2])
-      # allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return(opponents)
+      allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2])
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
       allow_any_instance_of(LegalAidApplication).to receive(:opponent_other_parties).and_return([other_party_1, other_party_2])
+      allow_any_instance_of(LegalAidApplication).to receive(:provider).and_return(provider)
       allow_any_instance_of(Applicant).to receive(:bank_accounts).and_return([bank_account])
     end
 
@@ -461,7 +470,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         @submission.aasm_state = 'applicant_ref_obtained'
       end
 
-
       it 'generates the CaseAdd payload' do
         ENV['CCMS_PAYLOAD_GENERATION_ONLY'] = '1'
         # stub ccms case reference as we're  not going through the whole path so it won't be generated
@@ -473,7 +481,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     describe 'complete sequence' do
       it 'runs one thing after another' do
         check_initial_state
-        get_case_id
+        request_case_id
         create_an_applicant
         poll_applicant_creation
         create_case
@@ -486,12 +494,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     def check_initial_state
-      print "checking initial state.... "
+      print 'checking initial state.... '
       expect(@submission.aasm_state).to eq 'initialised'
       puts "'initialised'".green
     end
 
-    def get_case_id
+    def request_case_id # rubocop:disable Metrics/AbcSize
       print 'Getting case id... '
       @submission.process!
       expect(@submission.case_ccms_reference).not_to be_nil
@@ -502,7 +510,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       puts @submission.case_ccms_reference.green
     end
 
-    def create_an_applicant
+    def create_an_applicant # rubocop:disable Metrics/AbcSize
       print 'Applicant submitted... '
       expect { @submission.process! }.not_to change { @submission.case_ccms_reference }
       expect(@submission.applicant_add_transaction_id).not_to be_nil
@@ -515,7 +523,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       puts 'done'.green
     end
 
-    def poll_applicant_creation
+    def poll_applicant_creation # rubocop:disable Metrics/AbcSize
       print 'Polling applicant creation result... '
       expect { @submission.process! }.to change { @submission.applicant_poll_count }.by(1) while @submission.applicant_ccms_reference.nil?
 
@@ -528,7 +536,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       puts "Applicant reference #{@submission.applicant_ccms_reference} in #{@submission.applicant_poll_count} attempts.".green
     end
 
-    def create_case
+    def create_case # rubocop:disable Metrics/AbcSize
       print 'Submitting case... '
       @submission.process!
       expect(@submission.aasm_state).to eq 'case_submitted'
@@ -539,9 +547,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       puts 'done'.green
     end
 
-    def poll_case_creation_result
+    def poll_case_creation_result # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       poll_count = 0
-      print "Polling for case creation result"
+      print 'Polling for case creation result'
       while @submission.aasm_state != 'case_created'
         print '...'
         $stdout.flush
@@ -559,117 +567,128 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       expect(history.success).to be true
       expect(history.details).to be_nil
     end
+
+    def scope_limitation_wording_2
+      'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to ' \
+        'and including obtaining and serving a final order and in the event of breach ' \
+        'leading to the exercise of a power of arrest to representation on the ' \
+        'consideration of the breach by the court (but excluding applying for a warrant ' \
+        'of arrest, if not attached, and representation in contempt proceedings).'
+    end
+
+    def scope_limitation_wording_3
+      'Limited to all steps up to and including trial/final hearing and any action ' \
+        'necessary to implement (but not enforce) the judgment or order.'
+    end
   end
 
-
-
-    #   describe 'initial state' do
-    #     it 'creates a submission in the initial state' do
-    #       expect(@submission.aasm_state).to eq 'initialised'
-    #     end
-    #   end
-    #
-    #   describe 'getting a case id' do
-    #     it 'stores the reference number, updates the state, and writes a history record' do
-    #       @submission.process!
-    #       expect(@submission.case_ccms_reference).not_to be_nil
-    #       expect(@submission.aasm_state).to eq 'case_ref_obtained'
-    #       expect(history.from_state).to eq 'initialised'
-    #       expect(history.to_state).to eq 'case_ref_obtained'
-    #       expect(history.success).to be true
-    #       expect(history.details).to be_nil
-    #     end
-    #   end
-    #
-    #   describe 'creating an applicant' do
-    #     it 'stores the transaction_id, updates the state and writes a history record' do
-    #       expect { @submission.process! }.not_to change { @submission.case_ccms_reference }
-    #       expect(@submission.applicant_add_transaction_id).not_to be_nil
-    #       expect(@submission.aasm_state).to eq 'applicant_submitted'
-    #       expect(history.from_state).to eq 'case_ref_obtained'
-    #       expect(history.to_state).to eq 'applicant_submitted'
-    #       expect(history.success).to be true
-    #       expect(history.details).to be_nil
-    #     end
-    #   end
-    #
-    #   describe 'polling for applicant creation' do
-    #     it 'stores the applicant_id, updates the state and writes a history record' do
-    #       expect { @submission.process! }.to change { @submission.applicant_poll_count }.by(1) while @submission.applicant_ccms_reference.nil?
-    #
-    #       expect(@submission.applicant_ccms_reference).not_to be_nil
-    #       expect(@submission.aasm_state).to eq 'applicant_ref_obtained'
-    #       expect(history.from_state).to eq 'applicant_submitted'
-    #       expect(history.to_state).to eq 'applicant_ref_obtained'
-    #       expect(history.success).to be true
-    #       expect(history.details).to be_nil
-    #     end
-    #   end
-    #
-    #   describe 'creating a case' do
-    #     it 'stores the transaction_id, updates the state and writes a history record' do
-    #       @submission.process!
-    #       expect(@submission.aasm_state).to eq 'case_submitted'
-    #       expect(history.from_state).to eq 'applicant_ref_obtained'
-    #       expect(history.to_state).to eq 'case_submitted'
-    #       expect(history.success).to be true
-    #       expect(history.details).to be_nil
-    #     end
-    #   end
-    #
-    #   describe 'polling for case creation' do
-    #     it 'updates the state and writes a history record' do
-    #       while @submission.aasm_state != 'case_created'
-    #         sleep(10)
-    #         expect { @submission.process! }.to change { @submission.case_poll_count }.by(1)
-    #       end
-    #
-    #       expect(@submission.applicant_ccms_reference).not_to be_nil
-    #       expect(@submission.aasm_state).to eq 'case_created'
-    #       expect(history.from_state).to eq 'case_submitted'
-    #       expect(history.to_state).to eq 'case_created'
-    #       expect(history.success).to be true
-    #       expect(history.details).to be_nil
-    #     end
-    #   end
-    #
-    #   describe 'getting document ids' do
-    #     # context 'there are no documents' do
-    #     #   it 'updates the state and writes a history record' do
-    #     #     @submission.process!
-    #     #     expect(@submission.documents).to be_empty
-    #     #     expect(@submission.aasm_state).to eq 'completed'
-    #     #     expect(history.from_state).to eq 'case_created'
-    #     #     expect(history.to_state).to eq 'completed'
-    #     #     expect(history.success).to be true
-    #     #     expect(history.details).to be_nil
-    #     #   end
-    #     # end
-    #
-    #     context 'there are documents' do
-    #       it 'populates the document list, stores document_ids, updates the state and writes a history record' do
-    #         @submission.process!
-    #         expect(@submission.documents).to_not be_empty
-    #         expect(@submission.documents.values[0]).to eq :id_obtained
-    #         expect(@submission.aasm_state).to eq 'document_ids_obtained'
-    #         expect(history.from_state).to eq 'case_created'
-    #         expect(history.to_state).to eq 'document_ids_obtained'
-    #         expect(history.success).to be true
-    #         expect(history.details).to be_nil
-    #       end
-    #     end
-    #
-    #     describe 'uploading documents' do
-    #       it 'updates the state and writes a history record' do
-    #         @submission.process!
-    #         expect(@submission.documents.values[0]).to eq :uploaded
-    #         expect(@submission.aasm_state).to eq 'completed'
-    #         expect(history.from_state).to eq 'document_ids_obtained'
-    #         expect(history.to_state).to eq 'completed'
-    #         expect(history.success).to be true
-    #         expect(history.details).to be_nil
-    #       end
-    #     end
-    #   end
-    # end
+  #   describe 'initial state' do
+  #     it 'creates a submission in the initial state' do
+  #       expect(@submission.aasm_state).to eq 'initialised'
+  #     end
+  #   end
+  #
+  #   describe 'getting a case id' do
+  #     it 'stores the reference number, updates the state, and writes a history record' do
+  #       @submission.process!
+  #       expect(@submission.case_ccms_reference).not_to be_nil
+  #       expect(@submission.aasm_state).to eq 'case_ref_obtained'
+  #       expect(history.from_state).to eq 'initialised'
+  #       expect(history.to_state).to eq 'case_ref_obtained'
+  #       expect(history.success).to be true
+  #       expect(history.details).to be_nil
+  #     end
+  #   end
+  #
+  #   describe 'creating an applicant' do
+  #     it 'stores the transaction_id, updates the state and writes a history record' do
+  #       expect { @submission.process! }.not_to change { @submission.case_ccms_reference }
+  #       expect(@submission.applicant_add_transaction_id).not_to be_nil
+  #       expect(@submission.aasm_state).to eq 'applicant_submitted'
+  #       expect(history.from_state).to eq 'case_ref_obtained'
+  #       expect(history.to_state).to eq 'applicant_submitted'
+  #       expect(history.success).to be true
+  #       expect(history.details).to be_nil
+  #     end
+  #   end
+  #
+  #   describe 'polling for applicant creation' do
+  #     it 'stores the applicant_id, updates the state and writes a history record' do
+  #       expect { @submission.process! }.to change { @submission.applicant_poll_count }.by(1) while @submission.applicant_ccms_reference.nil?
+  #
+  #       expect(@submission.applicant_ccms_reference).not_to be_nil
+  #       expect(@submission.aasm_state).to eq 'applicant_ref_obtained'
+  #       expect(history.from_state).to eq 'applicant_submitted'
+  #       expect(history.to_state).to eq 'applicant_ref_obtained'
+  #       expect(history.success).to be true
+  #       expect(history.details).to be_nil
+  #     end
+  #   end
+  #
+  #   describe 'creating a case' do
+  #     it 'stores the transaction_id, updates the state and writes a history record' do
+  #       @submission.process!
+  #       expect(@submission.aasm_state).to eq 'case_submitted'
+  #       expect(history.from_state).to eq 'applicant_ref_obtained'
+  #       expect(history.to_state).to eq 'case_submitted'
+  #       expect(history.success).to be true
+  #       expect(history.details).to be_nil
+  #     end
+  #   end
+  #
+  #   describe 'polling for case creation' do
+  #     it 'updates the state and writes a history record' do
+  #       while @submission.aasm_state != 'case_created'
+  #         sleep(10)
+  #         expect { @submission.process! }.to change { @submission.case_poll_count }.by(1)
+  #       end
+  #
+  #       expect(@submission.applicant_ccms_reference).not_to be_nil
+  #       expect(@submission.aasm_state).to eq 'case_created'
+  #       expect(history.from_state).to eq 'case_submitted'
+  #       expect(history.to_state).to eq 'case_created'
+  #       expect(history.success).to be true
+  #       expect(history.details).to be_nil
+  #     end
+  #   end
+  #
+  #   describe 'getting document ids' do
+  #     # context 'there are no documents' do
+  #     #   it 'updates the state and writes a history record' do
+  #     #     @submission.process!
+  #     #     expect(@submission.documents).to be_empty
+  #     #     expect(@submission.aasm_state).to eq 'completed'
+  #     #     expect(history.from_state).to eq 'case_created'
+  #     #     expect(history.to_state).to eq 'completed'
+  #     #     expect(history.success).to be true
+  #     #     expect(history.details).to be_nil
+  #     #   end
+  #     # end
+  #
+  #     context 'there are documents' do
+  #       it 'populates the document list, stores document_ids, updates the state and writes a history record' do
+  #         @submission.process!
+  #         expect(@submission.documents).to_not be_empty
+  #         expect(@submission.documents.values[0]).to eq :id_obtained
+  #         expect(@submission.aasm_state).to eq 'document_ids_obtained'
+  #         expect(history.from_state).to eq 'case_created'
+  #         expect(history.to_state).to eq 'document_ids_obtained'
+  #         expect(history.success).to be true
+  #         expect(history.details).to be_nil
+  #       end
+  #     end
+  #
+  #     describe 'uploading documents' do
+  #       it 'updates the state and writes a history record' do
+  #         @submission.process!
+  #         expect(@submission.documents.values[0]).to eq :uploaded
+  #         expect(@submission.aasm_state).to eq 'completed'
+  #         expect(history.from_state).to eq 'document_ids_obtained'
+  #         expect(history.to_state).to eq 'completed'
+  #         expect(history.success).to be true
+  #         expect(history.details).to be_nil
+  #       end
+  #     end
+  #   end
+  # end
 end
