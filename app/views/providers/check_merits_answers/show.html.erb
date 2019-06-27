@@ -34,7 +34,7 @@
           question: t('.respondent-heading')
         ) %>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2" id="THISONE">
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link_bold(
           name: :understands_terms_of_court_order,
           question: t('.items.understands_terms_of_court_order'),
@@ -84,7 +84,7 @@
           name: :statement_of_case,
           url: providers_legal_aid_application_statement_of_case_path,
           question: t('.items.statement_of_case'),
-          answer: @statement_of_case&.updated_at.strftime('%d %b %Y')
+          answer: nil
         ) %>
   </dl>
 
@@ -105,7 +105,7 @@
           url: providers_legal_aid_application_success_likely_index_path,
           question: t('.items.success_prospect'),
           answer: t("shared.forms.success_prospect.success_prospect_item.#{@merits.success_prospect}")
-        ) %>
+        ) unless @merits.success_likely? %>
   </dl>
 
   <div class='govuk-body'><%= simple_format @merits.success_prospect_details %></div>
