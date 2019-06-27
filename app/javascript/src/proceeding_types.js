@@ -1,3 +1,5 @@
+import * as JsSearch from 'js-search';
+
 $(function() {
   if ($("#proceeding-search-input").length){ searchProceedingTypes() };
 });

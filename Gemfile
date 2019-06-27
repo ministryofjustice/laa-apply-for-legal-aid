@@ -6,7 +6,6 @@ ruby '2.5.3'
 gem 'aasm', '~> 5.0.5'
 gem 'active_model_serializers', '~> 0.10.9'
 gem 'govuk_notify_rails', '~> 2.1.0'
-gem 'jquery-rails', '~> 4.3'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 3.12'
@@ -16,7 +15,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'savon', '~> 2.12.0'
 gem 'sentry-raven'
 gem 'simple_command', '~> 0.0.9'
-gem 'uglifier', '>= 1.3.0'
 gem 'webdack-uuid_migration', '~> 1.2.0'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -71,6 +69,8 @@ gem 'prometheus_exporter'
 # Generating Fake applications for tests and admin user
 gem 'factory_bot_rails'
 gem 'faker', '>=1.9.1'
+
+gem 'webpacker', '~> 4.x'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'

@@ -49,3 +49,9 @@ config/master.key
 
 # Ignore webhint reports
 hint-report/
+
+/public/packs
+/public/packs-test
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
