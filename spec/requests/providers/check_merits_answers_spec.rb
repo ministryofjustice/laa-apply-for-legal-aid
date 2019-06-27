@@ -34,22 +34,30 @@ RSpec.describe 'check merits answers requests', type: :request do
       it 'displays the correct questions' do
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.notification_of_latest_incident'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.date_of_latest_incident'))
-        # expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.details_of_latest_incident'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.understands_terms_of_court_order'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.warning_letter_sent'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.police_notified'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.bail_conditions_set'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.statement_of_case'))
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.prospects_of_success'))
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.success_prospect'))
       end
 
       it 'displays the correct URLs for changing values' do
-        expect(response.body).to have_change_link(:notification_of_latest_incident, providers_legal_aid_application_date_client_told_incident_path(application))
-        expect(response.body).to have_change_link(:date_of_latest_incident, providers_legal_aid_application_date_client_told_incident_path(application))
-        # expect(response.body).to have_change_link(:details_of_latest_incident, providers_legal_aid_application_details_latest_incident_path(application))
+        expect(response.body).to have_change_link(:incident_details, providers_legal_aid_application_date_client_told_incident_path)
         expect(response.body).to have_change_link(:respondent_details, providers_legal_aid_application_respondent_path)
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
-        expect(response.body).to have_change_link(:prospects_of_success, providers_legal_aid_application_success_likely_index_path(application))
+        expect(response.body).to have_change_link(:success_likely, providers_legal_aid_application_success_likely_index_path)
+      end
+
+      it 'displays the question When did your client tell you about the latest domestic abuse incident' do
+        expect(response.body).to include(I18n.t('shared.forms.date_input_fields.told_on_label'))
+        expect(response.body).to include(application.latest_incident.told_on.to_s)
+      end
+
+      it 'displays the question When did the incident occur?' do
+        expect(response.body).to include(I18n.t('shared.forms.date_input_fields.occurred_on_label'))
+        expect(response.body).to include(application.latest_incident.occurred_on.to_s)
       end
 
       it 'displays the details of wether the respondent understands the terms of court order' do

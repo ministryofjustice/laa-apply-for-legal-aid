@@ -89,7 +89,7 @@ en:
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
           notification_of_latest_incident: When did your client tell you about the latest domestic abuse incident?
-          date_of_latest_incident: When did the latest incident occur?
+          date_of_latest_incident: When did the incident occur?
           details_of_latest_incident: What happened during the incident?
     check_passported_answers:
       show:
