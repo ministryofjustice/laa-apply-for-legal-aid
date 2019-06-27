@@ -4,6 +4,8 @@
 #       To prevent this, restart your server after modifying this file.
 #
 class SamlSessionsController < Devise::SamlSessionsController
+  after_action :fetch_provider_details, only: :create
+
   def destroy
     sign_out current_provider
     if IdPSettingsAdapter.mock_saml?
@@ -14,6 +16,10 @@ class SamlSessionsController < Devise::SamlSessionsController
   end
 
   private
+
+  def fetch_provider_details
+    current_provider.retrieve_details
+  end
 
   # :nocov:
   def set_flash_message(key, kind, options = {})

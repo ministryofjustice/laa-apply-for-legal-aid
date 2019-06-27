@@ -41,6 +41,9 @@ module LaaApplyForLegalAid
     config.x.admin_portal.allow_create_test_applications = ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS'] == 'true'
     config.x.admin_portal.password = ENV['ADMIN_PASSWORD']
 
+    config.x.provider_details.url  = ENV['PROVIDER_DETAILS_URL']
+    config.x.provider_details.mock = ENV['PROVIDER_DETAILS_MOCK'] != 'false' # true by default
+
     config.x.metrics_service_host = ENV.fetch('METRICS_SERVICE_HOST', 'localhost')
 
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'

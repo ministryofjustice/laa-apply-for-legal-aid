@@ -4,4 +4,9 @@ class Provider < ApplicationRecord
   serialize :offices
 
   has_many :legal_aid_applications
+
+  def retrieve_details
+    details = ProviderDetailsRetriever.call(username)
+    update!(details_response: details)
+  end
 end
