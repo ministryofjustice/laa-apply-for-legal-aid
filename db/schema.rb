@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_17_103359) do
+ActiveRecord::Schema.define(version: 2019_06_28_120413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_103359) do
     t.boolean "used_delegated_functions"
     t.date "substantive_application_deadline_on"
     t.boolean "substantive_application"
+    t.boolean "has_dependants"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
