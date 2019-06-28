@@ -22,6 +22,10 @@ module Flowable
     delegate :forward_path, to: :flow_service
     helper_method :forward_path, :journey_type
 
+    def flow_param(flow_param)
+      @flow_param = flow_param
+    end
+
     def go_forward
       if path?(forward_path)
         redirect_to forward_path
@@ -34,7 +38,8 @@ module Flowable
       @flow_service ||= Flow::BaseFlowService.flow_service_for(
         journey_type,
         legal_aid_application: legal_aid_application,
-        current_step: current_step
+        current_step: current_step,
+        params: @flow_param
       )
     end
 

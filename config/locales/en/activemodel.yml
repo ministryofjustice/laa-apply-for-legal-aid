@@ -30,6 +30,11 @@ en:
         first_name: First name
         last_name: Last name
         national_insurance_number: National Insurance number
+      dependant:
+        dob_day: Day
+        dob_month: Month
+        dob_year: Year
+        name: Name
       incident:
         told_day: Day
         told_month: Month
@@ -105,6 +110,15 @@ en:
           attributes:
             code:
               blank: A proceeding must be selected
+        dependant:
+          attributes:
+            name:
+              blank: Enter a name
+            date_of_birth:
+              blank: Enter a valid date of birth
+              date_is_in_the_future: Date of birth must be in the past
+              date_not_valid: Enter a valid date of birth
+              earliest_allowed_date: Date of birth cannot be before %{date}
         incident:
           attributes:
             told_on:

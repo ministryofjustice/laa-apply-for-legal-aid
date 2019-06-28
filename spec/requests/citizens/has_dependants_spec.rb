@@ -25,7 +25,7 @@ RSpec.describe 'citizen own home requests', type: :request do
 
       context 'yes' do
         it 'redirects to the add dependant details page' do
-          expect(response.body).to include '[PLACEHOLDER] Dependant details'
+          expect(response).to redirect_to(new_citizens_dependant_path)
         end
       end
 

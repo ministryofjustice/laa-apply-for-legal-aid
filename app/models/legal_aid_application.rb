@@ -24,6 +24,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :restrictions, through: :legal_aid_application_restrictions
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
+  has_many :dependants, dependent: :destroy
   has_one :vehicle
 
   before_create :create_app_ref
@@ -131,6 +132,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
       checking_passported_answers? ||
       checking_merits_answers? ||
       provider_checking_citizens_means_answers?
+  end
+
+  def submission_date
+    transaction_period_finish_at.to_date
   end
 
   private

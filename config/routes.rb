@@ -78,6 +78,8 @@ Rails.application.routes.draw do
     end
     resource :means_test_result, only: [:show]
     resource :declaration, only: %i[show update]
+    resources :dependants, only: %i[new create]
+    resources :dependant_details, only: %i[show update]
   end
 
   namespace :providers do
