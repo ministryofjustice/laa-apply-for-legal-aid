@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       patch :reset, on: :collection
       patch :continue, on: :collection
     end
+    resource :has_dependants, only: %i[show update]
     resource :identify_types_of_income, only: %i[show update]
     resource :identify_types_of_outgoing, only: %i[show update]
     resources :income_summary, only: :index

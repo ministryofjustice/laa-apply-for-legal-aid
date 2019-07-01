@@ -119,6 +119,8 @@ en:
               blank: Enter details of the incident
         legal_aid_application:
           attributes:
+            has_dependants:
+              blank: Select yes if you have dependants
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               greater_than_or_equal_to: Mortgage amount must be 0 or more

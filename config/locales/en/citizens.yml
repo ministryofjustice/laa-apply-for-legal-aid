@@ -65,6 +65,11 @@ en:
           need to pay a financial penalty
           have your legal aid stopped and have to pay back the costs
         submit_button: Agree and submit
+    has_dependants:
+      show:
+        page_heading: Do you have any dependants?
+        info: A dependant could be a child or adult who lives with you and depends on you for financial support.
+        extra_info: Do not include your partner if you have one.
     identify_types_of_incomes:
       show:
         page_heading: Which types of income do you receive?
