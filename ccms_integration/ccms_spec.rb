@@ -78,7 +78,7 @@ module CCMS
              judicial_review: false,
              lar_gateway?: false,
              lead_proceeding?: true,
-             lead_proceeding_indicator: false,
+             lead_proceeding_indicator: true,
              lead_proceeding_merits?: true,
              level_of_service: 3,
              level_of_service_fhh: false,
@@ -319,91 +319,9 @@ module CCMS
              relation_to_case: 'CHILD'
     end
 
-    let(:other_party_1) do
-      double 'OtherParty',
-             child?: true,
-             date_of_birth: '01-01-2015',
-             name: 'Master BoBo Fabby',
-             opp_relationship_to_client: 'Child',
-             opp_relationship_to_case: 'Child',
-             organisation: false,
-             other_party_id: 'OPPONENT_11594798',
-             other_party_type: 'PERSON',
-             person?: true,
-             relationship_agent?: false,
-             relationship_case_beneficiary?: false,
-             relationship_case_child?: true,
-             relationship_case_guardian?: false,
-             relationship_case_interventor?: false,
-             relationship_case_opponent?: false,
-             relationship_child?: true,
-             relationship_civil_partner?: false,
-             relationship_customer?: false,
-             relationship_employee?: false,
-             relationship_employer?: false,
-             relationship_ex_civil_partner?: false,
-             relationship_ex_husband_wife?: false,
-             relationship_grandparent?: false,
-             relationship_husband_wife?: false,
-             relationship_interested_party?: false,
-             relationship_landlord?: false,
-             relationship_legal_guardian?: false,
-             relationship_locall_authority?: false,
-             relationship_medical_professional?: false,
-             relationship_none?: false,
-             relationship_other_family_member?: false,
-             relationship_parent?: false,
-             relationship_property_owner?: false,
-             relationship_solicitor_barrister?: false,
-             relationship_step_parent?: false,
-             relationship_supplier?: false,
-             relationship_tenant?: false,
-             relationship_to_client: 'CHILD',
-             relationship_to_case: 'CHILD'
-    end
+    let(:other_party_1) { create :opponent, :child }
 
-    let(:other_party_2) do
-      double 'OtherParty',
-             child?: false,
-             date_of_birth: '01-01-2015',
-             name: 'Mrs Fabby Fabby',
-             opp_relationship_to_client: 'Ex Husband/ Wife',
-             opp_relationship_to_case: 'Opponent',
-             organisation: false,
-             other_party_id: 'OPPONENT_11594796',
-             other_party_type: 'PERSON',
-             person?: true,
-             relationship_agent?: false,
-             relationship_case_beneficiary?: false,
-             relationship_case_child?: false,
-             relationship_case_guardian?: false,
-             relationship_case_interventor?: false,
-             relationship_case_opponent?: true,
-             relationship_child?: false,
-             relationship_civil_partner?: false,
-             relationship_customer?: false,
-             relationship_employee?: false,
-             relationship_employer?: false,
-             relationship_ex_civil_partner?: false,
-             relationship_ex_husband_wife?: true,
-             relationship_grandparent?: false,
-             relationship_husband_wife?: false,
-             relationship_interested_party?: false,
-             relationship_landlord?: false,
-             relationship_legal_guardian?: false,
-             relationship_locall_authority?: false,
-             relationship_medical_professional?: false,
-             relationship_none?: false,
-             relationship_other_family_member?: false,
-             relationship_parent?: false,
-             relationship_property_owner?: false,
-             relationship_solicitor_barrister?: false,
-             relationship_step_parent?: false,
-             relationship_supplier?: false,
-             relationship_tenant?: false,
-             relationship_to_client: 'EX_SPOUSE',
-             relationship_to_case: 'OPP'
-    end
+    let(:other_party_2)  { create :opponent, :ex_spouse }
 
     let(:bank_account) do
       double BankAccount,
@@ -453,7 +371,7 @@ module CCMS
       allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2])
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
-      allow_any_instance_of(LegalAidApplication).to receive(:opponent_other_parties).and_return([other_party_1, other_party_2])
+      allow_any_instance_of(LegalAidApplication).to receive(:opponent_other_parties).and_return([other_party_2, other_party_1])
       allow_any_instance_of(LegalAidApplication).to receive(:provider).and_return(provider)
       allow_any_instance_of(Applicant).to receive(:bank_accounts).and_return([bank_account])
     end
@@ -480,7 +398,7 @@ module CCMS
           ENV['CCMS_PAYLOAD_GENERATION_ONLY'] = '1'
           # stub ccms case reference as we're  not going through the whole path so it won't be generated
           allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
-          create_case
+          @submission.process!
         end
       end
     end

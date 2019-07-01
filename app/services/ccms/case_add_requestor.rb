@@ -34,7 +34,7 @@ module CCMS
     def save_request
       puts "CCMS payload saved to #{Rails.root.join('spec/integration/generated/add_case_request.xml')}"
       begin
-        File.open(Rails.root.join('spec/integration/generated/add_case_request.xml'), 'w') do |fp|
+        File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
           fp.puts request_xml
         end
       rescue StandardError => e
@@ -85,46 +85,30 @@ module CCMS
       xml.__send__('ns2:LARDetails') { generate_lar_details(xml) }
     end
 
-    # hard coded to match expected payload for now - until we decide what to do about other parties
-    def generate_other_parties(xml) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      xml.__send__('ns2:OtherParty') do
-        xml.__send__('ns2:OtherPartyID', 'OPPONENT_11594796')
-        xml.__send__('ns2:SharedInd', false)
-        xml.__send__('ns2:OtherPartyDetail') do
-          xml.__send__('ns2:Person') do
-            xml.__send__('ns2:Name') do
-              xml.__send__('ns0:Title', 'MRS.')
-              xml.__send__('ns0:Surname', 'Fabby')
-              xml.__send__('ns0:FirstName', 'Fabby')
-            end
-            xml.__send__('ns2:DateOfBirth', '1980-01-01')
-            xml.__send__('ns2:Address')
-            xml.__send__('ns2:RelationToClient', 'EX_SPOUSE')
-            xml.__send__('ns2:RelationToCase', 'OPP')
-            xml.__send__('ns2:ContactDetails')
-            xml.__send__('ns2:AssessedIncome', 0)
-            xml.__send__('ns2:AssessedAsstes', 0)
-          end
-        end
+    def generate_other_parties(xml)
+      @legal_aid_application.opponent_other_parties.each do |opponent|
+        generate_other_party(xml, opponent)
       end
+    end
 
+    def generate_other_party(xml, opponent) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       xml.__send__('ns2:OtherParty') do
-        xml.__send__('ns2:OtherPartyID', 'OPPONENT_11594798')
-        xml.__send__('ns2:SharedInd', false)
+        xml.__send__('ns2:OtherPartyID', opponent.other_party_id)
+        xml.__send__('ns2:SharedInd', opponent.shared_ind)
         xml.__send__('ns2:OtherPartyDetail') do
           xml.__send__('ns2:Person') do
             xml.__send__('ns2:Name') do
-              xml.__send__('ns0:Title', 'MASTER')
-              xml.__send__('ns0:Surname', 'Fabby')
-              xml.__send__('ns0:FirstName', 'BoBo')
+              xml.__send__('ns0:Title', opponent.title)
+              xml.__send__('ns0:Surname', opponent.surname)
+              xml.__send__('ns0:FirstName', opponent.first_name)
             end
-            xml.__send__('ns2:DateOfBirth', '2015-01-01')
+            xml.__send__('ns2:DateOfBirth', opponent.date_of_birth.strftime('%Y-%m-%d'))
             xml.__send__('ns2:Address')
-            xml.__send__('ns2:RelationToClient', 'CHILD')
-            xml.__send__('ns2:RelationToCase', 'CHILD')
+            xml.__send__('ns2:RelationToClient', opponent.relationship_to_client)
+            xml.__send__('ns2:RelationToCase', opponent.relationship_to_case)
             xml.__send__('ns2:ContactDetails')
-            xml.__send__('ns2:AssessedIncome', 0)
-            xml.__send__('ns2:AssessedAsstes', 0)
+            xml.__send__('ns2:AssessedIncome', opponent.assessed_income)
+            xml.__send__('ns2:AssessedAsstes', opponent.assessed_assets)
           end
         end
       end
@@ -399,7 +383,7 @@ module CCMS
     def generate_opponent_other_parties(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-      @legal_aid_application.opponent_other_parties.each do |oop|
+      @legal_aid_application.opponent_other_parties.reverse_each do |oop|
         xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', oop.other_party_id)
           xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :opponent, opponent: oop) }

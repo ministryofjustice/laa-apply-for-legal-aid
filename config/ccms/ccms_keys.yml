@@ -3662,12 +3662,12 @@ global_merits:
     :user_defined: false
 other_party:
   OTHER_PARTY_NAME:
-    :value: '#other_party_name'
+    :value: '#other_party_full_name'
     :br100_meaning: The name of the other party
     :response_type: text
     :user_defined: true
   OTHER_PARTY_TYPE:
-    :value: '#other_party_other_party_type'
+    :value: '#other_party_opponent_type'
     :br100_meaning: The other party type
     :response_type: text
     :user_defined: true
@@ -3688,22 +3688,22 @@ other_party:
     :user_defined: true
 opponent:
   RELATIONSHIP_CIVIL_PARTNER:
-    :value: '#opponent_relationship_civil_partner?'
+    :value: '#opponent_relationship_client_civil_partner?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Civil Partner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_INTERVENOR:
-    :value: '#opponent_relationship_case_interventor?'
+    :value: '#opponent_relationship_case_intervenor?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Intervener
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_TENANT:
-    :value: '#opponent_relationship_tenant?'
+    :value: '#opponent_relationship_client_tenant?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Tenant
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_MEDICAL_PRO:
-    :value: '#opponent_relationship_medical_professional?'
+    :value: '#opponent_relationship_client_medical_professional?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Medical
       Professional
     :response_type: boolean
@@ -3714,12 +3714,12 @@ opponent:
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EMPLOYER:
-    :value: '#opponent_relationship_employer?'
+    :value: '#opponent_relationship_client_employer?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Employer
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_NONE:
-    :value: '#opponent_relationship_none?'
+    :value: '#opponent_relationship_client_none?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is None
     :response_type: boolean
     :user_defined: false
@@ -3734,12 +3734,12 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_ORG:
-    :value: '#opponent_organisation'
+    :value: '#opponent_organisation?'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_STEP_PARENT:
-    :value: '#opponent_relationship_step_parent?'
+    :value: '#opponent_relationship_client_step_parent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Step Parent
     :response_type: boolean
     :user_defined: false
@@ -3750,29 +3750,29 @@ opponent:
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EX_HUSBAND_WIFE:
-    :value: '#opponent_relationship_ex_husband_wife?'
+    :value: '#opponent_relationship_client_ex_husband_wife?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Husband/Wife
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_LEGAL_GUARDIAN:
-    :value: '#opponent_relationship_legal_guardian?'
+    :value: '#opponent_relationship_client_legal_guardian?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Legal Guardian
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_SOL_BARRISTER:
-    :value: '#opponent_relationship_solicitor_barrister?'
+    :value: '#opponent_relationship_client_solicitor_barrister?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Solicitor
       Or Barrister
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EX_CIVIL_PARTNER:
-    :value: '#opponent_relationship_ex_civil_partner?'
+    :value: '#opponent_relationship_client_ex_civil_partner?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Civil
       Partner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_LOCAL_AUTHORITY:
-    :value: '#opponent_relationship_locall_authority?'
+    :value: '#opponent_relationship_client_local_authority?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Local Authority
     :response_type: boolean
     :user_defined: false
@@ -3782,12 +3782,12 @@ opponent:
     :response_type: text
     :user_defined: false
   RELATIONSHIP_PARENT:
-    :value: '#opponent_relationship_parent?'
+    :value: '#opponent_relationship_client_parent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Parent
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_OTHER_FAM_MEMBER:
-    :value: '#opponent_relationship_other_family_member?'
+    :value: '#opponent_relationship_client_other_family_member?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Other Family
       Member
     :response_type: boolean
@@ -3803,7 +3803,7 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_GRANDPARENT:
-    :value: '#opponent_relationship_grandparent?'
+    :value: '#opponent_relationship_client_grandparent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Grandparent
     :response_type: boolean
     :user_defined: false
@@ -3813,32 +3813,32 @@ opponent:
     :response_type: date
     :user_defined: true
   RELATIONSHIP_LANDLORD:
-    :value: '#opponent_relationship_landlord?'
+    :value: '#opponent_relationship_client_landlord?'
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CHILD:
-    :value: '#opponent_relationship_child?'
+    :value: '#opponent_child?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Child
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME:
-    :value: '#opponent_name'
+    :value: '#opponent_full_name'
     :br100_meaning: Other Party Name
     :response_type: text
     :user_defined: true
   RELATIONSHIP_CUSTOMER:
-    :value: '#opponent_relationship_customer?'
+    :value: '#opponent_relationship_client_customer?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Customer
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME_MERITS:
-    :value: '#opponent_name'
+    :value: '#opponent_full_name'
     :br100_meaning: 'OthPart: Other Party Name'
     :response_type: text
     :user_defined: false
   RELATIONSHIP_CASE_INT_PARTY:
-    :value: '#opponent_relationship_interested_party?'
+    :value: '#opponent_relationship_case_interested_party?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Interested
       Party
     :response_type: boolean
@@ -3849,18 +3849,18 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_PROPERTY_OWNER:
-    :value: '#opponent_relationship_property_owner?'
+    :value: '#opponent_relationship_client_property_owner?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Property
       Owner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_SUPPLIER:
-    :value: '#opponent_relationship_supplier?'
+    :value: '#opponent_relationship_client_supplier?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Supplier
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EMPLOYEE:
-    :value: '#opponent_relationship_employee?'
+    :value: '#opponent_relationship_client_employee?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Employee
     :response_type: boolean
     :user_defined: false
@@ -3875,12 +3875,12 @@ opponent:
     :response_type: date
     :user_defined: false
   RELATIONSHIP_CASE_AGENT:
-    :value: '#opponent_relationship_agent?'
+    :value: '#opponent_relationship_case_agent?'
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Agent
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_TYPE:
-    :value: '#opponent_other_party_type'
+    :value: '#opponent_opponent_type'
     :br100_meaning: Other Party Type
     :response_type: text
     :user_defined: true
@@ -3895,7 +3895,7 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_HUSBAND_WIFE:
-    :value: '#opponent_relationship_husband_wife?'
+    :value: '#opponent_relationship_client_husband_wife?'
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Husband/Wife
     :response_type: boolean
     :user_defined: false
