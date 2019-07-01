@@ -7,5 +7,5 @@ Rails.application.load_tasks
 
 unless Rails.env.production?
   task(:default).clear
-  task default: %i[rubocop erblint spec cucumber]
+  task default: %i[rubocop erblint javascript_tests spec cucumber]
 end

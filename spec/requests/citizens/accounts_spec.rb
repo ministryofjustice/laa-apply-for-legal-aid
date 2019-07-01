@@ -64,11 +64,12 @@ RSpec.describe 'citizen accounts request', type: :request do
   end
 
   describe 'GET /citizens/account/gather' do
+    let(:worker_id) { SecureRandom.uuid }
     let(:worker) { {} }
     subject { get gather_citizens_accounts_path }
 
     before do
-      expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id)
+      expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)
       allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       subject
@@ -96,6 +97,10 @@ RSpec.describe 'citizen accounts request', type: :request do
 
       it 'displays a loading message' do
         expect(response.body).to include(I18n.t('citizens.accounts.gather.retrieving_transactions'))
+      end
+
+      it 'includes the expect HTML for the javascript to work' do
+        expect(response.body).to include("<div class=\"worker-waiter\" data-worker-id=\"#{worker_id}\"")
       end
     end
 
