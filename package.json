@@ -11,7 +11,7 @@
     "@rails/webpacker": "^4.0.7",
     "govuk-frontend": "^2.13.0",
     "jquery": "^1.12.4",
-    "js-search": "^1.4.2"
+    "js-search": "^1.4.3"
   },
   "devDependencies": {
     "@hint/configuration-web-recommended": "^6.2.2",
