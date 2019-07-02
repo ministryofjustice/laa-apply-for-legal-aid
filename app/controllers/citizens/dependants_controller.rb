@@ -12,8 +12,7 @@ module Citizens
 
       if @form.save
         replace_last_page_in_history(edit_dependant_path)
-        flow_param(dependant)
-        go_forward
+        go_forward(dependant)
       else
         render :new
       end

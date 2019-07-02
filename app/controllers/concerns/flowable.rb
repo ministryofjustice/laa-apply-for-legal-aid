@@ -19,27 +19,27 @@ module Flowable
   end
 
   included do
-    delegate :forward_path, to: :flow_service
     helper_method :forward_path, :journey_type
 
-    def flow_param(flow_param)
-      @flow_param = flow_param
-    end
-
-    def go_forward
-      if path?(forward_path)
-        redirect_to forward_path
+    def go_forward(flow_param = nil)
+      path = forward_path(flow_param)
+      if path?(path)
+        redirect_to path
       else
-        render plain: forward_path
+        render plain: path
       end
     end
 
-    def flow_service
-      @flow_service ||= Flow::BaseFlowService.flow_service_for(
+    def forward_path(flow_param = nil)
+      flow_service(flow_param).forward_path
+    end
+
+    def flow_service(flow_param = nil)
+      Flow::BaseFlowService.flow_service_for(
         journey_type,
         legal_aid_application: legal_aid_application,
         current_step: current_step,
-        params: @flow_param
+        params: flow_param
       )
     end
 

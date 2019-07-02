@@ -11,8 +11,7 @@ module Citizens
       @form = Dependants::BasicDetailsForm.new(form_params)
 
       if @form.save
-        flow_param(dependant)
-        go_forward
+        go_forward(dependant)
       else
         render :show
       end
