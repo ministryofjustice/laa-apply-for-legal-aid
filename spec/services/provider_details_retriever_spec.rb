@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ProviderDetailsRetriever do
-  let(:username) { 'Chloé.Doe' }
   let(:api_url) { 'https://sitsoa10.laadev.co.uk/CCMSInformationService/api/providerDetails' }
   let(:mock) { true }
-  let(:provider) { create :provider, username: username }
+  let(:provider) { create :provider, :username_with_special_characters }
 
-  subject { described_class.call(username) }
+  subject { described_class.call(provider.username) }
 
   before do
     allow(Rails.configuration.x.provider_details).to receive(:url).and_return(api_url)
@@ -15,7 +14,7 @@ RSpec.describe ProviderDetailsRetriever do
 
   describe '.call' do
     shared_examples_for 'get response from API' do
-      let(:escaped_username) { CGI.escape(username) }
+      let(:escaped_username) { CGI.escape(provider.username) }
 
       it 'returns the expected data structure' do
         expected_keys = %i[providerOffices contactId contactName]
@@ -36,7 +35,7 @@ RSpec.describe ProviderDetailsRetriever do
     end
 
     context 'with real API', vcr: { cassette_name: 'provider_details_api_real' } do
-      let(:username) { 'NEETADESOR' }
+      let(:provider) { create :provider, :with_provider_details_api_username }
       let(:mock) { false }
 
       it_behaves_like 'get response from API'

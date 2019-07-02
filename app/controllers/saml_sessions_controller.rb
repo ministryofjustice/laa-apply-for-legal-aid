@@ -4,7 +4,7 @@
 #       To prevent this, restart your server after modifying this file.
 #
 class SamlSessionsController < Devise::SamlSessionsController
-  after_action :fetch_provider_details, only: :create
+  after_action :update_provider_details, only: :create
 
   def destroy
     sign_out current_provider
@@ -17,8 +17,8 @@ class SamlSessionsController < Devise::SamlSessionsController
 
   private
 
-  def fetch_provider_details
-    current_provider.retrieve_details
+  def update_provider_details
+    current_provider.update_details
   end
 
   # :nocov:

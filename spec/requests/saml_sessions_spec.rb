@@ -1,7 +1,9 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe 'SamlSessionsController', type: :request do
-  let(:provider) { create :provider, username: 'Chloé.Doe' }
+  let(:existing_details_response) { nil }
+  let(:provider) { create :provider, :username_with_special_characters, details_response: existing_details_response }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }
@@ -52,6 +54,23 @@ RSpec.describe 'SamlSessionsController', type: :request do
     it 'saves provider details' do
       expect(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_return(sample_provider_details)
       expect { subject }.to change { provider.reload.details_response }.to(sample_provider_details.stringify_keys)
+    end
+
+    it 'does not use a worker' do
+      expect(ProviderDetailsRetrieverWorker).not_to receive(:perform_async)
+      subject
+    end
+
+    context 'provider already has some provider details' do
+      let(:existing_details_response) { { foo: :bar } }
+
+      it 'uses a worker' do
+        ProviderDetailsRetrieverWorker.clear
+        expect(ProviderDetailsRetrieverWorker).to receive(:perform_async).with(provider.id).and_call_original
+        expect(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_call_original
+        subject
+        ProviderDetailsRetrieverWorker.drain
+      end
     end
   end
 end

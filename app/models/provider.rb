@@ -5,7 +5,13 @@ class Provider < ApplicationRecord
 
   has_many :legal_aid_applications
 
-  def retrieve_details
+  def update_details
+    return update_details_directly unless details_response
+
+    ProviderDetailsRetrieverWorker.perform_async(id)
+  end
+
+  def update_details_directly
     details = ProviderDetailsRetriever.call(username)
     update!(details_response: details)
   end
