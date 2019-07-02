@@ -392,10 +392,7 @@ Feature: Civil application journeys
     Then I click 'Continue'
     Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Details of the latest domestic abuse incident'
     Then I enter the 'occurred' date of 2 days ago
-    Then I fill "Details" with "It happened"
     Then I click 'Save and continue'
     Then I should be on a page showing "Respondent details"
     Then I choose option "Respondent understands terms of court order True"
@@ -493,10 +490,7 @@ Feature: Civil application journeys
     Then I click 'Continue'
     Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Details of the latest domestic abuse incident"
     Then I enter the 'occurred' date of 2 days ago
-    Then I fill "Details" with "It happened"
     Then I click 'Save and continue'
     Then I should be on a page showing "Respondent details"
     Then I choose option "Respondent understands terms of court order True"

@@ -9,11 +9,6 @@ module Flow
         },
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
-          forward: :details_latest_incidents,
-          check_answers: :check_merits_answers
-        },
-        details_latest_incidents: {
-          path: ->(application) { urls.providers_legal_aid_application_details_latest_incident_path(application) },
           forward: :respondents,
           check_answers: :check_merits_answers
         },

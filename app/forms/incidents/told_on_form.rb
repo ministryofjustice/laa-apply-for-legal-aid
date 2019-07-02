@@ -1,69 +1,88 @@
 module Incidents
   class ToldOnForm
     include BaseForm
-
     form_for Incident
 
     attr_accessor :told_year, :told_month, :told_day
     attr_writer :told_on
 
-    validates :told_on, presence: true, unless: :draft_and_not_incomplete_date?
+    attr_accessor :occurred_year, :occurred_month, :occurred_day
+    attr_writer :occurred_on
+
+    validates :told_on, presence: true, unless: :draft_and_not_partially_complete_told_on_date?
     validates :told_on, date: { not_in_the_future: true }, allow_nil: true
+
+    validates :occurred_on, presence: true, unless: :draft_and_not_partially_complete_occurred_on_date?
+    validates :occurred_on, date: { not_in_the_future: true }, allow_nil: true
+
+    validate :occurred_on_before_told_on
 
     def initialize(*args)
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: told_on_fields,
-        model_attributes: told_on_from_model
+        attrs: (told_on_date_fields.fields + occurred_on_date_fields.fields),
+        model_attributes:
+        [
+          told_on_date_fields.model_attributes,
+          occurred_on_date_fields.model_attributes
+        ].compact.reduce(&:merge)
       )
     end
 
     def told_on
       return @told_on if @told_on.present?
-      return incomplete_date if told_on_methods.any?(&:blank?)
+      return if told_on_date_fields.blank?
+      return :invalid if told_on_date_fields.partially_complete? || told_on_date_fields.form_date_invalid?
 
-      @told_on = attributes[:told_on] = Date.new(*told_on_methods.map(&:to_i))
-    rescue ArgumentError
-      :invalid
+      @told_on = attributes[:told_on] = told_on_date_fields.form_date
+    end
+
+    def occurred_on
+      return @occurred_on if @occurred_on.present?
+      return if occurred_on_date_fields.blank?
+      return :invalid if occurred_on_date_fields.partially_complete? || occurred_on_date_fields.form_date_invalid?
+
+      @occurred_on = attributes[:occurred_on] = occurred_on_date_fields.form_date
     end
 
     private
 
-    def exclude_from_model
-      told_on_fields
-    end
+    def occurred_on_before_told_on
+      return if occurred_on.blank? || told_on.blank?
 
-    def told_on_fields
-      %i[told_year told_month told_day]
-    end
-
-    def told_on_methods
-      @told_on_methods ||= told_on_fields.map { |f| __send__(f) }
-    end
-
-    def told_on_from_model
-      return unless model.told_on?
-
-      {
-        told_year: model.told_on.year,
-        told_month: model.told_on.month,
-        told_day: model.told_on.day
-      }
-    end
-
-    def incomplete_date
-      return nil if told_on_methods.all?(&:blank?)
-
-      @incomplete_date = true
+      errors.add(:occurred_on, :invalid_timeline) if told_on < occurred_on
+    rescue ArgumentError
       :invalid
     end
 
-    def incomplete_date?
-      @incomplete_date
+    def exclude_from_model
+      (told_on_date_fields.fields + occurred_on_date_fields.fields)
     end
 
-    def draft_and_not_incomplete_date?
-      draft? && !incomplete_date?
+    def draft_and_not_partially_complete_told_on_date?
+      draft? && !told_on_date_fields.partially_complete?
+    end
+
+    def draft_and_not_partially_complete_occurred_on_date?
+      draft? && !occurred_on_date_fields.partially_complete?
+    end
+
+    def told_on_date_fields
+      @told_on_date_fields ||= DateFieldBuilder.new(
+        form: self,
+        model: model,
+        method: :told_on,
+        prefix: :told_
+      )
+    end
+
+    def occurred_on_date_fields
+      @occurred_on_date_fields ||= DateFieldBuilder.new(
+        form: self,
+        model: model,
+        method: :occurred_on,
+        prefix: :occurred_
+      )
     end
   end
 end
