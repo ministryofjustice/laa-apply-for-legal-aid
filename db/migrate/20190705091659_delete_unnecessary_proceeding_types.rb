@@ -14,4 +14,8 @@ class DeleteUnnecessaryProceedingTypes < ActiveRecord::Migration[5.2]
 
   def down
   end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
+  end
 end
