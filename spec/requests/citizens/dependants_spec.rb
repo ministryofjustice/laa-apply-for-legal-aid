@@ -10,7 +10,7 @@ RSpec.describe Citizens::DependantsController, type: :request do
   end
 
   describe 'GET /citizens/dependant_details/:id' do
-    subject { get new_citizens_dependant_path }
+    subject { get citizens_dependants_path }
 
     it 'returns http success' do
       subject

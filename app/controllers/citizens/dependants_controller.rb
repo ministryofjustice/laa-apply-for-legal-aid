@@ -3,18 +3,18 @@ module Citizens
     include ApplicationFromSession
     helper_method :other_dependants
 
-    def new
-      @form = Dependants::BasicDetailsForm.new(model: dependant)
+    def index
+      @form = DependantForm::DetailsForm.new(model: dependant)
     end
 
     def create
-      @form = Dependants::BasicDetailsForm.new(form_params)
+      @form = DependantForm::DetailsForm.new(form_params)
 
       if @form.save
         replace_last_page_in_history(edit_dependant_path)
         go_forward(dependant)
       else
-        render :new
+        render :index
       end
     end
 
@@ -32,12 +32,12 @@ module Citizens
     end
 
     def edit_dependant_path
-      citizens_dependant_detail_path(dependant.id)
+      citizens_dependant_details_path(dependant.id)
     end
 
     def form_params
       merge_with_model(dependant) do
-        params.require(:dependant).permit(*Dependants::BasicDetailsForm::ATTRIBUTES)
+        params.require(:dependant).permit(*DependantForm::DetailsForm::ATTRIBUTES)
       end
     end
   end

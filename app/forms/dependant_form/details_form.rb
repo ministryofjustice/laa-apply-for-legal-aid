@@ -1,5 +1,5 @@
-module Dependants
-  class BasicDetailsForm
+module DependantForm
+  class DetailsForm
     include BaseForm
     form_for Dependant
 

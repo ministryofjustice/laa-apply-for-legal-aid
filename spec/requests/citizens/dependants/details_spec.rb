@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::DependantDetailsController, type: :request do
+RSpec.describe Citizens::Dependants::DetailsController, type: :request do
   let(:submission_date) { Time.now }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_at: submission_date }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
@@ -11,7 +11,7 @@ RSpec.describe Citizens::DependantDetailsController, type: :request do
   end
 
   describe 'GET /citizens/dependant_details/:id' do
-    subject { get citizens_dependant_detail_path(dependant) }
+    subject { get citizens_dependant_details_path(dependant) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -39,7 +39,7 @@ RSpec.describe Citizens::DependantDetailsController, type: :request do
       }
     end
 
-    subject { patch citizens_dependant_detail_path(dependant), params: params }
+    subject { patch citizens_dependant_details_path(dependant), params: params }
 
     it 'updates the dependant' do
       dependant.reload

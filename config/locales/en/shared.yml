@@ -46,11 +46,12 @@ en:
         told_on_label: When did your client tell you about the latest domestic abuse incident?
         told_on_hint: For example 31 3 2019
         purchased_on_hint: For example, 31 3 1980.
-      dependant_form:
-        page_title: "Enter your %{number} dependant's details"
-        add_dependant_later: You can add more dependants later.
-        you_already_told_about: "You've already told us about:"
-        dependant_list_item: "%{name}, born %{date_of_birth}"
+      dependants:
+        details:
+          page_title: "Enter your %{number} dependant's details"
+          add_dependant_later: You can add more dependants later.
+          you_already_told_about: "You've already told us about:"
+          dependant_list_item: "%{name}, born %{date_of_birth}"
       identify_types_of_outgoings_form:
         sub_heading: Select all that apply
         none_selected: None of these
