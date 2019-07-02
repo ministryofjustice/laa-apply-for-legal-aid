@@ -130,7 +130,7 @@ en:
         case-reference: Case reference
     date_client_told_incidents:
       show:
-        h1-heading: When did your client tell you about the latest domestic abuse incident?
+        h1-heading: Latest incident details
     details_latest_incidents:
       show:
         h1-heading: Details of the latest domestic abuse incident

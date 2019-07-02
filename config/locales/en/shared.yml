@@ -42,8 +42,8 @@ en:
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980
         date_of_birth_label: Date of birth
-        occurred_on_hint: For example 31 3 2019
         occurred_on_label: When did the incident occur?
+        told_on_label: When did your client tell you about the latest domestic abuse incident?
         told_on_hint: For example 31 3 2019
         purchased_on_hint: For example, 31 3 1980.
       identify_types_of_outgoings_form:

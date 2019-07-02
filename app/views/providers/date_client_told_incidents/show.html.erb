@@ -8,7 +8,7 @@
       ) do |form| %>
 
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= govuk_fieldset_header page_title %>
+      <%= govuk_fieldset_header page_title, padding_below: 4 %>
 
       <%= date_input_fields(
             prefix: :told,
@@ -19,6 +19,12 @@
           ) %>
     <% end %>
 
+    <%= date_input_fields(
+          prefix: :occurred,
+          field_name: :occurred_on,
+          width: :full,
+          form: form
+        ) %>
     <%= next_action_buttons(show_draft: true, form: form) %>
 
   <% end %>
