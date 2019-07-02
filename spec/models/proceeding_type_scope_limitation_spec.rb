@@ -16,4 +16,11 @@ RSpec.describe ProceedingTypeScopeLimitation, type: :model do
     it { should belong_to(:proceeding_type) }
     it { should belong_to(:scope_limitation) }
   end
+
+  describe '.populate' do
+    it 'calls the scope_limitations_populator service' do
+      expect(ProceedingTypeScopeLimitationsPopulator).to receive(:call).with(no_args)
+      described_class.populate
+    end
+  end
 end
