@@ -382,8 +382,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              main_dwelling_third_party_relationship: 'Ex-Partner',
              main_dwelling_third_party_percentage: 50,
              opponents: [],
-             ccms_submissions: ccms_submissions_collection
+             ccms_submissions: ccms_submissions_collection,
+             opponent_other_parties: [other_party_1, other_party_2],
+             most_recent_ccms_submission: ccms_submission
     end
+
+    let(:other_party_1) { create :opponent, :child }
+
+    let(:other_party_2)  { create :opponent, :ex_spouse }
+
 
     let(:ccms_submissions_collection) do
       double 'Collection of CCMS::Submission records',
@@ -403,7 +410,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              case_ccms_reference: 1_234_567_890,
              applicant_ccms_reference: 9_876_543_210
     end
-    let(:requestor) { described_class.new(submission) }
+    let(:requestor) { described_class.new(submission, {}) }
 
     describe 'XML request' do
       # This test is non-functional at the moment.

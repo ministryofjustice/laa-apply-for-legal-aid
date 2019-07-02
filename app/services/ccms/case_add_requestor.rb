@@ -32,7 +32,7 @@ module CCMS
     private
 
     def save_request
-      puts "CCMS payload saved to #{Rails.root.join('spec/integration/generated/add_case_request.xml')}"
+      # puts "CCMS payload saved to #{Rails.root.join('spec/integration/generated/add_case_request.xml')}"
       begin
         File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
           fp.puts request_xml
@@ -267,7 +267,7 @@ module CCMS
 
     def generate_wage_slip_instance(xml, slip)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', slip.description)
+        xml.__send__('ns0:InstanceLabel', "#{@submission.case_ccms_reference}#{slip.description}")
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :wages, wage_slip: slip) }
       end
     end
