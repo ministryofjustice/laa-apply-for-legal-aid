@@ -18,6 +18,6 @@ class BankAccount < ApplicationRecord
   end
 
   def display_name
-    "#{b.bank_provider.name} Acct #{b.account_number}"
+    "#{bank_provider.name} Acct #{account_number}"
   end
 end

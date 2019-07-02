@@ -381,7 +381,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              main_dwelling_third_party_name: 'Mrs Fabby Fabby',
              main_dwelling_third_party_relationship: 'Ex-Partner',
              main_dwelling_third_party_percentage: 50,
-             opponents: [],
+             opponents: [other_party_2],
              ccms_submissions: ccms_submissions_collection,
              opponent_other_parties: [other_party_1, other_party_2],
              most_recent_ccms_submission: ccms_submission
@@ -389,8 +389,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
     let(:other_party_1) { create :opponent, :child }
 
-    let(:other_party_2)  { create :opponent, :ex_spouse }
-
+    let(:other_party_2) { create :opponent, :ex_spouse }
 
     let(:ccms_submissions_collection) do
       double 'Collection of CCMS::Submission records',
@@ -463,6 +462,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect {
             requestor.__send__(:extract_response_value, config, options)
           }.to raise_error CCMS::CcmsError, 'Unknown response type: numeric'
+        end
+      end
+
+      # this test is only necessary as the concept of a lead proceeding has not yet been implemented for a
+      # legal_aid_application. when it has been implemented this test will not be necessary and can be removed
+      describe '#lead_proceeding' do
+        it 'returns the lead proceeding' do
+          expect(requestor.__send__(:lead_proceeding)).to eq proceeding_type_1
         end
       end
     end

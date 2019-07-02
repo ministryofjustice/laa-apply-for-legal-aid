@@ -31,18 +31,18 @@ module CCMS
 
     private
 
+    # :nocov:
     def save_request
       # puts "CCMS payload saved to #{Rails.root.join('spec/integration/generated/add_case_request.xml')}"
-      begin
-        File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
-          fp.puts request_xml
-        end
-      rescue StandardError => e
-        puts e.class
-        puts e.message
-        puts e.backtrace
+      File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
+        fp.puts request_xml
       end
+    rescue StandardError => e
+      puts e.class
+      puts e.message
+      puts e.backtrace
     end
+    # :nocov:
 
     def request_xml
       @request_xml ||= soap_envelope(namespaces).to_xml
@@ -135,7 +135,6 @@ module CCMS
     end
 
     def generate_provider_details(xml)
-      provider = @legal_aid_application.provider
       xml.__send__('ns2:ProviderCaseReferenceNumber', 'PC4') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
       xml.__send__('ns2:ProviderFirmID', provider.firm_id)
       xml.__send__('ns2:ProviderOfficeID', provider.office_id)

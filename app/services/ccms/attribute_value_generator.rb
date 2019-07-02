@@ -48,10 +48,6 @@ module CCMS
       1000.0
     end
 
-    def application_ccms_reference_number(_options)
-      @legal_aid_application.most_recent_ccms_submission.case_ccms_reference
-    end
-
     def bank_name(options)
       options[:bank_acct].bank_provider.name
     end

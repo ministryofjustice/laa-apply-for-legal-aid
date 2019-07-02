@@ -98,4 +98,16 @@ RSpec.describe Opponent, type: :model do
       end
     end
   end
+
+  describe '#other_party_relationship_to_client' do
+    it "returns the other party's relationship to the client" do
+      expect(opponent.other_party_relationship_to_client).to eq 'Ex_spouse'
+    end
+  end
+
+  describe '#other_party_relationship_to_case' do
+    it "returns the other party's relationship to the case" do
+      expect(opponent.other_party_relationship_to_case).to eq 'Opp'
+    end
+  end
 end
