@@ -1,10 +1,5 @@
 require 'rails_helper'
 
-#
-# NOTE: All of the specs here are protected with if RSpec.configuration.run_ccms_integrations_specs?
-#       which means they will only run if the RUN_CCMS_INTEGRATION_SPECS environment variable is set to 1
-#
-
 module CCMS
   RSpec.describe Submission do
     let(:proceeding_type_1) do
