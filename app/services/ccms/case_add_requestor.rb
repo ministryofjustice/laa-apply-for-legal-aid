@@ -311,7 +311,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'EMPLOYMENT_CLIENT')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', '300000333864:EMPLOYMENT_CLIENT_001')
+        xml.__send__('ns0:InstanceLabel', "#{@submission.case_ccms_reference}:EMPLOYMENT_CLIENT_001")
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :employment) }
       end
     end
