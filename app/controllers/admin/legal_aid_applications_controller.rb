@@ -1,8 +1,16 @@
 module Admin
   class LegalAidApplicationsController < ApplicationController
+    include Pagy::Backend
     before_action :authenticate_admin_user!
+
+    DEFAULT_PAGE_SIZE = 10
+
     def index
-      @applications = LegalAidApplication.latest.limit(25)
+      @pagy, @applications = pagy(
+        LegalAidApplication.latest,
+        items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
+        size: [1, 1, 1, 1]
+      )
     end
 
     def create_test_applications

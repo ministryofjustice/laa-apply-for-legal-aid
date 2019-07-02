@@ -4,11 +4,12 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   let(:count) { 3 }
   let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant }
   let(:admin_user) { create :admin_user }
+  let(:params) { {} }
 
   before { sign_in admin_user }
 
   describe 'GET /admin/legal_aid_applications' do
-    subject { get admin_legal_aid_applications_path }
+    subject { get admin_legal_aid_applications_path(params) }
 
     it 'renders successfully' do
       subject
@@ -25,6 +26,33 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
     it 'has a link to settings' do
       subject
       expect(response.body).to include(admin_settings_path)
+    end
+
+    context 'with pagination' do
+      it 'shows current total information' do
+        subject
+        expect(response.body).to include('Showing 3 of 3')
+      end
+
+      it 'does not show navigation links' do
+        subject
+        expect(parsed_response_body.css('.pagination-container nav')).to be_empty
+      end
+
+      context 'and more applications than page size' do
+        let(:params) { { page_size: 3 } }
+        let(:count) { 5 }
+
+        it 'show page information' do
+          subject
+          expect(response.body).to include('Showing 1 - 3 of 5 results')
+        end
+
+        it 'shows pagination' do
+          subject
+          expect(parsed_response_body.css('.pagination-container nav').text).to match(/Previous\s+1\s+2\s+Next/)
+        end
+      end
     end
 
     context 'when not authenticated' do
