@@ -287,8 +287,8 @@ module CCMS
     def generate_other_parties_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-      xml.__send__('ns0:Instances') do
-        @legal_aid_application.opponents.each do |opponent|
+      @legal_aid_application.opponents.each do |opponent|
+        xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', opponent.other_party_id)
           xml.__send__('ns0:Attributes') do
             generate_attributes_for(xml, :other_party, other_party: opponent)

@@ -296,29 +296,6 @@ module CCMS
              delegated_functions_apply: false
     end
 
-    let(:opponents) { [opponent_1, opponent_2] }
-
-    let(:opponent_1) do
-      double 'Person',
-             title: 'MR',
-             first_name: 'Dummy',
-             surname: 'Opponent',
-             date_of_birth: Date.new(1953, 8, 13),
-             relation_to_client: 'EX_SPOUSE',
-             relation_to_case: 'OPP',
-             civil_partner?: false
-    end
-
-    let(:opponent_2) do
-      double 'Person',
-             title: 'MASTER',
-             surname: 'Bonstart',
-             first_name: 'Stepriponikas',
-             date_of_birth: Date.new(1953, 8, 13),
-             relation_to_client: 'CHILD',
-             relation_to_case: 'CHILD'
-    end
-
     let(:other_party_1) { create :opponent, :child }
 
     let(:other_party_2)  { create :opponent, :ex_spouse }
@@ -372,7 +349,7 @@ module CCMS
       @submission = create :submission, legal_aid_application: @legal_aid_application
       PdfConverter.call(PdfFile.find_or_create_by(original_file_id: @statement_of_case.original_files.first.id).id)
       allow_any_instance_of(LegalAidApplication).to receive(:proceeding_types).and_return([proceeding_type_1, proceeding_type_2])
-      allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2])
+      allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2, other_party_1])
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
       allow_any_instance_of(LegalAidApplication).to receive(:opponent_other_parties).and_return([other_party_2, other_party_1])
