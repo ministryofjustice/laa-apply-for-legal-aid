@@ -45,7 +45,7 @@ module CCMS
     end
 
     def valuable_possessions_aggregate_value(_options)
-      1000.0
+      1000.0 # TODO: CCMS placeholder
     end
 
     def bank_name(options)
@@ -53,32 +53,27 @@ module CCMS
     end
 
     def bank_account_holders(_options)
-      'Client Sole'
+      'Client Sole' # TODO: CCMS placeholder
     end
 
     def means_assessment_capital_contribution(_options)
-      0
-      # @legal_aid_application.means_assessment_result.capital_contribution
+      0 # TODO: CCMS placeholder
     end
 
     def lead_proceeding_category(_options)
-      'MAT'
-      # @legal_aid_application.lead_proceeding.ccms_category_law_code
+      'MAT' # TODO: CCMS placeholder
     end
 
     def main_dwelling_third_party_name(_options)
-      'Mrs Fabby Fabby'
-      # @legal_aid_application.main_dwelling_third_party_name
+      'Mrs Fabby Fabby' # TODO: CCMS placeholder
     end
 
     def main_dwelling_third_party_relationship(_options)
-      'Ex-Partner'
-      # @legal_aid_application.main_dwelling_third_party_relationship
+      'Ex-Partner' # TODO: CCMS placeholder
     end
 
     def main_dwelling_third_party_percentage(_options)
-      50
-      # @legal_aid_application.main_dwelling_third_party_percentage
+      50 # TODO: CCMS placeholder
     end
 
     def submission_case_ccms_reference(_options)

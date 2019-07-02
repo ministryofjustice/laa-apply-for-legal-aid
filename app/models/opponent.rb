@@ -37,15 +37,15 @@ class Opponent < ApplicationRecord
   }.freeze
 
   def shared_ind
-    false
+    false # TODO: CCMS placeholder
   end
 
   def assessed_income
-    0
+    0 # TODO: CCMS placeholder
   end
 
   def assessed_assets
-    0
+    0 # TODO: CCMS placeholder
   end
 
   def full_name
@@ -53,11 +53,11 @@ class Opponent < ApplicationRecord
   end
 
   def person?
-    opponent_type.capitalize == 'Person'
+    opponent_type.capitalize == 'Person'.freeze
   end
 
   def organisation?
-    opponent_type.capitalize == 'Organisation'
+    opponent_type.capitalize == 'Organisation'.freeze
   end
 
   def other_party_relationship_to_client
@@ -68,11 +68,11 @@ class Opponent < ApplicationRecord
     relationship_to_case.capitalize
   end
 
-  def method_missing(meth, *args)
-    if valid_relationship_to_case_method?(meth)
-      case_relationship?(meth)
-    elsif valid_relationship_to_client_method?(meth)
-      client_relationship?(meth)
+  def method_missing(method, *args)
+    if valid_relationship_to_case_method?(method)
+      case_relationship?(method)
+    elsif valid_relationship_to_client_method?(method)
+      client_relationship?(method)
     else
       super
     end

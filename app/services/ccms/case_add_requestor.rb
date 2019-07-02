@@ -33,14 +33,9 @@ module CCMS
 
     # :nocov:
     def save_request
-      # puts "CCMS payload saved to #{Rails.root.join('spec/integration/generated/add_case_request.xml')}"
       File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
         fp.puts request_xml
       end
-    rescue StandardError => e
-      puts e.class
-      puts e.message
-      puts e.backtrace
     end
     # :nocov:
 
@@ -57,9 +52,9 @@ module CCMS
 
     def header_request(xml)
       xml.__send__('ns6:TransactionRequestID', transaction_request_id)
-      xml.__send__('ns6:Language', 'ENG')
-      xml.__send__('ns6:UserLoginID', 'NEETADESOR')
-      xml.__send__('ns6:UserRole', 'EXTERNAL')
+      xml.__send__('ns6:Language', 'ENG') # TODO: CCMS placeholder
+      xml.__send__('ns6:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
+      xml.__send__('ns6:UserRole', 'EXTERNAL') # TODO: CCMS placeholder
     end
 
     def case_request(xml)
@@ -73,15 +68,15 @@ module CCMS
 
     def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
       xml.__send__('ns2:Client') { generate_client(xml) }
-      xml.__send__('ns2:PreferredAddress', 'CLIENT')
+      xml.__send__('ns2:PreferredAddress', 'CLIENT') # TODO: CCMS placeholder
       xml.__send__('ns2:ProviderDetails') { generate_provider_details(xml) }
       xml.__send__('ns2:CategoryOfLaw') { generate_category_of_law(xml) }
       xml.__send__('ns2:OtherParties') { generate_other_parties(xml) }
       xml.__send__('ns2:Proceedings') { generate_proceedings(xml) }
       xml.__send__('ns2:MeansAssesments') { generate_means_assessment(xml) }
       xml.__send__('ns2:MeritsAssesments') { generate_merits_assessment(xml) }
-      xml.__send__('ns2:DevolvedPowersDate', '2019-04-01')
-      xml.__send__('ns2:ApplicationAmendmentType', 'SUBDP')
+      xml.__send__('ns2:DevolvedPowersDate', '2019-04-01')  # TODO: CCMS placeholder
+      xml.__send__('ns2:ApplicationAmendmentType', 'SUBDP') # TODO: CCMS placeholder
       xml.__send__('ns2:LARDetails') { generate_lar_details(xml) }
     end
 
@@ -117,15 +112,15 @@ module CCMS
     def generate_record_history(xml)
       xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
       xml.__send__('ns0:LastUpdatedBy') do
-        xml.__send__('ns0:UserLoginID', 'NEETADESOR')
-        xml.__send__('ns0:UserName', 'NEETADESOR')
-        xml.__send__('ns0:UserType', 'EXTERNAL')
+        xml.__send__('ns0:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
+        xml.__send__('ns0:UserName', 'NEETADESOR') # TODO: CCMS placeholder
+        xml.__send__('ns0:UserType', 'EXTERNAL') # TODO: CCMS placeholder
       end
       xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
     end
 
     def generate_lar_details(xml)
-      xml.__send__('ns2:LARScopeFlag', true)
+      xml.__send__('ns2:LARScopeFlag', true) # TODO: CCMS placeholder
     end
 
     def generate_client(xml)
@@ -164,9 +159,9 @@ module CCMS
           xml.__send__('ns2:ProceedingType', proceeding.ccms_code)
           xml.__send__('ns2:ProceedingDescription', proceeding.description)
           xml.__send__('ns2:MatterType', proceeding.ccms_matter_code)
-          xml.__send__('ns2:LevelOfService', 3)
-          xml.__send__('ns2:Stage', 8)
-          xml.__send__('ns2:ClientInvolvementType', 'A')
+          xml.__send__('ns2:LevelOfService', 3) # TODO: CCMS placeholder
+          xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
+          xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
           xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding) }
         end
       end
@@ -193,8 +188,8 @@ module CCMS
 
     def generate_means_assessment_results(xml)
       xml.__send__('ns0:Goal') do
-        xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA')
-        xml.__send__('ns0:AttributeValue', true)
+        xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA') # TODO: CCMS placeholder
+        xml.__send__('ns0:AttributeValue', true) # TODO: CCMS placeholder
       end
     end
 
@@ -218,7 +213,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'VALUABLE_POSSESSION')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the valuable possession1')
+        xml.__send__('ns0:InstanceLabel', 'the valuable possession1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :valuable_possessions) }
       end
     end
@@ -240,7 +235,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CHANGE_IN_CIRCUMSTANCE')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the change in circumstance1')
+        xml.__send__('ns0:InstanceLabel', 'the change in circumstance1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :change_in_circumstances) }
       end
     end
@@ -253,7 +248,7 @@ module CCMS
 
     def generate_vehicle_instance(xml, vehicle)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the cars & motor vehicles')
+        xml.__send__('ns0:InstanceLabel', 'the cars & motor vehicles') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :vehicles, vehicle: vehicle) }
       end
     end
@@ -319,7 +314,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'MAINTHIRD')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the third party who part owns the main dwelling1')
+        xml.__send__('ns0:InstanceLabel', 'the third party who part owns the main dwelling1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :main_dwelling) }
       end
     end
@@ -374,7 +369,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'FAMILY_STATEMENT')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the family statement of case1')
+        xml.__send__('ns0:InstanceLabel', 'the family statement of case1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :family_statement) }
       end
     end

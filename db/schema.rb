@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_150936) do
+ActiveRecord::Schema.define(version: 2019_07_04_160038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -317,6 +317,22 @@ ActiveRecord::Schema.define(version: 2019_07_05_150936) do
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
   end
 
+  create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "other_party_id"
+    t.string "title"
+    t.string "first_name"
+    t.string "surname"
+    t.date "date_of_birth"
+    t.string "relationship_to_client"
+    t.string "relationship_to_case"
+    t.string "opponent_type"
+    t.string "opp_relationship_to_client"
+    t.string "opp_relationship_to_case"
+    t.boolean "child", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "second_home_value", precision: 14, scale: 2
@@ -337,18 +353,6 @@ ActiveRecord::Schema.define(version: 2019_07_05_150936) do
     t.uuid "original_file_id", null: false
     t.text "ccms_document_id"
     t.index ["original_file_id"], name: "index_pdf_files_on_original_file_id", unique: true
-  end
-
-  create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "proceeding_type_id"
-    t.uuid "scope_limitation_id"
-    t.boolean "substantive_default"
-    t.boolean "delegated_functions_default"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["proceeding_type_id", "scope_limitation_id"], name: "index_proceeding_type_scope_limitations_on_ids", unique: true
-    t.index ["proceeding_type_id"], name: "index_proceeding_type_scope_limitations_on_proceeding_type_id"
-    t.index ["scope_limitation_id"], name: "index_proceeding_type_scope_limitations_on_scope_limitation_id"
   end
 
   create_table "proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -488,8 +492,6 @@ ActiveRecord::Schema.define(version: 2019_07_05_150936) do
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
-  add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
-  add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"

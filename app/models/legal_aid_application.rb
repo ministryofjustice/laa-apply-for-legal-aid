@@ -140,24 +140,16 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     transaction_period_finish_at.to_date
   end
 
-  # This is here so that this method can be stubbed in the ccms payload integration tests
-  # it will be later replaced by an opponents association to load a dummy opponent for CCMS
-  # injection
   def opponents
-    nil
+    nil # TODO: CCMS placeholder
   end
 
-  # This is here so that this method can be stubbed in the ccms payload integration tests
-  # it will later be replaced with data from the HMRC integration
   def wage_slips
-    []
+    []  # TODO: CCMS placeholder
   end
 
-  # This is here so that this method can be stubbed in the ccms payload integration tests
-  # it will be later replaced by an opponents association to load a dummy opponent for CCMS
-  # injection
   def opponent_other_parties
-    []
+    []  # TODO: CCMS placeholder
   end
 
   private
