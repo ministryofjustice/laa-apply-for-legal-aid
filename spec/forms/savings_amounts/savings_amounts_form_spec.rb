@@ -23,7 +23,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           savings_amount.reload
 
           attributes.each do |attr|
-            val = savings_amount.send(attr)
+            val = savings_amount.__send__(attr)
             expected_val = params[attr]
             expect(val.to_s).to eq(expected_val), "Attr #{attr}: expected #{expected_val}, got #{val}"
           end
@@ -97,7 +97,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           savings_amount.reload
 
           attributes.each do |attr|
-            val = savings_amount.send(attr).to_s
+            val = savings_amount.__send__(attr).to_s
             expected_val = params[attr]
 
             expect("£#{val}").to eq(expected_val), "Attr #{attr}: expected #{expected_val}, got £#{val}"
@@ -106,18 +106,29 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
     end
 
-    context 'check boxes are unchecked' do
-      let(:check_box_params) { check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' } }
+    context 'some check boxes are unchecked' do
+      let(:check_box_params) do
+        boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
+        boxes[:check_box_isa] = 'true'
+        boxes
+      end
 
-      shared_examples_for 'it empties amounts' do
-        it 'empties amounts' do
+      context 'amounts are valid' do
+        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.decimal.to_s } }
+
+        it 'empties amounts if checkbox is unchecked' do
+          attributes_except_isa = attributes - [:isa]
           subject.save
           savings_amount.reload
-
-          attributes.each do |attr|
-            val = savings_amount.send(attr)
+          attributes_except_isa.each do |attr|
+            val = savings_amount.__send__(attr)
             expect(val).to eq(nil), "Attr #{attr}: expected nil, got #{val}"
           end
+        end
+
+        it 'does not empty amount if a checkbox is checked' do
+          subject.save
+          expect(savings_amount.reload.isa).not_to eq(nil)
         end
 
         it 'returns true' do
@@ -129,14 +140,49 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
       end
 
-      context 'amounts are valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.decimal.to_s } }
-        it_behaves_like 'it empties amounts'
-      end
-
       context 'amounts are not valid' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
-        it_behaves_like 'it empties amounts'
+
+        it 'it empties amounts' do
+          subject.save
+          savings_amount.reload
+          attributes.each do |attr|
+            val = savings_amount.__send__(attr)
+            expect(val).to eq(nil), "Attr #{attr}: expected nil, got #{val}"
+          end
+        end
+
+        it 'returns false' do
+          expect(subject.save).to eq(false)
+          expect(subject.errors).not_to be_empty
+        end
+      end
+
+      context 'if none of the check boxes are checked' do
+        let(:check_box_params) do
+          boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
+          boxes[:check_box_none_selected] = ''
+          boxes
+        end
+        let(:journey) { 'citizens' }
+
+        it 'returns true' do
+          expect(subject.save).to eq(false)
+          expect(subject.errors[:base]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected"))
+        end
+      end
+
+      context 'none of these check box is checked' do
+        let(:check_box_params) do
+          boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
+          boxes[:check_box_none_selected] = 'true'
+          boxes
+        end
+
+        it 'returns true' do
+          expect(subject.save).to eq(true)
+          expect(subject.errors).to be_empty
+        end
       end
     end
   end

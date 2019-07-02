@@ -48,7 +48,9 @@ en:
         purchased_on_hint: For example, 31 3 1980.
       identify_types_of_outgoings_form:
         sub_heading: Select all that apply
-        or_break: or
+        none_selected: None of these
+      savings_and_investments_form:
+        sub_heading: Select all that apply
         none_selected: None of these
       outstanding_mortgage_form:
         citizens:
@@ -96,14 +98,14 @@ en:
             savings_and_investments:
               cash: Enter total amount
               check_box_cash: Cash savings
-              check_box_isa: Post Office, ISAs and other savings accounts
+              check_box_isa: Money in accounts you do not access with online banking
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
               check_box_national_savings: National Savings Certificates and Premium Bonds
-              check_box_other_person_account: Signatory on another person's bank account
+              check_box_other_person_account: Signatory on a child's or other person's bank account
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_plc_shares: Shares in a PLC (public limited company)
               hint:
-                check_box_isa: Accounts you do not access with online banking
+                check_box_isa: Include bank, building society, Post Office and ISA accounts
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
                 check_box_other_person_account: For example, if you have power of attorney
               isa: Enter the estimated total in all accounts
@@ -134,14 +136,14 @@ en:
             savings_and_investments:
               cash: Enter total amount
               check_box_cash: Cash savings
-              check_box_isa: Bank, building society, Post Office and ISAs accounts
+              check_box_isa: Money in accounts they do not access with online banking
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
               check_box_national_savings: National Savings Certificates and Premium Bonds
-              check_box_other_person_account: Signatory on another person's bank account
+              check_box_other_person_account: Signatory on a child's or other person's bank account
               check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
               check_box_plc_shares: Shares in a PLC (public limited company)
               hint:
-                check_box_isa: Including any money in current and savings accounts
+                check_box_isa: Include bank, building society, Post Office and ISA accounts.
                 check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
                 check_box_other_person_account: For example, a junior ISA for a child
               isa: Enter the estimated total in all accounts
@@ -171,7 +173,6 @@ en:
       types_of_income_form:
         select_all_that_apply: Select all that apply
         financial_help_examples: For example, money from a family member for rent or bills.
-        or_break: or
         none_selected: None of these
       vehicles:
         estimated_value:

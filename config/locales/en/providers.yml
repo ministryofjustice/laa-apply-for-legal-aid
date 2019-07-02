@@ -221,7 +221,6 @@ en:
       show:
         h1-heading: Which types of assets does your client have?
         h2-heading: Select all that apply
-        or_break: or
         none_selected: None of these
     outgoings_summary:
       add_other_outgoings:
@@ -287,7 +286,8 @@ en:
         h1-heading: Do any of the following restrictions apply to your client's property or other assets?
     savings_and_investments:
       show:
-        h1-heading: Does your client have any savings and investments?
+        h1-heading: What types of savings or investments does your client have?
+        none_selected: None of these
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?

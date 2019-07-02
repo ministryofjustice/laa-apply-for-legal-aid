@@ -1,26 +1,34 @@
-<%= render partial: 'accounts_summary', locals: { bank_accounts: bank_accounts } if bank_accounts.any? %>
+<%= render 'accounts_summary', bank_accounts: bank_accounts if bank_accounts.any? %>
 
-<%= form_with(model: @form,
-              url: form_path,
-              method: :patch,
-              local: true) do |form| %>
+<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
-  <%= govuk_form_group do %>
-    <div class="govuk-checkboxes" data-module="checkboxes">
-      <%= render(
-            partial: 'shared/forms/revealing_checkbox/attribute',
-            collection: attributes,
-            locals: {
-              model: @form,
-              form: form
-            }
-          ) %>
-    </div>
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <%= govuk_fieldset_header do %>
+      <h1 class="govuk-fieldset__heading govuk-!-padding-bottom-7"><%= page_title %></h1>
+    <% end %>
+    <fieldset class="govuk-fieldset">
+      <div class="govuk-checkboxes" data-module="checkboxes">
+        <div class="deselect-group" data-deselect-ctrl="#savings_amount_check_box_none_selected">
+          <%= render partial: 'shared/forms/revealing_checkbox/attribute',
+                     collection: attributes,
+                     locals: { model: @form, form: form } %>
+        </div>
+      </div>
+
+      <p class="govuk-!-padding-top-4"><%= or_break %></p>
+
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <%= form.check_box('check_box_none_selected', { class: 'govuk-checkboxes__input' }, 'true', false) %>
+          <%= form.label('check_box_none_selected', none_selected, class: 'govuk-label govuk-checkboxes__label') %>
+        </div>
+      </div>
+
+    </fieldset>
   <% end %>
 
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
         form: form
       ) %>
-
 <% end %>

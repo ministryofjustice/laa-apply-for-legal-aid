@@ -1,7 +1,8 @@
-<%= page_template page_title: t('.h1-heading') do %>
-  <%= render(
-        'shared/forms/savings_and_investments_form',
-        bank_accounts: bank_accounts,
-        form_path: citizens_savings_and_investment_path
-      ) %>
+<%= page_template page_title: t('.h1-heading'), template: :basic, show_errors_for: @form do %>
+  <%= render  'shared/forms/savings_and_investments_form',
+              model: @form,
+              bank_accounts: bank_accounts,
+              form_path: citizens_savings_and_investment_path,
+              or_break: t('generic.or'),
+              none_selected: t('.none_selected') %>
 <% end %>

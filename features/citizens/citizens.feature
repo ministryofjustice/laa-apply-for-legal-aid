@@ -61,7 +61,7 @@ Feature: Citizen journey
     Then I should be on a page showing "Is the vehicle in regular use?"
     Then I choose "Yes"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do you have any savings and investments?"
+    Then I should be on a page showing "What types of savings or investments do you have?"
     Then I select "Cash savings"
     Then I fill "Cash" with "100"
     Then I click 'Save and continue'
@@ -136,7 +136,7 @@ Feature: Citizen journey
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'Do you have any savings and investments?'
+    Then I should be on a page showing 'What types of savings or investments do you have?'
     Then I fill 'Cash' with '1000'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
@@ -150,14 +150,14 @@ Feature: Citizen journey
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'Do you have any savings and investments?'
-    Then I select 'Post Office, ISAs and other savings accounts'
+    Then I should be on a page showing 'What types of savings or investments do you have?'
+    Then I select 'Money in accounts you do not access with online banking'
     Then I fill 'Isa' with '5000'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Post Office, ISAs and other savings accounts'
+    And the answer for 'Savings and investments' should be 'Money in accounts you do not access with online banking'
     And the answer for 'Savings and investments' should be '£5,000.00'
 
   @javascript
@@ -166,7 +166,7 @@ Feature: Citizen journey
     And 'cash' savings of 100
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'Do you have any savings and investments?'
+    Then I should be on a page showing 'What types of savings or investments do you have?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
     Then I click 'Save and continue'
