@@ -68,7 +68,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           let(:state) { :applicant_ref_obtained }
           let(:service) { AddCaseService }
           it 'calls the add_case service' do
-            expect(service_instance).to receive(:call).with(no_args)
+            expect(service_instance).to receive(:call).with({})
           end
         end
 

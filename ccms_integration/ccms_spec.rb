@@ -394,25 +394,20 @@ module CCMS
       end
 
       it 'generates the CaseAdd payload' do
-        if RSpec.configuration.run_ccms_integration_specs?
-          ENV['CCMS_PAYLOAD_GENERATION_ONLY'] = '1'
-          # stub ccms case reference as we're  not going through the whole path so it won't be generated
-          allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
-          @submission.process!
-        end
+        # stub ccms case reference as we're  not going through the whole path so it won't be generated
+        allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
+        @submission.process!(no_call: true)
       end
     end
 
     describe 'complete sequence' do
       it 'runs one thing after another' do
-        if RSpec.configuration.run_ccms_integration_specs?
           check_initial_state
           request_case_id
           create_an_applicant
           poll_applicant_creation
           create_case
           poll_case_creation_result
-        end
       end
     end
 

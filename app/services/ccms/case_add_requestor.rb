@@ -15,7 +15,8 @@ module CCMS
       'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
     )
 
-    def initialize(submission)
+    def initialize(submission, options)
+      @options = options
       @submission = submission
       @legal_aid_application = submission.legal_aid_application
       @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
@@ -25,8 +26,7 @@ module CCMS
 
     def call
       save_request unless Rails.env.production?
-
-      soap_client.call(:create_case_application, xml: request_xml) unless ENV['CCMS_PAYLOAD_GENERATION_ONLY'] == '1'
+      soap_client.call(:create_case_application, xml: request_xml) unless @options[:no_call]
     end
 
     private
