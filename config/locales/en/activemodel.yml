@@ -119,6 +119,8 @@ en:
               date_is_in_the_future: Date of birth must be in the past
               date_not_valid: Enter a valid date of birth
               earliest_allowed_date: Date of birth cannot be before %{date}
+            relationship:
+              blank: "Select if %{name} is a child relative or adult relative"
         incident:
           attributes:
             told_on:
