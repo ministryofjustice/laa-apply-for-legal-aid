@@ -1,44 +1,34 @@
 require 'rails_helper'
+require 'csv'
 
 RSpec.describe ScopeLimitation, type: :model do
-  describe 'validation' do
-    subject { described_class.new }
+  describe '.populate' do
+    subject { described_class.populate }
+    let(:seed_file) { Rails.root.join('db', 'seeds', 'scope_limitations.csv') }
 
-    before do
-      subject.code = 'AA001'
-      subject.meaning = 'test_limitation'
-      subject.description = 'this is a test limitation'
-      subject.substantive = true
-      subject.delegated_functions = false
+    it 'create instances from the seed file' do
+      expect { subject }.to change { described_class.count }.by(seed_file.readlines.size - 1)
     end
 
-    it 'is valid with all valid attributes' do
-      expect(subject).to be_valid
+    it 'creates instances with correct data from the seed file' do
+      subject
+      expect(described_class.order("created_at ASC").first.code).to eq(CSV.read(seed_file, headers: true)[0][0])
     end
 
-    it 'is invalid without a code' do
-      subject.code = nil
-      expect(subject).not_to be_valid
+    context 'when a scope_limitation exists' do
+      let!(:scope_limitation) { create :scope_limitation, 'with_real_data' }
+      it 'creates one less scope_limitation' do
+        expect { subject }.to change { described_class.count }.by(seed_file.readlines.size - 2)
+      end
     end
 
-    it 'is invalid without a meaning' do
-      subject.meaning = nil
-      expect(subject).not_to be_valid
-    end
-
-    it 'is invalid without a description' do
-      subject.description = nil
-      expect(subject).not_to be_valid
-    end
-
-    it 'is invalid without a substantive flag' do
-      subject.substantive = nil
-      expect(subject).not_to be_valid
-    end
-
-    it 'is invalid without a delegated_functions flag' do
-      subject.delegated_functions = nil
-      expect(subject).not_to be_valid
+    context 'when run twice' do
+      it 'creates the same total number of instances' do
+        expect {
+          subject
+          subject
+        }.to change { described_class.count }.by(seed_file.readlines.size - 1)
+      end
     end
   end
 end
