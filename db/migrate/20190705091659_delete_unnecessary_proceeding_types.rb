@@ -12,10 +12,5 @@ class DeleteUnnecessaryProceedingTypes < ActiveRecord::Migration[5.2]
     ProceedingType.delete(proceeding_ids_to_be_deleted)
   end
 
-  def down
-  end
-
-  def down
-    raise ActiveRecord::IrreversibleMigration
-  end
+  def down; end
 end
