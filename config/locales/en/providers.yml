@@ -72,7 +72,7 @@ en:
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         h1-heading: Check your answers
-        merits-heading: Merits assessment
+        case-details-heading: Case details
         respondent-heading: Respondent details
         latest-incident-heading: Details of the latest incident
         items:
@@ -81,14 +81,15 @@ en:
           client_received_legal_help: Client received legal help
           estimated_legal_costs: Estimated legal costs
           proceedings_currently_before_court: Proceedings currently before court
-          prospects_of_success: Prospects of success
-          statement_of_case: Statement of case
+          prospects_of_success: Is the chance of a successful outcome 50% or better?
+          success_prospect: What is the chance of a successful outcome?
+          statement_of_case: Provide a statement of case
           understands_terms_of_court_order: Does the respondent have the mental capacity to understand the terms of a court order?
           warning_letter_sent: Has a warning letter been sent to the respondent?
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
           notification_of_latest_incident: When did your client tell you about the latest domestic abuse incident?
-          date_of_latest_incident: When did the latest incident occur?
+          date_of_latest_incident: When did the incident occur?
           details_of_latest_incident: What happened during the incident?
     check_passported_answers:
       show:

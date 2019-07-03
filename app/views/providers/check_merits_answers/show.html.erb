@@ -3,29 +3,28 @@
       back_link: { path: reset_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application), method: :patch }
     ) do %>
 
-  <h2 class="govuk-heading-m">
-    <%= t '.latest-incident-heading' %>
-  </h2>
+    <%= check_answer_change_link(
+          name: :incident_details,
+          url: providers_legal_aid_application_date_client_told_incident_path,
+          question: t('.latest-incident-heading')
+        ) %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
+
+    <%= check_answer_no_link_bold(
           name: :notification_of_latest_incident,
-          url: providers_legal_aid_application_date_client_told_incident_path,
           question: t('.items.notification_of_latest_incident'),
           answer: @incident&.told_on
         ) %>
   </dl>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-  <%= check_answer_link(
-        name: :date_of_latest_incident,
-        url: providers_legal_aid_application_date_client_told_incident_path,
-        question: t('.items.date_of_latest_incident'),
-        answer: @incident&.occurred_on
-      ) %>
+    <%= check_answer_no_link_bold(
+          name: :date_of_latest_incident,
+          question: t('.items.date_of_latest_incident'),
+          answer: @incident&.occurred_on
+        ) %>
   </dl>
-
-  <div class='govuk-body'><%= simple_format @incident&.details %></div>
 
   <div class="govuk-!-padding-bottom-6"></div>
 
@@ -35,7 +34,7 @@
           question: t('.respondent-heading')
         ) %>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2" id="THISONE">
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link_bold(
           name: :understands_terms_of_court_order,
           question: t('.items.understands_terms_of_court_order'),
@@ -75,7 +74,7 @@
   <div class="govuk-!-padding-bottom-6"></div>
 
   <h2 class="govuk-heading-m">
-    <%= t '.merits-heading' %>
+    <%= t '.case-details-heading' %>
   </h2>
 
   <div class='govuk-body'><%= simple_format @merits.details_of_proceedings_before_the_court %></div>
@@ -93,11 +92,20 @@
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
-          name: :prospects_of_success,
+          name: :success_likely,
           url: providers_legal_aid_application_success_likely_index_path,
           question: t('.items.prospects_of_success'),
-          answer: t("shared.forms.success_prospect.success_prospect_item.#{@merits.success_prospect}")
+          answer: yes_no(@merits.success_likely)
         ) %>
+  </dl>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_link(
+          name: :success_prospect,
+          url: providers_legal_aid_application_success_likely_index_path,
+          question: t('.items.success_prospect'),
+          answer: t("shared.forms.success_prospect.success_prospect_item.#{@merits.success_prospect}")
+        ) unless @merits.success_likely? %>
   </dl>
 
   <div class='govuk-body'><%= simple_format @merits.success_prospect_details %></div>
