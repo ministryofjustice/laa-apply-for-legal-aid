@@ -6,13 +6,7 @@ module Flow
           path: ->(_) { urls.citizens_identify_types_of_income_path },
           forward: :has_dependants
         },
-        has_dependants: {
-          path: ->(_) { urls.citizens_has_dependants_path },
-          forward: ->(application) { application.has_dependants? ? :dependant_details : :identify_types_of_outgoings }
-        },
-        dependant_details: {
-          path: '[PLACEHOLDER] Dependant details'
-        },
+        # Dependants steps here (see CitizenDependants)
         identify_types_of_outgoings: {
           path: ->(_) { urls.citizens_identify_types_of_outgoing_path },
           forward: :own_homes

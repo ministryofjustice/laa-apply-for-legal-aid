@@ -276,3 +276,29 @@ Feature: Citizen journey
       Then I choose option "Vehicle used regularly true"
       And I click "Save and continue"
       Then I should be on a page showing 'Check your answers'
+
+  @javascript
+  Scenario: I have one young dependant
+    Given An application has been created
+    Then I visit the first question about dependants
+    Then I should be on a page showing "Do you have any dependants?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Enter your first dependant's details"
+    Then I fill "Name" with "John Doe"
+    Then I enter the date of birth '01-01-2018'
+    Then I click "Save and continue"
+    Then I should be on a page showing "[PLACEHOLDER] do you have any other dependant?"
+
+  @javascript
+  Scenario: I have one 16 years old dependant
+    Given An application has been created
+    Then I visit the first question about dependants
+    Then I should be on a page showing "Do you have any dependants?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Enter your first dependant's details"
+    Then I fill "Name" with "Jane Doe"
+    Then I enter the date of birth '01-01-2003'
+    Then I click "Save and continue"
+    Then I should be on a page showing "[PLACEHOLDER] - Jane Doe - dependant relationship"

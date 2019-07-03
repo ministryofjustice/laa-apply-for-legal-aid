@@ -6,7 +6,8 @@ Given('An application has been created') do
     :with_no_savings,
     :with_no_other_assets,
     provider: create(:provider),
-    state: :provider_submitted
+    state: :provider_submitted,
+    transaction_period_finish_at: '2019-07-01'.to_time
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
@@ -17,6 +18,11 @@ end
 
 Then('I visit the start of the financial assessment') do
   visit citizens_legal_aid_application_path(secure_id)
+end
+
+Then('I visit the first question about dependants') do
+  visit citizens_legal_aid_application_path(secure_id)
+  visit citizens_has_dependants_path
 end
 
 Then('I visit the accounts page') do
