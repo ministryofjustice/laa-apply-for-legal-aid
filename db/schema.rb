@@ -363,6 +363,7 @@ ActiveRecord::Schema.define(version: 2019_06_28_122520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "offices"
+    t.json "details_response"
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
   end

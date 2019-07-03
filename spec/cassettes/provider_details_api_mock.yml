@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://test/v1/fake_providers/Chlo%C3%A9.Doe
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - localhost:5000
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"63765d206dd4359756a16b31f825dfc9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 178a83fc-95a8-49ce-b9cc-da3927d9fae4
+      X-Runtime:
+      - '0.174367'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJwcm92aWRlck9mZmljZXMiOlt7InByb3ZpZGVyZmlybUlkIjo0NjEyLCJvZmZpY2VJZCI6OTUyMDksIm9mZmljZU5hbWUiOiJFdCBxdWkgZXQgdm9sdXB0YXR1bS4iLCJzbXNWZW5kb3JOdW0iOiIxNjQwIiwic21zVmVuZG9yU2l0ZSI6ImRpZ25pc3NpbW9zIn0seyJwcm92aWRlcmZpcm1JZCI6MjM4MjIsIm9mZmljZUlkIjo3MjkyOSwib2ZmaWNlTmFtZSI6IlF1aWEgbWFpb3JlcyBxdW8gYXV0LiIsInNtc1ZlbmRvck51bSI6IjU2NDYiLCJzbXNWZW5kb3JTaXRlIjoibGFib3J1bSJ9LHsicHJvdmlkZXJmaXJtSWQiOjQyNTQ1LCJvZmZpY2VJZCI6ODcxNjEsIm9mZmljZU5hbWUiOiJMaWJlcm8gdm9sdXB0YXRlbSBkb2xvcnVtIHJlcHVkaWFuZGFlLiIsInNtc1ZlbmRvck51bSI6IjYzNDMiLCJzbXNWZW5kb3JTaXRlIjoibm9uIn1dLCJjb250YWN0SWQiOjYzODEwLCJjb250YWN0TmFtZSI6IkNobG/DqSBEb2UifQ==
+    http_version:
+  recorded_at: Thu, 27 Jun 2019 13:35:30 GMT
+recorded_with: VCR 5.0.0

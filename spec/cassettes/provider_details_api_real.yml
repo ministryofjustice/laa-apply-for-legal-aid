@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://sitsoa10.laadev.co.uk/CCMSInformationService/api/providerDetails/NEETADESOR
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - sitsoa10.laadev.co.uk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 27 Jun 2019 14:15:19 GMT
+      Server:
+      - Oracle-HTTP-Server
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"providerOffices":[{"providerfirmId":26403,"officeId":84705,"officeName":"RUSSELL
+        COOKE LLP RE ABILOYE & CO-0M477A","smsVendorNum":"3534","smsVendorSite":"SMS_VENDOR_SITE"}],"contactId":34419,"contactName":"Neeta
+        Desor"}'
+    http_version: 
+  recorded_at: Thu, 27 Jun 2019 14:15:19 GMT
+recorded_with: VCR 5.0.0
