@@ -55,7 +55,7 @@ RSpec.describe Citizens::Dependants::DetailsController, type: :request do
       let(:param_date_of_birth) { submission_date - 10.years }
 
       it 'redirects to the page asking if you have other dependant' do
-        expect(response.body).to include '[PLACEHOLDER] do you have any other dependant?'
+        expect(response).to redirect_to(citizens_has_other_dependant_path)
       end
     end
 
