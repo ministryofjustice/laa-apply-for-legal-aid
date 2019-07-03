@@ -298,4 +298,24 @@ Feature: Citizen journey
     Then I should be on a page showing "What is your relationship to"
     Then I choose "They're a child relative"
     Then I click "Save and continue"
-    Then I should be on a page showing "dependants income"
+    Then I should be on a page showing "receive any income?"
+
+  @javascript
+  Scenario: I have an adult dependant more than 18 years old
+    Given An application has been created
+    Then I visit the first question about dependants
+    Then I should be on a page showing "Do you have any dependants?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Enter your first dependant's details"
+    Then I fill "Name" with "Jane Doe"
+    Then I enter the date of birth '01-01-1980'
+    Then I click "Save and continue"
+    Then I should be on a page showing "What is your relationship to"
+    Then I choose "They're an adult relative"
+    Then I click "Save and continue"
+    Then I should be on a page showing "receive any income?"
+    Then I choose "Yes"
+    Then I fill "monthly income" with "1234"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "dependants assets"
