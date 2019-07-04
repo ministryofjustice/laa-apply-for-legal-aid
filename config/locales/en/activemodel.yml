@@ -339,7 +339,6 @@ en:
             purchased_on:
               blank: Enter a valid date
               date_not_valid: Enter a valid date
-              # date_is_in_the_future: Date you bought the vehicle must be in the past
               citizen:
                 date_is_in_the_future: Date you bought the vehicle must be in the past
               provider:

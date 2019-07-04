@@ -8,10 +8,10 @@ module VehicleForm
     attr_accessor :journey
     attr_writer :purchased_on
 
+    validate :date_is_in_the_future
+
     validates :purchased_on, presence: true, unless: :draft_and_not_partially_complete_date?
     validates :purchased_on, date: { not_in_the_future: true }, allow_nil: true
-
-    validate :date_is_in_the_future
 
     def initialize(*args)
       super
@@ -50,6 +50,7 @@ module VehicleForm
 
     def date_is_in_the_future
       return if draft? || !purchased_on
+      return if purchased_on == :invalid
 
       errors.add(:purchased_on, error_message_for(:date_is_in_the_future)) if purchased_on > Date.current
     end

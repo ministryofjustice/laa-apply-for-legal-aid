@@ -11,8 +11,8 @@
             <%= content_tag(:span, t(".#{field_name}_hint"), default: '', id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
         <% end %>
 
-        <% form.object.errors[field_name].each do |message| %>
-            <%= content_tag(:span, message, id: "#{field_name}-error".dasherize, class: 'govuk-error-message') if form.object.errors[field_name].any? %>
+        <% if form.object.errors[field_name].any? %>
+          <%= content_tag(:span, form.object.errors[field_name].first, id: "#{field_name}-error".dasherize, class: ['govuk-error-message']) %>
         <% end %>
 
         <fieldset class="govuk-fieldset">
