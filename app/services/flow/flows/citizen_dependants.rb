@@ -26,6 +26,10 @@ module Flow
         has_other_dependants: {
           path: ->(_) { urls.citizens_has_other_dependant_path },
           forward: ->(_, has_other_dependant) { has_other_dependant ? :dependants : :identify_types_of_outgoings }
+        },
+        dependants_full_time_educations: {
+          # path: ->(_) { urls.citizens_dependant_full_time_education_path },
+          forward: ->(_) { :dependants_income }
         }
       }.freeze
     end

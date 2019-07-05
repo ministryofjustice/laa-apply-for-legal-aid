@@ -5,5 +5,13 @@ FactoryBot.define do
     name { Faker::Name.name }
     date_of_birth { Faker::Date.birthday(7, 77) }
     relationship {  Dependant.relationships.keys.sample }
+
+    trait :over_18 do
+      date_of_birth { Faker::Date.birthday(19, 65) }
+    end
+
+    trait :under_18 do
+      date_of_birth { Faker::Date.birthday(1, 17) }
+    end
   end
 end

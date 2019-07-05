@@ -93,7 +93,7 @@ RSpec.describe 'provider percentage share of home test', type: :request do
           expect(response.body).not_to match('govuk-form-group--error')
         end
 
-        it 'redirects to the next step in Provider jouney' do
+        it 'redirects to the Provider home page' do
           subject
           expect(response).to redirect_to providers_legal_aid_applications_path
         end

@@ -52,6 +52,8 @@ en:
           add_dependant_later: You can add more dependants later.
           you_already_told_about: "You've already told us about:"
           dependant_list_item: "%{name}, born %{date_of_birth}"
+        full_time_educations:
+          page_title: "Is %{name} in full-time education or training?"
         relationship:
           option:
             child_relative: They're a child relative
