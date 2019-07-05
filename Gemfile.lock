@@ -265,8 +265,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (3.1.1)
-    puma (4.0.0)
-      nio4r (~> 2.0)
+    puma (3.12.1)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
     rack (2.0.7)
@@ -424,6 +423,8 @@ GEM
     timecop (0.9.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2019.2)
+      tzinfo (>= 1.0.0)
     unicode-display_width (1.6.0)
     vcr (5.0.0)
     warden (1.2.8)
@@ -489,7 +490,7 @@ DEPENDENCIES
   pg
   prometheus_exporter
   pry-byebug
-  puma (~> 4.0)
+  puma (~> 3.0)
   pundit
   rails (~> 5.2.3)
   redis-namespace
@@ -522,7 +523,7 @@ DEPENDENCIES
   webpacker (~> 4.x)
 
 RUBY VERSION
-   ruby 2.5.3p105
+   ruby 2.6.3p62
 
 BUNDLED WITH
-   1.17.3
+   2.0.2

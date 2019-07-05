@@ -42,11 +42,13 @@ spec:
               path: /status
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /status
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 10
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

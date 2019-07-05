@@ -1,37 +1,74 @@
-FROM ministryofjustice/ruby:2.5.3-webapp-onbuild
+FROM ruby:2.6.3-alpine3.8
 MAINTAINER apply for legal aid team
+
+# fail early and print all commands
+RUN set -ex
+
+# build dependencies:
+# - virtual: create virtual package for later deletion
+# - build-base for alpine fundamentals
+# - libxml2-dev/libxslt-dev for nokogiri, at least
+# - postgresql-dev for pg/activerecord gems
+# - git for installing gems referred to use a git:// uri
+#
+RUN apk --no-cache add --virtual build-dependencies \
+                    build-base \
+                    libxml2-dev \
+                    libxslt-dev \
+                    postgresql-dev \
+                    git \
+&& apk --no-cache add \
+                  postgresql-client \
+                  nodejs \
+                  yarn \
+                  linux-headers \
+                  clamav-daemon \
+                  pdftk \
+                  libreoffice
+
+# add non-root user and group with alpine first available uid, 1000
+RUN addgroup -g 1000 -S appgroup \
+&& adduser -u 1000 -S appuser -G appgroup
+
+# create app directory in conventional, existing dir /usr/src
+RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app/tmp
+WORKDIR /usr/src/app
+
+######################
+# DEPENDENCIES START #
+######################
+# Env vars needed for dependency install and asset precompilation
+
+COPY Gemfile* ./
+
+# only install production dependencies,
+# build nokogiri using libxml2-dev, libxslt-dev
+RUN gem install bundler -v 2.0.2 \
+&& bundle config --global without test:development \
+&& bundle config build.nokogiri --use-system-libraries \
+&& bundle install
+
+COPY package.json yarn.lock ./
+RUN yarn --prod
+
+####################
+# DEPENDENCIES END #
+####################
 
 ENV RAILS_ENV production
 ENV NODE_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+EXPOSE 3002
 
-ENV PORT 3002
+COPY . .
 
-RUN touch /etc/inittab
+RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
 
-RUN apt-get update && apt-get install -y
-RUN apt-get install postgresql postgresql-contrib -y
-RUN apt-get install clamav-daemon -y
-RUN apt-get install libreoffice -y
+# tidy up installation
+RUN apk del build-dependencies
 
-# latest 10.x version of Node.js
-RUN curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
-RUN bash nodesource_setup.sh
-RUN apt-get install nodejs -y
-RUN nodejs -v
+# non-root/appuser should own only what they need to
+RUN chown -R appuser:appgroup log tmp db
 
-# latest stable version of yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install yarn
-RUN yarn --pure-lockfile
-
-EXPOSE $PORT
-
-RUN bundle exec rake assets:precompile SECRET_KEY_BASE=required_but_does_not_matter_for_assets
-
-# Copy helper scripts
-COPY ./docker/* /usr/src/app/bin/
-
-ENV RAILS_SERVE_STATIC_FILES=true
-
-CMD ["bin/run"]
+USER 1000
+CMD "./docker/run"
