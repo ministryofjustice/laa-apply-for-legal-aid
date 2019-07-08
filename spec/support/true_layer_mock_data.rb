@@ -30,7 +30,7 @@ module TrueLayerHelpers
         sort_code: Faker::Number.number(6)
       },
       balance: {
-        current: Faker::Number.decimal(2).to_f
+        current: rand(1...1_000_000.0).round(2)
       },
       transactions: [{
         transaction_id: SecureRandom.hex,
@@ -60,7 +60,7 @@ module TrueLayerHelpers
         sort_code: Faker::Number.number(6)
       },
       balance: {
-        current: Faker::Number.decimal(2).to_f
+        current: rand(1...1_000_000.0).round(2)
       },
       transactions: [{
         transaction_id: SecureRandom.hex

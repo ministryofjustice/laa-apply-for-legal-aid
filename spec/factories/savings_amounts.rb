@@ -3,13 +3,13 @@ FactoryBot.define do
     legal_aid_application
 
     trait :with_values do
-      isa { Faker::Number.decimal.to_d }
-      cash { Faker::Number.decimal.to_d }
-      other_person_account { Faker::Number.decimal.to_d }
-      national_savings { Faker::Number.decimal.to_d }
-      plc_shares { Faker::Number.decimal.to_d }
-      peps_unit_trusts_capital_bonds_gov_stocks { Faker::Number.decimal.to_d }
-      life_assurance_endowment_policy { Faker::Number.decimal.to_d }
+      isa { rand(1...1_000_000.0).round(2) }
+      cash { rand(1...1_000_000.0).round(2) }
+      other_person_account { rand(1...1_000_000.0).round(2) }
+      national_savings { rand(1...1_000_000.0).round(2) }
+      plc_shares { rand(1...1_000_000.0).round(2) }
+      peps_unit_trusts_capital_bonds_gov_stocks { rand(1...1_000_000.0).round(2) }
+      life_assurance_endowment_policy { rand(1...1_000_000.0).round(2) }
     end
 
     trait :all_nil do
@@ -35,10 +35,10 @@ FactoryBot.define do
     trait :mix_of_values do
       isa { nil }
       cash { 0.0 }
-      other_person_account { Faker::Number.decimal.to_d }
+      other_person_account { rand(1...1_000_000.0).round(2) }
       national_savings { nil }
       plc_shares { 0.0 }
-      peps_unit_trusts_capital_bonds_gov_stocks { Faker::Number.decimal.to_d }
+      peps_unit_trusts_capital_bonds_gov_stocks { rand(1...1_000_000.0).round(2) }
       life_assurance_endowment_policy { 0.0 }
     end
   end

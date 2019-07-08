@@ -110,7 +110,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
 
           context 'has other_assets' do
-            let(:oad) { create :other_assets_declaration, land_value: Faker::Number.decimal.to_d }
+            let(:oad) { create :other_assets_declaration, land_value: rand(1...1_000_000.0).round(2) }
             let(:application) { oad.legal_aid_application }
 
             before do
@@ -132,7 +132,7 @@ RSpec.describe 'provider other assets requests', type: :request do
 
             before do
               application.create_savings_amount!
-              application.savings_amount.cash = Faker::Number.decimal.to_d
+              application.savings_amount.cash = rand(1...1_000_000.0).round(2)
               application.savings_amount.save!
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
@@ -269,7 +269,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
 
           context 'has other_assets' do
-            let(:oad) { create :other_assets_declaration, land_value: Faker::Number.decimal.to_d }
+            let(:oad) { create :other_assets_declaration, land_value: rand(1...1_000_000.0).round(2) }
             let(:application) { oad.legal_aid_application }
 
             it 'redirects to provider applications page' do
@@ -286,7 +286,7 @@ RSpec.describe 'provider other assets requests', type: :request do
 
             before do
               application.create_savings_amount!
-              application.savings_amount.cash = Faker::Number.decimal.to_d
+              application.savings_amount.cash = rand(1...1_000_000.0).round(2)
               application.savings_amount.save!
               patch providers_legal_aid_application_other_assets_path(application), params: empty_params.merge(submit_button)
             end

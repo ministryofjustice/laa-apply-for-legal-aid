@@ -4,7 +4,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
   let(:legal_aid_application) do
     create :legal_aid_application, outstanding_mortgage_amount: nil
   end
-  let(:amount) { Faker::Number.decimal(4) }
+  let(:amount) { rand(1...1_000_000.0).round(2).to_s }
   let(:params) do
     {
       model: legal_aid_application,
@@ -14,7 +14,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
   subject { described_class.new(params) }
 
   describe '#outstanding_mortgage_amount' do
-    let(:existing_amount) { Faker::Number.decimal(4) }
+    let(:existing_amount) { rand(1...1_000_000.0).round(2).to_s }
     let(:legal_aid_application) do
       create :legal_aid_application, outstanding_mortgage_amount: existing_amount
     end

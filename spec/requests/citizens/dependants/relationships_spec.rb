@@ -42,7 +42,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
 
       it 'redirects to dependant income' do
         subject
-        expect(response.body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
+        expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
 
         it 'redirects to dependant income' do
           subject
-          expect(response.body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
+          expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
         end
       end
 
@@ -63,7 +63,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
 
         it 'redirects to dependant income' do
           subject
-          expect(response.body).to include "[PLACEHOLDER] #{dependant.name} dependants education"
+          expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants education"
         end
       end
     end
@@ -79,7 +79,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.relationship.blank', name: dependant.name))
+        expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.dependant.attributes.relationship.blank', name: dependant.name))
       end
     end
   end

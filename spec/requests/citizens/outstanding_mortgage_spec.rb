@@ -17,7 +17,7 @@ RSpec.describe 'citizen outstanding mortgage request', type: :request do
   end
 
   describe 'PATCH /citizens/outstanding_mortgage' do
-    let(:amount) { Faker::Number.decimal(4) }
+    let(:amount) { rand(1...1_000_000.0).round(2).to_s }
     let(:params) do
       { legal_aid_application: { outstanding_mortgage_amount: amount } }
     end

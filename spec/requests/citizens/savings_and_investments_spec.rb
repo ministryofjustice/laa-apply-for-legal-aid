@@ -34,7 +34,7 @@ RSpec.describe 'citizen savings and investments', type: :request do
   end
 
   describe 'PATCH citizens/savings_and_investment' do
-    let(:isa) { Faker::Number.decimal.to_s }
+    let(:isa) { rand(1...1_000_000.0).round(2).to_s }
     let(:check_box_isa) { 'true' }
     let(:params) { { savings_amount: { isa: isa, check_box_isa: check_box_isa } } }
     subject { patch citizens_savings_and_investment_path, params: params }

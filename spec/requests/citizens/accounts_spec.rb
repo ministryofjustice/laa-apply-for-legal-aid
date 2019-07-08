@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen accounts request', type: :request do
+  include ActionView::Helpers::NumberHelper
+
   let!(:applicant) { create :applicant }
   let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, applicant: applicant }
   let(:addresses) do
@@ -51,7 +53,7 @@ RSpec.describe 'citizen accounts request', type: :request do
     end
 
     it 'display balance with pound symbol' do
-      expect(response.body).to include("£#{applicant_bank_account.balance}")
+      expect(response.body).to include(number_to_currency(applicant_bank_account.balance, unit: '£'))
     end
 
     it 'adds its url to history' do

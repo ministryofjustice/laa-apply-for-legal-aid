@@ -6,6 +6,6 @@ FactoryBot.define do
     currency { Faker::Currency.code }
     account_number { Faker::Number.number(10) }
     sort_code { Faker::Number.number(6) }
-    balance { Faker::Number.decimal(2).to_f }
+    balance { rand(1...1_000_000.0).round(2) }
   end
 end

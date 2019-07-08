@@ -11,7 +11,7 @@ RSpec.describe SavingsAmount, type: :model do
     end
 
     context 'has some savings' do
-      before { subject.update!(cash: Faker::Number.decimal.to_d) }
+      before { subject.update!(cash: rand(1...1_000_000.0).round(2)) }
 
       it 'is positive' do
         expect(subject.positive?).to eq(true)
