@@ -51,7 +51,7 @@ RSpec.describe Citizens::DependantsController, type: :request do
 
       it 'redirects to the page asking if you have other dependant' do
         subject
-        expect(response.body).to include '[PLACEHOLDER] do you have any other dependant?'
+        expect(response).to redirect_to(citizens_has_other_dependant_path)
       end
     end
 

@@ -8,10 +8,10 @@ module Flow
         },
         dependants: {
           path: ->(_) { urls.citizens_dependants_path },
-          forward: ->(_, dependant) { dependant.over_fifteen? ? :dependants_relationships : :other_dependant }
+          forward: ->(_, dependant) { dependant.over_fifteen? ? :dependants_relationships : :has_other_dependants }
         },
         dependants_details: {
-          forward: ->(_, dependant) { dependant.over_fifteen? ? :dependants_relationships : :other_dependant }
+          forward: ->(_, dependant) { dependant.over_fifteen? ? :dependants_relationships : :has_other_dependants }
         },
         dependants_relationships: {
           path: ->(_, dependant) { urls.citizens_dependant_relationship_path(dependant) },
@@ -23,8 +23,9 @@ module Flow
         dependants_income: {
           path: ->(_, dependant) { "[PLACEHOLDER] #{dependant.name} dependants income" }
         },
-        other_dependant: {
-          path: '[PLACEHOLDER] do you have any other dependant?'
+        has_other_dependants: {
+          path: ->(_) { urls.citizens_has_other_dependant_path },
+          forward: ->(_, has_other_dependant) { has_other_dependant ? :dependants : :identify_types_of_outgoings }
         }
       }.freeze
     end

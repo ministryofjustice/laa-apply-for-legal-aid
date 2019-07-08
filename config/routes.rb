@@ -86,6 +86,7 @@ Rails.application.routes.draw do
         resource :relationship, only: %i[show update]
       end
     end
+    resource :has_other_dependant, only: %i[show update]
   end
 
   namespace :providers do
