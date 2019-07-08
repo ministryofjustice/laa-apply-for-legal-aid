@@ -4,5 +4,6 @@ FactoryBot.define do
     number { Faker::Number.number(2) }
     name { Faker::Name.name }
     date_of_birth { Faker::Date.birthday(7, 77) }
+    relationship {  Dependant.relationships.keys.sample }
   end
 end

@@ -65,6 +65,10 @@ en:
           need to pay a financial penalty
           have your legal aid stopped and have to pay back the costs
         submit_button: Agree and submit
+    dependants:
+      relationships:
+        show:
+          page_heading: "What is your relationship to %{name}?"
     has_dependants:
       show:
         page_heading: Do you have any dependants?

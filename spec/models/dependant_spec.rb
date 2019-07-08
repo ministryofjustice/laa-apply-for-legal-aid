@@ -47,4 +47,38 @@ RSpec.describe Dependant, type: :model do
       end
     end
   end
+
+  describe '#eighteen_or_less?' do
+    context 'Less than 18 years old' do
+      let(:date_of_birth) { Time.now - 10.years }
+
+      it 'returns true' do
+        expect(dependant.eighteen_or_less?).to eq(true)
+      end
+    end
+
+    context 'more than 18 years old' do
+      let(:date_of_birth) { Time.now - 20.years }
+
+      it 'returns false' do
+        expect(dependant.eighteen_or_less?).to eq(false)
+      end
+    end
+
+    context '18 and a half years old' do
+      let(:date_of_birth) { Time.now - 18.years + 6.months }
+
+      it 'returns true' do
+        expect(dependant.eighteen_or_less?).to eq(true)
+      end
+    end
+
+    context '17 and a half years old' do
+      let(:date_of_birth) { Time.now - 18.years - 6.months }
+
+      it 'returns true' do
+        expect(dependant.eighteen_or_less?).to eq(true)
+      end
+    end
+  end
 end

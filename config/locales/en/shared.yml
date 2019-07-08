@@ -52,6 +52,13 @@ en:
           add_dependant_later: You can add more dependants later.
           you_already_told_about: "You've already told us about:"
           dependant_list_item: "%{name}, born %{date_of_birth}"
+        relationship:
+          option:
+            child_relative: They're a child relative
+            adult_relative: They're an adult relative
+            hint:
+              child_relative: For example, your child, grandchild, niece or nephew.
+              adult_relative: For example, a parent, grandparent, aunt or uncle.
       identify_types_of_outgoings_form:
         sub_heading: Select all that apply
         none_selected: None of these

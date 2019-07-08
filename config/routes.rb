@@ -83,6 +83,7 @@ Rails.application.routes.draw do
     resources :dependants, only: %i[index create] do
       scope module: :dependants do
         resource :details, only: %i[show update]
+        resource :relationship, only: %i[show update]
       end
     end
   end

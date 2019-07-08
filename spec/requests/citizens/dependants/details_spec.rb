@@ -10,7 +10,7 @@ RSpec.describe Citizens::Dependants::DetailsController, type: :request do
     subject
   end
 
-  describe 'GET /citizens/dependant_details/:id' do
+  describe 'GET /citizens/dependants/:id/details' do
     subject { get citizens_dependant_details_path(dependant) }
 
     it 'returns http success' do
@@ -25,7 +25,7 @@ RSpec.describe Citizens::Dependants::DetailsController, type: :request do
     end
   end
 
-  describe 'PATCH /citizens/dependant_details/:id' do
+  describe 'PATCH /citizens/dependants/:id/details' do
     let(:param_name) { Faker::Name.name }
     let(:param_date_of_birth) { submission_date - 20.years }
     let(:params) do
@@ -48,7 +48,7 @@ RSpec.describe Citizens::Dependants::DetailsController, type: :request do
     end
 
     it 'redirects to the dependant relationship page if the dependant is more than 15 years old' do
-      expect(unescaped_response_body).to include "[PLACEHOLDER] - #{param_name} - dependant relationship"
+      expect(response).to redirect_to(citizens_dependant_relationship_path(dependant))
     end
 
     context 'dependant is less than 15 years old' do

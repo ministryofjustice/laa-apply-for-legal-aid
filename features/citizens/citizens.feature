@@ -278,7 +278,7 @@ Feature: Citizen journey
       Then I should be on a page showing 'Check your answers'
 
   @javascript
-  Scenario: I have one young dependant
+  Scenario: I have a dependant less than 15 years old
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -291,7 +291,7 @@ Feature: Citizen journey
     Then I should be on a page showing "[PLACEHOLDER] do you have any other dependant?"
 
   @javascript
-  Scenario: I have one 16 years old dependant
+  Scenario: I have a dependant more than 18 years old
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -299,6 +299,9 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your first dependant's details"
     Then I fill "Name" with "Jane Doe"
-    Then I enter the date of birth '01-01-2003'
+    Then I enter the date of birth '01-01-1980'
     Then I click "Save and continue"
-    Then I should be on a page showing "[PLACEHOLDER] - Jane Doe - dependant relationship"
+    Then I should be on a page showing "What is your relationship to"
+    Then I choose "They're a child relative"
+    Then I click "Save and continue"
+    Then I should be on a page showing "dependants education"

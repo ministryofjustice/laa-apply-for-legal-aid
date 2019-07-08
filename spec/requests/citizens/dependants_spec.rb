@@ -31,6 +31,7 @@ RSpec.describe Citizens::DependantsController, type: :request do
         }
       }
     end
+    let(:latest_dependant) { Dependant.order(:created_at).last }
 
     subject { post citizens_dependants_path, params: params }
 
@@ -42,7 +43,7 @@ RSpec.describe Citizens::DependantsController, type: :request do
 
     it 'redirects to the dependant relationship page if the dependant is more than 15 years old' do
       subject
-      expect(unescaped_response_body).to include "[PLACEHOLDER] - #{param_name} - dependant relationship"
+      expect(response).to redirect_to(citizens_dependant_relationship_path(latest_dependant.id))
     end
 
     context 'dependant is less than 15 years old' do
