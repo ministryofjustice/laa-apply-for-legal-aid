@@ -41,7 +41,7 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
     end
 
     it 'redirects to the dependant income page' do
-      expect(response.body).to include '[PLACEHOLDER] does the dependant have an income?'
+      expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
     end
 
     context 'when not in full time education' do
@@ -53,7 +53,7 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
       end
 
       it 'redirects to the dependant income page' do
-        expect(response.body).to include '[PLACEHOLDER] does the dependant have an income?'
+        expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
       end
 
       it 'displays an error' do
-        expect(response.body).to match(I18n.t('activemodel.errors.models.dependant.attributes.in_full_time_education.blank_message', name: dependant.name))
+        expect(unescaped_response_body).to match(I18n.t('activemodel.errors.models.dependant.attributes.in_full_time_education.blank_message', name: dependant.name))
         expect(response.body).to match('govuk-error-message')
         expect(response.body).to match('govuk-form-group--error')
       end
