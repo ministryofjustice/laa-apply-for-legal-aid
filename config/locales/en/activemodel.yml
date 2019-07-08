@@ -123,6 +123,13 @@ en:
               blank_message: Select yes if %{name} is in full-time education or training
             relationship:
               blank: "Select if %{name} is a child relative or adult relative"
+            has_assets_more_than_threshold:
+              blank_message: "Select yes if %{name} has assets worth more than £8,000"
+            assets_value:
+              blank: Enter the amount
+              not_a_number: Value must be an amount of money, like 1,000
+              too_many_decimals: Value must not include more than 2 decimal numbers
+              less_than_threshold: "Select no if %{name} has assets worth less than £8,000"
         incident:
           attributes:
             told_on:

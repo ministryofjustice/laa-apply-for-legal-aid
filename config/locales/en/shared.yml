@@ -47,6 +47,9 @@ en:
         told_on_hint: For example 31 3 2019
         purchased_on_hint: For example, 31 3 1980.
       dependants:
+        assets_value:
+          example: For example, property, cash savings or shares.
+          enter_assets_value: Enter the total asset value
         details:
           page_title: "Enter your %{number} dependant's details"
           add_dependant_later: You can add more dependants later.

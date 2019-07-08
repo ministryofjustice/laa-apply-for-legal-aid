@@ -66,6 +66,9 @@ en:
           have your legal aid stopped and have to pay back the costs
         submit_button: Agree and submit
     dependants:
+      assets_values:
+        show:
+          page_heading: "Does %{name} have assets worth more than £8,000?"
       relationships:
         show:
           page_heading: "What is your relationship to %{name}?"
