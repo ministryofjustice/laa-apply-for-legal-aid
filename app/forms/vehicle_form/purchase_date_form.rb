@@ -11,7 +11,7 @@ module VehicleForm
     validate :date_is_in_the_future
 
     validates :purchased_on, presence: true, unless: :draft_and_not_partially_complete_date?
-    validates :purchased_on, date: { not_in_the_future: true }, allow_nil: true
+    validates :purchased_on, date: true, allow_nil: true
 
     def initialize(*args)
       super
