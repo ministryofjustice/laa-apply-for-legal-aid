@@ -6,22 +6,3 @@ linters:
       - '**/app/views/layouts/_google_analytics.html.erb'
   HardCodedString:
     enabled: false
-  Rubocop:
-    enabled: true
-    rubocop_config:
-      inherit_from:
-        - .rubocop.yml
-      Layout/InitialIndentation:
-        Enabled: false
-      Layout/TrailingBlankLines:
-        Enabled: false
-      Layout/TrailingWhitespace:
-        Enabled: false
-      Layout/LeadingBlankLines:
-        Enabled: false
-      Lint/UselessAssignment:
-        Enabled: false
-      Metrics/LineLength:
-        Enabled: false
-      Style/MultilineIfModifier:
-        Enabled: false
