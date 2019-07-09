@@ -295,18 +295,15 @@ workflows:
   build_and_deploy:
     jobs:
     - build_and_test
+    - run_webhint
     - hold_uat:
         type: approval
         requires:
         - build_and_test
+        - run_webhint
     - deploy_uat:
         requires:
         - hold_uat
-    - hold_webhint:
-        type: approval
-    - run_webhint:
-        requires:
-        - hold_webhint
     - hold_staging:
         type: approval
         requires:
