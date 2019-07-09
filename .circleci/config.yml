@@ -16,46 +16,59 @@ references:
 
   build_containers_config: &build_container_config
     docker:
-    - image: circleci/ruby:2.5.3-node-browsers
+    - image: circleci/ruby:2.6.3-node-browsers
       environment:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
     - image: postgres:10.5
     - image: redis:5.0
     - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.0
 
-  setup_test_env: &setup_test_env
+  setup_aws_login: &setup_aws_login
     run:
       name: Setup aws on debian environment
       command: |
-        sudo apt-get --assume-yes install python3-pip
-        sudo pip3 install awscli
-        $(aws ecr get-login --region eu-west-1 --no-include-email)
+        if [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+          sudo apt-get --assume-yes install python3-pip
+          sudo pip3 install awscli
+          $(aws ecr get-login --region eu-west-1 --no-include-email)
+        fi
 
   install_clamav: &install_clamav
     run:
       name: Install Clamav Client
-      command: sudo apt-get install clamav-daemon -y
+      command: |
+        if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+          sudo apt-get install clamav-daemon -y
+        fi
 
   install_libreoffice: &install_libreoffice
     run:
       name: Install LibreOffice
-      command: sudo apt-get install libreoffice -y
+      command: |
+        if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+          sudo apt-get install libreoffice -y
+        fi
 
   build_docker_image: &build_docker_image
     run:
       name: Build laa-apply-for-legal-aid  docker image
-      command: docker build -t app .
+      command: |
+        if [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+          docker build -t app .
+        fi
 
   push_to_ecr: &push_to_ecr
     run:
       name: Push image to ecr repo
       command: |
-        docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
-        docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
+        if [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+          docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
+          docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
 
-        if [ "${CIRCLE_BRANCH}" == "master" ]; then
-          docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-          docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+          fi
         fi
 
   update_packages: &update_packages
@@ -66,39 +79,83 @@ references:
 jobs:
   build_and_test:
     <<: *build_container_config
+    parallelism: 2
     steps:
     - checkout
     - setup_remote_docker:
         docker_layer_caching: true
     - *update_packages
-    - *setup_test_env
+    - *setup_aws_login
     - *install_clamav
     - *install_libreoffice
     - restore_cache:
         keys:
-          - laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
-          - laa-apply-for-legal-aid-v2
+          - v1-gems-cache-{{ checksum "Gemfile.lock" }}
+          - v1-gems-cache
     - run:
         name: Bundle Install
-        command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
-
-      # Store bundle cache
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            gem install bundler -v 2.0.2
+            bundle check --path vendor/bundle || bundle install --path vendor/bundle && bundle clean
+          fi
     - save_cache:
-        key: laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
+        key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
-    - run: sudo apt install -y postgresql-client || true
     - run:
         name: Database Setup
         command: |
-          bundle exec rake db:setup
-          bundle exec rake db:migrate
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            sudo apt install -y postgresql-client || true
+            bundle exec rake db:setup
+            bundle exec rake db:migrate
+          fi
+    - restore_cache:
+        keys:
+          - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+          - v1-yarn-packages-cache
     - run:
-        name: Install NPM packages
-        command: yarn --pure-lockfile
+        name: Install Yarn packages
+        command: yarn --frozen-lockfile
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            yarn --frozen-lockfile
+          fi
+    - save_cache:
+        key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+        paths:
+          - node_modules
     - run:
-        name: Run Tests
-        command: bundle exec rake
+        name: Run Rubocop
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            bin/rails rubocop
+          fi
+    - run:
+        name: Run erblint
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            bin/rails erblint
+          fi
+    - run:
+        name: Run javascript tests
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            bin/rails javascript_tests
+          fi
+    - run:
+        name: Run ruby tests
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            bin/rails spec
+          fi
+    - run:
+        name: Run integration tests
+        command: |
+          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+            bin/rails cucumber
+          fi
     - *build_docker_image
     - *push_to_ecr
 
@@ -178,7 +235,7 @@ jobs:
     - checkout
     - setup_remote_docker
     - *update_packages
-    - *setup_test_env
+    - *setup_aws_login
     - run:
         name: Delete old images from ecr repo
         command: |
@@ -193,8 +250,8 @@ jobs:
     - *install_libreoffice
     - restore_cache:
         keys:
-          - laa-apply-for-legal-aid-v2-{{ checksum "Gemfile.lock" }}
-          - laa-apply-for-legal-aid-v2
+          - v1-gems-cache-{{ checksum "Gemfile.lock" }}
+          - v1-gems-cache
     - run:
         name: Bundle Install
         command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
@@ -206,7 +263,7 @@ jobs:
           bundle exec rake db:migrate
     - run:
         name: Install NPM packages
-        command: yarn --pure-lockfile
+        command: yarn --frozen-lockfile
     - run:
         name: Generate webhint reports
         command: ./bin/generate_webhint_reports.sh

@@ -2,7 +2,7 @@
 
 set -e
 
-./bin/wait_for_pg
-./bin/setup_db
+./docker/wait_for_pg
+./docker/setup_db
 
 bundle exec puma -C config/puma.rb

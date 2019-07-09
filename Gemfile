@@ -1,20 +1,21 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
+ruby '2.6.3'
 
 gem 'aasm', '~> 5.0.5'
 gem 'active_model_serializers', '~> 0.10.9'
 gem 'govuk_notify_rails', '~> 2.1.0'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
-gem 'puma', '~> 4.0'
+gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.2.3'
 gem 'regexp-examples'
 gem 'sass-rails', '~> 5.0'
 gem 'savon', '~> 2.12.0'
 gem 'sentry-raven'
 gem 'simple_command', '~> 0.0.9'
+gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.2.0'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -110,6 +111,3 @@ group :test do
   gem 'webdrivers', '~> 4.1'
   gem 'webmock'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
