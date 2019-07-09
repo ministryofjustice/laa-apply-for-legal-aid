@@ -122,7 +122,7 @@ en:
             in_full_time_education:
               blank_message: Select yes if %{name} is in full-time education or training
             has_income:
-              blank: Select yes if %{name} receives any income
+              blank_message: Select yes if %{name} receives any income
             monthly_income:
               blank: Enter the amount
               not_a_number: Income must be an amount of money, like 1,000

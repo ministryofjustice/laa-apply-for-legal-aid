@@ -318,4 +318,4 @@ Feature: Citizen journey
     Then I choose "Yes"
     Then I fill "monthly income" with "1234"
     Then I click 'Save and continue'
-    Then I should be on a page showing "dependants assets"
+    Then I should be on a page showing "have assets worth more than £8,000?"

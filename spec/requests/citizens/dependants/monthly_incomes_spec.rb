@@ -43,7 +43,7 @@ RSpec.describe Citizens::Dependants::MonthlyIncomesController, type: :request do
     end
 
     it 'redirects to the assets page' do
-      expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants assets"
+      expect(response).to redirect_to(citizens_dependant_assets_value_path(dependant))
     end
 
     context 'invalid params' do
@@ -52,7 +52,7 @@ RSpec.describe Citizens::Dependants::MonthlyIncomesController, type: :request do
         let(:monthly_income) { '' }
 
         it 'shows errors' do
-          expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.dependant.attributes.has_income.blank', name: dependant.name))
+          expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.dependant.attributes.has_income.blank_message', name: dependant.name))
           expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.monthly_income.blank'))
         end
 

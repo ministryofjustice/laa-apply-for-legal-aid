@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
     t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "relationship"
     t.decimal "monthly_income"
     t.boolean "has_income"
     t.string "relationship"
@@ -276,23 +277,23 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
+    t.decimal "percentage_home"
     t.decimal "property_value", precision: 10, scale: 2
     t.string "shared_ownership"
     t.decimal "outstanding_mortgage_amount"
-    t.decimal "percentage_home"
     t.string "provider_step"
     t.uuid "provider_id"
     t.boolean "draft"
     t.datetime "transaction_period_start_at"
     t.datetime "transaction_period_finish_at"
     t.boolean "transactions_gathered"
-    t.datetime "completed_at"
     t.json "applicant_means_answers"
     t.datetime "declaration_accepted_at"
+    t.datetime "completed_at"
     t.json "provider_step_params"
+    t.boolean "own_vehicle"
     t.date "used_delegated_functions_on"
     t.boolean "used_delegated_functions"
-    t.boolean "own_vehicle"
     t.date "substantive_application_deadline_on"
     t.boolean "substantive_application"
     t.boolean "has_dependants"
@@ -322,9 +323,9 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
     t.text "application_purpose"
     t.boolean "proceedings_before_the_court"
     t.text "details_of_proceedings_before_the_court"
+    t.decimal "estimated_legal_cost", precision: 10, scale: 2
     t.string "success_prospect"
     t.text "success_prospect_details"
-    t.decimal "estimated_legal_cost", precision: 10, scale: 2
     t.datetime "submitted_at"
     t.boolean "success_likely"
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
@@ -357,15 +358,15 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
 
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
-    t.decimal "second_home_value"
-    t.decimal "second_home_mortgage"
-    t.decimal "second_home_percentage"
-    t.decimal "timeshare_property_value"
-    t.decimal "land_value"
-    t.decimal "valuable_items_value"
-    t.decimal "money_assets_value"
-    t.decimal "money_owed_value"
-    t.decimal "trust_value"
+    t.decimal "second_home_value", precision: 14, scale: 2
+    t.decimal "second_home_mortgage", precision: 14, scale: 2
+    t.decimal "second_home_percentage", precision: 14, scale: 2
+    t.decimal "timeshare_property_value", precision: 14, scale: 2
+    t.decimal "land_value", precision: 14, scale: 2
+    t.decimal "valuable_items_value", precision: 14, scale: 2
+    t.decimal "money_assets_value", precision: 14, scale: 2
+    t.decimal "money_owed_value", precision: 14, scale: 2
+    t.decimal "trust_value", precision: 14, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true

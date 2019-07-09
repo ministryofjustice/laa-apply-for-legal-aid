@@ -63,7 +63,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
 
         it 'redirects to dependant income' do
           subject
-          expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants education"
+          expect(response).to redirect_to(citizens_dependant_full_time_education_path(dependant))
         end
       end
     end

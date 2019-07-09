@@ -7,7 +7,7 @@ module DependantForm
 
     attr_accessor :has_income, :monthly_income
 
-    validate :income_presence
+    validates :has_income, presence: { message: ->(form, _) { form.error_message } }
     validates :monthly_income, presence: true, if: proc { |form| form.has_income.to_s == 'true' }
     validates :monthly_income, allow_blank: true, currency: { greater_than: 0.0 }
 
@@ -15,19 +15,14 @@ module DependantForm
       [:monthly_income]
     end
 
+    def error_message
+      I18n.t('activemodel.errors.models.dependant.attributes.has_income.blank_message', name: model.name)
+    end
+
     private
 
     def clear_monthly_income
       monthly_income&.clear unless ActiveModel::Type::Boolean.new.cast(has_income.to_s)
-    end
-
-    def income_presence
-      return if has_income.present?
-
-      errors.add(
-        :has_income,
-        I18n.t('activemodel.errors.models.dependant.attributes.has_income.blank', name: model.name)
-      )
     end
   end
 end
