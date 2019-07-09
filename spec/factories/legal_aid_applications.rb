@@ -141,6 +141,7 @@ FactoryBot.define do
       with_merits_statement_of_case
       with_respondent
       with_incident
+      with_vehicle
     end
 
     trait :with_negative_benefit_check_result do
