@@ -29,7 +29,7 @@ module Flow
         },
         dependants_full_time_educations: {
           # path: ->(_) { urls.citizens_dependant_full_time_education_path },
-          forward: ->(_) { :dependants_income }
+          forward: :dependants_income
         }
       }.freeze
     end
