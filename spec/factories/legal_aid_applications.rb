@@ -133,10 +133,10 @@ FactoryBot.define do
       with_savings_amount
       with_other_assets_declaration
       with_own_home_mortgaged
-      property_value { Faker::Number.decimal.to_d }
-      outstanding_mortgage_amount { Faker::Number.decimal.to_d }
+      property_value { rand(1...1_000_000.0).round(2) }
+      outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
-      percentage_home { Faker::Number.decimal(2).to_d }
+      percentage_home { rand(1...99.0).round(2) }
       with_merits_assessment
       with_merits_statement_of_case
       with_respondent

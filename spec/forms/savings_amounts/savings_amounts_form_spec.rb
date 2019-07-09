@@ -16,7 +16,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       let(:check_box_params) { check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = 'true' } }
 
       context 'amounts are valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.decimal.to_s } }
+        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
 
         it 'updates all amounts' do
           subject.save
@@ -90,7 +90,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts have a £ symbol' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = "£#{Faker::Number.decimal}" } }
+        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it 'strips the values of £ symbols' do
           subject.save
@@ -114,7 +114,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts are valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.decimal.to_s } }
+        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
 
         it 'empties amounts if checkbox is unchecked' do
           attributes_except_isa = attributes - [:isa]

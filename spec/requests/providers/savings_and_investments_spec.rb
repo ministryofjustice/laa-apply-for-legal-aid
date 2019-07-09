@@ -59,7 +59,7 @@ RSpec.describe 'providers savings and investments', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/savings_and_investment' do
-    let(:isa) { Faker::Number.decimal }
+    let(:isa) { rand(1...1_000_000.0).round(2).to_s }
     let(:check_box_isa) { 'true' }
     let(:params) do
       {
