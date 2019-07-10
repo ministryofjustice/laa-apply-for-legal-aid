@@ -2,6 +2,8 @@
   <%= render partial: 'form',
              locals: {
                model: @legal_aid_application,
-               url: citizens_restrictions_path
+               url: citizens_restrictions_path,
+               for_example: t('.for_example'),
+               details: t('.restrictions_details')
              } %>
 <% end %>

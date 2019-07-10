@@ -1,15 +1,31 @@
-<%= form_with(model: model, url: url, method: :post, local: true) do |form| %>
-  <%= govuk_form_group do %>
-    <%= govuk_fieldset_header page_title %>
-    <h2 class="govuk-heading-m"><%= t '.sub_heading' %></h2>
+<%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <%= govuk_fieldset_header page_title, size: 'l', padding_below: 4 %>
 
-    <div class="govuk-checkboxes">
-      <%= form.collection_check_boxes :restriction_ids, Restriction.all, :id, :label_name do |restriction_form| %>
-        <div class="govuk-checkboxes__item">
-          <%= restriction_form.check_box(class: 'govuk-checkboxes__input') %>
-          <%= restriction_form.label(class: 'govuk-label govuk-checkboxes__label') %>
-        </div>
-      <% end %>
+    <p class="govuk-body"><%= for_example %></p>
+    <%= list_from_translation_path ".restrictions.show.examples" %>
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <%= govuk_error_message(@form.errors[:has_restrictions].first) %>
+    <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+      <%= form.govuk_radio_button(
+        :has_restrictions,
+        true,
+        label: t('generic.yes'),
+        checked: @form.has_restrictions.to_s == 'true',
+        'data-aria-controls' => 'conditional-true') %>
+
+      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
+        <%= govuk_error_message(@form.errors[:restrictions_details].first) %>
+        <%= form.govuk_text_area :restrictions_details, rows: 5, label: details %>
+      </div>
+
+      <%= form.govuk_radio_button(
+        :has_restrictions,
+        false,
+        label: t('generic.no'),
+        checked: @form.has_restrictions.to_s == 'false'
+      ) %>
     </div>
   <% end %>
 

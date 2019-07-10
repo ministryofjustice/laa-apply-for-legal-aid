@@ -305,8 +305,15 @@ en:
         bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
         bail_conditions_set_blank: Give details of the bail conditions
     restrictions:
-      index:
-        h1-heading: Do any of the following restrictions apply to your client's property or other assets?
+      show:
+        h1-heading: Are there any legal restrictions that prevent your client from selling or borrowing against their assets?
+        restrictions_details: Tell us which assets they cannot sell or borrow against, and why      
+        for_example: "For example:" 
+        examples:
+          list: |
+            they're bankrupt
+            their home has been repossessed
+            their assets are the subject of dispute in other legal proceedings
     savings_and_investments:
       show:
         h1-heading: What types of savings or investments does your client have?

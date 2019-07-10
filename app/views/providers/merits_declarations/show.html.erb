@@ -3,7 +3,7 @@
   <p class="govuk-body"><%= t('.text') %></p>
 
   <% params = { applicant_name: @legal_aid_application.applicant.full_name } %>
-  <%= list_from_translation_path 'providers.merits_declarations.show', params: params %>
+  <%= list_from_translation_path '.merits_declarations.show', params: params %>
 
   <div class="govuk-!-padding-bottom-4"></div>
 

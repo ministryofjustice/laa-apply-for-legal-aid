@@ -1,0 +1,9 @@
+<dl class="govuk-summary-list">
+  <%= check_answer_link(
+        name: :restrictions,
+        url: check_answer_url_for(user_type, :restrictions, application),
+        question: t(".#{user_type}.question"),
+        answer: yes_no(application.has_restrictions)
+      ) %>
+</dl>
+<div class="govuk-body govuk-!-margin-bottom-9 wrap-text"><%= simple_format application.restrictions_details %></div>

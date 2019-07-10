@@ -67,7 +67,8 @@ module ApplicationHelper
   end
 
   def list_from_translation_path(translation_path, params: {})
-    render 'shared/forms/list_items', translation_path: translation_path, params: params
+    prefix = current_journey ? current_journey.to_s : ''
+    render 'shared/forms/list_items', translation_path: prefix + translation_path, params: params
   end
 
   def yes_no(boolean)

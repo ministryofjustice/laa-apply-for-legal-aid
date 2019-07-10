@@ -133,6 +133,11 @@ FactoryBot.define do
       respondent { create :respondent }
     end
 
+    trait :with_restrictions do
+      has_restrictions { true }
+      restrictions_details { Faker::Lorem.paragraph }
+    end
+
     trait :with_vehicle do
       transient do
         populate_vehicle { false }
@@ -158,6 +163,7 @@ FactoryBot.define do
       with_merits_assessment
       with_merits_statement_of_case
       with_respondent
+      with_restrictions
       with_incident
       with_vehicle
     end
