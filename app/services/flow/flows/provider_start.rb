@@ -44,7 +44,11 @@ module Flow
         },
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: ->(application) { application.benefit_check_result.positive? ? :capital_introductions : :used_delegated_functions }
+          forward: ->(application) do
+            return :substantive_applications if application.used_delegated_functions?
+
+            application.benefit_check_result&.positive? ? :capital_introductions : :online_bankings
+          end
         },
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
@@ -52,7 +56,11 @@ module Flow
         },
         substantive_applications: {
           path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
-          forward: ->(application) { application.substantive_application? ? :online_bankings : :providers_home }
+          forward: ->(application) do
+            return :providers_home unless application.substantive_application?
+
+            application.benefit_check_result&.positive? ? :capital_introductions : :online_bankings
+          end
         },
         online_bankings: {
           path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },
