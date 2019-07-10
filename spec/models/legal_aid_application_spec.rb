@@ -352,4 +352,16 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#wage_slips' do
+    it 'returns the correct wage slip data' do
+      expect(legal_aid_application.wage_slips).to eq []
+    end
+  end
+
+  describe '#opponent_other_parties' do
+    it 'returns the opponent other parties data' do
+      expect(legal_aid_application.opponent_other_parties).to eq []
+    end
+  end
 end

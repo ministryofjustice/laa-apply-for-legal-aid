@@ -17,14 +17,16 @@ module CCMS
   # ==================
   # If the method begins with one of the following prefixes, and is not specifically defined in this class, then the
   # method name without the prefix is called on the appropriate object in the options hash, e.g.
-  #  'vehicle_registration_number'  will call the registraion_number method on options[:vehicle] in order to get the
+  # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator
-    STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = /^(bank_account|vehicle|wage_slip|proceeding|other_party|opponent)_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
+    OTHER_PARTY = /^other_party_(\S+)$/.freeze
+    OPPONENT = /^opponent_(\S+)$/.freeze
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
@@ -43,11 +45,7 @@ module CCMS
     end
 
     def valuable_possessions_aggregate_value(_options)
-      1000.0
-    end
-
-    def application_ccms_reference_number(_options)
-      @legal_aid_application.ccms_reference_number
+      1000.0 # TODO: CCMS placeholder
     end
 
     def bank_name(options)
@@ -55,27 +53,31 @@ module CCMS
     end
 
     def bank_account_holders(_options)
-      'Client Sole'
+      'Client Sole' # TODO: CCMS placeholder
     end
 
     def means_assessment_capital_contribution(_options)
-      @legal_aid_application.means_assessment_result.capital_contribution
+      0 # TODO: CCMS placeholder
     end
 
     def lead_proceeding_category(_options)
-      @legal_aid_application.lead_proceeding.ccms_category_law_code
+      'MAT' # TODO: CCMS placeholder
     end
 
     def main_dwelling_third_party_name(_options)
-      @legal_aid_application.main_dwelling_third_party_name
+      'Mrs Fabby Fabby' # TODO: CCMS placeholder
     end
 
     def main_dwelling_third_party_relationship(_options)
-      @legal_aid_application.main_dwelling_third_party_relationship
+      'Ex-Partner' # TODO: CCMS placeholder
     end
 
     def main_dwelling_third_party_percentage(_options)
-      @legal_aid_application.main_dwelling_third_party_percentage
+      50 # TODO: CCMS placeholder
+    end
+
+    def submission_case_ccms_reference(_options)
+      @legal_aid_application.most_recent_ccms_submission.case_ccms_reference
     end
 
     private
@@ -84,7 +86,7 @@ module CCMS
       STANDARD_METHOD_NAMES.match?(method)
     end
 
-    def call_standard_method(method, options)
+    def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       case method
       when BANK_REGEX
         options[:bank_acct].send(Regexp.last_match(1))
@@ -94,6 +96,10 @@ module CCMS
         options[:wage_slip].send(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].send(Regexp.last_match(1))
+      when OTHER_PARTY
+        options[:other_party].send(Regexp.last_match(1))
+      when OPPONENT
+        options[:opponent].send(Regexp.last_match(1))
       end
     end
   end

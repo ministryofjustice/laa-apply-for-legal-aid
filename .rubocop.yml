@@ -8,6 +8,7 @@ AllCops:
   - 'db/schema.rb'
   - 'vendor/**/*'
   - 'node_modules/**/*'
+  - 'ccms_integration/*'
 
 Lint/AmbiguousBlockAssociation:
   Exclude:

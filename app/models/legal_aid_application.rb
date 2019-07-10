@@ -25,6 +25,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :dependants, dependent: :destroy
+  has_many :ccms_submissions, class_name: 'CCMS::Submission', dependent: :destroy
+  has_one :most_recent_ccms_submission, -> { order(:created_at) }, class_name: 'CCMS::Submission'
   has_one :vehicle
 
   before_create :create_app_ref
@@ -136,6 +138,18 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def submission_date
     transaction_period_finish_at.to_date
+  end
+
+  def opponents
+    nil # TODO: CCMS placeholder
+  end
+
+  def wage_slips
+    []  # TODO: CCMS placeholder
+  end
+
+  def opponent_other_parties
+    []  # TODO: CCMS placeholder
   end
 
   private

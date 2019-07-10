@@ -15,7 +15,8 @@ module CCMS
       'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
     )
 
-    def initialize(submission)
+    def initialize(submission, options)
+      @options = options
       @submission = submission
       @legal_aid_application = submission.legal_aid_application
       @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
@@ -24,13 +25,22 @@ module CCMS
     end
 
     def call
-      soap_client.call(:create_case_application, xml: request_xml)
+      save_request unless Rails.env.production?
+      soap_client.call(:create_case_application, xml: request_xml) unless @options[:no_call]
     end
 
     private
 
+    # :nocov:
+    def save_request
+      File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
+        fp.puts request_xml
+      end
+    end
+    # :nocov:
+
     def request_xml
-      soap_envelope(namespaces).to_xml
+      @request_xml ||= soap_envelope(namespaces).to_xml
     end
 
     def soap_body(xml)
@@ -42,9 +52,9 @@ module CCMS
 
     def header_request(xml)
       xml.__send__('ns6:TransactionRequestID', transaction_request_id)
-      xml.__send__('ns6:Language', 'ENG')
-      xml.__send__('ns6:UserLoginID', 'NEETADESOR')
-      xml.__send__('ns6:UserRole', 'EXTERNAL')
+      xml.__send__('ns6:Language', 'ENG') # TODO: CCMS placeholder
+      xml.__send__('ns6:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
+      xml.__send__('ns6:UserRole', 'EXTERNAL') # TODO: CCMS placeholder
     end
 
     def case_request(xml)
@@ -58,58 +68,42 @@ module CCMS
 
     def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
       xml.__send__('ns2:Client') { generate_client(xml) }
-      xml.__send__('ns2:PreferredAddress', applicant.preferred_address)
+      xml.__send__('ns2:PreferredAddress', 'CLIENT') # TODO: CCMS placeholder
       xml.__send__('ns2:ProviderDetails') { generate_provider_details(xml) }
       xml.__send__('ns2:CategoryOfLaw') { generate_category_of_law(xml) }
       xml.__send__('ns2:OtherParties') { generate_other_parties(xml) }
       xml.__send__('ns2:Proceedings') { generate_proceedings(xml) }
       xml.__send__('ns2:MeansAssesments') { generate_means_assessment(xml) }
       xml.__send__('ns2:MeritsAssesments') { generate_merits_assessment(xml) }
-      xml.__send__('ns2:DevolvedPowersDate', '2019-04-01')
-      xml.__send__('ns2:ApplicationAmendmentType', 'SUBDP')
+      xml.__send__('ns2:DevolvedPowersDate', '2019-04-01')  # TODO: CCMS placeholder
+      xml.__send__('ns2:ApplicationAmendmentType', 'SUBDP') # TODO: CCMS placeholder
       xml.__send__('ns2:LARDetails') { generate_lar_details(xml) }
     end
 
-    # hard coded to match expected payload for now - until we decide what to do about other parties
-    def generate_other_parties(xml) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      xml.__send__('ns2:OtherParty') do
-        xml.__send__('ns2:OtherPartyID', 'OPPONENT_11594796')
-        xml.__send__('ns2:SharedInd', false)
-        xml.__send__('ns2:OtherPartyDetail') do
-          xml.__send__('ns2:Person') do
-            xml.__send__('ns2:Name') do
-              xml.__send__('ns0:Title', 'MRS.')
-              xml.__send__('ns0:Surname', 'Fabby')
-              xml.__send__('ns0:FirstName', 'Fabby')
-            end
-            xml.__send__('ns2:DateOfBirth', '1980-01-01')
-            xml.__send__('ns2:Address')
-            xml.__send__('ns2:RelationToClient', 'EX_SPOUSE')
-            xml.__send__('ns2:RelationToCase', 'OPP')
-            xml.__send__('ns2:ContactDetails')
-            xml.__send__('ns2:AssessedIncome', 0)
-            xml.__send__('ns2:AssessedAsstes', 0)
-          end
-        end
+    def generate_other_parties(xml)
+      @legal_aid_application.opponent_other_parties.each do |opponent|
+        generate_other_party(xml, opponent)
       end
+    end
 
+    def generate_other_party(xml, opponent) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       xml.__send__('ns2:OtherParty') do
-        xml.__send__('ns2:OtherPartyID', 'OPPONENT_11594798')
-        xml.__send__('ns2:SharedInd', false)
+        xml.__send__('ns2:OtherPartyID', opponent.other_party_id)
+        xml.__send__('ns2:SharedInd', opponent.shared_ind)
         xml.__send__('ns2:OtherPartyDetail') do
           xml.__send__('ns2:Person') do
             xml.__send__('ns2:Name') do
-              xml.__send__('ns0:Title', 'MASTER')
-              xml.__send__('ns0:Surname', 'Fabby')
-              xml.__send__('ns0:FirstName', 'BoBo')
+              xml.__send__('ns0:Title', opponent.title)
+              xml.__send__('ns0:Surname', opponent.surname)
+              xml.__send__('ns0:FirstName', opponent.first_name)
             end
-            xml.__send__('ns2:DateOfBirth', '2015-01-01')
+            xml.__send__('ns2:DateOfBirth', opponent.date_of_birth.strftime('%Y-%m-%d'))
             xml.__send__('ns2:Address')
-            xml.__send__('ns2:RelationToClient', 'CHILD')
-            xml.__send__('ns2:RelationToCase', 'CHILD')
+            xml.__send__('ns2:RelationToClient', opponent.relationship_to_client)
+            xml.__send__('ns2:RelationToCase', opponent.relationship_to_case)
             xml.__send__('ns2:ContactDetails')
-            xml.__send__('ns2:AssessedIncome', 0)
-            xml.__send__('ns2:AssessedAsstes', 0)
+            xml.__send__('ns2:AssessedIncome', opponent.assessed_income)
+            xml.__send__('ns2:AssessedAsstes', opponent.assessed_assets)
           end
         end
       end
@@ -118,15 +112,15 @@ module CCMS
     def generate_record_history(xml)
       xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
       xml.__send__('ns0:LastUpdatedBy') do
-        xml.__send__('ns0:UserLoginID', 'NEETADESOR')
-        xml.__send__('ns0:UserName', 'NEETADESOR')
-        xml.__send__('ns0:UserType', 'EXTERNAL')
+        xml.__send__('ns0:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
+        xml.__send__('ns0:UserName', 'NEETADESOR') # TODO: CCMS placeholder
+        xml.__send__('ns0:UserType', 'EXTERNAL') # TODO: CCMS placeholder
       end
       xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
     end
 
     def generate_lar_details(xml)
-      xml.__send__('ns2:LARScopeFlag', true)
+      xml.__send__('ns2:LARScopeFlag', true) # TODO: CCMS placeholder
     end
 
     def generate_client(xml)
@@ -136,20 +130,20 @@ module CCMS
     end
 
     def generate_provider_details(xml)
-      xml.__send__('ns2:ProviderCaseReferenceNumber', @legal_aid_application.provider_case_reference_number)
+      xml.__send__('ns2:ProviderCaseReferenceNumber', 'PC4') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
       xml.__send__('ns2:ProviderFirmID', provider.firm_id)
       xml.__send__('ns2:ProviderOfficeID', provider.office_id)
       xml.__send__('ns2:ContactUserID') do
         xml.__send__('ns0:UserLoginID', provider.user_login_id)
       end
-      xml.__send__('ns2:SupervisorContactID', provider.supervisor_user_id)
+      xml.__send__('ns2:SupervisorContactID', provider.supervisor_contact_id)
       xml.__send__('ns2:FeeEarnerContactID', provider.fee_earner_contact_id)
     end
 
     def generate_category_of_law(xml)
-      xml.__send__('ns2:CategoryOfLawCode', lead_proceeding.ccms_category_law_code)
-      xml.__send__('ns2:CategoryOfLawDescription', lead_proceeding.ccms_category_law)
-      xml.__send__('ns2:RequestedAmount', as_currency(@legal_aid_application.requested_amount))
+      xml.__send__('ns2:CategoryOfLawCode', 'MAT') # TODO: replace with lead_proceeding.ccms_category_law_code when it is available in Apply
+      xml.__send__('ns2:CategoryOfLawDescription', 'Family') # TODO: insert lead_proceeding.ccms_category_law when it is available in Apply
+      xml.__send__('ns2:RequestedAmount', '5000.0') # TODO: replace with as_currency(@legal_aid_application.requested_amount)) when it is available in Apply
     end
 
     def generate_proceedings(xml)
@@ -165,9 +159,9 @@ module CCMS
           xml.__send__('ns2:ProceedingType', proceeding.ccms_code)
           xml.__send__('ns2:ProceedingDescription', proceeding.description)
           xml.__send__('ns2:MatterType', proceeding.ccms_matter_code)
-          xml.__send__('ns2:LevelOfService', 3)
-          xml.__send__('ns2:Stage', 8)
-          xml.__send__('ns2:ClientInvolvementType', 'A')
+          xml.__send__('ns2:LevelOfService', 3) # TODO: CCMS placeholder
+          xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
+          xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
           xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding) }
         end
       end
@@ -194,8 +188,8 @@ module CCMS
 
     def generate_means_assessment_results(xml)
       xml.__send__('ns0:Goal') do
-        xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA')
-        xml.__send__('ns0:AttributeValue', true)
+        xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA') # TODO: CCMS placeholder
+        xml.__send__('ns0:AttributeValue', true) # TODO: CCMS placeholder
       end
     end
 
@@ -206,7 +200,7 @@ module CCMS
         xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, 2) }
         xml.__send__('ns0:Entity') { generate_change_in_circumstance_entity(xml, 3) }
         xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, 4) }
-        xml.__send__('ns0:Entity') { generate_wage_slip_entity(xml, 5) }
+        xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, 5) }
         xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, 6) }
         xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, 7) }
         xml.__send__('ns0:Entity') { generate_global_means_entity(xml, 8) }
@@ -219,7 +213,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'VALUABLE_POSSESSION')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the valuable possession1')
+        xml.__send__('ns0:InstanceLabel', 'the valuable possession1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :valuable_possessions) }
       end
     end
@@ -241,7 +235,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CHANGE_IN_CIRCUMSTANCE')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the change in circumstance1')
+        xml.__send__('ns0:InstanceLabel', 'the change in circumstance1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :change_in_circumstances) }
       end
     end
@@ -249,17 +243,17 @@ module CCMS
     def generate_vehicles_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CARS_AND_MOTOR_VEHICLES')
-      vehicles.each { |vehicle| generate_vehicle_instance(xml, vehicle) }
+      generate_vehicle_instance(xml, vehicle) if vehicle
     end
 
     def generate_vehicle_instance(xml, vehicle)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', vehicle.instance_label)
+        xml.__send__('ns0:InstanceLabel', 'the cars & motor vehicles') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :vehicles, vehicle: vehicle) }
       end
     end
 
-    def generate_wage_slip_entity(xml, sequence_no)
+    def generate_wage_slips_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CLI_NON_HM_WAGE_SLIP')
       wage_slips.each { |slip| generate_wage_slip_instance(xml, slip) }
@@ -267,7 +261,7 @@ module CCMS
 
     def generate_wage_slip_instance(xml, slip)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', slip.description)
+        xml.__send__('ns0:InstanceLabel', "#{@submission.case_ccms_reference}#{slip.description}")
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :wages, wage_slip: slip) }
       end
     end
@@ -288,7 +282,14 @@ module CCMS
     def generate_other_parties_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-      xml.__send__('ns0:Instances')
+      @legal_aid_application.opponents.each do |opponent|
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', opponent.other_party_id)
+          xml.__send__('ns0:Attributes') do
+            generate_attributes_for(xml, :other_party, other_party: opponent)
+          end
+        end
+      end
     end
 
     def generate_global_means_entity(xml, sequence_no)
@@ -304,7 +305,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'EMPLOYMENT_CLIENT')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', '300000333864:EMPLOYMENT_CLIENT_001')
+        xml.__send__('ns0:InstanceLabel', "#{@submission.case_ccms_reference}:EMPLOYMENT_CLIENT_001")
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :employment) }
       end
     end
@@ -313,7 +314,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'MAINTHIRD')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the third party who part owns the main dwelling1')
+        xml.__send__('ns0:InstanceLabel', 'the third party who part owns the main dwelling1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :main_dwelling) }
       end
     end
@@ -368,7 +369,7 @@ module CCMS
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'FAMILY_STATEMENT')
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the family statement of case1')
+        xml.__send__('ns0:InstanceLabel', 'the family statement of case1') # TODO: CCMS placeholder
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :family_statement) }
       end
     end
@@ -376,6 +377,12 @@ module CCMS
     def generate_opponent_other_parties(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+      @legal_aid_application.opponent_other_parties.reverse_each do |oop|
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', oop.other_party_id)
+          xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :opponent, opponent: oop) }
+        end
+      end
     end
 
     def generate_attributes_for(xml, entity_name, options = {})
@@ -461,8 +468,8 @@ module CCMS
       @bank_accounts ||= applicant.bank_accounts
     end
 
-    def vehicles
-      @vehicles ||= @legal_aid_application.vehicles
+    def vehicle
+      @vehicle ||= @legal_aid_application.vehicle
     end
 
     def wage_slips

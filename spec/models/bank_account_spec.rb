@@ -17,4 +17,20 @@ RSpec.describe BankAccount, type: :model do
       expect(bank_account.account_type_label).to eq(not_defined_account_type)
     end
   end
+
+  describe '#holders' do
+    it 'returns the correct account holder' do
+      bank_account = create :bank_account
+      expect(bank_account.holders).to eq 'ClientSole'
+    end
+  end
+
+  describe '#display_name' do
+    it 'returns the correct display name' do
+      bank_account = create :bank_account
+      bank_account.bank_provider.name = 'Test Bank'
+      bank_account.account_number = '123456789'
+      expect(bank_account.display_name).to eq 'Test Bank Acct 123456789'
+    end
+  end
 end

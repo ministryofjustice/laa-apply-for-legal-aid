@@ -30,7 +30,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           submission.aasm_state = 'xxxxx'
           expect {
             submission.process!
-          }.to raise_error CcmsError, 'Unknown state'
+          }.to raise_error CcmsError, 'Unknown state: xxxxx'
         end
       end
 
@@ -68,7 +68,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           let(:state) { :applicant_ref_obtained }
           let(:service) { AddCaseService }
           it 'calls the add_case service' do
-            expect(service_instance).to receive(:call).with(no_args)
+            expect(service_instance).to receive(:call).with({})
           end
         end
 

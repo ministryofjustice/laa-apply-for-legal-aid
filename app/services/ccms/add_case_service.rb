@@ -1,6 +1,11 @@
 module CCMS
   class AddCaseService < BaseSubmissionService
-    def call
+    def self.call(submission, options)
+      new(submission).call(options)
+    end
+
+    def call(options = {})
+      @options = options
       if case_add_response_parser.success?
         submission.case_add_transaction_id = case_add_requestor.transaction_request_id
         create_history('applicant_ref_obtained', submission.aasm_state) if submission.submit_case!
@@ -14,7 +19,7 @@ module CCMS
     private
 
     def case_add_requestor
-      @case_add_requestor ||= CaseAddRequestor.new(submission)
+      @case_add_requestor ||= CaseAddRequestor.new(submission, @options)
     end
 
     def case_add_response_parser
