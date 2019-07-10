@@ -3907,7 +3907,7 @@ proceeding:
     :response_type: text
     :user_defined: true
   SCOPE_LIMIT_IS_DEFAULT:
-    :value: false
+    :value: true
     :br100_meaning: the proceeding's scope limit is default
     :response_type: boolean
     :user_defined: true
@@ -3949,6 +3949,7 @@ proceeding:
     :user_defined: true
 proceeding_merits:
   MATRIMONIAL_PROCEEDING:
+    :generate_block?: false
     :value: "#proceeding_matrimonial_proceeding"
     :br100_meaning: The Proceeding Is A Matrimonial Proceeding
     :response_type: text
@@ -3960,8 +3961,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   WORK_IN_SCH_ONE:
-    :generate_block?: "#proceeding_generate_work_in_scheme_1_block?"
-    :value: "#proceeding_work_in_scheme_1?"
+    :value: true
     :br100_meaning: 'ECF: Inscope Schedule 1 Legal Aid Sentencing & Punishment Of
       Offenders Act 2012'
     :response_type: boolean
@@ -3973,6 +3973,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   PROC_DEFAULT_LEVEL_OF_SERVICE:
+    :generate_block?: false
     :value: "#proceeding_default_level_of_service"
     :br100_meaning: The Proceeding Default Of Service
     :response_type: text
@@ -3995,6 +3996,7 @@ proceeding_merits:
     :user_defined: true
     :generate_block?: false
   PROC_CHILD_ABDUCTION:
+    :generate_block?: false
     :value: "#proceeding_child_abduction"
     :br100_meaning: The Proceeding Is An Action Relating To Child Abduction
     :response_type: text
@@ -4059,12 +4061,13 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROC_CA_GATEWAY_APPLIES:
+    :generate_block?: false
     :value: "#proceeding_ca_gateway_applies?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   APPEAL_IN_SUPREME_COURT:
-    :value: "#proceeding_appeal_in_supreme_court"
+    :value: false
     :br100_meaning: The Proceeding Relates To An Appeal Or Proposed Appeal In The
       Supreme Court
     :response_type: boolean
@@ -4105,7 +4108,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   SCOPE_LIMIT_IS_DEFAULT:
-    :value: "#proceeding_scope_limit_is_default"
+    :value: true
     :br100_meaning: the proceeding's scope limit is default
     :response_type: boolean
     :user_defined: true
@@ -4117,6 +4120,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   DAMAGES_AGAINST_POLICE:
+    :generate_block?: false
     :value: "#proceeding_damages_against_police"
     :br100_meaning: The Proceeding Is For Damages Against The Police
     :response_type: text
@@ -4146,6 +4150,7 @@ proceeding_merits:
     :response_type: date
     :user_defined: false
   PROC_INVOLVING_FIN_AND_PROP:
+    :generate_block?: false
     :value: "#proceeding_proc_involving_fin_and_prop"
     :br100_meaning: The Proceeding Is An Action Involving Finance And Property
     :response_type: text
@@ -4157,12 +4162,12 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   WARNING_LETTER_SENT:
-    :generate_block?: "#proceeding_generate_warning_letter_sent_block?"
+    :generate_block?: true
     :value: "#proceeding_warning_letter_sent?"
     :response_type: boolean
     :user_defined: true
   POLICE_NOTIFIED:
-    :generate_block?: "#proceeding_generate_police_notified_block?"
+    :generate_block?: true
     :value: "#proceeding_police_notified?"
     :response_type: boolean
     :user_defined: true
@@ -4189,7 +4194,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   INJ_RESPONDENT_CAPACITY:
-    :generate_block?: "#proceeding_generate_inj_respondent_capacity_block?"
+    :generate_block?: true
     :value: "#proceeding_inj_respondent_capacity?"
     :br100_meaning: 'Inj: The Respondent Or Proposed Respondent Has Capacity'
     :response_type: boolean
@@ -4224,6 +4229,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROC_IS_SCA_OR_RELATED:
+    :generate_block?: false
     :value: "#proceeding_proc_is_sca_or_related"
     :br100_meaning: The Proceeding Sca Or Related
     :response_type: text
@@ -4252,7 +4258,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   CROSS_BORDER_DISPUTES_C:
-    :generate_block?: "#proceeding_generate_x_border_lar_criteria_block?"
+    :generate_block?: false
     :value: "#proceeding_x_border_disputes_lar_criteria?"
     :br100_meaning: 'LARCriteria: Falls Within The Cross Border Disputes LAR Criteria'
     :response_type: boolean
@@ -4269,7 +4275,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   BAIL_CONDITIONS_SET:
-    :generate_block?: "#proceeding_generate_bail_conditions_set_block?"
+    :generate_block?: true
     :value: "#proceeding_bail_conditions_set?"
     :response_type: boolean
     :user_defined: true
@@ -4291,6 +4297,7 @@ proceeding_merits:
     :user_defined: true
     :generate_block?: false
   PROC_RELATED_SCA_OR_RELATED:
+    :generate_block?: false
     :value: "#proceeding_proc_related_sca_or_related"
     :br100_meaning: The Proceeding Is In Relation To Special Children Act Or Related
       Proceedings
@@ -4315,7 +4322,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   CHILD_PARTIES_C:
-    :generate_block?: "#proceeding_generate_child_parties_criteria_block?"
+    :generate_block?: false
     :value: false
     :br100_meaning: 'LARCriteria: Falls Within The Child Parties LAR Criteria'
     :response_type: boolean
@@ -4332,12 +4339,13 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   HIGH_COST_CASE_ROUTING:
+    :generate_block?: false
     :value: "#proceeding_high_cost_case_routing"
     :br100_meaning: The High Cost Case Routing For The Proceeding
     :response_type: text
     :user_defined: false
   NEW_OR_EXISTING:
-    :value: "#proceeding_new_or_existing"
+    :value: NEW
     :br100_meaning: New or existing
     :response_type: text
     :user_defined: true
@@ -4348,6 +4356,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   DOM_VIOLENCE_WAIVER_APPLIES:
+    :generate_block?: false
     :value: "#proceeding_dom_violence_waiver_applies"
     :br100_meaning: The Domestic Violence Waiver Applies To The Proceeding
     :response_type: text
@@ -4360,7 +4369,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   NEW_OR_EXISTING_MERITS:
-    :value: "#proceeding_new_or_existing_merits"
+    :value: NEW
     :br100_meaning: 'Proc: New or existing'
     :response_type: text
     :user_defined: false
@@ -4379,12 +4388,12 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   LEAD_PROCEEDING:
-    :value: "#proceeding_lead_proceeding?"
+    :value: true
     :br100_meaning: Lead Proceeding
     :response_type: boolean
     :user_defined: true
   INJ_REASON_NO_WARNING_LETTER:
-    :generate_block?: "#proceeding_generate_injunction_reason_no_warning_letter_block?"
+    :generate_block?: true
     :value: "#proceeding_reason_no_injunction_warning_letter"
     :br100_meaning: 'Inj: The Reason Why No Warning Letter Has Been Sent'
     :response_type: text
@@ -4401,16 +4410,19 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROC_INVOLVING_CHILDREN:
+    :generate_block?: false
     :value: "#proceeding_involving_children"
     :br100_meaning: The Proceeding Is An Action Involving Children
     :response_type: text
     :user_defined: false
   PROC_INVOLVING_INJUNCTION:
+    :generate_block?: false
     :value: "#proceeding_involving_injunction"
     :br100_meaning: The Proceeding Is An Action Involving An Injunction
     :response_type: text
     :user_defined: false
   PROC_FIN_REP_CATEGORY:
+    :generate_block?: false
     :value: "#proceeding_fin_rep_category"
     :br100_meaning: The Proceeding Fin Rep Category
     :response_type: text
@@ -4422,12 +4434,13 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   PROC_AVAILABLE_AMENDMENT_ONLY:
+    :generate_block?: false
     :value: "#proceeding_available_amendment_only"
     :br100_meaning: The Proceeding Is Available On Amendment Only
     :response_type: text
     :user_defined: false
   PRIVATE_FUNDING_CONSIDERED:
-    :value: "#proceeding_private_funding_considered"
+    :value: No
     :br100_meaning: Private Funding Of The Proceeding Is To Be Considered
     :response_type: text
     :user_defined: false
@@ -4455,7 +4468,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   INJ_RECENT_INCIDENT_DETAIL:
-    :generate_block?: "#proceeding_generate_injunction_recent_incident_detail_block?"
+    :generate_block?: true
     :value: "#proceeding_injunction_recent_incident_detail"
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
     :response_type: text
@@ -4474,12 +4487,13 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   PROC_IS_MERITS_TESTED:
+    :generate_block?: false
     :value: "#proceeding_proc_is_merits_tested"
     :br100_meaning: The Proceeding Is Merits Tested
     :response_type: text
     :user_defined: false
   CLIENT_INVOLVEMENT_TYPE:
-    :value: "#proceeding_client_involvement_type"
+    :value: A
     :br100_meaning: Client Involvement Type
     :response_type: text
     :user_defined: true
@@ -4592,7 +4606,8 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   ACTION_DAMAGES_AGAINST_POLICE:
-    :value: "#proceeding_action_damages_against_police"
+    :generate_block?: false
+    :value: false
     :br100_meaning: The Proceeding Is An Action For Damages Against The Police
     :response_type: boolean
     :user_defined: false
