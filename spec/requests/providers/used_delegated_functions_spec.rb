@@ -54,8 +54,8 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
       expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
     end
 
-    it 'redirects to the substantive application page' do
-      expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
+    it 'redirects to the limitations page' do
+      expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
     end
 
     context 'when not authenticated' do
@@ -101,7 +101,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
       end
 
       it 'redirects to the online banking page' do
-        expect(response).to redirect_to(providers_legal_aid_application_online_banking_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
       end
     end
 

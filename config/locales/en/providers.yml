@@ -112,6 +112,8 @@ en:
         section_proceeding:
           heading: Scope of legal aid
           proceeding: Proceeding
+          used_delegated_functions: Have you used delegated functions?
+          used_delegated_functions_on: Date you used delegated functions
           costs: Costs you can incur
           costs_answer: £5,000
           work: Work you can do

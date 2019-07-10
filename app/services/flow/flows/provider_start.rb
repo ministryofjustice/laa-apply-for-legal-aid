@@ -32,6 +32,10 @@ module Flow
         },
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
+          forward: :used_delegated_functions
+        },
+        used_delegated_functions: {
+          path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
           forward: :limitations
         },
         limitations: {
@@ -49,10 +53,6 @@ module Flow
 
             application.benefit_check_result&.positive? ? :capital_introductions : :online_bankings
           end
-        },
-        used_delegated_functions: {
-          path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
-          forward: ->(application) { application.used_delegated_functions? ? :substantive_applications : :online_bankings }
         },
         substantive_applications: {
           path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },

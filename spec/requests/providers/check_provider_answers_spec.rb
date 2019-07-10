@@ -1,8 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe 'check your answers requests', type: :request do
-  let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address) }
+  let(:used_delegated_functions) { false }
+  let(:used_delegated_functions_on) { nil }
+  let(:application) do
+    create(
+      :legal_aid_application,
+      :with_proceeding_types,
+      :with_applicant_and_address,
+      used_delegated_functions: used_delegated_functions,
+      used_delegated_functions_on: used_delegated_functions_on
+    )
+  end
   let(:application_id) { application.id }
+  let(:parsed_html) { Nokogiri::HTML(response.body) }
+  let(:used_delegated_functions_answer) { parsed_html.at_css('#app-check-your-answers__used_delegated_functions .govuk-summary-list__value') }
+  let(:used_delegated_functions_on_answer) { parsed_html.at_css('#app-check-your-answers__used_delegated_functions_on .govuk-summary-list__value') }
 
   describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
     subject { get "/providers/applications/#{application_id}/check_provider_answers" }
@@ -28,6 +41,27 @@ RSpec.describe 'check your answers requests', type: :request do
 
       it 'displays the correct proceeding' do
         expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
+      end
+
+      it 'displays correct used_delegated_functions answer' do
+        expect(used_delegated_functions_answer.content.strip).to eq('No')
+      end
+
+      it 'does not display used_delegated_functions_on answer' do
+        expect(used_delegated_functions_on_answer).to be_nil
+      end
+
+      context 'provider have used delegated functions' do
+        let(:used_delegated_functions) { true }
+        let(:used_delegated_functions_on) { Faker::Date.backward }
+
+        it 'displays correct used_delegated_functions answer' do
+          expect(used_delegated_functions_answer.content.strip).to eq('Yes')
+        end
+
+        it 'displays correct used_delegated_functions_on answer' do
+          expect(used_delegated_functions_on_answer.content.strip).to eq(application.used_delegated_functions_on.to_s.strip)
+        end
       end
 
       describe 'back link' do

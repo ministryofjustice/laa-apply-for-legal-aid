@@ -100,6 +100,10 @@ Given('I start the journey as far as the start of the vehicle section') do
   )
 end
 
+Given('I used delegated functions') do
+  @legal_aid_application.update!(used_delegated_functions: true)
+end
+
 Given('I complete the journey as far as check your answers') do
   applicant = create(
     :applicant,
@@ -118,13 +122,13 @@ Given('I complete the journey as far as check your answers') do
     applicant: applicant
   )
   proceeding_type = create(:proceeding_type)
-  legal_aid_application = create(
+  @legal_aid_application = create(
     :legal_aid_application,
     applicant: applicant,
     proceeding_types: [proceeding_type]
   )
-  login_as legal_aid_application.provider
-  visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
