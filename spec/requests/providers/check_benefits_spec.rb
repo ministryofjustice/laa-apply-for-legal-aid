@@ -94,7 +94,7 @@ RSpec.describe 'check benefits requests', type: :request do
           let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
           it 'displays the online banking page' do
-            expect(response).to redirect_to providers_legal_aid_application_used_delegated_functions_path(application)
+            expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
           end
         end
 
@@ -102,7 +102,15 @@ RSpec.describe 'check benefits requests', type: :request do
           let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
 
           it 'displays the online banking page' do
-            expect(response).to redirect_to providers_legal_aid_application_used_delegated_functions_path(application)
+            expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+          end
+        end
+
+        context 'when delegated functions used' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
+
+          it 'displays the substantive application page' do
+            expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)
           end
         end
       end
