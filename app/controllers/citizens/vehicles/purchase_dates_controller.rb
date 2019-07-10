@@ -23,7 +23,7 @@ module Citizens
       end
 
       def form_params
-        merge_with_model(vehicle, mode: :citizen) do
+        merge_with_model(vehicle, journey: :citizen) do
           params.require(:vehicle).permit(:purchased_on_year, :purchased_on_month, :purchased_on_day)
         end
       end

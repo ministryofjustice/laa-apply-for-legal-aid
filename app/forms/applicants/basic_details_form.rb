@@ -17,7 +17,7 @@ module Applicants
     # split so that they occur in the right order.
     validates :first_name, :last_name, presence: true, unless: :draft?
 
-    validates :date_of_birth, presence: true, unless: :draft_and_not_incomplete_date?
+    validates :date_of_birth, presence: true, unless: :draft_and_not_partially_complete_date_of_birth?
 
     validates(
       :date_of_birth,
@@ -37,18 +37,17 @@ module Applicants
     def initialize(*args)
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: dob_fields,
-        model_attributes: dob_from_model
+        attrs: dob_date_fields.fields,
+        model_attributes: dob_date_fields.model_attributes
       )
     end
 
     def date_of_birth
       return @date_of_birth if @date_of_birth.present?
-      return incomplete_date if dobs.any?(&:blank?)
+      return if dob_date_fields.blank?
+      return :invalid if dob_date_fields.partially_complete? || dob_date_fields.form_date_invalid?
 
-      @date_of_birth = attributes[:date_of_birth] = Date.new(*dobs.map(&:to_i))
-    rescue ArgumentError # rubocop:disable Lint/HandleExceptions
-      # if date can't be parsed set as nil
+      @date_of_birth = attributes[:date_of_birth] = dob_date_fields.form_date
     end
 
     def normalise_national_insurance_number
@@ -59,25 +58,20 @@ module Applicants
     end
 
     def exclude_from_model
-      dob_fields
+      dob_date_fields.fields
     end
 
-    def dob_fields
-      %i[dob_year dob_month dob_day]
+    def draft_and_not_partially_complete_date_of_birth?
+      draft? && !dob_date_fields.partially_complete?
     end
 
-    def dobs
-      @dobs ||= [dob_year, dob_month, dob_day]
-    end
-
-    def dob_from_model
-      return unless model.date_of_birth?
-
-      {
-        dob_year: model.date_of_birth.year,
-        dob_month: model.date_of_birth.month,
-        dob_day: model.date_of_birth.day
-      }
+    def dob_date_fields
+      @dob_date_fields ||= DateFieldBuilder.new(
+        form: self,
+        model: model,
+        method: :date_of_birth,
+        prefix: :dob_
+      )
     end
 
     def validate_national_insurance_number
@@ -96,19 +90,6 @@ module Applicants
 
     def test_level_validation?
       Rails.configuration.x.laa_portal.mock_saml == 'true'
-    end
-
-    def incomplete_date
-      @incomplete_date = true unless dobs.all?(&:blank?)
-      nil
-    end
-
-    def incomplete_date?
-      @incomplete_date
-    end
-
-    def draft_and_not_incomplete_date?
-      draft? && !incomplete_date?
     end
   end
 end

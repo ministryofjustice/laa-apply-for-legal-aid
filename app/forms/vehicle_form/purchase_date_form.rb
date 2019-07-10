@@ -4,75 +4,59 @@ module VehicleForm
 
     form_for Vehicle
 
-    DATE_PARTS = %i[purchased_on_year purchased_on_month purchased_on_day].freeze
-
-    attr_accessor(*DATE_PARTS)
-    attr_accessor :mode
+    attr_accessor :purchased_on_year, :purchased_on_month, :purchased_on_day
+    attr_accessor :journey
     attr_writer :purchased_on
 
     validate :date_is_in_the_future
 
-    validates :purchased_on,
-              date: { allow_nil: true },
-              presence: { unless: :draft_and_not_incomplete_date? }
-
-    def purchased_on
-      return @purchased_on if @purchased_on.present?
-      return incomplete_date if date_values.any?(&:blank?)
-      return unless Date.valid_date?(*date_values.map(&:to_i))
-
-      @purchased_on = attributes[:purchased_on] = Date.new(*date_values.map(&:to_i))
-    end
+    validates :purchased_on, presence: true, unless: :draft_and_not_partially_complete_date?
+    validates :purchased_on, date: true, allow_nil: true
 
     def initialize(*args)
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: DATE_PARTS,
-        model_attributes: purchased_on_from_model
+        attrs: purchased_on_date_fields.fields,
+        model_attributes: purchased_on_date_fields.model_attributes
       )
+    end
+
+    def purchased_on
+      return @purchased_on if @purchased_on.present?
+      return if purchased_on_date_fields.blank?
+      return :invalid if purchased_on_date_fields.partially_complete? || purchased_on_date_fields.form_date_invalid?
+
+      @purchased_on = attributes[:purchased_on] = purchased_on_date_fields.form_date
     end
 
     private
 
-    def date_values
-      DATE_PARTS.map { |field| __send__(field) }
-    end
-
     def exclude_from_model
-      DATE_PARTS + [:mode]
+      purchased_on_date_fields.fields + [:journey]
     end
 
-    def purchased_on_from_model
-      return unless model.purchased_on?
-
-      {
-        purchased_on_year: model.purchased_on.year,
-        purchased_on_month: model.purchased_on.month,
-        purchased_on_day: model.purchased_on.day
-      }
+    def purchased_on_date_fields
+      @purchased_on_date_fields ||= DateFieldBuilder.new(
+        form: self,
+        model: model,
+        method: :purchased_on,
+        prefix: :purchased_on_
+      )
     end
 
-    def incomplete_date
-      @incomplete_date = true unless date_values.all?(&:blank?)
-      nil
-    end
-
-    def incomplete_date?
-      @incomplete_date
-    end
-
-    def draft_and_not_incomplete_date?
-      draft? && !incomplete_date?
+    def draft_and_not_partially_complete_date?
+      draft? && !purchased_on_date_fields.partially_complete?
     end
 
     def date_is_in_the_future
       return if draft? || !purchased_on
+      return if purchased_on == :invalid
 
-      errors.add(:purchased_on, error_message_for(:date_is_in_the_future)) if purchased_on > Time.current
+      errors.add(:purchased_on, error_message_for(:date_is_in_the_future)) if purchased_on > Date.current
     end
 
     def error_message_for(error_type)
-      I18n.t("activemodel.errors.models.vehicle.attributes.purchased_on.#{mode}.#{error_type}")
+      I18n.t("activemodel.errors.models.vehicle.attributes.purchased_on.#{journey}.#{error_type}")
     end
   end
 end
