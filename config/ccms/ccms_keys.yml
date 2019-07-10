@@ -4247,6 +4247,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROC_DV_GATEWAY_APPLIES:
+    :generate_block?: false
     :value: "#proceeding_dv_gateway_applies?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
