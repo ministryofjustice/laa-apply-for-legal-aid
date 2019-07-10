@@ -154,6 +154,11 @@ en:
           attributes:
             has_dependants:
               blank: Select yes if you have dependants
+            has_restrictions:
+              citizen:
+                blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
+              provider:
+                blank: Select yes if there are restrictions that prevent your client from selling or borrowing against their assets
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               greater_than_or_equal_to: Mortgage amount must be 0 or more
@@ -182,6 +187,11 @@ en:
                 blank: Enter an estimated value for your client's home
                 not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
               too_many_decimals: Estimated value must not include more than 2 decimal numbers
+            restrictions_details:
+              citizen:
+                blank: Enter the assets you cannot sell or borrow against, and why
+              provider:
+                blank: Enter the assets your client cannot sell or borrow against, and why
             shared_ownership:
               blank: Select yes if you own your home with someone else
             substantive_application:

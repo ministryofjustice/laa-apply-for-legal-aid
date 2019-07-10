@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'citizen restrictions request', type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let!(:restrictions) { create_list :restriction, 3 }
+RSpec.describe 'provider restrictions request', type: :request do
+  let(:application) { create :legal_aid_application, :with_applicant }
+  let(:provider) { application.provider }
 
   describe 'GET /providers/applications/:id/restrictions' do
-    subject { get providers_legal_aid_application_restrictions_path(legal_aid_application) }
+    subject { get providers_legal_aid_application_restrictions_path(application) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -14,38 +14,33 @@ RSpec.describe 'citizen restrictions request', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
         subject
       end
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
       end
-
-      it 'displays the restriction name labels' do
-        restrictions.map(&:label_name).each do |label|
-          expect(unescaped_response_body).to include(label)
-        end
-      end
     end
   end
 
-  describe 'POST /citizens/restrictions' do
-    let(:restriction_ids) { restrictions.pluck(:id) }
+  describe 'PATCH /providers/applications/:id/restrictions' do
+    subject { patch providers_legal_aid_application_restrictions_path(application), params: params.merge(submit_button) }
     let(:params) do
       {
-        legal_aid_application_id: legal_aid_application.id,
         legal_aid_application: {
-          restriction_ids: restriction_ids
+          has_restrictions: has_restrictions,
+          restrictions_details: restrictions_details
         }
       }
     end
-
-    subject { post providers_legal_aid_application_restrictions_path(legal_aid_application), params: params.merge(submit_button) }
+    let(:restrictions_details) { Faker::Lorem.paragraph }
+    let(:has_restrictions) { true }
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as provider
+        subject
       end
 
       context 'Form submitted with continue button' do
@@ -55,51 +50,45 @@ RSpec.describe 'citizen restrictions request', type: :request do
           }
         end
 
-        it 'creates a mapping for each restriction' do
-          expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
+        it 'updates legal aid application restriction information' do
+          expect(application.reload.has_restrictions).to eq true
+          expect(application.reload.restrictions_details).to_not be_empty
         end
 
-        context 'after success' do
-          before do
-            subject
-            legal_aid_application.reload
-          end
-
-          it 'updates the legal_aid_application.restrictions' do
-            expect(legal_aid_application.restrictions).to match_array(restrictions)
-          end
-
-          it 'redirects to check passported answers' do
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
-          end
+        it 'redirects to check passported answers' do
+          expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
         end
 
-        context 'on error' do
-          let(:restriction_ids) { %i[foo bar] }
+        context 'invalid params' do
+          let(:restrictions_details) { '' }
 
-          # As I can not think of a "normal" behaviour that can cause an error.
-          # Error handling falls back to standard error handling.
           it 'displays error' do
-            subject
-            expect(response).to redirect_to(error_path(:page_not_found))
+            expect(response.body).to include(translation_for(:restrictions_details, 'blank'))
+          end
+
+          context 'no params' do
+            let(:has_restrictions) { nil }
+
+            it 'displays error' do
+              expect(response.body).to include(translation_for(:has_restrictions, 'blank'))
+            end
           end
         end
 
         context 'provider checking their answers' do
-          let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checking_passported_answers }
+          let(:application) { create :legal_aid_application, :with_applicant, state: :checking_passported_answers }
 
           it 'redirects to check passported answers' do
-            subject
-            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path)
           end
         end
 
         context "provider checking citizen's answers" do
-          let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :provider_checking_citizens_means_answers }
+          let(:application) { create :legal_aid_application, :with_applicant, state: :provider_checking_citizens_means_answers }
 
           it 'redirects to means summary page' do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
           end
         end
       end
@@ -111,18 +100,16 @@ RSpec.describe 'citizen restrictions request', type: :request do
           }
         end
 
-        it 'creates a mapping for each restriction' do
-          expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
-        end
-
         context 'after success' do
           before do
+            login_as provider
             subject
-            legal_aid_application.reload
+            application.reload
           end
 
           it 'updates the legal_aid_application.restrictions' do
-            expect(legal_aid_application.restrictions).to match_array(restrictions)
+            expect(application.has_restrictions).to eq true
+            expect(application.restrictions_details).to_not be_empty
           end
 
           it 'redirects to the list of applications' do
@@ -131,5 +118,9 @@ RSpec.describe 'citizen restrictions request', type: :request do
         end
       end
     end
+  end
+
+  def translation_for(attr, error)
+    I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attr}.provider.#{error}")
   end
 end

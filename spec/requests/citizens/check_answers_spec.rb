@@ -9,9 +9,12 @@ RSpec.describe 'check your answers requests', type: :request do
            :provider_submitted,
            :with_everything,
            vehicle: vehicle,
-           own_vehicle: own_vehicle
+           own_vehicle: own_vehicle,
+           has_restrictions: has_restrictions,
+           restrictions_details: restrictions_details
   end
-  let!(:restriction) { create :restriction, legal_aid_applications: [legal_aid_application] }
+  let(:has_restrictions) { true }
+  let(:restrictions_details) { Faker::Lorem.paragraph }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -127,9 +130,10 @@ RSpec.describe 'check your answers requests', type: :request do
 
     context 'applicant does not have any capital restrictions' do
       let(:legal_aid_application) { create :legal_aid_application, :with_everything }
-      let!(:restriction) { nil }
+      let(:has_restrictions) { false }
+      let!(:restrictions_details) { '' }
       it 'displays that no capital restrictions have been declared' do
-        expect(response.body).to include(I18n.t('.generic.none_declared'))
+        expect(response.body).to include(I18n.t('.generic.no'))
       end
     end
 

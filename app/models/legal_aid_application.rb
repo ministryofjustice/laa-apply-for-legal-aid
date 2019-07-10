@@ -21,8 +21,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_one :statement_of_case, dependent: :destroy
   has_one :respondent, dependent: :destroy
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: :Incident, dependent: :destroy
-  has_many :legal_aid_application_restrictions, dependent: :destroy
-  has_many :restrictions, through: :legal_aid_application_restrictions
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :dependants, dependent: :destroy

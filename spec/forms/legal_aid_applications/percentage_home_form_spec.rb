@@ -16,7 +16,7 @@ RSpec.describe LegalAidApplications::PercentageHomeForm, type: :form do
 
   describe '#save' do
     it 'updates application.percentage_home' do
-      expect { subject.save }.to change { application.reload.percentage_home.to_s.to_d }.to(percentage_home.to_d)
+      expect { subject.save }.to change { application.reload.percentage_home }.to(percentage_home)
     end
 
     it 'returns true' do

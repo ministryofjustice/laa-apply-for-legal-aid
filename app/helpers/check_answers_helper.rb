@@ -51,15 +51,4 @@ module CheckAnswersHelper
       question: question
     )
   end
-
-  # Creates both the outer `dl` and the inner list items
-  def check_answer_no_link_list(url:, question:, answers:, name:)
-    render(
-      'shared/check_answers/no_link_items',
-      name: name,
-      url: url,
-      question: question,
-      answers: answers
-    )
-  end
 end

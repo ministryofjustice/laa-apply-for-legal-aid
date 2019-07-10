@@ -57,12 +57,11 @@ Given('I complete the citizen journey as far as check your answers') do
   steps %(Then I should be on a page showing "Check your answers")
 end
 
-Given('the application has the restriction {string}') do |restriction_name|
-  restriction = Restriction.find_or_create_by(name: restriction_name)
+Given('the application has a restriction') do
   create(
-    :legal_aid_application_restriction,
-    legal_aid_application: @legal_aid_application,
-    restriction: restriction
+    :application,
+    :with_restrictions,
+    legal_aid_application: @legal_aid_application
   )
 end
 

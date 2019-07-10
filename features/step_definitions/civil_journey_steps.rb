@@ -201,10 +201,6 @@ Given('I complete the passported journey as far as capital check your answers') 
     applicant: applicant
   )
   login_as @legal_aid_application.provider
-  steps %(
-    Given the application has the restriction 'bankruptcy'
-    And the application has the restriction 'held_overseas'
-  )
   visit(providers_legal_aid_application_check_passported_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
 end

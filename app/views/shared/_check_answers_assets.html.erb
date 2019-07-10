@@ -71,9 +71,4 @@
       )
     ) if @legal_aid_application.other_assets? %>
 
-<%= check_answer_no_link_list(
-      name: :restrictions,
-      url: check_answer_url_for(user_type, :restrictions, application),
-      question: t('.assets.restrictions'),
-      answers: @legal_aid_application.restrictions.map { |restriction| t("restrictions.names.#{restriction.name}") }
-    ) if @legal_aid_application.own_capital? %>
+<%= render('shared/check_answers_restrictions', user_type: user_type, application: @legal_aid_application) if @legal_aid_application.own_capital? %>

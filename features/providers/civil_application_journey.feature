@@ -456,13 +456,13 @@ Feature: Civil application journeys
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
-    Then I select "Bankruptcy"
-    Then I select "Held overseas"
+    Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
+    Then I choose 'Yes'
+    Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click link "Back"
-    Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
+    Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
     Then I click link "Back"
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I click link "Back"

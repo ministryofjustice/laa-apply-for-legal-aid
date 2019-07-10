@@ -13,9 +13,7 @@ RSpec.describe SaveApplicantMeansAnswers do
   let(:selected_transactions) { application.bank_transactions.where.not(transaction_type: nil).compact }
 
   before do
-    Restriction.populate
     application.set_transaction_period
-    application.restrictions = Restriction.all.sample(Faker::Number.between(1, Restriction.count - 1))
   end
 
   describe '#call' do
@@ -60,13 +58,6 @@ RSpec.describe SaveApplicantMeansAnswers do
         end
         expect(got).to eq(expected), "Attr #{key}: expected #{expected}, got #{got}"
       end
-    end
-
-    it 'copies the restrictions of the application' do
-      subject
-      restrictions = application.applicant_means_answers['restrictions'].pluck('name')
-      expected_restrictions = application.restrictions.pluck(:name)
-      expect(restrictions).to match_array(expected_restrictions)
     end
 
     it 'copies the vehicle of the application' do

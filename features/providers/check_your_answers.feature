@@ -22,7 +22,8 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing "What % share of their home does your client legally own?"
     Then I fill "Percentage home" with "50"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
+    Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
@@ -30,6 +31,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Outstanding mortgage' should be '£100,000.00'
     And the answer for 'Shared ownership' should be 'Yes, a partner or ex-partner'
     And the answer for 'Percentage home' should be '50.00%'
+    And the answer for 'Restrictions' should be 'No'
 
   @javascript
   Scenario: I am able to go back and change no property to owned with a mortgage and not shared with a partner
@@ -50,13 +52,17 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing "Does your client own their home with anyone else?"
     Then I choose "No, sole owner"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
+    Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+    Then I choose 'Yes'
+    And I fill 'Restrictions details' with "Restrictions include:"
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000.00'
     And the answer for 'Outstanding mortgage' should be '£100,000.00'
     And the answer for 'Shared ownership' should be 'No, sole owner'
+    And the answer for 'Restrictions' should be 'Yes'
+    And the answer for 'Restrictions' should be 'Restrictions include:'
 
   @javascript
   Scenario: I am able to go back and not change property owned and come straight back to check passported answers
@@ -81,10 +87,12 @@ Feature: Checking answers backwards and forwards
     Then I select 'Cash savings'
     Then I fill 'cash' with '456.33'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
+    Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And I should be on a page showing "£456.33"
+    And the answer for 'Restrictions' should be 'No'
 
   @javascript
   Scenario: I am able to go back and not change Savings and Investments to have any values then come straight back to the check your answers page
@@ -110,7 +118,8 @@ Feature: Checking answers backwards and forwards
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
+    Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And I should be on a page showing "£20,000"
@@ -143,7 +152,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'What % share of their home does your client legally own?'
       Then I click 'Save and continue'
-      Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
+      Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
@@ -178,35 +187,22 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing 'Check your answers'
 
     @javascript @vcr
-    Scenario: I want to add restrictions via the capital check your answers page
+    Scenario: I want to add and remove restrictions via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
-      Then I select 'Restraint or freezing order'
+      Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+      Then I choose 'Yes'
+      Then I fill "Restrictions details" with 'Restraint or freezing order'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
+      And the answer for 'Restrictions' should be 'Yes'
       And the answer for 'Restrictions' should be 'Restraint or freezing order'
-
-    @javascript @vcr
-    Scenario: I want to remove capital restrictions via the capital check your answers page
-      Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
-      Then I deselect 'Bankruptcy'
-      Then I deselect 'Held overseas'
+      Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+      Then I choose 'No'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
-      And the answer for 'Restrictions' should be 'None declared'
-
-    @javascript @vcr
-    Scenario: I return to the capital check your answers page without changing capital restrictions
-      Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page showing "Do any of the following restrictions apply to your client's property or other assets?"
-      Then I click 'Save and continue'
-      Then I should be on a page showing 'Check your answers'
-      And the answer for 'Restrictions' should be 'Bankruptcy'
-      And the answer for 'Restrictions' should be 'Held overseas'
+      And the answer for 'Restrictions' should be 'No'
 
     @javascript
     Scenario: I change vehicle answers
