@@ -404,6 +404,7 @@ module CCMS
     end
 
     def evaluate_generate_block_method(config, options)
+      return config[:generate_block?] if boolean?(config[:generate_block?])
       method_name = config[:generate_block?].sub(/^#/, '')
       @attribute_value_generator.__send__(method_name, options)
     end
@@ -474,6 +475,10 @@ module CCMS
 
     def wage_slips
       @wage_slips ||= @legal_aid_application.wage_slips
+    end
+
+    def boolean?(value)
+      value.is_a?(TrueClass) || value.is_a?(FalseClass)
     end
   end
 end
