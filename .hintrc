@@ -1,10 +1,35 @@
 {
-  "extends": [
-    "web-recommended"
-  ],
   "connector": {
     "name": "local"
   },
-  "parsers": ["html", "css"],
-  "formatters": ["html"]
+  "formatters": [ "html", "json" ],
+  "parsers": [ "html", "css" ],
+  "hintsTimeout": 120000,
+  "hints": {
+    "axe": "error",
+    "button-type": "error",
+    "content-type": "error",
+    "create-element-svg": "error",
+    "css-prefix-order": "error",
+    "disown-opener": "error",
+    "highest-available-document-mode": "error",
+    "html-checker": "error",
+    "http-cache": "error",
+    "http-compression": "error",
+    "meta-charset-utf-8": "error",
+    "meta-viewport": "error",
+    "no-bom": "error",
+    "no-disallowed-headers": "error",
+    "no-friendly-error-pages": "error",
+    "no-html-only-headers": "error",
+    "no-http-redirects": "error",
+    "no-protocol-relative-urls": "error",
+    "no-vulnerable-javascript-libraries": "error",
+    "sri": "error",
+    "ssllabs": "error",
+    "strict-transport-security": "error",
+    "stylesheet-limits": "error",
+    "validate-set-cookie-header": "error",
+    "x-content-type-options": "error"
+  }
 }
