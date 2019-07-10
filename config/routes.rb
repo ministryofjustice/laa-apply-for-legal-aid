@@ -84,6 +84,7 @@ Rails.application.routes.draw do
       scope module: :dependants do
         resource :details, only: %i[show update]
         resource :relationship, only: %i[show update]
+        resource :full_time_education, only: %i[show update]
       end
     end
     resource :has_other_dependant, only: %i[show update]

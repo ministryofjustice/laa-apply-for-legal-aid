@@ -5,7 +5,7 @@ module DependantForm
 
     ATTRIBUTES = %i[name dob_year dob_month dob_day].freeze
 
-    attr_accessor :name, :dob_year, :dob_month, :dob_day
+    attr_accessor(*ATTRIBUTES)
     attr_writer :date_of_birth
 
     validates :name, presence: true
