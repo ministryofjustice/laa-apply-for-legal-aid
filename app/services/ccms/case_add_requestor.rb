@@ -405,6 +405,7 @@ module CCMS
 
     def evaluate_generate_block_method(config, options)
       return config[:generate_block?] if boolean?(config[:generate_block?])
+
       method_name = config[:generate_block?].sub(/^#/, '')
       @attribute_value_generator.__send__(method_name, options)
     end
