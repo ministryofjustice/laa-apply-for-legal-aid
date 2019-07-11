@@ -27,7 +27,7 @@ references:
     run:
       name: Setup aws on debian environment
       command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+        if [ "${CIRCLE_NODE_INDEX}" == "1" ] || [ "${CIRCLE_JOB}" == "clean_up_ecr" ]; then
           sudo apt-get --assume-yes install python3-pip
           sudo pip3 install awscli
           $(aws ecr get-login --region eu-west-1 --no-include-email)
