@@ -103,14 +103,15 @@ Feature: Civil application journeys
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'must complete a financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
@@ -137,15 +138,15 @@ Feature: Civil application journeys
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'must complete a financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
     Then I am on the client use online banking page
     Then I choose "Yes"
     Then I click 'Save and continue'
@@ -156,6 +157,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I can see that the applicant receives benefits
     Given I start the journey as far as the applicant page
+    And a "bank holiday" exists in the database
     Then I enter name 'Test', 'Walker'
     Then I enter the date of birth '10-01-1980'
     Then I enter national insurance number 'JA293483A'
@@ -169,6 +171,10 @@ Feature: Civil application journeys
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'Yes'
+    Then I enter the 'used delegated functions' date of 2 days ago
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -191,6 +197,9 @@ Feature: Civil application journeys
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -220,6 +229,9 @@ Feature: Civil application journeys
     And I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're covered for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -279,9 +291,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'must complete a financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
     Then I should be on a page showing 'Does your client use online banking?'
     Then I choose "Yes"
     Then I click 'Save and continue'
@@ -297,13 +306,10 @@ Feature: Civil application journeys
   Scenario: I use delegated functions and a substantive application
     Given I complete the journey as far as check your answers
     And a "bank holiday" exists in the database
+    And I used delegated functions
     Then I click 'Save and continue'
     Then I should be on a page showing 'must complete a financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'Yes'
-    Then I enter the 'used delegated functions' date of 2 days ago
-    Then I click 'Save and continue'
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
@@ -313,13 +319,10 @@ Feature: Civil application journeys
   Scenario: I use delegated functions and will return later
     Given I complete the journey as far as check your answers
     And a "bank holiday" exists in the database
+    And I used delegated functions
     Then I click 'Save and continue'
     Then I should be on a page showing 'must complete a financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'Yes'
-    Then I enter the 'used delegated functions' date of 2 days ago
-    Then I click 'Save and continue'
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'No'
     Then I click 'Save and continue'

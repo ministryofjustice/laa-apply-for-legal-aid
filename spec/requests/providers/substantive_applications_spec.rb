@@ -54,6 +54,22 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       )
     end
 
+    context 'with positive benefit check' do
+      let(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :with_positive_benefit_check_result,
+          state: :client_details_answers_checked
+        )
+      end
+
+      it 'redirects to captial introductions' do
+        expect(response).to redirect_to(
+          providers_legal_aid_application_capital_introduction_path(legal_aid_application)
+        )
+      end
+    end
+
     context 'No selected' do
       let(:substantive_application) { false }
 
