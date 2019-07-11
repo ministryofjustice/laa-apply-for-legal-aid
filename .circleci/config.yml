@@ -254,7 +254,9 @@ jobs:
           - v1-gems-cache
     - run:
         name: Bundle Install
-        command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
+        command: |
+          gem install bundler -v 2.0.2
+          bundle check --path vendor/bundle || bundle install --path vendor/bundle && bundle clean
     - run: sudo apt install -y postgresql-client || true
     - run:
         name: Database Setup

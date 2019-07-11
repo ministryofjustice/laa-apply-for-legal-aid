@@ -15,7 +15,8 @@ RAILS_ENV=test bin/rails server -p 3004 -d
 for filename in "$HTMLS_DIR"/*.html; do
     [ -e "$filename" ] || continue
     echo "hint $filename"
-    RESULT=$( npm run hint -- "$filename" --tracking off 2>&1 )
+    result=$( yarn run hint "$filename" --tracking off )
+    echo "$result"
 done
 
 # stop server
