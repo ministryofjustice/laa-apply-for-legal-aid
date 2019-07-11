@@ -403,6 +403,10 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
     t.string "ccms_category_law_code"
     t.string "ccms_matter"
     t.string "ccms_matter_code"
+    t.integer "default_level_of_service_id"
+    t.string "default_level_of_service_name"
+    t.integer "default_cost_limitation_delegated_functions"
+    t.integer "default_cost_limitation_substantive"
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
