@@ -16,7 +16,7 @@
         <tbody class="govuk-table__body">
           <tr class="govuk-table__row">
             <td class="govuk-table__cell"><%= application.applicant_full_name || t('generic.undefined') %></td>
-            <td class="govuk-table__cell"><%= l(application.created_at, format: :date) %></td>
+            <td class="govuk-table__cell"><%= l(application.created_at.to_date, format: :long_date) %></td>
             <td class="govuk-table__cell"><%= application.application_ref %></td>
             <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
             <td class="govuk-table__cell">
