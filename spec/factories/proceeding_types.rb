@@ -12,6 +12,7 @@ FactoryBot.define do
     default_level_of_service_name { 'Default level of service' }
     default_cost_limitation_delegated_functions { 1 }
     default_cost_limitation_substantive { 2 }
+    involvement_type_applicant { false }
 
     trait :with_real_data do
       code { 'PR0208' }
@@ -26,6 +27,7 @@ FactoryBot.define do
       default_level_of_service_name { 'Full Representation' }
       default_cost_limitation_delegated_functions { 1350 }
       default_cost_limitation_substantive { 5000 }
+      involvement_type_applicant { true }
     end
   end
 end
