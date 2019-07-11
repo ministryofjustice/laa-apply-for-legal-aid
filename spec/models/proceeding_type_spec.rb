@@ -14,4 +14,11 @@ RSpec.describe ProceedingType, type: :model do
   describe 'should have associations with scope_limitation' do
     it { should have_many(:scope_limitations) }
   end
+  
+  describe '.populate' do
+    it 'calls the proceeding_type_populator service' do
+      expect(ProceedingTypePopulator).to receive(:call).with(no_args)
+      described_class.populate
+    end
+  end
 end
