@@ -5,7 +5,7 @@ module GovukElementsFormBuilder
     # https://guides.rubyonrails.org/configuring.html#configuring-action-view
     ActionView::Base.field_error_proc = proc { |html_tag| html_tag.html_safe }
 
-    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline text_input input_attributes].freeze
+    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline text_input input_attributes collection].freeze
 
     delegate :content_tag, to: :@template
     delegate :errors, to: :@object
@@ -114,7 +114,7 @@ module GovukElementsFormBuilder
                 value = value_attr ? obj[value_attr] : obj
                 label = label_attr ? obj[label_attr] : nil
                 input_attributes = options.dig(:input_attributes, value.to_s) || {}
-                govuk_radio_button(attribute, value, options.merge(input_attributes).merge(label: label))
+                govuk_radio_button(attribute, value, options.merge(input_attributes).merge(label: label, collection: true))
               end
               concat_tags(inputs)
             end
@@ -228,7 +228,7 @@ module GovukElementsFormBuilder
     end
 
     def hint_message(attribute, options)
-      return options[:hint] if options.key?(:radio_button_value)
+      return nil if options[:collection]
 
       options[:hint].presence || I18n.translate("helpers.hint.#{@object_name}.#{attribute}", default: nil)
     end
