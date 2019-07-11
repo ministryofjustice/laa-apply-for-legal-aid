@@ -100,7 +100,7 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click 'Save and continue'
-    Then I search for proceeding 'Application for a care order'
+    Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
@@ -134,7 +134,7 @@ Feature: Civil application journeys
     Then I enter city 'London'
     Then I enter postcode 'SW1H 9AJ'
     Then I click 'Save and continue'
-    Then I search for proceeding 'Application for a care order'
+    Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
@@ -166,7 +166,7 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click 'Save and continue'
-    Then I search for proceeding 'Application for a care order'
+    Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
@@ -188,7 +188,7 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
     Then I click 'Save and continue'
-    Then I search for proceeding 'Application for a care order'
+    Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
@@ -217,7 +217,7 @@ Feature: Civil application journeys
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Proceeding Type'
-    And I search for proceeding 'Application for a care order'
+    And I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're covered for"
@@ -228,7 +228,7 @@ Feature: Civil application journeys
   Scenario: I want to return to the check your answers page without changing proceeding type
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Proceeding Type'
-    And I search for proceeding 'Application for a care order'
+    And I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I click link "Back"
     Then I should be on a page showing 'Check your answers'
