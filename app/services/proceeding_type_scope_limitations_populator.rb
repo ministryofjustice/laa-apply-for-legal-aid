@@ -28,10 +28,18 @@ class ProceedingTypeScopeLimitationsPopulator
   private
 
   def proceeding_type_id(row)
-    ProceedingType.find_by(ccms_code: row[:proceeding_type_code]).id
+    proceeding_types.find { |proceeding_type| proceeding_type.ccms_code == row[:proceeding_type_code] }.id
   end
 
   def scope_limitation_id(row)
-    ScopeLimitation.find_by(code: row[:scope_limitation_code]).id
+    scope_limitations.find { |scope_limitation| scope_limitation.code == row[:scope_limitation_code] }.id
+  end
+
+  def proceeding_types
+    @proceeding_types ||= ProceedingType.select(:id, :ccms_code).all
+  end
+
+  def scope_limitations
+    @scope_limitations ||= ScopeLimitation.select(:id, :code).all
   end
 end
