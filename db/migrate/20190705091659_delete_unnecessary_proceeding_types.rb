@@ -8,6 +8,8 @@ class DeleteUnnecessaryProceedingTypes < ActiveRecord::Migration[5.2]
   end
 
   def up
+    return if ProceedingType.count.zero?
+
     ApplicationProceedingType.where(proceeding_type_id: proceeding_ids_to_be_deleted).update_all(proceeding_type_id: safe_proceeding_id)
     ProceedingType.delete(proceeding_ids_to_be_deleted)
   end
