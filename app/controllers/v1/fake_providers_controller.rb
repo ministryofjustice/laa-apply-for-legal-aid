@@ -8,24 +8,48 @@ module V1
 
     def provider_details
       {
-        providerOffices: Array.new(rand(1..3)).map { provider_office },
-        contactId: rand(1..100_000),
-        contactName: params[:username]
+        providerOffices: number_of_offices.times.map do |office_index|
+          provider_office(office_index)
+        end,
+        contactId: username_number * 3,
+        contactName: contact_name
       }
     end
 
-    def provider_office
+    def provider_office(office_index)
+      # unique office_id for each office
+      office_id = username_number * 2 + office_index
+
+      # unique office_number for each office
+      office_number = "0A#{office_id}"
+
       {
         providerfirmId: firm_id,
-        officeId: rand(1..100_000),
-        officeName: Faker::Lorem.sentence,
-        smsVendorNum: rand(1..10_000).to_s,
-        smsVendorSite: Faker::Lorem.word
+        officeId: office_id,
+        officeName: "#{firm_name}-#{office_number}",
+        smsVendorNum: ((office_id + firm_id) * 4).to_s,
+        smsVendorSite: office_number
       }
+    end
+
+    def number_of_offices
+      (username_number & 3) + 1
     end
 
     def firm_id
-      @firm_id ||= rand(1..100_000)
+      @firm_id ||= username_number
+    end
+
+    def firm_name
+      @firm_name ||= "#{contact_name} & Co."
+    end
+
+    def contact_name
+      @contact_name ||=  params[:username].snakecase.titlecase
+    end
+
+    def username_number
+      @username_number ||= params[:username].upcase.chars.map(&:ord).sum
     end
   end
 end
