@@ -17,11 +17,16 @@ module Flow
           path: ->(_, dependant) { urls.citizens_dependant_relationship_path(dependant) },
           forward: ->(_, dependant) { dependant.adult_relative? || dependant.eighteen_or_less? ? :dependants_income : :dependants_education }
         },
+        dependants_assets_values: {
+          # path: ->(_, dependant) { urls.citizens_dependant_assets_value_path(dependant) },
+          forward: :has_other_dependants
+        },
         dependants_education: {
           path: ->(_, dependant) { "[PLACEHOLDER] #{dependant.name} dependants education" }
         },
         dependants_income: {
-          path: ->(_, dependant) { "[PLACEHOLDER] #{dependant.name} dependants income" }
+          path: ->(_, dependant) { "[PLACEHOLDER] #{dependant.name} dependants income" },
+          forward: :dependants_assets_values
         },
         has_other_dependants: {
           path: ->(_) { urls.citizens_has_other_dependant_path },

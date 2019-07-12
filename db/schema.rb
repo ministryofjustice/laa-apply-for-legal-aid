@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_091659) do
+ActiveRecord::Schema.define(version: 2019_07_08_151000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -212,6 +212,8 @@ ActiveRecord::Schema.define(version: 2019_07_05_091659) do
     t.datetime "updated_at", null: false
     t.string "relationship"
     t.boolean "in_full_time_education"
+    t.boolean "has_assets_more_than_threshold"
+    t.decimal "assets_value"
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 
