@@ -8,7 +8,7 @@ module V1
 
     def provider_details
       {
-        providerOffices: number_of_offices.times.map do |office_index|
+        providerOffices: Array.new(number_of_offices) do |office_index|
           provider_office(office_index)
         end,
         contactId: username_number * 3,
@@ -45,7 +45,7 @@ module V1
     end
 
     def contact_name
-      @contact_name ||=  params[:username].snakecase.titlecase
+      @contact_name ||= params[:username].snakecase.titlecase
     end
 
     def username_number

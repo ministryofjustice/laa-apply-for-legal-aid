@@ -1,5 +1,4 @@
 class ProviderDetailsCreator
-
   def self.call(provider)
     new(provider).call
   end
