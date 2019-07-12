@@ -3,6 +3,9 @@ class Provider < ApplicationRecord
   serialize :roles
   serialize :offices
 
+  belongs_to :firm, optional: true
+  belongs_to :office, optional: true
+
   has_many :legal_aid_applications
 
   def update_details
