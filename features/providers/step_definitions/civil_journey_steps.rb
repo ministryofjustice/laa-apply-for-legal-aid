@@ -150,13 +150,13 @@ Given('I complete the passported journey as far as check your answers') do
     lookup_used: true,
     applicant: applicant
   )
-  legal_aid_application = create(
+  @legal_aid_application = create(
     :legal_aid_application,
     :with_proceeding_types,
     applicant: applicant
   )
-  login_as legal_aid_application.provider
-  visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
 end
 

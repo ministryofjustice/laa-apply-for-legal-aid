@@ -5,7 +5,7 @@ class MockBenefitCheckService
     'SMITH' => { nino: 'ZZ123459A', dob: '11-Jan-99' },
     'JONES' => { nino: 'ZZ123458A', dob: '1-Jun-80' },
     'BLOGGS' => { nino: 'ZZ123457A', dob: '4-Jan-90' },
-    'WALKER' => { nino: 'ZZ123456A', dob: '11-Jan-55' }
+    'WALKER' => { nino: 'JA293483A', dob: '10-Jan-80' } # Used in cucumber tests and specs
   }.freeze
 
   def self.call(*args)
