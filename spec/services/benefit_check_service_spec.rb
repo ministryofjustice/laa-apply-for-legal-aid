@@ -87,23 +87,36 @@ RSpec.describe BenefitCheckService do
     end
   end
 
-  describe 'behaviour with mock' do
-    before { stub_const('BenefitCheckService::USE_MOCK', true) }
+  describe '.call' do
+    describe 'behaviour without mock' do
+      before do
+        stub_const('BenefitCheckService::USE_MOCK', false)
+        allow_any_instance_of(described_class).to receive(:call).and_return(:foo)
+      end
 
-    it 'returns the right parameters' do
-      result = described_class.call(application)
-      expect(result[:benefit_checker_status]).to eq('No')
-      expect(result[:confirmation_ref]).to match('mocked:')
+      it 'calls an instance call method' do
+        expect(described_class.call(application)).to eq(:foo)
+      end
     end
 
-    context 'with matching data' do
-      let(:date_of_birth) { '1955/01/11'.to_date }
-      let(:national_insurance_number) { 'ZZ123456A' }
+    describe 'behaviour with mock' do
+      before { stub_const('BenefitCheckService::USE_MOCK', true) }
 
-      it 'returns true' do
+      it 'returns the right parameters' do
         result = described_class.call(application)
-        expect(result[:benefit_checker_status]).to eq('Yes')
+        expect(result[:benefit_checker_status]).to eq('No')
         expect(result[:confirmation_ref]).to match('mocked:')
+      end
+
+      context 'with matching data' do
+        let(:date_of_birth) { '1955/01/11'.to_date }
+        let(:national_insurance_number) { 'ZZ123456A' }
+
+        it 'returns true' do
+          result = described_class.call(application)
+          expect(result[:benefit_checker_status]).to eq('Yes')
+          expect(result[:confirmation_ref]).to match('mocked:')
+        end
       end
     end
   end

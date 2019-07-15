@@ -1,6 +1,6 @@
 class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
-  USE_MOCK = ActiveModel::Type::Boolean.new.cast(ENV['USE_BC_DEV_MOCK'])
+  USE_MOCK = ActiveModel::Type::Boolean.new.cast(ENV['BC_USE_DEV_MOCK'])
 
   class ApiError < StandardError
     include Nesty::NestedError
@@ -9,10 +9,7 @@ class BenefitCheckService
   def self.call(application)
     return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production?
 
-    # :nocov:
-    # Not covered as this part of method will be skipped if USE_MOCK enabled
     new(application).call
-    # :nocov:
   end
 
   def initialize(application)

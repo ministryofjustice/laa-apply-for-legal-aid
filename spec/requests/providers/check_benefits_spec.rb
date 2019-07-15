@@ -28,7 +28,7 @@ RSpec.describe 'check benefits requests', type: :request do
       let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
       it 'does not generate a new one' do
-        expect(BenefitCheckService).not_to receive(:call).and_call_original
+        expect(BenefitCheckService).not_to receive(:call)
         expect { subject }.to_not change { BenefitCheckResult.count }
       end
 

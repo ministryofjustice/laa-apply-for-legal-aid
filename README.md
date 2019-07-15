@@ -132,7 +132,7 @@ To mock the benefits check in development and testing add the following environm
 variable:
 
 ```
-USE_BC_DEV_MOCK=true
+BC_USE_DEV_MOCK=true
 ```
 
 This will enable `MockBenefitCheckService`. See `MockBenefitCheckService::KNOWN for
