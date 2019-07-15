@@ -8,6 +8,32 @@ Feature: Civil application journeys
     And I click link "Apply for Legal Aid"
     Then I am on the legal aid applications
 
+  @javascript
+  Scenario: I am able to select an office
+    Given I am logged in as a provider
+    Then I visit the select office page
+    Then I choose 'London'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Your legal aid applications'
+
+  @javascript
+  Scenario: I am able to confirm my office
+    Given I am logged in as a provider
+    Given I have an existing office
+    Then I visit the confirm office page
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Your legal aid applications'
+
+  @javascript
+  Scenario: I am able to change my registered office
+    Given I am logged in as a provider
+    Given I have an existing office
+    Then I visit the confirm office page
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'office is responsible for your applications?'
+
   @javascript @vcr
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider

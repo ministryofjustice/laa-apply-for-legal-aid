@@ -1,0 +1,12 @@
+<%= page_template page_title: t('.h1-heading', firm: firm.name), template: :basic do %>
+  <%= form_with(model: @form, url: providers_select_office_path, method: :patch, local: true) do |form| %>
+
+    <%= govuk_fieldset_header(content_for(:page_title), padding_below: 6) %>
+
+    <%= form.govuk_collection_radio_buttons(:office_id, firm.offices, :id, :code) %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <%= next_action_buttons(form: form) %>
+  <% end %>
+<% end %>

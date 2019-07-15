@@ -131,6 +131,13 @@ en:
         review-advice: You can review their answers and make corrections before their application is submitted.
         client: Client
         case-reference: Case reference
+    confirm_offices:
+      show:
+        h1-heading: Confirm the %{firm} office responsible for this application
+        error: Select yes if these details are correct
+        no_another_office: No, another office is responsible for this application
+        account_number: 'Legal Aid Agency account number: '
+        is_this_correct: Is this correct?
     date_client_told_incidents:
       show:
         h1-heading: Latest incident details
@@ -291,6 +298,9 @@ en:
       show:
         h1-heading: What types of savings or investments does your client have?
         none_selected: None of these
+    select_offices:
+      show:
+        h1-heading: Which %{firm} office is responsible for your applications?
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?

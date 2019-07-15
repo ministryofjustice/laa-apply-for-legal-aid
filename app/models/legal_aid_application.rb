@@ -11,6 +11,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
+  belongs_to :office, optional: true
   has_many :application_proceeding_types, dependent: :destroy
   has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result, dependent: :destroy

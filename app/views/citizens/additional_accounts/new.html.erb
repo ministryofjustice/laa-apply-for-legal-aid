@@ -6,8 +6,6 @@
           input: :has_offline_accounts
         ) do %>
 
-      <%= govuk_error_message @error %>
-
       <%
         options = [
           { value: :yes, label: t('generic.yes') },
@@ -17,7 +15,7 @@
 
       <%= govuk_fieldset_header(content_for(:page_title)) %>
 
-      <%= form.govuk_collection_radio_buttons :has_offline_accounts, options, :value, :label %>
+      <%= form.govuk_collection_radio_buttons :has_offline_accounts, options, :value, :label, error: @error %>
 
     <% end %>
 

@@ -290,6 +290,15 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       end
     end
 
+    context 'when an error message is passed as a parameter' do
+      let(:error_message) { 'Something wrong' }
+      let(:params) { [:uses_online_banking, options, error: error_message] }
+
+      it 'the error message is shown' do
+        expect(parsed_html.at_css('span.govuk-error-message').content).to eq(error_message)
+      end
+    end
+
     context 'when there is a hint message defined' do
       let(:hint_message) { 'Choose an option' }
       let(:span_hint) { parsed_html.at_css('span.govuk-hint') }

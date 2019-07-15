@@ -15,6 +15,10 @@ class SamlSessionsController < Devise::SamlSessionsController
     end
   end
 
+  def after_sign_in_path_for(_provider)
+    providers_confirm_office_path
+  end
+
   private
 
   def update_provider_details
