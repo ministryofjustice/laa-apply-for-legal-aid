@@ -1,5 +1,10 @@
 module V1
   class FakeProvidersController < ApiController
+    # Fake API simulating a CCMS API to get information about providers.
+    # It accepts a provider username as a parameter.
+    # In order for the response to be consistent per username but also not always the same for each username,
+    # we generate a number from the username and use that number to generate the values from the response.
+
     def show
       render json: provider_details
     end
@@ -21,7 +26,7 @@ module V1
       office_id = username_number * 2 + office_index
 
       # unique office_number for each office
-      office_number = "0A#{office_id}"
+      office_number = "office_#{office_id}"
 
       {
         providerfirmId: firm_id,
@@ -48,6 +53,7 @@ module V1
       @contact_name ||= params[:username].snakecase.titlecase
     end
 
+    # Generates a number from the username which is used to generate the values from the response
     def username_number
       @username_number ||= params[:username].upcase.chars.map(&:ord).sum
     end
