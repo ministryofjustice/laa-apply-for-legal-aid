@@ -281,6 +281,15 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       expect(fieldset.classes).to include('govuk-fieldset')
     end
 
+    context 'when a hint message is passed as a parameter' do
+      let(:hint_message) { 'Choose an option' }
+      let(:params) { [:uses_online_banking, options, hint: hint_message] }
+
+      it 'the hint message appears only once' do
+        expect(parsed_html.css('span.govuk-hint').count).to eq(1)
+      end
+    end
+
     context 'when there is a hint message defined' do
       let(:hint_message) { 'Choose an option' }
       let(:span_hint) { parsed_html.at_css('span.govuk-hint') }
