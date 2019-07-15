@@ -257,7 +257,7 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     pg (1.1.4)
-    prometheus_exporter (0.4.12)
+    prometheus_exporter (0.4.13)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
