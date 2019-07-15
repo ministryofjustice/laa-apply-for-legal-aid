@@ -1,6 +1,19 @@
 class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
-  ApiError = Class.new(StandardError)
+  USE_MOCK = ActiveModel::Type::Boolean.new.cast(ENV['USE_BC_DEV_MOCK'])
+
+  class ApiError < StandardError
+    include Nesty::NestedError
+  end
+
+  def self.call(application)
+    return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production?
+
+    # :nocov:
+    # Not covered as this part of method will be skipped if USE_MOCK enabled
+    new(application).call
+    # :nocov:
+  end
 
   def initialize(application)
     @application = application
@@ -11,8 +24,6 @@ class BenefitCheckService
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
   rescue Savon::SOAPFault => e
     raise ApiError, "HTTP #{e.http.code}, #{e.to_hash}"
-  rescue Net::ReadTimeout, Net::OpenTimeout => e
-    raise ApiError, e
   end
 
   private
