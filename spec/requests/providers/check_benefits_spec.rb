@@ -28,7 +28,7 @@ RSpec.describe 'check benefits requests', type: :request do
       let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
       it 'does not generate a new one' do
-        expect_any_instance_of(BenefitCheckService).not_to receive(:call).and_call_original
+        expect(BenefitCheckService).not_to receive(:call)
         expect { subject }.to_not change { BenefitCheckResult.count }
       end
 
@@ -37,7 +37,7 @@ RSpec.describe 'check benefits requests', type: :request do
         let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
         it 'updates check_benefit_result' do
-          expect_any_instance_of(BenefitCheckService).to receive(:call).and_call_original
+          expect(BenefitCheckService).to receive(:call).and_call_original
           subject
         end
       end

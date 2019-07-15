@@ -103,8 +103,9 @@ helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-fo
 helm delete <name-of-the-release> --tiller-namespace=laa-apply-for-legalaid-uat --purge
 ```
 
+## Dev: running locally
 
-## LAA Portal Authentication dev setup
+### LAA Portal Authentication dev setup
 
 Add the following to .env.development
 ```
@@ -116,12 +117,26 @@ LAA_PORTAL_MOCK_SAML=false
 ```
 ** Note the above keys can be found in rattic
 
+### Authentication
+
 Mock Saml request on dev add the the following settings
 
 ```
 LAA_PORTAL_IDP_SSO_TARGET_URL=http://localhost:3002/saml/auth
 LAA_PORTAL_MOCK_SAML=true
 ```
+
+### Benefits checker
+
+To mock the benefits check in development and testing add the following environment
+variable:
+
+```
+BC_USE_DEV_MOCK=true
+```
+
+This will enable `MockBenefitCheckService`. See `MockBenefitCheckService::KNOWN for
+credentials that will return 'Yes' for has qualifying benefits.
 
 ## Admin Portal
 

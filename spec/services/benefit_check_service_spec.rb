@@ -72,7 +72,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it 'raises an error' do
-        expect { subject.call }.to raise_error(described_class::ApiError)
+        expect { subject.call }.to raise_error(Net::ReadTimeout)
       end
     end
 
@@ -83,6 +83,40 @@ RSpec.describe BenefitCheckService do
 
       it 'raises a detailed error' do
         expect { subject.call }.to raise_error(described_class::ApiError, /Invalid request credentials/)
+      end
+    end
+  end
+
+  describe '.call' do
+    describe 'behaviour without mock' do
+      before do
+        stub_const('BenefitCheckService::USE_MOCK', false)
+        allow_any_instance_of(described_class).to receive(:call).and_return(:foo)
+      end
+
+      it 'calls an instance call method' do
+        expect(described_class.call(application)).to eq(:foo)
+      end
+    end
+
+    describe 'behaviour with mock' do
+      before { stub_const('BenefitCheckService::USE_MOCK', true) }
+
+      it 'returns the right parameters' do
+        result = described_class.call(application)
+        expect(result[:benefit_checker_status]).to eq('No')
+        expect(result[:confirmation_ref]).to match('mocked:')
+      end
+
+      context 'with matching data' do
+        let(:date_of_birth) { '1955/01/11'.to_date }
+        let(:national_insurance_number) { 'ZZ123456A' }
+
+        it 'returns true' do
+          result = described_class.call(application)
+          expect(result[:benefit_checker_status]).to eq('Yes')
+          expect(result[:confirmation_ref]).to match('mocked:')
+        end
       end
     end
   end
