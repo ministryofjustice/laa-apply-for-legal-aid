@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe 'SamlSessionsController', type: :request do
-  let(:existing_details_response) { nil }
-  let(:provider) { create :provider, :username_with_special_characters, details_response: existing_details_response }
+  let(:firm) { nil }
+  let(:provider) { create :provider, :username_with_special_characters, firm: firm }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }
@@ -47,29 +47,25 @@ RSpec.describe 'SamlSessionsController', type: :request do
     end
 
     it 'retrieves provider details' do
-      expect(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_call_original
+      expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
       subject
-    end
-
-    it 'saves provider details' do
-      expect(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_return(sample_provider_details)
-      expect { subject }.to change { provider.reload.details_response }.to(sample_provider_details.stringify_keys)
+      expect(provider.firm).to_not be_nil
     end
 
     it 'does not use a worker' do
-      expect(ProviderDetailsRetrieverWorker).not_to receive(:perform_async)
+      expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async)
       subject
     end
 
     context 'provider already has some provider details' do
-      let(:existing_details_response) { { foo: :bar } }
+      let(:firm) { create :firm }
 
       it 'uses a worker' do
-        ProviderDetailsRetrieverWorker.clear
-        expect(ProviderDetailsRetrieverWorker).to receive(:perform_async).with(provider.id).and_call_original
-        expect(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_call_original
+        ProviderDetailsCreatorWorker.clear
+        expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id).and_call_original
+        expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
         subject
-        ProviderDetailsRetrieverWorker.drain
+        ProviderDetailsCreatorWorker.drain
       end
     end
   end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe V1::FakeProvidersController, type: :request do
   describe 'GET /v1/fake_providers/:username' do
     let(:username) { Faker::Internet.username }
+    let(:contact_name) { username.snakecase.titlecase }
 
     subject { get v1_fake_provider_path(username) }
 
@@ -14,7 +15,7 @@ RSpec.describe V1::FakeProvidersController, type: :request do
     end
 
     it 'returns the expected data structure' do
-      expect(json['contactName']).to eq(username)
+      expect(json['contactName']).to eq(contact_name)
       expected_keys = %w[providerOffices contactId contactName]
       expect(json.keys).to match_array(expected_keys)
 

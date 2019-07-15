@@ -1,4 +1,4 @@
-class ProviderDetailsRetrieverWorker
+class ProviderDetailsCreatorWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 

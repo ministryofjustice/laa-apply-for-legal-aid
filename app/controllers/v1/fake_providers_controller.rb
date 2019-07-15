@@ -1,5 +1,10 @@
 module V1
   class FakeProvidersController < ApiController
+    # Fake API simulating a CCMS API to get information about providers.
+    # It accepts a provider username as a parameter.
+    # In order for the response to be consistent per username but also not always the same for each username,
+    # we generate a number from the username and use that number to generate the values from the response.
+
     def show
       render json: provider_details
     end
@@ -8,24 +13,49 @@ module V1
 
     def provider_details
       {
-        providerOffices: Array.new(rand(1..3)).map { provider_office },
-        contactId: rand(1..100_000),
-        contactName: params[:username]
+        providerOffices: Array.new(number_of_offices) do |office_index|
+          provider_office(office_index)
+        end,
+        contactId: username_number * 3,
+        contactName: contact_name
       }
     end
 
-    def provider_office
+    def provider_office(office_index)
+      # unique office_id for each office
+      office_id = username_number * 2 + office_index
+
+      # unique office_number for each office
+      office_number = "office_#{office_id}"
+
       {
         providerfirmId: firm_id,
-        officeId: rand(1..100_000),
-        officeName: Faker::Lorem.sentence,
-        smsVendorNum: rand(1..10_000).to_s,
-        smsVendorSite: Faker::Lorem.word
+        officeId: office_id,
+        officeName: "#{firm_name}-#{office_number}",
+        smsVendorNum: ((office_id + firm_id) * 4).to_s,
+        smsVendorSite: office_number
       }
+    end
+
+    def number_of_offices
+      (username_number & 3) + 1
     end
 
     def firm_id
-      @firm_id ||= rand(1..100_000)
+      @firm_id ||= username_number
+    end
+
+    def firm_name
+      @firm_name ||= "#{contact_name} & Co."
+    end
+
+    def contact_name
+      @contact_name ||= params[:username].snakecase.titlecase
+    end
+
+    # Generates a number from the username which is used to generate the values from the response
+    def username_number
+      @username_number ||= params[:username].upcase.chars.map(&:ord).sum
     end
   end
 end

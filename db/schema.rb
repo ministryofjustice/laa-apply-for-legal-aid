@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_151000) do
+ActiveRecord::Schema.define(version: 2019_07_12_133912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -229,6 +229,13 @@ ActiveRecord::Schema.define(version: 2019_07_08_151000) do
     t.string "source"
   end
 
+  create_table "firms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ccms_id"
+    t.string "name"
+  end
+
   create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.date "occurred_on"
     t.text "details"
@@ -287,8 +294,10 @@ ActiveRecord::Schema.define(version: 2019_07_08_151000) do
     t.date "substantive_application_deadline_on"
     t.boolean "substantive_application"
     t.boolean "has_dependants"
+    t.uuid "office_id"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
+    t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
@@ -317,6 +326,15 @@ ActiveRecord::Schema.define(version: 2019_07_08_151000) do
     t.datetime "submitted_at"
     t.boolean "success_likely"
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
+  end
+
+  create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ccms_id"
+    t.string "code"
+    t.uuid "firm_id"
+    t.index ["firm_id"], name: "index_offices_on_firm_id"
   end
 
   create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -384,6 +402,10 @@ ActiveRecord::Schema.define(version: 2019_07_08_151000) do
     t.datetime "updated_at", null: false
     t.text "offices"
     t.json "details_response"
+    t.uuid "firm_id"
+    t.uuid "office_id"
+    t.index ["firm_id"], name: "index_providers_on_firm_id"
+    t.index ["office_id"], name: "index_providers_on_office_id"
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
@@ -492,8 +514,12 @@ ActiveRecord::Schema.define(version: 2019_07_08_151000) do
   add_foreign_key "legal_aid_application_restrictions", "legal_aid_applications"
   add_foreign_key "legal_aid_application_restrictions", "restrictions"
   add_foreign_key "legal_aid_applications", "applicants"
+  add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
+  add_foreign_key "offices", "firms"
+  add_foreign_key "providers", "firms"
+  add_foreign_key "providers", "offices"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"

@@ -3,16 +3,18 @@ class Provider < ApplicationRecord
   serialize :roles
   serialize :offices
 
+  belongs_to :firm, optional: true
+  belongs_to :office, optional: true
+
   has_many :legal_aid_applications
 
   def update_details
-    return update_details_directly unless details_response
+    return update_details_directly unless firm
 
-    ProviderDetailsRetrieverWorker.perform_async(id)
+    ProviderDetailsCreatorWorker.perform_async(id)
   end
 
   def update_details_directly
-    details = ProviderDetailsRetriever.call(username)
-    update!(details_response: details)
+    ProviderDetailsCreator.call(self)
   end
 end
