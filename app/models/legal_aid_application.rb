@@ -27,6 +27,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :ccms_submissions, class_name: 'CCMS::Submission', dependent: :destroy
   has_one :most_recent_ccms_submission, -> { order(:created_at) }, class_name: 'CCMS::Submission'
   has_one :vehicle, dependent: :destroy
+  has_many :application_scope_limitations, dependent: :destroy
+  has_many :scope_limitations, through: :application_scope_limitations, dependent: :destroy
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -153,6 +155,57 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def ccms_case_reference
     most_recent_ccms_submission.case_ccms_reference
+  end
+
+  def add_default_scope_limitation!
+    if used_delegated_functions?
+      add_default_delegated_functions_scope_limitation!
+    else
+      add_default_substantive_scope_limitation!
+    end
+  end
+
+  def add_default_substantive_scope_limitation!
+    ApplicationScopeLimitation.create!(
+      legal_aid_application: self,
+      scope_limitation: default_substantive_scope_limitation_for_first_proceeding_type,
+      substantive: true
+    )
+  end
+
+  def add_default_delegated_functions_scope_limitation!
+    ApplicationScopeLimitation.create!(
+      legal_aid_application: self,
+      scope_limitation: default_delegated_functions_scope_limitation_for_first_proceeding_type,
+      substantive: false
+    )
+  end
+
+  def default_substantive_scope_limitation_for_first_proceeding_type
+    proceeding_types.first.default_substantive_scope_limitation
+  end
+
+  def default_delegated_functions_scope_limitation_for_first_proceeding_type
+    proceeding_types.first.default_delegated_functions_scope_limitation
+  end
+
+  def substantive_scope_limitation
+    application_scope_limitations.find_by(substantive: true).scope_limitation
+  end
+
+  def delegated_functions_scope_limitation
+    application_scope_limitations.find_by(substantive: false)&.scope_limitation
+  end
+
+  def reset_delegated_functions
+    self.used_delegated_functions = false
+    self.used_delegated_functions_on = nil
+  end
+
+  def reset_proceeding_types!
+    proceeding_types.clear
+    scope_limitations.clear
+    reset_delegated_functions
   end
 
   private

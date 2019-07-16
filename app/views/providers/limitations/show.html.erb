@@ -7,21 +7,28 @@
     <%= render partial: 'shared/forms/proceedings_types/proceeding_type', collection: @legal_aid_application.proceeding_types, locals: { translation_path: 'providers.limitations.show' } %>
   </div>
 
-  <div class="govuk-!-padding-bottom-6"></div>
+  <% if @legal_aid_application.used_delegated_functions? %>
+    <p class="govuk-body">
+      <div class="govuk-heading-m"><%= t('.if_delegated_used') %></div>
+      <p><strong><%= t('.form_of_service') %></strong> <%= @legal_aid_application.proceeding_types.first.default_level_of_service.name %></p>
+      <div class="govuk-!-padding-bottom-1"></div>
+      <p><strong><%= t('.incurrable_costs') %></strong><%= number_to_currency(@legal_aid_application.proceeding_types.first.default_cost_limitation_delegated_functions,  precision: 0) %></p>
+      <p><strong><%= t('.allowable_work') %></strong><%= @legal_aid_application.delegated_functions_scope_limitation.description %></p>
+      </p>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full text-column">
+        <hr class="govuk-section-break govuk-section-break--visible govuk-!-padding-top-1 govuk-!-padding-bottom-1">
+      </div>
+    </div>
+  <% end %>
 
-  <div class="govuk-body">
-    <p><strong><%= t('.form_of_service') %></strong> <%= t('.form_of_service_type') %></p>
+  <p class="govuk-body">
+    <div class="govuk-heading-m"><%= t('.substantive_certificate') %>
+    <p><strong><%= t('.form_of_service') %></strong><%= @legal_aid_application.proceeding_types.first.default_level_of_service.name %></p></div>
     <div class="govuk-!-padding-bottom-1"></div>
-
-    <% if @legal_aid_application.proceeding_types.with_ccms_code_starting("DA").any? %>
-      <p><strong><%= t('.incurrable_costs') %></strong> <%= t('.incurrable_costs_value') %></p>
-      <div class="govuk-!-padding-bottom-1"></div>
-      <p><strong><%= t('.allowable_work') %></strong> <%= t('.body') %></p>
-    <% else %>
-      <p><strong><%= t('.incurrable_costs') %></strong></p>
-      <div class="govuk-!-padding-bottom-1"></div>
-      <p><strong><%= t('.allowable_work') %></strong></p>
-    <% end %>
+    <p><strong><%= t('.incurrable_costs') %></strong><%= number_to_currency(@legal_aid_application.proceeding_types.first.default_cost_limitation_substantive, precision: 0) %></p>
+    <p><strong><%= t('.allowable_work') %></strong><%= @legal_aid_application.substantive_scope_limitation.description %></p>
+  </p>
 
   <div class="govuk-!-padding-bottom-6"></div>
 

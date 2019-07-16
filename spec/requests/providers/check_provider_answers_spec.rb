@@ -8,8 +8,11 @@ RSpec.describe 'check your answers requests', type: :request do
       :legal_aid_application,
       :with_proceeding_types,
       :with_applicant_and_address,
+      :with_scope_limitations,
       used_delegated_functions: used_delegated_functions,
-      used_delegated_functions_on: used_delegated_functions_on
+      used_delegated_functions_on: used_delegated_functions_on,
+
+
     )
   end
   let(:application_id) { application.id }
@@ -119,7 +122,11 @@ RSpec.describe 'check your answers requests', type: :request do
 
       context 'when client is checking answers' do
         let(:application) do
-          create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, state: :checking_citizen_answers)
+          create(:legal_aid_application,
+                 :with_proceeding_types,
+                 :with_applicant_and_address,
+                 :with_scope_limitations,
+                 state: :checking_citizen_answers)
         end
         it 'renders page successfully' do
           expect(response).to have_http_status(:ok)

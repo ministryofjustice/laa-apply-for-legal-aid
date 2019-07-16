@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
     provider
+    used_delegated_functions { false }
+    used_delegated_functions_on { nil }
 
     trait :with_applicant do
       # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
@@ -66,6 +68,43 @@ FactoryBot.define do
                            end
         application.proceeding_types = proceeding_types
         application.save
+      end
+    end
+
+    # The trait :with_scope_limitations will set up:
+    #
+    # * one proceeding type
+    # * a default substantive scope limitation for that proceeding type
+    # * a default delegated functions scope limitation for that proceeding type
+    # * add the default substantive scope limitation to the application
+    # * add the default delegated functions scope limitation to the application (SEE NOTE BELOW)
+    #
+    # NOTE: The delegated function scope limitation will only be added to the application if
+    # the :with_delegated_functions trait is specified BEFORE the :with_scope_limitations trait
+    # when created, e.g.
+    #
+    #     create :legal_aid_application, :with_delegated_functions, :with_scope_limitations
+    # will work.
+    #
+    #    create :legal_aid_application, :with_scope_limitations, :with_delegated_functions
+    # will NOT work
+    #
+    # See factory specs at spec/factory_specs/legal_aid_application_factory_spec.rb
+    #
+    trait :with_scope_limitations do
+      after(:create) do |application, evaluator|
+        proceeding_types = if evaluator.proceeding_types.empty?
+                             create_list(:proceeding_type, 1)
+                           else
+                             evaluator.proceeding_types
+                           end
+        application.proceeding_types = proceeding_types
+
+        pt = application.proceeding_types.first
+        create :scope_limitation,  :substantive_default, joined_proceeding_type: pt
+        create :scope_limitation,  :delegated_functions_default, joined_proceeding_type: pt
+        application.add_default_substantive_scope_limitation!
+        application.add_default_delegated_functions_scope_limitation! if application.used_delegated_functions?
       end
     end
 

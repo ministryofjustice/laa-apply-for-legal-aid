@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Providers::LimitationsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let!(:proceeding_type) { create :proceeding_type }
+  let!(:sl_substantive_default) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
+  let!(:sl_delegated_default) { create :scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type, meaning: 'Default delegated functions SL' }
+
+  let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/limitations' do
@@ -14,13 +18,14 @@ RSpec.describe Providers::LimitationsController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
+        legal_aid_application.add_default_scope_limitation!
         login_as provider
         subject
       end
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('covered for')
+        expect(unescaped_response_body).to include(I18n.t('providers.limitations.show.h1-heading'))
       end
     end
   end

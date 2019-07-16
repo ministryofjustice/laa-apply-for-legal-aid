@@ -47,4 +47,73 @@ RSpec.describe 'LegalAidApplication factory' do
       end
     end
   end
+
+  describe ':with scope limitations' do
+    context "don't specify proceeding types" do
+      context "don't specify the number of proceeding types" do
+        it 'creates one proceeding type' do
+          application = create :application, :with_scope_limitations
+          expect(ProceedingType.count).to eq 1
+          proceeding_type = ProceedingType.first
+          expect(application.proceeding_types).to eq [proceeding_type]
+        end
+      end
+    end
+
+    context 'specifying the proceeding types' do
+      it 'creates the an application with the specified proceeding types' do
+        pt1 = create :proceeding_type
+        pt2 = create :proceeding_type
+        application = create :legal_aid_application, :with_scope_limitations, proceeding_types: [pt1, pt2]
+        expect(application.proceeding_types).to eq [pt1, pt2]
+      end
+    end
+
+    context 'scope_limitations' do
+      context 'without delegated functions' do
+        let(:application) { create :application, :with_scope_limitations }
+        let!(:proceeding_type) { application.proceeding_types.first }
+        it 'creates a default substantive scope limitation for the first proceeding type' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          expect(substantive_default_sl_for_pt).not_to be_nil
+        end
+
+        it 'creates adds the default substantive scope limitation for the first proceeding type to the application' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          expect(application.substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
+        end
+
+        it 'does not add a delegated function scope limitation to the application' do
+          expect(application.delegated_functions_scope_limitation).to be_nil
+        end
+      end
+
+      context 'with delegated functions' do
+        let(:application) { create :application, :with_delegated_functions, :with_scope_limitations }
+        let!(:proceeding_type) { application.proceeding_types.first }
+
+        it 'creates default substantive and delegated functions scope limitations for the first proceeding type' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          delegated_functions_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
+          expect(substantive_default_sl_for_pt).not_to be_nil
+          expect(delegated_functions_default_sl_for_pt).not_to be_nil
+        end
+
+        it 'adds the default substantive scope limitation for the first proceeding type to the application' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          expect(application.substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
+        end
+
+        it 'adds the default delegated_functions scope limitation for the first proceeding type to the application' do
+          delegated_functions_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
+          expect(application.delegated_functions_scope_limitation).to eq delegated_functions_default_sl_for_pt.scope_limitation
+        end
+
+        it 'adds a delegated function scope limitation to the application' do
+          substantive_delegated_functions_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
+          expect(application.delegated_functions_scope_limitation).to eq substantive_delegated_functions_sl_for_pt.scope_limitation
+        end
+      end
+    end
+  end
 end
