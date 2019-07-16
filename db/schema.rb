@@ -211,6 +211,9 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "relationship"
+    t.decimal "monthly_income"
+    t.boolean "has_income"
+    t.string "relationship"
     t.boolean "in_full_time_education"
     t.boolean "has_assets_more_than_threshold"
     t.decimal "assets_value"

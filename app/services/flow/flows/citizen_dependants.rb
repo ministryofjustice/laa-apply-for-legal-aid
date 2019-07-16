@@ -15,26 +15,23 @@ module Flow
         },
         dependants_relationships: {
           path: ->(_, dependant) { urls.citizens_dependant_relationship_path(dependant) },
-          forward: ->(_, dependant) { dependant.adult_relative? || dependant.eighteen_or_less? ? :dependants_income : :dependants_education }
+          forward: ->(_, dependant) { dependant.adult_relative? || dependant.eighteen_or_less? ? :dependants_monthly_incomes : :dependants_full_time_educations }
         },
         dependants_assets_values: {
-          # path: ->(_, dependant) { urls.citizens_dependant_assets_value_path(dependant) },
+          path: ->(_, dependant) { urls.citizens_dependant_assets_value_path(dependant) },
           forward: :has_other_dependants
         },
-        dependants_education: {
-          path: ->(_, dependant) { "[PLACEHOLDER] #{dependant.name} dependants education" }
-        },
-        dependants_income: {
-          path: ->(_, dependant) { "[PLACEHOLDER] #{dependant.name} dependants income" },
-          forward: :dependants_assets_values
+        dependants_monthly_incomes: {
+          path: ->(_, dependant) { urls.citizens_dependant_monthly_income_path(dependant) },
+          forward: ->(_) { :dependants_assets_values }
         },
         has_other_dependants: {
           path: ->(_) { urls.citizens_has_other_dependant_path },
           forward: ->(_, has_other_dependant) { has_other_dependant ? :dependants : :identify_types_of_outgoings }
         },
         dependants_full_time_educations: {
-          # path: ->(_) { urls.citizens_dependant_full_time_education_path },
-          forward: :dependants_income
+          path: ->(_, dependant) { urls.citizens_dependant_full_time_education_path(dependant) },
+          forward: :dependants_monthly_incomes
         }
       }.freeze
     end

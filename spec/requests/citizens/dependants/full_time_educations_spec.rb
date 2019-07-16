@@ -41,7 +41,7 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
     end
 
     it 'redirects to the dependant income page' do
-      expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
+      expect(response).to redirect_to(citizens_dependant_monthly_income_path(dependant))
     end
 
     context 'when not in full time education' do
@@ -53,7 +53,7 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
       end
 
       it 'redirects to the dependant income page' do
-        expect(unescaped_response_body).to include "[PLACEHOLDER] #{dependant.name} dependants income"
+        expect(response).to redirect_to(citizens_dependant_monthly_income_path(dependant))
       end
     end
 

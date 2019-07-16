@@ -86,6 +86,7 @@ Rails.application.routes.draw do
         resource :relationship, only: %i[show update]
         resource :full_time_education, only: %i[show update]
         resource :assets_value, only: %i[show update]
+        resource :monthly_income, only: %i[show update]
       end
     end
     resource :has_other_dependant, only: %i[show update]
