@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::Dependants::MonthlyIncomesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
 
   before do

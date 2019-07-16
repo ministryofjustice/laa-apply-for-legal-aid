@@ -338,6 +338,13 @@ Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   fill_in('dob_year', with: year)
 end
 
+Then('I enter a date of birth for a {int} year old') do |number|
+  date = (number.years + 1.month).ago
+  fill_in('date_of_birth', with: date.day)
+  fill_in('dob_month', with: date.month)
+  fill_in('dob_year', with: date.year)
+end
+
 Then(/^I enter the purchase date '(\d+-\d+-\d+)'$/) do |purchase_date|
   day, month, year = purchase_date.split('-')
   fill_in('purchased_on', with: day)

@@ -15,7 +15,9 @@ module Flow
         },
         dependants_relationships: {
           path: ->(_, dependant) { urls.citizens_dependant_relationship_path(dependant) },
-          forward: ->(_, dependant) { dependant.adult_relative? || dependant.eighteen_or_less? ? :dependants_monthly_incomes : :dependants_full_time_educations }
+          forward: ->(_, dependant) do
+            dependant.adult_relative? || dependant.eighteen_or_less? ? :dependants_monthly_incomes : :dependants_full_time_educations
+          end
         },
         dependants_assets_values: {
           path: ->(_, dependant) { urls.citizens_dependant_assets_value_path(dependant) },
@@ -23,7 +25,9 @@ module Flow
         },
         dependants_monthly_incomes: {
           path: ->(_, dependant) { urls.citizens_dependant_monthly_income_path(dependant) },
-          forward: ->(_) { :dependants_assets_values }
+          forward: ->(_, dependant) do
+            dependant.in_full_time_education? || dependant.eighteen_or_less? ? :has_other_dependants : :dependants_assets_values
+          end
         },
         has_other_dependants: {
           path: ->(_) { urls.citizens_has_other_dependant_path },
