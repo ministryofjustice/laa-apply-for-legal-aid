@@ -141,15 +141,15 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def opponents
-    nil # TODO: CCMS placeholder
+    [Opponent.dummy_opponent]
   end
 
   def wage_slips
-    []  # TODO: CCMS placeholder
+    [] # TODO: CCMS placeholder
   end
 
   def opponent_other_parties
-    []  # TODO: CCMS placeholder
+    [Opponent.dummy_opponent]
   end
 
   private

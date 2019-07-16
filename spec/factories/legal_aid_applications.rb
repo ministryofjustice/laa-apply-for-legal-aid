@@ -16,6 +16,9 @@ FactoryBot.define do
 
     trait :provider_submitted do
       state { 'provider_submitted' }
+      after :create do |application|
+        create :submission, legal_aid_application: application
+      end
     end
 
     trait :client_details_answers_checked do
@@ -94,6 +97,14 @@ FactoryBot.define do
       savings_amount { create :savings_amount, :with_values }
     end
 
+    trait :with_delegated_functions do
+      transient do
+        delegated_functions_date { nil }
+      end
+      used_delegated_functions_on { delegated_functions_date.present? ? delegated_functions_date : Date.today }
+      used_delegated_functions { true }
+    end
+
     trait :with_no_savings do
       savings_amount { create :savings_amount, :all_nil }
     end
@@ -119,8 +130,11 @@ FactoryBot.define do
     end
 
     trait :with_vehicle do
+      transient do
+        populate_vehicle { false }
+      end
       own_vehicle { true }
-      vehicle
+      vehicle { populate_vehicle ? create(:vehicle, :populated) : create(:vehicle) }
     end
 
     trait :with_incident do

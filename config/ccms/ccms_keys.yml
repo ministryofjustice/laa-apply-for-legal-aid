@@ -1213,7 +1213,8 @@ global_means:
     :response_type: currency
     :user_defined: true
   DELEGATED_FUNCTIONS_DATE:
-    :value: 01-04-2019
+    :generate_block?: '#application_used_delegated_functions?'
+    :value: '#used_delegated_functions_on'
     :br100_meaning: 'App: Delegated functions date'
     :response_type: date
     :user_defined: true
@@ -3535,7 +3536,8 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DELEGATED_FUNCTIONS_DATE:
-    :value: 01-04-2019
+    :generate_block?: '#application_used_delegated_functions?'
+    :value: '#used_delegated_functions_on'
     :br100_meaning: 'App: Delegated functions date'
     :response_type: date
     :user_defined: true
