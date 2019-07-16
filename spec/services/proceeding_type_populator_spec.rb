@@ -5,6 +5,10 @@ RSpec.describe ProceedingTypePopulator do
     let(:seed_file) { Rails.root.join('db/seeds/proceeding_types.csv').freeze }
     let(:proceeding_type) { ProceedingType.order('created_at ASC').first }
 
+    before do
+      create :service_level, :with_real_data
+    end
+
     it 'create instances from the seed file' do
       expect { described_class.call }.to change { ProceedingType.count }.by(seed_file.readlines.size - 1)
     end
