@@ -1,6 +1,6 @@
 require 'csv'
 
-file_path = Rails.root.join('db', 'seeds', 'proceeding_types.csv')
+file_path = Rails.root.join('db', 'seeds', 'legal_framework', 'proceeding_types.csv')
 
 data = CSV.read(file_path)
 data.shift

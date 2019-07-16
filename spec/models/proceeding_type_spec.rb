@@ -10,4 +10,8 @@ RSpec.describe ProceedingType, type: :model do
   describe 'should have associations with legal_aid_application' do
     it { should have_many(:legal_aid_applications) }
   end
+
+  describe 'should have associations with scope_limitation' do
+    it { should have_many(:scope_limitations) }
+  end
 end

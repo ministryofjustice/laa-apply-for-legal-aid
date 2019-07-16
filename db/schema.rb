@@ -378,6 +378,20 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
     t.index ["original_file_id"], name: "index_pdf_files_on_original_file_id", unique: true
   end
 
+  create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_type_id"
+    t.uuid "scope_limitation_id"
+    t.boolean "substantive_default"
+    t.boolean "delegated_functions_default"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proceeding_type_id", "delegated_functions_default"], name: "index_proceedings_scopes_unique_delegated_default", unique: true, where: "(delegated_functions_default = true)"
+    t.index ["proceeding_type_id", "scope_limitation_id"], name: "index_proceedings_scopes_unique_on_ids", unique: true
+    t.index ["proceeding_type_id", "substantive_default"], name: "index_proceedings_scopes_unique_substantive_default", unique: true, where: "(substantive_default = true)"
+    t.index ["proceeding_type_id"], name: "index_proceeding_type_scope_limitations_on_proceeding_type_id"
+    t.index ["scope_limitation_id"], name: "index_proceeding_type_scope_limitations_on_scope_limitation_id"
+  end
+
   create_table "proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "ccms_code"
@@ -521,6 +535,8 @@ ActiveRecord::Schema.define(version: 2019_07_12_133912) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "offices", "firms"
+  add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
+  add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices"
   add_foreign_key "respondents", "legal_aid_applications"

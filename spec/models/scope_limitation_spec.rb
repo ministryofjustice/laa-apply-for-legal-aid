@@ -7,4 +7,8 @@ RSpec.describe ScopeLimitation, type: :model do
       described_class.populate
     end
   end
+
+  describe 'should have associations with scope_limitation' do
+    it { should have_many(:proceeding_types) }
+  end
 end
