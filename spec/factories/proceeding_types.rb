@@ -26,7 +26,7 @@ FactoryBot.define do
       ccms_matter_code { 'MINJN' }
       default_service_level_id { 3 }
       default_cost_limitation_delegated_functions { 1350 }
-      default_cost_limitation_substantive { 5000 }
+      default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
     end
   end
