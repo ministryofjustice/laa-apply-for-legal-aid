@@ -3,7 +3,7 @@ require 'csv'
 
 RSpec.describe ServiceLevelPopulator do
   describe '#call' do
-    let(:seed_file) { Rails.root.join('db/seeds/levels_of_service.csv') }
+    let(:seed_file) { Rails.root.join('db/seeds/legal_framework/levels_of_service.csv') }
 
     it 'create instances from the seed file' do
       expect { described_class.call }.to change { ServiceLevel.count }.by(seed_file.readlines.size - 1)
