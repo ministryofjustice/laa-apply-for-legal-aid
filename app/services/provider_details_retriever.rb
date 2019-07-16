@@ -2,6 +2,8 @@ class ProviderDetailsRetriever
   ApiError = Class.new(StandardError)
 
   def self.call(username)
+    return MockProviderDetailsRetriever.call(username) if Rails.configuration.x.provider_details.mock
+
     new(username).call
   end
 
@@ -28,17 +30,7 @@ class ProviderDetailsRetriever
   end
 
   def url
-    File.join(base_url, CGI.escape(username))
-  end
-
-  def base_url
-    return mock_base_url if Rails.configuration.x.provider_details.mock
-
-    Rails.configuration.x.provider_details.url
-  end
-
-  def mock_base_url
-    "#{Rails.configuration.x.application.host_url}/v1/fake_providers"
+    File.join(Rails.configuration.x.provider_details.url, CGI.escape(username))
   end
 
   def raise_error
