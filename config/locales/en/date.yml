@@ -4,5 +4,5 @@ en:
     date_period: "%{from} to %{to}"
     formats:
       default: "%a, %d %b %Y"
-      long_date: "%d %B %Y"
-      short_date: "%d %b %Y"
+      long_date: "%-d %B %Y"
+      short_date: "%-d %b %Y"
