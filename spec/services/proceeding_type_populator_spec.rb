@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProceedingTypePopulator do
   describe '#call' do
-    let(:seed_file) { Rails.root.join('db', 'seeds', 'proceeding_types.csv') }
+    let(:seed_file) { Rails.root.join('db/seeds/proceeding_types.csv').freeze }
     let(:proceeding_type) { ProceedingType.order('created_at ASC').first }
 
     it 'create instances from the seed file' do
