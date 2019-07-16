@@ -104,7 +104,7 @@ RSpec.describe BenefitCheckService do
 
       it 'returns the right parameters' do
         result = described_class.call(application)
-        expect(result[:benefit_checker_status]).to eq('No')
+        expect(result[:benefit_checker_status]).to eq('Yes')
         expect(result[:confirmation_ref]).to match('mocked:')
       end
 
@@ -114,7 +114,7 @@ RSpec.describe BenefitCheckService do
 
         it 'returns true' do
           result = described_class.call(application)
-          expect(result[:benefit_checker_status]).to eq('Yes')
+          expect(result[:benefit_checker_status]).to eq('No')
           expect(result[:confirmation_ref]).to match('mocked:')
         end
       end

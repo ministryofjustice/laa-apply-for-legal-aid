@@ -303,32 +303,6 @@ Feature: Civil application journeys
     Then I should be on a page showing 'test@test.com'
 
   @javascript @vcr
-  Scenario: I use delegated functions and a substantive application
-    Given I complete the journey as far as check your answers
-    And a "bank holiday" exists in the database
-    And I used delegated functions
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'must complete a financial assessment'
-    Then I click 'Continue'
-    Then I should be on a page showing 'Do you want to make a substantive application now?'
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Does your client use online banking?'
-
-  @javascript @vcr
-  Scenario: I use delegated functions and will return later
-    Given I complete the journey as far as check your answers
-    And a "bank holiday" exists in the database
-    And I used delegated functions
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'must complete a financial assessment'
-    Then I click 'Continue'
-    Then I should be on a page showing 'Do you want to make a substantive application now?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Your legal aid applications'
-
-  @javascript @vcr
   Scenario: I want to return to check your answers from address lookup
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
