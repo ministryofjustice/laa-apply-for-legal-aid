@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :applicant do
+    transient do
+      num_bank_accounts { 0 }
+    end
+
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday }
@@ -21,6 +25,15 @@ FactoryBot.define do
           token: SecureRandom.hex,
           expires: 1.hour.from_now
         )
+      end
+    end
+
+    after(:create) do |applicant, evaluator|
+      if evaluator.num_bank_accounts > 0
+        provider = create :bank_provider, applicant: applicant
+        evaluator.num_bank_accounts.times do
+          create :bank_account, bank_provider: provider
+        end
       end
     end
   end
