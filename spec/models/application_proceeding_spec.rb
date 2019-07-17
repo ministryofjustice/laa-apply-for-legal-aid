@@ -4,7 +4,7 @@ RSpec.describe ApplicationProceedingType, type: :model do
   let!(:provider) { create(:provider) }
   let(:application_proceeding_type) { ApplicationProceedingType.create(legal_aid_application: legal_aid_application, proceeding_type: proceeding_type) }
   let(:legal_aid_application) { LegalAidApplication.create(provider: provider) }
-  let(:proceeding_type) { ProceedingType.create(code: 'PH0001') }
+  let(:proceeding_type) { create :proceeding_type, :with_real_data }
 
   it 'should belong to an proceeding_type and legal_aid_application' do
     expect(application_proceeding_type.legal_aid_application_id).not_to be_nil

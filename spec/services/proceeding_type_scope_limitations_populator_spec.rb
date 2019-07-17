@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ProceedingTypeScopeLimitationsPopulator do
   before(:all) do
-    load Rails.root.join('db', 'seeds', 'legal_framework', 'proceeding_types.rb')
+    ServiceLevelPopulator.call
+    ProceedingTypePopulator.call
     ScopeLimitationsPopulator.call
   end
 
