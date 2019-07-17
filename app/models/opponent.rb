@@ -37,23 +37,18 @@ class Opponent < ApplicationRecord # rubocop:disable Metrics/ClassLength
   }.freeze
 
   def self.dummy_opponent
-    Opponent.find_by(other_party_id: 'OPPONENT_00000001') || create_dummy_opponent
-  end
-
-  def self.create_dummy_opponent
-    Opponent.create(
-      other_party_id: 'OPPONENT_00000001',
-      title: 'MR.',
-      first_name: 'Dummy',
-      surname: 'Opponent',
-      date_of_birth: Date.new(2015, 1, 1),
-      relationship_to_case: 'OPP',
-      relationship_to_client: 'EX_SPOUSE',
-      opponent_type: 'PERSON',
-      opp_relationship_to_case: 'Opponent',
-      opp_relationship_to_client: 'Ex Husband/ Wife',
-      child: false
-    )
+    Opponent.find_or_create_by!(other_party_id: 'OPPONENT_00000001') do |opponent|
+      opponent.title = 'MR.'
+      opponent.first_name = 'Dummy'
+      opponent.surname = 'Opponent'
+      opponent.date_of_birth = Date.new(2015, 1, 1)
+      opponent.relationship_to_case = 'OPP'
+      opponent.relationship_to_client = 'EX_SPOUSE'
+      opponent.opponent_type = 'PERSON'
+      opponent.opp_relationship_to_case = 'Opponent'
+      opponent.opp_relationship_to_client = 'Ex Husband/ Wife'
+      opponent.child = false
+    end
   end
 
   def shared_ind
