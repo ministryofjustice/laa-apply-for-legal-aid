@@ -3,7 +3,7 @@ require 'sidekiq/testing'
 
 RSpec.describe 'SamlSessionsController', type: :request do
   let(:firm) { nil }
-  let(:provider) { create :provider, :username_with_special_characters, firm: firm }
+  let(:provider) { create :provider, firm: firm }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }
@@ -37,7 +37,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
     end
   end
 
-  describe 'POST /providers/saml/auth', vcr: { cassette_name: 'provider_details_api_mock' } do
+  describe 'POST /providers/saml/auth' do
     let(:sample_provider_details) { { foo: 'bar' } }
 
     subject { post provider_session_path }
