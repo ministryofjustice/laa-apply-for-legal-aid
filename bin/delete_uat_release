@@ -1,0 +1,27 @@
+#!/bin/sh
+
+GIT_MESSAGE=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+
+if [[ $GIT_MESSAGE == "Merge pull request #"* ]]
+then
+  MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
+  UAT_RELEASE="apply-$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]()' '-' | cut -c1-30 | sed 's/-$//')"
+
+  echo "Attempting to delete UAT release $UAT_RELEASE"
+
+  UAT_RELEASES=$(helm list --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} --all)
+
+  echo "Current UAT releases:"
+  echo "$UAT_RELEASES"
+
+  if [[ $UAT_RELEASES == *"$UAT_RELEASE"* ]]
+  then
+    echo "Deleting UAT release $UAT_RELEASE"
+    helm delete $UAT_RELEASE --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} --purge
+  else
+    echo "UAT release $UAT_RELEASE was not found"
+  fi
+
+else
+  echo "This commit is not a merged pull request"
+fi

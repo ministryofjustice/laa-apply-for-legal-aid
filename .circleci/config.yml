@@ -76,6 +76,14 @@ references:
       name: Update packages
       command: sudo apt-get update
 
+  setup_uat_kubectl: &setup_uat_kubectl
+    run:
+      name: Kubectl deployment setup UAT
+      command: |
+        $(aws ecr get-login --region eu-west-1 --no-include-email)
+        setup-kube-auth
+        kubectl config use-context uat
+
 jobs:
   build_and_test:
     <<: *build_container_config
@@ -165,12 +173,7 @@ jobs:
     - checkout
     - setup_remote_docker:
         docker_layer_caching: true
-    - run:
-        name: Kubectl deployment setup UAT
-        command: |
-          $(aws ecr get-login --region eu-west-1 --no-include-email)
-          setup-kube-auth
-          kubectl config use-context uat
+    - *setup_uat_kubectl
     - *decrypt_secrets
     - deploy:
         name: Helm deployment to UAT
@@ -276,6 +279,16 @@ jobs:
         path: ./hint-report
         destination: webhint-reports
 
+  delete_uat:
+    <<: *deploy_container_config
+    steps:
+    - checkout
+    - *setup_uat_kubectl
+    - run:
+        name: Delete UAT release
+        command: |
+          ./bin/delete_uat_release
+
 workflows:
   version: 2
   build_and_deploy:
@@ -316,6 +329,10 @@ workflows:
     - deploy_production:
         requires:
         - hold_production
+        filters:
+          branches:
+            only: master
+    - delete_uat:
         filters:
           branches:
             only: master
