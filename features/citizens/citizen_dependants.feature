@@ -24,7 +24,7 @@ Feature: Citizen journey through dependants pages
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your first dependant's details"
-    Then I fill "Name" with "Pugsley Addams"
+    Then I fill "Name" with "Wednesday Adams"
     Then I enter a date of birth for a 17 year old
     Then I click "Save and continue"
     Then I should be on a page showing "What is your relationship to"
@@ -47,7 +47,7 @@ Feature: Citizen journey through dependants pages
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your first dependant's details"
-    Then I fill "Name" with "Pugsley Addams"
+    Then I fill "Name" with "Cousin It"
     Then I enter a date of birth for a 23 year old
     Then I click "Save and continue"
     Then I should be on a page showing "What is your relationship to"
@@ -72,7 +72,7 @@ Feature: Citizen journey through dependants pages
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your first dependant's details"
-    Then I fill "Name" with "Pugsley Addams"
+    Then I fill "Name" with "Cousin It"
     Then I enter a date of birth for a 23 year old
     Then I click "Save and continue"
     Then I should be on a page showing "What is your relationship to"
