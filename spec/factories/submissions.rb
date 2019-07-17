@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :submission, class: CCMS::Submission do
     legal_aid_application { create :legal_aid_application }
+    sequence(:case_ccms_reference) { |n| format('P_55%06d', n) }
 
     trait :case_ref_obtained do
       aasm_state { 'case_ref_obtained' }

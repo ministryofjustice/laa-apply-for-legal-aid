@@ -216,6 +216,8 @@ ActiveRecord::Schema.define(version: 2019_07_16_081338) do
     t.boolean "in_full_time_education"
     t.boolean "has_assets_more_than_threshold"
     t.decimal "assets_value"
+    t.decimal "monthly_income"
+    t.boolean "has_income"
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 

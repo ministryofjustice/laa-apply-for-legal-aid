@@ -19,4 +19,16 @@ class BankAccount < ApplicationRecord
   def display_name
     "#{bank_provider.name} Acct #{account_number}"
   end
+
+  def receives_tax_credits?
+    true # TODO: CCMS placeholder
+  end
+
+  def receives_wages?
+    true # TODO: CCMS placeholder
+  end
+
+  def receives_benefits?
+    true # TODO: CCMS placeholder
+  end
 end
