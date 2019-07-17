@@ -69,3 +69,7 @@ end
 Given('{string} savings of {int}') do |savings_method, amount|
   @legal_aid_application.savings_amount.update!(savings_method.to_sym => amount)
 end
+
+Then('I should have completed the dependants section of the journey') do
+  steps %(Then I should be on a page showing "What regular payments do you make?")
+end
