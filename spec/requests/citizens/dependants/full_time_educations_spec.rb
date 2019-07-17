@@ -6,17 +6,18 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
 
   before do
     get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-    subject
   end
 
   describe 'GET /citizens/dependants/:dependant_id/full_time_education' do
     subject { get citizens_dependant_full_time_education_path(dependant) }
 
     it 'returns http success' do
+      subject
       expect(response).to have_http_status(:ok)
     end
 
     it "contains dependant's informations" do
+      subject
       expect(unescaped_response_body).to include(dependant.name)
     end
   end
@@ -36,11 +37,13 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
     end
 
     it 'updates the dependant' do
+      subject
       dependant.reload
       expect(dependant).to be_in_full_time_education
     end
 
     it 'redirects to the dependant income page' do
+      subject
       expect(response).to redirect_to(citizens_dependant_monthly_income_path(dependant))
     end
 
@@ -48,11 +51,13 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
       let(:in_full_time_education) { false }
 
       it 'updates the dependant' do
+        subject
         dependant.reload
         expect(dependant).not_to be_in_full_time_education
       end
 
       it 'redirects to the dependant income page' do
+        subject
         expect(response).to redirect_to(citizens_dependant_monthly_income_path(dependant))
       end
     end
@@ -66,11 +71,11 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
       end
 
       it 'does not update the dependant' do
-        dependant.reload
-        expect(dependant.in_full_time_education).to be_nil
+        expect { subject }.not_to change { dependant.reload.in_full_time_education }
       end
 
       it 'displays an error' do
+        subject
         expect(unescaped_response_body).to match(I18n.t('activemodel.errors.models.dependant.attributes.in_full_time_education.blank_message', name: dependant.name))
         expect(response.body).to match('govuk-error-message')
         expect(response.body).to match('govuk-form-group--error')
