@@ -132,6 +132,7 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
         end
 
         it 'leaves value blank' do
+          subject
           expect(vehicle.reload.payment_remaining).to be_blank
         end
       end

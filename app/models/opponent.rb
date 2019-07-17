@@ -1,4 +1,4 @@
-class Opponent < ApplicationRecord
+class Opponent < ApplicationRecord # rubocop:disable Metrics/ClassLength
   CASE_RELATIONSHIP_REGEX = /^relationship_case_(\S+)\?$/.freeze # begins with 'relationship_case_' and ends with a question mark
   CLIENT_RELATIONSHIP_REGEX = /^relationship_client_(\S+)\?$/.freeze # begins with "relationship_client_' and ends with a question mark
 
@@ -35,6 +35,21 @@ class Opponent < ApplicationRecord
     beneficiary: 'Beneficiary',
     interested_party: 'Interested party'
   }.freeze
+
+  def self.dummy_opponent
+    Opponent.find_or_create_by!(other_party_id: 'OPPONENT_00000001') do |opponent|
+      opponent.title = 'MR.'
+      opponent.first_name = 'Dummy'
+      opponent.surname = 'Opponent'
+      opponent.date_of_birth = Date.new(2015, 1, 1)
+      opponent.relationship_to_case = 'OPP'
+      opponent.relationship_to_client = 'EX_SPOUSE'
+      opponent.opponent_type = 'PERSON'
+      opponent.opp_relationship_to_case = 'Opponent'
+      opponent.opp_relationship_to_client = 'Ex Husband/ Wife'
+      opponent.child = false
+    end
+  end
 
   def shared_ind
     false # TODO: CCMS placeholder
