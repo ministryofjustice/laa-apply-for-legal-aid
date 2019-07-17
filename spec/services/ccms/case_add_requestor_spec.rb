@@ -239,7 +239,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'XML request' do
-        context 'delegated functions' do
+        context 'DELEGATED_FUNCTIONS_DATE blocks' do
           context 'delegated functions used' do
             let(:legal_aid_application) { create :legal_aid_application, :with_delegated_functions, :with_everything, populate_vehicle: true }
 
