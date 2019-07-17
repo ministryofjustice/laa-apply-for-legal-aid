@@ -1,3 +1,10 @@
+# These matchers are used for testing the contents of an XML attribute
+# block in the payload.
+#
+# 'actual' is expected to be an instance of Nokogiri::XML::NodeSet, which
+# is obtained by calling #xpath on an instance of Nokogiri::XML::Document,
+# or more simply, by calling XmlExtractor on an XML string
+#
 RSpec::Matchers.define :have_response_type do |expected|
   match do |actual|
     actual_response_type = actual.css('ResponseType').text
