@@ -2,5 +2,5 @@ class Office < ApplicationRecord
   has_many :providers
   has_many :legal_aid_applications
 
-  belongs_to :firm, optional: true
+  belongs_to :firm
 end
