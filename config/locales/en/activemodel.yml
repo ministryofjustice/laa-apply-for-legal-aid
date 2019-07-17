@@ -268,7 +268,7 @@ en:
         provider:
           attributes:
             office_id:
-              blank: Please select an office
+              blank: Select the office responsible for your applications
         respondent:
           attributes:
             understands_terms_of_court_order:

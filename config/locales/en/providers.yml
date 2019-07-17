@@ -134,7 +134,7 @@ en:
     confirm_offices:
       show:
         h1-heading: Confirm the %{firm} office responsible for this application
-        error: Select yes if these details are correct
+        error: Select yes if this office is responsible for your applications
         no_another_office: No, another office is responsible for this application
         account_number: 'Legal Aid Agency account number: '
         is_this_correct: Is this correct?
