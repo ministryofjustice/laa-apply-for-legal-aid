@@ -1,0 +1,46 @@
+<%= page_template page_title: t('.h1-heading', firm: firm.name), template: :basic do %>
+  <%= form_with(url: providers_confirm_office_path, method: :patch, local: true) do |form| %>
+
+    <% if @error %>
+      <div class="govuk-error-summary" id="error_explanation">
+        <h2 class="govuk-error-summary__title" id="error-summary-title">
+          <%= t('generic.errors.problem_text') %>
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <%= link_to @error, "#correct" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <%= govuk_form_group(
+          show_error_if: @error,
+          input: :correct
+        ) do %>
+
+      <%= govuk_fieldset_header(content_for(:page_title)) %>
+
+      <div class="govuk-!-padding-bottom-6"></div>
+      <p class="govuk-body">
+        <strong><%= t('.account_number') %></strong> <%= current_provider.office.code %>
+      </p>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+      <h2 class="govuk-heading-m"><%= t('.is_this_correct') %></h2>
+
+      <%
+        options = [
+          { value: :yes, label: t('generic.yes') },
+          { value: :no,  label: t('.no_another_office') }
+        ]
+      %>
+      <%= form.govuk_collection_radio_buttons :correct, options, :value, :label, error: @error %>
+
+    <% end %>
+
+    <%= next_action_buttons(form: form) %>
+  <% end %>
+<% end %>

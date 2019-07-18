@@ -92,6 +92,9 @@ module GovukElementsFormBuilder
     # You can pass a title with the :title parameter.
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: 'What is your gender?') %>
     #
+    # You can pass an error with the :error parameter.
+    # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], error: 'Please select a gender') %>
+    #
     # If you wish to specify the size of the heading pass a hash into title with text and size:
     # <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: { text: 'What is your gender?', size: :m } ) %>
     #
@@ -246,13 +249,15 @@ module GovukElementsFormBuilder
     def error_tag(attribute, options)
       return unless error?(attribute, options)
 
-      message = object.errors[attribute].first
+      message = options[:error] || object.errors[attribute].first
       return unless message.present?
 
       content_tag(:span, message, class: 'govuk-error-message', id: "#{attribute}-error")
     end
 
     def error?(attribute, options)
+      return true if options[:error]
+
       attr = options[:field_with_error] || attribute
       object.respond_to?(:errors) &&
         errors.messages.key?(attr) &&

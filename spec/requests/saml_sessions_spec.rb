@@ -3,7 +3,8 @@ require 'sidekiq/testing'
 
 RSpec.describe 'SamlSessionsController', type: :request do
   let(:firm) { nil }
-  let(:provider) { create :provider, firm: firm }
+  let(:office) { nil }
+  let(:provider) { create :provider, firm: firm, office: office }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }
@@ -55,6 +56,11 @@ RSpec.describe 'SamlSessionsController', type: :request do
     it 'does not use a worker' do
       expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async)
       subject
+    end
+
+    it 'redirects to the confirm office page' do
+      subject
+      expect(response).to redirect_to(providers_confirm_office_path)
     end
 
     context 'provider already has some provider details' do

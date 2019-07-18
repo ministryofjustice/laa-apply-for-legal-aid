@@ -23,7 +23,10 @@ module Providers
     private
 
     def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.create!(provider: current_provider)
+      @legal_aid_application ||= LegalAidApplication.create!(
+        provider: current_provider,
+        office: current_provider.office
+      )
     end
 
     def applicant
