@@ -11,7 +11,7 @@
     <% bank_transactions.each do |bank_transaction| %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <%= l(bank_transaction.happened_at, format: :transaction_date) %>
+          <%= l(bank_transaction.happened_at.to_date, format: :short_date) %>
         </td>
         <td class="govuk-table__cell">
           <%= bank_transaction.description %>
