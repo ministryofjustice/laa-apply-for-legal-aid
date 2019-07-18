@@ -14,7 +14,7 @@ references:
         echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
         git-crypt unlock git-crypt.key
 
-  build_containers_config: &build_container_config
+  build_container_config: &build_container_config
     docker:
     - image: circleci/ruby:2.6.3-node-browsers
       environment:
@@ -125,7 +125,6 @@ jobs:
           - v1-yarn-packages-cache
     - run:
         name: Install Yarn packages
-        command: yarn --frozen-lockfile
         command: |
           if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
             yarn --frozen-lockfile
@@ -162,10 +161,15 @@ jobs:
         name: Run integration tests
         command: |
           if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            bin/rails cucumber
+            SAVE_PAGES=true bin/rails cucumber
           fi
     - *build_docker_image
     - *push_to_ecr
+    - run: mkdir -p tmp/webhint_inputs
+    - persist_to_workspace:
+        root: tmp
+        paths:
+          - webhint_inputs
 
   deploy_uat:
     <<: *deploy_container_config
@@ -248,9 +252,9 @@ jobs:
     <<: *build_container_config
     steps:
     - checkout
+    - attach_workspace:
+        at: tmp
     - *update_packages
-    - *install_clamav
-    - *install_libreoffice
     - restore_cache:
         keys:
           - v1-gems-cache-{{ checksum "Gemfile.lock" }}
@@ -260,23 +264,21 @@ jobs:
         command: |
           gem install bundler -v 2.0.2
           bundle check --path vendor/bundle || bundle install --path vendor/bundle && bundle clean
-    - run: sudo apt install -y postgresql-client || true
+    - restore_cache:
+        keys:
+          - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+          - v1-yarn-packages-cache
     - run:
-        name: Database Setup
-        command: |
-          bundle exec rake db:setup
-          bundle exec rake db:migrate
-    - run:
-        name: Install NPM packages
+        name: Install Yarn packages
         command: yarn --frozen-lockfile
     - run:
         name: Generate webhint reports
         command: ./bin/generate_webhint_reports.sh
+    - run:
+        name: gzip webhint reports
+        command: tar -zcvf hint-report.tar.gz hint-report/
     - store_artifacts:
-        path: ./tmp/webhint_inputs
-        destination: webhint-inputs
-    - store_artifacts:
-        path: ./hint-report
+        path: ./hint-report.tar.gz
         destination: webhint-reports
 
   delete_uat:
@@ -296,11 +298,13 @@ workflows:
     jobs:
     - build_and_test
     - run_webhint
+    - run_webhint:
+        requires:
+        - build_and_test
     - hold_uat:
         type: approval
         requires:
         - build_and_test
-        - run_webhint
     - deploy_uat:
         requires:
         - hold_uat

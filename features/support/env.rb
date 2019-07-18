@@ -113,14 +113,17 @@ end
 World(FactoryBot::Syntax::Methods)
 World(Warden::Test::Helpers)
 
-AfterStep('@webhint') do
-  next unless ENV['SAVE_WEBHINT_STEPS'] == 'true'
+AfterStep do
+  next unless ENV['SAVE_PAGES'] == 'true'
 
   # the html file will fetch assets from that URL
   Capybara.asset_host = 'http://localhost:3004'
 
-  html_file = "apply-#{page.current_path.to_s.parameterize}.html"
-  screenshot_file = "apply-#{page.current_path.to_s.parameterize}.png"
-  page.save_page(Rails.root.join('tmp', 'webhint_inputs', html_file))
-  page.save_screenshot(Rails.root.join('tmp', 'webhint_inputs', screenshot_file))
+  path = page.current_path.to_s.parameterize
+
+  # UUIDs are removed from the path to avoid saving duplicate pages
+  path_without_uuids = path.gsub(/[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}/, 'uuid')
+  file = Rails.root.join('tmp', 'webhint_inputs', "apply-#{path_without_uuids}.html")
+
+  page.save_page(file) unless File.file?(file)
 end
