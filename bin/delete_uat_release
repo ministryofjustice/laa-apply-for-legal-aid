@@ -1,6 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 GIT_MESSAGE=$(git log --format=%B -n 1 $CIRCLE_SHA1)
+
+echo "git message is:"
+echo "$GIT_MESSAGE"
 
 if [[ $GIT_MESSAGE == "Merge pull request #"* ]]
 then

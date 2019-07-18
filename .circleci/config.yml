@@ -283,6 +283,7 @@ jobs:
     <<: *deploy_container_config
     steps:
     - checkout
+    - setup_remote_docker
     - *setup_uat_kubectl
     - run:
         name: Delete UAT release
