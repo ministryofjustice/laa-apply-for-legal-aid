@@ -12,9 +12,9 @@
       ) do |f| %>
 
     <%= govuk_form_group show_error_if: @form.errors[:lookup_id].present? do %>
-      <%= govuk_fieldset_header page_heading %>
+      <%= govuk_fieldset_header page_title %>
 
-      <%= label_tag t('generic.address.postcode_label'), class: 'govuk-label' do %>
+      <div class="govuk-label">
         <%= t('generic.address.postcode') %>
         <p class='govuk-body govuk-!-font-weight-bold'>
           <%= @form.postcode %>
@@ -24,11 +24,11 @@
                 class: 'govuk-body change-link change-postcode-link'
               ) %>
         </p>
-      <% end %>
+      </div>
       <%= f.hidden_field :postcode %>
 
-      <% @addresses.each do |address| %>
-        <%= hidden_field_tag 'address_selection[list][]', address.to_json %>
+      <% @addresses.each_with_index do |address, index| %>
+        <%= hidden_field_tag 'address_selection[list][]', address.to_json, id: "address_selection_list_#{index}" %>
       <% end %>
 
       <div class="govuk-!-padding-bottom-2"></div>
@@ -45,7 +45,7 @@
               @addresses.collect { |a| [a.full_address, a.lookup_id] },
               { include_blank: "#{@addresses.size} addresses found" },
               class: "govuk-select govuk-!-width-full #{input_error_class}",
-              id: :address
+              id: :address_selection_address
             ) %>
       </div>
 

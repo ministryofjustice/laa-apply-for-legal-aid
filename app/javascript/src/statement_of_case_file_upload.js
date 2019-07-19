@@ -32,7 +32,7 @@ $(document).ready(() => {
             <td class="govuk-table__cell">${file.name}</td>
             <td class="govuk-table__cell"></td>
             <td class="govuk-table__cell no-wrap">
-              <img src="${image_loading_small}" class="small-loading-image"/>
+              <img src="${image_loading_small}" class="small-loading-image" alt="small loading image"/>
               ${copy_uploading}
             </td>
             <td class="govuk-table__cell"></td>

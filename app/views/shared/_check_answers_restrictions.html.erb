@@ -7,10 +7,14 @@
         no_border: application.has_restrictions?
       ) %>
 
-  <div class="govuk-body wrap-text govuk-!-margin-bottom-0">
-    <%= simple_format application.restrictions_details %>
-    <% if application.has_restrictions %>
-      <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full govuk-!-margin-bottom-0" style="width: 100%;">
-    <% end %>
-  </div>
+  <% if application.has_restrictions %>
+    <div class="govuk-summary-list__row normal-word-break summary-list-details">
+      <dt class="govuk-visually-hidden">
+        <%= t(".#{user_type}.details") %>
+      </dt>
+      <dd class="govuk-body wrap-text govuk-!-margin-bottom-0 govuk-!-margin-left-0">
+        <%= simple_format application.restrictions_details %>
+      </dd>
+    </div>
+  <% end %>
 </dl>

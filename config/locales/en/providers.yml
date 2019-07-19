@@ -120,6 +120,7 @@ en:
           heading: What happens next
           content: We'll check with the Department for Work and Pensions to see if your client receives benefits that make them eligible for legal aid.
         title: Check your answers
+        read_only_title: Your application
     client_received_legal_helps:
       show:
         h1-heading: Has your client received legal help for the matter?
@@ -402,8 +403,6 @@ en:
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
-        used_delegated_functions_on: Date you used delegated functions
-        used_delegated_functions_on_hint: For example, 18 4 2019
     vehicles:
       show:
         heading: Does your client own a vehicle?

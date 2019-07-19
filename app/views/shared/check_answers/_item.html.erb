@@ -4,17 +4,17 @@ no_border = no_border ? '--no-border' : ''
 %>
 
 <div class="govuk-summary-list__row<%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
-  <div class="govuk-summary-list__key govuk-!-width-one-half">
+  <dt class="govuk-summary-list__key govuk-!-width-one-half">
     <%= question %>
-  </div>
-  <div class="govuk-summary-list__value">
+  </dt>
+  <dd class="govuk-summary-list__value">
     <%= answer.present? ? answer : '-' %>
-  </div>
+  </dd>
   <% unless read_only %>
-    <div class="govuk-summary-list__actions">
+    <dd class="govuk-summary-list__actions">
       <%= link_to(url, class: 'govuk-link change-link') do %>
         <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
       <% end %>
-    </div>
+    </dd>
   <% end %>
 </div>

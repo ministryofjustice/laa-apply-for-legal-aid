@@ -12,7 +12,7 @@
 %>
 
 <%= page_template(
-      page_title: @read_only ? '' : t('.title'),
+      page_title: @read_only ? t('.read_only_title') : t('.title'),
       back_link: @read_only ? read_only_back_link : back_link
     ) do %>
   <h2 class="govuk-heading-m"><%= t '.section_client.heading' %></h2>
