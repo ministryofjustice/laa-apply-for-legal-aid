@@ -458,12 +458,6 @@ module CCMS
       @provider ||= @legal_aid_application.provider
     end
 
-    # :nocov:
-    def lead_proceeding
-      @lead_proceeding ||= @legal_aid_application.lead_proceeding
-    end
-    # :nocov:
-
     def proceedings
       @proceedings ||= @legal_aid_application.proceeding_types
     end

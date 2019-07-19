@@ -9,7 +9,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                :with_proceeding_types,
                :with_everything,
                populate_vehicle: true,
-               num_bank_accounts: 2
+               with_bank_accounts: 2
       end
       let(:respondent) { legal_aid_application.respondent }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }

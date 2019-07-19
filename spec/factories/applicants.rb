@@ -1,9 +1,5 @@
 FactoryBot.define do
   factory :applicant do
-    transient do
-      num_bank_accounts { 0 }
-    end
-
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday }
@@ -28,10 +24,15 @@ FactoryBot.define do
       end
     end
 
+    # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
+    transient do
+      with_bank_accounts { 0 }
+    end
+
     after(:create) do |applicant, evaluator|
-      if evaluator.num_bank_accounts > 0
+      if evaluator.with_bank_accounts > 0
         provider = create :bank_provider, applicant: applicant
-        evaluator.num_bank_accounts.times do
+        evaluator.with_bank_accounts.times do
           create :bank_account, bank_provider: provider
         end
       end
