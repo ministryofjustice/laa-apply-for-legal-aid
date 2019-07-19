@@ -13,10 +13,19 @@
     "css-prefix-order": "error",
     "disown-opener": "error",
     "highest-available-document-mode": "error",
-    "html-checker": "off",
+    "html-checker": ["error", {
+        "ignore": [
+          "Attribute “src” not allowed on element “image” at this point.",
+          "The “banner” role is unnecessary for element “header”.",
+          "The “button” role is unnecessary for element “button”.",
+          "The “main” role is unnecessary for element “main”.",
+          "The “contentinfo” role is unnecessary for element “footer”.",
+          "Element “h1” not allowed as child of element “legend” in this context. (Suppressing further errors from this subtree.)"
+        ]
+    }],
     "http-cache": "error",
     "http-compression": "error",
-    "meta-charset-utf-8": "off",
+    "meta-charset-utf-8": "error",
     "meta-viewport": "error",
     "no-bom": "error",
     "no-disallowed-headers": "error",
