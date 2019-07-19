@@ -80,6 +80,14 @@ VCR_RECORD_MODE=all bin/rake
 
 [There is an (deprecated) alternative setup procedure (not recommended), using the makefile, which can be found here](./docs/README_alt.md)
 
+### Accessibility testing with webhint
+
+webhint (https://webhint.io/) is used to check if pages are accessible.
+
+- Run `SAVE_PAGES=true bin/rails cucumber` to run the feature tests and save all pages to `tmp/webhint_inputs`
+- Run `./bin/generate_webhint_reports.sh` to check these pages with webhint.
+- The result will be printed as a JSON result and you can also find HTML reports in the `hint-report` folder.
+
 ## Deployment
 
 The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid) but requires approval to the desired environment.
@@ -115,7 +123,7 @@ LAA_PORTAL_CERTIFICATE=< LAA_PORTAL_CERTIFICATE (dev)>
 LAA_PORTAL_SECRET_KEY=< LAA_PORTAL_SECRET_KEY(dev)>
 LAA_PORTAL_MOCK_SAML=false
 ```
-** Note the above keys can be found in rattic
+** Note the above keys can be found in LastPass
 
 ### Authentication
 
@@ -151,7 +159,7 @@ To allow reset mode within the admin portal, `ENV['ADMIN_ALLOW_RESET']` must ret
 
 ### Staging and Production
 
-Staging and production databases are RDS instances on the MOJ Cloud Platform. Connection details are held in Rattic.
+Staging and production databases are RDS instances on the MOJ Cloud Platform. Connection details are held in LastPass.
 
 These databases are within the AWS VPC and are not publicly available. In order to connect
 to an RDS database from a local client, first run:

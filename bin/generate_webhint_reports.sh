@@ -2,12 +2,6 @@
 
 HTMLS_DIR=tmp/webhint_inputs
 
-# delete previously generated html pages
-if [ -d "$HTMLS_DIR" ]; then rm -Rf $HTMLS_DIR; fi
-
-# generate HTML pages
-SAVE_WEBHINT_STEPS=true bundle exec cucumber --tags "@webhint"
-
 # start server to deliver assets
 RAILS_ENV=test bin/rails server -p 3004 -d
 
@@ -15,9 +9,11 @@ RAILS_ENV=test bin/rails server -p 3004 -d
 error=0
 
 # generate webhint report for each page
+index=1
+no_files=$(ls -l ${HTMLS_DIR} | grep -v ^d | wc -l | sed -e 's/^[ ]*//')
 for filename in "$HTMLS_DIR"/*.html; do
     [ -e "$filename" ] || continue
-    echo "hint $filename"
+    echo "${index}/${no_files} hint $filename"
     result=$( yarn run hint "$filename" --tracking off )
     exit_code=$?
     echo "Error report:"
@@ -31,12 +27,13 @@ for filename in "$HTMLS_DIR"/*.html; do
       echo "\e[42m        \e[0m \e[92mNo failures found in $filename\e[0m" #green flag before confirmation that this file passed
     fi
     echo ""
+    index=$(($index + 1))
 done
 
 # stop server
 kill -9 $(cat tmp/pids/server.pid)
 
-#throw error if error exists
+# throw error if error exists
 if [ $error -gt 0 ]; then
   echo "\e[41mWebhint issues found - test failed\e[0m"
   exit 0 #exit - 0 non fatal, 1 fatal (make fatal once all tests are in place and existing issues solved)
