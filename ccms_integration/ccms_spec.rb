@@ -107,9 +107,9 @@ module CCMS
              holders: 'ClientSole',
              account_type_label: 'Bank Current',
              display_name: 'the bank account1',
-             receives_tax_credits?: false,
-             receives_wages?: true,
-             receives_benefits?: true
+             has_tax_credits?: false,
+             has_wages?: true,
+             has_benefits?: true
     end
 
     let(:bank_provider) do
