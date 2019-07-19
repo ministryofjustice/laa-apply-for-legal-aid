@@ -44,9 +44,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:bank_account_1) do
         double BankAccount,
                display_name: 'the bank account1',
-               receives_wages?: true,
-               receives_benefits?: true,
-               receives_tax_credits?: false,
+               has_wages?: true,
+               has_benefits?: true,
+               has_tax_credits?: false,
                balance: 100.0,
                account_number: '12345678',
                bank_provider: bank_provider,

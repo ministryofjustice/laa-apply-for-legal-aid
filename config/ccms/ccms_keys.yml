@@ -26,17 +26,17 @@ bank_acct:
     :response_type: text
     :user_defined: true
   BANKACC_INPUT_B_7WP2_16A:
-    :value: "#bank_account_receives_tax_credits?"
+    :value: "#bank_account_has_tax_credits?"
     :br100_meaning: 'Bank accounts: Client tax credits paid in?'
     :response_type: boolean
     :user_defined: true
   BANKACC_INPUT_B_7WP2_12A:
-    :value: "#bank_account_receives_wages?"
+    :value: "#bank_account_has_wages?"
     :br100_meaning: 'Bank accounts: Client wages paid in?'
     :response_type: boolean
     :user_defined: true
   BANKACC_INPUT_B_7WP2_14A:
-    :value: "#bank_account_receives_benefits?"
+    :value: "#bank_account_has_benefits?"
     :br100_meaning: 'Bank accounts: Client benefits, ex. tax credits, paid in?'
     :response_type: boolean
     :user_defined: true
