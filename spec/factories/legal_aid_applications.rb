@@ -3,10 +3,11 @@ FactoryBot.define do
     provider
 
     trait :with_applicant do
+      # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
       transient do
-        num_bank_accounts { 0 }
+        with_bank_accounts { 0 }
       end
-      applicant { create :applicant, num_bank_accounts: num_bank_accounts }
+      applicant { create :applicant, with_bank_accounts: with_bank_accounts }
     end
 
     trait :with_applicant_and_address do
