@@ -138,6 +138,28 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_response_value legal_aid_application.proceeding_types.first.meaning
         end
       end
+
+      context 'BAIL_CONDITIONS_SET' do
+        context 'bail conditions set' do
+          before { respondent.bail_conditions_set = true }
+          it 'is true' do
+            block = XmlExtractor.call(xml, :merits_assessment, 'BAIL_CONDITIONS_SET')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
+        end
+
+        context 'bail conditions NOT set' do
+          before { respondent.bail_conditions_set = false }
+          it 'is false' do
+            block = XmlExtractor.call(xml, :merits_assessment, 'BAIL_CONDITIONS_SET')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'false'
+          end
+        end
+      end
     end
   end
 end
