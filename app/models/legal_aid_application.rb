@@ -153,6 +153,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     [Opponent.dummy_opponent]
   end
 
+  def ccms_case_reference
+    most_recent_ccms_submission.case_ccms_reference
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

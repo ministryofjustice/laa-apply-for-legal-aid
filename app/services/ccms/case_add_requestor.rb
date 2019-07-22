@@ -150,11 +150,11 @@ module CCMS
       @legal_aid_application.proceeding_types.each { |p| generate_proceeding(xml, p) }
     end
 
-    def generate_proceeding(xml, proceeding) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    def generate_proceeding(xml, proceeding) # rubocop:disable Metrics/MethodLength
       xml.__send__('ns2:Proceeding') do
-        xml.__send__('ns2:ProceedingCaseID', proceeding.case_id)
-        xml.__send__('ns2:Status', proceeding.status)
-        xml.__send__('ns2:LeadProceedingIndicator', proceeding.lead_proceeding_indicator)
+        xml.__send__('ns2:ProceedingCaseID', @legal_aid_application.ccms_case_reference)
+        xml.__send__('ns2:Status', 'Draft')
+        xml.__send__('ns2:LeadProceedingIndicator', true)
         xml.__send__('ns2:ProceedingDetails') do
           xml.__send__('ns2:ProceedingType', proceeding.ccms_code)
           xml.__send__('ns2:ProceedingDescription', proceeding.description)
@@ -274,7 +274,7 @@ module CCMS
 
     def generate_means_proceeding_instance(xml, proceeding)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', proceeding.case_id)
+        xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_case_reference)
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :proceeding, proceeding: proceeding) }
       end
     end
@@ -360,8 +360,8 @@ module CCMS
 
     def generate_merits_proceeding_instance(xml, proceeding)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', proceeding.case_id)
-        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :proceeding_merits, proceeding: proceeding) }
+        xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_case_reference)
+        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :proceeding_merits, proceeding: proceeding, respondent: @legal_aid_application.respondent) }
       end
     end
 
@@ -456,10 +456,6 @@ module CCMS
 
     def provider
       @provider ||= @legal_aid_application.provider
-    end
-
-    def lead_proceeding
-      @lead_proceeding ||= @legal_aid_application.lead_proceeding
     end
 
     def proceedings

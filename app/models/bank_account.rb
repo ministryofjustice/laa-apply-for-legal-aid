@@ -19,4 +19,18 @@ class BankAccount < ApplicationRecord
   def display_name
     "#{bank_provider.name} Acct #{account_number}"
   end
+
+  # rubocop:disable Naming/PredicateName
+  def has_tax_credits?
+    true # TODO: CCMS placeholder
+  end
+
+  def has_wages?
+    true # TODO: CCMS placeholder
+  end
+
+  def has_benefits?
+    true # TODO: CCMS placeholder
+  end
+  # rubocop:enable Naming/PredicateName
 end

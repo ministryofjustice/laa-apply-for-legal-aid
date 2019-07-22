@@ -26,17 +26,17 @@ bank_acct:
     :response_type: text
     :user_defined: true
   BANKACC_INPUT_B_7WP2_16A:
-    :value: "#bank_account_receives_tax_credits?"
+    :value: "#bank_account_has_tax_credits?"
     :br100_meaning: 'Bank accounts: Client tax credits paid in?'
     :response_type: boolean
     :user_defined: true
   BANKACC_INPUT_B_7WP2_12A:
-    :value: "#bank_account_receives_wages?"
+    :value: "#bank_account_has_wages?"
     :br100_meaning: 'Bank accounts: Client wages paid in?'
     :response_type: boolean
     :user_defined: true
   BANKACC_INPUT_B_7WP2_14A:
-    :value: "#bank_account_receives_benefits?"
+    :value: "#bank_account_has_benefits?"
     :br100_meaning: 'Bank accounts: Client benefits, ex. tax credits, paid in?'
     :response_type: boolean
     :user_defined: true
@@ -3925,7 +3925,7 @@ proceeding:
     :response_type: text
     :user_defined: true
   PROCEEDING_ID:
-    :value: "#proceeding_case_id"
+    :value: "#application_ccms_case_reference"
     :br100_meaning: Proceeding ID
     :response_type: text
     :user_defined: true
@@ -3969,7 +3969,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   FAM_PROSP_VERY_POOR:
-    :value: "#proceeding_fam_prosp_very_poor"
+    :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Very Poor
     :response_type: boolean
@@ -3981,18 +3981,18 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   REQUESTED_SCOPE:
-    :value: "#proceeding_requested_scope"
+    :value: Dummy requested scope pending legal framework enhancements
     :br100_meaning: Requested Scope
     :response_type: text
     :user_defined: true
   FAM_PROSP_UNCERTAIN:
-    :value: "#proceeding_fam_prosp_uncertain"
+    :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Uncertain
     :response_type: boolean
     :user_defined: false
   EXPERT_COST_FAMILY:
-    :value: "#proceeding_expert_cost_family"
+    :value: 0
     :br100_meaning: 'Fam: The Expert Costs To Completion Of The Family Proceeding'
     :response_type: currency
     :user_defined: true
@@ -4010,7 +4010,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_POOR:
-    :value: "#proceeding_fam_prosp_poor"
+    :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Poor
     :response_type: boolean
@@ -4034,7 +4034,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_ID:
-    :value: "#proceeding_case_id"
+    :value: "#application_ccms_case_reference"
     :br100_meaning: Proceeding ID
     :response_type: text
     :user_defined: true
@@ -4051,7 +4051,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_MARGINAL:
-    :value: "#proceeding_fam_prosp_marginal"
+    :value: false
     :br100_meaning: The Prospects of Success In The Proceeding For The Family Matter
       Are Marginal
     :response_type: boolean
@@ -4081,7 +4081,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   LEVEL_OF_SERVICE:
-    :value: "#proceeding_level_of_service"
+    :value: 3
     :br100_meaning: Form of Service
     :response_type: text
     :user_defined: true
@@ -4147,7 +4147,8 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   PROC_DELEGATED_FUNCTIONS_DATE:
-    :value: "#proceeding_delegated_functions_date"
+    :generate_block?: '#application_used_delegated_functions?'
+    :value: '#used_delegated_functions_on'
     :br100_meaning: 'Emg: The proceeding delegated functions date'
     :response_type: date
     :user_defined: false
@@ -4165,12 +4166,12 @@ proceeding_merits:
     :generate_block?: false
   WARNING_LETTER_SENT:
     :generate_block?: true
-    :value: "#proceeding_warning_letter_sent?"
+    :value: "#respondent_warning_letter_sent?"
     :response_type: boolean
     :user_defined: true
   POLICE_NOTIFIED:
     :generate_block?: true
-    :value: "#proceeding_police_notified?"
+    :value: "#respondent_police_notified?"
     :response_type: boolean
     :user_defined: true
   SMOD_APPLICABLE:
@@ -4180,12 +4181,12 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAMILY_PROSPECTS_OF_SUCCESS:
-    :value: "#proceeding_family_prospects_of_success"
+    :value: likely
     :br100_meaning: 'Fam: The Family Prospects Of Success For The Proceeding'
     :response_type: text
     :user_defined: true
   FAM_PROSP_VERY_GOOD:
-    :value: "#proceeding_fam_prosp_very_good"
+    :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -4197,7 +4198,7 @@ proceeding_merits:
     :generate_block?: false
   INJ_RESPONDENT_CAPACITY:
     :generate_block?: true
-    :value: "#proceeding_inj_respondent_capacity?"
+    :value: "#respondent_understands_terms_of_court_order?"
     :br100_meaning: 'Inj: The Respondent Or Proposed Respondent Has Capacity'
     :response_type: boolean
     :user_defined: true
@@ -4279,7 +4280,7 @@ proceeding_merits:
     :generate_block?: false
   BAIL_CONDITIONS_SET:
     :generate_block?: true
-    :value: "#proceeding_bail_conditions_set?"
+    :value: "#respondent_bail_conditions_set?"
     :response_type: boolean
     :user_defined: true
   ROUTING_FOR_PROCEEDING:
@@ -4289,7 +4290,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_GOOD:
-    :value: "#proceeding_fam_prosp_good"
+    :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -4319,7 +4320,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   FAM_PROSP_BORDER_UNCERT_POOR:
-    :value: "#proceeding_fam_prosp_border_uncert_poor"
+    :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Borderline
     :response_type: boolean
@@ -4331,7 +4332,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   FAM_PROSP_50_OR_BETTER:
-    :value: "#proceeding_fam_prosp_50_or_better"
+    :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -4396,8 +4397,8 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   INJ_REASON_NO_WARNING_LETTER:
-    :generate_block?: true
-    :value: "#proceeding_reason_no_injunction_warning_letter"
+    :generate_block?: '#respondent_no_warning_letter_sent?'
+    :value: "#respondent_warning_letter_sent_details"
     :br100_meaning: 'Inj: The Reason Why No Warning Letter Has Been Sent'
     :response_type: text
     :user_defined: true
@@ -4460,7 +4461,7 @@ proceeding_merits:
     :user_defined: true
     :generate_block?: false
   PROC_MATTER_TYPE_MEANING:
-    :value: "#proceeding_matter_type_meaning"
+    :value: "#proceeding_meaning"
     :br100_meaning: 'Proc: The Proceeding Matter Type Meaning'
     :response_type: text
     :user_defined: false
@@ -4472,7 +4473,7 @@ proceeding_merits:
     :generate_block?: false
   INJ_RECENT_INCIDENT_DETAIL:
     :generate_block?: true
-    :value: "#proceeding_injunction_recent_incident_detail"
+    :value: See statement of case
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
     :response_type: text
     :user_defined: true
@@ -4484,7 +4485,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_BORDERLINE_UNCERT:
-    :value: "#proceeding_fam_prosp_borderline_uncert"
+    :value: false
     :br100_meaning: The Prospects Of Success For The Family Matter Are Borderline
       Or Uncertain
     :response_type: boolean
@@ -4580,7 +4581,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_LEVEL_OF_SERVICE:
-    :value: "#proceeding_proceeding_level_of_service"
+    :value: 3
     :br100_meaning: 'Proc: The Proceeding Form Of Service'
     :response_type: text
     :user_defined: false

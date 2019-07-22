@@ -23,5 +23,19 @@ FactoryBot.define do
         )
       end
     end
+
+    # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
+    transient do
+      with_bank_accounts { 0 }
+    end
+
+    after(:create) do |applicant, evaluator|
+      if evaluator.with_bank_accounts > 0
+        provider = create :bank_provider, applicant: applicant
+        evaluator.with_bank_accounts.times do
+          create :bank_account, bank_provider: provider
+        end
+      end
+    end
   end
 end
