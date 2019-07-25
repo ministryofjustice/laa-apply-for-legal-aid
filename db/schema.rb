@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_093333) do
+ActiveRecord::Schema.define(version: 2019_07_29_100602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -339,6 +339,13 @@ ActiveRecord::Schema.define(version: 2019_07_25_093333) do
     t.index ["firm_id"], name: "index_offices_on_firm_id"
   end
 
+  create_table "offices_providers", id: false, force: :cascade do |t|
+    t.uuid "office_id", null: false
+    t.uuid "provider_id", null: false
+    t.index ["office_id"], name: "index_offices_providers_on_office_id"
+    t.index ["provider_id"], name: "index_offices_providers_on_provider_id"
+  end
+
   create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "other_party_id"
     t.string "title"
@@ -421,12 +428,12 @@ ActiveRecord::Schema.define(version: 2019_07_25_093333) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "offices"
+    t.text "office_codes"
     t.json "details_response"
     t.uuid "firm_id"
-    t.uuid "office_id"
+    t.uuid "selected_office_id"
     t.index ["firm_id"], name: "index_providers_on_firm_id"
-    t.index ["office_id"], name: "index_providers_on_office_id"
+    t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
@@ -545,11 +552,13 @@ ActiveRecord::Schema.define(version: 2019_07_25_093333) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "merits_assessments", "legal_aid_applications"
   add_foreign_key "offices", "firms"
+  add_foreign_key "offices_providers", "offices"
+  add_foreign_key "offices_providers", "providers"
   add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
   add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
   add_foreign_key "proceeding_types", "service_levels", column: "default_service_level_id", primary_key: "service_id"
   add_foreign_key "providers", "firms"
-  add_foreign_key "providers", "offices"
+  add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "statement_of_cases", "legal_aid_applications"

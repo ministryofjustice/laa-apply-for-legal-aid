@@ -4,14 +4,14 @@ module Providers
 
     form_for Provider
 
-    attr_accessor :office_id
+    attr_accessor :selected_office_id
 
-    validates :office_id, presence: true
+    validates :selected_office_id, presence: true
 
     delegate :firm, to: :model
 
     before_validation do
-      self.office_id = nil unless office_id.in?(firm.offices.pluck(:id))
+      self.selected_office_id = nil unless selected_office_id.in?(model.offices.pluck(:id))
     end
   end
 end

@@ -3,8 +3,9 @@
 Given(/^I am logged in as a provider$/) do
   @registered_provider = create(:provider, username: 'test_provider')
   login_as @registered_provider
-  @registered_provider.firm.offices << create(:office, code: 'London')
-  @registered_provider.firm.offices << create(:office, code: 'Manchester')
+  firm = @registered_provider.firm
+  @registered_provider.offices << create(:office, firm: firm, code: 'London')
+  @registered_provider.offices << create(:office, firm: firm, code: 'Manchester')
 end
 
 Given(/^I visit the application service$/) do
@@ -21,7 +22,7 @@ end
 
 Given('I have an existing office') do
   office = @registered_provider.firm.offices.find_by(code: 'London')
-  @registered_provider.update!(office: office)
+  @registered_provider.update!(selected_office: office)
 end
 
 Given(/^I visit the applications page$/) do

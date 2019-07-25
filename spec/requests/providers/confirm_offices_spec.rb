@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'provider confirm office', type: :request do
-  let(:provider) { create :provider, firm: firm, office: office }
   let(:firm) { create :firm }
   let!(:office) { create :office, firm: firm }
   let!(:office2) { create :office, firm: firm }
+  let(:provider) { create :provider, firm: firm, selected_office: office }
 
   describe 'GET providers/confirm_office' do
     subject { get providers_confirm_office_path }
@@ -36,7 +36,7 @@ RSpec.describe 'provider confirm office', type: :request do
         let!(:office) { nil }
 
         it 'assigns office 2 to the provider' do
-          expect(provider.reload.office).to eq office2
+          expect(provider.reload.selected_office).to eq office2
         end
 
         it 'redirects to the legal aid applications page' do
@@ -45,7 +45,7 @@ RSpec.describe 'provider confirm office', type: :request do
       end
 
       context 'provider has not selected office' do
-        let(:provider) { create :provider, firm: firm, office: nil }
+        let(:provider) { create :provider, firm: firm, selected_office: nil }
 
         it 'redirects to the select office page' do
           expect(response).to redirect_to providers_select_office_path
@@ -88,7 +88,7 @@ RSpec.describe 'provider confirm office', type: :request do
         end
 
         it 'clears the existing office' do
-          expect(provider.reload.office).to eq nil
+          expect(provider.reload.selected_office).to eq nil
         end
       end
     end

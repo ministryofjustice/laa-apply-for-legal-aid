@@ -12,11 +12,18 @@ class ProviderDetailsCreator
   def call
     provider.update!(
       firm: firm,
-      details_response: provider_details
+      details_response: provider_details,
+      offices: offices
     )
+
+    provider.update!(selected_office: nil) if should_clear_selected_office?
   end
 
   private
+
+  def should_clear_selected_office?
+    !provider.selected_office.nil? && !provider.selected_office.id.in?(offices.pluck(:id))
+  end
 
   def firm
     Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|

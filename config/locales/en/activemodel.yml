@@ -267,7 +267,7 @@ en:
                 none_selected: Select if your client has any of these types of assets
         provider:
           attributes:
-            office_id:
+            selected_office_id:
               blank: Select the office responsible for your applications
         respondent:
           attributes:
