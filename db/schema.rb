@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_081338) do
+ActiveRecord::Schema.define(version: 2019_07_25_093333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -216,8 +216,6 @@ ActiveRecord::Schema.define(version: 2019_07_16_081338) do
     t.boolean "in_full_time_education"
     t.boolean "has_assets_more_than_threshold"
     t.decimal "assets_value"
-    t.decimal "monthly_income"
-    t.boolean "has_income"
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 
@@ -408,6 +406,7 @@ ActiveRecord::Schema.define(version: 2019_07_16_081338) do
     t.integer "default_cost_limitation_delegated_functions"
     t.integer "default_cost_limitation_substantive"
     t.boolean "involvement_type_applicant"
+    t.string "additional_search_terms"
     t.index ["code"], name: "index_proceeding_types_on_code"
   end
 
