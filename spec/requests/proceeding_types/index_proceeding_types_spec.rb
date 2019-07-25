@@ -28,7 +28,8 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
                  ccms_matter_code: 'KPBLB',
                  meaning: 'Application for a care order',
                  description: 'to be represented on an application for a care order.',
-                 default_service_level_id: 3),
+                 default_service_level_id: 3,
+                 additional_search_terms: ''),
           create(:proceeding_type,
                  code: 'PH0002',
                  ccms_code: 'PBM24',
@@ -37,7 +38,8 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
                  ccms_matter_code: 'APBLB',
                  meaning: 'Not an application for a care order',
                  description: 'Not to be represented on an application for a care order.',
-                 default_service_level_id: 3)
+                 default_service_level_id: 3,
+                 additional_search_terms: 'injunction')
         ]
       end
 
@@ -50,14 +52,16 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
             meaning: 'Application for a care order',
             description: 'to be represented on an application for a care order.',
             category_law: 'Family',
-            matter: 'Public Law - Family'
+            matter: 'Public Law - Family',
+            additional_search_terms: ''
           },
           {
             code: 'PH0002',
             meaning: 'Not an application for a care order',
             description: 'Not to be represented on an application for a care order.',
             category_law: 'Other',
-            matter: 'Public Law - Other'
+            matter: 'Public Law - Other',
+            additional_search_terms: 'injunction'
           }
         ]
 

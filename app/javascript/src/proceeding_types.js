@@ -28,6 +28,7 @@ function searchProceedingTypes() {
     search.addIndex("description");
     search.addIndex("category_law");
     search.addIndex("matter");
+    search.addIndex("additional_search_terms");
     search.addDocuments(proceedings_data);
 
     $("#proceeding-search-input").keyup(function(){
