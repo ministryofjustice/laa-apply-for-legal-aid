@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: clamav
-          image: '926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.0'
+          image: '754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2'
           imagePullPolicy: IfNotPresent
           ports:
             - name: clamav

@@ -21,7 +21,7 @@ references:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
     - image: postgres:10.5
     - image: redis:5.0
-    - image: 926803513772.dkr.ecr.eu-west-1.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.0
+    - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
 
   setup_aws_login: &setup_aws_login
     run:
@@ -30,7 +30,7 @@ references:
         if [ "${CIRCLE_NODE_INDEX}" == "1" ] || [ "${CIRCLE_JOB}" == "clean_up_ecr" ]; then
           sudo apt-get --assume-yes install python3-pip
           sudo pip3 install awscli
-          $(aws ecr get-login --region eu-west-1 --no-include-email)
+          $(aws ecr get-login --region eu-west-2 --no-include-email)
         fi
 
   install_clamav: &install_clamav
@@ -80,7 +80,7 @@ references:
     run:
       name: Kubectl deployment setup UAT
       command: |
-        $(aws ecr get-login --region eu-west-1 --no-include-email)
+        $(aws ecr get-login --region eu-west-2 --no-include-email)
         setup-kube-auth
         kubectl config use-context uat
 
@@ -193,7 +193,7 @@ jobs:
     - run:
         name: Kubectl deployment setup staging
         command: |
-          $(aws ecr get-login --region eu-west-1 --no-include-email)
+          $(aws ecr get-login --region eu-west-2 --no-include-email)
           setup-kube-auth
           kubectl config use-context staging
     - *decrypt_secrets
@@ -219,7 +219,7 @@ jobs:
     - run:
         name: Kubectl deployment setup production
         command: |
-          $(aws ecr get-login --region eu-west-1 --no-include-email)
+          $(aws ecr get-login --region eu-west-2 --no-include-email)
           setup-kube-auth
           kubectl config use-context production
     - *decrypt_secrets
