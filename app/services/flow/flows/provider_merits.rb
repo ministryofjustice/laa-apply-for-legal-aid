@@ -55,10 +55,14 @@ module Flow
         },
         merits_declarations: {
           path: ->(application) { urls.providers_legal_aid_application_merits_declaration_path(application) },
-          forward: :placeholder_end_merits
+          forward: :end_of_applications
         },
-        placeholder_end_merits: {
-          path: 'End of provider-answered merits assessment questions for passported clients'
+        end_of_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_end_of_application_path(application) },
+          forward: :completed_application
+        },
+        completed_application: {
+          path: 'Displays completed application'
         }
       }.freeze
     end

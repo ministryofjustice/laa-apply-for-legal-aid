@@ -45,8 +45,8 @@ FactoryBot.define do
       state { 'checking_merits_answers' }
     end
 
-    trait :merits_completed do
-      state { 'merits_completed' }
+    trait :assessment_submitted do
+      state { 'assessment_submitted' }
     end
 
     trait :checking_client_details_answers do

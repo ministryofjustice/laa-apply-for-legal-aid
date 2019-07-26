@@ -1,0 +1,30 @@
+<%= page_template page_title: t('.heading'), template: :basic, back_link: :none do %>
+  <div class="govuk-panel govuk-panel--confirmation">
+    <h1 class="govuk-panel__title govuk-!-padding-top-4">
+      <%= page_title %>
+    </h1>
+    <div class="govuk-panel__body">
+      <%= t('.your_case_reference_number') %><br>
+      <strong><%= @legal_aid_application.application_ref %></strong>
+    </div>
+  </div>
+
+  <p class="govuk-body govuk-!-padding-top-4"><%= t('.confirmation_email_sent') %></p>
+
+  <h2 class="govuk-heading-l"><%= t('.what_happens_next') %></h2>
+  <p class="govuk-body"><%= t('.next_actions') %></p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><%= t('.print_application') %></li>
+    <li><%= t('.client_sign') %></li>
+  </ul>
+  <p class="govuk-body"><%= t('.application_to_be_checked') %></p>
+  <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.decision_in_ccms') %></p>
+
+  <%= next_action_buttons_with_form(
+      url: providers_legal_aid_application_end_of_application_path,
+      method: :patch,
+      show_draft: true,
+      continue_button_text: t('.view_completed_application'),
+      draft_button_text: t('.back_to_your_applications')
+    ) %>
+<% end %>

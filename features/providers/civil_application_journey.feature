@@ -420,7 +420,7 @@ Feature: Civil application journeys
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
-    Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
+    Then I should be on a page showing "Application complete"
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application
@@ -526,7 +526,7 @@ Feature: Civil application journeys
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
-    Then I should be on a page showing "End of provider-answered merits assessment questions for passported clients"
+    Then I should be on a page showing "Application complete"
 
   @javascript @vcr
   Scenario: View feedback form within provider journey

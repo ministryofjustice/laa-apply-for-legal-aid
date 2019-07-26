@@ -5,6 +5,7 @@ module Flow
     KEY_POINTS = {
       citizens: {},
       providers: {
+        home: :providers_home,
         journey_start: :applicants,
         edit_applicant: :applicant_details,
         start_after_applicant_completes_means: :client_completed_means,

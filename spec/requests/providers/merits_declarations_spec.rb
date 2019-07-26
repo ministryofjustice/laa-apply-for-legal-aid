@@ -40,11 +40,12 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         it 'updates the record' do
           legal_aid_application.create_merits_assessment!
           expect { subject }.to change { legal_aid_application.merits_assessment.reload.submitted_at }.from(nil)
+          expect(legal_aid_application.reload).to be_assessment_submitted
         end
 
         it 'redirects to next page' do
           subject
-          expect(response.body).to eq(Flow::Flows::ProviderMerits::STEPS[:placeholder_end_merits][:path])
+          expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(legal_aid_application))
         end
       end
 

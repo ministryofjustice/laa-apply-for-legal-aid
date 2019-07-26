@@ -168,6 +168,7 @@ Rails.application.routes.draw do
       resource :means_summary, only: %i[show update]
       resource :used_delegated_functions, only: %i[show update]
       resource :substantive_application, only: %i[show update]
+      resource :end_of_application, only: %i[show update]
     end
   end
 
