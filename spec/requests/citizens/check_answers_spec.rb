@@ -129,9 +129,8 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     context 'applicant does not have any capital restrictions' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_everything }
       let(:has_restrictions) { false }
-      let!(:restrictions_details) { '' }
+      let(:restrictions_details) { '' }
       it 'displays that no capital restrictions have been declared' do
         expect(response.body).to include(I18n.t('.generic.no'))
       end

@@ -26,7 +26,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
       }
     end
     let(:restrictions_details) { Faker::Lorem.paragraph }
-    let(:has_restrictions) { true }
+    let(:has_restrictions) { 'true' }
     let(:submit_button) do
       {
         continue_button: 'Continue'
@@ -54,7 +54,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
       end
 
       context 'no params' do
-        let(:has_restrictions) { nil }
+        let(:has_restrictions) { '' }
 
         it 'displays error' do
           expect(response.body).to include(translation_for(:has_restrictions, 'blank'))

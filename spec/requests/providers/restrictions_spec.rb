@@ -35,7 +35,7 @@ RSpec.describe 'provider restrictions request', type: :request do
       }
     end
     let(:restrictions_details) { Faker::Lorem.paragraph }
-    let(:has_restrictions) { true }
+    let(:has_restrictions) { 'true' }
 
     context 'when the provider is authenticated' do
       before do
@@ -67,7 +67,7 @@ RSpec.describe 'provider restrictions request', type: :request do
           end
 
           context 'no params' do
-            let(:has_restrictions) { nil }
+            let(:has_restrictions) { '' }
 
             it 'displays error' do
               expect(response.body).to include(translation_for(:has_restrictions, 'blank'))

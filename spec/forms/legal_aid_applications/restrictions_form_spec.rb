@@ -5,10 +5,12 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
   let(:params) do
     {
       has_restrictions: has_restrictions,
-      restrictions_details: restrictions_details
+      restrictions_details: restrictions_details,
+      mode: mode
     }
   end
-  let(:restrictions_details) { 'xxxxx' }
+  let(:mode) { %i[provider citizen].sample }
+  let(:restrictions_details) { Faker::Lorem.paragraph }
   let(:has_restrictions) { 'true' }
   let(:form_params) { params.merge(model: application) }
 
@@ -50,7 +52,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       end
 
       it 'generates the expected error message' do
-        expect(subject.errors[:restrictions_details]).to include I18n.t('activemodel.errors.models.legal_aid_application.attributes.restrictions_details.blank')
+        expect(subject.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{mode}.blank")
       end
 
       context 'no restrictions present' do
@@ -61,7 +63,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
         end
 
         it 'generates the expected error message' do
-          expect(subject.errors[:has_restrictions]).to include I18n.t('activemodel.errors.models.legal_aid_application.attributes.has_restrictions.blank')
+          expect(subject.errors[:has_restrictions]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_restrictions.#{mode}.blank")
         end
       end
     end
