@@ -22,7 +22,8 @@ FactoryBot.define do
       substantive { true }
       after(:create) do |sl, evaluator|
         create :proceeding_type_scope_limitation,
-               :substantive_default,
+               substantive_default: true,
+               delegated_functions_default: false,
                scope_limitation: sl,
                proceeding_type: evaluator.joined_proceeding_type
       end
@@ -32,7 +33,8 @@ FactoryBot.define do
       delegated_functions { true }
       after(:create) do |scope_limitation, evaluator|
         create :proceeding_type_scope_limitation,
-               :delegated_functions_default,
+               substantive_default: false,
+               delegated_functions_default: true,
                scope_limitation: scope_limitation,
                proceeding_type: evaluator.joined_proceeding_type
       end

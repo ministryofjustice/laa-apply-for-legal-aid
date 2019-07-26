@@ -29,5 +29,12 @@ FactoryBot.define do
       default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
     end
+
+    trait :with_scope_limitations do
+      after(:create) do |proceeding_type|
+        proceeding_type.scope_limitations << create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)
+        proceeding_type.scope_limitations << create(:scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type)
+      end
+    end
   end
 end

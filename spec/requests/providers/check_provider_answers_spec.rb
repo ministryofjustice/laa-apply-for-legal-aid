@@ -10,9 +10,7 @@ RSpec.describe 'check your answers requests', type: :request do
       :with_applicant_and_address,
       :with_scope_limitations,
       used_delegated_functions: used_delegated_functions,
-      used_delegated_functions_on: used_delegated_functions_on,
-
-
+      used_delegated_functions_on: used_delegated_functions_on
     )
   end
   let(:application_id) { application.id }
