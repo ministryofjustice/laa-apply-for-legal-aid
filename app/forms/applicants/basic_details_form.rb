@@ -77,7 +77,7 @@ module Applicants
     def validate_national_insurance_number
       return if draft? && national_insurance_number.blank?
       return if test_level_validation? && known_test_ninos.include?(national_insurance_number)
-      return if Applicant::NINO_REGEXP =~ national_insurance_number
+      return if Applicant::NINO_REGEXP.match?(national_insurance_number)
 
       errors.add(:national_insurance_number, :not_valid)
     end

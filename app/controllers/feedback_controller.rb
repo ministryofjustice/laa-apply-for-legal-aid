@@ -47,8 +47,8 @@ class FeedbackController < ApplicationController
 
   def source
     path = session[:feedback_return_path]
-    return :Provider if %r{/providers/} =~ path
-    return :Citizen if %r{/citizens/} =~ path
+    return :Provider if %r{/providers/}.match?(path)
+    return :Citizen if %r{/citizens/}.match?(path)
 
     :Unknown
   end
