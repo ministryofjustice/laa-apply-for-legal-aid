@@ -14,6 +14,6 @@ module FlowHelpers
   end
 
   def provider_draft_endpoint
-    __send__(Providers::Draftable::ENDPOINT)
+    Providers::Draftable::ENDPOINT
   end
 end

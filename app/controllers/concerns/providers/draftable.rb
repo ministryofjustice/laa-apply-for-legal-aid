@@ -4,10 +4,10 @@ module Providers
   # So usually depends on `Flowable` and `ApplicationDependable` being included
   # into the host controller
   module Draftable
-    ENDPOINT = :providers_legal_aid_applications_path
+    ENDPOINT = Flow::KeyPoint.path_for(journey: :providers, key_point: :home).freeze
 
     def draft_target_endpoint
-      __send__(ENDPOINT)
+      ENDPOINT
     end
 
     def save_continue_or_draft(form)
