@@ -7,6 +7,7 @@ $(function() {
 function searchProceedingTypes() {
   var submitForm = proceedingItem => {
     $(proceedingItem).find('form').submit();
+    return false;
   }
 
   $.getJSON("/v1/proceeding_types", function (proceedings_data) {
@@ -85,12 +86,12 @@ function searchProceedingTypes() {
     });
 
     $('.proceeding-item').on('click', function(e){
-      submitForm(this);
+      return submitForm(this);
     });
 
     $('.proceeding-item').on('keydown', function(e){
       if (e.which == 13) {
-        submitForm(this);
+        return submitForm(this);
       }
     });
   });
