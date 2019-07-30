@@ -3,7 +3,7 @@
 
     <%= govuk_fieldset_header(content_for(:page_title), padding_below: 6) %>
 
-    <%= form.govuk_collection_radio_buttons(:office_id, firm.offices, :id, :code) %>
+    <%= form.govuk_collection_radio_buttons(:selected_office_id, @form.model.offices, :id, :code) %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 

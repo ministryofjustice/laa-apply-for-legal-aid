@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::ApplicantsController, type: :request do
   let(:office) { create :office }
-  let(:provider) { create :provider, office: office }
+  let(:provider) { create :provider, selected_office: office }
   let(:login) { login_as provider }
 
   before { login }
@@ -36,7 +36,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
 
     it "creates an application with the provider's office" do
       expect { subject }.to change { provider.legal_aid_applications.count }.by(1)
-      expect(legal_aid_application.office.id).to eq(provider.office.id)
+      expect(legal_aid_application.office.id).to eq(provider.selected_office.id)
     end
 
     it 'creates an applicant' do

@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 RSpec.describe 'SamlSessionsController', type: :request do
   let(:firm) { nil }
   let(:office) { nil }
-  let(:provider) { create :provider, firm: firm, office: office }
+  let(:provider) { create :provider, firm: firm, selected_office: office }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }

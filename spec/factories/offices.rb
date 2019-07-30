@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :office do
-    ccms_id { rand(1..1000) }
-    code { rand(1..1000).to_s }
+    ccms_id { Faker::Number.unique.number(10) }
+    code { Faker::Number.unique.number(10) }
     firm
   end
 end

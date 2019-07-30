@@ -65,7 +65,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:provider) do
         double Provider,
                firm_id: 19_148,
-               office_id: 137_570,
+               selected_office_id: 137_570,
                username: 4_953_649,
                contact_user_id: 4_953_649,
                supervisor_contact_id: 7_008_010,
