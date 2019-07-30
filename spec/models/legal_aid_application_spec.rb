@@ -438,4 +438,25 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(application.used_delegated_functions_on).to be_nil
     end
   end
+
+  describe 'default_cost_limitations' do
+    let(:proceeding_type) do
+      create :proceeding_type,
+             default_cost_limitation_substantive: 9_000,
+             default_cost_limitation_delegated_functions: 2_500
+    end
+    context 'substantive' do
+      let(:application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
+      it 'returns the substantive cost limitation for the first proceeding type' do
+        expect(application.default_cost_limitation).to eq 9_000
+      end
+    end
+
+    context 'delegated functions' do
+      let(:application) { create :legal_aid_application, :with_delegated_functions,  proceeding_types: [proceeding_type] }
+      it 'returns the delegated fucntions cost limitation for the first proceeding type' do
+        expect(application.default_cost_limitation).to eq 2_500
+      end
+    end
+  end
 end

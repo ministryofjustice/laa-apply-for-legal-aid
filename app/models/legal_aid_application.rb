@@ -38,6 +38,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   validates :provider, presence: true
 
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
+  delegate :substantive_scope_limitation, :delegated_functions_scope_limitation, to: :application_scope_limitations
 
   scope :latest, -> { order(created_at: :desc) }
 
@@ -189,14 +190,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     proceeding_types.first.default_delegated_functions_scope_limitation
   end
 
-  def substantive_scope_limitation
-    application_scope_limitations.find_by(substantive: true).scope_limitation
-  end
-
-  def delegated_functions_scope_limitation
-    application_scope_limitations.find_by(substantive: false)&.scope_limitation
-  end
-
   def reset_delegated_functions
     self.used_delegated_functions = false
     self.used_delegated_functions_on = nil
@@ -206,6 +199,18 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     proceeding_types.clear
     scope_limitations.clear
     reset_delegated_functions
+  end
+
+  def default_cost_limitation
+    used_delegated_functions? ? default_delegated_functions_cost_limitation : default_substantive_cost_limitation
+  end
+
+  def default_substantive_cost_limitation
+    proceeding_types.first.default_cost_limitation_substantive
+  end
+
+  def default_delegated_functions_cost_limitation
+    proceeding_types.first.default_cost_limitation_delegated_functions
   end
 
   private

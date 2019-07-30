@@ -101,11 +101,7 @@
           <%= t '.section_proceeding.costs' %>
         </dt>
         <dd class="govuk-summary-list__value">
-          <% if @legal_aid_application.used_delegated_functions? %>
-            <%= number_to_currency(@legal_aid_application.proceeding_types.first.default_cost_limitation_delegated_functions,  precision: 0) %>
-          <% else %>
-            <%= number_to_currency(@legal_aid_application.proceeding_types.first.default_cost_limitation_substantive,  precision: 0) %>
-          <% end %>
+          <%= number_to_currency(@legal_aid_application.default_cost_limitation,  precision: 0) %>
         </dd>
         <dd class="govuk-summary-list__actions"></dd>
       </div>

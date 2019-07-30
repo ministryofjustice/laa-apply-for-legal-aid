@@ -11,11 +11,6 @@ class ProceedingType < ApplicationRecord
     ProceedingTypePopulator.call
   end
 
-  def default_substantive_scope_limitation
-    proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation
-  end
-
-  def default_delegated_functions_scope_limitation
-    proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation
-  end
+  delegate :default_substantive_scope_limitation,
+           :default_delegated_functions_scope_limitation, to: :proceeding_type_scope_limitations
 end
