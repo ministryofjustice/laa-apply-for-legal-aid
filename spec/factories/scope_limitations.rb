@@ -20,11 +20,11 @@ FactoryBot.define do
 
     trait :substantive_default do
       substantive { true }
-      after(:create) do |sl, evaluator|
+      after(:create) do |scope_limitation, evaluator|
         create :proceeding_type_scope_limitation,
                substantive_default: true,
                delegated_functions_default: false,
-               scope_limitation: sl,
+               scope_limitation: scope_limitation,
                proceeding_type: evaluator.joined_proceeding_type
       end
     end

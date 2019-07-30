@@ -171,8 +171,7 @@ Given('I complete the passported journey as far as check your answers') do
   )
   @legal_aid_application = create(
     :legal_aid_application,
-    # :with_proceeding_types,
-    :with_scope_limitations,
+    :with_substantive_scope_limitation,
     applicant: applicant
   )
   login_as @legal_aid_application.provider

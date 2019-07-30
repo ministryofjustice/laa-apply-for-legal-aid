@@ -25,8 +25,8 @@ module Providers
       authorize legal_aid_application
       ActiveRecord::Base.transaction do
         legal_aid_application.reset_proceeding_types! # This will probably change when multiple proceeding types implemented!
-        legal_aid_application.proceeding_types << proceeding_type unless legal_aid_application.proceeding_types.include?(proceeding_type)
-        legal_aid_application.add_default_scope_limitation!
+        legal_aid_application.proceeding_types << proceeding_type
+        legal_aid_application.add_default_substantive_scope_limitation!
       end
       go_forward
     end

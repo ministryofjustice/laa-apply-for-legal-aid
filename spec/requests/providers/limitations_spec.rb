@@ -18,7 +18,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        legal_aid_application.add_default_scope_limitation!
+        legal_aid_application.add_default_substantive_scope_limitation!
         login_as provider
         subject
       end

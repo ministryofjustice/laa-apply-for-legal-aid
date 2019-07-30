@@ -20,7 +20,7 @@ module Providers
     private
 
     def set_variables
-      @proceeding_types = legal_aid_application.proceeding_types
+      @proceeding_type = legal_aid_application.lead_proceeding_type
       @applicant = legal_aid_application.applicant
       @read_only = legal_aid_application.read_only?
       @address = @applicant.addresses.first

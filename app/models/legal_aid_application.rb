@@ -51,6 +51,14 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     _prefix: true
   )
 
+  # convenience method to return the lead proceeding type.  For now, that is the ONLY
+  # proceeding type until such time as we have multiple proceeding types per applications,
+  # at which time this method shuld be changed to determine which is the lead one and return that.
+  #
+  def lead_proceeding_type
+    proceeding_types.first
+  end
+
   def bank_transactions
     return applicant.bank_transactions if Setting.mock_true_layer_data?
 
@@ -158,14 +166,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     most_recent_ccms_submission.case_ccms_reference
   end
 
-  def add_default_scope_limitation!
-    if used_delegated_functions?
-      add_default_delegated_functions_scope_limitation!
-    else
-      add_default_substantive_scope_limitation!
-    end
-  end
-
   def add_default_substantive_scope_limitation!
     ApplicationScopeLimitation.create!(
       legal_aid_application: self,
@@ -183,11 +183,11 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def default_substantive_scope_limitation_for_first_proceeding_type
-    proceeding_types.first.default_substantive_scope_limitation
+    lead_proceeding_type.default_substantive_scope_limitation
   end
 
   def default_delegated_functions_scope_limitation_for_first_proceeding_type
-    proceeding_types.first.default_delegated_functions_scope_limitation
+    lead_proceeding_type.default_delegated_functions_scope_limitation
   end
 
   def reset_delegated_functions
@@ -206,11 +206,11 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def default_substantive_cost_limitation
-    proceeding_types.first.default_cost_limitation_substantive
+    lead_proceeding_type.default_cost_limitation_substantive
   end
 
   def default_delegated_functions_cost_limitation
-    proceeding_types.first.default_cost_limitation_delegated_functions
+    lead_proceeding_type.default_cost_limitation_delegated_functions
   end
 
   private

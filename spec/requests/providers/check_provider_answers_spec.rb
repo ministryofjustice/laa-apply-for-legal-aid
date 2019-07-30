@@ -8,7 +8,8 @@ RSpec.describe 'check your answers requests', type: :request do
       :legal_aid_application,
       :with_proceeding_types,
       :with_applicant_and_address,
-      :with_scope_limitations,
+      :with_substantive_scope_limitation,
+      :with_delegated_functions_scope_limitation,
       used_delegated_functions: used_delegated_functions,
       used_delegated_functions_on: used_delegated_functions_on
     )
@@ -123,7 +124,7 @@ RSpec.describe 'check your answers requests', type: :request do
           create(:legal_aid_application,
                  :with_proceeding_types,
                  :with_applicant_and_address,
-                 :with_scope_limitations,
+                 :with_substantive_scope_limitation,
                  state: :checking_citizen_answers)
         end
         it 'renders page successfully' do

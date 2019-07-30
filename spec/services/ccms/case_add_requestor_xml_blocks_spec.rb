@@ -135,7 +135,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           block = XmlExtractor.call(xml, :merits_assessment, 'PROC_MATTER_TYPE_MEANING')
           expect(block).to be_present
           expect(block).to have_response_type 'text'
-          expect(block).to have_response_value legal_aid_application.proceeding_types.first.meaning
+          expect(block).to have_response_value legal_aid_application.lead_proceeding_type.meaning
         end
       end
 
