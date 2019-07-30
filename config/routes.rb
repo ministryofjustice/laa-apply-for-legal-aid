@@ -169,6 +169,7 @@ Rails.application.routes.draw do
       resource :used_delegated_functions, only: %i[show update]
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]
+      resources :pdf_spike, only: :index
     end
   end
 

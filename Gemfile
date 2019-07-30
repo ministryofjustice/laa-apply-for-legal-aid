@@ -78,6 +78,9 @@ gem 'webpacker', '~> 4.x'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

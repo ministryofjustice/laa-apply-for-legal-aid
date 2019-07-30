@@ -1,0 +1,22 @@
+<h2 class="govuk-heading-m">
+  Application <%= @legal_aid_application.application_ref %>
+</h2>
+
+<dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Name
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <%= @legal_aid_application.applicant.full_name %>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Date of birth
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <%= @legal_aid_application.applicant.date_of_birth %>
+    </dd>
+  </div>
+</dl>
