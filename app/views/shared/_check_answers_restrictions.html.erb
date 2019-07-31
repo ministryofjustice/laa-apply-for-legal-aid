@@ -1,9 +1,16 @@
-<dl class="govuk-summary-list">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :restrictions,
         url: check_answer_url_for(user_type, :restrictions, application),
         question: t(".#{user_type}.question"),
-        answer: yes_no(application.has_restrictions)
+        answer: yes_no(application.has_restrictions),
+        no_border: application.has_restrictions?
       ) %>
+
+  <div class="govuk-body wrap-text govuk-!-margin-bottom-0">
+    <%= simple_format application.restrictions_details %>
+    <% if application.has_restrictions %>
+      <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full govuk-!-margin-bottom-0" style="width: 100%;">
+    <% end %>
+  </div>
 </dl>
-<div class="govuk-body govuk-!-margin-bottom-9 wrap-text"><%= simple_format application.restrictions_details %></div>
