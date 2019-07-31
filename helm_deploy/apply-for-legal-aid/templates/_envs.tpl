@@ -9,19 +9,19 @@ env:
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: postgresUser
+        key: postgresqlUsername
   - name: POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: postgresPassword
+        key: postgresqlPassword
   - name: POSTGRES_HOST
     value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
   - name: POSTGRES_DATABASE
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: postgresDatabase
+        key: postgresqlDatabase
   {{ else }}
   - name: POSTGRES_USER
     valueFrom:
