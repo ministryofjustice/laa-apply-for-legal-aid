@@ -816,7 +816,17 @@
   optionalDependencies:
     canvas "^2.5.0"
 
-"@hint/connector-local@^3.0.2", "@hint/connector-local@^3.1.0", "@hint/connector-local@^3.1.1":
+"@hint/connector-local@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-3.0.2.tgz#685276623df7d7f9354ee6bede28836bf7cbe039"
+  integrity sha512-cZmIDz1cIVNNJ7DSu3sqeYO0iYUprtyOVzS+NtQz5SI692vidF6uPEqUUUwGteI5McXfA+pndlkHyno2RnG++Q==
+  dependencies:
+    "@hint/utils" "^2.1.0"
+    chokidar "^3.0.0"
+    globby "^9.2.0"
+    jsdom "^15.1.0"
+
+"@hint/connector-local@^3.1.0":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-3.1.1.tgz#502fc8457feeb0b92bd1e03da00099f3cf13115e"
   integrity sha512-eq9wWyBnw9o4hpvFTck/Gy7wUZZq/PEm94XoJ+MdmS9QDwTM8QdAdqyIjSGiNDaiBdVUsSF9p+yW9Up9oH34/w==
@@ -2874,7 +2884,7 @@ chokidar@^2.0.2, chokidar@^2.1.6:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^3.0.2:
+chokidar@^3.0.0, chokidar@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.0.2.tgz#0d1cd6d04eb2df0327446188cd13736a3367d681"
   integrity sha512-c4PR2egjNjI1um6bamCQ6bUNPDiyofNQruHvKgHQ4gDUP/ITSVSzNsiI5OWtHOsX323i5ha/kk4YmOZ1Ktg7KA==
