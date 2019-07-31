@@ -28,7 +28,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_one :most_recent_ccms_submission, -> { order(:created_at) }, class_name: 'CCMS::Submission'
   has_one :vehicle, dependent: :destroy
   has_many :application_scope_limitations, dependent: :destroy
-  has_many :scope_limitations, through: :application_scope_limitations, dependent: :destroy
+  has_many :scope_limitations, through: :application_scope_limitations
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
