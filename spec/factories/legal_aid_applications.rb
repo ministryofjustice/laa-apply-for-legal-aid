@@ -61,46 +61,28 @@ FactoryBot.define do
       end
 
       after(:create) do |application, evaluator|
-        proceeding_types = if evaluator.proceeding_types.empty?
-                             create_list(:proceeding_type, evaluator.proceeding_types_count)
-                           else
-                             evaluator.proceeding_types
-                           end
-        application.proceeding_types = proceeding_types
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         application.save
       end
     end
 
     trait :with_substantive_scope_limitation do
       after(:create) do |application, evaluator|
-        proceeding_types = if evaluator.proceeding_types.empty?
-                             create_list(:proceeding_type, 1)
-                           else
-                             evaluator.proceeding_types
-                           end
-        application.proceeding_types = proceeding_types
-
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         pt = application.lead_proceeding_type
-        create :scope_limitation,  :substantive_default, joined_proceeding_type: pt
+        create :scope_limitation, :substantive_default, joined_proceeding_type: pt
         application.add_default_substantive_scope_limitation!
       end
     end
 
     trait :with_delegated_functions_scope_limitation do
       after(:create) do |application, evaluator|
-        proceeding_types = if evaluator.proceeding_types.empty?
-                             create_list(:proceeding_type, 1)
-                           else
-                             evaluator.proceeding_types
-                           end
-        application.proceeding_types = proceeding_types
-
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         pt = application.lead_proceeding_type
-        create :scope_limitation,  :delegated_functions_default, joined_proceeding_type: pt
+        create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
         application.add_default_delegated_functions_scope_limitation!
       end
     end
-
 
     trait :with_own_home_mortgaged do
       own_home { 'mortgage' }
