@@ -1,6 +1,6 @@
 module CCMS
   class DocumentIdRequestor < BaseRequestor
-    wsdl_from 'DocumentServicesWsdl.xml'.freeze
+    wsdl_from Rails.configuration.x.ccms_soa.documentServicesWsdl
 
     uses_namespaces(
       'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',

@@ -98,6 +98,56 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: benefitCheckerWsdlUrl
+  - name: CCMS_SOA_AWS_GATEWAY_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaAwsGatewayApiKey
+  - name: CCMS_SOA_CLIENT_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaClientUsername
+  - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaClientPasswordType
+  - name: CCMS_SOA_CLIENT_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaClientPassword
+  - name: CCMS_SOA_USER_LOGIN
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaUserLogin
+  - name: CCMS_SOA_USER_ROLE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaUserRole
+  - name: CCMS_SOA_CASE_SERVICES_WSDL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaCaseServicesWsdl
+  - name: CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaClientProxyServiceWsdl
+  - name: CCMS_SOA_DOCUMENT_SERVICES_WSDL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaDocumentServicesWsdl
+  - name: CCMS_SOA_GET_REFERENCE_DATA_WSDL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaGetReferenceDataWsdl
   - name: LAA_PORTAL_IDP_SSO_TARGET_URL
     valueFrom:
       secretKeyRef:

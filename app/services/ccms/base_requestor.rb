@@ -30,6 +30,7 @@ module CCMS
     # :nocov:
     def soap_client
       @soap_client ||= Savon.client(
+        headers: { 'x-api-key' => config.aws_gateway_api_key },
         env_namespace: :soap,
         wsdl: wsdl_location,
         namespaces: namespaces,
@@ -53,8 +54,10 @@ module CCMS
     def soap_header(xml)
       xml.__send__('ns1:Security') do
         xml.__send__('ns1:UsernameToken') do
-          xml.__send__('ns1:Username', ENV['SOAP_CLIENT_USERNAME'])
-          xml.__send__('ns1:Password', 'Type' => ENV['SOAP_CLIENT_PASSWORD_TYPE']) { xml.text ENV['SOAP_CLIENT_PASSWORD'] }
+          xml.__send__('ns1:Username', config.client_username)
+          xml.__send__('ns1:Password', 'Type' => config.client_password_type) do
+            xml.text(config.client_password)
+          end
         end
       end
     end
@@ -62,8 +65,8 @@ module CCMS
     def ns3_header_rq(xml)
       xml.__send__('ns3:TransactionRequestID', transaction_request_id)
       xml.__send__('ns3:Language', 'ENG')
-      xml.__send__('ns3:UserLoginID', ENV['USER_LOGIN'])
-      xml.__send__('ns3:UserRole', ENV['USER_ROLE'])
+      xml.__send__('ns3:UserLoginID', config.user_login)
+      xml.__send__('ns3:UserRole', config.user_role)
     end
 
     def wsdl_location
@@ -72,6 +75,10 @@ module CCMS
 
     def namespaces
       self.class.namespaces
+    end
+
+    def config
+      Rails.configuration.x.ccms_soa
     end
   end
 end
