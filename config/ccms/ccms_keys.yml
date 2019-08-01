@@ -136,11 +136,13 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_34WP3_1A:
+    :generate_block?: false
     :value: 990.0
     :br100_meaning: 'RESULT: Disposable income- Client deductions'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_34WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Cars'
     :response_type: currency
@@ -157,11 +159,13 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_CAP_CONT:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Capital - Capital contribution'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_19WP2_104A:
+    :generate_block?: false
     :value: -2030.0
     :br100_meaning: 'Int.Result: Main Dwelling- Net value of equity'
     :response_type: currency
@@ -197,6 +201,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INFER_B_1WP3_419A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Bankruptcy: Subject to order?'
     :response_type: boolean
@@ -212,16 +217,19 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_20WP2_101A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Add. Property- Value of equity'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_37WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Other capital'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_19WP2_105A:
+    :generate_block?: false
     :value: -1015.0
     :br100_meaning: 'Int.Result: Main Dwelling- Net value of equity when owned with
       ex. partner'
@@ -238,16 +246,19 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_31WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Shares'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_26WP3_218A:
+    :generate_block?: false
     :value: 1208.0
     :br100_meaning: 'RESULT: Gross Income- Total Unfrozen Income'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_34WP3_3A:
+    :generate_block?: false
     :value: 990.0
     :br100_meaning: 'RESULT: Disposable income- Total deductions'
     :response_type: currency
@@ -276,16 +287,19 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_25WP3_167A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Redundancy'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_19WP2_106A:
+    :generate_block?: false
     :value: -1015.0
     :br100_meaning: 'Int.Result: Client Main Dwelling- Value of equity'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_21WP4_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Self Emp/SubCon Income'
     :response_type: currency
@@ -322,6 +336,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_26WP3_217A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Gross Income- Total Restraint Order Income'
     :response_type: currency
@@ -357,6 +372,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   CLIENT_PRISONER:
+    :generate_block?: false
     :value: false
     :br100_meaning: The client is a prisoner
     :response_type: boolean
@@ -382,6 +398,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_PROC_B_1WP4_99A:
+    :generate_block?: false
     :value: true
     :br100_meaning: Business Means is complete
     :response_type: boolean
@@ -407,6 +424,7 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_22WP3_155A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Financial Support'
     :response_type: currency
@@ -422,6 +440,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   LAR_RFLAG_B_37WP2_41A:
+    :generate_block?: false
     :value: true
     :br100_meaning: "**RISK** Financial Help: Reg 16(5), Third party means"
     :response_type: boolean
@@ -437,11 +456,13 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_31WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Shares- Interim value'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_34WP3_4A:
+    :generate_block?: false
     :value: 218.0
     :br100_meaning: 'RESULT: Disposable income- Total disposable income'
     :response_type: currency
@@ -468,6 +489,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_19WP2_101A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Main Dwelling- Total landlord/housing association
       equity'
@@ -479,11 +501,13 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_21WP3_162A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Other Income'
     :response_type: currency
     :user_defined: false
   GB_INFER_B_26WP3_214A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Restraint Order: The client & partner have income subject to
       a freezing order?'
@@ -525,11 +549,13 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_20WP2_104A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Add. Property'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_37WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Other capital- Interim value'
     :response_type: currency
@@ -545,6 +571,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_19WP2_102A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Main Dwelling- Total 3rd party equity (not ex-partner)'
     :response_type: currency
@@ -566,6 +593,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_34WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Cars- Interim value '
     :response_type: currency
@@ -581,6 +609,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_34WP3_6A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Childcare'
     :response_type: currency
@@ -612,6 +641,7 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_19WP2_103A:
+    :generate_block?: false
     :value: 97970.0
     :br100_meaning: 'Int.Result: Main Dwelling- Interim Equity (97% current market
       value)'
@@ -628,6 +658,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   CLIENT_NASS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The client is NASS
     :response_type: boolean
@@ -644,6 +675,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_24WP2_102A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Will'
     :response_type: currency
@@ -655,6 +687,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_373A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Child Tax Credit'
     :response_type: currency
@@ -670,6 +703,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_27WP3_218A:
+    :generate_block?: false
     :value: 2657.0
     :br100_meaning: 'RESULT: Gross Income- Amended Upper Limit'
     :response_type: currency
@@ -680,11 +714,13 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_28WP4_3A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Employment Expenses (business)'
     :response_type: currency
     :user_defined: false
   GB_INFER_C_28WP4_20A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'PAYE+NI: Interim amount for partner'
     :response_type: currency
@@ -701,6 +737,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_36WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Trust'
     :response_type: currency
@@ -711,6 +748,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_30WP4_2A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Business Deductions'
     :response_type: currency
@@ -721,16 +759,19 @@ global_means:
     :response_type: text
     :user_defined: true
   OUT_GB_INFER_C_31WP3_2A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'Int.Result: Mortgage- Total for assessment'
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_13WP3_15A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Housing Costs: The client/partner pays rent'
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_30WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Other savings'
     :response_type: currency
@@ -741,6 +782,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_29WP4_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Business Income'
     :response_type: currency
@@ -763,6 +805,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_372A:
+    :generate_block?: false
     :value: 208.0
     :br100_meaning: 'Int.Result: Client Child Benefit'
     :response_type: currency
@@ -773,6 +816,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_28WP4_2A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int Result: Client Company Income'
     :response_type: currency
@@ -788,6 +832,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_30WP4_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'PAYE+ NI: Client Business'
     :response_type: currency
@@ -813,6 +858,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_15WP3_143A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- Oversees child benefit'
     :response_type: currency
@@ -823,6 +869,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INFER_C_28WP4_10A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'PAYE+NI: Interim amount for client'
     :response_type: currency
@@ -834,21 +881,25 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_29WP3_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Dependants Allowance'
     :response_type: currency
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_375A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client CB-JSA'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_27WP3_216A:
+    :generate_block?: false
     :value: 2657.0
     :br100_meaning: 'RESULT: Gross Income- Upper Limit'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_24WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Will- Interim value'
     :response_type: currency
@@ -875,6 +926,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_31WP3_4A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'RESULT: Housing costs- Total'
     :response_type: currency
@@ -891,11 +943,13 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_13WP3_37A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Housing Costs:  The client/partner pays board and lodgings'
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_15WP3_134A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- Monthly PAYE'
     :response_type: currency
@@ -918,6 +972,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_374A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Working Tax Credit'
     :response_type: currency
@@ -938,6 +993,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_14WP4_3A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Self. Emp Capital'
     :response_type: currency
@@ -969,6 +1025,7 @@ global_means:
     :response_type: currency
     :user_defined: true
   OUT_GB_INFER_C_15WP3_133A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- Monthly gross pay'
     :response_type: currency
@@ -989,6 +1046,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_25WP2_108A:
+    :generate_block?: false
     :value: 1000.0
     :br100_meaning: 'RESULT: Client Val. Possessions'
     :response_type: currency
@@ -999,6 +1057,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_377A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client State Pension'
     :response_type: currency
@@ -1009,6 +1068,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_30WP3_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Maintenance Out'
     :response_type: currency
@@ -1066,6 +1126,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_33WP3_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Crim Legal Aid'
     :response_type: currency
@@ -1087,6 +1148,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_376A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Incapacity Benefit'
     :response_type: currency
@@ -1097,6 +1159,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_15WP3_135A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- Monthly NI'
     :response_type: currency
@@ -1123,11 +1186,13 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_19WP2_109A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Main Dwelling'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_17WP4_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Business Capital '
     :response_type: currency
@@ -1188,6 +1253,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INPUT_C_20WP3_379A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client CB-ESA'
     :response_type: currency
@@ -1198,6 +1264,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_16WP4_3A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Company Capital'
     :response_type: currency
@@ -1219,11 +1286,13 @@ global_means:
     :response_type: date
     :user_defined: true
   OUT_GB_INFER_C_32WP3_1A:
+    :generate_block?: false
     :value: 545.0
     :br100_meaning: 'RESULT: Client Housing Costs (adjusted if no dependents)'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_36WP2_102A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Trust- Interim value'
     :response_type: currency
@@ -1266,6 +1335,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_378A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Savings Credit'
     :response_type: currency
@@ -1277,6 +1347,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_24WP4_1A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Bus. Part. Income'
     :response_type: currency
@@ -1287,11 +1358,13 @@ global_means:
     :response_type: currency
     :user_defined: false
   OUT_GB_PROC_C_34WP3_12A:
+    :generate_block?: false
     :value: 733.0
     :br100_meaning: 'RESULT: Upper Disposable Limit'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_16WP4_4A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Company- Interim value'
     :response_type: currency
@@ -1302,6 +1375,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_30WP3_2A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Maintenance Out'
     :response_type: currency
@@ -1322,6 +1396,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_31WP3_1A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'Int.Result: Mortgage- Total paid'
     :response_type: currency
@@ -1332,6 +1407,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_30WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Other savings- Interim value'
     :response_type: currency
@@ -1347,6 +1423,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_19WP3_144A:
+    :generate_block?: false
     :value: 45.0
     :br100_meaning: 'RESULT: Employment Expenses (non business)'
     :response_type: currency
@@ -1374,21 +1451,25 @@ global_means:
     :response_type: text
     :user_defined: true
   OUT_GB_INFER_C_28WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Investments'
     :response_type: currency
     :user_defined: false
   RB_VERSION_DATE_MEANS:
+    :generate_block?: false
     :value: 20-02-2019
     :br100_meaning: Version Date
     :response_type: date
     :user_defined: false
   OUT_GB_INFER_C_26WP3_186A:
+    :generate_block?: false
     :value: 1208.0
     :br100_meaning: 'RESULT: Client Interim Gross Income'
     :response_type: currency
     :user_defined: false
   MEANS_REQD:
+    :generate_block?: false
     :value: true
     :br100_meaning: means required
     :response_type: boolean
@@ -1400,6 +1481,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_25WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Timeshare'
     :response_type: currency
@@ -1425,11 +1507,13 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_18WP3_407A:
+    :generate_block?: false
     :value: 45.0
     :br100_meaning: 'RESULT: Client Employment Expenses'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_40WP2_102A:
+    :generate_block?: false
     :value: 8000.0
     :br100_meaning: 'RESULT: Capital- Upper Limit'
     :response_type: currency
@@ -1447,6 +1531,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   MEANS_ROUTING:
+    :generate_block?: false
     :value: MANB
     :br100_meaning: means routing
     :response_type: text
@@ -1468,6 +1553,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_35WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Money due- Interim value '
     :response_type: currency
@@ -1478,6 +1564,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_40WP2_101A:
+    :generate_block?: false
     :value: 3000.0
     :br100_meaning: 'RESULT: Capital- Lower Limit'
     :response_type: currency
@@ -1494,6 +1581,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   BEN_AWARD_DATE:
+    :generate_block?: false
     :value: 01-04-2019
     :br100_meaning: Meaning not defined in BR100
     :response_type: date
@@ -1514,6 +1602,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_34WP3_32A:
+    :generate_block?: false
     :value: true
     :br100_meaning: Income eligibility note has been displayed
     :response_type: boolean
@@ -1524,6 +1613,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_25WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Timeshare- Interim value'
     :response_type: currency
@@ -1534,6 +1624,7 @@ global_means:
     :response_type: currency
     :user_defined: true
   OUT_GB_INFER_C_31WP3_6A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Rent- Total Housing Benefit received'
     :response_type: currency
@@ -1544,6 +1635,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_15WP3_140A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- Local overseas allowance'
     :response_type: currency
@@ -1559,6 +1651,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_23WP3_161A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Dividends'
     :response_type: currency
@@ -1580,21 +1673,25 @@ global_means:
     :response_type: number
     :user_defined: true
   OUT_GB_INFER_C_32WP2_102A:
+    :generate_block?: false
     :value: 1000.0
     :br100_meaning: 'Int.Result: Client Val. Possessions- Interim value'
     :response_type: currency
     :user_defined: false
   MEANS_REPORT_BACKLOG_TAG:
+    :generate_block?: false
     :value: MANB, Normal, Substantive DF Asses
     :br100_meaning: 'Report: The means report tag'
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_26WP3_182A:
+    :generate_block?: false
     :value: 1208.0
     :br100_meaning: 'RESULT: Client gross income- Net total'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_26WP3_194A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client gross income- Frozen total'
     :response_type: currency
@@ -1610,6 +1707,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_35WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Money due'
     :response_type: currency
@@ -1620,6 +1718,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_23WP3_160A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Interest on savings'
     :response_type: currency
@@ -1641,11 +1740,13 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INPUT_C_20WP3_371A:
+    :generate_block?: false
     :value: 208.0
     :br100_meaning: 'RESULT: Client Benefits'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_26WP3_197A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client gross income- Restraint order income'
     :response_type: currency
@@ -1677,11 +1778,13 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_15WP3_142A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- London allowance'
     :response_type: currency
     :user_defined: false
   RB_VERSION_NUMBER_MEANS:
+    :generate_block?: false
     :value: v2.27.12
     :br100_meaning: Version Number
     :response_type: text
@@ -1692,6 +1795,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_31WP3_9A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Rent- Total for assessment'
     :response_type: currency
@@ -1728,6 +1832,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_15WP3_141A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client HM Employment- Excess rent allowance'
     :response_type: currency
@@ -1738,6 +1843,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   MEANS_EVIDENCE_PROVIDED:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -1748,6 +1854,7 @@ global_means:
     :response_type: currency
     :user_defined: true
   OUT_GB_INFER_C_18WP3_219A:
+    :generate_block?: false
     :value: 1000.0
     :br100_meaning: 'RESULT: Client Gross Wage'
     :response_type: currency
@@ -1763,6 +1870,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   PROVIDER_CASE_REFERENCE:
+    :generate_block?: false
     :value: CCMS_Apply_Test_Case
     :br100_meaning: Provider Case Reference
     :response_type: text
@@ -1785,6 +1893,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_34WP3_9A:
+    :generate_block?: false
     :value: 1208.0
     :br100_meaning: 'RESULT: Total Gross Income Assessed'
     :response_type: currency
@@ -1806,11 +1915,13 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_21WP2_104A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Land'
     :response_type: currency
     :user_defined: false
   SA_SCREEN10_1WP1_NONMEANS:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -1827,16 +1938,19 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_26WP2_105A:
+    :generate_block?: false
     :value: 100.0
     :br100_meaning: 'Int.Result: Client Bank accounts- Interim value'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_33WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Policies- Interim value '
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_31WP3_14A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'Int.Result: Housing costs- Total due to be paid'
     :response_type: currency
@@ -1871,6 +1985,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_22WP3_150A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Maintenance'
     :response_type: currency
@@ -1886,11 +2001,13 @@ global_means:
     :response_type: number
     :user_defined: true
   SA_SCREEN3_17WP2_1CAPASSESS:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_38WP2_102A:
+    :generate_block?: false
     :value: 1100.0
     :br100_meaning: 'RESULT: Capital- Interim Combined Total'
     :response_type: currency
@@ -1901,6 +2018,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_23WP3_159A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Student Income'
     :response_type: currency
@@ -1928,6 +2046,7 @@ global_means:
     :response_type: date
     :user_defined: true
   GB_INPUT_B_13WP3_2A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Housing Costs: The client/partner pays mortgage'
     :response_type: boolean
@@ -1939,6 +2058,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_38WP2_103A:
+    :generate_block?: false
     :value: 1100.0
     :br100_meaning: 'RESULT: Capital- Total Capital Assessed'
     :response_type: currency
@@ -1949,6 +2069,7 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_23WP3_158A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Board Income'
     :response_type: currency
@@ -1959,6 +2080,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_27WP2_100A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client 3rd party accounts- Interim value'
     :response_type: currency
@@ -1969,6 +2091,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   OUT_GB_INFER_C_34WP3_408A:
+    :generate_block?: false
     :value: 400.0
     :br100_meaning: 'RESULT: Client PAYE+NI'
     :response_type: currency
@@ -1980,6 +2103,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_14WP4_19A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Bus. Part. Capital'
     :response_type: currency
@@ -1990,11 +2114,13 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_18WP3_227A:
+    :generate_block?: false
     :value: 100.0
     :br100_meaning: Client NI- Total contributions paid via all employment
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_38WP2_100A:
+    :generate_block?: false
     :value: 1100.0
     :br100_meaning: 'RESULT: Client Capital- Interim total'
     :response_type: currency
@@ -2006,6 +2132,7 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_GB_INFER_C_31WP3_11A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: B&L- Amount paid per month'
     :response_type: currency
@@ -2022,16 +2149,19 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_26WP3_219A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Gross Income- Total Frozen Income'
     :response_type: currency
     :user_defined: false
   OUT_GB_INFER_C_18WP3_226A:
+    :generate_block?: false
     :value: 300.0
     :br100_meaning: Client PAYE- Total contributions paid via all employment
     :response_type: currency
     :user_defined: false
   MEANS_EVIDENCE_REQD:
+    :generate_block?: false
     :value: true
     :br100_meaning: The provision of evidence is mandatory
     :response_type: boolean
@@ -2048,6 +2178,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_31WP3_10A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: B&L- Total'
     :response_type: currency
@@ -2058,6 +2189,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_26WP2_100A:
+    :generate_block?: false
     :value: 100.0
     :br100_meaning: 'RESULT: Client Bank accounts'
     :response_type: currency
@@ -2077,6 +2209,7 @@ global_means:
     :response_type: number
     :user_defined: true
   OUT_GB_INFER_C_33WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client Policies'
     :response_type: currency
@@ -2087,6 +2220,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   MEANS_OPA_RELEASE:
+    :generate_block?: false
     :value: 12.2
     :br100_meaning: 'OPA Version '
     :response_type: text
@@ -2107,6 +2241,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_27WP2_103A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Client 3rd party accounts'
     :response_type: currency
@@ -2127,6 +2262,7 @@ global_means:
     :response_type: text
     :user_defined: false
   OUT_INCOME_CONT:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'RESULT: Disposable income - Income contribution'
     :response_type: currency
@@ -2137,6 +2273,7 @@ global_means:
     :response_type: text
     :user_defined: true
   OUT_GB_INFER_C_31WP3_12A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: B&L- Amount paid per month for food etc'
     :response_type: currency
@@ -2152,28 +2289,33 @@ global_means:
     :response_type: boolean
     :user_defined: true
   OUT_GB_INFER_C_21WP2_101A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Int.Result: Client Land- Value of equity'
     :response_type: currency
     :user_defined: false
 global_merits:
   APP_INCLUDES_IMMIGRATION_PROCS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Includes Immigration Proceedings
     :response_type: boolean
     :user_defined: false
   PUB_AUTH_QUESTION_APPLIES:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Actions Against Public Authorities Question Is Appropriate
     :response_type: boolean
     :user_defined: false
   APP_POTENTIAL_NON_MERITS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is Potentially Non-Means Non-Merits Tested Special
       Children Act
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA6A:
+    :generate_block?: false
     :value: 'I understand:'
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 6'
     :response_type: text
@@ -2184,11 +2326,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   UPPER_TRIBUNAL_OTHER:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Upper Tribunal (Other Cases)
     :response_type: boolean
     :user_defined: false
   MERITS_SUBMISSION_PAGE:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2200,6 +2344,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   LEGAL_HELP_COSTS_TO_DATE:
+    :generate_block?: false
     :value: '0'
     :br100_meaning: The legal help costs to date
     :response_type: currency
@@ -2211,6 +2356,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MERITS_EVIDENCE_PROVIDED:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2237,6 +2383,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   FIRST_TIER_TRIBUNAL_IMM_ASY:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The First-Tier Tribunal (Immigration And Asylum Chamber)
     :response_type: boolean
@@ -2247,6 +2394,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DEC_CLIENT_TEXT_PARA15A:
+    :generate_block?: false
     :value: Date:___/___/___
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 15'
     :response_type: text
@@ -2257,11 +2405,13 @@ global_merits:
     :response_type: number
     :user_defined: true
   COMMUNITY_CARE:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Community Care
     :response_type: boolean
     :user_defined: false
   ROUTING_IMMIGRATION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is An Immigration Team Case
     :response_type: boolean
@@ -2273,6 +2423,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA7A:
+    :generate_block?: false
     :value: "- Legal aid is not always free."
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 7'
     :response_type: text
@@ -2294,16 +2445,19 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APP_SCA_NON_MERITS_TESTED:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is Special Children Act Non-Means Non-Merits Tested
     :response_type: boolean
     :user_defined: false
   APP_CARE_SUPERVISION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Relates To Care Or Supervision Proceedings
     :response_type: boolean
     :user_defined: false
   UPPER_TRIBUNAL_MENTAL_HEALTH:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Upper Tribunal (Mental Health)
     :response_type: boolean
@@ -2319,17 +2473,20 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DEC_CLIENT_TEXT_PARA02A:
+    :generate_block?: false
     :value: 'This declaration applies to all the information given in this application
       as summarised below, and to any evidence provided in support:'
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 02'
     :response_type: text
     :user_defined: false
   SPECIAL_CHILDREN_ACT_APP:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is In Relation To Special Children Act Proceedings
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA14A:
+    :generate_block?: false
     :value: 'Signed:  ______________________'
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 14'
     :response_type: text
@@ -2345,11 +2502,13 @@ global_merits:
     :response_type: text
     :user_defined: true
   DECLARATION_IS_CLIENTS:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Declaration Is The Client's
     :response_type: boolean
     :user_defined: false
   MAGISTRATES_COURT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Magistrates Court
     :response_type: boolean
@@ -2360,6 +2519,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   APP_INCLUDES_INQUEST_PROCS:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2375,6 +2535,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   RB_VERSION_NUMBER_MERITS:
+    :generate_block?: false
     :value: LAR v5.12.8
     :br100_meaning: The Version Of The Merits Rulebase
     :response_type: text
@@ -2385,6 +2546,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   FIRST_TIER_TRIBUNAL_CARE_STAND:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Care Standards Cases In The First-Tier Tribunal
     :response_type: boolean
@@ -2395,6 +2557,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   DEC_CLIENT_TEXT_PARA8A:
+    :generate_block?: false
     :value: "- The Legal Aid Agency may register an interest bearing charge against
       my property."
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 8'
@@ -2436,11 +2599,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APP_INC_CHILD_ABDUCTION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Includes Child Abduction Proceedings
     :response_type: boolean
     :user_defined: false
   LIMITATION_PERIOD_TO_EXPIRE:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Limitation Period Is About To Expire
     :response_type: boolean
@@ -2451,21 +2616,25 @@ global_merits:
     :response_type: text
     :user_defined: true
   CURRENT_CERT_SUBSTANTIVE:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'App: The Current Certificate Is Substantive'
     :response_type: boolean
     :user_defined: false
   SUBSTANTIVE_APP:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is A Substantive Application
     :response_type: boolean
     :user_defined: false
   ATTEND_URGENT_HEARING:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Client Has An Urgent Hearing To Attend
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA13A:
+    :generate_block?: false
     :value: I understand if false or inaccurate information is provided and fraud
       is identified, details will be passed to fraud prevention agencies to prevent
       fraud and money laundering. For further details explaining how the information
@@ -2475,11 +2644,13 @@ global_merits:
     :response_type: text
     :user_defined: false
   RB_VERSION_DATE_MERITS:
+    :generate_block?: false
     :value: 06-12-2018
     :br100_meaning: The Date Of The Merits Rulebase
     :response_type: date
     :user_defined: false
   ROUTING_COMPLEX_MERITS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is A Complex Family And Other Category Merits Team Case
     :response_type: boolean
@@ -2490,11 +2661,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CASE_OWNER_IMMIGRATION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Owner Is The Immigration Team
     :response_type: boolean
     :user_defined: false
   LEGALLY_LINKED_SCU:
+    :generate_block?: false
     :value: false
     :br100_meaning: Case Is Linked To Another Special Cases Unit Case
     :response_type: boolean
@@ -2505,12 +2678,14 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA9A:
+    :generate_block?: false
     :value: "- I may have to pay back all or part of my legal costs at the end of
       my case."
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 9'
     :response_type: text
     :user_defined: false
   MERITS_BACKLOG_REPORT_TAG:
+    :generate_block?: false
     :value: Standard Family Merits, Family, Substantive DF, Application, Non Urgent
     :br100_meaning: 'Report: The Merits Report Tag'
     :response_type: text
@@ -2537,6 +2712,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DEC_CLIENT_TEXT_PARA12A:
+    :generate_block?: false
     :value: I give my permission for the Legal Aid Agency to make any enquiries of
       third parties and I authorise those third parties to give any information necessary
       to deal with this.
@@ -2566,6 +2742,7 @@ global_merits:
     :response_type: currency
     :user_defined: true
   DECLARATION_IS_REPRESENTATIVES:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Declaration Is The Client's Representative
     :response_type: boolean
@@ -2576,11 +2753,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   POA_OR_BILL_FLAG:
+    :generate_block?: false
     :value: N/A
     :br100_meaning: poa or bill flag
     :response_type: text
     :user_defined: true
   ISSUE_URGENT_PROCEEDINGS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Has To Issue Urgent Proceedings
     :response_type: boolean
@@ -2617,6 +2796,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   MATTER_IS_SWPI:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'CostBen: CostBen: The Matter Is Of Significant Wider Public Interest'
     :response_type: boolean
@@ -2627,6 +2807,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   CHILD_CLIENT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is A Child
     :response_type: boolean
@@ -2647,6 +2828,7 @@ global_merits:
     :response_type: date
     :user_defined: true
   ROUTING_MENTAL_HEALTH:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is An Mental Health Team Case
     :response_type: boolean
@@ -2678,6 +2860,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DEC_CLIENT_TEXT_PARA11A:
+    :generate_block?: false
     :value: As far as I know, all the information I have given is true and I have
       not withheld any relevant information. I understand that if I knowingly give
       false information or withhold relevant information or fail to disclose any change
@@ -2687,11 +2870,13 @@ global_merits:
     :response_type: text
     :user_defined: false
   SMOD_APPLICABLE_TO_MATTER:
+    :generate_block?: false
     :value: false
     :br100_meaning: Smod Is Applicable To The Matter
     :response_type: boolean
     :user_defined: false
   _SYSTEM_PUI_CONTEXT:
+    :generate_block?: false
     :value: Unused
     :br100_meaning: Meaning not defined in BR100
     :response_type: text
@@ -2732,6 +2917,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MENTAL_HEALTH_REVIEW_TRIBUNAL:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Mental Health Review Tribunal
     :response_type: boolean
@@ -2748,21 +2934,25 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   LAR_SCOPE_FLAG:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'App: LAR Scope Flag'
     :response_type: boolean
     :user_defined: true
   LEGALLY_LINKED_VHCC:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is Linked To Another Very High Costs Cases Unit Case
     :response_type: boolean
     :user_defined: false
   ROUTING_VHCC:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is A VHCCU Case
     :response_type: boolean
     :user_defined: false
   RISK_SCA_PR:
+    :generate_block?: false
     :value: false
     :br100_meaning: "**RISK** SCA PR: No court order and no agreement – clarify nature
       of client PR"
@@ -2774,6 +2964,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA10A:
+    :generate_block?: false
     :value: "- The more work my solicitor does, the more I may have to pay back."
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 10'
     :response_type: text
@@ -2800,6 +2991,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   APP_IS_SCA_RELATED:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is In Relation To Special Children Act Or Related
       Proceedings
@@ -2811,6 +3003,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   SCA_APPEAL_INCLUDED:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2848,6 +3041,7 @@ global_merits:
     :response_type: number
     :user_defined: false
   MERITS_ROUTING_NAME:
+    :generate_block?: false
     :value: Standard Family Merits
     :br100_meaning: merits routing name
     :response_type: text
@@ -2858,6 +3052,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   IMMIGRATION_QUESTION_APP:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Immigration Question Is Appropriate
     :response_type: boolean
@@ -2868,11 +3063,13 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   HIGH_COURT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The High Court
     :response_type: boolean
     :user_defined: false
   FIRST_TIER_TRIBUNAL_TAXATION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Taxation Cases In The First-Tier Tribunal
     :response_type: boolean
@@ -2893,21 +3090,25 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   IMMIGRATION_CT_OF_APPEAL:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Immigration Issue Is Being Heard In The Court Of Appeal
     :response_type: boolean
     :user_defined: false
   CURRENT_CERT_EMERGENCY:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'App: The Current Certificate Is Emergency'
     :response_type: boolean
     :user_defined: false
   SPECIAL_IMM_APPEAL_COMMISSION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Special Immigration Appeals Commission
     :response_type: boolean
     :user_defined: false
   CASE_OWNER_MENTAL_HEALTH:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Owner Is The Mental Health Team
     :response_type: boolean
@@ -2918,6 +3119,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CASE_OWNER_VHCC:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Owner Is VHCCU
     :response_type: boolean
@@ -2935,6 +3137,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   CASE_OWNER_SCA:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2945,6 +3148,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   CLIENT_MARITAL_STATUS:
+    :generate_block?: false
     :value: Single
     :br100_meaning: 'Client: The Client''s Marital Status'
     :response_type: text
@@ -2966,6 +3170,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   MENTAL_HEAL_QUESTION_APPLIES:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Mental Health Question Is Appropriate
     :response_type: boolean
@@ -2976,16 +3181,19 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   PROSCRIBED_ORG_APPEAL_COMM:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Proscribed Organisations Appeals Commission
     :response_type: boolean
     :user_defined: false
   NEW_APPLICATION:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Application Is A New Application
     :response_type: boolean
     :user_defined: false
   FAM_CERT_PREDICTED_COSTS:
+    :generate_block?: false
     :value: 10300
     :br100_meaning: 'App: The Family Predicted Costs Under The Certificate'
     :response_type: currency
@@ -3006,6 +3214,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CLIENT_CIVIL_PARTNER_DISSOLVE:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client's Civil Partnership Is Dissolved
     :response_type: boolean
@@ -3016,6 +3225,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CRIME:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Crime
     :response_type: boolean
@@ -3036,16 +3246,19 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   COURT_OF_APPEAL:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Court Of Appeal
     :response_type: boolean
     :user_defined: false
   CASE_OWNER_SCU:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Owner Is SCU
     :response_type: boolean
     :user_defined: false
   CASE_OWNER_COMPLEX_MERITS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Owner Is The Complex Family And Other Category Merits
       Team
@@ -3068,6 +3281,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   COUNTY_COURT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The County Court
     :response_type: boolean
@@ -3078,6 +3292,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   ROUTING_STD_FAMILY_MERITS:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Case Is A Standard Family Merits Team Case
     :response_type: boolean
@@ -3104,6 +3319,7 @@ global_merits:
     :response_type: currency
     :user_defined: false
   APP_DIV_JUDSEP_DISSOLUTION_CP:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is In Relation To Divorce, Judicial Separation,
       Or Dissolution
@@ -3115,11 +3331,13 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   APPLICATION_CAN_BE_SUBMITTED:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Application Can Be Submitted
     :response_type: boolean
     :user_defined: false
   _SYSTEM_PUI_URL:
+    :generate_block?: false
     :value: Unused
     :br100_meaning: Meaning not defined in BR100
     :response_type: text
@@ -3136,6 +3354,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   PROCS_INCLUDE_CHILD:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Proceedings Include A Child As Another Party
     :response_type: boolean
@@ -3146,6 +3365,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   URGENT_APPLICATION_TAG:
+    :generate_block?: false
     :value: Non Urgent
     :br100_meaning: 'Report: The Merits Report Urgent Tag'
     :response_type: text
@@ -3167,6 +3387,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   LEGALLY_LINKED_SIU:
+    :generate_block?: false
     :value: false
     :br100_meaning: Case Is Linked To Another Special Investigations Unit Case
     :response_type: boolean
@@ -3177,11 +3398,13 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   REQUESTED_COST_LIMIT_OVER_25K:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Case: The Requested Cost Limitation Exceeds £25,000'
     :response_type: boolean
     :user_defined: false
   CERTIFICATE_PREDICTED_COSTS:
+    :generate_block?: false
     :value: 10300
     :br100_meaning: The estimated costs for work under certificate
     :response_type: currency
@@ -3192,6 +3415,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CLIENT_SINGLE:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Client Is Single
     :response_type: boolean
@@ -3207,11 +3431,13 @@ global_merits:
     :response_type: number
     :user_defined: true
   SUPREME_COURT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Supreme Court
     :response_type: boolean
     :user_defined: false
   MERITS_EVIDENCE_REQD:
+    :generate_block?: false
     :value: true
     :br100_meaning: provision of evidence is mandatory
     :response_type: boolean
@@ -3232,11 +3458,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   EDUCATION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Education
     :response_type: boolean
     :user_defined: false
   APP_INCLUDES_SCA_PROCS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Includes Special Children Act Proceedings
     :response_type: boolean
@@ -3263,6 +3491,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   CLIENT_COHABITING:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is Cohabiting
     :response_type: boolean
@@ -3279,6 +3508,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEC_AGAINST_INSTRUCTIONS:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Evi: Provider is going to upload evidence supporting Dec Against
       Instructions'
@@ -3290,11 +3520,13 @@ global_merits:
     :response_type: date
     :user_defined: true
   DECLARATION_CLIENT_TEXT:
+    :generate_block?: false
     :value: 1.   a) Client?s Merits Declaration
     :br100_meaning: 'Dec: The Client''s Declaration '
     :response_type: text
     :user_defined: false
   DP_WITH_JUDICIAL_REVIEW:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Emg: The Provider Has Delegated Functions For Judicial Review'
     :response_type: boolean
@@ -3305,6 +3537,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   EMERGENCY_DEC_SIGNED:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3326,11 +3559,13 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   PROVIDER_HAS_DP:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Emg: The Provider Has Delegated Functions'
     :response_type: boolean
     :user_defined: false
   PUBLIC_LAW_NON_FAMILY:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Public Law (Non-Family)
     :response_type: boolean
@@ -3362,6 +3597,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   UPPER_TRIBUNAL_IMM_ASY:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Upper Tribunal (Immigration And Asylum Chamber)
     :response_type: boolean
@@ -3378,6 +3614,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CLIENT_WIDOWED:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is Widowed
     :response_type: boolean
@@ -3388,21 +3625,25 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   MERITS_OPA_RELEASE:
+    :generate_block?: false
     :value: '12.2'
     :br100_meaning: Merits Version Number
     :response_type: text
     :user_defined: false
   IMMIGRATION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Immigration
     :response_type: boolean
     :user_defined: false
   APP_INCLUDES_RELATED_PROCS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Includes Related Proceedings
     :response_type: boolean
     :user_defined: false
   CLIENT_MARRIED:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is Married
     :response_type: boolean
@@ -3414,6 +3655,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   PROPORTIONALITY_QUESTION_APP:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Proportionality Question Is Appropriate
     :response_type: boolean
@@ -3424,11 +3666,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA2A:
+    :generate_block?: false
     :value: 'My solicitors have given me to keep:'
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 2'
     :response_type: text
     :user_defined: false
   SA_INTRODUCTION:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3439,11 +3683,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ROUTING_SCU:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is An SCU Case
     :response_type: boolean
     :user_defined: false
   URGENT_DIRECTIONS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Has To Comply With Urgent Directions
     :response_type: boolean
@@ -3464,12 +3710,14 @@ global_merits:
     :response_type: text
     :user_defined: false
   APP_RELATES_EPO_EXTENDEPO_SAO:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Relates To Epo, Extend Epo Or Secure Accommodation
       Proceedings
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA3A:
+    :generate_block?: false
     :value: "* The Legal Aid Agency?s leaflet about Legal Aid (?Paying for your Legal
       Aid? leaflet available at https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters)"
     :br100_meaning: 'Dec: The Client''s Declaration Paragraph 3'
@@ -3481,6 +3729,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   EMPLOYMENT_APPEAL_TRIBUNAL:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Employment Appeal Tribunal
     :response_type: boolean
@@ -3491,6 +3740,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   PRE_CERT_COSTS:
+    :generate_block?: false
     :value: '0'
     :br100_meaning: The pre-cert costs
     :response_type: currency
@@ -3506,6 +3756,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   EMERGENCY_DPS_APP_AMD:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'App: The Application Is An Emergency/Delegated Functions Application'
     :response_type: boolean
@@ -3516,16 +3767,19 @@ global_merits:
     :response_type: text
     :user_defined: true
   MENTAL_HEALTH:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Mental Health
     :response_type: boolean
     :user_defined: false
   URGENT_APPLICATION:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Is Urgent
     :response_type: boolean
     :user_defined: false
   APP_INC_SECURE_ACCOM:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Application Includes Secure Accommodation Order Proceedings
     :response_type: boolean
@@ -3542,11 +3796,13 @@ global_merits:
     :response_type: date
     :user_defined: true
   HOUSING:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Housing
     :response_type: boolean
     :user_defined: false
   MERITS_CERT_PREDICTED_COSTS:
+    :generate_block?: false
     :value: 10300
     :br100_meaning: 'App: The predicted costs of certificated work'
     :response_type: currency
@@ -3568,31 +3824,37 @@ global_merits:
     :response_type: date
     :user_defined: true
   CROWN_COURT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Court Is The Crown Court
     :response_type: boolean
     :user_defined: false
   SCA_AUTO_GRANT:
+    :generate_block?: false
     :value: false
     :br100_meaning: the special children act application can be auto granted
     :response_type: boolean
     :user_defined: false
   CLIENT_DIVORCED:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is Divorced
     :response_type: boolean
     :user_defined: false
   CLIENT_JUDICIALLY_SEPARATED:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is Judicially Separated
     :response_type: boolean
     :user_defined: false
   PREP_OF_STATEMENT_PAPERS:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Preparation Of A Statement Or Papers Is Required
     :response_type: boolean
     :user_defined: false
   DEC_CLIENT_TEXT_PARA5A:
+    :generate_block?: false
     :value: My solicitors have explained the LAA Statutory Charge to me. In particular,
       my solicitors have advised that if I recover or preserve any property or asset,
       the Statutory Charge may arise, which could be payable immediately or postponed
@@ -3602,11 +3864,13 @@ global_merits:
     :response_type: text
     :user_defined: false
   CLINICAL_NEGLIGENCE:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Case Is In Relation To Clinical Negligence
     :response_type: boolean
     :user_defined: false
   MARITIAL_STATUS:
+    :generate_block?: false
     :value: S
     :br100_meaning: marital status
     :response_type: text
@@ -3618,11 +3882,13 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   APP_INC_CHILDREN_PROCS:
+    :generate_block?: false
     :value: true
     :br100_meaning: The Application Includes Children Proceedings
     :response_type: boolean
     :user_defined: false
   CLIENT_CIVIL_PARTNER:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Client Is In A Civil Partnership
     :response_type: boolean
@@ -3633,6 +3899,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MEDIATION_APPLICABLE:
+    :generate_block?: false
     :value: true
     :br100_meaning: Mediation Is Applicable
     :response_type: boolean
@@ -3675,111 +3942,132 @@ other_party:
     :user_defined: true
 opponent:
   RELATIONSHIP_CIVIL_PARTNER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_civil_partner?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Civil Partner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_INTERVENOR:
+    :generate_block?: false
     :value: "#opponent_relationship_case_intervenor?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Intervener
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_TENANT:
+    :generate_block?: false
     :value: "#opponent_relationship_client_tenant?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Tenant
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_MEDICAL_PRO:
+    :generate_block?: false
     :value: "#opponent_relationship_client_medical_professional?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Medical
       Professional
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_OPPONENT:
+    :generate_block?: false
     :value: "#opponent_relationship_case_opponent?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Opponent
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EMPLOYER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_employer?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Employer
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_NONE:
+    :generate_block?: false
     :value: "#opponent_relationship_client_none?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is None
     :response_type: boolean
     :user_defined: false
-  OTHER_PARTY_PERSON:
+  OTHER_PARTY_PERSON: # failing test coverage issue
+    :generate_block?: false
     :value: "#opponent_person?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   PARTY_IS_A_CHILD:
+    :generate_block?: false
     :value: "#opponent_child?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
-  OTHER_PARTY_ORG:
+  OTHER_PARTY_ORG:  # failing test coverage issue
+    :generate_block?: false
     :value: "#opponent_organisation?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
-  RELATIONSHIP_STEP_PARENT:
+  RELATIONSHIP_STEP_PARENT: # failing test coverage issue
+    :generate_block?: false
     :value: "#opponent_relationship_client_step_parent?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Step Parent
     :response_type: boolean
     :user_defined: false
-  RELATIONSHIP_CASE_GAL:
+  RELATIONSHIP_CASE_GAL: # failing test coverage issue
+    :generate_block?: false
     :value: "#opponent_relationship_case_guardian?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Guardian
       Ad Litem
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EX_HUSBAND_WIFE:
+    :generate_block?: false
     :value: "#opponent_relationship_client_ex_husband_wife?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Husband/Wife
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_LEGAL_GUARDIAN:
+    :generate_block?: false
     :value: "#opponent_relationship_client_legal_guardian?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Legal Guardian
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_SOL_BARRISTER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_solicitor_barrister?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Solicitor
       Or Barrister
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EX_CIVIL_PARTNER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_ex_civil_partner?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Civil
       Partner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_LOCAL_AUTHORITY:
+    :generate_block?: false
     :value: "#opponent_relationship_client_local_authority?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Local Authority
     :response_type: boolean
     :user_defined: false
   OPP_RELATIONSHIP_TO_CASE:
+    :generate_block?: false
     :value: "#opponent_opp_relationship_to_case"
     :br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Case'
     :response_type: text
     :user_defined: false
   RELATIONSHIP_PARENT:
+    :generate_block?: false
     :value: "#opponent_relationship_client_parent?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Parent
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_OTHER_FAM_MEMBER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_other_family_member?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Other Family
       Member
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_BENEFICIARY:
+    :generate_block?: false
     :value: "#opponent_relationship_case_beneficiary?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Beneficiary
     :response_type: boolean
@@ -3790,6 +4078,7 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_GRANDPARENT:
+    :generate_block?: false
     :value: "#opponent_relationship_client_grandparent?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Grandparent
     :response_type: boolean
@@ -3800,11 +4089,13 @@ opponent:
     :response_type: date
     :user_defined: true
   RELATIONSHIP_LANDLORD:
+    :generate_block?: false
     :value: "#opponent_relationship_client_landlord?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CHILD:
+    :generate_block?: false
     :value: "#opponent_child?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Child
     :response_type: boolean
@@ -3815,16 +4106,19 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_CUSTOMER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_customer?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Customer
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME_MERITS:
+    :generate_block?: false
     :value: "#opponent_full_name"
     :br100_meaning: 'OthPart: Other Party Name'
     :response_type: text
     :user_defined: false
   RELATIONSHIP_CASE_INT_PARTY:
+    :generate_block?: false
     :value: "#opponent_relationship_case_interested_party?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Interested
       Party
@@ -3836,22 +4130,26 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_PROPERTY_OWNER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_property_owner?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Property
       Owner
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_SUPPLIER:
+    :generate_block?: false
     :value: "#opponent_relationship_client_supplier?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Supplier
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_EMPLOYEE:
+    :generate_block?: false
     :value: "#opponent_relationship_client_employee?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Employee
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_CASE_CHILD:
+    :generate_block?: false
     :value: "#opponent_relationship_case_child?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Child
     :response_type: boolean
@@ -3862,6 +4160,7 @@ opponent:
     :response_type: date
     :user_defined: false
   RELATIONSHIP_CASE_AGENT:
+    :generate_block?: false
     :value: "#opponent_relationship_case_agent?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Agent
     :response_type: boolean
@@ -3872,6 +4171,7 @@ opponent:
     :response_type: text
     :user_defined: true
   OPP_RELATIONSHIP_TO_CLIENT:
+    :generate_block?: false
     :value: "#opponent_opp_relationship_to_client"
     :br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Client'
     :response_type: text
@@ -3882,6 +4182,7 @@ opponent:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_HUSBAND_WIFE:
+    :generate_block?: false
     :value: "#opponent_relationship_client_husband_wife?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Husband/Wife
     :response_type: boolean
@@ -3914,6 +4215,7 @@ proceeding:
     :response_type: boolean
     :user_defined: true
   PROC_UPPER_TRIBUNAL:
+    :generate_block?: false
     :value: 'No'
     :br100_meaning: Meaning not defined in BR100
     :response_type: text
@@ -3969,6 +4271,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   FAM_PROSP_VERY_POOR:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Very Poor
@@ -3986,12 +4289,14 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   FAM_PROSP_UNCERTAIN:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Uncertain
     :response_type: boolean
     :user_defined: false
   EXPERT_COST_FAMILY:
+    :generate_block?: false
     :value: 0
     :br100_meaning: 'Fam: The Expert Costs To Completion Of The Family Proceeding'
     :response_type: currency
@@ -4010,17 +4315,18 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_POOR:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Poor
     :response_type: boolean
     :user_defined: false
   CLIENT_INV_TYPE_CHILD:
+    :generate_block?: false
     :value: "#proceeding_client_inv_type_child"
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Child Subject
     :response_type: boolean
     :user_defined: false
-    :generate_block?: false
   CLIENT_INV_TYPE_PERSONAL_REP:
     :value: "#proceeding_client_inv_type_personal_rep"
     :br100_meaning: The Client's Involvement In The Proceeding Is As A Personal Rep
@@ -4051,6 +4357,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_MARGINAL:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Prospects of Success In The Proceeding For The Family Matter
       Are Marginal
@@ -4069,6 +4376,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   APPEAL_IN_SUPREME_COURT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Proceeding Relates To An Appeal Or Proposed Appeal In The
       Supreme Court
@@ -4186,6 +4494,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   FAM_PROSP_VERY_GOOD:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -4203,11 +4512,11 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   LEAD_PROCEEDING_MERITS:
+    :generate_block?: false
     :value: "#proceeding_lead_proceeding_merits?"
     :br100_meaning: 'Proc: Lead Proceeding'
     :response_type: boolean
     :user_defined: false
-    :generate_block?: false
   CLIENT_INV_TYPE_OTHER:
     :value: "#proceeding_client_inv_type_other"
     :br100_meaning: The Client's Involvement In The Proceeding Is Other
@@ -4221,6 +4530,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROC_MEANING:
+    :generate_block?: false
     :value: "#proceeding_meaning"
     :br100_meaning: 'Proc: The Proceeding Meaning'
     :response_type: text
@@ -4273,11 +4583,11 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   IMMIGRATION_QUESTION_APPLIES:
+    :generate_block?: false
     :value: "#proceeding_immigration_question_applies"
     :br100_meaning: The Immigration Question Is Applicable To The Proceeding
     :response_type: text
     :user_defined: false
-    :generate_block?: false
   BAIL_CONDITIONS_SET:
     :generate_block?: true
     :value: "#respondent_bail_conditions_set?"
@@ -4290,16 +4600,17 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_GOOD:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
   DISBURSEMENT_COST_FAMILY:
+    :generate_block?: false
     :value: "#proceeding_disbursement_cost_family"
     :br100_meaning: 'Fam: The Disbursements Cost To Completion Of The Family Proceeding'
     :response_type: currency
     :user_defined: true
-    :generate_block?: false
   PROC_RELATED_SCA_OR_RELATED:
     :generate_block?: false
     :value: "#proceeding_proc_related_sca_or_related"
@@ -4309,6 +4620,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_DESCRIPTION:
+    :generate_block?: false
     :value: "#proceeding_description"
     :br100_meaning: 'Proc: The Proceeding Description'
     :response_type: text
@@ -4320,6 +4632,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: false
   FAM_PROSP_BORDER_UNCERT_POOR:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Prospects Of Success In The Proceeding For The Family Matter
       Are Borderline
@@ -4332,6 +4645,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   FAM_PROSP_50_OR_BETTER:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -4403,6 +4717,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: true
   PROC_MATTER_TYPE_DESC:
+    :generate_block?: false
     :value: "#proceeding_ccms_matter"
     :br100_meaning: 'Proc: The Proceeding Matter Type Description'
     :response_type: text
@@ -4444,6 +4759,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   PRIVATE_FUNDING_CONSIDERED:
+    :generate_block?: false
     :value: No
     :br100_meaning: Private Funding Of The Proceeding Is To Be Considered
     :response_type: text
@@ -4461,6 +4777,7 @@ proceeding_merits:
     :user_defined: true
     :generate_block?: false
   PROC_MATTER_TYPE_MEANING:
+    :generate_block?: false
     :value: "#proceeding_meaning"
     :br100_meaning: 'Proc: The Proceeding Matter Type Meaning'
     :response_type: text
@@ -4485,6 +4802,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   FAM_PROSP_BORDERLINE_UNCERT:
+    :generate_block?: false
     :value: false
     :br100_meaning: The Prospects Of Success For The Family Matter Are Borderline
       Or Uncertain
@@ -4581,6 +4899,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_LEVEL_OF_SERVICE:
+    :generate_block?: false
     :value: 3
     :br100_meaning: 'Proc: The Proceeding Form Of Service'
     :response_type: text
