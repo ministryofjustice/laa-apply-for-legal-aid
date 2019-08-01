@@ -248,15 +248,6 @@ ActiveRecord::Schema.define(version: 2019_07_29_100602) do
     t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
   end
 
-  create_table "legal_aid_application_restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id"
-    t.uuid "restriction_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["legal_aid_application_id"], name: "laa_id_laa_restriction_id"
-    t.index ["restriction_id"], name: "index_legal_aid_application_restrictions_on_restriction_id"
-  end
-
   create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "transaction_type_id"
@@ -297,6 +288,8 @@ ActiveRecord::Schema.define(version: 2019_07_29_100602) do
     t.boolean "substantive_application"
     t.boolean "has_dependants"
     t.uuid "office_id"
+    t.boolean "has_restrictions"
+    t.string "restrictions_details"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
@@ -453,12 +446,6 @@ ActiveRecord::Schema.define(version: 2019_07_29_100602) do
     t.index ["legal_aid_application_id"], name: "index_respondents_on_legal_aid_application_id"
   end
 
-  create_table "restrictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "isa"
@@ -545,8 +532,6 @@ ActiveRecord::Schema.define(version: 2019_07_29_100602) do
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications"
   add_foreign_key "dependants", "legal_aid_applications"
-  add_foreign_key "legal_aid_application_restrictions", "legal_aid_applications"
-  add_foreign_key "legal_aid_application_restrictions", "restrictions"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"

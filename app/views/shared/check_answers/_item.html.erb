@@ -1,6 +1,9 @@
-<% read_only = local_assigns[:read_only] ? read_only : false %>
+<%
+read_only = local_assigns[:read_only] ? read_only : false
+no_border = no_border ? '--no-border' : ''
+%>
 
-<div class="govuk-summary-list__row normal-word-break" id="app-check-your-answers__<%= name %>">
+<div class="govuk-summary-list__row<%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
   <div class="govuk-summary-list__key govuk-!-width-one-half">
     <%= question %>
   </div>

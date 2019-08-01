@@ -13,7 +13,6 @@ RSpec.describe 'check passported answers requests', type: :request do
              vehicle: vehicle,
              own_vehicle: own_vehicle
     end
-    let!(:restriction) { create :restriction, legal_aid_applications: [application] }
 
     subject { get "/providers/applications/#{application.id}/check_passported_answers" }
 
@@ -79,10 +78,9 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant does not have any capital restrictions' do
-        let(:application) { create :legal_aid_application, :with_everything, :client_details_answers_checked }
-        let!(:restriction) { nil }
+        let(:application) { create :legal_aid_application, :with_everything, :client_details_answers_checked, has_restrictions: false }
         it 'displays that no capital restrictions have been declared' do
-          expect(response.body).to include(I18n.t('.generic.none_declared'))
+          expect(response.body).to include(I18n.t('.generic.no'))
         end
       end
 

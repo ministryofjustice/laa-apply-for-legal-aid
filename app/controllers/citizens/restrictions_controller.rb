@@ -1,21 +1,26 @@
 module Citizens
   class RestrictionsController < BaseController
     include ApplicationFromSession
-    before_action :authenticate_applicant!
 
-    def index
-      legal_aid_application
+    def show
+      @form = LegalAidApplications::RestrictionsForm.new(model: legal_aid_application)
     end
 
-    def create
-      legal_aid_application.update!(legal_aid_application_params)
-      go_forward
+    def update
+      @form = LegalAidApplications::RestrictionsForm.new(form_params)
+      return go_forward if @form.save
+
+      render :show
     end
 
     private
 
-    def legal_aid_application_params
-      params.require(:legal_aid_application).permit(restriction_ids: [])
+    def form_params
+      merge_with_model(legal_aid_application, mode: :citizen) do
+        return {} unless params[:legal_aid_application]
+
+        params.require(:legal_aid_application).permit(:has_restrictions, :restrictions_details)
+      end
     end
   end
 end

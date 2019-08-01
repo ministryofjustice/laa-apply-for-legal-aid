@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     end
     resource :savings_and_investment, only: %i[show update]
     resource :shared_ownership, only: %i[show update]
-    resources :restrictions, only: %i[index create] # as multiple restrictions
+    resource :restrictions, only: %i[show update]
     resource :other_assets, only: %i[show update]
     resources :check_answers, only: [:index] do
       patch :reset, on: :collection
@@ -119,7 +119,7 @@ Rails.application.routes.draw do
         post :reset, on: :collection
         patch :continue, on: :collection
       end
-      resources :restrictions, only: %i[index create] # as multiple restrictions
+      resource :restrictions, only: %i[show update]
       resource :about_the_financial_assessment, only: %i[show update]
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show

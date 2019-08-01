@@ -3,14 +3,15 @@ module CheckAnswersHelper
   #     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   #       <%= check_answer_link ..... %>
   #     </dl>
-  def check_answer_link(url:, question:, answer:, name:, read_only: false)
+  def check_answer_link(url:, question:, answer:, name:, read_only: false, no_border: false)
     render(
       'shared/check_answers/item',
       name: name,
       url: url,
       question: question,
       answer: answer,
-      read_only: read_only
+      read_only: read_only,
+      no_border: no_border
     )
   end
 
@@ -49,17 +50,6 @@ module CheckAnswersHelper
       name: name,
       url: url,
       question: question
-    )
-  end
-
-  # Creates both the outer `dl` and the inner list items
-  def check_answer_no_link_list(url:, question:, answers:, name:)
-    render(
-      'shared/check_answers/no_link_items',
-      name: name,
-      url: url,
-      question: question,
-      answers: answers
     )
   end
 end

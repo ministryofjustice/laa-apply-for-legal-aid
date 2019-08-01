@@ -12,12 +12,16 @@ en:
         own_home: Property owned
         percentage_home: Percentage owned
         property_value: Property value
-        restrictions: Do any restrictions apply?
         savings_and_investments: Savings and investments
         shared_ownership: Owned with anyone else
       submit:
         heading: Submit your details
         text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+    check_answers_restrictions:
+        citizens: 
+          question: Restrictions on your assets
+        providers: 
+          question: "Restrictions on your client's assets"
     check_answers_vehicles:
       citizens:
         heading: Vehicles

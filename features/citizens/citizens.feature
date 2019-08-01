@@ -69,9 +69,9 @@ Feature: Citizen journey
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do any of the following restrictions apply to your property or other assets?"
-    Then I select "Bankruptcy"
-    Then I select "Held overseas"
+    Then I should be on a page showing "Are there any legal restrictions that prevent you from selling or borrowing against your assets?"
+    Then I choose 'Yes'
+    Then I fill "Restrictions details" with "Yes, there are restrictions. They include..."
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click "Save and continue"
@@ -95,11 +95,15 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I should be on a page showing 'What % share of your home do you legally own?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
+    Then I choose 'Yes'
+    Then I fill "Restrictions details" with "Yes, there are restrictions. They include..."
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£500,000.00'
+    And the answer for 'Restrictions' should be 'Yes'
+    And the answer for 'Restrictions' should be 'Yes, there are restrictions. They include...'
 
   @javascript
   Scenario: I want to remove property details via the check your answers page
@@ -127,7 +131,7 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I should be on a page showing 'What % share of your home do you legally own?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
@@ -139,7 +143,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'What types of savings or investments do you have?'
     Then I fill 'Cash' with '1000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Cash savings'
@@ -154,7 +158,7 @@ Feature: Citizen journey
     Then I select 'Money in accounts you do not access with online banking'
     Then I fill 'Isa' with '5000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Money in accounts you do not access with online banking'
@@ -168,7 +172,7 @@ Feature: Citizen journey
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'What types of savings or investments do you have?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Savings and investments' should be 'Cash savings'
@@ -182,7 +186,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Which types of assets do you have?'
     Then I fill 'Land value' with '1234.56'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Land'
@@ -197,7 +201,7 @@ Feature: Citizen journey
     Then I select 'Timeshare property'
     Then I fill 'Timeshare property value' with '10000'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'Other assets' should be 'Timeshare property'
@@ -210,43 +214,29 @@ Feature: Citizen journey
     And I click Check Your Answers Change link for 'Other assets'
     Then I should be on a page showing 'Which types of assets do you have?'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript
   Scenario: I want to add restrictions via the check your answers page
     Given I have completed an application
-    And the application has the restriction 'bankruptcy'
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
-    Then I select 'Restraint or freezing order'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
+    Then I choose 'Yes'
+    Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Restrictions' should be 'Restraint or freezing order'
-
-  @javascript
-  Scenario: I want to remove capital restrictions via the check your answers page
-    Given I have completed an application
-    And the application has the restriction 'bankruptcy'
-    And the application has the restriction 'held_overseas'
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
-    Then I deselect 'Bankruptcy'
-    Then I deselect 'Held overseas'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Restrictions' should be 'None declared'
+    And the answer for 'Restrictions' should be 'Yes'
+    And the answer for 'Restrictions' should be 'Yes, there are restrictions. They include...'
 
   @javascript
   Scenario: I return to the check your answers page without changing capital restrictions
     Given I have completed an application
-    And the application has the restriction 'held_overseas'
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Do any of the following restrictions apply to your property or other assets?'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 

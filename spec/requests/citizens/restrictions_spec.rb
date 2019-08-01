@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen restrictions request', type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:secure_id) { legal_aid_application.generate_secure_id }
-  let!(:restrictions) { create_list :restriction, 3 }
+  let(:application) { create :legal_aid_application, :with_applicant }
+  let(:secure_id) { application.generate_secure_id }
+
   before do
     get citizens_legal_aid_application_path(secure_id)
   end
@@ -14,54 +14,64 @@ RSpec.describe 'citizen restrictions request', type: :request do
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
     end
+  end
 
-    it 'displays the restriction name labels' do
-      restrictions.map(&:label_name).each do |label|
-        expect(unescaped_response_body).to include(label)
+  describe 'PATCH /citizens/restrictions' do
+    let(:params) do
+      {
+        legal_aid_application: {
+          has_restrictions: has_restrictions,
+          restrictions_details: restrictions_details
+        }
+      }
+    end
+    let(:restrictions_details) { Faker::Lorem.paragraph }
+    let(:has_restrictions) { 'true' }
+    let(:submit_button) do
+      {
+        continue_button: 'Continue'
+      }
+    end
+
+    subject { patch citizens_restrictions_path, params: params.merge(submit_button) }
+
+    before { subject }
+
+    it 'updates legal aid application restriction information' do
+      expect(application.reload.has_restrictions).to eq true
+      expect(application.reload.restrictions_details).to_not be_empty
+    end
+
+    it 'redirects to citizens check answers' do
+      expect(response).to redirect_to(citizens_check_answers_path)
+    end
+
+    context 'invalid params' do
+      let(:restrictions_details) { '' }
+
+      it 'displays error' do
+        expect(response.body).to include(translation_for(:restrictions_details, 'blank'))
+      end
+
+      context 'no params' do
+        let(:has_restrictions) { '' }
+
+        it 'displays error' do
+          expect(response.body).to include(translation_for(:has_restrictions, 'blank'))
+        end
+      end
+    end
+
+    context 'checking answers' do
+      let(:application) { create :legal_aid_application, :with_applicant, state: :checking_citizen_answers }
+
+      it 'redirects to checking answers' do
+        expect(response).to redirect_to(citizens_check_answers_path)
       end
     end
   end
 
-  describe 'POST /citizens/restrictions' do
-    let(:restriction_ids) { restrictions.pluck(:id) }
-    let(:params) do
-      {
-        continue_button: 'Continue',
-        legal_aid_application: {
-          restriction_ids: restriction_ids
-        }
-      }
-    end
-    subject { post citizens_restrictions_path, params: params }
-
-    it 'creates a mapping for each restriction' do
-      expect { subject }.to change { LegalAidApplicationRestriction.count }.by(restrictions.count)
-    end
-
-    context 'after success' do
-      before do
-        subject
-        legal_aid_application.reload
-      end
-
-      it 'updates the legal_aid_application.restrictions' do
-        expect(legal_aid_application.restrictions).to match_array(restrictions)
-      end
-
-      it 'redirects to check answers page' do
-        expect(response).to redirect_to(citizens_check_answers_path)
-      end
-    end
-
-    context 'on error' do
-      let(:restriction_ids) { %i[foo bar] }
-
-      # As I can not think of a "normal" behaviour that can cause an error.
-      # Error handling falls back to standard error handling.
-      it 'displays error' do
-        subject
-        expect(response).to redirect_to(error_path(:page_not_found))
-      end
-    end
+  def translation_for(attr, error)
+    I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attr}.citizen.#{error}")
   end
 end
