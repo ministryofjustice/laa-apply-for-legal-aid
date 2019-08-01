@@ -76,7 +76,7 @@
         name: :proceeding_type,
         url: providers_legal_aid_application_proceedings_types_path(anchor: 'proceeding-search-input'.freeze),
         question: t('.section_proceeding.proceeding'),
-        answer: @proceeding_types.first.meaning,
+        answer: @lead_proceeding_type.meaning,
         read_only: @read_only
       ) %>
 
@@ -97,20 +97,25 @@
       )  if @legal_aid_application.used_delegated_functions? %>
 
     <div class="govuk-summary-list__row normal-word-break">
-      <dt class="govuk-summary-list__key govuk-!-width-one-half">
-        <%= t '.section_proceeding.costs' %>
-      </dt>
-      <dd class="govuk-summary-list__value">
-        <%= t '.section_proceeding.costs_answer' %>
-      </dd>
-      <dd class="govuk-summary-list__actions"></dd>
-    </div>
+        <dt class="govuk-summary-list__key govuk-!-width-one-half">
+          <%= t '.section_proceeding.costs' %>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <%= number_to_currency(@legal_aid_application.default_cost_limitation,  precision: 0) %>
+        </dd>
+        <dd class="govuk-summary-list__actions"></dd>
+      </div>
+
     <div class="govuk-summary-list__row normal-word-break">
       <dt class="govuk-summary-list__key govuk-!-width-one-half">
         <%= t '.section_proceeding.work' %>
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= t '.section_proceeding.work_answer' %>
+        <% if @legal_aid_application.used_delegated_functions? %>
+          <%= @legal_aid_application.delegated_functions_scope_limitation.description %>
+        <% else %>
+          <%= @legal_aid_application.substantive_scope_limitation.description %>
+        <% end %>
       </dd>
       <dd class="govuk-summary-list__actions"></dd>
     </div>

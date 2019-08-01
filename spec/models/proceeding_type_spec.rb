@@ -25,4 +25,23 @@ RSpec.describe ProceedingType, type: :model do
       described_class.populate
     end
   end
+
+  describe '#default_scope_limitation' do
+    let!(:proceeding_type) { create :proceeding_type }
+    let!(:sl_substantive_default) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
+    let!(:sl_delegated_default) { create :scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type, meaning: 'Default delegated functions SL' }
+    let!(:sl_non_default) { create :scope_limitation }
+
+    context 'for substantive applications' do
+      it 'returns the default substantive scope limitation' do
+        expect(proceeding_type.default_substantive_scope_limitation).to eq sl_substantive_default
+      end
+    end
+
+    context 'for delegated functions applications' do
+      it 'returns the default delegated functions scope limitation' do
+        expect(proceeding_type.default_delegated_functions_scope_limitation).to eq sl_delegated_default
+      end
+    end
+  end
 end

@@ -115,9 +115,7 @@ en:
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
           costs: Costs you can incur
-          costs_answer: £5,000
           work: Work you can do
-          work_answer: Injunction FLA to final hearing
         section_next:
           heading: What happens next
           content: We'll check with the Department for Work and Pensions to see if your client receives benefits that make them eligible for legal aid.
@@ -203,21 +201,15 @@ en:
         status: Status
     limitations:
       show:
-        h1-heading: What you're covered for
+        h1-heading: What you're applying for
         h2-heading: Proceeding
-        body: |
-          Injunction FLA-to final hearing -
-          As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and
-          including obtaining and serving a final order and in the event of breach leading to
-          the exercise of a power of arrest to representation on the consideration of the breach
-          by the court (but excluding applying for a warrant of arrest, if not attached,
-          and representation in contempt proceedings).
         link_title: Change
+        if_delegated_used: If you've used delegated functions
         form_of_service: "Form of service: "
         form_of_service_type: Full representation
         incurrable_costs: "Costs you can incur: "
-        incurrable_costs_value: '£5,000'
         allowable_work: "Work you can do: "
+        substantive_certificate: Once you've received a substantive certificate
     means_summaries:
       show:
         h1-heading: Check your answers

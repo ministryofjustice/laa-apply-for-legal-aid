@@ -24,6 +24,24 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/used_delegated_functions' do
+    let!(:proceeding_type) { create(:proceeding_type) }
+    let!(:default_substantive_scope_limitation) do
+      create :scope_limitation,
+             :substantive_default,
+             joined_proceeding_type: proceeding_type,
+             meaning: 'Default substantive SL'
+    end
+    let!(:default_delegated_function_scope_limitation) do
+      create :scope_limitation,
+             :delegated_functions_default,
+             joined_proceeding_type: proceeding_type,
+             meaning: 'Default delegated functions SL'
+    end
+    let!(:legal_aid_application) do
+      create :legal_aid_application,
+             proceeding_types: [proceeding_type],
+             scope_limitations: [default_substantive_scope_limitation]
+    end
     let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
     let(:day) { used_delegated_functions_on.day }
     let(:month) { used_delegated_functions_on.month }
@@ -41,7 +59,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
     end
     let(:button_clicked) { {} }
 
-    subject do
+    before do
       patch(
         providers_legal_aid_application_used_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
@@ -98,6 +116,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
         legal_aid_application.reload
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
         expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+        expect(legal_aid_application.reload.scope_limitations).to eq [default_substantive_scope_limitation]
       end
 
       it 'redirects to the online banking page' do
@@ -116,6 +135,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request do
         legal_aid_application.reload
         expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
         expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+        expect(legal_aid_application.scope_limitations).to match_array [default_substantive_scope_limitation, default_delegated_function_scope_limitation]
       end
 
       context 'when date incomplete' do

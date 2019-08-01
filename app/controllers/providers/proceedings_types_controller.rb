@@ -23,8 +23,11 @@ module Providers
     # PATCH /provider/applications/:legal_aid_application_id/proceedings_types/:id
     def update
       authorize legal_aid_application
-      legal_aid_application.proceeding_types.clear # Remove this when multiple proceeding types required!
-      legal_aid_application.proceeding_types << proceeding_type unless legal_aid_application.proceeding_types.include?(proceeding_type)
+      ActiveRecord::Base.transaction do
+        legal_aid_application.reset_proceeding_types! # This will probably change when multiple proceeding types implemented!
+        legal_aid_application.proceeding_types << proceeding_type
+        legal_aid_application.add_default_substantive_scope_limitation!
+      end
       go_forward
     end
 

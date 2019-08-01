@@ -1,7 +1,7 @@
 module Providers
   class CheckPassportedAnswersController < ProviderBaseController
     def show
-      @proceeding = legal_aid_application.proceeding_types.first
+      @proceeding = legal_aid_application.lead_proceeding_type
       @applicant = legal_aid_application.applicant
       @address = @applicant.addresses.first
       legal_aid_application.check_passported_answers! unless legal_aid_application.checking_passported_answers?

@@ -100,7 +100,7 @@ Feature: Civil application journeys
     When I select proceeding type 1
     Then I expect to see 2 proceeding types selected
     When I click 'Save and continue'
-    Then I should be on a page showing "What you're covered for"
+    Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
@@ -132,7 +132,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Have you used delegated functions?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you're covered for"
+    Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -167,7 +167,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Have you used delegated functions?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you're covered for"
+    Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -201,7 +201,9 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I enter the 'used delegated functions' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you're covered for"
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "If you've used delegated functions"
+    Then I should be on a page showing "Once you've received a substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -226,7 +228,8 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Have you used delegated functions?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you're covered for"
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "Once you've received a substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -258,7 +261,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Have you used delegated functions?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you're covered for"
+    Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 

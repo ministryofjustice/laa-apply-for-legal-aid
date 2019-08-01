@@ -137,12 +137,15 @@ Given('I complete the journey as far as check your answers') do
     lookup_used: true,
     applicant: applicant
   )
-  proceeding_type = create(:proceeding_type)
+  proceeding_type = ProceedingType.all.sample
   @legal_aid_application = create(
     :legal_aid_application,
     applicant: applicant,
     proceeding_types: [proceeding_type]
   )
+  @legal_aid_application.add_default_substantive_scope_limitation!
+  @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?
+
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
@@ -168,7 +171,7 @@ Given('I complete the passported journey as far as check your answers') do
   )
   @legal_aid_application = create(
     :legal_aid_application,
-    :with_proceeding_types,
+    :with_substantive_scope_limitation,
     applicant: applicant
   )
   login_as @legal_aid_application.provider
@@ -223,13 +226,16 @@ Given('I complete the application and view the check your answers page') do
     lookup_used: true,
     applicant: applicant
   )
-  proceeding_type = create(:proceeding_type)
+  proceeding_type = ProceedingType.all.sample
+
   legal_aid_application = create(
     :legal_aid_application,
     applicant: applicant,
     proceeding_types: [proceeding_type],
     state: :provider_submitted
   )
+  legal_aid_application.add_default_substantive_scope_limitation!
+  legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if legal_aid_application.used_delegated_functions?
   login_as legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
 end

@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_07_29_100602) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -92,8 +91,19 @@ ActiveRecord::Schema.define(version: 2019_07_29_100602) do
     t.uuid "proceeding_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id", "proceeding_type_id"], name: "app_proceeding_type_index", unique: true
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
+  end
+
+  create_table "application_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "scope_limitation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "substantive", default: true
+    t.index ["legal_aid_application_id", "scope_limitation_id"], name: "scope_limitations_index", unique: true
+    t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
   create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

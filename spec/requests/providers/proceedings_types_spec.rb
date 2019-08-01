@@ -124,6 +124,15 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
   describe 'update: PATCH /providers/applications/:legal_aid_application_id/proceedings_type/:id' do
     let(:code) { 'PR0001' }
     let!(:proceeding_type) { create(:proceeding_type) }
+    let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
+    let!(:default_delegated_function_scope_limitation) do
+      create :scope_limitation,
+             :delegated_functions_default,
+             joined_proceeding_type: proceeding_type,
+             meaning: 'Default delegated functions SL'
+    end
+    let!(:sl_non_default) { create :scope_limitation }
+
     let(:params) do
       {
         legal_aid_application_id: legal_aid_application,
@@ -145,6 +154,10 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
 
     it 'associates proceeding type with legal aid application' do
       expect(legal_aid_application.reload.proceeding_types).to include(proceeding_type)
+    end
+
+    it 'adds the default substantive scope limitation to the application' do
+      expect(legal_aid_application.reload.scope_limitations).to eq [default_substantive_scope_limitation]
     end
   end
 end

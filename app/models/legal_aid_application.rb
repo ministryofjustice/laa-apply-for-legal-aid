@@ -27,6 +27,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :ccms_submissions, class_name: 'CCMS::Submission', dependent: :destroy
   has_one :most_recent_ccms_submission, -> { order(:created_at) }, class_name: 'CCMS::Submission'
   has_one :vehicle, dependent: :destroy
+  has_many :application_scope_limitations, dependent: :destroy
+  has_many :scope_limitations, through: :application_scope_limitations
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -36,6 +38,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   validates :provider, presence: true
 
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
+  delegate :substantive_scope_limitation, :delegated_functions_scope_limitation, to: :application_scope_limitations
 
   scope :latest, -> { order(created_at: :desc) }
 
@@ -47,6 +50,14 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     },
     _prefix: true
   )
+
+  # convenience method to return the lead proceeding type.  For now, that is the ONLY
+  # proceeding type until such time as we have multiple proceeding types per applications,
+  # at which time this method shuld be changed to determine which is the lead one and return that.
+  #
+  def lead_proceeding_type
+    proceeding_types.first
+  end
 
   def bank_transactions
     return applicant.bank_transactions if Setting.mock_true_layer_data?
@@ -153,6 +164,45 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def ccms_case_reference
     most_recent_ccms_submission.case_ccms_reference
+  end
+
+  def add_default_substantive_scope_limitation!
+    ApplicationScopeLimitation.create!(
+      legal_aid_application: self,
+      scope_limitation: lead_proceeding_type.default_substantive_scope_limitation,
+      substantive: true
+    )
+  end
+
+  def add_default_delegated_functions_scope_limitation!
+    ApplicationScopeLimitation.create!(
+      legal_aid_application: self,
+      scope_limitation: lead_proceeding_type.default_delegated_functions_scope_limitation,
+      substantive: false
+    )
+  end
+
+  def reset_delegated_functions
+    self.used_delegated_functions = false
+    self.used_delegated_functions_on = nil
+  end
+
+  def reset_proceeding_types!
+    proceeding_types.clear
+    scope_limitations.clear
+    reset_delegated_functions
+  end
+
+  def default_cost_limitation
+    used_delegated_functions? ? default_delegated_functions_cost_limitation : default_substantive_cost_limitation
+  end
+
+  def default_substantive_cost_limitation
+    lead_proceeding_type.default_cost_limitation_substantive
+  end
+
+  def default_delegated_functions_cost_limitation
+    lead_proceeding_type.default_cost_limitation_delegated_functions
   end
 
   private
