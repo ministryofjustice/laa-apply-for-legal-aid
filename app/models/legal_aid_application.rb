@@ -182,14 +182,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     )
   end
 
-  # def default_substantive_scope_limitation_for_first_proceeding_type
-  #   lead_proceeding_type.default_substantive_scope_limitation
-  # end
-  #
-  # def default_delegated_functions_scope_limitation_for_first_proceeding_type
-  #   lead_proceeding_type.default_delegated_functions_scope_limitation
-  # end
-
   def reset_delegated_functions
     self.used_delegated_functions = false
     self.used_delegated_functions_on = nil
