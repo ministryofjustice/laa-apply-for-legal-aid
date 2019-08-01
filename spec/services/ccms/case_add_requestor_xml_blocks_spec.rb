@@ -142,16 +142,19 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'attributes hard coded to true' do
         it 'should be hard coded to true' do
           attributes = [
-                        [:global_means, 'LAR_SCOPE_FLAG'],
-                        [:global_means,	'GB_INPUT_B_38WP3_2SCREEN'],
-                        [:global_means, 'GB_INPUT_B_38WP3_3SCREEN'],
-                        [:global_merits, 'MERITS_DECLARATION_SCREEN'],
-                        [:global_means, 'GB_DECL_B_38WP3_13A'],
-                        [:global_merits, 'CLIENT_HAS_DV_RISK'],
-                        [:global_merits,	'CLIENT_REQ_SEP_REP'],
-                        [:global_merits,	'DECLARATION_WILL_BE_SIGNED'],
-                        [:global_merits,	'DECLARATION_REVOKE_IMP_SUBDP']
-                      ]
+            [:global_means, 'LAR_SCOPE_FLAG'],
+            [:global_means, 'GB_INPUT_B_38WP3_2SCREEN'],
+            [:global_means, 'GB_INPUT_B_38WP3_3SCREEN'],
+            [:global_merits, 'MERITS_DECLARATION_SCREEN'],
+            [:global_means, 'GB_DECL_B_38WP3_13A'],
+            [:global_merits, 'CLIENT_HAS_DV_RISK'],
+            [:global_merits,  'CLIENT_REQ_SEP_REP'],
+            [:global_merits,  'DECLARATION_WILL_BE_SIGNED'],
+            [:global_merits,  'DECLARATION_REVOKE_IMP_SUBDP'],
+            [:proceeding, 'SCOPE_LIMIT_IS_DEFAULT'],
+            [:proceeding_merits,  'LEAD_PROCEEDING'],
+            [:proceeding_merits,  'SCOPE_LIMIT_IS_DEFAULT']
+          ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
@@ -161,13 +164,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
       end
-
-    context 'spike test' do
-      it 'extracts proceeding ' do
-        block = XmlExtractor.call(xml, :proceeding, 'PROCEEDING')
-        puts block
-      end
-    end
     end
   end
 end
