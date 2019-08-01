@@ -195,6 +195,52 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
       end
+
+      context 'APP_AMEND_TYPE' do
+        context 'delegated function used' do
+          context 'in global_merits section' do
+            it 'returns SUBDP' do
+              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'SUBDP'
+            end
+
+            context 'in global_means section;' do
+              it 'returns SUBDP' do
+                allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+                allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+                expect(block).to be_present
+                expect(block).to have_response_type 'text'
+                expect(block).to have_response_value 'SUBDP'
+              end
+            end
+          end
+        end
+
+        context 'delegated functions not used' do
+          context 'in global_merits section' do
+            it 'returns SUB' do
+              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'SUB'
+            end
+
+            context 'in global_means section;' do
+              it 'returns SUB' do
+                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+                expect(block).to be_present
+                expect(block).to have_response_type 'text'
+                expect(block).to have_response_value 'SUB'
+              end
+            end
+          end
+        end
+      end
     end
   end
 end
