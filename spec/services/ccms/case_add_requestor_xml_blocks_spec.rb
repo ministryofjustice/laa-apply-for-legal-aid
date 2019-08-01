@@ -139,15 +139,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'LAR_SCOPE_FLAG' do
-        it 'should be hard coded to true' do
-          block = XmlExtractor.call(xml, :global_means, 'LAR_SCOPE_FLAG')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
-        end
-      end
-
       context 'attributes hard coded to true' do
         it 'should be hard coded to true' do
           attributes = [
