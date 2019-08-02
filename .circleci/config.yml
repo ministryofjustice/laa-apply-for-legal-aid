@@ -116,8 +116,10 @@ jobs:
         command: |
           if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
             sudo apt install -y postgresql-client || true
-            bundle exec rake db:setup
-            bundle exec rake db:migrate
+            git checkout origin/master
+            bundle exec rake db:create db:schema:load
+            git checkout -
+            bundle exec rake db:migrate db:seed
           fi
     - restore_cache:
         keys:
