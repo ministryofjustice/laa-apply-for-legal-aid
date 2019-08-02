@@ -130,24 +130,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'PROC_MATTER_TYPE_MEANING' do
-        it 'should be the meaning from the proceeding type record' do
-          block = XmlExtractor.call(xml, :global_merits, 'PROC_MATTER_TYPE_MEANING')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value legal_aid_application.proceeding_types.first.meaning
-        end
-      end
-
-      context 'LAR_SCOPE_FLAG' do
-        it 'should be hard coded to true' do
-          block = XmlExtractor.call(xml, :global_means, 'LAR_SCOPE_FLAG')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
-        end
-      end
-
       context 'attributes hard coded to true' do
         it 'should be hard coded to true' do
           attributes = [
@@ -385,7 +367,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:global_merits, 'FIRST_TIER_TRIBUNAL_IMM_ASY'],
             [:global_merits, 'FIRST_TIER_TRIBUNAL_TAXATION'],
             [:global_merits, 'HIGH_COURT'],
-            # [:global_merits, 'HOUSING'],
+            [:global_merits, 'HOUSING'],
             [:global_merits, 'IMMIGRATION'],
             [:global_merits, 'IMMIGRATION_CT_OF_APPEAL'],
             [:global_merits, 'IMMIGRATION_QUESTION_APP'],
@@ -444,6 +426,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:global_merits, 'URGENT_APPLICATION'],
             [:global_merits, 'URGENT_APPLICATION_TAG'],
             [:global_merits, 'URGENT_DIRECTIONS'],
+            [:global_merits, 'CHILD_MUST_BE_INCLUDED'],
             [:opponent, 'OPP_RELATIONSHIP_TO_CASE'],
             [:opponent, 'OPP_RELATIONSHIP_TO_CLIENT'],
             [:opponent, 'OTHER_PARTY_NAME_MERITS'],
@@ -600,6 +583,52 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
+          end
+        end
+      end
+
+      context 'APP_AMEND_TYPE' do
+        context 'delegated function used' do
+          context 'in global_merits section' do
+            it 'returns SUBDP' do
+              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'SUBDP'
+            end
+
+            context 'in global_means section;' do
+              it 'returns SUBDP' do
+                allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+                allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+                expect(block).to be_present
+                expect(block).to have_response_type 'text'
+                expect(block).to have_response_value 'SUBDP'
+              end
+            end
+          end
+        end
+
+        context 'delegated functions not used' do
+          context 'in global_merits section' do
+            it 'returns SUB' do
+              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'SUB'
+            end
+
+            context 'in global_means section;' do
+              it 'returns SUB' do
+                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+                expect(block).to be_present
+                expect(block).to have_response_type 'text'
+                expect(block).to have_response_value 'SUB'
+              end
+            end
           end
         end
       end

@@ -110,4 +110,13 @@ RSpec.describe Opponent, type: :model do
       expect(opponent.other_party_relationship_to_case).to eq 'Opp'
     end
   end
+
+  describe '#organisation?' do
+    before do
+      opponent.opponent_type = 'Organisation'
+    end
+    it 'returns true if oppoonent type organisation' do
+      expect(opponent.organisation?).to be true
+    end
+  end
 end

@@ -3678,6 +3678,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CHILD_MUST_BE_INCLUDED:
+    :generate_block?: false
     :value: true
     :br100_meaning: A Child Must Be Included As An Other Party
     :response_type: boolean
@@ -3996,7 +3997,7 @@ opponent:
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
-  OTHER_PARTY_ORG:  # failing test coverage issue
+  OTHER_PARTY_ORG:  # failing test coverage issue THIS ONE
     :generate_block?: false
     :value: "#opponent_organisation?"
     :br100_meaning: Meaning not defined in BR100
