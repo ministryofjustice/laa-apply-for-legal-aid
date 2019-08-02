@@ -86,7 +86,7 @@ module CCMS
       @legal_aid_application.used_delegated_functions_on.strftime('%d-%m-%Y')
     end
 
-    def app_ammendment_type(_options)
+    def app_amendment_type(_options)
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 

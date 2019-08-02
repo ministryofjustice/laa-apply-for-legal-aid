@@ -253,7 +253,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   APP_AMEND_TYPE:
-    :value: "#app_ammendment_type"
+    :value: "#app_amendment_type"
     :br100_meaning: 'App: The application or amendment type'
     :response_type: text
     :user_defined: true
@@ -2355,7 +2355,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APP_AMEND_TYPE:
-    :value: "#app_ammendment_type"
+    :value: "#app_amendment_type"
     :br100_meaning: 'App: The application or amendment type'
     :response_type: text
     :user_defined: true
