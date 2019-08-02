@@ -24,14 +24,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           it 'generates the delegated functions block in the means assessment section' do
-            block = XmlExtractor.call(xml, :means_assessment, 'DELEGATED_FUNCTIONS_DATE')
+            block = XmlExtractor.call(xml, :global_means, 'DELEGATED_FUNCTIONS_DATE')
             expect(block).to be_present
             expect(block).to have_response_type('date')
             expect(block).to have_response_value(Date.today.strftime('%d-%m-%Y'))
           end
 
           it 'generates the delegated functions block in the merits assessment section' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'DELEGATED_FUNCTIONS_DATE')
+            block = XmlExtractor.call(xml, :global_merits, 'DELEGATED_FUNCTIONS_DATE')
             expect(block).to be_present
             expect(block).to have_response_type('date')
             expect(block).to have_response_value(Date.today.strftime('%d-%m-%Y'))
@@ -40,12 +40,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'delegated functions not used' do
           it 'does not generate the delegated functions block in the means assessment section' do
-            block = XmlExtractor.call(xml, :means_assessment, 'DELEGATED_FUNCTIONS_DATE')
+            block = XmlExtractor.call(xml, :global_means, 'DELEGATED_FUNCTIONS_DATE')
             expect(block).not_to be_present
           end
 
           it 'does not generates the delegated functions block in the merits assessment section' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'DELEGATED_FUNCTIONS_DATE')
+            block = XmlExtractor.call(xml, :global_merits, 'DELEGATED_FUNCTIONS_DATE')
             expect(block).not_to be_present
           end
         end
@@ -55,7 +55,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'police notified' do
           before { respondent.update(police_notified: true) }
           it 'is true' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'POLICE_NOTIFIED')
+            block = XmlExtractor.call(xml, :global_merits, 'POLICE_NOTIFIED')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'true'
@@ -65,7 +65,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'police NOT notified' do
           before { respondent.update(police_notified: false) }
           it 'is false' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'POLICE_NOTIFIED')
+            block = XmlExtractor.call(xml, :global_merits, 'POLICE_NOTIFIED')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
@@ -77,14 +77,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'not sent' do
           before { respondent.update(warning_letter_sent: false) }
           it 'generates WARNING_LETTER_SENT block with false value' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'WARNING_LETTER_SENT')
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
           end
 
           it 'generates INJ_REASON_NO_WARNING_LETTER block with reason' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'INJ_REASON_NO_WARNING_LETTER')
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
             expect(block).to be_present
             expect(block).to have_response_type 'text'
             expect(block).to have_response_value legal_aid_application.respondent.warning_letter_sent_details
@@ -94,7 +94,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'sent' do
           it 'generates WARNING_LETTER_SENT block with true value' do
             respondent.update(warning_letter_sent: true)
-            block = XmlExtractor.call(xml, :merits_assessment, 'WARNING_LETTER_SENT')
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'true'
@@ -102,7 +102,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'does not generates INJ_REASON_NO_WARNING_LETTER block' do
             respondent.update(warning_letter_sent: true)
-            block = XmlExtractor.call(xml, :merits_assessment, 'INJ_REASON_NO_WARNING_LETTER')
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
             expect(block).not_to be_present
           end
         end
@@ -112,7 +112,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'respondent has capacity' do
           before { respondent.understands_terms_of_court_order = true }
           it 'is true' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'INJ_RESPONDENT_CAPACITY')
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_RESPONDENT_CAPACITY')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'true'
@@ -122,7 +122,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'respondent does not have capacity' do
           before { respondent.understands_terms_of_court_order = false }
           it 'is false' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'INJ_RESPONDENT_CAPACITY')
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_RESPONDENT_CAPACITY')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
@@ -132,10 +132,36 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       context 'PROC_MATTER_TYPE_MEANING' do
         it 'should be the meaning from the proceeding type record' do
-          block = XmlExtractor.call(xml, :merits_assessment, 'PROC_MATTER_TYPE_MEANING')
+          block = XmlExtractor.call(xml, :global_merits, 'PROC_MATTER_TYPE_MEANING')
           expect(block).to be_present
           expect(block).to have_response_type 'text'
           expect(block).to have_response_value legal_aid_application.lead_proceeding_type.meaning
+        end
+      end
+
+      context 'attributes hard coded to true' do
+        it 'should be hard coded to true' do
+          attributes = [
+            [:global_means, 'LAR_SCOPE_FLAG'],
+            [:global_means, 'GB_INPUT_B_38WP3_2SCREEN'],
+            [:global_means, 'GB_INPUT_B_38WP3_3SCREEN'],
+            [:global_merits, 'MERITS_DECLARATION_SCREEN'],
+            [:global_means, 'GB_DECL_B_38WP3_13A'],
+            [:global_merits, 'CLIENT_HAS_DV_RISK'],
+            [:global_merits,  'CLIENT_REQ_SEP_REP'],
+            [:global_merits,  'DECLARATION_WILL_BE_SIGNED'],
+            [:global_merits,  'DECLARATION_REVOKE_IMP_SUBDP'],
+            [:proceeding, 'SCOPE_LIMIT_IS_DEFAULT'],
+            [:proceeding_merits,  'LEAD_PROCEEDING'],
+            [:proceeding_merits,  'SCOPE_LIMIT_IS_DEFAULT']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
         end
       end
 
@@ -143,7 +169,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'bail conditions set' do
           before { respondent.bail_conditions_set = true }
           it 'is true' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'BAIL_CONDITIONS_SET')
+            block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'true'
@@ -153,10 +179,56 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'bail conditions NOT set' do
           before { respondent.bail_conditions_set = false }
           it 'is false' do
-            block = XmlExtractor.call(xml, :merits_assessment, 'BAIL_CONDITIONS_SET')
+            block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
+          end
+        end
+      end
+
+      context 'APP_AMEND_TYPE' do
+        context 'delegated function used' do
+          context 'in global_merits section' do
+            it 'returns SUBDP' do
+              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'SUBDP'
+            end
+
+            context 'in global_means section;' do
+              it 'returns SUBDP' do
+                allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+                allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+                expect(block).to be_present
+                expect(block).to have_response_type 'text'
+                expect(block).to have_response_value 'SUBDP'
+              end
+            end
+          end
+        end
+
+        context 'delegated functions not used' do
+          context 'in global_merits section' do
+            it 'returns SUB' do
+              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'SUB'
+            end
+
+            context 'in global_means section;' do
+              it 'returns SUB' do
+                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+                expect(block).to be_present
+                expect(block).to have_response_type 'text'
+                expect(block).to have_response_value 'SUB'
+              end
+            end
           end
         end
       end
