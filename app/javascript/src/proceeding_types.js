@@ -96,3 +96,5 @@ function searchProceedingTypes() {
     });
   });
 }
+
+module.exports = searchProceedingTypes
