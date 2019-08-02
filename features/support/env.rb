@@ -115,15 +115,22 @@ World(Warden::Test::Helpers)
 
 AfterStep do
   next unless ENV['SAVE_PAGES'] == 'true'
+  next unless page.current_host
+  next unless URI.parse(page.current_host).host == URI.parse(page.server_url).host
 
-  # the html file will fetch assets from that URL
-  Capybara.asset_host = 'http://localhost:3004'
-
-  path = page.current_path.to_s.parameterize
+  page_path = page.current_path.to_s.parameterize
 
   # UUIDs are removed from the path to avoid saving duplicate pages
-  path_without_uuids = path.gsub(/[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}/, 'uuid')
-  file = Rails.root.join('tmp', 'webhint_inputs', "apply-#{path_without_uuids}.html")
+  path_without_uuids = page_path.gsub(/[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}/, 'uuid')
+  file_path = Rails.root.join('tmp', 'webhint_inputs', "apply-#{path_without_uuids}.html")
 
-  page.save_page(file) unless File.file?(file)
+  next if File.file?(file_path)
+
+  # the html file will fetch assets from that URL
+  asset_host = 'http://localhost:3004'
+  HtmlPageSaver.call(
+    html: page.html,
+    file_path: file_path,
+    asset_host: asset_host
+  )
 end
