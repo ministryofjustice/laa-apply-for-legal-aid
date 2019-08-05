@@ -22,7 +22,7 @@ RSpec.describe CurrencyValidator do
     end
 
     it 'errors if given negative number' do
-      dummy.val1 = Faker::Number.between(-9999, -1).to_s
+      dummy.val1 = Faker::Number.between(from: -9999, to: -1).to_s
       dummy.val2 = Faker::Number.number.to_s
       expect(dummy).to be_invalid
       expect(dummy.errors[:val1]).to eq ['must be greater than or equal to 0']

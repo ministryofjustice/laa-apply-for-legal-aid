@@ -64,7 +64,7 @@ RSpec.describe CCMS::CheckApplicantStatusService do
       end
 
       context 'applicant is created' do
-        let(:expected_applicant_ccms_reference) { Faker::Number.number(10) }
+        let(:expected_applicant_ccms_reference) { Faker::Number.number.to_s }
 
         before do
           expect(applicant_add_status_requestor).to receive(:call).and_return(applicant_add_status_response)

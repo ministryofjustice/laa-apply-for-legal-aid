@@ -42,7 +42,7 @@ RSpec.describe CCMS::ObtainCaseReferenceService do
 
   context 'operation in error' do
     before do
-      allow(reference_data_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
+      allow(reference_data_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(digits: 8))
       expect(reference_data_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
     end
 

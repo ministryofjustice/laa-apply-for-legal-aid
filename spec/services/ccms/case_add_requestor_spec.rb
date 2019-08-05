@@ -220,7 +220,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       let(:ccms_submission) do
         double CCMS::Submission,
-               case_ccms_reference: Faker::Number.number(12)
+               case_ccms_reference: Faker::Number.number(digits: 12)
       end
 
       let(:expected_tx_id) { '201904011604570390059770759' }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
-  let(:date_of_birth) { Faker::Date.birthday(7, 77) }
+  let(:date_of_birth) { Faker::Date.birthday(min_age: 7, max_age: 77) }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, date_of_birth: date_of_birth, relationship: nil }
 

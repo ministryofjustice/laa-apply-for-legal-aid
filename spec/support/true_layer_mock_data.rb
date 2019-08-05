@@ -26,8 +26,8 @@ module TrueLayerHelpers
       account_type: 'TRANSACTION',
       currency: Faker::Currency.code,
       account_number: {
-        number: Faker::Number.number(10),
-        sort_code: Faker::Number.number(6)
+        number: Faker::Number.number.to_s,
+        sort_code: Faker::Number.number(digits: 6).to_s
       },
       balance: {
         current: rand(1...1_000_000.0).round(2)
@@ -56,8 +56,8 @@ module TrueLayerHelpers
       account_type: 'SAVINGS',
       currency: Faker::Currency.code,
       account_number: {
-        number: Faker::Number.number(10),
-        sort_code: Faker::Number.number(6)
+        number: Faker::Number.number,
+        sort_code: Faker::Number.number(digits: 6)
       },
       balance: {
         current: rand(1...1_000_000.0).round(2)
