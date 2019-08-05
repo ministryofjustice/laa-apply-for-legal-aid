@@ -44,12 +44,12 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
       expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
       expect(response.body).to include(vehicle.purchased_on.to_s)
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.heading'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.own'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.estimated_value'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.payment_remaining'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.purchased_on'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.used_regularly'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.heading'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.estimated_value'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.payment_remaining'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.purchased_on'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.used_regularly'))
     end
 
     context 'when not logged in' do
@@ -61,7 +61,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       let(:vehicle) { nil }
       let(:own_vehicle) { false }
       it 'displays first vehicle question' do
-        expect(response.body).to include(I18n.t('shared.check_answers_vehicles.providers.own'))
+        expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))
       end
 
       it 'does not display other vehicle questions' do

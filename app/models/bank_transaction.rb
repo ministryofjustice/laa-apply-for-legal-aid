@@ -13,4 +13,8 @@ class BankTransaction < ApplicationRecord
     credit: 'credit'.freeze,
     debit: 'debit'.freeze
   }
+
+  def self.amounts
+    group(:transaction_type_id).sum(:amount)
+  end
 end

@@ -76,12 +76,12 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
       expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
       expect(response.body).to include(vehicle.purchased_on.to_s)
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.heading'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.own'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.estimated_value'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.payment_remaining'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.purchased_on'))
-      expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.used_regularly'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.heading'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.own'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.estimated_value'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.payment_remaining'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.purchased_on'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.used_regularly'))
     end
 
     it 'should change the state to "checking_citizen_answers"' do
@@ -148,7 +148,7 @@ RSpec.describe 'check your answers requests', type: :request do
       let(:own_vehicle) { false }
 
       it 'displays first vehicle question' do
-        expect(response.body).to include(I18n.t('shared.check_answers_vehicles.citizens.own'))
+        expect(response.body).to include(I18n.t('shared.check_answers.vehicles.citizens.own'))
       end
 
       it 'does not display other vehicle questions' do

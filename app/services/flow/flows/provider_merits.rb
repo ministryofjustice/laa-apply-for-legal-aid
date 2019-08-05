@@ -59,10 +59,11 @@ module Flow
         },
         end_of_applications: {
           path: ->(application) { urls.providers_legal_aid_application_end_of_application_path(application) },
-          forward: :completed_application
+          forward: :submitted_applications
         },
-        completed_application: {
-          path: 'Displays completed application'
+        submitted_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_submitted_application_path(application) },
+          forward: :providers_home
         }
       }.freeze
     end

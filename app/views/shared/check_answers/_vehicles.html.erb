@@ -1,0 +1,51 @@
+<% read_only = local_assigns[:read_only] ? read_only : false %>
+<h2 class="govuk-heading-m">
+  <%= t(".#{journey_type}.heading") %>
+</h2>
+
+<div class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_link(
+        name: :vehicles,
+        url: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),
+        question: t(".#{journey_type}.own"),
+        answer: yes_no(@legal_aid_application.own_vehicle?),
+        read_only: read_only,
+        align_right: read_only
+      ) %>
+
+  <%= check_answer_link(
+        name: :vehicles_estimated_values,
+        url: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
+        question: t(".#{journey_type}.estimated_value"),
+        answer: number_to_currency(@legal_aid_application.vehicle.estimated_value),
+        read_only: read_only,
+        align_right: read_only
+      ) if @legal_aid_application.own_vehicle? %>
+
+  <%= check_answer_link(
+        name: :vehicles_remaining_payments,
+        url: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
+        question: t(".#{journey_type}.payment_remaining"),
+        answer: number_to_currency(@legal_aid_application.vehicle.payment_remaining),
+        read_only: read_only,
+        align_right: read_only
+      ) if @legal_aid_application.own_vehicle? %>
+
+  <%= check_answer_link(
+        name: :vehicles_purchase_dates,
+        url: check_answer_url_for(journey_type, :vehicles_purchase_dates, @legal_aid_application),
+        question: t(".#{journey_type}.purchased_on"),
+        answer: @legal_aid_application.vehicle.purchased_on,
+        read_only: read_only,
+        align_right: read_only
+      ) if @legal_aid_application.own_vehicle? %>
+
+  <%= check_answer_link(
+        name: :vehicles_regular_uses,
+        url: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
+        question: t(".#{journey_type}.used_regularly"),
+        answer: yes_no(@legal_aid_application.vehicle.used_regularly),
+        read_only: read_only,
+        align_right: read_only
+      ) if @legal_aid_application.own_vehicle? %>
+</div>

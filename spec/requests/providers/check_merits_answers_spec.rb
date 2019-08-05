@@ -32,15 +32,16 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       it 'displays the correct questions' do
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.notification_of_latest_incident'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.date_of_latest_incident'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.understands_terms_of_court_order'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.warning_letter_sent'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.police_notified'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.bail_conditions_set'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.statement_of_case'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.prospects_of_success'))
-        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.items.success_prospect'))
+        scope = 'shared.check_answers.merits.items'
+        expect(response.body).to include(I18n.t('notification_of_latest_incident', scope: scope))
+        expect(response.body).to include(I18n.t('date_of_latest_incident', scope: scope))
+        expect(response.body).to include(I18n.t('understands_terms_of_court_order', scope: scope))
+        expect(response.body).to include(I18n.t('warning_letter_sent', scope: scope))
+        expect(response.body).to include(I18n.t('police_notified', scope: scope))
+        expect(response.body).to include(I18n.t('bail_conditions_set', scope: scope))
+        expect(response.body).to include(I18n.t('statement_of_case', scope: scope))
+        expect(response.body).to include(I18n.t('prospects_of_success', scope: scope))
+        expect(response.body).to include(I18n.t('success_prospect', scope: scope))
       end
 
       it 'displays the correct URLs for changing values' do

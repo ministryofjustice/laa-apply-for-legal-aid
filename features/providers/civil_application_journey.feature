@@ -424,6 +424,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
+    Then I click 'View completed application'
+    Then I should be on a page showing "Application for civil legal aid certificate"
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application
@@ -530,6 +532,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "Declaration"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
+    Then I should be on a page showing "Application complete"
+    Then I click 'View completed application'
+    Then I should be on a page showing "Application for civil legal aid certificate"
 
   @javascript @vcr
   Scenario: View feedback form within provider journey

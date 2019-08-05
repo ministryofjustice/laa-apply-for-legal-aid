@@ -6,7 +6,7 @@
       ) do %>
     <%= govuk_fieldset_header controller_t('.field_set_header'), padding_below: 6 %>
     <%= form.govuk_text_field :outstanding_mortgage_amount,
-                              hint: t("helpers.hint.legal_aid_application.outstanding_mortgage_amount.#{user_type}"),
+                              hint: t("helpers.hint.legal_aid_application.outstanding_mortgage_amount.#{journey_type}"),
                               value: number_to_currency_or_original_string(model.outstanding_mortgage_amount),
                               input_prefix: t('currency.gbp'),
                               class: 'govuk-!-width-one-third' %>
