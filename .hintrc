@@ -15,6 +15,7 @@
     "highest-available-document-mode": "error",
     "html-checker": ["error", {
         "ignore": [
+          "Start tag seen without seeing a doctype first. Expected “<!DOCTYPE html>”.",
           "Attribute “src” not allowed on element “image” at this point.",
           "The “banner” role is unnecessary for element “header”.",
           "The “button” role is unnecessary for element “button”.",
