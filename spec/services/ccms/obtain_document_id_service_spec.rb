@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CCMS::ObtainDocumentIdService do
   let(:legal_aid_application) { create :legal_aid_application, statement_of_case: statement_of_case }
-  let(:submission) { create :submission, :case_created, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number(10) }
+  let(:submission) { create :submission, :case_created, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
   let(:statement_of_case) { create :statement_of_case }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:document_id_requestor) { double CCMS::DocumentIdRequestor.new(submission.case_ccms_reference) }
@@ -92,7 +92,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
 
       before do
         allow(subject).to receive(:document_id_requestor).and_return(document_id_requestor)
-        expect(document_id_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
+        expect(document_id_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(digits: 8))
         expect(document_id_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'failure requesting document ids')
       end
 

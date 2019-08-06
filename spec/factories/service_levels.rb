@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :service_level do
-    service_id { Faker::Number.number(2).to_i }
+    service_id { Faker::Number.number(digits: 2) }
     name { Faker::Lorem.sentence }
 
     trait :with_real_data do

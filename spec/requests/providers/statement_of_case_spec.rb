@@ -46,7 +46,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/statement_of_case' do
-    let(:entered_text) { Faker::Lorem.paragraph(3) }
+    let(:entered_text) { Faker::Lorem.paragraph(sentence_count: 3) }
     let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.pdf', 'application/pdf') }
     let(:statement_of_case) { legal_aid_application.statement_of_case }
     let(:params_statement_of_case) do

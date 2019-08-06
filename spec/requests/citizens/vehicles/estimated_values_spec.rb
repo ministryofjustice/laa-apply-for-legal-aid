@@ -18,7 +18,7 @@ RSpec.describe Citizens::Vehicles::EstimatedValuesController, type: :request do
   end
 
   describe 'PATCH /citizens/vehicle/estimated_value' do
-    let(:estimated_value) { Faker::Commerce.price(2000..10_000) }
+    let(:estimated_value) { Faker::Commerce.price(range: 2000..10_000) }
     let(:params) { { vehicle: { estimated_value: estimated_value } } }
     let(:next_url) { citizens_vehicles_remaining_payment_path }
 

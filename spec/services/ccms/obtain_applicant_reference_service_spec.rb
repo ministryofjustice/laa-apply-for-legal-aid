@@ -57,7 +57,7 @@ RSpec.describe CCMS::ObtainApplicantReferenceService do
   context 'operation in error' do
     context 'error when searching for applicant' do
       before do
-        allow(applicant_search_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(8))
+        allow(applicant_search_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(digits: 8))
         expect(applicant_search_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
       end
 

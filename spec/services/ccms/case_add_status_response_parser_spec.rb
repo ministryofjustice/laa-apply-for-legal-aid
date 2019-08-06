@@ -13,7 +13,7 @@ module CCMS
 
       it 'raises if the transaction_request_ids dont match' do
         expect {
-          parser = described_class.new(Faker::Number.number(20), response_xml)
+          parser = described_class.new(Faker::Number.number(digits: 20), response_xml)
           parser.success?
         }.to raise_error CCMS::CcmsError, 'Invalid transaction request id'
       end

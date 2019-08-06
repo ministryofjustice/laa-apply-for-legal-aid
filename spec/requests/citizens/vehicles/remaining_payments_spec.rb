@@ -18,7 +18,7 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
   end
 
   describe 'PATCH /citizens/vehicle/remaining_payment' do
-    let(:payment_remaining) { Faker::Commerce.price(100..2000) }
+    let(:payment_remaining) { Faker::Commerce.price(range: 100..2000) }
     let(:payments_remain) { 'true' }
     let(:params) do
       {
