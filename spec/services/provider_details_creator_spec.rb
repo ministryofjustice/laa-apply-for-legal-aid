@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProviderDetailsCreator do
-  let(:provider) { create :provider }
+  let(:provider) { create :provider, name: nil }
   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
   let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: rand(1..100).to_s) }
   let(:ccms_office_2) { OpenStruct.new(id: rand(101..200), code: rand(101..200).to_s) }
@@ -47,6 +47,10 @@ RSpec.describe ProviderDetailsCreator do
       expect(firm.offices.count).to eq(2)
       expect(office_1.code).to eq(ccms_office_1.code)
       expect(office_2.code).to eq(ccms_office_2.code)
+    end
+
+    it 'update the name of the provider' do
+      expect { subject }.to change { provider.reload.name }.to(api_response[:contactName])
     end
 
     context 'selected office of provider is not returned by the API' do
