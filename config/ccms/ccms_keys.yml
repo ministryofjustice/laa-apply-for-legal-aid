@@ -566,7 +566,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_PROC_B_41WP3_13A:
-    :value: true
+    :value: false
     :br100_meaning: 'R - Mortgage:  Documents confirming amount due and paid'
     :response_type: boolean
     :user_defined: false
@@ -864,7 +864,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_PROC_B_40WP3_44A:
-    :value: true
+    :value: false
     :br100_meaning: 'R - Val. possessions: Copy of valuation giving resale value'
     :response_type: boolean
     :user_defined: false
@@ -905,7 +905,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_PROC_B_41WP3_4A:
-    :value: true
+    :value: false
     :br100_meaning: 'R - Client Benefits: Copy of award letter(s)'
     :response_type: boolean
     :user_defined: false
@@ -915,7 +915,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_PROC_B_39WP3_23A:
-    :value: true
+    :value: false
     :br100_meaning: 'R - Main Dwelling: Docs confirming value , outstanding mortgage
       and/ or loan'
     :response_type: boolean
@@ -1089,7 +1089,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_PROC_B_39WP3_37A:
-    :value: true
+    :value: false
     :br100_meaning: 'R - Bank accounts: Certified copies/original statements for last
       3 months'
     :response_type: boolean
@@ -1175,7 +1175,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_PROC_B_41WP3_1A:
-    :value: true
+    :value: false
     :br100_meaning: 'R - Employment:  L17 / Last 3 monthly or 6 weekly wage slips
       / contract'
     :response_type: boolean
@@ -1790,7 +1790,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_RFLAG_B_2WP3_01A:
-    :value: true
+    :value: false
     :br100_meaning: "**RISK** Employment: Reg 17 Deprivation & Redundancy"
     :response_type: boolean
     :user_defined: false
@@ -2362,7 +2362,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   EVIDENCE_CA_POLICE_CAUTION:
-    :value: true
+    :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -2492,7 +2492,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   EVIDENCE_DV_POLICE_CAUTION_2A:
-    :value: true
+    :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -3021,7 +3021,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   EVIDENCE_DV_CONVICTION:
-    :value: true
+    :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
@@ -3586,7 +3586,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   EVIDENCE_DV_IDVA:
-    :value: true
+    :value: false
     :br100_meaning: 'A copy of the letter from IDVA/Independent Sexual Violence Advisor
       is required '
     :response_type: boolean
@@ -3786,7 +3786,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   EVIDENCE_CA_FINDING_FACT:
-    :value: true
+    :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
