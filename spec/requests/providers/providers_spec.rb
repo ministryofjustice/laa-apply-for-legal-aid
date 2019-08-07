@@ -18,7 +18,9 @@ RSpec.describe Providers::ProvidersController, type: :request do
   end
 
   it 'displays provider data' do
-    expect(response.body).to include(provider.username)
+    expect(unescaped_response_body).to include(provider.name)
+    expect(unescaped_response_body).to include(provider.username)
+    expect(unescaped_response_body).to include(provider.email)
   end
 
   context 'with unspaced roles' do

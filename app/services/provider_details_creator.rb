@@ -13,13 +13,18 @@ class ProviderDetailsCreator
     provider.update!(
       firm: firm,
       details_response: provider_details,
-      offices: offices
+      offices: offices,
+      name: provider_name
     )
 
     provider.update!(selected_office: nil) if should_clear_selected_office?
   end
 
   private
+
+  def provider_name
+    provider_details[:contactName]
+  end
 
   def should_clear_selected_office?
     !provider.selected_office.nil? && !provider.selected_office.id.in?(offices.pluck(:id))

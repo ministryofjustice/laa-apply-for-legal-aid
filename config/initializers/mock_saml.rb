@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 Rails.configuration.x.application.mock_saml = OpenStruct.new(
-  usernames: [
-    'really-really-long-email-address@example.com'.freeze,
-    'test1@example.com'.freeze,
-    'test2@example.com'.freeze,
-    '1.office@example.com'.freeze
+  users: [
+    OpenStruct.new(username: 'test1', email: 'test1@example.com'),
+    OpenStruct.new(username: 'test2', email: 'test2@example.com'),
+    OpenStruct.new(username: 'test3', email: 'really-really-long-email-address@example.com')
   ],
-  password: 'password'.freeze
+  password: 'password'
 )
