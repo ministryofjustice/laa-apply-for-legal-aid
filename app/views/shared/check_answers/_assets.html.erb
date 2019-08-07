@@ -90,4 +90,4 @@
       read_only: read_only
     ) if @legal_aid_application.other_assets? %>
 
-<%= render('shared/check_answers/restrictions') if @legal_aid_application.own_capital? %>
+<%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
