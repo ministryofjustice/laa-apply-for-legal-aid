@@ -24,15 +24,6 @@ module CheckAnswersHelper
     )
   end
 
-  def check_answer_no_link_bold(question:, answer:, name:)
-    render(
-      'shared/check_answers/no_link_item_bold',
-      name: name,
-      question: question,
-      answer: answer
-    )
-  end
-
   # Creates both the outer `dl` and the inner list items
   def check_answer_one_change_link(url:, question:, answer_hash:, name:)
     render(

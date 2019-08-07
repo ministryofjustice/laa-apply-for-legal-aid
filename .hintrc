@@ -6,7 +6,15 @@
   "parsers": [ "html", "css" ],
   "hintsTimeout": 120000,
   "hints": {
-    "axe": "error",
+    "axe": ["error", {
+      "rules": {
+        "definition-list": { "enabled": false },
+        "aria-allowed-attr": { "enabled": false },
+        "region": { "enabled": false },
+        "checkboxgroup": { "enabled": false },
+        "radiogroup": { "enabled": false }
+      }
+    }],
     "button-type": "error",
     "content-type": "error",
     "create-element-svg": "error",
@@ -14,15 +22,21 @@
     "disown-opener": "error",
     "highest-available-document-mode": "error",
     "html-checker": ["error", {
-        "ignore": [
-          "Start tag seen without seeing a doctype first. Expected “<!DOCTYPE html>”.",
-          "Attribute “src” not allowed on element “image” at this point.",
-          "The “banner” role is unnecessary for element “header”.",
-          "The “button” role is unnecessary for element “button”.",
-          "The “main” role is unnecessary for element “main”.",
-          "The “contentinfo” role is unnecessary for element “footer”.",
-          "Element “h1” not allowed as child of element “legend” in this context. (Suppressing further errors from this subtree.)"
-        ]
+      "ignore": [
+        "Start tag seen without seeing a doctype first. Expected “<!DOCTYPE html>”.",
+        "Element “input” is missing required attribute “role”.",
+        "Element “image” is missing required attribute “width”.",
+        "Element “image” is missing required attribute “height”.",
+        "Possible misuse of “aria-label”. (If you disagree with this warning, file an issue report or send e-mail to www-validator@w3.org.)",
+        "Attribute “aria-expanded” not allowed on element “input” at this point.",
+        "Attribute “src” not allowed on element “image” at this point.",
+        "The “banner” role is unnecessary for element “header”.",
+        "The “button” role is unnecessary for element “button”.",
+        "The “main” role is unnecessary for element “main”.",
+        "The “contentinfo” role is unnecessary for element “footer”.",
+        "Element “legend” not allowed as child of element “div” in this context. (Suppressing further errors from this subtree.)",
+        "Element “h1” not allowed as child of element “legend” in this context. (Suppressing further errors from this subtree.)"
+      ]
     }],
     "http-cache": "error",
     "http-compression": "error",
@@ -35,7 +49,7 @@
     "no-http-redirects": "error",
     "no-protocol-relative-urls": "error",
     "no-vulnerable-javascript-libraries": "error",
-    "sri": "error",
+    "sri": "off",
     "ssllabs": "error",
     "strict-transport-security": "error",
     "stylesheet-limits": "error",

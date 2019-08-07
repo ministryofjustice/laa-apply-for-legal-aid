@@ -6,6 +6,7 @@ en:
         header: Case enquires (Monday to Friday, 09:00 - 17:00)
         phone:
           phone_number: 0300 200 2020
+          phone_number_no_space: 03002002020
           text: 'Phone:'
       h1-heading: Contact us
       page_header: 'For any queries about your application, contact the following:'
@@ -16,4 +17,5 @@ en:
         header: Technical support (Monday to Friday, 09:00 - 17:00)
         phone:
           phone_number: 0300 200 2020
+          phone_number_no_space: 03002002020
           text: 'Phone:'

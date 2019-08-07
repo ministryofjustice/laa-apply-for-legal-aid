@@ -34,7 +34,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-hint')
-        expect(tag['aria-describedby']).to eq('')
+        expect(tag['aria-describedby']).to eq(nil)
       end
     end
 

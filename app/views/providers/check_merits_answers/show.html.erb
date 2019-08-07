@@ -11,7 +11,7 @@
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
 
-    <%= check_answer_no_link_bold(
+    <%= check_answer_no_link(
           name: :notification_of_latest_incident,
           question: t('.items.notification_of_latest_incident'),
           answer: @incident&.told_on
@@ -19,7 +19,7 @@
   </dl>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link_bold(
+    <%= check_answer_no_link(
           name: :date_of_latest_incident,
           question: t('.items.date_of_latest_incident'),
           answer: @incident&.occurred_on
@@ -35,7 +35,7 @@
         ) %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link_bold(
+    <%= check_answer_no_link(
           name: :understands_terms_of_court_order,
           question: t('.items.understands_terms_of_court_order'),
           answer: yes_no(@respondent.understands_terms_of_court_order)
@@ -45,7 +45,7 @@
   <div class='govuk-body'><%= simple_format @respondent.understands_terms_of_court_order_details %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link_bold(
+    <%= check_answer_no_link(
           name: :warning_letter_sent,
           question: t('.items.warning_letter_sent'),
           answer: yes_no(@respondent.warning_letter_sent)
@@ -54,7 +54,7 @@
   <div class='govuk-body'><%= simple_format @respondent.warning_letter_sent_details %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link_bold(
+    <%= check_answer_no_link(
           name: :police_notified,
           question: t('.items.police_notified'),
           answer: yes_no(@respondent.police_notified)
@@ -63,7 +63,7 @@
   <div class='govuk-body'><%= simple_format @respondent.police_notified_details %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link_bold(
+    <%= check_answer_no_link(
           name: :bail_conditions_set,
           question: t('.items.bail_conditions_set'),
           answer: yes_no(@respondent.bail_conditions_set)

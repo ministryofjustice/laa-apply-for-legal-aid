@@ -1,28 +1,35 @@
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-<%= width %>">
-    <div class="govuk-form-group">
-      <div class="govuk-date-input__item <%= group_error_class %>">
+<div class="govuk-form-group">
+  <div class="govuk-date-input__item <%= group_error_class %>">
 
-        <% label_text = t(".#{field_name}_label", default: '') %>
-        <%= form.govuk_label(field_name.to_s, label_text, id: "#{field_name}-label".dasherize) if label_text.present? %>
+    <% hint = t(".#{field_name}_hint", default: '') %>
+    <% if hint.present? %>
+      <fieldset class="govuk-fieldset" aria-describedby="<%= "#{field_name}-hint".dasherize %>" role="group">
+    <% else %>
+      <fieldset class="govuk-fieldset" role="group">
+    <% end %>
+      <% if label.present? %>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl ">
+          <h1 class="govuk-fieldset__heading"><%= label %></h1>
+        </legend>
+      <% else %>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <%= t(".#{field_name}_label") %>
+        </legend>
+      <% end %>
 
-        <% hint = t(".#{field_name}_hint", default: '') %>
-          <% if hint.present? %>
-            <%= content_tag(:span, t(".#{field_name}_hint"), default: '', id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
-        <% end %>
+      <% if hint.present? %>
+        <%= content_tag(:span, t(".#{field_name}_hint"), id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
+      <% end %>
 
-        <% if form.object.errors[field_name].any? %>
-          <%= content_tag(:span, form.object.errors[field_name].first, id: "#{field_name}-error".dasherize, class: ['govuk-error-message']) %>
-        <% end %>
+      <% if form.object.errors[field_name].any? %>
+        <%= content_tag(:span, form.object.errors[field_name].first, id: "#{field_name}-error".dasherize, class: ['govuk-error-message']) %>
+      <% end %>
 
-        <fieldset class="govuk-fieldset">
-          <div class="govuk-date-input">
-            <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_day", form: form, use_parent_as_id: true %>
-            <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_month", form: form %>
-            <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_year", form: form %>
-          </div>
-        </fieldset>
+      <div class="govuk-date-input">
+        <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_day", form: form, use_parent_as_id: true %>
+        <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_month", form: form %>
+        <%= render 'shared/forms/date_part_input_fields', parent_field: field_name, field_name: :"#{prefix}_year", form: form %>
       </div>
-    </div>
+    </fieldset>
   </div>
 </div>
