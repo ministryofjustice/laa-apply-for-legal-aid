@@ -5,7 +5,7 @@ class SamlIdpController < SamlIdp::IdpController
       if provider.nil?
         @saml_idp_fail_msg = 'Incorrect email or password.'
       else
-        @saml_response = idp_make_saml_response(provider)
+        @saml_response = idp_make_saml_response(provider, params[:email])
         render template: 'saml_idp/idp/saml_post', layout: false
         return
       end
@@ -16,15 +16,16 @@ class SamlIdpController < SamlIdp::IdpController
   private
 
   def idp_authenticate(email, password)
-    return unless config.usernames.include?(email) && config.password == password
+    return unless config.password == password
 
-    Provider.find_or_create_by(username: email) do |provider|
-      provider.type = 'Provider'
-    end
+    user = config.users.find { |u| u[:email] == email }
+    return unless user
+
+    Provider.find_or_create_by!(username: user.username)
   end
 
-  def idp_make_saml_response(provider)
-    encode_SAMLResponse(provider.username)
+  def idp_make_saml_response(provider, email)
+    encode_SAMLResponse(provider.username, {}, USER_EMAIL: email)
   end
 
   def config

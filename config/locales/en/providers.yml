@@ -120,6 +120,7 @@ en:
           heading: What happens next
           content: We'll check with the Department for Work and Pensions to see if your client receives benefits that make them eligible for legal aid.
         title: Check your answers
+        read_only_title: Your application
     client_received_legal_helps:
       show:
         h1-heading: Has your client received legal help for the matter?
@@ -286,6 +287,7 @@ en:
         name: Name
         page_title: Your profile
         role: Role
+        username: Username
     respondents:
       show:
         h1-heading: Respondent details
@@ -299,8 +301,8 @@ en:
     restrictions:
       show:
         h1-heading: Are there any legal restrictions that prevent your client from selling or borrowing against their assets?
-        restrictions_details: Tell us which assets they cannot sell or borrow against, and why      
-        for_example: "For example:" 
+        restrictions_details: Tell us which assets they cannot sell or borrow against, and why
+        for_example: "For example:"
         examples:
           list: |
             they're bankrupt
@@ -402,8 +404,6 @@ en:
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
-        used_delegated_functions_on: Date you used delegated functions
-        used_delegated_functions_on_hint: For example, 18 4 2019
     vehicles:
       show:
         heading: Does your client own a vehicle?

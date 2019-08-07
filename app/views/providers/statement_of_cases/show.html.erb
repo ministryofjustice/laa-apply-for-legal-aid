@@ -38,7 +38,7 @@
             ) %>
       </noscript>
 
-      <p class="govuk-body"><%= t('generic.or') %></p>
+      <div class="govuk-radios__divider"><%= t('generic.or') %></div>
 
       <label class="govuk-heading-m" for="statement"><%= t('generic.enter_text') %></label>
       <%= form.govuk_text_area :statement, label: nil, rows: 15 %>

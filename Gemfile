@@ -40,7 +40,7 @@ gem 'pagy'
 gem 'browser'
 
 # Used to mock saml request in UAT
-gem 'ruby-saml-idp'
+gem 'ruby-saml-idp', github: 'dev-develop/ruby-saml-idp', branch: 'master'
 
 # Used to encrypt JSON stored in SecureData
 gem 'jwt'

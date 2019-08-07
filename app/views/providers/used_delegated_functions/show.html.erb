@@ -19,19 +19,7 @@
             ) %>
 
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
-          <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-              <%= t('.used_delegated_functions_on') %>
-            </legend>
-            <%= govuk_hint t('.used_delegated_functions_on_hint') %>
-            <%= date_input_fields(
-                  prefix: :used_delegated_functions,
-                  field_name: :used_delegated_functions_on,
-                  width: :full,
-                  set_error_class_here: false,
-                  form: form
-                ) %>
-          </fieldset>
+          <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form %>
         </div>
 
         <%= form.govuk_radio_button(

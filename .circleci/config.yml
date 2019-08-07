@@ -307,11 +307,10 @@ workflows:
         - build_and_test
     - hold_uat:
         type: approval
-        requires:
-        - build_and_test
     - deploy_uat:
         requires:
         - hold_uat
+        - build_and_test
     - hold_staging:
         type: approval
         requires:

@@ -126,11 +126,6 @@ module GovukElementsFormBuilder
       end
     end
 
-    def govuk_label(method, text = nil, options = {}, &block)
-      size = options.delete(:size) || :m
-      label(method, text, merge_with_class(options, "govuk-fieldset__legend govuk-fieldset__legend--#{size}"), &block)
-    end
-
     private
 
     def concat_tags(*tags)
@@ -205,6 +200,8 @@ module GovukElementsFormBuilder
       aria_describedby = []
       aria_describedby << "#{attribute}-hint" if hint?(attribute, options)
       aria_describedby << "#{attribute}-error" if error?(attribute, options)
+      return if aria_describedby.empty?
+
       aria_describedby.join(' ')
     end
 
@@ -262,12 +259,6 @@ module GovukElementsFormBuilder
       object.respond_to?(:errors) &&
         errors.messages.key?(attr) &&
         errors.messages[attr].present?
-    end
-
-    def merge_with_class(args, class_text)
-      class_text = [class_text, args[:class]]
-      class_text.compact!
-      args.merge(class: class_text.join(' '))
     end
   end
 end

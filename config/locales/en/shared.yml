@@ -20,6 +20,7 @@ en:
     check_answers_restrictions:
         citizens: 
           question: Restrictions on your assets
+          details: Details of restrictions
         providers: 
           question: "Restrictions on your client's assets"
     check_answers_vehicles:
@@ -49,7 +50,9 @@ en:
         occurred_on_label: When did the incident occur?
         told_on_label: When did your client tell you about the latest domestic abuse incident?
         told_on_hint: For example 31 3 2019
-        purchased_on_hint: For example, 31 3 1980.
+        purchased_on_hint: For example, 31 3 1980
+        used_delegated_functions_on_label: Date you used delegated functions
+        used_delegated_functions_on_hint: For example, 31 3 2019
       dependants:
         assets_value:
           example: For example, property, cash savings or shares.
