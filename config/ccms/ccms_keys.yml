@@ -154,7 +154,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_14WP2_8A:
-    :value: true
+    :value: '#client_owns_vehicle'
     :br100_meaning: 'Cars: The client owns car(s)?'
     :response_type: boolean
     :user_defined: true
@@ -409,7 +409,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_16WP2_7A:
-    :value: false
+    :value: '#client_has_interest_in_a_trust'
     :br100_meaning: 'Trust: The client has an interest in a trust?'
     :response_type: boolean
     :user_defined: true
@@ -1548,7 +1548,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_9WP2_1A:
-    :value: false
+    :value: '#client_owed_money'
     :br100_meaning: 'Investments: The client has investments?'
     :response_type: boolean
     :user_defined: true
@@ -1826,7 +1826,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_15WP2_8A:
-    :value: false
+    :value: '#client_owns_vehicle'
     :br100_meaning: 'Money due: The client is owed money, including through a private
       mortgage?'
     :response_type: boolean
@@ -2097,7 +2097,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_12WP2_2A:
-    :value: true
+    :value: '#client_has_valuable_posessions'
     :br100_meaning: 'Val. possessions: The client has valuable possessions valued
       at £500+?'
     :response_type: boolean

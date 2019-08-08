@@ -92,6 +92,23 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
+    def client_owns_vehicle(_options)
+      @legal_aid_application.own_vehicle? ? 'true' : 'false'
+    end
+
+    def client_owed_money(_options)
+      @legal_aid_application.other_assets_declaration.money_owed_value.nil? ? 'false' : 'true'
+    end
+
+    def client_has_interest_in_a_trust(_options)
+      @legal_aid_application.other_assets_declaration.trust_value.nil? ? 'false' : 'true'
+    end
+
+    def client_has_valuable_posessions(_options)
+      # @legal_aid_application.other_assets_declaration.valuable_items_value.nil? ? 'false' : 'true'
+      @legal_aid_application.other_assets_declaration.valuable_items_value.blank? ? 'false' : 'true'
+    end
+
     private
 
     def standardly_named_method?(method)
