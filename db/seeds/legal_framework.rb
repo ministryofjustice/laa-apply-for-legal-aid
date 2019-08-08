@@ -10,8 +10,5 @@ legal_framework_seeds = ['levels_of_service.rb',
 
 legal_framework_seeds.each do |seed|
   seed_file = Rails.root.join(legal_framework_filepath, seed)
-  message = "Seeding '#{seed_file}'..."
-  Rails.logger.info message
-  puts message
   load seed_file
 end

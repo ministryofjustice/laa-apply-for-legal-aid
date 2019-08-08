@@ -1,0 +1,74 @@
+# Note the labels (primary keys in this file) are used to track the benefit type
+# across updates. If you change a label, a duplicate may result. If a benefit changes
+# name for example, from "Housing benefit" to "Homes benefit", change the 
+# desciption, but leave the benfit_type#label as it is.
+---
+attendance_allowance:
+  description: Attendance Allowance
+  exclude_from_gross_income: true
+budget_advances:
+  description: Budget Advances
+  exclude_from_gross_income: true
+care_in_the_community_direct_payment:
+  description: Care in the Community Direct Payment
+  exclude_from_gross_income: true
+carers_allowance:
+  description: Carers' Allowance
+  exclude_from_gross_income: true
+constant_attendance_allowance:
+  description: Constant Attendance Allowance
+  exclude_from_gross_income: true
+council_tax_benefit:
+  description: Council Tax Benefit
+  exclude_from_gross_income: true
+disability_living_allowance:
+  description: Disability Living Allowance
+  exclude_from_gross_income: true
+earnings_top_up:
+  description: Earnings Top Up
+  exclude_from_gross_income: true
+exceptionally_severe_disablement_allowance:
+  description: Exceptionally Severe Disablement Allowance
+  exclude_from_gross_income: true
+fostering_allowance:
+  description: Fostering Allowance (to the extent it exceeds dependents allowance)
+  exclude_from_gross_income: true
+housing_benefit:
+  description: Housing Benefit
+  exclude_from_gross_income: true
+independent_living_funds_payments:
+  description: Independent Living Funds payments
+  exclude_from_gross_income: true
+welsh_independent_living_grant:
+  description: Welsh Independent Living Grant
+  exclude_from_gross_income: true
+payments_on_account_of_benefit:
+  description: Payments on Account of Benefit
+  exclude_from_gross_income: true
+personal_independent_payments:
+  description: Personal Independent Payments
+  exclude_from_gross_income: true
+armed_forces_independence_payment:
+  description: Armed Forces Independence Payment
+  exclude_from_gross_income: true
+severe_disablement_allowance:
+  description: Severe Disablement Allowance
+  exclude_from_gross_income: true
+social_fund_payments:
+  description: Social Fund Payments
+  exclude_from_gross_income: true
+special_education_needs:
+  description: Special Education Needs (SEN) Direct Payment
+  exclude_from_gross_income: true
+transfer_advances_of_universal_credit:
+  description: Transfer Advances of Universal Credit
+  exclude_from_gross_income: true
+lump_sum_payments_under_windows_pension:
+  description: Lump sum payments under Window's Pension
+  exclude_from_gross_income: true
+war_pension:
+  description: War Pension (Any)
+  exclude_from_gross_income: true
+grenfell_payments:
+  description: Grenfell Payments
+  exclude_from_gross_income: true

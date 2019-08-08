@@ -36,6 +36,8 @@ gem 'pundit'
 # Pagination
 gem 'pagy'
 
+# Seeding tools
+gem 'dibber'
 # Gathers data from user browser - OS and Browser name
 gem 'browser'
 

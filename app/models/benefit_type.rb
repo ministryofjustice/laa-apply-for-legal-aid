@@ -1,0 +1,2 @@
+class BenefitType < ApplicationRecord
+end
