@@ -4795,6 +4795,12 @@ proceeding_merits:
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
     :response_type: text
     :user_defined: true
+  INJ_REASON_POLICE_NOT_NOTIFIED:
+    :generate_block?: true
+    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :br100_meaning: 'Inj: The Reason Why The Police  Have Not Been Notified'
+    :response_type: text
+    :user_defined: true
   CLIENT_INV_TYPE_INTERPLEADER:
     :value: "#proceeding_client_inv_type_interpleader"
     :br100_meaning: The Client's Involvement In The Proceeding Is As An Interpleader
