@@ -16,7 +16,7 @@ describe('ProceedingTypes.getAll', () => {
     ProceedingTypes.getAll()
   })
 
-  it('calls axios once', done => {
+  it('calls axios.get once', done => {
     expect(axios.get).toHaveBeenCalledTimes(1)
     done();
   })
@@ -27,25 +27,10 @@ describe('ProceedingTypes.getAll', () => {
     done()
   })
 
-  it('calls a get request', done => {
-    expect(axios.get).toHaveBeenCalled()
-    done()
-  })
-
   it('returns correct values', () => {
     axios.get.mockResolvedValueOnce({ data: { code: 'data' } })
     return ProceedingTypes.getAll().then((result) => {
       expect(result).toEqual({ code: 'data' })
     })
   })
-})
-
-describe('ProceedingTypes.filterSearch', () => {
-
-  beforeEach(() => {
-    axios.get.mockResolvedValueOnce({ data: { code: 'data' } })
-  })
-
-  // can this be tested with jest? or should it be left to capybara to test the page
-
 })
