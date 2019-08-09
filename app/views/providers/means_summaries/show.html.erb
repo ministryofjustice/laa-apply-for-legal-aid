@@ -1,8 +1,8 @@
 <%= page_template(page_title: t('.h1-heading')) do %>
 
+  <h2 class="govuk-heading-l"><%= t('.credits-section-heading') %></h2>
   <%= render(
-        'bank_transaction_table',
-        section_heading: t('.credits-section-heading'),
+        'shared/check_answers/bank_transaction_table',
         transaction_types: TransactionType.credits
       ) %>
 
@@ -15,9 +15,9 @@
 
   <div class="govuk-!-padding-bottom-8"></div>
 
+  <h2 class="govuk-heading-l"><%= t('.debits-section-heading') %></h2>
   <%= render(
-        'bank_transaction_table',
-        section_heading: t('.debits-section-heading'),
+        'shared/check_answers/bank_transaction_table',
         transaction_types: TransactionType.debits
       ) %>
 
@@ -32,7 +32,7 @@
 
   <h2 class="govuk-heading-l"><%= t('.captial-section-heading') %></h2>
 
-  <%= render 'shared/check_answers_assets', user_type: :providers, application: @legal_aid_application %>
+  <%= render 'shared/check_answers/assets' %>
 
     <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_means_summary_path,

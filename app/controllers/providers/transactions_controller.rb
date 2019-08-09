@@ -1,7 +1,5 @@
 module Providers
   class TransactionsController < ProviderBaseController
-    helper_method :date_from, :date_to
-
     def show
       authorize legal_aid_application
       transaction_type
@@ -16,14 +14,6 @@ module Providers
     end
 
     private
-
-    def date_from
-      l(legal_aid_application.transaction_period_start_at.to_date, format: :long_date)
-    end
-
-    def date_to
-      l(legal_aid_application.transaction_period_finish_at.to_date, format: :long_date)
-    end
 
     def reset_selection
       bank_transactions.where(transaction_type_id: transaction_type.id).update_all(transaction_type_id: nil)

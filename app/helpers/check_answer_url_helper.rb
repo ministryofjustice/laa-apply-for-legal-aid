@@ -1,7 +1,7 @@
 module CheckAnswerUrlHelper
-  def check_answer_url_for(user_type, field_name, application = nil)
+  def check_answer_url_for(journey_type, field_name, application = nil)
     flow_service = Flow::BaseFlowService.flow_service_for(
-      user_type,
+      journey_type,
       current_step: field_name,
       legal_aid_application: application
     )

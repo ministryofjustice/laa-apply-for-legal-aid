@@ -2,12 +2,14 @@
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m"><%= question %></h2>
   </div>
-  <%= link_to(url, class: 'govuk-link change-link') do %>
-    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
-      <p>
-        <%= t('generic.change') %>
-        <span class="govuk-visually-hidden"><%= question %></span>
-      </p>
-    </div>
+  <% unless read_only %>
+      <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+        <p>
+          <%= link_to(url, class: 'govuk-link change-link') do %>
+            <%= t('generic.change') %>
+            <span class="govuk-visually-hidden"><%= question %></span>
+          <% end %>
+        </p>
+      </div>
   <% end %>
 </div>

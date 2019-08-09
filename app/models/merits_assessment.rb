@@ -10,6 +10,6 @@ class MeritsAssessment < ApplicationRecord
   }, _prefix: true
 
   def self.prospects_unlikely_to_succeed
-    MeritsAssessment.success_prospects.except(:likely).keys
+    success_prospects.except(:likely).keys
   end
 end

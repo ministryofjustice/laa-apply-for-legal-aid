@@ -1,0 +1,21 @@
+<div class="govuk-summary-list govuk-!-margin-bottom-0">
+  <%= check_answer_link(
+        name: :restrictions,
+        url: check_answer_url_for(journey_type, :restrictions, @legal_aid_application),
+        question: t(".#{journey_type}.question"),
+        answer: yes_no(@legal_aid_application.has_restrictions),
+        no_border: @legal_aid_application.has_restrictions?,
+        read_only: read_only,
+        align_right: read_only
+      ) %>
+
+  <div class="govuk-body wrap-text govuk-!-margin-bottom-0">
+    <%= simple_format @legal_aid_application.restrictions_details %>
+  </div>
+</div>
+
+<div class=" govuk-!-margin-bottom-9">
+  <% if @legal_aid_application.has_restrictions %>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full" style="width: 100%;">
+  <% end %>
+</div>

@@ -62,7 +62,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   def bank_transactions
     return applicant.bank_transactions if Setting.mock_true_layer_data?
 
-    set_transaction_period unless transaction_period_start_at? && transaction_period_finish_at?
+    set_transaction_period
     applicant.bank_transactions.where(
       happened_at: transaction_period_start_at..transaction_period_finish_at
     )
@@ -78,6 +78,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def set_transaction_period
+    return if transaction_period_start_at? && transaction_period_finish_at?
+
     update!(
       transaction_period_start_at: 3.months.ago.beginning_of_day,
       transaction_period_finish_at: Time.now.beginning_of_day
