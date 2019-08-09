@@ -10,7 +10,7 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-describe('calls ProceedingTypes module', () => {
+describe('searchProceedingTypes function', () => {
   beforeEach(() => {
     axios.get.mockResolvedValueOnce({ data: { code: 'data' } })
     jest.spyOn(ProceedingTypes, 'getAll')
