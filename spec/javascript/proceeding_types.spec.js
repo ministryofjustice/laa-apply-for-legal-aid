@@ -1,43 +1,30 @@
-import $ from 'jquery'
-import * as JsSearch from 'js-search';
-jest.mock('js-search', () => { })
+import axios from 'axios'
+import * as ProceedingTypes from 'proceedings'
+import { searchProceedingTypes } from 'proceeding_types'
 
-global.$ = global.jQuery = $;
-const proceedingTypes = require('proceeding_types');
+jest.mock('axios')
 
-beforeEach(() => {
-  jest.resetAllMocks()
-})
+beforeEach(() => jest.resetAllMocks())
 
-describe('calls API to get a list of proceeding types', () => {
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
+describe('calls ProceedingTypes module', () => {
   beforeEach(() => {
-    $.getJSON = jest.fn()
-    search.mockImplementation(() => {
-      return {
-        Search: mMock
-      }
-    })
-    proceedingTypes()
+    axios.get.mockResolvedValueOnce({ data: { code: 'data' } })
+    jest.spyOn(ProceedingTypes, 'getAll')
+    jest.spyOn(ProceedingTypes, 'filterSearch')
+    searchProceedingTypes()
   })
 
-  it('calls getJSON', () => {
-    expect($.getJSON).toHaveBeenCalled();
+  it('calls ProceedingTypes.getAll', done => {
+    expect(ProceedingTypes.getAll).toHaveBeenCalled()
+    done()
   })
 
-  it('polls the correct endpoint', () => {
-    let endpoint = "/v1/proceeding_types"
-    expect($.getJSON).toHaveBeenCalledWith(endpoint, expect.any(Function))
+  it('calls ProceedingTypes.filterSearch', done => {
+    expect(ProceedingTypes.filterSearch).toHaveBeenCalledWith({ code: 'data' })
+    done()
   })
-
-  test("returns list of proceeding types", () => {
-    $.getJSON.mockImplementationOnce(() =>
-      Promise.resolve(dummy_response_data_here)
-    );
-    return search.fetchBooks().then(response => {
-      expect(response).toEqual();
-    });
-  });
-
-
 })
