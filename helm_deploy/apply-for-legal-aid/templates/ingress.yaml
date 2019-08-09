@@ -19,10 +19,19 @@ spec:
   {{- range .Values.ingress.hosts }}
   - hosts:
     - {{ . }}
+    - staging.apply-for-legal-aid.service.justice.gov.uk
+     secretName: apply-for-legal-aid-tls-certificate-domain
   {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
     - host: {{ . }}
+      http:
+        paths:
+          - path: {{ $ingressPath }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: http
+    - host: staging.apply-for-legal-aid.service.justice.gov.uk
       http:
         paths:
           - path: {{ $ingressPath }}
