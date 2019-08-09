@@ -2299,11 +2299,12 @@ global_means:
     :br100_meaning: 'The application has been made through the Apply service'
     :response_type: boolean
     :user_defined: false
-  # APPLY_CASE_MEANS_REVIEW:
-  #   :value: '#application_has_restrictions?'
-  #   :br100_meaning: 'The application means assessment needs a caseworker to manually review'
-  #   :response_type: boolean
-  #   :user_defined: false
+  APPLY_CASE_MEANS_REVIEW:
+    :value: '#application_has_restrictions?'
+    # :value: true
+    :br100_meaning: 'The application means assessment needs a caseworker to manually review'
+    :response_type: boolean
+    :user_defined: false
 global_merits:
   APP_INCLUDES_IMMIGRATION_PROCS:
     :generate_block?: false
@@ -3936,11 +3937,12 @@ global_merits:
     :br100_meaning: 'The application has been made through the Apply service'
     :response_type: boolean
     :user_defined: false
-  # APPLY_CASE_MEANS_REVIEW:
-  #   :value: '#application_has_restrictions?'
-  #   :br100_meaning: 'The application means assessment needs a caseworker to manually review'
-  #   :response_type: boolean
-  #   :user_defined: false
+  APPLY_CASE_MEANS_REVIEW:
+    :value: '#application_has_restrictions?'
+    # :value: true
+    :br100_meaning: 'The application means assessment needs a caseworker to manually review'
+    :response_type: boolean
+    :user_defined: false
 other_party:
   OTHER_PARTY_NAME:
     :value: "#other_party_full_name"
