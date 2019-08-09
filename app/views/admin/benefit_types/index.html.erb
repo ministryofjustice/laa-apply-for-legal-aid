@@ -1,0 +1,26 @@
+<%= page_template page_title: t('.heading') do %>
+
+  <%= link_to t('.link_to_new'), new_admin_benefit_type_path, class: 'govuk-button' %>
+
+  <table  class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header"><%= BenefitType.human_attribute_name(:description) %></th>
+        <th scope="col" class="govuk-table__header"><%= BenefitType.human_attribute_name(:exclude_from_gross_income) %></th>
+        <th colspan="3" class="govuk-table__header"></th>
+      </tr>
+    </thead>
+
+    <tbody class="govuk-table__body">
+      <% @benefit_types.each do |benefit_type| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><%= benefit_type.description %></td>
+          <td class="govuk-table__cell"><%= yes_no(benefit_type.exclude_from_gross_income) %></td>
+          <td class="govuk-table__cell"><%= link_to t('generic.show'), [:admin, benefit_type] %></td>
+          <td class="govuk-table__cell"><%= link_to t('generic.edit'), edit_admin_benefit_type_path(benefit_type) %></td>
+          <td class="govuk-table__cell"><%= link_to t('generic.destroy'), [:admin, benefit_type], method: :delete, data: { confirm: t('generic.confirm') } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

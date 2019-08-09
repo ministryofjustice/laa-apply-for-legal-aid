@@ -1,0 +1,7 @@
+<%= page_template page_title: t('.heading', label: @benefit_type.label.humanize) do %>
+
+  <%= render 'form', benefit_type: @benefit_type %>
+
+  <%= link_to t('generic.cancel'), admin_benefit_types_path %>
+
+<% end %>

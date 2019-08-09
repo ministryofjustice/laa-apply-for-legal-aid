@@ -1,6 +1,16 @@
 ---
 en:
   admin:
+    benefit_types:
+      edit:
+        heading: 'Edit: %{label}'
+      form:
+        error_heading: '%{benefit_types} prohibited this benefit type from being saved'
+      index:
+        heading: Benefit Types
+        link_to_new: New Benefit Type
+      show:
+        heading: 'Benefit Type: %{label}'
     legal_aid_applications:
       index:
         delete_all: Delete all applications

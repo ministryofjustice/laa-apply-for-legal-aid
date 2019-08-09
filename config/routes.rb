@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       delete :destroy_all, on: :collection
     end
     resource :settings, only: %i[show update]
+    resources :benefit_types
   end
 
   namespace 'v1' do

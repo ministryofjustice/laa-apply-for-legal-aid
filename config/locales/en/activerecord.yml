@@ -1,6 +1,10 @@
 ---
 en:
   activerecord:
+    attributes:
+      benefit_type:
+        description: Description
+        exclude_from_gross_income: Exclude from Gross Income
     errors:
       models:
         address:
