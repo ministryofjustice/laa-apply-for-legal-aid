@@ -19,21 +19,11 @@
           title: t(".#{attr}"),
           attribute: attr,
           attribute_details: "#{attr}_details".to_sym,
-          show_details_when: 'false'
+          show_details_when: attr == :bail_conditions_set ? 'true' : 'false'
         )
       end
-
-      questions.each do |question|
-        question.show_details_when = nil if question.attribute == :bail_conditions_set
-      end
-
-      bail_conditions_titles = {
-        yes: t('.bail_conditions_set_yes'),
-        no: t('.bail_conditions_set_no'),
-        blank_error: t('.bail_conditions_set_blank')
-      }
     %>
-    <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form, bail_conditions_titles: bail_conditions_titles } %>
+    <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form } %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
