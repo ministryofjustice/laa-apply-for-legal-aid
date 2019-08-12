@@ -11,3 +11,16 @@
   word-break: break-all;
   word-break: break-word;
 }
+
+.only-print, .only-print * {
+  display: none !important;
+}
+
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
+  }
+  .only-print, .only-print * {
+    display: inherit !important;
+  }
+}

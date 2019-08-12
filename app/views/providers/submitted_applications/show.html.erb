@@ -11,9 +11,7 @@
     </dd>
   </dl>
 
-  <button class="govuk-button" type="button">
-    <%= t('.print_button') %>
-  </button>
+  <%= print_button t('.print_button') %>
 
   <section class="client_details">
     <h2 class="govuk-heading-l"><%= t('.client_details_heading') %></h2>
@@ -67,9 +65,31 @@
     ) %>
   </section>
 
-  <button class="govuk-button" type="button">
-    <%= t('.print_button') %>
-  </button>
+  <div class="govuk-!-padding-bottom-6"></div>
 
-  <%= next_action_link continue_text: t('.back_home'), html_class: 'govuk-button--secondary' %>
+  <section id="client-declaration" class="only-print">
+    <h2 class="govuk-heading-l"><%= t('.client_declaration.heading') %></h2>
+
+    <%= render 'shared/applicant_declaration' %>
+
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t('.client_declaration.signature') %>
+        </dt>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t('.client_declaration.date') %>
+        </dt>
+      </div>
+    </dl>
+  </section>
+
+  <div class="no-print">
+    <%= print_button t('.print_button') %>
+
+    <%= next_action_link continue_text: t('.back_home'), html_class: 'govuk-button--secondary' %>
+  </div>
+
 <% end %>

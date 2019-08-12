@@ -18,10 +18,12 @@
     </div>
     <div class="govuk-header__content">
       <%= home_link %>
-      <%= menu_button if user_header_link %>
-      <nav>
-        <%= user_header_link %>
-      </nav>
+      <div class="no-print">
+        <%= menu_button if user_header_link %>
+        <nav>
+          <%= user_header_link %>
+        </nav>
+      </div>
     </div>
   </div>
 </header>

@@ -50,20 +50,6 @@ en:
     declarations:
       show:
         page_heading: Declaration
-        submission_list_summary: By submitting this assessment, you agree that
-        submission_list: |
-          you've instructed Hitchcock, Jones and King to represent you
-          we can share your information with other government departments like the Department for Work and Pensions (DWP) and HM Revenue and Customs (HMRC)
-          we can check your details with your bank and credit reference agencies
-          you may have to pay towards your legal aid
-          you may have to repay the legal costs if you keep or gain property or money at the end of your case (known as the 'statutory charge')
-          the information you've given is complete and correct
-          you'll report any changes to your financial situation immediately
-        warning_list_summary: If you give wrong or incomplete information, or do not report changes, you may
-        warning_list: |
-          be prosecuted
-          need to pay a financial penalty
-          have your legal aid stopped and have to pay back the costs
         submit_button: Agree and submit
     dependants:
       assets_values:
@@ -164,8 +150,8 @@ en:
     restrictions:
       show:
         h1-heading: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
-        restrictions_details: Tell us which assets you cannot sell or borrow against, and why      
-        for_example: "For example:" 
+        restrictions_details: Tell us which assets you cannot sell or borrow against, and why
+        for_example: "For example:"
         examples:
           list: |
             you're bankrupt

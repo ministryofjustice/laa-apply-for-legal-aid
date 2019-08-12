@@ -5,6 +5,8 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
     create :legal_aid_application, :with_everything, :with_proceeding_types, state: :assessment_submitted
   end
   let(:login) { login_as legal_aid_application.provider }
+  let(:html) { Nokogiri::HTML(response.body) }
+  let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
 
   before do
     login
@@ -22,6 +24,22 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
     it 'displays reference' do
       expect(response.body).to include(legal_aid_application.application_ref)
+    end
+
+    it 'shows client declaration only when printing the page' do
+      expect(html.at_css('#client-declaration').classes).to include('only-print')
+    end
+
+    it 'hidess print buttons when printing the page' do
+      print_buttons.each do |print_button|
+        expect(print_button.ancestors.at_css('.no-print')).to_not eq(nil)
+      end
+    end
+
+    it 'triggers window.print() when clicking the printing buttons' do
+      print_buttons.each do |print_button|
+        expect(print_button.attributes['onclick'].value).to eq('window.print()')
+      end
     end
 
     context 'when the provider is not authenticated' do
