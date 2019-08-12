@@ -241,7 +241,7 @@ GEM
     mustermann (1.0.3)
     nesty (1.0.2)
     nio4r (2.4.0)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     notifications-ruby-client (2.9.0)
