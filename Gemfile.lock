@@ -240,7 +240,7 @@ GEM
     multipart-post (2.1.1)
     mustermann (1.0.3)
     nesty (1.0.2)
-    nio4r (2.3.1)
+    nio4r (2.4.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
@@ -273,7 +273,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (3.1.1)
-    puma (4.0.1)
+    puma (4.1.0)
       nio4r (~> 2.0)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
@@ -499,7 +499,7 @@ DEPENDENCIES
   pg
   prometheus_exporter
   pry-byebug
-  puma (~> 4.0)
+  puma (~> 4.1)
   pundit
   rails (~> 5.2.3)
   redis-namespace
