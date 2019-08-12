@@ -1,16 +1,4 @@
 <%= form_with(model: [:admin, benefit_type], local: true) do |form| %>
-  <% if benefit_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= t('.error_heading', benefit_types: pluralize(benefit_type.errors.count, "error")) %>:</h2>
-
-      <ul>
-      <% benefit_type.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <% unless benefit_type.persisted? %>
     <%= form.govuk_text_field :label, label: { text: BenefitType.human_attribute_name(:label), size: :m } %>
   <% end %>

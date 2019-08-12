@@ -1,0 +1,29 @@
+.admin-page {
+  nav.app-navigation {
+    @media (min-width: 40.0625em) {
+      margin-top: -1em;
+    }
+
+    ul.app-navigation__list {
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        a {
+          padding: 0.5em 2em;
+          background-color: #dee0e2;
+        }
+
+        &.current-page {
+          a {
+            color: white;
+            background-color: black;
+          }
+        }
+      }
+    }
+  }
+}

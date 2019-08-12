@@ -1,6 +1,7 @@
 module Admin
   class BenefitTypesController < ApplicationController
     before_action :authenticate_admin_user!
+    layout 'admin'.freeze
 
     # GET /admin/benefit_types
     def index
@@ -24,8 +25,9 @@ module Admin
 
     # POST /admin/benefit_types
     def create
-      if  benefit_type.update(benefit_type_params)
-        redirect_to [:admin, benefit_type], notice: 'Benefit type was successfully created.'
+      @benefit_type = BenefitType.new(benefit_type_params)
+      if @benefit_type.save
+        redirect_to [:admin, @benefit_type], notice: 'Benefit type was successfully created.'
       else
         render :new
       end
@@ -47,13 +49,15 @@ module Admin
     end
 
     private
-    
+
     def benefit_type
       @benefit_type = params[:id] ? BenefitType.find(params[:id]) : BenefitType.new
     end
 
     # Only allow a trusted parameter "white list" through.
     def benefit_type_params
+      return {} unless params[:benefit_type].present?
+
       params.require(:benefit_type).permit(:description, :exclude_from_gross_income, :label)
     end
   end

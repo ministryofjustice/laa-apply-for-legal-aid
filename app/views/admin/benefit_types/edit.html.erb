@@ -1,4 +1,8 @@
-<%= page_template page_title: t('.heading', label: @benefit_type.label.humanize) do %>
+<%= page_template(
+      page_title: t('.heading', label: @benefit_type.label.humanize),
+      show_errors_for: @benefit_type,
+      back_link: :none
+    ) do %>
 
   <%= render 'form', benefit_type: @benefit_type %>
 

@@ -1,6 +1,10 @@
 ---
 en:
   layouts:
+    admin:
+      applications: Applications
+      benefit_types: Benefit Types
+      edit_settings: Settings
     application:
       footer:
         contact: Contact

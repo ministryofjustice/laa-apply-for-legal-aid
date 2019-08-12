@@ -1,8 +1,8 @@
-<%= page_template page_title: t('.heading') do %>
+<%= page_template page_title: t('.heading'), back_link: :none do %>
 
   <%= link_to t('.link_to_new'), new_admin_benefit_type_path, class: 'govuk-button' %>
 
-  <table  class="govuk-table">
+  <table class="govuk-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header"><%= BenefitType.human_attribute_name(:description) %></th>

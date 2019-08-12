@@ -19,6 +19,13 @@ en:
               invalid: address is not in the right format
             national_insurance_number:
               invalid: is not in the right format
+        benefit_type:
+          attributes:
+            label:
+              blank: Label must be present
+              taken: The label is already used by another Benefit Type
+            description:
+              blank: Description must be present
         legal_aid_application:
           attributes:
             base:
