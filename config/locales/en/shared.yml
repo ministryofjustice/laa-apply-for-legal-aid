@@ -1,10 +1,6 @@
 ---
 en:
   shared:
-    access_denied:
-      back_to_apps_link: Back to your applications
-      heading_1: You cannot view this page
-      permission_text: You can only view or edit this application if you created it
     check_answers:
       assets:
         assets:
@@ -63,7 +59,7 @@ en:
         citizens:
           question: Restrictions on your assets
           details: Details of restrictions
-        providers: 
+        providers:
           question: "Restrictions on your client's assets"
       vehicles:
         citizens:

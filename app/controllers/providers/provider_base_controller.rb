@@ -25,7 +25,7 @@ module Providers
 
     def provider_not_authorized
       respond_to do |format|
-        format.html { render 'shared/access_denied', status: :forbidden }
+        format.html { redirect_to error_path(:access_denied) }
       end
     end
   end
