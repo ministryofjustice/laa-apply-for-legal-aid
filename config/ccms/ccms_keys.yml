@@ -2301,7 +2301,6 @@ global_means:
     :user_defined: false
   APPLY_CASE_MEANS_REVIEW:
     :value: '#application_has_restrictions?'
-    # :value: true
     :br100_meaning: 'The application means assessment needs a caseworker to manually review'
     :response_type: boolean
     :user_defined: false
@@ -3926,12 +3925,6 @@ global_merits:
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
-  CLIENT_CIVIL_PARTNER:
-    :generate_block?: false
-    :value: false
-    :br100_meaning: The Client Is In A Civil Partnership
-    :response_type: boolean
-    :user_defined: false
   APPLICATION_FROM_APPLY:
     :value: true
     :br100_meaning: 'The application has been made through the Apply service'
@@ -3939,7 +3932,6 @@ global_merits:
     :user_defined: false
   APPLY_CASE_MEANS_REVIEW:
     :value: '#application_has_restrictions?'
-    # :value: true
     :br100_meaning: 'The application means assessment needs a caseworker to manually review'
     :response_type: boolean
     :user_defined: false
