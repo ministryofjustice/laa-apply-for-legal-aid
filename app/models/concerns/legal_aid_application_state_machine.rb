@@ -4,7 +4,7 @@ module LegalAidApplicationStateMachine
   included do # rubocop:disable Metrics/BlockLength
     include AASM
 
-    aasm column: :state do
+    aasm column: :state do # rubocop:disable Metrics/BlockLength
       state :initiated, initial: true
       state :checking_client_details_answers
       state :client_details_answers_checked
@@ -88,7 +88,8 @@ module LegalAidApplicationStateMachine
       end
 
       event :submit_assessment do
-        transitions from: :checked_merits_answers, to: :assessment_submitted
+        transitions from: :checked_merits_answers, to: :assessment_submitted,
+                    after: -> { MeritsReportCreatorWorker.perform_async(id) }
       end
     end
   end

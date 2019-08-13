@@ -13,6 +13,7 @@ may well be used to fire requests to other services.
     * postgres 10.5
     * redis
     * yarn
+    * wkhtmltopdf
 
 Install dependencies with homebrew:
 ```

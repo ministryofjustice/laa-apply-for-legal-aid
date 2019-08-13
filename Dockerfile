@@ -1,4 +1,4 @@
-FROM ruby:2.6.3-alpine3.8
+FROM ruby:2.6.3-alpine3.10
 MAINTAINER apply for legal aid team
 
 # fail early and print all commands
@@ -23,8 +23,9 @@ RUN apk --no-cache add --virtual build-dependencies \
                   yarn \
                   linux-headers \
                   clamav-daemon \
-                  pdftk \
-                  libreoffice
+                  libreoffice \
+                  ttf-ubuntu-font-family \
+                  wkhtmltopdf
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \

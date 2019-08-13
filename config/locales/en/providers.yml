@@ -199,6 +199,8 @@ en:
     merits_reports:
       show:
         heading: Merits report
+        apply_ref: 'Apply service case reference:'
+        ccms_ref: 'CCMS case reference:'
         client_details: Client details
         applying_for: What you’re applying for
       client_details:
