@@ -21,14 +21,15 @@
       ) %>
 </dl>
 
-<div class="govuk-!-padding-bottom-6">
-  <%= check_answer_change_link(
-        name: :respondent_details,
-        url: providers_legal_aid_application_respondent_path,
-        question: t('.respondent-heading'),
-        read_only: read_only
-      ) %>
-</div>
+<div class="govuk-!-padding-bottom-6"></div>
+
+<%= check_answer_change_link(
+      name: :respondent_details,
+      url: providers_legal_aid_application_respondent_path,
+      question: t('.respondent-heading'),
+      read_only: read_only
+    ) %>
+
 <dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :understands_terms_of_court_order,
@@ -36,12 +37,12 @@
         answer: yes_no(respondent.understands_terms_of_court_order),
         no_border: !respondent.understands_terms_of_court_order
       ) %>
-</div>
+</dl>
 <div class='govuk-body'><%= simple_format respondent.understands_terms_of_court_order_details %></div>
 
 <%= render 'shared/check_answers/section_break' unless respondent.understands_terms_of_court_order %>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :warning_letter_sent,
         question: t('.items.warning_letter_sent'),
@@ -53,7 +54,7 @@
 
 <%= render 'shared/check_answers/section_break' unless respondent.warning_letter_sent %>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :police_notified,
         question: t('.items.police_notified'),
@@ -65,7 +66,7 @@
 
 <%= render 'shared/check_answers/section_break' unless respondent.police_notified %>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :bail_conditions_set,
         question: t('.items.bail_conditions_set'),

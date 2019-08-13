@@ -13,13 +13,8 @@
           ) %>
 
     <% always_showing = question.show_details_when.nil? %>
-<<<<<<< HEAD
-    <%= content_tag(:div, id: conditional_id, class: always_showing ? nil : 'govuk-radios__conditional--hidden') do %>
-        <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>
-=======
     <%= content_tag(:div, id: conditional_id, class: 'govuk-radios__conditional--hidden') do %>
       <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>
->>>>>>> bdb7c5f2... Update views and forms
     <% end %>
   </div>
 </div>

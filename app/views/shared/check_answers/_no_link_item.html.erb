@@ -1,10 +1,10 @@
 <% no_border = no_border ? 'govuk-summary-list--no-border' : '' %>
 
-<div class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
+<dl class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
   <dt class="govuk-summary-list__key check-your-answers-question">
     <%= question %>
   </dt>
   <dd class="govuk-summary-list__value check-your-answers-answer">
     <%= answer.present? ? answer : '-' %>
   </dd>
-</div>
+</dl>
