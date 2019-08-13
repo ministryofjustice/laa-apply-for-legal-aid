@@ -19,7 +19,7 @@ end
 RSpec::Matchers.define :have_response_value do |expected|
   match do |actual|
     actual_response_value = actual.css('ResponseValue').text
-    actual_response_value.strip == expected.strip
+    actual_response_value.squish == expected.squish
   end
   failure_message do |actual|
     actual_response_value = actual.css('ResponseValue').text

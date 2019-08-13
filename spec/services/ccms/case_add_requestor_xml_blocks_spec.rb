@@ -1049,7 +1049,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             block = XmlExtractor.call(xml, entity, attribute)
             expect(block).to be_present
             expect(block).to have_response_type 'text'
-            # Issue with this as it is not matching the text correctly, seems to be due to length of the string
             expect(block).to have_response_value 'Apply Service application. See provider statement of case and report uploaded as evidence'
           end
         end
@@ -1058,17 +1057,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STMT_DETAIL')
           expect(block).to be_present
           expect(block).to have_response_type 'text'
-          # Issue with this as it is not matching the text correctly, seems to be due to length of the string
-          # expect(block).to have_response_value 'This is an APPLY service application. See Merits
-          # statement uploaded into CCMS supporting evidence'
+          expect(block).to have_response_value 'This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence'
         end
 
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to be_present
           expect(block).to have_response_type 'text'
-          # expect(block).to have_response_value 'Apply Service application. See provider statement of case and report uploaded as evidence'
-          # Issue with this as it is not matching the text correctly, seems to be due to length of the string
+          expect(block).to have_response_value 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
       end
     end
