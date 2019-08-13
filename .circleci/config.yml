@@ -49,6 +49,14 @@ references:
           sudo apt-get install libreoffice -y
         fi
 
+  install_wkhtmltopdf: &install_wkhtmltopdf
+    run:
+      name: Install LibreOffice
+      command: |
+        if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+          sudo apt-get install wkhtmltopdf -y
+        fi
+
   build_docker_image: &build_docker_image
     run:
       name: Build laa-apply-for-legal-aid  docker image
@@ -96,6 +104,7 @@ jobs:
     - *setup_aws_login
     - *install_clamav
     - *install_libreoffice
+    - *install_wkhtmltopdf
     - restore_cache:
         keys:
           - v1-gems-cache-{{ checksum "Gemfile.lock" }}
