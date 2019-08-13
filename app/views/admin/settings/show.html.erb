@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.heading_1') do %>
+<%= page_template page_title: t('.heading_1'), back_link: :none do %>
   <%= form_with(
         model: @form,
         url: admin_settings_path,

@@ -5,9 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Rails.logger.info 'Seeding started'
+Seeder = Dibber::Seeder
+Seeder.monitor AdminUser
+Seeder.monitor ServiceLevel
+Seeder.monitor ProceedingType
+Seeder.monitor ProceedingTypeScopeLimitation
+Seeder.monitor ScopeLimitation
+
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
-  message = "Seeding '#{seed}'..."
-  Rails.logger.info message
-  puts message
   load seed
 end
+
+Seeder.new(BenefitType, 'data/benefit_types.yml', name_method: :label).build
+
+puts Seeder.report
+Rails.logger.info Seeder.report.join("\n")
+Rails.logger.info 'Seeding completed'

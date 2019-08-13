@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_115955) do
+ActiveRecord::Schema.define(version: 2019_08_08_094323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -184,6 +184,14 @@ ActiveRecord::Schema.define(version: 2019_08_06_115955) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
+  end
+
+  create_table "benefit_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "label"
+    t.text "description"
+    t.boolean "exclude_from_gross_income"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ccms_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

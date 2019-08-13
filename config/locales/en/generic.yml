@@ -6,16 +6,21 @@ en:
       postcode: Postcode
       postcode_label: postcode
     back: Back
+    back_to_your_applications: Back to your applications
+    cancel: Cancel
     change: Change
     continue: Continue
+    confirm: Are you sure?
     create_test_applications: Create test applications
-    back_to_your_applications: Back to your applications
+    destroy: Destroy
+    edit: Edit
     enter_text: Enter text
     errors:
       problem_text: There is a problem
       yes_or_no: You must select either Yes or No
     home: Home
     information: Information
+    list: List
     'no': 'No'
     menu: Menu
     none_declared: None declared
@@ -26,6 +31,7 @@ en:
     save_and_come_back_later: Save and come back later
     select_and_continue: Select and continue
     send: Send
+    show: Show
     start: Start
     start_now: Start now
     submit: Submit
