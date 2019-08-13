@@ -1,19 +1,22 @@
-# Relies on `legal_aid_application` method being available - so define after `ApplicationDependable`
+# If included in a controller this will enable pundit and make `authorize legal_aid_application` the default behaviour
+# Controllers that have `legal_aid_application_not_required!` will also not use the default behaviour set here.
+# Relies on `legal_aid_application` method being available - so define after `ApplicationDependable`.
 module Providers
   module Authorizable
     extend ActiveSupport::Concern
 
     class_methods do
-      def use_custom_authorization!
-        @use_custom_authorization = true
-      end
+      attr_reader :authorize_with_policy_name
 
-      def use_custom_authorization?
-        @use_custom_authorization
+      # Use this class method in a controller to set the policy to be used within that controller
+      # If not set the policy will behave as normal for Pundit (policy will be based on action name)
+      def authorize_with_policy(name)
+        @authorize_with_policy_name = name
       end
     end
 
     included do
+      include Pundit
       before_action :authorize_legal_aid_application
       rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized
 
@@ -43,10 +46,10 @@ module Providers
       end
 
       def authorize_legal_aid_application
-        return if self.class.use_custom_authorization?
-        return unless legal_aid_application
+        return if self.class.legal_aid_application_not_required?
+        return unless legal_aid_application # let missing application through so can be caught as not found
 
-        authorize legal_aid_application
+        authorize legal_aid_application, self.class.authorize_with_policy_name
       end
     end
   end

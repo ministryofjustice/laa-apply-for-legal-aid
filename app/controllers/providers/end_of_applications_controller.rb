@@ -1,6 +1,6 @@
 module Providers
   class EndOfApplicationsController < ProviderBaseController
-    use_custom_authorization!
+    authorize_with_policy :show_submitted_application?
 
     def show; end
 

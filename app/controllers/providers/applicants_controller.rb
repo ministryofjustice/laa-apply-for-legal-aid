@@ -1,7 +1,6 @@
 module Providers
   class ApplicantsController < ProviderBaseController
     legal_aid_application_not_required!
-    use_custom_authorization!
 
     def new
       @form = Applicants::BasicDetailsForm.new(model: applicant)

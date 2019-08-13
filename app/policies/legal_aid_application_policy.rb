@@ -36,6 +36,7 @@ class LegalAidApplicationPolicy < ApplicationPolicy
   end
 
   private
+
   def my_unsubmitted_record?
     my_record? && !record.assessment_submitted?
   end

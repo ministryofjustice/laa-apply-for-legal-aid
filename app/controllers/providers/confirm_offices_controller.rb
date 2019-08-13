@@ -1,7 +1,6 @@
 module Providers
   class ConfirmOfficesController < ProviderBaseController
     legal_aid_application_not_required!
-    use_custom_authorization!
     helper_method :firm
 
     def show
