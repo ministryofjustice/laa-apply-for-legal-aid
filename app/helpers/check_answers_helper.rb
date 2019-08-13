@@ -10,7 +10,7 @@ module CheckAnswersHelper
       url: url,
       question: question,
       answer: answer,
-      read_only: read_only,
+      read_only: url.nil? ? true : read_only,
       no_border: no_border,
       align_right: align_right
     )

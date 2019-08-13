@@ -1,4 +1,11 @@
+<% show_client_involvment_type = false unless local_assigns.key?(:show_client_involvment_type) %>
+
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_link(
+        name: :proceeding_type,
+        question: t('.section_proceeding.client_involvement_type'),
+        answer: t('.section_proceeding.client_involvement_type_applicant')
+      ) if show_client_involvment_type %>
 
   <%= check_answer_link(
         name: :proceeding_type,
