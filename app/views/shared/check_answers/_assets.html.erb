@@ -1,6 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :own_home,
         url: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
@@ -63,7 +63,7 @@
         read_only: read_only,
         align_right: read_only
       ) unless @legal_aid_application.other_assets? %>
-</div>
+</dl>
 
 <%= render 'shared/check_answers/vehicles', read_only: read_only %>
 

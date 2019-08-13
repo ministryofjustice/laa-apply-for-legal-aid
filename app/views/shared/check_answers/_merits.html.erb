@@ -5,65 +5,65 @@
       read_only: read_only
     ) %>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :notification_of_latest_incident,
         question: t('.items.notification_of_latest_incident'),
         answer: incident&.told_on
       ) %>
-</div>
+</dl>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :date_of_latest_incident,
         question: t('.items.date_of_latest_incident'),
         answer: incident&.occurred_on
       ) %>
-</div>
+</dl>
 
-<div class="govuk-!-padding-bottom-6"></div>
+<div class="govuk-!-padding-bottom-6">
   <%= check_answer_change_link(
         name: :respondent_details,
         url: providers_legal_aid_application_respondent_path,
         question: t('.respondent-heading'),
         read_only: read_only
       ) %>
-
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+</div>
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :understands_terms_of_court_order,
         question: t('.items.understands_terms_of_court_order'),
         answer: yes_no(respondent.understands_terms_of_court_order)
       ) %>
-</div>
+</dl>
 
 <div class='govuk-body'><%= simple_format respondent.understands_terms_of_court_order_details %></div>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :warning_letter_sent,
         question: t('.items.warning_letter_sent'),
         answer: yes_no(respondent.warning_letter_sent)
       ) %>
-</div>
+</dl>
 <div class='govuk-body'><%= simple_format respondent.warning_letter_sent_details %></div>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :police_notified,
         question: t('.items.police_notified'),
         answer: yes_no(respondent.police_notified)
       ) %>
-</div>
+</dl>
 <div class='govuk-body'><%= simple_format respondent.police_notified_details %></div>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_no_link(
         name: :bail_conditions_set,
         question: t('.items.bail_conditions_set'),
         answer: yes_no(respondent.bail_conditions_set)
       ) %>
-</div>
+</dl>
 <div class='govuk-body'><%= simple_format respondent.bail_conditions_set_details %></div>
 
 <div class="govuk-!-padding-bottom-6"></div>
@@ -74,7 +74,7 @@
 
 <div class='govuk-body'><%= simple_format merits_assessment.details_of_proceedings_before_the_court %></div>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_link(
         name: :statement_of_case,
         url: providers_legal_aid_application_statement_of_case_path,
@@ -82,11 +82,11 @@
         answer: nil,
         read_only: read_only
       ) %>
-</div>
+</dl>
 
 <div class='govuk-body'><%= simple_format statement_of_case.statement %></div>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_link(
         name: :success_likely,
         url: providers_legal_aid_application_success_likely_index_path,
@@ -95,9 +95,9 @@
         read_only: read_only,
         align_right: read_only
       ) %>
-</div>
+</dl>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-2">
+<dl class="govuk-summary-list govuk-!-margin-bottom-2">
   <%= check_answer_link(
         name: :success_prospect,
         url: providers_legal_aid_application_success_likely_index_path,
@@ -106,6 +106,6 @@
         read_only: read_only,
         align_right: read_only
       ) unless merits_assessment.success_likely? %>
-</div>
+</dl>
 
 <div class='govuk-body'><%= simple_format merits_assessment.success_prospect_details %></div>
