@@ -7,7 +7,7 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
   let(:application) { create :application, applicant: applicant }
   let(:address_lookup_used) { true }
-  let(:login) { login_as create(:provider) }
+  let(:login) { login_as application.provider }
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
     let!(:address) { create :address, applicant: applicant, lookup_used: address_lookup_used }
@@ -69,85 +69,83 @@ RSpec.describe 'check benefits requests', type: :request do
 
     subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
 
-    context 'when the provider is authenticated' do
-      before do
-        login_as create(:provider)
-        subject
+    before do
+      login
+      subject
+    end
+
+    context 'Form submitted with Continue button' do
+      let(:params) do
+        {
+          continue_button: 'Continue'
+        }
       end
 
-      context 'Form submitted with Continue button' do
-        let(:params) do
-          {
-            continue_button: 'Continue'
-          }
-        end
+      context 'when the check_benefit_results is positive' do
+        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
 
-        context 'when the check_benefit_results is positive' do
-          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-
-          it 'displays the capital introduction page' do
-            expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
-          end
-        end
-
-        context 'when the check benefit result is negative' do
-          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-
-          it 'displays the online banking page' do
-            expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
-          end
-        end
-
-        context 'when the check benefit result is undetermined' do
-          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
-
-          it 'displays the online banking page' do
-            expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
-          end
-        end
-
-        context 'when delegated functions used' do
-          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
-
-          it 'displays the substantive application page' do
-            expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)
-          end
+        it 'displays the capital introduction page' do
+          expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
         end
       end
 
-      context 'Form submitted with Save as draft button' do
-        let(:params) do
-          {
-            draft_button: 'Save as draft'
-          }
+      context 'when the check benefit result is negative' do
+        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+        it 'displays the online banking page' do
+          expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+        end
+      end
+
+      context 'when the check benefit result is undetermined' do
+        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+
+        it 'displays the online banking page' do
+          expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+        end
+      end
+
+      context 'when delegated functions used' do
+        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
+
+        it 'displays the substantive application page' do
+          expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)
+        end
+      end
+    end
+
+    context 'Form submitted with Save as draft button' do
+      let(:params) do
+        {
+          draft_button: 'Save as draft'
+        }
+      end
+
+      context 'when the check_benefit_results is positive' do
+        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
+        it 'displays the providers applications page' do
+          expect(response).to redirect_to providers_legal_aid_applications_path
         end
 
-        context 'when the check_benefit_results is positive' do
-          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-
-          it 'displays the providers applications page' do
-            expect(response).to redirect_to providers_legal_aid_applications_path
-          end
-
-          it 'sets the application as draft' do
-            expect(application.reload).to be_draft
-          end
+        it 'sets the application as draft' do
+          expect(application.reload).to be_draft
         end
+      end
 
-        context 'when the check benefit result is negative' do
-          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+      context 'when the check benefit result is negative' do
+        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
-          it 'displays providers applications page' do
-            expect(response).to redirect_to providers_legal_aid_applications_path
-          end
+        it 'displays providers applications page' do
+          expect(response).to redirect_to providers_legal_aid_applications_path
         end
+      end
 
-        context 'when the check benefit result is undetermined' do
-          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+      context 'when the check benefit result is undetermined' do
+        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
 
-          it 'displays providers applications page' do
-            expect(response).to redirect_to providers_legal_aid_applications_path
-          end
+        it 'displays providers applications page' do
+          expect(response).to redirect_to providers_legal_aid_applications_path
         end
       end
     end

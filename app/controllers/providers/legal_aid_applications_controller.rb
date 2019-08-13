@@ -2,6 +2,7 @@ module Providers
   class LegalAidApplicationsController < ProviderBaseController
     include Pagy::Backend
     legal_aid_application_not_required!
+    use_custom_authorization!
 
     DEFAULT_PAGE_SIZE = 20
 

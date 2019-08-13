@@ -1,7 +1,5 @@
 module Providers
   class ClientReceivedLegalHelpsController < ProviderBaseController
-    before_action :authorize_legal_aid_application
-
     def show
       @form = MeritsAssessments::ClientReceivedLegalHelpForm.new(model: merits_assessment)
     end
@@ -21,10 +19,6 @@ module Providers
       merge_with_model(merits_assessment) do
         params.require(:merits_assessment).permit(:client_received_legal_help, :application_purpose)
       end
-    end
-
-    def authorize_legal_aid_application
-      authorize legal_aid_application
     end
   end
 end

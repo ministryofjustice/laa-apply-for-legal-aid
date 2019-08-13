@@ -1,12 +1,10 @@
 module Providers
   class RespondentsController < ProviderBaseController
     def show
-      authorize legal_aid_application
       @form = Respondents::RespondentForm.new(model: respondent)
     end
 
     def update
-      authorize legal_aid_application
       @form = Respondents::RespondentForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

@@ -1,7 +1,5 @@
 module Providers
   class AddressLookupsController < ProviderBaseController
-    before_action :authorize_legal_aid_application
-
     def show
       @form = Addresses::AddressLookupForm.new(model: address)
     end
@@ -21,10 +19,6 @@ module Providers
 
     def address
       applicant.address || applicant.build_address
-    end
-
-    def authorize_legal_aid_application
-      authorize @legal_aid_application
     end
   end
 end

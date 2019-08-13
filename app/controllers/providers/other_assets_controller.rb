@@ -1,12 +1,10 @@
 module Providers
   class OtherAssetsController < ProviderBaseController
     def show
-      authorize @legal_aid_application
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end
 
     def update
-      authorize @legal_aid_application
       @form = Citizens::OtherAssetsForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

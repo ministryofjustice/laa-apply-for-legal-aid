@@ -4,12 +4,10 @@ module Providers
       prefix_step_with :vehicles
 
       def show
-        authorize legal_aid_application
         @form = VehicleForm::UsedRegularlyForm.new(model: vehicle)
       end
 
       def update
-        authorize legal_aid_application
         @form = VehicleForm::UsedRegularlyForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end

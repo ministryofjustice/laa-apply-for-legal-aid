@@ -5,8 +5,7 @@ module Providers
     include Pundit
     include ApplicationDependable
     include Draftable
-
-    rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized
+    include Authorizable
 
     # This stops the browser caching these pages.
     # This is done so that someone can't use the Back button to return to a users pages
@@ -15,18 +14,6 @@ module Providers
       response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
       response.headers['Pragma'] = 'no-cache'
       response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
-    end
-
-    def pundit_user
-      current_provider
-    end
-
-    private
-
-    def provider_not_authorized
-      respond_to do |format|
-        format.html { redirect_to error_path(:access_denied) }
-      end
     end
   end
 end

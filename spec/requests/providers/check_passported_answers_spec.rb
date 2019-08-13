@@ -23,7 +23,7 @@ RSpec.describe 'check passported answers requests', type: :request do
 
     context 'logged in as an authenticated provider' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         subject
       end
 
@@ -184,7 +184,7 @@ RSpec.describe 'check passported answers requests', type: :request do
 
     context 'logged in as an authenticated provider' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         subject
       end
 
@@ -234,7 +234,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       let(:application) { create :legal_aid_application, :with_everything, :client_details_answers_checked }
 
       before do
-        login_as create(:provider)
+        login_as application.provider
         get providers_legal_aid_application_other_assets_path(application)
         get providers_legal_aid_application_check_passported_answers_path(application)
         subject

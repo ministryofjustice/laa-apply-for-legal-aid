@@ -1,12 +1,10 @@
 module Providers
   class RestrictionsController < ProviderBaseController
     def show
-      authorize @legal_aid_application
       @form = LegalAidApplications::RestrictionsForm.new(model: legal_aid_application)
     end
 
     def update
-      authorize @legal_aid_application
       @form = LegalAidApplications::RestrictionsForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

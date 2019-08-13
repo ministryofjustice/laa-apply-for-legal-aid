@@ -1,11 +1,8 @@
 module Providers
   class IdentifyTypesOfIncomesController < ProviderBaseController
-    def show
-      authorize legal_aid_application
-    end
+    def show; end
 
     def update
-      authorize legal_aid_application
       return continue_or_draft if none_selected? || transactions_added || draft_selected?
 
       legal_aid_application.errors.add :base, t('.none_selected')

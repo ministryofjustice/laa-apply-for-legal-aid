@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'address requests', type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:applicant) { legal_aid_application.applicant }
+  let(:provider) { legal_aid_application.provider }
   let(:address) { applicant.address }
   let(:address_params) do
     {
@@ -27,16 +28,7 @@ RSpec.describe 'address requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
-      end
-
-      context 'when the applicant does not exist' do
-        let(:legal_aid_application) { SecureRandom.uuid }
-
-        it 'redirects the user to an error page' do
-          subject
-          expect(response).to redirect_to(error_path(:page_not_found))
-        end
+        login_as provider
       end
 
       it 'returns success' do
@@ -76,20 +68,7 @@ RSpec.describe 'address requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
-      end
-
-      context 'when the legal aid application does not exist' do
-        let(:legal_aid_application) { SecureRandom.uuid }
-
-        it 'redirects the user to an error message' do
-          subject
-          expect(response).to redirect_to(error_path(:page_not_found))
-        end
-
-        it 'does NOT create an address record' do
-          expect { subject }.not_to change { Address.count }
-        end
+        login_as provider
       end
 
       context 'with a valid address' do

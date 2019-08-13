@@ -1,5 +1,7 @@
 module Providers
   class EndOfApplicationsController < ProviderBaseController
+    use_custom_authorization!
+
     def show; end
 
     def update
