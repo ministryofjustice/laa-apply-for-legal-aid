@@ -20,8 +20,9 @@ module CCMS
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator
-    STANDARD_METHOD_NAMES = /^(application|bank_account|vehicle|wage_slip|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = /^(application|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
+    APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
@@ -96,10 +97,12 @@ module CCMS
       STANDARD_METHOD_NAMES.match?(method)
     end
 
-    def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
       case method
       when APPLICATION_REGEX
         @legal_aid_application.__send__(Regexp.last_match(1))
+      when APPLICATION_PROCEEDING_TYPE_REGEX
+        options[:appl_proceeding_type].__send__(Regexp.last_match(1))
       when BANK_REGEX
         options[:bank_acct].__send__(Regexp.last_match(1))
       when VEHICLE_REGEX

@@ -4228,7 +4228,7 @@ proceeding:
     :response_type: text
     :user_defined: true
   PROCEEDING_ID:
-    :value: "#application_ccms_case_reference"
+    :value: "#appl_proceeding_type_proceeding_case_p_num"
     :br100_meaning: Proceeding ID
     :response_type: text
     :user_defined: true
@@ -4341,7 +4341,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_ID:
-    :value: "#application_ccms_case_reference"
+    :value: "#appl_proceeding_type_proceeding_case_p_num"
     :br100_meaning: Proceeding ID
     :response_type: text
     :user_defined: true
