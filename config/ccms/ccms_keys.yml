@@ -2300,7 +2300,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   APPLY_CASE_MEANS_REVIEW:
-    :value: '#application_has_restrictions?'
+    :value: true
     :br100_meaning: 'The application means assessment needs a caseworker to manually review'
     :response_type: boolean
     :user_defined: false
@@ -3931,7 +3931,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APPLY_CASE_MEANS_REVIEW:
-    :value: '#application_has_restrictions?'
+    :value: true
     :br100_meaning: 'The application means assessment needs a caseworker to manually review'
     :response_type: boolean
     :user_defined: false

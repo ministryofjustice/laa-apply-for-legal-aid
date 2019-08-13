@@ -167,11 +167,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'APPLICATION_FROM_APPLY hard coded to true' do
+      context 'APPLY_CASE_MEANS_REVIEW hard coded to true' do
         it 'always true' do
           attributes = [
-            [:global_means, 'APPLICATION_FROM_APPLY'],
-            [:global_means, 'APPLICATION_FROM_APPLY']
+            [:global_means, 'APPLY_CASE_MEANS_REVIEW'],
+            [:global_means, 'APPLY_CASE_MEANS_REVIEW']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -179,28 +179,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'true'
-          end
-        end
-      end
-
-      context 'APPLY_CASE_MEANS_REVIEW block' do
-        context 'restrictions exist' do
-          before { legal_aid_application.update(has_restrictions: true) }
-          it 'is true' do
-            block = XmlExtractor.call(xml, :global_merits, 'APPLY_CASE_MEANS_REVIEW')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
-          end
-        end
-
-        context 'restrictions do NOT exist' do
-          before { legal_aid_application.update(has_restrictions: false) }
-          it 'is false' do
-            block = XmlExtractor.call(xml, :global_merits, 'APPLY_CASE_MEANS_REVIEW')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
           end
         end
       end
@@ -214,12 +192,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:global_merits, 'MERITS_DECLARATION_SCREEN'],
             [:global_means, 'GB_DECL_B_38WP3_13A'],
             [:global_merits, 'CLIENT_HAS_DV_RISK'],
-            [:global_merits,  'CLIENT_REQ_SEP_REP'],
-            [:global_merits,  'DECLARATION_WILL_BE_SIGNED'],
-            [:global_merits,  'DECLARATION_REVOKE_IMP_SUBDP'],
+            [:global_merits, 'CLIENT_REQ_SEP_REP'],
+            [:global_merits, 'DECLARATION_WILL_BE_SIGNED'],
+            [:global_merits, 'DECLARATION_REVOKE_IMP_SUBDP'],
             [:proceeding, 'SCOPE_LIMIT_IS_DEFAULT'],
-            [:proceeding_merits,  'LEAD_PROCEEDING'],
-            [:proceeding_merits,  'SCOPE_LIMIT_IS_DEFAULT']
+            [:proceeding_merits, 'LEAD_PROCEEDING'],
+            [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT'],
+            [:global_means, 'APPLICATION_FROM_APPLY'],
+            [:global_means, 'APPLICATION_FROM_APPLY']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
