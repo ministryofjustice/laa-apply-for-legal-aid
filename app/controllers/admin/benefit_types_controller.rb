@@ -45,7 +45,7 @@ module Admin
     # DELETE /admin/benefit_types/1
     def destroy
       benefit_type.destroy
-      redirect_to admin_benefit_types_url, notice: 'Benefit type was successfully destroyed.'
+      redirect_to admin_benefit_types_path, notice: 'Benefit type was successfully destroyed.'
     end
 
     private
