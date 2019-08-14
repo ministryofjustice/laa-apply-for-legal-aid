@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def menu_button
     button_tag(t('generic.menu'),
-               type: 'button', role: 'button', class: 'govuk-header__menu-button js-header-toggle',
+               type: 'button', role: 'button', class: 'govuk-header__menu-button govuk-js-header-toggle',
                aria: { controls: 'navigation', label: t('generic.toggle_navigation') })
   end
 
