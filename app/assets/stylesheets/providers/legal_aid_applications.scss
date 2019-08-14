@@ -19,11 +19,11 @@ div.no-results {
 }
 
 .change-postcode-link {
-  padding-left: .8em;
+  margin-left: .8em;
 }
 
 .button-as-link {
-  background: none !important;
+  background: none;
   color: $govuk-link-colour;
   border: none;
   padding: 0 !important;
@@ -35,7 +35,7 @@ div.no-results {
 
 .govuk-header {
   .button-as-link {
-    padding-left: 1em !important;
+    margin-left: 1em;
     color: #ffffff;
     font-size: 1rem;
     font-weight: 700;
