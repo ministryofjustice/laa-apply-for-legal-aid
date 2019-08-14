@@ -15,7 +15,7 @@
   <% end %>
 </div>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <% if answer_hash.present? %>
 
       <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
@@ -34,4 +34,4 @@
           answer: t('generic.none_declared')
         ) %>
   <% end %>
-</div>
+</dl>

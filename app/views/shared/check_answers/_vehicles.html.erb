@@ -3,7 +3,7 @@
   <%= t(".#{journey_type}.heading") %>
 </h2>
 
-<div class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :vehicles,
         url: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),
@@ -48,4 +48,4 @@
         read_only: read_only,
         align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
-</div>
+</dl>
