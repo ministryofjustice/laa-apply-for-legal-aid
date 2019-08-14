@@ -18,6 +18,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:xml) { requestor.formatted_xml }
       before { allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id) }
 
+      # enable this context if  you need to create a file of the payload for manual inspection
+      xcontext 'saving to a temporary file' do
+        it 'creates a file' do
+          filename = Rails.root.join('tmp/generated_ccms_payload.xml')
+          File.open(filename, 'w') { |f| f.puts xml }
+          expect(File.exist?(filename)).to be true
+        end
+      end
+
       context 'ProceedingCaseId' do
         context 'ProceedingCaseId section' do
           it 'has  a p number' do
@@ -52,7 +61,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           it 'generates the delegated functions block in the means assessment section' do
-            # File.open(Rails.root.join('ccms_integration/generated/tmp.xml'), 'w') {|f| f.puts xml }
             block = XmlExtractor.call(xml, :global_means, 'DELEGATED_FUNCTIONS_DATE')
             expect(block).to be_present
             expect(block).to have_response_type('date')

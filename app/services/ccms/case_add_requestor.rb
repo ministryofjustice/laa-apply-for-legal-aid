@@ -477,10 +477,6 @@ module CCMS
       @application_proceeding_types ||= @legal_aid_application.application_proceeding_types
     end
 
-    # def proceedings
-    #   @proceedings ||= @legal_aid_application.proceeding_types
-    # end
-
     def bank_accounts
       @bank_accounts ||= applicant.bank_accounts
     end
