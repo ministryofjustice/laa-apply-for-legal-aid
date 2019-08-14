@@ -40,15 +40,15 @@ then
   exit 1 #exit - 0 non fatal, 1 fatal (make fatal once all tests are in place and existing issues solved)
 else
   echo "\e[42m      All  Webhint  tests  passed       \e[0m"
-  echo "\e[91m                                        \e[0m"
-  echo "\e[91m  ########     ###     ######   ######  \e[0m"
-  echo "\e[91m  ##     ##   ## ##   ##    ## ##    ## \e[0m"
-  echo "\e[91m  ##     ##  ##   ##  ##       ##       \e[0m"
-  echo "\e[91m  ########  ##     ##  ######   ######  \e[0m"
-  echo "\e[91m  ##        #########       ##       ## \e[0m"
-  echo "\e[91m  ##        ##     ## ##    ## ##    ## \e[0m"
-  echo "\e[91m  ##        ##     ##  ######   ######  \e[0m"
-  echo "\e[91m                                        \e[0m"
+  echo "\e[92m                                        \e[0m"
+  echo "\e[92m  ########     ###     ######   ######  \e[0m"
+  echo "\e[92m  ##     ##   ## ##   ##    ## ##    ## \e[0m"
+  echo "\e[92m  ##     ##  ##   ##  ##       ##       \e[0m"
+  echo "\e[92m  ########  ##     ##  ######   ######  \e[0m"
+  echo "\e[92m  ##        #########       ##       ## \e[0m"
+  echo "\e[92m  ##        ##     ## ##    ## ##    ## \e[0m"
+  echo "\e[92m  ##        ##     ##  ######   ######  \e[0m"
+  echo "\e[92m                                        \e[0m"
   echo "\e[42m      All  Webhint  tests  passed       \e[0m"
 fi
 
