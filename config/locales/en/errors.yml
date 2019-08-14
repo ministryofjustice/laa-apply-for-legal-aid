@@ -10,6 +10,7 @@ en:
       not_saved:
         one: '1 error prohibited this %{resource} from being saved:'
         other: "%{count} errors prohibited this %{resource} from being saved:"
+      update_denied: 'Update denied: redirecting to submitted application'
     show:
       assessment_already_completed:
         page_title: You've already completed your financial assessment

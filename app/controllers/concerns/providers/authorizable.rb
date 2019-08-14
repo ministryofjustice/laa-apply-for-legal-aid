@@ -32,7 +32,7 @@ module Providers
             if current_policy.show_submitted_application?
               redirect_to(
                 providers_legal_aid_application_submitted_application_path(legal_aid_application),
-                notice: 'Update denied: redirecting to submitted application'
+                notice: I18n.t('errors.messages.update_denied')
               )
             else
               redirect_to error_path(:access_denied)
