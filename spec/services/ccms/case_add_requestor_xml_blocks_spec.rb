@@ -11,11 +11,48 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                populate_vehicle: true,
                with_bank_accounts: 2
       end
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:respondent) { legal_aid_application.respondent }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
       before { allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id) }
+
+      # enable this context if  you need to create a file of the payload for manual inspection
+      xcontext 'saving to a temporary file' do
+        it 'creates a file' do
+          filename = Rails.root.join('tmp/generated_ccms_payload.xml')
+          File.open(filename, 'w') { |f| f.puts xml }
+          expect(File.exist?(filename)).to be true
+        end
+      end
+
+      context 'ProceedingCaseId' do
+        context 'ProceedingCaseId section' do
+          it 'has  a p number' do
+            block = XmlExtractor.call(xml, :proceeding_case_id)
+            expect(block.text).to eq application_proceeding_type.proceeding_case_p_num
+          end
+        end
+
+        context 'in merits assessment block' do
+          it 'has a p number' do
+            block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_ID')
+            expect(block).to be_present
+            expect(block).to have_response_type('text')
+            expect(block).to have_response_value(application_proceeding_type.proceeding_case_p_num)
+          end
+        end
+
+        context 'in means assessment block' do
+          it 'has a p number' do
+            block = XmlExtractor.call(xml, :proceeding, 'PROCEEDING_ID')
+            expect(block).to be_present
+            expect(block).to have_response_type('text')
+            expect(block).to have_response_value(application_proceeding_type.proceeding_case_p_num)
+          end
+        end
+      end
 
       context 'DELEGATED_FUNCTIONS_DATE blocks' do
         context 'delegated functions used' do

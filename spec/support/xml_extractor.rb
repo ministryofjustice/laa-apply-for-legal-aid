@@ -5,11 +5,13 @@ class XmlExtractor
     global_merits: '/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity/Instances/Attributes/Attribute',
     proceeding: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "PROCEEDING"]//Attributes/Attribute),
     proceeding_merits: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "PROCEEDING"]//Attributes/Attribute),
-    opponent: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "OPPONENT_OTHER_PARTIES"]//Attributes/Attribute)
+    opponent: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "OPPONENT_OTHER_PARTIES"]//Attributes/Attribute),
+    proceeding_case_id: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/Proceedings/Proceeding/ProceedingCaseID)
+
   }.freeze
   # rubocop:enable Metrics/LineLength
 
-  def self.call(xml, section, attribute_name)
+  def self.call(xml, section, attribute_name = nil)
     new(xml, section, attribute_name).extract
   end
 
@@ -21,7 +23,12 @@ class XmlExtractor
 
   def extract
     doc = Nokogiri::XML(@xml).remove_namespaces!
-    xpath = "#{XPATHS[@section]}[Attribute='#{@attribute_name}']"
+    xpath = if @attribute_name.nil?
+              (XPATHS[@section]).to_s
+            else
+              "#{XPATHS[@section]}[Attribute='#{@attribute_name}']"
+            end
+
     doc.xpath(xpath)
   end
 end

@@ -147,24 +147,26 @@ module CCMS
     end
 
     def generate_proceedings(xml)
-      @legal_aid_application.proceeding_types.each { |p| generate_proceeding(xml, p) }
+      @legal_aid_application.application_proceeding_types.each { |apt| generate_proceeding(xml, apt) }
     end
 
-    def generate_proceeding(xml, proceeding) # rubocop:disable Metrics/MethodLength
+    def generate_proceeding(xml, application_proceeding_type)
       xml.__send__('ns2:Proceeding') do
-        xml.__send__('ns2:ProceedingCaseID', @legal_aid_application.ccms_case_reference)
+        xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
         xml.__send__('ns2:Status', 'Draft')
         xml.__send__('ns2:LeadProceedingIndicator', true)
-        xml.__send__('ns2:ProceedingDetails') do
-          xml.__send__('ns2:ProceedingType', proceeding.ccms_code)
-          xml.__send__('ns2:ProceedingDescription', proceeding.description)
-          xml.__send__('ns2:MatterType', proceeding.ccms_matter_code)
-          xml.__send__('ns2:LevelOfService', 3) # TODO: CCMS placeholder
-          xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
-          xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
-          xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding) }
-        end
+        xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, application_proceeding_type.proceeding_type) }
       end
+    end
+
+    def generate_proceeding_type(xml, proceeding_type)
+      xml.__send__('ns2:ProceedingType', proceeding_type.ccms_code)
+      xml.__send__('ns2:ProceedingDescription', proceeding_type.description)
+      xml.__send__('ns2:MatterType', proceeding_type.ccms_matter_code)
+      xml.__send__('ns2:LevelOfService', 3) # TODO: CCMS placeholder
+      xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
+      xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
+      xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding_type) }
     end
 
     def generate_scope_limitations(xml, proceeding)
@@ -269,13 +271,20 @@ module CCMS
     def generate_means_proceeding_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'PROCEEDING')
-      proceedings.reverse_each { |proceeding| generate_means_proceeding_instance(xml, proceeding) }
+      application_proceeding_types.reverse_each do |application_proceeding_type|
+        generate_means_proceeding_instance(xml, application_proceeding_type)
+      end
     end
 
-    def generate_means_proceeding_instance(xml, proceeding)
+    def generate_means_proceeding_instance(xml, application_proceeding_type)
       xml.__send__('ns0:Instances') do
         xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_case_reference)
-        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :proceeding, proceeding: proceeding) }
+        xml.__send__('ns0:Attributes') do
+          generate_attributes_for(xml,
+                                  :proceeding,
+                                  appl_proceeding_type: application_proceeding_type,
+                                  proceeding: application_proceeding_type.proceeding_type)
+        end
       end
     end
 
@@ -355,13 +364,19 @@ module CCMS
     def generate_merits_proceeding_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'PROCEEDING')
-      @legal_aid_application.proceeding_types.reverse_each { |p| generate_merits_proceeding_instance(xml, p) }
+      application_proceeding_types.reverse_each { |apt| generate_merits_proceeding_instance(xml, apt) }
     end
 
-    def generate_merits_proceeding_instance(xml, proceeding)
+    def generate_merits_proceeding_instance(xml, application_proceeding_type)
       xml.__send__('ns0:Instances') do
         xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_case_reference)
-        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :proceeding_merits, proceeding: proceeding, respondent: @legal_aid_application.respondent) }
+        xml.__send__('ns0:Attributes') do
+          generate_attributes_for(xml,
+                                  :proceeding_merits,
+                                  appl_proceeding_type: application_proceeding_type,
+                                  proceeding: application_proceeding_type.proceeding_type,
+                                  respondent: @legal_aid_application.respondent)
+        end
       end
     end
 
@@ -458,8 +473,8 @@ module CCMS
       @provider ||= @legal_aid_application.provider
     end
 
-    def proceedings
-      @proceedings ||= @legal_aid_application.proceeding_types
+    def application_proceeding_types
+      @application_proceeding_types ||= @legal_aid_application.application_proceeding_types
     end
 
     def bank_accounts

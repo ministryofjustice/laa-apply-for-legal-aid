@@ -135,6 +135,7 @@ module CCMS
 
     let(:provider) do
       double 'Provider',
+             username: 'user1',
              firm_id: 22_381,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,

@@ -72,6 +72,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                fee_earner_contact_id: 4_925_152
       end
 
+      let(:application_proceeding_type_1) do
+        double ApplicationProceedingType,
+               proceeding_type: proceeding_type_1,
+               proceeding_case_p_num: 'P_55123456'
+      end
+
       let(:proceeding_type_1) do
         double ProceedingType,
                bail_conditions_set?: false,
@@ -106,6 +112,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                scope_limitations: [scope_limitation_1, scope_limitation_2],
                status: 'draft',
                warning_letter_sent?: false
+      end
+
+      let(:application_proceeding_type_2) do
+        double ApplicationProceedingType,
+               proceeding_type: proceeding_type_2,
+               proceeding_case_p_num: 'P_55123457'
       end
 
       let(:proceeding_type_2) do
@@ -191,6 +203,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                requested_amount: 5000.0,
                applicant: applicant,
                provider: provider,
+               application_proceeding_types: [application_proceeding_type_1, application_proceeding_type_2],
                proceeding_types: [proceeding_type_1, proceeding_type_2],
                lead_proceeding: proceeding_type_1,
                vehicle: vehicle_1,
