@@ -154,7 +154,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_14WP2_8A:
-    :value: '#client_owns_vehicle'
+    :value: "#client_owns_vehicle"
     :br100_meaning: 'Cars: The client owns car(s)?'
     :response_type: boolean
     :user_defined: true
@@ -409,6 +409,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_16WP2_7A:
+    # :generate_block?: true
     :value: '#client_has_interest_in_a_trust'
     :br100_meaning: 'Trust: The client has an interest in a trust?'
     :response_type: boolean
@@ -1100,12 +1101,12 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_7WP2_1A:
-    :value: true
+    :value: '#client_has_bank_accounts'
     :br100_meaning: 'Bank accounts: The client has bank accounts?'
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_4WP2_1A:
-    :value: false
+    :value: '#client_owns_property'
     :br100_meaning: 'Add. Property: The client has owns/ has financial interest in
       property?'
     :response_type: boolean
@@ -1238,7 +1239,8 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_6WP2_1A:
-    :value: false
+    # :generate_block?: true
+    :value: '#client_owns_timeshare'
     :br100_meaning: 'Timeshare: The client owns or has a financial interest?'
     :response_type: boolean
     :user_defined: true
@@ -1298,7 +1300,8 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_5WP2_1A:
-    :value: false
+    # :generate_block?: true
+    :value: '#client_owns_land'
     :br100_meaning: 'Land: The client owns or has a financial interest in land?'
     :response_type: boolean
     :user_defined: true
@@ -1548,7 +1551,8 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_9WP2_1A:
-    :value: '#client_owed_money'
+    # :generate_block?: true
+    :value: '#client_has_investments'
     :br100_meaning: 'Investments: The client has investments?'
     :response_type: boolean
     :user_defined: true
@@ -1826,7 +1830,8 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_15WP2_8A:
-    :value: '#client_owns_vehicle'
+    # :generate_block?: true
+    :value: '#client_owed_money'
     :br100_meaning: 'Money due: The client is owed money, including through a private
       mortgage?'
     :response_type: boolean
@@ -2097,6 +2102,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_12WP2_2A:
+    # :generate_block?: true
     :value: '#client_has_valuable_posessions'
     :br100_meaning: 'Val. possessions: The client has valuable possessions valued
       at £500+?'

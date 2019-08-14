@@ -63,11 +63,6 @@ module CCMS
       0 # TODO: CCMS placeholder
     end
 
-    #  commented out pending check with Stephen, AP-836
-    # def lead_proceeding_category(_options)
-    #   'MAT' # TODO: CCMS placeholder
-    # end
-
     def main_dwelling_third_party_name(_options)
       'Mrs Fabby Fabby' # TODO: CCMS placeholder
     end
@@ -105,8 +100,27 @@ module CCMS
     end
 
     def client_has_valuable_posessions(_options)
-      # @legal_aid_application.other_assets_declaration.valuable_items_value.nil? ? 'false' : 'true'
-      @legal_aid_application.other_assets_declaration.valuable_items_value.blank? ? 'false' : 'true'
+      @legal_aid_application.other_assets_declaration.valuable_items_value.nil? ? 'false' : 'true'
+    end
+
+    def client_owns_timeshare(_options)
+      @legal_aid_application.other_assets_declaration.timeshare_property_value.nil? ? 'false' : 'true'
+    end
+
+    def client_owns_land(_options)
+      @legal_aid_application.other_assets_declaration.land_value.nil? ? 'false' : 'true'
+    end
+
+    def client_has_investments(_options)
+      @legal_aid_application.other_assets_declaration.money_assets_value.nil? ? 'false' : 'true'
+    end
+
+    def client_owns_property(_options)
+      @legal_aid_application.property_value.nil? ? 'false' : 'true'
+    end
+
+    def client_has_bank_accounts(_options)
+      @legal_aid_application.applicant.uses_online_banking? ? 'true' : 'false'
     end
 
     private

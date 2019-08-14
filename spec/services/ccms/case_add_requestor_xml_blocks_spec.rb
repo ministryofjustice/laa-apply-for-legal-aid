@@ -8,6 +8,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         create :legal_aid_application,
                :with_proceeding_types,
                :with_everything,
+               :with_applicant,
                populate_vehicle: true,
                with_bank_accounts: 2
       end
@@ -688,28 +689,25 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'GB_INPUT_B_9WP2_1A client is owed money' do
+      context 'GB_INPUT_B_15WP2_8A client is owed money' do
         it 'returns true when applicant is owed money' do
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_15WP2_8A')
           expect(block).to be_present
           expect(block).to have_response_type 'boolean'
           expect(block).to have_response_value 'true'
         end
 
-        context 'GB_INPUT_B_9WP2_1A  client is NOT owed money' do
-          # before { legal_aid_application.other_assets_declaration.update(money_owed_value: nil) }
-          it 'returns false when applicant is NOT owed money' do
-            allow(legal_aid_application.other_assets_declaration).to receive(:money_owed_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
-          end
+        it 'returns false when applicant is NOT owed money' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:money_owed_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_15WP2_8A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
         end
       end
 
       context 'GB_INPUT_B_14WP2_8A vehicle is owned' do
-        it 'returns true when applicant owns a car' do
+        it 'returns true when applicant owns a vehicle' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP2_8A')
           expect(block).to be_present
           expect(block).to have_response_type 'boolean'
@@ -718,7 +716,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'GB_INPUT_B_14WP2_8A no vehicle owned' do
           before { legal_aid_application.update(own_vehicle: false) }
-          it 'returns false when applicant does NOT own a car' do
+          it 'returns false when applicant does NOT own a vehicle' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP2_8A')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
@@ -735,14 +733,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_response_value 'true'
         end
 
-        context 'GB_INPUT_B_16WP2_7A client has NO interest in a trust' do
-          it 'returns false when client has NO interest in a trust' do
-            allow(legal_aid_application.other_assets_declaration).to receive(:trust_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
-          end
+        it 'returns false when client has NO interest in a trust' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:trust_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
         end
       end
 
@@ -754,10 +750,95 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_response_value 'true'
         end
 
-        context 'GB_INPUT_B_12WP2_2A client has NO valuable possessions' do
-          it 'returns false when client has NO valuable possessions' do
-            allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
-            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+        it 'returns false when client has NO valuable possessions' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_6WP2_1A client does have timeshare' do
+        it 'returns true when client has timeshare' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have timeshare' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:timeshare_property_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_5WP2_1A client owns land' do
+        it 'returns true when client owns land' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT own land' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:land_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_9WP2_1A client does have investments' do
+        it 'returns true when client has investments' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have investments' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:money_assets_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_4WP2_1A client owns property ' do
+        it 'returns true when client owns property ' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT own property ' do
+          allow(legal_aid_application).to receive(:property_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_7WP2_1A client bank accounts' do
+        it 'returns true when client has bank accounts' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        context 'GB_INPUT_B_7WP2_1A no bank accounts' do
+          before { legal_aid_application.applicant.update(uses_online_banking: false) }
+          it 'returns false when applicant does NOT have bank accounts' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
