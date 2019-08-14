@@ -20,5 +20,8 @@
 
   <p class="govuk-body"><%= t('.online_banking_details') %></p>
 
-  <%= link_to t('generic.start'), forward_path, class: 'govuk-button govuk-button--start govuk-!-margin-top-2', id: 'start' %>
+  <%= link_to start_button_label(:start),
+              forward_path,
+              class: 'govuk-button govuk-button--start govuk-!-margin-top-2',
+              id: 'start' %>
 <% end %>
