@@ -50,6 +50,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                balance: 100.0,
                account_number: '12345678',
                bank_provider: bank_provider,
+               uses_online_banking: true,
                account_type_label: 'Bank Current'
       end
 
@@ -59,6 +60,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                first_name: 'Dave',
                last_name: 'Fabby',
                preferred_address: 'CLIENT',
+               uses_online_banking: true,
                bank_accounts: [bank_account_1]
       end
 
@@ -219,12 +221,32 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                used_delegated_functions?: true,
                used_delegated_functions_on: Date.today,
                ccms_case_reference: 'P_88000001',
-               respondent: respondent
+               respondent: respondent,
+               own_vehicle?: true,
+               property_value: 10_000.0,
+               other_assets_declaration: other_assets_declaration,
+               open_banking_consent: true,
+               open_banking_consent_choice_at: Date.new(2019, 6, 1)
       end
 
       let(:other_party_1) { create :opponent, :child }
 
+      let(:own_vehicle) { create :applicant, :with_v }
+
       let(:other_party_2) { create :opponent, :ex_spouse }
+
+      let(:other_assets_declaration) do
+        double OtherAssetsDeclaration,
+               timeshare_property_value: 123_456,
+               land_value: 333_323,
+               money_assets_value: 100_00,
+               money_owed_value: 129_00,
+               trust_value: 250_000,
+               second_home_value: 230_220,
+               second_home_mortgage: 100_000,
+               second_home_percentage: 40,
+               valuable_items_value: 1000
+      end
 
       let(:ccms_submissions_collection) do
         double 'Collection of CCMS::Submission records',

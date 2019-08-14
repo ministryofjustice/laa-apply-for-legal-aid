@@ -409,7 +409,6 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_16WP2_7A:
-    # :generate_block?: true
     :value: '#client_has_interest_in_a_trust'
     :br100_meaning: 'Trust: The client has an interest in a trust?'
     :response_type: boolean
@@ -1239,7 +1238,6 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_6WP2_1A:
-    # :generate_block?: true
     :value: '#client_owns_timeshare'
     :br100_meaning: 'Timeshare: The client owns or has a financial interest?'
     :response_type: boolean
@@ -1300,7 +1298,6 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_5WP2_1A:
-    # :generate_block?: true
     :value: '#client_owns_land'
     :br100_meaning: 'Land: The client owns or has a financial interest in land?'
     :response_type: boolean
@@ -1551,7 +1548,6 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_9WP2_1A:
-    # :generate_block?: true
     :value: '#client_has_investments'
     :br100_meaning: 'Investments: The client has investments?'
     :response_type: boolean
@@ -1830,7 +1826,6 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_15WP2_8A:
-    # :generate_block?: true
     :value: '#client_owed_money'
     :br100_meaning: 'Money due: The client is owed money, including through a private
       mortgage?'
@@ -2102,7 +2097,6 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_12WP2_2A:
-    # :generate_block?: true
     :value: '#client_has_valuable_posessions'
     :br100_meaning: 'Val. possessions: The client has valuable possessions valued
       at £500+?'
@@ -4011,7 +4005,7 @@ opponent:
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is None
     :response_type: boolean
     :user_defined: false
-  OTHER_PARTY_PERSON: # failing test coverage issue
+  OTHER_PARTY_PERSON:
     :generate_block?: false
     :value: "#opponent_person?"
     :br100_meaning: Meaning not defined in BR100
@@ -4023,19 +4017,19 @@ opponent:
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
-  OTHER_PARTY_ORG:  # failing test coverage issue THIS ONE
+  OTHER_PARTY_ORG:
     :generate_block?: false
     :value: "#opponent_organisation?"
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: false
-  RELATIONSHIP_STEP_PARENT: # failing test coverage issue
+  RELATIONSHIP_STEP_PARENT:
     :generate_block?: false
     :value: "#opponent_relationship_client_step_parent?"
     :br100_meaning: The Opponent & Other Parties Relationship To Client Is Step Parent
     :response_type: boolean
     :user_defined: false
-  RELATIONSHIP_CASE_GAL: # failing test coverage issue
+  RELATIONSHIP_CASE_GAL:
     :generate_block?: false
     :value: "#opponent_relationship_case_guardian?"
     :br100_meaning: The Opponent & Other Parties Relationship To Case Is Guardian

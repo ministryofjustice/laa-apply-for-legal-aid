@@ -120,7 +120,7 @@ module CCMS
     end
 
     def client_has_bank_accounts(_options)
-      @legal_aid_application.applicant.uses_online_banking? ? 'true' : 'false'
+      @legal_aid_application.open_banking_consent_choice_at.nil? ? 'false' : 'true'
     end
 
     private
