@@ -63,9 +63,10 @@ module CCMS
       0 # TODO: CCMS placeholder
     end
 
-    def lead_proceeding_category(_options)
-      'MAT' # TODO: CCMS placeholder
-    end
+    #  commented out pending check with Stephen, AP-836
+    # def lead_proceeding_category(_options)
+    #   'MAT' # TODO: CCMS placeholder
+    # end
 
     def main_dwelling_third_party_name(_options)
       'Mrs Fabby Fabby' # TODO: CCMS placeholder

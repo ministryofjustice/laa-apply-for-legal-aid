@@ -114,7 +114,7 @@ employment:
     :user_defined: true
 family_statement:
   FAMILY_STMT_DETAIL:
-    :value: Getting very irritated with all these questions now.
+    :value: This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence
     :br100_meaning: Statement:The Family Statement Of Case Detail
     :response_type: text
     :user_defined: true
@@ -277,7 +277,7 @@ global_means:
     :response_type: text
     :user_defined: false
   CATEGORY_OF_LAW:
-    :value: "#lead_proceeding_category"
+    :value: FAMILY
     :br100_meaning: the category of law
     :response_type: text
     :user_defined: true
@@ -357,7 +357,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   LAR_INPUT_T_1WP2_8A:
-    :value: Not Applicable
+    :value: Apply Service Application. See uploaded means report in CCMS
     :br100_meaning: 'Foreign Assets: Exchange rate & currency details'
     :response_type: text
     :user_defined: true
@@ -2429,7 +2429,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   REASON_APPLYING_FHH_LR:
-    :value: Domestic Abuse
+    :value: Apply Service application. See provider statement of case and report uploaded as evidence
     :br100_meaning: 'PrevLA: The ReasonThe Client Is Applying For Family Help (Higher)
       Or Legal Rep'
     :response_type: text
@@ -2907,7 +2907,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MAIN_PURPOSE_OF_APPLICATION:
-    :value: Domestic Abuse protection
+    :value: Apply Service application - see report and uploaded statement in CCMS upload section
     :br100_meaning: 'App: The Main Purpose Of The Application'
     :response_type: text
     :user_defined: true
@@ -3470,7 +3470,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   REASON_SEPARATE_REP_REQ:
-    :value: He just does OK?
+    :value: Apply Service application. See provider statement of case and report uploaded as evidence
     :br100_meaning: 'Rep: The reason client requires separate representation in proceedings'
     :response_type: text
     :user_defined: true
@@ -3581,7 +3581,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   REASON_NO_ATTEMPT_TO_SETTLE:
-    :value: Too dangerous for client
+    :value: Apply Service application. See provider statement of case and report uploaded as evidence
     :br100_meaning: 'Settle: The Reason Why No Attempts To Settle Have Been Made'
     :response_type: text
     :user_defined: true
@@ -4126,7 +4126,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   RELATIONSHIP_TO_CASE:
-    :value: "#opponent_relationship_to_case"
+    :value: OPP
     :br100_meaning: Opponent relationship to case
     :response_type: text
     :user_defined: true
@@ -4167,7 +4167,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_TYPE:
-    :value: "#opponent_opponent_type"
+    :value: PERSON
     :br100_meaning: Other Party Type
     :response_type: text
     :user_defined: true
@@ -4178,7 +4178,7 @@ opponent:
     :response_type: text
     :user_defined: false
   RELATIONSHIP_TO_CLIENT:
-    :value: "#opponent_relationship_to_client"
+    :value: UNKNOWN
     :br100_meaning: Opponent relationship to client
     :response_type: text
     :user_defined: true
@@ -4223,7 +4223,7 @@ proceeding:
     :user_defined: false
     :generate_block?: false
   LEVEL_OF_SERVICE:
-    :value: '3'
+    :value: 3
     :br100_meaning: Form of Service
     :response_type: text
     :user_defined: true
@@ -4791,8 +4791,14 @@ proceeding_merits:
     :generate_block?: false
   INJ_RECENT_INCIDENT_DETAIL:
     :generate_block?: true
-    :value: See statement of case
+    :value: Apply Service application. See provider statement of case and report uploaded as evidence
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
+    :response_type: text
+    :user_defined: true
+  INJ_REASON_POLICE_NOT_NOTIFIED:
+    :generate_block?: true
+    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :br100_meaning: 'Inj: The Reason Why The Police  Have Not Been Notified'
     :response_type: text
     :user_defined: true
   CLIENT_INV_TYPE_INTERPLEADER:

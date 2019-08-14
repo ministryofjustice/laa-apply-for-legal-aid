@@ -668,18 +668,21 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             end
           end
         end
+      end
 
-        context 'attributes hard coded to false' do
-          it 'should be type of text hard coded to false' do
+      context 'attributes with specific hard coded values' do
+        context 'attributes hard coded to specific values' do
+          it 'DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings' do
             attributes = [
-              [:global_means, 'COST_LIMIT_CHANGED_FLAG']
+              [:global_means, 'DEVOLVED_POWERS_CONTRACT_FLAG'],
+              [:global_merits, 'DEVOLVED_POWERS_CONTRACT_FLAG']
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
               expect(block).to be_present
               expect(block).to have_response_type 'text'
-              expect(block).to have_response_value 'false'
+              expect(block).to have_response_value 'Yes - Excluding JR Proceedings'
             end
           end
         end
@@ -882,6 +885,186 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
           end
+        end
+
+        context 'attributes hard coded to false' do
+          it 'should be type of text hard coded to false' do
+            attributes = [
+              [:global_means, 'COST_LIMIT_CHANGED_FLAG'],
+              [:global_merits, 'COST_LIMIT_CHANGED_FLAG']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'false'
+            end
+          end
+        end
+
+        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
+          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'FAMILY'
+        end
+
+        it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
+          block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
+          expect(block).to be_present
+          expect(block).to have_response_type 'number'
+          expect(block).to have_response_value '1'
+        end
+
+        it 'LEVEL_OF_SERVICE should be hard coded to 3' do
+          attributes = [
+            [:proceeding_merits, 'LEVEL_OF_SERVICE'],
+            [:proceeding, 'LEVEL_OF_SERVICE']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value '3'
+          end
+        end
+
+        it 'CLIENT_INVOLVEMENT_TYPE should be hard coded to A' do
+          attributes = [
+            [:proceeding_merits, 'CLIENT_INVOLVEMENT_TYPE'],
+            [:proceeding, 'CLIENT_INVOLVEMENT_TYPE']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'A'
+          end
+        end
+
+        it 'NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION' do
+          attributes = [
+            [:global_means, 'NEW_APPL_OR_AMENDMENT'],
+            [:global_merits, 'NEW_APPL_OR_AMENDMENT']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'APPLICATION'
+          end
+        end
+
+        it 'USER_TYPE should be hard coded to EXTERNAL' do
+          attributes = [
+            [:global_means, 'USER_TYPE'],
+            [:global_merits, 'USER_TYPE']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'EXTERNAL'
+          end
+        end
+
+        it 'COUNTRY should be hard coded to GBR' do
+          block = XmlExtractor.call(xml, :global_merits, 'COUNTRY')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'GBR'
+        end
+
+        it 'RELATIONSHIP_TO_CLIENT should be hard coded to UNKNOWN' do
+          block = XmlExtractor.call(xml, :global_merits, 'RELATIONSHIP_TO_CLIENT')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'UNKNOWN'
+        end
+
+        it 'REQUESTED_SCOPE should be hard coded to MULTIPLE' do
+          block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'MULTIPLE'
+        end
+
+        it 'NEW_OR_EXISTING should be hard coded to NEW' do
+          attributes = [
+            [:proceeding, 'NEW_OR_EXISTING'],
+            [:proceeding_merits, 'NEW_OR_EXISTING']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'NEW'
+          end
+        end
+
+        it 'RELATIONSHIP_TO_CASE should be hard coded to OPP' do
+          block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_TO_CASE')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'OPP'
+        end
+
+        it 'OTHER_PARTY_TYPE should be hard coded to PERSON' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_TYPE')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'PERSON'
+        end
+
+        it 'POA_OR_BILL_FLAG should be hard coded to N/A' do
+          block = XmlExtractor.call(xml, :global_means, 'POA_OR_BILL_FLAG')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'N/A'
+        end
+
+        it 'LAR_INPUT_T_1WP2_8A should be hard coded correctly' do
+          block = XmlExtractor.call(xml, :global_means, 'LAR_INPUT_T_1WP2_8A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'Apply Service Application. See uploaded means report in CCMS'
+        end
+
+        it 'should be hard coded with the correct notification' do
+          attributes = [
+            [:global_merits, 'REASON_APPLYING_FHH_LR'],
+            [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
+            [:global_merits, 'REASON_SEPARATE_REP_REQ'],
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
+            [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'Apply Service application. See provider statement of case and report uploaded as evidence'
+          end
+        end
+
+        it 'FAMILY_STMT_DETAIL should be hard coded with the correct notification' do
+          block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STMT_DETAIL')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence'
+        end
+
+        it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
+          block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
       end
     end
