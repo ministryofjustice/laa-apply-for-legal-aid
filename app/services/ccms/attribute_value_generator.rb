@@ -19,7 +19,7 @@ module CCMS
   # method name without the prefix is called on the appropriate object in the options hash, e.g.
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
-  class AttributeValueGenerator
+  class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
     STANDARD_METHOD_NAMES = /^(application|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
