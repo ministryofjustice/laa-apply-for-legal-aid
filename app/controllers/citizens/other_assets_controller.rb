@@ -1,7 +1,5 @@
 module Citizens
-  class OtherAssetsController < BaseController
-    include ApplicationFromSession
-
+  class OtherAssetsController < CitizenBaseController
     def show
       @form = Citizens::OtherAssetsForm.new(model: declaration)
     end

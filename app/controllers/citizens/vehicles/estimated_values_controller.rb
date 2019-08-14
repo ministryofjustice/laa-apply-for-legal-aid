@@ -1,7 +1,6 @@
 module Citizens
   module Vehicles
-    class EstimatedValuesController < BaseController
-      include ApplicationFromSession
+    class EstimatedValuesController < CitizenBaseController
       prefix_step_with :vehicles
 
       def show

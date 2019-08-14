@@ -1,7 +1,6 @@
 module Citizens
   module Vehicles
-    class RegularUsesController < BaseController
-      include ApplicationFromSession
+    class RegularUsesController < CitizenBaseController
       prefix_step_with :vehicles
 
       def show

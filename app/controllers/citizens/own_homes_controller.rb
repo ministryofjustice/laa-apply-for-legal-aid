@@ -1,7 +1,5 @@
 module Citizens
-  class OwnHomesController < BaseController
-    include ApplicationFromSession
-
+  class OwnHomesController < CitizenBaseController
     def show
       @form = LegalAidApplications::OwnHomeForm.new(model: legal_aid_application)
     end

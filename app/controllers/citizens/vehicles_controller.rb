@@ -1,7 +1,5 @@
 module Citizens
-  class VehiclesController < BaseController
-    include ApplicationFromSession
-
+  class VehiclesController < CitizenBaseController
     def show
       @form = LegalAidApplications::OwnVehicleForm.new(model: legal_aid_application)
     end

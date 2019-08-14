@@ -1,6 +1,5 @@
 module Citizens
-  class PercentageHomesController < BaseController
-    include ApplicationFromSession
+  class PercentageHomesController < CitizenBaseController
     def show
       @form = LegalAidApplications::PercentageHomeForm.new(model: legal_aid_application)
     end

@@ -1,6 +1,5 @@
 module Citizens
-  class IdentifyTypesOfIncomesController < BaseController
-    include ApplicationFromSession
+  class IdentifyTypesOfIncomesController < CitizenBaseController
     before_action :authenticate_applicant!
 
     def show

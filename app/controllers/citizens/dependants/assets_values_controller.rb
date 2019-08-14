@@ -1,7 +1,6 @@
 module Citizens
   module Dependants
-    class AssetsValuesController < BaseController
-      include ApplicationFromSession
+    class AssetsValuesController < CitizenBaseController
       prefix_step_with :dependants
 
       def show

@@ -1,7 +1,6 @@
 module Citizens
   module Vehicles
-    class RemainingPaymentsController < BaseController
-      include ApplicationFromSession
+    class RemainingPaymentsController < CitizenBaseController
       prefix_step_with :vehicles
 
       def show

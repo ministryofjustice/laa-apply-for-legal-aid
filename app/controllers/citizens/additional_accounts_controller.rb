@@ -1,6 +1,5 @@
 module Citizens
-  class AdditionalAccountsController < BaseController
-    include ApplicationFromSession
+  class AdditionalAccountsController < CitizenBaseController
     def index; end
 
     def create

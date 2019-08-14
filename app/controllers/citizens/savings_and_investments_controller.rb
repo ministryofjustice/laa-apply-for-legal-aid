@@ -1,6 +1,5 @@
 module Citizens
-  class SavingsAndInvestmentsController < BaseController
-    include ApplicationFromSession
+  class SavingsAndInvestmentsController < CitizenBaseController
     helper_method :bank_accounts, :attributes
 
     def show

@@ -1,7 +1,6 @@
 module Citizens
   module Dependants
-    class RelationshipsController < BaseController
-      include ApplicationFromSession
+    class RelationshipsController < CitizenBaseController
       prefix_step_with :dependants
 
       def show

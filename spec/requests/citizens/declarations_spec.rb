@@ -10,10 +10,17 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
   describe 'GET /citizens/declaration' do
     subject { get citizens_declaration_path }
 
-    before { subject }
-
     it 'returns http success' do
+      subject
       expect(response).to have_http_status(:ok)
+    end
+
+    context 'with completed application' do
+      it 'redirects to already completed' do
+        legal_aid_application.update completed_at: 1.minute.ago
+        subject
+        expect(response).to redirect_to(error_path(:assessment_already_completed))
+      end
     end
   end
 

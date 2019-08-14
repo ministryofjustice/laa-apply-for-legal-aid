@@ -1,6 +1,5 @@
 module Citizens
-  class AccountsController < BaseController
-    include ApplicationFromSession
+  class AccountsController < CitizenBaseController
     before_action :authenticate_applicant!
 
     skip_back_history_for :gather

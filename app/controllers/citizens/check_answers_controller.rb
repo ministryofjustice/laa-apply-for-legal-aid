@@ -1,6 +1,5 @@
 module Citizens
-  class CheckAnswersController < BaseController
-    include ApplicationFromSession
+  class CheckAnswersController < CitizenBaseController
     before_action :authenticate_applicant!
 
     def index

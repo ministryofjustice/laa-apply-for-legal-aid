@@ -1,7 +1,5 @@
 module Citizens
-  class SharedOwnershipsController < BaseController
-    include ApplicationFromSession
-
+  class SharedOwnershipsController < CitizenBaseController
     def show
       @form = LegalAidApplications::SharedOwnershipForm.new(model: legal_aid_application)
     end
