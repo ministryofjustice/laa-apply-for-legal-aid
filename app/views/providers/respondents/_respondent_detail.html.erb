@@ -3,7 +3,7 @@
  has_error = form.errors[question.attribute].any? || form.errors[question.attribute_details].any?
 %>
 <div class="govuk-form-group <%= has_error ? 'govuk-form-group--error' : '' %>">
-  <div id="<%= question.attribute %>" class="govuk-radios govuk-radios--conditional" data-module="radios">
+  <div id="<%= question.attribute %>" class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
       <%= form.govuk_collection_radio_buttons(
             question.attribute,
             [true, false],
