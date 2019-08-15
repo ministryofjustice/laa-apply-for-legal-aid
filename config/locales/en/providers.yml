@@ -355,6 +355,10 @@ en:
           content: We'll check with the Department for Work and Pensions to see if your client receives benefits that make them eligible for legal aid.
         section_proceeding:
           heading: Scope of legal aid
+        client_declaration:
+          heading: Client declaration
+          signature: 'Client signature:'
+          date: 'Date:'
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?

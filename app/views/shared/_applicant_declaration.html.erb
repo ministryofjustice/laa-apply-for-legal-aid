@@ -1,0 +1,20 @@
+<p class="govuk-body"><%= t('.submission_list_summary') %>:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <% t('.submission_list').each_line do |submission| %>
+    <li><%= submission %></li>
+  <% end %>
+</ul>
+
+<div class="govuk-warning-text declaration-warning">
+  <span class="govuk-warning-text__icon" aria-hidden="true" style="top: 30px;">!</span>
+  <p class="govuk-body">
+    <strong><%= t('.warning_list_summary') %>:</strong>
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <% t('.warning_list').each_line do |warning| %>
+      <li><strong><%= warning %></strong></li>
+    <% end %>
+  </ul>
+</div>

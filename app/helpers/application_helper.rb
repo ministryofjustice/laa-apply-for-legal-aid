@@ -74,4 +74,8 @@ module ApplicationHelper
   def yes_no(boolean)
     boolean ? t('generic.yes') : t('generic.no')
   end
+
+  def print_button(text)
+    content_tag :button, text, class: 'govuk-button no-print', type: 'button', onclick: 'window.print()'
+  end
 end
