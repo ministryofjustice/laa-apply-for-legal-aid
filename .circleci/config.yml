@@ -213,6 +213,7 @@ jobs:
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${STAGING_HOST_1}}"
+                        --set ingress.secretName=“{${STAGING_DOMAIN_CERT}}”
 
   deploy_production:
     <<: *deploy_container_config
@@ -239,6 +240,7 @@ jobs:
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}" \
                         --set ingress.hosts="{${PRODUCTION_HOST_1}}"
+                        --set ingress.secretName=“{${PRODUCTION_DOMAIN_CERT}}”
 
   clean_up_ecr:
     <<: *build_container_config
