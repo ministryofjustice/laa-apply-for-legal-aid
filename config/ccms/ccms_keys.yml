@@ -821,7 +821,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_17WP2_7A:
-    :value: false
+    :value: '#client_has_other_capital'
     :br100_meaning: 'Other capital: The client has other capital?'
     :response_type: boolean
     :user_defined: true
@@ -1586,7 +1586,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_10WP2_1A:
-    :value: false
+    :value: '#client_has_other_savings'
     :br100_meaning: 'Other savings: The client has other savings?'
     :response_type: boolean
     :user_defined: true
@@ -1656,7 +1656,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_13WP2_7A:
-    :value: false
+    :value: '#client_has_other_policies'
     :br100_meaning: 'Policies: The client has policies not linked to mortgage/death?'
     :response_type: boolean
     :user_defined: true
@@ -2236,7 +2236,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_11WP2_3A:
-    :value: false
+    :value: '#client_has_shares'
     :br100_meaning: 'Shares: The client has shares in a public limited company?'
     :response_type: boolean
     :user_defined: true

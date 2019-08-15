@@ -431,6 +431,74 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'GB_INPUT_B_10WP2_1A client other savings' do
+        it 'returns true when client has other savings' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have other savings' do
+          allow(legal_aid_application.savings_amount).to receive(:isa).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_17WP2_7A client other capital' do
+        it 'returns true when client has other capital' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have other capital' do
+          allow(legal_aid_application.savings_amount).to receive(:peps_unit_trusts_capital_bonds_gov_stocks).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_13WP2_7A client other policies' do
+        it 'returns true when client has other policies' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_13WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have other policies' do
+          allow(legal_aid_application.savings_amount).to receive(:life_assurance_endowment_policy).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_13WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_11WP2_3A client other shares' do
+        it 'returns true when client has other shares' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_11WP2_3A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have other shares' do
+          allow(legal_aid_application.savings_amount).to receive(:plc_shares).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_11WP2_3A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
       context 'attributes with specific hard coded values' do
         context 'attributes hard coded to specific values' do
           it 'DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings' do
