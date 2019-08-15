@@ -19,7 +19,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
     context 'logged in as an authenticated provider' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         subject
       end
 
@@ -111,7 +111,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
     context 'logged in as an authenticated provider' do
       before do
-        login_as create(:provider)
+        login_as application.provider
       end
 
       it 'redirects to next page' do
@@ -160,7 +160,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
     context 'logged in as an authenticated provider' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         get providers_legal_aid_application_merits_declaration_path(application)
         get providers_legal_aid_application_check_merits_answers_path(application)
         subject

@@ -1,13 +1,11 @@
 module Providers
   class TransactionsController < ProviderBaseController
     def show
-      authorize legal_aid_application
       transaction_type
       bank_transactions
     end
 
     def update
-      authorize legal_aid_application
       reset_selection
       set_selection
       continue_or_draft

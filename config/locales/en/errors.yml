@@ -10,6 +10,7 @@ en:
       not_saved:
         one: '1 error prohibited this %{resource} from being saved:'
         other: "%{count} errors prohibited this %{resource} from being saved:"
+      update_denied: 'Update denied: redirecting to submitted application'
     show:
       assessment_already_completed:
         page_title: You've already completed your financial assessment
@@ -18,3 +19,6 @@ en:
         page_title: Page not found
         web_address_incorrect: If you typed the web address, check it is correct.
         web_address_copied: If you pasted the web address, check you copied the entire address.
+      access_denied:
+        page_title: Access denied
+        permission_text: The page is not currently accessible to you

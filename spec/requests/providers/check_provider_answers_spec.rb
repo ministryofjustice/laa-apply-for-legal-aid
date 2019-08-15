@@ -29,7 +29,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         subject
       end
 
@@ -146,7 +146,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         application.check_your_answers!
         get providers_legal_aid_application_proceedings_types_path(application)
         get providers_legal_aid_application_check_provider_answers_path(application)
@@ -166,7 +166,6 @@ RSpec.describe 'check your answers requests', type: :request do
 
   describe 'PATCH  /providers/applications/:legal_aid_application_id/check_provider_answers/continue' do
     context 'Continue' do
-      let(:provider) { create(:provider) }
       let(:params) do
         {
           continue_button: 'Continue'
@@ -176,7 +175,7 @@ RSpec.describe 'check your answers requests', type: :request do
       subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
-        login_as provider
+        login_as application.provider
         application.check_your_answers!
       end
 
@@ -206,7 +205,7 @@ RSpec.describe 'check your answers requests', type: :request do
       subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
-        login_as create(:provider)
+        login_as application.provider
         application.check_your_answers!
         subject
         application.reload

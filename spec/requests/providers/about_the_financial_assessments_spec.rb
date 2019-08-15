@@ -14,7 +14,7 @@ RSpec.describe 'about financial assessments requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as application.provider
         subject
       end
 
@@ -48,7 +48,7 @@ RSpec.describe 'about financial assessments requests', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as application.provider
       end
 
       context 'when the application does not exist' do

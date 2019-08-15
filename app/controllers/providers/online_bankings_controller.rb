@@ -1,12 +1,10 @@
 module Providers
   class OnlineBankingsController < ProviderBaseController
     def show
-      authorize @legal_aid_application
       @form = Applicants::UsesOnlineBankingForm.new(model: applicant)
     end
 
     def update
-      authorize @legal_aid_application
       @form = Applicants::UsesOnlineBankingForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

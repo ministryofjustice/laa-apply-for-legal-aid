@@ -1,12 +1,10 @@
 module Providers
   class OutstandingMortgagesController < ProviderBaseController
     def show
-      authorize @legal_aid_application
       @form = LegalAidApplications::OutstandingMortgageForm.new(model: legal_aid_application)
     end
 
     def update
-      authorize @legal_aid_application
       @form = LegalAidApplications::OutstandingMortgageForm.new(legal_aid_application_params)
 
       render :show unless save_continue_or_draft(@form)

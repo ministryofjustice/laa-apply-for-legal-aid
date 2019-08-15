@@ -1,12 +1,10 @@
 module Providers
   class DateClientToldIncidentsController < ProviderBaseController
     def show
-      authorize legal_aid_application
       @form = Incidents::ToldOnForm.new(model: incident)
     end
 
     def update
-      authorize legal_aid_application
       @form = Incidents::ToldOnForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

@@ -1,7 +1,6 @@
 module Providers
   class AddressSelectionsController < ProviderBaseController
     def show # rubocop:disable Metrics/AbcSize
-      authorize @legal_aid_application
       return redirect_to back_path unless address.postcode
 
       if address_lookup.success?
@@ -14,7 +13,6 @@ module Providers
     end
 
     def update
-      authorize @legal_aid_application
       @addresses = build_addresses_from_form_data
       @form = Addresses::AddressSelectionForm.new(permitted_params)
 

@@ -2,13 +2,11 @@ module Providers
   class ProceedingsTypesController < ProviderBaseController
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
-      authorize legal_aid_application
       proceeding_types
     end
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_types
     def create
-      authorize legal_aid_application
       return continue_or_draft if draft_selected?
 
       if legal_aid_application.proceeding_types.present?
@@ -22,7 +20,6 @@ module Providers
 
     # PATCH /provider/applications/:legal_aid_application_id/proceedings_types/:id
     def update
-      authorize legal_aid_application
       ActiveRecord::Base.transaction do
         legal_aid_application.reset_proceeding_types! # This will probably change when multiple proceeding types implemented!
         legal_aid_application.proceeding_types << proceeding_type

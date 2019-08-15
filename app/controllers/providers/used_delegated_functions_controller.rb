@@ -1,12 +1,10 @@
 module Providers
   class UsedDelegatedFunctionsController < ProviderBaseController
     def show
-      authorize legal_aid_application
       @form = LegalAidApplications::UsedDelegatedFunctionsForm.new(model: legal_aid_application)
     end
 
     def update
-      authorize legal_aid_application
       @form = LegalAidApplications::UsedDelegatedFunctionsForm.new(form_params)
       render :show unless save_continue_or_draft_and_update_scope_limitations
     end

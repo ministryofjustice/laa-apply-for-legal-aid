@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Providers::MeritsDeclarationsController, type: :request do
+RSpec.describe Providers::EndOfApplicationsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, state: :assessment_submitted }
   let(:login) { login_as legal_aid_application.provider }
 
@@ -26,6 +26,15 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
+
+    context 'with another provider' do
+      let(:login) { login_as create(:provider) }
+      before { subject }
+
+      it 'redirects to access denied error' do
+        expect(response).to redirect_to(error_path(:access_denied))
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/end_of_application' do
@@ -38,7 +47,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
       )
     end
 
-    xit 'redirects to next page' do
+    it 'redirects to next page' do
       subject
       expect(response).to redirect_to(flow_forward_path)
     end
@@ -60,6 +69,15 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
       let(:login) { nil }
       before { subject }
       it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'with another provider' do
+      let(:login) { login_as create(:provider) }
+      before { subject }
+
+      it 'redirects to access denied error' do
+        expect(response).to redirect_to(error_path(:access_denied))
+      end
     end
   end
 end

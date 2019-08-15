@@ -13,7 +13,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as legal_aid_application.provider
       end
 
       it 'returns http success' do
@@ -65,7 +65,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        login_as create(:provider)
+        login_as legal_aid_application.provider
       end
 
       context 'Submitted with Continue button' do
