@@ -1823,7 +1823,7 @@ global_means:
   COST_LIMIT_CHANGED_FLAG:
     :value: false
     :br100_meaning: cost limit changed flag
-    :response_type: text
+    :response_type: boolean
     :user_defined: true
   GB_INPUT_B_15WP2_8A:
     :value: '#applicant_owed_money?'
@@ -1871,9 +1871,9 @@ global_means:
     :user_defined: false
   PROVIDER_CASE_REFERENCE:
     :generate_block?: false
-    :value: CCMS_Apply_Test_Case
+    :value: false
     :br100_meaning: Provider Case Reference
-    :response_type: text
+    :response_type: boolean
     :user_defined: true
   GB_INPUT_B_12WP3_3A:
     :value: false
@@ -3177,7 +3177,7 @@ global_merits:
   COST_LIMIT_CHANGED_FLAG:
     :value: false
     :br100_meaning: cost limit changed flag
-    :response_type: text
+    :response_type: boolean
     :user_defined: true
   MENTAL_HEAL_QUESTION_APPLIES:
     :generate_block?: false
@@ -3241,9 +3241,9 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   PROVIDER_CASE_REFERENCE:
-    :value: CCMS_Apply_Test_Case
+    :value: false
     :br100_meaning: Provider Case Reference
-    :response_type: text
+    :response_type: boolean
     :user_defined: true
   REQ_COST_LIMITATION:
     :value: 5000
@@ -4495,7 +4495,7 @@ proceeding_merits:
     :generate_block?: false
   WARNING_LETTER_SENT:
     :generate_block?: true
-    :value: "#respondent_warning_letter_sent?"
+    :value: false
     :response_type: boolean
     :user_defined: true
   POLICE_NOTIFIED:
