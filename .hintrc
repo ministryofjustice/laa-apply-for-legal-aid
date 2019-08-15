@@ -21,7 +21,7 @@
     "css-prefix-order": "error",
     "disown-opener": "error",
     "highest-available-document-mode": "error",
-    "html-checker": ["off", {
+    "html-checker": ["error", {
       "ignore": [
         "Could not get results from HTML checker for 'file:///home/circleci/project/tmp/webhint_inputs/apply-citizens-accounts.html'. Error: 'SyntaxError: Unexpected token < in JSON at position 0'.",
         "Could not get results from HTML checker for 'file:///home/circleci/project/tmp/webhint_inputs/apply-citizens-additional_accounts.html'. Error: 'SyntaxError: Unexpected token < in JSON at position 0'.",
