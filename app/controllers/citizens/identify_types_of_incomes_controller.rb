@@ -1,7 +1,5 @@
 module Citizens
   class IdentifyTypesOfIncomesController < CitizenBaseController
-    before_action :authenticate_applicant!
-
     def show
       legal_aid_application
       @none_selected = legal_aid_application.no_credit_transaction_types_selected?

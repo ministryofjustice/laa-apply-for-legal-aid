@@ -1,7 +1,5 @@
 module Citizens
   class OutstandingMortgagesController < CitizenBaseController
-    before_action :authenticate_applicant!
-
     def show
       @form = LegalAidApplications::OutstandingMortgageForm.new(model: legal_aid_application)
     end

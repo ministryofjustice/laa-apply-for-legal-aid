@@ -3,6 +3,7 @@ module Citizens
     include ApplicationFromSession
     before_action :authenticate_applicant!
     before_action :check_not_complete
+    before_action :set_cache_buster
 
     private
 
