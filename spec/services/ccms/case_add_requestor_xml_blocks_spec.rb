@@ -128,22 +128,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to have_response_value legal_aid_application.respondent.warning_letter_sent_details
           end
         end
-
-        context 'sent' do
-          it 'generates WARNING_LETTER_SENT block with true value' do
-            respondent.update(warning_letter_sent: true)
-            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
-          end
-
-          it 'does not generates INJ_REASON_NO_WARNING_LETTER block' do
-            respondent.update(warning_letter_sent: true)
-            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).not_to be_present
-          end
-        end
       end
 
       context 'INJ_RESPONDENT_CAPACITY' do
@@ -483,7 +467,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
               expect(block).to be_present
-              expect(block).to have_response_type 'text'
+              expect(block).to have_response_type 'boolean'
               expect(block).to have_response_value 'false'
             end
           end
@@ -749,7 +733,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def omitted_attributes
+  def omitted_attributes # rubocop:disable Metrics/MethodLength
     [
       [:global_means, 'BEN_AWARD_DATE'],
       [:global_means, 'CLIENT_NASS'],
@@ -1151,8 +1135,16 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     ]
   end
 
-  def false_attributes
+  def false_attributes # rubocop:disable Metrics/MethodLength
     [
+      [:global_means, 'GB_INPUT_B_1WP2_14A'],
+      [:global_means, 'GB_INPUT_B_1WP2_22A'],
+      [:global_means, 'GB_INPUT_B_1WP2_27A'],
+      [:global_means, 'GB_INPUT_B_1WP2_36A'],
+      [:global_means, 'GB_INPUT_B_1WP3_165A'],
+      [:global_means, 'GB_INPUT_B_1WP3_400A'],
+      [:global_means, 'GB_INPUT_B_1WP3_401A'],
+      [:global_means, 'MEANS_TASK_AUTO_GEN'],
       [:global_means, 'GB_INFER_B_1WP1_1A'],
       [:global_means, 'GB_INPUT_B_14WP2_7A'],
       [:global_means, 'GB_INPUT_B_17WP2_7A'],
@@ -1340,7 +1332,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
       [:global_merits, 'URGENT_FLAG'],
       [:global_merits, 'COST_LIMIT_CHANGED'],
-      [:global_merits, 'DECLARATION_IDENTIFIER']
+      [:global_merits, 'DECLARATION_IDENTIFIER'],
+      [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
+      [:global_merits, 'PROVIDER_CASE_REFERENCE'],
+      [:proceeding_merits, 'WARNING_LETTER_SENT']
     ]
   end
 end
