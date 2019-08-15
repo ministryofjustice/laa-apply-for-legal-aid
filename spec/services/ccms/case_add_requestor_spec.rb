@@ -50,7 +50,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                balance: 100.0,
                account_number: '12345678',
                bank_provider: bank_provider,
-               uses_online_banking: true,
                account_type_label: 'Bank Current'
       end
 
@@ -60,7 +59,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                first_name: 'Dave',
                last_name: 'Fabby',
                preferred_address: 'CLIENT',
-               uses_online_banking: true,
                bank_accounts: [bank_account_1]
       end
 
@@ -230,8 +228,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       let(:other_party_1) { create :opponent, :child }
-
-      let(:own_vehicle) { create :applicant, :with_v }
 
       let(:other_party_2) { create :opponent, :ex_spouse }
 

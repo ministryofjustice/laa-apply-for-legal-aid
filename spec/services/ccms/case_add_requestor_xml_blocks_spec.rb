@@ -8,7 +8,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         create :legal_aid_application,
                :with_proceeding_types,
                :with_everything,
-               :with_applicant,
                populate_vehicle: true,
                with_bank_accounts: 2
       end
