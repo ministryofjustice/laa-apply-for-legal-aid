@@ -211,9 +211,7 @@ jobs:
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
-                        --set image.tag="${CIRCLE_SHA1}" \
-                        --set ingress.hosts="{${STAGING_HOST_1}}"
-                        --set ingress.secretName=“{${STAGING_DOMAIN_CERT}}”
+                        --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
     <<: *deploy_container_config
