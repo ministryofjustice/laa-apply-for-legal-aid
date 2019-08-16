@@ -804,6 +804,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
   def omitted_attributes # rubocop:disable Metrics/MethodLength
     [
       [:global_means, 'BEN_AWARD_DATE'],
+      [:global_means, 'CAP_CONT'],
       [:global_means, 'CLIENT_NASS'],
       [:global_means, 'CLIENT_PRISONER'],
       [:global_means, 'GB_INFER_B_1WP3_419A'],
