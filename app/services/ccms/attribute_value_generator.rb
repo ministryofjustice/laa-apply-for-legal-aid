@@ -33,7 +33,6 @@ module CCMS
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
-      @applicant = legal_aid_application.applicant
     end
 
     def method_missing(method, *args)
@@ -117,10 +116,14 @@ module CCMS
     end
 
     def applicant_has_bank_accounts?(_options)
-      @applicant.bank_accounts.any?
+      applicant.bank_accounts.any?
     end
 
     private
+
+    def applicant
+      @applicant ||= @legal_aid_application.applicant
+    end
 
     def standardly_named_method?(method)
       STANDARD_METHOD_NAMES.match?(method)

@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_135413) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "proceeding_case_id"
+    t.index ["legal_aid_application_id", "proceeding_type_id"], name: "app_proceeding_type_index", unique: true
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
@@ -100,9 +101,10 @@ ActiveRecord::Schema.define(version: 2019_08_12_135413) do
   create_table "application_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "scope_limitation_id"
-    t.boolean "substantive", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "substantive", default: true
+    t.index ["legal_aid_application_id", "scope_limitation_id"], name: "scope_limitations_index", unique: true
     t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
