@@ -19,7 +19,7 @@ module CCMS
   # method name without the prefix is called on the appropriate object in the options hash, e.g.
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
-  class AttributeValueGenerator
+  class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
     STANDARD_METHOD_NAMES = /^(application|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
@@ -63,11 +63,6 @@ module CCMS
       0 # TODO: CCMS placeholder
     end
 
-    #  commented out pending check with Stephen, AP-836
-    # def lead_proceeding_category(_options)
-    #   'MAT' # TODO: CCMS placeholder
-    # end
-
     def main_dwelling_third_party_name(_options)
       'Mrs Fabby Fabby' # TODO: CCMS placeholder
     end
@@ -92,7 +87,43 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
+    def applicant_owed_money?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.money_owed_value
+    end
+
+    def applicant_has_interest_in_a_trust?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.trust_value
+    end
+
+    def applicant_has_valuable_posessions?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.valuable_items_value
+    end
+
+    def applicant_owns_timeshare?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.timeshare_property_value
+    end
+
+    def applicant_owns_land?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.land_value
+    end
+
+    def applicant_has_investments?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.money_assets_value
+    end
+
+    def applicant_owns_property?(_options)
+      not_zero? @legal_aid_application.property_value
+    end
+
+    def applicant_has_bank_accounts?(_options)
+      applicant.bank_accounts.any?
+    end
+
     private
+
+    def applicant
+      @applicant ||= @legal_aid_application.applicant
+    end
 
     def standardly_named_method?(method)
       STANDARD_METHOD_NAMES.match?(method)
@@ -119,6 +150,10 @@ module CCMS
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
       end
+    end
+
+    def not_zero?(value)
+      value.present? && value.positive?
     end
   end
 end

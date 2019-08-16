@@ -11,6 +11,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                populate_vehicle: true,
                with_bank_accounts: 2
       end
+
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:respondent) { legal_aid_application.respondent }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
@@ -688,6 +689,163 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'GB_INPUT_B_15WP2_8A client is owed money' do
+        it 'returns true when applicant is owed money' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_15WP2_8A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when applicant is NOT owed money' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:money_owed_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_15WP2_8A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_14WP2_8A vehicle is owned' do
+        it 'returns true when applicant owns a vehicle' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP2_8A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        context 'GB_INPUT_B_14WP2_8A no vehicle owned' do
+          before { legal_aid_application.update(own_vehicle: false) }
+          it 'returns false when applicant does NOT own a vehicle' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP2_8A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'false'
+          end
+        end
+      end
+
+      context 'GB_INPUT_B_16WP2_7A client interest in a trust' do
+        it 'returns true when client has interest in a trust' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client has NO interest in a trust' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:trust_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_12WP2_2A client valuable possessions' do
+        it 'returns true when client has valuable possessions' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client has NO valuable possessions' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_6WP2_1A client has timeshare' do
+        it 'returns true when client has timeshare' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have timeshare' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:timeshare_property_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_5WP2_1A client owns land' do
+        it 'returns true when client owns land' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT own land' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:land_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_9WP2_1A client investments' do
+        it 'returns true when client has investments' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT have investments' do
+          allow(legal_aid_application.other_assets_declaration).to receive(:money_assets_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_4WP2_1A client owns property ' do
+        it 'returns true when client owns property ' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        it 'returns false when client does NOT own property ' do
+          allow(legal_aid_application).to receive(:property_value).and_return(nil)
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
+      context 'GB_INPUT_B_7WP2_1A client bank accounts' do
+        it 'returns true when client has bank accounts' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+
+        context 'GB_INPUT_B_7WP2_1A no bank accounts' do
+          it 'returns false when applicant does NOT have bank accounts' do
+            allow(legal_aid_application.applicant).to receive(:bank_accounts).and_return([])
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'false'
+          end
+        end
+      end
+
       context 'attributes with specific hard coded values' do
         context 'attributes hard coded to specific values' do
           it 'DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings' do
@@ -902,6 +1060,91 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
+          end
+        end
+
+        context 'attributes hard coded to false' do
+          it 'should be type of text hard coded to false' do
+            attributes = [
+              [:global_means, 'COST_LIMIT_CHANGED_FLAG']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value 'false'
+            end
+          end
+        end
+
+        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
+          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value 'FAMILY'
+        end
+
+        it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
+          block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
+          expect(block).to be_present
+          expect(block).to have_response_type 'number'
+          expect(block).to have_response_value '1'
+        end
+
+        it 'LEVEL_OF_SERVICE should be hard coded to 3' do
+          attributes = [
+            [:proceeding_merits, 'LEVEL_OF_SERVICE'],
+            [:proceeding, 'LEVEL_OF_SERVICE']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value '3'
+          end
+        end
+
+        it 'CLIENT_INVOLVEMENT_TYPE should be hard coded to A' do
+          attributes = [
+            [:proceeding_merits, 'CLIENT_INVOLVEMENT_TYPE'],
+            [:proceeding, 'CLIENT_INVOLVEMENT_TYPE']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'A'
+          end
+        end
+
+        it 'NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION' do
+          attributes = [
+            [:global_means, 'NEW_APPL_OR_AMENDMENT'],
+            [:global_merits, 'NEW_APPL_OR_AMENDMENT']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'APPLICATION'
+          end
+        end
+
+        it 'USER_TYPE should be hard coded to EXTERNAL' do
+          attributes = [
+            [:global_means, 'USER_TYPE'],
+            [:global_merits, 'USER_TYPE']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'EXTERNAL'
           end
         end
 
