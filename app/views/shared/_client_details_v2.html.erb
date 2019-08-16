@@ -1,3 +1,6 @@
+
+<h2 class="govuk-heading-m"><%= t('.heading') %></h2>
+
 <div class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :first_name,
@@ -18,7 +21,7 @@
       ) %>
 
   <%= check_answer_link(
-        name: :national_insurance_number,
+        name: :age,
         question: t('.age_question'),
         answer: t('.age', years: applicant.age)
       ) %>
