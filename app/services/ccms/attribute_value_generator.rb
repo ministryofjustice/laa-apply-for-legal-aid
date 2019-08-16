@@ -88,39 +88,39 @@ module CCMS
     end
 
     def client_owns_vehicle(_options)
-      @legal_aid_application.own_vehicle? ? 'true' : 'false'
+      @legal_aid_application.own_vehicle?
     end
 
     def client_owed_money(_options)
-      @legal_aid_application.other_assets_declaration.money_owed_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.other_assets_declaration.money_owed_value
     end
 
     def client_has_interest_in_a_trust(_options)
-      @legal_aid_application.other_assets_declaration.trust_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.other_assets_declaration.trust_value
     end
 
     def client_has_valuable_posessions(_options)
-      @legal_aid_application.other_assets_declaration.valuable_items_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.other_assets_declaration.valuable_items_value
     end
 
     def client_owns_timeshare(_options)
-      @legal_aid_application.other_assets_declaration.timeshare_property_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.other_assets_declaration.timeshare_property_value
     end
 
     def client_owns_land(_options)
-      @legal_aid_application.other_assets_declaration.land_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.other_assets_declaration.land_value
     end
 
     def client_has_investments(_options)
-      @legal_aid_application.other_assets_declaration.money_assets_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.other_assets_declaration.money_assets_value
     end
 
     def client_owns_property(_options)
-      @legal_aid_application.property_value.nil? ? 'false' : 'true'
+      not_zero? @legal_aid_application.property_value
     end
 
     def client_has_bank_accounts(_options)
-      @legal_aid_application.open_banking_consent_choice_at.nil? ? 'false' : 'true'
+      @legal_aid_application.open_banking_consent_choice_at.present?
     end
 
     private
@@ -150,6 +150,10 @@ module CCMS
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
       end
+    end
+
+    def not_zero?(value)
+      value.present? && value > 0
     end
   end
 end

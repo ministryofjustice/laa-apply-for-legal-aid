@@ -11,6 +11,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                populate_vehicle: true,
                with_bank_accounts: 2
       end
+
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:respondent) { legal_aid_application.respondent }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
@@ -724,7 +725,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'GB_INPUT_B_16WP2_7A client has interest in a trust' do
+      context 'GB_INPUT_B_16WP2_7A client interest in a trust' do
         it 'returns true when client has interest in a trust' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
           expect(block).to be_present
@@ -741,7 +742,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'GB_INPUT_B_12WP2_2A client has valuable possessions' do
+      context 'GB_INPUT_B_12WP2_2A client valuable possessions' do
         it 'returns true when client has valuable possessions' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
           expect(block).to be_present
@@ -758,7 +759,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'GB_INPUT_B_6WP2_1A client does have timeshare' do
+      context 'GB_INPUT_B_6WP2_1A client has timeshare' do
         it 'returns true when client has timeshare' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
           expect(block).to be_present
@@ -792,7 +793,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'GB_INPUT_B_9WP2_1A client does have investments' do
+      context 'GB_INPUT_B_9WP2_1A client investments' do
         it 'returns true when client has investments' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
           expect(block).to be_present
@@ -827,7 +828,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_B_7WP2_1A client bank accounts' do
-        before { legal_aid_application.update(open_banking_consent_choice_at: '2019-6-7') }
+        before { legal_aid_application.update(open_banking_consent_choice_at: '2019-06-01') }
         it 'returns true when client has bank accounts' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
           expect(block).to be_present
