@@ -41,7 +41,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         it 'updates the record' do
           legal_aid_application.create_merits_assessment!
           expect { subject }.to change { legal_aid_application.merits_assessment.reload.submitted_at }.from(nil)
-          expect(legal_aid_application.reload).to be_assessment_submitted
+          expect(legal_aid_application.reload).to be_generating_merits_report
         end
 
         it 'redirects to next page' do

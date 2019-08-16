@@ -17,6 +17,7 @@ module LegalAidApplicationStateMachine
       state :provider_checked_citizens_means_answers
       state :checking_merits_answers
       state :checked_merits_answers
+      state :generating_merits_report
       state :assessment_submitted
 
       event :check_your_answers do
@@ -87,9 +88,13 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_merits_answers, to: :checked_merits_answers
       end
 
-      event :submit_assessment do
-        transitions from: :checked_merits_answers, to: :assessment_submitted,
+      event :generate_merits_report do
+        transitions from: :checked_merits_answers, to: :generating_merits_report,
                     after: -> { MeritsReportCreatorWorker.perform_async(id) }
+      end
+
+      event :generated_merits_report do
+        transitions from: :generating_merits_report, to: :assessment_submitted
       end
     end
   end
