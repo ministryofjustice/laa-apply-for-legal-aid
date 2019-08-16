@@ -2294,6 +2294,16 @@ global_means:
     :br100_meaning: 'Int.Result: Client Land- Value of equity'
     :response_type: currency
     :user_defined: false
+  APPLICATION_FROM_APPLY:
+    :value: true
+    :br100_meaning: 'The application has been made through the Apply service'
+    :response_type: boolean
+    :user_defined: false
+  APPLY_CASE_MEANS_REVIEW:
+    :value: true
+    :br100_meaning: 'The application means assessment needs a caseworker to manually review'
+    :response_type: boolean
+    :user_defined: false
 global_merits:
   APP_INCLUDES_IMMIGRATION_PROCS:
     :generate_block?: false
@@ -3913,6 +3923,16 @@ global_merits:
   EVIDENCE_AMD_SOLICITOR_RPT:
     :value: false
     :br100_meaning: Meaning not defined in BR100
+    :response_type: boolean
+    :user_defined: false
+  APPLICATION_FROM_APPLY:
+    :value: true
+    :br100_meaning: 'The application has been made through the Apply service'
+    :response_type: boolean
+    :user_defined: false
+  APPLY_CASE_MEANS_REVIEW:
+    :value: true
+    :br100_meaning: 'The application means assessment needs a caseworker to manually review'
     :response_type: boolean
     :user_defined: false
 other_party:
