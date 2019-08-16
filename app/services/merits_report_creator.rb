@@ -15,6 +15,7 @@ class MeritsReportCreator
       filename: 'merits_report.pdf',
       content_type: 'application/pdf'
     )
+    legal_aid_application.generated_merits_report!
   end
 
   private
