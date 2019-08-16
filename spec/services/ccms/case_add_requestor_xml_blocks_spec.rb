@@ -828,7 +828,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_B_7WP2_1A client bank accounts' do
-        before { legal_aid_application.update(open_banking_consent_choice_at: '2019-06-01') }
         it 'returns true when client has bank accounts' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
           expect(block).to be_present
@@ -837,8 +836,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
 
         context 'GB_INPUT_B_7WP2_1A no bank accounts' do
-          before { legal_aid_application.update(open_banking_consent_choice_at: nil) }
           it 'returns false when applicant does NOT have bank accounts' do
+            allow(legal_aid_application.applicant).to receive(:bank_accounts).and_return([])
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'

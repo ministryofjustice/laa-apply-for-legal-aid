@@ -33,6 +33,7 @@ module CCMS
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
+      @applicant = legal_aid_application.applicant
     end
 
     def method_missing(method, *args)
@@ -120,7 +121,7 @@ module CCMS
     end
 
     def client_has_bank_accounts(_options)
-      @legal_aid_application.open_banking_consent_choice_at.present?
+      @applicant.bank_accounts.any?
     end
 
     private
