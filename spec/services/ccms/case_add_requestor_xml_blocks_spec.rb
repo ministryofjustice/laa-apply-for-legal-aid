@@ -1078,6 +1078,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_response_value 'This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence'
         end
 
+        it 'FAMILY_STATEMENT_INSTANCE should be hard coded - ' do
+          block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STATEMENT_INSTANCE')
+          expect(block).to be_present
+          expect(block).to have_response_type 'text'
+          expect(block).to have_response_value '-'
+        end
+
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to be_present
