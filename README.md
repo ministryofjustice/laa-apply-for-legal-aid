@@ -84,9 +84,13 @@ VCR_RECORD_MODE=all bin/rake
 
 webhint (https://webhint.io/) is used to check if pages are accessible.
 
-- Run `SAVE_PAGES=true bin/rails cucumber` to run the feature tests and save all pages to `tmp/webhint_inputs`
-- Run `./bin/generate_webhint_reports.sh` to check these pages with webhint.
-- The result will be printed as a JSON result and you can also find HTML reports in the `hint-report` folder.
+Run `rake webhint:generate_reports`. This will
+
+- delete any existing files from previous runs
+- execute `SAVE_PAGES=true bin/rails cucumber` to run the feature tests and save all pages to `tmp/webhint_inputs`
+- and the execute `./bin/generate_webhint_reports.sh` to check those pages with webhint.
+
+The result will be printed as a JSON result and you can also find HTML reports in the `hint-report` folder.
 
 ## Deployment
 
