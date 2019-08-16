@@ -88,39 +88,35 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
-    def client_owns_vehicle(_options)
-      @legal_aid_application.own_vehicle?
-    end
-
-    def client_owed_money(_options)
+    def applicant_owed_money?(_options)
       not_zero? @legal_aid_application.other_assets_declaration.money_owed_value
     end
 
-    def client_has_interest_in_a_trust(_options)
+    def applicant_has_interest_in_a_trust?(_options)
       not_zero? @legal_aid_application.other_assets_declaration.trust_value
     end
 
-    def client_has_valuable_posessions(_options)
+    def applicant_has_valuable_posessions?(_options)
       not_zero? @legal_aid_application.other_assets_declaration.valuable_items_value
     end
 
-    def client_owns_timeshare(_options)
+    def applicant_owns_timeshare?(_options)
       not_zero? @legal_aid_application.other_assets_declaration.timeshare_property_value
     end
 
-    def client_owns_land(_options)
+    def applicant_owns_land?(_options)
       not_zero? @legal_aid_application.other_assets_declaration.land_value
     end
 
-    def client_has_investments(_options)
+    def applicant_has_investments?(_options)
       not_zero? @legal_aid_application.other_assets_declaration.money_assets_value
     end
 
-    def client_owns_property(_options)
+    def applicant_owns_property?(_options)
       not_zero? @legal_aid_application.property_value
     end
 
-    def client_has_bank_accounts(_options)
+    def applicant_has_bank_accounts?(_options)
       @applicant.bank_accounts.any?
     end
 
@@ -154,7 +150,7 @@ module CCMS
     end
 
     def not_zero?(value)
-      value.present? && value > 0
+      value.present? && value.positive?
     end
   end
 end
