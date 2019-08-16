@@ -16,6 +16,9 @@ en:
         be prosecuted
         need to pay a financial penalty
         have your legal aid stopped and have to pay back the costs
+    application_ref:
+      apply_ref: 'Apply service case reference:'
+      ccms_ref: 'CCMS case reference:'
     check_answers:
       assets:
         assets:
@@ -93,6 +96,14 @@ en:
           payment_remaining: Are there any payments left on the vehicle?
           purchased_on: When did your client buy the vehicle?
           used_regularly: Is the vehicle in regular use?
+    client_details_v2:
+      heading: Client details
+      first_name: First name
+      last_name: Last name
+      dob: Date of birth
+      age_question: Age at computation date
+      age: "%{years} years old"
+      nino: National Insurance number
     forms:
       applicant_form:
         page_title: Enter your client's details

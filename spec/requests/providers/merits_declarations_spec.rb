@@ -41,7 +41,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         it 'updates the record' do
           legal_aid_application.create_merits_assessment!
           expect { subject }.to change { legal_aid_application.merits_assessment.reload.submitted_at }.from(nil)
-          expect(legal_aid_application.reload).to be_generating_merits_report
+          expect(legal_aid_application.reload).to be_generating_reports
         end
 
         it 'redirects to next page' do
@@ -49,11 +49,11 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
           expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(legal_aid_application))
         end
 
-        it 'creates a merits report pdf' do
-          MeritsReportCreatorWorker.clear
-          expect(MeritsReportCreator).to receive(:call).with(legal_aid_application)
+        it 'creates a pdf reports' do
+          ReportsCreatorWorker.clear
+          expect(Reports::ReportsCreator).to receive(:call).with(legal_aid_application)
           subject
-          MeritsReportCreatorWorker.drain
+          ReportsCreatorWorker.drain
         end
       end
 

@@ -172,6 +172,7 @@ Rails.application.routes.draw do
       resource :end_of_application, only: %i[show update]
       resource :submitted_application, only: :show
       resource :merits_report, only: :show
+      resource :means_report, only: :show
     end
   end
 

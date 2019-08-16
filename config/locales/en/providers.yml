@@ -182,7 +182,7 @@ en:
     means_summaries:
       show:
         h1-heading: Check your answers
-        captial-section-heading: Total capital
+        capital-section-heading: Total capital
         credits-section-heading: Total income
         debits-section-heading: Total outgoings
         change_declared_income: View/change declared income
@@ -199,17 +199,11 @@ en:
     merits_reports:
       show:
         heading: Merits report
-        apply_ref: 'Apply service case reference:'
-        ccms_ref: 'CCMS case reference:'
-        client_details: Client details
         applying_for: What you’re applying for
-      client_details:
-        first_name: First name
-        last_name: Last name
-        dob: Date of birth
-        age_question: Age at computation date
-        age: "%{years} years old"
-        nino: National Insurance number
+    means_reports:
+      show:
+        heading: Means report
+        assets_heading: Property, savings and other assets
     online_bankings:
       show:
         heading: Does your client use online banking?

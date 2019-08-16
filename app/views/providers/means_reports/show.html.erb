@@ -1,0 +1,13 @@
+<%= page_template page_title: t('.heading'), back_link: :none do %>
+
+  <%= render 'shared/application_ref', legal_aid_application: @legal_aid_application %>
+
+  <%= render 'shared/client_details_v2', applicant: @legal_aid_application.applicant %>
+
+  <h2 class="govuk-heading-m">
+    <%= t('.assets_heading') %>
+  </h2>
+
+  <%= render 'shared/check_answers/assets', read_only: true %>
+
+<% end %>
