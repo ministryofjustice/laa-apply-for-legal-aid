@@ -1,5 +1,7 @@
 module Providers
   class MeritsReportsController < ProviderBaseController
+    authorize_with_policy :show_submitted_application?
+
     def show
       render pdf: 'Merit report',
              layout: 'pdf',
