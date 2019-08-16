@@ -2262,6 +2262,7 @@ global_means:
     :response_type: date
     :user_defined: true
   CAP_CONT:
+    :generate_block?: false
     :value: "#means_assessment_capital_contribution"
     :br100_meaning: 'RESULT: Capital- Capital contribution'
     :response_type: currency
