@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::MeritsReportsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :assessment_submitted }
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe 'GET /providers/applications/:legal_aid_application_id/merits_report' do
