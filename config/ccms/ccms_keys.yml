@@ -154,7 +154,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_14WP2_8A:
-    :value: '#application_own_vehicle'
+    :value: '#application_own_vehicle?'
     :br100_meaning: 'Cars: The client owns car(s)?'
     :response_type: boolean
     :user_defined: true
