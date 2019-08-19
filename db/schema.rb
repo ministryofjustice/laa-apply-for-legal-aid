@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_151326) do
+ActiveRecord::Schema.define(version: 2019_09_09_101523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -196,6 +196,16 @@ ActiveRecord::Schema.define(version: 2019_09_04_151326) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ccms_submission_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "submission_id"
+    t.string "document_id"
+    t.string "status"
+    t.string "document_type"
+    t.string "ccms_document_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ccms_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id", null: false
     t.string "from_state"
@@ -218,7 +228,6 @@ ActiveRecord::Schema.define(version: 2019_09_04_151326) do
     t.integer "applicant_poll_count", default: 0
     t.string "case_add_transaction_id"
     t.integer "case_poll_count", default: 0
-    t.text "documents"
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
   end
 
@@ -557,6 +566,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_151326) do
   add_foreign_key "bank_providers", "applicants"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
+  add_foreign_key "ccms_submission_documents", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications"
   add_foreign_key "dependants", "legal_aid_applications"

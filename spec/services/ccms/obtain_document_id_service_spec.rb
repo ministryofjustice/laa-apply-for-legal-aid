@@ -20,7 +20,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
     context 'the application has no documents' do
       it 'creates an empty documents array' do
         subject.call
-        expect(submission.documents&.size).to eq 0
+        expect(submission.submission_document.count).to eq 0
       end
 
       it 'changes the submission state to case_submitted' do
@@ -51,21 +51,21 @@ RSpec.describe CCMS::ObtainDocumentIdService do
 
       it 'populates the documents array with statement_of_case, means_report and merits_report' do
         subject.call
-        expect(submission.documents&.size).to eq 3
+        expect(submission.submission_document.count).to eq 3
       end
 
       context 'when requesting document_ids' do
         it 'populates the ccms_document_id for each document' do
           subject.call
-          submission.documents.each do |document|
-            expect(document[:ccms_document_id]).to_not be nil
+          submission.submission_document.each do |document|
+            expect(document.ccms_document_id).to_not be nil
           end
         end
 
         it 'updates the status for each document to id_obtained' do
           subject.call
-          submission.documents.each do |document|
-            expect(document[:status]).to eq :id_obtained
+          submission.submission_document.each do |document|
+            expect(document.status).to eq 'id_obtained'
           end
         end
 
@@ -111,7 +111,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
 
       it 'changes the document state to failed' do
         subject.call
-        expect(submission.documents.first[:status]).to eq :failed
+        expect(submission.submission_document.first.status).to eq 'failed'
       end
 
       it 'writes a history record' do

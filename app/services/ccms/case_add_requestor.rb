@@ -81,10 +81,10 @@ module CCMS
     end
 
     def generate_case_docs(xml)
-      @submission.documents.each do |document|
+      @submission.submission_document.each do |document|
         xml.__send__('ns2:CaseDoc') do
-          xml.__send__('ns2:CCMSDocumentID', document[:ccms_document_id])
-          xml.__send__('ns2:DocumentSubject', document[:type])
+          xml.__send__('ns2:CCMSDocumentID', document.ccms_document_id)
+          xml.__send__('ns2:DocumentSubject', document.document_type)
         end
       end
     end

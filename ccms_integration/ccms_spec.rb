@@ -237,26 +237,26 @@ module CCMS
     def request_document_ids
       print 'Requesting document IDs... '
       @submission.process!
-      expect(@submission.documents).to_not be_empty
-      expect(@submission.documents[0][:status]).to eq :id_obtained
+      expect(@submission.submission_document).to_not be_empty
+      expect(@submission.submission_document.first.status).to eq 'id_obtained'
       expect(@submission.aasm_state).to eq 'document_ids_obtained'
       expect(history.from_state).to eq 'applicant_ref_obtained'
       expect(history.to_state).to eq 'document_ids_obtained'
       expect(history.success).to be true
       expect(history.details).to be_nil
-      puts @submission.documents.to_s.green
+      puts 'done'.green
     end
 
     def upload_documents
       print 'Uploading documents... '
       @submission.process!
-      expect(@submission.documents[0][:status]).to eq :uploaded
+      expect(@submission.submission_document.first.status).to eq 'uploaded'
       expect(@submission.aasm_state).to eq 'completed'
       expect(history.from_state).to eq 'case_created'
       expect(history.to_state).to eq 'completed'
       expect(history.success).to be true
       expect(history.details).to be_nil
-      puts @submission.documents.to_s.green
+      puts 'done'.green
     end
 
     def run_everything

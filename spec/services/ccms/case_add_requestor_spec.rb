@@ -310,7 +310,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                applicant_ccms_reference: 9_876_543_210
       end
 
-      let(:documents) { [{ id: '12345', status: :id_obtained, type: :statement_of_case, ccms_document_id: '67890' }] }
+      let(:documents) { [(create :submission_document, :id_obtained, ccms_document_id: '67890')] }
 
       let(:pdf_file) do
         double PdfFile,
@@ -327,7 +327,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         allow(ProceedingType).to receive(:find).with(2).and_return(proceeding_type_2)
         allow(ApplicationScopeLimitation).to receive(:find_by).and_return(application_scope_limitation_1)
         allow(PdfFile).to receive(:find_by).and_return(pdf_file)
-        allow(submission).to receive(:documents).and_return(documents)
+        allow(submission).to receive(:submission_document).and_return(documents)
       end
 
       describe 'Full XML request' do
