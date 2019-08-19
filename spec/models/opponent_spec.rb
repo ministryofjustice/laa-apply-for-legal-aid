@@ -119,4 +119,22 @@ RSpec.describe Opponent, type: :model do
       expect(opponent.organisation?).to be true
     end
   end
+
+  describe '#shared_ind' do
+    it 'returns false' do
+      expect(opponent.shared_ind).to eq false
+    end
+  end
+
+  describe '#assessed_income' do
+    it 'returns 0' do
+      expect(opponent.assessed_income).to eq 0
+    end
+  end
+
+  describe '#assessed_assets' do
+    it 'returns 0' do
+      expect(opponent.assessed_assets).to eq 0
+    end
+  end
 end

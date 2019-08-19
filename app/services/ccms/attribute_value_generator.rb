@@ -233,8 +233,8 @@ module CCMS
         options[:wage_slip].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
-      when OTHER_PARTY
-        options[:other_party].__send__(Regexp.last_match(1))
+      # when OTHER_PARTY  # TODO enable this when a decision is made on how to handle other parties
+      #   options[:other_party].__send__(Regexp.last_match(1))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when RESPONDENT

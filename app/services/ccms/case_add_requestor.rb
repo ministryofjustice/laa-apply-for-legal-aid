@@ -90,9 +90,7 @@ module CCMS
     end
 
     def generate_other_parties(xml)
-      # @legal_aid_application.opponent_other_parties.each do |opponent|
       generate_other_party(xml)
-      # end
     end
 
     def generate_other_party(xml) # rubocop:disable Metrics/MethodLength
@@ -285,11 +283,9 @@ module CCMS
     def generate_other_parties_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-      # @legal_aid_application.opponents.each do |opponent|
       xml.__send__('ns0:Instances') do
         xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :other_party) }
-        # end
       end
     end
 
@@ -365,11 +361,9 @@ module CCMS
     def generate_opponent_other_parties(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-      # @legal_aid_application.opponent_other_parties.reverse_each do |oop|
       xml.__send__('ns0:Instances') do
         xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :opponent) }
-        # end
       end
     end
 
