@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/support', as: 'rails_admin'
+
   root to: 'home#index'
 
   require 'sidekiq/web'
