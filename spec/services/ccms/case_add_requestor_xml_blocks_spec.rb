@@ -553,7 +553,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
               expect(block).to be_present
-              expect(block).to have_response_type 'text'
+              expect(block).to have_response_type 'boolean'
               expect(block).to have_response_value 'false'
             end
           end
@@ -1258,10 +1258,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'LAR_PROC_B_40WP3_30A'],
       [:global_means, 'LAR_PROC_B_40WP3_31A'],
       [:global_means, 'LAR_PROC_B_40WP3_32A'],
+      [:global_means, 'LAR_INPUT_B_37WP2_4A'],
+      [:global_means, 'LAR_PER_RES_INPUT_B_37WP2_7A'],
       [:global_merits, 'ACTION_AGAINST_POLICE'],
       [:global_merits, 'ACTUAL_LIKELY_COSTS_EXCEED_25K'],
       [:global_merits, 'AMENDMENT'],
       [:global_merits, 'APP_BROUGHT_BY_PERSONAL_REP'],
+      [:global_merits, 'COPY_SEPARATE_STATEMENT'],
       [:global_merits, 'CLIENT_HAS_RECEIVED_LA_BEFORE'],
       [:global_merits, 'COURT_ATTEND_IN_LAST_12_MONTHS'],
       [:global_merits, 'ECF_FLAG'],

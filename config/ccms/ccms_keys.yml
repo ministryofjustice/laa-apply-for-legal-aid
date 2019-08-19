@@ -314,6 +314,16 @@ global_means:
     :br100_meaning: 'Client: Surname at birth'
     :response_type: text
     :user_defined: true
+  LAR_INPUT_B_37WP2_4A:
+    :value: false
+    :br100_meaning: 'Financial Help: Client gets financial help?'
+    :response_type: boolean
+    :user_defined: true
+  LAR_PER_RES_INPUT_B_37WP2_7A:
+    :value: false
+    :br100_meaning: 'Client: The client has persons residing in their household?'
+    :response_type: boolean
+    :user_defined: true
   LAR_PROC_B_40WP3_29A:
     :value: false
     :br100_meaning: 'R - Self. Emp.:  Copy of tax return'
@@ -2311,6 +2321,12 @@ global_merits:
     :br100_meaning: The Application Includes Immigration Proceedings
     :response_type: boolean
     :user_defined: false
+  COPY_SEPARATE_STATEMENT:
+    :generate_block?: true
+    :value: false
+    :br100_meaning: The provider has a copy of separate statement
+    :response_type: boolean
+    :user_defined: true
   PUB_AUTH_QUESTION_APPLIES:
     :generate_block?: false
     :value: false
