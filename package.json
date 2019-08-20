@@ -20,7 +20,7 @@
     "@hint/formatter-json": "^3.0.2",
     "@hint/parser-javascript": "^3.0.2",
     "hint": "^5.2.1",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "webpack-dev-server": "^3.7.2"
   },
   "jest": {
