@@ -75,3 +75,7 @@ $govuk-fonts-path: "/assets/";
 .align-text-right {
   text-align: right;
 }
+
+strong.app-tag--capitalize {
+  text-transform: capitalize
+}
