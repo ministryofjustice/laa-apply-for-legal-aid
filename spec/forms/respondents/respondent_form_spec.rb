@@ -87,6 +87,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
           understands_terms_of_court_order: 'false',
           warning_letter_sent: 'false',
           police_notified: 'false',
+          bail_conditions_set: 'true',
           understands_terms_of_court_order_details: '',
           warning_letter_sent_details: '',
           police_notified_details: '',
