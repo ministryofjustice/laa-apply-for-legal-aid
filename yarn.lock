@@ -868,13 +868,13 @@
     lodash "^4.17.13"
     moment "^2.24.0"
 
-"@hint/formatter-json@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-json/-/formatter-json-3.0.2.tgz#43b1e2a5c9f2a040d6d13ff3eaa6b7d382369a71"
-  integrity sha512-r+HjArdeuSyyGYpKyX1atXm4D9rbenCYlnW++cPgmam7EaaoEZYfcJXl9tBhvl1QmEKlZ7/CxJR83KFsbABQsw==
+"@hint/formatter-json@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-json/-/formatter-json-3.1.1.tgz#206f2d97b6a1534be7cdf607f9cd57c3823c13e6"
+  integrity sha512-+qFXN7x4UVuLXcLasjHdn2YfYsLNdB+lXnNi7bC9ELQ95+oRllOPXwsdxb8S+g6RMgWCtIfkXBRlqo/f08uSRw==
   dependencies:
-    "@hint/utils" "^2.1.0"
-    lodash "^4.17.11"
+    "@hint/utils" "^3.1.0"
+    lodash "^4.17.13"
 
 "@hint/formatter-stylish@^3.0.2":
   version "3.0.2"
