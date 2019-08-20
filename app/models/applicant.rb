@@ -39,4 +39,10 @@ class Applicant < ApplicationRecord
   def true_layer_token_data
     @true_layer_token_data = true_layer_secure_data.retrieve
   end
+
+  def age
+    date = legal_aid_application.submission_date
+    age = date.year - date_of_birth.year
+    date_of_birth > date.years_ago(age) ? age - 1 : age
+  end
 end

@@ -29,6 +29,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_one :vehicle, dependent: :destroy
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
+  has_one_attached :merits_report
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -148,8 +149,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
       provider_checking_citizens_means_answers?
   end
 
+  # TODO: decide when is the submission_date set for passported and non-passported applications
+  # and save it to the DB
   def submission_date
-    transaction_period_finish_at.to_date
+    (transaction_period_finish_at || Time.now.utc).to_date
   end
 
   def opponents

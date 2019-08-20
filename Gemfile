@@ -80,6 +80,10 @@ gem 'webpacker', '~> 4.x'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
+# generating PDFs
+gem 'wicked_pdf'
+
+# interface to manage data
 gem 'rails_admin', '~> 2.0'
 
 group :development, :test do

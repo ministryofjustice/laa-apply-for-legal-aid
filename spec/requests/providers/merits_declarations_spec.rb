@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe Providers::MeritsDeclarationsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checked_merits_answers }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, state: :checked_merits_answers }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/merits_declaration' do
@@ -40,12 +41,19 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         it 'updates the record' do
           legal_aid_application.create_merits_assessment!
           expect { subject }.to change { legal_aid_application.merits_assessment.reload.submitted_at }.from(nil)
-          expect(legal_aid_application.reload).to be_assessment_submitted
+          expect(legal_aid_application.reload).to be_generating_merits_report
         end
 
         it 'redirects to next page' do
           subject
           expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(legal_aid_application))
+        end
+
+        it 'creates a merits report pdf' do
+          MeritsReportCreatorWorker.clear
+          expect(MeritsReportCreator).to receive(:call).with(legal_aid_application)
+          subject
+          MeritsReportCreatorWorker.drain
         end
       end
 

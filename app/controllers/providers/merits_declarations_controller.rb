@@ -3,7 +3,7 @@ module Providers
     def show; end
 
     def update
-      legal_aid_application.submit_assessment! unless draft_selected? || legal_aid_application.assessment_submitted?
+      legal_aid_application.generate_merits_report! unless draft_selected? || !legal_aid_application.may_generate_merits_report?
       merits_assessment.update!(submitted_at: Time.current) unless merits_assessment.submitted_at?
       continue_or_draft
     end

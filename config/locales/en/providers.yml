@@ -196,6 +196,20 @@ en:
           you've gone through the application with your client
           you've explained the 'statutory charge' to your client
           the information you've provided is complete and correct
+    merits_reports:
+      show:
+        heading: Merits report
+        apply_ref: 'Apply service case reference:'
+        ccms_ref: 'CCMS case reference:'
+        client_details: Client details
+        applying_for: What you’re applying for
+      client_details:
+        first_name: First name
+        last_name: Last name
+        dob: Date of birth
+        age_question: Age at computation date
+        age: "%{years} years old"
+        nino: National Insurance number
     online_bankings:
       show:
         heading: Does your client use online banking?
