@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::DependantsController, type: :request do
-  let(:submission_date) { Time.now }
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_at: submission_date }
+  let(:calculation_date) { Date.current }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
   let(:dependant) { legal_aid_application.dependants.last }
 
   before do
@@ -20,7 +20,7 @@ RSpec.describe Citizens::DependantsController, type: :request do
 
   describe 'POST /citizens/dependants' do
     let(:param_name) { Faker::Name.name }
-    let(:param_date_of_birth) { submission_date - 20.years }
+    let(:param_date_of_birth) { calculation_date - 20.years }
     let(:params) do
       {
         dependant: {
@@ -47,7 +47,7 @@ RSpec.describe Citizens::DependantsController, type: :request do
     end
 
     context 'dependant is less than 15 years old' do
-      let(:param_date_of_birth) { submission_date - 10.years }
+      let(:param_date_of_birth) { calculation_date - 10.years }
 
       it 'redirects to the page asking if you have other dependant' do
         subject

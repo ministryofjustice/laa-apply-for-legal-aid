@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Dependant, type: :model do
-  let(:submission_date) { Time.now }
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_at: submission_date }
+  let(:calculation_date) { Date.current }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, date_of_birth: date_of_birth }
 
   describe '#ordinal_number' do

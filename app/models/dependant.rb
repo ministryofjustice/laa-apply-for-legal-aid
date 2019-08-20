@@ -2,7 +2,6 @@ class Dependant < ApplicationRecord
   default_scope { order(number: :asc) }
 
   belongs_to :legal_aid_application
-  delegate :submission_date, to: :legal_aid_application, prefix: true
 
   enum relationship: {
     child_relative: 'child_relative'.freeze,
@@ -14,11 +13,11 @@ class Dependant < ApplicationRecord
   end
 
   def age
-    ((legal_aid_application_submission_date - date_of_birth) / 365.0)
+    AgeCalculator.call(date_of_birth, legal_aid_application.calculation_date)
   end
 
   def over_fifteen?
-    age.floor > 15
+    age > 15
   end
 
   def eighteen_or_less?

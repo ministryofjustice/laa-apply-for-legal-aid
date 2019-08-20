@@ -24,7 +24,7 @@ module TrueLayer
         description: row[:description],
         currency: 'GBP',
         amount: amount.to_f,
-        timestamp: row[:date].to_time.to_s,
+        timestamp: Time.zone.parse(row[:date]).to_s,
         transaction_type: transaction_type.to_s
       }
     end

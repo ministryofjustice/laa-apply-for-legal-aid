@@ -51,7 +51,7 @@ module Flow
           forward: ->(application) do
             return :substantive_applications if application.used_delegated_functions?
 
-            application.benefit_check_result&.positive? ? :capital_introductions : :online_bankings
+            application.applicant_receives_benefit? ? :capital_introductions : :online_bankings
           end
         },
         substantive_applications: {
@@ -59,7 +59,7 @@ module Flow
           forward: ->(application) do
             return :providers_home unless application.substantive_application?
 
-            application.benefit_check_result&.positive? ? :capital_introductions : :online_bankings
+            application.applicant_receives_benefit? ? :capital_introductions : :online_bankings
           end
         },
         online_bankings: {

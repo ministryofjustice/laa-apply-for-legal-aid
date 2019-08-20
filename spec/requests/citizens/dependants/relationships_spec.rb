@@ -50,7 +50,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
       let(:relationship) { 'child_relative' }
 
       context 'dependant is less than 18' do
-        let(:date_of_birth) { legal_aid_application.submission_date - 17.years }
+        let(:date_of_birth) { legal_aid_application.calculation_date - 17.years }
 
         it 'redirects to dependant income' do
           subject
@@ -59,7 +59,7 @@ RSpec.describe Citizens::Dependants::RelationshipsController, type: :request do
       end
 
       context 'dependant is more than 18' do
-        let(:date_of_birth) { legal_aid_application.submission_date - 20.years }
+        let(:date_of_birth) { legal_aid_application.calculation_date - 20.years }
 
         it 'redirects to dependant income' do
           subject

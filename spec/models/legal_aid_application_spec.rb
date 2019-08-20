@@ -226,12 +226,23 @@ RSpec.describe LegalAidApplication, type: :model do
 
     it 'sets start' do
       subject
-      expect(legal_aid_application.transaction_period_start_at).to eq(3.months.ago.beginning_of_day)
+      expect(legal_aid_application.transaction_period_start_on).to eq(Date.current - 3.months)
     end
 
-    it 'set finish' do
+    it 'sets finish' do
       subject
-      expect(legal_aid_application.transaction_period_finish_at).to eq(Time.now.beginning_of_day)
+      expect(legal_aid_application.transaction_period_finish_on).to eq(Date.current)
+    end
+
+    context 'delegated functions are used' do
+      let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions: true, used_delegated_functions_on: Faker::Date.backward }
+      let(:used_delegated_functions_on) { legal_aid_application.used_delegated_functions_on }
+
+      it 'sets start and finish relative to used_delegated_functions_on' do
+        subject
+        expect(legal_aid_application.transaction_period_start_on).to eq(used_delegated_functions_on - 3.months)
+        expect(legal_aid_application.transaction_period_finish_on).to eq(used_delegated_functions_on)
+      end
     end
   end
 
@@ -419,6 +430,38 @@ RSpec.describe LegalAidApplication, type: :model do
       it 'returns the delegated fucntions cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 2_500
       end
+    end
+  end
+
+  describe '#bank_transactions' do
+    let(:transaction_period_start_on) { '2019-08-10'.to_date }
+    let(:transaction_period_finish_on) { '2019-08-20'.to_date }
+    let(:date_before_start) { '2019-08-09 23:40 +0100'.to_time }
+    let(:date_after_start)  { '2019-08-10 00:20 +0100'.to_time }
+    let(:date_before_end)   { '2019-08-20 23:40 +0100'.to_time }
+    let(:date_after_end)    { '2019-08-21 00:20 +0100'.to_time }
+    let(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_applicant,
+             transaction_period_start_on: transaction_period_start_on,
+             transaction_period_finish_on: transaction_period_finish_on
+    end
+    let(:bank_provider) { create :bank_provider, applicant: legal_aid_application.applicant }
+    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+    let!(:transaction_before_start) { create :bank_transaction, bank_account: bank_account, happened_at: date_before_start }
+    let!(:transaction_after_start) { create :bank_transaction, bank_account: bank_account, happened_at: date_after_start }
+    let!(:transaction_before_end) { create :bank_transaction, bank_account: bank_account, happened_at: date_before_end }
+    let!(:transaction_after_end) { create :bank_transaction, bank_account: bank_account, happened_at: date_after_end }
+    let(:transaction_ids) { subject.pluck(:id) }
+
+    subject { legal_aid_application.bank_transactions }
+
+    it 'returns the expected transactions' do
+      expect(transaction_ids).to include(transaction_after_start.id)
+      expect(transaction_ids).to include(transaction_before_end.id)
+
+      expect(transaction_ids).not_to include(transaction_before_start.id)
+      expect(transaction_ids).not_to include(transaction_after_end.id)
     end
   end
 end

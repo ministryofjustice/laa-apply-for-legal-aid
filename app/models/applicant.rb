@@ -41,8 +41,6 @@ class Applicant < ApplicationRecord
   end
 
   def age
-    date = legal_aid_application.submission_date
-    age = date.year - date_of_birth.year
-    date_of_birth > date.years_ago(age) ? age - 1 : age
+    AgeCalculator.call(date_of_birth, legal_aid_application.calculation_date)
   end
 end
