@@ -1,11 +1,20 @@
 version: 2.0
 
 references:
-  deploy_container_config: &deploy_container_config
+  cloud_platform_container_config: &cloud_platform_container_config
     docker:
     - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
       environment:
         GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+
+  build_container_config: &build_container_config
+    docker:
+    - image: circleci/ruby:2.6.3-node-browsers
+      environment:
+        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+    - image: circleci/postgres:10.5
+    - image: circleci/redis:5.0
+    - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
 
   decrypt_secrets: &decrypt_secrets
     run:
@@ -14,70 +23,13 @@ references:
         echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
         git-crypt unlock git-crypt.key
 
-  build_container_config: &build_container_config
-    docker:
-    - image: circleci/ruby:2.6.3-node-browsers
-      environment:
-        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-    - image: postgres:10.5
-    - image: redis:5.0
-    - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
-
   setup_aws_login: &setup_aws_login
     run:
-      name: Setup aws on debian environment
+      name: Setup aws login
       command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "1" ] || [ "${CIRCLE_JOB}" == "clean_up_ecr" ]; then
-          sudo apt-get --assume-yes install python3-pip
-          sudo pip3 install awscli
-          $(aws ecr get-login --region eu-west-2 --no-include-email)
-        fi
-
-  install_clamav: &install_clamav
-    run:
-      name: Install Clamav Client
-      command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-          sudo apt-get install clamav-daemon -y
-        fi
-
-  install_libreoffice: &install_libreoffice
-    run:
-      name: Install LibreOffice
-      command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-          sudo apt-get install libreoffice -y
-        fi
-
-  install_wkhtmltopdf: &install_wkhtmltopdf
-    run:
-      name: Install LibreOffice
-      command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-          sudo apt-get install wkhtmltopdf -y
-        fi
-
-  build_docker_image: &build_docker_image
-    run:
-      name: Build laa-apply-for-legal-aid  docker image
-      command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-          docker build -t app .
-        fi
-
-  push_to_ecr: &push_to_ecr
-    run:
-      name: Push image to ecr repo
-      command: |
-        if [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-          docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
-          docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
-
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-          fi
-        fi
+        sudo apt-get install -y python3-pip
+        sudo pip3 install awscli
+        $(aws ecr get-login --region eu-west-2 --no-include-email)
 
   update_packages: &update_packages
     run:
@@ -93,29 +45,21 @@ references:
         kubectl config use-context uat
 
 jobs:
-  build_and_test:
+  test:
     <<: *build_container_config
-    parallelism: 2
     steps:
     - checkout
-    - setup_remote_docker:
-        docker_layer_caching: true
     - *update_packages
-    - *setup_aws_login
-    - *install_clamav
-    - *install_libreoffice
-    - *install_wkhtmltopdf
+    - run: sudo apt-get install -y postgresql-client
+    - run: sudo apt-get install -y clamav-daemon
+    - run: sudo apt-get install -y libreoffice
+    - run: sudo apt-get install -y wkhtmltopdf
     - restore_cache:
         keys:
           - v1-gems-cache-{{ checksum "Gemfile.lock" }}
           - v1-gems-cache
-    - run:
-        name: Bundle Install
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            gem install bundler -v 2.0.2
-            bundle check --path vendor/bundle || bundle install --path vendor/bundle && bundle clean
-          fi
+    - run: gem install bundler -v 2.0.2
+    - run: bundle install --path=vendor/bundle --jobs=4 && bundle clean
     - save_cache:
         key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
         paths:
@@ -123,73 +67,76 @@ jobs:
     - run:
         name: Database Setup
         command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            sudo apt install -y postgresql-client || true
-            git checkout origin/master
-            bundle check --path vendor/bundle || bundle install --path vendor/bundle
-            bundle exec rake db:create db:schema:load
-            git checkout -
-            bundle check --path vendor/bundle || bundle install --path vendor/bundle
-            bundle exec rake db:migrate db:seed
-          fi
+          git checkout origin/master
+          bundle install --path=vendor/bundle --jobs=4
+          bundle exec rake db:create db:schema:load
+          git checkout -
+          bundle install --path=vendor/bundle --jobs=4
+          bundle exec rake db:migrate db:seed
     - restore_cache:
         keys:
           - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
           - v1-yarn-packages-cache
     - run:
         name: Install Yarn packages
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            yarn --frozen-lockfile
-          fi
+        command: yarn --frozen-lockfile
     - save_cache:
         key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
         paths:
           - node_modules
     - run:
         name: Run Rubocop
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            bin/rails rubocop
-          fi
+        command:  bin/rails rubocop
     - run:
         name: Run erblint
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            bin/rails erblint
-          fi
-    - run:
-        name: Run javascript tests
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            bin/rails javascript_tests
-          fi
+        command: bin/rails erblint
     - run:
         name: Run ruby tests
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            bin/rails spec
-          fi
+        command: bin/rails spec
     - run:
         name: Run integration tests
-        command: |
-          if [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-            SAVE_PAGES=true bin/rails cucumber
-          fi
-    - *build_docker_image
-    - *push_to_ecr
-    - run: mkdir -p tmp/webhint_inputs
-    - persist_to_workspace:
-        root: tmp
-        paths:
-          - webhint_inputs
+        command: SAVE_PAGES=true bin/rails cucumber
+    - run:
+        name: Generate webhint reports
+        command: ./bin/generate_webhint_reports.sh
+    - run:
+        name: gzip webhint reports
+        command: tar -zcvf hint-report.tar.gz hint-report/
+    - store_artifacts:
+        path: ./hint-report.tar.gz
+        destination: webhint-reports
+    - run:
+        name: gzip html pages
+        command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
+    - store_artifacts:
+        path: ./html-pages.tar.gz
+        destination: html-pages
 
-  deploy_uat:
-    <<: *deploy_container_config
+  build_and_push:
+    <<: *build_container_config
     steps:
     - checkout
-    - setup_remote_docker:
-        docker_layer_caching: true
+    - setup_remote_docker
+    - run:
+        name: Build docker images
+        command: docker build -t app .
+    - *setup_aws_login
+    - run:
+        name: Push docker image to ECR repo
+        command: |
+          docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
+          docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
+
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+          fi
+
+  deploy_uat:
+    <<: *cloud_platform_container_config
+    steps:
+    - checkout
+    - setup_remote_docker
     - *setup_uat_kubectl
     - *decrypt_secrets
     - deploy:
@@ -198,11 +145,10 @@ jobs:
           ./bin/uat_deploy
 
   deploy_staging:
-    <<: *deploy_container_config
+    <<: *cloud_platform_container_config
     steps:
     - checkout
-    - setup_remote_docker:
-        docker_layer_caching: true
+    - setup_remote_docker
     - run:
         name: Kubectl deployment setup staging
         command: |
@@ -213,7 +159,6 @@ jobs:
     - deploy:
         name: Helm deployment to staging
         command: |
-
           helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install --wait \
                         --tiller-namespace=${KUBE_ENV_STAGING_NAMESPACE} \
@@ -223,11 +168,10 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
-    <<: *deploy_container_config
+    <<: *cloud_platform_container_config
     steps:
     - checkout
-    - setup_remote_docker:
-        docker_layer_caching: true
+    - setup_remote_docker
     - run:
         name: Kubectl deployment setup production
         command: |
@@ -238,7 +182,6 @@ jobs:
     - deploy:
         name: Helm deployment to production
         command: |
-
           helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install --wait \
                         --tiller-namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
@@ -259,41 +202,8 @@ jobs:
         command: |
           ./bin/clean_up_ecr
 
-  run_webhint:
-    <<: *build_container_config
-    steps:
-    - checkout
-    - attach_workspace:
-        at: tmp
-    - *update_packages
-    - restore_cache:
-        keys:
-          - v1-gems-cache-{{ checksum "Gemfile.lock" }}
-          - v1-gems-cache
-    - run:
-        name: Bundle Install
-        command: |
-          gem install bundler -v 2.0.2
-          bundle check --path vendor/bundle || bundle install --path vendor/bundle && bundle clean
-    - restore_cache:
-        keys:
-          - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-          - v1-yarn-packages-cache
-    - run:
-        name: Install Yarn packages
-        command: yarn --frozen-lockfile
-    - run:
-        name: Generate webhint reports
-        command: ./bin/generate_webhint_reports.sh
-    - run:
-        name: gzip webhint reports
-        command: tar -zcvf hint-report.tar.gz hint-report/
-    - store_artifacts:
-        path: ./hint-report.tar.gz
-        destination: webhint-reports
-
   delete_uat:
-    <<: *deploy_container_config
+    <<: *cloud_platform_container_config
     steps:
     - checkout
     - setup_remote_docker
@@ -305,23 +215,22 @@ jobs:
 
 workflows:
   version: 2
+  test:
+    jobs:
+    - test
   build_and_deploy:
     jobs:
-    - build_and_test
-    - run_webhint
-    - run_webhint:
-        requires:
-        - build_and_test
+    - build_and_push
     - hold_uat:
         type: approval
     - deploy_uat:
         requires:
         - hold_uat
-        - build_and_test
+        - build_and_push
     - hold_staging:
         type: approval
         requires:
-        - build_and_test
+        - build_and_push
         filters:
           branches:
             only: master
@@ -344,6 +253,8 @@ workflows:
         filters:
           branches:
             only: master
+  delete_uat:
+    jobs:
     - delete_uat:
         filters:
           branches:
@@ -354,8 +265,7 @@ workflows:
         cron: "0 2 * * *"
         filters:
           branches:
-            only:
-            - master
+            only: master
     jobs:
     - clean_up_ecr
     - deploy_staging
