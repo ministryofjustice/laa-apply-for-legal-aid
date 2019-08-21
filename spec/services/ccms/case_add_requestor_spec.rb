@@ -223,6 +223,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                own_vehicle?: true,
                property_value: 10_000.0,
                other_assets_declaration: other_assets_declaration,
+               savings_amount: savings_amount,
                open_banking_consent: true,
                open_banking_consent_choice_at: Date.new(2019, 6, 1)
       end
@@ -242,6 +243,18 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                second_home_mortgage: 100_000,
                second_home_percentage: 40,
                valuable_items_value: 1000
+      end
+
+      let(:savings_amount) do
+        double Capital,
+               isa: 1_234,
+               cash: 1_500,
+               other_person_account: 1_000,
+               national_savings: 129_00,
+               trust_value: 2_500,
+               plc_shares: 1_980,
+               peps_unit_trusts_capital_bonds_gov_stocks: 10_000,
+               life_assurance_endowment_policy: 3_000
       end
 
       let(:ccms_submissions_collection) do

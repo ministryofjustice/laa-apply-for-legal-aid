@@ -119,6 +119,22 @@ module CCMS
       applicant.bank_accounts.any?
     end
 
+    def applicant_has_other_capital?(_options)
+      not_zero? @legal_aid_application.savings_amount.peps_unit_trusts_capital_bonds_gov_stocks
+    end
+
+    def applicant_has_other_savings?(_options)
+      not_zero? @legal_aid_application.savings_amount.isa
+    end
+
+    def applicant_has_other_policies?(_options)
+      not_zero? @legal_aid_application.savings_amount.life_assurance_endowment_policy
+    end
+
+    def applicant_has_shares?(_options)
+      not_zero? @legal_aid_application.savings_amount.plc_shares
+    end
+
     private
 
     def applicant
