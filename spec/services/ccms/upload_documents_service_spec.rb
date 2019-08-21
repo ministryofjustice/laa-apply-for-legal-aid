@@ -6,7 +6,7 @@ RSpec.describe CCMS::UploadDocumentsService do
   let(:document_id) { statement_of_case.original_files.first.id }
   let(:submission) do
     create :submission,
-           :document_ids_obtained,
+           :case_created,
            legal_aid_application: legal_aid_application,
            case_ccms_reference: Faker::Number.number(digits: 9),
            documents: { document_id => :id_obtained }
@@ -51,7 +51,7 @@ RSpec.describe CCMS::UploadDocumentsService do
 
     it 'writes a history record' do
       expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-      expect(history.from_state).to eq 'document_ids_obtained'
+      expect(history.from_state).to eq 'case_created'
       expect(history.to_state).to eq 'completed'
       expect(history.success).to be true
       expect(history.details).to be_nil
@@ -74,7 +74,7 @@ RSpec.describe CCMS::UploadDocumentsService do
 
       it 'writes a history record' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'document_ids_obtained'
+        expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)
@@ -98,7 +98,7 @@ RSpec.describe CCMS::UploadDocumentsService do
 
       it 'writes a history record' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'document_ids_obtained'
+        expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to match('failed to upload to CCMS')

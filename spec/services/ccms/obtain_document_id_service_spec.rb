@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CCMS::ObtainDocumentIdService do
   let(:legal_aid_application) { create :legal_aid_application, statement_of_case: statement_of_case }
-  let(:submission) { create :submission, :case_created, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
+  let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
   let(:statement_of_case) { create :statement_of_case }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:document_id_requestor) { double CCMS::DocumentIdRequestor.new(submission.case_ccms_reference) }
@@ -15,14 +15,14 @@ RSpec.describe CCMS::ObtainDocumentIdService do
         expect(submission.documents&.size).to eq 0
       end
 
-      it 'changes the submission state to completed' do
-        expect { subject.call }.to change { submission.aasm_state }.to 'completed'
+      it 'changes the submission state to case_submitted' do
+        expect { subject.call }.to change { submission.aasm_state }.to 'case_submitted'
       end
 
       it 'writes a history record' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'case_created'
-        expect(history.to_state).to eq 'completed'
+        expect(history.from_state).to eq 'applicant_ref_obtained'
+        expect(history.to_state).to eq 'case_submitted'
         expect(history.success).to be true
         expect(history.details).to be_nil
       end
@@ -79,7 +79,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
 
       it 'writes a history record' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'case_created'
+        expect(history.from_state).to eq 'applicant_ref_obtained'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)
@@ -106,7 +106,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
 
       it 'writes a history record' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'case_created'
+        expect(history.from_state).to eq 'applicant_ref_obtained'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)

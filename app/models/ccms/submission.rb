@@ -21,11 +21,11 @@ module CCMS
       when 'applicant_submitted'
         CheckApplicantStatusService.call(self)
       when 'case_created'
-        ObtainDocumentIdService.call(self)
-      when 'document_ids_obtained'
         UploadDocumentsService.call(self)
-      when 'applicant_ref_obtained'
+      when 'document_ids_obtained'
         AddCaseService.call(self, options)
+      when 'applicant_ref_obtained'
+        ObtainDocumentIdService.call(self)
       when 'case_submitted'
         CheckCaseStatusService.call(self)
       else

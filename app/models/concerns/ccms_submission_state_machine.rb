@@ -30,6 +30,7 @@ module CCMSSubmissionStateMachine
 
       event :submit_case, after: :process_async! do
         transitions from: :applicant_ref_obtained, to: :case_submitted
+        transitions from: :document_ids_obtained, to: :case_submitted
       end
 
       event :confirm_case_created, after: :process_async! do
@@ -37,12 +38,11 @@ module CCMSSubmissionStateMachine
       end
 
       event :obtain_document_ids, after: :process_async! do
-        transitions from: :case_created, to: :document_ids_obtained
+        transitions from: :applicant_ref_obtained, to: :document_ids_obtained
       end
 
       event :complete do
         transitions from: :case_created, to: :completed
-        transitions from: :document_ids_obtained, to: :completed
       end
 
       event :fail do
