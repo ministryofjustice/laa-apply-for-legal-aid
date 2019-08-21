@@ -73,7 +73,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       let(:provider) do
-        double 'Provider',
+        double Provider,
                firm_id: 19_148,
                selected_office_id: 137_570,
                user_login_id: 4_953_649,
@@ -339,21 +339,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
       let(:expected_soap_operation) { :create_case_application }
       let(:expected_xml) { requestor.__send__(:request_xml) }
-      let(:provider) do
-        double 'Provider',
-               firm_id: 19_148,
-               selected_office_id: 137_570,
-               user_login_id: 4_953_649,
-               username: 4_953_649,
-               contact_user_id: 4_953_649,
-               supervisor_contact_id: 7_008_010,
-               fee_earner_contact_id: 4_925_152
-      end
 
       before do
         Timecop.freeze
         expect(requestor).to receive(:soap_client).and_return(soap_client_double)
-        allow(requestor).to receive(:provider).and_return(provider)
       end
 
       it 'calls the savon soap client' do

@@ -41,7 +41,7 @@ module CCMS
     end
 
     let(:provider) do
-      double 'Provider',
+      double Provider,
              username: 'user1',
              firm_id: 22_381,
              selected_office_id: 81_693,
