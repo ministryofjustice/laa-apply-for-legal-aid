@@ -59,10 +59,6 @@ module CCMS
       'Client Sole' # TODO: CCMS placeholder
     end
 
-    def means_assessment_capital_contribution(_options)
-      0 # TODO: CCMS placeholder
-    end
-
     def main_dwelling_third_party_name(_options)
       'Mrs Fabby Fabby' # TODO: CCMS placeholder
     end
