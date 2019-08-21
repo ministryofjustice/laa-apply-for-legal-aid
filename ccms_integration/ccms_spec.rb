@@ -2,99 +2,6 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe Submission do
-    let(:proceeding_type_1) do
-      double ProceedingType,
-             bail_conditions_set?: false,
-             case_id: 'P_11594790',
-             ccms_category_law: 'Family',
-             ccms_category_law_code: 'MAT',
-             ccms_code: 'DA004',
-             ccms_matter: 'Domestic Abuse',
-             ccms_matter_code: 'MINJN',
-             delegated_functions_date: Date.new(2019, 4, 1),
-             description: 'to be represented on an application for a non-molestation order.',
-             family_prospects_of_success: '50% or Better',
-             fam_prosp_50_or_better: true,
-             fam_prosp_border_uncert_poor: false,
-             fam_prosp_borderline_uncert: false,
-             fam_prosp_good: false,
-             fam_prosp_marginal: false,
-             fam_prosp_poor: false,
-             fam_prosp_uncertain: false,
-             fam_prosp_very_good: false,
-             fam_prosp_very_poor: false,
-             inj_respondent_capacity?: true,
-             injunction_recent_incident_detail: '29/03/2019',
-             lead_proceeding_indicator: true,
-             level_of_service: 3,
-             matter_type_meaning: 'Domestic Abuse',
-             meaning: 'Non-molestation order-Domestic Abuse',
-             police_notified?: true,
-             proceeding_level_of_service: 'Full Representation',
-             reason_no_injunction_warning_letter: 'Too dangerous',
-             requested_scope: 'MULTIPLE',
-             scope_limitations: [scope_limitation_1, scope_limitation_2],
-             status: 'draft',
-             warning_letter_sent?: false
-    end
-
-    let(:proceeding_type_2) do
-      double ProceedingType,
-             bail_conditions_set?: false,
-             case_id: 'P_11594793',
-             ccms_category_law: 'Family',
-             ccms_category_law_code: 'MAT',
-             ccms_code: 'SE014',
-             ccms_matter: 'Children-Section 8 orders',
-             ccms_matter_code: 'KSEC8',
-             delegated_functions_date: Date.new(2019, 4, 1),
-             description: 'to be represented on an application for a child arrangements order ?where the child(ren) will live',
-             family_prospects_of_success: '50% or Better',
-             fam_prosp_50_or_better: true,
-             fam_prosp_border_uncert_poor: false,
-             fam_prosp_borderline_uncert: false,
-             fam_prosp_good: false,
-             fam_prosp_marginal: false,
-             fam_prosp_poor: false,
-             fam_prosp_uncertain: false,
-             fam_prosp_very_good: false,
-             fam_prosp_very_poor: false,
-             inj_respondent_capacity?: true,
-             injunction_recent_incident_detail: '29/03/2019',
-             lead_proceeding_indicator: false,
-             level_of_service: 3,
-             matter_type_meaning: 'Section 8 orders',
-             meaning: 'CAO residence',
-             police_notified?: true,
-             proceeding_level_of_service: 'Full Representation',
-             reason_no_injunction_warning_letter: 'Too dangerous',
-             requested_scope: 'MULTIPLE',
-             scope_limitations: [scope_limitation_1, scope_limitation_3],
-             status: 'draft',
-             warning_letter_sent?: false
-    end
-
-    let(:scope_limitation_1) do
-      double 'ScopeLimitation',
-             limitation: 'CV118',
-             wording: 'Limited to all steps up to and including the hearing on 01/04/2019',
-             delegated_functions_apply: true
-    end
-
-    let(:scope_limitation_2) do
-      double 'ScopeLimitation',
-             limitation: 'AA019',
-             wording: scope_limitation_wording_2,
-             delegated_functions_apply: false
-    end
-
-    let(:scope_limitation_3) do
-      double 'ScopeLimitation',
-             limitation: 'FM049',
-             wording: scope_limitation_wording_3,
-             delegated_functions_apply: false
-    end
-
     let(:other_party_1) { create :opponent, :child }
 
     let(:other_party_2)  { create :opponent, :ex_spouse }
@@ -135,20 +42,18 @@ module CCMS
 
     let(:provider) do
       double 'Provider',
-             username: 2016472,
+             username: 'user1',
              firm_id: 22_381,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,
              supervisor_contact_id: 3_982_723,
-             fee_earner_contact_id: 34_419
+             fee_earner_contact_id: 34_419,
+             marked_for_destruction?: false
     end
 
     before do
       @statement_of_case = create :statement_of_case, :with_attached_files
-      @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
-      @submission = create :submission, legal_aid_application: @legal_aid_application
       PdfConverter.call(PdfFile.find_or_create_by(original_file_id: @statement_of_case.original_files.first.id).id)
-      allow_any_instance_of(LegalAidApplication).to receive(:proceeding_types).and_return([proceeding_type_1, proceeding_type_2])
       allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2, other_party_1])
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
@@ -165,28 +70,55 @@ module CCMS
       DatabaseCleaner.clean
     end
 
-    describe 'generate case payload only' do
+    context 'delegated functions case' do
       before do
-        @submission.aasm_state = 'applicant_ref_obtained'
+        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_delegated_functions, :with_delegated_functions_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
+        @submission = create :submission, legal_aid_application: @legal_aid_application
       end
 
-      it 'generates the CaseAdd payload' do
-        # stub ccms case reference as we're  not going through the whole path so it won't be generated
-        allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
-        @submission.process!(no_call: true)
+      describe 'generate case payload only' do
+        before do
+          @submission.aasm_state = 'applicant_ref_obtained'
+        end
+
+        it 'generates the delegated functions CaseAdd payload' do
+          # stub ccms case reference as we're not going through the whole path so it won't be generated
+          allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
+          @submission.process!(no_call: true, case_type: 'delegated_functions')
+        end
+      end
+
+      describe 'complete sequence' do
+        it 'runs one thing after another' do
+          puts "\nCreating delegated functions case"
+          run_everything
+        end
       end
     end
 
-    describe 'complete sequence' do
-      it 'runs one thing after another' do
-        check_initial_state
-        request_case_id
-        create_an_applicant
-        poll_applicant_creation
-        create_case
-        poll_case_creation_result
-        request_document_ids
-        upload_documents
+    context 'substantive case' do
+      before do
+        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_substantive_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
+        @submission = create :submission, legal_aid_application: @legal_aid_application
+      end
+
+      describe 'generate case payload only' do
+        before do
+          @submission.aasm_state = 'applicant_ref_obtained'
+        end
+
+        it 'generates the substantive CaseAdd payload' do
+          # stub ccms case reference as we're not going through the whole path so it won't be generated
+          allow_any_instance_of(CCMS::Submission).to receive(:case_ccms_reference).and_return('300000333864')
+          @submission.process!(no_call: true, case_type: 'substantive')
+        end
+      end
+
+      describe 'complete sequence' do
+        it 'runs one thing after another' do
+          puts "\nCreating substantive case"
+          run_everything
+        end
       end
     end
 
@@ -296,17 +228,15 @@ module CCMS
       puts @submission.documents.to_s.green
     end
 
-    def scope_limitation_wording_2
-      'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to ' \
-        'and including obtaining and serving a final order and in the event of breach ' \
-        'leading to the exercise of a power of arrest to representation on the ' \
-        'consideration of the breach by the court (but excluding applying for a warrant ' \
-        'of arrest, if not attached, and representation in contempt proceedings).'
-    end
-
-    def scope_limitation_wording_3
-      'Limited to all steps up to and including trial/final hearing and any action ' \
-        'necessary to implement (but not enforce) the judgment or order.'
+    def run_everything
+      check_initial_state
+      request_case_id
+      create_an_applicant
+      poll_applicant_creation
+      create_case
+      poll_case_creation_result
+      request_document_ids
+      upload_documents
     end
   end
 end

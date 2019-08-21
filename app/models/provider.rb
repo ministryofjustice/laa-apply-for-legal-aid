@@ -19,6 +19,7 @@ class Provider < ApplicationRecord
   end
 
   # TODO: replace with real data once we have it from the provider details API
+  # :nocov:
   def supervisor_contact_id
     7_008_010
   end
@@ -26,4 +27,5 @@ class Provider < ApplicationRecord
   def fee_earner_contact_id
     4_925_152
   end
+  # :nocov:
 end
