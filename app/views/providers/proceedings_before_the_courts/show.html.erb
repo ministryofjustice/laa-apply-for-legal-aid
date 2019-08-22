@@ -16,7 +16,7 @@
 
       <%= govuk_error_message(form.object.errors[:proceedings_before_the_court].first) %>
 
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="radios">
+      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
         <%= form.govuk_radio_button(:proceedings_before_the_court, true, 'data-aria-controls' => 'conditional-true') %>
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
           <%= form.govuk_text_area :details_of_proceedings_before_the_court, rows: 5 %>

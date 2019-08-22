@@ -10,7 +10,7 @@
       ) do |form| %>
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
       <%= govuk_hint t('.hint') %>
-      <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
         <%= form.govuk_radio_button(
               :has_income,
               true,

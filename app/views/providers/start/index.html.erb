@@ -22,8 +22,10 @@
 
     <%= list_from_translation_path '.start.index.use_ccms_list' %>
 
-    <%= link_to t('generic.start'), providers_legal_aid_applications_path, class: 'govuk-button govuk-button--start', id: 'start' %>
-
+    <%= link_to start_button_label(:start),
+                providers_legal_aid_applications_path,
+                class: 'govuk-button govuk-button--start',
+                id: 'start' %>
   </div>
 
   <div class="govuk-grid-column-one-third">

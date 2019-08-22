@@ -2,18 +2,18 @@
   color:#0b0c0c;
   cursor:pointer;
   outline: none;
-  background-color:#dee0e2;
+  background-color:#f3f2f1;
   -webkit-box-shadow: 0 2px 0 #858688;
   box-shadow: 0 2px 0 #858688;
   position:relative;
   padding: 10px 8px 10px 6px;
-  border: 1px solid #bfc1c3;
+  border: 1px solid #f3f2f1;
 
   &:hover, &:focus {
     background-color:#c8cacb;
   }
   &:focus {
-    outline: 3px solid #ffbf47;
+    outline: 3px solid #ffdd00;
     outline-offset: 0;
     z-index: 100;
   }
@@ -51,7 +51,7 @@ td.sortable-cell {
     border: 5px solid transparent;
     font-size:0;
   }
-  &::before { 
+  &::before {
     border-top-color: #0b0c0c;
     border-top-width: 5px;
     top: 12px;

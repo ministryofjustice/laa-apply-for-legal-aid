@@ -1,5 +1,5 @@
-@import "govuk-frontend/settings/all";
-@import "govuk-frontend/helpers/all";
+@import "govuk-frontend/govuk/settings/all";
+@import "govuk-frontend/govuk/helpers/all";
 
 .proceeding-item {
   display: none;
@@ -16,7 +16,7 @@
 }
 
 .highlight {
-  border-bottom: 3px solid #ffbf47;
+  border-bottom: 3px solid #ffdd00;
   margin-right: 1px;
   background-color: #fff2d3;
   padding: 2px 0px 0px;
