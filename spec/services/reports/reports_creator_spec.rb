@@ -6,7 +6,7 @@ RSpec.describe Reports::ReportsCreator do
   subject { described_class.call(legal_aid_application) }
 
   describe '.call' do
-    it 'attaches merits_report.pdf to the application' do
+    it 'creates reports and update state' do
       expect(Reports::MeritsReportCreator).to receive(:call).with(legal_aid_application)
       expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)
       subject

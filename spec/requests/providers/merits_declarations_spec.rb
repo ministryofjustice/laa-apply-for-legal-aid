@@ -49,7 +49,7 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
           expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(legal_aid_application))
         end
 
-        it 'creates a pdf reports' do
+        it 'creates pdf reports' do
           ReportsCreatorWorker.clear
           expect(Reports::ReportsCreator).to receive(:call).with(legal_aid_application)
           subject
