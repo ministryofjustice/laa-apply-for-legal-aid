@@ -92,6 +92,9 @@ module Flow
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
           forward: :start_merits_assessments
+        },
+        means_reports: {
+          path: ->(application) { urls.providers_legal_aid_application_means_report_path(application) }
         }
       }.freeze
     end
