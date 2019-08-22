@@ -19,6 +19,7 @@
 
   <%= render(
         'shared/check_answers/client_details',
+        attributes: %i[first_name last_name date_of_birth national_insurance_number email address],
         applicant: @applicant,
         address: @address,
         read_only: @read_only

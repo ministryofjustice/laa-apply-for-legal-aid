@@ -199,10 +199,12 @@ en:
     merits_reports:
       show:
         heading: Merits report
+        client_details_heading: Client details
         applying_for: What you’re applying for
     means_reports:
       show:
         heading: Means report
+        client_details_heading: Client details
         assets_heading: Property, savings and other assets
     online_bankings:
       show:

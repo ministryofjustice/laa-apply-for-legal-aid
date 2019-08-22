@@ -2,7 +2,14 @@
 
   <%= render 'shared/application_ref', legal_aid_application: @legal_aid_application %>
 
-  <%= render 'shared/client_details_v2', applicant: @legal_aid_application.applicant %>
+  <h2 class="govuk-heading-m"><%= t('.client_details_heading') %></h2>
+
+  <%= render(
+        'shared/check_answers/client_details',
+        attributes: %i[first_name last_name date_of_birth age national_insurance_number],
+        applicant: @legal_aid_application.applicant,
+        read_only: true
+      ) %>
 
   <h2 class="govuk-heading-m">
     <%= t('.assets_heading') %>
