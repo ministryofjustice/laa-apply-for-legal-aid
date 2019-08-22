@@ -12,6 +12,19 @@
       ) %>
 
   <h2 class="govuk-heading-m">
+    <%= t('.benefit_check_heading') %>
+  </h2>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :receives_benefit,
+          question: t('.question_receives_benefit'),
+          answer: yes_no(@legal_aid_application.applicant_receives_benefit?),
+          align_right: true
+        ) %>
+  </dl>
+
+  <h2 class="govuk-heading-m">
     <%= t('.assets_heading') %>
   </h2>
 

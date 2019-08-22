@@ -205,7 +205,9 @@ en:
       show:
         heading: Means report
         client_details_heading: Client details
+        benefit_check_heading: Passported means
         assets_heading: Property, savings and other assets
+        question_receives_benefit: In receipt of passporting benefit
     online_bankings:
       show:
         heading: Does your client use online banking?

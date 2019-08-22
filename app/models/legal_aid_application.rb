@@ -103,7 +103,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def applicant_receives_benefit?
-    benefit_check_result.positive?
+    benefit_check_result&.positive?
   end
 
   def benefit_check_result_needs_updating?
