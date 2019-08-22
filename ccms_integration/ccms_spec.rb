@@ -135,7 +135,7 @@ module CCMS
 
     let(:provider) do
       double 'Provider',
-             username: 'user1',
+             username: 2016472,
              firm_id: 22_381,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,
@@ -145,7 +145,7 @@ module CCMS
 
     before do
       @statement_of_case = create :statement_of_case, :with_attached_files
-      @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, statement_of_case: @statement_of_case
+      @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
       @submission = create :submission, legal_aid_application: @legal_aid_application
       PdfConverter.call(PdfFile.find_or_create_by(original_file_id: @statement_of_case.original_files.first.id).id)
       allow_any_instance_of(LegalAidApplication).to receive(:proceeding_types).and_return([proceeding_type_1, proceeding_type_2])
