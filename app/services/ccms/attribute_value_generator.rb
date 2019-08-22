@@ -31,6 +31,8 @@ module CCMS
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
 
+    COUNTRY = 'GBR'.freeze
+
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
     end
@@ -53,6 +55,30 @@ module CCMS
 
     def bank_name(options)
       options[:bank_acct].bank_provider.name
+    end
+
+    def country
+      COUNTRY
+    end
+
+    def date_assessment_started
+      @legal_aid_application.submission_date
+    end
+
+    def applicant_date_of_birth
+      @legal_aid_application.applicant.date_of_birth
+    end
+
+    def default_cost_limitation
+      @legal_aid_application.default_cost_limitation
+    end
+
+    def applicant_first_name
+      @legal_aid_application.applicant.first_name
+    end
+
+    def passported?
+      @legal_aid_application.benefit_check_result&.positive?
     end
 
     def bank_account_holders(_options)
