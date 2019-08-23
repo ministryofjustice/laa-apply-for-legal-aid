@@ -8,6 +8,10 @@ FactoryBot.define do
       result { 'Yes' }
     end
 
+    trait :negative do
+      result { 'No' }
+    end
+
     trait :undetermined do
       result { 'Undetermined' }
     end

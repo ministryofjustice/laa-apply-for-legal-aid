@@ -59,3 +59,5 @@ en:
       setting:
         mock_true_layer_data:
           <<: *true_false
+        allow_non_passported_route:
+          <<: *true_false

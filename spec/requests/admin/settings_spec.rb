@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Admin::SettingsController, type: :request do
   let(:admin_user) { create :admin_user }
+  let(:env_allow_non_passported_route) { true }
 
-  before { sign_in admin_user }
+  before do
+    allow(Rails.configuration.x).to receive(:allow_non_passported_route).and_return(env_allow_non_passported_route)
+    sign_in admin_user
+  end
 
   describe 'GET /admin/settings' do
     subject { get admin_settings_path }
@@ -13,9 +17,23 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'displays applications' do
+    it 'displays title' do
       subject
       expect(response.body).to include(I18n.t('admin.settings.show.heading_1'))
+    end
+
+    it 'shows allow_non_passported_route setting' do
+      subject
+      expect(response.body).to include('allow_non_passported_route')
+    end
+
+    context 'when environment is not allowed to go through non-passported route' do
+      let(:env_allow_non_passported_route) { false }
+
+      it 'does not show allow_non_passported_route setting' do
+        subject
+        expect(response.body).not_to include('allow_non_passported_route')
+      end
     end
 
     context 'when not authenticated' do
@@ -32,7 +50,8 @@ RSpec.describe Admin::SettingsController, type: :request do
     let(:params) do
       {
         setting: {
-          mock_true_layer_data: 'true'
+          mock_true_layer_data: 'true',
+          allow_non_passported_route: 'false'
         }
       }
     end
@@ -40,9 +59,10 @@ RSpec.describe Admin::SettingsController, type: :request do
 
     subject { patch admin_settings_path, params: params }
 
-    it 'change Setting.mock_true_layer_data? value' do
+    it 'change settings values' do
       subject
       expect(Setting.mock_true_layer_data?).to eq(true)
+      expect(Setting.allow_non_passported_route?).to eq(false)
     end
 
     it 'create settings if they do not exist' do

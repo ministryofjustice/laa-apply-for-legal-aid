@@ -3,7 +3,11 @@
   padding:30px;
 
   p,h1,h2,ul {
-    color:#fff;
+    color: #fff;
+  }
+
+  a, a:link, a:visited {
+    color: #fff;
   }
 
   h2 {
@@ -15,7 +19,7 @@
     float: none;
   }
 
-  #continue {
+  #continue, a.white-button, button.white-button {
     color: #1d70b8;
     background: #fff;
     font-weight: bold;

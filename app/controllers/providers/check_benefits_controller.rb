@@ -1,5 +1,7 @@
 module Providers
   class CheckBenefitsController < ProviderBaseController
+    helper_method :should_use_ccms?
+
     def index
       return set_negative_result_and_go_forward if known_issue_prevents_benefit_check?
 
@@ -11,6 +13,12 @@ module Providers
     end
 
     private
+
+    def should_use_ccms?
+      return false if legal_aid_application.applicant_receives_benefit?
+
+      !Setting.allow_non_passported_route?
+    end
 
     def known_issue_prevents_benefit_check?
       applicant.last_name.length == 1
