@@ -222,7 +222,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#passported?' do
-    let(:legal_aid_application) { create :legal_aid_application, passported_value }  
+    let(:legal_aid_application) { create :legal_aid_application, passported_value }
     let(:passported_value) { :with_positive_benefit_check_result }
 
     it 'returns true' do

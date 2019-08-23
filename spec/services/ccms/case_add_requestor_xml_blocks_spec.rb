@@ -208,6 +208,66 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'applicant' do
+        context 'DATE_OF_BIRTH' do
+          it "inserts applicant's date of birth as a string" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'DATE_OF_BIRTH')
+              expect(block).to be_present
+              expect(block).to have_response_type 'date'
+              expect(block).to have_response_value '01-01-2000'
+            end
+          end
+        end
+        context 'FIRST_NAME' do
+          it "inserts applicant's first name as a string" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'FIRST_NAME')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value legal_aid_application.applicant.first_name
+            end
+          end
+        end
+      end
+
+      context 'DATE_ASSESSMENT_STARTED' do
+        before { allow(legal_aid_application).to receive(:submission_date).and_return(Date.today) }
+        it "inserts today's date as a string" do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'DATE_ASSESSMENT_STARTED')
+            expect(block).to be_present
+            expect(block).to have_response_type 'date'
+            expect(block).to have_response_value Date.today.strftime('%d-%m-%Y')
+          end
+        end
+      end
+
+      context 'DEFAULT_COST_LIMITATION' do
+        before { allow(legal_aid_application).to receive(:default_substantive_cost_limitation).and_return('2.00') }
+        context 'global_merits' do
+          it 'inserts default cost limitation' do
+            %i[global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION_MERITS')
+              expect(block).to be_present
+              expect(block).to have_response_type 'currency'
+              expect(block).to have_response_value legal_aid_application.default_substantive_cost_limitation
+            end
+          end
+        end
+
+        context 'global_means' do
+          it 'inserts default cost limitation' do
+            %i[global_means].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
+              expect(block).to be_present
+              expect(block).to have_response_type 'currency'
+              expect(block).to have_response_value legal_aid_application.default_substantive_cost_limitation
+            end
+          end
+        end
+      end
+
       context 'attributes omitted from payload' do
         it 'should not be present' do
           omitted_attributes.each do |entity_attribute_pair|
@@ -511,8 +571,32 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'GB_DECL_B_38WP3_11A application passported' do
+        it 'returns true when application is passported' do
+          allow(legal_aid_application).to receive(:passported?).and_return(true)
+          block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'true'
+        end
+        it 'returns false when application is passported' do
+          allow(legal_aid_application).to receive(:passported?).and_return(false)
+          block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'boolean'
+          expect(block).to have_response_value 'false'
+        end
+      end
+
       context 'attributes with specific hard coded values' do
         context 'attributes hard coded to specific values' do
+          it 'hard codes country to GBR' do
+            block = XmlExtractor.call(xml, :global_means, 'COUNTRY')
+            expect(block).to be_present
+            expect(block).to have_response_type 'text'
+            expect(block).to have_response_value 'GBR'
+          end
+
           it 'DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings' do
             attributes = [
               [:global_means, 'DEVOLVED_POWERS_CONTRACT_FLAG'],
