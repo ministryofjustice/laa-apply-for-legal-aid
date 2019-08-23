@@ -124,6 +124,11 @@ family_statement:
     :response_type: text
     :user_defined: false
 global_means:
+  COUNTRY:
+    :value: GBR
+    :br100_meaning: "Applicant's country of residence"
+    :response_type: text
+    :user_defined: true
   GB_INPUT_B_3WP2_27A:
     :value: true
     :br100_meaning: 'Main Dwelling: The client owns main dwelling?'
@@ -1629,7 +1634,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   DEFAULT_COST_LIMITATION:
-    :value: 5000.0
+    :value: '#application_default_substantive_cost_limitation'
     :br100_meaning: the default cost limitation
     :response_type: currency
     :user_defined: true
@@ -1640,7 +1645,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_B_38WP3_11A:
-    :value: false
+    :value: '#application_passported?'
     :br100_meaning: The application is passported
     :response_type: boolean
     :user_defined: false
@@ -2051,8 +2056,8 @@ global_means:
     :response_type: boolean
     :user_defined: false
   DATE_ASSESSMENT_STARTED:
-    :value: 01-04-2019
-    :br100_meaning: the Date assessment started
+    :value: '#application_submission_date'
+    :br100_meaning: The Date assessment started
     :response_type: date
     :user_defined: true
   GB_INPUT_B_13WP3_2A:
@@ -2241,7 +2246,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   FIRST_NAME:
-    :value: Dave
+    :value: '#applicant_first_name'
     :br100_meaning: 'Client: First name'
     :response_type: text
     :user_defined: true
@@ -2257,7 +2262,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   DATE_OF_BIRTH:
-    :value: 01-01-1978
+    :value: '#applicant_date_of_birth'
     :br100_meaning: 'Client: Date of Birth'
     :response_type: date
     :user_defined: true
@@ -2764,7 +2769,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEFAULT_COST_LIMITATION:
-    :value: 5000
+    :value: '#application_default_substantive_cost_limitation'
     :br100_meaning: the default cost limitation
     :response_type: currency
     :user_defined: true
@@ -3342,7 +3347,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DEFAULT_COST_LIMITATION_MERITS:
-    :value: 5000
+    :value: '#application_default_substantive_cost_limitation'
     :br100_meaning: 'App: The Default Cost Limitation'
     :response_type: currency
     :user_defined: false
@@ -3543,7 +3548,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DATE_ASSESSMENT_STARTED:
-    :value: 01-04-2019
+    :value: '#application_submission_date'
     :br100_meaning: the Date assessment started
     :response_type: date
     :user_defined: true
@@ -3791,7 +3796,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   FIRST_NAME:
-    :value: Dave
+    :value: '#applicant_first_name'
     :br100_meaning: 'Client: First name'
     :response_type: text
     :user_defined: true
@@ -3848,7 +3853,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   DATE_OF_BIRTH:
-    :value: 01-01-1978
+    :value: '#applicant_date_of_birth'
     :br100_meaning: 'Client: Date of Birth'
     :response_type: date
     :user_defined: true

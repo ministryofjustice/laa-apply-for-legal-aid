@@ -20,8 +20,9 @@ module CCMS
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
-    STANDARD_METHOD_NAMES = /^(application|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = /^(application|applicant|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
+    APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
@@ -30,8 +31,6 @@ module CCMS
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
-
-    COUNTRY = 'GBR'.freeze
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
@@ -55,30 +54,6 @@ module CCMS
 
     def bank_name(options)
       options[:bank_acct].bank_provider.name
-    end
-
-    def country
-      COUNTRY
-    end
-
-    def date_assessment_started
-      @legal_aid_application.submission_date
-    end
-
-    def applicant_date_of_birth
-      @legal_aid_application.applicant.date_of_birth
-    end
-
-    def default_cost_limitation
-      @legal_aid_application.default_cost_limitation
-    end
-
-    def applicant_first_name
-      @legal_aid_application.applicant.first_name
-    end
-
-    def passported?
-      @legal_aid_application.benefit_check_result&.positive?
     end
 
     def bank_account_holders(_options)
@@ -171,6 +146,8 @@ module CCMS
       case method
       when APPLICATION_REGEX
         @legal_aid_application.__send__(Regexp.last_match(1))
+      when APPLICANT_REGEX
+        applicant.__send__(Regexp.last_match(1))
       when APPLICATION_PROCEEDING_TYPE_REGEX
         options[:appl_proceeding_type].__send__(Regexp.last_match(1))
       when BANK_REGEX
