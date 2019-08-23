@@ -25,15 +25,15 @@ module CCMS
     end
 
     def call
-      save_request unless Rails.env.production?
+      save_request(@options[:case_type]) unless Rails.env.production?
       soap_client.call(:create_case_application, xml: request_xml) unless @options[:no_call]
     end
 
     private
 
     # :nocov:
-    def save_request
-      File.open(Rails.root.join('ccms_integration/generated/add_case_request.xml'), 'w') do |fp|
+    def save_request(case_type)
+      File.open(Rails.root.join("ccms_integration/generated/add_#{case_type}_case_request.xml"), 'w') do |fp|
         fp.puts request_xml
       end
     end
@@ -134,7 +134,7 @@ module CCMS
       xml.__send__('ns2:ProviderFirmID', provider.firm_id)
       xml.__send__('ns2:ProviderOfficeID', provider.selected_office_id)
       xml.__send__('ns2:ContactUserID') do
-        xml.__send__('ns0:UserLoginID', provider.username)
+        xml.__send__('ns0:UserLoginID', provider.user_login_id)
       end
       xml.__send__('ns2:SupervisorContactID', provider.supervisor_contact_id)
       xml.__send__('ns2:FeeEarnerContactID', provider.fee_earner_contact_id)
@@ -155,7 +155,7 @@ module CCMS
         xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
         xml.__send__('ns2:Status', 'Draft')
         xml.__send__('ns2:LeadProceedingIndicator', true)
-        xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, application_proceeding_type.proceeding_type) }
+        xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, ProceedingType.find(application_proceeding_type.proceeding_type_id)) }
       end
     end
 
@@ -174,10 +174,11 @@ module CCMS
     end
 
     def generate_scope_limitation(xml, limitation)
+      application_limitation = ApplicationScopeLimitation.find_by(scope_limitation_id: limitation.id, legal_aid_application_id: @legal_aid_application.id)
       xml.__send__('ns2:ScopeLimitation') do
-        xml.__send__('ns2:ScopeLimitation', limitation.limitation)
-        xml.__send__('ns2:ScopeLimitationWording', limitation.wording)
-        xml.__send__('ns2:DelegatedFunctionsApply', limitation.delegated_functions_apply)
+        xml.__send__('ns2:ScopeLimitation', limitation.code)
+        xml.__send__('ns2:ScopeLimitationWording', limitation.description)
+        xml.__send__('ns2:DelegatedFunctionsApply', !application_limitation.substantive)
       end
     end
 

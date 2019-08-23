@@ -4,10 +4,17 @@ require 'rails_helper'
 module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe CaseAddRequestor do
     context 'using dummy data' do # This context will eventually be removed
+      let(:application_scope_limitation_1) do
+        double ApplicationScopeLimitation,
+               id: 1,
+               substantive: false
+      end
+
       let(:scope_limitation_1) do
-        double 'ScopeLimitation',
-               limitation: 'CV118',
-               wording: 'Limited to all steps up to and including the hearing on 01/04/2019',
+        double ScopeLimitation,
+               id: 1,
+               code: 'CV118',
+               description: 'Limited to all steps up to and including the hearing on 01/04/2019',
                delegated_functions_apply: true
       end
 
@@ -23,16 +30,18 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       let(:scope_limitation_2) do
-        double 'ScopeLimitation',
-               limitation: 'AA019',
-               wording: aa019_text,
+        double ScopeLimitation,
+               id: 2,
+               code: 'AA019',
+               description: aa019_text,
                delegated_functions_apply: false
       end
 
       let(:scope_limitation_3) do
-        double 'ScopeLimitation',
-               limitation: 'FM049',
-               wording: 'Limited to all steps up to and including trial/final hearing and any action necessary to implement (but not enforce) the judgment or order.',
+        double ScopeLimitation,
+               id: 3,
+               code: 'FM049',
+               description: 'Limited to all steps up to and including trial/final hearing and any action necessary to implement (but not enforce) the judgment or order.',
                delegated_functions_apply: false
       end
 
@@ -63,9 +72,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       let(:provider) do
-        double Provider,
+        double 'Provider',
                firm_id: 19_148,
                selected_office_id: 137_570,
+               user_login_id: 4_953_649,
                username: 4_953_649,
                contact_user_id: 4_953_649,
                supervisor_contact_id: 7_008_010,
@@ -74,6 +84,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       let(:application_proceeding_type_1) do
         double ApplicationProceedingType,
+               proceeding_type_id: 1,
                proceeding_type: proceeding_type_1,
                proceeding_case_p_num: 'P_55123456'
       end
@@ -116,6 +127,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       let(:application_proceeding_type_2) do
         double ApplicationProceedingType,
+               proceeding_type_id: 2,
                proceeding_type: proceeding_type_2,
                proceeding_case_p_num: 'P_55123457'
       end
@@ -198,11 +210,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       let(:legal_aid_application) do
         double LegalAidApplication,
+               id: 1,
                ccms_reference_number: '300000333864',
                provider_case_reference_number: 'CCMS_Apply_Test_Case',
                requested_amount: 5000.0,
                applicant: applicant,
                provider: provider,
+               application_scope_limitations: [scope_limitation_1, scope_limitation_2, scope_limitation_3],
                application_proceeding_types: [application_proceeding_type_1, application_proceeding_type_2],
                proceeding_types: [proceeding_type_1, proceeding_type_2],
                lead_proceeding: proceeding_type_1,
@@ -277,6 +291,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
       let(:requestor) { described_class.new(submission, {}) }
 
+      before do
+        allow(ProceedingType).to receive(:find).with(1).and_return(proceeding_type_1)
+        allow(ProceedingType).to receive(:find).with(2).and_return(proceeding_type_2)
+        allow(ApplicationScopeLimitation).to receive(:find_by).and_return(application_scope_limitation_1)
+      end
+
       describe 'Full XML request' do
         # This test is non-functional at the moment.
         # It outputs to a temp file, which can then be compared with the expected xml using diff merge
@@ -303,10 +323,21 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
       let(:expected_soap_operation) { :create_case_application }
       let(:expected_xml) { requestor.__send__(:request_xml) }
+      let(:provider) do
+        double 'Provider',
+               firm_id: 19_148,
+               selected_office_id: 137_570,
+               user_login_id: 4_953_649,
+               username: 4_953_649,
+               contact_user_id: 4_953_649,
+               supervisor_contact_id: 7_008_010,
+               fee_earner_contact_id: 4_925_152
+      end
 
       before do
         Timecop.freeze
         expect(requestor).to receive(:soap_client).and_return(soap_client_double)
+        allow(requestor).to receive(:provider).and_return(provider)
       end
 
       it 'calls the savon soap client' do

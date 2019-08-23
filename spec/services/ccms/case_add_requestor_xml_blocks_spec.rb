@@ -12,12 +12,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                with_bank_accounts: 2
       end
 
+      let(:provider) do
+        double Provider,
+               firm_id: 19_148,
+               selected_office_id: 137_570,
+               user_login_id: 4_953_649,
+               username: 4_953_649,
+               contact_user_id: 4_953_649,
+               supervisor_contact_id: 7_008_010,
+               fee_earner_contact_id: 4_925_152
+      end
+
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:respondent) { legal_aid_application.respondent }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
       before { allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id) }
+      before { allow(requestor).to receive(:provider).and_return(provider) }
 
       # enable this context if  you need to create a file of the payload for manual inspection
       xcontext 'saving to a temporary file' do
