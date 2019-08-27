@@ -42,7 +42,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
           money_owed_value: '90,123.45',
           check_box_trust_value: 'true',
           trust_value: '1,234.56',
-          check_box_none_selected: ''
+          none_selected: ''
         },
         commit: 'Continue'
       }
@@ -67,12 +67,12 @@ RSpec.describe 'citizen other assets requests', type: :request do
           money_owed_value: '',
           check_box_trust_value: '',
           trust_value: '',
-          check_box_none_selected: check_box_none_selected
+          none_selected: none_selected
         }
       }
     end
 
-    let(:check_box_none_selected) { '' }
+    let(:none_selected) { '' }
 
     context 'valid params' do
       it 'updates the record' do
@@ -109,12 +109,24 @@ RSpec.describe 'citizen other assets requests', type: :request do
         end
 
         context 'and none of these checkbox is not selected' do
-          let(:check_box_none_selected) { '' }
+          let(:none_selected) { '' }
           before { patch citizens_other_assets_path, params: empty_params }
           it 'the response includes the error message' do
             expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.base.citizen.none_selected'))
           end
         end
+      end
+    end
+
+    context 'none of these checkbox is selected' do
+      let(:params) do
+        {
+          other_assets_declaration: { none_selected: 'true' }
+        }
+      end
+
+      it 'sets none_selected to true' do
+        expect(oad.reload.none_selected).to eq(true)
       end
     end
 

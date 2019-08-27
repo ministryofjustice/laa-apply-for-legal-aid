@@ -100,6 +100,15 @@ RSpec.describe 'providers savings and investments', type: :request do
             expect(response).to redirect_to(providers_legal_aid_application_other_assets_path(application))
           end
 
+          context 'none of these checkbox is selected' do
+            let(:params) { { savings_amount: { none_selected: 'true' } } }
+
+            it 'sets none_selected to true' do
+              subject
+              expect(savings_amount.reload.none_selected).to eq(true)
+            end
+          end
+
           context 'with invalid input' do
             let(:isa) { 'fifty' }
 

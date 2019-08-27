@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::OtherAssetsForm do
-  let(:empty_oad) { create :other_assets_declaration }
+  let(:empty_oad) { create :other_assets_declaration, none_selected: true }
   let(:oad_with_second_home) { create :other_assets_declaration, :with_second_home }
   let(:oad_with_all_values) { create :other_assets_declaration, :with_all_values }
 
@@ -18,7 +18,7 @@ RSpec.describe Citizens::OtherAssetsForm do
         second_home_value: '',
         second_home_mortgage: '',
         second_home_percentage: '',
-        check_box_none_selected: 'true' }
+        none_selected: 'true' }
     end
 
     let(:alpha_second_home_params) do
@@ -107,7 +107,7 @@ RSpec.describe Citizens::OtherAssetsForm do
         money_owed_value: '0.45',
         check_box_trust_value: 'true',
         trust_value: '3,560,622.77',
-        check_box_none_selected: '' }
+        none_selected: '' }
     end
 
     describe 'instantiation' do
@@ -127,7 +127,7 @@ RSpec.describe Citizens::OtherAssetsForm do
             end
 
             context 'no form fields present' do
-              let(:submitted_params) { { check_box_none_selected: 'true' } }
+              let(:submitted_params) { { none_selected: 'true' } }
 
               it 'is valid' do
                 expect(form).to be_valid

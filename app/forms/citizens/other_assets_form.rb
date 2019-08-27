@@ -20,7 +20,7 @@ module Citizens
       second_home_percentage
     ].freeze
 
-    OTHER_CHECKBOXES = %i[check_box_second_home check_box_valuable_items_value check_box_none_selected].freeze
+    OTHER_CHECKBOXES = %i[check_box_second_home check_box_valuable_items_value none_selected].freeze
 
     ALL_ATTRIBUTES = (SECOND_HOME_ATTRIBUTES + SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).freeze
 
@@ -38,7 +38,7 @@ module Citizens
 
     attr_accessor(*ALL_ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :check_box_second_home, :check_box_none_selected, :mode
+    attr_accessor :mode
 
     before_validation :empty_unchecked_values
 
@@ -56,7 +56,7 @@ module Citizens
     end
 
     def exclude_from_model
-      CHECK_BOXES_ATTRIBUTES + [:mode]
+      CHECK_BOXES_ATTRIBUTES + [:mode] - [:none_selected]
     end
 
     def attributes_to_clean

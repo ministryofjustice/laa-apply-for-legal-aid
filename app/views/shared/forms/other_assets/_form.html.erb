@@ -1,5 +1,5 @@
 <%
-none_selected_id = '#other_assets_declaration_check_box_none_selected'
+none_selected_id = '#other_assets_declaration_none_selected'
 %>
 <%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
 
@@ -24,8 +24,8 @@ none_selected_id = '#other_assets_declaration_check_box_none_selected'
 
     <div class="govuk-checkboxes">
       <div class="govuk-checkboxes__item">
-        <%= form.check_box('check_box_none_selected', { class: 'govuk-checkboxes__input' }, 'true', false) %>
-        <%= form.label('check_box_none_selected', none_selected, class: 'govuk-label govuk-checkboxes__label') %>
+        <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', '' %>
+        <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
       </div>
     </div>
   <% end %>

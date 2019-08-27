@@ -161,7 +161,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       context 'if none of the check boxes are checked' do
         let(:check_box_params) do
           boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
-          boxes[:check_box_none_selected] = ''
+          boxes[:none_selected] = ''
           boxes
         end
         let(:journey) { 'citizens' }
@@ -175,7 +175,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       context 'none of these check box is checked' do
         let(:check_box_params) do
           boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
-          boxes[:check_box_none_selected] = 'true'
+          boxes[:none_selected] = 'true'
           boxes
         end
 

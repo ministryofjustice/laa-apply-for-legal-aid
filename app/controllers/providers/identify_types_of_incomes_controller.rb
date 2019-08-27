@@ -1,6 +1,8 @@
 module Providers
   class IdentifyTypesOfIncomesController < ProviderBaseController
-    def show; end
+    def show
+      @none_selected = legal_aid_application.no_credit_transaction_types_selected == true
+    end
 
     def update
       return continue_or_draft if none_selected? || transactions_added || draft_selected?
@@ -20,13 +22,16 @@ module Providers
     end
 
     def none_selected?
-      params[:none_selected] == 'true' && remove_existing_transaction_types
+      params[:none_selected] == 'true' &&
+        remove_existing_transaction_types &&
+        legal_aid_application.update!(no_credit_transaction_types_selected: true)
     end
 
     def transactions_added
       return if transaction_types.empty?
 
       remove_existing_transaction_types
+      legal_aid_application.update!(no_credit_transaction_types_selected: false)
       legal_aid_application.transaction_types << transaction_types
     end
 

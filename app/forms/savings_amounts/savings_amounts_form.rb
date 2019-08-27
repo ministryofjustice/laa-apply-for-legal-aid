@@ -14,7 +14,7 @@ module SavingsAmounts
       life_assurance_endowment_policy
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[check_box_none_selected]).freeze
+    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[none_selected]).freeze
 
     ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
@@ -23,7 +23,7 @@ module SavingsAmounts
 
     attr_accessor(*ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :check_box_none_selected, :journey
+    attr_accessor :journey
 
     validates(*ATTRIBUTES, allow_blank: true, currency: { greater_than_or_equal_to: 0 })
 
@@ -32,7 +32,7 @@ module SavingsAmounts
     validate :any_checkbox_checked_or_draft
 
     def exclude_from_model
-      CHECK_BOXES_ATTRIBUTES + [:journey]
+      CHECK_BOXES_ATTRIBUTES + [:journey] - [:none_selected]
     end
 
     def attributes_to_clean
