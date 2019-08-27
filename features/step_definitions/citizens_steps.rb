@@ -7,7 +7,7 @@ Given('An application has been created') do
     :with_no_other_assets,
     provider: create(:provider),
     state: :provider_submitted,
-    transaction_period_finish_at: '2019-07-01'.to_time
+    transaction_period_finish_on: '2019-07-01'
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant

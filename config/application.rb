@@ -8,6 +8,8 @@ module LaaApplyForLegalAid
   class Application < Rails::Application
     config.load_defaults 5.2
 
+    config.time_zone = 'London'
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.test_framework :rspec

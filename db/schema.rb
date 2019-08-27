@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_135413) do
+ActiveRecord::Schema.define(version: 2019_08_20_154405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -293,8 +293,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_135413) do
     t.string "provider_step"
     t.uuid "provider_id"
     t.boolean "draft"
-    t.datetime "transaction_period_start_at"
-    t.datetime "transaction_period_finish_at"
+    t.date "transaction_period_start_on"
+    t.date "transaction_period_finish_on"
     t.boolean "transactions_gathered"
     t.datetime "completed_at"
     t.json "applicant_means_answers"

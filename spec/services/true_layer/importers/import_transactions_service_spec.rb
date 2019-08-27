@@ -6,8 +6,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
 
   describe '#call' do
-    let(:now) { '6/11/2018 15:10:00 +0000'.to_time }
-    let(:now_minus_3_month) { '5/08/2018 00:00:00 +0000'.to_time }
+    let(:now) { '6/11/2018'.to_date }
+    let(:now_minus_3_month) { '5/08/2018'.to_date }
     let(:mock_transaction_1) { mock_account[:transactions][0] }
     let(:mock_transaction_2) { mock_account[:transactions][1] }
     let(:transaction_1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction_1[:transaction_id]) }
@@ -15,10 +15,6 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let!(:existing_transaction) { create :bank_transaction, bank_account: bank_account }
 
     subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
-
-    before do
-      allow(Time).to receive(:now).and_return(now)
-    end
 
     context 'request is successful' do
       before do
@@ -33,7 +29,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         expect(transaction_1.merchant).to eq(mock_transaction_1[:merchant_name])
         expect(transaction_1.currency).to eq(mock_transaction_1[:currency])
         expect(transaction_1.amount.to_s).to eq(mock_transaction_1[:amount].to_s)
-        expect(transaction_1.happened_at).to eq(mock_transaction_1[:timestamp].to_time)
+        expect(transaction_1.happened_at).to eq(Time.zone.parse(mock_transaction_1[:timestamp]))
         expect(transaction_1.operation).to eq(mock_transaction_1[:transaction_type].downcase)
 
         expect(transaction_2.true_layer_response).to eq(mock_transaction_2.deep_stringify_keys)
@@ -42,7 +38,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         expect(transaction_2.merchant).to eq(mock_transaction_2[:merchant_name])
         expect(transaction_2.currency).to eq(mock_transaction_2[:currency])
         expect(transaction_2.amount.to_s).to eq(mock_transaction_2[:amount].to_s)
-        expect(transaction_2.happened_at).to eq(mock_transaction_2[:timestamp].to_time)
+        expect(transaction_2.happened_at).to eq(Time.zone.parse(mock_transaction_2[:timestamp]))
         expect(transaction_2.operation).to eq(mock_transaction_2[:transaction_type].downcase)
       end
 
@@ -61,8 +57,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
 
         expect(WebMock).to have_requested(:get, expected_request_url)
           .with(query: {
-                  from: now_minus_3_month.utc.iso8601,
-                  to: now.utc.iso8601
+                  from: now_minus_3_month.iso8601,
+                  to: now.iso8601
                 })
       end
     end

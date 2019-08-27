@@ -181,6 +181,7 @@ FactoryBot.define do
       with_restrictions
       with_incident
       with_vehicle
+      with_transaction_period
     end
 
     trait :with_negative_benefit_check_result do
@@ -200,8 +201,8 @@ FactoryBot.define do
     end
 
     trait :with_transaction_period do
-      transaction_period_start_at { 3.months.ago.beginning_of_day }
-      transaction_period_finish_at { Time.now.beginning_of_day }
+      transaction_period_start_on { Date.current - 3.months }
+      transaction_period_finish_on { Date.current }
     end
 
     trait :at_initiated do

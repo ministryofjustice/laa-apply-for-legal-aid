@@ -21,7 +21,7 @@ module CCMS
     end
 
     def transaction_request_id
-      @transaction_request_id ||= Time.now.strftime('%Y%m%d%H%M%S%6N') + rand.to_s[2..8]
+      @transaction_request_id ||= Time.current.strftime('%Y%m%d%H%M%S%6N') + rand.to_s[2..8]
     end
 
     private

@@ -61,13 +61,17 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     proceeding_types.first
   end
 
+  def calculation_date
+    LegalAidApplications::CalculationDateService.call(self)
+  end
+
   def bank_transactions
     return applicant.bank_transactions if Setting.mock_true_layer_data?
 
     set_transaction_period
-    applicant.bank_transactions.where(
-      happened_at: transaction_period_start_at..transaction_period_finish_at
-    )
+    from = transaction_period_start_on.beginning_of_day
+    to = transaction_period_finish_on.end_of_day
+    applicant.bank_transactions.where(happened_at: from..to)
   end
 
   def generate_secure_id
@@ -80,11 +84,14 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def set_transaction_period
-    return if transaction_period_start_at? && transaction_period_finish_at?
+    return if transaction_period_start_on? && transaction_period_finish_on?
+
+    date_to = (used_delegated_functions? ? used_delegated_functions_on : Date.current)
+    date_from = date_to - 3.months
 
     update!(
-      transaction_period_start_at: 3.months.ago.beginning_of_day,
-      transaction_period_finish_at: Time.now.beginning_of_day
+      transaction_period_start_on: date_from,
+      transaction_period_finish_on: date_to
     )
   end
 
@@ -148,12 +155,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
       checking_passported_answers? ||
       checking_merits_answers? ||
       provider_checking_citizens_means_answers?
-  end
-
-  # TODO: decide when is the submission_date set for passported and non-passported applications
-  # and save it to the DB
-  def submission_date
-    (transaction_period_finish_at || Time.now.utc).to_date
   end
 
   def opponents

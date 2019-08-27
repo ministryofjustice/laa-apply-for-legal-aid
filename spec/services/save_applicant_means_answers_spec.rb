@@ -24,9 +24,9 @@ RSpec.describe SaveApplicantMeansAnswers do
       application.attributes.except('applicant_means_answers').each do |key, value|
         got = application.applicant_means_answers[key].to_s
         expected = value.to_s
-        if value.is_a?(Time)
+        if value.is_a?(Time) || value.is_a?(Date)
           got = got.to_time.to_i
-          expected = value.to_i
+          expected = value.to_time.to_i
           expect(got).to be_within(2).of(expected), "Attr #{key}: expected #{expected}, got #{got}"
         else
           expect(got).to eq(expected), "Attr #{key}: expected #{expected}, got #{got}"

@@ -18,7 +18,7 @@ module TrueLayer
 
     attr_reader :legal_aid_application
     delegate(
-      :applicant, :transaction_period_start_at, :transaction_period_finish_at,
+      :applicant, :transaction_period_start_on, :transaction_period_finish_on,
       to: :legal_aid_application
     )
 
@@ -85,8 +85,8 @@ module TrueLayer
       command = Importers::ImportTransactionsService.call(
         api_client,
         account,
-        start_at: transaction_period_start_at,
-        finish_at: transaction_period_finish_at
+        start_at: transaction_period_start_on,
+        finish_at: transaction_period_finish_on
       )
       self.error = command.errors.first unless command.success?
     end
