@@ -38,7 +38,7 @@
     <h2 class="govuk-heading-l"><%= t('.income_payments_and_assets_heading') %></h2>
 
       <h3 class="govuk-heading-m"><%= t('.income') %></h3>
-        <% if @legal_aid_application.passported? %>
+        <% if @legal_aid_application.applicant_receives_benefit? %>
             <strong class="govuk-tag app-tag--capitalize">
               <%= t('.passported') %>
             </strong>
@@ -50,7 +50,7 @@
               ) %>
         <% end %>
       <h3 class="govuk-heading-m govuk-!-padding-top-8"><%= t('.payments') %></h3>
-        <% if @legal_aid_application.passported? %>
+        <% if @legal_aid_application.applicant_receives_benefit? %>
           <strong class="govuk-tag app-tag--capitalize">
             <%= t('.passported') %>
           </strong>

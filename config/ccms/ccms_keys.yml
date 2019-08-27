@@ -1645,7 +1645,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_B_38WP3_11A:
-    :value: '#application_passported?'
+    :value: '#application_applicant_receives_benefit?'
     :br100_meaning: The application is passported
     :response_type: boolean
     :user_defined: false
@@ -2056,7 +2056,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   DATE_ASSESSMENT_STARTED:
-    :value: '#application_submission_date'
+    :value: '#application_calculation_date'
     :br100_meaning: The Date assessment started
     :response_type: date
     :user_defined: true
@@ -3548,7 +3548,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DATE_ASSESSMENT_STARTED:
-    :value: '#application_submission_date'
+    :value: '#application_calculation_date'
     :br100_meaning: the Date assessment started
     :response_type: date
     :user_defined: true

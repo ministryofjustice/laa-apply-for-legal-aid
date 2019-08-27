@@ -221,23 +221,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#passported?' do
-    let(:legal_aid_application) { create :legal_aid_application, passported_value }
-    let(:passported_value) { :with_positive_benefit_check_result }
-
-    it 'returns true' do
-      expect(legal_aid_application.passported?).to be true
-    end
-
-    context 'with false benefit check result' do
-      let(:passported_value) { :with_negative_benefit_check_result }
-
-      it 'returns false' do
-        expect(legal_aid_application.passported?).to be false
-      end
-    end
-  end
-
   describe 'set_transaction_period' do
     subject { legal_aid_application.set_transaction_period }
 

@@ -215,7 +215,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               block = XmlExtractor.call(xml, entity, 'DATE_OF_BIRTH')
               expect(block).to be_present
               expect(block).to have_response_type 'date'
-              expect(block).to have_response_value '01-01-2000'
+              expect(block).to have_response_value(legal_aid_application.applicant.date_of_birth.strftime('%d-%m-%Y'))
             end
           end
         end
@@ -232,7 +232,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'DATE_ASSESSMENT_STARTED' do
-        before { allow(legal_aid_application).to receive(:submission_date).and_return(Date.today) }
+        before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
         it "inserts today's date as a string" do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'DATE_ASSESSMENT_STARTED')
@@ -573,14 +573,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       context 'GB_DECL_B_38WP3_11A application passported' do
         it 'returns true when application is passported' do
-          allow(legal_aid_application).to receive(:passported?).and_return(true)
+          allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true)
           block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
           expect(block).to be_present
           expect(block).to have_response_type 'boolean'
           expect(block).to have_response_value 'true'
         end
         it 'returns false when application is passported' do
-          allow(legal_aid_application).to receive(:passported?).and_return(false)
+          allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false)
           block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
           expect(block).to be_present
           expect(block).to have_response_type 'boolean'

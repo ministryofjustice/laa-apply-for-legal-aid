@@ -9,7 +9,7 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { create :applicant, with_bank_accounts: with_bank_accounts, date_of_birth: Date.new(2000, 1, 1) }
+      applicant { create :applicant, with_bank_accounts: with_bank_accounts }
     end
 
     trait :with_applicant_and_address do
