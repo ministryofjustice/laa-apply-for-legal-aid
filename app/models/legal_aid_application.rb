@@ -30,6 +30,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
   has_one_attached :merits_report
+  has_one_attached :means_report
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -102,7 +103,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def applicant_receives_benefit?
-    benefit_check_result.positive?
+    benefit_check_result&.positive?
   end
 
   def benefit_check_result_needs_updating?

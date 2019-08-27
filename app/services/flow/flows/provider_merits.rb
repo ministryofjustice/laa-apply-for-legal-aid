@@ -64,6 +64,9 @@ module Flow
         submitted_applications: {
           path: ->(application) { urls.providers_legal_aid_application_submitted_application_path(application) },
           forward: :providers_home
+        },
+        merits_reports: {
+          path: ->(application) { urls.providers_legal_aid_application_merits_report_path(application) }
         }
       }.freeze
     end
