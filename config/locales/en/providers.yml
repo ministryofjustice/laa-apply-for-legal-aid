@@ -55,7 +55,7 @@ en:
             a statement of case
             the chances of a successful outcome
     check_benefits:
-      index:
+      check_benefits_result:
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
         you_need_to: "You'll need to:"
@@ -67,6 +67,19 @@ en:
           title: "%{name} receives benefits that qualify for legal aid"
           must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
           provide_access/details: provide details of the case
+      use_ccms:
+        accept_only: We currently only accept applications for people receiving one of these benefits.
+        apply_in_ccms: Apply in CCMS
+        back_to_applications: Back to my applications
+        benefits:
+          list: |
+            Income Support
+            Income-based Employment and Support Allowance (ESA)
+            Income-based Jobseeker’s Allowance (JSA)
+            State Pension Guarantee Credit
+            Universal Credit
+        title: You need to use CCMS for this application
+        we_checked: 'We checked with the DWP and your client does not receive:'
     check_merits_answers:
       show:
         h1-heading: Check your answers

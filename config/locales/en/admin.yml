@@ -39,5 +39,7 @@ en:
         heading_1: Settings
         labels:
           mock_true_layer_data: Mock TrueLayer Data
+          allow_non_passported_route: Allow non-passported route
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data
+          allow_non_passported_route: Select Yes to allow non-passported route

@@ -48,6 +48,8 @@ module LaaApplyForLegalAid
 
     config.x.metrics_service_host = ENV.fetch('METRICS_SERVICE_HOST', 'localhost')
 
+    config.x.allow_non_passported_route = ENV['ALLOW_NON_PASSPORTED_ROUTE'] != 'false' # true by default
+
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
 

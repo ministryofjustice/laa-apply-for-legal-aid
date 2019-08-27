@@ -8,6 +8,14 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:application) { create :application, applicant: applicant }
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
+  let(:login) { login_as application.provider }
+  let(:env_allow_non_passported_route) { [true, false].sample }
+  let(:setting_allow_non_passported_route) { [true, false].sample }
+
+  before do
+    Setting.create!(allow_non_passported_route: setting_allow_non_passported_route)
+    allow(Rails.configuration.x).to receive(:allow_non_passported_route).and_return(env_allow_non_passported_route)
+  end
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
     let!(:address) { create :address, applicant: applicant, lookup_used: address_lookup_used }
@@ -39,6 +47,52 @@ RSpec.describe 'check benefits requests', type: :request do
         it 'updates check_benefit_result' do
           expect(BenefitCheckService).to receive(:call).and_call_original
           subject
+        end
+      end
+    end
+
+    context 'when the applicant receives benefits' do
+      let!(:benefit_check_result) { create :benefit_check_result, :positive, legal_aid_application: application }
+
+      it 'show positive result text' do
+        subject
+        text = I18n.t('providers.check_benefits.check_benefits_result.positive_result.title', name: applicant.full_name)
+        expect(response.body).to include(text)
+      end
+    end
+
+    context 'when the applicant does not receive benefits' do
+      let!(:benefit_check_result) { create :benefit_check_result, :negative, legal_aid_application: application }
+
+      context 'when environment is not allowed to go through non-passported route' do
+        let(:env_allow_non_passported_route) { false }
+
+        it 'shows text to use CCMS' do
+          subject
+          expect(response.body).to include(I18n.t('providers.check_benefits.use_ccms.title', name: applicant.full_name))
+        end
+      end
+
+      context 'when environment is allowed to go through non-passported route' do
+        let(:env_allow_non_passported_route) { true }
+
+        context 'when setting have allow_non_passported_route false' do
+          let(:setting_allow_non_passported_route) { false }
+
+          it 'shows text to use CCMS' do
+            subject
+            expect(response.body).to include(I18n.t('providers.check_benefits.use_ccms.title'))
+          end
+        end
+
+        context 'when setting have allow_non_passported_route true' do
+          let(:setting_allow_non_passported_route) { true }
+
+          it 'show negative result text' do
+            subject
+            text = I18n.t('providers.check_benefits.check_benefits_result.negative_result.title', name: applicant.full_name)
+            expect(response.body).to include(text)
+          end
         end
       end
     end

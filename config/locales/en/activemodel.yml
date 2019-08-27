@@ -340,6 +340,12 @@ en:
               greater_than_or_equal_to: Total of shares must be 0 or more
               not_a_number: Total of shares must be an amount of money, like 60,000
               too_many_decimals: Estimated shares value must not include more than 2 decimal numbers
+        setting:
+          attributes:
+            mock_true_layer_data:
+              blank: Mock TrueLayer Data can't be blank
+            allow_non_passported_route:
+              blank: Allow non-passported route can't be blank
         statement_of_case:
           attributes:
             original_files:
