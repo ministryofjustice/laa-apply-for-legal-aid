@@ -50,10 +50,10 @@ en:
         h1-heading: Before you continue
         items_to_be_provided:
           list: |
+            details about the latest domestic abuse incident
+            information about the respondent
             a statement of case
-            information about any attempts to settle
-            cost estimates
-            the prospects of success
+            the chances of a successful outcome
     check_benefits:
       index:
         what_happens_next: What happens next
