@@ -14,7 +14,7 @@ no_files=$(ls -l ${HTMLS_DIR} | grep -v ^d | wc -l | sed -e 's/^[ ]*//')
 for filename in "$HTMLS_DIR"/*.html; do
     [ -e "$filename" ] || continue
     echo "${index}/${no_files} hint $filename"
-    result=$( yarn run hint "$filename" --tracking off )
+    result=$( yarn run hint "$filename" --tracking off --debug )
     exit_code=$?
     echo "Error report:"
     if [ $exit_code -gt 0 ]

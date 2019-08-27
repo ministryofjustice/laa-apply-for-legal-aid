@@ -85,31 +85,38 @@ module CCMS
     end
 
     def applicant_owed_money?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.money_owed_value
+      not_zero? other_assets.money_owed_value
     end
 
     def applicant_has_interest_in_a_trust?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.trust_value
+      not_zero? other_assets.trust_value
     end
 
     def applicant_has_valuable_posessions?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.valuable_items_value
+      not_zero? other_assets.valuable_items_value
     end
 
     def applicant_owns_timeshare?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.timeshare_property_value
+      not_zero? other_assets.timeshare_property_value
     end
 
     def applicant_owns_land?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.land_value
+      not_zero? other_assets.land_value
+    end
+
+    def applicant_has_inheritance?(_options)
+      not_zero? other_assets.inherited_assets_value
     end
 
     def applicant_has_investments?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.money_assets_value
+      not_zero?(savings.national_savings) ||
+        not_zero?(savings.plc_shares) ||
+        not_zero?(savings.peps_unit_trusts_capital_bonds_gov_stocks) ||
+        not_zero?(savings.life_assurance_endowment_policy)
     end
 
-    def applicant_owns_property?(_options)
-      not_zero? @legal_aid_application.property_value
+    def applicant_owns_additional_property?(_options)
+      not_zero? other_assets.second_home_value
     end
 
     def applicant_has_bank_accounts?(_options)
@@ -117,19 +124,19 @@ module CCMS
     end
 
     def applicant_has_other_capital?(_options)
-      not_zero? @legal_aid_application.savings_amount.peps_unit_trusts_capital_bonds_gov_stocks
+      not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
 
     def applicant_has_other_savings?(_options)
-      not_zero? @legal_aid_application.savings_amount.isa
+      not_zero? savings.isa
     end
 
     def applicant_has_other_policies?(_options)
-      not_zero? @legal_aid_application.savings_amount.life_assurance_endowment_policy
+      not_zero? savings.life_assurance_endowment_policy
     end
 
     def applicant_has_shares?(_options)
-      not_zero? @legal_aid_application.savings_amount.plc_shares
+      not_zero? savings.plc_shares
     end
 
     private
@@ -140,6 +147,14 @@ module CCMS
 
     def standardly_named_method?(method)
       STANDARD_METHOD_NAMES.match?(method)
+    end
+
+    def savings
+      @savings ||= @legal_aid_application.savings_amount
+    end
+
+    def other_assets
+      @other_assets ||= @legal_aid_application.other_assets_declaration
     end
 
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity

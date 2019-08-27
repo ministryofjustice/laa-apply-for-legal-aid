@@ -67,6 +67,18 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'APPLICATION_CASE_REF' do
+        let(:case_reference) { legal_aid_application.most_recent_ccms_submission.case_ccms_reference }
+        it 'inserts the case reference from the submission record into both global means and merits sections' do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'APPLICATION_CASE_REF')
+            expect(block).to be_present
+            expect(block).to have_response_type('text')
+            expect(block).to have_response_value(case_reference)
+          end
+        end
+      end
+
       context 'DELEGATED_FUNCTIONS_DATE blocks' do
         context 'delegated functions used' do
           before do
@@ -176,6 +188,48 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to be_present
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'true'
+          end
+        end
+      end
+
+      context 'GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?' do
+        context 'not a beneficiary' do
+          before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
+          it 'inserts false into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type('boolean')
+            expect(block).to have_response_value('false')
+          end
+        end
+
+        context 'is a beneficiary' do
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type('boolean')
+            expect(block).to have_response_value('true')
+          end
+        end
+      end
+
+      context 'GB_INPUT_B_3WP2_1A - Applicant has a financial interest in main home?' do
+        context 'no interest' do
+          before { expect(legal_aid_application).to receive(:own_home).and_return(false) }
+          it 'inserts false into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type('boolean')
+            expect(block).to have_response_value('false')
+          end
+        end
+        context 'has an interest' do
+          before { expect(legal_aid_application).to receive(:own_home).and_return(true) }
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type('boolean')
+            expect(block).to have_response_value('true')
           end
         end
       end
@@ -451,36 +505,99 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_B_9WP2_1A client investments' do
-        it 'returns true when client has investments' do
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+        let(:ns_val) { 0 }
+        let(:plc_shares_val) { 0 }
+        let(:peps_val) { 0 }
+        let(:policy_val) { 0 }
+        before do
+          legal_aid_application.savings_amount.update(national_savings: ns_val,
+                                                      plc_shares: plc_shares_val,
+                                                      peps_unit_trusts_capital_bonds_gov_stocks: peps_val,
+                                                      life_assurance_endowment_policy: policy_val)
+        end
+        context 'no investments of any type' do
+          it 'inserts false into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'false'
+          end
         end
 
-        it 'returns false when client does NOT have investments' do
-          allow(legal_aid_application.other_assets_declaration).to receive(:money_assets_value).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+        context 'national savings only' do
+          let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
+        end
+
+        context 'life_assurance_policy_only' do
+          let(:ns_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
+        end
+
+        context 'multiple investments' do
+          let(:ns_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+          let(:plc_shares_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+          let(:peps_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+          let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
         end
       end
 
-      context 'GB_INPUT_B_4WP2_1A client owns property ' do
-        it 'returns true when client owns property ' do
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+      context 'GB_INPUT_B_4WP2_1A Does applicant own additional property?' do
+        context 'applicant owns addtional property' do
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
         end
 
-        it 'returns false when client does NOT own property ' do
-          allow(legal_aid_application).to receive(:property_value).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+        context 'applicant DOES NOT own additional property' do
+          before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
+          it 'returns false when client does NOT own additiaonl property ' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'false'
+          end
+        end
+      end
+
+      context 'GB_INPUT_B_5WP1_18A - does the applicant receive a passported benefit?' do
+        context 'no passported benefit' do
+          before { expect(legal_aid_application).to receive(:passported?).and_return(false) }
+          it 'inserts false into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP1_18A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'false'
+          end
+        end
+
+        context 'receiving a passported benefit' do
+          before { expect(legal_aid_application).to receive(:passported?).and_return(true) }
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP1_18A')
+            expect(block).to be_present
+            expect(block).to have_response_type 'boolean'
+            expect(block).to have_response_value 'true'
+          end
         end
       end
 
@@ -500,6 +617,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).to have_response_type 'boolean'
             expect(block).to have_response_value 'false'
           end
+        end
+      end
+
+      context 'GB_INPUT_D_18WP2_1A - application submission date' do
+        it 'inserts the submission date into the attribute block' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_D_18WP2_1A')
+          expect(block).to be_present
+          expect(block).to have_response_type 'date'
+          expect(block).to have_response_value Date.today.strftime('%d-%m-%Y')
         end
       end
 

@@ -101,8 +101,8 @@ RSpec.describe Citizens::OtherAssetsForm do
         land_value: '1,234.55',
         check_box_valuable_items_value: 'true',
         valuable_items_value: '566.0',
-        check_box_money_assets_value: 'true',
-        money_assets_value: '3,500',
+        check_box_inherited_assets_value: 'true',
+        inherited_assets_value: '3,500',
         check_box_money_owed_value: 'true',
         money_owed_value: '0.45',
         check_box_trust_value: 'true',
@@ -143,7 +143,7 @@ RSpec.describe Citizens::OtherAssetsForm do
               expect(form.errors[:timeshare_property_value]).to eq [translation_for(:timeshare_property_value, 'not_a_number')]
               expect(form.errors[:land_value]).to eq [translation_for(:land_value, 'not_a_number')]
               expect(form.errors[:valuable_items_value]).to eq [translation_for(:valuable_items_value, 'not_a_number')]
-              expect(form.errors[:money_assets_value]).to eq [translation_for(:money_assets_value, 'not_a_number')]
+              expect(form.errors[:inherited_assets_value]).to eq [translation_for(:inherited_assets_value, 'not_a_number')]
               expect(form.errors[:money_owed_value]).to eq [translation_for(:money_owed_value, 'not_a_number')]
               expect(form.errors[:trust_value]).to eq [translation_for(:trust_value, 'not_a_number')]
             end
@@ -165,7 +165,7 @@ RSpec.describe Citizens::OtherAssetsForm do
         expect(oad.timeshare_property_value).to eq 67_762.0
         expect(oad.land_value).to eq 1_234.55
         expect(oad.valuable_items_value).to eq 566.0
-        expect(oad.money_assets_value).to eq 3_500.0
+        expect(oad.inherited_assets_value).to eq 3_500.0
         expect(oad.money_owed_value).to eq 0.45
         expect(oad.trust_value).to eq 3_560_622.77
       end

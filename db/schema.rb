@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_122038) do
-
+ActiveRecord::Schema.define(version: 2019_08_27_131229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -104,7 +103,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_122038) do
     t.datetime "updated_at", null: false
     t.boolean "substantive", default: true
     t.index ["legal_aid_application_id", "scope_limitation_id"], name: "scope_limitations_index", unique: true
-    t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
   create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -384,7 +382,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_122038) do
     t.decimal "timeshare_property_value"
     t.decimal "land_value"
     t.decimal "valuable_items_value"
-    t.decimal "money_assets_value"
+    t.decimal "inherited_assets_value"
     t.decimal "money_owed_value"
     t.decimal "trust_value"
     t.datetime "created_at", null: false
