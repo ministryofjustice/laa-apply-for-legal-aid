@@ -6,28 +6,29 @@
     ) do |form| %>
 
   <%= govuk_form_group show_error_if: @legal_aid_application.errors.present? do %>
-    <%= govuk_fieldset_header page_title %>
-    <h2 class="govuk-heading-m"><%= t('.select_all_that_apply') %></h2>
+    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
+      <%= govuk_fieldset_header page_title %>
+      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
-    <div class="deselect-group" data-deselect-ctrl="#none_selected">
-      <%= transaction_type_check_boxes(
-            form: form,
-            transaction_types: TransactionType.credits,
-            hints: {
-              friends_or_family: t('.financial_help_examples')
-            }
-          ) %>
-    </div>
-
-    <div class="govuk-radios__divider tickbox_divider"><%= t('generic.or') %></div>
-
-    <div class="govuk-checkboxes">
-      <div class="govuk-checkboxes__item">
-        <%= check_box_tag :none_selected, 'true', @none_selected, class: 'govuk-checkboxes__input' %>
-        <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
+      <div class="deselect-group" data-deselect-ctrl="#none_selected">
+        <%= transaction_type_check_boxes(
+              form: form,
+              transaction_types: TransactionType.credits,
+              hints: {
+                friends_or_family: t('.financial_help_examples')
+              }
+            ) %>
       </div>
-    </div>
 
+      <div class="govuk-radios__divider tickbox_divider"><%= t('generic.or') %></div>
+
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <%= check_box_tag :none_selected, 'true', @none_selected, class: 'govuk-checkboxes__input' %>
+          <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
+        </div>
+      </div>
+    </fieldset>
   <% end %>
   <%= next_action_buttons(
         form: form,

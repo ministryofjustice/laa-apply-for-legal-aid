@@ -1,30 +1,30 @@
 <%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
 
   <%= govuk_form_group show_error_if: (@form.errors.present? && !@form.any_checkbox_checked?) do %>
-    <%= govuk_fieldset_header do %>
-      <h1 class="govuk-fieldset__heading govuk-!-padding-bottom-7"><%= page_title %></h1>
-      <h2 class="govuk-heading-m"><%= sub_heading %></h2>
-    <% end %>
-    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-      <div class="deselect-group" data-deselect-ctrl="[name='other_assets_declaration[none_selected]']">
-        <%= render partial: '/shared/forms/revealing_checkbox/attribute',
-                   collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
-                   locals: { model: model, form: form } %>
-        <%= render partial: '/shared/forms/other_assets/second_home_conditional_checkbox', locals: { model: model, form: form } %>
-        <%= render partial: '/shared/forms/revealing_checkbox/attribute',
-                   collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
-                   locals: { model: model, form: form } %>
+    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
+      <%= govuk_fieldset_header page_title %>
+      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+        <div class="deselect-group" data-deselect-ctrl="[name='other_assets_declaration[none_selected]']">
+          <%= render partial: '/shared/forms/revealing_checkbox/attribute',
+                     collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
+                     locals: { model: model, form: form } %>
+          <%= render partial: '/shared/forms/other_assets/second_home_conditional_checkbox', locals: { model: model, form: form } %>
+          <%= render partial: '/shared/forms/revealing_checkbox/attribute',
+                     collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
+                     locals: { model: model, form: form } %>
+        </div>
       </div>
-    </div>
 
-    <div class="govuk-radios__divider tickbox_divider"><%= or_break %></div>
+      <div class="govuk-radios__divider tickbox_divider"><%= or_break %></div>
 
-    <div class="govuk-checkboxes">
-      <div class="govuk-checkboxes__item">
-        <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', @form.none_selected %>
-        <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', @form.none_selected %>
+          <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
+        </div>
       </div>
-    </div>
+    </fieldset>
   <% end %>
 
   <%= next_action_buttons(
