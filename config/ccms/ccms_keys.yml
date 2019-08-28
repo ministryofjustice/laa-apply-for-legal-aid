@@ -842,7 +842,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_5WP1_18A:
-    :value: '#application_passported?'
+    :value: '#application_applicant_receives_benefit??'
     :br100_meaning: 'Client: The client is receiving a passported benefit?'
     :response_type: boolean
     :user_defined: true
