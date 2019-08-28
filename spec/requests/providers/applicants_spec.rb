@@ -14,6 +14,11 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       subject
       expect(response).to have_http_status(:ok)
     end
+
+    it 'does not prefix page title with error label' do
+      subject
+      expect(response.body).not_to match(/\<title\>#{I18n.t('errors.title_prefix')}\:/)
+    end
   end
 
   describe 'POST /providers/applicants' do
@@ -67,6 +72,11 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       it 'displays errors' do
         subject
         expect(response.body).to include('govuk-error-summary')
+      end
+
+      it 'prefixes page title with error label' do
+        subject
+        expect(response.body).to match(/\<title\>#{I18n.t('errors.title_prefix')}\:/)
       end
 
       it 'does not create applicant' do
