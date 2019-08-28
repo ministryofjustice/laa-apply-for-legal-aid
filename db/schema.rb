@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_131229) do
+ActiveRecord::Schema.define(version: 2019_08_28_133153) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -423,12 +424,13 @@ ActiveRecord::Schema.define(version: 2019_08_27_131229) do
     t.string "ccms_category_law_code"
     t.string "ccms_matter"
     t.string "ccms_matter_code"
-    t.integer "default_service_level_id"
     t.integer "default_cost_limitation_delegated_functions"
     t.integer "default_cost_limitation_substantive"
     t.boolean "involvement_type_applicant"
     t.string "additional_search_terms"
+    t.uuid "default_service_level_id"
     t.index ["code"], name: "index_proceeding_types_on_code"
+    t.index ["default_service_level_id"], name: "index_proceeding_types_on_default_service_level_id"
   end
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -501,10 +503,12 @@ ActiveRecord::Schema.define(version: 2019_08_27_131229) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "service_levels", primary_key: "service_id", force: :cascade do |t|
+  create_table "service_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "service_level_number"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["service_level_number"], name: "index_service_levels_on_service_level_number"
   end
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -566,7 +570,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_131229) do
   add_foreign_key "offices_providers", "providers"
   add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
   add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
-  add_foreign_key "proceeding_types", "service_levels", column: "default_service_level_id", primary_key: "service_id"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "respondents", "legal_aid_applications"
