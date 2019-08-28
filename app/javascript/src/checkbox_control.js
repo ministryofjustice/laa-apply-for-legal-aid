@@ -57,7 +57,7 @@ $(function() {
       If one is selected, deselect the control.
     */
     checkboxes.change( function() {
-      if(this.checked) { control.prop("checked", false )}
+      if(this.checked) { control.prop("checked", false ).val(false) }
     })
   })
 })

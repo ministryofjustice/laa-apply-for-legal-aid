@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_122038) do
     t.uuid "proceeding_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "proceeding_case_id", default: -> { "nextval('case_proceeding_sequence'::regclass)" }
+    t.integer "proceeding_case_id"
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end

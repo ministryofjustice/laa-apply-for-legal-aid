@@ -5,7 +5,7 @@ module Citizens
 
     def show
       legal_aid_application
-      @none_selected = legal_aid_application.no_debit_transaction_types_selected == true
+      @none_selected = legal_aid_application.no_debit_transaction_types_selected?
     end
 
     def update
@@ -26,17 +26,22 @@ module Citizens
     end
 
     def none_selected?
-      params[:none_selected] == 'true' &&
-        remove_existing_transaction_types &&
+      return unless params[:none_selected] == 'true'
+
+      LegalAidApplication.transaction do
+        remove_existing_transaction_types
         legal_aid_application.update!(no_debit_transaction_types_selected: true)
+      end
     end
 
     def transactions_added
       return if transaction_types.empty?
 
-      remove_existing_transaction_types
-      legal_aid_application.update!(no_debit_transaction_types_selected: false)
-      legal_aid_application.transaction_types << transaction_types
+      LegalAidApplication.transaction do
+        remove_existing_transaction_types
+        legal_aid_application.update!(no_debit_transaction_types_selected: false)
+        legal_aid_application.transaction_types << transaction_types
+      end
     end
 
     def remove_existing_transaction_types
