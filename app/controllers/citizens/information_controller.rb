@@ -1,7 +1,5 @@
 module Citizens
-  class InformationController < BaseController
-    include ApplicationFromSession
-
+  class InformationController < CitizenBaseController
     def show
       legal_aid_application
     end

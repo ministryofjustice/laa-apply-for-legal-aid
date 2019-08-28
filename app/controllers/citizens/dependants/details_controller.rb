@@ -1,7 +1,6 @@
 module Citizens
   module Dependants
-    class DetailsController < BaseController
-      include ApplicationFromSession
+    class DetailsController < CitizenBaseController
       prefix_step_with :dependants
       helper_method :other_dependants
 

@@ -1,7 +1,6 @@
 module Citizens
   module Dependants
-    class FullTimeEducationsController < BaseController
-      include ApplicationFromSession
+    class FullTimeEducationsController < CitizenBaseController
       prefix_step_with :dependants
 
       def show

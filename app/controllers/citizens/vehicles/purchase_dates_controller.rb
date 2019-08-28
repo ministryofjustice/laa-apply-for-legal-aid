@@ -1,7 +1,6 @@
 module Citizens
   module Vehicles
-    class PurchaseDatesController < BaseController
-      include ApplicationFromSession
+    class PurchaseDatesController < CitizenBaseController
       prefix_step_with :vehicles
 
       def show

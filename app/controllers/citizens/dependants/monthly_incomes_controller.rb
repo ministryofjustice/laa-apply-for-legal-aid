@@ -1,7 +1,6 @@
 module Citizens
   module Dependants
-    class MonthlyIncomesController < BaseController
-      include ApplicationFromSession
+    class MonthlyIncomesController < CitizenBaseController
       prefix_step_with :dependants
 
       def show

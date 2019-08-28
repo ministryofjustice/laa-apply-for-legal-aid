@@ -1,7 +1,5 @@
 module Citizens
-  class HasOtherDependantsController < BaseController
-    include ApplicationFromSession
-
+  class HasOtherDependantsController < CitizenBaseController
     def show; end
 
     def update

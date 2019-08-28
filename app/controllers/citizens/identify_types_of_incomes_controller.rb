@@ -1,8 +1,5 @@
 module Citizens
-  class IdentifyTypesOfIncomesController < BaseController
-    include ApplicationFromSession
-    before_action :authenticate_applicant!
-
+  class IdentifyTypesOfIncomesController < CitizenBaseController
     def show
       legal_aid_application
       @none_selected = legal_aid_application.no_credit_transaction_types_selected?

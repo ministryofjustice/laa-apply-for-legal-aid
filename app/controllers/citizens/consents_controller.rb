@@ -1,7 +1,5 @@
 module Citizens
-  class ConsentsController < BaseController
-    include ApplicationFromSession
-
+  class ConsentsController < CitizenBaseController
     def show; end
 
     def create

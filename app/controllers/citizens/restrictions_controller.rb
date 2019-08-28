@@ -1,7 +1,5 @@
 module Citizens
-  class RestrictionsController < BaseController
-    include ApplicationFromSession
-
+  class RestrictionsController < CitizenBaseController
     def show
       @form = LegalAidApplications::RestrictionsForm.new(model: legal_aid_application)
     end

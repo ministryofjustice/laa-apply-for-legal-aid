@@ -1,6 +1,5 @@
 module Citizens
-  class DependantsController < BaseController
-    include ApplicationFromSession
+  class DependantsController < CitizenBaseController
     helper_method :other_dependants
 
     def index

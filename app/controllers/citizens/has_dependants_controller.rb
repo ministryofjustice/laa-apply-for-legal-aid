@@ -1,6 +1,5 @@
 module Citizens
-  class HasDependantsController < BaseController
-    include ApplicationFromSession
+  class HasDependantsController < CitizenBaseController
     def show
       @form = LegalAidApplications::HasDependantsForm.new(model: legal_aid_application)
     end

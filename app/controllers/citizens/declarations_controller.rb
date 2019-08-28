@@ -1,8 +1,5 @@
 module Citizens
-  class DeclarationsController < BaseController
-    include ApplicationFromSession
-    before_action :authenticate_applicant!
-
+  class DeclarationsController < CitizenBaseController
     def show; end
 
     def update
