@@ -74,6 +74,10 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
       it 'should redirect to the next step' do
         expect(subject).to redirect_to(flow_forward_path)
       end
+
+      it 'sets no_credit_transaction_types_selected to false' do
+        expect { subject }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
+      end
     end
 
     context 'when application has transaction types of other kind' do
@@ -100,6 +104,10 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
 
       it 'redirects to the next step' do
         expect(subject).to redirect_to(flow_forward_path)
+      end
+
+      it 'sets no_credit_transaction_types_selected to true' do
+        expect { subject }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(true)
       end
 
       context 'and application has transactions' do

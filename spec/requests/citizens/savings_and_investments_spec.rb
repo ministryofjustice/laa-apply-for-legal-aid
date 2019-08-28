@@ -54,6 +54,15 @@ RSpec.describe 'citizen savings and investments', type: :request do
       expect(response).to redirect_to(citizens_other_assets_path)
     end
 
+    context 'none of these checkbox is selected' do
+      let(:params) { { savings_amount: { none_selected: 'true' } } }
+
+      it 'sets none_selected to true' do
+        subject
+        expect(savings_amount.reload.none_selected).to eq(true)
+      end
+    end
+
     context 'with invalid input' do
       let(:isa) { 'fifty' }
 

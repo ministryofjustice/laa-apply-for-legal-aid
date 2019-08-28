@@ -1,6 +1,3 @@
-<%
-none_selected_id = '#other_assets_declaration_check_box_none_selected'
-%>
 <%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
 
   <%= govuk_form_group show_error_if: (@form.errors.present? && !@form.any_checkbox_checked?) do %>
@@ -9,7 +6,7 @@ none_selected_id = '#other_assets_declaration_check_box_none_selected'
       <h2 class="govuk-heading-m"><%= sub_heading %></h2>
     <% end %>
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-      <div class="deselect-group" data-deselect-ctrl="<%= none_selected_id %>">
+      <div class="deselect-group" data-deselect-ctrl="[name='other_assets_declaration[none_selected]']">
         <%= render partial: '/shared/forms/revealing_checkbox/attribute',
                    collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
                    locals: { model: model, form: form } %>
@@ -24,8 +21,8 @@ none_selected_id = '#other_assets_declaration_check_box_none_selected'
 
     <div class="govuk-checkboxes">
       <div class="govuk-checkboxes__item">
-        <%= form.check_box('check_box_none_selected', { class: 'govuk-checkboxes__input' }, 'true', false) %>
-        <%= form.label('check_box_none_selected', none_selected, class: 'govuk-label govuk-checkboxes__label') %>
+        <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', @form.none_selected %>
+        <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
       </div>
     </div>
   <% end %>

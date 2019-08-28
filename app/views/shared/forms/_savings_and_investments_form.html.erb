@@ -8,7 +8,7 @@
     <% end %>
     <fieldset class="govuk-fieldset">
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="#savings_amount_check_box_none_selected">
+        <div class="deselect-group" data-deselect-ctrl="[name='savings_amount[none_selected]']">
           <%= render partial: 'shared/forms/revealing_checkbox/attribute',
                      collection: attributes,
                      locals: { model: @form, form: form } %>
@@ -19,8 +19,8 @@
 
       <div class="govuk-checkboxes">
         <div class="govuk-checkboxes__item">
-          <%= form.check_box('check_box_none_selected', { class: 'govuk-checkboxes__input' }, 'true', false) %>
-          <%= form.label('check_box_none_selected', none_selected, class: 'govuk-label govuk-checkboxes__label') %>
+          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', @form.none_selected %>
+          <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
         </div>
       </div>
 

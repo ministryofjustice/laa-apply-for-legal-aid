@@ -73,6 +73,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         expect(subject).to redirect_to(flow_forward_path)
       end
 
+      it 'sets no_debit_transaction_types_selected to false' do
+        expect { subject }.to change { legal_aid_application.reload.no_debit_transaction_types_selected }.to(false)
+      end
+
       context 'Form submitted with Save as draft button' do
         let(:transaction_type_ids) { [] }
         let(:submit_button) { { draft_button: 'Save as draft' } }
@@ -106,6 +110,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
       it 'redirects to the next step' do
         expect(subject).to redirect_to(flow_forward_path)
+      end
+
+      it 'sets no_debit_transaction_types_selected to true' do
+        expect { subject }.to change { legal_aid_application.reload.no_debit_transaction_types_selected }.to(true)
       end
 
       context 'and application has transactions' do

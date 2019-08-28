@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_093923) do
+ActiveRecord::Schema.define(version: 2019_08_27_122038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -309,6 +309,8 @@ ActiveRecord::Schema.define(version: 2019_08_23_093923) do
     t.uuid "office_id"
     t.boolean "has_restrictions"
     t.string "restrictions_details"
+    t.boolean "no_credit_transaction_types_selected"
+    t.boolean "no_debit_transaction_types_selected"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
@@ -387,6 +389,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_093923) do
     t.decimal "trust_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "none_selected"
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
 
@@ -478,6 +481,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_093923) do
     t.decimal "life_assurance_endowment_policy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "none_selected"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
   end
 

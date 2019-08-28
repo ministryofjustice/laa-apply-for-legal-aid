@@ -50,7 +50,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           money_owed_value: '90,123.45',
           check_box_trust_value: 'true',
           trust_value: '1,234.56',
-          check_box_none_selected: ''
+          none_selected: ''
         }
       }
     end
@@ -74,12 +74,12 @@ RSpec.describe 'provider other assets requests', type: :request do
           money_owed_value: '',
           check_box_trust_value: '',
           trust_value: '',
-          check_box_none_selected: check_box_none_selected
+          none_selected: none_selected
         }
       }
     end
 
-    let(:check_box_none_selected) { '' }
+    let(:none_selected) { '' }
 
     context 'when the provider is authenticated' do
       before do
@@ -128,7 +128,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has savings and investments' do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
-            let(:check_box_none_selected) { 'true' }
+            let(:none_selected) { 'true' }
 
             before do
               application.create_savings_amount!
@@ -148,7 +148,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has own home' do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
-            let(:check_box_none_selected) { 'true' }
+            let(:none_selected) { 'true' }
 
             before do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
@@ -166,7 +166,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:state) { :checking_passported_answers }
             let(:application) { create :legal_aid_application, :without_own_home, state: state }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
-            let(:check_box_none_selected) { 'true' }
+            let(:none_selected) { 'true' }
 
             before do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
@@ -191,7 +191,7 @@ RSpec.describe 'provider other assets requests', type: :request do
           context 'has nothing' do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
-            let(:check_box_none_selected) { 'true' }
+            let(:none_selected) { 'true' }
 
             before do
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
@@ -206,12 +206,24 @@ RSpec.describe 'provider other assets requests', type: :request do
               end
             end
             context 'and none of these checkbox is not selected' do
-              let(:check_box_none_selected) { '' }
+              let(:none_selected) { '' }
 
               it 'the response includes the error message' do
                 expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.base.provider.none_selected'))
               end
             end
+          end
+        end
+
+        context 'none of these checkbox is selected' do
+          let(:params) do
+            {
+              other_assets_declaration: { none_selected: 'true' }
+            }
+          end
+
+          it 'sets none_selected to true' do
+            expect(oad.reload.none_selected).to eq(true)
           end
         end
 
@@ -303,7 +315,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:params) { empty_params }
-            let(:check_box_none_selected) { 'true' }
+            let(:none_selected) { 'true' }
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be false
@@ -317,7 +329,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
             let(:params) { empty_params }
-            let(:check_box_none_selected) { 'true' }
+            let(:none_selected) { 'true' }
 
             it 'redirects to provider applications page' do
               expect(application.reload.other_assets?).to be false
