@@ -110,7 +110,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def applicant_receives_benefit?
-    benefit_check_result&.positive?
+    benefit_check_result&.positive? || false
   end
 
   def benefit_check_result_needs_updating?
@@ -210,10 +210,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def default_delegated_functions_cost_limitation
     lead_proceeding_type.default_cost_limitation_delegated_functions
-  end
-
-  def passported?
-    benefit_check_result&.positive? || false
   end
 
   private

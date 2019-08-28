@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_131229) do
     t.datetime "updated_at", null: false
     t.boolean "substantive", default: true
     t.index ["legal_aid_application_id", "scope_limitation_id"], name: "scope_limitations_index", unique: true
+    t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
   create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

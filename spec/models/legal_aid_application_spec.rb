@@ -465,33 +465,33 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'passported?' do
+  describe 'applicant_receives_benefit?' do
     context 'benefit_check_result exists?' do
       context 'passported' do
         before { create :benefit_check_result, :positive, legal_aid_application: legal_aid_application }
         it 'returns true' do
-          expect(legal_aid_application.passported?).to be true
+          expect(legal_aid_application.applicant_receives_benefit?).to be true
         end
       end
 
       context 'not passported' do
         before { create :benefit_check_result, legal_aid_application: legal_aid_application }
         it 'returns false' do
-          expect(legal_aid_application.passported?).to be false
+          expect(legal_aid_application.applicant_receives_benefit?).to be false
         end
       end
 
       context 'undetermined' do
         before { create :benefit_check_result, :undetermined, legal_aid_application: legal_aid_application }
         it 'returns false' do
-          expect(legal_aid_application.passported?).to be false
+          expect(legal_aid_application.applicant_receives_benefit?).to be false
         end
       end
     end
 
     context 'benefit_check_result does not exist' do
       it 'returns false' do
-        expect(legal_aid_application.passported?).to be false
+        expect(legal_aid_application.applicant_receives_benefit?).to be false
       end
     end
   end
