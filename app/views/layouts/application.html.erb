@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template">
   <head>
+    <%= render 'layouts/google_tag_manager' %>
     <meta charset="utf-8">
-    <%= render 'layouts/google_analytics' %>
     <title><%= html_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -35,6 +35,11 @@
   </head>
 
   <body class="govuk-template__body ">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= ENV['GOOGLE_TAG_MANAGER_TRACKING_ID'] %>"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <script>
       document.body.className = (
         (document.body.className)
