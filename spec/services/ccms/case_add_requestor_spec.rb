@@ -67,6 +67,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                ccms_reference_number: '7263259',
                first_name: 'Dave',
                last_name: 'Fabby',
+               date_of_birth: Date.today,
                preferred_address: 'CLIENT',
                bank_accounts: [bank_account_1]
       end
@@ -232,12 +233,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                most_recent_ccms_submission: ccms_submission,
                used_delegated_functions?: true,
                used_delegated_functions_on: Date.today,
+               default_substantive_cost_limitation: '2.00',
+               applicant_receives_benefit?: false,
                ccms_case_reference: 'P_88000001',
                respondent: respondent,
                own_vehicle?: true,
                property_value: 10_000.0,
                other_assets_declaration: other_assets_declaration,
                savings_amount: savings_amount,
+               calculation_date: Date.today,
                open_banking_consent: true,
                open_banking_consent_choice_at: Date.new(2019, 6, 1)
       end
