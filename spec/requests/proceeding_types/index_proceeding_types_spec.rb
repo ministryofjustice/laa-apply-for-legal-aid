@@ -22,15 +22,17 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
       let!(:proceeding_types) do
         [
           create(:proceeding_type,
+                 :with_real_data,
                  code: 'PH0001',
                  ccms_category_law: 'Family',
                  ccms_matter: 'Public Law - Family',
                  ccms_matter_code: 'KPBLB',
                  meaning: 'Application for a care order',
                  description: 'to be represented on an application for a care order.',
-                 default_service_level_id: 3,
+                 # default_service_level_id: 3,
                  additional_search_terms: ''),
           create(:proceeding_type,
+                 :with_real_data,
                  code: 'PH0002',
                  ccms_code: 'PBM24',
                  ccms_category_law: 'Other',
@@ -38,7 +40,7 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
                  ccms_matter_code: 'APBLB',
                  meaning: 'Not an application for a care order',
                  description: 'Not to be represented on an application for a care order.',
-                 default_service_level_id: 3,
+                 # default_service_level_id: 3,
                  additional_search_terms: 'injunction')
         ]
       end

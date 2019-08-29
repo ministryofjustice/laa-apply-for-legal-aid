@@ -10,7 +10,7 @@ FactoryBot.define do
     ccms_category_law_code { 'Category law code' }
     ccms_matter { 'Matter' }
     ccms_matter_code { 'Matter code' }
-    default_service_level_id { 3 }
+    default_service_level_id { create(:service_level).id }
     default_cost_limitation_delegated_functions { 1 }
     default_cost_limitation_substantive { 2 }
     involvement_type_applicant { false }
@@ -24,7 +24,7 @@ FactoryBot.define do
       ccms_category_law_code { 'MAT' }
       ccms_matter { 'Domestic Abuse' }
       ccms_matter_code { 'MINJN' }
-      default_service_level_id { 3 }
+      default_service_level_id { create(:service_level, :with_real_data).id }
       default_cost_limitation_delegated_functions { 1350 }
       default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
