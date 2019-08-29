@@ -84,6 +84,10 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
+    def application_firmname(_options)
+      @legal_aid_application.provider.firm.name
+    end
+
     def applicant_owed_money?(_options)
       not_zero? other_assets.money_owed_value
     end
@@ -145,6 +149,10 @@ module CCMS
 
     def lead_proceeding_type_default_level_of_service_name(_options)
       @legal_aid_application.lead_proceeding_type.default_level_of_service.name
+    end
+
+    def applicant_postcode(_options)
+      applicant.address.postcode
     end
 
     private
