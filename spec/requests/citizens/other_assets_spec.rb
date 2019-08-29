@@ -112,7 +112,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
           let(:none_selected) { '' }
           before { patch citizens_other_assets_path, params: empty_params }
           it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.base.citizen.none_selected'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.base.citizens.none_selected'))
           end
         end
       end

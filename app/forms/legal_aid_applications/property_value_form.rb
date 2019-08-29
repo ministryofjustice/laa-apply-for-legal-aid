@@ -4,14 +4,14 @@ module LegalAidApplications
 
     form_for LegalAidApplication
 
-    attr_accessor :property_value, :mode
+    attr_accessor :property_value, :journey
 
     validate :value_presence
     validates :property_value, allow_blank: true, currency: { greater_than_or_equal_to: 0.0 }
 
     def initialize(*args)
       super
-      @mode = :citizen unless @mode == :provider
+      @journey = :citizens unless @journey == :providers
     end
 
     def attributes_to_clean
@@ -27,11 +27,11 @@ module LegalAidApplications
     end
 
     def error_message_for(error_type)
-      I18n.t("activemodel.errors.models.legal_aid_application.attributes.property_value.#{mode}.#{error_type}")
+      I18n.t("activemodel.errors.models.legal_aid_application.attributes.property_value.#{journey}.#{error_type}")
     end
 
     def exclude_from_model
-      [:mode]
+      [:journey]
     end
   end
 end

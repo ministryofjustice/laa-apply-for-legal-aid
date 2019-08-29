@@ -13,7 +13,7 @@ module Providers
     private
 
     def edit_params
-      merge_with_model(legal_aid_application, mode: :provider) do
+      merge_with_model(legal_aid_application, journey: :providers) do
         params.require(:legal_aid_application).permit(:property_value)
       end
     end

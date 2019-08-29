@@ -38,7 +38,7 @@ module Citizens
 
     attr_accessor(*ALL_ATTRIBUTES)
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :mode
+    attr_accessor :journey
 
     before_validation :empty_unchecked_values
 
@@ -56,7 +56,7 @@ module Citizens
     end
 
     def exclude_from_model
-      CHECK_BOXES_ATTRIBUTES + [:mode] - [:none_selected]
+      CHECK_BOXES_ATTRIBUTES + [:journey] - [:none_selected]
     end
 
     def attributes_to_clean
@@ -103,7 +103,7 @@ module Citizens
     end
 
     def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.#{mode}.none_selected")
+      I18n.t("activemodel.errors.models.other_assets_declaration.attributes.base.#{journey}.none_selected")
     end
 
     def present_and_not_zero?(attr)
