@@ -581,7 +581,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       context 'GB_INPUT_B_5WP1_18A - does the applicant receive a passported benefit?' do
         context 'no passported benefit' do
-          before { expect(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false) }
+          before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false) }
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP1_18A')
             expect(block).to be_present
@@ -591,7 +591,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
 
         context 'receiving a passported benefit' do
-          before { expect(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true) }
+          before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true) }
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP1_18A')
             expect(block).to be_present

@@ -842,7 +842,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_5WP1_18A:
-    :value: '#application_applicant_receives_benefit??'
+    :value: '#application_applicant_receives_benefit?'
     :br100_meaning: 'Client: The client is receiving a passported benefit?'
     :response_type: boolean
     :user_defined: true
@@ -1607,7 +1607,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_D_18WP2_1A:
-    :value: '#application_submission_date'
+    :value: '#application_calculation_date'
     :br100_meaning: 'Client: The date client was aware of litigation'
     :response_type: date
     :user_defined: true
