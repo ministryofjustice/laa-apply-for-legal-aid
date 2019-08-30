@@ -36,8 +36,8 @@ RSpec.describe 'citizen other assets requests', type: :request do
           land_value: '34,567.89',
           check_box_valuable_items_value: 'true',
           valuable_items_value: '456,789.01',
-          check_box_money_assets_value: 'true',
-          money_assets_value: '89,012.34',
+          check_box_inherited_assets_value: 'true',
+          inherited_assets_value: '89,012.34',
           check_box_money_owed_value: 'true',
           money_owed_value: '90,123.45',
           check_box_trust_value: 'true',
@@ -61,8 +61,8 @@ RSpec.describe 'citizen other assets requests', type: :request do
           land_value: '',
           check_box_valuable_items_value: '',
           valuable_items_value: '',
-          check_box_money_assets_value: '',
-          money_assets_value: '',
+          check_box_inherited_assets_value: '',
+          inherited_assets_value: '',
           check_box_money_owed_value: '',
           money_owed_value: '',
           check_box_trust_value: '',
@@ -83,7 +83,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
         expect(oad.timeshare_property_value).to eq 234_567.89
         expect(oad.land_value).to eq 34_567.89
         expect(oad.valuable_items_value).to eq 456_789.01
-        expect(oad.money_assets_value).to eq 89_012.34
+        expect(oad.inherited_assets_value).to eq 89_012.34
         expect(oad.money_owed_value).to eq 90_123.45
         expect(oad.trust_value).to eq 1_234.56
       end

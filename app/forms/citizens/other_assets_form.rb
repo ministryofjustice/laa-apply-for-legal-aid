@@ -9,7 +9,7 @@ module Citizens
     SINGLE_VALUE_ATTRIBUTES = %i[
       timeshare_property_value
       land_value
-      money_assets_value
+      inherited_assets_value
       money_owed_value
       trust_value
     ].freeze

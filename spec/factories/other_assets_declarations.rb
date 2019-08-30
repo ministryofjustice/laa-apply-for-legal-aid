@@ -15,7 +15,7 @@ FactoryBot.define do
       timeshare_property_value { rand(1...1_000_000.0).round(2) }
       land_value { rand(1...1_000_000.0).round(2) }
       valuable_items_value { rand(1...1_000_000.0).round(2) }
-      money_assets_value { rand(1...1_000_000.0).round(2) }
+      inherited_assets_value { rand(1...1_000_000.0).round(2) }
       money_owed_value { rand(1...1_000_000.0).round(2) }
       trust_value { rand(1...1_000_000.0).round(2) }
     end
@@ -27,7 +27,7 @@ FactoryBot.define do
       timeshare_property_value { nil }
       land_value { nil }
       valuable_items_value { nil }
-      money_assets_value { nil }
+      inherited_assets_value { nil }
       money_owed_value { nil }
       trust_value { nil }
     end
@@ -39,7 +39,7 @@ FactoryBot.define do
       timeshare_property_value { 0.0 }
       land_value { 0.0 }
       valuable_items_value { 0.0 }
-      money_assets_value { 0.0 }
+      inherited_assets_value { 0.0 }
       money_owed_value { 0.0 }
       trust_value { 0.0 }
     end
@@ -51,7 +51,7 @@ FactoryBot.define do
       timeshare_property_value { rand(1...1_000_000.0).round(2) }
       land_value { nil }
       valuable_items_value { 0.0 }
-      money_assets_value { 0.0 }
+      inherited_assets_value { 0.0 }
       money_owed_value { nil }
       trust_value { 0.0 }
     end

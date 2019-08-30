@@ -235,7 +235,7 @@ en:
               greater_than_or_equal_to: Estimated land value must be 0 or more
               not_a_number: Estimated land value must be an amount of money, like 60,000
               too_many_decimals: Estimated land value must not include more than 2 decimal numbers
-            money_assets_value:
+            inherited_assets_value:
               blank: Enter the estimated value of estate
               greater_than_or_equal_to: Estimated money assets value must be 0 or more
               not_a_number: Estimated estate value must be an amount of money, like 60,000
