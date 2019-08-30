@@ -64,6 +64,7 @@ RSpec.configure do |config|
   config.include TrueLayerHelpers
   config.include FlowHelpers, type: :request
   config.include CCMS
+  config.include XMLBlockMatchers
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
     require Rails.root.join('db/seeds/proceeding_case_id.rb')

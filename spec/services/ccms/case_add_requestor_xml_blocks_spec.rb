@@ -51,18 +51,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'in merits assessment block' do
           it 'has a p number' do
             block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_ID')
-            expect(block).to be_present
-            expect(block).to have_response_type('text')
-            expect(block).to have_response_value(application_proceeding_type.proceeding_case_p_num)
+            expect(block).to have_text_response(application_proceeding_type.proceeding_case_p_num)
           end
         end
 
         context 'in means assessment block' do
           it 'has a p number' do
             block = XmlExtractor.call(xml, :proceeding, 'PROCEEDING_ID')
-            expect(block).to be_present
-            expect(block).to have_response_type('text')
-            expect(block).to have_response_value(application_proceeding_type.proceeding_case_p_num)
+            expect(block).to have_text_response(application_proceeding_type.proceeding_case_p_num)
           end
         end
       end
@@ -87,16 +83,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'generates the delegated functions block in the means assessment section' do
             block = XmlExtractor.call(xml, :global_means, 'DELEGATED_FUNCTIONS_DATE')
-            expect(block).to be_present
-            expect(block).to have_response_type('date')
-            expect(block).to have_response_value(Date.today.strftime('%d-%m-%Y'))
+            expect(block).to have_date_response(Date.today.strftime('%d-%m-%Y'))
           end
 
           it 'generates the delegated functions block in the merits assessment section' do
             block = XmlExtractor.call(xml, :global_merits, 'DELEGATED_FUNCTIONS_DATE')
-            expect(block).to be_present
-            expect(block).to have_response_type('date')
-            expect(block).to have_response_value(Date.today.strftime('%d-%m-%Y'))
+            expect(block).to have_date_response(Date.today.strftime('%d-%m-%Y'))
           end
         end
 
@@ -118,9 +110,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.update(police_notified: true) }
           it 'is true' do
             block = XmlExtractor.call(xml, :global_merits, 'POLICE_NOTIFIED')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
 
@@ -128,9 +118,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.update(police_notified: false) }
           it 'is false' do
             block = XmlExtractor.call(xml, :global_merits, 'POLICE_NOTIFIED')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
       end
@@ -140,16 +128,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.update(warning_letter_sent: false) }
           it 'generates WARNING_LETTER_SENT block with false value' do
             block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
 
           it 'generates INJ_REASON_NO_WARNING_LETTER block with reason' do
             block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value legal_aid_application.respondent.warning_letter_sent_details
+            expect(block).to have_text_response legal_aid_application.respondent.warning_letter_sent_details
           end
         end
       end
@@ -159,9 +143,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.understands_terms_of_court_order = true }
           it 'is true' do
             block = XmlExtractor.call(xml, :global_merits, 'INJ_RESPONDENT_CAPACITY')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
 
@@ -169,9 +151,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.understands_terms_of_court_order = false }
           it 'is false' do
             block = XmlExtractor.call(xml, :global_merits, 'INJ_RESPONDENT_CAPACITY')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
       end
@@ -185,9 +165,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
       end
@@ -255,9 +233,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
       end
@@ -337,9 +313,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.bail_conditions_set = true }
           it 'is true' do
             block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
 
@@ -347,9 +321,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { respondent.bail_conditions_set = false }
           it 'is false' do
             block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
       end
@@ -361,9 +333,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
               allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
               block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
-              expect(block).to be_present
-              expect(block).to have_response_type 'text'
-              expect(block).to have_response_value 'SUBDP'
+              expect(block).to have_text_response 'SUBDP'
             end
 
             context 'in global_means section;' do
@@ -371,9 +341,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                 allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
                 allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
                 block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
-                expect(block).to be_present
-                expect(block).to have_response_type 'text'
-                expect(block).to have_response_value 'SUBDP'
+                expect(block).to have_text_response 'SUBDP'
               end
             end
           end
@@ -383,17 +351,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           context 'in global_merits section' do
             it 'returns SUB' do
               block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
-              expect(block).to be_present
-              expect(block).to have_response_type 'text'
-              expect(block).to have_response_value 'SUB'
+              expect(block).to have_text_response 'SUB'
             end
 
             context 'in global_means section;' do
               it 'returns SUB' do
                 block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
-                expect(block).to be_present
-                expect(block).to have_response_type 'text'
-                expect(block).to have_response_value 'SUB'
+                expect(block).to have_text_response 'SUB'
               end
             end
           end
@@ -403,35 +367,27 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'GB_INPUT_B_15WP2_8A client is owed money' do
         it 'returns true when applicant is owed money' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_15WP2_8A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when applicant is NOT owed money' do
           allow(legal_aid_application.other_assets_declaration).to receive(:money_owed_value).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_15WP2_8A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_14WP2_8A vehicle is owned' do
         it 'returns true when applicant owns a vehicle' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP2_8A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         context 'GB_INPUT_B_14WP2_8A no vehicle owned' do
           before { legal_aid_application.update(own_vehicle: false) }
           it 'returns false when applicant does NOT own a vehicle' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP2_8A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
       end
@@ -439,68 +395,52 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'GB_INPUT_B_16WP2_7A client interest in a trust' do
         it 'returns true when client has interest in a trust' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client has NO interest in a trust' do
           allow(legal_aid_application.other_assets_declaration).to receive(:trust_value).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_16WP2_7A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_12WP2_2A client valuable possessions' do
         it 'returns true when client has valuable possessions' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client has NO valuable possessions' do
           allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_6WP2_1A client has timeshare' do
         it 'returns true when client has timeshare' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client does NOT have timeshare' do
           allow(legal_aid_application.other_assets_declaration).to receive(:timeshare_property_value).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_6WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_5WP2_1A client owns land' do
         it 'returns true when client owns land' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client does NOT own land' do
           allow(legal_aid_application.other_assets_declaration).to receive(:land_value).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
@@ -604,18 +544,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'GB_INPUT_B_7WP2_1A client bank accounts' do
         it 'returns true when client has bank accounts' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         context 'GB_INPUT_B_7WP2_1A no bank accounts' do
           it 'returns false when applicant does NOT have bank accounts' do
             allow(legal_aid_application.applicant).to receive(:bank_accounts).and_return([])
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
       end
@@ -632,68 +568,52 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'GB_INPUT_B_10WP2_1A client other savings' do
         it 'returns true when client has other savings' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client does NOT have other savings' do
           allow(legal_aid_application.savings_amount).to receive(:isa).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_17WP2_7A client other capital' do
         it 'returns true when client has other capital' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client does NOT have other capital' do
           allow(legal_aid_application.savings_amount).to receive(:peps_unit_trusts_capital_bonds_gov_stocks).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_13WP2_7A client other policies' do
         it 'returns true when client has other policies' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_13WP2_7A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client does NOT have other policies' do
           allow(legal_aid_application.savings_amount).to receive(:life_assurance_endowment_policy).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_13WP2_7A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
       context 'GB_INPUT_B_11WP2_3A client other shares' do
         it 'returns true when client has other shares' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_11WP2_3A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
 
         it 'returns false when client does NOT have other shares' do
           allow(legal_aid_application.savings_amount).to receive(:plc_shares).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_11WP2_3A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
@@ -731,9 +651,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to be_present
-              expect(block).to have_response_type 'text'
-              expect(block).to have_response_value 'Yes - Excluding JR Proceedings'
+              expect(block).to have_text_response 'Yes - Excluding JR Proceedings'
             end
           end
         end
@@ -742,9 +660,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           false_attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
 
@@ -756,25 +672,19 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to be_present
-              expect(block).to have_response_type 'boolean'
-              expect(block).to have_response_value 'false'
+              expect(block).to have_boolean_response false
             end
           end
         end
 
         it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
           block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'FAMILY'
+          expect(block).to have_text_response 'FAMILY'
         end
 
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
-          expect(block).to be_present
-          expect(block).to have_response_type 'number'
-          expect(block).to have_response_value '1'
+          expect(block).to have_number_response 1
         end
 
         context 'LEVEL_OF_SERVICE' do
@@ -782,9 +692,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             service_level_number = legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number.to_s
             %i[proceeding_merits proceeding].each do |entity|
               block = XmlExtractor.call(xml, entity, 'LEVEL_OF_SERVICE')
-              expect(block).to be_present
-              expect(block).to have_response_type 'text'
-              expect(block).to have_response_value service_level_number
+              expect(block).to have_text_response service_level_number
             end
           end
         end
@@ -792,9 +700,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'PROCEEDING_LEVEL_OF_SERVICE' do
           it 'should be the name of the lead proceeding default level of service' do
             block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LEVEL_OF_SERVICE')
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value legal_aid_application.lead_proceeding_type.default_level_of_service.name
+            expect(block).to have_text_response legal_aid_application.lead_proceeding_type.default_level_of_service.name
           end
         end
 
@@ -806,9 +712,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'A'
+            expect(block).to have_text_response 'A'
           end
         end
 
@@ -820,9 +724,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'APPLICATION'
+            expect(block).to have_text_response 'APPLICATION'
           end
         end
 
@@ -834,9 +736,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'EXTERNAL'
+            expect(block).to have_text_response 'EXTERNAL'
           end
         end
 
@@ -849,25 +749,19 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to be_present
-              expect(block).to have_response_type 'boolean'
-              expect(block).to have_response_value 'false'
+              expect(block).to have_boolean_response false
             end
           end
         end
 
         it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
           block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'FAMILY'
+          expect(block).to have_text_response 'FAMILY'
         end
 
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
-          expect(block).to be_present
-          expect(block).to have_response_type 'number'
-          expect(block).to have_response_value '1'
+          expect(block).to have_number_response 1
         end
 
         it 'CLIENT_INVOLVEMENT_TYPE should be hard coded to A' do
@@ -878,9 +772,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'A'
+            expect(block).to have_text_response 'A'
           end
         end
 
@@ -892,9 +784,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'APPLICATION'
+            expect(block).to have_text_response 'APPLICATION'
           end
         end
 
@@ -906,31 +796,23 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'EXTERNAL'
+            expect(block).to have_text_response 'EXTERNAL'
           end
         end
 
         it 'COUNTRY should be hard coded to GBR' do
           block = XmlExtractor.call(xml, :global_merits, 'COUNTRY')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'GBR'
+          expect(block).to have_text_response 'GBR'
         end
 
         it 'RELATIONSHIP_TO_CLIENT should be hard coded to UNKNOWN' do
           block = XmlExtractor.call(xml, :global_merits, 'RELATIONSHIP_TO_CLIENT')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'UNKNOWN'
+          expect(block).to have_text_response 'UNKNOWN'
         end
 
         it 'REQUESTED_SCOPE should be hard coded to MULTIPLE' do
           block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'MULTIPLE'
+          expect(block).to have_text_response 'MULTIPLE'
         end
 
         it 'NEW_OR_EXISTING should be hard coded to NEW' do
@@ -941,38 +823,28 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'NEW'
+            expect(block).to have_text_response 'NEW'
           end
         end
 
         it 'RELATIONSHIP_TO_CASE should be hard coded to OPP' do
           block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_TO_CASE')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'OPP'
+          expect(block).to have_text_response 'OPP'
         end
 
         it 'OTHER_PARTY_TYPE should be hard coded to PERSON' do
           block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_TYPE')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'PERSON'
+          expect(block).to have_text_response 'PERSON'
         end
 
         it 'POA_OR_BILL_FLAG should be hard coded to N/A' do
           block = XmlExtractor.call(xml, :global_means, 'POA_OR_BILL_FLAG')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'N/A'
+          expect(block).to have_text_response 'N/A'
         end
 
         it 'LAR_INPUT_T_1WP2_8A should be hard coded correctly' do
           block = XmlExtractor.call(xml, :global_means, 'LAR_INPUT_T_1WP2_8A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'Apply Service Application. See uploaded means report in CCMS'
+          expect(block).to have_text_response 'Apply Service Application. See uploaded means report in CCMS'
         end
 
         it 'should be hard coded with the correct notification' do
@@ -986,31 +858,23 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'Apply Service application. See provider statement of case and report uploaded as evidence'
+            expect(block).to have_text_response 'Apply Service application. See provider statement of case and report uploaded as evidence'
           end
         end
 
         it 'FAMILY_STMT_DETAIL should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STMT_DETAIL')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence'
+          expect(block).to have_text_response 'This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence'
         end
 
         it 'FAMILY_STATEMENT_INSTANCE should be hard coded - ' do
           block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STATEMENT_INSTANCE')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value '-'
+          expect(block).to have_text_response '-'
         end
 
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
-          expect(block).to be_present
-          expect(block).to have_response_type 'text'
-          expect(block).to have_response_value 'Apply Service application - see report and uploaded statement in CCMS upload section'
+          expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
       end
     end
