@@ -135,10 +135,8 @@ en:
           hint: For example, money from a job, apprenticeship, or student loan or grant.
           enter_monthly_income: Enter the amount they get each month
       identify_types_of_outgoings_form:
-        sub_heading: Select all that apply
         none_selected: None of these
       savings_and_investments_form:
-        sub_heading: Select all that apply
         none_selected: None of these
       outstanding_mortgage_form:
         citizens:
@@ -259,8 +257,9 @@ en:
             borderline: You cannot predict the outcome.
             not_known: Work still needs to be done to determine the likelihood of success.
       types_of_income_form:
-        select_all_that_apply: Select all that apply
         financial_help_examples: For example, money from a family member for rent or bills.
+        none_selected: None of these
+      identify_types_of_outgoings_form:
         none_selected: None of these
       vehicles:
         estimated_value:
