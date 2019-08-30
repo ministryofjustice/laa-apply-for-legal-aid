@@ -243,9 +243,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it "inserts applicant's date of birth as a string" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'DATE_OF_BIRTH')
-              expect(block).to be_present
-              expect(block).to have_response_type 'date'
-              expect(block).to have_response_value(legal_aid_application.applicant.date_of_birth.strftime('%d-%m-%Y'))
+              expect(block).to have_date_response legal_aid_application.applicant.date_of_birth.strftime('%d-%m-%Y')
             end
           end
         end
@@ -253,9 +251,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it "inserts applicant's first name as a string" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'FIRST_NAME')
-              expect(block).to be_present
-              expect(block).to have_response_type 'text'
-              expect(block).to have_response_value legal_aid_application.applicant.first_name
+              expect(block).to have_text_response legal_aid_application.applicant.first_name
             end
           end
         end
@@ -266,9 +262,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it "inserts today's date as a string" do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'DATE_ASSESSMENT_STARTED')
-            expect(block).to be_present
-            expect(block).to have_response_type 'date'
-            expect(block).to have_response_value Date.today.strftime('%d-%m-%Y')
+            expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
           end
         end
       end
@@ -279,9 +273,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'inserts default cost limitation' do
             %i[global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION_MERITS')
-              expect(block).to be_present
-              expect(block).to have_response_type 'currency'
-              expect(block).to have_response_value legal_aid_application.default_substantive_cost_limitation
+              expect(block).to have_currency_response legal_aid_application.default_substantive_cost_limitation
             end
           end
         end
@@ -290,9 +282,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'inserts default cost limitation' do
             %i[global_means].each do |entity|
               block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
-              expect(block).to be_present
-              expect(block).to have_response_type 'currency'
-              expect(block).to have_response_value legal_aid_application.default_substantive_cost_limitation
+              expect(block).to have_currency_response legal_aid_application.default_substantive_cost_limitation
             end
           end
         end
@@ -621,16 +611,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'returns true when application is passported' do
           allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true)
           block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'true'
+          expect(block).to have_boolean_response true
         end
+
         it 'returns false when application is passported' do
           allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false)
           block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'boolean'
-          expect(block).to have_response_value 'false'
+          expect(block).to have_boolean_response false
         end
       end
 
@@ -638,9 +625,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'attributes hard coded to specific values' do
           it 'hard codes country to GBR' do
             block = XmlExtractor.call(xml, :global_means, 'COUNTRY')
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value 'GBR'
+            expect(block).to have_text_response 'GBR'
           end
 
           it 'DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings' do

@@ -55,6 +55,18 @@ module XMLBlockMatchers
     end
   end
 
+  RSpec::Matchers.define :have_currency_response do |expected|
+    result = nil
+    match do |actual|
+      result = validate_expectation(actual, expected.to_s, 'currency')
+      result == :ok
+    end
+
+    failure_message do
+      "#{result}\n\n#{actual}"
+    end
+  end
+
   def validate_expectation(actual, expected_value, expected_response_type)
     return 'Block not found' if actual.blank?
 
