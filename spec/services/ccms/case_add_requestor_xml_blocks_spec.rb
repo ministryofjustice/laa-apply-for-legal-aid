@@ -701,30 +701,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
-        it 'NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION' do
-          attributes = [
-            [:global_means, 'NEW_APPL_OR_AMENDMENT'],
-            [:global_merits, 'NEW_APPL_OR_AMENDMENT']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'APPLICATION'
-          end
-        end
-
-        it 'USER_TYPE should be hard coded to EXTERNAL' do
-          attributes = [
-            [:global_means, 'USER_TYPE'],
-            [:global_merits, 'USER_TYPE']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'EXTERNAL'
-          end
-        end
-
         context 'attributes hard coded to false' do
           it 'should be type of text hard coded to false' do
             attributes = [
@@ -747,18 +723,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
-        end
-
-        it 'CLIENT_INVOLVEMENT_TYPE should be hard coded to A' do
-          attributes = [
-            [:proceeding_merits, 'CLIENT_INVOLVEMENT_TYPE'],
-            [:proceeding, 'CLIENT_INVOLVEMENT_TYPE']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'A'
-          end
         end
 
         it 'NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION' do
