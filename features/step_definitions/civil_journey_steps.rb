@@ -141,7 +141,8 @@ Given('I complete the journey as far as check your answers') do
   @legal_aid_application = create(
     :legal_aid_application,
     applicant: applicant,
-    proceeding_types: [proceeding_type]
+    proceeding_types: [proceeding_type],
+    used_delegated_functions_on: 1.day.ago
   )
   @legal_aid_application.add_default_substantive_scope_limitation!
   @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?
@@ -172,7 +173,8 @@ Given('I complete the passported journey as far as check your answers') do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_substantive_scope_limitation,
-    applicant: applicant
+    applicant: applicant,
+    used_delegated_functions_on: 1.day.ago
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
