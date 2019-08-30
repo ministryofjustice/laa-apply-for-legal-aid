@@ -68,9 +68,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'inserts the case reference from the submission record into both global means and merits sections' do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'APPLICATION_CASE_REF')
-            expect(block).to be_present
-            expect(block).to have_response_type('text')
-            expect(block).to have_response_value(case_reference)
+            expect(block).to have_text_response case_reference
           end
         end
       end
@@ -176,8 +174,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
             expect(block).to be_present
-            expect(block).to have_response_type('boolean')
-            expect(block).to have_response_value('false')
+            expect(block).to have_boolean_response false
           end
         end
 
@@ -185,8 +182,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
             expect(block).to be_present
-            expect(block).to have_response_type('boolean')
-            expect(block).to have_response_value('true')
+            expect(block).to have_boolean_response true
           end
         end
       end
@@ -196,18 +192,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { expect(legal_aid_application).to receive(:own_home).and_return(false) }
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type('boolean')
-            expect(block).to have_response_value('false')
+            expect(block).to have_boolean_response false
           end
         end
         context 'has an interest' do
           before { expect(legal_aid_application).to receive(:own_home).and_return(true) }
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type('boolean')
-            expect(block).to have_response_value('true')
+            expect(block).to have_boolean_response true
           end
         end
       end
@@ -448,9 +440,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'no investments of any type' do
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
 
@@ -458,9 +448,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
 
@@ -468,9 +456,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           let(:ns_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
 
@@ -481,9 +467,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
       end
@@ -492,9 +476,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'applicant owns addtional property' do
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
 
@@ -502,9 +484,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
           it 'returns false when client does NOT own additiaonl property ' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+
           end
         end
       end
@@ -514,9 +494,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false) }
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP1_18A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'false'
+            expect(block).to have_boolean_response false
           end
         end
 
@@ -524,9 +502,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true) }
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_5WP1_18A')
-            expect(block).to be_present
-            expect(block).to have_response_type 'boolean'
-            expect(block).to have_response_value 'true'
+            expect(block).to have_boolean_response true
           end
         end
       end
@@ -549,9 +525,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'GB_INPUT_D_18WP2_1A - application submission date' do
         it 'inserts the submission date into the attribute block' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_D_18WP2_1A')
-          expect(block).to be_present
-          expect(block).to have_response_type 'date'
-          expect(block).to have_response_value Date.today.strftime('%d-%m-%Y')
+          expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
         end
       end
 
