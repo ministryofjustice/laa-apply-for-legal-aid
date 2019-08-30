@@ -244,7 +244,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
-            expect(block).to be_present
             expect(block).to have_boolean_response false
           end
         end
@@ -252,7 +251,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'is a beneficiary' do
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
-            expect(block).to be_present
             expect(block).to have_boolean_response true
           end
         end

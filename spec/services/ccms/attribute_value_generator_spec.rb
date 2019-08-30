@@ -2,8 +2,8 @@ require 'rails_helper'
 
 module CCMS
   RSpec.describe AttributeValueGenerator do
-    let(:legal_aid_application) { double LegalAidApplication }
-    let(:value_generator) { AttributeValueGenerator.new(legal_aid_application) }
+    let(:submission) { create :submission }
+    let(:value_generator) { AttributeValueGenerator.new(submission) }
 
     describe '#method_missing' do
       context 'standardly_named_method' do
