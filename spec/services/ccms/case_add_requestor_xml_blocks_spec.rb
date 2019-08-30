@@ -484,7 +484,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
           it 'returns false when client does NOT own additiaonl property ' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_4WP2_1A')
-
+            expect(block).to have_boolean_response false
           end
         end
       end
