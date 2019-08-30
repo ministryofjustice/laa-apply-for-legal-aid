@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe Submission do
     let(:state) { :initialised }
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount }
     let(:submission) { create :submission, legal_aid_application: legal_aid_application, aasm_state: state }
 
     context 'Validations' do
@@ -66,9 +66,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'applicant_ref_obtained state' do
           let(:state) { :applicant_ref_obtained }
-          let(:service) { AddCaseService }
+          let(:service) { ObtainDocumentIdService }
           it 'calls the add_case service' do
-            expect(service_instance).to receive(:call).with({})
+            expect(service_instance).to receive(:call).with(no_args)
           end
         end
 
@@ -82,7 +82,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'case_created state' do
           let(:state) { :case_created }
-          let(:service) { ObtainDocumentIdService }
+          let(:service) { UploadDocumentsService }
           it 'calls the obtain_document_id service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -90,9 +90,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'document_ids_obtained state' do
           let(:state) { :document_ids_obtained }
-          let(:service) { UploadDocumentsService }
+          let(:service) { AddCaseService }
           it 'calls the upload_documents service' do
-            expect(service_instance).to receive(:call).with(no_args)
+            expect(service_instance).to receive(:call).with({})
           end
         end
       end

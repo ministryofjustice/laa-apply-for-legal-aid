@@ -41,7 +41,7 @@ module CCMS
     end
 
     let(:provider) do
-      double 'Provider',
+      double Provider,
              username: 'user1',
              firm_id: 22_381,
              selected_office_id: 81_693,
@@ -175,7 +175,7 @@ module CCMS
       print 'Submitting case... '
       @submission.process!
       expect(@submission.aasm_state).to eq 'case_submitted'
-      expect(history.from_state).to eq 'applicant_ref_obtained'
+      expect(history.from_state).to eq 'document_ids_obtained'
       expect(history.to_state).to eq 'case_submitted'
       expect(history.success).to be true
       expect(history.details).to be_nil
@@ -209,7 +209,7 @@ module CCMS
       expect(@submission.documents).to_not be_empty
       expect(@submission.documents.values[0]).to eq :id_obtained
       expect(@submission.aasm_state).to eq 'document_ids_obtained'
-      expect(history.from_state).to eq 'case_created'
+      expect(history.from_state).to eq 'applicant_ref_obtained'
       expect(history.to_state).to eq 'document_ids_obtained'
       expect(history.success).to be true
       expect(history.details).to be_nil
@@ -221,7 +221,7 @@ module CCMS
       @submission.process!
       expect(@submission.documents.values[0]).to eq :uploaded
       expect(@submission.aasm_state).to eq 'completed'
-      expect(history.from_state).to eq 'document_ids_obtained'
+      expect(history.from_state).to eq 'case_created'
       expect(history.to_state).to eq 'completed'
       expect(history.success).to be true
       expect(history.details).to be_nil
@@ -233,9 +233,9 @@ module CCMS
       request_case_id
       create_an_applicant
       poll_applicant_creation
+      request_document_ids
       create_case
       poll_case_creation_result
-      request_document_ids
       upload_documents
     end
   end

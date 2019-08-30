@@ -30,12 +30,25 @@ RSpec.describe CCMS::AddCaseService do
       expect(submission.case_add_transaction_id).to eq transaction_request_id_in_example_response
     end
 
-    it 'writes a history record' do
-      expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-      expect(history.from_state).to eq 'applicant_ref_obtained'
-      expect(history.to_state).to eq 'case_submitted'
-      expect(history.success).to be true
-      expect(history.details).to be_nil
+    context 'there are documents to upload' do
+      let(:submission) { create :submission, :document_ids_obtained, legal_aid_application: legal_aid_application }
+      it 'writes a history record' do
+        expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+        expect(history.from_state).to eq 'document_ids_obtained'
+        expect(history.to_state).to eq 'case_submitted'
+        expect(history.success).to be true
+        expect(history.details).to be_nil
+      end
+    end
+
+    context 'there are no documents to upload' do
+      it 'writes a history record' do
+        expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+        expect(history.from_state).to eq 'applicant_ref_obtained'
+        expect(history.to_state).to eq 'case_submitted'
+        expect(history.success).to be true
+        expect(history.details).to be_nil
+      end
     end
   end
 

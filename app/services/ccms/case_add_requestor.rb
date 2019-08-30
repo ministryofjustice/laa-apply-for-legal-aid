@@ -62,7 +62,7 @@ module CCMS
       xml.__send__('ns2:CaseDetails') do
         xml.__send__('ns2:ApplicationDetails') { generate_application_details(xml) }
         xml.__send__('ns2:RecordHistory') { generate_record_history(xml) }
-        xml.__send__('ns2:CaseDocs')
+        xml.__send__('ns2:CaseDocs') { generate_case_docs(xml) }
       end
     end
 
@@ -78,6 +78,17 @@ module CCMS
       xml.__send__('ns2:DevolvedPowersDate', '2019-04-01')  # TODO: CCMS placeholder
       xml.__send__('ns2:ApplicationAmendmentType', 'SUBDP') # TODO: CCMS placeholder
       xml.__send__('ns2:LARDetails') { generate_lar_details(xml) }
+    end
+
+    def generate_case_docs(xml)
+      @submission.documents.each do |key|
+        xml.__send__('ns2:CaseDoc') do
+          xml.__send__('ns2:CCMSDocumentID', PdfFile.find_by(original_file_id: key).ccms_document_id)
+          # TODO: at present only statements of case are uploaded. at some point uploads will also include means and
+          # merits reports; at that point the following element will need to vary based on document type
+          xml.__send__('ns2:DocumentSubject', 'statement_of_case')
+        end
+      end
     end
 
     def generate_other_parties(xml)

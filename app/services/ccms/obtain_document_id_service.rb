@@ -3,10 +3,10 @@ module CCMS
     def call
       populate_documents
       if submission.documents.empty?
-        create_history('case_created', submission.aasm_state) if submission.complete!
+        create_history('applicant_ref_obtained', submission.aasm_state) if submission.submit_case!
       else
         request_document_ids
-        create_history('case_created', submission.aasm_state) if submission.obtain_document_ids!
+        create_history('applicant_ref_obtained', submission.aasm_state) if submission.obtain_document_ids!
       end
     rescue CcmsError => e
       handle_failure(e)

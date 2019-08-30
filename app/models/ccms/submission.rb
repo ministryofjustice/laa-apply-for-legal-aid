@@ -20,14 +20,14 @@ module CCMS
         ObtainApplicantReferenceService.call(self)
       when 'applicant_submitted'
         CheckApplicantStatusService.call(self)
-      when 'case_created'
+      when 'applicant_ref_obtained'
         ObtainDocumentIdService.call(self)
       when 'document_ids_obtained'
-        UploadDocumentsService.call(self)
-      when 'applicant_ref_obtained'
         AddCaseService.call(self, options)
       when 'case_submitted'
         CheckCaseStatusService.call(self)
+      when 'case_created'
+        UploadDocumentsService.call(self)
       else
         raise CcmsError, "Unknown state: #{aasm_state}"
       end

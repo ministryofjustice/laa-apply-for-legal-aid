@@ -73,7 +73,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       let(:provider) do
-        double 'Provider',
+        double Provider,
                firm_id: 19_148,
                selected_office_id: 137_570,
                user_login_id: 4_953_649,
@@ -288,17 +288,29 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:expected_tx_id) { '201904011604570390059770759' }
 
       let(:submission) do
-        double Submission,
+        double CCMS::Submission,
                legal_aid_application: legal_aid_application,
                case_ccms_reference: 1_234_567_890,
                applicant_ccms_reference: 9_876_543_210
       end
+
+      let(:documents) { { '2b4ccb59-5161-498d-a27a-79110de7b67e' => :id_obtained } }
+
+      let(:pdf_file) do
+        double PdfFile,
+               id: 'd9e0444d-dad0-4228-afe0-14b5397e48dc',
+               original_file_id: '2b4ccb59-5161-498d-a27a-79110de7b67e',
+               ccms_document_id: '4427475'
+      end
+
       let(:requestor) { described_class.new(submission, {}) }
 
       before do
         allow(ProceedingType).to receive(:find).with(1).and_return(proceeding_type_1)
         allow(ProceedingType).to receive(:find).with(2).and_return(proceeding_type_2)
         allow(ApplicationScopeLimitation).to receive(:find_by).and_return(application_scope_limitation_1)
+        allow(PdfFile).to receive(:find_by).and_return(pdf_file)
+        allow(submission).to receive(:documents).and_return(documents)
       end
 
       describe 'Full XML request' do
@@ -327,21 +339,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
       let(:expected_soap_operation) { :create_case_application }
       let(:expected_xml) { requestor.__send__(:request_xml) }
-      let(:provider) do
-        double 'Provider',
-               firm_id: 19_148,
-               selected_office_id: 137_570,
-               user_login_id: 4_953_649,
-               username: 4_953_649,
-               contact_user_id: 4_953_649,
-               supervisor_contact_id: 7_008_010,
-               fee_earner_contact_id: 4_925_152
-      end
 
       before do
         Timecop.freeze
         expect(requestor).to receive(:soap_client).and_return(soap_client_double)
-        allow(requestor).to receive(:provider).and_return(provider)
       end
 
       it 'calls the savon soap client' do

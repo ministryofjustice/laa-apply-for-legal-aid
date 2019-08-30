@@ -8,7 +8,7 @@ module CCMS
       failed_uploads = submission.documents.select { |_key, value| value == :failed }
 
       if failed_uploads.empty?
-        create_history('document_ids_obtained', submission.aasm_state) if submission.complete!
+        create_history('case_created', submission.aasm_state) if submission.complete!
       else
         handle_failure("#{failed_uploads.keys} failed to upload to CCMS")
       end
