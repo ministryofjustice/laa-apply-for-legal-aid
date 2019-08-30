@@ -682,9 +682,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_D_18WP2_1A - application submission date' do
+        let(:dummy_date) {Faker::Date.between(from: 20.days.ago, to: Date.today) }
         it 'inserts the submission date into the attribute block' do
+          allow(legal_aid_application).to receive(:calculation_date).and_return(dummy_date)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_D_18WP2_1A')
-          expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
+          expect(block).to have_date_response dummy_date.strftime('%d-%m-%Y')
         end
       end
 
