@@ -9,9 +9,10 @@ module ApplicationHelper
 
   def html_title
     default = t('shared.page-title.suffix')
-    return default unless content_for?(:page_title)
+    return default unless content_for?(:head_title) || content_for?(:page_title)
 
-    "#{content_for(:page_title)} - #{default}".html_safe
+    title = content_for?(:head_title) ? content_for(:head_title) : content_for(:page_title)
+    "#{title} - #{default}".html_safe
   end
 
   def controller_t(lazy_t, *args)

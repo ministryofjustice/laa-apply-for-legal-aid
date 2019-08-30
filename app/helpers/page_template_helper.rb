@@ -48,7 +48,7 @@ module PageTemplateHelper
   )
     template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { back_link(back_link) unless back_link == :none }
-    content_for(:page_title) { page_title }
+    page_title_possibly_with_error(page_title, show_errors_for&.errors)
     content = capture(&content) if content
     render(
       "shared/page_templates/#{template}_page_template",
@@ -71,5 +71,19 @@ module PageTemplateHelper
 
   def page_title
     content_for(:page_title) if content_for?(:page_title)
+  end
+
+  def page_title_possibly_with_error(text, errors)
+    errors&.present? ? error_page_title(text) : simple_page_title(text)
+  end
+
+  def simple_page_title(text)
+    content_for(:page_title) { text }
+  end
+
+  def error_page_title(text)
+    prefix = t('errors.title_prefix')
+    content_for(:page_title) { text }
+    content_for(:head_title) { "#{prefix}: #{text}" }
   end
 end
