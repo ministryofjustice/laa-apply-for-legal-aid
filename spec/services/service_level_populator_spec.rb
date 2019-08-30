@@ -11,7 +11,7 @@ RSpec.describe ServiceLevelPopulator do
 
     it 'creates instances with correct data from the seed file' do
       described_class.call
-      expect(ServiceLevel.order('created_at ASC').first.service_id.to_s).to eq(CSV.read(seed_file, headers: true)[0][0])
+      expect(ServiceLevel.order('created_at ASC').first.service_level_number.to_s).to eq(CSV.read(seed_file, headers: true)[0][0])
     end
 
     context 'when a service_level exists' do

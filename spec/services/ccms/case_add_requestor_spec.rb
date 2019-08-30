@@ -123,7 +123,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                requested_scope: 'MULTIPLE',
                scope_limitations: [scope_limitation_1, scope_limitation_2],
                status: 'draft',
-               warning_letter_sent?: false
+               warning_letter_sent?: false,
+               default_level_of_service: service_level
       end
 
       let(:application_proceeding_type_2) do
@@ -166,8 +167,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                requested_scope: 'MULTIPLE',
                scope_limitations: [scope_limitation_1, scope_limitation_3],
                status: 'draft',
-               warning_letter_sent?: false
+               warning_letter_sent?: false,
+               default_level_of_service: service_level
       end
+
+      let(:service_level) { double ServiceLevel, service_level_number: 3, name: 'Full representation' }
 
       let(:vehicle_1) do
         double 'Vehicle',
@@ -244,7 +248,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                other_assets_declaration: other_assets_declaration,
                savings_amount: savings_amount,
                open_banking_consent: true,
-               open_banking_consent_choice_at: Date.new(2019, 6, 1)
+               open_banking_consent_choice_at: Date.new(2019, 6, 1),
+               lead_proceeding_type: proceeding_type_1
       end
 
       let(:other_party_1) { create :opponent, :child }
