@@ -4266,7 +4266,7 @@ proceeding:
     :user_defined: false
     :generate_block?: false
   LEVEL_OF_SERVICE:
-    :value: 3
+    :value: '#lead_proceeding_type_default_level_of_service'
     :br100_meaning: Form of Service
     :response_type: text
     :user_defined: true
@@ -4433,7 +4433,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   LEVEL_OF_SERVICE:
-    :value: 3
+    :value: '#lead_proceeding_type_default_level_of_service'
     :br100_meaning: Form of Service
     :response_type: text
     :user_defined: true
@@ -4949,8 +4949,8 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_LEVEL_OF_SERVICE:
-    :generate_block?: false
-    :value: 3
+    :generate_block?: true
+    :value: '#lead_proceeding_type_default_level_of_service_name'
     :br100_meaning: 'Proc: The Proceeding Form Of Service'
     :response_type: text
     :user_defined: false

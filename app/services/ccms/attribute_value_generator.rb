@@ -139,6 +139,14 @@ module CCMS
       not_zero? savings.plc_shares
     end
 
+    def lead_proceeding_type_default_level_of_service(_options)
+      @legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number
+    end
+
+    def lead_proceeding_type_default_level_of_service_name(_options)
+      @legal_aid_application.lead_proceeding_type.default_level_of_service.name
+    end
+
     private
 
     def applicant

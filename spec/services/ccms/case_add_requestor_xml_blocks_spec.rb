@@ -777,17 +777,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_response_value '1'
         end
 
-        it 'LEVEL_OF_SERVICE should be hard coded to 3' do
-          attributes = [
-            [:proceeding_merits, 'LEVEL_OF_SERVICE'],
-            [:proceeding, 'LEVEL_OF_SERVICE']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
+        context 'LEVEL_OF_SERVICE' do
+          it 'is the service level number from the default level of service' do
+            service_level_number = legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number.to_s
+            %i[proceeding_merits proceeding].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'LEVEL_OF_SERVICE')
+              expect(block).to be_present
+              expect(block).to have_response_type 'text'
+              expect(block).to have_response_value service_level_number
+            end
+          end
+        end
+
+        context 'PROCEEDING_LEVEL_OF_SERVICE' do
+          it 'should be the name of the lead proceeding default level of service' do
+            block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LEVEL_OF_SERVICE')
             expect(block).to be_present
             expect(block).to have_response_type 'text'
-            expect(block).to have_response_value '3'
+            expect(block).to have_response_value legal_aid_application.lead_proceeding_type.default_level_of_service.name
           end
         end
 
@@ -861,20 +868,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to be_present
           expect(block).to have_response_type 'number'
           expect(block).to have_response_value '1'
-        end
-
-        it 'LEVEL_OF_SERVICE should be hard coded to 3' do
-          attributes = [
-            [:proceeding_merits, 'LEVEL_OF_SERVICE'],
-            [:proceeding, 'LEVEL_OF_SERVICE']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to be_present
-            expect(block).to have_response_type 'text'
-            expect(block).to have_response_value '3'
-          end
         end
 
         it 'CLIENT_INVOLVEMENT_TYPE should be hard coded to A' do
@@ -1413,7 +1406,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:proceeding_merits, 'PROCEEDING_DESCRIPTION'],
       [:proceeding_merits, 'PROCEEDING_INCLUDES_CHILD'],
       [:proceeding_merits, 'PROCEEDING_JUDICIAL_REVIEW'],
-      [:proceeding_merits, 'PROCEEDING_LEVEL_OF_SERVICE'],
       [:proceeding_merits, 'PROCEEDING_LIMITATION_DESC'],
       [:proceeding_merits, 'PROCEEDING_LIMITATION_MEANING'],
       [:proceeding_merits, 'PROCEEDING_STAND_ALONE'],
