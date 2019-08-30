@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
   let(:application) { create :legal_aid_application, :with_applicant }
+  let(:journey) { %i[providers citizens].sample }
+  let(:restrictions_details) { Faker::Lorem.paragraph }
+  let(:has_restrictions) { 'true' }
   let(:params) do
     {
       has_restrictions: has_restrictions,
       restrictions_details: restrictions_details,
-      mode: mode
+      journey: journey
     }
   end
-  let(:mode) { %i[provider citizen].sample }
-  let(:restrictions_details) { Faker::Lorem.paragraph }
-  let(:has_restrictions) { 'true' }
   let(:form_params) { params.merge(model: application) }
 
   subject { described_class.new(form_params) }
@@ -52,7 +52,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       end
 
       it 'generates the expected error message' do
-        expect(subject.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{mode}.blank")
+        expect(subject.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{journey}.blank")
       end
 
       context 'no restrictions present' do
@@ -63,7 +63,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
         end
 
         it 'generates the expected error message' do
-          expect(subject.errors[:has_restrictions]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_restrictions.#{mode}.blank")
+          expect(subject.errors[:has_restrictions]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_restrictions.#{journey}.blank")
         end
       end
     end

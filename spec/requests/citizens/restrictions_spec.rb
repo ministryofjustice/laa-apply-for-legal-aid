@@ -72,6 +72,6 @@ RSpec.describe 'citizen restrictions request', type: :request do
   end
 
   def translation_for(attr, error)
-    I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attr}.citizen.#{error}")
+    I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attr}.citizens.#{error}")
   end
 end

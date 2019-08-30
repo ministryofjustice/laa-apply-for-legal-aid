@@ -4,7 +4,7 @@ module LegalAidApplications
 
     form_for LegalAidApplication
 
-    attr_accessor :has_restrictions, :restrictions_details, :mode
+    attr_accessor :has_restrictions, :restrictions_details, :journey
 
     before_validation :clear_restrictions_details
 
@@ -26,11 +26,11 @@ module LegalAidApplications
     end
 
     def add_blank_error_for(attribute)
-      errors.add(attribute, I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attribute}.#{mode}.blank"))
+      errors.add(attribute, I18n.t("activemodel.errors.models.legal_aid_application.attributes.#{attribute}.#{journey}.blank"))
     end
 
     def exclude_from_model
-      [:mode]
+      [:journey]
     end
 
     def clear_restrictions_details

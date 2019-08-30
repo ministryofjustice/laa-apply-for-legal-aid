@@ -155,9 +155,9 @@ en:
             has_dependants:
               blank: Select yes if you have dependants
             has_restrictions:
-              citizen:
+              citizens:
                 blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
-              provider:
+              providers:
                 blank: Select yes if there are restrictions that prevent your client from selling or borrowing against their assets
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
@@ -167,9 +167,9 @@ en:
             own_home:
               blank: Select yes if you own the home you live in
             own_vehicle:
-              citizen:
+              citizens:
                 blank: Select yes if you own a vehicle
-              provider:
+              providers:
                 blank: Select yes if your client owns a vehicle
             percentage_home:
               blank: Enter the percentage (%) share
@@ -177,20 +177,20 @@ en:
               less_than_or_equal_to: Share must be a percentage amount under 100, like 60
               not_a_number: Share must be a percentage amount under 100, like 60
             property_value:
-              citizen:
+              citizens:
                 blank: Enter an estimated value for your home
                 not_a_number: The estimated value of your home must be an amount of money, like 60,000
               greater_than: Estimated value must be 0 or more
               greater_than_or_equal_to: Estimated value must be 0 or more
               not_a_number: Estimated value must be an amount of money, like 60,000
-              provider:
+              providers:
                 blank: Enter an estimated value for your client's home
                 not_a_number: The estimated value of your client's home must be an amount of money, like 60,000
               too_many_decimals: Estimated value must not include more than 2 decimal numbers
             restrictions_details:
-              citizen:
+              citizens:
                 blank: Enter the assets you cannot sell or borrow against, and why
-              provider:
+              providers:
                 blank: Enter the assets your client cannot sell or borrow against, and why
             shared_ownership:
               blank: Select yes if you own your home with someone else
@@ -271,9 +271,9 @@ en:
               not_a_number: Estimated trust value must be an amount of money, like 60,000
               too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
             base:
-              citizen:
+              citizens:
                 none_selected: Select if you have any of these types of assets
-              provider:
+              providers:
                 none_selected: Select if your client has any of these types of assets
         provider:
           attributes:
@@ -373,9 +373,9 @@ en:
             purchased_on:
               blank: Enter a valid date
               date_not_valid: Enter a valid date
-              citizen:
+              citizens:
                 date_is_in_the_future: Date you bought the vehicle must be in the past
-              provider:
+              providers:
                 date_is_in_the_future: Date your client bought the vehicle must be in the past
             used_regularly:
               blank: Select yes if the vehicle is in regular use

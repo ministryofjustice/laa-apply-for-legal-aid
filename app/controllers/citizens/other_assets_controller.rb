@@ -18,7 +18,7 @@ module Citizens
     end
 
     def form_params
-      merge_with_model(declaration, mode: :citizen) do
+      merge_with_model(declaration, journey: :citizens) do
         attrs = Citizens::OtherAssetsForm::ALL_ATTRIBUTES + Citizens::OtherAssetsForm::CHECK_BOXES_ATTRIBUTES
         params[:other_assets_declaration].permit(*attrs)
       end
