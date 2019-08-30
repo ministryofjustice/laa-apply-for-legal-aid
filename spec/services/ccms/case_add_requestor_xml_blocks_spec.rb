@@ -29,7 +29,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:respondent) { legal_aid_application.respondent }
-      let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
+      let(:ccms_reference) { '300000000001' }
+      let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
       let(:success_prospect) { :likely }
@@ -152,6 +153,31 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'inserts ccms submission date as string' do
           block = XmlExtractor.call(xml, :global_merits, 'URGENT_HEARING_DATE')
           expect(block).to have_date_response legal_aid_application.calculation_date.strftime('%d-%m-%Y')
+        end
+      end
+
+      context 'APPLICATION_CASE_REF' do
+        let(:ccms_reference) { '400000099991' }
+        it 'inserts the ccms case reference from the submission into the attribute block' do
+          block = XmlExtractor.call(xml, :global_means, 'APPLICATION_CASE_REF')
+          expect(block).to have_text_response ccms_reference
+        end
+      end
+
+      context 'GB_INPUT_B_2WP2_1A  - Applicant is a beneficiary of a will?' do
+        context 'not a beneficiary' do
+          before { legal_aid_application.other_assets_declaration = create :other_assets_declaration, :all_nil }
+          it 'inserts false into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
+            expect(block).to have_boolean_response false
+          end
+        end
+
+        context 'is a beneficiary' do
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
+            expect(block).to have_boolean_response true
+          end
         end
       end
 

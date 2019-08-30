@@ -32,8 +32,9 @@ module CCMS
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
 
-    def initialize(legal_aid_application)
-      @legal_aid_application = legal_aid_application
+    def initialize(submission)
+      @submission = submission
+      @legal_aid_application = submission.legal_aid_application
     end
 
     def method_missing(method, *args)
@@ -73,7 +74,7 @@ module CCMS
     end
 
     def submission_case_ccms_reference(_options)
-      @legal_aid_application.most_recent_ccms_submission.case_ccms_reference
+      @submission.case_ccms_reference
     end
 
     def used_delegated_functions_on(_options)
@@ -129,6 +130,11 @@ module CCMS
 
     def applicant_owns_additional_property?(_options)
       not_zero? other_assets.second_home_value
+    end
+
+    # this will change to other_assets_declaration.inherited_assets once AP-877 is merged
+    def applicant_is_beneficiary?(_options)
+      not_zero? @legal_aid_application.other_assets_declaration.money_assets_value
     end
 
     def applicant_has_bank_accounts?(_options)
