@@ -7,22 +7,34 @@
           <th class="govuk-table__header" scope="col"><%= t('.applicant_name') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.created_at') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.certificate_type') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
-          <th class="govuk-table__header" scope="col"></th>
         </tr>
       </thead>
 
       <% legal_aid_applications.each do |application| %>
         <tbody class="govuk-table__body">
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell"><%= application.applicant_full_name || t('generic.undefined') %></td>
-            <td class="govuk-table__cell"><%= l(application.created_at.to_date, format: :long_date) %></td>
+            <td class="govuk-table__cell">
+              <%= link_to_application (application.applicant_full_name || t('generic.undefined')), application %>
+            </td>
+            <td class="govuk-table__cell"><%= l(application.created_at.to_date, format: :short_date) %></td>
             <td class="govuk-table__cell"><%= application.application_ref %></td>
             <td class="govuk-table__cell">
-              <%= gov_uk_tag text: application.enum_t(:summary_state), type: application.summary_state %>
+              <% if application.used_delegated_functions? %>
+                <%= t('.emergency') %>
+                <% if application.substantive_application_deadline_on? %>
+                  <br>
+                  <span class="govuk-body-s">
+                    <%=  t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
+                  </span>
+                <% end %>
+              <% else %>
+                <%= t('.substantive') %>
+              <% end %>
             </td>
             <td class="govuk-table__cell">
-              <%= link_to t('generic.view'), url_for_application(application) %>
+              <%= gov_uk_tag text: application.enum_t(:summary_state), type: application.summary_state %>
             </td>
           </tr>
         </tbody>
