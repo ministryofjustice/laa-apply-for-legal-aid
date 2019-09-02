@@ -62,19 +62,26 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                account_type_label: 'Bank Current'
       end
 
+      let(:address) { double Address, postcode: 'E15TR' }
+
       let(:applicant) do
         double Applicant,
                ccms_reference_number: '7263259',
                first_name: 'Dave',
+               age: '65',
                last_name: 'Fabby',
                date_of_birth: Date.today,
+               address: address,
                preferred_address: 'CLIENT',
                bank_accounts: [bank_account_1]
       end
 
+      let(:firm) { double Firm, firm_id: 19_148, name: 'Firm1' }
+
       let(:provider) do
         double Provider,
                firm_id: 19_148,
+               firm: firm,
                selected_office_id: 137_570,
                user_login_id: 4_953_649,
                username: 4_953_649,
@@ -339,7 +346,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     describe '#call' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, populate_vehicle: true }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_applicant_and_address, populate_vehicle: true }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
       let(:requestor) { described_class.new(submission, {}) }
       let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
