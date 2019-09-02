@@ -132,11 +132,6 @@ module CCMS
       not_zero? other_assets.second_home_value
     end
 
-    # this will change to other_assets_declaration.inherited_assets once AP-877 is merged
-    def applicant_is_beneficiary?(_options)
-      not_zero? @legal_aid_application.other_assets_declaration.money_assets_value
-    end
-
     def applicant_has_bank_accounts?(_options)
       applicant.bank_accounts.any?
     end

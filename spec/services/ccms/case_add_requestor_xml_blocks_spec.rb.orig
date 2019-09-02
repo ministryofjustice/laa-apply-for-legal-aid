@@ -4,21 +4,17 @@ module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe CaseAddRequestor do
     context 'XML request' do
       let(:expected_tx_id) { '201904011604570390059770666' }
-      let(:proceeding_type) { create :proceeding_type, :with_real_data }
       let(:legal_aid_application) do
         create :legal_aid_application,
+               :with_proceeding_types,
                :with_everything,
-               :with_applicant_and_address,
                populate_vehicle: true,
-               with_bank_accounts: 2,
-               proceeding_types: [proceeding_type]
+               with_bank_accounts: 2
       end
-
-      let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
 
       let(:provider) do
         double Provider,
-               firm: firm,
+               firm_id: 19_148,
                selected_office_id: 137_570,
                user_login_id: 4_953_649,
                username: 4_953_649,
@@ -33,8 +29,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
-      let(:success_prospect) { :likely }
-      let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
       before { allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id) }
       before { allow(requestor).to receive(:provider).and_return(provider) }
 
@@ -71,44 +65,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'APPLICATION_CASE_REF' do
-        let(:ccms_reference) { '400012345678' }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
+        let(:case_reference) { legal_aid_application.most_recent_ccms_submission.case_ccms_reference }
         it 'inserts the case reference from the submission record into both global means and merits sections' do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'APPLICATION_CASE_REF')
-            expect(block).to have_text_response ccms_reference
+            expect(block).to have_text_response case_reference
           end
-        end
-      end
-
-      context 'FAMILY_PROSPECTS_OF_SUCCESS' do
-        it 'returns the ccms equivalent prospect of success for likely' do
-          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('likely')
-          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-          expect(block).to have_text_response 'Good'
-        end
-
-        it 'returns the ccms equivalent prospect of success for marginal' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-          expect(block).to have_text_response 'Marginal'
-        end
-
-        it 'returns the ccms equivalent prospect of success for uncertain' do
-          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('uncertain')
-          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-          expect(block).to have_text_response 'Uncertain'
-        end
-
-        it 'returns the ccms equivalent prospect of success for poor' do
-          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('poor')
-          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-          expect(block).to have_text_response 'Poor'
-        end
-
-        it 'returns the ccms equivalent prospect of success for borderline' do
-          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('borderline')
-          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-          expect(block).to have_text_response 'Borderline'
         end
       end
 
@@ -142,21 +104,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'EMERGENCY_FC_CRITERIA' do
-        it 'inserts emergency_fc criteria as hard coded string' do
-          block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FC_CRITERIA')
-          expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
-        end
-      end
-
-      context 'URGENT_HEARING_DATE' do
-        before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
-        it 'inserts ccms submission date as string' do
-          block = XmlExtractor.call(xml, :global_merits, 'URGENT_HEARING_DATE')
-          expect(block).to have_date_response legal_aid_application.calculation_date.strftime('%d-%m-%Y')
-        end
-      end
-
       context 'APPLICATION_CASE_REF' do
         let(:ccms_reference) { '400000099991' }
         it 'inserts the ccms case reference from the submission into the attribute block' do
@@ -182,6 +129,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'GB_INPUT_B_3WP2_1A - applicant has financial interest in his main home' do
+        context 'no financial interest'
+        context 'a shared finanical interest'
+      end
+
+
       context 'POLICE_NOTIFIED block' do
         context 'police notified' do
           before { respondent.update(police_notified: true) }
@@ -200,11 +153,18 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'WARNING_LETTER_SENT not sent' do
-        before { respondent.update(warning_letter_sent: false) }
-        it 'generates WARNING_LETTER_SENT block with false value' do
-          block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-          expect(block).to have_boolean_response false
+      context 'WARNING_LETTER_SENT & INJ_REASON_NO_WARNING_LETTER blocks' do
+        context 'not sent' do
+          before { respondent.update(warning_letter_sent: false) }
+          it 'generates WARNING_LETTER_SENT block with false value' do
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+            expect(block).to have_boolean_response false
+          end
+
+          it 'generates INJ_REASON_NO_WARNING_LETTER block with reason' do
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
+            expect(block).to have_text_response legal_aid_application.respondent.warning_letter_sent_details
+          end
         end
       end
 
@@ -245,6 +205,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
           it 'inserts false into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
+<<<<<<< HEAD
+            expect(block).to be_present
+=======
+>>>>>>> AP-876 rebase
             expect(block).to have_boolean_response false
           end
         end
@@ -252,6 +216,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         context 'is a beneficiary' do
           it 'inserts true into the attribute block' do
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_2WP2_1A')
+<<<<<<< HEAD
+            expect(block).to be_present
+=======
+>>>>>>> AP-876 rebase
             expect(block).to have_boolean_response true
           end
         end
@@ -277,26 +245,20 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'attributes hard coded to true' do
         it 'should be hard coded to true' do
           attributes = [
-            [:global_means, 'APPLICATION_FROM_APPLY'],
+            [:global_means, 'LAR_SCOPE_FLAG'],
             [:global_means, 'GB_INPUT_B_38WP3_2SCREEN'],
             [:global_means, 'GB_INPUT_B_38WP3_3SCREEN'],
+            [:global_merits, 'MERITS_DECLARATION_SCREEN'],
             [:global_means, 'GB_DECL_B_38WP3_13A'],
-            [:global_means, 'LAR_SCOPE_FLAG'],
-            [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
-            [:global_merits, 'APPLICATION_FROM_APPLY'],
             [:global_merits, 'CLIENT_HAS_DV_RISK'],
             [:global_merits, 'CLIENT_REQ_SEP_REP'],
-            [:global_merits, 'DECLARATION_REVOKE_IMP_SUBDP'],
             [:global_merits, 'DECLARATION_WILL_BE_SIGNED'],
-            [:global_merits, 'MERITS_DECLARATION_SCREEN'],
-            [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
+            [:global_merits, 'DECLARATION_REVOKE_IMP_SUBDP'],
             [:proceeding, 'SCOPE_LIMIT_IS_DEFAULT'],
             [:proceeding_merits, 'LEAD_PROCEEDING'],
             [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT'],
             [:global_means, 'APPLICATION_FROM_APPLY'],
-            [:global_means, 'APPLICATION_FROM_APPLY'],
-            [:global_means, 'MEANS_SUBMISSION_PG_DISPLAYED'],
-            [:global_merits, 'CASE_OWNER_STD_FAMILY_MERITS']
+            [:global_means, 'APPLICATION_FROM_APPLY']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -323,62 +285,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             end
           end
         end
-        context 'POST_CODE' do
-          it "inserts applicant's postcode as a string" do
-            %i[global_means global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, 'POST_CODE')
-              expect(block).to have_text_response legal_aid_application.applicant.address.postcode
-            end
-          end
-        end
-        context 'SURNAME' do
-          it "inserts applicant's surname as a string" do
-            %i[global_means global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, 'SURNAME')
-              expect(block).to have_text_response legal_aid_application.applicant.last_name
-            end
-          end
-        end
-        context 'SURNAME_AT_BIRTH' do
-          it "inserts applicant's surname at birth as a string" do
-            %i[global_means global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, 'SURNAME_AT_BIRTH')
-              expect(block).to have_text_response legal_aid_application.applicant.last_name
-            end
-          end
-        end
-        context 'CLIENT_AGE' do
-          it "inserts applicant's age as a number" do
-            block = XmlExtractor.call(xml, :global_merits, 'CLIENT_AGE')
-            expect(block).to have_number_response legal_aid_application.applicant.age
-          end
-        end
-      end
-
-      context 'DATE_CLIENT_VISITED_FIRM' do
-        before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
-        it "inserts today's date as a string" do
-          block = XmlExtractor.call(xml, :global_merits, 'DATE_CLIENT_VISITED_FIRM')
-          expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
-        end
-      end
-
-      context '_SYSTEM_PUI_USERID' do
-        it "inserts provider's email address" do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, '_SYSTEM_PUI_USERID')
-            expect(block).to have_text_response legal_aid_application.provider.email
-          end
-        end
-      end
-
-      context 'USER_PROVIDER_FIRM_ID' do
-        it "inserts provider's firm id as a number" do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, 'USER_PROVIDER_FIRM_ID')
-            expect(block).to have_number_response legal_aid_application.provider.firm.id
-          end
-        end
       end
 
       context 'DATE_ASSESSMENT_STARTED' do
@@ -387,6 +293,27 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'DATE_ASSESSMENT_STARTED')
             expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
+          end
+        end
+      end
+
+      context 'DEFAULT_COST_LIMITATION' do
+        before { allow(legal_aid_application).to receive(:default_substantive_cost_limitation).and_return('2.00') }
+        context 'global_merits' do
+          it 'inserts default cost limitation' do
+            %i[global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION_MERITS')
+              expect(block).to have_currency_response legal_aid_application.default_substantive_cost_limitation
+            end
+          end
+        end
+
+        context 'global_means' do
+          it 'inserts default cost limitation' do
+            %i[global_means].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
+              expect(block).to have_currency_response legal_aid_application.default_substantive_cost_limitation
+            end
           end
         end
       end
@@ -419,36 +346,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'Benefit Checker' do
-        context 'BEN_DOB' do
-          it "inserts applicant's date of birth as a string" do
-            block = XmlExtractor.call(xml, :global_means, 'BEN_DOB')
-            expect(block).to have_date_response legal_aid_application.applicant.date_of_birth.strftime('%d-%m-%Y')
-          end
-        end
-
-        context 'BEN_NI_NO' do
-          it "inserts applicant's national insurance number as a string" do
-            block = XmlExtractor.call(xml, :global_means, 'BEN_NI_NO')
-            expect(block).to have_text_response legal_aid_application.applicant.national_insurance_number
-          end
-        end
-      end
-
-      context 'LAR_INFER_B_1WP1_36A' do
-        it 'uses the DWP benefit check result' do
-          block = XmlExtractor.call(xml, :global_means, 'LAR_INFER_B_1WP1_36A')
-          expect(block).to have_boolean_response legal_aid_application.benefit_check_result
-        end
-      end
-
-      context 'APP_GRANTED_USING_DP' do
-        it 'uses the DWP benefit check result' do
-          block = XmlExtractor.call(xml, :global_merits, 'APP_GRANTED_USING_DP')
-          expect(block).to have_boolean_response legal_aid_application.used_delegated_functions?
-        end
-      end
-
       context 'APP_AMEND_TYPE' do
         context 'delegated function used' do
           context 'in global_merits section' do
@@ -466,25 +363,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                 block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
                 expect(block).to have_text_response 'SUBDP'
               end
-            end
-          end
-        end
-
-        context 'EMERGENCY_FURTHER_INFORMATION' do
-          context 'delegated function used' do
-            it 'returns hard coded statement' do
-              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
-              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
-              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
-              expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
-            end
-          end
-
-          context 'delegated function not used' do
-            it 'EMERGENCY_FURTHER_INFORMATION block is not present' do
-              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(false)
-              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
-              expect(block).not_to be_present
             end
           end
         end
@@ -683,11 +561,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_D_18WP2_1A - application submission date' do
-        let(:dummy_date) { Faker::Date.between(from: 20.days.ago, to: Date.today) }
         it 'inserts the submission date into the attribute block' do
-          allow(legal_aid_application).to receive(:calculation_date).and_return(dummy_date)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_D_18WP2_1A')
-          expect(block).to have_date_response dummy_date.strftime('%d-%m-%Y')
+          expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
         end
       end
 
@@ -785,6 +661,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
+        context 'attributes hard coded to false' do
+          it 'should be type of text hard coded to false' do
+            attributes = [
+              [:global_means, 'COST_LIMIT_CHANGED_FLAG']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to have_boolean_response false
+            end
+          end
+        end
+
+        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
+          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
+          expect(block).to have_text_response 'FAMILY'
+        end
+
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
@@ -833,6 +727,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
+        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
+          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
+          expect(block).to have_text_response 'FAMILY'
+        end
+
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
@@ -872,19 +771,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'UNKNOWN'
         end
 
-        it 'MARITIAL_STATUS should be hard coded to UNKNOWN' do
-          block = XmlExtractor.call(xml, :global_means, 'MARITIAL_STATUS')
-          expect(block).to have_text_response 'UNKNOWN'
-        end
-
         it 'REQUESTED_SCOPE should be hard coded to MULTIPLE' do
           block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
           expect(block).to have_text_response 'MULTIPLE'
-        end
-
-        it 'REQUESTED_SCOPE should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'REQUESTED_SCOPE')
-          expect(block).to have_text_response 'Dummy requested scope pending legal framework enhancements'
         end
 
         it 'NEW_OR_EXISTING should be hard coded to NEW' do
@@ -919,35 +808,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'Apply Service Application. See uploaded means report in CCMS'
         end
 
-        it 'MERITS_ROUTING should be hard coded to SFM' do
-          block = XmlExtractor.call(xml, :global_merits, 'MERITS_ROUTING')
-          expect(block).to have_text_response 'SFM'
-        end
-
-        it 'IS_PASSPORTED should be hard coded to YES' do
-          block = XmlExtractor.call(xml, :global_means, 'IS_PASSPORTED')
-          expect(block).to have_text_response 'YES'
-        end
-
-        it 'should be hard coded with the correct notification' do
-          attributes = [
-            [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
-            [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
-            [:global_merits, 'INJ_REASON_NO_WARNING_LETTER']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
-          end
-        end
-
         it 'should be hard coded with the correct notification' do
           attributes = [
             [:global_merits, 'REASON_APPLYING_FHH_LR'],
             [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
-            [:global_merits, 'REASON_SEPARATE_REP_REQ']
+            [:global_merits, 'REASON_SEPARATE_REP_REQ'],
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
+            [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -970,71 +837,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
-
-        it 'OTHER_PARTY_NAME should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
-          expect(block).to have_text_response 'APPLY service application. See uploaded statement of case'
-        end
-      end
-
-      context 'legal framework attributes' do
-        it 'populates REQ_COST_LIMITATION' do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, 'REQ_COST_LIMITATION')
-            expect(block).to have_currency_response format('%.2f', legal_aid_application.default_substantive_cost_limitation)
-          end
-        end
-
-        it 'populates APP_IS_FAMILY' do
-          block = XmlExtractor.call(xml, :global_merits, 'APP_IS_FAMILY')
-          expect(block).to have_boolean_response(application_proceeding_type.proceeding_type.ccms_category_law == 'Family')
-        end
-
-        it 'populates CAT_OF_LAW_DESCRIPTION' do
-          block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_DESCRIPTION')
-          expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
-        end
-
-        it 'populates CAT_OF_LAW_HIGH_LEVEL' do
-          block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_HIGH_LEVEL')
-          expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
-        end
-
-        it 'populates CAT_OF_LAW_MEANING' do
-          block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_MEANING')
-          expect(block).to have_text_response application_proceeding_type.proceeding_type.meaning
-        end
-
-        it 'populates CATEGORY_OF_LAW' do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, 'CATEGORY_OF_LAW')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law_code
-          end
-        end
-
-        it 'populates DEFAULT_COST_LIMITATION_MERITS' do
-          block = XmlExtractor.call(xml, :global_merits, 'DEFAULT_COST_LIMITATION_MERITS')
-          expect(block).to have_currency_response format('%.2f', legal_aid_application.default_substantive_cost_limitation)
-        end
-
-        it 'populates DEFAULT_COST_LIMITATION' do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
-            expect(block).to have_currency_response format('%.2f', legal_aid_application.default_substantive_cost_limitation)
-          end
-        end
-
-        it 'populates MATTER_TYPE' do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, 'MATTER_TYPE')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_matter_code
-          end
-        end
-
-        it 'populates PROCEEDING_NAME' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_NAME')
-          expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_code
-        end
       end
     end
   end
@@ -1045,7 +847,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'CAP_CONT'],
       [:global_means, 'CLIENT_NASS'],
       [:global_means, 'CLIENT_PRISONER'],
-      [:global_means, 'CONFIRMED_NOT_PASSPORTED'],
       [:global_means, 'GB_INFER_B_1WP3_419A'],
       [:global_means, 'GB_INFER_B_26WP3_214A'],
       [:global_means, 'GB_INFER_C_28WP4_10A'],
@@ -1056,6 +857,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'GB_INPUT_B_34WP3_32A'],
       [:global_means, 'GB_PROC_B_1WP4_99A'],
       [:global_means, 'LAR_RFLAG_B_37WP2_41A'],
+      [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
+      [:global_means, 'MEANS_EVIDENCE_REQD'],
       [:global_means, 'MEANS_OPA_RELEASE'],
       [:global_means, 'MEANS_REPORT_BACKLOG_TAG'],
       [:global_means, 'MEANS_REQD'],
@@ -1269,6 +1072,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'MENTAL_HEALTH_REVIEW_TRIBUNAL'],
       [:global_merits, 'MERITS_BACKLOG_REPORT_TAG'],
       [:global_merits, 'MERITS_CERT_PREDICTED_COSTS'],
+      [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
+      [:global_merits, 'MERITS_EVIDENCE_REQD'],
       [:global_merits, 'MERITS_OPA_RELEASE'],
       [:global_merits, 'MERITS_ROUTING_NAME'],
       [:global_merits, 'MERITS_SUBMISSION_PAGE'],
@@ -1434,9 +1239,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:proceeding_merits, 'PROPORTIONALITY_QUESTION'],
       [:proceeding_merits, 'PROSPECTS_OF_SUCCESS'],
       [:proceeding_merits, 'ROUTING_FOR_PROCEEDING'],
-      [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER'],
-      [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST'],
-      [:proceeding_merits, 'SMOD_APPLICABLE']
+      [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER']
     ]
   end
 
@@ -1449,6 +1252,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'GB_INPUT_B_1WP3_165A'],
       [:global_means, 'GB_INPUT_B_1WP3_400A'],
       [:global_means, 'GB_INPUT_B_1WP3_401A'],
+      [:global_means, 'MEANS_TASK_AUTO_GEN'],
       [:global_means, 'GB_INFER_B_1WP1_1A'],
       [:global_means, 'GB_INPUT_B_14WP2_7A'],
       [:global_means, 'GB_INPUT_B_18WP2_2A'],
@@ -1563,18 +1367,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'LAR_PROC_B_40WP3_32A'],
       [:global_means, 'LAR_INPUT_B_37WP2_4A'],
       [:global_means, 'LAR_PER_RES_INPUT_B_37WP2_7A'],
-      [:global_means, 'MEANS_EVIDENCE_REQD'],
-      [:global_means, 'MEANS_TASK_AUTO_GEN'],
       [:global_merits, 'ACTION_AGAINST_POLICE'],
       [:global_merits, 'ACTUAL_LIKELY_COSTS_EXCEED_25K'],
       [:global_merits, 'AMENDMENT'],
       [:global_merits, 'APP_BROUGHT_BY_PERSONAL_REP'],
       [:global_merits, 'COPY_SEPARATE_STATEMENT'],
       [:global_merits, 'CLIENT_HAS_RECEIVED_LA_BEFORE'],
-      [:global_merits, 'COST_LIMIT_CHANGED'],
-      [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
       [:global_merits, 'COURT_ATTEND_IN_LAST_12_MONTHS'],
-      [:global_merits, 'DECLARATION_IDENTIFIER'],
       [:global_merits, 'ECF_FLAG'],
       [:global_merits, 'EVID_DEC_AGAINST_INSTRUCTIONS'],
       [:global_merits, 'EVIDENCE_AMD_CORRESPONDENCE'],
@@ -1636,18 +1435,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'HIGH_PROFILE'],
       [:global_merits, 'LEGAL_HELP_PROVIDED'],
       [:global_merits, 'MENTAL_HEAL_ACT_MENTAL_CAP_ACT'],
-      [:global_merits, 'MERITS_EVIDENCE_REQD'],
       [:global_merits, 'NEGOTIATION_CORRESPONDENCE'],
       [:global_merits, 'OTHER_PARTIES_MAY_BENEFIT'],
       [:global_merits, 'OTHERS_WHO_MAY_BENEFIT'],
       [:global_merits, 'PROCS_ARE_BEFORE_THE_COURT'],
-      [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
       [:global_merits, 'URGENT_FLAG'],
       [:global_merits, 'COST_LIMIT_CHANGED'],
       [:global_merits, 'DECLARATION_IDENTIFIER'],
       [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
-      [:global_means, 'COST_LIMIT_CHANGED_FLAG'],
       [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:proceeding_merits, 'WARNING_LETTER_SENT']
     ]
