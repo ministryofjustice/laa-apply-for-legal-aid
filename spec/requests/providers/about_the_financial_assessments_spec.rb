@@ -18,6 +18,14 @@ RSpec.describe 'about financial assessments requests', type: :request do
         subject
       end
 
+      it 'returns success' do
+        expect(response).to be_successful
+      end
+
+      it 'displays the correct page' do
+        expect(unescaped_response_body).to include('About the online financial assessment')
+      end
+
       context 'when the application does not exist' do
         let(:application_id) { SecureRandom.uuid }
 
@@ -26,12 +34,26 @@ RSpec.describe 'about financial assessments requests', type: :request do
         end
       end
 
-      it 'returns success' do
-        expect(response).to be_successful
-      end
+      context 'when means completed' do
+        let(:application) do
+          create(
+            :legal_aid_application,
+            :with_proceeding_types,
+            :with_applicant_and_address,
+            state: :means_completed
+          )
+        end
+        let(:target_path) do
+          Flow::KeyPoint.path_for(
+            key_point: :start_after_applicant_completes_means,
+            journey: :providers,
+            legal_aid_application: application
+          )
+        end
 
-      it 'displays the correct page' do
-        expect(unescaped_response_body).to include('About the online financial assessment')
+        it 'redirects to start after completed means' do
+          expect(response).to redirect_to(target_path)
+        end
       end
     end
   end
