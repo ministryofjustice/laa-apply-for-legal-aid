@@ -24,3 +24,6 @@ en:
         provider_checking_citizens_means_answers: Means test completed
         provider_checked_citizens_means_answers: Means test completed
         generating_reports: Generating reports
+      summary_state:
+        in_progress: In progress
+        submitted: Submitted

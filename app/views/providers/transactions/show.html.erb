@@ -68,9 +68,9 @@
               </td>
             <% else %>
               <td class="govuk-table__cell sortable-cell tag-cell" id="Category-<%= builder.object.id %>" data-sort-value="ZZZ">
-                <p class="table-category table-category-vacant govuk-body-s govuk-tag">
+                <strong class="table-category table-category-vacant govuk-body-s govuk-tag">
                   <%= t("transaction_types.table_label.#{@transaction_type.name}") %>
-                </p>
+                </strong>
               </td>
             <% end %>
           </tr>
