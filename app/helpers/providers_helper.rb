@@ -1,4 +1,8 @@
 module ProvidersHelper
+  def link_to_application(text, legal_aid_application)
+    link_to text, url_for_application(legal_aid_application)
+  end
+
   def url_for_application(legal_aid_application)
     name = legal_aid_application.provider_step.presence || :proceedings_types
 

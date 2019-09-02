@@ -188,7 +188,11 @@ en:
         application_ref: Case reference
         created_at: Date started
         current_application: Current applications
+        certificate_type: Certificate type
         status: Status
+        emergency: Emergency
+        substantive: Substantive
+        substantive_due: 'Substantive due: %{date}'
     limitations:
       show:
         h1-heading: What you're applying for
