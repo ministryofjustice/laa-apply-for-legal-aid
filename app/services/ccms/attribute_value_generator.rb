@@ -84,8 +84,12 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
-    def application_firmname(_options)
-      @legal_aid_application.provider.firm.name
+    def provider_firm_id(_options)
+      @legal_aid_application.provider.firm.id
+    end
+
+    def applicant_national_insurance_number(_options)
+      applicant.national_insurance_number
     end
 
     def applicant_owed_money?(_options)

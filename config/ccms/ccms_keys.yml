@@ -124,6 +124,21 @@ family_statement:
     :response_type: text
     :user_defined: false
 global_means:
+  BEN_DOB:
+    :value: '#applicant_date_of_birth'
+    :br100_meaning: "DWP Benefit Check: Recipient's DOB"
+    :response_type: date
+    :user_defined: false
+  BEN_NI_NO:
+    :value: '#applicant_national_insurance_number'
+    :br100_meaning: "DWP Benefit Check: National Insurance Number"
+    :response_type: text
+    :user_defined: false
+  BEN_SURNAME:
+    :value: '#applicant_last_name'
+    :br100_meaning: "DWP Benefit Check: Recipient's Surname"
+    :response_type: text
+    :user_defined: false
   COUNTRY:
     :value: GBR
     :br100_meaning: "Applicant's country of residence"
@@ -2011,7 +2026,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   USER_PROVIDER_FIRM_ID:
-    :value: '#application_firmname'
+    :value: '#provider_firm_id'
     :br100_meaning: the user provider firm id
     :response_type: number
     :user_defined: true
@@ -3459,7 +3474,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   USER_PROVIDER_FIRM_ID:
-    :value: '#application_firmname'
+    :value: '#provider_firm_id'
     :br100_meaning: the user provider firm id
     :response_type: number
     :user_defined: true
