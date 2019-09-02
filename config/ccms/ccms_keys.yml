@@ -124,6 +124,21 @@ family_statement:
     :response_type: text
     :user_defined: false
 global_means:
+  BEN_DOB:
+    :value: '#applicant_date_of_birth'
+    :br100_meaning: "DWP Benefit Check: Recipient's DOB"
+    :response_type: date
+    :user_defined: false
+  BEN_NI_NO:
+    :value: '#applicant_national_insurance_number'
+    :br100_meaning: "DWP Benefit Check: National Insurance Number"
+    :response_type: text
+    :user_defined: false
+  BEN_SURNAME:
+    :value: '#applicant_last_name'
+    :br100_meaning: "DWP Benefit Check: Recipient's Surname"
+    :response_type: text
+    :user_defined: false
   COUNTRY:
     :value: GBR
     :br100_meaning: "Applicant's country of residence"
@@ -315,7 +330,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   SURNAME_AT_BIRTH:
-    :value: Fabby
+    :value: '#applicant_last_name'
     :br100_meaning: 'Client: Surname at birth'
     :response_type: text
     :user_defined: true
@@ -592,7 +607,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   SURNAME:
-    :value: Fabby
+    :value: '#applicant_last_name'
     :br100_meaning: 'Client: Surname'
     :response_type: text
     :user_defined: true
@@ -769,7 +784,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   POST_CODE:
-    :value: CH1 1DW
+    :value: '#applicant_postcode'
     :br100_meaning: Post Code
     :response_type: text
     :user_defined: true
@@ -2011,7 +2026,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   USER_PROVIDER_FIRM_ID:
-    :value: 19148
+    :value: '#provider_firm_id'
     :br100_meaning: the user provider firm id
     :response_type: number
     :user_defined: true
@@ -2643,7 +2658,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   SURNAME_AT_BIRTH:
-    :value: Fabby
+    :value: '#applicant_last_name'
     :br100_meaning: 'Client: Surname at birth'
     :response_type: text
     :user_defined: true
@@ -2855,7 +2870,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   DATE_CLIENT_VISITED_FIRM:
-    :value: 01-04-2019
+    :value: '#application_calculation_date'
     :br100_meaning: 'App: The Date The Client First Visited The Firm About This Case'
     :response_type: date
     :user_defined: true
@@ -3069,7 +3084,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   CLIENT_AGE:
-    :value: '41'
+    :value: '#applicant_age'
     :br100_meaning: 'Client: The Client''s Age'
     :response_type: number
     :user_defined: false
@@ -3108,7 +3123,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   SURNAME:
-    :value: Fabby
+    :value: '#applicant_last_name'
     :br100_meaning: 'Client: Surname'
     :response_type: text
     :user_defined: true
@@ -3320,7 +3335,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   POST_CODE:
-    :value: CH1 1DW
+    :value: '#applicant_postcode'
     :br100_meaning: Post Code
     :response_type: text
     :user_defined: true
@@ -3459,7 +3474,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   USER_PROVIDER_FIRM_ID:
-    :value: 19148
+    :value: '#provider_firm_id'
     :br100_meaning: the user provider firm id
     :response_type: number
     :user_defined: true

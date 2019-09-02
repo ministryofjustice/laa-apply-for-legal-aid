@@ -13,7 +13,10 @@ FactoryBot.define do
     end
 
     trait :with_applicant_and_address do
-      applicant { create :applicant, :with_address }
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { create :applicant, :with_address, with_bank_accounts: with_bank_accounts }
     end
 
     trait :with_applicant_and_address_lookup do
