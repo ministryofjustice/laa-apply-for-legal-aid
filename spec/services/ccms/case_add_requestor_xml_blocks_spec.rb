@@ -248,6 +248,57 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             end
           end
         end
+        context 'POST_CODE' do
+          it "inserts applicant's postcode as a string" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'POST_CODE')
+              expect(block).to have_text_response legal_aid_application.applicant.address.postcode
+            end
+          end
+        end
+        context 'SURNAME' do
+          it "inserts applicant's surname as a string" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'SURNAME')
+              expect(block).to have_text_response legal_aid_application.applicant.last_name
+            end
+          end
+        end
+        context 'SURNAME_AT_BIRTH' do
+          it "inserts applicant's surname at birth as a string" do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'SURNAME_AT_BIRTH')
+              expect(block).to have_text_response legal_aid_application.applicant.last_name
+            end
+          end
+        end
+        context 'CLIENT_AGE' do
+          it "inserts applicant's age as a number" do
+            %i[global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'CLIENT_AGE')
+              expect(block).to have_number_response legal_aid_application.applicant.age
+            end
+          end
+        end
+      end
+
+      context 'DATE_CLIENT_VISITED_FIRM' do
+        before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
+        it "inserts today's date as a string" do
+          %i[global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'DATE_CLIENT_VISITED_FIRM')
+            expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
+          end
+        end
+      end
+
+      context 'USER_PROVIDER_FIRM_ID' do
+        it "inserts provider's firm id as a number" do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'USER_PROVIDER_FIRM_ID')
+            expect(block).to have_number_response legal_aid_application.provider.firm.id
+          end
+        end
       end
 
       context 'DATE_ASSESSMENT_STARTED' do
@@ -305,6 +356,26 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'is false' do
             block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
             expect(block).to have_boolean_response false
+          end
+        end
+      end
+
+      context 'Benefit Checker' do
+        context 'BEN_DOB' do
+          it "inserts applicant's date of birth as a string" do
+            %i[global_means].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'BEN_DOB')
+              expect(block).to have_date_response legal_aid_application.applicant.date_of_birth.strftime('%d-%m-%Y')
+            end
+          end
+        end
+
+        context 'BEN_NI_NO' do
+          it "inserts applicant's national insurance number as a string" do
+            %i[global_means].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'BEN_NI_NO')
+              expect(block).to have_text_response legal_aid_application.applicant.national_insurance_number
+            end
           end
         end
       end

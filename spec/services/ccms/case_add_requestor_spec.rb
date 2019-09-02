@@ -70,13 +70,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                first_name: 'Dave',
                age: '65',
                last_name: 'Fabby',
+               national_insurance_number: 'JH125029B',
                date_of_birth: Date.today,
                address: address,
                preferred_address: 'CLIENT',
                bank_accounts: [bank_account_1]
       end
 
-      let(:firm) { double Firm, firm_id: 19_148, name: 'Firm1' }
+      let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
 
       let(:provider) do
         double Provider,
