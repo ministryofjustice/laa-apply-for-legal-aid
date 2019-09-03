@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe CCMS::ObtainDocumentIdService do
-  let(:legal_aid_application) { create :legal_aid_application, statement_of_case: statement_of_case }
+  let(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_applicant,
+           :with_proceeding_types,
+           :with_respondent,
+           :with_merits_assessment,
+           :with_transaction_period,
+           statement_of_case: statement_of_case
+  end
   let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
   let(:statement_of_case) { create :statement_of_case }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
@@ -32,24 +40,25 @@ RSpec.describe CCMS::ObtainDocumentIdService do
       let(:statement_of_case) { create :statement_of_case, :with_attached_files }
       let(:document_id_response) { ccms_data_from_file 'document_id_response.xml' }
       let(:transaction_request_id_in_example_response) { '20190301030405123456' }
-      let(:ccms_document_id_in_example_response) { '4420073' }
 
       before do
         allow(subject).to receive(:document_id_requestor).and_return(document_id_requestor)
-        expect(document_id_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-        expect(document_id_requestor).to receive(:call).and_return(document_id_response)
+        allow(document_id_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+        allow(document_id_requestor).to receive(:call).and_return(document_id_response)
+        Reports::MeansReportCreator.call(legal_aid_application)
+        Reports::MeritsReportCreator.call(legal_aid_application)
       end
 
-      it 'populates the documents array with all documents for the application' do
+      it 'populates the documents array with statement_of_case, means_report and merits_report' do
         subject.call
-        expect(submission.documents&.size).to eq statement_of_case.original_files.count
+        expect(submission.documents&.size).to eq 3
       end
 
       context 'when requesting document_ids' do
-        it 'updates the ccms_document_id for each document' do
+        it 'populates the ccms_document_id for each document' do
           subject.call
           submission.documents.each do |document|
-            expect(document[:ccms_document_id]).to eq ccms_document_id_in_example_response
+            expect(document[:ccms_document_id]).to_not be nil
           end
         end
 

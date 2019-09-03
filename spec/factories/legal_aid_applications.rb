@@ -250,5 +250,17 @@ FactoryBot.define do
       state { :checking_merits_answers }
       provider_step { :check_merits_answers }
     end
+
+    trait :with_means_report do
+      after :create do |application|
+        Reports::MeansReportCreator.call(application)
+      end
+    end
+
+    trait :with_merits_report do
+      after :create do |application|
+        Reports::MeritsReportCreator.call(application)
+      end
+    end
   end
 end

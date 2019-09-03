@@ -19,14 +19,24 @@ module CCMS
     private
 
     def upload_document(document)
-      pdf_file = PdfFile.find_by(original_file_id: document[:id])
-      document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference, document[:ccms_document_id], Base64.strict_encode64(pdf_file.file.download))
+      document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference, document[:ccms_document_id], Base64.strict_encode64(pdf_binary(document)))
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
       update_document_status(document, tx_id, response)
     rescue CcmsError => e
       document[:status] = :failed
       raise CcmsError, e
+    end
+
+    def pdf_binary(document)
+      case document[:type]
+      when :statement_of_case
+        PdfFile.find_by(original_file_id: document[:id]).file.download
+      when :means_report
+        submission.legal_aid_application.means_report.attachment.download
+      when :merits_report
+        submission.legal_aid_application.merits_report.attachment.download
+      end
     end
 
     def update_document_status(document, tx_id, response)

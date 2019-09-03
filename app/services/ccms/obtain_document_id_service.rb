@@ -16,10 +16,34 @@ module CCMS
 
     def populate_documents
       submission.documents = []
+      add_statements_of_case
+      add_means_report
+      add_merits_report
+    end
+
+    def add_statements_of_case
       files = StatementOfCase.find_by(legal_aid_application_id: submission.legal_aid_application_id)&.original_files
       files&.each do |document|
         submission.documents << { id: document.id, status: :new, type: :statement_of_case, ccms_document_id: nil }
       end
+    end
+
+    def add_means_report
+      return unless submission.legal_aid_application.means_report.attachment
+
+      submission.documents << { id: submission.legal_aid_application.means_report.id,
+                                status: :new,
+                                type: :means_report,
+                                ccms_document_id: nil }
+    end
+
+    def add_merits_report
+      return unless submission.legal_aid_application.merits_report.attachment
+
+      submission.documents << { id: submission.legal_aid_application.merits_report.id,
+                                status: :new,
+                                type: :merits_report,
+                                ccms_document_id: nil }
     end
 
     def request_document_ids

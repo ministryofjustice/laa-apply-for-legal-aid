@@ -53,6 +53,37 @@ module CCMS
              marked_for_destruction?: false
     end
 
+    let(:substantive_legal_aid_application) do
+      create :legal_aid_application,
+             :with_applicant_and_address,
+             :with_proceeding_types,
+             :with_substantive_scope_limitation,
+             :with_other_assets_declaration,
+             :with_savings_amount,
+             :with_respondent,
+             :with_transaction_period,
+             :with_merits_assessment,
+             :with_means_report,
+             :with_merits_report,
+             statement_of_case: @statement_of_case
+    end
+
+    let(:delegated_functions_legal_aid_application) do
+      create :legal_aid_application,
+             :with_applicant_and_address,
+             :with_proceeding_types,
+             :with_delegated_functions,
+             :with_delegated_functions_scope_limitation,
+             :with_other_assets_declaration,
+             :with_savings_amount,
+             :with_respondent,
+             :with_transaction_period,
+             :with_merits_assessment,
+             :with_means_report,
+             :with_merits_report,
+             statement_of_case: @statement_of_case
+    end
+
     before do
       @statement_of_case = create :statement_of_case, :with_attached_files
       PdfConverter.call(PdfFile.find_or_create_by(original_file_id: @statement_of_case.original_files.first.id).id)
@@ -74,8 +105,7 @@ module CCMS
 
     context 'delegated functions case' do
       before do
-        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_delegated_functions, :with_delegated_functions_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
-        @submission = create :submission, legal_aid_application: @legal_aid_application
+        @submission = create :submission, legal_aid_application: delegated_functions_legal_aid_application
       end
 
       describe 'generate case payload only' do
@@ -100,8 +130,7 @@ module CCMS
 
     context 'substantive case' do
       before do
-        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_substantive_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, :with_transaction_period, statement_of_case: @statement_of_case
-        @submission = create :submission, legal_aid_application: @legal_aid_application
+        @submission = create :submission, legal_aid_application: substantive_legal_aid_application
       end
 
       describe 'generate case payload only' do

@@ -1,15 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe CCMS::UploadDocumentsService do
-  let(:legal_aid_application) { create :legal_aid_application, statement_of_case: statement_of_case }
+  let(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_applicant,
+           :with_proceeding_types,
+           :with_respondent,
+           :with_merits_assessment,
+           :with_transaction_period,
+           :with_means_report,
+           :with_merits_report,
+           statement_of_case: statement_of_case
+  end
   let(:statement_of_case) { create :statement_of_case, :with_attached_files }
   let(:document_id) { statement_of_case.original_files.first.id }
+  let(:means_report_id) { legal_aid_application.means_report.id }
+  let(:merits_report_id) { legal_aid_application.merits_report.id }
   let(:submission) do
     create :submission,
            :case_created,
            legal_aid_application: legal_aid_application,
            case_ccms_reference: Faker::Number.number(digits: 9),
-           documents: [{ id: document_id, status: :id_obtained, type: :statement_of_case, ccms_document_id: '67890' }]
+           documents: [{ id: document_id, status: :id_obtained, type: :statement_of_case, ccms_document_id: '67890' },
+                       { id: means_report_id, status: :id_obtained, type: :means_report, ccms_document_id: '67891' },
+                       { id: merits_report_id, status: :id_obtained, type: :merits_report, ccms_document_id: '67892' }]
   end
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, document_id, 'base64encodedpdf') }
@@ -20,12 +34,12 @@ RSpec.describe CCMS::UploadDocumentsService do
   before do
     PdfConverter.call(PdfFile.find_or_create_by(original_file_id: document_id).id)
     allow(CCMS::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
-    expect(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+    allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
   end
 
   context 'operation successful' do
     before do
-      expect(document_upload_requestor).to receive(:call).and_return(document_upload_response)
+      allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
     end
 
     it 'creates a DocumentUploadRequestor object for each document to be uploaded' do
@@ -86,7 +100,7 @@ RSpec.describe CCMS::UploadDocumentsService do
     context 'operation fails due to an error response from ccms' do
       before do
         allow_any_instance_of(CCMS::DocumentUploadResponseParser).to receive(:success?).and_return(false)
-        expect(document_upload_requestor).to receive(:call).and_return(document_upload_response)
+        allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
       end
 
       it 'changes the submission state to failed' do
