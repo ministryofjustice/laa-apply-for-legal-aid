@@ -20,7 +20,7 @@ module LegalAidApplications
     def substantive_application_deadline
       return if continuing_substantive_application_selected?
 
-      WorkingDayCalculator.working_days_from_now(working_days_to_complete)
+      WorkingDayCalculator.call working_days: working_days_to_complete, from: model.used_delegated_functions_on
     end
 
     def continuing_substantive_application_selected?

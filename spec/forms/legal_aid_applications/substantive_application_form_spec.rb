@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
-  let(:application) { create :legal_aid_application, state: :client_details_answers_checked }
+  let(:used_delegated_functions_on) { 1.day.ago.to_date }
+  let(:application) do
+    create :legal_aid_application, state: :client_details_answers_checked, used_delegated_functions_on: used_delegated_functions_on
+  end
   let(:substantive_application) { false }
-  let(:working_day_calculator) { WorkingDayCalculator.new(Date.today) }
   let(:working_days_to_complete) { LegalAidApplication::WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION }
-  let(:deadline) { working_day_calculator.add_working_days(working_days_to_complete) }
+  let(:deadline) { WorkingDayCalculator.call working_days: working_days_to_complete, from: used_delegated_functions_on }
   let(:params) do
     {
       substantive_application: substantive_application.to_s,
