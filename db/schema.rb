@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_133153) do
+ActiveRecord::Schema.define(version: 2019_09_03_092600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -424,8 +424,8 @@ ActiveRecord::Schema.define(version: 2019_08_28_133153) do
     t.string "ccms_category_law_code"
     t.string "ccms_matter"
     t.string "ccms_matter_code"
-    t.integer "default_cost_limitation_delegated_functions"
-    t.integer "default_cost_limitation_substantive"
+    t.decimal "default_cost_limitation_delegated_functions", precision: 8, scale: 2
+    t.decimal "default_cost_limitation_substantive", precision: 8, scale: 2
     t.boolean "involvement_type_applicant"
     t.string "additional_search_terms"
     t.uuid "default_service_level_id"

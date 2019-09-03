@@ -4,13 +4,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe CaseAddRequestor do
     context 'XML request' do
       let(:expected_tx_id) { '201904011604570390059770666' }
+      let(:proceeding_type) { create :proceeding_type, :with_real_data }
       let(:legal_aid_application) do
         create :legal_aid_application,
-               :with_proceeding_types,
                :with_everything,
                :with_applicant_and_address,
                populate_vehicle: true,
-               with_bank_accounts: 2
+               with_bank_accounts: 2,
+               proceeding_types: [proceeding_type]
       end
 
       let(:provider) do
@@ -307,27 +308,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'DATE_ASSESSMENT_STARTED')
             expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
-          end
-        end
-      end
-
-      context 'DEFAULT_COST_LIMITATION' do
-        before { allow(legal_aid_application).to receive(:default_substantive_cost_limitation).and_return('2.00') }
-        context 'global_merits' do
-          it 'inserts default cost limitation' do
-            %i[global_merits].each do |entity|
-              block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION_MERITS')
-              expect(block).to have_currency_response legal_aid_application.default_substantive_cost_limitation
-            end
-          end
-        end
-
-        context 'global_means' do
-          it 'inserts default cost limitation' do
-            %i[global_means].each do |entity|
-              block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
-              expect(block).to have_currency_response legal_aid_application.default_substantive_cost_limitation
-            end
           end
         end
       end
@@ -708,11 +688,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
-        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
-          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
-          expect(block).to have_text_response 'FAMILY'
-        end
-
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
@@ -759,11 +734,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               expect(block).to have_boolean_response false
             end
           end
-        end
-
-        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
-          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
-          expect(block).to have_text_response 'FAMILY'
         end
 
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
@@ -870,6 +840,66 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
+        end
+      end
+
+      context 'legal framework attributes' do
+        it 'populates REQ_COST_LIMITATION' do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'REQ_COST_LIMITATION')
+            expect(block).to have_currency_response format('%.2f', legal_aid_application.default_substantive_cost_limitation)
+          end
+        end
+
+        it 'populates APP_IS_FAMILY' do
+          block = XmlExtractor.call(xml, :global_merits, 'APP_IS_FAMILY')
+          expect(block).to have_boolean_response(application_proceeding_type.proceeding_type.ccms_category_law == 'Family')
+        end
+
+        it 'populates CAT_OF_LAW_DESCRIPTION' do
+          block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_DESCRIPTION')
+          expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
+        end
+
+        it 'populates CAT_OF_LAW_HIGH_LEVEL' do
+          block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_HIGH_LEVEL')
+          expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
+        end
+
+        it 'populates CAT_OF_LAW_MEANING' do
+          block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_MEANING')
+          expect(block).to have_text_response application_proceeding_type.proceeding_type.meaning
+        end
+
+        it 'populates CATEGORY_OF_LAW' do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'CATEGORY_OF_LAW')
+            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law_code
+          end
+        end
+
+        it 'populates DEFAULT_COST_LIMITATION_MERITS' do
+          block = XmlExtractor.call(xml, :global_merits, 'DEFAULT_COST_LIMITATION_MERITS')
+          expect(block).to have_currency_response format('%.2f', legal_aid_application.default_substantive_cost_limitation)
+        end
+
+        it 'populates DEFAULT_COST_LIMITATION' do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
+            expect(block).to have_currency_response format('%.2f', legal_aid_application.default_substantive_cost_limitation)
+          end
+        end
+
+        it 'populates MATTER_TYPE' do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, 'MATTER_TYPE')
+            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_matter_code
+          end
+        end
+
+        it 'populates PROCEEDING_NAME' do
+          block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_NAME')
+          expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_code
         end
       end
     end

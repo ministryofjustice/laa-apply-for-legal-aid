@@ -159,10 +159,34 @@ module CCMS
       applicant.address.postcode
     end
 
+    def lead_proceeding_cost_limitation_substantive(_options)
+      lead_proceeding_type.default_cost_limitation_substantive
+    end
+
+    def lead_proceeding_category_of_law(_options)
+      lead_proceeding_type.ccms_category_law
+    end
+
+    def lead_proceeding_category_of_law_is_family?(_options)
+      lead_proceeding_type.ccms_category_law == 'Family'
+    end
+
+    def lead_proceeding_category_of_law_meaning(_options)
+      lead_proceeding_type.meaning
+    end
+
+    def lead_proceeding_category_of_law_code(_options)
+      lead_proceeding_type.ccms_category_law_code
+    end
+
     private
 
     def applicant
       @applicant ||= @legal_aid_application.applicant
+    end
+
+    def lead_proceeding_type
+      @lead_proceeding_type ||= @legal_aid_application.lead_proceeding_type
     end
 
     def standardly_named_method?(method)

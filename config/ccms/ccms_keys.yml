@@ -297,7 +297,7 @@ global_means:
     :response_type: text
     :user_defined: false
   CATEGORY_OF_LAW:
-    :value: FAMILY
+    :value: '#lead_proceeding_category_of_law_code'
     :br100_meaning: the category of law
     :response_type: text
     :user_defined: true
@@ -723,7 +723,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   REQ_COST_LIMITATION:
-    :value: 5000.0
+    :value: '#lead_proceeding_cost_limitation_substantive'
     :br100_meaning: 'App: Requested Cost Limitation'
     :response_type: currency
     :user_defined: true
@@ -2611,12 +2611,12 @@ global_merits:
     :response_type: text
     :user_defined: false
   CAT_OF_LAW_DESCRIPTION:
-    :value: Family
+    :value: '#lead_proceeding_category_of_law'
     :br100_meaning: The Category Of Law Description
     :response_type: text
     :user_defined: false
   CATEGORY_OF_LAW:
-    :value: MAT
+    :value: '#lead_proceeding_category_of_law_code'
     :br100_meaning: the category of law
     :response_type: text
     :user_defined: true
@@ -3224,7 +3224,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APP_IS_FAMILY:
-    :value: true
+    :value: '#lead_proceeding_category_of_law_is_family?'
     :br100_meaning: The Application Is A Family Application
     :response_type: boolean
     :user_defined: false
@@ -3284,7 +3284,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   REQ_COST_LIMITATION:
-    :value: 5000
+    :value: '#lead_proceeding_cost_limitation_substantive'
     :br100_meaning: 'App: Requested Cost Limitation'
     :response_type: currency
     :user_defined: true
@@ -3640,7 +3640,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CAT_OF_LAW_HIGH_LEVEL:
-    :value: Family
+    :value: '#lead_proceeding_category_of_law'
     :br100_meaning: The Category Of Law High Level
     :response_type: text
     :user_defined: false
@@ -3754,7 +3754,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   CAT_OF_LAW_MEANING:
-    :value: Family
+    :value: '#lead_proceeding_category_of_law_meaning'
     :br100_meaning: 'App: The Category Of Law Meaning'
     :response_type: text
     :user_defined: false
