@@ -20,6 +20,7 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
+        # https://github.com/ministryofjustice/clamav
         - name: clamav
           image: '754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2'
           imagePullPolicy: IfNotPresent
@@ -28,7 +29,12 @@ spec:
               containerPort: 3310
               protocol: TCP
           resources:
-{{ toYaml .Values.clamav.resources | indent 12 }}
+            limits:
+              cpu: 500m
+              memory: 3Gi
+            requests:
+              cpu: 10m
+              memory: 1Gi
         - name: web
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: IfNotPresent
@@ -50,7 +56,12 @@ spec:
             initialDelaySeconds: 60
             timeoutSeconds: 10
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+            requests:
+              cpu: 10m
+              memory: 512Mi
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
