@@ -10,7 +10,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
 
   context 'operation successful' do
     context 'the application has no documents' do
-      it 'creates an empty documents hash' do
+      it 'creates an empty documents array' do
         subject.call
         expect(submission.documents&.size).to eq 0
       end
@@ -40,7 +40,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
         expect(document_id_requestor).to receive(:call).and_return(document_id_response)
       end
 
-      it 'populates the documents hash with all documents for the application' do
+      it 'populates the documents array with all documents for the application' do
         subject.call
         expect(submission.documents&.size).to eq statement_of_case.original_files.count
       end
@@ -48,15 +48,15 @@ RSpec.describe CCMS::ObtainDocumentIdService do
       context 'when requesting document_ids' do
         it 'updates the ccms_document_id for each document' do
           subject.call
-          submission.documents.each do |key, _value|
-            expect(PdfFile.find_by(original_file_id: key).ccms_document_id).to eq ccms_document_id_in_example_response
+          submission.documents.each do |document|
+            expect(document[:ccms_document_id]).to eq ccms_document_id_in_example_response
           end
         end
 
         it 'updates the status for each document to id_obtained' do
           subject.call
-          submission.documents.each do |_key, value|
-            expect(value).to eq :id_obtained
+          submission.documents.each do |document|
+            expect(document[:status]).to eq :id_obtained
           end
         end
 
@@ -101,7 +101,8 @@ RSpec.describe CCMS::ObtainDocumentIdService do
       end
 
       it 'changes the document state to failed' do
-        expect { subject.call }.to change { submission.documents[statement_of_case.original_files.first.id] }.to eq :failed
+        subject.call
+        expect(submission.documents.first[:status]).to eq :failed
       end
 
       it 'writes a history record' do

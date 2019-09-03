@@ -25,7 +25,7 @@ FactoryBot.define do
 
     trait :document_ids_obtained do
       aasm_state { 'document_ids_obtained' }
-      documents { { '12345' => :id_obtained } }
+      documents { [{ id: '12345', status: :id_obtained, type: :statement_of_case, ccms_document_id: '67890' }] }
     end
   end
 end

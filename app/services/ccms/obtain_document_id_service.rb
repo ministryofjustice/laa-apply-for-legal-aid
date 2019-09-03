@@ -15,19 +15,21 @@ module CCMS
     private
 
     def populate_documents
+      submission.documents = []
       files = StatementOfCase.find_by(legal_aid_application_id: submission.legal_aid_application_id)&.original_files
-      files&.each { |document| submission.documents[document.id] = :new }
+      files&.each do |document|
+        submission.documents << { id: document.id, status: :new, type: :statement_of_case, ccms_document_id: nil }
+      end
     end
 
     def request_document_ids
-      submission.documents.each do |key, _value|
+      submission.documents.each do |document|
         tx_id = document_id_requestor.transaction_request_id
         response = document_id_requestor.call
-        pdf_file = PdfFile.find_by(original_file_id: key)
-        pdf_file.update(ccms_document_id: DocumentIdResponseParser.new(tx_id, response).document_id)
-        submission.documents[key] = :id_obtained
+        document[:ccms_document_id] = DocumentIdResponseParser.new(tx_id, response).document_id
+        document[:status] = :id_obtained
       rescue CcmsError => e
-        submission.documents[key] = :failed
+        document[:status] = :failed
         raise CcmsError, e
       end
     end

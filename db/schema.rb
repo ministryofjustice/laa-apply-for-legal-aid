@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_092600) do
+ActiveRecord::Schema.define(version: 2019_09_04_151326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -395,7 +395,6 @@ ActiveRecord::Schema.define(version: 2019_09_03_092600) do
 
   create_table "pdf_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "original_file_id", null: false
-    t.text "ccms_document_id"
     t.index ["original_file_id"], name: "index_pdf_files_on_original_file_id", unique: true
   end
 

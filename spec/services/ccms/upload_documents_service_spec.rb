@@ -9,7 +9,7 @@ RSpec.describe CCMS::UploadDocumentsService do
            :case_created,
            legal_aid_application: legal_aid_application,
            case_ccms_reference: Faker::Number.number(digits: 9),
-           documents: { document_id => :id_obtained }
+           documents: [{ id: document_id, status: :id_obtained, type: :statement_of_case, ccms_document_id: '67890' }]
   end
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, document_id, 'base64encodedpdf') }
@@ -40,8 +40,8 @@ RSpec.describe CCMS::UploadDocumentsService do
 
     it 'updates the status for each document to uploaded' do
       subject.call
-      submission.documents.each do |_key, value|
-        expect(value).to eq :uploaded
+      submission.documents.each do |document|
+        expect(document[:status]).to eq :uploaded
       end
     end
 
@@ -69,7 +69,8 @@ RSpec.describe CCMS::UploadDocumentsService do
       end
 
       it 'changes the document state to failed' do
-        expect { subject.call }.to change { submission.documents[statement_of_case.original_files.first.id] }.to eq :failed
+        subject.call
+        expect(submission.documents.first[:status]).to eq :failed
       end
 
       it 'writes a history record' do
@@ -93,7 +94,8 @@ RSpec.describe CCMS::UploadDocumentsService do
       end
 
       it 'changes the document state to failed' do
-        expect { subject.call }.to change { submission.documents[statement_of_case.original_files.first.id] }.to eq :failed
+        subject.call
+        expect(submission.documents.first[:status]).to eq :failed
       end
 
       it 'writes a history record' do

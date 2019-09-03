@@ -81,12 +81,10 @@ module CCMS
     end
 
     def generate_case_docs(xml)
-      @submission.documents.each do |key|
+      @submission.documents.each do |document|
         xml.__send__('ns2:CaseDoc') do
-          xml.__send__('ns2:CCMSDocumentID', PdfFile.find_by(original_file_id: key).ccms_document_id)
-          # TODO: at present only statements of case are uploaded. at some point uploads will also include means and
-          # merits reports; at that point the following element will need to vary based on document type
-          xml.__send__('ns2:DocumentSubject', 'statement_of_case')
+          xml.__send__('ns2:CCMSDocumentID', document[:ccms_document_id])
+          xml.__send__('ns2:DocumentSubject', document[:type])
         end
       end
     end

@@ -310,7 +310,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                applicant_ccms_reference: 9_876_543_210
       end
 
-      let(:documents) { { '2b4ccb59-5161-498d-a27a-79110de7b67e' => :id_obtained } }
+      let(:documents) { [{ id: '12345', status: :id_obtained, type: :statement_of_case, ccms_document_id: '67890' }] }
 
       let(:pdf_file) do
         double PdfFile,
