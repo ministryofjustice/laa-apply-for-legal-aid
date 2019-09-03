@@ -222,7 +222,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:proceeding_merits, 'LEAD_PROCEEDING'],
             [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT'],
             [:global_means, 'APPLICATION_FROM_APPLY'],
-            [:global_means, 'APPLICATION_FROM_APPLY'],
+            [:global_merits, 'APPLICATION_FROM_APPLY'],
             [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
             [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
 
