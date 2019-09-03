@@ -209,23 +209,22 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'attributes hard coded to true' do
         it 'should be hard coded to true' do
           attributes = [
-            [:global_means, 'LAR_SCOPE_FLAG'],
+            [:global_means, 'APPLICATION_FROM_APPLY'],
             [:global_means, 'GB_INPUT_B_38WP3_2SCREEN'],
             [:global_means, 'GB_INPUT_B_38WP3_3SCREEN'],
-            [:global_merits, 'MERITS_DECLARATION_SCREEN'],
             [:global_means, 'GB_DECL_B_38WP3_13A'],
+            [:global_means, 'LAR_SCOPE_FLAG'],
+            [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
+            [:global_merits, 'APPLICATION_FROM_APPLY'],
             [:global_merits, 'CLIENT_HAS_DV_RISK'],
             [:global_merits, 'CLIENT_REQ_SEP_REP'],
-            [:global_merits, 'DECLARATION_WILL_BE_SIGNED'],
             [:global_merits, 'DECLARATION_REVOKE_IMP_SUBDP'],
+            [:global_merits, 'DECLARATION_WILL_BE_SIGNED'],
+            [:global_merits, 'MERITS_DECLARATION_SCREEN'],
+            [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
             [:proceeding, 'SCOPE_LIMIT_IS_DEFAULT'],
             [:proceeding_merits, 'LEAD_PROCEEDING'],
-            [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT'],
-            [:global_means, 'APPLICATION_FROM_APPLY'],
-            [:global_merits, 'APPLICATION_FROM_APPLY'],
-            [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
-            [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
-
+            [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -1315,7 +1314,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'GB_INPUT_B_1WP3_165A'],
       [:global_means, 'GB_INPUT_B_1WP3_400A'],
       [:global_means, 'GB_INPUT_B_1WP3_401A'],
-      [:global_means, 'MEANS_TASK_AUTO_GEN'],
       [:global_means, 'GB_INFER_B_1WP1_1A'],
       [:global_means, 'GB_INPUT_B_14WP2_7A'],
       [:global_means, 'GB_INPUT_B_18WP2_2A'],
@@ -1431,13 +1429,17 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'LAR_INPUT_B_37WP2_4A'],
       [:global_means, 'LAR_PER_RES_INPUT_B_37WP2_7A'],
       [:global_means, 'MEANS_EVIDENCE_REQD'],
+      [:global_means, 'MEANS_TASK_AUTO_GEN'],
       [:global_merits, 'ACTION_AGAINST_POLICE'],
       [:global_merits, 'ACTUAL_LIKELY_COSTS_EXCEED_25K'],
       [:global_merits, 'AMENDMENT'],
       [:global_merits, 'APP_BROUGHT_BY_PERSONAL_REP'],
       [:global_merits, 'COPY_SEPARATE_STATEMENT'],
       [:global_merits, 'CLIENT_HAS_RECEIVED_LA_BEFORE'],
+      [:global_merits, 'COST_LIMIT_CHANGED'],
+      [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
       [:global_merits, 'COURT_ATTEND_IN_LAST_12_MONTHS'],
+      [:global_merits, 'DECLARATION_IDENTIFIER'],
       [:global_merits, 'ECF_FLAG'],
       [:global_merits, 'EVID_DEC_AGAINST_INSTRUCTIONS'],
       [:global_merits, 'EVIDENCE_AMD_CORRESPONDENCE'],
@@ -1504,12 +1506,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'OTHER_PARTIES_MAY_BENEFIT'],
       [:global_merits, 'OTHERS_WHO_MAY_BENEFIT'],
       [:global_merits, 'PROCS_ARE_BEFORE_THE_COURT'],
+      [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
       [:global_merits, 'URGENT_FLAG'],
-      [:global_merits, 'COST_LIMIT_CHANGED'],
-      [:global_merits, 'DECLARATION_IDENTIFIER'],
-      [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
-      [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:proceeding_merits, 'WARNING_LETTER_SENT']
     ]
   end
