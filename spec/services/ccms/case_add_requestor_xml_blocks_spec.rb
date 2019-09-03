@@ -222,7 +222,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:proceeding_merits, 'LEAD_PROCEEDING'],
             [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT'],
             [:global_means, 'APPLICATION_FROM_APPLY'],
-            [:global_means, 'APPLICATION_FROM_APPLY']
+            [:global_means, 'APPLICATION_FROM_APPLY'],
+            [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
+            [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
+
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -921,8 +924,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'GB_INPUT_B_34WP3_32A'],
       [:global_means, 'GB_PROC_B_1WP4_99A'],
       [:global_means, 'LAR_RFLAG_B_37WP2_41A'],
-      [:global_means, 'MEANS_EVIDENCE_PROVIDED'],
-      [:global_means, 'MEANS_EVIDENCE_REQD'],
       [:global_means, 'MEANS_OPA_RELEASE'],
       [:global_means, 'MEANS_REPORT_BACKLOG_TAG'],
       [:global_means, 'MEANS_REQD'],
@@ -1136,8 +1137,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'MENTAL_HEALTH_REVIEW_TRIBUNAL'],
       [:global_merits, 'MERITS_BACKLOG_REPORT_TAG'],
       [:global_merits, 'MERITS_CERT_PREDICTED_COSTS'],
-      [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
-      [:global_merits, 'MERITS_EVIDENCE_REQD'],
       [:global_merits, 'MERITS_OPA_RELEASE'],
       [:global_merits, 'MERITS_ROUTING_NAME'],
       [:global_merits, 'MERITS_SUBMISSION_PAGE'],
@@ -1431,6 +1430,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'LAR_PROC_B_40WP3_32A'],
       [:global_means, 'LAR_INPUT_B_37WP2_4A'],
       [:global_means, 'LAR_PER_RES_INPUT_B_37WP2_7A'],
+      [:global_means, 'MEANS_EVIDENCE_REQD'],
       [:global_merits, 'ACTION_AGAINST_POLICE'],
       [:global_merits, 'ACTUAL_LIKELY_COSTS_EXCEED_25K'],
       [:global_merits, 'AMENDMENT'],
@@ -1499,6 +1499,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'HIGH_PROFILE'],
       [:global_merits, 'LEGAL_HELP_PROVIDED'],
       [:global_merits, 'MENTAL_HEAL_ACT_MENTAL_CAP_ACT'],
+      [:global_merits, 'MERITS_EVIDENCE_REQD'],
       [:global_merits, 'NEGOTIATION_CORRESPONDENCE'],
       [:global_merits, 'OTHER_PARTIES_MAY_BENEFIT'],
       [:global_merits, 'OTHERS_WHO_MAY_BENEFIT'],
