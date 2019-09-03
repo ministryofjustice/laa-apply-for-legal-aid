@@ -412,13 +412,6 @@ en:
         col_and_description: and description
         col_select_all: Select all
         sorted: Sorted
-        sorted_currently: "currently sorted "
-        sort_new_old_html: " from <em>newest</em> to <em>oldest</em>"
-        sort_old_new_html: " from <em>oldest</em> to <em>newest</em>"
-        sort_a_z_html: " from <em>A.</em> to <em>Zed</em>"
-        sort_z_a_html: " from <em>Zed</em> to <em>A</em>"
-        sort_small_large_html: " from <em>smallest</em> to <em>largest</em>"
-        sort_large_small_html: "from <em>largest</em> to <em>smallest</em>"
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?

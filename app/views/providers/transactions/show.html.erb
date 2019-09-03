@@ -18,24 +18,20 @@
             data-copy-select="<%= t '.col_select_all' %>"
             data-copy-clear="<%= t '.col_clear_all' %>">
           </th>
-          <th data-sort-type="date" class="govuk-table__header sort header-sort-desc table-combine_right_if_narrow narrow_555" scope="col">
-            <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_date') %></span><span class="table-hidden_right_title"> <%= t('.col_and_description') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"> (<%= t('.sorted_currently') %> <%= t('.sort_new_old_html') %>)</span></span>
-          </th>
-          <th data-sort-type="alphabetic" class="govuk-table__header sort" scope="col">
-            <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_description') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"></span></span>
-          </th>
-          <th class="nullcell">
-          </th>
-          <th data-sort-type="numeric" class="govuk-table__header sort govuk-table__header--numeric table-combine_right_if_narrow narrow_470" scope="col">
-            <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_amount') %></span><span class="table-hidden_right_title"> <%= t('.col_and_category') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"></span></span>
-          </th>
-          <th data-sort-type="alphabetic" class="govuk-table__header sort" scope="col">
-            <span class="govuk-visually-hidden">Sort by </span>
-            <span class="aria-sort-description"><%= t('.col_category') %></span><span class="sort-direction-indicator"><span class="screen-reader-sort-indicator govuk-visually-hidden"></span></span>
-          </th>
+          <%= sort_column_th(
+                type: :date,
+                content: t('.col_date'),
+                combine_right: { at: 555, append: t('.col_and_description') },
+                currently_sorted: :desc
+              ) %>
+          <%= sort_column_th type: :alphabetic, content: t('.col_description') %>
+          <th class="nullcell"></th>
+          <%= sort_column_th(
+                type: :numeric,
+                content: t('.col_amount'),
+                combine_right: { at: 470, append: t('.col_and_category') }
+              ) %>
+          <%= sort_column_th type: :alphabetic, content: t('.col_category') %>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
