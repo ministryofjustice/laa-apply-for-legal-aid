@@ -26,7 +26,7 @@
                 <% if application.substantive_application_deadline_on? %>
                   <br>
                   <span class="govuk-body-s">
-                    <%=  t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
+                    <%= t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
                   </span>
                 <% end %>
               <% else %>

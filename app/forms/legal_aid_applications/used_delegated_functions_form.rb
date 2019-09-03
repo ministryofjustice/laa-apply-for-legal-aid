@@ -11,6 +11,8 @@ module LegalAidApplications
     validates :used_delegated_functions_on, presence: { unless: :date_not_required? }
     validates :used_delegated_functions_on, date: { not_in_the_future: true }, allow_nil: true
 
+    after_validation :update_substantive_application_deadline
+
     def initialize(*args)
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
@@ -59,6 +61,16 @@ module LegalAidApplications
         method: :used_delegated_functions_on,
         prefix: :used_delegated_functions_
       )
+    end
+
+    def substantive_application_deadline
+      return unless used_delegated_functions_on && used_delegated_functions_on != :invalid
+
+      SubstantiveApplicationDeadlineCalculator.call self
+    end
+
+    def update_substantive_application_deadline
+      model.substantive_application_deadline_on = substantive_application_deadline
     end
   end
 end

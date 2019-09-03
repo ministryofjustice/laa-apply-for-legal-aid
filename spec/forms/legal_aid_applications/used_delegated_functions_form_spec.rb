@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
+RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:used_delegated_functions) { true }
   let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
@@ -33,6 +33,11 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
       expect(legal_aid_application.used_delegated_functions).to be used_delegated_functions
     end
 
+    it 'updates the substantive application deadline' do
+      deadline = SubstantiveApplicationDeadlineCalculator.call(legal_aid_application.reload)
+      expect(legal_aid_application.substantive_application_deadline_on).to eq(deadline)
+    end
+
     context 'when not using delegated functions selected' do
       let(:used_delegated_functions) { false }
 
@@ -42,6 +47,10 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
 
       it 'does not update the date' do
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
+      end
+
+      it 'does not update the substantive application deadline' do
+        expect(legal_aid_application.substantive_application_deadline_on).to be_nil
       end
     end
 
@@ -55,6 +64,10 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form do
 
       it 'deletes the date' do
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
+      end
+
+      it 'deletes the substantive application deadline' do
+        expect(legal_aid_application.substantive_application_deadline_on).to be_nil
       end
     end
 
