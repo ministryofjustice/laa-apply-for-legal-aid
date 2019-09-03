@@ -40,10 +40,12 @@ module CCMS
              description: ':EMPLOYMENT_CLIENT_001:CLI_NON_HM_WAGE_SLIP_001'
     end
 
+    let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
+
     let(:provider) do
       double Provider,
              username: 'user1',
-             firm_id: 22_381,
+             firm: firm,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,
              supervisor_contact_id: 3_982_723,
@@ -98,7 +100,7 @@ module CCMS
 
     context 'substantive case' do
       before do
-        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_substantive_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
+        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_substantive_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, :with_transaction_period, statement_of_case: @statement_of_case
         @submission = create :submission, legal_aid_application: @legal_aid_application
       end
 
