@@ -132,7 +132,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                scope_limitations: [scope_limitation_1, scope_limitation_2],
                status: 'draft',
                warning_letter_sent?: false,
-               default_level_of_service: service_level
+               default_level_of_service: service_level,
+               default_cost_limitation_substantive: 25_000
       end
 
       let(:application_proceeding_type_2) do
@@ -176,7 +177,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                scope_limitations: [scope_limitation_1, scope_limitation_3],
                status: 'draft',
                warning_letter_sent?: false,
-               default_level_of_service: service_level
+               default_level_of_service: service_level,
+               default_cost_limitation_substantive: 25_000
       end
 
       let(:service_level) { double ServiceLevel, service_level_number: 3, name: 'Full representation' }
@@ -320,6 +322,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:requestor) { described_class.new(submission, {}) }
 
       before do
+        allow(legal_aid_application).to receive(:lead_proceeding_type).and_return(proceeding_type_1)
         allow(ProceedingType).to receive(:find).with(1).and_return(proceeding_type_1)
         allow(ProceedingType).to receive(:find).with(2).and_return(proceeding_type_2)
         allow(ApplicationScopeLimitation).to receive(:find_by).and_return(application_scope_limitation_1)
