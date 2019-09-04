@@ -2305,7 +2305,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   MARITIAL_STATUS:
-    :value: S
+    :value: 'UNKNOWN'
     :br100_meaning: marital status
     :response_type: text
     :user_defined: true
@@ -4166,7 +4166,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME:
-    :value: "#opponent_full_name"
+    :value: 'APPLY service application. See uploaded statement of case'
     :br100_meaning: Other Party Name
     :response_type: text
     :user_defined: true
@@ -4855,13 +4855,13 @@ proceeding_merits:
     :generate_block?: false
   INJ_RECENT_INCIDENT_DETAIL:
     :generate_block?: true
-    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :value: Apply Service application. See uploaded provider statement and report
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
     :response_type: text
     :user_defined: true
   INJ_REASON_POLICE_NOT_NOTIFIED:
     :generate_block?: true
-    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :value: Apply Service application. See uploaded provider statement and report
     :br100_meaning: 'Inj: The Reason Why The Police  Have Not Been Notified'
     :response_type: text
     :user_defined: true
