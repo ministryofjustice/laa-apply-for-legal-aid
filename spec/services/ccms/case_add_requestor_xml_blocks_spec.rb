@@ -148,7 +148,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'generates INJ_REASON_NO_WARNING_LETTER block with reason' do
             block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).to have_text_response legal_aid_application.respondent.warning_letter_sent_details
+            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
           end
         end
       end
@@ -832,12 +832,16 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'SFM'
         end
 
+        it 'IS_PASSPORTED should be hard coded to YES' do
+          block = XmlExtractor.call(xml, :global_means, 'IS_PASSPORTED')
+          expect(block).to have_text_response 'YES'
+        end
+
         it 'should be hard coded with the correct notification' do
           attributes = [
-            # check the attribute below in the ccms spreadsheet
-            # [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
+            [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
+            [:proceeding_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair

@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2019_09_03_092600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "proceeding_case_id"
-    t.index ["legal_aid_application_id", "proceeding_type_id"], name: "app_proceeding_type_index", unique: true
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
