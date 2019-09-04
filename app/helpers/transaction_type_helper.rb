@@ -11,4 +11,28 @@ module TransactionTypeHelper
       label_method: "#{journey_type}_label_name"
     )
   end
+
+  def sort_category_column_cell(object, transaction_type)
+    return sort_category_column_cell_vacant(object, transaction_type) unless object.transaction_type_id?
+
+    tag_classes = %w[table-category govuk-body-s]
+    label = t("transaction_types.table_label.#{object.transaction_type.name}")
+
+    sort_column_cell(
+      id: "Category-#{object.id}",
+      sort_by: label,
+      content: gov_uk_tag(text: label, classes: tag_classes).html_safe
+    )
+  end
+
+  def sort_category_column_cell_vacant(object, transaction_type)
+    label = t("transaction_types.table_label.#{transaction_type.name}")
+    tag_classes = %w[table-category govuk-body-s table-category-vacant]
+
+    sort_column_cell(
+      id: "Category-#{object.id}",
+      sort_by: 'ZZZ',
+      content: gov_uk_tag(text: label, classes: tag_classes).html_safe
+    )
+  end
 end

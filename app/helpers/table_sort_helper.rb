@@ -1,4 +1,18 @@
 module TableSortHelper
+  def sort_column_cell(args, &block)
+    combine_right = args.delete(:combine_right)
+    sort_by = args.delete(:sort_by)
+    content = args.delete(:content) || capture(&block)
+    merge_with_class! args, ['table-combine_right_if_narrow', "narrow_#{combine_right}"] if combine_right
+    merge_with_class! args, %w[govuk-table__cell sortable-cell]
+    args['data-sort-value'] = sort_by.is_a?(Array) ? sort_by.join : sort_by
+    if args.delete(:numeric)
+      merge_with_class! args, 'govuk-table__cell--numeric'
+      args['data-sort-type'] = 'number'
+    end
+    content_tag :td, content, args
+  end
+
   # Usage
   #   For a th tag for a sortable date column with the text content of "Foo":
   #     sort_column_th type: :date, content: 'Foo'
