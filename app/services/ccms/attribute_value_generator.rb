@@ -88,6 +88,10 @@ module CCMS
       @legal_aid_application.provider.firm.id
     end
 
+    def provider_email(_options)
+      @legal_aid_application.provider.email
+    end
+
     def applicant_national_insurance_number(_options)
       applicant.national_insurance_number
     end
