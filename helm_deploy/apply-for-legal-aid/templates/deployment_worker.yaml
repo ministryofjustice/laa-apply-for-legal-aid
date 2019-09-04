@@ -26,7 +26,12 @@ spec:
           command: ['bundle', 'exec', 'sidekiq']
 {{ include "apply-for-legal-aid.envs" . | nindent 10 }}
           resources:
-{{ toYaml .Values.worker.resources | indent 12 }}
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 512Mi
           ports:
             - containerPort: 7433
           livenessProbe:
