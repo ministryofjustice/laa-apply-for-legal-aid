@@ -3396,12 +3396,6 @@ global_merits:
     :br100_meaning: Meaning not defined in BR100
     :response_type: text
     :user_defined: true
-  _SYSTEM_PUI_USERID:
-    :generate_block?: true
-    :value: '#provider_email'
-    :br100_meaning: 'Provider email address'
-    :response_type: text
-    :user_defined: true
   MENTAL_HEAL_ACT_MENTAL_CAP_ACT:
     :value: false
     :br100_meaning: 'Case: Matter Relates To Mental Health Act 2007/Mental Capacity
