@@ -14,7 +14,7 @@ gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0'
 gem 'savon', '~> 2.12.0'
 gem 'sentry-raven'
-gem 'simple_command', '~> 0.0.9'
+gem 'simple_command', '~> 0.1.0'
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.2.0'
 

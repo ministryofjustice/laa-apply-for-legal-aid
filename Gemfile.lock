@@ -436,7 +436,7 @@ GEM
     sidekiq_alive (1.1.0)
       sidekiq
       sinatra
-    simple_command (0.0.9)
+    simple_command (0.1.0)
     simplecov (0.17.0)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -564,7 +564,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-status
   sidekiq_alive
-  simple_command (~> 0.0.9)
+  simple_command (~> 0.1.0)
   simplecov
   simplecov-rcov
   spring
