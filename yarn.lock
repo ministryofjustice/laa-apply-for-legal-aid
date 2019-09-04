@@ -861,12 +861,12 @@
   optionalDependencies:
     canvas "^2.5.0"
 
-"@hint/connector-local@^3.0.2", "@hint/connector-local@^3.1.3", "@hint/connector-local@^3.1.4":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-3.1.4.tgz#1de78fdeee652b0bd50b6fa433440439c63e9fec"
-  integrity sha512-yAQfkSPiwe3N+WFrY5NE2AFl3p/6+SJcGtcR7NXkptKLNpCFOF3kynTYY/4zcaP1pNEDl6CatwFlq55AfKKAfw==
+"@hint/connector-local@^3.0.2", "@hint/connector-local@^3.1.3", "@hint/connector-local@^3.1.5":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-3.1.5.tgz#9748e7d424e7cc6842d63eb48f1a9495e4894541"
+  integrity sha512-tKpE/NSnyDjzJbqtQqj7BzI5ssSvpezPZ265KcM/vjDxgFX85gzNs2OHdJSAbKDuYe+oFeAte8ilFUiuB7hKWQ==
   dependencies:
-    "@hint/utils" "^4.0.0"
+    "@hint/utils" "^4.1.0"
     chokidar "^3.0.2"
     globby "^10.0.1"
     jsdom "^15.1.1"
