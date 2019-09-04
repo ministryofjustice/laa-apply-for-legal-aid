@@ -903,13 +903,13 @@
     lodash "^4.17.13"
     moment "^2.24.0"
 
-"@hint/formatter-json@^3.1.4":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-json/-/formatter-json-3.1.4.tgz#aa7b8c930c657acb6f44622fb156ebd584285a07"
-  integrity sha512-gOLdTEnnz6W5qh1HUJEkqLxHaw3/mqAOwPkcM92H32L4u2NwrVXjbmpP75BX3ha0WHQzHyVsnDR++VeVsl9KPw==
+"@hint/formatter-json@^3.1.5":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-json/-/formatter-json-3.1.5.tgz#9317d95fea96d1d53974f121dce89566c1cd1757"
+  integrity sha512-y5QaFdYvbWvsbPCDTK/h6mE+iEFLWSl68SjKtekUal+lZM2fohNPhxuGU2nCtZuVmYcQiqtbpdVRdG10ygIl5g==
   dependencies:
-    "@hint/utils" "^4.0.0"
-    lodash "^4.17.13"
+    "@hint/utils" "^4.1.0"
+    lodash "^4.17.15"
 
 "@hint/formatter-stylish@^3.0.2":
   version "3.0.2"
