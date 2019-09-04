@@ -1444,13 +1444,13 @@
   dependencies:
     jsdom "^15.1.1"
 
-"@hint/parser-javascript@^3.0.2", "@hint/parser-javascript@^3.0.7":
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.0.7.tgz#d85027ba3abbf212ac44be59dbbc148fdb719b9a"
-  integrity sha512-EDwQxOF3wwg5alKOaZZa6ci2GZjFhR9MN23wqNRFGDz9uoB+QEMhPwTL2MMfZmgZr6lwtdVsjVRsS0U7DVoNDg==
+"@hint/parser-javascript@^3.0.2", "@hint/parser-javascript@^3.0.7", "@hint/parser-javascript@^3.0.8":
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.0.8.tgz#2bd40b8b5c624cacf27b4295f8752b5389b50c72"
+  integrity sha512-AfutunenA0bLTJXVTqWdVJD6SHziAVEB5RxdeKmpMyRIrZwlfxfdMR4F5kHVvv9axjNj7yrFSTknO4rjxT6IUA==
   dependencies:
-    "@hint/utils" "^4.0.0"
-    acorn "^6.3.0"
+    "@hint/utils" "^4.1.0"
+    acorn "^7.0.0"
     acorn-walk "^6.2.0"
 
 "@hint/parser-manifest@^2.2.4":
@@ -2132,10 +2132,15 @@ acorn@^5.5.3:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
   integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
 
-acorn@^6.0.1, acorn@^6.1.1, acorn@^6.2.0, acorn@^6.3.0:
+acorn@^6.0.1, acorn@^6.1.1, acorn@^6.2.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.3.0.tgz#0087509119ffa4fc0a0041d1e93a417e68cb856e"
   integrity sha512-/czfa8BwS88b9gWQVhc8eknunSA2DoJpJyTQkhheIf5E48u1N0R4q/YxxsAeqRrmK9TQ/uYfgLDfZo91UlANIA==
+
+acorn@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.0.0.tgz#26b8d1cd9a9b700350b71c0905546f64d1284e7a"
+  integrity sha512-PaF/MduxijYYt7unVGRuds1vBC9bFxbNf+VWqhOClfdgy7RlVkQqt610ig1/yxTgsDIfW1cWDel5EBbOy3jdtQ==
 
 agent-base@4, agent-base@^4.2.0, agent-base@^4.3.0:
   version "4.3.0"
