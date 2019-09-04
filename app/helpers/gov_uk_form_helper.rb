@@ -80,7 +80,6 @@ module GovUkFormHelper
   end
 
   def merge_with_class!(args, class_text)
-    p ['FOOOOOO', args, class_text]
     class_text = [class_text, args[:class]]
     class_text.compact!
     class_text.flatten!
