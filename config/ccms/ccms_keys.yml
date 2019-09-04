@@ -1873,8 +1873,8 @@ global_means:
     :response_type: boolean
     :user_defined: false
   MEANS_EVIDENCE_PROVIDED:
-    :generate_block?: false
-    :value: false
+    :generate_block?: true
+    :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
@@ -2191,8 +2191,8 @@ global_means:
     :response_type: currency
     :user_defined: false
   MEANS_EVIDENCE_REQD:
-    :generate_block?: false
-    :value: true
+    :generate_block?: true
+    :value: false
     :br100_meaning: The provision of evidence is mandatory
     :response_type: boolean
     :user_defined: false
@@ -2403,8 +2403,8 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MERITS_EVIDENCE_PROVIDED:
-    :generate_block?: false
-    :value: false
+    :generate_block?: true
+    :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
@@ -3485,8 +3485,8 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   MERITS_EVIDENCE_REQD:
-    :generate_block?: false
-    :value: true
+    :generate_block?: true
+    :value: false
     :br100_meaning: provision of evidence is mandatory
     :response_type: boolean
     :user_defined: false
