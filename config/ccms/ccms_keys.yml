@@ -4781,7 +4781,6 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   INJ_REASON_NO_WARNING_LETTER:
-    :generate_block?: true
     :value: 'Apply Service application. See uploaded provider statement and report'
     :br100_meaning: 'Inj: The Reason Why No Warning Letter Has Been Sent'
     :response_type: text

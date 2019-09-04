@@ -688,11 +688,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
+<<<<<<< HEAD
         it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
           block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
           expect(block).to have_text_response 'FAMILY'
         end
 
+=======
+>>>>>>> Remove duplicated test
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
@@ -841,7 +844,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes = [
             [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:proceeding_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -873,14 +876,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response '-'
         end
 
+        it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
+          block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
+          expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
+        end
+
         it 'OTHER_PARTY_NAME should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
           expect(block).to have_text_response 'APPLY service application. See uploaded statement of case'
-        end
-
-        it 'FAMILY_STATEMENT_INSTANCE should be hard coded - ' do
-          block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STATEMENT_INSTANCE')
-          expect(block).to have_text_response '-'
         end
       end
 
@@ -1117,7 +1120,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'CLIENT_DIVORCED'],
       [:global_merits, 'CLIENT_JUDICIALLY_SEPARATED'],
       [:global_merits, 'CLIENT_MARITAL_STATUS'],
-      [:global_merits, 'MARITIAL_STATUS'],
       [:global_merits, 'CLIENT_MARRIED'],
       [:global_merits, 'CLIENT_SINGLE'],
       [:global_merits, 'CLIENT_WIDOWED'],
@@ -1169,6 +1171,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'LEGALLY_LINKED_VHCC'],
       [:global_merits, 'LIMITATION_PERIOD_TO_EXPIRE'],
       [:global_merits, 'MAGISTRATES_COURT'],
+      [:global_merits, 'MARITIAL_STATUS'],
       [:global_merits, 'MATTER_IS_SWPI'],
       [:global_merits, 'MEDIATION_APPLICABLE'],
       [:global_merits, 'MENTAL_HEAL_QUESTION_APPLIES'],
