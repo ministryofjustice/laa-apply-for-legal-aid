@@ -693,6 +693,12 @@ global_means:
     :br100_meaning: The client is NASS
     :response_type: boolean
     :user_defined: false
+  CONFIRMED_NOT_PASSPORTED:
+    :generate_block?: false
+    :value: false
+    :br100_meaning: The client is confirmed as not passported
+    :response_type: boolean
+    :user_defined: false
   GB_PROC_B_40WP3_10A:
     :value: false
     :br100_meaning: 'R - Company: Means 1c completed by company accountant'
@@ -2482,7 +2488,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   URGENT_HEARING_DATE:
-    :value: 01-04-2019
+    :value: '#application_calculation_date'
     :br100_meaning: 'Emg: The Date Of The Urgent Hearing'
     :response_type: date
     :user_defined: true
@@ -2599,7 +2605,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   EMERGENCY_FC_CRITERIA:
-    :value: Urgent hearing to attend
+    :value: Apply Service application - see uploaded provider statement of case
     :br100_meaning: 'Emg: The Reason Why The Application Meets The Emergency Criteria '
     :response_type: text
     :user_defined: true
