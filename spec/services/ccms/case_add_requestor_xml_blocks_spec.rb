@@ -120,13 +120,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'PROCEEDING_NAME' do
-        it 'inserts proceeding name as a string' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_NAME')
-          expect(block).to have_text_response legal_aid_application.proceeding_types.first.ccms_code
-        end
-      end
-
       context 'POLICE_NOTIFIED block' do
         context 'police notified' do
           before { respondent.update(police_notified: true) }
