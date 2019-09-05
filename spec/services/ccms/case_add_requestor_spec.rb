@@ -259,7 +259,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                savings_amount: savings_amount,
                open_banking_consent: true,
                open_banking_consent_choice_at: Date.new(2019, 6, 1),
-               lead_proceeding_type: proceeding_type_1
+               lead_proceeding_type: proceeding_type_1,
+               benefit_check_result: true
       end
 
       let(:other_party_1) { create :opponent, :child }

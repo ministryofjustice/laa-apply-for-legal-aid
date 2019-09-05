@@ -84,6 +84,10 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
+    def emergency_further_information(_options)
+      'Apply Service application - see uploaded provider statement of case'
+    end
+
     def provider_firm_id(_options)
       @legal_aid_application.provider.firm.id
     end

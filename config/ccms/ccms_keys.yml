@@ -1638,7 +1638,7 @@ global_means:
     :response_type: date
     :user_defined: true
   LAR_INFER_B_1WP1_36A:
-    :value: false
+    :value: "#application_benefit_check_result"
     :br100_meaning: The client is passported
     :response_type: boolean
     :user_defined: false
@@ -3039,7 +3039,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   APP_GRANTED_USING_DP:
-    :value: true
+    :value: '#application_used_delegated_functions?'
     :br100_meaning: 'Emg: The Application Has Been Granted Using Delegated Functions'
     :response_type: boolean
     :user_defined: false
@@ -3874,7 +3874,8 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   EMERGENCY_FURTHER_INFORMATION:
-    :value: Need to attend hearing today
+    :generate_block?: '#application_used_delegated_functions?'
+    :value: '#emergency_further_information'
     :br100_meaning: 'Emg: Additional Information'
     :response_type: text
     :user_defined: true
@@ -4553,6 +4554,7 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   SMOD_APPLICABLE:
+    :generate_block?: false
     :value: "#proceeding_smod_applicable"
     :br100_meaning: Smod Is Applicable To The Proceeding
     :response_type: text
@@ -4792,6 +4794,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   SIGNIFICANT_WIDER_PUB_INTEREST:
+    :generate_block?: false
     :value: "#proceeding_significant_wider_public_interest"
     :br100_meaning: The Proceeding Has Significant Wider Public Interest
     :response_type: boolean
