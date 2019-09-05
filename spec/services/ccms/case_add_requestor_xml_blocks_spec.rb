@@ -138,18 +138,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'WARNING_LETTER_SENT & INJ_REASON_NO_WARNING_LETTER blocks' do
-        context 'not sent' do
-          before { respondent.update(warning_letter_sent: false) }
-          it 'generates WARNING_LETTER_SENT block with false value' do
-            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-            expect(block).to have_boolean_response false
-          end
-
-          it 'generates INJ_REASON_NO_WARNING_LETTER block with reason' do
-            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
-          end
+      context 'WARNING_LETTER_SENT not sent' do
+        before { respondent.update(warning_letter_sent: false) }
+        it 'generates WARNING_LETTER_SENT block with false value' do
+          block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+          expect(block).to have_boolean_response false
         end
       end
 
@@ -688,14 +681,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
-<<<<<<< HEAD
-        it 'CATEGORY_OF_LAW should be hard coded to FAMILY' do
-          block = XmlExtractor.call(xml, :global_means, 'CATEGORY_OF_LAW')
-          expect(block).to have_text_response 'FAMILY'
-        end
-
-=======
->>>>>>> Remove duplicated test
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
@@ -844,7 +829,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           attributes = [
             [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
+            [:global_merits, 'INJ_REASON_NO_WARNING_LETTER']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
