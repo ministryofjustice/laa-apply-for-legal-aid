@@ -84,10 +84,6 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
-    def emergency_further_information(_options)
-      'Apply Service application - see uploaded provider statement of case'
-    end
-
     def provider_firm_id(_options)
       @legal_aid_application.provider.firm.id
     end
@@ -181,6 +177,24 @@ module CCMS
 
     def lead_proceeding_category_of_law_code(_options)
       lead_proceeding_type.ccms_category_law_code
+    end
+
+    def ccms_equivalent_prospects_of_success(_options) # rubocop:disable Metrics/MethodLength
+      check_value = @legal_aid_application.merits_assessment.success_prospect
+      case check_value
+      when 'likely'
+        'Good'
+      when 'marginal'
+        'Marginal'
+      when 'poor'
+        'Poor'
+      when 'borderline'
+        'Borderline'
+      when 'uncertain'
+        'Uncertain'
+      else
+        "Could not find match for #{check_value}"
+      end
     end
 
     private
