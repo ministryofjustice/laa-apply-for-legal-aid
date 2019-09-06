@@ -11,9 +11,8 @@
           <%= sort_column_th type: :alphabetic, content: t('.status'),           currently_sorted: @initial_sort[:status] %>
         </tr>
       </thead>
-
-      <% legal_aid_applications.each do |application| %>
-        <tbody class="govuk-table__body">
+      <tbody class="govuk-table__body">
+        <% legal_aid_applications.each do |application| %>
           <tr class="govuk-table__row">
             <% link_text = application.applicant_full_name || t('generic.undefined') %>
             <%= sort_column_cell(
@@ -46,8 +45,8 @@
               <%= gov_uk_tag text: application.enum_t(:summary_state), type: application.summary_state %>
             <% end %>
           </tr>
-        </tbody>
-      <% end %>
+        <% end %>
+      </tbody>
     </table>
     <% if local_assigns[:pagy] %>
       <div class="govuk-body pagination-container">

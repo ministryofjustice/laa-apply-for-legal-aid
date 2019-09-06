@@ -184,9 +184,9 @@ en:
         heading_1: Your legal aid applications
         make_new_application: Make a new application
       legal_aid_applications:
-        applicant_name: Client's name
-        application_ref: Case reference
-        created_at: Date started
+        applicant_name: Name
+        application_ref: LAA Ref
+        created_at: Start date
         current_application: Current applications
         certificate_type: Certificate type
         status: Status
