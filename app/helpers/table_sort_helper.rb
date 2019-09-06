@@ -1,4 +1,31 @@
 module TableSortHelper
+  # Usage
+  #   For a sortable cell (td) within a sortable column with content 'Bar'
+  #     sort_column_cell content: 'Bar'
+  #
+  #   or
+  #     sort_column_cell do
+  #       'Bar'
+  #     end
+  #
+  #   If the sort criteria is to be specified (that is not sorting on content), use the `sort_by` option
+  #     sort_column_cell content: 'Bar', sort_by 'x'
+  #
+  #   An array can also be used:
+  #     sort_column_cell content: 'Bar', sort_by [1,:a]
+  #
+  #   with the resultant sort criteria being taken from the concatinated array contents.
+  #
+  #   If the cells needs to combine right on small screens:
+  #     sort_column_cell content: 'Bar', combine_right: 470
+  #
+  #   Options are 470 and 555
+  #
+  #   Other options will be passed through to the `content_tag` used to build the `td` tag
+  #     sort_column_cell content: 'Bar', id: 2
+  #
+  #   will generate a `td` tag with id '2'
+  #
   def sort_column_cell(args, &block)
     combine_right = args.delete(:combine_right)
     sort_by = args.delete(:sort_by)
