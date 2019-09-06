@@ -138,18 +138,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'WARNING_LETTER_SENT & INJ_REASON_NO_WARNING_LETTER blocks' do
-        context 'not sent' do
-          before { respondent.update(warning_letter_sent: false) }
-          it 'generates WARNING_LETTER_SENT block with false value' do
-            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-            expect(block).to have_boolean_response false
-          end
-
-          it 'generates INJ_REASON_NO_WARNING_LETTER block with reason' do
-            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).to have_text_response legal_aid_application.respondent.warning_letter_sent_details
-          end
+      context 'WARNING_LETTER_SENT not sent' do
+        before { respondent.update(warning_letter_sent: false) }
+        it 'generates WARNING_LETTER_SENT block with false value' do
+          block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+          expect(block).to have_boolean_response false
         end
       end
 
@@ -239,7 +232,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:global_merits, 'MERITS_EVIDENCE_PROVIDED'],
             [:proceeding, 'SCOPE_LIMIT_IS_DEFAULT'],
             [:proceeding_merits, 'LEAD_PROCEEDING'],
-            [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT']
+            [:proceeding_merits, 'SCOPE_LIMIT_IS_DEFAULT'],
+            [:global_means, 'APPLICATION_FROM_APPLY'],
+            [:global_means, 'APPLICATION_FROM_APPLY'],
+            [:global_means, 'MEANS_SUBMISSION_PG_DISPLAYED'],
+            [:global_merits, 'CASE_OWNER_STD_FAMILY_MERITS']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -684,19 +681,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
-        context 'attributes hard coded to false' do
-          it 'should be type of text hard coded to false' do
-            attributes = [
-              [:global_means, 'COST_LIMIT_CHANGED_FLAG']
-            ]
-            attributes.each do |entity_attribute_pair|
-              entity, attribute = entity_attribute_pair
-              block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to have_boolean_response false
-            end
-          end
-        end
-
         it 'CASES_FEES_DISTRIBUTED should be hard coded to 1' do
           block = XmlExtractor.call(xml, :global_merits, 'CASES_FEES_DISTRIBUTED')
           expect(block).to have_number_response 1
@@ -784,9 +768,19 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'UNKNOWN'
         end
 
+        it 'MARITIAL_STATUS should be hard coded to UNKNOWN' do
+          block = XmlExtractor.call(xml, :global_means, 'MARITIAL_STATUS')
+          expect(block).to have_text_response 'UNKNOWN'
+        end
+
         it 'REQUESTED_SCOPE should be hard coded to MULTIPLE' do
           block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
           expect(block).to have_text_response 'MULTIPLE'
+        end
+
+        it 'REQUESTED_SCOPE should be hard coded with the correct notification' do
+          block = XmlExtractor.call(xml, :proceeding_merits, 'REQUESTED_SCOPE')
+          expect(block).to have_text_response 'Dummy requested scope pending legal framework enhancements'
         end
 
         it 'NEW_OR_EXISTING should be hard coded to NEW' do
@@ -821,13 +815,35 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'Apply Service Application. See uploaded means report in CCMS'
         end
 
+        it 'MERITS_ROUTING should be hard coded to SFM' do
+          block = XmlExtractor.call(xml, :global_merits, 'MERITS_ROUTING')
+          expect(block).to have_text_response 'SFM'
+        end
+
+        it 'IS_PASSPORTED should be hard coded to YES' do
+          block = XmlExtractor.call(xml, :global_means, 'IS_PASSPORTED')
+          expect(block).to have_text_response 'YES'
+        end
+
+        it 'should be hard coded with the correct notification' do
+          attributes = [
+            [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
+            [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
+            [:global_merits, 'INJ_REASON_NO_WARNING_LETTER']
+          ]
+          attributes.each do |entity_attribute_pair|
+            entity, attribute = entity_attribute_pair
+            block = XmlExtractor.call(xml, entity, attribute)
+            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
+          end
+        end
+
         it 'should be hard coded with the correct notification' do
           attributes = [
             [:global_merits, 'REASON_APPLYING_FHH_LR'],
             [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
-            [:global_merits, 'REASON_SEPARATE_REP_REQ'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
-            [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL']
+            [:global_merits, 'REASON_SEPARATE_REP_REQ']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -849,6 +865,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
+        end
+
+        it 'OTHER_PARTY_NAME should be hard coded with the correct notification' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
+          expect(block).to have_text_response 'APPLY service application. See uploaded statement of case'
         end
       end
 
@@ -1517,6 +1538,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
       [:global_merits, 'URGENT_FLAG'],
+      [:global_merits, 'COST_LIMIT_CHANGED'],
+      [:global_merits, 'DECLARATION_IDENTIFIER'],
+      [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
+      [:global_means, 'COST_LIMIT_CHANGED_FLAG'],
+      [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:proceeding_merits, 'WARNING_LETTER_SENT']
     ]
   end
