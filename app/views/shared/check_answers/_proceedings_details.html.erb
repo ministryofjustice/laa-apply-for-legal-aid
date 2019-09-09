@@ -30,19 +30,4 @@
         answer: legal_aid_application.used_delegated_functions_on,
         read_only: read_only
       )  if legal_aid_application.used_delegated_functions? %>
-
-  <%= check_answer_link(
-        name: :proceeding_costs,
-        question: t('.section_proceeding.costs'),
-        answer: number_to_currency(legal_aid_application.default_cost_limitation,  precision: 0),
-        read_only: true
-      ) %>
-
-  <% scope_limitation = legal_aid_application.used_delegated_functions? ? legal_aid_application.delegated_functions_scope_limitation : legal_aid_application.substantive_scope_limitation %>
-  <%= check_answer_link(
-        name: :proceeding_work,
-        question: t('.section_proceeding.work'),
-        answer: scope_limitation&.description,
-        read_only: true
-      ) %>
 </dl>
