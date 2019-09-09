@@ -3,6 +3,6 @@ linters:
   ErbSafety:
     enabled: true
     exclude:
-      - '**/app/views/layouts/_google_analytics.html.erb'
+      - '**/app/views/layouts/_google_tag_manager.html.erb'
   HardCodedString:
     enabled: false

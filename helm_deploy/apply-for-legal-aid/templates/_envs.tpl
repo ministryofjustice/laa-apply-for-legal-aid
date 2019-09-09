@@ -213,11 +213,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminPassword
-  - name: GOOGLE_ANALYTICS_TRACKING_ID
+  - name: GOOGLE_TAG_MANAGER_TRACKING_ID
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: googleAnalyticsTrackingID
+        key: googleTagManagerTrackingID
   - name: KUBERNETES_DEPLOYMENT
     value: "true"
   - name: METRICS_SERVICE_HOST
