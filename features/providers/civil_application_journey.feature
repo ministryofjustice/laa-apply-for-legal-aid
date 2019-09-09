@@ -135,6 +135,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'Covered under a substantive certificate'
     Then I click 'Save and continue'
     Then I should be on a page showing 'must complete a financial assessment'
     Then I click 'Continue'
@@ -206,6 +207,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "Once you've received a substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'Covered under an emergency certificate'
+    Then I should be on a page showing 'Covered under a substantive certificate'
     Then I click 'Save and continue'
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
 
