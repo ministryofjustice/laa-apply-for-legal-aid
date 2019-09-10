@@ -84,6 +84,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'Good'
         end
 
+        it 'returns the ccms equivalent prospect of success for marginal' do
+          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+          expect(block).to have_text_response 'Marginal'
+        end
+
         it 'returns the ccms equivalent prospect of success for uncertain' do
           allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('uncertain')
           block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')

@@ -210,10 +210,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                capital_contribution: 0.0
       end
 
-      let(:merits_assessment) do
-        double 'MeritsAssesment',
-               success_prospect: 'Good'
-      end
+      let(:merits_assessment) { create :merits_assessment, success_prospect: 'likely' }
 
       let(:respondent) do
         double Respondent,
