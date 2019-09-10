@@ -2,6 +2,7 @@ $(document).ready(function() {
   if ($('table.sortable')) {
     let table;
     const endText = {
+      //em tags are here to add emphasis to screen reader voice, rather than add italics
       asc: {
         date: 'from <em>oldest</em> to <em>newest</em>',
         numeric: 'from <em>smallest</em> to <em>largest</em>',
@@ -47,6 +48,11 @@ $(document).ready(function() {
           th.find(".screen-reader-sort-indicator").html(" (currently sorted " + endText[sortDirection][th.attr("data-sort-type")] + ").");
 
           inverse = !inverse;
+
+          if (typeof pageChange == 'function') { 
+            //if the page change function exists, it is involked to return to the first page
+            pageChange(0); 
+          }
 
           return false;
         });
@@ -99,11 +105,12 @@ $(document).ready(function() {
             parentNode.removeChild(nextSibling);
           };
         });
-
+        
         return sort.call(this, comparator).each(function(i) {
           placements[i].call(getSortable.call(this));
         });
       };
+      
     })();
   }
 });
