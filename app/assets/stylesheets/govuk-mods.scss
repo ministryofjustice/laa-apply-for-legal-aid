@@ -1,9 +1,3 @@
-// style copied from https://govuk-publishing-components.herokuapp.com/component-guide/button/destructive_button
-.govuk-button.destructive {
-  background-color: #d4351c;
-  box-shadow: 0 2px 0 #0b0c0c;
-}
-
 dl.govuk-list.inline-list {
   dt:before {
     content: "";
@@ -22,4 +16,9 @@ dl.govuk-list.inline-list {
     color: white;
     font-size: inherit;
   }
+}
+
+//Start button IE11 fix - adding a width of 15.5px to the SVG (AP-933)
+.govuk-button__start-icon {
+  width:15.5px;
 }
