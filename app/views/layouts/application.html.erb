@@ -3,6 +3,7 @@
   <head>
     <%= render 'layouts/google_tag_manager' if google_tag_present? %>
     <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
     <title><%= html_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
