@@ -3,7 +3,7 @@ require 'json'
 require 'date'
 
 repo = 'laa-apply-for-legal-aid/applyforlegalaid-service'
-delete_if_older_than = 30 # days
+delete_if_older_than = 10 # days
 
 puts 'Identifying images to delete'
 
