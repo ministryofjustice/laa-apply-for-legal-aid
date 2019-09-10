@@ -52,6 +52,8 @@ $(document).ready(function() {
           if (typeof pageChange == 'function') { 
             //if the page change function exists, it is involked to return to the first page
             pageChange(0); 
+          } else {
+            console.log("x");
           }
 
           return false;
@@ -148,7 +150,7 @@ $(document).ready(function() {
       }
 
       //function for changing the visible records (page change)
-      function pageChange(rowNumber) {
+      window.pageChange = function(rowNumber) {
         //enable any disabled buttons
         $(".moj-pagination__item--prev>a").css("display","inline");
         $(".moj-pagination__item--next>a").css("display","inline");
@@ -182,7 +184,7 @@ $(document).ready(function() {
         if (parseInt(rowNumber,10) + parseInt(numberOfVisibleRows,10) >= maxRow) {
           $(".moj-pagination__item--next>a").css("display","none"); //disable if on last page
         }
-      }
+      };
 
       var rowNumber = 0; //set current row to 0
       pageChange(0); //initially set to page 1 (row 0)
