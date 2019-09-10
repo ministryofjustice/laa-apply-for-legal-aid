@@ -113,7 +113,7 @@ $(document).ready(function() {
       
     })();
   }
-  
+
   /*multi page stuff*/
   //if pagination-table exists, then we add the functions and set to page 1 on document ready
   if ($("#pagination-table").length) {
@@ -152,7 +152,7 @@ $(document).ready(function() {
         //enable any disabled buttons
         $(".moj-pagination__item--prev>a").css("display","inline");
         $(".moj-pagination__item--next>a").css("display","inline");
-        
+
         if (!rowNumber) rowNumber=0; //resets to first page if unknown
         var numberOfVisibleRows = parseInt($("#table-nav-qty select").val(), 10); 
         var rows = document.querySelectorAll("#pagination-table tbody tr");
@@ -196,7 +196,7 @@ $(document).ready(function() {
           $(pageNavControls).insertAfter("#pagination-table");
         }
       }
-      
+
       //this is the qty per page control, we only show numbers below the total count
       numberPerPage = '<div class="govuk-form-group" id="table-nav-qty"><label class="govuk-label" for="sort">Results per page</label><select class="govuk-select" id="sort" name="sort"><option value="5">5</option>';
       if (rowQty > 10) numberPerPage += '<option value="10" selected="">10</option>';
@@ -211,7 +211,7 @@ $(document).ready(function() {
         $(numberPerPage).insertAfter("#table-page-nav"); //this inserts the qty per page control
       }
       pageChange(rowNumber); //run initial page function to get first page
-      
+
       $(".moj-pagination__item--prev>a").click(function(){
         rowNumber = navigateRowPages(rowNumber,"backwards")
         return false;
