@@ -43,7 +43,7 @@
         <%= f.select(
               :lookup_id,
               @addresses.collect { |a| [a.full_address, a.lookup_id] },
-              { include_blank: "#{@addresses.size} addresses found" },
+              { include_blank: t('.addresses_found_text', count: @addresses.size) },
               class: "govuk-select govuk-!-width-full #{input_error_class}",
               id: :address_selection_address
             ) %>
