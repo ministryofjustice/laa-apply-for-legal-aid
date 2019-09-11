@@ -23,6 +23,10 @@ en:
       show:
         link_text: I can't find the address in the list
         select_address_label: Select an address
+        addresses_found_text: {
+          one: '1 address found',
+          other: '%{count} addresses found'
+        }
     application_confirmations:
       show:
         application_created: Application created
