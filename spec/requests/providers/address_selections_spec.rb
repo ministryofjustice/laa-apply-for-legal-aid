@@ -40,7 +40,7 @@ RSpec.describe 'address selections requests', type: :request do
         context 'but the lookup does not return any valid results' do
           let(:postcode) { 'IM1H 3QQ' } # NOTE: test account does not return any results for this postcode
           let(:form_heading) { "Enter your client's correspondence address" }
-          let(:error_message) { "We could not find any addresses for that postcode. Enter the address manually." }
+          let(:error_message) { 'We could not find any addresses for that postcode. Enter the address manually.' }
 
           it 'renders the manual address selection page' do
             subject
