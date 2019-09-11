@@ -179,6 +179,21 @@ module CCMS
       lead_proceeding_type.ccms_category_law_code
     end
 
+    PROSPECTS_OF_SUCCESS = {
+      likely: 'Good',
+      marginal: 'Marginal',
+      poor: 'Poor',
+      borderline: 'Borderline',
+      uncertain: 'Uncertain'
+    }.freeze
+
+    attr_reader :legal_aid_application
+    delegate :merits_assessment, to: :legal_aid_application
+
+    def ccms_equivalent_prospects_of_success(_options)
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
+    end
+
     private
 
     def applicant

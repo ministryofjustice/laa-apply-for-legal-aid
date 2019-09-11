@@ -30,6 +30,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
+      let(:success_prospect) { :likely }
+      let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
       before { allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id) }
       before { allow(requestor).to receive(:provider).and_return(provider) }
 
@@ -72,6 +74,37 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             block = XmlExtractor.call(xml, entity, 'APPLICATION_CASE_REF')
             expect(block).to have_text_response case_reference
           end
+        end
+      end
+
+      context 'FAMILY_PROSPECTS_OF_SUCCESS' do
+        it 'returns the ccms equivalent prospect of success for likely' do
+          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('likely')
+          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+          expect(block).to have_text_response 'Good'
+        end
+
+        it 'returns the ccms equivalent prospect of success for marginal' do
+          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+          expect(block).to have_text_response 'Marginal'
+        end
+
+        it 'returns the ccms equivalent prospect of success for uncertain' do
+          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('uncertain')
+          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+          expect(block).to have_text_response 'Uncertain'
+        end
+
+        it 'returns the ccms equivalent prospect of success for poor' do
+          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('poor')
+          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+          expect(block).to have_text_response 'Poor'
+        end
+
+        it 'returns the ccms equivalent prospect of success for borderline' do
+          allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('borderline')
+          block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+          expect(block).to have_text_response 'Borderline'
         end
       end
 
@@ -366,6 +399,20 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'LAR_INFER_B_1WP1_36A' do
+        it 'uses the DWP benefit check result' do
+          block = XmlExtractor.call(xml, :global_means, 'LAR_INFER_B_1WP1_36A')
+          expect(block).to have_boolean_response legal_aid_application.benefit_check_result
+        end
+      end
+
+      context 'APP_GRANTED_USING_DP' do
+        it 'uses the DWP benefit check result' do
+          block = XmlExtractor.call(xml, :global_merits, 'APP_GRANTED_USING_DP')
+          expect(block).to have_boolean_response legal_aid_application.used_delegated_functions?
+        end
+      end
+
       context 'APP_AMEND_TYPE' do
         context 'delegated function used' do
           context 'in global_merits section' do
@@ -383,6 +430,25 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                 block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
                 expect(block).to have_text_response 'SUBDP'
               end
+            end
+          end
+        end
+
+        context 'EMERGENCY_FURTHER_INFORMATION' do
+          context 'delegated function used' do
+            it 'returns hard coded statement' do
+              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
+              expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+            end
+          end
+
+          context 'delegated function not used' do
+            it 'EMERGENCY_FURTHER_INFORMATION block is not present' do
+              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(false)
+              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
+              expect(block).not_to be_present
             end
           end
         end
@@ -1330,7 +1396,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:proceeding_merits, 'PROPORTIONALITY_QUESTION'],
       [:proceeding_merits, 'PROSPECTS_OF_SUCCESS'],
       [:proceeding_merits, 'ROUTING_FOR_PROCEEDING'],
-      [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER']
+      [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER'],
+      [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST'],
+      [:proceeding_merits, 'SMOD_APPLICABLE']
     ]
   end
 

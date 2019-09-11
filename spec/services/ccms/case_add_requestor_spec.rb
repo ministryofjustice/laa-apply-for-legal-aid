@@ -210,6 +210,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                capital_contribution: 0.0
       end
 
+      let(:merits_assessment) { create :merits_assessment, success_prospect: 'likely' }
+
       let(:respondent) do
         double Respondent,
                understands_terms_of_court_order?: true,
@@ -259,7 +261,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                savings_amount: savings_amount,
                open_banking_consent: true,
                open_banking_consent_choice_at: Date.new(2019, 6, 1),
-               lead_proceeding_type: proceeding_type_1
+               lead_proceeding_type: proceeding_type_1,
+               benefit_check_result: true,
+               merits_assessment: merits_assessment
       end
 
       let(:other_party_1) { create :opponent, :child }
