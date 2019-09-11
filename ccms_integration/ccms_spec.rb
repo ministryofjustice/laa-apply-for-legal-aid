@@ -40,15 +40,48 @@ module CCMS
              description: ':EMPLOYMENT_CLIENT_001:CLI_NON_HM_WAGE_SLIP_001'
     end
 
+    let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
+
     let(:provider) do
       double Provider,
              username: 'user1',
-             firm_id: 22_381,
+             firm: firm,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,
              supervisor_contact_id: 3_982_723,
              fee_earner_contact_id: 34_419,
              marked_for_destruction?: false
+    end
+
+    let(:substantive_legal_aid_application) do
+      create :legal_aid_application,
+             :with_applicant_and_address,
+             :with_proceeding_types,
+             :with_substantive_scope_limitation,
+             :with_other_assets_declaration,
+             :with_savings_amount,
+             :with_respondent,
+             :with_transaction_period,
+             :with_merits_assessment,
+             :with_means_report,
+             :with_merits_report,
+             statement_of_case: @statement_of_case
+    end
+
+    let(:delegated_functions_legal_aid_application) do
+      create :legal_aid_application,
+             :with_applicant_and_address,
+             :with_proceeding_types,
+             :with_delegated_functions,
+             :with_delegated_functions_scope_limitation,
+             :with_other_assets_declaration,
+             :with_savings_amount,
+             :with_respondent,
+             :with_transaction_period,
+             :with_merits_assessment,
+             :with_means_report,
+             :with_merits_report,
+             statement_of_case: @statement_of_case
     end
 
     before do
@@ -72,8 +105,7 @@ module CCMS
 
     context 'delegated functions case' do
       before do
-        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_delegated_functions, :with_delegated_functions_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
-        @submission = create :submission, legal_aid_application: @legal_aid_application
+        @submission = create :submission, legal_aid_application: delegated_functions_legal_aid_application
       end
 
       describe 'generate case payload only' do
@@ -98,8 +130,7 @@ module CCMS
 
     context 'substantive case' do
       before do
-        @legal_aid_application = create :legal_aid_application, :with_applicant_and_address, :with_proceeding_types, :with_substantive_scope_limitation, :with_other_assets_declaration, :with_savings_amount, :with_respondent, statement_of_case: @statement_of_case
-        @submission = create :submission, legal_aid_application: @legal_aid_application
+        @submission = create :submission, legal_aid_application: substantive_legal_aid_application
       end
 
       describe 'generate case payload only' do
@@ -206,26 +237,26 @@ module CCMS
     def request_document_ids
       print 'Requesting document IDs... '
       @submission.process!
-      expect(@submission.documents).to_not be_empty
-      expect(@submission.documents.values[0]).to eq :id_obtained
+      expect(@submission.submission_document).to_not be_empty
+      expect(@submission.submission_document.first.status).to eq 'id_obtained'
       expect(@submission.aasm_state).to eq 'document_ids_obtained'
       expect(history.from_state).to eq 'applicant_ref_obtained'
       expect(history.to_state).to eq 'document_ids_obtained'
       expect(history.success).to be true
       expect(history.details).to be_nil
-      puts @submission.documents.to_s.green
+      puts 'done'.green
     end
 
     def upload_documents
       print 'Uploading documents... '
       @submission.process!
-      expect(@submission.documents.values[0]).to eq :uploaded
+      expect(@submission.submission_document.first.status).to eq 'uploaded'
       expect(@submission.aasm_state).to eq 'completed'
       expect(history.from_state).to eq 'case_created'
       expect(history.to_state).to eq 'completed'
       expect(history.success).to be true
       expect(history.details).to be_nil
-      puts @submission.documents.to_s.green
+      puts 'done'.green
     end
 
     def run_everything

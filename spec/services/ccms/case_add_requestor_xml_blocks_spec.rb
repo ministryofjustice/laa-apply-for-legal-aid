@@ -14,9 +14,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                proceeding_types: [proceeding_type]
       end
 
+      let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
+
       let(:provider) do
         double Provider,
-               firm_id: 19_148,
+               firm: firm,
                selected_office_id: 137_570,
                user_login_id: 4_953_649,
                username: 4_953_649,

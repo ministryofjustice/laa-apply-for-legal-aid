@@ -8,7 +8,7 @@ module CCMS
 
     validates :legal_aid_application_id, presence: true
 
-    serialize :documents, Hash
+    has_many :submission_document
 
     POLL_LIMIT = 10
 

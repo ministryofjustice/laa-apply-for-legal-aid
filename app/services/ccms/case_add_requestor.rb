@@ -81,12 +81,10 @@ module CCMS
     end
 
     def generate_case_docs(xml)
-      @submission.documents.each do |key|
+      @submission.submission_document.each do |document|
         xml.__send__('ns2:CaseDoc') do
-          xml.__send__('ns2:CCMSDocumentID', PdfFile.find_by(original_file_id: key).ccms_document_id)
-          # TODO: at present only statements of case are uploaded. at some point uploads will also include means and
-          # merits reports; at that point the following element will need to vary based on document type
-          xml.__send__('ns2:DocumentSubject', 'statement_of_case')
+          xml.__send__('ns2:CCMSDocumentID', document.ccms_document_id)
+          xml.__send__('ns2:DocumentSubject', document.document_type)
         end
       end
     end
@@ -142,7 +140,7 @@ module CCMS
 
     def generate_provider_details(xml)
       xml.__send__('ns2:ProviderCaseReferenceNumber', 'PC4') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
-      xml.__send__('ns2:ProviderFirmID', provider.firm_id)
+      xml.__send__('ns2:ProviderFirmID', provider.firm.id)
       xml.__send__('ns2:ProviderOfficeID', provider.selected_office_id)
       xml.__send__('ns2:ContactUserID') do
         xml.__send__('ns0:UserLoginID', provider.user_login_id)
