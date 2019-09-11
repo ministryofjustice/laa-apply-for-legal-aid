@@ -12,6 +12,6 @@ en:
       postcode: Postcode
       submit_button: Find address
     address_manual:
-      heading: Enter your client's correspondence address manually
+      heading: Enter your client's correspondence address
     address_selection:
       heading: Enter your client's correspondence address
