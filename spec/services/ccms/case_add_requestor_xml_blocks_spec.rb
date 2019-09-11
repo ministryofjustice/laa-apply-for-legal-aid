@@ -182,6 +182,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'GB_INPUT_B_3WP2_1A - applicant has financial interest in his main home' do
+        context 'no financial interest' do
+          before { expect(legal_aid_application).to receive(:own_home?).and_return(false) }
+          it 'inserts false into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
+            expect(block).to have_boolean_response false
+          end
+        end
+
+        context 'a shared finanical interest' do
+          before { expect(legal_aid_application).to receive(:own_home?).and_return(true) }
+          it 'inserts true into the attribute block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
+            expect(block).to have_boolean_response true
+          end
+        end
+      end
+
       context 'POLICE_NOTIFIED block' do
         context 'police notified' do
           before { respondent.update(police_notified: true) }
