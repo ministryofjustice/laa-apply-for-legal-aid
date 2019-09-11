@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_101523) do
+ActiveRecord::Schema.define(version: 2019_09_11_150223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -229,6 +229,14 @@ ActiveRecord::Schema.define(version: 2019_09_09_101523) do
     t.string "case_add_transaction_id"
     t.integer "case_poll_count", default: 0
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
+  end
+
+  create_table "cfe_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "assessment_id"
+    t.string "aasm_state"
+    t.text "cfe_result"
+    t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
   end
 
   create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -569,6 +577,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_101523) do
   add_foreign_key "ccms_submission_documents", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications"
+  add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
