@@ -11,5 +11,5 @@ en:
       other: "results"
     nav:
       gap: "&hellip;"
-      next: "Next&nbsp;&raquo;"
-      prev: "&laquo;&nbsp;Previous"
+      next: "Next"
+      prev: "Previous"
