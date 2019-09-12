@@ -74,8 +74,14 @@ en:
           proceeding: Proceeding
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
-          costs: Costs you can incur
-          work: Work you can do
+      emergency_limitations:
+        form_of_service: &form Form of service
+        costs: &costs Costs you can incur
+        work: &work Work you can do
+      substantive_limitations:
+        form_of_service: *form
+        costs: *costs
+        work: *work
       restrictions:
         citizens:
           question: Restrictions on your assets
