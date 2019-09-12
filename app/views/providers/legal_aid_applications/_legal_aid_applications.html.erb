@@ -5,9 +5,10 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <%= sort_column_th type: :alphabetic, content: t('.applicant_name'),   currently_sorted: @initial_sort[:applicant_name] %>
-          <%= sort_column_th type: :date,       content: t('.created_at'),       currently_sorted: @initial_sort[:created_at] %>
+          <%= sort_column_th type: :date,       content: t('.created_at'),       currently_sorted: @initial_sort[:created_at],       combine_right: { at: 555, append: t('.col_and_ref') } %>
           <%= sort_column_th type: :alphabetic, content: t('.application_ref'),  currently_sorted: @initial_sort[:applicant_ref] %>
-          <%= sort_column_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type] %>
+          <th class="nullcell"></th>
+          <%= sort_column_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t('.col_and_state') } %>
           <%= sort_column_th type: :alphabetic, content: t('.status'),           currently_sorted: @initial_sort[:status] %>
         </tr>
       </thead>
@@ -22,12 +23,13 @@
 
             <%= sort_column_cell(
                   content: l(application.created_at.to_date, format: :short_date),
-                  sort_by: application.created_at.to_i
+                  sort_by: application.created_at.to_i,
+                  combine_right: 555
                 ) %>
 
             <%= sort_column_cell(content: application.application_ref) %>
-
-            <%= sort_column_cell(sort_by: application.used_delegated_functions?.to_s) do %>
+            <td class="nullcell"></td>
+            <%= sort_column_cell(sort_by: application.used_delegated_functions?.to_s, combine_right: 555) do %>
               <% if application.used_delegated_functions? %>
                 <%= t('.emergency') %>
                 <% if application.substantive_application_deadline_on? %>

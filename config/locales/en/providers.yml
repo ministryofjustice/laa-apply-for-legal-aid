@@ -193,6 +193,8 @@ en:
         emergency: Emergency
         substantive: Substantive
         substantive_due: 'Substantive due: %{date}'
+        col_and_ref: and Ref
+        col_and_state: and Status
     limitations:
       show:
         h1-heading: What you're applying for
