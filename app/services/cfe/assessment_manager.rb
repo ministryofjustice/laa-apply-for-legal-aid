@@ -10,7 +10,8 @@ module CFE
     end
 
     def call
-      assessment = CFE::Assessment.create(legal_aid_applicaiton_id: @legal_aid_application_id)
+      assessment = CFE::Assessment.create(legal_aid_applicaton_id: @legal_aid_application_id)
+      assessment.create_application!
     end
   end
 end
