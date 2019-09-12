@@ -64,15 +64,15 @@ module Flow
         },
         online_bankings: {
           path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },
-          forward: ->(application) { application.applicant.uses_online_banking? ? :about_the_financial_assessments : :place_holder_ccms }
-        },
-        about_the_financial_assessments: {
-          path: ->(application) { urls.providers_legal_aid_application_about_the_financial_assessment_path(application) },
-          forward: :application_confirmations
+          forward: ->(application) { application.applicant.uses_online_banking? ? :email_addresses : :place_holder_ccms }
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
           forward: :about_the_financial_assessments
+        },
+        about_the_financial_assessments: {
+          path: ->(application) { urls.providers_legal_aid_application_about_the_financial_assessment_path(application) },
+          forward: :application_confirmations
         },
         application_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_application_confirmation_path(application) }

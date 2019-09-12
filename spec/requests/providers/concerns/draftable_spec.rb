@@ -13,8 +13,7 @@ RSpec.describe Providers::Draftable do
           national_insurance_number: 'AA 12 34 56 C',
           dob_year: '1981',
           dob_month: '07',
-          dob_day: '11',
-          email: Faker::Internet.safe_email
+          dob_day: '11'
         }
       }
     end
@@ -66,7 +65,7 @@ RSpec.describe Providers::Draftable do
         let(:params) do
           {
             applicant: {
-              email: 'invalid'
+              national_insurance_number: 'invalid'
             }
           }
         end
@@ -75,7 +74,7 @@ RSpec.describe Providers::Draftable do
           subject
 
           expect(unescaped_response_body).to include('There is a problem')
-          expect(unescaped_response_body).to include('email-error')
+          expect(unescaped_response_body).to include('national_insurance_number-error')
         end
 
         it 'does NOT create a new applicant' do
@@ -88,7 +87,7 @@ RSpec.describe Providers::Draftable do
           {
             applicant: {
               last_name: 'Doe',
-              email: Faker::Internet.safe_email
+              national_insurance_number: 'AA 12 34 56 C'
             }
           }
         end

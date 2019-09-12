@@ -3,7 +3,7 @@ module Applicants
     include BaseForm
 
     ATTRIBUTES = %i[first_name last_name national_insurance_number
-                    dob_year dob_month dob_day email].freeze
+                    dob_year dob_month dob_day].freeze
 
     form_for Applicant
 
@@ -30,9 +30,6 @@ module Applicants
 
     validates :national_insurance_number, presence: true, unless: :draft?
     validate :validate_national_insurance_number
-
-    validates :email, presence: true, unless: :draft?
-    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 
     def initialize(*args)
       super

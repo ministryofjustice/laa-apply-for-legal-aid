@@ -59,17 +59,17 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'when validation error on object' do
-      let(:email_error) { I18n.t("activemodel.errors.models.#{resource}.attributes.#{attribute}.blank") }
+      let(:nino_error) { I18n.t("activemodel.errors.models.#{resource}.attributes.#{attribute}.blank") }
 
       before { resource_form.valid? }
 
       it 'includes an error message' do
         error_span = tag.previous_element
-        expect(error_span.content).to eq(email_error)
+        expect(error_span.content).to eq(nino_error)
         expect(error_span.name).to eq('span')
         expect(error_span.classes).to include('govuk-error-message')
         expect(tag.classes).to include(expected_error_class)
-        expect(tag['aria-describedby'].split(' ')).to include('email-error')
+        expect(tag['aria-describedby'].split(' ')).to include('national_insurance_number-error')
         expect(tag.parent.classes).to include('govuk-form-group--error')
       end
     end
@@ -100,7 +100,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   end
 
   describe 'govuk_text_field' do
-    let(:attribute) { 'email' }
+    let(:attribute) { 'national_insurance_number' }
     let(:params) { [attribute.to_sym] }
     let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
@@ -143,7 +143,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   end
 
   describe 'govuk_text_area' do
-    let(:attribute) { 'email' }
+    let(:attribute) { 'national_insurance_number' }
     let(:params) { [attribute.to_sym] }
     let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }
@@ -163,7 +163,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   end
 
   describe 'govuk_file_field' do
-    let(:attribute) { 'email' }
+    let(:attribute) { 'national_insurance_number' }
     let(:params) { [attribute.to_sym] }
     let(:label_copy) { I18n.t("activemodel.attributes.#{resource}.#{attribute}") }
     let(:hint_copy) { I18n.t("helpers.hint.#{resource}.#{attribute}") }

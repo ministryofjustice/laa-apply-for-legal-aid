@@ -50,7 +50,6 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       expect(applicant.first_name).to eq(param_applicant[:first_name])
       expect(applicant.last_name).to eq(param_applicant[:last_name])
       expect(applicant.national_insurance_number).to eq(param_applicant[:national_insurance_number])
-      expect(applicant.email).to eq(param_applicant[:email])
       expect(applicant.date_of_birth).to eq(param_applicant[:date_of_birth])
     end
 
@@ -107,7 +106,6 @@ RSpec.describe Providers::ApplicantsController, type: :request do
         expect(applicant.first_name).to eq(param_applicant[:first_name])
         expect(applicant.last_name).to eq(param_applicant[:last_name])
         expect(applicant.national_insurance_number).to eq(param_applicant[:national_insurance_number])
-        expect(applicant.email).to eq(param_applicant[:email])
         expect(applicant.date_of_birth).to eq(param_applicant[:date_of_birth])
       end
 
