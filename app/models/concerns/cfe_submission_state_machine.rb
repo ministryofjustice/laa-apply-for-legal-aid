@@ -1,4 +1,4 @@
-module CFEAssessmentStateMachine
+module CFESubmissionStateMachine
   extend ActiveSupport::Concern
 
   included do
@@ -12,35 +12,37 @@ module CFEAssessmentStateMachine
       state :properties_created
       state :vehicles_created
       state :results_obtained
+      state :failed
 
       event :create_assessment do
-        before { CreateAssessmentService.call(self) }
-        transition from :intialised, to: :assessment_created
+        # before { CFE::CreateAssessmentService.call(self) }
+        transitions from: :initialised, to: :assessment_created
+        # transitions from: :failed, to: :failed
       end
 
       event :create_applicant do
         before { CFE::CreateApplicantService.call(self) }
-        transition_from :asssessment_created, to: :applicant_created
+        transitions from: :assessment_created, to: :applicant_created
       end
 
       event :create_capitals do
         before { CFE::CreateCapitalsService.call(self) }
-        transition_from :applicant_created, to: :capitals_created
+        transitions from: :applicant_created, to: :capitals_created
       end
 
       event :create_properties do
         before { CFE::CreatePropertiesService.call(self) }
-        transition_from :capitals_created, to: :properties_created
+        transitions from: :capitals_created, to: :properties_created
       end
 
       event :create_vehicles do
         before { CFE::CreateVehiclesService.call(self) }
-        transition_from :properties_created, to: :vehicles_created
+        transitions from: :properties_created, to: :vehicles_created
       end
 
       event :obtain_results do
         before { CFE::CreateObtainResultsService.call(self) }
-        transition_from :vehicles_created, to: :results_obtained
+        transitions from: :vehicles_created, to: :results_obtained
       end
 
       event :fail do
