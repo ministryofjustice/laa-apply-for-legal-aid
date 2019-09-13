@@ -14,34 +14,27 @@ module CFESubmissionStateMachine
       state :results_obtained
       state :failed
 
-      event :create_assessment do
-        # before { CFE::CreateAssessmentService.call(self) }
+      event :assessment_created do
         transitions from: :initialised, to: :assessment_created
-        # transitions from: :failed, to: :failed
       end
 
-      event :create_applicant do
-        before { CFE::CreateApplicantService.call(self) }
+      event :applicant_created do
         transitions from: :assessment_created, to: :applicant_created
       end
 
-      event :create_capitals do
-        before { CFE::CreateCapitalsService.call(self) }
+      event :capitals_created do
         transitions from: :applicant_created, to: :capitals_created
       end
 
-      event :create_properties do
-        before { CFE::CreatePropertiesService.call(self) }
+      event :properties_created do
         transitions from: :capitals_created, to: :properties_created
       end
 
-      event :create_vehicles do
-        before { CFE::CreateVehiclesService.call(self) }
+      event :vehicles_created do
         transitions from: :properties_created, to: :vehicles_created
       end
 
-      event :obtain_results do
-        before { CFE::CreateObtainResultsService.call(self) }
+      event :results_obtained do
         transitions from: :vehicles_created, to: :results_obtained
       end
 

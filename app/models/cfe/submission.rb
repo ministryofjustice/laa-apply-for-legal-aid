@@ -5,5 +5,6 @@ module CFE
     self.table_name = :cfe_submissions
 
     belongs_to :legal_aid_application
+    has_many :submission_histories
   end
 end

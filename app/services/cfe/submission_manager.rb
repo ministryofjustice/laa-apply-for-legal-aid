@@ -1,6 +1,5 @@
 module CFE
   class SubmissionManager
-
     def self.call(legal_aid_application_id)
       new(legal_aid_application_id).call
     end
@@ -14,15 +13,17 @@ module CFE
 
       begin
         CFE::CreateAssessmentService.call(assessment)
-        assessment.create_assessment!
+        CFE::CreateApplicantService.call(assessment)
 
-        assessment.create_applicant! unless assessment.failed?
-      rescue CFE::SubmissionError => err
-        puts ">>>>>>>>> trapping error #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
+        # TODO: add these steps as we write the services
+        # assessment.create_capitals! unless assessment.failed?
+        # assessment.create_properties! unless assessment.failed?
+        # assessment.create_vehicles! unless assessment.failed?
+        # assessment.obtain_results unless assessment.failed?
+      rescue CFE::SubmissionError => e
+        assessment.error_message = e.message
         assessment.fail!
-
       end
-
     end
   end
 end

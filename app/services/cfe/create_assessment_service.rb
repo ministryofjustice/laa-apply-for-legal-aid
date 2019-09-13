@@ -14,8 +14,9 @@ module CFE
       }.to_json
     end
 
-    def process_successful_response
-      @assessment.assessment_id = @response['objects'].first['id']
+    def process_response
+      @submission.assessment_id = @response['objects'].first['id']
+      @submission.assessment_created!
       true
     end
   end

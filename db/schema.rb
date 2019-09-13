@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_11_150223) do
+ActiveRecord::Schema.define(version: 2019_09_13_092309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -231,11 +231,27 @@ ActiveRecord::Schema.define(version: 2019_09_11_150223) do
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
   end
 
+  create_table "cfe_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "submission_id"
+    t.string "url"
+    t.string "http_method"
+    t.text "request_payload"
+    t.integer "http_response_status"
+    t.text "response_payload"
+    t.string "error_message"
+    t.string "error_backtrace"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cfe_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "assessment_id"
     t.string "aasm_state"
+    t.string "error_message"
     t.text "cfe_result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
   end
 
