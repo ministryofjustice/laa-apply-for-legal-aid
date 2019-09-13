@@ -83,13 +83,12 @@ module CFE
     end
 
     describe 'unsuccessful post' do
-      let(:faraday_response) { double Faraday::Response, status: 422, body: '' }
+      let(:faraday_response) { double Faraday::Response, status: 422, body: error_response }
 
       it 'raises an exception' do
         expect {
           CreateApplicantService.call(submission)
-        }.to raise_error CFE::SubmissionError,
-                         "CFE::CreateApplicantService received CFE::SubmissionError: HTTP status 422 returned from http://localhost:3001/assessments/#{submission.assessment_id}/applicant"
+        }.to raise_error CFE::SubmissionError, 'Unprocessable entity'
       end
 
       it 'updates the submission record from initialised to failed' do
@@ -103,9 +102,15 @@ module CFE
         expect(history.http_method).to eq 'POST'
         expect(history.request_payload).to eq expected_payload
         expect(history.http_response_status).to eq 422
-        expect(history.response_payload).to be_nil
-        expect(history.error_message)
-          .to eq "CFE::CreateApplicantService received CFE::SubmissionError: HTTP status 422 returned from http://localhost:3001/assessments/#{submission.assessment_id}/applicant"
+        expect(history.response_payload).to eq error_response
+        expect(history.error_message).to be_nil
+      end
+
+      def error_response
+        {
+          errors: ['Detailed error message'],
+          success: false
+        }.to_json
       end
     end
   end

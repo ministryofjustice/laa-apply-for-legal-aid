@@ -29,12 +29,21 @@ module CFE
     end
 
     def query_cfe_service
-      raw_response = post_request
-      raise_http_status_error(raw_response) unless raw_response.status == 200
+      begin
+        raw_response = post_request
+      rescue StandardError => e
+        raise_exception_error(e)
+      end
+      parsed_response = JSON.parse(raw_response.body)
       write_submission_history(raw_response)
-      JSON.parse(raw_response.body)
-    rescue StandardError => e
-      raise_exception_error(e)
+      case raw_response.status
+      when 200
+        return parsed_response
+      when 422
+        raise CFE::SubmissionError.new('Unprocessable entity', 422)
+      else
+        raise CFE::SubmissionError.new('Unsuccessful HTTP response code', raw_response.status)
+      end
     end
 
     def post_request

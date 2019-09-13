@@ -13,6 +13,7 @@ module CFE
     let(:submission) { create :cfe_submission, :initialised, legal_aid_application: application }
     let(:faraday_connection) { double Faraday }
     let(:connection_param) { double.as_null_object }
+    let(:json_empty_string) { ''.to_json }
     let(:expected_payload) do
       {
         client_reference_id: 'L-XYZ-999',
@@ -82,12 +83,12 @@ module CFE
     end
 
     describe 'unsuccessful post' do
-      let(:faraday_response) { double Faraday::Response, status: 422, body: '' }
+      let(:faraday_response) { double Faraday::Response, status: 422, body: error_response }
 
       it 'raises an exception' do
         expect {
           CreateAssessmentService.call(submission)
-        }.to raise_error CFE::SubmissionError, 'CFE::CreateAssessmentService received CFE::SubmissionError: HTTP status 422 returned from http://localhost:3001/assessments'
+        }.to raise_error CFE::SubmissionError, 'Unprocessable entity'
       end
 
       it 'updates the submission record from initialised to failed' do
@@ -101,8 +102,17 @@ module CFE
         expect(history.http_method).to eq 'POST'
         expect(history.request_payload).to eq expected_payload
         expect(history.http_response_status).to eq 422
-        expect(history.response_payload).to be_nil
-        expect(history.error_message).to eq 'CFE::CreateAssessmentService received CFE::SubmissionError: HTTP status 422 returned from http://localhost:3001/assessments'
+        expect(history.response_payload).to eq error_response
+        expect(history.error_message).to be_nil
+      end
+
+      def error_response
+        {
+          errors: [
+            'error creating record'
+          ],
+          success: false
+        }.to_json
       end
     end
   end
