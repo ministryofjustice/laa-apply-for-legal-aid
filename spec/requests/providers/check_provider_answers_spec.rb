@@ -82,7 +82,7 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(unescaped_response_body).to include(applicant.national_insurance_number)
         expect(unescaped_response_body).to include(address.address_line_one)
         expect(unescaped_response_body).to include(address.city)
-        expect(unescaped_response_body).to include(address.postcode)
+        expect(unescaped_response_body).to include(address.pretty_postcode)
       end
 
       context 'when the application is in provider submitted state' do
@@ -113,7 +113,7 @@ RSpec.describe 'check your answers requests', type: :request do
           expect(unescaped_response_body).to include(applicant.national_insurance_number)
           expect(unescaped_response_body).to include(address.address_line_one)
           expect(unescaped_response_body).to include(address.city)
-          expect(unescaped_response_body).to include(address.postcode)
+          expect(unescaped_response_body).to include(address.pretty_postcode)
         end
       end
 
