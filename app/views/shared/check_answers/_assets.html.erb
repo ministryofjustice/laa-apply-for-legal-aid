@@ -1,93 +1,95 @@
-<% read_only = false unless local_assigns.key?(:read_only) %>
+<section class="print-no-break">
+  <% read_only = false unless local_assigns.key?(:read_only) %>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :own_home,
+          url: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
+          question: t('.assets.own_home'),
+          answer: @legal_aid_application.own_home.blank? ? '' : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}"),
+          read_only: read_only,
+          align_right: read_only
+        ) %>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= check_answer_link(
-        name: :own_home,
-        url: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
-        question: t('.assets.own_home'),
-        answer: @legal_aid_application.own_home.blank? ? '' : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}"),
-        read_only: read_only,
-        align_right: read_only
-      ) %>
+    <%= check_answer_link(
+          name: :property_value,
+          url: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
+          question: t('.assets.property_value'),
+          answer: number_to_currency(@legal_aid_application.property_value),
+          read_only: read_only,
+          align_right: read_only
+        ) if @legal_aid_application.own_home? %>
 
-  <%= check_answer_link(
-        name: :property_value,
-        url: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
-        question: t('.assets.property_value'),
-        answer: number_to_currency(@legal_aid_application.property_value),
-        read_only: read_only,
-        align_right: read_only
-      ) if @legal_aid_application.own_home? %>
+    <%= check_answer_link(
+          name: :outstanding_mortgage,
+          url: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
+          question: t('.assets.outstanding_mortgage'),
+          answer: number_to_currency(@legal_aid_application.outstanding_mortgage_amount),
+          read_only: read_only,
+          align_right: read_only
+        ) if @legal_aid_application.own_home_mortgage? %>
 
-  <%= check_answer_link(
-        name: :outstanding_mortgage,
-        url: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
-        question: t('.assets.outstanding_mortgage'),
-        answer: number_to_currency(@legal_aid_application.outstanding_mortgage_amount),
-        read_only: read_only,
-        align_right: read_only
-      ) if @legal_aid_application.own_home_mortgage? %>
+    <%= check_answer_link(
+          name: :shared_ownership,
+          url: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
+          question: t('.assets.shared_ownership'),
+          answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}"),
+          read_only: read_only,
+          align_right: read_only
+        ) if @legal_aid_application.own_home? %>
 
-  <%= check_answer_link(
-        name: :shared_ownership,
-        url: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
-        question: t('.assets.shared_ownership'),
-        answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}"),
-        read_only: read_only,
-        align_right: read_only
-      ) if @legal_aid_application.own_home? %>
+    <%= check_answer_link(
+          name: :percentage_home,
+          url: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
+          question: t('.assets.percentage_home'),
+          answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2),
+          read_only: read_only,
+          align_right: read_only
+        ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
 
-  <%= check_answer_link(
-        name: :percentage_home,
-        url: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
-        question: t('.assets.percentage_home'),
-        answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2),
-        read_only: read_only,
-        align_right: read_only
-      ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
+    <%= check_answer_link(
+          name: :savings_and_investments,
+          url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
+          question: t('.assets.savings_and_investments'),
+          answer: t('generic.none_declared'),
+          read_only: read_only,
+          align_right: read_only
+        ) unless @legal_aid_application.savings_amount? %>
 
-  <%= check_answer_link(
+    <%= check_answer_link(
+          name: :other_assets,
+          url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
+          question: t('.assets.other_assets'),
+          answer: t('generic.none_declared'),
+          read_only: read_only,
+          align_right: read_only
+        ) unless @legal_aid_application.other_assets? %>
+  </dl>
+</section>
+<section class="print-no-break">
+  <%= render 'shared/check_answers/vehicles', read_only: read_only %>
+
+  <%= check_answer_one_change_link(
         name: :savings_and_investments,
         url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
         question: t('.assets.savings_and_investments'),
-        answer: t('generic.none_declared'),
-        read_only: read_only,
-        align_right: read_only
-      ) unless @legal_aid_application.savings_amount? %>
+        answer_hash: capital_amounts_list(
+          @legal_aid_application.savings_amount,
+          locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_"
+        ),
+        read_only: read_only
+      ) if @legal_aid_application.savings_amount? %>
 
-  <%= check_answer_link(
+  <%= check_answer_one_change_link(
         name: :other_assets,
         url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
         question: t('.assets.other_assets'),
-        answer: t('generic.none_declared'),
-        read_only: read_only,
-        align_right: read_only
-      ) unless @legal_aid_application.other_assets? %>
-</dl>
+        answer_hash: capital_amounts_list(
+          @legal_aid_application.other_assets_declaration,
+          locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.other_assets.check_box_",
+          percentage_values: [:second_home_percentage]
+        ),
+        read_only: read_only
+      ) if @legal_aid_application.other_assets? %>
 
-<%= render 'shared/check_answers/vehicles', read_only: read_only %>
-
-<%= check_answer_one_change_link(
-      name: :savings_and_investments,
-      url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-      question: t('.assets.savings_and_investments'),
-      answer_hash: capital_amounts_list(
-        @legal_aid_application.savings_amount,
-        locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_"
-      ),
-      read_only: read_only
-    ) if @legal_aid_application.savings_amount? %>
-
-<%= check_answer_one_change_link(
-      name: :other_assets,
-      url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
-      question: t('.assets.other_assets'),
-      answer_hash: capital_amounts_list(
-        @legal_aid_application.other_assets_declaration,
-        locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.other_assets.check_box_",
-        percentage_values: [:second_home_percentage]
-      ),
-      read_only: read_only
-    ) if @legal_aid_application.other_assets? %>
-
-<%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
+  <%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
+</section>

@@ -1,0 +1,131 @@
+#print-logo {
+  padding-bottom: 12mm;
+  font-family: sans-serif;
+  display:none;
+  font-weight:700;
+  font-size: 8.45mm;
+  line-height:16mm;
+  
+  img {
+    height: 10mm;
+    position: relative;
+    top: 0.2em;
+    display:inline
+  }
+}
+
+
+@media print {
+  
+  main {
+    width:200mm;
+  }
+  
+  /*font size adjustments*/
+  .govuk-heading-xl {
+    font-size:8.45mm!important;
+  }
+  .govuk-heading-l {
+    font-size:6.9mm!important;
+  }
+  dl,
+  tr,
+  p.govuk-body,
+  .govuk-body>p,
+  .govuk-list {
+    font-size:4.25mm!important;
+  }
+  .income_payments_and_assets td:first-child {
+    font-weight:bold;
+  }
+
+  /*replacing missing bullets*/
+  .govuk-list.govuk-list--bullet>li>strong:before {
+    content:"● ";
+  }
+  .print-add-bullet {
+    position:relative;
+    &>li:before {
+      content:"●";
+      position:absolute;
+      left:0;
+    }
+  }
+  
+  
+  .print-bottom-gap {
+    padding-bottom:3.5em;
+  }
+  #print-logo {
+    display:inline;
+  }
+  .govuk-grid-column-two-thirds {
+    width:100%!important;
+  }
+  header {
+    display:none;
+  }
+  dl.govuk-summary-list {
+    .govuk-summary-list__key,
+    .govuk-summary-list__value {
+      width:100mm!important;
+      text-align:left;
+      display:table-cell;
+      padding-top:2.65mm;
+      padding-bottom:2.65mm;
+    }
+  }
+  
+  .print-position-correction {
+    position:relative;
+    top:7mm;
+  }
+
+  section.print-no-break, dl, h2 {
+    page-break-inside: avoid;
+  }
+
+  .print-header-wrapper {
+    position:relative;
+  }
+
+  dl.govuk-list.inline-list.print-header {
+    position:fixed;
+    top:0;
+    left:8.5mm;
+    font-size:3.7mm;
+    width: 100%;
+    z-index:10;
+    background-color:#fff;
+    
+    &>dt:before {
+      display: inline;
+    }
+    &>dd:after {
+      content: "";
+      padding-right:2em;
+    }
+  }
+  
+  .print-remove-border,
+  .print-remove-border * {
+    border:none;
+    padding-bottom:0;
+    margin-bottom:0;
+  }
+  
+}
+
+@page {
+  margin-top:10mm;
+  margin-bottom:10mm;
+  size:200mm 275mm; 
+}
+
+/*header overrides*/
+@media print and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles*/
+  .print-header-wrapper {
+    position:static;
+  }
+}

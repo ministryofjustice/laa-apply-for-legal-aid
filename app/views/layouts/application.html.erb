@@ -48,7 +48,6 @@
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
     <%= render partial: 'layouts/header' %>
-
     <div class="govuk-width-container">
       <div class="govuk-phase-banner no-print">
         <p class="govuk-phase-banner__content">
@@ -66,6 +65,10 @@
       <%= content_for(:navigation) %>
 
       <main class="govuk-main-wrapper " id="main-content" role="main">
+        <div id="print-logo">
+          <img src="<%= image_path('crest.svg') %>" alt="government-crest" height=58>
+          Legal Aid Agency
+        </div>
         <% if flash[:error] %>
           <div class="govuk-error-summary">
             <h2 class="govuk-error-summary__title"><%= flash[:error] %></h2>
