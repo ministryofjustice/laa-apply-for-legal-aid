@@ -24,8 +24,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :dependants, dependent: :destroy
-  has_many :ccms_submissions, class_name: 'CCMS::Submission', dependent: :destroy
-  has_one :most_recent_ccms_submission, -> { order(:created_at) }, class_name: 'CCMS::Submission'
+  has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', dependent: :destroy
   has_one :vehicle, dependent: :destroy
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
@@ -41,6 +40,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
   delegate :substantive_scope_limitation, :delegated_functions_scope_limitation, to: :application_scope_limitations
+  delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
 
   scope :latest, -> { order(created_at: :desc) }
 
@@ -167,10 +167,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def opponent_other_parties
     [Opponent.dummy_opponent]
-  end
-
-  def ccms_case_reference
-    most_recent_ccms_submission.case_ccms_reference
   end
 
   def add_default_substantive_scope_limitation!

@@ -71,8 +71,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'APPLICATION_CASE_REF' do
-        let(:ccms_reference) { '400012345678' }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
+        let(:case_reference) { legal_aid_application.case_ccms_reference }
         it 'inserts the case reference from the submission record into both global means and merits sections' do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'APPLICATION_CASE_REF')
