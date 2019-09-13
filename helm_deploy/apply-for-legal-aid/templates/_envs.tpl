@@ -217,7 +217,7 @@ env:
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: googleTagManagerTrackingID
+        key: googleTagManagerTrackingId
   - name: KUBERNETES_DEPLOYMENT
     value: "true"
   - name: METRICS_SERVICE_HOST
