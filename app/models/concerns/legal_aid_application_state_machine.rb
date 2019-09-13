@@ -4,6 +4,12 @@ module LegalAidApplicationStateMachine
   included do # rubocop:disable Metrics/BlockLength
     include AASM
 
+    def summary_state
+      return :submitted if state.to_sym == :assessment_submitted
+
+      :in_progress
+    end
+
     aasm column: :state do # rubocop:disable Metrics/BlockLength
       state :initiated, initial: true
       state :checking_client_details_answers

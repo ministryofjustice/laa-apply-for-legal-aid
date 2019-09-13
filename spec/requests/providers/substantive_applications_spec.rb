@@ -46,7 +46,6 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     it 'updates the application' do
       legal_aid_application.reload
       expect(legal_aid_application.substantive_application).to eq(substantive_application)
-      expect(legal_aid_application.substantive_application_deadline_on).to be_nil
       expect(legal_aid_application.state).to eq('delegated_functions_used')
     end
 
@@ -78,7 +77,6 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       it 'updates the application' do
         legal_aid_application.reload
         expect(legal_aid_application.substantive_application).to eq(substantive_application)
-        expect(legal_aid_application.substantive_application_deadline_on).to be_present
         expect(legal_aid_application.state).to eq('delegated_functions_used')
       end
 

@@ -1,0 +1,13 @@
+---
+en:
+  sorting:
+    oldest: oldest
+    newest: newest
+    a: A.
+    z: Zed
+    smallest: smallest
+    largest: largest
+    sort_by: Sort by
+    currently_sorted_html: "currently sorted from <em>%{from}</em> to <em>%{to}</em>"
+    sorted_asc_html: 'currently sorted in <em>ascending</em> order'
+    sorted_desc_html: 'currently sorted in <em>descending</em> order'

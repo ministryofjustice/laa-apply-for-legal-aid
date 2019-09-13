@@ -1,0 +1,37 @@
+.govuk-tag {
+  &.accessible-text-in-tag {
+    padding: 3px 1px 2px;
+    color: #1d70b8;
+    border: 2px solid;
+    margin: 0 1px 2px;
+    background: white;
+    white-space: nowrap;
+    text-transform:none;
+    text-align:center;
+  }
+
+  @media (min-width: 555px) {
+    &.accessible-text-in-tag {
+      padding: 3px 3px 2px;
+    }
+  }
+  @media (min-width: 655px) {
+    &.accessible-text-in-tag {
+      padding: 3px 8px 2px;
+    }
+  }
+
+  &.in-progress-tag {
+    @extend .accessible-text-in-tag;
+  }
+
+  &.table-category {
+    @extend .accessible-text-in-tag;
+  }
+
+  &.submitted-tag {
+    @extend .accessible-text-in-tag;
+    color: #00703c;
+    border-color: #00703c;
+  }
+}

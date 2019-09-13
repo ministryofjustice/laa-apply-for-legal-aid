@@ -54,7 +54,7 @@ Given('I previously created a passported application with no assets and left on 
 end
 
 Given(/^I view the previously created application$/) do
-  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a", text: 'View').click
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a").click
 end
 
 Given('I start the journey as far as the applicant page') do
@@ -230,16 +230,16 @@ Given('I complete the application and view the check your answers page') do
   )
   proceeding_type = ProceedingType.all.sample
 
-  legal_aid_application = create(
+  @legal_aid_application = create(
     :legal_aid_application,
     applicant: applicant,
     proceeding_types: [proceeding_type],
     state: :provider_submitted
   )
-  legal_aid_application.add_default_substantive_scope_limitation!
-  legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if legal_aid_application.used_delegated_functions?
-  login_as legal_aid_application.provider
-  visit(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+  @legal_aid_application.add_default_substantive_scope_limitation!
+  @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
 end
 
 Given('The means questions have been answered by the applicant') do
@@ -435,12 +435,6 @@ end
 Then('I am on the read only version of the check your answers page') do
   expect(page).to have_content('Home')
   expect(page).not_to have_css('.change-link')
-end
-
-Then('I click view on an application') do
-  steps %(
-    And I click link "View"
-  )
 end
 
 # rubocop:disable Lint/Debugger

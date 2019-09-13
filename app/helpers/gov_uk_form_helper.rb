@@ -79,6 +79,13 @@ module GovUkFormHelper
     args.merge(class: class_text.join(' '))
   end
 
+  def merge_with_class!(args, class_text)
+    class_text = [class_text, args[:class]]
+    class_text.compact!
+    class_text.flatten!
+    args.merge!(class: class_text.join(' '))
+  end
+
   def aria_describedby(*elements)
     elements.compact!
     return if elements.empty?

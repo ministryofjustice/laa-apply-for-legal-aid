@@ -149,6 +149,31 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#summary_state' do
+    let(:state) { :initiated }
+    subject(:legal_aid_application) { create(:legal_aid_application, state: state) }
+
+    it 'returns :in_progress summary state' do
+      expect(legal_aid_application.summary_state).to eq(:in_progress)
+    end
+
+    context 'with later state' do
+      let(:state) { :means_completed }
+
+      it 'still returns :in_progress summary state' do
+        expect(legal_aid_application.summary_state).to eq(:in_progress)
+      end
+    end
+
+    context 'on submission' do
+      let(:state) { :assessment_submitted }
+
+      it 'returns :in_progress summary state' do
+        expect(legal_aid_application.summary_state).to eq(:submitted)
+      end
+    end
+  end
+
   describe '#shared_ownership?' do
     subject(:legal_aid_application) { create(:legal_aid_application, shared_ownership: shared_ownership_reason) }
 
