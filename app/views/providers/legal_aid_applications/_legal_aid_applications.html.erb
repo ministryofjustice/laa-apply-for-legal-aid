@@ -1,6 +1,13 @@
+
+<div class="govuk-form-group">
+  <label class="govuk-label" for="search-for-applications">
+    Search for an application
+  </label>
+  <input class="govuk-input govuk-input--width-10" id="search-for-applications" name="search-for-applications" type="text">
+</div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <table class="govuk-table sortable table-merge_columns">
+    <table class="govuk-table sortable table-merge_columns" id="tableID">
       <caption class="govuk-table__caption"><%= t('.current_application') %></caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
@@ -18,12 +25,14 @@
             <% link_text = application.applicant_full_name || t('generic.undefined') %>
             <%= sort_column_cell(
                   content: link_to_application(link_text, application),
+                  class: 'application-name',
                   sort_by: link_text
                 ) %>
 
             <%= sort_column_cell(
                   content: l(application.created_at.to_date, format: :short_date),
                   sort_by: application.created_at.to_i,
+                  class: 'application-start',
                   combine_right: 555
                 ) %>
 
