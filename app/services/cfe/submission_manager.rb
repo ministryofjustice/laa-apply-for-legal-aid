@@ -20,7 +20,6 @@ module CFE
         # CFE::CreateVehiclesService.call(assessment)
         # CFE::CreatePropertiesService.call(assessment)
         # CFE::ObtainAssessmentResultService.call(assessment)
-
       rescue CFE::SubmissionError => e
         assessment.error_message = e.message
         assessment.fail!
