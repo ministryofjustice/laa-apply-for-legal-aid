@@ -423,6 +423,10 @@ Then('I am on the legal aid applications') do
   expect(page).to have_content('Your legal aid applications')
 end
 
+Then('I am on the Email Entry page') do
+  expect(page).to have_content("Enter your client's email address")
+end
+
 Then('I am on the About the Financial Assessment page') do
   expect(page).to have_content('About the online financial assessment')
 end

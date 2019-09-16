@@ -17,7 +17,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       last_name
       national_insurance_number
       date_of_birth
-      email
     ]
   end
 
@@ -112,19 +111,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context 'with an invalid email' do
-      let(:attributes) { attributes_for(:applicant).merge(email: 'not-a-valid-email') }
-
-      it 'does not persist model' do
-        expect { subject.save }.not_to change { Applicant.count }
-      end
-
-      it 'generate an error' do
-        subject.save
-        expect(subject.errors[:email]).to match_array(['Enter an email address in the correct format, such as name@example.com'])
-      end
-    end
-
     context 'with an invalid date' do
       let(:attributes) { attributes_for(:applicant).merge(date_of_birth: 'invalid-date') }
 
@@ -160,7 +146,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           dob_year: attributes[:date_of_birth].year.to_s,
           dob_month: attributes[:date_of_birth].month.to_s,
           dob_day: attributes[:date_of_birth].day.to_s,
-          email: Faker::Internet.safe_email,
           model: applicant
         }
       end
@@ -184,7 +169,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           dob_year: '10',
           dob_month: '21',
           dob_day: '44',
-          email: Faker::Internet.safe_email,
           model: applicant
         }
       end
@@ -219,8 +203,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: '',
           last_name: '',
           national_insurance_number: '',
-          date_of_birth: '',
-          email: ''
+          date_of_birth: ''
         }
       end
 
@@ -241,8 +224,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: first_name,
           last_name: '',
           national_insurance_number: '',
-          date_of_birth: '',
-          email: ''
+          date_of_birth: ''
         }
       end
 
@@ -259,14 +241,13 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
     context 'with an invalid entry input' do
       let(:first_name) { Faker::Name.first_name }
-      let(:invalid_email) { 'invalid' }
+      let(:invalid_nino) { 'invalid' }
       let(:params) do
         {
           first_name: first_name,
           last_name: '',
-          national_insurance_number: '',
-          date_of_birth: '',
-          email: invalid_email
+          national_insurance_number: invalid_nino,
+          date_of_birth: ''
         }
       end
 
@@ -282,7 +263,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       it 'will preserve the input' do
         subject.save_as_draft
         expect(subject.first_name).to eq(first_name)
-        expect(subject.email).to eq(invalid_email)
+        expect(subject.national_insurance_number).to eq(invalid_nino)
       end
     end
 
@@ -296,7 +277,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           national_insurance_number: attributes[:national_insurance_number],
           dob_month: '10',
           dob_day: '4',
-          email: Faker::Internet.safe_email,
           model: applicant
         }
       end

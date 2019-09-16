@@ -63,7 +63,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
         end
 
         it 'redirects to check_provider_answers page' do
-          expect(response).to redirect_to(providers_legal_aid_application_about_the_financial_assessment_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
         end
       end
 
