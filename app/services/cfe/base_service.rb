@@ -37,7 +37,7 @@ module CFE
       write_submission_history(raw_response)
       case raw_response.status
       when 200
-        return parsed_response
+        return JSON.parse(raw_response.body)
       when 422
         raise CFE::SubmissionError.new('Unprocessable entity', 422)
       else
