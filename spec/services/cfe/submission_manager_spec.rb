@@ -11,7 +11,8 @@ module CFE
     context 'No Errors' do
       before do
         allow_any_instance_of(CreateAssessmentService).to receive(:post_request).and_return(assessment_response)
-        allow_any_instance_of(CreateApplicantService).to receive(:post_request).and_return(applicant_response)
+        allow_any_instance_of(CreateApplicantService).to receive(:post_request).and_return(generic_successful_response)
+        allow_any_instance_of(CreateCapitalsService).to receive(:post_request).and_return(generic_successful_response)
       end
 
       it 'creates a submission record for the application' do
@@ -20,16 +21,17 @@ module CFE
         }.to change { Submission.count }.by(1)
 
         submission = Submission.last
+
         expect(submission.legal_aid_application_id).to eq application.id
-        expect(submission.aasm_state).to eq 'applicant_created' # TODO: change this as we add more services to the test
+        expect(submission.aasm_state).to eq 'capitals_created' # TODO: change this as we add more services to the test
       end
 
       it 'calls all the services to post data' do
         expect(CreateAssessmentService).to receive(:call).and_call_original
         expect(CreateApplicantService).to receive(:call).and_call_original
+        expect(CreateCapitalsService).to receive(:call).and_call_original
 
         # TODO: Add these expectations as we add more services to the test
-        # expect(CreateCapitalsService).to receive(:call).and_call_original
         # expect(CreatePropertiesService).to receive(:call).and_call_original
         # expect(CreateVehiclesService).to receive(:call).and_call_original
         # expect(ObtainResultsService).to receive(:call).and_call_original
@@ -40,7 +42,7 @@ module CFE
       it 'writes the expected submission history records' do
         expect {
           SubmissionManager.call(application.id)
-        }.to change { SubmissionHistory.count }.by 2 # TODO: increase this number as we add more services to the spec
+        }.to change { SubmissionHistory.count }.by 3 # TODO: increase this number as we add more services to the spec
       end
     end
 
@@ -88,11 +90,11 @@ module CFE
       }.to_json
     end
 
-    def applicant_response
-      double Faraday::Response, status: 200, body: dummy_applicant_response
+    def generic_successful_response
+      double Faraday::Response, status: 200, body: dummy_successful_response
     end
 
-    def dummy_applicant_response
+    def dummy_successful_response
       {
         'success' => true
       }.to_json
