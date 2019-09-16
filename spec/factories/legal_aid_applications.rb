@@ -124,6 +124,10 @@ FactoryBot.define do
       used_delegated_functions { true }
     end
 
+    trait :with_substantive_application_deadline_on do
+      substantive_application_deadline_on { SubstantiveApplicationDeadlineCalculator.call self }
+    end
+
     trait :with_no_savings do
       savings_amount { build :savings_amount, :all_nil }
     end

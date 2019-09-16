@@ -44,5 +44,11 @@ RSpec.describe SmokeTest::TestEmails do
       subject
       ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
     end
+
+    it 'sends a notify_provider email' do
+      expect_any_instance_of(SubmitApplicationReminderMailer).to receive(:notify_provider).and_return(true)
+      subject
+      ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
+    end
   end
 end

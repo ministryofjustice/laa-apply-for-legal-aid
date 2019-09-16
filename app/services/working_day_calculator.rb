@@ -6,7 +6,7 @@ class WorkingDayCalculator
   end
 
   def self.call(working_days:, from: Date.today)
-    new(from).add_working_days(working_days)
+    new(from).working_days_from_date(working_days)
   end
 
   attr_reader :date
@@ -17,8 +17,16 @@ class WorkingDayCalculator
     @date = date
   end
 
+  def working_days_from_date(number)
+    number.positive? ? add_working_days(number) : subtract_working_days(number)
+  end
+
   def add_working_days(number)
     calendar.add_business_days(date, number)
+  end
+
+  def subtract_working_days(number)
+    calendar.subtract_business_days(date, number.abs)
   end
 
   def calendar
