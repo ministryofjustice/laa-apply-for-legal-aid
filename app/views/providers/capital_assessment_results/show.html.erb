@@ -1,0 +1,9 @@
+<%= page_template(
+      page_title: t(".page_title", result: t(".#{@capital_assessment_result}.result") ),
+      template: :basic
+    ) do %>
+
+  <div class="interruption-panel">
+    <%= render @capital_assessment_result %>
+  </div>
+<% end %>

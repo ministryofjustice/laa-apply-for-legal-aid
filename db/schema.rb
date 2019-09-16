@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_101523) do
+ActiveRecord::Schema.define(version: 2019_09_16_091509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -320,6 +320,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_101523) do
     t.string "restrictions_details"
     t.boolean "no_credit_transaction_types_selected"
     t.boolean "no_debit_transaction_types_selected"
+    t.string "capital_assessment_result"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"

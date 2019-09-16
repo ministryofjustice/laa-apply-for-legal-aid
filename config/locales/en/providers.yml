@@ -42,6 +42,25 @@ en:
         col_date: Date
         col_description: Description
         remove_link: Remove
+    capital_assessment_results:
+      show:
+        page_title: 'Capital Assessment Result: %{result}'
+        result:
+          eligible: Eligible
+          not_eligible: Not Eligible
+          contribution_required: Contribution required
+      eligible:
+        heading: '%{name} could be eligible for free legal aid'
+        details:
+          - Based on their financial situation, your client may not have to pay towards legal aid.
+          - You still have to provide details of the case before we can grant legal aid.
+      not_eligible:
+        heading: '%{name} is unlikely to get legal aid'
+        detail: This is because they have too much disposable capital.
+      contribution_required:
+        heading: '%{name} must pay towards legal aid'
+        contribution_to_be_paid: 'Based on their financial situation, your client must pay a contribution of £%{amount}.'
+        details_required: You still have to provide details of the case before we can grant legal aid.
     capital_introductions:
       show:
         about_the_client:
