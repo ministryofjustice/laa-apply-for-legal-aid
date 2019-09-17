@@ -10,7 +10,7 @@ module CFE
     # end
 
     let(:application) { create :legal_aid_application, application_ref: 'L-XYZ-999' }
-    let(:submission) { create :cfe_submission, :initialised, legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'initialised', legal_aid_application: application }
     let(:faraday_connection) { double Faraday }
     let(:connection_param) { double.as_null_object }
     let(:json_empty_string) { ''.to_json }

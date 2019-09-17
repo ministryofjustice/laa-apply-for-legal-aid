@@ -11,7 +11,7 @@ module CFE
     #
     let(:application) { create :legal_aid_application, application_ref: 'L-XYZ-999' }
     let!(:applicant) { create :applicant, legal_aid_application: application, date_of_birth: Date.new(1999, 9, 11) }
-    let(:submission) { create :cfe_submission, :assessment_created, legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'assessment_created', legal_aid_application: application }
     let(:faraday_connection) { double Faraday }
     let(:connection_param) { double.as_null_object }
     let(:expected_payload) do

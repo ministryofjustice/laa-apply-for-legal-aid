@@ -47,7 +47,7 @@ module CFE
     context 'exception raised' do
       before do
         allow_any_instance_of(CreateAssessmentService).to receive(:post_request).and_return(assessment_response)
-        allow_any_instance_of(CreateApplicantService).to receive(:post_request).and_raise(Faraday::ConnectionFailed.new('my test error'))
+        allow_any_instance_of(Faraday::Connection).to receive(:post).and_raise(Faraday::ConnectionFailed.new('my test error'))
       end
 
       it 'transitions the aasm state to failed with an error message' do

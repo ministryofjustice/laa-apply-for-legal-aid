@@ -6,7 +6,6 @@ module CFE
 
     def initialize(submission)
       @submission = submission
-      @conn = Faraday.new(url: cfe_url_host)
     end
 
     def call
@@ -16,8 +15,12 @@ module CFE
 
     private
 
+    def conn
+      @conn ||= Faraday.new(url: cfe_url_host)
+    end
+
     def cfe_url_host
-      'http://localhost:3001'
+      ENV['CHECK_FINANCIAL_ELIGIBILITY_URL']
     end
 
     def cfe_url
@@ -29,11 +32,7 @@ module CFE
     end
 
     def query_cfe_service
-      begin
-        raw_response = post_request
-      rescue StandardError => e
-        raise_exception_error(e)
-      end
+      raw_response = post_request
       parsed_response = JSON.parse(raw_response.body)
       write_submission_history(raw_response)
       case raw_response.status
@@ -47,10 +46,14 @@ module CFE
     end
 
     def post_request
-      @conn.post do |request|
-        request.url cfe_url_path
-        request.headers['Content-Type'] = 'application/json'
-        request.body = request_body
+      begin
+        conn.post do |request|
+          request.url cfe_url_path
+          request.headers['Content-Type'] = 'application/json'
+          request.body = request_body
+        end
+      rescue StandardError => e
+        raise_exception_error(e)
       end
     end
 
@@ -67,7 +70,7 @@ module CFE
         error_message: formatted_error_message(err),
         error_backtrace: err.backtrace.join("\n")
       )
-      raise CFE::SubmissionError, formatted_error_message(err)
+      raise CFE::SubmissionError.new(formatted_error_message(err), err)
     end
 
     def formatted_error_message(err)
