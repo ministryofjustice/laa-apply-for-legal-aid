@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/support', as: 'rails_admin'
 
-  root to: 'home#index'
+  root to: 'providers/start#index'
 
   require 'sidekiq/web'
   require 'sidekiq-status/web'
