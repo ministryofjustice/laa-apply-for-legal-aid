@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module CFE
+module CFE # rubocop:disable Metrics/ModuleLength
   RSpec.describe CreateApplicantService do
     # uncomment this if you need to connect to a real instance of Check Financial Eligibility service
     # running on localhost
@@ -83,27 +83,54 @@ module CFE
     end
 
     describe 'unsuccessful post' do
-      let(:faraday_response) { double Faraday::Response, status: 422, body: error_response }
+      context 'http status 422' do
+        let(:faraday_response) { double Faraday::Response, status: 422, body: error_response }
 
-      it 'raises an exception' do
-        expect {
-          CreateApplicantService.call(submission)
-        }.to raise_error CFE::SubmissionError, 'Unprocessable entity'
+        it 'raises an exception' do
+          expect {
+            CreateApplicantService.call(submission)
+          }.to raise_error CFE::SubmissionError, 'Unprocessable entity'
+        end
+
+        it 'updates the submission record from initialised to failed' do
+          expect(submission.submission_histories).to be_empty
+          expect { CreateApplicantService.call(submission) }.to raise_error CFE::SubmissionError
+
+          expect(submission.submission_histories.count).to eq 1
+          history = submission.submission_histories.last
+          expect(history.submission_id).to eq submission.id
+          expect(history.url).to eq "http://localhost:3001/assessments/#{submission.assessment_id}/applicant"
+          expect(history.http_method).to eq 'POST'
+          expect(history.request_payload).to eq expected_payload
+          expect(history.http_response_status).to eq 422
+          expect(history.response_payload).to eq error_response
+          expect(history.error_message).to be_nil
+        end
       end
 
-      it 'updates the submission record from initialised to failed' do
-        expect(submission.submission_histories).to be_empty
-        expect { CreateApplicantService.call(submission) }.to raise_error CFE::SubmissionError
+      context 'http status not 200 or 422' do
+        let(:faraday_response) { double Faraday::Response, status: 503, body: error_response }
 
-        expect(submission.submission_histories.count).to eq 1
-        history = submission.submission_histories.last
-        expect(history.submission_id).to eq submission.id
-        expect(history.url).to eq "http://localhost:3001/assessments/#{submission.assessment_id}/applicant"
-        expect(history.http_method).to eq 'POST'
-        expect(history.request_payload).to eq expected_payload
-        expect(history.http_response_status).to eq 422
-        expect(history.response_payload).to eq error_response
-        expect(history.error_message).to be_nil
+        it 'raises an exception' do
+          expect {
+            CreateApplicantService.call(submission)
+          }.to raise_error CFE::SubmissionError, 'Unsuccessful HTTP response code'
+        end
+
+        it 'updates the submission record from initialised to failed' do
+          expect(submission.submission_histories).to be_empty
+          expect { CreateApplicantService.call(submission) }.to raise_error CFE::SubmissionError
+
+          expect(submission.submission_histories.count).to eq 1
+          history = submission.submission_histories.last
+          expect(history.submission_id).to eq submission.id
+          expect(history.url).to eq "http://localhost:3001/assessments/#{submission.assessment_id}/applicant"
+          expect(history.http_method).to eq 'POST'
+          expect(history.request_payload).to eq expected_payload
+          expect(history.http_response_status).to eq 503
+          expect(history.response_payload).to eq error_response
+          expect(history.error_message).to be_nil
+        end
       end
 
       def error_response

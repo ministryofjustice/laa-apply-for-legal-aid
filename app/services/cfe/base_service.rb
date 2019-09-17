@@ -46,19 +46,13 @@ module CFE
     end
 
     def post_request
-      begin
-        conn.post do |request|
-          request.url cfe_url_path
-          request.headers['Content-Type'] = 'application/json'
-          request.body = request_body
-        end
-      rescue StandardError => e
-        raise_exception_error(e)
+      conn.post do |request|
+        request.url cfe_url_path
+        request.headers['Content-Type'] = 'application/json'
+        request.body = request_body
       end
-    end
-
-    def raise_http_status_error(raw_response)
-      raise CFE::SubmissionError.new "HTTP status #{raw_response.status} returned from #{cfe_url}", raw_response.status
+    rescue StandardError => e
+      raise_exception_error(e)
     end
 
     def raise_exception_error(err)
