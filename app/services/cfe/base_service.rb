@@ -33,7 +33,7 @@ module CFE
 
     def query_cfe_service
       raw_response = post_request
-      parsed_response = JSON.parse(raw_response.body)
+      parse_json_response(raw_response.body)
       write_submission_history(raw_response)
       case raw_response.status
       when 200
@@ -43,6 +43,12 @@ module CFE
       else
         raise CFE::SubmissionError.new('Unsuccessful HTTP response code', raw_response.status)
       end
+    end
+
+    def parse_json_response(response_body)
+      JSON.parse(response_body)
+    rescue JSON::ParserError, TypeError
+      response_body || ''
     end
 
     def post_request

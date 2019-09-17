@@ -16,7 +16,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
                money_owed_value: 0.0,
                trust_value: 99_999.99
       end
-      let(:submission) { create :cfe_submission, :applicant_created, legal_aid_application: application }
+      let(:submission) { create :cfe_submission, aasm_state: 'applicant_created', legal_aid_application: application }
       let(:expected_payload) do
         {
           'bank_accounts' => [],
