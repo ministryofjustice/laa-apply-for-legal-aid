@@ -3,7 +3,7 @@ module Providers
     include Pagy::Backend
     legal_aid_application_not_required!
 
-    DEFAULT_PAGE_SIZE = 2000000000000
+    DEFAULT_PAGE_SIZE = 200_000_000_000
 
     # GET /provider/applications
     def index
