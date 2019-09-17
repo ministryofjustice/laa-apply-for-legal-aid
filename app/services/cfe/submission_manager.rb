@@ -14,12 +14,12 @@ module CFE
       begin
         CFE::CreateAssessmentService.call(assessment)
         CFE::CreateApplicantService.call(assessment)
+        CFE::CreateCapitalsService.call(assessment)
 
         # TODO: add these steps as we write the services
-        # assessment.create_capitals! unless assessment.failed?
-        # assessment.create_properties! unless assessment.failed?
-        # assessment.create_vehicles! unless assessment.failed?
-        # assessment.obtain_results unless assessment.failed?
+        # CFE::CreateVehiclesService.call(assessment)
+        # CFE::CreatePropertiesService.call(assessment)
+        # CFE::ObtainAssessmentResultService.call(assessment)
       rescue CFE::SubmissionError => e
         assessment.error_message = e.message
         assessment.fail!
