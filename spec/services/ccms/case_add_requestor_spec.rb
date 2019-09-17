@@ -88,7 +88,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                username: 4_953_649,
                contact_user_id: 4_953_649,
                supervisor_contact_id: 7_008_010,
-               fee_earner_contact_id: 4_925_152
+               fee_earner_contact_id: 4_925_152,
+               email: 'testemail@emailtest.com'
       end
 
       let(:application_proceeding_type_1) do

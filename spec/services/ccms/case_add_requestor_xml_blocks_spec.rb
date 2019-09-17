@@ -338,6 +338,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context '_SYSTEM_PUI_USERID' do
+        it "inserts provider's email address" do
+          %i[global_means global_merits].each do |entity|
+            block = XmlExtractor.call(xml, entity, '_SYSTEM_PUI_USERID')
+            expect(block).to have_text_response legal_aid_application.provider.email
+          end
+        end
+      end
+
       context 'USER_PROVIDER_FIRM_ID' do
         it "inserts provider's firm id as a number" do
           %i[global_means global_merits].each do |entity|

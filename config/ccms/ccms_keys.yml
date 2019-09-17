@@ -2346,6 +2346,11 @@ global_means:
     :br100_meaning: 'The application means assessment needs a caseworker to manually review'
     :response_type: boolean
     :user_defined: false
+  _SYSTEM_PUI_USERID:
+    :value: '#provider_email'
+    :br100_meaning: The email address of the provider responsible for the application
+    :response_type: text
+    :user_defined: true
 global_merits:
   APP_INCLUDES_IMMIGRATION_PROCS:
     :generate_block?: false
@@ -2937,6 +2942,11 @@ global_merits:
     :generate_block?: false
     :value: Unused
     :br100_meaning: Meaning not defined in BR100
+    :response_type: text
+    :user_defined: true
+  _SYSTEM_PUI_USERID:
+    :value: '#provider_email'
+    :br100_meaning: The email address of the provider responsible for the application
     :response_type: text
     :user_defined: true
   EVIDENCE_PRE_ACTION_DISCLOSURE:
