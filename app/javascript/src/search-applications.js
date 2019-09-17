@@ -8,5 +8,6 @@ $("#search-for-applications").ready(function(){ //only adds code when the search
         $(this).css("display","table-row"); //display this row
       }
     });
+    $(".page-info").text("Showing " + $("tbody tr:visible").length + " of " + $("tbody tr").length); //this changes the page-info text to say "showing x of y" (x = visible rows, y = total rows)
   });
 });
