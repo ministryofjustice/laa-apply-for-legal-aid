@@ -32,8 +32,9 @@ module CCMS
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
 
-    def initialize(legal_aid_application)
-      @legal_aid_application = legal_aid_application
+    def initialize(submission)
+      @submission = submission
+      @legal_aid_application = submission.legal_aid_application
     end
 
     def method_missing(method, *args)
@@ -73,7 +74,7 @@ module CCMS
     end
 
     def submission_case_ccms_reference(_options)
-      @legal_aid_application.most_recent_ccms_submission.case_ccms_reference
+      @submission.case_ccms_reference
     end
 
     def used_delegated_functions_on(_options)
