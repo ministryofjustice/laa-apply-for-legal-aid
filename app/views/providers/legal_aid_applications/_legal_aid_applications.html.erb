@@ -7,7 +7,7 @@
 </div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <table class="govuk-table sortable table-merge_columns" id="tableID">
+    <table class="govuk-table sortable table-merge_columns">
       <caption class="govuk-table__caption"><%= t('.current_application') %></caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
@@ -25,14 +25,12 @@
             <% link_text = application.applicant_full_name || t('generic.undefined') %>
             <%= sort_column_cell(
                   content: link_to_application(link_text, application),
-                  class: 'application-name',
                   sort_by: link_text
                 ) %>
 
             <%= sort_column_cell(
                   content: l(application.created_at.to_date, format: :short_date),
                   sort_by: application.created_at.to_i,
-                  class: 'application-start',
                   combine_right: 555
                 ) %>
 
