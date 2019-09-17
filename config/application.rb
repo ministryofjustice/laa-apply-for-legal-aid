@@ -21,7 +21,7 @@ module LaaApplyForLegalAid
     config.x.benefit_check.client_user_id = ENV['BC_CLIENT_USER_ID']
     config.x.benefit_check.wsdl_url       = ENV['BC_WSDL_URL']
 
-    config.x.google_tag_manger_tracking_id = ENV['GOOGLE_TAG_MANAGER_TRACKING_ID']
+    config.x.google_tag_manager_tracking_id = ENV['GOOGLE_TAG_MANAGER_TRACKING_ID']
 
     config.x.laa_portal.idp_slo_target_url             = ENV['LAA_PORTAL_IDP_SLO_TARGET_URL']
     config.x.laa_portal.idp_sso_target_url             = ENV['LAA_PORTAL_IDP_SSO_TARGET_URL']

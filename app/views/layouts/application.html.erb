@@ -36,7 +36,7 @@
   </head>
 
   <body class="govuk-template__body ">
-    <% render('layouts/google_tag_manager_no_script') if google_tag_present? %>
+    <%= render partial: 'layouts/google_tag_manager_no_script' if google_tag_present? %>
     <script>
       document.body.className = (
         (document.body.className)
