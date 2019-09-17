@@ -2,8 +2,6 @@ module CCMS
   class Submission < ApplicationRecord
     include CCMSSubmissionStateMachine
 
-    self.table_name = :ccms_submissions
-
     belongs_to :legal_aid_application
 
     validates :legal_aid_application_id, presence: true

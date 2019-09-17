@@ -193,6 +193,11 @@ respectively. Visit https://console.truelayer.com to get a client ID and client 
 True Layer offer a Mock Bank option (see https://docs.truelayer.com/#mock-users). To enable
 this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"true"`.
 
+
+## Check Financial Eligibility Service
+
+The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_URL`
+
 ## Troubleshooting
 
 Refer to the specific [README](./docs/troubleshooting.md)
