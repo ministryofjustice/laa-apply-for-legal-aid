@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Addresses::AddressForm, type: :form do
-  let(:address_line_one) { 'Ministry of Justice' }
+  let(:address_line_one) { 'Ministry Of Justice' }
   let(:address_line_two) { '102 Petty France' }
   let(:city) { 'London' }
   let(:county) { '' }

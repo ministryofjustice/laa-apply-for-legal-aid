@@ -48,7 +48,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     When the search for "cakes" is not successful
     Then the result list on page returns a "No results found." message
@@ -67,7 +67,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     And I search for proceeding 'app'
     Then proceeding suggestions has results
@@ -87,7 +87,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     Then I expect to see 0 proceeding types selected
     And I search for proceeding 'app'
@@ -121,7 +121,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -194,7 +194,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -223,7 +223,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -291,7 +291,7 @@ Feature: Civil application journeys
     Then I am on the postcode entry page
     Then I enter a postcode 'DA74NG'
     Then I click find address
-    Then I select an address '3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG'
+    Then I select an address '3, Lonsdale Road, Bexleyheath, DA7 4NG'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 

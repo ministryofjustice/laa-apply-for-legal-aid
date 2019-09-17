@@ -5,6 +5,7 @@ module Providers
 
       if address_lookup.success?
         @addresses = address_lookup.result
+        titleize_addresses
         @form = Addresses::AddressSelectionForm.new(model: address)
       else
         @form = Addresses::AddressForm.new(model: address, lookup_error: address_lookup.errors[:lookup].first)
@@ -42,6 +43,15 @@ module Providers
     def build_addresses_from_form_data
       address_list_params.to_a.map do |address_params|
         Address.from_json(address_params)
+      end
+    end
+
+    def titleize_addresses
+      @addresses.each do |a|
+        a[:organisation] = a[:organisation]&.titleize
+        a[:address_line_one] = a[:address_line_one]&.titleize
+        a[:address_line_two] = a[:address_line_two]&.titleize
+        a[:city] = a[:city]&.titleize
       end
     end
   end
