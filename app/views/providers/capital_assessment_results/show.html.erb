@@ -1,6 +1,7 @@
 <%= page_template(
-      page_title: t(".page_title", result: t(".#{@capital_assessment_result}.result") ),
-      template: :basic
+      page_title: t(".page_title", result: t(".result.#{@capital_assessment_result}") ),
+      template: :basic,
+      column_width: :full
     ) do %>
 
   <div class="interruption-panel">

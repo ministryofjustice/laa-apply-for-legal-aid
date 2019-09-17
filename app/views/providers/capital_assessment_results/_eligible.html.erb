@@ -2,6 +2,10 @@
   <%= t(".heading", name: @legal_aid_application.applicant_full_name) %>
 </h1>
 
-<% t(".details").each do |detail| %>
-  <p><%= detail %></p>
-<% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <% t(".details").each do |detail| %>
+      <p class="govuk-body"><%= detail %></p>
+    <% end %>
+  </div>
+</div>
