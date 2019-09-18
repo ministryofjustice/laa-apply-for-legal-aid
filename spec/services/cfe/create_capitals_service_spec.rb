@@ -16,10 +16,38 @@ module CFE # rubocop:disable Metrics/ModuleLength
                money_owed_value: 0.0,
                trust_value: 99_999.99
       end
+      let!(:savings_amount) do
+        create :savings_amount,
+               legal_aid_application: application,
+               isa: 333.33,
+               cash: 25.00,
+               other_person_account: 100.0,
+               national_savings: 750.0,
+               plc_shares: nil,
+               peps_unit_trusts_capital_bonds_gov_stocks: 0.0,
+               life_assurance_endowment_policy: nil
+      end
       let(:submission) { create :cfe_submission, aasm_state: 'applicant_created', legal_aid_application: application }
       let(:expected_payload) do
         {
-          'bank_accounts' => [],
+          'bank_accounts' => [
+            {
+              description: 'Off-line bank accounts',
+              value: '333.33'
+            },
+            {
+              description: 'Cash',
+              value: '25.0'
+            },
+            {
+              description: "Signatory on other person's account",
+              value: '100.0'
+            },
+            {
+              description: 'National savings',
+              value: '750.0'
+            },
+          ],
           'non_liquid_capital' => [
             {
               'description' => 'Timeshare property',
@@ -33,7 +61,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
               'description' => 'Valuable items',
               'value' => '32500.0'
             },
-            { 'description' => 'Trust',
+            { 'description' => 'Trusts',
               'value' => '99999.99' }
           ]
         }.to_json
