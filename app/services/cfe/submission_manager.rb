@@ -15,9 +15,9 @@ module CFE
         CFE::CreateAssessmentService.call(assessment)
         CFE::CreateApplicantService.call(assessment)
         CFE::CreateCapitalsService.call(assessment)
+        CFE::CreateVehiclesService.call(assessment)
 
         # TODO: add these steps as we write the services
-        # CFE::CreateVehiclesService.call(assessment)
         # CFE::CreatePropertiesService.call(assessment)
         # CFE::ObtainAssessmentResultService.call(assessment)
       rescue CFE::SubmissionError => e
