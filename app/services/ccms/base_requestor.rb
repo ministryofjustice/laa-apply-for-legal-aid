@@ -37,7 +37,8 @@ module CCMS
         pretty_print_xml: true,
         convert_request_keys_to: :none,
         namespace_identifier: 'ns2',
-        log: false
+        log: true,
+        log_level: :debug
       )
     end
     # :nocov:
