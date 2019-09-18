@@ -1,6 +1,7 @@
 class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
   USE_MOCK = ActiveModel::Type::Boolean.new.cast(ENV['BC_USE_DEV_MOCK'])
+  REQUEST_TIMEOUT = 30.seconds
 
   class ApiError < StandardError
     include Nesty::NestedError
@@ -20,7 +21,9 @@ class BenefitCheckService
   def call
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
   rescue Savon::SOAPFault => e
-    raise ApiError, "HTTP #{e.http.code}, #{e.to_hash}"
+    process_error(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
+  rescue StandardError => e
+    process_error(e)
   end
 
   private
@@ -52,7 +55,24 @@ class BenefitCheckService
   def soap_client
     @soap_client ||= Savon.client(
       endpoint: config.wsdl_url,
+      open_timeout: REQUEST_TIMEOUT,
+      read_timeout: REQUEST_TIMEOUT,
       namespace: BENEFIT_CHECKER_NAMESPACE
     )
+  end
+
+  def process_error(error)
+    Raven.capture_exception(error)
+    SlackAlertSenderWorker.perform_async(format_error(error))
+    false
+  end
+
+  def format_error(error)
+    [
+      '*BenefitChecker REQUEST ERROR*',
+      'An error has been raised by the BenefitChecker and logged to Sentry',
+      "*Application* #{application.application_ref}",
+      "#{error.class}: #{error.message}"
+    ].join("\n")
   end
 end

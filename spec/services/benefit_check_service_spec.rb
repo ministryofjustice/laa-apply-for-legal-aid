@@ -20,7 +20,7 @@ RSpec.describe BenefitCheckService do
       )
     end
 
-    context 'when the call is successful' do
+    context 'when the call is successful', vcr: { cassette_name: 'benefit_check_service/successful_call' } do
       it 'returns the right parameters' do
         result = subject.call
         expect(result[:benefit_checker_status]).to eq('Yes')
@@ -56,11 +56,21 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context 'when the API raises an error' do
+    context 'when the API raises an error', vcr: { cassette_name: 'benefit_check_service/service_error' } do
       let(:last_name) { 'SERVICEEXCEPTION' }
 
-      it 'raises a detailed error' do
-        expect { subject.call }.to raise_error(described_class::ApiError, /Service unavailable/)
+      it 'captures error' do
+        expect(Raven).to receive(:capture_exception).with(message_contains('Service unavailable'))
+        subject.call
+      end
+
+      it 'returns false' do
+        expect(subject.call).to eq false
+      end
+
+      it 'sends an alert on slack' do
+        expect(SlackAlertSenderWorker).to receive(:perform_async)
+        subject.call
       end
     end
 
@@ -71,18 +81,38 @@ RSpec.describe BenefitCheckService do
         allow(subject).to receive(:soap_client).and_return(savon_client)
       end
 
-      it 'raises an error' do
-        expect { subject.call }.to raise_error(Net::ReadTimeout)
+      it 'captures error and returns false' do
+        expect(Raven).to receive(:capture_exception).with(Net::ReadTimeout)
+        subject.call
+      end
+
+      it 'returns false' do
+        expect(subject.call).to eq false
+      end
+
+      it 'sends an alert on slack' do
+        expect(SlackAlertSenderWorker).to receive(:perform_async)
+        subject.call
       end
     end
 
-    context 'when some credentials are missing' do
+    context 'when some credentials are missing', vcr: { cassette_name: 'benefit_check_service/missing_credential' } do
       before do
         allow(Rails.configuration.x.benefit_check).to receive(:client_org_id).and_return('')
       end
 
-      it 'raises a detailed error' do
-        expect { subject.call }.to raise_error(described_class::ApiError, /Invalid request credentials/)
+      it 'captures error' do
+        expect(Raven).to receive(:capture_exception).with(message_contains('Invalid request credentials'))
+        subject.call
+      end
+
+      it 'returns false' do
+        expect(subject.call).to eq false
+      end
+
+      it 'sends an alert on slack' do
+        expect(SlackAlertSenderWorker).to receive(:perform_async)
+        subject.call
       end
     end
   end

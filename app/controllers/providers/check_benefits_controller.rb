@@ -5,7 +5,7 @@ module Providers
     def index
       return set_negative_result_and_go_forward if known_issue_prevents_benefit_check?
 
-      legal_aid_application.add_benefit_check_result if legal_aid_application.benefit_check_result_needs_updating?
+      check_benefits if legal_aid_application.benefit_check_result_needs_updating?
     end
 
     def update
@@ -13,6 +13,10 @@ module Providers
     end
 
     private
+
+    def check_benefits
+      redirect_to problem_index_path unless legal_aid_application.add_benefit_check_result
+    end
 
     def should_use_ccms?
       return false if legal_aid_application.applicant_receives_benefit?

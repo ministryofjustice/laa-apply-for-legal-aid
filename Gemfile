@@ -86,6 +86,8 @@ gem 'wicked_pdf'
 # interface to manage data
 gem 'rails_admin', '~> 2.0'
 
+gem 'slack-notifier'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

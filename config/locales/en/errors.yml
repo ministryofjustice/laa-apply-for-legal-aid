@@ -23,3 +23,8 @@ en:
       access_denied:
         page_title: Access denied
         permission_text: The page is not currently accessible to you
+  problem:
+    index:
+      title: Sorry, there is a problem with the service
+      try_later: Try again later.
+      answers_saved: We saved your answers.

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resource :contact, only: [:show]
   resources :feedback, only: %i[new create show]
   resources :errors, only: [:show], path: :error
+  resources :problem, only: :index
 
   namespace :admin do
     root to: 'legal_aid_applications#index'
