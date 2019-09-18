@@ -46,7 +46,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
             {
               description: 'National savings',
               value: '750.0'
-            },
+            }
           ],
           'non_liquid_capital' => [
             {

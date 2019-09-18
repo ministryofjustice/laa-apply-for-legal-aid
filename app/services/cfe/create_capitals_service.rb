@@ -7,7 +7,7 @@ module CFE
       inherited_assets_value: 'Inherited assets',
       money_owed_value: 'Money owed to applicant',
       trust_value: 'Trusts'
-    }
+    }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
       isa: 'Off-line bank accounts',
@@ -17,7 +17,7 @@ module CFE
       plc_shares: 'Shares in PLC',
       peps_unit_trusts_capital_bonds_gov_stocks: 'PEPs, unit trusts, capital bonds and government stocks',
       life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage'
-    }
+    }.freeze
 
     private
 
@@ -60,6 +60,7 @@ module CFE
 
     def array_of_hashes_for(model, field_names_and_descriptions)
       return nil if model.nil?
+
       items = []
       field_names_and_descriptions.each do |field_name, field_description|
         value = model.__send__(field_name)
@@ -82,8 +83,5 @@ module CFE
     def savings_amount
       @savings_amount ||= legal_aid_application.savings_amount
     end
-
-
-
   end
 end
