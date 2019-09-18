@@ -10,7 +10,7 @@ module CFE
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
-      isa: 'Off-line bank accounts',
+      offline_accounts: 'Off-line bank accounts',
       cash: 'Cash',
       other_person_account: "Signatory on other person's account",
       national_savings: 'National savings',

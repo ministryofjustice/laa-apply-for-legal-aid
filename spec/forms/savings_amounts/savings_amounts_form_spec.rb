@@ -41,7 +41,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       shared_examples_for 'it has an error' do
         let(:attribute_map) do
           {
-            isa: /total in.*accounts/i,
+            offline_accounts: /total in.*accounts/i,
             cash: /total.*cash savings/i,
             other_person_account: /other people’s accounts/,
             national_savings: /certificates and bonds/,
@@ -109,7 +109,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
     context 'some check boxes are unchecked' do
       let(:check_box_params) do
         boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
-        boxes[:check_box_isa] = 'true'
+        boxes[:check_box_offline_accounts] = 'true'
         boxes
       end
 
@@ -117,7 +117,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
 
         it 'empties amounts if checkbox is unchecked' do
-          attributes_except_isa = attributes - [:isa]
+          attributes_except_isa = attributes - [:offline_accounts]
           subject.save
           savings_amount.reload
           attributes_except_isa.each do |attr|
@@ -128,7 +128,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
         it 'does not empty amount if a checkbox is checked' do
           subject.save
-          expect(savings_amount.reload.isa).not_to eq(nil)
+          expect(savings_amount.reload.offline_accounts).not_to eq(nil)
         end
 
         it 'returns true' do

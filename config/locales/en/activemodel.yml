@@ -310,11 +310,11 @@ en:
               greater_than_or_equal_to: Total cash savings must be 0 or more
               not_a_number: Total cash savings must be an amount of money, like 60,000
               too_many_decimals: Estimated cash value must not include more than 2 decimal numbers
-            isa:
+            offline_accounts:
               blank: Enter the estimated total in all accounts
               greater_than_or_equal_to: Total in accounts must be 0 or more
               not_a_number: Total in accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated isa value must not include more than 2 decimal numbers
+              too_many_decimals: Estimated offline_accounts value must not include more than 2 decimal numbers
             life_assurance_endowment_policy:
               blank: Enter the total value of life assurance policies
               greater_than_or_equal_to: Total of life assurance policies must be 0 or more

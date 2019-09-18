@@ -19,7 +19,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
       let!(:savings_amount) do
         create :savings_amount,
                legal_aid_application: application,
-               isa: 333.33,
+               offline_accounts: 333.33,
                cash: 25.00,
                other_person_account: 100.0,
                national_savings: 750.0,

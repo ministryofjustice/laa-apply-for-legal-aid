@@ -59,13 +59,13 @@ RSpec.describe 'providers savings and investments', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/savings_and_investment' do
-    let(:isa) { rand(1...1_000_000.0).round(2).to_s }
-    let(:check_box_isa) { 'true' }
+    let(:offline_accounts) { rand(1...1_000_000.0).round(2).to_s }
+    let(:check_box_offline_accounts) { 'true' }
     let(:params) do
       {
         savings_amount: {
-          isa: isa,
-          check_box_isa: check_box_isa
+          offline_accounts: offline_accounts,
+          check_box_offline_accounts: check_box_offline_accounts
         }
       }
     end
@@ -85,8 +85,8 @@ RSpec.describe 'providers savings and investments', type: :request do
         end
 
         context 'not in checking passported answers state' do
-          it 'updates the isa amount' do
-            expect { subject }.to change { savings_amount.reload.isa.to_s }.to(isa)
+          it 'updates the offline_accounts amount' do
+            expect { subject }.to change { savings_amount.reload.offline_accounts.to_s }.to(offline_accounts)
           end
 
           it 'does not displays an error' do
@@ -110,7 +110,7 @@ RSpec.describe 'providers savings and investments', type: :request do
           end
 
           context 'with invalid input' do
-            let(:isa) { 'fifty' }
+            let(:offline_accounts) { 'fifty' }
 
             it 'renders successfully' do
               subject
@@ -119,7 +119,7 @@ RSpec.describe 'providers savings and investments', type: :request do
 
             it 'displays an error' do
               subject
-              expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.isa.not_a_number'))
+              expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_accounts.not_a_number'))
               expect(response.body).to match('govuk-error-message')
               expect(response.body).to match('govuk-form-group--error')
             end
@@ -141,7 +141,7 @@ RSpec.describe 'providers savings and investments', type: :request do
           end
 
           context 'no savings' do
-            let(:isa) { 0 }
+            let(:offline_accounts) { 0 }
 
             it 'redirects to the check passported answers page' do
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
@@ -165,8 +165,8 @@ RSpec.describe 'providers savings and investments', type: :request do
           }
         end
 
-        it 'updates the isa amount' do
-          expect { subject }.to change { savings_amount.reload.isa.to_s }.to(isa)
+        it 'updates the offline_accounts amount' do
+          expect { subject }.to change { savings_amount.reload.offline_accounts.to_s }.to(offline_accounts)
         end
 
         it 'does not displays an error' do
@@ -186,7 +186,7 @@ RSpec.describe 'providers savings and investments', type: :request do
         end
 
         context 'with invalid input' do
-          let(:isa) { 'fifty' }
+          let(:offline_accounts) { 'fifty' }
 
           it 'renders successfully' do
             subject
@@ -195,7 +195,7 @@ RSpec.describe 'providers savings and investments', type: :request do
 
           it 'displays an error' do
             subject
-            expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.isa.not_a_number'))
+            expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_accounts.not_a_number'))
             expect(response.body).to match('govuk-error-message')
             expect(response.body).to match('govuk-form-group--error')
           end
