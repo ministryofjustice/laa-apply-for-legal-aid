@@ -3,15 +3,17 @@ require 'rails_helper'
 RSpec.describe 'check your answers requests', type: :request do
   let(:used_delegated_functions) { false }
   let(:used_delegated_functions_on) { nil }
+  let(:address) { create :address }
+  let(:applicant) { create :applicant, address: address }
   let(:application) do
     create(
       :legal_aid_application,
       :with_proceeding_types,
-      :with_applicant_and_address,
       :with_substantive_scope_limitation,
       :with_delegated_functions_scope_limitation,
       used_delegated_functions: used_delegated_functions,
-      used_delegated_functions_on: used_delegated_functions_on
+      used_delegated_functions_on: used_delegated_functions_on,
+      applicant: applicant
     )
   end
   let(:application_id) { application.id }
@@ -74,15 +76,24 @@ RSpec.describe 'check your answers requests', type: :request do
 
       it 'displays the correct client details' do
         applicant = application.applicant
-        address = applicant.addresses[0]
 
         expect(unescaped_response_body).to include(applicant.first_name)
         expect(unescaped_response_body).to include(applicant.last_name)
         expect(unescaped_response_body).to include(applicant.date_of_birth.to_s)
         expect(unescaped_response_body).to include(applicant.national_insurance_number)
-        expect(unescaped_response_body).to include(address.address_line_one)
-        expect(unescaped_response_body).to include(address.city)
-        expect(unescaped_response_body).to include(address.postcode)
+      end
+
+      it 'formats the address correctly' do
+        address = application.applicant.addresses[0]
+
+        expect(unescaped_response_body).to include("#{address.address_line_one} #{address.address_line_two}<br>#{address.city}<br>#{address.pretty_postcode}")
+      end
+
+      context 'when an address includes an organisation but no address_line_one' do
+        let(:address) { create :address, organisation: 'Honeysuckle Cottage', address_line_one: nil, address_line_two: 'Station Road', city: 'Dartford', postcode: 'DA4 0EN' }
+        it 'formats the address correctly' do
+          expect(unescaped_response_body).to include('Honeysuckle Cottage<br> Station Road<br>Dartford<br>DA4 0EN')
+        end
       end
 
       context 'when the application is in provider submitted state' do
@@ -113,7 +124,7 @@ RSpec.describe 'check your answers requests', type: :request do
           expect(unescaped_response_body).to include(applicant.national_insurance_number)
           expect(unescaped_response_body).to include(address.address_line_one)
           expect(unescaped_response_body).to include(address.city)
-          expect(unescaped_response_body).to include(address.postcode)
+          expect(unescaped_response_body).to include(address.pretty_postcode)
         end
       end
 

@@ -3,9 +3,8 @@ module AddressHelper
     return unless address
 
     sanitize [address.organisation,
-              address.address_line_one,
-              address.address_line_two,
+              "#{address.address_line_one} #{address.address_line_two}",
               address.city,
-              address.postcode].compact.reject(&:blank?).join('<br>'), tags: ['br']
+              address.pretty_postcode].compact.reject(&:blank?).join('<br>'), tags: ['br']
   end
 end
