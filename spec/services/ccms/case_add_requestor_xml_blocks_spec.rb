@@ -471,33 +471,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
               expect(block).to have_text_response 'SUBDP'
             end
-
-            context 'in global_means section;' do
-              it 'returns SUBDP' do
-                allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
-                allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
-                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
-                expect(block).to have_text_response 'SUBDP'
-              end
-            end
           end
-        end
-
-        context 'EMERGENCY_FURTHER_INFORMATION' do
-          context 'delegated function used' do
-            it 'returns hard coded statement' do
+          context 'in global_means section;' do
+            it 'returns SUBDP' do
               allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
               allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
-              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
-              expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
-            end
-          end
-
-          context 'delegated function not used' do
-            it 'EMERGENCY_FURTHER_INFORMATION block is not present' do
-              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(false)
-              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
-              expect(block).not_to be_present
+              block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+              expect(block).to have_text_response 'SUBDP'
             end
           end
         end
@@ -515,6 +495,25 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                 expect(block).to have_text_response 'SUB'
               end
             end
+          end
+        end
+      end
+
+      context 'EMERGENCY_FURTHER_INFORMATION' do
+        context 'delegated function used' do
+          it 'returns hard coded statement' do
+            allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
+            allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
+            block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
+            expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+          end
+        end
+
+        context 'delegated function not used' do
+          it 'EMERGENCY_FURTHER_INFORMATION block is not present' do
+            allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(false)
+            block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
+            expect(block).not_to be_present
           end
         end
       end
@@ -1049,6 +1048,20 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_code
         end
       end
+
+      context 'SUBSTANTIVE_APP populates correctly' do
+        it 'returns true when application is substantive' do
+          block = XmlExtractor.call(xml, :global_merits, 'SUBSTANTIVE_APP')
+          expect(block).to have_boolean_response true
+        end
+      end
+
+      context 'PROCEEDING_APPLICATION_TYPE populates correctly' do
+        it 'returns Substantive when application is substantive' do
+          block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_APPLICATION_TYPE')
+          expect(block).to have_text_response 'Substantive'
+        end
+      end
     end
   end
 
@@ -1233,7 +1246,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'CRIME'],
       [:global_merits, 'CROWN_COURT'],
       [:global_merits, 'CURRENT_CERT_EMERGENCY'],
-      [:global_merits, 'CURRENT_CERT_SUBSTANTIVE'],
       [:global_merits, 'DEC_AGAINST_INSTRUCTIONS'],
       [:global_merits, 'DEC_CLIENT_TEXT_PARA02A'],
       [:global_merits, 'DEC_CLIENT_TEXT_PARA10A'],
@@ -1311,7 +1323,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'SMOD_APPLICABLE_TO_MATTER'],
       [:global_merits, 'SPECIAL_CHILDREN_ACT_APP'],
       [:global_merits, 'SPECIAL_IMM_APPEAL_COMMISSION'],
-      [:global_merits, 'SUBSTANTIVE_APP'],
       [:global_merits, 'SUPREME_COURT'],
       [:global_merits, 'UPPER_TRIBUNAL_IMM_ASY'],
       [:global_merits, 'UPPER_TRIBUNAL_MENTAL_HEALTH'],
@@ -1434,7 +1445,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:proceeding_merits, 'PROC_SUBJECT_TO_DP_CHECK'],
       [:proceeding_merits, 'PROC_SUBJECT_TO_MEDIATION'],
       [:proceeding_merits, 'PROC_UPPER_TRIBUNAL'],
-      [:proceeding_merits, 'PROCEEDING_APPLICATION_TYPE'],
       [:proceeding_merits, 'PROCEEDING_CASE_OWNER_SCU'],
       [:proceeding_merits, 'PROCEEDING_DESCRIPTION'],
       [:proceeding_merits, 'PROCEEDING_INCLUDES_CHILD'],
@@ -1587,6 +1597,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'COST_LIMIT_CHANGED'],
       [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
       [:global_merits, 'COURT_ATTEND_IN_LAST_12_MONTHS'],
+      [:global_merits, 'CURRENT_CERT_SUBSTANTIVE'],
       [:global_merits, 'DECLARATION_IDENTIFIER'],
       [:global_merits, 'ECF_FLAG'],
       [:global_merits, 'EVID_DEC_AGAINST_INSTRUCTIONS'],
