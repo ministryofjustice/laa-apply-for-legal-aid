@@ -40,7 +40,10 @@ module CFE
         expect(CreateCapitalsService).to receive(:call).and_return(true)
         expect(CreatePropertiesService).to receive(:call).and_return(true)
         expect(CreateVehiclesService).to receive(:call).and_return(true)
-        expect(ObtainResultsService).to receive(:call).and_return(true)
+
+        # TODO: Add these expectations as we add more services to the test
+        # expect(ObtainResultsService).to receive(:call).and_return(true)
+
         submission_manager.call
       end
 

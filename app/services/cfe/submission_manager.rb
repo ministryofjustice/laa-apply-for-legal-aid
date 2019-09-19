@@ -10,21 +10,18 @@ module CFE
     end
 
     def call
-      CFE::CreateAssessmentService.call(submission)
-      CFE::CreateApplicantService.call(submission)
-      CFE::CreateCapitalsService.call(submission)
-      CFE::CreateVehiclesService.call(submission)
-      CFE::CreatePropertiesService.call(submission)
+      submission = CFE::Submission.create!(legal_aid_application_id: @legal_aid_application_id)
 
-      # TODO: add these steps as we write the services
-      # CFE::ObtainAssessmentResultService.call(submission)
-    rescue CFE::SubmissionError => e
-      submission.error_message = e.message
-      submission.fail!
-    end
-
-    def submission
-      @submission ||= CFE::Submission.create!(legal_aid_application_id: legal_aid_application_id)
+      begin
+        CFE::CreateAssessmentService.call(submission)
+        CFE::CreateApplicantService.call(submission)
+        CFE::CreateCapitalsService.call(submission)
+        CFE::CreateVehiclesService.call(submission)
+        CFE::ObtainAssessmentResultService.call(submission)
+      rescue CFE::SubmissionError => e
+        assessment.error_message = e.message
+        assessment.fail!
+      end
     end
   end
 end
