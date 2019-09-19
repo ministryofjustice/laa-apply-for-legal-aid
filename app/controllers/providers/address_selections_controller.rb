@@ -46,16 +46,16 @@ module Providers
       end
     end
 
-    def address_titleize(sentence)
+    def hyphen_safe_titleize(sentence)
       sentence.to_s&.split(' ')&.map(&:capitalize)&.join(' ')
     end
 
     def titleize_addresses
       @addresses.each do |a|
-        a[:address_line_one] = address_titleize(a[:address_line_one])
-        a[:address_line_two] = address_titleize(a[:address_line_two])
-        a[:city] = address_titleize(a[:city])
-        a[:county] = address_titleize(a[:county])
+        a[:address_line_one] = hyphen_safe_titleize(a[:address_line_one])
+        a[:address_line_two] = hyphen_safe_titleize(a[:address_line_two])
+        a[:city] = hyphen_safe_titleize(a[:city])
+        a[:county] = hyphen_safe_titleize(a[:county])
       end
     end
   end
