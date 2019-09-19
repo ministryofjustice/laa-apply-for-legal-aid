@@ -172,7 +172,7 @@ module CCMS
       xml.__send__('ns2:ProceedingType', proceeding_type.ccms_code)
       xml.__send__('ns2:ProceedingDescription', proceeding_type.description)
       xml.__send__('ns2:MatterType', proceeding_type.ccms_matter_code)
-      xml.__send__('ns2:LevelOfService', 3) # TODO: CCMS placeholder
+      xml.__send__('ns2:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
       xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
       xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
       xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding_type) }
