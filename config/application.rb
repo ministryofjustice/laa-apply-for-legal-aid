@@ -45,6 +45,7 @@ module LaaApplyForLegalAid
     config.x.laa_portal.secret_key = ENV['LAA_PORTAL_SECRET_KEY']
 
     config.x.kubernetes_deployment = ENV['KUBERNETES_DEPLOYMENT'] == 'true'
+    config.x.check_financial_eligibility_host = ENV['CHECK_FINANCIAL_ELIGIBILITY_URL']
 
     config.govuk_notify_templates = config_for(
       :govuk_notify_templates,
