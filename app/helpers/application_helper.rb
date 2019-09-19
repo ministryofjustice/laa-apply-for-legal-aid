@@ -36,7 +36,7 @@ module ApplicationHelper
     return journey_type if respond_to?(:journey_type)
 
     journeys = %i[admin providers citizens]
-    parent = controller.class.parent.to_s.downcase.to_sym
+    parent = controller.class.module_parent.to_s.downcase.to_sym
     return :unknown unless journeys.include?(parent)
 
     parent

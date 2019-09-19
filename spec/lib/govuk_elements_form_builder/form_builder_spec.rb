@@ -3,7 +3,8 @@ require 'rails_helper'
 class TestHelper < ActionView::Base; end
 
 RSpec.describe GovukElementsFormBuilder::FormBuilder do
-  let(:helper) { TestHelper.new }
+  let(:lookup_context) { ActionView::LookupContext.new(Rails.root.join('/app/view')) }
+  let(:helper) { TestHelper.new(lookup_context) }
   let(:resource) { 'applicant' }
   let(:resource_form) { Applicants::BasicDetailsForm.new }
   let(:builder) { described_class.new resource.to_sym, resource_form, helper, {} }
