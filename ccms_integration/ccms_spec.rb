@@ -50,7 +50,8 @@ module CCMS
              user_login_id: 2_016_472,
              supervisor_contact_id: 3_982_723,
              fee_earner_contact_id: 34_419,
-             marked_for_destruction?: false
+             marked_for_destruction?: false,
+             email: 'test@test.com'
     end
 
     let(:substantive_legal_aid_application) do
