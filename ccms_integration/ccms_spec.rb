@@ -85,7 +85,8 @@ module CCMS
              :with_means_report,
              :with_merits_report,
              statement_of_case: @statement_of_case,
-             proceeding_types: [substantive_proceeding_type]
+             proceeding_types: [substantive_proceeding_type],
+             state: :submitting_assessment
     end
 
     let(:delegated_functions_scope_limitation) do
@@ -120,7 +121,8 @@ module CCMS
              :with_means_report,
              :with_merits_report,
              statement_of_case: @statement_of_case,
-             proceeding_types: [delegated_functions_proceeding_type]
+             proceeding_types: [delegated_functions_proceeding_type],
+             state: :submitting_assessment
     end
 
     before do
