@@ -46,12 +46,16 @@ module Providers
       end
     end
 
+    def address_titleize(sentence)
+      sentence.to_s&.split(' ')&.map(&:capitalize)&.join(' ')
+    end
+
     def titleize_addresses
       @addresses.each do |a|
-        a[:organisation] = a[:organisation]&.titleize
-        a[:address_line_one] = a[:address_line_one]&.titleize
-        a[:address_line_two] = a[:address_line_two]&.titleize
-        a[:city] = a[:city]&.titleize
+        a[:address_line_one] = address_titleize(a[:address_line_one])
+        a[:address_line_two] = address_titleize(a[:address_line_two])
+        a[:city] = address_titleize(a[:city])
+        a[:county] = address_titleize(a[:county])
       end
     end
   end

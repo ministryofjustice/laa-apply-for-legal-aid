@@ -86,13 +86,13 @@ RSpec.describe 'check your answers requests', type: :request do
       it 'formats the address correctly' do
         address = application.applicant.addresses[0]
 
-        expect(unescaped_response_body).to include("#{address.address_line_one} #{address.address_line_two}<br>#{address.city}<br>#{address.pretty_postcode}")
+        expect(unescaped_response_body).to include("#{address.address_line_one}<br>#{address.address_line_two}<br>#{address.city}<br>#{address.county}<br>#{address.pretty_postcode}")
       end
 
       context 'when an address includes an organisation but no address_line_one' do
-        let(:address) { create :address, organisation: 'Honeysuckle Cottage', address_line_one: nil, address_line_two: 'Station Road', city: 'Dartford', postcode: 'DA4 0EN' }
+        let(:address) { create :address, address_line_one: 'Honeysuckle Cottage', address_line_two: 'Station Road', city: 'Dartford', county: '', postcode: 'DA4 0EN' }
         it 'formats the address correctly' do
-          expect(unescaped_response_body).to include('Honeysuckle Cottage<br> Station Road<br>Dartford<br>DA4 0EN')
+          expect(unescaped_response_body).to include('Honeysuckle Cottage<br>Station Road<br>Dartford<br>DA4 0EN')
         end
       end
 
