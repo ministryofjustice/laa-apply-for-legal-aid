@@ -141,7 +141,7 @@ module CCMS
     end
 
     def applicant_has_other_savings?(_options)
-      not_zero? savings.isa
+      not_zero? savings.offline_accounts
     end
 
     def applicant_has_other_policies?(_options)

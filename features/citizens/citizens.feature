@@ -156,7 +156,7 @@ Feature: Citizen journey
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'What types of savings or investments do you have?'
     Then I select 'Money in accounts you do not access with online banking'
-    Then I fill 'Isa' with '5000'
+    Then I fill 'Offline accounts' with '5000'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'

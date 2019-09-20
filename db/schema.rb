@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_092309) do
+ActiveRecord::Schema.define(version: 2019_09_18_102038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -100,10 +100,9 @@ ActiveRecord::Schema.define(version: 2019_09_13_092309) do
   create_table "application_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "scope_limitation_id"
+    t.boolean "substantive", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "substantive", default: true
-    t.index ["legal_aid_application_id", "scope_limitation_id"], name: "scope_limitations_index", unique: true
     t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
@@ -505,7 +504,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_092309) do
 
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
-    t.decimal "isa"
+    t.decimal "offline_accounts"
     t.decimal "cash"
     t.decimal "other_person_account"
     t.decimal "national_savings"
