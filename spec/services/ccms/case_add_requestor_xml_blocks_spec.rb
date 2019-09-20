@@ -5,40 +5,35 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     context 'XML request' do
       let(:expected_tx_id) { '201904011604570390059770666' }
       let(:proceeding_type) { create :proceeding_type, :with_real_data }
+      let(:firm) { create :firm, name: 'Firm1' }
+      let(:office) { create :office, firm: firm }
+      let(:provider) do
+        create :provider,
+               firm: firm,
+               selected_office: office,
+               username: 4_953_649
+      end
+
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_everything,
                :with_applicant_and_address,
                populate_vehicle: true,
                with_bank_accounts: 2,
-               proceeding_types: [proceeding_type]
-      end
-
-      let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
-
-      let(:provider) do
-        double Provider,
-               firm: firm,
-               selected_office_id: 137_570,
-               user_login_id: 4_953_649,
-               username: 4_953_649,
-               contact_user_id: 4_953_649,
-               supervisor_contact_id: 7_008_010,
-               fee_earner_contact_id: 4_925_152
+               proceeding_types: [proceeding_type],
+               provider: provider
       end
 
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:respondent) { legal_aid_application.respondent }
-      let(:ccms_reference) { '300000000001' }
+      let(:ccms_reference) { '300000054005' }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
       let(:success_prospect) { :likely }
       let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
-      before { allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id) }
-      before { allow(requestor).to receive(:provider).and_return(provider) }
 
-      # enable this context if  you need to create a file of the payload for manual inspection
+      # enable this context if you need to create a file of the payload for manual inspection
       xcontext 'saving to a temporary file' do
         it 'creates a file' do
           filename = Rails.root.join('tmp/generated_ccms_payload.xml')
@@ -49,7 +44,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       context 'ProceedingCaseId' do
         context 'ProceedingCaseId section' do
-          it 'has  a p number' do
+          it 'has a p number' do
             block = XmlExtractor.call(xml, :proceeding_case_id)
             expect(block.text).to eq application_proceeding_type.proceeding_case_p_num
           end
@@ -71,13 +66,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'APPLICATION_CASE_REF' do
-        let(:ccms_reference) { '400012345678' }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
-        it 'inserts the case reference from the submission record into both global means and merits sections' do
-          %i[global_means global_merits].each do |entity|
-            block = XmlExtractor.call(xml, entity, 'APPLICATION_CASE_REF')
-            expect(block).to have_text_response ccms_reference
-          end
+        it 'inserts the case reference from the submission record the global means sections' do
+          block = XmlExtractor.call(xml, :global_means, 'APPLICATION_CASE_REF')
+          expect(block).to have_text_response submission.case_ccms_reference
+        end
+
+        it 'inserts the case reference from the submission record the global merits sections' do
+          block = XmlExtractor.call(xml, :global_merits, 'APPLICATION_CASE_REF')
+          expect(block).to have_text_response ccms_reference
         end
       end
 
@@ -158,7 +154,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'APPLICATION_CASE_REF' do
-        let(:ccms_reference) { '400000099991' }
         it 'inserts the ccms case reference from the submission into the attribute block' do
           block = XmlExtractor.call(xml, :global_means, 'APPLICATION_CASE_REF')
           expect(block).to have_text_response ccms_reference

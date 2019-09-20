@@ -288,7 +288,7 @@ module CCMS
 
     def generate_means_proceeding_instance(xml, application_proceeding_type)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_case_reference)
+        xml.__send__('ns0:InstanceLabel', @submission.case_ccms_reference)
         xml.__send__('ns0:Attributes') do
           generate_attributes_for(xml,
                                   :proceeding,
@@ -379,7 +379,7 @@ module CCMS
 
     def generate_merits_proceeding_instance(xml, application_proceeding_type)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', @legal_aid_application.ccms_case_reference)
+        xml.__send__('ns0:InstanceLabel', @submission.case_ccms_reference)
         xml.__send__('ns0:Attributes') do
           generate_attributes_for(xml,
                                   :proceeding_merits,

@@ -16,7 +16,7 @@ FactoryBot.define do
     end
 
     trait :with_true_layer_tokens do
-      after(:create) do |applicant|
+      after(:build) do |applicant|
         applicant.store_true_layer_token(
           token: SecureRandom.hex,
           expires: 1.hour.from_now
@@ -29,7 +29,7 @@ FactoryBot.define do
       with_bank_accounts { 0 }
     end
 
-    after(:create) do |applicant, evaluator|
+    after(:build) do |applicant, evaluator|
       if evaluator.with_bank_accounts > 0
         provider = create :bank_provider, applicant: applicant
         evaluator.with_bank_accounts.times do

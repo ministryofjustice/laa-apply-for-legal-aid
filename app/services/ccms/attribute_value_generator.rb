@@ -74,7 +74,7 @@ module CCMS
     end
 
     def submission_case_ccms_reference(_options)
-      @submission.case_ccms_reference
+      @legal_aid_application.case_ccms_reference
     end
 
     def used_delegated_functions_on(_options)

@@ -245,13 +245,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                main_dwelling_third_party_relationship: 'Ex-Partner',
                main_dwelling_third_party_percentage: 50,
                opponents: [other_party_2],
-               ccms_submissions: ccms_submissions_collection,
                opponent_other_parties: [other_party_1, other_party_2],
-               most_recent_ccms_submission: ccms_submission,
+               ccms_submission: ccms_submission,
                used_delegated_functions?: true,
                used_delegated_functions_on: Date.today,
                default_substantive_cost_limitation: '2.00',
-               ccms_case_reference: 'P_88000001',
+               case_ccms_reference: 'P_88000001',
                respondent: respondent,
                own_vehicle?: true,
                own_home?: true,
@@ -294,11 +293,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                plc_shares: 1_980,
                peps_unit_trusts_capital_bonds_gov_stocks: 10_000,
                life_assurance_endowment_policy: 3_000
-      end
-
-      let(:ccms_submissions_collection) do
-        double 'Collection of CCMS::Submission records',
-               most_recent: ccms_submission
       end
 
       let(:ccms_submission) do
