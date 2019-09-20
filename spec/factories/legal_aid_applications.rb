@@ -9,25 +9,22 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { create :applicant, with_bank_accounts: with_bank_accounts }
+      applicant { build :applicant, with_bank_accounts: with_bank_accounts }
     end
 
     trait :with_applicant_and_address do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { create :applicant, :with_address, with_bank_accounts: with_bank_accounts }
+      applicant { build :applicant, :with_address, with_bank_accounts: with_bank_accounts }
     end
 
     trait :with_applicant_and_address_lookup do
-      applicant { create :applicant, :with_address_lookup }
+      applicant { build :applicant, :with_address_lookup }
     end
 
     trait :provider_submitted do
       state { 'provider_submitted' }
-      after :create do |application|
-        create :submission, :case_ref_obtained, legal_aid_application: application
-      end
     end
 
     trait :client_details_answers_checked do
@@ -108,15 +105,15 @@ FactoryBot.define do
     end
 
     trait :with_other_assets_declaration do
-      other_assets_declaration { create :other_assets_declaration, :with_all_values }
+      other_assets_declaration { build :other_assets_declaration, :with_all_values }
     end
 
     trait :with_no_other_assets do
-      other_assets_declaration { create :other_assets_declaration, :all_nil }
+      other_assets_declaration { build :other_assets_declaration, :all_nil }
     end
 
     trait :with_savings_amount do
-      savings_amount { create :savings_amount, :with_values }
+      savings_amount { build :savings_amount, :with_values }
     end
 
     trait :with_delegated_functions do
@@ -128,11 +125,11 @@ FactoryBot.define do
     end
 
     trait :with_no_savings do
-      savings_amount { create :savings_amount, :all_nil }
+      savings_amount { build :savings_amount, :all_nil }
     end
 
     trait :with_no_other_assets do
-      other_assets_declaration { create :other_assets_declaration, :all_nil }
+      other_assets_declaration { build :other_assets_declaration, :all_nil }
     end
 
     trait :with_merits_assessment do
@@ -148,7 +145,7 @@ FactoryBot.define do
     end
 
     trait :with_respondent do
-      respondent { create :respondent }
+      respondent { build :respondent }
     end
 
     trait :with_restrictions do
@@ -161,11 +158,11 @@ FactoryBot.define do
         populate_vehicle { false }
       end
       own_vehicle { true }
-      vehicle { populate_vehicle ? create(:vehicle, :populated) : create(:vehicle) }
+      vehicle { populate_vehicle ? build(:vehicle, :populated) : build(:vehicle) }
     end
 
     trait :with_incident do
-      latest_incident { create :incident }
+      latest_incident { build :incident }
     end
 
     trait :with_everything do
