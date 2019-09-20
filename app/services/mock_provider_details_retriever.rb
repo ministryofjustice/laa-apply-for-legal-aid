@@ -55,7 +55,7 @@ class MockProviderDetailsRetriever
   end
 
   def firm_name
-    @firm_name ||= "#{contact_name} & Co."
+    @firm_name ||= "#{contact_name.sub(/\sUser\d+$/, '')} & Co."
   end
 
   def contact_name

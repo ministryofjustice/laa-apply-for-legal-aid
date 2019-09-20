@@ -100,9 +100,10 @@ ActiveRecord::Schema.define(version: 2019_09_25_095224) do
   create_table "application_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "scope_limitation_id"
-    t.boolean "substantive", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "substantive", default: true
+    t.index ["legal_aid_application_id", "scope_limitation_id"], name: "scope_limitations_index", unique: true
     t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
