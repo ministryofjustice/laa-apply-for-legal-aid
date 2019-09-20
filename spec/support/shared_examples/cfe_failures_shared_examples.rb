@@ -1,7 +1,13 @@
 module CFE
   RSpec.shared_examples 'a failed call to CFE' do |service, url|
     context 'http status 422' do
-      let(:faraday_response) { double Faraday::Response, status: 422, body: error_response }
+      # let(:faraday_response) { double Faraday::Response, status: 422, body: error_response }
+      before do
+        expect_any_instance_of(described_class).to receive(:request_body).exactly(2).times.and_return(expected_payload)
+        stub_request(:post, "localhost:3001/assessments/#{submission.assessment_id}/applicant")
+          .with(body: expected_payload)
+          .to_return(body: error_response, status: 422)
+      end
 
       it 'raises an exception' do
         expect {
@@ -26,7 +32,12 @@ module CFE
     end
 
     context 'other failing http status' do
-      let(:faraday_response) { double Faraday::Response, status: 503, body: '' }
+      before do
+        expect_any_instance_of(described_class).to receive(:request_body).exactly(2).times.and_return(expected_payload)
+        stub_request(:post, "localhost:3001/assessments/#{submission.assessment_id}/applicant")
+          .with(body: expected_payload)
+          .to_return(body: '', status: 503)
+      end
 
       it 'raises an exception' do
         expect {
@@ -40,10 +51,6 @@ module CFE
 
         expect(submission.submission_histories.count).to eq 1
         history = submission.submission_histories.last
-        expect(history.submission_id).to eq submission.id
-        expect(history.url).to eq expected_url(submission, url)
-        expect(history.http_method).to eq 'POST'
-        expect(history.request_payload).to eq expected_payload
         expect(history.http_response_status).to eq 503
         expect(history.response_payload).to eq ''
         expect(history.error_message).to be_nil
