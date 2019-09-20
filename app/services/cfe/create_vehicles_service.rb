@@ -21,7 +21,6 @@ module CFE
 
     def process_response
       @submission.vehicles_created!
-      true
     end
 
     def vehicle

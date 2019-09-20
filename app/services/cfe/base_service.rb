@@ -57,8 +57,8 @@ module CFE
         request.headers['Content-Type'] = 'application/json'
         request.body = request_body
       end
-    rescue StandardError => e
-      raise_exception_error(e)
+    # rescue StandardError => e
+    #   raise_exception_error(e)
     end
 
     def raise_exception_error(err)
