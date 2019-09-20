@@ -51,7 +51,7 @@ class MockProviderDetailsRetriever
   end
 
   def firm_id
-    @firm_id ||= username_number
+    @firm_id ||= firm_number
   end
 
   def firm_name
@@ -65,5 +65,13 @@ class MockProviderDetailsRetriever
   # Generates a number from the username which is used to generate the values from the response
   def username_number
     @username_number ||= username.upcase.chars.map(&:ord).sum
+  end
+
+  def firm_number
+    @firm_number ||= calculate_firm_number
+  end
+
+  def calculate_firm_number
+    username.sub(/-user\d+$/, '').upcase.chars.map(&:ord).sum
   end
 end
