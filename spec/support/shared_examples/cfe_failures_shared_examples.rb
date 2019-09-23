@@ -60,6 +60,23 @@ module CFE
       end
     end
 
+    context 'connection error' do
+      it 'creates a CFE::Submission error and writes a history record with a backtrace' do
+        stub_request(:post, cfe_url).to_raise(Faraday::ConnectionFailed.new('my faraday connection failed'))
+        expect {
+          described_class.call(submission)
+        }.to raise_error CFE::SubmissionError
+        history = CFE::SubmissionHistory.last
+        expect(history.submission_id).to eq submission.id
+        expect(history.url).to eq cfe_url
+        expect(history.http_method).to eq 'POST'
+        expect(history.http_response_status).to be_nil
+        expect(history.response_payload).to be_nil
+        expect(history.error_message).to eq "#{described_class} received Faraday::ConnectionFailed: my faraday connection failed"
+        expect(history.error_backtrace).not_to be_nil
+      end
+    end
+
     def error_response
       {
         errors: ['Detailed error message'],

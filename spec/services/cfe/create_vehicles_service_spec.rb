@@ -17,7 +17,7 @@ module CFE
     end
 
     describe 'successful post' do
-      before { stub_request(:post, cfe_url).to_return(body: expected_response) }
+      before { stub_request(:post, cfe_url).with(body: expected_payload).to_return(body: expected_response) }
 
       it 'updates the submission record from assessment_created to applicant_created' do
         expect(submission.aasm_state).to eq 'capitals_created'
@@ -57,7 +57,7 @@ module CFE
       }
     end
 
-    def expected_response_hash
+    def expected_response_hash # rubocop:disable Metrics/MethodLength
       {
         vehicles: [
           {

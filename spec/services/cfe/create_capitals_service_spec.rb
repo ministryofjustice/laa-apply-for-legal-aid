@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module CFE
+module CFE # rubocop:disable Metrics/ModuleLength
   RSpec.describe CreateCapitalsService do
     let(:application) { create :legal_aid_application }
     let!(:other_assets_declaration) { my_other_asset_declaration }
@@ -17,7 +17,7 @@ module CFE
       end
 
       context 'successful post' do
-        before { stub_request(:post, cfe_url).to_return(body: expected_response) }
+        before { stub_request(:post, cfe_url).with(body: expected_payload).to_return(body: expected_response) }
 
         it 'updates the submission record from applicant_created to capitals_created' do
           expect(submission.aasm_state).to eq 'applicant_created'
@@ -59,7 +59,7 @@ module CFE
              life_assurance_endowment_policy: nil
     end
 
-    def expected_payload_hash
+    def expected_payload_hash # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       {
         bank_accounts: [
           {
@@ -93,13 +93,12 @@ module CFE
             value: other_assets_declaration.valuable_items_value.to_s
           },
           { description: 'Trusts',
-            value: other_assets_declaration.trust_value.to_s
-          }
+            value: other_assets_declaration.trust_value.to_s }
         ]
       }
     end
 
-    def expected_response_hash
+    def expected_response_hash # rubocop:disable Metrics/MethodLength
       {
         objects: {
           id: 'dfc616dc-b8a0-4f18-b721-57dc561aaf07',
