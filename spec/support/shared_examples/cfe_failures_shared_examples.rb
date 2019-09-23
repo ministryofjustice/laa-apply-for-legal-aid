@@ -27,7 +27,7 @@ module CFE
         expect(history.request_payload).to eq service.request_body
         expect(history.http_response_status).to eq 422
         expect(history.response_payload).to eq error_response
-        expect(history.error_message).to be_nil
+        expect(history.error_message).to eq 'Unexpected response: 422'
       end
     end
 
@@ -52,7 +52,7 @@ module CFE
         history = submission.submission_histories.last
         expect(history.http_response_status).to eq 503
         expect(history.response_payload).to eq ''
-        expect(history.error_message).to be_nil
+        expect(history.error_message).to eq 'Unexpected response: 503'
       end
     end
 
