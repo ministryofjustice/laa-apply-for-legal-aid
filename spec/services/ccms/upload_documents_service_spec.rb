@@ -10,7 +10,8 @@ RSpec.describe CCMS::UploadDocumentsService do
            :with_transaction_period,
            :with_means_report,
            :with_merits_report,
-           statement_of_case: statement_of_case
+           statement_of_case: statement_of_case,
+           state: :submitting_assessment
   end
 
   let(:statement_of_case) { create :statement_of_case, :with_attached_files }

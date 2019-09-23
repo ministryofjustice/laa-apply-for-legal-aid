@@ -24,6 +24,7 @@ module LegalAidApplicationStateMachine
       state :checking_merits_answers
       state :checked_merits_answers
       state :generating_reports
+      state :submitting_assessment
       state :assessment_submitted
 
       event :check_your_answers do
@@ -87,6 +88,7 @@ module LegalAidApplicationStateMachine
         transitions from: :provider_checked_citizens_means_answers, to: :checking_merits_answers
         transitions from: :checked_merits_answers, to: :checking_merits_answers
         transitions from: :means_completed, to: :checking_merits_answers
+        transitions from: :submitting_assessment, to: :checking_merits_answers
         transitions from: :assessment_submitted, to: :checking_merits_answers
       end
 
@@ -100,7 +102,16 @@ module LegalAidApplicationStateMachine
       end
 
       event :generated_reports do
-        transitions from: :generating_reports, to: :assessment_submitted
+        transitions from: :generating_reports, to: :submitting_assessment,
+                    after: -> do
+                      return unless Rails.configuration.x.ccms_soa.submit_applications_to_ccms
+
+                      ccms_submission.process_async!
+                    end
+      end
+
+      event :submitted_assessment do
+        transitions from: :submitting_assessment, to: :assessment_submitted
       end
     end
   end

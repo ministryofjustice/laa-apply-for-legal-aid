@@ -42,7 +42,8 @@ module CCMSSubmissionStateMachine
       end
 
       event :complete do
-        transitions from: :case_created, to: :completed
+        transitions from: :case_created, to: :completed,
+                    after: -> { legal_aid_application.submitted_assessment! }
       end
 
       event :fail do

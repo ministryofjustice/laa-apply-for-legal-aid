@@ -533,4 +533,25 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#generated_reports' do
+    let(:legal_aid_application) { create :legal_aid_application, state: :generating_reports }
+    let(:submit_applications_to_ccms) { true }
+
+    before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(submit_applications_to_ccms) }
+
+    it 'starts the ccms submission process' do
+      expect(legal_aid_application.ccms_submission).to receive(:process_async!)
+      legal_aid_application.generated_reports!
+    end
+
+    context 'submit_applications_to_ccms is set to false' do
+      let(:submit_applications_to_ccms) { false }
+
+      it 'does not start the ccms submission process' do
+        expect(legal_aid_application.ccms_submission).not_to receive(:process_async!)
+        legal_aid_application.generated_reports!
+      end
+    end
+  end
 end
