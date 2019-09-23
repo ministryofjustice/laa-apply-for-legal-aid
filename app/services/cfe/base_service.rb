@@ -20,7 +20,7 @@ module CFE
     end
 
     def cfe_url_host
-      ENV['CHECK_FINANCIAL_ELIGIBILITY_URL']
+      Rails.configuration.x.check_finanical_eligibility_host
     end
 
     def cfe_url
