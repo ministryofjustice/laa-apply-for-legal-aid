@@ -1,4 +1,6 @@
 class DateFieldBuilder
+  YearError = Class.new(StandardError)
+
   DATE_PARTS = %i[year month day].freeze
 
   attr_reader :form, :model, :method, :prefix
@@ -46,16 +48,36 @@ class DateFieldBuilder
   end
 
   def form_date_invalid?
-    !Date.valid_date?(*from_form.map(&:to_i))
+    !Date.valid_date?(*date_attributes)
+  rescue YearError
+    true
   end
 
   def form_date
-    @form_date ||= Date.new(*from_form.map(&:to_i))
+    @form_date ||= Date.new(*date_attributes)
   end
 
   private
 
   def field_for(part)
     [prefix, part].join.to_sym
+  end
+
+  def date_attributes
+    year, month, day = from_form
+    [four_digit_year(year), month, day].map(&:to_i)
+  end
+
+  def four_digit_year(year)
+    year = year.to_s
+
+    case year.length
+    when 4
+      year
+    when 2
+      year > Time.now.strftime('%y') ? "19#{year}" : "20#{year}"
+    else
+      raise YearError, 'Year is incorrect length'
+    end
   end
 end
