@@ -19,8 +19,6 @@ module CFE
       life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage'
     }.freeze
 
-    private
-
     def cfe_url_path
       "/assessments/#{@submission.assessment_id}/capitals"
     end
@@ -31,6 +29,8 @@ module CFE
         "non_liquid_capital": itemised_other_assets
       }.to_json
     end
+
+    private
 
     def process_response
       @submission.capitals_created!

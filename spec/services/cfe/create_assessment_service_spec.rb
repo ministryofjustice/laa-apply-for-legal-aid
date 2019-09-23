@@ -5,42 +5,58 @@ module CFE
     let(:application) { create :legal_aid_application }
     let!(:applicant) { create :applicant, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'initialised', legal_aid_application: application }
-    let(:expected_payload) { expected_payload_hash.to_json }
+    let(:service) { described_class.new(submission) }
     let(:expected_response) { expected_response_hash.to_json }
-    let(:cfe_host) { Rails.configuration.x.check_finanical_eligibility_host }
-    let(:cfe_url) { "#{cfe_host}/assessments" }
 
     before do
       allow(application).to receive(:calculation_date).and_return(Date.today)
-      allow_any_instance_of(described_class).to receive(:request_body).and_return(expected_payload)
     end
 
-    describe 'successful post' do
-      before { stub_request(:post, cfe_url).with(body: expected_payload).to_return(body: expected_response) }
-
-      it 'updates the submission record from initialised to assessment created' do
-        expect(submission.aasm_state).to eq 'initialised'
-        CreateAssessmentService.call(submission)
-        expect(submission.aasm_state).to eq 'assessment_created'
+    describe '#cfe_url' do
+      it 'returns the assessment endpoint' do
+        expect(service.cfe_url)
+          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments"
       end
+    end
 
-      it 'creates a submission_history record' do
-        expect {
+    describe '#request payload' do
+      it 'creates the expected payload from the values in the applicant' do
+        expect(service.request_body).to eq expected_payload_hash.to_json
+      end
+    end
+
+    describe '.call' do
+      describe 'successful post' do
+        before do
+          stub_request(:post, service.cfe_url)
+            .with(body: expected_payload_hash.to_json)
+            .to_return(body: expected_response)
+        end
+
+        it 'updates the submission record from initialised to assessment created' do
+          expect(submission.aasm_state).to eq 'initialised'
           CreateAssessmentService.call(submission)
-        }.to change { submission.submission_histories.count }.by 1
-        history = CFE::SubmissionHistory.last
-        expect(history.submission_id).to eq submission.id
-        expect(history.url).to eq cfe_url
-        expect(history.http_method).to eq 'POST'
-        expect(history.request_payload).to eq expected_payload
-        expect(history.http_response_status).to eq 200
-        expect(history.response_payload).to eq expected_response
-        expect(history.error_message).to be_nil
-      end
-    end
+          expect(submission.aasm_state).to eq 'assessment_created'
+        end
 
-    describe 'failed calls to CFE' do
-      it_behaves_like 'a failed call to CFE'
+        it 'creates a submission_history record' do
+          expect {
+            CreateAssessmentService.call(submission)
+          }.to change { submission.submission_histories.count }.by 1
+          history = CFE::SubmissionHistory.last
+          expect(history.submission_id).to eq submission.id
+          expect(history.url).to eq service.cfe_url
+          expect(history.http_method).to eq 'POST'
+          expect(history.request_payload).to eq expected_payload_hash.to_json
+          expect(history.http_response_status).to eq 200
+          expect(history.response_payload).to eq expected_response
+          expect(history.error_message).to be_nil
+        end
+      end
+
+      describe 'failed calls to CFE' do
+        it_behaves_like 'a failed call to CFE'
+      end
     end
 
     def expected_payload_hash

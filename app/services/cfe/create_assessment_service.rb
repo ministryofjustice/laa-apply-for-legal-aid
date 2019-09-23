@@ -1,7 +1,5 @@
 module CFE
   class CreateAssessmentService < BaseService
-    private
-
     def cfe_url_path
       '/assessments'
     end
@@ -13,6 +11,8 @@ module CFE
         'matter_proceeding_type': 'domestic_abuse'
       }.to_json
     end
+
+    private
 
     def process_response
       @submission.assessment_id = @response['objects'].first['id']

@@ -1,7 +1,5 @@
 module CFE
   class CreateVehiclesService < BaseService
-    private
-
     def cfe_url_path
       "/assessments/#{@submission.assessment_id}/vehicles"
     end
@@ -18,6 +16,8 @@ module CFE
         ]
       }.to_json
     end
+
+    private
 
     def process_response
       @submission.vehicles_created!

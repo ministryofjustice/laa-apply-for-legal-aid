@@ -13,6 +13,10 @@ module CFE
       process_response
     end
 
+    def cfe_url
+      cfe_url_host + cfe_url_path
+    end
+
     private
 
     def conn
@@ -21,10 +25,6 @@ module CFE
 
     def cfe_url_host
       Rails.configuration.x.check_finanical_eligibility_host
-    end
-
-    def cfe_url
-      cfe_url_host + cfe_url_path
     end
 
     def legal_aid_application
