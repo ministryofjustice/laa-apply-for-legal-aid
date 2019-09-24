@@ -867,17 +867,7 @@
   optionalDependencies:
     canvas "^2.6.0"
 
-"@hint/connector-local@^3.0.2", "@hint/connector-local@^3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-3.1.5.tgz#9748e7d424e7cc6842d63eb48f1a9495e4894541"
-  integrity sha512-tKpE/NSnyDjzJbqtQqj7BzI5ssSvpezPZ265KcM/vjDxgFX85gzNs2OHdJSAbKDuYe+oFeAte8ilFUiuB7hKWQ==
-  dependencies:
-    "@hint/utils" "^4.1.0"
-    chokidar "^3.0.2"
-    globby "^10.0.1"
-    jsdom "^15.1.1"
-
-"@hint/connector-local@^3.1.6":
+"@hint/connector-local@^3.0.2", "@hint/connector-local@^3.1.6":
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-3.1.6.tgz#a75a955925ff030ceda4b25cb18d6f819e9eb8e8"
   integrity sha512-nbWshjyyquDcrpYuVK3MALEOqfqMKRKGzNGkhVI5PpBrzfbkZ1sihekxndGOXEzbIMxoyD9VajrdKZ0K28YvbA==
