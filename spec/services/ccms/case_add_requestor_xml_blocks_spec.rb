@@ -1054,16 +1054,58 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'SUBSTANTIVE_APP populates correctly' do
-        it 'returns true when application is substantive' do
-          block = XmlExtractor.call(xml, :global_merits, 'SUBSTANTIVE_APP')
-          expect(block).to have_boolean_response true
+        let(:block) { XmlExtractor.call(xml, :global_merits, 'SUBSTANTIVE_APP') }
+
+        context 'substantive' do
+          it 'returns true' do
+            expect(block).to have_boolean_response true
+          end
+        end
+
+        context 'delegated_functions' do
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   populate_vehicle: true,
+                   with_bank_accounts: 2,
+                   proceeding_types: [proceeding_type],
+                   provider: provider,
+                   used_delegated_functions: true,
+                   used_delegated_functions_on: Date.today
+          end
+
+          it 'returns false' do
+            expect(block).to have_boolean_response false
+          end
         end
       end
 
       context 'PROCEEDING_APPLICATION_TYPE populates correctly' do
-        it 'returns Substantive when application is substantive' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_APPLICATION_TYPE')
-          expect(block).to have_text_response 'Substantive'
+        let(:block) { XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_APPLICATION_TYPE') }
+
+        context 'substantive' do
+          it 'returns Substantive' do
+            expect(block).to have_text_response 'Substantive'
+          end
+        end
+
+        context 'delegated functions' do
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   populate_vehicle: true,
+                   with_bank_accounts: 2,
+                   proceeding_types: [proceeding_type],
+                   provider: provider,
+                   used_delegated_functions: true,
+                   used_delegated_functions_on: Date.today
+          end
+
+          it 'returns Both' do
+            expect(block).to have_text_response 'Both'
+          end
         end
       end
     end
