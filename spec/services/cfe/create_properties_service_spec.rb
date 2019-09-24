@@ -4,12 +4,15 @@ RSpec.describe CFE::CreatePropertiesService do
   let(:property_value) { Faker::Number.number(digits: 6) }
   let(:outstanding_mortgage) { property_value / Faker::Number.number(digits: 2) }
   let(:percentage_owned) { Faker::Number.number(digits: 2) }
+  let(:shared_ownership) { 'housing_assocation_or_landlord' }
+
   let(:legal_aid_application) do
     create(
       :legal_aid_application,
       property_value: property_value,
       outstanding_mortgage_amount: outstanding_mortgage,
-      percentage_home: percentage_owned
+      percentage_home: percentage_owned,
+      shared_ownership: shared_ownership
     )
   end
   let(:submission) do
@@ -87,6 +90,11 @@ RSpec.describe CFE::CreatePropertiesService do
       expect(additional_property[:percentage_owned]).to be_zero
     end
 
+    it 'includes sharing data' do
+      expect(request_body.dig(:properties, :main_home, :shared_with_housing_assoc)).to be(false)
+      expect(additional_property[:shared_with_housing_assoc]).to be(false)
+    end
+
     context 'with an own home' do
       let(:submission) do
         create(
@@ -106,6 +114,11 @@ RSpec.describe CFE::CreatePropertiesService do
         expect(additional_property[:value]).to be_zero
         expect(additional_property[:outstanding_mortgage]).to be_zero
         expect(additional_property[:percentage_owned]).to be_zero
+      end
+
+      it 'includes sharing data' do
+        expect(request_body.dig(:properties, :main_home, :shared_with_housing_assoc)).to be(true)
+        expect(additional_property[:shared_with_housing_assoc]).to be(false)
       end
     end
 
@@ -131,6 +144,11 @@ RSpec.describe CFE::CreatePropertiesService do
         expect(additional_property[:value]).to eq(other_assets_declaration.second_home_value.to_s)
         expect(additional_property[:outstanding_mortgage]).to eq(other_assets_declaration.second_home_mortgage.to_s)
         expect(additional_property[:percentage_owned]).to eq(other_assets_declaration.second_home_percentage.to_s)
+      end
+
+      it 'includes sharing data' do
+        expect(request_body.dig(:properties, :main_home, :shared_with_housing_assoc)).to be(true)
+        expect(additional_property[:shared_with_housing_assoc]).to be(false)
       end
     end
   end

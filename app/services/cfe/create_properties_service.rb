@@ -20,7 +20,7 @@ module CFE
         value: legal_aid_application.property_value,
         outstanding_mortgage: legal_aid_application.outstanding_mortgage_amount,
         percentage_owned: legal_aid_application.percentage_home,
-        shared_with_housing_assoc: false # Place holder - Expect param to be removed from API
+        shared_with_housing_assoc: main_home_shared_with_housing_association_or_landlord?
       }
     end
 
@@ -29,7 +29,7 @@ module CFE
         value: or_zero(other_assets_declaration&.second_home_value),
         outstanding_mortgage: or_zero(other_assets_declaration&.second_home_mortgage),
         percentage_owned: or_zero(other_assets_declaration&.second_home_percentage),
-        shared_with_housing_assoc: false # Place holder - Expect param to be removed from API
+        shared_with_housing_assoc: false # Data not gathered for second home
       }
     end
 
@@ -39,6 +39,10 @@ module CFE
 
     def process_response
       submission.properties_created!
+    end
+
+    def main_home_shared_with_housing_association_or_landlord?
+      legal_aid_application.shared_ownership == 'housing_assocation_or_landlord'
     end
   end
 end
