@@ -4,26 +4,27 @@ module CFE
       new(legal_aid_application_id).call
     end
 
+    attr_reader :legal_aid_application_id
     def initialize(legal_aid_application_id)
       @legal_aid_application_id = legal_aid_application_id
     end
 
     def call
-      assessment = CFE::Submission.create!(legal_aid_application_id: @legal_aid_application_id)
+      CFE::CreateAssessmentService.call(submission)
+      CFE::CreateApplicantService.call(submission)
+      CFE::CreateCapitalsService.call(submission)
+      CFE::CreatePropertiesService.call(submission)
+      CFE::CreateVehiclesService.call(submission)
 
-      begin
-        CFE::CreateAssessmentService.call(assessment)
-        CFE::CreateApplicantService.call(assessment)
-        CFE::CreateCapitalsService.call(assessment)
-        CFE::CreateVehiclesService.call(assessment)
+      # TODO: add these steps as we write the services
+      # CFE::ObtainAssessmentResultService.call(submission)
+    rescue CFE::SubmissionError => e
+      submission.error_message = e.message
+      submission.fail!
+    end
 
-        # TODO: add these steps as we write the services
-        # CFE::CreatePropertiesService.call(assessment)
-        # CFE::ObtainAssessmentResultService.call(assessment)
-      rescue CFE::SubmissionError => e
-        assessment.error_message = e.message
-        assessment.fail!
-      end
+    def submission
+      @submission ||= CFE::Submission.create!(legal_aid_application_id: legal_aid_application_id)
     end
   end
 end

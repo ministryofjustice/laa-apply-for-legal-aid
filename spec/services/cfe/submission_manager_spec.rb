@@ -2,103 +2,56 @@ require 'rails_helper'
 
 module CFE
   RSpec.describe SubmissionManager do
-    # before(:all) do
-    #   VCR.configure { |c| c.ignore_hosts 'localhost' }
-    # end
 
-    let(:application) { create :legal_aid_application, :with_everything, :with_vehicle, :at_provider_submitted, populate_vehicle: true }
+    let(:application) { create :legal_aid_application, :with_everything, :at_provider_submitted }
+    let(:submission_manager) { described_class.new(application.id) }
+    let(:submission) { submission_manager.submission }
+    let(:call_result) { true }
 
-    context 'No Errors' do
-      before do
-        allow_any_instance_of(CreateAssessmentService).to receive(:post_request).and_return(assessment_response)
-        allow_any_instance_of(CreateApplicantService).to receive(:post_request).and_return(generic_successful_response)
-        allow_any_instance_of(CreateCapitalsService).to receive(:post_request).and_return(generic_successful_response)
-        allow_any_instance_of(CreateVehiclesService).to receive(:post_request).and_return(generic_successful_response)
+    before do
+      allow(CreateAssessmentService).to receive(:call).and_return(true)
+      allow(CreateApplicantService).to receive(:call).and_return(true)
+      allow(CreateCapitalsService).to receive(:call).and_return(true)
+      allow(CreatePropertiesService).to receive(:call).and_return(true)
+      allow(CreateVehiclesService).to receive(:call).and_return(true)
+    end
+
+    describe '#call' do
+      it 'creates a submission record' do
+        expect { submission_manager.call }.to change { Submission.count }.by(1)
       end
 
-      it 'creates a submission record for the application' do
-        expect {
-          SubmissionManager.call(application.id)
-        }.to change { Submission.count }.by(1)
-
-        submission = Submission.last
-
-        expect(submission.legal_aid_application_id).to eq application.id
-        expect(submission.aasm_state).to eq 'vehicles_created' # TODO: change this as we add more services to the test
-      end
-
-      it 'calls all the services to post data' do
-        expect(CreateAssessmentService).to receive(:call).and_call_original
-        expect(CreateApplicantService).to receive(:call).and_call_original
-        expect(CreateCapitalsService).to receive(:call).and_call_original
-        expect(CreateVehiclesService).to receive(:call).and_call_original
+      it 'calls all the services it manages' do
+        expect(CreateAssessmentService).to receive(:call).and_return(true)
+        expect(CreateApplicantService).to receive(:call).and_return(true)
+        expect(CreateCapitalsService).to receive(:call).and_return(true)
+        expect(CreatePropertiesService).to receive(:call).and_return(true)
+        expect(CreateVehiclesService).to receive(:call).and_return(true)
 
         # TODO: Add these expectations as we add more services to the test
-        # expect(CreatePropertiesService).to receive(:call).and_call_original
-        # expect(ObtainResultsService).to receive(:call).and_call_original
-
-        SubmissionManager.call(application.id)
+        # expect(ObtainResultsService).to receive(:call).and_return(true)
+        
+        submission_manager.call
       end
 
-      it 'writes the expected submission history records' do
-        expect {
-          SubmissionManager.call(application.id)
-        }.to change { SubmissionHistory.count }.by 4 # TODO: increase this number as we add more services to the spec
-      end
-    end
+      context 'on submission error' do
+        let(:message) { Faker::Lorem.sentence }
+        before do
+          allow(CreateAssessmentService).to receive(:call).and_raise(CFE::SubmissionError, message)
+        end
 
-    context 'exception raised' do
-      before do
-        allow_any_instance_of(CreateAssessmentService).to receive(:post_request).and_return(assessment_response)
-        allow_any_instance_of(Faraday::Connection).to receive(:post).and_raise(Faraday::ConnectionFailed.new('my test error'))
-      end
-
-      it 'transitions the aasm state to failed with an error message' do
-        SubmissionManager.call(application.id)
-        submission = CFE::Submission.last
-        expect(submission).to be_failed
-        expect(submission.error_message).to eq 'CFE::CreateApplicantService received Faraday::ConnectionFailed: my test error'
-      end
-
-      it 'creates two submission history records' do
-        expect {
-          SubmissionManager.call(application.id)
-        }.to change { SubmissionHistory.count }.by 2
-      end
-
-      it 'writes error message and backtrace in submission history for create_applicants' do
-        SubmissionManager.call(application.id)
-        submission = CFE::Submission.last
-        history = submission.submission_histories.find_by(url: "http://localhost:3001/assessments/#{submission.assessment_id}/applicant")
-        expect(history.http_response_status).to be_nil
-        expect(history.error_message).to eq 'CFE::CreateApplicantService received Faraday::ConnectionFailed: my test error'
-        expect(history.error_backtrace).not_to be_nil
+        it 'records error in submission' do
+          submission_manager.call
+          expect(submission.error_message).to eq(message)
+          expect(submission).to be_failed
+        end
       end
     end
 
-    def assessment_response
-      double Faraday::Response, status: 200, body: dummy_assessment_body
-    end
-
-    def dummy_assessment_body
-      {
-        'success' => true,
-        'objects' => [
-          {
-            'id' => '1b2aa5eb-3763-445e-9407-2397ec3968f6'
-          }
-        ]
-      }.to_json
-    end
-
-    def generic_successful_response
-      double Faraday::Response, status: 200, body: dummy_successful_response
-    end
-
-    def dummy_successful_response
-      {
-        'success' => true
-      }.to_json
+    describe '#submission' do
+      it 'associates the application with the submission' do
+        expect(submission.legal_aid_application_id).to eq application.id
+      end
     end
   end
 end
