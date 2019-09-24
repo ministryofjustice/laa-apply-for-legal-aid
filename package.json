@@ -21,7 +21,7 @@
     "@hint/parser-javascript": "^3.0.8",
     "hint": "^5.2.3",
     "jest": "^24.9.0",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.8.1"
   },
   "jest": {
     "roots": [
