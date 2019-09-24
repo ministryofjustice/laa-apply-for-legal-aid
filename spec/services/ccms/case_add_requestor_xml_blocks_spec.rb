@@ -464,55 +464,59 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       context 'APP_AMEND_TYPE' do
         context 'delegated function used' do
-          context 'in global_merits section' do
-            it 'returns SUBDP' do
-              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
-              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
-              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
-              expect(block).to have_text_response 'SUBDP'
-            end
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   populate_vehicle: true,
+                   with_bank_accounts: 2,
+                   proceeding_types: [proceeding_type],
+                   provider: provider,
+                   used_delegated_functions: true,
+                   used_delegated_functions_on: Date.today
           end
-          context 'in global_means section;' do
-            it 'returns SUBDP' do
-              allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
-              allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
-              block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
+
+          it 'returns SUBDP' do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'APP_AMEND_TYPE')
               expect(block).to have_text_response 'SUBDP'
             end
           end
         end
 
         context 'delegated functions not used' do
-          context 'in global_merits section' do
-            it 'returns SUB' do
-              block = XmlExtractor.call(xml, :global_merits, 'APP_AMEND_TYPE')
+          it 'returns SUB' do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'APP_AMEND_TYPE')
               expect(block).to have_text_response 'SUB'
-            end
-
-            context 'in global_means section;' do
-              it 'returns SUB' do
-                block = XmlExtractor.call(xml, :global_means, 'APP_AMEND_TYPE')
-                expect(block).to have_text_response 'SUB'
-              end
             end
           end
         end
       end
 
       context 'EMERGENCY_FURTHER_INFORMATION' do
+        let(:block) { XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION') }
+
         context 'delegated function used' do
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   populate_vehicle: true,
+                   with_bank_accounts: 2,
+                   proceeding_types: [proceeding_type],
+                   provider: provider,
+                   used_delegated_functions: true,
+                   used_delegated_functions_on: Date.today
+          end
+
           it 'returns hard coded statement' do
-            allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(true)
-            allow(legal_aid_application).to receive(:used_delegated_functions_on).and_return(Date.today)
-            block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
             expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
           end
         end
 
         context 'delegated function not used' do
           it 'EMERGENCY_FURTHER_INFORMATION block is not present' do
-            allow(legal_aid_application).to receive(:used_delegated_functions?).and_return(false)
-            block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FURTHER_INFORMATION')
             expect(block).not_to be_present
           end
         end
