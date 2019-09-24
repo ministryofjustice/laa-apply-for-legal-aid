@@ -1475,16 +1475,7 @@
   dependencies:
     jsdom "^15.1.1"
 
-"@hint/parser-javascript@^3.0.2", "@hint/parser-javascript@^3.0.8":
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.0.8.tgz#2bd40b8b5c624cacf27b4295f8752b5389b50c72"
-  integrity sha512-AfutunenA0bLTJXVTqWdVJD6SHziAVEB5RxdeKmpMyRIrZwlfxfdMR4F5kHVvv9axjNj7yrFSTknO4rjxT6IUA==
-  dependencies:
-    "@hint/utils" "^4.1.0"
-    acorn "^7.0.0"
-    acorn-walk "^6.2.0"
-
-"@hint/parser-javascript@^3.0.9":
+"@hint/parser-javascript@^3.0.2", "@hint/parser-javascript@^3.0.9":
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.0.9.tgz#982e72c7d1ee1e8deb2d3ea32660f3a22e32eb2f"
   integrity sha512-uuRxTzxKTVmnlqxMjRpMnuCkO3BxLb5Ywkcl4Hwm3zCDs/Amg7I0W1er5cpoZQMCWCru/eDMhM438KBTNIQv4g==
@@ -2181,7 +2172,7 @@ acorn-globals@^4.1.0, acorn-globals@^4.3.2:
     acorn "^6.0.1"
     acorn-walk "^6.0.1"
 
-acorn-walk@^6.0.1, acorn-walk@^6.2.0:
+acorn-walk@^6.0.1:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.2.0.tgz#123cb8f3b84c2171f1f7fb252615b1c78a6b1a8c"
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
