@@ -920,12 +920,12 @@
     lodash "^4.17.15"
     moment "^2.24.0"
 
-"@hint/formatter-json@^3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-json/-/formatter-json-3.1.5.tgz#9317d95fea96d1d53974f121dce89566c1cd1757"
-  integrity sha512-y5QaFdYvbWvsbPCDTK/h6mE+iEFLWSl68SjKtekUal+lZM2fohNPhxuGU2nCtZuVmYcQiqtbpdVRdG10ygIl5g==
+"@hint/formatter-json@^3.1.6":
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-json/-/formatter-json-3.1.6.tgz#2bf0264ec38598320e1ea6ac682033f7e29153fd"
+  integrity sha512-Z/7P08euTP1bC8CqkWTpcrlKLz8XwCKHv3gqI9CK0xQ/k6YP3BTZOWzxRe7Bgxm+J/9J6Hv/UNmCxH9p8zqy+A==
   dependencies:
-    "@hint/utils" "^4.1.0"
+    "@hint/utils" "^4.1.1"
     lodash "^4.17.15"
 
 "@hint/formatter-stylish@^3.0.2":
