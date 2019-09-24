@@ -1,0 +1,8 @@
+<%= page_template page_title: t('.title'), back_link: :none do %>
+  <p><%= t('.try_later') %></p>
+  <p><%= t('.answers_saved') %></p>
+
+  <p class="govuk-body">
+    <%= link_to t('generic.back_to_your_applications'), providers_legal_aid_applications_path %>
+  </p>
+<% end %>

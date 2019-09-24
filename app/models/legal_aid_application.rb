@@ -102,6 +102,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def add_benefit_check_result
     benefit_check_response = BenefitCheckService.call(self)
+    return false unless benefit_check_response
+
     self.benefit_check_result ||= build_benefit_check_result
     benefit_check_result.update!(
       result: benefit_check_response.dig(:benefit_checker_status),

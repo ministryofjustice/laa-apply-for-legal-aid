@@ -111,6 +111,15 @@ RSpec.describe 'check benefits requests', type: :request do
       end
     end
 
+    context 'the benefit check service is down' do
+      before { allow(BenefitCheckService).to receive(:call).and_return(false) }
+
+      it 'redirects to the Problem page' do
+        subject
+        expect(response).to redirect_to(problem_index_path)
+      end
+    end
+
     context 'when the provider is not authenticated' do
       let(:login) { nil }
       before { subject }

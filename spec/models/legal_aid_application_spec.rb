@@ -78,6 +78,19 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
       expect(legal_aid_application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
     end
+
+    context 'benefit check service is down' do
+      let(:benefit_check_response) { false }
+
+      it 'returns false' do
+        expect(legal_aid_application.add_benefit_check_result).to eq false
+      end
+
+      it 'leaves benefit_check_result empty' do
+        legal_aid_application.add_benefit_check_result
+        expect(legal_aid_application.benefit_check_result).to eq nil
+      end
+    end
   end
 
   describe 'benefit_check_result_needs_updating?' do
