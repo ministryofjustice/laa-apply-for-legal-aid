@@ -12,7 +12,7 @@ module CCMS
     end
 
     def parse(data_method)
-      raise CcmsError, 'Invalid transaction request id' unless extracted_id_matches_request_id?
+      raise CcmsError, "Invalid transaction request id #{extracted_transaction_request_id}" unless extracted_id_matches_request_id?
 
       __send__(data_method)
     end
