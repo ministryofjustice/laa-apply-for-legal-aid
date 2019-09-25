@@ -21,6 +21,17 @@ module LaaApplyForLegalAid
     config.x.benefit_check.client_user_id = ENV['BC_CLIENT_USER_ID']
     config.x.benefit_check.wsdl_url       = ENV['BC_WSDL_URL']
 
+    config.x.ccms_soa.aws_gateway_api_key    = ENV['CCMS_SOA_AWS_GATEWAY_API_KEY']
+    config.x.ccms_soa.client_username        = ENV['CCMS_SOA_CLIENT_USERNAME']
+    config.x.ccms_soa.client_password_type   = ENV['CCMS_SOA_CLIENT_PASSWORD_TYPE']
+    config.x.ccms_soa.client_password        = ENV['CCMS_SOA_CLIENT_PASSWORD']
+    config.x.ccms_soa.user_login             = ENV['CCMS_SOA_USER_LOGIN']
+    config.x.ccms_soa.user_role              = ENV['CCMS_SOA_USER_ROLE']
+    config.x.ccms_soa.caseServicesWsdl       = ENV.fetch('CCMS_SOA_CASE_SERVICES_WSDL', 'CaseServicesWsdl.xml')
+    config.x.ccms_soa.clientProxyServiceWsdl = ENV.fetch('CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL', 'ClientProxyServiceWsdl.xml')
+    config.x.ccms_soa.documentServicesWsdl   = ENV.fetch('CCMS_SOA_DOCUMENT_SERVICES_WSDL', 'DocumentServicesWsdl.xml')
+    config.x.ccms_soa.getReferenceDataWsdl   = ENV.fetch('CCMS_SOA_GET_REFERENCE_DATA_WSDL', 'GetReferenceDataWsdl.xml')
+
     config.x.google_tag_manager_tracking_id = ENV['GOOGLE_TAG_MANAGER_TRACKING_ID']
 
     config.x.laa_portal.idp_slo_target_url             = ENV['LAA_PORTAL_IDP_SLO_TARGET_URL']

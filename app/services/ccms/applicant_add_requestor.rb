@@ -1,6 +1,6 @@
 module CCMS
   class ApplicantAddRequestor < BaseRequestor
-    wsdl_from 'ClientProxyServiceWsdl.xml'.freeze
+    wsdl_from Rails.configuration.x.ccms_soa.clientProxyServiceWsdl
 
     uses_namespaces(
       'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',

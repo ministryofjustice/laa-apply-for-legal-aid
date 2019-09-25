@@ -1,6 +1,6 @@
 module CCMS
   class CaseAddStatusRequestor < BaseRequestor
-    wsdl_from 'CaseServicesWsdl.xml'.freeze
+    wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
     uses_namespaces(
       'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',

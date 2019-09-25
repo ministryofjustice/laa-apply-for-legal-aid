@@ -2,7 +2,7 @@ module CCMS
   class CaseAddRequestor < BaseRequestor # rubocop:disable Metrics/ClassLength
     CONFIG_METHOD_REGEX = /^#(\S+)/.freeze
 
-    wsdl_from 'CaseServicesWsdl.xml'.freeze
+    wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
     uses_namespaces(
       'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',

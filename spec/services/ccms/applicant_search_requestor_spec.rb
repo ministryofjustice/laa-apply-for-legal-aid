@@ -14,11 +14,11 @@ module CCMS
     let(:requestor) { described_class.new(applicant) }
 
     describe 'XML request' do
+      include_context 'ccms soa configuration'
+
       it 'generates the expected XML' do
-        with_modified_env(modified_environment_vars) do
-          allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-          expect(requestor.formatted_xml).to eq expected_xml.chomp
-        end
+        allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+        expect(requestor.formatted_xml).to eq expected_xml.chomp
       end
     end
 

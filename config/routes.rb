@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
     resource :settings, only: %i[show update]
     resources :benefit_types
+    resources :ccms_connectivity_tests, only: [:show]
   end
 
   namespace 'v1' do
