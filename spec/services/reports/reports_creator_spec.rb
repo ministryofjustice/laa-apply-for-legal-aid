@@ -11,7 +11,7 @@ RSpec.describe Reports::ReportsCreator do
       expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)
       subject
       legal_aid_application.reload
-      expect(legal_aid_application.state).to eq('assessment_submitted')
+      expect(legal_aid_application.state).to eq('submitting_assessment')
     end
   end
 end

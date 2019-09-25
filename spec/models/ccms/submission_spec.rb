@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe Submission do
     let(:state) { :initialised }
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount, state: :submitting_assessment }
     let(:submission) { create :submission, legal_aid_application: legal_aid_application, aasm_state: state }
 
     context 'Validations' do

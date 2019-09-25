@@ -5,7 +5,13 @@ module CCMS
 
     def perform(submission_id, state)
       submission = Submission.find(submission_id)
-      submission.process! if submission.aasm_state == state.to_s # skip if state has already changed
+      return unless submission.aasm_state == state.to_s # skip if state has already changed
+
+      submission.process!
+      return if submission.completed? || submission.failed?
+
+      # process next step
+      SubmissionProcessWorker.perform_async(submission.id, submission.aasm_state)
     end
   end
 end
