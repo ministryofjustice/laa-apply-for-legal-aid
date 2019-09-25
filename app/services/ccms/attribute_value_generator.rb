@@ -184,6 +184,14 @@ module CCMS
       lead_proceeding_type.ccms_category_law_code
     end
 
+    def application_substantive?(_options)
+      !@legal_aid_application.used_delegated_functions?
+    end
+
+    def proceeding_proceeding_application_type(_options)
+      @legal_aid_application.used_delegated_functions? ? 'Both' : 'Substantive'
+    end
+
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
       marginal: 'Marginal',
