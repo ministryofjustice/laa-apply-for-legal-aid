@@ -98,6 +98,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: benefitCheckerWsdlUrl
+  - name: CCMS_SOA_SUBMIT_APPLICATIONS
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: ccmsSoaSubmitApplications
   - name: CCMS_SOA_AWS_GATEWAY_API_KEY
     valueFrom:
       secretKeyRef:
