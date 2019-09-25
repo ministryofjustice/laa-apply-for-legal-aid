@@ -1,21 +1,17 @@
 require 'rails_helper'
 
 module CFE
-  RSpec.describe CreateAssessmentService do
+  RSpec.describe CreateVehiclesService do
     let(:application) { create :legal_aid_application }
-    let!(:applicant) { create :applicant, legal_aid_application: application }
-    let(:submission) { create :cfe_submission, aasm_state: 'initialised', legal_aid_application: application }
+    let!(:vehicle) { create :vehicle, :populated, legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'capitals_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
-    before do
-      allow(application).to receive(:calculation_date).and_return(Date.today)
-    end
-
     describe '#cfe_url' do
-      it 'returns the assessment endpoint' do
+      it 'contains the submission assessment id' do
         expect(service.cfe_url)
-          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments"
+          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments/#{submission.assessment_id}/vehicles"
       end
     end
 
@@ -33,21 +29,17 @@ module CFE
       end
 
       describe 'successful post' do
-        before do
-          stub_request(:post, service.cfe_url)
-            .with(body: expected_payload_hash.to_json)
-            .to_return(body: dummy_response)
-        end
+        before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
-        it 'updates the submission record from initialised to assessment created' do
-          expect(submission.aasm_state).to eq 'initialised'
-          CreateAssessmentService.call(submission)
-          expect(submission.aasm_state).to eq 'assessment_created'
+        it 'updates the submission record from assessment_created to applicant_created' do
+          expect(submission.aasm_state).to eq 'capitals_created'
+          CreateVehiclesService.call(submission)
+          expect(submission.aasm_state).to eq 'vehicles_created'
         end
 
         it 'creates a submission_history record' do
           expect {
-            CreateAssessmentService.call(submission)
+            CreateVehiclesService.call(submission)
           }.to change { submission.submission_histories.count }.by 1
           history = CFE::SubmissionHistory.last
           expect(history.submission_id).to eq submission.id
@@ -67,22 +59,20 @@ module CFE
 
     def expected_payload_hash
       {
-        client_reference_id: application.application_ref,
-        submission_date: Date.today. strftime('%Y-%m-%d'),
-        matter_proceeding_type: 'domestic_abuse'
+        vehicles: [
+          {
+            value: vehicle.estimated_value.to_s,
+            loan_amount_outstanding: vehicle.payment_remaining.to_s,
+            date_of_purchase: vehicle.purchased_on.strftime('%Y-%m-%d'),
+            in_regular_use: vehicle.used_regularly
+          }
+        ]
       }
     end
 
     def dummy_response_hash
       {
-        success: true,
-        objects: [
-          {
-            id: '1b2aa5eb-3763-445e-9407-2397ec3968f6',
-            client_reference_id: 'L-XYZ-999'
-          }
-        ],
-        errors: []
+        "success": true
       }
     end
   end

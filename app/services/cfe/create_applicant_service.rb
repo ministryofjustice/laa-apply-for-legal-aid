@@ -1,7 +1,5 @@
 module CFE
   class CreateApplicantService < BaseService
-    private
-
     def cfe_url_path
       "/assessments/#{@submission.assessment_id}/applicant"
     end
@@ -16,6 +14,8 @@ module CFE
         }
       }.to_json
     end
+
+    private
 
     def process_response
       @submission.applicant_created!

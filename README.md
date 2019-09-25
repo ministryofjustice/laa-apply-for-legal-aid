@@ -196,7 +196,7 @@ this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"t
 
 ## Check Financial Eligibility Service
 
-The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_URL`
+The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_HOST`
 
 ## Troubleshooting
 
