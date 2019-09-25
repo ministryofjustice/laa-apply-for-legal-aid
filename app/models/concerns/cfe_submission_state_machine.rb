@@ -9,8 +9,8 @@ module CFESubmissionStateMachine
       state :assessment_created
       state :applicant_created
       state :capitals_created
-      state :properties_created
       state :vehicles_created
+      state :properties_created
       state :results_obtained
       state :failed
 
@@ -26,12 +26,12 @@ module CFESubmissionStateMachine
         transitions from: :applicant_created, to: :capitals_created
       end
 
-      event :properties_created do
-        transitions from: :capitals_created, to: :properties_created
+      event :vehicles_created do
+        transitions from: :capitals_created, to: :vehicles_created
       end
 
-      event :vehicles_created do
-        transitions from: :properties_created, to: :vehicles_created
+      event :properties_created do
+        transitions from: :vehicles_created, to: :properties_created
       end
 
       event :results_obtained do

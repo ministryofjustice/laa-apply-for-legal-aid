@@ -13,6 +13,10 @@ module CFE
       process_response
     end
 
+    def cfe_url
+      File.join(cfe_url_host, cfe_url_path)
+    end
+
     private
 
     def conn
@@ -20,11 +24,7 @@ module CFE
     end
 
     def cfe_url_host
-      ENV['CHECK_FINANCIAL_ELIGIBILITY_URL']
-    end
-
-    def cfe_url
-      cfe_url_host + cfe_url_path
+      Rails.configuration.x.check_finanical_eligibility_host
     end
 
     def legal_aid_application
@@ -83,8 +83,13 @@ module CFE
         http_method: 'POST',
         request_payload: request_body,
         http_response_status: raw_response.status,
-        response_payload: raw_response.body
+        response_payload: raw_response.body,
+        error_message: error_message_from_response(raw_response)
       )
+    end
+
+    def error_message_from_response(raw_response)
+      raw_response.status == 200 ? nil : "Unexpected response: #{raw_response.status}"
     end
   end
 end

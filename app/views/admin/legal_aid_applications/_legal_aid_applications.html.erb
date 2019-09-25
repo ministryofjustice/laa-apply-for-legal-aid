@@ -9,6 +9,7 @@
           <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
           <th class="govuk-table__header" scope="col"></th>
+          <th class="govuk-table__header" scope="col"></th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -29,6 +30,13 @@
                                                 "data-delete-ref": "#{t('.application_ref')}: #{application.application_ref}",
                                                 "data-delete-message": t('.warning.delete')
                                               ) if destroy_enabled? %>
+                                             </td>
+            <td class="govuk-table__cell"><%= button_to(
+                                                'Test CCMS connectivity',
+                                                admin_ccms_connectivity_test_path(application.id),
+                                                method: :get,
+                                                class: 'govuk-button'
+                                              ) %>
                                              </td>
           </tr>
         <% end %>

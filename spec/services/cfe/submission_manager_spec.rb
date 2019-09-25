@@ -6,13 +6,14 @@ module CFE
     #   VCR.configure { |c| c.ignore_hosts 'localhost' }
     # end
 
-    let(:application) { create :legal_aid_application, :with_everything, :at_provider_submitted }
+    let(:application) { create :legal_aid_application, :with_everything, :with_vehicle, :at_provider_submitted, populate_vehicle: true }
 
     context 'No Errors' do
       before do
         allow_any_instance_of(CreateAssessmentService).to receive(:post_request).and_return(assessment_response)
         allow_any_instance_of(CreateApplicantService).to receive(:post_request).and_return(generic_successful_response)
         allow_any_instance_of(CreateCapitalsService).to receive(:post_request).and_return(generic_successful_response)
+        allow_any_instance_of(CreateVehiclesService).to receive(:post_request).and_return(generic_successful_response)
       end
 
       it 'creates a submission record for the application' do
@@ -23,17 +24,17 @@ module CFE
         submission = Submission.last
 
         expect(submission.legal_aid_application_id).to eq application.id
-        expect(submission.aasm_state).to eq 'capitals_created' # TODO: change this as we add more services to the test
+        expect(submission.aasm_state).to eq 'vehicles_created' # TODO: change this as we add more services to the test
       end
 
       it 'calls all the services to post data' do
         expect(CreateAssessmentService).to receive(:call).and_call_original
         expect(CreateApplicantService).to receive(:call).and_call_original
         expect(CreateCapitalsService).to receive(:call).and_call_original
+        expect(CreateVehiclesService).to receive(:call).and_call_original
 
         # TODO: Add these expectations as we add more services to the test
         # expect(CreatePropertiesService).to receive(:call).and_call_original
-        # expect(CreateVehiclesService).to receive(:call).and_call_original
         # expect(ObtainResultsService).to receive(:call).and_call_original
 
         SubmissionManager.call(application.id)
@@ -42,7 +43,7 @@ module CFE
       it 'writes the expected submission history records' do
         expect {
           SubmissionManager.call(application.id)
-        }.to change { SubmissionHistory.count }.by 3 # TODO: increase this number as we add more services to the spec
+        }.to change { SubmissionHistory.count }.by 4 # TODO: increase this number as we add more services to the spec
       end
     end
 

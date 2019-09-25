@@ -15,7 +15,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                id: 1,
                code: 'CV118',
                description: 'Limited to all steps up to and including the hearing on 01/04/2019',
-               delegated_functions_apply: true
+               delegated_functions_apply: true,
+               substantive: false
       end
 
       let(:aa019_text) do
@@ -34,7 +35,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                id: 2,
                code: 'AA019',
                description: aa019_text,
-               delegated_functions_apply: false
+               delegated_functions_apply: false,
+               substantive: true
       end
 
       let(:scope_limitation_3) do
@@ -42,7 +44,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                id: 3,
                code: 'FM049',
                description: 'Limited to all steps up to and including trial/final hearing and any action necessary to implement (but not enforce) the judgment or order.',
-               delegated_functions_apply: false
+               delegated_functions_apply: false,
+               substantive: true
       end
 
       let(:bank_provider) do

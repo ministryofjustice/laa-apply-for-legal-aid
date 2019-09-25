@@ -2,7 +2,7 @@ module CCMS
   class CaseAddRequestor < BaseRequestor # rubocop:disable Metrics/ClassLength
     CONFIG_METHOD_REGEX = /^#(\S+)/.freeze
 
-    wsdl_from 'CaseServicesWsdl.xml'.freeze
+    wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
     uses_namespaces(
       'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
@@ -183,11 +183,10 @@ module CCMS
     end
 
     def generate_scope_limitation(xml, limitation)
-      application_limitation = ApplicationScopeLimitation.find_by(scope_limitation_id: limitation.id, legal_aid_application_id: @legal_aid_application.id)
       xml.__send__('ns2:ScopeLimitation') do
         xml.__send__('ns2:ScopeLimitation', limitation.code)
         xml.__send__('ns2:ScopeLimitationWording', limitation.description)
-        xml.__send__('ns2:DelegatedFunctionsApply', !application_limitation.substantive)
+        xml.__send__('ns2:DelegatedFunctionsApply', !limitation.substantive)
       end
     end
 
