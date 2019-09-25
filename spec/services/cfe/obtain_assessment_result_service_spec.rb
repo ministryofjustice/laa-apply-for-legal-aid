@@ -55,7 +55,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
 
     context 'unssuccessful call' do
       context 'http status 404' do
-        before  do
+        before do
           stub_request(:get, service.cfe_url)
             .to_return(body: '', status: 404)
         end
@@ -83,7 +83,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
       end
     end
 
-    def expected_response_hash
+    def expected_response_hash # rubocop:disable Metrics/MethodLength
       {
         assessment_result: 'eligible',
         applicant: {
