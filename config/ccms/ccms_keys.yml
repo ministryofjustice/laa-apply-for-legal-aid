@@ -2679,14 +2679,12 @@ global_merits:
     :response_type: text
     :user_defined: true
   CURRENT_CERT_SUBSTANTIVE:
-    :generate_block?: false
     :value: false
     :br100_meaning: 'App: The Current Certificate Is Substantive'
     :response_type: boolean
     :user_defined: false
   SUBSTANTIVE_APP:
-    :generate_block?: false
-    :value: false
+    :value: '#application_substantive?'
     :br100_meaning: The Application Is A Substantive Application
     :response_type: boolean
     :user_defined: false
@@ -4527,7 +4525,6 @@ proceeding_merits:
     :br100_meaning: The Proceeding Application Type
     :response_type: text
     :user_defined: false
-    :generate_block?: false
   CLIENT_INV_TYPE_BRING_3RD_PTY:
     :generate_block?: false
     :value: "#proceeding_client_inv_type_bring_3rd_pty"
