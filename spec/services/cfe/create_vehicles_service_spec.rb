@@ -6,7 +6,7 @@ module CFE
     let!(:vehicle) { create :vehicle, :populated, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'capitals_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
-    let(:expected_response) { expected_response_hash.to_json }
+    let(:dummy_response) { dummy_response_hash.to_json }
 
     describe '#cfe_url' do
       it 'contains the submission assessment id' do
@@ -22,8 +22,14 @@ module CFE
     end
 
     describe '.call' do
+      around do |example|
+        VCR.turn_off!
+        example.run
+        VCR.turn_on!
+      end
+
       describe 'successful post' do
-        before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: expected_response) }
+        before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
         it 'updates the submission record from assessment_created to applicant_created' do
           expect(submission.aasm_state).to eq 'capitals_created'
@@ -41,7 +47,7 @@ module CFE
           expect(history.http_method).to eq 'POST'
           expect(history.request_payload).to eq expected_payload_hash.to_json
           expect(history.http_response_status).to eq 200
-          expect(history.response_payload).to eq expected_response
+          expect(history.response_payload).to eq dummy_response
           expect(history.error_message).to be_nil
         end
       end
@@ -64,23 +70,8 @@ module CFE
       }
     end
 
-    def expected_response_hash # rubocop:disable Metrics/MethodLength
+    def dummy_response_hash
       {
-        vehicles: [
-          {
-            id: 'bd60a11d-4cbe-4759-a46c-45c2866bee88',
-            value: '8250.00',
-            loan_amount_outstanding: '3500.00',
-            date_of_purchase: '2019-04-01',
-            in_regular_use: true,
-            created_at: '2019-08-29T13:57:49.640Z',
-            updated_at: '2019-08-29T13:57:49.640Z',
-            capital_summary_id: '5b3a9100-2a01-4cd8-993d-5a6333c683cd',
-            included_in_assessment: false,
-            assessed_value: '0.0'
-          }
-        ],
-        "errors": [],
         "success": true
       }
     end

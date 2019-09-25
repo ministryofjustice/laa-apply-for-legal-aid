@@ -2,10 +2,10 @@ require 'rails_helper'
 
 module CFE
   RSpec.describe CreateApplicantService do
-    let(:application) { create :legal_aid_application }
+    let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, transaction_period_finish_on: Date.today }
     let!(:applicant) { create :applicant, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'assessment_created', legal_aid_application: application }
-    let(:expected_response) { expected_response_hash.to_json }
+    let(:dummy_response) { dummy_response_hash.to_json }
     let(:service) { described_class.new(submission) }
 
     describe '#cfe_url' do
@@ -22,17 +22,18 @@ module CFE
     end
 
     describe '.call' do
-      context 'response received from CFE' do
-        before do
-          allow(application).to receive(:applicant_receives_benefit?).and_return(true)
-          allow(application).to receive(:calculation_date).and_return(Date.today)
-        end
+      around do |example|
+        VCR.turn_off!
+        example.run
+        VCR.turn_on!
+      end
 
+      context 'response received from CFE' do
         describe 'successful post' do
           before do
             stub_request(:post, service.cfe_url)
               .with(body: service.request_body)
-              .to_return(body: expected_response)
+              .to_return(body: dummy_response)
           end
 
           it 'updates the submission record from assessment_created to applicant_created' do
@@ -51,7 +52,7 @@ module CFE
             expect(history.http_method).to eq 'POST'
             expect(history.request_payload).to eq service.request_body
             expect(history.http_response_status).to eq 200
-            expect(history.response_payload).to eq expected_response
+            expect(history.response_payload).to eq dummy_response
             expect(history.error_message).to be_nil
           end
         end
@@ -73,21 +74,8 @@ module CFE
       }
     end
 
-    def expected_response_hash # rubocop:disable Metrics/MethodLength
+    def dummy_response_hash
       {
-        objects: [
-          {
-            id: 'b464458d-cf3d-4860-a1cc-a1838c2babd9',
-            assessment_id: '3e1eb9db-f639-4fc2-81a7-0d12db4a2faf',
-            date_of_birth: '1999-09-11',
-            involvement_type: 'applicant',
-            has_partner_opponent: false,
-            receives_qualifying_benefit: true,
-            created_at: '2019-09-11T14:15:58.641Z',
-            updated_at: '2019-09-11T14:15:58.641Z'
-          }
-        ],
-        errors: [],
         success: true
       }
     end

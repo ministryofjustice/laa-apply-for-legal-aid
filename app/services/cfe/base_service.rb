@@ -14,7 +14,7 @@ module CFE
     end
 
     def cfe_url
-      cfe_url_host + cfe_url_path
+      File.join(cfe_url_host, cfe_url_path)
     end
 
     private

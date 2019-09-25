@@ -6,7 +6,7 @@ module CFE
     let!(:applicant) { create :applicant, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'initialised', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
-    let(:expected_response) { expected_response_hash.to_json }
+    let(:dummy_response) { dummy_response_hash.to_json }
 
     before do
       allow(application).to receive(:calculation_date).and_return(Date.today)
@@ -26,11 +26,17 @@ module CFE
     end
 
     describe '.call' do
+      around do |example|
+        VCR.turn_off!
+        example.run
+        VCR.turn_on!
+      end
+
       describe 'successful post' do
         before do
           stub_request(:post, service.cfe_url)
             .with(body: expected_payload_hash.to_json)
-            .to_return(body: expected_response)
+            .to_return(body: dummy_response)
         end
 
         it 'updates the submission record from initialised to assessment created' do
@@ -49,7 +55,7 @@ module CFE
           expect(history.http_method).to eq 'POST'
           expect(history.request_payload).to eq expected_payload_hash.to_json
           expect(history.http_response_status).to eq 200
-          expect(history.response_payload).to eq expected_response
+          expect(history.response_payload).to eq dummy_response
           expect(history.error_message).to be_nil
         end
       end
@@ -67,23 +73,13 @@ module CFE
       }
     end
 
-    def expected_response_hash # rubocop:disable Metrics/MethodLength
+    def dummy_response_hash
       {
         success: true,
         objects: [
           {
             id: '1b2aa5eb-3763-445e-9407-2397ec3968f6',
-            client_reference_id: 'L-XYZ-999',
-            remote_ip: {
-              family: 2,
-              addr: 2_130_706_433,
-              mask_addr: 4_294_967_295
-            },
-            created_at: '2019-09-11T14 =>15 =>58.672Z',
-            updated_at: '2019-09-11T14 =>15 =>58.672Z',
-            submission_date: '2019-06-06',
-            matter_proceeding_type: 'domestic_abuse',
-            assessment_result: 'pending'
+            client_reference_id: 'L-XYZ-999'
           }
         ],
         errors: []
