@@ -40,7 +40,7 @@ module CCMS
              description: ':EMPLOYMENT_CLIENT_001:CLI_NON_HM_WAGE_SLIP_001'
     end
 
-    let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
+    let(:firm) { double Firm, id: 22_381, name: 'Desor & Co' }
 
     let(:provider) do
       double Provider,
@@ -48,17 +48,35 @@ module CCMS
              firm: firm,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,
-             supervisor_contact_id: 3_982_723,
-             fee_earner_contact_id: 34_419,
+             supervisor_contact_id: 2_016_673,
+             fee_earner_contact_id: 2_016_673,
              marked_for_destruction?: false,
              email: 'test@test.com'
+    end
+
+    let(:substantive_scope_limitation) do
+      create :scope_limitation,
+             :with_real_data,
+             code:'CV117',
+             meaning: 'Interim order inc. return date',
+             description: 'Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.',
+             substantive: true,
+             delegated_functions: false
+    end
+
+    let(:substantive_proceeding_type) do
+      create :proceeding_type,
+             :with_real_data,
+             code:'PR0211',
+             ccms_code: 'DA004',
+             meaning: 'Non-molestation order',
+             description: 'to be represented on an application for a non-molestation order.',
+             scope_limitations: [substantive_scope_limitation]
     end
 
     let(:substantive_legal_aid_application) do
       create :legal_aid_application,
              :with_applicant_and_address,
-             :with_proceeding_types,
-             :with_substantive_scope_limitation,
              :with_other_assets_declaration,
              :with_savings_amount,
              :with_respondent,
@@ -66,15 +84,34 @@ module CCMS
              :with_merits_assessment,
              :with_means_report,
              :with_merits_report,
-             statement_of_case: @statement_of_case
+             statement_of_case: @statement_of_case,
+             proceeding_types: [substantive_proceeding_type]
+    end
+
+    let(:delegated_functions_scope_limitation) do
+      create :scope_limitation,
+             :with_real_data,
+             code:'CV117',
+             meaning: 'Interim order inc. return date',
+             description: 'Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.',
+             substantive: false,
+             delegated_functions: true
+    end
+
+    let(:delegated_functions_proceeding_type) do
+      create :proceeding_type,
+             :with_real_data,
+             code:'PR0211',
+             ccms_code: 'DA004',
+             meaning: 'Non-molestation order',
+             description: 'to be represented on an application for a non-molestation order.',
+             scope_limitations: [delegated_functions_scope_limitation]
     end
 
     let(:delegated_functions_legal_aid_application) do
       create :legal_aid_application,
              :with_applicant_and_address,
-             :with_proceeding_types,
              :with_delegated_functions,
-             :with_delegated_functions_scope_limitation,
              :with_other_assets_declaration,
              :with_savings_amount,
              :with_respondent,
@@ -82,7 +119,8 @@ module CCMS
              :with_merits_assessment,
              :with_means_report,
              :with_merits_report,
-             statement_of_case: @statement_of_case
+             statement_of_case: @statement_of_case,
+             proceeding_types: [delegated_functions_proceeding_type]
     end
 
     before do
