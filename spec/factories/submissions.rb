@@ -29,5 +29,9 @@ FactoryBot.define do
         create :submission_document, :id_obtained, submission: submission
       end
     end
+
+    # trait :with_xml_request do
+    #   request {'Some text for now will be xml?'}
+    # end
   end
 end

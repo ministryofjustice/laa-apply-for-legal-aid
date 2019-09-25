@@ -15,11 +15,11 @@ module CCMS
     def process_response(parser)
       if parser.success?
         submission.applicant_ccms_reference = parser.applicant_ccms_reference
-        create_history(:applicant_submitted, submission.aasm_state) if submission.obtain_applicant_ref!
+        create_history(:applicant_submitted, submission.aasm_state, applicant_add_status_requestor) if submission.obtain_applicant_ref!
       elsif submission.applicant_poll_count >= Submission::POLL_LIMIT
         handle_failure('Poll limit exceeded')
       else
-        create_history(submission.aasm_state, submission.aasm_state)
+        create_history(submission.aasm_state, submission.aasm_state,applicant_add_status_requestor)
       end
     end
 

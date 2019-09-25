@@ -13,11 +13,11 @@ module CCMS
 
     def process_response(parser)
       if parser.success?
-        create_history(:case_submitted, submission.aasm_state) if submission.confirm_case_created!
+        create_history(:case_submitted, submission.aasm_state, case_add_status_requestor) if submission.confirm_case_created!
       elsif submission.case_poll_count >= Submission::POLL_LIMIT
         handle_failure('Poll limit exceeded')
       else
-        create_history(submission.aasm_state, submission.aasm_state)
+        create_history(submission.aasm_state, submission.aasm_state, case_add_status_requestor)
       end
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_102038) do
+ActiveRecord::Schema.define(version: 2019_09_25_105003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -213,6 +213,8 @@ ActiveRecord::Schema.define(version: 2019_09_18_102038) do
     t.text "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.xml "request"
+    t.xml "response"
     t.index ["submission_id"], name: "index_ccms_submission_histories_on_submission_id"
   end
 

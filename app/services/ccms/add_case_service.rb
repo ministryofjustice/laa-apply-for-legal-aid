@@ -8,7 +8,7 @@ module CCMS
       @options = options
       if case_add_response_parser.success?
         submission.case_add_transaction_id = case_add_requestor.transaction_request_id
-        create_history(submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained', submission.aasm_state) if submission.submit_case!
+        create_history(submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained', submission.aasm_state, case_add_requestor) if submission.submit_case!
       else
         handle_failure(response)
       end
