@@ -6,6 +6,7 @@ RSpec.describe CCMS::AddApplicantService do
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:applicant_add_requestor) { double CCMS::ApplicantAddRequestor }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+  # let(:expected_xml) { ccms_data_from_file 'applicant_add_request.xml' }
   subject { described_class.new(submission) }
 
   before do
@@ -30,6 +31,16 @@ RSpec.describe CCMS::AddApplicantService do
         subject.call
         expect(submission.applicant_add_transaction_id).to eq transaction_request_id_in_example_response
       end
+
+      # it 'records a copy of the xml request' do
+      #   subject.call
+      #   expect(submission.save_applicant_request).to eq expected_xml
+      # end
+
+      # it 'records a copy of the xml response' do
+      #   subject.call
+      #   # expect(submission.applicant_add_requestor).to eq transaction_request_id_in_example_response
+      # end
 
       it 'writes a history record' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)

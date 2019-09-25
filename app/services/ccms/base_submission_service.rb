@@ -12,11 +12,13 @@ module CCMS
 
     private
 
-    def create_history(from_state, to_state)
+    def create_history(from_state, to_state, request, response)
       SubmissionHistory.create submission: submission,
                                from_state: from_state,
                                to_state: to_state,
-                               success: true
+                               success: true,
+                               request: request.formatted_xml,
+                               response: response.doc
     end
 
     def create_failure_history(from_state, error)
