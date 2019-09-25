@@ -318,8 +318,8 @@ Devise.setup do |config|
   require Rails.root.join 'app/lib/omniauth/omniauth_true_layer'
   config.omniauth(
     :true_layer,
-    ENV['TRUE_LAYER_CLIENT_ID'],
-    ENV['TRUE_LAYER_CLIENT_SECRET'],
+    Rails.configuration.x.true_layer.client_id,
+    Rails.configuration.x.true_layer.client_sercret,
     scope: 'info accounts balance transactions'
   )
 

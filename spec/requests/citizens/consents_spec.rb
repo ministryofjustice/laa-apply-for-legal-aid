@@ -24,8 +24,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       let(:params) { { legal_aid_application: { open_banking_consent: 'true' } } }
 
       it 'redirects to new action' do
-        expect(response).to redirect_to(applicant_true_layer_omniauth_authorize_path)
-        expect(unescaped_response_body).to include('true')
+        expect(response).to redirect_to(citizens_banks_path)
       end
 
       it 'records the decision on the legal aid application' do

@@ -1,0 +1,19 @@
+<%= page_template page_title: t('.title'), template: :basic do %>
+
+  <%= render 'error' if @error %>
+
+  <%= form_with(local: true) do |form| %>
+    <%= govuk_form_group(show_error_if: @error) do %>
+      <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+
+      <div class="govuk-radios bank-selection">
+        <%= render partial: 'bank', collection: TrueLayerBank.banks, locals: { form: form } %>
+      </div>
+    <% end %>
+
+    <h2 class="govuk-heading-m"><%= t('.what_happens_next') %></h2>
+    <p class="govuk-body"><%= t('.connect') %></p>
+
+    <%= form.submit(t('generic.continue'), class: 'govuk-button form-button') %>
+  <% end %>
+<% end %>

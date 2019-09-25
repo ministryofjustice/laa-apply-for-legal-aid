@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: %i[show index]
     resources :resend_link_requests, only: %i[show update], path: 'resend_link'
     resource :consent, only: %i[show create]
+    resources :banks, only: %i[index create]
     resource :property_value, only: %i[show update]
     resource :information, only: [:show]
     resources :accounts, only: [:index] do

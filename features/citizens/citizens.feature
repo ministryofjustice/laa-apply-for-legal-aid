@@ -2,6 +2,7 @@ Feature: Citizen journey
   @javascript
   Scenario: Start citizen journey until TrueLayer Auth
     Given An application has been created
+    And a "true layer bank" exists in the database
     Then I visit the start of the financial assessment
     Then I should be on a page showing 'Complete your legal aid financial assessment'
     Then I click link 'Start'
@@ -10,6 +11,9 @@ Feature: Citizen journey
     Then I should be on a page showing 'Do you agree to share your bank transactions with us?'
     Then I select 'I agree for you to check 3 months of bank transactions'
     Then I click 'Save and continue'
+    Then I should be on a page showing 'Select your bank'
+    Then I choose 'HSBC'
+    Then I click 'Continue'
     Then I am directed to TrueLayer
 
   @javascript @webhint

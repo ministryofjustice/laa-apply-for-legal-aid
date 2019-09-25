@@ -22,6 +22,13 @@ en:
       new:
         field_set_header: Do you have online access to your accounts with other banks?
         hint: If you do not, you will need to provide paper evidence for these accounts.
+    banks:
+      index:
+        title: Select your bank
+        what_happens_next: What happens next
+        connect: We'll connect you to your bank using a secure service so you can share your bank transactions with us.
+      create:
+        error: Select a bank
     check_answers:
       index:
         assets:

@@ -28,19 +28,20 @@ module OmniAuth
       end
 
       describe '#authorize_params' do
+        let(:enable_mock) { [true, false].sample }
+        let(:provider_id) { [nil, 'hsbc'].sample }
+
         before do
-          allow(subject).to receive(:session).and_return({})
-        end
-        it 'disables mock as default' do
-          with_modified_env TRUE_LAYER_ENABLE_MOCK: nil do
-            expect(subject.authorize_params[:enable_mock]).to be_falsey
-          end
+          allow(subject).to receive(:session).and_return(provider_id: provider_id)
+          allow(Rails.configuration.x.true_layer).to receive(:enable_mock).and_return(enable_mock)
         end
 
-        it 'can be set with an environment varialbe' do
-          with_modified_env TRUE_LAYER_ENABLE_MOCK: 'true' do
-            expect(subject.authorize_params[:enable_mock]).to be_truthy
-          end
+        it 'can be set with an environment variable' do
+          expect(subject.authorize_params[:enable_mock]).to eq(enable_mock)
+        end
+
+        it 'sets provider_id from session' do
+          expect(subject.authorize_params[:provider_id]).to eq(provider_id)
         end
       end
 
