@@ -21,11 +21,12 @@ module CCMS
                                # response: response.doc
     end
 
-    def create_failure_history(from_state, error)
+    def create_failure_history(from_state, error, request)
       SubmissionHistory.create submission: submission,
                                from_state: from_state,
                                to_state: :failed,
                                success: false,
+                               request: request,
                                details: error.is_a?(Exception) ? format_exception(error) : error
     end
 
@@ -33,8 +34,8 @@ module CCMS
       [error.class, error.message, error.backtrace].flatten.join("\n")
     end
 
-    def handle_failure(error)
-      create_failure_history(submission.aasm_state, error)
+    def handle_failure(error, request)
+      create_failure_history(submission.aasm_state, error, request)
       submission.fail!
     end
   end

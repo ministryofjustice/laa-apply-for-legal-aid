@@ -6,18 +6,18 @@ module CCMS
       parser = CaseAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
     rescue CcmsError => e
-      handle_failure(e)
+      handle_failure(e, case_add_status_requestor.formatted_xml)
     end
 
     private
 
     def process_response(parser)
       if parser.success?
-        create_history(:case_submitted, submission.aasm_state, case_add_status_requestor) if submission.confirm_case_created!
+        create_history(:case_submitted, submission.aasm_state, case_add_status_requestor.formatted_xml) if submission.confirm_case_created!
       elsif submission.case_poll_count >= Submission::POLL_LIMIT
-        handle_failure('Poll limit exceeded')
+        handle_failure('Poll limit exceeded', case_add_status_requestor.formatted_xml)
       else
-        create_history(submission.aasm_state, submission.aasm_state, case_add_status_requestor)
+        create_history(submission.aasm_state, submission.aasm_state, case_add_status_requestor.formatted_xml)
       end
     end
 

@@ -8,12 +8,12 @@ module CCMS
       @options = options
       if case_add_response_parser.success?
         submission.case_add_transaction_id = case_add_requestor.transaction_request_id
-        create_history(submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained', submission.aasm_state, case_add_requestor) if submission.submit_case!
+        create_history(submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained', submission.aasm_state, case_add_requestor.formatted_xml) if submission.submit_case!
       else
-        handle_failure(response)
+        handle_failure(response, case_add_requestor.formatted_xml)
       end
     rescue CcmsError => e
-      handle_failure(e)
+      handle_failure(e, case_add_requestor.formatted_xml)
     end
 
     private

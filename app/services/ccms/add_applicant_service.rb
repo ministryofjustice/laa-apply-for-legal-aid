@@ -2,14 +2,13 @@ module CCMS
   class AddApplicantService < BaseSubmissionService
     def call
       if applicant_add_response_parser.success?
-        # binding.pry
         submission.applicant_add_transaction_id = applicant_add_requestor.transaction_request_id
-        create_history('case_ref_obtained', submission.aasm_state, xml_request) if submission.submit_applicant!
+        create_history('case_ref_obtained', submission.aasm_state, applicant_add_requestor.formatted_xml) if submission.submit_applicant!
       else
-        handle_failure(response)
+        handle_failure(response, applicant_add_requestor.formatted_xml)
       end
     rescue CcmsError => e
-      handle_failure(e)
+      handle_failure(e, applicant_add_requestor.formatted_xml)
     end
 
     private
@@ -20,10 +19,6 @@ module CCMS
 
     def applicant_add_response_parser
       @applicant_add_response_parser ||= ApplicantAddResponseParser.new(applicant_add_requestor.transaction_request_id, response)
-    end
-
-    def xml_request
-      @xml_request ||= applicant_add_requestor.formatted_xml
     end
 
     def response
