@@ -6,7 +6,7 @@ Bundler.require(*Rails.groups)
 
 module LaaApplyForLegalAid
   class Application < Rails::Application
-    config.load_defaults = 6.0
+    config.load_defaults 5.2
 
     config.time_zone = 'London'
 
