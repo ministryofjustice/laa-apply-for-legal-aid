@@ -204,17 +204,19 @@ module CCMS
       end
     end
 
-    def generate_means_assessment_details(xml)
+    def generate_means_assessment_details(xml) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       xml.__send__('ns0:AssessmentScreens') do
         xml.__send__('ns0:ScreenName', 'SUMMARY')
-        xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, 1) }
-        xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, 2) }
-        xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, 4) }
-        xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, 5) }
-        xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, 6) }
-        xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, 7) }
-        xml.__send__('ns0:Entity') { generate_global_means_entity(xml, 8) }
-        xml.__send__('ns0:Entity') { generate_employment_entity(xml, 9) }
+        sequence_no = 0
+        xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, sequence_no += 1) } if @legal_aid_application.vehicle.present?
+        xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_global_means_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_employment_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_third_party_dwelling_owner_entity(xml, sequence_no += 1) }
       end
     end
 
@@ -248,7 +250,7 @@ module CCMS
 
     def generate_vehicle_instance(xml, vehicle)
       xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the cars & motor vehicles') # TODO: CCMS placeholder
+        xml.__send__('ns0:InstanceLabel', 'the cars & motor vehicles')
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :vehicles, vehicle: vehicle) }
       end
     end

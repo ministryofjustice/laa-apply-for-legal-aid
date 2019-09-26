@@ -303,7 +303,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
         it 'shows errors' do
           subject
-          expect(response.body).to include 'There is a problem'
+          expect(response.body).to include 'There is a problem' app/services/cfe/base_service.rb
           expect(response.body).to include 'You must choose at least one file'
         end
       end
