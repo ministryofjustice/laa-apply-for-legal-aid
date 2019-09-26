@@ -16,7 +16,7 @@ RSpec.describe CFE::CreatePropertiesService do
     )
   end
   let(:submission) do
-    create :cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :capitals_created
+    create :cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :vehicles_created
   end
 
   subject { described_class.new submission }

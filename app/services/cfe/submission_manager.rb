@@ -13,8 +13,8 @@ module CFE
       CFE::CreateAssessmentService.call(submission)
       CFE::CreateApplicantService.call(submission)
       CFE::CreateCapitalsService.call(submission)
-      CFE::CreatePropertiesService.call(submission)
       CFE::CreateVehiclesService.call(submission)
+      CFE::CreatePropertiesService.call(submission)
 
       # TODO: add these steps as we write the services
       # CFE::ObtainAssessmentResultService.call(submission)
