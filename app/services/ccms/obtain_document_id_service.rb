@@ -3,13 +3,13 @@ module CCMS
     def call
       populate_documents
       if submission.submission_document.empty?
-        create_history('applicant_ref_obtained', submission.aasm_state, document_id_requestor) if submission.submit_case!
+        create_history('applicant_ref_obtained', submission.aasm_state, xml_request) if submission.submit_case!
       else
         request_document_ids
-        create_history('applicant_ref_obtained', submission.aasm_state, document_id_requestor) if submission.obtain_document_ids!
+        create_history('applicant_ref_obtained', submission.aasm_state, xml_request) if submission.obtain_document_ids!
       end
     rescue CcmsError => e
-      handle_failure(e)
+      handle_failure(e, xml_request)
     end
 
     private
@@ -73,6 +73,10 @@ module CCMS
 
     def document_id_requestor
       @document_id_requestor ||= DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username)
+    end
+
+    def xml_request
+      @xml_request ||= document_id_requestor.formatted_xml
     end
   end
 end
