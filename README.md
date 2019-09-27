@@ -164,6 +164,19 @@ To allow the creation of test applications at different stages, for each provide
 `ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS']` must return "true". This is only available in the
 Staging and UAT environments.
 
+## Monitoring & Debugging
+
+- To monitor the worker jobs execution you can access `/sidekiq`:
+    - User: `sidekiq`
+    - Password: `worker: webUiPassword` in the secrets.
+- To access to the Site Administration Dashboard you need to point to `/support`.
+  Credentials are the same as in the Admin Portal.
+
+- To monitor Slack alerts from our service:
+  - [UAT](https://mojdt.slack.com/messages/GGW4FCZBL)
+  - [Staging](https://mojdt.slack.com/messages/GGWMW7M0F)
+  - [Production](https://mojdt.slack.com/messages/GGWE9V9BP)
+
 ## Databases
 
 ### Staging and Production
