@@ -54,6 +54,20 @@ RSpec.describe DateFieldBuilder do
     it 'returns date built from form part fields' do
       expect(subject.form_date).to eq(form_date)
     end
+
+    context 'with two character year' do
+      let(:form) do
+        OpenStruct.new(
+          happened_day: form_date.day,
+          happened_month: form_date.month,
+          happened_year: form_date.strftime('%y')
+        )
+      end
+
+      it 'returns date built from form part fields' do
+        expect(subject.form_date).to eq(form_date)
+      end
+    end
   end
 
   describe '#form_date_invalid?' do
@@ -71,6 +85,34 @@ RSpec.describe DateFieldBuilder do
       end
 
       it 'returns false' do
+        expect(subject.form_date_invalid?).to be true
+      end
+    end
+
+    context 'with two character year' do
+      let(:form) do
+        OpenStruct.new(
+          happened_day: form_date.day,
+          happened_month: form_date.month,
+          happened_year: form_date.strftime('%y')
+        )
+      end
+
+      it 'returns false with valid date data' do
+        expect(subject.form_date_invalid?).to be false
+      end
+    end
+
+    context 'with one character year' do
+      let(:form) do
+        OpenStruct.new(
+          happened_day: form_date.day,
+          happened_month: form_date.month,
+          happened_year: form_date.strftime('%y').last
+        )
+      end
+
+      it 'returns true' do
         expect(subject.form_date_invalid?).to be true
       end
     end
