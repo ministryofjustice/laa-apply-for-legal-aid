@@ -972,16 +972,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
-        it 'FAMILY_STMT_DETAIL should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STMT_DETAIL')
-          expect(block).to have_text_response 'This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence'
-        end
-
-        it 'FAMILY_STATEMENT_INSTANCE should be hard coded - ' do
-          block = XmlExtractor.call(xml, :family_statement, 'FAMILY_STATEMENT_INSTANCE')
-          expect(block).to have_text_response '-'
-        end
-
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
@@ -1113,6 +1103,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
   def omitted_attributes # rubocop:disable Metrics/MethodLength
     [
+      [:family_statement],
+      [:main_dwelling],
+      [:main_dwelling, 'MAINTHIRD_INPUT_T_3WP2_12A'],
+      [:main_dwelling, 'MAINTHIRD_INPUT_T_3WP2_13A'],
+      [:main_dwelling, 'MAINTHIRD_INPUT_N_3WP2_11A'],
+      [:family_statement, 'FAMILY_STMT_DETAIL'],
+      [:family_statement, 'FAMILY_STATEMENT_INSTANCE'],
       [:global_means, 'BEN_AWARD_DATE'],
       [:global_means, 'CAP_CONT'],
       [:global_means, 'CLIENT_NASS'],

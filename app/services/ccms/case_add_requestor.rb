@@ -204,19 +204,17 @@ module CCMS
       end
     end
 
-    def generate_means_assessment_details(xml) # rubocop:disable Metrics/AbcSize
+    def generate_means_assessment_details(xml)
       xml.__send__('ns0:AssessmentScreens') do
         xml.__send__('ns0:ScreenName', 'SUMMARY')
         xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, 1) }
         xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, 2) }
-        xml.__send__('ns0:Entity') { generate_change_in_circumstance_entity(xml, 3) }
         xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, 4) }
         xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, 5) }
         xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, 6) }
         xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, 7) }
         xml.__send__('ns0:Entity') { generate_global_means_entity(xml, 8) }
         xml.__send__('ns0:Entity') { generate_employment_entity(xml, 9) }
-        xml.__send__('ns0:Entity') { generate_third_party_dwelling_owner_entity(xml, 10) }
       end
     end
 
@@ -239,15 +237,6 @@ module CCMS
       xml.__send__('ns0:Instances') do
         xml.__send__('ns0:InstanceLabel', bank_account.display_name)
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :bank_acct, bank_acct: bank_account) }
-      end
-    end
-
-    def generate_change_in_circumstance_entity(xml, sequence_no)
-      xml.__send__('ns0:SequenceNumber', sequence_no)
-      xml.__send__('ns0:EntityName', 'CHANGE_IN_CIRCUMSTANCE')
-      xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the change in circumstance1') # TODO: CCMS placeholder
-        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :change_in_circumstances) }
       end
     end
 
@@ -328,15 +317,6 @@ module CCMS
       end
     end
 
-    def generate_third_party_dwelling_owner_entity(xml, sequence_no)
-      xml.__send__('ns0:SequenceNumber', sequence_no)
-      xml.__send__('ns0:EntityName', 'MAINTHIRD')
-      xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the third party who part owns the main dwelling1') # TODO: CCMS placeholder
-        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :main_dwelling) }
-      end
-    end
-
     def generate_merits_assessment(xml)
       xml.__send__('ns2:AssesmentResults') do
         xml.__send__('ns0:Results') { generate_merits_assessment_results(xml) }
@@ -356,7 +336,6 @@ module CCMS
         xml.__send__('ns0:ScreenName', 'SUMMARY')
         xml.__send__('ns0:Entity') { generate_global_merits_entity(xml, 1) }
         xml.__send__('ns0:Entity') { generate_merits_proceeding_entity(xml, 2) }
-        xml.__send__('ns0:Entity') { generate_family_statement(xml, 3) }
         xml.__send__('ns0:Entity') { generate_opponent_other_parties(xml, 4) }
       end
     end
@@ -386,15 +365,6 @@ module CCMS
                                   proceeding: application_proceeding_type.proceeding_type,
                                   respondent: @legal_aid_application.respondent)
         end
-      end
-    end
-
-    def generate_family_statement(xml, sequence_no)
-      xml.__send__('ns0:SequenceNumber', sequence_no)
-      xml.__send__('ns0:EntityName', 'FAMILY_STATEMENT')
-      xml.__send__('ns0:Instances') do
-        xml.__send__('ns0:InstanceLabel', 'the family statement of case1') # TODO: CCMS placeholder
-        xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :family_statement) }
       end
     end
 
