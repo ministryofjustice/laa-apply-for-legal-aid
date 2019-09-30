@@ -9,12 +9,12 @@ module AdminUsers
         flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
         sign_in_and_redirect admin_user, event: :authentication
       else
-        failure
+        failure(reason: 'You do not have an Admin account in this system')
       end
     end
 
-    def failure
-      set_flash_message(:error, :failure, kind: 'Google', reason: 'Process cancelled')
+    def failure(reason: 'Process cancelled')
+      set_flash_message(:error, :failure, kind: 'Google', reason: reason)
       redirect_to root_path
     end
 

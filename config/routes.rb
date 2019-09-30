@@ -207,5 +207,5 @@ Rails.application.routes.draw do
   end
 
   # Catch all route that traps paths not defined above. Must be last route.
-#  match '*path', to: redirect('error/page_not_found'), via: :all
+  match '*path', to: redirect('error/page_not_found'), via: :all
 end
