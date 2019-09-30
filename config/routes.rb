@@ -19,7 +19,27 @@ Rails.application.routes.draw do
   devise_for :admin_users
 
   devise_scope :applicant do
-    match 'applicants/auth/true_layer/callback', to: 'applicants/omniauth_callbacks#true_layer', via: %i[get puts], as: :applicant_true_layer_omniauth_callback
+    match(
+      'auth/true_layer/callback',
+      to: 'applicants/omniauth_callbacks#true_layer',
+      via: %i[get puts],
+      as: :applicant_true_layer_omniauth_callback
+    )
+  end
+
+  devise_scope :admin_user do
+    match(
+      'auth/google_oauth2/callback',
+      to: 'admin_users/omniauth_callbacks#google_oauth2',
+      via: %i[get puts],
+      as: :admin_user_google_oauth2_omniauth_callback
+    )
+#    match(
+#      'admin_users/auth/google_oauth2',
+#      to: 'admin_users/omniauth_callbacks#passthru',
+#      via: %i[get puts],
+#      as: :admin_user_google_oauth2_omniauth_authorize
+#    )
   end
 
   resources :status, only: [:index]
@@ -187,5 +207,5 @@ Rails.application.routes.draw do
   end
 
   # Catch all route that traps paths not defined above. Must be last route.
-  match '*path', to: redirect('error/page_not_found'), via: :all
+#  match '*path', to: redirect('error/page_not_found'), via: :all
 end

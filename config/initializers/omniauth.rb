@@ -10,4 +10,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     ENV['TRUE_LAYER_CLIENT_SECRET'],
     scope: 'info accounts balance transactions'
   )
+  provider(
+    :google_oauth2,
+    ENV['GOOGLE_CLIENT_ID'],
+    ENV['GOOGLE_CLIENT_SECRET']
+  )
 end

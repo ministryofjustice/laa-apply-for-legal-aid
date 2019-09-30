@@ -26,6 +26,7 @@ gem 'devise' # User authentication
 gem 'devise_saml_authenticatable'
 gem 'omniauth'
 gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
+gem 'omniauth-google-oauth2'
 
 # Improve backtrace in nested error recues
 gem 'nesty'

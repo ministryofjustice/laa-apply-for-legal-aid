@@ -18,7 +18,7 @@ module Flow
           forward: :true_layer
         },
         true_layer: {
-          path: ->(_) { '/applicants/auth/true_layer' }
+          path: ->(_) { '/auth/true_layer' }
         },
         accounts: {
           forward: :additional_accounts
