@@ -3,10 +3,9 @@ module CCMS
     include CCMSSubmissionStateMachine
 
     belongs_to :legal_aid_application
+    has_many :submission_document
 
     validates :legal_aid_application_id, presence: true
-
-    has_many :submission_document
 
     POLL_LIMIT = 10
 
@@ -27,7 +26,7 @@ module CCMS
       when 'case_created'
         UploadDocumentsService.call(self)
       else
-        raise CcmsError, "Unknown state: #{aasm_state}"
+        raise CcmsError, "Submission #{id} - Unknown state: #{aasm_state}"
       end
     end
 

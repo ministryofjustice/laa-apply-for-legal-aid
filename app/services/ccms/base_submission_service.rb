@@ -32,6 +32,7 @@ module CCMS
     end
 
     def handle_failure(error)
+      Raven.capture_exception(error)
       create_failure_history(submission.aasm_state, error)
       submission.fail!
     end

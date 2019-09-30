@@ -385,7 +385,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           }
           expect {
             requestor.__send__(:extract_response_value, config, options)
-          }.to raise_error CCMS::CcmsError, 'Unknown response type: numeric'
+          }.to raise_error CCMS::CcmsError, "Submission #{submission.id} - Unknown response type: numeric"
         end
       end
 
