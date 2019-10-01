@@ -4,6 +4,8 @@ module CFE
       new(submission).call
     end
 
+    attr_reader :submission
+
     def initialize(submission)
       @submission = submission
     end

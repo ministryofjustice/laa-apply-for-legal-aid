@@ -1,0 +1,305 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
+    body:
+      encoding: UTF-8
+      string: '{"client_reference_id":"L-YB0-M31","submission_date":"2019-09-26","matter_proceeding_type":"domestic_abuse"}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.15.8
+      Date:
+      - Thu, 26 Sep 2019 10:17:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"e87d75bbc5c726c5650e16b1361562c0"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e6e54beb74a9c61fc65bc32f111e7459
+      X-Runtime:
+      - '0.092029'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"objects":[{"id":"82c29e5a-58ff-4fc1-8d3e-fab96505893e","client_reference_id":"L-YB0-M31","remote_ip":{"family":2,"addr":1380268825,"mask_addr":4294967295},"created_at":"2019-09-26T10:17:16.895Z","updated_at":"2019-09-26T10:17:16.895Z","submission_date":"2019-09-26","matter_proceeding_type":"domestic_abuse","assessment_result":"pending"}],"errors":[]}'
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 10:17:16 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/82c29e5a-58ff-4fc1-8d3e-fab96505893e/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"1975-09-12","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.15.8
+      Date:
+      - Thu, 26 Sep 2019 10:17:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"0b4757162b738d03ce1bc79055ae6184"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 143b4e41c47b9da6f3ddf0a3a87c73de
+      X-Runtime:
+      - '0.009516'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"objects":[{"id":"5e32f804-1b2f-4361-ab47-251c83a65b24","assessment_id":"82c29e5a-58ff-4fc1-8d3e-fab96505893e","date_of_birth":"1975-09-12","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false,"created_at":"2019-09-26T10:17:17.066Z","updated_at":"2019-09-26T10:17:17.066Z"}],"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 10:17:17 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/82c29e5a-58ff-4fc1-8d3e-fab96505893e/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Off-line bank accounts","value":"256813.96"},{"description":"Cash","value":"929463.53"},{"description":"Signatory
+        on other person''s account","value":"247263.33"},{"description":"National
+        savings","value":"631488.6"},{"description":"Shares in PLC","value":"30317.69"},{"description":"PEPs,
+        unit trusts, capital bonds and government stocks","value":"267758.38"},{"description":"Life
+        assurance and endowment policies not linked to a mortgage","value":"961122.07"}],"non_liquid_capital":[{"description":"Timeshare
+        property","value":"98807.39"},{"description":"Land","value":"825874.26"},{"description":"Valuable
+        items","value":"406113.56"},{"description":"Inherited assets","value":"512724.02"},{"description":"Money
+        owed to applicant","value":"758681.72"},{"description":"Trusts","value":"914692.73"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.15.8
+      Date:
+      - Thu, 26 Sep 2019 10:17:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"19ac0337bcb049ee395ff7dab5dec3ef"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - fbf9c1524e9ff6b72a8eee2aa54ef82e
+      X-Runtime:
+      - '0.192168'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"objects":{"id":"02e0714f-0543-4ff3-bb73-500bdc46889d","assessment_id":"82c29e5a-58ff-4fc1-8d3e-fab96505893e","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","capital_assessment_result":"pending","created_at":"2019-09-26T10:17:16.900Z","updated_at":"2019-09-26T10:17:16.900Z"},"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 10:17:17 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/82c29e5a-58ff-4fc1-8d3e-fab96505893e/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[{"value":"4069.0","loan_amount_outstanding":"873.0","date_of_purchase":"2002-10-01","in_regular_use":true}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.15.8
+      Date:
+      - Thu, 26 Sep 2019 10:17:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"d5f43da6ce2ba2878a37119cb1f3f31f"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 981586736db6d4413a381a8aabb37541
+      X-Runtime:
+      - '0.024666'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"vehicles":[{"id":"89fd2145-3e5b-48a6-a0eb-75d389b93f79","value":"4069.0","loan_amount_outstanding":"873.0","date_of_purchase":"2002-10-01","in_regular_use":true,"created_at":"2019-09-26T10:17:17.494Z","updated_at":"2019-09-26T10:17:17.494Z","capital_summary_id":"02e0714f-0543-4ff3-bb73-500bdc46889d","included_in_assessment":false,"assessed_value":"0.0"}],"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 10:17:17 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/82c29e5a-58ff-4fc1-8d3e-fab96505893e/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"727864.08","outstanding_mortgage":"188024.24","percentage_owned":"43.75","shared_with_housing_assoc":false},"additional_properties":[{"value":"897453.03","outstanding_mortgage":"73722.46","percentage_owned":"66.32","shared_with_housing_assoc":false}]}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.15.8
+      Date:
+      - Thu, 26 Sep 2019 10:17:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"b6dd27fc7c654cc37fc064a1f572bde6"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7e7b4d80357025fccc74677e9a1058c1
+      X-Runtime:
+      - '0.116632'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"objects":[{"id":"7d5d1825-0de3-4ed5-a5e9-b1c366daa842","value":"727864.08","outstanding_mortgage":"188024.24","percentage_owned":"43.75","main_home":true,"shared_with_housing_assoc":false,"created_at":"2019-09-26T10:17:17.688Z","updated_at":"2019-09-26T10:17:17.688Z","capital_summary_id":"02e0714f-0543-4ff3-bb73-500bdc46889d","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"c7d5f438-76f6-4e7d-89e3-f5a03ca0d24a","value":"897453.03","outstanding_mortgage":"73722.46","percentage_owned":"66.32","main_home":false,"shared_with_housing_assoc":false,"created_at":"2019-09-26T10:17:17.701Z","updated_at":"2019-09-26T10:17:17.701Z","capital_summary_id":"02e0714f-0543-4ff3-bb73-500bdc46889d","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 10:17:17 GMT
+recorded_with: VCR 5.0.0

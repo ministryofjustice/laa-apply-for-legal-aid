@@ -35,7 +35,7 @@ module CFESubmissionStateMachine
       end
 
       event :results_obtained do
-        transitions from: :vehicles_created, to: :results_obtained
+        transitions from: :properties_created, to: :results_obtained
       end
 
       event :fail do
