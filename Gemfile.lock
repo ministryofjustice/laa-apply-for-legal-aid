@@ -267,7 +267,7 @@ GEM
     mustermann (1.0.3)
     nested_form (0.3.2)
     nesty (1.0.2)
-    nio4r (2.5.1)
+    nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
@@ -300,7 +300,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (4.0.1)
-    puma (4.1.1)
+    puma (4.2.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -547,7 +547,7 @@ DEPENDENCIES
   pg
   prometheus_exporter
   pry-byebug
-  puma (~> 4.1)
+  puma (~> 4.2)
   pundit
   rails (~> 5.2.3)
   rails_admin (~> 2.0)
