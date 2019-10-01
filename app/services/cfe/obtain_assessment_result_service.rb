@@ -17,8 +17,7 @@ module CFE
         @submission.results_obtained!
       else
         @submission.fail!
-        error = CFE::SubmissionError.new('Unsuccessful HTTP response code', @response.status)
-        catch_and_record_exception(error, 'GET')
+        raise_exception_error message: 'CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code', http_method: 'GET', http_status: @response.status
       end
     end
 

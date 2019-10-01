@@ -63,20 +63,8 @@ module CFE
       catch_and_record_exception(e)
     end
 
-    # def raise_exception_error(err, http_method = 'POST')
-    #   @submission.submission_histories.create!(
-    #     url: cfe_url,
-    #     http_method: http_method,
-    #     request_payload: request_body,
-    #     http_response_status: err.respond_to?(:http_status) ? err.ht/Users/stephenrichards/moj/apply/app/services/cfe/base_service.rb:91tp_status : nil,
-    #     error_message: formatted_error_message(err),
-    #     error_backtrace: err.backtrace&.join("\n")
-    #   )
-    #   raise CFE::SubmissionError.new(formatted_error_message(err), err)
-    # end
-
     def catch_and_record_exception(error, http_method = 'POST')
-      raise_exeception_error(
+      raise_exception_error(
         message: formatted_error_message(error),
         backtrace: error.backtrace&.join("\n"),
         http_method: http_method,
@@ -84,7 +72,7 @@ module CFE
       )
     end
 
-    def raise_exeception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
+    def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
       @submission.submission_histories.create!(
         url: cfe_url,
         http_method: http_method,
