@@ -19,10 +19,6 @@ RSpec.describe CCMS::CheckApplicantStatusService do
 
       context 'applicant not yet created' do
         before do
-          # expect(applicant_add_status_requestor).to receive(:call).and_return(applicant_add_status_response)
-          # allow(case_add_response_parser).to receive(:doc).and_return(case_add_response)
-          # allow(applicant_add_status_response_parser).to receive(:doc).and_return(applicant_add_status_response)
-          # allow(applicant_add_status_response_parser).to receive(:doc).and_return(applicant_add_status_response)
           expect(applicant_add_status_requestor).to receive(:call).and_return(applicant_add_status_response)
           expect(applicant_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
           allow(applicant_add_status_requestor).to receive(:formatted_xml).and_return(applicant_add_status_request)

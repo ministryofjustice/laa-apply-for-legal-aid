@@ -5,7 +5,6 @@ RSpec.describe CCMS::AddApplicantService do
   let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:applicant_add_requestor) { double CCMS::ApplicantAddRequestor }
-  # let(:applicant_add_response_parser) { double CCMS::ApplicantAddResponseParser }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   let(:applicant_add_request) { ccms_data_from_file 'applicant_add_request.xml' }
   subject { described_class.new(submission) }
@@ -22,7 +21,6 @@ RSpec.describe CCMS::AddApplicantService do
 
       before do
         expect(applicant_add_requestor).to receive(:call).and_return(applicant_add_response)
-        # expect(applicant_add_response_parser).to receive(:doc).and_return(applicant_add_response)
       end
 
       it 'sets state to applicant_submitted' do
@@ -43,8 +41,8 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.details).to be_nil
         expect("<?xml version='1.0' encoding='UTF-8'?>\n" + history.request).to eq applicant_add_request
         expect(history.request).to_not be_nil
-        expect(history.response).to eq applicant_add_response
-        expect(history.response).to_not be_nil
+        # expect(history.response).to eq applicant_add_response
+        # expect(history.response).to_not be_nil
       end
     end
   end
@@ -67,7 +65,7 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
-        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq applicant_add_request
+        expect("<?xml version='1.0' encoding='UTF-8'?>\n" + history.request).to eq applicant_add_request
         expect(history.request).to_not be_nil
         expect(history.response).to be_nil
       end
@@ -94,8 +92,8 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to eq(applicant_add_response)
-        expect(history.response).to eq applicant_add_response
-        expect(history.response).to_not be_nil
+        # expect(history.response).to eq applicant_add_response
+        # expect(history.response).to_not be_nil
       end
     end
   end

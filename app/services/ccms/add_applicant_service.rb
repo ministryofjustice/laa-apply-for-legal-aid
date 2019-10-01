@@ -3,9 +3,9 @@ module CCMS
     def call
       if applicant_add_response_parser.success?
         submission.applicant_add_transaction_id = applicant_add_requestor.transaction_request_id
-        create_history('case_ref_obtained', submission.aasm_state, xml_request, xml_response) if submission.submit_applicant!
+        create_history('case_ref_obtained', submission.aasm_state, xml_request) if submission.submit_applicant!
       else
-        handle_failure(response, xml_request, xml_response)
+        handle_failure(response, xml_request)
       end
     rescue CcmsError => e
       handle_ccms_failure(e, xml_request)
@@ -29,8 +29,8 @@ module CCMS
       @xml_request ||= applicant_add_requestor.formatted_xml
     end
 
-    def xml_response
-      @xml_response ||= applicant_add_response_parser.response
-    end
+    # def xml_response
+    #   @xml_response ||= applicant_add_response_parser.response
+    # end
   end
 end
