@@ -41,6 +41,7 @@ bank_acct:
     :response_type: boolean
     :user_defined: true
 change_in_circumstances:
+  :generate_block?: false
   CHANGE_CIRC_INPUT_T_33WP3_6A:
     :value: None
     :br100_meaning: CHANGE_CIRC_INPUT_T_33WP3_6A
@@ -113,6 +114,7 @@ employment:
     :response_type: text
     :user_defined: true
 family_statement:
+  :generate_block?: false
   FAMILY_STMT_DETAIL:
     :value: This is an APPLY service application. See Merits statement uploaded into CCMS supporting evidence
     :br100_meaning: Statement:The Family Statement Of Case Detail
@@ -4267,6 +4269,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
 main_dwelling:
+  :generate_block?: false
   MAINTHIRD_INPUT_T_3WP2_12A:
     :value: "#main_dwelling_third_party_name"
     :br100_meaning: 'Main Dwelling: Name of 3rd party'
