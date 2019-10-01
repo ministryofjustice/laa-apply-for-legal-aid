@@ -11,7 +11,7 @@ module CCMS
         expect {
           parser = described_class.new(Faker::Number.number(digits: 20), response_xml)
           parser.success?
-        }.to raise_error CCMS::CcmsError, 'Invalid transaction request id'
+        }.to raise_error CCMS::CcmsError, "Invalid transaction request id #{expected_tx_id}"
       end
 
       it 'returns true if extracted_status_free_text = "Party Successfully Created."' do

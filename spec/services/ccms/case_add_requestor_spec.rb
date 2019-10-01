@@ -244,9 +244,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                vehicle: vehicle_1,
                wage_slips: [wage_slip_1],
                means_assessment_result: means_assessment_result,
-               main_dwelling_third_party_name: 'Mrs Fabby Fabby',
-               main_dwelling_third_party_relationship: 'Ex-Partner',
-               main_dwelling_third_party_percentage: 50,
                opponents: [other_party_2],
                opponent_other_parties: [other_party_1, other_party_2],
                ccms_submission: ccms_submission,
@@ -385,7 +382,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           }
           expect {
             requestor.__send__(:extract_response_value, config, options)
-          }.to raise_error CCMS::CcmsError, 'Unknown response type: numeric'
+          }.to raise_error CCMS::CcmsError, "Submission #{submission.id} - Unknown response type: numeric"
         end
       end
 

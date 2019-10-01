@@ -61,18 +61,6 @@ module CCMS
       'Client Sole' # TODO: CCMS placeholder
     end
 
-    def main_dwelling_third_party_name(_options)
-      'Mrs Fabby Fabby' # TODO: CCMS placeholder
-    end
-
-    def main_dwelling_third_party_relationship(_options)
-      'Ex-Partner' # TODO: CCMS placeholder
-    end
-
-    def main_dwelling_third_party_percentage(_options)
-      50 # TODO: CCMS placeholder
-    end
-
     def submission_case_ccms_reference(_options)
       @legal_aid_application.case_ccms_reference
     end
