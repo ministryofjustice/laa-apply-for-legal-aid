@@ -1266,6 +1266,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:main_dwelling, 'MAINTHIRD_INPUT_N_3WP2_11A'],
       [:family_statement, 'FAMILY_STMT_DETAIL'],
       [:family_statement, 'FAMILY_STATEMENT_INSTANCE'],
+      [:change_in_circumstances],
+      [:change_in_circumstances, 'CHANGE_CIRC_INPUT_T_33WP3_6A'],
       [:global_means, 'BEN_AWARD_DATE'],
       [:global_means, 'CAP_CONT'],
       [:global_means, 'CLIENT_NASS'],
