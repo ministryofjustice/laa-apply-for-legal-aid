@@ -5,6 +5,7 @@ RSpec.describe CCMS::AddApplicantService do
   let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:applicant_add_requestor) { double CCMS::ApplicantAddRequestor }
+  # let(:applicant_add_response_parser) { double CCMS::ApplicantAddResponseParser }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   let(:applicant_add_request) { ccms_data_from_file 'applicant_add_request.xml' }
   subject { described_class.new(submission) }
