@@ -6,13 +6,13 @@ OmniAuth.config.logger = Rails.logger
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider(
     :true_layer,
-    ENV['TRUE_LAYER_CLIENT_ID'],
-    ENV['TRUE_LAYER_CLIENT_SECRET'],
+    Rails.configuration.x.true_layer.client_id,
+    Rails.configuration.x.true_layer.client_sercret,
     scope: 'info accounts balance transactions'
   )
   provider(
     :google_oauth2,
-    ENV['GOOGLE_CLIENT_ID'],
-    ENV['GOOGLE_CLIENT_SECRET']
+    Rails.configuration.x.google_oauth2.client_id,
+    Rails.configuration.x.google_oauth2.client_sercret
   )
 end

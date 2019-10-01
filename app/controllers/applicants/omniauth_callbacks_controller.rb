@@ -17,7 +17,6 @@ module Applicants
       redirect_to gather_citizens_accounts_path
     end
 
-
     private
 
     def store_tokens
