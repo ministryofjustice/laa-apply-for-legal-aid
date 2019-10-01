@@ -17,10 +17,8 @@ module CFE
         @submission.results_obtained!
       else
         @submission.fail!
-        raise_exception_error(
-          CFE::SubmissionError.new('Unsuccessful HTTP response code', @response.status),
-          'GET'
-        )
+        error = CFE::SubmissionError.new('Unsuccessful HTTP response code', @response.status)
+        catch_and_record_exception(error, 'GET')
       end
     end
 
