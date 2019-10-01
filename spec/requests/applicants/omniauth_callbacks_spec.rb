@@ -79,16 +79,17 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     context 'on authentication failure' do
       before do
         OmniAuth.config.mock_auth[:true_layer] = :invalid_credentials
+
+        # Faraday defined within OAuth2::Client outputs to console on error
+        # which then outputs into the standard rspec progress sequence rather
+        # than to logs. Mocking `logger.add` silences that output for this spec
         allow_any_instance_of(Logger).to receive(:add)
       end
 
       it 'redirects to root' do
-        # Faraday defined within OAuth2::Client outputs to console on error
-        # which then outputs into the standard rspec progress sequence rather
-        # than to logs. Mocking `logger.add` silences that output for this spec
         subject
         follow_redirect!
-        expect(request.env['REQUEST_URI']).to eq(citizens_consent_path)
+        expect(response).to redirect_to(error_path(:access_denied))
       end
 
       it 'does not add page to history' do

@@ -34,13 +34,9 @@ Rails.application.routes.draw do
       via: %i[get puts],
       as: :admin_user_google_oauth2_omniauth_callback
     )
-#    match(
-#      'admin_users/auth/google_oauth2',
-#      to: 'admin_users/omniauth_callbacks#passthru',
-#      via: %i[get puts],
-#      as: :admin_user_google_oauth2_omniauth_authorize
-#    )
   end
+
+  get 'auth/failure', to: 'auth#failure'
 
   resources :status, only: [:index]
   resource :contact, only: [:show]
