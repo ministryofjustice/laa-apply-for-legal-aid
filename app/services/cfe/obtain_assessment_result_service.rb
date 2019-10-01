@@ -7,10 +7,6 @@ module CFE
     end
 
     def query_cfe_service
-      make_get_request
-    end
-
-    def make_get_request
       conn.get cfe_url_path
     end
 

@@ -26,10 +26,6 @@ module CFE # rubocop:disable Metrics/ModuleLength
           .to_return(body: expected_response)
       end
 
-      it 'calls the expected URL' do
-        ObtainAssessmentResultService.call(submission)
-      end
-
       it 'updates the submission state to results_obtained' do
         ObtainAssessmentResultService.call(submission)
         expect(submission.aasm_state).to eq 'results_obtained'
