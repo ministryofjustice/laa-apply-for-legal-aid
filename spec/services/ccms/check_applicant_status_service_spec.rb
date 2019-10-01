@@ -15,9 +15,14 @@ RSpec.describe CCMS::CheckApplicantStatusService do
   context 'applicant_submitted state' do
     context 'operation successful' do
       let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+      let(:applicant_add_status_response_parser) { double CCMS::ApplicantAddStatusResponseParser }
 
       context 'applicant not yet created' do
         before do
+          # expect(applicant_add_status_requestor).to receive(:call).and_return(applicant_add_status_response)
+          # allow(case_add_response_parser).to receive(:doc).and_return(case_add_response)
+          # allow(applicant_add_status_response_parser).to receive(:doc).and_return(applicant_add_status_response)
+          # allow(applicant_add_status_response_parser).to receive(:doc).and_return(applicant_add_status_response)
           expect(applicant_add_status_requestor).to receive(:call).and_return(applicant_add_status_response)
           expect(applicant_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
           allow(applicant_add_status_requestor).to receive(:formatted_xml).and_return(applicant_add_status_request)
@@ -37,10 +42,10 @@ RSpec.describe CCMS::CheckApplicantStatusService do
             expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
             expect(history.from_state).to eq 'applicant_submitted'
             expect(history.to_state).to eq 'applicant_submitted'
-            expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq applicant_add_status_request
-            expect(history.request).to_not be_nil
             expect(history.success).to be true
             expect(history.details).to be_nil
+            expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq applicant_add_status_request
+            expect(history.request).to_not be_nil
           end
         end
 

@@ -6,7 +6,7 @@ module CCMS
       parser = ApplicantSearchResponseParser.new(tx_id, response)
       process_records(parser)
     rescue CcmsError => e
-      handle_failure(e, xml_request)
+      handle_ccms_failure(e, xml_request)
     end
 
     private

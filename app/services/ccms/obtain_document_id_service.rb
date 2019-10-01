@@ -9,7 +9,7 @@ module CCMS
         create_history('applicant_ref_obtained', submission.aasm_state, xml_request) if submission.obtain_document_ids!
       end
     rescue CcmsError => e
-      handle_failure(e, xml_request)
+      handle_ccms_failure(e, xml_request)
     end
 
     private

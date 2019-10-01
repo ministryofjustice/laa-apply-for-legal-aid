@@ -22,6 +22,7 @@ RSpec.describe CCMS::AddApplicantService do
 
       before do
         expect(applicant_add_requestor).to receive(:call).and_return(applicant_add_response)
+        # expect(applicant_add_response_parser).to receive(:doc).and_return(applicant_add_response)
       end
 
       it 'sets state to applicant_submitted' do
@@ -42,8 +43,8 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.details).to be_nil
         expect("<?xml version='1.0' encoding='UTF-8'?>\n" + history.request).to eq applicant_add_request
         expect(history.request).to_not be_nil
-        # expect(history.response).to eq applicant_add_response
-        # expect(history.response).to_not be_nil
+        expect(history.response).to eq applicant_add_response
+        expect(history.response).to_not be_nil
       end
     end
   end
@@ -64,10 +65,11 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.from_state).to eq 'case_ref_obtained'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq applicant_add_request
-        expect(history.request).to_not be_nil
         expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
+        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq applicant_add_request
+        expect(history.request).to_not be_nil
+        expect(history.response).to be_nil
       end
     end
 
@@ -92,6 +94,8 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to eq(applicant_add_response)
+        expect(history.response).to eq applicant_add_response
+        expect(history.response).to_not be_nil
       end
     end
   end

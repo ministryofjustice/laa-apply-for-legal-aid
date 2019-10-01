@@ -5,14 +5,14 @@ RSpec.describe CCMS::AddCaseService do
   let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:case_add_requestor) { double CCMS::CaseAddRequestor }
-  let(:expected_xml) { ccms_data_from_file 'case_add_request.xml' }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+  let(:add_case_request) { ccms_data_from_file 'case_add_request.xml' }
   subject { described_class.new(submission) }
 
   before do
     allow(subject).to receive(:case_add_requestor).and_return(case_add_requestor)
     allow(case_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-    allow(case_add_requestor).to receive(:formatted_xml).and_return(expected_xml)
+    allow(case_add_requestor).to receive(:formatted_xml).and_return(add_case_request)
   end
 
   context 'operation successful' do
@@ -38,10 +38,14 @@ RSpec.describe CCMS::AddCaseService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'document_ids_obtained'
         expect(history.to_state).to eq 'case_submitted'
-        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+history.request).to eq expected_xml
-        expect(history.request).to_not be_nil
         expect(history.success).to be true
         expect(history.details).to be_nil
+        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + history.request).to eq add_case_request
+        expect(history.request).to_not be_nil
+        # TO DO
+        # format of xml is missing "encoding="UTF-8"
+        # expect(history.response).to eq case_add_response
+        expect(history.response).to_not be_nil
       end
     end
 
@@ -50,10 +54,14 @@ RSpec.describe CCMS::AddCaseService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'applicant_ref_obtained'
         expect(history.to_state).to eq 'case_submitted'
-        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+history.request).to eq expected_xml
-        expect(history.request).to_not be_nil
         expect(history.success).to be true
         expect(history.details).to be_nil
+        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+history.request).to eq add_case_request
+        expect(history.request).to_not be_nil
+        # TO DO
+        # format of xml is missing "encoding="UTF-8"
+        # expect(history.response).to eq case_add_response
+        expect(history.response).to_not be_nil
       end
     end
   end
@@ -61,7 +69,7 @@ RSpec.describe CCMS::AddCaseService do
   context 'operation in error' do
     context 'error when adding a case' do
       before do
-        allow(case_add_requestor).to receive(:formatted_xml).and_return(expected_xml)
+        allow(case_add_requestor).to receive(:formatted_xml).and_return(add_case_request)
         expect(case_add_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
       end
 
@@ -74,11 +82,12 @@ RSpec.describe CCMS::AddCaseService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'applicant_ref_obtained'
         expect(history.to_state).to eq 'failed'
-        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+history.request).to eq expected_xml
-        expect(history.request).to_not be_nil
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
+        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+history.request).to eq add_case_request
+        expect(history.request).to_not be_nil
+        expect(history.response).to be_nil
       end
     end
 
@@ -87,7 +96,8 @@ RSpec.describe CCMS::AddCaseService do
       let(:case_add_response_parser) { double CCMS::CaseAddResponseParser }
 
       before do
-        allow(case_add_requestor).to receive(:formatted_xml).and_return(case_add_response)
+        # allow(case_add_requestor).to receive(:formatted_xml).and_return(case_add_response)
+        allow(case_add_response_parser).to receive(:doc).and_return(case_add_response)
         expect(case_add_requestor).to receive(:call).and_return(case_add_response)
         allow(subject).to receive(:case_add_response_parser).and_return(case_add_response_parser)
         expect(case_add_response_parser).to receive(:success?).and_return(false)
@@ -101,12 +111,15 @@ RSpec.describe CCMS::AddCaseService do
       it 'records the error in the submission history' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'applicant_ref_obtained'
-        # TO DO - check the xml for this as it is not matching the first part, encoding is missing
-        # expect(history.request).to eq case_add_response
-        expect(history.request).to_not be_nil
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
         expect(history.details).to eq(case_add_response)
+        expect("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + history.request).to eq add_case_request
+        expect(history.request).to_not be_nil
+        # TO DO
+        # format of xml is missing "encoding="UTF-8"
+        # expect(history.response).to eq case_add_response
+        expect(history.response).to_not be_nil
       end
     end
   end

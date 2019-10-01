@@ -37,10 +37,16 @@ RSpec.describe CCMS::ObtainCaseReferenceService do
       expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
       expect(history.from_state).to eq 'initialised'
       expect(history.to_state).to eq 'case_ref_obtained'
-      expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq reference_data_request
-      expect(history.request).to_not be_nil
       expect(history.success).to be true
       expect(history.details).to be_nil
+      expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n" + history.request).to eq reference_data_request
+      expect(history.request).to_not be_nil
+      # ap 111111
+      # ap history.response
+      # ap 111111
+      # ap reference_data_response
+      expect(history.response).to eq reference_data_response
+      expect(history.response).to_not be_nil
     end
   end
 
@@ -60,11 +66,12 @@ RSpec.describe CCMS::ObtainCaseReferenceService do
       expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
       expect(history.from_state).to eq 'initialised'
       expect(history.to_state).to eq 'failed'
-      expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq reference_data_request
-      expect(history.request).to_not be_nil
       expect(history.success).to be false
       expect(history.details).to match(/CCMS::CcmsError/)
       expect(history.details).to match(/oops/)
+      expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq reference_data_request
+      expect(history.request).to_not be_nil
+      expect(history.response).to be_nil
     end
   end
 

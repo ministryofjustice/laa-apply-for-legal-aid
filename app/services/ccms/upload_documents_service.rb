@@ -13,7 +13,7 @@ module CCMS
         handle_failure("#{failed_uploads} failed to upload to CCMS", xml_request)
       end
     rescue CcmsError => e
-      handle_failure(e, xml_request)
+      handle_ccms_failure(e, xml_request)
     end
 
     private
