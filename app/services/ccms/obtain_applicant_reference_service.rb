@@ -6,7 +6,7 @@ module CCMS
       parser = ApplicantSearchResponseParser.new(tx_id, response)
       process_records(parser)
     rescue CcmsError => e
-      handle_failure(e, applicant_search_requestor.formatted_xml)
+      handle_failure(e, xml_request)
     end
 
     private
@@ -20,8 +20,12 @@ module CCMS
         AddApplicantService.new(submission).call
       else
         submission.applicant_ccms_reference = parser.applicant_ccms_reference
-        create_history(:case_ref_obtained, submission.aasm_state, applicant_search_requestor.formatted_xml) if submission.obtain_applicant_ref!
+        create_history(:case_ref_obtained, submission.aasm_state, xml_request) if submission.obtain_applicant_ref!
       end
+    end
+
+    def xml_request
+      @xml_request ||= applicant_search_requestor.formatted_xml
     end
   end
 end

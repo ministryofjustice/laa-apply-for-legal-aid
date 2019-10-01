@@ -6,13 +6,13 @@ RSpec.describe CCMS::AddApplicantService do
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:applicant_add_requestor) { double CCMS::ApplicantAddRequestor }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
-  let(:expected_xml) { ccms_data_from_file 'applicant_add_request.xml' }
+  let(:applicant_add_request) { ccms_data_from_file 'applicant_add_request.xml' }
   subject { described_class.new(submission) }
 
   before do
     allow(subject).to receive(:applicant_add_requestor).and_return(applicant_add_requestor)
     allow(applicant_add_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-    allow(applicant_add_requestor).to receive(:formatted_xml).and_return(expected_xml)
+    allow(applicant_add_requestor).to receive(:formatted_xml).and_return(applicant_add_request)
   end
 
   context 'operation successful' do
@@ -37,14 +37,12 @@ RSpec.describe CCMS::AddApplicantService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'case_ref_obtained'
         expect(history.to_state).to eq 'applicant_submitted'
-        # ap 111111
-        # ap "<?xml version='1.0' encoding='UTF-8'?>\n"+history.request
-        # ap 3333333
-        # ap expected_xml
-        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq expected_xml
-        expect(history.request).to_not be_nil
         expect(history.success).to be true
         expect(history.details).to be_nil
+        expect("<?xml version='1.0' encoding='UTF-8'?>\n" + history.request).to eq applicant_add_request
+        expect(history.request).to_not be_nil
+        # expect(history.response).to eq applicant_add_response
+        # expect(history.response).to_not be_nil
       end
     end
   end
@@ -65,7 +63,7 @@ RSpec.describe CCMS::AddApplicantService do
         expect(history.from_state).to eq 'case_ref_obtained'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq expected_xml
+        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq applicant_add_request
         expect(history.request).to_not be_nil
         expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
@@ -88,7 +86,7 @@ RSpec.describe CCMS::AddApplicantService do
       it 'records the error in the submission history' do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'case_ref_obtained'
-        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq expected_xml
+        expect("<?xml version='1.0' encoding='UTF-8'?>\n"+history.request).to eq applicant_add_request
         expect(history.request).to_not be_nil
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
