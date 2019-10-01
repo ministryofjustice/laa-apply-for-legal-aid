@@ -31,7 +31,7 @@ module Providers
 
         context 'provider in different firm' do
           let(:logged_in_provider) { provider_in_different_firm }
-          it 'is successful' do
+          it 'is redirected to the access denied page' do
             expect(response).to redirect_to(error_path(:access_denied))
           end
         end
@@ -60,7 +60,7 @@ module Providers
 
       context 'provider in different firm' do
         let(:logged_in_provider) { provider_in_different_firm }
-        it 'is successful' do
+        it 'is redirected to the access denied page' do
           expect(response).to redirect_to(error_path(:access_denied))
         end
       end
