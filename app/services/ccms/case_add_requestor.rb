@@ -204,7 +204,7 @@ module CCMS
       end
     end
 
-    def generate_means_assessment_details(xml) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def generate_means_assessment_details(xml) # rubocop:disable Metrics/AbcSize
       xml.__send__('ns0:AssessmentScreens') do
         xml.__send__('ns0:ScreenName', 'SUMMARY')
         sequence_no = 0
@@ -216,7 +216,6 @@ module CCMS
         xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, sequence_no += 1) }
         xml.__send__('ns0:Entity') { generate_global_means_entity(xml, sequence_no += 1) }
         xml.__send__('ns0:Entity') { generate_employment_entity(xml, sequence_no += 1) }
-        xml.__send__('ns0:Entity') { generate_third_party_dwelling_owner_entity(xml, sequence_no += 1) }
       end
     end
 

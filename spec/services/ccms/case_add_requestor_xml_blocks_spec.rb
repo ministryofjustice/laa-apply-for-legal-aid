@@ -121,10 +121,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             expect(block).not_to be_present, "Expected block for vehicle entity not to be generated, but was \n #{block}"
           end
 
-          it 'assigns the sequence number 4 to the next entity' do
-            block = XmlExtractor.call(xml, :wage_slip_entity)
-            doc = Nokogiri::XML(block.to_s)
-            expect(doc.xpath('//SequenceNumber').text).to eq '4'
+          it 'assigns the sequence number to the next entity one higher than that for bank accounts' do
+            bank_acount_entity = XmlExtractor.call(xml, :bank_accounts_entity)
+            doc = Nokogiri::XML(bank_acount_entity.to_s)
+            bank_account_sequence = doc.xpath('//SequenceNumber').text.to_i
+
+            wage_slip_entity = XmlExtractor.call(xml, :wage_slip_entity)
+            doc = Nokogiri::XML(wage_slip_entity.to_s)
+            wage_slip_sequence = doc.xpath('//SequenceNumber').text.to_i
+            expect(wage_slip_sequence).to eq bank_account_sequence + 1
           end
         end
       end

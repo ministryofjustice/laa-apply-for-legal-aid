@@ -40,13 +40,13 @@ bank_acct:
     :br100_meaning: 'Bank accounts: Client benefits, ex. tax credits, paid in?'
     :response_type: boolean
     :user_defined: true
-#change_in_circumstances:
-#  :generate_block?: false
-#  CHANGE_CIRC_INPUT_T_33WP3_6A:
-#    :value: None
-#    :br100_meaning: CHANGE_CIRC_INPUT_T_33WP3_6A
-#    :response_type: text
-#    :user_defined: true
+change_in_circumstances:
+  :generate_block?: false
+  CHANGE_CIRC_INPUT_T_33WP3_6A:
+    :value: None
+    :br100_meaning: CHANGE_CIRC_INPUT_T_33WP3_6A
+    :response_type: text
+    :user_defined: true
 employment:
   EMP_INPUT_B_3WP3_62A:
     :value: true
