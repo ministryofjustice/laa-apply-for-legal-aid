@@ -42,6 +42,98 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'car and vehicle entity' do
+        context 'car and vehicle present' do
+          it 'creates the entity' do
+            entity_block = XmlExtractor.call(xml, :vehicle_entity)
+            expect(entity_block).to be_present
+          end
+
+          context 'CARANDVEH_INPUT_B_14WP2_28A - In regular use' do
+            it 'is flase' do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_B_14WP2_28A')
+              expect(block).to have_boolean_response legal_aid_application.vehicle.used_regularly?
+            end
+          end
+
+          context 'CARANDVEH_INPUT_D_14WP2_27A - Date of purchase' do
+            it 'is populated with the purchase date' do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_D_14WP2_27A')
+              expect(block).to have_date_response legal_aid_application.vehicle.purchased_on.strftime('%d-%m-%Y')
+            end
+          end
+
+          context 'CARANDVEH_INPUT_T_14WP2_20A - Make of vehicle' do
+            it "is populated with 'Make: unspecified'" do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_T_14WP2_20A')
+              expect(block).to have_text_response('Make: unspecified')
+            end
+          end
+
+          context 'CARANDVEH_INPUT_T_14WP2_21A - Model of vehicle' do
+            it "is populated with 'Model: unspecified'" do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_T_14WP2_21A')
+              expect(block).to have_text_response('Model: unspecified')
+            end
+          end
+
+          context 'CARANDVEH_INPUT_T_14WP2_22A - Registration number' do
+            it "is populated with 'Registration number: unspecified'" do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_T_14WP2_22A')
+              expect(block).to have_text_response('Registration number: unspecified')
+            end
+          end
+
+          context 'CARANDVEH_INPUT_C_14WP2_24A - Purchase price' do
+            it 'is populated with zero' do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_24A')
+              expect(block).to have_currency_response('0.00')
+            end
+          end
+
+          context 'CARANDVEH_INPUT_C_14WP2_25A - Current market value' do
+            it 'is populated with the estimated value' do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_25A')
+              expect(block).to have_currency_response(format('%.2f', legal_aid_application.vehicle.estimated_value))
+            end
+          end
+
+          context 'CARANDVEH_INPUT_C_14WP2_26A - Value of loan outstanding' do
+            it 'is populated with the payment remaining' do
+              block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_26A')
+              expect(block).to have_currency_response(format('%.2f', legal_aid_application.vehicle.payment_remaining))
+            end
+          end
+        end
+
+        context 'no car an vehicle present' do
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   with_bank_accounts: 2,
+                   vehicle: nil,
+                   proceeding_types: [proceeding_type]
+          end
+
+          it 'does not generate the vehicle entity' do
+            block = XmlExtractor.call(xml, :vehicle_entity)
+            expect(block).not_to be_present, "Expected block for vehicle entity not to be generated, but was \n #{block}"
+          end
+
+          it 'assigns the sequence number to the next entity one higher than that for bank accounts' do
+            bank_acount_entity = XmlExtractor.call(xml, :bank_accounts_entity)
+            doc = Nokogiri::XML(bank_acount_entity.to_s)
+            bank_account_sequence = doc.xpath('//SequenceNumber').text.to_i
+
+            wage_slip_entity = XmlExtractor.call(xml, :wage_slip_entity)
+            doc = Nokogiri::XML(wage_slip_entity.to_s)
+            wage_slip_sequence = doc.xpath('//SequenceNumber').text.to_i
+            expect(wage_slip_sequence).to eq bank_account_sequence + 1
+          end
+        end
+      end
+
       context 'ProceedingCaseId' do
         context 'ProceedingCaseId section' do
           it 'has a p number' do
