@@ -18,7 +18,14 @@ module CCMS
 
       it 'generates the expected XML' do
         allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-        expect(requestor.formatted_xml).to eq expected_xml.chomp
+        expect(requestor.formatted_xml).to be_soap_envelope_with(
+          command: 'ns2:ClientInqRQ',
+          transaction_id: expected_tx_id,
+          matching: [
+            "<ns5:Surname>#{applicant.last_name}</ns5:Surname>",
+            "<ns5:FirstName>#{applicant.first_name}</ns5:FirstName>"
+          ]
+        )
       end
     end
 

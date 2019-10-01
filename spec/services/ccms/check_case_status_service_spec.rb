@@ -37,10 +37,21 @@ RSpec.describe CCMS::CheckCaseStatusService do
             expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
             expect(history.from_state).to eq 'case_submitted'
             expect(history.to_state).to eq 'case_submitted'
-            expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq case_add_status_request
-            expect(history.request).to_not be_nil
             expect(history.success).to be true
             expect(history.details).to be_nil
+          end
+
+          it 'stores the reqeust body in the  submission history record' do
+            subject.call
+            expect(history.request).to be_soap_envelope_with(
+              command: 'ns2:CaseAddUpdtStatusRQ',
+              transaction_id: '20190101121530123456'
+            )
+          end
+
+          it 'stores the response body in the submission history record' do
+            subject.call
+            expect(history.response).to eq case_add_status_response
           end
         end
 
@@ -61,10 +72,21 @@ RSpec.describe CCMS::CheckCaseStatusService do
             expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
             expect(history.from_state).to eq 'case_submitted'
             expect(history.to_state).to eq 'failed'
-            expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq case_add_status_request
-            expect(history.request).to_not be_nil
             expect(history.success).to be false
             expect(history.details).to eq 'Poll limit exceeded'
+          end
+
+          it 'stores the reqeust body in the  submission history record' do
+            subject.call
+            expect(history.request).to be_soap_envelope_with(
+              command: 'ns2:CaseAddUpdtStatusRQ',
+              transaction_id: '20190101121530123456'
+            )
+          end
+
+          it 'does not store a response body in the submission history record' do
+            subject.call
+            expect(history.response).to be_nil
           end
         end
       end
@@ -85,10 +107,23 @@ RSpec.describe CCMS::CheckCaseStatusService do
           expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
           expect(history.from_state).to eq 'case_submitted'
           expect(history.to_state).to eq 'case_created'
-          expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq case_add_status_request
+          expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n" + history.request).to eq case_add_status_request
           expect(history.request).to_not be_nil
           expect(history.success).to be true
           expect(history.details).to be_nil
+        end
+
+        it 'stores the reqeust body in the  submission history record' do
+          subject.call
+          expect(history.request).to be_soap_envelope_with(
+            command: 'ns2:CaseAddUpdtStatusRQ',
+            transaction_id: '20190101121530123456'
+          )
+        end
+
+        it 'stores the response body in the submission history record' do
+          subject.call
+          expect(history.response).to eq case_add_status_response
         end
       end
     end
@@ -114,11 +149,24 @@ RSpec.describe CCMS::CheckCaseStatusService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'case_submitted'
         expect(history.to_state).to eq 'failed'
-        expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq case_add_status_request
+        expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n" + history.request).to eq case_add_status_request
         expect(history.request).to_not be_nil
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
+      end
+
+      it 'stores the reqeust body in the  submission history record' do
+        subject.call
+        expect(history.request).to be_soap_envelope_with(
+          command: 'ns2:CaseAddUpdtStatusRQ',
+          transaction_id: '20190101121530123456'
+        )
+      end
+
+      it 'does not store the response body in the submission history record' do
+        subject.call
+        expect(history.response).to be_nil
       end
     end
   end

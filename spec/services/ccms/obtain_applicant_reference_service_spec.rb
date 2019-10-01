@@ -1,98 +1,100 @@
 require 'rails_helper'
 
-RSpec.describe CCMS::ObtainApplicantReferenceService do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
-  let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
-  let(:applicant_search_request) { ccms_data_from_file 'applicant_search_request.xml' }
-  let(:applicant_search_requestor) { double CCMS::ApplicantSearchRequestor }
-  subject { described_class.new(submission) }
+module CCMS
+  RSpec.describe ObtainApplicantReferenceService do
+    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, populate_vehicle: true }
+    let(:applicant) { legal_aid_application.applicant }
+    let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
+    let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
+    let(:request_body) { ccms_data_from_file 'applicant_search_request.xml' }
+    let(:response_body) { ccms_data_from_file 'applicant_search_response_one_result.xml' }
+    let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/ClientServices/ClientServices_ep' }
 
-  before do
-    allow(subject).to receive(:applicant_search_requestor).and_return(applicant_search_requestor)
-  end
+    subject { described_class.new(submission) }
 
-  context 'operation successful' do
+    around do |example|
+      VCR.turn_off!
+      example.run
+      VCR.turn_on!
+    end
+
     before do
-      allow(applicant_search_requestor).to receive(:formatted_xml).and_return(applicant_search_request)
-      expect(applicant_search_requestor).to receive(:call).and_return(applicant_search_response)
-      expect(applicant_search_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+      # stub a post request - any body, any headers
+      stub_request(:post, endpoint).to_return(body: response_body, status: 200)
+
+      # stub the transaction request id that we expect in the response
+      allow_any_instance_of(ApplicantSearchRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
     end
 
-    context 'applicant exists on the CCMS system' do
-      let(:applicant_search_response) { ccms_data_from_file 'applicant_search_response_one_result.xml' }
-      let(:transaction_request_id_in_example_response) { '20190301030405123456' }
-      let(:applicant_ccms_reference_in_example_response) { '4390016' }
+    context 'operation successful' do
+      context 'applicant exists on the CCMS system' do
+        let(:applicant_ccms_reference_in_example_response) { '4390016' }
 
-      it 'updates the applicant_ccms_reference' do
-        subject.call
-        expect(submission.applicant_ccms_reference).to eq applicant_ccms_reference_in_example_response
-      end
+        it 'updates the applicant_ccms_reference' do
+          subject.call
+          expect(submission.applicant_ccms_reference).to eq applicant_ccms_reference_in_example_response
+        end
 
-      it 'sets the state to applicant_ref_obtained' do
-        subject.call
-        expect(submission.aasm_state).to eq 'applicant_ref_obtained'
-      end
+        it 'sets the state to applicant_ref_obtained' do
+          subject.call
+          expect(submission.aasm_state).to eq 'applicant_ref_obtained'
+        end
 
-      it 'writes a history record' do
-        expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'case_ref_obtained'
-        expect(history.to_state).to eq 'applicant_ref_obtained'
-        expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq applicant_search_request
-        expect(history.request).to_not be_nil
-        expect(history.success).to be true
-        expect(history.details).to be_nil
-      end
-    end
+        it 'writes a history record' do
+          expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+          expect(history.from_state).to eq 'case_ref_obtained'
+          expect(history.to_state).to eq 'applicant_ref_obtained'
+          expect(history.success).to be true
+          expect(history.details).to be_nil
+        end
 
-    context 'applicant does not exist on the CCMS system' do
-      let(:applicant_search_response) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
-      let(:transaction_request_id_in_example_response) { '20190301030405123456' }
-      let(:add_applicant_service_double) { CCMS::AddApplicantService.new(submission) }
+        it 'stores the reqeust body in the submission history record' do
+          subject.call
+          expect(history.request).to be_soap_envelope_with(
+            command: 'ns2:ClientInqRQ',
+            transaction_id: '20190301030405123456',
+            matching: [
+              "<ns5:Surname>#{applicant.last_name}</ns5:Surname>",
+              "<ns5:FirstName>#{applicant.first_name}</ns5:FirstName>"
+            ]
+          )
+        end
 
-      it 'calls the add_applicant_service' do
-        expect(CCMS::AddApplicantService).to receive(:new).with(submission).and_return(add_applicant_service_double)
-        expect(add_applicant_service_double).to receive(:call)
-        subject.call
-      end
-    end
-  end
-
-  context 'operation in error' do
-    context 'error when searching for applicant' do
-      before do
-        allow(applicant_search_requestor).to receive(:formatted_xml).and_return(applicant_search_request)
-        allow(applicant_search_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(digits: 8))
-        expect(applicant_search_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
-      end
-
-      it 'puts it into failed state' do
-        subject.call
-        expect(submission.aasm_state).to eq 'failed'
-      end
-
-      it 'records the error in the submission history' do
-        expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-        expect(history.from_state).to eq 'case_ref_obtained'
-        expect(history.to_state).to eq 'failed'
-        expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n"+history.request).to eq applicant_search_request
-        expect(history.request).to_not be_nil
-        expect(history.success).to be false
-        expect(history.details).to match(/CCMS::CcmsError/)
-        expect(history.details).to match(/oops/)
+        it 'stores the response body in the submission history record' do
+          subject.call
+          expect(history.response).to eq response_body
+        end
       end
     end
-  end
 
-  # private method tested here because it is mocked out above
-  #
-  describe '#applicant_search_requestor' do
-    let(:service_double) { CCMS::ObtainApplicantReferenceService.new(submission) }
-    let(:requestor1) { service_double.__send__(:applicant_search_requestor) }
-    let(:requestor2) { service_double.__send__(:applicant_search_requestor) }
-    it 'only instantiates one copy of the ApplicantSearchRequestor' do
-      expect(requestor1).to be_instance_of(CCMS::ApplicantSearchRequestor)
-      expect(requestor1).to eq requestor2
+    context 'operation in error' do
+      context 'error when searching for applicant' do
+        before do
+          expect_any_instance_of(ApplicantSearchRequestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
+        end
+
+        it 'puts it into failed state' do
+          subject.call
+          expect(submission.aasm_state).to eq 'failed'
+        end
+
+        it 'records the error in the submission history' do
+          expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+          expect(history.from_state).to eq 'case_ref_obtained'
+          expect(history.to_state).to eq 'failed'
+          expect(history.success).to be false
+          expect(history.details).to match(/CCMS::CcmsError/)
+          expect(history.details).to match(/oops/)
+          expect(history.request).to be_soap_envelope_with(
+            command: 'ns2:ClientInqRQ',
+            transaction_id: '20190301030405123456',
+            matching: [
+              "<ns5:Surname>#{applicant.last_name}</ns5:Surname>",
+              "<ns5:FirstName>#{applicant.first_name}</ns5:FirstName>"
+            ]
+          )
+        end
+      end
     end
   end
 end

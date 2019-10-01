@@ -37,7 +37,7 @@ module CCMS
         pretty_print_xml: true,
         convert_request_keys_to: :none,
         namespace_identifier: 'ns2',
-        log: true,
+        log: false,
         log_level: :debug
       )
     end
@@ -55,19 +55,17 @@ module CCMS
     def soap_header(xml)
       xml.__send__('ns1:Security') do
         xml.__send__('ns1:UsernameToken') do
-          xml.__send__('ns1:Username', config.client_username)
-          xml.__send__('ns1:Password', 'Type' => config.client_password_type) do
-            xml.text(config.client_password)
-          end
+          xml.__send__('ns1:Username', Rails.configuration.x.ccms_soa.client_username)
+          xml.__send__('ns1:Password', 'Type' => Rails.configuration.x.ccms_soa.client_password_type) { xml.text Rails.configuration.x.ccms_soa.client_password }
         end
       end
     end
 
-    def ns3_header_rq(xml, provider_username)
+    def ns3_header_rq(xml, _provider_username)
       xml.__send__('ns3:TransactionRequestID', transaction_request_id)
       xml.__send__('ns3:Language', 'ENG')
-      xml.__send__('ns3:UserLoginID', provider_username)
-      xml.__send__('ns3:UserRole', config.user_role)
+      xml.__send__('ns3:UserLoginID', Rails.configuration.x.ccms_soa.user_login)
+      xml.__send__('ns3:UserRole', Rails.configuration.x.ccms_soa.user_role)
     end
 
     def wsdl_location

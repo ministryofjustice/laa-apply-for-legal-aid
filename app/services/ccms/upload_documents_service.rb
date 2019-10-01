@@ -1,6 +1,6 @@
 module CCMS
   class UploadDocumentsService < BaseSubmissionService
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       submission.submission_document.each do |document|
         upload_document(document)
       end
@@ -8,12 +8,12 @@ module CCMS
       failed_uploads = submission.submission_document.select { |document| document.status == 'failed' }
 
       if failed_uploads.empty?
-        create_history('case_created', submission.aasm_state, xml_request) if submission.complete!
+        create_history('case_created', submission.aasm_state, nil, nil) if submission.complete!
       else
-        handle_failure("#{failed_uploads} failed to upload to CCMS", xml_request)
+        raise CcmsError, "The following documents failed to upload: #{failed_uploads.map(&:id).join(', ')}"
       end
     rescue CcmsError => e
-      handle_failure(e, xml_request)
+      handle_exception(e, nil)
     end
 
     private
@@ -21,8 +21,7 @@ module CCMS
     def upload_document(document)
       document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference,
                                                               document.ccms_document_id,
-                                                              Base64.strict_encode64(pdf_binary(document)),
-                                                              submission.legal_aid_application.provider.username)
+                                                              Base64.strict_encode64(pdf_binary(document)))
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
       update_document_status(document, tx_id, response)
@@ -51,13 +50,5 @@ module CCMS
                           :failed
                         end
     end
-
-    # def document_upload_requestor(document)
-    #   @document_upload_requestor ||= DocumentUploadRequestor.new(submission.case_ccms_reference, document.ccms_document_id, Base64.strict_encode64(pdf_binary(document)))
-    # end
-
-    # def xml_request
-    #   @xml_request ||= document_upload_requestor.formatted_xml
-    # end
   end
 end

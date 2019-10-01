@@ -32,6 +32,7 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
       let(:case_ccms_reference) { Faker::Number.number(digits: 6).to_s }
       let(:before_subject) do
         allow_any_instance_of(CCMS::ObtainCaseReferenceService).to receive(:reference_id).and_return(case_ccms_reference)
+        allow_any_instance_of(CCMS::ObtainCaseReferenceService).to receive(:response).and_return('dummy response')
       end
 
       it 'obtains the case reference remotely' do

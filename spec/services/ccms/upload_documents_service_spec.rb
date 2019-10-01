@@ -31,21 +31,21 @@ RSpec.describe CCMS::UploadDocumentsService do
   end
 
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
-  let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, statement_of_case_id, 'base64encodedpdf', 'my_login') }
+  # let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, statement_of_case_id, 'base64encodedpdf', 'my_login') }
   let(:document_upload_response) { ccms_data_from_file 'document_upload_response.xml' }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   subject { described_class.new(submission) }
 
   before do
     PdfConverter.call(PdfFile.find_or_create_by(original_file_id: statement_of_case_id).id)
-    allow(CCMS::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
-    allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+    # allow(CCMS::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
+    # allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
   end
 
   context 'operation successful' do
-    before do
-      allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
-    end
+    # before do
+    #   allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
+    # end
 
     it 'creates a DocumentUploadRequestor object for each document to be uploaded' do
       expect(CCMS::DocumentUploadRequestor).to receive(:new).exactly(submission.submission_document.count).times

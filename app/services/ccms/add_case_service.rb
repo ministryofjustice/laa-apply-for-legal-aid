@@ -4,16 +4,16 @@ module CCMS
       new(submission).call(options)
     end
 
-    def call(options = {})
+    def call(options = {}) # rubocop:disable Metrics/AbcSize
       @options = options
       if case_add_response_parser.success?
         submission.case_add_transaction_id = case_add_requestor.transaction_request_id
-        create_history(submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained', submission.aasm_state, xml_request) if submission.submit_case!
+        create_history(submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained', submission.aasm_state, xml_request, response) if submission.submit_case!
       else
-        handle_failure(response, xml_request)
+        handle_unsuccessful_response(xml_request, response)
       end
     rescue CcmsError => e
-      handle_failure(e, xml_request)
+      handle_exception(e, xml_request)
     end
 
     private

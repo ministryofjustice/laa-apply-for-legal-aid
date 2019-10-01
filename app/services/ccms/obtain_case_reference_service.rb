@@ -2,9 +2,9 @@ module CCMS
   class ObtainCaseReferenceService < BaseSubmissionService
     def call
       submission.case_ccms_reference = reference_id
-      create_history(:initialised, submission.aasm_state, xml_request) if submission.obtain_case_ref!
+      create_history(:initialised, submission.aasm_state, xml_request, response) if submission.obtain_case_ref!
     rescue CcmsError => e
-      handle_failure(e, xml_request)
+      handle_exception(e, xml_request)
     end
 
     def reference_id
@@ -12,7 +12,7 @@ module CCMS
     end
 
     def response
-      reference_data_requestor.call
+      @response ||= reference_data_requestor.call
     end
 
     def transaction_request_id
@@ -26,7 +26,7 @@ module CCMS
     end
 
     def xml_request
-      @xml_request ||= reference_data_requestor.formatted_xml
+      reference_data_requestor.request_xml
     end
   end
 end

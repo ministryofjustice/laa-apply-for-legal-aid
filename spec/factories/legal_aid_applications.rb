@@ -174,7 +174,7 @@ FactoryBot.define do
     end
 
     trait :with_everything do
-      with_applicant
+      with_applicant_and_address
       provider_submitted
       with_savings_amount
       with_other_assets_declaration
