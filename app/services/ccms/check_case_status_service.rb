@@ -3,6 +3,7 @@ module CCMS
     def call
       tx_id = case_add_status_requestor.transaction_request_id
       submission.case_poll_count += 1
+      submission.save
       parser = CaseAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
     rescue CcmsError => e
