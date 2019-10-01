@@ -28,6 +28,7 @@ module CFE
         allow(CreateCapitalsService).to receive(:call).and_return(true)
         allow(CreatePropertiesService).to receive(:call).and_return(true)
         allow(CreateVehiclesService).to receive(:call).and_return(true)
+        allow(ObtainAssessmentResultService).to receive(:call).and_return(true)
       end
 
       it 'creates a submission record' do
@@ -40,7 +41,7 @@ module CFE
         expect(CreateCapitalsService).to receive(:call).and_return(true)
         expect(CreatePropertiesService).to receive(:call).and_return(true)
         expect(CreateVehiclesService).to receive(:call).and_return(true)
-        expect(ObtainResultsService).to receive(:call).and_return(true)
+        expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
         submission_manager.call
       end
 
