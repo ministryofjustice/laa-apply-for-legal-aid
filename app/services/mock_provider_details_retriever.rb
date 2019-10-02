@@ -20,13 +20,37 @@ class MockProviderDetailsRetriever
 
   private
 
-  def provider_details
+  def provider_details # rubocop:disable Metrics/MethodLength
+    if username == 'NEETADESOR'
+      {
+        providerOffices: Array.new(1) do |office_index|
+          provider_office_ccms(office_index)
+        end,
+        contactId: '2016472',
+        contactName: contact_name
+      }
+    else
+      {
+        providerOffices: Array.new(number_of_offices) do |office_index|
+          provider_office(office_index)
+        end,
+        contactId: username_number * 3,
+        contactName: contact_name
+      }
+    end
+  end
+
+  def provider_office_ccms(_office_index)
+    office_id = 19_148
+
+    office_number = "office_#{office_id}"
+
     {
-      providerOffices: Array.new(number_of_offices) do |office_index|
-        provider_office(office_index)
-      end,
-      contactId: username_number * 3,
-      contactName: contact_name
+      providerfirmId: '19148',
+      officeId: '81693',
+      officeName: "Desor & Co._#{office_number}",
+      smsVendorNum: ((office_id + firm_id) * 4).to_s,
+      smsVendorSite: office_number
     }
   end
 

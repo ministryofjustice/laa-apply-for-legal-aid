@@ -22,6 +22,7 @@ module CCMS
       @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
       @ccms_attribute_keys = YAML.load_file(File.join(Rails.root, 'config', 'ccms', 'ccms_keys.yml'))
       @attribute_value_generator = AttributeValueGenerator.new(@submission)
+      @provider = submission.legal_aid_application.provider
     end
 
     def call
@@ -53,7 +54,7 @@ module CCMS
     def header_request(xml)
       xml.__send__('ns6:TransactionRequestID', transaction_request_id)
       xml.__send__('ns6:Language', 'ENG') # TODO: CCMS placeholder
-      xml.__send__('ns6:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
+      xml.__send__('ns6:UserLoginID', @provider.username)
       xml.__send__('ns6:UserRole', 'EXTERNAL') # TODO: CCMS placeholder
     end
 
@@ -114,8 +115,8 @@ module CCMS
     def generate_record_history(xml)
       xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
       xml.__send__('ns0:LastUpdatedBy') do
-        xml.__send__('ns0:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
-        xml.__send__('ns0:UserName', 'NEETADESOR') # TODO: CCMS placeholder
+        xml.__send__('ns0:UserLoginID', @provider.username)
+        xml.__send__('ns0:UserName', @provider.username)
         xml.__send__('ns0:UserType', 'EXTERNAL') # TODO: CCMS placeholder
       end
       xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
