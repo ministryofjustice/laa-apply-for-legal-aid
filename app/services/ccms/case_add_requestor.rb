@@ -143,9 +143,9 @@ module CCMS
     end
 
     def generate_category_of_law(xml)
-      xml.__send__('ns2:CategoryOfLawCode', 'MAT') # TODO: replace with lead_proceeding.ccms_category_law_code when it is available in Apply
-      xml.__send__('ns2:CategoryOfLawDescription', 'Family') # TODO: insert lead_proceeding.ccms_category_law when it is available in Apply
-      xml.__send__('ns2:RequestedAmount', '5000.0') # TODO: replace with as_currency(@legal_aid_application.requested_amount)) when it is available in Apply
+      xml.__send__('ns2:CategoryOfLawCode', @legal_aid_application.lead_proceeding_type.ccms_category_law_code)
+      xml.__send__('ns2:CategoryOfLawDescription', @legal_aid_application.lead_proceeding_type.ccms_category_law)
+      xml.__send__('ns2:RequestedAmount', @legal_aid_application.default_cost_limitation)
     end
 
     def generate_proceedings(xml)
