@@ -61,6 +61,10 @@ module CFE
           it_behaves_like 'a failed call to CFE'
         end
       end
+
+      describe 'failed calls to CFE' do
+        it_behaves_like 'a failed call to CFE', CreateApplicantService, 'applicant'
+      end
     end
 
     def expected_payload_hash

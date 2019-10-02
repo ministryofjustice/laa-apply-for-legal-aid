@@ -15,9 +15,7 @@ module CFE
       CFE::CreateCapitalsService.call(submission)
       CFE::CreateVehiclesService.call(submission)
       CFE::CreatePropertiesService.call(submission)
-
-      # TODO: add these steps as we write the services
-      # CFE::ObtainAssessmentResultService.call(submission)
+      CFE::ObtainAssessmentResultService.call(submission)
     rescue CFE::SubmissionError => e
       submission.error_message = e.message
       submission.fail!

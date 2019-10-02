@@ -60,29 +60,38 @@ module CFE
         request.body = request_body
       end
     rescue StandardError => e
-      raise_exception_error(e)
+      catch_and_record_exception(e)
     end
 
-    def raise_exception_error(err)
+    def catch_and_record_exception(error, http_method = 'POST')
+      raise_exception_error(
+        message: formatted_error_message(error),
+        backtrace: error.backtrace&.join("\n"),
+        http_method: http_method,
+        http_status: error.respond_to?(:http_status) ? error.http_status : nil
+      )
+    end
+
+    def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
       @submission.submission_histories.create!(
         url: cfe_url,
-        http_method: 'POST',
+        http_method: http_method,
         request_payload: request_body,
-        http_response_status: err.respond_to?(:http_status) ? err.http_status : nil,
-        error_message: formatted_error_message(err),
-        error_backtrace: err.backtrace.join("\n")
+        http_response_status: http_status,
+        error_message: message,
+        error_backtrace: backtrace
       )
-      raise CFE::SubmissionError.new(formatted_error_message(err), err)
+      raise CFE::SubmissionError.new(message, http_status)
     end
 
     def formatted_error_message(err)
       "#{self.class} received #{err.class}: #{err.message}"
     end
 
-    def write_submission_history(raw_response)
+    def write_submission_history(raw_response, http_method = 'POST')
       @submission.submission_histories.create!(
         url: cfe_url,
-        http_method: 'POST',
+        http_method: http_method,
         request_payload: request_body,
         http_response_status: raw_response.status,
         response_payload: raw_response.body,

@@ -302,4 +302,69 @@ http_interactions:
       string: '{"objects":[{"id":"7d5d1825-0de3-4ed5-a5e9-b1c366daa842","value":"727864.08","outstanding_mortgage":"188024.24","percentage_owned":"43.75","main_home":true,"shared_with_housing_assoc":false,"created_at":"2019-09-26T10:17:17.688Z","updated_at":"2019-09-26T10:17:17.688Z","capital_summary_id":"02e0714f-0543-4ff3-bb73-500bdc46889d","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"c7d5f438-76f6-4e7d-89e3-f5a03ca0d24a","value":"897453.03","outstanding_mortgage":"73722.46","percentage_owned":"66.32","main_home":false,"shared_with_housing_assoc":false,"created_at":"2019-09-26T10:17:17.701Z","updated_at":"2019-09-26T10:17:17.701Z","capital_summary_id":"02e0714f-0543-4ff3-bb73-500bdc46889d","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
     http_version: 
   recorded_at: Thu, 26 Sep 2019 10:17:17 GMT
+- request:
+    method: get
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/82c29e5a-58ff-4fc1-8d3e-fab96505893e
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.15.8
+      Date:
+      - Tue, 01 Oct 2019 16:24:01 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"bfd127548bb99e85b4fabfc4e65c2609"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a75132441fde7287ed98274191dabda5
+      X-Runtime:
+      - '0.180821'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: '{"assessment_result":"not_eligible","applicant":{"receives_qualifying_benefit":false,"age_at_submission":44},"capital":{"total_liquid":"3324227.56","total_non_liquid":"3516893.68","pensioner_capital_disregard":"0.0","total_capital":"7566954.53","capital_contribution":"0.0","liquid_capital_items":[{"description":"Off-line
+        bank accounts","value":"256813.96"},{"description":"Cash","value":"929463.53"},{"description":"Signatory
+        on other person''s account","value":"247263.33"},{"description":"National
+        savings","value":"631488.6"},{"description":"Shares in PLC","value":"30317.69"},{"description":"PEPs,
+        unit trusts, capital bonds and government stocks","value":"267758.38"},{"description":"Life
+        assurance and endowment policies not linked to a mortgage","value":"961122.07"}],"non_liquid_capital_items":[{"description":"Timeshare
+        property","value":"98807.39"},{"description":"Land","value":"825874.26"},{"description":"Valuable
+        items","value":"406113.56"},{"description":"Inherited assets","value":"512724.02"},{"description":"Money
+        owed to applicant","value":"758681.72"},{"description":"Trusts","value":"914692.73"}]},"property":{"total_mortgage_allowance":"100000.0","total_property":"725833.29","main_home":{"value":"727864.08","transaction_allowance":"21835.92","allowable_outstanding_mortgage":"26277.54","percentage_owned":"43.75","net_equity":"297390.9","main_home_equity_disregard":"100000.0","assessed_equity":"197390.9","shared_with_housing_assoc":false},"additional_properties":[{"value":"897453.03","transaction_allowance":"26923.59","allowable_outstanding_mortgage":"73722.46","percentage_owned":"66.32","assessed_equity":"528442.39"}]},"vehicles":{"total_vehicle":"0.0","vehicles":[{"in_regular_use":true,"value":"4069.0","loan_amount_outstanding":"873.0","date_of_purchase":"2002-10-01","included_in_assessment":false,"assessed_value":"0.0"}]}}'
+    http_version: 
+  recorded_at: Tue, 01 Oct 2019 16:22:12 GMT
 recorded_with: VCR 5.0.0
