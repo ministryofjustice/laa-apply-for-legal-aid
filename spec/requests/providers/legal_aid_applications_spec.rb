@@ -5,6 +5,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
     let(:legal_aid_application) { create :legal_aid_application }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
+    let(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
     let(:params) { {} }
     subject { get providers_legal_aid_applications_path(params) }
 
@@ -29,11 +30,24 @@ RSpec.describe 'providers legal aid application requests', type: :request do
       end
 
       context 'when legal_aid_application current path set' do
+        let!(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
         let!(:legal_aid_application) { create :legal_aid_application, provider_step: :applicant_details }
+        let!(:other_provider_in_same_firm_application) { create :legal_aid_application, provider: other_provider_in_same_firm, provider_step: :applicant_details }
+        let!(:other_provider_application) { create :legal_aid_application, provider: other_provider, provider_step: :applicant_details }
 
         it "includes a link to the legal aid application's current path" do
           subject
           expect(response.body).to include(providers_legal_aid_application_applicant_details_path(legal_aid_application))
+        end
+
+        it 'includes a link to the application of the other provider in the same firm' do
+          subject
+          expect(response.body).to include(providers_legal_aid_application_applicant_details_path(other_provider_in_same_firm_application))
+        end
+
+        it 'does not include a link to the application of the provider in a different firm' do
+          subject
+          expect(response.body).not_to include(providers_legal_aid_application_applicant_details_path(other_provider_application))
         end
       end
 
