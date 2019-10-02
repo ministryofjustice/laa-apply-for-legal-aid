@@ -5,7 +5,10 @@ RSpec.describe SmokeTest::TestEmails do
   describe '.call', :vcr do
     subject { described_class.call }
 
-    before { ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear }
+    before do
+      ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
+      allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
+    end
 
     it 'sends a feedback email' do
       expect_any_instance_of(FeedbackMailer).to receive(:notify).and_call_original
