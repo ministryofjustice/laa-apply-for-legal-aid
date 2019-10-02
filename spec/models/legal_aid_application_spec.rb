@@ -400,6 +400,12 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#opponents' do
+    it 'returns the opponent data' do
+      expect(legal_aid_application.opponents).to eq [Opponent.dummy_opponent]
+    end
+  end
+
   describe '#opponent_other_parties' do
     it 'returns the opponent other parties data' do
       expect(legal_aid_application.opponent_other_parties).to eq [Opponent.dummy_opponent]

@@ -975,11 +975,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'GBR'
         end
 
-        it 'RELATIONSHIP_TO_CLIENT should be hard coded to UNKNOWN' do
-          block = XmlExtractor.call(xml, :global_merits, 'RELATIONSHIP_TO_CLIENT')
-          expect(block).to have_text_response 'UNKNOWN'
-        end
-
         it 'MARITIAL_STATUS should be hard coded to UNKNOWN' do
           block = XmlExtractor.call(xml, :global_means, 'MARITIAL_STATUS')
           expect(block).to have_text_response 'UNKNOWN'
@@ -1005,16 +1000,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             block = XmlExtractor.call(xml, entity, attribute)
             expect(block).to have_text_response 'NEW'
           end
-        end
-
-        it 'RELATIONSHIP_TO_CASE should be hard coded to OPP' do
-          block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_TO_CASE')
-          expect(block).to have_text_response 'OPP'
-        end
-
-        it 'OTHER_PARTY_TYPE should be hard coded to PERSON' do
-          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_TYPE')
-          expect(block).to have_text_response 'PERSON'
         end
 
         it 'POA_OR_BILL_FLAG should be hard coded to N/A' do
@@ -1067,11 +1052,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
           block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
           expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
-        end
-
-        it 'OTHER_PARTY_NAME should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
-          expect(block).to have_text_response 'APPLY service application. See uploaded statement of case'
         end
       end
 
@@ -1188,6 +1168,90 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'returns Both' do
             expect(block).to have_text_response 'Both'
           end
+        end
+      end
+
+      context 'dummy opponent' do
+        it 'harcodes OPP_RELATIONSHIP_TO_CASE' do
+          block = XmlExtractor.call(xml, :opponent, 'OPP_RELATIONSHIP_TO_CASE')
+          expect(block).to have_text_response 'Opponent'
+        end
+
+        it 'harcodes OPP_RELATIONSHIP_TO_CLIENT' do
+          block = XmlExtractor.call(xml, :opponent, 'OPP_RELATIONSHIP_TO_CLIENT')
+          expect(block).to have_text_response 'None'
+        end
+
+        it 'harcodes OTHER_PARTY_ID' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_ID')
+          expect(block).to have_text_response 'OPPONENT_7713451'
+        end
+
+        it 'harcodes OTHER_PARTY_NAME' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
+          expect(block).to have_text_response 'APPLY service application'
+        end
+
+        it 'harcodes OTHER_PARTY_NAME_MERITS' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME_MERITS')
+          expect(block).to have_text_response 'APPLY service application'
+        end
+
+        it 'harcodes OTHER_PARTY_ORG' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_ORG')
+          expect(block).to have_boolean_response true
+        end
+
+        it 'harcodes OTHER_PARTY_TYPE' do
+          block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_TYPE')
+          expect(block).to have_text_response 'ORGANISATION'
+        end
+
+        it 'harcodes RELATIONSHIP_CASE_OPPONENT' do
+          block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_CASE_OPPONENT')
+          expect(block).to have_boolean_response true
+        end
+
+        it 'harcodes RELATIONSHIP_NONE' do
+          block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_NONE')
+          expect(block).to have_boolean_response true
+        end
+
+        it 'harcodes RELATIONSHIP_TO_CASE' do
+          block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_TO_CASE')
+          expect(block).to have_text_response 'OPP'
+        end
+
+        it 'harcodes RELATIONSHIP_TO_CLIENT' do
+          block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_TO_CLIENT')
+          expect(block).to have_text_response 'OPP'
+        end
+      end
+
+      context 'dummy other_party' do
+        it 'harcodes OTHER_PARTY_ID' do
+          block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_ID')
+          expect(block).to have_text_response 'OPPONENT_7713451'
+        end
+
+        it 'harcodes OTHER_PARTY_NAME' do
+          block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_NAME')
+          expect(block).to have_text_response 'APPLY service application'
+        end
+
+        it 'harcodes OTHER_PARTY_TYPE' do
+          block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_TYPE')
+          expect(block).to have_text_response 'ORGANISATION'
+        end
+
+        it 'harcodes RELATIONSHIP_TO_CASE' do
+          block = XmlExtractor.call(xml, :other_party, 'RELATIONSHIP_TO_CASE')
+          expect(block).to have_text_response 'OPP'
+        end
+
+        it 'harcodes RELATIONSHIP_TO_CLIENT' do
+          block = XmlExtractor.call(xml, :other_party, 'RELATIONSHIP_TO_CLIENT')
+          expect(block).to have_text_response 'UNKNOWN'
         end
       end
     end
@@ -1466,40 +1530,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'URGENT_APPLICATION_TAG'],
       [:global_merits, 'URGENT_DIRECTIONS'],
       [:global_merits, 'CHILD_MUST_BE_INCLUDED'],
-      [:opponent, 'OPP_RELATIONSHIP_TO_CASE'],
-      [:opponent, 'OPP_RELATIONSHIP_TO_CLIENT'],
-      [:opponent, 'OTHER_PARTY_NAME_MERITS'],
-      [:opponent, 'OTHER_PARTY_ORG'],
-      [:opponent, 'OTHER_PARTY_PERSON'],
-      [:opponent, 'PARTY_IS_A_CHILD'],
-      [:opponent, 'RELATIONSHIP_CASE_AGENT'],
-      [:opponent, 'RELATIONSHIP_CASE_BENEFICIARY'],
-      [:opponent, 'RELATIONSHIP_CASE_CHILD'],
-      [:opponent, 'RELATIONSHIP_CASE_GAL'],
-      [:opponent, 'RELATIONSHIP_CASE_INT_PARTY'],
-      [:opponent, 'RELATIONSHIP_CASE_INTERVENOR'],
-      [:opponent, 'RELATIONSHIP_CASE_OPPONENT'],
-      [:opponent, 'RELATIONSHIP_CHILD'],
-      [:opponent, 'RELATIONSHIP_CIVIL_PARTNER'],
-      [:opponent, 'RELATIONSHIP_CUSTOMER'],
-      [:opponent, 'RELATIONSHIP_EMPLOYEE'],
-      [:opponent, 'RELATIONSHIP_EMPLOYER'],
-      [:opponent, 'RELATIONSHIP_EX_CIVIL_PARTNER'],
-      [:opponent, 'RELATIONSHIP_EX_HUSBAND_WIFE'],
-      [:opponent, 'RELATIONSHIP_GRANDPARENT'],
-      [:opponent, 'RELATIONSHIP_HUSBAND_WIFE'],
-      [:opponent, 'RELATIONSHIP_LANDLORD'],
-      [:opponent, 'RELATIONSHIP_LEGAL_GUARDIAN'],
-      [:opponent, 'RELATIONSHIP_LOCAL_AUTHORITY'],
-      [:opponent, 'RELATIONSHIP_MEDICAL_PRO'],
-      [:opponent, 'RELATIONSHIP_NONE'],
-      [:opponent, 'RELATIONSHIP_OTHER_FAM_MEMBER'],
-      [:opponent, 'RELATIONSHIP_PARENT'],
-      [:opponent, 'RELATIONSHIP_PROPERTY_OWNER'],
-      [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
-      [:opponent, 'RELATIONSHIP_STEP_PARENT'],
-      [:opponent, 'RELATIONSHIP_SUPPLIER'],
-      [:opponent, 'RELATIONSHIP_TENANT'],
+      [:opponent, 'OPPONENT_DOB'],
+      [:opponent, 'OPPONENT_DOB_MERITS'],
       [:proceeding, 'PROC_UPPER_TRIBUNAL'],
       [:proceeding_merits, 'ACTION_DAMAGES_AGAINST_POLICE'],
       [:proceeding_merits, 'APPEAL_IN_SUPREME_COURT'],
@@ -1803,11 +1835,34 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_merits, 'PROVIDER_CASE_REFERENCE'],
       [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
       [:global_merits, 'URGENT_FLAG'],
-      [:global_merits, 'COST_LIMIT_CHANGED'],
-      [:global_merits, 'DECLARATION_IDENTIFIER'],
-      [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
-      [:global_means, 'COST_LIMIT_CHANGED_FLAG'],
-      [:global_merits, 'PROVIDER_CASE_REFERENCE'],
+      [:opponent, 'OTHER_PARTY_PERSON'],
+      [:opponent, 'PARTY_IS_A_CHILD'],
+      [:opponent, 'RELATIONSHIP_CASE_AGENT'],
+      [:opponent, 'RELATIONSHIP_CASE_BENEFICIARY'],
+      [:opponent, 'RELATIONSHIP_CASE_CHILD'],
+      [:opponent, 'RELATIONSHIP_CASE_GAL'],
+      [:opponent, 'RELATIONSHIP_CASE_INT_PARTY'],
+      [:opponent, 'RELATIONSHIP_CASE_INTERVENOR'],
+      [:opponent, 'RELATIONSHIP_CHILD'],
+      [:opponent, 'RELATIONSHIP_CIVIL_PARTNER'],
+      [:opponent, 'RELATIONSHIP_CUSTOMER'],
+      [:opponent, 'RELATIONSHIP_EMPLOYEE'],
+      [:opponent, 'RELATIONSHIP_EMPLOYER'],
+      [:opponent, 'RELATIONSHIP_EX_CIVIL_PARTNER'],
+      [:opponent, 'RELATIONSHIP_EX_HUSBAND_WIFE'],
+      [:opponent, 'RELATIONSHIP_GRANDPARENT'],
+      [:opponent, 'RELATIONSHIP_HUSBAND_WIFE'],
+      [:opponent, 'RELATIONSHIP_LANDLORD'],
+      [:opponent, 'RELATIONSHIP_LEGAL_GUARDIAN'],
+      [:opponent, 'RELATIONSHIP_LOCAL_AUTHORITY'],
+      [:opponent, 'RELATIONSHIP_MEDICAL_PRO'],
+      [:opponent, 'RELATIONSHIP_OTHER_FAM_MEMBER'],
+      [:opponent, 'RELATIONSHIP_PARENT'],
+      [:opponent, 'RELATIONSHIP_PROPERTY_OWNER'],
+      [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
+      [:opponent, 'RELATIONSHIP_STEP_PARENT'],
+      [:opponent, 'RELATIONSHIP_SUPPLIER'],
+      [:opponent, 'RELATIONSHIP_TENANT'],
       [:proceeding_merits, 'WARNING_LETTER_SENT']
     ]
   end
