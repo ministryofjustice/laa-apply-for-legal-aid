@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :status, only: [:index]
   resource :contact, only: [:show]
+  resource :privacy_policy, only: [:show]
   resources :feedback, only: %i[new create show]
   resources :errors, only: [:show], path: :error
   resources :problem, only: :index

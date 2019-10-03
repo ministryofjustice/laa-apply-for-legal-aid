@@ -1,0 +1,98 @@
+<%= page_template page_title: t('.h1-heading') do %>
+  <h2 class="govuk-heading-m"><%= t('.what_we_collect.header') %></h2>
+
+  <p class="govuk-body"><%= t('.what_we_collect.data_we_collect') %></p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><%= t('.what_we_collect.list.item_1') %></li>
+    <li><%= t('.what_we_collect.list.item_2') %></li>
+    <li><%= t('.what_we_collect.list.item_3_html') %></li>
+    <li><%= t('.what_we_collect.list.item_4_html') %></li>
+    <li><%= t('.what_we_collect.list.item_5') %></li>
+  </ul>
+  <p class="govuk-body"><%= t('.google_analytics.why') %></p>
+
+  <p class="govuk-body"><%= t('.google_analytics.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.google_analytics' %>
+
+  <p class="govuk-body"><%= t('.google_analytics.security_information') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.why_we_need_your_data.header') %></h2>
+
+  <p class="govuk-body"><%= t('.why_we_need_your_data.list_heading') %></p>
+
+  <%= list_from_translation_path 'privacy_policies.show.why_we_need_your_data' %>
+
+  <p class="govuk-body"><%= t('.why_we_need_your_data.legal_basis_html') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.what_we_do_with_your_data.header') %></h2>
+
+  <p class="govuk-body"><%= t('.what_we_do_with_your_data.what') %></p>
+
+  <p class="govuk-body"><%= t('.what_we_do_with_your_data.we_may.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.what_we_do_with_your_data.we_may' %>
+
+  <p class="govuk-body"><%= t('.what_we_do_with_your_data.we_will_not.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.what_we_do_with_your_data.we_will_not' %>
+
+  <p class="govuk-body"><%= t('.what_we_do_with_your_data.we_will') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.where_your_data_is_processed_and_stored.header') %></h2>
+
+  <p class="govuk-body"><%= t('.where_your_data_is_processed_and_stored.info_1') %></p>
+  <p class="govuk-body"><%= t('.where_your_data_is_processed_and_stored.info_2_html') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.security.header') %></h2>
+  <p class="govuk-body"><%= t('.security.info_1') %></p>
+  <p class="govuk-body"><%= t('.security.info_2') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.data_retention_period.header') %></h2>
+  <p class="govuk-body"><%= t('.data_retention_period.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.data_retention_period' %>
+  <p class="govuk-body"><%= t('.data_retention_period.info_html') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.rights.header') %></h2>
+  <p class="govuk-body"><%= t('.rights.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.rights' %>
+  <p class="govuk-body"><%= t('.rights.info') %></p>
+
+  <p class="govuk-body">
+    <%= t('.rights.data_protection_office_contact_details.title') %>
+    <br>
+    <%= t('.rights.data_protection_office_contact_details.email_address_html') %>
+    <br>
+      <%= t('.rights.data_protection_office_contact_details.address.line_1') %>
+    <br>
+      <%= t('.rights.data_protection_office_contact_details.address.line_2') %>
+    <br>
+      <%= t('.rights.data_protection_office_contact_details.address.line_3') %>
+    <br>
+      <%= t('.rights.data_protection_office_contact_details.address.post_code') %>
+  </p>
+
+  <h2 class="govuk-heading-m"><%= t('.contact_or_complaint.header') %></h2>
+
+  <p class="govuk-body"><%= t('.contact_or_complaint.data_protection_office.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.contact_or_complaint.data_protection_office' %>
+
+  <p class="govuk-body"><%= t('.contact_or_complaint.commissioner_office.list_heading') %></p>
+  <%= list_from_translation_path 'privacy_policies.show.contact_or_complaint.commissioner_office' %>
+
+  <p class="govuk-body">
+    <%= t('.contact_or_complaint.data_protection_office.contact_details.email_address_html') %>
+    <br>
+      <%= t('.contact_or_complaint.data_protection_office.contact_details.telephone') %>
+    <br>
+      <%= t('.contact_or_complaint.data_protection_office.contact_details.text_phone') %>
+    <br>
+      <%= t('.contact_or_complaint.data_protection_office.contact_details.call_hours') %>
+    <br>
+      <%= t('.contact_or_complaint.data_protection_office.contact_details.call_costs_html') %>
+  </p>
+
+  <p class="govuk-body">
+    <% t('.contact_or_complaint.commissioner_office.address').each do |address_lines| %>
+      <%= address_lines[-1] %>
+      <br>
+    <% end %>
+  </p>
+<% end %>

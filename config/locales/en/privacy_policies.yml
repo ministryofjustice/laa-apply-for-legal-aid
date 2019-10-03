@@ -1,0 +1,108 @@
+en:
+  privacy_policies:
+    show:
+      h1-heading: Privacy policy
+      what_we_collect:
+        header: What data we collect
+        data_we_collect: "The data we collect from you includes:"
+        list:
+          item_1: personal details like your name, address, date of birth, contact details and National Insurance number
+          item_2: financial information to check if you qualify for legal aid
+          item_3_html: your Internet Protocol (IP) address, and details of which version of <a href="https://www.gov.uk/help/browsers">web browser</a> you used
+          item_4_html: information on how you use the site, using <a href="https://www.gov.uk/help/cookies">cookies</a> and page tagging techniques
+          item_5: any feedback you leave
+      google_analytics:
+        why: We use Google Analytics software to collect information about how you use the service.
+        list_heading: "Google Analytics stores information about:"
+        list: |
+          the pages you visit
+          how long you spend on each page
+          how you got to the service
+          what you click on while you’re using the service
+        security_information: We do not collect or store your personal information through Google Analytics (for example your name or address) so this information cannot be used to identify who you are.
+      why_we_need_your_data:
+        header: Why we need your data
+        list_heading: "We collect data to:"
+        list: |
+          work out whether you qualify for legal aid
+          make sure the service meets the needs of its users
+          gather statistics about the service
+          help us monitor and improve the service
+          prevent or detect crime or fraud
+          justify public expenditure
+          carry out audits to ensure that the decisions we make are correct and accurate
+        legal_basis_html: The legal basis for processing your personal data is the result of the powers contained in the <a href="http://www.legislation.gov.uk/ukpga/2012/10/contents/enacted">Legal Aid, Sentencing and Punishment of Offenders Act 2012</a>.
+      what_we_do_with_your_data:
+        header: What we do with your data
+        what: We’ll share your personal data with your solicitor so they can complete your legal aid application.
+        we_may:
+          list_heading: "We may also share your data with:"
+          list: |
+            other government departments, agencies and public bodies
+            non-public organisations such as credit reference and debt collection agencies
+            our technology suppliers, for example our hosting provider
+        we_will_not:
+          list_heading: "We will not:"
+          list: |
+            sell or rent your data to third parties
+            share your data with third parties for marketing purposes
+        we_will: We will share your data if the law requires us to – for example, by court order, or to prevent fraud or other crime.
+      where_your_data_is_processed_and_stored:
+        header: Where your data is processed and stored
+        info_1: We design, build and run our systems to make sure that your data is as safe as possible at all stages, both while it’s processed and when it’s stored.
+        info_2_html: All personal data is stored in the <a href="https://www.gov.uk/eu-eea">European Economic Area</a> (EEA). Google Analytics data may be transferred outside the EEA, but this cannot be used to personally identify you.
+      security:
+        header: How we protect your data and keep it secure
+        info_1: We are committed to doing all that we can to keep your data secure. We have set up systems and processes to prevent unauthorised access or disclosure of your data – for example, we protect your data using varying levels of encryption.
+        info_2: We also make sure that any third parties that we deal with keep all personal data they process on our behalf secure.
+      data_retention_period:
+        header: How long we keep your data
+        list_heading: "We will only retain your personal data for as long as:"
+        list: |
+          it is needed for the purposes set out in this document
+          the law requires us to
+        info_html: View <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/824530/laa-rrds-august-2019.pdf">our policy on retaining data</a>, or request a copy from our Data Protection Officer.
+      rights:
+        header: Your rights
+        list_heading: "You have the right to request:"
+        list: |
+          information about how your personal data is processed
+          a copy of that personal data (a 'subject access request')
+          that anything inaccurate in your personal data is corrected
+          that your personal data is erased if there is no longer a justification for it
+          a copy of any data-sharing agreements we have with other organisations
+          information on how we instruct staff to collect, use or delete your personal data
+        info: If you have any of these requests, contact the Ministry of Justice (MoJ) Data Protection Officer.
+        data_protection_office_contact_details:
+          title: The Data Protection Officer
+          email_address_html: <a href="mailto:casework@ico.org.uk">data.compliance@justice.gov.uk</a>
+          address:
+            line_1: Ministry of Justice
+            line_2: 102 Petty France
+            line_3: London
+            post_code: SW1H 9AJ
+      contact_or_complaint:
+        header: Contact us or make a complaint
+        data_protection_office:
+          list_heading: "Contact the MoJ Data Protection Officer if you:"
+          list: |
+            have a question about anything in this privacy notice
+            think that your personal data has been misused or 
+          contact_details:
+            email_address_html: <a href="mailto:casework@ico.org.uk">casework@ico.org.uk</a>
+            telephone: "Telephone: 0303 123 1113"
+            text_phone: "Textphone: 01625 545860"
+            call_hours: "Monday to Friday, 9am to 4:30pm"
+            call_costs_html: <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
+        commissioner_office:
+          list_heading: "Contact the Information Commissioner's Office (ICO):"
+          list: |
+            to make a complaint
+            for independent advice about data protection
+          address:
+            title: Information Commissioner's Office
+            line_1: Wycliffe House
+            line_2: Water Lane
+            line_3: Wilmslow
+            line_4: Cheshire
+            post_code: SK9 5AF
