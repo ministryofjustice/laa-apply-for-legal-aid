@@ -68,4 +68,20 @@ RSpec.describe MockProviderDetailsRetriever do
       end
     end
   end
+
+  context 'CCMS user HFITZSIMONS@EDWARDHAYES.CO.UK is logged in' do
+    let(:username) { 'HFITZSIMONS@EDWARDHAYES.CO.UK' }
+    let(:contact_name) { username.snakecase.titlecase }
+
+    subject { described_class.call(username) }
+
+    describe '.call' do
+      it 'returns the expected data structure' do
+        expected_keys = %i[providerOffices contactId contactName]
+        expect(subject.keys).to match_array(expected_keys)
+        expect(subject[:contactId]).to eq '284410'
+        expect(subject[:providerOffices][0][:officeName]).to eq 'Edward Hayes_137570'
+      end
+    end
+  end
 end

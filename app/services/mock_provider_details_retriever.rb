@@ -1,4 +1,4 @@
-class MockProviderDetailsRetriever
+class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
   # This class simulated a CCMS API to get information about providers.
   # It accepts a provider username as a parameter.
   # In order for the response to be consistent per username but also not always the same for each username,
@@ -26,6 +26,8 @@ class MockProviderDetailsRetriever
       neetadesor_user
     when 'DAVIDGRAYLLPTWO'
       davidgrey_user
+    when 'HFITZSIMONS@EDWARDHAYES.CO.UK'
+      hfitzsimons_user
     else
       all_other_users
     end
@@ -55,6 +57,20 @@ class MockProviderDetailsRetriever
         smsVendorSite: 'TestSMSVendorSite2' # legal aid code/contract number e.g. 0B721W
       }],
       contactId: '4953649',
+      contactName: contact_name
+    }
+  end
+
+  def hfitzsimons_user
+    {
+      providerOffices: [{
+        providerfirmId: '20726',
+        officeId: '85487',
+        officeName: 'Edward Hayes_137570',
+        smsVendorNum: 'TestSMSVendorNum3',
+        smsVendorSite: 'TestSMSVendorSite3' # legal aid code/contract number e.g. 0B721W
+      }],
+      contactId: '284410',
       contactName: contact_name
     }
   end
