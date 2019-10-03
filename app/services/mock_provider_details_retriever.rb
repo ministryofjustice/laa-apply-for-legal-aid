@@ -37,8 +37,8 @@ class MockProviderDetailsRetriever
         providerfirmId: '19148',
         officeId: '81693',
         officeName: 'Desor & Co._81693',
-        smsVendorNum: 'TestSMSVendorNum1', # Check Value - i think it should be legal aid code/contract number e.g. 1R741K / 1M322G
-        smsVendorSite: 'TestSMSVendorSite1' #Check Value - i think it should be legal aid office location i.e where the contract is registered to
+        smsVendorNum: 'TestSMSVendorNum1',
+        smsVendorSite: '0B721W'
       }],
       contactId: '2016472',
       contactName: contact_name
@@ -52,7 +52,7 @@ class MockProviderDetailsRetriever
         officeId: '137570',
         officeName: 'David Gray LLP_137570',
         smsVendorNum: 'TestSMSVendorNum2',
-        smsVendorSite: 'TestSMSVendorSite2'
+        smsVendorSite: 'TestSMSVendorSite2' # legal aid code/contract number e.g. 0B721W
       }],
       contactId: '4953649',
       contactName: contact_name

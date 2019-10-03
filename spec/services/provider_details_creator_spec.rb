@@ -62,19 +62,6 @@ RSpec.describe ProviderDetailsCreator do
       end
     end
 
-    # context 'provider is CCMS test account' do
-    #   let(:provider_3) { create :provider, :with_provider_details_api_username}
-    #   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
-    #   let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: rand(1..100).to_s) }
-    #
-    #   it 'has the correct provider details' do
-    #     expect { subject }.to change { Firm.count }.by(1)
-    #     ap 111111
-    #     ap provider_3
-    #     expect(provider_3.firm_id).to eq '19148'
-    #   end
-    # end
-
     context 'firm already exists with one of the offices' do
       let!(:existing_firm) { create :firm, ccms_id: ccms_firm.id, name: 'foobar' }
       let!(:existing_office) { create :office, firm: existing_firm }
