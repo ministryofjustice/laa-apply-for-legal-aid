@@ -20,37 +20,52 @@ class MockProviderDetailsRetriever
 
   private
 
-  def provider_details # rubocop:disable Metrics/MethodLength
-    if username == 'NEETADESOR'
-      {
-        providerOffices: Array.new(1) do |office_index|
-          provider_office_ccms(office_index)
-        end,
-        contactId: '2016472',
-        contactName: contact_name
-      }
+  def provider_details
+    case username
+    when 'NEETADESOR'
+      neetadesor_user
+    when 'DAVIDGRAYLLPTWO'
+      davidgrey_user
     else
-      {
-        providerOffices: Array.new(number_of_offices) do |office_index|
-          provider_office(office_index)
-        end,
-        contactId: username_number * 3,
-        contactName: contact_name
-      }
+      all_other_users
     end
   end
 
-  def provider_office_ccms(_office_index)
-    office_id = 19_148
-
-    office_number = "office_#{office_id}"
-
+  def neetadesor_user
     {
-      providerfirmId: '19148',
-      officeId: '81693',
-      officeName: "Desor & Co._#{office_number}",
-      smsVendorNum: ((office_id + firm_id) * 4).to_s,
-      smsVendorSite: office_number
+      providerOffices: [{
+        providerfirmId: '19148',
+        officeId: '81693',
+        officeName: 'Desor & Co._81693',
+        smsVendorNum: 'TestSMSVendorNum1', # Check Value - i think it should be legal aid code/contract number e.g. 1R741K / 1M322G
+        smsVendorSite: 'TestSMSVendorSite1' #Check Value - i think it should be legal aid office location i.e where the contract is registered to
+      }],
+      contactId: '2016472',
+      contactName: contact_name
+    }
+  end
+
+  def davidgrey_user
+    {
+      providerOffices: [{
+        providerfirmId: '19148',
+        officeId: '137570',
+        officeName: 'David Gray LLP_137570',
+        smsVendorNum: 'TestSMSVendorNum2',
+        smsVendorSite: 'TestSMSVendorSite2'
+      }],
+      contactId: '4953649',
+      contactName: contact_name
+    }
+  end
+
+  def all_other_users
+    {
+      providerOffices: Array.new(number_of_offices) do |office_index|
+        provider_office(office_index)
+      end,
+      contactId: username_number * 3,
+      contactName: contact_name
     }
   end
 
