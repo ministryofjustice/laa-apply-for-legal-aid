@@ -3,6 +3,7 @@ module CCMS
     def call
       tx_id = applicant_add_status_requestor.transaction_request_id
       submission.applicant_poll_count += 1
+      submission.save
       response = applicant_add_status_requestor.call
       parser = ApplicantAddStatusResponseParser.new(tx_id, response)
       process_response(parser)
