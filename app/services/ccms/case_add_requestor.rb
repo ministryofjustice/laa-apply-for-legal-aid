@@ -133,8 +133,8 @@ module CCMS
 
     def generate_provider_details(xml)
       xml.__send__('ns2:ProviderCaseReferenceNumber', 'PC4') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
-      xml.__send__('ns2:ProviderFirmID', provider.firm_id)
-      xml.__send__('ns2:ProviderOfficeID', provider.selected_office_id)
+      xml.__send__('ns2:ProviderFirmID', provider.firm.ccms_id)
+      xml.__send__('ns2:ProviderOfficeID', @legal_aid_application.office.ccms_id)
       xml.__send__('ns2:ContactUserID') do
         xml.__send__('ns0:UserLoginID', provider.user_login_id)
       end

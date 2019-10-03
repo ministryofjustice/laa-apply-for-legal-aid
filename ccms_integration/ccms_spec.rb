@@ -40,11 +40,12 @@ module CCMS
              description: ':EMPLOYMENT_CLIENT_001:CLI_NON_HM_WAGE_SLIP_001'
     end
 
-    let(:firm) { double Firm, id: 22_381, name: 'Desor & Co' }
+    let(:firm) { create :firm, ccms_id: 22_381, name: 'Desor & Co' }
+    let(:office) { create :office, ccms_id: 81_693, firm: firm }
 
     let(:provider) do
       double Provider,
-             username: 'user1',
+             username: 'NEETADESOR',
              firm: firm,
              selected_office_id: 81_693,
              user_login_id: 2_016_472,
@@ -86,7 +87,8 @@ module CCMS
              :with_merits_report,
              statement_of_case: @statement_of_case,
              proceeding_types: [substantive_proceeding_type],
-             state: :submitting_assessment
+             state: :submitting_assessment,
+             office: office
     end
 
     let(:delegated_functions_scope_limitation) do
@@ -122,7 +124,8 @@ module CCMS
              :with_merits_report,
              statement_of_case: @statement_of_case,
              proceeding_types: [delegated_functions_proceeding_type],
-             state: :submitting_assessment
+             state: :submitting_assessment,
+             office: office
     end
 
     before do
