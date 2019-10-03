@@ -138,8 +138,6 @@ module CCMS
       xml.__send__('ns2:ContactUserID') do
         xml.__send__('ns0:UserLoginID', provider.user_login_id)
       end
-      xml.__send__('ns2:SupervisorContactID', provider.supervisor_contact_id)
-      xml.__send__('ns2:FeeEarnerContactID', provider.fee_earner_contact_id)
     end
 
     def generate_category_of_law(xml)
