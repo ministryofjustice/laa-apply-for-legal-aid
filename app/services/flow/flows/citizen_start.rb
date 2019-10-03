@@ -11,6 +11,10 @@ module Flow
         },
         consents: {
           path: ->(_) { urls.citizens_consent_path },
+          forward: :banks
+        },
+        banks: {
+          path: ->(_) { urls.citizens_banks_path },
           forward: :true_layer
         },
         true_layer: {

@@ -19,7 +19,7 @@ module Citizens
     def update
       case params[:has_offline_accounts]
       when 'yes'
-        redirect_to applicant_true_layer_omniauth_authorize_path
+        redirect_to citizens_banks_path
       when 'no'
         legal_aid_application.update(has_offline_accounts: true)
         go_forward

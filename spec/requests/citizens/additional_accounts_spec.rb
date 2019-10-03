@@ -76,9 +76,8 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     context 'with Yes submitted' do
       let(:params) { { has_offline_accounts: 'yes' } }
 
-      it 'redirects to back to the True Layer steps' do
-        # TODO: - set redirect path when known
-        expect(response).to redirect_to(applicant_true_layer_omniauth_authorize_path)
+      it 'redirects to select another bank' do
+        expect(response).to redirect_to(citizens_banks_path)
       end
 
       it 'does not record choice on legal_aid_application' do

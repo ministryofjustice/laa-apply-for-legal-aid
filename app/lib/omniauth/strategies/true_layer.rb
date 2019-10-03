@@ -14,7 +14,12 @@ module OmniAuth
              token_url: 'https://auth.truelayer.com/connect/token'
 
       def authorize_params
-        super.merge(enable_mock: enable_mock)
+        extra_params = { enable_mock: enable_mock }
+
+        extra_params[:provider_id] = session[:provider_id] if session[:provider_id].present?
+        extra_params[:consent_id] = consent_id if consent_id
+
+        super.merge(extra_params)
       end
 
       def token_params
@@ -26,10 +31,15 @@ module OmniAuth
       end
 
       def enable_mock
-        env_setting = ENV['TRUE_LAYER_ENABLE_MOCK']
-        return false if env_setting.blank?
+        Rails.configuration.x.true_layer.enable_mock
+      end
 
-        ActiveModel::Type::Boolean.new.cast(env_setting)
+      # If consent_id is set, the flow will skip TrueLayer's consent page.
+      # consent_id is used by TrueLayer for tracking purposes and needs to be a static string specific to our TrueLayer account.
+      # It could be something different than true_layer.client_id but it makes sense to use this value
+      def consent_id
+        Rails.configuration.x.true_layer.client_id
+        nil # TODO: remove when TrueLayer allows us to skip their consent page
       end
     end
   end

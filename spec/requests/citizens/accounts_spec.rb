@@ -60,8 +60,8 @@ RSpec.describe 'citizen accounts request', type: :request do
       expect(session[:page_history]).to include(citizens_accounts_path)
     end
 
-    it 'has a link to ad another account' do
-      expect(response.body).to include(applicant_true_layer_omniauth_authorize_path)
+    it 'has a link to select another bank' do
+      expect(response.body).to include(citizens_banks_path)
     end
   end
 
