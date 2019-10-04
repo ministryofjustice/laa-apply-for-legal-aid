@@ -16,6 +16,10 @@ RSpec.describe GovukEmails::EmailMonitor do
     stub_request(:post, 'https://api.notifications.service.gov.uk/v2/notifications/email')
       .to_return(status: 200, body: { id: status_govuk_message_id }.to_json)
   end
+  let!(:stub_email_status) do
+    stub_request(:get, "https://api.notifications.service.gov.uk/v2/notifications/#{status_govuk_message_id}")
+      .to_return(status: 200, body: { status: message_status }.to_json)
+  end
   let(:params) do
     {
       mailer: mailer,
@@ -30,11 +34,6 @@ RSpec.describe GovukEmails::EmailMonitor do
   subject { email_monitor.call }
 
   describe '#call' do
-    before do
-      stub_request(:get, "https://api.notifications.service.gov.uk/v2/notifications/#{status_govuk_message_id}")
-        .to_return(status: 200, body: { status: message_status }.to_json)
-    end
-
     context 'email has not been sent yet' do
       let(:message_status) { 'sending' }
       let(:arg_govuk_message_id) { nil }
@@ -58,6 +57,11 @@ RSpec.describe GovukEmails::EmailMonitor do
       it 'does not send a new email' do
         expect(email_monitor).not_to receive(:trigger_job).with(nil)
         subject
+      end
+
+      it 'does not check its status now' do
+        subject
+        expect(stub_email_status).not_to have_been_requested
       end
     end
 

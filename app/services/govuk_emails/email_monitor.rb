@@ -1,6 +1,7 @@
 module GovukEmails
   class EmailMonitor
-    attr_reader :mailer, :mail_method, :delivery_method, :email_args, :govuk_message_id
+    attr_reader :mailer, :mail_method, :delivery_method, :email_args
+    attr_accessor :govuk_message_id
 
     JOBS_DELAY = 5.seconds
 
@@ -13,11 +14,13 @@ module GovukEmails
       @mail_method = mail_method
       @delivery_method = delivery_method
       @email_args = email_args
-      @govuk_message_id = govuk_message_id || send_email.govuk_notify_response.id
+      @govuk_message_id = govuk_message_id
     end
 
     def call
-      if email.permanently_failed?
+      if govuk_message_id.nil?
+        send_first_email
+      elsif email.permanently_failed?
         send_slack_alert
       elsif email.should_resend?
         send_new_email
@@ -40,6 +43,11 @@ module GovukEmails
     end
 
     private
+
+    def send_first_email
+      self.govuk_message_id = send_email.govuk_notify_response.id
+      keep_monitoring
+    end
 
     def send_new_email
       trigger_job(nil)
