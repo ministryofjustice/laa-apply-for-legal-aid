@@ -35,16 +35,20 @@ module CFE
 
     def query_cfe_service
       raw_response = post_request
-      parse_json_response(raw_response.body)
-      write_submission_history(raw_response)
+      parsed_response = parse_json_response(raw_response.body)
+      history = write_submission_history(raw_response)
       case raw_response.status
       when 200
         return JSON.parse(raw_response.body)
       when 422
-        raise CFE::SubmissionError.new('Unprocessable entity', 422)
+        raise CFE::SubmissionError.new(detailed_error(parsed_response, history), 422)
       else
         raise CFE::SubmissionError.new('Unsuccessful HTTP response code', raw_response.status)
       end
+    end
+
+    def detailed_error(parsed_response, history)
+      "Unprocessable entity: URL: #{history.url}, details: #{parsed_response['errors'].first}"
     end
 
     def parse_json_response(response_body)

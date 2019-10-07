@@ -185,27 +185,44 @@ RSpec.describe 'check passported answers requests', type: :request do
     context 'logged in as an authenticated provider' do
       before do
         login_as application.provider
-        subject
       end
 
-      it 'redirects to Has your client received legal help for the matter?' do
-        expect(response).to redirect_to flow_forward_path
-      end
-
-      it 'transitions to means_completed state' do
-        expect(application.reload.means_completed?).to be true
-      end
-
-      context 'Form submitted using Save as draft button' do
-        let(:params) { { draft_button: 'Save as draft' } }
-
-        it "redirects provider to provider's applications page" do
+      context 'call to Check Financial Eligibility Service is successful' do
+        before do
+          allow(CFE::SubmissionManager).to receive(:call).with(application.id).and_return(true)
           subject
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
-        it 'sets the application as draft' do
-          expect(application.reload).to be_draft
+        it 'redirects to Has your client received legal help for the matter?' do
+          expect(response).to redirect_to flow_forward_path
+        end
+
+        it 'transitions to means_completed state' do
+          expect(application.reload.means_completed?).to be true
+        end
+
+        context 'Form submitted using Save as draft button' do
+          let(:params) { { draft_button: 'Save as draft' } }
+
+          it "redirects provider to provider's applications page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
+          end
+
+          it 'sets the application as draft' do
+            expect(application.reload).to be_draft
+          end
+        end
+      end
+
+      context 'call to Check Financial Eligibility Service is unsuccessful' do
+        before do
+          allow(CFE::SubmissionManager).to receive(:call).with(application.id).and_return(false)
+          subject
+        end
+
+        it 'redirects to the problem page' do
+          expect(response).to redirect_to(problem_index_path)
         end
       end
     end

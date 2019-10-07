@@ -16,9 +16,11 @@ module CFE
       CFE::CreateVehiclesService.call(submission)
       CFE::CreatePropertiesService.call(submission)
       CFE::ObtainAssessmentResultService.call(submission)
+      true
     rescue CFE::SubmissionError => e
       submission.error_message = e.message
       submission.fail!
+      false
     end
 
     def submission

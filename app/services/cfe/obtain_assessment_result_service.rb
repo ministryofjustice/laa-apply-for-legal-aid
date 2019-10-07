@@ -14,6 +14,7 @@ module CFE
       @submission.cfe_result = @response.body
       if @response.status == 200
         write_submission_history(@response, 'GET')
+        write_cfe_result
         @submission.results_obtained!
       else
         @submission.fail!
@@ -23,6 +24,14 @@ module CFE
 
     def request_body
       nil
+    end
+
+    def write_cfe_result
+      CFE::Result.create!(
+        legal_aid_application_id: legal_aid_application.id,
+        submission_id: @submission.id,
+        result: @response.body
+      )
     end
   end
 end

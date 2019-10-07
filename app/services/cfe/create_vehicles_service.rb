@@ -5,6 +5,22 @@ module CFE
     end
 
     def request_body
+      vehicle_request_body.to_json
+    end
+
+    private
+
+    def vehicle_request_body
+      vehicle.nil? ? vehicle_absent_request : vehicle_present_request
+    end
+
+    def vehicle_absent_request
+      {
+        vehicles: []
+      }
+    end
+
+    def vehicle_present_request
       {
         vehicles: [
           {
@@ -14,10 +30,8 @@ module CFE
             in_regular_use: vehicle.used_regularly
           }
         ]
-      }.to_json
+      }
     end
-
-    private
 
     def process_response
       @submission.vehicles_created!
