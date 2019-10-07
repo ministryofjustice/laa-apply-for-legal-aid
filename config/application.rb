@@ -26,7 +26,6 @@ module LaaApplyForLegalAid
     config.x.ccms_soa.client_username             = ENV['CCMS_SOA_CLIENT_USERNAME']
     config.x.ccms_soa.client_password_type        = ENV['CCMS_SOA_CLIENT_PASSWORD_TYPE']
     config.x.ccms_soa.client_password             = ENV['CCMS_SOA_CLIENT_PASSWORD']
-    config.x.ccms_soa.user_login                  = ENV['CCMS_SOA_USER_LOGIN']
     config.x.ccms_soa.user_role                   = ENV['CCMS_SOA_USER_ROLE']
     config.x.ccms_soa.caseServicesWsdl            = ENV.fetch('CCMS_SOA_CASE_SERVICES_WSDL', 'CaseServicesWsdl.xml')
     config.x.ccms_soa.clientProxyServiceWsdl      = ENV.fetch('CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL', 'ClientProxyServiceWsdl.xml')
