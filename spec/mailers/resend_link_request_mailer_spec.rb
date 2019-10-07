@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ResendLinkRequestMailer, type: :mailer do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:mail) { described_class.notify(legal_aid_application, legal_aid_application.applicant) }
+  let(:mail) { described_class.notify(legal_aid_application, legal_aid_application.provider, legal_aid_application.applicant) }
 
   it 'uses GovukNotifyMailerJob' do
     expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)

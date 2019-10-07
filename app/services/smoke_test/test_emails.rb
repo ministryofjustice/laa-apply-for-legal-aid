@@ -8,6 +8,7 @@ module SmokeTest
       send_feedback_email
       send_citizen_start_email
       send_resend_link_request_email
+      send_submission_confirmation_email
     end
 
     private
@@ -26,8 +27,17 @@ module SmokeTest
     def send_resend_link_request_email
       ResendLinkRequestMailer.notify(
         JSON.parse(legal_aid_application.to_json),
+        JSON.parse(legal_aid_application.provider.to_json),
         JSON.parse(legal_aid_application.applicant.to_json),
         to
+      ).deliver_later!
+    end
+
+    def send_submission_confirmation_email
+      SubmissionConfirmationMailer.notify(
+        JSON.parse(legal_aid_application.to_json),
+        JSON.parse(legal_aid_application.provider.to_json),
+        JSON.parse(legal_aid_application.applicant.to_json)
       ).deliver_later!
     end
 
@@ -44,9 +54,13 @@ module SmokeTest
       @legal_aid_application || FactoryBot.build(
         :legal_aid_application,
         :with_applicant,
-        provider_id: SecureRandom.uuid,
+        provider: provider,
         application_ref: SecureRandom.hex
       )
+    end
+
+    def provider
+      FactoryBot.build(:provider, id: SecureRandom.uuid, email: to)
     end
 
     def feedback

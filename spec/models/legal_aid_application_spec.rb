@@ -561,4 +561,17 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#submitted_assessment' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :submitting_assessment }
+
+    it 'sends a cubmission confirmation email' do
+      expect(SubmissionConfirmationMailer).to receive(:notify).with(
+        legal_aid_application,
+        legal_aid_application.provider,
+        legal_aid_application.applicant
+      ).and_call_original
+      legal_aid_application.submitted_assessment!
+    end
+  end
 end
