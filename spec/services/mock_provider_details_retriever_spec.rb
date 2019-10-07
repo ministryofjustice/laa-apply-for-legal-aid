@@ -39,8 +39,8 @@ RSpec.describe MockProviderDetailsRetriever do
     end
   end
 
-  context 'CCMS user DAVIDGRAYLLPTWO is logged in' do
-    let(:username) { 'DAVIDGRAYLLPTWO' }
+  context 'CCMS user MARTIN.RONAN@DAVIDGRAY.CO.UK is logged in' do
+    let(:username) { 'MARTIN.RONAN@DAVIDGRAY.CO.UK' }
     let(:contact_name) { username.snakecase.titlecase }
 
     subject { described_class.call(username) }
@@ -49,7 +49,7 @@ RSpec.describe MockProviderDetailsRetriever do
       it 'returns the expected data structure' do
         expected_keys = %i[providerOffices contactId contactName]
         expect(subject.keys).to match_array(expected_keys)
-        expect(subject[:contactId]).to eq '4953649'
+        expect(subject[:contactId]).to eq '494000'
         expect(subject[:providerOffices][0][:officeName]).to eq 'David Gray LLP_137570'
       end
     end
