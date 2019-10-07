@@ -1,0 +1,12 @@
+<div class="govuk-error-summary" id="error_explanation">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">
+    <%= t('generic.errors.problem_text') %>
+  </h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      <li>
+        <%= link_to @error, "#search_term" %>
+      </li>
+    </ul>
+  </div>
+</div>

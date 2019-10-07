@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     resource :select_office, only: %i[show update]
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
+      get :search, on: :collection
       resources :proceedings_types, only: %i[index create update]
       resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
