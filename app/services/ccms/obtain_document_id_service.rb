@@ -63,6 +63,7 @@ module CCMS
         response = document_id_requestor.call
         document.ccms_document_id = DocumentIdResponseParser.new(tx_id, response).document_id
         document.status = :id_obtained
+        submission.save!
       rescue CcmsError => e
         document.status = :failed
         raise CcmsError, e
