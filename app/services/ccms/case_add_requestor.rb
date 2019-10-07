@@ -407,7 +407,7 @@ module CCMS
     end
 
     def as_currency(raw_value)
-      format('%.2f', raw_value)
+      format('%<amount>.2f', amount: raw_value)
     end
 
     def extract_raw_value(config, options)

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :scope_limitation do
-    sequence(:code) { |n| format('AA%03d', n) }
+    sequence(:code) { |n| format('AA%<number>03d', number: n) }
     meaning { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
     substantive { true }

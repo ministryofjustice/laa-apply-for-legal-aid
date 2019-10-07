@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :proceeding_type do
     association :default_level_of_service, factory: %i[service_level with_real_data]
 
-    sequence(:code) { |n| format('PR%04d', n) }
+    sequence(:code) { |n| format('PR%<number>04d', number: n) }
     ccms_code { 'PBM23' }
     meaning { 'Meaning' }
     description { 'Description' }
