@@ -8,6 +8,8 @@ class Provider < ApplicationRecord
   has_many :legal_aid_applications
   has_and_belongs_to_many :offices
 
+  delegate :name, to: :firm, prefix: true, allow_nil: true
+
   def update_details
     return update_details_directly unless firm
 
