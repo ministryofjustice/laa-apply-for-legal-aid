@@ -42,6 +42,65 @@ en:
         col_date: Date
         col_description: Description
         remove_link: Remove
+    capital_assessment_results:
+      additional_property:
+        additional_property_value: Additional property value
+        outstanding_mortgage: Outstanding mortgage
+        disregards_and_deductions: Disregards and deductions
+      show:
+        page_title: 'Capital Assessment Result: %{result}'
+        result:
+          eligible: Eligible
+          not_eligible: Not Eligible
+          contribution_required: Contribution required
+      eligible:
+        heading: '%{name} could be eligible for free legal aid'
+        details:
+          - Based on their financial situation, your client may not have to pay towards legal aid.
+          - You still have to provide details of the case before we can grant legal aid.
+      not_eligible:
+        heading: '%{name} is unlikely to get legal aid'
+        detail: This is because they have too much disposable capital.
+      contribution_required:
+        heading: '%{name} must pay towards legal aid'
+        details:
+          - 'Based on their financial situation, your client must pay a contribution of %{amount}.'
+          - 'You still have to provide details of the case before we can grant legal aid.'
+      manual_check_required:
+        heading: We need to check if %{name} should pay towards legal aid
+        details:
+          - You told us legal restrictions prevent your client from selling or borrowing against their assets.
+          - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
+          - We’ll check the details you provided and let you know our decision.
+      property_results:
+        property: Property
+        value: Value
+        outstanding_mortgage: Outstanding mortgage
+        disregards: Disregards and deductions
+        assessment_amount: Amount included in assessment
+      vehicle_results:
+        vehicles: Vehicles
+        value: Value
+        oustanding_payments: Outstanding payments
+        disregards: Disregards and deductions
+        assessment_amount: Amount included in assessment
+      savings_and_investments:
+        savings_and_investments: Savings and investments
+        assessed_amount: Amount included in assessment
+      other_assets:
+        other_assets: Other assets
+        assessed_amount: Amount included in assessment
+      total_capital:
+        total_assessed_capital: Total assessed capital
+        property: Property
+        vehicles: Vehicles
+        savings_and_investments: Savings and investments
+        other_assets: Other assets
+      restrictions:
+        restrictions: Restrictions on your client's assets
+        none: None
+      result_details:
+        client_eligibility_calculation: How we calculated your client's eligibility
     capital_introductions:
       show:
         about_the_client:

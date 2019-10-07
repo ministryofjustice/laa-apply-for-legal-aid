@@ -110,6 +110,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               block = XmlExtractor.call(xml, :global_means, attribute)
               expect(block).to have_currency_response '0.00'
             end
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
+            expect(block).to have_currency_response '0.00'
           end
         end
 
@@ -1343,7 +1345,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
     end
-  end
 
   def omitted_attributes # rubocop:disable Metrics/MethodLength
     [

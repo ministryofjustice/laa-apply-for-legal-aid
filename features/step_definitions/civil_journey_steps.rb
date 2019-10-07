@@ -445,4 +445,8 @@ end
 Then('show me the page') do
   save_and_open_page
 end
+
+Then('wait a bit') do
+  sleep 2
+end
 # rubocop:enable Lint/Debugger

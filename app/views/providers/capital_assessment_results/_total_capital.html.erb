@@ -1,0 +1,11 @@
+<div class="govuk-details__text">
+  <h2 class="govuk-heading-m"><%= t('.total_assessed_capital') %></h2>
+  <table class="govuk-table">
+    <tbody>
+    <%= render partial: 'results_detail_row', locals: { caption: t('.property'), value: number_to_currency(@cfe_result.total_property) } %>
+    <%= render partial: 'results_detail_row', locals: { caption: t('.vehicles'), value: number_to_currency(@cfe_result.total_vehicles) } %>
+    <%= render partial: 'results_detail_row', locals: { caption: t('.savings_and_investments'), value: number_to_currency(@cfe_result.total_savings) } %>
+    <%= render partial: 'results_detail_row', locals: { caption: t('.other_assets'), value: number_to_currency(@cfe_result.total_other_assets) } %>
+    </tbody>
+  </table>
+</div>
