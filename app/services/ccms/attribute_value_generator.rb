@@ -74,7 +74,7 @@ module CCMS
     end
 
     def provider_firm_id(_options)
-      @legal_aid_application.provider.firm.id
+      @legal_aid_application.provider.firm.ccms_id
     end
 
     def provider_email(_options)

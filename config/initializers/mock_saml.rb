@@ -7,8 +7,10 @@ Rails.configuration.x.application.mock_saml = OpenStruct.new(
     OpenStruct.new(username: 'test3', email: 'really-really-long-email-address@example.com'),
     OpenStruct.new(username: 'firm1-user1', email: 'firm1-user1@example.com'),
     OpenStruct.new(username: 'firm1-user2', email: 'firm1-user2@example.com'),
-    OpenStruct.new(username: 'firm2-user1', email: 'firm2-user1@example.com')
-
+    OpenStruct.new(username: 'firm2-user1', email: 'firm2-user1@example.com'),
+    OpenStruct.new(username: 'NEETADESOR', email: 'neeta@example.com'),
+    OpenStruct.new(username: 'DAVIDGRAYLLPTWO', email: 'dg@example.com'),
+    OpenStruct.new(username: 'HFITZSIMONS@EDWARDHAYES.CO.UK', email: 'hfitzsimons@example.com')
   ],
   password: 'password'
 )
