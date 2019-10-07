@@ -13,8 +13,9 @@ module CCMS
       'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'
     )
 
-    def initialize(applicant)
+    def initialize(applicant, provider_username)
       @applicant = applicant
+      @provider_username = provider_username
     end
 
     def call
@@ -29,7 +30,7 @@ module CCMS
 
     def soap_body(xml)
       xml.__send__('ns2:ClientInqRQ') do
-        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
+        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
         xml.__send__('ns2:RecordCount') { record_count(xml) }
         xml.__send__('ns2:SearchCriteria') { search_criteria(xml) }
       end

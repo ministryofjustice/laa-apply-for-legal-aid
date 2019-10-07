@@ -21,7 +21,7 @@ module CCMS
              date_of_birth: Date.new(1969, 1, 1))
     end
 
-    let(:requestor) { described_class.new(applicant) }
+    let(:requestor) { described_class.new(applicant, 'my_login') }
 
     describe 'XML request' do
       include_context 'ccms soa configuration'

@@ -5,7 +5,7 @@ module CCMS
     let(:expected_xml) { ccms_data_from_file 'document_id_request.xml' }
     let(:expected_tx_id) { '20190101121530123456' }
     let(:case_ccms_reference) { '1234567890' }
-    let(:requestor) { described_class.new(case_ccms_reference) }
+    let(:requestor) { described_class.new(case_ccms_reference, 'my_login') }
 
     describe 'XML request' do
       include_context 'ccms soa configuration'

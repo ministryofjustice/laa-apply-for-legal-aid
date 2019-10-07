@@ -19,7 +19,10 @@ module CCMS
     private
 
     def upload_document(document)
-      document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference, document.ccms_document_id, Base64.strict_encode64(pdf_binary(document)))
+      document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference,
+                                                              document.ccms_document_id,
+                                                              Base64.strict_encode64(pdf_binary(document)),
+                                                              submission.legal_aid_application.provider.username)
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
       update_document_status(document, tx_id, response)

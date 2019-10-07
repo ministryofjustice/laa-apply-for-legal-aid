@@ -12,7 +12,7 @@ module CCMS
     private
 
     def applicant_search_requestor
-      @applicant_search_requestor ||= ApplicantSearchRequestor.new(submission.legal_aid_application.applicant)
+      @applicant_search_requestor ||= ApplicantSearchRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)
     end
 
     def process_records(parser)
@@ -22,6 +22,10 @@ module CCMS
         submission.applicant_ccms_reference = parser.applicant_ccms_reference
         create_history(:case_ref_obtained, submission.aasm_state) if submission.obtain_applicant_ref!
       end
+    end
+
+    def legal_aid_application
+      submission.legal_aid_application
     end
   end
 end

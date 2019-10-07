@@ -70,7 +70,7 @@ module CCMS
     end
 
     def document_id_requestor
-      @document_id_requestor ||= DocumentIdRequestor.new(submission.case_ccms_reference)
+      @document_id_requestor ||= DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username)
     end
   end
 end

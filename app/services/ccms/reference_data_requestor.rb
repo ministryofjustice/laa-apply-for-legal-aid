@@ -13,6 +13,10 @@ module CCMS
       'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIO'
     )
 
+    def initialize(provider_username)
+      @provider_username = provider_username
+    end
+
     def call
       soap_client.call(:process, xml: request_xml)
     end
@@ -25,7 +29,7 @@ module CCMS
 
     def soap_body(xml)
       xml.__send__('ns2:ReferenceDataInqRQ') do
-        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
+        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
         xml.__send__('ns2:SearchCriteria') { search_criteria(xml) }
       end
     end

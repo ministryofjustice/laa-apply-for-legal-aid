@@ -14,7 +14,7 @@ module CCMS
     private
 
     def applicant_add_requestor
-      @applicant_add_requestor ||= ApplicantAddRequestor.new(submission.legal_aid_application.applicant)
+      @applicant_add_requestor ||= ApplicantAddRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)
     end
 
     def applicant_add_response_parser
@@ -23,6 +23,10 @@ module CCMS
 
     def response
       @response ||= applicant_add_requestor.call
+    end
+
+    def legal_aid_application
+      submission.legal_aid_application
     end
   end
 end

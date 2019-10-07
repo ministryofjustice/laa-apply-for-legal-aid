@@ -7,7 +7,7 @@ module CCMS
     let(:case_ccms_reference) { '1234567890' }
     let(:document_id) { '4420073' }
     let(:document_encoded_base64) { 'JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiA' }
-    let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64) }
+    let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, 'my_login') }
 
     describe 'XML request' do
       include_context 'ccms soa configuration'

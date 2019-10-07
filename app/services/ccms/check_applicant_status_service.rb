@@ -25,7 +25,7 @@ module CCMS
     end
 
     def applicant_add_status_requestor
-      @applicant_add_status_requestor ||= ApplicantAddStatusRequestor.new(submission.applicant_add_transaction_id)
+      @applicant_add_status_requestor ||= ApplicantAddStatusRequestor.new(submission.applicant_add_transaction_id, submission.legal_aid_application.provider.username)
     end
   end
 end

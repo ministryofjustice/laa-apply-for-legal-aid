@@ -7,7 +7,7 @@ module Admin
 
     def show
       @response = ''
-      xml = REXML::Document.new(CCMS::ReferenceDataRequestor.new.call.to_s)
+      xml = REXML::Document.new(CCMS::ReferenceDataRequestor.new('my_login').call.to_s)
       xml.write(@response, 1)
       render :show
     end
