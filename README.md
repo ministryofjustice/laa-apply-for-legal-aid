@@ -132,12 +132,17 @@ LAA_PORTAL_MOCK_SAML=false
 
 ### Authentication
 
-Mock Saml request on dev add the the following settings
+User login on dev can be mocked out by adding the the following settings
 
 ```
 LAA_PORTAL_IDP_SSO_TARGET_URL=http://localhost:3002/saml/auth
 LAA_PORTAL_MOCK_SAML=true
 ```
+
+This will enable you to login as a provider with the usernames specified in `config/initializers/mock_saml.rb`.
+Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to 
+different firms.  The password for all users is `password`.
+
 
 ### Benefits checker
 

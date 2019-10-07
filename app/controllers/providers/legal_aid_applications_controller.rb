@@ -8,7 +8,7 @@ module Providers
     # GET /provider/applications
     def index
       @pagy, @legal_aid_applications = pagy(
-        current_provider.legal_aid_applications.latest,
+        current_provider.firm.legal_aid_applications.latest,
         items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
         size: [1, 1, 1, 1] # control of how many elements shown in page info
       )
