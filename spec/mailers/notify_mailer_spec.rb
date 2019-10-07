@@ -6,6 +6,10 @@ RSpec.describe NotifyMailer, type: :mailer do
   let(:client_name) { Faker::Name.name }
   let(:application_url) { "/applications/#{app_id}/citizen/start" }
 
+  it 'uses GovukNotifyMailerJob' do
+    expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)
+  end
+
   describe '#citizen_start_email' do
     let(:mail) { described_class.citizen_start_email(app_id, email, application_url, client_name) }
 

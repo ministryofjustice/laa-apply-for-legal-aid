@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.notifications.service.gov.uk/v2/notifications/ad9559be-f32d-4674-91dd-87c50d4a16b2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NzAwMDUxMzh9.um_29W4QDZpwmFBFxpi4pAOl33vHGaJHXaT-J6bm6Qw
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 02 Oct 2019 08:32:18 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - 4b9a05678b8b1e59
+      X-B3-Traceid:
+      - 4b9a05678b8b1e59
+      X-Vcap-Request-Id:
+      - 1f9229ba-7acd-455d-79c5-46124cf2ee26
+      Content-Length:
+      - '1091'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"body":"# Apply for Legal Aid Feedback - DEV\r\n\r\nWed, 20 Mar 2019
+        05:08:24 +0000\r\n\r\nThe following feedback has been received:\r\n\r\n* Linux
+        - Safari 8.6.5 - Unknown\r\n* Were you able to do what you needed today? true\r\n*
+        How satisfied were you with this service? dissatisfied\r\n\r\nHow could we
+        improve this service?\r\n\r\n---\r\nVel aut laborum. Consectetur aut voluptas.
+        Fuga eos quod.","completed_at":"2019-10-01T14:26:09.437904Z","created_at":"2019-10-01T14:26:07.751548Z","created_by_name":null,"email_address":"julien.sansot@digital.justice.gov.uk","id":"ad9559be-f32d-4674-91dd-87c50d4a16b2","line_1":null,"line_2":null,"line_3":null,"line_4":null,"line_5":null,"line_6":null,"phone_number":null,"postage":null,"postcode":null,"reference":null,"scheduled_for":null,"sent_at":"2019-10-01T14:26:07.994076Z","status":"delivered","subject":"Apply
+        for Legal Aid Feedback \u2013 DEV","template":{"id":"ac458f81-b7dd-4b2c-944c-3f17d2f2392c","uri":"https://api.notifications.service.gov.uk/v2/template/ac458f81-b7dd-4b2c-944c-3f17d2f2392c/version/9","version":9},"type":"email"}
+
+        '
+    http_version: 
+  recorded_at: Wed, 02 Oct 2019 08:32:18 GMT
+recorded_with: VCR 5.0.0

@@ -29,7 +29,10 @@ RSpec.describe Citizens::ResendLinkRequestsController, type: :request do
     end
 
     context 'sending the email', :vcr do
-      before { ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear }
+      before do
+        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
+        allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
+      end
 
       it 'sends an email with the right parameters' do
         expect_any_instance_of(ResendLinkRequestMailer)

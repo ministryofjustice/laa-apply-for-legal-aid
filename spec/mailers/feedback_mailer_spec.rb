@@ -5,6 +5,10 @@ RSpec.describe FeedbackMailer, type: :mailer do
     let(:feedback) { create :feedback }
     let(:mail) { described_class.notify(feedback) }
 
+    it 'uses GovukNotifyMailerJob' do
+      expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)
+    end
+
     it 'sends to correct address' do
       expect(mail.to).to eq([Rails.configuration.x.support_email_address])
     end
