@@ -5,7 +5,7 @@ module LegalAidApplicationStateMachine
     include AASM
 
     def summary_state
-      return :submitted if state.to_sym == :assessment_submitted
+      return :submitted if merits_assessment&.submitted_at
 
       :in_progress
     end

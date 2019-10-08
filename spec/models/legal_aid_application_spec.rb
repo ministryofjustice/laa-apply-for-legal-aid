@@ -163,26 +163,27 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#summary_state' do
-    let(:state) { :initiated }
-    subject(:legal_aid_application) { create(:legal_aid_application, state: state) }
+    let(:merits_assessment) { nil }
+    subject(:legal_aid_application) { create :legal_aid_application, merits_assessment: merits_assessment }
 
     it 'returns :in_progress summary state' do
       expect(legal_aid_application.summary_state).to eq(:in_progress)
     end
 
-    context 'with later state' do
-      let(:state) { :means_completed }
+    context 'with merits_assessment object' do
+      let(:submitted_at) { nil }
+      let(:merits_assessment) { create :merits_assessment, submitted_at: submitted_at }
 
       it 'still returns :in_progress summary state' do
         expect(legal_aid_application.summary_state).to eq(:in_progress)
       end
-    end
 
-    context 'on submission' do
-      let(:state) { :assessment_submitted }
+      context 'merits submitted' do
+        let(:submitted_at) { Faker::Time.backward }
 
-      it 'returns :in_progress summary state' do
-        expect(legal_aid_application.summary_state).to eq(:submitted)
+        it 'returns :in_progress summary state' do
+          expect(legal_aid_application.summary_state).to eq(:submitted)
+        end
       end
     end
   end
