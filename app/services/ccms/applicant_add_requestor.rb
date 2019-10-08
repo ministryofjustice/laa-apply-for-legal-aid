@@ -16,8 +16,9 @@ module CCMS
     attr_reader :applicant
     delegate :address, to: :applicant
 
-    def initialize(applicant)
+    def initialize(applicant, provider_username)
       @applicant = applicant
+      @provider_username = provider_username
     end
 
     def call
@@ -32,7 +33,7 @@ module CCMS
 
     def soap_body(xml)
       xml.__send__('ns2:ClientAddRQ') do
-        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
+        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
         xml.__send__('ns2:Client') { client(xml) }
       end
     end

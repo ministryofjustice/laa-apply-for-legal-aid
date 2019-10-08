@@ -14,8 +14,9 @@ module CCMS
 
     attr_reader :case_ccms_reference
 
-    def initialize(case_ccms_reference)
+    def initialize(case_ccms_reference, provider_username)
       @case_ccms_reference = case_ccms_reference
+      @provider_username = provider_username
     end
 
     def call
@@ -30,7 +31,7 @@ module CCMS
 
     def soap_body(xml)
       xml.__send__('ns2:DocumentUploadRQ') do
-        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
+        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
         xml.__send__('ns2:NotificationID', -1)
         xml.__send__('ns2:CaseReferenceNumber', case_ccms_reference)
         xml.__send__('ns2:Document') { document(xml) }

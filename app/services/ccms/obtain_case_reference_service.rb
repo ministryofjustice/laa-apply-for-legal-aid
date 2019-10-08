@@ -22,7 +22,7 @@ module CCMS
     private
 
     def reference_data_requestor
-      @reference_data_requestor ||= ReferenceDataRequestor.new
+      @reference_data_requestor ||= ReferenceDataRequestor.new(submission.legal_aid_application.provider.username)
     end
   end
 end

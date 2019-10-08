@@ -123,11 +123,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: ccmsSoaClientPassword
-  - name: CCMS_SOA_USER_LOGIN
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaUserLogin
   - name: CCMS_SOA_USER_ROLE
     valueFrom:
       secretKeyRef:

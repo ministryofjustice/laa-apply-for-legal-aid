@@ -23,7 +23,7 @@ module CCMS
     end
 
     def case_add_status_requestor
-      @case_add_status_requestor ||= CaseAddStatusRequestor.new(submission.case_add_transaction_id)
+      @case_add_status_requestor ||= CaseAddStatusRequestor.new(submission.case_add_transaction_id, submission.legal_aid_application.provider.username)
     end
 
     def response

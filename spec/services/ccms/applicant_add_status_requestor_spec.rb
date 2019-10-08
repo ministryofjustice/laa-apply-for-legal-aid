@@ -4,7 +4,7 @@ module CCMS
   RSpec.describe ApplicantAddStatusRequestor do
     let(:expected_xml) { ccms_data_from_file 'applicant_add_status_request.xml' }
     let(:expected_tx_id) { '20190101121530123456' }
-    let(:requestor) { described_class.new(expected_tx_id) }
+    let(:requestor) { described_class.new(expected_tx_id, 'my_login') }
 
     describe 'XML request' do
       include_context 'ccms soa configuration'

@@ -4,7 +4,7 @@ module CCMS
   RSpec.describe ReferenceDataRequestor do
     let(:expected_xml) { ccms_data_from_file 'reference_data_request.xml' }
     let(:expected_tx_id) { '20190101121530123456' }
-    let(:requestor) { described_class.new }
+    let(:requestor) { described_class.new('my_login') }
 
     describe 'XML request' do
       include_context 'ccms soa configuration'

@@ -24,8 +24,8 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
     case username
     when 'NEETADESOR'
       neetadesor_user
-    when 'DAVIDGRAYLLPTWO'
-      davidgrey_user
+    when 'MARTIN.RONAN@DAVIDGRAY.CO.UK'
+      martinronan_user
     when 'HFITZSIMONS@EDWARDHAYES.CO.UK'
       hfitzsimons_user
     else
@@ -47,7 +47,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
     }
   end
 
-  def davidgrey_user
+  def martinronan_user
     {
       providerOffices: [{
         providerfirmId: '19148',
@@ -56,7 +56,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
         smsVendorNum: 'TestSMSVendorNum2',
         smsVendorSite: 'TestSMSVendorSite2' # legal aid code/contract number e.g. 0B721W
       }],
-      contactId: '4953649',
+      contactId: '494000',
       contactName: contact_name
     }
   end

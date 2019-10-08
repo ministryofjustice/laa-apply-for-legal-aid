@@ -15,8 +15,9 @@ module CCMS
 
     attr_reader :applicant_add_transaction_id
 
-    def initialize(applicant_add_transaction_id)
+    def initialize(applicant_add_transaction_id, provider_username)
       @applicant_add_transaction_id = applicant_add_transaction_id
+      @provider_username = provider_username
     end
 
     def call
@@ -31,7 +32,7 @@ module CCMS
 
     def soap_body(xml)
       xml.__send__('ns2:ClientAddUpdtStatusRQ') do
-        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
+        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
         xml.__send__('ns2:TransactionID', applicant_add_transaction_id)
       end
     end

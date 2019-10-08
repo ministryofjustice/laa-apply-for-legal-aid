@@ -11,8 +11,9 @@ module CCMS
 
     attr_reader :case_add_transaction_id
 
-    def initialize(case_add_transaction_id)
+    def initialize(case_add_transaction_id, provider_username)
       @case_add_transaction_id = case_add_transaction_id
+      @provider_username = provider_username
     end
 
     def call
@@ -27,7 +28,7 @@ module CCMS
 
     def soap_body(xml)
       xml.__send__('ns2:CaseAddUpdtStatusRQ') do
-        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml) }
+        xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
         xml.__send__('ns2:TransactionID', case_add_transaction_id)
       end
     end

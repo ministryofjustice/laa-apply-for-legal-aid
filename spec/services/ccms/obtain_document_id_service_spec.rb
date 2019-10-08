@@ -13,7 +13,7 @@ RSpec.describe CCMS::ObtainDocumentIdService do
   let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
   let(:statement_of_case) { create :statement_of_case }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
-  let(:document_id_requestor) { double CCMS::DocumentIdRequestor.new(submission.case_ccms_reference) }
+  let(:document_id_requestor) { double CCMS::DocumentIdRequestor.new(submission.case_ccms_reference, 'my_login') }
   subject { described_class.new(submission) }
 
   context 'operation successful' do

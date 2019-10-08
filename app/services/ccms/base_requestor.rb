@@ -63,10 +63,10 @@ module CCMS
       end
     end
 
-    def ns3_header_rq(xml)
+    def ns3_header_rq(xml, provider_username)
       xml.__send__('ns3:TransactionRequestID', transaction_request_id)
       xml.__send__('ns3:Language', 'ENG')
-      xml.__send__('ns3:UserLoginID', config.user_login)
+      xml.__send__('ns3:UserLoginID', provider_username)
       xml.__send__('ns3:UserRole', config.user_role)
     end
 
