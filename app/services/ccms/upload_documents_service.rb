@@ -26,6 +26,7 @@ module CCMS
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
       update_document_status(document, tx_id, response)
+      submission.save!
     rescue CcmsError => e
       document.status = :failed
       raise CcmsError, e
