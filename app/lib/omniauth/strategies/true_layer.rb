@@ -39,7 +39,6 @@ module OmniAuth
       # It could be something different than true_layer.client_id but it makes sense to use this value
       def consent_id
         Rails.configuration.x.true_layer.client_id
-        nil # TODO: remove when TrueLayer allows us to skip their consent page
       end
     end
   end
