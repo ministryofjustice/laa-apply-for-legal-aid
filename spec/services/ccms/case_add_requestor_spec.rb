@@ -267,7 +267,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                benefit_check_result: true,
                merits_assessment: merits_assessment,
                default_cost_limitation: 25_000.0,
-               office: office
+               office: office,
+               cfe_result: cfe_result
+      end
+
+      let(:cfe_result) do
+        double CFE::Result,
+               result: { assessment_result: 'eligible' },
+               capital_contribution_required?: false,
+               assessment_result: 'eligible'
       end
 
       let(:other_party_1) { create :opponent, :child }
@@ -355,6 +363,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     describe '#call' do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_applicant_and_address, populate_vehicle: true, office: office }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
+      let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+      let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
       let(:office) { create :office }
       let(:requestor) { described_class.new(submission, {}) }
       let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }

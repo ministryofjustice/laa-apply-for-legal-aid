@@ -29,6 +29,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       let(:respondent) { legal_aid_application.respondent }
       let(:ccms_reference) { '300000054005' }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
+      let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+      let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
       let(:requestor) { described_class.new(submission, {}) }
       let(:xml) { requestor.formatted_xml }
       let(:success_prospect) { :likely }
@@ -40,6 +42,78 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           filename = Rails.root.join('tmp/generated_ccms_payload.xml')
           File.open(filename, 'w') { |f| f.puts xml }
           expect(File.exist?(filename)).to be true
+        end
+      end
+
+      context 'CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY' do
+        context 'eligible' do
+          let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+          it 'returns In Scope' do
+            block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
+            expect(block).to have_text_response 'In Scope'
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_ELIGIBILITY')
+            expect(block).to have_text_response 'In Scope'
+          end
+        end
+
+        context 'not_eligible' do
+          let!(:cfe_result) { create :cfe_result, :not_eligible, submission: cfe_submission }
+          it 'returns Out Of Scope' do
+            block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
+            expect(block).to have_text_response 'Out Of Scope'
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_ELIGIBILITY')
+            expect(block).to have_text_response 'Out Of Scope'
+          end
+        end
+
+        context 'contribution_required' do
+          let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission }
+          it 'returns In Scope' do
+            block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
+            expect(block).to have_text_response 'In Scope'
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_ELIGIBILITY')
+            expect(block).to have_text_response 'In Scope'
+          end
+        end
+
+        context 'invalid response' do
+          let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission, result: { assessment_result: 'Unknown' }.to_json }
+          it 'raises' do
+            expect { xml }.to raise_error RuntimeError, 'Unexpected assessment result: Unknown'
+          end
+        end
+      end
+
+      context 'INCOME_CONT' do
+        it 'always returns zero' do
+          block = XmlExtractor.call(xml, :global_means, 'INCOME_CONT')
+          expect(block).to have_currency_response '0.00'
+        end
+      end
+
+      context 'PUI_CLIENT_CAP_CONT' do
+        context 'eligble' do
+          let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+          it 'returns zero' do
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
+            expect(block).to have_currency_response '0.00'
+          end
+        end
+
+        context 'not eligble' do
+          let!(:cfe_result) { create :cfe_result, :not_eligible, submission: cfe_submission }
+          it 'returns zero' do
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
+            expect(block).to have_currency_response '0.00'
+          end
+        end
+
+        context 'contribution_required' do
+          let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission }
+          it 'returns the capital contribution' do
+            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
+            expect(block).to have_currency_response '465.66'
+          end
         end
       end
 

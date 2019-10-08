@@ -741,7 +741,7 @@ global_means:
     :response_type: currency
     :user_defined: true
   PUI_CLIENT_CAP_CONT:
-    :value: 0.0
+    :value: '#means_assessment_capital_contribution'
     :br100_meaning: Client Provisional Capital Contribution
     :response_type: currency
     :user_defined: false
@@ -1138,7 +1138,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   PUI_CLIENT_ELIGIBILITY:
-    :value: In Scope
+    :value: '#client_eligibility'
     :br100_meaning: Client Overall Provisonal Eligibility
     :response_type: text
     :user_defined: false
@@ -2067,7 +2067,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   CLIENT_ELIGIBILITY:
-    :value: In Scope
+    :value: '#client_eligibility'
     :br100_meaning: Client Overall Eligibility
     :response_type: text
     :user_defined: false

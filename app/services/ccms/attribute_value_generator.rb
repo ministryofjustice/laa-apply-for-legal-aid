@@ -195,6 +195,21 @@ module CCMS
       PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
     end
 
+    def client_eligibility(_options)
+      case cfe_result.assessment_result
+      when 'eligible', 'contribution_required'
+        'In Scope'
+      when 'not_eligible'
+        'Out Of Scope'
+      else
+        raise "Unexpected assessment result: #{cfe_result.assessment_result}"
+      end
+    end
+
+    def means_assessment_capital_contribution(_options)
+      cfe_result.capital_contribution_required? ? cfe_result.capital_contribution : 0.0
+    end
+
     private
 
     def applicant
@@ -215,6 +230,10 @@ module CCMS
 
     def other_assets
       @other_assets ||= @legal_aid_application.other_assets_declaration
+    end
+
+    def cfe_result
+      @cfe_result ||= @legal_aid_application.cfe_result
     end
 
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
