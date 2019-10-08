@@ -22,12 +22,4 @@ class Provider < ApplicationRecord
   def user_login_id
     2_016_472
   end
-
-  def supervisor_contact_id
-    7_008_010
-  end
-
-  def fee_earner_contact_id
-    4_925_152
-  end
 end

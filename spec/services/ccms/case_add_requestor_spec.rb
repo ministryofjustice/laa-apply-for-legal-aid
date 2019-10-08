@@ -80,7 +80,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                bank_accounts: [bank_account_1]
       end
 
-      let(:firm) { double Firm, id: 19_148, name: 'Firm1' }
+      let(:firm) { double Firm, id: 19_148, ccms_id: 19_148, name: 'Firm1' }
+
+      let(:office) { double Office, ccms_id: 137_570, name: 'Office1' }
 
       let(:provider) do
         double Provider,
@@ -264,7 +266,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                lead_proceeding_type: proceeding_type_1,
                benefit_check_result: true,
                merits_assessment: merits_assessment,
-               default_cost_limitation: 25_000.0
+               default_cost_limitation: 25_000.0,
+               office: office
       end
 
       let(:other_party_1) { create :opponent, :child }
@@ -350,8 +353,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     describe '#call' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_applicant_and_address, populate_vehicle: true }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_applicant_and_address, populate_vehicle: true, office: office }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
+      let(:office) { create :office }
       let(:requestor) { described_class.new(submission, {}) }
       let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
       let(:expected_soap_operation) { :create_case_application }

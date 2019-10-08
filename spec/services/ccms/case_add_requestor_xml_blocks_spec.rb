@@ -21,7 +21,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                populate_vehicle: true,
                with_bank_accounts: 2,
                proceeding_types: [proceeding_type],
-               provider: provider
+               provider: provider,
+               office: office
       end
 
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
@@ -113,7 +114,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_applicant_and_address,
                    with_bank_accounts: 2,
                    vehicle: nil,
-                   proceeding_types: [proceeding_type]
+                   proceeding_types: [proceeding_type],
+                   office: office
           end
 
           it 'does not generate the vehicle entity' do
@@ -481,7 +483,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it "inserts provider's firm id as a number" do
           %i[global_means global_merits].each do |entity|
             block = XmlExtractor.call(xml, entity, 'USER_PROVIDER_FIRM_ID')
-            expect(block).to have_number_response legal_aid_application.provider.firm.id
+            expect(block).to have_number_response legal_aid_application.provider.firm.ccms_id
           end
         end
       end
@@ -564,6 +566,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
                    provider: provider,
+                   office: office,
                    used_delegated_functions: true,
                    used_delegated_functions_on: Date.today
           end
@@ -598,6 +601,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
                    provider: provider,
+                   office: office,
                    used_delegated_functions: true,
                    used_delegated_functions_on: Date.today
           end
@@ -1133,6 +1137,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
                    provider: provider,
+                   office: office,
                    used_delegated_functions: true,
                    used_delegated_functions_on: Date.today
           end
@@ -1161,6 +1166,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
                    provider: provider,
+                   office: office,
                    used_delegated_functions: true,
                    used_delegated_functions_on: Date.today
           end

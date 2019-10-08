@@ -53,7 +53,7 @@ module CCMS
     def header_request(xml)
       xml.__send__('ns6:TransactionRequestID', transaction_request_id)
       xml.__send__('ns6:Language', 'ENG') # TODO: CCMS placeholder
-      xml.__send__('ns6:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
+      xml.__send__('ns6:UserLoginID', provider.username)
       xml.__send__('ns6:UserRole', 'EXTERNAL') # TODO: CCMS placeholder
     end
 
@@ -114,8 +114,8 @@ module CCMS
     def generate_record_history(xml)
       xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
       xml.__send__('ns0:LastUpdatedBy') do
-        xml.__send__('ns0:UserLoginID', 'NEETADESOR') # TODO: CCMS placeholder
-        xml.__send__('ns0:UserName', 'NEETADESOR') # TODO: CCMS placeholder
+        xml.__send__('ns0:UserLoginID', provider.username)
+        xml.__send__('ns0:UserName', provider.username)
         xml.__send__('ns0:UserType', 'EXTERNAL') # TODO: CCMS placeholder
       end
       xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
@@ -133,13 +133,11 @@ module CCMS
 
     def generate_provider_details(xml)
       xml.__send__('ns2:ProviderCaseReferenceNumber', 'PC4') # TODO: insert @legal_aid_application.provider_case_reference_number when it is available in Apply
-      xml.__send__('ns2:ProviderFirmID', provider.firm.id)
-      xml.__send__('ns2:ProviderOfficeID', provider.selected_office_id)
+      xml.__send__('ns2:ProviderFirmID', provider.firm.ccms_id)
+      xml.__send__('ns2:ProviderOfficeID', @legal_aid_application.office.ccms_id)
       xml.__send__('ns2:ContactUserID') do
         xml.__send__('ns0:UserLoginID', provider.user_login_id)
       end
-      xml.__send__('ns2:SupervisorContactID', provider.supervisor_contact_id)
-      xml.__send__('ns2:FeeEarnerContactID', provider.fee_earner_contact_id)
     end
 
     def generate_category_of_law(xml)
