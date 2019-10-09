@@ -31,8 +31,7 @@ module Providers
           format.html do
             if current_policy.show_submitted_application?
               redirect_to(
-                providers_legal_aid_application_submitted_application_path(legal_aid_application),
-                notice: I18n.t('errors.messages.update_denied')
+                providers_legal_aid_application_submitted_application_path(legal_aid_application)
               )
             else
               redirect_to error_path(:access_denied)
