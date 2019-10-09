@@ -37,8 +37,12 @@ class LegalAidApplicationPolicy < ApplicationPolicy
 
   private
 
+  def application_submitted_states
+    %w[submitting_assessment assessment_submitted generating_reports]
+  end
+
   def my_firms_unsubmitted_record?
-    my_firms_record? && !record.assessment_submitted?
+    my_firms_record? && application_submitted_states.exclude?(record.state)
   end
 
   def my_firms_record?
