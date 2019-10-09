@@ -1,6 +1,6 @@
 en:
-  privacy_policies:
-    show:
+  privacy_policy:
+    index:
       h1-heading: Privacy policy
       what_we_collect:
         header: What data we collect
