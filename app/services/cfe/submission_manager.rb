@@ -20,6 +20,7 @@ module CFE
     rescue CFE::SubmissionError => e
       submission.error_message = e.message
       submission.fail!
+      Raven.capture_exception(e)
       false
     end
 

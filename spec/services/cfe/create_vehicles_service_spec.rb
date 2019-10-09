@@ -3,7 +3,6 @@ require 'rails_helper'
 module CFE
   RSpec.describe CreateVehiclesService do
     let(:application) { create :legal_aid_application }
-    # let!(:vehicle) { create :vehicle, :populated, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'capitals_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
