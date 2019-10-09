@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::DeclarationsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_applicant }
+  let(:firm) { create :firm }
+  let(:provider) { create :provider, firm: firm }
+  let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_applicant, provider: provider }
 
   before do
     get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
@@ -13,6 +15,11 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
     it 'returns http success' do
       subject
       expect(response).to have_http_status(:ok)
+    end
+
+    it 'displays the name of the firm' do
+      subject
+      expect(unescaped_response_body).to include(firm.name)
     end
 
     context 'with completed application' do

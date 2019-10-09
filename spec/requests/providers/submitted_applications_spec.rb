@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Providers::SubmittedApplicationsController, type: :request do
+  let(:firm) { create :firm }
+  let(:provider) { create :provider, firm: firm }
   let(:legal_aid_application) do
-    create :legal_aid_application, :with_everything, :with_proceeding_types, state: :assessment_submitted
+    create :legal_aid_application, :with_everything, :with_proceeding_types, state: :assessment_submitted, provider: provider
   end
   let(:login) { login_as legal_aid_application.provider }
   let(:html) { Nokogiri::HTML(response.body) }
@@ -40,6 +42,11 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
       print_buttons.each do |print_button|
         expect(print_button.attributes['onclick'].value).to eq('window.print()')
       end
+    end
+
+    it 'includes the name of the firm' do
+      subject
+      expect(unescaped_response_body).to include(firm.name)
     end
 
     context 'when the provider is not authenticated' do
