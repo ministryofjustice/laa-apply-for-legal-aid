@@ -285,6 +285,22 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#submitted?' do
+    context 'provider application not submitted' do
+      let(:legal_aid_application) { create :legal_aid_application }
+      it 'returns false' do
+        expect(legal_aid_application.submitted?).to be(false)
+      end
+    end
+
+    context 'provider submitted' do
+      let(:legal_aid_application) { create :legal_aid_application, :submitted_application }
+      it 'returns true' do
+        expect(legal_aid_application.submitted?).to be(true)
+      end
+    end
+  end
+
   describe '#read_only?' do
     context 'provider application not submitted' do
       let(:legal_aid_application) { create :legal_aid_application }

@@ -47,6 +47,10 @@ FactoryBot.define do
       state { 'checking_merits_answers' }
     end
 
+    trait :submitted_application do
+      state { %w[assessment_submitted generating_reports submitting_assessment].sample }
+    end
+
     trait :assessment_submitted do
       state { 'assessment_submitted' }
     end
