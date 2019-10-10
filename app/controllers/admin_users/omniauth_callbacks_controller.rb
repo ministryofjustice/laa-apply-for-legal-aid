@@ -2,8 +2,6 @@
 # Note that you may need to restart the server to apply changes to this file.
 module AdminUsers
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    skip_back_history_for :true_layer, :failure
-
     def google_oauth2
       if admin_user
         flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'

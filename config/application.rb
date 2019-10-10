@@ -67,17 +67,15 @@ module LaaApplyForLegalAid
     config.x.slack_alerts_webhook = ENV['SLACK_ALERTS_WEBHOOK']
     config.x.check_finanical_eligibility_host = ENV['CHECK_FINANCIAL_ELIGIBILITY_HOST']
 
-    config.x.true_layer.client_id      = ENV['TRUE_LAYER_CLIENT_ID']
-    config.x.true_layer.client_sercret = ENV['TRUE_LAYER_CLIENT_SECRET']
-    config.x.true_layer.enable_mock    = ENV['TRUE_LAYER_ENABLE_MOCK'] == 'true'
+    config.x.true_layer.client_id = ENV['TRUE_LAYER_CLIENT_ID']
+    config.x.true_layer.client_secret = ENV['TRUE_LAYER_CLIENT_SECRET']
+    config.x.true_layer.enable_mock = ENV['TRUE_LAYER_ENABLE_MOCK'] == 'true'
 
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
 
     config.x.google_oauth2.client_id      = ENV['GOOGLE_CLIENT_ID']
-    config.x.google_oauth2.client_sercret = ENV['GOOGLE_CLIENT_SECRET']
-    config.x.true_layer.client_id         = ENV['TRUE_LAYER_CLIENT_ID']
-    config.x.true_layer.client_sercret    = ENV['TRUE_LAYER_CLIENT_SECRET']
+    config.x.google_oauth2.client_secret = ENV['GOOGLE_CLIENT_SECRET']
 
     config.active_job.queue_adapter = :sidekiq
   end
