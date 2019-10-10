@@ -5,6 +5,7 @@ module Citizens
     def update
       ResendLinkRequestMailer.notify(
         legal_aid_application,
+        legal_aid_application.provider,
         legal_aid_application.applicant
       ).deliver_later!
     end

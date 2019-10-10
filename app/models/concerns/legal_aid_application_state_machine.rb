@@ -111,7 +111,8 @@ module LegalAidApplicationStateMachine
       end
 
       event :submitted_assessment do
-        transitions from: :submitting_assessment, to: :assessment_submitted
+        transitions from: :submitting_assessment, to: :assessment_submitted,
+                    after: -> { SubmissionConfirmationMailer.notify(self, provider, applicant).deliver_later! }
       end
     end
   end
