@@ -47,7 +47,7 @@ FactoryBot.define do
       state { 'checking_merits_answers' }
     end
 
-    trait :submitted_application do
+    trait :submitted_to_ccms do
       state { %w[assessment_submitted generating_reports submitting_assessment].sample }
     end
 
