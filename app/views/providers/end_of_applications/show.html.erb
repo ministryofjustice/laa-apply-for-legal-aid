@@ -18,7 +18,8 @@
     <li><%= t('.client_sign') %></li>
   </ul>
   <p class="govuk-body"><%= t('.application_to_be_checked') %></p>
-  <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.decision_in_ccms') %></p>
+  <p class="govuk-body"><%= t('.decision_in_ccms') %></p>
+  <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.feedback_link_html', url: new_feedback_path) %></p>
 
   <%= next_action_buttons_with_form(
       url: providers_legal_aid_application_end_of_application_path,
