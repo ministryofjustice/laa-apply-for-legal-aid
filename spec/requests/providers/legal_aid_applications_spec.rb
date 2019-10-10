@@ -135,15 +135,23 @@ RSpec.describe 'providers legal aid application requests', type: :request do
       end
 
       context 'when searching for the application' do
-        let(:params) { { search_term: legal_aid_application.application_ref } }
+        let(:search_term) { legal_aid_application.application_ref }
+        let(:params) { { search_term: search_term } }
 
         it 'shows the application' do
           subject
           expect(unescaped_response_body).to include(legal_aid_application.applicant.last_name)
         end
+
+        it 'logs the search' do
+          expected_log = "Applications search: Provider #{provider.id} searched '#{search_term}' : 1 results."
+          allow(Rails.logger).to receive(:info).at_least(:once)
+          subject
+          expect(Rails.logger).to have_received(:info).with(expected_log).once
+        end
       end
 
-      context 'when searching for the application and not result if found' do
+      context 'when searching for the application and not result is found' do
         let(:params) { { search_term: 'something' } }
 
         it 'does not show the application' do

@@ -12,6 +12,7 @@ module Providers
     def search
       if search_term.present?
         applications
+        log_search
       elsif search_term == ''
         @error = t('.error')
       end
@@ -44,6 +45,10 @@ module Providers
 
     def search_term
       @search_term ||= params[:search_term]
+    end
+
+    def log_search
+      Rails.logger.info("Applications search: Provider #{current_provider.id} searched '#{search_term}' : #{@pagy.count} results.")
     end
   end
 end
