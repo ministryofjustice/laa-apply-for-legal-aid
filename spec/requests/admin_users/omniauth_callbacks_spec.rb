@@ -39,6 +39,12 @@ RSpec.describe 'admin users omniauth call back', type: :request do
         subject
         expect(response).to redirect_to(error_path(:access_denied))
       end
+
+      it 'displays failure information' do
+        subject
+        follow_redirect!
+        expect(response.body).to include('You do not have an Admin account')
+      end
     end
   end
 end
