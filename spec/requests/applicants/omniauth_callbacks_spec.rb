@@ -86,7 +86,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
         allow_any_instance_of(Logger).to receive(:add)
       end
 
-      it 'redirects to root' do
+      it 'redirects to error page' do
         subject
         follow_redirect!
         expect(response).to redirect_to(error_path(:access_denied))

@@ -4,22 +4,22 @@ RSpec.describe 'admin users omniauth call back', type: :request do
   around(:example) do |example|
     OmniAuth.config.test_mode = true
     example.run
-    OmniAuth.config.mock_auth[:true_layer] = nil
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
     OmniAuth.config.test_mode = false
   end
 
   let(:token) { SecureRandom.uuid }
   let(:expires_at) { 1.hour.from_now.round }
   let(:google_expires_at) { expires_at.to_i }
-  let(:admin_user) { create :admin_user }
+  let!(:admin_user) { create :admin_user }
+  let(:email) { admin_user.email }
+  let(:target_url) { admin_settings_url }
 
   before do
     OmniAuth.config.add_mock(
       :google_oauth2,
-      credentials: {
-        token: token,
-        expires_at: google_expires_at
-      }
+      info: { email: email },
+      origin: target_url
     )
   end
 
@@ -31,6 +31,14 @@ RSpec.describe 'admin users omniauth call back', type: :request do
     it 'redirects to admin user root' do
       expect(subject).to redirect_to(admin_root_path)
     end
-  end
 
+    context 'with unknown email' do
+      let(:email) { Faker::Internet.email }
+
+      it 'redirects to error page' do
+        subject
+        expect(response).to redirect_to(error_path(:access_denied))
+      end
+    end
+  end
 end
