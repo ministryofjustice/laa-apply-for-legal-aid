@@ -165,7 +165,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     checking_citizen_answers? || provider_submitted?
   end
 
-  def submitted?
+  def submitted_to_ccms?
     generating_reports? ||
       submitting_assessment? ||
       assessment_submitted?

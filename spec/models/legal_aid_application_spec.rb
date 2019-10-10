@@ -285,18 +285,18 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#submitted?' do
-    context 'provider application not submitted' do
+  describe '#submitted_to_ccms?' do
+    context 'application not submitted to ccms' do
       let(:legal_aid_application) { create :legal_aid_application }
       it 'returns false' do
-        expect(legal_aid_application.submitted?).to be(false)
+        expect(legal_aid_application.submitted_to_ccms?).to be(false)
       end
     end
 
-    context 'provider submitted' do
-      let(:legal_aid_application) { create :legal_aid_application, :submitted_application }
+    context 'application submitted to ccms' do
+      let(:legal_aid_application) { create :legal_aid_application, :submitted_to_ccms }
       it 'returns true' do
-        expect(legal_aid_application.submitted?).to be(true)
+        expect(legal_aid_application.submitted_to_ccms?).to be(true)
       end
     end
   end
