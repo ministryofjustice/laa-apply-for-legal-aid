@@ -7,7 +7,7 @@
       <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
 
       <div class="govuk-radios bank-selection">
-        <%= render partial: 'bank', collection: TrueLayerBank.banks, locals: { form: form } %>
+        <%= render partial: 'bank', collection: TrueLayerBank.available_banks, locals: { form: form } %>
       </div>
     <% end %>
 
