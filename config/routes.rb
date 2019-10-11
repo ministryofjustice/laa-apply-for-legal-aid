@@ -15,8 +15,28 @@ Rails.application.routes.draw do
   post '/saml/auth' => 'saml_idp#create'
 
   devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
-  devise_for :applicants, controllers: { omniauth_callbacks: 'applicants/omniauth_callbacks' }
+  devise_for :applicants
   devise_for :admin_users
+
+  devise_scope :applicant do
+    match(
+      'auth/true_layer/callback',
+      to: 'applicants/omniauth_callbacks#true_layer',
+      via: %i[get puts],
+      as: :applicant_true_layer_omniauth_callback
+    )
+  end
+
+  devise_scope :admin_user do
+    match(
+      'auth/google_oauth2/callback',
+      to: 'admin_users/omniauth_callbacks#google_oauth2',
+      via: %i[get puts],
+      as: :admin_user_google_oauth2_omniauth_callback
+    )
+  end
+
+  get 'auth/failure', to: 'auth#failure'
 
   resources :status, only: [:index]
   resource :contact, only: [:show]

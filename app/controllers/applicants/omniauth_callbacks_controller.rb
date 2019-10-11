@@ -17,11 +17,6 @@ module Applicants
       redirect_to gather_citizens_accounts_path
     end
 
-    def failure
-      set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Process cancelled')
-      redirect_to citizens_consent_path
-    end
-
     private
 
     def store_tokens

@@ -62,6 +62,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include RequestHelpers, type: :request
   config.include TrueLayerHelpers
+  config.include OmniauthPathHelper
   config.include FlowHelpers, type: :request
   config.include CCMS
   config.include XMLBlockMatchers

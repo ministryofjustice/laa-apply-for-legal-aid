@@ -40,7 +40,7 @@ RSpec.describe Citizens::BanksController, type: :request do
     before { post citizens_banks_path, params: { provider_id: provider_id } }
 
     it 'redirects to true layer' do
-      expect(response).to redirect_to(applicant_true_layer_omniauth_authorize_path)
+      expect(response).to redirect_to(omniauth_login_start_path(:true_layer))
     end
 
     it 'sets provider_id in the session' do

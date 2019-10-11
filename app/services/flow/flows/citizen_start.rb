@@ -18,7 +18,7 @@ module Flow
           forward: :true_layer
         },
         true_layer: {
-          path: ->(_) { urls.applicant_true_layer_omniauth_authorize_path }
+          path: ->(_) { omniauth_login_start_path(:true_layer) }
         },
         accounts: {
           forward: :additional_accounts
