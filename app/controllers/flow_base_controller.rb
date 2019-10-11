@@ -1,4 +1,4 @@
-class BaseController < ApplicationController
+class FlowBaseController < ApplicationController
   include Flowable
 
   # This stops the browser caching these pages.

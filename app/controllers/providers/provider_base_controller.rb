@@ -1,5 +1,5 @@
 module Providers
-  class ProviderBaseController < BaseController
+  class ProviderBaseController < FlowBaseController
     before_action :authenticate_provider!
     before_action :set_cache_buster
     include ApplicationDependable

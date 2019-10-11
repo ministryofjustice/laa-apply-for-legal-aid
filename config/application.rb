@@ -78,6 +78,8 @@ module LaaApplyForLegalAid
     config.x.google_oauth2.client_id      = ENV['GOOGLE_CLIENT_ID']
     config.x.google_oauth2.client_secret = ENV['GOOGLE_CLIENT_SECRET']
 
+    config.x.db_url = Rails.env.production? ? "postgres://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}:5432/#{ENV['POSTGRES_DATABASE']}" : 'postgres://localhost:5432/apply_for_legal_aid_dev' # rubocop:disable Metrics/LineLength
+
     config.active_job.queue_adapter = :sidekiq
   end
 end
