@@ -1,0 +1,33 @@
+<%= page_template page_title: t('.title'), template: :basic do %>
+
+  <%= render 'error' if @error %>
+
+  <%= form_with(method: :get, local: true) do |form| %>
+    <%= govuk_form_group(show_error_if: @error) do %>
+      <%= govuk_fieldset_header do %>
+        <h1 class="govuk-fieldset__heading">
+          <%= label_tag(:search_term, page_title) %>
+        </h1>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+
+      <%= form.govuk_text_field(
+            :search_term,
+            label: nil,
+            hint: t('.hint'),
+            class: 'govuk-!-width-two-thirds',
+            value: @search_term
+          ) %>
+    <% end %>
+
+    <%= form.submit(t('.search_button'), class: 'govuk-button form-button') %>
+  <% end %>
+<% end %>
+
+<% if @legal_aid_applications && @legal_aid_applications.any? %>
+  <h3 class="govuk-heading-m"><%= t('.search_results') %></h3>
+  <%= render 'legal_aid_applications', legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
+<% elsif @search_term.present? %>
+  <h3 class="govuk-heading-m"><%= t('.empty_result') %></h3>
+<% end %>

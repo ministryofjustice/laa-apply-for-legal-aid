@@ -183,11 +183,19 @@ en:
         basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
         heading_1: Your legal aid applications
         make_new_application: Make a new application
+        current_applications: Current applications
+        search_applications: Search applications
+      search:
+        title: Search applications
+        hint: Search by client name or reference number.
+        error: Please enter a criteria
+        search_results: Search results
+        empty_result: Application cannot be found
+        search_button: Search
       legal_aid_applications:
         applicant_name: Name
         application_ref: LAA Ref
         created_at: Start date
-        current_application: Current applications
         certificate_type: Certificate type
         status: Status
         emergency: Emergency

@@ -29,6 +29,11 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         expect(response.body).to include(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
 
+      it 'includes a link to the search page' do
+        subject
+        expect(response.body).to include(search_providers_legal_aid_applications_path)
+      end
+
       context 'when legal_aid_application current path set' do
         let!(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
         let!(:legal_aid_application) { create :legal_aid_application, provider_step: :applicant_details }
@@ -102,6 +107,78 @@ RSpec.describe 'providers legal aid application requests', type: :request do
 
       it 'displays no results' do
         expect(response.body).to include('No results')
+      end
+    end
+  end
+
+  describe 'GET /providers/applications/search' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:provider) { legal_aid_application.provider }
+    let(:other_provider) { create(:provider) }
+    let(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
+    let(:params) { {} }
+    subject { get search_providers_legal_aid_applications_path(params) }
+
+    context 'when the provider is not authenticated' do
+      before { subject }
+      it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'when the provider is authenticated' do
+      before do
+        login_as provider
+      end
+
+      it 'does not show any application' do
+        subject
+        expect(response.body).not_to include(legal_aid_application.application_ref)
+      end
+
+      context 'when searching for the application' do
+        let(:search_term) { legal_aid_application.application_ref }
+        let(:params) { { search_term: search_term } }
+
+        it 'shows the application' do
+          subject
+          expect(unescaped_response_body).to include(legal_aid_application.applicant.last_name)
+        end
+
+        it 'logs the search' do
+          expected_log = "Applications search: Provider #{provider.id} searched '#{search_term}' : 1 results."
+          allow(Rails.logger).to receive(:info).at_least(:once)
+          subject
+          expect(Rails.logger).to have_received(:info).with(expected_log).once
+        end
+      end
+
+      context 'when searching for the application and not result is found' do
+        let(:params) { { search_term: 'something' } }
+
+        it 'does not show the application' do
+          subject
+          expect(unescaped_response_body).not_to include(legal_aid_application.application_ref)
+        end
+      end
+
+      context 'when not entering search criteria' do
+        let(:params) { { search_term: '' } }
+
+        it 'shows an error' do
+          subject
+          expect(response.body).to include(I18n.t('providers.legal_aid_applications.search.error'))
+        end
+      end
+    end
+
+    context 'when another provider is authenticated and search the application' do
+      let(:params) { { search_term: legal_aid_application.application_ref } }
+      before do
+        login_as other_provider
+        subject
+      end
+
+      it 'does not show the application' do
+        expect(unescaped_response_body).not_to include(legal_aid_application.applicant.last_name)
       end
     end
   end

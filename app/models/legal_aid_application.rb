@@ -43,6 +43,20 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
 
   scope :latest, -> { order(created_at: :desc) }
+  scope :search, ->(term) do
+    attributes = [
+      'application_ref',
+      'concat(applicants.first_name, applicants.last_name)',
+      'ccms_submissions.case_ccms_reference'
+    ]
+    clean_term = term.to_s.downcase.gsub(/[^0-9a-z\\s]/i, '')
+    queries = attributes.map do |attribute|
+      left_joins(:applicant, :ccms_submission).where("regexp_replace(lower(#{attribute}),'[^[:alnum:]]', '', 'g') like ?", "%#{clean_term}%")
+    end
+    applications = queries.first
+    queries[1..-1].each { |query| applications = applications.or(query) }
+    applications
+  end
 
   enum(
     own_home: {
