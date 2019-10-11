@@ -199,6 +199,7 @@ Rails.application.routes.draw do
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]
       resource :submitted_application, only: :show
+      resources :delegated_confirmation, only: :index
       resource :merits_report, only: :show
       resource :means_report, only: :show
     end

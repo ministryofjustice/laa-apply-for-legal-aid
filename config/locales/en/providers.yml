@@ -129,6 +129,15 @@ en:
     date_client_told_incidents:
       show:
         h1-heading: Latest incident details
+    delegated_confirmation:
+      index:
+        page-heading: You notified us you've used delegated functions
+        sub_title: Your case reference number is
+        what_happens_next: What happens next
+        info: You can return to this application when you're ready to make a substantive application.
+        warning:
+          application_deadline_date: You must submit a substantive application by 10 November 2019.
+        back_home: Back to your applications
     details_latest_incidents:
       show:
         h1-heading: Details of the latest domestic abuse incident
