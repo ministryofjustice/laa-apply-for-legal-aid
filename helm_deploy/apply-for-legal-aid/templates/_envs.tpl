@@ -288,8 +288,8 @@ env:
   - name: METRICS_SERVICE_HOST
     value: {{ template "apply-for-legal-aid.fullname" . }}-metrics
   - name: CHECK_FINANCIAL_ELIGIBILITY_HOST
-      valueFrom:
-        secretKeyRef:
-          name: {{ template "apply-for-legal-aid.fullname" . }}
-          key: checkFinancialEligibilityHost
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: checkFinancialEligibilityHost
 {{- end }}
