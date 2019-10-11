@@ -144,6 +144,7 @@ en:
         client_sign: get your client to sign it
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
         decision_in_ccms: We'll let you know our decision in CCMS.
+        feedback_link_html: 'Please provide us with feedback to <a href="%{url}" class="govuk_link">help us improve this service</a>.'
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
     estimated_legal_costs:

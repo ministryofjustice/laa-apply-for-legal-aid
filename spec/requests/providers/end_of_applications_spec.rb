@@ -21,6 +21,11 @@ RSpec.describe Providers::EndOfApplicationsController, type: :request do
       expect(response.body).to include(legal_aid_application.application_ref)
     end
 
+    it 'has a link to the feedback page' do
+      subject
+      expect(response.body).to include(new_feedback_path)
+    end
+
     context 'when the provider is not authenticated' do
       let(:login) { nil }
       before { subject }
