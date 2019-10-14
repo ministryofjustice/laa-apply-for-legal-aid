@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: 'true_layer_banks_api', allow_playback_repeats: true } do
-  let(:group) { 'england-and-wales' }
-
   subject { described_class.new }
 
   describe '.banks' do
@@ -11,7 +9,7 @@ RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: 'true_layer_bank
     end
 
     context 'on failure' do
-      let(:uri) { URI.parse(described_class::API_URL) }
+      let(:uri) { URI.parse(described_class::API_URL_OPEN_BANKING) }
       before do
         allow(Net::HTTP).to receive(:get_response).with(uri).and_return(OpenStruct.new)
       end
@@ -26,6 +24,15 @@ RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: 'true_layer_bank
 
     it 'is an array' do
       expect(banks).to be_a(Array)
+    end
+
+    it 'is sorted by display_name' do
+      expect(banks.pluck(:display_name).sort).to eq(banks.pluck(:display_name))
+    end
+
+    it 'is contains open banking and oauth banks' do
+      expect(banks.select { |b| b[:provider_id].starts_with?('ob-') }).not_to be_empty
+      expect(banks.select { |b| b[:provider_id].starts_with?('oauth-') }).not_to be_empty
     end
 
     it 'contains data about the banks' do

@@ -14,16 +14,22 @@ class TrueLayerBank < ApplicationRecord
     logo_url: 'https://truelayer-client-logos.s3-eu-west-1.amazonaws.com/banks/banks-icons/mock-icon.svg'
   }.freeze
 
-  def self.banks
+  def self.available_banks
     TrueLayerBanksUpdateWorker.perform_in 10.seconds
     instance = by_updated_at.last || create!
-    return instance.banks unless mock_bank
+    return instance.available_banks unless mock_bank
 
-    [mock_bank] + instance.banks
+    [mock_bank] + instance.available_banks
   end
 
   def self.mock_bank
     Rails.configuration.x.true_layer.enable_mock ? MOCK_BANK : nil
+  end
+
+  def available_banks
+    banks.select do |bank|
+      bank[:provider_id].in?(Rails.configuration.x.true_layer.banks)
+    end
   end
 
   def populate_banks
