@@ -20,6 +20,10 @@
           </li>
 
           <li class="govuk-footer__inline-list-item">
+            <%= link_to t('layouts.application.footer.privacy_policy'), privacy_policy_index_path, class: 'govuk-footer__link' %>
+          </li>
+
+          <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="https://www.gov.uk/government/publications/laa-online-portal-help-and-information">
               <!-- TO DO differs between provider/citizen -->
               <%= t('layouts.application.footer.terms') %>

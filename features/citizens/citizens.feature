@@ -16,6 +16,16 @@ Feature: Citizen journey
     Then I click 'Continue'
     Then I am directed to TrueLayer
 
+  @javascript @vcr
+  Scenario: View privacy policy
+    Given An application has been created
+    Then I visit the start of the financial assessment
+    Then I click link "Privacy policy"
+    Then I should be on a page showing "Why we need your data"
+    Then I should be on a page showing "Your rights"
+    Then I click link "Back"
+    Then I should be on a page showing 'Complete your legal aid financial assessment'
+
   @javascript @webhint
   Scenario: Follow citizen journey from Accounts page
     Given An application has been created
