@@ -9,9 +9,18 @@ module SmokeTest
       send_citizen_start_email
       send_resend_link_request_email
       send_submission_confirmation_email
+      send_email_reminder
     end
 
     private
+
+    def send_email_reminder
+      SubmitApplicationReminderMailer.notify_provider(
+        JSON.parse(legal_aid_application.to_json),
+        JSON.parse(legal_aid_application.provider.name.to_json),
+        to
+      ).deliver_later!
+    end
 
     def send_feedback_email
       FeedbackMailer.notify(
@@ -54,6 +63,8 @@ module SmokeTest
       @legal_aid_application || FactoryBot.build(
         :legal_aid_application,
         :with_applicant,
+        :with_delegated_functions,
+        :with_substantive_application_deadline_on,
         provider: provider,
         application_ref: SecureRandom.hex
       )
