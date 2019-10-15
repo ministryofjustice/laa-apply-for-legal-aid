@@ -98,6 +98,11 @@ GEM
       html_tokenizer (~> 0.0.6)
       parser (>= 2.4)
       smart_properties
+    blazer (2.2.1)
+      activerecord (>= 5)
+      chartkick (>= 3.2)
+      railties (>= 5)
+      safely_block (>= 0.1.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     browser (2.6.1)
@@ -114,6 +119,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
+    chartkick (3.2.1)
     childprocess (3.0.0)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
@@ -170,6 +176,7 @@ GEM
       rainbow
       rubocop (~> 0.51)
       smart_properties
+    errbase (0.1.1)
     erubi (1.9.0)
     execjs (2.7.0)
     factory_bot (5.1.1)
@@ -400,6 +407,8 @@ GEM
       nokogiri (>= 1.5.10)
     rubyzip (2.0.0)
     safe_yaml (1.0.5)
+    safely_block (0.2.2)
+      errbase (>= 0.1.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.0.1)
@@ -517,6 +526,7 @@ DEPENDENCIES
   addressable
   awesome_print (~> 1.8.0)
   aws-sdk-s3
+  blazer
   bootsnap (>= 1.1.0)
   browser
   business

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/support', as: 'rails_admin'
+  mount Blazer::Engine, at: 'blazer'
 
   root to: 'providers/start#index'
 
