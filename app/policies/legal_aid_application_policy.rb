@@ -38,7 +38,7 @@ class LegalAidApplicationPolicy < ApplicationPolicy
   private
 
   def my_firms_unsubmitted_record?
-    my_firms_record? && !record.assessment_submitted?
+    my_firms_record? && !record.submitted_to_ccms?
   end
 
   def my_firms_record?
