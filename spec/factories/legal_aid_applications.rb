@@ -174,6 +174,25 @@ FactoryBot.define do
     end
 
     trait :with_everything do
+      with_applicant
+      provider_submitted
+      with_savings_amount
+      with_other_assets_declaration
+      with_own_home_mortgaged
+      property_value { rand(1...1_000_000.0).round(2) }
+      outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
+      shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
+      percentage_home { rand(1...99.0).round(2) }
+      with_merits_assessment
+      with_merits_statement_of_case
+      with_respondent
+      with_restrictions
+      with_incident
+      with_vehicle
+      with_transaction_period
+    end
+
+    trait :with_everything_and_address do
       with_applicant_and_address
       provider_submitted
       with_savings_amount

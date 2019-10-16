@@ -31,21 +31,21 @@ RSpec.describe CCMS::UploadDocumentsService do
   end
 
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
-  # let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, statement_of_case_id, 'base64encodedpdf', 'my_login') }
+  let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, statement_of_case_id, 'base64encodedpdf', 'my_login') }
   let(:document_upload_response) { ccms_data_from_file 'document_upload_response.xml' }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   subject { described_class.new(submission) }
 
   before do
     PdfConverter.call(PdfFile.find_or_create_by(original_file_id: statement_of_case_id).id)
-    # allow(CCMS::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
-    # allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
+    allow(CCMS::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
+    allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
   end
 
   context 'operation successful' do
-    # before do
-    #   allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
-    # end
+    before do
+      allow(document_upload_requestor).to receive(:call).and_return(document_upload_response)
+    end
 
     it 'creates a DocumentUploadRequestor object for each document to be uploaded' do
       expect(CCMS::DocumentUploadRequestor).to receive(:new).exactly(submission.submission_document.count).times
@@ -75,6 +75,23 @@ RSpec.describe CCMS::UploadDocumentsService do
       expect(history.success).to be true
       expect(history.details).to be_nil
     end
+
+    # it 'writes the request body to the history record' do
+    #   subject.call
+    #   expect(history.request).to be_soap_envelope_with(
+    #     command: 'ns2:DocumentUploadRQ',
+    #     transaction_id: '20190301030405123456',
+    #     matching: [
+    #       '<ns4:DocumentType>ADMIN1</ns4:DocumentType>',
+    #       "<ns2:CaseReferenceNumber>#{legal_aid_application.case_ccms_reference}</ns2:CaseReferenceNumber>"
+    #     ]
+    #   )
+    # end
+    #
+    # it 'writes the response body to the history record' do
+    #   subject.call
+    #   expect(history.response).to eq document_upload_response
+    # end
   end
 
   context 'operation unsuccessful' do
@@ -122,7 +139,8 @@ RSpec.describe CCMS::UploadDocumentsService do
         expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match('failed to upload to CCMS')
+        expect(history.details).to match(/CCMS::CcmsError/)
+        expect(history.details).to match(/The following documents failed to upload/)
       end
     end
   end

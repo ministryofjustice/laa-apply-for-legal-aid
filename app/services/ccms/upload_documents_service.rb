@@ -7,11 +7,9 @@ module CCMS
 
       failed_uploads = submission.submission_document.select { |document| document.status == 'failed' }
 
-      if failed_uploads.empty?
-        create_history('case_created', submission.aasm_state, nil, nil) if submission.complete!
-      else
-        raise CcmsError, "The following documents failed to upload: #{failed_uploads.map(&:id).join(', ')}"
-      end
+      raise CcmsError, "The following documents failed to upload: #{failed_uploads.map(&:id).join(', ')}" if failed_uploads.present?
+
+      create_history('case_created', submission.aasm_state, nil, nil) if submission.complete!
     rescue CcmsError => e
       handle_exception(e, nil)
     end
@@ -21,7 +19,8 @@ module CCMS
     def upload_document(document)
       document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference,
                                                               document.ccms_document_id,
-                                                              Base64.strict_encode64(pdf_binary(document)))
+                                                              Base64.strict_encode64(pdf_binary(document)),
+                                                              submission.legal_aid_application.provider.username)
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
       update_document_status(document, tx_id, response)

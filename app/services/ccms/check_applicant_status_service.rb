@@ -19,8 +19,6 @@ module CCMS
         create_history(:applicant_submitted, submission.aasm_state, xml_request, response) if submission.obtain_applicant_ref!
       elsif submission.applicant_poll_count >= Submission::POLL_LIMIT
         raise CcmsError, 'Poll limit exceeded'
-        # handle_exception(exception, xml_request)
-        # handle_unsuccessful_response('Poll limit exceeded', xml_request, response)
       else
         create_history(submission.aasm_state, submission.aasm_state, xml_request, response)
       end
