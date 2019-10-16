@@ -8,14 +8,22 @@ module Providers
     end
 
     def continue
-      legal_aid_application.complete_means! unless draft_selected? || legal_aid_application.means_completed?
-
+      unless draft_selected? || legal_aid_application.means_completed?
+        redirect_to(problem_index_path) && return unless check_financial_eligibility
+        legal_aid_application.complete_means!
+      end
       continue_or_draft
     end
 
     def reset
       legal_aid_application.reset!
       redirect_to back_path
+    end
+
+    private
+
+    def check_financial_eligibility
+      CFE::SubmissionManager.call(legal_aid_application.id)
     end
   end
 end

@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_10_11_142505) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -283,6 +282,14 @@ ActiveRecord::Schema.define(version: 2019_10_11_142505) do
     t.string "case_add_transaction_id"
     t.integer "case_poll_count", default: 0
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
+  end
+
+  create_table "cfe_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "submission_id"
+    t.text "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cfe_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

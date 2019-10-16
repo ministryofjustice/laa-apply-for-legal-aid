@@ -12,10 +12,10 @@ module CFE
       it 'raises an exception' do
         expect {
           described_class.call(submission)
-        }.to raise_error CFE::SubmissionError, 'Unprocessable entity'
+        }.to raise_error CFE::SubmissionError, /Unprocessable entity/
       end
 
-      it 'updates the submission record from initialised to failed' do
+      it 'updates the submission history record from initialised to failed' do
         expect(submission.submission_histories).to be_empty
         expect { described_class.call(submission) }.to raise_error CFE::SubmissionError
 

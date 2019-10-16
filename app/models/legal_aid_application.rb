@@ -30,6 +30,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :scope_limitations, through: :application_scope_limitations
   has_one_attached :merits_report
   has_one_attached :means_report
+  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', dependent: :destroy
+  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission'
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -73,6 +75,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   #
   def lead_proceeding_type
     proceeding_types.first
+  end
+
+  def cfe_result
+    most_recent_cfe_submission.result
   end
 
   def calculation_date
