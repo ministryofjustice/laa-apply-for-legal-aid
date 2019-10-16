@@ -136,7 +136,7 @@ en:
         what_happens_next: What happens next
         info: You can return to this application when you're ready to make a substantive application.
         warning:
-          application_deadline_date: You must submit a substantive application by 10 November 2019.
+          application_deadline_date: "You must submit a substantive application by "
         back_home: Back to your applications
     details_latest_incidents:
       show:

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::DelegatedConfirmationController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create :legal_aid_application, :with_everything, substantive_application_deadline_on: 1.days.ago }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/delegated_confirmation' do
@@ -24,6 +24,10 @@ RSpec.describe Providers::DelegatedConfirmationController, type: :request do
 
       it 'displays the correct page' do
         expect(unescaped_response_body).to include("You notified us you've used delegated functions")
+      end
+
+      it 'displays the deadline date' do
+        expect(unescaped_response_body).to include("You must submit a substantive application by #{legal_aid_application.substantive_application_deadline_on}.")
       end
     end
   end

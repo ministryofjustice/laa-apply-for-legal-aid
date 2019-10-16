@@ -16,7 +16,7 @@
    <%= t '.info' %>
   </p>
   <div class="govuk-inset-text">
-    <%= t('.warning.application_deadline_date') %>
+    <%= t('.warning.application_deadline_date') %><%= @legal_aid_application.substantive_application_deadline_on %>.
   </div>
   <%= link_to(
         t('.back_home'),
