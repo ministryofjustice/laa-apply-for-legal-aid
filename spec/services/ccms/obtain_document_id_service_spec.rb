@@ -8,11 +8,10 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              :with_proceeding_types,
              :with_respondent,
              :with_merits_assessment,
-             :with_transaction_period,
-             statement_of_case: statement_of_case
+             :with_transaction_period
     end
     let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
-    let(:statement_of_case) { create :statement_of_case }
+    let!(:statement_of_case) { create :statement_of_case, legal_aid_application: legal_aid_application }
     let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep' }
     let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
     let(:document_id_request) { ccms_data_from_file 'document_id_request.xml' }
@@ -26,14 +25,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       VCR.turn_on!
     end
 
-    before do
-      # stub a post request - any body, any headers
-      stub_request(:post, endpoint).to_return(body: response_body, status: 200)
-      # stub the transaction request id that we expect in the response
-      allow_any_instance_of(DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
-    end
-
     context 'operation successful' do
+      before do
+        # stub a post request - any body, any headers
+        stub_request(:post, endpoint).to_return(body: response_body, status: 200)
+
+        # stub the transaction request id that we expect in the response
+        allow_any_instance_of(DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
+      end
+
       context 'the application has no documents' do
         it 'creates an empty documents array' do
           subject.call
@@ -57,10 +57,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(history.request).to be_soap_envelope_with(
             command: 'ns2:DocumentUploadRQ',
             transaction_id: '20190301030405123456',
-            matching: [
-              '<ns4:DocumentType>ADMIN1</ns4:DocumentType>',
-              "<ns2:CaseReferenceNumber>#{legal_aid_application.case_ccms_reference}</ns2:CaseReferenceNumber>"
-            ]
+            matching: ['<ns4:DocumentType>ADMIN1</ns4:DocumentType>']
           )
         end
 
@@ -71,7 +68,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'the application has documents to upload' do
-        let(:statement_of_case) { create :statement_of_case, :with_attached_files }
+        let(:statement_of_case) { create :statement_of_case, :with_attached_files, legal_aid_application: legal_aid_application }
 
         before do
           Reports::MeansReportCreator.call(legal_aid_application)
@@ -107,6 +104,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
     context 'operation unsuccessful' do
       context 'when populating documents' do
+        let!(:statement_of_case) { create :statement_of_case, :with_attached_files, legal_aid_application: legal_aid_application }
         before do
           allow_any_instance_of(DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
           expect_any_instance_of(DocumentIdRequestor).to receive(:call).and_raise(CcmsError, 'failure populating document hash')
@@ -128,8 +126,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             command: 'ns2:DocumentUploadRQ',
             transaction_id: '20190301030405123456',
             matching: [
-              '<ns4:DocumentType>ADMIN1</ns4:DocumentType>',
-              "<ns2:CaseReferenceNumber>#{legal_aid_application.case_ccms_reference}</ns2:CaseReferenceNumber>"
+              '<ns4:DocumentType>ADMIN1</ns4:DocumentType>'
             ]
           )
           expect(history.response).to be_nil
@@ -139,10 +136,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'when requesting document_ids' do
         before do
           expect_any_instance_of(DocumentIdRequestor).to receive(:call).and_raise(CcmsError, 'failure populating document hash')
-          allow_any_instance_of(DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
         end
 
-        let(:statement_of_case) { create :statement_of_case, :with_attached_files }
+        let(:statement_of_case) { create :statement_of_case, :with_attached_files, legal_aid_application: legal_aid_application }
 
         it 'changes the submission state to failed' do
           expect { subject.call }.to change { submission.aasm_state }.to 'failed'
@@ -161,11 +157,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(history.details).to match(/CCMS::CcmsError/)
           expect(history.details).to match(/failure populating document hash/)
           expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:DocumentUploadRQ',
-            transaction_id: '20190301030405123456',
-            matching: [
-              "<ns2:CaseReferenceNumber>#{legal_aid_application.case_ccms_reference}</ns2:CaseReferenceNumber>"
-            ]
+            command: 'ns2:DocumentUploadRQ'
+            # matching: ['<ns2:CaseReferenceNumber>8408796346</ns2:CaseReferenceNumber>']
           )
           expect(history.response).to be_nil
         end

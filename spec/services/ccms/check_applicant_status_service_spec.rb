@@ -94,7 +94,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           let(:expected_applicant_ccms_reference) { Faker::Number.number.to_s }
 
           before do
-            allow_any_instance_of(ApplicantAddStatusResponseParser).to receive(:success?).and_return(true)
             allow_any_instance_of(ApplicantAddStatusResponseParser).to receive(:applicant_ccms_reference).and_return(expected_applicant_ccms_reference)
           end
 
