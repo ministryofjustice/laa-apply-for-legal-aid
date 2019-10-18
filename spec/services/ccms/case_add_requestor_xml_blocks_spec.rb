@@ -891,7 +891,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
 
         it 'returns false when client does NOT have other savings' do
-          allow(legal_aid_application.savings_amount).to receive(:offline_accounts).and_return(nil)
+          allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
+          allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
           expect(block).to have_boolean_response false
         end

@@ -78,8 +78,12 @@ module CFE # rubocop:disable Metrics/ModuleLength
       {
         bank_accounts: [
           {
-            description: 'Off-line bank accounts',
-            value: savings_amount.offline_accounts.to_s
+            description: 'Off-line current accounts',
+            value: savings_amount.offline_current_accounts.to_s
+          },
+          {
+            description: 'Off-line savings accounts',
+            value: savings_amount.offline_savings_accounts.to_s
           },
           {
             description: 'Cash',

@@ -76,7 +76,7 @@ Feature: Citizen journey
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "What types of savings or investments do you have?"
-    Then I select "Cash savings"
+    Then I select "Money not in a bank account"
     Then I fill "Cash" with "100"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets do you have?"
@@ -160,7 +160,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Cash savings'
+    And the answer for 'Savings and investments' should be 'Money not in a bank account'
     And the answer for 'Savings and investments' should be '£1,000.00'
 
   @javascript
@@ -169,13 +169,13 @@ Feature: Citizen journey
     And I complete the citizen journey as far as check your answers
     And I click Check Your Answers Change link for 'Savings and investments'
     Then I should be on a page showing 'What types of savings or investments do you have?'
-    Then I select 'Money in accounts you do not access with online banking'
-    Then I fill 'Offline accounts' with '5000'
+    Then I select 'Current account'
+    Then I fill 'Offline current accounts' with '5000'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Money in accounts you do not access with online banking'
+    And the answer for 'Savings and investments' should be 'Current account'
     And the answer for 'Savings and investments' should be '£5,000.00'
 
   @javascript
@@ -189,7 +189,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Cash savings'
+    And the answer for 'Savings and investments' should be 'Money not in a bank account'
     And the answer for 'Savings and investments' should be '£100.00'
 
   @javascript

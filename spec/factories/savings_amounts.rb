@@ -3,7 +3,8 @@ FactoryBot.define do
     legal_aid_application
 
     trait :with_values do
-      offline_accounts { rand(1...1_000_000.0).round(2) }
+      offline_current_accounts { rand(1...1_000_000.0).round(2) }
+      offline_savings_accounts { rand(1...1_000_000.0).round(2) }
       cash { rand(1...1_000_000.0).round(2) }
       other_person_account { rand(1...1_000_000.0).round(2) }
       national_savings { rand(1...1_000_000.0).round(2) }
@@ -13,7 +14,8 @@ FactoryBot.define do
     end
 
     trait :all_nil do
-      offline_accounts { nil }
+      offline_current_accounts { nil }
+      offline_savings_accounts { nil }
       cash { nil }
       other_person_account { nil }
       national_savings { nil }
@@ -23,7 +25,8 @@ FactoryBot.define do
     end
 
     trait :all_zero do
-      offline_accounts { 0.0 }
+      offline_current_accounts { 0.0 }
+      offline_savings_accounts { 0.0 }
       cash { 0.0 }
       other_person_account { 0.0 }
       national_savings { 0.0 }
@@ -33,7 +36,8 @@ FactoryBot.define do
     end
 
     trait :mix_of_values do
-      offline_accounts { nil }
+      offline_current_accounts { rand(1...1_000_000.0).round(2) }
+      offline_savings_accounts { nil }
       cash { 0.0 }
       other_person_account { rand(1...1_000_000.0).round(2) }
       national_savings { nil }

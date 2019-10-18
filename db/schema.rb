@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_11_142505) do
+ActiveRecord::Schema.define(version: 2019_10_18_174252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -568,7 +568,7 @@ ActiveRecord::Schema.define(version: 2019_10_11_142505) do
 
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
-    t.decimal "offline_accounts"
+    t.decimal "offline_current_accounts"
     t.decimal "cash"
     t.decimal "other_person_account"
     t.decimal "national_savings"
@@ -578,6 +578,7 @@ ActiveRecord::Schema.define(version: 2019_10_11_142505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "none_selected"
+    t.decimal "offline_savings_accounts"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
   end
 
