@@ -12,18 +12,17 @@ class Address < ApplicationRecord
   validates :city, :postcode, presence: true
 
   before_validation :normalize_postcode
-  before_save :titleize_address
 
   validates :postcode, format: { with: POSTCODE_REGEXP }
   validate :validate_address_lines
 
   def self.from_json(json)
     attrs = JSON.parse(json)
-    new(attrs.slice('organisation', 'address_line_one', 'address_line_two', 'city', 'postcode', 'lookup_id'))
+    new(attrs.slice('address_line_one', 'address_line_two', 'city', 'county', 'postcode', 'lookup_id'))
   end
 
   def full_address
-    [organisation, address_line_one, address_line_two, city, postcode].compact.reject(&:blank?).join(', ')
+    [address_line_one, address_line_two, city, county, postcode].compact.reject(&:blank?).join(', ')
   end
 
   def pretty_postcode
@@ -40,10 +39,10 @@ class Address < ApplicationRecord
 
   def to_json(*_args)
     {
-      organisation: organisation,
       address_line_one: address_line_one,
       address_line_two: address_line_two,
       city: city,
+      county: county,
       postcode: postcode,
       lookup_id: lookup_id
     }.to_json
@@ -62,13 +61,5 @@ class Address < ApplicationRecord
 
     postcode.delete!(' ')
     postcode.upcase!
-  end
-
-  def titleize_address
-    self.organisation = organisation&.titleize
-    self.address_line_one = address_line_one&.titleize
-    self.address_line_two = address_line_two&.titleize
-    self.city = city&.titleize
-    self.county = county&.titleize
   end
 end
