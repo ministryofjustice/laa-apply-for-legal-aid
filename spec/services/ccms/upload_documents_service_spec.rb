@@ -122,7 +122,8 @@ RSpec.describe CCMS::UploadDocumentsService do
         expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match('failed to upload to CCMS')
+        expect(history.details).to match(/CCMS::CcmsError/)
+        expect(history.details).to match(/The following documents failed to upload/)
       end
     end
   end

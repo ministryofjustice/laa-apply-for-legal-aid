@@ -18,7 +18,7 @@
         </header:RequestDetails>
         <header:Status>
           <header:Status>Success</header:Status>
-          <header:StatusFreeText>Party Successfully Created.</header:StatusFreeText>
+          <header:StatusFreeText>No such party.</header:StatusFreeText>
         </header:Status>
       </header:HeaderRS>
       <ns2:ClientReferenceNumber>20910584</ns2:ClientReferenceNumber>

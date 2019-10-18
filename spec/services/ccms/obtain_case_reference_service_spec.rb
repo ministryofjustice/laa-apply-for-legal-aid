@@ -1,75 +1,85 @@
 require 'rails_helper'
 
-RSpec.describe CCMS::ObtainCaseReferenceService do
-  let(:legal_aid_application) { create :legal_aid_application }
-  let(:submission) { create :submission, legal_aid_application: legal_aid_application }
-  let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
-  let(:reference_data_requestor) { double CCMS::ReferenceDataRequestor }
-  subject { described_class.new(submission) }
+module CCMS
+  RSpec.describe ObtainCaseReferenceService do
+    let(:legal_aid_application) { create :legal_aid_application }
+    let(:submission) { create :submission, legal_aid_application: legal_aid_application }
+    let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
+    let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/GetReferenceData!1.5*soa_92fe5600-6b1b-4d91-a97f-36e3955ae196/getreferencedata_ep' }
+    let(:response_body) { ccms_data_from_file 'reference_data_response.xml' }
 
-  before do
-    allow(subject).to receive(:reference_data_requestor).and_return(reference_data_requestor)
-  end
+    subject { described_class.new(submission) }
 
-  context 'operation successful' do
-    let(:reference_data_response) { ccms_data_from_file 'reference_data_response.xml' }
-    let(:transaction_request_id_in_example_response) { '20190301030405123456' }
-    let(:ccms_case_ref_in_example_response) { '300000135140' }
+    around do |example|
+      VCR.turn_off!
+      example.run
+      VCR.turn_on!
+    end
 
     before do
-      expect(reference_data_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
-      expect(reference_data_requestor).to receive(:call).and_return(reference_data_response)
+      # stub a post request - any body, any headers
+      stub_request(:post, endpoint).to_return(body: response_body, status: 200)
+      # stub the transaction request id that we expect in the response
+      allow_any_instance_of(ReferenceDataRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
     end
 
-    it 'stores the reference number' do
-      subject.call
-      expect(submission.case_ccms_reference).to eq ccms_case_ref_in_example_response
+    context 'operation successful' do
+      it 'stores the reference number returned in the response_body' do
+        subject.call
+        expect(submission.case_ccms_reference).to eq '300000135140'
+      end
+
+      it 'changes the state to case_ref_obtained' do
+        subject.call
+        expect(submission.aasm_state).to eq 'case_ref_obtained'
+      end
+
+      it 'writes a history record' do
+        expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+
+        expect(history.from_state).to eq 'initialised'
+        expect(history.to_state).to eq 'case_ref_obtained'
+        expect(history.success).to be true
+        expect(history.details).to be_nil
+      end
+
+      it 'writes the request body to the history record' do
+        subject.call
+        expect(history.request).to be_soap_envelope_with(
+          command: 'ns2:ReferenceDataInqRQ',
+          transaction_id: '20190301030405123456'
+        )
+      end
+
+      it 'writes the response body to the history record' do
+        subject.call
+        expect(history.response).to eq response_body
+      end
     end
 
-    it 'changes the state to case_ref_obtained' do
-      subject.call
-      expect(submission.aasm_state).to eq 'case_ref_obtained'
-    end
+    context 'operation in error' do
+      before do
+        expect_any_instance_of(ReferenceDataRequestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
+      end
 
-    it 'writes a history record' do
-      expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-      expect(history.from_state).to eq 'initialised'
-      expect(history.to_state).to eq 'case_ref_obtained'
-      expect(history.success).to be true
-      expect(history.details).to be_nil
-    end
-  end
+      it 'puts it into failed state' do
+        subject.call
+        expect(submission.aasm_state).to eq 'failed'
+      end
 
-  context 'operation in error' do
-    before do
-      allow(reference_data_requestor).to receive(:transaction_request_id).and_return(Faker::Number.number(digits: 8))
-      expect(reference_data_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
-    end
-
-    it 'puts it into failed state' do
-      subject.call
-      expect(submission.aasm_state).to eq 'failed'
-    end
-
-    it 'records the error in the submission history' do
-      expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
-      expect(history.from_state).to eq 'initialised'
-      expect(history.to_state).to eq 'failed'
-      expect(history.success).to be false
-      expect(history.details).to match(/CCMS::CcmsError/)
-      expect(history.details).to match(/oops/)
-    end
-  end
-
-  # private method tested here because it is mocked out above
-  #
-  describe '#reference_data_requestor' do
-    let(:service_double) { CCMS::ObtainCaseReferenceService.new(submission) }
-    let(:requestor1) { service_double.__send__(:reference_data_requestor) }
-    let(:requestor2) { service_double.__send__(:reference_data_requestor) }
-    it 'only instantiates one copy of the ReferenceDataRequestor' do
-      expect(requestor1).to be_instance_of(CCMS::ReferenceDataRequestor)
-      expect(requestor1).to eq requestor2
+      it 'records the error in the submission history' do
+        expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+        expect(history.from_state).to eq 'initialised'
+        expect(history.to_state).to eq 'failed'
+        expect(history.success).to be false
+        expect(history.details).to match(/CCMS::CcmsError/)
+        expect(history.details).to match(/oops/)
+        expect(history.request).to be_soap_envelope_with(
+          command: 'ns2:ReferenceDataInqRQ',
+          transaction_id: '20190301030405123456'
+        )
+        expect(history.response).to be_nil
+      end
     end
   end
 end

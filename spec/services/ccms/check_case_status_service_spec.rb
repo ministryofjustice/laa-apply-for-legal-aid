@@ -5,6 +5,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
   let(:case_add_status_requestor) { double CCMS::CaseAddStatusRequestor }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:case_add_status_response) { ccms_data_from_file 'case_add_status_response.xml' }
+  let(:case_add_status_request) { ccms_data_from_file 'case_add_status_request.xml' }
   subject { described_class.new(submission) }
 
   before do
@@ -17,6 +18,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
 
       context 'case not yet created' do
         before do
+          allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
           expect(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
           expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
           allow_any_instance_of(CCMS::CaseAddStatusResponseParser).to receive(:success?).and_return(false)
@@ -37,6 +39,19 @@ RSpec.describe CCMS::CheckCaseStatusService do
             expect(history.to_state).to eq 'case_submitted'
             expect(history.success).to be true
             expect(history.details).to be_nil
+          end
+
+          it 'stores the reqeust body in the  submission history record' do
+            subject.call
+            expect(history.request).to be_soap_envelope_with(
+              command: 'ns2:CaseAddUpdtStatusRQ',
+              transaction_id: '20190101121530123456'
+            )
+          end
+
+          it 'stores the response body in the submission history record' do
+            subject.call
+            expect(history.response).to eq case_add_status_response
           end
         end
 
@@ -60,11 +75,25 @@ RSpec.describe CCMS::CheckCaseStatusService do
             expect(history.success).to be false
             expect(history.details).to eq 'Poll limit exceeded'
           end
+
+          it 'stores the reqeust body in the  submission history record' do
+            subject.call
+            expect(history.request).to be_soap_envelope_with(
+              command: 'ns2:CaseAddUpdtStatusRQ',
+              transaction_id: '20190101121530123456'
+            )
+          end
+
+          it 'does not store a response body in the submission history record' do
+            subject.call
+            expect(history.response).to be_nil
+          end
         end
       end
 
       context 'case is created' do
         before do
+          allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
           expect(case_add_status_requestor).to receive(:call).and_return(case_add_status_response)
           expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
           allow_any_instance_of(CCMS::CaseAddStatusResponseParser).to receive(:success?).and_return(true)
@@ -78,8 +107,23 @@ RSpec.describe CCMS::CheckCaseStatusService do
           expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
           expect(history.from_state).to eq 'case_submitted'
           expect(history.to_state).to eq 'case_created'
+          expect(history.request).to eq case_add_status_request
+          expect(history.request).to_not be_nil
           expect(history.success).to be true
           expect(history.details).to be_nil
+        end
+
+        it 'stores the reqeust body in the  submission history record' do
+          subject.call
+          expect(history.request).to be_soap_envelope_with(
+            command: 'ns2:CaseAddUpdtStatusRQ',
+            transaction_id: '20190101121530123456'
+          )
+        end
+
+        it 'stores the response body in the submission history record' do
+          subject.call
+          expect(history.response).to eq case_add_status_response
         end
       end
     end
@@ -88,6 +132,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
       let(:transaction_request_id_in_example_response) { '20190301030405123456' }
 
       before do
+        allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
         expect(case_add_status_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
         expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
       end
@@ -104,9 +149,24 @@ RSpec.describe CCMS::CheckCaseStatusService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'case_submitted'
         expect(history.to_state).to eq 'failed'
+        expect(history.request).to eq case_add_status_request
+        expect(history.request).to_not be_nil
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)
         expect(history.details).to match(/oops/)
+      end
+
+      it 'stores the reqeust body in the  submission history record' do
+        subject.call
+        expect(history.request).to be_soap_envelope_with(
+          command: 'ns2:CaseAddUpdtStatusRQ',
+          transaction_id: '20190101121530123456'
+        )
+      end
+
+      it 'does not store the response body in the submission history record' do
+        subject.call
+        expect(history.response).to be_nil
       end
     end
   end

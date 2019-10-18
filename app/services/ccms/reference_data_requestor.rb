@@ -21,11 +21,11 @@ module CCMS
       soap_client.call(:process, xml: request_xml)
     end
 
-    private
-
     def request_xml
       soap_envelope(namespaces).to_xml
     end
+
+    private
 
     def soap_body(xml)
       xml.__send__('ns2:ReferenceDataInqRQ') do

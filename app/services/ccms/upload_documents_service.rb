@@ -1,19 +1,17 @@
 module CCMS
   class UploadDocumentsService < BaseSubmissionService
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       submission.submission_document.each do |document|
         upload_document(document)
       end
 
       failed_uploads = submission.submission_document.select { |document| document.status == 'failed' }
 
-      if failed_uploads.empty?
-        create_history('case_created', submission.aasm_state) if submission.complete!
-      else
-        handle_failure("#{failed_uploads} failed to upload to CCMS")
-      end
+      raise CcmsError, "The following documents failed to upload: #{failed_uploads.map(&:id).join(', ')}" if failed_uploads.present?
+
+      create_history('case_created', submission.aasm_state, nil, nil) if submission.complete!
     rescue CcmsError => e
-      handle_failure(e)
+      handle_exception(e, nil)
     end
 
     private
