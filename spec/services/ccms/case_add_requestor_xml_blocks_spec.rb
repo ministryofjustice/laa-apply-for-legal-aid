@@ -91,28 +91,35 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'PUI_CLIENT_CAP_CONT' do
+      context 'CAP_CONT and similar attributes' do
+        let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT] }
         context 'eligble' do
           let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
           it 'returns zero' do
-            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
-            expect(block).to have_currency_response '0.00'
+            attributes.each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).to have_currency_response '0.00'
+            end
           end
         end
 
         context 'not eligble' do
           let!(:cfe_result) { create :cfe_result, :not_eligible, submission: cfe_submission }
           it 'returns zero' do
-            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
-            expect(block).to have_currency_response '0.00'
+            attributes.each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).to have_currency_response '0.00'
+            end
           end
         end
 
         context 'contribution_required' do
           let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission }
           it 'returns the capital contribution' do
-            block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_CAP_CONT')
-            expect(block).to have_currency_response '465.66'
+            attributes.each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).to have_currency_response '465.66'
+            end
           end
         end
       end
@@ -1349,7 +1356,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:change_in_circumstances],
       [:change_in_circumstances, 'CHANGE_CIRC_INPUT_T_33WP3_6A'],
       [:global_means, 'BEN_AWARD_DATE'],
-      [:global_means, 'CAP_CONT'],
       [:global_means, 'CLIENT_NASS'],
       [:global_means, 'CLIENT_PRISONER'],
       [:global_means, 'CONFIRMED_NOT_PASSPORTED'],
@@ -1367,7 +1373,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       [:global_means, 'MEANS_REPORT_BACKLOG_TAG'],
       [:global_means, 'MEANS_REQD'],
       [:global_means, 'MEANS_ROUTING'],
-      [:global_means, 'OUT_CAP_CONT'],
       [:global_means, 'OUT_GB_INFER_C_14WP4_19A'],
       [:global_means, 'OUT_GB_INFER_C_14WP4_3A'],
       [:global_means, 'OUT_GB_INFER_C_15WP3_133A'],
