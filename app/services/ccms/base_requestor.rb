@@ -55,8 +55,10 @@ module CCMS
     def soap_header(xml)
       xml.__send__('ns1:Security') do
         xml.__send__('ns1:UsernameToken') do
-          xml.__send__('ns1:Username', Rails.configuration.x.ccms_soa.client_username)
-          xml.__send__('ns1:Password', 'Type' => Rails.configuration.x.ccms_soa.client_password_type) { xml.text Rails.configuration.x.ccms_soa.client_password }
+          xml.__send__('ns1:Username', config.client_username)
+          xml.__send__('ns1:Password', 'Type' => config.client_password_type) do
+            xml.text(config.client_password)
+          end
         end
       end
     end
