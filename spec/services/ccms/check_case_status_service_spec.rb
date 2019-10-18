@@ -107,7 +107,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
           expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
           expect(history.from_state).to eq 'case_submitted'
           expect(history.to_state).to eq 'case_created'
-          expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n" + history.request).to eq case_add_status_request
+          expect(history.request).to eq case_add_status_request
           expect(history.request).to_not be_nil
           expect(history.success).to be true
           expect(history.details).to be_nil
@@ -149,7 +149,7 @@ RSpec.describe CCMS::CheckCaseStatusService do
         expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
         expect(history.from_state).to eq 'case_submitted'
         expect(history.to_state).to eq 'failed'
-        expect("<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n" + history.request).to eq case_add_status_request
+        expect(history.request).to eq case_add_status_request
         expect(history.request).to_not be_nil
         expect(history.success).to be false
         expect(history.details).to match(/CCMS::CcmsError/)

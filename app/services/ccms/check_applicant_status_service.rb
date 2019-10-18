@@ -28,10 +28,6 @@ module CCMS
       @applicant_add_status_requestor ||= ApplicantAddStatusRequestor.new(submission.applicant_add_transaction_id, submission.legal_aid_application.provider.username)
     end
 
-    def applicant_add_status_response_parser
-      @applicant_add_status_response_parser ||= ApplicantAddStatusResponseParser.new(applicant_add_status_requestor.transaction_request_id, response)
-    end
-
     def response
       @response ||= applicant_add_status_requestor.call
     end
