@@ -46,6 +46,27 @@ RSpec.describe MapAddressLookupResults do
       end
     end
 
+    context 'short building name, street, town, city, postcode' do
+      let(:result) do
+        [{ 'DPA' =>
+         { 'ADDRESS' => '29A, MOOREND ROAD, YARDLEY GOBION, TOWCESTER, NN12 7UF',
+           'BUILDING_NAME' => '29A',
+           'THOROUGHFARE_NAME' => 'MOOREND ROAD',
+           'DEPENDENT_LOCALITY' => 'YARDLEY GOBION',
+           'POST_TOWN' => 'TOWCESTER',
+           'POSTCODE' => 'NN12 7UF' } }]
+      end
+
+      it 'returns the correct address' do
+        address = service.call(result).first
+        expect(address.address_line_one).to eq '29A MOOREND ROAD'
+        expect(address.address_line_two).to eq 'YARDLEY GOBION'
+        expect(address.city).to eq 'TOWCESTER'
+        expect(address.county).to be nil
+        expect(address.postcode).to eq 'NN12 7UF'
+      end
+    end
+
     context 'organisation, town, city, postcode' do
       let(:result) do
         [{ 'DPA' =>

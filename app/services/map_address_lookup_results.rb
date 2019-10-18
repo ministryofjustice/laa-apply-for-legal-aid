@@ -39,12 +39,12 @@ class MapAddressLookupResults
   end
 
   def self.use_dependent_locality?(result)
-    (building_name(result).nil? && organisation_name(result).nil?) ||
-      ((building_name(result).nil? || organisation_name(result).nil?) && thoroughfare_name(result).nil?)
+    (building_name(result).to_s.length < 9 && organisation_name(result).nil?) ||
+      ((building_name(result).to_s.length < 9 || organisation_name(result).nil?) && thoroughfare_name(result).nil?)
   end
 
   def self.get_line_one(result)
-    return combine_with_road(result, *NUMBER_NAME, ' ') if building_name(result).nil? && organisation_name(result).nil?
+    return combine_with_road(result, *NUMBER_NAME, ' ') if building_name(result).to_s.length < 9 && organisation_name(result).nil?
     return combine(result, *FULL_NAME) if organisation_name(result).nil?
 
     organisation_name(result)
