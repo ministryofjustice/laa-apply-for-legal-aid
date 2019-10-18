@@ -61,11 +61,11 @@ module CCMS
       end
     end
 
-    def ns3_header_rq(xml, _provider_username)
+    def ns3_header_rq(xml, provider_username)
       xml.__send__('ns3:TransactionRequestID', transaction_request_id)
       xml.__send__('ns3:Language', 'ENG')
-      xml.__send__('ns3:UserLoginID', Rails.configuration.x.ccms_soa.user_login)
-      xml.__send__('ns3:UserRole', Rails.configuration.x.ccms_soa.user_role)
+      xml.__send__('ns3:UserLoginID', provider_username)
+      xml.__send__('ns3:UserRole', config.user_role)
     end
 
     def wsdl_location

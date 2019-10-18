@@ -75,23 +75,6 @@ RSpec.describe CCMS::UploadDocumentsService do
       expect(history.success).to be true
       expect(history.details).to be_nil
     end
-
-    # it 'writes the request body to the history record' do
-    #   subject.call
-    #   expect(history.request).to be_soap_envelope_with(
-    #     command: 'ns2:DocumentUploadRQ',
-    #     transaction_id: '20190301030405123456',
-    #     matching: [
-    #       '<ns4:DocumentType>ADMIN1</ns4:DocumentType>',
-    #       "<ns2:CaseReferenceNumber>#{legal_aid_application.case_ccms_reference}</ns2:CaseReferenceNumber>"
-    #     ]
-    #   )
-    # end
-    #
-    # it 'writes the response body to the history record' do
-    #   subject.call
-    #   expect(history.response).to eq document_upload_response
-    # end
   end
 
   context 'operation unsuccessful' do

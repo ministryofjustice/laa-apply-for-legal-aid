@@ -9,6 +9,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
     let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/CaseServices/CaseServices_ep' }
     let(:response_body) { ccms_data_from_file 'case_add_response.xml' }
+    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
 
     subject { described_class.new(submission) }
 

@@ -77,7 +77,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               expect(history.from_state).to eq 'applicant_submitted'
               expect(history.to_state).to eq 'failed'
               expect(history.success).to be false
-              expect(history.details).to match(/CCMS::CcmsError\nPoll limit exceeded/)
+              expect(history.details).to match 'Poll limit exceeded'
             end
 
             it 'stores the reqeust body in the  submission history record' do
