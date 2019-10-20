@@ -166,11 +166,11 @@ module CCMS
       xml.__send__('ns2:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
       xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
       xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
-      xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding_type) }
+      xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml) }
     end
 
-    def generate_scope_limitations(xml, proceeding)
-      proceeding.scope_limitations.each { |limitation| generate_scope_limitation(xml, limitation) }
+    def generate_scope_limitations(xml)
+      @legal_aid_application.scope_limitations.each { |limitation| generate_scope_limitation(xml, limitation) }
     end
 
     def generate_scope_limitation(xml, limitation)
