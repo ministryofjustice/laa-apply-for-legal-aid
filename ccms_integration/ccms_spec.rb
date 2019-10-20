@@ -40,20 +40,11 @@ module CCMS
              description: ':EMPLOYMENT_CLIENT_001:CLI_NON_HM_WAGE_SLIP_001'
     end
 
-    let(:firm) { create :firm, ccms_id: 22_381, name: 'Desor & Co' }
+    let(:firm) { create :firm, ccms_id: 19_148, name: 'Desor & Co' }
     let(:office) { create :office, ccms_id: 81_693, firm: firm }
+    let(:provider) { create :provider, :with_provider_details_api_username, firm: firm }
 
-    let(:provider) do
-      double Provider,
-             username: 'NEETADESOR',
-             firm: firm,
-             selected_office_id: 81_693,
-             user_login_id: 2_016_472,
-             supervisor_contact_id: 2_016_673,
-             fee_earner_contact_id: 2_016_673,
-             marked_for_destruction?: false,
-             email: 'test@test.com'
-    end
+    let(:statement_of_case) { create :statement_of_case, :with_attached_files }
 
     let(:substantive_scope_limitation) do
       create :scope_limitation,
@@ -75,6 +66,11 @@ module CCMS
              scope_limitations: [substantive_scope_limitation]
     end
 
+    let(:cfe_submission_1) { create :cfe_submission, legal_aid_application: substantive_legal_aid_application }
+    let(:cfe_submission_2) { create :cfe_submission, legal_aid_application: delegated_functions_legal_aid_application }
+    let!(:cfe_result_1) { create :cfe_result, submission: cfe_submission_1 }
+    let!(:cfe_result_2) { create :cfe_result, submission: cfe_submission_2 }
+
     let(:substantive_legal_aid_application) do
       create :legal_aid_application,
              :with_applicant_and_address,
@@ -85,7 +81,7 @@ module CCMS
              :with_merits_assessment,
              :with_means_report,
              :with_merits_report,
-             statement_of_case: @statement_of_case,
+             statement_of_case: statement_of_case,
              proceeding_types: [substantive_proceeding_type],
              state: :submitting_assessment,
              office: office
@@ -122,15 +118,14 @@ module CCMS
              :with_merits_assessment,
              :with_means_report,
              :with_merits_report,
-             statement_of_case: @statement_of_case,
+             statement_of_case: statement_of_case,
              proceeding_types: [delegated_functions_proceeding_type],
              state: :submitting_assessment,
              office: office
     end
 
     before do
-      @statement_of_case = create :statement_of_case, :with_attached_files
-      PdfConverter.call(PdfFile.find_or_create_by(original_file_id: @statement_of_case.original_files.first.id).id)
+      PdfConverter.call(PdfFile.find_or_create_by(original_file_id: statement_of_case.original_files.first.id).id)
       allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2, other_party_1])
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
