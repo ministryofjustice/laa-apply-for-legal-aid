@@ -5,6 +5,7 @@ ruby '2.6.3'
 
 gem 'aasm', '~> 5.0.6'
 gem 'active_model_serializers', '~> 0.10.10'
+gem 'geckoboard-ruby'
 gem 'govuk_notify_rails', '~> 2.1.1'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
@@ -17,6 +18,7 @@ gem 'sentry-raven'
 gem 'simple_command', '~> 0.1.0'
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.2.0'
+gem 'whenever', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

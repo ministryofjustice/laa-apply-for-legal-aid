@@ -121,6 +121,7 @@ GEM
       activesupport
     chartkick (3.3.0)
     childprocess (3.0.0)
+    chronic (0.10.2)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     climate_control (0.2.0)
@@ -189,6 +190,7 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
+    geckoboard-ruby (0.4.0)
     gherkin (5.1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -512,6 +514,8 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     wicked_pdf (1.4.0)
       activesupport
     xpath (3.2.0)
@@ -542,6 +546,7 @@ DEPENDENCIES
   erb_lint
   factory_bot_rails
   faker (>= 1.9.1)
+  geckoboard-ruby
   govuk_notify_rails (~> 2.1.1)
   i18n-tasks
   json_expressions
