@@ -81,7 +81,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       end
 
       it 'redirects to online banking' do
-        expect(response).to redirect_to(providers_legal_aid_applications_path)
+        expect(response).to redirect_to(providers_legal_aid_application_delegated_confirmation_index_path)
       end
     end
 

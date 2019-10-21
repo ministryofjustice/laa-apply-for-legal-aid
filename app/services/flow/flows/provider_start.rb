@@ -57,10 +57,13 @@ module Flow
         substantive_applications: {
           path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
           forward: ->(application) do
-            return :providers_home unless application.substantive_application?
+            return :delegated_confirmation unless application.substantive_application?
 
             application.applicant_receives_benefit? ? :capital_introductions : :online_bankings
           end
+        },
+        delegated_confirmation: {
+          path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) }
         },
         online_bankings: {
           path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },
