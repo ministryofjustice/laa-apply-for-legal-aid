@@ -8,7 +8,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
              :with_proceeding_types,
              :with_respondent,
              :with_merits_assessment,
-             :with_transaction_period
+             :with_transaction_period,
+             :with_cfe_result
     end
     let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
     let!(:statement_of_case) { create :statement_of_case, legal_aid_application: legal_aid_application }

@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Providers::MeansReportsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :assessment_submitted }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_result, :assessment_submitted }
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create :submission, legal_aid_application: legal_aid_application }
+  let(:capital_result) { JSON.parse(legal_aid_application.cfe_result.result)['capital'] }
   let(:before_subject) { nil }
 
   describe 'GET /providers/applications/:legal_aid_application_id/means_report' do
@@ -38,6 +39,22 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       it 'obtains the case reference remotely' do
         expect(unescaped_response_body).to include(case_ccms_reference)
       end
+    end
+
+    it 'displays the total capital assessed' do
+      expect(unescaped_response_body).to include(capital_result['total_capital'])
+    end
+
+    it 'displays the capital lower limit' do
+      expect(unescaped_response_body).to include('£3000.00')
+    end
+
+    it 'displays the capital upper limit' do
+      expect(unescaped_response_body).to include('£8000.00')
+    end
+
+    it 'displays the capital contribution' do
+      expect(unescaped_response_body).to include(capital_result['capital_contribution'])
     end
 
     context 'when not authenticated' do
