@@ -49,66 +49,79 @@ change_in_circumstances:
     :user_defined: true
 employment:
   EMP_INPUT_B_3WP3_62A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Employment: Wage slips?'
     :response_type: boolean
     :user_defined: false
   EMP_INPUT_B_3WP3_63A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Employment: L17?'
     :response_type: boolean
     :user_defined: false
   EMP_INPUT_T_3WP3_2A:
+    :generate_block?: false
     :value: Dave & Co
     :br100_meaning: 'Client Employment: Name of employer'
     :response_type: text
     :user_defined: true
   EMP_INPUT_B_3WP3_60A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Employment: BIK?'
     :response_type: boolean
     :user_defined: true
   EMP_INPUT_D_3WP3_5A:
+    :generate_block?: false
     :value: 01-01-2019
     :br100_meaning: 'Client Employment: Date started'
     :response_type: date
     :user_defined: true
   EMP_INFER_C_15WP3_12A:
+    :generate_block?: false
     :value: 300.0
     :br100_meaning: 'Int.Result: Client Employment- Monthly PAYE'
     :response_type: currency
     :user_defined: false
   EMP_INFER_C_15WP3_13A:
+    :generate_block?: false
     :value: 100.0
     :br100_meaning: 'Int.Result: Client Employment- Monthly NI'
     :response_type: currency
     :user_defined: false
   EMP_INPUT_T_3WP3_4A:
+    :generate_block?: false
     :value: Genius
     :br100_meaning: 'Client Employment: Job title'
     :response_type: text
     :user_defined: true
   EMP_INPUT_N_3WP3_6A:
+    :generate_block?: false
     :value: 35
     :br100_meaning: 'Client Employment: Hours worked a week'
     :response_type: number
     :user_defined: true
   EMP_INPUT_T_3WP3_29A:
+    :generate_block?: false
     :value: BACS or other electronic automated transfer
     :br100_meaning: 'Client Employment: Method of  payment'
     :response_type: text
     :user_defined: true
   EMP_INPUT_T_3WP3_28A:
+    :generate_block?: false
     :value: Wage Slips
     :br100_meaning: 'Client Employment: Type of evidence used'
     :response_type: text
     :user_defined: true
   OUT_EMP_INFER_C_15WP3_11A:
+    :generate_block?: false
     :value: 1000.0
     :br100_meaning: 'Int.Result: Client Employment- Monthly gross pay'
     :response_type: currency
     :user_defined: false
   EMP_INPUT_T_3WP3_23A:
+    :generate_block?: false
     :value: Monthly
     :br100_meaning: 'Client Employment: Frequency of pay (wage slips)'
     :response_type: text
