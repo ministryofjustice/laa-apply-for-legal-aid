@@ -681,6 +681,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_T_2WP3_50A:
+    :generate_block?: false
     :value: Non HM Forces
     :br100_meaning: 'Client Employment: HM Forces/Non HM Forces/Both'
     :response_type: text
@@ -1822,6 +1823,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_21WP3_389A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: Receives other benefits from state or a local
       authority?'
@@ -2341,6 +2343,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_2WP3_214A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Client Employment: Employed?'
     :response_type: boolean
