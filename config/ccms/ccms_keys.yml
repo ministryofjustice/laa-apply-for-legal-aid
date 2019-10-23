@@ -1957,7 +1957,6 @@ global_means:
     :response_type: boolean
     :user_defined: false
   MEANS_EVIDENCE_PROVIDED:
-    :generate_block?: true
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2290,7 +2289,6 @@ global_means:
     :response_type: currency
     :user_defined: false
   MEANS_EVIDENCE_REQD:
-    :generate_block?: true
     :value: false
     :br100_meaning: The provision of evidence is mandatory
     :response_type: boolean
@@ -2456,7 +2454,6 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   COPY_SEPARATE_STATEMENT:
-    :generate_block?: true
     :value: false
     :br100_meaning: The provider has a copy of separate statement
     :response_type: boolean
@@ -2516,7 +2513,6 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MERITS_EVIDENCE_PROVIDED:
-    :generate_block?: true
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3632,7 +3628,6 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   MERITS_EVIDENCE_REQD:
-    :generate_block?: true
     :value: false
     :br100_meaning: provision of evidence is mandatory
     :response_type: boolean
@@ -4658,12 +4653,10 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   WARNING_LETTER_SENT:
-    :generate_block?: true
     :value: false
     :response_type: boolean
     :user_defined: true
   POLICE_NOTIFIED:
-    :generate_block?: true
     :value: "#respondent_police_notified?"
     :response_type: boolean
     :user_defined: true
@@ -4692,7 +4685,6 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   INJ_RESPONDENT_CAPACITY:
-    :generate_block?: true
     :value: "#respondent_understands_terms_of_court_order?"
     :br100_meaning: 'Inj: The Respondent Or Proposed Respondent Has Capacity'
     :response_type: boolean
@@ -4775,7 +4767,6 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   BAIL_CONDITIONS_SET:
-    :generate_block?: true
     :value: "#respondent_bail_conditions_set?"
     :response_type: boolean
     :user_defined: true
@@ -4975,13 +4966,11 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   INJ_RECENT_INCIDENT_DETAIL:
-    :generate_block?: true
     :value: Apply Service application. See uploaded provider statement and report
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
     :response_type: text
     :user_defined: true
   INJ_REASON_POLICE_NOT_NOTIFIED:
-    :generate_block?: true
     :value: Apply Service application. See uploaded provider statement and report
     :br100_meaning: 'Inj: The Reason Why The Police  Have Not Been Notified'
     :response_type: text
@@ -5091,7 +5080,6 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   PROCEEDING_LEVEL_OF_SERVICE:
-    :generate_block?: true
     :value: '#lead_proceeding_type_default_level_of_service_name'
     :br100_meaning: 'Proc: The Proceeding Form Of Service'
     :response_type: text
