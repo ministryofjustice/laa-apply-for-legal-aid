@@ -135,7 +135,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                proceeding_level_of_service: 'Full Representation',
                reason_no_injunction_warning_letter: 'Too dangerous',
                requested_scope: 'MULTIPLE',
-               scope_limitations: [scope_limitation_1, scope_limitation_2],
                status: 'draft',
                warning_letter_sent?: false,
                default_level_of_service: service_level,
@@ -268,7 +267,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                merits_assessment: merits_assessment,
                default_cost_limitation: 25_000.0,
                office: office,
-               cfe_result: cfe_result
+               cfe_result: cfe_result,
+               scope_limitations: [scope_limitation_1, scope_limitation_2]
       end
 
       let(:cfe_result) do
