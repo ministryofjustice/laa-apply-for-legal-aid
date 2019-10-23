@@ -165,6 +165,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_3WP2_27A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Main Dwelling: The client owns main dwelling?'
     :response_type: boolean
@@ -789,6 +790,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_3WP2_8A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Main Dwelling: Shared ownership?'
     :response_type: boolean
@@ -1104,6 +1106,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_C_3WP2_5A:
+    :generate_block?: false
     :value: 101000.0
     :br100_meaning: 'Main Dwelling: Current market value'
     :response_type: currency
@@ -1203,6 +1206,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_C_3WP2_7A:
+    :generate_block?: false
     :value: 100000.0
     :br100_meaning: 'Main Dwelling: Current value of any mortgage'
     :response_type: currency
@@ -1511,6 +1515,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INFER_B_3WP2_403A:
+    :generate_block?: false
     :value: true
     :br100_meaning: main dwelling interview for owned property is complete
     :response_type: boolean
@@ -1587,6 +1592,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_N_3WP2_14A:
+    :generate_block?: false
     :value: 50
     :br100_meaning: 'Main Dwelling: % Client'
     :response_type: number
@@ -1769,6 +1775,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_N_3WP2_4A:
+    :generate_block?: false
     :value: 3
     :br100_meaning: 'Main Dwelling: Number of bedrooms'
     :response_type: number
@@ -1859,6 +1866,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_T_3WP2_3A:
+    :generate_block?: false
     :value: Terrace
     :br100_meaning: 'Main Dwelling: Type of Property'
     :response_type: text
@@ -1905,6 +1913,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INFER_B_3WP2_404A:
+    :generate_block?: false
     :value: true
     :br100_meaning: main dwelling additional information interview is complete
     :response_type: boolean
@@ -2294,6 +2303,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_3WP2_10A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Main Dwelling: Owned with 3rd party, inc ex. partner?'
     :response_type: boolean
@@ -2339,6 +2349,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_3WP2_25A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Main Dwelling: Client/Partner has a deferred interest?'
     :response_type: boolean
