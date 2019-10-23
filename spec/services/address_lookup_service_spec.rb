@@ -53,6 +53,7 @@ RSpec.describe AddressLookupService do
       end
 
       it 'outcome is unsuccessful' do
+        expect(Raven).to receive(:capture_exception).with(message_contains('Connection refused'))
         outcome = service.call
         expect(outcome).not_to be_success
         expect(outcome.errors).to eq(lookup: [:service_unavailable])
@@ -76,11 +77,21 @@ RSpec.describe AddressLookupService do
       end
 
       it 'outcome is unsuccessful' do
+        expect(Raven).to receive(:capture_exception).with(message_contains('No postcode parameter provided'))
         outcome = service.call
         expect(outcome).not_to be_success
         expect(outcome.errors).to eq(lookup: [:unsuccessful])
         expect(outcome.result).to eq([])
       end
+    end
+  end
+
+  describe '#record_error' do
+    let(:state) { :service_unavailable }
+    let(:error) { StandardError.new 'Service unavailable' }
+    it 'captures error' do
+      expect(Raven).to receive(:capture_exception).with(message_contains('Service unavailable'))
+      service.__send__(:record_error, state, error)
     end
   end
 end
