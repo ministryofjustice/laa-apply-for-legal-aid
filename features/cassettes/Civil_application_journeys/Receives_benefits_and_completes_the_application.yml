@@ -400,4 +400,296 @@ http_interactions:
       string: '{"assessment_result":"contribution_required","applicant":{"receives_qualifying_benefit":true,"age_at_submission":39},"capital":{"total_liquid":"10000.0","total_non_liquid":"50000.0","pensioner_capital_disregard":"0.0","total_capital":"7000.0","capital_contribution":"0.0","liquid_capital_items":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital_items":[{"description":"Land","value":"50000.0"}]},"property":{"total_mortgage_allowance":"100000.0","total_property":"-53000.0","main_home":{"value":"200000.0","transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","percentage_owned":"50.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"-53000.0","shared_with_housing_assoc":false},"additional_properties":[{"value":"0.0","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","percentage_owned":"0.0","assessed_equity":"0.0"}]},"vehicles":{"total_vehicle":"0.0","vehicles":[]}}'
     http_version: 
   recorded_at: Tue, 08 Oct 2019 09:08:46 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments
+    body:
+      encoding: UTF-8
+      string: '{"client_reference_id":"L-6RU-R4N","submission_date":"2019-10-21","matter_proceeding_type":"domestic_abuse"}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"89f9bcf445273d7c19a00b3efb954d9c"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - abe4dedd-e9ee-405f-aa12-8a6de49012e2
+      X-Runtime:
+      - '0.064257'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"objects":[{"id":"7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902","client_reference_id":"L-6RU-R4N","remote_ip":{"family":30,"addr":1,"mask_addr":340282366920938463463374607431768211455},"created_at":"2019-10-21T15:08:27.552Z","updated_at":"2019-10-21T15:08:27.552Z","submission_date":"2019-10-21","matter_proceeding_type":"domestic_abuse","assessment_result":"pending"}],"errors":[]}'
+    http_version: 
+  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"cd1b5fe6d352f60d47d12838beb27f2e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 3239c488-c7d4-4501-9b66-49301cf72183
+      X-Runtime:
+      - '0.022326'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"objects":[{"id":"d5c32f2e-6724-46d5-98a1-9ada61335984","assessment_id":"7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902","date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"created_at":"2019-10-21T15:08:27.627Z","updated_at":"2019-10-21T15:08:27.627Z"}],"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital":[{"description":"Land","value":"50000.0"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"1271713a1c82e4c902e54abb85037779"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - dd21c02e-3a61-4a5d-8dad-3a0e3d52e8e8
+      X-Runtime:
+      - '0.023063'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"objects":{"id":"7362e3ae-2a9e-44ff-b54c-2329c2cd3673","assessment_id":"7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","capital_assessment_result":"pending","created_at":"2019-10-21T15:08:27.578Z","updated_at":"2019-10-21T15:08:27.578Z"},"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[]}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"7eb7dee5a8f69a7b4580e1e2bd9fa86a"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2326b628-f5f3-4be8-8298-dc4dba08b22c
+      X-Runtime:
+      - '0.005252'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[],"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"1608e96f413d9a96b175523ff95f48d9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a5cb7dae-ebbd-4a32-a603-17e5738d73ee
+      X-Runtime:
+      - '0.021300'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"objects":[{"id":"a856f0be-58a5-491a-baec-816cbcdbb323","value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"created_at":"2019-10-21T15:08:27.736Z","updated_at":"2019-10-21T15:08:27.736Z","capital_summary_id":"7362e3ae-2a9e-44ff-b54c-2329c2cd3673","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"d855bcff-e2cc-4cc4-a219-ffb47fad6f73","value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"created_at":"2019-10-21T15:08:27.747Z","updated_at":"2019-10-21T15:08:27.747Z","capital_summary_id":"7362e3ae-2a9e-44ff-b54c-2329c2cd3673","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
+    http_version: 
+  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
+- request:
+    method: get
+    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"4fbfb308148a06bb5bdf3ed2b8512440"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 54b13ff9-d3da-4d6c-baa7-ef40353a65ce
+      X-Runtime:
+      - '0.053780'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"assessment_result":"contribution_required","applicant":{"receives_qualifying_benefit":true,"age_at_submission":39},"capital":{"total_liquid":"10000.0","total_non_liquid":"50000.0","pensioner_capital_disregard":"0.0","total_capital":"60000.0","capital_contribution":"57000.0","liquid_capital_items":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital_items":[{"description":"Land","value":"50000.0"}]},"property":{"total_mortgage_allowance":"100000.0","total_property":"0.0","main_home":{"value":"200000.0","transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","shared_with_housing_assoc":false,"percentage_owned":"50.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","percentage_owned":"0.0","assessed_equity":"0.0"}]},"vehicles":{"total_vehicle":"0.0","vehicles":[]}}'
+    http_version: 
+  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
 recorded_with: VCR 5.0.0

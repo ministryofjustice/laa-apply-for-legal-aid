@@ -34,13 +34,13 @@ RSpec.describe 'citizen savings and investments', type: :request do
   end
 
   describe 'PATCH citizens/savings_and_investment' do
-    let(:offline_accounts) { rand(1...1_000_000.0).round(2).to_s }
-    let(:check_box_offline_accounts) { 'true' }
-    let(:params) { { savings_amount: { offline_accounts: offline_accounts, check_box_offline_accounts: check_box_offline_accounts } } }
+    let(:offline_current_accounts) { rand(1...1_000_000.0).round(2).to_s }
+    let(:check_box_offline_current_accounts) { 'true' }
+    let(:params) { { savings_amount: { offline_current_accounts: offline_current_accounts, check_box_offline_current_accounts: check_box_offline_current_accounts } } }
     subject { patch citizens_savings_and_investment_path, params: params }
 
-    it 'updates the offline_accounts amount' do
-      expect { subject }.to change { savings_amount.reload.offline_accounts.to_s }.to(offline_accounts)
+    it 'updates the offline_current_accounts amount' do
+      expect { subject }.to change { savings_amount.reload.offline_current_accounts.to_s }.to(offline_current_accounts)
     end
 
     it 'does not displays an error' do
@@ -64,7 +64,7 @@ RSpec.describe 'citizen savings and investments', type: :request do
     end
 
     context 'with invalid input' do
-      let(:offline_accounts) { 'fifty' }
+      let(:offline_current_accounts) { 'fifty' }
 
       it 'renders successfully' do
         subject
@@ -73,7 +73,7 @@ RSpec.describe 'citizen savings and investments', type: :request do
 
       it 'displays an error' do
         subject
-        expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_accounts.not_a_number'))
+        expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_current_accounts.not_a_number'))
         expect(response.body).to match('govuk-error-message')
         expect(response.body).to match('govuk-form-group--error')
       end

@@ -297,7 +297,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
       let(:savings_amount) do
         double Capital,
-               offline_accounts: 1_234,
+               offline_current_accounts: 1_234,
+               offline_savings_accounts: 1_234,
                cash: 1_500,
                other_person_account: 1_000,
                national_savings: 129_00,
