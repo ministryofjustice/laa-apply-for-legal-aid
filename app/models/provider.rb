@@ -19,9 +19,4 @@ class Provider < ApplicationRecord
   def update_details_directly
     ProviderDetailsCreator.call(self)
   end
-
-  # TODO: replace with real data once we have it from the provider details API
-  def user_login_id
-    2_016_472
-  end
 end
