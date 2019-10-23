@@ -2,7 +2,15 @@ require 'rails_helper'
 
 module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe AddCaseService do
-    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything_and_address, :with_cfe_result, office_id: office.id, populate_vehicle: true }
+    let(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_proceeding_types,
+             :with_everything_and_address,
+             :with_cfe_result,
+             :with_positive_benefit_check_result,
+             office_id: office.id,
+             populate_vehicle: true
+    end
     let(:applicant) { legal_aid_application.applicant }
     let(:office) { create :office }
     let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application }
