@@ -1,8 +1,9 @@
 module CCMS
   class AddApplicantService < BaseSubmissionService
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       if applicant_add_response_parser.success?
         submission.applicant_add_transaction_id = applicant_add_requestor.transaction_request_id
+        submission.save!
         create_history('case_ref_obtained', submission.aasm_state, xml_request, response) if submission.submit_applicant!
       else
         handle_unsuccessful_response(xml_request, response)
