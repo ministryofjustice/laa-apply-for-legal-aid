@@ -19,7 +19,7 @@
     "@hint/configuration-web-recommended": "^6.2.2",
     "@hint/formatter-json": "^3.1.5",
     "@hint/parser-javascript": "^3.0.8",
-    "hint": "^5.3.1",
+    "hint": "^5.3.3",
     "jest": "^24.9.0",
     "webpack-dev-server": "^3.9.0"
   },
