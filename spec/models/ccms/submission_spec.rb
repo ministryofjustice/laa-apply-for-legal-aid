@@ -104,21 +104,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect { submission.obtain_case_ref }.to change { submission.aasm_state }.to('case_ref_obtained')
         end
 
-        Sidekiq::Testing.fake! do
-          it 'triggers a worker to start the next step' do
-            expect { submission.obtain_case_ref }.to change { SubmissionProcessWorker.jobs.size }.by(1)
-          end
-        end
-
         context 'with event fail' do
           it 'changes state' do
             expect { submission.fail }.to change { submission.aasm_state }.to('failed')
-          end
-
-          Sidekiq::Testing.fake! do
-            it 'does not triggers a worker' do
-              expect { submission.fail }.not_to change { SubmissionProcessWorker.jobs.size }
-            end
           end
         end
 
@@ -127,13 +115,14 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           it 'changes state' do
             expect { submission.complete }.to change { submission.aasm_state }.to('completed')
           end
-
-          Sidekiq::Testing.fake! do
-            it 'does not triggers a worker' do
-              expect { submission.fail }.not_to change { SubmissionProcessWorker.jobs.size }
-            end
-          end
         end
+      end
+    end
+
+    describe '#process_async!' do
+      it 'calls SubmissionProcessWorker' do
+        expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state)
+        submission.process_async!
       end
     end
   end
