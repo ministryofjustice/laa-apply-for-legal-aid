@@ -1317,6 +1317,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_C_13WP3_3A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'Mortgage: Monthly repayment amount'
     :response_type: currency
@@ -1367,6 +1368,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_C_13WP3_12A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'Mortgage: Amount being paid by client'
     :response_type: currency
@@ -1483,6 +1485,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INFER_C_31WP3_13A:
+    :generate_block?: false
     :value: 600.0
     :br100_meaning: 'Int.Result: Housing costs- Total paid'
     :response_type: currency
