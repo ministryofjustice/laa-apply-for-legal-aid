@@ -72,4 +72,5 @@ RUN apk del build-dependencies
 RUN chown -R appuser:appgroup log tmp db
 
 USER 1000
+RUN whenever --update
 CMD "./docker/run"
