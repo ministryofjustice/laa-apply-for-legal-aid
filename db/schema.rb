@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2019_10_25_151150) do
     t.uuid "proceeding_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "proceeding_case_id", default: -> { "nextval('case_proceeding_sequence'::regclass)" }
+    t.integer "proceeding_case_id"
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_application_proceeding_types_on_proceeding_case_id", unique: true
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
@@ -318,14 +318,6 @@ ActiveRecord::Schema.define(version: 2019_10_25_151150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
-  end
-
-  create_table "dashboard_widgets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "dataset_name"
-    t.datetime "next_due", default: "1970-01-01 00:00:00"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dataset_name"], name: "index_dashboard_widgets_on_dataset_name", unique: true
   end
 
   create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
