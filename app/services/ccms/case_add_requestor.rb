@@ -105,7 +105,6 @@ module CCMS
             xml.__send__('ns2:RelationToCase', 'OPP')
             xml.__send__('ns2:Address')
             xml.__send__('ns2:ContactDetails')
-            xml.__send__('ns2:OtherInformation', 'Dummy opponent for Apply Service')
           end
         end
       end
