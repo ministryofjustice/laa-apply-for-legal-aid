@@ -25,7 +25,8 @@ RUN apk --no-cache add --virtual build-dependencies \
                   clamav-daemon \
                   libreoffice \
                   ttf-ubuntu-font-family \
-                  wkhtmltopdf
+                  wkhtmltopdf \
+                  curl
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \
