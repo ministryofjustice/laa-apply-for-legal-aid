@@ -39,7 +39,7 @@ RSpec.describe HostEnv do
       let(:rails_env) { :test }
 
       describe '.environment' do
-        it 'returns :development' do
+        it 'returns :test' do
           expect(HostEnv.environment).to eq :test
         end
       end
@@ -60,7 +60,7 @@ RSpec.describe HostEnv do
       let(:rails_env) { :production }
 
       describe '.environment' do
-        it 'returns :development' do
+        it 'returns :uat' do
           expect(HostEnv.environment).to eq :uat
         end
       end
@@ -81,7 +81,7 @@ RSpec.describe HostEnv do
       let(:rails_env) { :production }
 
       describe '.environment' do
-        it 'returns :development' do
+        it 'returns :staging' do
           expect(HostEnv.environment).to eq :staging
         end
       end
@@ -102,7 +102,7 @@ RSpec.describe HostEnv do
       let(:rails_env) { :production }
 
       describe '.environment' do
-        it 'returns :development' do
+        it 'returns :production' do
           expect(HostEnv.environment).to eq :production
         end
       end

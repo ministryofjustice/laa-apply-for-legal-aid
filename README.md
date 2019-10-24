@@ -235,7 +235,7 @@ There are three steps to creating a new widget for the Geckoboard dashboard
 
 Create a new class in the `app/models/dashboard/widget_data_providers` directory. This should define three class methods:
 
-* `.handle` - the name of the widget, which will be qualified with a project name and environment.  For example `my_widget` would become `apply_for_legal_aid.production.my_widget` ib the list of datasets on Geckoboard
+* `.handle` - the name of the widget, which will be qualified with a project name and environment.  For example `my_widget` would become `apply_for_legal_aid.production.my_widget` in the list of datasets on Geckoboard
 * `.dataset_defintion` - the list of fields that will be in the dataset (see https://developer.geckoboard.com/hc/en-us/sections/360002865451-Getting-started for details on how to define and provide data for a dataset.)
 * `.data` - the actual data that will be sent to Geckoboard every time it is run.
 
