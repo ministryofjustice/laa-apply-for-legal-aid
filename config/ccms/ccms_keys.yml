@@ -356,6 +356,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_6WP3_234A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Client Benefits: Child Benefit?'
     :response_type: boolean
@@ -1491,6 +1492,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_T_6WP3_229A:
+    :generate_block?: false    
     :value: 4-Weekly
     :br100_meaning: 'Client Child Benefit: How often'
     :response_type: text
@@ -1894,6 +1896,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_C_6WP3_228A:
+    :generate_block?: false
     :value: 192.0
     :br100_meaning: 'Client Child Benefit: Amount received'
     :response_type: currency
@@ -2249,6 +2252,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_N_6WP3_231A:
+    :generate_block?: false
     :value: 3
     :br100_meaning: 'Client Child Benefit: Number of children this is for'
     :response_type: number
