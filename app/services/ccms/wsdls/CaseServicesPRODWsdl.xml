@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions name="CaseServices" targetNamespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices" 
+  xmlns:ns1="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" 
+  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:tns="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <wsdl:documentation>
+    <abstractWSDL>http://ccmsebsprod.lab.gov:80/soa-infra/services/default/CaseServices!1.0/CaseProxyService.wsdl</abstractWSDL>
+  </wsdl:documentation>
+  <plnk:partnerLinkType name="CreateCaseApplication">
+    <plnk:role name="CreateCaseApplicationProvider">
+      <plnk:portType name="CreateCaseApplication" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="UpdateCase">
+    <plnk:role name="UpdateCaseProvider">
+      <plnk:portType name="UpdateCase" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="GetCaseDetails">
+    <plnk:role name="GetCaseDetailsProvider">
+      <plnk:portType name="GetCaseDetails" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="GetCaseTxnStatus">
+    <plnk:role name="GetCaseTxnStatusProvider">
+      <plnk:portType name="GetCaseTxnStatus" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="GetAssessmentData">
+    <plnk:role name="GetAssessmentDataProvider">
+      <plnk:portType name="GetAssessmentData" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+      <wsp:Policy>
+        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+          <wsp:Policy>
+            <sp:WssUsernameToken10 />
+          </wsp:Policy>
+        </sp:UsernameToken>
+      </wsp:Policy>
+    </sp:SupportingTokens>
+  </wsp:Policy>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/apps/lsc/Schema/BusinessObjects/CCMS/CaseManagement/Case/1.0/CaseBIM.xsd" />
+      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="CreateCaseApplicationRequestMessage">
+    <wsdl:part name="payload" element="ns1:CaseAddRQ" />
+  </wsdl:message>
+  <wsdl:message name="CreateCaseApplicationResponseMessage">
+    <wsdl:part name="payload" element="ns1:CaseAddRS" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCaseRequestMessage">
+    <wsdl:part name="payload" element="ns1:CaseUpdateRQ" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCaseResponseMessage">
+    <wsdl:part name="payload" element="ns1:CaseUpdateRS" />
+  </wsdl:message>
+  <wsdl:message name="GetCaseDetailsRequestMessage">
+    <wsdl:part name="payload" element="ns1:CaseInqRQ" />
+  </wsdl:message>
+  <wsdl:message name="GetCaseDetailsResponseMessage">
+    <wsdl:part name="payload" element="ns1:CaseInqRS" />
+  </wsdl:message>
+  <wsdl:message name="GetCaseTxnStatusRequestMessage">
+    <wsdl:part name="payload" element="ns1:CaseAddUpdtStatusRQ" />
+  </wsdl:message>
+  <wsdl:message name="GetCaseTxnStatusResponseMessage">
+    <wsdl:part name="payload" element="ns1:CaseAddUpdtStatusRS" />
+  </wsdl:message>
+  <wsdl:message name="GetAssessmentDataRequestMessage">
+    <wsdl:part name="payload" element="ns1:GetAssessmentDataRQ" />
+  </wsdl:message>
+  <wsdl:message name="GetAssessmentDataResponseMessage">
+    <wsdl:part name="payload" element="ns1:GetAssessmentDataRS" />
+  </wsdl:message>
+  <wsdl:message name="UsernameToken">
+    <wsdl:part name="Security" element="wsse:Security" />
+  </wsdl:message>
+  <wsdl:portType name="CaseServices">
+    <wsdl:operation name="CreateCaseApplication">
+      <wsdl:input message="tns:CreateCaseApplicationRequestMessage" />
+      <wsdl:output message="tns:CreateCaseApplicationResponseMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCase">
+      <wsdl:input message="tns:UpdateCaseRequestMessage" />
+      <wsdl:output message="tns:UpdateCaseResponseMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCaseDetails">
+      <wsdl:input message="tns:GetCaseDetailsRequestMessage" />
+      <wsdl:output message="tns:GetCaseDetailsResponseMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCaseTxnStatus">
+      <wsdl:input message="tns:GetCaseTxnStatusRequestMessage" />
+      <wsdl:output message="tns:GetCaseTxnStatusResponseMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssessmentData">
+      <wsdl:input message="tns:GetAssessmentDataRequestMessage" />
+      <wsdl:output message="tns:GetAssessmentDataResponseMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CaseServicesSOAPBinding" type="tns:CaseServices">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wss_username_token_service_policy" wsdl:required="false" />
+    <wsdl:operation name="CreateCaseApplication">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices/CreateCaseApplication" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCase">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices/UpdateCase" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCaseDetails">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices/GetCaseDetails" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCaseTxnStatus">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices/GetCaseTxnStatus" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssessmentData">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseServices/GetAssessmentData" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CaseServices_ep">
+    <wsdl:port name="CaseServices_pt" binding="tns:CaseServicesSOAPBinding">
+      <soap:address location="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/CaseServices_ep" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
