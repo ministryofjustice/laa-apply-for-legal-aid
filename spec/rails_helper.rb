@@ -68,7 +68,6 @@ RSpec.configure do |config|
   config.include XMLBlockMatchers
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
-    require Rails.root.join('db/seeds/proceeding_case_id.rb')
   end
 
   # Add support for Devise authentication helpers
