@@ -352,7 +352,7 @@ en:
           heading: Before you start
           list: |
             has a National Insurance number
-            is single (unless their partner is the opponent in the case)
+            is single (unless their partner is the respondent in the case)
           title: 'You can only use this service if your client:'
         use_ccms_para: Use the Client and Cost Management System (CCMS) for all other applications.
     start_merits_assessments:
