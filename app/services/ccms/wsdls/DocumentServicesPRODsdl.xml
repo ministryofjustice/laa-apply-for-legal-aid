@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions name="DocumentServices" targetNamespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/DocumentServices" 
+  xmlns:ns1="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" 
+  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:tns="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/DocumentServices" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <wsdl:documentation>
+    <abstractWSDL>http://ccmsebsprod.lab.gov:80/soa-infra/services/default/DocumentServices!4.0/DocumentProxyService.wsdl</abstractWSDL>
+  </wsdl:documentation>
+  <plnk:partnerLinkType name="UploadDocument">
+    <plnk:role name="UploadDocumentProvider">
+      <plnk:portType name="tns:UploadDocument" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="DownloadDocument">
+    <plnk:role name="DownloadDocumentProvider">
+      <plnk:portType name="tns:DownloadDocument" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="GetDocumentDetails">
+    <plnk:role name="GetDocumentDetailsProvider">
+      <plnk:portType name="tns:GetDocumentDetails" />
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+      <wsp:Policy>
+        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+          <wsp:Policy>
+            <sp:WssUsernameToken10 />
+          </wsp:Policy>
+        </sp:UsernameToken>
+      </wsp:Policy>
+    </sp:SupportingTokens>
+  </wsp:Policy>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/DocumentServices/apps/lsc/Schema/BusinessObjects/CCMS/CaseManagement/Case/1.0/CaseBIM.xsd" />
+      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/DocumentServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="DownloadDocumentRequestMessage">
+    <wsdl:part name="payload" element="ns1:DocumentDownloadRQ" />
+  </wsdl:message>
+  <wsdl:message name="DownloadDocumentResponseMessage">
+    <wsdl:part name="payload" element="ns1:DocumentDownloadRS" />
+  </wsdl:message>
+  <wsdl:message name="UploadDocumentRequestMessage">
+    <wsdl:part name="payload" element="ns1:DocumentUploadRQ" />
+  </wsdl:message>
+  <wsdl:message name="UploadDocumentResponseMessage">
+    <wsdl:part name="payload" element="ns1:DocumentUploadRS" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentDetailsRequestMessage">
+    <wsdl:part name="GetDocumentDetailsABMRQ" element="ns1:GetDocumentDetailsABMRQ" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentDetailsResponseMessage">
+    <wsdl:part name="GetDocumentDetailsABMRS" element="ns1:GetDocumentDetailsABMRS" />
+  </wsdl:message>
+  <wsdl:message name="UsernameToken">
+    <wsdl:part name="Security" element="wsse:Security" />
+  </wsdl:message>
+  <wsdl:portType name="DocumentServices">
+    <wsdl:operation name="DownloadDocument">
+      <wsdl:input message="tns:DownloadDocumentRequestMessage" />
+      <wsdl:output message="tns:DownloadDocumentResponseMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadDocument">
+      <wsdl:input message="tns:UploadDocumentRequestMessage" />
+      <wsdl:output message="tns:UploadDocumentResponseMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentDetails">
+      <wsdl:input message="tns:GetDocumentDetailsRequestMessage" />
+      <wsdl:output message="tns:GetDocumentDetailsResponseMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DocumentServicesSOAPBinding" type="tns:DocumentServices">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wss_username_token_service_policy" wsdl:required="false" />
+    <wsdl:operation name="UploadDocument">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/DocumentServices/UploadDocument" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadDocument">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/DocumentServices/DownloadDocument" />
+      <wsdl:input>
+        <soap:body use="literal" parts="payload" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentDetails">
+      <soap:operation style="document" soapAction="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/DocumentServices/GetDocumentDetails" />
+      <wsdl:input>
+        <soap:body use="literal" parts="GetDocumentDetailsABMRQ" />
+        <soap:header message="tns:UsernameToken" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="GetDocumentDetailsABMRS" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DocumentServices_ep">
+    <wsdl:port name="DocumentServices_pt" binding="tns:DocumentServicesSOAPBinding">
+      <soap:address location="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/DocumentServices/DocumentServices_ep" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
