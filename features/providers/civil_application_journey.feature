@@ -5,7 +5,7 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click link "Start Now"
-    And I click link "Apply for Legal Aid"
+    And I click link "Apply for legal aid"
     Then I am on the legal aid applications
 
   @javascript
@@ -353,7 +353,7 @@ Feature: Civil application journeys
     Then I click link "Contact"
     Then I should be on a page showing "Contact us"
     Then I click link "Back"
-    Then I should be on a page showing "Apply for Legal Aid"
+    Then I should be on a page showing "Apply for legal aid"
 
   @javascript
   Scenario: I want to return to applicant from Contact page
