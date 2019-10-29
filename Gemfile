@@ -9,7 +9,7 @@ gem 'geckoboard-ruby'
 gem 'govuk_notify_rails', '~> 2.1.1'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 4.2'
 gem 'rails', '~> 5.2.3'
 gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0'
@@ -18,7 +18,6 @@ gem 'sentry-raven'
 gem 'simple_command', '~> 0.1.0'
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.2.0'
-gem 'whenever', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

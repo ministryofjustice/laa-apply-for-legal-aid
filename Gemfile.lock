@@ -121,7 +121,6 @@ GEM
       activesupport
     chartkick (3.3.0)
     childprocess (3.0.0)
-    chronic (0.10.2)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     climate_control (0.2.0)
@@ -514,8 +513,6 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    whenever (1.0.0)
-      chronic (>= 0.6.3)
     wicked_pdf (1.4.0)
       activesupport
     xpath (3.2.0)
@@ -564,7 +561,7 @@ DEPENDENCIES
   pg
   prometheus_exporter
   pry-byebug
-  puma (~> 4.3)
+  puma (~> 4.2)
   pundit
   rails (~> 5.2.3)
   rails_admin (~> 2.0)

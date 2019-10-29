@@ -243,15 +243,14 @@ This data provider will be used by the `Dashboard::Widget` class when called wit
 
 ### 2. Add a cronjob to run it
 
-*** instructions on how to setup a cron job go here ****
-
-
+Create a yaml configuration file for each cronjob under `app/helm_deploy/apply_for_legal_aid/templates` by copying the `.dashboard_template_cron.yaml.sample` file and configure it to run the command `rake job:dashboard:update[the WidgetDataProvider class name here]` with
+your chosen cron job schedule.
 
 ### 3. Add the widget to the Geckoboard dashboard
 
 Once the job has been run at least once, you will be able to select the dataset as a data source when adding a new widget.
 
-
+----
 
 
 

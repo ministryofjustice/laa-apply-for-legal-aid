@@ -1,14 +1,14 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Release.Name }}-started-applications
+  name: {{ .Release.Name }}-submitted-applications
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  schedule: '*/5 * * * *'
+  schedule: '*/10 * * * *'
   selector:
     matchLabels:
       app: {{ template "apply-for-legal-aid.name" . }}
@@ -21,10 +21,10 @@ spec:
       template:
         spec:
           containers:
-          - name: started-applications
+          - name: submitted-applications
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
             imagePullPolicy: IfNotPresent
-            command: ['rake', 'job:dashboard:update[StartedApplications]']
+            command: ['rake', 'job:dashboard:update[SubmittedApplications]']
 {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
             resources:
               limits:
