@@ -17,6 +17,7 @@ module Providers
 
     included do
       include Pundit
+      before_action :authorize_whitelisted_user?, if: -> { HostEnv.production? }
       before_action :authorize_legal_aid_application
       rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized
 
@@ -42,6 +43,10 @@ module Providers
 
       def current_policy
         Pundit.policy pundit_user, legal_aid_application
+      end
+
+      def authorize_whitelisted_user?
+        redirect_to error_path(:access_denied) unless current_provider.whitelisted_user?
       end
 
       def authorize_legal_aid_application
