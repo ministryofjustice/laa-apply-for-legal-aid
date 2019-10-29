@@ -49,8 +49,12 @@ RSpec.describe ProviderDetailsCreator do
       expect(office_2.code).to eq(ccms_office_2.code)
     end
 
-    it 'update the name of the provider' do
+    it 'updates the name of the provider' do
       expect { subject }.to change { provider.reload.name }.to(api_response[:contactName])
+    end
+
+    it 'updates the user_login_id of the provider' do
+      expect { subject }.to change { provider.reload.user_login_id }.to(api_response[:contactId].to_s)
     end
 
     context 'selected office of provider is not returned by the API' do

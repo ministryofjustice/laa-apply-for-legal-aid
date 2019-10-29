@@ -14,7 +14,8 @@ class ProviderDetailsCreator
       firm: firm,
       details_response: provider_details,
       offices: offices,
-      name: provider_name
+      name: provider_name,
+      user_login_id: contact_id
     )
 
     provider.update!(selected_office: nil) if should_clear_selected_office?
@@ -53,6 +54,10 @@ class ProviderDetailsCreator
     # Remove the code at the end.
     # "Pearson & Pearson -0A1234" becomes "Pearson & Pearson"
     provider_details[:providerOffices].first[:officeName].split('-')[0..-2].join('-').strip
+  end
+
+  def contact_id
+    provider_details[:contactId]
   end
 
   def provider_details
