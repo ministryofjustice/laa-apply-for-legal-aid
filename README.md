@@ -241,35 +241,16 @@ Create a new class in the `app/models/dashboard/widget_data_providers` directory
 
 This data provider will be used by the `Dashboard::Widget` class when called with the name of the data provider as a parameter.
 
-### 2. Add the job to the whenever schedule
+### 2. Add a cronjob to run it
 
-Edit `config/schedule.rb` and add a line to execute your widget on the required schedule, for example:
+*** instructions on how to setup a cron job go here ****
 
-    every 1.day, at: '4:30 am' do
-         rake 'job:dashboard:update[NumberProviderFirms]'
-    end
-
-The name passed as a parameter to the `job:dashboard:update` rake task is the class name (without namespace) of the data provider you've just written.  This rake task will execute a job to schedule running the data provider in sidekiq.
 
 
 ### 3. Add the widget to the Geckoboard dashboard
 
 Once the job has been run at least once, you will be able to select the dataset as a data source when adding a new widget.
 
-
-## Notes on the `whenever` gem and `crontab`
-
-The `whenever` gem allows us to write a `config/schedule.rb` file in ruby syntax, and then export it to our `crontab` file to get the system to run jobs on a scheduled basis.  See https://github.com/javan/whenever for more details.
-
-If you want to try it out on your local system, you will need to export it to your crontab job with the following command:
-
-    bundle exec whenever --update --set environment=development
-
-This will create or update your crontab file to ensure the files are run in rails development environment.  To see the contents of your crontab file:
-
-    crontab -l
-    
-That's a lower-case L, not a number 1.
 
 
 
