@@ -422,7 +422,7 @@ module CCMS
     end
 
     def method_name(str)
-      str.sub(/^#/, '')
+      str.sub(/^#/, '')§§§§
     end
 
     def get_attr_value(str, options)

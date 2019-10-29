@@ -16,6 +16,6 @@ class ApplicationProceedingType < ApplicationRecord
 
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
-    rec.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
+    rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
   end
 end
