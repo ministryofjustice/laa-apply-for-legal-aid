@@ -72,7 +72,4 @@ RUN apk del build-dependencies
 RUN chown -R appuser:appgroup log tmp db
 
 USER 1000
-RUN whoami
-RUN PWD
-RUN whenever --update
 CMD "./docker/run"
