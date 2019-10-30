@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_151150) do
+ActiveRecord::Schema.define(version: 2019_10_30_141957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -615,6 +615,7 @@ ActiveRecord::Schema.define(version: 2019_10_25_151150) do
     t.datetime "updated_at", null: false
     t.boolean "mock_true_layer_data", default: false, null: false
     t.boolean "allow_non_passported_route", default: true, null: false
+    t.boolean "use_mock_provider_details", default: true, null: false
   end
 
   create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

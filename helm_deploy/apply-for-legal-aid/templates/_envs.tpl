@@ -188,11 +188,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: providerDetailsUrl
-  - name: PROVIDER_DETAILS_MOCK
+  - name: ALLOW_PROVIDER_DETAILS_MOCK
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: providerDetailsMock
+        key: providerDetailsAllowMock
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:

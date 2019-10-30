@@ -22,6 +22,14 @@
           title: { size: :m, text: t('.labels.allow_non_passported_route') }
         ) if Rails.configuration.x.allow_non_passported_route %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :use_mock_provider_details,
+          [true, false],
+          inline: true,
+          hint: t('.hints.use_mock_provider_details'),
+          title: { size: :m, text: t('.labels.use_mock_provider_details') }
+    ) if Rails.configuration.x.provider_details.allow_mock %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

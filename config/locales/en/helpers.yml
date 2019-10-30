@@ -61,3 +61,6 @@ en:
           <<: *true_false
         allow_non_passported_route:
           <<: *true_false
+        use_mock_provider_details:
+          <<: *true_false
+

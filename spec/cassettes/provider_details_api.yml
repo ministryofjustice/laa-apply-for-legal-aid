@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 27 Jun 2019 14:15:19 GMT
+      - Thu, 31 Oct 2019 12:24:40 GMT
       Server:
       - Oracle-HTTP-Server
       Content-Type:
@@ -30,9 +30,8 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"providerOffices":[{"providerfirmId":26403,"officeId":84705,"officeName":"RUSSELL
-        COOKE LLP RE ABILOYE & CO-0M477A","smsVendorNum":"3534","smsVendorSite":"SMS_VENDOR_SITE"}],"contactId":34419,"contactName":"Neeta
-        Desor"}'
+      string: '{"providerFirmId":22381,"contactUserId":2016472,"contacts":[{"id":4055523,"name":"
+        "}],"providerOffices":[{"id":81693,"name":"DESOR & CO-0B721W"}]}'
     http_version: 
-  recorded_at: Thu, 27 Jun 2019 14:15:19 GMT
+  recorded_at: Thu, 31 Oct 2019 12:24:40 GMT
 recorded_with: VCR 5.0.0

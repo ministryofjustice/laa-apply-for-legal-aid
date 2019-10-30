@@ -9,6 +9,12 @@ class Setting < ApplicationRecord
     setting.allow_non_passported_route?
   end
 
+  def self.use_mock_provider_details?
+    return false unless Rails.configuration.x.provider_details.allow_mock
+
+    setting.use_mock_provider_details || false
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

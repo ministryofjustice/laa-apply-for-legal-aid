@@ -63,4 +63,7 @@ Rails.application.configure do
 
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
+
+  # allow provider details api to be mocked
+  config.x.allow_mock_provider_api = true
 end

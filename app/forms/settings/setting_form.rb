@@ -4,8 +4,8 @@ module Settings
 
     form_for Setting
 
-    attr_accessor :mock_true_layer_data, :allow_non_passported_route
+    attr_accessor :mock_true_layer_data, :allow_non_passported_route, :use_mock_provider_details
 
-    validates :mock_true_layer_data, :allow_non_passported_route, presence: true
+    validates :mock_true_layer_data, :allow_non_passported_route, :use_mock_provider_details, presence: true
   end
 end

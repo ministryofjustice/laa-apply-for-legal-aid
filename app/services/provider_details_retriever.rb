@@ -2,8 +2,9 @@ class ProviderDetailsRetriever
   ApiError = Class.new(StandardError)
 
   def self.call(username)
-    return MockProviderDetailsRetriever.call(username) if Rails.configuration.x.provider_details.mock
+    return MockProviderDetailsRetriever.call(username) if Setting.use_mock_provider_details?
 
+    puts 'Using ProviderDetailsRetriever'
     new(username).call
   end
 
