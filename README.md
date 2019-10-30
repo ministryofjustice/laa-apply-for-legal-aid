@@ -140,7 +140,7 @@ LAA_PORTAL_MOCK_SAML=true
 ```
 
 This will enable you to login as a provider with the usernames specified in `config/initializers/mock_saml.rb`.
-Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to 
+Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to
 different firms.  The password for all users is `password`.
 
 
@@ -165,7 +165,14 @@ admin user with username `apply_maintenance`, and that password.
 
 To allow reset mode within the admin portal, `ENV['ADMIN_ALLOW_RESET']` must return "true"
 
-To allow the creation of test applications at different stages, for each provider, 
+The non-passported user journey is turned off in production. It can be toggled in
+Staging and UAT at `/admin/settings`
+
+To test the non-passported user journey, the 
+`ENV['ALLOW_NON_PASSPORTED_ROUTE']` must return "true". This is only available in the
+Staging and UAT environments.
+
+To allow the creation of test applications at different stages, for each provider,
 `ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS']` must return "true". This is only available in the
 Staging and UAT environments.
 
