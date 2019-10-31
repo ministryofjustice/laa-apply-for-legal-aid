@@ -1088,6 +1088,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_13WP3_14A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Housing Costs: The client pays rent'
     :response_type: boolean
@@ -1255,6 +1256,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_13WP3_36A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Housing Costs: The client pays board and lodgings'
     :response_type: boolean
@@ -2054,6 +2056,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_13WP3_1A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Housing Costs: The client pays mortgage'
     :response_type: boolean
@@ -2702,6 +2705,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   CURRENT_CERT_SUBSTANTIVE:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'App: The Current Certificate Is Substantive'
     :response_type: boolean
