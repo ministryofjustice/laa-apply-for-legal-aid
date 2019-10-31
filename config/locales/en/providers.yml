@@ -335,7 +335,7 @@ en:
         none_selected: None of these
     select_offices:
       show:
-        h1-heading: Which %{firm} office is responsible for your applications?
+        h1-heading: Select the account number of the office handling this application
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
