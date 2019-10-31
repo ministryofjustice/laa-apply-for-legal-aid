@@ -79,8 +79,6 @@ bin/rake
 VCR_RECORD_MODE=all bin/rake
 ```
 
-[There is an (deprecated) alternative setup procedure (not recommended), using the makefile, which can be found here](./docs/README_alt.md)
-
 ### Accessibility testing with webhint
 
 webhint (https://webhint.io/) is used to check if pages are accessible.
@@ -140,7 +138,7 @@ LAA_PORTAL_MOCK_SAML=true
 ```
 
 This will enable you to login as a provider with the usernames specified in `config/initializers/mock_saml.rb`.
-Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to 
+Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to
 different firms.  The password for all users is `password`.
 
 
