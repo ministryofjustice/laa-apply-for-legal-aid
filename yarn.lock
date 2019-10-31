@@ -1479,23 +1479,17 @@
   dependencies:
     "@hint/utils" "^6.0.0"
 
-"@hint/parser-javascript@^3.0.13":
-  version "3.0.13"
-  resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.0.13.tgz#0d5c865c74fc74a003618be515cf821a77eebdce"
-  integrity sha512-n8ZNU64SZfBOO7MQaM51R6z7fDnf2bCICpnECwa3PbmX/QUNIlsqGx6U7f5XUAft/Vk2uddN+V7OWg96HJ8Ymg==
+"@hint/parser-javascript@^3.0.13", "@hint/parser-javascript@^3.0.2", "@hint/parser-javascript@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.1.0.tgz#9be94eca18be1ef5d9aebaad27c7ab49cdc233eb"
+  integrity sha512-8p4YRoanSL7ZlZWlEkgargIOvJEcelfJtozWAZfJzXjKVIGAtd85JdXA6Vp0lPdMx/ESZg1l5556Iy4rtDYOiw==
   dependencies:
-    "@hint/utils" "^6.0.0"
-    acorn "^7.0.0"
+    "@hint/utils" "^6.1.0"
+    "@types/estree-jsx" "^0.0.0"
+    acorn "^7.1.0"
+    acorn-jsx "^5.0.2"
+    acorn-jsx-walk "^2.0.0"
     acorn-walk "^7.0.0"
-
-"@hint/parser-javascript@^3.0.2", "@hint/parser-javascript@^3.0.8":
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/@hint/parser-javascript/-/parser-javascript-3.0.8.tgz#2bd40b8b5c624cacf27b4295f8752b5389b50c72"
-  integrity sha512-AfutunenA0bLTJXVTqWdVJD6SHziAVEB5RxdeKmpMyRIrZwlfxfdMR4F5kHVvv9axjNj7yrFSTknO4rjxT6IUA==
-  dependencies:
-    "@hint/utils" "^4.1.0"
-    acorn "^7.0.0"
-    acorn-walk "^6.2.0"
 
 "@hint/parser-less@^1.0.5":
   version "1.0.5"
@@ -1642,10 +1636,10 @@
     strip-bom "^4.0.0"
     strip-json-comments "^3.0.1"
 
-"@hint/utils@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@hint/utils/-/utils-6.0.0.tgz#5198bf0b1cec021a42d126fce07cdbd22e39eae7"
-  integrity sha512-xg5GyIBlT+C0jdmgch5BupSbCbqGyOysrWSuEnFvP757MP2XS0Pm5whSY4ATMZiVtObFXwiiq3ZnP4qpK9Y3vw==
+"@hint/utils@^6.0.0", "@hint/utils@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@hint/utils/-/utils-6.1.0.tgz#b5715fb0ed4ba7e0412064e24321b2a0b5cdb98b"
+  integrity sha512-q3xUvSJOQRIbFKXzohImExvI4vl2xqq4h/pKIbWATrKjeCYUNFyE3IR7sxJ+5yOo8c5vVD0KvcptFxbarlh1zA==
   dependencies:
     "@types/debug" "^4.1.5"
     "@types/parse5" "^5.0.2"
@@ -1666,7 +1660,7 @@
     npm-registry-fetch "^5.0.0"
     parse5 "^5.1.0"
     parse5-htmlparser2-tree-adapter "^5.1.0"
-    postcss "^7.0.18"
+    postcss "^7.0.21"
     request "^2.88.0"
     semver "^6.3.0"
     strip-bom "^4.0.0"
@@ -1965,6 +1959,18 @@
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.5.tgz#b14efa8852b7768d898906613c23f688713e02cd"
   integrity sha512-Q1y515GcOdTHgagaVFhHnIFQ38ygs/kmxdNpvpou+raI9UO3YZcHDngBSYKQklcKlvA7iuQlmIKbzvmxcOE9CQ==
 
+"@types/estree-jsx@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@types/estree-jsx/-/estree-jsx-0.0.0.tgz#41447d0019a12dd43986cd23ca1b10f9a350a178"
+  integrity sha512-qbF1vq7M/ACuNkA3fbLJY0o+O+Yy4TPICtu6bUfX1IBdSOxBDms9zAdbhSfYuHTmWLakWg5zOJ64JrJae1ksdg==
+  dependencies:
+    "@types/estree" "*"
+
+"@types/estree@*":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
+  integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -2236,7 +2242,17 @@ acorn-globals@^4.1.0, acorn-globals@^4.3.2:
     acorn "^6.0.1"
     acorn-walk "^6.0.1"
 
-acorn-walk@^6.0.1, acorn-walk@^6.2.0:
+acorn-jsx-walk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/acorn-jsx-walk/-/acorn-jsx-walk-2.0.0.tgz#a5ed648264e68282d7c2aead80216bfdf232573a"
+  integrity sha512-uuo6iJj4D4ygkdzd6jPtcxs8vZgDX9YFIkqczGImoypX2fQ4dVImmu3UzA4ynixCIMTrEOWW+95M2HuBaCEOVA==
+
+acorn-jsx@^5.0.2:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.1.0.tgz#294adb71b57398b0680015f0a38c563ee1db5384"
+  integrity sha512-tMUqwBWfLFbJbizRmEcWSLw6HnFzfdJs2sOJEOwwtVPMoH/0Ay+E703oZz78VSXZiiDcZrQ5XKjPIUQixhmgVw==
+
+acorn-walk@^6.0.1:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.2.0.tgz#123cb8f3b84c2171f1f7fb252615b1c78a6b1a8c"
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
@@ -2256,10 +2272,10 @@ acorn@^6.0.1, acorn@^6.1.1, acorn@^6.2.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.3.0.tgz#0087509119ffa4fc0a0041d1e93a417e68cb856e"
   integrity sha512-/czfa8BwS88b9gWQVhc8eknunSA2DoJpJyTQkhheIf5E48u1N0R4q/YxxsAeqRrmK9TQ/uYfgLDfZo91UlANIA==
 
-acorn@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.0.0.tgz#26b8d1cd9a9b700350b71c0905546f64d1284e7a"
-  integrity sha512-PaF/MduxijYYt7unVGRuds1vBC9bFxbNf+VWqhOClfdgy7RlVkQqt610ig1/yxTgsDIfW1cWDel5EBbOy3jdtQ==
+acorn@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.0.tgz#949d36f2c292535da602283586c2477c57eb2d6c"
+  integrity sha512-kL5CuoXA/dgxlBbVrflsflzQ3PAas7RYZB52NOm/6839iVYJgKMJ3cQJD+t2i5+qFa8h3MDpEOJiS64E8JLnSQ==
 
 agent-base@4, agent-base@^4.2.0, agent-base@^4.3.0:
   version "4.3.0"
@@ -9135,6 +9151,15 @@ postcss@^7.0.18:
   version "7.0.18"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.18.tgz#4b9cda95ae6c069c67a4d933029eddd4838ac233"
   integrity sha512-/7g1QXXgegpF+9GJj4iN7ChGF40sYuGYJ8WZu8DZWnmhQ/G36hfdk3q9LBJmoK+lZ+yzZ5KYpOoxq7LF1BxE8g==
+  dependencies:
+    chalk "^2.4.2"
+    source-map "^0.6.1"
+    supports-color "^6.1.0"
+
+postcss@^7.0.21:
+  version "7.0.21"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.21.tgz#06bb07824c19c2021c5d056d5b10c35b989f7e17"
+  integrity sha512-uIFtJElxJo29QC753JzhidoAhvp/e/Exezkdhfmt8AymWT6/5B7W1WmponYWkHk2eg6sONyTch0A3nkMPun3SQ==
   dependencies:
     chalk "^2.4.2"
     source-map "^0.6.1"
