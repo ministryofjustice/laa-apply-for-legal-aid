@@ -117,6 +117,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
             expect(legal_aid_application.shared_ownership).to eq nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
+            expect(legal_aid_application.percentage_home).to eq 100.0
           end
 
           context 'while checking answers' do

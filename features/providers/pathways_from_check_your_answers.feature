@@ -51,7 +51,7 @@ Feature: Pathways from check your answers
     And I used delegated functions
     Then I click 'Save and continue'
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
-    Then I click 'Continue'
+    Then I click 'continue_button'
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'

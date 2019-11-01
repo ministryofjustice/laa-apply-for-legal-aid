@@ -492,6 +492,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
+    Then I should be on a page showing 'We need to check if Test Walker should pay towards legal aid'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
     Then I click 'Continue'
     Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'

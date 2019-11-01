@@ -149,6 +149,11 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     SHARED_OWNERSHIP_YES_REASONS.include?(shared_ownership)
   end
 
+  def shared_ownership=(new_val)
+    self[:shared_ownership] = new_val
+    self[:percentage_home] = 100.0 if new_val == 'no_sole_owner'
+  end
+
   def own_home?
     own_home.present? && !own_home_no?
   end

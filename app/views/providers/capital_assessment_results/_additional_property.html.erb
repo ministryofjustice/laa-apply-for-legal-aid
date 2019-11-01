@@ -1,0 +1,3 @@
+<%= render partial: 'results_detail_row', locals: { caption: t('.additional_property_value'), value: number_to_currency(@cfe_result.additional_property_value) } %>
+<%= render partial: 'results_detail_row', locals: { caption: t('.outstanding_mortgage'), value: number_to_currency(@cfe_result.additional_property_mortgage) } %>
+<%= render partial: 'results_detail_row', locals: { caption: t('.disregards_and_deductions'), value: number_to_currency(@cfe_result.additional_property_transaction_allowance) } %>

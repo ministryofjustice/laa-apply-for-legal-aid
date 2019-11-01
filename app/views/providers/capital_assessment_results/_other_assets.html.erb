@@ -1,0 +1,18 @@
+<% if @cfe_result.liquid_capital_items.any? || @cfe_result.additional_property? %>
+  <div class="govuk-details__text">
+    <h2 class="govuk-heading-m"><%= t('.other_assets') %></h2>
+    <table class="govuk-table">
+      <tbody>
+        <% @cfe_result.non_liquid_capital_items.each do |item| %>
+          <%= render partial: 'results_detail_row', locals: { caption: item[:description], value: number_to_currency(item[:value]) } %>
+        <% end %>
+
+        <% if @cfe_result.additional_property? %>
+          <%= render partial: 'additional_property' %>
+        <% end %>
+
+        <%= render partial: 'results_total_row', locals: { caption: t('.assessed_amount'), value: number_to_currency(@cfe_result.total_other_assets) } %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
