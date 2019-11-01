@@ -1,0 +1,35 @@
+<section class="print-no-break">
+  <% read_only = false unless local_assigns.key?(:read_only) %>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :total_capital_assessed,
+          question: t('.total'),
+          answer: number_to_currency(JSON.parse(@legal_aid_application.cfe_result.result)['capital']['total_capital']),
+          read_only: read_only,
+          align_right: read_only
+        ) %>
+
+    <%= check_answer_link(
+          name: :capital_lower_limit,
+          question: t('.lower_limit_label'),
+          answer: t('.lower_limit'),
+          read_only: read_only,
+          align_right: read_only
+        ) %>
+
+    <%= check_answer_link(
+          name: :capital_upper_limit,
+          question: t('.upper_limit_label'),
+          answer: t('.upper_limit'),
+          read_only: read_only,
+          align_right: read_only
+        ) %>
+
+    <%= check_answer_link(
+          name: :capital_contribution,
+          question: t('.contribution'),
+          answer: number_to_currency(JSON.parse(@legal_aid_application.cfe_result.result)['capital']['capital_contribution']),
+          read_only: read_only,
+          align_right: read_only
+        ) %>
+</section>

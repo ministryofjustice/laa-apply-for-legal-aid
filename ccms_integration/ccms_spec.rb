@@ -66,11 +66,6 @@ module CCMS
              scope_limitations: [substantive_scope_limitation]
     end
 
-    let(:cfe_submission_1) { create :cfe_submission, legal_aid_application: substantive_legal_aid_application }
-    let(:cfe_submission_2) { create :cfe_submission, legal_aid_application: delegated_functions_legal_aid_application }
-    let!(:cfe_result_1) { create :cfe_result, submission: cfe_submission_1 }
-    let!(:cfe_result_2) { create :cfe_result, submission: cfe_submission_2 }
-
     let(:substantive_legal_aid_application) do
       create :legal_aid_application,
              :with_applicant_and_address,
@@ -81,6 +76,7 @@ module CCMS
              :with_merits_assessment,
              :with_means_report,
              :with_merits_report,
+             :with_cfe_result,
              statement_of_case: statement_of_case,
              proceeding_types: [substantive_proceeding_type],
              state: :submitting_assessment,
@@ -118,6 +114,7 @@ module CCMS
              :with_merits_assessment,
              :with_means_report,
              :with_merits_report,
+             :with_cfe_result,
              statement_of_case: statement_of_case,
              proceeding_types: [delegated_functions_proceeding_type],
              state: :submitting_assessment,

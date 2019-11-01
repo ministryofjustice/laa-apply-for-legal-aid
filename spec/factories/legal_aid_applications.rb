@@ -275,7 +275,15 @@ FactoryBot.define do
       provider_step { :check_merits_answers }
     end
 
+    trait :with_cfe_result do
+      after :create do |application|
+        cfe_submission = create :cfe_submission, legal_aid_application: application
+        create :cfe_result, submission: cfe_submission
+      end
+    end
+
     trait :with_means_report do
+      with_cfe_result
       after :create do |application|
         Reports::MeansReportCreator.call(application)
       end

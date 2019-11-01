@@ -11,7 +11,7 @@ module CFEResults
           total_liquid: '350.0',
           total_non_liquid: '0.0',
           pensioner_capital_disregard: '0.0',
-          total_capital: '-99650.0',
+          total_capital: '0.0',
           capital_contribution: '0.0',
           liquid_capital_items: [
             {
