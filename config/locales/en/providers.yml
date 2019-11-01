@@ -73,14 +73,14 @@ en:
           provide_access/details: provide details of the case
       use_ccms:
         accept_only: We currently only accept applications for people receiving one of these benefits.
-        apply_in_ccms: Apply in CCMS
+        apply_in_ccms: Apply using CCMS
         back_to_applications: Back to my applications
         benefits:
           list: |
+            Employment and Support Allowance (ESA)
             Income Support
-            Income-based Employment and Support Allowance (ESA)
-            Income-based Jobseeker’s Allowance (JSA)
-            State Pension Guarantee Credit
+            Jobseeker’s Allowance (JSA)
+            Pension Credit (Guarantee Credit)
             Universal Credit
         title: You need to use CCMS for this application
         we_checked: 'We checked with the DWP and your client does not receive:'
