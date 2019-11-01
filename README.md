@@ -79,8 +79,6 @@ bin/rake
 VCR_RECORD_MODE=all bin/rake
 ```
 
-[There is an (deprecated) alternative setup procedure (not recommended), using the makefile, which can be found here](./docs/README_alt.md)
-
 ### Accessibility testing with webhint
 
 webhint (https://webhint.io/) is used to check if pages are accessible.
