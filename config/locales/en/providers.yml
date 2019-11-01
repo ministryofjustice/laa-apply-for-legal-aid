@@ -388,7 +388,8 @@ en:
         back_home: Back to your applications
         heading: Application for civil legal aid certificate
         client_name: Client
-        case_reference: Case reference
+        case_reference: LAA reference
+        ccms_reference: CCMS reference
         print_button: Print application
         client_details_heading: Client details
         proceedings_details_heading: What you're applying for
