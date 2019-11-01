@@ -32,7 +32,7 @@ Feature: Civil application journeys
     Then I visit the confirm office page
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'office is responsible for your applications?'
+    Then I should be on a page showing 'office handling this application'
 
   @javascript @vcr
   Scenario: No results returned is seen on screen when invalid proceeding search entered
