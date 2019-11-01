@@ -24,10 +24,6 @@ RSpec.describe 'provider confirm office', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'displays the correct firm name' do
-        expect(unescaped_response_body).to include(firm.name)
-      end
-
       it 'displays the correct office legal aid code' do
         expect(unescaped_response_body).to include(office.code)
       end
