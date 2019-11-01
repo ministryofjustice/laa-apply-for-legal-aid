@@ -121,9 +121,9 @@ en:
         case-reference: Case reference
     confirm_offices:
       show:
-        h1-heading: Confirm the %{firm} office responsible for this application
-        error: Select yes if this office is responsible for your applications
-        no_another_office: No, another office is responsible for this application
+        h1-heading: Confirm the account number of the office handling this application
+        error: Select yes if this is the account number of the office handling this application
+        no_another_office: No, another office is handling this application
         account_number: 'Legal Aid Agency account number: '
         is_this_correct: Is this correct?
     date_client_told_incidents:
