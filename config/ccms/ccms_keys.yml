@@ -170,6 +170,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_DECL_T_38WP3_12A:
+    :generate_block?: false
     :value: " ? The Legal Aid Agency may cancel my legal aid and I will have to pay
       back all of my legal fees."
     :br100_meaning: The means declaration 1a paragraph 12
@@ -188,6 +189,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_116A:
+    :generate_block?: false
     :value: 'This declaration applies to all the information given in this application
       as summarised below, and to any evidence provided in support:'
     :br100_meaning: The means declaration 1a paragraph 03
@@ -215,6 +217,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_6WP3_236A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: Working Tax Credit?'
     :response_type: boolean
@@ -235,6 +238,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_DECL_T_38WP3_13A:
+    :generate_block?: false
     :value: 'I understand:'
     :br100_meaning: The means declaration 1a paragraph 13
     :response_type: text
@@ -280,6 +284,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_6WP3_235A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: Child Tax Credit?'
     :response_type: boolean
@@ -308,6 +313,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_DECL_T_38WP3_14A:
+    :generate_block?: false
     :value: " ? Legal aid is not always free.  I may have to pay a contribution towards
       my legal costs from my income and/or capital.  My legal aid may be withdrawn
       if I fall in arrears of payment and I will be responsible for the outstanding
@@ -375,6 +381,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_DECL_T_38WP3_15A:
+    :generate_block?: false
     :value: " ? I may have to pay back all or part of my legal costs at the end of
       my case."
     :br100_meaning: The means declaration 1a paragraph 15
@@ -412,11 +419,13 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_9WP3_356A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Any Other Income: Receives any other income?'
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_6WP3_233A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Pending Benefit: Recently made applications for benefits?'
     :response_type: boolean
@@ -454,6 +463,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_DECL_T_38WP3_20A:
+    :generate_block?: false
     :value: Full name (in block capitals):_______________________________
     :br100_meaning: The means declaration 1a paragraph 20
     :response_type: text
@@ -469,6 +479,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_DECL_T_38WP3_1A:
+    :generate_block?: false
     :value: 1. a) Client Means Declaration
     :br100_meaning: The means declaration 1a paragraph 1
     :response_type: text
@@ -501,6 +512,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_6WP3_239A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: Incapacity Benefit?'
     :response_type: boolean
@@ -518,11 +530,13 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_21A:
+    :generate_block?: false
     :value: Date__/__/____
     :br100_meaning: The means declaration 1a paragraph 21
     :response_type: text
     :user_defined: false
   GB_DECL_T_38WP3_2A:
+    :generate_block?: false
     :value: " - To be signed in all non-passported cases (including clients living
       outside the UK) except where the client is a child under 16 or a protected party."
     :br100_meaning: The means declaration 1a paragraph 2
@@ -546,6 +560,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_6WP3_238A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: CB-ESA?'
     :response_type: boolean
@@ -564,11 +579,13 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_40WP3_64A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Val. possessions: Copy of valuation giving resale value'
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_9WP3_349A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Private Pension: Receives a private pension?'
     :response_type: boolean
@@ -580,12 +597,14 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_DECL_T_38WP3_10A:
+    :generate_block?: false
     :value: 'If I fail to notify the Legal Aid Agency of any change in my financial
       circumstances:'
     :br100_meaning: The means declaration 1a paragraph 10
     :response_type: text
     :user_defined: false
   GB_DECL_T_38WP3_3A:
+    :generate_block?: false
     :value: 'This is a true statement of all my and my partner?s (if applicable) income
       and assets in the UK and abroad. I understand that if I tell you anything untrue
       in this application, or the documents I send with it, or if I leave anything
@@ -637,6 +656,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_1WP3_175A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Restraint Order: The partner has income subject to restraint
       (freezing) order?'
@@ -649,6 +669,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_11A:
+    :generate_block?: false
     :value: " ? I may be prosecuted."
     :br100_meaning: The means declaration 1a paragraph 11
     :response_type: text
@@ -687,6 +708,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_DECL_T_38WP3_4A:
+    :generate_block?: false
     :value: " ? I may be prosecuted."
     :br100_meaning: The means declaration 1a paragraph 4
     :response_type: text
@@ -704,6 +726,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_6WP3_237A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: CB-JSA?'
     :response_type: boolean
@@ -905,6 +928,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_1WP3_400A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Restraint order: Made under S.41 POCA?'
     :response_type: boolean
@@ -995,6 +1019,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_1WP3_401A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Restraint order: Application to vary been made?'
     :response_type: boolean
@@ -1035,6 +1060,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_2WP4_2A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Sub. Con.: The client is a sub-contractor under CIS?'
     :response_type: boolean
@@ -1045,6 +1071,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_41WP3_23A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Client Benefits: Copy of award letter(s)'
     :response_type: boolean
@@ -1099,6 +1126,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_9WP3_351A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Rental Income: Receives rental income from another property?'
     :response_type: boolean
@@ -1169,6 +1197,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_9WP3_350A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Pension: Receives a pension from an employer?'
     :response_type: boolean
@@ -1190,6 +1219,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_13WP3_49A:
+    :generate_block?: false
     :value: Mortgage
     :br100_meaning: 'Housing Costs: Mortgage/ Mortgage & Rent/ Rent/ B&L/ None'
     :response_type: text
@@ -1267,6 +1297,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_9WP3_353A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Student Income: Receives a student loan/grant or bursary?'
     :response_type: boolean
@@ -1282,6 +1313,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   CLIENT_VULNERABLE:
+    :generate_block?: false
     :value: false
     :br100_meaning: The client is marked as vulnerable
     :response_type: boolean
@@ -1302,6 +1334,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_41WP3_20A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Employment:  L17 / Last 3 monthly or 6 weekly wage slips / contract'
     :response_type: boolean
@@ -1318,6 +1351,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_41WP3_32A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Mortgage:  Documents confirming amount due and paid'
     :response_type: boolean
@@ -1368,6 +1402,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_9WP3_352A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Board Income: Receives board or rent from family lodgers
       or tenants?'
@@ -1414,6 +1449,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   PUI_CLIENT_INCOME_CONT:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: Client Provisional Income Contribution
     :response_type: currency
@@ -1447,6 +1483,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_C_13WP3_4A:
+    :generate_block?: false
     :value: 0.0
     :br100_meaning: 'Mortgage: Monthly repayment amount for secured loans'
     :response_type: currency
@@ -1508,7 +1545,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_T_6WP3_229A:
-    :generate_block?: false    
+    :generate_block?: false
     :value: 4-Weekly
     :br100_meaning: 'Client Child Benefit: How often'
     :response_type: text
@@ -1622,6 +1659,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_8WP3_310A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Financial Support: Receives financial support?'
     :response_type: boolean
@@ -1787,6 +1825,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_13WP3_5A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Mortgage: Repayment amount is being (part) paid?'
     :response_type: boolean
@@ -1832,6 +1871,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_13WP3_6A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Mortgage: Some/all repayment is being made by another?'
     :response_type: boolean
@@ -1880,6 +1920,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_13WP3_7A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Housing Costs: The client pays mortgage and rent'
     :response_type: boolean
@@ -1941,17 +1982,20 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_12WP3_3A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Maintenance Out: Pays maintenance?'
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_39WP3_64A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Bank accounts: Certified copies or original statements for last
       3 months'
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_39WP3_52A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Main Dwelling: Documents confirming value , outstanding mortgage
       and/ or loan'
@@ -1974,6 +2018,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_DECL_T_38WP3_5A:
+    :generate_block?: false
     :value: " ? The Legal Aid Agency may take away my legal aid so I will have to
       pay back all my legal fees."
     :br100_meaning: The means declaration 1a paragraph 5
@@ -2026,6 +2071,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_DECL_T_38WP3_6A:
+    :generate_block?: false
     :value: " - I agree to the Legal Aid Agency checking these facts with others such
       as credit reference agencies, the Department of Work and Pensions and HM Revenue
       and Customs and I authorise those people/organisations to provide the information
@@ -2045,6 +2091,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_8WP3_308A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Maintenance: Receives maintenance?'
     :response_type: boolean
@@ -2079,6 +2126,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_3WP2_20A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Main Dwelling: Subject to possession proceedings?'
     :response_type: boolean
@@ -2095,6 +2143,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_DECL_T_38WP3_7A:
+    :generate_block?: false
     :value: 'I understand that I must co-operate fully and immediately with any enquiry
       into my financial circumstances. I will:'
     :br100_meaning: The means declaration 1a paragraph 7
@@ -2130,6 +2179,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_8A:
+    :generate_block?: false
     :value: " ? Provide more evidence if the Legal Aid Agency ask."
     :br100_meaning: The means declaration 1a paragraph 8
     :response_type: text
@@ -2175,6 +2225,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_16A:
+    :generate_block?: false
     :value: " ? The more work my solicitor does, the more I may have to pay back."
     :br100_meaning: The means declaration 1a paragraph 16
     :response_type: text
@@ -2192,6 +2243,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_9A:
+    :generate_block?: false
     :value: " - Tell the Legal Aid Agency immediately if anything I have said here
       changes."
     :br100_meaning: The means declaration 1a paragraph 9
@@ -2204,12 +2256,14 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_14WP3_1A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Crim Legal Aid: Pays a contribution towards criminal legal
       aid?'
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_6WP3_232A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Client Benefits: Receives benefits from state or a local authority?'
     :response_type: boolean
@@ -2233,6 +2287,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_DECL_T_38WP3_17A:
+    :generate_block?: false
     :value: " ? The Legal Aid Agency may register an interest-bearing charge against
       my property."
     :br100_meaning: The means declaration 1a paragraph 17
@@ -2250,6 +2305,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_12WP3_1A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client: The client has persons residing with them?'
     :response_type: boolean
@@ -2261,6 +2317,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_18A:
+    :generate_block?: false
     :value: I understand if false or inaccurate information is provided and fraud
       is identified, details will be passed to fraud prevention agencies to prevent
       fraud and money laundering. For further details explaining how the information
@@ -2303,6 +2360,7 @@ global_means:
     :response_type: text
     :user_defined: true
   GB_INPUT_B_6WP3_254A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Disregarded Benefits: Additional state benefits?'
     :response_type: boolean
@@ -2324,6 +2382,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_DECL_T_38WP3_19A:
+    :generate_block?: false
     :value: Signed:_______________________________
     :br100_meaning: The means declaration 1a paragraph 19
     :response_type: text
@@ -2352,6 +2411,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   GB_INPUT_B_6WP3_241A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Client Benefits: Savings Credit?'
     :response_type: boolean
@@ -2462,11 +2522,13 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   COPY_DV_POLICE_CAUTION_2A:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFDV_23A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2478,6 +2540,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CAFCASS_EXPT_RPT_RECEIVED:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Court: A  CAFCASS Or Other Expert Report Has Been Received'
     :response_type: boolean
@@ -2557,6 +2620,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   CROSS_BORDER_DISPUTES_GLOBAL:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'Gate: Falls Within The Cross Border Disputes LAR Criteria'
     :response_type: boolean
@@ -2586,6 +2650,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   LAR_CHILD_ABUSE_IDENTITY:
+    :generate_block?: false
     :value: Opponent
     :br100_meaning: 'Gate: The Identity Of Party(ies) Who Allegedly Pose Risk Of Abuse'
     :response_type: text
@@ -2668,16 +2733,19 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   ECFDV_33A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'GEvi: Letter from IDVA Or Independent Sexual Violence Advisor'
     :response_type: boolean
     :user_defined: true
   ECFDV_21A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFCA_2A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'GEvi: Relevant Police Caution For A Child Abuse Offence'
     :response_type: boolean
@@ -2779,12 +2847,14 @@ global_merits:
     :response_type: text
     :user_defined: false
   COPY_CA_FINDING_OF_FACT:
+    :generate_block?: false
     :value: true
     :br100_meaning: The provider has a copy of finding of fact a child was abused
       by other party
     :response_type: boolean
     :user_defined: true
   ECFDV_22A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -2795,6 +2865,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFCA_1A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Relevant Unspent Conviction For A Child Abuse Offence'
     :response_type: boolean
@@ -2869,11 +2940,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_27A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFCA_4A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Relevant Protective Injunction For Protection Of  Child'
     :response_type: boolean
@@ -2906,6 +2979,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   LAR_CHILD_ABUSE_RISK:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Gate: Alleged That Child Is At Risk Of Abuse'
     :response_type: boolean
@@ -2990,11 +3064,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_28A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFDV_16A:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3005,6 +3081,7 @@ global_merits:
     :response_type: text
     :user_defined: true
   ECFCA_3A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Relevant Criminal Proceedings For A Child Abuse Offence '
     :response_type: boolean
@@ -3022,6 +3099,7 @@ global_merits:
     :response_type: date
     :user_defined: false
   LEGAL_HELP_PROVIDED:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'PrevLA: The Provider Has Provided Legal Help To The Client On
       This Matter'
@@ -3103,6 +3181,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFCA_6A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Social Services Letter Confirming Child At Risk Of Child
       Abuse'
@@ -3120,6 +3199,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECF20A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Other Party is on Police Bail for a Child Abuse Offence'
     :response_type: boolean
@@ -3152,6 +3232,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_25A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3225,6 +3306,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   ECFCA_5A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'GEvi: Finding Of Fact Made By Courts That  A Child Abused By
       Other Party'
@@ -3293,11 +3375,13 @@ global_merits:
     :response_type: currency
     :user_defined: false
   ECFDV_26A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFDV_14A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3359,6 +3443,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_19A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3369,6 +3454,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFCA_8A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Undecided Application For Injunction Made With Prohibited
       Steps Order'
@@ -3397,6 +3483,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   COPY_CA_POLICE_CAUTION:
+    :generate_block?: false
     :value: true
     :br100_meaning: The provider has a copy of relevant police caution for a child
       abuse offence
@@ -3470,11 +3557,13 @@ global_merits:
     :response_type: text
     :user_defined: true
   COPY_DV_CONVICTION:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFCA_7A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Social Services Letter Confirming Child Protection Plan
       In Place Or Plan'
@@ -3487,6 +3576,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   LAR_DV_VICTIM:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Gate: The Client Has Been The Victim Of Domestic Abuse'
     :response_type: boolean
@@ -3580,6 +3670,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   ECFDV_17A:
+    :generate_block?: false
     :value: true
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
@@ -3591,6 +3682,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_29A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Letter Or Assessment From A Local Authority or  Housing
       Association'
@@ -3637,6 +3729,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   COPY_DV_IDVA:
+    :generate_block?: false
     :value: true
     :br100_meaning: The provider has a copy of letter from IDVA/Independent Sexual
       Violence Advisor
@@ -3743,6 +3836,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_31A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Letter From SOS Confirming That Client Granted Leave To
       Remain In UK'
@@ -3790,11 +3884,13 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_20A:
+    :generate_block?: false
     :value: false
     :br100_meaning: Meaning not defined in BR100
     :response_type: boolean
     :user_defined: true
   ECFDV_32A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Letter from Domestic Violence Support Services'
     :response_type: boolean
@@ -3830,6 +3926,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DV_FIN_ABUSE:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: The Client Has Evidence Of Financial Abuse'
     :response_type: boolean
@@ -3990,6 +4087,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   DV_LEGAL_HELP_PROVIDED:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'PrevLA: The Provider Has Provided Legal Help To The Client'
     :response_type: boolean
@@ -4001,6 +4099,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   ECFDV_30A:
+    :generate_block?: false
     :value: false
     :br100_meaning: 'GEvi: Letter Or Assessment From A Public Body Or Expert Report'
     :response_type: boolean
@@ -4340,6 +4439,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   WORK_IN_SCH_ONE:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'ECF: Inscope Schedule 1 Legal Aid Sentencing & Punishment Of
       Offenders Act 2012'
@@ -5095,6 +5195,7 @@ wages:
     :response_type: date
     :user_defined: true
   GB_INPUT_B_3WP3_393A:
+    :generate_block?: false
     :value: true
     :br100_meaning: 'Client Employment: Wage slip included in assessment?'
     :response_type: boolean
