@@ -10,8 +10,8 @@ module CFE
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
-      offline_current_accounts: 'Off-line current accounts',
-      offline_savings_accounts: 'Off-line savings accounts',
+      offline_current_accounts: 'Current accounts',
+      offline_savings_accounts: 'Savings accounts',
       cash: 'Cash',
       other_person_account: "Signatory on other person's account",
       national_savings: 'National savings',
@@ -26,8 +26,8 @@ module CFE
 
     def request_body
       {
-        "bank_accounts": bank_account_assets,
-        "non_liquid_capital": itemised_other_assets
+        bank_accounts: bank_account_assets,
+        non_liquid_capital: itemised_other_assets
       }.to_json
     end
 
