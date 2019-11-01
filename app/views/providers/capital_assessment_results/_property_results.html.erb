@@ -1,0 +1,11 @@
+<div class="govuk-details__text">
+  <h2 class="govuk-heading-m"><%= t('.property') %></h2>
+  <table class="govuk-table">
+    <tbody>
+      <%= render partial: 'results_detail_row', locals: { caption: t('.value'), value: number_to_currency(@cfe_result.main_home_value) } %>
+      <%= render partial: 'results_detail_row', locals: { caption: t('.outstanding_mortgage'), value: number_to_currency(@cfe_result.main_home_outstanding_mortgage) } %>
+      <%= render partial: 'results_detail_row', locals: { caption: t('.disregards'), value: number_to_currency(@cfe_result.main_home_disregards_and_deductions) } %>
+      <%= render partial: 'results_total_row', locals: { caption: t('.assessment_amount'), value: number_to_currency(@cfe_result.main_home_assessed_equity) } %>
+    </tbody>
+  </table>
+</div>

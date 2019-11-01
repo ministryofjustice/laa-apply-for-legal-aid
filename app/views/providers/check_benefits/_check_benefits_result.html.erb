@@ -1,7 +1,7 @@
 <div class="interruption-panel">
   <%= page_template(page_title: t("#{result_namespace}.title", name: @legal_aid_application.applicant.full_name), template: :basic) do %>
     <%= page_heading(size: 'l') %>
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-two-thirds maximize-text-width">
       <% if result_namespace == '.negative_result' %>
         <p class="govuk-body">
           <%= t '.because_not_receiving_benefits' %>

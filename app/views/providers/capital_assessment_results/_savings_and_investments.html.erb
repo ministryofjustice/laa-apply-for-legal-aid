@@ -1,0 +1,13 @@
+<% if @cfe_result.liquid_capital_items.any? %>
+  <div class="govuk-details__text">
+    <h2 class="govuk-heading-m"><%= t('.savings_and_investments') %></h2>
+    <table class="govuk-table">
+      <tbody>
+        <% @cfe_result.liquid_capital_items.each do |item| %>
+          <%= render partial: 'results_detail_row', locals: { caption: item[:description], value: number_to_currency(item[:value]) } %>
+        <% end %>
+        <%= render partial: 'results_total_row', locals: { caption: t('.assessed_amount'), value: number_to_currency(@cfe_result.total_savings) } %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
