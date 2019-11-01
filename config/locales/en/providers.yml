@@ -73,14 +73,14 @@ en:
           provide_access/details: provide details of the case
       use_ccms:
         accept_only: We currently only accept applications for people receiving one of these benefits.
-        apply_in_ccms: Apply in CCMS
+        apply_in_ccms: Apply using CCMS
         back_to_applications: Back to my applications
         benefits:
           list: |
+            Employment and Support Allowance (ESA)
             Income Support
-            Income-based Employment and Support Allowance (ESA)
-            Income-based Jobseeker’s Allowance (JSA)
-            State Pension Guarantee Credit
+            Jobseeker’s Allowance (JSA)
+            Pension Credit (Guarantee Credit)
             Universal Credit
         title: You need to use CCMS for this application
         we_checked: 'We checked with the DWP and your client does not receive:'
@@ -251,6 +251,7 @@ en:
         heading: Means report
         client_details_heading: Client details
         benefit_check_heading: Passported means
+        capital_result_heading: Capital result
         assets_heading: Property, savings and other assets
         question_receives_benefit: In receipt of passporting benefit
     online_bankings:
@@ -335,7 +336,7 @@ en:
         none_selected: None of these
     select_offices:
       show:
-        h1-heading: Which %{firm} office is responsible for your applications?
+        h1-heading: Select the account number of the office handling this application
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?

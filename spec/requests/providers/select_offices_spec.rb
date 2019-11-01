@@ -26,10 +26,6 @@ RSpec.describe 'provider selects office', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'displays the correct firm name' do
-        expect(unescaped_response_body).to include(firm.name)
-      end
-
       it 'displays the offices of the provider' do
         expect(unescaped_response_body).to include(office_1.code)
         expect(unescaped_response_body).to include(office_2.code)
