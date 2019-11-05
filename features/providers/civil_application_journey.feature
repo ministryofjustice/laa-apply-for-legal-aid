@@ -4,7 +4,7 @@ Feature: Civil application journeys
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start Now"
+    And I click link "Start now"
     And I click link "Apply for legal aid"
     Then I am on the legal aid applications
 
@@ -39,7 +39,7 @@ Feature: Civil application journeys
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start Now"
+    And I click link "Start now"
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
@@ -58,7 +58,7 @@ Feature: Civil application journeys
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start Now"
+    And I click link "Start now"
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
@@ -108,7 +108,7 @@ Feature: Civil application journeys
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start Now"
+    And I click link "Start now"
     Then I should be on the Applicant page
 
   @javascript @vcr @webhint

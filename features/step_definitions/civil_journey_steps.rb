@@ -62,7 +62,7 @@ Given('I start the journey as far as the applicant page') do
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start Now"
+    And I click link "Start now"
     Then I should be on the Applicant page
   )
 end
