@@ -28,6 +28,7 @@ gem 'devise_saml_authenticatable'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 # Improve backtrace in nested error recues
 gem 'nesty'
