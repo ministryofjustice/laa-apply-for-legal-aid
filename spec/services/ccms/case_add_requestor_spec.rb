@@ -230,6 +230,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                no_warning_letter_sent?: true
       end
 
+      let(:benefit_check_result) { create :benefit_check_result }
+
       let(:legal_aid_application) do
         double LegalAidApplication,
                id: 1,
@@ -263,7 +265,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                open_banking_consent: true,
                open_banking_consent_choice_at: Date.new(2019, 6, 1),
                lead_proceeding_type: proceeding_type_1,
-               benefit_check_result: true,
+               benefit_check_result: benefit_check_result,
                merits_assessment: merits_assessment,
                default_cost_limitation: 25_000.0,
                office: office,
@@ -362,7 +364,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     describe '#call' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_applicant_and_address, populate_vehicle: true, office: office }
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_proceeding_types,
+               :with_everything,
+               :with_applicant_and_address,
+               :with_positive_benefit_check_result,
+               populate_vehicle: true,
+               office: office
+      end
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
       let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
