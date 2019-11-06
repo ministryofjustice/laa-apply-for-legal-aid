@@ -18,6 +18,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         create :legal_aid_application,
                :with_everything,
                :with_applicant_and_address,
+               :with_positive_benefit_check_result,
                populate_vehicle: true,
                with_bank_accounts: 2,
                proceeding_types: [proceeding_type],
@@ -195,6 +196,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             create :legal_aid_application,
                    :with_everything,
                    :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
                    with_bank_accounts: 2,
                    vehicle: nil,
                    proceeding_types: [proceeding_type],
@@ -626,9 +628,20 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'LAR_INFER_B_1WP1_36A' do
-        it 'uses the DWP benefit check result' do
-          block = XmlExtractor.call(xml, :global_means, 'LAR_INFER_B_1WP1_36A')
-          expect(block).to have_boolean_response legal_aid_application.benefit_check_result
+        context 'benefit check result is yes' do
+          it 'uses the DWP benefit check result' do
+            block = XmlExtractor.call(xml, :global_means, 'LAR_INFER_B_1WP1_36A')
+            expect(block).to have_boolean_response true
+          end
+        end
+
+        context 'benefit check result is no' do
+          let(:benefit_check_result) { create :benefit_check_result, :negative }
+          before { legal_aid_application.benefit_check_result = benefit_check_result }
+          it 'uses the DWP benefit check result' do
+            block = XmlExtractor.call(xml, :global_means, 'LAR_INFER_B_1WP1_36A')
+            expect(block).to have_boolean_response false
+          end
         end
       end
 
@@ -645,6 +658,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             create :legal_aid_application,
                    :with_everything,
                    :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -680,6 +694,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             create :legal_aid_application,
                    :with_everything,
                    :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1217,6 +1232,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             create :legal_aid_application,
                    :with_everything,
                    :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1246,6 +1262,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             create :legal_aid_application,
                    :with_everything,
                    :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],

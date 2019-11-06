@@ -1704,7 +1704,7 @@ global_means:
     :response_type: date
     :user_defined: true
   LAR_INFER_B_1WP1_36A:
-    :value: "#application_benefit_check_result"
+    :value: "#benefit_check_passed?"
     :br100_meaning: The client is passported
     :response_type: boolean
     :user_defined: false
