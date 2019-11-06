@@ -420,7 +420,7 @@ Then('I am on the application confirmation page') do
 end
 
 Then('I am on the legal aid applications') do
-  expect(page).to have_content('Your legal aid applications')
+  expect(page).to have_content('Your applications')
 end
 
 Then('I am on the Email Entry page') do
