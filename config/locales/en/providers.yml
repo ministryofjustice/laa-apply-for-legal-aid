@@ -249,8 +249,8 @@ en:
           student_loan: Add student loan or grant payments
     legal_aid_applications:
       index:
-        basic_details_para: Tell us the basic case details and see if your client’s benefits or income qualifies for legal aid.
-        heading_1: Your legal aid applications
+        basic_details_para: Tell us the basic case details and we’ll check if your client is entitled to legal aid.
+        heading_1: Your applications
         make_new_application: Make a new application
         current_applications: Current applications
         search_applications: Search applications
@@ -263,7 +263,7 @@ en:
         search_button: Search
       legal_aid_applications:
         applicant_name: Name
-        application_ref: LAA Ref
+        application_ref: LAA reference
         created_at: Start date
         certificate_type: Certificate type
         status: Status

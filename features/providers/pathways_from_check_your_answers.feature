@@ -29,7 +29,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "You notified us you've used delegated functions"
     Then I click link 'Back to your applications'
-    Then I should be on a page showing 'Your legal aid applications'
+    Then I should be on a page showing 'Your applications'
 
   @javascript @vcr
   Scenario: I use delegated functions and a substantive application
