@@ -1,25 +1,21 @@
 <%= page_template page_title: t('.h1-heading') do %>
-  <p class="govuk-body"><%= t('.page_header') %></p>
+  <p class="govuk-heading-m">
+    <%= t('.case_enquiries.heading') %>
+  </p>
 
   <p class="govuk-body">
-    <%= t('.case_inquiries.header') %>
-    <br>
-    <%= t('.case_inquiries.phone.text') %>
-    <a href="tel:<%= t('.case_inquiries.phone.phone_number_no_space') %>">
-      <%= t('.case_inquiries.phone.phone_number') %>
-    </a>
+    <%= t('.case_enquiries.phone_number') %>
   </p>
+
+  <p class="govuk-heading-m">
+    <%= t('.technical_support.heading') %>
+  </p>
+
   <p class="govuk-body">
-    <%= t('.technical_support.header') %>
-    <br>
-    <%= t('.technical_support.email.text') %>
-    <a href="mailto:<%= t('.technical_support.email.email_address') %>">
-      <%= t('.technical_support.email.email_address') %>
-    </a>
-    <br>
-    <%= t('.technical_support.phone.text') %>
-    <a href="tel:<%= t('.technical_support.phone.phone_number_no_space') %>">
-      <%= t('.technical_support.phone.phone_number') %>
+    <%= t('.technical_support.email_text') %>
+    <a href="mailto:">
+      <%= t('.technical_support.email_address') %>
     </a>
   </p>
+
 <% end %>
