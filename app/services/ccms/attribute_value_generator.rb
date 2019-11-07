@@ -50,7 +50,7 @@ module CCMS
     end
 
     def valuable_possessions_aggregate_value(_options)
-      1000.0 # TODO: CCMS placeholder
+      other_assets.valuable_items_value
     end
 
     def bank_name(options)

@@ -5123,11 +5123,13 @@ proceeding_merits:
     :generate_block?: false
 valuable_possessions:
   VALPOSSESS_INPUT_T_12WP2_7A:
+    :generate_block?: '#applicant_has_valuable_posessions?'
     :value: Aggregate of valuable possessions
     :br100_meaning: 'Val. possessions: What it is'
     :response_type: text
     :user_defined: true
   VALPOSSESS_INPUT_C_12WP2_8A:
+    :generate_block?: '#applicant_has_valuable_posessions?'
     :value: "#valuable_possessions_aggregate_value"
     :br100_meaning: 'Val. possessions: Sale value'
     :response_type: currency

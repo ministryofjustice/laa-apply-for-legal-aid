@@ -777,15 +777,35 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_B_12WP2_2A client valuable possessions' do
-        it 'returns true when client has valuable possessions' do
+        it 'returns true' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
           expect(block).to have_boolean_response true
         end
 
-        it 'returns false when client has NO valuable possessions' do
-          allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
-          expect(block).to have_boolean_response false
+        it 'displays VALPOSSESS_INPUT_T_12WP2_7A' do
+          block = XmlExtractor.call(xml, :global_means, 'VALPOSSESS_INPUT_T_12WP2_7A')
+          expect(block).to have_text_response 'Aggregate of valuable possessions'
+        end
+
+        it 'displays VALPOSSESS_INPUT_C_12WP2_8A' do
+          block = XmlExtractor.call(xml, :global_means, 'VALPOSSESS_INPUT_C_12WP2_8A')
+          expect(block).to have_currency_response legal_aid_application.other_assets_declaration.valuable_items_value
+        end
+
+        context 'when client has NO valuable possessions' do
+          before { allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil) }
+
+          it 'returns false' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+            expect(block).to have_boolean_response false
+          end
+
+          it 'does not display VALPOSSESS_INPUT_T_12WP2_7A or VALPOSSESS_INPUT_C_12WP2_8A' do
+            %i[VALPOSSESS_INPUT_T_12WP2_7A VALPOSSESS_INPUT_T_12WP2_8A].each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
+            end
+          end
         end
       end
 
