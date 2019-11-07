@@ -50,7 +50,7 @@ Feature: Checking answers backwards and forwards
     Then I fill "Outstanding mortgage amount" with "100000"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own their home with anyone else?"
-    Then I choose "No, sole owner"
+    Then I choose "No, they're the sole owner"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
     Then I choose 'Yes'
@@ -60,7 +60,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000.00'
     And the answer for 'Outstanding mortgage' should be '£100,000.00'
-    And the answer for 'Shared ownership' should be 'No, sole owner'
+    And the answer for 'Shared ownership' should be 'No, they're the sole owner'
     And the answer for 'Restrictions' should be 'Yes'
     And the answer for 'Restrictions' should be 'Restrictions include:'
 

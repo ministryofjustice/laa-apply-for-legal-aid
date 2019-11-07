@@ -21,7 +21,7 @@ en:
         title: About the online financial assessment
     address_selections:
       show:
-        link_text: I can't find the address in the list
+        link_text: I cannot find the address
         select_address_label: Select an address
         addresses_found_text: {
           one: '1 address found',
@@ -113,7 +113,7 @@ en:
         h1-heading: Before you continue
         items_to_be_provided:
           list: |
-            details about the latest domestic abuse incident
+            details of the latest domestic abuse incident
             information about the respondent
             a statement of case
             the chances of a successful outcome
@@ -356,7 +356,7 @@ en:
         heading_2: Search for legal proceedings
         no_results: No results found.
         proceeding: proceeding
-        search_help_example: For example, 'non-molestation order'. Or search by category of law or matter type.
+        search_help_example: For example 'non-molestation order', or search by category of law or matter type
         you_have_selected: You have selected %{count}
     property_values:
       hint:
@@ -425,7 +425,7 @@ en:
           You'll need to enter:
         do_merits_of_case_qualify_list:
           list: |
-            details about the latest domestic abuse incident
+            details of the latest domestic abuse incident
             information about the respondent
             a statement of case
             the chances of a successful outcome
@@ -516,7 +516,7 @@ en:
           heading: Are there any payments left on the vehicle?
           detail_of_payments_to_include: |
             Include any outstanding payments on loans, hire purchase (HP) or
-            personal contract purchase (PCP) agreements.
+            personal contract purchase (PCP) agreements
           enter_amount_left_to_pay: Enter the amount left to pay
     email_addresses:
       show:
