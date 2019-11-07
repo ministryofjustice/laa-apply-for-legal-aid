@@ -36,35 +36,9 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'the application has no documents' do
-        it 'creates an empty documents array' do
+        it 'does not create any document objects' do
           subject.call
           expect(submission.submission_document.count).to eq 0
-        end
-
-        it 'changes the submission state to case_submitted' do
-          expect { subject.call }.to change { submission.aasm_state }.to 'case_submitted'
-        end
-
-        it 'writes a history record' do
-          expect { subject.call }.to change { SubmissionHistory.count }.by(1)
-          expect(history.from_state).to eq 'applicant_ref_obtained'
-          expect(history.to_state).to eq 'case_submitted'
-          expect(history.success).to be true
-          expect(history.details).to be_nil
-        end
-
-        it 'writes the request body to the history record' do
-          subject.call
-          expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:DocumentUploadRQ',
-            transaction_id: '20190301030405123456',
-            matching: ['<ns4:DocumentType>ADMIN1</ns4:DocumentType>']
-          )
-        end
-
-        it 'writes the response body to the history record' do
-          subject.call
-          expect(history.response).to eq response_body
         end
       end
 
@@ -98,6 +72,28 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'changes the submission state to document_ids_obtained' do
             expect { subject.call }.to change { submission.aasm_state }.to 'document_ids_obtained'
+          end
+
+          it 'writes a history record' do
+            expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            expect(history.from_state).to eq 'applicant_ref_obtained'
+            expect(history.to_state).to eq 'document_ids_obtained'
+            expect(history.success).to be true
+            expect(history.details).to be_nil
+          end
+
+          it 'writes the request body to the history record' do
+            subject.call
+            expect(history.request).to be_soap_envelope_with(
+              command: 'ns2:DocumentUploadRQ',
+              transaction_id: '20190301030405123456',
+              matching: ['<ns4:DocumentType>ADMIN1</ns4:DocumentType>']
+            )
+          end
+
+          it 'writes the response body to the history record' do
+            subject.call
+            expect(history.response).to eq response_body
           end
         end
       end
