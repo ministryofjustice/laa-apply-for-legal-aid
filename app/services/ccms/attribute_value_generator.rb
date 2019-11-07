@@ -180,6 +180,10 @@ module CCMS
       @legal_aid_application.used_delegated_functions? ? 'Both' : 'Substantive'
     end
 
+    def no_warning_letter_sent?(_options)
+      !@legal_aid_application.respondent.warning_letter_sent
+    end
+
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
       marginal: 'Marginal',

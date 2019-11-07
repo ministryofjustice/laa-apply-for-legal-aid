@@ -4653,7 +4653,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   WARNING_LETTER_SENT:
-    :value: false
+    :value: "#respondent_warning_letter_sent"
     :response_type: boolean
     :user_defined: true
   POLICE_NOTIFIED:
@@ -4888,7 +4888,8 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   INJ_REASON_NO_WARNING_LETTER:
-    :value: 'Apply Service application. See uploaded provider statement and report'
+    :generate_block?: '#no_warning_letter_sent?'
+    :value: '#respondent_warning_letter_sent_details'
     :br100_meaning: 'Inj: The Reason Why No Warning Letter Has Been Sent'
     :response_type: text
     :user_defined: true

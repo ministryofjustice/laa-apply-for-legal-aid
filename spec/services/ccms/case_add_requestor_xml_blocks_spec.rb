@@ -392,11 +392,30 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'WARNING_LETTER_SENT not sent' do
-        before { respondent.update(warning_letter_sent: false) }
-        it 'generates WARNING_LETTER_SENT block with false value' do
-          block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-          expect(block).to have_boolean_response false
+      context 'WARNING_LETTER_SENT' do
+        context 'letter has not been sent' do
+          it 'generates WARNING_LETTER_SENT block with false value' do
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+            expect(block).to have_boolean_response false
+          end
+
+          it 'includes correct text in INJ_REASON_NO_WARNING_LETTER block' do
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
+            expect(block).to have_text_response respondent.warning_letter_sent_details
+          end
+        end
+
+        context 'letter has been sent' do
+          before { respondent.update(warning_letter_sent: true) }
+          it 'generates WARNING_LETTER_SENT block with true value' do
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+            expect(block).to have_boolean_response true
+          end
+
+          it 'does not generate the INJ_REASON_NO_WARNING_LETTER block' do
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
+            expect(block).not_to be_present, 'Expected block for attribute INJ_REASON_NO_WARNING_LETTER not to be generated, but was in global_merits'
+          end
         end
       end
 
@@ -1127,10 +1146,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         it 'should be hard coded with the correct notification' do
           attributes = [
-            [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
             [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
-            [:global_merits, 'INJ_REASON_NO_WARNING_LETTER']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -2103,8 +2120,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
         [:opponent, 'RELATIONSHIP_STEP_PARENT'],
         [:opponent, 'RELATIONSHIP_SUPPLIER'],
-        [:opponent, 'RELATIONSHIP_TENANT'],
-        [:proceeding_merits, 'WARNING_LETTER_SENT']
+        [:opponent, 'RELATIONSHIP_TENANT']
       ]
     end
   end
