@@ -904,8 +904,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'GB_INPUT_B_7WP2_1A no bank accounts' do
           it 'returns false when applicant does NOT have bank accounts' do
-            allow(legal_aid_application.applicant).to receive(:bank_accounts).and_return([])
+            allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
+            allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
+            expect(block).to have_boolean_response false
+          end
+        end
+      end
+
+      context 'GB_INPUT_B_8WP2_1A client is signatory to other bank accounts' do
+        it 'returns true when client is a signatory to other bank accounts' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP2_1A')
+          expect(block).to have_boolean_response true
+        end
+
+        context 'GB_INPUT_B_8WP2_1A client is not a signatory to other bank accounts' do
+          it 'returns false when applicant is NOT a signatory to other bank accounts' do
+            allow(legal_aid_application.savings_amount).to receive(:other_person_account).and_return(nil)
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP2_1A')
             expect(block).to have_boolean_response false
           end
         end
@@ -927,22 +943,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
 
         it 'returns false when client does NOT have other savings' do
-          allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
-          allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
-          expect(block).to have_boolean_response false
-        end
-      end
-
-      context 'GB_INPUT_B_17WP2_7A client other capital' do
-        it 'returns true when client has other capital' do
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
-          expect(block).to have_boolean_response true
-        end
-
-        it 'returns false when client does NOT have other capital' do
           allow(legal_aid_application.savings_amount).to receive(:peps_unit_trusts_capital_bonds_gov_stocks).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
           expect(block).to have_boolean_response false
         end
       end
@@ -1147,7 +1149,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'should be hard coded with the correct notification' do
           attributes = [
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -1902,6 +1904,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_means, 'GB_INPUT_B_1WP3_165A'],
         [:global_means, 'GB_INFER_B_1WP1_1A'],
         [:global_means, 'GB_INPUT_B_14WP2_7A'],
+        [:global_means, 'GB_INPUT_B_17WP2_7A'],
         [:global_means, 'GB_INPUT_B_18WP2_2A'],
         [:global_means, 'GB_INPUT_B_18WP2_4A'],
         [:global_means, 'GB_INPUT_B_1WP1_2A'],
@@ -1912,7 +1915,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_means, 'GB_INPUT_B_41WP3_40A'],
         [:global_means, 'GB_INPUT_B_5WP1_22A'],
         [:global_means, 'GB_INPUT_B_5WP1_3A'],
-        [:global_means, 'GB_INPUT_B_8WP2_1A'],
         [:global_means, 'GB_PROC_B_39WP3_14A'],
         [:global_means, 'GB_PROC_B_39WP3_15A'],
         [:global_means, 'GB_PROC_B_39WP3_16A'],
