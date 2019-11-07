@@ -93,7 +93,7 @@ module CCMS
       not_zero? other_assets.trust_value
     end
 
-    def applicant_has_valuable_posessions?(_options)
+    def applicant_has_valuable_possessions?(_options)
       not_zero? other_assets.valuable_items_value
     end
 
