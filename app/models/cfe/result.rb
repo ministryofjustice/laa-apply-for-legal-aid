@@ -144,7 +144,7 @@ module CFE
     end
 
     def liquid_capital_items
-      capital[:liquid_capital_items].sort{ |a, b| a[:description] <=> b[:description] }
+      capital[:liquid_capital_items].sort_by { |a| a[:description] }
     end
 
     def total_property
