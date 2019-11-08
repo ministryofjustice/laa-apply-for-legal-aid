@@ -74,11 +74,13 @@ en:
           - We’ll check the details you provided and let you know our decision.
       property_results:
         value: Value
-        outstanding_mortgage: Outstanding mortgage
-        disregards: Disregards and deductions
+        sale_cost: '3% sale cost'
+        mortgage_deduction: Mortgage deduction
+        disregards: Main home disregard
         assessment_amount: Amount included in assessment
-        additional_property: Additional property
+        main_home_disregard: Main home disregard
         main_home: Main home
+        additional_property: Additional property
       vehicle_results:
         vehicles: Vehicles
         value: Value

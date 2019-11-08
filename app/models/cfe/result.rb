@@ -57,10 +57,6 @@ module CFE
       main_home[:allowable_outstanding_mortgage].to_d * -1
     end
 
-    def main_home_disregards_and_deductions
-      main_home_transaction_allowance + main_home_equity_disregard
-    end
-
     def main_home_transaction_allowance
       main_home[:transaction_allowance].to_d * -1
     end
@@ -148,7 +144,7 @@ module CFE
     end
 
     def liquid_capital_items
-      capital[:liquid_capital_items]
+      capital[:liquid_capital_items].sort{ |a, b| a[:description] <=> b[:description] }
     end
 
     def total_property
