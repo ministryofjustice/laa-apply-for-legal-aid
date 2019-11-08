@@ -82,7 +82,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(history.details).to be_nil
         end
 
-        it 'stores the reqeust body in the  submission history record' do
+        it 'stores the request body in the  submission history record' do
           subject.call
           expect(history.request).to be_soap_envelope_with(
             command: 'ns4:CaseAddRQ',
@@ -91,6 +91,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               "<ns2:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</ns2:ProviderOfficeID>"
             ]
           )
+        end
+
+        it 'writes the response body to the history record' do
+          subject.call
+          expect(history.response).to eq response_body
         end
       end
     end
