@@ -120,10 +120,6 @@ module CCMS
       not_zero? other_assets.second_home_value
     end
 
-    def applicant_has_bank_accounts?(_options)
-      applicant.bank_accounts.any?
-    end
-
     def applicant_has_other_capital?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
@@ -138,6 +134,10 @@ module CCMS
 
     def applicant_has_shares?(_options)
       not_zero? savings.plc_shares
+    end
+
+    def applicant_is_signatory_to_other_person_accounts?(_options)
+      not_zero? savings.other_person_account
     end
 
     def lead_proceeding_type_default_level_of_service(_options)
@@ -178,6 +178,10 @@ module CCMS
 
     def proceeding_proceeding_application_type(_options)
       @legal_aid_application.used_delegated_functions? ? 'Both' : 'Substantive'
+    end
+
+    def no_warning_letter_sent?(_options)
+      !@legal_aid_application.respondent.warning_letter_sent
     end
 
     PROSPECTS_OF_SUCCESS = {

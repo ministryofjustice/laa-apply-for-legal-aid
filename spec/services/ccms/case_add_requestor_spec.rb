@@ -221,7 +221,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         double Respondent,
                understands_terms_of_court_order?: true,
                understands_terms_of_court_order_details: '',
-               warning_letter_sent?: false,
+               warning_letter_sent: false,
                warning_letter_sent_details: 'Standard cease and desist letter',
                police_notified?: true,
                police_notified_details: '',

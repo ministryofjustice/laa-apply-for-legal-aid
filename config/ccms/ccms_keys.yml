@@ -438,7 +438,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_8WP2_1A:
-    :value: false
+    :value: '#applicant_is_signatory_to_other_person_accounts?'
     :br100_meaning: '3rd party accounts: The client is signatory to bank accounts?'
     :response_type: boolean
     :user_defined: true
@@ -893,7 +893,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_17WP2_7A:
-    :value: '#applicant_has_other_capital?'
+    :value: false
     :br100_meaning: 'Other capital: The client has other capital?'
     :response_type: boolean
     :user_defined: true
@@ -1189,7 +1189,7 @@ global_means:
     :response_type: text
     :user_defined: false
   GB_INPUT_B_7WP2_1A:
-    :value: '#applicant_has_bank_accounts?'
+    :value: '#applicant_has_other_savings?'
     :br100_meaning: 'Bank accounts: The client has bank accounts?'
     :response_type: boolean
     :user_defined: true
@@ -1683,7 +1683,7 @@ global_means:
     :response_type: boolean
     :user_defined: false
   GB_INPUT_B_10WP2_1A:
-    :value: '#applicant_has_other_savings?'
+    :value: '#applicant_has_other_capital?'
     :br100_meaning: 'Other savings: The client has other savings?'
     :response_type: boolean
     :user_defined: true
@@ -4653,7 +4653,7 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   WARNING_LETTER_SENT:
-    :value: false
+    :value: "#respondent_warning_letter_sent"
     :response_type: boolean
     :user_defined: true
   POLICE_NOTIFIED:
@@ -4888,7 +4888,8 @@ proceeding_merits:
     :response_type: boolean
     :user_defined: true
   INJ_REASON_NO_WARNING_LETTER:
-    :value: 'Apply Service application. See uploaded provider statement and report'
+    :generate_block?: '#no_warning_letter_sent?'
+    :value: '#respondent_warning_letter_sent_details'
     :br100_meaning: 'Inj: The Reason Why No Warning Letter Has Been Sent'
     :response_type: text
     :user_defined: true
