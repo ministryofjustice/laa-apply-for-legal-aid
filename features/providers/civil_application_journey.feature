@@ -204,8 +204,8 @@ Feature: Civil application journeys
     Then I enter the 'used delegated functions' date of 2 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "If you've used delegated functions"
-    Then I should be on a page showing "Once you've received a substantive certificate"
+    Then I should be on a page showing "Covered under an emergency certificate"
+    Then I should be on a page showing "Covered under a substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Covered under an emergency certificate'
@@ -232,7 +232,7 @@ Feature: Civil application journeys
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Once you've received a substantive certificate"
+    Then I should be on a page showing "Covered under a substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
