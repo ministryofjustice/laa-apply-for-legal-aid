@@ -107,5 +107,23 @@ RSpec.describe Citizens::DependantsController, type: :request do
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.date_not_valid'))
       end
     end
+
+    context 'when the date contains alphabetic characters' do
+      let(:params) do
+        {
+          dependant: {
+            name: param_name,
+            dob_year: param_date_of_birth.year.to_s,
+            dob_month: '2s',
+            dob_day: param_date_of_birth.day.to_s
+          }
+        }
+      end
+
+      it 'show errors' do
+        subject
+        expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.date_not_valid'))
+      end
+    end
   end
 end

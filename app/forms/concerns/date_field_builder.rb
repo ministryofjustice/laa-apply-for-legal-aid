@@ -26,6 +26,18 @@ class DateFieldBuilder
     !blank? && !complete?
   end
 
+  def all_numeric?
+    from_form.map { |x| numeric?(x) }.uniq == [true]
+  end
+
+  def not_all_numeric?
+    !all_numeric?
+  end
+
+  def numeric?(field)
+    /^\d+$/.match?(field.to_s)
+  end
+
   # Date part fields
   def fields
     DATE_PARTS.map { |part| field_for(part) }
@@ -48,6 +60,8 @@ class DateFieldBuilder
   end
 
   def form_date_invalid?
+    return true if not_all_numeric?
+
     !Date.valid_date?(*date_attributes)
   rescue YearError
     true
