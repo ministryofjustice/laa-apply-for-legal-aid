@@ -234,7 +234,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def default_cost_limitation
-    used_delegated_functions? ? default_delegated_functions_cost_limitation : default_substantive_cost_limitation
+    default_substantive_cost_limitation
   end
 
   def default_substantive_cost_limitation
