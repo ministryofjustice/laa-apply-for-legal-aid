@@ -35,12 +35,11 @@ class AddressLookupService
     if response.success?
       parse_successful_response(response)
     else
-      # NOTE: Add error tracking (e.g. Sentry)
-      errors.add(:lookup, :unsuccessful)
+      record_error(:unsuccessful, StandardError.new(response.body))
       []
     end
-  rescue Faraday::ConnectionFailed
-    errors.add(:lookup, :service_unavailable)
+  rescue Faraday::ConnectionFailed => e
+    record_error(:service_unavailable, e)
     []
   end
 
@@ -52,5 +51,10 @@ class AddressLookupService
       errors.add(:lookup, :no_results)
       []
     end
+  end
+
+  def record_error(state, error)
+    errors.add(:lookup, state)
+    Raven.capture_exception(error)
   end
 end

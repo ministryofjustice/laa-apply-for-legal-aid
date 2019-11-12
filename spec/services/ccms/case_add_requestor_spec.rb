@@ -15,7 +15,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                id: 1,
                code: 'CV118',
                description: 'Limited to all steps up to and including the hearing on 01/04/2019',
-               delegated_functions_apply: true,
+               delegated_functions: true,
                substantive: false
       end
 
@@ -35,7 +35,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                id: 2,
                code: 'AA019',
                description: aa019_text,
-               delegated_functions_apply: false,
+               delegated_functions: false,
                substantive: true
       end
 
@@ -44,7 +44,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                id: 3,
                code: 'FM049',
                description: 'Limited to all steps up to and including trial/final hearing and any action necessary to implement (but not enforce) the judgment or order.',
-               delegated_functions_apply: false,
+               delegated_functions: false,
                substantive: true
       end
 
@@ -221,7 +221,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         double Respondent,
                understands_terms_of_court_order?: true,
                understands_terms_of_court_order_details: '',
-               warning_letter_sent?: false,
+               warning_letter_sent: false,
                warning_letter_sent_details: 'Standard cease and desist letter',
                police_notified?: true,
                police_notified_details: '',
@@ -229,6 +229,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                bail_conditions_set_details: 'The judge was bonkers',
                no_warning_letter_sent?: true
       end
+
+      let(:benefit_check_result) { create :benefit_check_result }
 
       let(:legal_aid_application) do
         double LegalAidApplication,
@@ -263,7 +265,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                open_banking_consent: true,
                open_banking_consent_choice_at: Date.new(2019, 6, 1),
                lead_proceeding_type: proceeding_type_1,
-               benefit_check_result: true,
+               benefit_check_result: benefit_check_result,
                merits_assessment: merits_assessment,
                default_cost_limitation: 25_000.0,
                office: office,
@@ -362,7 +364,15 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     describe '#call' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_applicant_and_address, populate_vehicle: true, office: office }
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_proceeding_types,
+               :with_everything,
+               :with_applicant_and_address,
+               :with_positive_benefit_check_result,
+               populate_vehicle: true,
+               office: office
+      end
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
       let!(:cfe_result) { create :cfe_result, submission: cfe_submission }

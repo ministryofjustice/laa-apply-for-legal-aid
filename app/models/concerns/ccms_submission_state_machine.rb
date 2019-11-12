@@ -15,29 +15,29 @@ module CCMSSubmissionStateMachine
       state :completed
       state :failed
 
-      event :obtain_case_ref, after: :process_async! do
+      event :obtain_case_ref do
         transitions from: :initialised, to: :case_ref_obtained
       end
 
-      event :submit_applicant, after: :process_async! do
+      event :submit_applicant do
         transitions from: :case_ref_obtained, to: :applicant_submitted
       end
 
-      event :obtain_applicant_ref, after: :process_async! do
+      event :obtain_applicant_ref do
         transitions from: :applicant_submitted, to: :applicant_ref_obtained
         transitions from: :case_ref_obtained, to: :applicant_ref_obtained
       end
 
-      event :obtain_document_ids, after: :process_async! do
+      event :obtain_document_ids do
         transitions from: :applicant_ref_obtained, to: :document_ids_obtained
       end
 
-      event :submit_case, after: :process_async! do
+      event :submit_case do
         transitions from: :applicant_ref_obtained, to: :case_submitted
         transitions from: :document_ids_obtained, to: :case_submitted
       end
 
-      event :confirm_case_created, after: :process_async! do
+      event :confirm_case_created do
         transitions from: :case_submitted, to: :case_created
       end
 

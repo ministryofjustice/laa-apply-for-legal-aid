@@ -107,7 +107,7 @@ GEM
       msgpack (~> 1.0)
     browser (2.6.1)
     builder (3.2.3)
-    business (1.16.1)
+    business (1.17.0)
     byebug (11.0.1)
     capybara (3.29.0)
       addressable
@@ -119,7 +119,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    chartkick (3.2.1)
+    chartkick (3.3.0)
     childprocess (3.0.0)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
@@ -184,7 +184,7 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
-    faker (2.6.0)
+    faker (2.7.0)
       i18n (>= 1.6, < 1.8)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)

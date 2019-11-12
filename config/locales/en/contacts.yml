@@ -2,20 +2,11 @@
 en:
   contacts:
     show:
-      case_inquiries:
-        header: Case enquires (Monday to Friday, 09:00 - 17:00)
-        phone:
-          phone_number: 0300 200 2020
-          phone_number_no_space: 03002002020
-          text: 'Phone:'
       h1-heading: Contact us
-      page_header: 'For any queries about your application, contact the following:'
+      case_enquiries:
+        heading: Case enquiries
+        phone_number: 'Telephone: 0203 8144 350'
       technical_support:
-        email:
-          email_address: online-support@justice.gov.uk
-          text: 'Email:'
-        header: Technical support (Monday to Friday, 09:00 - 17:00)
-        phone:
-          phone_number: 0300 200 2020
-          phone_number_no_space: 03002002020
-          text: 'Phone:'
+        heading: Technical support
+        email_text: 'Email:'
+        email_address: apply-for-legal-aid@digital.justice.gov.uk

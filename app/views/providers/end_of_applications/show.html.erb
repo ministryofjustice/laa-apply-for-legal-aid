@@ -11,15 +11,18 @@
 
   <p class="govuk-body govuk-!-padding-top-4"><%= t('.confirmation_email_sent') %></p>
 
-  <h2 class="govuk-heading-l"><%= t('.what_happens_next') %></h2>
+  <h2 class="govuk-heading-m"><%= t('.what_happens_next') %></h2>
   <p class="govuk-body"><%= t('.next_actions') %></p>
-  <ul class="govuk-list govuk-list--bullet">
+  <ul class="govuk-list govuk-list--number">
     <li><%= t('.print_application') %></li>
     <li><%= t('.client_sign') %></li>
+    <li><%= t('.keep_file') %></li>
   </ul>
   <p class="govuk-body"><%= t('.application_to_be_checked') %></p>
   <p class="govuk-body"><%= t('.decision_in_ccms') %></p>
+  <div class="govuk-inset-text">
   <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.feedback_link_html', url: new_feedback_path) %></p>
+  </div>
 
   <%= next_action_buttons_with_form(
       url: providers_legal_aid_application_end_of_application_path,

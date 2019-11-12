@@ -62,7 +62,7 @@ Given('I start the journey as far as the applicant page') do
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start Now"
+    And I click link "Start now"
     Then I should be on the Applicant page
   )
 end
@@ -420,7 +420,7 @@ Then('I am on the application confirmation page') do
 end
 
 Then('I am on the legal aid applications') do
-  expect(page).to have_content('Your legal aid applications')
+  expect(page).to have_content('Your applications')
 end
 
 Then('I am on the Email Entry page') do

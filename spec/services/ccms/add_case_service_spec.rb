@@ -2,7 +2,15 @@ require 'rails_helper'
 
 module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe AddCaseService do
-    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything_and_address, :with_cfe_result, office_id: office.id, populate_vehicle: true }
+    let(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_proceeding_types,
+             :with_everything_and_address,
+             :with_cfe_result,
+             :with_positive_benefit_check_result,
+             office_id: office.id,
+             populate_vehicle: true
+    end
     let(:applicant) { legal_aid_application.applicant }
     let(:office) { create :office }
     let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application }
@@ -74,7 +82,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(history.details).to be_nil
         end
 
-        it 'stores the reqeust body in the  submission history record' do
+        it 'stores the request body in the  submission history record' do
           subject.call
           expect(history.request).to be_soap_envelope_with(
             command: 'ns4:CaseAddRQ',
@@ -83,6 +91,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
               "<ns2:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</ns2:ProviderOfficeID>"
             ]
           )
+        end
+
+        it 'writes the response body to the history record' do
+          subject.call
+          expect(history.response).to eq response_body
         end
       end
     end
