@@ -1,19 +1,13 @@
 module CCMS
   class ObtainDocumentIdService < BaseSubmissionService
-    def call # rubocop:disable Metrics/AbcSize
+    def call
       populate_documents
-      if submission.submission_document.empty?
-        create_history('applicant_ref_obtained', submission.aasm_state, xml_request, response) if submission.submit_case!
-      else
+      unless submission.submission_document.empty?
         request_document_ids
-        create_history('applicant_ref_obtained', submission.aasm_state, xml_request, response) if submission.obtain_document_ids!
+        create_history('applicant_ref_obtained', submission.aasm_state, xml_request, @response) if submission.obtain_document_ids!
       end
     rescue CcmsError => e
       handle_exception(e, xml_request)
-    end
-
-    def response
-      @response ||= document_id_requestor.call
     end
 
     private
@@ -64,8 +58,8 @@ module CCMS
     def request_document_ids
       submission.submission_document.each do |document|
         tx_id = document_id_requestor.transaction_request_id
-        response = document_id_requestor.call
-        document.ccms_document_id = DocumentIdResponseParser.new(tx_id, response).document_id
+        @response = document_id_requestor.call
+        document.ccms_document_id = DocumentIdResponseParser.new(tx_id, @response).document_id
         document.status = :id_obtained
         document.save!
         submission.save!

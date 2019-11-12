@@ -24,6 +24,7 @@ module CCMS
         AddApplicantService.new(submission).call
       else
         submission.applicant_ccms_reference = parser.applicant_ccms_reference
+        submission.save!
         create_history(:case_ref_obtained, submission.aasm_state, xml_request, response) if submission.obtain_applicant_ref!
       end
     end
