@@ -1383,7 +1383,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         it 'harcodes RELATIONSHIP_TO_CLIENT' do
           block = XmlExtractor.call(xml, :other_party, 'RELATIONSHIP_TO_CLIENT')
-          expect(block).to have_text_response 'UNKNOWN'
+          expect(block).to have_text_response 'NONE'
         end
       end
     end

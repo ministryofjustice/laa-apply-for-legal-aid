@@ -4147,7 +4147,7 @@ other_party:
     :response_type: text
     :user_defined: true
   RELATIONSHIP_TO_CLIENT:
-    :value: UNKNOWN
+    :value: NONE
     :br100_meaning: The relationship of the other party to the applicant
     :response_type: text
     :user_defined: true
