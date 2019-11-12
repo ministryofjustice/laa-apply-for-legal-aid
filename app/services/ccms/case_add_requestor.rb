@@ -175,7 +175,7 @@ module CCMS
       xml.__send__('ns2:ScopeLimitation') do
         xml.__send__('ns2:ScopeLimitation', limitation.code)
         xml.__send__('ns2:ScopeLimitationWording', limitation.description)
-        xml.__send__('ns2:DelegatedFunctionsApply', !limitation.substantive)
+        xml.__send__('ns2:DelegatedFunctionsApply', limitation.delegated_functions)
       end
     end
 
