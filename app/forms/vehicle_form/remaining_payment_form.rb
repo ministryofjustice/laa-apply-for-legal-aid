@@ -28,5 +28,9 @@ module VehicleForm
     def exclude_from_model
       [:payments_remain]
     end
+
+    def attributes_to_clean
+      [:payment_remaining]
+    end
   end
 end
