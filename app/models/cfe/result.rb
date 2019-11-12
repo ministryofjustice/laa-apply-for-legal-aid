@@ -140,11 +140,11 @@ module CFE
     ################################################################
 
     def non_liquid_capital_items
-      capital[:non_liquid_capital_items]
+      capital[:non_liquid_capital_items].sort_by { |item| item[:description] }
     end
 
     def liquid_capital_items
-      capital[:liquid_capital_items].sort_by { |a| a[:description] }
+      capital[:liquid_capital_items].sort_by { |item| item[:description] }
     end
 
     def total_property
