@@ -19,6 +19,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                :with_everything,
                :with_applicant_and_address,
                :with_positive_benefit_check_result,
+               :with_proceeding_types,
                :with_substantive_scope_limitation,
                populate_vehicle: true,
                with_bank_accounts: 2,
@@ -44,6 +45,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           filename = Rails.root.join('tmp/generated_ccms_payload.xml')
           File.open(filename, 'w') { |f| f.puts xml }
           expect(File.exist?(filename)).to be true
+        end
+      end
+
+      context 'DevolvedPowersDate' do
+        context 'on a Substantive case' do
+          it 'is omitted' do
+            block = XmlExtractor.call(xml, :devolved_powers_date)
+            expect(block).not_to be_present, "Expected block for attribute DevolvedPowersDate not to be generated, but was \n #{block}"
+          end
+        end
+
+        context 'on a Delegated Functions case' do
+          before { legal_aid_application.update(used_delegated_functions_on: Date.today, used_delegated_functions: true) }
+
+          it 'is populated with the delegated functions date' do
+            block = XmlExtractor.call(xml, :devolved_powers_date)
+            expect(block.children.text).to eq legal_aid_application.used_delegated_functions_on.to_s(:ccms_date)
+          end
         end
       end
 

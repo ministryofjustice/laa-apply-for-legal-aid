@@ -75,7 +75,7 @@ module CCMS
       xml.__send__('ns2:Proceedings') { generate_proceedings(xml) }
       xml.__send__('ns2:MeansAssesments') { generate_means_assessment(xml) }
       xml.__send__('ns2:MeritsAssesments') { generate_merits_assessment(xml) }
-      xml.__send__('ns2:DevolvedPowersDate', '2019-04-01') # TODO: CCMS placeholder
+      xml.__send__('ns2:DevolvedPowersDate', @legal_aid_application.used_delegated_functions_on.to_s(:ccms_date)) if @legal_aid_application.used_delegated_functions?
       xml.__send__('ns2:ApplicationAmendmentType', @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB')
       xml.__send__('ns2:LARDetails') { generate_lar_details(xml) }
     end
