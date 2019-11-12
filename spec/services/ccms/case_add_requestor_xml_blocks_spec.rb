@@ -320,7 +320,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'EMERGENCY_FC_CRITERIA' do
         it 'inserts emergency_fc criteria as hard coded string' do
           block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FC_CRITERIA')
-          expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+          expect(block).to have_text_response '.'
         end
       end
 
@@ -401,7 +401,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'includes correct text in INJ_REASON_NO_WARNING_LETTER block' do
             block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).to have_text_response respondent.warning_letter_sent_details
+            expect(block).to have_text_response '.'
           end
         end
 
@@ -724,7 +724,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           it 'returns hard coded statement' do
-            expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+            expect(block).to have_text_response '.'
           end
         end
 
@@ -1169,31 +1169,17 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'should be hard coded with the correct notification' do
           attributes = [
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
-          end
-        end
-
-        it 'should be hard coded with the correct notification' do
-          attributes = [
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
             [:global_merits, 'REASON_APPLYING_FHH_LR'],
             [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
-            [:global_merits, 'REASON_SEPARATE_REP_REQ']
+            [:global_merits, 'REASON_SEPARATE_REP_REQ'],
+            [:global_merits, 'MAIN_PURPOSE_OF_APPLICATION']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See provider statement of case and report uploaded as evidence'
+            expect(block).to have_text_response '.'
           end
-        end
-
-        it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
-          expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
       end
 

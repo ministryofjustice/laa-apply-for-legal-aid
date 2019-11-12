@@ -2588,7 +2588,7 @@ global_merits:
     :response_type: text
     :user_defined: false
   REASON_APPLYING_FHH_LR:
-    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :value: .
     :br100_meaning: 'PrevLA: The ReasonThe Client Is Applying For Family Help (Higher)
       Or Legal Rep'
     :response_type: text
@@ -2713,7 +2713,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   EMERGENCY_FC_CRITERIA:
-    :value: Apply Service application - see uploaded provider statement of case
+    :value: .
     :br100_meaning: 'Emg: The Reason Why The Application Meets The Emergency Criteria '
     :response_type: text
     :user_defined: true
@@ -3083,7 +3083,7 @@ global_merits:
     :response_type: boolean
     :user_defined: true
   MAIN_PURPOSE_OF_APPLICATION:
-    :value: Apply Service application - see report and uploaded statement in CCMS upload section
+    :value: .
     :br100_meaning: 'App: The Main Purpose Of The Application'
     :response_type: text
     :user_defined: true
@@ -3660,7 +3660,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   REASON_SEPARATE_REP_REQ:
-    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :value: .
     :br100_meaning: 'Rep: The reason client requires separate representation in proceedings'
     :response_type: text
     :user_defined: true
@@ -3774,7 +3774,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   REASON_NO_ATTEMPT_TO_SETTLE:
-    :value: Apply Service application. See provider statement of case and report uploaded as evidence
+    :value: .
     :br100_meaning: 'Settle: The Reason Why No Attempts To Settle Have Been Made'
     :response_type: text
     :user_defined: true
@@ -4013,7 +4013,7 @@ global_merits:
     :user_defined: true
   EMERGENCY_FURTHER_INFORMATION:
     :generate_block?: '#application_used_delegated_functions?'
-    :value: 'Apply Service application - see uploaded provider statement of case'
+    :value: .
     :br100_meaning: 'Emg: Additional Information'
     :response_type: text
     :user_defined: true
@@ -4889,7 +4889,7 @@ proceeding_merits:
     :user_defined: true
   INJ_REASON_NO_WARNING_LETTER:
     :generate_block?: '#no_warning_letter_sent?'
-    :value: '#respondent_warning_letter_sent_details'
+    :value: .
     :br100_meaning: 'Inj: The Reason Why No Warning Letter Has Been Sent'
     :response_type: text
     :user_defined: true
@@ -4967,12 +4967,12 @@ proceeding_merits:
     :user_defined: false
     :generate_block?: false
   INJ_RECENT_INCIDENT_DETAIL:
-    :value: Apply Service application. See uploaded provider statement and report
+    :value: .
     :br100_meaning: 'Inj: The Detail Of The Most Recent Incident'
     :response_type: text
     :user_defined: true
   INJ_REASON_POLICE_NOT_NOTIFIED:
-    :value: Apply Service application. See uploaded provider statement and report
+    :value: .
     :br100_meaning: 'Inj: The Reason Why The Police  Have Not Been Notified'
     :response_type: text
     :user_defined: true
