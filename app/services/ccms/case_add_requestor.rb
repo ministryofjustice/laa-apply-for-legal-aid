@@ -141,7 +141,7 @@ module CCMS
     def generate_category_of_law(xml)
       xml.__send__('ns2:CategoryOfLawCode', @legal_aid_application.lead_proceeding_type.ccms_category_law_code)
       xml.__send__('ns2:CategoryOfLawDescription', @legal_aid_application.lead_proceeding_type.ccms_category_law)
-      xml.__send__('ns2:RequestedAmount', @legal_aid_application.default_cost_limitation)
+      xml.__send__('ns2:RequestedAmount', as_currency(@legal_aid_application.default_cost_limitation))
     end
 
     def generate_proceedings(xml)
