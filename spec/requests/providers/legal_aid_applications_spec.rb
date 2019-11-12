@@ -134,13 +134,14 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         expect(response.body).not_to include(legal_aid_application.application_ref)
       end
 
-      context 'when searching for the application' do
+      context 'when searching for a Substantive application' do
         let(:search_term) { legal_aid_application.application_ref }
         let(:params) { { search_term: search_term } }
 
         it 'shows the application' do
           subject
           expect(unescaped_response_body).to include(legal_aid_application.applicant.last_name)
+          expect(unescaped_response_body).to include('Substantive')
         end
 
         it 'logs the search' do
@@ -148,6 +149,43 @@ RSpec.describe 'providers legal aid application requests', type: :request do
           allow(Rails.logger).to receive(:info).at_least(:once)
           subject
           expect(Rails.logger).to have_received(:info).with(expected_log).once
+        end
+      end
+
+      context 'when searching for an incomplete Emergency application with a substantive due date' do
+        let(:legal_aid_application) do
+          create :legal_aid_application,
+                 :with_applicant, used_delegated_functions: true,
+                                  substantive_application_deadline_on: Date.today + 3.days
+        end
+        let(:search_term) { legal_aid_application.application_ref }
+        let(:params) { { search_term: search_term } }
+
+        it 'shows the application' do
+          subject
+          expect(unescaped_response_body).to include('Emergency')
+          expect(unescaped_response_body).to match(/Substantive due: [\d]{1,2} [ADFJMNOS]\w* [\d]{4}/)
+          expect(legal_aid_application.summary_state).to eq(:in_progress)
+        end
+      end
+
+      context 'when searching for an Emergency application with a substantiuve due date and the application has been submitted' do
+        let(:legal_aid_application) do
+          create :legal_aid_application,
+                 :with_applicant,
+                 :with_everything,
+                 used_delegated_functions: true,
+                 substantive_application_deadline_on: Date.today + 3.days
+        end
+        let(:search_term) { legal_aid_application.application_ref }
+        let(:params) { { search_term: search_term } }
+
+        it 'shows the application' do
+          subject
+          expect(unescaped_response_body).to include('Emergency')
+          expect(legal_aid_application.substantive_application_deadline_on).not_to be_nil
+          expect(unescaped_response_body).not_to match(/Substantive due: [\d]{1,2} [ADFJMNOS]\w* [\d]{4}/)
+          expect(legal_aid_application.summary_state).to eq(:submitted)
         end
       end
 
