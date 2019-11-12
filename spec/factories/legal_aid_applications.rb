@@ -190,6 +190,8 @@ FactoryBot.define do
       with_incident
       with_vehicle
       with_transaction_period
+      with_other_assets_declaration
+      with_savings_amount
     end
 
     trait :with_everything_and_address do
@@ -209,6 +211,8 @@ FactoryBot.define do
       with_incident
       with_vehicle
       with_transaction_period
+      with_other_assets_declaration
+      with_savings_amount
     end
 
     trait :with_negative_benefit_check_result do
@@ -273,6 +277,20 @@ FactoryBot.define do
       with_merits_statement_of_case
       state { :checking_merits_answers }
       provider_step { :check_merits_answers }
+    end
+
+    trait :at_assessment_submitted do
+      with_everything_and_address
+      with_positive_benefit_check_result
+      with_substantive_scope_limitation
+      with_delegated_functions_scope_limitation
+      with_delegated_functions
+      with_cfe_result
+      with_means_report
+      with_merits_report
+      with_ccms_submission
+      state { :assessment_submitted }
+      provider_step { :end_of_application }
     end
 
     trait :with_cfe_result do
