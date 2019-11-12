@@ -294,5 +294,11 @@ FactoryBot.define do
         Reports::MeritsReportCreator.call(application)
       end
     end
+
+    trait :with_ccms_submission do
+      after :create do |application|
+        create :ccms_submission, :case_created, legal_aid_application: application
+      end
+    end
   end
 end
