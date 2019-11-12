@@ -2221,7 +2221,7 @@ global_means:
     :response_type: currency
     :user_defined: false
   GB_INPUT_B_12WP2_2A:
-    :value: '#applicant_has_valuable_posessions?'
+    :value: '#applicant_has_valuable_possessions?'
     :br100_meaning: 'Val. possessions: The client has valuable possessions valued
       at £500+?'
     :response_type: boolean
@@ -5123,11 +5123,13 @@ proceeding_merits:
     :generate_block?: false
 valuable_possessions:
   VALPOSSESS_INPUT_T_12WP2_7A:
+    :generate_block?: '#applicant_has_valuable_possessions?'
     :value: Aggregate of valuable possessions
     :br100_meaning: 'Val. possessions: What it is'
     :response_type: text
     :user_defined: true
   VALPOSSESS_INPUT_C_12WP2_8A:
+    :generate_block?: '#applicant_has_valuable_possessions?'
     :value: "#valuable_possessions_aggregate_value"
     :br100_meaning: 'Val. possessions: Sale value'
     :response_type: currency
