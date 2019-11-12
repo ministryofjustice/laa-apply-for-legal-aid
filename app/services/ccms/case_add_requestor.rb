@@ -197,14 +197,14 @@ module CCMS
       xml.__send__('ns0:AssessmentScreens') do
         xml.__send__('ns0:ScreenName', 'SUMMARY')
         sequence_no = 0
-        xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, sequence_no += 1) }
-        xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, sequence_no += 1) }
-        xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, sequence_no += 1) } if @legal_aid_application.vehicle.present?
-        xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_valuable_possessions_entity(xml, sequence_no += 1) } if valuables.present?
+        xml.__send__('ns0:Entity') { generate_bank_accounts_entity(xml, sequence_no += 1) } if bank_accounts.present?
+        xml.__send__('ns0:Entity') { generate_vehicles_entity(xml, sequence_no += 1) } if vehicle.present?
+        xml.__send__('ns0:Entity') { generate_wage_slips_entity(xml, sequence_no += 1) } if wage_slips.present?
         xml.__send__('ns0:Entity') { generate_means_proceeding_entity(xml, sequence_no += 1) }
         xml.__send__('ns0:Entity') { generate_other_parties_entity(xml, sequence_no += 1) }
         xml.__send__('ns0:Entity') { generate_global_means_entity(xml, sequence_no += 1) }
-        xml.__send__('ns0:Entity') { generate_employment_entity(xml, sequence_no += 1) }
+        xml.__send__('ns0:Entity') { generate_employment_entity(xml, sequence_no += 1) } if employment.present?
       end
     end
 
@@ -450,6 +450,14 @@ module CCMS
 
     def wage_slips
       @wage_slips ||= @legal_aid_application.wage_slips
+    end
+
+    def employment
+      @employment ||= @legal_aid_application.employment
+    end
+
+    def valuables
+      @valuables ||= @legal_aid_application.other_assets_declaration.valuable_items_value
     end
 
     def boolean?(value)

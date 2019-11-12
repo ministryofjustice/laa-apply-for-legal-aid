@@ -270,7 +270,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                default_cost_limitation: 25_000.0,
                office: office,
                cfe_result: cfe_result,
-               scope_limitations: [scope_limitation_1, scope_limitation_2]
+               scope_limitations: [scope_limitation_1, scope_limitation_2],
+               employment: 'Employed'
       end
 
       let(:cfe_result) do
