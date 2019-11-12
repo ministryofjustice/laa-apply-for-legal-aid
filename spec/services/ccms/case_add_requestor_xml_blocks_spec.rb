@@ -19,6 +19,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                :with_everything,
                :with_applicant_and_address,
                :with_positive_benefit_check_result,
+               :with_substantive_scope_limitation,
                populate_vehicle: true,
                with_bank_accounts: 2,
                proceeding_types: [proceeding_type],
@@ -166,6 +167,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    vehicle: nil,
                    proceeding_types: [proceeding_type],
                    office: office
@@ -259,6 +261,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    with_bank_accounts: 2,
                    vehicle: nil,
                    proceeding_types: [proceeding_type],
@@ -290,6 +293,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    proceeding_types: [proceeding_type],
                    office: office
@@ -779,6 +783,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -815,6 +820,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1225,14 +1231,34 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'UNKNOWN'
         end
 
-        it 'REQUESTED_SCOPE should be hard coded to MULTIPLE' do
-          block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
-          expect(block).to have_text_response 'MULTIPLE'
+        context 'there is one scope limitation' do
+          it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
+            attributes = [
+              [:proceeding, 'REQUESTED_SCOPE'],
+              [:proceeding_merits, 'REQUESTED_SCOPE']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to have_text_response legal_aid_application.scope_limitations.first.code
+            end
+          end
         end
 
-        it 'REQUESTED_SCOPE should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'REQUESTED_SCOPE')
-          expect(block).to have_text_response 'Dummy requested scope pending legal framework enhancements'
+        context 'there are multiple scope limitations' do
+          let(:scope_limitation) { create :scope_limitation }
+          before { legal_aid_application.scope_limitations << scope_limitation }
+          it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
+            attributes = [
+              [:proceeding, 'REQUESTED_SCOPE'],
+              [:proceeding_merits, 'REQUESTED_SCOPE']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to have_text_response 'MULTIPLE'
+            end
+          end
         end
 
         it 'NEW_OR_EXISTING should be hard coded to NEW' do
@@ -1359,6 +1385,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1389,6 +1416,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],

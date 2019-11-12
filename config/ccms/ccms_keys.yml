@@ -4422,7 +4422,7 @@ proceeding:
     :response_type: text
     :user_defined: true
   REQUESTED_SCOPE:
-    :value: MULTIPLE
+    :value: '#proceeding_cost_limitation'
     :br100_meaning: Requested Scope
     :response_type: text
     :user_defined: true
@@ -4465,7 +4465,7 @@ proceeding_merits:
     :response_type: text
     :user_defined: false
   REQUESTED_SCOPE:
-    :value: Dummy requested scope pending legal framework enhancements
+    :value: '#proceeding_cost_limitation'
     :br100_meaning: Requested Scope
     :response_type: text
     :user_defined: true

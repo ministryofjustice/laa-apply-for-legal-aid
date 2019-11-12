@@ -371,6 +371,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                :with_everything,
                :with_applicant_and_address,
                :with_positive_benefit_check_result,
+               :with_substantive_scope_limitation,
                populate_vehicle: true,
                office: office
       end
