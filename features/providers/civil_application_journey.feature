@@ -469,7 +469,7 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I click link "Back"
-    Then I should be on a page showing "which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I click link "Back"
