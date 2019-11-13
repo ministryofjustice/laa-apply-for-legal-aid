@@ -320,7 +320,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'EMERGENCY_FC_CRITERIA' do
         it 'inserts emergency_fc criteria as hard coded string' do
           block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FC_CRITERIA')
-          expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+          expect(block).to have_text_response '.'
         end
       end
 
@@ -401,7 +401,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
           it 'includes correct text in INJ_REASON_NO_WARNING_LETTER block' do
             block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
-            expect(block).to have_text_response respondent.warning_letter_sent_details
+            expect(block).to have_text_response '.'
           end
         end
 
@@ -724,7 +724,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           it 'returns hard coded statement' do
-            expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+            expect(block).to have_text_response '.'
           end
         end
 
@@ -777,15 +777,35 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_B_12WP2_2A client valuable possessions' do
-        it 'returns true when client has valuable possessions' do
+        it 'returns true' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
           expect(block).to have_boolean_response true
         end
 
-        it 'returns false when client has NO valuable possessions' do
-          allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
-          expect(block).to have_boolean_response false
+        it 'displays VALPOSSESS_INPUT_T_12WP2_7A' do
+          block = XmlExtractor.call(xml, :global_means, 'VALPOSSESS_INPUT_T_12WP2_7A')
+          expect(block).to have_text_response 'Aggregate of valuable possessions'
+        end
+
+        it 'displays VALPOSSESS_INPUT_C_12WP2_8A' do
+          block = XmlExtractor.call(xml, :global_means, 'VALPOSSESS_INPUT_C_12WP2_8A')
+          expect(block).to have_currency_response legal_aid_application.other_assets_declaration.valuable_items_value
+        end
+
+        context 'when client has NO valuable possessions' do
+          before { allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil) }
+
+          it 'returns false' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+            expect(block).to have_boolean_response false
+          end
+
+          it 'does not display VALPOSSESS_INPUT_T_12WP2_7A or VALPOSSESS_INPUT_C_12WP2_8A' do
+            %i[VALPOSSESS_INPUT_T_12WP2_7A VALPOSSESS_INPUT_T_12WP2_8A].each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
+            end
+          end
         end
       end
 
@@ -1149,31 +1169,17 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         it 'should be hard coded with the correct notification' do
           attributes = [
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
-            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
-          end
-        end
-
-        it 'should be hard coded with the correct notification' do
-          attributes = [
+            [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
             [:global_merits, 'REASON_APPLYING_FHH_LR'],
             [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
-            [:global_merits, 'REASON_SEPARATE_REP_REQ']
+            [:global_merits, 'REASON_SEPARATE_REP_REQ'],
+            [:global_merits, 'MAIN_PURPOSE_OF_APPLICATION']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See provider statement of case and report uploaded as evidence'
+            expect(block).to have_text_response '.'
           end
-        end
-
-        it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
-          expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
       end
 

@@ -96,6 +96,27 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       end
     end
 
+    context 'when date contains alpha characters' do
+      let(:params) do
+        {
+          legal_aid_application: {
+            used_delegated_functions_day: day.to_s,
+            used_delegated_functions_month: '5s',
+            used_delegated_functions_year: year.to_s,
+            used_delegated_functions: used_delegated_functions.to_s
+          }
+        }
+      end
+      it 'renders show' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays error' do
+        expect(response.body).to include('govuk-error-summary')
+        expect(response.body).to include('Enter a valid date')
+      end
+    end
+
     context 'when date not entered' do
       let(:day) { '' }
       let(:month) { '' }
