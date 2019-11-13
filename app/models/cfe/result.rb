@@ -1,7 +1,16 @@
 module CFE
-  class Result < ApplicationRecord
+  class Result < ApplicationRecord # rubocop:disable Metrics/ClassLength
     belongs_to :legal_aid_application
     belongs_to :submission
+
+    # returns the name of the partial to display at the top of the results page
+    def overview
+      if legal_aid_application.has_restrictions? && !eligible?
+        'manual_check_required'
+      else
+        assessment_result
+      end
+    end
 
     def result_hash
       JSON.parse(result, symbolize_names: true)
@@ -9,6 +18,10 @@ module CFE
 
     def capital_contribution_required?
       assessment_result == 'contribution_required'
+    end
+
+    def eligible?
+      assessment_result == 'eligible'
     end
 
     def assessment_result
@@ -31,16 +44,17 @@ module CFE
       property[:main_home]
     end
 
+    ################################################################
+    #                                                              #
+    #  MAIN HOME VALUES                                            #
+    #                                                              #
+    ################################################################
     def main_home_value
       main_home[:value].to_d
     end
 
     def main_home_outstanding_mortgage
       main_home[:allowable_outstanding_mortgage].to_d * -1
-    end
-
-    def main_home_disregards_and_deductions
-      main_home_transaction_allowance + main_home_equity_disregard
     end
 
     def main_home_transaction_allowance
@@ -55,8 +69,14 @@ module CFE
       main_home[:assessed_equity].to_d.positive? ? main_home[:assessed_equity].to_d : 0.0
     end
 
+    ################################################################
+    #                                                              #
+    #  ADDITIONAL PROPERTY                                         #
+    #                                                              #
+    ################################################################
+
     def additional_property?
-      property[:additional_properties]&.any?
+      existing_and_not_all_zero?(property[:additional_properties].first)
     end
 
     def additional_property
@@ -74,6 +94,16 @@ module CFE
     def additional_property_mortgage
       additional_property[:allowable_outstanding_mortgage].to_d * -1
     end
+
+    def additional_property_assessed_equity
+      additional_property[:assessed_equity].to_d.positive? ? additional_property[:assessed_equity].to_d : 0.0
+    end
+
+    ################################################################
+    #                                                              #
+    #  VEHICLE                                                     #
+    #                                                              #
+    ################################################################
 
     def vehicle
       result_hash[:vehicles][:vehicles].first
@@ -99,34 +129,62 @@ module CFE
       vehicle[:assessed_amount].to_d
     end
 
+    def total_vehicles
+      result_hash[:vehicles][:total_vehicle].to_d
+    end
+
+    ################################################################
+    #                                                              #
+    #  CAPITAL ITEMS                                               #
+    #                                                              #
+    ################################################################
+
     def non_liquid_capital_items
-      capital[:non_liquid_capital_items]
+      capital[:non_liquid_capital_items].sort_by { |item| item[:description] }
     end
 
     def liquid_capital_items
-      capital[:liquid_capital_items]
+      capital[:liquid_capital_items].sort_by { |item| item[:description] }
     end
 
     def total_property
-      property[:total_property]
-    end
-
-    def total_vehicles
-      result_hash[:vehicles][:total_vehicle]
+      property[:total_property].to_d
     end
 
     def total_savings
-      capital[:total_liquid]
+      capital[:total_liquid].to_d
     end
 
     def total_other_assets
-      total = capital[:total_non_liquid].to_d
-      if additional_property?
-        total += additional_property_value
-        total += additional_property_transaction_allowance
-        total += additional_property_mortgage
-      end
-      total
+      capital[:total_non_liquid].to_d
+    end
+
+    ################################################################
+    #                                                              #
+    #  TOTALS                                                      #
+    #                                                              #
+    ################################################################
+
+    def pensioner_capital_disregard
+      capital[:pensioner_capital_disregard].to_d * -1
+    end
+
+    def total_capital_before_pensioner_disregard
+      total_property + total_savings + total_vehicles + total_other_assets
+    end
+
+    def total_disposable_capital
+      [0, (total_capital_before_pensioner_disregard + pensioner_capital_disregard)].max
+    end
+
+    ################################################################
+    #                                                              #
+    #  UTILITY METHODS                                             #
+    #                                                              #
+    ################################################################
+
+    def existing_and_not_all_zero?(property)
+      property.present? && property[:value].to_d > 0.0
     end
   end
 end

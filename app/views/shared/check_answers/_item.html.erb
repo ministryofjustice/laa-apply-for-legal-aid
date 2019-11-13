@@ -5,19 +5,19 @@
 %>
 
 <div class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
-  <div class="govuk-summary-list__key govuk-!-width-one-half">
+  <dt class="govuk-summary-list__key govuk-!-width-one-half">
     <%= question %>
-  </div>
-  <div class="govuk-summary-list__value<%= ' align-text-right' if align_right %>">
+  </dt>
+  <dd class="govuk-summary-list__value<%= ' align-text-right' if align_right %>">
     <%= answer.present? ? answer : '-' %>
-  </div>
+  </dd>
   <% unless read_only && align_right %>
-    <div class="govuk-summary-list__actions">
+    <dd class="govuk-summary-list__actions">
       <% unless read_only %>
         <%= link_to(url, class: 'govuk-link change-link') do %>
           <%= t('generic.change') %><span class="govuk-visually-hidden"><%= question %></span>
         <% end %>
       <% end %>
-    </div>
+    </dd>
   <% end %>
 </div>

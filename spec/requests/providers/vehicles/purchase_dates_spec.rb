@@ -101,6 +101,32 @@ RSpec.describe Providers::Vehicles::PurchaseDatesController, type: :request do
       end
     end
 
+    context 'with alpha-numeric date' do
+      let(:params) do
+        {
+          vehicle: {
+            purchased_on_year: purchase_date.year,
+            purchased_on_month: '1a',
+            purchased_on_day: purchase_date.day
+          }
+        }
+      end
+      it 'renders successfully' do
+        subject
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'does not modify vehicle' do
+        expect { subject }.not_to change { vehicle.reload.purchased_on }
+      end
+
+      it 'displays error' do
+        subject
+        expect(response.body).to include('govuk-error-summary')
+        expect(response.body).to include('Enter a valid date')
+      end
+    end
+
     context 'with an invalid' do
       let(:params) do
         {
