@@ -15,6 +15,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
   end
 
   def call
+    puts "**** Using #{self.class} to retrieve Provider Details" unless Rails.env.test?
     provider_details
   end
 
@@ -33,100 +34,130 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def neetadesor_user
+  def neetadesor_user # rubocop:disable Metrics/MethodLength
     {
-      providerOffices: [{
-        providerfirmId: '19148',
-        officeId: '81693',
-        officeName: 'Desor & Co._81693',
-        smsVendorNum: 'TestSMSVendorNum1',
-        smsVendorSite: '0B721W'
-      }],
-      contactId: '2016472',
-      contactName: contact_name
+      providerFirmId: 22_381,
+      contactUserId: 2_016_472,
+      contacts: [
+        {
+          id: 34_419,
+          name: contact_name(1)
+        }
+      ],
+      providerOffices: [
+        {
+          id: 81_693,
+          name: 'DESOR & CO-0B721W'
+        }
+      ]
     }
   end
 
-  def martinronan_user
+  def martinronan_user # rubocop:disable Metrics/MethodLength
     {
-      providerOffices: [{
-        providerfirmId: '19148',
-        officeId: '137570',
-        officeName: 'David Gray LLP_137570',
-        smsVendorNum: 'TestSMSVendorNum2',
-        smsVendorSite: 'TestSMSVendorSite2' # legal aid code/contract number e.g. 0B721W
-      }],
-      contactId: '494000',
-      contactName: contact_name
+      providerFirmId: 19_148,
+      contactUserId: 494_000,
+      contacts: [
+        {
+          id: 34_419,
+          name: contact_name(1)
+        }
+      ],
+      providerOffices: [
+        {
+          id: 137_570,
+          name: 'David Gray LLP-0B721W'
+        }
+      ]
     }
   end
 
-  def hfitzsimons_user
+  def hfitzsimons_user # rubocop:disable Metrics/MethodLength
     {
-      providerOffices: [{
-        providerfirmId: '20726',
-        officeId: '85487',
-        officeName: 'Edward Hayes_137570',
-        smsVendorNum: 'TestSMSVendorNum3',
-        smsVendorSite: 'TestSMSVendorSite3' # legal aid code/contract number e.g. 0B721W
-      }],
-      contactId: '284410',
-      contactName: contact_name
+      providerFirmId: 20_726,
+      contactUserId: 284_410,
+      contacts: [
+        {
+          id: 34_419,
+          name: contact_name(1)
+        }
+      ],
+      providerOffices: [
+        {
+          id: 85_487,
+          name: 'Edward Hayes-137570'
+        }
+      ]
     }
   end
 
   def all_other_users
     {
-      providerOffices: Array.new(number_of_offices) do |office_index|
-        provider_office(office_index)
-      end,
-      contactId: username_number * 3,
-      contactName: contact_name
+      providerFirmId: firm_number,
+      contactUserId: username_number,
+      contacts: Array.new(number_of_contacts) { |index| contact_hash(index + 1) },
+      providerOffices: Array.new(number_of_offices) { |index| office_hash(index + 1) }
+
     }
   end
 
-  def provider_office(office_index)
-    # unique office_id for each office
-    office_id = username_number * 2 + office_index
+  def number_of_contacts
+    (firm_number % 3) + 1
+  end
 
-    # unique office_number for each office
-    office_number = "office_#{office_id}"
-
+  def contact_hash(index)
     {
-      providerfirmId: firm_id,
-      officeId: office_id,
-      officeName: "#{firm_name}-#{office_number}",
-      smsVendorNum: ((office_id + firm_id) * 4).to_s,
-      smsVendorSite: office_number
+      id: contact_id(index),
+      name: contact_name(index)
     }
+  end
+
+  def office_hash(index)
+    {
+      id: office_id(index),
+      name: office_name(index)
+    }
+  end
+
+  def office_name(index)
+    "#{firm_name} Office No. #{index}-#{vendor_num(index)}"
   end
 
   def number_of_offices
     (username_number & 3) + 1
   end
 
-  def firm_id
-    @firm_id ||= firm_number
+  def contact_id(index)
+    (username_number + index) % 1000
+  end
+
+  def office_id(index)
+    (firm_number + index) % 1000
   end
 
   def firm_name
-    @firm_name ||= "#{contact_name.sub(/\sUser\d+$/, '')} & Co."
+    @firm_name ||= "#{@username.sub(/-user\d+$/, '')} & Co."
   end
 
-  def contact_name
-    @contact_name ||= username.snakecase.titlecase
+  def contact_name(index)
+    "#{username.snakecase.titlecase}-#{index}"
   end
 
   # Generates a number from the username which is used to generate the values from the response
   def username_number
-    @username_number ||= username.upcase.chars.map(&:ord).sum
+    @username_number ||= username.upcase.chars.map(&:ord).sum + user_digits
   end
 
   def firm_number
-    @firm_number ||= calculate_firm_number
+    @firm_number ||= firm_name.chars.map(&:ord).sum
   end
 
-  def calculate_firm_number
-    username.sub(/-user\d+$/, '').upcase.chars.map(&:ord).sum
+  def user_digits
+    @username.gsub(/[^\d]/, '').to_i
+  end
+
+  # generate number in form NXNNNX
+  def vendor_num(index)
+    "#{index}#{firm_name[0].upcase}#{(firm_number * 100).to_s[0..2]}#{firm_name[1].upcase}"
   end
 end
