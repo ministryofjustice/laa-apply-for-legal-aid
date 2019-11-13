@@ -296,7 +296,7 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
-    pagy (3.6.0)
+    pagy (3.7.0)
     parallel (1.18.0)
     parser (2.6.5.0)
       ast (~> 2.4.0)
@@ -309,7 +309,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (4.0.1)
-    puma (4.2.1)
+    puma (4.3.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -363,7 +363,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
-    rake (13.0.0)
+    rake (13.0.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -431,7 +431,7 @@ GEM
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sentry-raven (2.12.2)
+    sentry-raven (2.12.3)
       faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
@@ -505,7 +505,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webpacker (4.0.7)
+    webpacker (4.2.0)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
@@ -559,7 +559,7 @@ DEPENDENCIES
   pg
   prometheus_exporter
   pry-byebug
-  puma (~> 4.2)
+  puma (~> 4.3)
   pundit
   rails (~> 5.2.3)
   rails_admin (~> 2.0)
@@ -591,7 +591,7 @@ DEPENDENCIES
   webdack-uuid_migration (~> 1.2.0)
   webdrivers (~> 4.1)
   webmock
-  webpacker (~> 4.x)
+  webpacker (~> 4)
   wicked_pdf
 
 RUBY VERSION

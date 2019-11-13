@@ -23,13 +23,13 @@ en:
       assets:
         assets:
           other_assets: Other assets
-          outstanding_mortgage: Outstanding mortgage amount
-          own_home: Property owned
-          percentage_home: Percentage owned
-          property_value: Property value
+          outstanding_mortgage: What is the outstanding mortgage on your client's home?
+          own_home: Does your client own the home they live in?
+          percentage_home: What % share of their home does your client legally own?
+          property_value: How much is your client's home worth?
           restrictions: Do any restrictions apply?
           savings_and_investments: Savings and investments
-          shared_ownership: Owned with anyone else
+          shared_ownership: Does your client own their home with anyone else?
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
@@ -259,7 +259,7 @@ en:
         shared_ownership_item:
           friend_family_member_or_other_individual: Yes, a friend, family member or other individual
           housing_assocation_or_landlord: Yes, a housing association or landlord
-          no_sole_owner: No, sole owner
+          no_sole_owner: No, they're the sole owner
           partner_or_ex_partner: Yes, a partner or ex-partner
       success_prospect:
         success_prospect_item:
@@ -269,10 +269,10 @@ en:
           borderline: Borderline
           not_known: I do not know yet
           hint:
-            marginal: The chance of a successful outcome is marginal.
-            poor: The chance of a successful outcome is poor.
-            borderline: You cannot predict the outcome.
-            not_known: Work still needs to be done to determine the likelihood of success.
+            marginal: The chance of a successful outcome is marginal
+            poor: The chance of a successful outcome is poor
+            borderline: You cannot predict the outcome
+            not_known: Work still needs to be done to determine the likelihood of success
       types_of_income_form:
         financial_help_examples: For example, money from a family member for rent or bills.
         none_selected: None of these
@@ -280,13 +280,13 @@ en:
         none_selected: None of these
       vehicles:
         estimated_value:
-          use_car_valuation_sites: You can use car valuation websites to find this out.
+          use_car_valuation_sites: You can use car valuation websites to find this out
         remaining_payment:
           detail_of_payments_to_include: |
             Include any outstanding payments on loans, hire purchase (HP) or
-            personal contract purchase (PCP) agreements.
+            personal contract purchase (PCP) agreements
           enter_amount_left_to_pay: Enter the amount left to pay
         regular_use:
-          include_partner_use: This includes use by your client's partner (if they have one).
+          include_partner_use: This includes use by your client's partner (if they have one)
     page-title:
       suffix: Apply for legal aid
