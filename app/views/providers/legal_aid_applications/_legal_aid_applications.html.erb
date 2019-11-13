@@ -31,7 +31,7 @@
             <%= sort_column_cell(sort_by: application.used_delegated_functions?.to_s, combine_right: 555) do %>
               <% if application.used_delegated_functions? %>
                 <%= t('.emergency') %>
-                <% if application.substantive_application_deadline_on? %>
+                <% if application.substantive_application_deadline_on? &&  application.summary_state == :in_progress %>
                   <br>
                   <span class="govuk-body-s">
                     <%= t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
