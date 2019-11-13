@@ -64,6 +64,24 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
       end
     end
 
+    context 'with thousands separator' do
+      let(:payment_remaining) { '4,300.0' }
+
+      it 'updates the vehicle model' do
+        subject
+        expect(vehicle.reload.payment_remaining).to eq 4_300.0
+      end
+    end
+
+    context 'with pound sign' do
+      let(:payment_remaining) { '£4900.0' }
+
+      it 'updates the vehicle model' do
+        subject
+        expect(vehicle.reload.payment_remaining).to eq 4_900.0
+      end
+    end
+
     context 'without value' do
       let(:payment_remaining) { '' }
 

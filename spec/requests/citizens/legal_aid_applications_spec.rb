@@ -80,7 +80,8 @@ RSpec.describe 'citizen home requests', type: :request do
     end
 
     context 'if a provider is logged in' do
-      let(:provider) { create :provider }
+      let(:provider_username) { 'stepriponikas.bonstart' }
+      let(:provider) { create :provider, username: provider_username }
       before { sign_in provider }
 
       it 'logs out the provider' do

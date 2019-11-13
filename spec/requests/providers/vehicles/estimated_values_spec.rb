@@ -85,6 +85,23 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
       end
     end
 
+    context 'with a value containing a comma as a thousands separator' do
+      let(:estimated_value) { '30,000.0' }
+
+      it 'updates the estimated value' do
+        subject
+        expect(vehicle.reload.estimated_value).to eq 30_000.0
+      end
+    end
+
+    context 'with currency sign' do
+      let(:estimated_value) { '£25,300' }
+      it 'updates the estimated value' do
+        subject
+        expect(vehicle.reload.estimated_value).to eq 25_300.0
+      end
+    end
+
     context 'Form submitted using Save as draft button' do
       let(:submit_button) { { draft_button: 'Save as draft' } }
 

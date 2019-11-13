@@ -145,6 +145,28 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
           expect { subject }.to change { application.reload.draft? }.from(false).to(true)
         end
       end
+
+      context 'dates contain alpha characters' do
+        let(:params) do
+          {
+            applicant: {
+              first_name: '',
+              last_name: 'Doe',
+              national_insurance_number: 'AA 12 34 56 C',
+              dob_year: '1981',
+              dob_month: '6s',
+              dob_day: '11sa',
+              email: Faker::Internet.safe_email
+            }
+          }
+        end
+
+        it 'errors' do
+          subject
+          expect(unescaped_response_body).to include('There is a problem')
+          expect(unescaped_response_body).to include('Enter a valid date of birth')
+        end
+      end
     end
   end
 end

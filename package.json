@@ -9,7 +9,7 @@
     "@hint/connector-local": "^3.2.0",
     "@rails/activestorage": "^6.0.1",
     "@rails/ujs": "^6.0.1",
-    "@rails/webpacker": "^4.0.7",
+    "@rails/webpacker": "^4.2.0",
     "axios": "^0.19.0",
     "govuk-frontend": "^3.3.0",
     "jquery": "^3.4.1",

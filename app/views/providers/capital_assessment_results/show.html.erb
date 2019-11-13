@@ -5,11 +5,7 @@
     ) do %>
 
   <div class="interruption-panel">
-    <% if @legal_aid_application.has_restrictions? %>
-      <%= render 'manual_check_required' %>
-    <% else %>
-      <%= render @cfe_result.assessment_result %>
-    <% end %>
+    <%= render @cfe_result.overview %>
   </div>
 
   <%= render 'result_details' %>
