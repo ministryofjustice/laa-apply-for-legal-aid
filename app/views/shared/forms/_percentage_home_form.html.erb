@@ -4,12 +4,22 @@
               method: :patch,
               local: true) do |form| %>
 
-              <%= form.govuk_text_field :percentage_home,
-                                        label: controller_t('percentage_home'),
-                                        value: model.percentage_home,
-                                        class: 'govuk-input--width-5 input-percentage',
-                                        suffix: '%' %>
-
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <%= govuk_fieldset_header do %>
+      <h1 class="govuk-fieldset__heading">
+        <%= label_tag(:estimated_value, page_title) %>
+      </h1>
+    <% end %>
+    <%= form.govuk_text_field(
+          :percentage_home,
+          hint: controller_t('percentage_home'),
+          label: nil,
+          value: model.percentage_home,
+          class: 'govuk-input--width-5 input-percentage',
+          suffix: '%' 
+        )%>
+  <% end %>
+  <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
         form: form
