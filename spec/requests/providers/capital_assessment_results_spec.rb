@@ -17,35 +17,82 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     before { before_tasks }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:ok)
-    end
+    context 'no restrictions' do
+      context 'eligible' do
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
 
-    it 'displays the correct result' do
-      expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
-    end
-
-    context 'when not eligible' do
-      let(:cfe_result) { create :cfe_result, :not_eligible }
-
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
+        it 'displays the correct result' do
+          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+        end
       end
 
-      it 'displays the correct result' do
-        expect(unescaped_response_body).to include(I18n.t('not_eligible.heading', name: applicant_name, scope: locale_scope))
+      context 'when not eligible' do
+        let(:cfe_result) { create :cfe_result, :not_eligible }
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'displays the correct result' do
+          expect(unescaped_response_body).to include(I18n.t('not_eligible.heading', name: applicant_name, scope: locale_scope))
+        end
+      end
+
+      context 'when contribution required' do
+        let(:cfe_result) { create :cfe_result, :contribution_required }
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'displays the correct result' do
+          expect(unescaped_response_body).to include(I18n.t('contribution_required.heading', name: applicant_name, scope: locale_scope))
+        end
       end
     end
 
-    context 'when contribution required' do
-      let(:cfe_result) { create :cfe_result, :contribution_required }
-
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
+    context 'with restrictions' do
+      let(:before_tasks) do
+        create :applicant, legal_aid_application: legal_aid_application, first_name: 'Stepriponikas', last_name: 'Bonstart'
+        legal_aid_application.update has_restrictions: true, restrictions_details: 'Blah blah'
+        login_provider
+        subject
       end
 
-      it 'displays the correct result' do
-        expect(unescaped_response_body).to include(I18n.t('contribution_required.heading', name: applicant_name, scope: locale_scope))
+      context 'eligible' do
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'displays the correct result' do
+          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+        end
+      end
+
+      context 'when not eligible' do
+        let(:cfe_result) { create :cfe_result, :not_eligible }
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'displays the correct result' do
+          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
+        end
+      end
+
+      context 'when contribution required' do
+        let(:cfe_result) { create :cfe_result, :contribution_required }
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'displays manual check required' do
+          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
+        end
       end
     end
 

@@ -7,10 +7,6 @@
           <%= render partial: 'results_detail_row', locals: { caption: item[:description], value: number_to_currency(item[:value]) } %>
         <% end %>
 
-        <% if @cfe_result.additional_property? %>
-          <%= render partial: 'additional_property' %>
-        <% end %>
-
         <%= render partial: 'results_total_row', locals: { caption: t('.assessed_amount'), value: number_to_currency(@cfe_result.total_other_assets) } %>
       </tbody>
     </table>
