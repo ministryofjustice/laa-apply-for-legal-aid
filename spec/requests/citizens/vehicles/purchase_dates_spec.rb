@@ -43,7 +43,6 @@ RSpec.describe Citizens::Vehicles::PurchaseDatesController, type: :request do
           purchased_on_year: purchase_date.year,
           purchased_on_month: purchase_date.month,
           purchased_on_day: purchase_date.day
-
         }
       }
     end
@@ -59,6 +58,24 @@ RSpec.describe Citizens::Vehicles::PurchaseDatesController, type: :request do
     it 'redirects to next step' do
       subject
       expect(response).to redirect_to(next_url)
+    end
+
+    context 'alphanumeric purchase date' do
+      let(:params) do
+        {
+          vehicle: {
+            purchased_on_year: purchase_date.year,
+            purchased_on_month: purchase_date.month,
+            purchased_on_day: '5s'
+          }
+        }
+      end
+
+      it 'errors' do
+        subject
+        expect(unescaped_response_body).to include('There is a problem')
+        expect(unescaped_response_body).to include('Enter a valid date')
+      end
     end
 
     context 'without a value' do

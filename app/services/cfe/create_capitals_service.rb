@@ -3,19 +3,19 @@ module CFE
     OTHER_ASSET_FIELDS = {
       timeshare_property_value: 'Timeshare property',
       land_value: 'Land',
-      valuable_items_value: 'Valuable items',
-      inherited_assets_value: 'Inherited assets',
+      valuable_items_value: 'Any valuable items worth more than £500',
+      inherited_assets_value: 'Money or assets from the estate of a person who has died',
       money_owed_value: 'Money owed to applicant',
-      trust_value: 'Trusts'
+      trust_value: 'Interest in a trust'
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
-      offline_current_accounts: 'Off-line current accounts',
-      offline_savings_accounts: 'Off-line savings accounts',
-      cash: 'Cash',
-      other_person_account: "Signatory on other person's account",
-      national_savings: 'National savings',
-      plc_shares: 'Shares in PLC',
+      offline_current_accounts: 'Current accounts',
+      offline_savings_accounts: 'Savings accounts',
+      cash: 'Money not in a bank account',
+      other_person_account: "Access to another person's bank account",
+      national_savings: 'National Savings Certificates and Premium Bonds',
+      plc_shares: 'Shares in a public limited company',
       peps_unit_trusts_capital_bonds_gov_stocks: 'PEPs, unit trusts, capital bonds and government stocks',
       life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage'
     }.freeze
@@ -26,8 +26,8 @@ module CFE
 
     def request_body
       {
-        "bank_accounts": bank_account_assets,
-        "non_liquid_capital": itemised_other_assets
+        bank_accounts: bank_account_assets,
+        non_liquid_capital: itemised_other_assets
       }.to_json
     end
 

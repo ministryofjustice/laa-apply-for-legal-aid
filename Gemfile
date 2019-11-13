@@ -8,7 +8,7 @@ gem 'active_model_serializers', '~> 0.10.10'
 gem 'govuk_notify_rails', '~> 2.1.1'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
-gem 'puma', '~> 4.2'
+gem 'puma', '~> 4.3'
 gem 'rails', '~> 5.2.3'
 gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0'
@@ -77,7 +77,7 @@ gem 'prometheus_exporter'
 gem 'factory_bot_rails'
 gem 'faker', '>=1.9.1'
 
-gem 'webpacker', '~> 4.x'
+gem 'webpacker', '~> 4'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
