@@ -100,6 +100,21 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
       end
     end
 
+    context 'with alpha-numeric date' do
+      let(:told_day) { '6s2' }
+
+      it 'renders show' do
+        subject
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'contains error message' do
+        subject
+        expect(response.body).to include('govuk-error-summary')
+        expect(response.body).to include('Enter a valid date')
+      end
+    end
+
     context 'when invalid' do
       let(:told_day) { '32' }
 
