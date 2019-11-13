@@ -73,11 +73,14 @@ en:
           - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
           - We’ll check the details you provided and let you know our decision.
       property_results:
-        property: Property
         value: Value
-        outstanding_mortgage: Outstanding mortgage
-        disregards: Disregards and deductions
+        sale_cost: '3% sale cost'
+        mortgage_deduction: Mortgage deduction
+        disregards: Main home disregard
         assessment_amount: Amount included in assessment
+        main_home_disregard: Main home disregard
+        main_home: Main home
+        additional_property: Additional property
       vehicle_results:
         vehicles: Vehicles
         value: Value
@@ -96,6 +99,9 @@ en:
         vehicles: Vehicles
         savings_and_investments: Savings and investments
         other_assets: Other assets
+        disposable_capital: Disposable capital
+        pensioner_disregard: Pensioner disregard
+        total_capital: Total capital
       restrictions:
         restrictions: Restrictions on your client's assets
         none: None

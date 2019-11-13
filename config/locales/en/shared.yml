@@ -23,13 +23,13 @@ en:
       assets:
         assets:
           other_assets: Other assets
-          outstanding_mortgage: Outstanding mortgage amount
-          own_home: Property owned
-          percentage_home: Percentage owned
-          property_value: Property value
+          outstanding_mortgage: What is the outstanding mortgage on your client's home?
+          own_home: Does your client own the home they live in?
+          percentage_home: What % share of their home does your client legally own?
+          property_value: How much is your client's home worth?
           restrictions: Do any restrictions apply?
           savings_and_investments: Savings and investments
-          shared_ownership: Owned with anyone else
+          shared_ownership: Does your client own their home with anyone else?
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
@@ -193,7 +193,7 @@ en:
               timeshare_property_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
               hint:
-                check_box_valuable_items_value: For example, jewellery, art or antiques. Do not include wedding or engagement rings, furniture, clothing or tools used for work.
+                check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work
             savings_and_investments:
               cash: Enter the total amount
               check_box_cash: Money not in a bank account
@@ -234,7 +234,7 @@ en:
               timeshare_property_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
               hint:
-                check_box_valuable_items_value: For example, jewellery, art or antiques. Do not include wedding or engagement rings, furniture, clothing or tools used for work.
+                check_box_valuable_items_value: For example, jewellery, art or antiques - do not include wedding or engagement rings, furniture, clothing or tools used for work
             savings_and_investments:
               cash: Enter the total amount
               check_box_cash: Money not in a bank account

@@ -320,7 +320,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       context 'EMERGENCY_FC_CRITERIA' do
         it 'inserts emergency_fc criteria as hard coded string' do
           block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_FC_CRITERIA')
-          expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+          expect(block).to have_text_response '.'
         end
       end
 
@@ -392,11 +392,30 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
-      context 'WARNING_LETTER_SENT not sent' do
-        before { respondent.update(warning_letter_sent: false) }
-        it 'generates WARNING_LETTER_SENT block with false value' do
-          block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
-          expect(block).to have_boolean_response false
+      context 'WARNING_LETTER_SENT' do
+        context 'letter has not been sent' do
+          it 'generates WARNING_LETTER_SENT block with false value' do
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+            expect(block).to have_boolean_response false
+          end
+
+          it 'includes correct text in INJ_REASON_NO_WARNING_LETTER block' do
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
+            expect(block).to have_text_response '.'
+          end
+        end
+
+        context 'letter has been sent' do
+          before { respondent.update(warning_letter_sent: true) }
+          it 'generates WARNING_LETTER_SENT block with true value' do
+            block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
+            expect(block).to have_boolean_response true
+          end
+
+          it 'does not generate the INJ_REASON_NO_WARNING_LETTER block' do
+            block = XmlExtractor.call(xml, :global_merits, 'INJ_REASON_NO_WARNING_LETTER')
+            expect(block).not_to be_present, 'Expected block for attribute INJ_REASON_NO_WARNING_LETTER not to be generated, but was in global_merits'
+          end
         end
       end
 
@@ -705,7 +724,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
 
           it 'returns hard coded statement' do
-            expect(block).to have_text_response 'Apply Service application - see uploaded provider statement of case'
+            expect(block).to have_text_response '.'
           end
         end
 
@@ -758,15 +777,35 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'GB_INPUT_B_12WP2_2A client valuable possessions' do
-        it 'returns true when client has valuable possessions' do
+        it 'returns true' do
           block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
           expect(block).to have_boolean_response true
         end
 
-        it 'returns false when client has NO valuable possessions' do
-          allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
-          expect(block).to have_boolean_response false
+        it 'displays VALPOSSESS_INPUT_T_12WP2_7A' do
+          block = XmlExtractor.call(xml, :global_means, 'VALPOSSESS_INPUT_T_12WP2_7A')
+          expect(block).to have_text_response 'Aggregate of valuable possessions'
+        end
+
+        it 'displays VALPOSSESS_INPUT_C_12WP2_8A' do
+          block = XmlExtractor.call(xml, :global_means, 'VALPOSSESS_INPUT_C_12WP2_8A')
+          expect(block).to have_currency_response legal_aid_application.other_assets_declaration.valuable_items_value
+        end
+
+        context 'when client has NO valuable possessions' do
+          before { allow(legal_aid_application.other_assets_declaration).to receive(:valuable_items_value).and_return(nil) }
+
+          it 'returns false' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP2_2A')
+            expect(block).to have_boolean_response false
+          end
+
+          it 'does not display VALPOSSESS_INPUT_T_12WP2_7A or VALPOSSESS_INPUT_C_12WP2_8A' do
+            %i[VALPOSSESS_INPUT_T_12WP2_7A VALPOSSESS_INPUT_T_12WP2_8A].each do |attribute|
+              block = XmlExtractor.call(xml, :global_means, attribute)
+              expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
+            end
+          end
         end
       end
 
@@ -885,8 +924,24 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'GB_INPUT_B_7WP2_1A no bank accounts' do
           it 'returns false when applicant does NOT have bank accounts' do
-            allow(legal_aid_application.applicant).to receive(:bank_accounts).and_return([])
+            allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
+            allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_7WP2_1A')
+            expect(block).to have_boolean_response false
+          end
+        end
+      end
+
+      context 'GB_INPUT_B_8WP2_1A client is signatory to other bank accounts' do
+        it 'returns true when client is a signatory to other bank accounts' do
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP2_1A')
+          expect(block).to have_boolean_response true
+        end
+
+        context 'GB_INPUT_B_8WP2_1A client is not a signatory to other bank accounts' do
+          it 'returns false when applicant is NOT a signatory to other bank accounts' do
+            allow(legal_aid_application.savings_amount).to receive(:other_person_account).and_return(nil)
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP2_1A')
             expect(block).to have_boolean_response false
           end
         end
@@ -908,22 +963,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
 
         it 'returns false when client does NOT have other savings' do
-          allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(nil)
-          allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
-          expect(block).to have_boolean_response false
-        end
-      end
-
-      context 'GB_INPUT_B_17WP2_7A client other capital' do
-        it 'returns true when client has other capital' do
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
-          expect(block).to have_boolean_response true
-        end
-
-        it 'returns false when client does NOT have other capital' do
           allow(legal_aid_application.savings_amount).to receive(:peps_unit_trusts_capital_bonds_gov_stocks).and_return(nil)
-          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_17WP2_7A')
+          block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_10WP2_1A')
           expect(block).to have_boolean_response false
         end
       end
@@ -1127,34 +1168,18 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         it 'should be hard coded with the correct notification' do
           attributes = [
-            [:proceeding_merits, 'INJ_REASON_NO_WARNING_LETTER'],
             [:proceeding_merits, 'INJ_RECENT_INCIDENT_DETAIL'],
             [:global_merits, 'INJ_REASON_POLICE_NOT_NOTIFIED'],
-            [:global_merits, 'INJ_REASON_NO_WARNING_LETTER']
-          ]
-          attributes.each do |entity_attribute_pair|
-            entity, attribute = entity_attribute_pair
-            block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See uploaded provider statement and report'
-          end
-        end
-
-        it 'should be hard coded with the correct notification' do
-          attributes = [
             [:global_merits, 'REASON_APPLYING_FHH_LR'],
             [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
-            [:global_merits, 'REASON_SEPARATE_REP_REQ']
+            [:global_merits, 'REASON_SEPARATE_REP_REQ'],
+            [:global_merits, 'MAIN_PURPOSE_OF_APPLICATION']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
             block = XmlExtractor.call(xml, entity, attribute)
-            expect(block).to have_text_response 'Apply Service application. See provider statement of case and report uploaded as evidence'
+            expect(block).to have_text_response '.'
           end
-        end
-
-        it 'MAIN_PURPOSE_OF_APPLICATION should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :global_merits, 'MAIN_PURPOSE_OF_APPLICATION')
-          expect(block).to have_text_response 'Apply Service application - see report and uploaded statement in CCMS upload section'
         end
       end
 
@@ -1885,6 +1910,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_means, 'GB_INPUT_B_1WP3_165A'],
         [:global_means, 'GB_INFER_B_1WP1_1A'],
         [:global_means, 'GB_INPUT_B_14WP2_7A'],
+        [:global_means, 'GB_INPUT_B_17WP2_7A'],
         [:global_means, 'GB_INPUT_B_18WP2_2A'],
         [:global_means, 'GB_INPUT_B_18WP2_4A'],
         [:global_means, 'GB_INPUT_B_1WP1_2A'],
@@ -1895,7 +1921,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_means, 'GB_INPUT_B_41WP3_40A'],
         [:global_means, 'GB_INPUT_B_5WP1_22A'],
         [:global_means, 'GB_INPUT_B_5WP1_3A'],
-        [:global_means, 'GB_INPUT_B_8WP2_1A'],
         [:global_means, 'GB_PROC_B_39WP3_14A'],
         [:global_means, 'GB_PROC_B_39WP3_15A'],
         [:global_means, 'GB_PROC_B_39WP3_16A'],
@@ -2103,8 +2128,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
         [:opponent, 'RELATIONSHIP_STEP_PARENT'],
         [:opponent, 'RELATIONSHIP_SUPPLIER'],
-        [:opponent, 'RELATIONSHIP_TENANT'],
-        [:proceeding_merits, 'WARNING_LETTER_SENT']
+        [:opponent, 'RELATIONSHIP_TENANT']
       ]
     end
   end
