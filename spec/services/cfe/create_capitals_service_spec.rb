@@ -78,23 +78,23 @@ module CFE # rubocop:disable Metrics/ModuleLength
       {
         bank_accounts: [
           {
-            description: 'Off-line current accounts',
+            description: 'Current accounts',
             value: savings_amount.offline_current_accounts.to_s
           },
           {
-            description: 'Off-line savings accounts',
+            description: 'Savings accounts',
             value: savings_amount.offline_savings_accounts.to_s
           },
           {
-            description: 'Cash',
+            description: 'Money not in a bank account',
             value: savings_amount.cash.to_s
           },
           {
-            description: "Signatory on other person's account",
+            description: "Access to another person's bank account",
             value: savings_amount.other_person_account.to_s
           },
           {
-            description: 'National savings',
+            description: 'National Savings Certificates and Premium Bonds',
             value: savings_amount.national_savings.to_s
           }
         ],
@@ -108,10 +108,10 @@ module CFE # rubocop:disable Metrics/ModuleLength
             value: other_assets_declaration.land_value.to_s
           },
           {
-            description: 'Valuable items',
+            description: 'Any valuable items worth more than £500',
             value: other_assets_declaration.valuable_items_value.to_s
           },
-          { description: 'Trusts',
+          { description: 'Interest in a trust',
             value: other_assets_declaration.trust_value.to_s }
         ]
       }
