@@ -10,6 +10,16 @@
 
     <%= govuk_hint t('.detail_of_payments_to_include') %>
 
+      <% if @form.errors.any? %>
+        <span class="govuk-error-message">
+          <% @form.errors.messages.values.each do |msg| %>
+             <% msg.each do  |m| %>
+               <%= m %>
+             <%end %>
+           <% end %>
+        </span>
+      <% end %>
+
     <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
       <%= form.govuk_radio_button(
             :payments_remain,
