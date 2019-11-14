@@ -7,6 +7,16 @@
       <%= govuk_fieldset_header page_title %>
       <h2 class="govuk-heading-m"><%= t('generic.select_all_that_apply') %></h2>
 
+      <% if @form.errors.any? %>
+        <span class="govuk-error-message">
+          <% @form.errors.messages.values.each do |msg| %>
+             <% msg.each do  |m| %>
+               <%= m %>
+             <%end %>
+           <% end %>
+        </span>
+      <% end %>
+
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="[name='savings_amount[none_selected]']">
           <%= render partial: 'shared/forms/revealing_checkbox/attribute',
