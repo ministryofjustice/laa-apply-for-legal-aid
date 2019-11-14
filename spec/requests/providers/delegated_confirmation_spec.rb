@@ -23,7 +23,7 @@ RSpec.describe Providers::DelegatedConfirmationController, type: :request do
       end
 
       it 'displays the correct page' do
-        expect(unescaped_response_body).to include("You notified us you've used delegated functions")
+        expect(unescaped_response_body).to include("You told us you've used delegated functions")
       end
 
       it 'displays the deadline date' do
