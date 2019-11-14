@@ -27,7 +27,7 @@ Feature: Pathways from check your answers
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "You notified us you've used delegated functions"
+    Then I should be on a page showing "You told us you've used delegated functions"
     Then I click link 'Back to your applications'
     Then I should be on a page showing 'Your applications'
 

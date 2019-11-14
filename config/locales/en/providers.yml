@@ -196,7 +196,7 @@ en:
         h1-heading: Latest incident details
     delegated_confirmation:
       index:
-        page-heading: You notified us you've used delegated functions
+        page-heading: You told us you've used delegated functions
         sub_title: Your case reference number is
         what_happens_next: What happens next
         application_deadline_date: "You must submit a substantive application by "
@@ -365,7 +365,6 @@ en:
     property_values:
       hint:
         property_value: You can use property websites to find the estimated value
-      property_value: Enter the value of your client's home
       show:
         h1-heading: How much is your client's home worth?
     providers:
