@@ -451,7 +451,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "What types of savings or investments does your client have?"
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "Money not in a bank account"
     Then I fill "Cash" with "10000"
     Then I click 'Save and continue'
@@ -469,7 +469,7 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I click link "Back"
-    Then I should be on a page showing "What types of savings or investments does your client have?"
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I click link "Back"
@@ -594,7 +594,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Is the vehicle in regular use?"
     Then I choose option "Vehicle used regularly true"
     And I click "Save and continue"
-    Then I should be on a page showing "What types of savings or investments does your client have?"
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
 
   @javascript @vcr
   Scenario: Going to the search page
