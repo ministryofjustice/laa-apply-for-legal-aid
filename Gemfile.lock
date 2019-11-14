@@ -189,6 +189,7 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
+    geckoboard-ruby (0.4.0)
     gherkin (5.1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -542,6 +543,7 @@ DEPENDENCIES
   erb_lint
   factory_bot_rails
   faker (>= 1.9.1)
+  geckoboard-ruby
   govuk_notify_rails (~> 2.1.1)
   i18n-tasks
   json_expressions
@@ -559,7 +561,7 @@ DEPENDENCIES
   pg
   prometheus_exporter
   pry-byebug
-  puma (~> 4.3)
+  puma (~> 4.2)
   pundit
   rails (~> 5.2.3)
   rails_admin (~> 2.0)
