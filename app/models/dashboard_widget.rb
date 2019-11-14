@@ -1,0 +1,2 @@
+class DashboardWidget < ApplicationRecord
+end
