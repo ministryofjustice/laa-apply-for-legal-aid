@@ -13,11 +13,8 @@
 
 <%= page_template page_title: t('.what_happens_next'), back_link: :none do %>
   <p class="govuk-body">
-   <%= t '.info' %>
-  </p>
-  <div class="govuk-inset-text">
     <%= t('.warning.application_deadline_date') %><%= @legal_aid_application.substantive_application_deadline_on %>.
-  </div>
+  </p>
   <%= link_to(
         t('.back_home'),
         providers_legal_aid_applications_path,
