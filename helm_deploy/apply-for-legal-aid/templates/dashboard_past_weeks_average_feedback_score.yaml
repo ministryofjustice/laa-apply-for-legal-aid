@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Release.Name }}-past-weeks-feedback-score
+  name: {{ .Release.Name | trunc 26 }}-one-week-feedback
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
@@ -21,7 +21,7 @@ spec:
       template:
         spec:
           containers:
-          - name: past-weeks-feedback-score
+          - name: one-week-feedback
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
             imagePullPolicy: IfNotPresent
             command: ['rake', 'job:dashboard:update[PastWeeksAverageFeedbackScore]']
