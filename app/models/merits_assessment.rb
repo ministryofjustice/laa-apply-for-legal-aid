@@ -14,6 +14,6 @@ class MeritsAssessment < ApplicationRecord
   end
 
   def submit!
-    self.update!(submitted_at: Time.current) unless submitted_at?
+    update!(submitted_at: Time.current) unless submitted_at?
   end
 end

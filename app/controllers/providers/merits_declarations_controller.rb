@@ -10,7 +10,6 @@ module Providers
       continue_or_draft
     end
 
-
     private
 
     def merits_assessment
