@@ -73,7 +73,7 @@ en:
               blank: Enter a valid date of birth
               date_is_in_the_future: Date of birth must be in the past
               date_not_valid: Enter a valid date of birth
-              earliest_allowed_date: Date of birth cannot be before %{date}
+              earliest_allowed_date: Enter a valid date of birth
             email:
               blank: Enter email address
               invalid: Enter an email address in the correct format, such as name@example.com
@@ -118,7 +118,7 @@ en:
               blank: Enter a valid date of birth
               date_is_in_the_future: Date of birth must be in the past
               date_not_valid: Enter a valid date of birth
-              earliest_allowed_date: Date of birth cannot be before %{date}
+              earliest_allowed_date: Enter a valid date of birth
             in_full_time_education:
               blank_message: Select yes if %{name} is in full-time education or training
             has_income:
