@@ -70,12 +70,30 @@ module XMLBlockMatchers
   def validate_expectation(actual, expected_value, expected_response_type)
     return 'Block not found' if actual.blank?
 
+    formatted_expected_value = if formatted_decimal?(expected_value, expected_response_type)
+                                 format('%<val>12.2f', val: expected_value).squish
+                               else
+                                 expected_value
+                               end
+
+    # formatted_expected_value = expected_response_type.in?(%w(number currency)) ? format('%12.2f', expected_value).squish : expected_value
+
     actual_response_type = actual.css('ResponseType').text
     return "Expected response type '#{expected_response_type}', got '#{actual_response_type}'" unless actual_response_type == expected_response_type
 
     actual_value = actual.css('ResponseValue').text
-    return "Expected value '#{expected_value}', got '#{actual_value}'" unless actual_value.squish == expected_value.squish
+    return "Expected value '#{formatted_expected_value}', got '#{actual_value}'" unless actual_value.squish == formatted_expected_value
 
     :ok
+  end
+
+  def formatted_decimal?(expected_value, expected_response_type)
+    return true if expected_response_type == 'currency'
+
+    return false unless expected_response_type == 'numeric'
+
+    return false if expected_value.is_a?(Integer)
+
+    true
   end
 end
