@@ -162,7 +162,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
 
       context 'with a lot of associations' do
-        let!(:application) { create :legal_aid_application, :with_everything }
+        let!(:application) { create :legal_aid_application, :at_assessment_submitted }
 
         it 'gets deleted too' do
           expect { subject }.to change { LegalAidApplication.count }.by(-1)
