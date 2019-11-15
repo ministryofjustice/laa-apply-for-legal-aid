@@ -1,0 +1,9 @@
+<% if @form.errors.any? %>
+  <span class="govuk-error-message">
+    <% @form.errors.messages.values.each do |msg| %>
+       <% msg.each do  |m| %>
+         <%= m %>
+       <% end %>
+     <% end %>
+  </span>
+<% end %>

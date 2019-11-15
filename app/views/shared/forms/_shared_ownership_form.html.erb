@@ -5,10 +5,11 @@
               local: true) do |form| %>
   <% error = form.object.errors[:shared_ownership].first %>
   <% input_error_class = error ? 'govuk-input--error' : '' %>
-  <%= content_tag(:span, error, class: 'govuk-error-message', id: 'shared_ownership') if error %>
 
   <%= govuk_form_group show_error_if: error do %>
     <%= govuk_fieldset_header page_title %>
+
+    <%= content_tag(:span, error, class: 'govuk-error-message', id: 'shared_ownership') if error %>
 
     <div class="govuk-radios govuk-!-padding-top-2">
       <%= render partial: 'shared/forms/shared_ownership_form/shared_ownership_item',
