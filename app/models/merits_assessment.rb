@@ -12,4 +12,8 @@ class MeritsAssessment < ApplicationRecord
   def self.prospects_unlikely_to_succeed
     success_prospects.except(:likely).keys
   end
+
+  def submit!
+    self.update!(submitted_at: Time.current) unless submitted_at?
+  end
 end

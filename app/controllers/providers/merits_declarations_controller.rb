@@ -5,10 +5,11 @@ module Providers
     def update
       unless draft_selected?
         legal_aid_application.generate_reports! if legal_aid_application.may_generate_reports?
-        merits_assessment.update!(submitted_at: Time.current) unless merits_assessment.submitted_at?
+        merits_assessment.submit!
       end
       continue_or_draft
     end
+
 
     private
 
