@@ -398,7 +398,8 @@ en:
             their assets are the subject of dispute in other legal proceedings
     savings_and_investments:
       show:
-        h1-heading: What types of savings or investments does your client have?
+        h1-heading: Which types of savings or investments does your client have?
+        h2-heading: Select all that apply
         none_selected: None of these
     select_offices:
       show:

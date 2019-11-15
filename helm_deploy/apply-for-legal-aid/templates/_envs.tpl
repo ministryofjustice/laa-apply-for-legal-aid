@@ -273,6 +273,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminPassword
+  - name: GECKOBOARD_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: geckoboardApiKey
   - name: GOOGLE_TAG_MANAGER_TRACKING_ID
     valueFrom:
       secretKeyRef:

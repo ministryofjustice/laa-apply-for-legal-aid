@@ -72,6 +72,8 @@ module LaaApplyForLegalAid
     config.x.true_layer.enable_mock = ENV['TRUE_LAYER_ENABLE_MOCK'] == 'true'
     config.x.true_layer.banks = YAML.load_file(Rails.root.join('config/banks.yml'))['banks']
 
+    config.x.geckoboard.api_key = ENV['GECKOBOARD_API_KEY']
+
     require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
     ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
 
