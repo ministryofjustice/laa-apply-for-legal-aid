@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_151150) do
+ActiveRecord::Schema.define(version: 2019_11_14_193807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -665,13 +665,13 @@ ActiveRecord::Schema.define(version: 2019_10_25_151150) do
   add_foreign_key "benefit_check_results", "legal_aid_applications"
   add_foreign_key "ccms_submission_documents", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
-  add_foreign_key "ccms_submissions", "legal_aid_applications"
+  add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
-  add_foreign_key "merits_assessments", "legal_aid_applications"
+  add_foreign_key "merits_assessments", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
@@ -681,7 +681,7 @@ ActiveRecord::Schema.define(version: 2019_10_25_151150) do
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
-  add_foreign_key "statement_of_cases", "legal_aid_applications"
+  add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
   add_foreign_key "vehicles", "legal_aid_applications"
 end
