@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: three-week-feedback
+  name: {{ .Release.Name | trunc 26 }}-three-week-feedback
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
