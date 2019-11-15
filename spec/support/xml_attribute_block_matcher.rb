@@ -76,8 +76,6 @@ module XMLBlockMatchers
                                  expected_value
                                end
 
-    # formatted_expected_value = expected_response_type.in?(%w(number currency)) ? format('%12.2f', expected_value).squish : expected_value
-
     actual_response_type = actual.css('ResponseType').text
     return "Expected response type '#{expected_response_type}', got '#{actual_response_type}'" unless actual_response_type == expected_response_type
 
