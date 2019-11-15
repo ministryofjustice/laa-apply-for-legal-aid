@@ -60,7 +60,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
     And the answer for 'Property value' should be '£200,000.00'
     And the answer for 'Outstanding mortgage' should be '£100,000.00'
-    And the answer for 'Shared ownership' should be 'No, they're the sole owner'
+    And the answer for 'Shared ownership' should be "No, they're the sole owner"
     And the answer for 'Restrictions' should be 'Yes'
     And the answer for 'Restrictions' should be 'Restrictions include:'
 

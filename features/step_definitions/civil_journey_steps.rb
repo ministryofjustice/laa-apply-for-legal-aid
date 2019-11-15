@@ -271,7 +271,7 @@ And('I search for proceeding {string}') do |proceeding_search|
 end
 
 And(/^I should not see "(.*?)"$/) do |arg1|
-  page.should have_no_content(arg1)
+  expect(page).to have_no_content(arg1)
 end
 
 When(/^I click clear search$/) do
