@@ -170,9 +170,7 @@ en:
             percentage_home: Enter the estimated percentage share you own
         providers:
           percentage_homes:
-            hint:
-              percentage_home: Enter the estimated property share
-            percentage_home: Their name must be on the property deeds, lease, freehold or mortgage.
+            percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage
       revealing_checkbox:
         attribute:
           citizens:
@@ -234,7 +232,7 @@ en:
               timeshare_property_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
               hint:
-                check_box_valuable_items_value: For example, jewellery, art or antiques - do not include wedding or engagement rings, furniture, clothing or tools used for work
+                check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work
             savings_and_investments:
               cash: Enter the total amount
               check_box_cash: Money not in a bank account
