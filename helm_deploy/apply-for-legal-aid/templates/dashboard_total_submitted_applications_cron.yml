@@ -1,7 +1,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Release.Name | trunc 26 }}-ttl-submitted-applications
+  # NOTE The cronjob name must not exceed 25 characters so that when appended to the release name
+  # it doesn't exceed the limit of 52 characters
+  name: {{ .Release.Name | trunc 26 }}-total-submitted-applics
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
@@ -21,7 +23,7 @@ spec:
       template:
         spec:
           containers:
-          - name: ttl-submitted-applications
+          - name: total-submitted-applics
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
             imagePullPolicy: IfNotPresent
             command: ['rake', 'job:dashboard:update[TotalSubmittedApplications]']
