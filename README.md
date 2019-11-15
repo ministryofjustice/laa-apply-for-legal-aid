@@ -97,7 +97,7 @@ The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/
 
 **NOTE:** **git-crypt** is required to store secrets required for **uat**, **staging** and **production** environments.
 To be able to modify those secrets, **git-crypt** needs to be set up according to the following
-[guide](https://ministryofjustice.github.io/cloud-platform-user-docs/03-other-topics/001-git-crypt-setup/#git-crypt).
+[guide](https://user-guide.cloud-platform.service.justice.gov.uk/tasks.html#git-crypt).
 
 * For more information on howto setup **Helm** in your local environment refer to the following [guide](https://ministryofjustice.github.io/cloud-platform-user-docs/02-deploying-an-app/002-app-deploy-helm/#installing-and-configuring-helm-and-tiller).
 * For more deployment information refer to the specific [README](./helm_deploy/apply-for-legal-aid/README.md)
