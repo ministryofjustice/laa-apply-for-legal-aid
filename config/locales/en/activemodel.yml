@@ -44,7 +44,6 @@ en:
         occurred_year: Year
       legal_aid_application:
         outstanding_mortgage_amount: Enter outstanding mortgage amount
-        property_value: Enter the estimated value of your home
         used_delegated_functions_day: Day
         used_delegated_functions_month: Month
         used_delegated_functions_year: Year
