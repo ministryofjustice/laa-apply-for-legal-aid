@@ -198,6 +198,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     [] # TODO: CCMS placeholder
   end
 
+  def employment
+    [] # TODO: CCMS placeholder
+  end
+
   def opponent_other_parties
     [Opponent.dummy_opponent]
   end

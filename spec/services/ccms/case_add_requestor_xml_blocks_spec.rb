@@ -19,6 +19,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                :with_everything,
                :with_applicant_and_address,
                :with_positive_benefit_check_result,
+               :with_substantive_scope_limitation,
                populate_vehicle: true,
                with_bank_accounts: 2,
                proceeding_types: [proceeding_type],
@@ -127,6 +128,69 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         end
       end
 
+      context 'valuable possessions entity' do
+        context 'valuable possessions present' do
+          it 'creates the entity' do
+            entity_block = XmlExtractor.call(xml, :valuable_possessions_entity)
+            expect(entity_block).to be_present
+          end
+        end
+
+        context 'no valuable possessions present' do
+          before { legal_aid_application.other_assets_declaration.valuable_items_value = nil }
+
+          it 'does not generate the bank accounts entity' do
+            block = XmlExtractor.call(xml, :valuable_possessions_entity)
+            expect(block).not_to be_present, "Expected block for valuable possessions entity not to be generated, but was \n #{block}"
+          end
+
+          it 'assigns the sequence number of 1 to the next entity ' do
+            bank_accounts_entity = XmlExtractor.call(xml, :bank_accounts_entity)
+            doc = Nokogiri::XML(bank_accounts_entity.to_s)
+            bank_accounts_sequence = doc.xpath('//SequenceNumber').text.to_i
+            expect(bank_accounts_sequence).to eq 1
+          end
+        end
+      end
+
+      context 'bank accounts entity' do
+        context 'bank accounts present' do
+          it 'creates the entity' do
+            entity_block = XmlExtractor.call(xml, :bank_accounts_entity)
+            expect(entity_block).to be_present
+          end
+        end
+
+        context 'no bank accounts present' do
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
+                   vehicle: nil,
+                   proceeding_types: [proceeding_type],
+                   office: office
+          end
+
+          it 'does not generate the bank accounts entity' do
+            block = XmlExtractor.call(xml, :bank_accounts_entity)
+            expect(block).not_to be_present, "Expected block for bank accounts entity not to be generated, but was \n #{block}"
+          end
+
+          it 'assigns the sequence number to the next entity one higher than that for valuable possessions' do
+            valuable_possessions_entity = XmlExtractor.call(xml, :valuable_possessions_entity)
+            doc = Nokogiri::XML(valuable_possessions_entity.to_s)
+            valuable_possessions_sequence = doc.xpath('//SequenceNumber').text.to_i
+
+            means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
+            doc = Nokogiri::XML(means_proceeding_entity.to_s)
+            means_proceeding_sequence = doc.xpath('//SequenceNumber').text.to_i
+            expect(means_proceeding_sequence).to eq valuable_possessions_sequence + 1
+          end
+        end
+      end
+
       context 'car and vehicle entity' do
         context 'car and vehicle present' do
           it 'creates the entity' do
@@ -191,12 +255,13 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           end
         end
 
-        context 'no car an vehicle present' do
+        context 'no car and vehicle present' do
           let(:legal_aid_application) do
             create :legal_aid_application,
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    with_bank_accounts: 2,
                    vehicle: nil,
                    proceeding_types: [proceeding_type],
@@ -213,10 +278,50 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             doc = Nokogiri::XML(bank_acount_entity.to_s)
             bank_account_sequence = doc.xpath('//SequenceNumber').text.to_i
 
-            wage_slip_entity = XmlExtractor.call(xml, :wage_slip_entity)
-            doc = Nokogiri::XML(wage_slip_entity.to_s)
-            wage_slip_sequence = doc.xpath('//SequenceNumber').text.to_i
-            expect(wage_slip_sequence).to eq bank_account_sequence + 1
+            means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
+            doc = Nokogiri::XML(means_proceeding_entity.to_s)
+            means_proceeding_sequence = doc.xpath('//SequenceNumber').text.to_i
+            expect(means_proceeding_sequence).to eq bank_account_sequence + 1
+          end
+        end
+      end
+
+      context 'wage slips entity' do
+        context 'no wage slips present' do
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
+                   populate_vehicle: true,
+                   proceeding_types: [proceeding_type],
+                   office: office
+          end
+
+          it 'does not generate the wage slips entity' do
+            block = XmlExtractor.call(xml, :wage_slip_entity)
+            expect(block).not_to be_present, "Expected block for wage slips entity not to be generated, but was \n #{block}"
+          end
+
+          it 'assigns the sequence number to the next entity one higher than that for vehicles' do
+            vehicle_entity = XmlExtractor.call(xml, :vehicle_sequence_entity)
+            doc = Nokogiri::XML(vehicle_entity.to_s)
+            vehicle_sequence = doc.xpath('//SequenceNumber').text.to_i
+
+            means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
+            doc = Nokogiri::XML(means_proceeding_entity.to_s)
+            means_proceeding_sequence = doc.xpath('//SequenceNumber').text.to_i
+            expect(means_proceeding_sequence).to eq vehicle_sequence + 1
+          end
+        end
+      end
+
+      context 'employment entity' do
+        context 'no employment details present' do
+          it 'does not generate the employment entity' do
+            block = XmlExtractor.call(xml, :employment_entity)
+            expect(block).not_to be_present, "Expected block for wage slips entity not to be generated, but was \n #{block}"
           end
         end
       end
@@ -678,6 +783,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -714,6 +820,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1124,14 +1231,34 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'UNKNOWN'
         end
 
-        it 'REQUESTED_SCOPE should be hard coded to MULTIPLE' do
-          block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
-          expect(block).to have_text_response 'MULTIPLE'
+        context 'there is one scope limitation' do
+          it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
+            attributes = [
+              [:proceeding, 'REQUESTED_SCOPE'],
+              [:proceeding_merits, 'REQUESTED_SCOPE']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to have_text_response legal_aid_application.scope_limitations.first.code
+            end
+          end
         end
 
-        it 'REQUESTED_SCOPE should be hard coded with the correct notification' do
-          block = XmlExtractor.call(xml, :proceeding_merits, 'REQUESTED_SCOPE')
-          expect(block).to have_text_response 'Dummy requested scope pending legal framework enhancements'
+        context 'there are multiple scope limitations' do
+          let(:scope_limitation) { create :scope_limitation }
+          before { legal_aid_application.scope_limitations << scope_limitation }
+          it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
+            attributes = [
+              [:proceeding, 'REQUESTED_SCOPE'],
+              [:proceeding_merits, 'REQUESTED_SCOPE']
+            ]
+            attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to have_text_response 'MULTIPLE'
+            end
+          end
         end
 
         it 'NEW_OR_EXISTING should be hard coded to NEW' do
@@ -1258,6 +1385,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1288,6 +1416,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
                    :with_everything,
                    :with_applicant_and_address,
                    :with_positive_benefit_check_result,
+                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    proceeding_types: [proceeding_type],
@@ -1383,7 +1512,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         it 'harcodes RELATIONSHIP_TO_CLIENT' do
           block = XmlExtractor.call(xml, :other_party, 'RELATIONSHIP_TO_CLIENT')
-          expect(block).to have_text_response 'UNKNOWN'
+          expect(block).to have_text_response 'NONE'
         end
       end
     end
