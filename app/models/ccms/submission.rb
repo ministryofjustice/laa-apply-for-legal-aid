@@ -3,7 +3,8 @@ module CCMS
     include CCMSSubmissionStateMachine
 
     belongs_to :legal_aid_application
-    has_many :submission_document
+    has_many :submission_document, dependent: :destroy
+    has_many :submission_history, dependent: :destroy
 
     validates :legal_aid_application_id, presence: true
 

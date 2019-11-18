@@ -10,6 +10,8 @@
 
     <%= govuk_hint t('.detail_of_payments_to_include') %>
 
+      <%= render 'shared/show_errors' %>
+
     <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
       <%= form.govuk_radio_button(
             :payments_remain,

@@ -218,6 +218,12 @@ module CCMS
       @legal_aid_application.benefit_check_result.result == 'Yes'
     end
 
+    def proceeding_cost_limitation(_options)
+      return 'MULTIPLE' if scope_limitations.size > 1
+
+      scope_limitations.first.code
+    end
+
     private
 
     def applicant
@@ -242,6 +248,10 @@ module CCMS
 
     def cfe_result
       @cfe_result ||= @legal_aid_application.cfe_result
+    end
+
+    def scope_limitations
+      @scope_limitations ||= @legal_aid_application.scope_limitations
     end
 
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity

@@ -206,6 +206,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
+
   # Catch all route that traps paths not defined above. Must be last route.
   match '*path', to: redirect('error/page_not_found'), via: :all
 end

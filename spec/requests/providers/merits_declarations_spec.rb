@@ -5,6 +5,10 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, state: :checked_merits_answers }
   let(:provider) { legal_aid_application.provider }
 
+  before do
+    legal_aid_application.merits_assessment.update submitted_at: nil
+  end
+
   describe 'GET /providers/applications/:id/merits_declaration' do
     subject { get providers_legal_aid_application_merits_declaration_path(legal_aid_application) }
 
@@ -55,6 +59,11 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
           subject
           ReportsCreatorWorker.drain
         end
+
+        it 'sets the merits assessment to submitted' do
+          subject
+          expect(legal_aid_application.reload.summary_state).to eq :submitted
+        end
       end
 
       context 'Form submitted using Save as draft button' do
@@ -68,6 +77,11 @@ RSpec.describe Providers::MeritsDeclarationsController, type: :request do
         it 'sets the application as draft' do
           subject
           expect(legal_aid_application.reload).to be_draft
+        end
+
+        it 'does not set it to submitted' do
+          subject
+          expect(legal_aid_application.reload.summary_state).to eq :in_progress
         end
       end
     end
