@@ -44,8 +44,6 @@ module CCMS
     let(:office) { create :office, ccms_id: 81_693, firm: firm }
     let(:provider) { create :provider, :with_provider_details_api_username, firm: firm }
 
-    let(:statement_of_case) { create :statement_of_case, :with_attached_files }
-
     let(:substantive_scope_limitation) do
       create :scope_limitation,
              :with_real_data,
@@ -79,7 +77,6 @@ module CCMS
              :with_cfe_result,
              :with_substantive_scope_limitation,
              :with_positive_benefit_check_result,
-             statement_of_case: statement_of_case,
              proceeding_types: [substantive_proceeding_type],
              state: :submitting_assessment,
              office: office
@@ -119,14 +116,12 @@ module CCMS
              :with_cfe_result,
              :with_delegated_functions_scope_limitation,
              :with_positive_benefit_check_result,
-             statement_of_case: statement_of_case,
              proceeding_types: [delegated_functions_proceeding_type],
              state: :submitting_assessment,
              office: office
     end
 
     before do
-      PdfConverter.call(PdfFile.find_or_create_by(original_file_id: statement_of_case.original_files.first.id).id)
       allow_any_instance_of(LegalAidApplication).to receive(:opponents).and_return([other_party_2, other_party_1])
       allow_any_instance_of(LegalAidApplication).to receive(:vehicle).and_return(vehicle)
       allow_any_instance_of(LegalAidApplication).to receive(:wage_slips).and_return([wage_slip])
@@ -145,6 +140,7 @@ module CCMS
 
     context 'delegated functions case' do
       before do
+        create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: delegated_functions_legal_aid_application
         @submission = create :submission, legal_aid_application: delegated_functions_legal_aid_application
       end
 
@@ -170,6 +166,7 @@ module CCMS
 
     context 'substantive case' do
       before do
+        create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: substantive_legal_aid_application
         @submission = create :submission, legal_aid_application: substantive_legal_aid_application
       end
 

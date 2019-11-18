@@ -15,7 +15,7 @@
     </ul>
 
     <div id="uploaded-files-table-container">
-      <%= render partial: 'uploaded_files', locals: { original_files: @form.model.original_files } %>
+      <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
     </div>
 
     <%# Note this form needs to start after the list of original files to avoid nesting forms %>

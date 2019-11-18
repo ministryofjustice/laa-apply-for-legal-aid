@@ -2,7 +2,7 @@ class PdfConverterWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 
-  def perform(original_file_id)
-    PdfConverter.call(original_file_id)
+  def perform(attachment_id)
+    PdfConverter.call(attachment_id)
   end
 end

@@ -10,18 +10,16 @@ RSpec.describe CCMS::UploadDocumentsService do
            :with_transaction_period,
            :with_means_report,
            :with_merits_report,
-           statement_of_case: statement_of_case,
            state: :submitting_assessment
   end
 
-  let(:statement_of_case) { create :statement_of_case, :with_attached_files }
-  let(:statement_of_case_id) { statement_of_case.original_files.first.id }
-  let(:means_report_id) { legal_aid_application.means_report.id }
-  let(:merits_report_id) { legal_aid_application.merits_report.id }
-
-  let!(:statement_of_case_submission_document) { create :submission_document, :id_obtained, submission: submission, document_id: statement_of_case_id }
-  let!(:means_report_document) { create :submission_document, :id_obtained, submission: submission, document_type: :means_report, document_id: means_report_id }
-  let!(:merits_report_document) { create :submission_document, :id_obtained, submission: submission, document_type: :merits_report, document_id: merits_report_id }
+  let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
+  let(:statement_of_case_attachment) { statement_of_case.original_attachments.first }
+  let(:means_report_attachment) { legal_aid_application.means_report }
+  let(:merits_report_attachment) { legal_aid_application.merits_report }
+  let!(:statement_of_case_submission_document) { create :submission_document, :id_obtained, submission: submission, attachment_id: statement_of_case_attachment.id }
+  let!(:means_report_document) { create :submission_document, :id_obtained, submission: submission, document_type: :means_report, attachment_id: means_report_attachment.id }
+  let!(:merits_report_document) { create :submission_document, :id_obtained, submission: submission, document_type: :merits_report, attachment_id: merits_report_attachment.id }
 
   let(:submission) do
     create :submission,
@@ -31,13 +29,12 @@ RSpec.describe CCMS::UploadDocumentsService do
   end
 
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
-  let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, statement_of_case_id, 'base64encodedpdf', 'my_login') }
+  let(:document_upload_requestor) { double CCMS::DocumentUploadRequestor.new(submission.case_ccms_reference, statement_of_case_attachment.id, 'base64encodedpdf', 'my_login') }
   let(:document_upload_response) { ccms_data_from_file 'document_upload_response.xml' }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
   subject { described_class.new(submission) }
 
   before do
-    PdfConverter.call(PdfFile.find_or_create_by(original_file_id: statement_of_case_id).id)
     allow(CCMS::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)
     allow(document_upload_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
   end

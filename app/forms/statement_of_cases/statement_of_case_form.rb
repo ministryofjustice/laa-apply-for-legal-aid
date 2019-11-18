@@ -1,12 +1,12 @@
 module StatementOfCases
-  class StatementOfCaseForm
+  class StatementOfCaseForm # rubocop:disable Metrics/ClassLength
     include BaseForm
 
     form_for StatementOfCase
 
     attr_accessor :statement, :original_files, :provider_uploader, :upload_button_pressed
 
-    MAX_FILE_SIZE = 50.megabytes
+    MAX_FILE_SIZE = 8.megabytes
 
     ALLOWED_CONTENT_TYPES = %w[
       application/pdf
@@ -14,6 +14,7 @@ module StatementOfCases
       application/vnd.openxmlformats-officedocument.wordprocessingml.document
       application/vnd.oasis.opendocument.text
       text/rtf
+      text/plain
       application/rtf
       image/jpeg
       image/png
@@ -27,11 +28,15 @@ module StatementOfCases
     end
 
     def exclude_from_model
-      [:upload_button_pressed]
+      %i[upload_button_pressed original_files]
     end
 
     validates :statement, presence: true, unless: :file_present_or_draft?
     validate :original_files_valid
+
+    def save
+      super
+    end
 
     private
 
@@ -47,11 +52,12 @@ module StatementOfCases
         original_file_empty(original_file)
         original_file_malware_scan(original_file)
         original_file_disallowed_content_type(original_file)
+        create_attachment(original_file)
       end
     end
 
     def file_present_or_draft?
-      model.original_files.any? || original_files&.any? || draft?
+      model.original_attachments.any? || original_files&.any? || draft?
     end
 
     def original_file_too_big(original_file)
@@ -105,6 +111,28 @@ module StatementOfCases
 
     def original_file_error_for(error_type, options = {})
       I18n.t("activemodel.errors.models.statement_of_case.attributes.original_files.#{error_type}", options)
+    end
+
+    def create_attachment(original_file)
+      model.legal_aid_application.attachments.create document: original_file, attachment_type: 'statement_of_case', attachment_name: sequenced_attachment_name
+    end
+
+    def sequenced_attachment_name
+      if model.original_attachments.any?
+        most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
+        increment_name(most_recent_name)
+      else
+        'statement_of_case'
+      end
+    end
+
+    def increment_name(most_recent_name)
+      if most_recent_name == 'statement_of_case'
+        'statement_of_case_1'
+      else
+        most_recent_name =~ /^statement_of_case_(\d+)$/
+        "statement_of_case_#{Regexp.last_match(1).to_i + 1}"
+      end
     end
   end
 end

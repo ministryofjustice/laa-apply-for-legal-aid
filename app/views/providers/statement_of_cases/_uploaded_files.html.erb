@@ -1,4 +1,4 @@
-<table class="govuk-table <%= 'hidden' if @form.model.original_files.empty? %>">
+<table class="govuk-table <%= 'hidden' if attachments.empty? %>">
   <thead class="govuk-table__head">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
@@ -9,10 +9,10 @@
   </thead>
   <tbody class="govuk-table__body">
 
-  <% original_files.order(:created_at).each do |file| %>
+  <% attachments.order(:created_at).each do |attachment| %>
     <tr class="govuk-table__row">
-      <td class="govuk-table__cell"><%= file.filename %></td>
-      <td class="govuk-table__cell no-wrap"><%= number_to_human_size(file.blob.byte_size) %></td>
+      <td class="govuk-table__cell"><%= attachment.document.filename %></td>
+      <td class="govuk-table__cell no-wrap"><%= number_to_human_size(attachment.document.blob.byte_size) %></td>
       <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
       <td class="govuk-table__cell">
         <%= button_to(
@@ -20,7 +20,7 @@
               providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
               method: :delete,
               class: 'button-as-link',
-              params: { original_file_id: file.id }
+              params: { attachment_id: attachment.id }
             ) %>
       </td>
     </tr>

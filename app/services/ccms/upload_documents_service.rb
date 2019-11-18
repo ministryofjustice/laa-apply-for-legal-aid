@@ -1,8 +1,8 @@
 module CCMS
   class UploadDocumentsService < BaseSubmissionService
     def call # rubocop:disable Metrics/AbcSize
-      submission.submission_document.each do |document|
-        upload_document(document)
+      submission.submission_document.each do |submission_document|
+        upload_document(submission_document)
       end
 
       failed_uploads = submission.submission_document.select { |document| document.status == 'failed' }
@@ -16,30 +16,23 @@ module CCMS
 
     private
 
-    def upload_document(document)
+    def upload_document(submission_document)
       document_upload_requestor = DocumentUploadRequestor.new(submission.case_ccms_reference,
-                                                              document.ccms_document_id,
-                                                              Base64.strict_encode64(pdf_binary(document)),
+                                                              submission_document.ccms_document_id,
+                                                              Base64.strict_encode64(pdf_binary(submission_document)),
                                                               submission.legal_aid_application.provider.username)
       tx_id = document_upload_requestor.transaction_request_id
       response = document_upload_requestor.call
-      update_document_status(document, tx_id, response)
-      document.save!
+      update_document_status(submission_document, tx_id, response)
+      submission_document.save!
       submission.save!
     rescue CcmsError => e
-      document.status = :failed
+      submission_document.status = :failed
       raise CcmsError, e
     end
 
-    def pdf_binary(document)
-      case document.document_type
-      when 'statement_of_case'
-        PdfFile.find_by(original_file_id: document.document_id).file.download
-      when 'means_report'
-        submission.legal_aid_application.means_report.attachment.download
-      when 'merits_report'
-        submission.legal_aid_application.merits_report.attachment.download
-      end
+    def pdf_binary(submission_document)
+      Attachment.find(submission_document.attachment_id).document.download
     end
 
     def update_document_status(document, tx_id, response)

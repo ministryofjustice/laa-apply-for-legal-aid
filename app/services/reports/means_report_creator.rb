@@ -11,7 +11,12 @@ module Reports
     end
 
     def call
-      legal_aid_application.means_report.attach(
+      return if legal_aid_application.means_report
+
+      attachment = legal_aid_application.attachments.create!(attachment_type: 'means_report',
+                                                             attachment_name: 'means_report.pdf')
+
+      attachment.document.attach(
         io: StringIO.new(pdf_report),
         filename: 'means_report.pdf',
         content_type: 'application/pdf'

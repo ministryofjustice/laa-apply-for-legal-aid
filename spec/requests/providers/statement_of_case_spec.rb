@@ -68,7 +68,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
     it 'updates the record' do
       subject
       expect(statement_of_case.reload.statement).to eq(entered_text)
-      expect(statement_of_case.original_files.first).to be_present
+      expect(statement_of_case.original_attachments.first).to be_present
     end
 
     it 'redirects to the next page' do
@@ -76,24 +76,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
       expect(response).to redirect_to providers_legal_aid_application_success_likely_index_path(legal_aid_application)
     end
 
-    context '2 files are uploaded' do
-      before do
-        legal_aid_application.build_statement_of_case.save!
-        filepath = "#{Rails.root}/spec/fixtures/files/documents/hello_world.pdf"
-        statement_of_case.original_files.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
-        PdfConverterWorker.clear
-      end
-
-      it 'converts both files to pdf' do
-        expect { subject && PdfConverterWorker.drain }.to change { PdfFile.count }.by(2)
-
-        statement_of_case.original_files.each do |original_file|
-          pdf_file = PdfFile.find_by(original_file_id: original_file.id).file
-          expect(pdf_file.filename.base).to eq(original_file.filename.base), 'Should have the same base name'
-        end
-      end
-    end
-
+    # When a file to upload is selected from the dialog box
     context 'uploading file with ajax request' do
       let(:xhr) { true }
       let(:params_statement_of_case) do
@@ -105,7 +88,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
       it 'updates the record' do
         subject
-        expect(statement_of_case.original_files.first).to be_present
+        expect(statement_of_case.original_attachments.first).to be_present
       end
 
       it 'returns HTML of files table in a JSON object' do
@@ -155,7 +138,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
           it 'updates the statement text' do
             subject
             expect(statement_of_case.reload.statement).to eq(entered_text)
-            expect(statement_of_case.original_files.first).not_to be_present
+            expect(statement_of_case.original_attachments.first).not_to be_present
           end
         end
 
@@ -165,7 +148,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
           it 'updates the file' do
             subject
             expect(statement_of_case.reload.statement).to eq('')
-            expect(statement_of_case.original_files.first).to be_present
+            expect(statement_of_case.original_attachments.first).to be_present
           end
         end
 
@@ -226,7 +209,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
 
       context 'model already has files attached' do
-        before { create :statement_of_case, :with_empty_text, :with_attached_files, legal_aid_application: legal_aid_application }
+        before { create :statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application: legal_aid_application }
 
         context 'text is empty' do
           let(:entered_text) { '' }
@@ -241,7 +224,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
             it 'does not alter the record' do
               subject
               expect(statement_of_case.reload.statement).to eq('')
-              expect(statement_of_case.original_files.count).to eq 1
+              expect(statement_of_case.original_attachments.count).to eq 1
             end
           end
 
@@ -249,7 +232,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
             it 'attaches the file' do
               subject
               expect(statement_of_case.reload.statement).to eq('')
-              expect(statement_of_case.original_files.count).to eq 2
+              expect(statement_of_case.original_attachments.count).to eq 3
             end
           end
         end
@@ -259,7 +242,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
           it 'updates the text and attaches  the additional file' do
             subject
             expect(statement_of_case.reload.statement).to eq entered_text
-            expect(statement_of_case.original_files.count).to eq 2
+            expect(statement_of_case.original_attachments.count).to eq 3
           end
         end
       end
@@ -271,7 +254,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
       it 'updates the record' do
         subject
         expect(statement_of_case.reload.statement).to eq(entered_text)
-        expect(statement_of_case.original_files.first).to be_present
+        expect(statement_of_case.original_attachments.first).to be_present
       end
 
       it 'redirects to provider draft endpoint' do
@@ -311,10 +294,10 @@ RSpec.describe 'provider statement of case requests', type: :request do
   end
 
   describe 'DELETE /providers/applications/:legal_aid_application_id/statement_of_case' do
-    let(:statement_of_case) { create :statement_of_case, :with_attached_files }
+    let(:statement_of_case) { create :statement_of_case, :with_original_file_attached }
     let(:legal_aid_application) { statement_of_case.legal_aid_application }
-    let(:original_file) { statement_of_case.original_files.first }
-    let(:params) { { original_file_id: original_file.id } }
+    let(:original_file) { statement_of_case.original_attachments.first }
+    let(:params) { { attachment_id: statement_of_case.original_attachments.first.id } }
     let(:xhr) { false }
     subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params, xhr: xhr }
 
@@ -323,34 +306,19 @@ RSpec.describe 'provider statement of case requests', type: :request do
     end
 
     shared_examples_for 'deleting a file' do
-      it 'deletes the file' do
-        expect { subject }.to change { ActiveStorage::Attachment.count }.by(-1)
-        expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(false)
-      end
-
-      context 'when file not found' do
-        let(:params) { { original_file_id: :unknown } }
-
-        it 'leaves the file in place' do
-          expect { subject }.not_to change { ActiveStorage::Attachment.count }
-          expect(ActiveStorage::Attachment.exists?(original_file.id)).to be(true)
+      context 'when only original file exists' do
+        it 'deletes the file' do
+          attachment_id = original_file.id
+          expect { subject }.to change { Attachment.count }.by(-1)
+          expect(Attachment.exists?(attachment_id)).to be(false)
         end
       end
 
       context 'when a PDF exists' do
-        let(:pdf_file) { PdfFile.find_or_create_by(original_file_id: original_file.id) }
-        before { PdfConverter.call(pdf_file.id) }
+        let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached }
 
-        it 'deletes the PdfFile' do
-          expect { subject }.to change { PdfFile.count }.by(-1)
-        end
-
-        it 'deletes original files attachment' do
-          expect { subject }.to change { ActiveStorage::Attachment.where(name: 'original_files').count }.by(-1)
-        end
-
-        it 'deletes the PdfFile file attachment' do
-          expect { subject }.to change { ActiveStorage::Attachment.where(name: 'file').count }.by(-1)
+        it 'deletes both attachments' do
+          expect { subject }.to change { Attachment.count }.by(-2)
         end
       end
     end
@@ -361,7 +329,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
     end
 
     context 'when file not found' do
-      let(:params) { { original_file_id: :unknown } }
+      let(:params) { { attachment_id: :unknown } }
 
       it 'redirects to show' do
         subject

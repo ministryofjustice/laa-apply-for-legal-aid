@@ -303,13 +303,13 @@ FactoryBot.define do
     trait :with_means_report do
       with_cfe_result
       after :create do |application|
-        Reports::MeansReportCreator.call(application)
+        create :attachment, :means_report, legal_aid_application: application
       end
     end
 
     trait :with_merits_report do
       after :create do |application|
-        Reports::MeritsReportCreator.call(application)
+        create :attachment, :merits_report, legal_aid_application: application
       end
     end
 

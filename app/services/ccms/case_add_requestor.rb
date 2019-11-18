@@ -243,18 +243,22 @@ module CCMS
       end
     end
 
+    # :nocov:
     def generate_wage_slips_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'CLI_NON_HM_WAGE_SLIP')
       wage_slips.each { |slip| generate_wage_slip_instance(xml, slip) }
     end
+    # :nocov:
 
+    # :nocov:
     def generate_wage_slip_instance(xml, slip)
       xml.__send__('ns0:Instances') do
         xml.__send__('ns0:InstanceLabel', "#{@submission.case_ccms_reference}#{slip.description}")
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :wages, wage_slip: slip) }
       end
     end
+    # :nocov:
 
     def generate_means_proceeding_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
@@ -294,6 +298,7 @@ module CCMS
       end
     end
 
+    # :nocov:
     def generate_employment_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'EMPLOYMENT_CLIENT')
@@ -302,6 +307,7 @@ module CCMS
         xml.__send__('ns0:Attributes') { generate_attributes_for(xml, :employment) }
       end
     end
+    # :nocov:
 
     def generate_merits_assessment(xml)
       xml.__send__('ns2:AssesmentResults') do
@@ -335,11 +341,13 @@ module CCMS
       end
     end
 
+    # :nocov:
     def generate_merits_proceeding_entity(xml, sequence_no)
       xml.__send__('ns0:SequenceNumber', sequence_no)
       xml.__send__('ns0:EntityName', 'PROCEEDING')
       application_proceeding_types.reverse_each { |apt| generate_merits_proceeding_instance(xml, apt) }
     end
+    # :nocov:
 
     def generate_merits_proceeding_instance(xml, application_proceeding_type)
       xml.__send__('ns0:Instances') do
