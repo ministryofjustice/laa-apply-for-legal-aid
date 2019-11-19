@@ -3416,6 +3416,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   PROVIDER_CASE_REFERENCE:
+    :generate_block?: false
     :value: false
     :br100_meaning: Provider Case Reference
     :response_type: boolean
