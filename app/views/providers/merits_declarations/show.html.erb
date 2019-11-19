@@ -5,7 +5,11 @@
   <% params = { applicant_name: @legal_aid_application.applicant.full_name } %>
   <%= list_from_translation_path '.merits_declarations.show', params: params %>
 
-  <div class="govuk-!-padding-bottom-4"></div>
+  <div class="govuk-inset-text">
+    <%= t('.sign_app_text') %>
+  </div>
+
+  <div class="govuk-!-padding-bottom-2"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_merits_declaration_path,

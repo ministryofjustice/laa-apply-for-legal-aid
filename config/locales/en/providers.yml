@@ -304,8 +304,9 @@ en:
         list: |
           you've been instructed by %{applicant_name} to represent them
           you've gone through the application with your client
-          you've explained the 'statutory charge' to your client
+          your client knows they may have to repay legal costs if they keep or gain property or money at the end of their case (the 'statutory charge')
           the information you've provided is complete and correct
+        sign_app_text: Once you've submitted it, you'll need to print the completed application and get your client to sign it.
     merits_reports:
       show:
         heading: Merits report
