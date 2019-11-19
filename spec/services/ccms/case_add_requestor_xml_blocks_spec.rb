@@ -113,7 +113,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'CAP_CONT and similar attributes' do
-        let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT] }
+        let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT GB_INFER_C_40WP2_100A GB_INFER_C_46WP3_9] }
         context 'eligble' do
           let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
           it 'returns zero' do

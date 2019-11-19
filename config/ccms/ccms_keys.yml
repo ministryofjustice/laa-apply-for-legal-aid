@@ -2446,6 +2446,16 @@ global_means:
     :br100_meaning: The email address of the provider responsible for the application
     :response_type: text
     :user_defined: true
+  GB_INFER_C_40WP2_100A:
+    :value: "#means_assessment_capital_contribution"
+    :br100_meaning: 'the LAR capital contribution for EBS'
+    :response_type: currency
+    :user_defined: false
+  GB_INFER_C_46WP3_9:
+    :value: "#means_assessment_capital_contribution"
+    :br100_meaning: 'the caseworker report capital contribution provisional value'
+    :response_type: currency
+    :user_defined: false
 global_merits:
   APP_INCLUDES_IMMIGRATION_PROCS:
     :generate_block?: false
