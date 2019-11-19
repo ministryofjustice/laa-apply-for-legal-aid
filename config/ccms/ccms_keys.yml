@@ -415,7 +415,7 @@ global_means:
     :response_type: boolean
     :user_defined: true
   LAR_INPUT_T_1WP2_8A:
-    :value: Apply Service Application. See uploaded means report in CCMS
+    :value: .
     :br100_meaning: 'Foreign Assets: Exchange rate & currency details'
     :response_type: text
     :user_defined: true
@@ -4128,7 +4128,7 @@ global_merits:
     :user_defined: false
 other_party:
   OTHER_PARTY_NAME:
-    :value: APPLY service application
+    :value: .
     :br100_meaning: The name of the other party
     :response_type: text
     :user_defined: true
@@ -4290,7 +4290,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME:
-    :value: APPLY service application
+    :value: .
     :br100_meaning: Other Party Name
     :response_type: text
     :user_defined: true
@@ -4300,7 +4300,7 @@ opponent:
     :response_type: boolean
     :user_defined: false
   OTHER_PARTY_NAME_MERITS:
-    :value: APPLY service application
+    :value: .
     :br100_meaning: 'OthPart: Other Party Name'
     :response_type: text
     :user_defined: false

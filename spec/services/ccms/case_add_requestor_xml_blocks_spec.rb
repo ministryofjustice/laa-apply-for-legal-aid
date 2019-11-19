@@ -1297,11 +1297,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(block).to have_text_response 'N/A'
         end
 
-        it 'LAR_INPUT_T_1WP2_8A should be hard coded correctly' do
-          block = XmlExtractor.call(xml, :global_means, 'LAR_INPUT_T_1WP2_8A')
-          expect(block).to have_text_response 'Apply Service Application. See uploaded means report in CCMS'
-        end
-
         it 'MERITS_ROUTING should be hard coded to SFM' do
           block = XmlExtractor.call(xml, :global_merits, 'MERITS_ROUTING')
           expect(block).to have_text_response 'SFM'
@@ -1319,7 +1314,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             [:global_merits, 'REASON_APPLYING_FHH_LR'],
             [:global_merits, 'REASON_NO_ATTEMPT_TO_SETTLE'],
             [:global_merits, 'REASON_SEPARATE_REP_REQ'],
-            [:global_merits, 'MAIN_PURPOSE_OF_APPLICATION']
+            [:global_merits, 'MAIN_PURPOSE_OF_APPLICATION'],
+            [:global_means, 'LAR_INPUT_T_1WP2_8A']
           ]
           attributes.each do |entity_attribute_pair|
             entity, attribute = entity_attribute_pair
@@ -1469,12 +1465,12 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         it 'harcodes OTHER_PARTY_NAME' do
           block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
-          expect(block).to have_text_response 'APPLY service application'
+          expect(block).to have_text_response '.'
         end
 
         it 'harcodes OTHER_PARTY_NAME_MERITS' do
           block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME_MERITS')
-          expect(block).to have_text_response 'APPLY service application'
+          expect(block).to have_text_response '.'
         end
 
         it 'harcodes OTHER_PARTY_ORG' do
@@ -1516,7 +1512,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         it 'harcodes OTHER_PARTY_NAME' do
           block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_NAME')
-          expect(block).to have_text_response 'APPLY service application'
+          expect(block).to have_text_response '.'
         end
 
         it 'harcodes OTHER_PARTY_TYPE' do
