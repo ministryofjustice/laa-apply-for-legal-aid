@@ -200,7 +200,8 @@ en:
         page-heading: You told us you've used delegated functions
         sub_title: Your case reference number is
         what_happens_next: What happens next
-        application_deadline_date: "You must submit a substantive application by "
+        warning:
+          application_deadline_date: "You must submit a substantive application by "
         back_home: Back to your applications
     details_latest_incidents:
       show:
