@@ -1206,7 +1206,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to have_boolean_response false
+              expect(block).to have_text_response 'false'
             end
           end
         end
@@ -1921,6 +1921,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_merits, 'PROCS_INCLUDE_CHILD'],
         [:global_merits, 'PROPORTIONALITY_QUESTION_APP'],
         [:global_merits, 'PROSCRIBED_ORG_APPEAL_COMM'],
+        [:global_merits, 'PROVIDER_CASE_REFERENCE'],
         [:global_merits, 'PROVIDER_HAS_DP'],
         [:global_merits, 'PUB_AUTH_QUESTION_APPLIES'],
         [:global_merits, 'PUBLIC_LAW_NON_FAMILY'],
@@ -2178,7 +2179,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_merits, 'COPY_SEPARATE_STATEMENT'],
         [:global_merits, 'CLIENT_HAS_RECEIVED_LA_BEFORE'],
         [:global_merits, 'COST_LIMIT_CHANGED'],
-        [:global_merits, 'COST_LIMIT_CHANGED_FLAG'],
         [:global_merits, 'COURT_ATTEND_IN_LAST_12_MONTHS'],
         [:global_merits, 'DECLARATION_IDENTIFIER'],
         [:global_merits, 'ECF_FLAG'],
@@ -2246,7 +2246,6 @@ module CCMS # rubocop:disable Metrics/ModuleLength
         [:global_merits, 'OTHER_PARTIES_MAY_BENEFIT'],
         [:global_merits, 'OTHERS_WHO_MAY_BENEFIT'],
         [:global_merits, 'PROCS_ARE_BEFORE_THE_COURT'],
-        [:global_merits, 'PROVIDER_CASE_REFERENCE'],
         [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
         [:global_merits, 'URGENT_FLAG'],
         [:opponent, 'OTHER_PARTY_PERSON'],

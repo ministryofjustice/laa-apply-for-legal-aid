@@ -1937,7 +1937,7 @@ global_means:
   COST_LIMIT_CHANGED_FLAG:
     :value: false
     :br100_meaning: cost limit changed flag
-    :response_type: boolean
+    :response_type: text
     :user_defined: true
   GB_INPUT_B_15WP2_8A:
     :value: '#applicant_owed_money?'
@@ -3350,7 +3350,7 @@ global_merits:
   COST_LIMIT_CHANGED_FLAG:
     :value: false
     :br100_meaning: cost limit changed flag
-    :response_type: boolean
+    :response_type: text
     :user_defined: true
   MENTAL_HEAL_QUESTION_APPLIES:
     :generate_block?: false
@@ -3416,6 +3416,7 @@ global_merits:
     :response_type: boolean
     :user_defined: false
   PROVIDER_CASE_REFERENCE:
+    :generate_block?: false
     :value: false
     :br100_meaning: Provider Case Reference
     :response_type: boolean
