@@ -73,6 +73,7 @@ en:
           - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
           - We’ll check the details you provided and let you know our decision.
       property_results:
+        property: Property
         value: Value
         sale_cost: '3% sale cost'
         mortgage_deduction: Mortgage deduction
@@ -367,7 +368,6 @@ en:
     property_values:
       hint:
         property_value: You can use property websites to find the estimated value
-      property_value: Enter the value of your client's home
       show:
         h1-heading: How much is your client's home worth?
     providers:
@@ -481,10 +481,10 @@ en:
       show:
         heading: Do you want to make a substantive application now?
         information_on_next_actions: |
-          You've told us you've used delegated functions.
-          You can continue into a full (or 'substantive') application now or start later.
-        no_start_later: No, I'll start later
-        must_submit_by: You must submit a full application by %{deadline}
+          You told us you've used delegated functions.
+          You can make a substantive application now or come back and do it later.
+        no_start_later: No, I'll do it later
+        must_submit_by: You must submit a substantive application by %{deadline}
     success_prospects:
       show:
         h1-heading: What is the chance of a successful outcome?
