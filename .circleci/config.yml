@@ -93,7 +93,7 @@ jobs:
     - run:
         name: Run erblint
         command: bin/rails erblint
-    - *decrypt_secrets
+
     - run:
         name: Run ruby tests
         command: bin/rails spec
