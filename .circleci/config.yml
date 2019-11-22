@@ -50,6 +50,7 @@ jobs:
     <<: *build_container_config
     steps:
     - checkout
+    - *decrypt_secrets
     - *update_packages
     - run: sudo apt-get install -y postgresql-client
     - run: sudo apt-get install -y clamav-daemon
