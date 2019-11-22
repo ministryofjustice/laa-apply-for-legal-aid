@@ -55,6 +55,8 @@ jobs:
     - run: sudo apt-get install -y clamav-daemon
     - run: sudo apt-get install -y libreoffice
     - run: sudo apt-get install -y wkhtmltopdf
+    - run: sudo apt-get install -y git-crypt
+    - *decrypt_secrets
     - restore_cache:
         keys:
           - v1-gems-cache-{{ checksum "Gemfile.lock" }}
