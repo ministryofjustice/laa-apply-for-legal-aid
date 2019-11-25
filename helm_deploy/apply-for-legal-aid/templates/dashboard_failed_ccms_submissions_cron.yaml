@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   # NOTE The cronjob name must not exceed 25 characters so that when appended to the release name
   # it doesn't exceed the limit of 52 characters
-  name: {{ .Release.Name |" trunc 26 }}-failed-ccms-submissions
+  name: {{ .Release.Name | trunc 26 }}-failed-ccms-submissions
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
