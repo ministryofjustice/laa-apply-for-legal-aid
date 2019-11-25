@@ -120,6 +120,9 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
+    - *update_packages
+    - run: sudo apt-get install -y git-crypt
+    - *decrypt_secrets
     - run:
         name: Build docker images
         command: docker build -t app .
