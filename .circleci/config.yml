@@ -127,7 +127,6 @@ jobs:
     - run:
         name: Build docker images
         command: docker build -t app .
-    - *update_packages
     - *setup_aws_login
     - run:
         name: Push docker image to ECR repo
