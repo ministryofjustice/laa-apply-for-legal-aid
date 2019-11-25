@@ -27,6 +27,7 @@ references:
     run:
       name: Setup aws login
       command: |
+        sudo apt-get update
         sudo apt-get install -y python3-pip
         sudo pip3 install awscli
         $(aws ecr get-login --region eu-west-2 --no-include-email)
@@ -195,7 +196,6 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - *update_packages
     - *setup_aws_login
     - run:
         name: Delete old images from ecr repo
