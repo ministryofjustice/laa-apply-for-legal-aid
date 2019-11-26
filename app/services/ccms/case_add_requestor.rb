@@ -134,7 +134,7 @@ module CCMS
       xml.__send__('ns2:ProviderFirmID', provider.firm.ccms_id)
       xml.__send__('ns2:ProviderOfficeID', @legal_aid_application.office.ccms_id)
       xml.__send__('ns2:ContactUserID') do
-        xml.__send__('ns0:UserLoginID', provider.user_login_id)
+        xml.__send__('ns0:UserLoginID', MockContactIdProvider.call(provider))
       end
     end
 
