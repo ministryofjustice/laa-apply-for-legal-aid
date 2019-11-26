@@ -100,21 +100,67 @@ jobs:
     - run:
         name: Run integration tests
         command: SAVE_PAGES=true bin/rails cucumber
-    - run:
-        name: Generate webhint reports
-        command: ./bin/generate_webhint_reports.sh
-    - run:
-        name: gzip webhint reports
-        command: tar -zcvf hint-report.tar.gz hint-report/
-    - store_artifacts:
-        path: ./hint-report.tar.gz
-        destination: webhint-reports
-    - run:
-        name: gzip html pages
-        command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
-    - store_artifacts:
-        path: ./html-pages.tar.gz
-        destination: html-pages
+    - persist_to_workspace:
+        root: tmp
+        # Must be relative path from root
+        paths:
+         - webhint_inputs
+
+  webhint_reports:
+    <<: *build_container_config
+    steps:
+      - checkout
+      - attach_workspace:
+          at: tmp
+      - *update_packages
+      - run: sudo apt-get install -y postgresql-client
+      - run: sudo apt-get install -y git-crypt
+      - *decrypt_secrets
+      - restore_cache:
+          keys:
+            - v1-gems-cache-{{ checksum "Gemfile.lock" }}
+            - v1-gems-cache
+      - run: gem install bundler -v 2.0.2
+      - run: bundle install --path=vendor/bundle --jobs=4 && bundle clean
+      - save_cache:
+          key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Database Setup
+          command: |
+            git checkout origin/master
+            bundle install --path=vendor/bundle --jobs=4
+            bundle exec rake db:create db:schema:load
+            git checkout -
+            bundle install --path=vendor/bundle --jobs=4
+            bundle exec rake db:migrate db:seed
+      - restore_cache:
+          keys:
+            - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+            - v1-yarn-packages-cache
+      - run:
+          name: Install Yarn packages
+          command: yarn --frozen-lockfile
+      - save_cache:
+          key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Generate webhint reports
+          command: ./bin/generate_webhint_reports.sh
+      - run:
+          name: gzip webhint reports
+          command: tar -zcvf hint-report.tar.gz hint-report/
+      - store_artifacts:
+          path: ./hint-report.tar.gz
+          destination: webhint-reports
+      - run:
+          name: gzip html pages
+          command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
+      - store_artifacts:
+          path: ./html-pages.tar.gz
+          destination: html-pages
 
   build_and_push:
     <<: *build_container_config
@@ -224,6 +270,13 @@ workflows:
   test:
     jobs:
     - test
+    - hold_webhint:
+        type: approval
+        requires:
+        - test
+    - webhint_reports:
+        requires:
+          - hold_webhint
   build_and_deploy:
     jobs:
     - build_and_push
