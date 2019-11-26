@@ -15,10 +15,10 @@ RSpec.describe ProviderDetailsRetriever do
   describe '.call' do
     shared_examples_for 'get response from API' do
       it 'returns the expected data structure' do
-        expected_keys = %i[providerOffices contactId contactName]
+        expected_keys = %i[providerFirmId contactUserId contacts providerOffices]
         expect(subject.keys).to match_array(expected_keys)
 
-        expected_office_keys = %i[providerfirmId officeId officeName smsVendorNum smsVendorSite]
+        expected_office_keys = %i[id name]
         expect(subject[:providerOffices][0].keys).to match_array(expected_office_keys)
       end
     end

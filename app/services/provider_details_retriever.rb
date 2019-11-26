@@ -14,6 +14,7 @@ class ProviderDetailsRetriever
   end
 
   def call
+    puts "**** Using #{self.class} to retrieve Provider Details" unless Rails.env.test?
     provider_details
   end
 
