@@ -1,5 +1,4 @@
 class MockContactIdProvider
-
   # If providers username is in the list of usernames, then use the contact id from there,
   # otherwise use it from the Provider record
   def self.call(provider)
@@ -13,5 +12,4 @@ class MockContactIdProvider
   def provider_beta_users
     @provider_beta_users ||= YAML.load_file
   end
-
 end
