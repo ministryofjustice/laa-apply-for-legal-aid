@@ -3,13 +3,13 @@ class MockContactIdProvider
   # otherwise use it from the Provider record
   def self.call(provider)
     if private_beta_users.key?(provider.username)
-      private_beta_users[provider.username]
+      private_beta_users[provider.username].to_s
     else
       provider.user_login_id
     end
   end
 
-  def provider_beta_users
-    @provider_beta_users ||= YAML.load_file
+  def self.private_beta_users
+    @private_beta_users ||= YAML.load_file(Rails.root.join('config/encrypted_private_beta_users.yml'))
   end
 end
