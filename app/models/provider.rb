@@ -19,4 +19,14 @@ class Provider < ApplicationRecord
   def update_details_directly
     ProviderDetailsCreator.call(self)
   end
+
+  def whitelisted_user?
+    username.in?(whitelisted_users)
+  end
+
+  private
+
+  def whitelisted_users
+    Rails.configuration.x.application.whitelisted_users
+  end
 end

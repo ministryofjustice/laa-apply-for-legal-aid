@@ -24,6 +24,17 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
+      context 'provider is not a whitelisted user' do
+        before do
+          allow(HostEnv).to receive(:production?).and_return(true)
+        end
+
+        it 'redirects to error page' do
+          subject
+          expect(response).to redirect_to(error_path(:access_denied))
+        end
+      end
+
       it "includes a link to the legal aid application's default start path" do
         subject
         expect(response.body).to include(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
