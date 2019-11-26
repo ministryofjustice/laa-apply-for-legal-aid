@@ -21,16 +21,16 @@ spec:
       template:
         spec:
           containers:
-            - name: failed-ccms-submissions
-              image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-              imagePullPolicy: IfNotPresent
-              command: ['rake', 'job:dashboard:update[FailedCCMSSubmissions]']
+          - name: failed-ccms-submissions
+            image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+            imagePullPolicy: IfNotPresent
+            command: ['rake', 'job:dashboard:update[FailedCCMSSubmissions]']
 {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
-              resources:
-                limits:
-                  cpu: 200m
-                  memory: 256Mi
-                requests:
-                  cpu: 100m
-                  memory: 128Mi
-              restartPolicy: Never
+            resources:
+              limits:
+                cpu: 200m
+                memory: 256Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
+            restartPolicy: Never
