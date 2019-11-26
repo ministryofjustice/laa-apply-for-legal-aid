@@ -1,12 +1,6 @@
 version: 2.0
 
 references:
-  cloud_platform_container_config: &cloud_platform_container_config
-    docker:
-    - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-      environment:
-        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-
   build_container_config: &build_container_config
     docker:
     - image: circleci/ruby:2.6.3-node-browsers
@@ -16,12 +10,41 @@ references:
     - image: circleci/redis:5.0
     - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
 
+  cloud_platform_container_config: &cloud_platform_container_config
+    docker:
+    - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      environment:
+        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+
   decrypt_secrets: &decrypt_secrets
     run:
       name: Decrypt secrets file
       command: |
         echo "${GIT_CRYPT_KEY}" | base64 -d > git-crypt.key
         git-crypt unlock git-crypt.key
+
+  install_gems: &install_gems
+    run:
+      name: Install ruby gems
+      command: |
+        gem install bundler -v 2.0.2
+        bundle install --path=vendor/bundle --jobs=4 && bundle clean
+
+  install_packages_for_testing: &install_packages_for_testing
+    run:
+      name: Install System packages needed for testing
+      command: |
+        sudo apt-get update
+        sudo apt-get install -y postgresql-client
+        sudo apt-get install -y clamav-daemon
+        sudo apt-get install -y libreoffice
+        sudo apt-get install -y wkhtmltopdf
+        sudo apt-get install -y git-crypt
+
+  install_js_packages: &install_js_packages
+    run:
+      name: Install Yarn packages
+      command: yarn --frozen-lockfile
 
   setup_aws_login: &setup_aws_login
     run:
@@ -32,11 +55,6 @@ references:
         sudo pip3 install awscli
         $(aws ecr get-login --region eu-west-2 --no-include-email)
 
-  update_packages: &update_packages
-    run:
-      name: Update packages
-      command: sudo apt-get update
-
   setup_uat_kubectl: &setup_uat_kubectl
     run:
       name: Kubectl deployment setup UAT
@@ -45,48 +63,54 @@ references:
         setup-kube-auth
         kubectl config use-context uat
 
-jobs:
-  test:
-    <<: *build_container_config
-    steps:
-    - checkout
-    - *update_packages
-    - run: sudo apt-get install -y postgresql-client
-    - run: sudo apt-get install -y clamav-daemon
-    - run: sudo apt-get install -y libreoffice
-    - run: sudo apt-get install -y wkhtmltopdf
-    - run: sudo apt-get install -y git-crypt
-    - *decrypt_secrets
-    - restore_cache:
-        keys:
-          - v1-gems-cache-{{ checksum "Gemfile.lock" }}
-          - v1-gems-cache
-    - run: gem install bundler -v 2.0.2
-    - run: bundle install --path=vendor/bundle --jobs=4 && bundle clean
-    - save_cache:
-        key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
-    - run:
-        name: Database Setup
-        command: |
-          git checkout origin/master
-          bundle install --path=vendor/bundle --jobs=4
-          bundle exec rake db:create db:schema:load
-          git checkout -
-          bundle install --path=vendor/bundle --jobs=4
-          bundle exec rake db:migrate db:seed
-    - restore_cache:
+  update_packages: &update_packages
+    run:
+      name: Update packages
+      command: sudo apt-get update
+
+  restore_gems_cache: &restore_gems_cache
+    restore_cache:
+      keys:
+        - v1-gems-cache-{{ checksum "Gemfile.lock" }}
+        - v1-gems-cache
+
+  restore_js_packages_cache: &restore_js_packages_cache
+    restore_cache:
+      keys:
+        - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+        - v1-yarn-packages-cache
+
+  save_gems_cache: &save_gems_cache
+    restore_cache:
         keys:
           - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
           - v1-yarn-packages-cache
-    - run:
-        name: Install Yarn packages
-        command: yarn --frozen-lockfile
-    - save_cache:
-        key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-        paths:
-          - node_modules
+
+  save_js_packages_cache: &save_js_packages_cache
+    save_cache:
+      key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+      paths:
+        - node_modules
+
+  setup_database: &setup_database
+    run:
+      name: Database Setup
+      command: |
+        git checkout origin/master
+        bundle install --path=vendor/bundle --jobs=4
+        bundle exec rake db:create db:schema:load
+        git checkout -
+        bundle install --path=vendor/bundle --jobs=4
+        bundle exec rake db:migrate db:seed
+
+jobs:
+  lint_checks:
+    <<: *build_container_config
+    steps:
+    - checkout
+    - *restore_gems_cache
+    - *install_gems
+    - *save_gems_cache
     - run:
         name: Run Rubocop
         command:  bin/rails rubocop
@@ -94,15 +118,38 @@ jobs:
         name: Run erblint
         command: bin/rails erblint
 
+  unit_tests:
+    <<: *build_container_config
+    steps:
+    - checkout
+    - *install_packages_for_testing
+    - *decrypt_secrets
+    - *restore_gems_cache
+    - *install_gems
+    - *save_gems_cache
+    - *setup_database
     - run:
-        name: Run ruby tests
+        name: Run ruby tegsts
         command: bin/rails spec
+
+  integration_tests:
+    <<: *build_container_config
+    steps:
+    - checkout
+    - *install_packages_for_testing
+    - *decrypt_secrets
+    - *restore_gems_cache
+    - *install_gems
+    - *save_gems_cache
+    - *setup_database
+    - *restore_js_packages_cache
+    - *install_js_packages
+    - *save_js_packages_cache
     - run:
         name: Run integration tests
         command: SAVE_PAGES=true bin/rails cucumber
     - persist_to_workspace:
         root: tmp
-        # Must be relative path from root
         paths:
          - webhint_inputs
 
@@ -116,36 +163,13 @@ jobs:
       - run: sudo apt-get install -y postgresql-client
       - run: sudo apt-get install -y git-crypt
       - *decrypt_secrets
-      - restore_cache:
-          keys:
-            - v1-gems-cache-{{ checksum "Gemfile.lock" }}
-            - v1-gems-cache
-      - run: gem install bundler -v 2.0.2
-      - run: bundle install --path=vendor/bundle --jobs=4 && bundle clean
-      - save_cache:
-          key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - run:
-          name: Database Setup
-          command: |
-            git checkout origin/master
-            bundle install --path=vendor/bundle --jobs=4
-            bundle exec rake db:create db:schema:load
-            git checkout -
-            bundle install --path=vendor/bundle --jobs=4
-            bundle exec rake db:migrate db:seed
-      - restore_cache:
-          keys:
-            - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-            - v1-yarn-packages-cache
-      - run:
-          name: Install Yarn packages
-          command: yarn --frozen-lockfile
-      - save_cache:
-          key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
+      - *restore_gems_cache
+      - *install_gems
+      - *save_gems_cache
+      - *setup_database
+      - *restore_js_packages_cache
+      - *install_js_packages
+      - *save_js_packages_cache
       - run:
           name: Generate webhint reports
           command: ./bin/generate_webhint_reports.sh
@@ -269,11 +293,13 @@ workflows:
   version: 2
   test:
     jobs:
-    - test
+    - lint_checks
+    - unit_tests
+    - integration_tests
     - hold_webhint:
         type: approval
         requires:
-        - test
+        - integration_tests
     - webhint_reports:
         requires:
           - hold_webhint
