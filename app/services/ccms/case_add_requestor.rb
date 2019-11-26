@@ -99,7 +99,7 @@ module CCMS
         xml.__send__('ns2:SharedInd', false)
         xml.__send__('ns2:OtherPartyDetail') do
           xml.__send__('ns2:Organization') do
-            xml.__send__('ns2:OrganizationName', 'APPLY service application')
+            xml.__send__('ns2:OrganizationName', '.')
             xml.__send__('ns2:OrganizationType', 'GOVT')
             xml.__send__('ns2:RelationToClient', 'NONE')
             xml.__send__('ns2:RelationToCase', 'OPP')
