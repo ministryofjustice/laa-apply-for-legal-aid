@@ -354,3 +354,7 @@ workflows:
     jobs:
     - clean_up_ecr
     - deploy_staging
+    - integration_tests
+    - webhint_reports:
+        requires:
+          - integration_tests
