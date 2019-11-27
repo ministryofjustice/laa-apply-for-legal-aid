@@ -107,7 +107,7 @@ GEM
       msgpack (~> 1.0)
     browser (2.7.1)
     builder (3.2.3)
-    business (1.17.0)
+    business (1.17.1)
     byebug (11.0.1)
     capybara (3.29.0)
       addressable
