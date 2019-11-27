@@ -10,8 +10,13 @@ RSpec.describe Reports::MeritsReportCreator do
       expect(Providers::MeritsReportsController.renderer).to receive(:render).and_call_original
       subject
       legal_aid_application.reload
-      expect(legal_aid_application.merits_report.content_type).to eq('application/pdf')
-      expect(legal_aid_application.merits_report.filename).to eq('merits_report.pdf')
+      expect(legal_aid_application.merits_report.document.content_type).to eq('application/pdf')
+      expect(legal_aid_application.merits_report.document.filename).to eq('merits_report.pdf')
+    end
+
+    it 'does not attach a report if one already exists' do
+      create :attachment, :merits_report, legal_aid_application: legal_aid_application
+      expect { subject }.not_to change { Attachment.count }
     end
   end
 end

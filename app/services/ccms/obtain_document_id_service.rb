@@ -12,47 +12,24 @@ module CCMS
 
     private
 
-    def populate_documents
-      add_statements_of_case
-      add_means_report
-      add_merits_report
+    def pdf_attachments
+      @pdf_attachments ||= legal_aid_application.attachments.reject { |a| a.attachment_type == 'statement_of_case' }
     end
 
-    def add_statements_of_case
-      files = StatementOfCase.find_by(legal_aid_application_id: submission.legal_aid_application_id)&.original_files
-      files&.each do |document|
+    def legal_aid_application
+      @legal_aid_application ||= submission.legal_aid_application
+    end
+
+    def populate_documents
+      pdf_attachments.each do |attachment|
         SubmissionDocument.create!(
           submission: submission,
-          document_id: document.id,
+          attachment_id: attachment.id,
           status: :new,
-          document_type: :statement_of_case,
+          document_type: attachment.attachment_type,
           ccms_document_id: nil
         )
       end
-    end
-
-    def add_means_report
-      return unless submission.legal_aid_application.means_report.attachment
-
-      SubmissionDocument.create!(
-        submission: submission,
-        document_id: submission.legal_aid_application.means_report.id,
-        status: :new,
-        document_type: :means_report,
-        ccms_document_id: nil
-      )
-    end
-
-    def add_merits_report
-      return unless submission.legal_aid_application.merits_report.attachment
-
-      SubmissionDocument.create!(
-        submission: submission,
-        document_id: submission.legal_aid_application.merits_report.id,
-        status: :new,
-        document_type: :merits_report,
-        ccms_document_id: nil
-      )
     end
 
     def request_document_ids

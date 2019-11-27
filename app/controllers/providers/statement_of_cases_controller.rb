@@ -5,9 +5,9 @@ module Providers
     end
 
     def update
-      if upload_button_pressed?
+      if upload_button_pressed? # javascript is unavailable
         perform_upload
-      elsif request.xhr?
+      elsif request.xhr? # a file selected for upload from the dialog box
         perform_xhr_request
       elsif save_continue_or_draft(form)
         convert_new_files_to_pdf
@@ -17,8 +17,7 @@ module Providers
     end
 
     def destroy
-      delete_original_file
-      delete_pdf_file
+      delete_original_and_pdf_files
 
       if request.xhr?
         head :ok
@@ -48,7 +47,7 @@ module Providers
     def uploaded_files_table
       render_to_string(
         partial: 'providers/statement_of_cases/uploaded_files',
-        locals: { original_files: form.model.original_files }
+        locals: { attachments: form.model.original_attachments }
       )
     end
 
@@ -62,8 +61,8 @@ module Providers
     end
 
     def convert_new_files_to_pdf
-      statement_of_case.original_files.each do |original_file|
-        PdfFile.convert_original_file(original_file.id)
+      statement_of_case.original_attachments.each do |attachment|
+        PdfConverterWorker.perform_async(attachment.id)
       end
     end
 
@@ -85,21 +84,21 @@ module Providers
       @statement_of_case ||= legal_aid_application.statement_of_case || legal_aid_application.build_statement_of_case
     end
 
-    def delete_original_file
-      file = statement_of_case.original_files.find_by(id: original_file_id)
-      if file
-        file.purge
-      else
-        Rails.logger.error "Unable to remove original file. Not found: #{original_file_id}"
-      end
+    def delete_original_and_pdf_files
+      original_attachment = Attachment.find(attachment_id)
+      delete_attachment(Attachment.find(original_attachment.pdf_attachment_id)) if original_attachment.pdf_attachment_id.present?
+      delete_attachment(original_attachment)
+    rescue StandardError
+      nil
     end
 
-    def delete_pdf_file
-      PdfFile.where(original_file_id: original_file_id).destroy_all
+    def delete_attachment(attachment)
+      attachment.document.purge_later
+      attachment.destroy
     end
 
-    def original_file_id
-      params[:original_file_id]
+    def attachment_id
+      params[:attachment_id]
     end
   end
 end

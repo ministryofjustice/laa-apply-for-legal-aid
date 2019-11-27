@@ -10,8 +10,13 @@ RSpec.describe Reports::MeansReportCreator do
       expect(Providers::MeansReportsController.renderer).to receive(:render).and_call_original
       subject
       legal_aid_application.reload
-      expect(legal_aid_application.means_report.content_type).to eq('application/pdf')
-      expect(legal_aid_application.means_report.filename).to eq('means_report.pdf')
+      expect(legal_aid_application.means_report.document.content_type).to eq('application/pdf')
+      expect(legal_aid_application.means_report.document.filename).to eq('means_report.pdf')
+    end
+
+    it 'does not attach a report if one already exists' do
+      create :attachment, :means_report, legal_aid_application: legal_aid_application
+      expect { subject }.not_to change { Attachment.count }
     end
   end
 end

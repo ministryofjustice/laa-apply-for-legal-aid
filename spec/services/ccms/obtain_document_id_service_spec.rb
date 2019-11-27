@@ -43,11 +43,11 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'the application has documents to upload' do
-        let(:statement_of_case) { create :statement_of_case, :with_attached_files, legal_aid_application: legal_aid_application }
+        let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
 
         before do
-          Reports::MeansReportCreator.call(legal_aid_application)
-          Reports::MeritsReportCreator.call(legal_aid_application)
+          create :attachment, :merits_report, legal_aid_application: legal_aid_application
+          create :attachment, :means_report, legal_aid_application: legal_aid_application
         end
 
         it 'populates the documents array with statement_of_case, means_report and merits_report' do
@@ -101,7 +101,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
     context 'operation unsuccessful' do
       context 'when populating documents' do
-        let!(:statement_of_case) { create :statement_of_case, :with_attached_files, legal_aid_application: legal_aid_application }
+        let!(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
         before do
           allow_any_instance_of(DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
           expect_any_instance_of(DocumentIdRequestor).to receive(:call).and_raise(CcmsError, 'failure populating document hash')
@@ -135,7 +135,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect_any_instance_of(DocumentIdRequestor).to receive(:call).and_raise(CcmsError, 'failure populating document hash')
         end
 
-        let(:statement_of_case) { create :statement_of_case, :with_attached_files, legal_aid_application: legal_aid_application }
+        let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
 
         it 'changes the submission state to failed' do
           expect { subject.call }.to change { submission.aasm_state }.to 'failed'
@@ -154,8 +154,8 @@ module CCMS # rubocop:disable Metrics/ModuleLength
           expect(history.details).to match(/CCMS::CcmsError/)
           expect(history.details).to match(/failure populating document hash/)
           expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:DocumentUploadRQ'
-            # matching: ['<ns2:CaseReferenceNumber>8408796346</ns2:CaseReferenceNumber>']
+            command: 'ns2:DocumentUploadRQ',
+            matching: ['<ns2:CaseReferenceNumber>\d{10}</ns2:CaseReferenceNumber>']
           )
           expect(history.response).to be_nil
         end
