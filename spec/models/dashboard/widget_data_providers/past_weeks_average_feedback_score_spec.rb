@@ -24,7 +24,7 @@ module Dashboard
         end
 
         def expected_data
-          [{ 'number' => (8.0 / 4).round(1) }]
+          [{ 'number' => (8.0 * 25 / 4).round(1) }]
         end
 
         def create_feedbacks

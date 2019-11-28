@@ -22,15 +22,19 @@ module Dashboard
           expect(described_class.data).to eq expected_data
         end
 
-        def expected_data # rubocop:disable Metrics/MethodLength
+        def expected_data # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           [
-            {
-              'date' => 7.days.ago.strftime('%Y-%m-%d'),
-              'number' => 2
-            },
             {
               'date' => 6.days.ago.strftime('%Y-%m-%d'),
               'number' => 3
+            },
+            {
+              'date' => 5.days.ago.strftime('%Y-%m-%d'),
+              'number' => 0
+            },
+            {
+              'date' => 4.days.ago.strftime('%Y-%m-%d'),
+              'number' => 0
             },
             {
               'date' => 3.days.ago.strftime('%Y-%m-%d'),

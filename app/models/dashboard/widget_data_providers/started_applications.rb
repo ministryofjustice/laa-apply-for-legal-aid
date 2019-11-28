@@ -14,28 +14,24 @@ module Dashboard
       end
 
       def self.data
-        start_time = 7.days.ago
-        result_set = query_database(start_time)
-        dataset_query = []
-        result_set.each { |row| dataset_query << row }
-        dataset_query
+        dates = (6.days.ago.to_date..Date.today).to_a
+        result_set = []
+        dates.each do |date|
+          result_set << { 'date' => format_date(date), 'number' => started_applications(date) }
+        end
+        result_set
       end
 
       def self.handle
         'started_applications'
       end
 
-      def self.query_database(start_time)
-        sql = <<-EOSQL
-          SELECT
-            date(created_at) as date,
-            count(*) as number
-          FROM legal_aid_applications
-          WHERE date(created_at) >= '#{start_time.strftime('%Y-%m-%d')} 00:00:00'
-          GROUP BY date
-          ORDER by date
-        EOSQL
-        LegalAidApplication.connection.execute(sql)
+      def self.format_date(date)
+        date.strftime('%Y-%m-%d')
+      end
+
+      def self.started_applications(date)
+        LegalAidApplication.where('DATE(created_at) = ?', date).count
       end
     end
   end
