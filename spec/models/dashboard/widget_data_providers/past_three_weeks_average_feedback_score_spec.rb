@@ -24,7 +24,7 @@ module Dashboard
         end
 
         def expected_data
-          [{ 'number' => (14.0 / 7).round(1) }]
+          [{ 'number' => (14.0 * 25 / 7).round(1) }]
         end
 
         def create_feedbacks # rubocop:disable Metrics/AbcSize
