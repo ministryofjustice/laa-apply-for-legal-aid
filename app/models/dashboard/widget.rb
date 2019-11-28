@@ -14,9 +14,6 @@ module Dashboard
     end
 
     def data
-      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-      pp @widget_klass.data
-      puts @widget_klass
       @data ||= @widget_klass.data
     end
 
