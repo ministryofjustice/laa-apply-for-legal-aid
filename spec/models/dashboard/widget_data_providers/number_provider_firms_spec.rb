@@ -24,18 +24,31 @@ module Dashboard
           end
         end
 
-        context 'three users over two firms' do
+        context 'five users over three firms' do
+          let(:firm1) { create :firm }
+          let(:firm2) { create :firm }
+          let(:firm3) { create :firm }
+
           before do
-            firm1 = create :firm
-            firm2 = create :firm
-            create :provider, firm: firm1
-            create :provider, firm: firm1
-            create :provider, firm: firm2
+            create :provider, username: 'user1-firm1', firm: firm1
+            create :provider, username: 'user2-firm1', firm: firm1
+            create :provider, username: 'user1-firm2', firm: firm2
+            create :provider, username: 'user2-firm2', firm: firm2
+            create :provider, username: 'user1-firm3', firm: firm3
           end
 
-          let(:expected_data) { [{ 'number' => 2 }] }
-          it 'sends expected data' do
-            expect(described_class.data).to eq expected_data
+          context 'no whitelisted users' do
+            before { Rails.configuration.x.application.whitelisted_users = nil }
+            it 'expects the firm count to include all firms' do
+              expect(described_class.data).to eq [{ 'number' => 3 }]
+            end
+          end
+
+          context 'with whitelisted users' do
+            before { Rails.configuration.x.application.whitelisted_users = %w[user1-firm1 user1-firm2 user2-firm2)] }
+            it 'expects the firm count to only to include those for whitelisted users' do
+              expect(described_class.data).to eq [{ 'number' => 2 }]
+            end
           end
         end
       end
