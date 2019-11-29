@@ -28,7 +28,7 @@ module Dashboard
 
       def self.signup_count(date)
         # if we're using whitelisted users, don't count providers that aren't in the whitelist
-        if Rails.configuration.x.application.whitelisted_users?
+        if Rails.configuration.x.application.whitelisted_users&.any?
           Provider.where('DATE(created_at) = ? AND username IN (?)', date, Rails.configuration.x.application.whitelisted_users).count
         else
           Provider.where('DATE(created_at) = ?', date).count
