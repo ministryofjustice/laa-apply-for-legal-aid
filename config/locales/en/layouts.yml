@@ -5,6 +5,7 @@ en:
       applications: Applications
       benefit_types: Benefit Types
       edit_settings: Settings
+      submitted_applications_report: Submitted Applications
     application:
       footer:
         contact: Contact

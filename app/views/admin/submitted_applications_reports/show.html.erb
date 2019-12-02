@@ -1,0 +1,32 @@
+<%= page_template(
+      page_title: t('.heading_1'),
+      column_width: :full,
+      back_link: :none
+    ) do %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col"><%= t('.applicant_name') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.ccms_ref') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.provider_firm') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.submission_date') %></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% @applications.each do |application| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell case-full-name"><%= application.applicant_full_name || t('generic.undefined') %></td>
+              <td class="govuk-table__cell case-reference-number"><%= application.application_ref %></td>
+              <td class="govuk-table__cell case-reference-number"><%= application.ccms_submission.case_ccms_reference %></td>
+              <td class="govuk-table__cell case-reference-number"><%= application.provider.firm.name %></td>
+              <td class="govuk-table__cell"><%= l(application.ccms_submission.created_at.to_date, format: :long_date) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

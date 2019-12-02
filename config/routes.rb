@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     end
     resource :settings, only: %i[show update]
     resources :benefit_types
+    resource :submitted_applications_report, only: %i[show]
     resources :ccms_connectivity_tests, only: [:show]
   end
 

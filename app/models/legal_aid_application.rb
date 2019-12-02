@@ -8,6 +8,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
   SECURE_ID_DAYS_TO_EXPIRE = 7
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
+  CCCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
@@ -60,6 +61,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     queries[1..-1].each { |query| applications = applications.or(query) }
     applications
   end
+
+  scope :submitted_applications, -> { where(state: CCCMS_SUBMITTED_STATES).order(created_at: :desc) }
 
   enum(
     own_home: {
