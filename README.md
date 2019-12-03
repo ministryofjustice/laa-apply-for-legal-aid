@@ -21,9 +21,16 @@ brew bundle
 ```
 
 ## Initial setup
+This requires your gpg key to have been added to git-crypt.  Liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md)
+
+Once the pull request has been merged, re-pull master and run 
 
 ```
-# From the root of the project execute the following command:
+git-crypt unlock
+```
+
+From the root of the project execute the following command:
+```
 bin/setup
 ```
 
