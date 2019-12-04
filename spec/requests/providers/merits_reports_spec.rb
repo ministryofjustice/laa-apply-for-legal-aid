@@ -27,6 +27,19 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
       expect(unescaped_response_body).to include(submission.case_ccms_reference)
     end
 
+    context 'when no CCMS case reference present' do
+      let!(:submission) { create :submission, legal_aid_application: legal_aid_application, case_ccms_reference: nil }
+      let(:case_ccms_reference) { Faker::Number.number(digits: 6).to_s }
+      let(:before_subject) do
+        allow_any_instance_of(CCMS::Submitters::ObtainCaseReferenceService).to receive(:reference_id).and_return(case_ccms_reference)
+        allow_any_instance_of(CCMS::Submitters::ObtainCaseReferenceService).to receive(:response).and_return('dummy response')
+      end
+
+      it 'obtains the case reference remotely' do
+        expect(unescaped_response_body).to include(case_ccms_reference)
+      end
+    end
+
     context 'when not authenticated' do
       let(:login_provider) { nil }
       it_behaves_like 'a provider not authenticated'

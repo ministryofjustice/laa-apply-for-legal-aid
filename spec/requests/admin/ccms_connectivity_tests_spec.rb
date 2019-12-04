@@ -20,8 +20,8 @@ RSpec.describe Admin::CcmsConnectivityTestsController, type: :request do
     subject { get admin_ccms_connectivity_test_path(legal_aid_applications.first.id) }
 
     before do
-      allow(CCMS::ReferenceDataRequestor).to receive(:new).and_return(
-        instance_double(CCMS::ReferenceDataRequestor, call: response_stub)
+      allow(CCMS::Requestors::ReferenceDataRequestor).to receive(:new).and_return(
+        instance_double(CCMS::Requestors::ReferenceDataRequestor, call: response_stub)
       )
     end
 
