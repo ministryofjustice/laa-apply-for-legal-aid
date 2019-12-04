@@ -166,7 +166,7 @@ To allow reset mode within the admin portal, `ENV['ADMIN_ALLOW_RESET']` must ret
 The non-passported user journey is turned off in production. It can be toggled in
 Staging and UAT at `/admin/settings`
 
-To test the non-passported user journey, the 
+To test the non-passported user journey, the
 `ENV['ALLOW_NON_PASSPORTED_ROUTE']` must return "true". This is only available in the
 Staging and UAT environments.
 
@@ -205,6 +205,12 @@ This will then allow you to connect to the database, eg:
 - Change `staging` to `production` in the above commands to access production.
 - Port 5433 is used in the above examples instead of the usual 5432 for postgres, as 5432 will not work if postgres is running locally.
 
+###Backups###
+
+Backups are taking daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
+
+A CronJOB takes hourly snapshots of production between 6am and 9pm. These need to be periodically deleted as a maximum of 100 can be stored.
+
 ## 3rd party integrations
 
 ### True Layer
@@ -229,7 +235,7 @@ Several sets of statistics are exported to Geckoboard for displaying on an appli
 
 ### How to add a new widget to the dashboard
 
-There are three steps to creating a new widget for the Geckoboard dashboard 
+There are three steps to creating a new widget for the Geckoboard dashboard
 
 ### 1. Create a widget data provider
 
@@ -257,4 +263,3 @@ Once the job has been run at least once, you will be able to select the dataset 
 ## Troubleshooting
 
 Refer to the specific [README](./docs/troubleshooting.md)
-

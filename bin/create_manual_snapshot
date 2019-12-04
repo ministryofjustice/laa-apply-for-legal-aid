@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+current_time=$(Date "+%Y%m%d-%H%M")
+
+file_name="apply-manual-snapshot"
+
+new_fileName=$file_name-$current_time
+
+echo "Logging into RDS"
+
+unset AWS_PROFILE
+
+read AWS_ACCESS_KEY_ID name pass user addr endp AWS_SECRET_ACCESS_KEY url <<<$(kubectl -n laa-apply-for-legalaid-staging get secret apply-for-legal-aid-rds-instance-output -o json | jq -r '.data[] | @base64d')
+
+export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+
+aws rds create-db-snapshot --region=eu-west-2 --db-instance-identifier cloud-platform-464651662c253592 --db-snapshot-identifier $new_fileName
+
+echo $new_fileName "has been created"
