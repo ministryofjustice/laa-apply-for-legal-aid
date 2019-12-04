@@ -123,12 +123,10 @@ module BaseForm
     end
 
     # Over-riding ActiveModel::AttributeAssignment method to store attributes as they are built
-    # rubocop:disable Naming/UncommunicativeMethodParamName
-    def _assign_attribute(k, v)
-      attributes[k] = v
+    def _assign_attribute(key, value)
+      attributes[key] = value
       super
     end
-    # rubocop:enable Naming/UncommunicativeMethodParamName
 
     def set_instance_variables_for_attributes_if_not_set_but_in_model(attrs:, model_attributes:)
       return unless model_attributes.present?
