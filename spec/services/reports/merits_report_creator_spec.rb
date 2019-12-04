@@ -7,6 +7,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
   describe '.call' do
     it 'attaches merits_report.pdf to the application' do
+      expect_any_instance_of(CCMS::ReferenceDataRequestor).to receive(:call)
       expect(Providers::MeritsReportsController.renderer).to receive(:render).and_call_original
       subject
       legal_aid_application.reload
