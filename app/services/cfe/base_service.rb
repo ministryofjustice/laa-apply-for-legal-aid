@@ -39,7 +39,7 @@ module CFE
       history = write_submission_history(raw_response)
       case raw_response.status
       when 200
-        return JSON.parse(raw_response.body)
+        JSON.parse(raw_response.body)
       when 422
         raise CFE::SubmissionError.new(detailed_error(parsed_response, history), 422)
       else
