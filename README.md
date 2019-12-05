@@ -207,9 +207,9 @@ This will then allow you to connect to the database, eg:
 
 ###Backups###
 
-Backups are taking daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
+Backups are taken daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
 
-A CronJOB takes hourly snapshots of production between 6am and 9pm. These need to be periodically deleted as a maximum of 100 can be stored.
+A CronJOB takes hourly snapshots of production between 6am and 9pm. These need to be periodically deleted as a maximum of 100 can be stored. At present all but the most recent 32 manual snapshots (approx 2 days of hourly backups) are deleted every 4 days.
 
 ## 3rd party integrations
 
