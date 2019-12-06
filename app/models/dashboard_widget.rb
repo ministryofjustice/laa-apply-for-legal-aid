@@ -1,2 +1,0 @@
-class DashboardWidget < ApplicationRecord
-end

@@ -2,7 +2,7 @@
 #
 module Dashboard
   module WidgetDataProviders
-    class FailedCCMSSubmissions
+    class FailedCcmsSubmissions
       def self.dataset_definition
         {
           fields: [

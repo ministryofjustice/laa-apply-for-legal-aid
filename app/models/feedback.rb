@@ -8,4 +8,8 @@ class Feedback < ApplicationRecord
     satisfied: 3,
     very_satisfied: 4
   }
+
+  after_create do
+    ActiveSupport::Notifications.instrument 'dashboard.feedback_created'
+  end
 end

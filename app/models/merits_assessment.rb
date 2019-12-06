@@ -15,5 +15,6 @@ class MeritsAssessment < ApplicationRecord
 
   def submit!
     update!(submitted_at: Time.current) unless submitted_at?
+    ActiveSupport::Notifications.instrument "dashboard.merits_assessment_submitted"
   end
 end

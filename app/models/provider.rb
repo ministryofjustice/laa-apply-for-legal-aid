@@ -8,6 +8,10 @@ class Provider < ApplicationRecord
   has_many :legal_aid_applications
   has_and_belongs_to_many :offices
 
+  after_create do
+    ActiveSupport::Notifications.instrument "dashboard.provider_created"
+  end
+
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
   def update_details

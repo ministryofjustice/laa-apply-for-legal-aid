@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Dashboard
   module WidgetDataProviders
-    RSpec.describe FailedCCMSSubmissions do
+    RSpec.describe FailedCcmsSubmissions do
       describe '.handle' do
         it 'returns the unqualified widget name' do
           expect(described_class.handle).to eq 'ccms_submission_failures'
