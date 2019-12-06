@@ -165,6 +165,10 @@ en:
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
             own_home:
               blank: Select yes if you own the home you live in
+              citizens:
+                blank: Select yes if you own the home you live in
+              providers:
+                blank: Select yes if your client owns the home that they live in
             own_vehicle:
               citizens:
                 blank: Select yes if you own a vehicle
@@ -193,6 +197,10 @@ en:
                 blank: Enter the assets your client cannot sell or borrow against, and why
             shared_ownership:
               blank: Select yes if you own your home with someone else
+              citizens:
+                blank: Select yes if you own your home with someone else
+              providers:
+                blank: Select yes if your client owns their home with anyone else
             substantive_application:
               blank: Select Yes or No
             used_delegated_functions:

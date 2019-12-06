@@ -2,6 +2,7 @@
   <%= render(
         'shared/forms/own_home_form',
         form_path: providers_legal_aid_application_own_home_path(@legal_aid_application),
-        show_draft: true
+        show_draft: true,
+        user_type: :provider
       ) %>
 <% end %>
