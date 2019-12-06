@@ -43,3 +43,13 @@ en:
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data
           allow_non_passported_route: Select Yes to allow non-passported route
+    submitted_applications_reports:
+      show:
+        heading_1: Submitted Applications
+        no_applications: No applications present
+      submitted_applications:
+        applicant_name: Client's name
+        application_ref: Case reference
+        ccms_ref: CCMS reference
+        provider_firm: Provider firm
+        submission_date: Submission date
