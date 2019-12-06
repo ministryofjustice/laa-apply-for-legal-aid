@@ -17,8 +17,6 @@ Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
   load seed
 end
 
-Seeder.new(BenefitType, 'data/benefit_types.yml', name_method: :label).build
-
 puts Seeder.report
 Rails.logger.info Seeder.report.join("\n")
 Rails.logger.info 'Seeding completed'
