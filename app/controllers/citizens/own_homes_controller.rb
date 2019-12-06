@@ -18,7 +18,7 @@ module Citizens
 
     def form_params
       merge_with_model(legal_aid_application, journey: :citizens) do
-        return {} unless params[:legal_aid_application]
+        next {} unless params[:legal_aid_application]
 
         params.require(:legal_aid_application).permit(:own_home)
       end

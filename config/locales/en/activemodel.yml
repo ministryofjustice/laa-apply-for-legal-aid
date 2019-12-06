@@ -195,7 +195,6 @@ en:
               providers:
                 blank: Enter the assets your client cannot sell or borrow against, and why
             shared_ownership:
-              blank: Select yes if you own your home with someone else
               citizens:
                 blank: Select yes if you own your home with someone else
               providers:
