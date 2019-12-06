@@ -164,7 +164,6 @@ en:
               not_a_number: Mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
             own_home:
-              blank: Select yes if you own the home you live in
               citizens:
                 blank: Select yes if you own the home you live in
               providers:
