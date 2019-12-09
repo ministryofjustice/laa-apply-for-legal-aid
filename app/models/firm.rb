@@ -4,6 +4,6 @@ class Firm < ApplicationRecord
   has_many :legal_aid_applications, through: :providers
 
   after_create do
-    ActiveSupport::Notifications.instrument "dashboard.firm_created"
+    ActiveSupport::Notifications.instrument 'dashboard.firm_created'
   end
 end

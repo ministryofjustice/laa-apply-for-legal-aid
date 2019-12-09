@@ -9,7 +9,7 @@ module CCMS
     validates :legal_aid_application_id, presence: true
 
     after_save do
-      ActiveSupport::Notifications.instrument "dashboard.ccms_submission_saved", { id: id, state: aasm_state }
+      ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
     end
 
     POLL_LIMIT = 10

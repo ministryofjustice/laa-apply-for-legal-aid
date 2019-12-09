@@ -9,7 +9,7 @@ class Provider < ApplicationRecord
   has_and_belongs_to_many :offices
 
   after_create do
-    ActiveSupport::Notifications.instrument "dashboard.provider_created"
+    ActiveSupport::Notifications.instrument 'dashboard.provider_created'
   end
 
   delegate :name, to: :firm, prefix: true, allow_nil: true

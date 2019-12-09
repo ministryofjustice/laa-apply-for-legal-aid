@@ -38,7 +38,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
   after_create do
-    ActiveSupport::Notifications.instrument "dashboard.application_created", { id: id, state: state }
+    ActiveSupport::Notifications.instrument 'dashboard.application_created', id: id, state: state
   end
 
   attr_reader :proceeding_type_codes
