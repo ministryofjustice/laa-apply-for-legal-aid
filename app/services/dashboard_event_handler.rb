@@ -1,7 +1,5 @@
 class DashboardEventHandler
-
   class UnrecognisedEventError < RuntimeError; end
-
   delegate :name, :payload, to: :event
 
   attr_reader :event
@@ -15,26 +13,28 @@ class DashboardEventHandler
   end
 
   def call
-    puts ">>> Event received: #{name}, payload: #{payload.inspect}"
-    case name
-    when 'dashboard.application_created'
-      application_created
-    when 'dashboard.provider_created'
-      provider_created
-    when 'dashboard.ccms_submission_saved'
-      ccms_submission_saved
-    when 'dashboard.firm_created'
-      firm_created
-    when 'dashboard.feedback_created'
-      feedback_created
-    when 'dashboard.merits_assessment_submitted'
-      merits_assessment_submitted
-    else
-      raise UnrecognisedEventError.new("Unrecognised event: #{name}")
-    end
+    raise UnrecognisedEventError, "Unrecognised event: #{name}" unless name_matches?
+
+    method(method_to_call).call
   end
 
   private
+
+  def name_parts
+    @name_parts ||= name.to_s.split('.')
+  end
+
+  def name_matches?
+    name_parts[0].eql?('dashboard') && valid_events.include?(name_parts[1])
+  end
+
+  def method_to_call
+    @name_parts[1]
+  end
+
+  def valid_events
+    %w[application_created provider_created ccms_submission_saved firm_created feedback_created merits_assessment_submitted]
+  end
 
   def application_created
     Dashboard::UpdaterJob.perform_later('StartedApplications') if payload[:state] == 'initiated'
@@ -45,9 +45,8 @@ class DashboardEventHandler
   end
 
   def ccms_submission_saved
-    Dashboard::UpdaterJob.perform_in(1.minute, 'FailedCcmsSubmissions') if payload[:state] == 'failed'
-
-    Dashboard::UpdaterJob.perform_in(1.minute, 'PendingCcmsSubmissions') unless payload[:state].in?(%w[failed completed])
+    Dashboard::UpdaterJob.perform_later('FailedCcmsSubmissions') if payload[:state] == 'failed'
+    Dashboard::UpdaterJob.set(wait: 1.minute).perform_later('PendingCcmsSubmissions') unless payload[:state].in?(%w[failed completed])
   end
 
   def firm_created
@@ -62,6 +61,4 @@ class DashboardEventHandler
   def merits_assessment_submitted
     Dashboard::UpdaterJob.perform_later('SubmittedApplications')
   end
-
-
 end
