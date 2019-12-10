@@ -22,15 +22,20 @@ module Dashboard
           expect(described_class.data).to eq expected_data
         end
 
+        it 'ignores draft MeritsAssessments' do
+          create_applications(include_draft: true)
+          expect(described_class.data).to eq expected_data
+        end
+
         def expected_data
           [
             {
-              'number' => MeritsAssessment.count
+              'number' => 15
             }
           ]
         end
 
-        def create_applications
+        def create_applications(include_draft = false)
           {
             7 => 2,
             6 => 3,
@@ -39,6 +44,7 @@ module Dashboard
             1 => 3,
             0 => 1
           }.each do |num_days, num_submitted_applications|
+            FactoryBot.create(:merits_assessment, submitted_at: nil) if include_draft
             num_submitted_applications.times do
               FactoryBot.create(:merits_assessment, submitted_at: num_days.days.ago)
             end
