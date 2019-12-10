@@ -11,6 +11,7 @@ RSpec.describe SmokeTest::TestEmails do
     before do
       ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
       allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
+      allow_any_instance_of(DashboardEventHandler).to receive(:call).and_return(double(DashboardEventHandler))
     end
 
     it 'tests all mailers' do
