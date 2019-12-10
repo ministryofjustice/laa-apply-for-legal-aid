@@ -25,7 +25,7 @@ module Dashboard
       def self.calculate_average
         records = Feedback.where(created_at: 7.days.ago.beginning_of_day..Time.now)
         total = records.map(&:satisfaction_before_type_cast).sum
-        ((total * 25.0) / records.size).round(1)
+        total.zero? ? total : ((total * 25.0) / records.size).round(1)
       end
     end
   end

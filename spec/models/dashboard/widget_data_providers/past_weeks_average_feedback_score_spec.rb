@@ -17,27 +17,33 @@ module Dashboard
       end
 
       describe '.data' do
-        it 'returns the expected data' do
-          create_feedbacks
+        context 'when feedback exists' do
+          it 'returns the expected data' do
+            create_feedbacks
 
-          expect(described_class.data).to eq expected_data
-        end
-
-        def expected_data
-          [{ 'number' => (8.0 * 25 / 4).round(1) }]
-        end
-
-        def create_feedbacks
-          {
-            8.days.ago => 0,
-            8.days.ago => 1,
-            7.days.ago => 3,
-            6.days.ago => 3,
-            3.days.ago => 2,
-            1.days.ago => 0
-          }.each do |date, feedback_score|
-            FactoryBot.create :feedback, satisfaction: Feedback.satisfactions.invert[feedback_score], created_at: date
+            expect(described_class.data).to eq expected_data
           end
+
+          def expected_data
+            [{ 'number' => (8.0 * 25 / 4).round(1) }]
+          end
+
+          def create_feedbacks
+            {
+              8.days.ago => 0,
+              8.days.ago => 1,
+              7.days.ago => 3,
+              6.days.ago => 3,
+              3.days.ago => 2,
+              1.days.ago => 0
+            }.each do |date, feedback_score|
+              FactoryBot.create :feedback, satisfaction: Feedback.satisfactions.invert[feedback_score], created_at: date
+            end
+          end
+        end
+
+        context 'when no feedback exists' do
+          it { expect(described_class.data).to eq [{ 'number' => 0 }] }
         end
       end
     end
