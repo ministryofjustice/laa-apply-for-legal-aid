@@ -14,7 +14,7 @@ module Dashboard
       def self.data
         [
           {
-            'number' => MeritsAssessment.count
+            'number' => MeritsAssessment.where('submitted_at IS NOT NULL').count
           }
         ]
       end
