@@ -1,6 +1,9 @@
 FROM ruby:2.6.3-alpine3.10
 MAINTAINER apply for legal aid team
 
+ENV \
+  KUBECTL_VERSION=1.13.11
+
 # fail early and print all commands
 RUN set -ex
 
@@ -17,15 +20,26 @@ RUN apk --no-cache add --virtual build-dependencies \
                     libxslt-dev \
                     postgresql-dev \
                     git \
+                    bash \
+                    curl \
 && apk --no-cache add \
                   postgresql-client \
                   nodejs \
                   yarn \
+                  jq \
                   linux-headers \
                   clamav-daemon \
                   libreoffice \
                   ttf-ubuntu-font-family \
-                  wkhtmltopdf
+                  wkhtmltopdf \
+ && pip3 install awscli
+
+#  # Install kubectl
+# RUN curl -LO /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+RUN curl -sLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+
+# Ensure everything is executable
+RUN chmod +x /usr/local/bin/*
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \
