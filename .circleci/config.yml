@@ -129,7 +129,7 @@ jobs:
     - *save_gems_cache
     - *setup_database
     - run:
-        name: Run ruby tegsts
+        name: Run ruby tests
         command: bin/rails spec
 
   integration_tests:
