@@ -135,7 +135,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
           it 're-renders the form with the validation errors' do
             subject
             expect(unescaped_response_body).to include('There is a problem')
-            expect(unescaped_response_body).to include('Select yes if you own your home with someone else')
+            expect(unescaped_response_body).to include('Select yes if your client owns their home with anyone else')
             expect(unescaped_response_body).to include('Does your client own their home with anyone else?')
           end
         end
