@@ -60,5 +60,6 @@ class DashboardEventHandler
 
   def merits_assessment_submitted
     Dashboard::UpdaterJob.perform_later('SubmittedApplications')
+    Dashboard::UpdaterJob.perform_later('TotalSubmittedApplications')
   end
 end
