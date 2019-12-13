@@ -97,6 +97,7 @@ RSpec.describe DashboardEventHandler do
     end
     it 'fires the submitted applications job' do
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with('SubmittedApplications')
+      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('TotalSubmittedApplications')
       merits_assessment = create :merits_assessment
       merits_assessment.submit!
     end

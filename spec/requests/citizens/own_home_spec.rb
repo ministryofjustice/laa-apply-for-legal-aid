@@ -59,7 +59,7 @@ RSpec.describe 'citizen own home requests', type: :request do
       end
 
       it 'the response includes the error message' do
-        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.own_home.blank'))
+        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.own_home.citizens.blank'))
       end
     end
   end
