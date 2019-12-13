@@ -30,8 +30,8 @@ class ProviderDetailsRetriever
     @response ||= Net::HTTP.get_response(URI.parse(url))
   end
 
-  def url
-    File.join(Rails.configuration.x.provider_details.url, CGI.escape(username))
+  def url # rubocop:disable Lint/UriEscapeUnescape
+    File.join(Rails.configuration.x.provider_details.url, URI.escape(username))
   end
 
   def raise_error
