@@ -25,7 +25,7 @@ class Provider < ApplicationRecord
   end
 
   def whitelisted_user?
-    username.in?(whitelisted_users)
+    whitelisted_users.any? { |user| user.casecmp(username).zero? }
   end
 
   private
