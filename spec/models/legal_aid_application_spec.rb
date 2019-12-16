@@ -653,4 +653,27 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.cfe_result).to eq result2
     end
   end
+
+  describe 'after_save hook' do
+    context 'when an application is created' do
+      let(:application) { create :legal_aid_application }
+
+      it { expect(application.used_delegated_functions).to eq false }
+
+      context 'and the used_delegated_functions is changed and saved' do
+        subject { application.save }
+
+        before do
+          application.used_delegated_functions = true
+          ActiveJob::Base.queue_adapter = :test
+        end
+
+        after { ActiveJob::Base.queue_adapter = :sidekiq }
+
+        it 'fires an ActiveSupport::Notification' do
+          expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
+        end
+      end
+    end
+  end
 end

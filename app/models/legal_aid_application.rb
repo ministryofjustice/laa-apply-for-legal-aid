@@ -41,6 +41,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     ActiveSupport::Notifications.instrument 'dashboard.application_created', id: id, state: state
   end
 
+  after_save do
+    ActiveSupport::Notifications.instrument 'dashboard.delegated_functions_used' if saved_change_to_used_delegated_functions?
+  end
+
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
   validates :provider, presence: true
