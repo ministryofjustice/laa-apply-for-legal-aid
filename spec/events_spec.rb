@@ -89,6 +89,18 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
+  context 'delegated_functions_used' do
+    subject { create :legal_aid_application, :with_delegated_functions }
+
+    before { ActiveJob::Base.queue_adapter = :test }
+
+    after { ActiveJob::Base.queue_adapter = :sidekiq }
+
+    it 'fires the Applications job' do
+      expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
+    end
+  end
+
   context 'merits_assessment_submitted' do
     before do
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)

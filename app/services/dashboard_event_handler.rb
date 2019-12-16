@@ -33,7 +33,7 @@ class DashboardEventHandler
   end
 
   def valid_events
-    %w[application_created provider_created ccms_submission_saved firm_created feedback_created merits_assessment_submitted]
+    %w[application_created provider_created ccms_submission_saved firm_created feedback_created merits_assessment_submitted delegated_functions_used]
   end
 
   def application_created
@@ -61,5 +61,9 @@ class DashboardEventHandler
   def merits_assessment_submitted
     Dashboard::UpdaterJob.perform_later('SubmittedApplications')
     Dashboard::UpdaterJob.perform_later('TotalSubmittedApplications')
+  end
+
+  def delegated_functions_used
+    Dashboard::UpdaterJob.perform_later('Applications')
   end
 end
