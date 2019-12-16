@@ -24,7 +24,7 @@ RSpec.describe DashboardEventHandler do
     end
     it 'fires an application_created event' do
       expect_any_instance_of(DashboardEventHandler).to receive(:application_created).and_call_original
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('StartedApplications')
+      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('Applications').at_least(1).times
 
       create :legal_aid_application
     end
@@ -59,8 +59,8 @@ RSpec.describe DashboardEventHandler do
     context 'saved with state failed' do
       let(:state) { 'failed' }
 
-      it 'fires a FailedCcmsSubmissions job' do
-        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('FailedCcmsSubmissions')
+      it 'fires the Applications job' do
+        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
       end
 
       it 'does not fire a PendingCcmsSubmissions job' do
@@ -71,8 +71,8 @@ RSpec.describe DashboardEventHandler do
     context 'saved with_state completed' do
       let(:state) { 'completed' }
 
-      it 'does not fire a FailedCcmsSubmissions job' do
-        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with('FailedCcmsSubmissions')
+      it 'does not fire the Applications job' do
+        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
       end
 
       it 'does not fire a PendingCcmsSubmissions job' do
@@ -108,8 +108,7 @@ RSpec.describe DashboardEventHandler do
       allow_any_instance_of(DashboardEventHandler).to receive(:application_created)
     end
     it 'fires the submitted applications job' do
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('SubmittedApplications')
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('TotalSubmittedApplications')
+      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('Applications').at_least(1).times
       merits_assessment = create :merits_assessment
       merits_assessment.submit!
     end

@@ -37,7 +37,7 @@ class DashboardEventHandler
   end
 
   def application_created
-    Dashboard::UpdaterJob.perform_later('StartedApplications') if payload[:state] == 'initiated'
+    Dashboard::UpdaterJob.perform_later('Applications') if payload[:state] == 'initiated'
   end
 
   def provider_created
@@ -45,7 +45,7 @@ class DashboardEventHandler
   end
 
   def ccms_submission_saved
-    Dashboard::UpdaterJob.perform_later('FailedCcmsSubmissions') if payload[:state] == 'failed'
+    Dashboard::UpdaterJob.perform_later('Applications') if payload[:state] == 'failed'
     Dashboard::UpdaterJob.set(wait: 1.minute).perform_later('PendingCcmsSubmissions') unless payload[:state].in?(%w[failed completed])
   end
 
@@ -59,8 +59,7 @@ class DashboardEventHandler
   end
 
   def merits_assessment_submitted
-    Dashboard::UpdaterJob.perform_later('SubmittedApplications')
-    Dashboard::UpdaterJob.perform_later('TotalSubmittedApplications')
+    Dashboard::UpdaterJob.perform_later('Applications')
   end
 
   def delegated_functions_used
