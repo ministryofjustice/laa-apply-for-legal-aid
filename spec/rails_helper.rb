@@ -64,6 +64,7 @@ RSpec.configure do |config|
   config.include TrueLayerHelpers
   config.include OmniauthPathHelper
   config.include FlowHelpers, type: :request
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include CCMS
   config.include XMLBlockMatchers
   config.before(:suite) do
