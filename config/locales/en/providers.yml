@@ -130,10 +130,12 @@ en:
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
         you_need_to: "You'll need to:"
         negative_result:
+          tab_title: Your client must complete a financial assessment
           title: "%{name} must complete a financial assessment"
           must_answer_financial_questions: Your client will need to answer questions about their financial situation.
           provide_access/details: 'We''ll ask you to give them access to the online assessment which they can complete at home or at another location.'
         positive_result:
+          tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
           must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
           provide_access/details: provide details of the case
