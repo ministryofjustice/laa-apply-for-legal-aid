@@ -403,6 +403,7 @@ Feature: Civil application journeys
     Then I choose option "Respondent police notified True"
     Then I choose option "Respondent bail conditions set True"
     Then I fill "Bail conditions set details" with "Foo bar"
+    Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
@@ -506,6 +507,7 @@ Feature: Civil application journeys
     Then I choose option "Respondent police notified True"
     Then I choose option "Respondent bail conditions set True"
     Then I fill "Bail conditions set details" with "Foo bar"
+    Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     Then I should be on a page showing "Provide a statement of case"

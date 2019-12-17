@@ -31,20 +31,16 @@ RSpec.describe Respondents::RespondentForm, type: :form do
         {
           understands_terms_of_court_order: 'true',
           warning_letter_sent: 'true',
-          police_notified: 'true',
           understands_terms_of_court_order_details: '',
-          warning_letter_sent_details: '',
-          police_notified_details: ''
+          warning_letter_sent_details: ''
         }
       end
 
       it 'updates the respondent' do
         expect(respondent.understands_terms_of_court_order).to eq(true)
         expect(respondent.warning_letter_sent).to eq(true)
-        expect(respondent.police_notified).to eq(true)
         expect(respondent.understands_terms_of_court_order_details).to eq('')
         expect(respondent.warning_letter_sent_details).to eq('')
-        expect(respondent.police_notified_details).to eq('')
       end
     end
 
@@ -86,7 +82,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
         {
           understands_terms_of_court_order: 'false',
           warning_letter_sent: 'false',
-          police_notified: 'false',
+          police_notified: %w[true false].sample,
           bail_conditions_set: 'true',
           understands_terms_of_court_order_details: '',
           warning_letter_sent_details: '',
