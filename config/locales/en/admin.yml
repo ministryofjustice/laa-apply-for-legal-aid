@@ -41,3 +41,11 @@ en:
         ccms_ref: CCMS reference
         provider_firm: Provider firm
         submission_date: Submission date
+    feedback:
+      show:
+        heading_1: Feedback
+        no_feedback: No feedback submitted
+      feedbacks:
+        done_eveything: Did eveything?
+        satisfaction: Satisfaction
+        suggestion: Improvement suggestion

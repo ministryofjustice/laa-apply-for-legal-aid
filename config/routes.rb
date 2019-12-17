@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     end
     resource :settings, only: %i[show update]
     resource :submitted_applications_report, only: %i[show]
+    resource :feedback, controller: :feedback, only: %i[show]
     resources :ccms_connectivity_tests, only: [:show]
   end
 
