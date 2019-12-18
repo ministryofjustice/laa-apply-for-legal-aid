@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Admin::FeedbackController, type: :request do
-  let(:count) { 3 }
-  let!(:feedback) { create_list :feedback, count }
+  let(:count) { 2 }
   let(:admin_user) { create :admin_user }
   let(:params) { {} }
 
   before do
+    create :feedback, satisfaction: nil
+    create_list :feedback, count
     sign_in admin_user
   end
 
@@ -25,9 +26,14 @@ RSpec.describe Admin::FeedbackController, type: :request do
 
     it 'displays feedback' do
       subject
-      feedback.each do |feedback|
+      Feedback.all.each do |feedback|
         expect(response.body).to include(feedback.improvement_suggestion)
       end
+    end
+
+    it 'substitutes placeholder text if user ignores a field' do
+      subject
+      expect(response.body).to include(I18n.t('.generic.not_completed'))
     end
 
     context 'with pagination' do
@@ -43,7 +49,7 @@ RSpec.describe Admin::FeedbackController, type: :request do
 
       context 'and more applications than page size' do
         let(:params) { { page_size: 3 } }
-        let(:count) { 5 }
+        let(:count) { 4 }
 
         it 'show page information' do
           subject
