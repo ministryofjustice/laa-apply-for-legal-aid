@@ -3,7 +3,7 @@
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col"><%= t('.done_eveything') %></th>
+            <th class="govuk-table__header govuk-!-width-one-quarter" scope="col"><%= t('.done_eveything') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.satisfaction') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.suggestion') %></th>
           </tr>
@@ -11,7 +11,9 @@
         <tbody class="govuk-table__body">
           <% @feedback.each do |feedback| %>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell feedback-done-all-needed"><%= feedback.done_all_needed || t('generic.not_completed') %></td>
+              <td class="govuk-table__cell feedback-done-all-needed">
+                <%= feedback.done_all_needed.nil? ? t('generic.not_completed') : feedback.done_all_needed.to_s %>
+              </td>
               <td class="govuk-table__cell feedback-satisfaction"><%= feedback.satisfaction&.humanize || t('generic.not_completed') %></td>
               <td class="govuk-table__cell feedback-improvement-suggestion">
                 <%= feedback.improvement_suggestion.present? ? feedback.improvement_suggestion : t('generic.not_completed') %>

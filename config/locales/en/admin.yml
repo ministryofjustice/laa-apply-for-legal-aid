@@ -46,6 +46,6 @@ en:
         heading_1: Feedback
         no_feedback: No feedback submitted
       feedbacks:
-        done_eveything: Did eveything?
-        satisfaction: Satisfaction
+        done_eveything: Was the user able to do what they needed to today?
+        satisfaction: Satisfaction rating
         suggestion: Improvement suggestion
