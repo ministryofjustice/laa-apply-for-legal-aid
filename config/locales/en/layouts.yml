@@ -5,6 +5,7 @@ en:
       applications: Applications
       edit_settings: Settings
       submitted_applications_report: Submitted Applications
+      feedback: Feedback
     application:
       footer:
         contact: Contact

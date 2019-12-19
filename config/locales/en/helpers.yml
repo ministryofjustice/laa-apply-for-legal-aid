@@ -25,6 +25,9 @@ en:
       applicant:
         uses_online_banking:
           <<: *true_false
+      feedback:
+        done_all_needed:
+          <<: *true_false
       merits_assessment:
         application_purpose: Please give details of why your client is applying for legal aid
         client_received_legal_help:
