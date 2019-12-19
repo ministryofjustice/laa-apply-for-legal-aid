@@ -443,9 +443,8 @@ en:
         bullet-1: details of the latest domestic abuse incident
         bullet-2: what has happened in the case so far
         bullet-3: about any other parties involved and their relationship to the applicant
-        bullet-4: how many clients you're representing
-        bullet-5: why the current proceedings are necessary
-        bullet-6: if anyone else might be able to fund this case
+        bullet-4: why the current proceedings are necessary
+        bullet-5: if anyone else might be able to fund this case
         h1-heading: Provide a statement of case
       uploaded_files:
         delete: Delete
