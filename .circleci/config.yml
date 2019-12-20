@@ -81,10 +81,10 @@ references:
         - v1-yarn-packages-cache
 
   save_gems_cache: &save_gems_cache
-    restore_cache:
-        keys:
-          - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-          - v1-yarn-packages-cache
+    save_cache:
+        key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
@@ -96,11 +96,7 @@ references:
     run:
       name: Database Setup
       command: |
-        git checkout origin/master
-        bundle install --path=vendor/bundle --jobs=4
         bundle exec rake db:create db:schema:load
-        git checkout -
-        bundle install --path=vendor/bundle --jobs=4
         bundle exec rake db:migrate db:seed
 
 jobs:
@@ -128,6 +124,9 @@ jobs:
     - *install_gems
     - *save_gems_cache
     - *setup_database
+    - *restore_js_packages_cache
+    - *install_js_packages
+    - *save_js_packages_cache
     - run:
         name: Run ruby tests
         command: bin/rails spec
