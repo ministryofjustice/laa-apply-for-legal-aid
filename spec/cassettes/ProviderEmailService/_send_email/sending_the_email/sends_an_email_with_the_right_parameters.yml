@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"d04e64ae-0a66-4577-83d6-6ce9f7fa27b4","personalisation":{"email":"simulate-delivered@notifications.service.gov.uk","provider_name":"Samira
+        Hyatt","applicant_name":"John Doe","ref_number":null,"application_url":"http://www.example.com/providers/applications"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NzY4NDI3ODN9.M-2KT_lAn4iTfBR2lkzzWI2Tjlq8Ie2Zqu5mC87eiO4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 20 Dec 2019 11:53:20 GMT
+      Server:
+      - nginx
+      X-B3-Spanid:
+      - f5a3080db5582518
+      X-B3-Traceid:
+      - f5a3080db5582518
+      X-Vcap-Request-Id:
+      - 0503d912-e5e4-4d75-4b99-1386c8f0100c
+      Content-Length:
+      - '96'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"errors":[{"error":"AuthError","message":"Invalid token: API key revoked"}],"status_code":403}
+
+        '
+    http_version: 
+  recorded_at: Fri, 20 Dec 2019 11:53:03 GMT
+recorded_with: VCR 5.0.0
