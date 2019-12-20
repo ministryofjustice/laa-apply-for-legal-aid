@@ -81,10 +81,10 @@ references:
         - v1-yarn-packages-cache
 
   save_gems_cache: &save_gems_cache
-    restore_cache:
-        keys:
-          - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-          - v1-yarn-packages-cache
+    save_cache:
+        key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
