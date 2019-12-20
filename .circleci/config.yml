@@ -96,11 +96,7 @@ references:
     run:
       name: Database Setup
       command: |
-        git checkout origin/master
-        bundle install --path=vendor/bundle --jobs=4
         bundle exec rake db:create db:schema:load
-        git checkout -
-        bundle install --path=vendor/bundle --jobs=4
         bundle exec rake db:migrate db:seed
 
 jobs:
