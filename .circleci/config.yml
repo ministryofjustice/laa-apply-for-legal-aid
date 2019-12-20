@@ -128,6 +128,9 @@ jobs:
     - *install_gems
     - *save_gems_cache
     - *setup_database
+    - *restore_js_packages_cache
+    - *install_js_packages
+    - *save_js_packages_cache
     - run:
         name: Run ruby tests
         command: bin/rails spec
