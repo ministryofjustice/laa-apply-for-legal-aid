@@ -1,6 +1,7 @@
 <%
  conditional_id = "#{question.attribute}_conditional"
  has_error = form.errors[question.attribute].any? || form.errors[question.attribute_details].any?
+ always_showing = question.show_details_when.nil? ? '' : 'govuk-radios__conditional--hidden'
 %>
 <div class="govuk-form-group <%= has_error ? 'govuk-form-group--error' : '' %>">
   <div id="<%= question.attribute %>" class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
@@ -12,9 +13,21 @@
             input_attributes: question.show_details_when ? { question.show_details_when.to_s => { 'data-aria-controls' => conditional_id } } : nil
           ) %>
 
-    <% always_showing = question.show_details_when.nil? %>
-    <%= content_tag(:div, id: conditional_id, class: 'govuk-radios__conditional govuk-radios__conditional--hidden') do %>
-      <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>
+    <%= content_tag(:div, id: conditional_id, class: "govuk-radios__conditional #{always_showing}") do %>
+      <% if question.attribute == :police_notified %>
+        <%= form.govuk_text_area(
+              question.attribute_details,
+              id: question.attribute_details,
+              rows: 5,
+              label: police_notified_titles[:yes],
+              'data-police-notified-yes' => police_notified_titles[:yes],
+              'data-police-notified-no' => police_notified_titles[:no],
+              'data-police-notified-blank-error-yes' => police_notified_titles[:blank_error],
+              'data-police-notified-blank-error-no' => police_notified_titles[:no]
+            ) %>
+      <% else %>
+          <%= form.govuk_text_area question.attribute_details, id: question.attribute_details, rows: 5 %>
+      <% end %>
     <% end %>
   </div>
 </div>

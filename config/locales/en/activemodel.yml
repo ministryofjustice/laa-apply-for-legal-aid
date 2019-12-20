@@ -299,7 +299,7 @@ en:
             warning_letter_sent_details:
               blank: Tell us why a warning letter has not been sent
             police_notified_details:
-              blank: Tell us why the police have not been notified
+              blank: Tell us what action the police have taken
             bail_conditions_set_details:
               blank: Give details of the bail conditions
         savings_amount:

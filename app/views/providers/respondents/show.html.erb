@@ -9,21 +9,29 @@
     <div class="govuk-!-padding-bottom-7"></div>
 
     <%
-      questions = %i[
-        understands_terms_of_court_order
-        warning_letter_sent
-        police_notified
-        bail_conditions_set
-      ].map do |attr|
+      questions = %i[understands_terms_of_court_order warning_letter_sent].map do |attr|
         OpenStruct.new(
           title: t(".#{attr}"),
           attribute: attr,
           attribute_details: "#{attr}_details".to_sym,
-          show_details_when: attr == :bail_conditions_set ? 'true' : 'false'
+          show_details_when: 'false'
         )
       end
+      questions += %i[police_notified bail_conditions_set].map do |attr|
+        OpenStruct.new(
+          title: t(".#{attr}"),
+          attribute: attr,
+          attribute_details: "#{attr}_details".to_sym,
+          show_details_when: attr == :bail_conditions_set ? 'true' : nil
+        )
+      end
+      police_notified_titles = {
+          yes: t('.police_notified_yes'),
+          no: t('.police_notified_no'),
+          blank_error: t('.police_notified_blank')
+        }
     %>
-    <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form } %>
+    <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form, police_notified_titles: police_notified_titles } %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
