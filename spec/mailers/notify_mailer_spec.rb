@@ -5,6 +5,7 @@ RSpec.describe NotifyMailer, type: :mailer do
   let(:email) { Faker::Internet.safe_email }
   let(:client_name) { Faker::Name.name }
   let(:application_url) { "/applications/#{app_id}/citizen/start" }
+  let(:citizen_start_application_template) { Rails.configuration.govuk_notify_templates[:citizen_start_application] }
 
   it 'uses GovukNotifyMailerJob' do
     expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)
@@ -22,7 +23,7 @@ RSpec.describe NotifyMailer, type: :mailer do
     end
 
     it 'sets the correct template' do
-      expect(mail.govuk_notify_template).to eq(Rails.configuration.govuk_notify_templates[:citizen_start_application])
+      expect(mail.govuk_notify_template).to eq(citizen_start_application_template)
     end
 
     it 'has the right personalisation' do

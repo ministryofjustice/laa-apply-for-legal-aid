@@ -22,7 +22,7 @@ RSpec.describe SmokeTest::TestEmails do
       ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
     end
 
-    it 'sends a notify_provider email' do
+    it 'sends a citizen completed means notify_provider email' do
       expect_any_instance_of(CitizenCompletedMeansMailer).to receive(:notify_provider).and_return(true)
       subject
       ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain

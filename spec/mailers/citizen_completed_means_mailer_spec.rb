@@ -6,6 +6,7 @@ RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
   let(:provider_name) { Faker::Name.name }
   let(:applicant_name) { Faker::Name.name }
   let(:application_url) { '/provider/legal_aid_applications/' }
+  let(:client_completed_means_template) { Rails.configuration.govuk_notify_templates[:client_completed_means] }
 
   describe '#notify_provider' do
     let(:mail) { described_class.notify_provider(application, provider_name, applicant_name, application_url, email) }
@@ -19,7 +20,7 @@ RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
     end
 
     it 'sets the correct template' do
-      expect(mail.govuk_notify_template).to eq(Rails.configuration.govuk_notify_templates[:client_completed_means])
+      expect(mail.govuk_notify_template).to eq(client_completed_means_template)
     end
 
     it 'has the right personalisation' do
