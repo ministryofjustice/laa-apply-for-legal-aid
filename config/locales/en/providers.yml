@@ -446,6 +446,8 @@ en:
         bullet-4: why the current proceedings are necessary
         bullet-5: if anyone else might be able to fund this case
         h1-heading: Provide a statement of case
+        warning: Warning
+        warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
       uploaded_files:
         delete: Delete
         filename: Filename
