@@ -9,10 +9,18 @@
 
     <p class="govuk-body"><%= t('generic.tell_us') %></p>
     <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
-      <% (1..6).each do |bullet_number| %>
+      <% (1..5).each do |bullet_number| %>
         <li><%= t(".bullet-#{bullet_number}") %></li>
       <% end %>
     </ul>
+
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">t('.warning')</span>
+        <%= t('.warning_text') %>
+      </strong>
+    </div>
 
     <div id="uploaded-files-table-container">
       <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
