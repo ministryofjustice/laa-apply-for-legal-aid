@@ -22,7 +22,7 @@ RSpec.describe NotifyMailer, type: :mailer do
     end
 
     it 'sets the correct template' do
-      expect(mail.govuk_notify_template).to eq('570e1b9d-6238-45fd-b75c-96f2f39db8e9')
+      expect(mail.govuk_notify_template).to eq(Rails.configuration.govuk_notify_templates[:citizen_start_application])
     end
 
     it 'has the right personalisation' do
