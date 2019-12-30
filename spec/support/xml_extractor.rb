@@ -1,5 +1,5 @@
 class XmlExtractor
-  # rubocop:disable Metrics/LineLength
+  # rubocop:disable Layout/LineLength
   XPATHS = {
     global_means: '/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity/Instances/Attributes/Attribute',
     global_merits: '/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity/Instances/Attributes/Attribute',
@@ -20,7 +20,7 @@ class XmlExtractor
     change_in_circumstances: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CHANGE_IN_CIRCUMSTANCES"]//Attributes/Attribute),
     devolved_powers_date: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/DevolvedPowersDate)
   }.freeze
-  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Layout/LineLength
 
   def self.call(xml, section, attribute_name = nil)
     new(xml, section, attribute_name).extract
