@@ -19,9 +19,12 @@ class ProviderEmailService
       application,
       provider.name,
       applicant.full_name,
-      application_url,
-      provider.email
-    ]
+      application_url
+    ] + with_provider_email
+  end
+
+  def with_provider_email
+    HostEnv.staging? ? [] : [provider.email]
   end
 
   def application_url
