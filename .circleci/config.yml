@@ -311,9 +311,6 @@ workflows:
         requires:
         - hold_uat
         - build_and_push
-        filters:
-          branches:
-            ignore: master
     - hold_staging:
         type: approval
         requires:
