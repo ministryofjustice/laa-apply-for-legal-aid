@@ -129,6 +129,6 @@ group :test do
   gem 'simplecov-rcov'
   gem 'timecop'
   gem 'vcr'
-  gem 'webdrivers', '~> 4.1'
+  gem 'webdrivers', '~> 4.2'
   gem 'webmock'
 end
