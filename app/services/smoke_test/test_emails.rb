@@ -8,6 +8,7 @@ module SmokeTest
       send_feedback_email
       send_citizen_start_email
       send_resend_link_request_email
+      send_citizen_completed_means_email
       send_submission_confirmation_email
       send_email_reminder
     end
@@ -18,6 +19,16 @@ module SmokeTest
       SubmitApplicationReminderMailer.notify_provider(
         JSON.parse(legal_aid_application.to_json),
         JSON.parse(legal_aid_application.provider.name.to_json),
+        to
+      ).deliver_later!
+    end
+
+    def send_citizen_completed_means_email
+      CitizenCompletedMeansMailer.notify_provider(
+        JSON.parse(legal_aid_application.to_json),
+        JSON.parse(legal_aid_application.provider.name.to_json),
+        JSON.parse(legal_aid_application.applicant.full_name.to_json),
+        'www.example.com/providers/applications',
         to
       ).deliver_later!
     end
