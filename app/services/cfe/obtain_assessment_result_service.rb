@@ -1,5 +1,7 @@
 module CFE
   class ObtainAssessmentResultService < BaseService
+    HTTP_ERR_MESSAGE = 'CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code'.freeze
+
     private
 
     def cfe_url_path
@@ -18,7 +20,7 @@ module CFE
         @submission.results_obtained!
       else
         @submission.fail!
-        raise_exception_error message: 'CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code', http_method: 'GET', http_status: @response.status
+        raise_exception_error message: HTTP_ERR_MESSAGE, http_method: 'GET', http_status: @response.status
       end
     end
 
