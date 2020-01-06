@@ -6,11 +6,15 @@
       }
     ) do %>
 
-  <h2 class="govuk-heading-m">
-    <%= t('.assets.heading') %>
-  </h2>
-
-  <%= render 'shared/check_answers/assets' %>
+  <%= check_long_questions_single_change_link(
+        name: :incomings,
+        url: citizens_identify_types_of_income_path,
+        question: t('citizens.identify_types_of_incomes.show.page_heading'),
+        answer_hash: incomings_list(
+            @legal_aid_application.other_assets_declaration,
+            locale_namespace: "transaction_types.names.citizens"
+        ),
+        read_only: false) %>
 
   <%= next_action_buttons_with_form(
         url: continue_citizens_check_answers_path,
