@@ -25,13 +25,5 @@
           ) %>
     <% end %>
 
-  <% else %>
-    <%= check_answer_link(
-            name: name,
-            url: url,
-            question: question,
-            answer: t('generic.none_declared'),
-            align_right: align_right
-        ) %>
   <% end %>
 </dl>
