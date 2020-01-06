@@ -11,7 +11,7 @@
         url: citizens_identify_types_of_income_path,
         question: t('citizens.identify_types_of_incomes.show.page_heading'),
         answer_hash: incomings_list(
-            @legal_aid_application.other_assets_declaration,
+            @legal_aid_application.transaction_types.credits,
             locale_namespace: "transaction_types.names.citizens"
         ),
         read_only: false) %>
