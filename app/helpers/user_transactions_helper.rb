@@ -14,4 +14,20 @@ module UserTransactionsHelper
       items: items
     }
   end
+
+  def payments_list(payments, locale_namespace:)
+    items = TransactionType.debits&.map do |payment_type|
+      OpenStruct.new(
+        label: t("#{locale_namespace}.#{payment_type.name}"),
+        name: payment_type.name,
+        amount_text: yes_no(payments.pluck(:name).include?(payment_type.name))
+      )
+    end
+
+    return nil unless items.present?
+
+    {
+      items: items
+    }
+  end
 end

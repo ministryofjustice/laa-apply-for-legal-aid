@@ -15,6 +15,15 @@
             locale_namespace: "transaction_types.names.citizens"
         ),
         read_only: false) %>
+  <%= check_long_questions_single_change_link(
+        name: :payments,
+        url: citizens_identify_types_of_outgoing_path,
+        question: t('citizens.identify_types_of_outgoings.show.page_heading'),
+        answer_hash: payments_list(
+            @legal_aid_application.transaction_types.debits,
+            locale_namespace: "transaction_types.names.citizens"
+        ),
+        read_only: false) %>
 
   <%= next_action_buttons_with_form(
         url: continue_citizens_check_answers_path,
