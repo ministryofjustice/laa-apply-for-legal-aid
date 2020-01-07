@@ -23,18 +23,18 @@ RSpec.describe Flow::BaseFlowService do
   before { flow_service_class.use_steps steps }
 
   describe '#forward_path' do
-    let(:current_step) { :percentage_homes }
+    let(:current_step) { :identify_types_of_incomes }
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
     it 'returns forward url' do
-      expect(subject.forward_path).to eq('/citizens/vehicle')
+      expect(subject.forward_path).to eq('/citizens/identify_types_of_outgoing')
     end
 
     context 'with logic' do
-      let(:current_step) { :own_homes }
+      let(:current_step) { :identify_types_of_outgoings }
 
       it 'returns forward url' do
-        expect(subject.forward_path).to eq('/citizens/property_value')
+        expect(subject.forward_path).to eq('/citizens/check_answers')
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe Flow::BaseFlowService do
       let(:legal_aid_application) { create :legal_aid_application, :checking_client_details_answers }
 
       context 'and check_answers page is defined' do
-        let(:current_step) { :savings_and_investments }
+        let(:current_step) { :identify_types_of_outgoings }
 
         it 'returns check_answers url' do
           expect(subject.forward_path).to eq('/citizens/check_answers')
@@ -69,6 +69,7 @@ RSpec.describe Flow::BaseFlowService do
           let(:current_step) { :own_homes }
 
           it 'returns next page in the sub flow' do
+            pending('No subflows exist on new citizen path, await move to providers')
             expect(subject.forward_path).to eq('/citizens/property_value')
           end
         end
