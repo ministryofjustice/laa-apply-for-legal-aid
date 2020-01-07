@@ -2,6 +2,7 @@ Feature: Citizen journey through dependants pages
 
   @javascript
   Scenario: I have a dependant under 15
+    Given I skip the rest of this scenario until the questions are moved to the provider flow
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -18,6 +19,7 @@ Feature: Citizen journey through dependants pages
 
   @javascript
   Scenario: I have a 16-18 year old child dependant
+    Given I skip the rest of this scenario until the questions are moved to the provider flow
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -41,6 +43,7 @@ Feature: Citizen journey through dependants pages
 
   @javascript
   Scenario: I have a child dependant over 18 and in fulltime education
+    Given I skip the rest of this scenario until the questions are moved to the provider flow
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -66,6 +69,7 @@ Feature: Citizen journey through dependants pages
 
   @javascript
   Scenario: I have a child dependant over 18 and not in fulltime education
+    Given I skip the rest of this scenario until the questions are moved to the provider flow
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -95,6 +99,7 @@ Feature: Citizen journey through dependants pages
 
   @javascript
   Scenario: I have an adult dependant more than 15 years old
+    Given I skip the rest of this scenario until the questions are moved to the provider flow
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
@@ -121,6 +126,7 @@ Feature: Citizen journey through dependants pages
 
   @javascript
   Scenario: I have multiple dependants
+    Given I skip the rest of this scenario until the questions are moved to the provider flow
     Given An application has been created
     Then I visit the first question about dependants
     Then I should be on a page showing "Do you have any dependants?"
