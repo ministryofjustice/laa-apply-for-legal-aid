@@ -6,7 +6,7 @@
       }
     ) do %>
 
-  <h2 class="govuk-heading-m"><%= t('.bank-heading')%></h2>
+  <h2 class="govuk-heading-m"><%= t('.bank-heading') %></h2>
   <dl class="govuk-summary-list govuk-!-padding-bottom-4">
     <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
       <h2 class="govuk-heading-m govuk-!-padding-top-4">Account <%= index+1 %></h2>
