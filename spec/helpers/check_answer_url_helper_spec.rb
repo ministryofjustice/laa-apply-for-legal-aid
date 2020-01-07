@@ -21,11 +21,6 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
         url = check_answer_url_for(:citizens, :identify_types_of_outgoings)
         expect(url).to eq '/citizens/identify_types_of_outgoing'
       end
-
-      it 'returns the path with anchor' do
-        url = check_answer_url_for(:citizens, :property_values)
-        expect(url).to eq '/citizens/property_value#property_value'
-      end
     end
   end
 end
