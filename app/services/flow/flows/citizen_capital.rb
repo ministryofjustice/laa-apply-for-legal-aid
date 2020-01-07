@@ -4,7 +4,8 @@ module Flow
       STEPS = {
         identify_types_of_incomes: {
           path: ->(_) { urls.citizens_identify_types_of_income_path },
-          forward: :identify_types_of_outgoings
+          forward: :identify_types_of_outgoings,
+          check_answers: :check_answers
         },
         # Dependants steps were here (see CitizenDependants)
         # They were removed Jan 2020 as the citizen path was simplified
