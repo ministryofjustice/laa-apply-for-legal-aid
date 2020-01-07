@@ -36,7 +36,7 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     it 'displays the correct section headings' do
-      #expect(response.body).to include('Your bank accounts')
+      expect(response.body).to include('Your bank accounts')
       expect(response.body).to include('Which types of income do you receive?')
       expect(response.body).to include('What regular payments do you make?')
     end

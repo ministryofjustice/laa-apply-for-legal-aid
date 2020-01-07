@@ -42,6 +42,8 @@ en:
           savings_and_investments: Savings and investments
           shared_ownership: Owned with anyone else
         h1-heading: Check your answers
+        bank-heading: Your bank accounts
+        link_other_account: Add another bank account
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
