@@ -93,6 +93,19 @@ Feature: Citizen journey
     Then I click "Agree and submit"
     Then I should be on a page showing "You've completed your financial assessment"
 
+  @javascript
+  Scenario: I want to change incomings via the check your answers page
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
+    Then I should be on a page showing 'Income from a property or lodger No'
+    And I click Check Your Answers Change link for 'incomings'
+    Then I should be on a page showing 'Which types of income do you receive?'
+    Then I select 'Income from a property or lodger'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    And I should be on a page showing 'Income from a property or lodger Yes'
+
+
 #  @javascript
 #  Scenario: I want to change property details via the check your answers page
 #    Given I have completed an application
