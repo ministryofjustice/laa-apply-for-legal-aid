@@ -1,3 +1,4 @@
+# :nocov:
 module Citizens
   class VehiclesController < CitizenBaseController
     def show
@@ -30,3 +31,5 @@ module Citizens
     end
   end
 end
+# :nocov:
+

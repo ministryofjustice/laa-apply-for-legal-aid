@@ -1,3 +1,4 @@
+# :nocov:
 module Citizens
   class OutstandingMortgagesController < CitizenBaseController
     def show
@@ -22,3 +23,4 @@ module Citizens
     end
   end
 end
+# :nocov:

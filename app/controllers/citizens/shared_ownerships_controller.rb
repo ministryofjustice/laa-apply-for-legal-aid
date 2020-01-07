@@ -1,3 +1,4 @@
+# :nocov:
 module Citizens
   class SharedOwnershipsController < CitizenBaseController
     def show
@@ -25,3 +26,4 @@ module Citizens
     end
   end
 end
+# :nocov:

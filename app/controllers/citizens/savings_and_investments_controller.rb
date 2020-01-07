@@ -1,3 +1,4 @@
+# :nocov:
 module Citizens
   class SavingsAndInvestmentsController < CitizenBaseController
     helper_method :bank_accounts, :attributes
@@ -38,3 +39,4 @@ module Citizens
     end
   end
 end
+# :nocov:

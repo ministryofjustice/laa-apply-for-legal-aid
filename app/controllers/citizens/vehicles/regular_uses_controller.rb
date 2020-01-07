@@ -1,3 +1,4 @@
+# :nocov:
 module Citizens
   module Vehicles
     class RegularUsesController < CitizenBaseController
@@ -35,3 +36,4 @@ module Citizens
     end
   end
 end
+# :nocov:

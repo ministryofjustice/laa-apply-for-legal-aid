@@ -1,3 +1,4 @@
+# :nocov:
 module Citizens
   class PropertyValuesController < CitizenBaseController
     def show
@@ -23,3 +24,4 @@ module Citizens
     end
   end
 end
+# :nocov:

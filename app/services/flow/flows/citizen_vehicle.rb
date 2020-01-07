@@ -1,3 +1,4 @@
+# :nocov:
 module Flow
   module Flows
     class CitizenVehicle < FlowSteps
@@ -29,3 +30,4 @@ module Flow
     end
   end
 end
+# :nocov:
