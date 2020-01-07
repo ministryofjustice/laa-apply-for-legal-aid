@@ -5,7 +5,7 @@ RSpec.describe 'citizen percentage share of home', type: :request do
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'GET citizens/percentage_home' do
+  xdescribe 'GET citizens/percentage_home' do
     subject { get citizens_percentage_home_path }
 
     it 'returns http success' do
@@ -14,7 +14,7 @@ RSpec.describe 'citizen percentage share of home', type: :request do
     end
   end
 
-  describe 'PATCH citizens/percentage_home' do
+  xdescribe 'PATCH citizens/percentage_home' do
     let(:percentage_home) { '33.33' }
     let(:params) { { legal_aid_application: { percentage_home: percentage_home } } }
     subject { patch citizens_percentage_home_path, params: params }

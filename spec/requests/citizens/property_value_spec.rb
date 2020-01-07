@@ -5,7 +5,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'citizen property value test' do
+  xdescribe 'citizen property value test' do
     describe 'GET /citizens/property_value' do
       before { get citizens_property_value_path }
 
@@ -16,7 +16,7 @@ RSpec.describe Citizens::PropertyValuesController, type: :request do
     end
   end
 
-  describe 'PATCH /citizens/property_value', type: :request do
+  xdescribe 'PATCH /citizens/property_value', type: :request do
     before { patch citizens_property_value_path, params: params }
 
     context 'when a property value is entered' do

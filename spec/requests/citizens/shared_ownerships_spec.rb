@@ -4,7 +4,7 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:secure_id) { legal_aid_application.generate_secure_id }
 
-  describe 'GET #citizens/shared_ownership' do
+  xdescribe 'GET #citizens/shared_ownership' do
     before do
       get citizens_legal_aid_application_path(secure_id)
       get citizens_shared_ownership_path
@@ -21,7 +21,7 @@ RSpec.describe 'citizen shared ownership request test', type: :request do
     end
   end
 
-  describe 'PATCH #citizens/shared_ownership' do
+  xdescribe 'PATCH #citizens/shared_ownership' do
     before do
       get citizens_legal_aid_application_path(secure_id)
     end

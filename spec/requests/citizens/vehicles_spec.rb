@@ -7,7 +7,7 @@ RSpec.describe Citizens::VehiclesController, type: :request do
     get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
   end
 
-  describe 'GET /citizens/vehicle' do
+  xdescribe 'GET /citizens/vehicle' do
     subject { get citizens_vehicle_path }
 
     before { subject }
@@ -17,7 +17,7 @@ RSpec.describe Citizens::VehiclesController, type: :request do
     end
   end
 
-  describe 'PATCH /citizens/vehicle' do
+  xdescribe 'PATCH /citizens/vehicle' do
     let(:own_vehicle) { nil }
     let(:params) do
       { legal_aid_application: { own_vehicle: own_vehicle } }

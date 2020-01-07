@@ -8,7 +8,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
     get citizens_legal_aid_application_path(secure_id)
   end
 
-  describe 'GET /citizens/restrictions' do
+  xdescribe 'GET /citizens/restrictions' do
     before { get citizens_restrictions_path }
 
     it 'returns http success' do
@@ -16,7 +16,7 @@ RSpec.describe 'citizen restrictions request', type: :request do
     end
   end
 
-  describe 'PATCH /citizens/restrictions' do
+  xdescribe 'PATCH /citizens/restrictions' do
     let(:params) do
       {
         legal_aid_application: {

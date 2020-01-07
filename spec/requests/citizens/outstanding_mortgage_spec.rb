@@ -9,14 +9,14 @@ RSpec.describe 'citizen outstanding mortgage request', type: :request do
     subject
   end
 
-  describe 'GET /citizens/outstanding_mortgage' do
+  xdescribe 'GET /citizens/outstanding_mortgage' do
     subject { get citizens_outstanding_mortgage_path }
     it 'renders successfully' do
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'PATCH /citizens/outstanding_mortgage' do
+  xdescribe 'PATCH /citizens/outstanding_mortgage' do
     let(:amount) { rand(1...1_000_000.0).round(2).to_s }
     let(:params) do
       { legal_aid_application: { outstanding_mortgage_amount: amount } }

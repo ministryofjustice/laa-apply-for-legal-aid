@@ -8,19 +8,21 @@ RSpec.describe 'citizen other assets requests', type: :request do
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'GET citizens/other_assets' do
+  xdescribe 'GET citizens/other_assets' do
     it 'returns http success' do
+      pending('MOVE TO PROVIDERS')
       get citizens_other_assets_path
       expect(response).to have_http_status(:ok)
     end
 
     it 'displays the show page' do
+      pending('MOVE TO PROVIDERS')
       get citizens_other_assets_path
       expect(response.body).to include I18n.t('citizens.other_assets.show.h1-heading')
     end
   end
 
-  describe 'PATCH citizens/other_assets' do
+  xdescribe 'PATCH citizens/other_assets' do
     before { patch citizens_other_assets_path, params: params }
 
     let(:params) do
@@ -74,8 +76,9 @@ RSpec.describe 'citizen other assets requests', type: :request do
 
     let(:none_selected) { '' }
 
-    context 'valid params' do
+    xcontext 'valid params' do
       it 'updates the record' do
+        pending('MOVE TO PROVIDERS')
         oad.reload
         expect(oad.second_home_value).to eq 875_123
         expect(oad.second_home_mortgage).to eq 125_345.67
@@ -89,10 +92,11 @@ RSpec.describe 'citizen other assets requests', type: :request do
       end
 
       it 'redirects to the capital restrictions page' do
+        pending('MOVE TO PROVIDERS')
         expect(response).to redirect_to(citizens_restrictions_path)
       end
 
-      context 'no asset' do
+      xcontext 'no asset' do
         let(:params) do
           {
             other_assets_declaration: {
@@ -112,13 +116,14 @@ RSpec.describe 'citizen other assets requests', type: :request do
           let(:none_selected) { '' }
           before { patch citizens_other_assets_path, params: empty_params }
           it 'the response includes the error message' do
+            pending('MOVE TO PROVIDERS')
             expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.base.citizens.none_selected'))
           end
         end
       end
     end
 
-    context 'none of these checkbox is selected' do
+    xcontext 'none of these checkbox is selected' do
       let(:params) do
         {
           other_assets_declaration: { none_selected: 'true' }
@@ -126,6 +131,7 @@ RSpec.describe 'citizen other assets requests', type: :request do
       end
 
       it 'sets none_selected to true' do
+        pending('MOVE TO PROVIDERS')
         expect(oad.reload.none_selected).to eq(true)
       end
     end
@@ -142,26 +148,31 @@ RSpec.describe 'citizen other assets requests', type: :request do
       end
 
       it 'returns http_success' do
+        pending('MOVE TO PROVIDERS')
         expect(response).to have_http_status(:ok)
       end
 
       it 'does not create the record' do
+        pending('MOVE TO PROVIDERS')
         expect(oad).to be_nil
       end
 
       it 'the response includes the error message' do
+        pending('MOVE TO PROVIDERS')
         expect(response.body).to include(I18n.t('activemodel.errors.models.other_assets_declaration.attributes.second_home_value.not_a_number'))
       end
 
       it 'renders the show page' do
+        pending('MOVE TO PROVIDERS')
         expect(response.body).to include I18n.t('citizens.other_assets.show.h1-heading')
       end
     end
 
-    context 'while checking answers' do
+    xcontext 'while checking answers' do
       let(:application) { create :legal_aid_application, :checking_client_details_answers, :with_applicant }
 
       it 'redirects to the "restrictions" page' do
+        pending('MOVE TO PROVIDERS')
         expect(response).to redirect_to(citizens_restrictions_path)
       end
     end
