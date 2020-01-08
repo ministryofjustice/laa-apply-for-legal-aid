@@ -22,9 +22,6 @@ en:
       merits_assessment:
         estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
     label:
-      applicant:
-        uses_online_banking:
-          <<: *true_false
       feedback:
         done_all_needed:
           <<: *true_false

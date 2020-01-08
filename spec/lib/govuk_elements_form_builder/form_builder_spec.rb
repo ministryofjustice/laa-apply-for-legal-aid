@@ -183,13 +183,13 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   end
 
   describe 'govuk_radio_button' do
-    let(:attribute) { 'uses_online_banking' }
-    let(:resource_form) { Applicants::UsesOnlineBankingForm.new }
+    let(:attribute) { 'understands_terms_of_court_order' }
+    let(:resource_form) { Respondents::RespondentForm.new }
     let(:hint_copy) { 'hint hint' }
-    let(:label_copy) { CGI.escapeHTML I18n.t("helpers.label.#{resource}.#{attribute}.true") }
+    let(:label_copy) { CGI.escapeHTML I18n.t("helpers.label.respondent.#{attribute}.true") }
     let(:input) { parsed_html.at_css("input##{resource}_#{attribute}_true") }
     let(:value) { true }
-    let(:params) { [:uses_online_banking, value, hint: hint_copy] }
+    let(:params) { [:understands_terms_of_court_order, value, hint: hint_copy] }
 
     subject { builder.govuk_radio_button(*params) }
 
@@ -224,7 +224,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'adding a custom class to the input' do
       let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [:uses_online_banking, value, class: custom_class] }
+      let(:params) { [:understands_terms_of_court_order, value, class: custom_class] }
 
       it 'adds custom class to the input' do
         expect(input.classes).to include(custom_class)
@@ -233,7 +233,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'label is passed as a parameter' do
       let(:custom_label) { Faker::Lorem.sentence }
-      let(:params) { [:uses_online_banking, value, label: custom_label] }
+      let(:params) { [:understands_terms_of_court_order, value, label: custom_label] }
 
       it 'display the custom label instead of the one in locale file' do
         label = input.parent.at_css('label')
@@ -243,10 +243,10 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
   end
 
   describe 'govuk_collection_radio_buttons' do
-    let(:attribute) { 'uses_online_banking' }
-    let(:resource_form) { Applicants::UsesOnlineBankingForm.new }
+    let(:attribute) { 'understands_terms_of_court_order' }
+    let(:resource_form) { Respondents::RespondentForm.new }
     let(:options) { [true, false] }
-    let(:params) { [:uses_online_banking, options] }
+    let(:params) { [:understands_terms_of_court_order, options] }
     let(:inputs) { options.map { |option| parsed_html.at_css("input##{resource}_#{attribute}_#{option}") } }
     let(:input) { inputs.first }
     let(:div_radios) { parsed_html.at_css('div.govuk-radios') }
@@ -283,7 +283,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'when a hint message is passed as a parameter' do
       let(:hint_message) { 'Choose an option' }
-      let(:params) { [:uses_online_banking, options, hint: hint_message] }
+      let(:params) { [:understands_terms_of_court_order, options, hint: hint_message] }
 
       it 'the hint message appears only once' do
         expect(parsed_html.css('span.govuk-hint').count).to eq(1)
@@ -292,7 +292,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'when an error message is passed as a parameter' do
       let(:error_message) { 'Something wrong' }
-      let(:params) { [:uses_online_banking, options, error: error_message] }
+      let(:params) { [:understands_terms_of_court_order, options, error: error_message] }
 
       it 'the error message is shown' do
         expect(parsed_html.at_css('span.govuk-error-message').content).to eq(error_message)
@@ -321,7 +321,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'when validation error on object' do
-      let(:error_message) { I18n.t("activemodel.errors.models.#{resource}.attributes.#{attribute}.blank") }
+      let(:error_message) { I18n.t("activemodel.errors.models.respondent.attributes.#{attribute}.blank") }
       let(:span_error) { parsed_html.at_css('span.govuk-error-message') }
 
       before { resource_form.valid? }
@@ -336,7 +336,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'title is passed as a parameter' do
       let(:title) { 'Pick an option' }
-      let(:params) { [:uses_online_banking, options, title: title] }
+      let(:params) { [:understands_terms_of_court_order, options, title: title] }
 
       it 'display the title in a <legend> and <h1> tag' do
         expect(fieldset.child.name).to eq('legend')
@@ -350,7 +350,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'title is passed as text and size' do
       let(:title) { 'Pick an option' }
-      let(:params) { [:uses_online_banking, options, title: { text: title, size: :m }] }
+      let(:params) { [:understands_terms_of_court_order, options, title: { text: title, size: :m }] }
 
       it 'display the title in a <legend> and <h1> tag' do
         expect(fieldset.child.name).to eq('legend')
@@ -365,7 +365,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     context 'input_attributes are passed as parameters' do
       let(:input_attribute) { { 'data-aria-controls' => 'details' } }
       let(:input_attributes) { { true.to_s => input_attribute } }
-      let(:params) { [:uses_online_banking, options, input_attributes: input_attributes] }
+      let(:params) { [:understands_terms_of_court_order, options, input_attributes: input_attributes] }
 
       it 'adds the attribute only to the right attribute' do
         correct_radio_button = parsed_html.at_css('input[value="true"]')
