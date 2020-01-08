@@ -94,7 +94,6 @@ Rails.application.routes.draw do
       patch :reset, on: :collection
       patch :continue, on: :collection
     end
-    resource :has_dependants, only: %i[show update]
     resource :identify_types_of_income, only: %i[show update]
     resource :identify_types_of_outgoing, only: %i[show update]
     resources :income_summary, only: :index
@@ -139,6 +138,7 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
+      resource :has_dependants, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]

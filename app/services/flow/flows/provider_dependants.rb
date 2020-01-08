@@ -1,14 +1,13 @@
-# :nocov:
 module Flow
   module Flows
-    class CitizenDependants < FlowSteps
+    class ProviderDependants < FlowSteps
       STEPS = {
         has_dependants: {
-          path: ->(_) { urls.citizens_has_dependants_path },
+          path: ->(application) { urls.providers_legal_aid_application_has_dependants_path(application) },
           forward: ->(application) { application.has_dependants? ? :dependants : :identify_types_of_outgoings }
         },
         dependants: {
-          path: ->(_) { urls.citizens_dependants_path },
+          path: ->(application) { urls.providers_dependants_path(application) },
           forward: ->(_, dependant) { dependant.over_fifteen? ? :dependants_relationships : :has_other_dependants }
         },
         dependants_details: {
@@ -42,4 +41,3 @@ module Flow
     end
   end
 end
-# :nocov:

@@ -1,5 +1,5 @@
-module Citizens
-  class HasDependantsController < CitizenBaseController
+module Providers
+  class HasDependantsController < ProviderBaseController
     def show
       @form = LegalAidApplications::HasDependantsForm.new(model: legal_aid_application)
     end
