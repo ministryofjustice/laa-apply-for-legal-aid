@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::HasOtherDependantsController, type: :request do
+RSpec.describe Providers::HasOtherDependantsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:provider) { legal_aid_application.provider }
 
   before do
-    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+    login_as provider
     subject
   end
 

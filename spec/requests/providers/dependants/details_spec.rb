@@ -1,17 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::Dependants::DetailsController, type: :request do
+RSpec.describe Providers::Dependants::DetailsController, type: :request do
   let(:calculation_date) { Date.current }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   before do
-    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+    login_as provider
     subject
   end
 
-  describe 'GET /citizens/dependants/:id/details' do
-    subject { get citizens_dependant_details_path(dependant) }
+  describe 'GET /providers/:application_id/dependants/:id/details' do
+    subject { get providers_legal_aid_application_applicant_details_path(legal_aid_application, dependant) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -25,7 +26,7 @@ RSpec.describe Citizens::Dependants::DetailsController, type: :request do
     end
   end
 
-  describe 'PATCH /citizens/dependants/:id/details' do
+  describe 'PATCH /providers/:application_id/dependants/:id/details' do
     let(:param_name) { Faker::Name.name }
     let(:param_date_of_birth) { calculation_date - 20.years }
     let(:params) do
@@ -39,7 +40,7 @@ RSpec.describe Citizens::Dependants::DetailsController, type: :request do
       }
     end
 
-    subject { patch citizens_dependant_details_path(dependant), params: params }
+    subject { patch providers_legal_aid_application_applicant_details_path(legal_aid_application, dependant), params: params }
 
     it 'updates the dependant' do
       dependant.reload

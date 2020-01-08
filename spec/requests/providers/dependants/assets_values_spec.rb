@@ -1,16 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::Dependants::AssetsValuesController, type: :request do
+RSpec.describe Providers::Dependants::AssetsValuesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   before do
-    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+    login_as provider
     subject
   end
 
-  describe 'GET /citizens/dependants/:dependant_id/assets_values' do
-    subject { get citizens_dependant_assets_value_path(dependant) }
+  describe 'GET /providers/:legal_aid_application/dependants/:dependant_id/assets_values' do
+    subject { get providers_legal_aid_application_dependant_assets_value_path(legal_aid_application, dependant) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -21,7 +22,7 @@ RSpec.describe Citizens::Dependants::AssetsValuesController, type: :request do
     end
   end
 
-  describe 'PATCH /citizens/dependants/:id/assets_values' do
+  describe 'PATCH /providers/dependants/:id/assets_values' do
     let(:has_assets_more_than_threshold) { true }
     let(:assets_value) { 10_000 }
     let(:params) do
@@ -33,7 +34,7 @@ RSpec.describe Citizens::Dependants::AssetsValuesController, type: :request do
       }
     end
 
-    subject { patch citizens_dependant_assets_value_path(dependant), params: params }
+    subject { patch providers_legal_aid_application_dependant_assets_value_path(legal_aid_application, dependant), params: params }
 
     it 'updates the dependant' do
       dependant.reload
@@ -42,7 +43,7 @@ RSpec.describe Citizens::Dependants::AssetsValuesController, type: :request do
     end
 
     it 'redirects to the page asking if you have other dependant' do
-      expect(response).to redirect_to(citizens_has_other_dependant_path)
+      expect(response).to redirect_to(providers_legal_aid_application_has_other_dependant_path(legal_aid_application))
     end
 
     context 'invalid params' do

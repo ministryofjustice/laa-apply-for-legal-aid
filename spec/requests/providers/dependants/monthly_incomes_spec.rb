@@ -1,11 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::Dependants::MonthlyIncomesController, type: :request do
+RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:dependant) { create :dependant, :over_18, in_full_time_education: false, legal_aid_application: legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   before do
-    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+    login_as provider
+    subject
   end
 
   describe 'GET /citizens/dependants/:id/monthly_income' do

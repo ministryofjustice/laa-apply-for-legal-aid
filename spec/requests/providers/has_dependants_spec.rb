@@ -3,8 +3,12 @@ require 'rails_helper'
 RSpec.describe 'citizen own home requests', type: :request do
   let(:application) { create :application, :with_applicant }
   let(:secure_id) { application.generate_secure_id }
+  let(:provider) { legal_aid_application.provider }
 
-  before { get citizens_legal_aid_application_path(secure_id) }
+  before do
+    login_as provider
+    subject
+  end
 
   describe 'GET citizens/has_dependants' do
     it 'returns http success' do

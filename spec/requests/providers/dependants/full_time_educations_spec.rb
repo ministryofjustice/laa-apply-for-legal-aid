@@ -1,15 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :request do
+RSpec.describe Providers::Dependants::FullTimeEducationsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   before do
-    get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+    login_as provider
+    subject
   end
 
   describe 'GET /citizens/dependants/:dependant_id/full_time_education' do
-    subject { get citizens_dependant_full_time_education_path(dependant) }
+    subject { get providers_legal_aid_application_dependant_full_time_education_path(legal_aid_application, dependant) }
 
     it 'returns http success' do
       subject
@@ -33,7 +35,7 @@ RSpec.describe Citizens::Dependants::FullTimeEducationsController, type: :reques
     end
 
     subject do
-      patch(citizens_dependant_full_time_education_path(dependant), params: params)
+      patch(providers_legal_aid_application_dependant_full_time_education_path(legal_aid_application, dependant), params: params)
     end
 
     it 'updates the dependant' do
