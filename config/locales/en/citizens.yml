@@ -67,11 +67,6 @@ en:
       relationships:
         show:
           page_heading: "What is your relationship to %{name}?"
-    has_dependants:
-      show:
-        page_heading: Do you have any dependants?
-        info: A dependant could be a child or adult who lives with you and depends on you for financial support.
-        extra_info: Do not include your partner if you have one.
     has_other_dependants:
       show:
         heading: Do you have any other dependants?

@@ -235,6 +235,11 @@ en:
     estimated_legal_costs:
       show:
         h1-heading: What are the estimated legal costs of doing the work?
+    has_dependants:
+      show:
+        page_heading: Does your client have any dependants?
+        info: A dependant could be a child or adult who lives with your client and depends on them for financial support.
+        extra_info: Do not include your client's partner if they have one.
     identify_types_of_incomes:
       show:
         page_heading: Which types of income does your client receive?
