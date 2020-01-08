@@ -32,7 +32,6 @@ module Providers
 
     def edit_dependant_path
       providers_legal_aid_application_dependant_details_path(legal_aid_application.id, dependant.id)
-
     end
 
     def form_params
