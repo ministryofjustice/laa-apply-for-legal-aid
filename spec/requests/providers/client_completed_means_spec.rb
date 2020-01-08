@@ -20,7 +20,11 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
+      end
+
+      it 'renders the correct view' do
         expect(response.body).to include('Your client has completed their financial assessment')
+        expect(response.body).to include('need to go through their transactions and sort them into categories')
       end
     end
   end

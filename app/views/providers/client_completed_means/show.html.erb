@@ -9,7 +9,19 @@
     <strong><%= @legal_aid_application.application_ref %></strong>
   </p>
 
-  <p class="govuk-body"><%= t('.review-advice') %></p>
+  <p class="govuk-body"><%= t('.intro') %></p>
+  <ul class="govuk-list govuk-list--bullet print-add-bullet">
+    <%- t('.intro-bullets').each do |bullet| %>
+      <li><%= bullet %></li>
+    <% end %>
+  </ul>
+  <p class="govuk-body"><%= t('.action') %></p>
+  <p class="govuk-body"><%= t('.question') %></p>
+  <ul class="govuk-list govuk-list--bullet print-add-bullet">
+    <%- t('.question-bullets').each do |bullet| %>
+      <li><%= bullet %></li>
+    <% end %>
+  </ul>
 
   <div class="govuk-!-padding-bottom-4"></div>
 
