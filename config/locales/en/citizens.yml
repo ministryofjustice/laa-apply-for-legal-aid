@@ -60,17 +60,6 @@ en:
       show:
         page_heading: Declaration
         submit_button: Agree and submit
-    dependants:
-      assets_values:
-        show:
-          page_heading: "Does %{name} have assets worth more than £8,000?"
-      relationships:
-        show:
-          page_heading: "What is your relationship to %{name}?"
-    has_other_dependants:
-      show:
-        heading: Do you have any other dependants?
-        error: Select yes if you have other dependants
     identify_types_of_incomes:
       show:
         page_heading: Which types of income do you receive?

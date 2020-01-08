@@ -217,6 +217,13 @@ en:
       show:
         h1-heading: Details of the latest domestic abuse incident
         details_label: What happened during the incident?
+    dependants:
+      assets_values:
+        show:
+          page_heading: "Does %{name} have assets worth more than £8,000?"
+      relationships:
+        show:
+          page_heading: "What is your relationship to %{name}?"
     end_of_applications:
       show:
         heading: Application complete
@@ -240,6 +247,10 @@ en:
         page_heading: Does your client have any dependants?
         info: A dependant could be a child or adult who lives with your client and depends on them for financial support.
         extra_info: Do not include your client's partner if they have one.
+    has_other_dependants:
+      show:
+        heading: Do you have any other dependants?
+        error: Select yes if you have other dependants
     identify_types_of_incomes:
       show:
         page_heading: Which types of income does your client receive?

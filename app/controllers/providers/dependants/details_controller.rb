@@ -1,6 +1,6 @@
-module Citizens
+module Providers
   module Dependants
-    class DetailsController < CitizenBaseController
+    class DetailsController < ProviderBaseController
       prefix_step_with :dependants
       helper_method :other_dependants
 

@@ -1,5 +1,5 @@
-module Citizens
-  class DependantsController < CitizenBaseController
+module Providers
+  class DependantsController < ProviderBaseController
     helper_method :other_dependants
 
     def index
@@ -31,7 +31,8 @@ module Citizens
     end
 
     def edit_dependant_path
-      citizens_dependant_details_path(dependant.id)
+      providers_legal_aid_application_dependant_details_path(legal_aid_application.id, dependant.id)
+
     end
 
     def form_params

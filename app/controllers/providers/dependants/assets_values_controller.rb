@@ -1,6 +1,6 @@
-module Citizens
+module Providers
   module Dependants
-    class AssetsValuesController < CitizenBaseController
+    class AssetsValuesController < ProviderBaseController
       prefix_step_with :dependants
 
       def show

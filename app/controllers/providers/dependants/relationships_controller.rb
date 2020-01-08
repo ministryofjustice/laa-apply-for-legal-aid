@@ -1,14 +1,14 @@
-module Citizens
+module Providers
   module Dependants
-    class FullTimeEducationsController < CitizenBaseController
+    class RelationshipsController < ProviderBaseController
       prefix_step_with :dependants
 
       def show
-        @form = DependantForm::FullTimeEducationForm.new(model: dependant)
+        @form = DependantForm::RelationshipForm.new(model: dependant)
       end
 
       def update
-        @form = DependantForm::FullTimeEducationForm.new(form_params)
+        @form = DependantForm::RelationshipForm.new(form_params)
 
         if @form.save
           go_forward(dependant)
@@ -24,10 +24,10 @@ module Citizens
       end
 
       def form_params
-        return { model: dependant } if params[:dependant].blank?
-
         merge_with_model(dependant) do
-          params.require(:dependant).permit(:in_full_time_education)
+          next {} unless params[:dependant]
+
+          params.require(:dependant).permit(:relationship)
         end
       end
     end

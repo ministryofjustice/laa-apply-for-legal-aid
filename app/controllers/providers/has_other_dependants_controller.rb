@@ -1,5 +1,5 @@
-module Citizens
-  class HasOtherDependantsController < CitizenBaseController
+module Providers
+  class HasOtherDependantsController < ProviderBaseController
     def show; end
 
     def update

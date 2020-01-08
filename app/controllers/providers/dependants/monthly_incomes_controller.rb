@@ -1,14 +1,14 @@
-module Citizens
+module Providers
   module Dependants
-    class RelationshipsController < CitizenBaseController
+    class MonthlyIncomesController < ProviderBaseController
       prefix_step_with :dependants
 
       def show
-        @form = DependantForm::RelationshipForm.new(model: dependant)
+        @form = DependantForm::MonthlyIncomeForm.new(model: dependant)
       end
 
       def update
-        @form = DependantForm::RelationshipForm.new(form_params)
+        @form = DependantForm::MonthlyIncomeForm.new(form_params)
 
         if @form.save
           go_forward(dependant)
@@ -25,9 +25,7 @@ module Citizens
 
       def form_params
         merge_with_model(dependant) do
-          next {} unless params[:dependant]
-
-          params.require(:dependant).permit(:relationship)
+          params.require(:dependant).permit(:has_income, :monthly_income)
         end
       end
     end
