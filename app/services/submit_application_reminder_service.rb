@@ -6,9 +6,14 @@ class SubmitApplicationReminderService
   def send_email
     return unless application.substantive_application_deadline_on
 
-    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
-    SubmitApplicationReminderMailer.notify_provider(*mailer_args).deliver_later!(wait_until: five_days_before_deadline)
-    SubmitApplicationReminderMailer.notify_provider(*mailer_args).deliver_later!(wait_until: nine_am_deadline_day)
+    [five_days_before_deadline, nine_am_deadline_day].each do |scheduled_time|
+      application.scheduled_mailings.create!(
+        mailer_klass: 'SubmitApplicationReminderMailer',
+        mailer_method: 'notify_provider',
+        arguments: mailer_args,
+        scheduled_time: scheduled_time
+      )
+    end
   end
 
   private
@@ -17,7 +22,7 @@ class SubmitApplicationReminderService
 
   def mailer_args
     [
-      application,
+      application.id,
       application.provider.name,
       application.provider.email
     ]
