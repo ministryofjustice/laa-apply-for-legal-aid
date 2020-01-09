@@ -443,11 +443,12 @@ en:
             the chances of a successful outcome
     statement_of_cases:
       show:
-        bullet-1: details of the latest domestic abuse incident
-        bullet-2: what has happened in the case so far
-        bullet-3: about any other parties involved and their relationship to the applicant
-        bullet-4: why the current proceedings are necessary
-        bullet-5: if anyone else might be able to fund this case
+        bullet-1: the opponent's name
+        bullet-2: details of the latest domestic abuse incident
+        bullet-3: what's happened in the case so far
+        bullet-4: if any other parties are involved and their relationship to your client
+        bullet-5: why the proceedings are necessary
+        bullet-6: if anyone else might be able to fund the case
         h1-heading: Provide a statement of case
         warning: Warning
         warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
