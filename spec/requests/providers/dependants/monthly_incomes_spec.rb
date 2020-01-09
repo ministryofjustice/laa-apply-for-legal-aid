@@ -10,8 +10,8 @@ RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request d
     subject
   end
 
-  describe 'GET /citizens/dependants/:id/monthly_income' do
-    subject { get citizens_dependant_monthly_income_path(dependant) }
+  describe 'GET /providers/:legal_aid_application_id/dependants/:id/monthly_income' do
+    subject { get providers_legal_aid_application_dependant_monthly_income_path(legal_aid_application, dependant) }
 
     it 'returns http status success' do
       subject
@@ -24,7 +24,7 @@ RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request d
     end
   end
 
-  describe 'PATCH /citizens/dependants/:id/monthly_income' do
+  describe 'PATCH /providers/:legal_aid_application_id/dependants/:id/monthly_income' do
     let(:has_income) { true }
     let(:monthly_income) { 1234 }
     let(:params) do
@@ -36,7 +36,7 @@ RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request d
       }
     end
 
-    subject { patch citizens_dependant_monthly_income_path(dependant), params: params }
+    subject { patch providers_legal_aid_application_dependant_monthly_income_path(legal_aid_application, dependant), params: params }
 
     it 'updates the dependant' do
       subject
@@ -47,7 +47,7 @@ RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request d
 
     it 'redirects to the assets page' do
       subject
-      expect(response).to redirect_to(citizens_dependant_assets_value_path(dependant))
+      expect(response).to redirect_to(providers_legal_aid_application_dependant_assets_value_path(legal_aid_application, dependant))
     end
 
     context 'dependant is less than 18' do
@@ -55,7 +55,7 @@ RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request d
 
       it 'redirects to the assets page' do
         subject
-        expect(response).to redirect_to(citizens_has_other_dependant_path)
+        expect(response).to redirect_to(providers_legal_aid_application_has_other_dependant_path(legal_aid_application))
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe Providers::Dependants::MonthlyIncomesController, type: :request d
 
       it 'redirects to the assets page' do
         subject
-        expect(response).to redirect_to(citizens_has_other_dependant_path)
+        expect(response).to redirect_to(providers_legal_aid_application_has_other_dependant_path(legal_aid_application))
       end
     end
 

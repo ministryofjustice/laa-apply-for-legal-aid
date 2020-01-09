@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'citizen own home requests', type: :request do
-  let(:application) { create :application, :with_applicant }
+RSpec.describe Providers::HasDependantsController, type: :request do
+  let(:legal_aid_application) { create :application, :with_applicant }
   let(:secure_id) { application.generate_secure_id }
   let(:provider) { legal_aid_application.provider }
 
@@ -10,26 +10,26 @@ RSpec.describe 'citizen own home requests', type: :request do
     subject
   end
 
-  describe 'GET citizens/has_dependants' do
+  describe 'GET /providers/:application_id/has_dependants' do
     it 'returns http success' do
-      get citizens_has_dependants_path
+      get providers_legal_aid_application_has_dependants_path(legal_aid_application)
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'PATCH citizens/has_dependants' do
-    before { patch citizens_has_dependants_path, params: params }
+  describe 'PATCH /providers/:application_id/has_dependants' do
+    before { patch providers_legal_aid_application_has_dependants_path(legal_aid_application), params: params }
 
     context 'valid params' do
       let(:params) { { legal_aid_application: { has_dependants: 'true' } } }
 
       it 'updates the record' do
-        expect(application.reload.has_dependants).to be true
+        expect(legal_aid_application.reload.has_dependants).to be true
       end
 
       context 'yes' do
         it 'redirects to the add dependant details page' do
-          expect(response).to redirect_to(citizens_dependants_path)
+          expect(response).to redirect_to(providers_legal_aid_application_dependants_path)
         end
       end
 
@@ -37,7 +37,7 @@ RSpec.describe 'citizen own home requests', type: :request do
         let(:params) { { legal_aid_application: { has_dependants: 'false' } } }
 
         it 'redirects to the identify types of outgoing page' do
-          expect(response).to redirect_to(citizens_identify_types_of_outgoing_path)
+          expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))
         end
       end
     end
@@ -50,7 +50,7 @@ RSpec.describe 'citizen own home requests', type: :request do
       end
 
       it 'does not update the record' do
-        expect(application.reload.has_dependants).to be_nil
+        expect(legal_aid_application.reload.has_dependants).to be_nil
       end
 
       it 'the response includes the error message' do

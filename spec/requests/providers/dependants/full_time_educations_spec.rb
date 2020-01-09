@@ -10,7 +10,7 @@ RSpec.describe Providers::Dependants::FullTimeEducationsController, type: :reque
     subject
   end
 
-  describe 'GET /citizens/dependants/:dependant_id/full_time_education' do
+  describe 'GET /providers/:legal_aid_application_id/dependants/:dependant_id/full_time_education' do
     subject { get providers_legal_aid_application_dependant_full_time_education_path(legal_aid_application, dependant) }
 
     it 'returns http success' do
@@ -24,7 +24,7 @@ RSpec.describe Providers::Dependants::FullTimeEducationsController, type: :reque
     end
   end
 
-  describe 'PATCH /citizens/dependants/:dependant_id/full_time_education' do
+  describe 'PATCH /providers/:legal_aid_application_id/:dependant_id/full_time_education' do
     let(:in_full_time_education) { true }
     let(:dependant) do
       create :dependant, :over_18, legal_aid_application: legal_aid_application
@@ -46,7 +46,7 @@ RSpec.describe Providers::Dependants::FullTimeEducationsController, type: :reque
 
     it 'redirects to the dependant income page' do
       subject
-      expect(response).to redirect_to(citizens_dependant_monthly_income_path(dependant))
+      expect(response).to redirect_to(providers_legal_aid_application_dependant_monthly_income_path(legal_aid_application, dependant))
     end
 
     context 'when not in full time education' do
@@ -60,7 +60,7 @@ RSpec.describe Providers::Dependants::FullTimeEducationsController, type: :reque
 
       it 'redirects to the dependant income page' do
         subject
-        expect(response).to redirect_to(citizens_dependant_monthly_income_path(dependant))
+        expect(response).to redirect_to(providers_legal_aid_application_dependant_monthly_income_path(legal_aid_application, dependant))
       end
     end
 

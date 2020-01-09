@@ -12,13 +12,13 @@ RSpec.describe Providers::Dependants::DetailsController, type: :request do
   end
 
   describe 'GET /providers/:application_id/dependants/:id/details' do
-    subject { get providers_legal_aid_application_applicant_details_path(legal_aid_application, dependant) }
+    subject { get providers_legal_aid_application_dependant_details_path(legal_aid_application, dependant) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
     end
 
-    it "contains dependant's informations" do
+    it "contains dependant's information" do
       expect(unescaped_response_body).to include(dependant.name)
       expect(unescaped_response_body).to include(dependant.date_of_birth.year.to_s)
       expect(unescaped_response_body).to include(dependant.date_of_birth.month.to_s)
@@ -40,7 +40,7 @@ RSpec.describe Providers::Dependants::DetailsController, type: :request do
       }
     end
 
-    subject { patch providers_legal_aid_application_applicant_details_path(legal_aid_application, dependant), params: params }
+    subject { patch providers_legal_aid_application_dependant_details_path(legal_aid_application, dependant), params: params }
 
     it 'updates the dependant' do
       dependant.reload
@@ -49,14 +49,14 @@ RSpec.describe Providers::Dependants::DetailsController, type: :request do
     end
 
     it 'redirects to the dependant relationship page if the dependant is more than 15 years old' do
-      expect(response).to redirect_to(citizens_dependant_relationship_path(dependant))
+      expect(response).to redirect_to(providers_legal_aid_application_dependant_relationship_path(legal_aid_application, dependant))
     end
 
     context 'dependant is less than 15 years old' do
       let(:param_date_of_birth) { calculation_date - 10.years }
 
       it 'redirects to the page asking if you have other dependant' do
-        expect(response).to redirect_to(citizens_has_other_dependant_path)
+        expect(response).to redirect_to(providers_legal_aid_application_has_other_dependant_path(legal_aid_application))
       end
     end
 

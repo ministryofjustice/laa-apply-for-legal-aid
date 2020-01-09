@@ -2,26 +2,24 @@ require 'rails_helper'
 
 RSpec.describe Providers::DependantsController, type: :request do
   let(:calculation_date) { Date.current }
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
+  let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
   let(:dependant) { legal_aid_application.dependants.last }
   let(:provider) { legal_aid_application.provider }
-
+  let(:skip_subject) { false }
   before do
     login_as provider
-    subject
+    subject unless skip_subject
   end
 
-
-  describe 'GET /citizens/dependant_details/:id' do
-    subject { get citizens_dependants_path }
+  describe 'GET /providers/:application_id/dependant_details/:id' do
+    subject { get providers_legal_aid_application_dependants_path(legal_aid_application) }
 
     it 'returns http success' do
-      subject
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'POST /citizens/dependants' do
+  describe 'POST /providers/:application_id/dependants' do
     let(:param_name) { Faker::Name.name }
     let(:param_date_of_birth) { calculation_date - 20.years }
     let(:params) do
@@ -36,25 +34,27 @@ RSpec.describe Providers::DependantsController, type: :request do
     end
     let(:latest_dependant) { Dependant.order(:created_at).last }
 
-    subject { post citizens_dependants_path, params: params }
+    subject { post providers_legal_aid_application_dependants_path(legal_aid_application), params: params }
 
-    it 'creates the dependant' do
-      expect { subject }.to change { legal_aid_application.reload.dependants.count }.by(1)
-      expect(dependant.name).to eq(param_name)
-      expect(dependant.date_of_birth).to eq(param_date_of_birth.to_date)
+    context 'reloading ' do
+      let(:skip_subject) { true }
+
+      it 'creates the dependant' do
+        expect { subject }.to change { legal_aid_application.reload.dependants.count }.by(1)
+        expect(dependant.name).to eq(param_name)
+        expect(dependant.date_of_birth).to eq(param_date_of_birth.to_date)
+      end
     end
 
     it 'redirects to the dependant relationship page if the dependant is more than 15 years old' do
-      subject
-      expect(response).to redirect_to(citizens_dependant_relationship_path(latest_dependant.id))
+      expect(response).to redirect_to(providers_legal_aid_application_dependant_relationship_path(legal_aid_application, latest_dependant.id))
     end
 
     context 'dependant is less than 15 years old' do
       let(:param_date_of_birth) { calculation_date - 10.years }
 
       it 'redirects to the page asking if you have other dependant' do
-        subject
-        expect(response).to redirect_to(citizens_has_other_dependant_path)
+        expect(response).to redirect_to(providers_legal_aid_application_has_other_dependant_path(legal_aid_application))
       end
     end
 
@@ -69,7 +69,6 @@ RSpec.describe Providers::DependantsController, type: :request do
       end
 
       it 'show errors' do
-        subject
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.name.blank'))
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.blank'))
       end
@@ -79,7 +78,6 @@ RSpec.describe Providers::DependantsController, type: :request do
       let(:param_date_of_birth) { Time.now + 2.years }
 
       it 'show errors' do
-        subject
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.date_is_in_the_future'))
       end
     end
@@ -88,7 +86,6 @@ RSpec.describe Providers::DependantsController, type: :request do
       let(:param_date_of_birth) { Time.now - 1000.years }
 
       it 'show errors' do
-        subject
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.earliest_allowed_date', date: '01 01 1900'))
       end
     end
@@ -106,7 +103,6 @@ RSpec.describe Providers::DependantsController, type: :request do
       end
 
       it 'show errors' do
-        subject
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.date_not_valid'))
       end
     end
@@ -124,7 +120,6 @@ RSpec.describe Providers::DependantsController, type: :request do
       end
 
       it 'show errors' do
-        subject
         expect(response.body).to include(I18n.t('activemodel.errors.models.dependant.attributes.date_of_birth.date_not_valid'))
       end
     end

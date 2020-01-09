@@ -9,28 +9,28 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     subject
   end
 
-  describe 'GET /citizens/has_other_dependant' do
-    subject { get citizens_has_other_dependant_path }
+  describe 'GET /providers/:application_id/has_other_dependant' do
+    subject { get providers_legal_aid_application_has_other_dependant_path(legal_aid_application) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'PATCH /citizens/has_other_dependant' do
+  describe 'PATCH /providers/:application_id/has_other_dependant' do
     let(:params) do
       {
         other_dependant: other_dependant
       }
     end
 
-    subject { patch citizens_has_other_dependant_path, params: params }
+    subject { patch providers_legal_aid_application_has_other_dependant_path(legal_aid_application), params: params }
 
     context 'choose yes' do
       let(:other_dependant) { 'yes' }
 
       it 'redirects to the page to add another dependant' do
-        expect(response).to redirect_to(citizens_dependants_path)
+        expect(response).to redirect_to(providers_legal_aid_application_dependants_path(legal_aid_application))
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
       let(:other_dependant) { 'no' }
 
       it 'redirects to the types of outgoings page' do
-        expect(response).to redirect_to(citizens_identify_types_of_outgoing_path)
+        expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
       let(:other_dependant) { 'not sure' }
 
       it 'show errors' do
-        expect(response.body).to include(I18n.t('citizens.has_other_dependants.show.error'))
+        expect(response.body).to include(I18n.t('providers.has_other_dependants.show.error'))
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
       let(:params) {}
 
       it 'show errors' do
-        expect(response.body).to include(I18n.t('citizens.has_other_dependants.show.error'))
+        expect(response.body).to include(I18n.t('providers.has_other_dependants.show.error'))
       end
     end
   end

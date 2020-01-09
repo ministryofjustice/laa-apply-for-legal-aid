@@ -1,5 +1,5 @@
 <%= render(
       'shared/forms/dependants/details',
-      form_url: providers_legal_aid_application_dependant_details_path(legal_aid_application.id, dependant.id),
+      form_url: providers_legal_aid_application_dependants_path(@legal_aid_application),
       form_method: :post
     ) %>
