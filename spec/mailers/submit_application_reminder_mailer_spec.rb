@@ -6,7 +6,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
   let(:provider_name) { Faker::Name.name }
 
   describe '#notify_provider' do
-    let(:mail) { described_class.notify_provider(application, provider_name, email) }
+    let(:mail) { described_class.notify_provider(application.id, provider_name, email) }
 
     it 'sends an email to the correct address' do
       expect(mail.to).to eq([email])

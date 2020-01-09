@@ -11,7 +11,7 @@ class SubmitApplicationReminderService
         mailer_klass: 'SubmitApplicationReminderMailer',
         mailer_method: 'notify_provider',
         arguments: mailer_args,
-        scheduled_time: scheduled_time
+        scheduled_at: scheduled_time
       )
     end
   end

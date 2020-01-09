@@ -5,7 +5,7 @@ RSpec.describe SubmissionConfirmationMailer, type: :mailer do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:provider) { legal_aid_application.provider }
     let(:applicant) { legal_aid_application.applicant }
-    let(:mail) { described_class.notify(legal_aid_application, provider, applicant) }
+    let(:mail) { described_class.notify(legal_aid_application.id) }
 
     it 'sends to correct address' do
       expect(mail.to).to eq([provider.email])

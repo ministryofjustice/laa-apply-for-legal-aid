@@ -9,18 +9,12 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
   subject { described_class.new(application) }
 
   describe '#send_email' do
-    it 'sends an email' do
-      message_delivery = instance_double(ActionMailer::MessageDelivery)
-      expect(SubmitApplicationReminderMailer).to receive(:notify_provider)
-        .with(application, provider.name, provider.email)
-        .and_return(message_delivery).exactly(2).times
-      expect(message_delivery).to receive(:deliver_later!).exactly(2).times
-
-      subject.send_email
+    it 'creates two scheduled mailing records' do
+      expect{ subject.send_email }.to change{ ScheduledMailing.count }.by(2)
     end
 
     context 'sending the email' do
-      let(:mail) { SubmitApplicationReminderMailer.notify_provider(application, application.provider.name, provider.email) }
+      let(:mail) { SubmitApplicationReminderMailer.notify_provider(application.id, application.provider.name, provider.email) }
       it 'sends an email with the right parameters' do
         expect(mail.govuk_notify_personalisation).to eq(
           email: provider.email,
