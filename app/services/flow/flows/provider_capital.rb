@@ -15,8 +15,8 @@ module Flow
           forward: :outgoings_summary
         },
         outgoings_summary: {
-            path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-            forward: :own_homes
+          path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
+          forward: :own_homes
         },
         own_homes: {
           path: ->(application) { urls.providers_legal_aid_application_own_home_path(application) },
