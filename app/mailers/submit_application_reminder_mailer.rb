@@ -3,9 +3,6 @@ class SubmitApplicationReminderMailer < GovukNotifyRails::Mailer
   include NotifyTemplateMethods
 
   def notify_provider(application_id, name, to = support_email_address)
-    # in order to still work for scheduled sidekiq jobs, allow application rather than application_id to be passed in
-    # This can be changed to use just application id once all the scheduled mailer jobs in sidekiq have been delivered.
-
     application = LegalAidApplication.find(application_id)
     template_name :reminder_to_submit_an_application
     set_personalisation(

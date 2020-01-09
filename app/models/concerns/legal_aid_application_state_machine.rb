@@ -112,7 +112,7 @@ module LegalAidApplicationStateMachine
 
       event :submitted_assessment do
         transitions from: :submitting_assessment, to: :assessment_submitted,
-                    after: -> { PostSubmissionProcessingJob.perform_later(self.id) }
+                    after: -> { PostSubmissionProcessingJob.perform_later(id) }
       end
     end
   end

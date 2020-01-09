@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe PostSubmissionProcessingJob, type: :job do
   let(:application) { create :legal_aid_application }
-  subject{ described_class.new.perform(application.id) }
-
+  subject { described_class.new.perform(application.id) }
 
   describe 'SubmissionConfirmationMailer' do
     it 'calls deliver on the mail item' do
-      mail = double "mail_object"
+      mail = double 'mail_object'
       expect(SubmissionConfirmationMailer).to receive(:notify).with(application.id).and_return(mail)
       expect(mail).to receive(:deliver_later!)
       subject

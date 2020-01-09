@@ -4,12 +4,12 @@ class PostSubmissionProcessingJob < ActiveJob::Base
   def perform(legal_aid_application_id)
     SubmissionConfirmationMailer.notify(legal_aid_application_id).deliver_later!
     @legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
-    reminder_mailings.each{ |mailing| mailing.cancel! }    
+    reminder_mailings.each(&:cancel!)
   end
 
   private
 
   def reminder_mailings
-    @legal_aid_application.scheduled_mailings.where(mailer_klass: "SubmitApplicationReminderMailer")
+    @legal_aid_application.scheduled_mailings.where(mailer_klass: 'SubmitApplicationReminderMailer')
   end
 end

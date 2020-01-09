@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ScheduledMailingsDeliveryJob, type: :job do
-  subject{ described_class.new.perform }
+  subject { described_class.new.perform }
 
   describe 'ScheduledMailingsDeliveryJob' do
     let!(:mailing_one) { create :scheduled_mailing, :due }

@@ -26,6 +26,9 @@ RSpec.describe ScheduledMailing do
     let(:scheduled_mail) { create :scheduled_mailing, :due }
     let(:mail_message) { double 'mail message' }
     let(:now) { Time.now }
+    before do
+      Timecop.freeze(now)
+    end
 
     it 'delivers the mail' do
       expect(SubmitApplicationReminderMailer)
@@ -37,10 +40,8 @@ RSpec.describe ScheduledMailing do
     end
 
     it 'marks the record as sent' do
-      Timecop.freeze(now) do
-        scheduled_mail.deliver!
-        expect(scheduled_mail.reload.sent_at).to eq now
-      end
+      scheduled_mail.deliver!
+      expect(scheduled_mail.reload.sent_at).to eq now
     end
   end
 
