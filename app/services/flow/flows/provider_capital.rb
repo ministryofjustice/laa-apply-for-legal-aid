@@ -14,6 +14,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: :outgoings_summary
         },
+        outgoings_summary: {
+            path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
+            forward: :own_homes
+        },
         own_homes: {
           path: ->(application) { urls.providers_legal_aid_application_own_home_path(application) },
           forward: ->(application) { application.own_home_no? ? :vehicles : :property_values },
@@ -80,10 +84,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: :has_dependants,
           check_answers: :means_summaries
-        },
-        outgoings_summary: {
-          path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: :means_summaries
         },
         incoming_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
