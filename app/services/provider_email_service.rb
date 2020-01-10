@@ -28,7 +28,7 @@ class ProviderEmailService
   end
 
   def application_url
-    @application_url ||= providers_legal_aid_applications_url
+    @application_url ||= providers_legal_aid_application_client_completed_means_url(application)
   end
 
   def applicant
