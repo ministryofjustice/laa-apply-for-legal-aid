@@ -13,7 +13,6 @@ module Flow
                 when :providers
                   Flow::ProviderFlowService
                 end
-
         klass.new(*args)
       end
     end

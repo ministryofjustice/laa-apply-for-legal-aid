@@ -1,5 +1,60 @@
 <%= page_template(page_title: t('.h1-heading')) do %>
 
+  <h2 class="govuk-heading-l"><%= t('.dependants-section-heading') %></h2>
+  <%- @legal_aid_application.dependants.each_with_index do |dependant, index| %>
+    <dl class="govuk-summary-list govuk-!-padding-bottom-4">
+      <h2 class="govuk-heading-m">Dependant <%= index + 1 %></h2>
+      <%= check_answer_link(
+              name: :dependant,
+              url: '',
+              question: t('.dependants.name'),
+              answer: dependant.name,
+              read_only: true,
+              align_right: false
+          ) %>
+      <%= check_answer_link(
+              name: :dependant,
+              url: nil,
+              question: t('.dependants.date_of_birth'),
+              answer: dependant.date_of_birth,
+              read_only: true,
+              align_right: false
+          ) %>
+      <%= check_answer_link(
+              name: :dependant,
+              url: check_answer_url_for(:providers, :dependants_relationships, @legal_aid_application, dependant_id: dependant),
+              question: t('.dependants.relationship'),
+              answer: dependant.relationship.nil? ? '' : t("shared.forms.dependants.relationship.option.#{dependant.relationship}"),
+              read_only: false,
+              align_right: false
+          ) %>
+      <%= check_answer_link(
+              name: :dependant,
+              url: nil,
+              question: t('.dependants.in_full_time_education'),
+              answer: yes_no(dependant.in_full_time_education),
+              read_only: true,
+              align_right: false
+          ) %>
+      <%= check_answer_link(
+              name: :dependant,
+              url: nil,
+              question: t('.dependants.income'),
+              answer: dependant.has_income? ? number_to_currency(dependant.monthly_income) : yes_no(dependant.has_income?),
+              read_only: true,
+              align_right: false
+          ) %>
+      <%= check_answer_link(
+              name: :dependant,
+              url: nil,
+              question: t('.dependants.assets'),
+              answer: dependant.has_assets_more_than_threshold? ? number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?),
+              read_only: true,
+              align_right: false
+          ) %>
+    </dl>
+  <% end %>
+
   <h2 class="govuk-heading-l"><%= t('.credits-section-heading') %></h2>
   <%= render(
         'shared/check_answers/bank_transaction_table',

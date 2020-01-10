@@ -14,13 +14,13 @@ module Flow
           forward: ->(_, dependant) { dependant.over_fifteen? ? :dependants_relationships : :has_other_dependants }
         },
         dependants_relationships: {
-          path: ->(application, dependant) { urls.providers_legal_aid_application_dependant_relationship_path(application, dependant) },
+          path: ->(application, params) { urls.providers_legal_aid_application_dependant_relationship_path(application, params.slice(:dependant_id)) },
           forward: ->(_, dependant) do
             dependant.adult_relative? || dependant.eighteen_or_less? ? :dependants_monthly_incomes : :dependants_full_time_educations
           end
         },
         dependants_assets_values: {
-          path: ->(applicant, dependant) { urls.providers_legal_aid_application_dependant_assets_value_path(applicant, dependant) },
+          path: ->(application, dependant) { urls.providers_legal_aid_application_dependant_assets_value_path(application, dependant) },
           forward: :has_other_dependants
         },
         dependants_monthly_incomes: {
