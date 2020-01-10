@@ -9,7 +9,6 @@ en:
       address_lookup:
         postcode: This must be a valid UK postcode
       applicant:
-        email: We'll send your client a link to our service if they need to answer questions about their finances
         national_insurance_number: For example, 'QQ 12 34 56 C'
       has_offline_accounts: If you do not, you will need to provide paper evidence for these accounts.
       legal_aid_application:
