@@ -7,6 +7,7 @@
             <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.ccms_ref') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.provider_firm') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.provider_username') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.submission_date') %></th>
           </tr>
         </thead>
@@ -17,6 +18,7 @@
               <td class="govuk-table__cell case-reference-number"><%= application.application_ref %></td>
               <td class="govuk-table__cell case-reference-number"><%= application.ccms_submission.case_ccms_reference %></td>
               <td class="govuk-table__cell case-reference-number"><%= application.provider.firm.name %></td>
+              <td class="govuk-table__cell case-reference-number"><%= application.provider.username %></td>
               <td class="govuk-table__cell"><%= l(application.ccms_submission.created_at.to_date, format: :long_date) %></td>
             </tr>
           <% end %>

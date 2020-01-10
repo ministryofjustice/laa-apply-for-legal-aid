@@ -40,6 +40,7 @@ en:
         application_ref: Case reference
         ccms_ref: CCMS reference
         provider_firm: Provider firm
+        provider_username: Provider username
         submission_date: Submission date
     feedback:
       show:
