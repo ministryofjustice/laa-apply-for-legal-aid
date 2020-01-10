@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: 'auth#failure'
   get 'ping', to: 'status#ping', format: :json
   get 'healthcheck', to: 'status#status', format: :json
-  get 'status', to: 'status#status', format: :json
+  get 'status', to: 'status#ping', format: :json
 
   resource :contact, only: [:show]
   resources :privacy_policy, only: [:index]
