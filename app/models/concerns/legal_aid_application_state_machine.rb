@@ -98,21 +98,21 @@ module LegalAidApplicationStateMachine
 
       event :generate_reports do
         transitions from: :checked_merits_answers, to: :generating_reports,
-                    after: -> { ReportsCreatorWorker.perform_async(id) }
+                    after: -> do
+                      ReportsCreatorWorker.perform_async(id)
+                      PostSubmissionProcessingJob.perform_later(id)
+                    end
       end
 
       event :generated_reports do
         transitions from: :generating_reports, to: :submitting_assessment,
                     after: -> do
-                      return unless Rails.configuration.x.ccms_soa.submit_applications_to_ccms
-
-                      ccms_submission.process_async!
+                      ccms_submission.process_async! if Rails.configuration.x.ccms_soa.submit_applications_to_ccms
                     end
       end
 
       event :submitted_assessment do
-        transitions from: :submitting_assessment, to: :assessment_submitted,
-                    after: -> { PostSubmissionProcessingJob.perform_later(id) }
+        transitions from: :submitting_assessment, to: :assessment_submitted
       end
     end
   end

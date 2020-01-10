@@ -322,15 +322,15 @@ workflows:
         type: approval
         requires:
         - build_and_push
-        filters:
-          branches:
-            only: master
+        # filters:
+        #   branches:
+        #     only: master
     - deploy_staging:
         requires:
         - hold_staging
-        filters:
-          branches:
-            only: master
+        # filters:
+        #   branches:
+        #     only: master
     - hold_production:
         type: approval
         requires:
