@@ -47,7 +47,7 @@ RSpec.describe Providers::DependantsController, type: :request do
     end
 
     it 'redirects to the dependant relationship page if the dependant is more than 15 years old' do
-      binding.pry
+      # binding.pry
       expect(response).to redirect_to(providers_legal_aid_application_dependant_relationship_path(legal_aid_application, dependant_id: latest_dependant.id))
     end
 

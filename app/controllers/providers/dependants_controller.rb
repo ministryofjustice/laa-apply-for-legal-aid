@@ -31,7 +31,7 @@ module Providers
     end
 
     def edit_dependant_path
-      binding.pry
+      # binding.pry
       providers_legal_aid_application_dependant_details_path(legal_aid_application.id, dependant.id)
     end
 
