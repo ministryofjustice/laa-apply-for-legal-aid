@@ -85,5 +85,14 @@ RUN apk del build-dependencies
 # non-root/appuser should own only what they need to
 RUN chown -R appuser:appgroup log tmp db
 
+# expect ping environment variablesARG COMMIT_ID
+ARG BUILD_DATE
+ARG BUILD_TAG
+ARG APP_BRANCH
+# set ping environment variables
+ENV BUILD_DATE=${BUILD_DATE}
+ENV BUILD_TAG=${BUILD_TAG}
+ENV APP_BRANCH=${APP_BRANCH}
+
 USER 1000
 CMD "./docker/run"
