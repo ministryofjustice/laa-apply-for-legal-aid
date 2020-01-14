@@ -199,7 +199,6 @@ RSpec.describe StatusController, type: :request do
       let(:expected_json) do
         {
           'build_date' => '20150721',
-          'commit_id' => 'afb12cb3',
           'build_tag' => 'test',
           'app_branch' => 'test_branch'
         }
@@ -207,7 +206,6 @@ RSpec.describe StatusController, type: :request do
 
       before do
         ENV['BUILD_DATE']       = '20150721'
-        ENV['COMMIT_ID']        = 'afb12cb3'
         ENV['BUILD_TAG']        = 'test'
         ENV['APP_BRANCH']       = 'test_branch'
 
@@ -223,7 +221,6 @@ RSpec.describe StatusController, type: :request do
       before do
         ENV['VERSION_NUMBER']   = nil
         ENV['BUILD_DATE']       = nil
-        ENV['COMMIT_ID']        = nil
         ENV['BUILD_TAG']        = nil
         ENV['APP_BRANCH']       = nil
 
