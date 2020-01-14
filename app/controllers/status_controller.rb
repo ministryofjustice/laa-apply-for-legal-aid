@@ -19,7 +19,6 @@ class StatusController < ApiController
   def ping
     render json: {
       'build_date' => ENV['BUILD_DATE'] || 'Not Available',
-      'commit_id' => ENV['COMMIT_ID'] || 'Not Available',
       'build_tag' => ENV['BUILD_TAG'] || 'Not Available',
       'app_branch' => ENV['APP_BRANCH'] || 'Not Available'
     }
