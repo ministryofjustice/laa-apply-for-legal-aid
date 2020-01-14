@@ -404,7 +404,7 @@ Then('I am on the postcode entry page') do
 end
 
 Then('I am on the client use online banking page') do
-  expect(page).to have_content('Does your client use online banking?')
+  expect(page).to have_content('Check if you can continue using this service')
 end
 
 Then(/^I click find address$/) do

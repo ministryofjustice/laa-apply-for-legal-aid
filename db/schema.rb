@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_104140) do
+ActiveRecord::Schema.define(version: 2020_01_06_113041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 2019_12_06_104140) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.boolean "uses_online_banking"
     t.string "true_layer_secure_data_id"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
@@ -410,6 +409,8 @@ ActiveRecord::Schema.define(version: 2019_12_06_104140) do
     t.string "restrictions_details"
     t.boolean "no_credit_transaction_types_selected"
     t.boolean "no_debit_transaction_types_selected"
+    t.boolean "provider_received_citizen_consent"
+    t.boolean "citizen_uses_online_banking"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
