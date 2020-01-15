@@ -40,7 +40,7 @@ RSpec.describe Providers::Dependants::DetailsController, type: :request do
       }
     end
 
-    subject { patch providers_legal_aid_application_dependant_details_path(legal_aid_application, dependant: dependant), params: params }
+    subject { patch providers_legal_aid_application_dependant_details_path(legal_aid_application, dependant), params: params }
 
     it 'updates the dependant' do
       dependant.reload
