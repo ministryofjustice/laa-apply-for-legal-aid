@@ -85,7 +85,7 @@ RUN apk del build-dependencies
 # non-root/appuser should own only what they need to
 RUN chown -R appuser:appgroup log tmp db
 
-# expect ping environment variablesARG COMMIT_ID
+# expect ping environment variables
 ARG BUILD_DATE
 ARG BUILD_TAG
 ARG APP_BRANCH
