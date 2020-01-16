@@ -17,6 +17,11 @@
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+
+// require polyfills via core-js
+require("core-js/stable")
+require("regenerator-runtime/runtime")
+
 require("axios")
 
 const context = require.context("../src", true, /\.js$/)
