@@ -579,13 +579,13 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#submitted_assessment' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :submitting_assessment }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checked_merits_answers }
 
     it 'schedules a PostSubmissionProcessingJob ' do
       expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
         legal_aid_application.id
       ).and_call_original
-      legal_aid_application.submitted_assessment!
+      legal_aid_application.generate_reports!
     end
   end
 
