@@ -147,6 +147,8 @@ jobs:
     - run:
         name: Run integration tests
         command: SAVE_PAGES=true bin/rails cucumber
+    - store_artifacts:
+      path: tmp/capybara
     - persist_to_workspace:
         root: tmp
         paths:
