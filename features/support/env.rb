@@ -113,6 +113,11 @@ end
 World(FactoryBot::Syntax::Methods)
 World(Warden::Test::Helpers)
 
+After do |scenario|
+  name = scenario.location.file.gsub('features/','').gsub(/\.|\//, '-')
+  screenshot_image(name) if scenario.failed?
+end
+
 AfterStep do
   next unless ENV['SAVE_PAGES'] == 'true'
   next unless page.current_host
