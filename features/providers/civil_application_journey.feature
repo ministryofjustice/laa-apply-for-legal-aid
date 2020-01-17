@@ -559,6 +559,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I upload a pdf file
+    Then I click 'Upload'
     Then I reload the page
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"

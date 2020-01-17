@@ -490,6 +490,7 @@ en:
         size: Size
         status: Status
         uploaded: Uploaded
+        title: Uploaded files
     submitted_applications:
       show:
         back_home: Back to your applications

@@ -1,4 +1,4 @@
-<div id="files-errors-container"></div>
+<div id="files-errors-container" role="alert" tabindex="0"></div>
 <%= page_template page_title: t('.h1-heading'), template: :basic do %>
 
   <%= govuk_form_group(
@@ -17,7 +17,7 @@
     <div class="govuk-warning-text">
       <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
       <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">t('.warning')</span>
+        <span class="govuk-warning-text__assistive"><%= t('.warning_text') %></span>
         <%= t('.warning_text') %>
       </strong>
     </div>
@@ -34,17 +34,22 @@
           local: true
         ) do |form| %>
 
-      <label class="govuk-heading-m" for="original_files"><%= t('generic.upload_file') %></label>
-      <%= form.govuk_file_field :original_files, multiple: true, label: nil %>
-
-      <noscript>
+      <label class="govuk-heading-m" for="original_file"><%= t('generic.upload_file') %></label>
+      <%= form.govuk_file_field :original_file, label: nil %>
         <%= form.submit(
               t('generic.upload'),
               id: 'upload',
               name: 'upload_button',
               class: 'govuk-button form-button'
             ) %>
-      </noscript>
+
+        <% #  Customised accessibility alerts within this span below %>
+        <% if @successfully_deleted %>
+          <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
+        <% end %>
+        <% if @error_message || @successful_upload %>
+          <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
+        <% end %>
 
       <div class="govuk-radios__divider"><%= t('generic.or') %></div>
 
