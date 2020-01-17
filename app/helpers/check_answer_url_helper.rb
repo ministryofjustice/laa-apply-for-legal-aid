@@ -10,17 +10,6 @@ module CheckAnswerUrlHelper
     [flow_service.current_path, anchor].compact.join('#')
   end
 
-  def check_answer_url_for_dependant(journey_type, field_name, dependant)
-    flow_service = Flow::BaseFlowService.flow_service_for(
-      journey_type,
-      current_step: field_name,
-      legal_aid_application: dependant.legal_aid_application,
-      params: { dependant: dependant }
-    )
-    anchor = field_name_to_anchor_map[field_name]
-    [flow_service.current_path, anchor].compact.join('#')
-  end
-
   # Used to append '#<anchor>' to urls for field names that need an anchor
   def field_name_to_anchor_map
     {
