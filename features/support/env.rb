@@ -114,7 +114,7 @@ World(FactoryBot::Syntax::Methods)
 World(Warden::Test::Helpers)
 
 After do |scenario|
-  name = scenario.location.file.gsub('features/','').gsub(/\.|\//, '-')
+  name = scenario.location.file.gsub('features/', '').gsub(%r{/\.|\/}, '-')
   screenshot_image(name) if scenario.failed?
 end
 
