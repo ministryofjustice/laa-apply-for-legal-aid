@@ -104,7 +104,6 @@ Feature: Civil application journeys
 
   @javascript
   Scenario: I complete each step up to the applicant page
-    # testing shared steps: Given I start the journey as far as the applicant page
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
@@ -373,8 +372,29 @@ Feature: Civil application journeys
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client have any dependants?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which regular payments does your client make?"
+    Then I select "None of these"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Your client's regular payments"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I select "None of these"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I select "None of these"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'I want a screenshot'
     Then I should be on a page showing 'Check your answers'
     Then I click link 'View/change declared income'
     Then I should be on a page showing "Your client's income"
@@ -389,6 +409,12 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client have any dependants?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which regular payments does your client make?"
+    Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's regular payments"
     Then I click 'Save and continue'
