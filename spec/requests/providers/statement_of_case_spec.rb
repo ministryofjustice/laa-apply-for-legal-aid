@@ -77,7 +77,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
     end
 
     # When a file to upload is selected from the dialog box
-    context 'uploading file with ajax request' do
+    context 'uploading files with ajax request' do
       let(:xhr) { true }
       let(:params_statement_of_case) do
         {
@@ -86,35 +86,77 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
       let(:json_response) { JSON.parse(response.body) }
 
-      it 'updates the record' do
-        subject
-        expect(statement_of_case.original_attachments.first).to be_present
-      end
+      context 'single file uploaded' do
+        it 'updates the record' do
+          subject
+          expect(statement_of_case.original_attachments.first).to be_present
+        end
 
-      it 'returns HTML of files table in a JSON object' do
-        subject
-        expect(json_response['uploaded_files_table']).to include('<table')
-        expect(json_response['uploaded_files_table']).to include(original_file.original_filename)
-      end
+        it 'returns HTML of files table in a JSON object' do
+          subject
+          expect(json_response['uploaded_files_table']).to include('<table')
+          expect(json_response['uploaded_files_table']).to include(original_file.original_filename)
+        end
 
-      context 'and there is an error' do
-        let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+        context 'and there is an error' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
+          it 'does not update the record' do
+            subject
+            expect(statement_of_case).to be_nil
+          end
+
+          it 'returns HTML of error summary' do
+            subject
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: original_file.original_filename)
+            expect(json_response['error_summary']).to include(error)
+          end
+
+          it 'returns hash of objects' do
+            subject
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: original_file.original_filename)
+            expect(json_response['errors'][original_file.original_filename]).to include(error)
+          end
+        end
+      end
+      context 'multiple files uploaded' do
+        let(:params_statement_of_case) do
+          {
+            original_files: [original_file_1, error_file, original_file_2]
+          }
+        end
+        let(:original_file_1) { uploaded_file('spec/fixtures/files/documents/hello_world.pdf', 'application/pdf') }
+        let(:original_file_2) { uploaded_file('spec/fixtures/files/documents/hello_world1.pdf', 'application/pdf') }
+        let(:error_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
+        it 'updates the record' do
+          subject
+          expect(statement_of_case.original_attachments.count).to eq 2
+        end
+
+        it 'returns HTML of files table in a JSON object' do
+          subject
+          expect(json_response['uploaded_files_table']).to include('<table')
+          expect(json_response['uploaded_files_table']).to include(original_file_1.original_filename)
+        end
 
         it 'returns HTML of error summary' do
           subject
-          expect(json_response['error_summary']).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid'))
+          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: error_file.original_filename)
+          expect(json_response['error_summary']).to include(error)
         end
 
         it 'returns hash of objects' do
           subject
-          expect(json_response['errors']['original_files']).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid'))
+          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: error_file.original_filename)
+          expect(json_response['errors'][error_file.original_filename]).to include(error)
         end
       end
     end
 
     context 'Continue button pressed' do
       context 'model has no files attached previously' do
-        context 'file is empty and text it empty' do
+        context 'file is empty and text is empty' do
           let(:params_statement_of_case) do
             {
               statement: ''
@@ -157,7 +199,8 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid'))
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: original_file.original_filename)
+            expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
         end
@@ -167,17 +210,19 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_too_big', size: 0))
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_too_big', size: 0, file_name: original_file.original_filename)
+            expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
         end
 
         context 'file is empty' do
-          let(:original_file) { uploaded_file('spec/fixtures/files/empty_file') }
+          let(:original_file) { uploaded_file('spec/fixtures/files/empty_file.pdf', 'application/pdf') }
 
           it 'does not save the object and raise an error' do
             subject
-            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_empty'))
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_empty', file_name: original_file.original_filename)
+            expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
         end
@@ -201,7 +246,8 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
             it 'does not save the object and raise an error' do
               subject
-              expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_virus'))
+              error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_virus', file_name: original_file.original_filename)
+              expect(response.body).to include(error)
               expect(statement_of_case).to be_nil
             end
           end

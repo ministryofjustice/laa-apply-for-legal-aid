@@ -360,10 +360,10 @@ en:
         statement_of_case:
           attributes:
             original_files:
-              content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
-              file_empty: The selected file is empty
-              file_too_big: The selected file must be smaller than %{size}MB
-              file_virus: The selected file contains a virus
+              content_type_invalid: The selected file %{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
+              file_empty: The selected file %{file_name} is empty
+              file_too_big: The selected file %{file_name} must be smaller than %{size}MB
+              file_virus: The selected file %{file_name} contains a virus
               no_file_chosen: You must choose at least one file
             statement:
               blank: Either attach a file or enter text
