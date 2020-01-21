@@ -1,3 +1,4 @@
+{{- $schedule := include "apply-for-legal-aid.cronjob-schedule-hourly-db-backup" . -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -8,7 +9,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  schedule: '3 7-21 * * *'
+  schedule: '{{ $schedule }}'
   selector:
     matchLabels:
       app: {{ template "apply-for-legal-aid.name" . }}
