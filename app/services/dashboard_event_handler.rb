@@ -38,6 +38,7 @@ class DashboardEventHandler
 
   def application_created
     Dashboard::UpdaterJob.perform_later('Applications') if payload[:state] == 'initiated'
+    Dashboard::UpdaterJob.perform_later('DailyApplications') if payload[:state] == 'initiated'
   end
 
   def provider_created
