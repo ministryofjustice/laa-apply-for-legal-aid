@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_113041) do
+ActiveRecord::Schema.define(version: 2020_01_08_162334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -585,6 +585,18 @@ ActiveRecord::Schema.define(version: 2020_01_06_113041) do
     t.boolean "none_selected"
     t.decimal "offline_savings_accounts"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
+  end
+
+  create_table "scheduled_mailings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "mailer_klass", null: false
+    t.string "mailer_method", null: false
+    t.string "arguments", null: false
+    t.datetime "scheduled_at", null: false
+    t.datetime "sent_at"
+    t.datetime "cancelled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

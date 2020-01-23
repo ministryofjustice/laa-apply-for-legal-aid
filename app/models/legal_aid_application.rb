@@ -34,6 +34,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment'
   has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', dependent: :destroy
   has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission'
+  has_many :scheduled_mailings
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
