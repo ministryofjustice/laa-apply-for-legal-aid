@@ -1,5 +1,4 @@
-<%= page_template page_title: t('.title') do %>
-
+<%= page_template page_title: t('.title'), back_link: back_button, success_message: success_message do %>
     <%= form_for(@feedback, url: feedback_index_path) do |form| %>
 
       <%= form.govuk_collection_radio_buttons(
