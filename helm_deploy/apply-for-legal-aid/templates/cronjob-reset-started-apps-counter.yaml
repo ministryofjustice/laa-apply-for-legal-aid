@@ -1,15 +1,14 @@
-{{- $schedule := include "apply-for-legal-aid.cronjob-schedule-hourly-db-backup" . -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Release.Name | trunc 26 }}-hourly-db-backup
+  name: {{ .Release.Name | trunc 26 }}-reset-counter
   labels:
     app: {{ template "apply-for-legal-aid.name" . }}
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  schedule: '{{ $schedule }}'
+  schedule: '18 0 * * *'
   selector:
     matchLabels:
       app: {{ template "apply-for-legal-aid.name" . }}
@@ -22,10 +21,11 @@ spec:
       template:
         spec:
           containers:
-          - name: hourly-db-backup
+          - name: reset-counter
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
             imagePullPolicy: IfNotPresent
-            command: ['bin/create_manual_snapshot']
+            command: ['rake', 'job:dashboard:update[Applications]']
+{{ include "apply-for-legal-aid.envs" . | nindent 12 }}
             resources:
               limits:
                 cpu: 200m
