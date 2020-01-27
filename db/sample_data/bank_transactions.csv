@@ -8,7 +8,37 @@ date,description,amount_out,amount_in
 29/09/2018,British Gas Trading Britishgas.co,£20.00,
 29/09/2018,Just Eat London,£15.80,
 29/09/2018,Transfer in: money for children,,£250.00
+01/10/2018,Mike Test,£500,
+01/10/2018,Mike Test,100,
+01/10/2018,Mike Test,550,
+01/10/2018,Mike Test,700,
+01/10/2018,Mike Test,400,
+01/10/2018,Mike Test,600,
+01/10/2018,Mike Test,,£999.99
+01/10/2018,Mike Test,,"£1,000.00"
+01/10/2018,Mike Test,,"£2,800.00"
+01//10/2018,Mike Test,,"£2,900.00"
+01/10/2018,Mike Test,,"£3,300.00"
+01/10/2018,Mike Test,,"£2,500.00"
+01/10/2018,Mike Test,,£600.00
+01/10/2018,NPE2-test2,,"£2,100.00"
+01/10/2018,Mike Test,,£500.00
+01/10/2018,Mike Test,,£400.00
+01/10/2018,Mike Test,,£300.00
+01/10/2018,Mike Test,,£92.00
+01/10/2018,Mike Test,,£200.00
+01/10/2018,NPE8-test2,,£208.00
+01/10/2018,Mike Test,,£250.00
+01/10/2018,Mike Test,,£180.00
+01/10/2018,NPE2-test3,,"£1,278.01"
+01/10/2018,NPE6-test2,,"£1,415.00"
+01/10/2018,Mike Test,,£700.00
 01/10/2018,Cash RB Scot Oct01 Tesco Killburn,£40.00,
+02/10/2018,NPE8-test2,,£150.00
+02/10/2018,Mike Test,,"£1,000.00"
+02/10/2018,Mike Test,,£600.00
+02/10/2018,Mike Test,,£500.00
+02/10/2018,Mike Test,,£92.00
 02/10/2018,Creation.co.uk loan repayment,£54.80,
 02/10/2018,DVLA-REGNUM,£19.25,
 02/10/2018,H3G,£34.88,
@@ -96,14 +126,45 @@ date,description,amount_out,amount_in
 29/10/2018,British Gas Trading Britishgas.co,£20.00,
 30/10/2018,Care Home Ltd Salary,,£188.24
 02/11/2018,Work and child tax credit,,£165.65
+02/11/2018,Mike Test,,£999.99
+03/11/2018,Mike Test,,"£1,000.00"
+03/11/2018,Mike Test,,"£1,000.00"
+01/11/2018,Mike Test,£100.00,
+01/11/2018,Mike Test,£500.00,
+01/11/2018,Mike Test,£550.00,
+01/11/2018,Mike Test,£700.00,
+01/11/2018,Mike Test,£400.00,
+01/11/2018,Mike Test,£600.00,
+01/11/2018,Mike Test,,"£2,800.00"
+01/11/2018,Mike Test,,"£2,900.00"
+01/11/2018,Mike Test,,"£3,300.00"
+01/11/2018,Mike Test,,"£2,500.00"
+01/11/2018,Mike Test,,£600.00
+01/11/2018,Mike Test,,£500.00
+01/11/2018,NPE2-test2,,"£2,000.00"
+01/11/2018,Mike Test,,£400.00
+01/11/2018,Mike Test,,£300.00
+01/11/2018,Mike Test,,£92.00
+01/11/2018,Mike Test,,£200.00
+01/11/2018,NPE8-test2,,£200.00
+01/11/2018,Mike Test,,£250.00
+01/11/2018,Mike Test,,£180.00
+01/11/2018,NPE2-test3,,"£1,278.01"
+01/11/2018,NPE6-test2,,"£1,415.00"
+01/11/2018,Mike Test,,£700.00
 02/11/2018,Creation.co.uk loan repayment,£54.80,
+02/11/2018,Mike Test,,£500.00
+02/11/2018,NPE8-test2,,£250.00
+02/11/2018,Mike Test,,£92.00
 02/11/2018,H3G,£34.88,
 02/11/2018,Asda superstore,£33.56,
 02/11/2018,Tombola.co.uk betting,£10.00,
 02/11/2018,Garden Centre,£6.99,
 02/11/2018,Asda superstore,£53.33,
 02/11/2018,British Gas Trading Britishgas.co,£19.00,
+02/11/2018,Mike Test,,£600.00
 06/11/2018,Care Home Ltd Salary,,£186.40
+04/11/2018,Mike Test,,£0.01
 07/11/2018,Cash Natwest 06Oct,£20.00,
 09/11/2018,Work and child tax credit,,£165.65
 09/11/2018,Cash in from betting win,,£120.00
@@ -162,7 +223,36 @@ date,description,amount_out,amount_in
 29/11/2018,Just Eat London,£15.80,
 29/11/2018,Transfer in: money for children,,£250.00
 30/11/2018,Work and child tax credit,,£165.65
+01/12/2018,Mike Test,£500.00,
+01/12/2018,Mike Test,£100.00,
+01/12/2018,Mike Test,£550.00,
+01/12/2018,Mike Test,£700.00,
+01/12/2018,Mike Test,£400.00,
+01/12/2018,Mike Test,£600.00,
+01/12/2018,Mike Test,,£999.99
+01/12/2018,Mike Test,,"£2,800.00"
+01/12/2018,Mike Test,,"£2,900.00"
+01/12/2018,Mike Test,,"£3,300.00"
+01/12/2018,Mike Test,,"£2,500.00"
+01/12/2018,"NPE8-test2
+",,£180.00
+02/12/2018,Mike Test,,"£1,000.00"
+01/12/2018,Mike Test,,£600.00
+01/12/2018,NPE2-test2,,"£2,039.00"
+01/12/2018,Mike Test,,£500.00
+01/12/2018,Mike Test,,£400.00
+01/12/2018,Mike Test,,£300.00
+01/12/2018,Mike Test,,£92.00
+01/12/2018,Mike Test,,£200.00
+01/12/2018,Mike Test,,£250.00
+01/12/2018,Mike Test,,£180.00
+01/12/2018,NPE2-test3,,"£1,278.01"
+01/12/2018,NPE6-test2,,"£1,415.00"
+02/12/2018,NPE8-test2,,£208.00
+01/12/2018,Mike Test,,£700.00
 02/12/2018,Creation.co.uk loan repayment,£54.80,
+02/12/2018,Mike Test,,£500.00
+02/12/2018,Mike Test,,£92.00
 02/12/2018,DVLA-REGNUM,£19.25,
 02/12/2018,H3G,£34.88,
 02/12/2018,Asda superstore,£67.92,
@@ -170,7 +260,11 @@ date,description,amount_out,amount_in
 02/12/2018,Garden Centre,£6.99,
 02/12/2018,Asda superstore,£53.33,
 02/12/2018,British Gas Trading Britishgas.co,£19.00,
+02/12/2018,Mike Test,,£600.00
+03/11/2018,Mike Test,,£0.01
+03/11/2018,Mike Test,,"£1,000.00"
 03/12/2018,Sky digital,£56.79,
+04/11/2018,Mike Test,,"£1,000.00"
 04/12/2018,Care Home Ltd Salary,,£188.30
 07/12/2018,Work and child tax credit,,£165.55
 07/12/2018,Cash Natwest 06Oct,£20.00,
@@ -204,6 +298,7 @@ date,description,amount_out,amount_in
 18/12/2018,Child benefit,,£82.80
 19/12/2018,Cash Natwide Nov19,£20.00,
 19/12/2018,Shell Finchley,£10.00,
+20/11/2018,Mike Test,,"£1,000.00"
 21/12/2018,Mum transfer in,,£250.00
 21/12/2018,Work and child tax credit,,£165.65
 20/12/2018,Cash bnkm Nov20,£20.00,
