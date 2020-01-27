@@ -28,6 +28,10 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       state :submitting_assessment
       state :assessment_submitted
 
+      after_all_transitions do
+        File.open("./tmp/state_machine/#{id}.txt", 'a') { |f2| f2.puts "State from #{aasm.from_state} => #{aasm.to_state} (event: #{aasm.current_event})" }
+      end
+
       event :check_your_answers do
         transitions from: :initiated, to: :checking_client_details_answers
         transitions from: :client_details_answers_checked, to: :checking_client_details_answers
