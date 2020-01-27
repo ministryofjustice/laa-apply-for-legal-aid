@@ -1,4 +1,4 @@
-module LegalAidApplicationStateMachine
+module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
   extend ActiveSupport::Concern
 
   included do # rubocop:disable Metrics/BlockLength
@@ -19,6 +19,7 @@ module LegalAidApplicationStateMachine
       state :checking_citizen_answers
       state :checking_passported_answers
       state :means_completed
+      state :client_completed_means
       state :provider_checking_citizens_means_answers
       state :provider_checked_citizens_means_answers
       state :checking_merits_answers
@@ -66,7 +67,7 @@ module LegalAidApplicationStateMachine
 
       event :check_citizen_answers do
         transitions from: :provider_submitted, to: :checking_citizen_answers
-        transitions from: :means_completed, to: :checking_citizen_answers
+        transitions from: :client_completed_means, to: :checking_citizen_answers
       end
 
       event :complete_means do
@@ -75,8 +76,15 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_passported_answers, to: :means_completed
       end
 
+      event :client_complete_means do
+        transitions from: :checking_citizen_answers, to: :client_completed_means,
+                    after: -> { ApplicantCompleteMeans.call(self) }
+        transitions from: :checking_passported_answers, to: :means_completed
+      end
+
       event :provider_check_citizens_means_answers do
         transitions from: :means_completed, to: :provider_checking_citizens_means_answers
+        transitions from: :client_completed_means, to: :provider_checking_citizens_means_answers
         transitions from: :provider_checked_citizens_means_answers, to: :provider_checking_citizens_means_answers
       end
 
@@ -88,6 +96,7 @@ module LegalAidApplicationStateMachine
         transitions from: :provider_checked_citizens_means_answers, to: :checking_merits_answers
         transitions from: :checked_merits_answers, to: :checking_merits_answers
         transitions from: :means_completed, to: :checking_merits_answers
+        transitions from: :client_completed_means, to: :checking_merits_answers
         transitions from: :submitting_assessment, to: :checking_merits_answers
         transitions from: :assessment_submitted, to: :checking_merits_answers
       end
