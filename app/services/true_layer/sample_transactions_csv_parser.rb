@@ -1,7 +1,7 @@
 require 'csv'
 module TrueLayer
   class SampleTransactionsCsvParser
-    TRANSACTIONS_CSV = 'db/sample_data/bank_transactions.old.csv'.freeze
+    TRANSACTIONS_CSV = 'db/sample_data/bank_transactions.csv'.freeze
 
     def self.call
       new.call
