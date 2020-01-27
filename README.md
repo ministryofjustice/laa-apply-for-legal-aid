@@ -21,13 +21,28 @@ brew bundle
 ```
 
 ## Initial setup
+This requires your gpg key to have been added to git-crypt.  Liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md)
+
+Once the pull request has been merged, re-pull master and run 
 
 ```
-# From the root of the project execute the following command:
+git-crypt unlock
+```
+Update the `.env.sample` file, to get the tests running you will need to obtain and set values for the following:
+```bash
+GOVUK_NOTIFY_API_KEY=
+CHECK_FINANCIAL_ELIGIBILITY_HOST=
+```
+
+To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
+```bash
+ADMIN_PASSWORD=
+```
+
+From the root of the project execute the following command:
+```
 bin/setup
 ```
-
-**NOTE:** Ensure the `.env.development` settings are correctly configured.
 
 ### Malware check of uploaded files
 
