@@ -33,9 +33,17 @@ RSpec.describe Provider, type: :model do
     end
 
     context 'user is whitelisted' do
-      let(:provider) { create :provider, username: Rails.configuration.x.application.whitelisted_users.sample }
-      it 'returns true' do
-        expect(provider.whitelisted_user?).to be true
+      context 'provider username is in lower case' do
+        let(:provider) { create :provider, username: Rails.configuration.x.application.whitelisted_users.sample.downcase }
+        it 'returns true' do
+          expect(provider.whitelisted_user?).to be true
+        end
+      end
+      context 'provider username is in upper case' do
+        let(:provider) { create :provider, username: Rails.configuration.x.application.whitelisted_users.sample.upcase }
+        it 'returns true' do
+          expect(provider.whitelisted_user?).to be true
+        end
       end
     end
     context 'user is not whitelisted' do

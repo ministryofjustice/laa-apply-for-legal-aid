@@ -1,18 +1,6 @@
 ---
 en:
   admin:
-    benefit_types:
-      edit:
-        heading: 'Edit: %{label}'
-      form:
-        error_heading: '%{benefit_types} prohibited this benefit type from being saved'
-      index:
-        heading: Benefit Types
-        link_to_new: New Benefit Type
-      new:
-        heading: New Benefit Type
-      show:
-        heading: 'Benefit Type: %{label}'
     legal_aid_applications:
       index:
         delete_all: Delete all applications
@@ -43,3 +31,22 @@ en:
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data
           allow_non_passported_route: Select Yes to allow non-passported route
+    submitted_applications_reports:
+      show:
+        heading_1: Submitted Applications
+        no_applications: No applications present
+      submitted_applications:
+        applicant_name: Client's name
+        application_ref: Case reference
+        ccms_ref: CCMS reference
+        provider_firm: Provider firm
+        provider_username: Provider username
+        submission_date: Submission date
+    feedback:
+      show:
+        heading_1: Feedback
+        no_feedback: No feedback submitted
+      feedbacks:
+        done_eveything: Was the user able to do what they needed to today?
+        satisfaction: Satisfaction rating
+        suggestion: Improvement suggestion

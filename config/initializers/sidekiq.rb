@@ -6,6 +6,8 @@ require 'prometheus_exporter/instrumentation'
 redis_url = "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" if ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present?
 namespace = ENV.fetch('HOST', 'laa-apply')
 
+module Dashboard; end
+
 class SentryErrorLogger
   def call(worker, job, queue)
     yield

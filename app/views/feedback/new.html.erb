@@ -4,7 +4,7 @@
 
       <%= form.govuk_collection_radio_buttons(
             :done_all_needed,
-            %w[yes no],
+            [true, false],
             inline: true,
             title: {
               text: t('.done_all_needed'),

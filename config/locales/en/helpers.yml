@@ -9,7 +9,6 @@ en:
       address_lookup:
         postcode: This must be a valid UK postcode
       applicant:
-        email: We'll send your client a link to our service if they need to answer questions about their finances
         national_insurance_number: For example, 'QQ 12 34 56 C'
       has_offline_accounts: If you do not, you will need to provide paper evidence for these accounts.
       legal_aid_application:
@@ -22,8 +21,8 @@ en:
       merits_assessment:
         estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
     label:
-      applicant:
-        uses_online_banking:
+      feedback:
+        done_all_needed:
           <<: *true_false
       merits_assessment:
         application_purpose: Please give details of why your client is applying for legal aid
@@ -46,8 +45,8 @@ en:
       respondent:
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
         warning_letter_sent_details: Tell us why a warning letter has not been sent
-        police_notified_details: Tell us why the police have not been notified
         bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
+        police_notified_details: Tell us what action they've taken (if any), including dates and the outcome        
         understands_terms_of_court_order:
           <<: *true_false
         warning_letter_sent:

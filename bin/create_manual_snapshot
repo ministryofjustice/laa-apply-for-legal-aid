@@ -1,0 +1,18 @@
+#!/bin/sh
+echo "Logging into RDS"
+
+current_time=$(date "+%Y%m%d-%H%M")
+
+file_name="apply-manual-snapshot"
+
+new_fileName=$file_name-$current_time
+
+unset AWS_PROFILE
+
+export AWS_ACCESS_KEY_ID=$(kubectl -n laa-apply-for-legalaid-production get secret apply-for-legal-aid-rds-instance-output -o json | jq -r '.data["access_key_id"] | @base64d')
+
+export AWS_SECRET_ACCESS_KEY=$(kubectl -n laa-apply-for-legalaid-production get secret apply-for-legal-aid-rds-instance-output -o json | jq -r '.data["secret_access_key"] | @base64d')
+
+export ADDRESS=$(kubectl -n laa-apply-for-legalaid-production get secret apply-for-legal-aid-rds-instance-output -o json | jq -r '.data["rds_instance_address"] | @base64d' | sed 's/\..*//g' )
+
+aws rds create-db-snapshot --region=eu-west-2 --db-instance-identifier $ADDRESS --db-snapshot-identifier $new_fileName

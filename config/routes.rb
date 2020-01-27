@@ -38,8 +38,10 @@ Rails.application.routes.draw do
   end
 
   get 'auth/failure', to: 'auth#failure'
+  get 'ping', to: 'status#ping', format: :json
+  get 'healthcheck', to: 'status#status', format: :json
+  get 'status', to: 'status#ping', format: :json
 
-  resources :status, only: [:index]
   resource :contact, only: [:show]
   resources :privacy_policy, only: [:index]
   resources :feedback, only: %i[new create show]
@@ -53,7 +55,8 @@ Rails.application.routes.draw do
       delete :destroy_all, on: :collection
     end
     resource :settings, only: %i[show update]
-    resources :benefit_types
+    resource :submitted_applications_report, only: %i[show]
+    resource :feedback, controller: :feedback, only: %i[show]
     resources :ccms_connectivity_tests, only: [:show]
   end
 
@@ -141,7 +144,7 @@ Rails.application.routes.draw do
       resource :other_assets, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy]
       resources :check_benefits, only: [:index]
-      resource :online_banking, only: %i[show update], path: 'does-client-use-online-banking'
+      resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
       resource :merits_declaration, only: %i[show update]
       resource :capital_introduction, only: %i[show update]
       resources :check_provider_answers, only: [:index] do
@@ -197,6 +200,7 @@ Rails.application.routes.draw do
       end
       resource :means_summary, only: %i[show update]
       resource :used_delegated_functions, only: %i[show update]
+      resource :use_ccms, only: %i[show]
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]
       resource :submitted_application, only: :show

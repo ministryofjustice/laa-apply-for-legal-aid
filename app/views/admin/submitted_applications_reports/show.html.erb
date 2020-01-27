@@ -1,0 +1,11 @@
+<%= page_template(
+      page_title: t('.heading_1'),
+      column_width: :full,
+      back_link: :none
+    ) do %>
+  <% if @applications.present? %>
+    <%= render 'submitted_applications', pagy: @pagy %>
+  <% else %>
+    <h2><%= t('.no_applications') %></h2>
+  <% end %>
+<% end %>

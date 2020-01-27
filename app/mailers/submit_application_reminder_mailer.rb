@@ -2,7 +2,8 @@ class SubmitApplicationReminderMailer < GovukNotifyRails::Mailer
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
-  def notify_provider(application, name, to = support_email_address)
+  def notify_provider(application_id, name, to = support_email_address)
+    application = LegalAidApplication.find(application_id)
     template_name :reminder_to_submit_an_application
     set_personalisation(
       email: to,

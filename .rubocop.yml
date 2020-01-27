@@ -14,6 +14,12 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
 
+Lint/UriEscapeUnescape:
+  Enabled: false
+
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+
 Metrics/AbcSize:
   Exclude:
   - 'db/migrate/*'

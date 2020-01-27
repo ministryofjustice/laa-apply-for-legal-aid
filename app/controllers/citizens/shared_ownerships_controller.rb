@@ -17,8 +17,8 @@ module Citizens
     private
 
     def shared_ownership_params
-      merge_with_model(legal_aid_application) do
-        return {} unless params[:legal_aid_application]
+      merge_with_model(legal_aid_application, journey: :citizens) do
+        next {} unless params[:legal_aid_application]
 
         params.require(:legal_aid_application).permit(:shared_ownership)
       end

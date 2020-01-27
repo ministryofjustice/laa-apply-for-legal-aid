@@ -8,6 +8,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
   SECURE_ID_DAYS_TO_EXPIRE = 7
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
+  CCCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
@@ -33,9 +34,17 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment'
   has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', dependent: :destroy
   has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission'
+  has_many :scheduled_mailings
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
+  after_create do
+    ActiveSupport::Notifications.instrument 'dashboard.application_created', id: id, state: state
+  end
+
+  after_save do
+    ActiveSupport::Notifications.instrument 'dashboard.delegated_functions_used' if saved_change_to_used_delegated_functions?
+  end
 
   attr_reader :proceeding_type_codes
   validate :proceeding_type_codes_existence
@@ -61,6 +70,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     applications
   end
 
+  scope :submitted_applications, -> { where(state: CCCMS_SUBMITTED_STATES).order(created_at: :desc) }
+
   enum(
     own_home: {
       no: 'no'.freeze,
@@ -80,6 +91,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def cfe_result
     most_recent_cfe_submission.result
+  end
+
+  def online_banking_consent?
+    citizen_uses_online_banking && provider_received_citizen_consent
   end
 
   def calculation_date

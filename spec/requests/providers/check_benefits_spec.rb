@@ -156,7 +156,7 @@ RSpec.describe 'check benefits requests', type: :request do
         let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
         it 'displays the online banking page' do
-          expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+          expect(response).to redirect_to providers_legal_aid_application_open_banking_consents_path(application)
         end
       end
 
@@ -164,7 +164,7 @@ RSpec.describe 'check benefits requests', type: :request do
         let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
 
         it 'displays the online banking page' do
-          expect(response).to redirect_to providers_legal_aid_application_online_banking_path(application)
+          expect(response).to redirect_to providers_legal_aid_application_open_banking_consents_path(application)
         end
       end
 

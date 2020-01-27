@@ -8,6 +8,7 @@ module SmokeTest
       send_feedback_email
       send_citizen_start_email
       send_resend_link_request_email
+      send_citizen_completed_means_email
       send_submission_confirmation_email
       send_email_reminder
     end
@@ -16,8 +17,18 @@ module SmokeTest
 
     def send_email_reminder
       SubmitApplicationReminderMailer.notify_provider(
+        legal_aid_application.id,
+        legal_aid_application.provider.name,
+        to
+      ).deliver_later!
+    end
+
+    def send_citizen_completed_means_email
+      CitizenCompletedMeansMailer.notify_provider(
         JSON.parse(legal_aid_application.to_json),
         JSON.parse(legal_aid_application.provider.name.to_json),
+        JSON.parse(legal_aid_application.applicant.full_name.to_json),
+        'www.example.com/providers/applications',
         to
       ).deliver_later!
     end
@@ -43,11 +54,7 @@ module SmokeTest
     end
 
     def send_submission_confirmation_email
-      SubmissionConfirmationMailer.notify(
-        JSON.parse(legal_aid_application.to_json),
-        JSON.parse(legal_aid_application.provider.to_json),
-        JSON.parse(legal_aid_application.applicant.to_json)
-      ).deliver_later!
+      SubmissionConfirmationMailer.notify(legal_aid_application.id).deliver_later!
     end
 
     def citizen_start_email_args
@@ -60,7 +67,7 @@ module SmokeTest
     end
 
     def legal_aid_application
-      @legal_aid_application || FactoryBot.build(
+      @legal_aid_application || FactoryBot.create(
         :legal_aid_application,
         :with_applicant,
         :with_delegated_functions,

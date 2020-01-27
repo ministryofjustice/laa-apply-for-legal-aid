@@ -83,8 +83,6 @@ en:
             national_insurance_number:
               blank: Enter a National Insurance number
               not_valid: Enter a valid National Insurance number
-            uses_online_banking:
-              blank: Please select an option
         applicants/address_form:
           attributes:
             address_line_one:
@@ -158,13 +156,19 @@ en:
                 blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
               providers:
                 blank: Select yes if there are restrictions that prevent your client from selling or borrowing against their assets
+            open_banking_consents:
+              base:
+                none_selected: Please select an option
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               greater_than_or_equal_to: Mortgage amount must be 0 or more
               not_a_number: Mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
             own_home:
-              blank: Select yes if you own the home you live in
+              citizens:
+                blank: Select yes if you own the home you live in
+              providers:
+                blank: Select yes if your client owns the home that they live in
             own_vehicle:
               citizens:
                 blank: Select yes if you own a vehicle
@@ -192,7 +196,10 @@ en:
               providers:
                 blank: Enter the assets your client cannot sell or borrow against, and why
             shared_ownership:
-              blank: Select yes if you own your home with someone else
+              citizens:
+                blank: Select yes if you own your home with someone else
+              providers:
+                blank: Select yes if your client owns their home with anyone else
             substantive_application:
               blank: Select Yes or No
             used_delegated_functions:
@@ -293,7 +300,7 @@ en:
             warning_letter_sent_details:
               blank: Tell us why a warning letter has not been sent
             police_notified_details:
-              blank: Tell us why the police have not been notified
+              blank: Tell us what action the police have taken
             bail_conditions_set_details:
               blank: Give details of the bail conditions
         savings_amount:

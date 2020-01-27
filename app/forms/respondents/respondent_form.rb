@@ -29,7 +29,7 @@ module Respondents
     validates(
       :police_notified_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.police_notified.to_s == 'false' }
+      if: proc { |form| !form.draft? && (%w[true false].include? form.police_notified.to_s) }
     )
 
     validates :bail_conditions_set, presence: true, unless: :draft?
@@ -42,11 +42,7 @@ module Respondents
     private
 
     def clear_details
-      %i[
-        understands_terms_of_court_order
-        warning_letter_sent
-        police_notified
-      ].each do |attr|
+      %i[understands_terms_of_court_order warning_letter_sent].each do |attr|
         details = "#{attr}_details".to_sym
         attr_value = __send__(attr)
         __send__(details)&.clear if attr_value.to_s == 'true'

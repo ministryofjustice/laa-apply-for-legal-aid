@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_143142) do
+ActiveRecord::Schema.define(version: 2020_01_08_162334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_143142) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.boolean "uses_online_banking"
     t.string "true_layer_secure_data_id"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
@@ -195,14 +194,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_143142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
-  end
-
-  create_table "benefit_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "label"
-    t.text "description"
-    t.boolean "exclude_from_gross_income"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "blazer_audits", force: :cascade do |t|
@@ -418,6 +409,8 @@ ActiveRecord::Schema.define(version: 2019_11_21_143142) do
     t.string "restrictions_details"
     t.boolean "no_credit_transaction_types_selected"
     t.boolean "no_debit_transaction_types_selected"
+    t.boolean "provider_received_citizen_consent"
+    t.boolean "citizen_uses_online_banking"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
@@ -592,6 +585,18 @@ ActiveRecord::Schema.define(version: 2019_11_21_143142) do
     t.boolean "none_selected"
     t.decimal "offline_savings_accounts"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
+  end
+
+  create_table "scheduled_mailings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "mailer_klass", null: false
+    t.string "mailer_method", null: false
+    t.string "arguments", null: false
+    t.datetime "scheduled_at", null: false
+    t.datetime "sent_at"
+    t.datetime "cancelled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

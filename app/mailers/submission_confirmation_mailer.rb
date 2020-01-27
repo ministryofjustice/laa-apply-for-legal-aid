@@ -2,13 +2,24 @@ class SubmissionConfirmationMailer < GovukNotifyRails::Mailer
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
-  def notify(legal_aid_application, provider, applicant)
+  def notify(legal_aid_application_id)
+    @legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
     template_name :submission_confirmation
     set_personalisation(
-      provider_name: provider['name'],
-      client_name: "#{applicant['first_name']} #{applicant['last_name']}".strip,
-      ref_number: legal_aid_application['application_ref']
+      provider_name: @legal_aid_application.provider.name,
+      client_name: "#{first_name} #{last_name}",
+      ref_number: @legal_aid_application.application_ref
     )
-    mail to: provider['email']
+    mail to: @legal_aid_application.provider.email
+  end
+
+  private
+
+  def first_name
+    @legal_aid_application.applicant.first_name
+  end
+
+  def last_name
+    @legal_aid_application.applicant.last_name
   end
 end

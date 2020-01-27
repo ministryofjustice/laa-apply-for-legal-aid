@@ -12,8 +12,8 @@ module Providers
     private
 
     def form_params
-      merge_with_model(legal_aid_application) do
-        return {} unless params[:legal_aid_application]
+      merge_with_model(legal_aid_application, journey: :providers) do
+        next {} unless params[:legal_aid_application]
 
         params.require(:legal_aid_application).permit(:own_home)
       end

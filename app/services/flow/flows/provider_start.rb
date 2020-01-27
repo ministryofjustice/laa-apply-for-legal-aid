@@ -51,7 +51,7 @@ module Flow
           forward: ->(application) do
             return :substantive_applications if application.used_delegated_functions?
 
-            application.applicant_receives_benefit? ? :capital_introductions : :online_bankings
+            application.applicant_receives_benefit? ? :capital_introductions : :open_banking_consents
           end
         },
         substantive_applications: {
@@ -59,15 +59,15 @@ module Flow
           forward: ->(application) do
             return :delegated_confirmation unless application.substantive_application?
 
-            application.applicant_receives_benefit? ? :capital_introductions : :online_bankings
+            application.applicant_receives_benefit? ? :capital_introductions : :open_banking_consents
           end
         },
         delegated_confirmation: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) }
         },
-        online_bankings: {
-          path: ->(application) { urls.providers_legal_aid_application_online_banking_path(application) },
-          forward: ->(application) { application.applicant.uses_online_banking? ? :email_addresses : :place_holder_ccms }
+        open_banking_consents: {
+          path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
+          forward: ->(application) { application.online_banking_consent? ? :email_addresses : :use_ccms }
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
@@ -80,8 +80,8 @@ module Flow
         application_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_application_confirmation_path(application) }
         },
-        place_holder_ccms: {
-          path: '[PLACEHOLDER] Page directing provider to use CCMS'
+        use_ccms: {
+          path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) }
         }
       }.freeze
     end

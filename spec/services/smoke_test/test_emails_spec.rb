@@ -11,12 +11,19 @@ RSpec.describe SmokeTest::TestEmails do
     before do
       ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
       allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
+      allow_any_instance_of(DashboardEventHandler).to receive(:call).and_return(double(DashboardEventHandler))
     end
 
     it 'tests all mailers' do
       all_mailers.each do |mailer|
         expect(mailer).to receive(:new).and_call_original
       end
+      subject
+      ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
+    end
+
+    it 'sends a citizen completed means notify_provider email' do
+      expect_any_instance_of(CitizenCompletedMeansMailer).to receive(:notify_provider).and_return(true)
       subject
       ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
     end

@@ -25,6 +25,7 @@ en:
     menu: Menu
     none_declared: None declared
     none_selected: None of these
+    not_completed: Not completed
     or: or
     remove: Remove
     save_and_continue: Save and continue
@@ -38,7 +39,7 @@ en:
     start_now: Start now
     submit: Submit
     submit_and_continue: Submit and continue
-    tell_us: "You need to tell us:"
+    tell_us: Your statement must include
     total: Total
     toggle_navigation: Show or hide Top Level Navigation
     undefined: Undefined

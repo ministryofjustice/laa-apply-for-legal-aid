@@ -1,0 +1,11 @@
+<%= page_template(
+      page_title: t('.heading_1'),
+      column_width: :full,
+      back_link: :none
+    ) do %>
+  <% if @feedback.present? %>
+    <%= render 'feedbacks', pagy: @pagy %>
+  <% else %>
+    <h2><%= t('.no_feedback') %></h2>
+  <% end %>
+<% end %>

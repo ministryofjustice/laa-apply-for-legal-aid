@@ -130,10 +130,12 @@ en:
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
         you_need_to: "You'll need to:"
         negative_result:
+          tab_title: Your client must complete a financial assessment
           title: "%{name} must complete a financial assessment"
           must_answer_financial_questions: Your client will need to answer questions about their financial situation.
           provide_access/details: 'We''ll ask you to give them access to the online assessment which they can complete at home or at another location.'
         positive_result:
+          tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
           must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
           provide_access/details: provide details of the case
@@ -321,9 +323,15 @@ en:
         capital_result_heading: Capital result
         assets_heading: Property, savings and other assets
         question_receives_benefit: In receipt of passporting benefit
-    online_bankings:
+    open_banking_consents:
       show:
-        heading: Does your client use online banking?
+        heading: Check if you can continue using this service
+        none_selected: None of these
+        citizen_uses_online_banking: Your client uses online banking for all of their bank accounts
+        provider_received_citizen_consent: Your client agrees to share their financial data with us
+        hint: 
+          provider_received_citizen_consent: We need their permission to view their bank transactions from the past 3 months
+          citizen_uses_online_banking: They'll need to sign in to online banking and share their financial data with us
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
@@ -386,6 +394,9 @@ en:
         police_notified: Have the police been notified?
         bail_conditions_set: Have bail conditions been set?
         bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
+        police_notified_no: Tell us why the police have not been notified
+        police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
+        police_notified_blank: Tell us what action the police have taken
     restrictions:
       show:
         h1-heading: Are there any legal restrictions that prevent your client from selling or borrowing against their assets?
@@ -438,13 +449,15 @@ en:
             the chances of a successful outcome
     statement_of_cases:
       show:
-        bullet-1: details of the latest domestic abuse incident
-        bullet-2: what has happened in the case so far
-        bullet-3: about any other parties involved and their relationship to the applicant
-        bullet-4: how many clients you're representing
-        bullet-5: why the current proceedings are necessary
-        bullet-6: if anyone else might be able to fund this case
+        bullet-1: the opponent's name
+        bullet-2: details of the latest domestic abuse incident
+        bullet-3: what's happened in the case so far
+        bullet-4: if any other parties are involved and their relationship to your client
+        bullet-5: why the proceedings are necessary
+        bullet-6: if anyone else might be able to fund the case
         h1-heading: Provide a statement of case
+        warning: Warning
+        warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
       uploaded_files:
         delete: Delete
         filename: Filename
@@ -502,6 +515,16 @@ en:
         col_and_description: and description
         col_select_all: Select all
         sorted: Sorted
+    use_ccms:
+      show:
+        title: You need to complete this application in CCMS
+        sub_heading: "You cannot continue using this service if your client does not:"
+        continue_in_ccms: Continue in CCMS
+        back_to_applications: Back to my applications
+        online_banking_consent:
+          list: |
+            use online banking for all of their accounts
+            agree to share their financial data with us
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?

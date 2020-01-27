@@ -579,15 +579,13 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#submitted_assessment' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :submitting_assessment }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checked_merits_answers }
 
-    it 'sends a cubmission confirmation email' do
-      expect(SubmissionConfirmationMailer).to receive(:notify).with(
-        legal_aid_application,
-        legal_aid_application.provider,
-        legal_aid_application.applicant
+    it 'schedules a PostSubmissionProcessingJob ' do
+      expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
+        legal_aid_application.id
       ).and_call_original
-      legal_aid_application.submitted_assessment!
+      legal_aid_application.generate_reports!
     end
   end
 
@@ -651,6 +649,29 @@ RSpec.describe LegalAidApplication, type: :model do
       result2 = create :cfe_result, submission: submission2
 
       expect(legal_aid_application.cfe_result).to eq result2
+    end
+  end
+
+  describe 'after_save hook' do
+    context 'when an application is created' do
+      let(:application) { create :legal_aid_application }
+
+      it { expect(application.used_delegated_functions).to eq false }
+
+      context 'and the used_delegated_functions is changed and saved' do
+        subject { application.save }
+
+        before do
+          application.used_delegated_functions = true
+          ActiveJob::Base.queue_adapter = :test
+        end
+
+        after { ActiveJob::Base.queue_adapter = :sidekiq }
+
+        it 'fires an ActiveSupport::Notification' do
+          expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
+        end
+      end
     end
   end
 end

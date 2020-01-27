@@ -8,6 +8,10 @@ class Provider < ApplicationRecord
   has_many :legal_aid_applications
   has_and_belongs_to_many :offices
 
+  after_create do
+    ActiveSupport::Notifications.instrument 'dashboard.provider_created'
+  end
+
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
   def update_details
@@ -21,7 +25,7 @@ class Provider < ApplicationRecord
   end
 
   def whitelisted_user?
-    username.in?(whitelisted_users)
+    whitelisted_users.any? { |user| user.casecmp(username).zero? }
   end
 
   private
