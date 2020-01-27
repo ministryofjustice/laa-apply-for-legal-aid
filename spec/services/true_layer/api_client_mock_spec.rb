@@ -45,7 +45,7 @@ RSpec.describe TrueLayer::ApiClientMock do
     end
 
     context 'with known data' do
-      let(:csv_file) { 'spec/fixtures/db/sample_data/bank_transactions.old.csv' }
+      let(:csv_file) { 'spec/fixtures/db/sample_data/bank_transactions.csv' }
       let(:expected_result) do
         [
           {
