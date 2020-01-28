@@ -18,38 +18,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
           forward: :own_homes
         },
-        own_homes: {
-          path: ->(application) { urls.providers_legal_aid_application_own_home_path(application) },
-          forward: ->(application) { application.own_home_no? ? :vehicles : :property_values },
-          carry_on_sub_flow: ->(application) { !application.own_home_no? },
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
-        },
-        property_values: {
-          path: ->(application) { urls.providers_legal_aid_application_property_value_path(application) },
-          forward: ->(application) { application.own_home_mortgage? ? :outstanding_mortgages : :shared_ownerships },
-          carry_on_sub_flow: true
-        },
-        outstanding_mortgages: {
-          path: ->(application) { urls.providers_legal_aid_application_outstanding_mortgage_path(application) },
-          forward: :shared_ownerships,
-          carry_on_sub_flow: true
-        },
-        shared_ownerships: {
-          path: ->(application) { urls.providers_legal_aid_application_shared_ownership_path(application) },
-          forward: ->(application) do
-            if application.shared_ownership?
-              :percentage_homes
-            else
-              application.checking_answers? ? :restrictions : :vehicles
-            end
-          end,
-          carry_on_sub_flow: true
-        },
-        percentage_homes: {
-          path: ->(application) { urls.providers_legal_aid_application_percentage_home_path(application) },
-          forward: ->(application) { application.checking_answers? ? :restrictions : :vehicles },
-          carry_on_sub_flow: true
-        },
+        # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
