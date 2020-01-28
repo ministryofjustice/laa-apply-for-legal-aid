@@ -59,14 +59,20 @@ module Flow
         },
         other_assets: {
           path: ->(application) { urls.providers_legal_aid_application_other_assets_path(application) },
-          forward: ->(application) { application.own_capital? ? :restrictions : :means_summaries },
+          forward: ->(application) do
+            if application.own_capital?
+              :restrictions
+            else
+              application.client_completed_means? ? :means_summaries : :check_passported_answers
+            end
+          end,
           carry_on_sub_flow: ->(application) { application.other_assets? },
           check_answers: ->(app) { app.client_completed_means? ? :means_summaries : :check_passported_answers }
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },
           forward: :check_passported_answers,
-          check_answers: ->(app) { app.client_completed_means? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(application) { application.client_completed_means? ? :means_summaries : :check_passported_answers }
         },
         check_passported_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
