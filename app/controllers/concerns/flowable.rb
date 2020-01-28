@@ -22,7 +22,6 @@ module Flowable
     helper_method :forward_path, :journey_type
 
     def go_forward(flow_param = nil)
-      # binding.pry
       path = forward_path(flow_param)
 
       redirect_to path if path?(path)
