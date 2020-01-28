@@ -57,7 +57,7 @@ https://pauladamsmith.com/blog/2011/05/go_time.html
     {{- $currentMinute := now | date "4" -}}
     {{- printf "%s/30 * * * *" $currentMinute -}}
   {{- else -}}
-    {{ "*/30 * * * *" }}
+    {{ "0 0 31 2 *" }}
   {{- end -}}
 {{- end -}}
 
