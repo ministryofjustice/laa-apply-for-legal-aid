@@ -393,9 +393,7 @@ Feature: Civil application journeys
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'I want a screenshot'
-    Then I should be on a page showing 'Check your answers'
+    Then I bind and pry
     Then I click link 'View/change declared income'
     Then I should be on a page showing "Your client's income"
     Then I click 'Save and continue'
