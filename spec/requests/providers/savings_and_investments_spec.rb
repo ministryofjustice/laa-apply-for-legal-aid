@@ -149,7 +149,7 @@ RSpec.describe 'providers savings and investments', type: :request do
             end
 
             context "provider checking citizen's answers" do
-              let(:state) { :provider_checking_citizens_means_answers }
+              let(:state) { :client_completed_means }
 
               it 'redirects to means summary page' do
                 expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
