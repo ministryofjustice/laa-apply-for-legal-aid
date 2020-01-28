@@ -55,18 +55,18 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
           forward: ->(application) { application.checking_answers? ? :restrictions : :other_assets },
           carry_on_sub_flow: ->(application) { application.savings_amount? },
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(app) { app.client_completed_means? ? :means_summaries : :check_passported_answers }
         },
         other_assets: {
           path: ->(application) { urls.providers_legal_aid_application_other_assets_path(application) },
-          forward: ->(application) { application.own_capital? ? :restrictions : :check_passported_answers },
+          forward: ->(application) { application.own_capital? ? :restrictions : :means_summaries },
           carry_on_sub_flow: ->(application) { application.other_assets? },
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(app) { app.client_completed_means? ? :means_summaries : :check_passported_answers }
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },
           forward: :check_passported_answers,
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(app) { app.client_completed_means? ? :means_summaries : :check_passported_answers }
         },
         check_passported_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_passported_answers_path(application) },
