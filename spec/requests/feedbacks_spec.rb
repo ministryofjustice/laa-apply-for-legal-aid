@@ -78,12 +78,34 @@ RSpec.describe 'FeedbacksController', type: :request do
     it 'renders the page' do
       expect(response).to have_http_status(:ok)
     end
+
+    context 'provider signed out' do
+      let(:provider) { create :provider }
+
+      before do
+        sign_in provider
+        delete destroy_provider_session_path
+        get new_feedback_path
+      end
+
+      it 'displays success message' do
+        expect(unescaped_response_body).to match(I18n.t('.feedback.new.signed_out'))
+      end
+
+      it 'does not display a back button' do
+        expect(unescaped_response_body).not_to match(I18n.t('.generic.back'))
+      end
+    end
   end
 
   describe 'GET /feedback/:id' do
     let(:feedback) { create :feedback }
+    let(:provider) { create :provider }
 
-    before { get feedback_path(feedback) }
+    before do
+      sign_in provider
+      get feedback_path(feedback)
+    end
 
     it 'renders the page' do
       expect(response).to have_http_status(:ok)
@@ -91,6 +113,20 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     it 'displays a message' do
       expect(unescaped_response_body).to match(I18n.t('feedback.show.title'))
+    end
+
+    context 'provider signed out' do
+      let(:provider) { create :provider }
+
+      before do
+        sign_in provider
+        delete destroy_provider_session_path
+        get feedback_path(feedback)
+      end
+
+      it 'displays close tab message' do
+        expect(unescaped_response_body).to match(I18n.t('.feedback.show.close_tab'))
+      end
     end
   end
 end

@@ -5,7 +5,9 @@ en:
       done_all_needed: Were you able to do what you needed today?
       improvement_suggestion: How could we improve this service?
       satisfaction: Overall, how satisfied were you with this service?
+      signed_out: You have signed out
       title: Help us improve this service
     show:
+      close_tab: You can close this tab or page.
       link: Back to your application
       title: Thank you for your feedback
