@@ -43,6 +43,7 @@ module PageTemplateHelper
     column_width: 'two-thirds',
     template: nil,
     show_errors_for: @form,
+    success_message: nil,
     page_heading_options: {},
     &content
   )
@@ -57,6 +58,7 @@ module PageTemplateHelper
       column_width: column_width,
       content: content,
       show_errors_for: show_errors_for,
+      success_message: success_message,
       page_heading_options: page_heading_options
     )
   end

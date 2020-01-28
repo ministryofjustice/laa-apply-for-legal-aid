@@ -37,7 +37,16 @@ class FeedbackController < ApplicationController
   def back_path
     session.fetch(:feedback_return_path, :back)
   end
-  helper_method :back_path
+
+  def success_message
+    provider_signed_in? ? {} : I18n.t('feedback.new.signed_out')
+  end
+
+  def back_button
+    provider_signed_in? ? {} : :none
+  end
+
+  helper_method :back_path, :back_button, :success_message
 
   def update_return_path
     return if request.referer&.include?(feedback_index_path)
