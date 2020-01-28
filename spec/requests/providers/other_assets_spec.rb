@@ -202,10 +202,6 @@ RSpec.describe 'provider other assets requests', type: :request do
                 expect(application.reload.other_assets?).to be false
                 expect(application.own_home?).to be false
                 expect(application.savings_amount?).to be false
-                #binding.pry
-                #expect(application.state).to eql(:bob)
-                pp '*************'
-                pp 'expecting response'
                 expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
               end
             end
