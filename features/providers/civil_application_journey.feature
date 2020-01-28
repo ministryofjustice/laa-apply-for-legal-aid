@@ -415,6 +415,18 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's regular payments"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I select "None of these"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I select "None of these"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
