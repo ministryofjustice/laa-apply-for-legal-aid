@@ -400,7 +400,7 @@ Feature: Civil application journeys
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Respondent details"
+    Then I should be on a page showing "Opponent details"
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
     Then I choose option "Respondent police notified True"
@@ -504,7 +504,7 @@ Feature: Civil application journeys
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Respondent details"
+    Then I should be on a page showing "Opponent details"
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
     Then I choose option "Respondent police notified True"

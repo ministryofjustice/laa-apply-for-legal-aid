@@ -121,7 +121,7 @@ en:
         items_to_be_provided:
           list: |
             details of the latest domestic abuse incident
-            information about the respondent
+            information about the opponent
             a statement of case
             the chances of a successful outcome
     check_benefits:
@@ -388,9 +388,9 @@ en:
         username: Username
     respondents:
       show:
-        h1-heading: Respondent details
-        understands_terms_of_court_order: Does the respondent have the mental capacity to understand the terms of a court order?
-        warning_letter_sent: Has a warning letter been sent to the respondent?
+        h1-heading: Opponent details
+        understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
+        warning_letter_sent: Has a warning letter been sent to the opponent?
         police_notified: Have the police been notified?
         bail_conditions_set: Have bail conditions been set?
         bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
@@ -431,7 +431,7 @@ en:
           heading: Before you start
           list: |
             has a National Insurance number
-            is single (unless their partner is the respondent in the case)
+            is single (unless their partner is the opponent in the case)
           title: 'You can only use this service if your client:'
         use_ccms_para: Use the Client and Cost Management System (CCMS) for all other applications.
     start_merits_assessments:
@@ -444,7 +444,7 @@ en:
         do_merits_of_case_qualify_list:
           list: |
             details of the latest domestic abuse incident
-            information about the respondent
+            information about the opponent
             a statement of case
             the chances of a successful outcome
     statement_of_cases:
