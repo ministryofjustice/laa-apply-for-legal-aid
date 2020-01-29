@@ -109,7 +109,7 @@ GEM
     builder (3.2.4)
     business (1.17.1)
     byebug (11.1.0)
-    capybara (3.30.0)
+    capybara (3.31.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -318,7 +318,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.8)
+    rack (2.1.2)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
