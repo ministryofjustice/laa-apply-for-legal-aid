@@ -11,7 +11,7 @@ class SamlSessionsController < Devise::SamlSessionsController
     if IdPSettingsAdapter.mock_saml?
       redirect_to providers_root_url
     else
-      redirect_to idp_sign_out_provider_session_url(SAMLRequest: 1)
+      redirect_to new_feedback_path
     end
   end
 

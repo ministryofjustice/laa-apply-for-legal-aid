@@ -32,27 +32,41 @@ module StatementOfCases
     end
 
     validates :statement, presence: true, unless: :file_present_or_draft?
+    validate :files_uploaded?
     validate :original_files_valid
 
     def save
-      super
+      result = super
+      return unless original_files
+
+      # create and save statement_of_case model only if attachments were made
+      model.save(validate: false) if attachments_made?
+      # return result which returns 300 for redirect to fix tests
+      result
     end
 
     private
 
+    def attachments_made?
+      model.legal_aid_application.attachments.present?
+    end
+
+    def files_uploaded?
+      return true unless @upload_button_pressed == true && (original_files.nil? || original_files.none?)
+
+      errors.add(:original_files, original_file_error_for(:no_file_chosen))
+    end
+
     def original_files_valid
-      if @upload_button_pressed == true
-        if original_files.nil? || original_files.none?
-          errors.add(:original_files, original_file_error_for(:no_file_chosen))
-          return
-        end
-      end
-      original_files&.each do |original_file|
-        original_file_too_big(original_file)
-        original_file_empty(original_file)
-        original_file_malware_scan(original_file)
-        original_file_disallowed_content_type(original_file)
-        create_attachment(original_file)
+      return if original_files.nil?
+
+      original_files.each do |original_file|
+        @original_file_name = original_file.original_filename
+        malware_scan(original_file)
+        disallowed_content_type(original_file)
+        file_empty(original_file)
+        too_big(original_file)
+        create_attachment(original_file) unless errors.key?(@original_file_name.to_sym)
       end
     end
 
@@ -60,41 +74,33 @@ module StatementOfCases
       model.original_attachments.any? || original_files&.any? || draft?
     end
 
-    def original_file_too_big(original_file)
-      return unless file_present?(original_file)
+    def too_big(original_file)
       return if original_file_size(original_file) <= StatementOfCaseForm.max_file_size
 
-      errors.add(:original_files, original_file_error_for(:file_too_big, size: StatementOfCaseForm.max_file_size / 1.megabyte))
+      error_options = { size: StatementOfCaseForm.max_file_size / 1.megabyte, file_name: @original_file_name }
+      errors.add(@original_file_name.to_sym, original_file_error_for(:file_too_big, error_options))
     end
 
-    def original_file_empty(original_file)
-      return unless file_present?(original_file)
+    def file_empty(original_file)
       return if File.size(original_file.tempfile) > 1
 
-      errors.add(:original_files, original_file_error_for(:file_empty))
+      errors.add(@original_file_name.to_sym, original_file_error_for(:file_empty, file_name: @original_file_name))
     end
 
-    def original_file_disallowed_content_type(original_file)
-      return unless file_present?(original_file)
+    def disallowed_content_type(original_file)
       return if original_file.content_type.in?(ALLOWED_CONTENT_TYPES)
 
-      errors.add(:original_files, original_file_error_for(:content_type_invalid))
+      errors.add(@original_file_name.to_sym, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
     end
 
-    def original_file_malware_scan(original_file)
-      return unless file_present?(original_file)
-
+    def malware_scan(original_file)
       return unless malware_scan_result(original_file).virus_found?
 
-      errors.add(:original_files, original_file_error_for(:file_virus))
-    end
-
-    def file_present?(original_file)
-      original_file.present?
+      errors.add(@original_file_name.to_sym, original_file_error_for(:file_virus, file_name: @original_file_name))
     end
 
     def malware_scan_result(original_file)
-      @malware_scan_result ||= MalwareScanner.call(
+      MalwareScanner.call(
         file_path: original_file.tempfile.path,
         uploader: provider_uploader,
         file_details: {

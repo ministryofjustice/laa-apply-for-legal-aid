@@ -13,7 +13,11 @@ module CCMS
     private
 
     def pdf_attachments
-      @pdf_attachments ||= legal_aid_application.attachments.reject { |a| a.attachment_type == 'statement_of_case' }
+      @pdf_attachments ||= attachments.reject { |a| a.attachment_type == 'statement_of_case' }
+    end
+
+    def attachments
+      legal_aid_application.attachments.all
     end
 
     def legal_aid_application

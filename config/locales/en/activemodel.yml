@@ -288,9 +288,9 @@ en:
         respondent:
           attributes:
             understands_terms_of_court_order:
-              blank: Select yes if the respondent has the mental capacity to understand the terms of a court order
+              blank: Select yes if the opponent has the mental capacity to understand the terms of a court order
             warning_letter_sent:
-              blank: Select yes if a warning letter has been sent to the respondent
+              blank: Select yes if a warning letter has been sent to the opponent
             police_notified:
               blank: Select yes if the police have been notified
             bail_conditions_set:
@@ -360,10 +360,10 @@ en:
         statement_of_case:
           attributes:
             original_files:
-              content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
-              file_empty: The selected file is empty
-              file_too_big: The selected file must be smaller than %{size}MB
-              file_virus: The selected file contains a virus
+              content_type_invalid: The selected file %{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
+              file_empty: The selected file %{file_name} is empty
+              file_too_big: The selected file %{file_name} must be smaller than %{size}MB
+              file_virus: The selected file %{file_name} contains a virus
               no_file_chosen: You must choose at least one file
             statement:
               blank: Either attach a file or enter text

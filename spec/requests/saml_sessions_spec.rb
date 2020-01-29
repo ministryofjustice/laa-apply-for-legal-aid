@@ -22,7 +22,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
 
       it 'redirects to the SAML sign_out URL' do
         subject
-        expect(response).to redirect_to(idp_sign_out_provider_session_url(SAMLRequest: 1))
+        expect(response).to redirect_to(new_feedback_path)
       end
     end
 

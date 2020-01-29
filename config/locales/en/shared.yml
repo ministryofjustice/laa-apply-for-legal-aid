@@ -55,7 +55,7 @@ en:
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         case-details-heading: Case details
-        respondent-heading: Respondent details
+        respondent-heading: Opponent details
         latest-incident-heading: Details of the latest incident
         items:
           client_declaration: Client declaration
@@ -66,8 +66,8 @@ en:
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?
           statement_of_case: Provide a statement of case
-          understands_terms_of_court_order: Does the respondent have the mental capacity to understand the terms of a court order?
-          warning_letter_sent: Has a warning letter been sent to the respondent?
+          understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
+          warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
           notification_of_latest_incident: When did your client tell you about the latest domestic abuse incident?

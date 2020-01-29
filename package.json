@@ -10,7 +10,7 @@
     "@rails/activestorage": "^6.0.2",
     "@rails/ujs": "^6.0.2",
     "@rails/webpacker": "^4.2.2",
-    "axios": "^0.19.1",
+    "axios": "^0.19.2",
     "govuk-frontend": "^3.5.0",
     "jquery": "^3.4.1",
     "js-search": "^1.4.3"
@@ -20,7 +20,7 @@
     "@hint/formatter-json": "^3.1.5",
     "@hint/parser-javascript": "^3.1.0",
     "hint": "^5.4.1",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "webpack-dev-server": "^3.10.1"
   },
   "jest": {
