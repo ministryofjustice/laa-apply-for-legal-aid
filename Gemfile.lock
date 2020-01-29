@@ -108,7 +108,7 @@ GEM
     browser (3.0.3)
     builder (3.2.4)
     business (1.17.1)
-    byebug (11.1.0)
+    byebug (11.1.1)
     capybara (3.31.0)
       addressable
       mini_mime (>= 0.1.3)
