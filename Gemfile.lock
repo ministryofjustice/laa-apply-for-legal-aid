@@ -129,7 +129,7 @@ GEM
     connection_pool (2.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    crass (1.0.5)
+    crass (1.0.6)
     cucumber (3.1.2)
       builder (>= 2.1.2)
       cucumber-core (~> 3.2.0)
@@ -169,12 +169,12 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
-    erb_lint (0.0.30)
+    erb_lint (0.0.31)
       activesupport
       better_html (~> 1.0.7)
       html_tokenizer
       rainbow
-      rubocop (~> 0.51)
+      rubocop (~> 0.79.0)
       smart_properties
     errbase (0.1.1)
     erubi (1.9.0)
@@ -302,7 +302,7 @@ GEM
     orm_adapter (0.5.0)
     pagy (3.7.2)
     parallel (1.19.1)
-    parser (2.7.0.1)
+    parser (2.7.0.2)
       ast (~> 2.4.0)
     pg (1.2.2)
     prometheus_exporter (0.4.16)
@@ -491,7 +491,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2019.3)
       tzinfo (>= 1.0.0)
-    unicode-display_width (1.6.0)
+    unicode-display_width (1.6.1)
     vcr (5.0.0)
     warden (1.2.8)
       rack (>= 2.0.6)
