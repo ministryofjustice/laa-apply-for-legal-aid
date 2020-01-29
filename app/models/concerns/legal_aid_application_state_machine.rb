@@ -71,8 +71,6 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       end
 
       event :complete_means do
-        transitions from: :checking_citizen_answers, to: :means_completed,
-                    after: -> { ApplicantCompleteMeans.call(self) }
         transitions from: :checking_passported_answers, to: :means_completed
       end
 
