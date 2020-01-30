@@ -7,7 +7,7 @@ RSpec.describe Reports::MeansReportCreator do
 
   describe '.call' do
     it 'attaches means_report.pdf to the application' do
-      expect_any_instance_of(CCMS::ReferenceDataRequestor).to receive(:call)
+      expect_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:call)
       expect(Providers::MeansReportsController.renderer).to receive(:render).and_call_original
       subject
       legal_aid_application.reload

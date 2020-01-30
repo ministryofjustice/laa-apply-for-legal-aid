@@ -17,19 +17,19 @@ module CCMS
     def process!(options = {}) # rubocop:disable Metrics/MethodLength
       case aasm_state
       when 'initialised'
-        ObtainCaseReferenceService.call(self)
+        CCMS::Submitters::ObtainCaseReferenceService.call(self)
       when 'case_ref_obtained'
-        ObtainApplicantReferenceService.call(self)
+        CCMS::Submitters::ObtainApplicantReferenceService.call(self)
       when 'applicant_submitted'
-        CheckApplicantStatusService.call(self)
+        CCMS::Submitters::CheckApplicantStatusService.call(self)
       when 'applicant_ref_obtained'
-        ObtainDocumentIdService.call(self)
+        CCMS::Submitters::ObtainDocumentIdService.call(self)
       when 'document_ids_obtained'
-        AddCaseService.call(self, options)
+        CCMS::Submitters::AddCaseService.call(self, options)
       when 'case_submitted'
-        CheckCaseStatusService.call(self)
+        CCMS::Submitters::CheckCaseStatusService.call(self)
       when 'case_created'
-        UploadDocumentsService.call(self)
+        CCMS::Submitters::UploadDocumentsService.call(self)
       else
         raise CcmsError, "Submission #{id} - Unknown state: #{aasm_state}"
       end

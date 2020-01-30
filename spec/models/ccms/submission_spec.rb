@@ -35,7 +35,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
       end
 
       context 'valid state' do
-        let(:service) { ObtainCaseReferenceService }
+        let(:service) { CCMS::Submitters::ObtainCaseReferenceService }
         let(:service_instance) { service.new(submission) }
 
         before do
@@ -50,7 +50,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'case_ref_obtained state' do
           let(:state) { :case_ref_obtained }
-          let(:service) { ObtainApplicantReferenceService }
+          let(:service) { CCMS::Submitters::ObtainApplicantReferenceService }
           it 'calls the obtain_applicant_reference service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -58,7 +58,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'applicant_submitted state' do
           let(:state) { :applicant_submitted }
-          let(:service) { CheckApplicantStatusService }
+          let(:service) { CCMS::Submitters::CheckApplicantStatusService }
           it 'calls the check_applicant_status service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -66,7 +66,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'applicant_ref_obtained state' do
           let(:state) { :applicant_ref_obtained }
-          let(:service) { ObtainDocumentIdService }
+          let(:service) { CCMS::Submitters::ObtainDocumentIdService }
           it 'calls the add_case service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -74,7 +74,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'case_submitted state' do
           let(:state) { :case_submitted }
-          let(:service) { CheckCaseStatusService }
+          let(:service) { CCMS::Submitters::CheckCaseStatusService }
           it 'calls the check_case_status service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -82,7 +82,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'case_created state' do
           let(:state) { :case_created }
-          let(:service) { UploadDocumentsService }
+          let(:service) { CCMS::Submitters::UploadDocumentsService }
           it 'calls the obtain_document_id service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -90,7 +90,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
 
         context 'document_ids_obtained state' do
           let(:state) { :document_ids_obtained }
-          let(:service) { AddCaseService }
+          let(:service) { CCMS::Submitters::AddCaseService }
           it 'calls the upload_documents service' do
             expect(service_instance).to receive(:call).with({})
           end
