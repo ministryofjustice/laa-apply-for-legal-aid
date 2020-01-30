@@ -11,7 +11,7 @@ class PdfConverter
   end
 
   def call # rubocop:disable Metrics/MethodLength
-    return if @original_attachment.pdf_attachment_id.present?
+    return if @original_attachment&.pdf_attachment_id.present?
 
     file = converted_file
 
