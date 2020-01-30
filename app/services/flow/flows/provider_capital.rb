@@ -24,7 +24,13 @@ module Flow
         },
         other_assets: {
           path: ->(application) { urls.providers_legal_aid_application_other_assets_path(application) },
-          forward: ->(application) { application.own_capital? ? :restrictions : :check_passported_answers },
+          forward: ->(application) do
+            if application.own_capital?
+              :restrictions
+            else
+              application.means_completed? ? :means_summaries : :check_passported_answers
+            end
+          end,
           carry_on_sub_flow: ->(application) { application.other_assets? },
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
         },
@@ -52,7 +58,8 @@ module Flow
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: :means_summaries
+          forward: :own_homes,
+          check_answers: :means_summaries
         },
         incoming_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
