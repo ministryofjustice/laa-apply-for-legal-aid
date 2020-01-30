@@ -2,6 +2,11 @@ Then('I should be on a page showing {string}') do |title|
   expect(page).to have_content(title)
 end
 
+Then('I should be on the {string} page showing {string}') do |view_name, title|
+  expect(page.current_path).to end_with(view_name)
+  expect(page).to have_content(title)
+end
+
 Then('I should be on a page not showing {string}') do |title|
   expect(page).not_to have_content(title)
 end
