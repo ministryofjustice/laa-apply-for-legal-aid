@@ -551,6 +551,9 @@ en:
     email_addresses:
       show:
         page_title: Enter your client's email address
+    dependants:
+      index:
+        page_title: "Enter the %{number} dependant's details for your client"
     has_dependants:
       show:
         page_heading: Does your client have any dependants?

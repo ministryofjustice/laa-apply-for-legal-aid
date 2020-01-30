@@ -1,0 +1,6 @@
+<%= render(
+      'shared/forms/dependants/details',
+      form_url: providers_legal_aid_application_dependants_path(@legal_aid_application),
+      form_method: :post,
+      page_title: t('.page_title', number: @form.model.ordinal_number)
+    ) %>
