@@ -33,7 +33,7 @@ module Flow
         },
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_dependant_path(application) },
-          forward: ->(_, has_other_dependant) { has_other_dependant ? :dependants : :identify_types_of_outgoings }
+          forward: ->(_, has_other_dependant) { has_other_dependant ? :dependants : :outgoings_summary }
         },
         dependants_full_time_educations: {
           path: ->(application, dependant) { urls.providers_legal_aid_application_dependant_full_time_education_path(application, dependant) },
