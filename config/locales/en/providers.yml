@@ -565,3 +565,7 @@ en:
         page_heading: Does your client have any dependants?
         info: A dependant could be a child or adult who lives with your client and depends on them for financial support.
         extra_info: Do not include your client's partner if they have one.
+    has_other_dependants:
+      show:
+        heading: Does your client have any other dependants?
+        error: Select yes if they have other dependants
