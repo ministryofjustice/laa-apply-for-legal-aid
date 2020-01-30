@@ -551,3 +551,8 @@ en:
     email_addresses:
       show:
         page_title: Enter your client's email address
+    has_dependants:
+      show:
+        page_heading: Does your client have any dependants?
+        info: A dependant could be a child or adult who lives with your client and depends on them for financial support.
+        extra_info: Do not include your client's partner if they have one.
