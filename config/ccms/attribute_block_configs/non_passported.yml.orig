@@ -1,5 +1,13 @@
 ---
 additional_property:
+<<<<<<< HEAD
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+=======
   ADDPROPERTY_INPUT_B_4WP2_18A:
     value: false
     br100_meaning: 'Add. Property: Owned with 3rd party, inc ex. partner?'
@@ -48,6 +56,7 @@ additional_property:
     response_type: boolean
     user_defined: true
     generate_block?: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
 
 bank_acct:
   BANKACC_INPUT_B_7WP2_12A:
@@ -56,6 +65,8 @@ bank_acct:
     value: false
   BANKACC_INPUT_B_7WP2_16A:
     value: false
+<<<<<<< HEAD
+=======
   BANKACC_INPUT_B_7WP2_19A:
     generate_block?: true
     value: false
@@ -84,6 +95,7 @@ bank_acct:
 
 
 
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
 
 capital_share:
   CAPSHARE_INPUT_B_11WP2_19A:
@@ -146,6 +158,13 @@ change_in_circumstance:
     response_type: text
 
 cli_capital:
+<<<<<<< HEAD
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+=======
   CLICAPITAL_INPUT_B_9WP2_10A:
     value: false
     br100_meaning: 'Client capital bonds: SMOD in other proceedings?'
@@ -169,6 +188,7 @@ cli_capital:
     br100_meaning: 'Client capital bonds: Subject to bankruptcy?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
     generate_block?: true
 
 financial_support:
@@ -323,6 +343,15 @@ global_means:
     generate_block?: true
   SA_SCREEN10_1WP1_NONMEANS:
     generate_block?: true
+<<<<<<< HEAD
+
+
+
+
+
+
+
+=======
   GB_INPUT_B_2WP3_214A:
     generate_block?: true
     value: false
@@ -362,6 +391,7 @@ global_means:
     br100_meaning: 'Main Dwelling: Client/Partner has a deferred interest?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
 
 
 
@@ -757,6 +787,15 @@ land:
     response_type: boolean
     user_defined: false
     generate_block?: true
+<<<<<<< HEAD
+
+life_assurance:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+=======
   LAND_INPUT_B_5WP2_11A:
     value: false
     br100_meaning: 'Land: Leased out?'
@@ -824,6 +863,7 @@ life_assurance:
     br100_meaning: 'Policies: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
     generate_block?: true
 
 main_dwelling_third_party:
@@ -836,6 +876,14 @@ main_dwelling_third_party:
 
 
 
+<<<<<<< HEAD
+money_due:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+=======
 
 money_due:
   MONEYDUE_INPUT_B_15WP2_18A:
@@ -873,6 +921,7 @@ money_due:
     br100_meaning: 'Money due: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
     generate_block?: true
 
 national_savings:
@@ -961,6 +1010,13 @@ other_savings:
 
 
 premium_bonds:
+<<<<<<< HEAD
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+=======
   CLIPREMIUM_INPUT_B_9WP2_10A:
     value: false
     br100_meaning: 'Client premium bonds: SMOD in other proceedings?'
@@ -984,6 +1040,7 @@ premium_bonds:
     br100_meaning: 'Client premium bonds: Subject to bankruptcy?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
     generate_block?: true
 
 proceeding_merits:
@@ -1109,6 +1166,72 @@ proceeding_merits:
     generate_block?: true
 
 
+<<<<<<< HEAD
+property_means:
+  ADDPROPERTY_INPUT_B_4WP2_18A:
+    value: false
+    br100_meaning: 'Add. Property: Owned with 3rd party, inc ex. partner?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INFER_B_4WP2_52A:
+    value: false
+    br100_meaning: 'Add. Property: SMOD?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_24A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_25A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_26A:
+    value: false
+    br100_meaning: 'Add. Property: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_27A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_28A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to possession proceedings?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_32A:
+    value: false
+    br100_meaning: 'Add. Property: Client/Partner has a deferred interest?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+stocks:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+third_party_accounts:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+=======
 #property_means:
 
 
@@ -1180,6 +1303,7 @@ third_party_accounts:
     br100_meaning: '3rd party accounts: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
     generate_block?: true
 
 timeshare:
@@ -1195,6 +1319,8 @@ timeshare:
     response_type: boolean
     user_defined: false
     generate_block?: true
+<<<<<<< HEAD
+=======
   TIMESHARE_INPUT_N_6WP2_16A:
     value: false
     br100_meaning: 'Timeshare: Subject to restraint (freezing) order?'
@@ -1219,6 +1345,7 @@ timeshare:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_owns_timeshare?'
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
 
 trust:
   TRUST_INPUT_B_16WP2_11A:
@@ -1227,6 +1354,15 @@ trust:
     response_type: boolean
     user_defined: false
     generate_block?: true
+<<<<<<< HEAD
+
+will:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+=======
   TRUST_INPUT_B_16WP2_19A:
     value: false
     br100_meaning: 'Trust: interview complete'
@@ -1347,4 +1483,5 @@ will:
     br100_meaning: 'Will: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+>>>>>>> AP-1230 Conditional false attributes for CCMS payload
     generate_block?: true
