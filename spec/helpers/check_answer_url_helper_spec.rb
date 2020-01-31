@@ -18,13 +18,8 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
 
     context 'citizen' do
       it 'returns the path' do
-        url = check_answer_url_for(:citizens, :own_homes)
-        expect(url).to eq '/citizens/own_home'
-      end
-
-      it 'returns the path with anchor' do
-        url = check_answer_url_for(:citizens, :property_values)
-        expect(url).to eq '/citizens/property_value#property_value'
+        url = check_answer_url_for(:citizens, :information)
+        expect(url).to eq '/citizens/information'
       end
     end
   end
