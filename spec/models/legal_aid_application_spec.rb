@@ -411,12 +411,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#wage_slips' do
-    it 'returns the correct wage slip data' do
-      expect(legal_aid_application.wage_slips).to eq []
-    end
-  end
-
   describe '#opponents' do
     it 'returns the opponent data' do
       expect(legal_aid_application.opponents).to eq [Opponent.dummy_opponent]
@@ -533,12 +527,20 @@ RSpec.describe LegalAidApplication, type: :model do
         it 'returns true' do
           expect(legal_aid_application.applicant_receives_benefit?).to be true
         end
+
+        it 'returns true for the aliased method #passported?' do
+          expect(legal_aid_application.passported?).to be true
+        end
       end
 
       context 'not passported' do
         before { create :benefit_check_result, legal_aid_application: legal_aid_application }
         it 'returns false' do
           expect(legal_aid_application.applicant_receives_benefit?).to be false
+        end
+
+        it 'returns true for the alias non_passported' do
+          expect(legal_aid_application.non_passported?).to be true
         end
       end
 

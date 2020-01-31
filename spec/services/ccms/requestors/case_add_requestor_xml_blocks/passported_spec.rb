@@ -41,7 +41,8 @@ module CCMS
         let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
 
         # enable this context if you need to create a file of the payload for manual inspection
-        context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
+        # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
+        context 'save to a temporary file' do
           it 'creates a file' do
             filename = Rails.root.join('tmp/generated_ccms_payload.xml')
             File.open(filename, 'w') { |f| f.puts xml }
