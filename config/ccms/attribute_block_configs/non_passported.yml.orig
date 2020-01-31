@@ -205,6 +205,8 @@ global_means:
     response_type: boolean
     br100_meaning: 'Client Dividends: Earns income from dividends from shares?'
     user_defined: true
+<<<<<<< HEAD
+=======
   GB_INPUT_B_40WP3_74A:
     generate_block?: true
     value: true
@@ -246,6 +248,7 @@ global_means:
 
 
 
+>>>>>>> AP-1229 Hard coded true attribues on non-passported payload
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -602,6 +605,13 @@ global_merits:
   URGENT_DIRECTIONS:
     generate_block?: true
     value: false
+<<<<<<< HEAD
+
+land:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+=======
   MEDIATION_APPLICABLE:
     generate_block?: true
   MENTAL_HEAL_QUESTION_APPLIES:
@@ -634,6 +644,7 @@ land:
   LAND_INFER_B_5WP2_54A:
     value: true
     br100_meaning: land interview for owned land is complete
+>>>>>>> AP-1229 Hard coded true attribues on non-passported payload
     response_type: boolean
     user_defined: false
     generate_block?: true
@@ -872,6 +883,8 @@ proceeding_merits:
   SIGNIFICANT_WIDER_PUB_INTEREST:
     generate_block?: true
     value: false
+<<<<<<< HEAD
+=======
   LEAD_PROCEEDING_MERITS:
     generate_block?: true
   LEVEL_OF_SERV_FR:
@@ -879,6 +892,7 @@ proceeding_merits:
   PROC_OUTCOME_NO_OUTCOME:
     generate_block?: true
 
+>>>>>>> AP-1229 Hard coded true attribues on non-passported payload
 
 property_means:
   ADDPROPERTY_INPUT_B_4WP2_18A:
@@ -947,6 +961,11 @@ third_party_accounts:
     generate_block?: true
 
 timeshare:
+<<<<<<< HEAD
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+=======
   TIMESHARE_INFER_B_6WP2_20A:
     value: true
     br100_meaning: timeshare additional information interview is complete
@@ -956,14 +975,21 @@ timeshare:
   TIMESHARE_INFER_B_6WP2_21A:
     value: true
     br100_meaning: timeshare interview for owned land is complete
+>>>>>>> AP-1229 Hard coded true attribues on non-passported payload
     response_type: boolean
     user_defined: false
     generate_block?: true
 
 trust:
+<<<<<<< HEAD
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+=======
   TRUST_INPUT_B_16WP2_11A:
     value: true
     br100_meaning: 'Trust: interview complete'
+>>>>>>> AP-1229 Hard coded true attribues on non-passported payload
     response_type: boolean
     user_defined: false
     generate_block?: true

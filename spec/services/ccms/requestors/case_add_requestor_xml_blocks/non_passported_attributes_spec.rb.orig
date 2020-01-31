@@ -68,6 +68,8 @@ module CCMS
           end
         end
 
+<<<<<<< HEAD
+=======
         context 'hard coded true attributes' do
           it 'generates the block with boolean value set to false' do
             true_attributes.each do |config_spec|
@@ -115,6 +117,7 @@ module CCMS
           ]
         end
 
+>>>>>>> AP-1229 Hard coded true attribues on non-passported payload
         def false_attributes # rubocop:disable Metrics/MethodLength
           [
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_12A', true],
