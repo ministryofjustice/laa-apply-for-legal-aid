@@ -2,7 +2,7 @@ class PostSubmissionProcessingJob < ActiveJob::Base
   queue_as :default
 
   def perform(legal_aid_application_id)
-    SubmissionConfirmationMailer.notify(legal_aid_application_id).deliver_later!
+    SubmissionConfirmationMailer.notify(legal_aid_application_id, app.new_feedback_url).deliver_later!
     @legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
     reminder_mailings.each(&:cancel!)
   end

@@ -54,7 +54,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = {
-    host: ENV.fetch('MAILER_DEFAULT_URL', 'localhost'),
+    host: ENV.fetch('MAILER_DEFAULT_URL', 'thisisatest'),
     port: ENV.fetch('PORT', 80)
   }
 
