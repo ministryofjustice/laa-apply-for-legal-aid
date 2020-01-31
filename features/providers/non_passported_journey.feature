@@ -46,7 +46,41 @@ Feature: Non-passported applicant journeys
     When I choose "Yes"
     And I fill "monthly income" with "1234"
     And I click 'Save and continue'
-    Then I should be on a page showing "Do you have any other dependants?"
+    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on the 'dependants' page showing "Enter the second dependant's details for your client"
+    When I fill "Name" with "Pugsley Adams"
+    And I enter a date of birth for a 21 year old
+    And I click "Save and continue"
+    Then I should be on a page showing "What is your clients' relationship to"
+    When I choose "They're a child relative"
+    And I click "Save and continue"
+    Then I should be on the 'full_time_education' page showing "in full-time education or training?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on a page showing "receive any income?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on the 'dependants' page showing "Enter the third dependant's details for your client"
+    When I fill "Name" with "Granny Addams"
+    And I enter a date of birth for a 80 year old
+    And I click "Save and continue"
+    Then I should be on the 'relationship' page showing "What is your clients' relationship to"
+    When I choose "They're an adult relative"
+    And I click "Save and continue"
+    Then I should be on the 'monthly_income' page showing "receive any income?"
+    When I choose "Yes"
+    And I fill "monthly income" with "4321"
+    And I click 'Save and continue'
+    Then I should be on the 'assets_value' page showing "have assets worth more than £8,000?"
+    When I choose "Yes"
+    And I fill "assets value" with "8765"
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Your client's regular payments"
@@ -79,7 +113,7 @@ Feature: Non-passported applicant journeys
     When I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 14 year old
     And I click "Save and continue"
-    Then I should be on a page showing "Do you have any other dependants?"
+    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Your client's regular payments"
