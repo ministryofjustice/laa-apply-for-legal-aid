@@ -49,9 +49,11 @@ module ApplicationHelper
   end
 
   def provider_header_link
-    return unless provider_signed_in?
-
-    render 'shared/provider_header_link'
+    if provider_signed_in?
+      render 'shared/provider_header_link'
+    else
+      render 'shared/signed_out_header_link'
+    end
   end
 
   def admin_header_link
