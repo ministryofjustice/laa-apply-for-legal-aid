@@ -47,4 +47,26 @@ module CheckAnswersHelper
       read_only: read_only
     )
   end
+
+  def check_long_questions_single_change_link(url:, question:, answer_hash:, name:, read_only: false)
+    render(
+      'shared/check_answers/one_change_link_long_answers_section',
+      url: url,
+      name: name,
+      question: question,
+      answer_hash: answer_hash,
+      read_only: read_only
+    )
+  end
+
+  def check_long_question_no_link(question:, answer:, no_border: false, name:, align_right: false)
+    render(
+      'shared/check_answers/no_link_long_item',
+      name: name,
+      question: question,
+      answer: answer,
+      no_border: no_border,
+      align_right: align_right
+   )
+  end
 end
