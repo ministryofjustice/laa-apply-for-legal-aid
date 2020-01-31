@@ -1,0 +1,24 @@
+<%= form_with(model: model, scope: :legal_aid_application, url: url, method: :patch, local: true) do |form| %>
+
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <%= govuk_fieldset_header do %>
+      <h1 class="govuk-fieldset__heading">
+        <%= label_tag(:property_value, page_title) %>
+      </h1>
+    <% end %>
+    <%= form.govuk_text_field(
+          :property_value,
+          hint: controller_t('hint.property_value'),
+          label: nil,
+          value: number_to_currency_or_original_string(model.property_value),
+          input_prefix: t('currency.gbp'),
+          class: 'govuk-!-width-one-third'
+        ) %>
+  <% end %>
+
+  <%= next_action_buttons(
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+        form: form
+      ) %>
+
+<% end %>
