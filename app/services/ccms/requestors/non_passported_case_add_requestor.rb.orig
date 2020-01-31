@@ -1,6 +1,8 @@
 module CCMS
   module Requestors
     class NonPassportedCaseAddRequestor < CaseAddRequestor
+<<<<<<< HEAD
+=======
       uses_namespaces(
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
         'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
@@ -83,6 +85,7 @@ module CCMS
       def applicant_is_beneficiary_of_trust?
         not_nil_or_zero? @legal_aid_application.other_assets_declaration.trust_value
       end
+>>>>>>> AP-1227 Generate Entity blocks for non-passported applications
     end
   end
 end

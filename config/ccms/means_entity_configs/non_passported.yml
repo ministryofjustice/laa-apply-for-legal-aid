@@ -1,0 +1,142 @@
+---
+- :predicate: :national_savings_present?
+  :method: :generate_entity
+  :entity_name: CLINATIONAL
+  :instance_label: the client's national saving certificate1
+  :yaml_section: :national_savings
+
+- :predicate: :valuables_present?
+  :method: :generate_valuable_possessions_entity
+  :entity_name: VALUABLE_POSSESSION
+  :instance_label: the valuable possession1
+  :yaml_section: :valuable_possessions
+
+- :predicate: :capital_share_present?
+  :method: :generate_entity
+  :entity_name: CAPITAL_SHARE
+  :instance_label: the capital share1
+  :yaml_section: :capital_share
+
+- :predicate: :bank_accounts_present?
+  :method: :generate_bank_accounts_entity
+  :entity_name: BANKACC
+  :yaml_section: :bank_acct
+
+- :predicate: :applicant_recieves_financial_support?
+  :method: generate_entity
+  :entity_name: CLIENT_FINANCIAL_SUPPORT
+  :instance_label: the client's financial support1
+  :yaml_section: :financial_support
+
+- :predicate: true
+  :method: generate_entity
+  :entity_name: CHANGE_IN_CIRCUMSTANCE
+  :instance_label: the change in circumstance
+  :yaml_section: :change_in_circumstance
+
+- :predicate: :vehicles_present?
+  :method: :generate_vehicles_entity
+  :entity_name: CARS_AND_MOTOR_VEHICLES
+  :instance_label: the car and motor vehicle
+  :yaml_section: :vehicles
+
+- :predicate: :applicant_has_access_to_other_person_account?
+  :method: :generate_entity
+  :entity_name: THIRDPARTACC
+  :instance_label: the car and motor vehicle
+  :yaml_section: :third_party_accounts
+
+- :predicate: applicant_has_premium_bonds?
+  :method: :generate_entity
+  :entity_name: CLIPREMIUM
+  :instance_label: the client's premium bond1
+  :yaml_section: :premium_bonds
+
+- :predicate: applicant_has_money_due?
+  :method: :generate_entity
+  :entity_name: MONEY_DUE
+  :instance_label: the money due1
+  :yaml_section: :money_due
+
+- :method: :generate_means_proceeding_entity
+  :entity_name: PROCEEDING
+  :yaml_section: :proceeding_means
+
+- :predicate: applicant_has_capital_bonds?
+  :method: :generate_entity
+  :entity_name: CLICAPITAL
+  :instance_label: the money due1
+  :yaml_section: :cli_capital
+
+- :method: :generate_entity
+  :entity_name: OPPONENT_OTHER_PARTIES
+  :instance_label: OPPONENT_7713451
+  :yaml_section: :opponent_other_parties_means
+
+- :method: :generate_entity
+  :entity_name: LAND
+  :instance_label: the land
+  :yaml_section: :land
+
+- :method: :generate_entity
+  :entity_name: TIMESHARE
+  :instance_label: the timeshare
+  :yaml_section: :timeshare
+
+- :method: :generate_entity
+  :entity_name: global
+  :instance_label: "#submission_case_ccms_reference"
+  :yaml_section: :global_means
+
+- :method: :generate_entity
+  :entity_name: OTHERSAVING
+  :instance_label: the timeshare
+  :yaml_section: :other_savings
+
+- :predicate: :vehicles_present?
+  :method: :generate_entity
+  :entity_name: CAR_USED
+  :instance_label: the car used
+  :yaml_section: :car_used
+
+- :predicate: applicant_has_second_home?
+  :method: :generate_entity
+  :entity_name: ADDPROPERTY
+  :instance_label: '#add_property_instance_label'
+  :yaml_section: :additional_property
+
+- :predicate: applicant_has_shares?
+  :method: :generate_entity
+  :entity_name: CLISTOCK
+  :instance_label: "the client's stock1"
+  :yaml_section: :stocks
+
+- :predicate: applicant_has_life_assurance?
+  :method: :generate_entity
+  :entity_name: LIFE_ASSURANCE
+  :instance_label: "the client's life assurance"
+  :yaml_section: :life_assurance
+
+- :predicate: applicant_owns_share_of_property?
+  :method: :generate_entity
+  :entity_name: MAINTHIRD
+  :instance_label: the third party who part owns the main dwelling1
+  :yaml_section: :main_dwelling_third_party
+
+- :predicate: true
+  :method: :generate_entity
+  :entity_name: OTHER_CAPITAL
+  :instance_label: the other capital1
+  :yaml_section: :other_capital
+
+- :predicate: applicant_has_inherited_assets?
+  :method: :generate_entity
+  :entity_name: WILL
+  :instance_label: the will1
+  :yaml_section: :will
+
+- :predicate: applicant_is_beneficiary_of_trust?
+  :method: :generate_entity
+  :entity_name: TRUST
+  :instance_label: the trust
+  :yaml_section: :trust

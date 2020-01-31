@@ -14,5 +14,10 @@ FactoryBot.define do
     trait :credit do
       operation { :credit }
     end
+
+    trait :friends_or_family do
+      operation { 'credit' }
+      transaction_type { TransactionType.where(name: 'friends_or_family').first || create(:transaction_type, :friends_or_family) }
+    end
   end
 end

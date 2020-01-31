@@ -9,7 +9,11 @@ module CCMS
       raise ArgumentError, 'Invalid application type' unless application_type.in?(VALID_APPLICATION_TYPES)
 
       @config = YAML.load_file(configuration_files[:standard])
+<<<<<<< HEAD
       @config.deep_merge! YAML.load_file(configuration_files[application_type]) if application_type == :non_passported
+=======
+      @config.deep_merge! YAML.load_file(configuration_files[application_type]) if application_type != :standard
+>>>>>>> AP-1227 Generate Entity blocks for non-passported applications
       @config.deep_symbolize_keys!
     end
 

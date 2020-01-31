@@ -13,10 +13,10 @@ employment:
   EMPLOYER_NAME:
     :value: "#replaced employer_name"
     :br100_meaning: 'Employer: replaced name'
-    :response_type: text
-    :user_defined: true
+    :response_type: replacement
+    :user_defined: perhaps
   EMPLOYER_TYPE:
-    :value: "#employer_type"
+    :value: "#employer_typr"
     :br100_meaning: 'Employer: type'
     :response_type: text
     :user_defined: true

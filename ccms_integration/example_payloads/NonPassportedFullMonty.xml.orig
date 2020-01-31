@@ -839,7 +839,11 @@
                 </ns3:Entity>
                 <ns3:Entity>
                   <ns3:SequenceNumber>13</ns3:SequenceNumber>
+<<<<<<< HEAD
+                  <ns3:EntityName>CLICAPITAL</ns3:EntityName>
+=======
                   <ns3:EntityName>CLICACLICAPITALPITAL</ns3:EntityName>
+>>>>>>> AP-1227 Generate Entity blocks for non-passported applications
                   <ns3:Instances>
                     <ns3:InstanceLabel>the client's capital bond1</ns3:InstanceLabel>
                     <ns3:Attributes>

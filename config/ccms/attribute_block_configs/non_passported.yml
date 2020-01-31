@@ -1,0 +1,266 @@
+---
+additional_property:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+capital_share:
+  CAPSHARE_INPUT_B_11WP2_19A:
+    generate_block?: true
+    br100_meaning: "Shares: Subject to restraint (freezing) order?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CAPSHARE_INPUT_B_11WP2_20A:
+    generate_block?: true
+    br100_meaning: "Shares: Subject to bankruptcy?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CAPSHARE_INPUT_B_11WP2_22A:
+    generate_block?: true
+    br100_meaning: "Shares: SMOD in other proceedings?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CAPSHARE_INPUT_B_11WP2_23A:
+    generate_block?: true
+    br100_meaning: "Shares: Subject to foreign exchange controls?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CAPSHARE_INPUT_N_11WP2_8A:
+    generate_block?: true
+    br100_meaning: "Shares: The number held"
+    value: 1
+    user_defined: true
+    response_type: number
+  CAPSHARE_INPUT_T_11WP2_6A:
+    generate_block?: true
+    br100_meaning: "Shares: The company in which they are held"
+    value: '.'
+    user_defined: true
+    response_type: text
+  CAPSHARE_INPUT_T_11WP2_7A:
+    generate_block?: true
+    br100_meaning: "Shares: How they were obtained"
+    value: '.'
+    user_defined: true
+    response_type: text
+
+car_used:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+change_in_circumstance:
+  CHANGE_CIRC_INPUT_T_33WP3_6A:
+    generate_block?: true
+    br100_meaning: Changes & Important Information
+    value: '.'
+    user_defined: true
+    response_type: text
+
+cli_capital:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+financial_support:
+  CLI_FIN_SUPP_INPUT_B_8WP3_8A:
+    br100_meaning: 'Client Financial Support: Continuing?'
+    value: true
+    user_defined: true
+    response_type: boolean
+
+land:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+life_assurance:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+main_dwelling_third_party:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+other_capital:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+money_due:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+national_savings:
+  CLINATIONAL_INPUT_B_9WP2_10A:
+    generate_block?: true
+    br100_meaning: "Client NSC: SMOD in other proceedings?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CLINATIONAL_INPUT_B_9WP2_11A:
+    generate_block?: true
+    br100_meaning: "Client NSC: Subject to foreign exchange controls?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CLINATIONAL_INPUT_B_9WP2_8A:
+    generate_block?: true
+    br100_meaning: "Client NSC: Subject to restraint (freezing) order?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CLINATIONAL_INPUT_B_9WP2_9A:
+    generate_block?: true
+    br100_meaning: "Client NSC: Subject to bankruptcy?"
+    value: false
+    user_defined: true
+    response_type: boolean
+  CLINATIONAL_INPUT_T_9WP2_12A:
+    generate_block?: true
+    br100_meaning: "Client NSC: Cert/ ref number"
+    value: '.'
+    user_defined: true
+    response_type: text
+
+other_savings:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+premium_bonds:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+proceeding_merits:
+  ACTION_DAMAGES_AGAINST_POLICE:
+    generate_block?: true
+    value: false
+
+property_means:
+  ADDPROPERTY_INPUT_B_4WP2_18A:
+    value: false
+    br100_meaning: 'Add. Property: Owned with 3rd party, inc ex. partner?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INFER_B_4WP2_52A:
+    value: false
+    br100_meaning: 'Add. Property: SMOD?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_24A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_25A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_26A:
+    value: false
+    br100_meaning: 'Add. Property: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_27A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_28A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to possession proceedings?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_32A:
+    value: false
+    br100_meaning: 'Add. Property: Client/Partner has a deferred interest?'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+stocks:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+third_party_accounts:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+timeshare:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+trust:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+
+will:
+  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+    value: false
+    br100_meaning: Dummy meaning
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
