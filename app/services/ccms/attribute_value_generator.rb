@@ -1,9 +1,10 @@
 module CCMS
   # This class is used to generate the Attribute key-value XML block within the instances of the
   # various entities on the CCMS add request payload.  Each possible key value pair has an
-  # entry in the /config/ccms/standard_ccms_keys.yml file.
+  # entry in the attribute configuration hash (created by the CCMS::AttributeConfiguration class from
+  # YAML files in the config/ccms/ directory).
   #
-  # Each key in the standard_ccms_keys.yml file has the following attributes:
+  # Each key in the configuration hash file has the following attributes:
   #
   # * generate_block? (optional).  If present, specifies the name of a method to call on this class
   #   to specify whether or not the block should be generated
