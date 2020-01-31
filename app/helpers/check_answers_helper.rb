@@ -67,6 +67,6 @@ module CheckAnswersHelper
       answer: answer,
       no_border: no_border,
       align_right: align_right
-   )
+    )
   end
 end
