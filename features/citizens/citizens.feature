@@ -35,6 +35,12 @@ Feature: Citizen journey
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Which types of income do you receive?"
+    And I select 'None of these'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What regular payments do you make?"
+    Then I select "Rent or mortgage"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
