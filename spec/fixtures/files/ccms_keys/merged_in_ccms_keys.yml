@@ -1,0 +1,34 @@
+---
+bank_acct:
+  BALANCE:
+    :value: "#new_bank_balance_method"
+  ACCOUNT_NUMBER:
+    :generate_block?: false
+  NEW_ATTR_IN_EXISTING_SECTION:
+    :value: "#new attr in existing section"
+    :br100_meaning: 'Bank accounts: new attr'
+    :response_type: text
+    :user_defined: true
+employment:
+  EMPLOYER_NAME:
+    :value: "#replaced employer_name"
+    :br100_meaning: 'Employer: replaced name'
+    :response_type: replacement
+    :user_defined: perhaps
+  EMPLOYER_TYPE:
+    :value: "#employer_typr"
+    :br100_meaning: 'Employer: type'
+    :response_type: text
+    :user_defined: true
+new_section:
+  NEW_SECTION_ATTR_1:
+    :value: "#new_section_attr_1"
+    :br100_meaning: 'Attr 1'
+    :response_type: text
+    :user_defined: true
+  NEW_SECTION_ATTR:
+    :value: "#new_seciton_attr_2"
+    :br100_meaning: 'Attr 2'
+    :response_type: text
+    :user_defined: false
+
