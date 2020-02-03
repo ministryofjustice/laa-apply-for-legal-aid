@@ -14,7 +14,11 @@ module CCMS
       private
 
       def pdf_attachments
-        @pdf_attachments ||= legal_aid_application.attachments.reject { |a| a.attachment_type == 'statement_of_case' }
+        @pdf_attachments ||= attachments.reject { |a| a.attachment_type == 'statement_of_case' }
+      end
+
+      def attachments
+        legal_aid_application.attachments.all
       end
 
       def legal_aid_application
@@ -37,7 +41,7 @@ module CCMS
         submission.submission_document.each do |document|
           tx_id = document_id_requestor.transaction_request_id
           @response = document_id_requestor.call
-          document.ccms_document_id = CCMS::Parsers::DocumentIdResponseParser.new(tx_id, @response).document_id
+          document.ccms_document_id = Parsers::DocumentIdResponseParser.new(tx_id, @response).document_id
           document.status = :id_obtained
           document.save!
           submission.save!
@@ -48,7 +52,7 @@ module CCMS
       end
 
       def document_id_requestor
-        @document_id_requestor ||= CCMS::Requestors::DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username)
+        @document_id_requestor ||= Requestors::DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username)
       end
 
       def xml_request
