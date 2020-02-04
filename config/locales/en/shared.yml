@@ -145,6 +145,7 @@ en:
               adult_relative: For example, a parent, grandparent, aunt or uncle.
         monthly_incomes:
           page_title: "Does %{name} receive any income?"
+          head_title: Does this dependant receive any income?
           hint: For example, money from a job, apprenticeship, or student loan or grant.
           enter_monthly_income: Enter the amount they get each month
       identify_types_of_outgoings_form:

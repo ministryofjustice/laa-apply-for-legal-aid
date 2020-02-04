@@ -1,3 +1,5 @@
-<%= page_template page_title: t('.page_heading', name: @dependant.name), template: :basic do %>
+<%= page_template page_title: t('.page_heading', name: @dependant.name),
+                  head_title: t('.head_title'),
+                  template: :basic do %>
   <%= render 'shared/forms/dependants/assets_value', form_path: providers_legal_aid_application_dependant_assets_value_path(@legal_aid_application, @dependant) %>
 <% end %>

@@ -565,9 +565,11 @@ en:
       assets_values:
         show:
           page_heading: "Does %{name} have assets worth more than £8,000?"
+          head_title: "Does this dependant have assets worth more than £8,000?"
       relationships:
         show:
           page_heading: "What is your clients' relationship to %{name}?"
+          head_title: "What is their relationship to your client?"
     has_dependants:
       show:
         page_heading: Does your client have any dependants?
