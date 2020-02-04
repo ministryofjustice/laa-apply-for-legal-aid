@@ -37,8 +37,10 @@ module PageTemplateHelper
   #     <p>Main content</p>
   #   <% end %>
   #
-  def page_template( # rubocop:disable Metrics/ParameterLists Metrics/MethodLength
+
+  def page_template( # rubocop:disable Metrics/ParameterLists, Metrics/MethodLength
     page_title:,
+    head_title: nil,
     back_link: {},
     column_width: 'two-thirds',
     template: nil,
@@ -49,11 +51,12 @@ module PageTemplateHelper
   )
     template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { back_link(back_link) unless back_link == :none }
-    page_title_possibly_with_error(page_title, show_errors_for&.errors)
+    page_title_possibly_with_error({ page_title: page_title, head_title: head_title }, show_errors_for&.errors)
     content = capture(&content) if content
     render(
       "shared/page_templates/#{template}_page_template",
       page_title: page_title,
+      head_title: head_title,
       back_link: back_link,
       column_width: column_width,
       content: content,
@@ -75,17 +78,22 @@ module PageTemplateHelper
     content_for(:page_title) if content_for?(:page_title)
   end
 
-  def page_title_possibly_with_error(text, errors)
-    errors&.present? ? error_page_title(text) : simple_page_title(text)
+  def head_title
+    content_for(:head_title) if content_for?(:head_title)
   end
 
-  def simple_page_title(text)
-    content_for(:page_title) { text }
+  def page_title_possibly_with_error(page_headings, errors)
+    errors&.present? ? error_page_title(page_headings) : simple_page_title(page_headings)
   end
 
-  def error_page_title(text)
+  def simple_page_title(headings)
+    content_for(:page_title) { headings[:page_title] }
+    content_for(:head_title) { headings[:head_title] || headings[:page_title] }
+  end
+
+  def error_page_title(headings)
     prefix = t('errors.title_prefix')
-    content_for(:page_title) { text }
-    content_for(:head_title) { "#{prefix}: #{text}" }
+    content_for(:page_title) { headings[:page_title] }
+    content_for(:head_title) { "#{prefix}: #{headings[:head_title] || headings[:page_title]}" }
   end
 end
