@@ -24,6 +24,7 @@ Feature: Non-passported applicant journeys
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
+    And I should see 'Add dependant'
 
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with dependants
@@ -131,6 +132,7 @@ Feature: Non-passported applicant journeys
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
+    And I should see 'Wednesday Adams'
 
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with no dependants but other values
