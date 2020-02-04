@@ -10,6 +10,15 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
         expect(url).to eq "/providers/applications/#{application.id}/own_home"
       end
 
+      context 'when params are provided' do
+        let(:dependant) { create :dependant, legal_aid_application: application }
+        let(:params) { { dependant_id: dependant.id } }
+        it 'returns the correct path' do
+          url = check_answer_url_for(:providers, :dependants_relationships, application, params)
+          expect(url).to eq "/providers/applications/#{application.id}/dependants/#{dependant.id}/relationship"
+        end
+      end
+
       it 'returns the path with anchor' do
         url = check_answer_url_for(:providers, :property_values, application)
         expect(url).to eq "/providers/applications/#{application.id}/property_value#property_value"
