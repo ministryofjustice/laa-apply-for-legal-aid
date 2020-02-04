@@ -46,3 +46,33 @@ Feature: Citizen journey
     Then I should be on a page showing "Declaration"
     Then I click "Agree and submit"
     Then I should be on a page showing "You've completed your financial assessment"
+
+  @javascript
+  Scenario: I want to change income types via the check your answers page
+    Given I have completed an application
+    And I complete the citizen journey as far as check your answers
+    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'Salary or wages No'
+    And I click Check Your Answers Change link for 'incomings'
+    Then I should be on a page showing 'Which types of income do you receive?'
+    Then I select 'Salary or wages'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'Salary or wages Yes'
+
+  @javascript
+  Scenario: I want to add another bank account via the check your answers page
+    # TODO: Expand this feature
+    # It should really do both:
+    # 1) actually handle the true layer interaction and
+    # 2) demonstrate the check_answer routing.
+    # It currently only manages 2)
+    Given I have completed an application
+    And a "true layer bank" exists in the database
+    And I complete the citizen journey as far as check your answers
+    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page not showing 'Account 2'
+    When I visit the accounts page
+    Then I should be on the 'accounts' page showing 'Your account(s)'
+    When I click link 'Continue'
+    Then I should be on a page showing 'Check your answers'
