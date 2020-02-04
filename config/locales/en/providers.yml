@@ -303,6 +303,16 @@ en:
     means_summaries:
       show:
         h1-heading: Check your answers
+        dependants:
+          heading: Dependants
+          add-new: Add dependant
+          delete: Delete dependant
+          name: Name
+          date_of_birth: Date of birth
+          relationship: Relationship to client
+          in_full_time_education: In full-time education or training
+          income: Income
+          assets: Assets worth more than £8,000
         capital-section-heading: Total capital
         credits-section-heading: Total income
         debits-section-heading: Total outgoings

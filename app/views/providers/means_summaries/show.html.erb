@@ -1,5 +1,8 @@
 <%= page_template(page_title: t('.h1-heading')) do %>
 
+  <h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>
+  <%= render 'shared/check_answers/dependants' %>
+
   <h2 class="govuk-heading-l"><%= t('.credits-section-heading') %></h2>
   <%= render(
         'shared/check_answers/bank_transaction_table',
