@@ -1,30 +1,24 @@
-<%= page_template(
-      page_title: t('.page_title', name: @form.model.name),
-      template: :basic
-    ) do %>
+<%= form_with(
+      model: @form,
+      url: form_url,
+      method: form_method,
+      local: true
+    ) do |form| %>
 
-  <%= form_with(
-        model: @form,
-        url: form_url,
-        method: form_method,
-        local: true
-      ) do |form| %>
+  <%
+    options = [
+      { value: true, label: t('generic.yes') },
+      { value: false, label: t('generic.no') }
+    ]
+  %>
 
-    <%
-      options = [
-        { value: true, label: t('generic.yes') },
-        { value: false, label: t('generic.no') }
-      ]
-    %>
+  <%= form.govuk_collection_radio_buttons(
+        :in_full_time_education,
+        options,
+        :value,
+        :label,
+        title: content_for(:page_title)
+      ) %>
 
-    <%= form.govuk_collection_radio_buttons(
-          :in_full_time_education,
-          options,
-          :value,
-          :label,
-          title: content_for(:page_title)
-        ) %>
-
-    <%= next_action_buttons(form: form) %>
-  <% end %>
+  <%= next_action_buttons(form: form) %>
 <% end %>

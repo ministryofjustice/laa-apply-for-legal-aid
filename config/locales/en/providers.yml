@@ -576,10 +576,21 @@ en:
         show:
           page_heading: "Does %{name} have assets worth more than £8,000?"
           head_title: "Does this dependant have assets worth more than £8,000?"
+      details:
+        show:
+          page_title: "Enter your %{number} dependant's details"
       relationships:
         show:
           page_heading: "What is your clients' relationship to %{name}?"
           head_title: "What is their relationship to your client?"
+      full_time_educations:
+        show:
+          page_title: "Is %{name} in full-time education or training?"
+          head_title: "Are they in full-time education or training?"
+      monthly_incomes:
+        show:
+          page_title: "Does %{name} receive any income?"
+          head_title: Does this dependant receive any income?
     has_dependants:
       show:
         page_heading: Does your client have any dependants?
