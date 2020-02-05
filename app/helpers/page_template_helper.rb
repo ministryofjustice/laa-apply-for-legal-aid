@@ -78,10 +78,6 @@ module PageTemplateHelper
     content_for(:page_title) if content_for?(:page_title)
   end
 
-  def head_title
-    content_for(:head_title) if content_for?(:head_title)
-  end
-
   def page_title_possibly_with_error(page_headings, errors)
     errors&.present? ? error_page_title(page_headings) : simple_page_title(page_headings)
   end
