@@ -21,7 +21,7 @@ module CCMS
         @submission = submission
         @legal_aid_application = submission.legal_aid_application
         @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
-        @ccms_attribute_keys = YAML.load_file(File.join(Rails.root, 'config', 'ccms', 'ccms_keys.yml'))
+        @ccms_attribute_keys = AttributeConfiguration.new(application_type: :standard).config
         @attribute_value_generator = AttributeValueGenerator.new(@submission)
       end
 
