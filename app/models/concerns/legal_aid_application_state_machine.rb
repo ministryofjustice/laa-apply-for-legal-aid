@@ -100,7 +100,7 @@ module LegalAidApplicationStateMachine
         transitions from: :checked_merits_answers, to: :generating_reports,
                     after: -> do
                       ReportsCreatorWorker.perform_async(id)
-                      PostSubmissionProcessingJob.perform_later(id)
+                      PostSubmissionProcessingJob.perform_later(id, "#{Rails.configuration.x.application.host_url}/feedback/new")
                     end
       end
 
