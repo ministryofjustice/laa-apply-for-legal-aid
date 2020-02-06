@@ -580,10 +580,12 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#submitted_assessment' do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checked_merits_answers }
+    let(:feedback_url) { 'http://test/feedback/new' }
 
     it 'schedules a PostSubmissionProcessingJob ' do
       expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
-        legal_aid_application.id
+        legal_aid_application.id,
+        feedback_url
       ).and_call_original
       legal_aid_application.generate_reports!
     end

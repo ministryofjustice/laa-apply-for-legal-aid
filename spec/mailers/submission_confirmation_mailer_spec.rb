@@ -5,7 +5,8 @@ RSpec.describe SubmissionConfirmationMailer, type: :mailer do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:provider) { legal_aid_application.provider }
     let(:applicant) { legal_aid_application.applicant }
-    let(:mail) { described_class.notify(legal_aid_application.id) }
+    let(:feedback_url) { 'www.example.com/feedback/new' }
+    let(:mail) { described_class.notify(legal_aid_application.id, feedback_url) }
 
     it 'sends to correct address' do
       expect(mail.to).to eq([provider.email])
@@ -24,7 +25,8 @@ RSpec.describe SubmissionConfirmationMailer, type: :mailer do
       expect(mail.govuk_notify_personalisation).to eq(
         provider_name: provider.name,
         client_name: applicant.full_name,
-        ref_number: legal_aid_application.application_ref
+        ref_number: legal_aid_application.application_ref,
+        feedback_url: feedback_url
       )
     end
   end
