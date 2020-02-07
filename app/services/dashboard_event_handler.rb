@@ -54,8 +54,7 @@ class DashboardEventHandler
   end
 
   def feedback_created
-    Dashboard::UpdaterJob.perform_later('PastThreeWeeksAverageFeedbackScore')
-    Dashboard::UpdaterJob.perform_later('PastWeeksAverageFeedbackScore')
+    Dashboard::UpdaterJob.perform_later('FeedbackScores')
   end
 
   def merits_assessment_submitted
