@@ -7,8 +7,8 @@ RSpec.describe Flow::BaseFlowService do
   end
   let(:steps) do
     Flow::Flows::CitizenStart::STEPS
-      .deep_merge(Flow::Flows::CitizenCapital::STEPS)
-      .deep_merge(Flow::Flows::CitizenVehicle::STEPS)
+      .deep_merge(Flow::Flows::CitizenStart::STEPS)
+      .deep_merge(Flow::Flows::CitizenEnd::STEPS)
   end
   let(:legal_aid_application) { create :legal_aid_application }
   let(:params) { nil }
@@ -23,18 +23,18 @@ RSpec.describe Flow::BaseFlowService do
   before { flow_service_class.use_steps steps }
 
   describe '#forward_path' do
-    let(:current_step) { :percentage_homes }
+    let(:current_step) { :information }
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
     it 'returns forward url' do
-      expect(subject.forward_path).to eq('/citizens/vehicle')
+      expect(subject.forward_path).to eq('/citizens/consent')
     end
 
     context 'with logic' do
-      let(:current_step) { :own_homes }
+      let(:current_step) { :information }
 
       it 'returns forward url' do
-        expect(subject.forward_path).to eq('/citizens/property_value')
+        expect(subject.forward_path).to eq('/citizens/consent')
       end
     end
 
@@ -51,35 +51,6 @@ RSpec.describe Flow::BaseFlowService do
 
       it 'raises an error' do
         expect { subject.forward_path }.to raise_error(/not defined/)
-      end
-    end
-
-    context 'checking answer' do
-      let(:legal_aid_application) { create :legal_aid_application, :checking_client_details_answers }
-
-      context 'and check_answers page is defined' do
-        let(:current_step) { :savings_and_investments }
-
-        it 'returns check_answers url' do
-          expect(subject.forward_path).to eq('/citizens/check_answers')
-        end
-
-        context 'and we are in a sub flow' do
-          let(:legal_aid_application) { create :legal_aid_application, :checking_client_details_answers, :with_own_home_mortgaged }
-          let(:current_step) { :own_homes }
-
-          it 'returns next page in the sub flow' do
-            expect(subject.forward_path).to eq('/citizens/property_value')
-          end
-        end
-      end
-
-      context 'and check_answers page is not defined' do
-        let(:current_step) { :information }
-
-        it 'returns forward url' do
-          expect(subject.forward_path).to eq('/citizens/consent')
-        end
       end
     end
   end

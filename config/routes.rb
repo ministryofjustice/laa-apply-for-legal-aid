@@ -139,6 +139,17 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
+      resource :has_dependants, only: %i[show update]
+      resources :dependants, only: %i[index create] do
+        scope module: :dependants do
+          resource :details, only: %i[show update]
+          resource :relationship, only: %i[show update]
+          resource :full_time_education, only: %i[show update]
+          resource :assets_value, only: %i[show update]
+          resource :monthly_income, only: %i[show update]
+        end
+      end
+      resource :has_other_dependant, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]

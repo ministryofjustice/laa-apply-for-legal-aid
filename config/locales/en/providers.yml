@@ -184,9 +184,17 @@ en:
     client_completed_means:
       show:
         h1-heading: Your client has completed their financial assessment
-        review-advice: You can review their answers and make corrections before their application is submitted.
         client: Client
         case-reference: Case reference
+        intro: 'Your client has:'
+        intro-bullets:
+          - shared their bank transactions
+          - told us about their income and regular payments
+        action: You'll need to go through their transactions and sort them into categories (for example, salary or benefits).
+        question: "You'll also need to answer questions about their:"
+        question-bullets:
+          - property, savings and other assets
+          - dependants
     confirm_offices:
       show:
         h1-heading: Confirm the account number of the office handling this application
@@ -295,6 +303,16 @@ en:
     means_summaries:
       show:
         h1-heading: Check your answers
+        dependants:
+          heading: Dependants
+          add-new: Add dependant
+          delete: Delete dependant
+          name: Name
+          date_of_birth: Date of birth
+          relationship: Relationship to client
+          in_full_time_education: In full-time education or training
+          income: Income
+          assets: Assets worth more than £8,000
         capital-section-heading: Total capital
         credits-section-heading: Total income
         debits-section-heading: Total outgoings
@@ -551,3 +569,34 @@ en:
     email_addresses:
       show:
         page_title: Enter your client's email address
+    dependants:
+      index:
+        page_title: "Enter the %{number} dependant's details for your client"
+      assets_values:
+        show:
+          page_heading: "Does %{name} have assets worth more than £8,000?"
+          head_title: "Does this dependant have assets worth more than £8,000?"
+      details:
+        show:
+          page_title: "Enter your %{number} dependant's details"
+      relationships:
+        show:
+          page_heading: "What is your clients' relationship to %{name}?"
+          head_title: "What is their relationship to your client?"
+      full_time_educations:
+        show:
+          page_title: "Is %{name} in full-time education or training?"
+          head_title: "Are they in full-time education or training?"
+      monthly_incomes:
+        show:
+          page_title: "Does %{name} receive any income?"
+          head_title: Does this dependant receive any income?
+    has_dependants:
+      show:
+        page_heading: Does your client have any dependants?
+        info: A dependant could be a child or adult who lives with your client and depends on them for financial support.
+        extra_info: Do not include your client's partner if they have one.
+    has_other_dependants:
+      show:
+        heading: Does your client have any other dependants?
+        error: Select yes if they have other dependants

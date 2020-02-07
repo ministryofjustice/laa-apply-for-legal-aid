@@ -270,8 +270,12 @@ And('I search for proceeding {string}') do |proceeding_search|
   wait_for_ajax
 end
 
-And(/^I should not see "(.*?)"$/) do |arg1|
-  expect(page).to have_no_content(arg1)
+And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
+  if visibility == 'see'
+    expect(page).to have_content(text)
+  else
+    expect(page).not_to have_content(text)
+  end
 end
 
 When(/^I click clear search$/) do

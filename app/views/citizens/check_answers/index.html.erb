@@ -1,19 +1,58 @@
 <%= page_template(
-      page_title: t('.h1-heading'),
-      back_link: {
-        path: reset_citizens_check_answers_path,
-        method: :patch
-      }
+        page_title: t('.h1-heading'),
+        back_link: {
+            path: reset_citizens_check_answers_path,
+            method: :patch
+        }
     ) do %>
 
-  <h2 class="govuk-heading-m">
-    <%= t('.assets.heading') %>
-  </h2>
+  <h2 class="govuk-heading-m"><%= t('.bank-heading') %></h2>
+  <dl class="govuk-summary-list govuk-!-padding-bottom-4">
+    <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
+      <h2 class="govuk-heading-m govuk-!-padding-top-4">Account <%= index+1 %></h2>
+      <div class="govuk-summary-list__row">
+        <dd class="govuk-summary-list__value">Bank</dd>
+        <dd class="govuk-summary-list__actions align-text-right"><%= account.bank_provider.name %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dd class="govuk-summary-list__value">Account number</dd>
+        <dd class="govuk-summary-list__actions align-text-right"><%= account.account_number %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dd class="govuk-summary-list__value">Sort code</dd>
+        <dd class="govuk-summary-list__actions align-text-right"><%= account.sort_code %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dd class="govuk-summary-list__value">Balance</dd>
+        <dd class="govuk-summary-list__actions align-text-right"><%= value_with_currency_unit(account.balance, account.currency) %></dd>
+      </div>
+    <% end %>
+    <div class="govuk-summary-list__row">
+      <%= link_to t('.link_other_account'), citizens_banks_path, class: 'govuk-link' %>
+    </div>
+  </dl>
 
-  <%= render 'shared/check_answers/assets' %>
+  <%= check_long_questions_single_change_link(
+          name: :incomings,
+          url: citizens_identify_types_of_income_path,
+          question: t('citizens.identify_types_of_incomes.show.page_heading'),
+          answer_hash: incomings_list(
+              @legal_aid_application.transaction_types.credits,
+              locale_namespace: "transaction_types.names.citizens"
+          ),
+          read_only: false) %>
+  <%= check_long_questions_single_change_link(
+          name: :payments,
+          url: citizens_identify_types_of_outgoing_path,
+          question: t('citizens.identify_types_of_outgoings.show.page_heading'),
+          answer_hash: payments_list(
+              @legal_aid_application.transaction_types.debits,
+              locale_namespace: "transaction_types.names.citizens"
+          ),
+          read_only: false) %>
 
   <%= next_action_buttons_with_form(
-        url: continue_citizens_check_answers_path,
-        method: :patch
+          url: continue_citizens_check_answers_path,
+          method: :patch
       ) %>
 <% end %>
