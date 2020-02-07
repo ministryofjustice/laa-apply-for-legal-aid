@@ -1,9 +1,9 @@
 namespace :job do
   namespace :dashboard do
     desc 'Update stats on the dashboard'
-    task :update, [:widget] => :environment do |_task, args|
-      widget = args[:widget]
-      Dashboard::UpdaterJob.perform_later(widget)
+    task :update, [:widgets] => :environment do |_task, args|
+      widgets = args[:widgets].split
+      widgets.each { |widget| Dashboard::UpdaterJob.perform_later(widget) }
     end
 
     namespace :update do
