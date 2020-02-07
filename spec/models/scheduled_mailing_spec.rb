@@ -42,6 +42,27 @@ RSpec.describe ScheduledMailing do
     end
   end
 
+  context 'when it raises an error/tries to send mail with no attached application' do
+    let(:scheduled_mail) { create :scheduled_mailing, :due }
+    before do
+      allow(scheduled_mail).to receive(:legal_aid_application_id).and_return('')
+    end
+
+    it 'captures error' do
+      expect(Raven).to receive(:capture_exception).with(message_contains('Scheduled Mailing ERROR'))
+      subject.deliver!
+    end
+
+    it 'returns false' do
+      expect(subject.deliver!).to eq false
+    end
+
+    it 'sends an alert on slack' do
+      expect(SlackAlertSenderWorker).to receive(:perform_async)
+      subject.deliver!
+    end
+  end
+
   describe '#cancel!' do
     let(:scheduled_mail) { create :scheduled_mailing }
     let(:now) { Time.now }
