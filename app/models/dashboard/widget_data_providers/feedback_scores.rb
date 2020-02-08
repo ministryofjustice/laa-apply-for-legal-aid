@@ -43,7 +43,8 @@ module Dashboard
         MULTIPLIERS.each_pair do |score, multiplier|
           total += values[score.to_s] * multiplier unless values[score.to_s].nil?
         end
-        total /= 10
+        total /= records.count unless records.count.zero?
+        total
       end
     end
   end

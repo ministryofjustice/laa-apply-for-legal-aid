@@ -34,7 +34,7 @@ module Dashboard
 
           def expected_data
             [
-              { 'three_week_average' => 70, 'three_week_count' => 10, 'one_week_average' => 60, 'one_week_count' => 8 }
+              { 'three_week_average' => 63, 'three_week_count' => 11, 'one_week_average' => 66, 'one_week_count' => 9 }
             ]
           end
 
@@ -46,7 +46,7 @@ module Dashboard
               12 => [0, 0, 0, 0, 1],
               5 => [0, 0, 0, 1, 0],
               3 => [0, 1, 0, 0, 0],
-              2 => [0, 0, 1, 0, 0],
+              2 => [1, 0, 1, 0, 0],
               1 => [0, 0, 0, 2, 0],
               0 => [0, 0, 0, 0, 3]
             }
