@@ -55,8 +55,18 @@ RSpec.describe 'provider restrictions request', type: :request do
           expect(application.reload.restrictions_details).to_not be_empty
         end
 
-        it 'redirects to check passported answers' do
-          expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+        context 'when the citizen has completed the non-passported path' do
+          let(:application) { create :legal_aid_application, :with_applicant, state: :means_completed }
+
+          it 'redirects to means_summary' do
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+          end
+        end
+
+        context 'provider on passported route' do
+          it 'redirects to check passported answers' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+          end
         end
 
         context 'invalid params' do

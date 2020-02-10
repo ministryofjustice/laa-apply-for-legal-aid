@@ -83,8 +83,7 @@ RSpec.describe DashboardEventHandler do
 
   context 'feedback_created' do
     it 'fires both Average Feedback jobs' do
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('PastThreeWeeksAverageFeedbackScore')
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('PastWeeksAverageFeedbackScore')
+      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('FeedbackScores')
       create :feedback
     end
   end

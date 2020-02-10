@@ -38,54 +38,8 @@ Feature: Citizen journey
     Then I should be on a page showing "Which types of income do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Do you have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
     Then I should be on a page showing "What regular payments do you make?"
     Then I select "Rent or mortgage"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Do you own the home that you live in?"
-    Then I choose "Yes, with a mortgage or loan"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "How much is your home worth?"
-    Then I fill "Property value" with "200000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the outstanding mortgage on your home?"
-    Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Do you own your home with anyone else?"
-    Then I choose "Yes, a partner or ex-partner"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What % share of your home do you legally own?"
-    Then I fill "Percentage home" with "50"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Do you own a vehicle?"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the estimated value of the vehicle?"
-    Then I fill "Estimated value" with "5000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Are there any payments left on the vehicle?"
-    Then I choose "Yes"
-    Then I fill "Payment remaining" with "1000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "When did you buy the vehicle?"
-    Then I enter the purchase date '21-3-2002'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What types of savings or investments do you have?"
-    Then I select "Money not in a bank account"
-    Then I fill "Cash" with "100"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets do you have?"
-    Then I select "Land"
-    Then I fill "Land value" with "50000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Are there any legal restrictions that prevent you from selling or borrowing against your assets?"
-    Then I choose 'Yes'
-    Then I fill "Restrictions details" with "Yes, there are restrictions. They include..."
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click "Save and continue"
@@ -94,189 +48,31 @@ Feature: Citizen journey
     Then I should be on a page showing "You've completed your financial assessment"
 
   @javascript
-  Scenario: I want to change property details via the check your answers page
+  Scenario: I want to change income types via the check your answers page
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Own home'
-    Then I should be on a page showing 'Do you own the home that you live in?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'How much is your home worth?'
-    Then I fill 'Property value' with '500000'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'What is the outstanding mortgage on your home?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Do you own your home with anyone else?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'What % share of your home do you legally own?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I choose 'Yes'
-    Then I fill "Restrictions details" with "Yes, there are restrictions. They include..."
+    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'Salary or wages No'
+    And I click Check Your Answers Change link for 'incomings'
+    Then I should be on a page showing 'Which types of income do you receive?'
+    Then I select 'Salary or wages'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-    And the answer for 'Property value' should be '£500,000.00'
-    And the answer for 'Restrictions' should be 'Yes'
-    And the answer for 'Restrictions' should be 'Yes, there are restrictions. They include...'
+    Then I should be on a page showing 'Salary or wages Yes'
 
   @javascript
-  Scenario: I want to remove property details via the check your answers page
+  Scenario: I want to add another bank account via the check your answers page
+    # TODO: Expand this feature
+    # It should really do both:
+    # 1) actually handle the true layer interaction and
+    # 2) demonstrate the check_answer routing.
+    # It currently only manages 2)
     Given I have completed an application
+    And a "true layer bank" exists in the database
     And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Own home'
-    Then I should be on a page showing 'Do you own the home that you live in?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    And the answer for 'Own home' should be 'No'
-
-  @javascript
-  Scenario: I want to return to the check your answers page without changing property details
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Own home'
-    Then I should be on a page showing 'Do you own the home that you live in?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'How much is your home worth?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'What is the outstanding mortgage on your home?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Do you own your home with anyone else?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'What % share of your home do you legally own?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
+    Then I should be on a page not showing 'Account 2'
+    When I visit the accounts page
+    Then I should be on the 'accounts' page showing 'Your account(s)'
+    When I click link 'Continue'
     Then I should be on a page showing 'Check your answers'
-
-  @javascript
-  Scenario: I want to change savings via the check your answers page
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'What types of savings or investments do you have?'
-    Then I fill 'Cash' with '1000'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Money not in a bank account'
-    And the answer for 'Savings and investments' should be '£1,000.00'
-
-  @javascript
-  Scenario: I want to add savings via the check your answers page
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'What types of savings or investments do you have?'
-    Then I select 'Current account'
-    Then I fill 'Offline current accounts' with '5000'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Current account'
-    And the answer for 'Savings and investments' should be '£5,000.00'
-
-  @javascript
-  Scenario: I return to the check your answers page without changing savings
-    Given I have completed an application
-    And 'cash' savings of 100
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on a page showing 'What types of savings or investments do you have?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Savings and investments' should be 'Money not in a bank account'
-    And the answer for 'Savings and investments' should be '£100.00'
-
-  @javascript
-  Scenario: I want to change other assets via the check your answers page
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Which types of assets do you have?'
-    Then I fill 'Land value' with '1234.56'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Other assets' should be 'Land'
-    And the answer for 'Other assets' should be '£1,234.56'
-
-  @javascript
-  Scenario: I want to add other assets via the check your answers page
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Which types of assets do you have?'
-    Then I select 'Timeshare property'
-    Then I fill 'Timeshare property value' with '10000'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Other assets' should be 'Timeshare property'
-    And the answer for 'Other assets' should be '£10,000.00'
-
-  @javascript
-  Scenario: I return to the check your answers page without changing other assets
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Other assets'
-    Then I should be on a page showing 'Which types of assets do you have?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript
-  Scenario: I want to add restrictions via the check your answers page
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I choose 'Yes'
-    Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    And the answer for 'Restrictions' should be 'Yes'
-    And the answer for 'Restrictions' should be 'Yes, there are restrictions. They include...'
-
-  @javascript
-  Scenario: I return to the check your answers page without changing capital restrictions
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    And I click Check Your Answers Change link for 'Restrictions'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent you from selling or borrowing against your assets?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript
-  Scenario: I change vehicle answers
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-      Then I click Check Your Answers Change link for 'Vehicles'
-      Then I should be on a page showing 'Do you own a vehicle?'
-      Then I choose 'No'
-      Then I click 'Save and continue'
-      Then I should be on a page showing 'Check your answers'
-      Then I click Check Your Answers Change link for 'Vehicles'
-      Then I choose 'Yes'
-      Then I click 'Save and continue'
-      Then I should be on a page showing "What is the estimated value of the vehicle?"
-      Then I fill "Estimated value" with "4000"
-      And I click "Save and continue"
-      Then I should be on a page showing "Are there any payments left on the vehicle?"
-      Then I choose option "Vehicle payments remain true"
-      Then I fill "Payment remaining" with "2000"
-      And I click "Save and continue"
-      Then I should be on a page showing "When did you buy the vehicle?"
-      Then I enter the purchase date '21-3-2002'
-      And I click "Save and continue"
-      Then I should be on a page showing "Is the vehicle in regular use?"
-      Then I choose option "Vehicle used regularly true"
-      And I click "Save and continue"
-      Then I should be on a page showing 'Check your answers'
