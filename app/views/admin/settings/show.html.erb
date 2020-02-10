@@ -22,6 +22,14 @@
           title: { size: :m, text: t('.labels.allow_non_passported_route') }
         ) if Rails.configuration.x.allow_non_passported_route %>
 
+    <%= form.govuk_collection_radio_buttons(
+      :manually_review_all_cases,
+      [true, false],
+      inline: true,
+      hint: t('.hints.manually_review_all_cases'),
+      title: { size: :m, text: t('.labels.manually_review_all_cases') }
+    )  %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

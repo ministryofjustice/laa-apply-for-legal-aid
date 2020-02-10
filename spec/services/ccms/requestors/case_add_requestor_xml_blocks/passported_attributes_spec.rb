@@ -563,19 +563,19 @@ module CCMS
           end
         end
 
-        context 'APPLY_CASE_MEANS_REVIEW hard coded to true' do
-          it 'always true' do
-            attributes = [
-              [:global_means, 'APPLY_CASE_MEANS_REVIEW'],
-              [:global_means, 'APPLY_CASE_MEANS_REVIEW']
-            ]
-            attributes.each do |entity_attribute_pair|
-              entity, attribute = entity_attribute_pair
-              block = XmlExtractor.call(xml, entity, attribute)
-              expect(block).to have_boolean_response true
-            end
-          end
-        end
+        # context 'APPLY_CASE_MEANS_REVIEW hard coded to true' do
+        #  it 'always true' do
+        #    attributes = [
+        #      [:global_means, 'APPLY_CASE_MEANS_REVIEW'],
+        #      [:global_means, 'APPLY_CASE_MEANS_REVIEW']
+        #    ]
+        #    attributes.each do |entity_attribute_pair|
+        #      entity, attribute = entity_attribute_pair
+        #      block = XmlExtractor.call(xml, entity, attribute)
+        #      expect(block).to have_boolean_response true
+        #    end
+        #  end
+        # end
 
         context 'GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?' do
           context 'not a beneficiary' do
@@ -1519,8 +1519,32 @@ module CCMS
           end
         end
 
+        context 'APPLY_CASE_MEANS_REVIEW' do
+          context 'in global means and global merits' do
+            context 'Manual review required' do
+              it 'set the attribute to false' do
+                allow(ManualReviewDeterminer).to receive(:call).with(legal_aid_application).times.and_return(true)
+                block = XmlExtractor.call(xml, :global_means, 'APPLY_CASE_MEANS_REVIEW')
+                expect(block).to have_boolean_response false
+                block = XmlExtractor.call(xml, :global_merits, 'APPLY_CASE_MEANS_REVIEW')
+                expect(block).to have_boolean_response false
+              end
+            end
+
+            context 'Manual review not required' do
+              it 'sets the attribute to true' do
+                allow(ManualReviewDeterminer).to receive(:call).with(legal_aid_application).times.and_return(false)
+                block = XmlExtractor.call(xml, :global_means, 'APPLY_CASE_MEANS_REVIEW')
+                expect(block).to have_boolean_response true
+                block = XmlExtractor.call(xml, :global_merits, 'APPLY_CASE_MEANS_REVIEW')
+                expect(block).to have_boolean_response true
+              end
+            end
+          end
+        end
+
         context 'dummy other_party' do
-          it 'harcodes OTHER_PARTY_ID' do
+          it 'hardcodes OTHER_PARTY_ID' do
             block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_ID')
             expect(block).to have_text_response 'OPPONENT_7713451'
           end
