@@ -21,7 +21,8 @@ module Flow
           path: ->(_) { omniauth_login_start_path(:true_layer) }
         },
         accounts: {
-          forward: :additional_accounts
+          forward: :additional_accounts,
+          check_answers: :check_answers
         },
         additional_accounts: {
           path: ->(_) { urls.citizens_additional_accounts_path },

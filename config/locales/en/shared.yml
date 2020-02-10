@@ -130,12 +130,9 @@ en:
           example: For example, property, cash savings or shares.
           enter_assets_value: Enter the total asset value
         details:
-          page_title: "Enter your %{number} dependant's details"
           add_dependant_later: You can add more dependants later.
           you_already_told_about: "You've already told us about:"
           dependant_list_item: "%{name}, born %{date_of_birth}"
-        full_time_educations:
-          page_title: "Is %{name} in full-time education or training?"
         relationship:
           option:
             child_relative: They're a child relative
@@ -144,7 +141,6 @@ en:
               child_relative: For example, your child, grandchild, niece or nephew.
               adult_relative: For example, a parent, grandparent, aunt or uncle.
         monthly_incomes:
-          page_title: "Does %{name} receive any income?"
           hint: For example, money from a job, apprenticeship, or student loan or grant.
           enter_monthly_income: Enter the amount they get each month
       identify_types_of_outgoings_form:
