@@ -31,8 +31,22 @@ module Dashboard
           travel_to(date) { expect(described_class.data).to eq expected_data }
         end
 
-        def expected_data
+        def expected_data # rubocop:disable Metrics/MethodLength
           [
+            { 'date' => '2019-11-22', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-23', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-24', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-25', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-26', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-27', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-28', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-29', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-11-30', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-12-01', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-12-02', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-12-03', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-12-04', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
+            { 'date' => '2019-12-05', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
             { 'date' => '2019-12-06', 'started_apps' => 5, 'submitted_apps' => 2, 'total_submitted_apps' => 2, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
             { 'date' => '2019-12-07', 'started_apps' => 3, 'submitted_apps' => 1, 'total_submitted_apps' => 3, 'failed_apps' => 1, 'delegated_func_apps' => 0 },
             { 'date' => '2019-12-08', 'started_apps' => 1, 'submitted_apps' => 0, 'total_submitted_apps' => 3, 'failed_apps' => 0, 'delegated_func_apps' => 1 },
