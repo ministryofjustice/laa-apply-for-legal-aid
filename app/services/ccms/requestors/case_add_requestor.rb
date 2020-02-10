@@ -38,7 +38,7 @@ module CCMS
       private
 
       def means_entity_configs
-        YAML.load_file(means_entity_config_file)
+        YAML.load_file(means_entity_config_file).map(&:deep_symbolize_keys!)
       end
 
       def means_entity_config_file
