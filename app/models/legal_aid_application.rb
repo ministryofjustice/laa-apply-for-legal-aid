@@ -151,6 +151,12 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     benefit_check_result&.positive? || false
   end
 
+  alias passported? applicant_receives_benefit?
+
+  def non_passported?
+    !passported?
+  end
+
   def benefit_check_result_needs_updating?
     return true unless benefit_check_result
 
@@ -208,14 +214,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def opponents
     [Opponent.dummy_opponent]
-  end
-
-  def wage_slips
-    [] # TODO: CCMS placeholder
-  end
-
-  def employment
-    [] # TODO: CCMS placeholder
   end
 
   def opponent_other_parties

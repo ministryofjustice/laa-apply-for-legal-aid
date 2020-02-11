@@ -7,6 +7,26 @@
 #
 
 module XMLBlockMatchers
+  RSpec::Matchers.define :be_user_defined do
+    match do |actual|
+      actual.css('UserDefinedInd').text == 'true'
+    end
+
+    failure_message do
+      "Expected UserDefinedInd to be true:\n#{actual}\n\n"
+    end
+  end
+
+  RSpec::Matchers.define :not_be_user_defined do
+    match do |actual|
+      actual.css('UserDefinedInd').text == 'false'
+    end
+
+    failure_message do
+      "Expected UserDefinedInd to be false:\n#{actual}\n\n"
+    end
+  end
+
   RSpec::Matchers.define :have_text_response do |expected|
     result = nil
     match do |actual|
