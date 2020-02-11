@@ -221,6 +221,7 @@ module CCMS
 
     def proceeding_cost_limitation(_options)
       return 'MULTIPLE' if scope_limitations.size > 1
+
       scope_limitations.first.code
     end
 
