@@ -15,12 +15,17 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
 require 'webmock/rspec'
+require 'highline/import'
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
     add_filter 'config/initializers/'
     add_filter 'spec/'
+  end
+  SimpleCov.at_exit do
+    say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
+    SimpleCov.result.format!
   end
 end
 

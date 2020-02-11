@@ -10,6 +10,7 @@ module CCMS
 
       @config = YAML.load_file(configuration_files[:standard])
       @config.deep_merge! YAML.load_file(configuration_files[application_type]) if application_type == :non_passported
+      @config.deep_symbolize_keys!
     end
 
     private
