@@ -41,12 +41,13 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
         let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
+        let(:timestamp) { Time.now.strftime('%Y-%m-%d_%H.%M') }
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
         context 'save to a temporary file', skip: 'not needed for testing, but re-enable if you want to save the XML to a file' do
           it 'creates a file' do
-            filename = Rails.root.join('tmp/generated_non_passported_ccms_payload.xml')
+            filename = Rails.root.join("tmp/generated_non_passported_ccms_payload_#{timestamp}.xml")
             File.open(filename, 'w') { |f| f.puts xml }
             expect(File.exist?(filename)).to be true
           end
@@ -209,13 +210,43 @@ module CCMS
             [:proceeding_merits, 'APPEAL_IN_SUPREME_COURT', false],
             [:proceeding_merits, 'CLIENT_BRINGING_OR_DEFENDING', false],
             [:proceeding_merits, 'CLIENT_DEFENDANT_3RD_PTY', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_APPELLANT', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_BRING_3RD_PTY', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_BRING_COUNTER', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_CHILD', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_DEF_COUNTER', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_DEFEND_PROCS', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_INTERPLEADER', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_INTERVENOR', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_JOINED_PARTY', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_OTHER', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_PERSONAL_REP', false],
+            [:proceeding_merits, 'FAM_PROSP_BORDERLINE_UNCERT', false],
+            [:proceeding_merits, 'FAM_PROSP_GOOD', false],
+            [:proceeding_merits, 'FAM_PROSP_VERY_GOOD', false],
+            [:proceeding_merits, 'FAM_PROSP_VERY_POOR', false],
+            [:proceeding_merits, 'LEVEL_OF_SERV_FHH', false],
+            [:proceeding_merits, 'LEVEL_OF_SERV_IH', false],
+            [:proceeding_merits, 'LEVEL_OF_SERV_INQUEST', false],
+            [:proceeding_merits, 'NON_QUANTIFIABLE_REMEDY', false],
+            [:proceeding_merits, 'OVERWHELMING_IMPORTANCE', false],
+            [:proceeding_merits, 'PRIVATE_FUNDING_APPLICABLE', false],
+            [:proceeding_merits, 'PROC_CA_GATEWAY_APPLIES', false],
+            [:proceeding_merits, 'PROC_DV_GATEWAY_APPLIES', false],
+            [:proceeding_merits, 'PROC_IMMIGRATION_RELATED', false],
+            [:proceeding_merits, 'PROC_IS_SCA_APPEAL', false],
+            [:proceeding_merits, 'PROC_LAR_GATEWAY', false],
+            [:proceeding_merits, 'PROC_OUTCOME_RECORDED', false],
+            [:proceeding_merits, 'PROC_RELATED_PROCEEDING', false],
+            [:proceeding_merits, 'PROC_RELATED_SCA_OR_RELATED', false],
+            [:proceeding_merits, 'PROC_SCHED1_TRUE', false],
+            [:proceeding_merits, 'PROCEEDING_CASE_OWNER_SCU', false],
+            [:proceeding_merits, 'PROCEEDING_JUDICIAL_REVIEW', false],
+            [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER', false],
+            [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST', false],
           ]
         end
       end
     end
   end
 end
-
-
-
-

@@ -702,6 +702,108 @@ proceeding_merits:
   CLIENT_DEFENDANT_3RD_PTY:
     generate_block?: true
     value: false
+  CLIENT_INV_TYPE_APPELLANT:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_BRING_3RD_PTY:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_BRING_COUNTER:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_CHILD:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_DEF_COUNTER:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_DEFEND_PROCS:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_INTERPLEADER:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_INTERVENOR:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_JOINED_PARTY:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_OTHER:
+    generate_block?: true
+    value: false
+  CLIENT_INV_TYPE_PERSONAL_REP:
+    generate_block?: true
+    value: false
+  FAM_PROSP_BORDERLINE_UNCERT:
+    generate_block?: true
+    value: false
+  FAM_PROSP_GOOD:
+    generate_block?: true
+    value: false
+  FAM_PROSP_VERY_GOOD:
+    generate_block?: true
+    value: false
+  FAM_PROSP_VERY_POOR:
+    generate_block?: true
+    value: false
+  LEVEL_OF_SERV_FHH:
+    generate_block?: true
+    value: false
+  LEVEL_OF_SERV_IH:
+    generate_block?: true
+    value: false
+  LEVEL_OF_SERV_INQUEST:
+    generate_block?: true
+    value: false
+  NON_QUANTIFIABLE_REMEDY:
+    generate_block?: true
+    value: false
+  OVERWHELMING_IMPORTANCE:
+    generate_block?: true
+    value: false
+  PRIVATE_FUNDING_APPLICABLE:
+    generate_block?: true
+    value: false
+  PROC_CA_GATEWAY_APPLIES:
+    generate_block?: true
+    value: false
+  PROC_DV_GATEWAY_APPLIES:
+    generate_block?: true
+    value: false
+  PROC_IMMIGRATION_RELATED:
+    generate_block?: true
+    value: false
+  PROC_IS_SCA_APPEAL:
+    generate_block?: true
+    value: false
+  PROC_LAR_GATEWAY:
+    generate_block?: true
+    value: false
+  PROC_OUTCOME_RECORDED:
+    generate_block?: true
+    value: false
+  PROC_RELATED_PROCEEDING:
+    generate_block?: true
+    value: false
+  PROC_RELATED_SCA_OR_RELATED:
+    generate_block?: true
+    value: false
+  PROC_SCHED1_TRUE:
+    generate_block?: true
+    value: false
+  PROCEEDING_CASE_OWNER_SCU:
+    generate_block?: true
+    value: false
+  PROCEEDING_JUDICIAL_REVIEW:
+    generate_block?: true
+    value: false
+  SCA_APPEAL_FINAL_ORDER:
+    generate_block?: true
+    value: false
+  SIGNIFICANT_WIDER_PUB_INTEREST:
+    generate_block?: true
+    value: false
 
 property_means:
   ADDPROPERTY_INPUT_B_4WP2_18A:
