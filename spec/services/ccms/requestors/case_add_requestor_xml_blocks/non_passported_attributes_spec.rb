@@ -243,7 +243,7 @@ module CCMS
             [:proceeding_merits, 'PROCEEDING_CASE_OWNER_SCU', false],
             [:proceeding_merits, 'PROCEEDING_JUDICIAL_REVIEW', false],
             [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER', false],
-            [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST', false],
+            [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST', false]
           ]
         end
       end
