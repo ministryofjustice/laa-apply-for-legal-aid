@@ -696,6 +696,12 @@ proceeding_merits:
   APPEAL_IN_SUPREME_COURT:
     generate_block?: true
     value: false
+  CLIENT_BRINGING_OR_DEFENDING:
+    generate_block?: true
+    value: false
+  CLIENT_DEFENDANT_3RD_PTY:
+    generate_block?: true
+    value: false
 
 property_means:
   ADDPROPERTY_INPUT_B_4WP2_18A:

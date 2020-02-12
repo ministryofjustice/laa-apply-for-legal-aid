@@ -72,8 +72,6 @@ module CCMS
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_12A', true],
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_14A', true],
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_16A', true],
-            [:proceeding_merits, 'ACTION_DAMAGES_AGAINST_POLICE', false],
-            [:proceeding_merits, 'APPEAL_IN_SUPREME_COURT', false],
             [:global_means, 'CLIENT_NASS', false],
             [:global_means, 'CLIENT_PRISONER', false],
             [:global_means, 'CLIENT_VULNERABLE', true],
@@ -207,6 +205,10 @@ module CCMS
             [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_15A', true],
             [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_16A', true],
             [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_17A', true],
+            [:proceeding_merits, 'ACTION_DAMAGES_AGAINST_POLICE', false],
+            [:proceeding_merits, 'APPEAL_IN_SUPREME_COURT', false],
+            [:proceeding_merits, 'CLIENT_BRINGING_OR_DEFENDING', false],
+            [:proceeding_merits, 'CLIENT_DEFENDANT_3RD_PTY', false],
           ]
         end
       end
