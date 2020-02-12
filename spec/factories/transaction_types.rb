@@ -35,5 +35,11 @@ FactoryBot.define do
       end
       operation { :debit }
     end
+
+    trait :friends_or_family do
+      name { 'friends_or_family' }
+      operation { 'credit' }
+      sort_order { 20 }
+    end
   end
 end

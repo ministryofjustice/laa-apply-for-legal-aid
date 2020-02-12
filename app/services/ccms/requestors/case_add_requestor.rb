@@ -7,45 +7,7 @@ module CCMS
 
       attr_reader :ccms_attribute_keys, :submission
 
-      MEANS_ENTITY_CONFIGS = [
-        {
-          predicate: :valuables_present?,
-          method: :generate_valuable_possessions_entity,
-          entity_name: 'VALUABLE_POSSESSION',
-          instance_label: 'the valuable possession1',
-          yaml_section: :valuable_possessions
-        },
-        {
-          predicate: :bank_accounts_present?,
-          method: :generate_bank_accounts_entity,
-          entity_name: 'BANKACC',
-          yaml_section: :bank_acct
-        },
-        {
-          predicate: :vehicles_present?,
-          method: :generate_vehicles_entity,
-          entity_name: 'CARS_AND_MOTOR_VEHICLES',
-          instance_label: 'the car and motor vehicle',
-          yaml_section: :vehicles
-        },
-        {
-          method: :generate_means_proceeding_entity,
-          entity_name: 'PROCEEDING',
-          yaml_section: :proceeding_means
-        },
-        {
-          method: :generate_entity,
-          entity_name: 'OPPONENT_OTHER_PARTIES',
-          instance_label: 'OPPONENT_7713451',
-          yaml_section: :opponent_other_parties_means
-        },
-        {
-          method: :generate_entity,
-          entity_name: 'global',
-          instance_label: '#submission_case_ccms_reference',
-          yaml_section: :global_means
-        }
-      ].freeze
+      MEANS_ENTITY_CONFIG_DIR = Rails.root.join('config/ccms/means_entity_configs')
 
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
@@ -66,7 +28,6 @@ module CCMS
         @legal_aid_application = submission.legal_aid_application
         @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
         @ccms_attribute_keys = attribute_configuration
-        # @attribute_value_generator = AttributeValueGenerator.new(@submission)
       end
 
       def call
@@ -75,6 +36,14 @@ module CCMS
       end
 
       private
+
+      def means_entity_configs
+        YAML.load_file(means_entity_config_file).map(&:deep_symbolize_keys!)
+      end
+
+      def means_entity_config_file
+        MEANS_ENTITY_CONFIG_DIR.join('passported.yml')
+      end
 
       def valuables_present?
         valuables.present?
@@ -262,7 +231,7 @@ module CCMS
         xml.__send__('ns0:AssessmentScreens') do
           xml.__send__('ns0:ScreenName', 'SUMMARY')
           sequence_no = 1
-          MEANS_ENTITY_CONFIGS.each do |config|
+          means_entity_configs.each do |config|
             if predicate_true?(config)
               generate_entity_from_config(xml, sequence_no, config)
               sequence_no += 1
@@ -273,6 +242,7 @@ module CCMS
 
       def predicate_true?(config)
         return true if config[:predicate].blank?
+        return config[:predicate] if boolean?(config[:predicate])
 
         __send__(config[:predicate])
       end
@@ -297,7 +267,6 @@ module CCMS
         xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', config[:instance_label])
           xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section]) }
-          # xml.__send__('ns0:Attributes') { generate_attributes_for(xml, config[:yaml_section]) }
         end
       end
 
@@ -448,6 +417,10 @@ module CCMS
 
       def as_currency(raw_value)
         format('%<amount>.2f', amount: raw_value)
+      end
+
+      def boolean?(val)
+        val.is_a?(TrueClass) || val.is_a?(FalseClass)
       end
     end
   end

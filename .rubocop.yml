@@ -34,10 +34,11 @@ Metrics/MethodLength:
   Exclude:
   - 'db/migrate/*'
   - 'ccms_integration/helpers/ccms_payload_analyser.rb'
+  - 'spec/**/*'
 
 Metrics/ModuleLength:
   Exclude:
-  - 'spec/**/*'
+    - 'spec/**/*'
 
 Metrics/ParameterLists:
   Max: 6

@@ -2,12 +2,14 @@ require 'rails_helper'
 
 module CCMS
   module Requestors # rubocop:disable Metrics/ModuleLength
-    RSpec.xdescribe NonPassportedCaseAddRequestor do
+    RSpec.describe NonPassportedCaseAddRequestor do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
         let(:proceeding_type) { create :proceeding_type, :with_real_data }
         let(:firm) { create :firm, name: 'Firm1' }
         let(:office) { create :office, firm: firm }
+        let(:savings_amount) { legal_aid_application.savings_amount }
+        let(:other_assets_decl) { legal_aid_application.other_assets_declaration }
         let(:provider) do
           create :provider,
                  firm: firm,
@@ -40,7 +42,17 @@ module CCMS
         let(:success_prospect) { :likely }
         let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
 
-        context 'hard coded false attributes' do
+        # enable this context if you need to create a file of the payload for manual inspection
+        # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
+        context 'save to a temporary file', skip: 'not needed for testing, but re-enable if you want to save the XML to a file' do
+          it 'creates a file' do
+            filename = Rails.root.join('tmp/generated_non_passported_ccms_payload.xml')
+            File.open(filename, 'w') { |f| f.puts xml }
+            expect(File.exist?(filename)).to be true
+          end
+        end
+
+        context 'hard coded false attributes', skip: 'skip until all enities have been coded up' do
           it 'generates the block with boolean value set to false' do
             false_attributes.each do |config_spec|
               entity, attribute, user_defined_ind = config_spec

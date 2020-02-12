@@ -1,0 +1,31 @@
+---
+- predicate: :valuables_present?
+  method: :generate_valuable_possessions_entity
+  entity_name: VALUABLE_POSSESSION
+  instance_label: the valuable possession1
+  yaml_section: :valuable_possessions
+
+- predicate: :bank_accounts_present?
+  method: :generate_bank_accounts_entity
+  entity_name: BANKACC
+  yaml_section: :bank_acct
+
+- predicate: :vehicles_present?
+  method: :generate_vehicles_entity
+  entity_name: CARS_AND_MOTOR_VEHICLES
+  instance_label: the car and motor vehicle
+  yaml_section: :vehicles
+
+- method: :generate_means_proceeding_entity
+  entity_name: PROCEEDING
+  yaml_section: :proceeding_means
+
+- method: :generate_entity
+  entity_name: OPPONENT_OTHER_PARTIES
+  instance_label: OPPONENT_7713451
+  yaml_section: :opponent_other_parties_means
+
+- method: :generate_entity
+  entity_name: global
+  instance_label: "#submission_case_ccms_reference"
+  yaml_section: :global_means
