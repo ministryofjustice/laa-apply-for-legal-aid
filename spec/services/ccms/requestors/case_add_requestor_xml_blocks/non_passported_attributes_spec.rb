@@ -44,7 +44,7 @@ module CCMS
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
-        context 'save to a temporary file' do
+        context 'save to a temporary file', skip: 'not needed for testing, but re-enable if you want to save the XML to a file' do
           it 'creates a file' do
             filename = Rails.root.join('tmp/generated_non_passported_ccms_payload.xml')
             File.open(filename, 'w') { |f| f.puts xml }
