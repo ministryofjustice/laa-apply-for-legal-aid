@@ -586,13 +586,7 @@ main_dwelling_third_party:
     user_defined: false
     generate_block?: true
 
-other_capital:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
-    value: false
-    br100_meaning: Dummy meaning
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
+
 
 money_due:
   DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
@@ -634,13 +628,58 @@ national_savings:
     user_defined: true
     response_type: text
 
-other_savings:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+other_capital:
+  OTHCAPITAL_INPUT_B_17WP2_1A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Other capital: Subject to restraint (freezing) order?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
     generate_block?: true
+  OTHCAPITAL_INPUT_B_17WP2_2A:
+    value: false
+    br100_meaning: 'Other capital: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  OTHCAPITAL_INPUT_B_17WP2_4A:
+    value: false
+    br100_meaning: 'Other capital: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  OTHCAPITAL_INPUT_B_17WP2_5A:
+    value: false
+    br100_meaning: 'Other capital: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+
+other_savings:
+  OTHERSAVING_INPUT_B_10WP2_14A:
+    value: false
+    br100_meaning: 'Other savings: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  OTHERSAVING_INPUT_B_10WP2_15A:
+    value: false
+    br100_meaning: 'Other savings: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  OTHERSAVING_INPUT_B_10WP2_16A:
+    value: false
+    br100_meaning: 'Other savings: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  OTHERSAVING_INPUT_B_10WP2_17A:
+    value: false
+    br100_meaning: 'Other savings: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+
 
 premium_bonds:
   DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket

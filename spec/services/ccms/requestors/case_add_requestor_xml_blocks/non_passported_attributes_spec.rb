@@ -199,6 +199,14 @@ module CCMS
             [:global_merits, 'UPPER_TRIBUNAL_OTHER', false],
             [:global_merits, 'URGENT_APPLICATION', false],
             [:global_merits, 'URGENT_DIRECTIONS', false],
+            [:other_capital, 'OTHCAPITAL_INPUT_B_17WP2_1A', true],
+            [:other_capital, 'OTHCAPITAL_INPUT_B_17WP2_2A', true],
+            [:other_capital, 'OTHCAPITAL_INPUT_B_17WP2_4A', true],
+            [:other_capital, 'OTHCAPITAL_INPUT_B_17WP2_5A', true],
+            [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_14A', true],
+            [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_15A', true],
+            [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_16A', true],
+            [:other_savings, 'OTHERSAVING_INPUT_B_10WP2_17A', true],
           ]
         end
       end
@@ -209,15 +217,3 @@ end
 
 
 
-
-
-#
-#[:property_means, 'ADDPROPERTY_INFER_B_4WP2_52A', false],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_18A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_24A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_25A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_26A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_27A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_28A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_32A', true],
-#  [:property_means, 'ADDPROPERTY_INPUT_B_4WP2_32A', true]
