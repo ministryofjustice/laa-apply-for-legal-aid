@@ -82,6 +82,362 @@ financial_support:
     user_defined: true
     response_type: boolean
 
+global_merits:
+  APP_CARE_SUPERVISION:
+    generate_block?: true
+    value: false
+  APP_DIV_JUDSEP_DISSOLUTION_CP:
+    generate_block?: true
+    value: false
+  APP_INCLUDES_IMMIGRATION_PROCS:
+    generate_block?: true
+    value: false
+  APP_INCLUDES_INQUEST_PROCS:
+    generate_block?: true
+    value: false
+  APP_INCLUDES_RELATED_PROCS:
+    generate_block?: true
+    value: false
+  APP_INCLUDES_SCA_PROCS:
+    generate_block?: true
+    value: false
+  APP_INC_CHILDREN_PROCS:
+    generate_block?: true
+    value: false
+  APP_INC_CHILD_ABDUCTION:
+    generate_block?: true
+    value: false
+  APP_INC_SECURE_ACCOM:
+    generate_block?: true
+    value: false
+  APP_IS_SCA_RELATED:
+    generate_block?: true
+    value: false
+  APP_POTENTIAL_NON_MERITS:
+    generate_block?: true
+    value: false
+  APP_RELATES_EPO_EXTENDEPO_SAO:
+    generate_block?: true
+    value: false
+  APP_SCA_NON_MERITS_TESTED:
+    generate_block?: true
+    value: false
+  CASE_OWNER_COMPLEX_MERITS:
+    generate_block?: true
+    value: false
+  CASE_OWNER_IMMIGRATION:
+    generate_block?: true
+    value: false
+  CASE_OWNER_MENTAL_HEALTH:
+    generate_block?: true
+    value: false
+  CASE_OWNER_SCA:
+    generate_block?: true
+    value: false
+  CASE_OWNER_SCU:
+    generate_block?: true
+    value: false
+  CASE_OWNER_VHCC:
+    generate_block?: true
+    value: false
+  CHILD_MUST_BE_INCLUDED:
+    generate_block?: true
+    value: false
+  CLIENT_CIVIL_PARTNER:
+    generate_block?: true
+    value: false
+  CLIENT_CIVIL_PARTNER_DISSOLVE:
+    generate_block?: true
+    value: false
+  CLIENT_DIVORCED:
+    generate_block?: true
+    value: false
+  CLIENT_JUDICIALLY_SEPARATED:
+    generate_block?: true
+    value: false
+  CLIENT_MARRIED:
+    generate_block?: true
+    value: false
+  CLIENT_SINGLE:
+    generate_block?: true
+    value: false
+  CLIENT_WIDOWED:
+    generate_block?: true
+    value: false
+  CLINICAL_NEGLIGENCE:
+    generate_block?: true
+    value: false
+  COMMUNITY_CARE:
+    generate_block?: true
+    value: false
+  COUNTY_COURT:
+    generate_block?: true
+    value: false
+  COURT_OF_APPEAL:
+    generate_block?: true
+    value: false
+  CRIME:
+    generate_block?: true
+    value: false
+  CROWN_COURT:
+    generate_block?: true
+    value: false
+  CURRENT_CERT_EMERGENCY:
+    generate_block?: true
+    value: false
+  CURRENT_CERT_SUBSTANTIVE:
+    generate_block?: true
+    value: false
+  DEC_AGAINST_INSTRUCTIONS:
+    generate_block?: true
+    value: false
+  EDUCATION:
+    generate_block?: true
+    value: false
+  EMERGENCY_DEC_SIGNED:
+    generate_block?: true
+    value: false
+  EMPLOYMENT_APPEAL_TRIBUNAL:
+    generate_block?: true
+    value: false
+  FIRST_TIER_TRIBUNAL_CARE_STAND:
+    generate_block?: true
+    value: false
+  FIRST_TIER_TRIBUNAL_IMM_ASY:
+    generate_block?: true
+    value: false
+  FIRST_TIER_TRIBUNAL_TAXATION:
+    generate_block?: true
+    value: false
+  HIGH_COURT:
+    generate_block?: true
+    value: false
+  HOUSING:
+    generate_block?: true
+    value: false
+  IMMIGRATION:
+    generate_block?: true
+    value: false
+  IMMIGRATION_CT_OF_APPEAL:
+    generate_block?: true
+    value: false
+  IMMIGRATION_QUESTION_APP:
+    generate_block?: true
+    value: false
+  ISSUE_URGENT_PROCEEDINGS:
+    generate_block?: true
+    value: false
+  LEGAL_HELP_PROVIDED:
+    generate_block?: true
+    value: false
+  LEGALLY_LINKED_SCU:
+    generate_block?: true
+    value: false
+  LEGALLY_LINKED_SIU:
+    generate_block?: true
+    value: false
+  LEGALLY_LINKED_VHCC:
+    generate_block?: true
+    value: false
+  LIMITATION_PERIOD_TO_EXPIRE:
+    generate_block?: true
+    value: false
+  MAGISTRATES_COURT:
+    generate_block?: true
+    value: false
+  MATTER_IS_SWPI:
+    generate_block?: true
+    value: false
+  MENTAL_HEALTH:
+    generate_block?: true
+    value: false
+  MENTAL_HEALTH_REVIEW_TRIBUNAL:
+    generate_block?: true
+    value: false
+  NON_MAND_EVIDENCE_AMD_CORR:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_AMD_COUNSEL:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_AMD_CT_ORDER:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_AMD_EXPERT:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_AMD_PLEAD:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_AMD_SOLS_RPT:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_CORR_ADR:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_CORR_SETTLE:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_COUNSEL_OP:
+    g    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_CTORDER:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_EXPERT_EXIST:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_EXPERT_RPT:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_ICA_LETTER:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_LTTR_ACTION:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_OMBUD_RPT:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_PLEADINGS:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_PRE_ACT_DISC:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_SEP_STATE:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  NON_MAND_EVIDENCE_WARNING_LTTR:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Unknown'
+    response_type: boolean
+    user_defined: false
+  PREP_OF_STATEMENT_PAPERS:
+    generate_block?: true
+    value: false
+  PROCS_INCLUDE_CHILD:
+    generate_block?: true
+    value: false
+  PROSCRIBED_ORG_APPEAL_COMM:
+    generate_block?: true
+    value: false
+  PUB_AUTH_QUESTION_APPLIES:
+    generate_block?: true
+    value: false
+  PUBLIC_LAW_NON_FAMILY:
+    generate_block?: true
+    value: false
+  REQUESTED_COST_LIMIT_OVER_25K:
+    generate_block?: true
+    value: false
+  RISK_SCA_PR:
+    generate_block?: true
+    value: false
+  ROUTING_COMPLEX_MERITS:
+    generate_block?: true
+    value: false
+  ROUTING_IMMIGRATION:
+    generate_block?: true
+    value: false
+  ROUTING_MENTAL_HEALTH:
+    generate_block?: true
+    value: false
+  ROUTING_SCU:
+    generate_block?: true
+    value: false
+  ROUTING_VHCC:
+    generate_block?: true
+    value: false
+  SCA_APPEAL_INCLUDED:
+    generate_block?: true
+    value: false
+  SCA_AUTO_GRANT:
+    generate_block?: true
+    value: false
+  SMOD_APPLICABLE_TO_MATTER:
+    generate_block?: true
+    value: false
+  SPECIAL_CHILDREN_ACT_APP:
+    generate_block?: true
+    value: false
+  SPECIAL_IMM_APPEAL_COMMISSION:
+    generate_block?: true
+    value: false
+  SUPREME_COURT:
+    generate_block?: true
+    value: false
+  UPPER_TRIBUNAL_IMM_ASY:
+    generate_block?: true
+    value: false
+  UPPER_TRIBUNAL_MENTAL_HEALTH:
+    generate_block?: true
+    value: false
+  UPPER_TRIBUNAL_OTHER:
+    generate_block?: true
+    value: false
+  URGENT_APPLICATION:
+    generate_block?: true
+    value: false
+  URGENT_DIRECTIONS:
+    generate_block?: true
+    value: false
+
 land:
   DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
     value: false
@@ -172,6 +528,9 @@ premium_bonds:
 
 proceeding_merits:
   ACTION_DAMAGES_AGAINST_POLICE:
+    generate_block?: true
+    value: false
+  APPEAL_IN_SUPREME_COURT:
     generate_block?: true
     value: false
 
