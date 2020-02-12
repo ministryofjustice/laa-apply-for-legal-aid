@@ -90,6 +90,122 @@ financial_support:
     user_defined: true
     response_type: boolean
 
+global_means:
+  CLIENT_NASS:
+    generate_block?: true
+    value: false
+  CLIENT_PRISONER:
+    generate_block?: true
+    value: false
+  CLIENT_VULNERABLE:
+    generate_block?: true
+    value: false
+  GB_INFER_B_26WP3_214A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_12WP3_1A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_13WP3_15A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_13WP3_2A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_13WP3_37A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_13WP3_5A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_13WP3_7A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_1WP3_175A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_1WP3_400A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_1WP3_401A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_2WP4_2A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_1WP3_390A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Frozen Income: Business income?'
+    user_defined: true
+  GB_INPUT_B_1WP2_17A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Restraint order: Made under POCA?'
+    user_defined: true
+  GB_INPUT_B_1WP2_19A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Restraint order: An application has been made to vary/discharge order?'
+    user_defined: true
+  GB_INPUT_B_1WP3_166A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Restraint order: Income can be released to client?'
+    user_defined: true
+  GB_INPUT_B_1WP3_167A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Frozen Income: Gross wage?'
+    user_defined: true
+  GB_INPUT_B_1WP3_169A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Frozen Income: Benefits?'
+    user_defined: true
+  GB_INPUT_B_1WP3_170A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Frozen Income: Maintenance?'
+    user_defined: true
+  GB_INPUT_B_1WP3_171A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Frozen Income: Financial support?'
+    user_defined: true
+  GB_INPUT_B_1WP3_172A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Frozen Income: Other income?'
+    user_defined: true
+  GB_INPUT_B_1WP3_174A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Bankruptcy: Client receives regular income?'
+    user_defined: true
+  GB_INPUT_B_9WP3_354A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'GB_INPUT_B_9WP3_354A'
+    user_defined: true
+  GB_INPUT_B_9WP3_355A:
+    generate_block?: true
+    value: false
+    response_type: boolean
+    br100_meaning: 'Client Dividends: Earns income from dividends from shares?'
+    user_defined: true
+
 global_merits:
   APP_CARE_SUPERVISION:
     generate_block?: true
