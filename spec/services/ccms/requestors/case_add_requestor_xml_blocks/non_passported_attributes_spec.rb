@@ -69,6 +69,9 @@ module CCMS
 
         def false_attributes # rubocop:disable Metrics/MethodLength
           [
+            [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_12A', true],
+            [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_14A', true],
+            [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_16A', true],
             [:proceeding_merits, 'ACTION_DAMAGES_AGAINST_POLICE', false],
             [:proceeding_merits, 'APPEAL_IN_SUPREME_COURT', false],
             [:global_merits, 'APP_CARE_SUPERVISION', false],

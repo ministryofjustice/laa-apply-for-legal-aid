@@ -7,6 +7,14 @@ additional_property:
     user_defined: false
     generate_block?: true
 
+bank_acct:
+  BANKACC_INPUT_B_7WP2_12A:
+    value: false
+  BANKACC_INPUT_B_7WP2_14A:
+    value: false
+  BANKACC_INPUT_B_7WP2_16A:
+    value: false
+
 capital_share:
   CAPSHARE_INPUT_B_11WP2_19A:
     generate_block?: true
