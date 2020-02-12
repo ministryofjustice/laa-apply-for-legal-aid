@@ -56,8 +56,6 @@ module CCMS
           it 'generates the block with boolean value set to false' do
             false_attributes.each do |config_spec|
               entity, attribute, user_defined_ind = config_spec
-              puts ">>>>>>>>> #{entity} #{attribute} #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
-
               block = XmlExtractor.call(xml, entity, attribute)
               expect(block).to have_boolean_response false
               if user_defined_ind == true
