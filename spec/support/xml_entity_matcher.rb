@@ -1,4 +1,4 @@
-module XMLEntitykMatchers
+module XMLEntityMatchers
   RSpec::Matchers.define :have_means_entity do |expected|
     match do |actual_xml|
       doc = Nokogiri::XML(actual_xml).remove_namespaces!
