@@ -205,6 +205,47 @@ global_means:
     response_type: boolean
     br100_meaning: 'Client Dividends: Earns income from dividends from shares?'
     user_defined: true
+  GB_INPUT_B_40WP3_74A:
+    generate_block?: true
+    value: true
+    response_type: boolean
+    br100_meaning: 'Trust: Copy of a letter from trustees confirming refusal to fund litigation'
+    user_defined: true
+  GB_INPUT_B_41WP3_23A:
+    generate_block?: true
+  GB_INPUT_B_41WP3_25A:
+    generate_block?: true
+    value: true
+    response_type: boolean
+    br100_meaning: 'Maintenance: Documents confirming amount received'
+    user_defined: true
+  GB_INPUT_B_41WP3_29A:
+    generate_block?: true
+    value: true
+    response_type: boolean
+    br100_meaning: 'Client Redundancy: Documents confirming amount received'
+    user_defined: true
+  GB_INPUT_B_41WP3_32A:
+    generate_block?: true
+  GB_INPUT_B_6WP3_233A:
+    generate_block?: true
+  GB_PROC_B_1WP4_99A:
+    generate_block?: true
+  MEANS_REQD:
+    generate_block?: true
+  SA_SCREEN10_1WP1_NONMEANS:
+    generate_block?: true
+
+
+
+
+
+
+
+
+
+
+
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -561,11 +602,38 @@ global_merits:
   URGENT_DIRECTIONS:
     generate_block?: true
     value: false
+  MEDIATION_APPLICABLE:
+    generate_block?: true
+  MENTAL_HEAL_QUESTION_APPLIES:
+    generate_block?: true
+  MERITS_SUBMISSION_PAGE:
+    generate_block?: true
+  NEW_APPLICATION:
+    generate_block?: true
+  PROPORTIONALITY_QUESTION_APP:
+    generate_block?: true
+  PROVIDER_HAS_DP:
+    generate_block?: true
+  ROUTING_STD_FAMILY_MERITS:
+    generate_block?: true
+  SA_INTRODUCTION:
+    generate_block?: true
+
+
+
+
+
 
 land:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
-    value: false
-    br100_meaning: Dummy meaning
+  LAND_INFER_B_5WP2_53A:
+    value: true
+    br100_meaning: land additional information interview is complete
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  LAND_INFER_B_5WP2_54A:
+    value: true
+    br100_meaning: land interview for owned land is complete
     response_type: boolean
     user_defined: false
     generate_block?: true
@@ -804,6 +872,13 @@ proceeding_merits:
   SIGNIFICANT_WIDER_PUB_INTEREST:
     generate_block?: true
     value: false
+  LEAD_PROCEEDING_MERITS:
+    generate_block?: true
+  LEVEL_OF_SERV_FR:
+    generate_block?: true
+  PROC_OUTCOME_NO_OUTCOME:
+    generate_block?: true
+
 
 property_means:
   ADDPROPERTY_INPUT_B_4WP2_18A:
@@ -872,17 +947,23 @@ third_party_accounts:
     generate_block?: true
 
 timeshare:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
-    value: false
-    br100_meaning: Dummy meaning
+  TIMESHARE_INFER_B_6WP2_20A:
+    value: true
+    br100_meaning: timeshare additional information interview is complete
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  TIMESHARE_INFER_B_6WP2_21A:
+    value: true
+    br100_meaning: timeshare interview for owned land is complete
     response_type: boolean
     user_defined: false
     generate_block?: true
 
 trust:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
-    value: false
-    br100_meaning: Dummy meaning
+  TRUST_INPUT_B_16WP2_11A:
+    value: true
+    br100_meaning: 'Trust: interview complete'
     response_type: boolean
     user_defined: false
     generate_block?: true

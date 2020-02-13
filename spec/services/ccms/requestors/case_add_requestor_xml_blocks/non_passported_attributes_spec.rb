@@ -68,6 +68,53 @@ module CCMS
           end
         end
 
+        context 'hard coded true attributes' do
+          it 'generates the block with boolean value set to false' do
+            true_attributes.each do |config_spec|
+              entity, attribute, user_defined_ind = config_spec
+
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).to have_boolean_response true
+              if user_defined_ind == true
+                expect(block).to be_user_defined
+              else
+                expect(block).to not_be_user_defined
+              end
+            end
+          end
+        end
+
+        def true_attributes
+          [
+            [:global_means, 'GB_INPUT_B_40WP3_74A', true],
+            [:global_means, 'GB_INPUT_B_41WP3_23A', true],
+            [:global_means, 'GB_INPUT_B_41WP3_25A', true],
+            [:global_means, 'GB_INPUT_B_41WP3_29A', true],
+            [:global_means, 'GB_INPUT_B_41WP3_32A', true],
+            [:global_means, 'GB_INPUT_B_6WP3_233A', true],
+            [:global_means, 'GB_PROC_B_1WP4_99A', false],
+            [:global_means, 'LAR_SCOPE_FLAG', true],
+            [:global_means, 'MEANS_REQD', false],
+            [:global_means, 'SA_SCREEN10_1WP1_NONMEANS', false],
+            [:global_merits, 'MEDIATION_APPLICABLE', false],
+            [:global_merits, 'MENTAL_HEAL_QUESTION_APPLIES', false],
+            [:global_merits, 'MERITS_SUBMISSION_PAGE', true],
+            [:global_merits, 'NEW_APPLICATION', false],
+            [:global_merits, 'PROPORTIONALITY_QUESTION_APP', false],
+            [:global_merits, 'PROVIDER_HAS_DP', false],
+            [:global_merits, 'ROUTING_STD_FAMILY_MERITS', false],
+            [:global_merits, 'SA_INTRODUCTION', false],
+            [:land, 'LAND_INFER_B_5WP2_53A', false],
+            [:land, 'LAND_INFER_B_5WP2_54A', false],
+            [:proceeding_merits, 'LEAD_PROCEEDING_MERITS', false],
+            [:proceeding_merits, 'LEVEL_OF_SERV_FR', false],
+            [:proceeding_merits, 'PROC_OUTCOME_NO_OUTCOME', false],
+            [:timeshare, 'TIMESHARE_INFER_B_6WP2_20A', false],
+            [:timeshare, 'TIMESHARE_INFER_B_6WP2_21A', false],
+            [:trust, 'TRUST_INPUT_B_16WP2_11A', false]
+          ]
+        end
+
         def false_attributes # rubocop:disable Metrics/MethodLength
           [
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_12A', true],

@@ -427,7 +427,7 @@ global_means:
     user_defined: true
   GB_INPUT_B_6WP3_233A:
     generate_block?: false
-    value: false
+    value: true
     br100_meaning: 'Client Pending Benefit: Recently made applications for benefits?'
     response_type: boolean
     user_defined: true
@@ -4576,7 +4576,7 @@ proceeding_merits:
     response_type: text
     user_defined: true
   LEVEL_OF_SERV_FR:
-    value: "#proceeding_level_of_service_fr"
+    value: true
     br100_meaning: The Proceeding Of Service Is Full Representation
     response_type: boolean
     user_defined: false
@@ -4588,7 +4588,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   PROC_OUTCOME_NO_OUTCOME:
-    value: "#proceeding_outcome_no_outcome"
+    value: true
     br100_meaning: The Proceeding Outcome Is No Outcome Recorded
     response_type: boolean
     user_defined: false
@@ -4692,7 +4692,7 @@ proceeding_merits:
     user_defined: true
   LEAD_PROCEEDING_MERITS:
     generate_block?: false
-    value: "#proceeding_lead_proceeding_merits?"
+    value: true
     br100_meaning: 'Proc: Lead Proceeding'
     response_type: boolean
     user_defined: false
