@@ -563,20 +563,6 @@ module CCMS
           end
         end
 
-        # context 'APPLY_CASE_MEANS_REVIEW hard coded to true' do
-        #  it 'always true' do
-        #    attributes = [
-        #      [:global_means, 'APPLY_CASE_MEANS_REVIEW'],
-        #      [:global_means, 'APPLY_CASE_MEANS_REVIEW']
-        #    ]
-        #    attributes.each do |entity_attribute_pair|
-        #      entity, attribute = entity_attribute_pair
-        #      block = XmlExtractor.call(xml, entity, attribute)
-        #      expect(block).to have_boolean_response true
-        #    end
-        #  end
-        # end
-
         context 'GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?' do
           context 'not a beneficiary' do
             before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
