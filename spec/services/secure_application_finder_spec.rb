@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe SecureApplicationFinder, type: :service do
+RSpec.describe SecureApplicationFinder do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:expired_at) { 1.hour.from_now }
   let(:secure_data_id) do

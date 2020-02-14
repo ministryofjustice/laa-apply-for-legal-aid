@@ -1,0 +1,84 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.geckoboard.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Feb 2020 14:15:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - cb5f7150-244f-4b5b-9623-df2571199401
+      X-Instance-Id:
+      - i-012ea96ced5161506
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 14:15:34 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.number_provider_firms
+    body:
+      encoding: UTF-8
+      string: '{"fields":{"number":{"name":"Firms","optional":false,"type":"number"}}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Date:
+      - Wed, 12 Feb 2020 14:15:50 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '120'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Content-Type-Options:
+      - nosniff
+      X-Instance-Id:
+      - i-02232cf8416e70a02
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"You have exceeded the API rate limit of 60 requests
+        per minute. Try sending data less frequently"}}'
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 14:15:35 GMT
+recorded_with: VCR 5.0.0
