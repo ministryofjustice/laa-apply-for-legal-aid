@@ -1,12 +1,10 @@
 require 'rails_helper'
 
-class TestHelper < ActionView::Base; end
-
 RSpec.describe GovukElementsFormBuilder::FormBuilder do
-  let(:helper) { TestHelper.new }
+  let(:view_context) { ActionController::Base.new.view_context }
   let(:resource) { 'applicant' }
   let(:resource_form) { Applicants::BasicDetailsForm.new }
-  let(:builder) { described_class.new resource.to_sym, resource_form, helper, {} }
+  let(:builder) { described_class.new resource.to_sym, resource_form, view_context, {} }
   let(:parsed_html) { Nokogiri::HTML(subject) }
 
   shared_examples_for 'a basic input field' do
