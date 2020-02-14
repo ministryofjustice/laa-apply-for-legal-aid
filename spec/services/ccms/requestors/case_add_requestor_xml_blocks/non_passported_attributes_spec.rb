@@ -84,8 +84,6 @@ module CCMS
           end
         end
 
-<<<<<<< HEAD
-=======
         context 'attributes in ADDPROPERTY entity' do
           before { legal_aid_application.other_assets_declaration.update! second_home_value: 244_000 }
           it 'generates all the attributes as false' do
@@ -481,7 +479,6 @@ module CCMS
           ]
         end
 
->>>>>>> AP-1230 Conditional false attributes for CCMS payload
         def true_attributes
           [
             [:global_means, 'GB_INPUT_B_40WP3_74A', true],
