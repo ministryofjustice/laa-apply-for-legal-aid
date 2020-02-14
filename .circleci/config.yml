@@ -314,10 +314,22 @@ workflows:
     - build_and_push
     - hold_uat:
         type: approval
+        filters:
+          branches:
+            ignore: master
     - deploy_uat:
         requires:
         - hold_uat
         - build_and_push
+        filters:
+          branches:
+            ignore: master
+    - deploy_uat_auto:
+        requires:
+          - build_and_push
+        filters:
+          branches:
+            only: master
     - hold_staging:
         type: approval
         requires:
