@@ -48,6 +48,60 @@ additional_property:
     response_type: boolean
     user_defined: true
     generate_block?: true
+  ADDPROPERTY_INPUT_N_4WP2_12A:
+    value: '0'
+    br100_meaning: 'Add. Property: Number of bedrooms'
+    user_defined: true
+    response_type: number
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_10A:
+    value: "."
+    br100_meaning: 'Add. Property: The post code'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_11A:
+    value: Bungalow
+    br100_meaning: 'Add. Property: Type of Property'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_15A:
+    value: Vacant Occupation
+    br100_meaning: 'Add. Property: How it is used'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_5A:
+    value: "."
+    br100_meaning: 'Add. Property: The 1st line of address'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_6A:
+    value: "."
+    br100_meaning: 'Add. Property: The 2nd line of address'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_7A:
+    value: "."
+    br100_meaning: 'Add. Property: The town/city'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_8A:
+    value: "."
+    br100_meaning: 'Add. Property: The county'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  ADDPROPERTY_INPUT_T_4WP2_9A:
+    value: United Kingdom
+    br100_meaning: 'Add. Property: The country'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 bank_acct:
   BANKACC_INPUT_B_7WP2_12A:
@@ -80,10 +134,30 @@ bank_acct:
     br100_meaning: 'Bank accounts: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
-
-
-
-
+  BANKACC_INPUT_C_7WP2_18A:
+    value: '0'
+    br100_meaning: 'Bank accounts: Current Balance'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  BANKACC_INPUT_N_7WP2_5A:
+    value: '0'
+    br100_meaning: 'Bank accounts: Account number'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  BANKACC_INPUT_T_7WP2_4A:
+    value: "."
+    br100_meaning: 'Bank accounts: Name of financial institution'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  BANKACC_INPUT_T_7WP2_6A:
+    value: Client Sole
+    br100_meaning: 'Bank accounts: Account holders'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 capital_share:
   CAPSHARE_INPUT_B_11WP2_19A:
@@ -130,11 +204,17 @@ capital_share:
     response_type: text
 
 car_used:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
-    value: false
-    br100_meaning: Dummy meaning
-    response_type: boolean
-    user_defined: false
+  CARUSED_INPUT_B_14WP2_16A:
+    value: "."
+    br100_meaning: 'Cars: Name of owner of car that is used'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  CARUSED_INPUT_B_14WP2_18A:
+    value: Other
+    br100_meaning: 'Cars: Relationship of owner of car that is used to client'
+    user_defined: true
+    response_type: text
     generate_block?: true
 
 change_in_circumstance:
@@ -169,6 +249,26 @@ cli_capital:
     br100_meaning: 'Client capital bonds: Subject to bankruptcy?'
     response_type: boolean
     user_defined: true
+    generate_block?: true
+  CLICAPITAL_INPUT_T_9WP2_12A:
+    value: "."
+    br100_meaning: 'Client capital bonds: Cert/ ref number'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+
+family_statement:
+  FAMILY_STATEMENT_INSTANCE:
+    value: "-"
+    br100_meaning: The instance of family statement of case detail
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  FAMILY_STMT_DETAIL:
+    value: "."
+    br100_meaning: Statement:The Family Statement Of Case Detail
+    user_defined: true
+    response_type: text
     generate_block?: true
 
 financial_support:
@@ -362,10 +462,48 @@ global_means:
     br100_meaning: 'Main Dwelling: Client/Partner has a deferred interest?'
     response_type: boolean
     user_defined: true
-
-
-
-
+  GB_INPUT_B_13WP3_49A:
+    value: NONE
+    br100_meaning: 'Housing Costs: Mortgage/ Mortgage & Rent/ Rent/ B&L/ None'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  MARITIAL_STATUS:
+    value: U
+    br100_meaning: marital status
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  MEANS_OPA_RELEASE:
+    value: '12.2'
+    br100_meaning: OPA Version
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MEANS_ROUTING:
+    value: BCM
+    br100_meaning: means routing
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  POA_OR_BILL_FLAG:
+    value: N/A
+    br100_meaning: poa or bill flag
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  RB_VERSION_DATE_MEANS:
+    value: 29-11-2019
+    br100_meaning: Version Date
+    user_defined: false
+    response_type: date
+    generate_block?: true
+  RB_VERSION_NUMBER_MEANS:
+    value: v2.31.6
+    br100_meaning: Version Number
+    user_defined: false
+    response_type: text
+    generate_block?: true
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -738,11 +876,54 @@ global_merits:
     generate_block?: true
   SA_INTRODUCTION:
     generate_block?: true
-
-
-
-
-
+  _SYSTEM_PUI_CONTEXT:
+    value: Unused
+    br100_meaning: "** Unknown key **"
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  _SYSTEM_PUI_URL:
+    value: Unused
+    br100_meaning: "** Unknown key **"
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LEGAL_HELP_COSTS_TO_DATE:
+    value: '0'
+    br100_meaning: The legal help costs to date
+    user_defined: false
+    response_type: currency
+    generate_block?: true
+  MERITS_OPA_RELEASE:
+    value: '12.2'
+    br100_meaning: Merits Version Number
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MERITS_ROUTING_NAME:
+    value: Standard Family Merits
+    br100_meaning: merits routing name
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PRE_CERT_COSTS:
+    value: '0'
+    br100_meaning: The pre-cert costs
+    user_defined: false
+    response_type: currency
+    generate_block?: true
+  RB_VERSION_DATE_MERITS:
+    value: 10-10-2019
+    br100_meaning: The Date Of The Merits Rulebase
+    user_defined: false
+    response_type: date
+    generate_block?: true
+  RB_VERSION_NUMBER_MERITS:
+    value: LAR v5.15.10
+    br100_meaning: The Version Of The Merits Rulebase
+    user_defined: false
+    response_type: text
+    generate_block?: true
 
 land:
   LAND_INFER_B_5WP2_53A:
@@ -799,6 +980,48 @@ land:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_N_3WP2_18A:
+    value: '100'
+    br100_meaning: 'Land: % Client'
+    user_defined: true
+    response_type: number
+    generate_block?: true
+  LAND_INPUT_T_5WP2_10A:
+    value: "."
+    br100_meaning: 'Land: The post code'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LAND_INPUT_T_5WP2_5A:
+    value: "."
+    br100_meaning: 'Land: The 1st line of address'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LAND_INPUT_T_5WP2_6A:
+    value: "."
+    br100_meaning: 'Land: The 2nd line of address'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LAND_INPUT_T_5WP2_7A:
+    value: "."
+    br100_meaning: 'Land: The town/city'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LAND_INPUT_T_5WP2_8A:
+    value: "."
+    br100_meaning: 'Land: The county'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LAND_INPUT_T_5WP2_9A:
+    value: United Kingdom
+    br100_meaning: 'Land: The country'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 life_assurance:
   LIFEASSUR_INPUT_B_13WP2_1A:
@@ -825,17 +1048,44 @@ life_assurance:
     response_type: boolean
     user_defined: true
     generate_block?: true
-
-main_dwelling_third_party:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
-    value: false
-    br100_meaning: Dummy meaning
-    response_type: boolean
-    user_defined: false
+  LIFEASSUR_INPUT_T_13WP2_12A:
+    value: "."
+    br100_meaning: 'Policies: Name of financial institution'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LIFEASSUR_INPUT_T_13WP2_14A:
+    value: Client Sole
+    br100_meaning: 'Policies: Who owns it'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LIFEASSUR_INPUT_T_13WP2_15A:
+    value: Loan Value
+    br100_meaning: 'Policies: What is value being given (surrender/loan)'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  LIFEASSUR_INPUT_T_13WP2_19A:
+    value: "."
+    br100_meaning: 'Policies: Account number'
+    user_defined: true
+    response_type: text
     generate_block?: true
 
-
-
+main_dwelling_third_party:
+  MAINTHIRD_INPUT_T_3WP2_12A:
+    value: "."
+    br100_meaning: 'Main Dwelling: Name of 3rd party'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  MAINTHIRD_INPUT_T_3WP2_13A:
+    value: Other
+    br100_meaning: 'Main Dwelling: Relationship to 3rd party'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 money_due:
   MONEYDUE_INPUT_B_15WP2_18A:
@@ -873,6 +1123,12 @@ money_due:
     br100_meaning: 'Money due: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+    generate_block?: true
+  MONEYDUE_INPUT_T_15WP2_13A:
+    value: debtor
+    br100_meaning: 'Money due: Name of person, body, or organisation owing money'
+    user_defined: true
+    response_type: text
     generate_block?: true
 
 national_savings:
@@ -932,6 +1188,18 @@ other_capital:
     response_type: boolean
     user_defined: true
     generate_block?: true
+  OTHCAPITAL_INPUT_C_17WP2_14A:
+    value: '0'
+    br100_meaning: 'Other capital: The value'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  OTHCAPITAL_INPUT_T_17WP2_13A:
+    value: "."
+    br100_meaning: 'Other capital: What it is'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 other_savings:
   OTHERSAVING_INPUT_B_10WP2_14A:
@@ -957,6 +1225,30 @@ other_savings:
     br100_meaning: 'Other savings: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+    generate_block?: true
+  OTHERSAVING_INPUT_C_10WP2_11A:
+    value: '0'
+    br100_meaning: 'Other savings: The value'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  OTHERSAVING_INPUT_T_10WP2_18A:
+    value: '0'
+    br100_meaning: 'Other savings: Cert/ ref number'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  OTHERSAVING_INPUT_T_10WP2_3A:
+    value: "."
+    br100_meaning: 'Other savings: Name of financial institution'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  OTHERSAVING_INPUT_T_10WP2_5A:
+    value: Client Sole
+    br100_meaning: 'Other savings: Whose savings is it'
+    user_defined: true
+    response_type: text
     generate_block?: true
 
 
@@ -984,6 +1276,20 @@ premium_bonds:
     br100_meaning: 'Client premium bonds: Subject to bankruptcy?'
     response_type: boolean
     user_defined: true
+    generate_block?: true
+  CLIPREMIUM_INPUT_T_9WP2_12A:
+    value: "."
+    br100_meaning: 'Client premium bonds: Cert/ ref number'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+
+proceeding_means:
+  PROC_UPPER_TRIBUNAL:
+    value: 'No'
+    br100_meaning: "** Unknown key **"
+    user_defined: false
+    response_type: text
     generate_block?: true
 
 proceeding_merits:
@@ -1107,10 +1413,205 @@ proceeding_merits:
     generate_block?: true
   PROC_OUTCOME_NO_OUTCOME:
     generate_block?: true
-
-
-#property_means:
-
+  CLIENT_INVOLVEMENT:
+    value: Applicant/Claimant/Petitioner
+    br100_meaning: 'Client: The Client''s Involvement In The Proceeding'
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  DAMAGES_AGAINST_POLICE:
+    value: 'No'
+    br100_meaning: The Proceeding Is For Damages Against The Police
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  DISBURSEMENT_COST_FAMILY:
+    value: '0'
+    br100_meaning: 'Fam: The Disbursements Cost To Completion Of The Family Proceeding'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  DOM_VIOLENCE_WAIVER_APPLIES:
+    value: 'Yes'
+    br100_meaning: The Domestic Violence Waiver Applies To The Proceeding
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  EXPERT_COST_FAMILY:
+    value: '0'
+    br100_meaning: 'Fam: The Expert Costs To Completion Of The Family Proceeding'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  IMMIGRATION_QUESTION_APPLIES:
+    value: 'No'
+    br100_meaning: The Immigration Question Is Applicable To The Proceeding
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MATRIMONIAL_PROCEEDING:
+    value: 'No'
+    br100_meaning: The Proceeding Is A Matrimonial Proceeding
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MATTER_TYPE_CHILD_ABDUCTION:
+    value: 'No'
+    br100_meaning: The Proceeding Matter Type Is Child Abduction
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MATTER_TYPE_PRIVATE_FAMILY:
+    value: 'Yes'
+    br100_meaning: The Proceeding Matter Type Is Private Family
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MATTER_TYPE_PUBLIC_FAMILY:
+    value: 'No'
+    br100_meaning: The Proceeding Matter Type Is Public Family
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  MATTER_TYPE_STAND_ALONE:
+    value: 'No'
+    br100_meaning: The Proceeding Matter Type Is Stand Alone
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  NEW_OR_EXISTING_MERITS:
+    value: NEW
+    br100_meaning: 'Proc: New or existing'
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PRIVATE_FUNDING_CONSIDERED:
+    value: 'No'
+    br100_meaning: Private Funding Of The Proceeding Is To Be Considered
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_AVAILABLE_AMENDMENT_ONLY:
+    value: 'No'
+    br100_meaning: The Proceeding Is Available On Amendment Only
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_CARE_SUPERV_OR_RELATED:
+    value: 'No'
+    br100_meaning: The Proceeding Care/Supervision Or Related
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_CHILD_ABDUCTION:
+    value: 'No'
+    br100_meaning: The Proceeding Is An Action Relating To Child Abduction
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_DEFAULT_LEVEL_OF_SERVICE:
+    value: '3'
+    br100_meaning: The Proceeding Default Of Service
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_FIN_REP_CATEGORY:
+    value: Domestic Violence
+    br100_meaning: The Proceeding Fin Rep Category
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_INVOLVING_CHILDREN:
+    value: 'No'
+    br100_meaning: The Proceeding Is An Action Involving Children
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_INVOLVING_FIN_AND_PROP:
+    value: 'No'
+    br100_meaning: The Proceeding Is An Action Involving Finance And Property
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_INVOLVING_INJUNCTION:
+    value: 'Yes'
+    br100_meaning: The Proceeding Is An Action Involving An Injunction
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_IS_MERITS_TESTED:
+    value: 'Yes'
+    br100_meaning: The Proceeding Is Merits Tested
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_IS_SCA_OR_RELATED:
+    value: 'No'
+    br100_meaning: The Proceeding Sca Or Related
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_POSSESSION:
+    value: 'No'
+    br100_meaning: The Proceeding Is In Relation To Possession
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_REGISTER_FOREIGN_ORDER:
+    value: 'No'
+    br100_meaning: The Proceeding Is An Action Relating To Registration Of A Foreign
+      Order
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_SUBJECT_TO_DP_CHECK:
+    value: 'Yes'
+    br100_meaning: The Proceeding Is Subject To A Devolved Powers Check
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROC_SUBJECT_TO_MEDIATION:
+    value: 'Yes'
+    br100_meaning: The Proceeding Is Subject To Mediation
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROCEEDING_INCLUDES_CHILD:
+    value: 'No'
+    br100_meaning: The Proceeding Includes A Child
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROCEEDING_STAND_ALONE:
+    value: 'No'
+    br100_meaning: The Proceeding Is Standalone
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROCEEDING_TYPE:
+    value: proc error
+    br100_meaning: The Proceeding Type
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  PROPORTIONALITY_QUESTION:
+    value: 'Yes'
+    br100_meaning: The Proportionality Question Is Applicable To The Proceeding
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  ROUTING_FOR_PROCEEDING:
+    value: Standard Family Merits
+    br100_meaning: The Routing For The Proceeding
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  SMOD_APPLICABLE:
+    value: 'No'
+    br100_meaning: Smod Is Applicable To The Proceeding
+    user_defined: false
+    response_type: text
+    generate_block?: true
 
 stocks:
   CLISTOCK_INPUT_B_9WP2_10A:
@@ -1181,6 +1682,36 @@ third_party_accounts:
     response_type: boolean
     user_defined: true
     generate_block?: true
+  THIRDPARTACC_INPUT_N_8WP2_5A:
+    value: "."
+    br100_meaning: '3rd party accounts: Account number'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  THIRDPARTACC_INPUT_T_8WP2_3A:
+    value: "."
+    br100_meaning: '3rd party accounts: Name of account holder'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  THIRDPARTACC_INPUT_T_8WP2_4A:
+    value: "."
+    br100_meaning: '3rd party accounts: Name of financial institution'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  THIRDPARTACC_INPUT_T_8WP2_6A:
+    value: Other Relative
+    br100_meaning: '3rd party accounts: Relationship of account holder'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  THIRDPARTACC_INPUT_T_8WP2_7A:
+    value: Other Relative
+    br100_meaning: '3rd party accounts: The type of account'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 timeshare:
   TIMESHARE_INFER_B_6WP2_20A:
@@ -1219,6 +1750,60 @@ timeshare:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_owns_timeshare?'
+  TIMESHARE_INPUT_C_6WP2_12A:
+    value: '0'
+    br100_meaning: 'Timeshare: Sale admin charges'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  TIMESHARE_INPUT_C_6WP2_13A:
+    value: '0'
+    br100_meaning: 'Timeshare: Current secured loan'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  TIMESHARE_INPUT_N_6WP2_14A:
+    value: '100'
+    br100_meaning: 'Timeshare:  % Client'
+    user_defined: true
+    response_type: number
+    generate_block?: true
+  TIMESHARE_INPUT_T_6WP2_10A:
+    value: "."
+    br100_meaning: 'Timeshare: The post code'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  TIMESHARE_INPUT_T_6WP2_5A:
+    value: "."
+    br100_meaning: 'Timeshare: The 1st line of address'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  TIMESHARE_INPUT_T_6WP2_6A:
+    value: "."
+    br100_meaning: 'Timeshare: The 2nd line of address'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  TIMESHARE_INPUT_T_6WP2_7A:
+    value: "."
+    br100_meaning: 'Timeshare: The town/city'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  TIMESHARE_INPUT_T_6WP2_8A:
+    value: "."
+    br100_meaning: 'Timeshare: The county'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  TIMESHARE_INPUT_T_6WP2_9A:
+    value: United Kingdom
+    br100_meaning: 'Timeshare: The country'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 trust:
   TRUST_INPUT_B_16WP2_11A:
@@ -1257,6 +1842,12 @@ trust:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_has_interest_in_a_trust?'
+  TRUST_INPUT_T_16WP2_12A:
+    value: Interest realised upon a specific event occuring
+    br100_meaning: 'Trust: The type of trust'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 valuable_possessions:
   VALPOSSESS_INPUT_B_12WP2_11A:
@@ -1283,7 +1874,12 @@ valuable_possessions:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_has_valuable_possessions?'
-
+  VALPOSSESS_INPUT_T_12WP2_7A:
+    value: "."
+    br100_meaning: 'Val. possessions: What it is'
+    user_defined: true
+    response_type: text
+    generate_block?: true
 
 vehicles:
   CARANDVEH_INPUT_B_14WP2_1A:
@@ -1309,6 +1905,30 @@ vehicles:
     br100_meaning: 'Cars: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+    generate_block?: true
+  CARANDVEH_INPUT_C_14WP2_24A:
+    value: '0'
+    br100_meaning: 'Cars: Purchase price'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
+  CARANDVEH_INPUT_T_14WP2_20A:
+    value: "."
+    br100_meaning: 'Cars: Make'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  CARANDVEH_INPUT_T_14WP2_21A:
+    value: "."
+    br100_meaning: 'Cars: Model'
+    user_defined: true
+    response_type: text
+    generate_block?: true
+  CARANDVEH_INPUT_T_14WP2_22A:
+    value: "."
+    br100_meaning: 'Cars: Reg'
+    user_defined: true
+    response_type: text
     generate_block?: true
 
 will:
@@ -1347,4 +1967,10 @@ will:
     br100_meaning: 'Will: Subject to foreign exchange controls?'
     response_type: boolean
     user_defined: true
+    generate_block?: true
+  WILL_INPUT_T_2WP2_52A:
+    value: "."
+    br100_meaning: 'Will: Name'
+    user_defined: true
+    response_type: text
     generate_block?: true

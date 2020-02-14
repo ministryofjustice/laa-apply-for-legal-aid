@@ -3,6 +3,7 @@ class XmlExtractor
   XPATHS = {
     additional_property: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "ADDPROPERTY"]//Attributes/Attribute),
     bank_accounts_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "BANKACC"]),
+    car_used: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CAR_USED"]//Attributes/Attribute),
     change_in_circumstances: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CHANGE_IN_CIRCUMSTANCES"]//Attributes/Attribute),
     change_in_circumstance: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CHANGE_IN_CIRCUMSTANCE"]//Attributes/Attribute),
     cli_capital: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLICAPITAL"]//Attributes/Attribute),
@@ -18,6 +19,7 @@ class XmlExtractor
     land: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "LAND"]//Attributes/Attribute),
     life_assurance: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "LIFE_ASSURANCE"]//Attributes/Attribute),
     main_dwelling: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "MAIN_DWELLING"]//Attributes/Attribute),
+    main_third: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "MAINTHIRD"]//Attributes/Attribute),
     means_proceeding_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "PROCEEDING"]),
     money_due: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "MONEY_DUE"]//Attributes/Attribute),
     national_savings: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLINATIONAL"]//Attributes/Attribute),

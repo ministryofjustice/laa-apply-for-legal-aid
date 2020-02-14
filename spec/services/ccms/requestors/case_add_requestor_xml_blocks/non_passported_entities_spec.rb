@@ -352,7 +352,7 @@ module CCMS
 
           context 'applicant has no vehicle' do
             before do
-              legal_aid_application.vehicle.destroy!
+              legal_aid_application.vehicle.destroy!§
               legal_aid_application.reload
             end
             it 'does not generates the entity block' do
