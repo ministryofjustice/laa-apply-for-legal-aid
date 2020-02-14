@@ -38,7 +38,7 @@ module GovukEmails
         mailer,
         mail_method,
         delivery_method,
-        *args
+        args: args
       )
     end
 

@@ -192,7 +192,7 @@ RSpec.describe GovukEmails::EmailMonitor do
     it 'passes the correct parameters' do
       email_monitor.trigger_job(message_id)
       expect(GovukNotifyMailerJob).to(
-        have_been_enqueued.with(mailer, mail_method, delivery_method, feedback_email_params, to, 'govuk_message_id' => message_id)
+        have_been_enqueued.with(mailer, mail_method, delivery_method, args: [feedback_email_params, to, { 'govuk_message_id' => message_id }])
       )
     end
 
@@ -202,7 +202,7 @@ RSpec.describe GovukEmails::EmailMonitor do
       it 'passes the correct parameters' do
         email_monitor.trigger_job(message_id)
         expect(GovukNotifyMailerJob).to(
-          have_been_enqueued.with(mailer, mail_method, delivery_method, feedback_email_params, to)
+          have_been_enqueued.with(mailer, mail_method, delivery_method, args: [feedback_email_params, to])
         )
       end
     end

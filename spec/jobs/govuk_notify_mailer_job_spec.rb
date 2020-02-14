@@ -6,7 +6,7 @@ RSpec.describe GovukNotifyMailerJob, type: :job do
   let(:delivery_method) { Faker::Lorem.sentence }
   let(:email_args) { ['foobar', { 'foo' => 'bar' }] }
 
-  subject { GovukNotifyMailerJob.new.perform(mailer, mail_method, delivery_method, *email_args) }
+  subject { GovukNotifyMailerJob.new.perform(mailer, mail_method, delivery_method, args: email_args) }
 
   describe '#perform' do
     it 'calls GovukEmails::EmailMonitor' do
