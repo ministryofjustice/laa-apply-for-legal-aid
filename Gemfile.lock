@@ -604,7 +604,7 @@ DEPENDENCIES
   slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
-  sprockets (= 3.7.2)
+  sprockets (~> 3.7.2)
   sprockets-es6
   timecop
   tzinfo-data

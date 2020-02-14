@@ -58,7 +58,7 @@ gem 'sidekiq_alive'
 
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
 # Default to 3.7.2 as https://github.com/sass/sassc-rails/issues/122 sassc loading is causing a segmentation error
-gem 'sprockets', '3.7.2'
+gem 'sprockets', '~> 3.7.2'
 gem 'sprockets-es6'
 
 # URL and path parsing

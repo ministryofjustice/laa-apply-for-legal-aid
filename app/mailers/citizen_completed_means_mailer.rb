@@ -1,4 +1,6 @@
 class CitizenCompletedMeansMailer < GovukNotifyRails::Mailer
+  self.delivery_job = GovukNotifyMailerJob
+
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
