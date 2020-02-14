@@ -10,7 +10,7 @@ module LayoutsHelper
     @parent_layouts_used << layout.to_sym
 
     @view_flow.set(:layout, output_buffer)
-    output = render(file: "layouts/#{layout}")
+    output = render(template: "layouts/#{layout}")
     self.output_buffer = ActionView::OutputBuffer.new(output)
   end
 end
