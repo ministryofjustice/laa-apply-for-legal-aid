@@ -185,6 +185,10 @@ module CCMS
       !@legal_aid_application.respondent.warning_letter_sent
     end
 
+    def applicant_owns_main_home?(_options)
+      !@legal_aid_application.own_home_no?
+    end
+
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
       marginal: 'Marginal',

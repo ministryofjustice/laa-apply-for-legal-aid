@@ -84,6 +84,401 @@ module CCMS
           end
         end
 
+        context 'attributes in ADDPROPERTY entity' do
+          before { legal_aid_application.other_assets_declaration.update! second_home_value: 244_000 }
+          it 'generates all the attributes as false' do
+            additional_property_false_attrs.each do |attr_pair|
+              attr_name, user_defined = attr_pair
+              block = XmlExtractor.call(xml, :additional_property, attr_name)
+              expect(block).to have_boolean_response false
+              if user_defined == true
+                expect(block).to be_user_defined
+              else
+                expect(block).to not_be_user_defined
+              end
+            end
+          end
+        end
+
+        context 'attributes in bank_acct entity' do
+          it 'generates each of the attributes as false for each bank account' do
+            instances = %i[first_bank_acct_instance second_bank_acct_instance]
+            instances.each do |instance|
+              bank_acct_false_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, instance, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+        end
+
+        context 'attributes in vehicles entity' do
+          it 'generates each attribute as false' do
+            vehicle_false_attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'attributes in CLICAPITAL entity' do
+          it 'generates each attribute as false' do
+            cli_capital_false_attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :cli_capital, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'attributes in CLIPREMIUM entity' do
+          it 'generates each attribute as false' do
+            premium_bond_false_attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :cli_premium, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'attributes in CLIPREMIUM entity' do
+          it 'generates each attribute as false' do
+            stocks_false_attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :cli_stock, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'global means main dwelling attribute' do
+          context 'applicant does not own main home' do
+            before { legal_aid_application.update! own_home: 'no' }
+            it 'omits all the attributes' do
+              global_means_main_dwelling_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :global_means, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+
+          context 'applicant owns main home outright' do
+            before { legal_aid_application.update! own_home: 'owned_outright' }
+            it 'generates all the attributes as false' do
+              global_means_main_dwelling_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :global_means, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'applicant owns main home with a mortgage' do
+            before { legal_aid_application.update! own_home: 'mortgage' }
+            it 'generates all the attributes as false' do
+              global_means_main_dwelling_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :global_means, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'conditionally present land attributes' do
+            context 'applicant has land' do
+              it 'inserts attrs into the payload with false' do
+                conditional_land_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :land, attr_name)
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'applicant has no land' do
+              before { legal_aid_application.other_assets_declaration.update! land_value: 0 }
+              it 'does not insert attrs into the payload' do
+                conditional_land_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :land, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+          end
+
+          context 'Life assurance attributes' do
+            it 'generates attributes' do
+              life_assurance_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :life_assurance, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'money due attributes' do
+            context 'applicant has money due' do
+              it 'generates attributes' do
+                money_due_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :money_due, attr_name)
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+            context 'applicant has no money due' do
+              before { legal_aid_application.other_assets_declaration.update! money_owed_value: nil }
+              it 'does not generate the attributes' do
+                money_due_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :money_due, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+          end
+
+          context 'third party account attrs' do
+            it 'generates attributes' do
+              third_party_acct_attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :third_party_acct, attr_name)
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'conditional timeshare attrs' do
+            context 'applicant owns timeshare' do
+              it 'generates the attributes' do
+                conditional_timeshare_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :timeshare, attr_name)
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'applicant does not have timeshare' do
+              before { legal_aid_application.other_assets_declaration.update! timeshare_property_value: 0.0 }
+              it 'does not generate the attributes' do
+                conditional_timeshare_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :timeshare, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+          end
+
+          context 'conditional trust attributes' do
+            context 'applicant has a trust' do
+              it 'generates the attributes' do
+                conditional_trust_attributes.each do |attr_name|
+                  block = XmlExtractor.call(xml, :trust, attr_name)
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'applicant doest not have a trust' do
+              before { legal_aid_application.other_assets_declaration.update! trust_value: nil }
+              it 'does not generate the attributes' do
+                conditional_trust_attributes.each do |attr_name|
+                  block = XmlExtractor.call(xml, :trust, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+          end
+
+          context 'conditional valuable possessions attributes' do
+            context 'applicant has valuable possessions' do
+              before { other_assets_decl.update! valuable_items_value: 878_787 }
+              it 'generates the attributes' do
+                conditional_valuable_possessions_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'applicant does not have valuable possessions' do
+              before { other_assets_decl.update! valuable_items_value: nil }
+              it 'goes not generate the attributes' do
+                conditional_valuable_possessions_attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+          end
+        end
+
+        context 'attributes for WILL' do
+          it 'generates the attributes' do
+            will_attributes.each do |attr_name|
+              block = XmlExtractor.call(xml, :will, attr_name)
+              expect(block).to have_boolean_response false
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        def will_attributes
+          %w[
+            WILL_INPUT_B_2WP2_10A
+            WILL_INPUT_B_2WP2_21A
+            WILL_INPUT_B_2WP2_24A
+            WILL_INPUT_B_2WP2_26A
+            WILL_INPUT_B_2WP2_27A
+            WILL_INPUT_B_2WP2_28A
+          ]
+        end
+
+        def conditional_valuable_possessions_attrs
+          %w[
+            VALPOSSESS_INPUT_B_12WP2_11A
+            VALPOSSESS_INPUT_B_12WP2_12A
+            VALPOSSESS_INPUT_B_12WP2_14A
+            VALPOSSESS_INPUT_B_12WP2_15A
+          ]
+        end
+
+        def conditional_trust_attributes
+          %w[
+            TRUST_INPUT_B_16WP2_19A
+            TRUST_INPUT_B_16WP2_1A
+            TRUST_INPUT_B_16WP2_2A
+            TRUST_INPUT_B_16WP2_4A
+            TRUST_INPUT_B_16WP2_5A
+          ]
+        end
+
+        def conditional_timeshare_attrs
+          %w[
+            TIMESHARE_INPUT_N_6WP2_16A
+            TIMESHARE_INPUT_N_6WP2_17A
+            TIMESHARE_INPUT_N_6WP2_18A
+            TIMESHARE_INPUT_N_6WP2_19A
+          ]
+        end
+
+        def third_party_acct_attrs
+          %w[
+            THIRDPARTACC_INPUT_B_8WP2_11A
+            THIRDPARTACC_INPUT_B_8WP2_12A
+            THIRDPARTACC_INPUT_B_8WP2_13A
+            THIRDPARTACC_INPUT_B_8WP2_15A
+            THIRDPARTACC_INPUT_B_8WP2_17A
+            THIRDPARTACC_INPUT_B_8WP2_18A
+            THIRDPARTACC_INPUT_B_8WP2_19A
+          ]
+        end
+
+        def money_due_attrs
+          %w[
+            MONEYDUE_INPUT_B_15WP2_18A
+            MONEYDUE_INPUT_B_15WP2_1A
+            MONEYDUE_INPUT_B_15WP2_21A
+            MONEYDUE_INPUT_B_15WP2_2A
+            MONEYDUE_INPUT_B_15WP2_4A
+            MONEYDUE_INPUT_B_15WP2_5A
+          ]
+        end
+
+        def life_assurance_attrs
+          %w[
+            LIFEASSUR_INPUT_B_13WP2_1A
+            LIFEASSUR_INPUT_B_13WP2_2A
+            LIFEASSUR_INPUT_B_13WP2_4A
+            LIFEASSUR_INPUT_B_13WP2_5A
+          ]
+        end
+
+        def conditional_land_attrs
+          %w[
+            LAND_INPUT_B_5WP2_11A
+            LAND_INPUT_B_5WP2_14A
+            LAND_INPUT_B_5WP2_20A
+            LAND_INPUT_B_5WP2_22A
+            LAND_INPUT_B_5WP2_23A
+            LAND_INPUT_B_5WP2_24A
+            LAND_INPUT_B_5WP2_25A
+          ]
+        end
+
+        def global_means_main_dwelling_attrs
+          %w[
+            GB_INPUT_B_3WP2_16A
+            GB_INPUT_B_3WP2_17A
+            GB_INPUT_B_3WP2_18A
+            GB_INPUT_B_3WP2_19A
+            GB_INPUT_B_3WP2_20A
+            GB_INPUT_B_3WP2_25A
+          ]
+        end
+
+        def stocks_false_attrs
+          %w[
+            CLISTOCK_INPUT_B_9WP2_10A
+            CLISTOCK_INPUT_B_9WP2_11A
+            CLISTOCK_INPUT_B_9WP2_8A
+            CLISTOCK_INPUT_B_9WP2_9A
+          ]
+        end
+
+        def premium_bond_false_attrs
+          %w[
+            CLIPREMIUM_INPUT_B_9WP2_10A
+            CLIPREMIUM_INPUT_B_9WP2_11A
+            CLIPREMIUM_INPUT_B_9WP2_8A
+            CLIPREMIUM_INPUT_B_9WP2_9A
+          ]
+        end
+
+        def cli_capital_false_attrs
+          %w[
+            CLICAPITAL_INPUT_B_9WP2_10A
+            CLICAPITAL_INPUT_B_9WP2_11A
+            CLICAPITAL_INPUT_B_9WP2_8A
+            CLICAPITAL_INPUT_B_9WP2_9A
+          ]
+        end
+
+        def vehicle_false_attrs
+          %w[
+            CARANDVEH_INPUT_B_14WP2_1A
+            CARANDVEH_INPUT_B_14WP2_2A
+            CARANDVEH_INPUT_B_14WP2_4A
+            CARANDVEH_INPUT_B_14WP2_5A
+          ]
+        end
+
+        def bank_acct_false_attrs
+          %w[
+            BANKACC_INPUT_B_7WP2_19A
+            BANKACC_INPUT_B_7WP2_21A
+            BANKACC_INPUT_B_7WP2_22A
+            BANKACC_INPUT_B_7WP2_23A
+          ]
+        end
+
+        def additional_property_false_attrs
+          [
+            ['ADDPROPERTY_INFER_B_4WP2_52A', false],
+            ['ADDPROPERTY_INPUT_B_4WP2_18A', true],
+            ['ADDPROPERTY_INPUT_B_4WP2_24A', true],
+            ['ADDPROPERTY_INPUT_B_4WP2_25A', true],
+            ['ADDPROPERTY_INPUT_B_4WP2_26A', true],
+            ['ADDPROPERTY_INPUT_B_4WP2_27A', true],
+            ['ADDPROPERTY_INPUT_B_4WP2_28A', true],
+            ['ADDPROPERTY_INPUT_B_4WP2_32A', true]
+          ]
+        end
+
         def true_attributes
           [
             [:global_means, 'GB_INPUT_B_40WP3_74A', true],

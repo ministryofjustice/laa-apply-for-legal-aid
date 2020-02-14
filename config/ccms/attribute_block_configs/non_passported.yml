@@ -1,10 +1,52 @@
 ---
 additional_property:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  ADDPROPERTY_INPUT_B_4WP2_18A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Add. Property: Owned with 3rd party, inc ex. partner?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  ADDPROPERTY_INFER_B_4WP2_52A:
+    value: false
+    br100_meaning: 'Add. Property: SMOD?'
     response_type: boolean
     user_defined: false
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_24A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_25A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_26A:
+    value: false
+    br100_meaning: 'Add. Property: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_27A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_28A:
+    value: false
+    br100_meaning: 'Add. Property: Subject to possession proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_32A:
+    value: false
+    br100_meaning: 'Add. Property: Client/Partner has a deferred interest?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 bank_acct:
@@ -14,6 +56,34 @@ bank_acct:
     value: false
   BANKACC_INPUT_B_7WP2_16A:
     value: false
+  BANKACC_INPUT_B_7WP2_19A:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Bank accounts: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+  BANKACC_INPUT_B_7WP2_21A:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Bank accounts: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+  BANKACC_INPUT_B_7WP2_22A:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Bank accounts: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+  BANKACC_INPUT_B_7WP2_23A:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Bank accounts: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+
+
+
+
 
 capital_share:
   CAPSHARE_INPUT_B_11WP2_19A:
@@ -76,11 +146,29 @@ change_in_circumstance:
     response_type: text
 
 cli_capital:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  CLICAPITAL_INPUT_B_9WP2_10A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Client capital bonds: SMOD in other proceedings?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  CLICAPITAL_INPUT_B_9WP2_11A:
+    value: false
+    br100_meaning: 'Client capital bonds: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CLICAPITAL_INPUT_B_9WP2_8A:
+    value: false
+    br100_meaning: 'Client capital bonds: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CLICAPITAL_INPUT_B_9WP2_9A:
+    value: false
+    br100_meaning: 'Client capital bonds: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 financial_support:
@@ -235,13 +323,45 @@ global_means:
     generate_block?: true
   SA_SCREEN10_1WP1_NONMEANS:
     generate_block?: true
-
-
-
-
-
-
-
+  GB_INPUT_B_2WP3_214A:
+    generate_block?: true
+    value: false
+  GB_INPUT_B_3WP2_16A:
+    generate_block?: '#applicant_owns_main_home?'
+    value: false
+    br100_meaning: 'Main Dwelling: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_3WP2_17A:
+    generate_block?: '#applicant_owns_main_home?'
+    value: false
+    br100_meaning: 'Main Dwelling: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_3WP2_18A:
+    generate_block?: '#applicant_owns_main_home?'
+    value: false
+    br100_meaning: 'Main Dwelling: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_3WP2_19A:
+    generate_block?: '#applicant_owns_main_home?'
+    value: false
+    br100_meaning: 'Main Dwelling: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_3WP2_20A:
+    generate_block?: '#applicant_owns_main_home?'
+    value: false
+    br100_meaning: 'Main Dwelling: Subject to possession proceedings?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_3WP2_25A:
+    generate_block?: '#applicant_owns_main_home?'
+    value: false
+    br100_meaning: 'Main Dwelling: Client/Partner has a deferred interest?'
+    response_type: boolean
+    user_defined: true
 
 
 
@@ -637,13 +757,73 @@ land:
     response_type: boolean
     user_defined: false
     generate_block?: true
+  LAND_INPUT_B_5WP2_11A:
+    value: false
+    br100_meaning: 'Land: Leased out?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_14A:
+    value: false
+    br100_meaning: 'Land: Owned with 3rd party, inc ex. partner?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_20A:
+    value: false
+    br100_meaning: 'Land: Loan outstanding?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_22A:
+    value: false
+    br100_meaning: 'Land: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_23A:
+    value: false
+    br100_meaning: 'Land: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_24A:
+    value: false
+    br100_meaning: 'Land: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_25A:
+    value: false
+    br100_meaning: 'Land: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_land?'
 
 life_assurance:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  LIFEASSUR_INPUT_B_13WP2_1A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Policies: Subject to restraint (freezing) order?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  LIFEASSUR_INPUT_B_13WP2_2A:
+    value: false
+    br100_meaning: 'Policies: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  LIFEASSUR_INPUT_B_13WP2_4A:
+    value: false
+    br100_meaning: 'Policies: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  LIFEASSUR_INPUT_B_13WP2_5A:
+    value: false
+    br100_meaning: 'Policies: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 main_dwelling_third_party:
@@ -656,12 +836,43 @@ main_dwelling_third_party:
 
 
 
+
 money_due:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  MONEYDUE_INPUT_B_15WP2_18A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Money due:  Is this as a result of a private mortgage?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  MONEYDUE_INPUT_B_15WP2_1A:
+    value: false
+    br100_meaning: 'Money due: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  MONEYDUE_INPUT_B_15WP2_21A:
+    value: false
+    br100_meaning: 'Money due: Formal agreement?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  MONEYDUE_INPUT_B_15WP2_2A:
+    value: false
+    br100_meaning: 'Money due: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  MONEYDUE_INPUT_B_15WP2_4A:
+    value: false
+    br100_meaning: 'Money due: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  MONEYDUE_INPUT_B_15WP2_5A:
+    value: false
+    br100_meaning: 'Money due: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 national_savings:
@@ -750,11 +961,29 @@ other_savings:
 
 
 premium_bonds:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  CLIPREMIUM_INPUT_B_9WP2_10A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Client premium bonds: SMOD in other proceedings?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  CLIPREMIUM_INPUT_B_9WP2_11A:
+    value: false
+    br100_meaning: 'Client premium bonds: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CLIPREMIUM_INPUT_B_9WP2_8A:
+    value: false
+    br100_meaning: 'Client premium bonds: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CLIPREMIUM_INPUT_B_9WP2_9A:
+    value: false
+    br100_meaning: 'Client premium bonds: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 proceeding_merits:
@@ -880,70 +1109,77 @@ proceeding_merits:
     generate_block?: true
 
 
-property_means:
-  ADDPROPERTY_INPUT_B_4WP2_18A:
-    value: false
-    br100_meaning: 'Add. Property: Owned with 3rd party, inc ex. partner?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INFER_B_4WP2_52A:
-    value: false
-    br100_meaning: 'Add. Property: SMOD?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INPUT_B_4WP2_24A:
-    value: false
-    br100_meaning: 'Add. Property: Subject to restraint (freezing) order?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INPUT_B_4WP2_25A:
-    value: false
-    br100_meaning: 'Add. Property: Subject to bankruptcy?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INPUT_B_4WP2_26A:
-    value: false
-    br100_meaning: 'Add. Property: SMOD in other proceedings?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INPUT_B_4WP2_27A:
-    value: false
-    br100_meaning: 'Add. Property: Subject to foreign exchange controls?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INPUT_B_4WP2_28A:
-    value: false
-    br100_meaning: 'Add. Property: Subject to possession proceedings?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
-  ADDPROPERTY_INPUT_B_4WP2_32A:
-    value: false
-    br100_meaning: 'Add. Property: Client/Partner has a deferred interest?'
-    response_type: boolean
-    user_defined: false
-    generate_block?: true
+#property_means:
+
 
 stocks:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  CLISTOCK_INPUT_B_9WP2_10A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning:  'Client gov. stock: SMOD in other proceedings?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  CLISTOCK_INPUT_B_9WP2_11A:
+    value: false
+    br100_meaning:  'Client gov. stock: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CLISTOCK_INPUT_B_9WP2_8A:
+    value: false
+    br100_meaning:  'Client gov. stock: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CLISTOCK_INPUT_B_9WP2_9A:
+    value: false
+    br100_meaning:  'Client gov. stock: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 third_party_accounts:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  THIRDPARTACC_INPUT_B_8WP2_11A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: '3rd party accounts: Wages paid in?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  THIRDPARTACC_INPUT_B_8WP2_12A:
+    value: false
+    br100_meaning: '3rd party accounts: Benefits, ex. tax credits, paid in?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  THIRDPARTACC_INPUT_B_8WP2_13A:
+    value: false
+    br100_meaning: '3rd party accounts: Tax credits paid in?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  THIRDPARTACC_INPUT_B_8WP2_15A:
+    value: false
+    br100_meaning: '3rd party accounts: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  THIRDPARTACC_INPUT_B_8WP2_17A:
+    value: false
+    br100_meaning: '3rd party accounts: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  THIRDPARTACC_INPUT_B_8WP2_18A:
+    value: false
+    br100_meaning: '3rd party accounts: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  THIRDPARTACC_INPUT_B_8WP2_19A:
+    value: false
+    br100_meaning: '3rd party accounts: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
 
 timeshare:
@@ -959,6 +1195,30 @@ timeshare:
     response_type: boolean
     user_defined: false
     generate_block?: true
+  TIMESHARE_INPUT_N_6WP2_16A:
+    value: false
+    br100_meaning: 'Timeshare: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_timeshare?'
+  TIMESHARE_INPUT_N_6WP2_17A:
+    value: false
+    br100_meaning: 'Timeshare: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_timeshare?'
+  TIMESHARE_INPUT_N_6WP2_18A:
+    value: false
+    br100_meaning: 'Timeshare: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_timeshare?'
+  TIMESHARE_INPUT_N_6WP2_19A:
+    value: false
+    br100_meaning: 'Timeshare: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_owns_timeshare?'
 
 trust:
   TRUST_INPUT_B_16WP2_11A:
@@ -967,11 +1227,124 @@ trust:
     response_type: boolean
     user_defined: false
     generate_block?: true
+  TRUST_INPUT_B_16WP2_19A:
+    value: false
+    br100_meaning: 'Trust: interview complete'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_interest_in_a_trust?'
+  TRUST_INPUT_B_16WP2_1A:
+    value: false
+    br100_meaning: 'Trust: interview complete'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_interest_in_a_trust?'
+  TRUST_INPUT_B_16WP2_2A:
+    value: false
+    br100_meaning: 'Trust: interview complete'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_interest_in_a_trust?'
+  TRUST_INPUT_B_16WP2_4A:
+    value: false
+    br100_meaning: 'Trust: interview complete'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_interest_in_a_trust?'
+  TRUST_INPUT_B_16WP2_5A:
+    value: false
+    br100_meaning: 'Trust: interview complete'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_interest_in_a_trust?'
+
+valuable_possessions:
+  VALPOSSESS_INPUT_B_12WP2_11A:
+    value: false
+    br100_meaning: 'Val. possessions: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_valuable_possessions?'
+  VALPOSSESS_INPUT_B_12WP2_12A:
+    value: false
+    br100_meaning: 'Val. possessions: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_valuable_possessions?'
+  VALPOSSESS_INPUT_B_12WP2_14A:
+    value: false
+    br100_meaning: 'Val. possessions: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_valuable_possessions?'
+  VALPOSSESS_INPUT_B_12WP2_15A:
+    value: false
+    br100_meaning: 'Val. possessions: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_valuable_possessions?'
+
+
+vehicles:
+  CARANDVEH_INPUT_B_14WP2_1A:
+    value: false
+    br100_meaning: 'Cars: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CARANDVEH_INPUT_B_14WP2_2A:
+    value: false
+    br100_meaning: 'Cars: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CARANDVEH_INPUT_B_14WP2_4A:
+    value: false
+    br100_meaning: 'Cars: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  CARANDVEH_INPUT_B_14WP2_5A:
+    value: false
+    br100_meaning: 'Cars: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
 
 will:
-  DUMMY_ATTR: # here to be able to test enity generation.  Attributes will be handled in a separate ticket
+  WILL_INPUT_B_2WP2_10A:
     value: false
-    br100_meaning: Dummy meaning
+    br100_meaning: 'Will: to be distributed this month?'
     response_type: boolean
-    user_defined: false
+    user_defined: true
+    generate_block?: true
+  WILL_INPUT_B_2WP2_21A:
+    value: false
+    br100_meaning: 'Will: Assets to be inherited to be held on trust?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  WILL_INPUT_B_2WP2_24A:
+    value: false
+    br100_meaning: 'Will: Subject to bankruptcy?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  WILL_INPUT_B_2WP2_26A:
+    value: false
+    br100_meaning: 'Will: SMOD in other proceedings?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  WILL_INPUT_B_2WP2_27A:
+    value: false
+    br100_meaning: 'Will: Subject to restraint (freezing) order?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
+  WILL_INPUT_B_2WP2_28A:
+    value: false
+    br100_meaning: 'Will: Subject to foreign exchange controls?'
+    response_type: boolean
+    user_defined: true
     generate_block?: true
