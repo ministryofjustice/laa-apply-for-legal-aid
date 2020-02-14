@@ -333,7 +333,7 @@ workflows:
     - hold_staging:
         type: approval
         requires:
-        - deploy_uat_auto
+        - build_and_push
         filters:
           branches:
             only: master
