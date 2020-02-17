@@ -136,6 +136,10 @@ module CCMS
       not_zero? other_assets.second_home_value
     end
 
+    def applicant_shares_ownership_of_second_home?(options)
+      applicant_owns_additional_property?(options) && @legal_aid_application.other_assets_declaration.second_home_percentage != 100
+    end
+
     def applicant_has_other_capital?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
