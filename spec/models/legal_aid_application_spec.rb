@@ -109,6 +109,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'but later, applicant first name updated' do
         before { applicant.update(first_name: Faker::Name.first_name) }
+        let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: legal_aid_application } }
 
         it 'returns true' do
           expect(legal_aid_application).to be_benefit_check_result_needs_updating
@@ -646,9 +647,11 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#cfe_result' do
     it 'returns the result associated with the most recent CFE::Submission' do
-      legal_aid_application = create :legal_aid_application
-      submission1 = create :cfe_submission, legal_aid_application: legal_aid_application
-      create :cfe_result, submission: submission1
+      travel(-10.minutes) do
+        legal_aid_application = create :legal_aid_application
+        submission1 = create :cfe_submission, legal_aid_application: legal_aid_application
+        create :cfe_result, submission: submission1
+      end
       submission2 = create :cfe_submission, legal_aid_application: legal_aid_application
       result2 = create :cfe_result, submission: submission2
 
