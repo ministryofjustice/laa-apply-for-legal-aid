@@ -214,7 +214,7 @@ module CCMS
               end
             end
 
-            context 'TIMESHARE_INPUT_C_6WP2_11A'  do
+            context 'TIMESHARE_INPUT_C_6WP2_11A' do
               it 'does not generate the block' do
                 block = XmlExtractor.call(xml, :timeshare, 'TIMESHARE_INPUT_C_6WP2_11A')
                 expect(block).not_to be_present
@@ -232,7 +232,7 @@ module CCMS
               end
             end
 
-            context 'TIMESHARE_INPUT_C_6WP2_11A'  do
+            context 'TIMESHARE_INPUT_C_6WP2_11A' do
               it 'generates the block' do
                 block = XmlExtractor.call(xml, :timeshare, 'TIMESHARE_INPUT_C_6WP2_11A')
                 expect(block).to have_currency_response 95_355
