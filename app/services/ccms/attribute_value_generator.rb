@@ -31,7 +31,9 @@ module CCMS
                               |other_party
                               |opponent
                               |respondent
-                              |merits_assessment)_(\S+)$}x.freeze
+                              |merits_assessment
+                              |other_assets_declaration
+                              |savings_amount)_(\S+)$}x.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
@@ -43,6 +45,8 @@ module CCMS
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
     MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
+    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
+    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
 
     def initialize(submission)
       @submission = submission
@@ -292,6 +296,10 @@ module CCMS
         options[:respondent].__send__(Regexp.last_match(1))
       when MERITS_ASSESSMENT
         options[:merits_assessment].__send__(Regexp.last_match(1))
+      when SAVINGS_AMOUNT
+        @legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
+      when OTHER_ASSETS_DECLARATION
+        @legal_aid_application.other_assets_declaration.__send__(Regexp.last_match(1))
       end
     end
 

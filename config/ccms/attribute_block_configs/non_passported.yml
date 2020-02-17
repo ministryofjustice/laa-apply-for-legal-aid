@@ -202,6 +202,12 @@ capital_share:
     value: '.'
     user_defined: true
     response_type: text
+  CAPSHARE_INPUT_C_11WP2_9A:
+    generate_block?: '#applicant_has_shares?'
+    br100_meaning: "Shares: The value"
+    value: '#savings_amount_plc_shares'
+    user_defined: true
+    response_type: currency
 
 car_used:
   CARUSED_INPUT_B_14WP2_16A:
@@ -1072,6 +1078,12 @@ life_assurance:
     user_defined: true
     response_type: text
     generate_block?: true
+  LIFEASSUR_INPUT_C_13WP2_16A:
+    value: '#savings_amount_life_assurance_endowment_policy'
+    br100_meaning: 'Policies: The value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_other_policies?'
 
 main_dwelling_third_party:
   MAINTHIRD_INPUT_T_3WP2_12A:
@@ -1727,6 +1739,12 @@ third_party_accounts:
     user_defined: true
     response_type: text
     generate_block?: true
+  THIRDPARTACC_INPUT_C_8WP2_14A:
+    value: '#savings_amount_other_person_account'
+    br100_meaning: '3rd party accounts: Current Balance'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_is_signatory_to_other_person_accounts?'
 
 timeshare:
   TIMESHARE_INFER_B_6WP2_20A:
@@ -1819,6 +1837,18 @@ timeshare:
     user_defined: true
     response_type: text
     generate_block?: true
+  TIMESHARE_INPUT_B_6WP2_22A:
+    value: '#applicant_owns_timeshare?'
+    br100_meaning: 'Timeshare: The client owns timeshare?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: '#applicant_owns_timeshare?'
+  TIMESHARE_INPUT_C_6WP2_11A:
+    value: '#other_assets_declaration_timeshare_property_value'
+    br100_meaning: 'Timeshare: Current sale value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_owns_timeshare?'
 
 trust:
   TRUST_INPUT_B_16WP2_11A:

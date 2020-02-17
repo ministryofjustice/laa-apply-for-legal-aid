@@ -146,6 +146,101 @@ module CCMS
             end
           end
         end
+
+        context 'CAPSHARE_INPUT_C_11WP2_9A' do
+          context 'applicant has no plc shares' do
+            before { savings_amount.update! plc_shares: nil }
+            it 'does not generate the block' do
+              block = XmlExtractor.call(xml, :plc_shares, 'CAPSHARE_INPUT_C_11WP2_9A')
+              expect(block).not_to be_present
+            end
+          end
+
+          context 'applicant has plc shares' do
+            before { savings_amount.update! plc_shares: 12_566 }
+            it 'generates the block' do
+              block = XmlExtractor.call(xml, :plc_shares, 'CAPSHARE_INPUT_C_11WP2_9A')
+              expect(block).to have_currency_response 12_566.0
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'LIFEASSUR_INPUT_C_13WP2_16A' do
+          context 'applicant has no life assurance policies' do
+            before { savings_amount.update! life_assurance_endowment_policy: 0.0 }
+            it 'does not generate the block' do
+              block = XmlExtractor.call(xml, :life_assurance, 'LIFEASSUR_INPUT_C_13WP2_16A')
+              expect(block).not_to be_present
+            end
+          end
+
+          context 'applicant has life assurance policies' do
+            before { savings_amount.update! life_assurance_endowment_policy: 42_518.38 }
+            it 'generates the block' do
+              block = XmlExtractor.call(xml, :life_assurance, 'LIFEASSUR_INPUT_C_13WP2_16A')
+              expect(block).to have_currency_response 42_518.38
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'THIRDPARTACC_INPUT_C_8WP2_14A' do
+          context 'applicant has no access to other peoples accounts' do
+            before { savings_amount.update! other_person_account: nil }
+            it 'does not generate the block' do
+              block = XmlExtractor.call(xml, :third_party_acct, 'THIRDPARTACC_INPUT_C_8WP2_14A')
+              expect(block).not_to be_present
+            end
+          end
+
+          context 'applicant has access to other persons account' do
+            before { savings_amount.update! other_person_account: 128.22 }
+            it 'generates the block' do
+              block = XmlExtractor.call(xml, :third_party_acct, 'THIRDPARTACC_INPUT_C_8WP2_14A')
+              expect(block).to have_currency_response 128.22
+              expect(block).to be_user_defined
+            end
+          end
+        end
+
+        context 'Timeshare' do
+          context 'Applicant does not own timeshare' do
+            before { other_assets_decl.update! timeshare_property_value: 0 }
+            context 'TIMESHARE_INPUT_B_6WP2_22A' do
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :timeshare, 'TIMESHARE_INPUT_B_6WP2_22A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'TIMESHARE_INPUT_C_6WP2_11A'  do
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :timeshare, 'TIMESHARE_INPUT_C_6WP2_11A')
+                expect(block).not_to be_present
+              end
+            end
+          end
+
+          context 'applicant owns timeshare' do
+            before { other_assets_decl.update! timeshare_property_value: 95_355.0 }
+            context 'TIMESHARE_INPUT_B_6WP2_22A' do
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :timeshare, 'TIMESHARE_INPUT_B_6WP2_22A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'TIMESHARE_INPUT_C_6WP2_11A'  do
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :timeshare, 'TIMESHARE_INPUT_C_6WP2_11A')
+                expect(block).to have_currency_response 95_355
+                expect(block).to be_user_defined
+              end
+            end
+          end
+        end
       end
     end
   end
