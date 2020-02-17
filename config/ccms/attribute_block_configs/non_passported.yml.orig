@@ -462,6 +462,7 @@ global_means:
     br100_meaning: 'Main Dwelling: Client/Partner has a deferred interest?'
     response_type: boolean
     user_defined: true
+<<<<<<< HEAD
   GB_INPUT_B_13WP3_49A:
     value: NONE
     br100_meaning: 'Housing Costs: Mortgage/ Mortgage & Rent/ Rent/ B&L/ None'
@@ -504,6 +505,8 @@ global_means:
     user_defined: false
     response_type: text
     generate_block?: true
+=======
+>>>>>>> AP-1188 Family propspects attributes
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -876,6 +879,7 @@ global_merits:
     generate_block?: true
   SA_INTRODUCTION:
     generate_block?: true
+<<<<<<< HEAD
   _SYSTEM_PUI_CONTEXT:
     value: Unused
     br100_meaning: "** Unknown key **"
@@ -924,6 +928,8 @@ global_merits:
     user_defined: false
     response_type: text
     generate_block?: true
+=======
+>>>>>>> AP-1188 Family propspects attributes
 
 land:
   LAND_INFER_B_5WP2_53A:
@@ -1428,6 +1434,7 @@ proceeding_merits:
     generate_block?: true
   PROC_OUTCOME_NO_OUTCOME:
     generate_block?: true
+<<<<<<< HEAD
   CLIENT_INVOLVEMENT:
     value: Applicant/Claimant/Petitioner
     br100_meaning: 'Client: The Client''s Involvement In The Proceeding'
@@ -1627,6 +1634,8 @@ proceeding_merits:
     user_defined: false
     response_type: text
     generate_block?: true
+=======
+>>>>>>> AP-1188 Family propspects attributes
 
 stocks:
   CLISTOCK_INPUT_B_9WP2_10A:

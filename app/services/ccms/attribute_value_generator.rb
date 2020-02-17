@@ -21,7 +21,17 @@ module CCMS
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
-    STANDARD_METHOD_NAMES = /^(application|applicant|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = %r{^(application
+                              |applicant
+                              |bank_account
+                              |vehicle
+                              |wage_slip
+                              |appl_proceeding_type
+                              |proceeding
+                              |other_party
+                              |opponent
+                              |respondent
+                              |merits_assessment)_(\S+)$}x.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
@@ -32,6 +42,7 @@ module CCMS
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
+    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
 
     def initialize(submission)
       @submission = submission
@@ -275,12 +286,12 @@ module CCMS
         options[:wage_slip].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
-      # when OTHER_PARTY  # TODO enable this when a decision is made on how to handle other parties
-      #   options[:other_party].__send__(Regexp.last_match(1))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
+      when MERITS_ASSESSMENT
+        options[:merits_assessment].__send__(Regexp.last_match(1))
       end
     end
 
