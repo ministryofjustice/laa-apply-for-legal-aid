@@ -30,6 +30,7 @@ RSpec.describe Provider, type: :model do
   describe '#whitelisted_user?' do
     before do
       allow(HostEnv).to receive(:production?).and_return(true)
+      Rails.configuration.x.application.whitelisted_users = %w[user1 user2 user3]
     end
 
     context 'user is whitelisted' do
