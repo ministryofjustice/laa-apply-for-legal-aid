@@ -61,7 +61,10 @@ module CCMS
     }.freeze
 
     attr_reader :legal_aid_application
-    delegate :merits_assessment, :vehicle, to: :legal_aid_application
+    delegate :merits_assessment,
+             :vehicle,
+             :substantive_scope_limitation,
+             :used_delegated_functions?, to: :legal_aid_application
 
     def initialize(submission)
       @submission = submission
@@ -292,6 +295,14 @@ module CCMS
 
     def scope_limitations
       @scope_limitations ||= @legal_aid_application.scope_limitations
+    end
+
+    def proceeding_limitation_desc(_options)
+      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.description
+    end
+
+    def proceeding_limitation_meaning(_options)
+      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.meaning
     end
 
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity

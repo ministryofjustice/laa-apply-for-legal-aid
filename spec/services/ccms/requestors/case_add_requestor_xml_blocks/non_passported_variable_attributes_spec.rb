@@ -558,6 +558,40 @@ module CCMS
             end
           end
         end
+
+        context 'Proceeding limitation attrs' do
+          context 'delegated functions used' do
+            before { legal_aid_application.update! used_delegated_functions: true, used_delegated_functions_on: Date.yesterday }
+            it 'generates a PROCEEDING_LIMITATION_DESC block with value MULTIPLE' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_DESC')
+              expect(block).to have_text_response 'MULTIPLE'
+              expect(block).not_to be_user_defined
+            end
+
+            it 'generates a PROCEEDING_LIMITATION_MEANING block with value MULTIPLE' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_MEANING')
+              expect(block).to have_text_response 'MULTIPLE'
+              expect(block).not_to be_user_defined
+            end
+          end
+
+          context 'delegated functions NOT used' do
+            before { legal_aid_application.update! used_delegated_functions: false, used_delegated_functions_on: nil }
+            it 'generates a PROCEEDING_LIMITATION_DESC block with value from substantive scope limitation' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_DESC')
+              expect(block).to have_text_response legal_aid_application.substantive_scope_limitation.description
+              expect(block).not_to be_user_defined
+            end
+
+            it 'generates a PROCEEDING_LIMITATION_MEANING block with value from substantive scope limitation' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_MEANING')
+              expect(block).to have_text_response legal_aid_application.substantive_scope_limitation.meaning
+              expect(block).not_to be_user_defined
+            end
+          end
+        end
+
+
       end
     end
   end

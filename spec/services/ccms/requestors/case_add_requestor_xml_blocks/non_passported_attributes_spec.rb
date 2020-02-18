@@ -414,6 +414,14 @@ module CCMS
           end
         end
 
+        context 'PROFIT_COST_FAMILY' do
+          it 'generates a block with the value from the default proceeding' do
+            block = XmlExtractor.call(xml, :proceeding_merits, 'PROFIT_COST_FAMILY')
+            expect(block).to have_currency_response default_cost
+            expect(block).to be_user_defined
+          end
+        end
+
 
         def will_attributes
           %w[
