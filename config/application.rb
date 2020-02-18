@@ -8,7 +8,7 @@ module LaaApplyForLegalAid
   class Application < Rails::Application
     config.load_defaults "6.0"
     config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
-    # zeitwork autoloader is causing errors so use classic
+    # zeitwerk autoloader is causing errors so use classic
     config.autoloader = :classic
 
     config.time_zone = 'London'
