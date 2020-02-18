@@ -317,8 +317,6 @@ module CCMS
                 end
               end
             end
-
-
           end
         end
 
@@ -336,10 +334,50 @@ module CCMS
           end
 
           context 'applicant has vehicle' do
-            before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years_ago.to_date, used_regularly: true }
-            context 'In regular use?' do
+            before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years.ago.to_date, used_regularly: regular_use }
+            let(:regular_use) { true }
+
+            context 'CARANDVEH_INPUT_B_14WP2_28A In regular use?' do
               context 'in regular use' do
-                
+                let(:regular_use) { true }
+                it 'generates the block with a value of true' do
+                  block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_B_14WP2_28A')
+                  expect(block).to have_boolean_response true
+                  expect(block).to be_user_defined
+                end
+              end
+
+              context 'not in regular use' do
+                let(:regular_use) { false }
+                it 'generates the block with a value of true' do
+                  block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_B_14WP2_28A')
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'CARANDVEH_INPUT_C_14WP2_25A current market value' do
+              it 'generates the block with the correct value' do
+                block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_25A')
+                expect(block).to have_currency_response 6500.0
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'CARANDVEH_INPUT_C_14WP2_26A - outstanding loan' do
+              it 'generates the block with the correct value' do
+                block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_26A')
+                expect(block).to have_currency_response 3215.66
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'CARANDVEH_INPUT_D_14WP2_27A - date_of_purchase' do
+              it 'generates the block with the correct value' do
+                block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_D_14WP2_27A')
+                expect(block).to have_date_response 5.years.ago.strftime('%d-%m-%Y')
+                expect(block).to be_user_defined
               end
             end
           end
