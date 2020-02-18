@@ -1024,7 +1024,6 @@ global_merits:
     response_type: text
     generate_block?: true
 
-
 land:
   LAND_INFER_B_5WP2_53A:
     value: true
