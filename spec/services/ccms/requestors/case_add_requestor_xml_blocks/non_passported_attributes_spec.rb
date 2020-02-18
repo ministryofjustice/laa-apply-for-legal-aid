@@ -373,7 +373,7 @@ module CCMS
 
         context 'EMERGENCY_DPS_APP_AMD' do
           context 'delegated functions used' do
-            before{ legal_aid_application.update! used_delegated_functions: true, used_delegated_functions_on: Date.yesterday }
+            before { legal_aid_application.update! used_delegated_functions: true, used_delegated_functions_on: Date.yesterday }
             it 'generates the block with true' do
               block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_DPS_APP_AMD')
               expect(block).to have_boolean_response true
@@ -381,7 +381,7 @@ module CCMS
             end
           end
           context 'delegated functions NOT used' do
-            before{ legal_aid_application.update! used_delegated_functions: false, used_delegated_functions_on: nil }
+            before { legal_aid_application.update! used_delegated_functions: false, used_delegated_functions_on: nil }
             it 'generates the block with true' do
               block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_DPS_APP_AMD')
               expect(block).to have_boolean_response false
@@ -421,7 +421,6 @@ module CCMS
             expect(block).to be_user_defined
           end
         end
-
 
         def will_attributes
           %w[
