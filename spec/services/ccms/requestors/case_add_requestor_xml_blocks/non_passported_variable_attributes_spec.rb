@@ -457,6 +457,31 @@ module CCMS
                 end
               end
             end
+
+
+          end
+        end
+
+        context 'vehicle attributes' do
+          let(:vehicle) { legal_aid_application.vehicle }
+          context 'applicant has no vehicle' do
+            before { vehicle.update! estimated_value: nil }
+            let(:attrs) { %w[CARANDVEH_INPUT_B_14WP2_28A CARANDVEH_INPUT_C_14WP2_25A CARANDVEH_INPUT_C_14WP2_26A CARANDVEH_INPUT_D_14WP2_27] }
+            it 'does not generate the attributes' do
+              attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+
+          context 'applicant has vehicle' do
+            before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years_ago.to_date, used_regularly: true }
+            context 'In regular use?' do
+              context 'in regular use' do
+                
+              end
+            end
           end
         end
 
