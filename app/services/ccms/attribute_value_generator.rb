@@ -66,6 +66,17 @@ module CCMS
              :substantive_scope_limitation,
              :used_delegated_functions?, to: :legal_aid_application
 
+    PROSPECTS_OF_SUCCESS = {
+      likely: 'Good',
+      marginal: 'Marginal',
+      poor: 'Poor',
+      borderline: 'Borderline',
+      uncertain: 'Uncertain'
+    }.freeze
+
+    attr_reader :legal_aid_application
+    delegate :merits_assessment, :vehicle, to: :legal_aid_application
+
     def initialize(submission)
       @submission = submission
       @legal_aid_application = submission.legal_aid_application
