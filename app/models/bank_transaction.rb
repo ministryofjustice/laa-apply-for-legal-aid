@@ -17,4 +17,11 @@ class BankTransaction < ApplicationRecord
   def self.amounts
     group(:transaction_type_id).sum(:amount)
   end
+
+  def self.for_type(transaction_type_name)
+    transaction_type = TransactionType.where(name: transaction_type_name).first
+    return [] if transaction_type.nil?
+
+    where(transaction_type_id: transaction_type.id)
+  end
 end

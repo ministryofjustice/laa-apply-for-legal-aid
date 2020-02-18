@@ -42,7 +42,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
       context 'and the applicant has since been modified' do
         before { applicant.update(first_name: Faker::Name.first_name) }
-        let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
+        let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: application } }
 
         it 'updates check_benefit_result' do
           expect(BenefitCheckService).to receive(:call).and_call_original

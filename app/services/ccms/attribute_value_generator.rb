@@ -1,9 +1,10 @@
 module CCMS
   # This class is used to generate the Attribute key-value XML block within the instances of the
   # various entities on the CCMS add request payload.  Each possible key value pair has an
-  # entry in the /config/ccms/ccms_keys.yml file.
+  # entry in the attribute configuration hash (created by the CCMS::AttributeConfiguration class from
+  # YAML files in the config/ccms/ directory).
   #
-  # Each key in the ccms_keys.yml file has the following attributes:
+  # Each key in the configuration hash file has the following attributes:
   #
   # * generate_block? (optional).  If present, specifies the name of a method to call on this class
   #   to specify whether or not the block should be generated
@@ -20,7 +21,17 @@ module CCMS
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
-    STANDARD_METHOD_NAMES = /^(application|applicant|bank_account|vehicle|wage_slip|appl_proceeding_type|proceeding|other_party|opponent|respondent)_(\S+)$/.freeze
+    STANDARD_METHOD_NAMES = %r{^(application
+                              |applicant
+                              |bank_account
+                              |vehicle
+                              |wage_slip
+                              |appl_proceeding_type
+                              |proceeding
+                              |other_party
+                              |opponent
+                              |respondent
+                              |merits_assessment)_(\S+)$}x.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
@@ -31,6 +42,7 @@ module CCMS
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
     OPPONENT = /^opponent_(\S+)$/.freeze
     RESPONDENT = /^respondent_(\S+)$/.freeze
+    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
 
     def initialize(submission)
       @submission = submission
@@ -184,6 +196,10 @@ module CCMS
       !@legal_aid_application.respondent.warning_letter_sent
     end
 
+    def applicant_owns_main_home?(_options)
+      !@legal_aid_application.own_home_no?
+    end
+
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
       marginal: 'Marginal',
@@ -270,12 +286,12 @@ module CCMS
         options[:wage_slip].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
-      # when OTHER_PARTY  # TODO enable this when a decision is made on how to handle other parties
-      #   options[:other_party].__send__(Regexp.last_match(1))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
+      when MERITS_ASSESSMENT
+        options[:merits_assessment].__send__(Regexp.last_match(1))
       end
     end
 

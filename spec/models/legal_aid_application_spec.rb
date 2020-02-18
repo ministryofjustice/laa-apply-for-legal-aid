@@ -109,6 +109,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'but later, applicant first name updated' do
         before { applicant.update(first_name: Faker::Name.first_name) }
+        let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: legal_aid_application } }
 
         it 'returns true' do
           expect(legal_aid_application).to be_benefit_check_result_needs_updating
@@ -411,12 +412,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#wage_slips' do
-    it 'returns the correct wage slip data' do
-      expect(legal_aid_application.wage_slips).to eq []
-    end
-  end
-
   describe '#opponents' do
     it 'returns the opponent data' do
       expect(legal_aid_application.opponents).to eq [Opponent.dummy_opponent]
@@ -533,12 +528,20 @@ RSpec.describe LegalAidApplication, type: :model do
         it 'returns true' do
           expect(legal_aid_application.applicant_receives_benefit?).to be true
         end
+
+        it 'returns true for the aliased method #passported?' do
+          expect(legal_aid_application.passported?).to be true
+        end
       end
 
       context 'not passported' do
         before { create :benefit_check_result, legal_aid_application: legal_aid_application }
         it 'returns false' do
           expect(legal_aid_application.applicant_receives_benefit?).to be false
+        end
+
+        it 'returns true for the alias non_passported' do
+          expect(legal_aid_application.non_passported?).to be true
         end
       end
 
@@ -580,10 +583,12 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#submitted_assessment' do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checked_merits_answers }
+    let(:feedback_url) { 'http://test/feedback/new' }
 
     it 'schedules a PostSubmissionProcessingJob ' do
       expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
-        legal_aid_application.id
+        legal_aid_application.id,
+        feedback_url
       ).and_call_original
       legal_aid_application.generate_reports!
     end
@@ -642,9 +647,11 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#cfe_result' do
     it 'returns the result associated with the most recent CFE::Submission' do
-      legal_aid_application = create :legal_aid_application
-      submission1 = create :cfe_submission, legal_aid_application: legal_aid_application
-      create :cfe_result, submission: submission1
+      travel(-10.minutes) do
+        legal_aid_application = create :legal_aid_application
+        submission1 = create :cfe_submission, legal_aid_application: legal_aid_application
+        create :cfe_result, submission: submission1
+      end
       submission2 = create :cfe_submission, legal_aid_application: legal_aid_application
       result2 = create :cfe_result, submission: submission2
 

@@ -23,6 +23,7 @@ Lint/RedundantCopDisableDirective:
 Metrics/AbcSize:
   Exclude:
   - 'db/migrate/*'
+  - 'ccms_integration/helpers/ccms_payload_analyser.rb'
 
 Metrics/BlockLength:
   Exclude:
@@ -32,6 +33,12 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
   - 'db/migrate/*'
+  - 'ccms_integration/helpers/ccms_payload_analyser.rb'
+  - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*'
 
 Metrics/ParameterLists:
   Max: 6
@@ -48,3 +55,6 @@ Style/SymbolArray:
 
 Style/Lambda:
   EnforcedStyle: literal
+
+Style/RegexpLiteral:
+  Enabled: false

@@ -16,7 +16,7 @@ module Dashboard
       end
 
       def self.data
-        dates = (6.days.ago.to_date..Date.today).to_a
+        dates = (20.days.ago.to_date..Date.today).to_a
         result_set = []
         dates.each do |date|
           result_set << {
