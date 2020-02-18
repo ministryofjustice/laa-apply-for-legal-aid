@@ -55,3 +55,6 @@ Style/SymbolArray:
 
 Style/Lambda:
   EnforcedStyle: literal
+
+Style/RegexpLiteral:
+  Enabled: false

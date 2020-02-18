@@ -41,8 +41,8 @@ RSpec.describe DependantForm::DetailsForm, type: :form do
     context 'with two character year' do
       let(:year) { date.strftime('%y') }
 
-      context 'in 20st century' do
-        let(:date) { Faker::Date.between from: 100.years.ago, to: turn_of_century }
+      context 'in 20th century' do
+        let(:date) { Faker::Date.between from: 99.years.ago, to: turn_of_century }
 
         it 'constructs correct date' do
           expect(subject.date_of_birth).to eq(date)
