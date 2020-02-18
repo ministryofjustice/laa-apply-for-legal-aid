@@ -546,6 +546,7 @@ global_means:
     user_defined: false
     response_type: text
     generate_block?: true
+<<<<<<< HEAD
   GB_INPUT_B_9WP2_2A:
     value: '#applicant_has_national_savings?'
     br100_meaning: 'Client NSC: The client has NSCs?'
@@ -570,6 +571,12 @@ global_means:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
+  NI_NO:
+    value: '#applicant_national_insurance_number'
+    br100_meaning: Applicant national insurance number
+    user_defined: false
+    response_type: text
+    generate_block?: true
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -987,6 +994,34 @@ global_merits:
   RB_VERSION_NUMBER_MERITS:
     value: LAR v5.15.10
     br100_meaning: The Version Of The Merits Rulebase
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  CERTIFICATE_PREDICTED_COSTS:
+    generate_block?: true
+    value: 25000
+  CHILD_CLIENT:
+    generate_block?: true
+    value: '#applicant_child?'
+  EMERGENCY_DPS_APP_AMD:
+    generate_block?: true
+    value: '#application_used_delegated_functions?'
+  FAM_CERT_PREDICTED_COSTS:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+  MERITS_CERT_PREDICTED_COSTS:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+  PROC_PREDICTED_COST_FAMILY:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    response_type: currency
+    br100_meaning: 'Fam: The Proceeding Family Predicted Costs Under The Certificate'
+    user_defined: false
+
+  NI_NO:
+    value: '#applicant_national_insurance_number'
+    br100_meaning: Applicant national insurance number
     user_defined: false
     response_type: text
     generate_block?: true

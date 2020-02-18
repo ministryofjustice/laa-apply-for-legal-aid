@@ -39,6 +39,7 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:merits_assessment) { legal_aid_application.merits_assessment }
+        let(:applicant) { legal_aid_application.applicant }
 
         context 'family prospects' do
           context '50% or better' do
@@ -399,7 +400,7 @@ module CCMS
                 ]
               end
               it 'does not generate the blocks' do
-                attrs.each do |attr_name|
+                attrs.each do |attr_name|config/ccms/attribute_block_configs/non_passported.yml
                   block = XmlExtractor.call(xml, :global_means, attr_name)
                   expect(block).not_to be_present
                 end
@@ -544,6 +545,16 @@ module CCMS
                 expect(block).to have_date_response 5.years.ago.strftime('%d-%m-%Y')
                 expect(block).to be_user_defined
               end
+            end
+          end
+        end
+
+        context 'NINO' do
+          it 'generates the national insurance number in means and merits' do
+            %i[global_means global_merits].each do |entity|
+              block = XmlExtractor.call(xml, entity, 'NI_NO')
+              expect(block).to have_text_response applicant.national_insurance_number
+              expect(block).not_to be_user_defined
             end
           end
         end
