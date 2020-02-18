@@ -98,24 +98,45 @@ RSpec.describe Applicant, type: :model do
     end
   end
 
-  describe '#receives_financial_support?' do
-    subject { legal_aid_application.applicant.receives_financial_support? }
-
+  context 'income checks' do
     let(:applicant) { create :applicant }
     let(:bank_provider) { create :bank_provider, applicant: applicant }
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }
     let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
+    let!(:property_or_lodger) { create :transaction_type, :credit, name: 'property_or_lodger' }
     let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
     let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
-    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [benefits] }
+    let(:transaction_array) { [benefits] }
+    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: transaction_array }
 
-    context 'when they receive friends and family income' do
-      before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
-      it { is_expected.to be true }
+    describe '#receives_financial_support?' do
+      subject { legal_aid_application.applicant.receives_financial_support? }
+
+      context 'when they receive friends and family income' do
+        before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+        let(:transaction_array) { [benefits, friends_or_family] }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when they do not receive friends and family income' do
+        it { is_expected.to be false }
+      end
     end
 
-    context 'when they do not receive friends and family income' do
-      it { is_expected.to be false }
+    describe '#receives_rental_income?' do
+      subject { legal_aid_application.applicant.receives_rental_income? }
+
+      context 'when they receive rental income' do
+        before { create :bank_transaction, :credit, transaction_type: property_or_lodger, bank_account: bank_account }
+        let(:transaction_array) { [benefits, property_or_lodger] }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when they do not receive friends and family income' do
+        it { is_expected.to be false }
+      end
     end
   end
 end
