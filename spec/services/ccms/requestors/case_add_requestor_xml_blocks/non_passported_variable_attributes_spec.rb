@@ -393,6 +393,51 @@ module CCMS
             end
           end
         end
+
+        context 'gross income' do
+          let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
+          let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+          let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+          let(:bank_provider) { create :bank_provider, applicant: applicant }
+          let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+          let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
+          let(:applicant) { create :applicant, :with_address }
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   :with_negative_benefit_check_result,
+                   :with_proceeding_types,
+                   :with_substantive_scope_limitation,
+                   populate_vehicle: true,
+                   with_bank_accounts: 2,
+                   proceeding_types: [proceeding_type],
+                   provider: provider,
+                   office: office,
+                   applicant: applicant,
+                   transaction_types: [benefits]
+          end
+
+          context 'GB_INPUT_B_8WP3_310A' do
+            context 'when the applicant receives financial support' do
+              before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+
+              it 'generates generates a block with the correct values' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'when the applicant does not receive financial support' do
+              it 'generates does not generate a block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+        end
       end
     end
   end

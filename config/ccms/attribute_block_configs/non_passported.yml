@@ -654,6 +654,12 @@ global_means:
     user_defined: true
     response_type: currency
     generate_block?: false
+  GB_INPUT_B_8WP3_310A:
+    user_defined: true
+    br100_meaning: 'Client Financial Support: Receives financial support?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_receives_financial_support?'
 
 global_merits:
   APP_CARE_SUPERVISION:
