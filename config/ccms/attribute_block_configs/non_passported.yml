@@ -660,6 +660,12 @@ global_means:
     response_type: boolean
     generate_block?: true
     value: '#applicant_receives_financial_support?'
+  GB_INPUT_B_9WP3_351A:
+    user_defined: true
+    br100_meaning: 'Client Rental Income: Receives rental income from another property?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_receives_rental_income?'
 
 global_merits:
   APP_CARE_SUPERVISION:

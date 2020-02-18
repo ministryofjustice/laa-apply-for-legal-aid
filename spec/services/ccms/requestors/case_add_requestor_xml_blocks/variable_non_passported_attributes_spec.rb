@@ -150,11 +150,13 @@ module CCMS
         context 'gross income' do
           let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
           let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+          let(:property_or_lodger) { create :transaction_type, :credit, name: 'property_or_lodger' }
           let(:bank_account) { create :bank_account, bank_provider: bank_provider }
           let(:bank_provider) { create :bank_provider, applicant: applicant }
           let(:bank_account) { create :bank_account, bank_provider: bank_provider }
           let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
           let(:applicant) { create :applicant, :with_address }
+          let(:transaction_array) { [benefits] }
           let(:legal_aid_application) do
             create :legal_aid_application,
                    :with_everything,
@@ -168,12 +170,13 @@ module CCMS
                    provider: provider,
                    office: office,
                    applicant: applicant,
-                   transaction_types: [benefits]
+                   transaction_types: transaction_array
           end
 
           context 'GB_INPUT_B_8WP3_310A' do
             context 'when the applicant receives financial support' do
               before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+              let(:transaction_array) { [benefits, friends_or_family] }
 
               it 'generates generates a block with the correct values' do
                 block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
@@ -185,6 +188,27 @@ module CCMS
             context 'when the applicant does not receive financial support' do
               it 'generates does not generate a block' do
                 block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'GB_INPUT_B_9WP3_351A' do
+            context 'when the applicant receives rental income' do
+              before { create :bank_transaction, :credit, transaction_type: property_or_lodger, bank_account: bank_account }
+              let(:transaction_array) { [benefits, property_or_lodger] }
+
+              it 'generates a block with the correct values' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_351A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'when the applicant does not receive rental income' do
+              it 'generates a block with the correct values' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_351A')
                 expect(block).to have_boolean_response false
                 expect(block).to be_user_defined
               end
