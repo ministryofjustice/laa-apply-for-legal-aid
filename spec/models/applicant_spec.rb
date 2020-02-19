@@ -104,10 +104,13 @@ RSpec.describe Applicant, type: :model do
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }
     let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
     let!(:property_or_lodger) { create :transaction_type, :credit, name: 'property_or_lodger' }
+    let!(:maintenance_in) { create :transaction_type, :credit, name: 'maintenance_in' }
     let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
     let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
     let(:transaction_array) { [benefits] }
     let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: transaction_array }
+    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let(:cfe_result) { create :cfe_result, submission: cfe_submission }
 
     describe '#receives_financial_support?' do
       subject { legal_aid_application.applicant.receives_financial_support? }
@@ -136,6 +139,34 @@ RSpec.describe Applicant, type: :model do
 
       context 'when they do not receive friends and family income' do
         it { is_expected.to be false }
+      end
+    end
+
+    describe '#receives_maintenance?' do
+      subject { legal_aid_application.applicant.receives_maintenance? }
+
+      context 'when they receive maintenance' do
+        let!(:cfe_result) { create :cfe_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when they do not receive maintenance' do
+        it { is_expected.to be false }
+      end
+    end
+
+    describe '#maintenance_per_month' do
+      subject { legal_aid_application.applicant.maintenance_per_month }
+
+      context 'when they receive maintenance' do
+        let!(:cfe_result) { create :cfe_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+        it { is_expected.to eq '150.00' }
+      end
+
+      context 'when they do not receive maintenance' do
+        it { is_expected.to eq '0.0' }
       end
     end
   end

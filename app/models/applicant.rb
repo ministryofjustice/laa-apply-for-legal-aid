@@ -59,4 +59,15 @@ class Applicant < ApplicationRecord
 
     bank_transactions.map(&:transaction_type_id).include?(TransactionType.find_by(name: 'property_or_lodger')&.id)
   end
+
+  def receives_maintenance?
+    maintenance_per_month.to_i.positive?
+  end
+
+  def maintenance_per_month
+    cfe_result = legal_aid_application&.most_recent_cfe_submission&.result
+    return '0.0' unless cfe_result
+
+    JSON.parse(cfe_result.result)['disposable_income']['maintenance_allowance'] || '0.0'
+  end
 end
