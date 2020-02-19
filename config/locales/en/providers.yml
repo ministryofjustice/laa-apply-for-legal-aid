@@ -160,8 +160,8 @@ en:
         assets:
           heading: Property, savings and other assets
         h1-heading: Check your answers
-        merits_assessment_body: You will now need to complete the merits assessment for the proceeding you are applying for.
-        merits_assessment_h2: Merits assessment
+        merits_assessment_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
+        merits_assessment_h2: What happens next
         property: Property
     check_provider_answers:
       index:
