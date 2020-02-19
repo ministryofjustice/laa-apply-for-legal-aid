@@ -12,7 +12,7 @@ class ScheduledMailing < ApplicationRecord
   end
 
   def deliver!
-    mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_later!
+    mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_now
     update!(sent_at: Time.now)
   rescue StandardError => e
     process_error(e)
@@ -30,10 +30,10 @@ class ScheduledMailing < ApplicationRecord
 
   def format_error(error)
     [
-        '*Scheduled Mailing ERROR*',
-        'An error has been raised by ScheduledMailings and logged to Sentry',
-        "*Application* #{legal_aid_application_id}",
-        "#{error.class}: #{error.message}"
+      '*Scheduled Mailing ERROR*',
+      'An error has been raised by ScheduledMailing and logged to Sentry',
+      "*Application* #{legal_aid_application_id}",
+      "#{error.class}: #{error.message}"
     ].join("\n")
   end
 end
