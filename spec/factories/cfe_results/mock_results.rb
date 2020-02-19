@@ -1,5 +1,5 @@
 module CFEResults
-  class MockResults
+  class MockResults # rubocop:disable Metrics/ClassLength
     def self.eligible # rubocop:disable Metrics/MethodLength
       {
         assessment_result: 'eligible',
@@ -54,6 +54,25 @@ module CFEResults
               assessed_value: '0.0'
             }
           ]
+        },
+        disposable_income: {
+          outgoings: {
+            childcare_costs: [],
+            housing_costs: [],
+            maintenance_costs: []
+          },
+          childcare_allowance: '0.0',
+          dependant_allowance: '0.0',
+          maintenance_allowance: '0.0',
+          gross_housing_costs: '0.0',
+          housing_benefit: '0.0',
+          net_housing_costs: '0.0',
+          total_outgoings_and_allowances: '0.0',
+          total_disposable_income: '0.0',
+          lower_threshold: '315.0',
+          upper_threshold: '999999999999.0',
+          assessment_result: 'eligible',
+          income_contribution: '0.0'
         }
       }
     end
@@ -84,6 +103,12 @@ module CFEResults
         assessed_equity: '224000'
       }
       result[:property][:additional_properties] = [property]
+      result
+    end
+
+    def self.with_maintenance_outgoings
+      result = eligible
+      result[:disposable_income][:maintenance_allowance] = '150.00'
       result
     end
   end

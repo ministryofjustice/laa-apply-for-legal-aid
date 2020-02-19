@@ -19,5 +19,9 @@ FactoryBot.define do
     trait :with_additional_properties do
       result { CFEResults::MockResults.with_additional_properties.to_json }
     end
+
+    trait :with_maintenance_outgoings do
+      result { CFEResults::MockResults.with_maintenance_outgoings.to_json }
+    end
   end
 end
