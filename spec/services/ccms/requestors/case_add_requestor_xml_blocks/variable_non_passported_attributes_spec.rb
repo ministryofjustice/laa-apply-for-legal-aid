@@ -214,6 +214,27 @@ module CCMS
               end
             end
           end
+
+          context 'GB_INPUT_B_9WP3_352A' do
+            context 'when the applicant receives rental income' do
+              before { create :bank_transaction, :credit, transaction_type: property_or_lodger, bank_account: bank_account }
+              let(:transaction_array) { [benefits, property_or_lodger] }
+
+              it 'generates a block with the correct values' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_352A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'when the applicant does not receive rental income' do
+              it 'generates a block with the correct values' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_352A')
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
         end
       end
     end
