@@ -102,6 +102,36 @@ additional_property:
     user_defined: true
     response_type: text
     generate_block?: true
+  ADDPROPERTY_INPUT_B_4WP2_16A:
+    value: '#applicant_shares_ownership_of_second_home?'
+    br100_meaning: 'Add. Property: Shared ownership?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: '#applicant_owns_additional_property?'
+  ADDPROPERTY_INPUT_C_4WP2_13A:
+    value: '#other_assets_declaration_second_home_value'
+    br100_meaning: 'Add. Property: Current market value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_owns_additional_property?'
+  ADDPROPERTY_INPUT_C_4WP2_14A:
+    value: '#other_assets_declaration_second_home_mortgage'
+    br100_meaning: 'Add. Property: Current value of any mortgage'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_owns_additional_property?'
+  ADDPROPERTY_INPUT_N_4WP2_22A:
+    value: '#other_assets_declaration_second_home_percentage'
+    br100_meaning: 'Add. Property: % Client'
+    user_defined: true
+    response_type: number
+    generate_block?: '#applicant_owns_additional_property?'
+  GB_INPUT_B_3WP2_29A:
+    value: '#applicant_owns_additional_property?'
+    br100_meaning: 'Add. Property: The client owns additional property?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: '#applicant_owns_additional_property?'
 
 bank_acct:
   BANKACC_INPUT_B_7WP2_12A:
