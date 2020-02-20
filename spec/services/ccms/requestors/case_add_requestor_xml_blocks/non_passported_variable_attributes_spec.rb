@@ -318,6 +318,154 @@ module CCMS
               end
             end
           end
+
+          context 'GB_INPUT_B_9WP2_4A' do
+            context 'applicant has no national savings certificates' do
+              before { savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: nil }
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_4A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'applicant has national savings certificates' do
+              before { savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: 12_116.0 }
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_4A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'GB_INPUT_B_9WP2_5A' do
+            context 'applicant has no premium bonds' do
+              before { savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: nil }
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_5A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'applicant has premium bonds' do
+              before { savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: 12_34.0 }
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_5A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'GB_INPUT_B_9WP2_2A' do
+            context 'applicant has no premium bonds' do
+              before { savings_amount.update! national_savings: nil }
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_2A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'applicant has premium bonds' do
+              before { savings_amount.update! national_savings: 12_34.0 }
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_2A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'GB_INPUT_B_9WP2_3A' do
+            context 'applicant has no premium bonds' do
+              before { savings_amount.update! national_savings: nil }
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_2A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'applicant has premium bonds' do
+              before { savings_amount.update! national_savings: 12_34.0 }
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_3A')
+                expect(block).to have_boolean_response true
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'premium bonds and national savings certificates' do
+            context 'applicant does not own premium bonds and national savings certificates' do
+              before { savings_amount.update! national_savings: nil }
+              let(:attrs) do
+                %w[
+                CLINATIONAL_INPUT_C_9WP2_7A
+                CLIPREMIUM_INPUT_C_9WP2_7A
+              ]
+              end
+              it 'does not generate the blocks' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+
+            context 'applicant does own premium bonds and national savings certificates' do
+              before { savings_amount.update! national_savings: 12_345.0 }
+              let(:attrs) do
+                %w[
+              CLINATIONAL_INPUT_C_9WP2_7A
+              CLIPREMIUM_INPUT_C_9WP2_7A
+            ]
+              end
+              it 'does not generate the blocks' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).to be_present
+                  expect(block).to have_currency_response 12345.0
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+          end
+
+          context 'premium bonds and national savings certificates' do
+            context 'applicant does not own premium bonds and national savings certificates' do
+              before { savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: nil }
+              let(:attrs) do
+                %w[
+                CLISTOCK_INPUT_C_9WP2_7A
+                CLICAPITAL_INPUT_C_9WP2_7A
+              ]
+              end
+              it 'does not generate the blocks' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+
+            context 'applicant does own premium bonds and national savings certificates' do
+              before { savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: 12_345.0 }
+              let(:attrs) do
+                %w[
+                CLISTOCK_INPUT_C_9WP2_7A
+                CLICAPITAL_INPUT_C_9WP2_7A
+              ]
+              end
+              it 'does not generate the blocks' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).to be_present
+                  expect(block).to have_currency_response 12345.0
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+          end
         end
       end
     end

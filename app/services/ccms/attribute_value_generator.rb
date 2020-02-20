@@ -140,6 +140,14 @@ module CCMS
       applicant_owns_additional_property?(options) && @legal_aid_application.other_assets_declaration.second_home_percentage != 100
     end
 
+    def applicant_has_trusts_bonds_or_stocks?(_options)
+      not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
+    end
+
+    def applicant_has_national_savings?(_options)
+      not_zero? savings.national_savings
+    end
+
     def applicant_has_other_capital?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end

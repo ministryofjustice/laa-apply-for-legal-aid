@@ -292,6 +292,12 @@ cli_capital:
     user_defined: true
     response_type: text
     generate_block?: true
+  CLICAPITAL_INPUT_C_9WP2_7A:
+    value: '#savings_amount_peps_unit_trusts_capital_bonds_gov_stocks'
+    br100_meaning: 'Client capital bonds: The interim value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
 
 family_statement:
   FAMILY_STATEMENT_INSTANCE:
@@ -540,6 +546,30 @@ global_means:
     user_defined: false
     response_type: text
     generate_block?: true
+  GB_INPUT_B_9WP2_2A:
+    value: '#applicant_has_national_savings?'
+    br100_meaning: 'Client NSC: The client has NSCs?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_national_savings?'
+  GB_INPUT_B_9WP2_3A:
+    value: '#applicant_has_national_savings?'
+    br100_meaning: 'Client premium bonds: The client has premium bonds?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_national_savings?'
+  GB_INPUT_B_9WP2_4A:
+    value: '#applicant_has_trusts_bonds_or_stocks?'
+    br100_meaning: 'Client capital bonds: The client has capital bonds?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
+  GB_INPUT_B_9WP2_5A:
+    value: '#applicant_has_trusts_bonds_or_stocks?'
+    br100_meaning: 'Client gov. stock: The client has government stock?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -1204,6 +1234,13 @@ national_savings:
     value: '.'
     user_defined: true
     response_type: text
+  CLINATIONAL_INPUT_C_9WP2_7A:
+    generate_block?: '#applicant_has_national_savings?'
+    br100_meaning: 'Client NSC: The interim value'
+    value: '#savings_amount_national_savings'
+    user_defined: true
+    response_type: currency
+
 
 other_capital:
   OTHCAPITAL_INPUT_B_17WP2_1A:
@@ -1325,6 +1362,12 @@ premium_bonds:
     user_defined: true
     response_type: text
     generate_block?: true
+  CLIPREMIUM_INPUT_C_9WP2_7A:
+    generate_block?: '#applicant_has_national_savings?'
+    br100_meaning: 'Client premium bonds: The interim value'
+    value: '#savings_amount_national_savings'
+    user_defined: true
+    response_type: currency
 
 proceeding_means:
   PROC_UPPER_TRIBUNAL:
@@ -1695,6 +1738,12 @@ stocks:
     response_type: boolean
     user_defined: true
     generate_block?: true
+  CLISTOCK_INPUT_C_9WP2_7A:
+    value: '#savings_amount_peps_unit_trusts_capital_bonds_gov_stocks'
+    br100_meaning: 'Client gov. stock: The interim value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
 
 third_party_accounts:
   THIRDPARTACC_INPUT_B_8WP2_11A:
