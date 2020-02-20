@@ -32,7 +32,7 @@ en:
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data
           allow_non_passported_route: Select Yes to allow non-passported route
-          manually_review_all_cases: Select Yes to route all applications to caseworker for review
+          manually_review_all_cases: Select Yes to route all applications to caseworker for review, No to have just those marked for manual review routed to caseworkers
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications

@@ -8,6 +8,7 @@ module Admin
     end
 
     def update
+      binding.pry
       @form = Settings::SettingForm.new(form_params.merge(model: setting))
 
       if @form.save
@@ -20,7 +21,7 @@ module Admin
     private
 
     def form_params
-      params.require(:setting).permit(:mock_true_layer_data, :allow_non_passported_route)
+      params.require(:setting).permit(:mock_true_layer_data, :allow_non_passported_route, :manually_review_all_cases)
     end
 
     def setting
