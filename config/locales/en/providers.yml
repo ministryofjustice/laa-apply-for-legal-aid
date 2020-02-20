@@ -62,9 +62,9 @@ en:
         heading: '%{name} is unlikely to get legal aid'
         detail: This is because they have too much disposable capital.
       contribution_required:
-        heading: '%{name} must pay towards legal aid'
+        heading: '%{name} may need to pay towards legal aid'
         details:
-          - 'Based on their financial situation, your client must pay a contribution of %{amount}.'
+          - 'We’ve calculated that your client should pay %{amount} from their disposable capital.'
           - 'You still have to provide details of the case before we can grant legal aid.'
       manual_check_required:
         heading: We need to check if %{name} should pay towards legal aid
