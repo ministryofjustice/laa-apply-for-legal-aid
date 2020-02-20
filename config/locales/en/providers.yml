@@ -54,7 +54,7 @@ en:
           not_eligible: Not Eligible
           contribution_required: Contribution required
       eligible:
-        heading: '%{name} could be eligible for free legal aid'
+        heading: '%{name} could be eligible for legal aid'
         details:
           - Based on their financial situation, your client may not have to pay towards legal aid.
           - You still have to provide details of the case before we can grant legal aid.
