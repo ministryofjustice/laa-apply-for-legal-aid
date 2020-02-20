@@ -18,17 +18,17 @@ RSpec.describe SavingsAmount, type: :model do
       end
     end
   end
-  describe '#sum_amounts?' do
+  describe '#values?' do
     subject { create :savings_amount, :with_values }
     context 'has savings and investments' do
-      it 'is not zero' do
-        expect(subject.sum_amounts?).not_to eq(0)
+      it 'returns true' do
+        expect(subject.values?).to eq true
       end
     end
     context 'has no savings and investments' do
       subject { create :savings_amount, :all_nil }
-      it 'is zero' do
-        expect(subject.sum_amounts?).to eq(0)
+      it 'returns false' do
+        expect(subject.values?).to eq false
       end
     end
   end

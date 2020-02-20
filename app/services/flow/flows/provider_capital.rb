@@ -19,10 +19,7 @@ module Flow
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
           forward: ->(application) { application.checking_answers? ? :restrictions : :other_assets },
-          carry_on_sub_flow: ->(application) do
-            total_amounts = application.savings_amount.sum_amounts?
-            application.savings_amount? && total_amounts.nonzero?
-          end,
+          carry_on_sub_flow: ->(application) { application.savings_amount? },
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
         },
         other_assets: {

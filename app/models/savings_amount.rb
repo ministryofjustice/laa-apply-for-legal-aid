@@ -3,10 +3,10 @@ class SavingsAmount < ApplicationRecord
 
   belongs_to :legal_aid_application
 
-  def sum_amounts?
+  def values?
     total = 0
     all_attributes.each { |attr| total += __send__(attr) unless __send__(attr).nil? }
-    total
+    total != 0
   end
 
   private
