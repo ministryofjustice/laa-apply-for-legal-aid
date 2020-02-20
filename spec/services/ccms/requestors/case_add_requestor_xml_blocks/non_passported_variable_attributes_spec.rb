@@ -462,6 +462,80 @@ module CCMS
               end
             end
           end
+
+          context 'private and employer pensions' do
+            context 'applicant does not have private and/or employer pensions' do
+              before { transaction_types.credits.update! pension: nil }
+              let(:attrs) do
+                %w[
+                  GB_INPUT_B_9WP3_349A
+                  GB_INPUT_B_9WP3_350A
+                ]
+              end
+              it 'does not generate the blocks' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).not_to be_present
+                end
+              end
+            end
+
+            context 'applicant does have private and/or employer pensions' do
+              before { transaction_types.credits.update! pension: 12_345.0 }
+              let(:attrs) do
+                %w[
+                  GB_INPUT_B_9WP3_349A
+                  GB_INPUT_B_9WP3_350A
+                ]
+              end
+              it 'does not generate the blocks' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).to be_present
+                  expect(block).to have_boolean_response true
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+          end
+
+          context 'GB_INPUT_C_6WP3_323A' do
+            context 'applicant has no pension' do
+              before { transaction_types.credits.update! pension: nil }
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_6WP3_323A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'applicant has pension' do
+              before { transaction_types.credits.update! pension: 2_501.0 }
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :plc_shares, 'GB_INPUT_C_6WP3_323A')
+                expect(block).to have_currency_response 2_501.0
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'GB_INPUT_B_9WP3_353A' do
+            context 'applicant has no student loan/grant' do
+              before { transaction_types.credits.update! student_loan: nil }
+              it 'does not generate the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
+                expect(block).not_to be_present
+              end
+            end
+
+            context 'applicant has student loan/grant' do
+              before { transaction_types.credits.update student_loan: 1_122.0 }
+              it 'generates the block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
+                expect(block).to have_currency_response 1_122.0
+                expect(block).to be_user_defined
+              end
+            end
+          end
         end
       end
     end

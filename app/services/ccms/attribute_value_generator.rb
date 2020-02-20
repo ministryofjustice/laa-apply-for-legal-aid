@@ -33,6 +33,7 @@ module CCMS
                               |respondent
                               |merits_assessment
                               |other_assets_declaration
+                              |transaction_types
                               |savings_amount)_(\S+)$}x.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
@@ -46,6 +47,7 @@ module CCMS
     RESPONDENT = /^respondent_(\S+)$/.freeze
     MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
+    TRANSACTION_TYPE = /^transaction_types(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
 
     def initialize(submission)
@@ -143,6 +145,10 @@ module CCMS
     def applicant_has_trusts_bonds_or_stocks?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
+
+    #def applicant_has_pension?(_options)
+    #  not_zero? transaction_types.pension
+    #end
 
     def applicant_has_national_savings?(_options)
       not_zero? savings.national_savings
