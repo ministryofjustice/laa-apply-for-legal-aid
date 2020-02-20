@@ -2,7 +2,6 @@ module CapitalHelper
   def capital_amounts_list(capital, locale_namespace:, percentage_values: [])
     items = capital_amount_items(capital, locale_namespace, percentage_values)
     items&.compact!
-
     return nil unless items.present?
 
     {

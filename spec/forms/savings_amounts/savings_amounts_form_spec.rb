@@ -124,7 +124,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
         context 'for bank account values' do
           let(:amount_params) do
-            random_value = [rand(1...1_000_000.0).round(2).to_s, (-rand(1...1_000_000.0).round(2).to_s).to_s].sample
+            random_value = [rand(1...1_000_000.0).round(2).to_s, (-rand(1...1_000_000.0).round(2).to_s).to_s, '0'].sample
             attributes.each_with_object({}) do |attr, hsh|
               hsh[attr] = rand(1...1_000_000.0).round(2).to_s
               %i[offline_current_accounts offline_savings_accounts].include?(attr) ? hsh[attr] = random_value : next
