@@ -427,7 +427,7 @@ global_means:
     generate_block?: true
     value: false
     response_type: boolean
-    br100_meaning: 'GB_INPUT_B_9WP3_354A'
+    br100_meaning: 'Client Interest on savings: Earns income from interest on savings?'
     user_defined: true
   GB_INPUT_B_9WP3_355A:
     generate_block?: true
@@ -654,6 +654,30 @@ global_means:
     user_defined: true
     response_type: currency
     generate_block?: false
+  GB_INPUT_B_9WP3_350A:
+    value: '#applicant_has_pension?'
+    br100_meaning: 'Client Pension: Receives a pension from an employer?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_pension?'
+  GB_INPUT_B_9WP3_349A:
+    value: '#applicant_has_pension?'
+    br100_meaning: 'Client Private Pension: Receives a private pension?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_pension?'
+  GB_INPUT_B_9WP3_353A:
+    value: '#applicant_has_student_loan?'
+    br100_meaning: 'Client Student Income: Receives a student loan/grant or bursary?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_student_loan?' # we dont pass through the student loan value at any point which we do with pension
+  GB_INPUT_C_6WP3_323A:
+    value: '#applicant_has_pension?' # this needs to be changed as it needs to return the value of the pension
+    br100_meaning: 'Client State Pension: Amount received'
+    response_type: currency
+    user_defined: true
+    generate_block?: '#applicant_has_pension?'
 
 global_merits:
   APP_CARE_SUPERVISION:

@@ -1,4 +1,4 @@
-module CCMS
+  module CCMS
   # This class is used to generate the Attribute key-value XML block within the instances of the
   # various entities on the CCMS add request payload.  Each possible key value pair has an
   # entry in the attribute configuration hash (created by the CCMS::AttributeConfiguration class from
@@ -34,6 +34,7 @@ module CCMS
                                 |proceeding
                                 |respondent
                                 |savings_amount
+                                |transaction_types
                                 |vehicle
                                 |wage_slip
                                 )_(\S+)$}x.freeze
@@ -49,6 +50,7 @@ module CCMS
     RESPONDENT = /^respondent_(\S+)$/.freeze
     MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
+    TRANSACTION_TYPE = /^transaction_types_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
@@ -160,6 +162,14 @@ module CCMS
 
     def applicant_has_trusts_bonds_or_stocks?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
+    end
+
+    def applicant_has_pension?(_options)
+      not_zero? transaction_types.pension
+    end
+
+    def applicant_has_student_loan?(_options)
+      not_zero? transaction_types.student_loan
     end
 
     def applicant_has_national_savings?(_options)
