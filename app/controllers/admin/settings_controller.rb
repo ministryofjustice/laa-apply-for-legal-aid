@@ -8,7 +8,6 @@ module Admin
     end
 
     def update
-      binding.pry
       @form = Settings::SettingForm.new(form_params.merge(model: setting))
 
       if @form.save
