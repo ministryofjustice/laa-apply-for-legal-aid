@@ -241,6 +241,84 @@ module CCMS
             end
           end
         end
+
+        context 'additional property' do
+          context 'applicant does not own additional property' do
+            before { other_assets_decl.update! second_home_value: nil }
+            let(:attrs) do
+              %w[
+                ADDPROPERTY_INPUT_B_4WP2_16A
+                ADDPROPERTY_INPUT_C_4WP2_13A
+                ADDPROPERTY_INPUT_C_4WP2_14A
+                ADDPROPERTY_INPUT_N_4WP2_22A
+                GB_INPUT_B_3WP2_29A
+              ]
+            end
+            it 'does not generate the blocks' do
+              attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :additional_property, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+
+          context 'applicant owns additional property' do
+            before { other_assets_decl.update! second_home_value: 120_634, second_home_mortgage: 45_933 }
+            context 'applicant owns 100% of addtional property' do
+              before { other_assets_decl.update! second_home_percentage: 100.0 }
+              let(:attrs) do
+                {
+                  'ADDPROPERTY_INPUT_B_4WP2_16A' => false,
+                  'ADDPROPERTY_INPUT_C_4WP2_13A' => 120_634,
+                  'ADDPROPERTY_INPUT_C_4WP2_14A' => 45_933,
+                  'ADDPROPERTY_INPUT_N_4WP2_22A' => 100.0,
+                  'GB_INPUT_B_3WP2_29A' => true
+                }
+              end
+              it 'generates attrs with expected values' do
+                attrs.each do |attr_name, expected_value|
+                  block = XmlExtractor.call(xml, :additional_property, attr_name)
+                  case attr_name
+                  when 'ADDPROPERTY_INPUT_B_4WP2_16A', 'GB_INPUT_B_3WP2_29A'
+                    expect(block).to have_boolean_response expected_value
+                  when 'ADDPROPERTY_INPUT_N_4WP2_22A'
+                    expect(block).to have_number_response expected_value
+                  else
+                    expect(block).to have_currency_response expected_value
+                  end
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'applicant shares ownership of additional property' do
+              before { other_assets_decl.update! second_home_percentage: 50.0, second_home_mortgage: 0.0 }
+              let(:attrs) do
+                {
+                  'ADDPROPERTY_INPUT_B_4WP2_16A' => true,
+                  'ADDPROPERTY_INPUT_C_4WP2_13A' => 120_634,
+                  'ADDPROPERTY_INPUT_C_4WP2_14A' => 0.0,
+                  'ADDPROPERTY_INPUT_N_4WP2_22A' => 50.0,
+                  'GB_INPUT_B_3WP2_29A' => true
+                }
+              end
+              it 'generates attrs with expected values' do
+                attrs.each do |attr_name, expected_value|
+                  block = XmlExtractor.call(xml, :additional_property, attr_name)
+                  case attr_name
+                  when 'ADDPROPERTY_INPUT_B_4WP2_16A', 'GB_INPUT_B_3WP2_29A'
+                    expect(block).to have_boolean_response expected_value
+                  when 'ADDPROPERTY_INPUT_N_4WP2_22A'
+                    expect(block).to have_number_response expected_value
+                  else
+                    expect(block).to have_currency_response expected_value
+                  end
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+          end
+        end
       end
     end
   end
