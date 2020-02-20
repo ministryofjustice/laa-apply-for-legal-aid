@@ -1,0 +1,28 @@
+<%= page_template(
+  page_title: t('.heading_1'),
+  column_width: :full,
+  back_link: :none
+  ) do %>
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col"><%= 'Report name' %></th>
+          <th class="govuk-table__header" scope="col"><%= 'Action' %></th>
+        </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        <% @reports.each do |_key, report| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell case-full-name"><%= report[:report_title] %></td>
+            <td class="govuk-table__cell"><%= link_to(report[:path_text], __send__(report[:path], format: :csv)) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
