@@ -1054,7 +1054,7 @@ module CCMS
           end
 
           context 'GB_INPUT_B_7WP2_1A negative values in bank accounts' do
-            it 'returns false when applicant does NOT have bank accounts' do
+            it 'returns false when applicant has negative values in bank accounts' do
               random_negative_value = -rand(1...1_000_000.0).round(2)
               allow(legal_aid_application.savings_amount).to receive(:offline_current_accounts).and_return(random_negative_value)
               allow(legal_aid_application.savings_amount).to receive(:offline_savings_accounts).and_return(random_negative_value)
