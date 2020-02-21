@@ -570,6 +570,12 @@ global_means:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
+  NI_NO:
+    value: '#applicant_national_insurance_number'
+    br100_meaning: Applicant national insurance number
+    user_defined: false
+    response_type: text
+    generate_block?: true
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -990,6 +996,34 @@ global_merits:
     user_defined: false
     response_type: text
     generate_block?: true
+  CERTIFICATE_PREDICTED_COSTS:
+    generate_block?: true
+    value: 25000
+  CHILD_CLIENT:
+    generate_block?: true
+    value: '#applicant_child?'
+  EMERGENCY_DPS_APP_AMD:
+    generate_block?: true
+    value: '#application_used_delegated_functions?'
+  FAM_CERT_PREDICTED_COSTS:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+  MERITS_CERT_PREDICTED_COSTS:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+  PROC_PREDICTED_COST_FAMILY:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    response_type: currency
+    br100_meaning: 'Fam: The Proceeding Family Predicted Costs Under The Certificate'
+    user_defined: false
+  NI_NO:
+    value: '#applicant_national_insurance_number'
+    br100_meaning: Applicant national insurance number
+    user_defined: false
+    response_type: text
+    generate_block?: true
+
 
 land:
   LAND_INFER_B_5WP2_53A:
@@ -1711,6 +1745,24 @@ proceeding_merits:
     br100_meaning: Smod Is Applicable To The Proceeding
     user_defined: false
     response_type: text
+    generate_block?: true
+  PROCEEDING_LIMITATION_DESC:
+    value: "#proceeding_limitation_desc"
+    br100_meaning: 'Proc: The Proceeding Limitation Description'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROCEEDING_LIMITATION_MEANING:
+    value: "#proceeding_limitation_meaning"
+    br100_meaning: 'Proc: The Proceeding Limitation Description'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROFIT_COST_FAMILY:
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    br100_meaning: 'Fam: The Profit Costs To Completion Of The Family Proceeding'
+    response_type: currency
+    user_defined: true
     generate_block?: true
 
 stocks:
