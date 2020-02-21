@@ -330,6 +330,12 @@ global_means:
   CLIENT_VULNERABLE:
     generate_block?: true
     value: false
+  GB_INPUT_B_14WP3_1A:
+    generate_block?: true
+    value: '#outgoing_legal_aid?'
+  GB_INPUT_B_12WP3_3A:
+    generate_block?: true
+    value: '#outgoing_maintenance?'
   GB_INFER_B_26WP3_214A:
     generate_block?: true
     value: false
