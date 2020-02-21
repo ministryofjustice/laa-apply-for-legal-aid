@@ -458,8 +458,6 @@ module CCMS
                 end
               end
             end
-
-
           end
         end
 
@@ -480,7 +478,6 @@ module CCMS
             before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years_ago.to_date, used_regularly: true }
             context 'In regular use?' do
               context 'in regular use' do
-                
               end
             end
           end
