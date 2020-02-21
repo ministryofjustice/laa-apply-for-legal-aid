@@ -1,5 +1,5 @@
-class GovukNotifyMailerJob < ActionMailer::DeliveryJob
-  def perform(mailer, mail_method, delivery_method, *args)
+class GovukNotifyMailerJob < ActionMailer::MailDeliveryJob
+  def perform(mailer, mail_method, delivery_method, args: nil)
     email_args, govuk_message_id = extract_govuk_message_id(args)
     GovukEmails::EmailMonitor.call(
       mailer: mailer,

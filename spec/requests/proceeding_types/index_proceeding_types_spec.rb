@@ -13,7 +13,7 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
         expected_json = []
 
         expect(response).to have_http_status(200)
-        expect(response.content_type).to eq('application/json')
+        expect(response.media_type).to eq('application/json')
         expect(response.body).to match_json_expression(expected_json)
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe 'GET /v1/proceeding_types', type: :request do
         ]
 
         expect(response).to have_http_status(200)
-        expect(response.content_type).to eql('application/json')
+        expect(response.media_type).to eql('application/json')
         expect(response.body).to match_json_expression(expected_json)
       end
     end

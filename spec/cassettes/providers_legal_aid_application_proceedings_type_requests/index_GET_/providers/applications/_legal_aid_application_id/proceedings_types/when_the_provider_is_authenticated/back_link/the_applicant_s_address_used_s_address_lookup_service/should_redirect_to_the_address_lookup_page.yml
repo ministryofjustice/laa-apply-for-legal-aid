@@ -2,52 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&postcode=YO4B0LJ
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 400
-      message: Bad Request
-    headers:
-      Content-Type:
-      - application/json;charset=UTF-8
-      Date:
-      - Wed, 06 Feb 2019 14:37:04 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Content-Length:
-      - '189'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "error" : {
-            "statuscode" : 400,
-            "message" : "Requested postcode must contain a minimum of the sector plus 1 digit of the district e.g. SO1. Requested postcode was YO4B0LJ"
-          }
-        }
-    http_version: 
-  recorded_at: Wed, 06 Feb 2019 14:37:04 GMT
-- request:
-    method: get
     uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=YO4B0LJ
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - Faraday v0.17.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -57,14 +18,12 @@ http_interactions:
       code: 400
       message: Bad Request
     headers:
+      Date:
+      - Thu, 06 Feb 2020 10:47:20 GMT
       Content-Type:
       - application/json;charset=UTF-8
-      Date:
-      - Thu, 11 Apr 2019 10:39:11 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Content-Length:
-      - '189'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
@@ -77,5 +36,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Thu, 11 Apr 2019 10:39:11 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Thu, 06 Feb 2020 10:47:16 GMT
+recorded_with: VCR 5.0.0

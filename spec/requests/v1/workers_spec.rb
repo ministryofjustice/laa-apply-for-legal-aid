@@ -23,7 +23,7 @@ RSpec.describe 'GET /v1/workers', type: :request do
       expected_json = worker_status.slice('status', 'errors')
 
       expect(response).to have_http_status(200)
-      expect(response.content_type).to eql('application/json')
+      expect(response.media_type).to eql('application/json')
       expect(response.body).to match_json_expression(expected_json)
     end
   end

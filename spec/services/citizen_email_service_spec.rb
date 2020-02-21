@@ -28,7 +28,6 @@ RSpec.describe CitizenEmailService do
         allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
         allow_any_instance_of(DashboardEventHandler).to receive(:call).and_return(double(DashboardEventHandler))
       end
-
       it 'sends an email with the right parameters' do
         expect_any_instance_of(NotifyMailer)
           .to receive(:set_personalisation)

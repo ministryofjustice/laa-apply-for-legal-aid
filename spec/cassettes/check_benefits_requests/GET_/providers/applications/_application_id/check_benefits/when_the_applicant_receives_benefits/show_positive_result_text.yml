@@ -1,0 +1,515 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.geckoboard.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 611f51f1-5919-4255-aaf5-2d41f4985231
+      X-Instance-Id:
+      - i-02232cf8416e70a02
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:10 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.number_provider_firms
+    body:
+      encoding: UTF-8
+      string: '{"fields":{"number":{"name":"Firms","optional":false,"type":"number"}}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '212'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 5e0e1a08-0fad-4e42-bc56-e0d9e093abfa
+      X-Instance-Id:
+      - i-0b11245a0b0cfd4ee
+    body:
+      encoding: UTF-8
+      string: '{"id":"apply_for_legal_aid.test.number_provider_firms","fields":{"number":{"type":"number","optional":false,"name":"Firms"}},"created_at":"2020-02-10T11:25:57.602591Z","updated_at":"2020-02-10T11:26:16.652195Z"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:10 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.number_provider_firms/data
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"number":0}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 51bbabcd-8fdb-46d4-ba66-7c05e5ea32c1
+      X-Instance-Id:
+      - i-012ea96ced5161506
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:11 GMT
+- request:
+    method: get
+    uri: https://api.geckoboard.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - ff33d984-ceb7-456a-a0ca-278d4544dad5
+      X-Instance-Id:
+      - i-0cf1294cfa539585e
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:11 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.daily_new_providers
+    body:
+      encoding: UTF-8
+      string: '{"fields":{"date":{"name":"Date","type":"date"},"number":{"name":"Applications","optional":false,"type":"number"}},"unique_by":["date"]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '292'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 9cbd33cc-5fba-4a1e-810b-a897a8fbb6a5
+      X-Instance-Id:
+      - i-0cf1294cfa539585e
+    body:
+      encoding: UTF-8
+      string: '{"id":"apply_for_legal_aid.test.daily_new_providers","fields":{"date":{"type":"date","optional":false,"name":"Date"},"number":{"type":"number","optional":false,"name":"Applications"}},"unique_by":["date"],"created_at":"2020-02-10T11:25:58.763783Z","updated_at":"2020-02-10T11:26:17.974065Z"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:11 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.daily_new_providers/data
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"date":"2020-02-04","number":0},{"date":"2020-02-05","number":0},{"date":"2020-02-06","number":0},{"date":"2020-02-07","number":0},{"date":"2020-02-08","number":0},{"date":"2020-02-09","number":0},{"date":"2020-02-10","number":0}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 2b1d6740-9375-410c-a8f2-6280548bcf84
+      X-Instance-Id:
+      - i-0959545e1516cafbb
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:12 GMT
+- request:
+    method: get
+    uri: https://api.geckoboard.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:23 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - ec96a4ca-6fcd-4bbd-8029-92376fb650f6
+      X-Instance-Id:
+      - i-02232cf8416e70a02
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:12 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.applications
+    body:
+      encoding: UTF-8
+      string: '{"fields":{"date":{"name":"Date","type":"date"},"started_apps":{"name":"Started
+        applications","optional":false,"type":"number"},"submitted_apps":{"name":"Submitted
+        applications","optional":false,"type":"number"},"total_submitted_apps":{"name":"Total
+        submitted applications","optional":false,"type":"number"},"failed_apps":{"name":"Failed
+        applications","optional":false,"type":"number"},"delegated_func_apps":{"name":"Delegated
+        function applications","optional":false,"type":"number"}},"unique_by":["date"]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:23 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '655'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 36dab476-ab1a-4979-9d31-1f241f3d5436
+      X-Instance-Id:
+      - i-0b11245a0b0cfd4ee
+    body:
+      encoding: UTF-8
+      string: '{"id":"apply_for_legal_aid.test.applications","fields":{"date":{"type":"date","optional":false,"name":"Date"},"delegated_func_apps":{"type":"number","optional":false,"name":"Delegated
+        function applications"},"failed_apps":{"type":"number","optional":false,"name":"Failed
+        applications"},"started_apps":{"type":"number","optional":false,"name":"Started
+        applications"},"submitted_apps":{"type":"number","optional":false,"name":"Submitted
+        applications"},"total_submitted_apps":{"type":"number","optional":false,"name":"Total
+        submitted applications"}},"unique_by":["date"],"created_at":"2020-02-10T11:26:00.373814Z","updated_at":"2020-02-10T11:26:20.542479Z"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:13 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.applications/data
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"date":"2020-02-04","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-05","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-06","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-07","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-08","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-09","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-10","started_apps":1,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 4cdd0062-49d6-4e15-b935-e56f8cef5c4b
+      X-Instance-Id:
+      - i-02232cf8416e70a02
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:13 GMT
+- request:
+    method: get
+    uri: https://api.geckoboard.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 06137adb-4544-404c-8881-abbbd9fae23f
+      X-Instance-Id:
+      - i-0cf1294cfa539585e
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:13 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.applications
+    body:
+      encoding: UTF-8
+      string: '{"fields":{"date":{"name":"Date","type":"date"},"started_apps":{"name":"Started
+        applications","optional":false,"type":"number"},"submitted_apps":{"name":"Submitted
+        applications","optional":false,"type":"number"},"total_submitted_apps":{"name":"Total
+        submitted applications","optional":false,"type":"number"},"failed_apps":{"name":"Failed
+        applications","optional":false,"type":"number"},"delegated_func_apps":{"name":"Delegated
+        function applications","optional":false,"type":"number"}},"unique_by":["date"]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '655'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 2758cc57-0a42-4379-be92-3d157660e258
+      X-Instance-Id:
+      - i-0959545e1516cafbb
+    body:
+      encoding: UTF-8
+      string: '{"id":"apply_for_legal_aid.test.applications","fields":{"date":{"type":"date","optional":false,"name":"Date"},"delegated_func_apps":{"type":"number","optional":false,"name":"Delegated
+        function applications"},"failed_apps":{"type":"number","optional":false,"name":"Failed
+        applications"},"started_apps":{"type":"number","optional":false,"name":"Started
+        applications"},"submitted_apps":{"type":"number","optional":false,"name":"Submitted
+        applications"},"total_submitted_apps":{"type":"number","optional":false,"name":"Total
+        submitted applications"}},"unique_by":["date"],"created_at":"2020-02-10T11:26:00.373814Z","updated_at":"2020-02-10T11:26:23.995407Z"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:14 GMT
+- request:
+    method: put
+    uri: https://api.geckoboard.com/datasets/apply_for_legal_aid.test.applications/data
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"date":"2020-02-04","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-05","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-06","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-07","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-08","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-09","started_apps":0,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0},{"date":"2020-02-10","started_apps":1,"submitted_apps":0,"total_submitted_apps":0,"failed_apps":0,"delegated_func_apps":0}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Geckoboard-Ruby/0.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZjU5YzVmMTI5YmU4MTNjMzA0ZGVkYzk3OTc5MmMwOTE6
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 10 Feb 2020 11:26:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      X-Request-Id:
+      - 427ca8a3-66a8-412a-9f43-7b77221b4704
+      X-Instance-Id:
+      - i-0cf1294cfa539585e
+    body:
+      encoding: UTF-8
+      string: "{}\n"
+    http_version: 
+  recorded_at: Mon, 10 Feb 2020 11:26:14 GMT
+recorded_with: VCR 5.0.0
