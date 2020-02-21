@@ -38,11 +38,39 @@ module CFE
       end
 
       def property
-        result_hash[:property]
+        capital[:capital_items][:properties]
       end
 
       def main_home
         property[:main_home]
+      end
+
+      def gross_income
+        result_hash[:gross_income]
+      end
+
+      ################################################################
+      #                                                              #
+      #  INCOME VALUES                                               #
+      #                                                              #
+      ################################################################
+
+      def monthly_other_income
+        gross_income[:value].to_d
+      end
+
+      ################################################################
+      #                                                              #
+      #  OUTGOINGS VALUES                                            #
+      #                                                              #
+      ################################################################
+
+      def outgoings
+        result_hash[:disposable_income][:outgoings]
+      end
+
+      def housing_costs
+        outgoings[:housing_costs]
       end
 
       ################################################################
@@ -50,6 +78,7 @@ module CFE
       #  MAIN HOME VALUES                                            #
       #                                                              #
       ################################################################
+
       def main_home_value
         main_home[:value].to_d
       end
@@ -102,16 +131,42 @@ module CFE
 
       ################################################################
       #                                                              #
-      #  VEHICLE                                                     #
+      #  CAPITAL ITEMS                                               #
+      #                                                              #
+      ################################################################
+
+      def non_liquid_capital_items
+        capital[:non_liquid].sort_by { |item| item[:description] }
+      end
+
+      def liquid_capital_items
+        capital[:liquid].sort_by { |item| item[:description] }
+      end
+
+      def total_property
+        capital[:total_property].to_d
+      end
+
+      def total_savings
+        capital[:total_liquid].to_d
+      end
+
+      def total_other_assets
+        capital[:total_non_liquid].to_d
+      end
+
+      ################################################################
+      #                                                              #
+      #  VEHICLE   A subset of capital_items                         #
       #                                                              #
       ################################################################
 
       def vehicle
-        result_hash[:vehicles][:vehicles].first
+        result_hash[:capital_items][:vehicles].first
       end
 
       def vehicles?
-        result_hash[:vehicles][:vehicles].any?
+        result_hash[:capital_items][:vehicles].any?
       end
 
       def vehicle_value
@@ -127,37 +182,11 @@ module CFE
       end
 
       def vehicle_assessed_amount
-        vehicle[:assessed_amount].to_d
+        vehicle[:assessed_value].to_d
       end
 
       def total_vehicles
-        result_hash[:vehicles][:total_vehicle].to_d
-      end
-
-      ################################################################
-      #                                                              #
-      #  CAPITAL ITEMS                                               #
-      #                                                              #
-      ################################################################
-
-      def non_liquid_capital_items
-        capital[:non_liquid_capital_items].sort_by { |item| item[:description] }
-      end
-
-      def liquid_capital_items
-        capital[:liquid_capital_items].sort_by { |item| item[:description] }
-      end
-
-      def total_property
-        property[:total_property].to_d
-      end
-
-      def total_savings
-        capital[:total_liquid].to_d
-      end
-
-      def total_other_assets
-        capital[:total_non_liquid].to_d
+        capital[:total_vehicle].to_d
       end
 
       ################################################################
