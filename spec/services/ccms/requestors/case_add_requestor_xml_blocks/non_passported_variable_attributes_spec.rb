@@ -400,7 +400,8 @@ module CCMS
                 ]
               end
               it 'does not generate the blocks' do
-                attrs.each do |attr_name|config/ccms/attribute_block_configs/non_passported.yml
+                attrs.each do |attr_name|
+                  config / ccms / attribute_block_configs / non_passported.yml
                   block = XmlExtractor.call(xml, :global_means, attr_name)
                   expect(block).not_to be_present
                 end
