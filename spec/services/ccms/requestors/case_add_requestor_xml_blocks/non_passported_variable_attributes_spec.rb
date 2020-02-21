@@ -401,7 +401,6 @@ module CCMS
               end
               it 'does not generate the blocks' do
                 attrs.each do |attr_name|
-                  config / ccms / attribute_block_configs / non_passported.yml
                   block = XmlExtractor.call(xml, :global_means, attr_name)
                   expect(block).not_to be_present
                 end
@@ -476,6 +475,28 @@ module CCMS
           end
 
           context 'applicant has vehicle' do
+            before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years_ago.to_date, used_regularly: true }
+            context 'In regular use?' do
+              context 'in regular use' do
+              end
+            end
+          end
+        end
+
+        context 'vehicle attributes' do
+          let(:vehicle) { legal_aid_application.vehicle }
+          context 'applicant has no vehicle' do
+            before { vehicle.update! estimated_value: nil }
+            let(:attrs) { %w[CARANDVEH_INPUT_B_14WP2_28A CARANDVEH_INPUT_C_14WP2_25A CARANDVEH_INPUT_C_14WP2_26A CARANDVEH_INPUT_D_14WP2_27] }
+            it 'does not generate the attributes' do
+              attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
+                expect(block).not_to be_present
+              end
+            end
+          end
+
+          context 'applicant has vehicle' do
             before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years.ago.to_date, used_regularly: regular_use }
             let(:regular_use) { true }
 
@@ -530,38 +551,6 @@ module CCMS
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'NI_NO')
               expect(block).to have_text_response applicant.national_insurance_number
-              expect(block).not_to be_user_defined
-            end
-          end
-        end
-
-        context 'Proceeding limitation attrs' do
-          context 'delegated functions used' do
-            before { legal_aid_application.update! used_delegated_functions: true, used_delegated_functions_on: Date.yesterday }
-            it 'generates a PROCEEDING_LIMITATION_DESC block with value MULTIPLE' do
-              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_DESC')
-              expect(block).to have_text_response 'MULTIPLE'
-              expect(block).not_to be_user_defined
-            end
-
-            it 'generates a PROCEEDING_LIMITATION_MEANING block with value MULTIPLE' do
-              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_MEANING')
-              expect(block).to have_text_response 'MULTIPLE'
-              expect(block).not_to be_user_defined
-            end
-          end
-
-          context 'delegated functions NOT used' do
-            before { legal_aid_application.update! used_delegated_functions: false, used_delegated_functions_on: nil }
-            it 'generates a PROCEEDING_LIMITATION_DESC block with value from substantive scope limitation' do
-              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_DESC')
-              expect(block).to have_text_response legal_aid_application.substantive_scope_limitation.description
-              expect(block).not_to be_user_defined
-            end
-
-            it 'generates a PROCEEDING_LIMITATION_MEANING block with value from substantive scope limitation' do
-              block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LIMITATION_MEANING')
-              expect(block).to have_text_response legal_aid_application.substantive_scope_limitation.meaning
               expect(block).not_to be_user_defined
             end
           end
