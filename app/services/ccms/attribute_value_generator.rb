@@ -48,6 +48,17 @@ module CCMS
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
 
+    PROSPECTS_OF_SUCCESS = {
+      likely: 'Good',
+      marginal: 'Marginal',
+      poor: 'Poor',
+      borderline: 'Borderline',
+      uncertain: 'Uncertain'
+    }.freeze
+
+    attr_reader :legal_aid_application
+    delegate :merits_assessment, :vehicle, to: :legal_aid_application
+
     def initialize(submission)
       @submission = submission
       @legal_aid_application = submission.legal_aid_application
@@ -208,16 +219,9 @@ module CCMS
       !@legal_aid_application.own_home_no?
     end
 
-    PROSPECTS_OF_SUCCESS = {
-      likely: 'Good',
-      marginal: 'Marginal',
-      poor: 'Poor',
-      borderline: 'Borderline',
-      uncertain: 'Uncertain'
-    }.freeze
-
-    attr_reader :legal_aid_application
-    delegate :merits_assessment, to: :legal_aid_application
+    def applicant_has_vehicle?(_options)
+      vehicle.present? && not_zero?(vehicle.estimated_value)
+    end
 
     def ccms_equivalent_prospects_of_success(_options)
       PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
