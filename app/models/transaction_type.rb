@@ -49,6 +49,11 @@ class TransactionType < ApplicationRecord
     I18n.t("transaction_types.names.#{journey}.#{name}")
   end
 
+  def self.for_outgoing_type?(transaction_type_name)
+    transaction_type = TransactionType.where(name: transaction_type_name, operation: :debit).first
+    transaction_type.present?
+  end
+
   def citizens_label_name
     label_name(journey: :citizens)
   end

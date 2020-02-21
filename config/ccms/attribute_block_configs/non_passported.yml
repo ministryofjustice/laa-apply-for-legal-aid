@@ -335,7 +335,7 @@ global_means:
     value: '#outgoing_legal_aid?'
   GB_INPUT_B_12WP3_3A:
     generate_block?: true
-    value: '#outgoing_maintenance?'
+    value: '#outgoing_maintenance_out?'
   GB_INFER_B_26WP3_214A:
     generate_block?: true
     value: false
