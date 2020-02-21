@@ -25,7 +25,7 @@ module CFE
     end
 
     def submission
-      @submission ||= CFE::Submission.create!(legal_aid_application_id: legal_aid_application_id)
+      @submission ||= CFE::V1::Submission.create!(legal_aid_application_id: legal_aid_application_id)
     end
   end
 end

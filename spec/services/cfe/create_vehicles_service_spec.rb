@@ -51,7 +51,7 @@ module CFE
           expect {
             CreateVehiclesService.call(submission)
           }.to change { submission.submission_histories.count }.by 1
-          history = CFE::SubmissionHistory.last
+          history = CFE::V1::SubmissionHistory.last
           expect(history.submission_id).to eq submission.id
           expect(history.url).to eq service.cfe_url
           expect(history.http_method).to eq 'POST'
