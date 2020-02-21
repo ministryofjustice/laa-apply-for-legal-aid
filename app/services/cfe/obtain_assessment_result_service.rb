@@ -32,7 +32,8 @@ module CFE
       CFE::V1::Result.create!(
         legal_aid_application_id: legal_aid_application.id,
         submission_id: @submission.id,
-        result: @response.body
+        result: @response.body,
+        type: 'CFE::V1::Result'
       )
     end
   end
