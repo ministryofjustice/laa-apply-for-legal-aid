@@ -347,7 +347,6 @@ module CCMS
               it 'does not generate the blocks' do
                 attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :global_means, attr_name)
-                  expect(block).to be_present
                   expect(block).to have_boolean_response true
                   expect(block).to be_user_defined
                 end
@@ -383,7 +382,6 @@ module CCMS
               it 'does not generate the blocks' do
                 attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :global_means, attr_name)
-                  expect(block).to be_present
                   expect(block).to have_boolean_response true
                   expect(block).to be_user_defined
                 end
@@ -419,7 +417,6 @@ module CCMS
               it 'does not generate the blocks' do
                 attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :global_means, attr_name)
-                  expect(block).to be_present
                   expect(block).to have_currency_response 12_345.0
                   expect(block).to be_user_defined
                 end
@@ -455,7 +452,6 @@ module CCMS
               it 'does not generate the blocks' do
                 attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :global_means, attr_name)
-                  expect(block).to be_present
                   expect(block).to have_currency_response 12_345.0
                   expect(block).to be_user_defined
                 end
