@@ -68,6 +68,6 @@ class Applicant < ApplicationRecord
     cfe_result = legal_aid_application&.most_recent_cfe_submission&.result
     return '0.0' unless cfe_result
 
-    JSON.parse(cfe_result.result)['disposable_income']['maintenance_allowance'] || '0.0'
+    format('%<amount>.2f', amount: cfe_result.maintenance_per_month).to_s || '0.0'
   end
 end

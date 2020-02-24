@@ -7,6 +7,7 @@ module CFE
     let(:contibution_required_result) { create :cfe_result, :contribution_required }
     let(:no_additional_properties) { create :cfe_result, :no_additional_properties }
     let(:additional_property) { create :cfe_result, :with_additional_properties }
+    let(:with_maintenance) { create :cfe_result, :with_maintenance_outgoings }
 
     describe '#assessment_result' do
       context 'eligible' do
@@ -73,6 +74,18 @@ module CFE
     describe 'additional_property_assessed_equity' do
       it 'returns the assessed equity for the first additional property' do
         expect(additional_property.additional_property_assessed_equity).to eq 224_000.0
+      end
+    end
+
+    describe 'maintenance_per_month' do
+      context 'when maintenance is received' do
+        subject(:maintenance_per_month) { with_maintenance.maintenance_per_month }
+        it { is_expected.to eq 150.00 }
+      end
+
+      context 'when maintenance is not received' do
+        subject(:maintenance_per_month) { eligible_result.maintenance_per_month }
+        it { is_expected.to eq 0.00 }
       end
     end
   end
