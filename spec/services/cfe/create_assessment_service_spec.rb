@@ -49,7 +49,7 @@ module CFE
           expect {
             CreateAssessmentService.call(submission)
           }.to change { submission.submission_histories.count }.by 1
-          history = CFE::V1::SubmissionHistory.last
+          history = CFE::SubmissionHistory.last
           expect(history.submission_id).to eq submission.id
           expect(history.url).to eq service.cfe_url
           expect(history.http_method).to eq 'POST'

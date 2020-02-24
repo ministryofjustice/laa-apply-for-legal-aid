@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 module CFE
-  module V2
-    RSpec.xdescribe Result, type: :model do
-      let(:eligible_result) { create :cfe_v2_result }
-      let(:not_eligible_result) { create :cfe_v2_result, :not_eligible }
-      # let(:contibution_required_result) { create :cfe_v2_result, :contribution_required }
-      #      #let(:no_additional_properties) { create :cfe_v2_result, :no_additional_properties }
-      #      #let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
+  module V1
+    RSpec.describe Result, type: :model do
+      let(:eligible_result) { create :cfe_v1_result }
+      let(:not_eligible_result) { create :cfe_v1_result, :not_eligible }
+      let(:contribution_required_result) { create :cfe_v1_result, :contribution_required }
+      let(:no_additional_properties) { create :cfe_v1_result, :no_additional_properties }
+      let(:additional_property) { create :cfe_v1_result, :with_additional_properties }
 
       describe '#assessment_result' do
         context 'eligible' do
@@ -24,14 +24,14 @@ module CFE
 
         context 'contribution_required' do
           it 'returns contribution_required' do
-            expect(contibution_required_result.assessment_result).to eq 'contribution_required'
+            expect(contribution_required_result.assessment_result).to eq 'contribution_required'
           end
         end
       end
 
       describe '#capital_contribution' do
         it 'returns the value of the capital contribution' do
-          expect(contibution_required_result.capital_contribution).to eq 465.66
+          expect(contribution_required_result.capital_contribution).to eq 465.66
         end
       end
 
@@ -65,7 +65,7 @@ module CFE
         end
       end
 
-      describe 'additional_property_mortgage', skip: 'Need to define V2 cfe result factory with this trait' do
+      describe 'additional_property_mortgage' do
         it 'returns the mortgage for the first additional property' do
           expect(additional_property.additional_property_mortgage).to eq(-45_000.0)
         end

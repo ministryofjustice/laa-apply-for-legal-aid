@@ -32,8 +32,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :scope_limitations, through: :application_scope_limitations
   has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment'
   has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment'
-  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::V1::Submission', dependent: :destroy
-  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::V1::Submission'
+  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', dependent: :destroy
+  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission'
   has_many :scheduled_mailings
 
   before_create :create_app_ref

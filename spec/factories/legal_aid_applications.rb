@@ -292,7 +292,7 @@ FactoryBot.define do
       with_substantive_scope_limitation
       with_delegated_functions_scope_limitation
       with_delegated_functions
-      with_cfe_result
+      with_cfe_v1_result
       with_means_report
       with_merits_report
       with_ccms_submission
@@ -314,15 +314,15 @@ FactoryBot.define do
       provider_step { :end_of_application }
     end
 
-    trait :with_cfe_result do
+    trait :with_cfe_v1_result do
       after :create do |application|
         cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_result, submission: cfe_submission
+        create :cfe_v1_result, submission: cfe_submission
       end
     end
 
     trait :with_means_report do
-      with_cfe_result
+      with_cfe_v1_result
       after :create do |application|
         create :attachment, :means_report, legal_aid_application: application
       end

@@ -62,7 +62,7 @@ module CFE
         expect {
           described_class.call(submission)
         }.to raise_error CFE::SubmissionError
-        history = CFE::V1::SubmissionHistory.last
+        history = CFE::SubmissionHistory.last
         expect(history.submission_id).to eq submission.id
         expect(history.url).to eq service.cfe_url
         expect(history.http_method).to eq 'POST'

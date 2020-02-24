@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
   describe 'GET  /providers/applications/:legal_aid_application_id/capital_assessment_result' do
-    let(:cfe_result) { create :cfe_result }
+    let(:cfe_result) { create :cfe_v1_result }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
     let(:locale_scope) { 'providers.capital_assessment_results' }
@@ -29,7 +29,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context 'when not eligible' do
-        let(:cfe_result) { create :cfe_result, :not_eligible }
+        let(:cfe_result) { create :cfe_v1_result, :not_eligible }
 
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
@@ -41,7 +41,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context 'when contribution required' do
-        let(:cfe_result) { create :cfe_result, :contribution_required }
+        let(:cfe_result) { create :cfe_v1_result, :contribution_required }
 
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
@@ -72,7 +72,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context 'when not eligible' do
-        let(:cfe_result) { create :cfe_result, :not_eligible }
+        let(:cfe_result) { create :cfe_v1_result, :not_eligible }
 
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
@@ -84,7 +84,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context 'when contribution required' do
-        let(:cfe_result) { create :cfe_result, :contribution_required }
+        let(:cfe_result) { create :cfe_v1_result, :contribution_required }
 
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
@@ -102,7 +102,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     end
 
     context 'unknown result' do
-      let(:cfe_result) { create :cfe_result, result: {}.to_json }
+      let(:cfe_result) { create :cfe_v1_result, result: {}.to_json }
       let(:before_tasks) { login_provider }
 
       it 'raises error' do

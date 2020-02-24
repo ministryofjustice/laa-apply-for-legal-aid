@@ -3,7 +3,7 @@ module CFEResults
     class MockResults
       def self.eligible # rubocop:disable Metrics/MethodLength
         {
-        #    NEED TO ADD IN AN ELIGIBLE RESULTSET
+          #    NEED TO ADD IN AN ELIGIBLE RESULTSET
         }
       end
 

@@ -1,9 +1,6 @@
 module CFE
   module V1
-    class Result < ApplicationRecord # rubocop:disable Metrics/ClassLength
-      belongs_to :legal_aid_application
-      belongs_to :submission
-
+    class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
       # returns the name of the partial to display at the top of the results page
       def overview
         if legal_aid_application.has_restrictions? && !eligible?
