@@ -14,7 +14,7 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'displays report name' do
       subject
-      expect(response_body).to include('Download CSV of all submitted applications')
+      expect(response.body).to include('Download CSV of all submitted applications')
     end
 
     it 'has a link to the download csv path' do
