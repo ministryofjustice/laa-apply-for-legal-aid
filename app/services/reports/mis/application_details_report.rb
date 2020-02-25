@@ -1,6 +1,7 @@
 module Reports
   module MIS
     class ApplicationDetailsReport
+      SUBMITTED_STATES = %w[submitting_assessment state assessment_submitted].freeze
       def run
         csv_string = CSV.generate do |csv|
           csv << ApplicationDetailCsvLine.header_row
@@ -14,7 +15,7 @@ module Reports
       private
 
       def legal_aid_applications
-        LegalAidApplication.assessment_submitted.order(:created_at)
+        LegalAidApplication.where(state: SUBMITTED_STATES).order(:created_at)
       end
     end
   end

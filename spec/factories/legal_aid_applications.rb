@@ -300,6 +300,20 @@ FactoryBot.define do
       provider_step { :end_of_application }
     end
 
+    trait :at_submitting_assessment do
+      with_everything_and_address
+      with_positive_benefit_check_result
+      with_substantive_scope_limitation
+      with_delegated_functions_scope_limitation
+      with_delegated_functions
+      with_cfe_result
+      with_means_report
+      with_merits_report
+      with_ccms_submission
+      state { :submitting_assessment }
+      provider_step { :end_of_application }
+    end
+
     trait :with_cfe_result do
       after :create do |application|
         cfe_submission = create :cfe_submission, legal_aid_application: application
