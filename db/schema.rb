@@ -630,7 +630,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_140642) do
     t.datetime "updated_at", null: false
     t.boolean "mock_true_layer_data", default: false, null: false
     t.boolean "allow_non_passported_route", default: true, null: false
-    t.boolean "manually_review_all_cases", default: true
   end
 
   create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
