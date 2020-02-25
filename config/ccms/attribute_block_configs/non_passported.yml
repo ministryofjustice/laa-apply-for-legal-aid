@@ -576,6 +576,84 @@ global_means:
     user_defined: false
     response_type: text
     generate_block?: true
+  GB_INPUT_B_21WP3_389A:
+    value: false
+    br100_meaning: 'Client Benefits: Receives other benefits from state or a local authority?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_232A:
+    value: false
+    br100_meaning: 'Client Benefits: Receives benefits from state or a local authority?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_234A:
+    value: false
+    br100_meaning: 'Client Benefits: Child Benefit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_235A:
+    value: false
+    br100_meaning: 'Client Benefits: Child Tax Credit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_236A:
+    value: false
+    br100_meaning: 'Client Benefits: Working Tax Credit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_237A:
+    value: false
+    br100_meaning: 'Client Benefits: CB-JSA?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_238A:
+    value: false
+    br100_meaning: 'Client Benefits: CB-ESA?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_239A:
+    value: false
+    br100_meaning: 'Client Benefits: Incapacity Benefit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_241A:
+    value: false
+    br100_meaning: 'Client Benefits: Savings Credit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_254A:
+    value: false
+    br100_meaning: 'Client Disregarded Benefits: Additional state benefits?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_C_6WP3_228A:
+    value: 0.0
+    br100_meaning: 'Client Child Benefit: Amount received'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
+  GB_INPUT_C_6WP3_318A:
+    value: 0.0
+    br100_meaning: 'Client Child Tax Credit: Amount received'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
+  GB_INPUT_C_6WP3_319A:
+    value: 0.0
+    br100_meaning: 'Client Working Tax Credit: Amount received'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -1023,7 +1101,6 @@ global_merits:
     user_defined: false
     response_type: text
     generate_block?: true
-
 
 land:
   LAND_INFER_B_5WP2_53A:
