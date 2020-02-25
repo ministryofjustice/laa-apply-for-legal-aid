@@ -14,9 +14,9 @@ module Flow
         },
         vehicles_remaining_payments: {
           path: ->(application) { urls.providers_legal_aid_application_vehicles_remaining_payment_path(application) },
-          forward: :vehicle_age
+          forward: :vehicles_ages
         },
-        vehicle_age: {
+        vehicles_ages: {
           path: ->(application) { urls.providers_legal_aid_application_vehicles_age_path(application) },
           forward: :vehicles_regular_uses
         },
