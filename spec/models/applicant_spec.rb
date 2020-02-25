@@ -112,6 +112,24 @@ RSpec.describe Applicant, type: :model do
     let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
     let(:cfe_result) { create :cfe_result, submission: cfe_submission }
 
+    describe '#receives_income_type?' do
+      subject { legal_aid_application.applicant.receives_income_type?(income_type.name) }
+
+      context 'when passed property_or_lodger' do
+        let(:income_type) { property_or_lodger }
+
+        describe 'when the applicant receives the benefit' do
+          before { create :bank_transaction, :credit, transaction_type: income_type, bank_account: bank_account }
+
+          it { is_expected.to be true }
+        end
+
+        describe 'when the applicant does not receive the benefit' do
+          it { is_expected.to be false }
+        end
+      end
+    end
+
     describe '#receives_financial_support?' do
       subject { legal_aid_application.applicant.receives_financial_support? }
 

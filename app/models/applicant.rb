@@ -48,16 +48,18 @@ class Applicant < ApplicationRecord
     age < 16
   end
 
-  def receives_financial_support?
+  def receives_income_type?(income_type)
     return false if bank_transactions.empty?
 
-    bank_transactions.map(&:transaction_type_id).include?(TransactionType.find_by(name: 'friends_or_family')&.id)
+    bank_transactions.map(&:transaction_type_id).include?(TransactionType.find_by(name: income_type)&.id)
+  end
+
+  def receives_financial_support?
+    receives_income_type? 'friends_or_family'
   end
 
   def receives_rental_income?
-    return false if bank_transactions.empty?
-
-    bank_transactions.map(&:transaction_type_id).include?(TransactionType.find_by(name: 'property_or_lodger')&.id)
+    receives_income_type? 'property_or_lodger'
   end
 
   def receives_maintenance?
