@@ -14,10 +14,10 @@ module Flow
         },
         vehicles_remaining_payments: {
           path: ->(application) { urls.providers_legal_aid_application_vehicles_remaining_payment_path(application) },
-          forward: :vehicles_purchase_dates
+          forward: :vehicle_age
         },
-        vehicles_purchase_dates: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicles_purchase_date_path(application) },
+        vehicle_age: {
+          path: ->(application) { urls.providers_legal_aid_application_vehicles_age_path(application) },
           forward: :vehicles_regular_uses
         },
         vehicles_regular_uses: {
