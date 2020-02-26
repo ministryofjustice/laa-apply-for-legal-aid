@@ -319,20 +319,26 @@ workflows:
         type: approval
         filters:
           branches:
-            ignore: master
+            ignore:
+              - /dependabot.*/
+              - master
     - deploy_uat:
         requires:
         - hold_uat
         - build_and_push
         filters:
           branches:
-            ignore: master
+            ignore:
+              - /dependabot.*/
+              - master
     - deploy_uat_auto:
         requires:
           - build_and_push
         filters:
           branches:
-            only: master
+            only:
+              - /dependabot.*/
+              - master
     - hold_staging:
         type: approval
         requires:
