@@ -1,25 +1,9 @@
 module CFE
   module V2
     class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
-      # returns the name of the partial to display at the top of the results page
-      def overview
-        if legal_aid_application.has_restrictions? || capital_contribution_required?
-          'manual_check_required'
-        else
-          assessment_result
-        end
-      end
 
       def result_hash
         JSON.parse(result, symbolize_names: true)
-      end
-
-      def capital_contribution_required?
-        assessment_result == 'contribution_required'
-      end
-
-      def eligible?
-        assessment_result == 'eligible'
       end
 
       def assessment_result

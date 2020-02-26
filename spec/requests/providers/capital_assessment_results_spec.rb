@@ -48,7 +48,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays the correct result' do
-          expect(unescaped_response_body).to include(I18n.t('contribution_required.heading', name: applicant_name, scope: locale_scope))
+          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
         end
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays the correct result' do
-          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
         end
       end
 
