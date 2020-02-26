@@ -227,7 +227,7 @@ jobs:
         command: |
           ./bin/uat_deploy
 
-  deploy_uat_auto:
+  auto-deploy-uat:
     <<: *deploy_uat
 
   deploy_staging:
@@ -331,7 +331,7 @@ workflows:
             ignore:
               - /dependabot.*/
               - master
-    - deploy_uat_auto:
+    - auto-deploy-uat:
         requires:
           - build_and_push
         filters:
