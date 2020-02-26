@@ -124,7 +124,6 @@ module Reports
           'Bail details',
           'Prospects of success',
           'Prospects of success details',
-          'Why should LA be granted?',
           'SOC uploaded?',
           'Application started',
           'Application submitted'
@@ -288,7 +287,6 @@ module Reports
       def merits
         @line << pretty_success_prospect
         @line << success_prospect_details
-        @line << application_purpose
         @line << statement_of_case_uploaded?
         @line << created_at.strftime('%Y-%m-%d')
         @line << submitted_at.strftime('%Y-%m-%d')
