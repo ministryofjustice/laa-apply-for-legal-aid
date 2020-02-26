@@ -9,6 +9,21 @@ module CFE
       let(:no_additional_properties) { create :cfe_v1_result, :no_additional_properties }
       let(:additional_property) { create :cfe_v1_result, :with_additional_properties }
 
+      describe '#overview' do
+        context 'applicant is eligible' do
+          it 'returns assessment result' do
+            expect(eligible_result.overview).to eq 'eligible'
+          end
+        end
+
+        context 'applicant is not eligible and has restrictions' do
+          it 'returns manual_check_required' do
+            expect(contribution_required_result.capital_contribution_required?).to be true
+            expect(contribution_required_result.overview).to eq 'manual_check_required'
+          end
+        end
+      end
+
       describe '#assessment_result' do
         context 'eligible' do
           it 'returns eligible' do

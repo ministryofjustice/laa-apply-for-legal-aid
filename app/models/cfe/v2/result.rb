@@ -3,7 +3,7 @@ module CFE
     class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
       # returns the name of the partial to display at the top of the results page
       def overview
-        if legal_aid_application.has_restrictions? && !eligible?
+        if legal_aid_application.has_restrictions? || capital_contribution_required?
           'manual_check_required'
         else
           assessment_result
@@ -23,15 +23,15 @@ module CFE
       end
 
       def assessment_result
-        result_hash[:assessment_result]
-      end
-
-      def capital_contribution
-        result_hash[:capital][:capital_contribution].to_d
+        result_hash[:assessment][:assessment_result]
       end
 
       def capital
-        result_hash[:capital]
+        result_hash[:assessment][:capital]
+      end
+
+      def capital_contribution
+        capital[:capital_contribution].to_d
       end
 
       def property
@@ -43,7 +43,15 @@ module CFE
       end
 
       def gross_income
-        result_hash[:gross_income]
+        result_hash[:assessment][:gross_income]
+      end
+
+      def outgoings
+        result_hash[:assessment][:disposable_income][:outgoings]
+      end
+
+      def vehicles
+        capital[:capital_items]
       end
 
       ################################################################
@@ -53,7 +61,7 @@ module CFE
       ################################################################
 
       def monthly_other_income
-        gross_income[:value].to_d
+        gross_income[:monthly_other_income].to_d
       end
 
       ################################################################
@@ -62,12 +70,16 @@ module CFE
       #                                                              #
       ################################################################
 
-      def outgoings
-        result_hash[:disposable_income][:outgoings]
+      def housing_costs
+        outgoings[:housing_costs].first
       end
 
-      def housing_costs
-        outgoings[:housing_costs]
+      def childcare_costs
+        outgoings[:childcare_costs].first
+      end
+
+      def maintenance_costs
+        outgoings[:maintenance_costs].first
       end
 
       ################################################################
@@ -133,11 +145,11 @@ module CFE
       ################################################################
 
       def non_liquid_capital_items
-        capital[:non_liquid].sort_by { |item| item[:description] }
+        capital[:capital_items][:non_liquid].sort_by { |item| item[:description] }
       end
 
       def liquid_capital_items
-        capital[:liquid].sort_by { |item| item[:description] }
+        capital[:capital_items][:liquid].sort_by { |item| item[:description] }
       end
 
       def total_property
@@ -159,11 +171,13 @@ module CFE
       ################################################################
 
       def vehicle
-        result_hash[:capital_items][:vehicles].first
+        # capital[:capital_items][:vehicles].first
+        vehicles[:vehicles].first
       end
 
       def vehicles?
-        result_hash[:capital_items][:vehicles].any?
+        # capital[:capital_items][:vehicles].any?
+        vehicles[:vehicles].any?
       end
 
       def vehicle_value
