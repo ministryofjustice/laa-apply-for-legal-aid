@@ -35,7 +35,7 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
         }
       }
     end
-    let(:next_url) { providers_legal_aid_application_vehicles_purchase_date_path(legal_aid_application) }
+    let(:next_url) { providers_legal_aid_application_vehicles_age_path(legal_aid_application) }
     let(:submit_button) { {} }
 
     subject do
