@@ -10,7 +10,7 @@ module Reports
 
       describe '#run' do
         it 'gets only applications in assessment submitted  or subitting assessment states' do
-          expect(LegalAidApplication).to receive(:where).with(state: %w[submitting_assessment state assessment_submitted]).and_call_original
+          expect(LegalAidApplication).to receive(:where).with(state: %w[submitting_assessment assessment_submitted]).and_call_original
           report.run
         end
 
