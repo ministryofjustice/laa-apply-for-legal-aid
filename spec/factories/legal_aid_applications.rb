@@ -306,7 +306,7 @@ FactoryBot.define do
       with_substantive_scope_limitation
       with_delegated_functions_scope_limitation
       with_delegated_functions
-      with_cfe_result
+      with_cfe_v1_result
       with_means_report
       with_merits_report
       with_ccms_submission
