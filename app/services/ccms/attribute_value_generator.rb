@@ -38,21 +38,21 @@ module CCMS
                                 |vehicle
                                 |wage_slip
                                 )_(\S+)$}x.freeze
-    APPLICATION_REGEX = /^application_(\S+)$/.freeze
-    APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
+    APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
+    APPLICATION_REGEX = /^application_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
-    VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
-    INCOME_TYPE_REGEX =  /^income_type_(\S+)$/.freeze
-    WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
-    PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
-    OTHER_PARTY = /^other_party_(\S+)$/.freeze
-    OPPONENT = /^opponent_(\S+)$/.freeze
-    RESPONDENT = /^respondent_(\S+)$/.freeze
-    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
-    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
-    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
+    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
+    OPPONENT = /^opponent_(\S+)$/.freeze
+    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
+    OTHER_PARTY = /^other_party_(\S+)$/.freeze
+    PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
+    RESPONDENT = /^respondent_(\S+)$/.freeze
+    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
+    INCOME_TYPE_REGEX = /^income_type_(\S+)$/.freeze
+    VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
+    WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',

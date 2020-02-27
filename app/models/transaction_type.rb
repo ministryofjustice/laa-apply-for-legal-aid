@@ -23,6 +23,7 @@ class TransactionType < ApplicationRecord
   scope :active, -> { where(archived_at: nil) }
   scope :debits, -> { active.where(operation: :debit) }
   scope :credits, -> { active.where(operation: :credit) }
+  scope :income_for, ->(transaction_type_name) { active.where(operation: :credit, name: transaction_type_name) }
 
   def self.populate
     populate_records
@@ -41,10 +42,8 @@ class TransactionType < ApplicationRecord
   end
 
   def self.for_income_type?(transaction_type_name)
-    transaction_type = TransactionType.where(name: transaction_type_name, operation: :credit).first
-    transaction_type.present?
+    income_for(transaction_type_name).any?
   end
-
 
   def label_name(journey: :citizens)
     I18n.t("transaction_types.names.#{journey}.#{name}")
