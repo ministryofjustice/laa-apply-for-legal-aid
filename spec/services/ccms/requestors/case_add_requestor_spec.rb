@@ -17,7 +17,7 @@ module CCMS
         end
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v1_result, submission: cfe_submission }
         let(:office) { create :office }
         let(:requestor) { described_class.new(submission, {}) }
         let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }

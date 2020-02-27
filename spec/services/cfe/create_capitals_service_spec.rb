@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module CFE # rubocop:disable Metrics/ModuleLength
+module CFE
   RSpec.describe CreateCapitalsService do
     let(:application) { create :legal_aid_application }
     let!(:other_assets_declaration) { my_other_asset_declaration }
