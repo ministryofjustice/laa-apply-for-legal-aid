@@ -10,7 +10,7 @@ module CFE
 
     describe '.call', vcr: { record: :new_episodes } do
       let(:staging_host) { 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk' }
-      let(:last_submission_history) { CFE::SubmissionHistory.order(created_at: :asc).last }
+      let(:last_submission_history) { SubmissionHistory.order(created_at: :asc).last }
       before do
         allow(Rails.configuration.x).to receive(:check_finanical_eligibility_host).and_return(staging_host)
       end
@@ -48,7 +48,7 @@ module CFE
       context 'on submission error' do
         let(:message) { Faker::Lorem.sentence }
         before do
-          allow(CreateAssessmentService).to receive(:call).and_raise(CFE::SubmissionError, message)
+          allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
         end
 
         it 'records error in submission' do
