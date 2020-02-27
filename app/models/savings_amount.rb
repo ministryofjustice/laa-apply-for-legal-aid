@@ -4,9 +4,7 @@ class SavingsAmount < ApplicationRecord
   belongs_to :legal_aid_application
 
   def values?
-    total = 0
-    all_attributes.each { |attr| total += __send__(attr) unless __send__(attr).nil? }
-    total != 0
+    all_attributes.map { |attr| send(attr).present? } .any?
   end
 
   private
