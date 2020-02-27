@@ -32,6 +32,7 @@ module CCMS
                                 |other_assets_declaration
                                 |other_party
                                 |proceeding
+                                |outgoing
                                 |respondent
                                 |savings_amount
                                 |income_type
