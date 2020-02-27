@@ -43,4 +43,8 @@ class Applicant < ApplicationRecord
   def age
     AgeCalculator.call(date_of_birth, legal_aid_application.calculation_date)
   end
+
+  def child?
+    age < 16
+  end
 end

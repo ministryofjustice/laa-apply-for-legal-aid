@@ -292,6 +292,12 @@ cli_capital:
     user_defined: true
     response_type: text
     generate_block?: true
+  CLICAPITAL_INPUT_C_9WP2_7A:
+    value: '#savings_amount_peps_unit_trusts_capital_bonds_gov_stocks'
+    br100_meaning: 'Client capital bonds: The interim value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
 
 family_statement:
   FAMILY_STATEMENT_INSTANCE:
@@ -540,6 +546,114 @@ global_means:
     user_defined: false
     response_type: text
     generate_block?: true
+  GB_INPUT_B_9WP2_2A:
+    value: '#applicant_has_national_savings?'
+    br100_meaning: 'Client NSC: The client has NSCs?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_national_savings?'
+  GB_INPUT_B_9WP2_3A:
+    value: '#applicant_has_national_savings?'
+    br100_meaning: 'Client premium bonds: The client has premium bonds?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_national_savings?'
+  GB_INPUT_B_9WP2_4A:
+    value: '#applicant_has_trusts_bonds_or_stocks?'
+    br100_meaning: 'Client capital bonds: The client has capital bonds?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
+  GB_INPUT_B_9WP2_5A:
+    value: '#applicant_has_trusts_bonds_or_stocks?'
+    br100_meaning: 'Client gov. stock: The client has government stock?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
+  NI_NO:
+    value: '#applicant_national_insurance_number'
+    br100_meaning: Applicant national insurance number
+    user_defined: false
+    response_type: text
+    generate_block?: true
+  GB_INPUT_B_21WP3_389A:
+    value: false
+    br100_meaning: 'Client Benefits: Receives other benefits from state or a local authority?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_232A:
+    value: false
+    br100_meaning: 'Client Benefits: Receives benefits from state or a local authority?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_234A:
+    value: false
+    br100_meaning: 'Client Benefits: Child Benefit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_235A:
+    value: false
+    br100_meaning: 'Client Benefits: Child Tax Credit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_236A:
+    value: false
+    br100_meaning: 'Client Benefits: Working Tax Credit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_237A:
+    value: false
+    br100_meaning: 'Client Benefits: CB-JSA?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_238A:
+    value: false
+    br100_meaning: 'Client Benefits: CB-ESA?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_239A:
+    value: false
+    br100_meaning: 'Client Benefits: Incapacity Benefit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_241A:
+    value: false
+    br100_meaning: 'Client Benefits: Savings Credit?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_B_6WP3_254A:
+    value: false
+    br100_meaning: 'Client Disregarded Benefits: Additional state benefits?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: true
+  GB_INPUT_C_6WP3_228A:
+    value: 0.0
+    br100_meaning: 'Client Child Benefit: Amount received'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
+  GB_INPUT_C_6WP3_318A:
+    value: 0.0
+    br100_meaning: 'Client Child Tax Credit: Amount received'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
+  GB_INPUT_C_6WP3_319A:
+    value: 0.0
+    br100_meaning: 'Client Working Tax Credit: Amount received'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -960,6 +1074,33 @@ global_merits:
     user_defined: false
     response_type: text
     generate_block?: true
+  CERTIFICATE_PREDICTED_COSTS:
+    generate_block?: true
+    value: 25000
+  CHILD_CLIENT:
+    generate_block?: true
+    value: '#applicant_child?'
+  EMERGENCY_DPS_APP_AMD:
+    generate_block?: true
+    value: '#application_used_delegated_functions?'
+  FAM_CERT_PREDICTED_COSTS:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+  MERITS_CERT_PREDICTED_COSTS:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+  PROC_PREDICTED_COST_FAMILY:
+    generate_block?: true
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    response_type: currency
+    br100_meaning: 'Fam: The Proceeding Family Predicted Costs Under The Certificate'
+    user_defined: false
+  NI_NO:
+    value: '#applicant_national_insurance_number'
+    br100_meaning: Applicant national insurance number
+    user_defined: false
+    response_type: text
+    generate_block?: true
 
 land:
   LAND_INFER_B_5WP2_53A:
@@ -1204,6 +1345,13 @@ national_savings:
     value: '.'
     user_defined: true
     response_type: text
+  CLINATIONAL_INPUT_C_9WP2_7A:
+    generate_block?: '#applicant_has_national_savings?'
+    br100_meaning: 'Client NSC: The interim value'
+    value: '#savings_amount_national_savings'
+    user_defined: true
+    response_type: currency
+
 
 other_capital:
   OTHCAPITAL_INPUT_B_17WP2_1A:
@@ -1325,6 +1473,12 @@ premium_bonds:
     user_defined: true
     response_type: text
     generate_block?: true
+  CLIPREMIUM_INPUT_C_9WP2_7A:
+    generate_block?: '#applicant_has_national_savings?'
+    br100_meaning: 'Client premium bonds: The interim value'
+    value: '#savings_amount_national_savings'
+    user_defined: true
+    response_type: currency
 
 proceeding_means:
   PROC_UPPER_TRIBUNAL:
@@ -1669,6 +1823,24 @@ proceeding_merits:
     user_defined: false
     response_type: text
     generate_block?: true
+  PROCEEDING_LIMITATION_DESC:
+    value: "#proceeding_limitation_desc"
+    br100_meaning: 'Proc: The Proceeding Limitation Description'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROCEEDING_LIMITATION_MEANING:
+    value: "#proceeding_limitation_meaning"
+    br100_meaning: 'Proc: The Proceeding Limitation Description'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROFIT_COST_FAMILY:
+    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    br100_meaning: 'Fam: The Profit Costs To Completion Of The Family Proceeding'
+    response_type: currency
+    user_defined: true
+    generate_block?: true
 
 stocks:
   CLISTOCK_INPUT_B_9WP2_10A:
@@ -1695,6 +1867,12 @@ stocks:
     response_type: boolean
     user_defined: true
     generate_block?: true
+  CLISTOCK_INPUT_C_9WP2_7A:
+    value: '#savings_amount_peps_unit_trusts_capital_bonds_gov_stocks'
+    br100_meaning: 'Client gov. stock: The interim value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_trusts_bonds_or_stocks?'
 
 third_party_accounts:
   THIRDPARTACC_INPUT_B_8WP2_11A:
@@ -2005,6 +2183,31 @@ vehicles:
     user_defined: true
     response_type: text
     generate_block?: true
+  CARANDVEH_INPUT_B_14WP2_28A:
+    value: '#vehicle_used_regularly?'
+    br100_meaning: 'Cars: It is used for regular use?'
+    user_defined: true
+    response_type: boolean
+    generate_block?: '#applicant_has_vehicle?'
+  CARANDVEH_INPUT_C_14WP2_25A:
+    value: '#vehicle_estimated_value'
+    br100_meaning: 'Cars: Current market value'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_vehicle?'
+  CARANDVEH_INPUT_C_14WP2_26A:
+    value: '#vehicle_payment_remaining'
+    br100_meaning: 'Cars: Value of loan outstanding'
+    user_defined: true
+    response_type: currency
+    generate_block?: '#applicant_has_vehicle?'
+  CARANDVEH_INPUT_D_14WP2_27A:
+    value: '#vehicle_purchased_on'
+    br100_meaning: 'Cars: Date of purchase'
+    user_defined: true
+    response_type: date
+    generate_block?: '#applicant_has_vehicle?'
+
 
 will:
   WILL_INPUT_B_2WP2_10A:

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Citizens::IdentifyTypesOfIncomesController do
+RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do

@@ -49,7 +49,7 @@ module Flowable
     end
 
     def parent_name_space_module
-      self.class.parent
+      self.class.module_parent
     end
 
     def path?(string)

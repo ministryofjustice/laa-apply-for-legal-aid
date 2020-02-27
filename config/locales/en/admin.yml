@@ -50,3 +50,6 @@ en:
         done_eveything: Was the user able to do what they needed to today?
         satisfaction: Satisfaction rating
         suggestion: Improvement suggestion
+    reports:
+      index:
+        heading_1: 'Admin reports and downloads'

@@ -36,23 +36,6 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(response).to redirect_to(feedback_path(feedback))
     end
 
-    context 'sending the email', :vcr do
-      before do
-        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
-        allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
-        allow_any_instance_of(DashboardEventHandler).to receive(:call).and_return(double(DashboardEventHandler))
-      end
-
-      it 'sends an email with the right parameters' do
-        expect_any_instance_of(FeedbackMailer)
-          .to receive(:set_personalisation)
-          .with(hash_including(improvement_suggestion: params[:improvement_suggestion]))
-          .and_call_original
-        subject
-        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
-      end
-    end
-
     context 'with empty params' do
       let(:params) { { improvement_suggestion: '' } }
 

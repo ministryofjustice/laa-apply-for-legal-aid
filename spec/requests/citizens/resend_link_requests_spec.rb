@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'sidekiq/testing'
 
 RSpec.describe Citizens::ResendLinkRequestsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
@@ -26,23 +25,6 @@ RSpec.describe Citizens::ResendLinkRequestsController, type: :request do
       mailer = double(deliver_later!: true)
       expect(ResendLinkRequestMailer).to receive(:notify).and_return(mailer)
       subject
-    end
-
-    context 'sending the email', :vcr do
-      before do
-        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
-        allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
-        allow_any_instance_of(DashboardEventHandler).to receive(:call).and_return(double(DashboardEventHandler))
-      end
-
-      it 'sends an email with the right parameters' do
-        expect_any_instance_of(ResendLinkRequestMailer)
-          .to receive(:set_personalisation)
-          .with(hash_including(application_ref: legal_aid_application.application_ref))
-          .and_call_original
-        subject
-        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
-      end
     end
   end
 end

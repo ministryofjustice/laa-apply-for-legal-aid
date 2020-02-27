@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.notifications.service.gov.uk/v2/notifications/adfa5334-db23-4b06-b13b-f10646a70941
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.1.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1ODE1MTk0Njl9.6gYOsUWtM-TRU8vdq7x1Fe7xk3M_mkzmUKykuoiYaUA
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Feb 2020 14:58:04 GMT
+      Server:
+      - nginx
+      X-B3-Spanid:
+      - d954f3538e505a0a
+      X-B3-Traceid:
+      - d954f3538e505a0a
+      X-Vcap-Request-Id:
+      - a1d709eb-0836-4c75-59f8-df9bd27b2beb
+      Content-Length:
+      - '85'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"errors":[{"error":"NoResultFound","message":"No result found"}],"status_code":404}
+
+        '
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 14:57:49 GMT
+recorded_with: VCR 5.0.0

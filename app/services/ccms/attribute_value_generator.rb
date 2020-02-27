@@ -21,19 +21,22 @@ module CCMS
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
   class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
-    STANDARD_METHOD_NAMES = %r{^(application
-                              |applicant
-                              |bank_account
-                              |vehicle
-                              |wage_slip
-                              |appl_proceeding_type
-                              |proceeding
-                              |other_party
-                              |opponent
-                              |respondent
-                              |merits_assessment
-                              |other_assets_declaration
-                              |savings_amount)_(\S+)$}x.freeze
+    STANDARD_METHOD_NAMES = %r{^(
+                                appl_proceeding_type
+                                |applicant
+                                |application
+                                |bank_account
+                                |lead_proceeding_type
+                                |merits_assessment
+                                |opponent
+                                |other_assets_declaration
+                                |other_party
+                                |proceeding
+                                |respondent
+                                |savings_amount
+                                |vehicle
+                                |wage_slip
+                                )_(\S+)$}x.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
@@ -47,6 +50,21 @@ module CCMS
     MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
+    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
+
+    PROSPECTS_OF_SUCCESS = {
+      likely: 'Good',
+      marginal: 'Marginal',
+      poor: 'Poor',
+      borderline: 'Borderline',
+      uncertain: 'Uncertain'
+    }.freeze
+
+    attr_reader :legal_aid_application
+    delegate :merits_assessment,
+             :vehicle,
+             :substantive_scope_limitation,
+             :used_delegated_functions?, to: :legal_aid_application
 
     def initialize(submission)
       @submission = submission
@@ -140,6 +158,14 @@ module CCMS
       applicant_owns_additional_property?(options) && @legal_aid_application.other_assets_declaration.second_home_percentage != 100
     end
 
+    def applicant_has_trusts_bonds_or_stocks?(_options)
+      not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
+    end
+
+    def applicant_has_national_savings?(_options)
+      not_zero? savings.national_savings
+    end
+
     def applicant_has_other_capital?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
@@ -208,16 +234,9 @@ module CCMS
       !@legal_aid_application.own_home_no?
     end
 
-    PROSPECTS_OF_SUCCESS = {
-      likely: 'Good',
-      marginal: 'Marginal',
-      poor: 'Poor',
-      borderline: 'Borderline',
-      uncertain: 'Uncertain'
-    }.freeze
-
-    attr_reader :legal_aid_application
-    delegate :merits_assessment, to: :legal_aid_application
+    def applicant_has_vehicle?(_options)
+      vehicle.present? && not_zero?(vehicle.estimated_value)
+    end
 
     def ccms_equivalent_prospects_of_success(_options)
       PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
@@ -278,6 +297,14 @@ module CCMS
       @scope_limitations ||= @legal_aid_application.scope_limitations
     end
 
+    def proceeding_limitation_desc(_options)
+      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.description
+    end
+
+    def proceeding_limitation_meaning(_options)
+      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.meaning
+    end
+
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
       case method
       when APPLICATION_REGEX
@@ -304,6 +331,8 @@ module CCMS
         @legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
       when OTHER_ASSETS_DECLARATION
         @legal_aid_application.other_assets_declaration.__send__(Regexp.last_match(1))
+      when LEAD_PROCEEDING_TYPE
+        @legal_aid_application.lead_proceeding_type.__send__(Regexp.last_match(1))
       end
     end
 

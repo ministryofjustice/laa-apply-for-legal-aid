@@ -36,12 +36,14 @@ module CCMS
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v1_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
         let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
         let(:timestamp) { Time.now.strftime('%Y-%m-%d_%H.%M') }
+        let(:applicant) { legal_aid_application.applicant }
+        let(:default_cost) { legal_aid_application.lead_proceeding_type.default_cost_limitation_substantive }
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
@@ -324,6 +326,99 @@ module CCMS
               expect(block).to have_boolean_response false
               expect(block).to be_user_defined
             end
+          end
+        end
+
+        context 'CERTIFICATE_PREDICTED_COSTS - estimated costs' do
+          it 'generates the block with the right value' do
+            block = XmlExtractor.call(xml, :global_merits, 'CERTIFICATE_PREDICTED_COSTS')
+            expect(block).to have_currency_response 25_000.0
+            expect(block).not_to be_user_defined
+          end
+        end
+
+        context 'CHILD_CLIENT' do
+          let(:sixteen_today) { 16.years.ago.to_date }
+          let(:sixteen_yesterday) { sixteen_today - 1.day }
+          let(:sixteen_tomorrow) { sixteen_today + 1.day }
+          before { applicant.update! date_of_birth: dob }
+
+          context 'applicant is 16 today' do
+            let(:dob) { sixteen_today }
+            it 'generates the block as an adult' do
+              block = XmlExtractor.call(xml, :global_merits, 'CHILD_CLIENT')
+              expect(block).to have_boolean_response false
+              expect(block).not_to be_user_defined
+            end
+          end
+
+          context 'applicant is 16 tomorrow' do
+            let(:dob) { sixteen_tomorrow }
+            it 'generates the block as a child' do
+              block = XmlExtractor.call(xml, :global_merits, 'CHILD_CLIENT')
+              expect(block).to have_boolean_response true
+              expect(block).not_to be_user_defined
+            end
+          end
+
+          context 'applicant was 16 yesterday' do
+            let(:dob) { sixteen_yesterday }
+            it 'generates the block as an adult' do
+              block = XmlExtractor.call(xml, :global_merits, 'CHILD_CLIENT')
+              expect(block).to have_boolean_response false
+              expect(block).not_to be_user_defined
+            end
+          end
+        end
+
+        context 'EMERGENCY_DPS_APP_AMD' do
+          context 'delegated functions used' do
+            before { legal_aid_application.update! used_delegated_functions: true, used_delegated_functions_on: Date.yesterday }
+            it 'generates the block with true' do
+              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_DPS_APP_AMD')
+              expect(block).to have_boolean_response true
+              expect(block).not_to be_user_defined
+            end
+          end
+          context 'delegated functions NOT used' do
+            before { legal_aid_application.update! used_delegated_functions: false, used_delegated_functions_on: nil }
+            it 'generates the block with true' do
+              block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_DPS_APP_AMD')
+              expect(block).to have_boolean_response false
+              expect(block).not_to be_user_defined
+            end
+          end
+        end
+
+        context 'FAM_CERT_PREDICTED_COSTS' do
+          it 'generates the block with the standard value' do
+            block = XmlExtractor.call(xml, :global_merits, 'FAM_CERT_PREDICTED_COSTS')
+            expect(block).to have_currency_response default_cost
+            expect(block).not_to be_user_defined
+          end
+        end
+
+        context 'MERITS_CERT_PREDICTED_COSTS' do
+          it 'generates the block with the standard value' do
+            block = XmlExtractor.call(xml, :global_merits, 'MERITS_CERT_PREDICTED_COSTS')
+            expect(block).to have_currency_response default_cost
+            expect(block).not_to be_user_defined
+          end
+        end
+
+        context 'PROC_PREDICTED_COST_FAMILY' do
+          it 'generates the block with the standard value' do
+            block = XmlExtractor.call(xml, :global_merits, 'PROC_PREDICTED_COST_FAMILY')
+            expect(block).to have_currency_response default_cost
+            expect(block).not_to be_user_defined
+          end
+        end
+
+        context 'PROFIT_COST_FAMILY' do
+          it 'generates a block with the value from the default proceeding' do
+            block = XmlExtractor.call(xml, :proceeding_merits, 'PROFIT_COST_FAMILY')
+            expect(block).to have_currency_response default_cost
+            expect(block).to be_user_defined
           end
         end
 

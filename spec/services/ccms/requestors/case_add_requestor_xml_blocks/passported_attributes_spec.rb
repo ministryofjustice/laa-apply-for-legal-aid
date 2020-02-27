@@ -34,7 +34,7 @@ module CCMS
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v1_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
@@ -70,7 +70,7 @@ module CCMS
 
         context 'CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY' do
           context 'eligible' do
-            let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v1_result, submission: cfe_submission }
             it 'returns In Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'In Scope'
@@ -80,7 +80,7 @@ module CCMS
           end
 
           context 'not_eligible' do
-            let!(:cfe_result) { create :cfe_result, :not_eligible, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v1_result, :not_eligible, submission: cfe_submission }
             it 'returns Out Of Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'Out Of Scope'
@@ -90,7 +90,7 @@ module CCMS
           end
 
           context 'contribution_required' do
-            let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v1_result, :contribution_required, submission: cfe_submission }
             it 'returns In Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'In Scope'
@@ -100,7 +100,7 @@ module CCMS
           end
 
           context 'invalid response' do
-            let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission, result: { assessment_result: 'Unknown' }.to_json }
+            let!(:cfe_result) { create :cfe_v1_result, :contribution_required, submission: cfe_submission, result: { assessment_result: 'Unknown' }.to_json }
             it 'raises' do
               expect { xml }.to raise_error RuntimeError, 'Unexpected assessment result: Unknown'
             end
@@ -117,7 +117,7 @@ module CCMS
         context 'CAP_CONT and similar attributes' do
           let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT] }
           context 'eligble' do
-            let!(:cfe_result) { create :cfe_result, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v1_result, submission: cfe_submission }
             it 'returns zero' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)
@@ -127,7 +127,7 @@ module CCMS
           end
 
           context 'not eligble' do
-            let!(:cfe_result) { create :cfe_result, :not_eligible, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v1_result, :not_eligible, submission: cfe_submission }
             it 'returns zero' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)
@@ -139,7 +139,7 @@ module CCMS
           end
 
           context 'contribution_required' do
-            let!(:cfe_result) { create :cfe_result, :contribution_required, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v1_result, :contribution_required, submission: cfe_submission }
             it 'returns the capital contribution' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)

@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     resource :submitted_applications_report, only: %i[show]
     resource :feedback, controller: :feedback, only: %i[show]
     resources :ccms_connectivity_tests, only: [:show]
+    resources :reports, only: [:index]
+    get 'admin_report_submitted', to: 'reports#download_submitted', as: 'reports_submitted_csv'
   end
 
   namespace 'v1' do

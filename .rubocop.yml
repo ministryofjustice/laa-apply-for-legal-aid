@@ -30,11 +30,16 @@ Metrics/BlockLength:
   - 'config/routes.rb'
   - 'spec/**/*'
 
+Metrics/ClassLength:
+  Exclude:
+    - 'app/services/reports/mis/application_detail_csv_line.rb'
+
 Metrics/MethodLength:
   Exclude:
   - 'db/migrate/*'
   - 'ccms_integration/helpers/ccms_payload_analyser.rb'
   - 'spec/**/*'
+  - 'app/services/reports/mis/application_detail_csv_line.rb'
 
 Metrics/ModuleLength:
   Exclude:

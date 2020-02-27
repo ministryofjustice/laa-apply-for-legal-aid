@@ -10,7 +10,7 @@ gem 'govuk_notify_rails', '~> 2.1.2'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 6.0.2'
 gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0'
 gem 'savon', '~> 2.12.0'
@@ -52,12 +52,13 @@ gem 'jwt'
 
 # background processing
 gem 'redis-namespace'
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2.7'
 gem 'sidekiq-status'
 gem 'sidekiq_alive'
 
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
-gem 'sprockets', '>= 3.0.0'
+# Default to 3.7.2 as https://github.com/sass/sassc-rails/issues/122 sassc loading is causing a segmentation error
+gem 'sprockets', '~> 3.7.2'
 gem 'sprockets-es6'
 
 # URL and path parsing

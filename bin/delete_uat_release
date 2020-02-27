@@ -8,7 +8,7 @@ echo "$GIT_MESSAGE"
 if [[ $GIT_MESSAGE == "Merge pull request #"* ]]
 then
   MERGED_BRANCH=$(echo $GIT_MESSAGE | sed -n "s/^.*from ministryofjustice\/\s*\(\S*\).*$/\1/p")
-  UAT_RELEASE="apply-$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]()' '-' | cut -c1-30 | sed 's/-$//')"
+  UAT_RELEASE="apply-$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
 
   echo "Attempting to delete UAT release $UAT_RELEASE"
 
