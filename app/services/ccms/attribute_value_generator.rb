@@ -1,4 +1,4 @@
-  module CCMS
+module CCMS
   # This class is used to generate the Attribute key-value XML block within the instances of the
   # various entities on the CCMS add request payload.  Each possible key value pair has an
   # entry in the attribute configuration hash (created by the CCMS::AttributeConfiguration class from
@@ -34,7 +34,7 @@
                                 |proceeding
                                 |respondent
                                 |savings_amount
-                                |transaction_types
+                                |income_type
                                 |vehicle
                                 |wage_slip
                                 )_(\S+)$}x.freeze
@@ -43,6 +43,7 @@
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
+    INCOME_TYPE_REGEX =  /^income_type_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
@@ -50,7 +51,6 @@
     RESPONDENT = /^respondent_(\S+)$/.freeze
     MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
-    TRANSACTION_TYPE = /^transaction_types_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
@@ -164,20 +164,12 @@
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
 
-    def applicant_has_pension?(_options)
-      not_zero? transaction_types.pension
-    end
-
-    def applicant_has_student_loan?(_options)
-      not_zero? transaction_types.student_loan
+    def applicant_has_other_capital?(_options)
+      not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
 
     def applicant_has_national_savings?(_options)
       not_zero? savings.national_savings
-    end
-
-    def applicant_has_other_capital?(_options)
-      not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
 
     def applicant_has_other_savings?(_options)
@@ -331,6 +323,8 @@
         options[:wage_slip].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
+      when INCOME_TYPE_REGEX
+        @legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp('?'))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when RESPONDENT

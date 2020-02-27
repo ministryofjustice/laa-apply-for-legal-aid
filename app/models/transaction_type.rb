@@ -40,6 +40,12 @@ class TransactionType < ApplicationRecord
     TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
   end
 
+  def self.for_income_type?(transaction_type_name)
+    transaction_type = TransactionType.where(name: transaction_type_name, operation: :credit).first
+    transaction_type.present?
+  end
+
+
   def label_name(journey: :citizens)
     I18n.t("transaction_types.names.#{journey}.#{name}")
   end

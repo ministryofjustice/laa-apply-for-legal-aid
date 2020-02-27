@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Requestors # rubocop:disable Metrics/ModuleLength
-    RSpec.describe NonPassportedCas eAddRequestor do
+    RSpec.describe NonPassportedCaseAddRequestor do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
         let(:proceeding_type) { create :proceeding_type, :with_real_data }
@@ -392,79 +392,38 @@ module CCMS
               expect(block).not_to be_user_defined
             end
           end
+        end
 
-          context 'private and employer pensions' do
-            context 'applicant does not have private and/or employer pensions' do
-              before { transaction_types.credits.update! pension: nil }
-              let(:attrs) do
-                %w[
-                  GB_INPUT_B_9WP3_349A
-                  GB_INPUT_B_9WP3_350A
-                ]
-              end
-              it 'does not generate the blocks' do
-                attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :global_means, attr_name)
-                  expect(block).not_to be_present
-                end
-              end
+        context 'GB_INPUT_B_9WP3_353A' do
+          context 'applicant has a student loan/grant' do
+            let(:student_loan_income) { create :transaction_type, :credit, name: 'student_loan' }
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: student_loan_income)
             end
 
-            context 'applicant does have private and/or employer pensions' do
-              before { transaction_types.credits.update! pension: 12_345.0 }
-              let(:attrs) do
-                %w[
-                  GB_INPUT_B_9WP3_349A
-                  GB_INPUT_B_9WP3_350A
-                ]
-              end
-              it 'does not generate the blocks' do
-                attrs.each do |attr_name|
-                  block = XmlExtractor.call(xml, :global_means, attr_name)
-                  expect(block).to be_present
-                  expect(block).to have_boolean_response true
-                  expect(block).to be_user_defined
-                end
-              end
-            end
-          end
-
-          context 'GB_INPUT_C_6WP3_323A' do
-            context 'applicant has no pension' do
-              before { transaction_types.credits.update! pension: nil }
-              it 'does not generate the block' do
-                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_6WP3_323A')
-                expect(block).not_to be_present
-              end
+            it 'returns true' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
+              expect(block).to have_boolean_response true
+              expect(block).to be_user_defined
             end
 
-            context 'applicant has pension' do
-              before { transaction_types.credits.update! pension: 2_501.0 }
-              it 'generates the block' do
-                block = XmlExtractor.call(xml, :plc_shares, 'GB_INPUT_C_6WP3_323A')
-                expect(block).to have_currency_response 2_501.0
-                expect(block).to be_user_defined
-              end
-            end
-          end
-
-          context 'GB_INPUT_B_9WP3_353A' do
             context 'applicant has no student loan/grant' do
-              before { transaction_types.credits.update! student_loan: nil }
-              it 'does not generate the block' do
-                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
-                expect(block).not_to be_present
-              end
-            end
+              before { legal_aid_application.transaction_types.delete_all }
 
-            context 'applicant has student loan/grant' do
-              before { transaction_types.credits.update student_loan: 1_122.0 }
-              it 'generates the block' do
+              it 'returns false' do
                 block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
-                expect(block).to have_currency_response 1_122.0
+                expect(block).to have_boolean_response false
                 expect(block).to be_user_defined
               end
             end
+          end
+        end
+
+        context 'GB_INPUT_C_6WP3_323A' do
+          it 'no pension is declared so it does not generate a block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_6WP3_323A')
+            expect(block).not_to be_present
           end
         end
       end
