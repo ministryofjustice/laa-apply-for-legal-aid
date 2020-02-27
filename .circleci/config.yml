@@ -320,7 +320,7 @@ workflows:
         filters:
           branches:
             ignore:
-              - /dependabot.*/
+              - /dependabot\/bundler\/.*/
               - master
     - deploy_uat:
         requires:
@@ -329,7 +329,7 @@ workflows:
         filters:
           branches:
             ignore:
-              - /dependabot.*/
+              - /dependabot\/bundler\/.*/
               - master
     - auto-deploy-uat:
         requires:
@@ -337,7 +337,7 @@ workflows:
         filters:
           branches:
             only:
-              - /dependabot.*/
+              - /dependabot\/bundler\/.*/
               - master
     - hold_staging:
         type: approval
