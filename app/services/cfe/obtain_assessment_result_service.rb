@@ -28,12 +28,22 @@ module CFE
       nil
     end
 
-    def write_cfe_result
-      CFE::Result.create!(
-        legal_aid_application_id: legal_aid_application.id,
-        submission_id: @submission.id,
-        result: @response.body
-      )
+    def write_cfe_result # rubocop:disable Metrics/MethodLength
+      if JSON.parse(@response.body)['assessment'].nil?
+        CFE::V1::Result.create!(
+          legal_aid_application_id: legal_aid_application.id,
+          submission_id: @submission.id,
+          result: @response.body,
+          type: 'CFE::V1::Result'
+        )
+      else
+        CFE::V2::Result.create!(
+          legal_aid_application_id: legal_aid_application.id,
+          submission_id: @submission.id,
+          result: @response.body,
+          type: 'CFE::V2::Result'
+        )
+      end
     end
   end
 end

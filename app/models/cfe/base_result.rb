@@ -1,19 +1,20 @@
 module CFE
-  class Result < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  class BaseResult < ApplicationRecord # rubocop:disable Metrics/ClassLength
     belongs_to :legal_aid_application
     belongs_to :submission
 
-    # returns the name of the partial to display at the top of the results page
+    self.table_name = 'cfe_results'
+
+    def result_hash
+      JSON.parse(result, symbolize_names: true)
+    end
+
     def overview
-      if legal_aid_application.has_restrictions? && !eligible?
+      if legal_aid_application.has_restrictions? || capital_contribution_required?
         'manual_check_required'
       else
         assessment_result
       end
-    end
-
-    def result_hash
-      JSON.parse(result, symbolize_names: true)
     end
 
     def capital_contribution_required?
@@ -22,22 +23,6 @@ module CFE
 
     def eligible?
       assessment_result == 'eligible'
-    end
-
-    def assessment_result
-      result_hash[:assessment_result]
-    end
-
-    def capital_contribution
-      result_hash[:capital][:capital_contribution].to_d
-    end
-
-    def capital
-      result_hash[:capital]
-    end
-
-    def property
-      result_hash[:property]
     end
 
     def main_home
@@ -49,6 +34,7 @@ module CFE
     #  MAIN HOME VALUES                                            #
     #                                                              #
     ################################################################
+
     def main_home_value
       main_home[:value].to_d
     end
@@ -101,21 +87,23 @@ module CFE
 
     ################################################################
     #                                                              #
-    #  VEHICLE                                                     #
+    #  CAPITAL ITEMS                                               #
     #                                                              #
     ################################################################
 
-    def vehicle
-      result_hash[:vehicles][:vehicles].first
+    def total_savings
+      capital[:total_liquid].to_d
     end
 
-    def vehicles?
-      result_hash[:vehicles][:vehicles].any?
+    def total_other_assets
+      capital[:total_non_liquid].to_d
     end
 
-    def vehicle_value
-      vehicle[:value].to_d
-    end
+    ################################################################
+    #                                                              #
+    #  VEHICLE                                                     #
+    #                                                              #
+    ################################################################
 
     def vehicle_loan_amount_outstanding
       vehicle[:loan_amount_outstanding].to_d
@@ -126,37 +114,7 @@ module CFE
     end
 
     def vehicle_assessed_amount
-      vehicle[:assessed_amount].to_d
-    end
-
-    def total_vehicles
-      result_hash[:vehicles][:total_vehicle].to_d
-    end
-
-    ################################################################
-    #                                                              #
-    #  CAPITAL ITEMS                                               #
-    #                                                              #
-    ################################################################
-
-    def non_liquid_capital_items
-      capital[:non_liquid_capital_items].sort_by { |item| item[:description] }
-    end
-
-    def liquid_capital_items
-      capital[:liquid_capital_items].sort_by { |item| item[:description] }
-    end
-
-    def total_property
-      property[:total_property].to_d
-    end
-
-    def total_savings
-      capital[:total_liquid].to_d
-    end
-
-    def total_other_assets
-      capital[:total_non_liquid].to_d
+      vehicle[:assessed_value].to_d
     end
 
     ################################################################
