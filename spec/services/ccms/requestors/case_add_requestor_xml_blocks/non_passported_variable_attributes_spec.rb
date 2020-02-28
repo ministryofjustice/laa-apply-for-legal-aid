@@ -430,6 +430,7 @@ module CCMS
         context 'gross income' do
           let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
           let!(:property_or_lodger) { create :transaction_type, :credit, name: 'property_or_lodger' }
+          let(:maintenance_in) { create :transaction_type, :credit, name: 'maintenance_in' }
           let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
           let(:bank_account) { create :bank_account, bank_provider: bank_provider }
           let(:bank_provider) { create :bank_provider, applicant: applicant }
@@ -506,6 +507,25 @@ module CCMS
                   expect(block).to have_boolean_response expected_result
                   expect(block).to be_user_defined
                 end
+              end
+            end
+          end
+
+          context 'GB_INPUT_C_8WP3_303A' do
+            context 'when the applicant receives maintenance' do
+              let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+              it 'generates a block with the correct values' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
+                expect(block).to have_number_response '150.00'
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'when the applicant does not receive maintenance' do
+              it 'does not generate a block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
+                expect(block).not_to be_present
               end
             end
           end
