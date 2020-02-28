@@ -393,6 +393,39 @@ module CCMS
             end
           end
         end
+
+        context 'GB_INPUT_B_9WP3_353A' do
+          context 'applicant has a student loan/grant' do
+            let(:student_loan_income) { create :transaction_type, :credit, name: 'student_loan' }
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: student_loan_income)
+            end
+
+            it 'returns true' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
+              expect(block).to have_boolean_response true
+              expect(block).to be_user_defined
+            end
+
+            context 'applicant has no student loan/grant' do
+              before { legal_aid_application.transaction_types.delete_all }
+
+              it 'returns false' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP3_353A')
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+        end
+
+        context 'GB_INPUT_C_6WP3_323A' do
+          it 'no pension is declared so it does not generate a block' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_6WP3_323A')
+            expect(block).not_to be_present
+          end
+        end
       end
     end
   end

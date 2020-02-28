@@ -634,6 +634,8 @@ module CCMS
             [:global_means, 'GB_INPUT_B_1WP3_400A', false],
             [:global_means, 'GB_INPUT_B_1WP3_401A', false],
             [:global_means, 'GB_INPUT_B_2WP4_2A', true],
+            [:global_means, 'GB_INPUT_B_9WP3_349A', true],
+            [:global_means, 'GB_INPUT_B_9WP3_350A', true],
             [:global_means, 'GB_INPUT_B_9WP3_354A', true],
             [:global_means, 'GB_INPUT_B_9WP3_355A', true],
             [:global_merits, 'APP_CARE_SUPERVISION', false],
