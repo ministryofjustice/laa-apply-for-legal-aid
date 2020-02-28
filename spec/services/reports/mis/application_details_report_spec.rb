@@ -9,7 +9,7 @@ module Reports
       let(:report) { described_class.new }
 
       describe '#run' do
-        it 'gets only applications in assessment submitted  or subitting assessment states' do
+        it 'gets only applications in assessment submitted  or submitting assessment states' do
           expect(LegalAidApplication).to receive(:where).with(state: %w[submitting_assessment assessment_submitted]).and_call_original
           report.run
         end
