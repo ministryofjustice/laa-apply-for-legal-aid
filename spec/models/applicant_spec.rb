@@ -97,4 +97,40 @@ RSpec.describe Applicant, type: :model do
       expect(subject).to be_kind_of(Integer)
     end
   end
+
+  context 'income checks' do
+    let(:applicant) { create :applicant }
+    let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+    let(:transaction_array) { [benefits] }
+    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: transaction_array }
+    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+
+    describe '#receives_maintenance?' do
+      subject { legal_aid_application.applicant.receives_maintenance? }
+
+      context 'when they receive maintenance' do
+        let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when they do not receive maintenance' do
+        it { is_expected.to be false }
+      end
+    end
+
+    describe '#maintenance_per_month' do
+      subject { legal_aid_application.applicant.maintenance_per_month }
+
+      context 'when they receive maintenance' do
+        let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+        it { is_expected.to eq '150.00' }
+      end
+
+      context 'when they do not receive maintenance' do
+        it { is_expected.to eq '0.0' }
+      end
+    end
+  end
 end
