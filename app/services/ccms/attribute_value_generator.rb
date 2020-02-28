@@ -32,6 +32,7 @@ module CCMS
                                 |other_assets_declaration
                                 |other_party
                                 |proceeding
+                                |outgoing
                                 |respondent
                                 |savings_amount
                                 |income_type
@@ -53,6 +54,9 @@ module CCMS
     INCOME_TYPE_REGEX = /^income_type_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
+    OUTGOING = /^outgoing_(\S+)$/.freeze
+    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
+    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
@@ -327,6 +331,8 @@ module CCMS
         @legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp('?'))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
+      when OUTGOING
+        @legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
       when MERITS_ASSESSMENT

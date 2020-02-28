@@ -70,4 +70,20 @@ RSpec.describe TransactionType, type: :model do
       end
     end
   end
+
+  describe '#for_outgoing_type?' do
+    before { create :transaction_type, :child_care }
+    context 'no such outgoing types exist' do
+      it 'returns false' do
+        expect(TransactionType.for_outgoing_type?('maintenance_out')).to be false
+      end
+    end
+
+    context 'outgoing types do exist' do
+      before { create :transaction_type, :maintenance_out }
+      it 'returns true' do
+        expect(TransactionType.for_outgoing_type?('maintenance_out')).to be true
+      end
+    end
+  end
 end

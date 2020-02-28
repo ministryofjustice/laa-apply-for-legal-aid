@@ -2266,8 +2266,7 @@ global_means:
   GB_INPUT_B_14WP3_1A:
     generate_block?: false
     value: false
-    br100_meaning: 'Client Crim Legal Aid: Pays a contribution towards criminal legal
-      aid?'
+    br100_meaning: 'Client Criminal Legal Aid: Pays a contribution towards criminal legal aid?'
     response_type: boolean
     user_defined: true
   GB_INPUT_B_6WP3_232A:

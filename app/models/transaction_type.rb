@@ -24,6 +24,7 @@ class TransactionType < ApplicationRecord
   scope :debits, -> { active.where(operation: :debit) }
   scope :credits, -> { active.where(operation: :credit) }
   scope :income_for, ->(transaction_type_name) { active.where(operation: :credit, name: transaction_type_name) }
+  scope :outgoing_for, ->(transaction_type_name) { active.where(operation: :debit, name: transaction_type_name) }
 
   def self.populate
     populate_records
@@ -47,6 +48,10 @@ class TransactionType < ApplicationRecord
 
   def label_name(journey: :citizens)
     I18n.t("transaction_types.names.#{journey}.#{name}")
+  end
+
+  def self.for_outgoing_type?(transaction_type_name)
+    outgoing_for(transaction_type_name).any?
   end
 
   def citizens_label_name
