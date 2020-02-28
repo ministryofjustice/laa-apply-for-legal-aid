@@ -5,14 +5,16 @@
       local: true
     ) do |form| %>
   <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <%= date_input_fields(
-          prefix: :purchased_on,
-          field_name: :purchased_on,
-          form: form,
-          set_error_class_here: false, # Error class present on form group
-          label: page_title
+    <%= form.govuk_collection_radio_buttons(
+          :more_than_three_years_old,
+          [
+            { code: 'true', label: t('generic.yes') },
+            { code: 'false', label: t('generic.no') }
+          ],
+          :code,
+          :label,
+          title: page_title
         ) %>
-
   <% end %>
 
   <div class="govuk-!-padding-bottom-4"></div>

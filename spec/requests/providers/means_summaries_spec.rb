@@ -43,12 +43,12 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
     it 'displays the correct vehicles details' do
       expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
       expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
-      expect(response.body).to include(vehicle.purchased_on.to_s)
+      expect(response.body).to include(yes_no(vehicle.more_than_three_years_old?))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.heading'))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.estimated_value'))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.payment_remaining'))
-      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.purchased_on'))
+      expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.more_than_three_years_old'))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.used_regularly'))
     end
 
@@ -107,5 +107,9 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       let(:login) {}
       it_behaves_like 'a provider not authenticated'
     end
+  end
+
+  def yes_no(value)
+    value ? 'Yes' : 'No'
   end
 end
