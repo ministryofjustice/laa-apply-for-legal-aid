@@ -381,12 +381,7 @@ en:
               too_many_decimals: Amount must not include more than 2 decimal numbers
             payments_remain:
               blank: Select yes if there are any payments left on the vehicle
-            purchased_on:
-              blank: Enter a valid date
-              date_not_valid: Enter a valid date
-              citizens:
-                date_is_in_the_future: Date you bought the vehicle must be in the past
-              providers:
-                date_is_in_the_future: Date your client bought the vehicle must be in the past
+            more_than_three_years_old:
+              blank: Select Yes if your client bought the car over three years ago
             used_regularly:
               blank: Select yes if the vehicle is in regular use
