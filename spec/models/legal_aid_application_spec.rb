@@ -659,6 +659,34 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#transaction_types' do
+    let(:legal_aid_application) { create :legal_aid_application }
+    let!(:ff) { create :transaction_type, :friends_or_family }
+    let!(:salary) { create :transaction_type, :salary }
+    let!(:maintenance) { create :transaction_type, :maintenance_out }
+    let!(:child_care) { create :transaction_type, :child_care }
+    let!(:ff_tt) { create :legal_aid_application_transaction_type, transaction_type: ff, legal_aid_application: legal_aid_application }
+    let!(:maintenance_tt) { create :legal_aid_application_transaction_type, transaction_type: maintenance, legal_aid_application: legal_aid_application }
+
+    it 'returns an array of transaction type records' do
+      expect(legal_aid_application.transaction_types).to eq [ff, maintenance]
+    end
+
+    describe '#transaction_type.for_outgoing_type?' do
+      context 'there is no legal aid transaction type of the required type' do
+        it 'returns false' do
+          expect(legal_aid_application.transaction_types.for_outgoing_type?('child_care')).to be false
+        end
+      end
+
+      context 'there is a legal aid transaction type of the rrquired type' do
+        it 'returns true' do
+          expect(legal_aid_application.transaction_types.for_outgoing_type?('maintenance_out')).to be true
+        end
+      end
+    end
+  end
+
   describe 'after_save hook' do
     context 'when an application is created' do
       let(:application) { create :legal_aid_application }

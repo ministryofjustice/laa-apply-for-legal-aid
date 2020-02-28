@@ -41,5 +41,23 @@ FactoryBot.define do
       operation { 'credit' }
       sort_order { 20 }
     end
+
+    trait :salary do
+      name { 'salary' }
+      operation { 'credit' }
+      sort_order { 10 }
+    end
+
+    trait :maintenance_out do
+      name { 'maintenance_out' }
+      operation { 'debit' }
+      sort_order { 50 }
+    end
+
+    trait :child_care do
+      name { 'child_care' }
+      operation { 'credit' }
+      sort_order { 60 }
+    end
   end
 end

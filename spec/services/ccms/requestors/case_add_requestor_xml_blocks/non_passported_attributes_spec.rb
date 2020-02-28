@@ -319,6 +319,46 @@ module CCMS
           end
         end
 
+        context 'global means outgoing attributes' do
+          context 'maintenance payments' do
+            let(:maintenance_transaction) { create :transaction_type, :debit, name: 'maintenance_out' }
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: maintenance_transaction)
+            end
+            it 'has attributes' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP3_3A')
+              expect(block).to have_boolean_response true
+              expect(block).to be_user_defined
+            end
+            context 'no payments' do
+              before { legal_aid_application.transaction_types.delete_all }
+              it 'does not have attributes' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP3_3A')
+                expect(block).to have_boolean_response false
+              end
+            end
+          end
+          context 'applicant criminal legal aid payments' do
+            let(:criminal_legal_aid_transaction) { create :transaction_type, :debit, name: 'legal_aid' }
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: criminal_legal_aid_transaction)
+            end
+            it 'has attributes' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP3_1A')
+              expect(block).to have_boolean_response true
+              expect(block).to be_user_defined
+            end
+            context 'no payments' do
+              before { legal_aid_application.transaction_types.delete_all }
+              it 'does not have attributes' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP3_1A')
+                expect(block).to have_boolean_response false
+              end
+            end
+          end
+        end
+
         context 'attributes for WILL' do
           it 'generates the attributes' do
             will_attributes.each do |attr_name|
@@ -634,6 +674,8 @@ module CCMS
             [:global_means, 'GB_INPUT_B_1WP3_400A', false],
             [:global_means, 'GB_INPUT_B_1WP3_401A', false],
             [:global_means, 'GB_INPUT_B_2WP4_2A', true],
+            [:global_means, 'GB_INPUT_B_9WP3_349A', true],
+            [:global_means, 'GB_INPUT_B_9WP3_350A', true],
             [:global_means, 'GB_INPUT_B_9WP3_354A', true],
             [:global_means, 'GB_INPUT_B_9WP3_355A', true],
             [:global_merits, 'APP_CARE_SUPERVISION', false],
