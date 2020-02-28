@@ -1,11 +1,13 @@
 module CCMS
   module Parsers
     class BaseResponseParser
-      attr_reader :transaction_request_id, :response
+      attr_reader :transaction_request_id, :response, :success, :message
 
       def initialize(tx_request_id, response)
         @transaction_request_id = tx_request_id
         @response = response
+        @success = nil
+        @message = nil
       end
 
       def doc
@@ -15,6 +17,7 @@ module CCMS
       def parse(data_method)
         raise CcmsError, "Invalid transaction request id #{extracted_transaction_request_id}" unless extracted_id_matches_request_id?
 
+        extract_result_status
         __send__(data_method)
       end
 
@@ -24,6 +27,44 @@ module CCMS
 
       def text_from(xpath)
         doc.xpath(xpath).text
+      end
+
+      private
+
+      def extract_result_status
+        if status.present?
+          extract_status_code_and_message
+        elsif exception.present?
+          extract_exception_and_message
+        else
+          raise CcmsError, 'Unable to find status code or exception in response'
+        end
+      end
+
+      def status
+        @status ||= @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Status").text
+      end
+
+      def exception
+        @exception ||= @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusCode").text
+      end
+
+      def extract_status_code_and_message
+        @success = status == 'Success'
+        @message = "#{status}: #{status_free_text}"
+      end
+
+      def extract_exception_and_message
+        @success = false
+        @message = "Server side exception: #{exception}: #{exception_status_text}"
+      end
+
+      def exception_status_text
+        @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusText").text
+      end
+
+      def status_free_text
+        @status_free_text ||=  @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/StatusFreeText").text
       end
     end
   end
