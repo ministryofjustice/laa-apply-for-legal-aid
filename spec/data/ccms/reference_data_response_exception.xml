@@ -7,6 +7,7 @@
             xmlns:ns3="http://legalservices.gov.uk/Enterprise/Common/1.0/Header"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:ns5="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO"
+            xmlns:header="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <ns1:UsernameToken>
         <ns1:Username>my_soap_client_username</ns1:Username>
@@ -19,7 +20,7 @@
     </wsa:ReplyTo>
   </env:Header>
   <env:Body>
-    <ns1:ClientAddRS xmlns:ns1="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM">
+    <ns1:ReferenceDataInqRS xmlns:ns1="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM">
       <ns2:HeaderRS xmlns:ns2="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
         <ns2:TransactionID>20190301030405123456</ns2:TransactionID>
         <ns2:RequestDetails>
@@ -29,14 +30,14 @@
           <ns2:UserRole>my_role</ns2:UserRole>
         </ns2:RequestDetails>
         <ns2:Status>
-          <header:Exceptions>
-            <header:ObjectPath>:</header:ObjectPath>
-            <header:StatusCode>Error</header:StatusCode>
-            <header:StatusText>USer does not have valid responsibility associated.</header:StatusText>
-          </header:Exceptions>
+          <ns2:Exceptions>
+            <ns2:ObjectPath>:</ns2:ObjectPath>
+            <ns2:StatusCode>Error</ns2:StatusCode>
+            <ns2:StatusText>User does not have valid responsibility associated.</ns2:StatusText>
+          </ns2:Exceptions>
         </ns2:Status>
       </ns2:HeaderRS>
       <ns1:TransactionID>20190301030405123456</ns1:TransactionID>
-    </ns1:ClientAddRS>
+    </ns1:ReferenceDataInqRS>
   </env:Body>
 </env:Envelope>

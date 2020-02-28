@@ -26,6 +26,20 @@ module CCMS
           it 'does not return an applicant_ccms_reference' do
             expect(parser.applicant_ccms_reference).to be_nil
           end
+
+          describe '#success' do
+            it 'returns true' do
+              parser.record_count
+              expect(parser.success).to be true
+            end
+          end
+
+          describe '#message' do
+            it 'returns status and message' do
+              parser.record_count
+              expect(parser.message).to eq 'Success: End of Get Party details process.'
+            end
+          end
         end
 
         context 'there is one applicant returned' do
@@ -38,6 +52,20 @@ module CCMS
           it 'returns the applicant_ccms_reference' do
             expect(parser.applicant_ccms_reference).to eq '4390016'
           end
+
+          describe '#success' do
+            it 'returns true' do
+              parser.record_count
+              expect(parser.success).to be true
+            end
+          end
+
+          describe '#message' do
+            it 'returns status and message' do
+              parser.record_count
+              expect(parser.message).to eq 'Success: End of Get Party details process.'
+            end
+          end
         end
 
         context 'there are multiple applicants returned' do
@@ -49,6 +77,20 @@ module CCMS
 
           it 'returns the first applicant_ccms_reference' do
             expect(parser.applicant_ccms_reference).to eq '4390017'
+          end
+
+          describe '#success' do
+            it 'returns true' do
+              parser.record_count
+              expect(parser.success).to be true
+            end
+          end
+
+          describe '#message' do
+            it 'returns status and message' do
+              parser.record_count
+              expect(parser.message).to eq 'Success: End of Get Party details process.'
+            end
           end
         end
       end

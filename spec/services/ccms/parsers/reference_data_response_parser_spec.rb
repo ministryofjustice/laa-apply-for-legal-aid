@@ -60,6 +60,46 @@ module CCMS
         end
       end
 
+      context 'failed response without message' do
+        let(:response_xml) { ccms_data_from_file 'reference_data_response_without_status_free_text.xml' }
+
+        describe '#success' do
+          it 'returns false' do
+            parser = described_class.new(expected_tx_id, response_xml)
+            parser.reference_id
+            expect(parser.success).to be false
+          end
+        end
+
+        describe '#message' do
+          it 'returns status concatenated with status free text' do
+            parser = described_class.new(expected_tx_id, response_xml)
+            parser.reference_id
+            expect(parser.message).to eq 'Failed: '
+          end
+        end
+      end
+
+      context 'failed response - server side exception' do
+        let(:response_xml) { ccms_data_from_file 'reference_data_response_exception.xml' }
+
+        describe '#success' do
+          it 'returns false' do
+            parser = described_class.new(expected_tx_id, response_xml)
+            parser.reference_id
+            expect(parser.success).to be false
+          end
+        end
+
+        describe '#message' do
+          it 'returns exception message concatenated with status and status free text' do
+            parser = described_class.new(expected_tx_id, response_xml)
+            parser.reference_id
+            expect(parser.message).to eq 'Server side exception: Error: User does not have valid responsibility associated.'
+          end
+        end
+      end
+
     end
   end
 end
