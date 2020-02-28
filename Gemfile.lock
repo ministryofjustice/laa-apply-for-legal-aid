@@ -118,7 +118,7 @@ GEM
       safely_block (>= 0.1.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
-    browser (3.0.3)
+    browser (4.0.0)
     builder (3.2.4)
     business (1.17.1)
     byebug (11.1.1)
@@ -530,7 +530,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    wicked_pdf (1.4.0)
+    wicked_pdf (2.0.1)
       activesupport
     xpath (3.2.0)
       nokogiri (~> 1.8)
