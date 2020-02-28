@@ -32,10 +32,10 @@
       ) if @legal_aid_application.own_vehicle? %>
 
   <%= check_answer_link(
-        name: :vehicles_purchase_dates,
-        url: check_answer_url_for(journey_type, :vehicles_purchase_dates, @legal_aid_application),
-        question: t(".#{journey_type}.purchased_on"),
-        answer: @legal_aid_application.vehicle.purchased_on,
+        name: :vehicles_ages,
+        url: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
+        question: t(".#{journey_type}.more_than_three_years_old"),
+        answer: yes_no(@legal_aid_application.vehicle.more_than_three_years_old?),
         read_only: read_only,
         align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
