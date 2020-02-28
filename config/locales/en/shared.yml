@@ -283,6 +283,6 @@ en:
             personal contract purchase (PCP) agreements
           enter_amount_left_to_pay: Enter the amount left to pay
         regular_use:
-          include_partner_use: This includes use by your client's partner (if they have one)
+          include_partner_use: This means the vehicle is used at least once every 2 weeks for things like work, shopping or driving children to school.
     page-title:
       suffix: Apply for legal aid

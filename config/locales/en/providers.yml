@@ -558,7 +558,7 @@ en:
       regular_uses:
         show:
           heading: Is the vehicle in regular use?
-          include_partner_use: This includes use by your client's partner (if they have one).
+          include_partner_use: This includes use by your client's partner (if they have one) -PROVIDERS.
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?

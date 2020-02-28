@@ -179,19 +179,4 @@ en:
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?
-    vehicles:
-      show:
-        heading: Do you own a vehicle?
-      estimated_values:
-        show:
-          heading: What is the estimated value of the vehicle?
-      purchase_dates:
-        show:
-          heading: When did you buy the vehicle?
-      regular_uses:
-        show:
-          heading: Is the vehicle in regular use?
-          include_partner_use: This includes use by your client's partner (if they have one).
-      remaining_payments:
-        show:
-          heading: Are there any payments left on the vehicle?
+
