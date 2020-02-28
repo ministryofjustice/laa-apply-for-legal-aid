@@ -426,6 +426,90 @@ module CCMS
             expect(block).not_to be_present
           end
         end
+
+        context 'gross income' do
+          let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
+          let!(:property_or_lodger) { create :transaction_type, :credit, name: 'property_or_lodger' }
+          let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+          let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+          let(:bank_provider) { create :bank_provider, applicant: applicant }
+          let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+          let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
+          let(:applicant) { create :applicant, :with_address }
+          let(:legal_aid_application) do
+            create :legal_aid_application,
+                   :with_everything,
+                   :with_applicant_and_address,
+                   :with_negative_benefit_check_result,
+                   :with_proceeding_types,
+                   :with_substantive_scope_limitation,
+                   populate_vehicle: true,
+                   with_bank_accounts: 2,
+                   proceeding_types: [proceeding_type],
+                   provider: provider,
+                   office: office,
+                   applicant: applicant,
+                   transaction_types: [benefits]
+          end
+
+          context 'GB_INPUT_B_8WP3_310A' do
+            context 'when the applicant receives financial support' do
+              before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+
+              it 'generates a block with a response of false' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+
+            context 'when the applicant does not receive financial support' do
+              it 'generates a block with a response of false' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          context 'rental income' do
+            context 'when the applicant receives rental income' do
+              before { create :bank_transaction, :credit, transaction_type: property_or_lodger, bank_account: bank_account }
+
+              let(:expected_results) do
+                [
+                  ['GB_INPUT_B_9WP3_351A', false],
+                  ['GB_INPUT_B_9WP3_352A', false]
+                ]
+              end
+              it 'generates a block with a response of false' do
+                expected_results.each do |expected_result_array|
+                  attr_name, expected_result = expected_result_array
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).to have_boolean_response expected_result
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'when the applicant does not receive rental income' do
+              let(:expected_results) do
+                [
+                  ['GB_INPUT_B_9WP3_351A', false],
+                  ['GB_INPUT_B_9WP3_352A', false]
+                ]
+              end
+              it 'generates a block with a response of false' do
+                expected_results.each do |expected_result_array|
+                  attr_name, expected_result = expected_result_array
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).to have_boolean_response expected_result
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+          end
+        end
       end
     end
   end
