@@ -48,6 +48,12 @@ class Applicant < ApplicationRecord
     age < 16
   end
 
+  def receives_financial_support?
+    return false if bank_transactions.empty?
+
+    bank_transactions.map(&:transaction_type_id).include?(TransactionType.find_by(name: 'friends_or_family')&.id)
+  end
+
   def receives_maintenance?
     maintenance_per_month.to_i.positive?
   end

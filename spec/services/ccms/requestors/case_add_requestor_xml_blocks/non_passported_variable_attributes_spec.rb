@@ -457,9 +457,9 @@ module CCMS
             context 'when the applicant receives financial support' do
               before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
 
-              it 'generates a block with a response of false' do
+              it 'generates a block with the correct values' do
                 block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_8WP3_310A')
-                expect(block).to have_boolean_response false
+                expect(block).to have_boolean_response true
                 expect(block).to be_user_defined
               end
             end

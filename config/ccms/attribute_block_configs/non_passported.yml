@@ -689,7 +689,7 @@ global_means:
     br100_meaning: 'Client Financial Support: Receives financial support?'
     response_type: boolean
     generate_block?: true
-    value: false
+    value: '#applicant_receives_financial_support?'
   GB_INPUT_B_9WP3_351A:
     user_defined: true
     br100_meaning: 'Client Rental Income: Receives rental income from another property?'

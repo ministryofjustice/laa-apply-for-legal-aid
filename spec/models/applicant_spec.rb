@@ -98,6 +98,27 @@ RSpec.describe Applicant, type: :model do
     end
   end
 
+  describe '#receives_financial_support?' do
+    subject { legal_aid_application.applicant.receives_financial_support? }
+
+    let(:applicant) { create :applicant }
+    let(:bank_provider) { create :bank_provider, applicant: applicant }
+    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+    let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
+    let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+    let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
+    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [benefits] }
+
+    context 'when they receive friends and family income' do
+      before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+      it { is_expected.to be true }
+    end
+
+    context 'when they do not receive friends and family income' do
+      it { is_expected.to be false }
+    end
+  end
+
   context 'income checks' do
     let(:applicant) { create :applicant }
     let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
