@@ -144,15 +144,15 @@ RSpec.describe 'providers savings and investments', type: :request do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
-            it 'redirects to the check passported answers page' do
-              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+            it 'redirects to the restrictions page' do
+              expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
             end
 
             context "provider checking citizen's answers" do
               let(:state) { :provider_checking_citizens_means_answers }
 
-              it 'redirects to means summary page' do
-                expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+              it 'redirects to the restrictions page' do
+                expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
               end
             end
           end

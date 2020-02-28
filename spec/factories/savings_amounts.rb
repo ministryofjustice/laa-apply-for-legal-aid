@@ -3,8 +3,12 @@ FactoryBot.define do
     legal_aid_application
 
     trait :with_values do
-      offline_current_accounts { rand(1...1_000_000.0).round(2) }
-      offline_savings_accounts { rand(1...1_000_000.0).round(2) }
+      offline_current_accounts do
+        [true, false].sample ? rand(1...1_000_000.0).round(2) : -rand(1...1_000_000.0).round(2)
+      end
+      offline_savings_accounts do
+        [true, false].sample ? rand(1...1_000_000.0).round(2) : -rand(1...1_000_000.0).round(2)
+      end
       cash { rand(1...1_000_000.0).round(2) }
       other_person_account { rand(1...1_000_000.0).round(2) }
       national_savings { rand(1...1_000_000.0).round(2) }
