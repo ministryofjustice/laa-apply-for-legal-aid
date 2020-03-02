@@ -114,7 +114,7 @@ module CFEResults
               },
               "childcare_allowance": '0.0',
               "dependant_allowance": '0.0',
-              "maintenance_allowance": '50.0',
+              "maintenance_allowance": '0.0',
               "gross_housing_costs": '125.0',
               "housing_benefit": '0.0',
               "net_housing_costs": '125.0',
@@ -246,6 +246,12 @@ module CFEResults
           "assessed_equity": '125.33'
         }
         result[:assessment][:capital][:capital_items][:properties][:additional_properties] = [property]
+        result
+      end
+
+      def self.with_maintenance_outgoings
+        result = eligible
+        result[:assessment][:disposable_income][:maintenance_allowance] = '150.00'
         result
       end
     end

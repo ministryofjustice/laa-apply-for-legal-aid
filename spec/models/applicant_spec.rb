@@ -97,4 +97,61 @@ RSpec.describe Applicant, type: :model do
       expect(subject).to be_kind_of(Integer)
     end
   end
+
+  describe '#receives_financial_support?' do
+    subject { legal_aid_application.applicant.receives_financial_support? }
+
+    let(:applicant) { create :applicant }
+    let(:bank_provider) { create :bank_provider, applicant: applicant }
+    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+    let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
+    let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+    let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
+    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [benefits] }
+
+    context 'when they receive friends and family income' do
+      before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+      it { is_expected.to be true }
+    end
+
+    context 'when they do not receive friends and family income' do
+      it { is_expected.to be false }
+    end
+  end
+
+  context 'income checks' do
+    let(:applicant) { create :applicant }
+    let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
+    let(:transaction_array) { [benefits] }
+    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: transaction_array }
+    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+
+    describe '#receives_maintenance?' do
+      subject { legal_aid_application.applicant.receives_maintenance? }
+
+      context 'when they receive maintenance' do
+        let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when they do not receive maintenance' do
+        it { is_expected.to be false }
+      end
+    end
+
+    describe '#maintenance_per_month' do
+      subject { legal_aid_application.applicant.maintenance_per_month }
+
+      context 'when they receive maintenance' do
+        let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+
+        it { is_expected.to eq '150.00' }
+      end
+
+      context 'when they do not receive maintenance' do
+        it { is_expected.to eq '0.0' }
+      end
+    end
+  end
 end

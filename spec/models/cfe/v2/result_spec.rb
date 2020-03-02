@@ -9,6 +9,7 @@ module CFE
       let(:no_additional_properties) { create :cfe_v2_result, :no_additional_properties }
       let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
       let(:no_vehicles) { create :cfe_v2_result, :no_vehicles }
+      let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_outgoings }
 
       describe '#overview' do
         context 'applicant is eligible' do
@@ -288,6 +289,22 @@ module CFE
           expect(eligible_result.maintenance_costs).to be_kind_of(Hash)
           expect(eligible_result.maintenance_costs).to include(:amount)
           expect(eligible_result.maintenance_costs).to include(:payment_date)
+        end
+      end
+
+      ################################################################
+      #  DISPOSABLE INCOME                                           #
+      ################################################################
+
+      describe 'maintenance_per_month' do
+        context 'when maintenance is received' do
+          subject(:maintenance_per_month) { with_maintenance.maintenance_per_month }
+          it { is_expected.to eq 150.00 }
+        end
+
+        context 'when maintenance is not received' do
+          subject(:maintenance_per_month) { eligible_result.maintenance_per_month }
+          it { is_expected.to eq 0.00 }
         end
       end
 
