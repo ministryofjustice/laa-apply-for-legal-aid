@@ -370,7 +370,9 @@ workflows:
     - delete_uat:
         filters:
           branches:
-            only: master
+            only:
+              - master
+              - update-delete-uat-script
   nightly:
     triggers:
     - schedule:
