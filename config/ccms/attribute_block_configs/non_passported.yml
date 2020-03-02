@@ -330,6 +330,12 @@ global_means:
   CLIENT_VULNERABLE:
     generate_block?: true
     value: false
+  GB_INPUT_B_14WP3_1A:
+    generate_block?: true
+    value: '#outgoing_legal_aid?'
+  GB_INPUT_B_12WP3_3A:
+    generate_block?: true
+    value: '#outgoing_maintenance_out?'
   GB_INFER_B_26WP3_214A:
     generate_block?: true
     value: false
@@ -427,7 +433,7 @@ global_means:
     generate_block?: true
     value: false
     response_type: boolean
-    br100_meaning: 'GB_INPUT_B_9WP3_354A'
+    br100_meaning: 'Client Interest on savings: Earns income from interest on savings?'
     user_defined: true
   GB_INPUT_B_9WP3_355A:
     generate_block?: true
@@ -654,7 +660,54 @@ global_means:
     user_defined: true
     response_type: currency
     generate_block?: false
-
+  GB_INPUT_B_9WP3_350A:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Client Pension: Receives a pension from an employer?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_9WP3_349A:
+    generate_block?: true
+    value: false
+    br100_meaning: 'Client Private Pension: Receives a private pension?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_C_6WP3_323A:
+    br100_meaning: 'Client State Pension: Amount received'
+    response_type: currency
+    value: 0.0
+    user_defined: true
+    generate_block?: false
+  GB_INPUT_B_9WP3_353A:
+    generate_block?: true
+    value: '#income_type_student_loan?'
+    br100_meaning: 'Client Student Income: Receives a student loan/grant or bursary?'
+    response_type: boolean
+    user_defined: true
+  GB_INPUT_B_8WP3_310A:
+    user_defined: true
+    br100_meaning: 'Client Financial Support: Receives financial support?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_receives_financial_support?'
+  GB_INPUT_B_9WP3_351A:
+    user_defined: true
+    br100_meaning: 'Client Rental Income: Receives rental income from another property?'
+    response_type: boolean
+    generate_block?: true
+    value: false
+  GB_INPUT_B_9WP3_352A:
+    user_defined: true
+    br100_meaning: 'Client Board Income: Receives board or rent from family lodgers or tenants?'
+    response_type: boolean
+    generate_block?: true
+    value: false
+  GB_INPUT_C_8WP3_303A:
+    user_defined: true
+    br100_meaning: 'Client Maintenance: Amount received per month'
+    response_type: number
+    generate_block?: '#applicant_receives_maintenance?'
+    value: '#applicant_maintenance_per_month'
 global_merits:
   APP_CARE_SUPERVISION:
     generate_block?: true

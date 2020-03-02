@@ -52,4 +52,38 @@ RSpec.describe TransactionType, type: :model do
       end
     end
   end
+
+  describe '#for_income_type?' do
+    context 'checks that a boolean response is returned' do
+      let!(:credit_transaction) { create :transaction_type, :credit_with_standard_name }
+
+      it ' returns true with a valid income_type' do
+        expect(described_class.for_income_type?(credit_transaction['name'])).to eq true
+      end
+    end
+
+    context 'checks for boolean response' do
+      let!(:debit_transaction) { create :transaction_type, :debit_with_standard_name }
+
+      it ' returns false when a non valid income type is used' do
+        expect(described_class.for_income_type?(debit_transaction['name'])).to eq false
+      end
+    end
+  end
+
+  describe '#for_outgoing_type?' do
+    before { create :transaction_type, :child_care }
+    context 'no such outgoing types exist' do
+      it 'returns false' do
+        expect(TransactionType.for_outgoing_type?('maintenance_out')).to be false
+      end
+    end
+
+    context 'outgoing types do exist' do
+      before { create :transaction_type, :maintenance_out }
+      it 'returns true' do
+        expect(TransactionType.for_outgoing_type?('maintenance_out')).to be true
+      end
+    end
+  end
 end

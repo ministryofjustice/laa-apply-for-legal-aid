@@ -1,0 +1,60 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+              xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <wsa:To xmlns:wsa="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:MessageID xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:216C3511596511EABF99012B4AFAC620</wsa:MessageID>
+    <wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:214D3B60596511EABF99012B4AFAC620</wsa:RelatesTo>
+    <wsa:ReplyTo xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters/>
+    </wsa:ReplyTo>
+    <wsa:FaultTo xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters/>
+    </wsa:FaultTo>
+    <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" wsa:IsReferenceParameter="1" xmlns:wsa="http://www.w3.org/2005/08/addressing">0009TtLLIBVATOw5OFL6id000775000lSL</instra:tracking.ecid>
+    <instra:tracking.parentComponentInstanceId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" wsa:IsReferenceParameter="1" xmlns:wsa="http://www.w3.org/2005/08/addressing">reference:22398358</instra:tracking.parentComponentInstanceId>
+    <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0" wsa:IsReferenceParameter="1" xmlns:wsa="http://www.w3.org/2005/08/addressing">2020-02-27T13:29:07.298Z</instra:tracking.compositeInstanceCreatedTime>
+    <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2020-02-27T13:29:07.298Z</instra:tracking.compositeInstanceCreatedTime>
+    <wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:MessageID>urn:216C3511596511EABF99012B4AFAC620</wsa:MessageID>
+    <wsa:RelatesTo>urn:214D3B60596511EABF99012B4AFAC620</wsa:RelatesTo>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0009TtLLIBVATOw5OFL6id000775000lSL</instra:tracking.ecid>
+        <instra:tracking.conversationId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">urn:214D3B60596511EABF99012B4AFAC620</instra:tracking.conversationId>
+        <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2020-02-27T13:29:07.298Z</instra:tracking.compositeInstanceCreatedTime>
+      </wsa:ReferenceParameters>
+    </wsa:ReplyTo>
+    <wsa:FaultTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0009TtLLIBVATOw5OFL6id000775000lSL</instra:tracking.ecid>
+        <instra:tracking.conversationId xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">urn:214D3B60596511EABF99012B4AFAC620</instra:tracking.conversationId>
+        <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2020-02-27T13:29:07.298Z</instra:tracking.compositeInstanceCreatedTime>
+      </wsa:ReferenceParameters>
+    </wsa:FaultTo>
+  </env:Header>
+  <env:Body>
+    <ClientAddUpdtStatusRS xmlns:msg="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM"
+                           xmlns="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM"
+                           xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <header:HeaderRS xmlns:header="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <header:TransactionID>202002271328554101970899557</header:TransactionID>
+        <header:RequestDetails>
+          <header:TransactionRequestID>202002271329068590248783169</header:TransactionRequestID>
+          <header:Language>ENG</header:Language>
+          <header:UserLoginID>test1</header:UserLoginID>
+          <header:UserRole>EXTERNAL</header:UserRole>
+        </header:RequestDetails>
+        <header:Status>
+          <header:Exceptions>
+            <header:ObjectPath>:</header:ObjectPath>
+            <header:StatusCode>Error</header:StatusCode>
+            <header:StatusText>USer does not have valid responsibility associated.</header:StatusText>
+          </header:Exceptions>
+        </header:Status>
+      </header:HeaderRS>
+    </ClientAddUpdtStatusRS>
+  </env:Body>
+</env:Envelope>

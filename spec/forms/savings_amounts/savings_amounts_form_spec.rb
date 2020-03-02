@@ -84,10 +84,56 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts are less than 0' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
-        let(:expected_error) { /must be 0 or more/ }
+        context 'that are not bank account attributes' do
+          let(:attribute_map) do
+            {
+              offline_current_accounts: /total in.*accounts/i,
+              offline_savings_accounts: /total in.*accounts/i,
+              cash: /total.*cash savings/i,
+              other_person_account: /other people’s accounts/,
+              national_savings: /certificates and bonds/,
+              plc_shares: /shares/,
+              peps_unit_trusts_capital_bonds_gov_stocks: /total.*of other investments/i,
+              life_assurance_endowment_policy: /total.*of life assurance policies/i
+            }
+          end
+          let(:attributes_without_savings_or_current_accounts) { attributes - %i[offline_current_accounts offline_savings_accounts] }
+          let(:amount_params) { attributes_without_savings_or_current_accounts.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
+          let(:expected_error) { /must be 0 or more/ }
+          before do
+            amount_params[:offline_current_accounts] = '1'
+            amount_params[:offline_savings_accounts] = '1'
+          end
 
-        it_behaves_like 'it has an error'
+          it 'returns false' do
+            expect(subject.save).to eq(false)
+          end
+
+          it 'generates errors' do
+            subject.save
+            attributes_without_savings_or_current_accounts.each do |attr|
+              error_message = subject.errors[attr].first
+              expect(error_message).to match(expected_error)
+              expect(error_message).to match(attribute_map[attr.to_sym])
+            end
+          end
+
+          it 'does not update the model' do
+            expect { subject.save }.not_to change { savings_amount.reload.updated_at }
+          end
+        end
+        context 'for bank account values' do
+          let(:amount_params) do
+            random_value = [rand(1...1_000_000.0).round(2).to_s, (-rand(1...1_000_000.0).round(2).to_s).to_s, '0'].sample
+            attributes.each_with_object({}) do |attr, hsh|
+              hsh[attr] = rand(1...1_000_000.0).round(2).to_s
+              %i[offline_current_accounts offline_savings_accounts].include?(attr) ? hsh[attr] = random_value : next
+            end
+          end
+          it 'has no errors' do
+            expect(subject.save).to eq(true)
+          end
+        end
       end
 
       context 'amounts have a £ symbol' do

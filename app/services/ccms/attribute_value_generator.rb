@@ -32,23 +32,29 @@ module CCMS
                                 |other_assets_declaration
                                 |other_party
                                 |proceeding
+                                |outgoing
                                 |respondent
                                 |savings_amount
+                                |income_type
                                 |vehicle
                                 |wage_slip
                                 )_(\S+)$}x.freeze
-    APPLICATION_REGEX = /^application_(\S+)$/.freeze
-    APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
+    APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
+    APPLICATION_REGEX = /^application_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
+    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
+    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
+    OPPONENT = /^opponent_(\S+)$/.freeze
+    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
+    OTHER_PARTY = /^other_party_(\S+)$/.freeze
+    PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
+    RESPONDENT = /^respondent_(\S+)$/.freeze
+    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
+    INCOME_TYPE_REGEX = /^income_type_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
-    PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
-    OTHER_PARTY = /^other_party_(\S+)$/.freeze
-    OPPONENT = /^opponent_(\S+)$/.freeze
-    RESPONDENT = /^respondent_(\S+)$/.freeze
-    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
-    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
+    OUTGOING = /^outgoing_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
@@ -162,12 +168,12 @@ module CCMS
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
     end
 
-    def applicant_has_national_savings?(_options)
-      not_zero? savings.national_savings
-    end
-
     def applicant_has_other_capital?(_options)
       not_zero? savings.peps_unit_trusts_capital_bonds_gov_stocks
+    end
+
+    def applicant_has_national_savings?(_options)
+      not_zero? savings.national_savings
     end
 
     def applicant_has_other_savings?(_options)
@@ -321,8 +327,12 @@ module CCMS
         options[:wage_slip].__send__(Regexp.last_match(1))
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
+      when INCOME_TYPE_REGEX
+        @legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp('?'))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
+      when OUTGOING
+        @legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
       when MERITS_ASSESSMENT

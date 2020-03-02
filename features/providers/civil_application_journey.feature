@@ -623,8 +623,8 @@ Feature: Civil application journeys
     Then I choose option "Vehicle payments remain true"
     Then I fill "Payment remaining" with "2000"
     And I click "Save and continue"
-    Then I should be on a page showing "When did your client buy the vehicle?"
-    Then I enter the purchase date '21-3-2002'
+    Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
+    Then I choose 'Yes'
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
     Then I choose option "Vehicle used regularly true"
