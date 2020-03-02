@@ -77,8 +77,6 @@ EXPOSE 3002
 
 COPY . .
 
-RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
-
 # tidy up installation
 RUN apk del build-dependencies
 
