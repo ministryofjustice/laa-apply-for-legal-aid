@@ -21,6 +21,10 @@ module CFE
         result_hash[:assessment][:gross_income]
       end
 
+      def disposable_income
+        result_hash[:assessment][:disposable_income]
+      end
+
       def outgoings
         result_hash[:assessment][:disposable_income][:outgoings]
       end
@@ -37,6 +41,13 @@ module CFE
 
       def monthly_other_income
         gross_income[:monthly_other_income].to_d
+      end
+
+      def maintenance_per_month
+        # TODO: monitor this... is it actually monthly or a gross amount?
+        # this will need testing once full CCMS submission for non passported
+        # is working.  Either this will need amending or this comment can be deleted
+        disposable_income[:maintenance_allowance].to_d
       end
 
       ################################################################
