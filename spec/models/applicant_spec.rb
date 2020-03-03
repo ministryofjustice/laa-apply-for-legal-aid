@@ -154,4 +154,20 @@ RSpec.describe Applicant, type: :model do
       end
     end
   end
+
+  describe '#mortgage_per_month' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything }
+    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    subject { legal_aid_application.applicant.mortgage_per_month }
+
+    context 'when they pay a mortgage' do
+      let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+
+      it { is_expected.to eq '125.00' }
+    end
+
+    context 'when they do not pay a mortgage' do
+      it { is_expected.to eq '0.0' }
+    end
+  end
 end
