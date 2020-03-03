@@ -1442,7 +1442,6 @@ national_savings:
     user_defined: true
     response_type: currency
 
-
 other_capital:
   OTHCAPITAL_INPUT_B_17WP2_1A:
     value: false
@@ -1530,7 +1529,6 @@ other_savings:
     user_defined: true
     response_type: text
     generate_block?: true
-
 
 premium_bonds:
   CLIPREMIUM_INPUT_B_9WP2_10A:
@@ -2297,7 +2295,6 @@ vehicles:
     user_defined: true
     response_type: date
     generate_block?: '#applicant_has_vehicle?'
-
 
 will:
   WILL_INPUT_B_2WP2_10A:
