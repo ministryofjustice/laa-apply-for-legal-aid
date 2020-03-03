@@ -10,6 +10,7 @@ module CFE
       let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
       let(:no_vehicles) { create :cfe_v2_result, :no_vehicles }
       let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_outgoings }
+      let(:no_mortgage) { create :cfe_v2_result, :no_mortgage }
 
       describe '#overview' do
         context 'applicant is eligible' do
@@ -311,6 +312,20 @@ module CFE
       ################################################################
       #  TOTALS                                                      #
       ################################################################
+
+      describe 'mortgage per month' do
+        context 'when mortgage is paid' do
+          it 'returns the value of mortgage per month' do
+            expect(eligible_result.mortgage_per_month).to eq 125.0
+          end
+        end
+
+        context 'when no mortgage is paid' do
+          it 'returns the value of mortgage per month' do
+            expect(no_mortgage.mortgage_per_month).to eq 0.0
+          end
+        end
+      end
 
       describe 'pensioner_capital_disregard' do
         it 'returns the total pension disregard' do

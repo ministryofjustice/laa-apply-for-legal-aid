@@ -39,6 +39,10 @@ module CFE
       #                                                              #
       ################################################################
 
+      def mortgage_per_month
+        disposable_income[:gross_housing_costs].to_d
+      end
+
       def monthly_other_income
         gross_income[:monthly_other_income].to_d
       end

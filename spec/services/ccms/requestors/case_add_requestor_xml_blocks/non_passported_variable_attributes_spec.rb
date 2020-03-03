@@ -530,6 +530,28 @@ module CCMS
             end
           end
         end
+
+        #context 'GB_INPUT_C_13WP3_3A' do
+        #  context 'when the applicant pays a mortgage' do
+        #    let(:legal_aid_application) { create :legal_aid_application }
+        #    #let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+        #    let!(:cfe_v2_response) { create :cfe_v2_result  }
+        #
+        #    it 'returns true' do
+        #      #ap JSON.parse(cfe_v2_response.result)['assessment']['disposable_income']['gross_housing_costs'].to_d
+        #      block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_13WP3_3A')
+        #      expect(block).to have_currency_response 125.0
+        #      expect(block).not_to be_user_defined
+        #    end
+        #
+        #    context 'when the applicant does not receive maintenance' do
+        #      it 'does not generate a block' do
+        #        block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
+        #        expect(block).not_to be_present
+        #      end
+        #    end
+        #  end
+        #end
       end
     end
   end
