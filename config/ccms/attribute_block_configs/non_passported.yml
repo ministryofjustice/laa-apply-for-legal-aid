@@ -738,6 +738,12 @@ global_means:
     br100_meaning: 'Mortgage: Monthly repayment amount for secured loans'
     response_type: currency
     user_defined: true
+  PUI_CLIENT_INCOME_CONT:
+    user_defined: false
+    br100_meaning: 'Client Provisional Income Contribution'
+    response_type: currency
+    generate_block?: true
+    value: '#means_assessment_capital_contribution'
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -1436,7 +1442,6 @@ national_savings:
     user_defined: true
     response_type: currency
 
-
 other_capital:
   OTHCAPITAL_INPUT_B_17WP2_1A:
     value: false
@@ -1524,7 +1529,6 @@ other_savings:
     user_defined: true
     response_type: text
     generate_block?: true
-
 
 premium_bonds:
   CLIPREMIUM_INPUT_B_9WP2_10A:
@@ -2291,7 +2295,6 @@ vehicles:
     user_defined: true
     response_type: date
     generate_block?: '#applicant_has_vehicle?'
-
 
 will:
   WILL_INPUT_B_2WP2_10A:
