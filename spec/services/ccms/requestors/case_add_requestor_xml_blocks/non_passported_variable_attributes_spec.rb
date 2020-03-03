@@ -531,27 +531,75 @@ module CCMS
           end
         end
 
-        #context 'GB_INPUT_C_13WP3_3A' do
-        #  context 'when the applicant pays a mortgage' do
-        #    let(:legal_aid_application) { create :legal_aid_application }
-        #    #let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        #    let!(:cfe_v2_response) { create :cfe_v2_result  }
-        #
-        #    it 'returns true' do
-        #      #ap JSON.parse(cfe_v2_response.result)['assessment']['disposable_income']['gross_housing_costs'].to_d
-        #      block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_13WP3_3A')
-        #      expect(block).to have_currency_response 125.0
-        #      expect(block).not_to be_user_defined
-        #    end
-        #
-        #    context 'when the applicant does not receive maintenance' do
-        #      it 'does not generate a block' do
-        #        block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
-        #        expect(block).not_to be_present
-        #      end
-        #    end
-        #  end
-        #end
+        context 'GB_INPUT_B_13WP3_14A' do
+          context 'when the applicant pays rent or mortgage' do
+            let(:rent_or_mortgage_payment) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: rent_or_mortgage_payment)
+            end
+            let(:attrs) do
+              %w[
+                GB_INPUT_B_13WP3_14A
+                GB_INPUT_B_13WP3_1A
+                GB_INPUT_B_13WP3_36A
+              ]
+            end
+
+            it 'returns true' do
+              attrs.each do |attr_name|
+                block = XmlExtractor.call(xml, :global_means, attr_name)
+                expect(block).to have_boolean_response true
+                expect(block).to_not be_user_defined
+              end
+            end
+
+            context 'applicant does not pay rent or mortgage' do
+              before { legal_aid_application.transaction_types.delete_all }
+              let(:attrs) do
+                %w[
+                  GB_INPUT_B_13WP3_14A
+                  GB_INPUT_B_13WP3_1A
+                  GB_INPUT_B_13WP3_36A
+                ]
+              end
+
+              it 'returns false' do
+                attrs.each do |attr_name|
+                  block = XmlExtractor.call(xml, :global_means, attr_name)
+                  expect(block).to have_boolean_response false
+                  expect(block).to_not be_user_defined
+                end
+              end
+            end
+          end
+        end
+
+        context 'GB_INPUT_C_13WP3_3A' do
+          context 'when the applicant pays a mortgage' do
+            let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+            let(:rent_or_mortgage_payment) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: rent_or_mortgage_payment)
+            end
+
+            it 'does generate the block' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_13WP3_3A')
+              expect(block).to have_currency_response 125.00
+              expect(block).to be_present
+            end
+          end
+
+          context 'when the applicant does not pay a mortgage' do
+            before { legal_aid_application.transaction_types.delete_all }
+
+            it 'does not generate the block' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_13WP3_3A')
+              expect(block).not_to be_present
+            end
+          end
+        end
       end
     end
   end
