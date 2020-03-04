@@ -16,6 +16,10 @@ FactoryBot.define do
       result { CFEResults::V1::MockResults.contribution_required.to_json }
     end
 
+    trait :no_capital do
+      result { CFEResults::V1::MockResults.no_capital.to_json }
+    end
+
     trait :no_additional_properties do
       result { CFEResults::V1::MockResults.no_additional_properties.to_json }
     end
