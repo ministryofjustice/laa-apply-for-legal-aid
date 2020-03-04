@@ -5,7 +5,7 @@ FactoryBot.define do
     result { CFEResults::V1::MockResults.eligible.to_json }
 
     trait :eligible do
-      result { CFEResults::MockResults.eligible.to_json }
+      result { CFEResults::V1::MockResults.eligible.to_json }
     end
 
     trait :not_eligible do

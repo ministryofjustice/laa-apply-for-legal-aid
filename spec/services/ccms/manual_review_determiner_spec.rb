@@ -15,7 +15,7 @@ module CCMS
       end
 
       context 'manual review setting true' do
-        let(:cfe_result) { create :cfe_result }
+        let(:cfe_result) { create :cfe_v1_result }
         let(:legal_aid_application) { cfe_result.legal_aid_application }
 
         before { setting.update! manually_review_all_cases: true }
@@ -33,21 +33,21 @@ module CCMS
         let(:legal_aid_application) { cfe_result.legal_aid_application }
 
         context 'no contribution required, no restrictions on assets' do
-          let(:cfe_result) { create :cfe_result, :eligible }
+          let(:cfe_result) { create :cfe_v1_result, :eligible }
           it 'does not require manual review' do
             expect(subject).to be false
           end
         end
 
         context 'contribution required' do
-          let(:cfe_result) { create :cfe_result, :contribution_required }
+          let(:cfe_result) { create :cfe_v1_result, :contribution_required }
           it 'requires manual review' do
             expect(subject).to be true
           end
         end
 
         context 'restriction on assets' do
-          let(:cfe_result) { create :cfe_result, :eligible }
+          let(:cfe_result) { create :cfe_v1_result, :eligible }
 
           before { legal_aid_application.update! has_restrictions: true }
 
