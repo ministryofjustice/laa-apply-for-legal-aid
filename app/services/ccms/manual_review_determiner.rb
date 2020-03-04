@@ -14,18 +14,12 @@ module CCMS
     def call
       return true if Setting.manually_review_all_cases?
 
-      return true if restriction_on_capital_assets?
-
       return true if contribution_required?
 
       false
     end
 
     private
-
-    def restriction_on_capital_assets?
-      @legal_aid_application.has_restrictions?
-    end
 
     def contribution_required?
       @legal_aid_application.cfe_result.contribution_required?
