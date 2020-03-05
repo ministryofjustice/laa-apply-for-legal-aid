@@ -32,13 +32,28 @@ RSpec.describe ScheduledMailing do
         .to receive(:notify_provider)
         .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
         .and_return(mail_message)
-      expect(mail_message).to receive(:deliver_later!)
+      expect(mail_message).to receive(:deliver_now)
+      scheduled_mail.deliver!
+      expect(scheduled_mail.reload.sent_at.to_s).to eq now.to_s
+    end
+  end
+
+  context 'when it tries to send mail with no attached application' do
+    let(:application) { create :legal_aid_application }
+    let!(:scheduled_mail) { create :scheduled_mailing, :invalid, legal_aid_application: application }
+
+    it 'captures error' do
+      expect(Raven).to receive(:capture_exception).with(message_contains("Couldn't find LegalAidApplication with 'id"))
       scheduled_mail.deliver!
     end
 
-    it 'marks the record as sent' do
+    it 'returns false' do
+      expect(scheduled_mail.deliver!).to eq false
+    end
+
+    it 'sends an alert on slack' do
+      expect(SlackAlertSenderWorker).to receive(:perform_async)
       scheduled_mail.deliver!
-      expect(scheduled_mail.reload.sent_at.to_s).to eq now.to_s
     end
   end
 
