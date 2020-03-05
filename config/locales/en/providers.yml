@@ -32,10 +32,10 @@ en:
         application_created: Application created
         back_button: Back to your applications
         happen_next_heading: What happens next
-        happen_next_text: You will be sent the results of your client's financial assessment so you can confirm they are eligible for legal aid.
-        secure_link_heading: We have sent your client a secure link
-        secure_link_text: Your client can use the link to complete the online financial assessment from home or another location.
-        sub_title: Your case reference number is
+        happen_next_text: You can continue your application once your client has shared their financial information.
+        let_you_know_text: We'll let you know once they've done this.
+        sent_email_text:  "We've sent an email to %{email}."
+        sub_title: Your case reference is
     bank_transactions:
       list_selected:
         col_amount: Amount
