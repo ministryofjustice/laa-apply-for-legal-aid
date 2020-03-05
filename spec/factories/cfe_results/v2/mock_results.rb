@@ -230,6 +230,12 @@ module CFEResults
         result
       end
 
+      def self.no_mortgage
+        result = eligible
+        result[:assessment][:disposable_income][:gross_housing_costs] = 0.0
+        result
+      end
+
       def self.with_additional_properties
         result = eligible
         property = {

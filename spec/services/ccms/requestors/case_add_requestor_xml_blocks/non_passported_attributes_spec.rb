@@ -462,6 +462,13 @@ module CCMS
           end
         end
 
+        context 'GB_INPUT_C_13WP3_4A' do
+          it 'is omitted' do
+            block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_13WP3_4A')
+            expect(block).not_to be_present
+          end
+        end
+
         def will_attributes
           %w[
             WILL_INPUT_B_2WP2_10A
