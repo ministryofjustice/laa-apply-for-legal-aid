@@ -744,7 +744,6 @@ global_means:
     response_type: currency
     generate_block?: true
     value: '#means_assessment_capital_contribution'
-<<<<<<< HEAD
   LAND_INPUT_B_5WP2_26A:
     user_defined: true
     br100_meaning: 'Land: The client owns land?'
@@ -769,7 +768,6 @@ global_means:
     response_type: text
     generate_block?: '#applicant_owed_money?'
     value: 'Other'
-=======
   GB_INPUT_B_40WP3_71A:
     value: true
     br100_meaning: 'Money due: Copy of statement from debtor'
@@ -782,7 +780,6 @@ global_means:
     user_defined: true
     response_type: boolean
     generate_block?: true
->>>>>>> Add hard coded TRUE attributes
 
 global_merits:
   APP_CARE_SUPERVISION:
@@ -851,6 +848,12 @@ global_merits:
   CLIENT_CIVIL_PARTNER_DISSOLVE:
     generate_block?: true
     value: false
+  CLIENT_COHABITING:
+    generate_block?: true
+    value: false
+    br100_meaning: 'The Client Is Cohabiting'
+    response_type: boolean
+    user_defined: false
   CLIENT_DIVORCED:
     generate_block?: true
     value: false

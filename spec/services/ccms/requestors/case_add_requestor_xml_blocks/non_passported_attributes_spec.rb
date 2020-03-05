@@ -728,6 +728,7 @@ module CCMS
             [:global_merits, 'CHILD_MUST_BE_INCLUDED', false],
             [:global_merits, 'CLIENT_CIVIL_PARTNER', false],
             [:global_merits, 'CLIENT_CIVIL_PARTNER_DISSOLVE', false],
+            [:global_merits, 'CLIENT_COHABITING', false],
             [:global_merits, 'CLIENT_DIVORCED', false],
             [:global_merits, 'CLIENT_JUDICIALLY_SEPARATED', false],
             [:global_merits, 'CLIENT_MARRIED', false],
