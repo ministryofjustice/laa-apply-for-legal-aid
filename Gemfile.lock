@@ -103,6 +103,10 @@ GEM
       execjs (~> 2.0)
     backports (3.15.0)
     bcrypt (3.1.13)
+    better_errors (2.6.0)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     better_html (1.0.14)
       actionview (>= 4.0)
       activesupport (>= 4.0)
@@ -111,6 +115,8 @@ GEM
       html_tokenizer (~> 0.0.6)
       parser (>= 2.4)
       smart_properties
+    binding_of_caller (0.8.0)
+      debug_inspector (>= 0.0.1)
     blazer (2.2.1)
       activerecord (>= 5)
       chartkick (>= 3.2)
@@ -166,6 +172,7 @@ GEM
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     database_cleaner (1.8.3)
+    debug_inspector (0.0.3)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -545,6 +552,8 @@ DEPENDENCIES
   addressable
   awesome_print (~> 1.8.0)
   aws-sdk-s3
+  better_errors
+  binding_of_caller
   blazer
   bootsnap (>= 1.1.0)
   browser
