@@ -697,6 +697,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_140642) do
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
+  add_foreign_key "scheduled_mailings", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
   add_foreign_key "vehicles", "legal_aid_applications"

@@ -16,6 +16,12 @@ FactoryBot.define do
       sent_at { scheduled_at + 15.seconds }
     end
 
+    trait :invalid do
+      scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
+      sent_at { scheduled_at + 15.seconds }
+      arguments { ['11111', 'Bob Marley', 'bob@wailing.jm'] }
+    end
+
     trait :cancelled do
       scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
       cancelled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
