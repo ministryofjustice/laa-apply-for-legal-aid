@@ -620,6 +620,91 @@ module CCMS
             end
           end
         end
+
+        describe 'LAND_INPUT_B_5WP2_26A' do
+          subject(:block) { XmlExtractor.call(xml, :global_means, 'LAND_INPUT_B_5WP2_26A') }
+
+          context 'when the applicant owns land' do
+            it 'generates the block' do
+              expect(block).to have_boolean_response true
+              expect(block).to be_user_defined
+            end
+          end
+
+          context 'when the applicant does not own land' do
+            before { legal_aid_application.other_assets_declaration.land_value = 0.0 }
+
+            it 'does not generate the block' do
+              expect(block).to have_boolean_response false
+            end
+          end
+        end
+
+        describe 'LAND_INPUT_C_5WP2_13A' do
+          subject(:block) { XmlExtractor.call(xml, :global_means, 'LAND_INPUT_C_5WP2_13A') }
+          before { legal_aid_application.other_assets_declaration.land_value = land_value }
+
+          context 'when the applicant owns land' do
+            let(:land_value) { 4567.00 }
+
+            it 'generates the block' do
+              expect(block).to have_currency_response 4567.00
+              expect(block).to be_user_defined
+            end
+          end
+
+          context 'when the applicant does not own land' do
+            let(:land_value) { 0.0 }
+
+            it 'does not generate the block' do
+              expect(block).to_not be_present
+            end
+          end
+        end
+
+        describe 'MONEYDUE_INPUT_C_15WP2_14A' do
+          subject(:block) { XmlExtractor.call(xml, :global_means, 'MONEYDUE_INPUT_C_15WP2_14A') }
+          before { legal_aid_application.other_assets_declaration.money_owed_value = money_owed }
+
+          context 'when the applicant has money owed to them' do
+            let(:money_owed) { 4567.00 }
+
+            it 'generates the block' do
+              expect(block).to have_currency_response 4567.00
+              expect(block).to be_user_defined
+            end
+          end
+
+          context 'when the applicant does not have money owed' do
+            let(:money_owed) { 0.0 }
+
+            it 'does not generate the block' do
+              expect(block).to_not be_present
+            end
+          end
+        end
+
+        describe 'MONEYDUE_INPUT_T_15WP2_15A' do
+          subject(:block) { XmlExtractor.call(xml, :global_means, 'MONEYDUE_INPUT_T_15WP2_15A') }
+          before { legal_aid_application.other_assets_declaration.money_owed_value = money_owed }
+
+          context 'when the applicant has money owed to them' do
+            let(:money_owed) { 4567.00 }
+
+            it 'generates the block' do
+              expect(block).to have_text_response 'Other'
+              expect(block).to be_user_defined
+            end
+          end
+
+          context 'when the applicant does not have money owed' do
+            let(:money_owed) { 0.0 }
+
+            it 'does not generate the block' do
+              expect(block).to_not be_present
+            end
+          end
+        end
       end
     end
   end

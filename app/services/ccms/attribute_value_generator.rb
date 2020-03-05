@@ -129,6 +129,10 @@ module CCMS
       not_zero? other_assets.money_owed_value
     end
 
+    def applicant_owed_money_value(_options)
+      other_assets.money_owed_value
+    end
+
     def applicant_has_interest_in_a_trust?(_options)
       not_zero? other_assets.trust_value
     end
@@ -139,6 +143,10 @@ module CCMS
 
     def applicant_owns_timeshare?(_options)
       not_zero? other_assets.timeshare_property_value
+    end
+
+    def applicant_land_value(_options)
+      other_assets.land_value
     end
 
     def applicant_owns_land?(_options)

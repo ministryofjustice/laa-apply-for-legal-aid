@@ -82,6 +82,8 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe 'DELETE /admin/legal_aid_applications/destroy_all' do
     subject { delete destroy_all_admin_legal_aid_applications_path }
+    let(:scheduled_mail) { create :scheduled_mailing, :due }
+    let(:scheduled_mail2) { create :scheduled_mailing, :due }
 
     context 'when enabled' do
       before do
@@ -94,6 +96,12 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
       it 'deletes the applicants too' do
         expect { subject }.to change { Applicant.count }.by(-count)
+      end
+
+      it 'deletes the outstanding scheduled mail' do
+        scheduled_mail
+        scheduled_mail2
+        expect { subject }.to change { ScheduledMailing.count }.by(-2)
       end
 
       it 'redirects back to admin root' do
