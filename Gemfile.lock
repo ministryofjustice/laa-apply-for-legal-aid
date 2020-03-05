@@ -256,8 +256,8 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    launchy (2.4.3)
-      addressable (~> 2.3)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     libreconv (0.9.5)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
