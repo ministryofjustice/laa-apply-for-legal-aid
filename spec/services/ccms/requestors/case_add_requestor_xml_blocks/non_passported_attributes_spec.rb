@@ -377,6 +377,22 @@ module CCMS
           end
         end
 
+        context 'URGENT_APPLICATION_TAG' do
+          it 'generates the block with the right value' do
+            block = XmlExtractor.call(xml, :global_merits, 'URGENT_APPLICATION_TAG')
+            expect(block).to have_text_response 'Non Urgent'
+            expect(block).not_to be_user_defined
+          end
+        end
+
+        context 'COUNSEL_FEE_FAMILY' do
+          it 'generates the block with the right value' do
+            block = XmlExtractor.call(xml, :proceeding_merits, 'COUNSEL_FEE_FAMILY')
+            expect(block).to have_currency_response 0.0
+            expect(block).to be_user_defined
+          end
+        end
+
         context 'CHILD_CLIENT' do
           let(:sixteen_today) { 16.years.ago.to_date }
           let(:sixteen_yesterday) { sixteen_today - 1.day }
