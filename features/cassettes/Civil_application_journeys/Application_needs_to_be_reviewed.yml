@@ -1,0 +1,296 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/assessments
+    body:
+      encoding: UTF-8
+      string: '{"client_reference_id":"L-8M7-FW7","submission_date":"2020-03-04","matter_proceeding_type":"domestic_abuse"}'
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"1c700d79e94fd71b7a95304a773322bc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a4edf45d-8aab-49a0-9e80-7061c675e691
+      X-Runtime:
+      - '0.030079'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"objects":[{"id":"0bcd01e5-37cc-4a02-a244-8889df91d70f","client_reference_id":"L-8M7-FW7","remote_ip":{"family":30,"addr":1,"mask_addr":340282366920938463463374607431768211455},"created_at":"2020-03-04T18:13:52.921Z","updated_at":"2020-03-04T18:13:52.921Z","submission_date":"2020-03-04","matter_proceeding_type":"domestic_abuse","assessment_result":"pending"}],"errors":[]}'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 18:13:52 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/0bcd01e5-37cc-4a02-a244-8889df91d70f/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"61a1508d3b5421811e3e3ce2fb0cb968"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e0dacdd9-0770-47b8-ae7d-8b2036ff0413
+      X-Runtime:
+      - '0.009801'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"objects":[{"id":"dac16f01-501f-42a6-9eeb-9532d64b825b","assessment_id":"0bcd01e5-37cc-4a02-a244-8889df91d70f","date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"created_at":"2020-03-04T18:13:52.950Z","updated_at":"2020-03-04T18:13:52.950Z","self_employed":false}],"errors":[],"success":true}'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 18:13:52 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/0bcd01e5-37cc-4a02-a244-8889df91d70f/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Money not in a bank account","value":"10000.0"}],"non_liquid_capital":[{"description":"Land","value":"50000.0"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"d4a6ef016792eed7092a224a9fe47732"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - c317eee0-92d3-4572-a2dd-97b238b1e997
+      X-Runtime:
+      - '0.011729'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"objects":{"id":"9d4299ab-3004-4c78-8bd9-9a7404ff8c98","assessment_id":"0bcd01e5-37cc-4a02-a244-8889df91d70f","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","assessment_result":"pending","created_at":"2020-03-04T18:13:52.925Z","updated_at":"2020-03-04T18:13:52.925Z"},"errors":[],"success":true}'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 18:13:52 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/0bcd01e5-37cc-4a02-a244-8889df91d70f/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[]}'
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"7eb7dee5a8f69a7b4580e1e2bd9fa86a"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e7594b23-a3a9-491a-a612-4d92f8ce47f8
+      X-Runtime:
+      - '0.004913'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[],"errors":[],"success":true}'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 18:13:52 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/assessments/0bcd01e5-37cc-4a02-a244-8889df91d70f/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b00469126cb84d3e40be4e6e85eaec92"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b9216bcc-1ee4-4a8d-85b4-94f4f2e3a1fd
+      X-Runtime:
+      - '0.017767'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"objects":[{"id":"39ff9fe5-9497-4a7e-b08a-789aa0d5de45","value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"created_at":"2020-03-04T18:13:53.043Z","updated_at":"2020-03-04T18:13:53.043Z","capital_summary_id":"9d4299ab-3004-4c78-8bd9-9a7404ff8c98","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"7ca18ca9-0a23-4a70-bd63-cc41867a1e82","value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"created_at":"2020-03-04T18:13:53.051Z","updated_at":"2020-03-04T18:13:53.051Z","capital_summary_id":"9d4299ab-3004-4c78-8bd9-9a7404ff8c98","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 18:13:53 GMT
+- request:
+    method: get
+    uri: http://localhost:3000/assessments/0bcd01e5-37cc-4a02-a244-8889df91d70f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"ea7f29fa55fe6f3e0292ca8e57e55eb4"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a0f48d9c-0e25-4891-b35c-7fa122eaf78f
+      X-Runtime:
+      - '0.033266'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"assessment_result":"contribution_required","applicant":{"receives_qualifying_benefit":true,"age_at_submission":40},"capital":{"total_liquid":"10000.0","total_non_liquid":"50000.0","pensioner_capital_disregard":"0.0","total_capital":"60000.0","capital_contribution":"57000.0","liquid_capital_items":[{"description":"Money
+        not in a bank account","value":"10000.0"}],"non_liquid_capital_items":[{"description":"Land","value":"50000.0"}]},"property":{"total_mortgage_allowance":"100000.0","total_property":"0.0","main_home":{"value":"200000.0","transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","shared_with_housing_assoc":false,"percentage_owned":"50.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","percentage_owned":"0.0","assessed_equity":"0.0"}]},"vehicles":{"total_vehicle":"0.0","vehicles":[]}}'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 18:13:53 GMT
+recorded_with: VCR 5.1.0

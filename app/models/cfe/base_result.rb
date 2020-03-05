@@ -10,7 +10,9 @@ module CFE
     end
 
     def overview
-      if legal_aid_application.has_restrictions? || capital_contribution_required?
+      if capital_contribution_required? && !legal_aid_application.has_restrictions?
+        'contribution_required'
+      elsif capital_contribution_required? && legal_aid_application.has_restrictions?
         'manual_check_required'
       else
         assessment_result
