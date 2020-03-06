@@ -11,12 +11,15 @@
   </div>
 <% end %>
 
-<%= page_template page_title: t('.secure_link_heading') do %>
+<%= page_template page_title: nil do %>
 
-  <p class="govuk-body"><%= t '.secure_link_text' %></p>
+  <p class="govuk-body"><%= t '.sent_email_text', email: @legal_aid_application.applicant.email %></p>
   <h3 class="govuk-heading-m"><%= t '.happen_next_heading' %></h3>
   <p class="govuk-body">
    <%= t '.happen_next_text' %>
+  </p>
+  <p class="govuk-body">
+    <%= t '.let_you_know_text' %>
   </p>
   <%= link_to(
         t('.back_button'),
