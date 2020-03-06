@@ -112,6 +112,11 @@ group :development, :test do
 end
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'guard-rubocop'
   gem 'listen', '>= 3.0.5', '< 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
