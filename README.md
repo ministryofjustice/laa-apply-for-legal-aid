@@ -7,7 +7,7 @@ may well be used to fire requests to other services.
 
 * Ruby version
     * Ruby version 2.6.3
-    * Rails 5
+    * Rails 6
 
 * System dependencies
     * postgres 10.5
@@ -94,6 +94,17 @@ bin/rake
 VCR_RECORD_MODE=all bin/rake
 ```
 
+#### Guard
+
+The repo also includes a Guardfile, this can be run in a terminal window
+```sh
+bundle exec guard
+```
+
+When changes to test files are made it will run the tests in that file
+When changes are made to objects are made it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
+Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes 
+**Note**: Guard will not currently run cucumber features, there is an open Issue on the `guard-cucumber` repo
 ### Accessibility testing with webhint
 
 webhint (https://webhint.io/) is used to check if pages are accessible.
