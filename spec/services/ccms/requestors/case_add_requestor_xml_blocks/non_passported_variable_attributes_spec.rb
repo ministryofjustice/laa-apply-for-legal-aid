@@ -513,21 +513,47 @@ module CCMS
             end
           end
 
-          context 'GB_INPUT_C_8WP3_303A' do
-            context 'when the applicant receives maintenance' do
-              let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+          context 'maintenance payments' do
+            subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
 
-              it 'generates a block with the correct values' do
-                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
-                expect(block).to have_number_response '150.00'
-                expect(block).to be_user_defined
+            describe 'are received by the applicant ' do
+              let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_received, submission: cfe_submission }
+
+              context 'GB_INPUT_C_8WP3_303A' do
+                let(:attribute) { 'GB_INPUT_C_8WP3_303A' }
+
+                it 'generates a block with the correct values' do
+                  expect(block).to have_number_response '150.00'
+                  expect(block).to be_user_defined
+                end
+              end
+
+              context 'GB_INPUT_B_8WP3_308A' do
+                let(:attribute) { 'GB_INPUT_B_8WP3_308A' }
+
+                it 'generates a block with the correct values' do
+                  expect(block).to have_boolean_response true
+                  expect(block).to be_user_defined
+                end
               end
             end
 
-            context 'when the applicant does not receive maintenance' do
-              it 'does not generate a block' do
-                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
-                expect(block).not_to be_present
+            describe 'are not received by the applicant' do
+              context 'GB_INPUT_C_8WP3_303A' do
+                let(:attribute) { 'GB_INPUT_C_8WP3_303A' }
+
+                it 'does not generate a block' do
+                  expect(block).not_to be_present
+                end
+              end
+
+              context 'GB_INPUT_B_8WP3_308A' do
+                let(:attribute) { 'GB_INPUT_B_8WP3_308A' }
+
+                it 'generates a block with the correct values' do
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
               end
             end
           end
