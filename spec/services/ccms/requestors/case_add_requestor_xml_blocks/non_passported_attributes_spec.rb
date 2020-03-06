@@ -664,7 +664,12 @@ module CCMS
             [:proceeding_merits, 'PROC_OUTCOME_NO_OUTCOME', false],
             [:timeshare, 'TIMESHARE_INFER_B_6WP2_20A', false],
             [:timeshare, 'TIMESHARE_INFER_B_6WP2_21A', false],
-            [:trust, 'TRUST_INPUT_B_16WP2_11A', false]
+            [:global_means, 'GB_INPUT_B_40WP3_71A', true],
+            [:global_means, 'GB_INPUT_B_40WP3_73A', true],
+            [:global_merits, 'APPLICATION_CAN_BE_SUBMITTED', false],
+            [:global_merits, 'COPY_WARNING_LETTER', true],
+            [:global_merits, 'DP_WITH_JUDICIAL_REVIEW', false],
+            [:proceeding_merits, 'CLIENT_INV_TYPE_BRINGING_PROCS', false]
           ]
         end
 
@@ -723,6 +728,7 @@ module CCMS
             [:global_merits, 'CHILD_MUST_BE_INCLUDED', false],
             [:global_merits, 'CLIENT_CIVIL_PARTNER', false],
             [:global_merits, 'CLIENT_CIVIL_PARTNER_DISSOLVE', false],
+            [:global_merits, 'CLIENT_COHABITING', false],
             [:global_merits, 'CLIENT_DIVORCED', false],
             [:global_merits, 'CLIENT_JUDICIALLY_SEPARATED', false],
             [:global_merits, 'CLIENT_MARRIED', false],
