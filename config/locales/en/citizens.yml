@@ -97,17 +97,21 @@ en:
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'
-        heading_1: Complete your legal aid financial assessment
-        legal_cost_para: We use this information to work out if you can get legal aid or you need to pay towards the legal costs.
+        heading_1: Share your financial information with us
         name: 'Name:'
         online_banking_details: Your online banking sign in details.
         what_you_will_need: What you'll need
-        you_need_to_answer: 'You need to answer questions about your:'
+        we_need_to_check: We need to check if you qualify financially for legal aid.
+        ask_you_to: "We'll ask you to:"
         list: |
-          bank accounts
-          income and regular costs
-          property, savings and other assets
+          sign in to your online banking via a secure service
+          share 3 months of bank transactions with us
+        tell_us:
+          list: |
+            income you receive
+            regular payments you make
         your_solicitor: 'Your solicitor:'
+        need_to_tell_us: "You'll also need to tell us about any:"
     means_test_results:
       show:
         page-heading: What happens next

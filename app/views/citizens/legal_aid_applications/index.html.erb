@@ -1,20 +1,24 @@
 <%= page_template page_title: t('.heading_1'), back_link: :none do %>
   <p class="govuk-body">
-    <%= t('.name') %>
-    <b><%= current_applicant.first_name %></b>
-    <b><%= current_applicant.last_name %></b>
+    <b> <%= t('.name') %></b>
+    <%= current_applicant.first_name %>
+    <%= current_applicant.last_name %>
     <br>
-    <%= t('.case_reference') %>
-    <b><%= current_applicant.legal_aid_application.application_ref %></b>
+    <b><%= t('.case_reference') %></b>
+    <%= current_applicant.legal_aid_application.application_ref %>
     <br>
-    <%= t('.your_solicitor') %>
+    <b><%= t('.your_solicitor') %></b>
   </p>
 
-  <p class="govuk-body"><%= t('.you_need_to_answer') %></p>
+  <p class="govuk-body"><%= t('.we_need_to_check') %></p>
 
-  <%= list_from_translation_path '.legal_aid_applications.index' %>
+  <p class="govuk-body"><%= t('.ask_you_to') %></p>
 
-  <p class="govuk-body"><%= t('.legal_cost_para') %></p>
+  <%= list_from_translation_path '.legal_aid_applications.index.' %>
+
+  <p class="govuk-body"><%= t('.need_to_tell_us') %></p>
+
+  <%= list_from_translation_path '.legal_aid_applications.index.tell_us' %>
 
   <h2 class="govuk-heading-m"><%= t('.what_you_will_need') %></h2>
 
