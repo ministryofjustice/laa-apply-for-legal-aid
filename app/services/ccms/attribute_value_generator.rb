@@ -55,8 +55,6 @@ module CCMS
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     OUTGOING = /^outgoing_(\S+)$/.freeze
-    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
-    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
