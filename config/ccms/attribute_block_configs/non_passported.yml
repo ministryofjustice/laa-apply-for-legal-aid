@@ -1121,6 +1121,12 @@ global_merits:
   URGENT_APPLICATION:
     generate_block?: true
     value: false
+  URGENT_APPLICATION_TAG:
+    value: Non Urgent
+    br100_meaning: "Report: The Merits Report Urgent Tag"
+    user_defined: false
+    response_type: text
+    generate_block?: true
   URGENT_DIRECTIONS:
     generate_block?: true
     value: false
@@ -1646,6 +1652,12 @@ proceeding_merits:
   CLIENT_INV_TYPE_PERSONAL_REP:
     generate_block?: true
     value: false
+  COUNSEL_FEE_FAMILY:
+    value: 0.0
+    br100_meaning: 'Fam: The Counsel Fees To Completion Of The Family Proceeding'
+    user_defined: true
+    response_type: currency
+    generate_block?: true
   FAM_PROSP_50_OR_BETTER:
     generate_block?: true
     value: '#merits_assessment_success_prospect_likely?'
