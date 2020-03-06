@@ -64,6 +64,14 @@ module CCMS
       uncertain: 'Uncertain'
     }.freeze
 
+    PROSPECTS_OF_SUCCESS_CODES = {
+      likely: 'FM',
+      marginal: 'FO',
+      poor: 'NE',
+      borderline: 'FH',
+      not_known: 'FJ'
+    }.freeze
+
     attr_reader :legal_aid_application
     delegate :merits_assessment,
              :vehicle,
@@ -276,6 +284,10 @@ module CCMS
 
     def ccms_equivalent_prospects_of_success(_options)
       PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
+    end
+
+    def ccms_code_prospects_of_success(_options)
+      PROSPECTS_OF_SUCCESS_CODES[merits_assessment.success_prospect.to_sym]
     end
 
     def client_eligibility(_options)

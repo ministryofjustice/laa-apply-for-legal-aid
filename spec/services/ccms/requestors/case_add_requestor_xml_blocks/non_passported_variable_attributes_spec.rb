@@ -712,6 +712,27 @@ module CCMS
           end
         end
 
+        describe 'PROSPECTS_OF_SUCCESS' do
+          subject(:block) { XmlExtractor.call(xml, :global_means, 'PROSPECTS_OF_SUCCESS') }
+
+          EXAMPLES = [
+            { input: 'likely', result: 'FM' },
+            { input: 'marginal', result: 'FO' },
+            { input: 'poor', result: 'NE' },
+            { input: 'borderline', result: 'FH' },
+            { input: 'not_known', result: 'FJ' }
+          ].freeze
+
+          EXAMPLES.each do |test|
+            context "is set to #{test[:input]}" do
+              before { merits_assessment.update! success_prospect: test[:input] }
+
+              it { is_expected.to have_text_response test[:result] }
+              it { is_expected.to_not be_user_defined }
+            end
+          end
+        end
+
         describe 'MONEYDUE_INPUT_T_15WP2_15A' do
           subject(:block) { XmlExtractor.call(xml, :global_means, 'MONEYDUE_INPUT_T_15WP2_15A') }
           before { legal_aid_application.other_assets_declaration.money_owed_value = money_owed }
