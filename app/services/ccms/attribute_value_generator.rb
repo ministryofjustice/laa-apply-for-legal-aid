@@ -57,19 +57,12 @@ module CCMS
     OUTGOING = /^outgoing_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
-      likely: 'Good',
-      marginal: 'Marginal',
-      poor: 'Poor',
-      borderline: 'Borderline',
-      uncertain: 'Uncertain'
-    }.freeze
-
-    PROSPECTS_OF_SUCCESS_CODES = {
-      likely: 'FM',
-      marginal: 'FO',
-      poor: 'NE',
-      borderline: 'FH',
-      not_known: 'FJ'
+      likely: { text: 'Good', code: 'FM' },
+      marginal: { text: 'Marginal', code: 'FO' },
+      poor: { text: 'Poor', code: 'NE' },
+      borderline: { text: 'Borderline', code: 'FH' },
+      uncertain: { text: 'Uncertain', code: 'FJ' },
+      not_known: { text: 'Uncertain', code: 'FJ' }
     }.freeze
 
     attr_reader :legal_aid_application
@@ -283,11 +276,19 @@ module CCMS
     end
 
     def ccms_equivalent_prospects_of_success(_options)
-      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
+      return unless ccms_equivalent_prospects_of_success_valid?
+
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym][:text]
     end
 
     def ccms_code_prospects_of_success(_options)
-      PROSPECTS_OF_SUCCESS_CODES[merits_assessment.success_prospect.to_sym]
+      return unless ccms_equivalent_prospects_of_success_valid?
+
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym][:code]
+    end
+
+    def ccms_equivalent_prospects_of_success_valid?
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym].present?
     end
 
     def client_eligibility(_options)
