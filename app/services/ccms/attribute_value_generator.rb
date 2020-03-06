@@ -350,6 +350,10 @@ module CCMS
       used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.description
     end
 
+    def proceeding_description(_options)
+      lead_proceeding_type.description
+    end
+
     def proceeding_limitation_meaning(_options)
       used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.meaning
     end
