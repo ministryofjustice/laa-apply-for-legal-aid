@@ -246,6 +246,30 @@ module CCMS
       !@legal_aid_application.own_home_no?
     end
 
+    def applicant_shares_ownership_main_home?(_options)
+      (not_zero? @legal_aid_application.percentage_home) && @legal_aid_application.percentage_home < 100
+    end
+
+    def applicant_owns_percentage_main_home(_options)
+      @legal_aid_application.percentage_home
+    end
+
+    def third_party_owns_percentage_main_home(_options)
+      100 - @legal_aid_application.percentage_home
+    end
+
+    def applicant_property_value(_options)
+      @legal_aid_application.property_value
+    end
+
+    def outstanding_mortgage?(_options)
+      !@legal_aid_application&.own_home_no? && @legal_aid_application&.own_home_mortgage? && @legal_aid_application&.outstanding_mortgage_amount
+    end
+
+    def outstanding_mortgage_amount(_options)
+      @legal_aid_application.outstanding_mortgage_amount
+    end
+
     def applicant_has_vehicle?(_options)
       vehicle.present? && not_zero?(vehicle.estimated_value)
     end

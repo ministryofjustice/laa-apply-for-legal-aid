@@ -780,7 +780,48 @@ global_means:
     user_defined: true
     response_type: boolean
     generate_block?: true
-
+  GB_INPUT_B_3WP2_10A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: Owned with 3rd party, inc ex. partner?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_shares_ownership_main_home?'
+  GB_INPUT_B_3WP2_8A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: Shared ownership?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_shares_ownership_main_home?'
+  GB_INPUT_B_3WP2_27A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: The client owns main dwelling?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_owns_main_home?'
+  GB_INPUT_C_3WP2_5A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: Current market value'
+    response_type: currency
+    generate_block?: '#applicant_owns_main_home?'
+    value: '#applicant_property_value'
+  GB_INPUT_C_3WP2_7A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: Current value of any mortgage'
+    response_type: currency
+    generate_block?: '#outstanding_mortgage?'
+    value: '#outstanding_mortgage_amount'
+  GB_INPUT_N_3WP2_14A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: % Client'
+    response_type: number
+    generate_block?: '#applicant_shares_ownership_main_home?'
+    value: '#applicant_owns_percentage_main_home'
+  MAINTHIRD_INPUT_N_3WP2_11A:
+    user_defined: true
+    br100_meaning: 'Main Dwelling: % Client'
+    response_type: number
+    generate_block?: '#applicant_shares_ownership_main_home?'
+    value: '#third_party_owns_percentage_main_home'
 global_merits:
   APP_CARE_SUPERVISION:
     generate_block?: true
