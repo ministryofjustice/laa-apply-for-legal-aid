@@ -4,12 +4,20 @@ FactoryBot.define do
     legal_aid_application { submission.legal_aid_application }
     result { CFEResults::V1::MockResults.eligible.to_json }
 
+    trait :eligible do
+      result { CFEResults::V1::MockResults.eligible.to_json }
+    end
+
     trait :not_eligible do
       result { CFEResults::V1::MockResults.not_eligible.to_json }
     end
 
     trait :contribution_required do
       result { CFEResults::V1::MockResults.contribution_required.to_json }
+    end
+
+    trait :no_capital do
+      result { CFEResults::V1::MockResults.no_capital.to_json }
     end
 
     trait :no_additional_properties do

@@ -46,7 +46,7 @@ en:
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
         warning_letter_sent_details: Tell us why a warning letter has not been sent
         bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
-        police_notified_details: Tell us what action they've taken (if any), including dates and the outcome        
+        police_notified_details: Tell us what action they've taken (if any), including dates and the outcome
         understands_terms_of_court_order:
           <<: *true_false
         warning_letter_sent:
@@ -59,4 +59,6 @@ en:
         mock_true_layer_data:
           <<: *true_false
         allow_non_passported_route:
+          <<: *true_false
+        manually_review_all_cases:
           <<: *true_false

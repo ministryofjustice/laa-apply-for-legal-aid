@@ -379,5 +379,13 @@ module CCMS
     def not_zero?(value)
       value.present? && value.positive?
     end
+
+    def bypass_manual_review_in_ccms?(_options)
+      !manual_case_review_required?
+    end
+
+    def manual_case_review_required?
+      ManualReviewDeterminer.call(@legal_aid_application)
+    end
   end
 end

@@ -90,7 +90,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def cfe_result
-    most_recent_cfe_submission.result
+    most_recent_cfe_submission&.result
   end
 
   def online_banking_consent?
