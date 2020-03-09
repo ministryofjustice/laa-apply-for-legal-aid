@@ -54,8 +54,8 @@ FactoryBot.define do
       result { CFEResults::V2::MockResults.no_vehicles.to_json }
     end
 
-    trait :with_maintenance_outgoings do
-      result { CFEResults::V2::MockResults.with_maintenance_outgoings.to_json }
+    trait :with_maintenance_received do
+      result { CFEResults::V2::MockResults.with_maintenance_received.to_json }
     end
 
     trait :no_mortgage do

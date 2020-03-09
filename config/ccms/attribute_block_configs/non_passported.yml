@@ -708,6 +708,12 @@ global_means:
     response_type: number
     generate_block?: '#applicant_receives_maintenance?'
     value: '#applicant_maintenance_per_month'
+  GB_INPUT_B_8WP3_308A:
+    user_defined: true
+    br100_meaning: 'Client Maintenance: Receives maintenance?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_receives_maintenance?'
   GB_INPUT_C_13WP3_3A:
     generate_block?: '#outgoing_rent_or_mortgage?'
     value: '#applicant_mortgage_per_month'
@@ -822,6 +828,12 @@ global_means:
     response_type: number
     generate_block?: '#applicant_shares_ownership_main_home?'
     value: '#third_party_owns_percentage_main_home'
+  PROSPECTS_OF_SUCCESS:
+    user_defined: false
+    br100_meaning: "The proceeding's prospect of success"
+    response_type: text
+    generate_block?: true
+    value: '#ccms_code_prospects_of_success'
 global_merits:
   APP_CARE_SUPERVISION:
     generate_block?: true

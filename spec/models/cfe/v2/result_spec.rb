@@ -9,7 +9,7 @@ module CFE
       let(:no_additional_properties) { create :cfe_v2_result, :no_additional_properties }
       let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
       let(:no_vehicles) { create :cfe_v2_result, :no_vehicles }
-      let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_outgoings }
+      let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_received }
       let(:no_mortgage) { create :cfe_v2_result, :no_mortgage }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v2_result }
       let(:contribution_and_restriction_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission }

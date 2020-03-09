@@ -255,7 +255,7 @@ module CFEResults
         result
       end
 
-      def self.with_maintenance_outgoings
+      def self.with_maintenance_received
         result = eligible
         result[:assessment][:disposable_income][:maintenance_allowance] = '150.00'
         result
