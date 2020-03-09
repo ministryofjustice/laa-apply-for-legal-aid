@@ -64,7 +64,7 @@ module CCMS
       end
 
       def status_free_text
-        @status_free_text ||=  @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/StatusFreeText").text
+        @status_free_text ||= @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/StatusFreeText").text
       end
     end
   end

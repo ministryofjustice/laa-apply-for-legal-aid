@@ -30,7 +30,7 @@
     </wsa:FaultTo>
   </env:Header>
   <env:Body>
-    <ns8:CaseAddRS>
+    <CaseAddRS>
       <HeaderRS>
         <TransactionID>20190301030405123456</TransactionID>
         <RequestDetails>
@@ -44,6 +44,6 @@
         </Status>
       </HeaderRS>
       <ns3:TransactionID>20190301030405123456</ns3:TransactionID>
-    </ns8:CaseAddRS>
+    </CaseAddRS>
   </env:Body>
 </env:Envelope>

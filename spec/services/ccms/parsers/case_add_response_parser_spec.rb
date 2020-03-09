@@ -43,7 +43,5 @@ module CCMS
         let(:response_xml) { ccms_data_from_file 'case_add_response_failure.xml' }
       end
     end
-
-
   end
 end

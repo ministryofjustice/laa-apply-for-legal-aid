@@ -65,6 +65,24 @@ module CCMS
         end
       end
 
+      context 'response with no status or exception' do
+        let(:response_xml) { ccms_data_from_file 'applicant_add_response_no_status.xml' }
+        describe '#success?' do
+          it 'raises' do
+            parser = described_class.new(expected_tx_id, response_xml)
+            expect { parser.success? }.to raise_error CCMS::CcmsError, 'Unable to find status code or exception in response'
+          end
+        end
+      end
+
+      context 'wrong transaction id' do
+        let(:expected_tx_id) { '88880301030405123456' }
+        let(:response_xml) { ccms_data_from_file 'applicant_add_response_success.xml' }
+        it 'raises' do
+          parser = described_class.new(expected_tx_id, response_xml)
+          expect { parser.success? }.to raise_error CCMS::CcmsError, 'Invalid transaction request id 20190301030405123456'
+        end
+      end
     end
   end
 end
