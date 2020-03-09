@@ -55,8 +55,6 @@ module CCMS
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     OUTGOING = /^outgoing_(\S+)$/.freeze
-    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
-    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
       likely: 'Good',
@@ -246,6 +244,30 @@ module CCMS
 
     def applicant_owns_main_home?(_options)
       !@legal_aid_application.own_home_no?
+    end
+
+    def applicant_shares_ownership_main_home?(_options)
+      (not_zero? @legal_aid_application.percentage_home) && @legal_aid_application.percentage_home < 100
+    end
+
+    def applicant_owns_percentage_main_home(_options)
+      @legal_aid_application.percentage_home
+    end
+
+    def third_party_owns_percentage_main_home(_options)
+      100 - @legal_aid_application.percentage_home
+    end
+
+    def applicant_property_value(_options)
+      @legal_aid_application.property_value
+    end
+
+    def outstanding_mortgage?(_options)
+      !@legal_aid_application&.own_home_no? && @legal_aid_application&.own_home_mortgage? && @legal_aid_application&.outstanding_mortgage_amount
+    end
+
+    def outstanding_mortgage_amount(_options)
+      @legal_aid_application.outstanding_mortgage_amount
     end
 
     def applicant_has_vehicle?(_options)
