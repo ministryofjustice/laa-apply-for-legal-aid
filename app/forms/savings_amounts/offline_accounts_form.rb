@@ -9,7 +9,7 @@ module SavingsAmounts
       offline_savings_accounts
     ].freeze
 
-    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[none_selected]).freeze
+    CHECK_BOXES_ATTRIBUTES = (ATTRIBUTES.map { |attribute| "check_box_#{attribute}".to_sym } + %i[no_account_selected]).freeze
 
     ATTRIBUTES.each do |attribute|
       check_box_attribute = "check_box_#{attribute}".to_sym
@@ -27,7 +27,7 @@ module SavingsAmounts
     validate :any_checkbox_checked_or_draft
 
     def exclude_from_model
-      CHECK_BOXES_ATTRIBUTES + [:journey] - [:none_selected]
+      CHECK_BOXES_ATTRIBUTES + [:journey] - [:no_account_selected]
     end
 
     def attributes_to_clean
@@ -51,11 +51,11 @@ module SavingsAmounts
     end
 
     def any_checkbox_checked_or_draft
-      errors.add :base, error_message_for_none_selected unless any_checkbox_checked? || draft?
+      errors.add :base, error_message_for_no_account_selected unless any_checkbox_checked? || draft?
     end
 
-    def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected")
+    def error_message_for_no_account_selected
+      I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.no_account_selected")
     end
   end
 end

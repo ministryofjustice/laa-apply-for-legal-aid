@@ -5,8 +5,6 @@ module SavingsAmounts
     form_for SavingsAmount
 
     ATTRIBUTES = %i[
-      offline_current_accounts
-      offline_savings_accounts
       cash
       other_person_account
       national_savings
