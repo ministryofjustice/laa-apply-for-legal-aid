@@ -169,6 +169,7 @@ Rails.application.routes.draw do
         resource :age, only: %i[show update]
         resource :regular_use, only: %i[show update]
       end
+      resource :offline_account, only: %i[show update]
       resource :savings_and_investment, only: %i[show update]
       resource :shared_ownership, only: %i[show update]
       resource :check_passported_answers, only: [:show] do

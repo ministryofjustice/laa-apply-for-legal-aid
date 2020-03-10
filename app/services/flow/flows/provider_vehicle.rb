@@ -4,7 +4,7 @@ module Flow
       STEPS = {
         vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
-          forward: ->(application) { application.own_vehicle? ? :vehicles_estimated_values : :savings_and_investments },
+          forward: ->(application) { application.own_vehicle? ? :vehicles_estimated_values : :offline_accounts },
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers },
           carry_on_sub_flow: ->(application) { application.own_vehicle? }
         },
@@ -22,7 +22,7 @@ module Flow
         },
         vehicles_regular_uses: {
           path: ->(application) { urls.providers_legal_aid_application_vehicles_regular_use_path(application) },
-          forward: :savings_and_investments,
+          forward: :offline_accounts,
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
         }
       }.freeze
