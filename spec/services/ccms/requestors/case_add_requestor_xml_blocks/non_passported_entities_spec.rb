@@ -416,7 +416,7 @@ module CCMS
 
         context 'entity MAINTHIRD' do
           context 'applicant does not own a property' do
-            before { legal_aid_application.update! property_value: nil, percentage_home: nil }
+            before { legal_aid_application.update! own_home: 'no', property_value: nil, percentage_home: nil }
             it 'does not generate entity block' do
               expect(xml).not_to have_means_entity 'MAINTHIRD'
             end

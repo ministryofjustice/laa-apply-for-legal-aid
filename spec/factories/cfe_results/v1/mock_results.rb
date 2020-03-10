@@ -12,7 +12,7 @@ module CFEResults
             total_liquid: '350.0',
             total_non_liquid: '0.0',
             pensioner_capital_disregard: '0.0',
-            total_capital: '0.0',
+            total_capital: '350.0',
             capital_contribution: '0.0',
             liquid_capital_items: [
               {
@@ -67,6 +67,13 @@ module CFEResults
         new_capital_section = eligible[:capital]
         new_capital_section[:capital_contribution] = '465.66'
         eligible.merge assessment_result: 'contribution_required', capital: new_capital_section
+      end
+
+      def self.no_capital
+        new_capital_section = eligible[:capital]
+        new_capital_section[:total_liquid] = '0.0'
+        new_capital_section[:total_capital] = '0.0'
+        eligible.merge capital: new_capital_section
       end
 
       def self.no_additional_properties

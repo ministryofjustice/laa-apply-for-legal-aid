@@ -28,7 +28,8 @@ module CCMS
                  with_bank_accounts: 2,
                  proceeding_types: [proceeding_type],
                  provider: provider,
-                 office: office
+                 office: office,
+                 percentage_home: percentage_home
         end
 
         let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
@@ -40,6 +41,7 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let(:merits_assessment) { legal_aid_application.merits_assessment }
         let(:applicant) { legal_aid_application.applicant }
+        let(:percentage_home) { rand(1...99.0).round(2) }
 
         context 'family prospects' do
           context '50% or better' do
@@ -511,21 +513,47 @@ module CCMS
             end
           end
 
-          context 'GB_INPUT_C_8WP3_303A' do
-            context 'when the applicant receives maintenance' do
-              let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_outgoings, submission: cfe_submission }
+          context 'maintenance payments' do
+            subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
 
-              it 'generates a block with the correct values' do
-                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
-                expect(block).to have_number_response '150.00'
-                expect(block).to be_user_defined
+            describe 'are received by the applicant ' do
+              let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_received, submission: cfe_submission }
+
+              context 'GB_INPUT_C_8WP3_303A' do
+                let(:attribute) { 'GB_INPUT_C_8WP3_303A' }
+
+                it 'generates a block with the correct values' do
+                  expect(block).to have_number_response '150.00'
+                  expect(block).to be_user_defined
+                end
+              end
+
+              context 'GB_INPUT_B_8WP3_308A' do
+                let(:attribute) { 'GB_INPUT_B_8WP3_308A' }
+
+                it 'generates a block with the correct values' do
+                  expect(block).to have_boolean_response true
+                  expect(block).to be_user_defined
+                end
               end
             end
 
-            context 'when the applicant does not receive maintenance' do
-              it 'does not generate a block' do
-                block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_8WP3_303A')
-                expect(block).not_to be_present
+            describe 'are not received by the applicant' do
+              context 'GB_INPUT_C_8WP3_303A' do
+                let(:attribute) { 'GB_INPUT_C_8WP3_303A' }
+
+                it 'does not generate a block' do
+                  expect(block).not_to be_present
+                end
+              end
+
+              context 'GB_INPUT_B_8WP3_308A' do
+                let(:attribute) { 'GB_INPUT_B_8WP3_308A' }
+
+                it 'generates a block with the correct values' do
+                  expect(block).to have_boolean_response false
+                  expect(block).to be_user_defined
+                end
               end
             end
           end
@@ -684,6 +712,27 @@ module CCMS
           end
         end
 
+        describe 'PROSPECTS_OF_SUCCESS' do
+          subject(:block) { XmlExtractor.call(xml, :global_means, 'PROSPECTS_OF_SUCCESS') }
+
+          EXAMPLES = [
+            { input: 'likely', result: 'FM' },
+            { input: 'marginal', result: 'FO' },
+            { input: 'poor', result: 'NE' },
+            { input: 'borderline', result: 'FH' },
+            { input: 'not_known', result: 'FJ' }
+          ].freeze
+
+          EXAMPLES.each do |test|
+            context "is set to #{test[:input]}" do
+              before { merits_assessment.update! success_prospect: test[:input] }
+
+              it { is_expected.to have_text_response test[:result] }
+              it { is_expected.to_not be_user_defined }
+            end
+          end
+        end
+
         describe 'MONEYDUE_INPUT_T_15WP2_15A' do
           subject(:block) { XmlExtractor.call(xml, :global_means, 'MONEYDUE_INPUT_T_15WP2_15A') }
           before { legal_aid_application.other_assets_declaration.money_owed_value = money_owed }
@@ -702,6 +751,154 @@ module CCMS
 
             it 'does not generate the block' do
               expect(block).to_not be_present
+            end
+          end
+        end
+
+        describe 'shared ownership attributes' do
+          EXAMPLES = [
+            {
+              input: 60,
+              tests: [
+                { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: true },
+                { attributes: %w[GB_INPUT_N_3WP2_14A], result: 60.0 },
+                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 40.0 }
+              ]
+            },
+            {
+              input: 99,
+              tests: [
+                { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: true },
+                { attributes: %w[GB_INPUT_N_3WP2_14A], result: 99.0 },
+                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 1.0 }
+              ]
+            },
+            {
+              input: 100,
+              tests: [
+                { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: false },
+                { attributes: %w[GB_INPUT_N_3WP2_14A], omit_block: true },
+                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], omit_block: true }
+              ]
+            }
+          ].freeze
+          EXAMPLES.each do |example|
+            example[:tests].each do |test|
+              test[:attributes].each do |attribute|
+                context attribute.to_s do
+                  subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
+                  let!(:percentage_home) { example[:input] }
+
+                  it "returns #{test[:result]} when percentage_home is set to #{test[:input]}" do
+                    if test[:omit_block]
+                      expect(block).to_not be_present
+                    elsif [true, false].include? test[:result]
+                      expect(block).to have_boolean_response test[:result]
+                    else
+                      expect(block).to have_number_response test[:result]
+                    end
+                  end
+                end
+              end
+            end
+          end
+
+          describe 'GB_INPUT_B_3WP2_27A' do
+            subject(:block) { XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_27A') }
+            before { legal_aid_application.own_home = ownership }
+
+            context 'when ownership of main dwelling is declared in capital' do
+              context 'as outright ownership' do
+                let(:ownership) { 'owned_outright' }
+
+                it 'generates the block' do
+                  expect(block).to have_boolean_response true
+                  expect(block).to be_user_defined
+                end
+              end
+
+              context 'with a mortgage' do
+                let(:ownership) { 'mortgage' }
+
+                it 'generates the block' do
+                  expect(block).to have_boolean_response true
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'when ownership of main dwelling is not declared in capital' do
+              let(:ownership) { 'no' }
+
+              it 'generates the block' do
+                expect(block).to have_boolean_response false
+                expect(block).to be_user_defined
+              end
+            end
+          end
+
+          describe 'GB_INPUT_C_3WP2_5A' do
+            subject(:block) { XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_3WP2_5A') }
+            before { legal_aid_application.update(own_home: ownership, property_value: 55_123.00) }
+
+            context 'when ownership of main dwelling is declared in capital' do
+              context 'as outright ownership' do
+                let(:ownership) { 'owned_outright' }
+
+                it 'generates the block' do
+                  expect(block).to have_currency_response 55_123.00
+                  expect(block).to be_user_defined
+                end
+              end
+
+              context 'with a mortgage' do
+                let(:ownership) { 'mortgage' }
+
+                it 'generates the block' do
+                  expect(block).to have_currency_response 55_123.00
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'when ownership of main dwelling is not declared in capital' do
+              let(:ownership) { 'no' }
+
+              it 'does not generate the block' do
+                expect(block).to_not be_present
+              end
+            end
+          end
+
+          describe 'GB_INPUT_C_3WP2_7A' do
+            subject(:block) { XmlExtractor.call(xml, :global_means, 'GB_INPUT_C_3WP2_7A') }
+            before { legal_aid_application.update(own_home: ownership, property_value: 55_123.00, outstanding_mortgage_amount: 25_432.00) }
+
+            context 'when ownership of main dwelling is declared in capital' do
+              context 'as outright ownership' do
+                let(:ownership) { 'owned_outright' }
+
+                it 'does not generate the block' do
+                  expect(block).to_not be_present
+                end
+              end
+
+              context 'with a mortgage' do
+                let(:ownership) { 'mortgage' }
+
+                it 'generates the block' do
+                  expect(block).to have_currency_response 25_432.00
+                  expect(block).to be_user_defined
+                end
+              end
+            end
+
+            context 'when ownership of main dwelling is not declared in capital' do
+              let(:ownership) { 'no' }
+
+              it 'does not generate the block' do
+                expect(block).to_not be_present
+              end
             end
           end
         end

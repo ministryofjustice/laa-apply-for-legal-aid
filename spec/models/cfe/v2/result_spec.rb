@@ -9,8 +9,11 @@ module CFE
       let(:no_additional_properties) { create :cfe_v2_result, :no_additional_properties }
       let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
       let(:no_vehicles) { create :cfe_v2_result, :no_vehicles }
-      let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_outgoings }
+      let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_received }
       let(:no_mortgage) { create :cfe_v2_result, :no_mortgage }
+      let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v2_result }
+      let(:contribution_and_restriction_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission }
+      let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
 
       describe '#overview' do
         context 'applicant is eligible' do
@@ -19,10 +22,18 @@ module CFE
           end
         end
 
-        context 'applicant is not eligible and has restrictions' do
+        context 'applicant has contribution required and restrictions' do
+          it 'returns manual_check_required' do
+            expect(contribution_and_restriction_result.capital_contribution_required?).to be true
+            expect(legal_aid_application.has_restrictions?).to be true
+            expect(contribution_and_restriction_result.overview).to eq 'manual_check_required'
+          end
+        end
+
+        context 'applicant has contribution required and no restrictions' do
           it 'returns manual_check_required' do
             expect(contribution_required_result.capital_contribution_required?).to be true
-            expect(contribution_required_result.overview).to eq 'manual_check_required'
+            expect(contribution_required_result.overview).to eq 'contribution_required'
           end
         end
       end
