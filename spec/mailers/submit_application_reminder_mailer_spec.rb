@@ -4,6 +4,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
   let(:application) { create :legal_aid_application, :with_delegated_functions, :with_everything, substantive_application_deadline_on: 10.days.from_now }
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }
+  let(:client_name) { application.applicant.full_name }
 
   describe '#notify_provider' do
     let(:mail) { described_class.notify_provider(application.id, provider_name, email) }

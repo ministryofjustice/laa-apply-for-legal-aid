@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 RSpec.describe SubmitApplicationReminderService, :vcr do
   let(:smoke_test_email) { Rails.configuration.x.smoke_test_email_address }
   let(:provider) { create :provider, email: smoke_test_email }
-  let(:application) { create :application, :with_delegated_functions, :with_substantive_application_deadline_on, provider: provider }
+  let(:application) { create :application, :with_applicant, :with_delegated_functions, :with_substantive_application_deadline_on, provider: provider }
 
   subject { described_class.new(application) }
 
