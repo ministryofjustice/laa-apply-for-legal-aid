@@ -39,7 +39,7 @@ module PageTemplateHelper
   #
 
   def page_template( # rubocop:disable Metrics/ParameterLists, Metrics/MethodLength
-    page_title:,
+    page_title: nil,
     head_title: nil,
     back_link: {},
     column_width: 'two-thirds',
