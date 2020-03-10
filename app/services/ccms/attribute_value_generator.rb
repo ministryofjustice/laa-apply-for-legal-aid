@@ -55,15 +55,14 @@ module CCMS
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
     WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
     OUTGOING = /^outgoing_(\S+)$/.freeze
-    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
-    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
-      likely: 'Good',
-      marginal: 'Marginal',
-      poor: 'Poor',
-      borderline: 'Borderline',
-      uncertain: 'Uncertain'
+      likely: { text: 'Good', code: 'FM' },
+      marginal: { text: 'Marginal', code: 'FO' },
+      poor: { text: 'Poor', code: 'NE' },
+      borderline: { text: 'Borderline', code: 'FH' },
+      uncertain: { text: 'Uncertain', code: 'FJ' },
+      not_known: { text: 'Uncertain', code: 'FJ' }
     }.freeze
 
     attr_reader :legal_aid_application
@@ -248,12 +247,48 @@ module CCMS
       !@legal_aid_application.own_home_no?
     end
 
+    def applicant_shares_ownership_main_home?(_options)
+      (not_zero? @legal_aid_application.percentage_home) && @legal_aid_application.percentage_home < 100
+    end
+
+    def applicant_owns_percentage_main_home(_options)
+      @legal_aid_application.percentage_home
+    end
+
+    def third_party_owns_percentage_main_home(_options)
+      100 - @legal_aid_application.percentage_home
+    end
+
+    def applicant_property_value(_options)
+      @legal_aid_application.property_value
+    end
+
+    def outstanding_mortgage?(_options)
+      !@legal_aid_application&.own_home_no? && @legal_aid_application&.own_home_mortgage? && @legal_aid_application&.outstanding_mortgage_amount
+    end
+
+    def outstanding_mortgage_amount(_options)
+      @legal_aid_application.outstanding_mortgage_amount
+    end
+
     def applicant_has_vehicle?(_options)
       vehicle.present? && not_zero?(vehicle.estimated_value)
     end
 
     def ccms_equivalent_prospects_of_success(_options)
-      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym]
+      return unless ccms_equivalent_prospects_of_success_valid?
+
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym][:text]
+    end
+
+    def ccms_code_prospects_of_success(_options)
+      return unless ccms_equivalent_prospects_of_success_valid?
+
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym][:code]
+    end
+
+    def ccms_equivalent_prospects_of_success_valid?
+      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym].present?
     end
 
     def client_eligibility(_options)
@@ -356,6 +391,14 @@ module CCMS
 
     def not_zero?(value)
       value.present? && value.positive?
+    end
+
+    def bypass_manual_review_in_ccms?(_options)
+      !manual_case_review_required?
+    end
+
+    def manual_case_review_required?
+      ManualReviewDeterminer.call(@legal_aid_application)
     end
   end
 end

@@ -9,6 +9,10 @@ class Setting < ApplicationRecord
     setting.allow_non_passported_route?
   end
 
+  def self.manually_review_all_cases?
+    setting.manually_review_all_cases
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
