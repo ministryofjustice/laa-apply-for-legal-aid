@@ -271,6 +271,8 @@ en:
             not_known: Work still needs to be done to determine the likelihood of success
       types_of_income_form:
         financial_help_examples: For example, money from a family member for rent or bills.
+        benefits_examples: For example, Universal Credit or Child Benefit.
+        pension_examples: Include State, workplace and private pensions.
         none_selected: None of these
       identify_types_of_outgoings_form:
         none_selected: None of these
