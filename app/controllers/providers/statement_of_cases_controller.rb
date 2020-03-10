@@ -16,7 +16,7 @@ module Providers
 
     def destroy
       original_file = delete_original_and_pdf_files
-      @successfully_deleted = files_deleted_message(original_file) unless original_file.nil?
+      @successfully_deleted = files_deleted_message(original_file.attachment_name) unless original_file.nil?
       redirect_to providers_legal_aid_application_statement_of_case_path
     end
 
@@ -39,8 +39,8 @@ module Providers
       I18n.t('accessibility.problem_text') + ' ' + form.errors.messages[:original_file].first
     end
 
-    def files_deleted_message(original_file)
-      I18n.t('activemodel.attributes.statement_of_case.file_deleted', file_name: original_file.document.filename)
+    def files_deleted_message(deleted_file_name)
+      I18n.t('activemodel.attributes.statement_of_case.file_deleted', file_name: deleted_file_name)
     end
 
     def successful_upload
