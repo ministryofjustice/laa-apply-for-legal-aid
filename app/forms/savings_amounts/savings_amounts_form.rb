@@ -26,7 +26,6 @@ module SavingsAmounts
 
     validates(*ATTRIBUTES, allow_blank: true, currency: { greater_than_or_equal_to: 0 })
 
-
     before_validation :empty_unchecked_values
 
     validate :any_checkbox_checked_or_draft
