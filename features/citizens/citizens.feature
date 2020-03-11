@@ -45,7 +45,7 @@ Feature: Citizen journey
     Then I click "Save and continue"
     Then I should be on a page showing "Declaration"
     Then I click "Agree and submit"
-    Then I should be on a page showing "You've completed your financial assessment"
+    Then I should be on a page showing "You've shared your financial information"
 
   @javascript
   Scenario: I want to change income types via the check your answers page
