@@ -24,8 +24,8 @@ module SavingsAmounts
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
     attr_accessor :journey
 
-    validates(*ATTRIBUTES - %i[offline_current_accounts offline_savings_accounts], allow_blank: true, currency: { greater_than_or_equal_to: 0 })
-    validates(:offline_current_accounts, :offline_savings_accounts, allow_blank: true, currency: true)
+    validates(*ATTRIBUTES, allow_blank: true, currency: { greater_than_or_equal_to: 0 })
+
 
     before_validation :empty_unchecked_values
 

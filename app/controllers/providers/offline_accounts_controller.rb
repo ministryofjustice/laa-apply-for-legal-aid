@@ -9,7 +9,7 @@ module Providers
     def update
       ap params.to_unsafe_hash
       puts '.........'
-    ap form_params
+      ap form_params
       @form = SavingsAmounts::OfflineAccountsForm.new(form_params)
 
       render :show unless save_continue_or_draft(@form)
