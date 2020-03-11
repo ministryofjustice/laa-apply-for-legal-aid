@@ -52,13 +52,13 @@ Feature: Citizen journey
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Salary or wages No'
+    Then I should be on a page showing 'Benefits'
     And I click Check Your Answers Change link for 'incomings'
     Then I should be on a page showing 'Which types of income do you receive?'
-    Then I select 'Salary or wages'
+    Then I select 'Financial help from friends or family'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Salary or wages Yes'
+    Then I should be on a page showing 'Financial help from friends or family Yes'
 
   @javascript
   Scenario: I want to add another bank account via the check your answers page
