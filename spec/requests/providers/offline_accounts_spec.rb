@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'providers savings and investments', type: :request do
+RSpec.describe 'providers offine accounts', type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount }
   let(:savings_amount) { application.savings_amount }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/savings_and_investment' do
-    subject { get providers_legal_aid_application_savings_and_investment_path(application) }
+  describe 'GET /providers/applications/:legal_aid_application_id/offline_account' do
+    subject { get providers_legal_aid_application_offline_account_path(application) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -59,18 +59,18 @@ RSpec.describe 'providers savings and investments', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/savings_and_investment' do
-    let(:cash) { rand(1...1_000_000.0).round(2).to_s }
-    let(:check_box_cash) { 'true' }
+    let(:offline_current_accounts) { rand(1...1_000_000.0).round(2).to_s }
+    let(:check_box_offline_current_accounts) { 'true' }
     let(:params) do
       {
         savings_amount: {
-          cash: cash,
-          check_box_cash: check_box_cash
+          offline_current_accounts: offline_current_accounts,
+          check_box_offline_current_accounts: check_box_offline_current_accounts
         }
       }
     end
 
-    subject { patch providers_legal_aid_application_savings_and_investment_path(application), params: params.merge(submit_button) }
+    subject { patch providers_legal_aid_application_offline_account_path(application), params: params.merge(submit_button) }
 
     context 'when the provider is authenticated' do
       before do
@@ -85,8 +85,8 @@ RSpec.describe 'providers savings and investments', type: :request do
         end
 
         context 'not in checking passported answers state' do
-          it 'updates the cash amount' do
-            expect { subject }.to change { savings_amount.reload.cash.to_s }.to(cash)
+          it 'updates the offline_current_accounts amount' do
+            expect { subject }.to change { savings_amount.reload.offline_current_accounts.to_s }.to(offline_current_accounts)
           end
 
           it 'does not displays an error' do
@@ -97,20 +97,20 @@ RSpec.describe 'providers savings and investments', type: :request do
 
           it 'redirects to the next step in Citizen jouney' do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_other_assets_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
           end
 
           context 'none of these checkbox is selected' do
-            let(:params) { { savings_amount: { none_selected: 'true' } } }
+            let(:params) { { savings_amount: { no_account_selected: 'true' } } }
 
-            it 'sets none_selected to true' do
+            it 'sets no_account_selected to true' do
               subject
-              expect(savings_amount.reload.none_selected).to eq(true)
+              expect(savings_amount.reload.no_account_selected).to eq(true)
             end
           end
 
           context 'with invalid input' do
-            let(:cash) { 'fifty' }
+            let(:offline_current_accounts) { 'fifty' }
 
             it 'renders successfully' do
               subject
@@ -119,15 +119,15 @@ RSpec.describe 'providers savings and investments', type: :request do
 
             it 'displays an error' do
               subject
-              expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.cash.not_a_number'))
+              expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_current_accounts.not_a_number'))
               expect(response.body).to match('govuk-error-message')
               expect(response.body).to match('govuk-form-group--error')
             end
           end
         end
 
-        context 'when in checking passported answers state' do
-          let(:state) { :checking_passported_answers }
+        context 'when in checking citizen  answers state' do
+          let(:state) { :checking_citizen_answers }
           let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, state: state }
           let(:submit_button) do
             {
@@ -137,7 +137,7 @@ RSpec.describe 'providers savings and investments', type: :request do
           before { subject }
 
           it 'redirects to the restrictions page' do
-            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
           end
 
           context 'no savings' do
@@ -167,7 +167,7 @@ RSpec.describe 'providers savings and investments', type: :request do
         end
 
         it 'updates the offline_current_accounts amount' do
-          expect { subject }.to change { savings_amount.reload.cash.to_s }.to(cash)
+          expect { subject }.to change { savings_amount.reload.offline_current_accounts.to_s }.to(offline_current_accounts)
         end
 
         it 'does not displays an error' do
@@ -187,7 +187,7 @@ RSpec.describe 'providers savings and investments', type: :request do
         end
 
         context 'with invalid input' do
-          let(:cash) { 'fifty' }
+          let(:offline_current_accounts) { 'fifty' }
 
           it 'renders successfully' do
             subject
@@ -196,7 +196,7 @@ RSpec.describe 'providers savings and investments', type: :request do
 
           it 'displays an error' do
             subject
-            expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.cash.not_a_number'))
+            expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_current_accounts.not_a_number'))
             expect(response.body).to match('govuk-error-message')
             expect(response.body).to match('govuk-form-group--error')
           end

@@ -19,7 +19,7 @@ module Flow
         offline_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
           forward: ->(application) { application.checking_answers? ? :restrictions : :savings_and_investments },
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :savings_and_investments }
         },
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
