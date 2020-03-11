@@ -41,8 +41,6 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       shared_examples_for 'it has an error' do
         let(:attribute_map) do
           {
-            offline_current_accounts: /total in.*accounts/i,
-            offline_savings_accounts: /total in.*accounts/i,
             cash: /total.*cash savings/i,
             other_person_account: /other people’s accounts/,
             national_savings: /certificates and bonds/,
@@ -87,8 +85,6 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         context 'that are not bank account attributes' do
           let(:attribute_map) do
             {
-              offline_current_accounts: /total in.*accounts/i,
-              offline_savings_accounts: /total in.*accounts/i,
               cash: /total.*cash savings/i,
               other_person_account: /other people’s accounts/,
               national_savings: /certificates and bonds/,
@@ -97,13 +93,8 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
               life_assurance_endowment_policy: /total.*of life assurance policies/i
             }
           end
-          let(:attributes_without_savings_or_current_accounts) { attributes - %i[offline_current_accounts offline_savings_accounts] }
-          let(:amount_params) { attributes_without_savings_or_current_accounts.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
+          let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
           let(:expected_error) { /must be 0 or more/ }
-          before do
-            amount_params[:offline_current_accounts] = '1'
-            amount_params[:offline_savings_accounts] = '1'
-          end
 
           it 'returns false' do
             expect(subject.save).to eq(false)
@@ -111,7 +102,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
           it 'generates errors' do
             subject.save
-            attributes_without_savings_or_current_accounts.each do |attr|
+            attributes.each do |attr|
               error_message = subject.errors[attr].first
               expect(error_message).to match(expected_error)
               expect(error_message).to match(attribute_map[attr.to_sym])
@@ -120,18 +111,6 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
           it 'does not update the model' do
             expect { subject.save }.not_to change { savings_amount.reload.updated_at }
-          end
-        end
-        context 'for bank account values' do
-          let(:amount_params) do
-            random_value = [rand(1...1_000_000.0).round(2).to_s, (-rand(1...1_000_000.0).round(2).to_s).to_s, '0'].sample
-            attributes.each_with_object({}) do |attr, hsh|
-              hsh[attr] = rand(1...1_000_000.0).round(2).to_s
-              %i[offline_current_accounts offline_savings_accounts].include?(attr) ? hsh[attr] = random_value : next
-            end
-          end
-          it 'has no errors' do
-            expect(subject.save).to eq(true)
           end
         end
       end
@@ -156,19 +135,18 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
     context 'some check boxes are unchecked' do
       let(:check_box_params) do
         boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
-        boxes[:check_box_offline_current_accounts] = 'true'
-        boxes[:check_box_offline_savings_accounts] = 'true'
+        boxes[:check_box_cash] = 'true'
         boxes
       end
 
-      context 'amounts are valid' do
+      context 'amounts are invalid' do
         let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
 
         it 'empties amounts if checkbox is unchecked' do
-          attributes_except_isa = attributes - %i[offline_current_accounts offline_savings_accounts]
+          attributes_except_cash = attributes - [:cash]
           subject.save
           savings_amount.reload
-          attributes_except_isa.each do |attr|
+          attributes_except_cash.each do |attr|
             val = savings_amount.__send__(attr)
             expect(val).to eq(nil), "Attr #{attr}: expected nil, got #{val}"
           end
@@ -176,7 +154,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
         it 'does not empty amount if a checkbox is checked' do
           subject.save
-          expect(savings_amount.reload.offline_current_accounts).not_to eq(nil)
+          expect(savings_amount.reload.cash).not_to eq(nil)
         end
 
         it 'returns true' do

@@ -95,13 +95,13 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_property_value_path(application, anchor: 'property_value'))
         expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_shared_ownership_path(application))
         expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_percentage_home_path(application, anchor: 'percentage_home'))
-        expect(response.body).to include(providers_legal_aid_application_savings_and_investment_path(application))
+        expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
         expect(response.body).to include(providers_legal_aid_application_other_assets_path(application))
         expect(response.body).to include(providers_legal_aid_application_restrictions_path(application))
       end
 
       it 'displays the correct savings details' do
-        application.savings_amount.amount_attributes.each do |_, amount|
+        application.savings_amount.amount_attributes.each do |_attr, amount|
           expect(response.body).to include(number_to_currency(amount, unit: '£')), 'saving amount should be in the page'
         end
       end
