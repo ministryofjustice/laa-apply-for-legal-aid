@@ -4,7 +4,7 @@ Feature: Citizen journey
     Given An application has been created
     And a "true layer bank" exists in the database
     Then I visit the start of the financial assessment
-    Then I should be on a page showing 'Complete your legal aid financial assessment'
+    Then I should be on a page showing 'Share your financial information with us'
     Then I click link 'Start'
     Then I should be on a page showing 'Give one-time access to your bank accounts'
     Then I click link 'Continue'
@@ -24,7 +24,7 @@ Feature: Citizen journey
     Then I should be on a page showing "Why we need your data"
     Then I should be on a page showing "Your rights"
     Then I click link "Back"
-    Then I should be on a page showing 'Complete your legal aid financial assessment'
+    Then I should be on a page showing 'Share your financial information with us'
 
   @javascript @webhint
   Scenario: Follow citizen journey from Accounts page
