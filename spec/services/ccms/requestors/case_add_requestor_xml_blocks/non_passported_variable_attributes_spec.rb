@@ -715,7 +715,7 @@ module CCMS
         describe 'PROSPECTS_OF_SUCCESS' do
           subject(:block) { XmlExtractor.call(xml, :global_means, 'PROSPECTS_OF_SUCCESS') }
 
-          EXAMPLES = [
+          examples = [
             { input: 'likely', result: 'FM' },
             { input: 'marginal', result: 'FO' },
             { input: 'poor', result: 'NE' },
@@ -723,7 +723,7 @@ module CCMS
             { input: 'not_known', result: 'FJ' }
           ].freeze
 
-          EXAMPLES.each do |test|
+          examples.each do |test|
             context "is set to #{test[:input]}" do
               before { merits_assessment.update! success_prospect: test[:input] }
 
@@ -756,7 +756,7 @@ module CCMS
         end
 
         describe 'shared ownership attributes' do
-          EXAMPLES = [
+          examples = [
             {
               input: 60,
               tests: [
@@ -782,7 +782,7 @@ module CCMS
               ]
             }
           ].freeze
-          EXAMPLES.each do |example|
+          examples.each do |example|
             example[:tests].each do |test|
               test[:attributes].each do |attribute|
                 context attribute.to_s do

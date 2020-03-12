@@ -55,7 +55,7 @@ module SavingsAmounts
     end
 
     def error_message_for_no_account_selected
-      I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.no_account_selected")
+      I18n.t('activemodel.errors.models.savings_amount.attributes.base.providers.no_account_selected')
     end
   end
 end

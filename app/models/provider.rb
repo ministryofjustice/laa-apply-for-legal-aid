@@ -20,7 +20,7 @@ class Provider < ApplicationRecord
     ProviderDetailsCreatorWorker.perform_async(id)
   end
 
-  def update_details_directly
+  def update_details_directly§§
     ProviderDetailsCreator.call(self)
   end
 
