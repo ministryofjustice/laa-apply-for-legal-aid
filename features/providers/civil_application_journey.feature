@@ -493,7 +493,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select "Current account"
-    Then I fill "Enter the total in all current accounts" with "-10"
+    Then I fill "offline_current_accounts" with "-10"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "Money not in a bank account"
@@ -528,6 +528,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "How much is your client's home worth?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
