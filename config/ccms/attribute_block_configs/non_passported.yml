@@ -2060,6 +2060,30 @@ proceeding_merits:
     user_defined: false
     response_type: boolean
     generate_block?: true
+  PROC_MATTER_TYPE_DESC:
+    value: "#proceeding_description"
+    br100_meaning: 'Proc: The Proceeding Matter Type Description'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROC_MATTER_TYPE_MEANING:
+    value: "#proceeding_description"
+    br100_meaning: 'Proc: The Proceeding Matter Type Meaning'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROC_MEANING:
+    value: "#proceeding_description"
+    br100_meaning: 'Proc: The Proceeding Meaning'
+    response_type: text
+    user_defined: false
+    generate_block?: true
+  PROCEEDING_DESCRIPTION:
+    value: "#proceeding_description"
+    br100_meaning: 'Proc: The Proceeding Description'
+    response_type: text
+    user_defined: false
+    generate_block?: true
 
 stocks:
   CLISTOCK_INPUT_B_9WP2_10A:

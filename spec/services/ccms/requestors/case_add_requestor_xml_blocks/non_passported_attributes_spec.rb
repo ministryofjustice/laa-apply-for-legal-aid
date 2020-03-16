@@ -485,6 +485,24 @@ module CCMS
           end
         end
 
+        context 'Proceeding Matter Type Descriptions' do
+          let(:attrs) do
+            %w[
+              PROC_MATTER_TYPE_DESC
+              PROC_MATTER_TYPE_MEANING
+              PROC_MEANING
+              PROCEEDING_DESCRIPTION
+            ]
+          end
+          it 'generates the block with the correct description' do
+            attrs.each do |attr_name|
+              block = XmlExtractor.call(xml, :proceeding_merits, attr_name)
+              expect(block).to have_text_response legal_aid_application.lead_proceeding_type.description
+              expect(block).not_to be_user_defined
+            end
+          end
+        end
+
         def will_attributes
           %w[
             WILL_INPUT_B_2WP2_10A
