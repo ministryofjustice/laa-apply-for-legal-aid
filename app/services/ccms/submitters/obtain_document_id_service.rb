@@ -5,7 +5,7 @@ module CCMS
         populate_documents
         unless submission.submission_document.empty?
           request_document_ids
-          create_history('applicant_ref_obtained', submission.aasm_state, xml_request, @response) if submission.obtain_document_ids!
+          submission.obtain_document_ids!
         end
       rescue CcmsError => e
         handle_exception(e, xml_request)
@@ -44,7 +44,7 @@ module CCMS
           document.ccms_document_id = Parsers::DocumentIdResponseParser.new(tx_id, @response).document_id
           document.status = :id_obtained
           document.save!
-          submission.save!
+          create_history('applicant_ref_obtained', 'document_ids_obtained', xml_request, @response) if submission.save!
         rescue CcmsError => e
           document.status = :failed
           raise CcmsError, e

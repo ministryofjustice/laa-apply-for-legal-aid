@@ -15,7 +15,7 @@ module CCMS
       let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
       let!(:statement_of_case) { create :statement_of_case, legal_aid_application: legal_aid_application }
       let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep' }
-      let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
+      let(:history) { SubmissionHistory.where(submission_id: submission.id).last }
       let(:document_id_request) { ccms_data_from_file 'document_id_request.xml' }
       let(:response_body) { ccms_data_from_file 'document_id_response.xml' }
 
@@ -75,8 +75,12 @@ module CCMS
               expect { subject.call }.to change { submission.aasm_state }.to 'document_ids_obtained'
             end
 
-            it 'writes a history record' do
-              expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            it 'writes a history record for each document' do
+              expect { subject.call }.to change { SubmissionHistory.count }.by(3)
+            end
+
+            it 'updates the history records' do
+              subject.call
               expect(history.from_state).to eq 'applicant_ref_obtained'
               expect(history.to_state).to eq 'document_ids_obtained'
               expect(history.success).to be true
