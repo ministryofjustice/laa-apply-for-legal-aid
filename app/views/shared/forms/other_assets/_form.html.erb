@@ -23,7 +23,7 @@
 
       <div class="govuk-checkboxes">
         <div class="govuk-checkboxes__item">
-          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', @form.none_selected %>
+          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input', include_hidden: true }, true, '' %>
           <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
         </div>
       </div>

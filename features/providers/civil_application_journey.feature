@@ -639,3 +639,32 @@ Feature: Civil application journeys
     Then I click link "Start"
     Then I click link "Search applications"
     Then I should be on a page showing "Search applications"
+
+  @javascript @vcr
+  Scenario: Using the back button to change none_of_these checkboxes
+    Given I am checking the applicant's means answers
+    When I click Check Your Answers Change link for 'Savings and investments'
+    Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
+    When I select "None of these"
+    And I click "Save and continue"
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    When I click link "Back"
+    Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
+    When I deselect "None of these"
+    And I click "Save and continue"
+    Then I should be on the "savings_and_investment" page showing "Select if your client has any of these savings or investments"
+    When I select "None of these"
+    And I click "Save and continue"
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    When I click Check Your Answers Change link for 'Other assets'
+    Then I should be on the "other_assets" page showing "Which types of assets does your client have?"
+    When I select "None of these"
+    And I click "Save and continue"
+    Then I should be on a page showing "Check your answers"
+    When I click link "Back"
+    Then I should be on the "other_assets" page showing "Which types of assets does your client have?"
+    When I deselect "None of these"
+    And I click "Save and continue"
+    Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
+    Then I select "None of these"
+    Then I click "Save and continue"
