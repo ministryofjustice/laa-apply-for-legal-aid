@@ -2,11 +2,11 @@ module CCMS
   module Submitters
     class UploadDocumentsService < BaseSubmissionService
       def call # rubocop:disable Metrics/AbcSize
-        submission.submission_document.each do |submission_document|
+        submission.submission_documents.each do |submission_document|
           upload_document(submission_document)
         end
 
-        failed_uploads = submission.submission_document.select { |document| document.status == 'failed' }
+        failed_uploads = submission.submission_documents.select { |document| document.status == 'failed' }
 
         raise CcmsError, "The following documents failed to upload: #{failed_uploads.map(&:id).join(', ')}" if failed_uploads.present?
 
