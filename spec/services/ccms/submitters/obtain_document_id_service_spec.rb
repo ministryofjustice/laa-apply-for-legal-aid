@@ -39,7 +39,7 @@ module CCMS
         context 'the application has no documents' do
           it 'does not create any document objects' do
             subject.call
-            expect(submission.submission_document.count).to eq 0
+            expect(submission.submission_documents.count).to eq 0
           end
         end
 
@@ -53,20 +53,20 @@ module CCMS
 
           it 'populates the documents array with statement_of_case, means_report and merits_report' do
             subject.call
-            expect(submission.submission_document.count).to eq 3
+            expect(submission.submission_documents.count).to eq 3
           end
 
           context 'when requesting document_ids' do
             it 'populates the ccms_document_id for each document' do
               subject.call
-              submission.submission_document.each do |document|
+              submission.submission_documents.each do |document|
                 expect(document.ccms_document_id).to_not be nil
               end
             end
 
             it 'updates the status for each document to id_obtained' do
               subject.call
-              submission.submission_document.each do |document|
+              submission.submission_documents.each do |document|
                 expect(document.status).to eq 'id_obtained'
               end
             end
@@ -148,7 +148,7 @@ module CCMS
 
           it 'changes the document state to failed' do
             subject.call
-            expect(submission.submission_document.first.status).to eq 'failed'
+            expect(submission.submission_documents.first.status).to eq 'failed'
           end
 
           it 'writes a history record' do

@@ -50,18 +50,18 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
     end
 
     it 'creates a DocumentUploadRequestor object for each document to be uploaded' do
-      expect(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).exactly(submission.submission_document.count).times
+      expect(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).exactly(submission.submission_documents.count).times
       subject.call
     end
 
     it 'encodes each document as base64' do
-      expect(Base64).to receive(:strict_encode64).exactly(submission.submission_document.count).times
+      expect(Base64).to receive(:strict_encode64).exactly(submission.submission_documents.count).times
       subject.call
     end
 
     it 'updates the status for each document to uploaded' do
       subject.call
-      submission.submission_document.each do |document|
+      submission.submission_documents.each do |document|
         expect(document.status).to eq 'uploaded'
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
 
       it 'changes the document state to failed' do
         subject.call
-        expect(submission.submission_document.first.status).to eq 'failed'
+        expect(submission.submission_documents.first.status).to eq 'failed'
       end
 
       it 'writes a history record' do
@@ -116,7 +116,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
 
       it 'changes the document state to failed' do
         subject.call
-        expect(submission.submission_document.first.status).to eq 'failed'
+        expect(submission.submission_documents.first.status).to eq 'failed'
       end
 
       it 'writes a history record' do
