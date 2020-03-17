@@ -640,7 +640,6 @@ Feature: Civil application journeys
     Then I click link "Search applications"
     Then I should be on a page showing "Search applications"
 
-
   @javascript @vcr
   Scenario: Using the back button to change none_of_these checkboxes
     Given I am checking the applicant's means answers
