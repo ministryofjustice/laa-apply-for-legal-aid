@@ -1,24 +1,49 @@
-<?xml version="1.0" standalone="yes"?>
-<ns8:CaseAddRS
-  xmlns:ns2="http://legalservices.gov.uk/Enterprise/Common/1.0/Common"
-  xmlns="http://legalservices.gov.uk/Enterprise/Common/1.0/Header"
-  xmlns:ns4="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO"
-  xmlns:ns3="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM"
-  xmlns:ns5="http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO"
-  xmlns:ns6="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-  xmlns:ns7="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-  xmlns:ns8="uri">
-  <HeaderRS>
-    <TransactionID>20190301030405123456</TransactionID>
-    <RequestDetails>
-      <TransactionRequestID>20190301030405123456</TransactionRequestID>
-      <UserLoginID>my_login</UserLoginID>
-      <UserRole>my_role</UserRole>
-    </RequestDetails>
-    <Status>
-      <Status>Fail</Status>
-      <StatusFreeText></StatusFreeText>
-    </Status>
-  </HeaderRS>
-  <ns3:TransactionID>20190301030405123456</ns3:TransactionID>
-</ns8:CaseAddRS>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <ns1:Security xmlns:ns2="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO"
+                  xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+                  xmlns:ns4="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM"
+                  xmlns:ns3="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:ns0="http://legalservices.gov.uk/Enterprise/Common/1.0/Common"
+                  xmlns:ns5="http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO"
+                  xmlns:ns6="http://legalservices.gov.uk/Enterprise/Common/1.0/Header"
+                  xmlns:ns8="uri">
+      <ns1:UsernameToken>
+        <ns1:Username>pui_user</ns1:Username>
+        <ns1:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">PUIONLY1</ns1:Password>
+      </ns1:UsernameToken>
+    </ns1:Security>
+    <wsa:MessageID>urn:7A3451705A3F11EABF99012B4AFAC620</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0009VGeQKP^ATOw5OFL6id000775000rsA</instra:tracking.ecid>
+        <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2020-02-28T15:32:00.756Z</instra:tracking.compositeInstanceCreatedTime>
+      </wsa:ReferenceParameters>
+    </wsa:ReplyTo>
+    <wsa:FaultTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+      <wsa:ReferenceParameters>
+        <instra:tracking.ecid xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">0009VGeQKP^ATOw5OFL6id000775000rsA</instra:tracking.ecid>
+        <instra:tracking.compositeInstanceCreatedTime xmlns:instra="http://xmlns.oracle.com/sca/tracking/1.0">2020-02-28T15:32:00.756Z</instra:tracking.compositeInstanceCreatedTime>
+      </wsa:ReferenceParameters>
+    </wsa:FaultTo>
+  </env:Header>
+  <env:Body>
+    <CaseAddRS>
+      <HeaderRS>
+        <TransactionID>20190301030405123456</TransactionID>
+        <RequestDetails>
+          <TransactionRequestID>20190301030405123456</TransactionRequestID>
+          <UserLoginID>my_login</UserLoginID>
+          <UserRole>my_role</UserRole>
+        </RequestDetails>
+        <Status>
+          <Status>Fail</Status>
+          <StatusFreeText></StatusFreeText>
+        </Status>
+      </HeaderRS>
+      <ns3:TransactionID>20190301030405123456</ns3:TransactionID>
+    </CaseAddRS>
+  </env:Body>
+</env:Envelope>

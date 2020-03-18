@@ -27,6 +27,22 @@ module CCMS
           expect(parser.applicant_ccms_reference).to eq expected_applicant_ccms_reference
         end
       end
+
+      describe '#success?' do
+        it 'returns true' do
+          parser = described_class.new(expected_tx_id, response_xml)
+          parser.success?
+          expect(parser.success).to be true
+        end
+      end
+
+      describe '#message' do
+        it 'returns status concatenated with status free text' do
+          parser = described_class.new(expected_tx_id, response_xml)
+          parser.success?
+          expect(parser.message).to eq 'Success: Party Successfully Created.'
+        end
+      end
     end
   end
 end
