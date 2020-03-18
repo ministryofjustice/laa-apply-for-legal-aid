@@ -21,7 +21,7 @@ module CCMS
       private
 
       def from_state?
-        submission.submission_document.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained'
+        submission.submission_documents.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained'
       end
 
       def case_add_requestor
