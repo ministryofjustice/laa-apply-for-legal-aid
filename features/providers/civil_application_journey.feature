@@ -384,6 +384,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
@@ -415,6 +418,9 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -485,6 +491,10 @@ Feature: Civil application journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select "Current account"
+    Then I fill "offline_current_accounts" with "-10"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "Money not in a bank account"
     Then I fill "Cash" with "10000"
@@ -505,6 +515,8 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I click link "Back"
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I click link "Back"
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I click link "Back"
     Then I should be on a page showing "What % share of their home does your client legally own?"
@@ -516,6 +528,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "How much is your client's home worth?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
@@ -629,6 +642,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "Is the vehicle in regular use?"
     Then I choose option "Vehicle used regularly true"
     And I click "Save and continue"
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
 
   @javascript @vcr
@@ -644,6 +660,9 @@ Feature: Civil application journeys
   Scenario: Using the back button to change none_of_these checkboxes
     Given I am checking the applicant's means answers
     When I click Check Your Answers Change link for 'Savings and investments'
+    Then I should be on the "offline_account" page showing "Which bank accounts does your client have?"
+    When I select "None of these"
+    And I click "Save and continue"
     Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
     When I select "None of these"
     And I click "Save and continue"

@@ -1,0 +1,36 @@
+<%= render 'accounts_summary', bank_accounts: bank_accounts if bank_accounts.any? %>
+
+<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
+
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
+      <%= govuk_fieldset_header page_title %>
+      <h2 class="govuk-heading-m"><%= t('generic.select_all_that_apply') %></h2>
+
+      <%= render 'shared/show_errors' %>
+
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+        <div class="deselect-group" data-deselect-ctrl="[name='savings_amount[no_account_selected]']">
+          <%= render partial: 'shared/forms/revealing_checkbox/attribute',
+                     collection: attributes,
+                     locals: { model: @form, form: form } %>
+        </div>
+      </div>
+
+      <div class="govuk-radios__divider tickbox_divider"><%= or_break %></div>
+
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <%= form.check_box :no_account_selected, { class: 'govuk-checkboxes__input' }, true, '' %>
+          <%= form.label :no_account_selected, no_account_selected, class: 'govuk-label govuk-checkboxes__label' %>
+        </div>
+      </div>
+
+    </fieldset>
+  <% end %>
+
+  <%= next_action_buttons(
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+        form: form
+      ) %>
+<% end %>

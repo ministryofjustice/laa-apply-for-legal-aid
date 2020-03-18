@@ -17,6 +17,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
@@ -92,6 +95,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
@@ -124,6 +130,9 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -177,6 +186,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Is the vehicle in regular use?"
     Then I choose option "Vehicle used regularly true"
     And I click "Save and continue"
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'

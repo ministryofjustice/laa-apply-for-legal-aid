@@ -341,6 +341,12 @@ en:
         capital_result_heading: Capital result
         assets_heading: Property, savings and other assets
         question_receives_benefit: In receipt of passporting benefit
+    offline_accounts:
+        show:
+          h1-heading: Which bank accounts does your client have?
+          offline_current_accounts: Current account
+          offline_savings_accounts: Savings account
+          no_account_selected: None of these
     open_banking_consents:
       show:
         heading: Check if you can continue using this service
