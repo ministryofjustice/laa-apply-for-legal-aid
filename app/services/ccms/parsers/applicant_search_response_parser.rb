@@ -15,6 +15,10 @@ module CCMS
 
       private
 
+      def response_type
+        'ClientInqRS'.freeze
+      end
+
       def extracted_transaction_request_id
         text_from(TRANSACTION_ID_PATH)
       end

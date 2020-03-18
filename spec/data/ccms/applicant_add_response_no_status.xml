@@ -1,0 +1,35 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <ns1:Security
+            xmlns:ns2="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM"
+            xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:ns4="http://legalservices.gov.uk/Enterprise/Common/1.0/Common"
+            xmlns:ns3="http://legalservices.gov.uk/Enterprise/Common/1.0/Header"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:ns5="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <ns1:UsernameToken>
+        <ns1:Username>my_soap_client_username</ns1:Username>
+        <ns1:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">xxxxx</ns1:Password>
+      </ns1:UsernameToken>
+    </ns1:Security>
+    <wsa:MessageID>urn:BE122A8057A611E99F6F058281F6012C</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+    </wsa:ReplyTo>
+  </env:Header>
+  <env:Body>
+    <ns1:ClientAddRS xmlns:ns1="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM">
+      <ns2:HeaderRS xmlns:ns2="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <ns2:TransactionID>20190301030405123456</ns2:TransactionID>
+        <ns2:RequestDetails>
+          <ns2:TransactionRequestID>20190301030405123456</ns2:TransactionRequestID>
+          <ns2:Language>ENG</ns2:Language>
+          <ns2:UserLoginID>my_login</ns2:UserLoginID>
+          <ns2:UserRole>my_role</ns2:UserRole>
+        </ns2:RequestDetails>
+      </ns2:HeaderRS>
+      <ns1:TransactionID>20190301030405123456</ns1:TransactionID>
+    </ns1:ClientAddRS>
+  </env:Body>
+</env:Envelope>
