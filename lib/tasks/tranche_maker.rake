@@ -7,8 +7,7 @@
 #
 namespace :tranche do
   task maker: :environment do
-    NEW_USERS_FILE = '/Users/stephenrichards/Library/Preferences/RubyMine2019.3/scratches/scratch_5.txt'.freeze
-    new_users = File.read(NEW_USERS_FILE).split("\n")
+    new_users = File.read(Rails.root.joins('add_tranche_users.txt')).split("\n")
 
     whitelisted_users = YAML.load_file(Rails.root.join('helm_deploy/apply-for-legal-aid/whitelisted_users.yaml'))
     beta_test_users = YAML.load_file(Rails.root.join('config/encrypted_private_beta_users.yml'))
