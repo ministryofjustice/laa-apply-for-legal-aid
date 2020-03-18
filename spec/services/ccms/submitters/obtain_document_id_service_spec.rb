@@ -15,7 +15,7 @@ module CCMS
       let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
       let!(:statement_of_case) { create :statement_of_case, legal_aid_application: legal_aid_application }
       let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep' }
-      let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
+      let(:history) { SubmissionHistory.where(submission_id: submission.id).last }
       let(:document_id_request) { ccms_data_from_file 'document_id_request.xml' }
       let(:response_body) { ccms_data_from_file 'document_id_response.xml' }
 
@@ -39,7 +39,7 @@ module CCMS
         context 'the application has no documents' do
           it 'does not create any document objects' do
             subject.call
-            expect(submission.submission_document.count).to eq 0
+            expect(submission.submission_documents.count).to eq 0
           end
         end
 
@@ -53,20 +53,20 @@ module CCMS
 
           it 'populates the documents array with statement_of_case, means_report and merits_report' do
             subject.call
-            expect(submission.submission_document.count).to eq 3
+            expect(submission.submission_documents.count).to eq 3
           end
 
           context 'when requesting document_ids' do
             it 'populates the ccms_document_id for each document' do
               subject.call
-              submission.submission_document.each do |document|
+              submission.submission_documents.each do |document|
                 expect(document.ccms_document_id).to_not be nil
               end
             end
 
             it 'updates the status for each document to id_obtained' do
               subject.call
-              submission.submission_document.each do |document|
+              submission.submission_documents.each do |document|
                 expect(document.status).to eq 'id_obtained'
               end
             end
@@ -75,8 +75,12 @@ module CCMS
               expect { subject.call }.to change { submission.aasm_state }.to 'document_ids_obtained'
             end
 
-            it 'writes a history record' do
-              expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            it 'writes a history record for each document' do
+              expect { subject.call }.to change { SubmissionHistory.count }.by(3)
+            end
+
+            it 'updates the history records' do
+              subject.call
               expect(history.from_state).to eq 'applicant_ref_obtained'
               expect(history.to_state).to eq 'document_ids_obtained'
               expect(history.success).to be true
@@ -144,7 +148,7 @@ module CCMS
 
           it 'changes the document state to failed' do
             subject.call
-            expect(submission.submission_document.first.status).to eq 'failed'
+            expect(submission.submission_documents.first.status).to eq 'failed'
           end
 
           it 'writes a history record' do

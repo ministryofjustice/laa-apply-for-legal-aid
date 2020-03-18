@@ -13,7 +13,7 @@
     "axios": "^0.19.2",
     "govuk-frontend": "^3.6.0",
     "jquery": "^3.4.1",
-    "js-search": "^1.4.3"
+    "js-search": "^2.0.0"
   },
   "devDependencies": {
     "@hint/configuration-web-recommended": "^6.2.2",

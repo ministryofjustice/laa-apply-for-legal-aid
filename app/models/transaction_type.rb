@@ -4,7 +4,6 @@ class TransactionType < ApplicationRecord
   # Note that names should be unique across the whole of NAMES - so both credit and debit
   NAMES = {
     credit: %i[
-      salary
       benefits
       friends_or_family
       maintenance_in
