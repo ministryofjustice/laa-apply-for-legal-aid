@@ -88,9 +88,9 @@ RSpec.describe 'provider statement of case requests', type: :request do
         expect(statement_of_case.original_attachments.first).to be_present
       end
 
-      it 'redirects to the same page' do
+      it 'returns http success' do
         subject
-        expect(response).to redirect_to providers_legal_aid_application_statement_of_case_path(legal_aid_application)
+        expect(response).to have_http_status(:ok)
       end
 
       context 'and there is an error' do
@@ -319,17 +319,17 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
     end
 
-    it 'redirects to show' do
+    it 'returns http success' do
       subject
-      expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+      expect(response).to have_http_status(:ok)
     end
 
     context 'when file not found' do
       let(:params) { { attachment_id: :unknown } }
 
-      it 'redirects to show' do
+      it 'returns http success' do
         subject
-        expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+        expect(response).to have_http_status(:ok)
       end
     end
 
