@@ -7,7 +7,7 @@
 #
 namespace :tranche do
   task maker: :environment do
-    NEW_USERS_FILE = '/Users/stephenrichards/Library/Preferences/RubyMine2019.3/scratches/scratch_5.txt'
+    NEW_USERS_FILE = '/Users/stephenrichards/Library/Preferences/RubyMine2019.3/scratches/scratch_5.txt'.freeze
     new_users = File.read(NEW_USERS_FILE).split("\n")
 
     whitelisted_users = YAML.load_file(Rails.root.join('helm_deploy/apply-for-legal-aid/whitelisted_users.yaml'))
@@ -20,7 +20,7 @@ namespace :tranche do
       if hash.key?('error')
         puts ">>>>>>>> User #{user} not found <<<<<<<<<"
       else
-        contact_hash = hash['contacts'].detect{ |h| h['name'] == user.upcase }
+        contact_hash = hash['contacts'].detect { |h| h['name'] == user.upcase }
         whitelisted_users << user.upcase
 
         beta_test_users[user.upcase] = contact_hash['id']
