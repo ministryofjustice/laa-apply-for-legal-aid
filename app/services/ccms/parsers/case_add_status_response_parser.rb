@@ -10,6 +10,10 @@ module CCMS
 
       private
 
+      def response_type
+        'CaseAddUpdtStatusRS'.freeze
+      end
+
       def extracted_transaction_request_id
         text_from(TRANSACTION_ID_PATH)
       end

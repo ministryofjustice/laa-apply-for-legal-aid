@@ -8,6 +8,10 @@ module CCMS
         @reference_id ||= parse(:extracted_reference_id)
       end
 
+      def response_type
+        'ReferenceDataInqRS'.freeze
+      end
+
       private
 
       def extracted_transaction_request_id
