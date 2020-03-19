@@ -1,12 +1,12 @@
 <div id="files-errors-container" role="alert" tabindex="0"></div>
-<% new_page_title = if @successfully_deleted
+<% new_head_title = if @successfully_deleted
                       @successfully_deleted
                     elsif @error_message || @successful_upload
                       "#{@successful_upload} #{@error_message}"
                     else
                       t('.h1-heading')
                     end %>
-<%= page_template page_title: t('.h1-heading'), head_title: new_page_title, template: :basic do %>
+<%= page_template page_title: t('.h1-heading'), head_title: new_head_title, template: :basic do %>
 
   <%= govuk_form_group(
         input: :proceedings_before_the_court,
