@@ -494,11 +494,6 @@ ActiveRecord::Schema.define(version: 2020_03_10_162254) do
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
 
-  create_table "pdf_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "original_file_id", null: false
-    t.index ["original_file_id"], name: "index_pdf_files_on_original_file_id", unique: true
-  end
-
   create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_type_id"
     t.uuid "scope_limitation_id"
