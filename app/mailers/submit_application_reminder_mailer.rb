@@ -11,8 +11,8 @@ class SubmitApplicationReminderMailer < GovukNotifyRails::Mailer
       provider_name: name,
       ref_number: application['application_ref'],
       client_name: application.applicant.full_name,
-      delegated_functions_date: application['used_delegated_functions_on'],
-      deadline_date: application['substantive_application_deadline_on']
+      delegated_functions_date: application['used_delegated_functions_on'].strftime('%d %B %y'),
+      deadline_date: application['substantive_application_deadline_on'].strftime('%d %B %y')
     )
     mail to: to
   end
