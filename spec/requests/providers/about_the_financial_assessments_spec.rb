@@ -23,7 +23,7 @@ RSpec.describe 'about financial assessments requests', type: :request do
       end
 
       it 'displays the correct page' do
-        expect(unescaped_response_body).to include('About the online financial assessment')
+        expect(unescaped_response_body).to include(I18n.t('providers.about_the_financial_assessments.show.title'))
       end
 
       context 'when the application does not exist' do
