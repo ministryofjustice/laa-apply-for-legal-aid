@@ -432,7 +432,7 @@ Then('I am on the Email Entry page') do
 end
 
 Then('I am on the About the Financial Assessment page') do
-  expect(page).to have_content('About the online financial assessment')
+  expect(page).to have_content('Give your client temporary access to the service')
 end
 
 Then('I am on the check your answers page for other assets') do
