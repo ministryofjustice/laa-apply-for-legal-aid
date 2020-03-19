@@ -90,8 +90,7 @@ RSpec.describe 'check benefits requests', type: :request do
 
           it 'show negative result text' do
             subject
-            text = I18n.t('providers.check_benefits.check_benefits_result.negative_result.title', name: applicant.full_name)
-            expect(response.body).to include(text)
+            expect(unescaped_response_body).to include I18n.t('providers.check_benefits.check_benefits_result.negative_result.title')
           end
         end
       end

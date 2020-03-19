@@ -131,7 +131,7 @@ en:
         you_need_to: "You'll need to:"
         negative_result:
           tab_title: Your client must complete a financial assessment
-          title: We need to check your client's financial eligibility
+          title: "We need to check your client's financial eligibility"
           must_answer_financial_questions: "If your client uses online banking and agrees to share their financial information with us, we'll ask them to:"
           actions:
             list: |
