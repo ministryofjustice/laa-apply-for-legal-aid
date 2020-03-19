@@ -7,11 +7,15 @@ module CCMS
         @document_id ||= parse(:extracted_document_id)
       end
 
-      def parse(data_method)
-        __send__(data_method)
+      private
+
+      def response_type
+        'DocumentUploadRS'.freeze
       end
 
-      private
+      def expect_transaction_request_id_in_response?
+        false
+      end
 
       def extracted_document_id
         text_from(DOCUMENT_ID_PATH)

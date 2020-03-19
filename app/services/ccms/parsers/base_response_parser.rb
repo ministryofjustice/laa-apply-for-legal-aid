@@ -15,7 +15,7 @@ module CCMS
       end
 
       def parse(data_method)
-        raise CcmsError, "Invalid transaction request id #{extracted_transaction_request_id}" unless extracted_id_matches_request_id?
+        check_matching_transaction_request_ids if expect_transaction_request_id_in_response?
 
         extract_result_status
         __send__(data_method)
@@ -31,6 +31,14 @@ module CCMS
 
       private
 
+      def expect_transaction_request_id_in_response?
+        true
+      end
+
+      def check_matching_transaction_request_ids
+        raise CcmsError, "Invalid transaction request id #{extracted_transaction_request_id}" unless extracted_id_matches_request_id?
+      end
+
       def extract_result_status
         if status.present?
           extract_status_code_and_message
@@ -41,12 +49,16 @@ module CCMS
         end
       end
 
+      def status_path
+        "/Envelope/Body/#{response_type}/HeaderRS/Status/Status"
+      end
+
       def status
-        @status ||= @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Status").text
+        @status ||= doc.xpath(status_path).text
       end
 
       def exception
-        @exception ||= @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusCode").text
+        @exception ||= doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusCode").text
       end
 
       def extract_status_code_and_message
@@ -60,11 +72,11 @@ module CCMS
       end
 
       def exception_status_text
-        @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusText").text
+        doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusText").text
       end
 
       def status_free_text
-        @status_free_text ||= @doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/StatusFreeText").text
+        @status_free_text ||= doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/StatusFreeText").text
       end
     end
   end

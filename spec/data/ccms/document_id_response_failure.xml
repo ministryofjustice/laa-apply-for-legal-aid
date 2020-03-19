@@ -1,0 +1,15 @@
+<env:Envelope xmlns:env='http://schemas.xmlsoap.org/soap/envelope/' xmlns:wsa='http://www.w3.org/2005/08/addressing'>
+  <env:Body>
+    <DocumentUploadRS xmlns='http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM'>
+      <HeaderRS xmlns='http://legalservices.gov.uk/Enterprise/Common/1.0/Header'>
+        <TransactionID>20190301030405123456</TransactionID>
+        <RequestDetails/>
+        <Status>
+          <Status>Fail</Status>
+          <StatusFreeText>Unable to allocate id</StatusFreeText>
+        </Status>
+      </HeaderRS>
+      <DocumentID>4420073</DocumentID>
+    </DocumentUploadRS>
+  </env:Body>
+</env:Envelope>

@@ -2,7 +2,9 @@ module CCMS
   module Submitters
     class UploadDocumentsService < BaseSubmissionService
       def call # rubocop:disable Metrics/AbcSize
+        puts ">>>>>>>>>>>> CALLING UPLOAD DOCUMENT SERVICE #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         submission.submission_documents.each do |submission_document|
+          puts ">>>>>>>>>>>> processing documnt #{submission_document.document_type} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
           upload_document(submission_document)
         end
 
@@ -23,8 +25,11 @@ module CCMS
                                                                                   Base64.strict_encode64(pdf_binary(submission_document)),
                                                                                   submission.legal_aid_application.provider.username)
         tx_id = document_upload_requestor.transaction_request_id
+        puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         response = document_upload_requestor.call
+        puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         update_document_status(submission_document, tx_id, response)
+        puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         submission_document.save!
         submission.save!
       rescue CcmsError => e
@@ -37,9 +42,12 @@ module CCMS
       end
 
       def update_document_status(document, tx_id, response)
+        puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         document.status = if CCMS::Parsers::DocumentUploadResponseParser.new(tx_id, response).success?
+                            puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
                             :uploaded
                           else
+                            puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
                             :failed
                           end
       end

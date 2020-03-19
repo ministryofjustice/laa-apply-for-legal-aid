@@ -12,7 +12,7 @@ module CCMS
       ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
     end
 
-    POLL_LIMIT = 10
+    POLL_LIMIT = Rails.env.development? ? 99 : 10
 
     def process!(options = {}) # rubocop:disable Metrics/MethodLength
       case aasm_state
@@ -27,6 +27,7 @@ module CCMS
       when 'document_ids_obtained'
         CCMS::Submitters::AddCaseService.call(self, options)
       when 'case_submitted'
+        puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         CCMS::Submitters::CheckCaseStatusService.call(self)
       when 'case_created'
         CCMS::Submitters::UploadDocumentsService.call(self)
