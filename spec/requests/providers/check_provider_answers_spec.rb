@@ -142,7 +142,7 @@ RSpec.describe 'check your answers requests', type: :request do
       end
 
       context 'when client has completed their journey' do
-        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :means_completed) }
+        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :provider_assessing_means) }
         it 'redirects to means summary' do
           expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
         end
