@@ -131,9 +131,13 @@ en:
         you_need_to: "You'll need to:"
         negative_result:
           tab_title: Your client must complete a financial assessment
-          title: "%{name} must complete a financial assessment"
-          must_answer_financial_questions: Your client will need to answer questions about their financial situation.
-          provide_access/details: 'We''ll ask you to give them access to the online assessment which they can complete at home or at another location.'
+          title: We need to check your client's financial eligibility
+          must_answer_financial_questions: "If your client uses online banking and agrees to share their financial information with us, we'll ask them to:"
+          actions:
+            list: |
+              share their bank transactions from the past 3 months
+              tell us about their income and regular payments
+          provide_access/details: If they do not, you'll need to continue your application in CCMS
         positive_result:
           tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
