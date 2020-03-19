@@ -24,7 +24,7 @@ module CCMS
     private
 
     def application_is_non_passported?
-      @legal_aid_application.benefit_check_result.result != 'Yes'
+      @legal_aid_application.non_passported?
     end
 
     def contribution_required?
