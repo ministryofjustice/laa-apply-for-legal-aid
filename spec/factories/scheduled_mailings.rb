@@ -26,5 +26,11 @@ FactoryBot.define do
       scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
       cancelled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
     end
+
+    trait :missing_client_name do
+      scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
+      sent_at { scheduled_at + 15.seconds }
+      arguments { [legal_aid_application.id, '', 'bob@wailing.jm'] }
+    end
   end
 end
