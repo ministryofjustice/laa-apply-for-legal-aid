@@ -37,7 +37,6 @@ end
 
 Then('I upload a pdf file') do
   attach_file('Attach a file', Rails.root.join('spec/fixtures/files/documents/hello_world.pdf'))
-  wait_for_ajax
 end
 
 Then('I reload the page') do

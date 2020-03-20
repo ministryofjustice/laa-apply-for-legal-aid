@@ -52,16 +52,15 @@ RSpec.describe 'provider statement of case requests', type: :request do
     let(:params_statement_of_case) do
       {
         statement: entered_text,
-        original_files: [original_file]
+        original_file: original_file
       }
     end
     let(:draft_button) { { draft_button: 'Save as draft' } }
     let(:upload_button) { { upload_button: 'Upload' } }
     let(:button_clicked) { {} }
     let(:params) { { statement_of_case: params_statement_of_case }.merge(button_clicked) }
-    let(:xhr) { false }
 
-    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params, xhr: xhr }
+    subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
     before { login_as provider }
 
@@ -76,80 +75,51 @@ RSpec.describe 'provider statement of case requests', type: :request do
       expect(response).to redirect_to providers_legal_aid_application_success_likely_index_path(legal_aid_application)
     end
 
-    # When a file to upload is selected from the dialog box
-    context 'uploading files with ajax request' do
-      let(:xhr) { true }
+    context 'uploading a file' do
       let(:params_statement_of_case) do
         {
-          original_files: [original_file]
+          original_file: original_file
         }
       end
-      let(:json_response) { JSON.parse(response.body) }
+      let(:button_clicked) { upload_button }
 
-      context 'single file uploaded' do
-        it 'updates the record' do
+      it 'updates the record' do
+        subject
+        expect(statement_of_case.original_attachments.first).to be_present
+      end
+
+      it 'returns http success' do
+        subject
+        expect(response).to have_http_status(:ok)
+      end
+
+      context 'and there is an error' do
+        let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
+        it 'does not update the record' do
           subject
-          expect(statement_of_case.original_attachments.first).to be_present
+          expect(statement_of_case).to be_nil
         end
 
-        it 'returns HTML of files table in a JSON object' do
+        it 'returns error message' do
           subject
-          expect(json_response['uploaded_files_table']).to include('<table')
-          expect(json_response['uploaded_files_table']).to include(original_file.original_filename)
+          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid')
+          expect(response.body).to include(error)
         end
 
-        context 'and there is an error' do
-          let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+        context 'no file chosen' do
+          let(:original_file) { nil }
 
           it 'does not update the record' do
             subject
             expect(statement_of_case).to be_nil
           end
 
-          it 'returns HTML of error summary' do
+          it 'returns error message' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: original_file.original_filename)
-            expect(json_response['error_summary']).to include(error)
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.no_file_chosen')
+            expect(response.body).to include(error)
           end
-
-          it 'returns hash of objects' do
-            subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: original_file.original_filename)
-            expect(json_response['errors'][original_file.original_filename]).to include(error)
-          end
-        end
-      end
-      context 'multiple files uploaded' do
-        let(:params_statement_of_case) do
-          {
-            original_files: [original_file_1, error_file, original_file_2]
-          }
-        end
-        let(:original_file_1) { uploaded_file('spec/fixtures/files/documents/hello_world.pdf', 'application/pdf') }
-        let(:original_file_2) { uploaded_file('spec/fixtures/files/documents/hello_world1.pdf', 'application/pdf') }
-        let(:error_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
-
-        it 'updates the record' do
-          subject
-          expect(statement_of_case.original_attachments.count).to eq 2
-        end
-
-        it 'returns HTML of files table in a JSON object' do
-          subject
-          expect(json_response['uploaded_files_table']).to include('<table')
-          expect(json_response['uploaded_files_table']).to include(original_file_1.original_filename)
-        end
-
-        it 'returns HTML of error summary' do
-          subject
-          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: error_file.original_filename)
-          expect(json_response['error_summary']).to include(error)
-        end
-
-        it 'returns hash of objects' do
-          subject
-          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: error_file.original_filename)
-          expect(json_response['errors'][error_file.original_filename]).to include(error)
         end
       end
     end
@@ -199,7 +169,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.content_type_invalid', file_name: original_file.original_filename)
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid', file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -210,7 +180,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_too_big', size: 0, file_name: original_file.original_filename)
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0, file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -221,7 +191,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_empty', file_name: original_file.original_filename)
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_empty', file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -246,7 +216,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
             it 'does not save the object and raise an error' do
               subject
-              error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_files.file_virus', file_name: original_file.original_filename)
+              error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_virus', file_name: original_file.original_filename)
               expect(response.body).to include(error)
               expect(statement_of_case).to be_nil
             end
@@ -318,25 +288,6 @@ RSpec.describe 'provider statement of case requests', type: :request do
         end
       end
     end
-
-    context 'Upload button pressed' do
-      let(:button_clicked) { upload_button }
-
-      it 'redirects to the same page' do
-        subject
-        expect(response).to redirect_to providers_legal_aid_application_statement_of_case_path(legal_aid_application)
-      end
-
-      context 'there are errors' do
-        let(:original_file) { nil }
-
-        it 'shows errors' do
-          subject
-          expect(response.body).to include 'There is a problem'
-          expect(response.body).to include 'You must choose at least one file'
-        end
-      end
-    end
   end
 
   describe 'DELETE /providers/applications/:legal_aid_application_id/statement_of_case' do
@@ -344,8 +295,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
     let(:legal_aid_application) { statement_of_case.legal_aid_application }
     let(:original_file) { statement_of_case.original_attachments.first }
     let(:params) { { attachment_id: statement_of_case.original_attachments.first.id } }
-    let(:xhr) { false }
-    subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params, xhr: xhr }
+    subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
     before do
       login_as provider
@@ -369,40 +319,20 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
     end
 
-    it 'redirects to show' do
+    it 'returns http success' do
       subject
-      expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+      expect(response).to have_http_status(:ok)
     end
 
     context 'when file not found' do
       let(:params) { { attachment_id: :unknown } }
 
-      it 'redirects to show' do
-        subject
-        expect(request).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
-      end
-    end
-
-    it_behaves_like 'deleting a file'
-
-    context 'deleting file with ajax request' do
-      let(:xhr) { true }
-
-      it_behaves_like 'deleting a file'
-
       it 'returns http success' do
         subject
         expect(response).to have_http_status(:ok)
       end
-
-      context 'when file not found' do
-        let(:params) { { original_file_id: :unknown } }
-
-        it 'redirects to show' do
-          subject
-          expect(response).to have_http_status(:ok)
-        end
-      end
     end
+
+    it_behaves_like 'deleting a file'
   end
 end

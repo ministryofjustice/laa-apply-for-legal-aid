@@ -1,14 +1,12 @@
 module Providers
   class StatementOfCasesController < ProviderBaseController
     def show
-      @form = StatementOfCases::StatementOfCaseForm.new(model: statement_of_case)
+      populate_form
     end
 
     def update
-      if upload_button_pressed? # javascript is unavailable
+      if upload_button_pressed?
         perform_upload
-      elsif request.xhr? # a file selected for upload from the dialog box
-        perform_xhr_request
       elsif save_continue_or_draft(form)
         convert_new_files_to_pdf
       else
@@ -17,47 +15,42 @@ module Providers
     end
 
     def destroy
-      delete_original_and_pdf_files
-
-      if request.xhr?
-        head :ok
-      else
-        redirect_to [:providers, legal_aid_application, :statement_of_case]
-      end
+      original_file = delete_original_and_pdf_files
+      @successfully_deleted = files_deleted_message(original_file.attachment_name) unless original_file.nil?
+      populate_form
+      render :show
     end
 
     private
 
-    def perform_xhr_request
-      form.save
-      render json: {
-        error_summary: error_summary,
-        uploaded_files_table: uploaded_files_table,
-        errors: form.errors
-      }
-    end
-
-    def error_summary
-      render_to_string(
-        partial: 'shared/forms/error_summary',
-        locals: { model: form }
-      )
-    end
-
-    def uploaded_files_table
-      render_to_string(
-        partial: 'providers/statement_of_cases/uploaded_files',
-        locals: { attachments: form.model.original_attachments }
-      )
+    def populate_form
+      @form = StatementOfCases::StatementOfCaseForm.new(model: statement_of_case)
     end
 
     def perform_upload
       form.upload_button_pressed = true
       if form.save
-        redirect_to providers_legal_aid_application_statement_of_case_path
+        @successful_upload = successful_upload
       else
-        render :show
+        @error_message = error_message
       end
+      render :show
+    end
+
+    def error_message
+      return unless form.errors.present?
+
+      I18n.t('accessibility.problem_text') + ' ' + form.errors.messages[:original_file].first
+    end
+
+    def files_deleted_message(deleted_file_name)
+      I18n.t('activemodel.attributes.statement_of_case.file_deleted', file_name: deleted_file_name)
+    end
+
+    def successful_upload
+      return if form.errors.present?
+
+      I18n.t('activemodel.attributes.statement_of_case.file_uploaded', file_name: form.original_file.original_filename)
     end
 
     def convert_new_files_to_pdf
@@ -76,7 +69,7 @@ module Providers
 
     def statement_of_case_params
       merge_with_model(statement_of_case, provider_uploader: current_provider) do
-        params.require(:statement_of_case).permit(:statement, original_files: [])
+        params.require(:statement_of_case).permit(:statement, :original_file)
       end
     end
 
@@ -89,7 +82,7 @@ module Providers
       delete_attachment(Attachment.find(original_attachment.pdf_attachment_id)) if original_attachment.pdf_attachment_id.present?
       delete_attachment(original_attachment)
     rescue StandardError
-      nil
+      original_attachment
     end
 
     def delete_attachment(attachment)

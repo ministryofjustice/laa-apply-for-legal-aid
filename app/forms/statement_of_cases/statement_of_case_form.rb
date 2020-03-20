@@ -4,7 +4,7 @@ module StatementOfCases
 
     form_for StatementOfCase
 
-    attr_accessor :statement, :original_files, :provider_uploader, :upload_button_pressed
+    attr_accessor :statement, :original_file, :provider_uploader, :upload_button_pressed
 
     MAX_FILE_SIZE = 8.megabytes
 
@@ -28,16 +28,16 @@ module StatementOfCases
     end
 
     def exclude_from_model
-      %i[upload_button_pressed original_files]
+      %i[upload_button_pressed original_file]
     end
 
     validates :statement, presence: true, unless: :file_present_or_draft?
-    validate :files_uploaded?
-    validate :original_files_valid
+    validate :file_uploaded?
+    validate :original_file_valid
 
     def save
       result = super
-      return unless original_files
+      return unless original_file
 
       # create and save statement_of_case model only if attachments were made
       model.save(validate: false) if attachments_made?
@@ -51,52 +51,50 @@ module StatementOfCases
       model.legal_aid_application.attachments.present?
     end
 
-    def files_uploaded?
-      return true unless @upload_button_pressed == true && (original_files.nil? || original_files.none?)
+    def file_uploaded?
+      return true unless @upload_button_pressed == true && original_file.nil?
 
-      errors.add(:original_files, original_file_error_for(:no_file_chosen))
+      errors.add(:original_file, original_file_error_for(:no_file_chosen))
     end
 
-    def original_files_valid
-      return if original_files.nil?
+    def original_file_valid
+      return if original_file.nil?
 
-      original_files.each do |original_file|
-        @original_file_name = original_file.original_filename
-        malware_scan(original_file)
-        disallowed_content_type(original_file)
-        file_empty(original_file)
-        too_big(original_file)
-        create_attachment(original_file) unless errors.key?(@original_file_name.to_sym)
-      end
+      @original_file_name = original_file.original_filename
+      malware_scan(original_file)
+      disallowed_content_type(original_file)
+      file_empty(original_file)
+      too_big(original_file)
+      create_attachment(original_file) unless errors.present?
     end
 
     def file_present_or_draft?
-      model.original_attachments.any? || original_files&.any? || draft?
+      model.original_attachments.any? || original_file&.present? || draft?
     end
 
     def too_big(original_file)
       return if original_file_size(original_file) <= StatementOfCaseForm.max_file_size
 
       error_options = { size: StatementOfCaseForm.max_file_size / 1.megabyte, file_name: @original_file_name }
-      errors.add(@original_file_name.to_sym, original_file_error_for(:file_too_big, error_options))
+      errors.add(:original_file, original_file_error_for(:file_too_big, error_options))
     end
 
     def file_empty(original_file)
       return if File.size(original_file.tempfile) > 1
 
-      errors.add(@original_file_name.to_sym, original_file_error_for(:file_empty, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:file_empty, file_name: @original_file_name))
     end
 
     def disallowed_content_type(original_file)
       return if original_file.content_type.in?(ALLOWED_CONTENT_TYPES)
 
-      errors.add(@original_file_name.to_sym, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
     end
 
     def malware_scan(original_file)
       return unless malware_scan_result(original_file).virus_found?
 
-      errors.add(@original_file_name.to_sym, original_file_error_for(:file_virus, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:file_virus, file_name: @original_file_name))
     end
 
     def malware_scan_result(original_file)
@@ -116,7 +114,7 @@ module StatementOfCases
     end
 
     def original_file_error_for(error_type, options = {})
-      I18n.t("activemodel.errors.models.statement_of_case.attributes.original_files.#{error_type}", options)
+      I18n.t("activemodel.errors.models.statement_of_case.attributes.original_file.#{error_type}", options)
     end
 
     def create_attachment(original_file)

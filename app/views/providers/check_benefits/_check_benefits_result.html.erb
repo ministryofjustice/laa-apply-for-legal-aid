@@ -22,6 +22,7 @@
         </ul>
       <% else %>
         <p class="govuk-body"><%= t "#{result_namespace}.must_answer_financial_questions" %></p>
+        <%= list_from_translation_path '.check_benefits.check_benefits_result.negative_result.actions' %>
         <p class="govuk-body"><%= t "#{result_namespace}.provide_access/details" %></p>
       <% end %>
     </div>

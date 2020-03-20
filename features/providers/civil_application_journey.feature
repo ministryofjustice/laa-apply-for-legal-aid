@@ -134,7 +134,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Covered under a substantive certificate'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'must complete a financial assessment'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I click 'Save and continue'
     Then I am on the client use online banking page
@@ -172,7 +172,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'must complete a financial assessment'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I am on the client use online banking page
     Then I select 'Your client uses online banking for all of their bank accounts'
@@ -238,7 +238,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'must complete a financial assessment'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
 
   @javascript @vcr
   Scenario: I want to change first name from the check your answers page
@@ -314,7 +314,7 @@ Feature: Civil application journeys
   Scenario: I want to change email address from the about financial assessment page
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'must complete a financial assessment'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I should be on a page showing 'Check if you can continue using this service'
     Then I select 'Your client uses online banking for all of their bank accounts'
@@ -559,6 +559,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "Statement" with "Statement of case"
     Then I upload a pdf file
+    Then I click 'Upload'
     Then I reload the page
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"

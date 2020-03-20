@@ -1,6 +1,6 @@
 <% attribute_prefix = local_assigns[:attribute_prefix] ? attribute_prefix : '' %>
 <% if model.errors.any? %>
-  <div class="govuk-error-summary" id="error_explanation">
+  <div class="govuk-error-summary" id="error_explanation" aria-live="polite">
     <h2 class="govuk-error-summary__title" id="error-summary-title">
       <%= t('generic.errors.problem_text') %>
     </h2>
