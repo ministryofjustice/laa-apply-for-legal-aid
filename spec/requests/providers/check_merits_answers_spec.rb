@@ -61,7 +61,7 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to include(application.latest_incident.occurred_on.to_s)
       end
 
-      it 'displays the details of wether the respondent understands the terms of court order' do
+      it 'displays the details of whether the respondent understands the terms of court order' do
         expect(response.body).to include(application.respondent.understands_terms_of_court_order_details)
       end
 
@@ -81,11 +81,13 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to include(application.statement_of_case.statement)
       end
 
-      context 'prospects of success has supplementary text' do
-        it 'displays the prospects of success and details' do
-          expect(response.body).to include(I18n.t("shared.forms.success_prospect.success_prospect_item.#{application.merits_assessment.success_prospect}"))
-          expect(response.body).to include(application.merits_assessment.success_prospect_details)
-        end
+      it 'displays the warning text When did the incident occur?' do
+        expect(response.body).to include(I18n.t('shared.forms.date_input_fields.occurred_on_label'))
+        expect(response.body).to include(application.latest_incident.occurred_on.to_s)
+      end
+
+      it 'displays the warning text' do
+        expect(response.body).to include(I18n.t('providers.check_merits_answers.show.sign_app_text'))
       end
 
       it 'should change the state to "checking_merits_answers"' do
@@ -120,13 +122,19 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       it 'transitions to checked_merits_answers state' do
         subject
-        expect(application.reload.checked_merits_answers?).to be true
+        expect(application.reload.may_generate_reports?).to be true
       end
+
+      #it 'updates the record' do
+      #  application.create_merits_assessment!
+      #  expect { subject }.to change { application.merits_assessment.reload.submitted_at }.from(nil)
+      #  expect(application.reload).to be_generating_reports
+      #end
 
       context 'Form submitted using Save as draft button' do
         let(:params) { { draft_button: 'Save as draft' } }
 
-        it "redirects provider to provider's applications page" do
+        it "redirect provider to provider's applications page" do
           subject
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end

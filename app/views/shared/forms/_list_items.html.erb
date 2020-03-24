@@ -1,7 +1,15 @@
 <div class="govuk-list">
-  <ul class="govuk-list govuk-list--bullet">
-    <% t("#{translation_path}.list", params).each_line do |item| %>
-      <li><%= item %></li>
-    <% end %>
-  </ul>
+  <% if translation_path.include? 'warning' %>
+    <ul class="govuk-list govuk-list--bullet">
+      <% t("#{translation_path}.list", params).each_line do |item| %>
+        <strong><li><%= item %></li></strong>
+      <% end %>
+    </ul>
+    <% else %>
+    <ul class="govuk-list govuk-list--bullet">
+      <% t("#{translation_path}.list", params).each_line do |item| %>
+       <li><%= item %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
