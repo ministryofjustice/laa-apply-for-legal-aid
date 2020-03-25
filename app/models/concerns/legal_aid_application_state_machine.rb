@@ -22,7 +22,6 @@ module LegalAidApplicationStateMachine
       state :provider_checking_citizens_means_answers
       state :provider_checked_citizens_means_answers
       state :checking_merits_answers
-      state :checked_merits_answers
       state :generating_reports
       state :submitting_assessment
       state :assessment_submitted
@@ -86,14 +85,9 @@ module LegalAidApplicationStateMachine
 
       event :check_merits_answers do
         transitions from: :provider_checked_citizens_means_answers, to: :checking_merits_answers
-        transitions from: :checked_merits_answers, to: :checking_merits_answers
         transitions from: :means_completed, to: :checking_merits_answers
         transitions from: :submitting_assessment, to: :checking_merits_answers
         transitions from: :assessment_submitted, to: :checking_merits_answers
-      end
-
-      event :checked_merits_answers do
-        transitions from: :checking_merits_answers, to: :checked_merits_answers
       end
 
       event :generate_reports do

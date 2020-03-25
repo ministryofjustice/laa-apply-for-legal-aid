@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe 'check merits answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
@@ -88,6 +89,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       it 'displays the warning text' do
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.sign_app_text'))
+        expect(unescaped_response_body).to include(application.provider.firm.name)
       end
 
       it 'should change the state to "checking_merits_answers"' do
@@ -116,20 +118,37 @@ RSpec.describe 'check merits answers requests', type: :request do
         login_as application.provider
       end
 
+      context 'Continue button pressed' do
+        let(:submit_button) { { continue_button: 'Continue' } }
+
+        it 'updates the record' do
+          application.create_merits_assessment!
+          expect { subject }.to change { application.merits_assessment.reload.submitted_at }.from(nil)
+          expect(application.reload).to be_generating_reports
+        end
+      end
+
       it 'redirects to next page' do
-        expect(subject).to redirect_to(providers_legal_aid_application_merits_declaration_path(application))
-      end
-
-      it 'transitions to checked_merits_answers state' do
         subject
-        expect(application.reload.may_generate_reports?).to be true
+        expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(application))
       end
 
-      #it 'updates the record' do
-      #  application.create_merits_assessment!
-      #  expect { subject }.to change { application.merits_assessment.reload.submitted_at }.from(nil)
-      #  expect(application.reload).to be_generating_reports
-      #end
+      it 'creates pdf reports' do
+        ReportsCreatorWorker.clear
+        expect(Reports::ReportsCreator).to receive(:call).with(application)
+        subject
+        ReportsCreatorWorker.drain
+      end
+
+      it 'sets the merits assessment to submitted' do
+        subject
+        expect(application.reload.summary_state).to eq :submitted
+      end
+
+      it 'transitions to generating_reports state' do
+        subject
+        expect(application.reload).to be_generating_reports
+      end
 
       context 'Form submitted using Save as draft button' do
         let(:params) { { draft_button: 'Save as draft' } }
@@ -169,7 +188,7 @@ RSpec.describe 'check merits answers requests', type: :request do
     context 'logged in as an authenticated provider' do
       before do
         login_as application.provider
-        get providers_legal_aid_application_merits_declaration_path(application)
+        get providers_legal_aid_application_end_of_application_path(application)
         get providers_legal_aid_application_check_merits_answers_path(application)
         subject
       end
@@ -179,8 +198,8 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       describe 'redirection' do
-        it 'redirects to client declaration page' do
-          expect(response).to redirect_to providers_legal_aid_application_merits_declaration_path(application, back: true)
+        it 'redirects to end of application page' do
+          expect(response).to redirect_to providers_legal_aid_application_end_of_application_path(application, back: true)
         end
       end
     end

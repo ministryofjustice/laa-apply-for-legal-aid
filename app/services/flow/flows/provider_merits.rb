@@ -51,10 +51,6 @@ module Flow
         },
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
-          forward: :merits_declarations
-        },
-        merits_declarations: {
-          path: ->(application) { urls.providers_legal_aid_application_merits_declaration_path(application) },
           forward: :end_of_applications
         },
         end_of_applications: {

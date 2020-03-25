@@ -457,8 +457,7 @@ Feature: Civil application journeys
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    Then I click "Save and continue"
-    Then I should be on a page showing "Declaration"
+    Then I should be on a page showing "Confirm the following"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
@@ -577,10 +576,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
-    Then I click "Save and continue"
-    Then I should be on a page showing "Declaration"
+    And I should be on a page showing "Confirm the following"
     Then I click 'Submit and continue'
-    Then I should be on a page showing "Application complete"
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
