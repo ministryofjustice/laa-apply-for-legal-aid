@@ -40,6 +40,8 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click link "Start now"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
@@ -59,6 +61,8 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click link "Start now"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
@@ -109,6 +113,8 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click link "Start now"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
     Then I should be on the Applicant page
 
   @javascript @vcr @webhint

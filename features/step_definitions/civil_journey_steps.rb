@@ -63,6 +63,8 @@ Given('I start the journey as far as the applicant page') do
     Given I visit the application service
     And I click link "Start"
     And I click link "Start now"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
     Then I should be on the Applicant page
   )
 end
