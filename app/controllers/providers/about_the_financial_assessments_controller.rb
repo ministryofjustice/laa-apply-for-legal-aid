@@ -1,7 +1,7 @@
 module Providers
   class AboutTheFinancialAssessmentsController < ProviderBaseController
     def show
-      redirect_to start_after_means_complete_path if legal_aid_application.means_completed?
+      redirect_to start_after_means_complete_path if legal_aid_application.provider_assessing_means?
 
       @applicant = legal_aid_application.applicant
     end
