@@ -157,6 +157,22 @@ en:
     check_merits_answers:
       show:
         h1-heading: Check your answers
+        sub-heading: Confirm the following
+        text: 'Your client agrees that:'
+        list: |
+          they've instructed %{provider_firm_name} to represent them
+          we can share their information with other government departments like the Department for Work and Pensions and HM Revenue and Customs
+          we can check their details with bank and credit reference agencies
+          they may have to pay towards legal aid
+          they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
+          the information they’ve given is complete and correct
+          they’ll report any changes to their financial situation immediately
+        sign_app_text: 'If your client gives wrong or incomplete information, or they do not report changes, they may:'
+        warning:
+          list: |
+            be prosecuted
+            need to pay a financial penalty
+            have their legal aid stopped and have to pay back the costs
     check_passported_answers:
       show:
         assets:
@@ -320,16 +336,6 @@ en:
         debits-section-heading: Total outgoings
         change_declared_income: View/change declared income
         change_declared_outgoings: View/change declared outgoings
-    merits_declarations:
-      show:
-        h1-heading: Declaration
-        text: 'By submitting this application, you agree that:'
-        list: |
-          you've been instructed by %{applicant_name} to represent them
-          you've gone through the application with your client
-          your client knows they may have to repay legal costs if they keep or gain property or money at the end of their case (the 'statutory charge')
-          the information you've provided is complete and correct
-        sign_app_text: Once you've submitted it, you'll need to print the completed application and get your client to sign it.
     merits_reports:
       show:
         heading: Merits report
