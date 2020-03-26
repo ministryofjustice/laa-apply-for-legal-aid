@@ -2,7 +2,6 @@ module CCMS
   module Submitters
     class CheckCaseStatusService < BaseSubmissionService
       def call
-        puts ">>>>>>>>>>>> calling CheckCaseStatusService #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         tx_id = case_add_status_requestor.transaction_request_id
         submission.case_poll_count += 1
         submission.save!
