@@ -21,8 +21,15 @@ module CFE
 
     private
 
+    # override this method in the derived class if youe need more/different headers
+    def headers
+      {
+        'Content-Type' => 'application/json'
+      }
+    end
+
     def conn
-      @conn ||= Faraday.new(url: cfe_url_host)
+      @conn ||= Faraday.new(url: cfe_url_host, headers: headers)
     end
 
     def cfe_url_host

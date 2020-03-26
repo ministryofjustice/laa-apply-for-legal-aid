@@ -4,6 +4,13 @@ module CFE
 
     private
 
+    def headers
+      {
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json;version=2'
+      }
+    end
+
     def cfe_url_path
       "/assessments/#{@submission.assessment_id}"
     end
