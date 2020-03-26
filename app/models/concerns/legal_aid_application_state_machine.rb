@@ -18,6 +18,7 @@ module LegalAidApplicationStateMachine
       state :provider_submitted
       state :checking_citizen_answers
       state :checking_passported_answers
+      state :analysing_bank_transactions
       state :provider_assessing_means
       state :provider_checking_citizens_means_answers
       state :provider_checked_citizens_means_answers
@@ -46,6 +47,11 @@ module LegalAidApplicationStateMachine
         transitions from: :delegated_functions_used, to: :checking_passported_answers
         transitions from: :client_details_answers_checked, to: :checking_passported_answers
         transitions from: :provider_assessing_means, to: :checking_passported_answers
+      end
+
+      event :analyse_bank_transactions do
+        transitions from: :checking_passported_answers, to: :analysing_bank_transactions,
+                    after: -> { BankTransactionsAnalyserJob.perform(self) }
       end
 
       event :provider_submit do
