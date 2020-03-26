@@ -27,7 +27,6 @@ module CCMS
       when 'document_ids_obtained'
         CCMS::Submitters::AddCaseService.call(self, options)
       when 'case_submitted'
-        puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         CCMS::Submitters::CheckCaseStatusService.call(self)
       when 'case_created'
         CCMS::Submitters::UploadDocumentsService.call(self)
