@@ -1,4 +1,4 @@
-module LegalAidApplicationStateMachine
+module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
   extend ActiveSupport::Concern
 
   included do # rubocop:disable Metrics/BlockLength
@@ -49,11 +49,6 @@ module LegalAidApplicationStateMachine
         transitions from: :provider_assessing_means, to: :checking_passported_answers
       end
 
-      event :analyse_bank_transactions do
-        transitions from: :checking_passported_answers, to: :analysing_bank_transactions,
-                    after: -> { BankTransactionsAnalyserJob.perform_later(self) }
-      end
-
       event :provider_submit do
         transitions from: :initiated, to: :provider_submitted
         transitions from: :checking_client_details_answers, to: :provider_submitted
@@ -75,9 +70,16 @@ module LegalAidApplicationStateMachine
       end
 
       event :complete_means do
-        transitions from: :checking_citizen_answers, to: :provider_assessing_means,
-                    after: -> { ApplicantCompleteMeans.call(self) }
+        transitions from: :checking_citizen_answers, to: :analysing_bank_transactions,
+                    after: -> do
+                      ApplicantCompleteMeans.call(self)
+                      BankTransactionsAnalyserJob.perform_later(self)
+                    end
         transitions from: :checking_passported_answers, to: :provider_assessing_means
+      end
+
+      event :complete_bank_transaction_analysis do
+        transitions from: :analysing_bank_transactions, to: :provider_assessing_means
       end
 
       event :provider_check_citizens_means_answers do
