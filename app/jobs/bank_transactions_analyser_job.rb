@@ -1,6 +1,5 @@
 class BankTransactionsAnalyserJob < ActiveJob::Base
-
-  def self.perform(legal_aid_application)
-    legal_aid_application.state = 'provider_assessing_means'
+  def perform(legal_aid_application)
+    legal_aid_application.analyse_bank_transactions!
   end
 end

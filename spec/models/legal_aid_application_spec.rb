@@ -594,13 +594,12 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'The BankTransactionsAnalayser job' do
+  describe 'The transition from checking passported to analaysing state job' do
     let(:legal_aid_application) { create :legal_aid_application, state: :checking_passported_answers }
 
     it 'runs a BankTransactionsAnalyserJob ' do
-      # expect(BankTransactionsAnalyserJob).to receive(:perform).with(legal_aid_application)
-      BankTransactionsAnalyserJob.perform(legal_aid_application)
-      expect(legal_aid_application.state).to eq('provider_assessing_means')
+      expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application).and_call_original
+      legal_aid_application.analyse_bank_transactions!
     end
   end
 

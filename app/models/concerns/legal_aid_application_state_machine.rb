@@ -51,7 +51,7 @@ module LegalAidApplicationStateMachine
 
       event :analyse_bank_transactions do
         transitions from: :checking_passported_answers, to: :analysing_bank_transactions,
-                    after: -> { BankTransactionsAnalyserJob.perform(self) }
+                    after: -> { BankTransactionsAnalyserJob.perform_later(self) }
       end
 
       event :provider_submit do
