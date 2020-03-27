@@ -11,7 +11,13 @@ module CCMS
       return if submission.completed? || submission.failed?
 
       # process next step
-      SubmissionProcessWorker.perform_in(5.seconds, submission.id, submission.aasm_state)
+      SubmissionProcessWorker.perform_in(delay, submission.id, submission.aasm_state)
+    end
+
+    private
+
+    def delay
+      Rails.env.development? ? 20.seconds : 5.seconds
     end
   end
 end

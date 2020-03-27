@@ -12,7 +12,7 @@ module CCMS
       ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
     end
 
-    POLL_LIMIT = 10
+    POLL_LIMIT = Rails.env.development? ? 99 : 10
 
     def process!(options = {}) # rubocop:disable Metrics/MethodLength
       case aasm_state
