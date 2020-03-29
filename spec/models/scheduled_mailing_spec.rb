@@ -25,7 +25,7 @@ RSpec.describe ScheduledMailing do
   describe '#deliver!' do
     let(:scheduled_mail) { create :scheduled_mailing, :due }
     let(:mail_message) { double 'mail message' }
-    let(:now) { Time.now }
+    let(:now) { Time.zone.now }
 
     it 'delivers the mail' do
       expect(SubmitApplicationReminderMailer)
@@ -59,7 +59,7 @@ RSpec.describe ScheduledMailing do
 
   describe '#cancel!' do
     let(:scheduled_mail) { create :scheduled_mailing }
-    let(:now) { Time.now }
+    let(:now) { Time.zone.now }
 
     it 'updates the record as cancelled' do
       Timecop.freeze(now) do
