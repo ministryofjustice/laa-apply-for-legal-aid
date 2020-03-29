@@ -18,6 +18,7 @@ en:
         checking_passported_answers: Provider checking means test answers
         delegated_functions_used: Delegated functions used
         initiated: In progress
+        analysing_bank_transactions: Analysing Bank Transactions
         provider_assessing_means: Means test completed
         assessment_submitted: Application submitted
         provider_submitted: Submitted by provider

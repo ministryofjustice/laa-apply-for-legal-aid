@@ -594,6 +594,15 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe 'The transition from checking passported to analaysing state job' do
+    let(:legal_aid_application) { create :legal_aid_application, state: :checking_passported_answers }
+
+    it 'runs a BankTransactionsAnalyserJob ' do
+      expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application).and_call_original
+      legal_aid_application.analyse_bank_transactions!
+    end
+  end
+
   describe '.search' do
     let!(:application_1) { create :legal_aid_application, application_ref: 'L-123-ABC' }
     let(:jacob) { create :applicant, first_name: 'Jacob', last_name: 'Rees-Mogg' }

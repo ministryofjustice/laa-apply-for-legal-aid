@@ -55,6 +55,10 @@ FactoryBot.define do
       state { 'assessment_submitted' }
     end
 
+    trait :analysing_bank_transactions do
+      state { 'analysing_bank_transactions' }
+    end
+
     trait :checking_client_details_answers do
       state { :checking_client_details_answers }
     end
