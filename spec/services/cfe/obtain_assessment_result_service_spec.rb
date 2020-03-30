@@ -21,35 +21,6 @@ module CFE # rubocop:disable Metrics/ModuleLength
       end
     end
 
-    context 'success for v1' do
-      before do
-        stub_request(:get, service.cfe_url)
-          .to_return(body: expected_v1_response)
-      end
-
-      it 'updates the submission state to results_obtained' do
-        ObtainAssessmentResultService.call(submission)
-        expect(submission.aasm_state).to eq 'results_obtained'
-      end
-
-      it 'stores the response in the submission cfe_result field' do
-        ObtainAssessmentResultService.call(submission)
-        expect(submission.cfe_result).to eq expected_v1_response
-      end
-
-      it 'writes a history record' do
-        ObtainAssessmentResultService.call(submission)
-        history = submission.submission_histories.first
-        expect(history.url).to eq service.cfe_url
-        expect(history.http_method).to eq 'GET'
-        expect(history.request_payload).to be_nil
-        expect(history.http_response_status).to eq 200
-        expect(history.response_payload).to eq expected_v1_response
-        expect(history.error_message).to be_nil
-        expect(history.error_backtrace).to be_nil
-      end
-    end
-
     context 'success for v2' do
       before do
         stub_request(:get, service.cfe_url)
@@ -107,63 +78,6 @@ module CFE # rubocop:disable Metrics/ModuleLength
           expect(history.error_backtrace).to be_nil
         end
       end
-    end
-
-    def expected_v1_response_hash # rubocop:disable Metrics/MethodLength
-      {
-        assessment_result: 'eligible',
-        applicant: {
-          receives_qualifying_benefit: false,
-          age_at_submission: 51
-        },
-        capital: {
-          total_liquid: '6771.93',
-          total_non_liquid: '3570.51',
-          pensioner_capital_disregard: '0.0',
-          total_capital: '-86264.36',
-          capital_contribution: '0.0',
-          liquid_capital_items: [
-            {
-              description: 'Quia dicta laboriosam pariatur.',
-              value: '6771.93'
-            }
-          ],
-          non_liquid_capital_items: [
-            {
-              description: 'Quidem aspernatur a ducimus.',
-              value: '3570.51'
-            }
-          ]
-        },
-        property: {
-          total_mortgage_allowance: '100000.0',
-          total_property: '-100023.77',
-          main_home: {
-            value: '2290.58',
-            transaction_allowance: '68.72',
-            allowable_outstanding_mortgage: '9424.94',
-            percentage_owned: '0.33',
-            net_equity: '-23.77',
-            main_home_equity_disregard: '100000.0',
-            assessed_equity: '-100023.77',
-            shared_with_housing_assoc: true
-          },
-          additional_properties: []
-        },
-        vehicles: {
-          total_vehicle: '3416.97',
-          vehicles: [
-            {
-              in_regular_use: false,
-              included_in_assessment: true,
-              value: '3416.97',
-              assessed_value: '3416.97',
-              date_of_purchase: '2016-11-04',
-              loan_amount_outstanding: '3515.61'
-            }
-          ]
-        }
-      }
     end
 
     def expected_v2_response_hash # rubocop:disable Metrics/MethodLength
