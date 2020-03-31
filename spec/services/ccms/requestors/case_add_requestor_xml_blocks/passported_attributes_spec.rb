@@ -100,7 +100,7 @@ module CCMS
           end
 
           context 'invalid response' do
-            let!(:cfe_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission, result: { assessment: {assessment_result: 'Unknown' }}.to_json }
+            let!(:cfe_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission, result: { assessment: { assessment_result: 'Unknown' } }.to_json }
             it 'raises' do
               expect { xml }.to raise_error RuntimeError, 'Unexpected assessment result: Unknown'
             end
