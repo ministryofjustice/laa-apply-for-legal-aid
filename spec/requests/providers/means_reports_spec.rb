@@ -7,7 +7,6 @@ RSpec.describe Providers::MeansReportsController, type: :request do
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create :submission, legal_aid_application: legal_aid_application }
   let(:cfe_result) { legal_aid_application.cfe_result }
-  # let(:capital_result) { JSON.parse(legal_aid_application.cfe_result.result)['capital'] }
   let(:before_subject) { nil }
 
   describe 'GET /providers/applications/:legal_aid_application_id/means_report' do
