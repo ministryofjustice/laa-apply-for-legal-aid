@@ -1,3 +1,4 @@
+# :nocov:
 module CFE
   module V1
     class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
@@ -59,3 +60,4 @@ module CFE
     end
   end
 end
+# :nocov:
