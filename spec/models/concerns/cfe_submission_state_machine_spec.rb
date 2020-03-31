@@ -9,7 +9,7 @@ module CFE
       end
     end
 
-    context 'asssessment_created event' do
+    context 'asssessment_created! event' do
       it 'transitions from initialised to assessment_created' do
         submission = create :cfe_submission
         submission.assessment_created!
@@ -17,7 +17,7 @@ module CFE
       end
     end
 
-    context 'results_obtained event' do
+    context 'results_obtained! event' do
       context 'passported application' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
         let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'properties_created' }
@@ -49,7 +49,7 @@ module CFE
       end
     end
 
-    context 'dependants created event' do
+    context 'dependants_created! event' do
       let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'properties_created' }
 
       context 'passported' do
@@ -69,7 +69,7 @@ module CFE
       end
     end
 
-    context 'state_benefits_cresated event' do
+    context 'state_benefits_created! event' do
       let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'dependants_created' }
 
       context 'passported' do
@@ -89,7 +89,7 @@ module CFE
       end
     end
 
-    context 'other_income_created event' do
+    context 'other_income_created! event' do
       let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'state_benefits_created' }
 
       context 'passported' do
@@ -105,6 +105,17 @@ module CFE
         it 'transitions from state_benefits_created to other_income_created' do
           expect { submission.other_income_created! }.not_to raise_error
           expect(submission.other_income_created?).to be true
+        end
+      end
+
+      context 'fail! event' do
+        let(:states) { Submission.aasm.states.map(&:name) - %i[failed results_obtained] }
+        it 'transitions to failed from all states except failed and results obtained' do
+          states.each do |state|
+            submission = create :cfe_submission, aasm_state: state
+            expect{submission.fail!}.not_to raise_error
+            expect(submission.failed?).to be true
+          end
         end
       end
     end

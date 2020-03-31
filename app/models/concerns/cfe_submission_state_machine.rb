@@ -61,6 +61,9 @@ module CFESubmissionStateMachine
         transitions from: :capitals_created, to: :failed
         transitions from: :properties_created, to: :failed
         transitions from: :vehicles_created, to: :failed
+        transitions from: :dependants_created, to: :failed
+        transitions from: :state_benefits_created, to: :failed
+        transitions from: :other_income_created, to: :failed
       end
     end
 
