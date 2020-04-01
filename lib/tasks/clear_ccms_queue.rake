@@ -25,7 +25,7 @@ namespace :ccms do
         attachments.delete_all
       end
       Reports::MeansReportCreator.call(laa) unless dry_run
-      laa.ccms_submission.complete!
+      laa.ccms_submission.complete! unless dry_run
       pp "#{providers_legal_aid_application_means_report_url(laa)}?debug=true#{' would work if not in dry_run mode' if dry_run}"
     rescue StandardError => e
       puts e
