@@ -1,7 +1,6 @@
 namespace :ccms do
   desc 'Clear CCMS submissions with stuck means reports'
   task :clear_queue, [:application_id] => :environment do |_task, args|
-
     include Rails.application.routes.url_helpers
     # v3
     # get the application_ids
