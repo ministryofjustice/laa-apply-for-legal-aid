@@ -80,7 +80,7 @@ module LegalAidApplicationStateMachine
         transitions from: :checking_passported_answers, to: :provider_assessing_means
       end
 
-      event :provider_check_citizens_means_answers do
+      event :provider_check_citizens_answers do
         transitions from: :provider_assessing_means, to: :provider_checking_citizens_means_answers
         transitions from: :provider_checked_citizens_means_answers, to: :provider_checking_citizens_means_answers
       end
