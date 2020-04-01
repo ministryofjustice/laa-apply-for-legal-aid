@@ -236,6 +236,16 @@ module CFEResults
         result
       end
 
+      def self.no_capital
+        new_capital_section = eligible[:assessment][:capital]
+        new_capital_section[:total_liquid] = '0.0'
+        new_capital_section[:total_non_liquid] = '0.0'
+        new_capital_section[:total_vehicle] = '0.0'
+        new_capital_section[:total_property] = '0.0'
+        new_capital_section[:total_capital] = '0.0'
+        eligible.merge capital: new_capital_section
+      end
+
       def self.with_additional_properties
         result = eligible
         property = {
