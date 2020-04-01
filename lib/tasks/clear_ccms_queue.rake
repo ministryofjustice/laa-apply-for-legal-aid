@@ -20,12 +20,14 @@ namespace :ccms do
       if dry_run
         pp "I want to delete the #{attachments.count} attachments with ids #{attachments.pluck(:id)}"
         pp "I want to delete the #{submission_documents.count} submission_documents with ids #{submission_documents.pluck(:id)}"
+        pp "I would call Reports::MeansReportCreator.call for LegalAidApplication id:#{laa.id}"
+        pp "I would mark LegalAidApplication id:#{laa.id} as complete"
       else
         submission_documents.delete_all
         attachments.delete_all
+        Reports::MeansReportCreator.call(laa) unless dry_run
+        laa.ccms_submission.complete! unless dry_run
       end
-      Reports::MeansReportCreator.call(laa) unless dry_run
-      laa.ccms_submission.complete! unless dry_run
       pp "#{providers_legal_aid_application_means_report_url(laa)}?debug=true#{' would work if not in dry_run mode' if dry_run}"
     rescue StandardError => e
       puts e
