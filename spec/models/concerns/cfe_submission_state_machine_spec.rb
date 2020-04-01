@@ -107,15 +107,15 @@ module CFE
           expect(submission.other_income_created?).to be true
         end
       end
+    end
 
-      context 'fail! event' do
-        let(:states) { Submission.aasm.states.map(&:name) - %i[failed results_obtained] }
-        it 'transitions to failed from all states except failed and results obtained' do
-          states.each do |state|
-            submission = create :cfe_submission, aasm_state: state
-            expect { submission.fail! }.not_to raise_error
-            expect(submission.failed?).to be true
-          end
+    context 'fail! event' do
+      let(:states) { Submission.aasm.states.map(&:name) - %i[failed results_obtained] }
+      it 'transitions to failed from all states except failed and results obtained' do
+        states.each do |state|
+          submission = create :cfe_submission, aasm_state: state
+          expect { submission.fail! }.not_to raise_error
+          expect(submission.failed?).to be true
         end
       end
     end
