@@ -86,4 +86,12 @@ RSpec.describe TransactionType, type: :model do
       end
     end
   end
+
+  describe '.other_income' do
+    it 'returns all other_income type TransactionTypes' do
+      TransactionType.populate
+      names = TransactionType.other_income.pluck(:name)
+      expect(names).to eq %w[friends_or_family maintenance_in property_or_lodger student_loan pension]
+    end
+  end
 end

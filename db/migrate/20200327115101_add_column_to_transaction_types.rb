@@ -6,6 +6,6 @@ class AddColumnToTransactionTypes < ActiveRecord::Migration[6.0]
                                  maintenance_in
                                  property_or_lodger
                                  student_loan
-                                 private_pension]).update_all(other_income: 'true')
+                                 pension]).update_all(other_income: 'true')
   end
 end
