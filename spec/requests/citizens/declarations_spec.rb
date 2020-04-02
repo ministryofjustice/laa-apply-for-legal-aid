@@ -44,9 +44,9 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
       expect(response).to redirect_to(flow_forward_path)
     end
 
-    it 'sets the application state to means completed' do
+    it 'sets the application state to analysing_bank_transactions' do
       subject
-      expect(legal_aid_application.reload.provider_assessing_means?).to be_truthy
+      expect(legal_aid_application.reload.state).to eq 'analysing_bank_transactions'
       expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 

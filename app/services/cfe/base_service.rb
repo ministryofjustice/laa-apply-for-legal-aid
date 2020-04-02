@@ -1,6 +1,6 @@
 module CFE
   class BaseService
-    def self.call(submission)
+    def self.call(submission = nil)
       new(submission).call
     end
 
