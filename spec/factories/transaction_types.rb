@@ -59,5 +59,11 @@ FactoryBot.define do
       operation { 'credit' }
       sort_order { 60 }
     end
+
+    trait :benefits do
+      name { 'benefits' }
+      operation { 'credit' }
+      sort_order { 30 }
+    end
   end
 end
