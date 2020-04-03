@@ -22,12 +22,6 @@ module CFE
     describe '.call' do
       before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
-      around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
-      end
-
       context 'successful calls' do
         context 'no bank transactions at all' do
           describe 'successful calls' do
