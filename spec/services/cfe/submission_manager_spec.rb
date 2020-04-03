@@ -3,7 +3,7 @@ require 'rails_helper'
 module CFE
   RSpec.describe SubmissionManager do
     let(:vehicle) { build :vehicle, :populated }
-    let(:application) { create :legal_aid_application, :with_everything, :at_provider_submitted, vehicle: vehicle }
+    let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :at_provider_submitted, vehicle: vehicle }
     let(:submission_manager) { described_class.new(application.id) }
     let(:submission) { submission_manager.submission }
     let(:call_result) { true }
