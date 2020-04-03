@@ -1,6 +1,5 @@
 module CFE
   class CreateOtherIncomeService < BaseService
-
     def cfe_url_path
       "/assessments/#{@submission.assessment_id}/other_income"
     end
@@ -27,7 +26,7 @@ module CFE
 
     def all_transactions_of_one_type(transaction_type, transactions)
       {
-        source: transaction_type.name,
+        source: transaction_type.name.humanize,
         payments: transactions.map { |t| single_transaction_hash(t) }
       }
     end
@@ -50,7 +49,5 @@ module CFE
     def other_income_transaction_type_ids
       TransactionType.other_income.pluck(:id)
     end
-
-
   end
 end
