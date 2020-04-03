@@ -29,7 +29,6 @@ module CFE
     end
 
     def call
-      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
       COMMON_SERVICES.each { |s| s.call(submission) }
       NON_PASSPORTED_SERVICES.each { |s| s.call(submission) } if submission.non_passported?
       ObtainAssessmentResultService.call(submission)
