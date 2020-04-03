@@ -22,11 +22,6 @@ module CFE
       end
     end
 
-    # TODO: Delete this placeholder
-    describe 'basic test -- DELETE' do
-      it { expect(application.bank_transactions.count).to eq 5 }
-    end
-
     describe '.cfe_url' do
       it 'contains the submission assessment id' do
         expect(service.cfe_url)
