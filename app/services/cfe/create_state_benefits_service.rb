@@ -20,7 +20,6 @@ module CFE
       result = []
 
       raise CFE::SubmissionError, 'Benefit transactions un-coded' if bank_transactions.keys.any?(nil)
-      raise CFE::SubmissionError, 'Benefit transaction cannot be identified' if bank_transactions.keys.map { |n| n.match?(/Unknown code/) }.any?
 
       bank_transactions.each do |name, array|
         type_hash = { "name": name, "payments": transactions(array) }

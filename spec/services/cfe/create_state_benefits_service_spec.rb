@@ -54,14 +54,6 @@ module CFE
           expect { subject.call }.to raise_error(CFE::SubmissionError, 'Benefit transactions un-coded')
         end
       end
-
-      context 'when a benefit transaction is returned with an unknown meta-data tag' do
-        before { create :bank_transaction, :unknown_benefits, bank_account: bank_account, amount: '123.45', happened_at: DAY_SEQUENCE[0].days.ago }
-
-        it 'raises an error' do
-          expect { subject.call }.to raise_error(CFE::SubmissionError, 'Benefit transaction cannot be identified')
-        end
-      end
     end
 
     describe '.call' do
