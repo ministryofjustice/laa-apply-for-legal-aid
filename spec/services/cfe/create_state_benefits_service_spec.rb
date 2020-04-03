@@ -140,6 +140,18 @@ module CFE
 
     def dummy_response_hash
       {
+        "objects": [
+          {
+            "id": 'ba43211a-6972-4839-994a-cdd7978c576f',
+            "gross_income_summary_id": '1a3e0752-4b63-4041-b9d7-f083331f9ab2',
+            "state_benefit_type_id": '4115b92e-4a2f-4553-9c64-b9c177baf7b4',
+            "name": 'child_maintenance',
+            "created_at": '2020-03-27T13:08:22.022Z',
+            "updated_at": '2020-03-27T13:08:22.022Z',
+            "monthly_value": '123.45'
+          }
+        ],
+        "errors": [],
         "success": true
       }
     end
