@@ -86,26 +86,24 @@ module CFE
       end
     end
 
-
-
     def dummy_response_hash
       {
         objects: [
           {
-            id: "6027b85f-d286-48b6-94ff-c191bf71dedb",
-            gross_income_summary_id: "4499dd19-f407-4ddd-9edb-6c30f567c629",
-            name: "Student grant",
-            created_at: "2020-03-27T13:08:21.889Z",
-            updated_at: "2020-03-27T13:08:21.889Z",
+            id: '6027b85f-d286-48b6-94ff-c191bf71dedb',
+            gross_income_summary_id: '4499dd19-f407-4ddd-9edb-6c30f567c629',
+            name: 'Student grant',
+            created_at: '2020-03-27T13:08:21.889Z',
+            updated_at: '2020-03-27T13:08:21.889Z',
             monthly_income: nil,
             assessment_error: false
           },
           {
-            id: "7c82b3a7-7563-400e-809e-8c7ce7dad3c4",
-            gross_income_summary_id: "4499dd19-f407-4ddd-9edb-6c30f567c629",
-            name: "Help from family",
-            created_at: "2020-03-27T13:08:21.907Z",
-            updated_at: "2020-03-27T13:08:21.907Z",
+            id: '7c82b3a7-7563-400e-809e-8c7ce7dad3c4',
+            gross_income_summary_id: '4499dd19-f407-4ddd-9edb-6c30f567c629',
+            name: 'Help from family',
+            created_at: '2020-03-27T13:08:21.907Z',
+            updated_at: '2020-03-27T13:08:21.907Z',
             monthly_income: nil,
             assessment_error: false
           }
