@@ -66,13 +66,5 @@ module CFESubmissionStateMachine
         transitions from: :other_income_created, to: :failed
       end
     end
-
-    def passported?
-      legal_aid_application.passported?
-    end
-
-    def non_passported?
-      legal_aid_application.non_passported?
-    end
   end
 end

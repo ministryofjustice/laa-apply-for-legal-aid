@@ -62,7 +62,7 @@ module CFE
       context 'non_passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
-        it 'transitions from properties created to dependants_created' do
+        it 'transitions from properties_created to dependants_created' do
           expect { submission.dependants_created! }.not_to raise_error
           expect(submission.dependants_created?).to be true
         end
