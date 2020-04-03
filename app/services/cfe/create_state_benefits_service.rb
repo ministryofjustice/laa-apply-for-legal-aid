@@ -12,26 +12,33 @@ module CFE
 
     private
 
+    def process_response
+      @submission.state_benefits_created!
+    end
+
     def build_transactions
       result = []
-      benefit_types = legal_aid_application.bank_transactions.for_type(:benefits).pluck(:meta_data).uniq
 
-      raise CFE::SubmissionError, 'Benefit transactions un-coded' if benefit_types.any?(nil)
-      raise CFE::SubmissionError, 'Benefit transaction cannot be identified' if benefit_types.map { |n| n.match?(/Unknown code/) }.any?
+      raise CFE::SubmissionError, 'Benefit transactions un-coded' if bank_transactions.keys.any?(nil)
+      raise CFE::SubmissionError, 'Benefit transaction cannot be identified' if bank_transactions.keys.map { |n| n.match?(/Unknown code/) }.any?
 
-      benefit_types.each do |type|
-        type_hash = { "name": type, "payments": transactions(type) }
+      bank_transactions.each do |name, array|
+        type_hash = { "name": name, "payments": transactions(array) }
         result << type_hash
       end
       result
     end
 
-    def transactions(type)
+    def transactions(array)
       result = []
-      legal_aid_application.bank_transactions.for_type(:benefits).where(meta_data: type).each do |transaction|
+      array.each do |transaction|
         result << { date: transaction.happened_at.strftime('%Y-%m-%d'), amount: transaction.amount.to_f }
       end
       result
+    end
+
+    def bank_transactions
+      @bank_transactions ||= legal_aid_application.bank_transactions.for_type(:benefits).group_by(&:meta_data)
     end
   end
 end
