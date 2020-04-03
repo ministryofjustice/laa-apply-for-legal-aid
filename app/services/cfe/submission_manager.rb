@@ -1,8 +1,8 @@
 module CFE
   ## temporary classes to enable this class to be tested while work is still ongoing on tickets AP-1334 and AP-1333
 
-  class CreateStateBenefitsService < BaseService; end
-  class CreateDependantsService < BaseService; end
+  # class CreateStateBenefitsService < BaseService; end
+  # class CreateDependantsService < BaseService; end
 
   class SubmissionManager
     COMMON_SERVICES = [
