@@ -8,6 +8,9 @@ module CFE
     let(:submission) { create :cfe_submission, aasm_state: 'state_benefits_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
+    let(:today) { Date.today.strftime('%Y-%m-%d') }
+    let(:one_week_ago) { 1.week.ago.strftime('%Y-%m-%d') }
+    let(:two_weeks_ago) { 2.week.ago.strftime('%Y-%m-%d') }
 
     describe '#cfe_url' do
       it 'contains the submission assessment id' do
@@ -25,44 +28,90 @@ module CFE
         VCR.turn_on!
       end
 
-      context 'no bank transactions' do
-        let(:expected_payload_hash) { empty_payload }
+      context 'successful calls' do
+        context 'no bank transactions at all' do
+          describe 'successful calls' do
+            let(:expected_payload_hash) { empty_payload }
 
-        it 'updates the submission record from state_benefits_created to other_income_created' do
-          expect(submission.aasm_state).to eq 'state_benefits_created'
-          described_class.call(submission)
-          expect(submission.aasm_state).to eq 'other_income_created'
+            it 'updates the submission record from state_benefits_created to other_income_created' do
+              expect(submission.aasm_state).to eq 'state_benefits_created'
+              described_class.call(submission)
+              expect(submission.aasm_state).to eq 'other_income_created'
+            end
+          end
+
+          context 'no other income bank transactions' do
+            let(:expected_payload_hash) { empty_payload }
+
+            before { create_non_other_income_bank_transactions }
+
+            it 'updates the submission record from state_benefits_created to other_income_created' do
+              expect(submission.aasm_state).to eq 'state_benefits_created'
+              described_class.call(submission)
+              expect(submission.aasm_state).to eq 'other_income_created'
+            end
+          end
+
+          context 'other_income bank transactions' do
+            let(:expected_payload_hash) { loaded_payload }
+
+            before { create_other_income_bank_transactions }
+
+            it 'updates the submission record from state_benefits_created to other_income_created' do
+              expect(submission.aasm_state).to eq 'state_benefits_created'
+              described_class.call(submission)
+              expect(submission.aasm_state).to eq 'other_income_created'
+            end
+
+            it 'creates a submission_history record' do
+              expect {
+                described_class.call(submission)
+              }.to change { submission.submission_histories.count }.by 1
+              history = CFE::SubmissionHistory.last
+              expect(history.submission_id).to eq submission.id
+              expect(history.url).to eq service.cfe_url
+              expect(history.http_method).to eq 'POST'
+              expect(history.request_payload).to eq expected_payload_hash.to_json
+              expect(history.http_response_status).to eq 200
+              expect(history.response_payload).to eq dummy_response
+              expect(history.error_message).to be_nil
+            end
+          end
         end
       end
 
-      context 'no other income bank transactions' do
-        let(:expected_payload_hash) { empty_payload }
-
-        before { create_non_other_income_bank_transactions }
-
-        it 'updates the submission record from state_benefits_created to other_income_created' do
-          expect(submission.aasm_state).to eq 'state_benefits_created'
-          described_class.call(submission)
-          expect(submission.aasm_state).to eq 'other_income_created'
-        end
-      end
-
-      context 'other_income bank transactions' do
+      context 'failed calls to CFE' do
         let(:expected_payload_hash) { loaded_payload }
-
-        before { create_other_income_bank_transactions }
-
-        it 'updates the submission record from state_benefits_created to other_income_created' do
-          expect(submission.aasm_state).to eq 'state_benefits_created'
-          described_class.call(submission)
-          expect(submission.aasm_state).to eq 'other_income_created'
-        end
+        it_behaves_like 'a failed call to CFE'
       end
     end
 
+
+
     def dummy_response_hash
       {
-        "success": true
+        objects: [
+          {
+            id: "6027b85f-d286-48b6-94ff-c191bf71dedb",
+            gross_income_summary_id: "4499dd19-f407-4ddd-9edb-6c30f567c629",
+            name: "Student grant",
+            created_at: "2020-03-27T13:08:21.889Z",
+            updated_at: "2020-03-27T13:08:21.889Z",
+            monthly_income: nil,
+            assessment_error: false
+          },
+          {
+            id: "7c82b3a7-7563-400e-809e-8c7ce7dad3c4",
+            gross_income_summary_id: "4499dd19-f407-4ddd-9edb-6c30f567c629",
+            name: "Help from family",
+            created_at: "2020-03-27T13:08:21.907Z",
+            updated_at: "2020-03-27T13:08:21.907Z",
+            monthly_income: nil,
+            assessment_error: false
+          }
+        ],
+        errors: [],
+        success: true
       }
     end
 
@@ -76,25 +125,25 @@ module CFE
       {
         other_incomes: [
           {
-            :source=>"student_loan",
-            :payments=> [
-              {:date=>"2020-03-19", :amount=>355.68},
-              {:date=>"2020-03-26", :amount=>355.67},
-              {:date=>"2020-04-02", :amount=>355.66}
+            source: 'Student loan',
+            payments: [
+              { date: two_weeks_ago, amount: 355.68 },
+              { date: one_week_ago, amount: 355.67 },
+              { date: today, amount: 355.66 }
             ]
           },
           {
-            :source=>"friends_or_family",
-            :payments=> [
-              {:date=>"2020-03-26", :amount=>60.0},
-              {:date=>"2020-04-02", :amount=>60.0}
+            source: 'Friends or family',
+            payments: [
+              { date: one_week_ago, amount: 60.0 },
+              { date: today, amount: 60.0 }
             ]
           },
           {
-            :source=>"maintenance_in",
-            :payments=> [
-              {:date=>"2020-03-26", :amount=>125.0},
-              {:date=>"2020-04-02", :amount=>250.0}
+            source: 'Maintenance in',
+            payments: [
+              { date: one_week_ago, amount: 125.0 },
+              { date: today, amount: 250.0 }
             ]
           }
         ]
@@ -123,5 +172,3 @@ module CFE
     end
   end
 end
-
-

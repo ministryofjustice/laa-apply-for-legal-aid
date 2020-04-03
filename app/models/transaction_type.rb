@@ -20,12 +20,12 @@ class TransactionType < ApplicationRecord
   }.freeze
 
   OTHER_INCOME_TYPES = %w[
-                          friends_or_family
-                          maintenance_in
-                          property_or_lodger
-                          student_loan
-                          pension
-                         ]
+    friends_or_family
+    maintenance_in
+    property_or_lodger
+    student_loan
+    pension
+  ].freeze
 
   scope :active, -> { where(archived_at: nil) }
   scope :debits, -> { active.where(operation: :debit) }
@@ -46,7 +46,8 @@ class TransactionType < ApplicationRecord
       end
     end
     TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
-    TransactionType.where(name: OTHER_INCOME_TYPES).each do |tt| tt.update!(other_income: true)
+    TransactionType.where(name: OTHER_INCOME_TYPES).each do |tt|
+      tt.update!(other_income: true)
     end
   end
 
