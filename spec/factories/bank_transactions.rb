@@ -18,6 +18,24 @@ FactoryBot.define do
     trait :benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
+      meta_data { 'child_maintenance' }
+    end
+
+    trait :disregarded_benefits do
+      operation { 'credit' }
+      transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
+      meta_data { 'grenfell_payments' }
+    end
+
+    trait :unassigned_benefits do
+      operation { 'credit' }
+      transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
+    end
+
+    trait :unknown_benefits do
+      operation { 'credit' }
+      transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
+      meta_data { 'Unknown code xxx' }
     end
 
     trait :friends_or_family do
