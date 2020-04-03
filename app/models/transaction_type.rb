@@ -19,6 +19,14 @@ class TransactionType < ApplicationRecord
     ]
   }.freeze
 
+  OTHER_INCOME_TYPES = %w[
+    friends_or_family
+    maintenance_in
+    property_or_lodger
+    student_loan
+    pension
+  ].freeze
+
   scope :active, -> { where(archived_at: nil) }
   scope :debits, -> { active.where(operation: :debit) }
   scope :credits, -> { active.where(operation: :credit) }
@@ -37,12 +45,18 @@ class TransactionType < ApplicationRecord
         transaction_type.update! sort_order: start_number
       end
     end
-
     TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
+    TransactionType.where(name: OTHER_INCOME_TYPES).each do |tt|
+      tt.update!(other_income: true)
+    end
   end
 
   def self.for_income_type?(transaction_type_name)
     income_for(transaction_type_name).any?
+  end
+
+  def self.other_income
+    TransactionType.where(other_income: true)
   end
 
   def label_name(journey: :citizens)
