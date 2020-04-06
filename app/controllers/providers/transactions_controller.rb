@@ -18,9 +18,11 @@ module Providers
     end
 
     def set_selection
+      new_values = { transaction_type_id: transaction_type.id }
+      new_values[:meta_data] = 'manually_chosen' if transaction_type.name.eql?('benefits')
       bank_transactions
         .where(id: selected_transaction_ids)
-        .update_all(transaction_type_id: transaction_type.id)
+        .update_all(new_values)
     end
 
     def selected_transaction_ids
