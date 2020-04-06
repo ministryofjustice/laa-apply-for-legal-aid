@@ -34,10 +34,14 @@ class TransactionType < ApplicationRecord
   scope :outgoing_for, ->(transaction_type_name) { active.where(operation: :debit, name: transaction_type_name) }
 
   def self.populate
-    populate_records
+    populate_records(true)
   end
 
-  def self.populate_records
+  def self.populate_without_income
+    populate_records(false)
+  end
+
+  def self.populate_records(include_other_income)
     NAMES.each_with_index do |(operation, names), op_index|
       names.each_with_index do |name, index|
         start_number = (op_index * 1000) + (index * 10)
@@ -46,6 +50,8 @@ class TransactionType < ApplicationRecord
       end
     end
     TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
+    return unless include_other_income
+
     TransactionType.where(name: OTHER_INCOME_TYPES).each do |tt|
       tt.update!(other_income: true)
     end
