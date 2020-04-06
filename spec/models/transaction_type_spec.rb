@@ -53,6 +53,16 @@ RSpec.describe TransactionType, type: :model do
     end
   end
 
+  describe '#populate_without_income' do
+    # this is called from an old migration
+    subject { described_class.populate_without_income }
+
+    it 'does not attempt to update other_income fields' do
+      subject
+      expect(TransactionType.where(other_income: true).count).to eq 0
+    end
+  end
+
   describe '#for_income_type?' do
     context 'checks that a boolean response is returned' do
       let!(:credit_transaction) { create :transaction_type, :credit_with_standard_name }
