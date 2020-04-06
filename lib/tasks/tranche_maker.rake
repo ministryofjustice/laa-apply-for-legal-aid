@@ -13,16 +13,17 @@ namespace :tranche do
     beta_test_users = YAML.load_file(Rails.root.join('config/encrypted_private_beta_users.yml'))
 
     new_users.each do |user|
-      uri = URI("https://ccms-pda.legalservices.gov.uk/api/providerDetails/#{user.upcase}")
+      encoded_user = user.upcase.tr(' ', '')
+      uri = URI("https://ccms-pda.legalservices.gov.uk/api/providerDetails/#{encoded_user}")
       response = Net::HTTP.get(uri)
       hash = JSON.parse(response)
       if hash.key?('error')
-        puts ">>>>>>>> User #{user} not found <<<<<<<<<"
+        puts ">>>>>>>> User #{user} / #{encoded_user} not found <<<<<<<<<"
       else
-        contact_hash = hash['contacts'].detect { |h| h['name'] == user.upcase }
-        whitelisted_users << user.upcase
+        contact_hash = hash['contacts'].detect { |h| h['name'] == encoded_user.upcase }
+        whitelisted_users << encoded_user
 
-        beta_test_users[user.upcase] = contact_hash['id']
+        beta_test_users[encoded_user] = contact_hash['id']
       end
     end
 
@@ -33,5 +34,12 @@ namespace :tranche do
     File.open('config/encrypted_private_beta_users.UPDATED.yml', 'w') do |fp|
       fp.puts beta_test_users.to_yaml
     end
+
+    puts "The following files have been created: "
+    puts " "
+    puts "   helm_deploy/apply-for-legal-aid/whitelisted_users.UPDATED.yaml"
+    puts "   config/encrypted_private_beta_users.UPDATED.yml"
+    puts " "
+    puts "Please check, and then replace the originals with these when satisfied"
   end
 end
