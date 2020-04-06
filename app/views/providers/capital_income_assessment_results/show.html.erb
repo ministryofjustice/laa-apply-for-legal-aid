@@ -1,0 +1,20 @@
+<%= page_template(
+        page_title: t(".page_title", result: t(".result.#{@cfe_result.assessment_result}") ),
+        template: :basic,
+        column_width: :full
+    ) do %>
+
+  <div class="interruption-panel">
+    <%= render @cfe_result.overview %>
+  </div>
+
+  <%#= render 'result_details' %>
+
+  <br><br>
+
+  <%= next_action_buttons_with_form(
+          url: providers_legal_aid_application_start_merits_assessment_path(@legal_aid_application),
+          method: :get,
+          show_draft: true
+      ) %>
+<% end %>

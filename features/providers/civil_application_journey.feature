@@ -410,7 +410,7 @@ Feature: Civil application journeys
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
-
+  spec/services/ccms/manual_review_determiner_spec.rb
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
     Given I start the merits application and the applicant has uploaded transaction data

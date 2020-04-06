@@ -77,6 +77,10 @@ module Flow
         },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
+          forward: :capital_income_assessment_results
+        },
+        capital_income_assessment_results: {
+          path: ->(application) { urls.providers_legal_aid_application_capital_income_assessment_result_path(application) },
           forward: :start_merits_assessments
         },
         means_reports: {

@@ -190,8 +190,8 @@ module CFEResults
               "assessed_capital": '9552.05',
               "lower_threshold": '3000.0',
               "upper_threshold": '999999999999.0',
-              "assessment_result": 'contribution_required',
-              "capital_contribution": '6552.05'
+              "assessment_result": 'eligible',
+              "capital_contribution": '0.0'
             }
           }
         }
@@ -200,22 +200,47 @@ module CFEResults
       def self.not_eligible
         not_eligible_result = eligible
         not_eligible_result[:assessment][:assessment_result] = 'not_eligible'
+        not_eligible_result[:assessment][:disposable_income][:assessment_result] = 'not_eligible'
+        not_eligible_result[:assessment][:capital][:assessment_result] = 'not_eligible'
         not_eligible_result
       end
 
-      def self.contribution_required
-        # new_capital_section = eligible[:assessment][:capital]
-        # new_capital_section[:capital_contribution] = '465.66'
-        # eligible.merge assessment_result: 'contribution_required', capital: new_capital_section
+      def self.with_capital_contribution_required
         result = eligible
         result[:assessment][:assessment_result] = 'contribution_required'
+        new_capital_section = result[:assessment][:capital]
+        new_capital_section[:capital_contribution] = '465.66'
+        new_capital_section[:assessment_result] = 'contribution_required'
+        result[:assessment][:capital] = new_capital_section
         result
       end
 
-      def self.with_contribution_required
-        new_capital_section = eligible[:assessment][:capital]
+      def self.with_income_contribution_required
+        result = eligible
+        result[:assessment][:assessment_result] = 'contribution_required'
+        new_disposable_income = eligible[:assessment][:disposable_income]
+        new_disposable_income[:assessment_result] = 'contribution_required'
+        new_disposable_income[:income_contribution] = 366.82
+        result[:assessment][:disposable_income] = new_disposable_income
+        result
+      end
+
+      def self.with_capital_and_income_contributions_required
+        result = eligible
+        result[:assessment][:assessment_result] = 'contribution_required'
+
+        new_disposable_income = eligible[:assessment][:disposable_income]
+        new_disposable_income[:assessment_result] = 'contribution_required'
+        new_disposable_income[:income_contribution] = 366.82
+        result[:assessment][:disposable_income] = new_disposable_income
+
+        result[:assessment][:assessment_result] = 'contribution_required'
+        new_capital_section = result[:assessment][:capital]
         new_capital_section[:capital_contribution] = '465.66'
-        eligible.merge assessment_result: 'contribution_required', capital: new_capital_section
+        new_capital_section[:assessment_result] = 'contribution_required'
+        result[:assessment][:capital] = new_capital_section
+
+        result
       end
 
       def self.no_additional_properties
@@ -230,20 +255,27 @@ module CFEResults
         result
       end
 
-      def self.no_mortgage
+      def self.with_no_mortgage_costs
         result = eligible
         result[:assessment][:disposable_income][:gross_housing_costs] = 0.0
         result
       end
 
       def self.no_capital
-        new_capital_section = eligible[:assessment][:capital]
+        result = eligible
+        new_capital_section = result[:assessment][:capital]
+        new_capital_section[:capital_items][:liquid] = []
+        new_capital_section[:capital_items][:non_liquid] = []
+        new_capital_section[:capital_items][:vehicles] = []
+        new_capital_section[:capital_items][:properties][:main_home] = {}
+        new_capital_section[:capital_items][:properties][:additional_properties] = {}
         new_capital_section[:total_liquid] = '0.0'
         new_capital_section[:total_non_liquid] = '0.0'
         new_capital_section[:total_vehicle] = '0.0'
         new_capital_section[:total_property] = '0.0'
         new_capital_section[:total_capital] = '0.0'
-        eligible.merge capital: new_capital_section
+        result[:assessment][:capital] = new_capital_section
+        result
       end
 
       def self.with_additional_properties
@@ -268,6 +300,14 @@ module CFEResults
       def self.with_maintenance_received
         result = eligible
         result[:assessment][:disposable_income][:maintenance_allowance] = '150.00'
+        result
+      end
+
+      def self.unknown
+        result = eligible
+        result[:assessment][:assessment_result] = 'unknown'
+        result[:assessment][:capital][:assessment_result] = 'unknown'
+        result[:assessment][:disposable_income][:assessment_result] = 'unknown'
         result
       end
     end

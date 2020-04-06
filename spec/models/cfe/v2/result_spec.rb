@@ -5,42 +5,97 @@ module CFE
     RSpec.describe Result, type: :model do
       let(:eligible_result) { create :cfe_v2_result }
       let(:not_eligible_result) { create :cfe_v2_result, :not_eligible }
-      let(:contribution_required_result) { create :cfe_v2_result, :contribution_required }
+      let(:contribution_required_result) { create :cfe_v2_result, :with_capital_contribution_required }
       let(:no_additional_properties) { create :cfe_v2_result, :no_additional_properties }
       let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
       let(:no_vehicles) { create :cfe_v2_result, :no_vehicles }
       let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_received }
-      let(:no_mortgage) { create :cfe_v2_result, :no_mortgage }
+      let(:no_mortgage) { create :cfe_v2_result, :with_no_mortgage_costs }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v2_result }
-      let(:contribution_and_restriction_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission }
+      let(:contribution_and_restriction_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
 
       describe '#overview' do
-        context 'applicant is eligible' do
-          it 'returns assessment result' do
-            expect(eligible_result.overview).to eq 'eligible'
+        subject { cfe_result.overview }
+
+        let(:application) { cfe_result.legal_aid_application }
+
+        context 'manual check not required' do
+          before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(false) }
+
+          context 'eligible' do
+            let(:cfe_result) { create :cfe_v2_result, :eligible }
+            it 'returns eligible' do
+              expect(subject).to eq 'eligible'
+            end
+          end
+
+          context 'not_eligible' do
+            let(:cfe_result) { create :cfe_v2_result, :not_eligible }
+            it 'returns not_eligible' do
+              expect(subject).to eq 'not_eligible'
+            end
+          end
+
+          context 'capital_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
+            it 'returns capital_contribution_required' do
+              expect(subject).to eq 'capital_contribution_required'
+            end
+          end
+
+          context 'income_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
+            it 'returns income_contribution_required' do
+              expect(subject).to eq 'income_contribution_required'
+            end
+          end
+
+          context 'capital_and_income_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
+            it 'returns capital_and_income_contribution_required' do
+              expect(subject).to eq 'capital_and_income_contribution_required'
+            end
           end
         end
 
-        context 'applicant has contribution required and restrictions' do
-          it 'returns manual_check_required' do
-            expect(contribution_and_restriction_result.capital_contribution_required?).to be true
-            expect(legal_aid_application.has_restrictions?).to be true
-            expect(contribution_and_restriction_result.overview).to eq 'manual_check_required'
-          end
-        end
+        context 'manual check IS required' do
+          before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(true) }
 
-        context 'applicant has contribution required and no restrictions' do
-          it 'returns manual_check_required' do
-            expect(contribution_required_result.capital_contribution_required?).to be true
-            expect(contribution_required_result.overview).to eq 'contribution_required'
+          context 'eligible' do
+            let(:cfe_result) { create :cfe_v2_result, :eligible }
+            it 'returns manual_check_required' do
+              expect(subject).to eq 'manual_check_required'
+            end
           end
-        end
-      end
 
-      describe '#overview' do
-        it 'returns manual_check_required' do
-          expect(not_eligible_result.overview).to eq 'not_eligible'
+          context 'not_eligible' do
+            let(:cfe_result) { create :cfe_v2_result, :not_eligible }
+            it 'returns manual_check_required' do
+              expect(subject).to eq 'manual_check_required'
+            end
+          end
+
+          context 'capital_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
+            it 'returns manual_check_required' do
+              expect(subject).to eq 'manual_check_required'
+            end
+          end
+
+          context 'income_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
+            it 'returns manual_check_required' do
+              expect(subject).to eq 'manual_check_required'
+            end
+          end
+
+          context 'capital_and_income_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
+            it 'returns manual_check_required' do
+              expect(subject).to eq 'manual_check_required'
+            end
+          end
         end
       end
 
@@ -66,7 +121,7 @@ module CFE
 
       describe '#capital_contribution' do
         it 'returns the value of the capital contribution' do
-          expect(contribution_required_result.capital_contribution).to eq 6552.05
+          expect(contribution_required_result.capital_contribution).to eq 465.66
         end
       end
 
