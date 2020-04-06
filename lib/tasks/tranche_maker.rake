@@ -35,11 +35,11 @@ namespace :tranche do
       fp.puts beta_test_users.to_yaml
     end
 
-    puts "The following files have been created: "
-    puts " "
-    puts "   helm_deploy/apply-for-legal-aid/whitelisted_users.UPDATED.yaml"
-    puts "   config/encrypted_private_beta_users.UPDATED.yml"
-    puts " "
-    puts "Please check, and then replace the originals with these when satisfied"
+    puts 'The following files have been created: '
+    puts ' '
+    puts '   helm_deploy/apply-for-legal-aid/whitelisted_users.UPDATED.yaml'
+    puts '   config/encrypted_private_beta_users.UPDATED.yml'
+    puts ' '
+    puts 'Please check, and then replace the originals with these when satisfied'
   end
 end
