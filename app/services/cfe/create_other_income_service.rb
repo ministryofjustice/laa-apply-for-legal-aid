@@ -18,8 +18,9 @@ module CFE
 
     def other_income_data
       array = []
-      transactions_of_interest_grouped_by_transaction_type.each do |transaction_type, transactions|
-        array << all_transactions_of_one_type(transaction_type, transactions)
+      transaction_types = grouped_transactions.keys.sort_by(&:name)
+      transaction_types.each do |transaction_type|
+        array << all_transactions_of_one_type(transaction_type, grouped_transactions[transaction_type])
       end
       array
     end
@@ -38,12 +39,12 @@ module CFE
       }
     end
 
-    def transactions_of_interest_grouped_by_transaction_type
-      legal_aid_application
-        .bank_transactions
-        .credit
-        .where(transaction_type_id: other_income_transaction_type_ids)
-        .group_by(&:transaction_type)
+    def grouped_transactions
+      @grouped_transactions ||= legal_aid_application
+                                .bank_transactions
+                                .credit
+                                .where(transaction_type_id: other_income_transaction_type_ids)
+                                .group_by(&:transaction_type)
     end
 
     def other_income_transaction_type_ids

@@ -5,5 +5,7 @@ module CFE
     belongs_to :legal_aid_application
     has_many :submission_histories, -> { order(created_at: :asc) }
     has_one :result, class_name: 'BaseResult'
+
+    delegate :passported?, :non_passported?, to: :legal_aid_application
   end
 end

@@ -117,14 +117,6 @@ module CFE
       {
         other_incomes: [
           {
-            source: 'Student loan',
-            payments: [
-              { date: two_weeks_ago, amount: 355.68 },
-              { date: one_week_ago, amount: 355.67 },
-              { date: today, amount: 355.66 }
-            ]
-          },
-          {
             source: 'Friends or family',
             payments: [
               { date: one_week_ago, amount: 60.0 },
@@ -136,6 +128,14 @@ module CFE
             payments: [
               { date: one_week_ago, amount: 125.0 },
               { date: today, amount: 250.0 }
+            ]
+          },
+          {
+            source: 'Student loan',
+            payments: [
+              { date: two_weeks_ago, amount: 355.68 },
+              { date: one_week_ago, amount: 355.67 },
+              { date: today, amount: 355.66 }
             ]
           }
         ]
