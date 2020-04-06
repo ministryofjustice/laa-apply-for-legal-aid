@@ -1,7 +1,7 @@
 module CFE
   class CreateOtherIncomeService < BaseService
     def cfe_url_path
-      "/assessments/#{@submission.assessment_id}/other_income"
+      "/assessments/#{@submission.assessment_id}/other_incomes"
     end
 
     def request_body

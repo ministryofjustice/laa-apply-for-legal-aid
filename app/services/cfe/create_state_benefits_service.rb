@@ -1,7 +1,7 @@
 module CFE
   class CreateStateBenefitsService < BaseService
     def cfe_url_path
-      "/assessments/#{@submission.assessment_id}/state_benefit"
+      "/assessments/#{@submission.assessment_id}/state_benefits"
     end
 
     def request_body
