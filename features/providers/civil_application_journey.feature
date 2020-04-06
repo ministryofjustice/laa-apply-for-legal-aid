@@ -408,12 +408,16 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Provide details of the case'
 
   @javascript @vcr
-  Scenario: Completes the merits application for applicant that does not receive benefits
-    Given I start the merits application
+  Scenario: Completes the merits application for applicant that does not receive passported benefits
+    Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Your client's income"
-    Then I click 'Save and continue'
+    When I click link 'Add another type of income'
+    And I select 'Benefits like Universal Credit or Child Benefit'
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Your client's income"
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
