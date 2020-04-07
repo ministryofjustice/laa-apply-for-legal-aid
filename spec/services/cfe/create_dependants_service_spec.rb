@@ -15,13 +15,8 @@ module CFE
     end
 
     describe '.call' do
-      around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
-      end
       before do
-        stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response)
+        stub_request(:post, service.cfe_url).to_return(body: dummy_response)
       end
 
       context 'successful calls' do

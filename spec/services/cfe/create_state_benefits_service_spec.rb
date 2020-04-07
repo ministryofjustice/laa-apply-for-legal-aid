@@ -52,15 +52,10 @@ module CFE
     end
 
     describe '.call' do
-      around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
-      end
       subject(:call_service) { service.call }
 
       describe 'successful post' do
-        before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
+        before { stub_request(:post, service.cfe_url).to_return(body: dummy_response) }
 
         it 'updates the submission record from dependants_created to state_benefits_created' do
           expect(submission.aasm_state).to eq 'dependants_created'
