@@ -374,11 +374,15 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I am able to view the client completed means answers
-    Given I start the journey as far as the client completed means page
+    Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Your client's income"
-    Then I click 'Save and continue'
+    When I click link 'Add another type of income'
+    And I select 'Benefits like Universal Credit or Child Benefit'
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Your client's income"
+    When I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
