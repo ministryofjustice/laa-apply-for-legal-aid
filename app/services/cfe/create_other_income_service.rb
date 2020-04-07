@@ -44,6 +44,7 @@ module CFE
                                 .bank_transactions
                                 .credit
                                 .where(transaction_type_id: other_income_transaction_type_ids)
+                                .order(:happened_at)
                                 .group_by(&:transaction_type)
     end
 
