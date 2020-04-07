@@ -122,7 +122,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
       context 'when being set to benefits' do
         let!(:benefits_transaction_type) { create :transaction_type, :benefits }
         let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, benefit_bank_transaction] }
-        let!(:benefit_bank_transaction) { create :bank_transaction, :benefits, bank_account: bank_account, operation: transaction_type.operation, meta_data: nil }
+        let!(:benefit_bank_transaction) { create :bank_transaction, :benefits, bank_account: bank_account, meta_data: nil }
         let(:params) do
           {
             transaction_type: benefits_transaction_type.name,
