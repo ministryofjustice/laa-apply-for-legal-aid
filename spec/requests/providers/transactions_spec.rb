@@ -119,6 +119,22 @@ RSpec.describe Providers::TransactionsController, type: :request do
 
       it_behaves_like 'PATCH #providers/transactions'
 
+      context 'when being set to benefits' do
+        let!(:benefits_transaction_type) { create :transaction_type, :benefits }
+        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, benefit_bank_transaction] }
+        let!(:benefit_bank_transaction) { create :bank_transaction, :benefits, bank_account: bank_account, meta_data: nil }
+        let(:params) do
+          {
+            transaction_type: benefits_transaction_type.name,
+            transaction_ids: selected_transactions.pluck(:id)
+          }
+        end
+
+        it 'sets meta_data for benefit transactions' do
+          expect { subject }.to change { benefit_bank_transaction.reload.meta_data }.from(nil).to('manually_chosen')
+        end
+      end
+
       it 'redirects to the next page' do
         subject
         expect(response).to redirect_to providers_legal_aid_application_income_summary_index_path
