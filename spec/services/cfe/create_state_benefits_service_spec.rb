@@ -52,6 +52,11 @@ module CFE
     end
 
     describe '.call' do
+      around do |example|
+        VCR.turn_off!
+        example.run
+        VCR.turn_on!
+      end
       subject(:call_service) { service.call }
 
       describe 'successful post' do
