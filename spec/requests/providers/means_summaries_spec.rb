@@ -11,6 +11,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:own_vehicle) { true }
   let(:legal_aid_application) do
     create :legal_aid_application,
+           :with_negative_benefit_check_result,
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            applicant: applicant,
@@ -80,32 +81,50 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       patch providers_legal_aid_application_means_summary_path(legal_aid_application), params: params
     end
 
-    before do
-      login
-      subject
-    end
-
-    it 'redirects to next page' do
-      expect(response).to redirect_to flow_forward_path
-    end
-
-    context 'when submitted as draft' do
-      let(:params) do
-        { draft_button: 'Save as draft' }
-      end
-
-      it 'displays the providers applications page' do
-        expect(response).to redirect_to providers_legal_aid_applications_path
-      end
-
-      it 'sets the application as draft' do
-        expect(legal_aid_application.reload).to be_draft
-      end
-    end
-
-    context 'when not logged in' do
-      let(:login) {}
+    context 'unauthenticated' do
+      before { subject }
       it_behaves_like 'a provider not authenticated'
+    end
+
+    context 'logged in as an authenticated provider' do
+      before do
+        login
+        allow(CFE::SubmissionManager).to receive(:call).with(legal_aid_application.id).and_return(cfe_result)
+        subject
+      end
+
+      context 'call to Check Financial Eligibility Service is successful' do
+        let(:cfe_result) { true }
+
+        it 'redirects along the successful path' do
+          expect(response).to redirect_to flow_forward_path
+        end
+
+        it 'transitions to provider_checked_citizens_means_answers state' do
+          expect(legal_aid_application.reload.provider_checked_citizens_means_answers?).to be true
+        end
+
+        context 'Form submitted using Save as draft button' do
+          let(:params) { { draft_button: 'Save as draft' } }
+
+          it "redirects provider to provider's applications page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
+          end
+
+          it 'sets the application as draft' do
+            expect(legal_aid_application.reload).to be_draft
+          end
+        end
+      end
+
+      context 'call to Check Financial Eligibility Service is unsuccessful' do
+        let(:cfe_result) { false }
+
+        it 'redirects to the problem page' do
+          expect(response).to redirect_to(problem_index_path)
+        end
+      end
     end
   end
 

@@ -15,7 +15,7 @@ module CFE
     describe '#cfe_url' do
       it 'contains the submission assessment id' do
         expect(service.cfe_url)
-          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments/#{submission.assessment_id}/other_income"
+          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments/#{submission.assessment_id}/other_incomes"
       end
     end
 

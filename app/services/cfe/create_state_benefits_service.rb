@@ -1,7 +1,7 @@
 module CFE
   class CreateStateBenefitsService < BaseService
     def cfe_url_path
-      "/assessments/#{@submission.assessment_id}/state_benefit"
+      "/assessments/#{@submission.assessment_id}/state_benefits"
     end
 
     def request_body
@@ -37,7 +37,11 @@ module CFE
     end
 
     def bank_transactions
-      @bank_transactions ||= legal_aid_application.bank_transactions.for_type(:benefits).group_by(&:meta_data)
+      @bank_transactions ||= legal_aid_application
+                             .bank_transactions
+                             .for_type(:benefits)
+                             .order(:happened_at)
+                             .group_by(&:meta_data)
     end
   end
 end
