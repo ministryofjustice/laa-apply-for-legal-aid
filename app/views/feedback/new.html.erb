@@ -11,6 +11,17 @@
             }
           ) %>
 
+    <%= Feedback.enum_radio_buttons(
+            form, :difficulty,
+            order: :reverse,
+            args: {
+                title: {
+                    text: t('.difficulty'),
+                    size: :m
+                }
+            }
+        ) %>
+
       <%= Feedback.enum_radio_buttons(
             form, :satisfaction,
             order: :reverse,
@@ -22,10 +33,12 @@
             }
           ) %>
 
+      <p class="govuk-heading-m"><%= t('.improvement_suggestion') %></p>
+
       <%= form.govuk_text_area(
             :improvement_suggestion,
             label: {
-              text: t('.improvement_suggestion'),
+              text: t('.contact_email'),
               size: :m
             },
             rows: 4,
