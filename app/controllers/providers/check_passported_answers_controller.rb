@@ -10,6 +10,7 @@ module Providers
     def continue
       unless draft_selected? || legal_aid_application.provider_assessing_means?
         redirect_to(problem_index_path) && return unless check_financial_eligibility
+
         legal_aid_application.complete_means!
       end
       continue_or_draft
