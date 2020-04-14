@@ -15,6 +15,7 @@ RSpec.describe 'FeedbacksController', type: :request do
       subject
       expect(feedback.done_all_needed).to eq(params[:done_all_needed])
       expect(feedback.satisfaction).to eq(params[:satisfaction])
+      expect(feedback.difficulty).to eq(params[:difficulty])
       expect(feedback.improvement_suggestion).to eq(params[:improvement_suggestion])
     end
 

@@ -9,6 +9,14 @@ class Feedback < ApplicationRecord
     very_satisfied: 4
   }
 
+  enum difficulty: {
+    very_difficult: 0,
+    difficult: 1,
+    neither_difficult_nor_easy: 2,
+    easy: 3,
+    very_easy: 4
+  }
+
   after_create do
     ActiveSupport::Notifications.instrument 'dashboard.feedback_created'
   end

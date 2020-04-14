@@ -2,8 +2,10 @@
 en:
   feedback:
     new:
+      contact_email: Please provide your email address if you'd like a response
+      difficulty: How easy or difficult was it to apply for legal aid using the new service?
       done_all_needed: Were you able to do what you needed today?
-      improvement_suggestion: How could we improve this service?
+      improvement_suggestion: Do you have any other feedback or suggestions on how we could improve the service?
       satisfaction: Overall, how satisfied were you with this service?
       signed_out: You are signed out
       title: Help us improve this service
