@@ -1,7 +1,7 @@
-<%= page_template page_title: t('.title'), back_link: back_button, success_message: success_message do %>
-    <%= form_for(@feedback, url: feedback_index_path) do |form| %>
+<%= page_template page_title: t('.title'), show_errors_for: @feedback, back_link: back_button, success_message: success_message do %>
+  <%= form_for(@feedback, url: feedback_index_path) do |form| %>
 
-      <%= form.govuk_collection_radio_buttons(
+    <%= form.govuk_collection_radio_buttons(
             :done_all_needed,
             [true, false],
             inline: true,
@@ -9,43 +9,40 @@
               text: t('.done_all_needed'),
               size: :m
             }
-          ) %>
+        ) %>
 
     <%= Feedback.enum_radio_buttons(
             form, :difficulty,
             order: :reverse,
             args: {
                 title: {
-                    text: t('.difficulty'),
-                    size: :m
+                  text: t('.difficulty'),
+                  size: :m
                 }
             }
         ) %>
 
-      <%= Feedback.enum_radio_buttons(
+    <%= Feedback.enum_radio_buttons(
             form, :satisfaction,
             order: :reverse,
             args: {
-              title: {
-                text: t('.satisfaction'),
-                size: :m
-              }
+                title: {
+                  text: t('.satisfaction'),
+                  size: :m
+                }
             }
-          ) %>
+        ) %>
 
-      <p class="govuk-heading-m"><%= t('.improvement_suggestion') %></p>
-
-      <%= form.govuk_text_area(
+    <%= form.govuk_text_area(
             :improvement_suggestion,
             label: {
-              text: t('.contact_email'),
+              hint: t('.contact_email'),
               size: :m
             },
             rows: 4,
             class: 'govuk-!-width-full'
-          ) %>
+        ) %>
+    <%= form.submit t('generic.send'), class: 'govuk-button' %>
 
-      <%= form.submit t('generic.send'), class: 'govuk-button' %>
-
-    <% end %>
+  <% end %>
 <% end %>

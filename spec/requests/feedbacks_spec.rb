@@ -54,6 +54,24 @@ RSpec.describe 'FeedbacksController', type: :request do
         expect(response).to redirect_to(feedback_path(feedback))
       end
     end
+
+    context 'with no satisfaction params' do
+      let(:params) { { satisfaction: '' } }
+
+      it 'does not create a feedback to record browser data' do
+        expect { subject.save }.not_to change { Feedback.count }
+      end
+
+      it 'does not send an email' do
+        expect(FeedbackMailer).not_to receive(:notify)
+        subject
+      end
+
+      it 'renders to show action a page' do
+        subject
+        expect(response).to redirect_to(feedback_path(feedback))
+      end
+    end
   end
 
   describe 'GET /feedback/new' do

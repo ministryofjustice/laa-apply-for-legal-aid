@@ -6,11 +6,16 @@ class FeedbackController < ApplicationController
   end
 
   def create
-    feedback.update!(feedback_params)
+    @feedback = Feedback.new(feedback_params)
     # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
-    FeedbackMailer.notify(feedback).deliver_later! if feedback_submitted?
+    FeedbackMailer.notify(feedback).deliver_later! if @feedback.save
+    render 'feedback/new'
+    # redirect_to feedback_path(feedback)
 
-    redirect_to feedback
+    # feedback.update!(feedback_params)
+    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
+    # FeedbackMailer.notify(feedback).deliver_later! if feedback_submitted?
+    # redirect_to feedback
   end
 
   def show
