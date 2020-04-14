@@ -120,10 +120,6 @@ module CFE
         property[:main_home]
       end
 
-      def outstanding_mortgage
-        main_home[:outstanding_mortgage]
-      end
-
       def additional_properties
         property[:additional_properties]
       end

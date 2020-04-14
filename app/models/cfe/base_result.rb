@@ -27,10 +27,6 @@ module CFE
       assessment_result == 'eligible'
     end
 
-    def main_home
-      property[:main_home]
-    end
-
     ################################################################
     #                                                              #
     #  MAIN HOME VALUES                                            #
