@@ -27,46 +27,94 @@ module CCMS
       end
 
       context 'manual review setting false' do
-        # Zero Capital/Zero contribution/No restrictions = AUTOMATED
-        # Zero Capital/Zero contribution/Restrictions apply = AUTOMATED
-        # >0 Capital/Zero contribution/Restrictions apply = AUTOMATED
-        # >0 Capital/>0 contribution/No Restrictions = MANUAL REVIEW
-        # >0 Capital/>0 contribution/Restrictions apply = MANUAL REVIEW
-
-        before { setting.update! manually_review_all_cases: false }
-
         let(:legal_aid_application) { cfe_result.legal_aid_application }
+        before do
+          legal_aid_application.benefit_check_result = benefit_check_result
+          setting.update! manually_review_all_cases: false
+        end
 
-        context 'when there is no_capital and no contribution required' do
-          let(:cfe_result) { create :cfe_v2_result, :eligible, :no_capital }
+        context 'when the applicant is passported' do
+          let(:benefit_check_result) { build :benefit_check_result, :positive }
+          # Zero Capital/Zero contribution/No restrictions = AUTOMATED
+          # Zero Capital/Zero contribution/Restrictions apply = AUTOMATED
+          # >0 Capital/Zero contribution/Restrictions apply = AUTOMATED
+          # >0 Capital/>0 contribution/No Restrictions = MANUAL REVIEW
+          # >0 Capital/>0 contribution/Restrictions apply = MANUAL REVIEW
 
-          context 'no restrictions on assets' do
-            it { is_expected.to be false }
+          context 'when there is no_capital and no contribution required' do
+            let(:cfe_result) { create :cfe_v2_result, :eligible, :no_capital }
+
+            context 'no restrictions on assets' do
+              it { is_expected.to be false }
+            end
+
+            context 'when there are restrictions on the assets' do
+              before { legal_aid_application.update! has_restrictions: true }
+
+              it { is_expected.to be false }
+            end
           end
 
-          context 'when there are restrictions on the assets' do
-            before { legal_aid_application.update! has_restrictions: true }
+          context 'has capital' do
+            let(:cfe_result) { create :cfe_v2_result, :eligible }
 
-            it { is_expected.to be false }
+            context 'no contribution required, no restrictions on assets' do
+              it { is_expected.to be false }
+            end
+
+            context 'contribution required' do
+              let(:cfe_result) { create :cfe_v1_result, :contribution_required }
+
+              context 'when there are no restrictions on assets' do
+                it { is_expected.to be true }
+              end
+
+              context 'when there are restrictions on assets' do
+                it { is_expected.to be true }
+              end
+            end
           end
         end
 
-        context 'has capital' do
-          let(:cfe_result) { create :cfe_v2_result, :eligible }
+        context 'when the applicant is non-passported' do
+          let(:benefit_check_result) { build :benefit_check_result }
+          # Zero Capital/Zero contribution/No restrictions = MANUAL REVIEW
+          # Zero Capital/Zero contribution/Restrictions apply = MANUAL REVIEW
+          # >0 Capital/Zero contribution/Restrictions apply = MANUAL REVIEW
+          # >0 Capital/>0 contribution/No Restrictions = MANUAL REVIEW
+          # >0 Capital/>0 contribution/Restrictions apply = MANUAL REVIEW
 
-          context 'no contribution required, no restrictions on assets' do
-            it { is_expected.to be false }
-          end
+          context 'when there is no_capital and no contribution required' do
+            let(:cfe_result) { create :cfe_v2_result, :eligible, :no_capital }
 
-          context 'contribution required' do
-            let(:cfe_result) { create :cfe_v2_result, :contribution_required }
-
-            context 'when there are no restrictions on assets' do
+            context 'no restrictions on assets' do
               it { is_expected.to be true }
             end
 
-            context 'when there are restrictions on assets' do
+            context 'when there are restrictions on the assets' do
+              before { legal_aid_application.update! has_restrictions: true }
+
               it { is_expected.to be true }
+            end
+          end
+
+          context 'has capital' do
+            let(:cfe_result) { create :cfe_v1_result, :eligible }
+
+            context 'no contribution required, no restrictions on assets' do
+              it { is_expected.to be true }
+            end
+
+            context 'contribution required' do
+              let(:cfe_result) { create :cfe_v1_result, :contribution_required }
+
+              context 'when there are no restrictions on assets' do
+                it { is_expected.to be true }
+              end
+
+              context 'when there are restrictions on assets' do
+                it { is_expected.to be true }
+              end
             end
           end
         end

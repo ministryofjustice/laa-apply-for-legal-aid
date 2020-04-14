@@ -14,12 +14,18 @@ module CCMS
     def call
       return true if Setting.manually_review_all_cases?
 
+      return true if application_is_non_passported?
+
       return true if contribution_required?
 
       false
     end
 
     private
+
+    def application_is_non_passported?
+      @legal_aid_application.non_passported?
+    end
 
     def contribution_required?
       @legal_aid_application.cfe_result.contribution_required?
