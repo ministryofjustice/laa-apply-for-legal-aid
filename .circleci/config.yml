@@ -350,98 +350,68 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  open_pr:
     jobs:
-    - lint_checks
-    - unit_tests
-    - integration_tests
-    - hold_webhint_notification:
-        requires:
-        - integration_tests
-    - hold_webhint:
-        type: approval
-        requires:
-        - integration_tests
-    - webhint_reports:
-        requires:
-          - hold_webhint
-  build_and_deploy:
-    jobs:
-    - build_and_push
-    - hold_uat_notification:
-        filters:
-          branches:
-            ignore:
-              - /dependabot\/bundler\/.*/
-              - master
-    - hold_uat:
-        type: approval
-        filters:
-          branches:
-            ignore:
-              - /dependabot\/bundler\/.*/
-              - master
-    - deploy_uat:
-        requires:
-        - hold_uat
-        - build_and_push
-        filters:
-          branches:
-            ignore:
-              - /dependabot\/bundler\/.*/
-              - master
-    - auto_deploy_uat:
-        requires:
+      - lint_checks:
+          filters:
+            branches:
+              ignore: master
+      - build_and_push:
+          requires:
+          - lint_checks
+      - auto_deploy_uat:
+          requires:
           - build_and_push
-        filters:
-          branches:
-            only:
-              - /dependabot\/bundler\/.*/
-              - master
-    - hold_staging_notification:
-        requires:
-        - build_and_push
-        filters:
-          branches:
-            only: master
-    - hold_staging:
-        type: approval
-        requires:
-        - build_and_push
-        filters:
-          branches:
-            only: master
-    - deploy_staging:
-        requires:
-        - hold_staging
-        filters:
-          branches:
-            only: master
-    - hold_production_notification:
-        requires:
-        - deploy_staging
-        filters:
-          branches:
-            only: master
-    - hold_production:
-        type: approval
-        requires:
-        - deploy_staging
-        filters:
-          branches:
-            only: master
-    - deploy_production:
-        requires:
-        - hold_production
-        filters:
-          branches:
-            only: master
-  delete_uat:
+      - unit_tests:
+          requires:
+          - lint_checks
+      - integration_tests:
+          requires:
+          - lint_checks
+      - webhint_reports:
+          requires:
+          - integration_tests
+
+  merge_pr:
     jobs:
-    - delete_uat:
-        filters:
-          branches:
-            only: master
+      - lint_checks:
+          filters:
+            branches:
+              only: master
+      - build_and_push:
+          requires:
+          - lint_checks
+      - auto_deploy_uat:
+          requires:
+            - build_and_push
+      - delete_uat:
+          requires:
+            - auto_deploy_uat
+      - unit_tests:
+          requires:
+            - lint_checks
+      - integration_tests:
+          requires:
+            - lint_checks
+      - webhint_reports:
+          requires:
+            - integration_tests
+      - deploy_staging:
+          requires:
+            - webhint_reports
+            - unit_tests
+      - hold_production_notification:
+          requires:
+            - deploy_staging
+      - hold_production:
+          type: approval
+          requires:
+            - hold_production_notification
+            - delete_uat
+      - deploy_production:
+          requires:
+            - hold_production
+
   nightly:
     triggers:
     - schedule:
