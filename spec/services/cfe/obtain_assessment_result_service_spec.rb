@@ -17,7 +17,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
     describe '#cfe_url' do
       it 'contains the submission assessment id' do
         expect(service.cfe_url)
-          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments/#{submission.assessment_id}"
+          .to eq "#{Rails.configuration.x.check_financial_eligibility_host}/assessments/#{submission.assessment_id}"
       end
     end
 
