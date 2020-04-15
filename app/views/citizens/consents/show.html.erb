@@ -1,18 +1,50 @@
-<%= page_template page_title: t('.field_set_header') do %>
+<%= page_template page_title: t('.title') do %>
 
   <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
     <%= govuk_form_group(
           input: :open_banking_consent
         ) do %>
-
-      <p class="govuk-body govuk-!-margin-top-3"><%= t('.body') %></p>
-      <div class="govuk-checkboxes">
-        <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :open_banking_consent, label: t('.open_banking_consent.label.html'), govuk_hint: nil, form: form, checked: 'true', unchecked: 'false' } %>
+      <div class="govuk-inset-text">
+        <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.inset_text') %></p>
       </div>
-      <div class="govuk-!-padding-top-4"></div>
+      <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            <%= t('.summary_heading') %>
+          </span>
+        </summary>
 
-      <h2 class="govuk-heading-m"><%= t('.what_happens_next_header') %></h2>
-      <p class="govuk-body govuk-!-margin-0"><%= t('.what_happens_next_text') %></p>
+        <div class="govuk-details__text">
+          <p><%= t(".able_to_see.heading") %></p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <% t(".able_to_see.list").each_line do |item| %>
+              <li><%= item %></li>
+            <% end %>
+          </ul>
+
+          <p><%= t(".unable_to_see.heading") %></p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <% t(".unable_to_see.list").each_line do |item| %>
+              <li><%= item %></li>
+            <% end %>
+          </ul>
+        </div>
+      </details>
+
+
+      <%= form.govuk_radio_button(
+            :open_banking_consent,
+            true,
+            label: t('generic.yes')
+          ) %>
+
+      <%= form.govuk_radio_button(
+            :open_banking_consent,
+            false,
+            label: t('generic.no')
+          ) %>
     <% end %>
 
     <%= next_action_buttons(form: form) %>

@@ -38,9 +38,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       let(:params) { { legal_aid_application: { open_banking_consent: 'false' } } }
 
       it 'redirects to a holding page action' do
-        # TODO: add new path
-        # expect(response).to redirect_to(to_be_determined_path)
-        expect(unescaped_response_body).to include('Landing page: No Consent provided')
+        expect(response).to redirect_to(contact_solicitor_path)
       end
 
       it 'records the decision on the legal aid application' do
