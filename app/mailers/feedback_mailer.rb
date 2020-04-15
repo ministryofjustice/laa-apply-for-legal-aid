@@ -15,6 +15,7 @@ class FeedbackMailer < GovukNotifyRails::Mailer
       ].join(' - '),
       done_all_needed: feedback['done_all_needed'].to_s,
       satisfaction: (feedback['satisfaction'] || ''),
+      difficulty: (feedback['difficulty'] || ''),
       improvement_suggestion: (feedback['improvement_suggestion'] || '')
     )
     mail to: to

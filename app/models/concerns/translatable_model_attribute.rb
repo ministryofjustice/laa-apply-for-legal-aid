@@ -1,7 +1,7 @@
 # provides a method to translate the values of an enum or field with a fixed number of values like state
 # machine states.
 #
-# e.g. given that applicaiton is a LegalAidApplication record with the
+# e.g. given that application is a LegalAidApplication record with the
 # state containing the string "provider_submitted", then
 #
 #  application.enum_t(:state)

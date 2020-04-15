@@ -21,7 +21,7 @@ class FeedbackController < ApplicationController
 
   def feedback_params
     params.require(:feedback).permit(
-      :done_all_needed, :satisfaction, :improvement_suggestion
+      :done_all_needed, :satisfaction, :difficulty, :improvement_suggestion
     )
   end
 
