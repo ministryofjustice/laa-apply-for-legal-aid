@@ -12,7 +12,7 @@ module CFE
       end
 
       def capital_contribution_required?
-        capital[:assessment_result] == 'contribution_required'
+        capital_assessment_result == 'contribution_required'
       end
 
       def capital_contribution
@@ -24,7 +24,7 @@ module CFE
       end
 
       def income_contribution_required?
-        disposable_income[:assessment_result] == 'contribution_required'
+        income_assessment_result == 'contribution_required'
       end
 
       def income_contribution
