@@ -10,9 +10,9 @@ class FeedbackController < ApplicationController
     # must use bang version `deliver_later!` or failures won't be retried by sidekiq
     if @feedback.save
       FeedbackMailer.notify(@feedback).deliver_later!
-      render 'feedback/show'
+      render :show
     else
-      render 'feedback/new'
+      render :new
     end
   end
 
