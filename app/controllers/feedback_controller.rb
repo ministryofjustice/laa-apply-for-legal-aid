@@ -9,11 +9,21 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.new(feedback_params)
     # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
     FeedbackMailer.notify(feedback).deliver_later! if @feedback.save
+
     render 'feedback/new'
-    # redirect_to feedback_path(feedback)
+
+    # if feedback_responses_submitted?
+    #  @feedback = Feedback.new(feedback_params)
+    #  # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
+    #  FeedbackMailer.notify(feedback).deliver_later! if @feedback.save
+    #
+    #  render 'feedback/show'
+    # else
+    #  render 'feedback/new'
+    # end
 
     # feedback.update!(feedback_params)
-    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
+    ## Must use bang version `deliver_later!` or failures won't be retried by sidekiq
     # FeedbackMailer.notify(feedback).deliver_later! if feedback_submitted?
     # redirect_to feedback
   end
@@ -69,5 +79,9 @@ class FeedbackController < ApplicationController
 
   def feedback_submitted?
     feedback_params.values.any?(&:present?)
+  end
+
+  def feedback_responses_submitted?
+    feedback_params[:satisfaction].present? && feedback_params[:difficulty].present?
   end
 end
