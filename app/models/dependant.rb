@@ -3,6 +3,30 @@ class Dependant < ApplicationRecord
 
   belongs_to :legal_aid_application
 
+  validates :in_full_time_education,
+            :has_assets_more_than_threshold,
+            :has_income,
+            inclusion: { in: [true, false] }
+
+  validates :number,
+            :name,
+            :date_of_birth,
+            :relationship,
+            :monthly_income,
+            :assets_value,
+            presence: true
+
+  before_validation :populate_with_default_values
+
+  DEFAULT_VALUES = {
+    in_full_time_education: false,
+    has_assets_more_than_threshold: false,
+    has_income: false,
+    relationship: 'child_relative',
+    monthly_income: 0.0,
+    assets_value: 0.0
+  }.freeze
+
   enum relationship: {
     child_relative: 'child_relative'.freeze,
     adult_relative: 'adult_relative'.freeze
@@ -22,5 +46,9 @@ class Dependant < ApplicationRecord
 
   def eighteen_or_less?
     age < 19
+  end
+
+  def populate_with_default_values
+    DEFAULT_VALUES.each { |attr, value| self[attr] = value if self[attr].nil? }
   end
 end
