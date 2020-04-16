@@ -1,10 +1,6 @@
 ---
 en:
   feedback:
-    errors:
-      attributes:
-        satisfaction:
-          blank: this is my meeesage
     new:
       difficulty: How easy or difficult was it to apply for legal aid using the new service?
       done_all_needed: Were you able to do what you needed today?
