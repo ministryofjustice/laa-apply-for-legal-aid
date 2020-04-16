@@ -34,32 +34,14 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     it 'redirects to show action' do
       subject
-      expect(response).to redirect_to(feedback_path(feedback))
-    end
-
-    context 'with empty params' do
-      let(:params) { { improvement_suggestion: '' } }
-
-      it 'creates a feedback to record browser data' do
-        expect { subject }.to change { Feedback.count }.by(1)
-      end
-
-      it 'does not send an email' do
-        expect(FeedbackMailer).not_to receive(:notify)
-        subject
-      end
-
-      it 'renders to show action a page' do
-        subject
-        expect(response).to redirect_to(feedback_path(feedback))
-      end
+      expect(response.body).to include(I18n.t('.feedback.show.title'))
     end
 
     context 'with no satisfaction params' do
       let(:params) { { satisfaction: '' } }
 
       it 'does not create a feedback to record browser data' do
-        expect { subject.save }.not_to change { Feedback.count }
+        expect { subject }.not_to change { Feedback.count }
       end
 
       it 'does not send an email' do
@@ -67,9 +49,9 @@ RSpec.describe 'FeedbacksController', type: :request do
         subject
       end
 
-      it 'renders to show action a page' do
+      it 'shows errors on the page' do
         subject
-        expect(response).to redirect_to(feedback_path(feedback))
+        expect(unescaped_response_body).to include(I18n.t('.activerecord.errors.models.feedback.attributes.satisfaction.blank'))
       end
     end
   end
