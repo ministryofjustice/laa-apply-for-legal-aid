@@ -402,8 +402,12 @@ en:
         client_details_heading: Client details
         benefit_check_heading: Passported means
         capital_result_heading: Capital result
+        income_result_heading: Income result
         assets_heading: Property, savings and other assets
         question_receives_benefit: In receipt of passporting benefit
+        income_details_heading: Income
+        debits-section-heading: Outgoings
+        deductions-section-heading: Deductions
     offline_accounts:
         show:
           h1-heading: Which bank accounts does your client have?

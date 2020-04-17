@@ -24,6 +24,39 @@
         ) %>
   </dl>
 
+  <% if @legal_aid_application.non_passported? %>
+    <h2 class="govuk-heading-m">
+      <%= t('.income_result_heading') %>
+    </h2>
+
+    <%= render 'shared/check_answers/income_result', read_only: true %>
+
+    <section class="print-no-break">
+      <h2 class="govuk-heading-m">
+        <%= t('.income_details_heading') %>
+      </h2>
+      <%= render 'shared/check_answers/income_details' %>
+    </section>
+
+    <div class="govuk-!-padding-bottom-8"></div>
+
+    <section class="print-no-break">
+      <h2 class="govuk-heading-l"><%= t('.debits-section-heading') %></h2>
+      <%= render 'shared/check_answers/outgoings_details' %>
+    </section>
+
+    <div class="govuk-!-padding-bottom-8"></div>
+
+    <section class="print-no-break">
+      <h2 class="govuk-heading-l"><%= t('.deductions-section-heading') %></h2>
+      <%= render 'shared/check_answers/deductions_details' %>
+    </section>
+
+    <div class="govuk-!-padding-bottom-8"></div>
+
+  <%end %>
+
+
   <h2 class="govuk-heading-m">
     <%= t('.capital_result_heading') %>
   </h2>

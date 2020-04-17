@@ -39,8 +39,28 @@ module CFE
         result_hash[:assessment][:gross_income]
       end
 
+      def total_disposable_income_assessed
+        disposable_income[:total_disposable_income]
+      end
+
+      def total_gross_income_assessed
+        gross_income[:total_gross_income]
+      end
+
+      def gross_income_upper_threshold
+        gross_income[:upper_threshold]
+      end
+
       def disposable_income
         result_hash[:assessment][:disposable_income]
+      end
+
+      def disposable_income_lower_threshold
+        disposable_income[:lower_threshold]
+      end
+
+      def disposable_income_upper_threshold
+        disposable_income[:upper_threshold]
       end
 
       def outgoings
@@ -63,6 +83,10 @@ module CFE
 
       def monthly_other_income
         gross_income[:monthly_other_income].to_d
+      end
+
+      def monthly_state_benefits
+        gross_income[:monthly_state_benefits]
       end
 
       def maintenance_per_month
@@ -144,6 +168,92 @@ module CFE
 
       def total_vehicles
         capital[:total_vehicle].to_d
+      end
+
+      ################################################################
+      #                                                              #
+      #  MONTHLY INCOME EQUIVALENTS                                  #
+      #                                                              #
+      ################################################################
+
+      def mei_friends_or_family
+        monthly_income_equivalents[:friends_or_family].to_d
+      end
+
+      def mei_maintenance_in
+        monthly_income_equivalents[:maintenance_in].to_d
+      end
+
+      def mei_property_or_lodger
+        monthly_income_equivalents[:property_or_lodger].to_d
+      end
+
+      def mei_student_loan
+        monthly_income_equivalents[:student_loan].to_d
+      end
+
+      def mei_pension
+        monthly_income_equivalents[:pension].to_d
+      end
+
+      ################################################################
+      #                                                              #
+      #  MONTHLY_OUTGOING_EQUIVALENTS                                #
+      #                                                              #
+      ################################################################
+
+      def moe_housing
+        monthly_outgoing_equivalents[:rent_or_mortgage].to_d.abs
+      end
+
+      def moe_childcare
+        monthly_outgoing_equivalents[:child_care].to_d.abs
+      end
+
+      def moe_maintenance_out
+        monthly_outgoing_equivalents[:maintenance_out].to_d.abs
+      end
+
+      def moe_legal_aid
+        monthly_outgoing_equivalents[:legal_aid].to_d.abs
+      end
+
+      def total_monthly_outgoings
+        moe_housing + moe_childcare + moe_maintenance_out + moe_legal_aid
+      end
+
+      ################################################################
+      #                                                              #
+      #  DEDUCTIONS                                                  #
+      #                                                              #
+      ################################################################
+
+      def dependants_allowance
+        deductions[:dependants_allowance].to_d
+      end
+
+      def disregarded_state_benefits
+        deductions[:disregarded_state_benefits].to_d
+      end
+
+      def total_deductions
+        dependants_allowance + disregarded_state_benefits
+      end
+
+      private
+
+      def monthly_income_equivalents
+        gross_income[:monthly_income_equivalents]
+      end
+
+      def monthly_outgoing_equivalents
+        gross_income[:monthly_outgoing_equivalents]
+      end
+
+      def deductions
+        # stub out zero values if not found until CFE is updated.
+        # 
+        disposable_income[:deductions] || { dependants_allowance: '0.0', disregarded_state_benefits: '0.0' }
       end
     end
   end

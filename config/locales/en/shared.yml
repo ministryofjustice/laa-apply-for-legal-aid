@@ -19,6 +19,25 @@ en:
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref: 'CCMS case reference:'
+    means_report:
+      item:
+        deductions:
+          dependants_allowance: Dependants allowance
+          disregarded_state_benefits: Income from benefits excluded from calculation
+        income:
+          benefits: Benefits
+          family_help: Financial help from friends or family
+          maintenance_in: Maintenance payments
+          property_or_lodger: Income from property or lodger
+          student_loan: Student loan or grant
+          pension: Pension
+          total_income: Total income
+        outgoing:
+          housing: Housing costs
+          childcare: Childcare costs
+          maintenance_out: Maintenance payments
+          legal_aid: Legal aid payments
+          total_outgoing: Total outgoings
     check_answers:
       assets:
         assets:
@@ -51,6 +70,22 @@ en:
         first_name: First name
         last_name: Last name
         nino: National Insurance number
+      income_details:
+        income:
+          benefits: Benefits
+          family_help: Financial help from friends or family
+          maintenance_in: Maintenance payments
+          property_or_lodger: Income from property or lodger
+          student_loan: Student loan or grant
+          pension: Pension
+          total_income: Total income
+      income_result:
+        total_disposable_income: Total disposable income asssessed
+        total_gross_income: Total gross income assessed
+        gross_income_limit: Gross income limit
+        disposable_income_lower_limit: Disposable income lower limit
+        disposable_income_upper_limit: Disposable income upper limit
+        disposable_income_contribution: Income contribution
       merits:
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
