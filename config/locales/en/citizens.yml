@@ -47,11 +47,15 @@ en:
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+    contact_providers:
+      show:
+        title: Contact your solicitor to continue your application
+        they_will_check: They will check whether you qualify for legal aid by asking about your finances.
     consents:
       show:
         title: Do you agree to share your bank account information with the LAA?
         inset_text: We only use your financial information to support your legal aid application. We do not use it for anything else.
-        summary_heading: What information will the LAA will be able to see?
+        summary_heading: What information will the LAA be able to see?
         able_to_see: 
           heading: "We'll be able to see your:"
           list: |
