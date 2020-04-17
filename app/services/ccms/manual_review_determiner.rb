@@ -4,7 +4,7 @@ module CCMS
   #
   # This is used in two cases:
   #  - to determine the value of the APPLY_CASE_MEANS_REVIEW attribute for CCMS payload
-  #  - to determine which header on the assessment results page to display
+  #  - to determine which header on the assessment results pages to display
   #
   class ManualReviewDeterminer
     attr_reader :legal_aid_application
@@ -28,9 +28,7 @@ module CCMS
     def call
       return true if Setting.manually_review_all_cases?
 
-      return true if passported? && contribution_required?
-
-      return true if non_passported? && contribution_required? && has_restrictions?
+      return true if contribution_required? && has_restrictions?
 
       false
     end
