@@ -26,6 +26,12 @@ en:
               taken: The label is already used by another Benefit Type
             description:
               blank: Description must be present
+        feedback:
+          attributes:
+            satisfaction:
+              blank: Satisfaction response must be included
+            difficulty:
+              blank: Difficulty response must be included
         legal_aid_application:
           attributes:
             base:

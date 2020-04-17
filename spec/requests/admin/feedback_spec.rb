@@ -6,7 +6,7 @@ RSpec.describe Admin::FeedbackController, type: :request do
   let(:params) { {} }
 
   before do
-    create :feedback, satisfaction: nil
+    create :feedback, satisfaction: 'satisfied'
     create_list :feedback, count
     sign_in admin_user
   end
@@ -31,9 +31,14 @@ RSpec.describe Admin::FeedbackController, type: :request do
       end
     end
 
-    it 'substitutes placeholder text if user ignores a field' do
-      subject
-      expect(response.body).to include(I18n.t('.generic.not_completed'))
+    context 'with no response to done_all_needed' do
+      let(:feedback) { create :feedback, done_all_needed: nil }
+
+      it 'substitutes placeholder text if user ignores a field' do
+        feedback
+        subject
+        expect(response.body).to include(I18n.t('.generic.not_completed'))
+      end
     end
 
     context 'with pagination' do
