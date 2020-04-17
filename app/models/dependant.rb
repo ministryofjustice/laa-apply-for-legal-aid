@@ -3,21 +3,6 @@ class Dependant < ApplicationRecord
 
   belongs_to :legal_aid_application
 
-  validates :in_full_time_education,
-            :has_assets_more_than_threshold,
-            :has_income,
-            inclusion: { in: [true, false] }
-
-  validates :number,
-            :name,
-            :date_of_birth,
-            :relationship,
-            :monthly_income,
-            :assets_value,
-            presence: true
-
-  before_validation :populate_with_default_values
-
   DEFAULT_VALUES = {
     in_full_time_education: false,
     has_assets_more_than_threshold: false,
@@ -48,7 +33,19 @@ class Dependant < ApplicationRecord
     age < 19
   end
 
-  def populate_with_default_values
-    DEFAULT_VALUES.each { |attr, value| self[attr] = value if self[attr].nil? }
+  def as_json
+    {
+      date_of_birth: date_of_birth.strftime('%Y-%m-%d'),
+      relationship: value_or_default(:relationship),
+      monthly_income: value_or_default(:monthly_income),
+      in_full_time_education: value_or_default(:in_full_time_education),
+      assets_value: value_or_default(:assets_value)
+    }
+  end
+
+  private
+
+  def value_or_default(attribute)
+    __send__(attribute) || DEFAULT_VALUES[attribute]
   end
 end
