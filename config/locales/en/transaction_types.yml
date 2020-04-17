@@ -15,17 +15,17 @@ en:
         salary: Salary or wages
         student_loan: Student loan or grant
       providers:
-        benefits: Benefits like Universal Credit or Child Benefit
+        benefits: Benefits
         child_care: Childcare costs to a nursery or registered provider
         friends_or_family: Financial help from friends or family
         legal_aid: Payments towards legal aid in a criminal case
-        maintenance_in: Maintenance payments for them or their children
+        maintenance_in: Maintenance payments
         maintenance_out: Maintenance payments for children or an ex-partner
-        pension: Income from a State, work or personal pension
+        pension: Pension
         property_or_lodger: Income from a property or lodger
         rent_or_mortgage: Rent or mortgage payments
         salary: Salary or wages
-        student_loan: Money from a student loan or grant
+        student_loan: Student loan or grant
     table_label:
       benefits: Benefits
       child_care: Childcare
@@ -46,7 +46,27 @@ en:
       maintenance_in: Select maintenance payments
       maintenance_out: Select maintenance payments
       pension: Select pension payments
-      property_or_lodger: Select income from a property or lodger
+      property_or_lodger: Select payments from a property or lodger
       rent_or_mortgage: Select rent or mortgage payments
       salary: Select salary or wage payments
       student_loan: Select student loan or grant payments
+    dates_span: "%{start_at} to %{finish_at}"
+    benefits:
+      inset_text: Select every benefits payment your client received in the past 3 months.
+    friends_or_family:
+      inset_text: Select every payment your client received from friends or family in the past 3 months.
+      details_summary_heading: Not sure which payments to select?      
+      subheading: "Payments from friends or family count as income if they are all of the following:"
+      list: |
+        regular (for example, two or more in the last month)
+        from the same person
+        gifts (your client will not repay them)
+        meant for living expenses (for example, housing costs)
+    maintenance_in:
+      inset_text: Select every maintenance payment your client received in the past 3 months.
+    property_or_lodger:
+      inset_text: Select every payment your client received from property or a lodger in the past 3 months.
+    student_loan:
+      inset_text: Select every student loan or grant payment your client received in the past 3 months.
+    pension:
+      inset_text: Select every pension payment your client received in the past 3 months.
