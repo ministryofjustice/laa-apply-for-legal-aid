@@ -10,27 +10,17 @@ module CFE
     end
 
     def overview
-      if capital_contribution_required? && !legal_aid_application.has_restrictions?
-        'contribution_required'
-      elsif capital_contribution_required? && legal_aid_application.has_restrictions?
-        'manual_check_required'
-      else
-        assessment_result
-      end
+      return 'manual_check_required' if manual_check_required?
+
+      return determine_type_of_contribution if assessment_result == 'contribution_required'
+
+      assessment_result
     end
 
-    def capital_contribution_required?
-      assessment_result == 'contribution_required'
-    end
-
-    alias contribution_required? capital_contribution_required?
+    # alias contribution_required? capital_contribution_required?
 
     def eligible?
       assessment_result == 'eligible'
-    end
-
-    def main_home
-      property[:main_home]
     end
 
     ################################################################
@@ -147,6 +137,20 @@ module CFE
 
     def existing_and_not_all_zero?(property)
       property.present? && property[:value].to_d > 0.0
+    end
+
+    private
+
+    def manual_check_required?
+      CCMS::ManualReviewDeterminer.call(legal_aid_application)
+    end
+
+    def determine_type_of_contribution
+      return 'capital_and_income_contribution_required' if capital_contribution_required? && income_contribution_required?
+
+      return 'capital_contribution_required' if capital_contribution_required?
+
+      'income_contribution_required'
     end
   end
 end

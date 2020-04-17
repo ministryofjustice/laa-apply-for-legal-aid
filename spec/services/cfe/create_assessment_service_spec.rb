@@ -15,7 +15,7 @@ module CFE
     describe '#cfe_url' do
       it 'returns the assessment endpoint' do
         expect(service.cfe_url)
-          .to eq "#{Rails.configuration.x.check_finanical_eligibility_host}/assessments"
+          .to eq "#{Rails.configuration.x.check_financial_eligibility_host}/assessments"
       end
     end
 

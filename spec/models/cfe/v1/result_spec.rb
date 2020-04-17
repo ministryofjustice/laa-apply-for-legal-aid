@@ -14,6 +14,7 @@ module CFE
 
       describe '#overview' do
         context 'applicant is eligible' do
+          before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(eligible_result.legal_aid_application).and_return(false) }
           it 'returns assessment result' do
             expect(eligible_result.overview).to eq 'eligible'
           end
@@ -28,9 +29,10 @@ module CFE
         end
 
         context 'applicant has contribution required and no restrictions' do
+          before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(contribution_required_result.legal_aid_application).and_return(false) }
           it 'returns manual_check_required' do
             expect(contribution_required_result.capital_contribution_required?).to be true
-            expect(contribution_required_result.overview).to eq 'contribution_required'
+            expect(contribution_required_result.overview).to eq 'capital_contribution_required'
           end
         end
       end

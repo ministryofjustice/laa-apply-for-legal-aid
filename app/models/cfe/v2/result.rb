@@ -7,16 +7,32 @@ module CFE
         result_hash[:assessment][:assessment_result]
       end
 
+      def capital_assessment_result
+        capital[:assessment_result]
+      end
+
+      def capital_contribution_required?
+        capital_assessment_result == 'contribution_required'
+      end
+
       def capital_contribution
         capital[:capital_contribution].to_d
       end
 
-      def capital
-        result_hash[:assessment][:capital]
+      def income_assessment_result
+        disposable_income[:assessment_result]
       end
 
-      def property
-        capital[:capital_items][:properties]
+      def income_contribution_required?
+        income_assessment_result == 'contribution_required'
+      end
+
+      def income_contribution
+        disposable_income[:income_contribution].to_d
+      end
+
+      def capital
+        result_hash[:assessment][:capital]
       end
 
       def gross_income
@@ -32,7 +48,7 @@ module CFE
       end
 
       def vehicles
-        capital[:capital_items]
+        capital[:capital_items][:vehicles]
       end
 
       ################################################################
@@ -96,6 +112,18 @@ module CFE
         capital[:total_capital]
       end
 
+      def property
+        capital[:capital_items][:properties]
+      end
+
+      def main_home
+        property[:main_home]
+      end
+
+      def additional_properties
+        property[:additional_properties]
+      end
+
       ################################################################
       #                                                              #
       #  VEHICLE                                                     #
@@ -103,11 +131,11 @@ module CFE
       ################################################################
 
       def vehicle
-        vehicles[:vehicles].first
+        vehicles.first
       end
 
       def vehicles?
-        vehicles[:vehicles].any?
+        vehicles.any?
       end
 
       def vehicle_value

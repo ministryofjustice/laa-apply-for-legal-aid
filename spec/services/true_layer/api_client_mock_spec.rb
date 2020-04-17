@@ -76,7 +76,7 @@ RSpec.describe TrueLayer::ApiClientMock do
       end
 
       before do
-        stub_const('TrueLayer::SampleTransactionsCsvParser::TRANSACTIONS_CSV', csv_file)
+        expect(Setting).to receive(:bank_transaction_filename).and_return(csv_file)
       end
 
       it 'returns the sample data' do

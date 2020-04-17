@@ -21,6 +21,10 @@ RSpec.describe StateBenefitAnalyserService do
         subject
         expect(legal_aid_application.reload.bank_transactions.order(:id)).to eq transactions
       end
+
+      it 'does not add any transaction types to the legal aid application' do
+        expect { subject }.not_to change { legal_aid_application.transaction_types.count }
+      end
     end
 
     context 'DWP payment for a different nino' do
@@ -28,6 +32,10 @@ RSpec.describe StateBenefitAnalyserService do
       it 'does not mark the transaction as a state benefit' do
         subject
         expect(legal_aid_application.reload.bank_transactions).to eq transactions
+      end
+
+      it 'does not add any transaction types to the legal aid application' do
+        expect { subject }.not_to change { legal_aid_application.transaction_types.count }
       end
     end
 
@@ -44,6 +52,12 @@ RSpec.describe StateBenefitAnalyserService do
         tx = legal_aid_application.reload.bank_transactions.first
         expect(tx.meta_data).to eq 'disability_living_allowance'
       end
+
+      it 'adds a transaction type of benefits to the legal aid application' do
+        expect(legal_aid_application.transaction_types.count).to be_zero
+        subject
+        expect(legal_aid_application.transaction_types).to eq [state_benefit_transaction_type]
+      end
     end
 
     context 'DWP payment for this applicant with unrecognised code' do
@@ -58,6 +72,12 @@ RSpec.describe StateBenefitAnalyserService do
         subject
         tx = legal_aid_application.reload.bank_transactions.first
         expect(tx.meta_data).to eq 'Unknown code XXXX'
+      end
+
+      it 'adds a transaction type of benefits to the legal aid application' do
+        expect(legal_aid_application.transaction_types.count).to be_zero
+        subject
+        expect(legal_aid_application.transaction_types).to eq [state_benefit_transaction_type]
       end
     end
 

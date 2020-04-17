@@ -90,7 +90,7 @@ module CCMS
           end
 
           context 'contribution_required' do
-            let!(:cfe_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
             it 'returns In Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'In Scope'
@@ -100,9 +100,14 @@ module CCMS
           end
 
           context 'invalid response' do
-            let!(:cfe_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission, result: { assessment: { assessment_result: 'Unknown' } }.to_json }
+            let!(:cfe_result) do
+              create(:cfe_v2_result,
+                     :with_unknown_result,
+                     submission: cfe_submission)
+            end
+
             it 'raises' do
-              expect { xml }.to raise_error RuntimeError, 'Unexpected assessment result: Unknown'
+              expect { xml }.to raise_error RuntimeError, 'Unexpected assessment result: unknown'
             end
           end
         end
@@ -139,11 +144,11 @@ module CCMS
           end
 
           context 'contribution_required' do
-            let!(:cfe_result) { create :cfe_v2_result, :contribution_required, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
             it 'returns the capital contribution' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)
-                expect(block).to have_currency_response '6552.05'
+                expect(block).to have_currency_response '465.66'
               end
             end
           end
