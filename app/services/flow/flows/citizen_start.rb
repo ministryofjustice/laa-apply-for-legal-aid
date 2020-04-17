@@ -11,7 +11,12 @@ module Flow
         },
         consents: {
           path: ->(_) { urls.citizens_consent_path },
-          forward: :banks
+          forward: ->(application) do
+            application.open_banking_consent ? :banks : :contact_providers
+          end
+        },
+        contact_providers: {
+          path: ->(_) { urls.citizens_contact_provider_path }
         },
         banks: {
           path: ->(_) { urls.citizens_banks_path },

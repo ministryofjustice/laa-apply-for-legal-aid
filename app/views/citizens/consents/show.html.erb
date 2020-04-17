@@ -1,9 +1,15 @@
 <%= page_template page_title: t('.title') do %>
+<%= form_with(
+      model: @form,
+      url: citizens_consent_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
 
-  <%= form_with(model: @form, scope: :legal_aid_application, url: citizens_consent_path, local: true) do |form| %>
-    <%= govuk_form_group(
-          input: :open_banking_consent
-        ) do %>
+  <%= govuk_form_group show_error_if: @form.errors.present? do %>
+
+      <%= govuk_error_message(form.object.errors[:proceedings_before_the_court].first) %>
+
       <div class="govuk-inset-text">
         <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.inset_text') %></p>
       </div>
@@ -33,7 +39,6 @@
         </div>
       </details>
 
-
       <%= form.govuk_radio_button(
             :open_banking_consent,
             true,
@@ -47,6 +52,9 @@
           ) %>
     <% end %>
 
-    <%= next_action_buttons(form: form) %>
+    <%= next_action_buttons(
+      form: form,
+      continue_button_text: t('generic.continue')
+      ) %>
   <% end %>
 <% end %>
