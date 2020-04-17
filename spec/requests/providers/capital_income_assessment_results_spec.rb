@@ -122,8 +122,8 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
           expect(response).to have_http_status(:ok)
         end
 
-        it 'displays manual check required' do
-          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
+        it 'does not displays manual check required' do
+          expect(unescaped_response_body).not_to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
         end
       end
 

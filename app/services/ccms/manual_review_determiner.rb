@@ -14,7 +14,7 @@ module CCMS
              :non_passported?,
              :has_restrictions?, to: :legal_aid_application
 
-    delegate :contribution_required?, to: :cfe_result
+    delegate :capital_contribution_required?, to: :cfe_result
 
     def self.call(legal_aid_application)
       new(legal_aid_application).call
@@ -28,7 +28,7 @@ module CCMS
     def call
       return true if Setting.manually_review_all_cases?
 
-      return true if contribution_required? && has_restrictions?
+      return true if capital_contribution_required? && has_restrictions?
 
       false
     end

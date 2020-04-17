@@ -38,8 +38,8 @@ module CCMS
             let!(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
 
             context 'no restrictions' do
-              it 'returns true' do
-                expect(subject).to be true
+              it 'returns false' do
+                expect(subject).to be false
               end
             end
 
