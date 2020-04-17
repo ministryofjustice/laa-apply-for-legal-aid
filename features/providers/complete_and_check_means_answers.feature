@@ -5,7 +5,7 @@ Feature: Completing and checking means answers backwards and forwards
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
+    Then I should be on a page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
@@ -33,7 +33,7 @@ Feature: Completing and checking means answers backwards and forwards
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
+    Then I should be on a page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
