@@ -5,9 +5,6 @@ module CFE
     end
 
     def request_body
-      puts ">>>>>>>>>>>> request bogy #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-      puts({ dependants: dependants_data }.to_json)
-      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
       {
         dependants: dependants_data
       }.to_json
