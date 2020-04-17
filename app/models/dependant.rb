@@ -5,8 +5,6 @@ class Dependant < ApplicationRecord
 
   DEFAULT_VALUES = {
     in_full_time_education: false,
-    has_assets_more_than_threshold: false,
-    has_income: false,
     relationship: 'child_relative',
     monthly_income: 0.0,
     assets_value: 0.0
