@@ -13,7 +13,7 @@ module CFE
       let(:staging_host) { 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk' }
       let(:last_submission_history) { SubmissionHistory.order(created_at: :asc).last }
       before do
-        allow(Rails.configuration.x).to receive(:check_finanical_eligibility_host).and_return(staging_host)
+        allow(Rails.configuration.x).to receive(:check_financial_eligibility_host).and_return(staging_host)
       end
 
       it 'completes process' do

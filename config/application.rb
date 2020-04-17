@@ -68,7 +68,7 @@ module LaaApplyForLegalAid
     config.x.allow_non_passported_route = ENV['ALLOW_NON_PASSPORTED_ROUTE'] != 'false' # true by default
 
     config.x.slack_alerts_webhook = ENV['SLACK_ALERTS_WEBHOOK']
-    config.x.check_finanical_eligibility_host = ENV['CHECK_FINANCIAL_ELIGIBILITY_HOST']
+    config.x.check_financial_eligibility_host = ENV['CHECK_FINANCIAL_ELIGIBILITY_HOST']
 
     config.x.true_layer.client_id = ENV['TRUE_LAYER_CLIENT_ID']
     config.x.true_layer.client_secret = ENV['TRUE_LAYER_CLIENT_SECRET']

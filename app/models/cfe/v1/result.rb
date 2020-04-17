@@ -6,6 +6,14 @@ module CFE
         result_hash[:assessment_result]
       end
 
+      def income_contribution_required?
+        false
+      end
+
+      def capital_contribution_required?
+        result_hash[:assessment_result] == 'contribution_required'
+      end
+
       def capital_contribution
         result_hash[:capital][:capital_contribution].to_d
       end

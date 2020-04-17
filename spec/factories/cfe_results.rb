@@ -46,8 +46,16 @@ FactoryBot.define do
       result { CFEResults::V2::MockResults.no_capital.to_json }
     end
 
-    trait :contribution_required do
-      result { CFEResults::V2::MockResults.contribution_required.to_json }
+    trait :with_capital_contribution_required do
+      result { CFEResults::V2::MockResults.with_capital_contribution_required.to_json }
+    end
+
+    trait :with_income_contribution_required do
+      result { CFEResults::V2::MockResults.with_income_contribution_required.to_json }
+    end
+
+    trait :with_capital_and_income_contributions_required do
+      result { CFEResults::V2::MockResults.with_capital_and_income_contributions_required.to_json }
     end
 
     trait :no_additional_properties do
@@ -66,8 +74,12 @@ FactoryBot.define do
       result { CFEResults::V2::MockResults.with_maintenance_received.to_json }
     end
 
-    trait :no_mortgage do
-      result { CFEResults::V2::MockResults.no_mortgage.to_json }
+    trait :with_no_mortgage_costs do
+      result { CFEResults::V2::MockResults.with_no_mortgage_costs.to_json }
+    end
+
+    trait :with_unknown_result do
+      result { CFEResults::V2::MockResults.unknown.to_json }
     end
   end
 end

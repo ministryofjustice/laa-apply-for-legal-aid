@@ -1,15 +1,13 @@
 require 'csv'
 module TrueLayer
   class SampleTransactionsCsvParser
-    TRANSACTIONS_CSV = 'db/sample_data/bank_transactions.csv'.freeze
-
     def self.call
       new.call
     end
 
     def call
       @transaction_ids = []
-      CSV.read(Rails.root.join(TRANSACTIONS_CSV), headers: true).map do |row|
+      CSV.read(Rails.root.join(Setting.bank_transaction_filename), headers: true).map do |row|
         parse_transaction_csv_row(row.to_h.symbolize_keys)
       end
     end

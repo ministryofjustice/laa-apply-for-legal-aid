@@ -33,7 +33,7 @@ module CFE
     end
 
     def cfe_url_host
-      Rails.configuration.x.check_finanical_eligibility_host
+      Rails.configuration.x.check_financial_eligibility_host
     end
 
     def legal_aid_application
