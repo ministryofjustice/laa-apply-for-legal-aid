@@ -2,15 +2,18 @@ class FeedbackController < ApplicationController
   before_action :update_return_path
 
   def new
-    feedback
+    @feedback = Feedback.new
   end
 
   def create
-    feedback.update!(feedback_params)
-    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
-    FeedbackMailer.notify(feedback).deliver_later! if feedback_submitted?
-
-    redirect_to feedback
+    @feedback = Feedback.new(feedback_params)
+    # must use bang version `deliver_later!` or failures won't be retried by sidekiq
+    if @feedback.save
+      FeedbackMailer.notify(@feedback).deliver_later!
+      render :show
+    else
+      render :new
+    end
   end
 
   def show
@@ -22,16 +25,14 @@ class FeedbackController < ApplicationController
   def feedback_params
     params.require(:feedback).permit(
       :done_all_needed, :satisfaction, :difficulty, :improvement_suggestion
-    )
+    ).merge(browser_meta_data)
   end
 
-  def feedback
-    @feedback ||= Feedback.new(
-      source: source,
+  def browser_meta_data
+    { source: source,
       os: browser.platform.name,
       browser: browser.name,
-      browser_version: browser.full_version
-    )
+      browser_version: browser.full_version }
   end
 
   def back_path
@@ -60,9 +61,5 @@ class FeedbackController < ApplicationController
     return :Citizen if %r{/citizens/}.match?(path)
 
     :Unknown
-  end
-
-  def feedback_submitted?
-    feedback_params.values.any?(&:present?)
   end
 end
