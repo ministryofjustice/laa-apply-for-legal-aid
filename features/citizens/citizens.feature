@@ -8,10 +8,19 @@ Feature: Citizen journey
     Then I click link 'Start'
     Then I should be on a page showing 'Give one-time access to your bank accounts'
     Then I click link 'Continue'
-    Then I should be on a page showing 'Do you agree to share your bank transactions with us?'
-    Then I select 'I agree for you to check 3 months of bank transactions'
-    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you agree to share your bank account information with the LAA?'
+    Then I choose 'Yes'
+    Then I click 'Continue'
     Then I should be on a page showing 'Select your bank'
+    Then I click link "Back"
+    Then I should be on a page showing 'Do you agree to share your bank account information with the LAA?'
+    Then I choose 'No'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Contact your solicitor to continue your application'
+    Then I click link "Back"
+    Then I should be on a page showing 'Do you agree to share your bank account information with the LAA?'
+    Then I choose 'Yes'
+    Then I click 'Continue'
     Then I choose 'HSBC'
     Then I click 'Continue'
     Then I am directed to TrueLayer

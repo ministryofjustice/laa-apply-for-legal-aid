@@ -27,6 +27,10 @@ FactoryBot.define do
       state { 'provider_submitted' }
     end
 
+    trait :use_ccms do
+      state { 'use_ccms' }
+    end
+
     trait :client_details_answers_checked do
       state { 'client_details_answers_checked' }
     end
