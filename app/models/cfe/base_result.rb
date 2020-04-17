@@ -17,11 +17,7 @@ module CFE
       assessment_result
     end
 
-    def capital_contribution_required?
-      assessment_result == 'contribution_required'
-    end
-
-    alias contribution_required? capital_contribution_required?
+    # alias contribution_required? capital_contribution_required?
 
     def eligible?
       assessment_result == 'eligible'
