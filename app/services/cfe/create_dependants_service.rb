@@ -23,7 +23,7 @@ module CFE
     end
 
     def dependant_data(dependant)
-      dependant.as_json(only: %i[date_of_birth in_full_time_education relationship monthly_income assets_value])
+      dependant.as_json
     end
   end
 end
