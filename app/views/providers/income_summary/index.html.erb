@@ -1,19 +1,17 @@
 <%= page_template page_title: t('.page_heading') do %>
 
-  <h2 class="govuk-heading-m">
-    <%= t(
-          '.add_all_income',
-          start_at: l(@legal_aid_application.transaction_period_start_on.to_date, format: :long_date),
-          finish_at: l(@legal_aid_application.transaction_period_finish_on.to_date, format: :long_date)
-        ) %>
-  </h2>
+  <p class="gov-body"><%= t('.subheading') %></p>
+
+  <p class="gov-body"><%= t('.you_need_to.text') %></p>
+  <%= list_from_translation_path('.income_summary.index.you_need_to') %>
+
   <ol class="app-task-list">
     <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
       <%= render(
             'income_type_item',
             name: transaction_type.name,
             number: index + 1,
-            link_text: t(".select.#{transaction_type.name}"),
+            link_text: t(".select"),
             bank_transactions: @bank_transactions[transaction_type]
           ) %>
     <% end %>
