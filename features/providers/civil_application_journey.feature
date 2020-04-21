@@ -377,11 +377,15 @@ Feature: Civil application journeys
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     When I click link 'Add another type of income'
-    And I select 'Benefits like Universal Credit or Child Benefit'
+    And I select 'Benefits'
     And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And I click link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     When I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
@@ -405,7 +409,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click link 'View/change declared income'
-    Then I should be on a page showing "Your client's income"
+    Then I should be on a page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -419,11 +423,11 @@ Feature: Civil application journeys
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     When I click link 'Add another type of income'
-    And I select 'Benefits like Universal Credit or Child Benefit'
+    And I select 'Benefits'
     And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"

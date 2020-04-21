@@ -1,5 +1,27 @@
 <%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), column_width: 'full', template: :default do %>
 
+  <div class="govuk-inset-text"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
+
+  <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
+    <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
+      </summary>
+
+      <div class="govuk-details__text">
+        <%= t("transaction_types.#{@transaction_type.name}.subheading") %>
+
+        <div class="govuk-!-padding-bottom-4"></div>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <% t("transaction_types.#{@transaction_type.name}.list").each_line do |examples| %>
+            <li><%= examples %></li>
+          <% end %>
+        </ul>
+      </div>
+    </details>
+  <% end %>
+
   <div class="govuk-!-padding-bottom-4"></div>
 
   <%= form_with(method: :patch, local: true) do |form| %>
@@ -8,7 +30,7 @@
     <div id="screen-reader-messages" class="govuk-visually-hidden" role="alert" aria-live="assertive"></div>
     <table class="govuk-table sortable table-merge_columns">
       <caption class="govuk-table__caption">
-        <%= content_tag(:h3, t('date.date_period', from: date_from, to: date_to), class: 'govuk-heading-s') if @bank_transactions.any? %>
+        <%= content_tag(:h2, t('date.date_period', from: date_from, to: date_to), class: 'govuk-heading-s') if @bank_transactions.any? %>
       </caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">

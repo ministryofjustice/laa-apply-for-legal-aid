@@ -4,7 +4,7 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
@@ -34,7 +34,7 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
@@ -111,7 +111,7 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
@@ -148,7 +148,7 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Your client's income"
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"

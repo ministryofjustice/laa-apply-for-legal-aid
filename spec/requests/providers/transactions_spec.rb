@@ -139,7 +139,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
         subject
         expect(response).to redirect_to providers_legal_aid_application_income_summary_index_path
         follow_redirect!
-        expect(unescaped_response_body).to include("Your client's income")
+        expect(unescaped_response_body).to include("Sort your client's income into categories")
       end
     end
 
