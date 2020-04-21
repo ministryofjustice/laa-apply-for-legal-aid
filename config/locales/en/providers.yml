@@ -172,7 +172,7 @@ en:
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
         how_we_checked: How we checked your client's benefits status
         details_used: "We used the following details to check your client's benefits status with the DWP:"
-        change_client_details_html: <a href="check_provider_answers">Change your client's details</a> if you entered them incorrectly.
+        change_client_details_html: <a href="applicant_details">Change your client's details</a> if you entered them incorrectly.
         you_need_to: "You'll need to:"
         negative_result:
           tab_title: Your client must complete a financial assessment
