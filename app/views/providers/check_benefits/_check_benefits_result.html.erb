@@ -9,7 +9,7 @@
           <%= t '.because_not_receiving_benefits' %>
           <details class="govuk-details" data-module="govuk-details">
             <summary style="color:white" class="govuk-details__summary">
-             <span class="govuk-details__summary-text">
+             <span class="govuk-details__summary-text" id="checked-status">
               <%= t '.how_we_checked' %>
              </span>
             </summary>
@@ -20,7 +20,7 @@
               <strong><%= t 'shared.forms.date_input_fields.date_of_birth_label' %>:</strong> <%= @applicant.date_of_birth %><br>
               <strong> <%= t 'shared.forms.applicant_form.nino_label' %>:</strong> <%= @applicant.national_insurance_number %></p>
 
-            <p><%= t '.change_client_details_html' %></p>
+            <p id='change-client-link'><%= t '.change_client_details_html' %></p>
           </details>
         </p>
 
@@ -28,7 +28,6 @@
       <h2 class="govuk-heading-m">
         <%= t '.what_happens_next' %>
       </h2>
-
       <% if result_namespace == '.positive_result' %>
         <p class="govuk-body">
           <%= t '.you_need_to' %>

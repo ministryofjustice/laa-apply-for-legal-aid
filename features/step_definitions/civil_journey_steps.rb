@@ -301,6 +301,10 @@ When(/^I click clear search$/) do
   page.find('#clear-proceeding-search').click
 end
 
+When("I click How we checked your client's benefits status") do
+  page.find('#checked-status').click
+end
+
 Then(/^proceeding search field is empty$/) do
   expect(page).to have_field('proceeding-search-input', with: '')
 end

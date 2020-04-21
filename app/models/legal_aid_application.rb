@@ -212,6 +212,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
       provider_checking_citizens_means_answers?
   end
 
+  def checked_provider_answers?
+    client_details_answers_checked?
+  end
+
   def opponents
     [Opponent.dummy_opponent]
   end
