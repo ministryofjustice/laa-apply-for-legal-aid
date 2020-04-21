@@ -24,13 +24,6 @@
 
   <div class="govuk-!-padding-bottom-4"></div>
 
-  <h2 class="govuk-heading-s">
-    <%= t(
-          'transaction_types.dates_span',
-          start_at: l(@legal_aid_application.transaction_period_start_on.to_date, format: :long_date),
-          finish_at: l(@legal_aid_application.transaction_period_finish_on.to_date, format: :long_date)
-        ) %>
-  </h2>
   <%= form_with(method: :patch, local: true) do |form| %>
 
     <%= form.hidden_field :transaction_type, value: @transaction_type.name %>
