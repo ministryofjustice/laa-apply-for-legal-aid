@@ -60,7 +60,7 @@ en:
       list: |
         regular (for example, two or more in the last month)
         from the same person
-        gifts (your client will not repay them)
+        gifts (your client does not need to repay them)
         meant for living expenses (for example, housing costs)
     maintenance_in:
       inset_text: Select every maintenance payment your client received in the past 3 months.
