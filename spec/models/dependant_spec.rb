@@ -14,6 +14,58 @@ RSpec.describe Dependant, type: :model do
     end
   end
 
+  describe '#as_json' do
+    context 'dependant has nil values' do
+      let(:dependant) do
+        create :dependant,
+               date_of_birth: Date.new(2019, 3, 2),
+               in_full_time_education: nil,
+               has_assets_more_than_threshold: nil,
+               has_income: nil,
+               relationship: nil,
+               monthly_income: nil,
+               assets_value: nil
+      end
+      let(:expected_hash) do
+        {
+          date_of_birth: '2019-03-02',
+          in_full_time_education: false,
+          relationship: 'child_relative',
+          monthly_income: 0.0,
+          assets_value: 0.0
+        }
+      end
+      it 'returns the expected hash' do
+        expect(dependant.as_json).to eq expected_hash
+      end
+    end
+
+    context 'dependant has values' do
+      let(:dependant) do
+        create :dependant,
+               date_of_birth: Date.new(2019, 3, 2),
+               in_full_time_education: true,
+               has_assets_more_than_threshold: false,
+               has_income: true,
+               relationship: 'adult_relative',
+               monthly_income: 123.45,
+               assets_value: 6789.0
+      end
+      let(:expected_hash) do
+        {
+          date_of_birth: '2019-03-02',
+          in_full_time_education: true,
+          relationship: 'adult_relative',
+          monthly_income: 123.45,
+          assets_value: 6789.0
+        }
+      end
+      it 'returns the expected hash' do
+        expect(dependant.as_json).to eq expected_hash
+      end
+    end
+  end
+
   describe '#over_fifteen?' do
     context 'Less than 15 years old' do
       let(:date_of_birth) { Time.now - 10.years }
