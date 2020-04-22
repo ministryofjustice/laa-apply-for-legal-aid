@@ -164,6 +164,8 @@ en:
             open_banking_consents:
               base:
                 none_selected: Please select an option
+              citizens:
+                blank: Select yes if you agree to share your bank account information with the LAA
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               greater_than_or_equal_to: Mortgage amount must be 0 or more

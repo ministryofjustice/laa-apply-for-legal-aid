@@ -47,15 +47,26 @@ en:
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+    contact_providers:
+      show:
+        title: Contact your solicitor to continue your application
+        they_will_check: They will check whether you qualify for legal aid by asking about your finances.
     consents:
       show:
-        body: We only use your bank transactions to support your legal aid application. We do not use the information for anything else.
-        field_set_header: Do you agree to share your bank transactions with us?
-        open_banking_consent:
-          label:
-            html: "<b>I agree for you to check 3 months of bank transactions</b> <br /> using temporary access to my online banking"
-        what_happens_next_header: What happens next
-        what_happens_next_text: We'll hand over to a secure service for you to sign in to your online banking.
+        title: Do you agree to share your bank account information with the LAA?
+        inset_text: We only use your financial information to support your legal aid application. We do not use it for anything else.
+        summary_heading: What information will the LAA be able to see?
+        able_to_see: 
+          heading: "We'll be able to see your:"
+          list: |
+            personal details (such as your name and date of birth)
+            bank statements and transaction details
+            account balance
+        unable_to_see: 
+          heading: "We will not:"
+          list: |
+            save your online banking username and password
+            have any ongoing access to your bank account
     declarations:
       show:
         page_heading: Declaration
@@ -181,4 +192,3 @@ en:
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?
-
