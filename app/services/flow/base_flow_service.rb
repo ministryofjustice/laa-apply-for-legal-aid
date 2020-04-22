@@ -27,7 +27,7 @@ module Flow
     end
 
     def forward_path
-      if legal_aid_application.checking_answers? && check_answers_step || legal_aid_application.checked_provider_answers? && check_answers_step
+      if legal_aid_application.checking_answers? && check_answers_step
         return path(forward_step) if carry_on_sub_flow?
 
         return path(check_answers_step)
