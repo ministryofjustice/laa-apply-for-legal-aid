@@ -145,6 +145,10 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       it 'redirects to the online banking page' do
         expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
       end
+
+      it 'does not send a reminder email' do
+        expect(SubmitApplicationReminderService).not_to receive(:new).with(legal_aid_application)
+      end
     end
 
     context 'Form submitted using Save as draft button' do
