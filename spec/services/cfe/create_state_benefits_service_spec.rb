@@ -57,7 +57,7 @@ module CFE
       describe 'successful post' do
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
-        it 'updates the submission record from dependants_created to state_benefits_created' do
+        it 'updates the submission record from outgoings_created to state_benefits_created' do
           expect(submission.aasm_state).to eq 'outgoings_created'
           call_service
           expect(submission.aasm_state).to eq 'state_benefits_created'

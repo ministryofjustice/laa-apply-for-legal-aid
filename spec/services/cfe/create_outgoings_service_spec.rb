@@ -24,7 +24,7 @@ module CFE
         context 'no bank transactions at all' do
           let(:expected_payload_hash) { empty_payload }
 
-          it 'updates the submission record from state_benefits_created to other_income_created' do
+          it 'updates the submission record from state_benefits_created to outgoings_created' do
             expect(submission.aasm_state).to eq 'dependants_created'
             described_class.call(submission)
             expect(submission.aasm_state).to eq 'outgoings_created'
@@ -42,7 +42,7 @@ module CFE
 
           before { create_bank_transactions }
 
-          it 'updates the submission record from state_benefits_created to other_income_created' do
+          it 'updates the submission record from dependants_created to outgoings_created' do
             expect(submission.aasm_state).to eq 'dependants_created'
             described_class.call(submission)
             expect(submission.aasm_state).to eq 'outgoings_created'
