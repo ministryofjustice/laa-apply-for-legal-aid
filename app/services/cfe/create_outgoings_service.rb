@@ -39,6 +39,7 @@ module CFE
       @bank_transactions ||= legal_aid_application
                              .bank_transactions
                              .debit
+                             .where.not(transaction_type_id: nil)
                              .order(:happened_at)
                              .group_by(&:transaction_type_id)
     end

@@ -64,10 +64,19 @@ module CFE
 
           def create_bank_transactions
             TransactionType.populate
+            create_categorised_bank_transactions
+            create_uncategorised_bank_transactions
+          end
+
+          def create_categorised_bank_transactions
             create :bank_transaction, :rent_or_mortgage, bank_account: bank_account, happened_at: 10.days.ago, amount: 1150.0
             create :bank_transaction, :rent_or_mortgage, bank_account: bank_account, happened_at: 40.days.ago, amount: 1150.0
             create :bank_transaction, :child_care, bank_account: bank_account, happened_at: 15.days.ago, amount: 234.56
             create :bank_transaction, :child_care, bank_account: bank_account, happened_at: 45.days.ago, amount: 266.0
+          end
+
+          def create_uncategorised_bank_transactions
+            create :bank_transaction, :debit, bank_account: bank_account, happened_at: 45.days.ago, amount: 266.0 # uncategorised - will be ignored
           end
 
           def payload_with_transactions
