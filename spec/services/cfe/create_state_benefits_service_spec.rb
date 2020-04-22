@@ -8,7 +8,7 @@ module CFE
 
     let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, transaction_period_finish_on: Date.today }
     let!(:applicant) { create :applicant, legal_aid_application: application }
-    let(:submission) { create :cfe_submission, aasm_state: 'dependants_created', legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'outgoings_created', legal_aid_application: application }
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }
     let(:bank_provider) { create :bank_provider, applicant: applicant }
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }
@@ -58,7 +58,7 @@ module CFE
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
         it 'updates the submission record from dependants_created to state_benefits_created' do
-          expect(submission.aasm_state).to eq 'dependants_created'
+          expect(submission.aasm_state).to eq 'outgoings_created'
           call_service
           expect(submission.aasm_state).to eq 'state_benefits_created'
         end

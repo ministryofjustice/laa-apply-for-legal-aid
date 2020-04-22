@@ -85,6 +85,7 @@ module CFE
           expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
           expect(CreateStateBenefitsService).to receive(:call).and_return(true)
           expect(CreateDependantsService).to receive(:call).and_return(true)
+          expect(CreateOutgoingsService).to receive(:call).and_return(true)
           expect(CreateOtherIncomeService).to receive(:call).and_return(true)
           submission_manager.call
         end

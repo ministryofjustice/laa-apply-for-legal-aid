@@ -68,7 +68,7 @@ module CFE
     def expected_payload_hash
       {
         client_reference_id: application.application_ref,
-        submission_date: Date.today. strftime('%Y-%m-%d'),
+        submission_date: Date.today.strftime('%Y-%m-%d'),
         matter_proceeding_type: 'domestic_abuse'
       }
     end

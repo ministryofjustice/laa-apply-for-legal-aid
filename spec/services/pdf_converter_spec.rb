@@ -32,7 +32,7 @@ RSpec.describe PdfConverter do
 
       it 'converts the file to pdf' do
         expect(Libreconv).to receive(:convert)
-        expect { subject }.to change { ActiveStorage::Attachment.count } .by(1)
+        expect { subject }.to change { ActiveStorage::Attachment.count }.by(1)
         pdf_attachment = statement_of_case.pdf_attachments.first
         expect(pdf_attachment.attachment_name).to eq 'statement_of_case.pdf'
       end
