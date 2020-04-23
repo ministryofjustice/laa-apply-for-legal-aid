@@ -101,6 +101,15 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
           end
         end
 
+        context 'when the application is in client_details_answers_checked state' do
+          let(:application) { create(:legal_aid_application, state: :client_details_answers_checked) }
+
+          it 'redirects to check_your_answers page' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path)
+          end
+        end
+
         context 'when the params are not valid' do
           let(:params) do
             {
