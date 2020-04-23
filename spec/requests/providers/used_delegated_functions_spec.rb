@@ -147,7 +147,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       end
 
       it 'does not send a reminder email' do
-        expect(SubmitApplicationReminderService).not_to receive(:new).with(legal_aid_application)
+        expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
       end
     end
 
