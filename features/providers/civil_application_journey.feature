@@ -715,3 +715,5 @@ Feature: Civil application journeys
     Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
     Then I select "None of these"
     Then I click "Save and continue"
+
+
