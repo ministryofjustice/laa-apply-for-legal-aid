@@ -9,7 +9,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Your client's regular payments"
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -87,7 +87,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Your client's regular payments"
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -123,7 +123,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Your client's regular payments"
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -153,7 +153,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Your client's regular payments"
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
