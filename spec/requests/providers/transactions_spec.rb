@@ -152,7 +152,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
         subject
         expect(response).to redirect_to providers_legal_aid_application_outgoings_summary_index_path
         follow_redirect!
-        expect(unescaped_response_body).to include("Your client's regular payments")
+        expect(unescaped_response_body).to include(I18n.t('providers.outgoings_summary.index.page_heading'))
       end
     end
   end
