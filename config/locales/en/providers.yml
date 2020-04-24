@@ -428,13 +428,17 @@ en:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
       index:
-        add_all_outgoings: Add payments your client made from %{start_at} to %{finish_at}
-        page_heading: Your client's regular payments
+        list: |
+          view your client's bank statements
+          add transactions to each category
+        page_heading: Sort your client's regular payments into categories
+        payment_types: Your client told us they make the types of payments listed on this page.
         select:
-          rent_or_mortgage: Add rent or mortgage payments
-          child_care: Add childcare costs
-          maintenance_out: Add maintenance payments
-          legal_aid: Add legal aid payments
+          rent_or_mortgage: View statements and add transactions
+          child_care: View statements and add transactions
+          maintenance_out: View statements and add transactions
+          legal_aid: View statements and add transactions
+        you_need_to: "You need to:"
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your client's home?
       outstanding_mortgage_amount: Enter the outstanding mortgage amount
