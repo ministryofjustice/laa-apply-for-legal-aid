@@ -63,6 +63,8 @@ en:
         from the same person
         gifts (your client does not need to repay them)
         meant for living expenses (for example, housing costs)
+    legal_aid:
+      inset_text: Select every payment your client made towards legal aid in a criminal case in the past 3 months
     maintenance_in:
       inset_text: Select every maintenance payment your client received in the past 3 months.
     maintenance_out:
