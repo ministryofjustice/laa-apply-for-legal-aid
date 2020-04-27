@@ -10,6 +10,9 @@ AllCops:
   - 'node_modules/**/*'
   - 'ccms_integration/*'
 
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
@@ -77,4 +80,7 @@ Style/HashTransformKeys:
   Enabled: true
 
 Style/HashTransformValues:
+  Enabled: true
+
+Style/ExponentialNotation:
   Enabled: true

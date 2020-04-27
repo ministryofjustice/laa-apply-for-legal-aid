@@ -20,7 +20,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
 
       it 'adds the bank provider to the applicant' do
-        expect { subject }.to change { applicant.bank_providers.count } .by(1)
+        expect { subject }.to change { applicant.bank_providers.count }.by(1)
         expect(bank_provider.true_layer_response).to eq(mock_provider.deep_stringify_keys)
         expect(bank_provider.credentials_id).to eq(mock_provider[:credentials_id])
         expect(bank_provider.token).to eq(applicant.true_layer_secure_data_id)

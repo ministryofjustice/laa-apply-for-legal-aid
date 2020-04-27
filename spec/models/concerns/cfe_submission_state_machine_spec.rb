@@ -69,13 +69,33 @@ module CFE
       end
     end
 
-    context 'state_benefits_created! event' do
+    context 'outgoings_created! event' do
       let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'dependants_created' }
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
         it 'raises' do
-          expect { submission.state_benefits_created! }.to raise_error AASM::InvalidTransition, /Event 'state_benefits_created' cannot transition from 'dependants_created'/
+          expect { submission.outgoings_created! }.to raise_error AASM::InvalidTransition, /Event 'outgoings_created' cannot transition from 'dependants_created'/
+        end
+      end
+
+      context 'non_passported' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+        it 'transitions from properties created to dependants_created' do
+          expect { submission.outgoings_created! }.not_to raise_error
+          expect(submission.outgoings_created?).to be true
+        end
+      end
+    end
+
+    context 'state_benefits_created! event' do
+      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'outgoings_created' }
+
+      context 'passported' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        it 'raises' do
+          expect { submission.state_benefits_created! }.to raise_error AASM::InvalidTransition, /Event 'state_benefits_created' cannot transition from 'outgoings_created'/
         end
       end
 

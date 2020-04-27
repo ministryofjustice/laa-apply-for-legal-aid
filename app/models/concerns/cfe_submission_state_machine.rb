@@ -12,6 +12,7 @@ module CFESubmissionStateMachine
       state :vehicles_created
       state :properties_created
       state :dependants_created
+      state :outgoings_created
       state :state_benefits_created
       state :other_income_created
       state :results_obtained
@@ -41,8 +42,12 @@ module CFESubmissionStateMachine
         transitions from: :properties_created, to: :dependants_created, guard: :non_passported?
       end
 
+      event :outgoings_created do
+        transitions from: :dependants_created, to: :outgoings_created, guard: :non_passported?
+      end
+
       event :state_benefits_created do
-        transitions from: :dependants_created, to: :state_benefits_created, guard: :non_passported?
+        transitions from: :outgoings_created, to: :state_benefits_created, guard: :non_passported?
       end
 
       event :other_income_created do
@@ -62,6 +67,7 @@ module CFESubmissionStateMachine
         transitions from: :properties_created, to: :failed
         transitions from: :vehicles_created, to: :failed
         transitions from: :dependants_created, to: :failed
+        transitions from: :outgoings_created, to: :failed
         transitions from: :state_benefits_created, to: :failed
         transitions from: :other_income_created, to: :failed
       end
