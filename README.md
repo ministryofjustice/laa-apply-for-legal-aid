@@ -156,6 +156,22 @@ LAA_PORTAL_MOCK_SAML=false
 
 ### Authentication
 
+#### Live
+
+Authentication is made to the LAA portal, which sends back a packet of data like this:
+
+```
+{
+  "USER_EMAIL"=>[“a.user@example.com”],
+  "LAA_APP_ROLES"=>["CWA_XXLSC_EM_ACT_REP,EMI,CCMS_Apply"],
+  "LAA_ACCOUNTS"=>[“9X999X”]
+}
+```
+
+These are translated by the devise_saml_authenticatable module to the appropriate fields on the provider using the mapping specified in `config/attribute-map.yml`.
+
+#### Development
+
 User login on dev can be mocked out by adding the the following settings
 
 ```
