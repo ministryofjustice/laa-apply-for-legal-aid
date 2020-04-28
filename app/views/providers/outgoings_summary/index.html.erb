@@ -1,12 +1,17 @@
 <%= page_template page_title: t('.page_heading') do %>
 
-  <h2 class="govuk-heading-m">
-    <%= t(
-          '.add_all_outgoings',
-          start_at: l(@legal_aid_application.transaction_period_start_on, format: :long_date),
-          finish_at: l(@legal_aid_application.transaction_period_finish_on, format: :long_date)
-        ) %>
-  </h2>
+  <p class="govuk-body">
+    <%= t('.payment_types') %>
+  </p>
+
+  <p class="govuk-body">
+    <%= t('.you_need_to') %>
+  </p>
+
+  <p class="govuk-body">
+    <%= list_from_translation_path '.outgoings_summary.index' %>
+  </p>
+
   <ol class="app-task-list">
     <% @legal_aid_application.transaction_types.debits.each_with_index do |transaction_type, index| %>
       <%= render(
