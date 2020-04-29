@@ -174,6 +174,10 @@ FactoryBot.define do
       provider_received_citizen_consent { true }
     end
 
+    trait :with_consent do
+      open_banking_consent { true }
+    end
+
     trait :with_vehicle do
       transient do
         populate_vehicle { false }
@@ -206,6 +210,7 @@ FactoryBot.define do
       with_other_assets_declaration
       with_savings_amount
       with_open_banking_consent
+      with_consent
     end
 
     trait :with_everything_and_address do
@@ -228,6 +233,7 @@ FactoryBot.define do
       with_other_assets_declaration
       with_savings_amount
       with_open_banking_consent
+      with_consent
     end
 
     trait :with_negative_benefit_check_result do
