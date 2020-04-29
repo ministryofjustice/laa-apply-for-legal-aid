@@ -251,8 +251,7 @@ module CFE
       end
 
       def deductions
-        # stub out zero values if not found until CFE is updated.
-        # 
+        # stub out zero values if not found until CFE is updated
         disposable_income[:deductions] || { dependants_allowance: '0.0', disregarded_state_benefits: '0.0' }
       end
     end

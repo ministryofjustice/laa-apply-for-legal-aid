@@ -1,8 +1,8 @@
-<tr class="govuk-table__row" style="border-top: 2px solid #000">
-  <th scope="row" class="govuk-table__header">
-    <%=  t(".#{scope}.#{name}") %>
-  </th>
-  <td class="govuk-table__cell govuk-table__cell--numeric">
+<div class="govuk-summary-list__total-row  normal-word-break" id="<%= "means-merits-report__#{name}" %>">
+  <dt class="govuk-summary-list__key govuk-!-width-one-half">
+    <%= t(".#{name}") %>
+  </dt>
+  <dd class="govuk-summary-list__value align-text-right">
     <%= number_to_currency(@cfe_result.__send__(value_method)) %>
-  </td>
-</tr>
+  </dd>
+</div>

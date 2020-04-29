@@ -1,14 +1,14 @@
 <section>
-  <table class="govuk-table">
-    <tbody>
-    <% {
-           dependants_allowance: :dependants_allowance,
-           disregarded_state_benefits: :disregarded_state_benefits
-       }.each do |name, value_method|
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%
+      {
+          dependants_allowance: :dependants_allowance,
+          disregarded_state_benefits: :disregarded_state_benefits
+      }.each do |name, value_method|
     %>
-      <%= render 'shared/means_report/item', name: name, scope: 'deductions', value_method: value_method %>
-    <% end  %>
-    <%= render 'shared/means_report/total', name: 'total_deductions', scope: 'deductions', value_method: :total_deductions %>
-    </tbody>
-  </table>
+      <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method %>
+    <% end %>
+    <%= render 'shared/means_report/total', name: 'total_deductions', value_method: :total_deductions %>
+  </dl>
+
 </section>

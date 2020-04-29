@@ -31,13 +31,16 @@ en:
           property_or_lodger: Income from property or lodger
           student_loan: Student loan or grant
           pension: Pension
-          total_income: Total income
         outgoing:
           housing: Housing costs
           childcare: Childcare costs
           maintenance_out: Maintenance payments
           legal_aid: Legal aid payments
-          total_outgoing: Total outgoings
+      total:
+        total_income: Total income
+        total_outgoings: Total outgoings
+        total_deductions: Total deductions
+
     check_answers:
       assets:
         assets:
