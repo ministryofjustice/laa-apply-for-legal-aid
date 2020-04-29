@@ -140,10 +140,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     errors.present?
   end
 
-  def uncategorised_transactions_errors(transaction_type_name)
-    errors.add(transaction_type_name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
-  end
-
   def proceeding_type_codes=(codes)
     @proceeding_type_codes = codes
     self.proceeding_types = ProceedingType.where(code: codes)
@@ -287,6 +283,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     return unless proceeding_type_codes.present?
 
     errors.add(:proceeding_type_codes, :invalid) if proceeding_types.size != proceeding_type_codes.size
+  end
+
+  def uncategorised_transactions_errors(transaction_type_name)
+    errors.add(transaction_type_name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
   end
 
   def create_app_ref
