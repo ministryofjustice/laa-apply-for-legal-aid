@@ -132,6 +132,18 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     )
   end
 
+  def uncategorised_bank_transactions?
+    @bank_transactions = bank_transactions.credit.order(happened_at: :desc).by_type
+    transaction_types.credits.each do |transaction_type|
+      uncategorised_transactions_errors(transaction_type.name) if @bank_transactions[transaction_type].blank?
+    end
+    errors.present?
+  end
+
+  def uncategorised_transactions_errors(transaction_type_name)
+    errors.add(transaction_type_name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
+  end
+
   def proceeding_type_codes=(codes)
     @proceeding_type_codes = codes
     self.proceeding_types = ProceedingType.where(code: codes)
