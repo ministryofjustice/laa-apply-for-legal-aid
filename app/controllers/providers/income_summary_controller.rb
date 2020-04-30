@@ -18,7 +18,7 @@ module Providers
     private
 
     def uncategorized_transactions?
-      @legal_aid_application.uncategorised_bank_transactions?
+      @legal_aid_application.uncategorised_income_transactions?
     end
 
     def bank_transactions

@@ -208,7 +208,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#uncategorised_bank_transactions?' do
+  describe '#uncategorised_income_transactions?' do
     context 'transaction types have associated bank transactions' do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
@@ -218,10 +218,10 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
 
       it 'returns true' do
-        expect(legal_aid_application.uncategorised_bank_transactions?).to eq false
+        expect(legal_aid_application.uncategorised_income_transactions?).to eq false
       end
     end
-    context 'transaction types do not have associated bank transactions' do
+    context 'transaction types do not have associated income bank transactions' do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
@@ -230,7 +230,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
 
       it 'returns false' do
-        expect(legal_aid_application.uncategorised_bank_transactions?).to eq true
+        expect(legal_aid_application.uncategorised_income_transactions?).to eq true
       end
     end
   end

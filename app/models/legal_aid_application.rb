@@ -132,7 +132,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     )
   end
 
-  def uncategorised_bank_transactions?
+  def uncategorised_income_transactions?
     @bank_transactions = bank_transactions.credit.order(happened_at: :desc).by_type
     transaction_types.credits.each do |transaction_type|
       uncategorised_transactions_errors(transaction_type.name) if @bank_transactions[transaction_type].blank?
