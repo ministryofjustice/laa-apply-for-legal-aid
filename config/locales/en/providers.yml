@@ -76,10 +76,10 @@ en:
       property_results:
         property: Property
         value: Value
-        sale_cost: '3% sale cost'
+        outstanding_mortgage: Outstanding mortgage
         mortgage_deduction: Mortgage deduction
-        disregards: Main home disregard
-        assessment_amount: Amount included in assessment
+        disregards: Disregards and deductions
+        assessment_amount: Amount included in calculation
         main_home_disregard: Main home disregard
         main_home: Main home
         additional_property: Additional property
@@ -88,26 +88,28 @@ en:
         value: Value
         oustanding_payments: Outstanding payments
         disregards: Disregards and deductions
-        assessment_amount: Amount included in assessment
+        assessment_amount: Amount included in calculation
       savings_and_investments:
         savings_and_investments: Savings and investments
-        assessed_amount: Amount included in assessment
+        assessed_amount: Total savings and investments
       other_assets:
         other_assets: Other assets
-        assessed_amount: Amount included in assessment
+        assessed_amount: Total assets
       total_capital:
-        total_assessed_capital: Total assessed capital
+        total_assessed_capital: Disposable capital
         property: Property
         vehicles: Vehicles
         savings_and_investments: Savings and investments
         other_assets: Other assets
-        disposable_capital: Disposable capital
+        disposable_capital: Total disposable capital
         pensioner_disregard: Pensioner disregard
-        total_capital: Total capital
+        total_capital: Total
       restrictions:
         restrictions: Restrictions on your client's assets
         none: None
       result_details:
+        capital_calculation: Capital Calculation
+        income_calculation: Income Calculation
         client_eligibility_calculation: How we calculated your client's eligibility
 
 

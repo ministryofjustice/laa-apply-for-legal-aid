@@ -1,47 +1,23 @@
-<div class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
+<div class="govuk-details govuk-!-margin-top-6" data-module="govuk-details">
     <h1 class="govuk-heading-m">
       <%= t('.client_eligibility_calculation') %>
     </h1>
 
-  <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+  <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-breakdown">
     <div class="govuk-accordion__section ">
       <div class="govuk-accordion__section-header">
         <h2 class="govuk-accordion__section-heading">
-        <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
-          Income Calculation
+        <span class="govuk-accordion__section-button" id="accordion-capital-calculation">
+          <%= t('.capital_calculation') %>
         </span>
         </h2>
       </div>
-      <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
-        <p class='govuk-body'>This is the content for Writing well for the web.</p>
-      </div>
-    </div>
-    <div class="govuk-accordion__section ">
-      <div class="govuk-accordion__section-header">
-        <h2 class="govuk-accordion__section-heading">
-        <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
-          Capital Calculation
-        </span>
-        </h2>
-      </div>
-      <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
-        <%= render 'new_property_results' %>
-      </div>
-      <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
+        <%= render 'property_results' %>
         <%= render 'vehicle_results' %>
-      </div>
-      <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
         <%= render 'savings_and_investments' %>
-      </div>
-      <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
         <%= render 'other_assets' %>
-      </div>
-      <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
         <%= render 'total_capital' %>
-      </div>
-      <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
         <%= render 'restrictions' %>
-      </div>
     </div>
   </div>
 </div>
