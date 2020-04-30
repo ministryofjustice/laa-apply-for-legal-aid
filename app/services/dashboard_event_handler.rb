@@ -33,7 +33,7 @@ class DashboardEventHandler
   end
 
   def valid_events
-    %w[application_created provider_created ccms_submission_saved firm_created feedback_created merits_assessment_submitted delegated_functions_used total_declined_open_banking]
+    %w[application_created provider_created ccms_submission_saved firm_created feedback_created merits_assessment_submitted delegated_functions_used declined_open_banking]
   end
 
   def application_created
@@ -49,8 +49,8 @@ class DashboardEventHandler
     Dashboard::UpdaterJob.set(wait: 1.minute).perform_later('PendingCcmsSubmissions') unless payload[:state].in?(%w[failed completed])
   end
 
-  def total_declined_open_banking
-    Dashboard::UpdaterJob.perform_later('TotalDeclinedOpenBanking')
+  def declined_open_banking
+    Dashboard::UpdaterJob.perform_later('PercentageDeclinedOpenBanking')
   end
 
   def firm_created
