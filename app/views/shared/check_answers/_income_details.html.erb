@@ -10,7 +10,7 @@
           pension: :mei_pension
       }.each do |name, value_method|
     %>
-      <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method %>
+      <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method, suppress_border: name == :pension %>
     <% end %>
     <%= render 'shared/means_report/total', name: 'total_income', value_method: :total_gross_income_assessed %>
   </dl>
