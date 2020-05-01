@@ -39,13 +39,12 @@ module CFE
     def submission
       @submission ||= Submission.create!(legal_aid_application_id: legal_aid_application_id)
     end
-    
+
     private
 
     def process_error(error)
       Raven.capture_exception(error)
       SlackAlertSenderWorker.perform_async(format_error(error))
-      false
     end
 
     def format_error(error)
