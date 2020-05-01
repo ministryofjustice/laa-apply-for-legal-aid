@@ -5,6 +5,7 @@ class TransactionType < ApplicationRecord
   NAMES = {
     credit: %i[
       benefits
+      excluded_benefits
       friends_or_family
       maintenance_in
       property_or_lodger
@@ -45,7 +46,7 @@ class TransactionType < ApplicationRecord
     NAMES.each_with_index do |(operation, names), op_index|
       names.each_with_index do |name, index|
         start_number = (op_index * 1000) + (index * 10)
-        transaction_type = find_or_initialize_by(name: name, operation: operation)
+        transaction_type = find_or_initialize_by(name: name, operation)
         transaction_type.update! sort_order: start_number
       end
     end
