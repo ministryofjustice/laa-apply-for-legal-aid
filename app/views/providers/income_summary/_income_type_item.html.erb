@@ -10,7 +10,12 @@
 
 <li id="<%= "#{name}" %>" class="<%= form_group_error_class %>">
   <h2 class="app-task-list__section">
-    <span class="app-task-list__section-number"><%= number %>. </span>
+    <% if display_number %>
+      <span class="app-task-list__section-number"><%= number %>. </span>
+    <% else %>
+      <span class="app-task-list__section-number"><%= '' %> </span>
+    <% end %>
+
     <%= t("transaction_types.names.providers.#{name}") %>
     <% if I18n.exists? "transaction_types.hints.#{name}" %>
       <span class="govuk-hint" style="margin-bottom: 0px">
