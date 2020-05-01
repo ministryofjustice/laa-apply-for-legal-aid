@@ -13,7 +13,7 @@
       <div class="deselect-group" data-deselect-ctrl="#none_selected">
         <%= transaction_type_check_boxes(
               form: form,
-              transaction_types: TransactionType.credits,
+              transaction_types: TransactionType.credits.not_children,
               hints: {
                 friends_or_family: t('.financial_help_examples'),
                 benefits: t('.benefits_examples'),

@@ -3,6 +3,8 @@ class BankTransaction < ApplicationRecord
   belongs_to :transaction_type, optional: true
   has_one :legal_aid_application, through: :bank_account
 
+  serialize :meta_data
+
   scope :by_type, -> do
     includes(:transaction_type)
       .where.not(transaction_type_id: nil)

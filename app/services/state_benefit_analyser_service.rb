@@ -1,9 +1,12 @@
 class StateBenefitAnalyserService
+  Struct.new('Benefit', :code, :label, :name, :excluded?)
+
   def self.call(legal_aid_application)
     new(legal_aid_application).call
   end
 
   def initialize(legal_aid_application)
+    @benefit_transactions_found = false
     @legal_aid_application = legal_aid_application
     @state_benefit_codes = {}
   end
@@ -11,12 +14,17 @@ class StateBenefitAnalyserService
   def call
     load_state_benefit_types
     @legal_aid_application.bank_transactions.credit.each { |txn| process_transaction(txn) }
+    update_legal_aid_transaction_types if @benefit_transactions_found
   end
 
   private
 
-  def benefit_transaction_type
-    @benefit_transaction_type ||= TransactionType.find_by(name: 'benefits')
+  def included_benefit_transaction_type
+    @included_benefit_transaction_type ||= TransactionType.find_by(name: 'benefits')
+  end
+
+  def excluded_benefit_transaction_type
+    @excluded_benefit_transaction_type ||= TransactionType.find_by(name: 'excluded_benefits')
   end
 
   def process_transaction(txn)
@@ -25,21 +33,52 @@ class StateBenefitAnalyserService
 
   def load_state_benefit_types
     state_benefit_list = CFE::ObtainStateBenefitTypesService.call
-    state_benefit_list.each do |state_benefit|
-      next if state_benefit['dwp_code'].nil?
+    state_benefit_list.each do |sb_hash|
+      next if sb_hash['dwp_code'].nil?
 
-      @state_benefit_codes[state_benefit['dwp_code']] = state_benefit['label']
+      store_benefit(sb_hash)
     end
   end
 
-  def identify_state_benefit(txn)
-    dwp_code = regex_pattern.match(txn.description)[1]
-    txn.update(transaction_type_id: benefit_transaction_type.id, meta_data: determine_label(dwp_code))
-    add_legal_aid_application_transaction_type
+  def store_benefit(sb_hash)
+    benefit = Struct::Benefit.new(sb_hash['dwp_code'], sb_hash['label'], sb_hash['name'], sb_hash['exclude_from_gross_income'])
+    @state_benefit_codes[benefit.code] = benefit
   end
 
-  def determine_label(dwp_code)
-    @state_benefit_codes.key?(dwp_code) ? @state_benefit_codes[dwp_code] : "Unknown code #{dwp_code}"
+  def identify_state_benefit(txn)
+    @benefit_transactions_found = true
+    dwp_code = regex_pattern.match(txn.description)[1]
+    benefit = @state_benefit_codes[dwp_code]
+    benefit.nil? ? process_unknown_benefit(txn, dwp_code) : process_known_benefit(txn, benefit)
+  end
+
+  def process_unknown_benefit(txn, dwp_code)
+    txn.update!(transaction_type: included_benefit_transaction_type, meta_data: unknown_meta(dwp_code))
+  end
+
+  def unknown_meta(dwp_code)
+    {
+      code: dwp_code,
+      label: "Unknown code #{dwp_code}",
+      name: 'Unknown state benefit'
+    }
+  end
+
+  def process_known_benefit(txn, benefit)
+    transaction_type = benefit.excluded? ? excluded_benefit_transaction_type : included_benefit_transaction_type
+    txn.update!(transaction_type: transaction_type, meta_data: known_meta(benefit))
+  end
+
+  def determine_meta(dwp_code)
+    @state_benefit_codes.key?(dwp_code) ? known_meta(dwp_code) : unknown_meta(dwp_code)
+  end
+
+  def known_meta(benefit)
+    {
+      code: benefit.code,
+      label: benefit.label,
+      name: benefit.name
+    }
   end
 
   def state_benefit_payment_pattern?(description)
@@ -54,10 +93,10 @@ class StateBenefitAnalyserService
     @nino || @legal_aid_application.applicant.national_insurance_number
   end
 
-  def add_legal_aid_application_transaction_type
-    return if @legal_aid_application.transaction_types.include?(benefit_transaction_type)
-
-    @legal_aid_application.transaction_types << benefit_transaction_type
+  def update_legal_aid_transaction_types
+    [included_benefit_transaction_type, excluded_benefit_transaction_type].each do |tt|
+      @legal_aid_application.transaction_types << tt unless @legal_aid_application.transaction_types.include?(tt)
+    end
     @legal_aid_application.save!
   end
 end

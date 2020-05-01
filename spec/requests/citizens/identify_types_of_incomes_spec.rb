@@ -8,6 +8,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
   end
 
   let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+  let(:income_types_without_children) { TransactionType.not_children.where(id: income_types.map(&:id)) }
 
   describe 'GET /citizens/identify_types_of_income' do
     before { get citizens_identify_types_of_income_path }
@@ -17,7 +18,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
     end
 
     it 'displays the income type labels' do
-      income_types.map(&:label_name).each do |label|
+      income_types_without_children.map(&:label_name).each do |label|
         expect(unescaped_response_body).to include(label)
       end
       expect(unescaped_response_body).not_to include('translation missing')

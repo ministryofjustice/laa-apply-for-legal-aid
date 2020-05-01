@@ -93,5 +93,11 @@ FactoryBot.define do
       operation { 'debit' }
       transaction_type { TransactionType.where(name: 'legal_aid').first || create(:transaction_type, :legal_aid) }
     end
+
+    trait :with_meta do
+      meta_data do
+        { code: 'UC', label: 'universal_credit', name: 'Universal credit' }
+      end
+    end
   end
 end

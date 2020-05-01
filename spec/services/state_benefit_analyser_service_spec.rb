@@ -6,7 +6,8 @@ RSpec.describe StateBenefitAnalyserService do
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account1) { create :bank_account, bank_provider: bank_provider }
   let(:nino) { 'YS327299B' }
-  let!(:state_benefit_transaction_type) { create :transaction_type, :benefits }
+  let!(:included_benefit_transaction_type) { create :transaction_type, :benefits }
+  let!(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
 
   describe '.call' do
     before do
@@ -40,23 +41,48 @@ RSpec.describe StateBenefitAnalyserService do
     end
 
     context 'DWP payment for this applicant with recognised code' do
-      let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1)] }
-      it 'marks the transaction as a state benefit' do
-        subject
-        tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.transaction_type_id).to eq state_benefit_transaction_type.id
+      context 'an included benefit' do
+        let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} CWP", bank_account: bank_account1)] }
+        it 'marks the transaction as a state benefit' do
+          subject
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
+        end
+
+        it 'updates the meta data with the label of the state benefit' do
+          subject
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.meta_data).to eq({ code: 'CWP', label: 'cold_weather_payment', name: 'Cold Weather Payment' })
+        end
+
+        it 'adds both included and excluded transaction types to the legal aid application' do
+          expect(legal_aid_application.transaction_types.count).to be_zero
+          subject
+          expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
+          expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
+        end
       end
 
-      it 'updates the meta data with the label of the state benefit' do
-        subject
-        tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.meta_data).to eq 'disability_living_allowance'
-      end
+      context 'an excluded benefit' do
+        let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1)] }
+        it 'marks the transaction as a state benefit' do
+          subject
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.transaction_type_id).to eq excluded_benefit_transaction_type.id
+        end
 
-      it 'adds a transaction type of benefits to the legal aid application' do
-        expect(legal_aid_application.transaction_types.count).to be_zero
-        subject
-        expect(legal_aid_application.transaction_types).to eq [state_benefit_transaction_type]
+        it 'updates the meta data with the label of the state benefit' do
+          subject
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.meta_data).to eq({ code: 'DLA', label: 'disability_living_allowance', name: 'Disability Living Allowance' })
+        end
+
+        it 'adds both included and excluded transaction types to the legal aid application' do
+          expect(legal_aid_application.transaction_types.count).to be_zero
+          subject
+          expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
+          expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
+        end
       end
     end
 
@@ -65,28 +91,53 @@ RSpec.describe StateBenefitAnalyserService do
       it 'marks the transaction as a state benefit' do
         subject
         tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.transaction_type_id).to eq state_benefit_transaction_type.id
+        expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
       end
 
       it 'updates the meta data with the label of the state benefit' do
         subject
         tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.meta_data).to eq 'Unknown code XXXX'
+        expect(tx.meta_data).to eq({ code: 'XXXX', label: 'Unknown code XXXX', name: 'Unknown state benefit' })
       end
 
       it 'adds a transaction type of benefits to the legal aid application' do
         expect(legal_aid_application.transaction_types.count).to be_zero
         subject
-        expect(legal_aid_application.transaction_types).to eq [state_benefit_transaction_type]
+        expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
+        expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
       end
     end
 
     def dummy_benefits
       [
-        { 'label' => 'cold_weather_payment', 'name' => 'Cold Weather Payment', 'dwp_code' => 'CWP' },
-        { 'label' => 'disability_living_allowance', 'name' => 'Disability Living Allowance', 'dwp_code' => 'DLA' },
-        { 'label' => 'employment_support_allowance', 'name' => 'Employment Support Allowance', 'dwp_code' => 'ESA' },
-        { 'label' => 'social_fund_payments', 'name' => 'Social Fund Payment', 'dwp_code' => nil }
+        {
+          'label' => 'cold_weather_payment',
+          'name' => 'Cold Weather Payment',
+          'dwp_code' => 'CWP',
+          'exclude_from_gross_income' => false,
+          'category' => nil
+        },
+        {
+          'label' => 'disability_living_allowance',
+          'name' => 'Disability Living Allowance',
+          'dwp_code' => 'DLA',
+          'exclude_from_gross_income' => true,
+          'category' => 'carer_disability'
+        },
+        {
+          'label' => 'employment_support_allowance',
+          'name' => 'Employment Support Allowance',
+          'dwp_code' => 'ESA',
+          'exclude_from_gross_income' => false,
+          'category' => nil
+        },
+        {
+          'label' => 'social_fund_payments',
+          'name' => 'Social Fund Payment',
+          'dwp_code' => nil,
+          'exclude_from_gross_income' => false,
+          'category' => nil
+        }
       ]
     end
 

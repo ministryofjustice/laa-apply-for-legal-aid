@@ -13,7 +13,7 @@ Given('An application has been created') do
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   create :bank_account_holder, bank_provider: bank_provider
   create :bank_account, bank_provider: bank_provider, currency: 'GBP'
-  TransactionType.populate
+  Populators::TransactionTypePopulator.call
 end
 
 Then('I visit the start of the financial assessment') do
@@ -48,7 +48,7 @@ Given('I have completed an application') do
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   create :bank_account_holder, bank_provider: bank_provider
   create :bank_account, bank_provider: bank_provider, currency: 'GBP'
-  TransactionType.populate
+  Populators::TransactionTypePopulator.call
   steps %(Then I visit the start of the financial assessment)
 end
 
