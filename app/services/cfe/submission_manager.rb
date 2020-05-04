@@ -31,8 +31,8 @@ module CFE
       true
     rescue SubmissionError => e
       submission.error_message = e.message
-      submission.fail!
       process_error(e)
+      submission.fail! unless submission.failed?
       false
     end
 
