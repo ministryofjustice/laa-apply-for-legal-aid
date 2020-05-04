@@ -26,7 +26,7 @@ module CFE
         write_cfe_result
         @submission.results_obtained!
       else
-        @submission.fail!
+        @submission.fail! unless @submission.failed?
         raise_exception_error message: HTTP_ERR_MESSAGE, http_method: 'GET', http_status: @response.status
       end
     end

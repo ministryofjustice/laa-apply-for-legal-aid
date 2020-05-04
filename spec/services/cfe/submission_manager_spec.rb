@@ -75,6 +75,18 @@ module CFE
             expect(Raven).to receive(:capture_exception).with(message_contains(message))
             submission_manager.call
           end
+
+          context 'does not change state if already :failed' do
+            before do
+              allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
+              submission.fail!
+            end
+            it 'records error in submission' do
+              submission_manager.call
+              expect(submission.error_message).to eq(message)
+              expect(submission).to be_failed
+            end
+          end
         end
       end
 
