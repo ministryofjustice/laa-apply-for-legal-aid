@@ -4,6 +4,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:target_url) { providers_legal_aid_application_identify_types_of_income_path(legal_aid_application) }
   let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+  let(:non_child_income_types) { income_types.reject(&:child?) }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
 
@@ -21,7 +22,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
 
     it 'displays the income type labels' do
       subject
-      income_types.map(&:providers_label_name).each do |label|
+      non_child_income_types.map(&:providers_label_name).each do |label|
         expect(unescaped_response_body).to include(label)
       end
       expect(unescaped_response_body).not_to include('translation missing')

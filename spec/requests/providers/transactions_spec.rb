@@ -131,7 +131,15 @@ RSpec.describe Providers::TransactionsController, type: :request do
         end
 
         it 'sets meta_data for benefit transactions' do
-          expect { subject }.to change { benefit_bank_transaction.reload.meta_data }.from(nil).to('manually_chosen')
+          expect { subject }.to change { benefit_bank_transaction.reload.meta_data }.from(nil).to(manually_chosen_metadata)
+        end
+
+        def manually_chosen_metadata
+          {
+            code: 'XXXX',
+            label: 'manually_chosen',
+            name: 'Manually chosen'
+          }
         end
       end
 

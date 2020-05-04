@@ -135,5 +135,25 @@ RSpec.describe TransactionType, type: :model do
         end
       end
     end
+
+    describe '.any_type_of' do
+      context 'name of record with children' do
+        it 'returns record and its chidlren' do
+          expect(TransactionType.any_type_of('benefits')).to match_array([benefits, excluded_benefits])
+        end
+      end
+
+      context 'name of record with no children' do
+        it 'returns just that record in an array' do
+          expect(TransactionType.any_type_of('pension')).to eq [pension]
+        end
+      end
+
+      context 'name that does not exist' do
+        it 'returns an empty collection' do
+          expect(TransactionType.any_type_of('xxx')).to be_empty
+        end
+      end
+    end
   end
 end

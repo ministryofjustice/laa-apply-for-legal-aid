@@ -60,6 +60,13 @@ class TransactionType < ApplicationRecord
     where(id: all_ids)
   end
 
+  def self.any_type_of(name)
+    top_level_id = TransactionType.find_by(name: name)&.id
+    return [] if top_level_id.nil?
+
+    find_with_children(top_level_id)
+  end
+
   def citizens_label_name
     label_name(journey: :citizens)
   end

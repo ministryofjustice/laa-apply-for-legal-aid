@@ -69,10 +69,6 @@ class StateBenefitAnalyserService
     txn.update!(transaction_type: transaction_type, meta_data: known_meta(benefit))
   end
 
-  def determine_meta(dwp_code)
-    @state_benefit_codes.key?(dwp_code) ? known_meta(dwp_code) : unknown_meta(dwp_code)
-  end
-
   def known_meta(benefit)
     {
       code: benefit.code,
