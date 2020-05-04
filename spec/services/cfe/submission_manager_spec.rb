@@ -75,11 +75,6 @@ module CFE
             expect(Raven).to receive(:capture_exception).with(message_contains(message))
             submission_manager.call
           end
-
-          it 'sends an alert on slack' do
-            expect(SlackAlertSenderWorker).to receive(:perform_async)
-            submission_manager.call
-          end
         end
       end
 

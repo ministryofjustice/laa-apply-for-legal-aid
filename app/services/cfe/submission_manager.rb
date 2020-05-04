@@ -31,29 +31,13 @@ module CFE
       true
     rescue SubmissionError => e
       submission.error_message = e.message
-      process_error(e)
+      Raven.capture_exception(e)
       submission.fail! unless submission.failed?
       false
     end
 
     def submission
       @submission ||= Submission.create!(legal_aid_application_id: legal_aid_application_id)
-    end
-
-    private
-
-    def process_error(error)
-      Raven.capture_exception(error)
-      SlackAlertSenderWorker.perform_async(format_error(error))
-    end
-
-    def format_error(error)
-      [
-        '*CFE::SubmissionManager REQUEST ERROR*',
-        'An error has been raised by the CFE::SubmissionManager and logged to Sentry',
-        "*Application* #{legal_aid_application_id}",
-        "#{error.class}: #{error.message}"
-      ].join("\n")
     end
   end
 end
