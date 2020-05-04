@@ -1,4 +1,8 @@
-<%= page_template page_title: t('.page_heading') do %>
+<%= page_template page_title: t('.page_heading'), show_errors_for: @legal_aid_application  do %>
+
+<%
+  errors = @legal_aid_application.errors.messages
+%>
 
   <p class="gov-body"><%= t('.subheading') %></p>
 
@@ -6,19 +10,20 @@
   <%= list_from_translation_path('.income_summary.index.you_need_to') %>
 
   <ol class="app-task-list">
-    <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
-      <%= render(
-            'income_type_item',
-            name: transaction_type.name,
-            number: index + 1,
-            link_text: t(".select"),
-            bank_transactions: @bank_transactions[transaction_type]
-          ) %>
-    <% end %>
+      <% @legal_aid_application.transaction_types.credits.each_with_index do |transaction_type, index| %>
+        <%= render(
+              'income_type_item',
+              name: transaction_type.name,
+              number: index + 1,
+              link_text: t(".select"),
+              bank_transactions: @bank_transactions[transaction_type],
+              error: errors[transaction_type.name.to_sym]
+            ) %>
+      <% end %>
 
-    <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
-      <%= render partial: 'add_other_income' %>
-    <% end %>
+      <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
+        <%= render partial: 'add_other_income' %>
+      <% end %>
   </ol>
 
   <%= next_action_buttons_with_form(

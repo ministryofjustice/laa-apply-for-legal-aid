@@ -25,7 +25,7 @@ RSpec.describe Providers::IncomeSummaryController do
       subject
       [salary, benefits].pluck(:name).each do |name|
         legend = I18n.t("transaction_types.names.providers.#{name}")
-        expect(parsed_response_body.css("ol li#income-type-#{name} h2").text).to match(/#{legend}/)
+        expect(parsed_response_body.css("ol li##{name} h2").text).to match(/#{legend}/)
       end
     end
 
@@ -76,6 +76,12 @@ RSpec.describe Providers::IncomeSummaryController do
   end
 
   describe 'POST /providers/income_summary' do
+    let(:applicant) { create :applicant }
+    let(:bank_provider) { create :bank_provider, applicant: applicant }
+    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+    let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: bank_account }
+    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
+
     let(:submit_button) { { continue_button: 'Continue' } }
     subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
     before { subject }
@@ -94,6 +100,26 @@ RSpec.describe Providers::IncomeSummaryController do
 
       it 'redirects to the list of applications' do
         expect(response).to redirect_to providers_legal_aid_applications_path
+      end
+    end
+
+    context 'The transaction type category has no bank transactions' do
+      let(:applicant) { create :applicant }
+      let(:bank_provider) { create :bank_provider, applicant: applicant }
+      let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: nil, bank_account: bank_account }
+      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
+
+      let(:submit_button) { { continue_button: 'Continue' } }
+      subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
+      before { subject }
+
+      it 'renders successfully' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'returns errors' do
+        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
       end
     end
   end
