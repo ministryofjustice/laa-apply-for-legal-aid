@@ -114,7 +114,8 @@ Given('I start the merits application with brank transactions with no transactio
     :with_applicant,
     :with_proceeding_types,
     :provider_assessing_means,
-    :with_uncategorised_benefits_transactions
+    :with_uncategorised_credit_transactions,
+    :with_uncategorised_debit_transactions
   )
 
   login_as @legal_aid_application.provider
