@@ -70,7 +70,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))        
+          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -89,7 +89,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))        
+          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -113,7 +113,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'captures an exception' do
-          expect(Raven).to receive(:capture_exception).with(message_contains(error_message))        
+          expect(Raven).to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -132,7 +132,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))        
+          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 

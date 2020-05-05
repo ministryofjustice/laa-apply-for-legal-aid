@@ -66,11 +66,9 @@ module GovukEmails
     end
 
     def capture_error
-      begin
-        raise StandardError, error_message
-      rescue StandardError => e
-        Raven.capture_exception(e)
-      end
+      raise StandardError, error_message
+    rescue StandardError => e
+      Raven.capture_exception(e)
     end
 
     def error_message
