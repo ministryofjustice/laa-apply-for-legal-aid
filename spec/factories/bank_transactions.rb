@@ -22,10 +22,14 @@ FactoryBot.define do
       meta_data { 'child_maintenance' }
     end
 
-    trait :uncategorised_benefit_transactions do
+    trait :uncategorised_credit_transaction do
       operation { 'credit' }
       transaction_type { nil }
-      meta_data { 'child_maintenance' }
+    end
+
+    trait :uncategorised_debit_transaction do
+      operation { 'debit' }
+      transaction_type { nil }
     end
 
     trait :disregarded_benefits do

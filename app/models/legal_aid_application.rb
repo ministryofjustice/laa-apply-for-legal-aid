@@ -132,9 +132,9 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     )
   end
 
-  def uncategorised_income_transactions?
-    grouped_transactions = bank_transactions.credit.order(happened_at: :desc).by_type
-    transaction_types.credits.each do |transaction_type|
+  def uncategorised_transactions?(type)
+    grouped_transactions = bank_transactions.__send__(type).order(happened_at: :desc).by_type
+    transaction_types.__send__(type.to_s.pluralize.to_sym).each do |transaction_type|
       uncategorised_transactions_errors(transaction_type.name) if grouped_transactions[transaction_type].blank?
     end
     errors.present?

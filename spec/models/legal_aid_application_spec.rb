@@ -208,29 +208,50 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#uncategorised_income_transactions?' do
+  describe '#uncategorised_transactions?' do
     context 'transaction types have associated bank transactions' do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-      let!(:salary) { create :transaction_type, :credit, name: 'salary' }
-      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: bank_account }
-      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
+      let!(:transaction_type) { create :transaction_type, :credit, name: 'salary' }
+      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: transaction_type, bank_account: bank_account }
+      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type] }
 
-      it 'returns true' do
-        expect(legal_aid_application.uncategorised_income_transactions?).to eq false
+      context 'income transactions' do
+        let!(:transaction_type) { create :transaction_type, :credit, name: 'salary' }
+        it 'returns false' do
+          expect(legal_aid_application.uncategorised_transactions?(:credit)).to eq false
+        end
+      end
+
+      context 'outgoing transactions' do
+        let(:transaction_type) { create :transaction_type, :debit }
+        let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: transaction_type, bank_account: bank_account }
+        it 'returns false' do
+          expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq false
+        end
       end
     end
-    context 'transaction types do not have associated income bank transactions' do
+    context 'transaction types do not have associated bank transactions' do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-      let!(:salary) { create :transaction_type, :credit, name: 'salary' }
+      let!(:transaction_type) { create :transaction_type, :credit, name: 'salary' }
       let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: nil, bank_account: bank_account }
-      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [salary] }
+      let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type] }
 
-      it 'returns false' do
-        expect(legal_aid_application.uncategorised_income_transactions?).to eq true
+      context 'income transactions' do
+        it 'returns true' do
+          expect(legal_aid_application.uncategorised_transactions?(:credit)).to eq true
+        end
+      end
+
+      context 'outgoing transactions' do
+        let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: nil, bank_account: bank_account }
+        let!(:transaction_type) { create :transaction_type, :debit }
+        it 'returns true' do
+          expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq true
+        end
       end
     end
   end

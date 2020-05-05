@@ -1,4 +1,8 @@
-<%= page_template page_title: t('.page_heading') do %>
+<%= page_template page_title: t('.page_heading'), show_errors_for: @legal_aid_application  do %>
+
+<%
+  errors = @legal_aid_application.errors.messages
+%>
 
   <p class="govuk-body">
     <%= t('.payment_types') %>
@@ -19,7 +23,8 @@
             name: transaction_type.name,
             number: index + 1,
             link_text: t(".select.#{transaction_type.name}"),
-            bank_transactions: @bank_transactions[transaction_type]
+            bank_transactions: @bank_transactions[transaction_type],
+            error: errors[transaction_type.name.to_sym]
           ) %>
     <% end %>
 

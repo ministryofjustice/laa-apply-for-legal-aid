@@ -114,7 +114,8 @@ Given('I start the merits application with brank transactions with no transactio
     :with_applicant,
     :with_proceeding_types,
     :provider_assessing_means,
-    :with_uncategorised_benefits_transactions
+    :with_uncategorised_credit_transactions,
+    :with_uncategorised_debit_transactions
   )
 
   login_as @legal_aid_application.provider
@@ -283,7 +284,8 @@ Given('The means questions have been answered by the applicant') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :provider_assessing_means
+    :provider_assessing_means,
+    :with_uncategorised_debit_transactions
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -441,6 +443,10 @@ end
 
 Then(/^I select the first checkbox$/) do
   page.first("input[type='checkbox']", visible: false).click
+end
+
+Then(/^I select the second checkbox$/) do
+  page.find("input[type='checkbox']", visible: false)[1].click
 end
 
 Then('I am on the postcode entry page') do
