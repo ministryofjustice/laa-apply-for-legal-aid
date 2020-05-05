@@ -9,6 +9,14 @@ RSpec.describe Admin::SettingsController, type: :request do
     sign_in admin_user
   end
 
+  context 'default values' do
+    describe 'manually_review_all_cases' do
+      it 'is false' do
+        expect(Setting.manually_review_all_cases?).to eq(false)
+      end
+    end
+  end
+
   describe 'GET /admin/settings' do
     subject { get admin_settings_path }
 
@@ -51,7 +59,8 @@ RSpec.describe Admin::SettingsController, type: :request do
       {
         setting: {
           mock_true_layer_data: 'true',
-          allow_non_passported_route: 'false'
+          allow_non_passported_route: 'false',
+          manually_review_all_cases: 'true'
         }
       }
     end
@@ -63,6 +72,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       subject
       expect(Setting.mock_true_layer_data?).to eq(true)
       expect(Setting.allow_non_passported_route?).to eq(false)
+      expect(Setting.manually_review_all_cases?).to eq(true)
     end
 
     it 'create settings if they do not exist' do

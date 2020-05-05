@@ -34,11 +34,14 @@ module Flow
             if application.own_capital?
               :restrictions
             else
-              application.provider_assessing_means? ? :means_summaries : :check_passported_answers
+              application.analysing_bank_transactions? ? :gather_means_transactions_results : :check_passported_answers
             end
           end,
           carry_on_sub_flow: ->(application) { application.other_assets? },
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+        },
+        gather_means_transactions_results: {
+          path: ->(application) { urls.gather_providers_legal_aid_application_means_summary_path(application) }
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },

@@ -374,6 +374,8 @@ en:
         allowable_work: "Work you can do: "
         substantive_certificate: Covered under a substantive certificate
     means_summaries:
+      gather:
+        retrieving_transactions: Analysing transactions
       show:
         h1-heading: Check your answers
         dependants:

@@ -413,8 +413,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'We need to check if'
-    And I should be on a page showing 'should pay towards legal aid'
+    Then I should be on a page showing "We’ve calculated that your client should pay"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
 
@@ -451,8 +450,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'We need to check if '
-    Then I should be on a page showing 'should pay towards legal aid'
+    Then I should be on a page showing "We’ve calculated that your client should pay"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
     Then I click 'Continue'
@@ -715,5 +713,3 @@ Feature: Civil application journeys
     Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
     Then I select "None of these"
     Then I click "Save and continue"
-
-

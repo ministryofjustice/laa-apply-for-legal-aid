@@ -48,6 +48,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
         transitions from: :delegated_functions_used, to: :checking_passported_answers
         transitions from: :client_details_answers_checked, to: :checking_passported_answers
         transitions from: :provider_assessing_means, to: :checking_passported_answers
+        transitions from: :provider_checked_citizens_means_answers, to: :provider_checking_citizens_means_answers
       end
 
       event :provider_submit do

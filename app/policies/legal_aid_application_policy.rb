@@ -35,6 +35,10 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     my_firms_record?
   end
 
+  def gather?
+    my_firms_unsubmitted_record?
+  end
+
   private
 
   def my_firms_unsubmitted_record?

@@ -208,7 +208,9 @@ Rails.application.routes.draw do
       resources :bank_transactions, only: [] do
         patch 'remove_transaction_type', on: :member
       end
-      resource :means_summary, only: %i[show update]
+      resource :means_summary, only: %i[show update] do
+        get :gather, on: :collection
+      end
       resource :used_delegated_functions, only: %i[show update]
       resource :use_ccms, only: %i[show]
       resource :substantive_application, only: %i[show update]

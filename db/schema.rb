@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_140502) do
+ActiveRecord::Schema.define(version: 2020_05_06_130533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -414,6 +414,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_140502) do
     t.boolean "no_debit_transaction_types_selected"
     t.boolean "provider_received_citizen_consent"
     t.boolean "citizen_uses_online_banking"
+    t.string "gathering_transactions_jid"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
