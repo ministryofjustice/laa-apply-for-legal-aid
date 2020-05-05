@@ -171,7 +171,7 @@ GEM
       railties (>= 4.2, < 7)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
-    database_cleaner (1.8.4)
+    database_cleaner (1.8.5)
     debug_inspector (0.0.3)
     devise (4.7.1)
       bcrypt (~> 3.0)
@@ -525,7 +525,6 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
-    slack-notifier (2.3.2)
     smart_properties (1.15.0)
     socksify (1.7.1)
     spring (2.1.0)
@@ -655,7 +654,6 @@ DEPENDENCIES
   simple_command (~> 0.1.0)
   simplecov
   simplecov-rcov
-  slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (~> 3.7.2)
