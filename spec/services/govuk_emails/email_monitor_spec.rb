@@ -44,11 +44,6 @@ RSpec.describe GovukEmails::EmailMonitor do
         expect(stub_send_email).to have_been_requested
       end
 
-      it 'does not send a slack message' do
-        expect(SlackAlertSenderWorker).not_to receive(:perform_async)
-        subject
-      end
-
       it 'keeps monitoring the email' do
         expect(email_monitor).to receive(:trigger_job).with(status_govuk_message_id)
         subject
@@ -74,8 +69,8 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(stub_send_email).not_to have_been_requested
         end
 
-        it 'does not send a slack message' do
-          expect(SlackAlertSenderWorker).not_to receive(:perform_async)
+        it 'does not capture an exception' do
+          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -93,8 +88,8 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(stub_send_email).not_to have_been_requested
         end
 
-        it 'does not send a slack message' do
-          expect(SlackAlertSenderWorker).not_to receive(:perform_async)
+        it 'does not capture an exception' do
+          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -117,14 +112,8 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(stub_send_email).not_to have_been_requested
         end
 
-        it 'sends a slack message' do
-          expected_message = [
-            '*Email ERROR*',
-            "*#{mailer}.#{mail_method}* could not be sent",
-            "*GovUk email status:* #{message_status}",
-            email_args.to_s
-          ].join("\n")
-          expect(SlackAlertSenderWorker).to receive(:perform_async).with(expected_message)
+        it 'captures an exception' do
+          expect(Raven).to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -142,8 +131,8 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(stub_send_email).not_to have_been_requested
         end
 
-        it 'does not send a slack message' do
-          expect(SlackAlertSenderWorker).not_to receive(:perform_async)
+        it 'does not capture an exception' do
+          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -206,5 +195,14 @@ RSpec.describe GovukEmails::EmailMonitor do
         )
       end
     end
+  end
+
+  def error_message
+    [
+      '*Email ERROR*',
+      "*#{mailer}.#{mail_method}* could not be sent",
+      "*GovUk email status:* #{message_status}",
+      email_args.to_s
+    ].join("\n")
   end
 end

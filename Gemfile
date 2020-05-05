@@ -90,8 +90,6 @@ gem 'wicked_pdf'
 # interface to manage data
 gem 'rails_admin', '~> 2.0'
 
-gem 'slack-notifier'
-
 # Create reports with SQL queries
 gem 'blazer'
 

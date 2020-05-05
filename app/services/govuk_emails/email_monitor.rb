@@ -21,7 +21,7 @@ module GovukEmails
       if govuk_message_id.nil?
         send_first_email
       elsif email.permanently_failed?
-        send_slack_alert
+        capture_error
       elsif email.should_resend?
         send_new_email
       elsif !email.delivered?
@@ -57,10 +57,6 @@ module GovukEmails
       trigger_job(govuk_message_id)
     end
 
-    def send_slack_alert
-      SlackAlertSenderWorker.perform_async(slack_alert)
-    end
-
     def email
       @email ||= Email.new(govuk_message_id)
     end
@@ -69,7 +65,13 @@ module GovukEmails
       mailer.constantize.public_send(mail_method, *email_args).send(delivery_method)
     end
 
-    def slack_alert
+    def capture_error
+      raise StandardError, error_message
+    rescue StandardError => e
+      Raven.capture_exception(e)
+    end
+
+    def error_message
       [
         '*Email ERROR*',
         "*#{mailer}.#{mail_method}* could not be sent",

@@ -67,11 +67,6 @@ RSpec.describe BenefitCheckService do
       it 'returns false' do
         expect(subject.call).to eq false
       end
-
-      it 'sends an alert on slack' do
-        expect(SlackAlertSenderWorker).to receive(:perform_async)
-        subject.call
-      end
     end
 
     context 'when the API times out' do
@@ -89,11 +84,6 @@ RSpec.describe BenefitCheckService do
       it 'returns false' do
         expect(subject.call).to eq false
       end
-
-      it 'sends an alert on slack' do
-        expect(SlackAlertSenderWorker).to receive(:perform_async)
-        subject.call
-      end
     end
 
     context 'when some credentials are missing', vcr: { cassette_name: 'benefit_check_service/missing_credential' } do
@@ -108,11 +98,6 @@ RSpec.describe BenefitCheckService do
 
       it 'returns false' do
         expect(subject.call).to eq false
-      end
-
-      it 'sends an alert on slack' do
-        expect(SlackAlertSenderWorker).to receive(:perform_async)
-        subject.call
       end
     end
   end
