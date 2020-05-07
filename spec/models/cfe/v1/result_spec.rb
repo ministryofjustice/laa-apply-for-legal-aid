@@ -29,8 +29,10 @@ module CFE
         end
 
         context 'applicant has contribution required and no restrictions' do
+          let(:legal_aid_application) { create :legal_aid_application, :with_cfe_v1_result }
           before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(contribution_required_result.legal_aid_application).and_return(false) }
-          it 'returns manual_check_required' do
+          it 'returns capital_contribution_required' do
+            expect(legal_aid_application.has_restrictions?).to be false
             expect(contribution_required_result.capital_contribution_required?).to be true
             expect(contribution_required_result.overview).to eq 'capital_contribution_required'
           end

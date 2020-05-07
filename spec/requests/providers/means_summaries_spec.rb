@@ -9,15 +9,17 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
   let(:vehicle) { create :vehicle, :populated }
   let(:own_vehicle) { true }
+  let(:state) { :provider_assessing_means }
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_negative_benefit_check_result,
+           gathering_transactions_jid: nil,
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            applicant: applicant,
            provider: provider,
            transaction_types: [transaction_type],
-           state: :provider_assessing_means
+           state: state
   end
   let(:login) { login_as provider }
 
@@ -124,6 +126,78 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
         it 'redirects to the problem page' do
           expect(response).to redirect_to(problem_index_path)
         end
+      end
+    end
+  end
+
+  describe 'GET /providers/applications/:legal_aid_application_id/means_summary/gather' do
+    let(:state) { :analysing_bank_transactions }
+    let(:worker_id) { SecureRandom.uuid }
+    let(:worker) { { 'status' => 'completed' } }
+    subject { get gather_providers_legal_aid_application_means_summary_path(legal_aid_application) }
+
+    before do
+      login
+      expect(BankTransactionsAnalyserWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)
+      allow(Sidekiq::Status).to receive(:get_all).and_return(worker)
+      subject
+    end
+
+    it 'redirects to show path' do
+      expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
+    end
+
+    it 'updates the state' do
+      expect(legal_aid_application.reload.state).to eq('provider_assessing_means')
+    end
+
+    it 'clears the job/worker id in the legal aid application' do
+      expect(legal_aid_application.reload.gathering_transactions_jid).to eq nil
+    end
+
+    it 'does not have errors' do
+      expect(worker).not_to have_key('errors')
+    end
+
+    context 'background worker is still working' do
+      let(:worker) { { 'status' => 'working' } }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays a loading message' do
+        expect(response.body).to include(I18n.t('providers.means_summaries.gather.retrieving_transactions'))
+      end
+
+      it 'includes the expect HTML for the javascript to work' do
+        expect(response.body).to include("<div class=\"worker-waiter\" data-worker-id=\"#{worker_id}\"")
+      end
+
+      it 'saves the job/worker id in the legal aid application' do
+        expect(legal_aid_application.reload.gathering_transactions_jid).to eq(worker_id)
+      end
+    end
+
+    context 'background worker generated an error' do
+      let(:state) { :analysing_bank_transactions }
+      let(:error) { 'something wrong' }
+      let(:worker) { { 'status' => 'complete', 'errors' => [error].to_json } }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays the error' do
+        expect(response.body).to include(error)
+      end
+
+      it 'keeps the job/worker id in the legal aid application' do
+        expect(legal_aid_application.reload.gathering_transactions_jid).to eq(worker_id)
+      end
+
+      it 'does not update the state' do
+        expect(legal_aid_application.reload.state).to eq('analysing_bank_transactions')
       end
     end
   end

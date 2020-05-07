@@ -6,7 +6,7 @@ RSpec.describe 'GET /v1/workers', type: :request do
     let(:worker_status) do
       {
         status: 'complete',
-        worker: 'ImportBankDataWorker',
+        worker: %w[ImportBankDataWorker BankTransactionsAnalyserWorker].sample,
         jid: worker_id,
         errors: ['error 1', 'error 2'].to_json
       }.stringify_keys

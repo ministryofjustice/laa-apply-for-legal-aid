@@ -185,6 +185,12 @@ RSpec.describe 'provider other assets requests', type: :request do
               it 'redirects to means summary page' do
                 expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
               end
+              context 'still analysing bank transactions' do
+                let(:state) { :analysing_bank_transactions }
+                it 'redirects to the gather_means_transactions_results_path' do
+                  expect(response).to redirect_to(gather_providers_legal_aid_application_means_summary_path(application))
+                end
+              end
             end
           end
 

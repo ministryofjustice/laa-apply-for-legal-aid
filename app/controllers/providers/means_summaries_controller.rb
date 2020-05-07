@@ -16,17 +16,14 @@ module Providers
     end
 
     def gather
-      if worker_working?
-        render :gather
+      return if worker_working?
+
+      if worker_errors.any?
+        @errors = worker_errors.join(', ')
       else
         legal_aid_application.complete_bank_transaction_analysis!
-
-        if worker_errors.any?
-          @errors = worker_errors.join(', ')
-        else
-          legal_aid_application.gathering_transactions_jid = nil
-          redirect_to action: :show
-        end
+        legal_aid_application.update_attribute(:gathering_transactions_jid, nil)
+        redirect_to action: :show
       end
     end
 
