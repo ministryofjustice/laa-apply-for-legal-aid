@@ -19,6 +19,9 @@ FactoryBot.define do
       applicant { build :applicant, :with_address, with_bank_accounts: with_bank_accounts }
     end
 
+    trait :gathering_transactions_jid do
+      gathering_transactions_jid { nil }
+    end
     trait :with_applicant_and_address_lookup do
       applicant { build :applicant, :with_address_lookup }
     end

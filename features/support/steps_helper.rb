@@ -34,7 +34,6 @@ end
 Then('I click {string} and I wait') do |button_name|
   click_button(button_name)
   wait_for_ajax
-  visit current_path
 end
 
 Then('I fill {string} with {string}') do |field, value|

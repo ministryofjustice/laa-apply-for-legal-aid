@@ -24,7 +24,7 @@ module CFE
           it 'returns manual_check_required' do
             expect(contribution_and_restriction_result.capital_contribution_required?).to be true
             expect(legal_aid_application.has_restrictions?).to be true
-            expect(contribution_and_restriction_result.overview).to eq 'manual_check_required'
+            expect(contribution_and_restriction_result.reload.overview).to eq 'manual_check_required'
           end
         end
 
