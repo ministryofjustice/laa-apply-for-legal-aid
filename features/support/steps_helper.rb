@@ -37,7 +37,12 @@ Then('I click {string} and I wait') do |button_name|
 end
 
 Then('I wait') do
-  wait_for_ajax
+  10.times do
+    break unless current_path.split('/').last == 'gather'
+
+    wait_for_ajax
+    visit current_path
+  end
 end
 
 Then('I fill {string} with {string}') do |field, value|
