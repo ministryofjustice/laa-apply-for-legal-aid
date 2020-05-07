@@ -98,7 +98,8 @@ Given('I start the merits application') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :provider_assessing_means
+    :gathering_transactions_jid,
+    :analysing_bank_transactions
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -131,7 +132,7 @@ Given('I start the merits application and the applicant has uploaded transaction
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :provider_assessing_means,
+    :analysing_bank_transactions,
     :with_transaction_period,
     :with_benefits_transactions
   )
@@ -284,7 +285,7 @@ Given('The means questions have been answered by the applicant') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :provider_assessing_means,
+    :analysing_bank_transactions,
     :with_uncategorised_debit_transactions
   )
   login_as @legal_aid_application.provider

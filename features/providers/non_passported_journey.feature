@@ -25,7 +25,7 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
-    Then I click 'Save and continue'
+    Then I click 'Save and continue' and I wait
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'Add dependant'
 
@@ -136,7 +136,7 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
-    Then I click 'Save and continue'
+    Then I click 'Save and continue' and I wait
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
@@ -172,7 +172,7 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
-    Then I click 'Save and continue'
+    Then I click 'Save and continue' and I wait
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'Wednesday Adams'
 
@@ -227,9 +227,10 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
-    Then I click 'Save and continue'
+    Then I click 'Save and continue' and I wait
+    Then show me the page
     Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
-    Then I click 'Save and continue'
+    Then I click 'Save and continue' and I wait
     Then I should be on the 'means_summary' page showing 'Check your answers'
