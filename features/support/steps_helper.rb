@@ -32,7 +32,11 @@ Then('I click {string}') do |button_name|
 end
 
 Then('I click {string} and I wait') do |button_name|
+  wait_for_ajax
   click_button(button_name)
+end
+
+Then('I wait') do
   wait_for_ajax
 end
 

@@ -406,8 +406,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
-    Then I click 'Save and continue' and I wait
-    Then I reload the page
+    Then I click 'Save and continue'
+    Then I wait
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click link 'View/change declared income'
     Then I should be on a page showing "Sort your client's income into categories"
@@ -448,8 +448,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
-    Then I click 'Save and continue' and I wait
-    Then I reload the page
+    Then I click 'Save and continue'
+    Then I wait
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "We’ve calculated that your client should pay"
