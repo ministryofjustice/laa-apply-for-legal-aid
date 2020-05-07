@@ -45,7 +45,7 @@ module Flow
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },
-          forward: ->(app) { app.provider_assessing_means? ? :means_summaries : :check_passported_answers },
+          forward: ->(app) { app.analysing_bank_transactions? ? :gather_means_transactions_results : :check_passported_answers },
           check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
         },
         check_passported_answers: {

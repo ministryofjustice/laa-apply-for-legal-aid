@@ -56,10 +56,10 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context 'when the citizen has completed the non-passported path' do
-          let(:application) { create :legal_aid_application, :with_applicant, state: :provider_assessing_means }
+          let(:application) { create :legal_aid_application, :with_applicant, state: :analysing_bank_transactions }
 
-          it 'redirects to means_summary' do
-            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+          it 'redirects to /means_summary/gather' do
+            expect(response).to redirect_to(gather_providers_legal_aid_application_means_summary_path(application))
           end
         end
 
