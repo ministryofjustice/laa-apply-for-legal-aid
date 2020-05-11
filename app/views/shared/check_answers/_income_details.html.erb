@@ -1,0 +1,18 @@
+<section>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%
+      {
+          benefits: :monthly_state_benefits,
+          family_help: :mei_friends_or_family,
+          maintenance_in: :mei_maintenance_in,
+          property_or_lodger: :mei_property_or_lodger,
+          student_loan: :mei_student_loan,
+          pension: :mei_pension
+      }.each do |name, value_method|
+    %>
+      <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method, suppress_border: name == :pension %>
+    <% end %>
+    <%= render 'shared/means_report/total', name: 'total_income', value_method: :total_gross_income_assessed %>
+  </dl>
+
+</section>

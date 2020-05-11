@@ -35,6 +35,8 @@ RSpec.describe 'cfe_v2_result factory' do
     it 'has required keys in gross income' do
       expect(gross_income.keys).to match_array %i[monthly_other_income
                                                   monthly_state_benefits
+                                                  monthly_income_equivalents
+                                                  monthly_outgoing_equivalents
                                                   total_gross_income
                                                   upper_threshold
                                                   assessment_result
@@ -44,6 +46,7 @@ RSpec.describe 'cfe_v2_result factory' do
 
     it 'has required keys in disposable income' do
       expect(disposable_income.keys).to match_array %i[outgoings
+                                                       deductions
                                                        childcare_allowance
                                                        dependant_allowance
                                                        maintenance_allowance

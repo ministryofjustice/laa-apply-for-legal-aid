@@ -1,0 +1,12 @@
+<%
+  suppress_border = suppress_border || false
+  css_border_klass = suppress_border ? 'govuk-summary-list__row--no-border' : ''
+%>
+<div class="<%= "govuk-summary-list__row  normal-word-break #{css_border_klass}" %>" id="<%= "means-merits-report__#{name}" %>">
+  <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
+    <%= t(".#{scope}.#{name}") %>
+  </dt>
+  <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+    <%= number_to_currency(@cfe_result.__send__(value_method)) %>
+  </dd>
+</div>

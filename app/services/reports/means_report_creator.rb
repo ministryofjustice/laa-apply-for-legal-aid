@@ -28,7 +28,8 @@ module Reports
         template: 'providers/means_reports/show',
         layout: 'pdf',
         locals: {
-          :@legal_aid_application => legal_aid_application
+          :@legal_aid_application => legal_aid_application,
+          :@cfe_result => legal_aid_application.cfe_result
         }
       )
     end
