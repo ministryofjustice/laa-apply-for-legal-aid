@@ -209,6 +209,8 @@ en:
                 blank: Select yes if your client owns their home with anyone else
             substantive_application:
               blank: Select Yes or No
+            uncategorised_bank_transactions:
+              message: Add transactions to this category
             used_delegated_functions:
               blank: Please select Yes or No
             used_delegated_functions_on:

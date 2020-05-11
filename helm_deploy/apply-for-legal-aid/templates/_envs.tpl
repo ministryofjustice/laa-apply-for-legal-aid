@@ -283,11 +283,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: googleTagManagerTrackingId
-  - name: SLACK_ALERTS_WEBHOOK
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: slackAlertsWebhook
   - name: KUBERNETES_DEPLOYMENT
     value: "true"
   - name: METRICS_SERVICE_HOST

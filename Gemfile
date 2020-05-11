@@ -10,7 +10,7 @@ gem 'govuk_notify_rails', '~> 2.1.2'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 6.0.2'
+gem 'rails', '~> 6.0.3'
 gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0'
 gem 'savon', '~> 2.12.0'
@@ -89,8 +89,6 @@ gem 'wicked_pdf'
 
 # interface to manage data
 gem 'rails_admin', '~> 2.0'
-
-gem 'slack-notifier'
 
 # Create reports with SQL queries
 gem 'blazer'

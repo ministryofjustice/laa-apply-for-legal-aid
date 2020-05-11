@@ -22,6 +22,16 @@ FactoryBot.define do
       meta_data { 'child_maintenance' }
     end
 
+    trait :uncategorised_credit_transaction do
+      operation { 'credit' }
+      transaction_type { nil }
+    end
+
+    trait :uncategorised_debit_transaction do
+      operation { 'debit' }
+      transaction_type { nil }
+    end
+
     trait :disregarded_benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }

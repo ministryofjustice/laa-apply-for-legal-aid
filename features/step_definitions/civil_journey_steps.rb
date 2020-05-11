@@ -108,6 +108,24 @@ Given('I start the merits application') do
   )
 end
 
+Given('I start the merits application with brank transactions with no transaction type category') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :provider_assessing_means,
+    :with_uncategorised_credit_transactions,
+    :with_uncategorised_debit_transactions
+  )
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
 Given('I start the merits application and the applicant has uploaded transaction data') do
   @legal_aid_application = create(
     :application,
@@ -266,7 +284,8 @@ Given('The means questions have been answered by the applicant') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :provider_assessing_means
+    :provider_assessing_means,
+    :with_uncategorised_debit_transactions
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -420,6 +439,14 @@ Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
   fill_in(field_name, with: entry)
+end
+
+Then(/^I select the first checkbox$/) do
+  page.first("input[type='checkbox']", visible: false).click
+end
+
+Then(/^I select the second checkbox$/) do
+  page.find("input[type='checkbox']", visible: false)[1].click
 end
 
 Then('I am on the postcode entry page') do

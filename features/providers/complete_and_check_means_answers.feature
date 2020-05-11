@@ -60,14 +60,15 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Sort your client's regular payments into categories"
     Then I click link 'Add another type of regular payment'
     Then I should be on a page showing 'Which regular payments does your client make?'
-    Then I select 'Housing costs'
     Then I select 'Payments towards legal aid in a criminal case'
     Then I click 'Save and continue'
     Then I should be on a page showing "Sort your client's regular payments into categories"
-    Then I should be on a page showing "Housing costs"
     Then I should be on a page showing "Payments towards legal aid in a criminal case"
+    Then I click link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Check your answers"
+    Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
   Scenario: I change the applicant answer about owning a vehicle

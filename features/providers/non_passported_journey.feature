@@ -30,6 +30,39 @@ Feature: Non-passported applicant journeys
     And I should see 'Add dependant'
 
   @javascript
+  Scenario: Selects and categorises bank transactions into transaction types
+    Given I start the merits application with brank transactions with no transaction type category
+    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I click 'Continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    When I click link 'Add another type of income'
+    And I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    Then I click link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    When I click link 'Add another type of regular payment'
+    And I select 'Childcare costs'
+    Then I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    Then I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    Then I click link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Does your client own the home that they live in?'
+
+
+  @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with dependants
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'

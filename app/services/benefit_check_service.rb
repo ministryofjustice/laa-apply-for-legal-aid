@@ -21,9 +21,9 @@ class BenefitCheckService
   def call
     soap_client.call(:check, message: benefit_checker_params).body.dig(:benefit_checker_response)
   rescue Savon::SOAPFault => e
-    process_error(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
+    Raven.capture_exception(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
   rescue StandardError => e
-    process_error(e)
+    Raven.capture_exception(e)
   end
 
   private
@@ -59,20 +59,5 @@ class BenefitCheckService
       read_timeout: REQUEST_TIMEOUT,
       namespace: BENEFIT_CHECKER_NAMESPACE
     )
-  end
-
-  def process_error(error)
-    Raven.capture_exception(error)
-    SlackAlertSenderWorker.perform_async(format_error(error))
-    false
-  end
-
-  def format_error(error)
-    [
-      '*BenefitChecker REQUEST ERROR*',
-      'An error has been raised by the BenefitChecker and logged to Sentry',
-      "*Application* #{application.application_ref}",
-      "#{error.class}: #{error.message}"
-    ].join("\n")
   end
 end

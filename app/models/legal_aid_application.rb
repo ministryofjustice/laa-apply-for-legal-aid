@@ -44,6 +44,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   after_save do
     ActiveSupport::Notifications.instrument 'dashboard.delegated_functions_used' if saved_change_to_used_delegated_functions?
+    ActiveSupport::Notifications.instrument 'dashboard.declined_open_banking' if saved_change_to_open_banking_consent?
   end
 
   attr_reader :proceeding_type_codes
@@ -129,6 +130,14 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
       transaction_period_start_on: date_from,
       transaction_period_finish_on: date_to
     )
+  end
+
+  def uncategorised_transactions?(type)
+    grouped_transactions = bank_transactions.__send__(type).order(happened_at: :desc).by_type
+    transaction_types.__send__(type.to_s.pluralize.to_sym).each do |transaction_type|
+      uncategorised_transactions_errors(transaction_type.name) if grouped_transactions[transaction_type].blank?
+    end
+    errors.present?
   end
 
   def proceeding_type_codes=(codes)
@@ -274,6 +283,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     return unless proceeding_type_codes.present?
 
     errors.add(:proceeding_type_codes, :invalid) if proceeding_types.size != proceeding_type_codes.size
+  end
+
+  def uncategorised_transactions_errors(transaction_type_name)
+    errors.add(transaction_type_name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
   end
 
   def create_app_ref

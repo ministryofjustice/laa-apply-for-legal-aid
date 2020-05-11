@@ -50,11 +50,6 @@ RSpec.describe ScheduledMailing do
     it 'returns false' do
       expect(scheduled_mail.deliver!).to eq false
     end
-
-    it 'sends an alert on slack' do
-      expect(SlackAlertSenderWorker).to receive(:perform_async)
-      scheduled_mail.deliver!
-    end
   end
 
   describe '#cancel!' do
