@@ -22,11 +22,5 @@ Feature: Completing and checking means answers backwards and forwards
     And I should see 'Benefits'
     And I should see 'Excluded benefits'
     And I should see 'Student loan or grant'
-
     Then I click on the View statements and add transactions link for 'Excluded benefits'
     And I should be on a page showing 'Excluded Benefits'
-
-    Then show me the page
-
-
-

@@ -90,4 +90,8 @@ class TransactionType < ApplicationRecord
   def children
     TransactionType.where(parent_id: id)
   end
+
+  def parent_or_self
+    parent_id.present? ? parent : self
+  end
 end
