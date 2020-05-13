@@ -200,6 +200,10 @@ module CFE
         monthly_income_equivalents[:pension].to_d
       end
 
+      def total_monthly_income
+        mei_pension + mei_student_loan + mei_property_or_lodger + mei_maintenance_in + mei_friends_or_family + monthly_state_benefits.to_d
+      end
+
       ################################################################
       #                                                              #
       #  MONTHLY_OUTGOING_EQUIVALENTS                                #
