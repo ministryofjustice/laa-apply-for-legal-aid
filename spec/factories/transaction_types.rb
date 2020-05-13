@@ -27,6 +27,13 @@ FactoryBot.define do
         repeating_sequence_for_transaction_type(:credit, n)
       end
       operation { :credit }
+
+      after(:create) do |record|
+        if record.name == 'excluded_benefits'
+          parent = TransactionType.find_or_create_by(name: 'benefits', operation: 'credit')
+          record.update!(parent_id: parent.id)
+        end
+      end
     end
 
     trait :debit_with_standard_name do
@@ -64,6 +71,12 @@ FactoryBot.define do
       name { 'benefits' }
       operation { 'credit' }
       sort_order { 30 }
+    end
+
+    trait :excluded_benefits do
+      name { 'excluded_benefits' }
+      operation { 'credit' }
+      sort_order { 40 }
     end
   end
 end

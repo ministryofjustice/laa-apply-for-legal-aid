@@ -19,7 +19,7 @@ FactoryBot.define do
     trait :benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
-      meta_data { 'child_maintenance' }
+      meta_data { { code: 'CHB', label: 'child_benefit', name: 'Child Benefit' } }
     end
 
     trait :uncategorised_credit_transaction do
@@ -35,7 +35,7 @@ FactoryBot.define do
     trait :disregarded_benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
-      meta_data { 'grenfell_payments' }
+      meta_data { { code: nil, label: 'grenfell_payments', name: 'Grenfell Tower fire victims payments' } }
     end
 
     trait :unassigned_benefits do
@@ -46,7 +46,7 @@ FactoryBot.define do
     trait :unknown_benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
-      meta_data { 'Unknown code xxx' }
+      meta_data { { code: 'xxx', label: 'unknown', name: 'Unrecognised state benefit' } }
     end
 
     trait :friends_or_family do
@@ -92,6 +92,12 @@ FactoryBot.define do
     trait :legal_aid do
       operation { 'debit' }
       transaction_type { TransactionType.where(name: 'legal_aid').first || create(:transaction_type, :legal_aid) }
+    end
+
+    trait :with_meta do
+      meta_data do
+        { code: 'UC', label: 'universal_credit', name: 'Universal credit' }
+      end
     end
   end
 end

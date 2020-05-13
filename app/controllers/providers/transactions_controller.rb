@@ -19,7 +19,7 @@ module Providers
 
     def set_selection
       new_values = { transaction_type_id: transaction_type.id }
-      new_values[:meta_data] = 'manually_chosen' if transaction_type.name.eql?('benefits')
+      new_values[:meta_data] = manually_chosen_metadata if any_type_of_benefit?(transaction_type)
       bank_transactions
         .where(id: selected_transaction_ids)
         .update_all(new_values)
@@ -39,6 +39,18 @@ module Providers
         .bank_transactions
         .where(operation: transaction_type.operation)
         .order(happened_at: :desc, description: :desc)
+    end
+
+    def manually_chosen_metadata
+      {
+        code: 'XXXX',
+        label: 'manually_chosen',
+        name: 'Manually chosen'
+      }
+    end
+
+    def any_type_of_benefit?(transaction_type)
+      transaction_type.name.in?(TransactionType.any_type_of('benefits').map(&:name))
     end
   end
 end

@@ -89,7 +89,7 @@ module CFE
 
     def with_disregarded_hash
       {
-        "name": 'grenfell_payments',
+        "name": 'Grenfell Tower fire victims payments',
         "payments": [
           {
             "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
@@ -101,7 +101,7 @@ module CFE
 
     def basic_payload_hash # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       {
-        "name": 'child_maintenance',
+        "name": 'Child Benefit',
         "payments": [
           {
             "date": DAY_SEQUENCE[2].days.ago.strftime('%Y-%m-%d'),

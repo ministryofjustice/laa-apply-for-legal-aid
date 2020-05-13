@@ -5,6 +5,7 @@ class TransactionType < ApplicationRecord
   NAMES = {
     credit: %i[
       benefits
+      excluded_benefits
       friends_or_family
       maintenance_in
       property_or_lodger
@@ -27,35 +28,16 @@ class TransactionType < ApplicationRecord
     pension
   ].freeze
 
+  HIERARCHIES = {
+    excluded_benefits: :benefits
+  }.freeze
+
   scope :active, -> { where(archived_at: nil) }
   scope :debits, -> { active.where(operation: :debit) }
   scope :credits, -> { active.where(operation: :credit) }
   scope :income_for, ->(transaction_type_name) { active.where(operation: :credit, name: transaction_type_name) }
   scope :outgoing_for, ->(transaction_type_name) { active.where(operation: :debit, name: transaction_type_name) }
-
-  def self.populate
-    populate_records(true)
-  end
-
-  def self.populate_without_income
-    populate_records(false)
-  end
-
-  def self.populate_records(include_other_income)
-    NAMES.each_with_index do |(operation, names), op_index|
-      names.each_with_index do |name, index|
-        start_number = (op_index * 1000) + (index * 10)
-        transaction_type = find_or_initialize_by(name: name, operation: operation)
-        transaction_type.update! sort_order: start_number
-      end
-    end
-    TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.now)
-    return unless include_other_income
-
-    TransactionType.where(name: OTHER_INCOME_TYPES).each do |tt|
-      tt.update!(other_income: true)
-    end
-  end
+  scope :not_children, -> { where(parent_id: nil) }
 
   def self.for_income_type?(transaction_type_name)
     income_for(transaction_type_name).any?
@@ -73,11 +55,39 @@ class TransactionType < ApplicationRecord
     outgoing_for(transaction_type_name).any?
   end
 
+  def self.find_with_children(*ids)
+    all_ids = (ids + TransactionType.where(parent_id: ids).pluck(:id)).flatten
+    where(id: all_ids)
+  end
+
+  def self.any_type_of(name)
+    top_level_id = TransactionType.find_by(name: name)&.id
+    return [] if top_level_id.nil?
+
+    find_with_children(top_level_id)
+  end
+
   def citizens_label_name
     label_name(journey: :citizens)
   end
 
   def providers_label_name
     label_name(journey: :providers)
+  end
+
+  def child?
+    parent_id.present?
+  end
+
+  def parent?
+    TransactionType.where(parent_id: id).any?
+  end
+
+  def parent
+    TransactionType.find_by(id: parent_id)
+  end
+
+  def children
+    TransactionType.where(parent_id: id)
   end
 end

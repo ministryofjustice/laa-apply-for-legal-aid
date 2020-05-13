@@ -63,7 +63,7 @@ module CFE
           end
 
           def create_bank_transactions
-            TransactionType.populate
+            Populators::TransactionTypePopulator.call
             create_categorised_bank_transactions
             create_uncategorised_bank_transactions
           end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_144915) do
+ActiveRecord::Schema.define(version: 2020_05_01_103020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -650,6 +650,8 @@ ActiveRecord::Schema.define(version: 2020_04_10_144915) do
     t.integer "sort_order"
     t.datetime "archived_at"
     t.boolean "other_income", default: false
+    t.string "parent_id"
+    t.index ["parent_id"], name: "index_transaction_types_on_parent_id"
   end
 
   create_table "true_layer_banks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
