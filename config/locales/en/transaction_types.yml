@@ -5,6 +5,7 @@ en:
       citizens:
         benefits: Benefits
         child_care: Childcare costs
+        excluded_benefits: Disregarded benefits
         friends_or_family: Financial help from friends or family
         legal_aid: Payments towards legal aid in a criminal case
         maintenance_in: Maintenance payments
