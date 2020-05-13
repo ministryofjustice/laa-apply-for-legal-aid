@@ -4,6 +4,23 @@
     </h1>
 
   <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-breakdown">
+
+    <div class="govuk-accordion__section ">
+      <div class="govuk-accordion__section-header">
+        <h2 class="govuk-accordion__section-heading">
+        <span class="govuk-accordion__section-button" id="accordion-income-calculation">
+          <%= t('.income_calculation') %>
+        </span>
+        </h2>
+      </div>
+        <%= render 'shared/property_results' %>
+        <%= render 'shared/vehicle_results' %>
+        <%= render 'shared/savings_and_investments' %>
+        <%= render 'shared/other_assets' %>
+        <%= render 'shared/total_capital' %>
+        <%= render 'shared/restrictions' %>
+    </div>
+
     <div class="govuk-accordion__section ">
       <div class="govuk-accordion__section-header">
         <h2 class="govuk-accordion__section-heading">

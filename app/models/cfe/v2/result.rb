@@ -89,6 +89,10 @@ module CFE
         gross_income[:monthly_state_benefits]
       end
 
+      def total_gross_income
+        gross_income[:total_gross_income].to_d
+      end
+
       def maintenance_per_month
         # TODO: monitor this... is it actually monthly or a gross amount?
         # this will need testing once full CCMS submission for non passported
