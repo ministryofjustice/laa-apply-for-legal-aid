@@ -358,7 +358,7 @@ http_interactions:
             }
           } ]
         }
-    http_version: 
+    http_version: null
   recorded_at: Wed, 28 Nov 2018 14:35:37 GMT
 - request:
     method: get
@@ -506,7 +506,7 @@ http_interactions:
            </wsdl:service>
 
         </wsdl:definitions>
-    http_version: 
+    http_version: null
   recorded_at: Wed, 28 Nov 2018 14:35:38 GMT
 - request:
     method: post
@@ -554,7 +554,7 @@ http_interactions:
         xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">e05bce11-b8ef-4a08-bfc0-4f2dbc95745a</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1543415738301</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version: null
   recorded_at: Wed, 28 Nov 2018 14:35:38 GMT
 - request:
     method: get
@@ -605,7 +605,7 @@ http_interactions:
             "output_srs" : "EPSG:27700"
           }
         }
-    http_version: 
+    http_version: null
   recorded_at: Wed, 28 Nov 2018 14:35:39 GMT
 - request:
     method: get
@@ -615,7 +615,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - Faraday v1.0.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -625,20 +625,18 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Date:
+      - Wed, 13 May 2020 15:23:21 GMT
       Content-Type:
       - application/json;charset=UTF-8
-      Date:
-      - Thu, 11 Apr 2019 10:52:07 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Status:
-      - success
-      Tx-Id:
-      - 1554979927381:381
-      Content-Length:
-      - '337'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
+      Tx-Id:
+      - 1589383401805:805
+      Status:
+      - success
     body:
       encoding: UTF-8
       string: |-
@@ -652,10 +650,10 @@ http_interactions:
             "dataset" : "DPA",
             "lr" : "EN",
             "maxresults" : 100,
-            "epoch" : "65",
+            "epoch" : "75",
             "output_srs" : "EPSG:27700"
           }
         }
-    http_version: 
-  recorded_at: Thu, 11 Apr 2019 10:52:07 GMT
-recorded_with: VCR 4.0.0
+    http_version: null
+  recorded_at: Wed, 13 May 2020 15:23:21 GMT
+recorded_with: VCR 5.1.0

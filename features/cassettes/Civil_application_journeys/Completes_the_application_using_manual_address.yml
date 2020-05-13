@@ -49,59 +49,8 @@ http_interactions:
             "output_srs" : "EPSG:27700"
           }
         }
-    http_version: 
+    http_version: null
   recorded_at: Wed, 20 Mar 2019 16:51:34 GMT
-- request:
-    method: get
-    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=SW1H9AJ
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json;charset=UTF-8
-      Date:
-      - Thu, 11 Apr 2019 10:50:50 GMT
-      Server:
-      - Apache-Coyote/1.1
-      Status:
-      - success
-      Tx-Id:
-      - 1554979850480:480
-      Content-Length:
-      - '337'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "header" : {
-            "uri" : "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?lr=EN&postcode=SW1H9AJ",
-            "query" : "postcode=SW1H9AJ",
-            "offset" : 0,
-            "totalresults" : 0,
-            "format" : "JSON",
-            "dataset" : "DPA",
-            "lr" : "EN",
-            "maxresults" : 100,
-            "epoch" : "65",
-            "output_srs" : "EPSG:27700"
-          }
-        }
-    http_version: 
-  recorded_at: Thu, 11 Apr 2019 10:50:50 GMT
 - request:
     method: post
     uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
@@ -148,6 +97,55 @@ http_interactions:
         xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">5e674336-b4a6-4294-ab7e-523aa81813c8</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1554979853501</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
-    http_version: 
+    http_version: null
   recorded_at: Thu, 11 Apr 2019 10:50:53 GMT
-recorded_with: VCR 4.0.0
+- request:
+    method: get
+    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=SW1H9AJ
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 13 May 2020 15:23:03 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Tx-Id:
+      - 1589383383861:861
+      Status:
+      - success
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "header" : {
+            "uri" : "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?lr=EN&postcode=SW1H9AJ",
+            "query" : "postcode=SW1H9AJ",
+            "offset" : 0,
+            "totalresults" : 0,
+            "format" : "JSON",
+            "dataset" : "DPA",
+            "lr" : "EN",
+            "maxresults" : 100,
+            "epoch" : "75",
+            "output_srs" : "EPSG:27700"
+          }
+        }
+    http_version: null
+  recorded_at: Wed, 13 May 2020 15:23:03 GMT
+recorded_with: VCR 5.1.0
