@@ -610,6 +610,9 @@ en:
         col_select_all: Select all
         sorted: Sorted
         disregarded_list: Benefits disregarded from the financial eligibility calculation
+        other: Other benefits
+        armed_forces_independence_payment: Armed Forces Independance Payments
+        attendance_allowance: Attendance Allowance
     use_ccms:
       show:
         title: You need to complete this application in CCMS

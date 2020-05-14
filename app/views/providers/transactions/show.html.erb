@@ -1,7 +1,7 @@
 <%= page_template page_title: t("transaction_types.page_titles.#{@transaction_type.name}"), column_width: 'full', template: :default do %>
 
   <div class="govuk-inset-text"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
-
+<%= @state_benefit_names %>
   <% if @transaction_type.name == 'excluded_benefits' %>
     <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
      <summary class="govuk-details__summary">
@@ -10,7 +10,36 @@
         </span>
       </summary>
 
-      <%= @state_benefit_names %>
+      <div class="govuk-details__text">
+        <strong><%= t('.carer_and_disability') %></strong>
+          <ul class="govuk-list">
+            <% @carer_benefits.each do |benefit| %>
+            <li class="govuk-list">
+              <%= t(".#{benefit[:name]}") %>
+            </li>
+            <% end %>
+          </ul>
+          <br>
+
+        <strong><%= t('.low_income_benefits') %></strong>
+          <ul class="govuk-list">
+            <% @low_income_benefits.each do |benefit| %>
+              <li class="govuk-list">
+                <%= t(".#{benefit[:name]}") %>
+              </li>
+            <% end %>
+          </ul>
+          <br>
+
+        <strong><%= t('.other_benefits') %></strong>
+          <ul class="govuk-list">
+            <% @other_benefits.each do |benefit| %>
+              <li class="govuk-list">
+                <%= t(".#{benefit[:name]}") %>
+              </li>
+            <% end %>
+          </ul>
+      </div>
     </details>
   <% end %>
 

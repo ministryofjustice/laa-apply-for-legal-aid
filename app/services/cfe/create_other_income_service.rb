@@ -20,7 +20,7 @@ module CFE
       array = []
       transaction_types = grouped_transactions.keys.sort_by(&:name)
       transaction_types.each do |transaction_type|
-         array << all_transactions_of_one_type(transaction_type, grouped_transactions[transaction_type])
+        array << all_transactions_of_one_type(transaction_type, grouped_transactions[transaction_type])
       end
       array
     end
