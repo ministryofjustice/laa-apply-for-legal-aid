@@ -64,6 +64,7 @@ module CFEResults
       end
 
       def self.contribution_required
+        puts ">>>>>>>>>>>> MOCKRESULT contribution requiered #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
         new_capital_section = eligible[:capital]
         new_capital_section[:capital_contribution] = '465.66'
         eligible.merge assessment_result: 'contribution_required', capital: new_capital_section
