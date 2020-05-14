@@ -17,7 +17,7 @@ module CFE
             .to_return(status: 200, body: expected_json_response)
         end
 
-        it 'returns a hash respresentation of the json response' do
+        it 'returns a hash representation of the json response' do
           expect(described_class.call).to eq expected_response
         end
       end

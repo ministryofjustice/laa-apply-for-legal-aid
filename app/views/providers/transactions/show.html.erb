@@ -2,6 +2,19 @@
 
   <div class="govuk-inset-text"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
 
+  <% if @transaction_type.name == 'excluded_benefits' %>
+    <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
+     <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          <%= t('.disregarded_list') %>
+        </span>
+      </summary>
+
+      <%= @state_benefit_names %>
+    </details>
+  <% end %>
+
+
   <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
     <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
       <summary class="govuk-details__summary">
@@ -96,7 +109,14 @@
                   numeric: true
                 ) %>
 
+            <%# if @transaction_type.name != 'excluded_benefits' %>
+              <%#= sort_category_column_cell builder.object, @transaction_type %>
+            <%# else %>
+              <%#= sort_category_column_cell builder.object, @transaction_type %>
+            <%# end %>
+
             <%= sort_category_column_cell builder.object, @transaction_type %>
+
           </tr>
         <% end %>
       </tbody>

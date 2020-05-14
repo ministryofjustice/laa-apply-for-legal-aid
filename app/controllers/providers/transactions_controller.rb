@@ -1,6 +1,7 @@
 module Providers
   class TransactionsController < ProviderBaseController
     def show
+      get_state_benefit_list
       transaction_type
       bank_transactions
     end
@@ -39,6 +40,26 @@ module Providers
         .bank_transactions
         .where(operation: transaction_type.operation)
         .order(happened_at: :desc, description: :desc)
+    end
+
+    def get_state_benefit_list
+      result = []
+      benefits_list = CFE::ObtainStateBenefitTypesService.call
+      disregarded_benefits_list = benefits_list.select!{|benefit| benefit["exclude_from_gross_income"] == true}
+      disregarded_benefits_list.sort_by!{ |item| item["name"] }
+
+      # WORKING TO SHOW NAME AND CATEGORY
+      #disregarded_benefits_list.each do |state|
+      #  #result << { name: state['name'], category: state['category']}
+      #  result << (state['name']) << (state['category'])
+      #end
+      #return @state_benefit_names = result
+
+      disregarded_benefits_list.each do |state|
+        result << { name: state['name'], category: state['category']}
+      end
+      return @state_benefit_names = result
+
     end
 
     def manually_chosen_metadata

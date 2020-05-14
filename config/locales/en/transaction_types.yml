@@ -18,7 +18,7 @@ en:
       providers:
         benefits: Benefits
         child_care: Childcare costs
-        excluded_benefits: Excluded benefits
+        excluded_benefits: Disregarded benefits
         friends_or_family: Financial help from friends or family
         legal_aid: Payments towards legal aid in a criminal case
         maintenance_in: Maintenance payments
@@ -40,6 +40,7 @@ en:
       rent_or_mortgage: Housing
       salary: Salary
       student_loan: Student loan
+      excluded_benefits: ''
     page_titles:
       benefits: Select benefits payments
       child_care: Select childcare costs
@@ -52,10 +53,13 @@ en:
       rent_or_mortgage: Select housing payments
       salary: Select salary or wage payments
       student_loan: Select student loan or grant payments
+      excluded_benefits: Select disregarded benefits payments
     benefits:
       inset_text: Select every benefits payment your client received in the past 3 months.
     child_care:
       inset_text: Select every childcare payment your client made in the past 3 months.
+    excluded_benefits:
+      inset_text: Select every disregarded benefits payment your client received in the past 3 months
     friends_or_family:
       inset_text: Select every payment your client received from friends or family in the past 3 months.
       details_summary_heading: Not sure which payments to select?      

@@ -609,6 +609,7 @@ en:
         col_and_description: and description
         col_select_all: Select all
         sorted: Sorted
+        disregarded_list: Benefits disregarded from the financial eligibility calculation
     use_ccms:
       show:
         title: You need to complete this application in CCMS
