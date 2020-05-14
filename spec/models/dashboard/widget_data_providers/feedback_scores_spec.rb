@@ -13,8 +13,10 @@ module Dashboard
         it 'returns hash of field definitions' do
           expected_definition = { 'fields':
                                   [
+                                    { 'name': 'three_week_average_difficulty', "optional": false, "type": 'number' },
                                     { 'name': 'three_week_average', "optional": false, "type": 'number' },
                                     { 'name': 'three_week_count', "optional": false, "type": 'number' },
+                                    { 'name': 'one_week_average_difficulty', "optional": false, "type": 'number' },
                                     { 'name': 'one_week_average', "optional": false, "type": 'number' },
                                     { 'name': 'one_week_count', "optional": false, "type": 'number' }
                                   ] }.to_json
@@ -34,7 +36,14 @@ module Dashboard
 
           def expected_data
             [
-              { 'three_week_average' => 63, 'three_week_count' => 11, 'one_week_average' => 66, 'one_week_count' => 9 }
+              {
+                'three_week_average_difficulty' => 63,
+                'three_week_average' => 63,
+                'three_week_count' => 11,
+                'one_week_average_difficulty' => 66,
+                'one_week_average' => 66,
+                'one_week_count' => 9
+              }
             ]
           end
 
@@ -56,7 +65,7 @@ module Dashboard
             expected_feedback.each do |num_days, num_apps|
               travel_to(date - num_days.days) do
                 (0..4).each do |level|
-                  FactoryBot.create_list :feedback, num_apps[level], satisfaction: level if num_apps[level] > 0
+                  create_list :feedback, num_apps[level], satisfaction: level, difficulty: level if num_apps[level] > 0
                 end
               end
             end
@@ -72,7 +81,14 @@ module Dashboard
 
           def expected_data
             [
-              { 'three_week_average' => 50, 'three_week_count' => 10, 'one_week_average' => 50, 'one_week_count' => 10 }
+              {
+                'three_week_average_difficulty' => 50,
+                'three_week_average' => 50,
+                'three_week_count' => 10,
+                'one_week_average_difficulty' => 50,
+                'one_week_average' => 50,
+                'one_week_count' => 10
+              }
             ]
           end
 
@@ -87,7 +103,7 @@ module Dashboard
             expected_feedback.each do |num_days, num_apps|
               travel_to(date - num_days.days) do
                 (0..4).each do |level|
-                  FactoryBot.create_list :feedback, num_apps[level], satisfaction: level if num_apps[level] > 0
+                  FactoryBot.create_list :feedback, num_apps[level], satisfaction: level, difficulty: level if num_apps[level] > 0
                 end
               end
             end
@@ -101,7 +117,14 @@ module Dashboard
 
           def expected_data
             [
-              { 'three_week_average' => 0, 'three_week_count' => 0, 'one_week_average' => 0, 'one_week_count' => 0 }
+              {
+                'three_week_average_difficulty' => 0,
+                'three_week_average' => 0,
+                'three_week_count' => 0,
+                'one_week_average_difficulty' => 0,
+                'one_week_average' => 0,
+                'one_week_count' => 0
+              }
             ]
           end
         end
