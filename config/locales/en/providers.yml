@@ -611,8 +611,33 @@ en:
         sorted: Sorted
         disregarded_list: Benefits disregarded from the financial eligibility calculation
         other: Other benefits
-        armed_forces_independence_payment: Armed Forces Independance Payments
+        carer_and_disability: Carer and disability benefits
+        low_income_benefits: Low income benefits
+        other_benefits: Other benefits
+        armed_forces_independence_payment: Armed Forces Independence Payments
         attendance_allowance: Attendance Allowance
+        benefit_transfer_advance: Benefit transfer advance (Universal Credit)
+        budget_advances: Budgeting Advance
+        carers_allowance: Carer's Allowance
+        community_care_dp: Community Care direct payments
+        constant_attendance_allowance: Constant Attendance Allowance
+        council_tax_benefit: Council Tax Reduction
+        disability_living_allowance: Disability Living Allowance (DLA)
+        earnings_top_up: Earnings Top-up (ETU)
+        exceptionally_severe_disablement_allowance: Exceptionally Severe Disablement Allowance
+        fostering_allowance: Fostering allowance
+        grenfell_payments: Grenfell Tower fire victims payments
+        housing_benefit: Housing Benefit
+        independent_living_funds_payment: Independent Living Funds payments
+        payments_on_account_of_benefit: Payments on account of benefit
+        personal_independent_payments: Personal Independence Payment (PIP)
+        special_education_needs: Special Education Needs (SEN) direct payments
+        social_fund_funeral_payment: Social Fund funeral payments
+        social_fund_payments: Social Fund payments
+        war_widows_pension: War Widow(er) Pension
+        welsh_independent_living_grant: Welsh Independent Living Grant
+        widows_pension_lump_sum: Widow's Pension lump sump payments
+        windrush: Windrush Compensation Scheme payments
     use_ccms:
       show:
         title: You need to complete this application in CCMS

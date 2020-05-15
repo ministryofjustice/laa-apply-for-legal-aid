@@ -20,7 +20,7 @@ Feature: Completing and checking means answers backwards and forwards
     And I click 'Save and continue'
     And I should be on a page showing "Sort your client's income into categories"
     And I should see 'Benefits'
-    And I should see 'Excluded benefits'
+    And I should see 'Disregarded benefits'
     And I should see 'Student loan or grant'
     Then I click on the View statements and add transactions link for 'Excluded benefits'
     And I should be on a page showing 'Excluded Benefits'

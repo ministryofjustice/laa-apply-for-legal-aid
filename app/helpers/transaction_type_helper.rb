@@ -17,20 +17,22 @@ module TransactionTypeHelper
 
     tag_classes = %w[table-category govuk-body-s]
     label = t("transaction_types.table_label.#{object.transaction_type.name}")
+    content = gov_uk_tag(text: label, classes: tag_classes).html_safe
+
+    # @transaction_type.name == 'excluded_benefits' ? content = '' : content = gov_uk_tag(text: label, classes: tag_classes).html_safe
 
     sort_column_cell(
       id: "Category-#{object.id}",
       sort_by: label,
-      content: gov_uk_tag(text: label, classes: tag_classes).html_safe
+      content: content
     )
   end
 
   def sort_category_column_cell_vacant(object, transaction_type)
     label = t("transaction_types.table_label.#{transaction_type.name}")
     tag_classes = %w[table-category govuk-body-s table-category-vacant]
-    content = gov_uk_tag(text: label, classes: tag_classes).html_safe
 
-    content = '' if @transaction_type.name == 'excluded_benefits'
+    content = @transaction_type.name == 'excluded_benefits' ? '' : gov_uk_tag(text: label, classes: tag_classes).html_safe
 
     sort_column_cell(
       id: "Category-#{object.id}",

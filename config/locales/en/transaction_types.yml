@@ -40,7 +40,6 @@ en:
       rent_or_mortgage: Housing
       salary: Salary
       student_loan: Student loan
-      excluded_benefits: ''
     page_titles:
       benefits: Select benefits payments
       child_care: Select childcare costs
