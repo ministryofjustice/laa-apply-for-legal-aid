@@ -24,7 +24,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
       expect(unescaped_response_body).to include(I18n.t("transaction_types.page_titles.#{transaction_type.name}"))
     end
 
-    context 'When there are transactions' do
+    context 'When there are transactions', :vcr do
       let(:not_matching_operation) { (TransactionType::NAMES.keys.map(&:to_s) - [transaction_type.operation.to_s]).first }
       let(:other_transaction_type) { create :transaction_type, name: (TransactionType::NAMES[transaction_type.operation.to_sym] - [transaction_type.name.to_sym]).sample }
       let!(:bank_transaction_matching) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
@@ -76,13 +76,13 @@ RSpec.describe Providers::TransactionsController, type: :request do
     end
   end
 
-  describe 'GET #providers/incoming_transactions' do
+  describe 'GET #providers/incoming_transactions', :vcr do
     subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'
   end
 
-  describe 'GET #citizens/outgoing_transactions' do
+  describe 'GET #citizens/outgoing_transactions', :vcr do
     subject { get providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'

@@ -13,13 +13,11 @@ module TransactionTypeHelper
   end
 
   def sort_category_column_cell(object, transaction_type)
-    return sort_category_column_cell_vacant(object, transaction_type) unless object.transaction_type_id?
+    return sort_category_column_cell_vacant(object, transaction_type) if category_cells_should_be_blank?(object)
 
     tag_classes = %w[table-category govuk-body-s]
     label = t("transaction_types.table_label.#{object.transaction_type.name}")
     content = gov_uk_tag(text: label, classes: tag_classes).html_safe
-
-    # @transaction_type.name == 'excluded_benefits' ? content = '' : content = gov_uk_tag(text: label, classes: tag_classes).html_safe
 
     sort_column_cell(
       id: "Category-#{object.id}",
@@ -39,5 +37,9 @@ module TransactionTypeHelper
       sort_by: 'ZZZ',
       content: content
     )
+  end
+
+  def category_cells_should_be_blank?(object)
+    object.transaction_type_id.nil? || object.transaction_type.name == 'excluded_benefits'
   end
 end

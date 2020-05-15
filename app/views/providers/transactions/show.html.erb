@@ -3,44 +3,7 @@
   <div class="govuk-inset-text"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
 
   <% if @transaction_type.name == 'excluded_benefits' %>
-    <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-     <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          <%= t('.disregarded_list') %>
-        </span>
-      </summary>
-
-      <div class="govuk-details__text">
-        <strong><%= t('.carer_and_disability') %></strong>
-          <ul class="govuk-list">
-            <% @carer_benefits.each do |benefit| %>
-            <li class="govuk-list">
-              <%= t(".#{benefit[:name]}") %>
-            </li>
-            <% end %>
-          </ul>
-          <br>
-
-        <strong><%= t('.low_income_benefits') %></strong>
-          <ul class="govuk-list">
-            <% @low_income_benefits.each do |benefit| %>
-              <li class="govuk-list">
-                <%= t(".#{benefit[:name]}") %>
-              </li>
-            <% end %>
-          </ul>
-          <br>
-
-        <strong><%= t('.other_benefits') %></strong>
-          <ul class="govuk-list">
-            <% @other_benefits.each do |benefit| %>
-              <li class="govuk-list">
-                <%= t(".#{benefit[:name]}") %>
-              </li>
-            <% end %>
-          </ul>
-      </div>
-    </details>
+    <%= render 'disregarded_list' %>
   <% end %>
 
   <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
@@ -135,12 +98,6 @@
                   sort_by: builder.object.amount,
                   numeric: true
                 ) %>
-
-            <%# if @transaction_type.name != 'excluded_benefits' %>
-              <%#= sort_category_column_cell builder.object, @transaction_type %>
-            <%# else %>
-              <%#= sort_category_column_cell builder.object, @transaction_type %>
-            <%# end %>
 
             <%= sort_category_column_cell builder.object, @transaction_type %>
 

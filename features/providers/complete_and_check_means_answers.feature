@@ -28,7 +28,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
-  @javascript
+  @javascript @vcr
   Scenario: I navigate to the Check your answers page and then add some outgoing transaction types
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Your client has completed their financial assessment'
