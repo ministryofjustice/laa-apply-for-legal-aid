@@ -17,6 +17,7 @@ module CFE
 
     describe '.call' do
       before do
+        allow_any_instance_of(BankTransaction).to receive(:id).and_return('33333333-3333-3333-3333-333333333333')
         stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response.to_json)
       end
 
@@ -85,15 +86,15 @@ module CFE
                 {
                   name: 'child_care',
                   payments: [
-                    { payment_date: 45.days.ago.strftime('%F'), amount: 266.0 },
-                    { payment_date: 15.days.ago.strftime('%F'), amount: 234.56 }
+                    { payment_date: 45.days.ago.strftime('%F'), amount: 266.0, client_id: '33333333-3333-3333-3333-333333333333' },
+                    { payment_date: 15.days.ago.strftime('%F'), amount: 234.56, client_id: '33333333-3333-3333-3333-333333333333' }
                   ]
                 },
                 {
                   name: 'rent_or_mortgage',
                   payments: [
-                    { payment_date: 40.days.ago.strftime('%F'), amount: 1150.0 },
-                    { payment_date: 10.days.ago.strftime('%F'), amount: 1150.0 }
+                    { payment_date: 40.days.ago.strftime('%F'), amount: 1150.0, client_id: '33333333-3333-3333-3333-333333333333' },
+                    { payment_date: 10.days.ago.strftime('%F'), amount: 1150.0, client_id: '33333333-3333-3333-3333-333333333333' }
                   ]
                 }
               ]
