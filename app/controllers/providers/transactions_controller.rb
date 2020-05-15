@@ -1,7 +1,7 @@
 module Providers
   class TransactionsController < ProviderBaseController
     def show
-      disregarded_state_benefit_list
+      disregarded_state_benefits_list
       disregarded_low_income_benefits
       disregarded_carer_benefits
       disregarded_other_benefits
@@ -45,49 +45,37 @@ module Providers
         .order(happened_at: :desc, description: :desc)
     end
 
-    def disregarded_state_benefit_list
-      result = []
+    def disregarded_state_benefits_list
       benefits_list = CFE::ObtainStateBenefitTypesService.call
-      disregarded_benefits_list = benefits_list.select! { |benefit| benefit['exclude_from_gross_income'] == true }
-      disregarded_benefits_list.sort_by! { |item| item['label'] }
-
-      disregarded_benefits_list.each do |state|
-        result << { name: state['label'], category: state['category'] }
-      end
-      @state_benefit_names = result
-    end
-
-    def disregarded_low_income_benefits
-      result = []
-      #benefits_list = CFE::ObtainStateBenefitTypesService.call
-      @disregarded_benefits_list = benefits_list.select! { |benefit| benefit['category'] == 'low_income' }
-      @disregarded_benefits_list.sort_by! { |item| item['label'] }
-
-      @disregarded_benefits_list.each do |state|
-        result << { name: state['label'], category: state['category'] }
-      end
-      @low_income_benefits = result
+      @disregarded_state_benefits = benefits_list.select! { |benefit| benefit['exclude_from_gross_income'] == true }
+      @disregarded_state_benefits.sort_by! { |item| item['label'] }
     end
 
     def disregarded_carer_benefits
       result = []
-      benefits_list = CFE::ObtainStateBenefitTypesService.call
-      @disregarded_benefits_list = benefits_list.select! { |benefit| benefit['category'] == 'carer_disability' }
-      @disregarded_benefits_list.sort_by! { |item| item['label'] }
+      carer_benefits_list = @disregarded_state_benefits.select { |benefit| benefit['category'] == 'carer_disability' }
 
-      @disregarded_benefits_list.each do |state|
+      carer_benefits_list.each do |state|
         result << { name: state['label'], category: state['category'] }
       end
       @carer_benefits = result
     end
 
+    def disregarded_low_income_benefits
+      result = []
+      disregarded_benefits_list = @disregarded_state_benefits.select { |benefit| benefit['category'] == 'low_income' }
+
+      disregarded_benefits_list.each do |state|
+        result << { name: state['label'], category: state['category'] }
+      end
+      @low_income_benefits = result
+    end
+
     def disregarded_other_benefits
       result = []
-      benefits_list = CFE::ObtainStateBenefitTypesService.call
-      @disregarded_benefits_list = benefits_list.select! { |benefit| benefit['category'] == 'other' }
-      @disregarded_benefits_list.sort_by! { |item| item['label'] }
+      disregarded_benefits_list = @disregarded_state_benefits.select { |benefit| benefit['category'] == 'other' }
 
-      @disregarded_benefits_list.each do |state|
+      disregarded_benefits_list.each do |state|
         result << { name: state['label'], category: state['category'] }
       end
       @other_benefits = result
