@@ -17,6 +17,7 @@ module CFE
     let(:dummy_response) { dummy_response_hash.to_json }
 
     before do
+      allow_any_instance_of(BankTransaction).to receive(:id).and_return('22222222-2222-2222-2222-222222222222')
       DAY_SEQUENCE.each do |days|
         create :bank_transaction, :benefits, bank_account: bank_account, amount: '123.45', happened_at: days.days.ago
       end
@@ -93,7 +94,8 @@ module CFE
         "payments": [
           {
             "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45
+            "amount": 123.45,
+            "client_id": '22222222-2222-2222-2222-222222222222'
           }
         ]
       }
@@ -105,15 +107,18 @@ module CFE
         "payments": [
           {
             "date": DAY_SEQUENCE[2].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45
+            "amount": 123.45,
+            "client_id": '22222222-2222-2222-2222-222222222222'
           },
           {
             "date": DAY_SEQUENCE[1].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45
+            "amount": 123.45,
+            "client_id": '22222222-2222-2222-2222-222222222222'
           },
           {
             "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45
+            "amount": 123.45,
+            "client_id": '22222222-2222-2222-2222-222222222222'
           }
         ]
       }

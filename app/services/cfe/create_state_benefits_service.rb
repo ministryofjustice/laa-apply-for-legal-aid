@@ -31,7 +31,11 @@ module CFE
     def transactions(array)
       result = []
       array.each do |transaction|
-        result << { date: transaction.happened_at.strftime('%Y-%m-%d'), amount: transaction.amount.to_f }
+        result << {
+          date: transaction.happened_at.strftime('%Y-%m-%d'),
+          amount: transaction.amount.to_f,
+          client_id: transaction.id
+        }
       end
       result
     end
