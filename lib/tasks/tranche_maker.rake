@@ -13,17 +13,18 @@ namespace :tranche do
     beta_test_users = YAML.load_file(Rails.root.join('config/encrypted_private_beta_users.yml'))
 
     new_users.each do |user|
-      encoded_user = user.upcase.tr(' ', '')
+      encoded_user = user.upcase.gsub(' ', '%20')
       uri = URI("https://ccms-pda.legalservices.gov.uk/api/providerDetails/#{encoded_user}")
+      puts uri.to_s
       response = Net::HTTP.get(uri)
       hash = JSON.parse(response)
       if hash.key?('error')
         puts ">>>>>>>> User #{user} / #{encoded_user} not found <<<<<<<<<"
       else
-        contact_hash = hash['contacts'].detect { |h| h['name'] == encoded_user.upcase }
-        whitelisted_users << encoded_user
+        contact_hash = hash['contacts'].detect { |h| h['name'] == user.upcase }
+        whitelisted_users << user
 
-        beta_test_users[encoded_user] = contact_hash['id']
+        beta_test_users[user] = contact_hash['id']
       end
     end
 
