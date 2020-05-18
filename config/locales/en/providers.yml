@@ -73,41 +73,8 @@ en:
           - You told us legal restrictions prevent your client from selling or borrowing against their assets.
           - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
           - We’ll check the details you provided and let you know our decision.
-      property_results:
-        property: Property
-        value: Value
-        sale_cost: '3% sale cost'
-        mortgage_deduction: Mortgage deduction
-        disregards: Main home disregard
-        assessment_amount: Amount included in assessment
-        main_home_disregard: Main home disregard
-        main_home: Main home
-        additional_property: Additional property
-      vehicle_results:
-        vehicles: Vehicles
-        value: Value
-        oustanding_payments: Outstanding payments
-        disregards: Disregards and deductions
-        assessment_amount: Amount included in assessment
-      savings_and_investments:
-        savings_and_investments: Savings and investments
-        assessed_amount: Amount included in assessment
-      other_assets:
-        other_assets: Other assets
-        assessed_amount: Amount included in assessment
-      total_capital:
-        total_assessed_capital: Total assessed capital
-        property: Property
-        vehicles: Vehicles
-        savings_and_investments: Savings and investments
-        other_assets: Other assets
-        disposable_capital: Disposable capital
-        pensioner_disregard: Pensioner disregard
-        total_capital: Total capital
-      restrictions:
-        restrictions: Restrictions on your client's assets
-        none: None
       result_details:
+        capital_calculation: Capital calculation
         client_eligibility_calculation: How we calculated your client's eligibility
 
 
@@ -149,6 +116,9 @@ en:
           - You told us legal restrictions prevent your client from selling or borrowing against their assets.
           - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
           - We’ll check the details you provided and let you know our decision.
+      result_details:
+        capital_calculation: Capital calculation
+        client_eligibility_calculation: How we calculated your client's eligibility
 
     capital_introductions:
       show:
