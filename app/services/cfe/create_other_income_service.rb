@@ -35,7 +35,8 @@ module CFE
     def single_transaction_hash(transaction)
       {
         date: transaction.happened_at.strftime('%Y-%m-%d'),
-        amount: transaction.amount.to_f
+        amount: transaction.amount.to_f,
+        client_id: transaction.id
       }
     end
 

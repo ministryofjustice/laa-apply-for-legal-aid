@@ -20,7 +20,10 @@ module CFE
     end
 
     describe '.call' do
-      before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
+      before do
+        allow_any_instance_of(BankTransaction).to receive(:id).and_return('11111111-1111-1111-1111-111111111111')
+        stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response)
+      end
 
       context 'successful calls' do
         context 'no bank transactions at all' do
@@ -119,23 +122,23 @@ module CFE
           {
             source: 'Friends or family',
             payments: [
-              { date: one_week_ago, amount: 60.0 },
-              { date: today, amount: 60.0 }
+              { date: one_week_ago, amount: 60.0, client_id: '11111111-1111-1111-1111-111111111111' },
+              { date: today, amount: 60.0, client_id: '11111111-1111-1111-1111-111111111111' }
             ]
           },
           {
             source: 'Maintenance in',
             payments: [
-              { date: one_week_ago, amount: 125.0 },
-              { date: today, amount: 250.0 }
+              { date: one_week_ago, amount: 125.0, client_id: '11111111-1111-1111-1111-111111111111' },
+              { date: today, amount: 250.0, client_id: '11111111-1111-1111-1111-111111111111' }
             ]
           },
           {
             source: 'Student loan',
             payments: [
-              { date: two_weeks_ago, amount: 355.68 },
-              { date: one_week_ago, amount: 355.67 },
-              { date: today, amount: 355.66 }
+              { date: two_weeks_ago, amount: 355.68, client_id: '11111111-1111-1111-1111-111111111111' },
+              { date: one_week_ago, amount: 355.67, client_id: '11111111-1111-1111-1111-111111111111' },
+              { date: today, amount: 355.66, client_id: '11111111-1111-1111-1111-111111111111' }
             ]
           }
         ]
