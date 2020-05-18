@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen additional accounts request test', type: :request do
-  let(:application) { create :application, :with_applicant }
+  let(:application) { create :application, :with_applicant, :provider_submitted }
   let(:application_id) { application.id }
   let(:secure_id) { application.generate_secure_id }
   let(:next_flow_step) { flow_forward_path }
@@ -56,7 +56,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
   describe 'PATCH/PUT /citizens/additional_accounts' do
     let(:params) { {} }
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :provider_submitted }
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       patch(
@@ -88,8 +88,8 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     context 'with No submitted' do
       let(:params) { { has_offline_accounts: 'no' } }
 
-      it 'redirects to the next step in Citizen jouney' do
-        expect(response).to redirect_to(next_flow_step)
+      it 'redirects to contact provider path' do
+        expect(response).to redirect_to(citizens_contact_provider_path)
       end
 
       it 'records choice on legal_aid_application' do
