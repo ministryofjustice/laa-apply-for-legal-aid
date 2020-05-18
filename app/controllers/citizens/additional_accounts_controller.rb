@@ -22,6 +22,7 @@ module Citizens
         redirect_to citizens_banks_path
       when 'no'
         legal_aid_application.update(has_offline_accounts: true)
+        legal_aid_application.use_ccms! unless legal_aid_application.use_ccms?
         go_forward
       else
         @error = I18n.t('generic.errors.yes_or_no')
