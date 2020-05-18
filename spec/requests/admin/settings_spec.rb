@@ -51,7 +51,8 @@ RSpec.describe Admin::SettingsController, type: :request do
       {
         setting: {
           mock_true_layer_data: 'true',
-          allow_non_passported_route: 'false'
+          allow_non_passported_route: 'false',
+          manually_review_all_cases: 'true'
         }
       }
     end
