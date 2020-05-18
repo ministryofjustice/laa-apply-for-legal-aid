@@ -118,7 +118,35 @@ en:
           - We’ll check the details you provided and let you know our decision.
       result_details:
         capital_calculation: Capital calculation
+        income_calculation: Income calculation
         client_eligibility_calculation: How we calculated your client's eligibility
+      disposable_income:
+        title: Disposable income
+        total_income: Total income
+        total_outgoings: Total outgoings
+        total_deductions: Total deductions
+        total_disposable: Total disposable income
+      deductions:
+        title: Deductions
+        dependants_allowance: Dependants allowance
+        excluded_benefits: Income from benefits excluded from calculation
+        total_deductions: Total deductions
+      income:
+        title: Income
+        benefits: Benefits
+        friends_or_family: Financial help from friends or family
+        maintenance: Maintenace payments
+        property_or_lodger: Income from property or lodger
+        student_loan_or_grant: Student loan or grant
+        pension: Pension
+        total_income: Total income
+      outgoings:
+        title: Outgoings
+        housing_costs: Housing costs
+        childcare_costs: Childcare costs
+        maintenance_out: Maintenance payments
+        legal_aid: Legal aid payments
+        total_outgoings: Total outgoings
 
     capital_introductions:
       show:

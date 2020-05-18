@@ -1,0 +1,11 @@
+<div class="govuk-accordion__section-content">
+  <h2 class="govuk-heading-m"><%= t('.title') %></h2>
+  <table class="govuk-table">
+    <tbody>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.total_income'), value: number_to_currency(@cfe_result.total_monthly_income) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.total_outgoings'), value: number_to_currency(@cfe_result.total_monthly_outgoings) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.total_deductions'), value: number_to_currency(@cfe_result.total_deductions) } %>
+      <%= render partial: 'shared/results_total_bold_row', locals: { caption: t('.total_disposable'), value: number_to_currency(@cfe_result.total_disposable_income_assessed) } %>
+    <tbody>
+  </table>
+</div>
