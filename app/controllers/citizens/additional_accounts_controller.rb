@@ -17,17 +17,29 @@ module Citizens
     def new; end
 
     def update
-      case params[:has_offline_accounts]
+      case params[:has_online_accounts]
       when 'yes'
+        online_accounts_update
         redirect_to citizens_banks_path
       when 'no'
-        legal_aid_application.update(has_offline_accounts: true)
-        legal_aid_application.use_ccms! unless legal_aid_application.use_ccms?
+        offline_accounts_update
         go_forward
       else
         @error = I18n.t('generic.errors.yes_or_no')
         render :new
       end
+    end
+
+    private
+
+    def online_accounts_update
+      legal_aid_application.provider_submit! unless legal_aid_application.provider_submitted?
+      legal_aid_application.update(has_offline_accounts: false)
+    end
+
+    def offline_accounts_update
+      legal_aid_application.update(has_offline_accounts: true)
+      legal_aid_application.use_ccms! unless legal_aid_application.use_ccms?
     end
   end
 end
