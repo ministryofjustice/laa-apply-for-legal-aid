@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
+  let(:login_provider) { login_as legal_aid_application.provider }
+
   describe 'GET  /providers/applications/:legal_aid_application_id/capital_assessment_result' do
     let(:cfe_result) { create :cfe_v2_result }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
     let(:locale_scope) { 'providers.capital_assessment_results' }
 
-    let(:login_provider) { login_as legal_aid_application.provider }
     let(:before_tasks) do
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
@@ -98,6 +99,39 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
       it 'raises error' do
         expect { subject }.to raise_error(/Unknown capital_assessment_result/)
+      end
+    end
+  end
+
+  describe 'PATCH /providers/applications/:id/capital_assessment_result' do
+    subject { patch providers_legal_aid_application_capital_assessment_result_path(legal_aid_application), params: params.merge(submit_button) }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:params) { {} }
+
+    context 'when the provider is authenticated' do
+      before do
+        login_provider
+        subject
+      end
+
+      context 'Continue button pressed' do
+        let(:submit_button) { { continue_button: 'Continue' } }
+        it 'redirects to next page' do
+          expect(subject).to redirect_to(providers_legal_aid_application_start_merits_assessment_path)
+        end
+      end
+
+      context 'Save as draft button pressed' do
+        let(:submit_button) { { draft_button: 'Save as draft' } }
+
+        it "redirects provider to provider's applications page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it 'sets the application as draft' do
+          expect(legal_aid_application.reload).to be_draft
+        end
       end
     end
   end

@@ -7,6 +7,10 @@ module Providers
       handle_unknown
     end
 
+    def update
+      continue_or_draft
+    end
+
     private
 
     def handle_unknown

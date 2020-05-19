@@ -178,8 +178,8 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
-      resource :capital_assessment_result, only: [:show]
-      resource :capital_income_assessment_result, only: [:show]
+      resource :capital_assessment_result, only: %i[show update]
+      resource :capital_income_assessment_result, only: %i[show update]
       resource :identify_types_of_income, only: %i[show update]
       resource :identify_types_of_outgoing, only: %i[show update]
       resource :respondent, only: %i[show update]
