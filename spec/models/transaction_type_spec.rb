@@ -97,6 +97,20 @@ RSpec.describe TransactionType, type: :model do
       end
     end
 
+    describe 'parent_or_self' do
+      context 'is not a child' do
+        it 'returns self' do
+          expect(pension.parent_or_self).to eq pension
+        end
+      end
+
+      context 'is a child' do
+        it 'returns parent' do
+          expect(excluded_benefits.parent_or_self).to eq benefits
+        end
+      end
+    end
+
     describe '#children' do
       context 'record with no children' do
         it 'returns an empty array' do

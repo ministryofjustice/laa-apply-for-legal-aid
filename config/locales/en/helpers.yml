@@ -12,7 +12,6 @@ en:
         postcode: This must be a valid UK postcode
       applicant:
         national_insurance_number: For example, 'QQ 12 34 56 C'
-      has_offline_accounts: If you do not, you will need to provide paper evidence for these accounts.
       legal_aid_application:
         outstanding_mortgage_amount:
           citizens: Check the statement from your mortgage provider or lender

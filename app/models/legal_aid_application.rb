@@ -132,10 +132,16 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     )
   end
 
+  def parent_transaction_types
+    ids = transaction_types.map(&:parent_or_self).map(&:id)
+    TransactionType.where(id: ids)
+  end
+
+  # type is either :credit or :debit
   def uncategorised_transactions?(type)
-    grouped_transactions = bank_transactions.__send__(type).order(happened_at: :desc).by_type
-    transaction_types.__send__(type.to_s.pluralize.to_sym).each do |transaction_type|
-      uncategorised_transactions_errors(transaction_type.name) if grouped_transactions[transaction_type].blank?
+    grouped_transactions = bank_transactions.__send__(type).order(happened_at: :desc).by_parent_transaction_type
+    parent_transaction_types.__send__(type.to_s.pluralize.to_sym).each do |transaction_type|
+      uncategorised_transactions_errors(transaction_type) if grouped_transactions[transaction_type].blank?
     end
     errors.present?
   end
@@ -285,8 +291,13 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     errors.add(:proceeding_type_codes, :invalid) if proceeding_types.size != proceeding_type_codes.size
   end
 
-  def uncategorised_transactions_errors(transaction_type_name)
-    errors.add(transaction_type_name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
+  def uncategorised_transactions_errors(transaction_type)
+    add_uncategorised_transaction_error(transaction_type)
+    transaction_type.children.each { |child| add_uncategorised_transaction_error(child) }
+  end
+
+  def add_uncategorised_transaction_error(transaction_type)
+    errors.add(transaction_type.name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
   end
 
   def create_app_ref

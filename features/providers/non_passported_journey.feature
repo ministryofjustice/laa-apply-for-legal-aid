@@ -41,7 +41,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    Then I click link 'View statements and add transactions'
+    Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
     Then I click 'Save and continue'

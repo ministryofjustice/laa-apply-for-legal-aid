@@ -1,0 +1,125 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://auth.truelayer.com/api/providers/oauth/openbanking
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - auth.truelayer.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      - no-store
+      Content-Security-Policy:
+      - default-src 'none'; frame-ancestors 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 19 May 2020 11:41:25 GMT
+      Referrer-Policy:
+      - no-referrer
+      - no-referrer
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Request-Id:
+      - 0HLVRSG3DQM73:00000001
+      X-Xss-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      Content-Length:
+      - '6886'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"provider_id":"ob-monzo","display_name":"Monzo","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/monzo.svg","scopes":["direct_debits","standing_orders","accounts","balance","info","transactions","offline_access"]},{"provider_id":"ob-barclays","display_name":"Barclays","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/barclays.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","transactions","offline_access","info"]},{"provider_id":"ob-barclays-business","display_name":"Barclays
+        Business","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/barclays.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","transactions","offline_access","info"]},{"provider_id":"ob-hsbc","display_name":"HSBC","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/hsbc.svg","scopes":["accounts","balance","standing_orders","direct_debits","info","transactions","offline_access"]},{"provider_id":"ob-hsbc-business","display_name":"HSBC
+        Business","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/hsbc.svg","scopes":["accounts","balance","direct_debits","standing_orders","info","transactions","offline_access"]},{"provider_id":"ob-natwest","display_name":"Natwest","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/natwest.svg","scopes":["accounts","balance","transactions","standing_orders","direct_debits","info","cards","offline_access"]},{"provider_id":"ob-lloyds","display_name":"Lloyds
+        Bank","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/lloyds.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","info","transactions","offline_access"]},{"provider_id":"ob-lloyds-business","display_name":"Lloyds
+        Business Bank","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/lloyds.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","info","transactions","offline_access"]},{"provider_id":"ob-halifax","display_name":"Halifax","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/halifax.svg","scopes":["accounts","balance","transactions","cards","direct_debits","standing_orders","info","offline_access"]},{"provider_id":"ob-santander","display_name":"Santander","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/santander.svg","scopes":["accounts","balance","cards","direct_debits","info","standing_orders","transactions","offline_access"]},{"provider_id":"ob-nationwide","display_name":"Nationwide","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/nationwide.svg","scopes":["accounts","balance","direct_debits","standing_orders","transactions","info","cards","offline_access"]},{"provider_id":"ob-rbs","display_name":"RBS","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/rbs.svg","scopes":["accounts","balance","transactions","direct_debits","standing_orders","info","cards","offline_access"]},{"provider_id":"ob-first-direct","display_name":"First
+        Direct","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/first-direct.svg","scopes":["accounts","balance","direct_debits","standing_orders","info","transactions","offline_access"]},{"provider_id":"ob-bos","display_name":"Bank
+        of Scotland","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/bos.svg","scopes":["accounts","balance","transactions","cards","direct_debits","standing_orders","info","offline_access"]},{"provider_id":"ob-revolut","display_name":"Revolut","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/revolut.svg","scopes":["accounts","balance","direct_debits","standing_orders","info","transactions","offline_access"]},{"provider_id":"ob-revolut","display_name":"Revolut","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/revolut.svg","scopes":["accounts","balance","info","transactions","offline_access"]},{"provider_id":"ob-barclaycard","display_name":"Barclaycard","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/barclaycard.svg","scopes":["cards","balance","transactions","offline_access"]},{"provider_id":"ob-ulster","display_name":"Ulster
+        Bank","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/ulster.svg","scopes":["accounts","balance","transactions","direct_debits","standing_orders","info","cards","offline_access"]},{"provider_id":"ob-ms","display_name":"Marks
+        & Spencer","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/ms.svg","scopes":["accounts","balance","direct_debits","standing_orders","info","transactions","offline_access"]},{"provider_id":"ob-mbna","display_name":"MBNA","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/mbna.svg","scopes":["cards","balance","direct_debits","standing_orders","transactions","info","offline_access"]},{"provider_id":"ob-danske","display_name":"Danske","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/danske.svg","scopes":["accounts","balance","info","direct_debits","standing_orders","transactions","offline_access"]},{"provider_id":"ob-tsb","display_name":"TSB","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/uk/logos/tsb.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","transactions","offline_access"]},{"provider_id":"ob-ptsb","display_name":"PTSB","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/ie/logos/ptsb.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","transactions","offline_access"]},{"provider_id":"ob-aib","display_name":"AIB","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/aib.svg","scopes":["accounts","balance","cards","direct_debits","standing_orders","transactions","offline_access"]},{"provider_id":"ob-ulster-ie","display_name":"Ulster
+        Bank Republic of Ireland","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/ulster.svg","scopes":["accounts","balance","direct_debits","standing_orders","transactions","info","cards","offline_access"]},{"provider_id":"ob-boi-ie","display_name":"Bank
+        of Ireland (ROI)","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/boi.svg","scopes":["accounts","balance","direct_debits","standing_orders","transactions","cards","offline_access"]}]'
+    http_version: null
+  recorded_at: Tue, 19 May 2020 11:41:25 GMT
+- request:
+    method: get
+    uri: https://auth.truelayer.com/api/providers/oauth
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - auth.truelayer.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      - no-store
+      Content-Security-Policy:
+      - default-src 'none'; frame-ancestors 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 19 May 2020 11:41:25 GMT
+      Referrer-Policy:
+      - no-referrer
+      - no-referrer
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Request-Id:
+      - 0HLVRSG3DQM74:00000001
+      X-Xss-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      Content-Length:
+      - '236'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"provider_id":"oauth-starling","display_name":"Starling","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/starling.svg","scopes":["accounts","balance","info","transactions","offline_access"]}]'
+    http_version: null
+  recorded_at: Tue, 19 May 2020 11:41:25 GMT
+recorded_with: VCR 5.1.0

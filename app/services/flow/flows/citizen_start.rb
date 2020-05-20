@@ -31,7 +31,9 @@ module Flow
         },
         additional_accounts: {
           path: ->(_) { urls.citizens_additional_accounts_path },
-          forward: :identify_types_of_incomes
+          forward: ->(application) do
+            application.has_offline_accounts? ? :contact_providers : :identify_types_of_incomes
+          end
         }
       }.freeze
     end
