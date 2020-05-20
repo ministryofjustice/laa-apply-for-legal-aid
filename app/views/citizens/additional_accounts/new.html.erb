@@ -3,7 +3,7 @@
 
     <%= govuk_form_group(
           show_error_if: @error,
-          input: :has_offline_accounts
+          input: :has_online_accounts
         ) do %>
 
       <%
@@ -15,7 +15,7 @@
 
       <%= govuk_fieldset_header(content_for(:page_title)) %>
 
-      <%= form.govuk_collection_radio_buttons :has_offline_accounts, options, :value, :label, error: @error %>
+      <%= form.govuk_collection_radio_buttons :has_online_accounts, options, :value, :label, error: @error %>
 
     <% end %>
 
