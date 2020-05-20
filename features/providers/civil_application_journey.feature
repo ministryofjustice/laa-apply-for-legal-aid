@@ -382,7 +382,7 @@ Feature: Civil application journeys
     And I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    And I click link 'View statements and add transactions'
+    And I click the first link 'View statements and add transactions'
     Then I should be on a page showing 'Select benefits payments'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
