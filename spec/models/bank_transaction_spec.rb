@@ -1,6 +1,43 @@
 require 'rails_helper'
 
 RSpec.describe BankTransaction do
+  describe '#parent_transaction_type' do
+    before { Populators::TransactionTypePopulator.call }
+
+    let(:benefits) { TransactionType.find_by(name: 'benefits') }
+    let(:excluded_benefits) { TransactionType.find_by(name: 'excluded_benefits') }
+    let(:pension) { TransactionType.find_by(name: 'pension') }
+
+    context 'transaction type is not a child' do
+      it 'returns the transaction type' do
+        trx = create :bank_transaction, :credit, transaction_type: pension
+        expect(trx.parent_transaction_type).to eq pension
+      end
+    end
+
+    context 'transaction type is a child' do
+      it 'returns the transaction type parent' do
+        trx = create :bank_transaction, :credit, transaction_type: excluded_benefits
+        expect(trx.parent_transaction_type).to eq benefits
+      end
+    end
+
+    describe 'scope by parent_transaction_type' do
+      it 'groups the transactions keyed by parent transaction tyep' do
+        trx_p1 = create :bank_transaction, :credit, transaction_type: pension
+        trx_p2 = create :bank_transaction, :credit, transaction_type: pension
+        trx_b1 = create :bank_transaction, :credit, transaction_type: benefits
+        trx_b2 = create :bank_transaction, :credit, transaction_type: benefits
+        trx_eb1 = create :bank_transaction, :credit, transaction_type: excluded_benefits
+        trx_eb2 = create :bank_transaction, :credit, transaction_type: excluded_benefits
+
+        grouped_transactions = BankTransaction.by_parent_transaction_type
+        expect(grouped_transactions[pension]).to match_array [trx_p1, trx_p2]
+        expect(grouped_transactions[benefits]).to match_array [trx_b1, trx_b2, trx_eb1, trx_eb2]
+      end
+    end
+  end
+
   context 'serialization of meta data' do
     context 'meta data is null' do
       let(:tx) { create :bank_transaction }

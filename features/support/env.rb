@@ -102,6 +102,7 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Before do |_scenario|
   load Rails.root.join('db/seeds.rb')
+  Populators::TransactionTypePopulator.call
   # Delete previous screenshots from filesystem that were generated during previous feature runs
   FileUtils.rm_rf("#{Rails.root}/tmp/capybara/**.*")
 end

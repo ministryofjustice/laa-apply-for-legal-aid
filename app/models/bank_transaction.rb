@@ -11,6 +11,12 @@ class BankTransaction < ApplicationRecord
       .group_by(&:transaction_type)
   end
 
+  scope :by_parent_transaction_type, -> do
+    includes(:transaction_type)
+      .where.not(transaction_type_id: nil)
+      .group_by(&:parent_transaction_type)
+  end
+
   enum operation: {
     credit: 'credit'.freeze,
     debit: 'debit'.freeze
@@ -25,5 +31,9 @@ class BankTransaction < ApplicationRecord
     return [] if transaction_type.nil?
 
     where(transaction_type_id: transaction_type.id)
+  end
+
+  def parent_transaction_type
+    transaction_type.parent_or_self
   end
 end
