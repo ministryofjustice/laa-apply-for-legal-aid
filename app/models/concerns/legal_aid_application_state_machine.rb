@@ -10,6 +10,10 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       :in_progress
     end
 
+    def provider_checking_or_checked_citizens_means_answers?
+      provider_checking_citizens_means_answers? || provider_checked_citizens_means_answers?
+    end
+
     aasm column: :state do # rubocop:disable Metrics/BlockLength
       state :initiated, initial: true
       state :checking_client_details_answers

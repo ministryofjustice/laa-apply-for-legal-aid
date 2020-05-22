@@ -244,8 +244,16 @@ FactoryBot.define do
       benefit_check_result { build :benefit_check_result, :positive }
     end
 
+    trait :passported do
+      with_positive_benefit_check_result
+    end
+
     trait :with_undetermined_benefit_check_result do
       benefit_check_result { build :benefit_check_result, :undetermined }
+    end
+
+    trait :non_passported do
+      with_negative_benefit_check_result
     end
 
     trait :draft do
