@@ -8,6 +8,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
   let(:transaction_type) { create :transaction_type }
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+  let(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
 
   before do
     login_as provider
@@ -99,6 +100,20 @@ RSpec.describe Providers::TransactionsController, type: :request do
 
     it 'does not change other applicants transactions' do
       expect { subject }.not_to change { bank_transaction_other_applicant.reload.transaction_type }
+    end
+  end
+
+  context 'call to Check Financial Eligibility Service is successful', :vcr do
+    before { allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
+
+    describe 'GET #providers/incoming_transactions' do
+      subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, excluded_benefit_transaction_type.name) }
+
+      it 'redirects to the problem path as it cannot show the list of excluded benefits' do
+        subject
+
+        expect(response).to redirect_to(problem_index_path)
+      end
     end
   end
 
