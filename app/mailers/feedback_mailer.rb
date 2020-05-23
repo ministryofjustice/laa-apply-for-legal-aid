@@ -13,11 +13,17 @@ class FeedbackMailer < GovukNotifyRails::Mailer
         "#{feedback['browser']} #{feedback['browser_version']}",
         feedback['source']
       ].join(' - '),
-      done_all_needed: feedback['done_all_needed'].to_s,
+      done_all_needed: yes_or_no(feedback),
       satisfaction: (feedback['satisfaction'] || ''),
       difficulty: (feedback['difficulty'] || ''),
       improvement_suggestion: (feedback['improvement_suggestion'] || '')
     )
     mail to: to
+  end
+
+  private
+
+  def yes_or_no(feedback)
+    feedback['done_all_needed'] == true ? 'Yes' : 'No'
   end
 end
