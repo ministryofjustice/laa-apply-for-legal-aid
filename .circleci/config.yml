@@ -400,6 +400,7 @@ workflows:
           requires:
             - webhint_reports
             - unit_tests
+            - build_and_push
       - hold_production_notification:
           requires:
             - deploy_staging

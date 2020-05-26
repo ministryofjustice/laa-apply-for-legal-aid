@@ -35,12 +35,26 @@ Feature: Citizen journey
     Then I click link "Back"
     Then I should be on a page showing 'Share your financial information with us'
 
-  @javascript @webhint
+  @javascript @webhint @vcr
   Scenario: Follow citizen journey from Accounts page
     Given An application has been created
     Then I visit the start of the financial assessment
     Then I visit the accounts page
     Then I click link 'Continue'
+    Then I should be on a page showing "Do you have accounts with other banks?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you have online access'
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Contact your solicitor'
+    Then I click link "Back"
+    Then I should be on a page showing 'Do you have online access'
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Select your bank"
+    Then I click link "Back"
+    Then I click link "Back"
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'

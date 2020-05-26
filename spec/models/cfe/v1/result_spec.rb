@@ -12,13 +12,19 @@ module CFE
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v1_result }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
 
-      before { Setting.destroy_all }
-
       describe '#overview' do
         context 'applicant is eligible' do
           before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(eligible_result.legal_aid_application).and_return(false) }
           it 'returns assessment result' do
             expect(eligible_result.overview).to eq 'eligible'
+          end
+        end
+
+        context 'applicant has contribution required and restrictions' do
+          it 'returns manual_check_required' do
+            expect(contribution_and_restriction_result.capital_contribution_required?).to be true
+            expect(legal_aid_application.has_restrictions?).to be true
+            expect(contribution_and_restriction_result.overview).to eq 'manual_check_required'
           end
         end
 

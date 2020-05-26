@@ -255,7 +255,9 @@ module CCMS
       end
 
       def resolve_instance_label(config)
-        return config[:instance_label] unless /^#/.match?(config[:instance_label])
+        return nil if config[:instance_label].nil?
+
+        return config[:instance_label] unless config[:instance_label].starts_with?('#')
 
         method_name = config[:instance_label].sub(/^#/, '')
         __send__(method_name)

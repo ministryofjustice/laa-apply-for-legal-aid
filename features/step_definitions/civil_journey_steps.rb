@@ -295,6 +295,18 @@ Given('The means questions have been answered by the applicant') do
   )
 end
 
+Given('Bank transactions exist') do
+  bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
+  bank_account = create :bank_account, bank_provider: bank_provider
+  create_list :bank_transaction, 6, :credit, bank_account: bank_account
+end
+
+Then('I click on the View statements and add transactions link for {string}') do |transaction_type_name|
+  within(:css, "div#list-item-#{transaction_type_name.underscore.tr(' ', '_')}") do
+    click_link 'View statements and add transactions'
+  end
+end
+
 When('the search for {string} is not successful') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
 end
