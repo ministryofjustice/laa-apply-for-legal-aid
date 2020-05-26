@@ -21,7 +21,6 @@ en:
         field_set_header: Do you have accounts with other banks?
       new:
         field_set_header: Do you have online access to your accounts with other banks?
-        hint: If you do not, you will need to provide paper evidence for these accounts.
     banks:
       index:
         title: Select your bank

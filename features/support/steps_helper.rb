@@ -19,6 +19,10 @@ Then('I click link {string}') do |link_name|
   click_link(link_name)
 end
 
+Then('I click the first link {string}') do |link_name|
+  first(:link, link_name).click
+end
+
 Then('I select {string}') do |option|
   check(option, allow_label_click: true)
 end

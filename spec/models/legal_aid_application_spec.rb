@@ -766,4 +766,45 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#parent_transaction_types' do
+    before { Populators::TransactionTypePopulator.call }
+    let(:benefits) { TransactionType.find_by(name: 'benefits') }
+    let(:excluded_benefits) { TransactionType.find_by(name: 'excluded_benefits') }
+    let(:pension) { TransactionType.find_by(name: 'pension') }
+
+    context 'legal aid application parent, child and stand-alone transaction types' do
+      before do
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: benefits
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: excluded_benefits
+      end
+
+      it 'returns parent and stand-alone' do
+        expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
+      end
+    end
+
+    context 'legal aid application child and stand-alone transaction types' do
+      before do
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: excluded_benefits
+      end
+
+      it 'returns parent and stand-alone' do
+        expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
+      end
+    end
+
+    context 'legal aid application parent and stand-alone transaction types' do
+      before do
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension
+        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: benefits
+      end
+
+      it 'returns parent and stand-alone' do
+        expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
+      end
+    end
+  end
 end
