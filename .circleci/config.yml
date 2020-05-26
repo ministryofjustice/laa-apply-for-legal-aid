@@ -359,7 +359,7 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - auto_deploy_uat:
+      - uat_master_deploy:
           requires:
           - build_and_push
       - unit_tests:
@@ -381,12 +381,12 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - auto_deploy_uat:
+      - uat_master_deplly:
           requires:
             - build_and_push
       - delete_uat:
           requires:
-            - auto_deploy_uat
+            - uat_master_deploy
       - unit_tests:
           requires:
             - lint_checks
