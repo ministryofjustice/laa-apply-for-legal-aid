@@ -253,7 +253,7 @@ jobs:
         command: |
           ./bin/uat_deploy
 
-  auto_deploy_uat:
+  uat_master_deploy:
     <<: *deploy_uat
 
   deploy_staging:
