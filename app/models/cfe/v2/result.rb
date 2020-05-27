@@ -71,6 +71,10 @@ module CFE
         capital[:capital_items][:vehicles]
       end
 
+      def remarks
+        Remarks.new(result_hash[:assessment][:remarks])
+      end
+
       ################################################################
       #                                                              #
       #  INCOME VALUES                                               #
