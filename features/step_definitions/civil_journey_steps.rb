@@ -503,6 +503,10 @@ Then('I am on the read only version of the check your answers page') do
   expect(page).not_to have_css('.change-link')
 end
 
+Then(/^I click How we checked your client's benefits status$/) do
+  page.find('#checked-status').click
+end
+
 # rubocop:disable Lint/Debugger
 Then('show me the page') do
   save_and_open_page
