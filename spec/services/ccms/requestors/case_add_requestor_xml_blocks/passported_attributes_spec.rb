@@ -1134,7 +1134,7 @@ module CCMS
             expect(block).to have_boolean_response true
           end
 
-          it 'returns false when application is passported' do
+          it 'returns false when application is not passported' do
             allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false)
             block = XmlExtractor.call(xml, :global_means, 'GB_DECL_B_38WP3_11A')
             expect(block).to have_boolean_response false
