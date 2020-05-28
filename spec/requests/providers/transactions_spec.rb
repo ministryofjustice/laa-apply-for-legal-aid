@@ -8,6 +8,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
   let(:transaction_type) { create :transaction_type }
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+  let(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
 
   before do
     login_as provider
@@ -24,7 +25,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
       expect(unescaped_response_body).to include(I18n.t("transaction_types.page_titles.#{transaction_type.name}"))
     end
 
-    context 'When there are transactions' do
+    context 'When there are transactions', :vcr do
       let(:not_matching_operation) { (TransactionType::NAMES.keys.map(&:to_s) - [transaction_type.operation.to_s]).first }
       let(:other_transaction_type) { create :transaction_type, name: (TransactionType::NAMES[transaction_type.operation.to_sym] - [transaction_type.name.to_sym]).sample }
       let!(:bank_transaction_matching) { create :bank_transaction, bank_account: bank_account, operation: transaction_type.operation }
@@ -76,13 +77,13 @@ RSpec.describe Providers::TransactionsController, type: :request do
     end
   end
 
-  describe 'GET #providers/incoming_transactions' do
+  describe 'GET #providers/incoming_transactions', :vcr do
     subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'
   end
 
-  describe 'GET #citizens/outgoing_transactions' do
+  describe 'GET #citizens/outgoing_transactions', :vcr do
     subject { get providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'
@@ -99,6 +100,20 @@ RSpec.describe Providers::TransactionsController, type: :request do
 
     it 'does not change other applicants transactions' do
       expect { subject }.not_to change { bank_transaction_other_applicant.reload.transaction_type }
+    end
+  end
+
+  context 'call to Check Financial Eligibility Service is successful', :vcr do
+    before { allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
+
+    describe 'GET #providers/incoming_transactions' do
+      subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, excluded_benefit_transaction_type.name) }
+
+      it 'redirects to the problem path as it cannot show the list of excluded benefits' do
+        subject
+
+        expect(response).to redirect_to(problem_index_path)
+      end
     end
   end
 

@@ -599,6 +599,11 @@ en:
       index:
         h1-heading: Is the chance of a successful outcome 50% or better?
     transactions:
+      disregarded_list:
+        disregarded_list: Benefits disregarded from the financial eligibility calculation
+        other: Other benefits
+        carer_disability: Carer and disability benefits
+        low_income: Low income benefits
       show:
         col_category: Category
         col_and_category: and category

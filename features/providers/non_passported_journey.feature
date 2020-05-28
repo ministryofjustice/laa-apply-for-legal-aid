@@ -29,7 +29,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'Add dependant'
 
-  @javascript
+  @javascript @vcr
   Scenario: Selects and categorises bank transactions into transaction types
     Given I start the merits application with brank transactions with no transaction type category
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'

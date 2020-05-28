@@ -1,6 +1,6 @@
 Feature: Completing and checking means answers backwards and forwards
 
-  @javascript
+  @javascript @vcr
   Scenario: I add a benefits category and add transactions to included and excluded benefits
     Given The means questions have been answered by the applicant
     And Bank transactions exist
@@ -20,7 +20,7 @@ Feature: Completing and checking means answers backwards and forwards
     And I click 'Save and continue'
     And I should be on a page showing "Sort your client's income into categories"
     And I should see 'Benefits'
-    And I should see 'Excluded benefits'
+    And I should see 'Disregarded benefits'
     And I should see 'Student loan or grant'
     Then I click on the View statements and add transactions link for 'Excluded benefits'
-    And I should be on a page showing 'Excluded Benefits'
+    And I should be on a page showing 'Select disregarded benefits payments'

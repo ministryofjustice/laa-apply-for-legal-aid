@@ -1,6 +1,9 @@
 module Providers
   class TransactionsController < ProviderBaseController
     def show
+      if transaction_type.name == 'excluded_benefits'
+        redirect_to(problem_index_path) && return unless disregarded_state_benefits_list
+      end
       transaction_type
       bank_transactions
     end
@@ -39,6 +42,23 @@ module Providers
         .bank_transactions
         .where(operation: transaction_type.operation)
         .order(happened_at: :desc, description: :desc)
+    end
+
+    def disregarded_state_benefits_list
+      benefits_list = state_benefit_types
+      return false unless benefits_list
+
+      disregarded_state_benefits = benefits_list.select! { |benefit| benefit['exclude_from_gross_income'] == true }
+      categorised_benefits = disregarded_state_benefits.group_by { |benefit| benefit['category'] }
+      categorised_benefits.delete(nil)
+      @categorised_benefits = categorised_benefits.sort_by { |key, _value| key }
+    end
+
+    def state_benefit_types
+      CFE::ObtainStateBenefitTypesService.call
+    rescue StandardError => e
+      Raven.capture_exception(e)
+      false
     end
 
     def manually_chosen_metadata

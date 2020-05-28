@@ -2,6 +2,10 @@
 
   <div class="govuk-inset-text"><%= t("transaction_types.#{@transaction_type.name}.inset_text") %></div>
 
+  <% if @transaction_type.name == 'excluded_benefits' %>
+    <%= render 'disregarded_list' %>
+  <% end %>
+
   <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
     <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
       <summary class="govuk-details__summary">
@@ -10,7 +14,6 @@
 
       <div class="govuk-details__text">
         <%= t("transaction_types.#{@transaction_type.name}.subheading") %>
-
         <div class="govuk-!-padding-bottom-4"></div>
 
         <ul class="govuk-list govuk-list--bullet">
@@ -97,6 +100,7 @@
                 ) %>
 
             <%= sort_category_column_cell builder.object, @transaction_type %>
+
           </tr>
         <% end %>
       </tbody>
