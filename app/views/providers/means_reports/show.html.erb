@@ -54,6 +54,11 @@
 
     <div class="govuk-!-padding-bottom-8"></div>
 
+    <section class="print-no-break">
+      <h2 class="govuk-heading-l"><%= t('.caseworker-review-section-heading') %></h2>
+      <%= render partial: 'caseworker_review', locals: {remarks: @cfe_result.remarks } %>
+    </section>
+
   <% end %>
 
   <h2 class="govuk-heading-m">

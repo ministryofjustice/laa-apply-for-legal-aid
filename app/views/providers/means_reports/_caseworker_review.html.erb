@@ -1,0 +1,42 @@
+<section>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+
+    <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
+      <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
+        <%= t(".caseworker-review.caseworker-review-required") %>
+      </dt>
+      <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+        <%= yes_no(remarks.caseworker_review_required?) %>
+      </dd>
+    </div>
+
+    <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
+      <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
+        <%= t(".caseworker-review.caseworker-review-reasons") %>
+      </dt>
+      <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+        <% remarks.review_reasons.each do |reason| %>
+          <%= t(".caseworker-review.#{reason}") %>
+          <br />
+        <% end %>
+      </dd>
+    </div>
+
+
+    <% remarks.review_categories_by_reason.each do |reason, categories| %>
+      <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
+        <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
+          <%= t(".caseworker-review.caseworker-review-category-#{reason}") %>
+        </dt>
+        <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+          <% categories.each do |category| %>
+            <%= t(".caseworker-review.#{category}") %>
+            <br />
+          <% end %>
+        </dd>
+      </div>
+    <% end %>
+
+  </dl>
+  <hr />
+</section>

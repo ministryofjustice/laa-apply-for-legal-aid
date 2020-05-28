@@ -402,6 +402,7 @@ en:
     means_reports:
       show:
         heading: Means report
+        caseworker-review-section-heading: Caseworker Review
         client_details_heading: Client details
         benefit_check_heading: Passported means
         capital_result_heading: Capital result
