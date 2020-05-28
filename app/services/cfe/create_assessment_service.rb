@@ -15,7 +15,7 @@ module CFE
     private
 
     def process_response
-      @submission.assessment_id = @response['objects'].first['id']
+      @submission.assessment_id = @response['assessment_id']
       @submission.assessment_created!
       true
     end

@@ -82,6 +82,7 @@ module CFE
             client_reference_id: 'L-XYZ-999'
           }
         ],
+        assessment_id: '1b2aa5eb-3763-445e-9407-2397ec3968f6',
         errors: []
       }
     end
