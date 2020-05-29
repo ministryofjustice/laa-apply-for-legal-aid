@@ -2,12 +2,12 @@
 http_interactions:
 - request:
     method: post
-    uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>70b908ed-b306-49dd-80c8-86d3b2a96178</clientReference><nino>JA293483A</nino><surname>WALKER</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20190320</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>4a54377c-e154-42f8-aceb-5f2f5a88a279</clientReference><nino>JA293483A</nino><surname>WALKER</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20200529</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
     headers:
       Soapaction:
       - '"check"'
@@ -27,7 +27,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Wed, 20 Mar 2019 17:05:00 GMT
+      - Fri, 29 May 2020 14:12:08 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -35,7 +35,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-5c9272bc-8bee2f0044498080de54f2ac;
+      - Root=1-5ed11837-9b969b221893c2807a3cfc88;
       Vary:
       - Accept-Encoding
     body:
@@ -43,602 +43,16 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
-        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">70b908ed-b306-49dd-80c8-86d3b2a96178</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">4a54377c-e154-42f8-aceb-5f2f5a88a279</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1553101500262</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
-    http_version: null
-  recorded_at: Wed, 20 Mar 2019 17:05:00 GMT
-- request:
-    method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ccf852a2-f48f-4935-ad6a-023a7d38f06d/applicant
-    body:
-      encoding: UTF-8
-      string: '{"applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - openresty/1.15.8.2
-      Date:
-      - Tue, 08 Oct 2019 09:08:46 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Etag:
-      - W/"49acaa397e7e96c19d5986ac5492b54f"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - f8fe1ddcfd99260d7aa4afc9b5996228
-      X-Runtime:
-      - '0.037941'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"objects":[{"id":"c465c696-8eda-46f3-a995-a05c9dd3a712","assessment_id":"ccf852a2-f48f-4935-ad6a-023a7d38f06d","date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"created_at":"2019-10-08T09:08:46.272Z","updated_at":"2019-10-08T09:08:46.272Z"}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Tue, 08 Oct 2019 09:08:46 GMT
-- request:
-    method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ccf852a2-f48f-4935-ad6a-023a7d38f06d/capitals
-    body:
-      encoding: UTF-8
-      string: '{"bank_accounts":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital":[{"description":"Land","value":"50000.0"}]}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - openresty/1.15.8.2
-      Date:
-      - Tue, 08 Oct 2019 09:08:46 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Etag:
-      - W/"be457fcc79886fbdac4a0d90bc5f08b6"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 4538ac7362d72087db38ae1475d0ce67
-      X-Runtime:
-      - '0.129519'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"objects":{"id":"7cbcb4d3-703b-466a-9399-3532e15f67fb","assessment_id":"ccf852a2-f48f-4935-ad6a-023a7d38f06d","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","capital_assessment_result":"pending","created_at":"2019-10-08T09:08:46.148Z","updated_at":"2019-10-08T09:08:46.148Z"},"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Tue, 08 Oct 2019 09:08:46 GMT
-- request:
-    method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ccf852a2-f48f-4935-ad6a-023a7d38f06d/vehicles
-    body:
-      encoding: UTF-8
-      string: '{"vehicles":[]}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - openresty/1.15.8.2
-      Date:
-      - Tue, 08 Oct 2019 09:08:46 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Etag:
-      - W/"7eb7dee5a8f69a7b4580e1e2bd9fa86a"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 9d2849e109380d4d1341a1a9479b51d5
-      X-Runtime:
-      - '0.007938'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"vehicles":[],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Tue, 08 Oct 2019 09:08:46 GMT
-- request:
-    method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ccf852a2-f48f-4935-ad6a-023a7d38f06d/properties
-    body:
-      encoding: UTF-8
-      string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - openresty/1.15.8.2
-      Date:
-      - Tue, 08 Oct 2019 09:08:46 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Etag:
-      - W/"a85a64290b46f2e4106f689382da6741"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - ce4bcc83619677da80e89d5811f07cc9
-      X-Runtime:
-      - '0.079744'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"objects":[{"id":"5a86436a-90d5-430e-91c7-735aff4f08c9","value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"created_at":"2019-10-08T09:08:46.661Z","updated_at":"2019-10-08T09:08:46.661Z","capital_summary_id":"7cbcb4d3-703b-466a-9399-3532e15f67fb","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"c963dd5f-0b37-463d-b4eb-6f8dd9ace690","value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"created_at":"2019-10-08T09:08:46.668Z","updated_at":"2019-10-08T09:08:46.668Z","capital_summary_id":"7cbcb4d3-703b-466a-9399-3532e15f67fb","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Tue, 08 Oct 2019 09:08:46 GMT
-- request:
-    method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ccf852a2-f48f-4935-ad6a-023a7d38f06d
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - openresty/1.15.8.2
-      Date:
-      - Tue, 08 Oct 2019 09:08:46 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Etag:
-      - W/"c59dedc0c274fee1e93309d86e1ef892"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 1400e3c690cae85fbf80e9ca4aa6ac43
-      X-Runtime:
-      - '0.080539'
-    body:
-      encoding: ASCII-8BIT
-      string: '{"assessment_result":"contribution_required","applicant":{"receives_qualifying_benefit":true,"age_at_submission":39},"capital":{"total_liquid":"10000.0","total_non_liquid":"50000.0","pensioner_capital_disregard":"0.0","total_capital":"7000.0","capital_contribution":"0.0","liquid_capital_items":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital_items":[{"description":"Land","value":"50000.0"}]},"property":{"total_mortgage_allowance":"100000.0","total_property":"-53000.0","main_home":{"value":"200000.0","transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","percentage_owned":"50.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"-53000.0","shared_with_housing_assoc":false},"additional_properties":[{"value":"0.0","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","percentage_owned":"0.0","assessed_equity":"0.0"}]},"vehicles":{"total_vehicle":"0.0","vehicles":[]}}'
-    http_version: null
-  recorded_at: Tue, 08 Oct 2019 09:08:46 GMT
-- request:
-    method: post
-    uri: http://localhost:3000/assessments
-    body:
-      encoding: UTF-8
-      string: '{"client_reference_id":"L-6RU-R4N","submission_date":"2019-10-21","matter_proceeding_type":"domestic_abuse"}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"89f9bcf445273d7c19a00b3efb954d9c"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - abe4dedd-e9ee-405f-aa12-8a6de49012e2
-      X-Runtime:
-      - '0.064257'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"success":true,"objects":[{"id":"7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902","client_reference_id":"L-6RU-R4N","remote_ip":{"family":30,"addr":1,"mask_addr":340282366920938463463374607431768211455},"created_at":"2019-10-21T15:08:27.552Z","updated_at":"2019-10-21T15:08:27.552Z","submission_date":"2019-10-21","matter_proceeding_type":"domestic_abuse","assessment_result":"pending"}],"errors":[]}'
-    http_version: null
-  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
-- request:
-    method: post
-    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/applicant
-    body:
-      encoding: UTF-8
-      string: '{"applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"cd1b5fe6d352f60d47d12838beb27f2e"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 3239c488-c7d4-4501-9b66-49301cf72183
-      X-Runtime:
-      - '0.022326'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"objects":[{"id":"d5c32f2e-6724-46d5-98a1-9ada61335984","assessment_id":"7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902","date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"created_at":"2019-10-21T15:08:27.627Z","updated_at":"2019-10-21T15:08:27.627Z"}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
-- request:
-    method: post
-    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/capitals
-    body:
-      encoding: UTF-8
-      string: '{"bank_accounts":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital":[{"description":"Land","value":"50000.0"}]}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"1271713a1c82e4c902e54abb85037779"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - dd21c02e-3a61-4a5d-8dad-3a0e3d52e8e8
-      X-Runtime:
-      - '0.023063'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"objects":{"id":"7362e3ae-2a9e-44ff-b54c-2329c2cd3673","assessment_id":"7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","capital_assessment_result":"pending","created_at":"2019-10-21T15:08:27.578Z","updated_at":"2019-10-21T15:08:27.578Z"},"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
-- request:
-    method: post
-    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/vehicles
-    body:
-      encoding: UTF-8
-      string: '{"vehicles":[]}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"7eb7dee5a8f69a7b4580e1e2bd9fa86a"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 2326b628-f5f3-4be8-8298-dc4dba08b22c
-      X-Runtime:
-      - '0.005252'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"vehicles":[],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
-- request:
-    method: post
-    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902/properties
-    body:
-      encoding: UTF-8
-      string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"1608e96f413d9a96b175523ff95f48d9"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - a5cb7dae-ebbd-4a32-a603-17e5738d73ee
-      X-Runtime:
-      - '0.021300'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"objects":[{"id":"a856f0be-58a5-491a-baec-816cbcdbb323","value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"created_at":"2019-10-21T15:08:27.736Z","updated_at":"2019-10-21T15:08:27.736Z","capital_summary_id":"7362e3ae-2a9e-44ff-b54c-2329c2cd3673","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"d855bcff-e2cc-4cc4-a219-ffb47fad6f73","value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"created_at":"2019-10-21T15:08:27.747Z","updated_at":"2019-10-21T15:08:27.747Z","capital_summary_id":"7362e3ae-2a9e-44ff-b54c-2329c2cd3673","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
-- request:
-    method: get
-    uri: http://localhost:3000/assessments/7a9d6f34-8df8-4c4d-b52e-8bbf1bac5902
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"4fbfb308148a06bb5bdf3ed2b8512440"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 54b13ff9-d3da-4d6c-baa7-ef40353a65ce
-      X-Runtime:
-      - '0.053780'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"assessment_result":"contribution_required","applicant":{"receives_qualifying_benefit":true,"age_at_submission":39},"capital":{"total_liquid":"10000.0","total_non_liquid":"50000.0","pensioner_capital_disregard":"0.0","total_capital":"60000.0","capital_contribution":"57000.0","liquid_capital_items":[{"description":"Cash","value":"10000.0"}],"non_liquid_capital_items":[{"description":"Land","value":"50000.0"}]},"property":{"total_mortgage_allowance":"100000.0","total_property":"0.0","main_home":{"value":"200000.0","transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","shared_with_housing_assoc":false,"percentage_owned":"50.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","percentage_owned":"0.0","assessed_equity":"0.0"}]},"vehicles":{"total_vehicle":"0.0","vehicles":[]}}'
-    http_version: null
-  recorded_at: Mon, 21 Oct 2019 15:08:27 GMT
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1590761528029</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+  recorded_at: Fri, 29 May 2020 14:12:08 GMT
 - request:
     method: post
     uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
     body:
       encoding: UTF-8
-      string: '{"client_reference_id":"L-H92-UFH","submission_date":"2020-03-30","matter_proceeding_type":"domestic_abuse"}'
+      string: '{"client_reference_id":"L-YK6-FN7","submission_date":"2020-05-29","matter_proceeding_type":"domestic_abuse"}'
     headers:
       Content-Type:
       - application/json
@@ -654,9 +68,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Mon, 30 Mar 2020 09:37:37 GMT
+      - Fri, 29 May 2020 14:12:13 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -665,8 +79,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -680,21 +92,22 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"95fb74dccb52fbb2b9938558f03a5d78"
+      - W/"faefe947fe0ee788f424c52ebd4e4b12"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1719f8f62e766b1d1b2df8b4a34aa91b
+      - 2cfd4730e213337eaef398a36a37b9c8
       X-Runtime:
-      - '0.055607'
+      - '0.076940'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"success":true,"objects":[{"id":"fc3d36d9-d2a5-4274-8d1b-159e2361ee2a","client_reference_id":"L-H92-UFH","remote_ip":{"family":2,"addr":1367788061,"mask_addr":4294967295},"created_at":"2020-03-30T09:37:37.749Z","updated_at":"2020-03-30T09:37:37.749Z","submission_date":"2020-03-30","matter_proceeding_type":"domestic_abuse","assessment_result":"pending"}],"errors":[]}'
-    http_version: null
-  recorded_at: Mon, 30 Mar 2020 09:37:37 GMT
+      string: '{"success":true,"objects":[{"id":"7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a","client_reference_id":"L-YK6-FN7","remote_ip":{"family":2,"addr":1367788061,"mask_addr":4294967295},"created_at":"2020-05-29T14:12:13.567Z","updated_at":"2020-05-29T14:12:13.567Z","submission_date":"2020-05-29","matter_proceeding_type":"domestic_abuse","assessment_result":"pending","remarks":{}}],"assessment_id":"7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a","errors":[]}'
+  recorded_at: Fri, 29 May 2020 14:12:13 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/fc3d36d9-d2a5-4274-8d1b-159e2361ee2a/applicant
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a/applicant
     body:
       encoding: UTF-8
       string: '{"applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
@@ -713,9 +126,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Mon, 30 Mar 2020 09:37:38 GMT
+      - Fri, 29 May 2020 14:12:13 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -724,8 +137,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -739,21 +150,22 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"0d4acce9ebc0c80bbf4fdfc4e142fe67"
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 36556bfda3ebc8352d8ae71b8d5dec21
+      - ae100d0ba058bcfda95c00c28af6a143
       X-Runtime:
-      - '0.113363'
+      - '0.013118'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"objects":[{"id":"2477a441-9ada-4f68-a341-7b3879126472","assessment_id":"fc3d36d9-d2a5-4274-8d1b-159e2361ee2a","date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"created_at":"2020-03-30T09:37:38.081Z","updated_at":"2020-03-30T09:37:38.081Z","self_employed":false}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 30 Mar 2020 09:37:38 GMT
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Fri, 29 May 2020 14:12:13 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/fc3d36d9-d2a5-4274-8d1b-159e2361ee2a/capitals
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a/capitals
     body:
       encoding: UTF-8
       string: '{"bank_accounts":[{"description":"Current accounts","value":"-10.0"},{"description":"Money
@@ -773,9 +185,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Mon, 30 Mar 2020 09:37:38 GMT
+      - Fri, 29 May 2020 14:12:14 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -784,8 +196,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -799,21 +209,22 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"7572ed0b23054d746ac7160a3e7c5ef2"
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f17e1a37efe55a4785c86ccac0217903
+      - 04df526ab828d46b0963b83b7ee0fa21
       X-Runtime:
-      - '0.073118'
+      - '0.036723'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"objects":{"id":"30fb722c-4e6f-4b80-a347-f781dfa8c680","assessment_id":"fc3d36d9-d2a5-4274-8d1b-159e2361ee2a","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","assessment_result":"pending","created_at":"2020-03-30T09:37:37.751Z","updated_at":"2020-03-30T09:37:37.751Z"},"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 30 Mar 2020 09:37:38 GMT
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Fri, 29 May 2020 14:12:14 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/fc3d36d9-d2a5-4274-8d1b-159e2361ee2a/vehicles
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a/vehicles
     body:
       encoding: UTF-8
       string: '{"vehicles":[]}'
@@ -832,9 +243,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Mon, 30 Mar 2020 09:37:39 GMT
+      - Fri, 29 May 2020 14:12:14 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -843,8 +254,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -858,21 +267,22 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"7eb7dee5a8f69a7b4580e1e2bd9fa86a"
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 88dede1bbfc8f3cfebbdc18d4345435b
+      - ea733ffe3356c120acaa6e23664f0d90
       X-Runtime:
-      - '0.053887'
+      - '0.051413'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"vehicles":[],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 30 Mar 2020 09:37:39 GMT
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Fri, 29 May 2020 14:12:14 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/fc3d36d9-d2a5-4274-8d1b-159e2361ee2a/properties
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a/properties
     body:
       encoding: UTF-8
       string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
@@ -891,9 +301,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Mon, 30 Mar 2020 09:37:39 GMT
+      - Fri, 29 May 2020 14:12:14 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -902,8 +312,6 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -917,21 +325,22 @@ http_interactions:
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Etag:
-      - W/"0ce6af425bf1d5c3f34c6e7f412e0542"
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 62b0996fc967d6d80d1eddb087a3ed37
+      - 1b1fc7d1a8cdaae2f6c1317614f55160
       X-Runtime:
-      - '0.013858'
+      - '0.044709'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
-      string: '{"objects":[{"id":"71de3f1c-66ee-4c9d-96ee-2d048ad90234","value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"created_at":"2020-03-30T09:37:39.322Z","updated_at":"2020-03-30T09:37:39.322Z","capital_summary_id":"30fb722c-4e6f-4b80-a347-f781dfa8c680","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"01402425-fb24-467c-bc99-6350737f1842","value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"created_at":"2020-03-30T09:37:39.327Z","updated_at":"2020-03-30T09:37:39.327Z","capital_summary_id":"30fb722c-4e6f-4b80-a347-f781dfa8c680","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Mon, 30 Mar 2020 09:37:39 GMT
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Fri, 29 May 2020 14:12:14 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/fc3d36d9-d2a5-4274-8d1b-159e2361ee2a
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a
     body:
       encoding: US-ASCII
       string: ''
@@ -950,9 +359,9 @@ http_interactions:
       message: OK
     headers:
       Server:
-      - openresty/1.15.8.2
+      - nginx/1.17.8
       Date:
-      - Mon, 30 Mar 2020 09:37:39 GMT
+      - Fri, 29 May 2020 14:12:15 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -961,328 +370,31 @@ http_interactions:
       - keep-alive
       Vary:
       - Accept-Encoding
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Etag:
+      - W/"a00989c17ba30dc9fc9ed5de18d8d839"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 63d0297075b96f2b620b902ba1bbeb0d
+      X-Runtime:
+      - '0.134657'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Etag:
-      - W/"231cd75141aba79e8a6d508fd83595ba"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 6448c86dc7695c43f10f43df1f2f5be6
-      X-Runtime:
-      - '0.168270'
     body:
       encoding: ASCII-8BIT
-      string: '{"version":"2","timestamp":"2020-03-30T09:37:39.622+00:00","success":true,"assessment":{"id":"fc3d36d9-d2a5-4274-8d1b-159e2361ee2a","client_reference_id":"L-H92-UFH","submission_date":"2020-03-30","matter_proceeding_type":"domestic_abuse","assessment_result":"contribution_required","applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"self_employed":false},"gross_income":{"monthly_other_income":null,"monthly_state_benefits":"0.0","total_gross_income":"0.0","upper_threshold":"0.0","assessment_result":"pending","state_benefits":[],"other_income":[]},"disposable_income":{"outgoings":{"childcare_costs":[],"housing_costs":[],"maintenance_costs":[]},"childcare_allowance":"0.0","dependant_allowance":"0.0","maintenance_allowance":"0.0","gross_housing_costs":"0.0","housing_benefit":"0.0","net_housing_costs":"0.0","total_outgoings_and_allowances":"0.0","total_disposable_income":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","assessment_result":"pending","income_contribution":"0.0"},"capital":{"capital_items":{"liquid":[{"description":"Money
-        not in a bank account","value":"10000.0"},{"description":"Current accounts","value":"-10.0"}],"non_liquid":[{"description":"Land","value":"50000.0"}],"vehicles":[],"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","net_value":"94000.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"0.0","assessed_equity":"0.0"}]}},"total_liquid":"10000.0","total_non_liquid":"50000.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"100000.0","total_capital":"60000.0","pensioner_capital_disregard":"0.0","assessed_capital":"60000.0","lower_threshold":"3000.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","capital_contribution":"57000.0"}}}'
-    http_version: null
-  recorded_at: Mon, 30 Mar 2020 09:37:39 GMT
-- request:
-    method: post
-    uri: http://localhost:3001/assessments
-    body:
-      encoding: UTF-8
-      string: '{"client_reference_id":"L-P76-RUB","submission_date":"2020-04-15","matter_proceeding_type":"domestic_abuse"}'
-    headers:
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Faraday v1.0.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"da5c19e82b6ab31ec833f476126c61ac"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - b696d6ad-915f-4981-ac89-4b68a2b939b1
-      X-Runtime:
-      - '0.034242'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"success":true,"objects":[{"id":"029320a7-c984-4dfb-a4c8-aeccd7262de3","client_reference_id":"L-P76-RUB","remote_ip":{"family":30,"addr":1,"mask_addr":340282366920938463463374607431768211455},"created_at":"2020-04-15T16:23:15.331Z","updated_at":"2020-04-15T16:23:15.331Z","submission_date":"2020-04-15","matter_proceeding_type":"domestic_abuse","assessment_result":"pending"}],"errors":[]}'
-    http_version: null
-  recorded_at: Wed, 15 Apr 2020 16:23:15 GMT
-- request:
-    method: post
-    uri: http://localhost:3001/assessments/029320a7-c984-4dfb-a4c8-aeccd7262de3/applicant
-    body:
-      encoding: UTF-8
-      string: '{"applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
-    headers:
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Faraday v1.0.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"af9dbf70e9ebde3c68a4c3a1e69656a1"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - e322a599-43ae-4575-94fd-c4864a6d56ae
-      X-Runtime:
-      - '0.042680'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"objects":[{"id":"7239c5b7-e4a9-4288-8e28-bfe85871376b","assessment_id":"029320a7-c984-4dfb-a4c8-aeccd7262de3","date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"created_at":"2020-04-15T16:23:15.388Z","updated_at":"2020-04-15T16:23:15.388Z","self_employed":false}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Wed, 15 Apr 2020 16:23:15 GMT
-- request:
-    method: post
-    uri: http://localhost:3001/assessments/029320a7-c984-4dfb-a4c8-aeccd7262de3/capitals
-    body:
-      encoding: UTF-8
-      string: '{"bank_accounts":[{"description":"Current accounts","value":"-10.0"},{"description":"Money
-        not in a bank account","value":"10000.0"}],"non_liquid_capital":[{"description":"Land","value":"50000.0"}]}'
-    headers:
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Faraday v1.0.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"731296025ba2fe63602cd7f02065ef4f"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - '00903183-23fc-4d45-ad49-3c41f9e47270'
-      X-Runtime:
-      - '0.028087'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"objects":{"id":"a138ab4d-12e2-4c6e-9703-6dd190018344","assessment_id":"029320a7-c984-4dfb-a4c8-aeccd7262de3","total_liquid":"0.0","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"0.0","total_capital":"0.0","pensioner_capital_disregard":"0.0","assessed_capital":"0.0","capital_contribution":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","assessment_result":"pending","created_at":"2020-04-15T16:23:15.335Z","updated_at":"2020-04-15T16:23:15.335Z"},"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Wed, 15 Apr 2020 16:23:15 GMT
-- request:
-    method: post
-    uri: http://localhost:3001/assessments/029320a7-c984-4dfb-a4c8-aeccd7262de3/vehicles
-    body:
-      encoding: UTF-8
-      string: '{"vehicles":[]}'
-    headers:
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Faraday v1.0.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"7eb7dee5a8f69a7b4580e1e2bd9fa86a"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - fcc880d6-c742-47ca-95ba-d23ef7805dc6
-      X-Runtime:
-      - '0.006117'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"vehicles":[],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Wed, 15 Apr 2020 16:23:15 GMT
-- request:
-    method: post
-    uri: http://localhost:3001/assessments/029320a7-c984-4dfb-a4c8-aeccd7262de3/properties
-    body:
-      encoding: UTF-8
-      string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
-    headers:
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Faraday v1.0.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"39c766f3f88d9ca610cb0ae626611c4d"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 28b484e8-59e3-4c83-8943-8bc1a7615a97
-      X-Runtime:
-      - '0.015803'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"objects":[{"id":"5080d3dd-554a-4da9-a6d5-e13a7fc38812","value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"created_at":"2020-04-15T16:23:15.520Z","updated_at":"2020-04-15T16:23:15.520Z","capital_summary_id":"a138ab4d-12e2-4c6e-9703-6dd190018344","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"},{"id":"e08d6320-71ea-4850-9f36-cd6c9c601bf8","value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"created_at":"2020-04-15T16:23:15.525Z","updated_at":"2020-04-15T16:23:15.525Z","capital_summary_id":"a138ab4d-12e2-4c6e-9703-6dd190018344","transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","assessed_equity":"0.0","main_home_equity_disregard":"0.0"}],"errors":[],"success":true}'
-    http_version: null
-  recorded_at: Wed, 15 Apr 2020 16:23:15 GMT
-- request:
-    method: get
-    uri: http://localhost:3001/assessments/029320a7-c984-4dfb-a4c8-aeccd7262de3
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json;version=2
-      User-Agent:
-      - Faraday v1.0.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Etag:
-      - W/"132884fb88ebb29e7b0ec2425e57e512"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - d5aa3474-c47d-4c46-843f-4e5b3a861d02
-      X-Runtime:
-      - '0.071578'
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: '{"version":"2","timestamp":"2020-04-15T17:23:15.609+01:00","success":true,"assessment":{"id":"029320a7-c984-4dfb-a4c8-aeccd7262de3","client_reference_id":"L-P76-RUB","submission_date":"2020-04-15","matter_proceeding_type":"domestic_abuse","assessment_result":"contribution_required","applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"self_employed":false},"gross_income":{"monthly_other_income":null,"monthly_state_benefits":"0.0","total_gross_income":"0.0","upper_threshold":"0.0","assessment_result":"pending","state_benefits":[],"other_income":[]},"disposable_income":{"outgoings":{"childcare_costs":[],"housing_costs":[],"maintenance_costs":[]},"childcare_allowance":"0.0","dependant_allowance":"0.0","maintenance_allowance":"0.0","gross_housing_costs":"0.0","housing_benefit":"0.0","net_housing_costs":"0.0","total_outgoings_and_allowances":"0.0","total_disposable_income":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","assessment_result":"pending","income_contribution":"0.0"},"capital":{"capital_items":{"liquid":[{"description":"Current
-        accounts","value":"-10.0"},{"description":"Money not in a bank account","value":"10000.0"}],"non_liquid":[{"description":"Land","value":"50000.0"}],"vehicles":[],"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","net_value":"94000.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"0.0","assessed_equity":"0.0"}]}},"total_liquid":"10000.0","total_non_liquid":"50000.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"100000.0","total_capital":"60000.0","pensioner_capital_disregard":"0.0","assessed_capital":"60000.0","lower_threshold":"3000.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","capital_contribution":"57000.0"}}}'
-    http_version: null
-  recorded_at: Wed, 15 Apr 2020 16:23:15 GMT
-recorded_with: VCR 5.1.0
+      string: '{"version":"2","timestamp":"2020-05-29T14:12:15.077+00:00","success":true,"assessment":{"id":"7601e7ea-362d-41a6-ba7f-7b0e3e3ed56a","client_reference_id":"L-YK6-FN7","submission_date":"2020-05-29","matter_proceeding_type":"domestic_abuse","assessment_result":"contribution_required","applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true,"self_employed":false},"gross_income":{"monthly_other_income":null,"monthly_state_benefits":"0.0","total_gross_income":"0.0","upper_threshold":"0.0","assessment_result":"pending","monthly_income_equivalents":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","student_loan":"0.0","pension":"0.0"},"monthly_outgoing_equivalents":{"child_care":"0.0","maintenance_out":"0.0","rent_or_mortgage":"0.0","legal_aid":"0.0"},"state_benefits":[],"other_income":[]},"disposable_income":{"monthly_outgoing_equivalents":{"child_care":"0.0","maintenance_out":"0.0","rent_or_mortgage":"0.0","legal_aid":"0.0"},"childcare_allowance":"0.0","deductions":{"dependants_allowance":"0.0","disregarded_state_benefits":0.0},"dependant_allowance":"0.0","maintenance_allowance":"0.0","gross_housing_costs":"0.0","housing_benefit":"0.0","net_housing_costs":"0.0","total_outgoings_and_allowances":"0.0","total_disposable_income":"0.0","lower_threshold":"0.0","upper_threshold":"0.0","assessment_result":"pending","income_contribution":"0.0"},"capital":{"capital_items":{"liquid":[{"description":"Current
+        accounts","value":"-10.0"},{"description":"Money not in a bank account","value":"10000.0"}],"non_liquid":[{"description":"Land","value":"50000.0"}],"vehicles":[],"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","main_home":true,"shared_with_housing_assoc":false,"transaction_allowance":"6000.0","allowable_outstanding_mortgage":"100000.0","net_value":"94000.0","net_equity":"47000.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"0.0","assessed_equity":"0.0"}]}},"total_liquid":"10000.0","total_non_liquid":"50000.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"100000.0","total_capital":"60000.0","pensioner_capital_disregard":"0.0","assessed_capital":"60000.0","lower_threshold":"3000.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","capital_contribution":"57000.0"},"remarks":{}}}'
+  recorded_at: Fri, 29 May 2020 14:12:15 GMT
+recorded_with: VCR 6.0.0

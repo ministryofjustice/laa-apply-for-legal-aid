@@ -716,4 +716,66 @@ Feature: Civil application journeys
     Then I select "None of these"
     Then I click "Save and continue"
 
+  @javascript @vcr
+  Scenario: I want to change client details after a failed benefit check
+#    Given I start a non-passported application
+#    Then I should be on a page showing "How we checked your client's benefits status"
+#    Then I click How we checked your client's benefits status
+#    Then I should be on a page showing "Change your client's details"
+#    When I click link "Change your client's details"
+#    Then I should be on a page showing "Enter your client's details"
+#    Then I enter name 'Kyle', 'Walker'
+#    Then I enter the date of birth '10-1-1980'
+#    Then I enter national insurance number 'JA293483A'
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Check your answers"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "receives benefits that qualify for legal aid"
+#    Then I click 'Continue'
+#    Then I click 'Save and continue'
+    Given I am logged in as a provider
+    Given I visit the application service
+    And I click link "Start"
+    And I click link "Start now"
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    When I click 'Agree and continue'
+    Then I should be on the Applicant page
+    Then I enter name 'Test', 'Fail'
+    Then I enter the date of birth '10-10-1980'
+    Then I enter national insurance number 'AB293483A'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1A1AA'
+    Then I click find address
+    Then I select an address 'Buckingham Palace, London, SW1A 1AA'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Non-molestation order'
+    Then proceeding suggestions has results
+    Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "How we checked your client's benefits status"
+    Then I click How we checked your client's benefits status
+    Then I should be on a page showing "Change your client's details"
+    When I click link "Change your client's details"
+    Then I should be on a page showing "Enter your client's details"
+    Then I enter name 'Kyle', 'Walker'
+    Then I enter the date of birth '10-1-1980'
+    Then I enter national insurance number 'JA293483A'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "receives benefits that qualify for legal aid"
+    Then I click 'Continue'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
 
