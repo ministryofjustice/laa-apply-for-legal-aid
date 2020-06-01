@@ -9,7 +9,7 @@
             question.attribute,
             [true, false],
             inline: true,
-            title: { size: :m, text: question.title },
+            title: { size: :m, text: question.title, htag: :h2 },
             input_attributes: question.show_details_when ? { question.show_details_when.to_s => { 'data-aria-controls' => conditional_id } } : nil
           ) %>
 
