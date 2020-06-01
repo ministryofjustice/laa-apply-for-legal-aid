@@ -716,4 +716,25 @@ Feature: Civil application journeys
     Then I select "None of these"
     Then I click "Save and continue"
 
+  @javascript @vcr
+  Scenario: I want to change client details after a failed benefit check
+    Given I start a non-passported application
+    Then I should be on a page showing "How we checked your client's benefits status"
+    Then I click How we checked your client's benefits status
+    Then I should be on a page showing "Change your client's details"
+    When I click link "Change your client's details"
+    Then I should be on a page showing "Enter your client's details"
+    Then I enter name 'Kyle', 'Walker'
+    Then I enter the date of birth '10-1-1980'
+    Then I enter national insurance number 'JA293483A'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "receives benefits that qualify for legal aid"
+    Then I click 'Continue'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
 

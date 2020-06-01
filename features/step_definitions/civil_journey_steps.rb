@@ -69,6 +69,33 @@ Given('I start the journey as far as the applicant page') do
   )
 end
 
+Given('I start a non-passported application') do
+  steps %(
+   Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'Paul'
+    Then I enter the date of birth '10-12-1961'
+    Then I enter national insurance number 'JA293483B'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1A 1AA'
+    Then I click find address
+    Then I select an address 'Buckingham Palace, London, SW1A 1AA'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Non-molestation order'
+    Then proceeding suggestions has results
+    Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "Covered under a substantive certificate"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+  )
+end
+
 Given('I start the journey as far as the client completed means page') do
   @legal_aid_application = create(
     :application,
@@ -501,6 +528,10 @@ end
 Then('I am on the read only version of the check your answers page') do
   expect(page).to have_content('Home')
   expect(page).not_to have_css('.change-link')
+end
+
+Then(/^I click How we checked your client's benefits status$/) do
+  page.find('#checked-status').click
 end
 
 # rubocop:disable Lint/Debugger

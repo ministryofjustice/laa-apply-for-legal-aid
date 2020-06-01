@@ -204,6 +204,8 @@ BC_USE_DEV_MOCK=true
 This will enable `MockBenefitCheckService`. See `MockBenefitCheckService::KNOWN for
 credentials that will return 'Yes' for has qualifying benefits.
 
+This environment variable should be set to ```false``` when recording new vcr cassettes otherwise the test will pass locally and fail on CircleCI. 
+
 ## Admin Portal
 
 The admin portal is at `/admin`. To access it, there must be an `AdminUser` defined.

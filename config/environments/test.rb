@@ -38,7 +38,7 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  config.x.benefit_check.wsdl_url = 'https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl'
+  config.x.benefit_check.wsdl_url = 'https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl'
 
   config.x.logs_faraday_response = false
 
