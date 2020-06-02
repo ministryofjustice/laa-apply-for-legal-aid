@@ -96,6 +96,7 @@ module GovukElementsFormBuilder
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], error: 'Please select a gender') %>
     #
     # If you wish to specify the size of the heading and/or which header tag to use, pass a hash into title with text and size:
+    # And the default for header tag, if no htag is supplied, is h1
     # <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: { text: 'What is your gender?', size: :m, htag: :h2 } ) %>
     #
     # Use the :inline parameter to have the radio buttons displayed horizontally rather than vertically
