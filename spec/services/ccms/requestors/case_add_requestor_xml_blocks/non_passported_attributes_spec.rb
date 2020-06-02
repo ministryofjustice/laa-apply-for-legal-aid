@@ -462,6 +462,13 @@ module CCMS
           end
         end
 
+        context 'attributes with specific hard coded values' do
+          it 'IS_PASSPORTED should be hard coded to NO' do
+            block = XmlExtractor.call(xml, :global_means, 'IS_PASSPORTED')
+            expect(block).to have_text_response 'NO'
+          end
+        end
+
         context 'PROC_PREDICTED_COST_FAMILY' do
           it 'generates the block with the standard value' do
             block = XmlExtractor.call(xml, :global_merits, 'PROC_PREDICTED_COST_FAMILY')

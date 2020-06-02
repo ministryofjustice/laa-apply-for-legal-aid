@@ -1,6 +1,8 @@
 module CCMS
   module Requestors
     class NonPassportedCaseAddRequestor < CaseAddRequestor
+      wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
+
       uses_namespaces(
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
         'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',

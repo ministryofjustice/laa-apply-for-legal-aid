@@ -516,6 +516,11 @@ global_means:
     user_defined: true
     response_type: text
     generate_block?: true
+  IS_PASSPORTED:
+    value: 'NO'
+    br100_meaning: 'DWP Benefit Check: Response'
+    response_type: text
+    user_defined: true
   MARITIAL_STATUS:
     value: U
     br100_meaning: marital status
