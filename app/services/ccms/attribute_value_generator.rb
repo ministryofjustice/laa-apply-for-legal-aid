@@ -66,6 +66,7 @@ module CCMS
     }.freeze
 
     attr_reader :legal_aid_application
+
     delegate :merits_assessment,
              :vehicle,
              :substantive_scope_limitation,

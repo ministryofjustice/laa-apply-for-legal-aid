@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.h1-heading') do %>
+<%= page_template(page_title: t('.h1-heading'), back_link: { text: t('generic.home') }) do %>
   <p class="govuk-body"><%= t('.statement') %></p>
   <ul class="govuk-list govuk-list--bullet print-add-bullet">
     <%- t('.statement-bullets').each do |bullet| %>

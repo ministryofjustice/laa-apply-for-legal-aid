@@ -4,6 +4,7 @@ class CleanupCapitalAttributes
   end
 
   attr_reader :legal_aid_application
+
   delegate(
     :own_home_no?, :own_home_owned_outright?, :own_home?, :shared_ownership?,
     to: :legal_aid_application

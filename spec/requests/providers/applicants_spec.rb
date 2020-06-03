@@ -17,7 +17,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
 
     it 'does not prefix page title with error label' do
       subject
-      expect(response.body).not_to match(/\<title\>#{I18n.t('errors.title_prefix')}\:/)
+      expect(response.body).not_to match(/<title>#{I18n.t('errors.title_prefix')}:/)
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
 
       it 'prefixes page title with error label' do
         subject
-        expect(response.body).to match(/\<title\>#{I18n.t('errors.title_prefix')}\:/)
+        expect(response.body).to match(/<title>#{I18n.t('errors.title_prefix')}:/)
       end
 
       it 'does not create applicant' do

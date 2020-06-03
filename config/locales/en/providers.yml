@@ -271,6 +271,7 @@ en:
     declarations:
       show:
         h1-heading: Declaration
+        h1-heading: Declaration
         statement: 'By continuing, you agree that:'
         statement-bullets:
         - your client has instructed you to represent them
