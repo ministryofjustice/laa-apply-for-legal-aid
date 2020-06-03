@@ -23,11 +23,11 @@ gem 'webdack-uuid_migration', '~> 1.3.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
-gem 'devise' , '>= 4.7.1' # User authentication
+gem 'devise', '>= 4.7.1' # User authentication
 gem 'devise_saml_authenticatable', '>= 1.5.0'
 gem 'omniauth', '>= 1.9.1'
 gem 'omniauth-google-oauth2', '>= 0.8.0'
-gem 'omniauth-oauth2' , '>= 1.6.0' # Provide Oauth2 strategy framework
+gem 'omniauth-oauth2', '>= 1.6.0' # Provide Oauth2 strategy framework
 gem 'omniauth-rails_csrf_protection', '~> 0.1', '>= 0.1.2'
 
 # Improve backtrace in nested error recues
