@@ -6,7 +6,8 @@ module CCMS
       let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything_and_address, populate_vehicle: true }
       let(:applicant) { legal_aid_application.applicant }
       let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
-      let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
+      let(:histories) { CCMS::SubmissionHistory.where(submission_id: submission.id).order(:created_at) }
+      let(:latest_history) { histories.reload.last }
       let(:request_body) { ccms_data_from_file 'applicant_search_request.xml' }
       let(:response_body) { ccms_data_from_file 'applicant_search_response_one_result.xml' }
       let(:empty_response_body) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
@@ -45,15 +46,15 @@ module CCMS
 
           it 'writes a history record' do
             expect { subject.call }.to change { SubmissionHistory.count }.by(1)
-            expect(history.from_state).to eq 'case_ref_obtained'
-            expect(history.to_state).to eq 'applicant_ref_obtained'
-            expect(history.success).to be true
-            expect(history.details).to be_nil
+            expect(latest_history.from_state).to eq 'case_ref_obtained'
+            expect(latest_history.to_state).to eq 'applicant_ref_obtained'
+            expect(latest_history.success).to be true
+            expect(latest_history.details).to be_nil
           end
 
           it 'stores the reqeust body in the submission history record' do
             subject.call
-            expect(history.request).to be_soap_envelope_with(
+            expect(latest_history.request).to be_soap_envelope_with(
               command: 'ns2:ClientInqRQ',
               transaction_id: '20190301030405123456',
               matching: [
@@ -65,52 +66,52 @@ module CCMS
 
           it 'stores the response body in the submission history record' do
             subject.call
-            expect(history.response).to eq response_body
+            expect(latest_history.response).to eq response_body
           end
         end
-      end
 
-      context 'applicant does not exist on CCMS' do
-        before do
-          # stub a post request
-          stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: empty_response_body, status: 200)
-          stub_request(:post, endpoint).with(body: /ClientAddRQ/).to_return(body: success_add_applicant_response_body, status: 200)
-          expect_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:transaction_request_id).at_least(1).and_return('20190301030405123456')
-        end
+        context 'applicant does not exist on CCMS' do
+          before do
+            # stub a post request
+            stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: empty_response_body, status: 200)
+            stub_request(:post, endpoint).with(body: /ClientAddRQ/).to_return(body: success_add_applicant_response_body, status: 200)
+            expect_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:transaction_request_id).at_least(1).and_return('20190301030405123456')
+          end
 
-        it 'sets the state to applicant_submitted' do
-          subject.call
-          expect(submission.aasm_state).to eq 'applicant_submitted'
-        end
+          it 'sets the state to applicant_submitted' do
+            subject.call
+            expect(submission.aasm_state).to eq 'applicant_submitted'
+          end
 
-        it 'writes a history record' do
-          expect { subject.call }.to change { SubmissionHistory.count }.by(2)
-          expect(history.from_state).to eq 'case_ref_obtained'
-          expect(history.to_state).to eq 'applicant_submitted'
-          expect(history.success).to be true
-          expect(history.details).to be_nil
-        end
+          it 'writes a history record' do
+            expect { subject.call }.to change { SubmissionHistory.count }.by(2)
+            expect(latest_history.from_state).to eq 'case_ref_obtained'
+            expect(latest_history.to_state).to eq 'applicant_submitted'
+            expect(latest_history.success).to be true
+            expect(latest_history.details).to be_nil
+          end
 
-        it 'stores the reqeust body in the submission history record' do
-          subject.call
-          expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:ClientAddRQ',
-            transaction_id: '20190301030405123456',
-            matching: [
-              "<ns4:Surname>#{applicant.last_name}</ns4:Surname>",
-              "<ns4:FirstName>#{applicant.first_name}</ns4:FirstName>"
-            ]
-          )
-        end
+          it 'stores the reqeust body in the submission history record' do
+            subject.call
+            expect(latest_history.request).to be_soap_envelope_with(
+              command: 'ns2:ClientAddRQ',
+              transaction_id: '20190301030405123456',
+              matching: [
+                "<ns4:Surname>#{applicant.last_name}</ns4:Surname>",
+                "<ns4:FirstName>#{applicant.first_name}</ns4:FirstName>"
+              ]
+            )
+          end
 
-        it 'stores the response body in the submission history record' do
-          subject.call
-          expect(history.response).to eq success_add_applicant_response_body
-        end
+          it 'stores the response body in the submission history record' do
+            subject.call
+            expect(latest_history.response).to eq success_add_applicant_response_body
+          end
 
-        it 'calls the AddApplicant service' do
-          expect(CCMS::Submitters::AddApplicantService).to receive(:new).and_call_original
-          subject.call
+          it 'calls the AddApplicant service' do
+            expect(CCMS::Submitters::AddApplicantService).to receive(:new).and_call_original
+            subject.call
+          end
         end
       end
 
@@ -127,12 +128,12 @@ module CCMS
 
           it 'records the error in the submission history' do
             expect { subject.call }.to change { SubmissionHistory.count }.by(1)
-            expect(history.from_state).to eq 'case_ref_obtained'
-            expect(history.to_state).to eq 'failed'
-            expect(history.success).to be false
-            expect(history.details).to match(/CCMS::CcmsError/)
-            expect(history.details).to match(/oops/)
-            expect(history.request).to be_soap_envelope_with(
+            expect(latest_history.from_state).to eq 'case_ref_obtained'
+            expect(latest_history.to_state).to eq 'failed'
+            expect(latest_history.success).to be false
+            expect(latest_history.details).to match(/CCMS::CcmsError/)
+            expect(latest_history.details).to match(/oops/)
+            expect(latest_history.request).to be_soap_envelope_with(
               command: 'ns2:ClientInqRQ',
               transaction_id: '20190301030405123456',
               matching: [
