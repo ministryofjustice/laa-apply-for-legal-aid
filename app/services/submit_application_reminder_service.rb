@@ -5,14 +5,14 @@ class SubmitApplicationReminderService
     @application = application
   end
 
-  def send_provider_email
+  def send_email
     return unless application.substantive_application_deadline_on
 
     [five_days_before_deadline, nine_am_deadline_day].each do |scheduled_time|
       application.scheduled_mailings.create!(
         mailer_klass: 'SubmitApplicationReminderMailer',
         mailer_method: 'notify_provider',
-        arguments: provider_mailer_args,
+        arguments: mailer_args,
         scheduled_at: scheduled_time
       )
     end
@@ -22,7 +22,7 @@ class SubmitApplicationReminderService
 
   attr_reader :application
 
-  def provider_mailer_args
+  def mailer_args
     [
       application.id,
       application.provider.name,

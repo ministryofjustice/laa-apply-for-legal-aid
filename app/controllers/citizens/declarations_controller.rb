@@ -7,6 +7,7 @@ module Citizens
       legal_aid_application.complete_means! unless legal_aid_application.provider_assessing_means?
       ProviderEmailService.new(legal_aid_application).send_email
       CitizenCompleteProcessingJob.perform_later(legal_aid_application.id)
+
       go_forward
     end
 

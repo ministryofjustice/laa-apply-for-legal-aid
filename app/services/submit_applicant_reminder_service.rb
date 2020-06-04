@@ -9,6 +9,7 @@ class SubmitApplicantReminderService
     # return unless application.state == 'provider_assessing_means'
     # this might be better to check if it has passed a state rather than looking at anyone state in case it has progressed beyond
     # this state to e.g. provider_checking_citizens_means_answers
+    # this might be better as single if statemnt, if state is client_details_answers_checked then send the email
 
     [one_day_after_initial, nine_am_deadline_day].each do |scheduled_time|
       application.scheduled_mailings.create!(
