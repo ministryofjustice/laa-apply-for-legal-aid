@@ -117,7 +117,7 @@ GEM
       smart_properties
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    blazer (2.2.4)
+    blazer (2.2.5)
       activerecord (>= 5)
       chartkick (>= 3.2)
       railties (>= 5)
