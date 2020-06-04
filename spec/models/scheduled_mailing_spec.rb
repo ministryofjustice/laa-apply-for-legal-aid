@@ -23,18 +23,32 @@ RSpec.describe ScheduledMailing do
   end
 
   describe '#deliver!' do
-    let(:scheduled_mail) { create :scheduled_mailing, :due }
     let(:mail_message) { double 'mail message' }
     let(:now) { Time.zone.now }
 
-    context 'scheduled_mails are checked for eligibility prior to sending' do
-      let(:scheduled_mail) { create :scheduled_mailing, :provider_financial_reminder, legal_aid_application: legal_aid_application }
-      context 'the mail is eligible to be sent' do
-        let(:legal_aid_application) { create :legal_aid_application, :at_client_completed_means }
+    context 'mailer class does not override #eligible_for_delivery?' do
+      let(:scheduled_mail) { create :scheduled_mailing, :due, :always_eligible_for_delivery }
+      it 'delivers the mail' do
+        Timecop.freeze(now) do
+          expect(ResendLinkRequestMailer)
+            .to receive(:notify)
+            .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
+            .and_return(mail_message)
+          expect(mail_message).to receive(:deliver_now)
+          scheduled_mail.deliver!
+          expect(scheduled_mail.reload.sent_at.to_s).to eq now.to_s
+        end
+      end
+    end
+
+    context 'mailer_class does override #eligble for delivery' do
+      let(:scheduled_mail) { create :scheduled_mailing, :due, legal_aid_application: legal_aid_application }
+      context 'the mail is eligible' do
+        let(:legal_aid_application) { create :legal_aid_application, :at_checking_client_details_answers }
 
         it 'delivers the mail' do
           Timecop.freeze(now) do
-            expect(SubmitProviderFinancialReminderMailer)
+            expect(SubmitApplicationReminderMailer)
               .to receive(:notify_provider)
               .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
               .and_return(mail_message)
@@ -45,13 +59,19 @@ RSpec.describe ScheduledMailing do
         end
       end
 
-      context 'the mail is not eligible to be sent' do
-        let(:legal_aid_application) { create :legal_aid_application, :at_client_completed_means }
-
+      context 'the mail is not eligible' do
+        let(:legal_aid_application) { create :legal_aid_application, :at_use_ccms }
         it 'does not deliver the mail' do
-          expect_any_instance_of(SubmitProviderFinancialReminderMailer).not_to receive(:notify_provider)
+          expect_any_instance_of(SubmitApplicationReminderMailer).not_to receive(:notify_provider)
           scheduled_mail.deliver!
           expect(scheduled_mail.reload.sent_at).to be_nil
+        end
+
+        it 'cancels the mail' do
+          Timecop.freeze(now) do
+            scheduled_mail.deliver!
+            expect(scheduled_mail.reload.cancelled_at).to eq now
+          end
         end
       end
     end

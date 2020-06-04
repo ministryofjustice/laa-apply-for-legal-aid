@@ -1,4 +1,4 @@
-class SubmissionConfirmationMailer < GovukNotifyRails::Mailer
+class SubmissionConfirmationMailer < BaseApplyMailer
   self.delivery_job = GovukNotifyMailerJob
 
   require_relative 'concerns/notify_template_methods'
