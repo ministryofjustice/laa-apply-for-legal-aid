@@ -3,7 +3,7 @@ class SubmitApplicantFinancialReminderMailer < GovukNotifyRails::Mailer
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
-  def notify_citizen(application_id,  email, application_url)
+  def notify_citizen(application_id, email, application_url)
     application = LegalAidApplication.find(application_id)
     template_name :reminder_to_submit_financial_information_client
     set_personalisation(

@@ -89,7 +89,10 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       end
 
       event :complete_bank_transaction_analysis do
-        transitions from: :analysing_bank_transactions, to: :provider_assessing_means
+        transitions from: :analysing_bank_transactions, to: :provider_assessing_means,
+                    after: -> do
+                      CitizenCompleteProcessingJob.perform_later(id)
+                    end
       end
 
       event :provider_check_citizens_means_answers do
