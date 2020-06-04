@@ -101,7 +101,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    backports (3.15.0)
+    backports (3.17.2)
     bcrypt (3.1.13)
     better_errors (2.7.1)
       coderay (>= 1.0.0)
@@ -143,13 +143,13 @@ GEM
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     climate_control (0.2.0)
-    coderay (1.1.2)
+    coderay (1.1.3)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.6)
-    cucumber (3.1.2)
+    cucumber (3.2.0)
       builder (>= 2.1.2)
       cucumber-core (~> 3.2.0)
       cucumber-expressions (~> 6.0.1)
@@ -210,9 +210,9 @@ GEM
       railties (>= 4.2.0)
     faker (2.12.0)
       i18n (>= 1.6, < 2)
-    faraday (1.0.0)
+    faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
-    ffi (1.12.2)
+    ffi (1.13.0)
     formatador (0.2.5)
     geckoboard-ruby (0.4.0)
     gherkin (5.1.0)
@@ -269,7 +269,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
     jmespath (1.4.0)
-    jquery-rails (4.3.5)
+    jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -307,7 +307,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2019.1009)
+    mime-types-data (3.2020.0512)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -332,7 +332,7 @@ GEM
     notifications-ruby-client (5.1.2)
       jwt (>= 1.5, < 3)
     numerizer (0.1.1)
-    oauth2 (1.4.2)
+    oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
@@ -369,7 +369,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.9)
+    rack (2.2.2)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -425,13 +425,13 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.1.3)
+    redis (4.1.4)
     redis-namespace (1.7.0)
       redis (>= 3.0.4)
     regexp-examples (1.5.1)
     regexp_parser (1.7.0)
     remotipart (1.4.4)
-    responders (3.0.0)
+    responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
@@ -479,7 +479,7 @@ GEM
       errbase (>= 0.1.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.2.1)
+    sassc (2.3.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
@@ -504,11 +504,11 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
-    sidekiq (5.2.8)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (< 2.1.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
+    sidekiq (6.0.7)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     sidekiq-status (1.1.4)
       chronic_duration
       sidekiq (>= 3.0)
@@ -577,7 +577,7 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    websocket-driver (0.7.1)
+    websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     wicked_pdf (2.0.2)
@@ -595,30 +595,30 @@ DEPENDENCIES
   addressable
   awesome_print (~> 1.8.0)
   aws-sdk-s3
-  better_errors
+  better_errors (>= 2.7.1)
   binding_of_caller
-  blazer
+  blazer (>= 2.2.4)
   bootsnap (>= 1.1.0)
   browser
   business
   byebug
-  capybara (>= 2.15, < 4.0)
+  capybara (>= 3.32.2, < 4.0)
   climate_control
-  cucumber-rails
+  cucumber-rails (>= 2.0.0)
   database_cleaner
-  devise
-  devise_saml_authenticatable
+  devise (>= 4.7.1)
+  devise_saml_authenticatable (>= 1.5.0)
   dibber
-  dotenv-rails
+  dotenv-rails (>= 2.7.5)
   erb_lint
-  factory_bot_rails
+  factory_bot_rails (>= 5.2.0)
   faker (>= 1.9.1)
   geckoboard-ruby
   govuk_notify_rails (~> 2.1.2)
   guard-livereload
   guard-rspec
   guard-rubocop
-  i18n-tasks
+  i18n-tasks (>= 0.9.31)
   json_expressions
   jwt
   launchy
@@ -627,50 +627,50 @@ DEPENDENCIES
   loofah (>= 2.2.3)
   nesty
   nokogiri
-  omniauth
-  omniauth-google-oauth2
-  omniauth-oauth2
-  omniauth-rails_csrf_protection (~> 0.1)
+  omniauth (>= 1.9.1)
+  omniauth-google-oauth2 (>= 0.8.0)
+  omniauth-oauth2 (>= 1.6.0)
+  omniauth-rails_csrf_protection (~> 0.1, >= 0.1.2)
   pagy
   pg
   prometheus_exporter
   pry-byebug
   puma (~> 4.3)
   pundit
-  rails (~> 6.0.3)
-  rails_admin (~> 2.0)
+  rails (~> 6.0.3, >= 6.0.3.1)
+  rails_admin (~> 2.0, >= 2.0.2)
   redis-namespace
   regexp-examples
-  rspec-rails (~> 4.0)
+  rspec-rails (~> 4.0, >= 4.0.1)
   rubocop
   rubocop-performance
   ruby-saml-idp!
-  sass-rails (~> 6.0)
+  sass-rails (~> 6.0, >= 6.0.0)
   savon (~> 2.12.0)
   selenium-webdriver
   sentry-raven
   shoulda-matchers (~> 4.3)
-  sidekiq (~> 5.2.8)
-  sidekiq-status
-  sidekiq_alive
+  sidekiq (~> 6.0.0)
+  sidekiq-status (>= 1.1.4)
+  sidekiq_alive (>= 2.0.1)
   simple_command (~> 0.1.0)
   simplecov
   simplecov-rcov
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (~> 3.7.2)
-  sprockets-es6
+  sprockets-es6 (>= 0.9.2)
   timecop
   tzinfo-data
   vcr
   webdack-uuid_migration (~> 1.3.0)
   webdrivers (~> 4.4)
   webmock
-  webpacker (~> 5)
+  webpacker (~> 5, >= 5.1.1)
   wicked_pdf
 
 RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.1.4
+   1.17.3
