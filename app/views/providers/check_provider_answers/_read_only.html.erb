@@ -1,0 +1,32 @@
+<div class="govuk-grid-column-two-thirds govuk-!-padding-left-0">
+  <div class="moj-banner">
+    <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+      <path d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8
+      C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"></path></svg>
+    <div class="moj-banner__message">
+      <span class="govuk-visually-hidden"><%= t('.banner.assistive') %></span>
+      <%= t('.banner.text') %>
+    </div>
+  </div>
+</div>
+
+<%= page_template(
+        page_title: t('.title'),
+        back_link: {
+            path: providers_legal_aid_applications_path,
+            text: t('generic.home'),
+            method: :get
+        }
+    ) do %>
+
+  <%= render('providers/check_provider_answers/shared',
+             applicant: @applicant,
+             address: @address,
+             read_only: @read_only) %>
+  <%= next_action_buttons_with_form(
+          url: providers_legal_aid_applications_path,
+          method: :get,
+          show_draft: false,
+          continue_button_text: t('generic.back_to_your_applications')
+      ) %>
+<% end %>
