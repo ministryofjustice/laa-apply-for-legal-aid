@@ -1,4 +1,4 @@
-class SubmitApplicantReminderService
+class SubmitCitizenReminderService
   include Rails.application.routes.url_helpers
 
   def initialize(application)

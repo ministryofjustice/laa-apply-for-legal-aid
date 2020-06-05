@@ -1,4 +1,4 @@
-class SubmitApplicantFinancialReminderMailer < GovukNotifyRails::Mailer
+class SubmitCitizenFinancialReminderMailer < GovukNotifyRails::Mailer
   self.delivery_job = GovukNotifyMailerJob
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods

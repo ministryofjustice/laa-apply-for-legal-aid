@@ -12,7 +12,7 @@ module Providers
       unless legal_aid_application.provider_submitted?
         legal_aid_application.provider_submit!
         CitizenEmailService.new(legal_aid_application).send_email
-        SubmitApplicantReminderService.new(legal_aid_application).send_email
+        SubmitCitizenReminderService.new(legal_aid_application).send_email
       end
       go_forward
     end

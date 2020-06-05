@@ -22,6 +22,12 @@ FactoryBot.define do
       arguments { ['11111', 'Bob Marley', 'bob@wailing.jm'] }
     end
 
+    trait :provider_financial_reminder do
+      mailer_klass { 'SubmitProviderFinancialReminderMailer' }
+      mailer_method { 'notify_provider' }
+      scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
+    end
+
     trait :cancelled do
       scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
       cancelled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }

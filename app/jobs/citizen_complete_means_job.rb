@@ -1,4 +1,4 @@
-class CitizenCompleteProcessingJob < ActiveJob::Base
+class CitizenCompleteMeansJob < ActiveJob::Base
   queue_as :default
 
   def perform(legal_aid_application_id)
@@ -10,6 +10,6 @@ class CitizenCompleteProcessingJob < ActiveJob::Base
   private
 
   def reminder_mailings
-    @legal_aid_application.scheduled_mailings.where(mailer_klass: 'SubmitApplicantFinancialReminderMailer')
+    @legal_aid_application.scheduled_mailings.where(mailer_klass: 'SubmitCitizenFinancialReminderMailer')
   end
 end

@@ -1,5 +1,5 @@
 class SubmitApplicationReminderService
-  include Rails.application.routes.url_helpers
+  # include Rails.application.routes.url_helpers
 
   def initialize(application)
     @application = application
