@@ -95,8 +95,9 @@ module GovukElementsFormBuilder
     # You can pass an error with the :error parameter.
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], error: 'Please select a gender') %>
     #
-    # If you wish to specify the size of the heading pass a hash into title with text and size:
-    # <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: { text: 'What is your gender?', size: :m } ) %>
+    # If you wish to specify the size of the heading and/or which header tag to use, pass a hash into title with text and size:
+    # And the default for header tag, if no htag is supplied, is h1
+    # <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], title: { text: 'What is your gender?', size: :m, htag: :h2 } ) %>
     #
     # Use the :inline parameter to have the radio buttons displayed horizontally rather than vertically
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], inline: true) %>
@@ -205,11 +206,16 @@ module GovukElementsFormBuilder
       aria_describedby.join(' ')
     end
 
+    # title param can either be:
+    # * a text string, e.g  "My title"
+    # * a hash, e.g { text: "My title", size: :m, htag: :h2 }
+    #
     def fieldset_legend(title)
       title = text_hash(title)
       size = title.fetch(:size, 'xl')
+      htag = title.fetch(:htag, :h1)
       content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}") do
-        content_tag(:h1, title[:text], class: 'govuk-fieldset__heading')
+        content_tag(htag, title[:text], class: 'govuk-fieldset__heading')
       end
     end
 

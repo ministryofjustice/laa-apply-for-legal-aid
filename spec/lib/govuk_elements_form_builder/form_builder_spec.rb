@@ -97,6 +97,45 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
   end
 
+  describe 'fieldset_legend' do
+    subject { builder.__send__(:fieldset_legend, params) }
+
+    context 'with just text title' do
+      let(:params) { 'This is my title' }
+      it 'returns the html' do
+        expected_html = '<legend class="govuk-fieldset__legend govuk-fieldset__legend--xl"><h1 class="govuk-fieldset__heading">This is my title</h1></legend>'
+        expect(subject).to eq expected_html
+      end
+    end
+
+    context 'passing in a title hash' do
+      let(:params) do
+        {
+          text: 'My text',
+          size: :m
+        }
+      end
+      it 'returns html with medium size' do
+        expected_html = '<legend class="govuk-fieldset__legend govuk-fieldset__legend--m"><h1 class="govuk-fieldset__heading">My text</h1></legend>'
+        expect(subject).to eq expected_html
+      end
+    end
+
+    context 'passing in a title hash' do
+      let(:params) do
+        {
+          text: 'My text',
+          size: :m,
+          htag: :h2
+        }
+      end
+      it 'returns html with medium size' do
+        expected_html = '<legend class="govuk-fieldset__legend govuk-fieldset__legend--m"><h2 class="govuk-fieldset__heading">My text</h2></legend>'
+        expect(subject).to eq expected_html
+      end
+    end
+  end
+
   describe 'govuk_text_field' do
     let(:attribute) { 'national_insurance_number' }
     let(:params) { [attribute.to_sym] }
