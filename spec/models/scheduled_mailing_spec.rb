@@ -70,7 +70,7 @@ RSpec.describe ScheduledMailing do
         it 'cancels the mail' do
           Timecop.freeze(now) do
             scheduled_mail.deliver!
-            expect(scheduled_mail.reload.cancelled_at).to eq now
+            expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
           end
         end
       end
