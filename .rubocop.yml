@@ -10,12 +10,21 @@ AllCops:
   - 'node_modules/**/*'
   - 'ccms_integration/*'
 
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
 
 Lint/UriEscapeUnescape:
   Enabled: false
@@ -84,4 +93,14 @@ Style/HashTransformValues:
 
 Style/ExponentialNotation:
   Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
 

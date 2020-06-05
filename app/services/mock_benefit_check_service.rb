@@ -14,6 +14,7 @@ class MockBenefitCheckService
   end
 
   attr_reader :application
+
   delegate :applicant, to: :application, allow_nil: true
   delegate :last_name, :national_insurance_number, :date_of_birth, to: :applicant, allow_nil: true
 

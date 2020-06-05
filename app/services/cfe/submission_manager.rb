@@ -20,6 +20,7 @@ module CFE
     end
 
     attr_reader :legal_aid_application_id
+
     def initialize(legal_aid_application_id)
       @legal_aid_application_id = legal_aid_application_id
     end

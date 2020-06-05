@@ -188,7 +188,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         it 'shows the application' do
           subject
           expect(unescaped_response_body).to include('Emergency')
-          expect(unescaped_response_body).to match(/Substantive due: [\d]{1,2} [ADFJMNOS]\w* [\d]{4}/)
+          expect(unescaped_response_body).to match(/Substantive due: \d{1,2} [ADFJMNOS]\w* \d{4}/)
           expect(legal_aid_application.summary_state).to eq(:in_progress)
         end
       end
@@ -208,7 +208,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
           subject
           expect(unescaped_response_body).to include('Emergency')
           expect(legal_aid_application.substantive_application_deadline_on).not_to be_nil
-          expect(unescaped_response_body).not_to match(/Substantive due: [\d]{1,2} [ADFJMNOS]\w* [\d]{4}/)
+          expect(unescaped_response_body).not_to match(/Substantive due: \d{1,2} [ADFJMNOS]\w* \d{4}/)
           expect(legal_aid_application.summary_state).to eq(:submitted)
         end
       end

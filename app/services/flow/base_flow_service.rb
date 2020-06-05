@@ -2,6 +2,7 @@ module Flow
   class BaseFlowService
     class << self
       attr_reader :steps
+
       def use_steps(steps)
         @steps = steps
       end

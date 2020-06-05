@@ -118,7 +118,7 @@ World(Warden::Test::Helpers)
 
 After do |scenario|
   if scenario.failed?
-    name = scenario.location.file.gsub('features/', '').gsub(%r{/\.|\/}, '-')
+    name = scenario.location.file.gsub('features/', '').gsub(%r{/\.|/}, '-')
     screenshot_image(name)
   end
 end
