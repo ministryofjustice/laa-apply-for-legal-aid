@@ -28,6 +28,12 @@ FactoryBot.define do
       scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
     end
 
+    trait :citizen_financial_reminder do
+      mailer_klass { 'SubmitCitizenFinancialReminderMailer' }
+      mailer_method { 'notify_citizen' }
+      scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
+    end
+
     trait :cancelled do
       scheduled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }
       cancelled_at { Faker::Time.between(from: 2.months.ago, to: 1.minute.ago) }

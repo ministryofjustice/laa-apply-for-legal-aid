@@ -4,7 +4,6 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
   let(:legal_aid_application) { create :legal_aid_application, :provider_submitted, :with_applicant, provider: provider }
-  let(:scheduled_mail) { create :scheduled_mailing, :due }
 
   before do
     get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
@@ -49,8 +48,6 @@ RSpec.describe Citizens::DeclarationsController, type: :request do
       subject
       expect(legal_aid_application.reload.state).to eq 'analysing_bank_transactions'
       expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
-      # expect { subject }.to change { ScheduledMailing.count }.by(-2)
-      ap ScheduledMailing.count
     end
 
     it 'changes the provider step to start_merits_assessment' do

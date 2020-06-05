@@ -22,24 +22,12 @@ RSpec.describe ScheduledMailing do
     end
   end
 
-  describe '#cancel!' do
-    let(:scheduled_mail) { create :scheduled_mailing }
-    let(:now) { Time.zone.now }
-
-    it 'updates the record as cancelled' do
-      Timecop.freeze(now) do
-        scheduled_mail.cancel!
-        expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
-      end
-    end
-  end
-
   describe '#deliver!' do
     let(:scheduled_mail) { create :scheduled_mailing, :due }
     let(:mail_message) { double 'mail message' }
     let(:now) { Time.zone.now }
 
-    context 'mailer_class does override #eligble for delivery' do
+    context 'scheduled_mails are checked for eligibility prior to sending' do
       let(:scheduled_mail) { create :scheduled_mailing, :provider_financial_reminder, legal_aid_application: legal_aid_application }
       context 'the mail is eligible to be sent' do
         let(:legal_aid_application) { create :legal_aid_application, :at_client_completed_means }
@@ -80,6 +68,18 @@ RSpec.describe ScheduledMailing do
 
     it 'returns false' do
       expect(scheduled_mail.deliver!).to eq false
+    end
+  end
+
+  describe '#cancel!' do
+    let(:scheduled_mail) { create :scheduled_mailing }
+    let(:now) { Time.zone.now }
+
+    it 'updates the record as cancelled' do
+      Timecop.freeze(now) do
+        scheduled_mail.cancel!
+        expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
+      end
     end
   end
 end
