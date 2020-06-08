@@ -270,8 +270,7 @@ jobs:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
-
-  auto_deploy_uat:
+  deploy_master_uat:
     <<: *deploy_uat
 
   deploy_staging:
@@ -359,7 +358,7 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - auto_deploy_uat:
+      - deploy_uat:
           requires:
           - build_and_push
       - unit_tests:
@@ -381,12 +380,12 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - auto_deploy_uat:
+      - deploy_master_uat:
           requires:
             - build_and_push
       - delete_uat_branch:
           requires:
-            - auto_deploy_uat
+            - deploy_master_uat
       - unit_tests:
           requires:
             - lint_checks
