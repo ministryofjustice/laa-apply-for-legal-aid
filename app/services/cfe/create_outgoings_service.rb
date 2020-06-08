@@ -32,7 +32,7 @@ module CFE
       array.each do |transaction|
         result << {
           payment_date: transaction.happened_at.strftime('%Y-%m-%d'),
-          amount: transaction.amount.to_f,
+          amount: transaction.amount.abs.to_f,
           client_id: transaction.id
         }
       end
