@@ -3,6 +3,14 @@ version: 2.1
 orbs:
   slack: circleci/slack@3.4.2
 
+executors:
+  linting-executor:
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          - RAILS_ENV=test
+          - TZ: "Europe/London"
+
 references:
   build_container_config: &build_container_config
     docker:
@@ -127,7 +135,7 @@ commands:
 
 jobs:
   lint_checks:
-    <<: *build_container_config
+    executor: linting-executor
     steps:
     - checkout
     - *restore_gems_cache
@@ -303,7 +311,7 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}"
 
   clean_up_ecr:
-    <<: *build_container_config
+    executor: linting-executor
     steps:
     - checkout
     - setup_remote_docker
