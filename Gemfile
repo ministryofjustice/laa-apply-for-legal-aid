@@ -102,6 +102,7 @@ group :development, :test do
   gem 'json_expressions'
   gem 'nokogiri'
   gem 'pry-byebug'
+  gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
 

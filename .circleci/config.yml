@@ -173,7 +173,7 @@ jobs:
     - *save_js_packages_cache
     - run:
         name: Run ruby tests
-        command: bin/rails spec
+        command: bin/rails rspec --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
 
   integration_tests:
     executor: test-executor
@@ -190,7 +190,7 @@ jobs:
     - *save_js_packages_cache
     - run:
         name: Run integration tests
-        command: SAVE_PAGES=true bin/rails cucumber
+        command: SAVE_PAGES=true bin/rails cucumber --format junit --out /tmp/test-results/cucumber
     - store_artifacts:
         path: tmp/capybara
     - persist_to_workspace:
