@@ -331,7 +331,7 @@ jobs:
         command: |
           ./bin/clean_up_ecr
 
-  delete_uat:
+  delete_uat_branch:
     executor: cloud-platform-executor
     steps:
     - checkout
@@ -384,7 +384,7 @@ workflows:
       - auto_deploy_uat:
           requires:
             - build_and_push
-      - delete_uat:
+      - delete_uat_branch:
           requires:
             - auto_deploy_uat
       - unit_tests:
@@ -408,7 +408,7 @@ workflows:
           type: approval
           requires:
             - hold_production_notification
-            - delete_uat
+            - delete_uat_branch
       - deploy_production:
           requires:
             - hold_production
