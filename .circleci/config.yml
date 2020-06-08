@@ -174,6 +174,8 @@ jobs:
     - run:
         name: Run ruby tests
         command: bundle exec rspec --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
+    - store_test_results:
+        path: /tmp/test-results/rspec
 
   integration_tests:
     executor: test-executor
@@ -197,6 +199,8 @@ jobs:
         root: tmp
         paths:
          - webhint_inputs
+    - store_test_results:
+        path: /tmp/test-results/cucumber
 
   webhint_reports:
     executor: linting-executor
