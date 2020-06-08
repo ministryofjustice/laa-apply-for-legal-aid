@@ -3,22 +3,40 @@ version: 2.1
 orbs:
   slack: circleci/slack@3.4.2
 
+executors:
+  basic-executor:
+    docker:
+      - image: cimg/base:2020.01
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+  linting-executor:
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          - RAILS_ENV=test
+          - TZ: "Europe/London"
+  cloud-platform-executor:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+  notification-executor:
+    docker:
+      - image: 'cibuilds/base:latest'
+        environment:
+          TERM: dumb
+    resource_class: small
+
+  test-executor:
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+      - image: circleci/postgres:10.5
+      - image: circleci/redis:5.0
+      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
+
 references:
-  build_container_config: &build_container_config
-    docker:
-    - image: circleci/ruby:2.6.3-node-browsers
-      environment:
-        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-    - image: circleci/postgres:10.5
-    - image: circleci/redis:5.0
-    - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
-
-  cloud_platform_container_config: &cloud_platform_container_config
-    docker:
-    - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-      environment:
-        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-
   decrypt_secrets: &decrypt_secrets
     run:
       name: Decrypt secrets file
@@ -127,7 +145,7 @@ commands:
 
 jobs:
   lint_checks:
-    <<: *build_container_config
+    executor: linting-executor
     steps:
     - checkout
     - *restore_gems_cache
@@ -141,7 +159,7 @@ jobs:
         command: bin/rails erblint
 
   unit_tests:
-    <<: *build_container_config
+    executor: test-executor
     steps:
     - checkout
     - *install_packages_for_testing
@@ -158,7 +176,7 @@ jobs:
         command: bin/rails spec
 
   integration_tests:
-    <<: *build_container_config
+    executor: test-executor
     steps:
     - checkout
     - *install_packages_for_testing
@@ -181,19 +199,15 @@ jobs:
          - webhint_inputs
 
   webhint_reports:
-    <<: *build_container_config
+    executor: linting-executor
     steps:
       - checkout
       - attach_workspace:
           at: tmp
       - *update_packages
-      - run: sudo apt-get install -y postgresql-client
-      - run: sudo apt-get install -y git-crypt
-      - *decrypt_secrets
       - *restore_gems_cache
       - *install_gems
       - *save_gems_cache
-      - *setup_database
       - *restore_js_packages_cache
       - *install_js_packages
       - *save_js_packages_cache
@@ -214,7 +228,7 @@ jobs:
           destination: html-pages
 
   build_and_push:
-    <<: *build_container_config
+    executor: basic-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -242,7 +256,7 @@ jobs:
           fi
 
   deploy_uat: &deploy_uat
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -252,12 +266,11 @@ jobs:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
-
-  auto_deploy_uat:
+  deploy_master_uat:
     <<: *deploy_uat
 
   deploy_staging:
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -280,7 +293,7 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -303,7 +316,7 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}"
 
   clean_up_ecr:
-    <<: *build_container_config
+    executor: linting-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -313,8 +326,8 @@ jobs:
         command: |
           ./bin/clean_up_ecr
 
-  delete_uat:
-    <<: *cloud_platform_container_config
+  delete_uat_branch:
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -323,27 +336,9 @@ jobs:
         name: Delete UAT release
         command: |
           ./bin/delete_uat_release
-  
-  hold_uat_notification:
-    <<: *cloud_platform_container_config
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending uat approval for $CIRCLE_BRANCH"
-
-  hold_webhint_notification:
-    <<: *cloud_platform_container_config
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending webhint approval for $CIRCLE_BRANCH"
-
-  hold_staging_notification:
-    <<: *cloud_platform_container_config
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending staging approval for $CIRCLE_BRANCH"
 
   hold_production_notification:
-    <<: *cloud_platform_container_config
+    executor: notification-executor
     steps:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
@@ -359,7 +354,7 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - auto_deploy_uat:
+      - deploy_uat:
           requires:
           - build_and_push
       - unit_tests:
@@ -381,12 +376,12 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - auto_deploy_uat:
+      - deploy_master_uat:
           requires:
             - build_and_push
-      - delete_uat:
+      - delete_uat_branch:
           requires:
-            - auto_deploy_uat
+            - deploy_master_uat
       - unit_tests:
           requires:
             - lint_checks
@@ -408,7 +403,7 @@ workflows:
           type: approval
           requires:
             - hold_production_notification
-            - delete_uat
+            - delete_uat_branch
       - deploy_production:
           requires:
             - hold_production
