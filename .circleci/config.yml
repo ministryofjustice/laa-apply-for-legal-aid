@@ -27,16 +27,16 @@ executors:
           TERM: dumb
     resource_class: small
 
-references:
-  build_container_config: &build_container_config
+  test-executor:
     docker:
-    - image: circleci/ruby:2.6.3-node-browsers
-      environment:
-        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-    - image: circleci/postgres:10.5
-    - image: circleci/redis:5.0
-    - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
+      - image: circleci/ruby:2.6.3-node-browsers
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+      - image: circleci/postgres:10.5
+      - image: circleci/redis:5.0
+      - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
 
+references:
   decrypt_secrets: &decrypt_secrets
     run:
       name: Decrypt secrets file
@@ -159,7 +159,7 @@ jobs:
         command: bin/rails erblint
 
   unit_tests:
-    <<: *build_container_config
+    executor: test-executor
     steps:
     - checkout
     - *install_packages_for_testing
@@ -176,7 +176,7 @@ jobs:
         command: bin/rails spec
 
   integration_tests:
-    <<: *build_container_config
+    executor: test-executor
     steps:
     - checkout
     - *install_packages_for_testing
@@ -199,7 +199,7 @@ jobs:
          - webhint_inputs
 
   webhint_reports:
-    <<: *build_container_config
+    executor: test-executor
     steps:
       - checkout
       - attach_workspace:
