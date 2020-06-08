@@ -4,6 +4,11 @@ orbs:
   slack: circleci/slack@3.4.2
 
 executors:
+  basic-executor:
+    docker:
+      - image: cimg/base:2020.01
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers
@@ -222,7 +227,7 @@ jobs:
           destination: html-pages
 
   build_and_push:
-    <<: *build_container_config
+    executor: basic-executor
     steps:
     - checkout
     - setup_remote_docker
