@@ -15,6 +15,17 @@ executors:
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
+  cloud-platform-executor:
+    docker:
+      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+        environment:
+          GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+  notification-executor:
+    docker:
+      - image: 'cibuilds/base:latest'
+        environment:
+          TERM: dumb
+    resource_class: small
 
 references:
   build_container_config: &build_container_config
@@ -25,12 +36,6 @@ references:
     - image: circleci/postgres:10.5
     - image: circleci/redis:5.0
     - image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2
-
-  cloud_platform_container_config: &cloud_platform_container_config
-    docker:
-    - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
-      environment:
-        GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
 
   decrypt_secrets: &decrypt_secrets
     run:
@@ -255,7 +260,7 @@ jobs:
           fi
 
   deploy_uat: &deploy_uat
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -270,7 +275,7 @@ jobs:
     <<: *deploy_uat
 
   deploy_staging:
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -293,7 +298,7 @@ jobs:
                         --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -327,7 +332,7 @@ jobs:
           ./bin/clean_up_ecr
 
   delete_uat:
-    <<: *cloud_platform_container_config
+    executor: cloud-platform-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -336,27 +341,9 @@ jobs:
         name: Delete UAT release
         command: |
           ./bin/delete_uat_release
-  
-  hold_uat_notification:
-    <<: *cloud_platform_container_config
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending uat approval for $CIRCLE_BRANCH"
-
-  hold_webhint_notification:
-    <<: *cloud_platform_container_config
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending webhint approval for $CIRCLE_BRANCH"
-
-  hold_staging_notification:
-    <<: *cloud_platform_container_config
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending staging approval for $CIRCLE_BRANCH"
 
   hold_production_notification:
-    <<: *cloud_platform_container_config
+    executor: notification-executor
     steps:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
