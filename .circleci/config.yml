@@ -199,19 +199,15 @@ jobs:
          - webhint_inputs
 
   webhint_reports:
-    executor: test-executor
+    executor: linting-executor
     steps:
       - checkout
       - attach_workspace:
           at: tmp
       - *update_packages
-      - run: sudo apt-get install -y postgresql-client
-      - run: sudo apt-get install -y git-crypt
-      - *decrypt_secrets
       - *restore_gems_cache
       - *install_gems
       - *save_gems_cache
-      - *setup_database
       - *restore_js_packages_cache
       - *install_js_packages
       - *save_js_packages_cache
