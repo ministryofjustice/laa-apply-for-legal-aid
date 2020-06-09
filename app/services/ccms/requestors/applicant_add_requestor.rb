@@ -15,6 +15,7 @@ module CCMS
       )
 
       attr_reader :applicant
+
       delegate :address, to: :applicant
 
       def initialize(applicant, provider_username)

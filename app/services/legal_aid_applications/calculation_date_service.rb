@@ -1,6 +1,7 @@
 module LegalAidApplications
   class CalculationDateService
     attr_accessor :legal_aid_application
+
     delegate(
       :used_delegated_functions_on, :used_delegated_functions?, :merits_assessment, :applicant_receives_benefit?, :transaction_period_finish_on,
       to: :legal_aid_application

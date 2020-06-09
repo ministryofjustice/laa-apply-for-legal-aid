@@ -1,5 +1,6 @@
 $(document).ready(() => {
-  const govuk_hidden_class = 'govuk-visually-hidden'
+  // conditional--hidden will hide from voiceover/screen readers compared to visually hidden
+  const govuk_hidden_class = 'govuk-radios__conditional--hidden'
   const police_notified_label = $("label[for='police_notified_details']")
   const police_notified = $('#police_notified_details')
 
