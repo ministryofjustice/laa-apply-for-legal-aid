@@ -215,7 +215,7 @@ module CFE
       ################################################################
 
       def moe_housing
-        monthly_outgoing_equivalents[:child_care].to_d.abs
+        monthly_outgoing_equivalents[:rent_or_mortgage].to_d.abs
       end
 
       def moe_childcare
