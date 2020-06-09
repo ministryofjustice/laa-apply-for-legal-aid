@@ -27,7 +27,10 @@ class CfeApiDisplayer
     categorised_bank_transactions.each do |transaction_type, txs|
       puts "#{transaction_type.name}:"
       txs.each do |tx|
-        puts format('   %s %.2f %s', tx.happened_at.strftime('%F'), tx.amount, tx.description)
+        puts format('   %<date>s %<amount>.2f %<description>s',
+                    date: tx.happened_at.strftime('%F'),
+                    amount: tx.amount,
+                    description: tx.description)
       end
     end
   end
