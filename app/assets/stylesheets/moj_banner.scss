@@ -1,0 +1,34 @@
+@import "govuk-frontend/govuk/settings/all";
+@import "govuk-frontend/govuk/tools/all";
+@import "govuk-frontend/govuk/helpers/all";
+$govuk-fonts-path: "/assets/";
+
+.moj-banner {
+  border: 5px solid govuk-colour("blue");
+  color: govuk-colour("blue");
+  //font-size: 0; // Removes white space when using inline-block on child element.
+  margin-bottom: govuk-spacing(6);
+  padding: govuk-spacing(2);
+}
+
+.moj-banner__icon {
+  fill: currentColor;
+  float: left;
+  margin-right: govuk-spacing(2);
+}
+
+.moj-banner__message {
+  @include govuk-font($size: 19);
+  color: govuk-colour("black");
+  display: block;
+  overflow: hidden;
+}
+
+.moj-banner__message h2 {
+  margin-bottom: govuk-spacing(2);
+}
+
+.moj-banner__message h2:last-child,
+.moj-banner__message p:last-child {
+  margin-bottom: 0;
+}
