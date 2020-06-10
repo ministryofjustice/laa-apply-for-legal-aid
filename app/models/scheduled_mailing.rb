@@ -12,13 +12,23 @@ class ScheduledMailing < ApplicationRecord
   end
 
   def deliver!
-    mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_now
-    update!(sent_at: Time.now)
+    eligible_for_delivery? ? deliver_now : cancel!
   rescue StandardError => e
     Raven.capture_exception(e)
   end
 
   def cancel!
     update!(cancelled_at: Time.now)
+  end
+
+  private
+
+  def deliver_now
+    mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_now
+    update!(sent_at: Time.now)
+  end
+
+  def eligible_for_delivery?
+    mailer_klass.constantize.__send__(:eligible_for_delivery?, self)
   end
 end
