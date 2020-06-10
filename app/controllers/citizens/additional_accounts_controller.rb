@@ -1,6 +1,9 @@
 module Citizens
   class AdditionalAccountsController < CitizenBaseController
-    def index; end
+    def index
+      legal_aid_application.update!(has_offline_accounts: nil)
+      legal_aid_application.update!(state: 'provider_submitted')
+    end
 
     def create
       case params[:additional_account]
