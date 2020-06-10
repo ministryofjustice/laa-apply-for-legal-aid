@@ -35,6 +35,7 @@ module Providers
                 providers_legal_aid_application_submitted_application_path(legal_aid_application)
               )
             else
+              Raven.capture_exception(AuthController::AuthorizationError.new('Provider not authorised'))
               redirect_to error_path(:access_denied)
             end
           end
@@ -46,7 +47,10 @@ module Providers
       end
 
       def authorize_whitelisted_user?
-        redirect_to error_path(:access_denied) unless current_provider.whitelisted_user?
+        return if current_provider.whitelisted_user?
+
+        Raven.capture_exception(AuthController::AuthorizationError.new('Provider not whitelisted'))
+        redirect_to error_path(:access_denied)
       end
 
       def authorize_legal_aid_application
