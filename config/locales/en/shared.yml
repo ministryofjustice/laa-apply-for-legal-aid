@@ -183,6 +183,11 @@ en:
           enter_monthly_income: Enter the amount they get each month
       identify_types_of_outgoings_form:
         none_selected: None of these
+        expanded_explanation:
+          heading: Why am I being asked this?
+          list: |
+            Your solicitor will look at your bank statements and put your transactions into the categories you select.
+            We need this information to check if you qualify financially for legal aid.
       savings_and_investments_form:
         none_selected: None of these
       outstanding_mortgage_form:
@@ -313,8 +318,11 @@ en:
         benefits_examples: For example, Universal Credit or Child Benefit.
         pension_examples: Include State, workplace and personal pensions.
         none_selected: None of these
-      identify_types_of_outgoings_form:
-        none_selected: None of these
+        expanded_explanation:
+          heading: Why am I being asked this?
+          list: |
+            Your solicitor will look at your bank statements and put your transactions into the categories you select.
+            We need this information to check if you qualify financially for legal aid.
       vehicles:
         estimated_value:
           use_car_valuation_sites: You can use car valuation websites to find this out

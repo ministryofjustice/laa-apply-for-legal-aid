@@ -233,3 +233,23 @@ Feature: Non-passported applicant journeys
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
+
+  @javascript @vcr
+  Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
+    Given I start a non-passported application
+    When I click 'Continue'
+    Then I should be on the 'does-client-use-online-banking' page showing 'Check if you can continue using this service'
+    When I select 'Your client uses online banking for all of their bank accounts'
+    And I select 'Your client agrees to share their financial data with us'
+    And I click 'Save and continue'
+    Then I should be on the 'email_address' page showing "Enter your client's email address"
+    When I enter the email address 'test@example.com'
+    And I click 'Save and continue'
+    Then I should be on the 'about_the_financial_assessment' page showing 'Give your client temporary access to the service'
+    When I click 'Send client link'
+    Then I should be on the 'application_confirmation' page showing 'Application created'
+    When I visit the applications page
+    And I view the first application in the table
+    Then I should be on the 'check_provider_answers' page showing 'Your application'
+    And I should not see 'What happens next'
+    But I should see 'You can continue your application when your client has shared their financial information with us. We'll tell you when they've done this.'

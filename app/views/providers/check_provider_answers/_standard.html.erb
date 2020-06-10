@@ -1,0 +1,25 @@
+<%= page_template(
+        page_title: t('.title'),
+        back_link: {
+            path: reset_providers_legal_aid_application_check_provider_answers_path,
+            text: t('generic.back'),
+            method: :post
+        }
+    ) do %>
+  <%= render('providers/check_provider_answers/shared',
+             applicant: @applicant,
+             address: @address,
+             read_only: @read_only) %>
+
+  <h2 class="govuk-heading-m"><%= t '.section_next.heading' %></h2>
+
+  <p class="govuk-body govuk-!-margin-bottom-9">
+    <%= t '.section_next.content' %>
+  </p>
+
+  <%= next_action_buttons_with_form(
+          url: continue_providers_legal_aid_application_check_provider_answers_path,
+          method: :patch,
+          show_draft: true
+      ) %>
+<% end %>

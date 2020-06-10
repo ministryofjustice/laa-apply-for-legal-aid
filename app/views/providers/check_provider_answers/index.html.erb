@@ -1,72 +1,10 @@
-<%
-  read_only_back_link = {
-    path: providers_legal_aid_applications_path,
-    text: t('generic.home'),
-    method: :get
-  }
-  back_link = {
-    path: reset_providers_legal_aid_application_check_provider_answers_path,
-    text: t('generic.back'),
-    method: :post
-  }
-%>
-
-<%= page_template(
-      page_title: @read_only ? t('.read_only_title') : t('.title'),
-      back_link: @read_only ? read_only_back_link : back_link
-    ) do %>
-  <h2 class="govuk-heading-m"><%= t '.section_client.heading' %></h2>
-
-  <%= render(
-        'shared/check_answers/client_details',
-        attributes: %i[first_name last_name date_of_birth national_insurance_number address],
-        applicant: @applicant,
-        address: @address,
-        read_only: @read_only
-      ) %>
-
-  <h2 class="govuk-heading-m"><%= t '.section_proceeding.heading' %></h2>
-
-  <%= render(
-        'shared/check_answers/proceedings_details',
-        legal_aid_application: @legal_aid_application,
-        read_only: @read_only
-      ) %>
-
-  <% if @legal_aid_application.used_delegated_functions? %>
-    <h2 class="govuk-heading-m"><%= t '.section_emergency.heading' %></h2>
-      <%= render(
-            'shared/check_answers/emergency_limitations',
-            legal_aid_application: @legal_aid_application
-          ) %>
-  <% end %>
-
-  <h2 class="govuk-heading-m"><%= t('.section_substantive.heading') %></h2>
-    <%= render(
-          'shared/check_answers/substantive_limitations',
-          legal_aid_application: @legal_aid_application
-        ) %>
-
-  <h2 class="govuk-heading-m"><%= t '.section_next.heading' %></h2>
-
-  <p class="govuk-body govuk-!-margin-bottom-9">
-    <%= t '.section_next.content' %>
-  </p>
-
-<%
-  next_button_options = {
-    url: continue_providers_legal_aid_application_check_provider_answers_path,
-    method: :patch,
-    show_draft: true
-  }
-  read_only_next_button_options = {
-    url: providers_legal_aid_applications_path,
-    method: :get,
-    show_draft: false,
-    continue_button_text: t('generic.back_to_your_applications')
-  }
-%>
-<%= next_action_buttons_with_form(
-      @read_only ? read_only_next_button_options : next_button_options
-    ) %>
+<% pass_through = {
+                    applicant: @applicant,
+                    address: @address,
+                    read_only: @read_only
+                  } %>
+<% if @read_only %>
+  <%= render 'providers/check_provider_answers/read_only', pass_through %>
+<% else %>
+  <%= render 'providers/check_provider_answers/standard', pass_through %>
 <% end %>
