@@ -227,20 +227,25 @@ en:
         merits_assessment_h2: What happens next
         property: Property
     check_provider_answers:
-      index:
-        section_client:
-          heading: Client details
+      standard:
+        title: Check your answers
         section_next:
           heading: What happens next
           content: We'll check with the Department for Work and Pensions to see if your client receives benefits that qualify for legal aid.
+      read_only:
+        title: Your application
+        banner:
+          assistive: information
+          text: "You can continue your application when your client has shared their financial information with us. We'll tell you when they've done this."
+      shared:
+        section_client:
+          heading: Client details
         section_proceeding:
           heading: What you're applying for
         section_emergency:
           heading: Covered under an emergency certificate
         section_substantive:
           heading: Covered under a substantive certificate
-        title: Check your answers
-        read_only_title: Your application
     client_received_legal_helps:
       show:
         h1-heading: Has your client received legal help for the matter?

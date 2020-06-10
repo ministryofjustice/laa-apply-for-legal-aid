@@ -1,7 +1,6 @@
-<% back_label = @legal_aid_application&.checking_client_details_answers? ? 'generic.back' : 'generic.home' %>
 <%= page_template(
       page_title: t('.page_title'),
-      back_link: { text: t(back_label) },
+      back_link: { text: t('generic.back') },
       page_heading_options: { margin_bottom: 3 }
     ) do %>
 

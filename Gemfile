@@ -10,9 +10,9 @@ gem 'govuk_notify_rails', '~> 2.1.2'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 gem 'regexp-examples'
-gem 'sass-rails', '~> 6.0'
+gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'savon', '~> 2.12.0'
 gem 'sentry-raven'
 gem 'simple_command', '~> 0.1.0'
@@ -23,12 +23,12 @@ gem 'webdack-uuid_migration', '~> 1.3.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
-gem 'devise' # User authentication
-gem 'devise_saml_authenticatable'
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-oauth2' # Provide Oauth2 strategy framework
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'devise', '>= 4.7.1' # User authentication
+gem 'devise_saml_authenticatable', '>= 1.5.0'
+gem 'omniauth', '>= 1.9.1'
+gem 'omniauth-google-oauth2', '>= 0.8.0'
+gem 'omniauth-oauth2', '>= 1.6.0' # Provide Oauth2 strategy framework
+gem 'omniauth-rails_csrf_protection', '~> 0.1', '>= 0.1.2'
 
 # Improve backtrace in nested error recues
 gem 'nesty'
@@ -52,14 +52,14 @@ gem 'jwt'
 
 # background processing
 gem 'redis-namespace'
-gem 'sidekiq', '~> 5.2.8'
-gem 'sidekiq-status'
-gem 'sidekiq_alive'
+gem 'sidekiq', '~> 6.0.0'
+gem 'sidekiq-status', '>= 1.1.4'
+gem 'sidekiq_alive', '>= 2.0.1'
 
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
 # Default to 3.7.2 as https://github.com/sass/sassc-rails/issues/122 sassc loading is causing a segmentation error
 gem 'sprockets', '~> 3.7.2'
-gem 'sprockets-es6'
+gem 'sprockets-es6', '>= 0.9.2'
 
 # URL and path parsing
 gem 'addressable'
@@ -77,10 +77,10 @@ gem 'business'
 gem 'prometheus_exporter'
 
 # Generating Fake applications for tests and admin user
-gem 'factory_bot_rails'
+gem 'factory_bot_rails', '>= 5.2.0'
 gem 'faker', '>=1.9.1'
 
-gem 'webpacker', '~> 5'
+gem 'webpacker', '~> 5', '>= 5.1.1'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
@@ -88,29 +88,30 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'wicked_pdf'
 
 # interface to manage data
-gem 'rails_admin', '~> 2.0'
+gem 'rails_admin', '~> 2.0', '>= 2.0.2'
 
 # Create reports with SQL queries
-gem 'blazer'
+gem 'blazer', '>= 2.2.4'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '>= 2.7.5'
   gem 'erb_lint', require: false
-  gem 'i18n-tasks'
+  gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'
   gem 'nokogiri'
   gem 'pry-byebug'
+  gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
 
   # Available in dev env for generators
-  gem 'rspec-rails', '~> 4.0'
+  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
 end
 
 group :development do
-  gem 'better_errors'
+  gem 'better_errors', '>= 2.7.1'
   gem 'binding_of_caller'
   gem 'guard-livereload'
   gem 'guard-rspec'
@@ -122,9 +123,9 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'capybara', '>= 3.32.2', '< 4.0'
   gem 'climate_control' # Allows environment variables to be modified within specs
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails', '>= 2.0.0', require: false
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'

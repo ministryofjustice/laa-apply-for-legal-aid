@@ -9,6 +9,7 @@ module Citizens
 
     class << self
       attr_reader :view_when_complete
+
       def allow_view_when_complete
         @view_when_complete = true
       end

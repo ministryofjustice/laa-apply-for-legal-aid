@@ -1,5 +1,6 @@
 class ApplicantAccountPresenter
   attr_reader :bank_provider
+
   delegate :name, :bank_accounts, to: :bank_provider
 
   def initialize(bank_provider)

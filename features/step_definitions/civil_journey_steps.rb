@@ -57,6 +57,10 @@ Given(/^I view the previously created application$/) do
   find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a").click
 end
 
+Given(/^I view the first application in the table$/) do
+  find(:xpath, '//tr/td/a').click
+end
+
 Given('I start the journey as far as the applicant page') do
   steps %(
     Given I am logged in as a provider
@@ -437,6 +441,10 @@ Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   fill_in('date_of_birth', with: day)
   fill_in('dob_month', with: month)
   fill_in('dob_year', with: year)
+end
+
+Then('I enter the email address {string}') do |email|
+  fill_in('email', with: email)
 end
 
 Then('I enter a date of birth for a {int} year old') do |number|

@@ -48,6 +48,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   attr_reader :proceeding_type_codes
+
   validate :proceeding_type_codes_existence
   validates :provider, presence: true
 
@@ -67,7 +68,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
       left_joins(:applicant, :ccms_submission).where("regexp_replace(lower(#{attribute}),'[^[:alnum:]]', '', 'g') like ?", "%#{clean_term}%")
     end
     applications = queries.first
-    queries[1..-1].each { |query| applications = applications.or(query) }
+    queries[1..].each { |query| applications = applications.or(query) }
     applications
   end
 

@@ -17,6 +17,7 @@ module TrueLayer
     private
 
     attr_reader :legal_aid_application
+
     delegate(
       :applicant, :transaction_period_start_on, :transaction_period_finish_on,
       to: :legal_aid_application
