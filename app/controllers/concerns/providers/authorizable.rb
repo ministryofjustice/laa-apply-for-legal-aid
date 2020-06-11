@@ -31,15 +31,25 @@ module Providers
         respond_to do |format|
           format.html do
             if current_policy.show_submitted_application?
-              redirect_to(
-                providers_legal_aid_application_submitted_application_path(legal_aid_application)
-              )
+              redirect_to_show_path
             else
-              Raven.capture_exception(AuthController::AuthorizationError.new('Provider not authorised'))
-              redirect_to error_path(:access_denied)
+              redirect_to_auth_error_path
             end
           end
         end
+      end
+
+      def redirect_to_show_path
+        redirect_to providers_legal_aid_application_submitted_application_path(legal_aid_application)
+      end
+
+      def redirect_to_auth_error_path
+        begin
+          raise AuthController::AuthorizationError, 'Provider not authorised'
+        rescue StandardError => e
+          Raven.capture_exception(e)
+        end
+        redirect_to error_path(:access_denied)
       end
 
       def current_policy
@@ -49,7 +59,11 @@ module Providers
       def authorize_whitelisted_user?
         return if current_provider.whitelisted_user?
 
-        Raven.capture_exception(AuthController::AuthorizationError.new('Provider not whitelisted'))
+        begin
+          raise AuthController::AuthorizationError, 'Provider not whitelisted'
+        rescue StandardError => e
+          Raven.capture_exception(e)
+        end
         redirect_to error_path(:access_denied)
       end
 

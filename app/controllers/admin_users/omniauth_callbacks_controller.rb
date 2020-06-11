@@ -12,8 +12,12 @@ module AdminUsers
     end
 
     def failure(reason: 'Process cancelled')
-      set_flash_message(:error, :failure, kind: 'Google', reason: reason)
-      Raven.capture_exception(AuthController::AuthorizationError.new("Kind: Google, reason: #{reason}"))
+      begin
+        set_flash_message(:error, :failure, kind: 'Google', reason: reason)
+        raise AuthController::AuthorizationError, "Kind: Google, reason: #{reason}"
+      rescue StandardError => e
+        Raven.capture_exception(e)
+      end
       redirect_to error_path(:access_denied)
     end
 
