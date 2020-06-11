@@ -21,14 +21,6 @@ module Dashboard
           before { Rails.configuration.x.application.whitelisted_users = nil }
           it 'returns the expected data' do
             create_providers
-            ap Provider.order(:created_at).pluck(:created_at)
-
-
-            puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-            ap described_class.data
-            puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-            ap expected_data
-
             expect(described_class.data).to eq expected_data
           end
 
