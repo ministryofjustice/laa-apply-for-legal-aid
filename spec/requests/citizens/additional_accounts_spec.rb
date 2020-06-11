@@ -18,14 +18,13 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
   context 'when an applicant revisits the page to change their answer' do
     before do
-      application.update!(has_offline_accounts: true)
-      application.update!(state: 'use_ccms')
+      application.update!(has_offline_accounts: true, state: 'use_ccms')
     end
 
     it 'checks that offline account is reset to nil' do
       get citizens_additional_accounts_path
       expect(application.reload.has_offline_accounts).to be_nil
-      expect(application.reload.state).to eq 'provider_submitted'
+      expect(application.state).to eq 'provider_submitted'
     end
   end
 
