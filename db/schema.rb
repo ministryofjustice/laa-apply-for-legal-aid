@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_103020) do
+ActiveRecord::Schema.define(version: 2020_06_10_213903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -630,6 +630,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_103020) do
     t.boolean "allow_non_passported_route", default: true, null: false
     t.boolean "manually_review_all_cases", default: true
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
+    t.boolean "use_new_student_loan", default: false
   end
 
   create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

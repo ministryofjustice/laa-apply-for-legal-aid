@@ -17,6 +17,10 @@ class Setting < ApplicationRecord
     setting.manually_review_all_cases
   end
 
+  def self.use_new_student_loan?
+    setting.use_new_student_loan
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
