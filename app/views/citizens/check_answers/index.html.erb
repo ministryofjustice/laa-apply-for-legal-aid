@@ -51,7 +51,7 @@
           ),
           read_only: false) %>
 
-  <%= render 'student_finance' if @legal_aid_application.receives_student_finance? %>
+  <%= render 'student_finance' %>
 
   <%= next_action_buttons_with_form(
           url: continue_citizens_check_answers_path,
