@@ -8,7 +8,7 @@ class SubmitCitizenReminderService
   def send_email
     [one_day_after_initial, nine_am_deadline_day].each do |scheduled_time|
       application.scheduled_mailings.create!(
-        mailer_klass: 'SubmitApplicantFinancialReminderMailer',
+        mailer_klass: 'SubmitCitizenFinancialReminderMailer',
         mailer_method: 'notify_citizen',
         arguments: mailer_args,
         scheduled_at: scheduled_time
