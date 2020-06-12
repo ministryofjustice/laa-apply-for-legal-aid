@@ -12,6 +12,7 @@ module CFE
       CreateDependantsService,
       CreateOutgoingsService,
       CreateStateBenefitsService,
+      CreateIrregularIncomesService,
       CreateOtherIncomeService
     ].freeze
 
@@ -28,6 +29,10 @@ module CFE
     def call
       COMMON_SERVICES.each { |s| s.call(submission) }
       NON_PASSPORTED_SERVICES.each { |s| s.call(submission) } if submission.non_passported?
+
+      # move CreateIrregularIncomesService up into the NON_PASSPORTED_SERVICES when removing the use_new_student_loan feature flag
+      CreateIrregularIncomesService.call(submission) if submission.non_passported? && Setting.use_new_student_loan?
+
       ObtainAssessmentResultService.call(submission)
       true
     rescue SubmissionError => e
