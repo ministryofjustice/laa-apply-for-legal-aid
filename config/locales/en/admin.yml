@@ -29,10 +29,14 @@ en:
           mock_true_layer_data: Mock TrueLayer Data
           allow_non_passported_route: Allow non-passported route
           manually_review_all_cases: Manually review all applications
+          use_new_student_loan: Use new method of entering student loans
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           allow_non_passported_route: Select Yes to allow non-passported route
           manually_review_all_cases: Select Yes to route all applications to caseworker for review, No to have just those marked for manual review routed to caseworkers
+          use_new_student_loan: |
+            Select Yes to input one annual figure for student loan income, select No to use
+            the old method of inputing as multiple other income receipts
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications

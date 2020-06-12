@@ -25,6 +25,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: :Incident, dependent: :destroy
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
+  has_many :irregular_incomes, dependent: :destroy
   has_many :dependants, dependent: :destroy
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', dependent: :destroy
   has_one :vehicle, dependent: :destroy
