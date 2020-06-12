@@ -265,6 +265,15 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     reset_delegated_functions
   end
 
+  def receives_student_finance?
+    irregular_incomes.map{|ir| ir.income_type}.include?'student_loan'
+  end
+
+  def value_of_student_finance
+    irregular_incomes[0].amount
+    # irregular_incomes(&:amount).where(income_type: 'student_loan')
+  end
+
   def default_cost_limitation
     default_substantive_cost_limitation
   end

@@ -1,0 +1,22 @@
+<h2 class="govuk-heading-m"><%= t '.student_finance' %></h2>
+
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_link(
+          name: :student_finance,
+          url: 'tbd',
+          question: t('.do_you_get'),
+          answer: yes_no(@legal_aid_application.receives_student_finance?),
+          read_only: false,
+          align_right: false
+      ) %>
+
+  <%= check_answer_link(
+          name: :student_finance,
+          url: 'tbd',
+          question: t('.how_much'),
+          # answer: "£#{@legal_aid_application.irregular_incomes[0].amount}",  # CHECK FOR CURRENCY DISPLAY HELPER TO USE HERE
+          answer: number_to_currency(@legal_aid_application.value_of_student_finance),
+          read_only: false,
+          align_right: false
+      ) %>
+</dl>

@@ -43,12 +43,13 @@ en:
         h1-heading: Check your answers
         bank-heading: Your bank accounts
         link_other_account: Add another bank account
-        student_finance: Student finance
-        do_you_get: Do you get student finance?
-        how_much: How much student finance will you get this academic year?
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      student_finance:
+        student_finance: Student finance
+        do_you_get: Do you get student finance?
+        how_much: How much student finance will you get this academic year?
     contact_providers:
       show:
         title: Contact your solicitor to continue your application
