@@ -51,11 +51,12 @@ RSpec.describe Admin::SettingsController, type: :request do
       {
         setting: {
           mock_true_layer_data: 'true',
-          allow_non_passported_route: 'false'
+          allow_non_passported_route: 'false',
+          use_new_student_loan: 'true'
         }
       }
     end
-    let(:setting) { Setting.first }
+    let(:setting) { Setting.setting }
 
     subject { patch admin_settings_path, params: params }
 

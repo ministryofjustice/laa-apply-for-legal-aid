@@ -10,7 +10,6 @@ module CFE # rubocop:disable Metrics/ModuleLength
 
     let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, application_ref: 'L-XYZ-999' }
     let(:submission) { create :cfe_submission, aasm_state: 'properties_created', legal_aid_application: application }
-    let(:expected_v1_response) { expected_v1_response_hash.to_json }
     let(:expected_v2_response) { expected_v2_response_hash.to_json }
     let(:service) { described_class.new(submission) }
 

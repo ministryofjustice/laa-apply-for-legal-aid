@@ -64,3 +64,5 @@ en:
           <<: *true_false
         manually_review_all_cases:
           <<: *true_false
+        use_new_student_loan:
+          <<: *true_false
