@@ -300,6 +300,18 @@ FactoryBot.define do
       provider_step { :start_merits_assessments }
     end
 
+    trait :at_client_completed_means do
+      with_proceeding_types
+      state { :provider_assessing_means }
+      provider_step { :client_completed_means }
+    end
+
+    trait :at_income_summary do
+      with_proceeding_types
+      state { :provider_assessing_means }
+      provider_step { :income_summary }
+    end
+
     trait :at_checking_merits_answers do
       with_proceeding_types
       with_merits_assessment
@@ -372,13 +384,6 @@ FactoryBot.define do
         [90, 60, 30].each do |count|
           create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: 'debit'
         end
-      end
-    end
-
-    trait :with_cfe_v1_result do
-      after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_v1_result, submission: cfe_submission
       end
     end
 
