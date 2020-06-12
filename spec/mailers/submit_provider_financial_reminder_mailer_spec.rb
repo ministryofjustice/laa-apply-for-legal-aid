@@ -10,7 +10,6 @@ RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
     let(:mail) { described_class.notify_provider(application.id, application_url) }
 
     it 'sends an email to the correct address' do
-      ap application.provider.email
       expect(mail.to).to eq([application.provider.email])
     end
 
