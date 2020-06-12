@@ -1,5 +1,6 @@
 module Citizens
   class AccountsController < CitizenBaseController
+    class TrueLayerWorkerError < StandardError; end
     skip_back_history_for :gather
 
     def index
@@ -13,6 +14,7 @@ module Citizens
 
       if worker_errors.any?
         @errors = worker_errors.join(', ')
+        Raven.capture_exception(TrueLayerWorkerError.new(@errors))
       else
         session[:worker_id] = nil
         redirect_to action: :index
