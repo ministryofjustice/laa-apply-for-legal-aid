@@ -1,5 +1,5 @@
 require 'rails_helper'
-require Rails.root.join 'spec/factories/cfe_results/state_benefit_types/mock_result'
+require Rails.root.join('spec/factories/cfe_results/state_benefit_types/mock_state_benefit_type_result')
 
 RSpec.describe Providers::TransactionsController, type: :request do
   include ActionView::Helpers::NumberHelper
@@ -10,10 +10,12 @@ RSpec.describe Providers::TransactionsController, type: :request do
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
   let(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
+  let(:cfe_state_benefits_url) { "#{Rails.configuration.x.check_financial_eligibility_host}/state_benefit_type" }
+  let(:cfe_state_benefit_response) { CFE::MockStateBenefitTypeResult.full_list.to_json }
 
   before do
     login_as provider
-
+    stub_request(:get, cfe_state_benefits_url).to_return(body: cfe_state_benefit_response)
   end
 
   shared_examples_for 'GET #providers/transactions' do
@@ -79,13 +81,13 @@ RSpec.describe Providers::TransactionsController, type: :request do
     end
   end
 
-  describe 'GET #providers/incoming_transactions', :vcr do
+  describe 'GET #providers/incoming_transactions' do
     subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'
   end
 
-  describe 'GET #citizens/outgoing_transactions', :vcr do
+  describe 'GET #citizens/outgoing_transactions' do
     subject { get providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'
@@ -105,7 +107,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
     end
   end
 
-  context 'call to Check Financial Eligibility Service is successful', :vcr do
+  context 'call to Check Financial Eligibility Service is successful' do
     before { allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
 
     describe 'GET #providers/incoming_transactions' do
