@@ -26,12 +26,8 @@ module CFE
     end
 
     def call
-      COMMON_SERVICES.each { |s| s.call(submission) }
-      NON_PASSPORTED_SERVICES.each { |s| s.call(submission) } if submission.non_passported?
-
-      # move CreateIrregularIncomesService up into the NON_PASSPORTED_SERVICES when removing the use_new_student_loan feature flag
-      CreateIrregularIncomesService.call(submission) if submission.non_passported? && Setting.use_new_student_loan?
-
+      call_common_services
+      call_non_passported_services
       ObtainAssessmentResultService.call(submission)
       true
     rescue SubmissionError => e
@@ -43,6 +39,24 @@ module CFE
 
     def submission
       @submission ||= Submission.create!(legal_aid_application_id: legal_aid_application_id)
+    end
+
+    def call_common_services
+      COMMON_SERVICES.each { |s| s.call(submission) }
+    end
+
+    def call_non_passported_services
+      return if submission.passported?
+
+      NON_PASSPORTED_SERVICES.each { |s| s.call(submission) }
+      call_irregular_income
+    end
+
+    def call_irregular_income
+      # move CreateIrregularIncomesService up into the NON_PASSPORTED_SERVICES when removing the use_new_student_loan feature flag
+      return unless Setting.use_new_student_loan?
+
+      CreateIrregularIncomesService.call(submission)
     end
   end
 end
