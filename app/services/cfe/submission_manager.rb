@@ -12,7 +12,6 @@ module CFE
       CreateDependantsService,
       CreateOutgoingsService,
       CreateStateBenefitsService,
-      CreateIrregularIncomesService,
       CreateOtherIncomeService
     ].freeze
 

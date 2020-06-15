@@ -1,6 +1,5 @@
 module CFE
   class CreateIrregularIncomesService < BaseService
-
     delegate :legal_aid_application, to: :submission
     delegate :irregular_incomes, to: :legal_aid_application
 
@@ -19,5 +18,3 @@ module CFE
     end
   end
 end
-
-

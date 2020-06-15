@@ -56,7 +56,7 @@ module CFESubmissionStateMachine
       end
 
       event :irregular_income_created do
-        transitions from: other_income_created, to: :irregular_income_created, guard: :non_passported?
+        transitions from: :other_income_created, to: :irregular_income_created, guard: :non_passported?
       end
 
       event :results_obtained do
@@ -76,6 +76,7 @@ module CFESubmissionStateMachine
         transitions from: :outgoings_created, to: :failed
         transitions from: :state_benefits_created, to: :failed
         transitions from: :other_income_created, to: :failed
+        transitions from: :irregular_income_created, to: :failed
       end
     end
   end

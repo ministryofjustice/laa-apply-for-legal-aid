@@ -3,7 +3,7 @@ require 'rails_helper'
 module CFE
   RSpec.describe CreateIrregularIncomesService do
     let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-    let(:submission) { create :cfe_submission, aasm_state: 'properties_created', legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'other_income_created', legal_aid_application: application }
     let!(:irregular_income) { create :irregular_income, legal_aid_application: application, amount: 3628.07 }
     let(:service) { described_class.new(submission) }
 
@@ -16,7 +16,7 @@ module CFE
 
     describe '#request_body' do
       it 'is as expected' do
-        service  = described_class.new(submission)
+        service = described_class.new(submission)
         expect(service.request_body).to eq expected_payload
       end
     end
@@ -28,6 +28,11 @@ module CFE
 
       it 'formats the payload and calls CFE API' do
         described_class.call(submission)
+      end
+
+      it 'progresses the submission state' do
+        described_class.call(submission)
+        expect(submission.reload.aasm_state).to eq 'irregular_income_created'
       end
     end
 
