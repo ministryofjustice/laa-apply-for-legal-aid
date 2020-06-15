@@ -129,8 +129,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     date_from = date_to - 3.months
 
     update!(
-      transaction_period_start_on: date_from,
-      transaction_period_finish_on: date_to
+      transaction_period_start_on: date_from.beginning_of_day,
+      transaction_period_finish_on: date_to.beginning_of_day
     )
   end
 
