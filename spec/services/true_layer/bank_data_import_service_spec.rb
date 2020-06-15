@@ -72,7 +72,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       end
     end
 
-    context 'a aubsequent API call is failing' do
+    context 'a subsequent API call is failing' do
       before do
         endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/accounts'
         stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
