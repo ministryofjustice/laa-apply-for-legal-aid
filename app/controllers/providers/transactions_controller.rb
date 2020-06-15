@@ -45,6 +45,7 @@ module Providers
     end
 
     def disregarded_state_benefits_list
+      puts ">>>>>>>>>>>> disregarded state benefits list #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
       benefits_list = state_benefit_types
       return false unless benefits_list
 
