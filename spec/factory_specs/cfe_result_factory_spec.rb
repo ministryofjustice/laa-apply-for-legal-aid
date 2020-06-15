@@ -21,7 +21,8 @@ RSpec.describe 'cfe_v2_result factory' do
                                                 applicant
                                                 gross_income
                                                 disposable_income
-                                                capital]
+                                                capital
+                                                remarks]
     end
 
     it 'has required keys in applicant' do

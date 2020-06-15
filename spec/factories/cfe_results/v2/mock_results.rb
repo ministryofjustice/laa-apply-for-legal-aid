@@ -211,6 +211,8 @@ module CFEResults
               upper_threshold: '999999999999.0',
               assessment_result: 'eligible',
               capital_contribution: '0.0'
+            },
+            remarks: {
             }
           }
         }
