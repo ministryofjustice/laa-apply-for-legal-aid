@@ -30,7 +30,10 @@ RSpec.describe 'check your answers requests', type: :request do
 
   describe 'GET /citizens/check_answers' do
     subject { get '/citizens/check_answers' }
-    before { subject }
+    before do
+      Setting.setting.update!(use_new_student_loan: true)
+      subject
+    end
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -94,8 +97,13 @@ RSpec.describe 'check your answers requests', type: :request do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything }
     subject { get '/citizens/check_answers' }
 
-    it 'should not show the student value quuestion' do
+    before do
+      Setting.setting.update!(use_new_student_loan: false)
       subject
+    end
+
+    it 'should not show the student value question' do
+      expect(response.body).not_to include('Do you get student finance?')
       expect(response.body).not_to include('How much student finance will you get this academic year?')
     end
   end

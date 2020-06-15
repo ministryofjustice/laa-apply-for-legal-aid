@@ -266,11 +266,11 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def receives_student_finance?
-    irregular_incomes.map(&:income_type).include? 'student_loan'
+    irregular_incomes.student_finance.any?
   end
 
   def value_of_student_finance
-    irregular_incomes.map { |ir| ir.income_type == 'student_loan' ? ir.amount : nil }.first
+    receives_student_finance? ? irregular_incomes.student_finance.first.amount : nil
   end
 
   def default_cost_limitation
