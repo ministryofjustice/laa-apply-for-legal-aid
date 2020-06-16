@@ -4,8 +4,16 @@ require 'sidekiq/testing'
 module CCMS # rubocop:disable Metrics/ModuleLength
   RSpec.describe Submission do
     let(:state) { :initialised }
+    let(:applicant_poll_count) { 0 }
+    let(:case_poll_count) { 0 }
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount, state: :submitting_assessment }
-    let(:submission) { create :submission, legal_aid_application: legal_aid_application, aasm_state: state }
+    let(:submission) do
+      create :submission,
+             legal_aid_application: legal_aid_application,
+             aasm_state: state,
+             applicant_poll_count: applicant_poll_count,
+             case_poll_count: case_poll_count
+    end
 
     context 'Validations' do
       it 'errors if no legal aid application id is present' do
@@ -120,9 +128,49 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     end
 
     describe '#process_async!' do
-      it 'calls SubmissionProcessWorker' do
-        expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state)
-        submission.process_async!
+      context 'submission is in initialised state' do
+        it 'calls SubmissionProcessWorker with a delay of 5 seconds' do
+          expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 5.seconds)
+          submission.process_async!
+        end
+      end
+
+      context 'submission is in applicant submitted state' do
+        let(:state) { 'applicant_submitted' }
+
+        context 'current poll count is 0' do
+          it 'calls SubmissionProcessWorker with a delay of 5 seconds' do
+            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 5.seconds)
+            submission.process_async!
+          end
+        end
+
+        context 'current poll count is 5' do
+          let(:applicant_poll_count) { 5 }
+          it 'calls the SubmissionProcessWorker with a delay of 30 seconds' do
+            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 30.seconds)
+            submission.process_async!
+          end
+        end
+      end
+
+      context 'submission is in case submitted state' do
+        let(:state) { 'case_submitted' }
+
+        context 'current poll count is 0' do
+          it 'calls SubmissionProcessWorker with a delay of 5 seconds' do
+            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 5.seconds)
+            submission.process_async!
+          end
+        end
+
+        context 'current poll count is 5' do
+          let(:case_poll_count) { 8 }
+          it 'calls the SubmissionProcessWorker with a delay of 30 seconds' do
+            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 45.seconds)
+            submission.process_async!
+          end
+        end
       end
     end
   end

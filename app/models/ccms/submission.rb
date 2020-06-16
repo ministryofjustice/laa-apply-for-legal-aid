@@ -36,7 +36,26 @@ module CCMS
     end
 
     def process_async!
-      SubmissionProcessWorker.perform_async(id, aasm_state)
+      SubmissionProcessWorker.perform_async(id, aasm_state, delay)
+    end
+
+    def base_delay
+      Rails.env.development? ? 10.seconds : 5.seconds
+    end
+
+    def delay
+      base_delay * (current_poll_count + 1)
+    end
+
+    def current_poll_count
+      case aasm_state
+      when 'applicant_submitted'
+        applicant_poll_count
+      when 'case_submitted'
+        case_poll_count
+      else
+        0
+      end
     end
   end
 end
