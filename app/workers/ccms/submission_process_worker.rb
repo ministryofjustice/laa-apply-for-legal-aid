@@ -11,7 +11,7 @@ module CCMS
       return if submission.completed? || submission.failed?
 
       # process next step
-      SubmissionProcessWorker.perform_in(delay, submission.id, submission.aasm_state)
+      SubmissionProcessWorker.perform_in(submission.id, submission.aasm_state, delay)
     end
   end
 end
