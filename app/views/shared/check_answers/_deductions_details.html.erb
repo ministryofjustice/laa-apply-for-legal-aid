@@ -6,7 +6,7 @@
           disregarded_state_benefits: :disregarded_state_benefits
       }.each do |name, value_method|
     %>
-      <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method, suppress_border: name == :disregarded_state_benefits %>
+      <%= render 'shared/means_report/item', name: name, scope: 'deductions', value_method: value_method, suppress_border: name == :disregarded_state_benefits %>
     <% end %>
     <%= render 'shared/means_report/total', name: 'total_deductions', value_method: :total_deductions %>
   </dl>

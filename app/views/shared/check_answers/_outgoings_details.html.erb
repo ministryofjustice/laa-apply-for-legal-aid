@@ -8,7 +8,7 @@
           legal_aid: :moe_legal_aid
       }.each do |name, value_method|
     %>
-      <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method, suppress_border: name == :legal_aid %>
+      <%= render 'shared/means_report/item', name: name, scope: 'outgoing', value_method: value_method, suppress_border: name == :legal_aid %>
     <% end %>
     <%= render 'shared/means_report/total', name: 'total_outgoings', value_method: :total_monthly_outgoings %>
   </dl>

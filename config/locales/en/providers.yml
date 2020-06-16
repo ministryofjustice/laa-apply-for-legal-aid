@@ -400,8 +400,27 @@ en:
         client_details_heading: Client details
         applying_for: What you’re applying for
     means_reports:
+      caseworker_review:
+        required: Caseworker review required?
+        reasons: Review reasons
+        category-amount_variation: Review categories - Monthly value
+        category-unknown_frequency: Review categories - Frequency
+        category:
+          state_benefit_payment: State benefits
+          other_income_payment: Other income
+          outgoings_housing_cost: Housing costs
+          outgoings_maintenance: Maintenance payments
+          outgoings_legal_aid: Legal aid payments
+          outgoings_childcare: Childcare payments
+        reason:
+          amount_variation: Monthly value unknown (variations)
+          unknown_frequency: Frequency unknown
+
+
+
       show:
         heading: Means report
+        caseworker-review-section-heading: Caseworker Review
         client_details_heading: Client details
         benefit_check_heading: Passported means
         capital_result_heading: Capital result

@@ -410,6 +410,21 @@ module CFE
           expect(eligible_result.total_disposable_capital).to eq 10_686.05
         end
       end
+
+      ################################################################
+      #  REMARKS                                                     #
+      ################################################################
+
+      describe 'remarks' do
+        it 'returns a CFE::Remarks object' do
+          expect(eligible_result.remarks).to be_instance_of(CFE::Remarks)
+        end
+
+        it 'instantiates the Remarks class with the remarks part of the hash' do
+          expect(CFE::Remarks).to receive(:new).with({})
+          eligible_result.remarks
+        end
+      end
     end
   end
 end
