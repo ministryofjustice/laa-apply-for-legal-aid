@@ -6,8 +6,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
 
   describe '#call' do
-    let(:now) { '6/11/2018'.to_date }
-    let(:now_minus_3_month) { '5/08/2018'.to_date }
+    let(:now) { '6/11/2018'.to_datetime.beginning_of_day }
+    let(:now_minus_3_month) { '5/08/2018'.to_datetime.beginning_of_day }
     let(:mock_transaction_1) { mock_account[:transactions][0] }
     let(:mock_transaction_2) { mock_account[:transactions][1] }
     let(:transaction_1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction_1[:transaction_id]) }
@@ -57,8 +57,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
 
         expect(WebMock).to have_requested(:get, expected_request_url)
           .with(query: {
-                  from: now_minus_3_month.iso8601,
-                  to: now.iso8601
+                  from: '2018-08-05T00:00:00Z',
+                  to: '2018-11-06T00:00:00Z'
                 })
       end
     end
