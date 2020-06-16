@@ -57,8 +57,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
 
         expect(WebMock).to have_requested(:get, expected_request_url)
           .with(query: {
-                  from: now_minus_3_month.beginning_of_day.iso8601,
-                  to: now.beginning_of_day.iso8601
+                  from: '2018-08-05T00:00:00Z',
+                  to: '2018-11-06T00:00:00Z'
                 })
       end
     end
