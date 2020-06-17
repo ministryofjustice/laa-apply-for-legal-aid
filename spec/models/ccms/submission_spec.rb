@@ -130,45 +130,51 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     describe '#process_async!' do
       context 'submission is in initialised state' do
         it 'calls SubmissionProcessWorker with a delay of 5 seconds' do
-          expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 5.seconds)
+          expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state)
           submission.process_async!
         end
       end
+    end
 
-      context 'submission is in applicant submitted state' do
+    describe '#delay' do
+      context 'intialised state' do
+        it 'returns the base delay' do
+          expect(submission.delay).to eq 5.seconds
+        end
+      end
+
+      context 'applicant_submitted state' do
         let(:state) { 'applicant_submitted' }
 
-        context 'current poll count is 0' do
-          it 'calls SubmissionProcessWorker with a delay of 5 seconds' do
-            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 5.seconds)
-            submission.process_async!
+        context 'zero poll count' do
+          let(:applicant_poll_count) { 0 }
+          it 'returns the base delay' do
+            expect(submission.delay).to eq 5.seconds
           end
         end
 
-        context 'current poll count is 5' do
-          let(:applicant_poll_count) { 5 }
-          it 'calls the SubmissionProcessWorker with a delay of 30 seconds' do
-            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 30.seconds)
-            submission.process_async!
+        context 'poll count of 6' do
+          let(:applicant_poll_count) { 6 }
+          it 'returns 7 times the base delay' do
+            expect(submission.delay).to eq 35.seconds
           end
         end
       end
 
-      context 'submission is in case submitted state' do
+      context 'case_submitted state' do
         let(:state) { 'case_submitted' }
 
-        context 'current poll count is 0' do
-          it 'calls SubmissionProcessWorker with a delay of 5 seconds' do
-            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 5.seconds)
-            submission.process_async!
+        context 'zero poll count' do
+          let(:case_poll_count) { 0 }
+          it 'returns the base delay' do
+            expect(submission.delay).to eq 5.seconds
           end
         end
 
-        context 'current poll count is 5' do
+        context 'poll count of 6' do
           let(:case_poll_count) { 8 }
-          it 'calls the SubmissionProcessWorker with a delay of 30 seconds' do
-            expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state, 45.seconds)
-            submission.process_async!
+          it 'returns 7 times the base delay' do
+            expect(submission.delay).to eq 45.seconds
           end
         end
       end

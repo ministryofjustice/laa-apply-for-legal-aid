@@ -7,7 +7,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
   before { allow(CCMS::Submission).to receive(:find).with(submission.id).and_return(submission) }
 
-  subject { worker.perform(submission.id, state, 5.seconds) }
+  subject { worker.perform(submission.id, state) }
 
   it 'calls process! on the submission' do
     expect(submission).to receive(:process!)

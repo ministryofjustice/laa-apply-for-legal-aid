@@ -3,7 +3,7 @@ module CCMS
     include Sidekiq::Worker
     include Sidekiq::Status::Worker
 
-    def perform(submission_id, state, delay)
+    def perform(submission_id, state)
       submission = Submission.find(submission_id)
       return unless submission.aasm_state == state.to_s # skip if state has already changed
 
@@ -11,7 +11,7 @@ module CCMS
       return if submission.completed? || submission.failed?
 
       # process next step
-      SubmissionProcessWorker.perform_in(delay, submission.id, submission.aasm_state, delay)
+      SubmissionProcessWorker.perform_in(submission.delay, submission.id, submission.aasm_state)
     end
   end
 end

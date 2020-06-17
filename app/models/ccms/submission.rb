@@ -14,6 +14,8 @@ module CCMS
 
     POLL_LIMIT = Rails.env.development? ? 99 : 10
 
+    BASE_DELAY = 5.seconds.freeze
+
     def process!(options = {}) # rubocop:disable Metrics/MethodLength
       case aasm_state
       when 'initialised'
@@ -36,16 +38,14 @@ module CCMS
     end
 
     def process_async!
-      SubmissionProcessWorker.perform_async(id, aasm_state, delay)
-    end
-
-    def base_delay
-      Rails.env.development? ? 10.seconds : 5.seconds
+      SubmissionProcessWorker.perform_async(id, aasm_state)
     end
 
     def delay
-      base_delay * (current_poll_count + 1)
+      BASE_DELAY * (current_poll_count + 1)
     end
+
+    private
 
     def current_poll_count
       case aasm_state
