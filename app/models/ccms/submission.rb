@@ -12,7 +12,7 @@ module CCMS
       ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
     end
 
-    POLL_LIMIT = Rails.env.development? ? 99 : 10
+    POLL_LIMIT = Rails.env.development? ? 99 : 20
 
     BASE_DELAY = 5.seconds.freeze
 
