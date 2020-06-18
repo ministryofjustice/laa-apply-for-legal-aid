@@ -50,19 +50,6 @@ Style/ClassAndModuleChildren:
     - 'app/controllers/v1/applications_controller.rb'
     - 'app/controllers/v1/status_controller.rb'
 
-# Offense count: 8
-Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'app/controllers/v1/applications_controller.rb'
-    - 'app/controllers/v1/status_controller.rb'
-    - 'app/mailers/application_mailer.rb'
-    - 'app/models/application_record.rb'
-    - 'app/models/legal_aid_application.rb'
-    - 'app/serializers/legal_aid_application_serializer.rb'
-    - 'config/application.rb'
-    - 'db/migrate/20180807211758_create_legal_aid_applications.rb'
-
 # Offense count: 2
 Style/MixinUsage:
   Exclude:
