@@ -22,14 +22,19 @@ class SubmitCitizenReminderService
 
   def mailer_args
     [
-      application.id,
-      application.applicant.email,
-      application_url
+      application.application_ref,
+      applicant.email,
+      application_url,
+      applicant.full_name
     ]
   end
 
   def application_url
     @application_url ||= citizens_legal_aid_application_url(secure_id)
+  end
+
+  def applicant
+    @applicant ||= application&.applicant
   end
 
   def secure_id

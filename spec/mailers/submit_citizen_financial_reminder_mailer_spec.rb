@@ -7,7 +7,7 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
   let(:application_url) { 'http://test.com' }
 
   describe '#notify_citizen' do
-    let(:mail) { described_class.notify_citizen(application.id, email, application_url) }
+    let(:mail) { described_class.notify_citizen(application.id, email, application_url, application.applicant.full_name) }
 
     it 'sends an email to the correct address' do
       expect(mail.to).to eq([email])
