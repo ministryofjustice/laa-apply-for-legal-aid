@@ -69,16 +69,6 @@ Style/Documentation:
     - 'config/application.rb'
     - 'db/migrate/20180807211758_create_legal_aid_applications.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/ExpandPathArguments:
-  Exclude:
-    - 'bin/bundle'
-    - 'bin/rails'
-    - 'bin/rake'
-    - 'bin/rspec'
-    - 'spec/rails_helper.rb'
-
 # Offense count: 43
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
