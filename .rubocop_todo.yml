@@ -55,9 +55,3 @@ Style/MixinUsage:
   Exclude:
     - 'bin/setup'
     - 'bin/update'
-
-# Offense count: 46
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Layout/LineLength:
-  Max: 180
