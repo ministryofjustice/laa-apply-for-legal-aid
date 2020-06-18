@@ -26,6 +26,13 @@ RSpec.describe 'does client use online banking requests', type: :request do
       it 'displays the correct page' do
         expect(unescaped_response_body).to include('Check if you can continue using this service')
       end
+
+      context 'the application is in use_ccms state' do
+        let(:application) { create :legal_aid_application, state: 'use_ccms' }
+        it 'resets the state to initiated' do
+          expect(application.reload.state).to eq 'initiated'
+        end
+      end
     end
   end
 

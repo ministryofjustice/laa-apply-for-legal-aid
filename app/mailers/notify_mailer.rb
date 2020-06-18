@@ -1,4 +1,4 @@
-class NotifyMailer < GovukNotifyRails::Mailer
+class NotifyMailer < BaseApplyMailer
   self.delivery_job = GovukNotifyMailerJob
 
   # Require relative statement required as concern not found when loaded from sidekiq on retry

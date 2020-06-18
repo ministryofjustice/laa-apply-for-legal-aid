@@ -270,6 +270,11 @@ FactoryBot.define do
       provider_step { :applicants }
     end
 
+    trait :at_use_ccms do
+      state { :use_ccms }
+      provider_step { :use_ccms }
+    end
+
     trait :at_checking_client_details_answers do
       with_proceeding_types
       state { :checking_client_details_answers }
