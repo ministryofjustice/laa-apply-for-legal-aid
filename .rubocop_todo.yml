@@ -63,13 +63,6 @@ Style/Documentation:
     - 'config/application.rb'
     - 'db/migrate/20180807211758_create_legal_aid_applications.rb'
 
-# Offense count: 43
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: when_needed, always, never
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 # Offense count: 2
 Style/MixinUsage:
   Exclude:
