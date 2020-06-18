@@ -2,18 +2,23 @@ module CCMS
   module Submitters
     class ObtainDocumentIdService < BaseSubmissionService
       def call
-        populate_documents
-        unless submission.submission_documents.empty?
-          request_document_ids
-          submission.obtain_document_ids!
+        return unless populate_documents
+
+        submission.submission_documents.each do |document|
+          request_document_id(document)
         end
+        raise CcmsError, "Failed to obtain document ids for: #{failed_requesting_ids}" if failed_requesting_ids.present?
+
+        submission.obtain_document_ids!
       rescue CcmsError => e
-        handle_exception(e, xml_request)
+        handle_exception(e, nil)
       end
 
       private
 
       def pdf_attachments
+        # TODO: Establish why we are ignoring the statement_of_case documents
+        # TODO: Should we be ignoring the bank_statement_report too?
         @pdf_attachments ||= attachments.reject { |a| a.attachment_type == 'statement_of_case' }
       end
 
@@ -37,26 +42,33 @@ module CCMS
         end
       end
 
-      def request_document_ids
-        submission.submission_documents.each do |document|
-          tx_id = document_id_requestor.transaction_request_id
-          @response = document_id_requestor.call
-          document.ccms_document_id = Parsers::DocumentIdResponseParser.new(tx_id, @response).document_id
-          document.status = :id_obtained
-          document.save!
-          create_history('applicant_ref_obtained', 'document_ids_obtained', xml_request, @response) if submission.save!
-        rescue CcmsError => e
-          document.status = :failed
-          raise CcmsError, e
-        end
+      def request_document_id(document)
+        document_id_requestor = document_id_requestor(document.document_type)
+        response = update_document_and_return_response(document, document_id_requestor)
+        document.save!
+        create_history('applicant_ref_obtained', 'document_ids_obtained', document_id_requestor.formatted_xml, response) if submission.save!
+      rescue CcmsError => e
+        document.status = :failed
+        document.save!
+        create_ccms_failure_history('applicant_ref_obtained', e, document_id_requestor.formatted_xml)
       end
 
-      def document_id_requestor
-        @document_id_requestor ||= Requestors::DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username)
+      def ccms_document_id(dir)
+        Parsers::DocumentIdResponseParser.new(dir.transaction_request_id, dir.call).document_id
       end
 
-      def xml_request
-        @xml_request ||= document_id_requestor.formatted_xml
+      def document_id_requestor(document_type)
+        Requestors::DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username, document_type)
+      end
+
+      def update_document_and_return_response(document, document_id_requestor)
+        document.ccms_document_id = ccms_document_id(document_id_requestor)
+        document.status = :id_obtained
+        document_id_requestor.call
+      end
+
+      def failed_requesting_ids
+        @failed_requesting_ids ||= submission.submission_documents.select { |document| document.status == 'failed' }&.map(&:id)&.join(', ')
       end
     end
   end

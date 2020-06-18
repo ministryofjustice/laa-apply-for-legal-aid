@@ -1,14 +1,12 @@
 module CCMS
   module Submitters
     class UploadDocumentsService < BaseSubmissionService
-      def call # rubocop:disable Metrics/AbcSize
+      def call
         submission.submission_documents.each do |submission_document|
           upload_document(submission_document)
         end
 
-        failed_uploads = submission.submission_documents.select { |document| document.status == 'failed' }
-
-        raise CcmsError, "The following documents failed to upload: #{failed_uploads.map(&:id).join(', ')}" if failed_uploads.present?
+        raise CcmsError, "The following documents failed to upload: #{failed_upload_ids}" if failed_upload_ids.present?
 
         create_history('case_created', submission.aasm_state, nil, nil) if submission.complete!
       rescue CcmsError => e
@@ -17,31 +15,48 @@ module CCMS
 
       private
 
+      def failed_upload_ids
+        @failed_upload_ids ||= submission.submission_documents.select { |document| document.status == 'failed' }&.map(&:id)&.join(', ')
+      end
+
       def upload_document(submission_document)
-        document_upload_requestor = CCMS::Requestors::DocumentUploadRequestor.new(submission.case_ccms_reference,
-                                                                                  submission_document.ccms_document_id,
-                                                                                  Base64.strict_encode64(pdf_binary(submission_document)),
-                                                                                  submission.legal_aid_application.provider.username)
-        tx_id = document_upload_requestor.transaction_request_id
-        response = document_upload_requestor.call
-        update_document_status(submission_document, tx_id, response)
+        document_upload_requestor = document_upload_requestor(submission_document)
+        response = update_document_status_and_return_response(submission_document, document_upload_requestor)
         submission_document.save!
         submission.save!
+        create_history('case_created', submission_document.status, document_upload_requestor.formatted_xml, response)
       rescue CcmsError => e
         submission_document.status = :failed
-        raise CcmsError, e
+        submission.save!
+        create_ccms_failure_history('case_created', e, document_upload_requestor.formatted_xml)
+      end
+
+      def document_upload_requestor(submission_document)
+        CCMS::Requestors::DocumentUploadRequestor.new(submission.case_ccms_reference,
+                                                      submission_document.ccms_document_id,
+                                                      Base64.strict_encode64(pdf_binary(submission_document)),
+                                                      submission.legal_aid_application.provider.username,
+                                                      submission_document.document_type)
       end
 
       def pdf_binary(submission_document)
         Attachment.find(submission_document.attachment_id).document.download
       end
 
-      def update_document_status(document, tx_id, response)
-        document.status = if CCMS::Parsers::DocumentUploadResponseParser.new(tx_id, response).success?
+      def update_document_status_and_return_response(document, document_upload_requestor)
+        tx_id = document_upload_requestor.transaction_request_id
+        response = document_upload_requestor.call
+        document.status = if document_upload_response_parser(tx_id, response)
                             :uploaded
                           else
                             :failed
                           end
+        response
+      end
+
+      def document_upload_response_parser(tx_id, response)
+        CCMS::Parsers::DocumentUploadResponseParser
+          .new(tx_id, response).success?
       end
     end
   end
