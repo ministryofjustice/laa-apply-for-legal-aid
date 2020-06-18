@@ -22,7 +22,7 @@ class SubmitCitizenReminderService
 
   def mailer_args
     [
-      application.application_ref,
+      application.id,
       applicant.email,
       application_url,
       applicant.full_name
