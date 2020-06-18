@@ -21,6 +21,11 @@ module LegalAidApplications
       [:none_selected]
     end
 
+    def save
+      super
+      model.use_ccms! unless model.online_banking_consent?
+    end
+
     private
 
     def empty_unchecked_values
