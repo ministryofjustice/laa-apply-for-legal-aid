@@ -82,13 +82,6 @@ Style/MixinUsage:
     - 'bin/setup'
     - 'bin/update'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: MinDigits, Strict.
-Style/NumericLiterals:
-  Exclude:
-    - 'db/schema.rb'
-
 # Offense count: 44
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
@@ -101,7 +94,6 @@ Style/StringLiterals:
     - 'config/application.rb'
     - 'config/environments/production.rb'
     - 'config/puma.rb'
-    - 'db/schema.rb'
     - 'spec/rails_helper.rb'
 
 # Offense count: 46
