@@ -91,12 +91,6 @@ Style/NumericLiterals:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/PerlBackrefs:
-  Exclude:
-    - 'bin/bundle'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: .
 # SupportedStyles: use_perl_names, use_english_names
 Style/SpecialGlobalVars:
