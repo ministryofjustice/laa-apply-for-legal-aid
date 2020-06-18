@@ -3,4 +3,12 @@ class IrregularIncome < ApplicationRecord
 
   validates :income_type, inclusion: %w[student_loan]
   validates :frequency, inclusion: %w[annual]
+
+  def as_json(_options = nil)
+    {
+      income_type: income_type,
+      frequency: frequency,
+      amount: amount.to_f
+    }
+  end
 end
