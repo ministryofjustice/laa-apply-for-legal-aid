@@ -44,16 +44,16 @@ module CCMS
         end
 
         context 'the application has documents to upload' do
-          let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
-
           before do
             create :attachment, :merits_report, legal_aid_application: legal_aid_application
             create :attachment, :means_report, legal_aid_application: legal_aid_application
+            create :attachment, :bank_transaction_report, legal_aid_application: legal_aid_application
+            create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application
           end
 
           it 'populates the documents array with statement_of_case, means_report and merits_report' do
             subject.call
-            expect(submission.submission_documents.count).to eq 3
+            expect(submission.submission_documents.count).to eq 4
           end
 
           context 'when requesting document_ids' do
@@ -76,7 +76,7 @@ module CCMS
             end
 
             it 'writes a history record for each document' do
-              expect { subject.call }.to change { SubmissionHistory.count }.by(3)
+              expect { subject.call }.to change { SubmissionHistory.count }.by(4)
             end
 
             it 'updates the history records' do
@@ -92,8 +92,16 @@ module CCMS
               expect(history.request).to be_soap_envelope_with(
                 command: 'ns2:DocumentUploadRQ',
                 transaction_id: '20190301030405123456',
-                matching: ['<ns4:DocumentType>ADMIN1</ns4:DocumentType>']
+                matching: ['<ns4:Channel>E</ns4:Channel>']
               )
+            end
+
+            it 'creates three documents as ADMIN1 and one as BSTMT' do
+              subject.call
+              admin1_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/ADMIN1/) }.flatten.count
+              bstmt_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/BSTMT/) }.flatten.count
+              expect(admin1_documents).to eq 3
+              expect(bstmt_documents).to eq 1
             end
 
             it 'writes the response body to the history record' do
@@ -105,11 +113,15 @@ module CCMS
       end
 
       context 'operation unsuccessful' do
+        let(:history) { SubmissionHistory.where(submission_id: submission.id, request: nil, response: nil).last }
+        # There should only be one record in this state, so if it fails it's a legitimate error,
+        # previously a race condition would occur where both records where created to
+        # the microsecond :(
         context 'when populating documents' do
           let!(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
           before do
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
-            expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CcmsError, 'failure populating document hash')
+            expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CcmsError, 'Failed to obtain document ids for')
           end
 
           it 'changes the submission state to failed' do
@@ -117,20 +129,13 @@ module CCMS
           end
 
           it 'writes a history record' do
-            expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change { SubmissionHistory.count }.by(2)
             expect(history.from_state).to eq 'applicant_ref_obtained' # this is failing gets case_submitted
             expect(history.to_state).to eq 'failed'
             expect(history.success).to be false
             expect(history.details).to match(/CCMS::CcmsError/)
-            expect(history.details).to match(/failure populating document hash/)
-            expect(history.request).not_to be_nil
-            expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:DocumentUploadRQ',
-              transaction_id: '20190301030405123456',
-              matching: [
-                '<ns4:DocumentType>ADMIN1</ns4:DocumentType>'
-              ]
-            )
+            expect(history.details).to match(/Failed to obtain document ids for/)
+            expect(history.request).to be_nil
             expect(history.response).to be_nil
           end
         end
@@ -152,16 +157,13 @@ module CCMS
           end
 
           it 'writes a history record' do
-            expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change { SubmissionHistory.count }.by(2)
             expect(history.from_state).to eq 'applicant_ref_obtained'
             expect(history.to_state).to eq 'failed'
             expect(history.success).to be false
             expect(history.details).to match(/CCMS::CcmsError/)
-            expect(history.details).to match(/failure populating document hash/)
-            expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:DocumentUploadRQ',
-              matching: ['<ns2:CaseReferenceNumber>\d{10}</ns2:CaseReferenceNumber>']
-            )
+            expect(history.details).to match(/Failed to obtain document ids for/)
+            expect(history.request).to be_nil
             expect(history.response).to be_nil
           end
         end
