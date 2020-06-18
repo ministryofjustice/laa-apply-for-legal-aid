@@ -8,6 +8,7 @@ module Populators
       let(:credit_names) { names[:credit] }
       let(:debit_names) { names[:debit] }
       let(:total) { credit_names.length + debit_names.length }
+      let(:archived_credit_names) { %i[student_loan] }
 
       it 'creates instances from names' do
         expect { subject }.to change { TransactionType.count }.by(total)
@@ -16,7 +17,7 @@ module Populators
       it 'assigns the names to the correct operation' do
         subject
         expect(TransactionType.debits.count).to eq(debit_names.length)
-        expect(TransactionType.credits.count).to eq(credit_names.length)
+        expect(TransactionType.credits.count).to eq(credit_names.length - archived_credit_names.length)
         expect(debit_names.map(&:to_s)).to include(TransactionType.debits.first.name)
         expect(credit_names.map(&:to_s)).to include(TransactionType.credits.first.name)
       end
@@ -48,7 +49,8 @@ module Populators
 
         it 'does not set the archived_at date in the database for active transaction types' do
           subject
-          names.values.flatten.each do |transaction_name|
+          active_names = names.values.flatten - archived_credit_names
+          active_names.each do |transaction_name|
             expect(TransactionType.find_by(name: transaction_name).archived_at).to eq nil
           end
         end

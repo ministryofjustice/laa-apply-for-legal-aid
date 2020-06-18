@@ -15,6 +15,7 @@ module CFESubmissionStateMachine
       state :outgoings_created
       state :state_benefits_created
       state :other_income_created
+      state :irregular_income_created
       state :results_obtained
       state :failed
 
@@ -54,9 +55,14 @@ module CFESubmissionStateMachine
         transitions from: :state_benefits_created, to: :other_income_created, guard: :non_passported?
       end
 
+      event :irregular_income_created do
+        transitions from: :other_income_created, to: :irregular_income_created, guard: :non_passported?
+      end
+
       event :results_obtained do
         transitions from: :properties_created, to: :results_obtained, guard: :passported?
-        transitions from: :other_income_created, to: :results_obtained
+        transitions from: :other_income_created, to: :results_obtained # remove this when new_student_loan feature flag is removed
+        transitions from: :irregular_income_created, to: :results_obtained, guard: :non_passported?
       end
 
       event :fail do
@@ -70,6 +76,7 @@ module CFESubmissionStateMachine
         transitions from: :outgoings_created, to: :failed
         transitions from: :state_benefits_created, to: :failed
         transitions from: :other_income_created, to: :failed
+        transitions from: :irregular_income_created, to: :failed
       end
     end
   end

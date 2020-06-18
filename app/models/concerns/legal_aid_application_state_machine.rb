@@ -63,7 +63,10 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       end
 
       event :use_ccms do
+        transitions from: :initiated, to: :use_ccms
+        transitions from: :client_details_answers_checked, to: :use_ccms
         transitions from: :provider_submitted, to: :use_ccms
+        transitions from: :delegated_functions_used, to: :use_ccms
       end
 
       event :reset do
@@ -126,6 +129,10 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
 
       event :submitted_assessment do
         transitions from: :submitting_assessment, to: :assessment_submitted
+      end
+
+      event :reset_from_use_ccms do
+        transitions from: :use_ccms, to: :initiated
       end
     end
   end

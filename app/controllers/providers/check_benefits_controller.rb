@@ -22,7 +22,10 @@ module Providers
     def should_use_ccms?
       return false if legal_aid_application.applicant_receives_benefit?
 
-      !Setting.allow_non_passported_route?
+      return false if Setting.allow_non_passported_route?
+
+      legal_aid_application.use_ccms!
+      true
     end
 
     def known_issue_prevents_benefit_check?
