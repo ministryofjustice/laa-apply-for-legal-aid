@@ -22,9 +22,22 @@ Layout/ParameterAlignment:
   Exclude:
     - 'bin/rspec'
 
-# Offense count: 1
+# Offense count: 17
 Metrics/AbcSize:
-  Max: 18
+  IgnoredMethods:
+  - 'activate_bundler' # bin/bundle
+  - 'calculate_average' # app/models/dashboard/widget_data_providers/feedback_scores.rb
+  - 'call' # app/services/[cfe/submission_manager.rb, govuk_emails/email_monitor.rb, pdf_converter.rb]
+  - 'create_categorised_bank_transactions' # spec/services/cfe/create_outgoings_service_spec.rb
+  - 'data' # app/models/dashboard/widget_data_providers/[feedback_scores.rb, number_provider_firms.rb, number_provider_firms.rb]
+  - 'deserialize_address' # app/forms/addresses/address_selection_form.rb
+  - 'govuk_radio_button' # app/lib/govuk_elements_form_builder/form_builder.rb
+  - 'no_capital' # spec/factories/cfe_results/v2/mock_results.rb
+  - 'notify' # app/mailers/feedback_mailer.rb
+  - 'original_file_valid' # app/forms/statement_of_cases/statement_of_case_form.rb
+  - 'parse_transaction_csv_row' # app/services/true_layer/sample_transactions_csv_parser.rb
+  - 'screenshot_image' # features/support/screenshot_helper.rb
+  - 'uncategorised_transactions?' # app/models/legal_aid_application.rb
 
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.
