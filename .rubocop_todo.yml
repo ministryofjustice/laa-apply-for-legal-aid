@@ -41,15 +41,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 9
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/v1/applications_controller.rb'
-    - 'app/controllers/v1/status_controller.rb'
-
 # Offense count: 2
 Style/MixinUsage:
   Exclude:
