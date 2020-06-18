@@ -11,18 +11,38 @@ module CCMS
       let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, 'my_login') }
 
       describe 'XML request' do
-        include_context 'ccms soa configuration'
+        context 'when sent a normal document' do
+          include_context 'ccms soa configuration'
 
-        it 'generates the expected XML' do
-          allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
-          expect(requestor.formatted_xml).to be_soap_envelope_with(
-            command: 'ns2:DocumentUploadRQ',
-            transaction_id: expected_tx_id,
-            matchers: [
-              '<ns4:DocumentType>ADMIN1</ns4:DocumentType>',
-              '<ns4:FileExtension>pdf</ns4:FileExtension>'
-            ]
-          )
+          it 'generates the expected XML' do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: 'ns2:DocumentUploadRQ',
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <ns4:DocumentType>ADMIN1</ns4:DocumentType>
+                <ns4:FileExtension>pdf</ns4:FileExtension>
+              ]
+            )
+          end
+        end
+
+        context 'when sent a bank_transaction_report' do
+          let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, 'my_login', 'bank_transaction_report') }
+
+          include_context 'ccms soa configuration'
+
+          it 'generates the expected XML' do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: 'ns2:DocumentUploadRQ',
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <ns4:DocumentType>BSTMT</ns4:DocumentType>
+                <ns4:FileExtension>csv</ns4:FileExtension>
+              ]
+            )
+          end
         end
       end
 
