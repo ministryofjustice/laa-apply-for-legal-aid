@@ -1,0 +1,29 @@
+<%= page_template page_title: t('.field_set_header'), template: :basic do %>
+  <%= form_with(model: @form, url: citizens_student_finance_amount_path, method: :post, local: true) do |form| %>
+
+    <%= govuk_form_group(
+            show_error_if: @error,
+            input: :student_finances
+        ) do %>
+
+      <%= govuk_fieldset_header(content_for(:page_title)) %>
+
+      <%= form.govuk_text_field(
+              :student_finances,
+              hint: t('.hint'),
+              label: nil,
+              # value: number_to_currency_or_original_string(@form.irregular_income.amount),
+              value: number_to_currency_or_original_string(@form),
+              input_prefix: t('currency.gbp'),
+              class: 'govuk-!-width-one-third'
+          ) %>
+
+    <% end %>
+
+    <%= next_action_buttons(
+            form: form,
+            continue_button_text: t('generic.continue')
+        ) %>
+  <% end %>
+<% end %>
+

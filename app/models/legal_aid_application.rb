@@ -269,6 +269,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     irregular_incomes.student_finance.any?
   end
 
+  def new_receives_student_finance?
+    in_receipt_of_student_funding
+  end
+
   def value_of_student_finance
     receives_student_finance? ? irregular_incomes.student_finance.first.amount : nil
   end

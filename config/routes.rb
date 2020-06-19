@@ -91,6 +91,8 @@ Rails.application.routes.draw do
       patch :continue, on: :collection
     end
     resource :identify_types_of_income, only: %i[show update]
+    resource :student_finance, only: %i[show update]
+    resource :student_finance_amount, only: %i[show update]
     resource :identify_types_of_outgoing, only: %i[show update]
     resources :income_summary, only: :index
     resources :outgoings_summary, only: :index
