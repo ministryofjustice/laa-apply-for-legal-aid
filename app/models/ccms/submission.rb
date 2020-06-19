@@ -12,7 +12,9 @@ module CCMS
       ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
     end
 
-    POLL_LIMIT = Rails.env.development? ? 99 : 10
+    POLL_LIMIT = Rails.env.development? ? 99 : 20
+
+    BASE_DELAY = 5.seconds.freeze
 
     def process!(options = {}) # rubocop:disable Metrics/MethodLength
       case aasm_state
@@ -37,6 +39,23 @@ module CCMS
 
     def process_async!
       SubmissionProcessWorker.perform_async(id, aasm_state)
+    end
+
+    def delay
+      BASE_DELAY * (current_poll_count + 1)
+    end
+
+    private
+
+    def current_poll_count
+      case aasm_state
+      when 'applicant_submitted'
+        applicant_poll_count
+      when 'case_submitted'
+        case_poll_count
+      else
+        0
+      end
     end
   end
 end
