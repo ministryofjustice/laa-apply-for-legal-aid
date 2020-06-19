@@ -8,29 +8,11 @@ module Citizens
       @form = LegalAidApplications::StudentFinanceForm.new(form_params)
 
       if @form.save
-        case params[:student_finance]
-        when 'yes'
-          render html: '<div>html YES here</div>'.html_safe
-        when 'no'
-        # legal_aid_application.student_finance? go_forward
-          render html: '<div>html NO here</div>'.html_safe
-        end
+        go_forward
       else
         render :show
       end
     end
-
-    # def update
-    #   case params[:student_finance]
-    #   when 'yes'
-    #     go_forward
-    #     # redirect_to providers_legal_aid_applications_path
-    #   when 'no'
-    #     redirect_to providers_select_office_path
-    #   else
-    #     render :show
-    #   end
-    # end
 
     private
 
@@ -42,9 +24,9 @@ module Citizens
       end
     end
 
-    def irregular_income
-      @irregular_income = legal_aid_application.irregular_incomes
-    end
+    # def irregular_income
+    #   @irregular_income = legal_aid_application.irregular_incomes
+    # end
   end
 end
 

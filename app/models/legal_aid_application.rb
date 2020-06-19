@@ -270,7 +270,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def new_receives_student_finance?
-    in_receipt_of_student_funding
+    student_finance?
   end
 
   def value_of_student_finance
