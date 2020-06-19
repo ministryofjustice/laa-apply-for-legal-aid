@@ -11,6 +11,6 @@ class IrregularIncome < ApplicationRecord
       amount: amount.to_f
     }
   end
-  
+
   scope :student_finance, -> { where(income_type: 'student_loan') }
 end
