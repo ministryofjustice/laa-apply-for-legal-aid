@@ -44,5 +44,10 @@ FactoryBot.define do
       sent_at { scheduled_at + 15.seconds }
       arguments { [legal_aid_application.id, '', 'bob@wailing.jm'] }
     end
+
+    trait :always_eligible_for_delivery do
+      mailer_klass { 'ResendLinkRequestMailer' }
+      mailer_method { 'notify' }
+    end
   end
 end

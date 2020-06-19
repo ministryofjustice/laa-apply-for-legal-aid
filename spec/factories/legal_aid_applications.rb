@@ -270,6 +270,11 @@ FactoryBot.define do
       provider_step { :applicants }
     end
 
+    trait :at_use_ccms do
+      state { :use_ccms }
+      provider_step { :use_ccms }
+    end
+
     trait :at_checking_client_details_answers do
       with_proceeding_types
       state { :checking_client_details_answers }
@@ -372,7 +377,7 @@ FactoryBot.define do
         bank_provider = create :bank_provider, applicant: application.applicant
         bank_account = create :bank_account, bank_provider: bank_provider
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: 'credit', meta_data: 'benefits'
+          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: 'credit'
         end
       end
     end
@@ -398,6 +403,13 @@ FactoryBot.define do
       with_cfe_v2_result
       after :create do |application|
         create :attachment, :means_report, legal_aid_application: application
+      end
+    end
+
+    trait :with_bank_transaction_report do
+      with_cfe_v2_result
+      after :create do |application|
+        create :attachment, :bank_transaction_report, legal_aid_application: application
       end
     end
 

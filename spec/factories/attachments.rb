@@ -15,6 +15,11 @@ FactoryBot.define do
       attachment_name { 'means_report.pdf' }
     end
 
+    trait :bank_transaction_report do
+      attachment_type { 'bank_transaction_report' }
+      attachment_name { 'bank_transaction_report.csv' }
+    end
+
     after(:create) do |attachment|
       attachment.document.attach(
         io: File.open("#{Rails.root}/spec/fixtures/files/documents/hello_world.pdf"),

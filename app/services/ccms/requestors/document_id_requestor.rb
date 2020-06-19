@@ -15,9 +15,10 @@ module CCMS
 
       attr_reader :case_ccms_reference
 
-      def initialize(case_ccms_reference, provider_username)
+      def initialize(case_ccms_reference, provider_username, document_type)
         @case_ccms_reference = case_ccms_reference
         @provider_username = provider_username
+        @document_type = document_type
       end
 
       def call
@@ -35,12 +36,16 @@ module CCMS
           xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
           xml.__send__('ns2:NotificationID', -1)
           xml.__send__('ns2:CaseReferenceNumber', case_ccms_reference)
-          xml.__send__('ns2:Document') { document(xml) }
+          xml.__send__('ns2:Document') { document_type(xml) }
         end
       end
 
-      def document(xml)
-        xml.__send__('ns4:DocumentType', 'ADMIN1')
+      def document_type(xml)
+        if @document_type.eql?('bank_transaction_report')
+          xml.__send__('ns4:DocumentType', 'BSTMT')
+        else
+          xml.__send__('ns4:DocumentType', 'ADMIN1')
+        end
         xml.__send__('ns4:Channel', 'E')
       end
     end

@@ -15,11 +15,12 @@ module CCMS
 
       attr_reader :case_ccms_reference, :ccms_document_id, :document_encoded_base64
 
-      def initialize(case_ccms_reference, ccms_document_id, document_encoded_base64, provider_username)
+      def initialize(case_ccms_reference, ccms_document_id, document_encoded_base64, provider_username, document_type = nil)
         @case_ccms_reference = case_ccms_reference
         @ccms_document_id = ccms_document_id
         @document_encoded_base64 = document_encoded_base64
         @provider_username = provider_username
+        @document_type = document_type
       end
 
       def call
@@ -43,10 +44,19 @@ module CCMS
 
       def document(xml)
         xml.__send__('ns4:CCMSDocumentID', ccms_document_id)
-        xml.__send__('ns4:DocumentType', 'ADMIN1')
-        xml.__send__('ns4:FileExtension', 'pdf')
+        document_type(xml)
         xml.__send__('ns4:Channel', 'E')
         xml.__send__('ns4:BinData', document_encoded_base64)
+      end
+
+      def document_type(xml)
+        if @document_type.eql?('bank_transaction_report')
+          xml.__send__('ns4:DocumentType', 'BSTMT')
+          xml.__send__('ns4:FileExtension', 'csv')
+        else
+          xml.__send__('ns4:DocumentType', 'ADMIN1')
+          xml.__send__('ns4:FileExtension', 'pdf')
+        end
       end
     end
   end

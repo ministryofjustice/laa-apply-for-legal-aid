@@ -32,6 +32,11 @@ RSpec.describe 'check benefits requests', type: :request do
       expect { subject }.to change { BenefitCheckResult.count }.by(1)
     end
 
+    it 'has not transitioned the state' do
+      subject
+      expect(application.reload.state).to eq 'initiated'
+    end
+
     context 'when the check_benefit_result already exists' do
       let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
@@ -71,6 +76,11 @@ RSpec.describe 'check benefits requests', type: :request do
           subject
           expect(response.body).to include(I18n.t('providers.check_benefits.use_ccms.title', name: applicant.full_name))
         end
+
+        it 'sets the application to use_ccms state' do
+          subject
+          expect(application.reload.state).to eq 'use_ccms'
+        end
       end
 
       context 'when environment is allowed to go through non-passported route' do
@@ -82,6 +92,11 @@ RSpec.describe 'check benefits requests', type: :request do
           it 'shows text to use CCMS' do
             subject
             expect(response.body).to include(I18n.t('providers.check_benefits.use_ccms.title'))
+          end
+
+          it 'transitions the application to use_ccms' do
+            subject
+            expect(application.reload.state).to eq 'use_ccms'
           end
         end
 
