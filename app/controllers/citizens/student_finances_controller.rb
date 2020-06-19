@@ -29,6 +29,3 @@ module Citizens
     # end
   end
 end
-
-
-
