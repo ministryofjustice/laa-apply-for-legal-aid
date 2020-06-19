@@ -56,11 +56,34 @@ RSpec.describe BenefitCheckService do
       end
     end
 
-    context 'when the API raises an error', vcr: { cassette_name: 'benefit_check_service/service_error' } do
+    context 'calling API raises a Savon::SOAPFault error', vcr: { cassette_name: 'benefit_check_service/service_error' } do
       let(:last_name) { 'SERVICEEXCEPTION' }
 
       it 'captures error' do
         expect(Raven).to receive(:capture_exception).with(message_contains('Service unavailable'))
+        subject.call
+      end
+
+      it 'returns false' do
+        expect(subject.call).to eq false
+      end
+    end
+
+    context 'calling API raises an unhandled error or StandardError' do
+      before do
+        allow_any_instance_of(Savon::Client)
+          .to receive(:call)
+          .with(:check, expected_params)
+          .and_raise(StandardError.new('fake error'))
+      end
+
+      it 'captures error' do
+        expect(Raven).to receive(:capture_exception).with(message_contains('fake error'))
+        subject.call
+      end
+
+      it 'captures StandardError' do
+        expect(Raven).to receive(:capture_exception).with(instance_of(StandardError))
         subject.call
       end
 
