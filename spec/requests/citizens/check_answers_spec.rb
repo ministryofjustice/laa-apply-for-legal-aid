@@ -10,6 +10,7 @@ RSpec.describe 'check your answers requests', type: :request do
     create :legal_aid_application,
            :provider_submitted,
            :with_everything,
+           :with_irregular_income,
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            has_restrictions: has_restrictions,
@@ -29,7 +30,10 @@ RSpec.describe 'check your answers requests', type: :request do
 
   describe 'GET /citizens/check_answers' do
     subject { get '/citizens/check_answers' }
-    before { subject }
+    before do
+      Setting.setting.update!(use_new_student_loan: true)
+      subject
+    end
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -39,6 +43,8 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response.body).to include('Your bank accounts')
       expect(response.body).to include('Which types of income do you receive?')
       expect(response.body).to include('What regular payments do you make?')
+      expect(response.body).to include('Do you get student finance?')
+      expect(response.body).to include('How much student finance will you get this academic year?')
     end
 
     it 'displays the correct URLs for changing values' do
@@ -84,6 +90,21 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'should change the state back to "provider_submitted"' do
       expect(legal_aid_application.reload.provider_submitted?).to be_truthy
+    end
+  end
+
+  describe 'GET /citizens/check_answers' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything }
+    subject { get '/citizens/check_answers' }
+
+    before do
+      Setting.setting.update!(use_new_student_loan: false)
+      subject
+    end
+
+    it 'should not show the student value question' do
+      expect(response.body).not_to include('Do you get student finance?')
+      expect(response.body).not_to include('How much student finance will you get this academic year?')
     end
   end
 end

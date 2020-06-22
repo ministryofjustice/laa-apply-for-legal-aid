@@ -265,6 +265,14 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     reset_delegated_functions
   end
 
+  def receives_student_finance?
+    irregular_incomes.student_finance.any?
+  end
+
+  def value_of_student_finance
+    receives_student_finance? ? irregular_incomes.student_finance.first.amount : nil
+  end
+
   def default_cost_limitation
     default_substantive_cost_limitation
   end

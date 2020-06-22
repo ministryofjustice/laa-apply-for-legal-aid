@@ -47,6 +47,12 @@ FactoryBot.define do
       state { 'provider_assessing_means' }
     end
 
+    trait :with_irregular_income do
+      after(:create) do |application|
+        create(:irregular_income, legal_aid_application: application)
+      end
+    end
+
     trait :checking_merits_answers do
       state { 'checking_merits_answers' }
     end

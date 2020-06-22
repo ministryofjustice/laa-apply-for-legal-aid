@@ -51,6 +51,8 @@
           ),
           read_only: false) %>
 
+  <%= render 'student_finance' if Setting.use_new_student_loan? %>
+
   <%= next_action_buttons_with_form(
           url: continue_citizens_check_answers_path,
           method: :patch
