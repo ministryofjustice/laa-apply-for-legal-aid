@@ -10,6 +10,9 @@ AllCops:
   - 'node_modules/**/*'
   - 'ccms_integration/*'
 
+Layout/LineLength:
+  Max: 180
+
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
@@ -103,4 +106,6 @@ Style/RedundantRegexpEscape:
 Style/SlicingWithRange:
   Enabled: true
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
