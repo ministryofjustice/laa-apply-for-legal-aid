@@ -172,6 +172,9 @@ jobs:
     - *install_js_packages
     - *save_js_packages_cache
     - run:
+        name: Run JavaScript tests
+        command: bin/rails javascript_tests
+    - run:
         name: Run ruby tests
         command: bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
     - store_test_results:
