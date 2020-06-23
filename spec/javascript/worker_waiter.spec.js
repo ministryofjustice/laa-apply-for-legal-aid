@@ -1,12 +1,11 @@
 import axios from 'axios'
 jest.mock('axios')
 
-const location_reload = window.location.reload
 beforeAll(() => {
-  Object.defineProperty(window.location, 'reload', { configurable: true })
-  window.location.reload = jest.fn()
-})
-afterAll(() => { window.location.reload = location_reload })
+  Object.defineProperty(window, 'location', {
+    value: { reload: jest.fn() }
+  })
+});
 
 beforeEach(() => jest.resetAllMocks() )
 
