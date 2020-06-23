@@ -176,6 +176,8 @@ jobs:
         command: bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
     - store_test_results:
         path: /tmp/test-results/rspec
+    - store_artifacts:
+        path: coverage
 
   integration_tests:
     executor: test-executor
