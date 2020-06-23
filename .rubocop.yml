@@ -109,3 +109,6 @@ Style/SlicingWithRange:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Metrics/CyclomaticComplexity:
+  IgnoredMethods:
+    - 'cli_arg_version' # from bin/bundle - auto generated method
