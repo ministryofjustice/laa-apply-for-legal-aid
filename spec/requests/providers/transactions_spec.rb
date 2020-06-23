@@ -9,7 +9,6 @@ RSpec.describe Providers::TransactionsController, type: :request do
   let(:transaction_type) { create :transaction_type }
   let(:bank_provider) { create :bank_provider, applicant: applicant }
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-  let(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
   let(:cfe_state_benefits_url) { "#{Rails.configuration.x.check_financial_eligibility_host}/state_benefit_type" }
   let(:cfe_state_benefit_response) { CFE::MockStateBenefitTypeResult.full_list.to_json }
 
@@ -85,6 +84,24 @@ RSpec.describe Providers::TransactionsController, type: :request do
     subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, transaction_type: transaction_type.name) }
 
     it_behaves_like 'GET #providers/transactions'
+
+    context 'when the call to Check Financial Eligibility Service for excluded benefits' do
+      let(:transaction_type) { create :transaction_type, :excluded_benefits }
+
+      context 'is successful' do
+        it_behaves_like 'GET #providers/transactions'
+      end
+
+      context 'is un-successful' do
+        before { allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
+
+        it 'redirects to the problem path as it cannot show the list of excluded benefits' do
+          subject
+
+          expect(response).to redirect_to(problem_index_path)
+        end
+      end
+    end
   end
 
   describe 'GET #citizens/outgoing_transactions' do
@@ -104,20 +121,6 @@ RSpec.describe Providers::TransactionsController, type: :request do
 
     it 'does not change other applicants transactions' do
       expect { subject }.not_to change { bank_transaction_other_applicant.reload.transaction_type }
-    end
-  end
-
-  context 'call to Check Financial Eligibility Service is successful' do
-    before { allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_raise(StandardError) }
-
-    describe 'GET #providers/incoming_transactions' do
-      subject { get providers_legal_aid_application_incoming_transactions_path(legal_aid_application, excluded_benefit_transaction_type.name) }
-
-      it 'redirects to the problem path as it cannot show the list of excluded benefits' do
-        subject
-
-        expect(response).to redirect_to(problem_index_path)
-      end
     end
   end
 
