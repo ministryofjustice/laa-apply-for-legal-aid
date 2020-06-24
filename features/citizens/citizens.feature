@@ -43,6 +43,7 @@ Feature: Citizen journey
     Then I click link 'Continue'
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "Yes"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do you have online access'
     Then I choose "No"
@@ -61,6 +62,12 @@ Feature: Citizen journey
     Then I should be on a page showing "Which types of income do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Do you get student finance?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "How much student finance will you get this academic year?"
+    Then I enter amount '10000'
+    Then I click 'Continue'
     Then I should be on a page showing "What regular payments do you make?"
     Then I select "Rent or mortgage"
     Then I click 'Save and continue'

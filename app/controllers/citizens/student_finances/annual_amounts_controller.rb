@@ -4,7 +4,7 @@ module Citizens
       prefix_step_with :student_finances
 
       def show
-        @form = ::StudentFinances::AnnualAmountForm.new(model: irregular_income )
+        @form = ::StudentFinances::AnnualAmountForm.new(model: irregular_income)
       end
 
       def update

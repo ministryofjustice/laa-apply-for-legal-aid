@@ -5,7 +5,6 @@ module Citizens
     end
 
     def update
-      ap params.to_unsafe_hash
       @form = LegalAidApplications::StudentFinanceForm.new(form_params)
 
       if @form.save

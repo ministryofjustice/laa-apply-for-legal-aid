@@ -6,7 +6,11 @@
             input: :amount
         ) do %>
 
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
+      <%= govuk_fieldset_header do %>
+        <h1 class="govuk-fieldset__heading">
+          <%= label_tag(:amount, page_title) %>
+        </h1>
+      <% end %>
 
       <%= form.govuk_text_field(
               :amount,
@@ -24,4 +28,3 @@
         ) %>
   <% end %>
 <% end %>
-

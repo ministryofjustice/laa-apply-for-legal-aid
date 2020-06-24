@@ -423,7 +423,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_123658) do
     t.boolean "no_debit_transaction_types_selected"
     t.boolean "provider_received_citizen_consent"
     t.boolean "citizen_uses_online_banking"
-    t.boolean "student_finances", default: false
+    t.boolean "student_finance"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
