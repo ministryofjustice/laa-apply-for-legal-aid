@@ -5,6 +5,7 @@ module Citizens
     end
 
     def update
+      ap params.to_unsafe_hash
       @form = LegalAidApplications::StudentFinanceForm.new(form_params)
 
       if @form.save
@@ -23,9 +24,5 @@ module Citizens
         params.require(:legal_aid_application).permit(:student_finance)
       end
     end
-
-    # def irregular_income
-    #   @irregular_income = legal_aid_application.irregular_incomes
-    # end
   end
 end
