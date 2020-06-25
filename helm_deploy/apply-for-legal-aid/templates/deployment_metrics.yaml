@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "apply-for-legal-aid.fullname" . }}-metrics
+  labels:
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: {{ template "apply-for-legal-aid.fullname" . }}-metrics
+  template:
+    metadata:
+      labels:
+        app: {{ template "apply-for-legal-aid.name" . }}
+        release: {{ .Release.Name }}
+        service: {{ template "apply-for-legal-aid.fullname" . }}-metrics
+    spec:
+      containers:
+        - name: metrics
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'bundle exec prometheus_exporter -a app/lib/prometheus_collectors/collectors.rb']
+          ports:
+          - containerPort: 9394
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          resources:
+            limits:
+              cpu: 50m
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi

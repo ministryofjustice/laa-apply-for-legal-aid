@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "apply-for-legal-aid.fullname" . }}-metrics
+  labels:
+    service: {{ template "apply-for-legal-aid.fullname" . }}-metrics
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  ports:
+  - port: 9394
+    protocol: TCP
+    name: metrics
+  selector:
+    service: {{ template "apply-for-legal-aid.fullname" . }}-metrics

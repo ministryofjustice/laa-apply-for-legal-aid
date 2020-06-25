@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "apply-for-legal-aid.fullname" . }}-worker
+  labels:
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "apply-for-legal-aid.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "apply-for-legal-aid.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: worker
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          imagePullPolicy: IfNotPresent
+          command: ['bundle', 'exec', 'sidekiq']
+{{ include "apply-for-legal-aid.envs" . | nindent 10 }}
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 512Mi
+          ports:
+            - containerPort: 7433
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7433
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7433
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          lifecycle:
+            preStop:
+              exec:
+                command: ['bundle', 'exec', 'sidekiqctl', 'quiet']
+      terminationGracePeriodSeconds: 60
