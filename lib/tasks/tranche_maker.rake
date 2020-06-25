@@ -1,6 +1,6 @@
 # rake file to assist in adding beta users to the two config files
 #
-# Simply create a list of new users one per line in a text file, and put the filename in NEW_USERS_FILE
+# Simply create a list of new users one per line in a text file, and put the filename in add_tranche_users.txt
 #
 # After you run the rake taks, you will have two new config files with UPDATED in their name, so that you
 # can compare before replacing the original with the updated ones.
