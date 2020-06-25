@@ -31,8 +31,8 @@ FactoryBot.define do
       state { 'use_ccms' }
     end
 
-    trait :client_details_answers_checked do
-      state { 'client_details_answers_checked' }
+    trait :applicant_details_checked do
+      state { 'applicant_details_checked' }
     end
 
     trait :checking_passported_answers do
@@ -69,8 +69,8 @@ FactoryBot.define do
       state { 'analysing_bank_transactions' }
     end
 
-    trait :checking_client_details_answers do
-      state { :checking_client_details_answers }
+    trait :checking_applicant_details do
+      state { :checking_applicant_details }
     end
 
     trait :with_proceeding_types do
@@ -276,14 +276,19 @@ FactoryBot.define do
       provider_step { :applicants }
     end
 
+    trait :at_entering_applicant_details do
+      state { :entering_applicant_details }
+      provider_step { :applicants }
+    end
+
     trait :at_use_ccms do
       state { :use_ccms }
       provider_step { :use_ccms }
     end
 
-    trait :at_checking_client_details_answers do
+    trait :at_checking_applicant_details do
       with_proceeding_types
-      state { :checking_client_details_answers }
+      state { :checking_applicant_details }
       provider_step { :check_provider_answers }
     end
 
@@ -293,9 +298,9 @@ FactoryBot.define do
       provider_step { :check_passported_answers }
     end
 
-    trait :at_client_details_answers_checked do
+    trait :at_applicant_details_checked do
       with_proceeding_types
-      state { :client_details_answers_checked }
+      state { :applicant_details_checked }
       provider_step { :check_benefits }
     end
 

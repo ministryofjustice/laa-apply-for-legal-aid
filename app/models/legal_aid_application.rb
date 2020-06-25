@@ -223,7 +223,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def checking_answers?
-    checking_client_details_answers? ||
+    checking_applicant_details? ||
       checking_citizen_answers? ||
       checking_passported_answers? ||
       checking_merits_answers? ||

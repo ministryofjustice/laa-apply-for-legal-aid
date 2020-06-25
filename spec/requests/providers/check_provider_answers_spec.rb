@@ -8,6 +8,7 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:application) do
     create(
       :legal_aid_application,
+      :at_entering_applicant_details,
       :with_proceeding_types,
       :with_substantive_scope_limitation,
       :with_delegated_functions_scope_limitation,
@@ -156,7 +157,7 @@ RSpec.describe 'check your answers requests', type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as application.provider
-        application.check_your_answers!
+        application.check_applicant_details!
         get providers_legal_aid_application_proceedings_types_path(application)
         get providers_legal_aid_application_check_provider_answers_path(application)
         subject
@@ -166,9 +167,9 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(application, back: true))
       end
 
-      it 'should change the stage back to "initialized' do
+      it 'should change the stage back to "entering_applicant_details' do
         subject
-        expect(application.reload.initiated?).to be_truthy
+        expect(application.reload.entering_applicant_details?).to be_truthy
       end
     end
   end
@@ -185,7 +186,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
       before do
         login_as application.provider
-        application.check_your_answers!
+        application.check_applicant_details!
       end
 
       it 'redirects to next step' do
@@ -193,9 +194,9 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
       end
 
-      it 'changes the state to "client_details_answers_checked"' do
+      it 'changes the state to "applicant_details_checked"' do
         subject
-        expect(application.reload.client_details_answers_checked?).to be_truthy
+        expect(application.reload.applicant_details_checked?).to be_truthy
       end
 
       it 'syncs the application' do
@@ -215,7 +216,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
       before do
         login_as application.provider
-        application.check_your_answers!
+        application.check_applicant_details!
         subject
         application.reload
       end
@@ -224,8 +225,8 @@ RSpec.describe 'check your answers requests', type: :request do
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'changes the state to "client_details_answers_checked"' do
-        expect(application).not_to be_client_details_answers_checked
+      it 'changes the state to "applicant_details_checked"' do
+        expect(application).not_to be_applicant_details_checked
       end
 
       it 'sets application as draft' do

@@ -44,7 +44,7 @@ RSpec.describe ScheduledMailing do
     context 'mailer_class does override #eligble for delivery' do
       let(:scheduled_mail) { create :scheduled_mailing, :due, legal_aid_application: legal_aid_application }
       context 'the mail is eligible' do
-        let(:legal_aid_application) { create :legal_aid_application, :at_checking_client_details_answers }
+        let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details }
 
         it 'delivers the mail' do
           Timecop.freeze(now) do

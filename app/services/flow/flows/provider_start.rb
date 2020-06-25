@@ -12,7 +12,7 @@ module Flow
         applicant_details: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
           forward: ->(application) do
-            if application.client_details_answers_checked?
+            if application.applicant_details_checked?
               :check_provider_answers
             else
               :address_lookups
