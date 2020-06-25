@@ -149,7 +149,7 @@ RSpec.describe 'providers savings and investments', type: :request do
             end
 
             context "provider checking citizen's answers" do
-              let(:state) { :provider_checking_citizens_means_answers }
+              let(:state) { :checking_non_passported_means }
 
               it 'redirects to the restrictions page' do
                 expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))

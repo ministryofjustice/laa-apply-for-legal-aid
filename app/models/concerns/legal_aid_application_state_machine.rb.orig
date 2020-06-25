@@ -37,6 +37,12 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength La
       state :submitting_assessment
       state :use_ccms
 
+<<<<<<< HEAD
+      event :check_your_answers do
+        transitions from: :initiated, to: :checking_client_details_answers
+        transitions from: :client_details_answers_checked, to: :checking_client_details_answers
+        transitions from: :use_ccms, to: :checking_client_details_answers
+=======
       event :enter_applicant_details do
         transitions from: %i[
                               initiated
@@ -63,6 +69,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength La
                             ],
                     to: :applicant_details_checked,
                     after: -> { CleanupCapitalAttributes.call(self) }
+>>>>>>> AP-1462 Rename states
       end
 
       event :provider_enter_means do

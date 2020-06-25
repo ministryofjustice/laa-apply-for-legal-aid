@@ -124,6 +124,9 @@ Style/ExponentialNotation:
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 
+Style/RedundantFetchBlock:
+  Enabled: true
+
 Style/RedundantRegexpEscape:
   Enabled: true
 

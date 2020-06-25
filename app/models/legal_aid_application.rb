@@ -213,7 +213,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   # Refactored into its own method because there may be multiple conditions in the future
   # which make it read only.
   def read_only?
-    checking_citizen_answers? || provider_submitted?
+    checking_citizen_answers? || applicant_entering_means? || awaiting_applicant?
   end
 
   def submitted_to_ccms?
@@ -223,11 +223,11 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def checking_answers?
-    checking_client_details_answers? ||
-      checking_citizen_answers? ||
+    checking_applicant_details? ||
       checking_passported_answers? ||
       checking_merits_answers? ||
-      provider_checking_citizens_means_answers?
+      checking_citizen_answers? ||
+      checking_non_passported_means?
   end
 
   def opponents

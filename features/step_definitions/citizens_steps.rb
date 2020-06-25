@@ -2,11 +2,10 @@ Given('An application has been created') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :provider_submitted,
     :with_no_savings,
     :with_no_other_assets,
     provider: create(:provider),
-    state: :provider_submitted,
+    state: :applicant_entering_means,
     transaction_period_finish_on: '2019-07-01'
   )
 
@@ -42,7 +41,7 @@ Given('I have completed an application') do
   @legal_aid_application = create(
     :application,
     :with_everything,
-    state: :provider_submitted
+    state: :applicant_entering_means
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant

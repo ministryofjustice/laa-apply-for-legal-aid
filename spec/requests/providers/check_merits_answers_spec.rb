@@ -8,7 +8,7 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :provider_assessing_means
+             :provider_entering_merits
     end
 
     subject { get "/providers/applications/#{application.id}/check_merits_answers" }
@@ -193,8 +193,8 @@ RSpec.describe 'check merits answers requests', type: :request do
         subject
       end
 
-      it 'transitions to provider_assessing_means state' do
-        expect(application.reload.provider_assessing_means?).to be true
+      it 'transitions to provider_entering_merits state' do
+        expect(application.reload.provider_entering_merits?).to be true
       end
 
       describe 'redirection' do

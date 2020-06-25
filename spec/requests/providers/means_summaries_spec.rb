@@ -100,8 +100,8 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
           expect(response).to redirect_to flow_forward_path
         end
 
-        it 'transitions to provider_checked_citizens_means_answers state' do
-          expect(legal_aid_application.reload.provider_checked_citizens_means_answers?).to be true
+        it 'transitions to provider_entering_merits state' do
+          expect(legal_aid_application.reload.provider_entering_merits?).to be true
         end
 
         context 'Form submitted using Save as draft button' do

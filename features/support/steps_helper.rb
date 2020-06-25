@@ -50,3 +50,16 @@ end
 Then('I choose option {string}') do |field|
   choose(field.parameterize(separator: '_'), allow_label_click: true)
 end
+
+# This can be used to display the state of the application
+# Usage:
+# Then I display the state of the application from 123
+#
+Then('I display the state of the application from {int}') do |label|
+  if @legal_aid_application.nil?
+    raise 'Unable to determine the application to be displayed' if LegalAidApplication.count != 1
+
+    @legal_aid_application = LegalAidApplication.first
+  end
+  puts ">>>>>>>>>>>> #{label} #{@legal_aid_application.reload.state} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+end

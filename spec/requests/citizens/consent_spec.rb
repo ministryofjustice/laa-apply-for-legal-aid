@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::ConsentsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :provider_submitted }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means }
   describe 'GET /citizens/consent' do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
@@ -34,7 +34,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       end
 
       it 'updates application state' do
-        expect(legal_aid_application.reload.provider_submitted?).to eq(true)
+        expect(legal_aid_application.reload.applicant_entering_means?).to eq(true)
       end
     end
 

@@ -95,7 +95,7 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context "provider checking citizen's answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, state: :provider_checking_citizens_means_answers }
+          let(:application) { create :legal_aid_application, :with_applicant, state: :checking_non_passported_means }
 
           it 'redirects to means summary page' do
             subject

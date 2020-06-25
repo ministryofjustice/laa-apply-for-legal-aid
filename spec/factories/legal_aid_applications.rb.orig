@@ -356,6 +356,7 @@ FactoryBot.define do
       provider_step { :client_completed_means }
     end
 
+<<<<<<< HEAD
     trait :at_check_provider_answers do
       with_proceeding_types
       state { :provider_assessing_means }
@@ -368,6 +369,8 @@ FactoryBot.define do
       provider_step { :income_summary }
     end
 
+=======
+>>>>>>> AP-1462 Rename states
     trait :at_checking_merits_answers do
       with_proceeding_types
       with_merits_assessment

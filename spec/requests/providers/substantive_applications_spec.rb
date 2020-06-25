@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) do
-    create :legal_aid_application, state: :client_details_answers_checked, used_delegated_functions_on: 1.day.ago
+    create :legal_aid_application, state: :applicant_details_checked, used_delegated_functions_on: 1.day.ago
   end
   let(:login_provider) { login_as legal_aid_application.provider }
 
@@ -60,7 +60,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         create(
           :legal_aid_application,
           :with_positive_benefit_check_result,
-          state: :client_details_answers_checked
+          state: :applicant_details_checked
         )
       end
 

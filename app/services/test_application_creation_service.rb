@@ -1,11 +1,12 @@
 class TestApplicationCreationService
   APPLICATION_TEST_TRAITS = %i[
     at_initiated
-    at_checking_client_details_answers
+    at_checking_applicant_details
     at_checking_passported_answers
-    at_client_details_answers_checked
-    at_provider_submitted
-    at_provider_assessing_means
+    at_applicant_details_checked
+    awaiting_applicant
+    applicant_entering_means
+    provider_entering_merits
     at_checking_merits_answers
   ].freeze
 
