@@ -16,8 +16,12 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
 
     aasm column: :state do # rubocop:disable Metrics/BlockLength
       state :initiated, initial: true
-      state :checking_client_details_answers
-      state :client_details_answers_checked
+      state :entering_applicant_details # new state between initiated and checking_applicant_detils/checking_client_details_answers
+      state :checking_applicant_details # rename of checking_client_details_answers
+      state :applicant_details_checked # rename of client_details_answers_checked
+
+      # state :checking_client_details_answers # renamed to checking_applicant_details
+      # state :client_details_answers_checked # renamed to applicant_details_checked
       state :delegated_functions_used
       state :provider_submitted
       state :checking_citizen_answers
@@ -32,47 +36,52 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       state :assessment_submitted
       state :use_ccms
 
-      event :check_your_answers do
-        transitions from: :initiated, to: :checking_client_details_answers
-        transitions from: :client_details_answers_checked, to: :checking_client_details_answers
+      event :enter_applicant_details do
+        transitions from: :initiated, to: :entering_applicant_details
       end
 
-      event :client_details_answers_checked do
-        transitions from: :checking_client_details_answers, to: :client_details_answers_checked,
+      event :check_applicant_details do
+        transitions from: :entering_applicant_details, to: :checking_applicant_details
+        transitions from: :applicant_details_checked, to: :checking_applicant_details
+      end
+
+      event :applicant_details_checked do
+        transitions from: :checking_applicant_details, to: :applicant_details_checked,
                     after: -> { CleanupCapitalAttributes.call(self) }
       end
 
       event :provider_used_delegated_functions do
-        transitions from: :client_details_answers_checked, to: :delegated_functions_used
+        transitions from: :applicant_details_checked, to: :delegated_functions_used
         transitions from: :provider_submitted, to: :delegated_functions_used
         transitions from: :delegated_functions_used, to: :delegated_functions_used
       end
 
       event :check_passported_answers do
         transitions from: :delegated_functions_used, to: :checking_passported_answers
-        transitions from: :client_details_answers_checked, to: :checking_passported_answers
+        transitions from: :applicant_details_checked, to: :checking_passported_answers
         transitions from: :provider_assessing_means, to: :checking_passported_answers
       end
 
       event :provider_submit do
         transitions from: :initiated, to: :provider_submitted
-        transitions from: :checking_client_details_answers, to: :provider_submitted
-        transitions from: :client_details_answers_checked, to: :provider_submitted
+        transitions from: :entering_applicant_details, to: :provider_submitted # this will be removed eventually
+        transitions from: :checking_applicant_details, to: :provider_submitted
+        transitions from: :applicant_details_checked, to: :provider_submitted
         transitions from: :delegated_functions_used, to: :provider_submitted
         transitions from: :use_ccms, to: :provider_submitted
       end
 
       event :use_ccms do
         transitions from: :initiated, to: :use_ccms
-        transitions from: :client_details_answers_checked, to: :use_ccms
+        transitions from: :applicant_details_checked, to: :use_ccms
         transitions from: :provider_submitted, to: :use_ccms
         transitions from: :delegated_functions_used, to: :use_ccms
       end
 
       event :reset do
-        transitions from: :checking_client_details_answers, to: :initiated
+        transitions from: :checking_applicant_details, to: :entering_applicant_details
         transitions from: :checking_citizen_answers, to: :provider_submitted
-        transitions from: :checking_passported_answers, to: :client_details_answers_checked
+        transitions from: :checking_passported_answers, to: :applicant_details_checked
         transitions from: :checking_merits_answers, to: :provider_assessing_means
         transitions from: :provider_assessing_means, to: :checking_citizen_answers
       end

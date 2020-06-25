@@ -208,6 +208,7 @@ Given('I complete the journey as far as check your answers') do
   proceeding_type = ProceedingType.all.sample
   @legal_aid_application = create(
     :legal_aid_application,
+    :at_entering_applicant_details,
     applicant: applicant,
     proceeding_types: [proceeding_type],
     used_delegated_functions_on: 1.day.ago
@@ -240,6 +241,7 @@ Given('I complete the passported journey as far as check your answers') do
   )
   @legal_aid_application = create(
     :legal_aid_application,
+    :at_entering_applicant_details,
     :with_substantive_scope_limitation,
     applicant: applicant,
     used_delegated_functions_on: 1.day.ago
@@ -271,7 +273,7 @@ Given('I complete the passported journey as far as capital check your answers') 
     :legal_aid_application,
     :with_everything,
     :with_proceeding_types,
-    :client_details_answers_checked,
+    :applicant_details_checked,
     applicant: applicant
   )
   login_as @legal_aid_application.provider

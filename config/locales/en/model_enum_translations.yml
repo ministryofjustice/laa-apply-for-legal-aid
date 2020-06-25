@@ -16,13 +16,14 @@ en:
         very_easy: Very easy
     legal_aid_application:
       state:
-        client_details_answers_checked: Answers checked
-        checking_client_details_answers: Checking answers
+        applicant_details_checked: Answers checked
+        checking_applicant_details: Checking answers
         checking_citizen_answers: Applicant checking answers
         checking_merits_answers: Provider checking merits test answers
         checked_merits_answers: Provider checked merits test answers
         checking_passported_answers: Provider checking means test answers
         delegated_functions_used: Delegated functions used
+        entering_applicant_details: In progress
         initiated: In progress
         analysing_bank_transactions: Analysing Bank Transactions
         provider_assessing_means: Means test completed

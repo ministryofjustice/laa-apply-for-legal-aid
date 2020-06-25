@@ -94,7 +94,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'benefit_check_result_needs_updating?' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, :at_entering_applicant_details }
     let(:applicant) { legal_aid_application.applicant }
     it 'is true if no benefit check results' do
       expect(legal_aid_application).to be_benefit_check_result_needs_updating
@@ -118,7 +118,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'but later, state changes' do
         before do
-          legal_aid_application.check_your_answers!
+          legal_aid_application.check_applicant_details!
         end
 
         it 'returns false' do
@@ -373,16 +373,16 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'attributes are synced on client_details_answers_checked' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_client_details_answers }
+  describe 'attributes are synced on applicant_details_checked' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_applicant_details }
     it 'passes application to keep in sync service' do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
-      legal_aid_application.client_details_answers_checked!
+      legal_aid_application.applicant_details_checked!
     end
 
     context 'and attributes changed' do
       before do
-        legal_aid_application.client_details_answers_checked!
+        legal_aid_application.applicant_details_checked!
         legal_aid_application.reload
       end
       it 'resets property values' do
