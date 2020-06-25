@@ -70,13 +70,26 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       end
     end
 
+    context 'when transaction types selected' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, no_credit_transaction_types_selected: true }
+      let(:transaction_type_ids) { income_types.map(&:id) }
+
+      before do
+        Setting.setting.update!(use_new_student_loan: true)
+      end
+
+      it 'should redirect to the next step' do
+        expect(subject).to redirect_to(citizens_student_finance_path)
+      end
+    end
+
     context 'when application has transaction types of other kind' do
       let(:other_transaction_type) { create :transaction_type, :debit }
       let(:legal_aid_application) do
         create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type]
       end
 
-      it 'does not remove existing transation of other type' do
+      it 'does not remove existing transaction of other type' do
         expect { subject }.not_to change { legal_aid_application.transaction_types.count }
       end
 

@@ -266,10 +266,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def receives_student_finance?
-    irregular_incomes.student_finance.any?
-  end
-
-  def new_receives_student_finance?
     student_finance?
   end
 
