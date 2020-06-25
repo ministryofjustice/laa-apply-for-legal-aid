@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "apply-for-legal-aid.fullname" . }}-test-connection"
+  labels:
+    {{- include "apply-for-legal-aid.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "apply-for-legal-aid.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
