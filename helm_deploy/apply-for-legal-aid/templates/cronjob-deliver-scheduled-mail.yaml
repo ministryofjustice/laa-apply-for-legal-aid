@@ -9,10 +9,6 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   schedule: '15 9,12,15 * * 1-5'
-  selector:
-    matchLabels:
-      app: {{ template "apply-for-legal-aid.name" . }}
-      release: {{ .Release.Name }}
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 0
