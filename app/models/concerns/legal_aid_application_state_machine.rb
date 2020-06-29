@@ -19,6 +19,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       state :entering_applicant_details # new state between initiated and checking_applicant_detils/checking_client_details_answers
       state :checking_applicant_details # rename of checking_client_details_answers
       state :applicant_details_checked # rename of client_details_answers_checked
+      state :provider_entering_means # rename of most of client_details_answers_checked
 
       # state :checking_client_details_answers # renamed to checking_applicant_details
       # state :client_details_answers_checked # renamed to applicant_details_checked
@@ -37,17 +38,34 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       state :use_ccms
 
       event :enter_applicant_details do
-        transitions from: :initiated, to: :entering_applicant_details
+        transitions from: %i[initiated
+                             provider_entering_means],
+                    to: :entering_applicant_details
+        #
+        #
+        # transitions from: :initiated, to: :entering_applicant_details
+        # transitions from: :provider_entering_means, to: :entering_applicant_details
       end
 
       event :check_applicant_details do
-        transitions from: :entering_applicant_details, to: :checking_applicant_details
-        transitions from: :applicant_details_checked, to: :checking_applicant_details
+        transitions from: %i[entering_applicant_details
+                             applicant_details_checked],
+                    to: :checking_applicant_details
+        # transitions from: :entering_applicant_details, to: :checking_applicant_details
+        # transitions from: :applicant_details_checked, to: :checking_applicant_details
       end
 
       event :applicant_details_checked do
         transitions from: :checking_applicant_details, to: :applicant_details_checked,
                     after: -> { CleanupCapitalAttributes.call(self) }
+      end
+
+      event :provider_enter_means do
+        transitions from: %i[applicant_details_checked
+                             delegated_functions_used],
+                    to: :provider_entering_means
+        # transitions from: :applicant_details_checked, to: :provider_entering_means
+        # transitions from: :delegated_functions_used, to: :provider_entering_means
       end
 
       event :provider_used_delegated_functions do
@@ -57,6 +75,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       end
 
       event :check_passported_answers do
+        transitions from: :provider_entering_means, to: :checking_passported_answers
         transitions from: :delegated_functions_used, to: :checking_passported_answers
         transitions from: :applicant_details_checked, to: :checking_passported_answers
         transitions from: :provider_assessing_means, to: :checking_passported_answers

@@ -27,6 +27,7 @@ en:
         initiated: In progress
         analysing_bank_transactions: Analysing Bank Transactions
         provider_assessing_means: Means test completed
+        provider_entering_means: In progress
         assessment_submitted: Application submitted
         provider_submitted: Submitted by provider
         provider_checking_citizens_means_answers: Means test completed
