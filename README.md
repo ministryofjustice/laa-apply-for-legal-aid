@@ -134,10 +134,10 @@ To be able to modify those secrets, **git-crypt** needs to be set up according t
 
 ```
 # list the availables releases:
-helm list --tiller-namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --debug --all
+helm list --namespace=laa-apply-for-legalaid-uat --debug --all
 
 # delete a specific release
-helm delete <name-of-the-release> --tiller-namespace=laa-apply-for-legalaid-uat --purge
+helm delete <name-of-the-release> --namespace=laa-apply-for-legalaid-uat
 ```
 
 ## Dev: running locally

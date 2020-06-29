@@ -12,7 +12,7 @@ then
 
   echo "Attempting to delete UAT release $UAT_RELEASE"
 
-  UAT_RELEASES=$(helm list --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} --all)
+  UAT_RELEASES=$(helm list --namespace=${KUBE_ENV_UAT_NAMESPACE} --all)
 
   echo "Current UAT releases:"
   echo "$UAT_RELEASES"
@@ -20,7 +20,7 @@ then
   if [[ $UAT_RELEASES == *"$UAT_RELEASE"* ]]
   then
     echo "Deleting UAT release $UAT_RELEASE"
-    helm delete $UAT_RELEASE --tiller-namespace=${KUBE_ENV_UAT_NAMESPACE} --purge
+    helm delete $UAT_RELEASE --namespace=${KUBE_ENV_UAT_NAMESPACE}
   else
     echo "UAT release $UAT_RELEASE was not found"
   fi
