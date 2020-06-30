@@ -231,6 +231,9 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
+    guard-cucumber (3.0.0)
+      cucumber (>= 3.1)
+      nenv (>= 0.1)
     guard-livereload (2.5.2)
       em-websocket (~> 0.5)
       guard (~> 2.8)
@@ -618,6 +621,7 @@ DEPENDENCIES
   faker (>= 1.9.1)
   geckoboard-ruby
   govuk_notify_rails (~> 2.1.2)
+  guard-cucumber
   guard-livereload
   guard-rspec
   guard-rubocop

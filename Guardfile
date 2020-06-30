@@ -18,3 +18,12 @@ guard :rubocop, all_on_start: false do
   watch(%r{.+\.rb$})
   watch(%r{(?:.+/)?\.(rubocop|rubocop_todo)\.yml$}) { |m| File.dirname(m[0]) }
 end
+
+guard 'cucumber', all_on_start: false do
+  watch(%r{^features/.+\.feature$})
+  watch(%r{^features/support/.+$}) { 'features' }
+
+  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+    Dir[File.join("**/#{m[1]}.feature")][0] || 'features'
+  end
+end
