@@ -72,52 +72,41 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
     Then I click 'Save and continue'
-    Then I should be on the 'dependants' page showing "Enter the first dependant's details for your client"
+    Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 17 year old
-    And I click "Save and continue"
-    Then I should be on a page showing "What is your clients' relationship to"
-    When I choose "They're a child relative"
-    And I click "Save and continue"
-    Then I should be on a page showing "receive any income?"
-    When I choose "Yes"
-    And I fill "monthly income" with "1234"
+    And I choose "They're a child relative"
+    And I choose option "dependant_in_full_time_education_false"
+    And I choose option "dependant_has_income_false"
+    And I choose option "dependant_has_assets_more_than_threshold_false"
     And I click 'Save and continue'
-    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then I should be on the 'dependants' page showing "Enter the second dependant's details for your client"
+    Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Pugsley Adams"
     And I enter a date of birth for a 21 year old
+    And I choose "They're a child relative"
     And I click "Save and continue"
-    Then I should be on a page showing "What is your clients' relationship to"
-    When I choose "They're a child relative"
-    And I click "Save and continue"
-    Then I should be on the 'full_time_education' page showing "in full-time education or training?"
+    And I choose option "dependant_in_full_time_education_true"
+    And I choose option "dependant_has_income_true"
+    And I fill "monthly income" with "1234"
+    And I choose option "dependant_has_assets_more_than_threshold_false"
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then I should be on a page showing "receive any income?"
-    When I choose "No"
-    And I click 'Save and continue'
-    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
-    When I choose "Yes"
-    And I click 'Save and continue'
-    Then I should be on the 'dependants' page showing "Enter the third dependant's details for your client"
+    Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Granny Addams"
     And I enter a date of birth for a 80 year old
-    And I click "Save and continue"
-    Then I should be on the 'relationship' page showing "What is your clients' relationship to"
     When I choose "They're an adult relative"
-    And I click "Save and continue"
-    Then I should be on the 'monthly_income' page showing "receive any income?"
-    When I choose "Yes"
+    And I choose option "dependant_in_full_time_education_false"
+    And I choose option "dependant_has_income_true"
     And I fill "monthly income" with "4321"
-    And I click 'Save and continue'
-    Then I should be on the 'assets_value' page showing "have assets worth more than £8,000?"
-    When I choose "Yes"
+    And I choose option "dependant_has_assets_more_than_threshold_true"
     And I fill "assets value" with "8765"
     And I click 'Save and continue'
-    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
@@ -149,11 +138,15 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
     Then I click 'Save and continue'
-    Then I should be on the 'dependants' page showing "Enter the first dependant's details for your client"
+    Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 14 year old
-    And I click "Save and continue"
-    Then I should be on the 'has_other_dependant' page showing "Does your client have any other dependants?"
+    And I choose "They're a child relative"
+    And I choose option "dependant_in_full_time_education_false"
+    And I choose option "dependant_has_income_false"
+    And I choose option "dependant_has_assets_more_than_threshold_false"
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
@@ -175,6 +168,10 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'Wednesday Adams'
+    When I click Check Your Answers Change link for dependant '1'
+    Then I should be on a page showing 'Amend dependant details'
+    When I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with no dependants but other values
