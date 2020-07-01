@@ -52,7 +52,7 @@ gem 'jwt'
 
 # background processing
 gem 'redis-namespace'
-gem 'sidekiq', '~> 6.0.0'
+gem 'sidekiq', '~> 6.1.0'
 gem 'sidekiq-status', '>= 1.1.4'
 gem 'sidekiq_alive', '>= 2.0.1'
 
