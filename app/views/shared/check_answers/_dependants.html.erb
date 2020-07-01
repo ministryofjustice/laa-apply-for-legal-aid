@@ -1,66 +1,70 @@
 <% if @legal_aid_application.dependants %>
-  <%- @legal_aid_application.dependants.each_with_index do |dependant, index| %>
-    <div class="govuk-grid-row" id="app-check-your-answers__dependants_<%= index + 1 %>_delete">
-      <div class="govuk-grid-column-one-third">
+  <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
+    <div class="govuk-grid-row" id="app-check-your-answers__dependants_<%= index + 1 %>">
+      <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m">Dependant <%= index + 1 %></h2>
       </div>
+      <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+        <p>
+          <%= link_to(providers_legal_aid_application_dependant_path(@legal_aid_application, dependant), class: 'govuk-link') do %>
+            <%= t('generic.change') %><span class="govuk-visually-hidden">Change dependant <%= dependant.name %></span>
+          <% end %>
+        </p>
+      </div>
     </div>
-
     <dl class="govuk-summary-list">
-
       <%= check_answer_link(
               name: :dependant,
-              url: nil,
-              question: t('providers.means_summaries.show.dependants.name'),
+              question:  t('providers.means_summaries.show.dependants.name'),
               answer: dependant.name,
               read_only: true,
-              align_right: false
+              align_right: true
           ) %>
       <%= check_answer_link(
               name: :dependant,
-              url: nil,
               question: t('providers.means_summaries.show.dependants.date_of_birth'),
               answer: dependant.date_of_birth,
               read_only: true,
-              align_right: false
+              align_right: true
           ) %>
       <%= check_answer_link(
               name: :dependant,
-              url: check_answer_url_for(:providers, :dependants_relationships, @legal_aid_application, dependant_id: dependant),
+              url: nil,
               question: t('providers.means_summaries.show.dependants.relationship'),
               answer: dependant.relationship.nil? ? '' : t("shared.forms.dependants.relationship.option.#{dependant.relationship}"),
-              read_only: false,
-              align_right: false
+              read_only: true,
+              align_right: true
           ) %>
       <%= check_answer_link(
               name: :dependant,
-              url: check_answer_url_for(:providers, :dependants_full_time_educations, @legal_aid_application, dependant_id: dependant),
+              url: nil,
               question: t('providers.means_summaries.show.dependants.in_full_time_education'),
               answer: yes_no(dependant.in_full_time_education),
-              read_only: false,
-              align_right: false
+              read_only: true,
+              align_right: true
           ) %>
       <%= check_answer_link(
               name: :dependant,
-              url: check_answer_url_for(:providers, :dependants_monthly_incomes, @legal_aid_application, dependant_id: dependant),
+              url: nil,
               question: t('providers.means_summaries.show.dependants.income'),
               answer: dependant.has_income? ? number_to_currency(dependant.monthly_income) : yes_no(dependant.has_income?),
-              read_only: false,
-              align_right: false
+              read_only: true,
+              align_right: true
           ) %>
       <%= check_answer_link(
               name: :dependant,
-              url: check_answer_url_for(:providers, :dependants_assets_values, @legal_aid_application, dependant_id: dependant),
+              url: nil,
               question: t('providers.means_summaries.show.dependants.assets'),
               answer: dependant.has_assets_more_than_threshold? ? number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?),
-              read_only: false,
-              align_right: false
+              read_only: true,
+              align_right: true
           ) %>
+      <!-- pasted here -->
     </dl>
   <% end %>
 <% end %>
 <div class="govuk-summary-list govuk-!-padding-bottom-4">
   <div class="govuk-summary-list__row">
-    <%= link_to t('providers.means_summaries.show.dependants.add-new'), providers_legal_aid_application_dependants_path, class: 'govuk-link' %>
+    <%= link_to t('providers.means_summaries.show.dependants.add-new'), new_providers_legal_aid_application_dependant_path, class: 'govuk-link' %>
   </div>
 </div>

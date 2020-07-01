@@ -1,6 +1,67 @@
-<%= page_template page_title: t('.page_heading'), template: :basic do %>
-  <%= render 'shared/forms/has_dependants_form',
-             dependant_info: t('.info'),
-             dependant_extra_info: t('.extra_info'),
-             form_path: providers_legal_aid_application_has_dependants_path(@legal_aid_application) %>
+<%= page_template page_title: t('.page_title'), template: :basic do %>
+  <% if @legal_aid_application.has_dependants? %>
+    <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
+    <div class="govuk-summary-list">
+      <% @legal_aid_application.dependants.each do |dependant| %>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value"><%= dependant.name %></dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="<%= providers_legal_aid_application_dependant_path(@legal_aid_application, dependant) %>">Change<span class="govuk-visually-hidden"> name</span></a></dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="remove_2">
+              Remove<span class="govuk-visually-hidden"> name</span>
+            </a>
+          </dd>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_has_dependants_path(@legal_aid_application),
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= govuk_form_group show_error_if: @form.errors.present? do %>
+      <%= govuk_fieldset_header page_title %>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+
+      <p class="govuk-body">
+        <%= t('.info') %>
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <% t('.list').each_line do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+
+      <div class="govuk-inset-text">
+        <p class="govuk-body">
+          <%= t('.extra_info') %>
+        </p>
+      </div>
+
+      <%= form.govuk_radio_button(
+              :has_dependants,
+              true,
+              label: t('generic.yes')
+          ) %>
+
+      <%= form.govuk_radio_button(
+              :has_dependants,
+              false,
+              label: t('generic.no')
+          ) %>
+
+    <% end %>
+
+    <%= next_action_buttons(
+            show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+            form: form
+        ) %>
+  <% end %>
 <% end %>
