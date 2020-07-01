@@ -10,5 +10,16 @@ module Providers
         render :show
       end
     end
+
+    def destroy
+      dependant&.destroy!
+      redirect_to providers_legal_aid_application_has_other_dependants_path
+    end
+
+    private
+
+    def dependant
+      @legal_aid_application.dependants.find(params[:dependant_id])
+    end
   end
 end
