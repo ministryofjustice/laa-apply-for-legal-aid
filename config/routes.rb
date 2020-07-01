@@ -90,7 +90,6 @@ Rails.application.routes.draw do
       patch :reset, on: :collection
       patch :continue, on: :collection
     end
-    resource :has_dependants, only: %i[show update]
     resource :identify_types_of_income, only: %i[show update]
     resource :identify_types_of_outgoing, only: %i[show update]
     resources :income_summary, only: :index
@@ -105,17 +104,6 @@ Rails.application.routes.draw do
     end
     resource :means_test_result, only: [:show]
     resource :declaration, only: %i[show update]
-
-    resources :dependants, only: %i[index create] do
-      scope module: :dependants do
-        resource :details, only: %i[show update]
-        resource :relationship, only: %i[show update]
-        resource :full_time_education, only: %i[show update]
-        resource :assets_value, only: %i[show update]
-        resource :monthly_income, only: %i[show update]
-      end
-    end
-    resource :has_other_dependant, only: %i[show update]
   end
 
   namespace :providers do
