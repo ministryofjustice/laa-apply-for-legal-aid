@@ -12,7 +12,8 @@ module CFE
       CreateDependantsService,
       CreateOutgoingsService,
       CreateStateBenefitsService,
-      CreateOtherIncomeService
+      CreateOtherIncomeService,
+      CreateIrregularIncomesService
     ].freeze
 
     def self.call(legal_aid_application_id)
@@ -48,15 +49,9 @@ module CFE
     def call_non_passported_services
       return if submission.passported?
 
-      NON_PASSPORTED_SERVICES.each { |s| s.call(submission) }
-      call_irregular_income
-    end
-
-    def call_irregular_income
-      # move CreateIrregularIncomesService up into the NON_PASSPORTED_SERVICES when removing the use_new_student_loan feature flag
-      return unless Setting.use_new_student_loan?
-
-      CreateIrregularIncomesService.call(submission)
+      NON_PASSPORTED_SERVICES.each do |s|
+        s.call(submission)
+      end
     end
   end
 end

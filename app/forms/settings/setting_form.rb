@@ -6,13 +6,11 @@ module Settings
 
     attr_accessor :mock_true_layer_data,
                   :allow_non_passported_route,
-                  :manually_review_all_cases,
-                  :use_new_student_loan
+                  :manually_review_all_cases
 
     validates :mock_true_layer_data,
               :allow_non_passported_route,
               :manually_review_all_cases,
-              :use_new_student_loan,
               presence: true
   end
 end
