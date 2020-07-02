@@ -1,5 +1,5 @@
 dependencies:
 - name: postgresql
-  version: 11.8.0
+  version: ^8.10.13
   condition: postgresql.enabled
   repository: https://charts.bitnami.com
