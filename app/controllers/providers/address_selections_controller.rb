@@ -21,11 +21,10 @@ module Providers
     end
 
     def add_a_space_to_postcode
-      string = @form.postcode.(insert(-3), " ")
+      string = @form.postcode.call(insert(-3), ' ')
       string
     end
     helper_method :add_a_space_to_postcode
-
 
     private
 
