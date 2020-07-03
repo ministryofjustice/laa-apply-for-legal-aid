@@ -35,6 +35,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength
       event :check_your_answers do
         transitions from: :initiated, to: :checking_client_details_answers
         transitions from: :client_details_answers_checked, to: :checking_client_details_answers
+        transitions from: :use_ccms, to: :checking_client_details_answers
       end
 
       event :client_details_answers_checked do

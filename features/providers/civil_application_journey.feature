@@ -247,6 +247,37 @@ Feature: Civil application journeys
     Then I should be on a page showing "We need to check your client's financial eligibility"
 
   @javascript @vcr
+  Scenario: I am instructed to use CCMS on the passported journey with an applicant does not receive benefits
+    Given I start the passported journey
+    When I start the journey as far as the applicant page
+    Then I enter name 'Test', 'Paul'
+    Then I enter the date of birth '10-12-1961'
+    Then I enter national insurance number 'JA293483B'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'DA74NG'
+    Then I click find address
+    Then I select an address '3 Lonsdale Road, Bexleyheath, DA7 4NG'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Non-molestation order'
+    Then proceeding suggestions has results
+    Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "Covered under a substantive certificate"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You need to use CCMS for this application'
+    Then I click How we checked your client's benefits status
+    Then I should be on a page showing "Change your client's details"
+    Then I click link "Change your client's details"
+    Then I see the client details page
+    Then I complete the passported journey
+
+  @javascript @vcr
   Scenario: I want to change first name from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'First name'
@@ -737,4 +768,3 @@ Feature: Civil application journeys
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-
