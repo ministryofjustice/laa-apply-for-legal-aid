@@ -630,19 +630,39 @@ module CCMS
         end
 
         describe 'PUI_CLIENT_INCOME_CONT' do
-          context 'when the applicant has to make a contribution' do
-            let!(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
+          context 'when the applicant has to make an income contribution' do
+            let!(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required, submission: cfe_submission }
 
             it 'returns the expected values' do
               block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_INCOME_CONT')
-              expect(block).to have_currency_response 465.66
+              expect(block).to have_currency_response 366.82
               expect(block).not_to be_user_defined
             end
           end
 
-          context 'when the applicant does not have to make a contribution' do
+          context 'when the applicant does not have to make an income contribution' do
             it 'returns no block' do
               block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_INCOME_CONT')
+              expect(block).to be_present
+              expect(block).to have_currency_response 0.0
+            end
+          end
+        end
+
+        describe 'OUT_INCOME_CONT' do
+          context 'when the applicant has to make an income contribution' do
+            let!(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required, submission: cfe_submission }
+
+            it 'returns the expected values' do
+              block = XmlExtractor.call(xml, :global_means, 'OUT_INCOME_CONT')
+              expect(block).to have_currency_response 366.82
+              expect(block).not_to be_user_defined
+            end
+          end
+
+          context 'when the applicant does not have to make an income contribution' do
+            it 'returns no block' do
+              block = XmlExtractor.call(xml, :global_means, 'OUT_INCOME_CONT')
               expect(block).to be_present
               expect(block).to have_currency_response 0.0
             end

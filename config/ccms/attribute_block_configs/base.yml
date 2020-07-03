@@ -356,7 +356,7 @@ global_means:
     response_type: currency
     user_defined: false
   INCOME_CONT:
-    value: 0.0
+    value: '#means_assessment_income_contribution'
     br100_meaning: 'RESULT: Disposable income- Income contribution'
     response_type: currency
     user_defined: false
@@ -1457,12 +1457,6 @@ global_means:
     br100_meaning: 'Int.Result: Client Bus. Part. Income'
     response_type: currency
     user_defined: false
-  PUI_CLIENT_INCOME_CONT:
-    generate_block?: false
-    value: 0.0
-    br100_meaning: Client Provisional Income Contribution
-    response_type: currency
-    user_defined: false
   OUT_GB_PROC_C_34WP3_12A:
     generate_block?: false
     value: 733.0
@@ -2399,12 +2393,6 @@ global_means:
     value: Signed:_______________________________
     br100_meaning: The means declaration 1a paragraph 19
     response_type: text
-    user_defined: false
-  OUT_INCOME_CONT:
-    generate_block?: false
-    value: 0.0
-    br100_meaning: 'RESULT: Disposable income - Income contribution'
-    response_type: currency
     user_defined: false
   MARITIAL_STATUS:
     value: 'UNKNOWN'
