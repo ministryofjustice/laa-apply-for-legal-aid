@@ -139,7 +139,7 @@ Given('I start the merits application') do
   )
 end
 
-Given('I start the merits application with brank transactions with no transaction type category') do
+Given('I start the merits application with bank transactions with no transaction type category') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
