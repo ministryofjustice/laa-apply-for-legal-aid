@@ -30,7 +30,7 @@ RSpec.describe MoneyHelper, type: :helper do
     let(:result) { number_to_currency_or_original_string(value) }
 
     context 'is a number' do
-      let(:value) { BigDecimal(12_345.5, 12) }
+      let(:value) { BigDecimal('12_345.5', 12) }
 
       it 'formats the currency' do
         expect(result).to eq '12,345.50'
