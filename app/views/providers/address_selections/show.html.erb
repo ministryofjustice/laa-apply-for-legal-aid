@@ -17,7 +17,7 @@
       <div class="govuk-label">
         <%= t('generic.address.postcode') %>
         <p class='govuk-body govuk-!-font-weight-bold'>
-          <%= @form.postcode %>
+          <%= @form.postcode.insert(-4, " ") %>
           <%= link_to(
                 t('generic.change'),
                 providers_legal_aid_application_address_lookup_path(@legal_aid_application),

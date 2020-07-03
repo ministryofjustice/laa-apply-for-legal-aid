@@ -20,7 +20,18 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
+    def add_a_space_to_postcode
+      string = @form.postcode.(insert(-3), " ")
+      string
+    end
+    helper_method :add_a_space_to_postcode
+
+
     private
+
+    # def add_a_space_to_postcode(string)
+    #   string.(insert(-3), " ")
+    # end
 
     def address_lookup
       @address_lookup ||= AddressLookupService.call(address.postcode)
