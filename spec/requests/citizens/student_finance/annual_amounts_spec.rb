@@ -14,7 +14,7 @@ RSpec.describe 'annual_amounts', type: :request do
     end
 
     it 'contains the correct content' do
-      expect(response.body).to include('How much student finance will you get this academic year?')
+      expect(response.body).to include I18n.t('citizens.student_finances.annual_amounts.show.field_set_header')
     end
   end
 
@@ -55,7 +55,7 @@ RSpec.describe 'annual_amounts', type: :request do
       let(:amount) { '' }
 
       it 'displays an error' do
-        expect(response.body).to include('There is a problem')
+        expect(response.body).to include I18n.t('activemodel.errors.models.irregular_income.attributes.amount.blank')
       end
     end
   end
