@@ -9,9 +9,8 @@ module StudentFinances
     validates :amount,
               currency: {
                 greater_than_or_equal_to: 0,
-                allow_blank: true,
-                message: I18n.t('activemodel.errors.models.legal_aid_application.attributes.annual_amount.not_a_number')
+                allow_blank: true
               },
-              presence: { unless: :draft?, message: I18n.t('activemodel.errors.models.legal_aid_application.attributes.annual_amount.blank') }
+              presence: { unless: :draft? }
   end
 end

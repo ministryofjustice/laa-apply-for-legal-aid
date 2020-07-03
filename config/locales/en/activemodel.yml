@@ -152,6 +152,12 @@ en:
               invalid_timeline: Date the incident occurred must be before the date your client told you about it
             details:
               blank: Enter details of the incident
+        irregular_income:
+          attributes:
+            amount:
+              blank: Enter the total amount of student finance you’ll get this academic year
+              too_many_decimals: &student_error Student loan amount must be an amount of money, like 10,000
+              not_a_number: *student_error
         legal_aid_application:
           attributes:
             has_dependants:
@@ -209,9 +215,6 @@ en:
                 blank: Select yes if your client owns their home with anyone else
             student_finance:
               blank: Select yes if you get student finance
-            annual_amount:
-              blank: Enter the total amount of student finance you’ll get this academic year
-              not_a_number: Student loan amount must be an amount of money, like 1,000
             substantive_application:
               blank: Select Yes or No
             uncategorised_bank_transactions:
