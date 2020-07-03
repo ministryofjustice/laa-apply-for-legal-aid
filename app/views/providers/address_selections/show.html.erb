@@ -14,7 +14,7 @@
     <%= govuk_form_group show_error_if: @form.errors[:lookup_id].present? do %>
       <%= govuk_fieldset_header page_title %>
 
-      <div class="govuk-label">
+      <p class="govuk-label">
         <%= t('generic.address.postcode') %>
         <p class='govuk-body govuk-!-font-weight-bold'>
           <%= @form.postcode.insert(-4, " ") %>
@@ -24,7 +24,7 @@
                 class: 'govuk-body change-link change-postcode-link'
               ) %>
         </p>
-      </div>
+      </p>
       <%= f.hidden_field :postcode %>
 
       <% @addresses.each_with_index do |address, index| %>
