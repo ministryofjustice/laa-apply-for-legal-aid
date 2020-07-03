@@ -22,7 +22,7 @@ module CFE
       raise CFE::SubmissionError, 'Benefit transactions un-coded' if bank_transactions.keys.any?(nil)
 
       bank_transactions.each do |meta_data, array|
-        type_hash = { name: meta_data[:name], "payments": transactions(array) }
+        type_hash = { name: meta_data[:label], "payments": transactions(array) }
         result << type_hash
       end
       result
