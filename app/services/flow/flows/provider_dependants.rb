@@ -14,6 +14,10 @@ module Flow
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_dependants_path(application) },
           forward: ->(_, has_other_dependant) { has_other_dependant ? :dependants : :outgoings_summary }
+        },
+        remove_dependant: {
+          path: ->(application, dependant) { urls.providers_legal_aid_application_remove_dependant_path(application, dependant) },
+          forward: :has_other_dependants
         }
       }.freeze
     end

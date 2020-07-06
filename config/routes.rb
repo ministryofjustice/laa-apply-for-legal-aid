@@ -129,6 +129,7 @@ Rails.application.routes.draw do
       resource :has_other_dependants, only: %i[show update] do
         delete '/:dependant_id', to: 'has_other_dependants#destroy', as: 'destroy'
       end
+      resources :remove_dependant, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]

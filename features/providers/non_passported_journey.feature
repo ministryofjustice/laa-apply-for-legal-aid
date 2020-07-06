@@ -147,6 +147,24 @@ Feature: Non-passported applicant journeys
     And I choose option "dependant_has_assets_more_than_threshold_false"
     And I click 'Save and continue'
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on the 'dependants/new' page showing "Enter dependant details"
+    When I fill "Name" with "Pugsley Addams"
+    And I enter a date of birth for a 10 year old
+    And I choose "They're a child relative"
+    And I choose option "dependant_in_full_time_education_false"
+    And I choose option "dependant_has_income_false"
+    And I choose option "dependant_has_assets_more_than_threshold_false"
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
+    And I should see 'Pugsley Addams'
+    When I click has other dependants remove link for dependant '2'
+    Then I should be on a page showing 'Are you sure you want to remove Pugsley Addams'
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
+    And I should not see 'Pugsley Addams'
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"

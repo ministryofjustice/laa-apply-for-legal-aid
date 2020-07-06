@@ -714,3 +714,7 @@ en:
         warning:
           delete: Are you sure you want to delete this dependant?
         error: Select yes if they have other dependants
+    remove_dependant:
+      show:
+        page_title: "Are you sure you want to remove %{name}?"
+        error: Select yes if you wish to delete the dependant

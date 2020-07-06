@@ -389,6 +389,12 @@ Given('I click Check Your Answers Change link for dependant {string}') do |depen
   end
 end
 
+Given('I click has other dependants remove link for dependant {string}') do |dependant|
+  within "#dependant_#{dependant}" do
+    click_button('Remove')
+  end
+end
+
 Then('I click on the add payments link for income type {string}') do |income_type|
   income_type.downcase!
   within "#income-type-#{income_type}" do
