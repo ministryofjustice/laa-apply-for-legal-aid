@@ -1,15 +1,15 @@
 module Providers
   class DependantsController < ProviderBaseController
     def new
-      @form = LegalAidApplications::DependantNewForm.new(model: dependant)
+      @form = LegalAidApplications::DependantForm.new(model: dependant)
     end
 
     def show
-      @form = LegalAidApplications::DependantNewForm.new(model: dependant)
+      @form = LegalAidApplications::DependantForm.new(model: dependant)
     end
 
     def update
-      @form = LegalAidApplications::DependantNewForm.new(form_params)
+      @form = LegalAidApplications::DependantForm.new(form_params)
       if @form.save
         go_forward(dependant)
       else
@@ -38,7 +38,7 @@ module Providers
 
     def form_params
       merge_with_model(dependant) do
-        params.require(:dependant).permit(*LegalAidApplications::DependantNewForm::ATTRIBUTES)
+        params.require(:dependant).permit(*LegalAidApplications::DependantForm::ATTRIBUTES)
       end
     end
   end
