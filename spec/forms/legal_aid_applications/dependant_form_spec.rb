@@ -133,6 +133,14 @@ RSpec.describe LegalAidApplications::DependantForm do
           expect(subject.errors[:assets_value]).to eq expected_array
         end
       end
+
+      context 'with a value above the threshold' do
+        let(:assets_value) { '9,000' }
+
+        it 'raises the expected error' do
+          expect(subject.valid?).to be true
+        end
+      end
     end
 
     context 'when the assets question is blank' do
@@ -162,6 +170,12 @@ RSpec.describe LegalAidApplications::DependantForm do
         it 'raises the expected error' do
           expect(subject.errors[:monthly_income]).to eq expected_array
         end
+      end
+
+      context 'with a value specified' do
+        let(:monthly_income) { '1,000.00' }
+
+        it { expect(subject.valid?).to be true }
       end
     end
 

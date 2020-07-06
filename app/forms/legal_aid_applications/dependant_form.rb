@@ -43,7 +43,7 @@ module LegalAidApplications
 
     validates(
       :assets_value,
-      numericality: {
+      currency: {
         greater_than_or_equal_to: 8_000,
         message: ->(form, _) { form.less_than_threshold_error_message }
       },
