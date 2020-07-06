@@ -58,6 +58,10 @@ module LegalAidApplications
       )
     end
 
+    def attributes_to_clean
+      %i[monthly_income assets_value]
+    end
+
     # Note that this method is first called by `validates`.
     # Without that validation, the functionality in this method will not be called before save
     def date_of_birth
@@ -82,10 +86,7 @@ module LegalAidApplications
     end
 
     def less_than_threshold_error_message
-      I18n.t(
-        'activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold',
-        name: model.name
-      )
+      I18n.t('activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold', name: model.name)
     end
 
     private
