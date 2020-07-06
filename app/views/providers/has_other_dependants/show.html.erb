@@ -1,4 +1,19 @@
 <%= page_template page_title: t('.page_title'), template: :basic do %>
+  <% if @error %>
+    <div class="govuk-error-summary" id="error_explanation">
+      <h2 class="govuk-error-summary__title" id="error-summary-title">
+        <%= t('generic.errors.problem_text') %>
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <%= link_to @error.values.first, "##{@error.keys.first}" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
   <% if @legal_aid_application.has_dependants? %>
     <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
     <div class="govuk-summary-list">
@@ -36,7 +51,7 @@
         ]
       %>
 
-      <%= form.govuk_collection_radio_buttons :other_dependant, options, :value, :label, error: @error, title: content_for(:page_title) %>
+      <%= form.govuk_collection_radio_buttons :other_dependant, options, :value, :label, error: @error&.values&.first, title: content_for(:page_title) %>
 
     <% end %>
 
