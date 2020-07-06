@@ -1,22 +1,4 @@
 <%= page_template page_title: t('.page_title'), template: :basic do %>
-  <% if @legal_aid_application.has_dependants? %>
-    <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
-    <div class="govuk-summary-list">
-      <% @legal_aid_application.dependants.each do |dependant| %>
-        <div class="govuk-summary-list__row">
-          <dd class="govuk-summary-list__value"><%= dependant.name %></dd>
-          <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="<%= providers_legal_aid_application_dependant_path(@legal_aid_application, dependant) %>">Change<span class="govuk-visually-hidden"> name</span></a></dd>
-          <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="remove_2">
-              Remove<span class="govuk-visually-hidden"> name</span>
-            </a>
-          </dd>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-
     <%= form_with(
           model: @form,
           url: providers_legal_aid_application_has_dependants_path(@legal_aid_application),
