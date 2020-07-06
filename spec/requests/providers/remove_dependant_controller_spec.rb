@@ -36,7 +36,7 @@ RSpec.describe Providers::RemoveDependantController, type: :request do
     context 'choose yes' do
       let(:remove_dependant) { 'yes' }
 
-      it 'redirects to the page to add another dependant' do
+      it 'redirects to the has other dependants page' do
         expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
       end
     end
@@ -44,7 +44,7 @@ RSpec.describe Providers::RemoveDependantController, type: :request do
     context 'choose no' do
       let(:remove_dependant) { 'no' }
 
-      it 'redirects to the page to add another dependant' do
+      it 'redirects to the has other dependants page' do
         expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
       end
     end

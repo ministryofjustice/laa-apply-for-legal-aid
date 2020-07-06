@@ -66,7 +66,7 @@ RSpec.describe Providers::DependantsController, type: :request do
     end
 
     context 'when the parameters are valid' do
-      it 'redirects to the has dependant page' do
+      it 'redirects to the has other dependants page' do
         expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
       end
     end
