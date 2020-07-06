@@ -1,66 +1,12 @@
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
-    <div class="govuk-grid-row" id="app-check-your-answers__dependants_<%= index + 1 %>">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m">Dependant <%= index + 1 %></h2>
-      </div>
-      <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
-        <p>
-          <%= link_to(providers_legal_aid_application_dependant_path(@legal_aid_application, dependant), class: 'govuk-link') do %>
-            <%= t('generic.change') %><span class="govuk-visually-hidden">Change dependant <%= dependant.name %></span>
-          <% end %>
-        </p>
-      </div>
-    </div>
-    <dl class="govuk-summary-list">
-      <%= check_answer_link(
-              name: :dependant,
-              question:  t('providers.means_summaries.show.dependants.name'),
-              answer: dependant.name,
-              read_only: true,
-              align_right: true
-          ) %>
-      <%= check_answer_link(
-              name: :dependant,
-              question: t('providers.means_summaries.show.dependants.date_of_birth'),
-              answer: dependant.date_of_birth,
-              read_only: true,
-              align_right: true
-          ) %>
-      <%= check_answer_link(
-              name: :dependant,
-              url: nil,
-              question: t('providers.means_summaries.show.dependants.relationship'),
-              answer: dependant.relationship.nil? ? '' : t("shared.forms.dependants.relationship.option.#{dependant.relationship}"),
-              read_only: true,
-              align_right: true
-          ) %>
-      <%= check_answer_link(
-              name: :dependant,
-              url: nil,
-              question: t('providers.means_summaries.show.dependants.in_full_time_education'),
-              answer: yes_no(dependant.in_full_time_education),
-              read_only: true,
-              align_right: true
-          ) %>
-      <%= check_answer_link(
-              name: :dependant,
-              url: nil,
-              question: t('providers.means_summaries.show.dependants.income'),
-              answer: dependant.has_income? ? number_to_currency(dependant.monthly_income) : yes_no(dependant.has_income?),
-              read_only: true,
-              align_right: true
-          ) %>
-      <%= check_answer_link(
-              name: :dependant,
-              url: nil,
-              question: t('providers.means_summaries.show.dependants.assets'),
-              answer: dependant.has_assets_more_than_threshold? ? number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?),
-              read_only: true,
-              align_right: true
-          ) %>
-      <!-- pasted here -->
-    </dl>
+    <%= check_answer_one_change_link(
+      name: "dependants_#{index + 1}",
+      url: providers_legal_aid_application_dependant_path(@legal_aid_application, dependant),
+      question: "Dependant #{index + 1}",
+      answer_hash: dependant_hash(dependant),
+      read_only: FALSE
+    ) %>
   <% end %>
 <% end %>
 <div class="govuk-summary-list govuk-!-padding-bottom-4">
