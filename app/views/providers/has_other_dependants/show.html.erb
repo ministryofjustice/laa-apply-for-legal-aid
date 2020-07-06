@@ -3,7 +3,7 @@
     <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
     <div class="govuk-summary-list">
       <% @legal_aid_application.dependants.order(:created_at, :number).each do |dependant| %>
-        <dl class="govuk-summary-list__row">
+        <dl class="govuk-summary-list__row" id="dependant_<%= dependant.number %>">
           <dt class="govuk-summary-list__value"><%= dependant.name %></dt>
           <dt class="govuk-summary-list__actions">
             <a class="govuk-link" href="<%= providers_legal_aid_application_dependant_path(@legal_aid_application, dependant) %>"><%= t('.change') %><span class="govuk-visually-hidden"> name</span></a></dt>
@@ -11,11 +11,9 @@
             <dd class="govuk-summary-list__actions">
               <%= button_to(
                 t('.remove'),
-                destroy_providers_legal_aid_application_has_other_dependants_path(@legal_aid_application, dependant),
-                method: :delete,
-                class: 'button-as-link',
-                params: { id: dependant.id },
-                data: { confirm: "Are you sure you want to remove #{dependant.name}" }
+                providers_legal_aid_application_remove_dependant_path(@legal_aid_application, dependant),
+                method: :get,
+                class: 'button-as-link'
               ) %>
             </dd>
           </dt>

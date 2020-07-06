@@ -58,14 +58,4 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
       end
     end
   end
-
-  describe 'DELETE /providers/:application_id/has_other_dependants/:dependant_id' do
-    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
-
-    subject { delete destroy_providers_legal_aid_application_has_other_dependants_path(legal_aid_application, dependant) }
-
-    it 'redirects to the has other dependants page' do
-      expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path)
-    end
-  end
 end
