@@ -13,7 +13,6 @@ module StudentFinances
               },
               presence: { unless: :draft? }
 
-
     def attributes_to_clean
       [:amount]
     end
