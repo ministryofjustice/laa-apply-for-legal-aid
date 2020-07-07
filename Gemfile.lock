@@ -326,7 +326,7 @@ GEM
     nested_form (0.3.2)
     nesty (1.0.2)
     nio4r (2.5.2)
-    nokogiri (1.10.9)
+    nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     notiffany (0.1.3)
