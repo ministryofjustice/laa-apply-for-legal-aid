@@ -12,5 +12,10 @@ module StudentFinances
                 allow_blank: true
               },
               presence: { unless: :draft? }
+
+
+    def attributes_to_clean
+      [:amount]
+    end
   end
 end
