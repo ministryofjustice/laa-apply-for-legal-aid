@@ -1,21 +1,57 @@
-<%= page_template page_title: t('.heading'), template: :basic do %>
-  <%= form_with(url: providers_legal_aid_application_has_other_dependant_path, method: :patch, local: true) do |form| %>
+<%= page_template page_title: t('.page_title'), template: :basic do %>
+  <% if @error %>
+    <div class="govuk-error-summary" id="error_explanation">
+      <h2 class="govuk-error-summary__title" id="error-summary-title">
+        <%= t('generic.errors.problem_text') %>
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <%= link_to @error.values.first, "##{@error.keys.first}" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @legal_aid_application.has_dependants? %>
+    <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
+    <div class="govuk-summary-list">
+      <% @legal_aid_application.dependants.order(:created_at, :number).each do |dependant| %>
+        <dl class="govuk-summary-list__row" id="dependant_<%= dependant.number %>">
+          <dt class="govuk-summary-list__value"><%= dependant.name %></dt>
+          <dt class="govuk-summary-list__actions">
+            <a class="govuk-link" href="<%= providers_legal_aid_application_dependant_path(@legal_aid_application, dependant) %>"><%= t('.change') %><span class="govuk-visually-hidden"> name</span></a></dt>
+          <dt class="govuk-summary-list__actions">
+            <dd class="govuk-summary-list__actions">
+              <%= button_to(
+                t('.remove'),
+                providers_legal_aid_application_remove_dependant_path(@legal_aid_application, dependant),
+                method: :get,
+                class: 'button-as-link'
+              ) %>
+            </dd>
+          </dt>
+        </dl>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with(url: providers_legal_aid_application_has_other_dependants_path, method: :patch, local: true) do |form| %>
 
     <%= govuk_form_group(
-          show_error_if: @error,
-          input: :other_dependant
+            show_error_if: @error,
+            input: :other_dependant
         ) do %>
-
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
 
       <%
         options = [
-          { value: :yes, label: t('generic.yes') },
-          { value: :no,  label: t('generic.no') }
+            { value: :yes, label: t('generic.yes') },
+            { value: :no,  label: t('generic.no') }
         ]
       %>
 
-      <%= form.govuk_collection_radio_buttons :other_dependant, options, :value, :label, error: @error %>
+      <%= form.govuk_collection_radio_buttons :other_dependant, options, :value, :label, error: @error&.values&.first, title: content_for(:page_title) %>
 
     <% end %>
 
