@@ -118,6 +118,10 @@ FactoryBot.define do
       shared_ownership { 'no_sole_owner' }
     end
 
+    trait :with_student_finance do
+      student_finance { true }
+    end
+
     trait :with_home_shared_with_partner do
       shared_ownership { 'partner_or_ex_partner' }
     end
