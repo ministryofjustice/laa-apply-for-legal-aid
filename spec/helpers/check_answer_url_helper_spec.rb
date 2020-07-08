@@ -11,11 +11,10 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
       end
 
       context 'when params are provided' do
-        let(:dependant) { create :dependant, legal_aid_application: application }
-        let(:params) { { dependant_id: dependant.id } }
+        let(:params) { { transaction_type: 'benefits' } }
         it 'returns the correct path' do
-          url = check_answer_url_for(:providers, :dependants_relationships, application, params)
-          expect(url).to eq "/providers/applications/#{application.id}/dependants/#{dependant.id}/relationship"
+          url = check_answer_url_for(:providers, :incoming_transactions, application, params)
+          expect(url).to eq "/providers/applications/#{application.id}/incoming_transactions/benefits"
         end
       end
 

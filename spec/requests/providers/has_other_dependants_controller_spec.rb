@@ -9,28 +9,28 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     subject
   end
 
-  describe 'GET /providers/:application_id/has_other_dependant' do
-    subject { get providers_legal_aid_application_has_other_dependant_path(legal_aid_application) }
+  describe 'GET /providers/:application_id/has_other_dependants' do
+    subject { get providers_legal_aid_application_has_other_dependants_path(legal_aid_application) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'PATCH /providers/:application_id/has_other_dependant' do
+  describe 'PATCH /providers/:application_id/has_other_dependants' do
     let(:params) do
       {
         other_dependant: other_dependant
       }
     end
 
-    subject { patch providers_legal_aid_application_has_other_dependant_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_has_other_dependants_path(legal_aid_application), params: params }
 
     context 'choose yes' do
       let(:other_dependant) { 'yes' }
 
       it 'redirects to the page to add another dependant' do
-        expect(response).to redirect_to(providers_legal_aid_application_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
       end
     end
 

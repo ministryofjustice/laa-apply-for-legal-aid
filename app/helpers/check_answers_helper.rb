@@ -16,13 +16,14 @@ module CheckAnswersHelper
     )
   end
 
-  def check_answer_no_link(question:, answer:, no_border: false, name:)
+  def check_answer_no_link(question:, answer:, no_border: false, name:, align_right: false)
     render(
       'shared/check_answers/no_link_item',
       name: name,
       question: question,
       answer: answer,
-      no_border: no_border
+      no_border: no_border,
+      align_right: align_right
     )
   end
 

@@ -3,6 +3,10 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     my_firms_unsubmitted_record?
   end
 
+  def new?
+    my_firms_unsubmitted_record?
+  end
+
   def show?
     my_firms_unsubmitted_record?
   end
