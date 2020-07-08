@@ -50,7 +50,7 @@ module PageTemplateHelper
     &content
   )
     template = :default unless %i[form basic].include?(template)
-    content_for(:navigation) { back_link(back_link) unless back_link == :none }
+    content_for(:navigation) { back_link(**back_link) unless back_link == :none }
     page_title_possibly_with_error({ page_title: page_title, head_title: head_title }, show_errors_for&.errors)
     content = capture(&content) if content
     render(

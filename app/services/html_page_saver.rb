@@ -1,8 +1,8 @@
 class HtmlPageSaver
   attr_accessor :html, :file_path, :asset_host
 
-  def self.call(*args)
-    new(*args).call
+  def self.call(**args)
+    new(**args).call
   end
 
   def initialize(html:, file_path:, asset_host:)
