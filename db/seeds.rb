@@ -12,6 +12,7 @@ Seeder.monitor ServiceLevel
 Seeder.monitor ProceedingType
 Seeder.monitor ProceedingTypeScopeLimitation
 Seeder.monitor ScopeLimitation
+Seeder.monitor Role
 
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
   load seed
