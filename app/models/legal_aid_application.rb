@@ -270,7 +270,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def value_of_student_finance
-    receives_student_finance? ? irregular_incomes.student_finance.first.amount : nil
+    receives_student_finance? ? irregular_incomes.student_finance.order('created_at').last.amount : nil
   end
 
   def default_cost_limitation
