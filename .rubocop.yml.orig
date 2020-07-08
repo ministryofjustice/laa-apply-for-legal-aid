@@ -1,0 +1,158 @@
+require: rubocop-performance
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+  - 'db/schema.rb'
+  - 'vendor/**/*'
+  - 'node_modules/**/*'
+  - 'ccms_integration/*'
+
+Layout/LineLength:
+  Max: 180
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+  - 'spec/**/*'
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/UriEscapeUnescape:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+  - 'db/migrate/*'
+  - 'ccms_integration/helpers/ccms_payload_analyser.rb'
+
+Metrics/BlockLength:
+  Exclude:
+  - 'config/routes.rb'
+  - 'spec/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/services/reports/mis/application_detail_csv_line.rb'
+
+Metrics/MethodLength:
+  Exclude:
+  - 'db/migrate/*'
+  - 'ccms_integration/helpers/ccms_payload_analyser.rb'
+  - 'spec/**/*'
+  - 'app/services/reports/mis/application_detail_csv_line.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ParameterLists:
+  Max: 6
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> AP-1500 Create permissions table, and a polymorphic join table to Providers and users
+Performance/AncestorsInclude:
+  Enabled: true
+
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+
+Performance/RedundantSortBlock:
+  Enabled: true
+
+Performance/RedundantStringChars:
+  Enabled: true
+
+Performance/ReverseFirst:
+  Enabled: true
+
+Performance/SortReverse:
+  Enabled: true
+
+Performance/Squeeze:
+  Enabled: true
+
+Performance/StringInclude:
+  Enabled: true
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> AP-1500 Create permissions table, and a polymorphic join table to Providers and users
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
+Style/Documentation:
+  Exclude:
+  - '**/*'
+
+Style/SymbolArray:
+  EnforcedStyle: percent
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  IgnoredMethods:
+    - 'cli_arg_version' # from bin/bundle - auto generated method
+
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: false
+
+Style/RedundantFetchBlock:
+  Enabled: true
