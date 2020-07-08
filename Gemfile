@@ -53,8 +53,8 @@ gem 'jwt'
 # background processing
 gem 'redis-namespace'
 gem 'sidekiq', '~> 6.1.0'
-gem 'sidekiq-status', '>= 1.1.4'
 gem 'sidekiq_alive', '>= 2.0.1'
+gem 'sidekiq-status', '>= 1.1.4'
 
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
 # Default to 3.7.2 as https://github.com/sass/sassc-rails/issues/122 sassc loading is causing a segmentation error

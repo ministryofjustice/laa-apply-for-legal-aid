@@ -112,3 +112,15 @@ Style/FrozenStringLiteralComment:
 Metrics/CyclomaticComplexity:
   IgnoredMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
+
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: false
+
+Style/RedundantFetchBlock:
+  Enabled: true
