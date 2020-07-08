@@ -34,7 +34,7 @@ FactoryBot.define do
 
     trait :disregarded_benefits do
       operation { 'credit' }
-      transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
+      transaction_type { TransactionType.where(name: 'excluded_benefits').first || create(:transaction_type, :benefits) }
       meta_data { { code: nil, label: 'grenfell_payments', name: 'Grenfell Tower fire victims payments' } }
     end
 

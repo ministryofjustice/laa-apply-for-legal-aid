@@ -10,6 +10,7 @@ RSpec.describe 'check your answers requests', type: :request do
     create :legal_aid_application,
            :provider_submitted,
            :with_everything,
+           :with_student_finance,
            :with_irregular_income,
            vehicle: vehicle,
            own_vehicle: own_vehicle,

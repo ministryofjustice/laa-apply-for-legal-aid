@@ -1,0 +1,30 @@
+<%= page_template page_title: t('.field_set_header'), template: :basic do %>
+  <%= form_with(model: @form, url: citizens_student_finances_annual_amount_path, method: :patch, local: true) do |form| %>
+
+    <%= govuk_form_group(
+            show_error_if: @error,
+            input: :amount
+        ) do %>
+
+      <%= govuk_fieldset_header do %>
+        <h1 class="govuk-fieldset__heading">
+          <%= label_tag(:amount, page_title) %>
+        </h1>
+      <% end %>
+
+      <%= form.govuk_text_field(
+              :amount,
+              hint: t('.hint'),
+              label: nil,
+              input_prefix: t('currency.gbp'),
+              class: 'govuk-!-width-one-third'
+          ) %>
+
+    <% end %>
+
+    <%= next_action_buttons(
+            form: form,
+            continue_button_text: t('generic.continue')
+        ) %>
+  <% end %>
+<% end %>
