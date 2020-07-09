@@ -5,8 +5,8 @@ module GovukEmails
 
     JOBS_DELAY = 5.seconds
 
-    def self.call(*args)
-      new(*args).call
+    def self.call(**args)
+      new(**args).call
     end
 
     def initialize(mailer:, mail_method:, delivery_method:, email_args:, govuk_message_id:)

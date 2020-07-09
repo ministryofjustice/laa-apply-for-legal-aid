@@ -31,7 +31,7 @@ class ProviderDetailsRetriever
   end
 
   def url # rubocop:disable Lint/UriEscapeUnescape
-    File.join(Rails.configuration.x.provider_details.url, URI.escape(username))
+    File.join(Rails.configuration.x.provider_details.url, URI.encode_www_form_component(username))
   end
 
   def raise_error
