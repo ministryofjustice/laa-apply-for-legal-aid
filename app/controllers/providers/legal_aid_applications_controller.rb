@@ -6,7 +6,6 @@ module Providers
     DEFAULT_PAGE_SIZE = 20
 
     def index
-      puts ">>>>>>>>>>>> INDEX PAGE FOR APPLICATIONS #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
       applications
     end
 

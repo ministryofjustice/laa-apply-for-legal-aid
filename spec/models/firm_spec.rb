@@ -32,7 +32,7 @@ RSpec.describe 'Firm' do
           firm.save!
         end
 
-        it 'returns just both permissions' do
+        it 'returns both permissions' do
           expect(firm.reload.permissions).to match_array [permission2, permission1]
         end
       end
