@@ -92,24 +92,24 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v1-gems-cache-{{ checksum "Gemfile.lock" }}
-        - v1-gems-cache
+        - v2.7-gems-cache-{{ checksum "Gemfile.lock" }}
+        - v2.7-gems-cache-
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-        - v1-yarn-packages-cache
+        - v2.7-yarn-packages-cache-{{ checksum "yarn.lock" }}
+        - v2.7-yarn-packages-cache-
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
+        key: v2.7-gems-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+      key: v2.7-yarn-packages-cache-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
