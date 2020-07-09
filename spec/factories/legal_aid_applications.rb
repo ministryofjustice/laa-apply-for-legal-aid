@@ -384,10 +384,6 @@ FactoryBot.define do
       end
     end
 
-    trait :with_transaction_types do
-      transaction_types { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
-    end
-
     trait :with_uncategorised_credit_transactions do
       after :create do |application|
         bank_provider = create :bank_provider, applicant: application.applicant
