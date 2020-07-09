@@ -1,6 +1,8 @@
 module UserTransactionsHelper
   def incomings_list(incomings, locale_namespace:)
     items = TransactionType.credits&.map do |income_type|
+      next if income_type.excluded_benefit?
+
       OpenStruct.new(
         label: t("#{locale_namespace}.#{income_type.name}"),
         name: income_type.name,
@@ -11,7 +13,7 @@ module UserTransactionsHelper
     return nil unless items.present?
 
     {
-      items: items
+      items: items.compact
     }
   end
 
