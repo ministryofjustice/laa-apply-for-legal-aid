@@ -15,7 +15,8 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
     end
 
     context 'sending the email' do
-      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, smoke_test_email, application_url) }
+      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, smoke_test_email, application_url, application.applicant.full_name) }
+
       it 'sends an email with the right parameters' do
         expect(mail.govuk_notify_personalisation).to eq(
           application_url: application_url,

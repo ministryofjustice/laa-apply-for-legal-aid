@@ -321,6 +321,12 @@ FactoryBot.define do
       provider_step { :client_completed_means }
     end
 
+    trait :at_check_provider_answers do
+      with_proceeding_types
+      state { :provider_assessing_means }
+      provider_step { :check_provider_answers }
+    end
+
     trait :at_income_summary do
       with_proceeding_types
       state { :provider_assessing_means }

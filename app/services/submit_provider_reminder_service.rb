@@ -22,7 +22,6 @@ class SubmitProviderReminderService
     [
       application.id,
       application_url
-      # 'test_url_should_go_here'
     ]
   end
 

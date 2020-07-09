@@ -7,7 +7,7 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
   let(:application_url) { 'http://test.com' }
 
   describe '#notify_citizen' do
-    let(:mail) { described_class.notify_citizen(application.id, email, application_url) }
+    let(:mail) { described_class.notify_citizen(application.id, email, application_url, application.applicant.full_name) }
 
     it 'sends an email to the correct address' do
       expect(mail.to).to eq([email])
@@ -27,6 +27,23 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
         client_name: application.applicant.full_name,
         application_url: application_url
       )
+    end
+  end
+
+  describe '.eligible_for_delivery?' do
+    let(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: application }
+    context 'it is eligible' do
+      let(:application) { create :legal_aid_application, :at_check_provider_answers }
+      it 'returns true' do
+        expect(described_class.eligible_for_delivery?(scheduled_mailing)).to be true
+      end
+    end
+
+    context 'it is not eligible' do
+      let(:application) { create :legal_aid_application, :at_assessment_submitted }
+      it 'returns false' do
+        expect(described_class.eligible_for_delivery?(scheduled_mailing)).to be false
+      end
     end
   end
 end
