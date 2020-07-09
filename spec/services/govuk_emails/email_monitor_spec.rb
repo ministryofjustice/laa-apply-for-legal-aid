@@ -29,7 +29,7 @@ RSpec.describe GovukEmails::EmailMonitor do
       govuk_message_id: arg_govuk_message_id
     }
   end
-  let(:email_monitor) { described_class.new(params) }
+  let(:email_monitor) { described_class.new(**params) }
 
   subject { email_monitor.call }
 
