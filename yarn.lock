@@ -8887,9 +8887,9 @@ npm-registry-fetch@^5.0.0:
     safe-buffer "^5.2.0"
 
 npm-registry-fetch@^8.0.2:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-8.1.0.tgz#1d5c229b82412414b9c63cde040b51981db76904"
-  integrity sha512-RkcugRDye2j6yEiHGMyAdKQoipgp8VToSIjm+TFLhVraXOkC/WU2kjE2URcYBpcJ4hs++VFBKo6+Zg4wmrS+Qw==
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-8.1.1.tgz#999f0a0cb7fcf31dd0ad9f2ba12663f392af6312"
+  integrity sha512-3FCYb/YO6k9vfPMSU6H1CbixQAzoLuBqTTpjcks2PHlN59c0ENTYrDF8lCRvgLm1iAhwhwZg7pRq2VOTw3Yfaw==
   dependencies:
     "@npmcli/ci-detect" "^1.0.0"
     lru-cache "^5.1.1"
