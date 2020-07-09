@@ -12,7 +12,7 @@
       ) %>
 
   <%= check_answer_link(
-          name: :student_finance,
+          name: :student_finance_annual_amount,
           url: citizens_student_finances_annual_amount_path,
           question: t('.how_much'),
           answer: number_to_currency(@legal_aid_application.value_of_student_finance),

@@ -25,7 +25,6 @@ module CFE
     describe '#call' do
       context 'new_student_loan setting is false' do
         before do
-          Setting.setting.update!(use_new_student_loan: false)
           allow(CreateAssessmentService).to receive(:call).and_return(true)
           allow(CreateApplicantService).to receive(:call).and_return(true)
           allow(CreateCapitalsService).to receive(:call).and_return(true)
@@ -35,6 +34,7 @@ module CFE
           allow(CreateDependantsService).to receive(:call).and_return(true)
           allow(CreateOtherIncomeService).to receive(:call).and_return(true)
           allow(ObtainAssessmentResultService).to receive(:call).and_return(true)
+          allow(CreateIrregularIncomesService).to receive(:call).and_return(true)
         end
 
         context 'passported application' do
@@ -96,46 +96,25 @@ module CFE
         context 'non-passported application' do
           let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :at_provider_submitted, vehicle: vehicle }
 
-          context 'Setting set not to use new student loan' do
-            it 'calls all the services it manages but does not call CreateIrregularIncomesService' do
-              expect(CreateAssessmentService).to receive(:call).and_return(true)
-              expect(CreateApplicantService).to receive(:call).and_return(true)
-              expect(CreateCapitalsService).to receive(:call).and_return(true)
-              expect(CreatePropertiesService).to receive(:call).and_return(true)
-              expect(CreateVehiclesService).to receive(:call).and_return(true)
-              expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
-              expect(CreateStateBenefitsService).to receive(:call).and_return(true)
-              expect(CreateDependantsService).to receive(:call).and_return(true)
-              expect(CreateOutgoingsService).to receive(:call).and_return(true)
-              expect(CreateOtherIncomeService).to receive(:call).and_return(true)
+          it 'calls all the services it manages' do
+            expect(CreateAssessmentService).to receive(:call).and_return(true)
+            expect(CreateApplicantService).to receive(:call).and_return(true)
+            expect(CreateCapitalsService).to receive(:call).and_return(true)
+            expect(CreatePropertiesService).to receive(:call).and_return(true)
+            expect(CreateVehiclesService).to receive(:call).and_return(true)
+            expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
+            expect(CreateStateBenefitsService).to receive(:call).and_return(true)
+            expect(CreateDependantsService).to receive(:call).and_return(true)
+            expect(CreateOutgoingsService).to receive(:call).and_return(true)
+            expect(CreateOtherIncomeService).to receive(:call).and_return(true)
+            expect(CreateIrregularIncomesService).to receive(:call).and_return(true)
 
-              expect(CreateIrregularIncomesService).not_to receive(:call)
-
-              submission_manager.call
-            end
+            submission_manager.call
           end
 
           describe '#submission' do
             it 'associates the application with the submission' do
               expect(submission.legal_aid_application_id).to eq application.id
-            end
-          end
-
-          context 'use new student loan is set to true' do
-            it 'calls the CreateIrregularIncomesService along with all the others' do
-              Setting.setting.update(use_new_student_loan: true)
-              expect(CreateAssessmentService).to receive(:call).and_return(true)
-              expect(CreateApplicantService).to receive(:call).and_return(true)
-              expect(CreateCapitalsService).to receive(:call).and_return(true)
-              expect(CreatePropertiesService).to receive(:call).and_return(true)
-              expect(CreateVehiclesService).to receive(:call).and_return(true)
-              expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
-              expect(CreateStateBenefitsService).to receive(:call).and_return(true)
-              expect(CreateDependantsService).to receive(:call).and_return(true)
-              expect(CreateOutgoingsService).to receive(:call).and_return(true)
-              expect(CreateOtherIncomeService).to receive(:call).and_return(true)
-              expect(CreateIrregularIncomesService).to receive(:call).and_return(true)
-              submission_manager.call
             end
           end
         end
