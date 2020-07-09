@@ -1,0 +1,2 @@
+class ApplySystemRole < ApplicationRecord
+end

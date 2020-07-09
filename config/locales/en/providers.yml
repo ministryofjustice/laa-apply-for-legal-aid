@@ -501,7 +501,7 @@ en:
         email: Email address
         name: Name
         page_title: Your profile
-        role: Role
+        role: ApplySystemRole
         username: Username
     respondents:
       show:
