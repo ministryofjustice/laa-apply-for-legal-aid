@@ -4,7 +4,7 @@ module Flow
       STEPS = {
         identify_types_of_incomes: {
           path: ->(_) { urls.citizens_identify_types_of_income_path },
-          forward: ->(_) { Setting.use_new_student_loan? ? :student_finances : :identify_types_of_outgoings },
+          forward: ->(_) { :student_finances },
           check_answers: :check_answers
         },
         student_finances: {
