@@ -8,6 +8,9 @@ class Provider < ApplicationRecord
   has_many :legal_aid_applications
   has_and_belongs_to_many :offices
 
+  has_many :actor_permissions, as: :permittable
+  has_many :permissions, through: :actor_permissions
+
   after_create do
     ActiveSupport::Notifications.instrument 'dashboard.provider_created'
   end
@@ -26,6 +29,11 @@ class Provider < ApplicationRecord
 
   def whitelisted_user?
     whitelisted_users&.any? { |user| user.casecmp(username).zero? }
+  end
+
+  def user_permissions
+    firm_permissions = firm.nil? ? [] : firm.permissions
+    permissions.empty? ? firm_permissions : permissions
   end
 
   private
