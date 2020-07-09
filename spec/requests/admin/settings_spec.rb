@@ -51,8 +51,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       {
         setting: {
           mock_true_layer_data: 'true',
-          allow_non_passported_route: 'false',
-          use_new_student_loan: 'true'
+          allow_non_passported_route: 'false'
         }
       }
     end

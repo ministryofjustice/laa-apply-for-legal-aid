@@ -30,14 +30,6 @@
       title: { size: :m, text: t('.labels.manually_review_all_cases') }
     ) %>
 
-    <%= form.govuk_collection_radio_buttons(
-            :use_new_student_loan,
-            [true, false],
-            inline: true,
-            hint: t('.hints.use_new_student_loan'),
-            title: { size: :m, text: t('.labels.use_new_student_loan') }
-        ) %>
-
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

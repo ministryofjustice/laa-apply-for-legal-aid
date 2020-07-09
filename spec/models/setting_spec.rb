@@ -10,7 +10,6 @@ RSpec.describe Setting do
         expect(rec.mock_true_layer_data?).to be false
         expect(rec.allow_non_passported_route?).to be true
         expect(rec.manually_review_all_cases?).to be true
-        expect(rec.use_new_student_loan?).to be false
         expect(rec.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
       end
     end
@@ -21,7 +20,6 @@ RSpec.describe Setting do
           mock_true_layer_data: true,
           allow_non_passported_route: false,
           manually_review_all_cases: false,
-          use_new_student_loan: true,
           bank_transaction_filename: 'my_special_file.csv'
         )
       end
@@ -31,7 +29,6 @@ RSpec.describe Setting do
         expect(rec.mock_true_layer_data?).to be true
         expect(rec.allow_non_passported_route?).to be false
         expect(rec.manually_review_all_cases?).to be false
-        expect(rec.use_new_student_loan?).to be true
         expect(rec.bank_transaction_filename).to eq 'my_special_file.csv'
       end
     end
@@ -44,7 +41,6 @@ RSpec.describe Setting do
       expect(Setting.mock_true_layer_data?).to be false
       expect(Setting.allow_non_passported_route?).to be true
       expect(Setting.manually_review_all_cases?).to be true
-      expect(Setting.use_new_student_loan?).to be false
       expect(Setting.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
     end
   end

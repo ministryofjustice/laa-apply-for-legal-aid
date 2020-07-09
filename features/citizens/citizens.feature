@@ -62,6 +62,12 @@ Feature: Citizen journey
     Then I should be on a page showing "Which types of income do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
+    Then I should be on the 'student_finance' page showing 'Do you get student finance?'
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on the 'annual_amount' page showing 'How much student finance will you get this academic year?'
+    When I enter amount '5000'
+    And I click 'Save and continue'
     Then I should be on a page showing "What regular payments do you make?"
     Then I select "Rent or mortgage"
     Then I click 'Save and continue'
