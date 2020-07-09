@@ -195,3 +195,11 @@ en:
     shared_ownerships:
       show:
         heading_1: Do you own your home with anyone else?
+    student_finances:
+      show:
+        field_set_header: Do you get student finance?
+        hint: This includes any type of student loan, grant or bursary.
+      annual_amounts:
+        show:
+          field_set_header: How much student finance will you get this academic year?
+          hint: Check your student finance entitlement letter.

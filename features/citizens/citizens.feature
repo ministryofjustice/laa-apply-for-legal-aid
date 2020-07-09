@@ -43,6 +43,7 @@ Feature: Citizen journey
     Then I click link 'Continue'
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "Yes"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do you have online access'
     Then I choose "No"

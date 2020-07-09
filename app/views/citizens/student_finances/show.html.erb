@@ -1,0 +1,22 @@
+<%= page_template page_title: t('.field_set_header'), template: :basic do %>
+
+  <%= form_with(model: @form, url: citizens_student_finance_path, method: :patch, local: true) do |form| %>
+
+    <%
+      options = [
+          { value: :true, label: t('generic.yes') },
+          { value: :false,  label: t('generic.no') }
+      ]
+    %>
+
+    <%= govuk_fieldset_header(content_for(:page_title)) %>
+    <%= govuk_hint t('.hint') %>
+
+    <%= form.govuk_collection_radio_buttons :student_finance, options, :value, :label, error: @error %>
+
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+  <% end %>
+<% end %>

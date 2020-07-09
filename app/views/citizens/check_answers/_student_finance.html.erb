@@ -4,7 +4,7 @@
 
   <%= check_answer_link(
           name: :student_finance,
-          url: 'tbd',
+          url: citizens_student_finance_path,
           question: t('.do_you_get'),
           answer: yes_no(@legal_aid_application.receives_student_finance?),
           read_only: false,
@@ -13,7 +13,7 @@
 
   <%= check_answer_link(
           name: :student_finance,
-          url: 'tbd',
+          url: citizens_student_finances_annual_amount_path,
           question: t('.how_much'),
           answer: number_to_currency(@legal_aid_application.value_of_student_finance),
           read_only: false,
