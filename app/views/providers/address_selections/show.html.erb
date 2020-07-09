@@ -16,7 +16,7 @@
 
       <p class="govuk-label">
         <%= t('generic.address.postcode') %>
-        <p class='govuk-body govuk-!-font-weight-bold'>
+        <p class='govuk-body govuk-!-font-weight-bold' role='alert'>
           <%= @form.postcode.insert(-4, " ") %>
           <%= link_to(
                 t('generic.change'),
