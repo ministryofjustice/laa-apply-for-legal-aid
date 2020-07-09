@@ -13,7 +13,7 @@ RSpec.describe ProvidersHelper, type: :helper do
       route.defaults[:controller].to_s.split('/')[1]
     }.uniq
   end
-  let(:controllers_with_params) { %w[incoming_transactions outgoing_transactions] }
+  let(:controllers_with_params) { %w[incoming_transactions outgoing_transactions remove_dependant] }
   let(:excluded_controllers) { %w[bank_transactions] + controllers_with_params }
 
   describe '#url_for_application' do
@@ -34,6 +34,16 @@ RSpec.describe ProvidersHelper, type: :helper do
       legal_aid_application.provider_step = 'outgoing_transactions'
       legal_aid_application.provider_step_params = { transaction_type: :salary }
       expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary")
+    end
+
+    context 'when removing a dependant' do
+      let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+
+      it 'routes correctly' do
+        legal_aid_application.provider_step = 'remove_dependant'
+        legal_aid_application.provider_step_params = { id: dependant.id }
+        expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/remove_dependant/#{dependant.id}")
+      end
     end
   end
 end

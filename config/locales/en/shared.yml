@@ -85,7 +85,7 @@ en:
           pension: Pension
           total_income: Total income
       income_result:
-        total_disposable_income: Total disposable income asssessed
+        total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
         gross_income_limit: Gross income limit
         disposable_income_lower_limit: Disposable income lower limit

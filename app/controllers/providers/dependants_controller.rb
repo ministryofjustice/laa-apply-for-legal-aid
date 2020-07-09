@@ -1,42 +1,44 @@
 module Providers
   class DependantsController < ProviderBaseController
-    helper_method :other_dependants
-
-    def index
-      @form = DependantForm::DetailsForm.new(model: dependant)
+    def new
+      @form = LegalAidApplications::DependantForm.new(model: dependant)
     end
 
-    def create
-      @form = DependantForm::DetailsForm.new(form_params)
+    def show
+      @form = LegalAidApplications::DependantForm.new(model: dependant)
+    end
 
+    def update
+      @form = LegalAidApplications::DependantForm.new(form_params)
       if @form.save
-        replace_last_page_in_history(edit_dependant_path)
         go_forward(dependant)
       else
-        render :index
+        render @form.model.id.nil? ? :new : :show
       end
     end
 
     private
 
-    def other_dependants
-      @other_dependants ||= legal_aid_application.dependants
+    def dependant
+      @dependant ||= dependant_exists? || build_new_dependant
     end
 
-    def dependant
-      @dependant ||= Dependant.new(
+    def dependant_exists?
+      legal_aid_application.dependants.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      false
+    end
+
+    def build_new_dependant
+      Dependant.new(
         legal_aid_application: legal_aid_application,
         number: legal_aid_application.dependants.count + 1
       )
     end
 
-    def edit_dependant_path
-      providers_legal_aid_application_dependant_details_path(legal_aid_application.id, dependant.id)
-    end
-
     def form_params
       merge_with_model(dependant) do
-        params.require(:dependant).permit(*DependantForm::DetailsForm::ATTRIBUTES)
+        params.require(:dependant).permit(*LegalAidApplications::DependantForm::ATTRIBUTES)
       end
     end
   end

@@ -13,7 +13,7 @@ gem 'puma', '~> 4.3'
 gem 'rails', '~> 6.0.3'
 gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0', '>= 6.0.0'
-gem 'savon', '~> 2.12.0'
+gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
 gem 'simple_command', '~> 0.1.0'
 gem 'tzinfo-data'
@@ -52,9 +52,9 @@ gem 'jwt'
 
 # background processing
 gem 'redis-namespace'
-gem 'sidekiq', '~> 6.0.0'
-gem 'sidekiq-status', '>= 1.1.4'
+gem 'sidekiq', '~> 6.1.0'
 gem 'sidekiq_alive', '>= 2.0.1'
+gem 'sidekiq-status', '>= 1.1.4'
 
 # Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
 # Default to 3.7.2 as https://github.com/sass/sassc-rails/issues/122 sassc loading is causing a segmentation error
@@ -113,6 +113,7 @@ end
 group :development do
   gem 'better_errors', '>= 2.7.1'
   gem 'binding_of_caller'
+  gem 'guard-cucumber'
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-rubocop'

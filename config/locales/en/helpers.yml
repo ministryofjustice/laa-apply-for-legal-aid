@@ -21,6 +21,7 @@ en:
         own_vehicle: This includes cars, vans and motorcycles
       merits_assessment:
         estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
+      student_finance: This includes any type of student loan, grant or bursary.
     label:
       feedback:
         done_all_needed:

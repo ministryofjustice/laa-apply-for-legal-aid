@@ -114,7 +114,7 @@ module StatementOfCases
     end
 
     def original_file_error_for(error_type, options = {})
-      I18n.t("activemodel.errors.models.statement_of_case.attributes.original_file.#{error_type}", options)
+      I18n.t("activemodel.errors.models.statement_of_case.attributes.original_file.#{error_type}", **options)
     end
 
     def create_attachment(original_file)

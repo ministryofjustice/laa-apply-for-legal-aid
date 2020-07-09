@@ -2,7 +2,7 @@ FROM ruby:2.6.3-alpine3.10
 MAINTAINER apply for legal aid team
 
 ENV \
-  KUBECTL_VERSION=1.13.11
+  KUBECTL_VERSION=1.16.10
 
 # fail early and print all commands
 RUN set -ex

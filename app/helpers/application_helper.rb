@@ -15,9 +15,9 @@ module ApplicationHelper
     "#{title} - #{default}".html_safe
   end
 
-  def controller_t(lazy_t, *args)
+  def controller_t(lazy_t, **args)
     controller = controller_path.split('/')
-    t ".#{[*controller, lazy_t].join('.')}", *args
+    t ".#{[*controller, lazy_t].join('.')}", **args
   end
 
   def menu_button
