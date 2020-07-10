@@ -268,3 +268,35 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'check_provider_answers' page showing 'Your application'
     And I should not see 'What happens next'
     But I should see 'You can continue your application when your client has shared their financial information with us. We'll tell you when they've done this.'
+
+  @javascript
+  Scenario: Complete a merits application for applicant that does not receive benefits but gets a student loan
+    Given I start the merits application with student finance
+    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    When I click 'Continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And I should see 'Student finance'
+    And I should see 'in student finance this academic year.'
+    When I click 'Save and continue'
+    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    When I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+    When I choose "No"
+    And I click "Save and continue"
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    When I select 'None of these'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    When I select "None of these"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which types of assets does your client have?"
+    When I select "None of these"
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    And I should not see 'Student finance'
