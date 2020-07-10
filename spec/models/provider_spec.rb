@@ -53,4 +53,35 @@ RSpec.describe Provider, type: :model do
       end
     end
   end
+
+  describe '#user_permissions' do
+    let!(:permission1) { create :permission }
+    let!(:permission2) { create :permission }
+    let!(:permission3) { create :permission }
+
+    context 'no permissions for this provider, but one permission for firm' do
+      before do
+        firm.permissions << permission2
+        firm.save!
+      end
+
+      it 'returns the firms permissions' do
+        expect(provider.user_permissions).to eq [permission2]
+      end
+    end
+
+    context 'permissions exist for both firm and provider' do
+      before do
+        firm.permissions << permission1
+        firm.permissions << permission2
+        firm.save!
+        provider.permissions << permission3
+        provider.permissions << permission1
+        provider.save!
+      end
+      it 'returns the permission for the provider' do
+        expect(provider.user_permissions).to match_array([permission1, permission3])
+      end
+    end
+  end
 end

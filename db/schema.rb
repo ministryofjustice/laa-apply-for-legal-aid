@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_122054) do
+ActiveRecord::Schema.define(version: 2020_07_09_135901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2020_07_02_122054) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "actor_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "permittable_type"
+    t.uuid "permittable_id"
+    t.uuid "permission_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["permittable_type", "permittable_id", "permission_id"], name: "actor_permissions_unqiueness", unique: true
+    t.index ["permittable_type", "permittable_id"], name: "index_actor_permissions_on_permittable_type_and_permittable_id"
   end
 
   create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -504,6 +514,12 @@ ActiveRecord::Schema.define(version: 2020_07_02_122054) do
     t.datetime "updated_at", null: false
     t.boolean "none_selected"
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
+  end
+
+  create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "role"
+    t.string "description"
+    t.index ["role"], name: "index_permissions_on_role", unique: true
   end
 
   create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
