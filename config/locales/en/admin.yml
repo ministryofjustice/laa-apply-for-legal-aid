@@ -55,3 +55,9 @@ en:
     reports:
       index:
         heading_1: 'Admin reports and downloads'
+    roles:
+      index:
+        heading_1: Search for the Provider firm name
+      permissions:
+        show:
+          heading_1: Select Firm permissions
