@@ -26,6 +26,12 @@
       <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
         <%= render partial: 'add_other_income' %>
       <% end %>
+    <% if @legal_aid_application.student_finance? %>
+      <li>
+        <h3 class="govuk-heading-m govuk-!-padding-top-6">Student finance</h3>
+        <p class="gov-body">Your client also told us they'll get <%= number_to_currency(@legal_aid_application.value_of_student_finance) %> in student finance this academic year.</p>
+      </li>
+    <% end %>
   </ol>
 
   <%= next_action_buttons_with_form(
