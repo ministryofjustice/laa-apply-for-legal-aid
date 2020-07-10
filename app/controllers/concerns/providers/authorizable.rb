@@ -6,12 +6,12 @@ module Providers
     extend ActiveSupport::Concern
 
     class_methods do
-      attr_reader :authorize_with_policy_name
+      attr_reader :authorize_with_policy_method_name
 
       # Use this class method in a controller to set the policy to be used within that controller
       # If not set the policy will behave as normal for Pundit (policy will be based on action name)
-      def authorize_with_policy(name)
-        @authorize_with_policy_name = name
+      def authorize_with_policy_method(name)
+        @authorize_with_policy_method_name = name
       end
     end
 
@@ -22,7 +22,7 @@ module Providers
       rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized
 
       def pundit_user
-        current_provider
+        AuthorizationContext.new(current_provider, self)
       end
 
       private
@@ -71,7 +71,7 @@ module Providers
         return if self.class.legal_aid_application_not_required?
         return unless legal_aid_application # let missing application through so can be caught as not found
 
-        authorize legal_aid_application, self.class.authorize_with_policy_name
+        authorize legal_aid_application, self.class.authorize_with_policy_method_name
       end
     end
   end

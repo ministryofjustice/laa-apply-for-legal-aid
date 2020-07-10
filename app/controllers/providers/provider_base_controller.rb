@@ -5,5 +5,9 @@ module Providers
     include ApplicationDependable
     include Draftable
     include Authorizable
+
+    def pre_dwp_check?
+      false
+    end
   end
 end

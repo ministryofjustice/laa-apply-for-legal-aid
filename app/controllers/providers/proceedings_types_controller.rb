@@ -1,5 +1,5 @@
 module Providers
-  class ProceedingsTypesController < ProviderBaseController
+  class ProceedingsTypesController < PreDWPCheckProviderBaseController
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
       proceeding_types

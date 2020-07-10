@@ -36,6 +36,14 @@ class Provider < ApplicationRecord
     permissions.empty? ? firm_permissions : permissions
   end
 
+  def passported_permissions?
+    user_permissions.map(&:role).include?('application.passported.*')
+  end
+
+  def non_passported_permissions?
+    user_permissions.map(&:role).include?('application.non_passported.*')
+  end
+
   private
 
   def whitelisted_users

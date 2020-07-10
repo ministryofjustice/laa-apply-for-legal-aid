@@ -1,5 +1,5 @@
 module Providers
-  class UsedDelegatedFunctionsController < ProviderBaseController
+  class UsedDelegatedFunctionsController < PreDWPCheckProviderBaseController
     def show
       @form = LegalAidApplications::UsedDelegatedFunctionsForm.new(model: legal_aid_application)
     end

@@ -1,5 +1,5 @@
 module Providers
-  class AddressLookupsController < ProviderBaseController
+  class AddressLookupsController < PreDWPCheckProviderBaseController
     def show
       @form = Addresses::AddressLookupForm.new(model: address)
     end

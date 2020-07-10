@@ -807,4 +807,29 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#benefits_checked?' do
+    subject { legal_aid_application.benefits_checked? }
+
+    context 'benefits not checked yet' do
+      let(:legal_aid_application) { create :legal_aid_application }
+      it 'returns false' do
+        expect(subject).to be false
+      end
+    end
+
+    context 'benefits checked with negative result' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+      it 'returns true' do
+        expect(subject).to be true
+      end
+    end
+
+    context 'benefits checked with positive result' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+      it 'returns true' do
+        expect(subject).to be true
+      end
+    end
+  end
 end

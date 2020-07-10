@@ -43,7 +43,11 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:date_of_birth) { '1980/01/10'.to_date }
   let(:national_insurance_number) { 'JA293483A' }
   let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
+<<<<<<< HEAD
   let(:application) { create :application, applicant: applicant, state: 'checking_applicant_details' }
+=======
+  let(:application) { create :application, applicant: applicant, provider: provider }
+>>>>>>> AP-1505 Add checks to legal aid application policy to ensure provider has right permissions to manage applications
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
   let(:env_allow_non_passported_route) { [true, false].sample }

@@ -1,51 +1,61 @@
 class LegalAidApplicationPolicy < ApplicationPolicy
   def index?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def new?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def show?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def update?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def destroy?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def create?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def remove_transaction_type?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def continue?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def reset?
-    my_firms_unsubmitted_record?
+    authorized_to_process?
   end
 
   def show_submitted_application?
-    my_firms_record?
+    authorized_to_view_submitted?
   end
 
   private
 
-  def my_firms_unsubmitted_record?
-    my_firms_record? && !record.submitted_to_ccms?
+  def authorized_to_process?
+    my_firms_record? && !record.submitted_to_ccms? && authorized_passported_permissions?
+  end
+
+  def authorized_to_view_submitted?
+    my_firms_record? && authorized_passported_permissions?
   end
 
   def my_firms_record?
     record.provider.firm.id == provider.firm.id
+  end
+
+  def authorized_passported_permissions?
+    return true if @controller.pre_dwp_check?
+
+    record.passported? ? provider.passported_permissions? : provider.non_passported_permissions?
   end
 end

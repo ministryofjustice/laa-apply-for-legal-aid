@@ -175,6 +175,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     !passported?
   end
 
+  def benefits_checked?
+    benefit_check_result.present?
+  end
+
   def benefit_check_result_needs_updating?
     return true unless benefit_check_result
 

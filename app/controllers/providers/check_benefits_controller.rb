@@ -1,5 +1,5 @@
 module Providers
-  class CheckBenefitsController < ProviderBaseController
+  class CheckBenefitsController < PreDWPCheckProviderBaseController
     helper_method :should_use_ccms?
 
     def index
@@ -21,9 +21,9 @@ module Providers
     end
 
     def should_use_ccms?
-      return false if legal_aid_application.applicant_receives_benefit?
+      return false if legal_aid_application.applicant_receives_benefit? && provider.passported_permissions?
 
-      return false if Setting.allow_non_passported_route?
+      return false if provider.non_passported_permissions? && Setting.allow_non_passported_route?
 
       legal_aid_application.use_ccms! unless legal_aid_application.use_ccms?
       true
@@ -36,6 +36,10 @@ module Providers
     def set_negative_result_and_go_forward
       legal_aid_application.create_benefit_check_result!(result: 'skipped:known_issue')
       go_forward
+    end
+
+    def provider
+      legal_aid_application.provider
     end
   end
 end

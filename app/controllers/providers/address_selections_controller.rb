@@ -1,5 +1,5 @@
 module Providers
-  class AddressSelectionsController < ProviderBaseController
+  class AddressSelectionsController < PreDWPCheckProviderBaseController
     def show # rubocop:disable Metrics/AbcSize
       return redirect_to back_path unless address.postcode
 

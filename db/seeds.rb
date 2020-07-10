@@ -13,6 +13,7 @@ Seeder.monitor ProceedingType
 Seeder.monitor ProceedingTypeScopeLimitation
 Seeder.monitor ScopeLimitation
 Seeder.monitor Permission
+Seeder.monitor ActorPermission
 
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
   load seed
