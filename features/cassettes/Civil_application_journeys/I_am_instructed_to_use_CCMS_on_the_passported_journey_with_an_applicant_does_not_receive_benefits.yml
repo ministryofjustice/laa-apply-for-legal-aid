@@ -1,0 +1,418 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=DA74NG
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Jul 2020 14:39:17 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Tx-Id:
+      - 1594305557312:312
+      Status:
+      - success
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "header" : {
+            "uri" : "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?lr=EN&postcode=DA74NG",
+            "query" : "postcode=DA74NG",
+            "offset" : 0,
+            "totalresults" : 11,
+            "format" : "JSON",
+            "dataset" : "DPA",
+            "lr" : "EN",
+            "maxresults" : 100,
+            "epoch" : "76",
+            "output_srs" : "EPSG:27700"
+          },
+          "results" : [ {
+            "DPA" : {
+              "UPRN" : "100020211558",
+              "UDPRN" : "6248161",
+              "ADDRESS" : "1, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "1",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "2",
+              "X_COORDINATE" : 548894.0,
+              "Y_COORDINATE" : 176139.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD02",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095093",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "19/03/2001",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211559",
+              "UDPRN" : "6248164",
+              "ADDRESS" : "2, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "2",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548861.0,
+              "Y_COORDINATE" : 176156.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095079",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211560",
+              "UDPRN" : "6248165",
+              "ADDRESS" : "3, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "3",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "2",
+              "X_COORDINATE" : 548888.0,
+              "Y_COORDINATE" : 176131.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD02",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb5000005153955102",
+              "LAST_UPDATE_DATE" : "23/04/2020",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211561",
+              "UDPRN" : "6248166",
+              "ADDRESS" : "4, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "4",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548858.0,
+              "Y_COORDINATE" : 176150.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095080",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "19/03/2001",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211562",
+              "UDPRN" : "6248167",
+              "ADDRESS" : "5, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "5",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548884.0,
+              "Y_COORDINATE" : 176118.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD02",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095091",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "19/03/2001",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211563",
+              "UDPRN" : "6248168",
+              "ADDRESS" : "6, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "6",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548849.0,
+              "Y_COORDINATE" : 176141.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095082",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211564",
+              "UDPRN" : "6248169",
+              "ADDRESS" : "7, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "7",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548874.0,
+              "Y_COORDINATE" : 176106.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095089",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "19/03/2001",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211565",
+              "UDPRN" : "6248170",
+              "ADDRESS" : "8, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "8",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548846.0,
+              "Y_COORDINATE" : 176133.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095083",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211566",
+              "UDPRN" : "6248171",
+              "ADDRESS" : "9, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "9",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548868.0,
+              "Y_COORDINATE" : 176104.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095088",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211567",
+              "UDPRN" : "6248162",
+              "ADDRESS" : "10, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "10",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "1",
+              "X_COORDINATE" : 548848.0,
+              "Y_COORDINATE" : 176115.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095085",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          }, {
+            "DPA" : {
+              "UPRN" : "100020211568",
+              "UDPRN" : "6248163",
+              "ADDRESS" : "12, LONSDALE ROAD, BEXLEYHEATH, DA7 4NG",
+              "BUILDING_NUMBER" : "12",
+              "THOROUGHFARE_NAME" : "LONSDALE ROAD",
+              "POST_TOWN" : "BEXLEYHEATH",
+              "POSTCODE" : "DA7 4NG",
+              "RPC" : "2",
+              "X_COORDINATE" : 548854.0,
+              "Y_COORDINATE" : 176110.0,
+              "STATUS" : "APPROVED",
+              "LOGICAL_STATUS_CODE" : "1",
+              "CLASSIFICATION_CODE" : "RD03",
+              "CLASSIFICATION_CODE_DESCRIPTION" : "Semi-Detached",
+              "LOCAL_CUSTODIAN_CODE" : 5120,
+              "LOCAL_CUSTODIAN_CODE_DESCRIPTION" : "BEXLEY",
+              "POSTAL_ADDRESS_CODE" : "D",
+              "POSTAL_ADDRESS_CODE_DESCRIPTION" : "A record which is linked to PAF",
+              "BLPU_STATE_CODE" : null,
+              "BLPU_STATE_CODE_DESCRIPTION" : "Unknown/Not applicable",
+              "TOPOGRAPHY_LAYER_TOID" : "osgb1000000095086",
+              "LAST_UPDATE_DATE" : "10/02/2016",
+              "ENTRY_DATE" : "04/06/2005",
+              "LANGUAGE" : "EN",
+              "MATCH" : 1.0,
+              "MATCH_DESCRIPTION" : "EXACT"
+            }
+          } ]
+        }
+  recorded_at: Thu, 09 Jul 2020 14:39:17 GMT
+- request:
+    method: post
+    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>55685032-2718-4667-b9f2-1b571dd72e95</clientReference><nino>JA293483B</nino><surname>PAUL</surname><dateOfBirth>19611210</dateOfBirth><dateOfAward>20200709</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"check"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '649'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Thu, 09 Jul 2020 14:39:18 GMT
+      Content-Type:
+      - text/xml;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Amzn-Trace-Id:
+      - Root=1-5f072c16-4752cca9e982c7e540fda9af;
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
+        xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">55685032-2718-4667-b9f2-1b571dd72e95</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">No</ns2:benefitCheckerStatus><ns3:confirmationRef
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1594305558801</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+  recorded_at: Thu, 09 Jul 2020 14:39:18 GMT
+recorded_with: VCR 6.0.0

@@ -31,7 +31,7 @@ Feature: Non-passported applicant journeys
 
   @javascript @vcr
   Scenario: Selects and categorises bank transactions into transaction types
-    Given I start the merits application with brank transactions with no transaction type category
+    Given I start the merits application with bank transactions with no transaction type category
     Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"

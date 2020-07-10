@@ -139,7 +139,7 @@ Given('I start the merits application') do
   )
 end
 
-Given('I start the merits application with brank transactions with no transaction type category') do
+Given('I start the merits application with bank transactions with no transaction type category') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -563,3 +563,11 @@ Then('wait a bit') do
   sleep 2
 end
 # rubocop:enable Lint/Debugger
+
+Given('I start the passported journey') do
+  LaaApplyForLegalAid::Application.config.x.allow_non_passported_route = false
+end
+
+Then('I complete the passported journey') do
+  LaaApplyForLegalAid::Application.config.x.allow_non_passported_route = true
+end

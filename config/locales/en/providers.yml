@@ -168,9 +168,6 @@ en:
       check_benefits_result:
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
-        how_we_checked: How we checked your client's benefits status
-        details_used: "We used the following details to check your client's benefits status with the DWP:"
-        change_client_details_html: <a href="applicant_details">Change your client's details</a> if you entered them incorrectly.
         you_need_to: "You'll need to:"
         negative_result:
           tab_title: Your client must complete a financial assessment
@@ -186,6 +183,10 @@ en:
           title: "%{name} receives benefits that qualify for legal aid"
           must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
           provide_access/details: provide details of the case
+      how_we_checked:
+        how_we_checked: How we checked your client's benefits status
+        details_used: "We used the following details to check your client's benefits status with the DWP:"
+        change_client_details_html: <a href="applicant_details">Change your client's details</a> if you entered them incorrectly.   
       use_ccms:
         accept_only: We currently only accept applications for people receiving one of these benefits.
         apply_in_ccms: Apply using CCMS
@@ -333,7 +334,7 @@ en:
         remove_link: Remove
       index:
         subheading: Your client told us they receive the following types of income.
-        you_need_to: 
+        you_need_to:
           text: "You need to:"
           list: |
             view your client's bank statements
