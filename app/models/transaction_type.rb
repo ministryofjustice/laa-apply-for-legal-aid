@@ -20,6 +20,8 @@ class TransactionType < ApplicationRecord
     ]
   }.freeze
 
+  EXCLUDED_BENEFITS = 'excluded_benefits'.freeze
+
   OTHER_INCOME_TYPES = %w[
     friends_or_family
     maintenance_in
@@ -73,6 +75,10 @@ class TransactionType < ApplicationRecord
 
   def providers_label_name
     label_name(journey: :providers)
+  end
+
+  def excluded_benefit?
+    name == EXCLUDED_BENEFITS
   end
 
   def child?

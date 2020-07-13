@@ -111,6 +111,19 @@ RSpec.describe TransactionType, type: :model do
       end
     end
 
+    describe '#excluded_benefit?' do
+      context 'is excluded benefit type' do
+        it 'returns true' do
+          expect(excluded_benefits.excluded_benefit?).to eq true
+        end
+      end
+      context 'not an excluded benefit type' do
+        it 'returns false' do
+          expect(pension.excluded_benefit?).to eq false
+        end
+      end
+    end
+
     describe '#children' do
       context 'record with no children' do
         it 'returns an empty array' do
