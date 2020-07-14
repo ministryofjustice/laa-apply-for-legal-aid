@@ -9,7 +9,9 @@ module Flow
         dependants: {
           path: ->(application) { urls.new_providers_legal_aid_application_dependant_path(application) },
           forward: :has_other_dependants,
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(app) {
+                           app.checking_non_passported_means? ? :means_summaries : :check_passported_answers
+                         }
         },
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_dependants_path(application) },

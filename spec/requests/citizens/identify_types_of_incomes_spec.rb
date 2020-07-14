@@ -71,7 +71,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
     end
 
     context 'when transaction types selected' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, no_credit_transaction_types_selected: true }
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means, no_credit_transaction_types_selected: true }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
       it 'should redirect to the next step' do

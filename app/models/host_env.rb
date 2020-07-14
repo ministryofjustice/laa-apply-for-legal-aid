@@ -2,11 +2,12 @@ class HostEnv
   def self.environment
     return Rails.env.to_sym unless Rails.env.production?
 
-    if /staging.apply-for-legal-aid.service.justice.gov.uk/.match?(root_url)
+    case root_url
+    when /staging.apply-for-legal-aid.service.justice.gov.uk/
       :staging
-    elsif /.apps.live-1.cloud-platform.service.justice.gov.uk/.match?(root_url)
+    when /.apps.live-1.cloud-platform.service.justice.gov.uk/
       :uat
-    elsif /apply-for-legal-aid.service.justice.gov.uk/.match?(root_url)
+    when /apply-for-legal-aid.service.justice.gov.uk/
       :production
     else raise "Unable to determine HostEnv from #{root_url}"
     end
