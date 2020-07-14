@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'citizen additional accounts request test', type: :request do
-  let(:application) { create :application, :with_applicant, :provider_submitted }
+  let(:application) { create :application, :with_applicant, :applicant_entering_means }
   let(:application_id) { application.id }
   let(:secure_id) { application.generate_secure_id }
   let(:next_flow_step) { flow_forward_path }
@@ -24,7 +24,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     it 'checks that offline account is reset to nil' do
       get citizens_additional_accounts_path
       expect(application.reload.has_offline_accounts).to be_nil
-      expect(application.state).to eq 'provider_submitted'
+      expect(application.state).to eq 'applicant_entering_means'
     end
   end
 
@@ -67,7 +67,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
   describe 'PATCH/PUT /citizens/additional_accounts' do
     let(:params) { {} }
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :provider_submitted }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means }
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       patch(

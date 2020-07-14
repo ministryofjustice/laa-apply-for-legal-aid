@@ -28,7 +28,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'hint: nil' do
-      let(:params) { [attribute.to_sym, hint: nil] }
+      let(:params) { [attribute.to_sym, { hint: nil }] }
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-hint')
@@ -37,7 +37,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'Display hint and no label (label: nil, hint: hint_copy)' do
-      let(:params) { [attribute.to_sym, label: nil, hint: hint_copy] }
+      let(:params) { [attribute.to_sym, { label: nil, hint: hint_copy }] }
 
       it 'does not include a hint message' do
         expect(subject).not_to include('govuk-label')
@@ -47,7 +47,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'pass a label parameter' do
       let(:custom_label) { Faker::Lorem.sentence }
-      let(:params) { [attribute.to_sym, label: custom_label] }
+      let(:params) { [attribute.to_sym, { label: custom_label }] }
 
       it 'shows the custom label' do
         expect(label.classes).to include('govuk-label')
@@ -74,7 +74,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'adding a custom class to the input' do
       let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [attribute.to_sym, class: custom_class] }
+      let(:params) { [attribute.to_sym, { class: custom_class }] }
 
       it 'adds custom class to the input' do
         expect(tag.classes).to include(custom_class)
@@ -83,7 +83,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'pass a label parameter with text and size' do
       let(:custom_label) { Faker::Lorem.sentence }
-      let(:params) { [attribute.to_sym, label: { text: custom_label, size: :m }] }
+      let(:params) { [attribute.to_sym, { label: { text: custom_label, size: :m } }] }
 
       it 'shows the custom label' do
         expect(label.classes).to include('govuk-label')
@@ -156,7 +156,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'suffix' do
-      let(:params) { [attribute.to_sym, suffix: 'litres'] }
+      let(:params) { [attribute.to_sym, { suffix: 'litres' }] }
 
       it 'shows the suffix' do
         expect(subject).to include %(<span class="input-suffix"> litres</span></div>)
@@ -165,7 +165,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'has an input_prefix option' do
       let(:prefix) { '£' }
-      let(:params) { [attribute.to_sym, input_prefix: prefix] }
+      let(:params) { [attribute.to_sym, { input_prefix: prefix }] }
 
       it 'includes a prefix ' do
         expect(tag.previous_element.content).to eq(prefix)
@@ -226,7 +226,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     let(:label_copy) { CGI.escapeHTML I18n.t("helpers.label.respondent.#{attribute}.true") }
     let(:input) { parsed_html.at_css("input##{resource}_#{attribute}_true") }
     let(:value) { true }
-    let(:params) { [:understands_terms_of_court_order, value, hint: hint_copy] }
+    let(:params) { [:understands_terms_of_court_order, value, { hint: hint_copy }] }
 
     subject { builder.govuk_radio_button(*params) }
 
@@ -261,7 +261,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'adding a custom class to the input' do
       let(:custom_class) { 'govuk-!-width-one-third' }
-      let(:params) { [:understands_terms_of_court_order, value, class: custom_class] }
+      let(:params) { [:understands_terms_of_court_order, value, { class: custom_class }] }
 
       it 'adds custom class to the input' do
         expect(input.classes).to include(custom_class)
@@ -270,7 +270,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'label is passed as a parameter' do
       let(:custom_label) { Faker::Lorem.sentence }
-      let(:params) { [:understands_terms_of_court_order, value, label: custom_label] }
+      let(:params) { [:understands_terms_of_court_order, value, { label: custom_label }] }
 
       it 'display the custom label instead of the one in locale file' do
         label = input.parent.at_css('label')
@@ -320,7 +320,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'when a hint message is passed as a parameter' do
       let(:hint_message) { 'Choose an option' }
-      let(:params) { [:understands_terms_of_court_order, options, hint: hint_message] }
+      let(:params) { [:understands_terms_of_court_order, options, { hint: hint_message }] }
 
       it 'the hint message appears only once' do
         expect(parsed_html.css('span.govuk-hint').count).to eq(1)
@@ -329,7 +329,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'when an error message is passed as a parameter' do
       let(:error_message) { 'Something wrong' }
-      let(:params) { [:understands_terms_of_court_order, options, error: error_message] }
+      let(:params) { [:understands_terms_of_court_order, options, { error: error_message }] }
 
       it 'the error message is shown' do
         expect(parsed_html.at_css('span.govuk-error-message').content).to eq(error_message)
@@ -373,7 +373,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'title is passed as a parameter' do
       let(:title) { 'Pick an option' }
-      let(:params) { [:understands_terms_of_court_order, options, title: title] }
+      let(:params) { [:understands_terms_of_court_order, options, { title: title }] }
 
       it 'display the title in a <legend> and <h1> tag' do
         expect(fieldset.child.name).to eq('legend')
@@ -387,7 +387,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
     context 'title is passed as text and size' do
       let(:title) { 'Pick an option' }
-      let(:params) { [:understands_terms_of_court_order, options, title: { text: title, size: :m }] }
+      let(:params) { [:understands_terms_of_court_order, options, { title: { text: title, size: :m } }] }
 
       it 'display the title in a <legend> and <h1> tag' do
         expect(fieldset.child.name).to eq('legend')
@@ -402,7 +402,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     context 'input_attributes are passed as parameters' do
       let(:input_attribute) { { 'data-aria-controls' => 'details' } }
       let(:input_attributes) { { true.to_s => input_attribute } }
-      let(:params) { [:understands_terms_of_court_order, options, input_attributes: input_attributes] }
+      let(:params) { [:understands_terms_of_court_order, options, { input_attributes: input_attributes }] }
 
       it 'adds the attribute only to the right attribute' do
         correct_radio_button = parsed_html.at_css('input[value="true"]')

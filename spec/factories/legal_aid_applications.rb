@@ -23,29 +23,87 @@ FactoryBot.define do
       applicant { build :applicant, :with_address_lookup }
     end
 
-    trait :provider_submitted do
-      state { 'provider_submitted' }
+    #######################################################
+    #        TRAITS TO SET STATE                          #
+    #######################################################
+
+    trait :analysing_bank_transactions do
+      state { 'analysing_bank_transactions' }
     end
 
-    trait :use_ccms do
-      state { 'use_ccms' }
+    trait :applicant_details_checked do
+      state { 'applicant_details_checked' }
     end
 
-    trait :client_details_answers_checked do
-      state { 'client_details_answers_checked' }
+    trait :applicant_entering_means do
+      state { 'applicant_entering_means' }
+    end
+
+    trait :assessment_submitted do
+      state { 'assessment_submitted' }
+    end
+
+    trait :awaiting_applicant do
+      state { 'awaiting_applicant' }
+    end
+
+    trait :checking_applicant_details do
+      state { :checking_applicant_details }
+    end
+
+    trait :checking_citizen_answers do
+      state { :checking_citizen_answers }
+    end
+
+    trait :checking_merits_answers do
+      state { 'checking_merits_answers' }
+    end
+
+    trait :checking_non_passported_means do
+      state { 'checking_non_passported_means' }
     end
 
     trait :checking_passported_answers do
       state { 'checking_passported_answers' }
     end
 
-    trait :provider_checking_citizens_means_answers do
-      state { 'provider_checking_citizens_means_answers' }
+    trait :delegated_functions_used do
+      state { :delegated_functions_used }
+    end
+
+    trait :entering_applicant_details do
+      state { :entering_applicant_details }
+    end
+
+    trait :generating_reports do
+      state { :generating_reports }
     end
 
     trait :provider_assessing_means do
       state { 'provider_assessing_means' }
     end
+
+    trait :provider_confirming_applicant_eligibility do
+      state { :provider_confirming_applicant_eligibility }
+    end
+
+    trait :provider_entering_means do
+      state { 'provider_entering_means' }
+    end
+
+    trait :provider_entering_merits do
+      state { 'provider_entering_merits' }
+    end
+
+    trait :submitting_assessment do
+      sate { :submitting_assessment }
+    end
+
+    trait :use_ccms do
+      state { 'use_ccms' }
+    end
+
+    #############################################################################
 
     trait :with_irregular_income do
       after(:create) do |application|
@@ -53,24 +111,8 @@ FactoryBot.define do
       end
     end
 
-    trait :checking_merits_answers do
-      state { 'checking_merits_answers' }
-    end
-
     trait :submitted_to_ccms do
       state { %w[assessment_submitted generating_reports submitting_assessment].sample }
-    end
-
-    trait :assessment_submitted do
-      state { 'assessment_submitted' }
-    end
-
-    trait :analysing_bank_transactions do
-      state { 'analysing_bank_transactions' }
-    end
-
-    trait :checking_client_details_answers do
-      state { :checking_client_details_answers }
     end
 
     trait :with_proceeding_types do
@@ -202,7 +244,7 @@ FactoryBot.define do
 
     trait :with_everything do
       with_applicant
-      provider_submitted
+      applicant_entering_means
       with_savings_amount
       with_other_assets_declaration
       with_own_home_mortgaged
@@ -225,7 +267,7 @@ FactoryBot.define do
 
     trait :with_everything_and_address do
       with_applicant_and_address
-      provider_submitted
+      applicant_entering_means
       with_savings_amount
       with_other_assets_declaration
       with_own_home_mortgaged
@@ -280,14 +322,19 @@ FactoryBot.define do
       provider_step { :applicants }
     end
 
+    trait :at_entering_applicant_details do
+      state { :entering_applicant_details }
+      provider_step { :applicants }
+    end
+
     trait :at_use_ccms do
       state { :use_ccms }
       provider_step { :use_ccms }
     end
 
-    trait :at_checking_client_details_answers do
+    trait :at_checking_applicant_details do
       with_proceeding_types
-      state { :checking_client_details_answers }
+      state { :checking_applicant_details }
       provider_step { :check_provider_answers }
     end
 
@@ -297,22 +344,10 @@ FactoryBot.define do
       provider_step { :check_passported_answers }
     end
 
-    trait :at_client_details_answers_checked do
+    trait :at_applicant_details_checked do
       with_proceeding_types
-      state { :client_details_answers_checked }
+      state { :applicant_details_checked }
       provider_step { :check_benefits }
-    end
-
-    trait :at_provider_submitted do
-      with_proceeding_types
-      state { :provider_submitted }
-      provider_step { :check_provider_answers }
-    end
-
-    trait :at_provider_assessing_means do
-      with_proceeding_types
-      state { :provider_assessing_means }
-      provider_step { :start_merits_assessments }
     end
 
     trait :at_client_completed_means do

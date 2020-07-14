@@ -142,7 +142,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I click 'Save and continue'
     Then I am on the client use online banking page
     Then I select 'Your client uses online banking for all of their bank accounts'
     Then I select 'Your client agrees to share their financial data with us'

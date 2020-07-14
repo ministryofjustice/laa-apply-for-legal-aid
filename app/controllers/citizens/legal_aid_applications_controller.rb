@@ -7,6 +7,7 @@ module Citizens
     def show
       return expired if application_error == :expired
 
+      legal_aid_application.applicant_enter_means!
       start_applicant_flow
     end
 

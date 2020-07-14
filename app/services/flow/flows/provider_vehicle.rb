@@ -5,7 +5,7 @@ module Flow
         vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
           forward: ->(application) { application.own_vehicle? ? :vehicles_estimated_values : :offline_accounts },
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers },
+          check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
           carry_on_sub_flow: ->(application) { application.own_vehicle? }
         },
         vehicles_estimated_values: {
@@ -23,7 +23,7 @@ module Flow
         vehicles_regular_uses: {
           path: ->(application) { urls.providers_legal_aid_application_vehicles_regular_use_path(application) },
           forward: :offline_accounts,
-          check_answers: ->(app) { app.provider_checking_citizens_means_answers? ? :means_summaries : :check_passported_answers }
+          check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers }
         }
       }.freeze
     end

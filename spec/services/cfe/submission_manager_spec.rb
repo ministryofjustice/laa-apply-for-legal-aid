@@ -9,7 +9,7 @@ module CFE
     let(:call_result) { true }
 
     describe '.call', vcr: { record: :new_episodes } do
-      let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :at_provider_submitted, vehicle: vehicle }
+      let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
       let(:staging_host) { 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk' }
       let(:last_submission_history) { SubmissionHistory.order(created_at: :asc).last }
       before do
@@ -38,7 +38,7 @@ module CFE
         end
 
         context 'passported application' do
-          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :at_provider_submitted, vehicle: vehicle }
+          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
 
           it 'creates a submission record' do
             expect { submission_manager.call }.to change { Submission.count }.by(1)
@@ -94,7 +94,7 @@ module CFE
         end
 
         context 'non-passported application' do
-          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :at_provider_submitted, vehicle: vehicle }
+          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
 
           it 'calls all the services it manages' do
             expect(CreateAssessmentService).to receive(:call).and_return(true)

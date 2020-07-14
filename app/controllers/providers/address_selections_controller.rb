@@ -3,6 +3,8 @@ module Providers
     def show # rubocop:disable Metrics/AbcSize
       return redirect_to back_path unless address.postcode
 
+      legal_aid_application.enter_applicant_details! unless no_state_change_required?
+
       if address_lookup.success?
         @addresses = address_lookup.result
         titleize_addresses
@@ -21,6 +23,10 @@ module Providers
     end
 
     private
+
+    def no_state_change_required?
+      legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?
+    end
 
     def address_lookup
       @address_lookup ||= AddressLookupService.call(address.postcode)

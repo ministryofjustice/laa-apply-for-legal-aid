@@ -2,7 +2,7 @@ module Citizens
   class AdditionalAccountsController < CitizenBaseController
     def index
       legal_aid_application.update!(has_offline_accounts: nil)
-      legal_aid_application.provider_submit! unless legal_aid_application.provider_submitted?
+      legal_aid_application.applicant_enter_means! unless legal_aid_application.applicant_entering_means?
     end
 
     def create
@@ -36,7 +36,6 @@ module Citizens
     private
 
     def online_accounts_update
-      legal_aid_application.provider_submit! unless legal_aid_application.provider_submitted?
       legal_aid_application.update(has_offline_accounts: false)
     end
 

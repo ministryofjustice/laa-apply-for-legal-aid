@@ -8,7 +8,7 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:debit) { create :transaction_type, :debit_with_standard_name }
   let!(:legal_aid_application) do
     create :legal_aid_application,
-           :provider_submitted,
+           :applicant_entering_means,
            :with_everything,
            :with_student_finance,
            :with_irregular_income,
@@ -86,8 +86,8 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response).to redirect_to(citizens_identify_types_of_outgoing_path(back: true))
     end
 
-    it 'should change the state back to "provider_submitted"' do
-      expect(legal_aid_application.reload.provider_submitted?).to be_truthy
+    it 'should change the state back to "applicant_entering_means"' do
+      expect(legal_aid_application.reload.applicant_entering_means?).to be true
     end
   end
 end

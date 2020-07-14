@@ -148,8 +148,8 @@ RSpec.describe 'providers offine accounts', type: :request do
               expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
             end
 
-            context "provider checking citizen's answers" do
-              let(:state) { :provider_checking_citizens_means_answers }
+            context 'provider_entering_merits' do
+              let(:state) { :provider_entering_merits }
 
               it 'redirects to the restrictions page' do
                 expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))

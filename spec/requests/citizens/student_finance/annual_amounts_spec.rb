@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'annual_amounts', type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means }
 
   describe 'GET /citizens/student_finance/annual_amounts' do
     before do

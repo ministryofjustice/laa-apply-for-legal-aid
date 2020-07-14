@@ -4,7 +4,7 @@ RSpec.describe 'citizen accounts request', type: :request do
   include ActionView::Helpers::NumberHelper
 
   let!(:applicant) { create :applicant }
-  let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, applicant: applicant }
+  let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, state: 'awaiting_applicant', applicant: applicant }
   let(:addresses) do
     [{ address: Faker::Address.building_number,
        city: Faker::Address.city,

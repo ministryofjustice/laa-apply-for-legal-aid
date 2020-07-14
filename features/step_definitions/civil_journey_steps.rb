@@ -144,7 +144,7 @@ Given('I start the merits application with bank transactions with no transaction
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :provider_assessing_means,
+    :provider_entering_merits,
     :with_uncategorised_credit_transactions,
     :with_uncategorised_debit_transactions
   )
@@ -208,6 +208,7 @@ Given('I complete the journey as far as check your answers') do
   proceeding_type = ProceedingType.all.sample
   @legal_aid_application = create(
     :legal_aid_application,
+    :at_entering_applicant_details,
     applicant: applicant,
     proceeding_types: [proceeding_type],
     used_delegated_functions_on: 1.day.ago
@@ -240,6 +241,7 @@ Given('I complete the passported journey as far as check your answers') do
   )
   @legal_aid_application = create(
     :legal_aid_application,
+    :at_entering_applicant_details,
     :with_substantive_scope_limitation,
     applicant: applicant,
     used_delegated_functions_on: 1.day.ago
@@ -271,7 +273,7 @@ Given('I complete the passported journey as far as capital check your answers') 
     :legal_aid_application,
     :with_everything,
     :with_proceeding_types,
-    :client_details_answers_checked,
+    :provider_entering_means,
     applicant: applicant
   )
   login_as @legal_aid_application.provider
@@ -302,7 +304,7 @@ Given('I complete the application and view the check your answers page') do
     :legal_aid_application,
     applicant: applicant,
     proceeding_types: [proceeding_type],
-    state: :provider_submitted
+    state: :applicant_entering_means
   )
   @legal_aid_application.add_default_substantive_scope_limitation!
   @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?

@@ -3,6 +3,7 @@ module Providers
     helper_method :should_use_ccms?
 
     def index
+      legal_aid_application.applicant_details_checked! unless legal_aid_application.applicant_details_checked?
       @applicant = legal_aid_application.applicant
       return set_negative_result_and_go_forward if known_issue_prevents_benefit_check?
 
