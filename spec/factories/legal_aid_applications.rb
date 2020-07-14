@@ -106,6 +106,7 @@ FactoryBot.define do
     #############################################################################
 
     trait :with_irregular_income do
+      student_finance { true }
       after(:create) do |application|
         create(:irregular_income, legal_aid_application: application)
       end

@@ -164,8 +164,5 @@ Style/BisectedAttrAccessor:
 Style/RedundantAssignment:
   Enabled: false
 
-Style/RedundantFetchBlock:
-  Enabled: true
-
 Style/RedundantFileExtensionInRequire:
   Enabled: true

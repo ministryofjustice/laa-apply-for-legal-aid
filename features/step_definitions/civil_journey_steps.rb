@@ -157,6 +157,23 @@ Given('I start the merits application with bank transactions with no transaction
   )
 end
 
+Given('I start the merits application with student finance') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :provider_assessing_means,
+    :with_irregular_income
+  )
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
 Given('I start the merits application and the applicant has uploaded transaction data') do
   @legal_aid_application = create(
     :application,
