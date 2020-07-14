@@ -105,12 +105,12 @@ FactoryBot.define do
 
     #############################################################################
 
-  trait :with_irregular_income do
-    student_finance { true }
-    after(:create) do |application|
-      create(:irregular_income, legal_aid_application: application)
+    trait :with_irregular_income do
+      student_finance { true }
+      after(:create) do |application|
+        create(:irregular_income, legal_aid_application: application)
+      end
     end
-  end
 
     trait :submitted_to_ccms do
       state { %w[assessment_submitted generating_reports submitting_assessment].sample }
