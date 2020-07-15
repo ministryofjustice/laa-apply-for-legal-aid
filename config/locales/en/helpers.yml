@@ -4,6 +4,8 @@ en:
     'false': 'No'
     'true': 'Yes'
   helpers:
+    accessibility:
+      error: Error
     hint:
       feedback:
         improvement_suggestion: Please provide your email address if you'd like a response

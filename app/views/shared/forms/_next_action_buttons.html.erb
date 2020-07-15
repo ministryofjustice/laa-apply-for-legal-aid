@@ -2,7 +2,8 @@
       continue_button_text,
       id: continue_id,
       name: 'continue_button',
-      class: 'govuk-button form-button'
+      class: 'govuk-button form-button',
+      data: { module: 'govuk-button' }
     ) %>
 
 <% if show_draft %>
@@ -10,6 +11,7 @@
         draft_button_text,
         name: 'draft_button',
         id: 'draft_button',
-        class: 'govuk-button form-button govuk-secondary-button'
+        class: 'govuk-button form-button govuk-secondary-button',
+        data: { module: 'govuk-button' }
       ) %>
 <% end %>
