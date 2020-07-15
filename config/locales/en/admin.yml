@@ -60,4 +60,4 @@ en:
         heading_1: Search for the Provider firm name
       permissions:
         show:
-          heading_1: Select Firm permissions
+          heading_1: 'Select Firm permissions for %{firm_name}'

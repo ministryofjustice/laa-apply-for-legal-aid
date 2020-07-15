@@ -61,7 +61,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:index]
     resources :roles, only: %i[index create update]
     namespace :roles do
-      resource :permissions, only: %i[show update]
+      resources :permissions, only: %i[show update]
     end
     get 'admin_report_submitted', to: 'reports#download_submitted', as: 'reports_submitted_csv'
   end

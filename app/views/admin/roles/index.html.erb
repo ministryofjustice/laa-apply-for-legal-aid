@@ -10,17 +10,14 @@
         <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
           <input class="govuk-input" id="firm-search-input" name="firm-search-input" type="text">
         </div>
-
-        <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
-          <p><a id="clear-firm-search" href="#" class="govuk-link govuk-!-font-size-19"><%= t '.clear_search' %></a></p>
-        </div>
       </div>
 
       <div class="govuk-grid-row govuk-!-margin-top-0">
-        <ul id="proceeding-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
+        <ul id="firms-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
           <%= render partial: 'form', collection: @provider_firms, as: :provider_firm %>
         </ul>
       </div>
     </div>
   </div>
+
 <% end %>

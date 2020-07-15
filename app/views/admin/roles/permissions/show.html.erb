@@ -1,28 +1,23 @@
 <%= page_template(
-  page_title: t('.heading_1'),
+  page_title: t('.heading_1', firm_name: @firm.name),
   column_width: :full,
   back_link: :none
   ) do %>
 
   <%= form_with(
-          model: @legal_aid_application,
-          url: admin_roles_permissions_path,
+          model: @firm,
+          url: admin_roles_permission_path,
           method: :patch,
           local: true
       ) do |form| %>
 
     <div class="govuk-!-margin-top-0govuk-!-padding-bottom-2">
-      <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
-        <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+      <fieldset class="govuk-fieldset">
         <div class="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <%= check_box_tag :permission_1, 'true', @permission_1, class: 'govuk-checkboxes__input' %>
-            <%= label_tag :permission_1, t('.permission_1'), class: 'govuk-label govuk-checkboxes__label' %>
-          </div>
-
-          <div class="govuk-checkboxes__item">
-            <%= check_box_tag :permission_2, 'true', @whatisthis, class: 'govuk-checkboxes__input' %>
-            <%= label_tag :permission_2, t('.permission_2'), class: 'govuk-label govuk-checkboxes__label' %>
+          <div class="govuk-grid-row govuk-!-margin-top-0">
+            <ul id="roles-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
+              <%= render partial: 'form', collection: @permissions, as: :permission, locals: { form: form } %>
+            </ul>
           </div>
         </div>
       </fieldset>
@@ -32,7 +27,7 @@
 
     <%= next_action_buttons(
             form: form,
-            show_draft: local_assigns.key?(:show_draft) ? show_draft : false
+            show_draft: false
         ) %>
   <% end %>
 <% end %>
