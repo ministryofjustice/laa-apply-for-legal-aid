@@ -68,6 +68,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength La
 
       event :provider_enter_means do
         transitions from: %i[
+                              provider_entering_means
                               applicant_details_checked
                               delegated_functions_used
                               use_ccms
