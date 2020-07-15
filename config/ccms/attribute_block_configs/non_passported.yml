@@ -754,7 +754,13 @@ global_means:
     br100_meaning: 'Client Provisional Income Contribution'
     response_type: currency
     generate_block?: true
-    value: '#means_assessment_capital_contribution'
+    value: '#means_assessment_income_contribution'
+  OUT_INCOME_CONT:
+    generate_block?: true
+    value: '#means_assessment_income_contribution'
+    br100_meaning: 'RESULT: Disposable income - Income contribution'
+    response_type: currency
+    user_defined: false
   LAND_INPUT_B_5WP2_26A:
     user_defined: true
     br100_meaning: 'Land: The client owns land?'

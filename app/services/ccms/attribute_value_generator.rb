@@ -307,6 +307,10 @@ module CCMS
       cfe_result.capital_contribution_required? ? cfe_result.capital_contribution : 0.0
     end
 
+    def means_assessment_income_contribution(_options)
+      cfe_result.income_contribution_required? ? cfe_result.income_contribution : 0.0
+    end
+
     def benefit_check_passed?(_options)
       @legal_aid_application.benefit_check_result.result == 'Yes'
     end
