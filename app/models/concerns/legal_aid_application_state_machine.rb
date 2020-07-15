@@ -60,6 +60,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength La
         transitions from: %i[
                               checking_applicant_details
                               provider_confirming_applicant_eligibility
+                              use_ccms
                             ],
                     to: :applicant_details_checked,
                     after: -> { CleanupCapitalAttributes.call(self) }
