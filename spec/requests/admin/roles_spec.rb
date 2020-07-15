@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Admin::RolesController, type: :request do
   let(:admin_user) { create :admin_user }
-  let(:firm) { create :firm, name: "Shotgun, Bobble & Dribble" }
-  let(:firm2) { create :firm, name: "Noodle, Legs & Co." }
+  let(:firm) { create :firm, name: 'Shotgun, Bobble & Dribble' }
+  let(:firm2) { create :firm, name: 'Noodle, Legs & Co.' }
   let(:firm3) { create :firm }
   before { sign_in admin_user }
 
