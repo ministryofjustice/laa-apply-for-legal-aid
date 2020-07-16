@@ -4,6 +4,12 @@ RSpec.describe 'check benefits requests', type: :request do
   class EnvironmentPermutation
     attr_reader :env, :setting, :application, :permissions, :expected_result
 
+    EXPECTED_TEXTS = {
+      continue: 'receives benefits that qualify for legal aid',
+      ccms: 'You need to use CCMS for this application',
+      need_to_check: 'We need to check your client'
+    }.freeze
+
     def initialize(env:, setting:, application:, permissions:, expected_result:)
       @env = env
       @setting = setting
@@ -28,14 +34,7 @@ RSpec.describe 'check benefits requests', type: :request do
     end
 
     def expected_text
-      case @expected_result
-      when :continue
-        'receives benefits that qualify for legal aid'
-      when :ccms
-        'You need to use CCMS for this application'
-      when :need_to_check
-        'We need to check your client'
-      end
+      EXPECTED_TEXTS[@expected_result]
     end
   end
 
@@ -238,7 +237,7 @@ RSpec.describe 'check benefits requests', type: :request do
         Setting.setting.update!(allow_non_passported_route: perm.setting)
         allow(Rails.configuration.x).to receive(:allow_non_passported_route).and_return(perm.env)
         provider = create :provider, perm.provider_permissions
-        application = create :application, applicant: applicant, provider: provider
+        application = create :application, :checking_applicant_details, applicant: applicant, provider: provider
         create :benefit_check_result, perm.benefit_check_result, legal_aid_application: application
 
         login_as application.provider
