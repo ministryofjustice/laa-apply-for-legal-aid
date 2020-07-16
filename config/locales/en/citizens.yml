@@ -59,6 +59,7 @@ en:
         title: Do you agree to share your bank account information with the LAA?
         inset_text: We only use your financial information to support your legal aid application. We do not use it for anything else.
         summary_heading: What information will the LAA be able to see?
+        true_layer_auth_error: Select yes if you agree to share your bank account information with the LAA
         able_to_see: 
           heading: "We'll be able to see your:"
           list: |

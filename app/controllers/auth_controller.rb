@@ -16,8 +16,10 @@ class AuthController < ApplicationController
     end
   end
 
-
   def auth_error_during_bank_login?
-    params&.fetch(:origin).match?(/citizens\/banks$/)
+    origin = params[:origin]
+    return false if origin.nil?
+
+    URI(origin).path == '/citizens/banks'
   end
 end

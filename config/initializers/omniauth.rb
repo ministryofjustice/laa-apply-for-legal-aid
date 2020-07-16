@@ -8,10 +8,9 @@ OmniAuth.config.logger = Rails.logger
 # This block here makes sure that dev behaviour is the same as production, i.e.
 # is redirectied to /auth/failure
 #
-OmniAuth.config.on_failure = Proc.new { |env|
+OmniAuth.config.on_failure = proc do |env|
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
-}
-
+end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider(
@@ -26,7 +25,3 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     Rails.configuration.x.google_oauth2.client_secret
   )
 end
-
-
-
-
