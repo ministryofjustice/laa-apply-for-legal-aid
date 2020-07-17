@@ -12,12 +12,6 @@ module Admin
       def update
         firm.update!(firm_params)
         redirect_to admin_settings_path, notice: 'Permissions have been updated'
-        # if firm.update(firm_params)
-        #   firm.update!(firm_params)
-        #   redirect_to admin_settings_path, notice: 'Permissions have been updated'
-        # else
-        #   redirect_to admin_settings_path, notice: 'Permissions have NOT been changed'
-        # end
       end
 
       private
@@ -31,6 +25,9 @@ module Admin
       end
 
       def firm_params
+        if params[:firm].nil?
+          params[:firm] = {permission_ids: []}
+        end
         params.require(:firm).permit(permission_ids: [])
       end
     end

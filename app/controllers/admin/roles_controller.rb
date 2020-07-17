@@ -4,13 +4,7 @@ module Admin
     layout 'admin'.freeze
 
     def index
-      provider_firms
-    end
-
-    private
-
-    def provider_firms
-      @provider_firms ||= Firm.all
+      @provider_firms = Firm.search(params[:search])
     end
   end
 end

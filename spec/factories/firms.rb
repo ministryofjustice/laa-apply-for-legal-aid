@@ -3,4 +3,21 @@ FactoryBot.define do
     ccms_id { rand(1..1000) }
     name { Faker::Company.name }
   end
+
+  trait :with_passported_permissions do
+    permissions { [Permission.find_by(role: 'application.passported.*') || create(:permission, :passported)] }
+  end
+
+  trait :with_non_passported_permissions do
+    permissions { [Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)] }
+  end
+
+  trait :with_passported_and_non_passported_permissions do
+    permissions do
+      [
+          Permission.find_by(role: 'application.passported.*') || create(:permission, :passported),
+          Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)
+      ]
+    end
+  end
 end

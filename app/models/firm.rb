@@ -13,10 +13,12 @@ class Firm < ApplicationRecord
   def firm_permissions
     permissions.all
   end
-  #
-  # def firm_permissions_collection
-  #   self.permissions.each do |perm|
-  #     perm.role
-  #   end
-  # end
+
+  def self.search(search_term)
+    if search_term
+      where('name ILIKE ?', "%#{search_term}%")
+    else
+      all
+    end
+  end
 end
