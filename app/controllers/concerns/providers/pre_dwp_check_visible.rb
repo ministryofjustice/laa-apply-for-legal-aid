@@ -1,5 +1,5 @@
 module Providers
-  class PreDWPCheckProviderBaseController < ProviderBaseController
+  module PreDWPCheckVisible
     def pre_dwp_check?
       true
     end

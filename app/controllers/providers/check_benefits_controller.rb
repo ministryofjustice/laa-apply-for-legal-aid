@@ -1,5 +1,7 @@
 module Providers
-  class CheckBenefitsController < PreDWPCheckProviderBaseController
+  class CheckBenefitsController < ProviderBaseController
+    include PreDWPCheckVisible
+
     helper_method :should_use_ccms?
 
     def index

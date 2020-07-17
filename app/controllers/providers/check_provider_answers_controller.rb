@@ -1,5 +1,7 @@
 module Providers
-  class CheckProviderAnswersController < PreDWPCheckProviderBaseController
+  class CheckProviderAnswersController < ProviderBaseController
+    include PreDWPCheckVisible
+
     def index
       return redirect_to_means_summary if legal_aid_application.provider_assessing_means?
 

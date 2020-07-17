@@ -1,5 +1,7 @@
 module Providers
-  class AddressLookupsController < PreDWPCheckProviderBaseController
+  class AddressLookupsController < ProviderBaseController
+    include PreDWPCheckVisible
+
     def show
       @form = Addresses::AddressLookupForm.new(model: address)
     end
