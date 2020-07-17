@@ -15,8 +15,8 @@ FactoryBot.define do
   trait :with_passported_and_non_passported_permissions do
     permissions do
       [
-          Permission.find_by(role: 'application.passported.*') || create(:permission, :passported),
-          Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)
+        Permission.find_by(role: 'application.passported.*') || create(:permission, :passported),
+        Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)
       ]
     end
   end

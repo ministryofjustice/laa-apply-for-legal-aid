@@ -24,12 +24,12 @@
 
       <div class="govuk-radios__divider tickbox_divider"><%= t('generic.or') %></div>
 
-        <div class="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <%= check_box_tag :none_selected, 'true', @none_selected, class: 'govuk-checkboxes__input' %>
-            <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
-          </div>
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <%= check_box_tag :none_selected, 'true', @none_selected, class: 'govuk-checkboxes__input' %>
+          <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
         </div>
+      </div>
     </fieldset>
   <% end %>
 

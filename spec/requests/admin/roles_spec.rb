@@ -27,13 +27,13 @@ RSpec.describe Admin::RolesController, type: :request do
       expect(response.body).to include(firm2.name)
     end
 
-    context 'when the search field is used'  do
+    context 'when the search field is used' do
       it ' returns the relevant firm' do
-        expect(Firm.search("Nelson")).to eq([firm4])
+        expect(Firm.search('Nelson')).to eq([firm4])
       end
 
       it 'returns all relevant firms' do
-        expect(Firm.search("McKenzie")).to match_array([firm2, firm3])
+        expect(Firm.search('McKenzie')).to match_array([firm2, firm3])
       end
     end
   end

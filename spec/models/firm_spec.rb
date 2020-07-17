@@ -37,7 +37,7 @@ RSpec.describe 'Firm' do
         end
 
         it 'returns all permissions' do
-          expect(firm.permissions.all). to match_array [permission2, permission1]
+          expect(firm.permissions.all).to match_array [permission2, permission1]
         end
       end
     end
@@ -49,13 +49,13 @@ RSpec.describe 'Firm' do
 
     context 'search for a firm' do
       it 'returns a single record' do
-        expect(Firm.search("Harvey")).to eq([firm3])
+        expect(Firm.search('Harvey')).to eq([firm3])
       end
     end
 
     context 'returns all records' do
       it 'returns all  record' do
-        expect(Firm.search("")).to match_array([firm3, firm2, firm])
+        expect(Firm.search('')).to match_array([firm3, firm2, firm])
       end
     end
   end
