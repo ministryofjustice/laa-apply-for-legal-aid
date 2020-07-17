@@ -10,10 +10,6 @@ class Firm < ApplicationRecord
     ActiveSupport::Notifications.instrument 'dashboard.firm_created'
   end
 
-  def firm_permissions
-    permissions.all
-  end
-
   def self.search(search_term)
     if search_term
       where('name ILIKE ?', "%#{search_term}%")
