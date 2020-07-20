@@ -29,13 +29,15 @@ FactoryBot.define do
 
     trait :with_non_passported_state_machine do
       before(:create) do |application|
-        application.state_machine = NonPassportedStateMachine.new
+        state_machine = FactoryBot.create(:non_passported_state_machine)
+        application.update!(state_machine: state_machine)
       end
     end
 
     trait :with_passported_state_machine do
       before(:create) do |application|
-        application.state_machine = PassportedStateMachine.new
+        state_machine = FactoryBot.create(:passported_state_machine)
+        application.update!(state_machine: state_machine)
       end
     end
 
