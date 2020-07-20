@@ -402,7 +402,6 @@ ActiveRecord::Schema.define(version: 2020_07_24_083605) do
     t.datetime "updated_at", null: false
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
-    t.string "state"
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
@@ -658,6 +657,14 @@ ActiveRecord::Schema.define(version: 2020_07_24_083605) do
     t.boolean "allow_non_passported_route", default: true, null: false
     t.boolean "manually_review_all_cases", default: true
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
+  end
+
+  create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.string "type"
+    t.string "aasm_state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

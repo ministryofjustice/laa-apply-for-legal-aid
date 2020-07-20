@@ -22,6 +22,7 @@ unless ENV['NOCOVERAGE']
   SimpleCov.start do
     add_filter 'config/initializers/'
     add_filter 'spec/'
+    add_filter 'services/migration_helpers/'
   end
   SimpleCov.at_exit do
     say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100

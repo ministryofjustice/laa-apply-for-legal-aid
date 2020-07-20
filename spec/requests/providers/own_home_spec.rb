@@ -72,7 +72,7 @@ RSpec.describe 'provider own home requests', type: :request do
           end
 
           context 'while checking answers' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
 
             it 'redirects to next page in the flow' do
               expect(response).to redirect_to(providers_legal_aid_application_property_value_path(legal_aid_application))
@@ -84,7 +84,7 @@ RSpec.describe 'provider own home requests', type: :request do
           let(:own_home) { 'no' }
 
           context 'while checking answers' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
 
             it 'redirects to check answers page' do
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(legal_aid_application))
@@ -92,7 +92,7 @@ RSpec.describe 'provider own home requests', type: :request do
           end
 
           context 'while provider checking answers of citizen' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checking_non_passported_means }
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
 
             it 'redirects to the means summary page' do
               expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
+  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_vehicle }
   let(:vehicle) { legal_aid_application.vehicle }
   let(:login) { login_as legal_aid_application.provider }
 

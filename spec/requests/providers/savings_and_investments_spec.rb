@@ -127,8 +127,7 @@ RSpec.describe 'providers savings and investments', type: :request do
         end
 
         context 'when in checking passported answers state' do
-          let(:state) { :checking_passported_answers }
-          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, state: state }
+          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_passported_state_machine, :checking_passported_answers }
           let(:submit_button) do
             {
               continue_button: 'Continue'
@@ -147,14 +146,20 @@ RSpec.describe 'providers savings and investments', type: :request do
             it 'redirects to the restrictions page' do
               expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
             end
+          end
+        end
 
-            context "provider checking citizen's answers" do
-              let(:state) { :checking_non_passported_means }
+        context "provider checking citizen's answers" do
+          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, :checking_non_passported_means }
+          let(:submit_button) do
+            {
+              continue_button: 'Continue'
+            }
+          end
+          before { subject }
 
-              it 'redirects to the restrictions page' do
-                expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
-              end
-            end
+          it 'redirects to the restrictions page' do
+            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
           end
         end
       end

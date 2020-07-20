@@ -352,21 +352,21 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#read_only?' do
     context 'provider application not submitted' do
-      let(:legal_aid_application) { create :legal_aid_application }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine }
       it 'returns false' do
         expect(legal_aid_application.read_only?).to be(false)
       end
     end
 
     context 'provider submitted' do
-      let(:legal_aid_application) { create :legal_aid_application, :applicant_entering_means }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :applicant_entering_means }
       it 'returns true' do
         expect(legal_aid_application.read_only?).to be(true)
       end
     end
 
     context 'checking citizen answers?' do
-      let(:legal_aid_application) { create :legal_aid_application, state: :checking_citizen_answers }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
       it 'returns true' do
         expect(legal_aid_application.read_only?).to be(true)
       end
@@ -374,7 +374,8 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'attributes are synced on applicant_details_checked' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, state: :checking_applicant_details }
+    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details }
+
     it 'passes application to keep in sync service' do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       legal_aid_application.applicant_details_checked!
@@ -451,11 +452,23 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'state label' do
-    let(:states) { LegalAidApplication.aasm.states.map(&:name) }
+    let(:states) { legal_aid_application.state_machine_proxy.aasm.states.map(&:name) }
 
-    it 'has a translation for all states' do
-      states.each do |state|
-        expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true)
+    context 'passported states' do
+      it 'has a translation for all states' do
+        states.each do |state|
+          expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true)
+        end
+      end
+    end
+
+    context 'non-passported states' do
+      before { legal_aid_application.change_state_machine_type('NonPassportedStateMachine') }
+
+      it 'has a translation for all states' do
+        states.each do |state|
+          expect(I18n.exists?("model_enum_translations.legal_aid_application.state.#{state}")).to be(true)
+        end
       end
     end
   end
@@ -609,7 +622,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#generated_reports' do
-    let(:legal_aid_application) { create :legal_aid_application, state: :generating_reports }
+    let(:legal_aid_application) { create :legal_aid_application, :generating_reports }
     let(:submit_applications_to_ccms) { true }
 
     before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(submit_applications_to_ccms) }
@@ -630,7 +643,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#submitted_assessment' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, state: :checking_merits_answers }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_merits_answers }
     let(:feedback_url) { 'http://test/feedback/new' }
 
     it 'schedules a PostSubmissionProcessingJob ' do
@@ -643,7 +656,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'complete means event' do
-    let(:legal_aid_application) { create :legal_aid_application, state: :checking_citizen_answers }
+    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
     it 'runs the complete means service and the bank transaction analyser' do
       expect(ApplicantCompleteMeans).to receive(:call).with(legal_aid_application)
       expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application)
@@ -805,6 +818,38 @@ RSpec.describe LegalAidApplication, type: :model do
       it 'returns parent and stand-alone' do
         expect(legal_aid_application.parent_transaction_types).to match_array [pension, benefits]
       end
+    end
+  end
+
+  context 'initializing a new object' do
+    it 'instantiates the default state machine' do
+      expect(legal_aid_application.state_machine_proxy.type).to eq 'PassportedStateMachine'
+      expect(legal_aid_application.state).to eq 'initiated'
+    end
+  end
+
+  context 'advancing state' do
+    it 'advances state and saves' do
+      legal_aid_application.enter_applicant_details!
+      expect(legal_aid_application.state).to eq 'entering_applicant_details'
+    end
+  end
+
+  context 'loading an existing record and advancing state' do
+    before { legal_aid_application.enter_applicant_details! }
+
+    it 'is in the expected state and can be advanced' do
+      expect(legal_aid_application.state).to eq 'entering_applicant_details'
+      legal_aid_application.check_applicant_details!
+      expect(legal_aid_application.state).to eq 'checking_applicant_details'
+    end
+  end
+
+  context 'switching state machines' do
+    it 'switches to the new state machine' do
+      expect(legal_aid_application.state_machine).to be_instance_of(PassportedStateMachine)
+      legal_aid_application.change_state_machine_type('NonPassportedStateMachine')
+      expect(legal_aid_application.state_machine).to be_instance_of(NonPassportedStateMachine)
     end
   end
 end

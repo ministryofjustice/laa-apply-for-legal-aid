@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -71,7 +71,13 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
 
     context 'when application has transaction types of other kind' do
       let(:other_transaction_type) { create :transaction_type, :credit }
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means, transaction_types: [other_transaction_type] }
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_applicant,
+               :with_non_passported_state_machine,
+               :applicant_entering_means,
+               transaction_types: [other_transaction_type]
+      end
 
       it 'does not remove existing transation of other type' do
         expect { subject }.not_to change { legal_aid_application.transaction_types.count }
@@ -99,7 +105,7 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
 
       context 'and application has transactions' do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :applicant_entering_means, transaction_types: outgoing_types
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: outgoing_types
         end
 
         it 'removes transaction types from the application' do
