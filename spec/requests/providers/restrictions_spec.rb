@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'provider restrictions request', type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant }
+  let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
   let(:provider) { application.provider }
 
   describe 'GET /providers/applications/:id/restrictions' do
@@ -56,7 +56,7 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context 'when the citizen has completed the non-passported path' do
-          let(:application) { create :legal_aid_application, :with_applicant, :non_passported, state: :provider_assessing_means }
+          let(:application) { create :legal_aid_application, :with_applicant, :non_passported, :with_non_passported_state_machine, :provider_assessing_means }
 
           it 'redirects to means_summary' do
             expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
@@ -64,7 +64,7 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context 'provider on passported route' do
-          let(:application) { create :legal_aid_application, :with_applicant, :passported, state: :provider_assessing_means }
+          let(:application) { create :legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :provider_assessing_means }
           it 'redirects to check passported answers' do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
           end
@@ -87,7 +87,7 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context 'provider checking their answers' do
-          let(:application) { create :legal_aid_application, :with_applicant, state: :checking_passported_answers }
+          let(:application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
 
           it 'redirects to check passported answers' do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path)
@@ -95,7 +95,7 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context "provider checking citizen's answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, state: :checking_non_passported_means }
+          let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
 
           it 'redirects to means summary page' do
             subject

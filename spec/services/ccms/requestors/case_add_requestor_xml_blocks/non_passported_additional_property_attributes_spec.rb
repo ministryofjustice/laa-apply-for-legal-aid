@@ -5,7 +5,6 @@ module CCMS
     RSpec.describe NonPassportedCaseAddRequestor do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
-        let(:proceeding_type) { create :proceeding_type, :with_real_data }
         let(:firm) { create :firm, name: 'Firm1' }
         let(:office) { create :office, firm: firm }
         let(:savings_amount) { legal_aid_application.savings_amount }
@@ -26,7 +25,6 @@ module CCMS
                  :with_substantive_scope_limitation,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
-                 proceeding_types: [proceeding_type],
                  provider: provider,
                  office: office
         end

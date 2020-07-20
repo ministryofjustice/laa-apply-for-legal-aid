@@ -92,7 +92,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         end
 
         context 'when the legal aid application is in checking_applicant_details state' do
-          let(:application) { create(:legal_aid_application, state: :checking_applicant_details) }
+          let(:application) { create(:legal_aid_application, :checking_applicant_details) }
 
           it 'redirects to check_your_answers page' do
             subject
@@ -102,7 +102,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         end
 
         context 'when the application is in applicant_details_checked state' do
-          let(:application) { create(:legal_aid_application, state: :applicant_details_checked) }
+          let(:application) { create(:legal_aid_application, :applicant_details_checked) }
 
           it 'redirects to check_your_answers page' do
             subject

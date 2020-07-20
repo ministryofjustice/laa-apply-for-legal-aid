@@ -8,6 +8,7 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:application) do
     create(
       :legal_aid_application,
+      :with_non_passported_state_machine,
       :at_entering_applicant_details,
       :with_proceeding_types,
       :with_substantive_scope_limitation,
@@ -99,7 +100,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
       context 'when the application is in applicant_entering_means state' do
         before do
-          application.update!(state: 'applicant_entering_means')
+          application.state_machine_proxy.update!(aasm_state: :applicant_entering_means)
           get providers_legal_aid_application_check_provider_answers_path(application)
         end
 
@@ -135,7 +136,8 @@ RSpec.describe 'check your answers requests', type: :request do
                  :with_proceeding_types,
                  :with_applicant_and_address,
                  :with_substantive_scope_limitation,
-                 state: :checking_citizen_answers)
+                 :with_non_passported_state_machine,
+                 :checking_citizen_answers)
         end
         it 'renders page successfully' do
           expect(response).to have_http_status(:ok)
@@ -143,7 +145,7 @@ RSpec.describe 'check your answers requests', type: :request do
       end
 
       context 'when client has completed their journey' do
-        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :provider_assessing_means) }
+        let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :with_non_passported_state_machine, :provider_assessing_means) }
         it 'redirects to means summary' do
           expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
         end

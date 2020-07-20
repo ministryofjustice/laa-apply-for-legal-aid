@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::CapitalIntroductionsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :at_applicant_details_checked }
+  let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :at_applicant_details_checked }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/capital_introduction' do

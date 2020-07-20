@@ -8,6 +8,7 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:debit) { create :transaction_type, :debit_with_standard_name }
   let!(:legal_aid_application) do
     create :legal_aid_application,
+           :with_non_passported_state_machine,
            :applicant_entering_means,
            :with_everything,
            :with_student_finance,

@@ -126,7 +126,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
     end
 
     context 'while checking answers' do
-      let(:legal_aid_application) { create :legal_aid_application, :checking_non_passported_means }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means }
 
       it 'redirects to non-passported check answers page' do
         subject
@@ -135,7 +135,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
     end
 
     context 'while checking passported answers' do
-      let(:legal_aid_application) { create :legal_aid_application, :checking_passported_answers }
+      let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :checking_passported_answers }
 
       it 'redirects to passported check answers page' do
         subject

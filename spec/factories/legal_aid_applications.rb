@@ -27,80 +27,142 @@ FactoryBot.define do
     #        TRAITS TO SET STATE                          #
     #######################################################
 
+    trait :with_non_passported_state_machine do
+      before(:create) do |application|
+        application.state_machine = NonPassportedStateMachine.new
+      end
+    end
+
+    trait :with_passported_state_machine do
+      before(:create) do |application|
+        application.state_machine = PassportedStateMachine.new
+      end
+    end
+
+    trait :initiated do
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :initiated)
+      end
+    end
+
     trait :analysing_bank_transactions do
-      state { 'analysing_bank_transactions' }
-    end
-
-    trait :applicant_details_checked do
-      state { 'applicant_details_checked' }
-    end
-
-    trait :applicant_entering_means do
-      state { 'applicant_entering_means' }
-    end
-
-    trait :assessment_submitted do
-      state { 'assessment_submitted' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :analysing_bank_transactions)
+      end
     end
 
     trait :awaiting_applicant do
-      state { 'awaiting_applicant' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :awaiting_applicant)
+      end
+    end
+
+    trait :applicant_details_checked do
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :applicant_details_checked)
+      end
+    end
+
+    trait :applicant_entering_means do
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :applicant_entering_means)
+      end
+    end
+
+    trait :assessment_submitted do
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :assessment_submitted)
+      end
+    end
+
+    trait :awaiting_applicant do
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :awaiting_applicant)
+      end
     end
 
     trait :checking_applicant_details do
-      state { :checking_applicant_details }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_applicant_details)
+      end
     end
 
     trait :checking_citizen_answers do
-      state { :checking_citizen_answers }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_citizen_answers)
+      end
     end
 
     trait :checking_merits_answers do
-      state { 'checking_merits_answers' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_merits_answers)
+      end
     end
 
     trait :checking_non_passported_means do
-      state { 'checking_non_passported_means' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_non_passported_means)
+      end
     end
 
     trait :checking_passported_answers do
-      state { 'checking_passported_answers' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_passported_answers)
+      end
     end
 
     trait :delegated_functions_used do
-      state { :delegated_functions_used }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :delegated_functions_used)
+      end
     end
 
     trait :entering_applicant_details do
-      state { :entering_applicant_details }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :entering_applicant_details)
+      end
     end
 
     trait :generating_reports do
-      state { :generating_reports }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :generating_reports)
+      end
     end
 
     trait :provider_assessing_means do
-      state { 'provider_assessing_means' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :provider_assessing_means)
+      end
     end
 
     trait :provider_confirming_applicant_eligibility do
-      state { :provider_confirming_applicant_eligibility }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :provider_confirming_applicant_eligibility)
+      end
     end
 
     trait :provider_entering_means do
-      state { 'provider_entering_means' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :provider_entering_means)
+      end
     end
 
     trait :provider_entering_merits do
-      state { 'provider_entering_merits' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :provider_entering_merits)
+      end
     end
 
     trait :submitting_assessment do
-      sate { :submitting_assessment }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :submitting_assessment)
+      end
     end
 
     trait :use_ccms do
-      state { 'use_ccms' }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :use_ccms)
+      end
     end
 
     #############################################################################
@@ -113,7 +175,9 @@ FactoryBot.define do
     end
 
     trait :submitted_to_ccms do
-      state { %w[assessment_submitted generating_reports submitting_assessment].sample }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: %i[assessment_submitted generating_reports submitting_assessment].sample)
+      end
     end
 
     trait :with_proceeding_types do
@@ -319,61 +383,88 @@ FactoryBot.define do
     end
 
     trait :at_initiated do
-      state { :initiated }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :initiated)
+      end
+
       provider_step { :applicants }
     end
 
     trait :at_entering_applicant_details do
-      state { :entering_applicant_details }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :entering_applicant_details)
+      end
+
       provider_step { :applicants }
     end
 
     trait :at_use_ccms do
-      state { :use_ccms }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :use_ccms)
+      end
+
       provider_step { :use_ccms }
     end
 
     trait :at_checking_applicant_details do
       with_proceeding_types
-      state { :checking_applicant_details }
+
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_applicant_details)
+      end
+
       provider_step { :check_provider_answers }
     end
 
     trait :at_checking_passported_answers do
       with_proceeding_types
-      state { :checking_passported_answers }
+
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_passported_answers)
+      end
+
       provider_step { :check_passported_answers }
     end
 
     trait :at_applicant_details_checked do
       with_proceeding_types
-      state { :applicant_details_checked }
+
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :applicant_details_checked)
+      end
+
       provider_step { :check_benefits }
     end
 
     trait :at_client_completed_means do
       with_proceeding_types
-      state { :provider_assessing_means }
+
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :client_completed_means)
+      end
+
       provider_step { :client_completed_means }
     end
 
     trait :at_check_provider_answers do
       with_proceeding_types
-      state { :provider_assessing_means }
-      provider_step { :check_provider_answers }
-    end
 
-    trait :at_income_summary do
-      with_proceeding_types
-      state { :provider_assessing_means }
-      provider_step { :income_summary }
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :provider_assessing_means)
+      end
+
+      provider_step { :check_provider_answers }
     end
 
     trait :at_checking_merits_answers do
       with_proceeding_types
       with_merits_assessment
       with_merits_statement_of_case
-      state { :checking_merits_answers }
+
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :checking_merits_answers)
+      end
+
       provider_step { :check_merits_answers }
     end
 
@@ -387,7 +478,11 @@ FactoryBot.define do
       with_means_report
       with_merits_report
       with_ccms_submission
-      state { :assessment_submitted }
+
+      after(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :assessment_submitted)
+      end
+
       provider_step { :end_of_application }
     end
 
@@ -401,7 +496,11 @@ FactoryBot.define do
       with_means_report
       with_merits_report
       with_ccms_submission
-      state { :submitting_assessment }
+
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :submitting_assessment)
+      end
+
       provider_step { :end_of_application }
     end
 

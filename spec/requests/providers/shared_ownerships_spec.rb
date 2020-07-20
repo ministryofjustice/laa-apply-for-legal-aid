@@ -121,7 +121,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
           end
 
           context 'while checking answers' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
 
             it 'redirects to check answers page' do
               subject

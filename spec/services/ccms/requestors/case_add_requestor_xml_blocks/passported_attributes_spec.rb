@@ -5,7 +5,6 @@ module CCMS
     RSpec.describe CaseAddRequestor do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
-        let(:proceeding_type) { create :proceeding_type, :with_real_data }
         let(:firm) { create :firm, name: 'Firm1' }
         let(:office) { create :office, firm: firm }
         let(:provider) do
@@ -24,7 +23,6 @@ module CCMS
                  :with_substantive_scope_limitation,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
-                 proceeding_types: [proceeding_type],
                  provider: provider,
                  office: office
         end
@@ -194,8 +192,8 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      vehicle: nil,
-                     proceeding_types: [proceeding_type],
                      office: office
             end
 
@@ -288,9 +286,9 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      with_bank_accounts: 2,
                      vehicle: nil,
-                     proceeding_types: [proceeding_type],
                      office: office
             end
 
@@ -320,8 +318,8 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      populate_vehicle: true,
-                     proceeding_types: [proceeding_type],
                      office: office
             end
 
@@ -796,9 +794,9 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     proceeding_types: [proceeding_type],
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
@@ -833,9 +831,9 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     proceeding_types: [proceeding_type],
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
@@ -1407,9 +1405,9 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     proceeding_types: [proceeding_type],
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
@@ -1438,9 +1436,9 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      :with_substantive_scope_limitation,
+                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     proceeding_types: [proceeding_type],
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,

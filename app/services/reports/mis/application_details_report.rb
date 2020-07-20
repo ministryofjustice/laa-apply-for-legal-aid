@@ -15,7 +15,7 @@ module Reports
       private
 
       def legal_aid_applications
-        LegalAidApplication.where(state: SUBMITTED_STATES).order(:created_at)
+        LegalAidApplication.joins(:state_machine).where(state_machine_proxies: { aasm_state: SUBMITTED_STATES }).order(:created_at)
       end
     end
   end

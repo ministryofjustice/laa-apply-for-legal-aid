@@ -40,6 +40,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     end
     let!(:legal_aid_application) do
       create :legal_aid_application,
+             :with_passported_state_machine,
              proceeding_types: [proceeding_type],
              scope_limitations: [default_substantive_scope_limitation]
     end
@@ -139,7 +140,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         legal_aid_application.reload
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
         expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
-        expect(legal_aid_application.reload.scope_limitations).to eq [default_substantive_scope_limitation]
+        expect(legal_aid_application.scope_limitations).to eq [default_substantive_scope_limitation]
       end
 
       it 'redirects to the online banking page' do

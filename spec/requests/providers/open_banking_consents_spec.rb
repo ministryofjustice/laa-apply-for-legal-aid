@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'does client use online banking requests', type: :request do
-  let(:application) { create :legal_aid_application, :applicant_details_checked }
+  let(:application) { create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked }
   let(:application_id) { application.id }
   let(:provider) { application.provider }
 
@@ -28,7 +28,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
       end
 
       context 'the application is in use_ccms state' do
-        let(:application) { create :legal_aid_application, state: 'use_ccms' }
+        let(:application) { create :legal_aid_application, :with_non_passported_state_machine, :use_ccms }
         it 'resets the state to provider_confirming_applicant_eligibility' do
           expect(application.reload.state).to eq 'provider_confirming_applicant_eligibility'
         end
@@ -65,7 +65,8 @@ RSpec.describe 'does client use online banking requests', type: :request do
       end
 
       context 'when no option is chosen' do
-        let(:params) { {} }
+        let(:uses_online_banking) { nil }
+        let(:received_consent) { nil }
 
         it 'shows an error' do
           expect(unescaped_response_body).to include('Please select an option')

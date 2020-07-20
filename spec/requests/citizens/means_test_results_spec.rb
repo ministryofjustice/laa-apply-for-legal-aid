@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::MeansTestResultsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :awaiting_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant }
 
   before { get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) }
 
