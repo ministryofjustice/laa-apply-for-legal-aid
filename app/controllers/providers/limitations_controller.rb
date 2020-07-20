@@ -1,5 +1,7 @@
 module Providers
   class LimitationsController < ProviderBaseController
+    include PreDWPCheckVisible
+
     def show
       legal_aid_application.enter_applicant_details! unless legal_aid_application.entering_applicant_details?
     end
