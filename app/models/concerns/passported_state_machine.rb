@@ -7,6 +7,7 @@ class PassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassL
       transitions from: %i[
         applicant_details_checked
         delegated_functions_used
+        provider_entering_means
         use_ccms
       ],
                   to: :provider_entering_means
@@ -15,7 +16,6 @@ class PassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassL
     event :check_passported_answers do
       transitions from: %i[
         provider_entering_means
-        delegated_functions_used
         delegated_functions_used
       ],
                   to: :checking_passported_answers
