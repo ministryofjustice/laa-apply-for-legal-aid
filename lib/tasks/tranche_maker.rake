@@ -22,9 +22,9 @@ namespace :tranche do
         puts ">>>>>>>> User #{user} / #{encoded_user} not found <<<<<<<<<"
       else
         contact_hash = hash['contacts'].detect { |h| h['name'] == user.upcase }
-        whitelisted_users << user
+        whitelisted_users << user.upcase
 
-        beta_test_users[user] = contact_hash['id']
+        beta_test_users[user.upcase] = contact_hash['id']
       end
     end
 
