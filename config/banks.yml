@@ -4,7 +4,6 @@
 # https://auth.truelayer.com/api/providers/oauth
 #
 banks:
-- oauth-monzo
 - oauth-starling
 - ob-barclays
 - ob-bos
@@ -17,10 +16,12 @@ banks:
 - ob-lloyds-business
 - ob-mbna
 - ob-ms
+- ob-monzo
 - ob-nationwide
 - ob-natwest
 - ob-rbs
 - ob-revolut
 - ob-santander
 - ob-tsb
+- ob-tesco
 - ob-ulster
