@@ -9,4 +9,12 @@ class Firm < ApplicationRecord
   after_create do
     ActiveSupport::Notifications.instrument 'dashboard.firm_created'
   end
+
+  def self.search(search_term)
+    if search_term
+      where('name ILIKE ?', "%#{search_term}%")
+    else
+      all
+    end
+  end
 end
