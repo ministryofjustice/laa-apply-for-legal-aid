@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_131513) do
+ActiveRecord::Schema.define(version: 2020_07_22_120356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -576,7 +576,6 @@ ActiveRecord::Schema.define(version: 2020_07_22_131513) do
     t.string "user_login_id"
     t.boolean "portal_enabled", default: false
     t.integer "contact_id"
-    t.json "test_json"
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
