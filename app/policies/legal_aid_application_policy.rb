@@ -54,6 +54,8 @@ class LegalAidApplicationPolicy < ApplicationPolicy
   end
 
   def authorized_passported_permissions?
+    return false if record.with_applicant? && !provider.non_passported_permissions?
+
     return true if @controller.respond_to?(:pre_dwp_check?) && @controller.pre_dwp_check? == true
 
     record.passported? ? provider.passported_permissions? : provider.non_passported_permissions?
