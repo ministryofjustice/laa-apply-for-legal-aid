@@ -24,7 +24,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
       end
 
       it 'displays the correct page' do
-        expect(unescaped_response_body).to include('Check if you can continue using this service')
+        expect(unescaped_response_body).to include(I18n.t('providers.open_banking_consents.show.heading'))
       end
 
       context 'the application is in use_ccms state' do
@@ -37,16 +37,12 @@ RSpec.describe 'does client use online banking requests', type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
-    let(:uses_online_banking) { 'true' }
-    let(:received_consent) { 'true' }
-    let(:none_selected) { nil }
+    let(:provider_received_citizen_consent) { 'true' }
     let(:submit_button) { {} }
     let(:params) do
       {
         legal_aid_application: {
-          citizen_uses_online_banking: uses_online_banking,
-          provider_received_citizen_consent: received_consent,
-          none_selected: none_selected
+          provider_received_citizen_consent: provider_received_citizen_consent
         }
       }
     end
@@ -58,74 +54,25 @@ RSpec.describe 'does client use online banking requests', type: :request do
       )
     end
 
-    context 'when the provider is authenticated' do
+    context 'the provider is authenticated' do
       before do
         login_as provider
         subject
       end
 
-      context 'when no option is chosen' do
-        let(:uses_online_banking) { nil }
-        let(:received_consent) { nil }
+      it 'updates the application' do
+        expect(application.reload.provider_received_citizen_consent).to eq(true)
+      end
+
+      it 'redirects to the email address page' do
+        expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
+      end
+
+      context 'no option is chosen' do
+        let(:params) { {} }
 
         it 'shows an error' do
-          expect(unescaped_response_body).to include('Please select an option')
-        end
-      end
-
-      context 'uses online banking and consent provided' do
-        let(:uses_online_banking) { 'true' }
-        let(:received_consent) { 'true' }
-
-        it 'updates the application' do
-          expect(application.reload.citizen_uses_online_banking).to eq(true)
-          expect(application.reload.provider_received_citizen_consent).to eq(true)
-        end
-
-        it 'redirects to check_provider_answers page' do
-          expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
-        end
-      end
-
-      context 'uses online banking for all accounts and consent not provided' do
-        let(:uses_online_banking) { 'true' }
-        let(:received_consent) { '' }
-
-        it 'updates the application' do
-          expect(application.reload.citizen_uses_online_banking).to eq(true)
-          expect(application.reload.provider_received_citizen_consent).to eq(false)
-        end
-        it 'redirects to use_ccms page' do
-          expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
-        end
-      end
-
-      context 'does not use online banking for all accounts but consent provided' do
-        let(:uses_online_banking) { '' }
-        let(:received_consent) { 'true' }
-
-        it 'updates the application' do
-          expect(application.reload.citizen_uses_online_banking).to eq(false)
-          expect(application.reload.provider_received_citizen_consent).to eq(true)
-        end
-
-        it 'redirects to use_ccms page' do
-          expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
-        end
-      end
-
-      context 'checks none selected option' do
-        let(:uses_online_banking) { '' }
-        let(:received_consent) { '' }
-        let(:none_selected) { 'true' }
-
-        it 'updates the application' do
-          expect(application.reload.citizen_uses_online_banking).to eq(false)
-          expect(application.reload.provider_received_citizen_consent).to eq(false)
-        end
-
-        it 'redirects to use ccms page' do
-          expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
+          expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.open_banking_consents.providers.blank'))
         end
       end
 

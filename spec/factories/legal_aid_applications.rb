@@ -289,7 +289,6 @@ FactoryBot.define do
     end
 
     trait :with_open_banking_consent do
-      citizen_uses_online_banking { true }
       provider_received_citizen_consent { true }
     end
 
