@@ -440,13 +440,11 @@ en:
           no_account_selected: None of these
     open_banking_consents:
       show:
-        heading: Check if you can continue using this service
-        none_selected: None of these
-        citizen_uses_online_banking: Your client uses online banking for all of their bank accounts
-        provider_received_citizen_consent: Your client agrees to share their financial data with us
-        hint:
-          provider_received_citizen_consent: We need their permission to view their bank transactions from the past 3 months
-          citizen_uses_online_banking: They'll need to sign in to online banking and share their financial data with us
+        heading: Is the following correct?
+        info: "Your client:"
+        list: |
+          uses online banking for all of their bank accounts
+          will give the LAA one-time access to their bank accounts
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?

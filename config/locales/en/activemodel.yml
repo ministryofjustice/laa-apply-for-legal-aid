@@ -168,8 +168,8 @@ en:
               providers:
                 blank: Select yes if there are restrictions that prevent your client from selling or borrowing against their assets
             open_banking_consents:
-              base:
-                none_selected: Please select an option
+              providers:
+                blank: Select yes if your client uses online banking and agrees to share their bank accounts
               citizens:
                 blank: Select yes if you agree to share your bank account information with the LAA
             outstanding_mortgage_amount:

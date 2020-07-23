@@ -1,22 +1,43 @@
-<%= page_template(
-      page_title: t('.heading'),
-      template: :basic
-    ) do %>
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_open_banking_consents_path(@legal_aid_application),
-        method: :patch,
-        local: true
+<%= page_template page_title: t('.heading'), template: :basic do %>
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_open_banking_consents_path(@legal_aid_application),
+          method: :patch,
+          local: true
       ) do |form| %>
 
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= render partial: '/shared/forms/open_banking_consents' , locals: { form: form, citizen_uses_online_banking: t('.citizen_uses_online_banking'), citizen_uses_online_banking_hint: t('.hint.citizen_uses_online_banking'), provider_received_citizen_consent_hint: t('.hint.provider_received_citizen_consent'),
-      provider_received_citizen_consent: t('.provider_received_citizen_consent'), none_selected: t('.none_selected')
-      } %>
+      <%= govuk_fieldset_header page_title %>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+
+      <p class="govuk-body">
+        <%= t('.info') %>
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <% t('.list').each_line do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              true,
+              label: t('generic.yes')
+          ) %>
+
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              false,
+              label: t('generic.no')
+          ) %>
+
     <% end %>
 
-    <div class="govuk-!-padding-bottom-6"></div>
-
-    <%= next_action_buttons(show_draft: true, form: form) %>
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_open_banking_consents_path,
+        show_draft: true
+      ) %>
   <% end %>
 <% end %>
