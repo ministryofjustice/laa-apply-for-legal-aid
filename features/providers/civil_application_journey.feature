@@ -143,8 +143,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I am on the client use online banking page
-    Then I select 'Your client uses online banking for all of their bank accounts'
-    Then I select 'Your client agrees to share their financial data with us'
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I am on the Email Entry page
     Then I fill 'email' with 'test@test.com'
@@ -180,8 +179,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I am on the client use online banking page
-    Then I select 'Your client uses online banking for all of their bank accounts'
-    Then I select 'Your client agrees to share their financial data with us'
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I am on the Email Entry page
     Then I fill 'email' with 'test@test.com'
@@ -353,8 +351,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I should be on a page showing 'Check if you can continue using this service'
-    Then I select 'Your client uses online banking for all of their bank accounts'
-    Then I select 'Your client agrees to share their financial data with us'
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I am on the Email Entry page
     Then I fill 'email' with 'test@test.com'
