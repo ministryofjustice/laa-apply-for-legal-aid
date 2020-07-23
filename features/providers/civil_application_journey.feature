@@ -142,10 +142,10 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I am on the client use online banking page
+    Then I am on the provider open banking consent page
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I am on the Email Entry page
+    Then I click save and continue
+    Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
@@ -178,10 +178,10 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I am on the client use online banking page
+    Then I am on the provider open banking consent page
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I am on the Email Entry page
+    Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
@@ -350,10 +350,10 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'Check if you can continue using this service'
+    Then I am on the provider open banking consent page
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I am on the Email Entry page
+    Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page

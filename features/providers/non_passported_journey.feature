@@ -253,9 +253,8 @@ Feature: Non-passported applicant journeys
   Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
     Given I start a non-passported application
     When I click 'Continue'
-    Then I should be on the 'does-client-use-online-banking' page showing 'Check if you can continue using this service'
-    When I select 'Your client uses online banking for all of their bank accounts'
-    And I select 'Your client agrees to share their financial data with us'
+    Then I should be on the 'does-client-use-online-banking' page showing 'Is the following correct?'
+    Then I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'email_address' page showing "Enter your client's email address"
     When I enter the email address 'test@example.com'
