@@ -41,7 +41,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
       contacts: [
         {
           id: 34_419,
-          name: contact_name(1)
+          name: contact_name
         }
       ],
       providerOffices: [
@@ -60,7 +60,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
       contacts: [
         {
           id: 34_419,
-          name: contact_name(1)
+          name: contact_name
         }
       ],
       providerOffices: [
@@ -79,7 +79,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
       contacts: [
         {
           id: 34_419,
-          name: contact_name(1)
+          name: contact_name
         }
       ],
       providerOffices: [
@@ -108,7 +108,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
   def contact_hash(index)
     {
       id: contact_id(index),
-      name: contact_name(index)
+      name: contact_name
     }
   end
 
@@ -139,8 +139,8 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
     @firm_name ||= "#{@username.sub(/-user\d+$/, '')} & Co."
   end
 
-  def contact_name(index)
-    "#{username.snakecase.titlecase}-#{index}"
+  def contact_name
+    username
   end
 
   # Generates a number from the username which is used to generate the values from the response

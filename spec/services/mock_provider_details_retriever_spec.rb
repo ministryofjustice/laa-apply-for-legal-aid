@@ -5,7 +5,7 @@ RSpec.describe MockProviderDetailsRetriever do
 
   context 'a mock user is logged in' do
     let(:username) { Faker::Internet.username }
-    let(:contact_name) { "#{username.snakecase.titlecase}-1" }
+    let(:contact_name) { username }
 
     subject { described_class.call(username) }
 
@@ -36,7 +36,6 @@ RSpec.describe MockProviderDetailsRetriever do
 
   context 'CCMS user NEETADESOR is logged in' do
     let(:username) { 'NEETADESOR' }
-    let(:contact_name) { username.snakecase.titlecase }
 
     subject { described_class.call(username) }
 
@@ -51,7 +50,6 @@ RSpec.describe MockProviderDetailsRetriever do
 
   context 'CCMS user MARTIN.RONAN@DAVIDGRAY.CO.UK is logged in' do
     let(:username) { 'MARTIN.RONAN@DAVIDGRAY.CO.UK' }
-    let(:contact_name) { username.snakecase.titlecase }
 
     subject { described_class.call(username) }
 
@@ -85,7 +83,7 @@ RSpec.describe MockProviderDetailsRetriever do
 
   context 'CCMS user HFITZSIMONS@EDWARDHAYES.CO.UK is logged in' do
     let(:username) { 'HFITZSIMONS@EDWARDHAYES.CO.UK' }
-    let(:contact_name) { username.snakecase.titlecase }
+    let(:contact_name) { username }
 
     subject { described_class.call(username) }
 
@@ -95,7 +93,7 @@ RSpec.describe MockProviderDetailsRetriever do
         expect(subject[:providerFirmId]).to eq 20_726
         expect(subject[:contactUserId]).to eq 284_410
         expect(subject[:contacts].first[:id]).to eq 34_419
-        expect(subject[:contacts].first[:name]).to eq 'Hfitzsimons@Edwardhayes Co Uk-1'
+        expect(subject[:contacts].first[:name]).to eq 'HFITZSIMONS@EDWARDHAYES.CO.UK'
         expect(subject[:providerOffices].first[:name]).to eq 'Edward Hayes-137570'
       end
     end
