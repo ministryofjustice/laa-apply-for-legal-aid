@@ -78,7 +78,7 @@ module Flow
         },
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
-          forward: ->(application) { application.online_banking_consent? ? :email_addresses : :use_ccms }
+          forward: ->(application) { application.provider_received_citizen_consent? ? :email_addresses : :use_ccms }
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },

@@ -135,10 +135,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     most_recent_cfe_submission&.result
   end
 
-  def online_banking_consent?
-    citizen_uses_online_banking && provider_received_citizen_consent
-  end
-
   def calculation_date
     LegalAidApplications::CalculationDateService.call(self)
   end
