@@ -33,6 +33,7 @@ class BaseStateMachine < ApplicationRecord
       transitions from: %i[
         entering_applicant_details
         applicant_details_checked
+        provider_confirming_applicant_eligibility
         use_ccms
       ],
                   to: :checking_applicant_details

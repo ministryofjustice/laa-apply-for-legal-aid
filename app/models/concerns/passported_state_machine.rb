@@ -38,9 +38,11 @@ class PassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassL
     false
   end
 
+  # :nocov:
   def provider_assessing_means?
     false
   end
+  # :nocov:
 
   def awaiting_applicant?
     false
