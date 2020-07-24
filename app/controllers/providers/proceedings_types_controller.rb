@@ -1,5 +1,7 @@
 module Providers
   class ProceedingsTypesController < ProviderBaseController
+    include PreDWPCheckVisible
+
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
       proceeding_types

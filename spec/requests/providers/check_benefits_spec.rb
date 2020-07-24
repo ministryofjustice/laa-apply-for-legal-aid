@@ -1,6 +1,43 @@
 require 'rails_helper'
 
 RSpec.describe 'check benefits requests', type: :request do
+  class EnvironmentPermutation
+    attr_reader :env, :setting, :application, :permissions, :expected_result
+
+    EXPECTED_TEXTS = {
+      continue: 'receives benefits that qualify for legal aid',
+      ccms: 'You need to use CCMS for this application',
+      need_to_check: 'We need to check your client'
+    }.freeze
+
+    def initialize(env:, setting:, application:, permissions:, expected_result:)
+      @env = env
+      @setting = setting
+      @application = application
+      @permissions = permissions
+      @expected_result = expected_result
+    end
+
+    def benefit_check_result
+      @application == :passported ? :positive : :negative
+    end
+
+    def provider_permissions
+      case @permissions
+      when :passported
+        :with_passported_permissions
+      when :non_passported
+        :with_non_passported_permissions
+      else
+        :with_no_permissions
+      end
+    end
+
+    def expected_text
+      EXPECTED_TEXTS[@expected_result]
+    end
+  end
+
   let(:last_name) { 'WALKER' }
   let(:date_of_birth) { '1980/01/10'.to_date }
   let(:national_insurance_number) { 'JA293483A' }
@@ -8,9 +45,9 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:application) { create :application, applicant: applicant, state: 'checking_applicant_details' }
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
-  let(:login) { login_as application.provider }
   let(:env_allow_non_passported_route) { [true, false].sample }
   let(:setting_allow_non_passported_route) { [true, false].sample }
+  let(:provider) { create :provider }
 
   before do
     Setting.create!(allow_non_passported_route: setting_allow_non_passported_route)
@@ -52,61 +89,6 @@ RSpec.describe 'check benefits requests', type: :request do
         it 'updates check_benefit_result' do
           expect(BenefitCheckService).to receive(:call).and_call_original
           subject
-        end
-      end
-    end
-
-    context 'when the applicant receives benefits' do
-      let!(:benefit_check_result) { create :benefit_check_result, :positive, legal_aid_application: application }
-
-      it 'show positive result text' do
-        subject
-        text = I18n.t('providers.check_benefits.check_benefits_result.positive_result.title', name: applicant.full_name)
-        expect(response.body).to include(text)
-      end
-    end
-
-    context 'when the applicant does not receive benefits' do
-      let!(:benefit_check_result) { create :benefit_check_result, :negative, legal_aid_application: application }
-
-      context 'when environment is not allowed to go through non-passported route' do
-        let(:env_allow_non_passported_route) { false }
-
-        it 'shows text to use CCMS' do
-          subject
-          expect(response.body).to include(I18n.t('providers.check_benefits.use_ccms.title', name: applicant.full_name))
-        end
-
-        it 'sets the application to use_ccms state' do
-          subject
-          expect(application.reload.state).to eq 'use_ccms'
-        end
-      end
-
-      context 'when environment is allowed to go through non-passported route' do
-        let(:env_allow_non_passported_route) { true }
-
-        context 'when setting have allow_non_passported_route false' do
-          let(:setting_allow_non_passported_route) { false }
-
-          it 'shows text to use CCMS' do
-            subject
-            expect(response.body).to include(I18n.t('providers.check_benefits.use_ccms.title'))
-          end
-
-          it 'transitions the application to use_ccms' do
-            subject
-            expect(application.reload.state).to eq 'use_ccms'
-          end
-        end
-
-        context 'when setting have allow_non_passported_route true' do
-          let(:setting_allow_non_passported_route) { true }
-
-          it 'show negative result text' do
-            subject
-            expect(unescaped_response_body).to include I18n.t('providers.check_benefits.check_benefits_result.negative_result.title')
-          end
         end
       end
     end
@@ -224,6 +206,43 @@ RSpec.describe 'check benefits requests', type: :request do
         it 'displays providers applications page' do
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
+      end
+    end
+  end
+
+  context 'decision tree: allowed to continue or use ccms?' do
+    permutations = [
+      EnvironmentPermutation.new(env: true, setting: true, application: :passported, permissions: :passported, expected_result: :continue),
+      EnvironmentPermutation.new(env: true, setting: true, application: :passported, permissions: :none, expected_result: :ccms),
+      EnvironmentPermutation.new(env: true, setting: true, application: :non_passported, permissions: :passported, expected_result: :ccms),
+      EnvironmentPermutation.new(env: true, setting: true, application: :non_passported, permissions: :non_passported, expected_result: :need_to_check),
+
+      EnvironmentPermutation.new(env: true, setting: false, application: :passported, permissions: :passported, expected_result: :continue),
+      EnvironmentPermutation.new(env: true, setting: false, application: :passported, permissions: :none, expected_result: :ccms),
+      EnvironmentPermutation.new(env: true, setting: false, application: :non_passported, permissions: :passported, expected_result: :ccms),
+      EnvironmentPermutation.new(env: true, setting: false, application: :non_passported, permissions: :non_passported, expected_result: :ccms),
+
+      EnvironmentPermutation.new(env: false, setting: false, application: :passported, permissions: :passported, expected_result: :continue),
+      EnvironmentPermutation.new(env: false, setting: false, application: :passported, permissions: :none, expected_result: :ccms),
+      EnvironmentPermutation.new(env: false, setting: false, application: :non_passported, permissions: :passported, expected_result: :ccms),
+      EnvironmentPermutation.new(env: false, setting: false, application: :non_passported, permissions: :non_passported, expected_result: :ccms),
+
+      EnvironmentPermutation.new(env: false, setting: true, application: :passported, permissions: :passported, expected_result: :continue),
+      EnvironmentPermutation.new(env: false, setting: true, application: :passported, permissions: :none, expected_result: :ccms),
+      EnvironmentPermutation.new(env: false, setting: true, application: :non_passported, permissions: :passported, expected_result: :ccms),
+      EnvironmentPermutation.new(env: false, setting: true, application: :non_passported, permissions: :non_passported, expected_result: :ccms)
+    ]
+    permutations.each do |perm|
+      it 'outputs the expected text' do
+        Setting.setting.update!(allow_non_passported_route: perm.setting)
+        allow(Rails.configuration.x).to receive(:allow_non_passported_route).and_return(perm.env)
+        provider = create :provider, perm.provider_permissions
+        application = create :application, :checking_applicant_details, applicant: applicant, provider: provider
+        create :benefit_check_result, perm.benefit_check_result, legal_aid_application: application
+
+        login_as application.provider
+        get "/providers/applications/#{application.id}/check_benefits"
+        expect(response.body).to include(perm.expected_text)
       end
     end
   end

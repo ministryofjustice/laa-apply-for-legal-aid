@@ -1,6 +1,6 @@
 module Providers
   class MeansReportsController < ProviderBaseController
-    authorize_with_policy :show_submitted_application?
+    authorize_with_policy_method :show_submitted_application?
 
     def show
       @cfe_result = @legal_aid_application.cfe_result
