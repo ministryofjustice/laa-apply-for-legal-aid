@@ -171,8 +171,9 @@ en:
         page_title: This link has expired
         new_link_request: Request a new link
       update:
-        page_title: Your request for a new link has been sent
-        contact_provider: Speak with your solicitor to check your application status.
+        page_title: We've sent you a new link
+        check_inbox: Check your email inbox.
+        valid_until: Your new link will only remain active for 7 days for security reasons.
     restrictions:
       show:
         h1-heading: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
