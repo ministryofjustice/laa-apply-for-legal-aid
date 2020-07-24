@@ -188,8 +188,8 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
 
           context 'has nothing' do
-            let(:oad) { create :other_assets_declaration }
-            let(:application) { oad.legal_aid_application }
+            let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+            let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { 'true' }
 
             before do
