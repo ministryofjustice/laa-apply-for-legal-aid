@@ -1,28 +1,29 @@
 <%= page_template page_title: t('.h1-heading') do %>
 
   <p class="govuk-body govuk-!-margin-bottom-0">
-    <%= t('.client') %>:
-    <strong><%= @legal_aid_application.applicant.full_name %></strong>
+    <strong><%= t('.client') %>:</strong>
+    <%= @legal_aid_application.applicant.full_name %>
   </p>
   <p class="govuk-body">
-    <%= t('.case-reference') %>:
-    <strong><%= @legal_aid_application.application_ref %></strong>
+    <strong><%= t('.case-reference') %>:</strong>
+    <%= @legal_aid_application.application_ref %>
   </p>
 
+  <p class="govuk-body"><%= t('.state') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.what_next') %></h2>
   <p class="govuk-body"><%= t('.intro') %></p>
   <ul class="govuk-list govuk-list--bullet print-add-bullet">
     <%- t('.intro-bullets').each do |bullet| %>
       <li><%= bullet %></li>
     <% end %>
   </ul>
-  <p class="govuk-body"><%= t('.action') %></p>
   <p class="govuk-body"><%= t('.question') %></p>
   <ul class="govuk-list govuk-list--bullet print-add-bullet">
     <%- t('.question-bullets').each do |bullet| %>
       <li><%= bullet %></li>
     <% end %>
   </ul>
-
   <div class="govuk-!-padding-bottom-4"></div>
 
   <%= next_action_buttons_with_form(

@@ -252,18 +252,19 @@ en:
         h1-heading: Has your client received legal help for the matter?
     client_completed_means:
       show:
-        h1-heading: Your client has completed their financial assessment
+        h1-heading: Continue your application
         client: Client
         case-reference: Case reference
-        intro: 'Your client has:'
+        state: Your client has shared their financial information with us.
+        what_next: What happens next
+        intro: 'You need to:'
         intro-bullets:
-          - shared their bank transactions
-          - told us about their income and regular payments
-        action: You'll need to go through their transactions and sort them into categories (for example, salary or benefits).
-        question: "You'll also need to answer questions about their:"
+          - view your client's bank statements from the past 3 months
+          - put their transactions into the categories they selected
+        question: "You'll also need to tell us about their:"
         question-bullets:
+          - dependants (if they have any)
           - property, savings and other assets
-          - dependants
     confirm_offices:
       show:
         h1-heading: Confirm the account number of the office handling this application
