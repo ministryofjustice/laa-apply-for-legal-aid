@@ -405,7 +405,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I am able to view the client completed means answers
     Given I start the merits application and the applicant has uploaded transaction data
-    Then I should be on a page showing 'Your client has completed their financial assessment'
+    Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     When I click link 'Add another type of income'
@@ -451,7 +451,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
     Given I start the merits application and the applicant has uploaded transaction data
-    Then I should be on a page showing 'Your client has completed their financial assessment'
+    Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     When I click link 'Add another type of income'
