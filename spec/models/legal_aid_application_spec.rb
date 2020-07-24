@@ -852,4 +852,14 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.state_machine).to be_instance_of(NonPassportedStateMachine)
     end
   end
+
+  context 'delegated state machine methods' do
+    let(:application) { create :legal_aid_application, :with_passported_state_machine }
+
+    describe '#provider_assessing_means' do
+      it 'returns false' do
+        expect(application.provider_assessing_means?).to be false
+      end
+    end
+  end
 end
