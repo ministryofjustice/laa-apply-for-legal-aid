@@ -17,6 +17,7 @@ development:
   client_completed_means: d04e64ae-0a66-4577-83d6-6ce9f7fa27b4
   reminder_to_submit_financial_information_client: e8052551-2afa-4b11-b3e3-578248d9b582
   reminder_to_submit_financial_information_provider: ec4f423d-498a-4828-ab66-c2453cb42ed3
+  new_link_to_client: 5708ec04-c789-4f7e-8a15-ad7dd3f4f336
 
 production:
   citizen_start_application: 66865f0d-6410-40e2-b862-98724eb6e33a
@@ -27,3 +28,4 @@ production:
   client_completed_means: b343446d-b487-4f8b-9673-2aaf21ea10a1
   reminder_to_submit_financial_information_client: 2a07ae35-670a-4753-a7cf-58843068b659
   reminder_to_submit_financial_information_provider: 9843f667-8b11-41c0-9c11-622fffc686ec
+  new_link_to_client: b59f52f3-ad0b-45ed-9b2a-a33686f4278a
