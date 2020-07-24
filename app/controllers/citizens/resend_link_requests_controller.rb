@@ -4,9 +4,6 @@ module Citizens
 
     def update
       ResendLinkRequestMailer.notify(
-        # legal_aid_application,
-        # legal_aid_application.provider,
-        # legal_aid_application.applicant
         legal_aid_application.application_ref,
         legal_aid_application.applicant.email_address,
         application_url,
