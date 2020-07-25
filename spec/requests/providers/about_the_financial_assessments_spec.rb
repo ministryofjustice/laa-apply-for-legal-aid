@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'about financial assessments requests', type: :request do
-  let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, state: :provider_confirming_applicant_eligibility) }
+  let(:application) do
+    create(:legal_aid_application,
+           :with_proceeding_types,
+           :with_applicant_and_address,
+           :with_non_passported_state_machine,
+           :provider_confirming_applicant_eligibility)
+  end
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/about_the_financial_assessment' do
@@ -40,7 +46,8 @@ RSpec.describe 'about financial assessments requests', type: :request do
             :legal_aid_application,
             :with_proceeding_types,
             :with_applicant_and_address,
-            state: :provider_assessing_means
+            :with_non_passported_state_machine,
+            :provider_assessing_means
           )
         end
         let(:target_path) do
@@ -92,7 +99,7 @@ RSpec.describe 'about financial assessments requests', type: :request do
         end
 
         context 'but has already been submitted by the provider' do
-          let(:application) { create(:legal_aid_application, :with_applicant, :awaiting_applicant) }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant) }
 
           it 'does not send an email to the citizen' do
             expect(CitizenEmailService).not_to receive(:new)

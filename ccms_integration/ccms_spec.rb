@@ -77,8 +77,8 @@ module CCMS
              :with_cfe_v2_result,
              :with_substantive_scope_limitation,
              :with_positive_benefit_check_result,
+             :submitting_assessment,
              proceeding_types: [substantive_proceeding_type],
-             state: :submitting_assessment,
              office: office
     end
 
@@ -116,8 +116,8 @@ module CCMS
              :with_cfe_v2_result,
              :with_delegated_functions_scope_limitation,
              :with_positive_benefit_check_result,
+             :submitting_assessment,
              proceeding_types: [delegated_functions_proceeding_type],
-             state: :submitting_assessment,
              office: office
     end
 

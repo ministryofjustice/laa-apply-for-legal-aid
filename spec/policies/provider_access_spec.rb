@@ -12,7 +12,7 @@ RSpec.describe 'Provider access', type: :request do
     expect(response).to have_http_status(:ok)
 
     # Application is submitted
-    legal_aid_application.update(state: :assessment_submitted)
+    legal_aid_application.state_machine.update!(aasm_state: :assessment_submitted)
 
     # On access to page after submission user is redirected to submitted application
     get providers_legal_aid_application_address_lookup_path(legal_aid_application)

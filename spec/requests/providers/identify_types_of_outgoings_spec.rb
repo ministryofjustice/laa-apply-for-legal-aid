@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_applicant }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
   let!(:outgoing_types) { create_list :transaction_type, 3, :debit_with_standard_name }
@@ -90,7 +90,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
     context 'when application has transaction types of other kind' do
       let(:other_transaction_type) { create :transaction_type, :credit }
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type] }
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [other_transaction_type] }
 
       it 'does not remove existing transation of other type' do
         expect { subject }.not_to change { legal_aid_application.transaction_types.count }
@@ -118,7 +118,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
       context 'and application has transactions' do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, transaction_types: outgoing_types
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types
         end
 
         it 'removes transaction types from the application' do

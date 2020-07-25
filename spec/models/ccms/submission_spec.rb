@@ -6,7 +6,7 @@ module CCMS # rubocop:disable Metrics/ModuleLength
     let(:state) { :initialised }
     let(:applicant_poll_count) { 0 }
     let(:case_poll_count) { 0 }
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount, state: :submitting_assessment }
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount, :submitting_assessment }
     let(:submission) do
       create :submission,
              legal_aid_application: legal_aid_application,

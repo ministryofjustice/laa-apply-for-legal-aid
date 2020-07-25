@@ -55,6 +55,11 @@ module Flow
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
           forward: ->(application) do
+            if application.applicant_receives_benefit?
+              application.change_state_machine_type('PassportedStateMachine')
+            else
+              application.change_state_machine_type('NonPassportedStateMachine')
+            end
             return :substantive_applications if application.used_delegated_functions?
 
             application.applicant_receives_benefit? ? :capital_introductions : :open_banking_consents

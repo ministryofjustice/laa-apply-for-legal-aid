@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) do
-    create :legal_aid_application, state: :applicant_details_checked, used_delegated_functions_on: 1.day.ago
+    create :legal_aid_application, :with_passported_state_machine, :applicant_details_checked, used_delegated_functions_on: 1.day.ago
   end
   let(:login_provider) { login_as legal_aid_application.provider }
 
@@ -60,11 +60,12 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         create(
           :legal_aid_application,
           :with_positive_benefit_check_result,
-          state: :applicant_details_checked
+          :with_passported_state_machine,
+          :applicant_details_checked
         )
       end
 
-      it 'redirects to captial introductions' do
+      it 'redirects to capital introductions' do
         expect(response).to redirect_to(
           providers_legal_aid_application_capital_introduction_path(legal_aid_application)
         )

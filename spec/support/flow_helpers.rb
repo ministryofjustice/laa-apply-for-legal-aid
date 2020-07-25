@@ -8,7 +8,7 @@ module FlowHelpers
     legal_aid_application_id = path_details[:legal_aid_application_id]
     Flow::BaseFlowService.flow_service_for(
       controller_module,
-      legal_aid_application: legal_aid_application_id ? LegalAidApplication.find(legal_aid_application_id) : LegalAidApplication.new,
+      legal_aid_application: legal_aid_application_id ? LegalAidApplication.find(legal_aid_application_id) : FactoryBot.create(:legal_aid_application),
       current_step: controller_name
     ).forward_path
   end

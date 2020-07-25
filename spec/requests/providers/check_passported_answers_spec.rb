@@ -9,6 +9,7 @@ RSpec.describe 'check passported answers requests', type: :request do
     let!(:application) do
       create :legal_aid_application,
              :with_everything,
+             :with_passported_state_machine,
              :provider_entering_means,
              vehicle: vehicle,
              own_vehicle: own_vehicle
@@ -63,28 +64,28 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant does not have any savings' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_no_savings, :provider_entering_means }
+        let(:application) { create :legal_aid_application, :with_everything, :with_no_savings, :with_passported_state_machine, :provider_entering_means }
         it 'displays that no savings have been declared' do
           expect(response.body).to include(I18n.t('.generic.none_declared'))
         end
       end
 
       context 'applicant does not have any other assets' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_no_other_assets, :provider_entering_means }
+        let(:application) { create :legal_aid_application, :with_everything, :with_no_other_assets, :with_passported_state_machine, :provider_entering_means }
         it 'displays that no other assets have been declared' do
           expect(response.body).to include(I18n.t('.generic.none_declared'))
         end
       end
 
       context 'applicant does not have any capital restrictions' do
-        let(:application) { create :legal_aid_application, :with_everything, :provider_entering_means, has_restrictions: false }
+        let(:application) { create :legal_aid_application, :with_everything, :with_passported_state_machine, :provider_entering_means, has_restrictions: false }
         it 'displays that no capital restrictions have been declared' do
           expect(response.body).to include(I18n.t('.generic.no'))
         end
       end
 
       context 'applicant does not have any capital' do
-        let(:application) { create :legal_aid_application, :with_applicant, :without_own_home, :provider_entering_means }
+        let(:application) { create :legal_aid_application, :with_applicant, :without_own_home, :with_passported_state_machine, :provider_entering_means }
         it 'does not display capital restrictions' do
           expect(response.body).not_to include('restrictions')
         end
@@ -122,7 +123,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant does not own home' do
-        let(:application) { create :legal_aid_application, :with_everything, :without_own_home, :provider_entering_means }
+        let(:application) { create :legal_aid_application, :with_everything, :without_own_home, :with_passported_state_machine, :provider_entering_means }
         it 'does not display property value' do
           expect(response.body).not_to include(number_to_currency(application.property_value, unit: '£'))
           expect(response.body).not_to include('Property value')
@@ -135,7 +136,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant owns home without mortgage' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_own_home_owned_outright, :provider_entering_means }
+        let(:application) { create :legal_aid_application, :with_everything, :with_own_home_owned_outright, :with_passported_state_machine, :provider_entering_means }
         it 'does not display property value' do
           expect(response.body).not_to include(number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
           expect(response.body).not_to include('Outstanding mortgage')
@@ -143,7 +144,14 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant is sole owner of home' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_no_other_assets, :with_home_sole_owner, :provider_entering_means }
+        let(:application) do
+          create :legal_aid_application,
+                 :with_everything,
+                 :with_no_other_assets,
+                 :with_home_sole_owner,
+                 :with_passported_state_machine,
+                 :provider_entering_means
+        end
         it 'does not display percentage owned' do
           expect(response.body).not_to include(number_to_percentage(application.percentage_home, precision: 2))
           expect(response.body).not_to include('Percentage')
@@ -171,6 +179,7 @@ RSpec.describe 'check passported answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
+             :with_passported_state_machine,
              :checking_passported_answers
     end
     let(:params) { {} }
@@ -236,6 +245,7 @@ RSpec.describe 'check passported answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
+             :with_passported_state_machine,
              :checking_passported_answers
     end
 
@@ -247,7 +257,7 @@ RSpec.describe 'check passported answers requests', type: :request do
     end
 
     context 'logged in as an authenticated provider' do
-      let(:application) { create :legal_aid_application, :with_everything, :provider_entering_means }
+      let(:application) { create :legal_aid_application, :with_everything, :with_passported_state_machine, :provider_entering_means }
 
       before do
         login_as application.provider
