@@ -44,6 +44,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
           name: contact_name(1)
         }
       ],
+      feeEarners: [],
       providerOffices: [
         {
           id: 81_693,
@@ -63,6 +64,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
           name: contact_name(1)
         }
       ],
+      feeEarners: [],
       providerOffices: [
         {
           id: 137_570,
@@ -82,6 +84,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
           name: contact_name(1)
         }
       ],
+      feeEarners: [],
       providerOffices: [
         {
           id: 85_487,
@@ -96,6 +99,7 @@ class MockProviderDetailsRetriever # rubocop:disable Metrics/ClassLength
       providerFirmId: firm_number,
       contactUserId: username_number,
       contacts: Array.new(number_of_contacts) { |index| contact_hash(index + 1) },
+      feeEarners: [],
       providerOffices: Array.new(number_of_offices) { |index| office_hash(index + 1) }
 
     }

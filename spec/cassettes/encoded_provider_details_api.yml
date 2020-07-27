@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails/ROB%20R
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - ccms-pda.stg.legalservices.gov.uk
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Mon, 27 Jul 2020 14:10:48 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"providerFirmId":27358,"contactUserId":21025,"contacts":[{"id":9467190,"name":"MANDYBRADSHAW"},{"id":822444,"name":"ROB
+        R"},{"id":3293283,"name":"ANNALISAMOSCARDINI@KYLESLEGALPRACTICE.CO.UK"},{"id":521356,"name":"GAYNORHIGGINBOTHAM@KYLESLEGALPRACTICE.CO.UK"},{"id":5767233,"name":"NICKPEACOCK2"},{"id":5106865,"name":"DAVIDPARISH@KYLESLEGALPRACTICE.CO.UK"},{"id":8677372,"name":"VICKYLANT@KYLESLEGAL.CO.UK"},{"id":8677374,"name":"VICTORIALANT@KYLESLEGAL.CO.UK"},{"id":504182,"name":"ROB@ROWANLEGALCOSTS.CO.UK"},{"id":2441136,"name":"AMYHOSSACK@KYLESLEGALPRACTICE.CO.UK"},{"id":2835394,"name":"PMASON"},{"id":3293287,"name":"GOODLUCK
+        JONATHAN"},{"id":6564073,"name":"CLIFFD"}],"feeEarners":[],"providerOffices":[{"id":146464,"name":"KYLES
+        LEGAL PRACTICE-2M341C"},{"id":5900725,"name":"KYLES LEGAL PRACTICE-2P467N"},{"id":146466,"name":"KYLES
+        LEGAL PRACTICE-2M342D"},{"id":5989512,"name":"KYLES LEGAL PRACTICE-2P541U"},{"id":145934,"name":"KYLES
+        LEGAL PRACTICE-2M058V"},{"id":146462,"name":"KYLES LEGAL PRACTICE-2M340B"},{"id":5989510,"name":"KYLES
+        LEGAL PRACTICE-2P540T"},{"id":7561116,"name":"KYLES LEGAL PRACTICE-2P649L"},{"id":146454,"name":"KYLES
+        LEGAL PRACTICE-2M336X"},{"id":146460,"name":"KYLES LEGAL PRACTICE-2M339A"},{"id":146456,"name":"KYLES
+        LEGAL PRACTICE-2M337Y"}]}'
+  recorded_at: Mon, 27 Jul 2020 14:10:48 GMT
+recorded_with: VCR 6.0.0

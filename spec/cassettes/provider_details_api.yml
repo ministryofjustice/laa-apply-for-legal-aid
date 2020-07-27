@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://sitsoa10.laadev.co.uk/CCMSInformationService/api/providerDetails/NEETADESOR
+    uri: https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails/NEETADESOR
     body:
       encoding: US-ASCII
       string: ''
@@ -14,24 +14,25 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - sitsoa10.laadev.co.uk
+      - ccms-pda.stg.legalservices.gov.uk
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
       Date:
-      - Wed, 13 Nov 2019 16:31:19 GMT
-      Server:
-      - Oracle-HTTP-Server
+      - Mon, 27 Jul 2020 13:49:17 GMT
       Content-Type:
-      - application/json;charset=UTF-8
+      - application/json
       Transfer-Encoding:
       - chunked
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"providerFirmId":22381,"contactUserId":2016472,"contacts":[{"id":34419,"name":"Neeta
-        Desor"}],"providerOffices":[{"id":81693,"name":"DESOR & CO-0B721W"}]}'
-    http_version: 
-  recorded_at: Wed, 13 Nov 2019 16:31:20 GMT
-recorded_with: VCR 5.0.0
+      string: '{"providerFirmId":22381,"contactUserId":29562,"contacts":[{"id":568352,"name":"SALLYCORNHILL"},{"id":2017809,"name":"KAREN@HMLAWCOSTS.CO.UK"},{"id":3577068,"name":"DES@ELITELAWSOLICITORS.CO.UK"},{"id":2017801,"name":"JOHN@HMLAWCOSTS.CO.UK"},{"id":2017805,"name":"JO@HMLAWCOSTS.CO.UK"},{"id":2016496,"name":"BERYLCURLING"},{"id":2016486,"name":"ANITAANTHONY"},{"id":6751872,"name":"DURGA@DESORANDCO.CO.UK"},{"id":2016472,"name":"NEETADESOR"},{"id":8555414,"name":"BALWINDER@DESORANDCO.CO.UK"},{"id":2016500,"name":"LAURA@DESORANDCO.CO.UK"},{"id":8178598,"name":"ALINA@DESORANDCO.CO.UK"},{"id":2016508,"name":"KAMAL@DESORANDCO.CO.UK"},{"id":3763746,"name":"MARILYN@DESORANDCO.CO.UK"},{"id":2017811,"name":"MARK@HMLAWCOSTS.CO.UK"},{"id":2890641,"name":"SALLY@DESORANDCO.CO.UK"},{"id":4055523,"name":"LAURAGUSATU"},{"id":9111821,"name":"BALWINDERUBHA"},{"id":2016490,"name":"MAANSIKHOSA"}],"feeEarners":[{"id":9111793,"name":"Balwinder
+        Kaur Ubha"},{"id":9174953,"name":"Marilyn Willows"},{"id":2016673,"name":"Kamal
+        Desor"},{"id":34419,"name":"Neeta Desor"}],"providerOffices":[{"id":81693,"name":"DESOR
+        & CO-0B721W"}]}'
+  recorded_at: Mon, 27 Jul 2020 13:49:17 GMT
+recorded_with: VCR 6.0.0

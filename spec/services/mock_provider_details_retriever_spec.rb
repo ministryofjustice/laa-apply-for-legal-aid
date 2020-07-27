@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MockProviderDetailsRetriever do
-  let(:expected_keys) { %i[providerFirmId contactUserId contacts providerOffices] }
+  let(:expected_keys) { %i[providerFirmId contactUserId contacts providerOffices feeEarners] }
 
   context 'a mock user is logged in' do
     let(:username) { Faker::Internet.username }
