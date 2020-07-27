@@ -1,7 +1,11 @@
 class UpdateStateMachines < ActiveRecord::Migration[6.0]
   def up
     LegalAidApplication.all.each do |application|
-      application.create_state_machine!(type: 'PassportedStateMachine', aasm_state: application.read_attribute(:state))
+      type = application.passported? ? 'PassportedStateMachine' : 'NonPassportedStateMachine'
+      application.create_state_machine!(type: type, aasm_state: application.read_attribute(:state))
+    rescue StandardError
+      message = "Cannot create a #{type} state machine for application: #{application.id} with an aasm_state of `#{application.read_attribute(:state)}`"
+      raise message
     end
 
     remove_column :legal_aid_applications, :state, :string
