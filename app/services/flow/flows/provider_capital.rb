@@ -34,7 +34,7 @@ module Flow
             if application.own_capital?
               :restrictions
             else
-              application.non_passported? ? :means_summaries : :check_passported_answers
+              application.provider_assessing_means? ? :means_summaries : :check_passported_answers
             end
           end,
           carry_on_sub_flow: ->(application) { application.other_assets? },

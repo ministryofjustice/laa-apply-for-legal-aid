@@ -42,7 +42,7 @@ RSpec.describe 'check benefits requests', type: :request do
   let(:date_of_birth) { '1980/01/10'.to_date }
   let(:national_insurance_number) { 'JA293483A' }
   let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
-  let(:application) { create :application, :checking_applicant_details, applicant: applicant }
+  let(:application) { create :application, applicant: applicant, state: 'checking_applicant_details' }
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
   let(:env_allow_non_passported_route) { [true, false].sample }

@@ -1,13 +1,14 @@
 # TODO: Think about how we refactor this class to make it smaller
 class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLength
   include TranslatableModelAttribute
+  include LegalAidApplicationStateMachine # States are defined here
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
   SECURE_ID_DAYS_TO_EXPIRE = 7
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
-  CCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
+  CCCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
 
   belongs_to :applicant, optional: true
   belongs_to :provider, optional: false
@@ -36,7 +37,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', dependent: :destroy
   has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission'
   has_many :scheduled_mailings, dependent: :destroy
-  has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
 
   before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
@@ -57,44 +57,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
   delegate :substantive_scope_limitation, :delegated_functions_scope_limitation, to: :application_scope_limitations
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
-  delegate :applicant_enter_means!,
-           :await_applicant!,
-           :check_applicant_details!,
-           :check_citizen_answers!,
-           :check_merits_answers!,
-           :check_non_passported_means!,
-           :check_passported_answers!,
-           :complete_bank_transaction_analysis!,
-           :complete_passported_means!,
-           :enter_applicant_details!,
-           :provider_confirm_applicant_eligibility!,
-           :provider_enter_means!,
-           :provider_enter_merits!,
-           :provider_used_delegated_functions!,
-           :reset!,
-           :reset_from_use_ccms!,
-           :submitted_assessment!,
-           :use_ccms!,
-           :applicant_details_checked?,
-           :applicant_entering_means?,
-           :assessment_submitted?,
-           :awaiting_applicant?,
-           :checking_applicant_details?,
-           :checking_citizen_answers?,
-           :checking_merits_answers?,
-           :checking_non_passported_means?,
-           :checking_passported_answers?,
-           :entering_applicant_details?,
-           :generating_reports?,
-           :may_generate_reports?,
-           :provider_assessing_means?,
-           :provider_checking_or_checked_citizens_means_answers?,
-           :provider_entering_means?,
-           :provider_entering_merits?,
-           :submitting_assessment?,
-           :use_ccms?,
-           :summary_state,
-           to: :state_machine_proxy
 
   scope :latest, -> { order(created_at: :desc) }
   scope :search, ->(term) do
@@ -112,7 +74,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     applications
   end
 
-  scope :submitted_applications, -> { joins(:state_machine).where(state_machine_proxies: { aasm_state: CCMS_SUBMITTED_STATES }).order(created_at: :desc) }
+  scope :submitted_applications, -> { where(state: CCCMS_SUBMITTED_STATES).order(created_at: :desc) }
 
   enum(
     own_home: {
@@ -330,46 +292,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   def ccms_submission
     create_ccms_submission! unless super
     super
-  end
-
-  def state
-    state_machine_proxy.aasm_state
-  end
-
-  def state_machine_proxy
-    if state_machine.nil?
-      save!
-      create_state_machine(type: 'PassportedStateMachine')
-    end
-    state_machine
-  end
-
-  def change_state_machine_type(state_machine_type)
-    save!
-    state_machine.update!(type: state_machine_type)
-    reload
-  end
-
-  def applicant_details_checked!
-    state_machine_proxy.applicant_details_checked!(self)
-  end
-
-  def generate_reports!
-    state_machine_proxy.generate_reports!(self)
-  end
-
-  def generated_reports!
-    state_machine_proxy.generated_reports!(self)
-  end
-
-  def complete_non_passported_means!
-    state_machine_proxy.complete_non_passported_means!(self)
-  end
-
-  def summary_state
-    return :submitted if merits_assessment&.submitted_at
-
-    :in_progress
   end
 
   private

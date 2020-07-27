@@ -33,9 +33,8 @@ Given('I previously created a passported application and left on the {string} pa
   @legal_aid_application = create(
     :application,
     :with_everything,
-    :with_passported_state_machine,
-    :initiated,
     provider: create(:provider),
+    state: :initiated,
     provider_step: provider_step.downcase
   )
   login_as @legal_aid_application.provider
@@ -47,7 +46,6 @@ Given('I previously created a passported application with no assets and left on 
     :with_applicant,
     :without_own_home,
     :with_no_other_assets,
-    :with_passported_state_machine,
     :checking_passported_answers,
     provider: create(:provider),
     provider_step: provider_step.downcase
@@ -108,7 +106,6 @@ Given('I start the journey as far as the client completed means page') do
     :with_applicant,
     :with_everything,
     :with_vehicle,
-    :with_non_passported_state_machine,
     :provider_assessing_means
   )
   login_as @legal_aid_application.provider
@@ -121,7 +118,6 @@ Given("I am checking the applicant's means answers") do
     :with_applicant,
     :with_everything,
     :with_vehicle,
-    :with_non_passported_state_machine,
     :provider_assessing_means
   )
   login_as @legal_aid_application.provider
@@ -133,7 +129,6 @@ Given('I start the merits application') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :with_non_passported_state_machine,
     :provider_assessing_means
   )
   login_as @legal_aid_application.provider
@@ -149,7 +144,6 @@ Given('I start the merits application with bank transactions with no transaction
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_uncategorised_credit_transactions,
     :with_uncategorised_debit_transactions
@@ -168,7 +162,6 @@ Given('I start the merits application with student finance') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_irregular_income
   )
@@ -186,7 +179,6 @@ Given('I start the merits application and the applicant has uploaded transaction
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_transaction_period,
     :with_benefits_transactions
@@ -266,7 +258,6 @@ Given('I complete the passported journey as far as check your answers') do
   )
   @legal_aid_application = create(
     :legal_aid_application,
-    :with_passported_state_machine,
     :at_entering_applicant_details,
     :with_substantive_scope_limitation,
     applicant: applicant,
@@ -299,7 +290,6 @@ Given('I complete the passported journey as far as capital check your answers') 
     :legal_aid_application,
     :with_everything,
     :with_proceeding_types,
-    :with_passported_state_machine,
     :provider_entering_means,
     applicant: applicant
   )
@@ -329,10 +319,9 @@ Given('I complete the application and view the check your answers page') do
 
   @legal_aid_application = create(
     :legal_aid_application,
-    :with_non_passported_state_machine,
-    :applicant_entering_means,
     applicant: applicant,
-    proceeding_types: [proceeding_type]
+    proceeding_types: [proceeding_type],
+    state: :applicant_entering_means
   )
   @legal_aid_application.add_default_substantive_scope_limitation!
   @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?
@@ -345,7 +334,6 @@ Given('The means questions have been answered by the applicant') do
     :application,
     :with_applicant,
     :with_proceeding_types,
-    :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_uncategorised_debit_transactions
   )

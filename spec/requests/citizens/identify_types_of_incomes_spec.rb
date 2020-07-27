@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means }
   let(:secure_id) { legal_aid_application.generate_secure_id }
   before do
     get citizens_legal_aid_application_path(secure_id)
@@ -11,9 +11,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
   let(:income_types_without_children) { TransactionType.not_children.where(id: income_types.map(&:id)) }
 
   describe 'GET /citizens/identify_types_of_income' do
-    before do
-      get citizens_identify_types_of_income_path
-    end
+    before { get citizens_identify_types_of_income_path }
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -55,13 +53,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
     end
 
     context 'when transaction types selected' do
-      let(:legal_aid_application) do
-        create :legal_aid_application,
-               :with_applicant,
-               :with_non_passported_state_machine,
-               :applicant_entering_means,
-               no_credit_transaction_types_selected: true
-      end
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means, no_credit_transaction_types_selected: true }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
       it 'adds transaction types to the application' do
@@ -79,13 +71,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
     end
 
     context 'when transaction types selected' do
-      let(:legal_aid_application) do
-        create :legal_aid_application,
-               :with_applicant,
-               :with_non_passported_state_machine,
-               :applicant_entering_means,
-               no_credit_transaction_types_selected: true
-      end
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :applicant_entering_means, no_credit_transaction_types_selected: true }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
       it 'should redirect to the next step' do
@@ -98,7 +84,6 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_applicant,
-               :with_non_passported_state_machine,
                :applicant_entering_means,
                transaction_types: [other_transaction_type]
       end
@@ -131,7 +116,6 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
         let(:legal_aid_application) do
           create :legal_aid_application,
                  :with_applicant,
-                 :with_non_passported_state_machine,
                  :applicant_entering_means,
                  transaction_types: income_types
         end

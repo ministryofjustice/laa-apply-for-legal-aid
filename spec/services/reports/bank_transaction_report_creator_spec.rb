@@ -10,7 +10,7 @@ RSpec.describe Reports::BankTransactionReportCreator do
            :with_benefits_transactions,
            :with_uncategorised_credit_transactions,
            :with_cfe_v2_result,
-           :generating_reports
+           state: :generating_reports
   end
 
   let(:remarks) { CFE::Remarks.new(populated_remarks_hash) }
