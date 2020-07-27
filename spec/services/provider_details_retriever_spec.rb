@@ -4,8 +4,9 @@ RSpec.describe ProviderDetailsRetriever do
   let(:api_url) { 'https://sitsoa10.laadev.co.uk/CCMSInformationService/api/providerDetails' }
   let(:mock) { true }
   let(:provider) { create :provider }
+  let(:username) { provider.username }
 
-  subject { described_class.call(provider.username) }
+  subject { described_class.call(username) }
 
   before do
     allow(Rails.configuration.x.provider_details).to receive(:url).and_return(api_url)
@@ -37,6 +38,16 @@ RSpec.describe ProviderDetailsRetriever do
       it 'encode properly the username' do
         expect(URI).to receive(:parse).at_least(:once).with(/#{escaped_username}/).and_call_original
         subject
+      end
+
+      context 'username with space' do
+        let(:provider) { create :provider, username: 'JOHN LANG' }
+        let(:escaped_username) { 'JOHN%20LANG' }
+
+        it 'encodes with a %20 in place of a space' do
+          expect(URI).to receive(:parse).at_least(:once).with(/#{escaped_username}/).and_call_original
+          subject
+        end
       end
 
       context 'on failure' do
