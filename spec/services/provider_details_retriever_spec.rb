@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProviderDetailsRetriever do
-  let(:api_url) { 'https://sitsoa10.laadev.co.uk/CCMSInformationService/api/providerDetails' }
+  let(:api_url) { 'https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails' }
+
   let(:mock) { true }
   let(:provider) { create :provider }
   let(:username) { provider.username }
@@ -16,7 +17,7 @@ RSpec.describe ProviderDetailsRetriever do
   describe '.call' do
     shared_examples_for 'get response from API' do
       it 'returns the expected data structure' do
-        expected_keys = %i[providerFirmId contactUserId contacts providerOffices]
+        expected_keys = %i[providerFirmId contactUserId contacts providerOffices feeEarners]
         expect(subject.keys).to match_array(expected_keys)
 
         expected_office_keys = %i[id name]
@@ -40,9 +41,9 @@ RSpec.describe ProviderDetailsRetriever do
         subject
       end
 
-      context 'username with space' do
-        let(:provider) { create :provider, username: 'JOHN LANG' }
-        let(:escaped_username) { 'JOHN%20LANG' }
+      context 'username with space', vcr: { cassette_name: 'encoded_provider_details_api' } do
+        let(:provider) { create :provider, username: 'ROB R' }
+        let(:escaped_username) { URI.encode_www_form_component(provider.username).gsub('+', '%20') }
 
         it 'encodes with a %20 in place of a space' do
           expect(URI).to receive(:parse).at_least(:once).with(/#{escaped_username}/).and_call_original
