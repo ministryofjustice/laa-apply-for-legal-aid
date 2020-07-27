@@ -163,7 +163,8 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
 
           context 'checking answers' do
-            let(:application) { create :legal_aid_application, :without_own_home, :checking_passported_answers }
+            let(:state) { :checking_passported_answers }
+            let(:application) { create :legal_aid_application, :without_own_home, state: state }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { 'true' }
 
@@ -179,7 +180,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             end
 
             context "provider checking citizen's answers" do
-              let(:application) { create :legal_aid_application, :without_own_home, :with_non_passported_state_machine, :checking_non_passported_means }
+              let(:state) { :checking_non_passported_means }
 
               it 'redirects to means summary page' do
                 expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
@@ -188,8 +189,8 @@ RSpec.describe 'provider other assets requests', type: :request do
           end
 
           context 'has nothing' do
-            let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-            let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:oad) { create :other_assets_declaration }
+            let(:application) { oad.legal_aid_application }
             let(:none_selected) { 'true' }
 
             before do

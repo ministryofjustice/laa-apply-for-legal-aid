@@ -12,13 +12,12 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_negative_benefit_check_result,
-           :with_non_passported_state_machine,
-           :provider_assessing_means,
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            applicant: applicant,
            provider: provider,
-           transaction_types: [transaction_type]
+           transaction_types: [transaction_type],
+           state: :provider_assessing_means
   end
   let(:login) { login_as provider }
 
