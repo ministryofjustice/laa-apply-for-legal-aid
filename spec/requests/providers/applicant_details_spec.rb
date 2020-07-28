@@ -32,6 +32,12 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
           expect(unescaped_response_body).to include(applicant.first_name)
         end
       end
+
+      context '#pre_dwp_check?' do
+        it 'returns true' do
+          expect(described_class.new.pre_dwp_check?).to be true
+        end
+      end
     end
   end
 

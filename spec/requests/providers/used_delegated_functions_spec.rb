@@ -18,6 +18,12 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       expect(response).to have_http_status(:ok)
     end
 
+    context '#pre_dwp_check?' do
+      it 'returns true' do
+        expect(described_class.new.pre_dwp_check?).to be true
+      end
+    end
+
     context 'when not authenticated' do
       let(:login_provider) { nil }
       it_behaves_like 'a provider not authenticated'

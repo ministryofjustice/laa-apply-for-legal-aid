@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'address selections requests', type: :request do
+RSpec.describe Providers::AddressSelectionsController, type: :request do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
@@ -61,6 +61,12 @@ RSpec.describe 'address selections requests', type: :request do
           subject
           expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(back: true))
         end
+      end
+    end
+
+    context '#pre_dwp_check?' do
+      it 'returns true' do
+        expect(described_class.new.pre_dwp_check?).to be true
       end
     end
   end

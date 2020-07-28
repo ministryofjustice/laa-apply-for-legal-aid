@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'check benefits requests', type: :request do
+RSpec.describe Providers::CheckBenefitsController, type: :request do
   class EnvironmentPermutation
     attr_reader :env, :setting, :application, :permissions, :expected_result
 
@@ -63,6 +63,12 @@ RSpec.describe 'check benefits requests', type: :request do
     it 'returns http success' do
       subject
       expect(response).to have_http_status(:ok)
+    end
+
+    context '#pre_dwp_check?' do
+      it 'returns true' do
+        expect(described_class.new.pre_dwp_check?).to be true
+      end
     end
 
     it 'generates a new check_benefit_result' do

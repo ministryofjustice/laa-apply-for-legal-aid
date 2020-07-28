@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'address lookup requests', type: :request do
+RSpec.describe Providers::AddressLookupsController, type: :request do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
@@ -22,6 +22,12 @@ RSpec.describe 'address lookup requests', type: :request do
       it 'shows the postcode entry page' do
         expect(response).to be_successful
         expect(unescaped_response_body).to include(I18n.t('forms.address_lookup.heading'))
+      end
+    end
+
+    context '#pre_dwp_check?' do
+      it 'returns true' do
+        expect(described_class.new.pre_dwp_check?).to be true
       end
     end
   end
