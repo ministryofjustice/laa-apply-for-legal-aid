@@ -21,7 +21,7 @@ RSpec.describe SaveApplicantMeansAnswers do
 
     it 'copies the attributes of the application' do
       expect { subject }.to change { application.reload.applicant_means_answers }.from(nil)
-      application.attributes.except('applicant_means_answers').each do |key, value|
+      application.attributes.except('applicant_means_answers', 'state').each do |key, value|
         got = application.applicant_means_answers[key].to_s
         expected = value.to_s
         if value.is_a?(Time) || value.is_a?(Date)
