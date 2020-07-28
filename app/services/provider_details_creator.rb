@@ -32,11 +32,12 @@ class ProviderDetailsCreator
   end
 
   def firm
-    firm = Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|
+    current_firm = Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|
       firm.update!(name: firm_name)
       firm.offices << offices
     end
-    firm.permissions << @passported_permission unless firm.permissions.include?(@passported_permission)
+    current_firm.permissions << @passported_permission unless current_firm.permissions.include?(@passported_permission)
+    current_firm
   end
 
   def offices
