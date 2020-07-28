@@ -7,6 +7,7 @@ class ProviderDetailsCreator
 
   def initialize(provider)
     @provider = provider
+    @passported_permission = Permission.find_by(role: 'application.passported.*')
   end
 
   def call
@@ -31,10 +32,11 @@ class ProviderDetailsCreator
   end
 
   def firm
-    Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|
+    firm = Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|
       firm.update!(name: firm_name)
       firm.offices << offices
     end
+    firm.permissions << @passported_permission unless firm.permissions.include?(@passported_permission)
   end
 
   def offices
