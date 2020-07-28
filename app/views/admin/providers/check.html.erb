@@ -1,0 +1,25 @@
+
+<%= form_with(model: @provider, url: admin_providers_path, method: :post, local: true) do |form| %>
+
+  <%= govuk_form_group show_error_if: @provider.errors.present? do %>
+    <%= govuk_fieldset_header do %>
+      <h1 class="govuk-fieldset__heading">
+        <%= label_tag(t('.heading_1', username: @provider.username), page_title) %>
+      </h1>
+      <br>
+      <h2 class="govuk-heading-l">User is in firm <%= @firm_name %></h2>
+      <br>
+      <p>Press continue to create user and firm if it doesn't already exist.</p>
+    <% end %>
+
+  <% end %>
+
+  <%= form.hidden_field :username %>
+
+  <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form: form,
+          continue_button_text: t('generic.continue')
+      ) %>
+
+<% end %>

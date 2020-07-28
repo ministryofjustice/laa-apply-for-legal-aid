@@ -59,10 +59,14 @@ Rails.application.routes.draw do
     resource :feedback, controller: :feedback, only: %i[show]
     resources :ccms_connectivity_tests, only: [:show]
     resources :reports, only: [:index]
+    get 'user_dashboard', to: 'user_dashboard#index', as: 'user_dashboard'
     resources :roles, only: %i[index create update]
     namespace :roles do
       resources :permissions, only: %i[show update]
     end
+    resources :providers, only: %i[new create]
+
+    post 'provider/check', to: 'providers#check', as: 'provider_check'
     get 'admin_report_submitted', to: 'reports#download_submitted', as: 'reports_submitted_csv'
   end
 

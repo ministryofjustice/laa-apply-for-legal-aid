@@ -62,3 +62,17 @@ en:
       permissions:
         show:
           heading_1: 'Select Firm permissions for %{firm_name}'
+    providers:
+      new:
+        admin:
+          providers:
+            hint:
+              username: Enter the username the provider uses to log into the portal and we'll get the details from the Provider Details API.
+        heading_1: Add new provider user
+      check:
+        heading_1: Add provider user %{username}
+    user_dashboard:
+      index:
+        heading_1: User administration main menu
+        firm_permissions: Manage permissions for provider firms
+        add_user: Add provider users
