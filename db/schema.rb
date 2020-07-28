@@ -402,6 +402,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_081000) do
     t.datetime "updated_at", null: false
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
+    t.string "state"
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
