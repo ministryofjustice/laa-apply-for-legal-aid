@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.17.3
+      - Faraday v1.0.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 06 Feb 2020 10:46:56 GMT
+      - Tue, 28 Jul 2020 11:39:58 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -27,7 +27,7 @@ http_interactions:
       Connection:
       - keep-alive
       Tx-Id:
-      - 1580986016485:485
+      - 1595936398859:859
       Status:
       - success
     body:
@@ -43,10 +43,9 @@ http_interactions:
             "dataset" : "DPA",
             "lr" : "EN",
             "maxresults" : 100,
-            "epoch" : "73",
+            "epoch" : "77",
             "output_srs" : "EPSG:27700"
           }
         }
-    http_version: 
-  recorded_at: Thu, 06 Feb 2020 10:46:53 GMT
-recorded_with: VCR 5.0.0
+  recorded_at: Tue, 28 Jul 2020 11:39:58 GMT
+recorded_with: VCR 6.0.0
