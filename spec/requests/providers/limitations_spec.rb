@@ -28,6 +28,12 @@ RSpec.describe Providers::LimitationsController, type: :request do
         expect(unescaped_response_body).to include(I18n.t('providers.limitations.show.h1-heading'))
       end
     end
+
+    context '#pre_dwp_check?' do
+      it 'returns true' do
+        expect(described_class.new.pre_dwp_check?).to be true
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:id/limitations' do

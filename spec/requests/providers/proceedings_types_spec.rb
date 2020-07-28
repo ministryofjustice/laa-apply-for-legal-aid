@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'providers legal aid application proceedings type requests', type: :request do
+RSpec.describe Providers::ProceedingsTypesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:provider) { legal_aid_application.provider }
 
@@ -58,6 +58,12 @@ RSpec.describe 'providers legal aid application proceedings type requests', type
             expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application, back: true))
           end
         end
+      end
+    end
+
+    context '#pre_dwp_check?' do
+      it 'returns true' do
+        expect(described_class.new.pre_dwp_check?).to be true
       end
     end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'check your answers requests', type: :request do
+RSpec.describe Providers::CheckProviderAnswersController, type: :request do
   let(:used_delegated_functions) { false }
   let(:used_delegated_functions_on) { nil }
   let(:address) { create :address }
@@ -38,6 +38,12 @@ RSpec.describe 'check your answers requests', type: :request do
 
       it 'returns success' do
         expect(response).to be_successful
+      end
+
+      context '#pre_dwp_check?' do
+        it 'returns true' do
+          expect(described_class.new.pre_dwp_check?).to be true
+        end
       end
 
       it 'displays the correct page' do

@@ -1,5 +1,7 @@
 module Providers
   class ApplicantDetailsController < ProviderBaseController
+    include PreDWPCheckVisible
+
     def show
       @form = Applicants::BasicDetailsForm.new(model: applicant)
     end

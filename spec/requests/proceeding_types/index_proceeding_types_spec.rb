@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'GET /v1/proceeding_types', type: :request do
-  describe 'GET proceeding_types' do
+RSpec.describe V1::ProceedingTypesController, type: :request do
+  describe 'GET /v1/proceeding_types' do
     let(:get_request) do
       -> { get '/v1/proceeding_types' }
     end
