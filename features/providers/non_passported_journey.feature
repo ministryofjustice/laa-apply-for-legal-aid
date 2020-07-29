@@ -2,7 +2,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Completes a minimal merits application for applicant that does not receive benefits
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
@@ -32,7 +32,7 @@ Feature: Non-passported applicant journeys
   @javascript @vcr
   Scenario: Selects and categorises bank transactions into transaction types
     Given I start the merits application with bank transactions with no transaction type category
-    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     When I click link 'Add another type of income'
@@ -65,7 +65,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with dependants
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
@@ -131,7 +131,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with a child dependant
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
@@ -194,7 +194,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with no dependants but other values
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
@@ -272,7 +272,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits but gets a student loan
     Given I start the merits application with student finance
-    Then I should be on the 'client_completed_means' page showing 'Your client has completed their financial assessment'
+    Then I should be on the 'client_completed_means' page showing 'Continue your application'
     When I click 'Continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I should see 'Student finance'
