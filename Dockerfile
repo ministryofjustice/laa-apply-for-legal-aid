@@ -36,7 +36,8 @@ RUN apk --no-cache add --virtual build-dependencies \
 
 #  # Install kubectl
 # RUN curl -LO /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-RUN curl -sLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+RUN echo $KUBECTL_VERSION
+RUN curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
