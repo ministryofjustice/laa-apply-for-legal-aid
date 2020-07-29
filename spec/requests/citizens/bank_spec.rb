@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Citizens::BanksController, type: :request do
-  let(:application) { create :application, :with_applicant, :applicant_entering_means }
+  let(:application) { create :application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
   let(:secure_id) { application.generate_secure_id }
   let!(:banks) { create(:true_layer_bank).banks }
   let(:enable_mock) { false }

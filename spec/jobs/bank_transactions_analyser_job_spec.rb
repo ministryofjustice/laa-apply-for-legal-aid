@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BankTransactionsAnalyserJob, type: :job do
-  let(:legal_aid_application) { create :legal_aid_application, :analysing_bank_transactions }
+  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :analysing_bank_transactions }
   subject { described_class.perform_now(legal_aid_application) }
 
   describe '#perform' do

@@ -4,8 +4,9 @@ Given('An application has been created') do
     :with_applicant,
     :with_no_savings,
     :with_no_other_assets,
+    :with_non_passported_state_machine,
+    :applicant_entering_means,
     provider: create(:provider),
-    state: :applicant_entering_means,
     transaction_period_finish_on: '2019-07-01'
   )
 
@@ -41,7 +42,8 @@ Given('I have completed an application') do
   @legal_aid_application = create(
     :application,
     :with_everything,
-    state: :applicant_entering_means
+    :with_non_passported_state_machine,
+    :applicant_entering_means
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant

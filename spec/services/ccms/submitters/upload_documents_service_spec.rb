@@ -11,7 +11,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
            :with_means_report,
            :with_merits_report,
            :with_bank_transaction_report,
-           state: :submitting_assessment
+           :submitting_assessment
   end
 
   let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }

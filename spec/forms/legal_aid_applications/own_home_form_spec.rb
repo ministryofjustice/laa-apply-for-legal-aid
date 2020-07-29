@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
-  let(:application) { create :legal_aid_application, :with_applicant_and_address }
+  let!(:application) { create :legal_aid_application, :with_applicant_and_address }
+
   let(:params) { { own_home: 'mortgage' } }
   let(:form_params) { params.merge(model: application) }
 
@@ -38,7 +39,7 @@ RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
     end
 
     it 'leaves other attributes on the record unchanged' do
-      expected_attributes = application.attributes.symbolize_keys.except(:own_home, :updated_at, :created_at)
+      expected_attributes = application.attributes.symbolize_keys.except(:state, :own_home, :updated_at, :created_at)
       subject.save
       application.reload
       expected_attributes.each do |attr, val|

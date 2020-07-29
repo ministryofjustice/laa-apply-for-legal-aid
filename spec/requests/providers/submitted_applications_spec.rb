@@ -4,7 +4,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
   let(:legal_aid_application) do
-    create :legal_aid_application, :with_everything, :with_proceeding_types, state: :assessment_submitted, provider: provider
+    create :legal_aid_application, :with_everything, :with_proceeding_types, :assessment_submitted, provider: provider
   end
   let(:login) { login_as legal_aid_application.provider }
   let(:html) { Nokogiri::HTML(response.body) }

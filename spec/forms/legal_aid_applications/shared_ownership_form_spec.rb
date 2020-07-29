@@ -41,7 +41,7 @@ RSpec.describe LegalAidApplications::SharedOwnershipForm, type: :form do
     end
 
     it 'leaves other attributes on the record unchanged' do
-      expected_attributes = legal_aid_application.attributes.symbolize_keys.except(:shared_ownership, :updated_at, :created_at)
+      expected_attributes = legal_aid_application.attributes.symbolize_keys.except(:state, :shared_ownership, :updated_at, :created_at)
       @form.save
       legal_aid_application.reload
       expected_attributes.each do |attr, val|

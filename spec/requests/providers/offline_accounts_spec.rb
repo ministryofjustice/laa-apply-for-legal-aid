@@ -126,9 +126,9 @@ RSpec.describe 'providers offine accounts', type: :request do
           end
         end
 
-        context 'when in checking citizen  answers state' do
+        context 'when in checking citizen answers state' do
           let(:state) { :checking_citizen_answers }
-          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, state: state }
+          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, state }
           let(:submit_button) do
             {
               continue_button: 'Continue'

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Citizens::DeclarationsController, type: :request do
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
-  let(:legal_aid_application) { create :legal_aid_application, :applicant_entering_means, :with_applicant, provider: provider }
+  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :applicant_entering_means, :with_applicant, provider: provider }
 
   before do
     get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
