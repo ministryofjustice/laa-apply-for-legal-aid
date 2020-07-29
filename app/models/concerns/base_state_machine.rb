@@ -51,8 +51,10 @@ class BaseStateMachine < ApplicationRecord
 
     event :provider_used_delegated_functions do
       transitions from: %i[
+        provider_entering_means
         applicant_details_checked
         delegated_functions_used
+        provider_confirming_applicant_eligibility
       ],
                   to: :delegated_functions_used
     end
