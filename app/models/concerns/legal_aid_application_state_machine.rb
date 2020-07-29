@@ -82,6 +82,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength La
                               provider_entering_means
                               applicant_details_checked
                               delegated_functions_used
+                              provider_confirming_applicant_eligibility
                              ],
                     to: :delegated_functions_used
       end
