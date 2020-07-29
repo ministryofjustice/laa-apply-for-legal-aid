@@ -43,6 +43,7 @@ module LegalAidApplicationStateMachine # rubocop:disable Metrics/ModuleLength La
                               applicant_details_checked
                               provider_entering_means
                               checking_applicant_details
+                              use_ccms
                             ],
                     to: :entering_applicant_details
       end
