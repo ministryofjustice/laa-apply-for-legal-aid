@@ -7,6 +7,7 @@ class ProviderDetailsCreator
 
   def initialize(provider)
     @provider = provider
+    @passported_permission = Permission.find_by(role: 'application.passported.*')
   end
 
   def call
@@ -31,10 +32,13 @@ class ProviderDetailsCreator
   end
 
   def firm
-    Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|
+    current_firm = Firm.find_or_create_by!(ccms_id: firm_id).tap do |firm|
       firm.update!(name: firm_name)
       firm.offices << offices
     end
+    # TODO: For the timebeing, we add passported permissions to every new firm, but this may change in the future.
+    current_firm.permissions << @passported_permission unless current_firm.permissions.include?(@passported_permission)
+    current_firm
   end
 
   def offices
