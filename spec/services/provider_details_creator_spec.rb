@@ -1,29 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe ProviderDetailsCreator do
-  let(:provider) { create :provider, name: Faker::Name.name }
-  let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
-  let(:third_provider) { create :provider, name: nil, email: nil }
+  let(:username) { Faker::Name.name }
+  let(:provider) { create :provider, name: nil, username: username }
   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
   let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
   let(:ccms_office_2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
-  let(:provider_name) { provider.name }
+  let(:contact_id) { rand(101..200) }
   let(:api_response) do
     {
       providerFirmId: ccms_firm.id,
       contactUserId: rand(101..200),
       contacts: [
         {
-          id: rand(101..200),
-          name: provider_name
-        },
-        {
-          id: rand(101..200),
-          name: other_provider.email
-        },
-        {
-          id: rand(101..200),
-          name: third_provider.username
+          id: contact_id,
+          name: username
         }
       ],
       feeEarners: [],
@@ -63,6 +54,10 @@ RSpec.describe ProviderDetailsCreator do
 
     it 'updates the name of the provider' do
       expect { subject }.to change { provider.reload.name }.to('')
+    end
+
+    it 'updates the contact_id of the provider' do
+      expect { subject }.to change { provider.reload.contact_id }.to(contact_id)
     end
 
     it 'updates the user_login_id of the provider' do
