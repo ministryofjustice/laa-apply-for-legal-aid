@@ -6,6 +6,7 @@
             <th class="govuk-table__header govuk-!-width-one-quarter" scope="col"><%= t('.done_eveything') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.satisfaction') %></th>
             <th class="govuk-table__header" scope="col"><%= t('.suggestion') %></th>
+            <th class="govuk-table__header" scope="col"><%= t('.source') %></th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -18,6 +19,7 @@
               <td class="govuk-table__cell feedback-improvement-suggestion">
                 <%= feedback.improvement_suggestion.present? ? feedback.improvement_suggestion : t('generic.not_completed') %>
               </td>
+              <td class="govuk-table__cell feedback-satisfaction"><%= feedback.source %></td>
             </tr>
           <% end %>
         </tbody>
