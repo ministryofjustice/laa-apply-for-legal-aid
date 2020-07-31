@@ -547,15 +547,20 @@ Then('I am on the provider open banking consent page') do
   expect(page).to have_content('Is the following correct?')
 end
 
+Then('I am on the enter client email address page') do
+  page.driver.browser.navigate.refresh
+  expect(page).to have_content("Enter your client's email address")
+end
+
 Then(/^I click find address$/) do
   click_button('Find address')
 end
 
 Then(/^I click save and continue with patience$/) do
-  find('#continue').tap do |b|
-    patiently do
-      b.click
-    end
+  find('#continue', wait: 5).tap do |b|
+    b.click
+    sleep 2
+    b.click
   end
 end
 
