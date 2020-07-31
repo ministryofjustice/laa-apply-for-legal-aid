@@ -551,11 +551,11 @@ Then(/^I click find address$/) do
   click_button('Find address')
 end
 
-Then(/^I click save and continue$/) do
+Then(/^I click save and continue with patience$/) do
   find('#continue').tap do |b|
-    b.click
-    sleep 1
-    b.click
+    patiently do
+      b.click
+    end
   end
 end
 
