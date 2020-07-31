@@ -552,7 +552,11 @@ Then(/^I click find address$/) do
 end
 
 Then(/^I click save and continue$/) do
-  click_button('Save and continue')
+  find('#continue').tap do |b|
+    b.click
+    sleep 1
+    b.click
+  end
 end
 
 Then(/^I select an address '(.*)'$/) do |address|
