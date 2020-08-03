@@ -17,6 +17,7 @@ class PassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassL
       transitions from: %i[
         provider_entering_means
         delegated_functions_used
+        provider_entering_merits
       ],
                   to: :checking_passported_answers
     end
