@@ -59,6 +59,7 @@ class DashboardEventHandler
 
   def feedback_created
     Dashboard::UpdaterJob.perform_later('FeedbackScores')
+    Dashboard::FeedbackItemJob.perform_later(Feedback.find(payload[:feedback_id]))
   end
 
   def merits_assessment_submitted

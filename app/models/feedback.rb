@@ -20,6 +20,6 @@ class Feedback < ApplicationRecord
   validates :satisfaction, :difficulty, presence: true
 
   after_create do
-    ActiveSupport::Notifications.instrument 'dashboard.feedback_created'
+    ActiveSupport::Notifications.instrument 'dashboard.feedback_created', feedback_id: id
   end
 end
