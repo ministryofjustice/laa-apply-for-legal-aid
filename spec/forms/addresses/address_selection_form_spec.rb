@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Addresses::AddressSelectionForm, type: :form do
-  let(:postcode) { 'DA7 4NG' }
+  let(:postcode) { 'SW1H 9EA' }
   let(:lookup_id) { '123456' }
   let(:applicant) { create :applicant }
   let(:form_params) do

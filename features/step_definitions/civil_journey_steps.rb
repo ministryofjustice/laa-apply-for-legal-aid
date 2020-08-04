@@ -223,10 +223,10 @@ Given('I complete the journey as far as check your answers') do
   )
   create(
     :address,
-    address_line_one: '3',
-    address_line_two: 'LONSDALE ROAD',
-    city: 'BEXLEYHEATH',
-    postcode: 'DA7 4NG',
+    address_line_one: 'Transport For London',
+    address_line_two: '98 Petty France',
+    city: 'London',
+    postcode: 'SW1H 9EA',
     lookup_used: true,
     applicant: applicant
   )
@@ -257,10 +257,10 @@ Given('I complete the passported journey as far as check your answers') do
   )
   create(
     :address,
-    address_line_one: '3',
-    address_line_two: 'LONSDALE ROAD',
-    city: 'BEXLEYHEATH',
-    postcode: 'DA7 4NG',
+    address_line_one: 'Transport For London',
+    address_line_two: '98 Petty France',
+    city: 'London',
+    postcode: 'SW1H 9EA',
     lookup_used: true,
     applicant: applicant
   )
@@ -288,10 +288,10 @@ Given('I complete the passported journey as far as capital check your answers') 
   )
   create(
     :address,
-    address_line_one: '3',
-    address_line_two: 'LONSDALE ROAD',
-    city: 'BEXLEYHEATH',
-    postcode: 'DA7 4NG',
+    address_line_one: 'Transport For London',
+    address_line_two: '98 Petty France',
+    city: 'London',
+    postcode: 'SW1H 9EA',
     lookup_used: true,
     applicant: applicant
   )
@@ -318,10 +318,10 @@ Given('I complete the application and view the check your answers page') do
   )
   create(
     :address,
-    address_line_one: '3',
-    address_line_two: 'LONSDALE ROAD',
-    city: 'BEXLEYHEATH',
-    postcode: 'DA7 4NG',
+    address_line_one: 'Transport For London',
+    address_line_two: '98 Petty France',
+    city: 'London',
+    postcode: 'SW1H 9EA',
     lookup_used: true,
     applicant: applicant
   )
