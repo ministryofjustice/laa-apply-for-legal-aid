@@ -49,3 +49,11 @@ div.no-results {
     font-weight: 700;
   }
 }
+
+.govuk-details__summary.white_text {
+  color: white;
+}
+
+a.black_text_on_focus{
+  &:focus{ color: black; }
+}

@@ -186,7 +186,7 @@ en:
       how_we_checked:
         how_we_checked: How we checked your client's benefits status
         details_used: "We used the following details to check your client's benefits status with the DWP:"
-        change_client_details_html: <a href="applicant_details">Change your client's details</a> if you entered them incorrectly.   
+        change_client_details_html: <a class="black_text_on_focus" href="applicant_details">Change your client's details</a> if you entered them incorrectly.
       use_ccms:
         accept_only: We currently only accept applications for people receiving one of these benefits.
         apply_in_ccms: Apply using CCMS
