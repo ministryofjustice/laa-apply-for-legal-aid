@@ -77,6 +77,7 @@ RSpec.describe 'citizen home requests', type: :request do
       subject
       expect(unescaped_response_body).to include(applicant_first_name.html_safe)
       expect(unescaped_response_body).to include(applicant_last_name.html_safe)
+      expect(unescaped_response_body).to include(application.provider.firm.name.html_safe)
     end
 
     context 'if a provider is logged in' do
