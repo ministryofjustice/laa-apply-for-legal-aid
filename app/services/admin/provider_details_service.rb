@@ -77,7 +77,7 @@ module Admin
       @provider.username.upcase.gsub(' ', '%20')
     end
 
-    def provider_details_url # rubocop:disable Metrics/AbcSize
+    def provider_details_url
       File.join(Rails.configuration.x.provider_details.url, normalized_username)
     end
 
