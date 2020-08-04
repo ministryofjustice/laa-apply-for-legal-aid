@@ -8,6 +8,16 @@ module Admin
       @provider = Provider.new
     end
 
+    def index
+      if params[:firm_id] == '0'
+        @providers = Provider.order(:username)
+        @firm = nil
+      else
+        @firm = Firm.find(params[:firm_id])
+        @providers = @firm.providers.order(:username)
+      end
+    end
+
     def check
       service = ProviderDetailsService.new(@provider)
       if service.check == :success

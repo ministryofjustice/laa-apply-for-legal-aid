@@ -65,6 +65,9 @@ Rails.application.routes.draw do
       resources :permissions, only: %i[show update]
     end
     resources :providers, only: %i[new create]
+    resources :firms, only: :index do
+      resources :providers, only: :index
+    end
 
     post 'provider/check', to: 'providers#check', as: 'provider_check'
     get 'admin_report_submitted', to: 'reports#download_submitted', as: 'reports_submitted_csv'
