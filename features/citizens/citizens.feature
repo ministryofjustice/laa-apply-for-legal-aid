@@ -12,6 +12,7 @@ Feature: Citizen journey
     Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Select your bank'
+    Then I should be on a page showing "Select one bank at a time. You'll be able to select more later if you have accounts with different banks."
     Then I click link "Back"
     Then I should be on a page showing 'Do you agree to share your bank account information with the LAA?'
     Then I choose 'No'
