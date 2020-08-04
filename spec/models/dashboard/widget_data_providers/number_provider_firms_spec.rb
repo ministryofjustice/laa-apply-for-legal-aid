@@ -37,19 +37,8 @@ module Dashboard
             create :provider, username: 'user1-firm3', firm: firm3
           end
 
-          context 'no whitelisted users' do
-            before { Rails.configuration.x.application.whitelisted_users_excluding_test = nil }
-            it 'expects the firm count to include all firms' do
-              expect(described_class.data).to eq [{ 'number' => 3 }]
-            end
-          end
-
-          context 'with whitelisted users' do
-            before { Rails.configuration.x.application.whitelisted_users_excluding_test = %w[user1-firm1 user1-firm2 user2-firm2)] }
-
-            it 'expects the firm count to only to include those for whitelisted users' do
-              expect(described_class.data).to eq [{ 'number' => 2 }]
-            end
+          it 'expects the firm count to include all firms' do
+            expect(described_class.data).to eq [{ 'number' => 3 }]
           end
         end
       end
