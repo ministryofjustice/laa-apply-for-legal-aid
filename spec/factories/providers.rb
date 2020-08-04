@@ -11,6 +11,11 @@ FactoryBot.define do
       non_passported = create(:permission, :non_passported) if non_passported.nil?
       [passported, non_passported]
     end
+    portal_enabled { true }
+
+    trait :without_portal_enabled do
+      portal_enabled { false }
+    end
 
     trait :with_provider_details_api_username do
       username { 'NEETADESOR' }
