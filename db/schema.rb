@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_081000) do
+ActiveRecord::Schema.define(version: 2020_07_29_140115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -402,7 +402,6 @@ ActiveRecord::Schema.define(version: 2020_07_28_081000) do
     t.datetime "updated_at", null: false
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
-    t.string "state"
     t.boolean "open_banking_consent"
     t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
