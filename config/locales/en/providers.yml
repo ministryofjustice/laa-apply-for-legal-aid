@@ -674,6 +674,7 @@ en:
     email_addresses:
       show:
         page_title: Enter your client's email address
+        hint: We'll use this to send your client a link to the service.
     has_dependants:
       show:
         page_title: "Does your client have any dependants?"
