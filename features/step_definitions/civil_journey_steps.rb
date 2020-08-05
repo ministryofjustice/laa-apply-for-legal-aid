@@ -543,10 +543,6 @@ Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's correspondence address")
 end
 
-Then('I am on the provider open banking consent page') do
-  expect(page).to have_content('Is the following correct?')
-end
-
 Then(/^I click find address$/) do
   click_button('Find address')
 end

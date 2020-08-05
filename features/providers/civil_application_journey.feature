@@ -142,7 +142,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I am on the provider open banking consent page
+    Then I should be on a page showing "Is the following correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
@@ -178,7 +178,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I am on the provider open banking consent page
+    Then I should be on a page showing "Is the following correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
@@ -350,7 +350,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I am on the provider open banking consent page
+    Then I should be on a page showing "Is the following correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
