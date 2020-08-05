@@ -1,0 +1,30 @@
+<%= govuk_fieldset_header do %>
+  <h1 class="govuk-fieldset__heading">
+    <% title = @firm.present? ? t('.heading_1', firm_name: @firm.name) : t('.all_firms_heading_1') %>
+    <label for="#{title.downcase}">
+      <%= title %>
+    </label>
+  </h1>
+<% end %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="col"><%= t('.username') %></th>
+        <th class="govuk-table__header" scope="col"><%= t('.email_address') %></th>
+      </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+      <% @providers.each do |provider| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell case-full-name"><%= provider.username %></td>
+          <td class="govuk-table__cell case-reference-number"><%= provider.email %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

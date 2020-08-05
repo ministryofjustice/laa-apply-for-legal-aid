@@ -1,0 +1,29 @@
+<%= govuk_fieldset_header do %>
+  <h1 class="govuk-fieldset__heading">
+    <%= label_tag(t('.heading_1'), page_title) %>
+  </h1>
+<% end %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col"><%= t('.firm') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.num_users') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.action') %></th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+      <% @firms.each do |firm| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell case-full-name"><%= firm.name %></td>
+          <td class="govuk-table__cell case-reference-number"><%= firm.providers.count %></td>
+          <td class="govuk-table__cell case-reference-number"><%= link_to t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

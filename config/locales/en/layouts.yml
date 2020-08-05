@@ -7,7 +7,7 @@ en:
       submitted_applications_report: Submitted Applications
       feedback: Feedback
       reports: Reports
-      roles: User Roles
+      user_admin: User admin
     application:
       footer:
         contact: Contact

@@ -302,6 +302,8 @@ en:
           attributes:
             selected_office_id:
               blank: Select an account number
+            username:
+              already_exists: There is already a user with that username
         respondent:
           attributes:
             understands_terms_of_court_order:

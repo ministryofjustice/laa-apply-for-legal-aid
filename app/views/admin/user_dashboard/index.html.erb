@@ -1,0 +1,11 @@
+<%= govuk_fieldset_header do %>
+  <h1 class="govuk-fieldset__heading">
+    <%= label_tag(t('.heading_1'), page_title) %>
+  </h1>
+<% end %>
+
+<br>
+
+<%= link_to t('.firm_permissions'), admin_roles_path, class: 'govuk-heading-m', id: 'firm_permissions', method: :get %>
+<%= link_to t('.firms'), admin_firms_path,  class: 'govuk-heading-m', id: 'firm_permissions', method: :get %>
+<%= link_to t('.add_user'), new_admin_provider_path, class: 'govuk-heading-m', id: 'add_user', method: :get %>
