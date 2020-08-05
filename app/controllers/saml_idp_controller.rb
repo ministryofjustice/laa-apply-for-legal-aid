@@ -23,7 +23,7 @@ class SamlIdpController < SamlIdp::IdpController
     user = config.users.find { |u| u[:email] == email }
     return unless user
 
-    Provider.find_or_create_by!(username: user.username)
+    Provider.find_by(username: user.username)
   end
 
   def idp_make_saml_response(provider, email)
