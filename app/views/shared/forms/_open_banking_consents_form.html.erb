@@ -1,0 +1,42 @@
+    <%= form_with(
+          model: @form,
+          url: form_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= govuk_form_group(input: :provider_received_citizen_consent, show_error_if: @form.errors.present?) do %>
+      <%= govuk_fieldset_header page_title %>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+
+      <p class="govuk-body">
+        <%= info %>
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <% list.each_line do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              true,
+              label: t('generic.yes')
+          ) %>
+
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              false,
+              label: t('generic.no')
+          ) %>
+
+      <div class="govuk-!-padding-bottom-5"></div>
+
+      <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form: form
+      ) %>
+    <% end %>
+  <% end %>

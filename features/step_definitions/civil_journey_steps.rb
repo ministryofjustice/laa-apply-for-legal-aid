@@ -551,10 +551,6 @@ Then(/^I click find address$/) do
   click_button('Find address')
 end
 
-Then(/^I click save and continue$/) do
-  click_button('Save and continue')
-end
-
 Then(/^I select an address '(.*)'$/) do |address|
   select(address, from: 'address_selection[lookup_id]')
 end

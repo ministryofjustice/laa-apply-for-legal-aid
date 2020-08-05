@@ -144,7 +144,7 @@ Feature: Civil application journeys
     Then I click 'Continue'
     Then I am on the provider open banking consent page
     Then I choose 'Yes'
-    Then I click save and continue
+    Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
