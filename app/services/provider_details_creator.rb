@@ -13,7 +13,6 @@ class ProviderDetailsCreator
   def call
     provider.update!(
       firm: firm,
-      details_response: provider_details,
       offices: offices,
       name: provider_name,
       user_login_id: contact_user_id
