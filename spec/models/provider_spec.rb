@@ -64,6 +64,21 @@ RSpec.describe Provider, type: :model do
       end
     end
 
+    context 'no permissions for provider and their firm' do
+      let(:firm) { create :firm, :with_no_permissions }
+      let(:provider) { create :provider, :with_no_permissions, firm: firm }
+      let(:Raven) { instance_double(Tracker) }
+
+      it 'returns false' do
+        expect(provider.user_permissions).to be_empty
+      end
+
+      it 'notifies sentry' do
+        expect(Raven).to receive(:capture_message).with("Provider Firm has no permissions with firm id: #{firm.id}")
+        provider.user_permissions
+      end
+    end
+
     context 'permissions exist for both firm and provider' do
       let(:firm) { create :firm, :with_passported_and_non_passported_permissions }
       let(:provider) { create :provider, :with_passported_permissions, firm: firm }

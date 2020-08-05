@@ -12,6 +12,10 @@ FactoryBot.define do
     permissions { [Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)] }
   end
 
+  trait :with_no_permissions do
+    permissions { [] }
+  end
+
   trait :with_passported_and_non_passported_permissions do
     permissions do
       [

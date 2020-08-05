@@ -32,8 +32,12 @@ class Provider < ApplicationRecord
   end
 
   def user_permissions
-    firm_permissions = firm.nil? ? [] : firm.permissions
     permissions.empty? ? firm_permissions : permissions
+  end
+
+  def firm_permissions
+    Raven.capture_message("Provider Firm has no permissions with firm id: #{firm.id}") if firm&.permissions&.empty?
+    firm.nil? ? [] : firm.permissions
   end
 
   def passported_permissions?
