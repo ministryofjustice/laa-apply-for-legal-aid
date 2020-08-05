@@ -104,7 +104,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     backports (3.18.1)
-    bcrypt (3.1.13)
+    bcrypt (3.1.15)
     better_errors (2.7.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -181,7 +181,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise_saml_authenticatable (1.5.0)
+    devise_saml_authenticatable (1.6.0)
       devise (> 2.0.0)
       ruby-saml (~> 1.7)
     dibber (0.6.0)
@@ -261,7 +261,7 @@ GEM
     httpi (2.4.4)
       rack
       socksify
-    i18n (1.8.4)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.31)
       activesupport (>= 4.0.2)
