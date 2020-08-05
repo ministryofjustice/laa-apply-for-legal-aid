@@ -543,10 +543,6 @@ Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's correspondence address")
 end
 
-Then('I am on the client use online banking page') do
-  expect(page).to have_content('Check if you can continue using this service')
-end
-
 Then(/^I click find address$/) do
   click_button('Find address')
 end
@@ -561,10 +557,6 @@ end
 
 Then('I am on the legal aid applications') do
   expect(page).to have_content('Your applications')
-end
-
-Then('I am on the Email Entry page') do
-  expect(page).to have_content("Enter your client's email address")
 end
 
 Then('I am on the About the Financial Assessment page') do

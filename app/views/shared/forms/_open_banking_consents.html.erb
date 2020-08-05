@@ -1,25 +1,42 @@
-<fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
+    <%= form_with(
+          model: @form,
+          url: form_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= govuk_form_group(input: :provider_received_citizen_consent, show_error_if: @form.errors.present?) do %>
       <%= govuk_fieldset_header page_title %>
-      <div class="govuk-!-padding-top-4"></div>
 
-      <span id="waste-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+      <div class="govuk-!-padding-bottom-4"></div>
 
-      <%= render 'shared/show_errors' %>
+      <p class="govuk-body">
+        <%= info %>
+      </p>
 
-      <div class="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="[name='legal_aid_application[none_selected]']">
-          <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :citizen_uses_online_banking, label: citizen_uses_online_banking, govuk_hint: citizen_uses_online_banking_hint, form: form, checked: 'true', unchecked: '' } %>
-          <%= render partial: 'shared/forms/check_boxes', locals: { field_name: :provider_received_citizen_consent, label: provider_received_citizen_consent, govuk_hint: provider_received_citizen_consent_hint, form: form, checked: 'true', unchecked: '' } %>
-        </div>
-      </div>
+      <ul class="govuk-list govuk-list--bullet">
+        <% list.each_line do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
 
-      <div class="govuk-radios__divider tickbox_divider"><%= t('generic.or') %></div>
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              true,
+              label: t('generic.yes')
+          ) %>
 
-      <div class="govuk-checkboxes">
-        <div class="govuk-checkboxes__item">
-          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, 'true', @form.none_selected %>
-          <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
-        </div>
-      </div>
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              false,
+              label: t('generic.no')
+          ) %>
 
-</fieldset>
+      <div class="govuk-!-padding-bottom-5"></div>
+
+      <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form: form
+      ) %>
+    <% end %>
+  <% end %>
