@@ -11,7 +11,7 @@
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "^5.1.1",
     "axios": "^0.19.2",
-    "govuk-frontend": "^3.7.0",
+    "govuk-frontend": "^3.8.0",
     "jquery": "^3.5.1",
     "js-search": "^2.0.0"
   },
