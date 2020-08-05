@@ -2,9 +2,11 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe 'SamlSessionsController', type: :request do
-  let(:firm) { nil }
-  let(:office) { nil }
-  let(:provider) { create :provider, firm: firm, selected_office: office }
+  let(:firm) { create :firm, offices: [office] }
+  let(:office) { create :office }
+  let(:provider) { create :provider, firm: firm, selected_office: office, offices: [office], username: username }
+  let(:username) { 'bob-the-builder' }
+  let(:provider_details_api) { "#{Rails.configuration.x.provider_details.url}#{username}" }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }
@@ -39,28 +41,11 @@ RSpec.describe 'SamlSessionsController', type: :request do
   end
 
   describe 'POST /providers/saml/auth' do
-    let(:sample_provider_details) { { foo: 'bar' } }
-
     subject { post provider_session_path }
 
     before do
       allow_any_instance_of(Warden::Proxy).to receive(:authenticate!).and_return(provider)
-    end
-
-    it 'retrieves provider details' do
-      expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-      subject
-      expect(provider.firm).to_not be_nil
-    end
-
-    it 'does not use a worker' do
-      expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async)
-      subject
-    end
-
-    it 'redirects to the confirm office page' do
-      subject
-      expect(response).to redirect_to(providers_confirm_office_path)
+      stub_request(:get, provider_details_api).to_return(body: provider_details_response)
     end
 
     context 'provider already has some provider details' do
@@ -74,5 +59,28 @@ RSpec.describe 'SamlSessionsController', type: :request do
         ProviderDetailsCreatorWorker.drain
       end
     end
+  end
+
+  def provider_details_response
+    {
+      providerFirmId: 22_381,
+      contactUserId: 29_562,
+      contacts: [
+        {
+          id: 568_352,
+          name: 'SALLYCORNHILL'
+        },
+        {
+          id: 2_017_809,
+          name: username
+        }
+      ],
+      providerOffices: [
+        {
+          id: 81_693,
+          name: 'Test1 and Co'
+        }
+      ]
+    }.to_json
   end
 end

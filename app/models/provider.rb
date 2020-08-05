@@ -18,8 +18,6 @@ class Provider < ApplicationRecord
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
   def update_details
-    return update_details_directly unless firm
-
     ProviderDetailsCreatorWorker.perform_async(id)
   end
 

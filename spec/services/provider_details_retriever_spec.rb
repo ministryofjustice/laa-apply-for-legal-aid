@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe ProviderDetailsRetriever do
   let(:api_url) { 'https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails' }
-
-  let(:mock) { true }
   let(:provider) { create :provider }
   let(:username) { provider.username }
 
@@ -11,7 +9,6 @@ RSpec.describe ProviderDetailsRetriever do
 
   before do
     allow(Rails.configuration.x.provider_details).to receive(:url).and_return(api_url)
-    allow(Rails.configuration.x.provider_details).to receive(:mock).and_return(mock)
   end
 
   describe '.call' do
@@ -25,13 +22,8 @@ RSpec.describe ProviderDetailsRetriever do
       end
     end
 
-    context 'with fake API' do
-      it_behaves_like 'get response from API'
-    end
-
     context 'with real API', vcr: { cassette_name: 'provider_details_api' } do
       let(:provider) { create :provider, :with_provider_details_api_username }
-      let(:mock) { false }
       let(:escaped_username) { CGI.escape(provider.username) }
 
       it_behaves_like 'get response from API'

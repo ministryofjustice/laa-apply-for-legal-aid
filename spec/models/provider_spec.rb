@@ -16,15 +16,6 @@ RSpec.describe Provider, type: :model do
         provider.update_details
       end
     end
-
-    context 'firm does not exist' do
-      let(:firm) { nil }
-
-      it 'updates provider details immediately' do
-        expect(ProviderDetailsCreator).to receive(:call).with(provider)
-        provider.update_details
-      end
-    end
   end
 
   describe '#whitelisted_user?' do
