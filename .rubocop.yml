@@ -48,6 +48,7 @@ Metrics/AbcSize:
   Exclude:
   - 'db/migrate/*'
   - 'ccms_integration/helpers/ccms_payload_analyser.rb'
+  - 'bin/bundle'
 
 Metrics/BlockLength:
   Exclude:
@@ -166,3 +167,49 @@ Style/RedundantAssignment:
 
 Style/RedundantFileExtensionInRequire:
   Enabled: true
+
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+
+Lint/DuplicateRescueException:
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  Enabled: true
+
+Lint/FloatComparison:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: true
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+
+Lint/UnreachableLoop:
+  Enabled: true
+
+Style/ExplicitBlockArgument:
+  Enabled: true
+
+Style/GlobalStdStream:
+  Enabled: true
+
+Style/OptionalBooleanParameter:
+  Enabled: true
+
+Style/SingleArgumentDig:
+  Enabled: true
+
+Style/StringConcatenation:
+  Enabled: true
+
+Metrics/PerceivedComplexity:
+  IgnoredMethods:
+    - 'cli_arg_version' # from bin/bundle - auto generated method

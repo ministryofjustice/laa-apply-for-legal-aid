@@ -11,6 +11,7 @@ module BaseForm
   attr_writer :model
 
   def self.included(base)
+    super
     base.include(ActiveModel::Model)
     base.include(ActiveModel::Validations::Callbacks)
     base.extend(ClassMethods)

@@ -93,7 +93,7 @@ class Opponent < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def respond_to_missing?(meth, include_private = false)
+  def respond_to_missing?(meth, include_private = false) # rubocop:disable Style/OptionalBooleanParameter
     return true if valid_relationship_to_case_method?(meth) || valid_relationship_to_client_method?(meth)
 
     super

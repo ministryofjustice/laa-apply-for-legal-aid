@@ -5,6 +5,7 @@ module PrometheusCollectors
     COLLECTOR_TYPE = 'sidekiq_queue_size'.freeze
 
     def initialize
+      super
       @gauge = PrometheusExporter::Metric::Gauge.new(COLLECTOR_TYPE, 'Sidekiq queue size')
     end
 

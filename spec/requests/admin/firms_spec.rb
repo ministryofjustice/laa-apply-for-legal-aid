@@ -19,9 +19,10 @@ module Admin
       end
 
       it 'the name of every firm' do
-        expect(response.body).to include(firms[0].name)
-        expect(response.body).to include(firms[1].name)
-        expect(response.body).to include(firms[2].name)
+        response_body = CGI.unescapeHTML(response.body)
+        expect(response_body).to include(firms[0].name)
+        expect(response_body).to include(firms[1].name)
+        expect(response_body).to include(firms[2].name)
       end
     end
   end

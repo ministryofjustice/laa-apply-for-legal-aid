@@ -19,6 +19,7 @@ module CCMS
       delegate :address, to: :applicant
 
       def initialize(applicant, provider_username)
+        super()
         @applicant = applicant
         @provider_username = provider_username
       end

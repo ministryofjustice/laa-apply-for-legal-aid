@@ -1,5 +1,6 @@
 module RequestHelpers
   def self.included(base)
+    super
     base.include(JsonHelpers)
     base.include(ResponseHelpers)
   end

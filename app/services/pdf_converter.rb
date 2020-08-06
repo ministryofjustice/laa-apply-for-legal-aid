@@ -16,7 +16,7 @@ class PdfConverter
     file = converted_file
 
     Attachment.transaction do
-      pdf_filename = File.basename(@original_attachment.attachment_name, '.*') + '.pdf'
+      pdf_filename = "#{File.basename(@original_attachment.attachment_name, '.*')}.pdf"
       pdf_attachment = Attachment.create!(
         legal_aid_application_id: @original_attachment.legal_aid_application_id,
         attachment_type: 'statement_of_case_pdf',
