@@ -16,6 +16,7 @@ module CCMS
       attr_reader :case_ccms_reference
 
       def initialize(case_ccms_reference, provider_username, document_type)
+        super()
         @case_ccms_reference = case_ccms_reference
         @provider_username = provider_username
         @document_type = document_type

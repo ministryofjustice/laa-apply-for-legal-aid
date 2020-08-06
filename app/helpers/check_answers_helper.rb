@@ -72,6 +72,6 @@ module CheckAnswersHelper
   end
 
   def number_to_currency_or_na(number)
-    number.to_f == 999_999_999_999.0 ? 'N/a' : number_to_currency(number)
+    number.to_d == 999_999_999_999.0.to_d ? 'N/a' : number_to_currency(number)
   end
 end

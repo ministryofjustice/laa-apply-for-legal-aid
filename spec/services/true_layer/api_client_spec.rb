@@ -18,7 +18,7 @@ RSpec.describe TrueLayer::ApiClient do
 
     context 'result is not json' do
       before do
-        endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/me'
+        endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
         stub_request(:get, endpoint).to_return(body: 'Boom!', status: 501)
       end
 
@@ -29,7 +29,7 @@ RSpec.describe TrueLayer::ApiClient do
 
     context 'API cannot be reached' do
       before do
-        endpoint = TrueLayer::ApiClient::TRUE_LAYER_URL + '/data/v1/me'
+        endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
         stub_request(:get, endpoint).to_timeout
       end
 

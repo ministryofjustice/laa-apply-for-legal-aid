@@ -40,7 +40,7 @@ module Providers
     def error_message
       return unless form.errors.present?
 
-      I18n.t('accessibility.problem_text') + ' ' + form.errors.messages[:original_file].first
+      "#{I18n.t('accessibility.problem_text')} #{form.errors.messages[:original_file].first}"
     end
 
     def files_deleted_message(deleted_file_name)

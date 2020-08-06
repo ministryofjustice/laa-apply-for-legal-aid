@@ -23,6 +23,7 @@ module CCMS
       )
 
       def initialize(submission, options)
+        super()
         @options = options
         @submission = submission
         @legal_aid_application = submission.legal_aid_application

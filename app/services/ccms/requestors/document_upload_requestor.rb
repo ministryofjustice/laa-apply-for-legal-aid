@@ -16,6 +16,7 @@ module CCMS
       attr_reader :case_ccms_reference, :ccms_document_id, :document_encoded_base64
 
       def initialize(case_ccms_reference, ccms_document_id, document_encoded_base64, provider_username, document_type = nil)
+        super()
         @case_ccms_reference = case_ccms_reference
         @ccms_document_id = ccms_document_id
         @document_encoded_base64 = document_encoded_base64

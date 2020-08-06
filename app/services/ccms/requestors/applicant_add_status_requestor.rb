@@ -17,6 +17,7 @@ module CCMS
       attr_reader :applicant_add_transaction_id
 
       def initialize(applicant_add_transaction_id, provider_username)
+        super()
         @applicant_add_transaction_id = applicant_add_transaction_id
         @provider_username = provider_username
       end

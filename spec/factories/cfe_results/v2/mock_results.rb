@@ -246,7 +246,7 @@ module CFEResults
         result
       end
 
-      def self.with_capital_and_income_contributions_required
+      def self.with_capital_and_income_contributions_required # rubocop:disable Metrics/AbcSize
         result = eligible
         result[:assessment][:assessment_result] = 'contribution_required'
 

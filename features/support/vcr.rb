@@ -11,7 +11,7 @@ VCR.configure do |vcr_config|
     record: record_mode,
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)]
   }
-  vcr_config.debug_logger = STDOUT if vcr_debug
+  vcr_config.debug_logger = $stdout if vcr_debug
   vcr_config.ignore_request do |request|
     uri = URI(request.uri)
     uri.to_s.include?('__identify__') || uri.to_s =~ /127.0.0.1.*(session|shutdown)/

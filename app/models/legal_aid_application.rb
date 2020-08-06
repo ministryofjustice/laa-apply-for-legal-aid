@@ -194,8 +194,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
     self.benefit_check_result ||= build_benefit_check_result
     benefit_check_result.update!(
-      result: benefit_check_response.dig(:benefit_checker_status),
-      dwp_ref: benefit_check_response.dig(:confirmation_ref)
+      result: benefit_check_response[:benefit_checker_status],
+      dwp_ref: benefit_check_response[:confirmation_ref]
     )
   end
 

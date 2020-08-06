@@ -45,7 +45,7 @@ VCR.configure do |vcr_config|
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)]
   }
   vcr_config.configure_rspec_metadata!
-  vcr_config.debug_logger = STDOUT if vcr_debug
+  vcr_config.debug_logger = $stdout if vcr_debug
   vcr_config.filter_sensitive_data('<GOVUK_NOTIFY_API_KEY>') { ENV['GOVUK_NOTIFY_API_KEY'] }
   vcr_config.filter_sensitive_data('<ORDNANACE_SURVEY_API_KEY>') { ENV['ORDNANACE_SURVEY_API_KEY'] }
   vcr_config.filter_sensitive_data('<BC_LSC_SERVICE_NAME>') { ENV['BC_LSC_SERVICE_NAME'] }

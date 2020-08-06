@@ -15,6 +15,7 @@ module CCMS
       )
 
       def initialize(provider_username)
+        super()
         @provider_username = provider_username
       end
 

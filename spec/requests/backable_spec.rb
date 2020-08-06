@@ -31,7 +31,7 @@ RSpec.describe 'Backable', type: :request do
     end
 
     it 'has a back link to the previous page' do
-      expect(response.body).to have_back_link(page_2 + '?back=true')
+      expect(response.body).to have_back_link("#{page_2}?back=true")
     end
 
     context 'we reload the current page several times' do
@@ -41,20 +41,20 @@ RSpec.describe 'Backable', type: :request do
       end
 
       it 'has a back link to the previous page' do
-        expect(response.body).to have_back_link(page_2 + '?back=true')
+        expect(response.body).to have_back_link("#{page_2}?back=true")
       end
     end
 
     context 'we go back once' do
       it 'redirects to same page without the param' do
-        get page_2 + '?back=true'
+        get "#{page_2}?back=true"
         expect(response).to redirect_to(page_2)
       end
 
       it 'has a link to the previous page' do
-        get page_2 + '?back=true'
+        get "#{page_2}?back=true"
         get page_2
-        expect(response.body).to have_back_link(page_1 + '?back=true')
+        expect(response.body).to have_back_link("#{page_1}?back=true")
       end
     end
   end

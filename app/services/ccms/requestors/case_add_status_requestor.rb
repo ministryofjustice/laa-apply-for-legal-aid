@@ -13,6 +13,7 @@ module CCMS
       attr_reader :case_add_transaction_id
 
       def initialize(case_add_transaction_id, provider_username)
+        super()
         @case_add_transaction_id = case_add_transaction_id
         @provider_username = provider_username
       end
