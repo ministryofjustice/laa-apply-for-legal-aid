@@ -394,13 +394,13 @@ workflows:
       - hold_master_uat_notification:
           requires:
             - lint_checks
-      - hold_master_uat:
+      - hold_master_uat_approval:
           type: approval
           requires:
             - hold_master_uat_notification
       - deploy_master_uat:
           requires:
-            - hold_master_uat_notification
+            - hold_master_uat_approval
       - delete_uat_branch:
           requires:
             - lint_checks
