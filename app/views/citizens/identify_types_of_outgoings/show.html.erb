@@ -1,6 +1,7 @@
 <%= page_template page_title: t('.page_heading'), template: :basic, show_errors_for: @legal_aid_application do %>
   <%= render(
         'shared/forms/identify_types_of_outgoings_form',
+        journey: :citizen,
         form_path: citizens_identify_types_of_outgoing_path
       ) %>
 <% end %>

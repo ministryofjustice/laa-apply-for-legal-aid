@@ -28,6 +28,11 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
       expect(unescaped_response_body).not_to include('translation missing')
     end
 
+    it 'does not display expanded details list' do
+      subject
+      expect(unescaped_response_body).not_to match(I18n.t('shared.forms.types_of_income_form.expanded_explanation.heading'))
+    end
+
     context 'when the provider is not authenticated' do
       let(:login) { nil }
       before { subject }

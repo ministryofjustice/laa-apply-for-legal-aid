@@ -21,6 +21,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       expect(unescaped_response_body).not_to include('translation missing')
     end
 
+    it 'does not display expanded explanation' do
+      expect(unescaped_response_body).not_to match(I18n.t('shared.forms.identify_types_of_outgoings_form.expanded_explanation.heading'))
+    end
+
     context 'when the provider is not authenticated' do
       let(:login) { nil }
       it_behaves_like 'a provider not authenticated'
