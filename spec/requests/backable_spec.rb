@@ -59,4 +59,3 @@ RSpec.describe 'Backable', type: :request do
     end
   end
 end
-
