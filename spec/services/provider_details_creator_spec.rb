@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ProviderDetailsCreator do
-  let(:provider) { create :provider, name: nil }
+  let(:provider) { create :provider, name: Faker::Name.name }
+  let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
   let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
   let(:ccms_office_2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
+  let(:provider_name) { provider.name }
   let(:api_response) do
     {
       providerFirmId: ccms_firm.id,
@@ -12,9 +14,14 @@ RSpec.describe ProviderDetailsCreator do
       contacts: [
         {
           id: rand(101..200),
-          name: Faker::Name.name
+          name: provider_name
+        },
+        {
+          id: rand(101..200),
+          name: other_provider.email
         }
       ],
+      feeEarners: [],
       providerOffices: [
         {
           id: ccms_office_1.id,
@@ -55,6 +62,22 @@ RSpec.describe ProviderDetailsCreator do
 
     it 'updates the user_login_id of the provider' do
       expect { subject }.to change { provider.reload.user_login_id }.to(api_response[:contactUserId].to_s)
+    end
+
+    context 'when the names match' do
+      it 'updates the contact_id of the provider' do
+        expect { subject }.to change { provider.reload.contact_id }.to(api_response[:contacts][0][:id])
+      end
+    end
+
+    context 'when the emails match' do
+      before { allow(ProviderDetailsRetriever).to receive(:call).with(other_provider.username).and_return(api_response) }
+
+      subject { described_class.call(other_provider) }
+
+      it 'updates the contact_id of the provider' do
+        expect { subject }.to change { other_provider.reload.contact_id }.to(api_response[:contacts][1][:id])
+      end
     end
 
     context 'selected office of provider is not returned by the API' do

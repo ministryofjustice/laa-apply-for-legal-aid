@@ -15,7 +15,8 @@ class ProviderDetailsCreator
       firm: firm,
       offices: offices,
       name: provider_name,
-      user_login_id: contact_user_id
+      user_login_id: contact_user_id,
+      contact_id: contact_id
     )
     provider.update!(selected_office: nil) if should_clear_selected_office?
   end
@@ -64,6 +65,14 @@ class ProviderDetailsCreator
 
   def contact_user_id
     provider_details[:contactUserId]
+  end
+
+  def contact_id
+    provider_details[:contacts].map { |contact| contact[:id] if provider_details_match(contact) }.compact.first
+  end
+
+  def provider_details_match(contact)
+    [provider.name&.upcase, provider.email&.upcase].include?(contact[:name]&.upcase)
   end
 
   def provider_details
