@@ -8,6 +8,7 @@
     <%= current_applicant.legal_aid_application.application_ref %>
     <br>
     <b><%= t('.your_solicitor') %></b>
+    <%= current_applicant.legal_aid_application.provider.firm.name %>
   </p>
 
   <p class="govuk-body"><%= t('.we_need_to_check') %></p>
