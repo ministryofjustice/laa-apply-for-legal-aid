@@ -140,7 +140,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    chartkick (3.3.1)
+    chartkick (3.4.0)
     childprocess (3.0.0)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
@@ -261,7 +261,7 @@ GEM
     httpi (2.4.4)
       rack
       socksify
-    i18n (1.8.4)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.31)
       activesupport (>= 4.0.2)
@@ -604,7 +604,7 @@ DEPENDENCIES
   aws-sdk-s3
   better_errors (>= 2.7.1)
   binding_of_caller
-  blazer (>= 2.2.4)
+  blazer (>= 2.2.6)
   bootsnap (>= 1.1.0)
   browser
   business
