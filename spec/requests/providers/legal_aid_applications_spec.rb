@@ -24,23 +24,8 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      context 'there are no whitelisted users' do
-        before do
-          allow(HostEnv).to receive(:production?).and_return(true)
-          Rails.configuration.x.application.whitelisted_users = nil
-        end
-
-        it 'redirects to error page' do
-          subject
-          expect(response).to redirect_to(error_path(:access_denied))
-        end
-      end
-
-      context 'provider is not a whitelisted user' do
-        before do
-          allow(HostEnv).to receive(:production?).and_return(true)
-          Rails.configuration.x.application.whitelisted_users = %w[not_this_provider]
-        end
+      context 'provider is not a portal_enabled user' do
+        let(:provider) { create :provider, :without_portal_enabled }
 
         it 'redirects to error page' do
           subject

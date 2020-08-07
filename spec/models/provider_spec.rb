@@ -18,33 +18,6 @@ RSpec.describe Provider, type: :model do
     end
   end
 
-  describe '#whitelisted_user?' do
-    before do
-      allow(HostEnv).to receive(:production?).and_return(true)
-      Rails.configuration.x.application.whitelisted_users = %w[user1 user2 user3]
-    end
-
-    context 'user is whitelisted' do
-      context 'provider username is in lower case' do
-        let(:provider) { create :provider, username: Rails.configuration.x.application.whitelisted_users.sample.downcase }
-        it 'returns true' do
-          expect(provider.whitelisted_user?).to be true
-        end
-      end
-      context 'provider username is in upper case' do
-        let(:provider) { create :provider, username: Rails.configuration.x.application.whitelisted_users.sample.upcase }
-        it 'returns true' do
-          expect(provider.whitelisted_user?).to be true
-        end
-      end
-    end
-    context 'user is not whitelisted' do
-      it 'returns false' do
-        expect(provider.whitelisted_user?).to be false
-      end
-    end
-  end
-
   describe '#user_permissions' do
     context 'no permissions for this provider, but one permission for firm' do
       let(:firm) { create :firm, :with_passported_permissions }

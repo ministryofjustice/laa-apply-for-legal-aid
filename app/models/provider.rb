@@ -25,10 +25,6 @@ class Provider < ApplicationRecord
     ProviderDetailsCreator.call(self)
   end
 
-  def whitelisted_user?
-    whitelisted_users&.any? { |user| user.casecmp(username).zero? }
-  end
-
   def user_permissions
     permissions.empty? ? firm_permissions : permissions
   end
@@ -44,11 +40,5 @@ class Provider < ApplicationRecord
 
   def non_passported_permissions?
     user_permissions.map(&:role).include?('application.non_passported.*')
-  end
-
-  private
-
-  def whitelisted_users
-    Rails.configuration.x.application.whitelisted_users
   end
 end
