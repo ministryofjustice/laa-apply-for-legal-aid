@@ -14,7 +14,7 @@
       <%= t '.heading_2' %>
       <span class="govuk-hint govuk-!-margin-top-0">
         <%= t '.search_help_example' %>
-        <span class="govuk-visually-hidden" id="proceedingTypes" role="alert" data-message="<%= t '.accessibility_message' %>"></span>
+        <span class="govuk-visually-hidden" id="proceedingTypes" role="alert" aria-live="assertive" data-message="<%= t '.accessibility_message' %>"></span>
       </span>
     </label>
   </h2>
@@ -22,7 +22,7 @@
   <div class="govuk-grid-row search-field govuk-!-margin-top-0">
     <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
       <%= govuk_error_message(error_message) %>
-      <input class="govuk-input <%= input_error_class %>" id="proceeding-search-input" name="proceeding-search-input" type="text">
+      <input class="govuk-input <%= input_error_class %>" id="proceeding-search-input" name="proceeding-search-input" type="text" aria-label="<%= t '.accessibility_message_safari_browser' %>">
     </div>
 
     <div class="govuk-grid-column-one-third govuk-!-margin-top-2 clear-search">
