@@ -56,6 +56,9 @@ Rails.application.configure do
 
   config.x.support_email_address = config.x.smoke_test_email_address
 
+  # Dummy url for provider details api
+  config.x.provider_details.url = 'http://dummy-provider-details-api/'
+
   # Set a css_compressor so sassc-rails does not overwrite the compressor when running the tests
   config.assets.css_compressor = nil
 end
