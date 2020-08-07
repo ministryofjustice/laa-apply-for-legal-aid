@@ -489,6 +489,7 @@ en:
         no_results: No results found.
         proceeding: proceeding
         search_help_example: For example, 'non-molestation order', or search by category of law or matter type
+        accessibility_message: Tab out of this box to select returned options
         you_have_selected: You have selected %{count}
     property_values:
       hint:
