@@ -1,21 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ProviderDetailsCreator do
-  let(:provider) { create :provider, name: Faker::Name.name }
+  let(:username) { Faker::Name.name }
+  let(:provider) { create :provider, name: nil, username: username }
   let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
   let(:third_provider) { create :provider, name: nil, email: nil }
   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
   let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
   let(:ccms_office_2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
-  let(:provider_name) { provider.name }
+  let(:contact_id) { rand(101..200) }
   let(:api_response) do
     {
       providerFirmId: ccms_firm.id,
       contactUserId: rand(101..200),
       contacts: [
         {
-          id: rand(101..200),
-          name: provider_name
+          id: contact_id,
+          name: username
         },
         {
           id: rand(101..200),
@@ -65,6 +66,10 @@ RSpec.describe ProviderDetailsCreator do
       expect { subject }.to change { provider.reload.name }.to('')
     end
 
+    it 'updates the contact_id of the provider' do
+      expect { subject }.to change { provider.reload.contact_id }.to(contact_id)
+    end
+
     it 'updates the user_login_id of the provider' do
       expect { subject }.to change { provider.reload.user_login_id }.to(api_response[:contactUserId].to_s)
     end
@@ -86,12 +91,12 @@ RSpec.describe ProviderDetailsCreator do
     end
 
     context 'when the emails match' do
-      before { allow(ProviderDetailsRetriever).to receive(:call).with(other_provider.username).and_return(api_response) }
+      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
 
-      subject { described_class.call(other_provider) }
+      subject { described_class.call(third_provider) }
 
       it 'updates the contact_id of the provider' do
-        expect { subject }.to change { other_provider.reload.contact_id }.to(api_response[:contacts][1][:id])
+        expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
       end
     end
 
