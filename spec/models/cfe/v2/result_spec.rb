@@ -59,8 +59,50 @@ module CFE
           end
         end
 
-        context 'manual check IS required' do
+        context 'manual check IS required and restrictions do not exist' do
           before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(true) }
+
+          context 'eligible' do
+            let(:cfe_result) { create :cfe_v2_result, :eligible }
+            it 'returns eligible' do
+              expect(subject).to eq 'eligible'
+            end
+          end
+
+          context 'not_eligible' do
+            let(:cfe_result) { create :cfe_v2_result, :not_eligible }
+            it 'returns not_eligible' do
+              expect(subject).to eq 'not_eligible'
+            end
+          end
+
+          context 'capital_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
+            it 'returns capital_contribution_required' do
+              expect(subject).to eq 'capital_contribution_required'
+            end
+          end
+
+          context 'income_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
+            it 'returns income_contribution_required' do
+              expect(subject).to eq 'income_contribution_required'
+            end
+          end
+
+          context 'capital_and_income_contribution_required' do
+            let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
+            it 'returns capital_and_income_contribution_required' do
+              expect(subject).to eq 'capital_and_income_contribution_required'
+            end
+          end
+        end
+
+        context 'manual check IS required and restrictions exist' do
+          before do
+            allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(true)
+            application.has_restrictions = true
+          end
 
           context 'eligible' do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
