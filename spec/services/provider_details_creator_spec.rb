@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ProviderDetailsCreator do
   let(:provider) { create :provider, name: Faker::Name.name }
   let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
+  let(:third_provider) { create :provider, name: nil, email: nil }
   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
   let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
   let(:ccms_office_2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
@@ -19,6 +20,10 @@ RSpec.describe ProviderDetailsCreator do
         {
           id: rand(101..200),
           name: other_provider.email
+        },
+        {
+          id: rand(101..200),
+          name: third_provider.username
         }
       ],
       feeEarners: [],
@@ -67,6 +72,16 @@ RSpec.describe ProviderDetailsCreator do
     context 'when the names match' do
       it 'updates the contact_id of the provider' do
         expect { subject }.to change { provider.reload.contact_id }.to(api_response[:contacts][0][:id])
+      end
+    end
+
+    context 'when the username matches' do
+      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
+
+      subject { described_class.call(third_provider) }
+
+      it 'updates the contact_id of the provider' do
+        expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
       end
     end
 

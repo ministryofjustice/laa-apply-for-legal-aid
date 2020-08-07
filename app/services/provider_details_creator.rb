@@ -72,7 +72,7 @@ class ProviderDetailsCreator
   end
 
   def provider_details_match(contact)
-    [provider.name&.upcase, provider.email&.upcase].include?(contact[:name]&.upcase)
+    [provider.name&.upcase, provider.email&.upcase, provider.username&.upcase].include?(contact[:name]&.upcase)
   end
 
   def provider_details
