@@ -5,8 +5,8 @@ RSpec.describe 'SamlSessionsController', type: :request do
   let(:firm) { create :firm, offices: [office] }
   let(:office) { create :office }
   let(:provider) { create :provider, firm: firm, selected_office: office, offices: [office], username: username }
-  let(:username) { 'bob-the-builder' }
-  let(:provider_details_api) { "#{Rails.configuration.x.provider_details.url}#{username}" }
+  let(:username) { 'bob the builder' }
+  let(:provider_details_api) { "#{Rails.configuration.x.provider_details.url}#{username.gsub(' ', '%20')}" }
 
   describe 'DELETE /providers/sign_out' do
     before { sign_in provider }
