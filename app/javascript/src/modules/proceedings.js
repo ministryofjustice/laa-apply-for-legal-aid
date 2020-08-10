@@ -83,6 +83,10 @@ function filterData(inputText, search) {
         const parent = $('#proceeding-list')
         element.detach().prependTo(parent)
         element.show()
+
+        // the below alerts screen reader users that results appeared on the page
+        const accessibilityAlertMessage = document.querySelector("#proceedingTypes").dataset.message
+        document.querySelector("#proceedingTypes").innerHTML = accessibilityAlertMessage
       })
     }
     else {
