@@ -18,6 +18,9 @@ class Provider < ApplicationRecord
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
   def update_details
+    return unless HostEnv.staging_or_production?
+
+    # only schedule a background job to update details for staging and live
     ProviderDetailsCreatorWorker.perform_async(id)
   end
 

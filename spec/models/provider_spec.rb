@@ -11,9 +11,20 @@ RSpec.describe Provider, type: :model do
         provider.update_details
       end
 
-      it 'schedules a background job' do
-        expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id)
-        provider.update_details
+      context 'staging or production' do
+        it 'schedules a background job' do
+          expect(HostEnv).to receive(:staging_or_production?).and_return(true)
+          expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id)
+          provider.update_details
+        end
+      end
+
+      context 'not staging or production' do
+        it 'does not schedule a background job' do
+          expect(HostEnv).to receive(:staging_or_production?).and_return(false)
+          expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
+          provider.update_details
+        end
       end
     end
   end
