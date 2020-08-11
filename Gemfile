@@ -92,7 +92,7 @@ gem 'wicked_pdf'
 gem 'rails_admin', '~> 2.0', '>= 2.0.2'
 
 # Create reports with SQL queries
-gem 'blazer', '>= 2.2.4'
+gem 'blazer', '>= 2.2.6'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'

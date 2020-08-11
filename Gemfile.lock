@@ -605,7 +605,7 @@ DEPENDENCIES
   aws-sdk-s3
   better_errors (>= 2.7.1)
   binding_of_caller
-  blazer (>= 2.2.4)
+  blazer (>= 2.2.6)
   bootsnap (>= 1.1.0)
   browser
   business
