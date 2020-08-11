@@ -44,6 +44,7 @@
     </section>
 
     <section class="income_payments_and_assets page_break_before">
+      <div class="govuk-!-padding-bottom-6"></div>
       <h2 class="govuk-heading-l"><%= t('.income_payments_and_assets_heading') %></h2>
       <section class="print-no-break">
         <h3 class="govuk-heading-m"><%= t('.income') %></h3>
@@ -80,6 +81,7 @@
     </section>
 
     <section class="merits page_break_before">
+      <div class="govuk-!-padding-bottom-6"></div>
       <%= render(
         'shared/check_answers/merits',
         incident: @legal_aid_application.latest_incident,
@@ -90,9 +92,8 @@
       ) %>
     </section>
 
-    <div class="govuk-!-padding-bottom-6"></div>
-
     <section id="client-declaration" class="only-print print-no-break page_break_before">
+      <div class="govuk-!-padding-bottom-6"></div>
       <h2 class="govuk-heading-l"><%= t('.client_declaration.heading') %></h2>
 
       <%= render 'shared/applicant_declaration' %>
