@@ -2,13 +2,13 @@ class TestProviderPopulator
   TEST_FIRMS = {
     'Test & Co' => [823, %w[1T823E 2T823E 3T823E]],
     'Will-c & Co.' => [910, ['1W910I']],
-    'Test-sch & Co.' => [1137, %w[2T113E 3T113E 4T113E 5T113E]],
-    'Test2 & Co.' => [824, %w[1T824E 2T824E 3T824E 4T824E]],
-    'Test3 & Co.' => [825, %w[3T823E 2T825E 3T825E]],
-    'Firm1 & Co.' => [805, %w[1F805I 2F805I 3F805I 4F805I]],
-    'Firm2 & Co.' => [806, %w[2F805I 3F805I 4F805I]],
-    'Richards & Co.' => [555, %w[1S555R 2S555R]],
-    'David Gray LLP' => [19_148, ['0B721W']]
+    'Test-sch & Co.' => [1137, %w[2T113E:1 3T113E:2 4T113E:3 5T113E:4]],
+    'Test2 & Co.' => [824, %w[1T824E:5 2T824E:6 3T824E:7 4T824E:8]],
+    'Test3 & Co.' => [825, %w[3T823E:9 2T825E:10 3T825E:11]],
+    'Firm1 & Co.' => [805, %w[1F805I:12 2F805I:13 3F805I:14 4F805I:15]],
+    'Firm2 & Co.' => [806, %w[2F805I:16 3F805I:17 4F805I:18]],
+    'Richards & Co.' => [555, %w[1S555R:19 2S555R:20]],
+    'David Gray LLP' => [19_148, ['0B721W:137570']]
   }.freeze
 
   TEST_PROVIDERS = {
@@ -65,12 +65,13 @@ class TestProviderPopulator
 
   def populate_firm(firm_name)
     details = TEST_FIRMS.fetch(firm_name)
-    ccms_id, office_codes = details
+    ccms_id, office_code_ids = details
     firm = Firm.find_by(name: firm_name) || Firm.new(name: firm_name, ccms_id: ccms_id)
-    office_codes.each do |code|
+    office_code_ids.each do |office_code_id|
+      code, ccms_id = office_code_id.split(':')
       next if firm.offices.map(&:code).include?(code)
 
-      firm.offices << Office.new(code: code, ccms_id: rand(1..9999).to_s)
+      firm.offices << Office.new(code: code, ccms_id: ccms_id.to_s)
     end
     firm.save!
     firm
