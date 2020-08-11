@@ -560,7 +560,7 @@ en:
             has a National Insurance number
             is single (unless their partner is the opponent in the case)
           title: 'You can only use this service if your client:'
-        use_ccms_para: Use the Client and Cost Management System (CCMS) for all other applications.
+        use_ccms_para_html: "Use the Client and Cost Management System (<abbr title='Client and Cost Management System'>CCMS</abbr>) for all other applications."
     start_merits_assessments:
       show:
         h1-heading: Provide details of the case
