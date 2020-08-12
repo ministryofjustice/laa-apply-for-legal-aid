@@ -124,6 +124,22 @@ RSpec.describe 'providers savings and investments', type: :request do
               expect(response.body).to match('govuk-form-group--error')
             end
           end
+
+          context 'checkbox checked with no value entered' do
+            let(:params) do
+              {
+                savings_amount: {
+                  cash: '',
+                  check_box_cash: 'true'
+                }
+              }
+            end
+
+            it 'displays error for field' do
+              subject
+              expect(response.body).to match(I18n.t('activemodel.errors.models.savings_amount.attributes.cash.blank'))
+            end
+          end
         end
 
         context 'when in checking passported answers state' do
