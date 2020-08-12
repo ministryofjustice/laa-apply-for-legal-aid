@@ -16,6 +16,10 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
+    it 'displays expanded explanation' do
+      expect(unescaped_response_body).to match(I18n.t('shared.forms.identify_types_of_outgoings_form.expanded_explanation.heading'))
+    end
+
     it 'displays the outgoing type labels' do
       outgoing_types.map(&:citizens_label_name).each do |label|
         expect(unescaped_response_body).to include(label)

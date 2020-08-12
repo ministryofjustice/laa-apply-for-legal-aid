@@ -49,6 +49,11 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       expect(unescaped_response_body).not_to include('translation missing')
     end
 
+    it 'displays expanded details list' do
+      subject
+      expect(unescaped_response_body).to match(I18n.t('shared.forms.types_of_income_form.expanded_explanation.heading'))
+    end
+
     it 'returns http success' do
       subject
       expect(response).to have_http_status(:ok)
