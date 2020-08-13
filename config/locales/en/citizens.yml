@@ -26,6 +26,7 @@ en:
         title: Select your bank
         what_happens_next: What happens next
         connect: We'll connect you to your bank using a secure service so you can share your bank transactions with us.
+        hint: Select one bank at a time. You'll be able to select more later if you have accounts with different banks.
       create:
         error: Select a bank
     check_answers:
