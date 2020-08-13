@@ -1,4 +1,4 @@
-class BaseStateMachine < ApplicationRecord
+class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLength
   self.table_name = 'state_machine_proxies'
 
   belongs_to :legal_aid_application
@@ -41,6 +41,7 @@ class BaseStateMachine < ApplicationRecord
 
     event :applicant_details_checked do
       transitions from: %i[
+        provider_entering_means
         checking_applicant_details
         provider_confirming_applicant_eligibility
         use_ccms

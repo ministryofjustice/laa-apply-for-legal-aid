@@ -80,6 +80,15 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       expect(application.reload.state).to eq 'applicant_details_checked'
     end
 
+    context 'state is provider_entering_means' do
+      let(:application) { create :application, :provider_entering_means, applicant: applicant }
+
+      it 'transitions from provider_entering_means' do
+        subject
+        expect(application.reload.state).to eq 'applicant_details_checked'
+      end
+    end
+
     context 'when the check_benefit_result already exists' do
       let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
 
