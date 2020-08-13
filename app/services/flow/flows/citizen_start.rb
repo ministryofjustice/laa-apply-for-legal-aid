@@ -3,11 +3,13 @@ module Flow
     class CitizenStart < FlowSteps
       STEPS = {
         legal_aid_applications: {
+          path: ->(_) { urls.citizens_legal_aid_applications_path },
           forward: :information
         },
         information: {
           path: ->(_) { urls.citizens_information_path },
-          forward: :consents
+          forward: :consents,
+          back: :legal_aid_applications
         },
         consents: {
           path: ->(_) { urls.citizens_consent_path },
