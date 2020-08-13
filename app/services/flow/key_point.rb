@@ -39,7 +39,7 @@ module Flow
 
     private
 
-    def flow((legal_aid_application))
+    def flow(legal_aid_application)
       Flow::BaseFlowService.flow_service_for(
         journey,
         legal_aid_application: legal_aid_application,
