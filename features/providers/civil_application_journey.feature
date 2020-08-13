@@ -146,6 +146,7 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
+    Then I should be on a page showing "We'll use this to send your client a link to the service."
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
