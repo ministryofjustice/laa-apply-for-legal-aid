@@ -37,6 +37,10 @@ module Flow
       path(forward_step)
     end
 
+    def back_path
+      path(back_step)
+    end
+
     def current_path
       path(current_step)
     end
@@ -60,6 +64,10 @@ module Flow
       @forward_step ||= step(:forward)
     end
 
+    def back_step
+      @back_step ||= step(:back)
+    end
+
     def check_answers_step
       return nil unless step?(:check_answers)
 
@@ -76,6 +84,7 @@ module Flow
 
     def path_for(step, option)
       path_action = steps.dig(step, option)
+      return nil if step.eql?(:back) && path_action.nil?
       raise FlowError, ":#{option} of step :#{step} is not defined" unless path_action
 
       return path_action unless path_action.is_a?(Proc)
