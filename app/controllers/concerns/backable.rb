@@ -17,6 +17,10 @@ module Backable
 
     # Adding ?back=true to the path of the previous page to indicate that we are moving backward in the page history
     def back_path
+      # check if current_flow step has a back step
+      return flow_service.back_path if flow_exists_and_has_back_path?
+
+      # else fall back to previous version
       return unless page_history.size > 1
 
       path = Addressable::URI.parse(page_history[-2])
@@ -32,6 +36,14 @@ module Backable
     end
 
     private
+
+    def flow_exists_and_has_back_path?
+      return false unless @legal_aid_application.present?
+
+      flow_service&.back_path
+    rescue Flow::FlowError
+      false
+    end
 
     def update_page_history
       return if self.class.skip_back_history_actions.include?(action_name.to_sym)
