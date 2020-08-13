@@ -73,3 +73,8 @@ end
 Then('I should have completed the dependants section of the journey') do
   steps %(Then I should be on a page showing "What regular payments do you make?")
 end
+
+Then(/^I should see a link ending with ['|"](.*?)['|"]$/) do |path|
+  # find(:xpath, "//a[@href='#{path}']")
+  expect(page).to have_link(nil, href: path)
+end
