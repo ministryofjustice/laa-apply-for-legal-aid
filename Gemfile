@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'aasm', '~> 5.1.0'
+gem 'aasm', '~> 5.1.1'
 gem 'active_model_serializers', '~> 0.10.10'
 gem 'after_commit_everywhere', '~> 0.1', '>= 0.1.5'
 gem 'geckoboard-ruby'
