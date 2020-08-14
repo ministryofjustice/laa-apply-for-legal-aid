@@ -15,8 +15,7 @@ class ProviderDetailsCreator
       firm: firm,
       offices: offices,
       name: provider_name,
-      contact_id: contact_id,
-      user_login_id: contact_user_id
+      contact_id: contact_id
     )
     provider.update!(selected_office: nil) if should_clear_selected_office?
   end
@@ -61,10 +60,6 @@ class ProviderDetailsCreator
     #
     name = provider_details[:providerOffices].first[:name]
     name.sub(/Office No. \d+/, '').sub(/-\S{6}$/, '').strip
-  end
-
-  def contact_user_id
-    provider_details[:contactUserId]
   end
 
   def contact_id
