@@ -33,18 +33,22 @@ class TestProviderPopulator
 
   private
 
-  def populate_firm_permissions
+  def populate_firm_permissions # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     passported_permission = Permission.find_by(role: 'application.passported.*')
     non_passported_permission = Permission.find_by(role: 'application.non_passported.*')
-    Firm.all.each do |f|
-      f.permissions << passported_permission
-      f.save!
+    Firm.all.each do |firm|
+      unless firm.permissions.map(&:role).include?('application.passported.*')
+        firm.permissions << passported_permission
+        firm.save!
+      end
     end
 
     %w[test1 sr MARTIN.RONAN@DAVIDGRAY.CO.UK].each do |firm_name|
       firm = Provider.find_by(username: firm_name).firm
-      firm.permissions << non_passported_permission
-      firm.save!
+      unless firm.permissions.map(&:role).include?('application.non_passported.*')
+        firm.permissions << non_passported_permission
+        firm.save!
+      end
     end
   end
 
