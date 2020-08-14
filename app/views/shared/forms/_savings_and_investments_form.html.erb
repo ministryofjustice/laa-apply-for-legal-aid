@@ -5,9 +5,9 @@
   <%= govuk_form_group show_error_if: @form.errors.present? do %>
     <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
       <%= govuk_fieldset_header page_title %>
-      <h2 class="govuk-heading-m"><%= t('generic.select_all_that_apply') %></h2>
+      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
-      <%= render 'shared/show_errors' %>
+      <%= render 'shared/show_errors' unless @form.any_checkbox_checked? %>
 
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="[name='savings_amount[none_selected]']">
