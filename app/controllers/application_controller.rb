@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   # See also catch all route at end of config/routes.rb
   rescue_from ActiveRecord::RecordNotFound, with: :page_not_found
 
+  # this will be overridden by the flowable concern
+  def flow_service
+    nil
+  end
+
   private
 
   def page_not_found
