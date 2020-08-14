@@ -18,17 +18,14 @@ class Provider < ApplicationRecord
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
   def update_details
-    return update_details_directly unless firm
+    return unless HostEnv.staging_or_production?
 
+    # only schedule a background job to update details for staging and live
     ProviderDetailsCreatorWorker.perform_async(id)
   end
 
   def update_details_directly
     ProviderDetailsCreator.call(self)
-  end
-
-  def whitelisted_user?
-    whitelisted_users&.any? { |user| user.casecmp(username).zero? }
   end
 
   def user_permissions
@@ -46,11 +43,5 @@ class Provider < ApplicationRecord
 
   def non_passported_permissions?
     user_permissions.map(&:role).include?('application.non_passported.*')
-  end
-
-  private
-
-  def whitelisted_users
-    Rails.configuration.x.application.whitelisted_users
   end
 end

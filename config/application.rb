@@ -61,7 +61,6 @@ module LaaApplyForLegalAid
     config.x.admin_portal.password = ENV['ADMIN_PASSWORD']
 
     config.x.provider_details.url  = ENV['PROVIDER_DETAILS_URL']
-    config.x.provider_details.mock = ENV['PROVIDER_DETAILS_MOCK'] != 'false' # true by default
 
     config.x.metrics_service_host = ENV.fetch('METRICS_SERVICE_HOST', 'localhost')
 

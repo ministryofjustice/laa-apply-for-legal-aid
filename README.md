@@ -186,11 +186,10 @@ different firms.  The password for all users is `password`.
 
 ### Post-authentication provider details retrieval
 Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
-an after_action method `#update_provider_details` on the `SamlSsessionsController` is executed. This will call the `update_details` method on the current_provider (a Provider object supplied by Devise).
-
-The first time someone logs in, there will be no firm for the provider, and `update_details_directly` will be called immediately, otherwise a job to do that in the background will be scheduled.
-
-The `update_details-directly` method will instantiate and call the ProviderDetailsCreator which in turn calls the `ProviderDetailsRetriever` to get the details from the API, and create the necessary firm, contact records.  The `ProviderDetailsRetriever` will in fact delegate this task to the `MockProviderDetailsRetriever` if the rails configuration item `provider_details.mock` is set to true.
+an after_action method `#update_provider_details` on the `SamlSsessionsController` is executed. This will call 
+the `update_details` method on the current_provider (a Provider object supplied by Devise) whch generates
+a background job to query the 
+provider details API and updates any details that have changed on the provider record.
 
 ### Benefits checker
 

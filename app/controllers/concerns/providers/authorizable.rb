@@ -17,7 +17,7 @@ module Providers
 
     included do
       include Pundit
-      before_action :authorize_whitelisted_user?, if: -> { HostEnv.production? }
+      before_action :authorize_portal_user?
       before_action :authorize_legal_aid_application
       rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized
 
@@ -56,11 +56,11 @@ module Providers
         Pundit.policy pundit_user, legal_aid_application
       end
 
-      def authorize_whitelisted_user?
-        return if current_provider.whitelisted_user?
+      def authorize_portal_user?
+        return if current_provider.portal_enabled?
 
         begin
-          raise AuthController::AuthorizationError, 'Provider not whitelisted'
+          raise AuthController::AuthorizationError, 'Provider not enabled on the portal'
         rescue StandardError => e
           Raven.capture_exception(e)
         end

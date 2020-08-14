@@ -12,12 +12,7 @@ module Dashboard
       end
 
       def self.data
-        # if we're using whitelisted users, don't count firms that belong to users that aren't in the whitelist, excluding test users
-        provider_count = if Rails.configuration.x.application.whitelisted_users_excluding_test
-                           Provider.where(username: Rails.configuration.x.application.whitelisted_users_excluding_test).group(:firm_id).count.size
-                         else
-                           Provider.all.group(:firm_id).count.size
-                         end
+        provider_count = Provider.all.group(:firm_id).count.size
         [
           {
             'number' => provider_count
