@@ -37,7 +37,11 @@
       <div class="govuk-form-group <%= group_error_class %>">
         <%= f.label :address, t('.select_address_label'), class: 'govuk-label' %>
         <% if @form.errors[:lookup_id].any? %>
-          <%= content_tag(:span, @form.errors[:lookup_id].first, class: ['govuk-error-message']) %>
+
+      <%= content_tag(:span, @form.errors[:lookup_id].first, class: 'govuk-error-message') do %>
+        <%= content_tag(:span, I18n.translate('helpers.accessibility.error'), class: 'govuk-visually-hidden') + @form.errors[:lookup_id].first %>
+      <% end %>
+
         <% end %>
         <% input_error_class = @form.errors[:lookup_id].any? ? 'govuk-select--error' : '' %>
         <%= f.select(
