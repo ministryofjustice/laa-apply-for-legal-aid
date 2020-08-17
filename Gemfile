@@ -81,7 +81,7 @@ gem 'prometheus_exporter'
 gem 'factory_bot_rails', '>= 5.2.0'
 gem 'faker', '>=1.9.1'
 
-gem 'webpacker', '~> 5', '>= 5.1.1'
+gem 'webpacker', '~> 5'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
