@@ -33,8 +33,8 @@ RSpec.describe Providers::AddressLookupsController, type: :request do
   end
 
   describe 'PATCH/providers/applications/:legal_aid_application_id/address_lookup' do
-    let(:postcode) { 'DA7 4NG' }
-    let(:normalized_postcode) { 'DA74NG' }
+    let(:postcode) { 'SW1H 9EA' }
+    let(:normalized_postcode) { 'SW1H9AE' }
     let(:submit_button) { {} }
     let(:params) do
       {
@@ -72,7 +72,7 @@ RSpec.describe Providers::AddressLookupsController, type: :request do
       end
 
       context 'with a valid postcode' do
-        let(:postcode) { 'DA7 4NG' }
+        let(:postcode) { 'SW1H 9EA' }
 
         it 'saves the postcode' do
           subject

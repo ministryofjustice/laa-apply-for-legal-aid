@@ -18,8 +18,8 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         login_as provider
       end
 
-      context 'a postcode have been entered before', :vcr do
-        let(:postcode) { 'DA7 4NG' }
+      context 'a postcode has been entered before', :vcr do
+        let(:postcode) { 'SW1H 9EA' }
         let!(:address) { create :address, postcode: postcode, applicant: applicant }
 
         it 'performs an address lookup with the provided postcode' do
@@ -74,23 +74,14 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
   describe 'PATCH /providers/applications/:legal_aid_application_id/address_selections' do
     let(:address_list) do
       [
-        { lookup_id: '11', address_line_one: '1', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '12', address_line_one: '2', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '13', address_line_one: '3', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '14', address_line_one: '4', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '15', address_line_one: '5', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '16', address_line_one: '6', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '17', address_line_one: '7', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '18', address_line_one: '8', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '19', address_line_one: '9', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '20', address_line_one: '10', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' },
-        { lookup_id: '22', address_line_one: '12', address_line_two: 'LONSDALE ROAD', city: 'BEXLEYHEATH', postcode: 'DA7 4NG' }
+        { lookup_id: '11', address_line_one: '1', address_line_two: 'FAKE ROAD', city: 'TEST CITY', postcode: 'AA1 1AA' },
+        { lookup_id: '12', address_line_one: '2', address_line_two: 'FAKE ROAD', city: 'TEST CITY', postcode: 'AA1 1AA' },
+        { lookup_id: '13', address_line_one: '3', address_line_two: 'FAKE ROAD', city: 'TEST  CITY', postcode: 'AA1 1AA' }
       ]
     end
-    let(:postcode) { 'DA7 4NG' }
     let(:selected_address) { address_list.sample }
     let(:lookup_id) { selected_address[:lookup_id] }
-    let(:normalized_postcode) { 'DA74NG' }
+    let(:postcode) { selected_address[:postcode] }
     let(:submit_button) { { continue_button: 'Continue' } }
     let(:params) do
       {

@@ -143,7 +143,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And the answer for 'Other assets' should be 'None declared'
 
-    @javascript @vcr
+    @javascript
     Scenario: I want to change property value via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Own home'
@@ -164,7 +164,7 @@ Feature: Checking answers backwards and forwards
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
       And the answer for 'Property value' should be '£500,000.00'
 
-    @javascript @vcr
+    @javascript
     Scenario: I want to remove property details via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Own home'
@@ -174,7 +174,7 @@ Feature: Checking answers backwards and forwards
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'No'
 
-    @javascript @vcr
+    @javascript
     Scenario: I want to view savings via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Savings and investments'
@@ -186,7 +186,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
 
-    @javascript @vcr
+    @javascript
     Scenario: I want to view other assets via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Other assets'
@@ -195,7 +195,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
 
-    @javascript @vcr
+    @javascript
     Scenario: I want to add and remove restrictions via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
@@ -239,7 +239,7 @@ Feature: Checking answers backwards and forwards
       And I click "Save and continue"
       Then I should be on a page showing 'Check your answers'
 
-    @javascript @vcr
+    @javascript
     Scenario: I submit the application and view the check_your_answers page
       Given I complete the application and view the check your answers page
       Then I am on the read only version of the check your answers page
