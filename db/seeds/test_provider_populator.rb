@@ -53,7 +53,7 @@ class TestProviderPopulator
   end
 
   def populate_provider(username, details)
-    firm_name, email, contact_id, user_login_id = details
+    firm_name, email, contact_id = details
     firm = populate_firm(firm_name)
     return if Provider.exists?(username: username)
 
@@ -61,7 +61,6 @@ class TestProviderPopulator
       username: username,
       email: email,
       contact_id: contact_id,
-      user_login_id: user_login_id,
       firm: firm,
       offices: firm.offices
     )

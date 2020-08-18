@@ -70,10 +70,6 @@ RSpec.describe ProviderDetailsCreator do
       expect { subject }.to change { provider.reload.contact_id }.to(contact_id)
     end
 
-    it 'updates the user_login_id of the provider' do
-      expect { subject }.to change { provider.reload.user_login_id }.to(api_response[:contactUserId].to_s)
-    end
-
     context 'when the names match' do
       it 'updates the contact_id of the provider' do
         expect { subject }.to change { provider.reload.contact_id }.to(api_response[:contacts][0][:id])

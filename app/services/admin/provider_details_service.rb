@@ -22,7 +22,6 @@ module Admin
         @provider.update!(
           firm: firm,
           offices: offices,
-          user_login_id: user_login_id,
           contact_id: contact_id
         )
       end
@@ -101,10 +100,6 @@ module Admin
           office.firm = firm
         end
       end
-    end
-
-    def user_login_id
-      parsed_response[:contactUserId]
     end
 
     def contact_id
