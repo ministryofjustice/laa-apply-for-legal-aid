@@ -84,7 +84,7 @@ en:
       contact_or_complaint:
         header: Contact us or make a complaint
         data_protection_office:
-          list_heading: "Contact the MoJ Data Protection Officer if you:"
+          list_heading: "Contact the (<abbr title='Ministry of Justice'>MOJ</abbr>) Data Protection Officer if you:"
           list: |
             have a question about anything in this privacy notice
             think that your personal data has been misused or 

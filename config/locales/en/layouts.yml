@@ -13,7 +13,7 @@ en:
         contact: Contact
         cookies: Cookies
         copyright: Crown copyright
-        digital_services: MOJ Digital Services
+        digital_services_html:  "<abbr title='Ministry of Justice'>MOJ</abbr> Digital Services"
         feedback: Feedback
         open_gov_link_text: Open Government Licence v3.0
         privacy_policy: Privacy policy
