@@ -1,5 +1,5 @@
 <div class="interruption-panel">
-  <%= page_template(page_title: t('.title'), column_width: 'full', template: :basic) do %>
+  <%= page_template(page_title: t('.title_html'), column_width: 'full', template: :basic) do %>
     <%= page_heading(size: 'l') %>
     <div class="maximize-text-width">
       <p class="govuk-body"><%= t '.sub_heading' %></p>
@@ -7,7 +7,7 @@
     </div>
 
     <div>
-      <%= link_to t('.continue_in_ccms'), 'https://portal.legalservices.gov.uk', class: 'govuk-button white-button', role: 'button' %>
+      <%= link_to t('.continue_in_ccms_html'), 'https://portal.legalservices.gov.uk', class: 'govuk-button white-button', role: 'button' %>
     </div>
     <%= link_to t('.back_to_applications'), providers_legal_aid_applications_path, class: 'govuk-body black_text_on_focus' %>
   <% end %>

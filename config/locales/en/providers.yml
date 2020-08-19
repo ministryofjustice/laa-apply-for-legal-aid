@@ -455,7 +455,8 @@ en:
       show:
         heading: Is the following correct?
         info: "Your client:"
-        list_html: "will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts"
+        list_1: uses online banking for all of their bank accounts
+        list_2_html: will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
@@ -564,7 +565,7 @@ en:
             has a National Insurance number
             is single (unless their partner is the opponent in the case)
           title: 'You can only use this service if your client:'
-        use_ccms_para_html: "Use the Client and Cost Management System (CCMS) for all other applications."
+        use_ccms_para_html: "Use the Client and Cost Management System (<abbr title='Client and Cost Management System'>CCMS</abbr>) for all other applications."
     start_merits_assessments:
       show:
         h1-heading: Provide details of the case
@@ -654,9 +655,9 @@ en:
         sorted: Sorted
     use_ccms:
       show:
-        title_html: "You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>"
+        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
         sub_heading: "You cannot continue using this service if your client does not:"
-        continue_in_ccms_html: "Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>"
+        continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         online_banking_consent:
           list: |

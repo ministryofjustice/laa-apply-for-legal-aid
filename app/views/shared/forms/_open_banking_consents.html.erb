@@ -15,9 +15,8 @@
       </p>
 
       <ul class="govuk-list govuk-list--bullet">
-        <% list.each_line do |item| %>
-          <li><%= item %></li>
-        <% end %>
+        <li><%= t('providers.open_banking_consents.show.list_1') %></li>
+        <li><%= t('providers.open_banking_consents.show.list_2_html') %></li>
       </ul>
 
       <%= form.govuk_radio_button(

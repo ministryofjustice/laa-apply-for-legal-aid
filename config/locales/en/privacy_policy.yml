@@ -8,7 +8,7 @@ en:
         list:
           item_1: personal details like your name, address, date of birth, contact details and National Insurance number
           item_2: financial information to check if you qualify for legal aid
-          item_3_html: your Internet Protocol (IP) address, and details of which version of <a href="https://www.gov.uk/help/browsers">web browser</a> you used
+          item_3_html: your Internet Protocol <abbr title='Internet Protocol'>(IP)</abbr> address, and details of which version of <a href='https://www.gov.uk/help/browsers'>web browser</a> you used
           item_4_html: information on how you use the site, using <a href="https://www.gov.uk/help/cookies">cookies</a> and page tagging techniques
           item_5: any feedback you leave
       google_analytics:
@@ -50,7 +50,7 @@ en:
       where_your_data_is_processed_and_stored:
         header: Where your data is processed and stored
         info_1: We design, build and run our systems to make sure that your data is as safe as possible at all stages, both while it’s processed and when it’s stored.
-        info_2_html: All personal data is stored in the <a href="https://www.gov.uk/eu-eea">European Economic Area</a> (EEA). Google Analytics data may be transferred outside the EEA, but this cannot be used to personally identify you.
+        info_2_html: All personal data is stored in the <a href="https://www.gov.uk/eu-eea">European Economic Area</a> <abbr title='European Economic Area'>(EEA)</abbr>. Google Analytics data may be transferred outside the <abbr title='European Economic Area'>EEA</abbr>, but this cannot be used to personally identify you.
       security:
         header: How we protect your data and keep it secure
         info_1: We are committed to doing all that we can to keep your data secure. We have set up systems and processes to prevent unauthorised access or disclosure of your data – for example, we protect your data using varying levels of encryption.
@@ -72,7 +72,7 @@ en:
           that your personal data is erased if there is no longer a justification for it
           a copy of any data-sharing agreements we have with other organisations
           information on how we instruct staff to collect, use or delete your personal data
-        info: If you have any of these requests, contact the Ministry of Justice (MoJ) Data Protection Officer.
+        info_html: If you have any of these requests, contact the Ministry of Justice <abbr title='Ministry of Justice'>MoJ</abbr> Data Protection Officer.
         data_protection_office_contact_details:
           title: The Data Protection Officer
           email_address_html: <a href="mailto:casework@ico.org.uk">data.compliance@justice.gov.uk</a>
@@ -84,7 +84,7 @@ en:
       contact_or_complaint:
         header: Contact us or make a complaint
         data_protection_office:
-          list_heading: "Contact the (<abbr title='Ministry of Justice'>MOJ</abbr>) Data Protection Officer if you:"
+          list_heading_html: "Contact the (<abbr title='Ministry of Justice'>MoJ</abbr>) Data Protection Officer if you:"
           list: |
             have a question about anything in this privacy notice
             think that your personal data has been misused or 
@@ -95,7 +95,7 @@ en:
             call_hours: "Monday to Friday, 9am to 4:30pm"
             call_costs_html: <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
         commissioner_office:
-          list_heading: "Contact the Information Commissioner's Office (ICO):"
+          list_heading_html: "Contact the Information Commissioner's Office (<abbr title='Information Commissioner's Office'>ICO</abbr>):"
           list: |
             to make a complaint
             for independent advice about data protection
