@@ -391,19 +391,12 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - hold_master_uat_notification:
-          requires:
-            - lint_checks
-      - hold_master_uat_approval:
-          type: approval
-          requires:
-            - hold_master_uat_notification
       - deploy_master_uat:
           requires:
-            - hold_master_uat_approval
+            - build_and_push
       - delete_uat_branch:
           requires:
-            - lint_checks
+            - deploy_master_uat
       - unit_tests:
           requires:
             - lint_checks
@@ -421,7 +414,6 @@ workflows:
       - hold_production_notification:
           requires:
             - deploy_staging
-            - delete_uat_branch
       - hold_production:
           type: approval
           requires:
