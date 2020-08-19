@@ -323,8 +323,6 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    mustermann (1.1.1)
-      ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
     nested_form (0.3.2)
     nesty (1.0.2)
@@ -379,8 +377,6 @@ GEM
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
-    rack-protection (2.0.8.1)
-      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -480,7 +476,6 @@ GEM
     ruby-progressbar (1.10.1)
     ruby-saml (1.11.0)
       nokogiri (>= 1.5.10)
-    ruby2_keywords (0.0.2)
     rubyzip (2.3.0)
     safe_yaml (1.0.5)
     safely_block (0.3.0)
@@ -519,9 +514,8 @@ GEM
     sidekiq-status (1.1.4)
       chronic_duration
       sidekiq (>= 3.0)
-    sidekiq_alive (2.0.2)
+    sidekiq_alive (2.0.3)
       sidekiq
-      sinatra
     simple_command (0.1.0)
     simplecov (0.19.0)
       docile (~> 1.1)
@@ -529,11 +523,6 @@ GEM
     simplecov-html (0.12.2)
     simplecov-rcov (0.2.3)
       simplecov (>= 0.4.1)
-    sinatra (2.0.8.1)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
-      tilt (~> 2.0)
     smart_properties (1.15.0)
     socksify (1.7.1)
     spring (2.1.0)
