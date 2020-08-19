@@ -24,7 +24,7 @@ RSpec.describe Providers::UseCcmsController, type: :request do
 
       it 'shows text to use CCMS' do
         subject
-        expect(response.body).to include(I18n.t('providers.use_ccms.show.title'))
+        expect(response.body).to include(I18n.t('providers.use_ccms.show.title_html'))
       end
     end
   end

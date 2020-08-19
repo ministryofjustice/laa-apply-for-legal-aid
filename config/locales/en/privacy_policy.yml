@@ -72,7 +72,7 @@ en:
           that your personal data is erased if there is no longer a justification for it
           a copy of any data-sharing agreements we have with other organisations
           information on how we instruct staff to collect, use or delete your personal data
-        info_html: If you have any of these requests, contact the Ministry of Justice <abbr title='Ministry of Justice'>MoJ</abbr> Data Protection Officer.
+        info_html: If you have any of these requests, contact the Ministry of Justice <abbr title='Ministry of Justice'>MOJ</abbr> Data Protection Officer.
         data_protection_office_contact_details:
           title: The Data Protection Officer
           email_address_html: <a href="mailto:casework@ico.org.uk">data.compliance@justice.gov.uk</a>
@@ -84,7 +84,7 @@ en:
       contact_or_complaint:
         header: Contact us or make a complaint
         data_protection_office:
-          list_heading_html: "Contact the (<abbr title='Ministry of Justice'>MoJ</abbr>) Data Protection Officer if you:"
+          list_heading_html: "Contact the (<abbr title='Ministry of Justice'>MOJ</abbr>) Data Protection Officer if you:"
           list: |
             have a question about anything in this privacy notice
             think that your personal data has been misused or 
