@@ -352,12 +352,6 @@ jobs:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
 
-  hold_master_uat_notification:
-    executor: notification-executor
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME - ONLY APPROVE IF THIS CODE WAS NEEDED FOR DAC TESTING\n There is a pending MASTER UAT approval for $CIRCLE_BRANCH"
-
 workflows:
   version: 2
   open_pr:
