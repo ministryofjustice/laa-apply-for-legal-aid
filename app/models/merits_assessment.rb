@@ -24,7 +24,7 @@ class MeritsAssessment < ApplicationRecord
 
   def submit!
     update!(submitted_at: Time.current) unless submitted_at?
-    ActiveSupport::Notifications.instrument 'dashboard.application_submitted', application_id: legal_aid_application.id
+    ActiveSupport::Notifications.instrument 'dashboard.merits_assessment_submitted'
   end
 
   def pretty_success_prospect
