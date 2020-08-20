@@ -104,7 +104,7 @@ RSpec.describe 'client received legal help', type: :request do
 
           it 'renders an error' do
             expect(response).to have_http_status(:ok)
-            expect(response.body).to include('id="error_explanation"')
+            expect(response.body).to include('data-module="govuk-error-summary"')
           end
         end
       end

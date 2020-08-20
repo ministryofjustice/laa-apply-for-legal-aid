@@ -1,3 +1,7 @@
+<%
+accessibility_error_notice = content_tag(:span, I18n.translate('helpers.accessibility.error'), class: 'govuk-visually-hidden')
+%>
+
 <div class="govuk-form-group">
   <div class="govuk-date-input__item <%= group_error_class %>">
 
@@ -22,7 +26,9 @@
       <% end %>
 
       <% if form.object.errors[field_name].any? %>
-        <%= content_tag(:span, form.object.errors[field_name].first, id: "#{field_name}-error".dasherize, class: ['govuk-error-message']) %>
+          <%= content_tag(:span, class: 'govuk-error-message', id: "#{field_name}-error".dasherize) do %>
+            <%= accessibility_error_notice + form.object.errors[field_name].first %>
+          <% end %>
       <% end %>
 
       <div class="govuk-date-input">

@@ -1,6 +1,6 @@
 <% if @errors %>
-  <div class="govuk-error-summary">
-    <h2 class="govuk-error-summary__title"><%= @errors %></h2>
+  <div class="govuk-error-summary" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    <h2 class="govuk-error-summary__title" id="error-summary-title"><%= @errors %></h2>
   </div>
 <% else %>
   <div class="worker-waiter" data-worker-id="<%= session[:worker_id] %>" align="center">

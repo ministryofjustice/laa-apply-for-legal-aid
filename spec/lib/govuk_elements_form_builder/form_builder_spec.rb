@@ -63,7 +63,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
       it 'includes an error message' do
         error_span = tag.previous_element
-        expect(error_span.content).to eq(nino_error)
+        expect(error_span.content).to include(nino_error)
         expect(error_span.name).to eq('span')
         expect(error_span.classes).to include('govuk-error-message')
         expect(tag.classes).to include(expected_error_class)
@@ -332,7 +332,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       let(:params) { [:understands_terms_of_court_order, options, { error: error_message }] }
 
       it 'the error message is shown' do
-        expect(parsed_html.at_css('span.govuk-error-message').content).to eq(error_message)
+        expect(parsed_html.at_css('span.govuk-error-message').content).to include(error_message)
       end
     end
 
@@ -366,7 +366,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       it 'includes an error message' do
         expect(fieldset['aria-describedby'].split(' ')).to include("#{attribute}-error")
         expect(span_error[:id]).to eq("#{attribute}-error")
-        expect(span_error.content).to eq(error_message)
+        expect(span_error.content).to include(error_message)
         expect(span_error.parent).to eq(fieldset)
       end
     end
