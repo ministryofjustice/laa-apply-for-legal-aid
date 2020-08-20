@@ -273,6 +273,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_merits_assessment_submitted_today do
+      after(:create) do |application|
+        create(:merits_assessment, :with_optional_text, submitted_at: Date.today, legal_aid_application: application)
+      end
+    end
+
     trait :with_merits_statement_of_case do
       after(:create) do |application|
         create(:statement_of_case, legal_aid_application: application)
