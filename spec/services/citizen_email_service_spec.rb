@@ -18,6 +18,7 @@ RSpec.describe CitizenEmailService do
         .and_return(message_delivery)
       expect(message_delivery).to receive(:deliver_later!)
       expect(application).to receive(:generate_secure_id).and_return(secure_id)
+      expect_any_instance_of(DashboardEventHandler).to receive(:applicant_emailed)
 
       subject.send_email
     end
