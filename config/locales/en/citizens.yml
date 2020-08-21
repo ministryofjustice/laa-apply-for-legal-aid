@@ -61,13 +61,13 @@ en:
         inset_text: We only use your financial information to support your legal aid application. We do not use it for anything else.
         summary_heading: What information will the LAA be able to see?
         true_layer_auth_error: Select yes if you agree to share your bank account information with the LAA
-        able_to_see: 
+        able_to_see:
           heading: "We'll be able to see your:"
           list: |
             personal details (such as your name and date of birth)
             bank statements and transaction details
             account balance
-        unable_to_see: 
+        unable_to_see:
           heading: "We will not:"
           list: |
             save your online banking username and password
@@ -102,14 +102,6 @@ en:
         page_heading: What regular payments do you make?
       update:
         none_selected: Select if you make any regular payments
-    information:
-      show:
-        heading: Give one-time access to your bank accounts
-        secure_service_redirect_info: We'll transfer you to a secure service to sign in to your online banking.
-        what_will_need_to_be_shared: You'll need to share all of your bank accounts with us, including any in joint names or with no money.
-        online_banking_info_heading: How we connect to your online banking
-        data_download_info: After you've signed in and authorised us to access your account, we download bank transactions covering the last 3 months.
-        banking_credentials_not_saved: We do not save your online banking username and password.
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'

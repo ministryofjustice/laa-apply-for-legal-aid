@@ -23,18 +23,18 @@ RSpec.describe Flow::BaseFlowService do
   before { flow_service_class.use_steps steps }
 
   describe '#forward_path' do
-    let(:current_step) { :information }
+    let(:current_step) { :accounts }
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
     it 'returns forward url' do
-      expect(subject.forward_path).to eq('/citizens/consent')
+      expect(subject.forward_path).to eq('/citizens/additional_accounts')
     end
 
     context 'with logic' do
-      let(:current_step) { :information }
+      let(:current_step) { :consents }
 
       it 'returns forward url' do
-        expect(subject.forward_path).to eq('/citizens/consent')
+        expect(subject.forward_path).to eq('/citizens/contact_provider')
       end
     end
 

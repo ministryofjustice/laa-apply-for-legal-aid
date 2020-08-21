@@ -26,8 +26,8 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
 
     context 'citizen' do
       it 'returns the path' do
-        url = check_answer_url_for(:citizens, :information)
-        expect(url).to eq '/citizens/information'
+        url = check_answer_url_for(:citizens, :consents)
+        expect(url).to eq '/citizens/consent'
       end
     end
   end

@@ -6,8 +6,6 @@ Feature: Citizen journey
     Then I visit the start of the financial assessment
     Then I should be on a page showing 'Share your financial information with us'
     Then I click link 'Start'
-    Then I should be on a page showing 'Give one-time access to your bank accounts'
-    Then I click link 'Continue'
     Then I should be on a page showing 'Do you agree to share your bank account information with the LAA?'
     Then I choose 'Yes'
     Then I click 'Continue'
