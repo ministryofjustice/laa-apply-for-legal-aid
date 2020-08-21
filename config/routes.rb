@@ -213,6 +213,7 @@ Rails.application.routes.draw do
       resources :delegated_confirmation, only: :index
       resource :merits_report, only: :show
       resource :means_report, only: :show
+      resource :non_passported_client_instructions, only: :show
     end
   end
 

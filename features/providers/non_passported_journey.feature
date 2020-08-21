@@ -253,6 +253,8 @@ Feature: Non-passported applicant journeys
   Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
     Given I start a non-passported application
     When I click 'Continue'
+    Then I should be on the 'non_passported_client_instructions' page showing 'What your client has to do'
+    When I click link 'Continue'
     Then I should be on the 'does-client-use-online-banking' page showing 'Is the following correct?'
     Then I choose 'Yes'
     And I click 'Save and continue'

@@ -429,6 +429,16 @@ en:
         income_details_heading: Income
         debits-section-heading: Outgoings
         deductions-section-heading: Deductions
+    non_passported_client_instructions:
+      show:
+        h1-heading: What your client has to do
+        give_client_access: "We'll give your client access to the service and ask them to:"
+        actions:
+          list: |
+            sign in to online banking using a secure third-party service
+            give us one-time access to their bank accounts so we can download 3 months of bank statements
+            tell us which types of income they receive and regular payments they make
+        next: Once they've done this, you'll need to categorise their bank transactions so we can calculate their disposable income.
     offline_accounts:
         show:
           h1-heading: Which bank accounts does your client have?

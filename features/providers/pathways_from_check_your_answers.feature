@@ -6,7 +6,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'Is the following correct?'
+    Then I should be on a page showing 'What your client has to do'
 
   @javascript @vcr
   Scenario: I do not use delegated functions for a passported journey
@@ -42,7 +42,7 @@ Feature: Pathways from check your answers
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is the following correct?'
+    Then I should be on a page showing 'What your client has to do'
 
   @javascript @vcr
   Scenario: I use delegated functions and a substantive application for a passported journey
