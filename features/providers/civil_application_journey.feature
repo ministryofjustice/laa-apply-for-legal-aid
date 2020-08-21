@@ -751,9 +751,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
     Given I start a non-passported application
-    Then I should be on a page showing "How we checked your client's benefits status"
-    Then I click How we checked your client's benefits status
-    Then I should be on a page showing "Change your client's details"
+    Then I should be on a page showing "We used the following details to check your client's benefits status with the DWP"
     When I click link "Change your client's details"
     Then I should be on a page showing "Enter your client's details"
     Then I enter name 'Kyle', 'Walker'

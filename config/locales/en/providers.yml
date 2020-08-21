@@ -166,27 +166,24 @@ en:
             the chances of a successful outcome
     check_benefits:
       check_benefits_result:
+        details_used: "We used the following details to check your client's benefits status with the DWP:"
         what_happens_next: What happens next
         because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
         you_need_to: "You'll need to:"
         negative_result:
           tab_title: Your client must complete a financial assessment
           title: "We need to check your client's financial eligibility"
-          must_answer_financial_questions: "If your client uses online banking and agrees to share their financial information with us, we'll ask them to:"
-          actions:
-            list: |
-              share their bank transactions from the past 3 months
-              tell us about their income and regular payments
-          provide_access/details: If they do not, you'll need to continue your application in CCMS
         positive_result:
           tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
           must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
           provide_access/details: provide details of the case
-      how_we_checked:
+      how_we_checked: &how_we_checked
         how_we_checked: How we checked your client's benefits status
         details_used: "We used the following details to check your client's benefits status with the DWP:"
         change_client_details_html: <a class="black_text_on_focus" href="applicant_details">Change your client's details</a> if you entered them incorrectly.
+      applicant_details:
+        <<: *how_we_checked
       use_ccms:
         accept_only: We currently only accept applications for people receiving one of these benefits.
         apply_in_ccms: Apply using CCMS
