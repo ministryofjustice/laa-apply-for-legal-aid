@@ -13,13 +13,11 @@
 
   <p class="govuk-body"><%= t('.we_need_to_check') %></p>
 
-  <p class="govuk-body"><%= t('.ask_you_to') %></p>
+  <h2 class="govuk-heading-m"><%= t('.how_we_do_this_heading') %></p>
 
-  <%= list_from_translation_path '.legal_aid_applications.index.' %>
-
-  <p class="govuk-body"><%= t('.need_to_tell_us') %></p>
-
-  <%= list_from_translation_path '.legal_aid_applications.index.tell_us' %>
+  <% (1..5).each do |number| %>
+    <p class="govuk-body"><%= t(".how_we_do_this_body_#{number}") %></p>
+  <% end %>
 
   <h2 class="govuk-heading-m"><%= t('.what_you_will_need') %></h2>
 

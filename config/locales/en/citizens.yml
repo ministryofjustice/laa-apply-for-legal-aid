@@ -105,21 +105,18 @@ en:
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'
-        heading_1: Share your financial information with us
+        heading_1: Your legal aid application
+        how_we_do_this_heading: How we do this
+        how_we_do_this_body_1: The Legal Aid Agency (LAA) uses a secure third-party service to connect you to your online banking.
+        how_we_do_this_body_2: Once you're signed in to online banking, we ask you to give us one-time access to your bank accounts.
+        how_we_do_this_body_3: If you agree, we download your bank statements from the past 3 months and share them with your solicitor.
+        how_we_do_this_body_4: Your solicitor will put your transactions into categories and tell us more about your financial situation.
+        how_we_do_this_body_5: This helps us decide if you can get legal aid or you need to pay towards the costs.
         name: 'Name:'
         online_banking_details: Your online banking sign in details.
         what_you_will_need: What you'll need
         we_need_to_check: We need to check if you qualify financially for legal aid.
-        ask_you_to: "We'll ask you to:"
-        list: |
-          sign in to your online banking via a secure service
-          share 3 months of bank transactions with us
-        tell_us:
-          list: |
-            income you receive
-            regular payments you make
         your_solicitor: 'Your solicitor:'
-        need_to_tell_us: "You'll also need to tell us about any:"
     means_test_results:
       show:
         page-heading: What happens next
