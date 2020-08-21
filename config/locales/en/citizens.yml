@@ -64,9 +64,10 @@ en:
         able_to_see:
           heading: "We'll be able to see your:"
           list: |
-            personal details (such as your name and date of birth)
+            account details
             bank statements and transaction details
-            account balance
+            account balances
+            Direct Debits and standing orders
         unable_to_see:
           heading: "We will not:"
           list: |
