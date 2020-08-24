@@ -116,11 +116,6 @@ RSpec.describe DashboardEventHandler do
 
   context 'applicant_emailed' do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-    before do
-      # allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)
-      # allow_any_instance_of(DashboardEventHandler).to receive(:provider_created)
-      # allow_any_instance_of(DashboardEventHandler).to receive(:application_created)
-    end
 
     it 'fires the applicant_email job' do
       expect(Dashboard::ApplicantEmailJob).to receive(:perform_later).at_least(1).times
