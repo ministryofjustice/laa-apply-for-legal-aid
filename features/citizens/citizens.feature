@@ -76,6 +76,8 @@ Feature: Citizen journey
     Then I should be on a page showing "Declaration"
     Then I click "Agree and submit"
     Then I should be on a page showing "You've shared your financial information"
+    Then I click link "feedback"
+    Then I should be on a page showing "How easy or difficult was it to use this service?"
 
   @javascript
   Scenario: I want to change income types via the check your answers page
