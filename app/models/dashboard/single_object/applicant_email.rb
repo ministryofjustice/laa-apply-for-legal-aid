@@ -39,11 +39,11 @@ module Dashboard
       end
 
       def log_start_message
-        log_message("***** Feedback starting job at #{Time.now} for dataset: #{dataset_name}")
+        log_message("***** ApplicantEmail starting job at #{Time.now} for dataset: #{dataset_name}")
       end
 
       def log_data_message
-        log_message "***** Feedback sending: #{build_row} job at #{Time.now} for dataset: #{dataset_name}"
+        log_message "***** ApplicantEmail sending: #{build_row} job at #{Time.now} for dataset: #{dataset_name}"
       end
 
       def log_message(message)
