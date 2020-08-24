@@ -113,4 +113,13 @@ RSpec.describe DashboardEventHandler do
       merits_assessment.submit!
     end
   end
+
+  context 'applicant_emailed' do
+    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+
+    it 'fires the applicant_email job' do
+      expect(Dashboard::ApplicantEmailJob).to receive(:perform_later).at_least(1).times
+      CitizenEmailService.new(legal_aid_application).send_email
+    end
+  end
 end

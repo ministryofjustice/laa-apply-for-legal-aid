@@ -8,6 +8,7 @@ class CitizenEmailService
   def send_email
     # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
     NotifyMailer.citizen_start_email(*mailer_args).deliver_later!
+    ActiveSupport::Notifications.instrument 'dashboard.applicant_emailed', legal_aid_application_id: @application.id
   end
 
   private

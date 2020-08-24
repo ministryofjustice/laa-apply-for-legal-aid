@@ -33,7 +33,8 @@ class DashboardEventHandler
   end
 
   def valid_events
-    %w[application_created provider_created ccms_submission_saved firm_created feedback_created merits_assessment_submitted delegated_functions_used declined_open_banking]
+    %w[application_created provider_created ccms_submission_saved firm_created feedback_created
+       merits_assessment_submitted delegated_functions_used declined_open_banking applicant_emailed]
   end
 
   def application_created
@@ -68,5 +69,9 @@ class DashboardEventHandler
 
   def delegated_functions_used
     Dashboard::UpdaterJob.perform_later('Applications')
+  end
+
+  def applicant_emailed
+    Dashboard::ApplicantEmailJob.perform_later(LegalAidApplication.find(payload[:legal_aid_application_id]))
   end
 end
