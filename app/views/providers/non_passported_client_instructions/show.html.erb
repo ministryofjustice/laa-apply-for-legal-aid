@@ -1,0 +1,11 @@
+<%= page_template page_title: t('.h1-heading') do %>
+  <%= simple_format t('.give_client_access') %>
+
+  <%= list_from_translation_path '.non_passported_client_instructions.show.actions' %>
+
+  <%= simple_format t('.next') %>
+
+  <div class="govuk-!-padding-bottom-4"></div>
+
+  <%= next_action_link continue_text: t('generic.continue') %>
+<% end %>

@@ -7,14 +7,12 @@
       <% if result_namespace == '.negative_result' %>
         <p class="govuk-body">
           <%= t '.because_not_receiving_benefits' %>
-          <%= render 'how_we_checked' %>
         </p>
-
       <% end %>
-      <h2 class="govuk-heading-m">
-        <%= t '.what_happens_next' %>
-      </h2>
       <% if result_namespace == '.positive_result' %>
+        <h2 class="govuk-heading-m">
+          <%= t '.what_happens_next' %>
+        </h2>
         <p class="govuk-body">
           <%= t '.you_need_to' %>
         </p>
@@ -23,9 +21,7 @@
           <li><%= t "#{result_namespace}.provide_access/details" %></li>
         </ul>
       <% else %>
-        <p class="govuk-body"><%= t "#{result_namespace}.must_answer_financial_questions" %></p>
-        <%= list_from_translation_path '.check_benefits.check_benefits_result.negative_result.actions' %>
-        <p class="govuk-body"><%= t "#{result_namespace}.provide_access/details" %></p>
+        <%= render 'applicant_details' %>
       <% end %>
     </div>
     <%= next_action_buttons_with_form(
