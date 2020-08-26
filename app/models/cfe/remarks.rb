@@ -1,5 +1,7 @@
 module CFE
   class Remarks
+    REASONS_WITHOUT_CATEGORIES = [:residual_balance].freeze
+
     def initialize(hash)
       @hash = hash
     end
@@ -44,7 +46,7 @@ module CFE
       result = Hash.new([])
       @hash.each do |category, reason_hash|
         reason_hash.each_key do |reason|
-          result[reason] += [category]
+          result[reason] += [category] unless REASONS_WITHOUT_CATEGORIES.include? reason
         end
       end
       result
