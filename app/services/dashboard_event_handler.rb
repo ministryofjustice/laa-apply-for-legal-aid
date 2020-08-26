@@ -33,7 +33,7 @@ class DashboardEventHandler
   end
 
   def valid_events
-    %w[application_created provider_created ccms_submission_saved firm_created feedback_created
+    %w[application_created provider_created provider_updated ccms_submission_saved firm_created feedback_created
        merits_assessment_submitted delegated_functions_used declined_open_banking applicant_emailed]
   end
 
@@ -43,6 +43,11 @@ class DashboardEventHandler
 
   def provider_created
     Dashboard::UpdaterJob.perform_later('DailyNewProviders')
+    provider_updated
+  end
+
+  def provider_updated
+    Dashboard::ProviderDataJob.perform_later(Provider.find(payload[:provider_id]))
   end
 
   def ccms_submission_saved
