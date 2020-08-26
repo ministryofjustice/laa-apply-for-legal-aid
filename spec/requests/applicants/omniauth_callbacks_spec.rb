@@ -86,12 +86,6 @@ RSpec.describe 'applicants omniauth call back', type: :request do
         allow_any_instance_of(Logger).to receive(:add)
       end
 
-      it 'redirects to error page' do
-        subject
-        follow_redirect!
-        expect(response).to redirect_to(error_path(:access_denied))
-      end
-
       it 'does not add page to history' do
         subject
         expect(session[:page_history]).not_to include(applicant_true_layer_omniauth_callback_path)
