@@ -3,12 +3,12 @@ require Rails.root.join 'app/controllers/applicants/omniauth_callbacks_controlle
 
 OmniAuth.config.allowed_request_methods = %i[post get]
 OmniAuth.config.logger = Rails.logger
-
 # normally in dev mode, if the user fails to authenticate, an excesption is raised.
 # This block here makes sure that dev behaviour is the same as production, i.e.
 # is redirectied to /auth/failure
 #
 OmniAuth.config.on_failure = proc do |env|
+  Raven.capture_message("Omniauth error: #{env['omniauth.error']}")
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end
 
