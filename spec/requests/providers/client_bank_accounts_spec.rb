@@ -34,7 +34,56 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
       end
 
       it 'shows the client bank account name and balance' do
-        expect(response).to include
+        ap 1111
+        ap bank_provider
+        ap bank_account
+        subject
+        expect(unescaped_response_body).to include(bank_provider.name)
+        expect(unescaped_response_body).to include(bank_account.balance)
+      end
+    end
+  end
+
+  describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
+    let(:offline_savings_account) { 'yes' }
+    let(:submit_button) { {} }
+    let(:params) do
+      {
+          offline_savings_account: offline_savings_account
+      }
+    end
+
+    subject do
+      patch(
+          "/providers/applications/#{application_id}/client_bank_account",
+          params: params.merge(submit_button)
+      )
+    end
+
+    context 'the provider is authenticated' do
+      before do
+        login_as provider
+        subject
+      end
+
+      it 'redirects to the non-passported offline savings account' do
+        expect(response).to redirect_to(providers_legal_aid_application_offline_savings_account_path(legal_aid_application))
+      end
+
+      context 'neither option is chosen' do
+        let(:params) { {} }
+
+        it 'shows an error' do
+          expect(unescaped_response_body).to include(I18n.t('providers.client_bank_accounts.show.error'))
+        end
+      end
+
+      context 'The NO option is chosen' do
+        let(:offline_savings_account) { 'no' }
+
+        it 'redirects to the savings and investments page' do
+          expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+        end
       end
     end
   end
