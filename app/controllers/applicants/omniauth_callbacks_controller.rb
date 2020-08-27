@@ -8,11 +8,8 @@ module Applicants
     skip_back_history_for :true_layer, :failure
 
     def true_layer # rubocop:disable Metrics/AbcSize
-      puts ">>>>>>>>>>>> OMNIAUTH CALLBACK #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-      ap request.env['omniauth.auth']
-      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-      ap params.to_unsafe_hash
-      puts ">>>>>>>>>>>> ^^^^^^^^^^^^^^^^ #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+      Raven.capture_message("Omniauth callback : request.env['onmiauth.auth'] #{request.env['omniauth.auth'].inspect}")
+      Raven.capture_message("Omniauth callback : params: #{params.to_unsafe_hash.inspect}")
 
       unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')

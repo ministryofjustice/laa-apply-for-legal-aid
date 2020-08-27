@@ -4,11 +4,8 @@ class AuthController < ApplicationController
   def failure # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     # redirect to consents page if it was an applicant failing to login at his bank
     #
-    puts ">>>>>>>>>>>> OMNIAUTH FAILYER #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-    ap request.env['omniauth.auth']
-    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-    ap params.to_unsafe_hash
-    puts ">>>>>>>>>>>> ^^^^^^^^^^^^^^^^ #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+    Raven.capture_message("Omniauth failure : request.env['onmiauth.auth'] #{request.env['omniauth.auth'].inspect}")
+    Raven.capture_message("Omniauth failure : params: #{params.to_unsafe_hash.inspect}")
 
     if auth_error_during_bank_login?
       begin
@@ -34,3 +31,7 @@ class AuthController < ApplicationController
     URI(origin).path != '/citizens/banks'
   end
 end
+
+
+
+
