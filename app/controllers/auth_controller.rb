@@ -31,7 +31,3 @@ class AuthController < ApplicationController
     URI(origin).path != '/citizens/banks'
   end
 end
-
-
-
-
