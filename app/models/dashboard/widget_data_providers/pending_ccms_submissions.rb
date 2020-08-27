@@ -23,7 +23,7 @@ module Dashboard
       end
 
       def self.pending_submissions
-        CCMS::Submission.where(created_at: 6.days.ago.beginning_of_day..Time.now).where.not(aasm_state: %w[failed completed]).count
+        CCMS::Submission.where.not(aasm_state: %w[failed completed]).count
       end
     end
   end
