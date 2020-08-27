@@ -8,6 +8,12 @@ module Applicants
     skip_back_history_for :true_layer, :failure
 
     def true_layer
+      puts ">>>>>>>>>>>> OMNIAUTH CALLBACK #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+      ap request.env['omniauth.auth']
+      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+      ap params.to_unsafe_hash
+      puts ">>>>>>>>>>>> ^^^^^^^^^^^^^^^^ #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+
       unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
         Raven.capture_exception(MissingApplicantError.new('Unable to find applicant on return from TrueLayer'))
