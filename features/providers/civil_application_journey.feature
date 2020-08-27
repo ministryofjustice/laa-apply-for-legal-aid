@@ -658,6 +658,7 @@ Feature: Civil application journeys
   Scenario: View feedback form within provider journey
     Given I start the journey as far as the applicant page
     Then I click link "feedback"
+    Then I should be on a page showing "How easy or difficult was it to apply for legal aid using the new service?"
     Then I click link "Back"
     Then I should be on the Applicant page
 

@@ -2,6 +2,7 @@ class FeedbackController < ApplicationController
   before_action :update_return_path
 
   def new
+    @journey = source
     @feedback = Feedback.new
   end
 
