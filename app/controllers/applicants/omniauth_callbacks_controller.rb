@@ -7,7 +7,7 @@ module Applicants
 
     skip_back_history_for :true_layer, :failure
 
-    def true_layer
+    def true_layer # rubocop:disable Metrics/AbcSize
       puts ">>>>>>>>>>>> OMNIAUTH CALLBACK #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
       ap request.env['omniauth.auth']
       puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"

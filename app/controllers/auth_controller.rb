@@ -1,7 +1,7 @@
 class AuthController < ApplicationController
   class AuthorizationError < StandardError; end
 
-  def failure
+  def failure # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     # redirect to consents page if it was an applicant failing to login at his bank
     #
     puts ">>>>>>>>>>>> OMNIAUTH FAILYER #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
