@@ -18,9 +18,9 @@ module Flow
         # Vehicle steps here (see ProviderVehicle)
         client_bank_accounts: {
             path: ->(application) { urls.providers_legal_aid_application_client_bank_account_path(application) },
-            forward: ->(_, has_offline_savings_account) { has_offline_savings_account ? :offline_savings_account : :savings_and_investments }
+            forward: ->(_, has_offline_savings_account) { has_offline_savings_account ? :offline_savings_accounts : :savings_and_investments }
         },
-        offline_savings_account: {
+        offline_savings_accounts: {
             path: ->(application) { urls.providers_legal_aid_application_offline_savings_account_path(application) },
             forward: :savings_and_investments,
             # check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers }
