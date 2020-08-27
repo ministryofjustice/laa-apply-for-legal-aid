@@ -25,13 +25,16 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/vehicle/regular_use' do
+    # TO DO
+    # add in tests for passported applications, these tests work for non-passported cases
+    # passported will skip client bank account and go to :offline_accounts
     let(:used_regularly) { true }
     let(:params) do
       {
         vehicle: { used_regularly: used_regularly.to_s }
       }
     end
-    let(:next_url) { providers_legal_aid_application_offline_account_path(legal_aid_application) }
+    let(:next_url) { providers_legal_aid_application_client_bank_account_path(legal_aid_application) }
     let(:submit_button) { {} }
 
     subject do
@@ -59,10 +62,14 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
         expect(vehicle.reload).not_to be_used_regularly
       end
 
-      it 'redirects to next step' do
+      it 'redirects to next step in the non-passported journey' do
         subject
         expect(response).to redirect_to(next_url)
       end
+
+      # TO DO
+      # add in tests for passported applications, these tests work for non-passported cases
+      # passported will skip client bank account and go to :offline_accounts
     end
 
     context 'without value' do

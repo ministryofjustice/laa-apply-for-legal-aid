@@ -432,8 +432,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -479,8 +479,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
