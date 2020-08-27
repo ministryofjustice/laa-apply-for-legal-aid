@@ -7,10 +7,11 @@ module Providers
     def update
       if params[:offline_savings_account].in?(%w[yes no])
         go_forward(params[:offline_savings_account] == 'yes')
-        if params[:offline_savings_account] == 'no'
-          legal_aid_application.savings_amount[:offline_savings_accounts] = nil
-          legal_aid_application.savings_amount.save
-        end
+        # The of statement below is used to delete the value for offline_savings_account if the user returns to the page from CYA and selects the No radio button
+        # if params[:offline_savings_account] == 'no'
+        #   legal_aid_application.savings_amount[:offline_savings_accounts] = nil
+        #   legal_aid_application.savings_amount.save
+        # end
       else
         @error = { 'offline_savings_account-error' => I18n.t('providers.client_bank_accounts.show.error') }
         applicant_accounts
