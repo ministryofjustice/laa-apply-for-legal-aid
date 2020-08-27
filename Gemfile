@@ -132,7 +132,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 4.3'
+  gem 'shoulda-matchers', '~> 4.4'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'timecop'
