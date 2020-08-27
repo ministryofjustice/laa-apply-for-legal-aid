@@ -46,6 +46,8 @@ en:
     check_answers:
       assets:
         assets:
+          offline_accounts: Your client's bank accounts
+          offline_savings: Savings accounts your client cannot access online
           other_assets: Other assets
           outstanding_mortgage: What is the outstanding mortgage on your client's home?
           own_home: Does your client own the home they live in?
