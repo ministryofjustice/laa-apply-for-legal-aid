@@ -4,7 +4,6 @@ module Applicants
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     class MissingApplicantError < StandardError; end
     before_action :authenticate_applicant!, only: [:true_layer]
-
     skip_back_history_for :true_layer, :failure
 
     def true_layer
