@@ -1,6 +1,5 @@
 module Providers
   class OfflineSavingsAccountsController < ProviderBaseController
-
     def show
       @form = SavingsAmounts::OfflineSavingsAccountsForm.new(model: savings_amount)
     end

@@ -242,11 +242,11 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def offline_savings?
-    (savings_amount&.offline_savings_accounts.present?)
+    savings_amount&.offline_savings_accounts.present?
   end
 
   def offline_savings_value
-    (savings_amount.offline_savings_accounts)
+    savings_amount.offline_savings_accounts
   end
 
   def other_assets?

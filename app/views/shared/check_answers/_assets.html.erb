@@ -69,7 +69,7 @@
   <%= render 'shared/check_answers/vehicles', read_only: read_only %>
 
   <% if @legal_aid_application.offline_savings? %>
-    <h2 class="govuk-heading-m"><%= t('.assets.offline_accounts')%></h2>
+    <h2 class="govuk-heading-m"><%= t('.assets.offline_accounts') %></h2>
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
       <%= check_answer_link(
@@ -79,9 +79,9 @@
               answer: number_to_currency(@legal_aid_application.offline_savings_value),
               read_only: read_only,
               align_right: read_only
-          )  %>
+          ) %>
     </dl>
-  <% end  %>
+  <% end %>
 
   <%= check_answer_one_change_link(
         name: :savings_and_investments,
