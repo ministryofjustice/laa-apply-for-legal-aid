@@ -1,0 +1,6 @@
+<%= page_template page_title: t('.h1-heading'), template: :basic, show_errors_for: @form do %>
+  <%= render  'shared/forms/offline_savings_accounts_form',
+              model: @form,
+              show_draft: true,
+              form_path: providers_legal_aid_application_offline_savings_account_path(@legal_aid_application) %>
+<% end %>
