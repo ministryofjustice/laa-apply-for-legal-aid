@@ -3,7 +3,11 @@
   <%= govuk_form_group show_error_if: @form.errors.present? do %>
 
     <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header page_title %>
+      <%= govuk_fieldset_header do %>
+        <h1 class="govuk-fieldset__heading">
+          <%= label_tag(:offline_savings_accounts, page_title) %>
+        </h1>
+      <% end %>
 
       <%= form.govuk_text_field(
               :offline_savings_accounts,

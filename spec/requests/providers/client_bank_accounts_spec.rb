@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Providers::ClientBankAccountsController, type: :request do
   let(:applicant) { create :applicant }
-  let(:bank_provider) { create :bank_provider, applicant: applicant }
-  let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant }
+  let!(:bank_provider) { create :bank_provider, applicant: applicant }
+  let!(:bank_account) { create :bank_account, bank_provider: bank_provider }
+  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_savings_amount, applicant: applicant }
   let!(:savings_amount) { create :savings_amount }
   let(:application_id) { legal_aid_application.id }
   let!(:provider) { legal_aid_application.provider }
@@ -34,12 +34,9 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
       end
 
       it 'shows the client bank account name and balance' do
-        ap 1111
-        ap bank_provider
-        ap bank_account
         subject
         expect(unescaped_response_body).to include(bank_provider.name)
-        expect(unescaped_response_body).to include(bank_account.balance)
+        expect(response.body).to include(bank_account.balance.to_s(:delimited))
       end
     end
   end

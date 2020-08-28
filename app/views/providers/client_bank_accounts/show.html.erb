@@ -15,9 +15,14 @@
     </div>
   <% end %>
 
-  <%= form_with(model: @form, url: providers_legal_aid_application_client_bank_account_path, method: :patch, local: true) do |form| %>
+  <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_client_bank_account_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
 
-    <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
+    <%= govuk_fieldset_header page_title %>
 
     <p class="govuk-body"><%= t('.previously_told') %></p>
 
