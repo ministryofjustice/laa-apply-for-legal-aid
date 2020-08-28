@@ -49,14 +49,14 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
     let(:submit_button) { {} }
     let(:params) do
       {
-          offline_savings_account: offline_savings_account
+        offline_savings_account: offline_savings_account
       }
     end
 
     subject do
       patch(
-          "/providers/applications/#{application_id}/client_bank_account",
-          params: params.merge(submit_button)
+        "/providers/applications/#{application_id}/client_bank_account",
+        params: params.merge(submit_button)
       )
     end
 
