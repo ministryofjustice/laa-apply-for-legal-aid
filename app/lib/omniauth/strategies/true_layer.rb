@@ -2,10 +2,11 @@
 # Oauth2 authentication via TrueLayer.
 # Note that you need to restart the server to apply changes to this file.
 require 'omniauth-oauth2'
+require_relative 'laa_oauth2'
 
 module OmniAuth
   module Strategies
-    class TrueLayer < OmniAuth::Strategies::OAuth2
+    class TrueLayer < OmniAuth::Strategies::LAAOAuth2
       option :name, :true_layer
 
       option :client_options,
@@ -20,6 +21,17 @@ module OmniAuth
         extra_params[:consent_id] = consent_id if consent_id
 
         super.merge(extra_params)
+      end
+
+      def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+        puts ">>>>>>>>> CALLBACK PHASE #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
+        puts ">>>>>>>>> request params #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
+        pp request.params
+        puts ">>>>>>>>> session #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
+        pp session['omniauth.state']
+        puts ">>>>>>>>> calling super #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
+
+        super
       end
 
       def token_params
