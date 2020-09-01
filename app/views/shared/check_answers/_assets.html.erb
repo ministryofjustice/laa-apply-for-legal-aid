@@ -68,7 +68,7 @@
 <section class="print-no-break">
   <%= render 'shared/check_answers/vehicles', read_only: read_only %>
 
-  <% if @legal_aid_application.offline_savings? %>
+  <% if @legal_aid_application.non_passported? &&  @legal_aid_application.offline_savings? %>
     <h2 class="govuk-heading-m"><%= t('.assets.offline_accounts') %></h2>
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
