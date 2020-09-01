@@ -11,7 +11,7 @@ module CapitalHelper
   end
 
   def capital_amount_items(capital, locale_namespace, percentage_values)
-    capital&.amount_attributes&.map do |attribute, amount|
+    capital&.amount_attributes&.reject { |c| c == 'offline_savings_accounts' }&.map do |attribute, amount|
       next unless amount
 
       type = percentage_values.include?(attribute.to_sym) ? :percentage : :currency
