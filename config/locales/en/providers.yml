@@ -173,6 +173,12 @@ en:
         negative_result:
           tab_title: Your client must complete a financial assessment
           title: "We need to check your client's financial eligibility"
+          must_answer_financial_questions: "If your client uses online banking and agrees to share their financial information with us, we'll ask them to:"
+          actions:
+            list: |
+              share their bank transactions from the past 3 months
+              tell us about their income and regular payments
+          provide_access_html: "If they do not, you'll need to continue your application in <abbr title='Client and Cost Management System'>CCMS</abbr>"
         positive_result:
           tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
@@ -186,7 +192,7 @@ en:
         <<: *how_we_checked
       use_ccms:
         accept_only: We currently only accept applications for people receiving one of these benefits.
-        apply_in_ccms: Apply using CCMS
+        apply_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         benefits:
           list: |
@@ -195,7 +201,7 @@ en:
             Jobseeker’s Allowance (JSA)
             Pension Credit (Guarantee Credit)
             Universal Credit
-        title: You need to use CCMS for this application
+        title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         we_checked: 'We checked with the DWP and your client does not receive:'
     check_merits_answers:
       show:
@@ -305,7 +311,7 @@ en:
         client_sign: Get your client to sign it.
         keep_file: Keep it on file.
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
-        decision_in_ccms: We'll let you know our decision in CCMS.
+        decision_in_ccms_html: We'll let you know our decision in <abbr title='Client and Cost Management System'>CCMS</abbr>.
         feedback_link_html: '<a href="%{url}" class="govuk_link">Give feedback</a> to help us improve this service.'
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
@@ -355,7 +361,7 @@ en:
         search_button: Search
       legal_aid_applications:
         applicant_name: Name
-        application_ref: LAA reference
+        application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         created_at: Start date
         certificate_type: Certificate type
         status: Status
@@ -449,9 +455,8 @@ en:
       show:
         heading: Is the following correct?
         info: "Your client:"
-        list: |
-          uses online banking for all of their bank accounts
-          will give the LAA one-time access to their bank accounts
+        list_1: uses online banking for all of their bank accounts
+        list_2_html: will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
@@ -560,7 +565,7 @@ en:
             has a National Insurance number
             is single (unless their partner is the opponent in the case)
           title: 'You can only use this service if your client:'
-        use_ccms_para: Use the Client and Cost Management System (CCMS) for all other applications.
+        use_ccms_para_html: Use the Client and Cost Management System (<abbr title='Client and Cost Management System'>CCMS</abbr>) for all other applications.
     start_merits_assessments:
       show:
         h1-heading: Provide details of the case
@@ -597,8 +602,8 @@ en:
         back_home: Back to your applications
         heading: Application for civil legal aid certificate
         client_name: Client
-        case_reference: LAA reference
-        ccms_reference: CCMS reference
+        case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
+        ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
         print_button: Print application
         client_details_heading: Client details
         proceedings_details_heading: What you're applying for
@@ -650,9 +655,9 @@ en:
         sorted: Sorted
     use_ccms:
       show:
-        title: You need to complete this application in CCMS
+        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
         sub_heading: "You cannot continue using this service if your client does not:"
-        continue_in_ccms: Continue in CCMS
+        continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         online_banking_consent:
           list: |

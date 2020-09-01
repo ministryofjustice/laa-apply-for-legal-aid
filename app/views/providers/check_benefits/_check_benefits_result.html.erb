@@ -18,10 +18,16 @@
         </p>
         <ul class="govuk-list govuk-list--bullet">
           <li><%= t "#{result_namespace}.must_answer_financial_questions" %></li>
-          <li><%= t "#{result_namespace}.provide_access/details" %></li>
+          <li><%= t "#{result_namespace}.provide_access_html" %></li>
         </ul>
       <% else %>
+
         <%= render 'applicant_details' %>
+
+        <p class="govuk-body"><%= t "#{result_namespace}.must_answer_financial_questions" %></p>
+        <%= list_from_translation_path '.check_benefits.check_benefits_result.negative_result.actions' %>
+        <p class="govuk-body"><%= t "#{result_namespace}.provide_access_html" %></p>
+
       <% end %>
     </div>
     <%= next_action_buttons_with_form(

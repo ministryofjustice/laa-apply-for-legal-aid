@@ -18,7 +18,7 @@ en:
         have your legal aid stopped and have to pay back the costs
     application_ref:
       apply_ref: 'Apply service case reference:'
-      ccms_ref: 'CCMS case reference:'
+      ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"
     means_report:
 
 

@@ -57,10 +57,12 @@ en:
         they_will_check: They will check whether you qualify for legal aid by asking about your finances.
     consents:
       show:
-        title: Do you agree to share your bank account information with the LAA?
+        title_html: Do you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>?
         inset_text: We only use your financial information to support your legal aid application. We do not use it for anything else.
         summary_heading: What information will the LAA be able to see?
         true_layer_auth_error: Select yes if you agree to share your bank account information with the LAA
+        summary_heading_html: What information will the <abbr title='Legal Aid Agency'>LAA</abbr> be able to see?
+        true_layer_auth_error_html: Select yes if you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>
         able_to_see:
           heading: "We'll be able to see your:"
           list: |

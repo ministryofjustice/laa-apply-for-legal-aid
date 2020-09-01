@@ -60,7 +60,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       let(:params) { { legal_aid_application: { open_banking_consent: nil } } }
 
       it 'returns an error' do
-        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.open_banking_consents.citizens.blank'))
+        expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.open_banking_consents.citizens.blank_html'))
       end
     end
   end

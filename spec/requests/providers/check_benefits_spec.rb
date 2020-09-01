@@ -6,7 +6,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
     EXPECTED_TEXTS = {
       continue: 'receives benefits that qualify for legal aid',
-      ccms: 'You need to use CCMS for this application',
+      ccms: "You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application",
       need_to_check: 'We need to check your client'
     }.freeze
 

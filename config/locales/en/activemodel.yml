@@ -171,7 +171,7 @@ en:
               providers:
                 blank: Select yes if your client uses online banking and agrees to share their bank accounts
               citizens:
-                blank: Select yes if you agree to share your bank account information with the LAA
+                blank_html: Select yes if you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               greater_than_or_equal_to: Mortgage amount must be 0 or more
