@@ -385,12 +385,14 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - deploy_master_uat:
-          requires:
-            - build_and_push
+      # Disable deploying master UAT while security tets is ongoing.
+      # - deploy_master_uat:
+      #     requires:
+      #       - build_and_push
       - delete_uat_branch:
           requires:
-            - deploy_master_uat
+            - build_and_push
+          #   - deploy_master_uat
       - unit_tests:
           requires:
             - lint_checks
