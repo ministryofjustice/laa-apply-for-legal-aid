@@ -2,7 +2,7 @@
   <%= form.radio_button :provider_id, bank[:provider_id], class: 'govuk-radios__input' %>
   <%= form.label :provider_id, bank[:display_name], value: bank[:provider_id], class: 'govuk-label govuk-radios__label' do %>
     <div class="bank-logo">
-      <%= image_tag(bank[:logo_url], alt: bank[:display_name]) if bank[:logo_url] %>
+      <%= image_tag(bank[:logo_url], alt:'') if bank[:logo_url] %>
     </div>
     <span><%= bank[:display_name] %></span>
   <% end %>

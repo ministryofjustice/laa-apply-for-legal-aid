@@ -4,7 +4,7 @@
   </div>
 <% else %>
   <div class="worker-waiter" data-worker-id="<%= session[:worker_id] %>" align="center">
-    <%= image_tag('loading.gif') %>
+    <%= image_tag('loading.gif',  alt:'Page Loading') %>
     <p class="govuk-body-l"><%= t '.retrieving_transactions' %></p>
   </div>
 <% end %>
