@@ -244,7 +244,7 @@ en:
           heading: Covered under an emergency certificate
         section_substantive:
           heading: Covered under a substantive certificate
-    client_bank_accounts:
+    applicant_bank_accounts:
       show:
         heading: Your client’s bank accounts
         previously_told: "Your client shared the following bank account information with us:"

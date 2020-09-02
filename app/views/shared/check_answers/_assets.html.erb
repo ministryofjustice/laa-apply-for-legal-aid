@@ -74,7 +74,7 @@
 
       <%= check_answer_link(
               name: :offline_accounts,
-              url: check_answer_url_for(journey_type, :client_bank_accounts, @legal_aid_application),
+              url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
               question: t('.assets.offline_savings'),
               answer: number_to_currency(@legal_aid_application.offline_savings_value),
               read_only: read_only,

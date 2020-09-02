@@ -1,5 +1,5 @@
 module Providers
-  class ClientBankAccountsController < ProviderBaseController
+  class ApplicantBankAccountsController < ProviderBaseController
     def show
       applicant_accounts
     end
@@ -9,7 +9,7 @@ module Providers
         go_forward(params[:offline_savings_account] == 'yes')
         reset_account_balance if params[:offline_savings_account] == 'no'
       else
-        @error = { 'offline_savings_account-error' => I18n.t('providers.client_bank_accounts.show.error') }
+        @error = { 'offline_savings_account-error' => I18n.t('providers.applicant_bank_accounts.show.error') }
         applicant_accounts
         render :show
       end

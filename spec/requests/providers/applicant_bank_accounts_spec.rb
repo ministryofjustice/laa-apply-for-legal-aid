@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Providers::ClientBankAccountsController, type: :request do
+RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
   let(:applicant) { create :applicant }
   let!(:bank_provider) { create :bank_provider, applicant: applicant }
   let!(:bank_account) { create :bank_account, bank_provider: bank_provider }
@@ -9,9 +9,8 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
   let(:application_id) { legal_aid_application.id }
   let!(:provider) { legal_aid_application.provider }
 
-  describe 'GET providers/client_bank_account' do
-    # subject { get providers_legal_aid_application_client_bank_account_path(legal_aid_application.id) }
-    subject { get "/providers/applications/#{application_id}/client_bank_account" }
+  describe 'GET providers/applicant_bank_account' do
+    subject { get providers_legal_aid_application_applicant_bank_account_path(legal_aid_application.id) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -29,8 +28,8 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
       end
 
       it 'displays the correct page content' do
-        expect(unescaped_response_body).to include(I18n.t('providers.client_bank_accounts.show.heading'))
-        expect(unescaped_response_body).to include(I18n.t('providers.client_bank_accounts.show.offline_savings_accounts'))
+        expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.heading'))
+        expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.offline_savings_accounts'))
       end
 
       it 'shows the client bank account name and balance' do
@@ -52,7 +51,7 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
 
     subject do
       patch(
-        "/providers/applications/#{application_id}/client_bank_account",
+        "/providers/applications/#{application_id}/applicant_bank_account",
         params: params.merge(submit_button)
       )
     end
@@ -71,7 +70,7 @@ RSpec.describe Providers::ClientBankAccountsController, type: :request do
         let(:params) { {} }
 
         it 'shows an error' do
-          expect(unescaped_response_body).to include(I18n.t('providers.client_bank_accounts.show.error'))
+          expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.error'))
         end
       end
 
