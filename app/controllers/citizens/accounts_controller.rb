@@ -15,8 +15,9 @@ module Citizens
       if worker_errors.any?
         @errors = worker_errors.join(', ')
         Raven.capture_exception(TrueLayerWorkerError.new(@errors))
+        reset_worker
       else
-        session[:worker_id] = nil
+        reset_worker
         redirect_to action: :index
       end
     end
@@ -50,6 +51,10 @@ module Citizens
     def start_worker_to_get_transactions
       legal_aid_application.set_transaction_period
       ImportBankDataWorker.perform_async(legal_aid_application.id)
+    end
+
+    def reset_worker
+      session[:worker_id] = nil
     end
   end
 end
