@@ -24,13 +24,7 @@ module OmniAuth
       end
 
       def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
-        puts ">>>>>>>>> CALLBACK PHASE #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
-        puts ">>>>>>>>> request params #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
-        pp request.params
-        puts ">>>>>>>>> session #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
-        pp session['omniauth.state']
-        puts ">>>>>>>>> calling super #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
-
+        Raven.capture_message("before #callback_phase details > request: #{request.params} , state: #{session['omniauth.state']} and client_id: #{consent_id}")
         super
       end
 

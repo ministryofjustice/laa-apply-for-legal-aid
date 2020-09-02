@@ -1,9 +1,11 @@
-require "oauth2"
-require "omniauth"
-require "securerandom"
-require "socket"       # for SocketError
-require "timeout"      # for Timeout::Error
+require 'oauth2'
+require 'omniauth'
+require 'securerandom'
+require 'socket'       # for SocketError
+require 'timeout'      # for Timeout::Error
 
+# This is a class from the OmniAuth library and is here temporarily until
+# we find a fix for the callback error csfr_detected e.g. https://github.com/omniauth/omniauth-oauth2/issues/58
 module OmniAuth
   module Strategies
     # Authentication strategy for connecting with APIs constructed using
@@ -11,11 +13,12 @@ module OmniAuth
     # You must generally register your application with the provider and
     # utilize an application id and secret in order to authenticate using
     # OAuth 2.0.
-    class LAAOAuth2
+    class LAAOAuth2 # rubocop:disable Metrics/ClassLength
       include OmniAuth::Strategy
 
       def self.inherited(subclass)
         OmniAuth::Strategy.included(subclass)
+        super
       end
 
       args %i[client_id client_secret]
@@ -32,13 +35,13 @@ module OmniAuth
       option :pkce, false
       option :pkce_verifier, nil
       option :pkce_options, {
-        :code_challenge => proc { |verifier|
+        code_challenge: proc { |verifier|
           Base64.urlsafe_encode64(
             Digest::SHA2.digest(verifier),
-            :padding => false,
-            )
+            padding: false
+          )
         },
-        :code_challenge_method => "S256",
+        code_challenge_method: 'S256'
       }
 
       attr_accessor :access_token
@@ -48,15 +51,15 @@ module OmniAuth
       end
 
       credentials do
-        hash = {"token" => access_token.token}
-        hash["refresh_token"] = access_token.refresh_token if access_token.expires? && access_token.refresh_token
-        hash["expires_at"] = access_token.expires_at if access_token.expires?
-        hash["expires"] = access_token.expires?
+        hash = { 'token' => access_token.token }
+        hash['refresh_token'] = access_token.refresh_token if access_token.expires? && access_token.refresh_token
+        hash['expires_at'] = access_token.expires_at if access_token.expires?
+        hash['expires'] = access_token.expires?
         hash
       end
 
       def request_phase
-        redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params))
+        redirect client.auth_code.authorize_url({ redirect_uri: callback_url }.merge(authorize_params))
       end
 
       def authorize_params # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -64,31 +67,29 @@ module OmniAuth
 
         if OmniAuth.config.test_mode
           @env ||= {}
-          @env["rack.session"] ||= {}
+          @env['rack.session'] ||= {}
         end
 
         params = options.authorize_params
-                   .merge(options_for("authorize"))
-                   .merge(pkce_authorize_params)
+                        .merge(options_for('authorize'))
+                        .merge(pkce_authorize_params)
 
-        session["omniauth.pkce.verifier"] = options.pkce_verifier if options.pkce
-        session["omniauth.state"] = params[:state]
+        session['omniauth.pkce.verifier'] = options.pkce_verifier if options.pkce
+        session['omniauth.state'] = params[:state]
 
         params
       end
 
       def token_params
-        options.token_params.merge(options_for("token")).merge(pkce_token_params)
+        options.token_params.merge(options_for('token')).merge(pkce_token_params)
       end
 
       def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
-        puts ">>>>>>>>> HERE IN LAA_OAUTH2 #{__FILE__}:#{__LINE__} <<<<<<<<<<\n"
-        
-        error = request.params["error_reason"] || request.params["error"]
+        error = request.params['error_reason'] || request.params['error']
         if error
-          fail!(error, CallbackError.new(request.params["error"], request.params["error_description"] || request.params["error_reason"], request.params["error_uri"]))
-        elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
-          fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
+          fail!(error, CallbackError.new(request.params['error'], request.params['error_description'] || request.params['error_reason'], request.params['error_uri']))
+        elsif !options.provider_ignores_state && (request.params['state'].to_s.empty? || request.params['state'] != session.delete('omniauth.state'))
+          fail!(:csrf_detected, CallbackError.new(:csrf_detected, 'CSRF detected'))
         else
           self.access_token = build_access_token
           self.access_token = access_token.refresh! if access_token.expired?
@@ -111,21 +112,21 @@ module OmniAuth
 
         # NOTE: see https://tools.ietf.org/html/rfc7636#appendix-A
         {
-          :code_challenge => options.pkce_options[:code_challenge]
-                               .call(options.pkce_verifier),
-          :code_challenge_method => options.pkce_options[:code_challenge_method],
+          code_challenge: options.pkce_options[:code_challenge]
+                                 .call(options.pkce_verifier),
+          code_challenge_method: options.pkce_options[:code_challenge_method]
         }
       end
 
       def pkce_token_params
         return {} unless options.pkce
 
-        {:code_verifier => session.delete("omniauth.pkce.verifier")}
+        { code_verifier: session.delete('omniauth.pkce.verifier') }
       end
 
       def build_access_token
-        verifier = request.params["code"]
-        client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
+        verifier = request.params['code']
+        client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
       end
 
       def deep_symbolize(options)
@@ -134,7 +135,7 @@ module OmniAuth
         end
       end
 
-      def options_for(option)
+      def options_for(option) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         hash = {}
         options.send(:"#{option}_options").select { |key| options[key] }.each do |key|
           hash[key.to_sym] = if options[key].respond_to?(:call)
@@ -155,14 +156,15 @@ module OmniAuth
           self.error = error
           self.error_reason = error_reason
           self.error_uri = error_uri
+          super
         end
 
         def message
-          [error, error_reason, error_uri].compact.join(" | ")
+          [error, error_reason, error_uri].compact.join(' | ')
         end
       end
     end
   end
 end
 
-OmniAuth.config.add_camelization "oauth2", "OAuth2"
+OmniAuth.config.add_camelization 'oauth2', 'OAuth2'
