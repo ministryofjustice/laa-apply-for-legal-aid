@@ -3,7 +3,7 @@ module CheckAnswersHelper
   #     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   #       <%= check_answer_link ..... %>
   #     </dl>
-  def check_answer_link(url: nil, question:, answer:, name:, read_only: false, align_right: false, no_border: false) # rubocop:disable Metrics/ParameterLists
+  def check_answer_link(question:, answer:, name:, url: nil, read_only: false, align_right: false, no_border: false) # rubocop:disable Metrics/ParameterLists
     render(
       'shared/check_answers/item',
       name: name,
@@ -16,7 +16,7 @@ module CheckAnswersHelper
     )
   end
 
-  def check_answer_no_link(question:, answer:, no_border: false, name:, align_right: false)
+  def check_answer_no_link(question:, answer:, name:, no_border: false, align_right: false)
     render(
       'shared/check_answers/no_link_item',
       name: name,
@@ -60,7 +60,7 @@ module CheckAnswersHelper
     )
   end
 
-  def check_long_question_no_link(question:, answer:, no_border: false, name:, align_right: false)
+  def check_long_question_no_link(question:, answer:, name:, no_border: false, align_right: false)
     render(
       'shared/check_answers/no_link_long_item',
       name: name,
