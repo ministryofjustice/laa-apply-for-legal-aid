@@ -24,7 +24,7 @@
         </dd>
       </div>
 
-      <% remarks.review_categories_by_reason.each do |reason, categories| %>
+      <% remarks.review_categories_by_reason&.each do |reason, categories| %>
         <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
           <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
             <%= t(".category-#{reason}") %>

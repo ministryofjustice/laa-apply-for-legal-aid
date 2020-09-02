@@ -420,9 +420,7 @@ en:
         reason:
           amount_variation: Monthly value unknown (variations)
           unknown_frequency: Frequency unknown
-
-
-
+          residual_balance: Capital Contribution - Residual Balance Check
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review

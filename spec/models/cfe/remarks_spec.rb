@@ -54,6 +54,18 @@ module CFE
           expect(remarks.review_categories_by_reason).to eq expected_results
         end
       end
+
+      context 'with remarks that do not require a category' do
+        before { populated_hash[:current_account_balance] = { residual_balance: [] } }
+        let(:remarks_hash) { populated_hash }
+        it 'does not include the remarks in the hash of categories by reason' do
+          expected_results = {
+            amount_variation: [:state_benefit_payment],
+            unknown_frequency: %i[state_benefit_payment outgoings_housing_cost]
+          }
+          expect(remarks.review_categories_by_reason).to eq expected_results
+        end
+      end
     end
 
     describe '#review_transactions' do
