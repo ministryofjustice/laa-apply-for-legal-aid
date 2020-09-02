@@ -1,7 +1,9 @@
 <% if @errors %>
-  <div class="govuk-error-summary" role="alert" tabindex="-1" data-module="govuk-error-summary">
-    <h2 class="govuk-error-summary__title" id="error-summary-title"><%= @errors %></h2>
-  </div>
+  <%= page_template do %>
+    <div class="govuk-error-summary" role="alert" tabindex="-1" data-module="govuk-error-summary">
+      <h2 class="govuk-error-summary__title" id="error-summary-title"><%= error_description %></h2>
+    </div>
+  <% end %>
 <% else %>
   <div class="worker-waiter" data-worker-id="<%= session[:worker_id] %>" align="center">
     <%= image_tag('loading.gif') %>

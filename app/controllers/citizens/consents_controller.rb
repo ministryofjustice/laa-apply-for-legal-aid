@@ -2,7 +2,6 @@ module Citizens
   class ConsentsController < CitizenBaseController
     def show
       @form = Applicants::OpenBankingConsentForm.new(model: legal_aid_application)
-      @form.errors.add(:open_banking_consent, I18n.t('citizens.consents.show.true_layer_auth_error_html')) if params[:auth_failure]
     end
 
     def update

@@ -114,8 +114,20 @@ RSpec.describe 'citizen accounts request', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'displays the error' do
-        expect(response.body).to include(error)
+      it 'displays the default error' do
+        expect(response.body).to include(I18n.t('citizens.accounts.gather.default_error'))
+      end
+
+      context 'a realistic TrueLayerError is received' do
+        let(:truelayer_error_description) { 'The provider service is currently unavailable or experiencing technical difficulties. Please try again later.' }
+        let(:error_1) { { bank_data_import: {} } }
+        let(:error_2) { { import_account_holders: {} } }
+        let(:error_3) { { TrueLayerError: { error_description: truelayer_error_description, error: :provider_error, error_details: {} } } }
+        let(:worker) { { 'status' => 'complete', 'errors' => [error_1.to_json, error_2.to_json, error_3.to_json].to_json } }
+
+        it 'displays the TrueLayer error description' do
+          expect(response.body).to include('The provider service is currently unavailable or experiencing technical difficulties. Please try again later')
+        end
       end
     end
   end

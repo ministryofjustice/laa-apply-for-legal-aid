@@ -2,6 +2,7 @@ module Citizens
   class AccountsController < CitizenBaseController
     class TrueLayerWorkerError < StandardError; end
     skip_back_history_for :gather
+    helper_method :error_description
 
     def index
       @applicant_banks = current_applicant.bank_providers.collect do |bank_provider|
@@ -55,6 +56,14 @@ module Citizens
 
     def reset_worker
       session[:worker_id] = nil
+    end
+
+    def error_description
+      truelayer_error_description || I18n.t('citizens.accounts.gather.default_error')
+    end
+
+    def truelayer_error_description
+      JSON.parse(worker_errors[2])&.dig('TrueLayerError', 'error_description') unless worker_errors[2].nil?
     end
   end
 end
