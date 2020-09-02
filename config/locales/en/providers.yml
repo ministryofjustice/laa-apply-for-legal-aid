@@ -183,7 +183,7 @@ en:
           tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
           must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
-          provide_access/details: provide details of the case
+          provide_access_html: "If they do not, you'll need to continue your application in <abbr title='Client and Cost Management System'>CCMS</abbr>"
       how_we_checked: &how_we_checked
         how_we_checked: How we checked your client's benefits status
         details_used: "We used the following details to check your client's benefits status with the DWP:"
