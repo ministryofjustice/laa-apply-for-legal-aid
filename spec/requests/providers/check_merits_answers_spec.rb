@@ -198,8 +198,8 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       describe 'redirection' do
-        it 'redirects to end of application page' do
-          expect(response).to redirect_to providers_legal_aid_application_end_of_application_path(application, back: true)
+        it 'redirects to success_likely page' do
+          expect(response).to redirect_to providers_legal_aid_application_success_likely_index_path
         end
       end
     end

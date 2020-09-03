@@ -15,7 +15,7 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-      redirect_to back_path
+      redirect_to providers_legal_aid_application_success_likely_index_path
     end
 
     private

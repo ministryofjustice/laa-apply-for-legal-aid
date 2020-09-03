@@ -1,4 +1,7 @@
-<%= page_template page_title: t('.h1-heading') do %>
+<%= page_template(
+      page_title: t('.h1-heading'),
+      back_link: { path: providers_legal_aid_application_capital_assessment_result_path(@legal_aid_application) }
+    ) do %>
   <%= simple_format t('.do_merits_of_case_qualify') %>
 
   <%= list_from_translation_path '.start_merits_assessments.show.do_merits_of_case_qualify_list' %>
