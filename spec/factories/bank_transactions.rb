@@ -7,6 +7,7 @@ FactoryBot.define do
     happened_at { Faker::Date.between(from: 3.months.ago + 2.days, to: Time.now - 2.days) }
     currency { Faker::Currency.code }
     amount { rand(1...1_000_000.0).round(2) }
+    running_balance { rand(1...1_000_000.0).round(2) }
 
     trait :debit do
       operation { :debit }

@@ -6,6 +6,7 @@ class BankTransactionPresenter
     operation: 'type',
     description: 'description',
     merchant: 'merchant',
+    running_balance: 'balance/running total',
     category: 'category',
     flagged: 'flagged'
   }.freeze
@@ -71,5 +72,9 @@ class BankTransactionPresenter
     return nil if @remarks.empty?
 
     @remarks.map { |x| x.to_s.humanize }.join(', ').to_s
+  end
+
+  def transaction_running_balance
+    @transaction.running_balance
   end
 end
