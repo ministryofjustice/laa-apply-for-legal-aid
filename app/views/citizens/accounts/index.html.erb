@@ -39,7 +39,7 @@
         <tbody class="govuk-table__body">
           <% applicant_bank.bank_accounts.each do |bank_account| %>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell"><%= "#{applicant_bank.name} #{bank_account.name}" %></td>
+              <td class="govuk-table__cell"><%= bank_account.bank_and_account_name %></td>
               <td class="govuk-table__cell"><%= bank_account.account_number %></td>
               <td class="govuk-table__cell"><%= bank_account.sort_code %></td>
               <td class="govuk-table__cell govuk-table__cell--numeric"><%= value_with_currency_unit(bank_account.balance, bank_account.currency) %></td>
