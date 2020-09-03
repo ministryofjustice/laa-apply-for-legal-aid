@@ -17,8 +17,8 @@ module OmniAuth
       include OmniAuth::Strategy
 
       def self.inherited(subclass)
-        OmniAuth::Strategy.included(subclass)
         super
+        OmniAuth::Strategy.included(subclass)
       end
 
       args %i[client_id client_secret]
@@ -152,11 +152,10 @@ module OmniAuth
       class CallbackError < StandardError
         attr_accessor :error, :error_reason, :error_uri
 
-        def initialize(error, error_reason = nil, error_uri = nil)
+        def initialize(error, error_reason = nil, error_uri = nil) # rubocop:disable Lint/MissingSuper
           self.error = error
           self.error_reason = error_reason
           self.error_uri = error_uri
-          super
         end
 
         def message
