@@ -1,6 +1,12 @@
 <% if @cfe_result.liquid_capital_items.any? %>
   <div class="govuk-accordion__section-content">
     <h2 class="govuk-heading-m"><%= t('.savings_and_investments') %></h2>
+    <p>Savings accounts</p>
+    <%= @legal_aid_application.online_savings_accounts_balance %>
+    <p>Current accounts</p>
+    <%= @legal_aid_application.online_current_accounts_balance %>
+    <p>All accounts</p>
+    <%= @legal_aid_application.online_accounts_balance %>
     <table class="govuk-table">
       <tbody>
         <% @cfe_result.liquid_capital_items.each do |item| %>

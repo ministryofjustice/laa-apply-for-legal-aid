@@ -250,20 +250,18 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def online_savings_accounts_balance
-    accounts = applicant.bank_accounts.reject { |c| c.account_type == 'TRANSACTION' }&.map { |acc| acc.balance}
-    accounts.inject(0){|balance, x| balance + x}
-    # accounts.inject(0, :+)
+    accounts = applicant.bank_accounts.reject { |c| c.account_type == 'TRANSACTION' }&.map(&:balance)
+    accounts.inject(:+)
   end
 
   def online_accounts_balance
-    accounts = applicant.bank_accounts.map { |acc| acc.balance}
-    accounts.inject(0){|balance, x| balance + x}
-    # accounts.inject(0, :+)
+    accounts = applicant.bank_accounts.map(&:balance)
+    accounts.inject(:+)
   end
 
   def online_current_accounts_balance
-    accounts = applicant.bank_accounts.reject { |c| c.account_type == 'SAVINGS' }&.map { |acc| acc.balance}
-    accounts.inject(0, :+)
+    accounts = applicant.bank_accounts.reject { |c| c.account_type == 'SAVINGS' }&.map(&:balance)
+    accounts.inject(:+)
   end
 
   def other_assets?
