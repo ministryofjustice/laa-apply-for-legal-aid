@@ -39,8 +39,11 @@ module TrueLayerHelpers
         amount: -2.99,
         currency: 'GBP',
         transaction_type: 'DEBIT',
-        merchant_name: 'Google play'
-
+        merchant_name: 'Google play',
+        running_balance: {
+          currency: 'GBP',
+          amount: 413.11
+        }
       }, {
         transaction_id: SecureRandom.hex,
         timestamp: '2018-02-18T00:00:00',
@@ -48,7 +51,8 @@ module TrueLayerHelpers
         amount: 25.25,
         currency: 'GBP',
         transaction_type: 'CREDIT',
-        merchant_name: 'Ebay'
+        merchant_name: 'Ebay',
+        running_balance: {}
       }]
     }, {
       account_id: SecureRandom.hex,

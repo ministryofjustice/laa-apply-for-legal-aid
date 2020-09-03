@@ -31,6 +31,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         expect(transaction_1.amount.to_s).to eq(mock_transaction_1[:amount].to_s)
         expect(transaction_1.happened_at).to eq(Time.zone.parse(mock_transaction_1[:timestamp]))
         expect(transaction_1.operation).to eq(mock_transaction_1[:transaction_type].downcase)
+        expect(transaction_1.running_balance.to_s).to eq(mock_transaction_1.dig(:running_balance, :amount).to_s)
 
         expect(transaction_2.true_layer_response).to eq(mock_transaction_2.deep_stringify_keys)
         expect(transaction_2.true_layer_id).to eq(mock_transaction_2[:transaction_id])
@@ -40,6 +41,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         expect(transaction_2.amount.to_s).to eq(mock_transaction_2[:amount].to_s)
         expect(transaction_2.happened_at).to eq(Time.zone.parse(mock_transaction_2[:timestamp]))
         expect(transaction_2.operation).to eq(mock_transaction_2[:transaction_type].downcase)
+        expect(transaction_2.running_balance.to_s).to eq(mock_transaction_2.dig(:running_balance, :amount).to_s)
       end
 
       it 'removes existing transactions' do
