@@ -7,6 +7,8 @@ class BankTransactionPresenter
     description: 'description',
     merchant: 'merchant',
     running_balance: 'balance/running total',
+    account_type: 'account type',
+    account_name: 'account name',
     category: 'category',
     flagged: 'flagged'
   }.freeze
@@ -75,6 +77,18 @@ class BankTransactionPresenter
   end
 
   def transaction_running_balance
-    @transaction.running_balance
+    @transaction.running_balance || 'Not available'
+  end
+
+  def transaction_account_type
+    account_for_transaction.account_type_label
+  end
+
+  def transaction_account_name
+    account_for_transaction.bank_and_account_name
+  end
+
+  def account_for_transaction
+    @transaction.bank_account
   end
 end

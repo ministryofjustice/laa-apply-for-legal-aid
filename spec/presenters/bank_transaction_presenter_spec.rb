@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe BankTransactionPresenter do
   subject(:presenter) { described_class.new(transaction, remarks) }
-
-  let(:transaction) { create :bank_transaction, :uncategorised_credit_transaction }
+  let(:account) { create :bank_account, account_type: 'SAVINGS' }
+  let(:transaction) { create :bank_transaction, :uncategorised_credit_transaction, bank_account: account }
   let(:remarks) { [] }
 
   it { is_expected.to be_a BankTransactionPresenter }
@@ -12,7 +12,7 @@ RSpec.describe BankTransactionPresenter do
     subject(:headers) { described_class.headers }
 
     it { is_expected.to be_a Array }
-    it { expect(headers.count).to eq 9 }
+    it { expect(headers.count).to eq 11 }
   end
 
   describe '.present!' do
@@ -106,6 +106,29 @@ RSpec.describe BankTransactionPresenter do
       context 'when there is a running balance value' do
         it { is_expected.to eq transaction.running_balance }
       end
+
+      context 'when there is no running balance value' do
+        before { transaction.running_balance = nil }
+        it { is_expected.to eq 'Not available' }
+      end
+    end
+
+    describe 'account_type' do
+      subject(:account_type) { presenter.build_transaction_hash[:account_type] }
+      context 'when the transaction is from a savings account' do
+        it { is_expected.to eq 'Savings' }
+      end
+
+      context 'when the transaction is from a current account' do
+        let(:account) { create :bank_account, account_type: 'TRANSACTION' }
+        it { is_expected.to eq 'Current' }
+      end
+    end
+
+    describe 'account_name' do
+      subject(:account_name) { presenter.build_transaction_hash[:account_name] }
+
+      it { is_expected.to eq account.bank_and_account_name }
     end
   end
 end
