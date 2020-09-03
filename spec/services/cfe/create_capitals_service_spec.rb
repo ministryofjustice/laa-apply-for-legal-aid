@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CFE
   RSpec.describe CreateCapitalsService do
-    let(:application) { create :legal_aid_application }
+    let!(:application) { create :legal_aid_application, :with_applicant, with_bank_accounts: 6 }
     let!(:other_assets_declaration) { my_other_asset_declaration }
     let!(:savings_amount) { my_savings_amount }
     let(:submission) { create :cfe_submission, aasm_state: 'applicant_created', legal_aid_application: application }
@@ -78,11 +78,11 @@ module CFE
       {
         bank_accounts: [
           {
-            description: 'Current accounts',
+            description: 'Current accounts your client cannot access online',
             value: savings_amount.offline_current_accounts.to_s
           },
           {
-            description: 'Savings accounts',
+            description: 'Savings accounts your client cannot access online',
             value: savings_amount.offline_savings_accounts.to_s
           },
           {
@@ -96,6 +96,14 @@ module CFE
           {
             description: 'National Savings Certificates and Premium Bonds',
             value: savings_amount.national_savings.to_s
+          },
+          {
+            description: 'Current accounts',
+            value: application.online_current_accounts_balance.to_s
+          },
+          {
+            description: 'Savings accounts',
+            value: application.online_savings_accounts_balance.to_s
           }
         ],
         non_liquid_capital: [

@@ -10,8 +10,8 @@ module CFE
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
-      offline_current_accounts: 'Current accounts',
-      offline_savings_accounts: 'Savings accounts',
+      offline_current_accounts: 'Current accounts your client cannot access online',
+      offline_savings_accounts: 'Savings accounts your client cannot access online',
       cash: 'Money not in a bank account',
       other_person_account: "Access to another person's bank account",
       national_savings: 'National Savings Certificates and Premium Bonds',
@@ -50,9 +50,25 @@ module CFE
     end
 
     def bank_accounts
-      # passported applicants don't have online bank accounts, so this is always empty until
-      # such time as non-passported applicants are added to the system
-      []
+      [current_account_balance, savings_account_balance].compact
+    end
+
+    def current_account_balance
+      return unless legal_aid_application.online_current_accounts_balance.present?
+
+      {
+        description: 'Current accounts',
+        value: legal_aid_application.online_current_accounts_balance
+      }
+    end
+
+    def savings_account_balance
+      return unless legal_aid_application.online_current_accounts_balance.present?
+
+      {
+        description: 'Savings accounts',
+        value: legal_aid_application.online_savings_accounts_balance
+      }
     end
 
     def savings_amounts

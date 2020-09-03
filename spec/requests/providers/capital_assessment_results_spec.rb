@@ -6,6 +6,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
   describe 'GET  /providers/applications/:legal_aid_application_id/capital_assessment_result' do
     let(:cfe_result) { create :cfe_v2_result }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
+    let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: legal_aid_application }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
     let(:locale_scope) { 'providers.capital_assessment_results' }
 

@@ -254,11 +254,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     accounts.inject(:+)
   end
 
-  def online_accounts_balance
-    accounts = applicant.bank_accounts.map(&:balance)
-    accounts.inject(:+)
-  end
-
   def online_current_accounts_balance
     accounts = applicant.bank_accounts.reject { |c| c.account_type == 'SAVINGS' }&.map(&:balance)
     accounts.inject(:+)
