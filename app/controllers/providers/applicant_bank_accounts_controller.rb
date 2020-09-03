@@ -27,7 +27,7 @@ module Providers
       return unless legal_aid_application.savings_amount.present?
 
       legal_aid_application.savings_amount[:offline_savings_accounts] = nil
-      legal_aid_application.save
+      legal_aid_application.savings_amount.save
     end
   end
 end
