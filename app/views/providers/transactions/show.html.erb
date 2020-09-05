@@ -53,7 +53,7 @@
 
           <%= sort_column_th type: :alphabetic, content: t('.col_description') %>
 
-          <th class="nullcell"></th>
+          <th class="nullcell" aria-hidden="true"></th>
 
           <%= sort_column_th(
                 type: :numeric,
@@ -89,7 +89,7 @@
                   content: builder.object.description
                 ) %>
 
-            <td class="nullcell"></td>
+            <td class="nullcell" aria-hidden="true"></td>
 
             <%= sort_column_cell(
                   id: "Amount-#{builder.object.id}",
