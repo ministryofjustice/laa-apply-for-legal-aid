@@ -804,12 +804,13 @@ module CCMS
               test[:attributes].each do |attribute|
                 context attribute.to_s do
                   subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
+                  let(:true_false) { [true, false] }
                   let!(:percentage_home) { example[:input] }
 
                   it "returns #{test[:result]} when percentage_home is set to #{test[:input]}" do
                     if test[:omit_block]
                       expect(block).to_not be_present
-                    elsif [true, false].include? test[:result]
+                    elsif true_false.include? test[:result]
                       expect(block).to have_boolean_response test[:result]
                     else
                       expect(block).to have_number_response test[:result]
