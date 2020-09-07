@@ -4,6 +4,7 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   TargetRubyVersion: 2.6
+  NewCops: enable
   Exclude:
   - 'db/schema.rb'
   - 'vendor/**/*'
