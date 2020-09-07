@@ -114,7 +114,7 @@ end
 group :development do
   gem 'better_errors', '>= 2.7.1'
   gem 'binding_of_caller'
-  gem 'guard-cucumber'
+  gem 'guard-cucumber', '>= 3.0.0'
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-rubocop'
@@ -127,8 +127,8 @@ end
 group :test do
   gem 'capybara', '>= 3.32.2', '< 4.0'
   gem 'climate_control' # Allows environment variables to be modified within specs
-  gem 'cucumber', '~> 3.0', require: false
-  gem 'cucumber-rails', '>= 2.0.0', require: false
+  gem 'cucumber', '~> 4.0', '>= 4.0.0', require: false
+  gem 'cucumber-rails', '>= 2.1.0', require: false
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
