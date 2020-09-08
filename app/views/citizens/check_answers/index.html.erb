@@ -7,9 +7,11 @@
     ) do %>
 
   <h2 class="govuk-heading-m"><%= t('.bank-heading') %></h2>
-  <dl class="govuk-summary-list govuk-!-padding-bottom-4">
-    <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
-      <h2 class="govuk-heading-m govuk-!-padding-top-4">Account <%= index+1 %></h2>
+
+  <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
+    <h2 class="govuk-heading-m govuk-!-padding-top-4">Account <%= index+1 %></h2>
+
+    <dl class="govuk-summary-list govuk-!-padding-bottom-4">
       <div class="govuk-summary-list__row">
         <dd class="govuk-summary-list__value">Bank</dd>
         <dd class="govuk-summary-list__actions align-text-right"><%= account.bank_provider.name %></dd>
@@ -26,11 +28,12 @@
         <dd class="govuk-summary-list__value">Balance</dd>
         <dd class="govuk-summary-list__actions align-text-right"><%= value_with_currency_unit(account.balance, account.currency) %></dd>
       </div>
-    <% end %>
-    <div class="govuk-summary-list__row">
+    </dl>
+  <% end %>
+
+    <div class="govuk-body govuk-!-padding-bottom-4">
       <%= link_to t('.link_other_account'), citizens_banks_path, class: 'govuk-link' %>
     </div>
-  </dl>
 
   <%= check_long_questions_single_change_link(
           name: :incomings,
