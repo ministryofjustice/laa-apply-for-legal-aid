@@ -98,7 +98,7 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
       <%= check_answer_link(
-              name: :offline_accounts,
+              name: :online_current_accounts,
               url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
               question: t('.assets.current_account'),
               answer: number_to_currency(@legal_aid_application.online_current_accounts_balance),
@@ -107,7 +107,7 @@
           ) %>
 
     <%= check_answer_link(
-            name: :offline_accounts,
+            name: :online_savings_accounts,
             url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
             question: t('.assets.savings_account'),
             answer: number_to_currency(@legal_aid_application.online_savings_accounts_balance),

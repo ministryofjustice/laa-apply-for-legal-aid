@@ -55,6 +55,8 @@ en:
           property_value: How much is your client's home worth?
           restrictions: Do any restrictions apply?
           savings_and_investments: Savings and investments
+          savings_account: Savings account
+          current_account: Current account
           shared_ownership: Does your client own their home with anyone else?
         submit:
           heading: Submit your details
