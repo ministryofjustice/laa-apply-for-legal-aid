@@ -57,13 +57,13 @@ module TableSortHelper
   #   where at: is the width below which the column will be combined (options are 470 and 555)
   #   and append: is the contented that will be appended to the main content when the columns are combined
   #
-  def sort_column_th(type:, content:, combine_right: {}, currently_sorted: nil)
+  def sort_column_th(type:, content:, aria:, combine_right: {}, currently_sorted: nil)
     combine_right_at = combine_right[:at]
     klasses = %w[govuk-table__header sort]
     klasses += ['table-combine_right_if_narrow', "narrow_#{combine_right_at}"] if combine_right_at
     klasses << 'govuk-table__header--numeric' if type == :numeric
     klasses << "header-sort-#{currently_sorted}" if currently_sorted
-    content_tag(:th, class: klasses, scope: 'col', 'data-sort-type' => type) do
+    content_tag(:th, role: 'button', class: klasses, scope: 'col', 'aria-label' => content, 'aria-sort' => aria, 'data-sort-type' => type) do
       sort_span_by +
         sort_span_content(content) +
         sort_span_combine_right(combine_right) +
