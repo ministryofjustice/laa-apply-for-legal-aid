@@ -1,0 +1,92 @@
+<%= page_template page_title: t('.heading'), template: :basic do %>
+
+  <% if @error %>
+    <div class="govuk-error-summary" id="error_explanation">
+      <h2 class="govuk-error-summary__title" id="error-summary-title">
+        <%= t('generic.errors.problem_text') %>
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <%= link_to @error.values.first, "##{@error.keys.first}" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_applicant_bank_account_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= govuk_fieldset_header page_title %>
+
+    <p class="govuk-body"><%= t('.previously_told') %></p>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <% @applicant_accounts.each do |applicant_account| %>
+          <% applicant_account.bank_accounts.each do |bank_account| %>
+            <dl class="govuk-summary-list govuk-summary-list--no-border">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  <strong><%= t('.account') %></strong>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <%= "#{applicant_account.name} #{bank_account.name}" %>
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  <strong><%= t('.balance') %></strong>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <%= value_with_currency_unit(bank_account.balance, bank_account.currency) %>
+                </dd>
+              </div>
+            </dl>
+            </dl>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+    <%= govuk_form_group(
+            show_error_if: @error,
+            input: :offline_savings_account
+        ) do %>
+
+      <h2 class="govuk-heading-l"><%= t('.offline_savings_accounts') %></h2>
+
+      <p class="govuk-hint"><%= t('.hints.offline_savings_accounts') %></p>
+
+      <%= govuk_error_message(@error&.values&.first) %>
+
+      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
+        <%= form.govuk_radio_button(
+                :offline_savings_account,
+                'yes',
+                label: t('generic.yes'),
+                error: @error&.values&.first,
+                checked: @legal_aid_application&.savings_amount&.offline_savings_accounts.present?
+            ) %>
+
+        <%= form.govuk_radio_button(
+                :offline_savings_account,
+                'no',
+                error: @error&.values&.first,
+                label: t('generic.no')
+            ) %>
+      </div>
+  <% end %>
+
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+  <% end %>
+<% end %>

@@ -95,7 +95,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
     context 'with option "false"' do
       let(:own_vehicle) { 'false' }
       let(:target_url) do
-        providers_legal_aid_application_offline_account_path(legal_aid_application)
+        providers_legal_aid_application_applicant_bank_account_path(legal_aid_application)
       end
 
       it 'does not create a vehicle' do
@@ -106,21 +106,21 @@ RSpec.describe Providers::VehiclesController, type: :request do
         expect { subject }.to change { legal_aid_application.reload.own_vehicle }.to(false)
       end
 
-      it 'redirects to savings and investment' do
+      it 'redirects to applicant bank account for non-passported journey' do
         subject
         expect(response).to redirect_to(target_url)
       end
 
       context 'and existing vehicle' do
-        let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
+        let(:legal_aid_application) { create :legal_aid_application, :with_vehicle, :passported }
 
         it 'delete existing vehicle' do
           expect { subject }.to change { Vehicle.count }.by(-1)
         end
 
-        it 'redirects to savings and investment' do
+        it 'redirects to offline account page on passported journey' do
           subject
-          expect(response).to redirect_to(target_url)
+          expect(response).to redirect_to(providers_legal_aid_application_offline_account_path(legal_aid_application))
         end
       end
 

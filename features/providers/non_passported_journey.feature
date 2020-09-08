@@ -17,8 +17,8 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -117,8 +117,8 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -175,8 +175,8 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -234,8 +234,12 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Is the vehicle in regular use?"
     Then I choose option "Vehicle used regularly true"
     And I click "Save and continue"
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I should be on a page showing "Does your client have any savings accounts they cannot access online?"
+    Then I choose 'Yes'
+    And I click "Save and continue"
+    Then I should be on a page showing "Enter the total amount in all savings accounts that your client cannot access online"
+    And I fill 'offline savings accounts' with '456.33'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     Then I select "None of these"
@@ -290,8 +294,8 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Does your client own a vehicle?"
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    When I select 'None of these'
+    Then I should be on a page showing "Your client’s bank accounts"
+    Then I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
     When I select "None of these"

@@ -7,5 +7,6 @@ FactoryBot.define do
     account_number { Faker::Number.number }
     sort_code { Faker::Number.number(digits: 6) }
     balance { rand(1...1_000_000.0).round(2) }
+    account_type { %w[TRANSACTION SAVINGS].sample }
   end
 end

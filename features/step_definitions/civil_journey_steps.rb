@@ -200,7 +200,10 @@ Given('I start the merits application and the applicant has uploaded transaction
 end
 
 Given('I start the journey as far as the start of the vehicle section') do
-  @legal_aid_application = create(:application)
+  @legal_aid_application = create(
+    :application,
+    :passported
+  )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,

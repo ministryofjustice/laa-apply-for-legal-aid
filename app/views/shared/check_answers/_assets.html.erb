@@ -68,6 +68,21 @@
 <section class="print-no-break">
   <%= render 'shared/check_answers/vehicles', read_only: read_only %>
 
+  <% if @legal_aid_application.non_passported? &&  @legal_aid_application.offline_savings? %>
+    <h2 class="govuk-heading-m"><%= t('.assets.offline_accounts') %></h2>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+
+      <%= check_answer_link(
+              name: :offline_accounts,
+              url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
+              question: t('.assets.offline_savings'),
+              answer: number_to_currency(@legal_aid_application.offline_savings_value),
+              read_only: read_only,
+              align_right: read_only
+          ) %>
+    </dl>
+  <% end %>
+
   <%= check_answer_one_change_link(
         name: :savings_and_investments,
         url: check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
@@ -79,6 +94,29 @@
         read_only: read_only
       ) if @legal_aid_application.savings_amount? %>
 
+  <% if read_only %>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+
+      <%= check_answer_link(
+              name: :online_current_accounts,
+              url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
+              question: t('.assets.current_account'),
+              answer: number_to_currency(@legal_aid_application.online_current_accounts_balance),
+              read_only: read_only,
+              align_right: read_only
+          ) %>
+
+    <%= check_answer_link(
+            name: :online_savings_accounts,
+            url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
+            question: t('.assets.savings_account'),
+            answer: number_to_currency(@legal_aid_application.online_savings_accounts_balance),
+            read_only: read_only,
+            align_right: read_only
+        ) %>
+    </dl>
+
+  <% end %>
   <%= check_answer_one_change_link(
         name: :other_assets,
         url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),

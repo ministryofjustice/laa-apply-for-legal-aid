@@ -244,6 +244,16 @@ en:
           heading: Covered under an emergency certificate
         section_substantive:
           heading: Covered under a substantive certificate
+    applicant_bank_accounts:
+      show:
+        heading: Your client’s bank accounts
+        previously_told: "Your client shared the following bank account information with us:"
+        account: Account
+        balance: Balance
+        offline_savings_accounts: Does your client have any savings accounts they cannot access online?
+        hints:
+          offline_savings_accounts: For example, a Post Office savings account.
+        error: Please select Yes or No
     client_received_legal_helps:
       show:
         h1-heading: Has your client received legal help for the matter?
@@ -443,6 +453,9 @@ en:
           offline_current_accounts: Current account
           offline_savings_accounts: Savings account
           no_account_selected: None of these
+    offline_savings_accounts:
+      show:
+        h1-heading: Enter the total amount in all savings accounts that your client cannot access online
     open_banking_consents:
       show:
         heading: Is the following correct?
