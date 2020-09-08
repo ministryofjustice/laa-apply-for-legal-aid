@@ -16,8 +16,9 @@
 
     <%= list_from_translation_path '.start.index.use_ccms_list' %>
 
-    <%= link_to start_button_label(:start),
+    <%= link_to start_button_label(:start_now),
                 providers_legal_aid_applications_path,
+                role: 'button',
                 class: 'govuk-button govuk-button--start',
                 id: 'start' %>
   </div>
