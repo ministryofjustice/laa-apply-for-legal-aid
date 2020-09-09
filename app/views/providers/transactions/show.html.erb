@@ -48,20 +48,22 @@
                 type: :date,
                 content: t('.col_date'),
                 combine_right: { at: 555, append: t('.col_and_description') },
+                aria: 'ascending',
                 currently_sorted: :desc
               ) %>
 
-          <%= sort_column_th type: :alphabetic, content: t('.col_description') %>
+          <%= sort_column_th type: :alphabetic, content: t('.col_description'), aria: 'none' %>
 
           <th class="nullcell" aria-hidden="true"></th>
 
           <%= sort_column_th(
                 type: :numeric,
                 content: t('.col_amount'),
+                aria: 'none',
                 combine_right: { at: 470, append: t('.col_and_category') }
               ) %>
 
-          <%= sort_column_th type: :alphabetic, content: t('.col_category') %>
+          <%= sort_column_th type: :alphabetic, content: t('.col_category'), aria: 'none' %>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
