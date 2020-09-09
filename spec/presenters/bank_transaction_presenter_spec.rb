@@ -12,7 +12,7 @@ RSpec.describe BankTransactionPresenter do
     subject(:headers) { described_class.headers }
 
     it { is_expected.to be_a Array }
-    it { expect(headers.count).to eq 8 }
+    it { expect(headers.count).to eq 9 }
   end
 
   describe '.present!' do
@@ -98,6 +98,13 @@ RSpec.describe BankTransactionPresenter do
         let(:remarks) { %w[amount_variation unknown_frequency] }
 
         it { is_expected.to eq 'Amount variation, Unknown frequency' }
+      end
+    end
+
+    describe 'running_balance' do
+      subject(:running_balance) { presenter.build_transaction_hash[:running_balance] }
+      context 'when there is a running balance value' do
+        it { is_expected.to eq transaction.running_balance }
       end
     end
   end
