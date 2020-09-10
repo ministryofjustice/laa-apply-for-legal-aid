@@ -8,9 +8,9 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
 
   describe '#call' do
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }
-    let(:bank_provider) { applicant.bank_providers.find_by(credentials_id: mock_provider[:credentials_id]) }
-    let(:existing_credentials_id) { SecureRandom.hex }
-    let!(:existing_provider) { create :bank_provider, applicant: applicant, credentials_id: existing_credentials_id }
+    let(:bank_provider) { applicant.bank_providers.find_by(true_layer_provider_id: mock_provider[:provider][:provider_id]) }
+    let(:existing_true_layer_provider_id) { SecureRandom.hex }
+    let!(:existing_provider) { create :bank_provider, applicant: applicant, true_layer_provider_id: existing_true_layer_provider_id }
 
     subject { described_class.call(api_client: api_client, applicant: applicant, token_expires_at: token_expires_at) }
 
@@ -34,8 +34,8 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
         expect(command.result).to eq(bank_provider)
       end
 
-      context 'existing provider has same credentials_id' do
-        let(:existing_credentials_id) { mock_provider[:credentials_id] }
+      context 'existing provider has same true_layer_provider_id' do
+        let(:existing_true_layer_provider_id) { mock_provider[:provider][:provider_id] }
 
         it 'does not create another bank provider' do
           expect { subject }.not_to change { applicant.bank_providers.count }
