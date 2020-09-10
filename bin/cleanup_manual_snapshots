@@ -30,10 +30,10 @@ echo 'There are' ${#array[@]} 'hourly backups'
 
 echo 'There are' $snapshot_count 'automatic daily DB backups'
 
-if [ ${#array[@]} -gt 12 ]
-  then
-    END=$((${#array[@]} - 12 ))
-    for ((i=0;i<=$END;++i)); do (aws rds delete-db-snapshot --region=eu-west-2 --db-snapshot-identifier ${array[i]}) ; done
-  else
-    echo "No need to delete any backups today"
-fi
+#if [ ${#array[@]} -gt 12 ]
+#  then
+#    END=$((${#array[@]} - 12 ))
+#    for ((i=0;i<=$END;++i)); do (aws rds delete-db-snapshot --region=eu-west-2 --db-snapshot-identifier ${array[i]}) ; done
+#  else
+#    echo "No need to delete any backups today"
+#fi
