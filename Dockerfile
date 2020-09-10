@@ -20,7 +20,6 @@ RUN apk --no-cache add --virtual build-dependencies \
                     libxslt-dev \
                     postgresql-dev \
                     git \
-                    bash \
                     curl \
 && apk --no-cache add \
                   postgresql-client \
@@ -32,6 +31,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                   libreoffice \
                   ttf-ubuntu-font-family \
                   wkhtmltopdf \
+                  bash \
  && pip3 install awscli
 
 #  # Install kubectl
