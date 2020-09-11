@@ -24,7 +24,7 @@ module TrueLayer
 
       def import_provider
         bank_provider = applicant.bank_providers.find_or_create_by!(
-          credentials_id: provider[:credentials_id]
+          true_layer_provider_id: provider[:provider][:provider_id]
         )
 
         bank_provider.update!(mapped_resource)
