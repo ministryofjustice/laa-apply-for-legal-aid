@@ -23,7 +23,7 @@ RSpec.describe 'FeedbacksController', type: :request do
       subject
       expect(feedback.browser).not_to be_empty
       expect(feedback.os).not_to be_empty
-      expect(feedback.source).to eq('Unknown')
+      expect(feedback.source).to eq('unknown')
     end
 
     it 'sends an email' do
