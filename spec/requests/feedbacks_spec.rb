@@ -63,6 +63,10 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
+    it 'displays the provider difficulty question' do
+      expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty.provider'))
+    end
+
     context 'provider signed out' do
       let(:provider) { create :provider }
 
