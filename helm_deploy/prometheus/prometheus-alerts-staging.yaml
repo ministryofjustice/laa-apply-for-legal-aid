@@ -19,6 +19,7 @@ kind: PrometheusRule
 metadata:
   namespace: laa-apply-for-legalaid-staging
   labels:
+    prometheus: cloud-platform
     role: alert-rules
   name: prometheus-custom-rules-laa-apply-for-legal-aid
 spec:
