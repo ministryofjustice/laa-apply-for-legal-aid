@@ -5,7 +5,7 @@
         <tr class="govuk-table__row">
           <%= sort_column_th type: :alphabetic, content: t('.applicant_name'), aria: 'ascending',   currently_sorted: @initial_sort[:applicant_name] %>
           <%= sort_column_th type: :date,       content: t('.created_at'), aria: 'none',      currently_sorted: @initial_sort[:created_at],       combine_right: { at: 555, append: t('.col_and_ref') } %>
-          <%= sort_column_th type: :alphabetic, content: t('.application_ref_html'), aria: 'none',  currently_sorted: @initial_sort[:applicant_ref] %>
+          <%= sort_column_th type: :alphabetic, content: t('.application_ref_html'), aria: 'none', arialabel: 'LAA Reference',  currently_sorted: @initial_sort[:applicant_ref] %>
           <th class="nullcell" aria-hidden="true"></th>
           <%= sort_column_th type: :alphabetic, content: t('.certificate_type'), aria: 'none', currently_sorted: nil, combine_right: { at: 555, append: t('.col_and_state') } %>
           <%= sort_column_th type: :alphabetic, content: t('.status'),  aria: 'none',         currently_sorted: nil %>
