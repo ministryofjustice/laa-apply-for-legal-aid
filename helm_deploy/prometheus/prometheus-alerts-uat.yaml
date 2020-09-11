@@ -1,7 +1,7 @@
 #
 # -- Prometheus Alerts --
 # Alerts are set manually for each namespace with this command:
-# kubectl apply -f helm_deploy/prometheus-alerts.yaml -n laa-apply-for-legalaid-uat
+# kubectl apply -f helm_deploy/prometheus/prometheus-alerts-uat.yaml -n laa-apply-for-legalaid-uat
 #
 # you can see current alerts of a namespace with the command:
 # kubectl describe prometheusrule -n laa-apply-for-legalaid-uat
