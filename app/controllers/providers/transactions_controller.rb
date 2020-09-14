@@ -22,7 +22,7 @@ module Providers
 
     def set_selection
       new_values = { transaction_type_id: transaction_type.id }
-      new_values[:meta_data] = manually_chosen_metadata if any_type_of_benefit?(transaction_type)
+      new_values[:meta_data] = manually_chosen_metadata(transaction_type)
       bank_transactions
         .where(id: selected_transaction_ids)
         .update_all(new_values)
@@ -61,16 +61,18 @@ module Providers
       false
     end
 
-    def manually_chosen_metadata
+    def manually_chosen_metadata(transaction_type)
       {
         code: 'XXXX',
         label: 'manually_chosen',
-        name: 'Manually chosen'
+        name: transaction_type.name.titleize,
+        category: sentencize(transaction_type.name),
+        selected_by: 'Provider'
       }
     end
 
-    def any_type_of_benefit?(transaction_type)
-      transaction_type.name.in?(TransactionType.any_type_of('benefits').map(&:name))
+    def sentencize(sentence)
+      sentence.split('_').map(&:capitalize).join(' ')
     end
   end
 end

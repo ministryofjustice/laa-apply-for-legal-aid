@@ -12,7 +12,7 @@ RSpec.describe BankTransactionPresenter do
     subject(:headers) { described_class.headers }
 
     it { is_expected.to be_a Array }
-    it { expect(headers.count).to eq 11 }
+    it { expect(headers.count).to eq 12 }
   end
 
   describe '.present!' do

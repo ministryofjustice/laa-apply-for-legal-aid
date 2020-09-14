@@ -160,7 +160,35 @@ RSpec.describe Providers::TransactionsController, type: :request do
           {
             code: 'XXXX',
             label: 'manually_chosen',
-            name: 'Manually chosen'
+            name: 'Benefits',
+            category: 'Benefits',
+            selected_by: 'Provider'
+          }
+        end
+      end
+
+      context 'when being set to friends_or_family' do
+        let!(:friends_or_family_transaction_type) { create :transaction_type, :friends_or_family }
+        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, friends_or_family_bank_transaction] }
+        let!(:friends_or_family_bank_transaction) { create :bank_transaction, :friends_or_family, bank_account: bank_account, meta_data: nil }
+        let(:params) do
+          {
+            transaction_type: friends_or_family_transaction_type.name,
+            transaction_ids: selected_transactions.pluck(:id)
+          }
+        end
+
+        it 'sets meta_data for friends_or_family transactions' do
+          expect { subject }.to change { friends_or_family_bank_transaction.reload.meta_data }.from(nil).to(manually_chosen_metadata)
+        end
+
+        def manually_chosen_metadata
+          {
+            code: 'XXXX',
+            label: 'manually_chosen',
+            name: 'Friends Or Family',
+            category: 'Friends Or Family',
+            selected_by: 'Provider'
           }
         end
       end
@@ -177,6 +205,32 @@ RSpec.describe Providers::TransactionsController, type: :request do
       subject { patch providers_legal_aid_application_outgoing_transactions_path(legal_aid_application, params) }
 
       it_behaves_like 'PATCH #providers/transactions'
+
+      context 'when being set to rent' do
+        let!(:outgoing_bank_transaction_type) { create :transaction_type, :rent_or_mortgage }
+        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, outgoing_bank_transaction] }
+        let!(:outgoing_bank_transaction) { create :bank_transaction, :rent_or_mortgage, bank_account: bank_account, meta_data: nil }
+        let(:params) do
+          {
+            transaction_type: outgoing_bank_transaction_type.name,
+            transaction_ids: selected_transactions.pluck(:id)
+          }
+        end
+
+        it 'sets meta_data for outgoing transactions' do
+          expect { subject }.to change { outgoing_bank_transaction.reload.meta_data }.from(nil).to(manually_chosen_metadata)
+        end
+
+        def manually_chosen_metadata
+          {
+            code: 'XXXX',
+            label: 'manually_chosen',
+            name: 'Rent Or Mortgage',
+            category: 'Rent Or Mortgage',
+            selected_by: 'Provider'
+          }
+        end
+      end
 
       it 'redirects to the next page' do
         subject
