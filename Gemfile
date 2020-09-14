@@ -5,6 +5,7 @@ ruby '2.6.3'
 
 gem 'aasm', '~> 5.1.1'
 gem 'active_model_serializers', '~> 0.10.10'
+gem 'activerecord-session_store', '~> 1.1'
 gem 'after_commit_everywhere', '~> 0.1', '>= 0.1.5'
 gem 'geckoboard-ruby'
 gem 'govuk_notify_rails', '~> 2.1.2'
