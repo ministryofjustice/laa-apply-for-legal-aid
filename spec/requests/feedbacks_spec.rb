@@ -64,7 +64,7 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
 
     it 'displays the provider difficulty question' do
-      expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty.provider'))
+      expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
     end
 
     context 'provider signed out' do

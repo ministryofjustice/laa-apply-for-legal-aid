@@ -2,10 +2,7 @@
 en:
   feedback:
     new:
-      difficulty: 
-        provider: How easy or difficult was it to use this service?
-        citizen: How easy or difficult was it to use this service?
-        unknown: How easy or difficult was it to use this service?
+      difficulty: How easy or difficult was it to use this service?
       done_all_needed: Were you able to do what you needed today?
       satisfaction: Overall, how satisfied were you with this service?
       signed_out: You are signed out
