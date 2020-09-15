@@ -4,6 +4,8 @@ module Providers
     helper_method :firm
 
     def show
+      # keep session size small by emptying page history on login
+      session[:page_history] = []
       if firm.offices.count == 1
         current_provider.update!(selected_office: firm.offices.first)
         redirect_to providers_legal_aid_applications_path
