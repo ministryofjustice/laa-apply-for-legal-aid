@@ -6,7 +6,7 @@ module Providers
       return redirect_to back_path unless address.postcode
 
       legal_aid_application.enter_applicant_details! unless no_state_change_required?
-
+      Rails.logger.info 'HTTP 400 fake error'
       if address_lookup.success?
         @addresses = address_lookup.result
         titleize_addresses
