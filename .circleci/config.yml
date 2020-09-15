@@ -378,44 +378,45 @@ workflows:
 
   merge_pr:
     jobs:
-      - lint_checks:
-          filters:
-            branches:
-              only: master
-      - build_and_push:
-          requires:
-          - lint_checks
-      - deploy_master_uat:
-          requires:
-            - build_and_push
-      - delete_uat_branch:
-          requires:
-            - deploy_master_uat
-      - unit_tests:
-          requires:
-            - lint_checks
-      - integration_tests:
-          requires:
-            - lint_checks
-      - webhint_reports:
-          requires:
-            - integration_tests
-      - deploy_staging:
-          requires:
-            - webhint_reports
-            - unit_tests
-            - build_and_push
-      - hold_production_notification:
-          requires:
-            - deploy_staging
-      - hold_production:
-          type: approval
-          requires:
-            - deploy_staging
-            - delete_uat_branch
-      - deploy_production:
-          requires:
-            - hold_production
+      - unit_tests
+#      - lint_checks:
+#          filters:
+#            branches:
+#              only: master
+#      - build_and_push:
+#          requires:
+#          - lint_checks
+#      - deploy_master_uat:
+#          requires:
+#            - build_and_push
+#      - delete_uat_branch:
+#          requires:
+#            - deploy_master_uat
+#      - unit_tests:
+#          requires:
+#            - lint_checks
+#      - integration_tests:
+#          requires:
+#            - lint_checks
+#      - webhint_reports:
+#          requires:
+#            - integration_tests
+#      - deploy_staging:
+#          requires:
+#            - webhint_reports
+#            - unit_tests
+#            - build_and_push
+#      - hold_production_notification:
+#          requires:
+#            - deploy_staging
+#      - hold_production:
+#          type: approval
+#          requires:
+#            - deploy_staging
+#            - delete_uat_branch
+#      - deploy_production:
+#          requires:
+#            - hold_production
 
   nightly:
     triggers:
