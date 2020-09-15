@@ -94,7 +94,7 @@ module CFE
             value: savings_amount.other_person_account.to_s
           },
           {
-            description: 'National Savings Certificates and Premium Bonds',
+            description: 'ISAs, National Savings Certificates and Premium Bonds',
             value: savings_amount.national_savings.to_s
           },
           {
