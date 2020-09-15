@@ -81,8 +81,8 @@ RSpec.describe 'citizen accounts request', type: :request do
       expect(response).to redirect_to(citizens_accounts_path)
     end
 
-    it 'does not add its url to history' do
-      expect(session[:page_history]).not_to include(gather_citizens_accounts_path)
+    it 'has reset the session and has no page history' do
+      expect(session.keys).not_to include(:page_history)
     end
 
     context 'background worker is still working' do

@@ -21,6 +21,7 @@ module Citizens
 
     def start_applicant_flow
       sign_out current_provider if provider_signed_in?
+      reset_session
       session[:current_application_id] = legal_aid_application.id
       sign_applicant_in_via_devise(legal_aid_application.applicant)
       redirect_to citizens_legal_aid_applications_path

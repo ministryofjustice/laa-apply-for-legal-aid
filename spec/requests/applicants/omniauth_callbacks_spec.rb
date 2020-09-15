@@ -47,7 +47,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
 
     it 'does not add its url to page history' do
       subject
-      expect(session[:page_history]).not_to include(applicant_true_layer_omniauth_callback_path)
+      expect(session.keys).not_to include(:page_history)
     end
 
     context 'with a string time' do
@@ -92,9 +92,9 @@ RSpec.describe 'applicants omniauth call back', type: :request do
         expect(response).to redirect_to(error_path(:access_denied))
       end
 
-      it 'does not add page to history' do
+      it 'has reset the session and has no page history' do
         subject
-        expect(session[:page_history]).not_to include(applicant_true_layer_omniauth_callback_path)
+        expect(session.keys).not_to include(:page_history)
       end
     end
   end
