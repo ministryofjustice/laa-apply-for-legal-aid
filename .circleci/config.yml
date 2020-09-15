@@ -98,8 +98,8 @@ references:
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v2-yarn-packages-cache-{{ checksum "yarn.lock" }}
-        - v2-yarn-packages-cache
+        - v3-yarn-packages-cache-{{ checksum "yarn.lock" }}
+        - v3-yarn-packages-cache
 
   save_gems_cache: &save_gems_cache
     save_cache:
@@ -109,7 +109,7 @@ references:
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v2-yarn-packages-cache-{{ checksum "yarn.lock" }}
+      key: v3-yarn-packages-cache-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
