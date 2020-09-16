@@ -2,9 +2,7 @@
 en:
   feedback:
     new:
-      difficulty: 
-        Provider: How easy or difficult was it to apply for legal aid using the new service?
-        Citizen: How easy or difficult was it to use this service?
+      difficulty: How easy or difficult was it to use this service?
       done_all_needed: Were you able to do what you needed today?
       satisfaction: Overall, how satisfied were you with this service?
       signed_out: You are signed out

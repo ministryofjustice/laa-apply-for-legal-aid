@@ -23,7 +23,7 @@ RSpec.describe 'FeedbacksController', type: :request do
       subject
       expect(feedback.browser).not_to be_empty
       expect(feedback.os).not_to be_empty
-      expect(feedback.source).to eq('Unknown')
+      expect(feedback.source).to eq('unknown')
     end
 
     it 'sends an email' do
@@ -61,6 +61,10 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     it 'renders the page' do
       expect(response).to have_http_status(:ok)
+    end
+
+    it 'displays the provider difficulty question' do
+      expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
     end
 
     context 'provider signed out' do
