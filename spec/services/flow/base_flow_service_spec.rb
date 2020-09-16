@@ -1,8 +1,9 @@
 require 'rails_helper'
 
+class TestFlowService < Flow::BaseFlowService; end
+
 RSpec.describe Flow::BaseFlowService do
   let(:flow_service_class) do
-    class TestFlowService < Flow::BaseFlowService; end
     TestFlowService
   end
   let(:steps) do

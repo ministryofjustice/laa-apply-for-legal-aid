@@ -1,14 +1,15 @@
 require 'rails_helper'
 
+class DummyClass
+  include ActiveModel::Model
+  include ActiveModel::Validations
+
+  attr_accessor :val1, :val2, :val3
+
+  validates :val1, :val2, :val3, currency: { greater_than_or_equal_to: 0 }, allow_blank: true
+end
+
 RSpec.describe CurrencyValidator do
-  class DummyClass
-    include ActiveModel::Model
-    include ActiveModel::Validations
-
-    attr_accessor :val1, :val2, :val3
-
-    validates :val1, :val2, :val3, currency: { greater_than_or_equal_to: 0 }, allow_blank: true
-  end
   describe 'numericality validation' do
     let(:dummy) { DummyClass.new }
 
