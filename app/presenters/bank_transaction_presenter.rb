@@ -10,6 +10,7 @@ class BankTransactionPresenter
     account_type: 'account type',
     account_name: 'account name',
     category: 'category',
+    selected_by: 'selected_by',
     flagged: 'flagged'
   }.freeze
 
@@ -68,6 +69,12 @@ class BankTransactionPresenter
     return unless @transaction.meta_data.present?
 
     @transaction.meta_data[:name]
+  end
+
+  def transaction_selected_by
+    return unless @transaction.meta_data.present?
+
+    @transaction.meta_data[:selected_by]
   end
 
   def transaction_flagged

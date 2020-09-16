@@ -67,6 +67,12 @@ FactoryBot.define do
       sort_order { 60 }
     end
 
+    trait :rent_or_mortgage do
+      name { 'rent_or_mortgage' }
+      operation { 'debit' }
+      sort_order { 50 }
+    end
+
     trait :benefits do
       name { 'benefits' }
       operation { 'credit' }
