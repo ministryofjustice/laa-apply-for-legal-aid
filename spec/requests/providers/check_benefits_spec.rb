@@ -1,43 +1,43 @@
 require 'rails_helper'
 
-RSpec.describe Providers::CheckBenefitsController, type: :request do
-  class EnvironmentPermutation
-    attr_reader :env, :setting, :application, :permissions, :expected_result
+class EnvironmentPermutation
+  attr_reader :env, :setting, :application, :permissions, :expected_result
 
-    EXPECTED_TEXTS = {
-      continue: 'receives benefits that qualify for legal aid',
-      ccms: "You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application",
-      need_to_check: 'We need to check your client'
-    }.freeze
+  EXPECTED_TEXTS = {
+    continue: 'receives benefits that qualify for legal aid',
+    ccms: "You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application",
+    need_to_check: 'We need to check your client'
+  }.freeze
 
-    def initialize(env:, setting:, application:, permissions:, expected_result:)
-      @env = env
-      @setting = setting
-      @application = application
-      @permissions = permissions
-      @expected_result = expected_result
-    end
+  def initialize(env:, setting:, application:, permissions:, expected_result:)
+    @env = env
+    @setting = setting
+    @application = application
+    @permissions = permissions
+    @expected_result = expected_result
+  end
 
-    def benefit_check_result
-      @application == :passported ? :positive : :negative
-    end
+  def benefit_check_result
+    @application == :passported ? :positive : :negative
+  end
 
-    def provider_permissions
-      case @permissions
-      when :passported
-        :with_passported_permissions
-      when :non_passported
-        :with_non_passported_permissions
-      else
-        :with_no_permissions
-      end
-    end
-
-    def expected_text
-      EXPECTED_TEXTS[@expected_result]
+  def provider_permissions
+    case @permissions
+    when :passported
+      :with_passported_permissions
+    when :non_passported
+      :with_non_passported_permissions
+    else
+      :with_no_permissions
     end
   end
 
+  def expected_text
+    EXPECTED_TEXTS[@expected_result]
+  end
+end
+
+RSpec.describe Providers::CheckBenefitsController, type: :request do
   let(:last_name) { 'WALKER' }
   let(:date_of_birth) { '1980/01/10'.to_date }
   let(:national_insurance_number) { 'JA293483A' }

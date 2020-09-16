@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 module CFE
+  DAY_SEQUENCE = [10, 40, 70].freeze
+
   RSpec.describe CreateStateBenefitsService do
     subject(:service) { described_class.new(submission) }
-
-    DAY_SEQUENCE = [10, 40, 70].freeze
 
     let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, transaction_period_finish_on: Date.today }
     let!(:applicant) { create :applicant, legal_aid_application: application }
