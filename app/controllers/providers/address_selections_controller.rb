@@ -6,7 +6,6 @@ module Providers
       return redirect_to back_path unless address.postcode
 
       legal_aid_application.enter_applicant_details! unless no_state_change_required?
-      Rails.logger.info 'HTTP 400 fake error'
       if address_lookup.success?
         @addresses = address_lookup.result
         titleize_addresses
@@ -15,6 +14,11 @@ module Providers
         @form = Addresses::AddressForm.new(model: address, lookup_error: address_lookup.errors[:lookup].first)
         render template: 'providers/addresses/show'.freeze
       end
+    end
+
+    def fake_error
+      Rails.logger.info('HTTP 400 bad request')
+      render json: { success: false, errors: 'fake error' }, status: :bad_request
     end
 
     def update

@@ -27,6 +27,10 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     authorized_to_process?
   end
 
+  def fake_error?
+    true
+  end
+
   def continue?
     authorized_to_process?
   end

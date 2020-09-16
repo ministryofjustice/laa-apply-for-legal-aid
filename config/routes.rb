@@ -136,7 +136,9 @@ Rails.application.routes.draw do
       resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
-      resource :address_selection, only: %i[show update]
+      resource :address_selection, only: %i[show update] do
+        get :fake_error
+      end
       resource :outstanding_mortgage, only: %i[show update]
       resource :has_dependants, only: %i[show update]
       resources :dependants, only: %i[new show update]
