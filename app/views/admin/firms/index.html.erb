@@ -9,20 +9,26 @@
     <table class="govuk-table">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col"><%= t('.firm') %></th>
+          <th class="govuk-table__header govuk-!-width-one-quarter" scope="col"><%= t('.firm') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.num_users') %></th>
+          <th class="govuk-table__header govuk-!-width-one-half" scope="col"><%= t('.permissions') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.action') %></th>
         </tr>
       </thead>
 
       <tbody class="govuk-table__body">
-      <% @firms.each do |firm| %>
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell case-full-name"><%= firm.name %></td>
-          <td class="govuk-table__cell case-reference-number"><%= firm.providers.count %></td>
-          <td class="govuk-table__cell case-reference-number"><%= link_to t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
-        </tr>
-      <% end %>
+        <% @firms.each do |firm| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><%= firm.name %></td>
+            <td class="govuk-table__cell"><%= firm.providers.count %></td>
+            <td class="govuk-table__cell">
+              <% firm.permissions.each do |permission| %>
+                <li><%= permission.description %></li>
+              <% end %>
+            </td>
+            <td class="govuk-table__cell"><%= link_to t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
