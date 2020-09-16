@@ -1,9 +1,12 @@
-$(document).ready(function(){
-    const link = document.getElementById("start");
+$(document).ready(function() {
+  const link = document.getElementById("start");
 
-    link.onkeydown = function (e) {
-        if (e.keyCode == 32) {
-            link.click();
-        }
+  if (link != null) {
+    link.onkeydown = function(e) {
+      if (e.keyCode == 32) {
+        e.preventDefault();
+        link.click();
+      }
     };
+  }
 });
