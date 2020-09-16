@@ -5,8 +5,15 @@ RSpec.describe 'Firm' do
 
   describe '#permissions' do
     context 'when there are no permissions' do
-      it 'returns an empty collection' do
-        expect(firm.permissions).to be_empty
+      let!(:default_permission) { create :permission }
+      let(:firm_with_no_permission) { create :firm }
+
+      before do
+        allow_any_instance_of(Firm).to receive(:passported_permission_id).and_return(default_permission.id)
+      end
+
+      it 'has a default permission' do
+        expect(firm_with_no_permission.permissions).to eq [default_permission]
       end
     end
 

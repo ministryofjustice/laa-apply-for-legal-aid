@@ -6,6 +6,10 @@ class Firm < ApplicationRecord
   has_many :actor_permissions, as: :permittable
   has_many :permissions, through: :actor_permissions
 
+  before_create do
+    self.permission_ids = [passported_permission_id]
+  end
+
   after_create do
     ActiveSupport::Notifications.instrument 'dashboard.firm_created'
   end
@@ -16,5 +20,9 @@ class Firm < ApplicationRecord
     else
       all
     end
+  end
+
+  def passported_permission_id
+    Permission.find_by(role: 'application.passported.*')&.id
   end
 end
