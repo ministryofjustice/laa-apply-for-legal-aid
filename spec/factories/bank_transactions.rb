@@ -20,7 +20,7 @@ FactoryBot.define do
     trait :benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
-      meta_data { { code: 'CHB', label: 'child_benefit', name: 'Child Benefit' } }
+      meta_data { { code: 'CHB', label: 'child_benefit', name: 'Child Benefit', selected_by: 'System' } }
     end
 
     trait :uncategorised_credit_transaction do
@@ -36,7 +36,7 @@ FactoryBot.define do
     trait :disregarded_benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'excluded_benefits').first || create(:transaction_type, :benefits) }
-      meta_data { { code: nil, label: 'grenfell_payments', name: 'Grenfell Tower fire victims payments' } }
+      meta_data { { code: nil, label: 'grenfell_payments', name: 'Grenfell Tower fire victims payments', selected_by: 'System' } }
     end
 
     trait :unassigned_benefits do
@@ -47,7 +47,7 @@ FactoryBot.define do
     trait :unknown_benefits do
       operation { 'credit' }
       transaction_type { TransactionType.where(name: 'benefits').first || create(:transaction_type, :benefits) }
-      meta_data { { code: 'xxx', label: 'unknown', name: 'Unrecognised state benefit' } }
+      meta_data { { code: 'xxx', label: 'unknown', name: 'Unrecognised state benefit', selected_by: 'System' } }
     end
 
     trait :friends_or_family do
@@ -97,7 +97,7 @@ FactoryBot.define do
 
     trait :with_meta do
       meta_data do
-        { code: 'UC', label: 'universal_credit', name: 'Universal credit' }
+        { code: 'UC', label: 'universal_credit', name: 'Universal credit', selected_by: 'System' }
       end
     end
   end

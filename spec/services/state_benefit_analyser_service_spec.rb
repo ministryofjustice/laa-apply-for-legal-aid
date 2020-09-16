@@ -52,7 +52,7 @@ RSpec.describe StateBenefitAnalyserService do
         it 'updates the meta data with the label of the state benefit' do
           subject
           tx = legal_aid_application.reload.bank_transactions.first
-          expect(tx.meta_data).to eq({ code: 'CWP', label: 'cold_weather_payment', name: 'Cold Weather Payment' })
+          expect(tx.meta_data).to eq({ code: 'CWP', label: 'cold_weather_payment', name: 'Cold Weather Payment', selected_by: 'System' })
         end
 
         it 'adds both included and excluded transaction types to the legal aid application' do
@@ -74,7 +74,7 @@ RSpec.describe StateBenefitAnalyserService do
         it 'updates the meta data with the label of the state benefit' do
           subject
           tx = legal_aid_application.reload.bank_transactions.first
-          expect(tx.meta_data).to eq({ code: 'DLA', label: 'disability_living_allowance', name: 'Disability Living Allowance' })
+          expect(tx.meta_data).to eq({ code: 'DLA', label: 'disability_living_allowance', name: 'Disability Living Allowance', selected_by: 'System' })
         end
 
         it 'adds both included and excluded transaction types to the legal aid application' do
@@ -97,7 +97,7 @@ RSpec.describe StateBenefitAnalyserService do
       it 'updates the meta data with the label of the state benefit' do
         subject
         tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.meta_data).to eq({ code: 'XXXX', label: 'Unknown code XXXX', name: 'Unknown state benefit' })
+        expect(tx.meta_data).to eq({ code: 'XXXX', label: 'Unknown code XXXX', name: 'Unknown state benefit', selected_by: 'System' })
       end
 
       it 'adds a transaction type of benefits to the legal aid application' do
@@ -115,28 +115,32 @@ RSpec.describe StateBenefitAnalyserService do
           'name' => 'Cold Weather Payment',
           'dwp_code' => 'CWP',
           'exclude_from_gross_income' => false,
-          'category' => nil
+          'category' => nil,
+          'selected_by': 'System'
         },
         {
           'label' => 'disability_living_allowance',
           'name' => 'Disability Living Allowance',
           'dwp_code' => 'DLA',
           'exclude_from_gross_income' => true,
-          'category' => 'carer_disability'
+          'category' => 'carer_disability',
+          'selected_by': 'System'
         },
         {
           'label' => 'employment_support_allowance',
           'name' => 'Employment Support Allowance',
           'dwp_code' => 'ESA',
           'exclude_from_gross_income' => false,
-          'category' => nil
+          'category' => nil,
+          'selected_by': 'System'
         },
         {
           'label' => 'social_fund_payments',
           'name' => 'Social Fund Payment',
           'dwp_code' => nil,
           'exclude_from_gross_income' => false,
-          'category' => nil
+          'category' => nil,
+          'selected_by': 'System'
         }
       ]
     end
