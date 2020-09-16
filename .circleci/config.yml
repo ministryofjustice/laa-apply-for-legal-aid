@@ -65,7 +65,9 @@ references:
   install_js_packages: &install_js_packages
     run:
       name: Install Yarn packages
-      command: yarn --frozen-lockfile
+      command: |
+        node -v
+        yarn --frozen-lockfile
 
   setup_aws_login: &setup_aws_login
     run:
@@ -98,8 +100,8 @@ references:
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-        - v1-yarn-packages-cache
+        - v10-yarn-packages-cache-{{ checksum "yarn.lock" }}
+        - v10-yarn-packages-cache
 
   save_gems_cache: &save_gems_cache
     save_cache:
@@ -109,7 +111,7 @@ references:
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+      key: v10-yarn-packages-cache-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
@@ -356,22 +358,23 @@ workflows:
   version: 2
   open_pr:
     jobs:
-      - lint_checks:
-          filters:
-            branches:
-              ignore: master
-      - build_and_push:
-          requires:
-          - lint_checks
-      - deploy_uat:
-          requires:
-          - build_and_push
-      - unit_tests:
-          requires:
-          - lint_checks
-      - integration_tests:
-          requires:
-          - lint_checks
+      # - lint_checks:
+      #     filters:
+      #       branches:
+      #         ignore: master
+      # - build_and_push:
+      #     requires:
+      #     - lint_checks
+      # - deploy_uat:
+      #     requires:
+      #     - build_and_push
+      # - unit_tests:
+      #     requires:
+      #     - lint_checks
+      # - integration_tests:
+      #     requires:
+      #     - lint_checks
+      - integration_tests
       - webhint_reports:
           requires:
           - integration_tests
