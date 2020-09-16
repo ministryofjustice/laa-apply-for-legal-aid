@@ -70,7 +70,7 @@ In UAT and Staging, we dont run the job by scheduling it for 31st February.
   {{- if contains "-production" .Release.Namespace -}}
     {{ "3 7-21 * * *"}}
   {{- else -}}
-    {{ "*/5 * * * *" }}
+    {{ "0 0 31 2 *" }}
   {{- end -}}
 {{- end -}}
 
@@ -83,6 +83,6 @@ In UAT and Staging, we dont run the job by scheduling it for 31st February
   {{- if contains "-production" .Release.Namespace -}}
     {{ "0 7 * * *"}}
   {{- else -}}
-    {{ "45 * * * *" }}
+    {{ "0 0 31 2 *" }}
   {{- end -}}
 {{- end -}}
