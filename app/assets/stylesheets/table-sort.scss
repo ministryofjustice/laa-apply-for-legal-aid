@@ -1,3 +1,5 @@
+@import "govuk-frontend/govuk/settings/all";
+
 .sort.js-sortable, th.select-all, th.clear-all {
   color:#0b0c0c;
   cursor:pointer;
@@ -13,7 +15,7 @@
     background-color:#c8cacb;
   }
   &:focus {
-    outline: 3px solid #ffdd00;
+    box-shadow: 0 0 0 $govuk-focus-width $govuk-focus-text-colour, 0 0 0 $govuk-focus-width*2 $govuk-focus-colour;
     outline-offset: 0;
     z-index: 100;
   }
