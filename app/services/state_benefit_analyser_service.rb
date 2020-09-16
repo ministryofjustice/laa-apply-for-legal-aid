@@ -60,7 +60,8 @@ class StateBenefitAnalyserService
     {
       code: dwp_code,
       label: "Unknown code #{dwp_code}",
-      name: 'Unknown state benefit'
+      name: 'Unknown state benefit',
+      selected_by: 'System'
     }
   end
 
@@ -73,7 +74,8 @@ class StateBenefitAnalyserService
     {
       code: benefit.code,
       label: benefit.label,
-      name: benefit.name
+      name: benefit.name,
+      selected_by: 'System'
     }
   end
 
