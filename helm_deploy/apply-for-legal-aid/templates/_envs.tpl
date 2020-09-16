@@ -44,6 +44,13 @@ env:
         name: apply-for-legal-aid-rds-instance-output
         key: database_name
   {{ end }}
+  {{ if .Values.admin.allowAdminPassword }}
+    - name: ADMIN_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: {{ template "apply-for-legal-aid.fullname" . }}
+          key: adminPassword
+  {{ end }}
   - name: GOVUK_NOTIFY_API_KEY
     valueFrom:
       secretKeyRef:
@@ -263,11 +270,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminAllowNonPassportedRoute
-  - name: ADMIN_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: adminPassword
   - name: GECKOBOARD_API_KEY
     valueFrom:
       secretKeyRef:
