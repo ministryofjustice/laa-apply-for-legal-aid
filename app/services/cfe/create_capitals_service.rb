@@ -14,7 +14,7 @@ module CFE
       offline_savings_accounts: 'Savings accounts your client cannot access online',
       cash: 'Money not in a bank account',
       other_person_account: "Access to another person's bank account",
-      national_savings: 'National Savings Certificates and Premium Bonds',
+      national_savings: 'ISAs, National Savings Certificates and Premium Bonds',
       plc_shares: 'Shares in a public limited company',
       peps_unit_trusts_capital_bonds_gov_stocks: 'PEPs, unit trusts, capital bonds and government stocks',
       life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage'
