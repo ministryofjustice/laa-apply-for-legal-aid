@@ -18,7 +18,7 @@ module Providers
 
     def fake_error
       Rails.logger.info('HTTP 400 bad request')
-      render json: { success: false, errors: 'fake error' }, status: :bad_request
+      render json: { success: false, errors: 'fake error' }, status: 500
     end
 
     def update
