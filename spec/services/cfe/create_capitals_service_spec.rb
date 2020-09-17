@@ -19,7 +19,7 @@ module CFE
     describe '#request payload' do
       it 'creates the expected payload from the values in the applicant' do
         response_hash = JSON.parse(service.request_body, symbolize_names: true)
-        response_hash.keys.each do |key|
+        response_hash.each_key do |key|
           expect(response_hash[key]).to match_array(expected_payload_hash[key])
         end
       end
