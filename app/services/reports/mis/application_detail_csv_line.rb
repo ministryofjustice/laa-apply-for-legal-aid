@@ -20,6 +20,8 @@ module Reports
                :savings_amount,
                :shared_ownership,
                :used_delegated_functions?,
+               :used_delegated_functions_on,
+               :used_delegated_functions_reported_on,
                :vehicle, to: :laa
 
       delegate :case_ccms_reference, to: :ccms_submission
@@ -73,6 +75,8 @@ module Reports
           'Proceeding type selected',
           'DWP check result',
           'Delegated functions used',
+          'Delegated functions date',
+          'Delegated functions reported',
           'Own home?',
           'Value',
           'Outstanding mortgage',
@@ -179,6 +183,8 @@ module Reports
 
       def delegated_functions
         @line << yesno(used_delegated_functions?)
+        @line << (used_delegated_functions? ? used_delegated_functions_on&.strftime('%Y-%m-%d') : '')
+        @line << (used_delegated_functions? ? used_delegated_functions_reported_on&.strftime('%Y-%m-%d') : '')
       end
 
       def main_home_details
