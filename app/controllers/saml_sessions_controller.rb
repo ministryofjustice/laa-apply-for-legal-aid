@@ -6,7 +6,7 @@
 class SamlSessionsController < Devise::SamlSessionsController
   after_action :update_provider_details, only: :create
 
-  def destroy
+  def destroy # rubocop:disable Metrics/AbcSize
     puts ">>>>>>>>>>>> session destroy #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
     pp session.to_hash
     puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
