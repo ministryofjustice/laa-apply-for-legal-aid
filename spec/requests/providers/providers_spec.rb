@@ -22,11 +22,4 @@ RSpec.describe Providers::ProvidersController, type: :request do
     expect(unescaped_response_body).to include(provider.username)
     expect(unescaped_response_body).to include(provider.email)
   end
-
-  context 'with unspaced roles' do
-    let(:provider) { create :provider, roles: 'CWA,PUI' }
-    it 'displays roles with spaces' do
-      expect(response.body).to include('CWA, PUI')
-    end
-  end
 end

@@ -17,10 +17,6 @@
         <td class="govuk-table__cell"><%= @provider.email %></td>
       </tr>
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="row"><%= t('.role') %></th>
-        <td class="govuk-table__cell wrap-text"><%= @provider.roles&.gsub(/,(?=\S)/, ', ') %></td>
-      </tr>
-      <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="row"><%= t('.account_number') %></th>
         <td class="govuk-table__cell"></td>
       </tr>
