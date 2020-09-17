@@ -7,14 +7,12 @@ class SamlSessionsController < Devise::SamlSessionsController
   after_action :update_provider_details, only: :create
 
   def destroy # rubocop:disable Metrics/AbcSize
-    puts ">>>>>>>>>>>> session destroy #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-    pp session.to_hash
-    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
     sign_out current_provider
 
-    puts ">>>>>>>>>>>> after signout #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
-    pp session.to_hash
-    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+    # the reset session shouldn't necessary below, but for some reason, the  user is not being fully
+    # signed out on staging (and probably production as well), so this ensures that they are.
+    #
+    reset_session
 
     if IdPSettingsAdapter.mock_saml?
       redirect_to providers_root_url
