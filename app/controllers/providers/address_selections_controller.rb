@@ -16,11 +16,6 @@ module Providers
       end
     end
 
-    def fake_error
-      Rails.logger.info('HTTP 400 bad request')
-      render json: { success: false, errors: 'fake error' }, status: 500
-    end
-
     def update
       @addresses = build_addresses_from_form_data
       @form = Addresses::AddressSelectionForm.new(permitted_params)
