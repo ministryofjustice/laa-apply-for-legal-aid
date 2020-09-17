@@ -7,7 +7,15 @@ class SamlSessionsController < Devise::SamlSessionsController
   after_action :update_provider_details, only: :create
 
   def destroy
+    puts ">>>>>>>>>>>> session destroy #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+    pp session.to_hash
+    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
     sign_out current_provider
+
+    puts ">>>>>>>>>>>> after signout #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+    pp session.to_hash
+    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+
     if IdPSettingsAdapter.mock_saml?
       redirect_to providers_root_url
     else
