@@ -84,21 +84,21 @@ spec:
       annotations:
         message: Request is taking more than 2 seconds
     - alert: Address lookup service
-      expr: sum(increase(ruby_http_requests_total{status=~"4**|5**", namespace="laa-apply-for-legalaid-uat", controller="providers/address_lookups"}
+      expr: sum(rate(ruby_http_requests_total{status=~"4..", namespace="laa-apply-for-legalaid-staging", controller="providers/address_lookups"}[30m])) * 1800 > 1
       for: 1m
       labels:
         severity: apply-for-legal-aid-uat
       annotations:
         message: Request has multiple consecutive HTTP 4xx or 5xx status errors over the last 30 minutes
     - alert: Benefit Checker
-      expr: sum(increase(ruby_http_requests_total{status=~"4**|5**", namespace="laa-apply-for-legalaid-uat", controller="providers/check_benefits"}[30m])) > 1
+      expr: sum(increase(ruby_http_requests_total{status=~"4..|5..", namespace="laa-apply-for-legalaid-uat", controller="providers/check_benefits"}[30m])) > 1
       for: 1m
       labels:
         severity: apply-for-legal-aid-uat
       annotations:
         message: Request has multiple consecutive HTTP 4xx or 5xx status errors over the last 30 minutes
     - alert: Provider Details API
-      expr: sum(increase(ruby_http_requests_total{status=~"4**|5**", namespace="laa-apply-for-legalaid-uat", controller="providers/saml/sign_in"}[30m])) > 1
+      expr: sum(increase(ruby_http_requests_total{status=~"4..|5..", namespace="laa-apply-for-legalaid-uat", controller="providers/saml/sign_in"}[30m])) > 1
       for: 1m
       labels:
         severity: apply-for-legal-aid-uat
