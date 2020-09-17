@@ -523,9 +523,11 @@ RSpec.describe LegalAidApplication, type: :model do
       application = create :legal_aid_application, :with_delegated_functions
       expect(application.used_delegated_functions).to be true
       expect(application.used_delegated_functions_on).to eq Date.today
+      expect(application.used_delegated_functions_reported_on).to eq Date.today
       application.reset_delegated_functions
       expect(application.used_delegated_functions).to be false
       expect(application.used_delegated_functions_on).to be_nil
+      expect(application.used_delegated_functions_reported_on).to be_nil
     end
   end
 

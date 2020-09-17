@@ -252,6 +252,7 @@ FactoryBot.define do
         delegated_functions_date { nil }
       end
       used_delegated_functions_on { delegated_functions_date.present? ? delegated_functions_date : Date.today }
+      used_delegated_functions_reported_on { Date.today }
       used_delegated_functions { true }
     end
 
