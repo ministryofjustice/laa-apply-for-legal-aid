@@ -16,7 +16,7 @@ gem 'regexp-examples'
 gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
-gem 'simple_command', '~> 0.1.0'
+gem 'simple_command', github: 'nebulab/simple_command', branch: 'master'
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.3.0'
 
