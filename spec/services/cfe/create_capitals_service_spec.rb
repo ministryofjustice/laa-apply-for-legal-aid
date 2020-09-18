@@ -102,11 +102,11 @@ module CFE
           },
           {
             description: 'Current accounts',
-            value: application.online_current_accounts_balance.to_s
+            value: application.online_current_accounts_balance
           },
           {
             description: 'Savings accounts',
-            value: application.online_savings_accounts_balance.to_s
+            value: application.online_savings_accounts_balance
           }
         ],
         non_liquid_capital: [

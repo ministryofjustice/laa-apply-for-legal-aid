@@ -251,12 +251,12 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def online_savings_accounts_balance
     accounts = applicant.bank_accounts.reject { |c| c.account_type == 'TRANSACTION' }&.map(&:balance)
-    accounts.sum
+    accounts.sum.to_s
   end
 
   def online_current_accounts_balance
     accounts = applicant.bank_accounts.reject { |c| c.account_type == 'SAVINGS' }&.map(&:balance)
-    accounts.sum
+    accounts.sum.to_s
   end
 
   def other_assets?
