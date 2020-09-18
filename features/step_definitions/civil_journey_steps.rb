@@ -350,7 +350,8 @@ Given('The means questions have been answered by the applicant') do
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
-    :with_uncategorised_debit_transactions
+    :with_uncategorised_debit_transactions,
+    :with_uncategorised_credit_transactions
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(

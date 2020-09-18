@@ -4,12 +4,14 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    Then I should be on a page showing "Your client's outgoings"
+    Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -34,11 +36,11 @@ Feature: Non-passported applicant journeys
     Given I start the merits application with bank transactions with no transaction type category
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    When I click link 'Add another type of income'
-    And I select 'Benefits'
-    And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which types of income does your client receive?"
+    Then I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click the first link 'View statements and add transactions'
@@ -48,6 +50,12 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
+    Then I should be on a page showing "Your client's outgoings"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which regular payments does your client make?"
+    Then I select 'Housing costs'
+    And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     When I click link 'Add another type of regular payment'
     And I select 'Childcare costs'
@@ -55,7 +63,11 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-    Then I click link 'View statements and add transactions'
+    Then I click the first link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I click the last link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
     Then I click 'Save and continue'
@@ -67,7 +79,8 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
@@ -133,7 +146,8 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
@@ -196,7 +210,8 @@ Feature: Non-passported applicant journeys
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
