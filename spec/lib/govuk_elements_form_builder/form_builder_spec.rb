@@ -134,6 +134,21 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
         expect(subject).to eq expected_html
       end
     end
+
+    context 'passing in a title hash with padding' do
+      let(:params) do
+        {
+          text: 'My text',
+          size: :m,
+          htag: :h2,
+          padding_below: 6
+        }
+      end
+      it 'returns html with medium size' do
+        expected_html = '<legend class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-padding-bottom-6"><h2 class="govuk-fieldset__heading">My text</h2></legend>'
+        expect(subject).to eq expected_html
+      end
+    end
   end
 
   describe 'govuk_text_field' do

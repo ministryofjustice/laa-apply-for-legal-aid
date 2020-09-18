@@ -214,7 +214,9 @@ module GovukElementsFormBuilder
       title = text_hash(title)
       size = title.fetch(:size, 'xl')
       htag = title.fetch(:htag, :h1)
-      content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}") do
+      padding_below = title.fetch(:padding_below, nil)
+      padding_class = " govuk-!-padding-bottom-#{padding_below}" if padding_below.present?
+      content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}#{padding_class}") do
         content_tag(htag, title[:text], class: 'govuk-fieldset__heading')
       end
     end
