@@ -63,7 +63,7 @@ module Flow
         },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
-          forward: ->(application) { application.income_types? ? :income_summary : :no_income_summary }
+          forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries }
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
@@ -76,8 +76,12 @@ module Flow
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: :own_homes,
-          check_answers: :means_summaries
+          forward: :own_homes
+          # check_answers: :means_summaries
+        },
+        no_outgoings_summaries: {
+            path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
+            forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :own_homes : :identify_types_of_outgoings }
         },
         incoming_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
