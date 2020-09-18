@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const link = document.getElementById("start");
+  const link = document.getElementById("continue");
 
   if (link != null) {
     link.onkeydown = function(e) {
