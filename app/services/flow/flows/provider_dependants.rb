@@ -5,15 +5,6 @@ module Flow
         has_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_dependants_path(application) },
           forward: ->(application) { application.has_dependants? ? :dependants : :no_outgoings_summaries }
-          # forward: ->(application) do
-          #   if application.has_dependants?
-          #     :dependants
-          #   elsif application.outgoing_types?
-          #     :outgoings_summary
-          #   else
-          #     :no_outgoings_summaries
-          #   end
-          # end
         },
         dependants: {
           path: ->(application) { urls.new_providers_legal_aid_application_dependant_path(application) },

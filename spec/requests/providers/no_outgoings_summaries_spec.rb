@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Providers::NoIncomeSummariesController, type: :request do
+RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine }
   let(:application_id) { legal_aid_application.id }
   let!(:provider) { legal_aid_application.provider }
 
-  describe 'GET providers/no_income_summary' do
-    subject { get providers_legal_aid_application_no_income_summary_path(legal_aid_application.id) }
+  describe 'GET providers/no_outgoings_summary' do
+    subject { get providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application.id) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -24,24 +24,24 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
       end
 
       it 'displays the correct page content' do
-        expect(unescaped_response_body).to include(I18n.t('providers.no_income_summaries.show.page_heading'))
-        expect(unescaped_response_body).to include(I18n.t('providers.no_income_summaries.show.subheading.text'))
+        expect(unescaped_response_body).to include(I18n.t('providers.no_outgoings_summaries.show.page_heading'))
+        expect(unescaped_response_body).to include(I18n.t('providers.no_outgoings_summaries.show.subheading.text'))
       end
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/no_income_summary' do
-    let(:confirm_no_income) { 'yes' }
+  describe 'PATCH /providers/applications/:legal_aid_application_id/no_outgoings_summary' do
+    let(:confirm_no_outgoings) { 'yes' }
     let(:submit_button) { {} }
     let(:params) do
       {
-        confirm_no_income: confirm_no_income
+        confirm_no_outgoings: confirm_no_outgoings
       }
     end
 
     subject do
       patch(
-        "/providers/applications/#{application_id}/no_income_summary",
+        "/providers/applications/#{application_id}/no_outgoings_summary",
         params: params.merge(submit_button)
       )
     end
@@ -53,22 +53,22 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
       end
 
       it 'redirects to the dependants' do
-        expect(response).to redirect_to(providers_legal_aid_application_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_own_home_path(legal_aid_application))
       end
 
       context 'neither option is chosen' do
         let(:params) { {} }
 
         it 'shows an error' do
-          expect(unescaped_response_body).to include(I18n.t('providers.no_income_summaries.show.error'))
+          expect(unescaped_response_body).to include(I18n.t('providers.no_outgoings_summaries.show.error'))
         end
       end
 
       context 'The NO option is chosen' do
-        let(:confirm_no_income) { 'no' }
+        let(:confirm_no_outgoings) { 'no' }
 
-        it 'redirects to the identify income types page' do
-          expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_income_path(legal_aid_application))
+        it 'redirects to the identify outgoings types page' do
+          expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))
         end
       end
     end
