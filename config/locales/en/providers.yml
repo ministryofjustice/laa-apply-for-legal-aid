@@ -439,8 +439,8 @@ en:
         deductions-section-heading: Deductions
     no_income_summaries:
       show:
-        alt_page_heading: "Your client's income"
-        alt_subheading:
+        page_heading: "Your client's income"
+        subheading:
           text: 'Your client has told us they do not receive:'
           list: |
             benefits
@@ -452,8 +452,8 @@ en:
         error: Please select Yes or No
     no_outgoings_summaries:
       show:
-        alt_page_heading: "Your client's outgoings"
-        alt_subheading:
+        page_heading: "Your client's outgoings"
+        subheading:
           text: 'Your client has told us they do not pay:'
           list: |
             housing costs

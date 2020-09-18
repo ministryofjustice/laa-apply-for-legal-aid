@@ -67,21 +67,21 @@ module Flow
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
-          forward: :has_dependants
-          # check_answers: :means_summaries
+          forward: :has_dependants,
+          check_answers: :means_summaries
         },
         no_income_summaries: {
-            path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
-            forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :has_dependants : :identify_types_of_incomes }
+          path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
+          forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :has_dependants : :identify_types_of_incomes }
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: :own_homes
-          # check_answers: :means_summaries
+          forward: :own_homes,
+          check_answers: :means_summaries
         },
         no_outgoings_summaries: {
-            path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
-            forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :own_homes : :identify_types_of_outgoings }
+          path: ->(application) { urls.providers_legal_aid_application_no_outgoings_summary_path(application) },
+          forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :own_homes : :identify_types_of_outgoings }
         },
         incoming_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },

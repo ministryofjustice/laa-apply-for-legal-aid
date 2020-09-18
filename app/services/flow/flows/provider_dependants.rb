@@ -4,7 +4,7 @@ module Flow
       STEPS = {
         has_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_dependants_path(application) },
-          forward: ->(application) { application.has_dependants? ? :dependants : :outgoings_summary },
+          forward: ->(application) { application.has_dependants? ? :dependants : :no_outgoings_summaries }
           # forward: ->(application) do
           #   if application.has_dependants?
           #     :dependants

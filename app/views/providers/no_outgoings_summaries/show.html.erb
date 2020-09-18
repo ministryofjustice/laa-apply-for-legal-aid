@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.alt_page_heading'), template: :basic do %>
+<%= page_template page_title: t('.page_heading'), template: :basic do %>
 
   <% if @error %>
     <div class="govuk-error-summary" id="error_explanation">
@@ -22,10 +22,10 @@
           local: true
       ) do |form| %>
 
-    <%= govuk_fieldset_header t('.alt_page_heading') %>
+    <%= govuk_fieldset_header t('.page_heading') %>
 
-    <p class="gov-body"><%= t('.alt_subheading.text') %></p>
-    <%= list_from_translation_path('.no_outgoings_summaries.show.alt_subheading') %>
+    <p class="gov-body"><%= t('.subheading.text') %></p>
+    <%= list_from_translation_path('.no_outgoings_summaries.show.subheading') %>
 
     <h2 class="govuk-heading-l"><%= t('.is_this_correct') %></h2>
 
@@ -51,8 +51,6 @@
                 error: @error&.values&.first
             ) %>
       </div>
-
-
     <% end %>
 
     <%= next_action_buttons_with_form(
