@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.h1-heading', firm: firm.name), template: :basic do %>
+<%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), template: :basic do %>
   <%= form_with(url: providers_confirm_office_path, method: :patch, local: true) do |form| %>
 
     <% if @error %>
@@ -19,24 +19,24 @@
     <%= govuk_form_group(
           show_error_if: @error,
         ) do %>
-
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
-
-      <div class="govuk-!-padding-bottom-6"></div>
-      <p class="govuk-body">
-        <strong><%= t('.account_number') %></strong> <%= current_provider.selected_office.code %>
-      </p>
-
-      <div class="govuk-!-padding-bottom-2"></div>
-      <h2 class="govuk-heading-m"><%= t('.is_this_correct') %></h2>
-
       <%
         options = [
           { value: :yes, label: t('generic.yes') },
           { value: :no,  label: t('.no_another_office') }
         ]
       %>
-      <%= form.govuk_collection_radio_buttons :correct, options, :value, :label, error: @error %>
+      <%= form.govuk_collection_radio_buttons(
+            :correct,
+            options,
+            :value,
+            :label,
+            error: @error,
+            title: {
+                      text: t('.h1-heading', office_code: current_provider.selected_office.code),
+                      htag: :h1,
+                      padding_below: 6
+            }
+          ) %>
 
     <% end %>
 

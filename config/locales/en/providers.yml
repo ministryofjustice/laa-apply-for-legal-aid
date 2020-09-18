@@ -274,11 +274,9 @@ en:
           - property, savings and other assets
     confirm_offices:
       show:
-        h1-heading: Confirm the account number of the office handling this application
+        h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
-        account_number: 'Legal Aid Agency account number: '
-        is_this_correct: Is this correct?
     date_client_told_incidents:
       show:
         h1-heading: Latest incident details
