@@ -63,12 +63,16 @@ module Flow
         },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
-          forward: :income_summary
+          forward: ->(application) { application.income_types? ? :income_summary : :no_income_summary }
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
-          forward: :has_dependants,
-          check_answers: :means_summaries
+          forward: :has_dependants
+          # check_answers: :means_summaries
+        },
+        no_income_summaries: {
+            path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
+            forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :has_dependants : :identify_types_of_incomes }
         },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },

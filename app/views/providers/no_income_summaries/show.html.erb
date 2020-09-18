@@ -1,0 +1,64 @@
+<%= page_template page_title: t('.alt_page_heading'), template: :basic do %>
+
+  <% if @error %>
+    <div class="govuk-error-summary" id="error_explanation">
+      <h2 class="govuk-error-summary__title" id="error-summary-title">
+        <%= t('generic.errors.problem_text') %>
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <%= link_to @error.values.first, "##{@error.keys.first}" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_no_income_summary_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= govuk_fieldset_header t('.alt_page_heading') %>
+
+    <p class="gov-body"><%= t('.alt_subheading.text') %></p>
+    <%= list_from_translation_path('.income_summaries.no_income_summary.alt_subheading') %>
+
+    <h2 class="govuk-heading-l"><%= t('.is_this_correct') %></h2>
+
+    <%= govuk_form_group(
+            show_error_if: @error,
+            input: :confirm_no_income
+        ) do %>
+
+      <%= govuk_error_message(@error&.values&.first) %>
+
+      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
+        <%= form.govuk_radio_button(
+                :confirm_no_income,
+                'yes',
+                label: t('generic.yes'),
+                error: @error&.values&.first
+            ) %>
+
+        <%= form.govuk_radio_button(
+                :confirm_no_income,
+                'no',
+                label: t('generic.no'),
+                error: @error&.values&.first
+            ) %>
+      </div>
+
+
+    <% end %>
+
+    <%= next_action_buttons_with_form(
+            url: providers_legal_aid_application_no_income_summary_path,
+            show_draft: true
+        ) %>
+
+  <% end %>
+<% end %>
