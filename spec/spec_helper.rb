@@ -23,8 +23,6 @@ unless ENV['NOCOVERAGE']
     add_filter 'config/initializers/'
     add_filter 'spec/'
     add_filter 'services/migration_helpers/'
-    add_filter 'app/lib/omniauth/strategies/laa_oauth2.rb'
-    add_filter 'app/lib/omniauth/strategies/true_layer.rb'
   end
   SimpleCov.at_exit do
     say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
