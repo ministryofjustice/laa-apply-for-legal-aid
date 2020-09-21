@@ -163,11 +163,11 @@ Feature: Civil application journeys
     Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9AJ'
+    Then I enter a postcode 'XX1 1XX'
     Then I click find address
-    Then I enter address line one '102 Petty France'
-    Then I enter city 'London'
-    Then I enter postcode 'SW1H 9AJ'
+    Then I enter address line one 'Fake Road'
+    Then I enter city 'Fake City'
+    Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -353,11 +353,11 @@ Feature: Civil application journeys
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Address'
     Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9AJ'
+    Then I enter a postcode 'XX1 1XX'
     Then I click find address
-    Then I enter address line one '102 Petty France'
-    Then I enter city 'London'
-    Then I enter postcode 'SW1H 9AJ'
+    Then I enter address line one 'Fake Road'
+    Then I enter city 'Fake City'
+    Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 

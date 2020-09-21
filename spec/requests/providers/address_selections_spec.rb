@@ -38,7 +38,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         end
 
         context 'but the lookup does not return any valid results' do
-          let(:postcode) { 'SW1H 9AJ' } # NOTE: test account does not return any results for this postcode
+          let(:postcode) { 'XX1 1XX' }
           let(:form_heading) { "Enter your client's correspondence address" }
           let(:error_message) { 'We could not find any addresses for that postcode. Enter the address manually.' }
 
