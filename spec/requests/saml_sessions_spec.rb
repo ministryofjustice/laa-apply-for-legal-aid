@@ -17,6 +17,16 @@ RSpec.describe 'SamlSessionsController', type: :request do
       expect(controller.current_provider).to be_nil
     end
 
+    it 'records id of logged out provider in session' do
+      subject
+      expect(session['signed_out_provider_id']).to eq provider.id
+    end
+
+    it 'records the signout page as the feedback return path' do
+      subject
+      expect(session['feedback_return_path']).to eq destroy_provider_session_path
+    end
+
     context 'no mock saml' do
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('false')

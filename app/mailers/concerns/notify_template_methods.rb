@@ -11,4 +11,8 @@ module NotifyTemplateMethods
   def support_email_address
     Rails.configuration.x.support_email_address
   end
+
+  def safe_nil(value)
+    value || ''
+  end
 end

@@ -3,20 +3,70 @@ require 'sidekiq/testing'
 
 RSpec.describe 'FeedbacksController', type: :request do
   describe 'POST /feedback' do
-    let(:params) { attributes_for(:feedback) }
+    let(:params) { { feedback: attributes_for(:feedback) } }
     let(:feedback) { Feedback.order(created_at: :asc).last }
-    subject { post feedback_index_path, params: { feedback: params } }
+    let(:feedback_params) { params[:feedback] }
+    let(:provider) { create :provider }
+    let(:session_vars) { {} }
+    let(:address_lookup_page) { 'http://localhost:3000/providers/applications/fa580023-5b07-493d-bb64-49b6d97c2a97/address_lookup' }
+    let(:additional_accounts_page) { 'http://localhost:3000/citizens/additional_accounts' }
+    let(:originating_page) { 'page_outside_apply_service' }
 
-    it 'create a feedback' do
-      expect { subject }.to change { Feedback.count }.by(1)
-    end
+    before { set_session(session_vars) }
 
-    it 'applies params to new feedback' do
-      subject
-      expect(feedback.done_all_needed).to eq(params[:done_all_needed])
-      expect(feedback.satisfaction).to eq(params[:satisfaction])
-      expect(feedback.difficulty).to eq(params[:difficulty])
-      expect(feedback.improvement_suggestion).to eq(params[:improvement_suggestion])
+    subject { post feedback_index_path, params: params, headers: { 'HTTP_REFERER' => originating_page } }
+
+    describe 'creation of feedback record' do
+      context 'any type of user' do
+        it 'create a feedback' do
+          expect { subject }.to change { Feedback.count }.by(1)
+        end
+
+        it 'applies params to new feedback' do
+          subject
+          expect(feedback.done_all_needed).to eq(feedback_params[:done_all_needed])
+          expect(feedback.satisfaction).to eq(feedback_params[:satisfaction])
+          expect(feedback.difficulty).to eq(feedback_params[:difficulty])
+          expect(feedback.improvement_suggestion).to eq(feedback_params[:improvement_suggestion])
+        end
+      end
+      context 'as a logged in provider' do
+        let(:originating_page) { address_lookup_page }
+        let(:provider_warden_data) { [[provider.id], nil] }
+        let(:session_vars) do
+          {
+            'warden.user.provider.key' => provider_warden_data
+          }
+        end
+        it 'adds provider-specific data to feedback record' do
+          subject
+          expect(feedback.source).to eq 'provider'
+          expect(feedback.email).to eq provider.email
+          expect(feedback.originating_page).to eq address_lookup_page
+        end
+      end
+
+      context 'as a provider after logging out' do
+        let(:originating_page) { address_lookup_page }
+        let(:params) { { feedback: attributes_for(:feedback), signed_out_provider_id: provider.id } }
+        it 'adds signed-out provider specific attributes' do
+          subject
+          expect(feedback.source).to eq 'provider'
+          expect(feedback.email).to eq provider.email
+          expect(feedback.originating_page).to eq '/providers/sign_out'
+        end
+      end
+
+      context 'as an applicant' do
+        let(:originating_page) { additional_accounts_page }
+
+        it 'adds applicant specific data' do
+          subject
+          expect(feedback.source).to eq 'citizen'
+          expect(feedback.email).to be_nil
+          expect(feedback.originating_page).to eq additional_accounts_page
+        end
+      end
     end
 
     it 'gathers browser data' do
@@ -38,7 +88,7 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
 
     context 'with no satisfaction params' do
-      let(:params) { { satisfaction: '' } }
+      let(:params) { { feedback: { satisfaction: '' } } }
 
       it 'does not create a feedback to record browser data' do
         expect { subject }.not_to change { Feedback.count }
@@ -57,7 +107,11 @@ RSpec.describe 'FeedbacksController', type: :request do
   end
 
   describe 'GET /feedback/new' do
-    before { get new_feedback_path }
+    let(:session_vars) { {} }
+    before do
+      set_session(session_vars)
+      get new_feedback_path
+    end
 
     it 'renders the page' do
       expect(response).to have_http_status(:ok)
@@ -65,6 +119,20 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     it 'displays the provider difficulty question' do
       expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
+    end
+
+    context 'has come here after provider signing out' do
+      let(:session_vars) { { 'signed_out_provider_id' => 'abc-123' } }
+      it 'copies the signed_out_provider_id from the session to a hidden form field' do
+        expect(response.body).to include('<input type="hidden" name="signed_out_provider_id" id="signed_out_provider_id" value="abc-123" />')
+      end
+    end
+
+    context 'has come here as applicant or signed in provider' do
+      let(:session_vars) { {} }
+      it 'hash a hidden form field with no value' do
+        expect(response.body).to include('<input type="hidden" name="signed_out_provider_id" id="signed_out_provider_id" />')
+      end
     end
 
     context 'provider signed out' do

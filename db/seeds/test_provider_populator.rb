@@ -23,7 +23,7 @@ class TestProviderPopulator
     'firm2-user1' => ['Firm2 & Co.', 'firm2-user1@example.com', 107, 592],
     'sr' => ['Richards & Co.', 'stephen.richards@digital.justice.gov.uk', 108, 593],
     'MARTIN.RONAN@DAVIDGRAY.CO.UK' => ['David Gray LLP', 'martin.ronan@example.com', 494_000, 5027],
-    'BENREID' => ['Test firm for portal login', 'benreid@talbotssolicitors.co.uk', 107, 592]
+    'BENREID' => ['Test firm for portal login', 'benreid@example.co.uk', 107, 592]
   }.freeze
 
   def run
@@ -45,7 +45,7 @@ class TestProviderPopulator
       end
     end
 
-    %w[test1 sr MARTIN.RONAN@DAVIDGRAY.CO.UK].each do |firm_name|
+    %w[test1 sr MARTIN.RONAN@DAVIDGRAY.CO.UK BENREID].each do |firm_name|
       firm = Provider.find_by(username: firm_name).firm
       unless firm.permissions.map(&:role).include?('application.non_passported.*')
         firm.permissions << non_passported_permission

@@ -4,10 +4,14 @@ class FeedbackController < ApplicationController
   def new
     @journey = source
     @feedback = Feedback.new
+    @signed_out_provider_id = session.delete('signed_out_provider_id')
   end
 
   def create
     @feedback = Feedback.new(feedback_params)
+    @feedback.originating_page = originating_page
+    @feedback.email = provider_email
+
     # must use bang version `deliver_later!` or failures won't be retried by sidekiq
     if @feedback.save
       FeedbackMailer.notify(@feedback).deliver_later!
@@ -22,6 +26,33 @@ class FeedbackController < ApplicationController
   end
 
   private
+
+  def provider_email
+    if params[:signed_out_provider_id].present?
+      signed_out_provider_email
+    else
+      signed_in_provider_email
+    end
+  end
+
+  def signed_out_provider_email
+    provider_id = params[:signed_out_provider_id]
+    Provider.find(provider_id).email
+  end
+
+  def signed_in_provider_email
+    provider_struct = session['warden.user.provider.key']
+    return nil unless provider_struct
+
+    provider_id = provider_struct.first&.first
+    return nil unless provider_id
+
+    Provider.find(provider_id).email
+  end
+
+  def originating_page
+    params[:signed_out_provider_id].present? ? destroy_provider_session_path : session['feedback_return_path']
+  end
 
   def feedback_params
     params.require(:feedback).permit(

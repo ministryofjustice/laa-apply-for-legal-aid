@@ -1,6 +1,6 @@
 <%= page_template page_title: t('.title'), show_errors_for: @feedback, back_link: back_button, success_message: success_message do %>
   <%= form_for(@feedback, url: feedback_index_path) do |form| %>
-
+    <% applicant_email_hint = @journey == :citizen ? t('.applicant_email_hint') : '' %>
     <%= form.govuk_collection_radio_buttons(
             :done_all_needed,
             [true, false],
@@ -38,9 +38,13 @@
             label: {
               size: :m
             },
+            hint: applicant_email_hint,
             rows: 4,
             class: 'govuk-!-width-full'
         ) %>
+
+    <%= hidden_field_tag 'signed_out_provider_id', @signed_out_provider_id %>
+
     <%= form.submit t('generic.send'), class: 'govuk-button' %>
 
   <% end %>

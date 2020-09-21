@@ -2,6 +2,7 @@
 en:
   feedback:
     new:
+      applicant_email_hint: Please provide your email address if you'd like a response
       difficulty: How easy or difficult was it to use this service?
       done_all_needed: Were you able to do what you needed today?
       satisfaction: Overall, how satisfied were you with this service?

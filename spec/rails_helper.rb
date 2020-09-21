@@ -96,3 +96,18 @@ end
 def uploaded_file(path, content_type = nil, binary: false)
   Rack::Test::UploadedFile.new(Rails.root.join(path), content_type, binary)
 end
+
+# method to enable session vars to be set in request spec.
+# uses the test_session_path route which is only available in test env.
+def set_session(vars = {})
+  return if vars.empty?
+
+  my_params = { session_vars: vars.to_json }
+
+  post test_session_path, params: my_params
+  expect(response).to have_http_status(:created)
+
+  vars.each_key do |var|
+    expect(session[var]).to be_present
+  end
+end

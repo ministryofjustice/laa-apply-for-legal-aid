@@ -10,7 +10,7 @@
 #
 development:
   citizen_start_application: 570e1b9d-6238-45fd-b75c-96f2f39db8e9
-  feedback_notification: ac458f81-b7dd-4b2c-944c-3f17d2f2392c
+  feedback_notification: 9aa7c2d5-f7ee-405c-9ec4-c0fcee149572
   new_link_request: a577582b-3e60-44a4-885c-d4b12bf23958
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
   reminder_to_submit_an_application: c4ac858d-68ae-437b-9353-06e632cd88f2
@@ -21,7 +21,7 @@ development:
 
 production:
   citizen_start_application: 66865f0d-6410-40e2-b862-98724eb6e33a
-  feedback_notification: 246379d9-14f5-470e-a8a4-31c4b61e64b2
+  feedback_notification: d8b0be70-c70c-436d-83f1-3db9f272e29d
   new_link_request: 3cc3be57-e072-4095-9caa-c0cd52193405
   submission_confirmation: 5472b10b-bc11-432a-a18d-9f20de5b2854
   reminder_to_submit_an_application: 96e58b6c-83e2-4ae8-be67-028803e98398

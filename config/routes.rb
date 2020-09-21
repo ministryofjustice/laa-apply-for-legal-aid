@@ -218,6 +218,13 @@ Rails.application.routes.draw do
     end
   end
 
+  # dummy route to set session vars available in test environment only
+  if Rails.env.test?
+    namespace :test do
+      resource :session, only: %i[create]
+    end
+  end
+
   get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
 
   # Catch all route that traps paths not defined above. Must be last route.
