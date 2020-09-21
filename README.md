@@ -191,6 +191,37 @@ the `update_details` method on the current_provider (a Provider object supplied 
 a background job to query the 
 provider details API and updates any details that have changed on the provider record.
 
+
+### Signing out of the application
+
+When using the mock-saml in development or on UAT, sign out works in the way you'd expect: Clicking signout takes you
+to a page confirming your're signed out, and going to the start url will redirect you to the sign-in page.
+
+When using the portal for authentication, (on staging or live, or if configured as described below, on localhost), the
+sign out link takes you to a feedback page, but doesn't really sign you out.  This is an side effect of using the 
+portal Single Sign On system. You're not signed out until you tell the portal you've signed out, and when you do that, 
+you are signed out of all other applications at the same time. (Behind the scenes, the Devise `authenticate_provider!` 
+method contacts the portal to see if your signed in, and if so, repopulates the session with the required data).
+
+You can sign out of the portal by going to https://portal.stg.legalservices.gov.uk/oam/server/logout
+
+### How to set up localhost to use the portal
+
+Setting up localhost to use the portal staging environment for signing in rather than the mock is fairly straightforward:
+
+* change the values of the following environment variables in your .env file to the same values as in the Staging environment:
+    * LAA_PORTAL_MOCK_SAML=false
+    * LAA_PORTAL_IDP_CERT=<value from staging>
+    * LAA_PORTAL_IDP_SLO_TARGET_URL=https://portal.stg.legalservices.gov.uk/oam/server/logout
+    * LAA_PORTAL_SECRET_KEY=<value from staging>
+    * LAA_PORTAL_IDP_SSO_TARGET_URL=https://portal.stg.legalservices.gov.uk/oamfed/idp/samlv20
+    * LAA_PORTAL_CERTIFICATE=<value from staging>
+    * LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM=<idp-cert-fingerprint-alg-goes-here>
+    
+  Note that the value for LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM is <idp-cert-fingerprint-alg-goes-here> and not replaced with anything else.
+  
+* Use the BENREID credientials from staging to log in (This use is set up as part of the `db:seed` rake task)
+
 ### Benefits checker
 
 To mock the benefits check in development and testing add the following environment
