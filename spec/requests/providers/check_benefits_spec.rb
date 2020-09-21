@@ -253,6 +253,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         Setting.setting.update!(allow_non_passported_route: perm.setting)
         allow(Rails.configuration.x).to receive(:allow_non_passported_route).and_return(perm.env)
         provider = create :provider, perm.provider_permissions
+        provider.firm.permissions = []
         application = create :application, :checking_applicant_details, applicant: applicant, provider: provider
         create :benefit_check_result, perm.benefit_check_result, legal_aid_application: application
 

@@ -18,33 +18,29 @@ RSpec.describe 'Firm' do
     end
 
     context 'when there are permissions' do
+      let(:default_permission) { Permission.find_by(role: 'application.passported.*') }
       let!(:permission1) { create :permission }
       let!(:permission2) { create :permission }
 
-      context 'with just permission 2' do
-        before do
-          firm.permissions << permission2
-          firm.save!
-        end
-
-        it 'returns just the one permission' do
-          expect(firm.reload.permissions).to eq [permission2]
+      context 'with just the default permission' do
+        it 'returns the default permission' do
+          expect(firm.reload.permissions).to eq [default_permission]
         end
       end
 
-      context 'with both permissions' do
+      context 'with additional permissions added' do
         before do
           firm.permissions << permission2
           firm.permissions << permission1
           firm.save!
         end
 
-        it 'returns both permissions' do
-          expect(firm.reload.permissions).to match_array [permission2, permission1]
+        it 'returns the correct permissions' do
+          expect(firm.reload.permissions).to match_array [default_permission, permission2, permission1]
         end
 
         it 'returns all permissions' do
-          expect(firm.permissions.all).to match_array [permission2, permission1]
+          expect(firm.permissions.all).to match_array [default_permission, permission2, permission1]
         end
       end
     end
