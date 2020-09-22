@@ -8,8 +8,6 @@ class Setting < ApplicationRecord
   end
 
   def self.allow_non_passported_route?
-    return false unless Rails.configuration.x.allow_non_passported_route
-
     setting.allow_non_passported_route?
   end
 
