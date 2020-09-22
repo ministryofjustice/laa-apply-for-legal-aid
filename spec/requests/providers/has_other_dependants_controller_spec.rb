@@ -38,7 +38,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
       let(:other_dependant) { 'no' }
 
       it 'redirects to the outgoings summary page' do
-        expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
       end
     end
 
