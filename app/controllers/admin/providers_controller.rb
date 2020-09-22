@@ -43,7 +43,7 @@ module Admin
     private
 
     def new_provider
-      @provider = Provider.new(username: params[:provider][:username].downcase)
+      @provider = Provider.new(username: params[:provider][:username].upcase)
     end
   end
 end
