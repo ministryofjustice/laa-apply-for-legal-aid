@@ -242,10 +242,11 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       EnvironmentPermutation.new(env: false, setting: false, application: :non_passported, permissions: :passported, expected_result: :ccms),
       EnvironmentPermutation.new(env: false, setting: false, application: :non_passported, permissions: :non_passported, expected_result: :ccms),
 
+      # # The environment setting is no longer used - so same results as if it were true in first section above
       EnvironmentPermutation.new(env: false, setting: true, application: :passported, permissions: :passported, expected_result: :continue),
       EnvironmentPermutation.new(env: false, setting: true, application: :passported, permissions: :none, expected_result: :ccms),
       EnvironmentPermutation.new(env: false, setting: true, application: :non_passported, permissions: :passported, expected_result: :ccms),
-      EnvironmentPermutation.new(env: false, setting: true, application: :non_passported, permissions: :non_passported, expected_result: :ccms)
+      EnvironmentPermutation.new(env: false, setting: true, application: :non_passported, permissions: :non_passported, expected_result: :need_to_check)
     ]
     permutations.each do |perm|
       it 'outputs the expected text' do
