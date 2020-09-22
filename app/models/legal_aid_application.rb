@@ -314,6 +314,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   def reset_delegated_functions
     self.used_delegated_functions = false
     self.used_delegated_functions_on = nil
+    self.used_delegated_functions_reported_on = nil
   end
 
   def reset_proceeding_types!

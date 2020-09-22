@@ -10,11 +10,13 @@ module LegalAidApplications
     validates :used_delegated_functions, presence: { unless: :draft? }
     validates :used_delegated_functions_on, presence: { unless: :date_not_required? }
     validates :used_delegated_functions_on, date: { not_in_the_future: true }, allow_nil: true
+    validates :used_delegated_functions_reported_on, presence: { unless: :date_not_required? }
 
     after_validation :update_substantive_application_deadline
 
     def initialize(*args)
       super
+      attributes[:used_delegated_functions_reported_on] = used_delegated_functions_reported_on
       set_instance_variables_for_attributes_if_not_set_but_in_model(
         attrs: date_fields.fields,
         model_attributes: date_fields.model_attributes
@@ -30,6 +32,10 @@ module LegalAidApplications
       return :invalid if date_fields.partially_complete? || date_fields.form_date_invalid?
 
       @used_delegated_functions_on = attributes[:used_delegated_functions_on] = date_fields.form_date
+    end
+
+    def used_delegated_functions_reported_on
+      @used_delegated_functions_reported_on = used_delegated_functions_selected? ? Date.today : nil
     end
 
     private

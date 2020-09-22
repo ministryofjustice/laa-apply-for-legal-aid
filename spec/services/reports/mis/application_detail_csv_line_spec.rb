@@ -22,6 +22,8 @@ module Reports
                ccms_submission: ccms_submission,
                merits_assessment: merits_assessment,
                used_delegated_functions: used_delegated_functions,
+               used_delegated_functions_on: used_delegated_functions_on,
+               used_delegated_functions_reported_on: used_delegated_functions_reported_on,
                own_vehicle: false
       end
 
@@ -143,6 +145,9 @@ module Reports
       let(:purpose) { 'The reason we are applying' }
       let(:submitted_at) { Time.new(2020, 2, 21, 15, 44, 55) }
       let(:used_delegated_functions) { true }
+      let(:used_delegated_functions_on) { Date.new(2020, 1, 1) }
+      let(:used_delegated_functions_on_date) { Date.new(2020, 2, 21) }
+      let(:used_delegated_functions_reported_on) { Date.new(2020, 2, 21) }
 
       describe '.call' do
         let(:headers) { described_class.header_row }
@@ -159,6 +164,8 @@ module Reports
             expect(value_for('Proceeding type selected')).to eq 'Proceeding type meaning'
             expect(value_for('DWP check result')).to eq 'Yes'
             expect(value_for('Delegated functions used')).to eq 'Yes'
+            expect(value_for('Delegated functions date')).to eq '2020-01-01'
+            expect(value_for('Delegated functions reported')).to eq '2020-02-21'
           end
 
           context 'DWP check result negative' do
@@ -170,8 +177,18 @@ module Reports
 
           context 'Delegated functions not used' do
             let(:used_delegated_functions) { false }
+            let(:used_delegated_functions_on) { nil }
+
             it 'generates no' do
               expect(value_for('Delegated functions used')).to eq 'No'
+            end
+
+            it 'generates an empty string for the used_on date' do
+              expect(value_for('Delegated functions date')).to eq ''
+            end
+
+            it 'generates an empty string for the delegated function notification date' do
+              expect(value_for('Delegated functions reported')).to eq ''
             end
           end
         end

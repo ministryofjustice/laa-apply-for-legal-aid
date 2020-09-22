@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:used_delegated_functions) { true }
+  let(:used_delegated_functions_reported_on) { Date.today }
   let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
   let(:day) { used_delegated_functions_on.day }
   let(:month) { used_delegated_functions_on.month }
@@ -29,6 +30,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
     end
 
     it 'updates the application' do
+      expect(legal_aid_application.used_delegated_functions_reported_on).to eq(used_delegated_functions_reported_on)
       expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
       expect(legal_aid_application.used_delegated_functions).to be used_delegated_functions
     end
@@ -49,6 +51,10 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
       end
 
+      it 'does not update the reported on date' do
+        expect(legal_aid_application.used_delegated_functions_reported_on).to be_nil
+      end
+
       it 'does not update the substantive application deadline' do
         expect(legal_aid_application.substantive_application_deadline_on).to be_nil
       end
@@ -56,7 +62,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
 
     context 'when not using delegated functions selected and date exists on model' do
       let(:used_delegated_functions) { false }
-      let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions_on: 1.day.ago }
+      let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions_on: 1.day.ago, used_delegated_functions_reported_on: 1.day.ago }
 
       it 'updates the application' do
         expect(legal_aid_application.used_delegated_functions).to be used_delegated_functions
@@ -64,6 +70,10 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
 
       it 'deletes the date' do
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
+      end
+
+      it 'deletes the reported on date' do
+        expect(legal_aid_application.used_delegated_functions_reported_on).to be_nil
       end
 
       it 'deletes the substantive application deadline' do
