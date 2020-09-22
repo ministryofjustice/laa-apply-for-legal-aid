@@ -121,7 +121,7 @@ module Admin
         it 'renders the new page with a confirmatory flash message' do
           subject
           follow_redirect!
-          expect(response.body).to include("User #{username} created")
+          expect(response.body).to include("User #{username.upcase} created")
           expect(response.body).to include('Add new provider user')
         end
       end
