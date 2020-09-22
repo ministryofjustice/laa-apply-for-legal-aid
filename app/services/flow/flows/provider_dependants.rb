@@ -25,7 +25,7 @@ module Flow
                      if has_other_dependant
                        :dependants
                      else
-                       (application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries)
+                       application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries
                      end
                    }
         },
