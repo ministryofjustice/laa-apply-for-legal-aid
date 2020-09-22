@@ -272,12 +272,24 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'You need to use CCMS for this application'
-    Then I click How we checked your client's benefits status
-    Then I should be on a page showing "Change your client's details"
-    Then I click link "Change your client's details"
-    Then I see the client details page
-    Then I complete the passported journey
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I click 'Continue'
+    Then I should be on a page showing 'What your client has to do'
+    Then I click link 'Continue'
+    Then I should be on a page showing "Is the following correct?"
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Enter your client's email address"
+    Then I fill 'email' with 'test@test.com'
+    Then I click 'Save and continue'
+    Then I am on the About the Financial Assessment page
+    And I click link 'Change'
+    Then I should be on a page showing 'Email address'
+    Then I fill 'email' with 'test@test.com'
+    Then I click 'Save and continue'
+    Then I am on the About the Financial Assessment page
+    Then I should be on a page showing 'test@test.com'
+
 
   @javascript @vcr
   Scenario: I want to change first name from the check your answers page
