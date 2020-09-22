@@ -18,11 +18,16 @@ module Admin
         expect(response.body).to include('List of firms')
       end
 
-      it 'the name of every firm' do
+      it 'the displays the name of every firm' do
         response_body = CGI.unescapeHTML(response.body)
         expect(response_body).to include(firms[0].name)
         expect(response_body).to include(firms[1].name)
         expect(response_body).to include(firms[2].name)
+      end
+
+      it 'displays firm permissions' do
+        response_body = CGI.unescapeHTML(response.body)
+        expect(response_body).to include(firms.first.permissions.first.description)
       end
     end
   end

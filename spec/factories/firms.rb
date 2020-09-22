@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :firm do
     ccms_id { rand(1..1000) }
     name { Faker::Company.name }
+    with_passported_permissions
   end
 
   trait :with_passported_permissions do

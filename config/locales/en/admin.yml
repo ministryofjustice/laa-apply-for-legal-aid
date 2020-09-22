@@ -59,6 +59,7 @@ en:
         action: Action
         firm: Firm name
         num_users: Number of provider users
+        permissions: Permissions
         view_users: View provider users
     reports:
       index:
