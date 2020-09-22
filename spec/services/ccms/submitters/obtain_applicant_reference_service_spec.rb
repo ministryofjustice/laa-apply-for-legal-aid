@@ -11,6 +11,7 @@ module CCMS
       let(:request_body) { ccms_data_from_file 'applicant_search_request.xml' }
       let(:response_body) { ccms_data_from_file 'applicant_search_response_one_result.xml' }
       let(:empty_response_body) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
+      let(:no_applicant_details_response_body) { ccms_data_from_file 'applicant_search_response_results_no_details.xml' }
       let(:endpoint) { 'https://sitsoa10.laadev.co.uk/soa-infra/services/default/ClientServices/ClientServices_ep' }
       let(:success_add_applicant_response_body) { ccms_data_from_file 'applicant_add_response_success.xml' }
 
@@ -70,7 +71,7 @@ module CCMS
           end
         end
 
-        context 'applicant does not exist on CCMS' do
+        shared_examples 'applicant does not exist on CCMS' do
           before do
             # stub a post request
             stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: empty_response_body, status: 200)
@@ -91,7 +92,7 @@ module CCMS
             expect(latest_history.details).to be_nil
           end
 
-          it 'stores the reqeust body in the submission history record' do
+          it 'stores the request body in the submission history record' do
             subject.call
             expect(latest_history.request).to be_soap_envelope_with(
               command: 'ns2:ClientAddRQ',
@@ -112,6 +113,11 @@ module CCMS
             expect(CCMS::Submitters::AddApplicantService).to receive(:new).and_call_original
             subject.call
           end
+        end
+
+        context 'applicant exists on CCMS but applicant details are not returned' do
+          before { stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: no_applicant_details_response_body, status: 200) }
+          it_behaves_like 'applicant does not exist on CCMS'
         end
       end
 
