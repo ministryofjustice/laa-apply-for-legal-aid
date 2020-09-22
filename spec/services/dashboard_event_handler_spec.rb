@@ -19,7 +19,7 @@ RSpec.describe DashboardEventHandler do
 
   context 'application created' do
     before do
-      allow_any_instance_of(DashboardEventHandler).to receive(:provider_created)
+      allow_any_instance_of(DashboardEventHandler).to receive(:provider_updated)
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)
     end
     it 'fires an application_created event' do
@@ -30,13 +30,12 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context 'provider_created' do
+  context 'provider_updated' do
     before do
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)
     end
-    it 'fires provider_created events' do
-      expect_any_instance_of(DashboardEventHandler).to receive(:provider_created).and_call_original
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('DailyNewProviders')
+    it 'fires a ProviderDataJob event' do
+      expect_any_instance_of(DashboardEventHandler).to receive(:provider_updated).and_call_original
       expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(1).times
 
       create :provider
@@ -83,8 +82,7 @@ RSpec.describe DashboardEventHandler do
   end
 
   context 'feedback_created' do
-    it 'fires both Feedback jobs' do
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with('FeedbackScores')
+    it 'fires the FeedbackItemJob job' do
       expect(Dashboard::FeedbackItemJob).to receive(:perform_later)
       create :feedback
     end
@@ -105,7 +103,7 @@ RSpec.describe DashboardEventHandler do
   context 'merits_assessment_submitted' do
     before do
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)
-      allow_any_instance_of(DashboardEventHandler).to receive(:provider_created)
+      allow_any_instance_of(DashboardEventHandler).to receive(:provider_updated).and_call_original
       allow_any_instance_of(DashboardEventHandler).to receive(:application_created)
     end
     it 'fires the submitted applications job' do
