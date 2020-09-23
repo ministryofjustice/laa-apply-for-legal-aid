@@ -449,7 +449,7 @@ en:
             income from a property or lodger
             pension payments
         is_this_correct: Is this correct?
-        error: Please select Yes or No
+        error: Select yes if your client does not receive these payments
     no_outgoings_summaries:
       show:
         page_heading: "Your client's outgoings"
@@ -461,7 +461,7 @@ en:
             spousal or child maintenance
             for legal aid in a criminal case
         is_this_correct: Is this correct?
-        error: Please select Yes or No
+        error: Select yes if your client does not make these payments
     non_passported_client_instructions:
       show:
         h1-heading: What your client has to do
