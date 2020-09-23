@@ -6,14 +6,16 @@ class FeedbackMailer < BaseApplyMailer
 
   def notify(feedback, to = support_email_address)
     template_name :feedback_notification
+    personalise feedback
+    mail to: to
+  end
 
+  private
+
+  def personalise(feedback)
     set_personalisation(
       created_at: feedback.created_at&.to_time&.to_s(:rfc822),
-      user_data: [
-        feedback.os,
-        "#{feedback.browser} #{feedback.browser_version}",
-        feedback.source
-      ].join(' - '),
+      user_data: user_data(feedback),
       done_all_needed: yes_or_no(feedback),
       satisfaction: safe_nil(feedback.satisfaction),
       difficulty: safe_nil(feedback.difficulty),
@@ -21,10 +23,11 @@ class FeedbackMailer < BaseApplyMailer
       originating_page: safe_nil(feedback.originating_page),
       provider_email: safe_nil(feedback.email)
     )
-    mail to: to
   end
 
-  private
+  def user_data(feedback)
+    "#{feedback.os} :: #{feedback.browser} #{feedback.browser_version} :: #{feedback.source}"
+  end
 
   def yes_or_no(feedback)
     feedback['done_all_needed'] == true ? 'Yes' : 'No'
