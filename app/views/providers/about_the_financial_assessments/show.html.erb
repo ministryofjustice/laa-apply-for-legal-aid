@@ -21,7 +21,12 @@
           <%= @applicant.email %>
         </dt>
         <dd class="govuk-summary-list__actions">
-          <%= link_to(t('generic.change'), providers_legal_aid_application_email_address_path(anchor: :email), class: 'govuk-link change-link') %>
+          <%= link_to_with_hidden_suffix(
+                text: t('generic.change'),
+                path: providers_legal_aid_application_email_address_path(anchor: :email),
+                klass: 'govuk-link change-link',
+                suffix: 'email address'
+              ) %>
         </dd>
       </div>
     </dl>

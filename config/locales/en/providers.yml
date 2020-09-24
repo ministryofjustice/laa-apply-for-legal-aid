@@ -376,7 +376,6 @@ en:
       show:
         h1-heading: What you're applying for
         h2-heading: Proceeding
-        link_title: Change
         if_delegated_used: Covered under an emergency certificate
         form_of_service: "Form of service: "
         form_of_service_type: Full representation
