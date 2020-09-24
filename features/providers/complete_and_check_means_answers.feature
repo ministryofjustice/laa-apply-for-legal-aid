@@ -5,14 +5,16 @@ Feature: Completing and checking means answers backwards and forwards
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on a page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
-    Then I click link 'Add another type of regular payment'
-    Then I should be on a page showing 'Which regular payments does your client make?'
+    Then I should be on a page showing "Your client's outgoings"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which regular payments does your client make?"
     Then I select 'Housing costs'
     Then I select 'Payments towards legal aid in a criminal case'
     Then I click 'Save and continue'
@@ -33,12 +35,14 @@ Feature: Completing and checking means answers backwards and forwards
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on a page showing "Sort your client's income into categories"
+    Then I should be on a page showing "Your client's income"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
+    Then I should be on a page showing "Your client's outgoings"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"

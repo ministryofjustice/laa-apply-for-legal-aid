@@ -423,9 +423,11 @@ Feature: Civil application journeys
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    When I click link 'Add another type of income'
-    And I select 'Benefits'
+    Then I should be on a page showing "Your client's income"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which types of income does your client receive?"
+    Then I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click the first link 'View statements and add transactions'
@@ -436,7 +438,8 @@ Feature: Civil application journeys
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    Then I should be on a page showing "Your client's outgoings"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -474,16 +477,19 @@ Feature: Civil application journeys
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    When I click link 'Add another type of income'
-    And I select 'Benefits'
+    Then I should be on a page showing "Your client's income"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which types of income does your client receive?"
+    Then I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    Then I should be on a page showing "Your client's outgoings"
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"

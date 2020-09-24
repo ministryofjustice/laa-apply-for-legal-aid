@@ -23,6 +23,10 @@ Then('I click the first link {string}') do |link_name|
   first(:link, link_name).click
 end
 
+Then('I click the last link {string}') do |link_name|
+  all(:link, link_name).last.click
+end
+
 Then('I select {string}') do |option|
   check(option, allow_label_click: true)
 end

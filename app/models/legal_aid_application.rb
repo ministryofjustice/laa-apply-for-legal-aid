@@ -149,6 +149,14 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     applicant.bank_transactions.where(happened_at: from..to)
   end
 
+  def income_types?
+    transaction_types.credits.any?
+  end
+
+  def outgoing_types?
+    transaction_types.debits.any?
+  end
+
   def generate_secure_id
     SecureData.create_and_store!(
       legal_aid_application: { id: id },

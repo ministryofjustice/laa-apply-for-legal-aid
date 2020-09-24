@@ -435,6 +435,31 @@ en:
         income_details_heading: Income
         debits-section-heading: Outgoings
         deductions-section-heading: Deductions
+    no_income_summaries:
+      show:
+        page_heading: "Your client's income"
+        subheading:
+          text: 'Your client has told us they do not receive:'
+          list: |
+            benefits
+            financial help from family or friends
+            maintenance payments
+            income from a property or lodger
+            pension payments
+        is_this_correct: Is this correct?
+        error: Select yes if your client does not receive these payments
+    no_outgoings_summaries:
+      show:
+        page_heading: "Your client's outgoings"
+        subheading:
+          text: 'Your client has told us they do not pay:'
+          list: |
+            housing costs
+            childcare costs
+            spousal or child maintenance
+            for legal aid in a criminal case
+        is_this_correct: Is this correct?
+        error: Select yes if your client does not make these payments
     non_passported_client_instructions:
       show:
         h1-heading: What your client has to do

@@ -6,8 +6,9 @@ Feature: Completing and checking means answers backwards and forwards
     And Bank transactions exist
     Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
-    Then I should be on a page showing "Sort your client's income into categories"
-    Then I click link 'Add another type of income'
+    Then I should be on a page showing "Your client's income"
+    Then I choose "No"
+    Then I click 'Save and continue'
     And I should be on a page showing 'Which types of income does your client receive?'
     And I should see 'Benefits'
     And I should see 'Financial help from friends or family'

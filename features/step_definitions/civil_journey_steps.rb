@@ -170,7 +170,9 @@ Given('I start the merits application with student finance') do
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
-    :with_irregular_income
+    :with_irregular_income,
+    :with_transaction_period,
+    :with_benefits_transactions
   )
 
   login_as @legal_aid_application.provider
@@ -350,7 +352,8 @@ Given('The means questions have been answered by the applicant') do
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
-    :with_uncategorised_debit_transactions
+    :with_uncategorised_debit_transactions,
+    :with_uncategorised_credit_transactions
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
