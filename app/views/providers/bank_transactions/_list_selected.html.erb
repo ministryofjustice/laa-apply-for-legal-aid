@@ -21,13 +21,14 @@
         </td>
         <td class="govuk-table__cell">
           <%= button_to(
-                t('.remove_link'),
                 remove_transaction_type_providers_legal_aid_application_bank_transaction_path(@legal_aid_application, bank_transaction),
                 method: :patch,
                 class: 'button-as-link',
                 form_class: 'remote-remove-transaction',
                 remote: true
-              ) %>
+              ) do %>
+                <%= t('.remove_link') %><span class="govuk-visually-hidden"> <%= bank_transaction.description %> <%= value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) %></span>
+              <% end %>
         </td>
       </tr>
     <% end %>

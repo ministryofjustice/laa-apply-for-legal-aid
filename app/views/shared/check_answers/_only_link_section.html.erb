@@ -5,10 +5,7 @@
   <% unless read_only %>
       <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
         <p>
-          <%= link_to(url, class: 'govuk-link change-link') do %>
-            <%= t('generic.change') %>
-            <span class="govuk-visually-hidden"><%= question %></span>
-          <% end %>
+          <%= link_to_with_hidden_suffix(path: url, klass: 'govuk-link change-link', text: t('generic.change'), suffix: question) %>
         </p>
       </div>
   <% end %>
