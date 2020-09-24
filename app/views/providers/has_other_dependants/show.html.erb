@@ -31,11 +31,12 @@
           <dt class="govuk-summary-list__actions">
             <dd class="govuk-summary-list__actions">
               <%= button_to(
-                t('.remove'),
                 providers_legal_aid_application_remove_dependant_path(@legal_aid_application, dependant),
                 method: :get,
                 class: 'button-as-link'
-              ) %>
+              ) do %>
+                <%= t('.remove') %><span class="govuk-visually-hidden"> <%= dependant.name %></span>
+              <% end %>
             </dd>
           </dt>
         </dl>
