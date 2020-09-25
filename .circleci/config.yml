@@ -372,9 +372,9 @@ workflows:
       - integration_tests:
           requires:
           - lint_checks
-      - webhint_reports:
-          requires:
-          - integration_tests
+      # - webhint_reports:
+      #    requires:
+      #    - integration_tests
 
   merge_pr:
     jobs:
@@ -397,12 +397,12 @@ workflows:
       - integration_tests:
           requires:
             - lint_checks
-      - webhint_reports:
-          requires:
-            - integration_tests
+      # - webhint_reports:
+      #     requires:
+      #       - integration_tests
       - deploy_staging:
           requires:
-            - webhint_reports
+            # - webhint_reports
             - unit_tests
             - build_and_push
       - hold_production_notification:
