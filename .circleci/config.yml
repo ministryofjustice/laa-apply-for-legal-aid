@@ -148,15 +148,15 @@ jobs:
     executor: linting-executor
     steps:
     - checkout
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
     - run:
         name: echo RUN_WEBHINT env_var
         command: echo "${RUN_WEBHINTS}"
     - run:
         name: echo pipeline.parameters.run-webhint
         command: echo << pipeline.parameters.run-webhint >>
+    - *restore_gems_cache
+    - *install_gems
+    - *save_gems_cache
     - run:
         name: Run Rubocop
         command:  bin/rails rubocop
@@ -361,7 +361,7 @@ jobs:
 parameters:
   run-webhint:
     type: string
-    default: "${RUN_WEBHINT}"
+    default: echo "${RUN_WEBHINT}"
 
 workflows:
   version: 2
