@@ -64,9 +64,9 @@ Rails.application.configure do
 
   # lists the Dashboard updater jobs which are NOT enabled run in this environment
   config.x.suspended_dashboard_updater_jobs = %w[
-                                                  Dashboard::FeedbackItemJob
-                                                  Dashboard::ApplicantEmailJob
-                                                  Dashboard::ProviderDataJob
-                                                  Dashboard::UpdaterJob
-                                                 ]
+    Dashboard::FeedbackItemJob
+    Dashboard::ApplicantEmailJob
+    Dashboard::ProviderDataJob
+    Dashboard::UpdaterJob
+  ]
 end
