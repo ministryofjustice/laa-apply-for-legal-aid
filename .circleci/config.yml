@@ -151,6 +151,8 @@ jobs:
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
+    - run: echo $WEBHINT
+    - run: echo << pipeline.parameters.run-webhint >>
     - run:
         name: Run Rubocop
         command:  bin/rails rubocop
