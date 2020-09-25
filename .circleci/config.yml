@@ -361,7 +361,7 @@ jobs:
 parameters:
   run-webhint:
     type: string
-    default: echo "${RUN_WEBHINT}"
+    default: ${RUN_WEBHINT}
 
 workflows:
   version: 2
