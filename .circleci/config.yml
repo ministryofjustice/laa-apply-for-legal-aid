@@ -211,30 +211,34 @@ jobs:
     executor: linting-executor
     steps:
       - checkout
-      - attach_workspace:
-          at: tmp
-      - *update_packages
-      - *restore_gems_cache
-      - *install_gems
-      - *save_gems_cache
-      - *restore_js_packages_cache
-      - *install_js_packages
-      - *save_js_packages_cache
-      - run:
-          name: Generate webhint reports
-          command: ./bin/generate_webhint_reports.sh
-      - run:
-          name: gzip webhint reports
-          command: tar -zcvf hint-report.tar.gz hint-report/
-      - store_artifacts:
-          path: ./hint-report.tar.gz
-          destination: webhint-reports
-      - run:
-          name: gzip html pages
-          command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
-      - store_artifacts:
-          path: ./html-pages.tar.gz
-          destination: html-pages
+      - when:
+          condition:
+            equal: [ 'true', << pipeline.parameters.run-webhint >> ]
+          steps:
+            - attach_workspace:
+                at: tmp
+            - *update_packages
+            - *restore_gems_cache
+            - *install_gems
+            - *save_gems_cache
+            - *restore_js_packages_cache
+            - *install_js_packages
+            - *save_js_packages_cache
+            - run:
+                name: Generate webhint reports
+                command: ./bin/generate_webhint_reports.sh
+            - run:
+                name: gzip webhint reports
+                command: tar -zcvf hint-report.tar.gz hint-report/
+            - store_artifacts:
+                path: ./hint-report.tar.gz
+                destination: webhint-reports
+            - run:
+                name: gzip html pages
+                command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
+            - store_artifacts:
+                path: ./html-pages.tar.gz
+                destination: html-pages
 
   build_and_push:
     executor: basic-executor
@@ -351,6 +355,11 @@ jobs:
     steps:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
+
+parameters:
+  run-webhint:
+    type: string
+    default: ${RUN_WEBHINT}
 
 workflows:
   version: 2
