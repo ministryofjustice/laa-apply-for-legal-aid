@@ -61,4 +61,12 @@ Rails.application.configure do
 
   # Set a css_compressor so sassc-rails does not overwrite the compressor when running the tests
   config.assets.css_compressor = nil
+
+  # lists the Dashboard updater jobs which are NOT enabled run in this environment
+  config.x.suspended_dashboard_updater_jobs = %w[
+                                                  Dashboard::FeedbackItemJob
+                                                  Dashboard::ApplicantEmailJob
+                                                  Dashboard::ProviderDataJob
+                                                  Dashboard::UpdaterJob
+                                                 ]
 end

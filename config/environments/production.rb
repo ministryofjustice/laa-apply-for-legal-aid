@@ -97,4 +97,7 @@ Rails.application.configure do
 
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
+
+  # lists the Dashboard updater jobs which are NOT enabled run in this environment
+  config.x.suspended_dashboard_updater_jobs = []
 end
