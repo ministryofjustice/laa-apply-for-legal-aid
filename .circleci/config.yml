@@ -151,8 +151,12 @@ jobs:
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
-    - run: echo $WEBHINT
-    - run: echo << pipeline.parameters.run-webhint >>
+    - run:
+        name: echo RUN_WEBHINT env_var
+        command: echo ${RUN_WEBHINTS}
+    - run:
+        name: echo pipeline.parameters.run-webhint
+        command: echo << pipeline.parameters.run-webhint >>
     - run:
         name: Run Rubocop
         command:  bin/rails rubocop
@@ -222,7 +226,6 @@ jobs:
       - *restore_js_packages_cache
       - *install_js_packages
       - *save_js_packages_cache
-      - run: echo ${RUN_WEBHINTS}
       - run:
           name: Generate webhint reports
           command: ./bin/generate_webhint_reports.sh
