@@ -363,7 +363,7 @@ workflows:
   open_pr:
     when:
       condition:
-        equal: [ 'true', << pipeline.parameters.run-webhint >> ]
+        equal: [ true, << pipeline.parameters.run-webhint >> ]
     jobs:
       - lint_checks:
           filters:
@@ -388,7 +388,7 @@ workflows:
   open_pr_without_webhint:
     when:
       condition:
-        not: [ 'true', << pipeline.parameters.run-webhint >> ]
+        not: [ true, << pipeline.parameters.run-webhint >> ]
     jobs:
       - lint_checks:
           filters:
