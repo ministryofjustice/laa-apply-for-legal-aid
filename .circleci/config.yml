@@ -149,11 +149,8 @@ jobs:
     steps:
     - checkout
     - run:
-        name: echo RUN_WEBHINT env_var
-        command: echo "${RUN_WEBHINTS}"
-    - run:
-        name: echo pipeline.parameters.run-webhint
-        command: echo << pipeline.parameters.run-webhint >>
+        name: echo $RUN_WEBHINTS env_var
+        command: echo $RUN_WEBHINTS
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
@@ -358,17 +355,12 @@ jobs:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
 
-parameters:
-  run-webhint:
-    type: string
-    default: ${RUN_WEBHINT}
-
 workflows:
   version: 2
   open_pr:
     when:
       condition:
-        equal: [ true, << pipeline.parameters.run-webhint >> ]
+        equal: [ true, $RUN_WEBHINTS ]
     jobs:
       - lint_checks:
           filters:
@@ -393,7 +385,7 @@ workflows:
   open_pr_without_webhint:
     when:
       condition:
-        not: [ true, << pipeline.parameters.run-webhint >> ]
+        not: [ true, $RUN_WEBHINTS ]
     jobs:
       - lint_checks:
           filters:
