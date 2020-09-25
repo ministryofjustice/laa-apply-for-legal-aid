@@ -360,7 +360,7 @@ workflows:
   open_pr:
     when:
       condition:
-        equal: [ true, $RUN_WEBHINTS ]
+        equal: [ 'true', $RUN_WEBHINTS ]
     jobs:
       - lint_checks:
           filters:
@@ -385,7 +385,7 @@ workflows:
   open_pr_without_webhint:
     when:
       condition:
-        not: [ true, $RUN_WEBHINTS ]
+        not: [ 'true', $RUN_WEBHINTS ]
     jobs:
       - lint_checks:
           filters:
