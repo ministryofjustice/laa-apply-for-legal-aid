@@ -211,34 +211,31 @@ jobs:
     executor: linting-executor
     steps:
       - checkout
-      - when:
-          condition:
-            equal: [ 'true', << pipeline.parameters.run-webhint >> ]
-          steps:
-            - attach_workspace:
-                at: tmp
-            - *update_packages
-            - *restore_gems_cache
-            - *install_gems
-            - *save_gems_cache
-            - *restore_js_packages_cache
-            - *install_js_packages
-            - *save_js_packages_cache
-            - run:
-                name: Generate webhint reports
-                command: ./bin/generate_webhint_reports.sh
-            - run:
-                name: gzip webhint reports
-                command: tar -zcvf hint-report.tar.gz hint-report/
-            - store_artifacts:
-                path: ./hint-report.tar.gz
-                destination: webhint-reports
-            - run:
-                name: gzip html pages
-                command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
-            - store_artifacts:
-                path: ./html-pages.tar.gz
-                destination: html-pages
+      - attach_workspace:
+          at: tmp
+      - *update_packages
+      - *restore_gems_cache
+      - *install_gems
+      - *save_gems_cache
+      - *restore_js_packages_cache
+      - *install_js_packages
+      - *save_js_packages_cache
+      - run: echo ${RUN_WEBHINTS}
+      - run:
+          name: Generate webhint reports
+          command: ./bin/generate_webhint_reports.sh
+      - run:
+          name: gzip webhint reports
+          command: tar -zcvf hint-report.tar.gz hint-report/
+      - store_artifacts:
+          path: ./hint-report.tar.gz
+          destination: webhint-reports
+      - run:
+          name: gzip html pages
+          command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
+      - store_artifacts:
+          path: ./html-pages.tar.gz
+          destination: html-pages
 
   build_and_push:
     executor: basic-executor
@@ -364,6 +361,9 @@ parameters:
 workflows:
   version: 2
   open_pr:
+    when:
+      condition:
+        equal: [ 'true', << pipeline.parameters.run-webhint >> ]
     jobs:
       - lint_checks:
           filters:
@@ -384,6 +384,28 @@ workflows:
       - webhint_reports:
           requires:
           - integration_tests
+
+  open_pr_without_webhint:
+    when:
+      condition:
+        not: [ 'true', << pipeline.parameters.run-webhint >> ]
+    jobs:
+      - lint_checks:
+          filters:
+            branches:
+              ignore: master
+      - build_and_push:
+          requires:
+          - lint_checks
+      - deploy_uat:
+          requires:
+          - build_and_push
+      - unit_tests:
+          requires:
+          - lint_checks
+      - integration_tests:
+          requires:
+          - lint_checks
 
   merge_pr:
     jobs:
