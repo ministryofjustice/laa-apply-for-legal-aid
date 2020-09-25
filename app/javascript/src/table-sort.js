@@ -27,9 +27,12 @@ $(document).ready(function() {
 
         th.click(() => {
           table = th.parents('table');
-          th.parent().children().removeClass('header-sort-asc header-sort-desc')
+          th.parent().children().removeClass('header-sort-asc header-sort-desc');
           let sortDirection = inverse ? 'desc' : 'asc';
           th.addClass('header-sort-' + sortDirection);
+          th.parent().children().removeAttr('aria-sort');
+          let verboseSortDirection = inverse ? 'descending' : 'ascending';
+          th[0].setAttribute('aria-sort', verboseSortDirection)
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
           }).sortElements((a, b) => (
