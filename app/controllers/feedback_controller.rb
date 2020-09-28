@@ -28,7 +28,7 @@ class FeedbackController < ApplicationController
   private
 
   def print_session
-    puts ">>>>>>>>>>>> SESSION #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+    puts ">>>>>>>>>>>> SESSION #{__FILE__}:#{__LINE__} <<<<<<<<<<<<"
     puts session.to_h.inspect
   end
 
@@ -87,7 +87,7 @@ class FeedbackController < ApplicationController
   helper_method :back_path, :back_button, :success_message
 
   def update_return_path
-    puts ">>>>>>>>>>>> updating return path #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+    puts ">>>>>>>>>>>> updating return path #{__FILE__}:#{__LINE__} <<<<<<<<<<<<"
     puts request.referrer
     return if request.referer&.include?(feedback_index_path)
 
