@@ -11,7 +11,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
@@ -29,7 +29,7 @@ executors:
 
   test-executor:
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
       - image: circleci/postgres:10.5
@@ -48,7 +48,6 @@ references:
     run:
       name: Install ruby gems
       command: |
-        gem install bundler -v 2.0.2
         bundle install --path=vendor/bundle --jobs=4 && bundle clean
 
   install_packages_for_testing: &install_packages_for_testing
@@ -92,24 +91,24 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v1-gems-cache-{{ checksum "Gemfile.lock" }}
-        - v1-gems-cache
+        - v2.7-gems-cache-{{ checksum "Gemfile.lock" }}
+        - v2.7-gems-cache-
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
-        - v1-yarn-packages-cache
+        - v2.7-yarn-packages-cache-{{ checksum "yarn.lock" }}
+        - v2.7-yarn-packages-cache-
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v1-gems-cache-{{ checksum "Gemfile.lock" }}
+        key: v2.7-gems-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v1-yarn-packages-cache-{{ checksum "yarn.lock" }}
+      key: v2.7-yarn-packages-cache-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
