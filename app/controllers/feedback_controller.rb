@@ -29,7 +29,7 @@ class FeedbackController < ApplicationController
 
   def print_session
     puts ">>>>>>>>>>>> SESSION #{__FILE__}:#{__LINE__} <<<<<<<<<<<<"
-    puts session.to_h.inspect
+    Raven.capture_message("FeedbackController#new SESSION: #{session.to_h.inspect}")
   end
 
   def provider_email
@@ -88,6 +88,7 @@ class FeedbackController < ApplicationController
 
   def update_return_path
     puts ">>>>>>>>>>>> updating return path #{__FILE__}:#{__LINE__} <<<<<<<<<<<<"
+    Raven.capture_message("FeedbackController#new update return path: #{request.referrer}")
     puts request.referrer
     return if request.referer&.include?(feedback_index_path)
 
