@@ -28,7 +28,7 @@ module Dashboard
         end
 
         context 'job is not in the suspended list' do
-          before {allow(suspended_list).to receive(:include?).with('Dashboard::FeedbackItemJob').and_return(true) }
+          before { allow(suspended_list).to receive(:include?).with('Dashboard::FeedbackItemJob').and_return(true) }
           it 'calls the runs the geckoboard feedback updater' do
             expect_any_instance_of(Dashboard::SingleObject::Feedback).not_to receive(:run)
             subject

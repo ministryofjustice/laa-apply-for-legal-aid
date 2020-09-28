@@ -51,7 +51,7 @@ RSpec.describe 'FeedbacksController', type: :request do
 
       it 'shows errors on the page' do
         subject
-        expect(unescaped_response_body).to include(I18n.t('.activerecord.errors.models.feedback.attributes.satisfaction.blank'))
+        expect(unescaped_response_body).to include(I18n.t('.activerecord.errors.modspec/jobs/dashboard/feedback_item_job_spec.rbels.feedback.attributes.satisfaction.blank'))
       end
     end
   end
