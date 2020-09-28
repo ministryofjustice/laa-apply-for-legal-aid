@@ -21,8 +21,5 @@ module Dashboard
         end
       end
     end
-
-
-
   end
 end
