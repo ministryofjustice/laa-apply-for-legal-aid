@@ -1,5 +1,5 @@
 class FeedbackController < ApplicationController
-  before_action :update_return_path
+  before_action :print_session, :update_return_path
 
   def new
     @journey = source
@@ -26,6 +26,11 @@ class FeedbackController < ApplicationController
   end
 
   private
+  
+  def print_session
+    puts ">>>>>>>>>>>> SESSION #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+    puts session.to_h.inspect
+  end
 
   def provider_email
     if params[:signed_out_provider_id].present?
@@ -82,6 +87,8 @@ class FeedbackController < ApplicationController
   helper_method :back_path, :back_button, :success_message
 
   def update_return_path
+    puts ">>>>>>>>>>>> updating return path #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+    puts request.referrer
     return if request.referer&.include?(feedback_index_path)
 
     session[:feedback_return_path] = request.referer
