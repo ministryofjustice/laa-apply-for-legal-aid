@@ -11,6 +11,7 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.new(feedback_params)
     @feedback.originating_page = originating_page
     @feedback.email = provider_email
+    @display_close_tab_msg = params[:signed_out_provider_id].present?
 
     # must use bang version `deliver_later!` or failures won't be retried by sidekiq
     if @feedback.save
