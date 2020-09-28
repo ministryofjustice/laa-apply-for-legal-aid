@@ -45,6 +45,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
         checking_applicant_details
         provider_confirming_applicant_eligibility
         use_ccms
+        delegated_functions_used
       ],
                   to: :applicant_details_checked,
                   after: proc { |legal_aid_application| CleanupCapitalAttributes.call(legal_aid_application) }
