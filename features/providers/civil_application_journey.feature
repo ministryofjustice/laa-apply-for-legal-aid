@@ -605,9 +605,11 @@ Feature: Civil application journeys
     Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
     Then I click link "Back"
     Then I should be on a page showing "How much is your client's home worth?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I click 'Save and continue'
+    # The following back has been temporarily taken out of this cuke while the page history size setting is reduced to 10
+    #    Then I click link "Back"
+    #    Then I should be on a page showing "Does your client own the home that they live in?"
+    #    Then I click 'Save and continue'
+
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'

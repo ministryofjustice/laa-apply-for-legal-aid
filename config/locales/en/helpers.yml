@@ -7,8 +7,6 @@ en:
     accessibility:
       error: "Error:"
     hint:
-      feedback:
-        improvement_suggestion: Please provide your email address if you'd like a response
       additional_account: Share details of any accounts you have with another bank or building society
       address_lookup:
         postcode: This must be a valid UK postcode

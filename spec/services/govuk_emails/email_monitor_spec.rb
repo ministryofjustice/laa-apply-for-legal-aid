@@ -8,7 +8,7 @@ RSpec.describe GovukEmails::EmailMonitor do
   let(:mailer) { 'FeedbackMailer' }
   let(:mail_method) { 'notify' }
   let(:delivery_method) { 'deliver_now!' }
-  let(:feedback_email_params) { { 'content' => Faker::Lorem.sentence } }
+  let(:feedback_email_params) { create :feedback }
   let(:to) { 'julien.sansot@digital.justice.gov.uk' }
   let(:email_args) { [feedback_email_params, to] }
   let(:message_status) { 'sending' }
