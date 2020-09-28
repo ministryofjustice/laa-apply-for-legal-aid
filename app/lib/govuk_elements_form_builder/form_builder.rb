@@ -10,6 +10,12 @@ module GovukElementsFormBuilder
     delegate :content_tag, to: :@template
     delegate :errors, to: :@object
 
+    def yes_no_radio_button_array
+      [
+        { value: :yes, label: I18n.t('generic.yes') },
+        { value: :no,  label: I18n.t('generic.no') }
+      ]
+    end
     # Usage:
     # <%= form.govuk_text_field :name %>
     # <%= form.govuk_text_area :statement %>
@@ -103,7 +109,7 @@ module GovukElementsFormBuilder
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], inline: true) %>
     #
     # TODO: Refactor this method and remove the rubocop:disable
-    def govuk_collection_radio_buttons(attribute, collection, *args) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    def govuk_collection_radio_buttons(attribute, collection, *args, &block) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       options = args.extract_options!.symbolize_keys!
       value_attr, label_attr = extract_value_and_label_attributes(args)
 
@@ -113,6 +119,7 @@ module GovukElementsFormBuilder
           classes << (options[:inline] ? 'govuk-radios--inline' : 'govuk-!-padding-top-2')
           concat_tags(
             hint_and_error_tags(attribute, options),
+            content_tag(:div, &block),
             content_tag(:div, class: classes.join(' ')) do
               inputs = collection.map do |obj|
                 value = value_attr ? obj[value_attr] : obj
@@ -216,7 +223,8 @@ module GovukElementsFormBuilder
       htag = title.fetch(:htag, :h1)
       padding_below = title.fetch(:padding_below, nil)
       padding_class = " govuk-!-padding-bottom-#{padding_below}" if padding_below.present?
-      content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}#{padding_class}") do
+      hidden = ' govuk-visually-hidden' if title.fetch(:hidden, nil)
+      content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}#{padding_class}#{hidden}") do
         content_tag(htag, title[:text], class: 'govuk-fieldset__heading')
       end
     end
