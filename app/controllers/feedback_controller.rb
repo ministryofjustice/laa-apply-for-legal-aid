@@ -26,7 +26,7 @@ class FeedbackController < ApplicationController
   end
 
   private
-  
+
   def print_session
     puts ">>>>>>>>>>>> SESSION #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
     puts session.to_h.inspect
