@@ -1,6 +1,6 @@
 module Backable
   extend ActiveSupport::Concern
-  HISTORY_SIZE = 20
+  HISTORY_SIZE = 10
 
   class_methods do
     def skip_back_history_actions
