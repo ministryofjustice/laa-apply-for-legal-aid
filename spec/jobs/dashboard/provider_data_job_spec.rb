@@ -27,7 +27,7 @@ module Dashboard
         end
 
         context 'job is not in the suspended list' do
-          before {allow(suspended_list).to receive(:include?).with('Dashboard::ProviderDataJob').and_return(true) }
+          before { allow(suspended_list).to receive(:include?).with('Dashboard::ProviderDataJob').and_return(true) }
           it 'does not run ProviderData' do
             expect_any_instance_of(Dashboard::SingleObject::ProviderData).not_to receive(:run)
             subject
