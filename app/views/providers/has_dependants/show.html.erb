@@ -6,38 +6,42 @@
           local: true
       ) do |form| %>
 
-    <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= govuk_fieldset_header page_title %>
+    <%= govuk_form_group(
+            show_error_if: @form.errors.present?,
+            input: :has_dependants
+        ) do %>
+      <%
+        options = [
+            { value: :true, label: t('generic.yes') },
+            { value: :false,  label: t('generic.no') }
+        ]
+      %>
 
-      <div class="govuk-!-padding-bottom-4"></div>
+      <%= form.govuk_collection_radio_buttons :has_dependants,
+                                              options,
+                                              :value,
+                                              :label,
+                                              error: @error,
+                                              title: {
+                                                  text: t('.page_title'),
+                                                  padding_below: 4
+                                              } do %>
+          <p class="govuk-body">
+            <%= t('.info') %>
+          </p>
 
-      <p class="govuk-body">
-        <%= t('.info') %>
-      </p>
+          <ul class="govuk-list govuk-list--bullet">
+            <% t('.list').each_line do |item| %>
+              <li><%= item %></li>
+            <% end %>
+          </ul>
 
-      <ul class="govuk-list govuk-list--bullet">
-        <% t('.list').each_line do |item| %>
-          <li><%= item %></li>
-        <% end %>
-      </ul>
-
-      <div class="govuk-inset-text">
-        <p class="govuk-body">
-          <%= t('.extra_info') %>
-        </p>
-      </div>
-
-      <%= form.govuk_radio_button(
-              :has_dependants,
-              true,
-              label: t('generic.yes')
-          ) %>
-
-      <%= form.govuk_radio_button(
-              :has_dependants,
-              false,
-              label: t('generic.no')
-          ) %>
+          <div class="govuk-inset-text">
+            <p class="govuk-body">
+              <%= t('.extra_info') %>
+            </p>
+          </div>
+      <% end %>
 
     <% end %>
 
