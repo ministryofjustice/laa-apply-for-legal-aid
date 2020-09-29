@@ -19,7 +19,7 @@ module Dashboard
 
       describe '#perform' do
         context 'job is not in the suspended list' do
-          before {allow(suspended_list).to receive(:include?).with('Dashboard::ProviderDataJob').and_return(false) }
+          before { allow(suspended_list).to receive(:include?).with('Dashboard::ProviderDataJob').and_return(false) }
           it 'calls runs ProviderData' do
             expect_any_instance_of(Dashboard::SingleObject::ProviderData).to receive(:run)
             subject
