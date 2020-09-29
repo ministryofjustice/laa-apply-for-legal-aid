@@ -1,7 +1,6 @@
 # :nocov:
 module Admin
   class RedisController < ApplicationController
-
     def index
       @values = values
     end
@@ -18,7 +17,7 @@ module Admin
     end
 
     def values
-      redis.keys.map{ |key| [key, redis.get(key)] }
+      redis.keys.map { |key| [key, redis.get(key)] }
     end
 
     def create_record
