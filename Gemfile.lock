@@ -181,7 +181,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise_saml_authenticatable (1.6.1)
+    devise_saml_authenticatable (1.6.2)
       devise (> 2.0.0)
       ruby-saml (~> 1.7)
     dibber (0.6.0)
@@ -606,7 +606,7 @@ DEPENDENCIES
   cucumber-rails (>= 2.0.0)
   database_cleaner
   devise (>= 4.7.1)
-  devise_saml_authenticatable (>= 1.5.0)
+  devise_saml_authenticatable (>= 1.6.2)
   dibber
   dotenv-rails (>= 2.7.5)
   erb_lint
