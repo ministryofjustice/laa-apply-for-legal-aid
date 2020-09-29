@@ -1,12 +1,9 @@
+# :nocov:
 module Admin
   class RedisController < ApplicationController
 
     def index
       @values = values
-    end
-
-    def new
-
     end
 
     def create
@@ -17,7 +14,7 @@ module Admin
     private
 
     def redis
-      @redis ||= Redis.new(host: '0.0.0.0', db: 2)
+      @redis ||= Redis.new(url: redis_url)
     end
 
     def values
@@ -31,5 +28,11 @@ module Admin
       values << Time.now.strftime('%H:%M:%S')
       redis.set(key, values.to_json)
     end
+
+    def redis_url
+      url = "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" if ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present?
+      url || 'redis://localhost/2'
+    end
   end
 end
+# :nocov:
