@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>key</th>
+    <th>value</th>
+    <% @values.each do |key_value_pair| %>
+      <tr>
+        <% key, serialised_values = key_value_pair %>
+        <% values = JSON.parse(serialised_values) %>
+        <td><%= key %></td>
+        <td><%= values.pop %></td>
+      </tr>
+      <% values.each do |value| %>
+        <tr>
+          <td></td>
+          <td><%= value %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tr>
+</table>
+
+<%=  link_to 'create new record', admin_redis_path, method: :post %>

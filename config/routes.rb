@@ -68,6 +68,9 @@ Rails.application.routes.draw do
     resources :firms, only: :index do
       resources :providers, only: :index
     end
+    resources :redis, only: %i[index new create]
+    # get :redis_test, to: 'redis#index', as: 'redis_test'
+    # post :redis_create, to: 'redis#create', as: 'create_redis_test'
 
     post 'provider/check', to: 'providers#check', as: 'provider_check'
     get 'admin_report_submitted', to: 'reports#download_submitted', as: 'reports_submitted_csv'
