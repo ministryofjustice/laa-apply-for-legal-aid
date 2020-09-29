@@ -34,4 +34,8 @@ class SamlSessionsController < Devise::SamlSessionsController
     super
   end
   # :nocov:
+
+  def current_user
+    current_provider
+  end
 end

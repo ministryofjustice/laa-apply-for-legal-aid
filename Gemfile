@@ -25,7 +25,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
 gem 'devise', '>= 4.7.1' # User authentication
-gem 'devise_saml_authenticatable', '>= 1.5.0'
+gem 'devise_saml_authenticatable', '>= 1.6.2'
 gem 'omniauth', '>= 1.9.1'
 gem 'omniauth-google-oauth2', '>= 0.8.0'
 gem 'omniauth-oauth2', '>= 1.6.0' # Provide Oauth2 strategy framework
