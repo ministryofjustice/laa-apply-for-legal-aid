@@ -13,23 +13,25 @@
     <%= date_input_fields prefix: :dob, field_name: :date_of_birth, form: form %>
 
     <%= govuk_form_group(input: :relationship, show_error_if: @form.errors.messages[:relationship].any?) do %>
-      <div id='relationship'></div>
-      <%= govuk_fieldset_header(size: 'm') { t('.relationship') } %>
-      <%= govuk_error_message(form.object.errors[:relationship].first) %>
+      <fieldset class="govuk-fieldset">
+        <div id='relationship'></div>
+        <%= govuk_fieldset_header(size: 'm') { t('.relationship') } %>
+        <%= govuk_error_message(form.object.errors[:relationship].first) %>
 
-      <div class="govuk-!-padding-bottom-3"></div>
-
-      <% Dependant.relationships.keys.each do |relationship_type| %>
         <div class="govuk-!-padding-bottom-3"></div>
 
-        <%= form.govuk_radio_button(
-                :relationship,
-                relationship_type,
-                label: t(".option.#{relationship_type}"),
-                hint: t(".option.hint.#{relationship_type}"),
-                checked: @form.relationship.to_s == relationship_type.to_s
-            ) %>
-      <% end %>
+        <% Dependant.relationships.keys.each do |relationship_type| %>
+          <div class="govuk-!-padding-bottom-3"></div>
+
+          <%= form.govuk_radio_button(
+                  :relationship,
+                  relationship_type,
+                  label: t(".option.#{relationship_type}"),
+                  hint: t(".option.hint.#{relationship_type}"),
+                  checked: @form.relationship.to_s == relationship_type.to_s
+              ) %>
+        <% end %>
+      </fieldset>
     <% end %>
     <%
       options = [
@@ -47,12 +49,13 @@
         ) %>
 
     <%= govuk_form_group show_error_if: @form.errors.messages[:has_income].present? do %>
-      <div id='has_income'></div>
-      <%= govuk_fieldset_header(size: 'm') { t('.has_income.question') } %>
-      <%= govuk_hint t('.has_income.hint') %>
-      <%= govuk_error_message(form.object.errors[:has_income].first) %>
+      <fieldset class="govuk-fieldset">
+        <div id='has_income'></div>
+        <%= govuk_fieldset_header(size: 'm') { t('.has_income.question') } %>
+        <%= govuk_hint t('.has_income.hint') %>
+        <%= govuk_error_message(form.object.errors[:has_income].first) %>
 
-      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
         <%= form.govuk_radio_button(
                 :has_income,
                 true,
@@ -76,18 +79,20 @@
                 label: t('generic.no')
             ) %>
       </div>
+      </fieldset>
     <% end %>
 
     <%= govuk_form_group show_error_if: @form.errors[:has_assets_more_than_threshold].present? do %>
-      <div id='has_assets_more_than_threshold'></div>
-      <%= govuk_fieldset_header(size: 'm') { t('.has_assets_more_than_threshold.question') } %>
-      <%= govuk_error_message(form.object.errors[:has_assets_more_than_threshold].first) %>
+      <fieldset class="govuk-fieldset">
+        <div id='has_assets_more_than_threshold'></div>
+        <%= govuk_fieldset_header(size: 'm') { t('.has_assets_more_than_threshold.question') } %>
+        <%= govuk_error_message(form.object.errors[:has_assets_more_than_threshold].first) %>
 
-      <%= govuk_hint t('.has_assets_more_than_threshold.hint') %>
+        <%= govuk_hint t('.has_assets_more_than_threshold.hint') %>
 
-      <div class="govuk-!-padding-bottom-2"></div>
+        <div class="govuk-!-padding-bottom-2"></div>
 
-      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
         <%= form.govuk_radio_button(
                 :has_assets_more_than_threshold,
                 true,
@@ -113,7 +118,7 @@
                 checked: @form.has_assets_more_than_threshold == false
             ) %>
       </div>
-
+      </fieldset>
     <% end %>
 
     <div class="govuk-!-padding-bottom-2"></div>
