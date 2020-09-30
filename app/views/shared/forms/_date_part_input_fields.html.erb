@@ -8,6 +8,6 @@
 <div class="govuk-date-input__item">
   <div class="govuk-form-group">
     <%= form.label field_name, class: ['govuk-date-input__label govuk-label'], for: input_id %>
-    <%= form.text_field field_name, id: input_id, class: ["govuk-input govuk-date-input__input govuk-input--width-#{width} #{field_error_class}"] %>
+    <%= form.text_field field_name, id: input_id, class: ["govuk-input govuk-date-input__input govuk-input--width-#{width} #{field_error_class}"], pattern: "[0-9]*", inputmode: "numeric" %>
   </div>
 </div>
