@@ -21,42 +21,43 @@
           method: :patch,
           local: true
       ) do |form| %>
+    <fieldset class="govuk-fieldset">
+      <%= govuk_fieldset_header t('.page_heading') %>
 
-    <%= govuk_fieldset_header t('.page_heading') %>
+      <p class="gov-body"><%= t('.subheading.text') %></p>
+      <%= list_from_translation_path('.no_outgoings_summaries.show.subheading') %>
 
-    <p class="gov-body"><%= t('.subheading.text') %></p>
-    <%= list_from_translation_path('.no_outgoings_summaries.show.subheading') %>
+      <h2 class="govuk-heading-l"><%= t('.is_this_correct') %></h2>
 
-    <h2 class="govuk-heading-l"><%= t('.is_this_correct') %></h2>
+      <%= govuk_form_group(
+              show_error_if: @error,
+              input: :confirm_no_income
+          ) do %>
 
-    <%= govuk_form_group(
-            show_error_if: @error,
-            input: :confirm_no_income
-        ) do %>
+        <%= govuk_error_message(@error&.values&.first, id: 'confirm_no_outgoings-error') %>
 
-      <%= govuk_error_message(@error&.values&.first) %>
+        <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
+          <%= form.govuk_radio_button(
+                  :confirm_no_outgoings,
+                  'yes',
+                  label: t('generic.yes'),
+                  error: @error&.values&.first
+              ) %>
 
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
-        <%= form.govuk_radio_button(
-                :confirm_no_outgoings,
-                'yes',
-                label: t('generic.yes'),
-                error: @error&.values&.first
-            ) %>
+          <%= form.govuk_radio_button(
+                  :confirm_no_outgoings,
+                  'no',
+                  label: t('generic.no'),
+                  error: @error&.values&.first
+              ) %>
+        </div>
+      <% end %>
 
-        <%= form.govuk_radio_button(
-                :confirm_no_outgoings,
-                'no',
-                label: t('generic.no'),
-                error: @error&.values&.first
-            ) %>
-      </div>
-    <% end %>
+      <%= next_action_buttons_with_form(
+              url: providers_legal_aid_application_no_outgoings_summary_path,
+              show_draft: true
+          ) %>
 
-    <%= next_action_buttons_with_form(
-            url: providers_legal_aid_application_no_outgoings_summary_path,
-            show_draft: true
-        ) %>
-
+    </fieldset>
   <% end %>
 <% end %>
