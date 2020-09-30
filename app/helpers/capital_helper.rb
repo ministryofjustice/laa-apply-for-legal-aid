@@ -1,11 +1,6 @@
 module CapitalHelper
   def capital_amounts_list(capital, locale_namespace:, percentage_values: [])
-    items = if @legal_aid_application.passported?
-              capital_amount_items(capital, locale_namespace, percentage_values)
-            else
-              non_passported_capital_amount_items(capital, locale_namespace, percentage_values)
-            end
-
+    items = capital_amount_items(capital, locale_namespace, percentage_values)
     items&.compact!
     return nil unless items.present?
 
@@ -16,22 +11,7 @@ module CapitalHelper
   end
 
   def capital_amount_items(capital, locale_namespace, percentage_values)
-    capital&.amount_attributes&.map do |attribute, amount|
-      next unless amount
-
-      type = percentage_values.include?(attribute.to_sym) ? :percentage : :currency
-
-      OpenStruct.new(
-        label: t("#{locale_namespace}#{attribute}"),
-        amount: amount,
-        type: type,
-        amount_text: capital_amount_text(amount, type)
-      )
-    end
-  end
-
-  def non_passported_capital_amount_items(capital, locale_namespace, percentage_values)
-    capital&.amount_attributes&.reject { |c| c == 'offline_savings_accounts' }&.map do |attribute, amount|
+    capital_amount_attributes(capital)&.map do |attribute, amount|
       next unless amount
 
       type = percentage_values.include?(attribute.to_sym) ? :percentage : :currency
@@ -51,5 +31,11 @@ module CapitalHelper
     else
       number_to_currency(amount)
     end
+  end
+
+  def capital_amount_attributes(capital)
+    return capital&.amount_attributes if @legal_aid_application.passported?
+
+    capital&.amount_attributes&.reject { |c| c == 'offline_savings_accounts' }
   end
 end

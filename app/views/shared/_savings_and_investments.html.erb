@@ -4,7 +4,7 @@
       <h2 class="govuk-heading-m"><%= t('.savings_and_investments') %></h2>
       <table class="govuk-table">
         <tbody>
-        <% @cfe_result.liquid_capital_items.reject {|i| i[:description] == 'Online Savings accounts' || i[:description] == 'Online Current accounts' }&.map do |item| %>
+        <% @cfe_result.liquid_capital_items.reject {|i| i[:description] == 'Online savings accounts' || i[:description] == 'Online current accounts' }&.map do |item| %>
           <%= render partial: 'shared/results_detail_row', locals: { caption: item[:description], value: number_to_currency(item[:value]) } %>
         <% end %>
         <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessed_amount'), value: number_to_currency(@cfe_result.total_savings) } %>
@@ -16,7 +16,8 @@
       <h2 class="govuk-heading-m"><%= t('.savings_and_investments') %></h2>
       <table class="govuk-table">
         <tbody>
-        <% @cfe_result.liquid_capital_items.each do |item| %>
+        <% @cfe_result.liquid_capital_items.map! do |item| %>
+        <% item[:description] = 'Savings accounts your client cannot access online' if item[:description] == 'Savings accounts' %>
           <%= render partial: 'shared/results_detail_row', locals: { caption: item[:description], value: number_to_currency(item[:value]) } %>
         <% end %>
         <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessed_amount'), value: number_to_currency(@cfe_result.total_savings) } %>

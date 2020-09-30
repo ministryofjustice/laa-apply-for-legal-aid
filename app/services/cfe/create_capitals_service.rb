@@ -57,7 +57,7 @@ module CFE
       return unless legal_aid_application.online_current_accounts_balance.present?
 
       {
-        description: 'Online Current accounts',
+        description: 'Online current accounts',
         value: legal_aid_application.online_current_accounts_balance
       }
     end
@@ -66,7 +66,7 @@ module CFE
       return unless legal_aid_application.online_current_accounts_balance.present?
 
       {
-        description: 'Online Savings accounts',
+        description: 'Online savings accounts',
         value: legal_aid_application.online_savings_accounts_balance
       }
     end

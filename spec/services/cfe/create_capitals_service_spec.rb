@@ -101,11 +101,11 @@ module CFE
             value: savings_amount.national_savings.to_s
           },
           {
-            description: 'Online Current accounts',
+            description: 'Online current accounts',
             value: application.online_current_accounts_balance
           },
           {
-            description: 'Online Savings accounts',
+            description: 'Online savings accounts',
             value: application.online_savings_accounts_balance
           }
         ],
