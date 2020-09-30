@@ -5,6 +5,8 @@ en:
       gather:
         retrieving_transactions: Retrieving bank transactions
         default_error: Sorry, we are experiencing technical difficulties. Please try again later.
+        status_message: Transactions are loading, you will be redirected once complete.
+        page_loading: Page Loading
       index:
         account_holder_address_heading: Account holder address
         account_holder_name_heading: Account holder name

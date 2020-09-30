@@ -5,8 +5,9 @@
     </div>
   <% end %>
 <% else %>
+  <div id="status" class="govuk-visually-hidden" role="status" data-status="<%= t('.status_message') %>"><%= t('.status_message') %></div>
   <div class="worker-waiter" data-worker-id="<%= session[:worker_id] %>" align="center">
-    <%= image_tag('loading.gif',  alt:'Page Loading') %>
+    <%= image_tag('loading.gif',  alt: t('.page_loading')) %>
     <p class="govuk-body-l"><%= t '.retrieving_transactions' %></p>
   </div>
 <% end %>
