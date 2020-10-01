@@ -142,11 +142,11 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'What your client has to do'
-    Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
+    Then I should be on a page showing 'What your client has to do'
+    Then I click link 'Continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I should be on a page showing "We'll use this to send your client a link to the service."
     Then I fill 'email' with 'test@test.com'
@@ -181,11 +181,11 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'What your client has to do'
-    Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
+    Then I should be on a page showing 'What your client has to do'
+    Then I click link 'Continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
@@ -274,11 +274,11 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'What your client has to do'
-    Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
+    Then I should be on a page showing 'What your client has to do'
+    Then I click link 'Continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
@@ -290,6 +290,14 @@ Feature: Civil application journeys
     Then I am on the About the Financial Assessment page
     Then I should be on a page showing 'test@test.com'
 
+  @javascript @vcr
+  Scenario: I am instructed to use CCMS when the applicant is not eligible
+    Given I start a non-passported application
+    Then I click 'Continue'
+    Then I should be on a page showing "Check if you can continue using this service"
+    Then I choose 'No, I do not agree'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You need to complete this application in CCMS'
 
   @javascript @vcr
   Scenario: I want to change first name from the check your answers page
@@ -367,11 +375,11 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'What your client has to do'
-    Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
+    Then I should be on a page showing 'What your client has to do'
+    Then I click link 'Continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
