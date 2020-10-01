@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_05_152150) do
+ActiveRecord::Schema.define(version: 2020_10_06_122951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -449,8 +449,10 @@ ActiveRecord::Schema.define(version: 2020_10_05_152150) do
     t.boolean "provider_received_citizen_consent"
     t.boolean "student_finance"
     t.date "used_delegated_functions_reported_on"
+    t.datetime "discarded_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
+    t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
