@@ -19,15 +19,10 @@
     <%= govuk_form_group(
           show_error_if: @error,
         ) do %>
-      <%
-        options = [
-          { value: :yes, label: t('generic.yes') },
-          { value: :no,  label: t('.no_another_office') }
-        ]
-      %>
+
       <%= form.govuk_collection_radio_buttons(
             :correct,
-            options,
+            form.yes_no_radio_button_array,
             :value,
             :label,
             error: @error,

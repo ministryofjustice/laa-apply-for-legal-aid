@@ -6,15 +6,8 @@
           input: :has_online_accounts
         ) do %>
 
-      <%
-        options = [
-          { value: :yes, label: t('generic.yes') },
-          { value: :no,  label: t('generic.no') }
-        ]
-      %>
-
       <%= form.govuk_collection_radio_buttons :has_online_accounts,
-                                              options,
+                                              form.yes_no_radio_button_array,
                                               :value,
                                               :label,
                                               error: @error,

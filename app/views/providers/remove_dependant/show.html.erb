@@ -20,14 +20,7 @@
             input: :remove_dependant
         ) do %>
 
-      <%
-        options = [
-            { value: :yes, label: t('generic.yes') },
-            { value: :no,  label: t('generic.no') }
-        ]
-      %>
-
-      <%= form.govuk_collection_radio_buttons :remove_dependant, options, :value, :label, error: @error&.values&.first, title: content_for(:page_title) %>
+      <%= form.govuk_collection_radio_buttons :remove_dependant, form.yes_no_radio_button_array, :value, :label, error: @error&.values&.first, title: content_for(:page_title) %>
 
     <% end %>
 

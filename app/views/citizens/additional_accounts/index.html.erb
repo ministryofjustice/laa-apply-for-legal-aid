@@ -6,15 +6,8 @@
             input: :additional_account
           ) do %>
 
-        <%
-          options = [
-            { value: :yes, label: t('generic.yes') },
-            { value: :no,  label: t('generic.no') }
-          ]
-        %>
-
         <%= form.govuk_collection_radio_buttons :additional_account,
-                                                options,
+                                                form.yes_no_radio_button_array,
                                                 :value,
                                                 :label,
                                                 error: @error,
