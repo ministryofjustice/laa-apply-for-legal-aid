@@ -145,7 +145,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
-    Then I choose 'Yes'
+    Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I should be on a page showing "We'll use this to send your client a link to the service."
@@ -184,7 +184,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
-    Then I choose 'Yes'
+    Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
@@ -277,7 +277,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
-    Then I choose 'Yes'
+    Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
@@ -370,7 +370,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
     Then I should be on a page showing "Check if you can continue using this service"
-    Then I choose 'Yes'
+    Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'

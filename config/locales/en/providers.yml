@@ -485,6 +485,8 @@ en:
         list_1: uses online banking for all of their current accounts
         list_2_html: will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts
         list_3: is not employed
+        radio_no: No, I do not agree
+        radio_yes: Yes, I agree
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
