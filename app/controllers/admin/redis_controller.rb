@@ -2,6 +2,7 @@
 module Admin
   class RedisController < ApplicationController
     def index
+      binding.pry
       @values = values
     end
 
@@ -17,6 +18,8 @@ module Admin
     end
 
     def values
+      return [] if redis.keys.empty?
+
       redis.keys.map { |key| [key, redis.get(key)] }
     end
 
