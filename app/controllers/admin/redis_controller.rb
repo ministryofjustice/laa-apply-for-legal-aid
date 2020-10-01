@@ -17,9 +17,15 @@ module Admin
     end
 
     def values
-      return [] if redis.keys.empty?
+      return if redis_keys.empty?
+
+      Raven.caputure_message "REDIS KEYS: #{redis_keys.inspect}"
 
       redis.keys.map { |key| [key, redis.get(key)] }
+    end
+
+    def redis_keys
+      @redis_keys ||= redis.keys
     end
 
     def create_record
@@ -31,7 +37,7 @@ module Admin
     end
 
     def redis_url
-      url = "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" if ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present?
+      url = "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379/2" if ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present?
       url || 'redis://localhost/2'
     end
   end
