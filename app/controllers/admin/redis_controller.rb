@@ -2,7 +2,6 @@
 module Admin
   class RedisController < ApplicationController
     def index
-      binding.pry
       @values = values
     end
 
