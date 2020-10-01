@@ -19,7 +19,7 @@ module Dashboard
 
       describe '#perform' do
         context 'job is not in the suspended list' do
-          before { allow(suspended_list).to receive(:include?).with('Dashboard::ApplicantEmailJob').and_return(false) }
+          before { allow(HostEnv).to receive(:environment).and_return(:production) }
           it 'calls the applicant email job' do
             expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
             subject
@@ -27,7 +27,7 @@ module Dashboard
         end
 
         context 'job is not in the suspended list' do
-          before { allow(suspended_list).to receive(:include?).with('Dashboard::ApplicantEmailJob').and_return(true) }
+          before { allow(HostEnv).to receive(:environment).and_return(:development) }
           it 'does not call the applicant email job' do
             expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).not_to receive(:run)
             subject

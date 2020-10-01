@@ -1,7 +1,11 @@
 module Dashboard
   module SuspendableJob
     def job_suspended?
-      Rails.configuration.x.suspended_dashboard_updater_jobs.include?(self.class.to_s)
+      suspended_jobs.include?(self.class.to_s)
+    end
+
+    def suspended_jobs
+      Rails.configuration.x.suspended_geckoboard_updater_jobs[HostEnv.environment]
     end
   end
 end

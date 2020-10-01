@@ -19,7 +19,7 @@ module Dashboard
 
       describe '#perform' do
         context 'job is not in the suspended list' do
-          before { allow(suspended_list).to receive(:include?).with('Dashboard::ProviderDataJob').and_return(false) }
+          before { allow(HostEnv).to receive(:environment).and_return(:production) }
           it 'calls runs ProviderData' do
             expect_any_instance_of(Dashboard::SingleObject::ProviderData).to receive(:run)
             subject
@@ -27,7 +27,7 @@ module Dashboard
         end
 
         context 'job is not in the suspended list' do
-          before { allow(suspended_list).to receive(:include?).with('Dashboard::ProviderDataJob').and_return(true) }
+          before { allow(HostEnv).to receive(:environment).and_return(:test) }
           it 'does not run ProviderData' do
             expect_any_instance_of(Dashboard::SingleObject::ProviderData).not_to receive(:run)
             subject
