@@ -19,8 +19,6 @@ module Admin
     def values
       return if redis_keys.empty?
 
-      Raven.caputure_message "REDIS KEYS: #{redis_keys.inspect}"
-
       redis.keys.map { |key| [key, redis.get(key)] }
     end
 
