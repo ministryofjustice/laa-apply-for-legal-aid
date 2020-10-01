@@ -105,12 +105,7 @@ module LaaApplyForLegalAid
         Dashboard::ProviderDataJob
         Dashboard::UpdaterJob
       ],
-      staging: %w[
-        Dashboard::FeedbackItemJob
-        Dashboard::ApplicantEmailJob
-        Dashboard::ProviderDataJob
-        Dashboard::UpdaterJob
-      ],
+      staging: [],
       production: []
     }
   end
