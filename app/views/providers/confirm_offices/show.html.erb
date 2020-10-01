@@ -22,7 +22,10 @@
 
       <%= form.govuk_collection_radio_buttons(
             :correct,
-            form.yes_no_radio_button_array,
+            [
+              { value: :yes, label: t('generic.yes') },
+              { value: :no,  label: t('.no_another_office') }
+            ],
             :value,
             :label,
             error: @error,
