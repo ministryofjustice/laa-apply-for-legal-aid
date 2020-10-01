@@ -129,6 +129,7 @@ Rails.application.routes.draw do
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
       get :search, on: :collection
+      resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create update]
       resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]

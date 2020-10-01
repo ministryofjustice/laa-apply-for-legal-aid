@@ -10,6 +10,7 @@
           <th class="nullcell" aria-hidden="true"></th>
           <%= simple_sortable_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t('.col_and_state') } %>
           <%= simple_sortable_th type: :alphabetic, content: t('.status'), currently_sorted: @initial_sort[:status] %>
+          <th class='govuk-table__header clear-all' scope='col'>Action</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -46,6 +47,9 @@
             <%= sort_column_cell(sort_by: application.enum_t(:summary_state)) do %>
               <%= gov_uk_tag text: application.enum_t(:summary_state), type: application.summary_state %>
             <% end %>
+            <td>
+              <%= link_to 'Delete', providers_legal_aid_application_delete_path(application), class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0' %>
+            </td>
           </tr>
         <% end %>
       </tbody>
