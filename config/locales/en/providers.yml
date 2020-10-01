@@ -481,9 +481,10 @@ en:
     open_banking_consents:
       show:
         heading: Check if you can continue using this service
-        info: "Your client:"
-        list_1: uses online banking for all of their bank accounts
+        info: "You agree that your client:"
+        list_1: uses online banking for all of their current accounts
         list_2_html: will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts
+        list_3: is not employed
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
