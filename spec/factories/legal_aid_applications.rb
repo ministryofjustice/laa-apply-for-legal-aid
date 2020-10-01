@@ -579,5 +579,9 @@ FactoryBot.define do
         create :ccms_submission, :case_created, legal_aid_application: application
       end
     end
+
+    trait :discarded do
+      discarded_at { Time.now - 5.minutes }
+    end
   end
 end
