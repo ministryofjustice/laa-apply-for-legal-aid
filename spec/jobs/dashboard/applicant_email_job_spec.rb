@@ -4,6 +4,7 @@ module Dashboard
   RSpec.describe ApplicantEmailJob do
     describe '.perform' do
       let(:application) { create :legal_aid_application, :with_applicant }
+      let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
       subject { described_class.perform_now(application) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
@@ -17,9 +18,20 @@ module Dashboard
       end
 
       describe '#perform' do
-        it 'calls the runs the geckoboard feedback updater' do
-          expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
-          subject
+        context 'job is not in the suspended list' do
+          before { allow(HostEnv).to receive(:environment).and_return(:production) }
+          it 'calls the applicant email job' do
+            expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).to receive(:run)
+            subject
+          end
+        end
+
+        context 'job is not in the suspended list' do
+          before { allow(HostEnv).to receive(:environment).and_return(:development) }
+          it 'does not call the applicant email job' do
+            expect_any_instance_of(Dashboard::SingleObject::ApplicantEmail).not_to receive(:run)
+            subject
+          end
         end
       end
     end

@@ -85,5 +85,29 @@ module LaaApplyForLegalAid
     config.x.db_url = Rails.env.production? ? "postgres://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}:5432/#{ENV['POSTGRES_DATABASE']}" : 'postgres://localhost:5432/apply_for_legal_aid_dev' # rubocop:disable Layout/LineLength
 
     config.active_job.queue_adapter = :sidekiq
+
+    # list geckoboard updater jobs which are suspended by host environment
+    config.x.suspended_geckoboard_updater_jobs = {
+      development: %w[
+        Dashboard::FeedbackItemJob
+        Dashboard::ApplicantEmailJob
+        Dashboard::ProviderDataJob
+        Dashboard::UpdaterJob
+      ],
+      test: %w[
+        Dashboard::FeedbackItemJob
+        Dashboard::ApplicantEmailJob
+        Dashboard::ProviderDataJob
+        Dashboard::UpdaterJob
+      ],
+      uat: %w[
+        Dashboard::FeedbackItemJob
+        Dashboard::ApplicantEmailJob
+        Dashboard::ProviderDataJob
+        Dashboard::UpdaterJob
+      ],
+      staging: [],
+      production: []
+    }
   end
 end

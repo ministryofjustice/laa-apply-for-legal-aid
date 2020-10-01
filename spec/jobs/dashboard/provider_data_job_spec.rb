@@ -4,6 +4,7 @@ module Dashboard
   RSpec.describe ProviderDataJob do
     describe '.perform' do
       let(:provider) { create :provider }
+      let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
       subject { described_class.perform_now(provider) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
@@ -17,9 +18,20 @@ module Dashboard
       end
 
       describe '#perform' do
-        it 'runs the geckoboard feedback updater' do
-          expect_any_instance_of(Dashboard::SingleObject::ProviderData).to receive(:run)
-          subject
+        context 'job is not in the suspended list' do
+          before { allow(HostEnv).to receive(:environment).and_return(:production) }
+          it 'calls runs ProviderData' do
+            expect_any_instance_of(Dashboard::SingleObject::ProviderData).to receive(:run)
+            subject
+          end
+        end
+
+        context 'job is not in the suspended list' do
+          before { allow(HostEnv).to receive(:environment).and_return(:test) }
+          it 'does not run ProviderData' do
+            expect_any_instance_of(Dashboard::SingleObject::ProviderData).not_to receive(:run)
+            subject
+          end
         end
       end
     end
