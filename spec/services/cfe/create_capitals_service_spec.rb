@@ -81,11 +81,11 @@ module CFE
       {
         bank_accounts: [
           {
-            description: 'Current accounts your client cannot access online',
+            description: 'Current accounts',
             value: savings_amount.offline_current_accounts.to_s
           },
           {
-            description: 'Savings accounts your client cannot access online',
+            description: 'Savings accounts',
             value: savings_amount.offline_savings_accounts.to_s
           },
           {
@@ -101,11 +101,11 @@ module CFE
             value: savings_amount.national_savings.to_s
           },
           {
-            description: 'Current accounts',
+            description: 'Online current accounts',
             value: application.online_current_accounts_balance
           },
           {
-            description: 'Savings accounts',
+            description: 'Online savings accounts',
             value: application.online_savings_accounts_balance
           }
         ],

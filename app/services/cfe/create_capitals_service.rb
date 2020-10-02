@@ -10,8 +10,8 @@ module CFE
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
-      offline_current_accounts: 'Current accounts your client cannot access online',
-      offline_savings_accounts: 'Savings accounts your client cannot access online',
+      offline_current_accounts: 'Current accounts',
+      offline_savings_accounts: 'Savings accounts',
       cash: 'Money not in a bank account',
       other_person_account: "Access to another person's bank account",
       national_savings: 'ISAs, National Savings Certificates and Premium Bonds',
@@ -57,7 +57,7 @@ module CFE
       return unless legal_aid_application.online_current_accounts_balance.present?
 
       {
-        description: 'Current accounts',
+        description: 'Online current accounts',
         value: legal_aid_application.online_current_accounts_balance
       }
     end
@@ -66,7 +66,7 @@ module CFE
       return unless legal_aid_application.online_current_accounts_balance.present?
 
       {
-        description: 'Savings accounts',
+        description: 'Online savings accounts',
         value: legal_aid_application.online_savings_accounts_balance
       }
     end
