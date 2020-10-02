@@ -127,6 +127,7 @@ en:
         reference_number: Reference number
         solicitors-actions: Your solicitor will use the information you provided to help them complete your application.
         what-happens-next:  We'll confirm if you qualify for legal aid once we've checked your financial situation and the details of your case.
+        feedback_link_html: '<a href="%{url}" class="govuk_link">Give feedback</a> to help us improve this service.'
     other_assets:
       show:
         h1-heading: Which types of assets do you have?
