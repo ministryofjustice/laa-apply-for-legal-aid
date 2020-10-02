@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :feedback do
-    done_all_needed { Faker::Boolean.boolean }
+    done_all_needed { %w[yes no].sample }
     satisfaction { Feedback.satisfactions.keys.sample }
     difficulty { Feedback.difficulties.keys.sample }
     improvement_suggestion { Faker::Lorem.paragraph }

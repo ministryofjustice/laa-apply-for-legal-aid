@@ -17,7 +17,7 @@ class Feedback < ApplicationRecord
     very_easy: 4
   }
 
-  validates :satisfaction, :difficulty, presence: true
+  validates :satisfaction, :difficulty, :done_all_needed, presence: true
 
   after_create do
     ActiveSupport::Notifications.instrument 'dashboard.feedback_created', feedback_id: id
