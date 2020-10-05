@@ -133,7 +133,7 @@ GEM
       safely_block (>= 0.1.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
-    browser (5.0.0)
+    browser (5.1.0)
     builder (3.2.4)
     business (2.1.0)
     byebug (11.1.3)
