@@ -38,12 +38,6 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
       end
     end
 
-    it 'triggers window.print() when clicking the printing buttons' do
-      print_buttons.each do |print_button|
-        expect(print_button.attributes['onclick'].value).to eq('window.print()')
-      end
-    end
-
     it 'includes the name of the firm' do
       subject
       expect(unescaped_response_body).to include(firm.name)
