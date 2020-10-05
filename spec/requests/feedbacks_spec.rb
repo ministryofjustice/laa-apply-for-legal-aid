@@ -170,19 +170,5 @@ RSpec.describe 'FeedbacksController', type: :request do
     it 'displays a message' do
       expect(unescaped_response_body).to match(I18n.t('feedback.show.title'))
     end
-
-    context 'provider signed out' do
-      let(:provider) { create :provider }
-
-      before do
-        sign_in provider
-        delete destroy_provider_session_path
-        get feedback_path(feedback)
-      end
-
-      it 'displays close tab message' do
-        expect(unescaped_response_body).to match(I18n.t('.feedback.show.close_tab'))
-      end
-    end
   end
 end

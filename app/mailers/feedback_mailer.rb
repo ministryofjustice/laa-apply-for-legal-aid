@@ -21,7 +21,7 @@ class FeedbackMailer < BaseApplyMailer
       difficulty: safe_nil(feedback.difficulty),
       improvement_suggestion: safe_nil(feedback.improvement_suggestion),
       originating_page: safe_nil(feedback.originating_page),
-      provider_email: safe_nil(feedback.email)
+      provider_email: provider_email_phrase(feedback)
     )
   end
 
@@ -31,5 +31,11 @@ class FeedbackMailer < BaseApplyMailer
 
   def yes_or_no(feedback)
     feedback['done_all_needed'] == true ? 'Yes' : 'No'
+  end
+
+  def provider_email_phrase(feedback)
+    return '' if feedback.email.nil?
+
+    "from #{feedback.email}"
   end
 end

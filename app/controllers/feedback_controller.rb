@@ -11,6 +11,7 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.new(feedback_params)
     @feedback.originating_page = originating_page
     @feedback.email = provider_email
+    @display_close_tab_msg = params[:signed_out_provider_id].present?
 
     # must use bang version `deliver_later!` or failures won't be retried by sidekiq
     if @feedback.save
@@ -72,7 +73,13 @@ class FeedbackController < ApplicationController
   end
 
   def success_message
+    return {} if citizen_journey?
+
     provider_signed_in? ? {} : I18n.t('feedback.new.signed_out')
+  end
+
+  def citizen_journey?
+    citizen_path_regex.match? session[:feedback_return_path]
   end
 
   def back_button
@@ -93,5 +100,9 @@ class FeedbackController < ApplicationController
     return :citizen if %r{/citizens/}.match?(path)
 
     :unknown
+  end
+
+  def citizen_path_regex
+    @citizen_path_regex ||= Regexp.new(/\/citizens\//)
   end
 end
