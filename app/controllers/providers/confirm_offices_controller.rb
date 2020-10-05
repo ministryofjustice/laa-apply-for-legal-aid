@@ -5,7 +5,7 @@ module Providers
 
     def show
       # keep session size small by emptying page history on login
-      session[:page_history] = []
+      clear_page_history
       if firm.offices.count == 1
         current_provider.update!(selected_office: firm.offices.first)
         redirect_to providers_legal_aid_applications_path
@@ -32,6 +32,10 @@ module Providers
 
     def firm
       current_provider.firm
+    end
+
+    def clear_page_history
+      PageHistoryService.new(session_id: session['session_id']).write([])
     end
   end
 end

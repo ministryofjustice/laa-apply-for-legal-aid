@@ -54,6 +54,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
 
       context 'no postcode have been entered yet' do
         before do
+          set_session({ 'dummy_var' => 'dummy_value' }) # fixes the session_id
           get providers_legal_aid_application_address_lookup_path(legal_aid_application)
         end
 

@@ -261,6 +261,7 @@ RSpec.describe 'check passported answers requests', type: :request do
 
       before do
         login_as application.provider
+        set_session({ 'dummy_var' => 'dummy_value' }) # fixes the session_id
         get providers_legal_aid_application_other_assets_path(application)
         get providers_legal_aid_application_check_passported_answers_path(application)
         subject

@@ -109,5 +109,8 @@ module LaaApplyForLegalAid
       staging: [],
       production: []
     }
+
+    config.x.redis.base_url = ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present? ? "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" : 'redis://localhost:6379' # rubocop:disable Layout/LineLength, Lint/RequireParentheses
+    config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
   end
 end

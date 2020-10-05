@@ -19,6 +19,8 @@ RSpec.describe 'citizen accounts request', type: :request do
     create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
   end
 
+  let(:page_history_service) { PageHistoryService.new(session_id: session['session_id']) }
+
   describe 'GET /citizens/account' do
     subject { get citizens_accounts_path }
 
@@ -57,7 +59,7 @@ RSpec.describe 'citizen accounts request', type: :request do
     end
 
     it 'adds its url to history' do
-      expect(session[:page_history]).to include(citizens_accounts_path)
+      expect(page_history_service.read).to include(citizens_accounts_path)
     end
 
     it 'has a link to select another bank' do

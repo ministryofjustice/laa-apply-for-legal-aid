@@ -29,6 +29,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
       end
 
       describe 'back link' do
+        before { set_session({ 'dummy_var' => 'dummy_value' }) } # fixes the session_id
         context 'applicant owns with mortgage' do
           before { get providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application) }
 
