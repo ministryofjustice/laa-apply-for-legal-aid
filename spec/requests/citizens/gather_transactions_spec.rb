@@ -18,6 +18,7 @@ RSpec.describe 'citizen accounts request', type: :request do
   let!(:applicant_bank_account) do
     create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
   end
+  let(:page_history_service) { PageHistoryService.new(page_history_id: session['page_history_id']) }
 
   describe 'GET /citizens/gather_transactions' do
     subject { get citizens_gather_transactions_path }
@@ -36,7 +37,7 @@ RSpec.describe 'citizen accounts request', type: :request do
     end
 
     it 'does not add its url to history' do
-      expect(session[:page_history]).not_to include(citizens_gather_transactions_path)
+      expect(page_history_service.read).to eq nil
     end
   end
 
@@ -56,8 +57,8 @@ RSpec.describe 'citizen accounts request', type: :request do
       expect(unescaped_response_body).to include(I18n.t('citizens.gather_transactions.index.heading_1'))
     end
 
-    it 'has reset the session and has no page history' do
-      expect(session.keys).not_to include(:page_history)
+    it 'has reset the page history' do
+      expect(page_history_service.read).to eq nil
     end
 
     context 'background worker is still working' do
