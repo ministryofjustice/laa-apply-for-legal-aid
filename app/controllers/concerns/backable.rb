@@ -88,7 +88,11 @@ module Backable
     end
 
     def page_history_service
-      @page_history_service ||= PageHistoryService.new(session_id: session[:session_id])
+      @page_history_service ||= PageHistoryService.new(page_history_id: page_history_id)
+    end
+
+    def page_history_id
+      @page_history_id ||= session[:page_history_id]
     end
   end
 end

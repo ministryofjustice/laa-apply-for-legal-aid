@@ -311,7 +311,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to return to the check your answers page without changing first name
     Given I complete the journey as far as check your answers
-    Then I reload the page
     And I click Check Your Answers Change link for 'First name'
     Then I click link "Back"
     Then I should be on a page showing 'Check your answers'
@@ -333,7 +332,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to return to the check your answers page without changing proceeding type
     Given I complete the journey as far as check your answers
-    Then I reload the page
     And I click Check Your Answers Change link for 'Proceeding Type'
     And I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -343,7 +341,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to return to the check your answers page without changing name
     Given I complete the journey as far as check your answers
-    Then I reload the page
     And I click Check Your Answers Change link for 'First name'
     Then I click link "Back"
     Then I should be on a page showing 'Check your answers'
@@ -397,7 +394,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to return to check your answers from address lookup
     Given I complete the journey as far as check your answers
-    Then I reload the page
     And I click Check Your Answers Change link for 'Address'
     Then I am on the postcode entry page
     Then I click link "Back"
@@ -406,7 +402,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to return to check your answers from address select
     Given I complete the journey as far as check your answers
-    Then I reload the page
     And I click Check Your Answers Change link for 'Address'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -418,7 +413,6 @@ Feature: Civil application journeys
   Scenario: I navigate to Contact page from application service and back
     Given I am logged in as a provider
     Given I visit the application service
-    Then I reload the page
     Then I click link "Contact"
     Then I should be on a page showing "Contact us"
     Then I click link "Back"

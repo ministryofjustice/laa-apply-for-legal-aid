@@ -36,7 +36,6 @@ RSpec.describe Providers::ApplicantsController, type: :request do
     let(:legal_aid_application) { provider.legal_aid_applications.last }
     let(:applicant) { legal_aid_application.applicant }
     let(:next_url) { providers_legal_aid_application_address_lookup_path(legal_aid_application) }
-    before { set_session({ 'dummy_var' => 'dummy_value' }) } # fixes the session_id
 
     subject { post providers_applicants_path, params: params.merge(submit_button) }
 

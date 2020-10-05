@@ -23,6 +23,7 @@ module Citizens
       sign_out current_provider if provider_signed_in?
       reset_session
       session[:current_application_id] = legal_aid_application.id
+      session[:page_history_id] = SecureRandom.uuid
       sign_applicant_in_via_devise(legal_aid_application.applicant)
       redirect_to citizens_legal_aid_applications_path
     end

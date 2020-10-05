@@ -1,6 +1,6 @@
 class PageHistoryService
-  def initialize(session_id:)
-    @session_id = session_id
+  def initialize(page_history_id:)
+    @page_history_id = page_history_id
   end
 
   def write(page_history)
@@ -22,6 +22,6 @@ class PageHistoryService
   end
 
   def redis_key
-    @redis_key ||= "page_history:#{@session_id}"
+    @redis_key ||= "page_history:#{@page_history_id}"
   end
 end

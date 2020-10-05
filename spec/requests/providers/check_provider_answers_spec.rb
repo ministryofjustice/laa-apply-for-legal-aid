@@ -165,7 +165,6 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as application.provider
-        set_session({ 'dummy_var' => 'dummy_value' }) # fixes the session_id
         application.check_applicant_details!
         get providers_legal_aid_application_proceedings_types_path(application)
         get providers_legal_aid_application_check_provider_answers_path(application)

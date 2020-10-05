@@ -24,7 +24,6 @@ RSpec.describe 'Backable', type: :request do
 
   describe 'back_path' do
     before do
-      set_session({ 'dummy_var' => 'dummy_value' }) # fixes the session_id
       get page_1
       get page_2
       patch page_2, params: address_params

@@ -28,7 +28,6 @@ RSpec.describe 'providers savings and investments', type: :request do
       end
 
       describe 'back link' do
-        before { set_session({ 'dummy_var' => 'dummy_value' }) } # fixes the session_id
         context 'applicant does not own home' do
           before { get providers_legal_aid_application_own_home_path(application) }
 

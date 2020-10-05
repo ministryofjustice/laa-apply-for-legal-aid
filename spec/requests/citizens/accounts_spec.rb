@@ -19,7 +19,7 @@ RSpec.describe 'citizen accounts request', type: :request do
     create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
   end
 
-  let(:page_history_service) { PageHistoryService.new(session_id: session['session_id']) }
+  let(:page_history_service) { PageHistoryService.new(page_history_id: session['page_history_id']) }
 
   describe 'GET /citizens/account' do
     subject { get citizens_accounts_path }

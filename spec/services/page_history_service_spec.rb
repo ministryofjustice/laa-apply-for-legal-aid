@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe PageHistoryService do
   let!(:redis) { Redis.new(url: Rails.configuration.x.redis.page_history_url) }
-  let(:session_id) { SecureRandom.uuid }
-  let(:key) { "page_history:#{session_id}" }
+  let(:page_history_id) { SecureRandom.uuid }
+  let(:key) { "page_history:#{page_history_id}" }
   let(:page_history) { %w[page_1 page_2] }
   before(:each) { redis.flushdb }
   after(:each) { redis.quit }
 
-  subject { PageHistoryService.new(session_id: session_id) }
+  subject { PageHistoryService.new(page_history_id: page_history_id) }
 
   describe '#write' do
     before { subject.write(page_history) }

@@ -34,7 +34,6 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
       end
 
       describe 'back link' do
-        before { set_session({ 'dummy_var' => 'dummy_value' }) } # fixes the session_id
         context "the applicant's address used s address lookup service", :vcr do
           let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address_lookup }
 
