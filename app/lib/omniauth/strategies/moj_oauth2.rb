@@ -5,6 +5,7 @@ require 'socket'       # for SocketError
 require 'timeout'      # for Timeout::Error
 
 # rubocop:disable Lint/MissingSuper
+# :nocov:
 
 module OmniAuth
   module Strategies
@@ -173,5 +174,5 @@ module OmniAuth
 end
 
 OmniAuth.config.add_camelization 'oauth2', 'OAuth2'
-
+# :nocov:
 # rubocop:enable Lint/MissingSuper
