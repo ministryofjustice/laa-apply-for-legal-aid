@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   </head>
-  <body onload="document.forms[0].submit();">
+  <body>
     <%= form_tag("#{Rails.configuration.x.application.host_url}/providers/saml/auth") do %>
       <%= hidden_field_tag('SAMLResponse', @saml_response) %>
       <%= hidden_field_tag('RelayState', params[:RelayState]) %>
@@ -12,3 +12,9 @@
     <% end %>
   </body>
 </html>
+
+<script nonce="<%= content_security_policy_script_nonce %>">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.forms[0].submit();
+  });
+</script>

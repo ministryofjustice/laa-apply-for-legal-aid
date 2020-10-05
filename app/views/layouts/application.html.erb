@@ -37,7 +37,7 @@
 
   <body class="govuk-template__body ">
     <%= render partial: 'layouts/google_tag_manager_no_script' if google_tag_present? %>
-    <script>
+    <script nonce="<%= content_security_policy_script_nonce %>">
       document.body.className = (
         (document.body.className)
           ? document.body.className + ' js-enabled'

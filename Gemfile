@@ -95,6 +95,9 @@ gem 'rails_admin', '~> 2.0', '>= 2.0.2'
 # Create reports with SQL queries
 gem 'blazer', '>= 2.2.6'
 
+# Manage security headers
+gem 'secure_headers'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
