@@ -8,7 +8,8 @@ require_relative 'moj_oauth2'
 
 module OmniAuth
   module Strategies
-    class TrueLayer < OmniAuth::Strategies::MojOAuth2 # TODO revert back to TrueLayer < OmniAuth::Strategies::OAuth2 once True layer debugging removed
+    # TODO: revert back to TrueLayer < OmniAuth::Strategies::OAuth2 once True layer debugging removed
+    class TrueLayer < OmniAuth::Strategies::MojOAuth2
       option :name, :true_layer
 
       option :client_options,

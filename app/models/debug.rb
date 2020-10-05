@@ -1,6 +1,5 @@
 class Debug < ApplicationRecord
-
-
+  # :nocov:
   def self.record_request(session, auth_params, callback_url)
     create!(
       debug_type: 'request',
@@ -11,7 +10,6 @@ class Debug < ApplicationRecord
       callback_url: callback_url
     )
   end
-
 
   def self.record_callback(session, callback_params)
     create!(
@@ -33,5 +31,5 @@ class Debug < ApplicationRecord
       error_details: details
     )
   end
-
+  # :nocov:
 end
