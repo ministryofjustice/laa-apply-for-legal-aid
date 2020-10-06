@@ -48,7 +48,12 @@
               <%= gov_uk_tag text: application.enum_t(:summary_state), type: application.summary_state %>
             <% end %>
             <td>
-              <%= link_to 'Delete', providers_legal_aid_application_delete_path(application), class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0' %>
+              <%= link_to_with_hidden_suffix(
+                      text: t('.delete'),
+                      path: providers_legal_aid_application_delete_path(application),
+                      klass: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0',
+                      suffix: t('.delete_suffix', reference: application.application_ref, applicant: application.applicant_full_name)
+                  ) %>
             </td>
           </tr>
         <% end %>
