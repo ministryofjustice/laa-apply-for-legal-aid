@@ -56,11 +56,11 @@ Given('I previously created a passported application with no assets and left on 
 end
 
 Given(/^I view the previously created application$/) do
-  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a").click
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a[contains(.,'#{@legal_aid_application.applicant.full_name}')]").click
 end
 
 Given(/^I view the first application in the table$/) do
-  find(:xpath, '//tr/td/a').click
+  find(:xpath, '//tr/td[1]/a').click
 end
 
 Given('I start the journey as far as the applicant page') do
