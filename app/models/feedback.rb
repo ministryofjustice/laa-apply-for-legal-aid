@@ -19,7 +19,6 @@ class Feedback < ApplicationRecord
 
   validates :satisfaction, :difficulty, presence: true
 
-
   validates_inclusion_of :done_all_needed, in: [true, false]
 
   after_create do
