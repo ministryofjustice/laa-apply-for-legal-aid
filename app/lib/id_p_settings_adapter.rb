@@ -28,7 +28,8 @@ class IdPSettingsAdapter
     {
       idp_sso_target_url: laa_portal_config.idp_sso_target_url,
       issuer: 'apply',
-      idp_cert_fingerprint_algorithm: laa_portal_config.idp_cert_fingerprint_algorithm
+      idp_cert_fingerprint_algorithm: laa_portal_config.idp_cert_fingerprint_algorithm,
+      force_authn: true
     }
   end
 
