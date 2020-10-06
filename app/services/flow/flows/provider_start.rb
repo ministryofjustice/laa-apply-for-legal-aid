@@ -62,7 +62,7 @@ module Flow
             end
             return :substantive_applications if application.used_delegated_functions?
 
-            application.applicant_receives_benefit? ? :capital_introductions : :non_passported_client_instructions
+            application.applicant_receives_benefit? ? :capital_introductions : :open_banking_consents
           end
         },
         substantive_applications: {
@@ -70,7 +70,7 @@ module Flow
           forward: ->(application) do
             return :delegated_confirmation unless application.substantive_application?
 
-            application.applicant_receives_benefit? ? :capital_introductions : :non_passported_client_instructions
+            application.applicant_receives_benefit? ? :capital_introductions : :open_banking_consents
           end
         },
         delegated_confirmation: {
@@ -78,7 +78,7 @@ module Flow
         },
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
-          forward: ->(application) { application.provider_received_citizen_consent? ? :email_addresses : :use_ccms }
+          forward: ->(application) { application.provider_received_citizen_consent? ? :non_passported_client_instructions : :use_ccms }
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
@@ -96,7 +96,7 @@ module Flow
         },
         non_passported_client_instructions: {
           path: ->(application) { urls.providers_legal_aid_application_non_passported_client_instructions_path(application) },
-          forward: :open_banking_consents
+          forward: :email_addresses
         }
       }.freeze
     end

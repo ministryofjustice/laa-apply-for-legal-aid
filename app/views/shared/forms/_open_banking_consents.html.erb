@@ -17,18 +17,19 @@
       <ul class="govuk-list govuk-list--bullet">
         <li><%= t('providers.open_banking_consents.show.list_1') %></li>
         <li><%= t('providers.open_banking_consents.show.list_2_html') %></li>
+        <li><%= t('providers.open_banking_consents.show.list_3') %></li>
       </ul>
 
       <%= form.govuk_radio_button(
               :provider_received_citizen_consent,
               true,
-              label: t('generic.yes')
+              label: t('providers.open_banking_consents.show.radio_yes')
           ) %>
 
       <%= form.govuk_radio_button(
               :provider_received_citizen_consent,
               false,
-              label: t('generic.no')
+              label: t('providers.open_banking_consents.show.radio_no')
           ) %>
 
       <div class="govuk-!-padding-bottom-5"></div>

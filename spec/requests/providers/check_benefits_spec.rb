@@ -166,16 +166,16 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       context 'when the check benefit result is negative' do
         let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
-        it 'displays the online banking page' do
-          expect(response).to redirect_to providers_legal_aid_application_non_passported_client_instructions_path(application)
+        it 'displays the open banking consent page' do
+          expect(response).to redirect_to providers_legal_aid_application_open_banking_consents_path(application)
         end
       end
 
       context 'when the check benefit result is undetermined' do
         let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
 
-        it 'displays the online banking page' do
-          expect(response).to redirect_to providers_legal_aid_application_non_passported_client_instructions_path(application)
+        it 'displays the open banking consent page' do
+          expect(response).to redirect_to providers_legal_aid_application_open_banking_consents_path(application)
         end
       end
 

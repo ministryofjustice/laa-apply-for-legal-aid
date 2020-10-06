@@ -480,10 +480,13 @@ en:
         h1-heading: Enter the total amount in all savings accounts that your client cannot access online
     open_banking_consents:
       show:
-        heading: Is the following correct?
-        info: "Your client:"
-        list_1: uses online banking for all of their bank accounts
+        heading: Check if you can continue using this service
+        info: "You agree that your client:"
+        list_1: uses online banking for all of their current accounts
         list_2_html: will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts
+        list_3: is not employed
+        radio_no: No, I do not agree
+        radio_yes: Yes, I agree
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
@@ -683,13 +686,14 @@ en:
     use_ccms:
       show:
         title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
-        sub_heading: "You cannot use this service if your client does not:"
+        sub_heading: "You cannot use this service if your client:"
         continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
         online_banking_consent:
           list: |
-            use online banking for all of their current accounts
-            agree to give the LAA one-time access to their bank accounts
+            does not use online banking for all of their current accounts
+            will not give the LAA one-time access to their bank accounts
+            is employed
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
