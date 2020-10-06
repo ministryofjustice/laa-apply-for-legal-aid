@@ -21,18 +21,20 @@
             <td class="govuk-table__cell case-reference-number"><%= application.application_ref %></td>
             <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
             <td class="govuk-table__cell"><%= mail_to application.provider.email, application.provider.username %></td>
-            <td class="govuk-table__cell"><%= button_to(
-                                                t('.delete'),
-                                                admin_legal_aid_application_path(application.id),
-                                                method: :delete,
-                                                class: 'govuk-button govuk-button--warning request-delete-button',
-                                                "data-application-id": application.id,
-                                                "data-original-text": t('.delete'),
-                                                "data-delete-name": "#{t('.applicant_name')}: #{application.applicant_full_name || t('generic.undefined')}",
-                                                "data-delete-ref": "#{t('.application_ref')}: #{application.application_ref}",
-                                                "data-delete-message": t('.warning.delete')
-                                              ) if destroy_enabled? %>
-                                             </td>
+            <td class="govuk-table__cell">
+              <%= "Discarded by user on #{application.discarded_at.strftime('%d-%m-%Y')}" if application.discarded? %>
+              <%= button_to(
+                t('.delete'),
+                admin_legal_aid_application_path(application.id),
+                method: :delete,
+                class: 'govuk-button govuk-button--warning request-delete-button',
+                "data-application-id": application.id,
+                "data-original-text": t('.delete'),
+                "data-delete-name": "#{t('.applicant_name')}: #{application.applicant_full_name || t('generic.undefined')}",
+                "data-delete-ref": "#{t('.application_ref')}: #{application.application_ref}",
+                "data-delete-message": t('.warning.delete')
+              ) if destroy_enabled? %>
+             </td>
             <td class="govuk-table__cell"><%= button_to(
                                                 'Test CCMS connectivity',
                                                 admin_ccms_connectivity_test_path(application.id),
