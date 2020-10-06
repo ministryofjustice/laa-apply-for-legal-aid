@@ -9,10 +9,13 @@
       ]
     %>
 
-    <%= govuk_fieldset_header(content_for(:page_title)) %>
-    <%= govuk_hint t('.hint') %>
-
-    <%= form.govuk_collection_radio_buttons :student_finance, options, :value, :label, error: @error %>
+    <%= form.govuk_collection_radio_buttons :student_finance,
+                                            options,
+                                            :value,
+                                            :label,
+                                            error: @error,
+                                            hint: t('.hint'),
+                                            title: content_for(:page_title) %>
 
     <%= next_action_buttons(
             show_draft: true,

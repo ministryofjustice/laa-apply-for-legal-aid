@@ -39,16 +39,23 @@
         </div>
       </details>
 
-      <%= form.govuk_radio_button(
-            :open_banking_consent,
-            true,
-            label: t('generic.yes')
-          ) %>
-
-      <%= form.govuk_radio_button(
-            :open_banking_consent,
-            false,
-            label: t('generic.no')
+      <%
+        options = [
+            { value: :true, label: t('generic.yes') },
+            { value: :false,  label: t('generic.no') }
+        ]
+      %>
+      <%= form.govuk_collection_radio_buttons(
+              :open_banking_consent,
+              options,
+              :value,
+              :label,
+              error: @error,
+              title: {
+                  text: t('.title_html'),
+                  htag: :h2,
+                  hidden: true
+              }
           ) %>
     <% end %>
 

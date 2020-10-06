@@ -55,34 +55,18 @@
     </div>
 
     <div class="govuk-!-padding-bottom-4"></div>
-    <%= govuk_form_group(
-            show_error_if: @error,
-            input: :offline_savings_account
-        ) do %>
 
-      <h2 class="govuk-heading-l"><%= t('.offline_savings_accounts') %></h2>
-
-      <p class="govuk-hint"><%= t('.hints.offline_savings_accounts') %></p>
-
-      <%= govuk_error_message(@error&.values&.first) %>
-
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
-        <%= form.govuk_radio_button(
-                :offline_savings_account,
-                'yes',
-                label: t('generic.yes'),
-                error: @error&.values&.first,
-                checked: @legal_aid_application&.savings_amount&.offline_savings_accounts.present?
-            ) %>
-
-        <%= form.govuk_radio_button(
-                :offline_savings_account,
-                'no',
-                error: @error&.values&.first,
-                label: t('generic.no')
-            ) %>
-      </div>
-  <% end %>
+    <%= form.govuk_collection_radio_buttons :offline_savings_account,
+                                            form.yes_no_radio_button_array,
+                                            :value,
+                                            :label,
+                                            error: @error&.values&.first,
+                                            hint: t('.hints.offline_savings_accounts'),
+                                            title: {
+                                              text: t('.offline_savings_accounts'),
+                                              htag: 'h2',
+                                              size: :l
+                                            } %>
 
     <%= next_action_buttons(
             show_draft: true,

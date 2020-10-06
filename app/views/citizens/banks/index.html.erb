@@ -4,11 +4,13 @@
 
   <%= form_with(local: true) do |form| %>
     <%= govuk_form_group(show_error_if: @error) do %>
-      <h1 class="govuk-heading-xl"><%= content_for(:page_title) %></h1>
-      <%= govuk_hint t('.hint') %>
-      <div class="govuk-radios bank-selection">
-        <%= render partial: 'bank', collection: TrueLayerBank.available_banks, locals: { form: form } %>
-      </div>
+      <fieldset class="govuk-fieldset">
+        <%= govuk_fieldset_header content_for(:page_title) %>
+        <%= govuk_hint t('.hint') %>
+        <div class="govuk-radios bank-selection">
+          <%= render partial: 'bank', collection: TrueLayerBank.available_banks, locals: { form: form } %>
+        </div>
+      </fieldset>
     <% end %>
 
     <h2 class="govuk-heading-m"><%= t('.what_happens_next') %></h2>

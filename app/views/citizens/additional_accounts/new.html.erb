@@ -6,17 +6,12 @@
           input: :has_online_accounts
         ) do %>
 
-      <%
-        options = [
-          { value: :yes, label: t('generic.yes') },
-          { value: :no,  label: t('generic.no') }
-        ]
-      %>
-
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
-
-      <%= form.govuk_collection_radio_buttons :has_online_accounts, options, :value, :label, error: @error %>
-
+      <%= form.govuk_collection_radio_buttons :has_online_accounts,
+                                              form.yes_no_radio_button_array,
+                                              :value,
+                                              :label,
+                                              error: @error,
+                                              title: content_for(:page_title) %>
     <% end %>
 
     <%= next_action_buttons(form: form) %>
