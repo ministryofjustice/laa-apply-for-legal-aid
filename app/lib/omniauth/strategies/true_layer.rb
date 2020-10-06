@@ -3,9 +3,13 @@
 # Note that you need to restart the server to apply changes to this file.
 require 'omniauth-oauth2'
 
+# remove this once special true layer debugging removed
+require_relative 'moj_oauth2'
+
 module OmniAuth
   module Strategies
-    class TrueLayer < OmniAuth::Strategies::OAuth2
+    # TODO: revert back to TrueLayer < OmniAuth::Strategies::OAuth2 once True layer debugging removed
+    class TrueLayer < OmniAuth::Strategies::MojOAuth2
       option :name, :true_layer
 
       option :client_options,
