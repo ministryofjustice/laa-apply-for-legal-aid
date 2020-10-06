@@ -22,6 +22,7 @@ en:
         delete: Delete
         latest_applications: Latest Legal Aid Applications
         status: Status
+        provider_username: Provider's username
     settings:
       show:
         heading_1: Settings

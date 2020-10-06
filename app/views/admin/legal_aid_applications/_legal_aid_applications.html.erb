@@ -8,6 +8,7 @@
           <th class="govuk-table__header" scope="col"><%= t('.created_at') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
           <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
+          <th class="govuk-table__header" scope="col"><%= t('.provider_username') %></th>
           <th class="govuk-table__header" scope="col"></th>
           <th class="govuk-table__header" scope="col"></th>
         </tr>
@@ -19,6 +20,7 @@
             <td class="govuk-table__cell"><%= l(application.created_at.to_date, format: :long_date) %></td>
             <td class="govuk-table__cell case-reference-number"><%= application.application_ref %></td>
             <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
+            <td class="govuk-table__cell"><%= mail_to application.provider.email, application.provider.username %></td>
             <td class="govuk-table__cell"><%= button_to(
                                                 t('.delete'),
                                                 admin_legal_aid_application_path(application.id),
