@@ -34,18 +34,25 @@ RSpec.describe Providers::DeleteController, type: :request do
 
   describe 'DELETE /admin/legal_aid_applications/:legal_aid_application_id/destroy' do
     subject { delete providers_legal_aid_application_delete_path(legal_aid_application) }
+    before { login_as provider }
 
-    before do
-      login_as provider
-      subject
+    context 'when the application has no pre-existing scheduled mails' do
+      it 'sets the application to discarded' do
+        expect { subject }.to change { legal_aid_application.reload.discarded_at }
+      end
+
+      it 'returns http found' do
+        subject
+        expect(response).to have_http_status(:found)
+      end
     end
 
-    it 'sets the application to discarded' do
-      expect(legal_aid_application.reload.discarded_at).not_to be nil
-    end
+    context 'when the application has a pre-existing scheduled mail' do
+      let!(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: legal_aid_application }
 
-    it 'returns http found' do
-      expect(response).to have_http_status(:found)
+      it 'clears any scheduled mailings' do
+        expect { subject }.to change { legal_aid_application.scheduled_mailings.first.cancelled_at }
+      end
     end
   end
 end
