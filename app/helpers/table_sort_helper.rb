@@ -57,6 +57,12 @@ module TableSortHelper
   #   where at: is the width below which the column will be combined (options are 470 and 555)
   #   and append: is the contented that will be appended to the main content when the columns are combined
   #
+  # TODO: Depending on outcome of second DAC review this version may be deprecatable
+  # it adds a lot of noise to the aria tags and the simple_sortable_th was designed to
+  # be more screen reader friendly. Apparently, this version gives _too much_ detail
+  # to the users!
+  # It was left in place in Oct 2020 because it is still in use on the transaction pages
+  # and we wanted feedback on the new version before replacing it everywhere
   def sort_column_th(type:, content:, combine_right: {}, currently_sorted: nil)
     combine_right_at = combine_right[:at]
     klasses = %w[govuk-table__header sort]
@@ -69,6 +75,29 @@ module TableSortHelper
         sort_span_combine_right(combine_right) +
         sort_span_sort_indicator(type, currently_sorted)
     end
+  end
+
+  def simple_sortable_th(type:, content:, combine_right: {}, currently_sorted: nil)
+    combine_right_at = combine_right[:at]
+    classes = %w[govuk-table__header sort] # sort enables function and wrapping th content in 'sortable-column' span
+    classes += ['table-combine_right_if_narrow', "narrow_#{combine_right_at}"] if combine_right_at
+    classes << 'govuk-table__header--numeric' if type == :numeric
+    classes << "header-sort-#{currently_sorted}" if currently_sorted
+
+    content_tag(:th, role: 'columnheader', scope: 'col', class: classes) do
+      content_tag(:span, class: 'aria-sort-description') { content } +
+        sort_span_combine_right(combine_right) +
+        content_tag(:span, ', button', class: 'govuk-visually-hidden') +
+        simple_span_sort_indicator
+    end
+  end
+
+  def simple_span_sort_indicator
+    content_tag(
+      :span,
+      '',
+      class: 'sort-direction-indicator'
+    )
   end
 
   def sort_span_by
