@@ -26,7 +26,7 @@ module CCMS
     end
 
     def call
-      return true if Setting.manually_review_all_cases?
+      return true if Setting.manually_review_all_cases? && non_passported?
 
       return true if capital_contribution_required? && has_restrictions?
 

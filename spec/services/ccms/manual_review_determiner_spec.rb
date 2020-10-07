@@ -22,6 +22,15 @@ module CCMS
           let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
           let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
 
+          it 'returns false' do
+            expect(subject).to be false
+          end
+        end
+
+        context 'non-passported, no contrib, no restrictions' do
+          let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+          let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+
           it 'returns true' do
             expect(subject).to be true
           end
