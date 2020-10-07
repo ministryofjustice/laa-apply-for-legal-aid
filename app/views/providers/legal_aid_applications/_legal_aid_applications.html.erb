@@ -1,14 +1,15 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <table class="govuk-table sortable table-merge_columns">
+      <caption class="govuk-visually-hidden"><%= t('.table_description') %></caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <%= sort_column_th type: :alphabetic, content: t('.applicant_name'),   currently_sorted: @initial_sort[:applicant_name] %>
-          <%= sort_column_th type: :date,       content: t('.created_at'),       currently_sorted: @initial_sort[:created_at],       combine_right: { at: 555, append: t('.col_and_ref') } %>
-          <%= sort_column_th type: :alphabetic, content: t('.application_ref_html'),  currently_sorted: @initial_sort[:applicant_ref] %>
+          <%= simple_sortable_th type: :alphabetic, content: t('.applicant_name'), currently_sorted: @initial_sort[:applicant_name] %>
+          <%= simple_sortable_th type: :date, content: t('.created_at'), currently_sorted: @initial_sort[:created_at], combine_right: { at: 555, append: t('.col_and_ref') } %>
+          <%= simple_sortable_th type: :alphabetic, content: t('.application_ref_html'), currently_sorted: @initial_sort[:applicant_ref] %>
           <th class="nullcell" aria-hidden="true"></th>
-          <%= sort_column_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t('.col_and_state') } %>
-          <%= sort_column_th type: :alphabetic, content: t('.status'),           currently_sorted: @initial_sort[:status] %>
+          <%= simple_sortable_th type: :alphabetic, content: t('.certificate_type'), currently_sorted: @initial_sort[:certificate_type], combine_right: { at: 555, append: t('.col_and_state') } %>
+          <%= simple_sortable_th type: :alphabetic, content: t('.status'), currently_sorted: @initial_sort[:status] %>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -57,3 +58,5 @@
     <% end %>
   </div>
 </div>
+
+<div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" role='region'></div>

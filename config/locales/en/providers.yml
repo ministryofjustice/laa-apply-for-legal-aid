@@ -362,6 +362,7 @@ en:
         empty_result: Application cannot be found
         search_button: Search
       legal_aid_applications:
+        table_description: 'Applications table. Sortable by Name, Start date, LAA reference, Certificate type and Status.'
         applicant_name: Name
         application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         created_at: Start date
