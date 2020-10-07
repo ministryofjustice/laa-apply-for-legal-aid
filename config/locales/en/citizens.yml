@@ -1,8 +1,15 @@
 ---
 en:
   citizens:
+<<<<<<< HEAD
     gather_transactions:
       index:
+=======
+    accounts:
+      display_error:
+        bank_selection_link: Try again
+      gather:
+>>>>>>> AP-1721 Clarify TrueLayer errors and retry path
         retrieving_transactions: Retrieving bank transactions
         failed_transactions_retrieval: Failed to retrieve bank transactions
         default_error: Sorry, we are experiencing technical difficulties. Please try again later.

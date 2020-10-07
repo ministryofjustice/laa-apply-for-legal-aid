@@ -1,0 +1,21 @@
+en:
+  true_layer_errors:
+    headings:
+      provider_error: We cannot connect to your bank right now
+      account_permanently_locked: We cannot access your account
+      account_temporarily_locked: We cannot access your account right now
+      internal_server_error: Sorry, there is a problem with the service
+      user_input_required: You need to verify your identity with your bank
+      wrong_credentials: You did not enter the correct username and password
+      unknown: An unknown error has occurred
+
+    detail:
+      provider_error: ''
+      account_permanently_locked: Contact your bank to see if there’s a problem with your account.
+      account_temporarily_locked: ''
+      internal_server_error: ''
+      user_input_required: ''
+      wrong_credentials: ''
+      unknown: 'An unknown error has occurred.  We have been alerted, and are working on it.  Please try again later.'
+
+    close_tab: You can close this tab or page.
