@@ -71,5 +71,5 @@ Given('{string} savings of {int}') do |savings_method, amount|
 end
 
 Then('I should have completed the dependants section of the journey') do
-  steps %(Then I should be on a page showing "What regular payments do you make?")
+  steps %(Then I should be on a page showing "Which of the following payments do you make?")
 end

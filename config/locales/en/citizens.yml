@@ -45,6 +45,8 @@ en:
         h1-heading: Check your answers
         bank-heading: Your bank accounts
         link_other_account: Add another bank account
+        payments_receive_heading: Payments you receive
+        payments_make_heading: Payments you make
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
@@ -96,12 +98,12 @@ en:
         error: Select yes if you have other dependants
     identify_types_of_incomes:
       show:
-        page_heading: Which types of income do you receive?
+        page_heading: Which of the following payments do you receive?
       update:
         none_selected: Select if you receive any types of income
     identify_types_of_outgoings:
       show:
-        page_heading: What regular payments do you make?
+        page_heading: Which of the following payments do you make?
       update:
         none_selected: Select if you make any regular payments
     legal_aid_applications:

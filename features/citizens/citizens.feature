@@ -58,7 +58,7 @@ Feature: Citizen journey
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of income do you receive?"
+    Then I should be on a page showing "Which of the following payments do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
     Then I should be on the 'student_finance' page showing 'Do you get student finance?'
@@ -67,7 +67,7 @@ Feature: Citizen journey
     Then I should be on the 'annual_amount' page showing 'How much student finance will you get this academic year?'
     When I enter amount '5000'
     And I click 'Save and continue'
-    Then I should be on a page showing "What regular payments do you make?"
+    Then I should be on a page showing "Which of the following payments do you make?"
     Then I select "Rent or mortgage"
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
@@ -86,7 +86,7 @@ Feature: Citizen journey
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Benefits'
     And I click Check Your Answers Change link for 'incomings'
-    Then I should be on a page showing 'Which types of income do you receive?'
+    Then I should be on a page showing 'Which of the following payments do you receive?'
     Then I select 'Financial help from friends or family'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
