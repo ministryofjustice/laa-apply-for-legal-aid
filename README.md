@@ -6,14 +6,16 @@ may well be used to fire requests to other services.
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master)
 
 * Ruby version
-    * Ruby version 2.6.3
-    * Rails 6
+    * Ruby version 2.7.1
+    * Rails 6.0.3
 
 * System dependencies
-    * postgres 10.5
+    * postgres 10.13
     * redis
     * yarn
     * wkhtmltopdf
+    * libreoffice
+    * clamav
 
 Install dependencies with homebrew:
 ```
@@ -102,10 +104,12 @@ bundle exec guard
 ```
 
 When changes to test files are made it will run the tests in that file
-When changes are made to objects are made it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
+When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
 Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes 
 **Note**: Guard will not currently run cucumber features, there is an open Issue on the `guard-cucumber` repo
 ### Accessibility testing with webhint
+
+The webhint tests are currently only run as the final part of `bin/rake` they are not run as part of the deployment process.
 
 webhint (https://webhint.io/) is used to check if pages are accessible.
 
@@ -121,6 +125,8 @@ The result will be printed as a JSON result and you can also find HTML reports i
 
 The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid) but requires approval to the desired environment.
 
+A build is only triggered by Circle CI when a pull request is opened in GitHub, this also applies to `Draft` pull requests.
+
 **NOTE:** **git-crypt** is required to store secrets required for **uat**, **staging** and **production** environments.
 To be able to modify those secrets, **git-crypt** needs to be set up according to the following
 [guide](https://user-guide.cloud-platform.service.justice.gov.uk/tasks.html#git-crypt).
@@ -130,7 +136,10 @@ To be able to modify those secrets, **git-crypt** needs to be set up according t
 
 ### UAT Deployments
 
-**NOTE: Until an automated process is put in place to deal with this issue, once a branch has been merged into master or deleted, for which there's an associated release, the following commands should be executed to ensure those releases are deleted, as they're no longer necessary:**
+UAT deployments are automatically created and deleted as part of the Circle CI process. Once a pull request has been created on GitHub, Circle CI will create a deployment under the new branch name.
+Once the branch has been merged with `master` the UAT deployment is deleted as part of the Circle CI process to deploy production.
+
+In some cases a deployed branch will not be merged with `master` in which case the following commands can be used to manually delete the UAT deployment: 
 
 ```
 # list the availables releases:
@@ -244,19 +253,14 @@ This mock data allows for testing with more meaningful bank transactions, includ
 
 ## Admin Portal
 
-The admin portal is at `/admin`. To access it, there must be an `AdminUser` defined.
+The admin portal is at `/admin`. To access it in UAT, there must be an `AdminUser` defined.
 
 If `ENV['ADMIN_PASSWORD']` returns a password, running `rake db:seed` will create an
-admin user with username `apply_maintenance`, and that password.
+admin user with username `apply_maintenance`, and that password, in all UAT deployments.
+
+The admin portal is only accessible in Staging and Production using Google login for authorised accounts.
 
 To allow reset mode within the admin portal, `ENV['ADMIN_ALLOW_RESET']` must return "true"
-
-The non-passported user journey is turned off in production. It can be toggled in
-Staging and UAT at `/admin/settings`
-
-To test the non-passported user journey, the
-`ENV['ALLOW_NON_PASSPORTED_ROUTE']` must return "true". This is only available in the
-Staging and UAT environments.
 
 To allow the creation of test applications at different stages, for each provider,
 `ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS']` must return "true". This is only available in the
@@ -297,7 +301,7 @@ This will then allow you to connect to the database, eg:
 
 Backups are taken daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
 
-A CronJOB takes hourly snapshots of production between 6am and 9pm. These need to be periodically deleted as a maximum of 100 can be stored. At present all but the most recent 32 manual snapshots (approx 2 days of hourly backups) are deleted every 4 days.
+A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am. 
 
 ## 3rd party integrations
 
