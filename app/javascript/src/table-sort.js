@@ -3,23 +3,22 @@ $(document).ready(function() {
     let table;
     const endText = {
       asc: {
-        date: 'from <em>oldest</em> to <em>newest</em>',
-        numeric: 'from <em>smallest</em> to <em>largest</em>',
-        alphabetic: 'from <em>A.</em> to <em>Zed</em>',
-        undefined: 'in <em>ascending</em> order' //for when the data-sort-type is not set
+        date: 'from Oldest to Newest',
+        numeric: 'from Smallest to Largest',
+        alphabetic: 'from A. to Zed',
+        undefined: 'in ascending order' //for when the data-sort-type is not set
       },
       desc: {
-        date: 'from <em>newest</em> to <em>oldest</em>',
-        numeric: 'from <em>largest</em> to <em>smallest</em>',
-        alphabetic: 'from <em>Zed</em> to <em>A</em>',
-        undefined: 'in <em>descending</em> order' //for when the data-sort-type is not set
+        date: 'from Newest to Oldest',
+        numeric: 'from Largest to Smallest',
+        alphabetic: 'from Zed to A',
+        undefined: 'in descending order' //for when the data-sort-type is not set
       }
     }
 
     $('th.sort')
       .addClass("js-sortable")  //this class used to style as links, if JS not enabled, titles won't look clickable.
       .attr('tabindex', 0)
-      .wrapInner('<span class="sortable-column" title="sort this column"/>')
       .each(function(index) {
         const th = $(this),
           thIndex = $(this).index('th');
@@ -27,9 +26,12 @@ $(document).ready(function() {
 
         th.click(() => {
           table = th.parents('table');
-          th.parent().children().removeClass('header-sort-asc header-sort-desc')
+          th.parent().children().removeClass('header-sort-asc header-sort-desc');
+          th.parent().children().removeAttr('aria-sort');
           let sortDirection = inverse ? 'desc' : 'asc';
+          let verboseSortDirection = inverse ? 'descending' : 'ascending';
           th.addClass('header-sort-' + sortDirection);
+          th[0].setAttribute('aria-sort', verboseSortDirection);
           table.find('td').filter(function() {
             return $(this).index() === thIndex;
           }).sortElements((a, b) => (
