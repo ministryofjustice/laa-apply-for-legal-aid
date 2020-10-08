@@ -1,6 +1,8 @@
 module Providers
   class DeleteController < ProviderBaseController
-    def show; end
+    def show
+      redirect_to providers_legal_aid_applications_path if @legal_aid_application.discarded?
+    end
 
     def destroy
       @legal_aid_application.discard
