@@ -1,6 +1,9 @@
 import $ from 'jquery'
 import axios from 'axios'
 import * as JsSearch from 'js-search'
+var typingTimer;                //timer identifier
+var doneTypingInterval = 1500;  //time in ms, 1.5 second for example
+var ariaText;
 
 async function getAll(){
   const response = await axios.get('/v1/proceeding_types')
@@ -13,7 +16,15 @@ function filterSearch(proceedings_data) {
 
   let searchObject = search(proceedings_data)
 
-  $("#proceeding-search-input").keyup((event) => searchCallback(event, searchObject))
+  $("#proceeding-search-input").keyup((event) => {
+    searchCallback(event, searchObject);
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  })
+
+  $("#proceeding-search-input").keydown(() => {
+    clearTimeout(typingTimer);
+  })
 
   $('#clear-proceeding-search').on("click", () => $("#proceeding-search-input").val("").trigger("keyup"))
 
@@ -56,6 +67,10 @@ function searchCallback(event, search) {
   filterData(inputText, search)
 }
 
+function doneTyping () {
+  $('#screen-reader-messages').html(ariaText)
+}
+
 function filterData(inputText, search) {
   if (inputText.length > 2) {
     const codes = search.search(inputText).map(obj => obj["code"])
@@ -85,15 +100,21 @@ function filterData(inputText, search) {
         element.show()
 
         // the below alerts screen reader users that results appeared on the page
-        const accessibilityAlertMessage = document.querySelector("#proceedingTypes").dataset.message
-        document.querySelector("#proceedingTypes").innerHTML = accessibilityAlertMessage
+        ariaText = codes.length + ' ' + pluralize(codes.length, 'match', 'matches') + ' found for ' + inputText + ', use tab to move through options';
       })
     }
     else {
       $(".no-proceeding-items").show()
+      ariaText = 'No results found matching ' + inputText
     }
   }
 }
+const pluralize = (val, word, plural = word + 's') => {
+  const _pluralize = (num, word, plural = word + 's') =>
+    [1, -1].includes(Number(num)) ? word : plural;
+  if (typeof val === 'object') return (num, word) => _pluralize(num, word, val[word]);
+  return _pluralize(val, word, plural);
+};
 
 let submitForm = proceedingItem => {
   $(proceedingItem).find('form').submit()
