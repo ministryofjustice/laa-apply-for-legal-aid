@@ -530,7 +530,7 @@ en:
         heading_2: Search for legal proceedings
         no_results: No results found.
         proceeding: proceeding
-        search_help_example: For example, 'non-molestation order', or search by category of law or matter type
+        search_help_example: You can only apply for a single domestic abuse proceeding per application
         accessibility_message: Tab out of this box to select returned options
         accessibility_message_safari_browser: "You are in a search field, tab out to see results"
         you_have_selected: You have selected %{count}
