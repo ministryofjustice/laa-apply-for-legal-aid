@@ -31,16 +31,6 @@ RSpec.describe Admin::FeedbackController, type: :request do
       end
     end
 
-    context 'with no response to done_all_needed' do
-      let(:feedback) { create :feedback, done_all_needed: nil }
-
-      it 'substitutes placeholder text if user ignores a field' do
-        feedback
-        subject
-        expect(response.body).to include(I18n.t('.generic.not_completed'))
-      end
-    end
-
     context 'with pagination' do
       it 'shows current total information' do
         subject
