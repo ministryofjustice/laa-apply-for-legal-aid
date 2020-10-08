@@ -34,6 +34,9 @@ class FeedbackMailer < BaseApplyMailer
   end
 
   def provider_email_phrase(feedback)
+    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+    ap feedback
+    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
     return '' if feedback.email.nil?
 
     "from #{feedback.email}"
