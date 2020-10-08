@@ -1,11 +1,12 @@
-<%= form.submit(
+<% if show_continue %>
+  <%= form.submit(
       continue_button_text,
       id: continue_id,
       name: 'continue_button',
       class: 'govuk-button form-button',
       data: { module: 'govuk-button' }
     ) %>
-
+<% end %>
 <% if show_draft %>
   <%= form.submit(
         draft_button_text,
