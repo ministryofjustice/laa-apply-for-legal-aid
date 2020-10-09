@@ -1,0 +1,11 @@
+<%
+failed_transactions_retrieval = locals[:failed_transactions_retrieval] || nil
+error_description = locals[:error_description] || nil
+%>
+
+<%= page_template page_title: failed_transactions_retrieval, column_width: :full do %>
+  <div class="govuk-error-summary" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    <h2 class="govuk-error-summary__title" id="error-summary-title"><%= failed_transactions_retrieval %>: <%= error_description %></h2>
+  </div>
+  <span role="status" id="error"></span>
+<% end %>

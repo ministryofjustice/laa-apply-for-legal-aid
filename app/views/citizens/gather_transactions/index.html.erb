@@ -1,0 +1,8 @@
+<% if @errors %>
+  <%= render 'shared/worker_failed', locals: { error_description: error_description, failed_transactions_retrieval: t('.failed_transactions_retrieval') } %>
+<% elsif @worker_complete %>
+  <%= render 'shared/worker_complete', locals: { heading: t('.heading_1'), intro_text: t('.intro_text'), balance_text: t('.balance_text'), continue_text: t('generic.continue')} %>
+  <div id="worker_complete" role="alert" class="govuk-visually-hidden"></div>
+<% else %>
+  <%= render 'shared/worker_working', locals: { retrieving_transactions: t('.retrieving_transactions'), worker_id: session[:worker_id], page_loading: t('.page_loading')} %>
+<% end %>
