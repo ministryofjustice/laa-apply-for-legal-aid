@@ -1,28 +1,50 @@
 const $ = require('jquery')
 const axios = require('axios')
 
-function waitForWorker({ poll_interval = 1000, callback = null }) {
+async function checkWorkerStatus() {
+  const worker_id = $(".worker-waiter").data('worker-id')
+  const response = await axios.get(`/v1/workers/${worker_id}`)
+  return response.data
+}
+
+function waitForWorker() {
   if (!$('.worker-waiter').length) {
-    callback && callback()
     return
   }
 
-  const worker_id = $(".worker-waiter").data('worker-id')
-  const working_statuses = ['queued', 'working']
-
-  axios.get(`/v1/workers/${worker_id}`).then(worker_response => {
-    if(working_statuses.includes(worker_response.data.status)) {
-      setTimeout(
-        () => waitForWorker({ poll_interval, callback }),
-        poll_interval
-      )
-    } else {
+  checkWorkerStatus().then(data => {
+      // delay next action by 1 second e.g. calling api again
+      return new Promise(resolve => setTimeout(() => resolve(data), 1000));
+    }).then((data) => workerResponse(data, waitForWorker)).catch(() =>{
       window.location.reload()
-      callback && callback()
-    }
-  })
+    })
 }
 
-module.exports = waitForWorker
+function workerResponse(data, waitForWorker) {
+  const working_statuses = ['queued', 'working']
+  if (data && working_statuses.includes(data.status)) {
+    waitForWorker()
+  } else {
+    window.location.reload()
+  }
+}
 
-if (process.env.NODE_ENV !== 'test') $(waitForWorker)
+function accessibilityAlert() {
+  setTimeout(() => {
+    let accessibilityMessage = document.querySelector('#accessibilityMessageUpdate')
+    if (accessibilityMessage != undefined) {
+      accessibilityMessage.innerHTML = accessibilityMessage.dataset.message
+    }
+  }, 5000)
+}
+
+export {
+  waitForWorker,
+  checkWorkerStatus,
+  workerResponse
+}
+
+if (process.env.NODE_ENV !== 'test') {
+  $(waitForWorker)
+  $(accessibilityAlert)
+}
