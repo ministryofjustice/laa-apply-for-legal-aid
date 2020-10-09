@@ -3,14 +3,22 @@ en:
   providers:
     about_the_financial_assessments:
       show:
-        sign_in_para: "We'll send your client a link to the service so they can:"
+        activity: |
+          The link will remain active for 7 days for security reasons. If your client
+          does not access the service within 7 days they’ll need to request a new link.
         list:
           list: |
             share their bank transactions
             tell us about their income and outgoings
-        section_1:
-          title: How we use your client's details
+        sign_in_para: "We'll send your client a link to the service so they can:"
+        disclosure:
+          heading: How we use your client's bank account information
           detail_use: We only use your client's financial information for the legal aid application.
+          will_not_heading: "We will not:"
+          list: |
+            save their obnline banking username and password
+            have any ongoing access to their bank account
+
           sign_in_save: We do not save any sign in details.
         section_2:
           heading: Your client's email address
