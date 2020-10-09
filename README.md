@@ -106,7 +106,7 @@ bundle exec guard
 When changes to test files are made it will run the tests in that file
 When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
 Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes 
-**Note**: Guard will not currently run cucumber features, there is an open Issue on the `guard-cucumber` repo
+
 ### Accessibility testing with webhint
 
 The webhint tests are currently only run as the final part of `bin/rake` they are not run as part of the deployment process.
