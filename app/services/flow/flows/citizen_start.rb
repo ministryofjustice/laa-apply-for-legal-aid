@@ -21,7 +21,11 @@ module Flow
         true_layer: {
           path: ->(_) { omniauth_login_start_path(:true_layer) }
         },
+        gather_transactions: {
+          forward: :accounts
+        },
         accounts: {
+          path: ->(_) { urls.citizens_accounts_path },
           forward: :additional_accounts,
           check_answers: :check_answers
         },

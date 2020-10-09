@@ -37,7 +37,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     end
 
     it 'redirects to next page' do
-      expect(subject).to redirect_to(gather_citizens_accounts_path)
+      expect(subject).to redirect_to(citizens_gather_transactions_path)
     end
 
     it 'persists the token on the applicant' do

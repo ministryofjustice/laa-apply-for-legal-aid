@@ -1,21 +1,24 @@
 ---
 en:
   citizens:
-    accounts:
-      gather:
+    gather_transactions:
+      index:
         retrieving_transactions: Retrieving bank transactions
+        failed_transactions_retrieval: Failed to retrieve bank transactions
         default_error: Sorry, we are experiencing technical difficulties. Please try again later.
+        page_loading: Page Loading
+        heading_1: "You've successfully shared your bank transactions"
+        intro_text: We’ve downloaded your bank statements from the past 3 months.
+        balance_text: We’ll ask your solicitor to put your transactions into categories to help us understand your financial situation.
+    accounts:
       index:
         account_holder_address_heading: Account holder address
         account_holder_name_heading: Account holder name
         account_number_heading: Account Number
         balance_heading: Balance
-        balance_text: We'll ask your solicitor to group your transactions to help us understand your financial situation.
-        heading_1: You've successfully shared your bank transactions
-        intro_text: We've downloaded 3 months of your transaction history.
         sort_code_heading: Sort Code
         type_heading: Type
-        your_accounts: Your account(s)
+        your_accounts: Your bank accounts
         link_other_account: Add another bank account
     additional_accounts:
       index:

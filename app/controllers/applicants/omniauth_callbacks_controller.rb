@@ -15,7 +15,7 @@ module Applicants
       end
 
       store_tokens
-      redirect_to gather_citizens_accounts_path
+      redirect_to citizens_gather_transactions_path
     end
 
     private

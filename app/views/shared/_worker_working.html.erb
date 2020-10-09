@@ -1,0 +1,12 @@
+<%
+retrieving_transactions = locals[:retrieving_transactions] || nil
+worker_id = locals[:worker_id] || nil
+page_loading = locals[:page_loading] || nil
+%>
+
+<%= page_template page_title: retrieving_transactions  do %>
+  <div class="worker-waiter" data-worker-id="<%= worker_id %>" align="center">
+    <div class="worker-loader"></div>
+  </div>
+  <span class="govuk-visually-hidden" data-message="<%= retrieving_transactions %>" role="status" id="accessibilityMessageUpdate"></span>
+<% end %>

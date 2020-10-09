@@ -104,7 +104,7 @@ Feature: Citizen journey
     And I complete the citizen journey as far as check your answers
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page not showing 'Account 2'
-    When I visit the accounts page
-    Then I should be on the 'accounts' page showing 'Your account(s)'
+    When I visit the gather transactions page
+    Then I should be on the 'accounts' page showing 'Your bank accounts'
     When I click link 'Continue'
     Then I should be on a page showing 'Check your answers'
