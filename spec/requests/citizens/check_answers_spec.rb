@@ -40,8 +40,8 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'displays the correct section headings' do
       expect(response.body).to include('Your bank accounts')
-      expect(response.body).to include('Which types of income do you receive?')
-      expect(response.body).to include('What regular payments do you make?')
+      expect(response.body).to include('Payments you receive')
+      expect(response.body).to include('Payments you make')
       expect(response.body).to include('Do you get student finance?')
       expect(response.body).to include('How much student finance will you get this academic year?')
     end

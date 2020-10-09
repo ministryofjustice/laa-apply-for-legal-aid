@@ -38,7 +38,7 @@
   <%= check_long_questions_single_change_link(
           name: :incomings,
           url: citizens_identify_types_of_income_path,
-          question: t('citizens.identify_types_of_incomes.show.page_heading'),
+          question: t('.payments_receive_heading'),
           answer_hash: incomings_list(
               @legal_aid_application.transaction_types.credits,
               locale_namespace: "transaction_types.names.citizens"
@@ -47,7 +47,7 @@
   <%= check_long_questions_single_change_link(
           name: :payments,
           url: citizens_identify_types_of_outgoing_path,
-          question: t('citizens.identify_types_of_outgoings.show.page_heading'),
+          question: t('.payments_make_heading'),
           answer_hash: payments_list(
               @legal_aid_application.transaction_types.debits,
               locale_namespace: "transaction_types.names.citizens"
