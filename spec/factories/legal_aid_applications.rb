@@ -29,14 +29,14 @@ FactoryBot.define do
 
     trait :with_non_passported_state_machine do
       before(:create) do |application|
-        state_machine = FactoryBot.create(:non_passported_state_machine)
+        state_machine = FactoryBot.build(:non_passported_state_machine, legal_aid_application: application)
         application.update!(state_machine: state_machine)
       end
     end
 
     trait :with_passported_state_machine do
       before(:create) do |application|
-        state_machine = FactoryBot.create(:passported_state_machine)
+        state_machine = FactoryBot.build(:passported_state_machine, legal_aid_application: application)
         application.update!(state_machine: state_machine)
       end
     end

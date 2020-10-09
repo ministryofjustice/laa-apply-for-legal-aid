@@ -12,6 +12,11 @@ module Admin
           report_title: 'Download CSV of all submitted applications',
           path: :admin_reports_submitted_csv_path,
           path_text: 'Download CSV'
+        },
+        non_passported_applications: {
+          report_title: 'Non passported applications',
+          path: :admin_reports_non_passported_csv_path,
+          path_text: 'Download CSV'
         }
       }
     end
@@ -20,6 +25,14 @@ module Admin
       respond_to do |format|
         format.csv do
           send_data Reports::MIS::ApplicationDetailsReport.new.run
+        end
+      end
+    end
+
+    def download_non_passported
+      respond_to do |format|
+        format.csv do
+          send_data Reports::MIS::NonPassportedApplicationsReport.new.run
         end
       end
     end
