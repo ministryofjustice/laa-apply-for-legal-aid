@@ -466,8 +466,8 @@ en:
         give_client_access: "We'll give your client access to the service and ask them to:"
         actions:
           list: |
-            sign in to online banking using a secure third-party service
-            give us one-time access to their bank accounts so we can download 3 months of bank statements
+            sign in to their online banking
+            give TrueLayer one-time access to their bank accounts
             tell us about their income and outgoings
         next: Once they've done this, you'll need to categorise their bank transactions so we can calculate their disposable income.
     offline_accounts:
@@ -484,7 +484,7 @@ en:
         heading: Check if you can continue using this service
         info: "You agree that your client:"
         list_1: uses online banking for all of their current accounts
-        list_2_html: will give the <abbr title='Legal Aid Agency'>LAA</abbr> one-time access to their bank accounts
+        list_2_html: will give a secure third-party service (TrueLayer) one-time access to their bank accounts to collect 3 months of bank statements
         list_3: is not employed
         radio_no: No, I do not agree
         radio_yes: Yes, I agree
