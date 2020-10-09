@@ -15,7 +15,7 @@ module VehicleForm
     )
 
     def payments_remain?
-      payments_remain&.to_s == 'true'
+      payments_remain.to_s == 'true'
     end
 
     def save

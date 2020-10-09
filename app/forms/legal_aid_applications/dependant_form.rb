@@ -82,7 +82,7 @@ module LegalAidApplications
     end
 
     def assets_more_than_threshold?
-      has_assets_more_than_threshold&.to_s == 'true'
+      has_assets_more_than_threshold.to_s == 'true'
     end
 
     def less_than_threshold_error_message
