@@ -85,9 +85,8 @@ Rails.application.routes.draw do
     resource :contact_provider, only: [:show]
     resources :banks, only: %i[index create]
     resource :property_value, only: %i[show update]
-    resources :accounts, only: [:index] do
-      get :gather, on: :collection
-    end
+    resources :accounts, only: [:index]
+    resources :gather_transactions, only: [:index]
     resources :additional_accounts, only: %i[index create new update]
     resource :own_home, only: %i[show update]
     resource :percentage_home, only: %i[show update]
