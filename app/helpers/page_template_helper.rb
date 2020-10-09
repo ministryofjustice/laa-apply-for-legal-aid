@@ -79,7 +79,7 @@ module PageTemplateHelper
   end
 
   def page_title_possibly_with_error(page_headings, errors)
-    errors&.present? ? error_page_title(page_headings) : simple_page_title(page_headings)
+    errors.present? ? error_page_title(page_headings) : simple_page_title(page_headings)
   end
 
   def simple_page_title(headings)

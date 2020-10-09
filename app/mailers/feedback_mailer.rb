@@ -14,7 +14,7 @@ class FeedbackMailer < BaseApplyMailer
 
   def personalise(feedback)
     set_personalisation(
-      created_at: feedback.created_at&.to_time&.to_s(:rfc822),
+      created_at: feedback.created_at&.to_time.to_s(:rfc822),
       user_data: user_data(feedback),
       done_all_needed: yes_or_no(feedback),
       satisfaction: safe_nil(feedback.satisfaction),
