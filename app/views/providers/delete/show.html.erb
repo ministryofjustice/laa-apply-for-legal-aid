@@ -1,0 +1,20 @@
+<h1 class="govuk-heading-xl"><%= t('.page_title') %></h1>
+<p class="govuk-body">
+  <%= t('.applicant') %>: <strong><%= @legal_aid_application.applicant.full_name %></strong><br>
+  <%= t('.reference') %>: <strong><%= @legal_aid_application.application_ref %></strong></p>
+
+<div class="govuk-warning-text">
+  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+  <strong class="govuk-warning-text__text">
+    <span class="govuk-warning-text__assistive"><%= t('.warning_assistive') %></span>
+    <%= t('.warning') %>
+  </strong>
+</div>
+
+<%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
+  <%= form.submit(
+          t('.yes_button'),
+          class: 'govuk-button govuk-button--warning',
+      ) %>
+  <%= link_to t('.no_button'), providers_legal_aid_applications_path, class: 'govuk-button' %>
+<% end %>

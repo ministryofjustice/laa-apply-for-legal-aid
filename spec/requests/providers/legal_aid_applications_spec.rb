@@ -105,6 +105,15 @@ RSpec.describe 'providers legal aid application requests', type: :request do
             expect(parsed_response_body.css('.pagination-container nav').text).to match(/Previous\s+1\s+2\s+Next/)
           end
         end
+
+        context 'when an application has been discarded' do
+          before { create :legal_aid_application, :discarded, provider: provider }
+
+          it 'is excluded from the list' do
+            subject
+            expect(response.body).to include('Showing 1 of 1')
+          end
+        end
       end
     end
 

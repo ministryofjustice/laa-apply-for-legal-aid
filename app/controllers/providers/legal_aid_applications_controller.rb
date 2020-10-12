@@ -37,7 +37,7 @@ module Providers
     end
 
     def applications_query
-      query = current_provider.firm.legal_aid_applications.includes(:applicant, :merits_assessment).latest
+      query = current_provider.firm.legal_aid_applications.kept.includes(:applicant, :merits_assessment).latest
       return query if search_term.blank?
 
       query.search(search_term)

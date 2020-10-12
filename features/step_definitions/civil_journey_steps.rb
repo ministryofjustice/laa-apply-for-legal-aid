@@ -29,6 +29,20 @@ Given(/^I visit the applications page$/) do
   visit providers_legal_aid_applications_path
 end
 
+Given('I have previously created multiple applications') do
+  provider = create(:provider)
+  create_list :legal_aid_application, 3, :with_non_passported_state_machine, provider: provider
+  create_list :legal_aid_application, 3, :with_passported_state_machine, :at_assessment_submitted, provider: provider
+  @legal_aid_application = create(
+    :application,
+    :with_everything,
+    :with_passported_state_machine,
+    :initiated,
+    provider: provider
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given('I previously created a passported application and left on the {string} page') do |provider_step|
   @legal_aid_application = create(
     :application,
@@ -56,11 +70,19 @@ Given('I previously created a passported application with no assets and left on 
 end
 
 Given(/^I view the previously created application$/) do
-  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a").click
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a[contains(.,'#{@legal_aid_application.applicant.full_name}')]").click
+end
+
+Then(/^I should not see the previously created application$/) do
+  expect(page).not_to have_content(@legal_aid_application.applicant.full_name)
+end
+
+Given(/^I click delete for the previously created application$/) do
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a[contains(.,'Delete')]").click
 end
 
 Given(/^I view the first application in the table$/) do
-  find(:xpath, '//tr/td/a').click
+  find(:xpath, '//tr/td[1]/a').click
 end
 
 Given('I start the journey as far as the applicant page') do
@@ -599,4 +621,8 @@ end
 
 Then('I complete the passported journey') do
   LaaApplyForLegalAid::Application.config.x.allow_non_passported_route = true
+end
+
+When('I click the browser back button') do
+  page.go_back
 end
