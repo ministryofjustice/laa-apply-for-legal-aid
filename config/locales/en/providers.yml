@@ -16,7 +16,7 @@ en:
           detail_use: We only use your client's financial information for the legal aid application.
           will_not_heading: "We will not:"
           list: |
-            save their obnline banking username and password
+            save their online banking username and password
             have any ongoing access to their bank account
 
           sign_in_save: We do not save any sign in details.
