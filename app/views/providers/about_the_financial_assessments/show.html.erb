@@ -5,31 +5,46 @@
     <%= list_from_translation_path '.about_the_financial_assessments.show.list' %>
   </p>
 
-  <h2 class="govuk-heading-m"><%= t '.section_1.title' %></h2>
+  <p class="govuk-body">
+    <%= t('.activity') %>
+  </p>
 
-  <p class="govuk-body"><%= t '.section_1.detail_use' %></p>
+  <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            <%= t('.disclosure.heading') %>
+          </span>
+    </summary>
 
-  <p class="govuk-body"><%= t '.section_1.sign_in_save' %></p>
+    <div class="govuk-details__text">
+      <p><%= t('.disclosure.detail_use') %></p>
+
+      <p><%= t('.disclosure.will_not_heading') %></p>
+
+      <%= list_from_translation_path '.about_the_financial_assessments.show.disclosure' %>
+
+    </div>
+  </details>
 
   <h2 class="govuk-heading-m">
     <%= t '.section_2.heading' %>
   </h2>
 
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__value">
-          <%= @applicant.email %>
-        </dt>
-        <dd class="govuk-summary-list__actions">
-          <%= link_to_with_hidden_suffix(
+  <dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__value">
+        <%= @applicant.email %>
+      </dt>
+      <dd class="govuk-summary-list__actions">
+        <%= link_to_with_hidden_suffix(
                 text: t('generic.change'),
                 path: providers_legal_aid_application_email_address_path(anchor: :email),
                 klass: 'govuk-link change-link',
                 suffix: 'email address'
-              ) %>
-        </dd>
-      </div>
-    </dl>
+            ) %>
+      </dd>
+    </div>
+  </dl>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_about_the_financial_assessment_path,
