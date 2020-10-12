@@ -122,7 +122,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
       context 'and application has transactions' do
         let(:legal_aid_application) do
-          rec = create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types
         end
 
         it 'removes transaction types from the application' do
