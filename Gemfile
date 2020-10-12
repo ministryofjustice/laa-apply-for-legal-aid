@@ -127,7 +127,7 @@ end
 group :test do
   gem 'capybara', '>= 3.32.2', '< 4.0'
   gem 'climate_control' # Allows environment variables to be modified within specs
-  gem 'cucumber', '~> 3.0', require: false
+  gem 'cucumber', '~> 5.1', require: false
   gem 'cucumber-rails', '>= 2.0.0', require: false
   gem 'database_cleaner'
   gem 'launchy'
