@@ -53,6 +53,12 @@
         </div>
       <% end %>
 
+    <% if @student_finance %>
+      <h2 class="govuk-heading-l"><%= t('.student_finance.heading') %></h2>
+
+      <p><%= t('.student_finance.info', student_finance: value_with_currency_unit(@student_finance, t('currency.gbp'))) %></p>
+    <% end %>
+
       <%= next_action_buttons_with_form(
               url: providers_legal_aid_application_no_income_summary_path,
               show_draft: true
