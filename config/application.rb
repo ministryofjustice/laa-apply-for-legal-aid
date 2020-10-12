@@ -61,7 +61,9 @@ module LaaApplyForLegalAid
     config.x.admin_portal.allow_create_test_applications = ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS'] == 'true'
     config.x.admin_portal.password = ENV['ADMIN_PASSWORD']
 
-    config.x.provider_details.url  = ENV['PROVIDER_DETAILS_URL']
+    config.x.email_domain.suffix = ENV['APPLY_EMAIL']
+
+    config.x.provider_details.url = ENV['PROVIDER_DETAILS_URL']
 
     config.x.metrics_service_host = ENV.fetch('METRICS_SERVICE_HOST', 'localhost')
 
