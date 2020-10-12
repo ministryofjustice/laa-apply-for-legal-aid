@@ -58,6 +58,6 @@ class LegalAidApplicationPolicy < ApplicationPolicy
 
     return true if @controller.respond_to?(:pre_dwp_check?) && @controller.pre_dwp_check? == true
 
-    record.passported? ? provider.passported_permissions? : provider.non_passported_permissions?
+    record.state_machine_proxy.is_a?(PassportedStateMachine) ? provider.passported_permissions? : provider.non_passported_permissions?
   end
 end

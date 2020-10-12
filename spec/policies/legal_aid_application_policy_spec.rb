@@ -69,7 +69,7 @@ RSpec.describe LegalAidApplicationPolicy do
     end
 
     context 'application is non-passported' do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, provider: provider) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, :with_non_passported_state_machine, provider: provider) }
       let(:authorization_context) { AuthorizationContext.new(provider, post_dwp_check_controller) }
       context 'provider has non-passported rights' do
         let(:provider) { create :provider, :with_non_passported_permissions }
