@@ -2,9 +2,9 @@ require 'rails_helper'
 
 module Reports
   module MIS
-    RSpec.describe NonPassportedApplicationCsvLine do
-      DATE_TIME_REGEX = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/
+    DATE_TIME_REGEX = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.freeze
 
+    RSpec.describe NonPassportedApplicationCsvLine do
       describe '.header_row' do
         let(:expected_header_row) do
           %w[
