@@ -1,9 +1,16 @@
+[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master)
+
 # LAA Apply for legal aid
 
-This is the service api for persisting application related information to the back end database and
-may well be used to fire requests to other services.
+The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to enter applications for legal aid on-line.
 
-[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master)
+## Technical Information
+
+[![auto-updating container diagram](https://static.structurizr.com/workspace/55246/diagrams/apply-container.png)](https://structurizr.com/share/55246/diagrams#apply-container)
+
+👆 edit in [laa-architecture-as-code](https://github.com/ministryofjustice/laa-architecture-as-code/blob/main/src/main/kotlin/model/Apply.kt)
+
+## Dependencies
 
 * Ruby version
     * Ruby version 2.7.1
@@ -25,7 +32,7 @@ brew bundle
 ## Initial setup
 This requires your gpg key to have been added to git-crypt.  Liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md)
 
-Once the pull request has been merged, re-pull master and run 
+Once the pull request has been merged, re-pull master and run
 
 ```
 git-crypt unlock
@@ -138,7 +145,7 @@ bundle exec guard
 
 When changes to test files are made it will run the tests in that file
 When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
-Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes 
+Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes
 
 ## Deployment
 
@@ -158,7 +165,7 @@ To be able to modify those secrets, **git-crypt** needs to be set up according t
 UAT deployments are automatically created and deleted as part of the Circle CI process. Once a pull request has been created on GitHub, Circle CI will create a deployment under the new branch name.
 Once the branch has been merged with `master` the UAT deployment is deleted as part of the Circle CI process to deploy production.
 
-In some cases a deployed branch will not be merged with `master` in which case the following commands can be used to manually delete the UAT deployment: 
+In some cases a deployed branch will not be merged with `master` in which case the following commands can be used to manually delete the UAT deployment:
 
 ```
 # list the availables releases:
@@ -214,9 +221,9 @@ different firms.  The password for all users is `password`.
 
 ### Post-authentication provider details retrieval
 Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
-an after_action method `#update_provider_details` on the `SamlSsessionsController` is executed. This will call 
+an after_action method `#update_provider_details` on the `SamlSsessionsController` is executed. This will call
 the `update_details` method on the current_provider (a Provider object supplied by Devise) whch generates
-a background job to query the 
+a background job to query the
 provider details API and updates any details that have changed on the provider record.
 
 
@@ -226,9 +233,9 @@ When using the mock-saml in development or on UAT, sign out works in the way you
 to a page confirming your're signed out, and going to the start url will redirect you to the sign-in page.
 
 When using the portal for authentication, (on staging or live, or if configured as described below, on localhost), the
-sign out link takes you to a feedback page, but doesn't really sign you out.  This is an side effect of using the 
-portal Single Sign On system. You're not signed out until you tell the portal you've signed out, and when you do that, 
-you are signed out of all other applications at the same time. (Behind the scenes, the Devise `authenticate_provider!` 
+sign out link takes you to a feedback page, but doesn't really sign you out.  This is an side effect of using the
+portal Single Sign On system. You're not signed out until you tell the portal you've signed out, and when you do that,
+you are signed out of all other applications at the same time. (Behind the scenes, the Devise `authenticate_provider!`
 method contacts the portal to see if your signed in, and if so, repopulates the session with the required data).
 
 You can sign out of the portal by going to https://portal.stg.legalservices.gov.uk/oam/server/logout
@@ -245,9 +252,9 @@ Setting up localhost to use the portal staging environment for signing in rather
     * LAA_PORTAL_IDP_SSO_TARGET_URL=https://portal.stg.legalservices.gov.uk/oamfed/idp/samlv20
     * LAA_PORTAL_CERTIFICATE=<value from staging>
     * LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM=<idp-cert-fingerprint-alg-goes-here>
-    
+
   Note that the value for LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM is <idp-cert-fingerprint-alg-goes-here> and not replaced with anything else.
-  
+
 * Use the BENREID credientials from staging to log in (This use is set up as part of the `db:seed` rake task)
 
 ### Benefits checker
@@ -262,7 +269,7 @@ BC_USE_DEV_MOCK=true
 This will enable `MockBenefitCheckService`. See `MockBenefitCheckService::KNOWN for
 credentials that will return 'Yes' for has qualifying benefits.
 
-This environment variable should be set to ```false``` when recording new vcr cassettes otherwise the test will pass locally and fail on CircleCI. 
+This environment variable should be set to ```false``` when recording new vcr cassettes otherwise the test will pass locally and fail on CircleCI.
 
 ### Mock TrueLayer Data
 
@@ -320,7 +327,7 @@ This will then allow you to connect to the database, eg:
 
 Backups are taken daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
 
-A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am. 
+A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am.
 
 ## 3rd party integrations
 
