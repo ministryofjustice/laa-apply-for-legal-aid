@@ -37,8 +37,8 @@
     ],
     "moduleDirectories": [
       "node_modules",
-      "app/javascript/src",
-      "app/javascript/src/modules"
+      "app/webpack/src",
+      "app/webpack/src/modules"
     ]
   }
 }
