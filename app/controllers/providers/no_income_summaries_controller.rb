@@ -1,6 +1,8 @@
 module Providers
   class NoIncomeSummariesController < ProviderBaseController
-    def show; end
+    def show
+      @student_finance = legal_aid_application.value_of_student_finance
+    end
 
     def update
       if params[:confirm_no_income].in?(%w[yes no])

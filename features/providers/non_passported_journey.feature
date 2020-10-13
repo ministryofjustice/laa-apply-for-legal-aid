@@ -5,6 +5,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
+    And I should not see 'Student finance'
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
@@ -298,6 +299,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'client_completed_means' page showing 'Continue your application'
     When I click 'Continue'
     Then I should be on a page showing "Your client's income"
+    Then I should be on a page showing "Student finance"
     Then I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'identify_types_of_income' page showing "Which types of income does your client receive?"

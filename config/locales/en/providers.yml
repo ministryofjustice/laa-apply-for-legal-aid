@@ -466,6 +466,9 @@ en:
             income from a property or lodger
             pension payments
         is_this_correct: Is this correct?
+        student_finance: 
+          heading: Student finance
+          info: Your client also told us they'll get %{student_finance} in student finance this academic year.
         error: Select yes if your client does not receive these payments
     no_outgoings_summaries:
       show:
