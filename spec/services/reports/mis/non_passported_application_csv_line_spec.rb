@@ -3,6 +3,8 @@ require 'rails_helper'
 module Reports
   module MIS
     RSpec.describe NonPassportedApplicationCsvLine do
+      DATE_TIME_REGEX = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/
+
       describe '.header_row' do
         let(:expected_header_row) do
           %w[
@@ -36,7 +38,7 @@ module Reports
           expect(fields[1]).to eq application.state
           expect(fields[2]).to eq provider.username
           expect(fields[3]).to eq provider.email
-          expect(fields[4]).to eq '2020-09-20 02:03:44'
+          expect(fields[4]).to match DATE_TIME_REGEX
         end
       end
     end
