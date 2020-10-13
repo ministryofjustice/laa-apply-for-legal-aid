@@ -29,7 +29,7 @@ module Reports
         @line << laa.state
         @line << laa.provider.username
         @line << provider.email
-        @line << laa.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        @line << laa.created_at.in_time_zone.strftime('%Y-%m-%d %H:%M:%S')
       end
     end
   end
