@@ -1,15 +1,8 @@
 ---
 en:
   citizens:
-<<<<<<< HEAD
     gather_transactions:
       index:
-=======
-    accounts:
-      display_error:
-        bank_selection_link: Try again
-      gather:
->>>>>>> AP-1721 Clarify TrueLayer errors and retry path
         retrieving_transactions: Retrieving bank transactions
         failed_transactions_retrieval: Failed to retrieve bank transactions
         default_error: Sorry, we are experiencing technical difficulties. Please try again later.
@@ -17,6 +10,8 @@ en:
         heading_1: "You've successfully shared your bank transactions"
         intro_text: We’ve downloaded your bank statements from the past 3 months.
         balance_text: We’ll ask your solicitor to put your transactions into categories to help us understand your financial situation.
+      display_error:
+        bank_selection_link: Try again
     accounts:
       index:
         account_holder_address_heading: Account holder address
