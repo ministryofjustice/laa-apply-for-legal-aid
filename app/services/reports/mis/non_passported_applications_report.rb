@@ -12,20 +12,17 @@ module Reports
             csv << NonPassportedApplicationCsvLine.call(legal_aid_application)
           end
         end
-        Raven.capture_message("CSV STRING: #{csv_string}")
         csv_string
       end
 
       private
 
       def legal_aid_applications
-        apps = LegalAidApplication.joins(:state_machine)
+        LegalAidApplication.joins(:state_machine)
                                   .where(created_at: [START_DATE..END_TIME])
                                   .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
                                   .where.not(state_machine_proxies: { aasm_state: EXCLUDED_STATES })
                                   .order(:created_at)
-        Raven.capture_message("NO OF NON PASSPORTED APPS: #{apps.size}")
-        apps
       end
     end
   end
