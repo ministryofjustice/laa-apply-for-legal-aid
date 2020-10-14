@@ -2,6 +2,7 @@
 en:
   shared:
     applicant_declaration:
+      confirm_following: Confirm the following
       submission_list_summary: You agree that
       submission_list: |
         you've instructed %{firm} to represent you
@@ -11,7 +12,7 @@ en:
         you may have to repay the legal costs if you keep or gain property or money at the end of your case (known as the 'statutory charge')
         the information you've given is complete and correct
         you'll report any changes to your financial situation immediately
-      warning_list_summary: If you give wrong or incomplete information, or do not report changes, you may
+      warning_list_summary: If you give wrong or incomplete information, do not report changes, or are found to have committed benefit fraud, you may
       warning_list: |
         be prosecuted
         need to pay a financial penalty

@@ -56,8 +56,11 @@
 
   <%= render 'student_finance' %>
 
+  <%= render 'shared/applicant_declaration' %>
+
   <%= next_action_buttons_with_form(
           url: continue_citizens_check_answers_path,
-          method: :patch
+          method: :patch,
+          continue_button_text: t('.submit_button')
       ) %>
 <% end %>
