@@ -77,9 +77,33 @@ RSpec.describe 'check your answers requests', type: :request do
     end
 
     it 'changes the state' do
-      ap legal_aid_application.state
       expect { subject }.to change { legal_aid_application.reload.state }
-      ap legal_aid_application.state
+    end
+
+    it 'sets the application state to analysing_bank_transactions' do
+      subject
+      expect(legal_aid_application.reload.state).to eq 'analysing_bank_transactions'
+      expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
+    end
+
+    it 'changes the provider step to start_merits_assessment' do
+      subject
+      expect(legal_aid_application.reload.provider_step).to eq('client_completed_means')
+    end
+
+    it 'records when the declartion accepted' do
+      subject
+      expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.now)
+    end
+
+    it 'syncs the application' do
+      expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
+      subject
+    end
+
+    it 'saves the applicant means answers' do
+      expect(SaveApplicantMeansAnswers).to receive(:call).with(legal_aid_application)
+      subject
     end
   end
 

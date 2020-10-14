@@ -4,9 +4,6 @@ module Citizens
       legal_aid_application.check_citizen_answers! unless legal_aid_application.checking_citizen_answers?
     end
 
-    # def continue
-    #   go_forward
-    # end
     def continue
       record_acceptance
       legal_aid_application.complete_non_passported_means! unless legal_aid_application.provider_assessing_means?

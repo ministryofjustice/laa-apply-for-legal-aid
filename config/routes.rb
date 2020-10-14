@@ -117,7 +117,6 @@ Rails.application.routes.draw do
       patch '/:transaction_type', to: 'outgoing_transactions#update'
     end
     resource :means_test_result, only: [:show]
-    resource :declaration, only: %i[show update]
   end
 
   namespace :providers do
