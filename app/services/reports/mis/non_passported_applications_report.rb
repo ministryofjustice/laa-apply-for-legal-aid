@@ -9,7 +9,7 @@ module Reports
         csv_string = CSV.generate do |csv|
           csv << NonPassportedApplicationCsvLine.header_row
           legal_aid_applications.find_each(batch_size: 100) do |legal_aid_application|
-              csv << NonPassportedApplicationCsvLine.call(legal_aid_application)
+            csv << NonPassportedApplicationCsvLine.call(legal_aid_application)
           end
         end
         Raven.capture_message("CSV STRING: #{csv_string}")
@@ -20,10 +20,10 @@ module Reports
 
       def legal_aid_applications
         apps = LegalAidApplication.joins(:state_machine)
-                           .where(created_at: [START_DATE..END_TIME])
-                           .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
-                           .where.not(state_machine_proxies: { aasm_state: EXCLUDED_STATES })
-                           .order(:created_at)
+                                  .where(created_at: [START_DATE..END_TIME])
+                                  .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
+                                  .where.not(state_machine_proxies: { aasm_state: EXCLUDED_STATES })
+                                  .order(:created_at)
         Raven.capture_message("NO OF NON PASSPORTED APPS: #{apps.size}")
         apps
       end
