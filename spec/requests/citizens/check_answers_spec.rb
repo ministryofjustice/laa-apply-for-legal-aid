@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'check your answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
+  let(:firm) { create :firm }
+  let(:provider) { create :provider, firm: firm }
   let(:vehicle) { create :vehicle, :populated }
   let(:own_vehicle) { true }
   let(:credit) { create :transaction_type, :credit_with_standard_name }
@@ -16,7 +18,8 @@ RSpec.describe 'check your answers requests', type: :request do
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            has_restrictions: has_restrictions,
-           restrictions_details: restrictions_details
+           restrictions_details: restrictions_details,
+           provider: provider
   end
   let!(:application_transaction_types) do
     create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: credit
@@ -54,6 +57,11 @@ RSpec.describe 'check your answers requests', type: :request do
     it 'should change the state to "checking_citizen_answers"' do
       expect(legal_aid_application.reload.checking_citizen_answers?).to be_truthy
     end
+
+    it 'displays the name of the firm' do
+      subject
+      expect(response.body).to include(firm.name)
+    end
   end
 
   describe 'PATCH /citizens/check_answers/continue' do
@@ -68,8 +76,10 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(response).to redirect_to(flow_forward_path)
     end
 
-    it 'does not change the state' do
-      expect { subject }.not_to change { legal_aid_application.reload.state }
+    it 'changes the state' do
+      ap legal_aid_application.state
+      expect { subject }.to change { legal_aid_application.reload.state }
+      ap legal_aid_application.state
     end
   end
 
