@@ -19,10 +19,10 @@ module Reports
 
       def legal_aid_applications
         LegalAidApplication.joins(:state_machine)
-                                  .where(created_at: [START_DATE..END_TIME])
-                                  .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
-                                  .where.not(state_machine_proxies: { aasm_state: EXCLUDED_STATES })
-                                  .order(:created_at)
+                           .where(created_at: [START_DATE..END_TIME])
+                           .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
+                           .where.not(state_machine_proxies: { aasm_state: EXCLUDED_STATES })
+                           .order(:created_at)
       end
     end
   end
