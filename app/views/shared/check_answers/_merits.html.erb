@@ -39,7 +39,7 @@
           no_border: !respondent.understands_terms_of_court_order
         ) %>
   </dl>
-  <div class='govuk-body'><%= simple_format respondent.understands_terms_of_court_order_details %></div>
+  <div class='govuk-body'><%= respondent.understands_terms_of_court_order_details %></div>
 
   <%= render 'shared/check_answers/section_break' unless respondent.understands_terms_of_court_order %>
 
@@ -51,7 +51,7 @@
           no_border: !respondent.warning_letter_sent
         ) %>
   </dl>
-  <div class='govuk-body'><%= simple_format respondent.warning_letter_sent_details %></div>
+  <div class='govuk-body'><%= respondent.warning_letter_sent_details %></div>
 
   <%= render 'shared/check_answers/section_break' unless respondent.warning_letter_sent %>
 
@@ -63,7 +63,7 @@
           no_border: !respondent.police_notified
         ) %>
   </dl>
-  <div class='govuk-body'><%= simple_format respondent.police_notified_details %></div>
+  <div class='govuk-body'><%= respondent.police_notified_details %></div>
 
   <%= render 'shared/check_answers/section_break' unless respondent.police_notified %>
 
@@ -75,7 +75,7 @@
           no_border: respondent.bail_conditions_set
         ) %>
   </dl>
-  <div class='govuk-body'><%= simple_format respondent.bail_conditions_set_details %></div>
+  <div class='govuk-body'><%= respondent.bail_conditions_set_details %></div>
 
   <%= render 'shared/check_answers/section_break' if respondent.bail_conditions_set %>
 </section>
@@ -85,7 +85,7 @@
     <%= t '.case-details-heading' %>
   </h2>
 
-  <div class='govuk-body'><%= simple_format merits_assessment.details_of_proceedings_before_the_court %></div>
+  <div class='govuk-body'><%= merits_assessment.details_of_proceedings_before_the_court %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
     <%= check_answer_link(
@@ -98,7 +98,7 @@
         ) %>
   </dl>
 
-  <div class="govuk-body"><%= simple_format statement_of_case.statement %></div>
+  <div class="govuk-body"><%= statement_of_case.statement %></div>
 
   <%= render 'shared/check_answers/section_break' if respondent.bail_conditions_set %>
 
@@ -124,5 +124,5 @@
         ) unless merits_assessment.success_likely? %>
   </dl>
 
-  <div class='govuk-body'><%= simple_format merits_assessment.success_prospect_details %></div>
+  <div class='govuk-body'><%= merits_assessment.success_prospect_details %></div>
 </section>

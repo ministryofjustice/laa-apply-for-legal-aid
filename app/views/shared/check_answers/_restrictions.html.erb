@@ -12,8 +12,8 @@
 </dl>
 
 <% if @legal_aid_application.has_restrictions %>
-  <div class="govuk-body wrap-text govuk-!-margin-bottom-0">
-    <%= simple_format @legal_aid_application.restrictions_details %>
+  <div class="govuk-body wrap-text govuk-!-margin-bottom-4">
+    <%= @legal_aid_application.restrictions_details %>
   </div>
 
   <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full" style="width: 100%;">
