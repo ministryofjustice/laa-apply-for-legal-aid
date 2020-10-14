@@ -60,12 +60,12 @@
           name: :police_notified,
           question: t('.items.police_notified'),
           answer: yes_no(respondent.police_notified),
-          no_border: !respondent.police_notified
+          no_border: true
         ) %>
   </dl>
   <div class='govuk-body'><%= respondent.police_notified_details %></div>
 
-  <%= render 'shared/check_answers/section_break' unless respondent.police_notified %>
+  <%= render 'shared/check_answers/section_break' %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link(
