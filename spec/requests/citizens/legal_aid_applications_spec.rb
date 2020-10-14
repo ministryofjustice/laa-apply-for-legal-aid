@@ -15,6 +15,10 @@ RSpec.describe 'citizen home requests', type: :request do
       expect(response).to redirect_to(citizens_legal_aid_applications_path)
     end
 
+    it 'sets the page_history_id' do
+      expect(session['page_history_id']).not_to be_nil
+    end
+
     context 'the link is not set to expire' do
       let(:secure_id) do
         SecureData.create_and_store!(

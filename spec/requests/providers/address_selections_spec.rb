@@ -53,9 +53,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
       end
 
       context 'no postcode have been entered yet' do
-        before do
-          get providers_legal_aid_application_address_lookup_path(legal_aid_application)
-        end
+        before { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
 
         it 'redirects to the postcode entering page' do
           subject

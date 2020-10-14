@@ -28,6 +28,10 @@ RSpec.describe 'provider confirm office', type: :request do
         expect(unescaped_response_body).to include(office.code)
       end
 
+      it 'sets the page_history_id' do
+        expect(session['page_history_id']).not_to be_nil
+      end
+
       context 'firm has only one office' do
         let!(:office) { nil }
 

@@ -69,13 +69,17 @@ sudo apt install clamdscan
 bin/rails s
 ```
 
-NOTE: You also need to start sidekiq in another terminal window:
+NOTE: You also need to start sidekiq and redis in separate terminal windows:
 
 ```
 bundle exec sidekiq
 ```
 
-You can also use foreman to start the application server and sidekiq with one command
+```
+redis-server
+```
+
+You can also use foreman to start the application server, sidekiq and redis with one command:
 
 ```
 gem install foreman

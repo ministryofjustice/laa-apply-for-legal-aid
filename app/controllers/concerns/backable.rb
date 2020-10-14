@@ -1,6 +1,6 @@
 module Backable
   extend ActiveSupport::Concern
-  HISTORY_SIZE = 10
+  HISTORY_SIZE = 20
 
   class_methods do
     def skip_back_history_actions
@@ -28,7 +28,9 @@ module Backable
     def replace_last_page_in_history(path)
       return if page_history.empty?
 
-      page_history[-1] = path
+      temp_page_history = page_history
+      temp_page_history[-1] = path
+      page_history_service.write(temp_page_history)
     end
 
     private
@@ -45,7 +47,9 @@ module Backable
       if navigated_back?
         cleanup_path
       elsif flash[:back] == true
-        page_history.pop
+        temp_page_history = page_history
+        temp_page_history.pop
+        page_history_service.write(temp_page_history)
         flash[:back] = nil
       elsif !same_page?
         add_page_to_history
@@ -53,7 +57,7 @@ module Backable
     end
 
     def add_page_to_history
-      page_history << request.fullpath
+      page_history_service.write(page_history << request.fullpath)
     end
 
     def navigated_back?
@@ -73,11 +77,22 @@ module Backable
     end
 
     def remove_old_history
-      session[:page_history] = page_history.last(HISTORY_SIZE)
+      page_history_service.write(page_history.last(HISTORY_SIZE))
     end
 
     def page_history
-      session[:page_history] ||= []
+      history = page_history_service.read
+      return [] if history.nil?
+
+      JSON.parse(history)
+    end
+
+    def page_history_service
+      @page_history_service ||= PageHistoryService.new(page_history_id: page_history_id)
+    end
+
+    def page_history_id
+      @page_history_id ||= session[:page_history_id]
     end
   end
 end
