@@ -289,4 +289,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: checkFinancialEligibilityHost
+  - name: APPLY_EMAIL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: email_domainSuffix
 {{- end }}

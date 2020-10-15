@@ -56,6 +56,8 @@ Rails.application.configure do
 
   config.x.support_email_address = config.x.smoke_test_email_address
 
+  config.x.email_domain.suffix = '@test.test'
+
   # Dummy url for provider details api
   config.x.provider_details.url = 'http://dummy-provider-details-api/'
 
