@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
   devise_for :applicants
-  devise_for :admin_users
+  devise_for :admin_users, controllers: { sessions: 'admin_users/sessions' }
 
   devise_scope :applicant do
     match(
