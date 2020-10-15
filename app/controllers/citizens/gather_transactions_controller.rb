@@ -2,18 +2,19 @@ module Citizens
   class GatherTransactionsController < CitizenBaseController
     class TrueLayerWorkerError < StandardError; end
     skip_back_history_for :index
-    helper_method :error_description
 
     def index
       return if worker_working?
 
       if worker_errors.any?
-        @errors = worker_errors.join(', ')
+        @error_decoder = TrueLayerErrorDecoder.new(worker_errors)
         Raven.capture_exception(TrueLayerWorkerError.new(@errors))
+        reset_worker
+        render :display_error
       else
+        reset_worker
         @worker_complete = true
       end
-      reset_worker
     end
 
     private
@@ -49,14 +50,6 @@ module Citizens
 
     def reset_worker
       session[:worker_id] = nil
-    end
-
-    def error_description
-      truelayer_error_description || I18n.t('citizens.gather_transactions.index.default_error')
-    end
-
-    def truelayer_error_description
-      JSON.parse(worker_errors[2])&.dig('TrueLayerError', 'error_description') unless worker_errors[2].nil?
     end
   end
 end

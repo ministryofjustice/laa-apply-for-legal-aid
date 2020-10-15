@@ -1,0 +1,19 @@
+
+<%= page_template page_title: @error_decoder.error_heading, back_link: :none do %>
+  <p class="govuk-body">
+    <%= @error_decoder.error_detail %>
+  </p>
+
+  <% if @error_decoder.show_link? %>
+    <p class="govuk-body">
+      <%= link_to(
+              t('.bank_selection_link'),
+              citizens_banks_path
+          ) %>
+    </p>
+  <% else %>
+    <p class="govuk-body">
+      <%= t('true_layer_errors.close_tab') %>
+    </p>
+  <% end %>
+<% end %>

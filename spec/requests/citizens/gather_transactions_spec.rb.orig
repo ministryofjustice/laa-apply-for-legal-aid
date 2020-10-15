@@ -10,10 +10,9 @@ RSpec.describe 'citizen accounts request', type: :request do
     create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,
                                  addresses: addresses)
   end
-  let(:addresses) do
-    [{ address: Faker::Address.building_number,
-       city: Faker::Address.city,
-       zip: Faker::Address.zip }]
+<<<<<<< HEAD
+  let!(:applicant_bank_account) do
+    create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: 'GBP')
   end
   let(:page_history_service) { PageHistoryService.new(page_history_id: session['page_history_id']) }
 
@@ -36,9 +35,15 @@ RSpec.describe 'citizen accounts request', type: :request do
     it 'does not add its url to history' do
       expect(page_history_service.read).to eq nil
     end
+=======
+  let(:addresses) do
+    [{ address: Faker::Address.building_number,
+       city: Faker::Address.city,
+       zip: Faker::Address.zip }]
+>>>>>>> AP-1721 merge conflicts
   end
 
-  describe 'GET /citizens/gather_transactions' do
+  describe 'GET /citizens/account/gather_transactions' do
     let(:worker_id) { SecureRandom.uuid }
     let(:worker) { {} }
     subject { get citizens_gather_transactions_path }
