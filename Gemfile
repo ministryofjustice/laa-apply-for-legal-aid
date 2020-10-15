@@ -100,8 +100,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '>= 2.7.5'
   gem 'erb_lint', require: false
-  gem 'i18n-tasks', '>= 0.9.31'
   gem 'htmlentities'
+  gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'
   gem 'nokogiri'
   gem 'pry-byebug'
@@ -111,7 +111,7 @@ group :development, :test do
 
   # Available in dev env for generators
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
-end
+end 
 
 group :development do
   gem 'better_errors', '>= 2.7.1'
