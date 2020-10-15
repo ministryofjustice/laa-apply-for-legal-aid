@@ -70,7 +70,7 @@ Given('I previously created a passported application with no assets and left on 
 end
 
 Given(/^I view the previously created application$/) do
-  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a[contains(.,'#{@legal_aid_application.applicant.full_name}')]").click
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a[contains(.,'#{HTMLEntities.new.encode(@legal_aid_application.applicant.full_name)}')]").click
 end
 
 Then(/^I should not see the previously created application$/) do

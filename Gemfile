@@ -101,6 +101,7 @@ group :development, :test do
   gem 'dotenv-rails', '>= 2.7.5'
   gem 'erb_lint', require: false
   gem 'i18n-tasks', '>= 0.9.31'
+  gem 'htmlentities'
   gem 'json_expressions'
   gem 'nokogiri'
   gem 'pry-byebug'
