@@ -4,6 +4,10 @@ RSpec.describe AdminUsers::SessionsController, type: :request do
   describe 'GET admin_users/sessions#new' do
     let(:subject) { get new_admin_user_session_path }
 
+    before do
+      allow(Rails.configuration.x.admin_portal).to receive(:show_form).and_return(true)
+    end
+
     it 'renders successfully' do
       subject
       expect(response).to have_http_status(:ok)
@@ -15,7 +19,9 @@ RSpec.describe AdminUsers::SessionsController, type: :request do
     end
 
     context 'in production environment' do
-      before { allow(Rails.env).to receive(:production?).and_return(true) }
+      before do
+        allow(Rails.configuration.x.admin_portal).to receive(:show_form).and_return(false)
+      end
 
       it 'does not show login form' do
         subject
