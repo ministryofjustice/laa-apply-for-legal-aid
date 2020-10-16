@@ -4,10 +4,6 @@ module Flow
       STEPS = {
         check_answers: {
           path: ->(_) { urls.citizens_check_answers_path },
-          forward: :declarations
-        },
-        declarations: {
-          path: ->(_) { urls.citizens_declaration_path },
           forward: :means_test_results
         },
         means_test_results: {

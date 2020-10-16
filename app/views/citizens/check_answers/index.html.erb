@@ -35,6 +35,8 @@
       <%= link_to t('.link_other_account'), citizens_banks_path, class: 'govuk-link' %>
     </div>
 
+  <h2 class="govuk-heading-l"><%= t('.income_outgoings') %></h2>
+
   <%= check_long_questions_single_change_link(
           name: :incomings,
           url: citizens_identify_types_of_income_path,
@@ -56,8 +58,11 @@
 
   <%= render 'student_finance' %>
 
+  <%= render 'shared/applicant_declaration' %>
+
   <%= next_action_buttons_with_form(
           url: continue_citizens_check_answers_path,
-          method: :patch
+          method: :patch,
+          continue_button_text: t('.submit_button')
       ) %>
 <% end %>

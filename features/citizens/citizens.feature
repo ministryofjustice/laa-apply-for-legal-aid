@@ -72,8 +72,7 @@ Feature: Citizen journey
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page not showing 'Excluded Benefits'
-    Then I click "Save and continue"
-    Then I should be on a page showing "Declaration"
+    Then I should be on a page showing "Confirm the following"
     Then I click "Agree and submit"
     Then I should be on a page showing "You've shared your financial information"
     Then I click link "feedback"
