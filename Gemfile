@@ -111,7 +111,7 @@ group :development, :test do
 
   # Available in dev env for generators
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
-end 
+end
 
 group :development do
   gem 'better_errors', '>= 2.7.1'
