@@ -59,6 +59,7 @@ module LaaApplyForLegalAid
 
     config.x.admin_portal.allow_reset = ENV['ADMIN_ALLOW_RESET'] == 'true'
     config.x.admin_portal.allow_create_test_applications = ENV['ADMIN_ALLOW_CREATE_TEST_APPLICATIONS'] == 'true'
+    config.x.admin_portal.show_form = ENV['ADMIN_SHOW_FORM'] == 'true'
     config.x.admin_portal.password = ENV['ADMIN_PASSWORD']
 
     config.x.email_domain.suffix = ENV['APPLY_EMAIL']

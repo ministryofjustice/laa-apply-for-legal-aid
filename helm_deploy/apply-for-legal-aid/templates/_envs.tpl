@@ -294,4 +294,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: email_domainSuffix
+  - name: ADMIN_SHOW_FORM
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: adminShowForm
 {{- end }}
