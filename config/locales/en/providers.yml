@@ -697,6 +697,7 @@ en:
         carer_disability: Carer and disability benefits
         low_income: Low income benefits
       show:
+        table_description: 'Transactions table "%{from} to %{to}". Sortable by Date, Description, Amount and Category.'
         col_category: Category
         col_and_category: and category
         col_amount: Amount
