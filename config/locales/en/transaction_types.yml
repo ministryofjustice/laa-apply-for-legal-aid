@@ -61,13 +61,14 @@ en:
       inset_text: Select every disregarded benefits payment your client received in the past 3 months
     friends_or_family:
       inset_text: Select every payment your client received from friends or family in the past 3 months.
-      details_summary_heading: Not sure which payments to select?      
-      subheading: "Payments from friends or family count as income if they are all of the following:"
+      details_summary_heading: Not sure which payments to select?
+      subheading: "Payments from friends or family count as income if they are:"
       list: |
-        regular (for example, two or more in the last month)
+        regular (at least once a month)
         from the same person
         gifts (your client does not need to repay them)
-        meant for living expenses (for example, housing costs)
+        used for living expenses like housing costs
+      closing_text: Do not include one-off payments your client received in the past 3 months.
     legal_aid:
       inset_text: Select every payment your client made towards legal aid in a criminal case in the past 3 months
     maintenance_in:
