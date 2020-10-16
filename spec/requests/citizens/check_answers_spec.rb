@@ -91,7 +91,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(legal_aid_application.reload.provider_step).to eq('client_completed_means')
     end
 
-    it 'records when the declartion accepted' do
+    it 'records when the declaration was accepted' do
       subject
       expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.now)
     end

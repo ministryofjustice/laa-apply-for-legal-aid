@@ -53,6 +53,7 @@ en:
         payments_receive_heading: Payments you receive
         payments_make_heading: Payments you make
         submit_button: Agree and submit
+        income_outgoings: Your income and outgoings
       student_finance:
         student_finance: Student finance
         do_you_get: Do you get student finance?
