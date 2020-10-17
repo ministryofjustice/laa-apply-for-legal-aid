@@ -92,7 +92,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Select Yes if your client bought the car over three years ago')
+        expect(response.body).to include('Select yes if your client bought the vehicle over 3 years ago')
       end
     end
 

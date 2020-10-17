@@ -100,7 +100,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Select Yes or No')
+        expect(response.body).to include('Select yes if you want to make a substantive application now')
       end
     end
   end

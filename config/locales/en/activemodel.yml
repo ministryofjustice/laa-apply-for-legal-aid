@@ -79,7 +79,7 @@ en:
               date_not_valid: Enter a valid date of birth
               earliest_allowed_date: Enter a valid date of birth
             email:
-              blank: Enter email address
+              blank: Enter an email address
               invalid: Enter an email address in the correct format, such as name@example.com
             first_name:
               blank: Enter first name
@@ -161,7 +161,7 @@ en:
         legal_aid_application:
           attributes:
             has_dependants:
-              blank: Select yes if you have dependants
+              blank: Select yes if your client has any dependants
             has_restrictions:
               citizens:
                 blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
@@ -216,11 +216,11 @@ en:
             student_finance:
               blank: Select yes if you get student finance
             substantive_application:
-              blank: Select Yes or No
+              blank: Select yes if you want to make a substantive application now
             uncategorised_bank_transactions:
               message: Add transactions to this category
             used_delegated_functions:
-              blank: Please select Yes or No
+              blank: Select yes if you've used delegated functions
             used_delegated_functions_on:
               date_not_valid: Enter a valid date
               date_is_in_the_future: The date you used delegated functions must be in the past
@@ -403,6 +403,6 @@ en:
             payments_remain:
               blank: Select yes if there are any payments left on the vehicle
             more_than_three_years_old:
-              blank: Select Yes if your client bought the car over three years ago
+              blank: Select yes if your client bought the vehicle over 3 years ago
             used_regularly:
               blank: Select yes if the vehicle is in regular use

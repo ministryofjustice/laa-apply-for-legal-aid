@@ -27,6 +27,7 @@ en:
         field_set_header: Do you have accounts with other banks?
       new:
         field_set_header: Do you have online access to your accounts with other banks?
+      error: Select yes if you have accounts with other banks
     banks:
       index:
         title: Select your bank

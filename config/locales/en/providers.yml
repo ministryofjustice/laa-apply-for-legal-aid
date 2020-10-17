@@ -546,7 +546,7 @@ en:
         h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
     proceedings_types:
       create:
-        search_and_select: Search and select a proceeding
+        search_and_select: Search for and select a proceeding
       index:
         clear_search: Clear search
         heading_1: What does your client want legal aid for?

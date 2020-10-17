@@ -415,6 +415,8 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   end
 
   def add_uncategorised_transaction_error(transaction_type)
+    return if transaction_type.name == 'excluded_benefits'
+
     errors.add(transaction_type.name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
   end
 
