@@ -32,13 +32,14 @@ module Reports
         end
 
         it 'returns an array with the expected values' do
-          Timecop.freeze(time)
-          fields = subject
-          expect(fields[0]).to eq application.application_ref
-          expect(fields[1]).to eq application.state
-          expect(fields[2]).to eq provider.username
-          expect(fields[3]).to eq provider.email
-          expect(fields[4]).to match DATE_TIME_REGEX
+          Timecop.freeze(time) do
+            fields = subject
+            expect(fields[0]).to eq application.application_ref
+            expect(fields[1]).to eq application.state
+            expect(fields[2]).to eq provider.username
+            expect(fields[3]).to eq provider.email
+            expect(fields[4]).to match DATE_TIME_REGEX
+          end
         end
       end
     end
