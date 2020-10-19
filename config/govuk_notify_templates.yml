@@ -9,7 +9,7 @@
 # we default to 'integration' group.
 #
 development:
-  citizen_start_application: 570e1b9d-6238-45fd-b75c-96f2f39db8e9
+  citizen_start_application: e747df7d-4842-4bca-88a6-4ad3ebd89994
   feedback_notification: 9aa7c2d5-f7ee-405c-9ec4-c0fcee149572
   new_link_request: a577582b-3e60-44a4-885c-d4b12bf23958
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b

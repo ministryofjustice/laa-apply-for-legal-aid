@@ -4,6 +4,7 @@ RSpec.describe NotifyMailer, type: :mailer do
   let(:app_id) { SecureRandom.uuid }
   let(:email) { Faker::Internet.safe_email }
   let(:client_name) { Faker::Name.name }
+  let(:provider_firm) { Faker::Name.name }
   let(:application_url) { "/applications/#{app_id}/citizen/start" }
   let(:citizen_start_application_template) { Rails.configuration.govuk_notify_templates[:citizen_start_application] }
 
@@ -12,7 +13,7 @@ RSpec.describe NotifyMailer, type: :mailer do
   end
 
   describe '#citizen_start_email' do
-    let(:mail) { described_class.citizen_start_email(app_id, email, application_url, client_name) }
+    let(:mail) { described_class.citizen_start_email(app_id, email, application_url, client_name, provider_firm) }
 
     it 'sends an email to the correct address' do
       expect(mail.to).to eq([email])
@@ -30,6 +31,7 @@ RSpec.describe NotifyMailer, type: :mailer do
       expect(mail.govuk_notify_personalisation).to eq(
         application_url: application_url,
         client_name: client_name,
+        provider_firm: provider_firm,
         ref_number: app_id
       )
     end
