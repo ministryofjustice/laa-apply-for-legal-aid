@@ -94,13 +94,16 @@ RSpec.describe StateBenefitAnalyserService do
     context 'DWP payment for this applicant has multiple recognised codes' do
       context 'an included benefit' do
         let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1)] }
+        before { call }
 
         # OCT-2020: A choice has been made that, for now, we should not try to handle multiple codes in a single row.These
         # should be flagged by CFE and marked for case worker review. They can still be marked as benefits by the provider
         it 'does not update the meta data' do
-          subject
-          tx = legal_aid_application.reload.bank_transactions.first
-          expect(tx.meta_data).to be nil
+          expect(legal_aid_application.reload.bank_transactions.first.meta_data).to be nil
+        end
+
+        it 'adds a caseworker flag for multi_benefit' do
+          expect(legal_aid_application.reload.bank_transactions.first.flags['multi_benefit']).to be true
         end
       end
     end
