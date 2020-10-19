@@ -119,16 +119,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
 
       it 'generates the expected error message' do
         expect(message).not_to match(/^translation missing:/)
-        expect(subject.errors[:used_delegated_functions_on].join).to match(message)
-      end
-    end
-
-    context 'dynamic date text is displayed' do
-      let(:date) { 12.months.ago.strftime('%m %d %Y') }
-
-      it 'generates the dynamic date text' do
-        subject
-        expect(unescaped_response_body).to include(date)
+        expect(subject.errors[:used_delegated_functions].join).to match(I18n.t(error_locale, scope: i18n_scope, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
       end
     end
 
