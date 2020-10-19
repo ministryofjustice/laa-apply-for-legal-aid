@@ -225,6 +225,7 @@ en:
               date_not_valid: Enter a valid date
               date_is_in_the_future: The date you used delegated functions must be in the past
               blank: Enter the date you used delegated functions
+              date_not_in_range: "The date you used delegated functions cannot be before %{months}"
         merits_assessment:
           attributes:
             application_purpose:

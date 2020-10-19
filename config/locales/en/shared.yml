@@ -169,7 +169,7 @@ en:
         told_on_hint: For example 31 3 2019
         purchased_on_hint: For example, 31 3 1980
         used_delegated_functions_on_label: Date you used delegated functions
-        used_delegated_functions_on_hint: For example, 31 3 2019
+        used_delegated_functions_on_hint: "For example, %{options}"
       dependants:
         assets_value:
           example: For example, property, cash savings or shares.

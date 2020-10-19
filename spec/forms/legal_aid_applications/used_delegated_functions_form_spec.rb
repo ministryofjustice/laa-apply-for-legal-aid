@@ -109,6 +109,29 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       end
     end
 
+    context 'date is older than x months ago' do
+      let(:used_delegated_functions_on) { 13.months.ago }
+      let(:error_locale) { 'used_delegated_functions_on.date_not_in_range' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+      end
+
+      it 'generates the expected error message' do
+        expect(message).not_to match(/^translation missing:/)
+        expect(subject.errors[:used_delegated_functions_on].join).to match(message)
+      end
+    end
+
+    context 'dynamic date text is displayed' do
+      let(:date) { 12.months.ago.strftime('%m %d %Y') }
+
+      it 'generates the dynamic date text' do
+        subject
+        expect(unescaped_response_body).to include(date)
+      end
+    end
+
     context 'when occurred on is in future' do
       let(:used_delegated_functions_on) { 1.days.from_now.to_date }
       let(:error_locale) { 'used_delegated_functions_on.date_is_in_the_future' }
