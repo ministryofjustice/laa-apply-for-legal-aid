@@ -22,7 +22,7 @@
               ) %>
 
           <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
-            <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form %>
+            <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_months_ago(5) %>
           </div>
 
           <%= form.govuk_radio_button(
