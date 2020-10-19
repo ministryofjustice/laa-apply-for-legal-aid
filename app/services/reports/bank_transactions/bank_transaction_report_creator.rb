@@ -2,7 +2,7 @@ module Reports
   module BankTransactions
     class BankTransactionReportCreator < BaseReportCreator
       # generate_local_csv is used for manual testing in the console
-      #    rc = Reports::BankTransactionReportCreator.new(laa)
+      #    rc = Reports::BankTransactions::BankTransactionReportCreator.new(laa)
       #    rc.call(local_csv: true)
       #
       def call(local_csv: false)

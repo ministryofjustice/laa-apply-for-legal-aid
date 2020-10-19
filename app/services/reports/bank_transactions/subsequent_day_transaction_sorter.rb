@@ -14,6 +14,10 @@ module Reports
       end
 
       def call
+        # if the balance is nil, then the balances couldn't be computed on a previous day
+        # so don't do anything.
+        return @txn_array if @balance.nil?
+
         return sanitized_single_transaction if @txn_array.size == 1
 
         return @txn_array if no_running_balances?

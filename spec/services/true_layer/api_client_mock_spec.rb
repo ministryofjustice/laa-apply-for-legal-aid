@@ -54,7 +54,8 @@ RSpec.describe TrueLayer::ApiClientMock do
             currency: 'GBP',
             amount: -1234.56,
             timestamp: '2020-12-01 00:00:00 +0000',
-            transaction_type: 'debit'
+            transaction_type: 'debit',
+            running_balance: nil
           },
           {
             transaction_id: 'Gc9-6HF2-m9iBBYdKJ6p2_hUvaxlM6o8ktZtp6v4',
@@ -62,7 +63,8 @@ RSpec.describe TrueLayer::ApiClientMock do
             currency: 'GBP',
             amount: 1234.56,
             timestamp: '2010-01-12 00:00:00 +0000',
-            transaction_type: 'credit'
+            transaction_type: 'credit',
+            running_balance: nil
           },
           {
             transaction_id: 'iWEomIVMycq4bvAqBI5SgaGmrMWRnq-pQIHnLv_U',
@@ -70,7 +72,8 @@ RSpec.describe TrueLayer::ApiClientMock do
             currency: 'GBP',
             amount: 1234.56,
             timestamp: '2010-01-12 00:00:00 +0000',
-            transaction_type: 'credit'
+            transaction_type: 'credit',
+            running_balance: nil
           }
         ]
       end
