@@ -21,6 +21,8 @@
             <li><%= examples %></li>
           <% end %>
         </ul>
+        <div class="govuk-!-margin-bottom-0"></div>
+        <%= t("transaction_types.#{@transaction_type.name}.closing_text") %>
       </div>
     </details>
   <% end %>
