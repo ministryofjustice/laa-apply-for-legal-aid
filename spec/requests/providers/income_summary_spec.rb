@@ -122,5 +122,14 @@ RSpec.describe Providers::IncomeSummaryController do
         expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
       end
     end
+
+    context 'no disregarded benefits are categorised' do
+      let(:excluded_benefits) { create :transaction_type, :credit, name: 'excluded_benefits' }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [excluded_benefits] }
+
+      it 'does not return an error' do
+        expect(response.body).not_to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
+      end
+    end
   end
 end

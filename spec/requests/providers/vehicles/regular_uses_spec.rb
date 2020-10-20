@@ -95,7 +95,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Select yes if the vehicle is in regular use')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.vehicle.attributes.used_regularly.blank'))
       end
     end
 

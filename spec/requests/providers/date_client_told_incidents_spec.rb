@@ -111,7 +111,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
       it 'contains error message' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Enter a valid date')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.incident.attributes.told_on.date_not_valid'))
       end
     end
 

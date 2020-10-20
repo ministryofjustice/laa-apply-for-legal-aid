@@ -39,6 +39,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
     it 'should display an error' do
       expect(response.body).to match('govuk-error-message')
+      expect(response.body).to include('Select yes if you have accounts with other banks')
     end
 
     context 'with Yes submitted' do
@@ -83,6 +84,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
     it 'should display an error' do
       expect(response.body).to match('govuk-error-message')
+      expect(response.body).to include('Select yes if you have accounts with other banks')
     end
 
     context 'with Yes submitted' do

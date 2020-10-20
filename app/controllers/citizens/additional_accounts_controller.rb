@@ -12,7 +12,7 @@ module Citizens
       when 'no'
         go_forward
       else
-        @error = I18n.t('generic.errors.yes_or_no')
+        error
         render :index
       end
     end
@@ -28,7 +28,7 @@ module Citizens
         offline_accounts_update
         go_forward
       else
-        @error = I18n.t('generic.errors.yes_or_no')
+        error
         render :new
       end
     end
@@ -42,6 +42,10 @@ module Citizens
     def offline_accounts_update
       legal_aid_application.update(has_offline_accounts: true)
       legal_aid_application.use_ccms! unless legal_aid_application.use_ccms?
+    end
+
+    def error
+      @error = I18n.t('citizens.additional_accounts.error')
     end
   end
 end

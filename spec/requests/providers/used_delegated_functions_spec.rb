@@ -99,7 +99,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Enter a valid date')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Enter a valid date')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
       end
     end
 
@@ -135,7 +135,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Enter the date you used delegated functions')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.blank'))
       end
     end
 
@@ -181,7 +181,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
         it 'displays error' do
           expect(response.body).to include('govuk-error-summary')
-          expect(response.body).to include('Enter a valid date')
+          expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
         end
       end
 
