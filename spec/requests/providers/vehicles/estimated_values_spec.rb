@@ -62,7 +62,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Enter the estimated value of the vehicle')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.vehicle.attributes.estimated_value.blank'))
       end
     end
 
@@ -81,7 +81,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Estimated value must be an amount of money, like 5,000')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.vehicle.attributes.estimated_value.not_a_number'))
       end
     end
 

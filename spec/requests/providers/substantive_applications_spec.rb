@@ -100,7 +100,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include('Select yes if you want to make a substantive application now')
+        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.substantive_application.blank'))
       end
     end
   end
