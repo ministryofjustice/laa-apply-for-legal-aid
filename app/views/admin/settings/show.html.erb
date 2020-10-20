@@ -30,6 +30,14 @@
       title: { size: :m, text: t('.labels.manually_review_all_cases') }
     ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+      :allow_welsh_translation,
+      [true, false],
+      inline: true,
+      hint: t('.hints.allow_welsh_translation'),
+      title: { size: :m, text: t('.labels.allow_welsh_translation') }
+    ) %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

@@ -5,7 +5,8 @@ namespace :settings do
     setting.update!(mock_true_layer_data: true,
                     bank_transaction_filename: 'db/sample_data/bank_transactions_2.csv',
                     allow_non_passported_route: true,
-                    manually_review_all_cases: false)
+                    manually_review_all_cases: false,
+                    allow_welsh_translation: false)
 
     pp Setting.first
   end

@@ -30,12 +30,14 @@ en:
           mock_true_layer_data: Mock TrueLayer Data
           allow_non_passported_route: Allow non-passported route
           manually_review_all_cases: Manually review all non-passported applications
+          allow_welsh_translation: Allow Welsh translation
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           allow_non_passported_route: Select Yes to allow non-passported route
           manually_review_all_cases: |
             All applications with capital contributions AND restrictions on assets will be routed to caseworker for review.
-            Select Yes to additionally route all non-passported applications to casewoker for review.
+            Select Yes to additionally route all non-passported applications to caseworker for review.
+          allow_welsh_translation: Select Yes to translate the service into Welsh
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications
