@@ -1,8 +1,6 @@
 module Admin
-  class LegalAidApplicationsController < ApplicationController
+  class LegalAidApplicationsController < AdminBaseController
     include Pagy::Backend
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
 
     DEFAULT_PAGE_SIZE = 10
 

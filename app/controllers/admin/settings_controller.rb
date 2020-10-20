@@ -1,8 +1,5 @@
 module Admin
-  class SettingsController < ApplicationController
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
-
+  class SettingsController < AdminBaseController
     def show
       @form = Settings::SettingForm.new(model: setting)
     end

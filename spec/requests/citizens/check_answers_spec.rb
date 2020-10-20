@@ -60,7 +60,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'displays the name of the firm' do
       subject
-      expect(response.body).to include(firm.name)
+      expect(response.body).to include(HTMLEntities.new.encode(firm.name))
     end
   end
 

@@ -11,6 +11,16 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   describe 'GET /admin/legal_aid_applications' do
     subject { get admin_legal_aid_applications_path(params) }
 
+    context 'not from a whitelisted IP address' do
+      it 'redirects to error page' do
+        # stub the response to request.env['HTTP_X_REAL_IP']
+        Rails.application.env_config['HTTP_X_REAL_IP'] = '55.6.7.8'
+        subject
+        expect(response).to redirect_to(error_path(:access_denied))
+        Rails.application.env_config['HTTP_X_REAL_IP'] = nil
+      end
+    end
+
     it 'renders successfully' do
       subject
       expect(response).to have_http_status(:ok)

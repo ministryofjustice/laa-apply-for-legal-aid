@@ -1,8 +1,6 @@
 module Admin
-  class FeedbackController < ApplicationController
+  class FeedbackController < AdminBaseController
     include Pagy::Backend
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
 
     DEFAULT_PAGE_SIZE = 10
 

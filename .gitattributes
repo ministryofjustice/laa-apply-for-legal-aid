@@ -1,1 +1,2 @@
 helm_deploy/apply-for-legal-aid/values-*.yaml filter=git-crypt diff=git-crypt
+config/ipaddrs.crypt.yml filter=git-crypt diff=git-crypt
