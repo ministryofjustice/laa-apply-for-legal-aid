@@ -111,10 +111,6 @@ RSpec.describe Providers::TransactionsController, type: :request do
   end
 
   shared_examples_for 'PATCH #providers/transactions' do
-    it 'unselect the previously selected' do
-      expect { subject }.to change { bank_transaction_A.reload.transaction_type }.to(nil)
-    end
-
     it 'saves the selected transactions' do
       expect { subject }.to change { bank_transaction_B.reload.transaction_type }.from(nil).to(transaction_type)
     end

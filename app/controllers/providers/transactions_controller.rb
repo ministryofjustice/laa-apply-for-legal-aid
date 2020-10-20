@@ -9,16 +9,11 @@ module Providers
     end
 
     def update
-      reset_selection
       set_selection
       continue_or_draft
     end
 
     private
-
-    def reset_selection
-      bank_transactions.where(transaction_type_id: transaction_type.id).update_all(transaction_type_id: nil)
-    end
 
     def set_selection
       new_values = { transaction_type_id: transaction_type.id }
