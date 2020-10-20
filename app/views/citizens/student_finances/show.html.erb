@@ -17,9 +17,6 @@
                                             hint: t('.hint'),
                                             title: content_for(:page_title) %>
 
-    <%= next_action_buttons(
-            show_draft: true,
-            form: form
-        ) %>
+    <%= next_action_buttons(form: form) %>
   <% end %>
 <% end %>
