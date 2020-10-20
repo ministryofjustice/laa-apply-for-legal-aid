@@ -194,7 +194,7 @@ Given('I start the merits application with student finance') do
     :provider_assessing_means,
     :with_irregular_income,
     :with_transaction_period,
-    :with_benefits_transactions
+    :with_uncategorised_credit_transactions
   )
 
   login_as @legal_aid_application.provider
