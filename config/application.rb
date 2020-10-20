@@ -115,5 +115,9 @@ module LaaApplyForLegalAid
 
     config.x.redis.base_url = ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present? ? "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" : 'redis://localhost:6379' # rubocop:disable Layout/LineLength, Lint/RequireParentheses
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
+
+    # Load array of ip ranges that are allowed to access the Admin pages
+    require Rails.root.join('app', 'lib', 'authenticated_ip_ranges')
+    config.x.authenticated_ipranges = AuthenticatedIpRanges.ranges
   end
 end

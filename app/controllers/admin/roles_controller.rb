@@ -1,8 +1,5 @@
 module Admin
-  class RolesController < ApplicationController
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
-
+  class RolesController < AdminBaseController
     def index
       @provider_firms = Firm.search(params[:search])
     end

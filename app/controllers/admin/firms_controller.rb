@@ -1,8 +1,5 @@
 module Admin
-  class FirmsController < ApplicationController
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
-
+  class FirmsController < AdminBaseController
     def index
       @firms = Firm.order(:name)
     end
