@@ -109,7 +109,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       end
     end
 
-    context 'date is older than x months ago' do
+    context 'date is older than 12 months ago' do
       let(:used_delegated_functions_on) { 13.months.ago }
       let(:error_locale) { 'used_delegated_functions_on.date_not_in_range' }
 

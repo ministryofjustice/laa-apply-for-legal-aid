@@ -72,7 +72,7 @@ Metrics/ModuleLength:
     - 'spec/**/*'
 
 Metrics/ParameterLists:
-  Max: 6
+  Max: 7
 
 Performance/AncestorsInclude:
   Enabled: true
