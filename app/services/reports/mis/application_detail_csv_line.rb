@@ -1,6 +1,8 @@
 module Reports
   module MIS
     class ApplicationDetailCsvLine
+      include Sanitisable
+
       attr_reader :laa
 
       delegate :application_ref,
@@ -156,7 +158,7 @@ module Reports
         restrictions
         respondent_details
         merits
-        @line
+        sanitise
       end
 
       private

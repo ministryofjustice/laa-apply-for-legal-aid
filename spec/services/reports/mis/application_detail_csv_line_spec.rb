@@ -411,6 +411,13 @@ module Reports
               expect(value_for('Bail details')).to eq respondent.bail_conditions_set_details
             end
           end
+
+          context 'data begins with a vulnerable character' do
+            before { firm.name = '=malicious_code' }
+            it 'returns the escaped text' do
+              expect(value_for('Firm name')).to eq "'=malicious_code"
+            end
+          end
         end
       end
 
