@@ -55,12 +55,6 @@ RSpec.describe Providers::TransactionsController, type: :request do
         expect(unescaped_response_body).to include(expected_amount)
       end
 
-      it 'shows selected transactions' do
-        subject
-        checkbox = parsed_response_body.at_css("[value='#{bank_transaction_selected.id}']")
-        expect(checkbox[:checked]).to eq('checked')
-      end
-
       it 'does not show transactions that do not match the operation on the transaction type' do
         subject
         expect(unescaped_response_body).not_to include(bank_transaction_not_matching.description)
