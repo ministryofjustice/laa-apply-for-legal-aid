@@ -20,7 +20,7 @@ development:
   new_link_to_client: 5708ec04-c789-4f7e-8a15-ad7dd3f4f336
 
 production:
-  citizen_start_application: 66865f0d-6410-40e2-b862-98724eb6e33a
+  citizen_start_application: 7e5fb1a7-4b78-4a95-917e-c0bcb78a5fcc
   feedback_notification: d8b0be70-c70c-436d-83f1-3db9f272e29d
   new_link_request: 3cc3be57-e072-4095-9caa-c0cd52193405
   submission_confirmation: 5472b10b-bc11-432a-a18d-9f20de5b2854
