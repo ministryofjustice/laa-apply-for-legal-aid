@@ -18,6 +18,15 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       expect(response).to have_http_status(:ok)
     end
 
+    context 'dynamic date hint text' do
+      it 'contains a valid date' do
+        hint_text_date = Time.zone.now.ago(5.days).strftime('%d %m %Y')
+
+        subject
+        expect(response.body).to include(hint_text_date)
+      end
+    end
+
     context '#pre_dwp_check?' do
       it 'returns true' do
         expect(described_class.new.pre_dwp_check?).to be true
@@ -100,6 +109,24 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
+      end
+    end
+
+    context 'date is not in range' do
+      let(:year) { 2018 }
+      let(:month) { 10 }
+      let(:day) { 1 }
+
+      it 'renders show' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays error' do
+        hint_text_date = Time.zone.now.ago(12.months).strftime('%d %m %Y')
+
+        subject
+        translation_path = 'activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_in_range'
+        expect(response.body).to include(I18n.t(translation_path, months: hint_text_date))
       end
     end
 

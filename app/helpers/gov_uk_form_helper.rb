@@ -54,7 +54,7 @@ module GovUkFormHelper
     content_tag :span, text, merge_with_class(args, 'govuk-error-message')
   end
 
-  def date_input_fields(prefix:, field_name:, form:, width: 'two-thirds', set_error_class_here: true, label: nil)
+  def date_input_fields(prefix:, field_name:, form:, width: 'two-thirds', set_error_class_here: true, label: nil, options: nil)
     group_error_class = set_error_class_here && form.object.errors[field_name].any? ? 'govuk-form-group--error' : ''
     render(
       'shared/forms/date_input_fields',
@@ -63,7 +63,8 @@ module GovUkFormHelper
       form: form,
       width: width,
       group_error_class: group_error_class,
-      label: label
+      label: label,
+      options: options || nil
     )
   end
 

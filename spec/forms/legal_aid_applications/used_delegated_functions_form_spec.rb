@@ -40,6 +40,18 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       expect(legal_aid_application.substantive_application_deadline_on).to eq(deadline)
     end
 
+    context 'date is exactly 12 months ago' do
+      let(:used_delegated_functions_on) { 12.months.ago }
+
+      it 'is valid' do
+        expect(subject).to be_valid
+      end
+
+      it 'updates the application' do
+        expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on.to_date)
+      end
+    end
+
     context 'when not using delegated functions selected' do
       let(:used_delegated_functions) { false }
 
@@ -106,6 +118,20 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       it 'generates the expected error message' do
         expect(message).not_to match(/^translation missing:/)
         expect(subject.errors[:used_delegated_functions_on].join).to match(message)
+      end
+    end
+
+    context 'date is older than 12 months ago' do
+      let(:used_delegated_functions_on) { 13.months.ago }
+      let(:error_locale) { 'used_delegated_functions_on.date_not_in_range' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+      end
+
+      it 'generates the expected error message' do
+        expect(message).not_to match(/^translation missing:/)
+        expect(subject.errors[:used_delegated_functions].join).to match(I18n.t(error_locale, scope: i18n_scope, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
       end
     end
 
