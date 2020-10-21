@@ -43,7 +43,7 @@ module LegalAidApplications
 
     def date_in_range
       return if date_not_required? || !datetime?(used_delegated_functions_on)
-      return true if Time.zone.parse(used_delegated_functions_on.to_s) > Time.zone.now.ago(12.months)
+      return true if Time.zone.parse(used_delegated_functions_on.to_s) >= Date.current.ago(12.months)
 
       add_date_in_range_error
     end

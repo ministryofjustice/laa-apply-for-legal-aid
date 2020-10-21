@@ -40,6 +40,18 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       expect(legal_aid_application.substantive_application_deadline_on).to eq(deadline)
     end
 
+    context 'date is exactly 12 months ago' do
+      let(:used_delegated_functions_on) { 12.months.ago }
+
+      it 'is valid' do
+        expect(subject).to be_valid
+      end
+
+      it 'updates the application' do
+        expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on.to_date)
+      end
+    end
+
     context 'when not using delegated functions selected' do
       let(:used_delegated_functions) { false }
 

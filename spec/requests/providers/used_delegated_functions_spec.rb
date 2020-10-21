@@ -20,7 +20,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
     context 'dynamic date hint text' do
       it 'contains a valid date' do
-        hint_text_date = Time.zone.now.ago(5.months).strftime('%d %m %Y')
+        hint_text_date = Time.zone.now.ago(5.days).strftime('%d %m %Y')
 
         subject
         expect(response.body).to include(hint_text_date)
