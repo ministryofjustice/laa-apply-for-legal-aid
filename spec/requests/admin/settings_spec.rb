@@ -51,7 +51,8 @@ RSpec.describe Admin::SettingsController, type: :request do
       {
         setting: {
           mock_true_layer_data: 'true',
-          allow_non_passported_route: 'false'
+          allow_non_passported_route: 'false',
+          allow_welsh_translation: 'true'
         }
       }
     end
@@ -63,6 +64,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       subject
       expect(Setting.mock_true_layer_data?).to eq(true)
       expect(Setting.allow_non_passported_route?).to eq(false)
+      expect(Setting.allow_welsh_translation?).to eq(true)
     end
 
     it 'create settings if they do not exist' do

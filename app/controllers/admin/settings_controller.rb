@@ -22,7 +22,8 @@ module Admin
     def form_params
       params.require(:setting).permit(:mock_true_layer_data,
                                       :allow_non_passported_route,
-                                      :manually_review_all_cases)
+                                      :manually_review_all_cases,
+                                      :allow_welsh_translation)
     end
 
     def setting

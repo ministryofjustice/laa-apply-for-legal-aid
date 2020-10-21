@@ -6,11 +6,13 @@ module Settings
 
     attr_accessor :mock_true_layer_data,
                   :allow_non_passported_route,
-                  :manually_review_all_cases
+                  :manually_review_all_cases,
+                  :allow_welsh_translation
 
     validates :mock_true_layer_data,
               :allow_non_passported_route,
               :manually_review_all_cases,
+              :allow_welsh_translation,
               presence: true
   end
 end

@@ -15,6 +15,10 @@ class Setting < ApplicationRecord
     setting.manually_review_all_cases
   end
 
+  def self.allow_welsh_translation?
+    setting.allow_welsh_translation
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
