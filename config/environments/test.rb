@@ -63,4 +63,7 @@ Rails.application.configure do
 
   # Set a css_compressor so sassc-rails does not overwrite the compressor when running the tests
   config.assets.css_compressor = nil
+
+  # allow en-GB locale in test environment for Faker
+  config.i18n.available_locales = %i[en cy en-GB]
 end

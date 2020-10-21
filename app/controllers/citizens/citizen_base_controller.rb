@@ -4,6 +4,7 @@ module Citizens
     before_action :authenticate_applicant!
     before_action :check_not_complete
     before_action :set_cache_buster
+    around_action :switch_locale
 
     private
 
@@ -23,6 +24,11 @@ module Citizens
 
     def completed
       redirect_to error_path(:assessment_already_completed)
+    end
+
+    def switch_locale(&action)
+      locale = params[:locale] || I18n.default_locale
+      I18n.with_locale(locale, &action)
     end
   end
 end

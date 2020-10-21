@@ -19,7 +19,7 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'has a link to the download csv path' do
       subject
-      expect(response.body).to include(admin_reports_submitted_csv_path)
+      expect(response.body).to include(admin_reports_submitted_csv_path(format: :csv))
     end
   end
 

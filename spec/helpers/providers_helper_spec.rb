@@ -27,13 +27,13 @@ RSpec.describe ProvidersHelper, type: :helper do
     it 'incoming_transactions should return the right URL with param' do
       legal_aid_application.provider_step = 'incoming_transactions'
       legal_aid_application.provider_step_params = { transaction_type: :salary }
-      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/incoming_transactions/salary")
+      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/incoming_transactions/salary?locale=en")
     end
 
     it 'outgoing_transactions should return the right URL with param' do
       legal_aid_application.provider_step = 'outgoing_transactions'
       legal_aid_application.provider_step_params = { transaction_type: :salary }
-      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary")
+      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary?locale=en")
     end
 
     context 'when removing a dependant' do
@@ -42,7 +42,7 @@ RSpec.describe ProvidersHelper, type: :helper do
       it 'routes correctly' do
         legal_aid_application.provider_step = 'remove_dependant'
         legal_aid_application.provider_step_params = { id: dependant.id }
-        expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/remove_dependant/#{dependant.id}")
+        expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/remove_dependant/#{dependant.id}?locale=en")
       end
     end
   end
