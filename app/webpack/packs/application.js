@@ -29,4 +29,5 @@ context.keys().forEach(key => context(key))
 
 const GOVUKFrontend = require('govuk-frontend')
 $(function() { GOVUKFrontend.initAll() })
+import '../stylesheets/govuk-frontend.scss'
 require.context('govuk-frontend/govuk/assets', true)
