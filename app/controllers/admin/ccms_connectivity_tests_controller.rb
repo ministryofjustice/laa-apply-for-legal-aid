@@ -1,10 +1,7 @@
 require 'rexml/document'
 
 module Admin
-  class CcmsConnectivityTestsController < ApplicationController
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
-
+  class CcmsConnectivityTestsController < AdminBaseController
     def show
       @response = ''
       xml = REXML::Document.new(CCMS::Requestors::ReferenceDataRequestor.new('my_login').call.to_s)

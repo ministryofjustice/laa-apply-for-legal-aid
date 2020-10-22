@@ -46,6 +46,29 @@ From the root of the project execute the following command:
 bin/setup
 ```
 
+### Encrypting sensitive data
+We use git-crypt to encrypt sensitive data so that it can be stored in the same repo as all the other code, 
+yet still be inaccessible to unauthorised users.  
+
+#### Adding a new encrypted file
+This can be a bit tricky, so follow these steps:
+- ```git-crypt unlock <PATH_TO_FILE_CONTAINING_KEY>```
+- Add a new line to `.gitattributes` to ensure the new file is encrypted
+
+  ```<path_to_file_to_be_encrypted> filter=git-crypt diff=git-crypt```
+- Add the file you want to be encrypted 
+- Add the new file to git, and commit it
+  ```git add .```
+  
+  ```git comit -m '<message>```
+  
+- Lock the repo
+   ```git-crypt lock```
+
+You should now check by looking at the file either in your editor or on the command line to ensure the
+file you've just added is in fact encrypted.
+
+
 ### Malware check of uploaded files
 
 ClamAV is used to make sure uploaded files do not contain any malware.

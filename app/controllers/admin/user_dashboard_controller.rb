@@ -1,8 +1,5 @@
 module Admin
-  class UserDashboardController < ApplicationController
-    before_action :authenticate_admin_user!
-    layout 'admin'.freeze
-
+  class UserDashboardController < AdminBaseController
     def index; end
   end
 end

@@ -1,8 +1,6 @@
 module Admin
-  class ProvidersController < ApplicationController
-    before_action :authenticate_admin_user!
+  class ProvidersController < AdminBaseController
     before_action :new_provider, only: %i[check create]
-    layout 'admin'.freeze
 
     def new
       @provider = Provider.new

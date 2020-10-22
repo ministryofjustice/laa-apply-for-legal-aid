@@ -103,6 +103,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '>= 2.7.5'
   gem 'erb_lint', require: false
+  gem 'htmlentities'
   gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'
   gem 'nokogiri'
