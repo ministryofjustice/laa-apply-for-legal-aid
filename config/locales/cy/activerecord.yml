@@ -1,0 +1,13 @@
+---
+cy:
+  activerecord:
+    errors:
+      models:
+        feedback:
+          attributes:
+            satisfaction:
+              blank: ecivres eht htiw erew uoy deifsitas woh tceleS
+            difficulty:
+              blank: ecivres wen eht gnisu dia lagel rof ylppa ot saw ti tluciffid ro ysae woh tceleS
+            done_all_needed:
+              inclusion: yadot dedeen uoy tahw od ot elba uoy erew uoy fi sey tceleS

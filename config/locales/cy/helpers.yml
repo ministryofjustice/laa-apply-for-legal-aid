@@ -1,0 +1,17 @@
+---
+cy:
+  true_false:
+    'false': 'oN'
+    'true': seY
+  helpers:
+    accessibility:
+      error: ":rorrE"
+    hint:
+      additional_account: yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca yna fo sliated erahS
+      student_finance: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
+    label:
+      feedback:
+        done_all_needed:
+          'false': 'oN'
+          'true': seY
+        improvement_suggestion: "?ecivres eht evorpmi dluoc ew woh no snoitseggus ro kcabdeef rehto yna evah uoy oD"

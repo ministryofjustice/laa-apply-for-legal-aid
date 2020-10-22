@@ -1,0 +1,16 @@
+---
+cy:
+  model_enum_translations:
+    feedback:
+      satisfaction:
+        dissatisfied: deifsitassiD
+        neither_dissatisfied_nor_satisfied: deifsitassid ron deifsitas rehtieN
+        satisfied: deifsitaS
+        very_dissatisfied: deifsitassid yreV
+        very_satisfied: deifsitas yreV
+      difficulty:
+        very_difficult: tluciffid yreV
+        difficult: tluciffiD
+        neither_difficult_nor_easy: tluciffid ron ysae rehtieN
+        easy: ysaE
+        very_easy: ysae yreV

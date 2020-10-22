@@ -1,0 +1,109 @@
+---
+cy:
+  privacy_policy:
+    index:
+      h1-heading: ycilop ycavirP
+      what_we_collect:
+        header: tcelloc ew atad tahW
+        data_we_collect: ":sedulcni uoy morf tcelloc ew atad ehT"
+        list:
+          item_1: rebmun ecnarusnI lanoitaN dna sliated tcatnoc ,htrib fo etad ,sserdda ,eman ruoy ekil sliated lanosrep
+          item_2: dia lagel rof yfilauq uoy fi kcehc ot noitamrofni laicnanif
+          item_3_html: desu uoy >a/<resworb bew>'sresworb/pleh/ku.vog.www//:sptth'=ferh a< fo noisrev hcihw fo sliated dna ,sserdda >rbba/<)PI(>'locotorP tenretnI'=eltit rbba< locotorP tenretnI ruoy
+          item_4_html: seuqinhcet gniggat egap dna >a/<seikooc>"seikooc/pleh/ku.vog.www//:sptth"=ferh a< gnisu ,etis eht esu uoy woh no noitamrofni
+          item_5: evael uoy kcabdeef yna
+      google_analytics:
+        why: ".ecivres eht esu uoy woh tuoba noitamrofni tcelloc ot erawtfos scitylanA elgooG esu eW"
+        list_heading: ":tuoba noitamrofni serots scitylanA elgooG"
+        list: |
+          ecivres eht gnisu er’uoy elihw no kcilc uoy tahw
+          ecivres eht ot tog uoy woh
+          egap hcae no dneps uoy gnol woh
+          tisiv uoy segap eht
+        security_information: ".era uoy ohw yfitnedi ot desu eb tonnac noitamrofni siht os )sserdda ro eman ruoy elpmaxe rof( scitylanA elgooG hguorht noitamrofni lanosrep ruoy erots ro tcelloc ton od eW"
+      why_we_need_your_data:
+        header: atad ruoy deen ew yhW
+        list_heading: ":ot atad tcelloc eW"
+        list: |
+          etarucca dna tcerroc era ekam ew snoisiced eht taht erusne ot stidua tuo yrrac
+          erutidnepxe cilbup yfitsuj
+          duarf ro emirc tceted ro tneverp
+          ecivres eht evorpmi dna rotinom su pleh
+          ecivres eht tuoba scitsitats rehtag
+          sresu sti fo sdeen eht steem ecivres eht erus ekam
+          dia lagel rof yfilauq uoy rehtehw tuo krow
+        legal_basis_html: .>a/<2102 tcA sredneffO fo tnemhsinuP dna gnicnetneS ,diA lageL>"detcane/stnetnoc/01/2102/agpku/ku.vog.noitalsigel.www//:ptth"=ferh a< eht ni deniatnoc srewop eht fo tluser eht si atad lanosrep ruoy gnissecorp rof sisab lagel ehT
+      what_we_do_with_your_data:
+        header: atad ruoy htiw od ew tahW
+        what: ".noitacilppa dia lagel ruoy etelpmoc nac yeht os roticilos ruoy htiw atad lanosrep ruoy erahs ll’eW"
+        we_may:
+          list_heading: ":htiw atad ruoy erahs osla yam eW"
+          list: |
+            redivorp gnitsoh ruo elpmaxe rof ,sreilppus ygolonhcet ruo
+            seicnega noitcelloc tbed dna ecnerefer tiderc sa hcus snoitasinagro cilbup-non
+            seidob cilbup dna seicnega ,stnemtraped tnemnrevog rehto
+        we_will_not:
+          list_heading: ":ton lliw eW"
+          list: |
+            sesoprup gnitekram rof seitrap driht htiw atad ruoy erahs
+            seitrap driht ot atad ruoy tner ro lles
+        we_will: ".emirc rehto ro duarf tneverp ot ro ,redro truoc yb ,elpmaxe rof – ot su seriuqer wal eht fi atad ruoy erahs lliw eW"
+      where_your_data_is_processed_and_stored:
+        header: derots dna dessecorp si atad ruoy erehW
+        info_1: ".derots s’ti nehw dna dessecorp s’ti elihw htob ,segats lla ta elbissop sa efas sa si atad ruoy taht erus ekam ot smetsys ruo nur dna dliub ,ngised eW"
+        info_2_html: .uoy yfitnedi yllanosrep ot desu eb tonnac siht tub ,>rbba/<AEE>'aerA cimonocE naeporuE'=eltit rbba< eht edistuo derrefsnart eb yam atad scitylanA elgooG .>rbba/<)AEE(>'aerA cimonocE naeporuE'=eltit rbba< >a/<aerA cimonocE naeporuE>"aee-ue/ku.vog.www//:sptth"=ferh a< eht ni derots si atad lanosrep llA
+      security:
+        header: eruces ti peek dna atad ruoy tcetorp ew woH
+        info_1: ".noitpyrcne fo slevel gniyrav gnisu atad ruoy tcetorp ew ,elpmaxe rof – atad ruoy fo erusolcsid ro ssecca desirohtuanu tneverp ot sessecorp dna smetsys pu tes evah eW .eruces atad ruoy peek ot nac ew taht lla gniod ot dettimmoc era eW"
+        info_2: ".eruces flaheb ruo no ssecorp yeht atad lanosrep lla peek htiw laed ew taht seitrap driht yna taht erus ekam osla eW"
+      data_retention_period:
+        header: atad ruoy peek ew gnol woH
+        list_heading: ":sa gnol sa rof atad lanosrep ruoy niater ylno lliw eW"
+        list: |
+          ot su seriuqer wal eht
+          tnemucod siht ni tuo tes sesoprup eht rof dedeen si ti
+        info_html: .reciffO noitcetorP ataD ruo morf ypoc a tseuqer ro ,>a/<atad gniniater no ycilop ruo>"fdp.9102-tsugua-sdrr-aal/035428/elif/atad_tnemhcatta/sdaolpu/metsys/sdaolpu/tnemnrevog/ku.vog.ecivres.gnihsilbup.stessa//:sptth"=ferh a< weiV
+      rights:
+        header: sthgir ruoY
+        list_heading: ":tseuqer ot thgir eht evah uoY"
+        list: |
+          atad lanosrep ruoy eteled ro esu ,tcelloc ot ffats tcurtsni ew woh no noitamrofni
+          snoitasinagro rehto htiw evah ew stnemeerga gnirahs-atad yna fo ypoc a
+          ti rof noitacifitsuj a regnol on si ereht fi desare si atad lanosrep ruoy taht
+          detcerroc si atad lanosrep ruoy ni etaruccani gnihtyna taht
+          )'tseuqer ssecca tcejbus' a( atad lanosrep taht fo ypoc a
+          dessecorp si atad lanosrep ruoy woh tuoba noitamrofni
+        info_html: ".reciffO noitcetorP ataD >rbba/<)JOM(>'ecitsuJ fo yrtsiniM'=eltit rbba< ecitsuJ fo yrtsiniM eht tcatnoc ,stseuqer eseht fo yna evah uoy fI"
+        data_protection_office_contact_details:
+          title: reciffO noitcetorP ataD ehT
+          email_address_html: '>a/<ku.vog.ecitsuj@ecnailpmoc.atad>"ku.gro.oci@krowesac:otliam"=ferh a<'
+          address:
+            line_1: ecitsuJ fo yrtsiniM
+            line_2: ecnarF ytteP 201
+            line_3: nodnoL
+            post_code: JA9 H1WS
+      contact_or_complaint:
+        header: tnialpmoc a ekam ro su tcatnoC
+        data_protection_office:
+          list_heading_html: ":uoy fi reciffO noitcetorP ataD >rbba/<JOM>'ecitsuJ fo yrtsiniM'=eltit rbba< eht tcatnoC"
+          list: |
+            ro desusim neeb sah atad lanosrep ruoy taht kniht
+            eciton ycavirp siht ni gnihtyna tuoba noitseuq a evah
+          contact_details:
+            email_address_html: '>a/<ku.gro.oci@krowesac>"ku.gro.oci@krowesac:otliam"=ferh a<'
+            telephone: 3111 321 3030 :enohpeleT
+            text_phone: '068545 52610 :enohptxeT'
+            call_hours: mp03:4 ot ma9 ,yadirF ot yadnoM
+            call_costs_html: '>a/<segrahc llac tuoba tuo dniF>"segrahc-llac/ku.vog.www//:sptth"=ferh a<'
+        commissioner_office:
+          list_heading_html: ":)>rbba/<OCI>'eciffO s'renoissimmoC noitamrofnI'=eltit rbba<( eciffO s'renoissimmoC noitamrofnI eht tcatnoC"
+          list: |
+            noitcetorp atad tuoba ecivda tnednepedni rof
+            tnialpmoc a ekam ot
+          address:
+            title: eciffO s'renoissimmoC noitamrofnI
+            line_1: esuoH effilcyW
+            line_2: enaL retaW
+            line_3: wolsmliW
+            line_4: erihsehC
+            post_code: FA5 9KS

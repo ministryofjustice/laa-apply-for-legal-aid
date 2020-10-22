@@ -1,0 +1,39 @@
+---
+cy:
+  shared:
+    applicant_declaration:
+      confirm_following: gniwollof eht mrifnoC
+      submission_list_summary: taht eerga uoY
+      submission_list: |
+        yletaidemmi noitautis laicnanif ruoy ot segnahc yna troper ll'uoy
+        tcerroc dna etelpmoc si nevig ev'uoy noitamrofni eht
+        )'egrahc yrotutats' eht sa nwonk( esac ruoy fo dne eht ta yenom ro ytreporp niag ro peek uoy fi stsoc lagel eht yaper ot evah yam uoy
+        dia lagel ruoy sdrawot yap ot evah yam uoy
+        seicnega ecnerefer tiderc dna knab ruoy htiw sliated ruoy kcehc nac ew
+        smotsuC dna euneveR MH dna snoisneP dna kroW rof tnemtrapeD eht ekil stnemtraped tnemnrevog rehto htiw noitamrofni ruoy erahs nac ew
+        uoy tneserper ot }mrif{% detcurtsni ev'uoy
+      warning_list_summary: yam uoy ,duarf tifeneb dettimmoc evah ot dnuof era ro ,segnahc troper ton od ,noitamrofni etelpmocni ro gnorw evig uoy fI
+      warning_list: |
+        stsoc eht kcab yap ot evah dna deppots dia lagel ruoy evah
+        ytlanep laicnanif a yap ot deen
+        detucesorp eb
+    forms:
+      identify_types_of_outgoings_form:
+        none_selected: eseht fo enoN
+        expanded_explanation:
+          heading: "?siht deksa gnieb I ma yhW"
+          list: |
+            .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
+            .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
+      types_of_income_form:
+        financial_help_examples: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe roF"
+        benefits_examples: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
+        pension_examples: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
+        none_selected: eseht fo enoN
+        expanded_explanation:
+          heading: "?siht deksa gnieb I ma yhW"
+          list: |
+            .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
+            .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
+    page-title:
+      suffix: dia lagel rof ylppA

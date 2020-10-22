@@ -1,0 +1,20 @@
+---
+cy:
+  true_layer_errors:
+    headings:
+      provider_error: won thgir knab ruoy ot tcennoc tonnac eW
+      account_permanently_locked: tnuocca ruoy ssecca tonnac eW
+      account_temporarily_locked: won thgir tnuocca ruoy ssecca tonnac eW
+      internal_server_error: ecivres eht htiw melborp a si ereht ,yrroS
+      user_input_required: knab ruoy htiw ytitnedi ruoy yfirev ot deen uoY
+      wrong_credentials: drowssap dna emanresu tcerroc eht retne ton did uoY
+      unknown: derrucco sah rorre nwonknu nA
+    detail:
+      provider_error: ''
+      account_permanently_locked: ".tnuocca ruoy htiw melborp a s’ereht fi ees ot knab ruoy tcatnoC"
+      account_temporarily_locked: ''
+      internal_server_error: ''
+      user_input_required: ''
+      wrong_credentials: ''
+      unknown: ".retal niaga yrt esaelP  .ti no gnikrow era dna ,detrela neeb evah eW  .derrucco sah rorre nwonknu nA"
+    close_tab: ".egap ro bat siht esolc nac uoY"
