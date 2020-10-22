@@ -1,4 +1,10 @@
 //// GOV.UK Frontend (Design System)
+$govuk-images-path: "/assets/";
+$govuk-fonts-path: "/assets/";
+$govuk-font-url-function: 'font-url';
+$govuk-image-url-function: 'image-url';
+
+$govuk-global-styles: true;
 
 //// Compatibility mode can be turned off when migration is complete
 //// https://frontend.design-system.service.gov.uk/compatibility-mode/#turn-off-39-compatibility-mode-39
