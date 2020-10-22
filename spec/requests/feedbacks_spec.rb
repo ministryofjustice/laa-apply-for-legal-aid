@@ -7,12 +7,25 @@ RSpec.describe 'FeedbacksController', type: :request do
     let(:feedback) { Feedback.order(created_at: :asc).last }
     let(:feedback_params) { params[:feedback] }
     let(:provider) { create :provider }
-    let(:session_vars) { {} }
-    let(:address_lookup_page) { 'http://localhost:3000/providers/applications/fa580023-5b07-493d-bb64-49b6d97c2a97/address_lookup' }
+    let(:session_vars) do
+      {
+        'page_history_id' => page_history_id
+      }
+    end
+    let(:address_lookup_page) { "http://localhost:3000/providers/applications/#{application.id}/address_lookup" }
     let(:additional_accounts_page) { 'http://localhost:3000/citizens/additional_accounts' }
     let(:originating_page) { 'page_outside_apply_service' }
+    let(:provider) { create :provider }
+    let(:application) { create :application, provider: provider }
+    let(:page_history_id) { SecureRandom.uuid }
+    let(:page_history) { [address_lookup_page, '/feedback'] }
 
-    before { set_session(session_vars) }
+    before do
+      page_history_stub = double(PageHistoryService, read: page_history.to_json)
+      allow(PageHistoryService).to receive(:new).with(page_history_id: page_history_id).and_return(page_history_stub)
+
+      set_session(session_vars)
+    end
 
     subject { post feedback_index_path, params: params, headers: { 'HTTP_REFERER' => originating_page } }
 
@@ -32,26 +45,55 @@ RSpec.describe 'FeedbacksController', type: :request do
       end
       context 'as a logged in provider' do
         let(:originating_page) { address_lookup_page }
-        let(:provider_warden_data) { [[provider.id], nil] }
-        let(:session_vars) do
-          {
-            'warden.user.provider.key' => provider_warden_data
-          }
-        end
+
+        before { sign_in provider }
+
         it 'adds provider-specific data to feedback record' do
           subject
-          expect(feedback.source).to eq 'provider'
+          expect(feedback.source).to eq 'Provider'
           expect(feedback.email).to eq provider.email
-          expect(feedback.originating_page).to eq address_lookup_page
+          expect(feedback.originating_page).to eq URI(address_lookup_page).path.split('/').last
+        end
+
+        context 'gives feedback during application' do
+          let(:page_history) do
+            [originating_page, '/feedback/new']
+          end
+
+          it 'adds provider-specific data to feedback record' do
+            subject
+            expect(feedback.source).to eq 'Provider'
+            expect(feedback.email).to eq provider.email
+            expect(feedback.originating_page).to eq URI(address_lookup_page).path.split('/').last
+          end
+        end
+
+        context 'gives feedback outside of an application' do
+          let(:page_history) do
+            ['/feedback/new']
+          end
+
+          it 'does not provider application id to feedback mailer' do
+            mailer = double(deliver_later!: true)
+            expect(FeedbackMailer).to receive(:notify).with(instance_of(Feedback), nil).and_return(mailer)
+            subject
+          end
+
+          it 'adds provider-specific data to feedback record' do
+            subject
+            expect(feedback.source).to eq 'Provider'
+            expect(feedback.email).to eq provider.email
+            expect(feedback.originating_page).to eq URI(address_lookup_page).path.split('/').last
+          end
         end
       end
 
       context 'as a provider after logging out' do
         let(:originating_page) { address_lookup_page }
-        let(:params) { { feedback: attributes_for(:feedback), signed_out_provider_id: provider.id } }
+        let(:params) { { feedback: attributes_for(:feedback), signed_out: true } }
         it 'adds signed-out provider specific attributes' do
           subject
-          expect(feedback.source).to eq 'provider'
+          expect(feedback.source).to eq 'Provider'
           expect(feedback.email).to eq provider.email
           expect(feedback.originating_page).to eq '/providers/sign_out'
         end
@@ -59,12 +101,16 @@ RSpec.describe 'FeedbacksController', type: :request do
 
       context 'as an applicant' do
         let(:originating_page) { additional_accounts_page }
-
+        let(:session_vars) do
+          {
+            'current_application_id' => application.id
+          }
+        end
         it 'adds applicant specific data' do
           subject
-          expect(feedback.source).to eq 'citizen'
-          expect(feedback.email).to be_nil
-          expect(feedback.originating_page).to eq additional_accounts_page
+          expect(feedback.source).to eq 'Applicant'
+          expect(feedback.email).to eq provider.email
+          expect(feedback.originating_page).to eq URI(additional_accounts_page).path.split('/').last
         end
       end
     end
@@ -73,7 +119,28 @@ RSpec.describe 'FeedbacksController', type: :request do
       subject
       expect(feedback.browser).not_to be_empty
       expect(feedback.os).not_to be_empty
-      expect(feedback.source).to eq('unknown')
+      expect(feedback.source).to eq('Unknown')
+    end
+
+    context 'provider feedback' do
+      let(:originating_page) { address_lookup_page }
+      it 'contains provider email' do
+        subject
+        expect(feedback.source).to eq 'Provider'
+        expect(feedback.email).to eq provider.email
+      end
+    end
+
+    context 'provider feedback' do
+      let(:originating_page) { additional_accounts_page }
+      let(:session_vars) { { current_application_id: application.id } }
+      context 'no appliction id in the page history' do
+        it 'contains provider email' do
+          subject
+          expect(feedback.source).to eq 'Applicant'
+          expect(feedback.email).to eq provider.email
+        end
+      end
     end
 
     it 'sends an email' do
@@ -121,17 +188,10 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
     end
 
-    context 'has come here after provider signing out' do
-      let(:session_vars) { { 'signed_out_provider_id' => 'abc-123' } }
-      it 'copies the signed_out_provider_id from the session to a hidden form field' do
-        expect(response.body).to include('<input type="hidden" name="signed_out_provider_id" id="signed_out_provider_id" value="abc-123" />')
-      end
-    end
-
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
       it 'hash a hidden form field with no value' do
-        expect(response.body).to include('<input type="hidden" name="signed_out_provider_id" id="signed_out_provider_id" />')
+        expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" />')
       end
     end
 

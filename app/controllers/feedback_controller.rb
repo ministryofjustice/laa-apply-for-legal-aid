@@ -4,18 +4,15 @@ class FeedbackController < ApplicationController
   def new
     @journey = source
     @feedback = Feedback.new
-    @signed_out_provider_id = session.delete('signed_out_provider_id')
+    @signed_out = session.delete('signed_out')
   end
 
   def create
-    @feedback = Feedback.new(feedback_params)
-    @feedback.originating_page = originating_page
-    @feedback.email = provider_email
-    @display_close_tab_msg = params[:signed_out_provider_id].present?
-
+    initialize_feedback
+    @display_close_tab_msg = params['signed_out'].present?
     # must use bang version `deliver_later!` or failures won't be retried by sidekiq
     if @feedback.save
-      FeedbackMailer.notify(@feedback).deliver_later!
+      FeedbackMailer.notify(@feedback, application_id).deliver_later!
       render :show
     else
       render :new
@@ -28,31 +25,39 @@ class FeedbackController < ApplicationController
 
   private
 
+  def initialize_feedback
+    @feedback = Feedback.new(feedback_params)
+    @feedback.originating_page = originating_page
+    @feedback.email = provider_email
+  end
+
   def provider_email
-    if params[:signed_out_provider_id].present?
-      signed_out_provider_email
-    else
-      signed_in_provider_email
+    # citizen side won't have access to current_provider but can get provider_email via current_application_id
+    provider&.email || current_provider&.email
+  end
+
+  def provider
+    LegalAidApplication.find_by_id(application_id)&.provider
+  end
+
+  def application_id
+    return session['current_application_id'] if source == :citizen
+
+    application_id_from_page_history || nil
+  end
+
+  def application_id_from_page_history
+    page_history_service = PageHistoryService.new(page_history_id: session[:page_history_id])
+    page_history = JSON.parse(page_history_service.read)
+    previous_page = page_history[-2]
+
+    previous_page&.split('/')&.each_with_index do |section, i|
+      return previous_page.split('/')[i + 1] if ['applications'].include?(section)
     end
   end
 
-  def signed_out_provider_email
-    provider_id = params[:signed_out_provider_id]
-    Provider.find(provider_id).email
-  end
-
-  def signed_in_provider_email
-    provider_struct = session['warden.user.provider.key']
-    return nil unless provider_struct
-
-    provider_id = provider_struct.first&.first
-    return nil unless provider_id
-
-    Provider.find(provider_id).email
-  end
-
   def originating_page
-    params[:signed_out_provider_id].present? ? destroy_provider_session_path : session['feedback_return_path']
+    params['signed_out'].present? ? destroy_provider_session_path : URI(session['feedback_return_path']).path.split('/').last
   end
 
   def feedback_params
@@ -62,10 +67,21 @@ class FeedbackController < ApplicationController
   end
 
   def browser_meta_data
-    { source: source,
+    { source: user,
       os: browser.platform.name,
       browser: browser.name,
       browser_version: browser.full_version }
+  end
+
+  def user
+    case source
+    when :citizen
+      'Applicant'
+    when :provider
+      'Provider'
+    else
+      'Unknown'
+    end
   end
 
   def back_path

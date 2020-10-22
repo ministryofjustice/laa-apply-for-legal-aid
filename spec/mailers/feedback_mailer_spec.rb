@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe FeedbackMailer, type: :mailer do
   describe 'notify' do
     let(:feedback) { create :feedback }
-    let(:mail) { described_class.notify(feedback) }
+    let(:application) { create :application }
+    let(:mail) { described_class.notify(feedback, application.id) }
 
     it 'uses GovukNotifyMailerJob' do
       expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)

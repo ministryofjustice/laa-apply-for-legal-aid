@@ -93,6 +93,32 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#pre_dwp_check?' do
+    let(:state) { :initiated }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, state }
+
+    context 'in pre-dwp-check state' do
+      it 'is true' do
+        expect(legal_aid_application.pre_dwp_check?).to eq true
+      end
+    end
+
+    context 'in non passported state' do
+      let(:state) { :checking_non_passported_means }
+
+      it 'is false' do
+        expect(legal_aid_application.pre_dwp_check?).to eq false
+      end
+    end
+    context 'in passported state' do
+      let(:state) { :checking_passported_answers }
+
+      it 'is false' do
+        expect(legal_aid_application.pre_dwp_check?).to eq false
+      end
+    end
+  end
+
   describe 'benefit_check_result_needs_updating?' do
     let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, :at_entering_applicant_details }
     let(:applicant) { legal_aid_application.applicant }
