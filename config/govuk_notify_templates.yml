@@ -9,7 +9,7 @@
 # we default to 'integration' group.
 #
 development:
-  citizen_start_application: 570e1b9d-6238-45fd-b75c-96f2f39db8e9
+  citizen_start_application: e747df7d-4842-4bca-88a6-4ad3ebd89994
   feedback_notification: 9aa7c2d5-f7ee-405c-9ec4-c0fcee149572
   new_link_request: a577582b-3e60-44a4-885c-d4b12bf23958
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
@@ -20,7 +20,7 @@ development:
   new_link_to_client: 5708ec04-c789-4f7e-8a15-ad7dd3f4f336
 
 production:
-  citizen_start_application: 66865f0d-6410-40e2-b862-98724eb6e33a
+  citizen_start_application: 7e5fb1a7-4b78-4a95-917e-c0bcb78a5fcc
   feedback_notification: d8b0be70-c70c-436d-83f1-3db9f272e29d
   new_link_request: 3cc3be57-e072-4095-9caa-c0cd52193405
   submission_confirmation: 5472b10b-bc11-432a-a18d-9f20de5b2854

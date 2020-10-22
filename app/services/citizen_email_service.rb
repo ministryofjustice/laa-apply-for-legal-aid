@@ -20,8 +20,13 @@ class CitizenEmailService
       application.application_ref,
       applicant.email_address,
       application_url,
-      applicant.full_name
+      applicant.full_name,
+      provider.firm.name
     ]
+  end
+
+  def provider
+    application&.provider
   end
 
   def application_url
