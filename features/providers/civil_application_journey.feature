@@ -716,10 +716,8 @@ Feature: Civil application journeys
     Then I choose "Easy"
     Then I choose "Satisfied"
     Then I click "Send"
-    Then show me the page
     Then I should be on a page showing "Thank you for your feedback"
     Then I click link "Back to your application"
-    Then show me the page
     Then I should be on the Applicant page
 
   @javascript @vcr
