@@ -29,3 +29,4 @@ context.keys().forEach(key => context(key))
 
 const GOVUKFrontend = require('govuk-frontend')
 $(function() { GOVUKFrontend.initAll() })
+require.context('govuk-frontend/govuk/assets', true)
