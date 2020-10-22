@@ -150,6 +150,10 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     applicant.bank_transactions.where(happened_at: from..to)
   end
 
+  def pre_dwp_check?
+    BaseStateMachine.aasm.states.map(&:name).include? state.to_sym
+  end
+
   def income_types?
     transaction_types.credits.any?
   end
