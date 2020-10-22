@@ -1,6 +1,7 @@
 module Reports
   module MIS
     class NonPassportedApplicationCsvLine
+      include Sanitisable
       attr_reader :laa
 
       delegate :provider, to: :laa
@@ -30,6 +31,7 @@ module Reports
         @line << laa.provider.username
         @line << provider.email
         @line << laa.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        sanitise
       end
     end
   end

@@ -41,6 +41,13 @@ module Reports
             expect(fields[4]).to match DATE_TIME_REGEX
           end
         end
+
+        context 'data begins with a vulnerable character' do
+          before { provider.email = '=malicious_code' }
+          it 'returns the escaped text' do
+            expect(subject[3]).to eq "'=malicious_code"
+          end
+        end
       end
     end
   end
