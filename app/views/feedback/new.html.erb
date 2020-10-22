@@ -43,7 +43,8 @@
             class: 'govuk-!-width-full'
         ) %>
 
-    <%= hidden_field_tag 'signed_out_provider_id', @signed_out_provider_id %>
+    <%= hidden_field_tag 'signed_out', @signed_out %>
+    <%= hidden_field_tag 'application_id', @application_id %>
 
     <%= form.submit t('generic.send'), class: 'govuk-button' %>
 

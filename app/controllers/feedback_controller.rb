@@ -5,7 +5,6 @@ class FeedbackController < ApplicationController
     @journey = source
     @feedback = Feedback.new
     @signed_out = session.delete('signed_out')
-    @application_id = application_id
   end
 
   def create
@@ -42,7 +41,6 @@ class FeedbackController < ApplicationController
   end
 
   def application_id
-    return params['application_id'] if params['application_id']
     return session['current_application_id'] if source == :citizen
 
     application_id_from_page_history || nil
