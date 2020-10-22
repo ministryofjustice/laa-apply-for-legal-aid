@@ -1,0 +1,21 @@
+---
+cy:
+  accessibility:
+    problem_text: melborp a si erehT
+  activemodel:
+    errors:
+      models:
+        irregular_income:
+          attributes:
+            amount:
+              blank: raey cimedaca siht teg ll’uoy ecnanif tneduts fo tnuoma latoteht retnE
+              too_many_decimals: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol tnedutS
+              not_a_number: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol tnedutS
+        legal_aid_application:
+          attributes:
+            open_banking_consents:
+              citizens:
+                blank_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni
+                  tnuocca knab ruoy erahs ot eerga uoy fi sey tceleS"
+            student_finance:
+              blank: ecnanif tneduts teg uoy fi sey tceleS

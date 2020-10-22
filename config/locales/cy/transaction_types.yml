@@ -1,0 +1,17 @@
+---
+cy:
+  transaction_types:
+    names:
+      citizens:
+        benefits: stifeneB
+        child_care: stsoc eracdlihC
+        excluded_benefits: stifeneb dedragersiD
+        friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
+        legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
+        maintenance_in: stnemyap ecnanetniaM
+        maintenance_out: rentrap-xe na ro nerdlihc rof stnemyap ecnanetniaM
+        pension: noisneP
+        property_or_lodger: regdol ro ytreporp a morf emocnI
+        rent_or_mortgage: stnemyap egagtrom ro tneR
+        salary: segaw ro yralaS
+        student_loan: tnarg ro naol tnedutS
