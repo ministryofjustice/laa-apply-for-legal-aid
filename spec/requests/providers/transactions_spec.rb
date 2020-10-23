@@ -55,12 +55,6 @@ RSpec.describe Providers::TransactionsController, type: :request do
         expect(unescaped_response_body).to include(expected_amount)
       end
 
-      it 'shows selected transactions' do
-        subject
-        checkbox = parsed_response_body.at_css("[value='#{bank_transaction_selected.id}']")
-        expect(checkbox[:checked]).to eq('checked')
-      end
-
       it 'does not show transactions that do not match the operation on the transaction type' do
         subject
         expect(unescaped_response_body).not_to include(bank_transaction_not_matching.description)
@@ -111,10 +105,6 @@ RSpec.describe Providers::TransactionsController, type: :request do
   end
 
   shared_examples_for 'PATCH #providers/transactions' do
-    it 'unselect the previously selected' do
-      expect { subject }.to change { bank_transaction_A.reload.transaction_type }.to(nil)
-    end
-
     it 'saves the selected transactions' do
       expect { subject }.to change { bank_transaction_B.reload.transaction_type }.from(nil).to(transaction_type)
     end
@@ -164,6 +154,25 @@ RSpec.describe Providers::TransactionsController, type: :request do
             category: 'Benefits',
             selected_by: 'Provider'
           }
+        end
+      end
+
+      context 'when there are identified benefits' do
+        let!(:benefits_transaction_type) { create :transaction_type, :benefits }
+        let!(:selected_transactions) { [bank_transaction_B, bank_transaction_other_applicant, benefit_bank_transaction, child_benefit_bank_transaction] }
+        let!(:benefit_bank_transaction) { create :bank_transaction, :benefits, bank_account: bank_account, meta_data: nil }
+        let!(:child_benefit_bank_transaction) do
+          create :bank_transaction, :benefits, bank_account: bank_account, meta_data: { code: 'CHB', label: 'child_benefit', name: 'Child Benefit' }
+        end
+        let(:params) do
+          {
+            transaction_type: benefits_transaction_type.name,
+            transaction_ids: selected_transactions.pluck(:id)
+          }
+        end
+
+        it 'does not change the meta data for the pre-analysed data' do
+          expect { subject }.not_to change { child_benefit_bank_transaction.reload.meta_data }
         end
       end
 

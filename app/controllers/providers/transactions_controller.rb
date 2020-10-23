@@ -9,22 +9,17 @@ module Providers
     end
 
     def update
-      reset_selection
       set_selection
       continue_or_draft
     end
 
     private
 
-    def reset_selection
-      bank_transactions.where(transaction_type_id: transaction_type.id).update_all(transaction_type_id: nil)
-    end
-
     def set_selection
       new_values = { transaction_type_id: transaction_type.id }
       new_values[:meta_data] = manually_chosen_metadata(transaction_type)
       bank_transactions
-        .where(id: selected_transaction_ids)
+        .where(id: selected_transaction_ids, meta_data: nil)
         .update_all(new_values)
     end
 

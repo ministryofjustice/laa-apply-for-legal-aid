@@ -71,7 +71,7 @@
         <%= form.collection_check_boxes :transaction_ids, @bank_transactions, :id, :description do |builder| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell tick-box-cell">
-              <% if builder.object.transaction_type_id == nil || builder.object.transaction_type_id == @transaction_type.id %>
+              <% if builder.object.transaction_type_id == nil %>
                 <div class="govuk-checkboxes__item">
                   <% checked = builder.object.transaction_type_id == @transaction_type.id %>
                   <%= builder.check_box(class: 'govuk-checkboxes__input', checked: checked, 'aria-labelledby' => 'Date-' + builder.object.id + ' Description-' + builder.object.id + ' Amount-' + builder.object.id) %>
