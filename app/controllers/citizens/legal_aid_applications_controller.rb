@@ -1,6 +1,6 @@
 module Citizens
   class LegalAidApplicationsController < CitizenBaseController
-    before_action :authenticate_applicant!, only: :index
+    before_action :authenticate_with_devise, only: :index
 
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index where the first page is displayed.
@@ -8,6 +8,7 @@ module Citizens
       session[:journey_type] = :citizens
       return expired if application_error == :expired
 
+      legal_aid_application.applicant.remember_me!
       legal_aid_application.applicant_enter_means!
       start_applicant_flow
     end
@@ -15,6 +16,10 @@ module Citizens
     def index; end
 
     private
+
+    def authenticate_with_devise!
+      authenticate_applicant!
+    end
 
     def expired
       redirect_to citizens_resend_link_request_path(params[:id])

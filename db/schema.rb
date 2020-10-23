@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_133306) do
     t.string "true_layer_secure_data_id"
     t.datetime "remember_created_at"
     t.boolean "employed"
+    t.string "remember_token"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
