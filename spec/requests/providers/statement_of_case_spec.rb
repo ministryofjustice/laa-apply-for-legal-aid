@@ -122,6 +122,18 @@ RSpec.describe 'provider statement of case requests', type: :request do
           end
         end
       end
+
+      context 'virus scanner is down' do
+        before do
+          allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false)
+        end
+
+        it 'returns error message' do
+          subject
+          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.system_down')
+          expect(response.body).to include(error)
+        end
+      end
     end
 
     context 'Continue button pressed' do
