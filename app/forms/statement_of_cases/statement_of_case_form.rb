@@ -61,6 +61,7 @@ module StatementOfCases
       return if original_file.nil?
 
       @original_file_name = original_file.original_filename
+      scanner_down(original_file)
       malware_scan(original_file)
       disallowed_content_type(original_file)
       file_empty(original_file)
@@ -89,6 +90,12 @@ module StatementOfCases
       return if original_file.content_type.in?(ALLOWED_CONTENT_TYPES)
 
       errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
+    end
+
+    def scanner_down(original_file)
+      return if malware_scan_result(original_file).scanner_working
+
+      errors.add(:original_file, original_file_error_for(:system_down, file_name: @original_file_name))
     end
 
     def malware_scan(original_file)
