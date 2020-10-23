@@ -469,6 +469,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_133306) do
     t.json "file_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "scanner_working"
     t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
   end
 
