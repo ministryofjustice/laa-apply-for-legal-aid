@@ -16,6 +16,7 @@ module OmniAuth
     # OAuth 2.0.
     class MojOAuth2 # rubocop:disable Metrics/ClassLength
       include OmniAuth::Strategy
+      include Browser::ActionController
 
       def self.inherited(subclass)
         OmniAuth::Strategy.included(subclass)
@@ -60,8 +61,7 @@ module OmniAuth
 
       def request_phase
         auth_params = authorize_params
-        Debug.record_request(session, auth_params, callback_url)
-
+        Debug.record_request(session, auth_params, callback_url, browser_details)
         redirect client.auth_code.authorize_url({ redirect_uri: callback_url }.merge(auth_params))
       end
 
@@ -88,14 +88,14 @@ module OmniAuth
       end
 
       def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
-        Debug.record_callback(session, request.params)
+        Debug.record_callback(session, request.params, browser_details)
 
         error = request.params['error_reason'] || request.params['error']
         if error
-          Debug.record_error(session, request.params, '')
+          Debug.record_error(session, request.params, '', browser_details)
           fail!(error, CallbackError.new(request.params['error'], request.params['error_description'] || request.params['error_reason'], request.params['error_uri']))
         elsif !options.provider_ignores_state && (request.params['state'].to_s.empty? || request.params['state'] != session.delete('omniauth.state'))
-          Debug.record_error(session, request.params, 'CSRF detected')
+          Debug.record_error(session, request.params, 'CSRF detected', browser_details)
           fail!(:csrf_detected, CallbackError.new(:csrf_detected, 'CSRF detected'))
         else
           self.access_token = build_access_token
@@ -152,6 +152,16 @@ module OmniAuth
                              end
         end
         hash
+      end
+
+      private
+
+      def browser_details
+        browser = Browser.new(
+          request.env['HTTP_USER_AGENT'],
+          accept_language: request.env['HTTP_ACCEPT_LANGUAGE']
+        )
+        "#{browser.platform.name}::#{browser.name}::#{browser.full_version}"
       end
 
       # An error that is indicated in the OAuth 2.0 callback.
