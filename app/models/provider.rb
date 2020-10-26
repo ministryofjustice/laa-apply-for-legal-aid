@@ -44,4 +44,26 @@ class Provider < ApplicationRecord
   def non_passported_permissions?
     user_permissions.map(&:role).include?('application.non_passported.*')
   end
+
+  def ccms_apply_role?
+    return false if roles.nil?
+
+    roles.split(',').include?('CCMS_Apply')
+  end
+
+  def invalid_login?
+    invalid_login_details.present?
+  end
+
+  def newly_created_by_devise?
+    firm_id.nil?
+  end
+
+  def provider_details_api_error?
+    invalid_login_details == 'provider_details_api_error'
+  end
+
+  def clear_invalid_login!
+    update!(invalid_login_details: nil)
+  end
 end

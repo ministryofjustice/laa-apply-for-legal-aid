@@ -50,5 +50,20 @@ FactoryBot.define do
     trait :with_no_permissions do
       permissions { [] }
     end
+
+    trait :created_by_devise do
+      firm { nil }
+      name { nil }
+      permissions { [] }
+      sign_in_count { 0 }
+    end
+
+    trait :without_ccms_apply_role do
+      roles { 'EMI,PUI_XXCCMS_BILL_PREPARATION,CWA_eFormsFirmAdministrator,PUI_XXCCMS_CROSS_OFFICE_ACCESS,EFORMS,CWA_XXLSC_EM_ACT_MGR_EXT' }
+    end
+
+    trait :with_ccms_apply_role do
+      roles { 'EMI,PUI_XXCCMS_BILL_PREPARATION,CWA_eFormsFirmAdministrator,CCMS_Apply,PUI_XXCCMS_CROSS_OFFICE_ACCESS,EFORMS,CWA_XXLSC_EM_ACT_MGR_EXT' }
+    end
   end
 end

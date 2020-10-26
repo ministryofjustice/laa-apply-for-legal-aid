@@ -120,5 +120,7 @@ module LaaApplyForLegalAid
     Rails.application.routes.default_url_options[:locale] = I18n.locale
     config.i18n.default_locale = :en
     config.i18n.available_locales = %i[en cy] # overriden in test to allow en-GB for Faker
+
+    config.x.team_email = 'apply-for-legal-aid@digital.justice.gov.uk'
   end
 end
