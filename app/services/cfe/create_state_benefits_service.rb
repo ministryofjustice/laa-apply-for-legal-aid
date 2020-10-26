@@ -36,6 +36,7 @@ module CFE
           amount: transaction.amount.to_f,
           client_id: transaction.id
         }
+        result.first[:flags] = transaction.flags if transaction.flags.present?
       end
       result
     end

@@ -50,6 +50,14 @@ module CFE
           expect { subject.call }.to raise_error(CFE::SubmissionError, 'Benefit transactions un-coded')
         end
       end
+
+      context 'when a bank transaction is flagged for having multiple benefits' do
+        before { create :bank_transaction, :unknown_benefits, :flagged_multi_benefits, bank_account: bank_account, amount: '321.99', happened_at: DAY_SEQUENCE[0].days.ago }
+
+        it { expect(service.request_body).to include(basic_payload_hash.to_json) }
+        it { expect(service.request_body).to include(flagged_payload_hash.to_json) }
+        it { expect(application.bank_transactions.count).to eq 6 }
+      end
     end
 
     describe '.call' do
@@ -119,6 +127,20 @@ module CFE
             "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
             "amount": 123.45,
             "client_id": '22222222-2222-2222-2222-222222222222'
+          }
+        ]
+      }
+    end
+
+    def flagged_payload_hash
+      {
+        "name": 'unknown',
+        "payments": [
+          {
+            "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
+            "amount": 321.99,
+            "client_id": '22222222-2222-2222-2222-222222222222',
+            "flags": { multi_benefit: true }
           }
         ]
       }
