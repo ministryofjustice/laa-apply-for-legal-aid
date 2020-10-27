@@ -21,18 +21,15 @@ RSpec.describe ErrorsController, type: :request do
 
     describe 'object not found' do
       context 'default locale' do
-        before do
-          get feedback_path(SecureRandom.uuid)
-        end
+        before { get feedback_path(SecureRandom.uuid) }
         it 'redirect to page not found' do
           expect(response).to redirect_to('/error/page_not_found?locale=en')
         end
       end
 
       context 'Welsh locale' do
-        before do
-          get feedback_path(SecureRandom.uuid, locale: :cy)
-        end
+        before { get feedback_path(SecureRandom.uuid, locale: :cy) }
+        after { I18n.locale = I18n.default_locale }
         it 'redirect to page not found' do
           expect(response).to redirect_to('/error/page_not_found?locale=cy')
         end
