@@ -17,7 +17,7 @@ executors:
           - TZ: "Europe/London"
   cloud-platform-executor:
     docker:
-      - image: cimg/base:2020.01
+      - image: ministryofjustice/cloud-platform-tools:1.23
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   notification-executor:
