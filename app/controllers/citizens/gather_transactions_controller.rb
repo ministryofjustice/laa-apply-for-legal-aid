@@ -4,6 +4,7 @@ module Citizens
     skip_back_history_for :index
 
     def index
+      I18n.locale = session[:locale]
       return if worker_working?
 
       if worker_errors.any?

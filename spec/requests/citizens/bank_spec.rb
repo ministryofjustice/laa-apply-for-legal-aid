@@ -47,6 +47,22 @@ RSpec.describe Citizens::BanksController, type: :request do
       expect(session[:provider_id]).to eq(provider_id)
     end
 
+    it 'sets the default locale in the session' do
+      expect(session[:locale]).to eq(:en)
+    end
+
+    context 'Welsh locale' do
+      before { post citizens_banks_path, params: { provider_id: provider_id } }
+      around do |example|
+        I18n.locale = :cy
+        example.run
+        I18n.locale = I18n.default_locale
+      end
+      it 'sets locale in the session' do
+        expect(session[:locale]).to eq(:cy)
+      end
+    end
+
     context 'no bank was selected' do
       let(:provider_id) { nil }
 
