@@ -23,7 +23,8 @@ module Citizens
     end
 
     def completed
-      redirect_to error_path(:assessment_already_completed)
+      update_locale
+      redirect_to error_path(:assessment_already_completed, default_url_options)
     end
 
     def switch_locale(&action)

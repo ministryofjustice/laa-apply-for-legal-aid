@@ -3,20 +3,16 @@ require 'rails_helper'
 RSpec.describe ErrorsController, type: :request do
   describe 'actions that result in error pages being shown' do
     describe 'unknown page' do
-      before { get '/unknown/path' }
-
       context 'default locale' do
+        before { get '/unknown/path' }
         it 'redirect to page not found' do
           expect(response).to redirect_to('/error/page_not_found?locale=en')
         end
       end
 
       context 'Welsh locale' do
-        around do |example|
-          I18n.locale = :cy
-          example.run
-          I18n.locale = I18n.default_locale
-        end
+        before { get '/unknown/path', params: { locale: 'cy' } }
+        after { I18n.locale = I18n.default_locale }
         it 'redirect to page not found' do
           expect(response).to redirect_to('/error/page_not_found?locale=cy')
         end
@@ -24,21 +20,18 @@ RSpec.describe ErrorsController, type: :request do
     end
 
     describe 'object not found' do
-      before do
-        get feedback_path(SecureRandom.uuid)
-      end
-
       context 'default locale' do
+        before do
+          get feedback_path(SecureRandom.uuid)
+        end
         it 'redirect to page not found' do
           expect(response).to redirect_to('/error/page_not_found?locale=en')
         end
       end
 
       context 'Welsh locale' do
-        around do |example|
-          I18n.locale = :cy
-          example.run
-          I18n.locale = I18n.default_locale
+        before do
+          get feedback_path(SecureRandom.uuid, locale: :cy)
         end
         it 'redirect to page not found' do
           expect(response).to redirect_to('/error/page_not_found?locale=cy')
