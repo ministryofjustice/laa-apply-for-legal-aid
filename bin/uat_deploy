@@ -9,7 +9,7 @@ deploy() {
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
   helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
-                --install --force --wait \
+                --install  --force --wait \
                 --namespace=${KUBE_ENV_UAT_NAMESPACE} \
                 --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
                 --set deploy.host="$RELEASE_HOST" \
