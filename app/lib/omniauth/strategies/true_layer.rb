@@ -22,6 +22,7 @@ module OmniAuth
 
         extra_params[:provider_id] = session[:provider_id] if session[:provider_id].present?
         extra_params[:consent_id] = consent_id if consent_id
+        extra_params[:tracking_id] = session[:current_application_id]
 
         super.merge(extra_params)
       end
