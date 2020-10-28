@@ -23,8 +23,15 @@ module TrueLayer
         currency: 'GBP',
         amount: amount.to_f,
         timestamp: Time.zone.parse(row[:date]).to_s,
-        transaction_type: transaction_type.to_s
+        transaction_type: transaction_type.to_s,
+        running_balance: running_balance(row)
       }
+    end
+
+    def running_balance(row)
+      return nil if row[:running_balance].nil?
+
+      { amount: parse_amount(row[:running_balance]), currency: 'GBP' }
     end
 
     def parse_amount(amount_string)

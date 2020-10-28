@@ -5,6 +5,8 @@ class BankTransaction < ApplicationRecord
 
   serialize :meta_data
 
+  attr_accessor :previous_txn_id, :next_txn_id
+
   scope :by_type, -> do
     includes(:transaction_type)
       .where.not(transaction_type_id: nil)
