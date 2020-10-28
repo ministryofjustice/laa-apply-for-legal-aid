@@ -40,7 +40,7 @@ en:
         happen_next_heading: What happens next
         happen_next_text: You can continue your application once your client has shared their financial information.
         let_you_know_text: We'll let you know once they've done this.
-        sent_email_text:  "We've sent an email to %{email}."
+        sent_email_text:  "We've sent an email to %{email}"
         sub_title: Your case reference is
     bank_transactions:
       list_selected:
@@ -466,7 +466,7 @@ en:
             income from a property or lodger
             pension payments
         is_this_correct: Is this correct?
-        student_finance: 
+        student_finance:
           heading: Student finance
           info: Your client also told us they'll get %{student_finance} in student finance this academic year.
         error: Select yes if your client does not receive these payments
