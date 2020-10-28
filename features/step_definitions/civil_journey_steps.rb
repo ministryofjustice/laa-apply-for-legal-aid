@@ -450,7 +450,7 @@ end
 
 Given('I click has other dependants remove link for dependant {string}') do |dependant|
   within "#dependant_#{dependant}" do
-    click_button('Remove')
+    click_link('Remove')
   end
 end
 
