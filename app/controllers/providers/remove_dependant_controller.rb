@@ -20,5 +20,5 @@ module Providers
     def dependant
       @legal_aid_application.dependants.find(params[:id])
     end
-  end
+  end./spec/requests/providers/outgoings_summary_spec.rb:140:
 end
