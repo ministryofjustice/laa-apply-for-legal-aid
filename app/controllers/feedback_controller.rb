@@ -105,7 +105,7 @@ class FeedbackController < ApplicationController
   helper_method :back_path, :back_button, :success_message
 
   def update_return_path
-    return if request.referer&.include?(feedback_index_path)
+    return if request.referer&.include?('/feedback/')
 
     session[:feedback_return_path] = request.referer
   end

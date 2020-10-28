@@ -62,7 +62,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       get new_providers_applicant_path
       subject
       follow_redirect!
-      expect(response.body).to include(providers_legal_aid_application_applicant_details_path(legal_aid_application, back: true))
+      expect(response.body).to have_back_link(providers_legal_aid_application_applicant_details_path(legal_aid_application, back: true))
     end
 
     context 'with missing parameters' do

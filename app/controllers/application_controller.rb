@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def page_not_found
     redirect_to error_path(:page_not_found)
   end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
 end

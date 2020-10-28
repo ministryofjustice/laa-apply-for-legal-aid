@@ -8,7 +8,7 @@ RSpec.describe CitizenEmailService do
   let(:provider) { create :provider, firm: firm }
   let(:application) { create(:application, applicant: applicant, provider: provider) }
   let(:secure_id) { SecureRandom.uuid }
-  let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}" }
+  let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}?locale=en" }
 
   subject { described_class.new(application) }
 

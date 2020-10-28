@@ -1,7 +1,7 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :first_name,
-        url: providers_legal_aid_application_applicant_details_path(anchor: :first_name),
+        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :first_name),
         question: t('.first_name'),
         answer: applicant.first_name,
         read_only: read_only,
@@ -10,7 +10,7 @@
 
   <%= check_answer_link(
         name: :last_name,
-        url: providers_legal_aid_application_applicant_details_path(anchor: :last_name),
+        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
         question: t('.last_name'),
         answer: applicant.last_name,
         read_only: read_only,
@@ -19,7 +19,7 @@
 
   <%= check_answer_link(
         name: :date_of_birth,
-        url: providers_legal_aid_application_applicant_details_path(anchor: :date_of_birth),
+        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
         question: t('.dob'),
         answer: applicant.date_of_birth,
         read_only: read_only,
@@ -35,7 +35,7 @@
 
   <%= check_answer_link(
         name: :national_insurance_number,
-        url: providers_legal_aid_application_applicant_details_path(anchor: :national_insurance_number),
+        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :national_insurance_number),
         question: t('.nino'),
         answer: applicant.national_insurance_number,
         read_only: read_only,
@@ -44,7 +44,7 @@
 
   <%= check_answer_link(
         name: :email,
-        url: providers_legal_aid_application_applicant_details_path(anchor: :email),
+        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :email),
         question: t('.email'),
         answer: applicant.email,
         read_only: read_only,

@@ -27,15 +27,28 @@ RSpec.describe Flow::BaseFlowService do
     let(:current_step) { :accounts }
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
-    it 'returns forward url' do
-      expect(subject.forward_path).to eq('/citizens/additional_accounts')
+    context 'default locale' do
+      it 'returns forward url with en locale' do
+        expect(subject.forward_path).to eq('/citizens/additional_accounts?locale=en')
+      end
+    end
+
+    context 'Welsh locale' do
+      around do |example|
+        I18n.locale = :cy
+        example.run
+        I18n.locale = I18n.default_locale
+      end
+      it 'returns forward url with cy locale' do
+        expect(subject.forward_path).to eq('/citizens/additional_accounts?locale=cy')
+      end
     end
 
     context 'with logic' do
       let(:current_step) { :consents }
 
       it 'returns forward url' do
-        expect(subject.forward_path).to eq('/citizens/contact_provider')
+        expect(subject.forward_path).to eq('/citizens/contact_provider?locale=en')
       end
     end
 

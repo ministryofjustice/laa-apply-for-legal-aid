@@ -95,7 +95,7 @@ RSpec.describe 'FeedbacksController', type: :request do
           subject
           expect(feedback.source).to eq 'Provider'
           expect(feedback.email).to eq provider.email
-          expect(feedback.originating_page).to eq '/providers/sign_out'
+          expect(feedback.originating_page).to eq '/providers/sign_out?locale=en'
         end
       end
 

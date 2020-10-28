@@ -45,7 +45,7 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
 
       it 'redirects to page_not_found' do
         subject
-        expect(response).to redirect_to '/error/page_not_found'
+        expect(response).to redirect_to '/error/page_not_found?locale=en'
       end
     end
   end

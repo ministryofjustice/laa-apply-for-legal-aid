@@ -6,7 +6,7 @@ RSpec.describe ProviderEmailService do
   let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe') }
   let(:provider) { create :provider, email: smoke_test_email }
   let(:application) { create(:application, applicant: applicant, provider: provider) }
-  let(:application_url) { "http://www.example.com/providers/applications/#{application.id}/client_completed_means" }
+  let(:application_url) { "http://www.example.com/providers/applications/#{application.id}/client_completed_means?locale=en" }
   subject { described_class.new(application) }
 
   describe '#send_email' do
