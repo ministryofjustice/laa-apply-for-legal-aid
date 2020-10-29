@@ -25,7 +25,7 @@ en:
         info_2: The LAA is committed to making its service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
         compliance:
           status: Compliance status
-          info_prefix: This service is compliant with the
+          info_prefix: This service is fully compliant with the
           link_text: " Web Content Accessibility Guidelines (WCAG) version 2.1"
           info_suffix: " AA standard."
         not_in_scope:
@@ -49,7 +49,4 @@ en:
       testing:
         heading: How we tested this website
         info_1: This website was last tested on 16 October 2020. The test was carried out by the Digital Accessibility Centre (DAC).
-        info_2: 
-          heading: "The DAC tested the service available at: "
-          link: "https://master-applyforlegalaid-uat.apps.live-1.cloud-platform.service.justice.gov.uk/providers/applications"
       preparation_date: This statement was prepared on 26 October 2020.

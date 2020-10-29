@@ -34,7 +34,7 @@ cy:
           sti gnikam ot dettimmoc si AAL ehT"
         compliance:
           status: sutats ecnailpmoC
-          info_prefix: eht htiw tnailpmoc si ecivres sihT
+          info_prefix: eht htiw tnailpmoc ylluf si ecivres sihT
           link_text: '1.2 noisrev )GACW( senilediuG ytilibisseccA tnetnoC beW '
           info_suffix: ".dradnats AA "
         not_in_scope:
@@ -66,7 +66,4 @@ cy:
         heading: etisbew siht detset ew woH
         info_1: ".)CAD( ertneC ytilibisseccA latigiD eht yb tuo deirrac saw tset ehT
           .0202 rebotcO 61 no detset tsal saw etisbew sihT"
-        info_2:
-          heading: " :ta elbaliava ecivres eht detset CAD ehT"
-          link: snoitacilppa/sredivorp/ku.vog.ecitsuj.ecivres.mroftalp-duolc.1-evil.sppa.tau-dialagelrofylppa-retsam//:sptth
       preparation_date: ".0202 rebotcO 62 no deraperp saw tnemetats sihT"
