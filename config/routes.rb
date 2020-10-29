@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'status', to: 'status#ping', format: :json
 
   resource :contact, only: [:show]
+  resources :accessibility_statement, only: [:index]
   resources :privacy_policy, only: [:index]
   resources :feedback, only: %i[new create show]
   resources :errors, only: [:show], path: :error
