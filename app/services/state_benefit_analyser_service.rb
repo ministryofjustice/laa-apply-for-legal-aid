@@ -48,14 +48,26 @@ class StateBenefitAnalyserService
   def identify_state_benefit(txn)
     matches = txn.description.scan(regex_pattern)
     if matches.count > 1
-      txn.update(flags: { multi_benefit: true })
-      return unless matches.count.eql?(1)
+      process_multiple_benefits(txn)
     else
       @benefit_transactions_found = true
       dwp_code = matches.flatten.first
       benefit = @state_benefit_codes[dwp_code]
       process_known_benefit(txn, benefit)
     end
+  end
+
+  def process_multiple_benefits(txn)
+    txn.update!(transaction_type: included_benefit_transaction_type, meta_data: multi_dwp_codes_meta_data, flags: { multi_benefit: true })
+  end
+
+  def multi_dwp_codes_meta_data
+    {
+      code: 'multiple',
+      label: 'multiple dwp codes',
+      name: 'multiple state benefits',
+      selected_by: 'System'
+    }
   end
 
   def process_known_benefit(txn, benefit)

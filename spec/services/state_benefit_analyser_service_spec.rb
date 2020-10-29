@@ -99,7 +99,8 @@ RSpec.describe StateBenefitAnalyserService do
         # OCT-2020: A choice has been made that, for now, we should not try to handle multiple codes in a single row.These
         # should be flagged by CFE and marked for case worker review. They can still be marked as benefits by the provider
         it 'does not update the meta data' do
-          expect(legal_aid_application.reload.bank_transactions.first.meta_data).to be nil
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.meta_data).to eq({ code: 'multiple', label: 'multiple dwp codes', name: 'multiple state benefits', selected_by: 'System' })
         end
 
         it 'adds a caseworker flag for multi_benefit' do
