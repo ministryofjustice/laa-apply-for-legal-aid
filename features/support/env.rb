@@ -113,9 +113,9 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+load Rails.root.join('db/seeds.rb')
 
 Before do |_scenario|
-  load Rails.root.join('db/seeds.rb')
   Populators::TransactionTypePopulator.call
   # Delete previous screenshots from filesystem that were generated during previous feature runs
   FileUtils.rm_rf("#{Rails.root}/tmp/capybara/**.*")
