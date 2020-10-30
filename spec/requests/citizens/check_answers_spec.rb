@@ -60,7 +60,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'displays the name of the firm' do
       subject
-      expect(response.body).to include(html_encode(firm.name))
+      expect(response.body).to include(html_compare(firm.name))
     end
 
     context 'firms with special characters in the name' do
