@@ -12,6 +12,20 @@ require 'webmock/cucumber'
 require 'factory_bot'
 require 'webdrivers'
 
+# HACK: this method was available in cucumber 3.1 but not cucumber 4 and VCR relies on it to
+# generate cassette names.
+module Cucumber
+  module RunningTestCase
+    class TestCase < SimpleDelegator
+      def feature
+        string = File.read(location.file)
+        document = ::Gherkin::Parser.new.parse(string)
+        document[:feature]
+      end
+    end
+  end
+end
+
 allowed_sites = [
   ->(uri) do
     [
