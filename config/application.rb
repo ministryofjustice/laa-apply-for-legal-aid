@@ -41,7 +41,11 @@ module LaaApplyForLegalAid
     config.x.laa_portal.idp_sso_target_url             = ENV['LAA_PORTAL_IDP_SSO_TARGET_URL']
     config.x.laa_portal.idp_cert                       = ENV['LAA_PORTAL_IDP_CERT']
     config.x.laa_portal.idp_cert_fingerprint_algorithm = ENV['LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM']
-    config.x.laa_portal.mock_saml = ENV['LAA_PORTAL_MOCK_SAML']
+
+    #### Temporary fix to enable testing against the staging portal
+    config.x.laa_portal.mock_saml = 'false'
+    # config.x.laa_portal.mock_saml = ENV['LAA_PORTAL_MOCK_SAML']
+
 
     config.x.laa_portal.certificate = ENV['LAA_PORTAL_CERTIFICATE']
     config.x.laa_portal.secret_key = ENV['LAA_PORTAL_SECRET_KEY']
