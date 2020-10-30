@@ -10,6 +10,7 @@ en:
       user_admin: User admin
     application:
       footer:
+        accessibility_statement: Accessibility statement
         contact: Contact
         cookies: Cookies
         copyright: Crown copyright

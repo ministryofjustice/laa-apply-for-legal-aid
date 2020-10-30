@@ -1,0 +1,52 @@
+---
+en:
+  accessibility_statement:
+    index:
+      h1-heading: Accessibility statement
+      using_service: Using this service
+      responsibility: "The Legal Aid Agency (LAA) is responsible for the ‘Apply for legal aid’ service."
+      we_want: 
+        heading: "We want as many people as possible to be able to use this service. For example, that means you should be able to:"
+        list: |
+          change colours, contrast levels and fonts
+          zoom in up to 300% without the text spilling off the screen
+          navigate most of the website using just a keyboard
+          navigate most of the website using speech recognition software
+          listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+      ability_net: 
+        prefix: AbilityNet has advice on making your device easier to use
+        suffix: " if you have a disability."
+      no_access: What to do if you cannot access part of this service
+      contact: If you need information on this service in a different format, contact apply-for-legal-aid@digital.justice.gov.uk
+      accessibility:
+        problems: Reporting accessibility problems
+        contact: We’re always looking to improve the accessibility of this service. If you find any problems that are not listed on this page or think we’re not meeting the requirements of the accessibility regulations, contact apply-for-legal-aid@digital.justice.gov.uk giving details of the issue and any assistive technology you are using.
+        info_1: Technical information about this service’s accessibility
+        info_2: The LAA is committed to making its service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
+        compliance:
+          status: Compliance status
+          info_prefix: This service is fully compliant with the
+          link_text: " Web Content Accessibility Guidelines (WCAG) version 2.1"
+          info_suffix: " AA standard."
+        not_in_scope:
+          heading: Content that’s not within the scope of the accessibility regulations
+          info_1: Page titles do not conform with GOV.UK Design System guidelines.
+          info_2: There are pages which will be difficult for screen reader users to navigate due to the structure of the page.
+        improvements:
+          heading: What we’re doing to improve accessibility
+          info: We will monitor the accessibility of this website on an on-going basis and fix any accessibility issues reported to us.
+      enforcement: Enforcement procedure
+      ehrc:
+        heading: "The Equality and Human Rights Commission (EHRC) is responsible for enforcing the accessibility regulations. If you’re not happy with how we respond to your complaint,"
+        link_text: " contact the Equality Advisory and Support Service (EASS)."
+      burden:
+        heading: Disproportionate burden
+        info: Not applicable
+      third_party:
+        heading: Third-party content
+        info_1: This service engages a third-party open banking provider called TrueLayer. TrueLayer does not support Internet Explorer 11.
+        info_2: This service may direct some users to third-party websites and applications. We do not control these third-party websites and are not responsible for their accessibility compliance.
+      testing:
+        heading: How we tested this website
+        info_1: This website was last tested on 16 October 2020. The test was carried out by the Digital Accessibility Centre (DAC).
+      preparation_date: This statement was prepared on 26 October 2020.
