@@ -126,7 +126,7 @@ GEM
       smart_properties
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    blazer (2.2.7)
+    blazer (2.2.8)
       activerecord (>= 5)
       chartkick (>= 3.2)
       railties (>= 5)
@@ -147,7 +147,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    chartkick (3.4.0)
+    chartkick (3.4.2)
     childprocess (3.0.0)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
@@ -590,7 +590,7 @@ GEM
       activesupport
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.0)
+    zeitwerk (2.4.1)
 
 PLATFORMS
   ruby
