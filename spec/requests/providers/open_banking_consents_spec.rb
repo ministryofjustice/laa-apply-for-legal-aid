@@ -64,8 +64,43 @@ RSpec.describe 'does client use online banking requests', type: :request do
         expect(application.reload.provider_received_citizen_consent).to eq(true)
       end
 
-      it 'redirects to the client instructions page' do
-        expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
+      context 'applicant is not employed after negative benefit check result' do
+        context 'used_delegated_functions is true' do
+          let(:application) do
+            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, used_delegated_functions: true, applicant: applicant
+          end
+
+          let(:applicant) { create :applicant, :not_employed }
+
+          it 'redirects to the substantive application page' do
+            expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(application))
+          end
+        end
+
+        context 'used_delegated_functions is false' do
+          let(:application) do
+            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, used_delegated_functions: false, applicant: applicant
+          end
+
+          let(:applicant) { create :applicant, :not_employed }
+
+          it 'redirects to the client instructions page' do
+            expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
+          end
+        end
+      end
+
+      context 'positive beenfit check result' do
+        it 'redirects to the client instructions page' do
+          expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
+        end
+
+        context 'provider_received_citizen_consent is false' do
+          let(:provider_received_citizen_consent) { 'false' }
+          it 'redirects to the use ccms page' do
+            expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
+          end
+        end
       end
 
       context 'no option is chosen' do

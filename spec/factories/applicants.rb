@@ -14,6 +14,10 @@ FactoryBot.define do
       addresses { build_list :address, 1, :is_lookup_used }
     end
 
+    trait :not_employed do
+      employed { false }
+    end
+
     trait :with_true_layer_tokens do
       after(:build) do |applicant|
         applicant.store_true_layer_token(

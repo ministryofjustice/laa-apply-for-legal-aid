@@ -1,12 +1,15 @@
 require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) do
-    create :legal_aid_application, :with_passported_state_machine, :applicant_details_checked, used_delegated_functions_on: 1.day.ago
+    create :legal_aid_application, :with_passported_state_machine, :applicant_details_checked, used_delegated_functions_on: 1.day.ago, applicant: applicant
   end
+
+  let(:applicant) { create :applicant, :not_employed }
   let(:login_provider) { login_as legal_aid_application.provider }
 
   before do
     login_provider
+    allow(legal_aid_application).to receive(:applicant_employed?).and_return(false)
     subject
   end
 
@@ -49,9 +52,9 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       expect(legal_aid_application.state).to eq('delegated_functions_used')
     end
 
-    it 'redirects to open banking consent' do
+    it 'redirects to non passported client instructions' do
       expect(response).to redirect_to(
-        providers_legal_aid_application_open_banking_consents_path(legal_aid_application)
+        providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application)
       )
     end
 
