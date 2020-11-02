@@ -276,7 +276,7 @@ This environment variable should be set to ```false``` when recording new vcr ca
 
 TrueLayer test data can be replaced by mock data from db/sample_data/bank_transactions.csv. This can be toggled in the Admin Portal at `/admin/settings`.
 
-This mock data allows for testing with more meaningful bank transactions, including benefits data tagged with correct DWP codes. To ensure that this benefits data is correctly analysed, so it can be processed successfully by CFE, an applicant with the National Insurance Number `AA123456A` must be used.
+This mock data allows for testing with more meaningful bank transactions, including benefits data tagged with correct DWP codes. 
 
 ## Admin Portal
 

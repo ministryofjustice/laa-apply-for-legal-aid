@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_220052) do
+ActiveRecord::Schema.define(version: 2020_10_29_080226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_220052) do
     t.uuid "transaction_type_id"
     t.string "meta_data"
     t.decimal "running_balance"
+    t.json "flags"
     t.index ["bank_account_id"], name: "index_bank_transactions_on_bank_account_id"
     t.index ["transaction_type_id"], name: "index_bank_transactions_on_transaction_type_id"
   end

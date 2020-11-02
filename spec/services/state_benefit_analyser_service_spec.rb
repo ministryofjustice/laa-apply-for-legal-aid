@@ -14,7 +14,7 @@ RSpec.describe StateBenefitAnalyserService do
       allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_return(dummy_benefits)
     end
 
-    subject { described_class.call(legal_aid_application) }
+    subject(:call) { described_class.call(legal_aid_application) }
 
     context 'there are no state benefit transactions' do
       let!(:transactions) { create_mix_of_non_benefit_transactions }
@@ -30,19 +30,24 @@ RSpec.describe StateBenefitAnalyserService do
 
     context 'DWP payment for a different nino' do
       let!(:transactions) { [create(:bank_transaction, :credit, description: 'DWP YS327299X UC', bank_account: bank_account1)] }
-      it 'does not mark the transaction as a state benefit' do
-        subject
-        expect(legal_aid_application.reload.bank_transactions).to eq transactions
+      let(:tx) { legal_aid_application.reload.bank_transactions.first }
+
+      before { call }
+
+      it 'marks the transaction as a state benefit' do
+        expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
       end
 
-      it 'does not add any transaction types to the legal aid application' do
-        expect { subject }.not_to change { legal_aid_application.transaction_types.count }
+      # OCT-2020: A choice has been made that, for now, we should not try to untangle NINO mismatches.
+      # We are just interested in the fact they can access the income
+      it 'updates the meta data with the label of the state benefit' do
+        expect(tx.meta_data).to eq({ code: 'UC', label: 'universal_credit', name: 'Universal Credit', selected_by: 'System' })
       end
     end
 
     context 'DWP payment for this applicant with recognised code' do
       context 'an included benefit' do
-        let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} CWP", bank_account: bank_account1)] }
+        let!(:transactions) { [create(:bank_transaction, :credit, description: '010101010101-CHB', bank_account: bank_account1)] }
         it 'marks the transaction as a state benefit' do
           subject
           tx = legal_aid_application.reload.bank_transactions.first
@@ -52,7 +57,7 @@ RSpec.describe StateBenefitAnalyserService do
         it 'updates the meta data with the label of the state benefit' do
           subject
           tx = legal_aid_application.reload.bank_transactions.first
-          expect(tx.meta_data).to eq({ code: 'CWP', label: 'cold_weather_payment', name: 'Cold Weather Payment', selected_by: 'System' })
+          expect(tx.meta_data).to eq({ code: 'CHB', label: 'child_benefit', name: 'Child Benefit', selected_by: 'System' })
         end
 
         it 'adds both included and excluded transaction types to the legal aid application' do
@@ -86,25 +91,21 @@ RSpec.describe StateBenefitAnalyserService do
       end
     end
 
-    context 'DWP payment for this applicant with unrecognised code' do
-      let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} XXXX", bank_account: bank_account1)] }
-      it 'marks the transaction as a state benefit' do
-        subject
-        tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
-      end
+    context 'DWP payment for this applicant has multiple recognised codes' do
+      context 'an included benefit' do
+        let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1)] }
+        before { call }
 
-      it 'updates the meta data with the label of the state benefit' do
-        subject
-        tx = legal_aid_application.reload.bank_transactions.first
-        expect(tx.meta_data).to eq({ code: 'XXXX', label: 'Unknown code XXXX', name: 'Unknown state benefit', selected_by: 'System' })
-      end
+        # OCT-2020: A choice has been made that, for now, we should not try to handle multiple codes in a single row.These
+        # should be flagged by CFE and marked for case worker review. They can still be marked as benefits by the provider
+        it 'does not update the meta data' do
+          tx = legal_aid_application.reload.bank_transactions.first
+          expect(tx.meta_data).to eq({ code: 'multiple', label: 'multiple dwp codes', name: 'multiple state benefits', selected_by: 'System' })
+        end
 
-      it 'adds a transaction type of benefits to the legal aid application' do
-        expect(legal_aid_application.transaction_types.count).to be_zero
-        subject
-        expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
-        expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
+        it 'adds a caseworker flag for multi_benefit' do
+          expect(legal_aid_application.reload.bank_transactions.first.flags['multi_benefit']).to be true
+        end
       end
     end
 
@@ -116,7 +117,23 @@ RSpec.describe StateBenefitAnalyserService do
           'dwp_code' => 'CWP',
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by': 'System'
+          'selected_by' => 'System'
+        },
+        {
+          'label' => 'child_benefit',
+          'name' => 'Child Benefit',
+          'dwp_code' => 'CHB',
+          'exclude_from_gross_income' => false,
+          'category' => nil,
+          'selected_by' => 'System'
+        },
+        {
+          'label' => 'universal_credit',
+          'name' => 'Universal Credit',
+          'exclude_from_gross_income' => false,
+          'dwp_code' => 'UC',
+          'category' => nil,
+          'selected_by' => 'System'
         },
         {
           'label' => 'disability_living_allowance',
@@ -124,7 +141,7 @@ RSpec.describe StateBenefitAnalyserService do
           'dwp_code' => 'DLA',
           'exclude_from_gross_income' => true,
           'category' => 'carer_disability',
-          'selected_by': 'System'
+          'selected_by' => 'System'
         },
         {
           'label' => 'employment_support_allowance',
@@ -132,7 +149,15 @@ RSpec.describe StateBenefitAnalyserService do
           'dwp_code' => 'ESA',
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by': 'System'
+          'selected_by' => 'System'
+        },
+        {
+          'label' => 'training_payment',
+          'name' => 'Training Payment',
+          'dwp_code' => 'T/P',
+          'exclude_from_gross_income' => false,
+          'category' => nil,
+          'selected_by' => 'System'
         },
         {
           'label' => 'social_fund_payments',
@@ -140,7 +165,7 @@ RSpec.describe StateBenefitAnalyserService do
           'dwp_code' => nil,
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by': 'System'
+          'selected_by' => 'System'
         }
       ]
     end

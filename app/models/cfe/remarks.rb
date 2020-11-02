@@ -1,6 +1,6 @@
 module CFE
   class Remarks
-    REASONS_WITHOUT_CATEGORIES = [:residual_balance].freeze
+    REASONS_WITHOUT_CATEGORIES = %i[residual_balance multi_benefit].freeze
 
     def initialize(hash)
       @hash = hash

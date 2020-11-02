@@ -100,5 +100,9 @@ FactoryBot.define do
         { code: 'UC', label: 'universal_credit', name: 'Universal credit', selected_by: 'System' }
       end
     end
+
+    trait :flagged_multi_benefits do
+      flags { { multi_benefit: true } }
+    end
   end
 end

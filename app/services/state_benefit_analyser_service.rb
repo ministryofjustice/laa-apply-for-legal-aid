@@ -46,21 +46,26 @@ class StateBenefitAnalyserService
   end
 
   def identify_state_benefit(txn)
-    @benefit_transactions_found = true
-    dwp_code = regex_pattern.match(txn.description)[1]
-    benefit = @state_benefit_codes[dwp_code]
-    benefit.nil? ? process_unknown_benefit(txn, dwp_code) : process_known_benefit(txn, benefit)
+    matches = txn.description.scan(regex_pattern)
+    if matches.count > 1
+      process_multiple_benefits(txn)
+    else
+      @benefit_transactions_found = true
+      dwp_code = matches.flatten.first
+      benefit = @state_benefit_codes[dwp_code]
+      process_known_benefit(txn, benefit)
+    end
   end
 
-  def process_unknown_benefit(txn, dwp_code)
-    txn.update!(transaction_type: included_benefit_transaction_type, meta_data: unknown_meta(dwp_code))
+  def process_multiple_benefits(txn)
+    txn.update!(transaction_type: included_benefit_transaction_type, meta_data: multi_dwp_codes_meta_data, flags: { multi_benefit: true })
   end
 
-  def unknown_meta(dwp_code)
+  def multi_dwp_codes_meta_data
     {
-      code: dwp_code,
-      label: "Unknown code #{dwp_code}",
-      name: 'Unknown state benefit',
+      code: 'multiple',
+      label: 'multiple dwp codes',
+      name: 'multiple state benefits',
       selected_by: 'System'
     }
   end
@@ -84,11 +89,11 @@ class StateBenefitAnalyserService
   end
 
   def regex_pattern
-    @regex_pattern ||= Regexp.new("^DWP\s#{nino}\s(\\S{2,6})$")
+    @regex_pattern ||= Regexp.new(/\b(#{keys})\b/)
   end
 
-  def nino
-    @nino || @legal_aid_application.applicant.national_insurance_number
+  def keys
+    @keys ||= @state_benefit_codes.keys.join('|').gsub('/', '\/')
   end
 
   def update_legal_aid_transaction_types
