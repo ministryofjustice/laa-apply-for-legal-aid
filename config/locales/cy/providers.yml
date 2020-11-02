@@ -1,0 +1,884 @@
+---
+cy:
+  providers:
+    about_the_financial_assessments:
+      show:
+        activity: |2-
+
+          .knil wen a tseuqer ot deen ll’yeht syad 7 nihtiw ecivres eht ssecca ton seod
+          tneilc ruoy fI .snosaer ytiruces rof syad 7 rof evitca niamer lliw knil ehT
+        list:
+          list: |2-
+
+            sgniogtuo dna emocni rieht tuoba su llet
+            snoitcasnart knab rieht erahs
+        sign_in_para: ":nac yeht os ecivres eht ot knil a tneilc ruoy dnes ll'eW"
+        disclosure:
+          heading: noitamrofni tnuocca knab s'tneilc ruoy esu ew woH
+          detail_use: ".noitacilppa dia lagel eht rof noitamrofni laicnanif s'tneilc
+            ruoy esu ylno eW"
+          will_not_heading: ":ton lliw eW"
+          list: |2-
+
+            tnuocca knab rieht ot ssecca gniogno yna evah
+            drowssap dna emanresu gniknab enilno rieht evas
+          sign_in_save: ".sliated ni ngis yna evas ton od eW"
+        section_2:
+          heading: sserdda liame s'tneilc ruoY
+        secure_link_para: ".tnemssessa enilno eht ot knil eruces a htiw tneilc ruoy
+          ot liame na dneS"
+        send_client_link: knil tneilc dneS
+        title: ecivres eht ot ssecca yraropmet tneilc ruoy eviG
+    address_selections:
+      show:
+        link_text: sserdda eht dnif tonnac I
+        select_address_label: sserdda na tceleS
+        addresses_found_text:
+          one: dnuof sserdda 1
+          other: dnuof sesserdda }tnuoc{%
+    applicant_employed:
+      index:
+        heading_1: "?deyolpme tneilc ruoy sI"
+        hint: ".tnemyolpme-fles dna yraropmet ,lausac ,emit-trap ,emit-lluf sedulcni
+          sihT"
+    application_confirmations:
+      show:
+        application_created: detaerc noitacilppA
+        back_button: snoitacilppa ruoy ot kcaB
+        happen_next_heading: txen sneppah tahW
+        happen_next_text: ".noitamrofni laicnanif rieht derahs sah tneilc ruoy ecno
+          noitacilppa ruoy eunitnoc nac uoY"
+        let_you_know_text: ".siht enod ev'yeht ecno wonk uoy tel ll'eW"
+        sent_email_text: ".}liame{% ot liame na tnes ev'eW"
+        sub_title: si ecnerefer esac ruoY
+    bank_transactions:
+      list_selected:
+        col_amount: tnuomA
+        col_date: etaD
+        col_description: noitpircseD
+        remove_link: evomeR
+    capital_assessment_results:
+      additional_property:
+        additional_property_value: eulav ytreporp lanoitiddA
+        outstanding_mortgage: egagtrom gnidnatstuO
+        disregards_and_deductions: snoitcuded dna sdragersiD
+      show:
+        page_title: "}tluser{% :tluseR tnemssessA latipaC"
+        result:
+          eligible: elbigilE
+          not_eligible: elbigilE toN
+          contribution_required: deriuqer noitubirtnoC
+      eligible:
+        heading: dia lagel rof elbigile eb dluoc }eman{%
+        details:
+        - Based on their financial situation, your client may not have to pay towards
+          legal aid.
+        - You still need to provide details of the case before we can grant legal
+          aid.
+      not_eligible:
+        heading: dia lagel teg ot ylekilnu si }eman{%
+        detail: ".latipac elbasopsid hcum oot evah yeht esuaceb si sihT"
+      capital_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam }eman{%
+        details:
+        - We’ve calculated that your client should pay %{amount} from their disposable
+          capital.
+        - You still need to provide details of the case before we can grant legal
+          aid.
+      manual_check_required:
+        heading: dia lagel sdrawot yap dluohs }eman{% fi kcehc ot deen eW
+        details:
+        - You told us legal restrictions prevent your client from selling or borrowing
+          against their assets.
+        - We calculated that your client should pay a contribution, but the amount
+          depends on the restrictions.
+        - We’ll check the details you provided and let you know our decision.
+      result_details:
+        capital_calculation: noitaluclac latipaC
+        client_eligibility_calculation: ytilibigile s'tneilc ruoy detaluclac ew woH
+    capital_income_assessment_results:
+      show:
+        page_title: "}tluser{% :tluseR tnemssessA emocnI dna latipaC"
+        result:
+          eligible: elbigilE
+          not_eligible: elbigile toN
+          contribution_required: deriuqer noitubirtnoC
+      eligible:
+        heading: dia lagel rof elbigile eb dluoc }eman{%
+        details:
+        - Based on their financial situation, your client may not have to pay towards
+          legal aid.
+        - You still need to provide details of the case before we can grant legal
+          aid.
+      not_eligible:
+        heading: dia lagel teg ot ylekilnu si }eman{%
+        detail: ".latipac elbasopsid hcum oot evah yeht esuaceb si sihT"
+      capital_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam }eman{%
+        details:
+        - We’ve calculated that your client should pay %{amount} from their disposable
+          capital.
+        - You still need to provide details of the case before we can grant legal
+          aid.
+      capital_and_income_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam }eman{%
+        line_1: ":yap dluohs tneilc ruoy taht detaluclac ev'eW"
+        line_2: ".dia lagel tnarg nac ew erofeb esac eht fo sliated edivorp ot deen
+          llits uoY"
+        details:
+        - "%{income_contribution} from their disposable income"
+        - "%{capital_contribution} from their disposable capital"
+      income_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam }eman{%
+        details:
+        - We’ve calculated that your client should pay %{amount} from their disposable
+          income.
+        - You still need to provide details of the case before we can grant legal
+          aid.
+      manual_check_required:
+        heading: dia lagel sdrawot yap dluohs }eman{% fi kcehc ot deen eW
+        details:
+        - You told us legal restrictions prevent your client from selling or borrowing
+          against their assets.
+        - We calculated that your client should pay a contribution, but the amount
+          depends on the restrictions.
+        - We’ll check the details you provided and let you know our decision.
+      result_details:
+        capital_calculation: noitaluclac latipaC
+        income_calculation: noitaluclac emocnI
+        client_eligibility_calculation: ytilibigile s'tneilc ruoy detaluclac ew woH
+      disposable_income:
+        title: emocni elbasopsiD
+        total_income: emocni latoT
+        total_outgoings: sgniogtuo latoT
+        total_deductions: snoitcuded latoT
+        total_disposable: emocni elbasopsid latoT
+      deductions:
+        title: snoitcudeD
+        dependants_allowance: ecnawolla stnadnepeD
+        excluded_benefits: noitaluclac morf dedulcxe stifeneb morf emocnI
+        total_deductions: snoitcuded latoT
+      income:
+        title: emocnI
+        benefits: stifeneB
+        friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
+        maintenance: stnemyap ecnanetniaM
+        property_or_lodger: regdol ro ytreporp morf emocnI
+        student_loan_or_grant: tnarg ro naol tnedutS
+        pension: noisneP
+        total_income: emocni latoT
+      outgoings:
+        title: sgniogtuO
+        housing_costs: stsoc gnisuoH
+        childcare_costs: stsoc eracdlihC
+        maintenance_out: stnemyap ecnanetniaM
+        legal_aid: stnemyap dia lageL
+        total_outgoings: sgniogtuo latoT
+    capital_introductions:
+      show:
+        about_the_client:
+          list: |2-
+
+            stsoc lagel sdrawot etubirtnoc ot syaw rehto yna sah
+            )seulav rieht dna( latipac rehto ro stnemtsevni ,sgnivas yna sah
+            )seulav rieht dna( egagtrom a sah ro emoh a snwo
+        client_to_provide: ":edivorp ot deen osla ll'uoY"
+        does_your_client: ":tneilc ruoy fi su llet ot deen ll'uoY"
+        h1-heading: eunitnoc uoy erofeB
+        items_to_be_provided:
+          list: |2-
+
+            emoctuo lufsseccus a fo secnahc eht
+            esac fo tnemetats a
+            tnenoppo eht tuoba noitamrofni
+            tnedicni esuba citsemod tsetal eht fo sliated
+    check_benefits:
+      check_benefits_result:
+        details_used: ":PWD eht htiw sutats stifeneb s'tneilc ruoy kcehc ot sliated
+          gniwollof eht desu eW"
+        what_happens_next: txen sneppah tahW
+        because_not_receiving_benefits: ".dia lagel rof yfilauq taht stifeneb eviecer
+          ton od yeht esuaceb si sihT"
+        you_need_to: ":ot deen ll'uoY"
+        negative_result:
+          tab_title: tnemssessa laicnanif a etelpmoc tsum tneilc ruoY
+          title: ytilibigile laicnanif s'tneilc ruoy kcehc ot deen eW
+        positive_result:
+          tab_title: dia lagel rof yfilauq taht stifeneb seviecer tneilc ruoY
+          title: dia lagel rof yfilauq taht stifeneb seviecer }eman{%
+          must_answer_financial_questions: stessa rehto dna sgnivas ,ytreporp s'tneilc
+            ruoy tuoba snoitseuq rewsna
+          provide_details: esac eht fo sliated edivorp
+      how_we_checked:
+        how_we_checked: sutats stifeneb s'tneilc ruoy dekcehc ew woH
+        details_used: ":PWD eht htiw sutats stifeneb s'tneilc ruoy kcehc ot sliated
+          gniwollof eht desu eW"
+        change_client_details_html: .yltcerrocni meht deretne uoy fi >a/<sliated s'tneilc
+          ruoy egnahC>"sliated_tnacilppa"=ferh "sucof_no_txet_kcalb"=ssalc a<
+      applicant_details:
+        how_we_checked: sutats stifeneb s'tneilc ruoy dekcehc ew woH
+        details_used: ":PWD eht htiw sutats stifeneb s'tneilc ruoy kcehc ot sliated
+          gniwollof eht desu eW"
+        change_client_details_html: .yltcerrocni meht deretne uoy fi >a/<sliated s'tneilc
+          ruoy egnahC>"sliated_tnacilppa"=ferh "sucof_no_txet_kcalb"=ssalc a<
+      use_ccms:
+        accept_only: ".stifeneb eseht fo eno gniviecer elpoep rof snoitacilppa tpecca
+          ylno yltnerruc eW"
+        apply_in_ccms_html: ">rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+          rbba< gnisu ylppA"
+        back_to_applications: snoitacilppa ym ot kcaB
+        benefits:
+          list: |2-
+
+            tiderC lasrevinU
+            )tiderC eetnarauG( tiderC noisneP
+            )ASJ( ecnawollA s’rekeesboJ
+            troppuS emocnI
+            )ASE( ecnawollA troppuS dna tnemyolpmE
+        title_html: noitacilppa siht rof >rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+          rbba< esu ot deen uoY
+        we_checked: ":eviecer ton seod tneilc ruoy dna PWD eht htiw dekcehc eW"
+    check_merits_answers:
+      show:
+        h1-heading: srewsna ruoy kcehC
+        sub-heading: gniwollof eht mrifnoC
+        text: ":taht seerga tneilc ruoY"
+        list: |2-
+
+          yletaidemmi noitautis laicnanif rieht ot segnahc yna troper ll’yeht
+          tcerroc dna etelpmoc si nevig ev’yeht noitamrofni eht
+          )'egrahc yrotutats' eht( esac eht fo dne eht ta yenom ro ytreporp niag ro peek yeht fi stsoc lagel eht yaper ot evah yam yeht
+          dia lagel sdrawot yap ot evah yam yeht
+          seicnega ecnerefer tiderc dna knab htiw sliated rieht kcehc nac ew
+          smotsuC dna euneveR MH dna snoisneP dna kroW rof tnemtrapeD eht ekil stnemtraped tnemnrevog rehto htiw noitamrofni rieht erahs nac ew
+          meht tneserper ot }eman_mrif_redivorp{% detcurtsni ev'yeht
+        sign_app_text: ":yam yeht ,segnahc troper ton od yeht ro ,noitamrofni etelpmocni
+          ro gnorw sevig tneilc ruoy fI"
+        warning:
+          list: |2-
+
+            stsoc eht kcab yap ot evah dna deppots dia lagel rieht evah
+            ytlanep laicnanif a yap ot deen
+            detucesorp eb
+    check_passported_answers:
+      show:
+        assets:
+          heading: stessa rehto dna sgnivas ,ytreporP
+        h1-heading: srewsna ruoy kcehC
+        merits_assessment_body: ".dia lagel rof ytilibigile laicnanif s'tneilc ruoy
+          etaluclac ot srewsna ruoy esu ll'eW"
+        merits_assessment_h2: txen sneppah tahW
+        property: ytreporP
+    check_provider_answers:
+      standard:
+        title: srewsna ruoy kcehC
+        section_next:
+          heading: txen sneppah tahW
+          content: ".dia lagel rof yfilauq taht stifeneb seviecer tneilc ruoy fi ees
+            ot snoisneP dna kroW rof tnemtrapeD eht htiw kcehc ll'eW"
+      read_only:
+        title: noitacilppa ruoY
+        banner:
+          assistive: noitamrofni
+          text: ".siht enod ev'yeht nehw uoy llet ll'eW .su htiw noitamrofni laicnanif
+            rieht derahs sah tneilc ruoy nehw noitacilppa ruoy eunitnoc nac uoY"
+      shared:
+        section_client:
+          heading: sliated tneilC
+        section_proceeding:
+          heading: rof gniylppa er'uoy tahW
+        section_emergency:
+          heading: etacifitrec ycnegreme na rednu derevoC
+        section_substantive:
+          heading: etacifitrec evitnatsbus a rednu derevoC
+    applicant_bank_accounts:
+      show:
+        heading: stnuocca knab s’tneilc ruoY
+        previously_told: ":su htiw noitamrofni tnuocca knab gniwollof eht derahs tneilc
+          ruoY"
+        account: tnuoccA
+        balance: ecnalaB
+        offline_savings_accounts: "?enilno ssecca tonnac yeht stnuocca sgnivas yna
+          evah tneilc ruoy seoD"
+        hints:
+          offline_savings_accounts: ".tnuocca sgnivas eciffO tsoP a ,elpmaxe roF"
+        error: oN ro seY tceles esaelP
+    client_received_legal_helps:
+      show:
+        h1-heading: "?rettam eht rof pleh lagel deviecer tneilc ruoy saH"
+    client_completed_means:
+      show:
+        h1-heading: noitacilppa ruoy eunitnoC
+        client: tneilC
+        case-reference: ecnerefer esaC
+        state: ".su htiw noitamrofni laicnanif rieht derahs sah tneilc ruoY"
+        what_next: txen sneppah tahW
+        intro: ":ot deen uoY"
+        intro-bullets:
+        - view your client's bank statements from the past 3 months
+        - put their transactions into the categories they selected
+        question: ":rieht tuoba su llet ot deen osla ll'uoY"
+        question-bullets:
+        - dependants (if they have any)
+        - property, savings and other assets
+    confirm_offices:
+      show:
+        h1-heading: "?rebmun tnuocca eciffo ruoy }edoc_eciffo{% sI"
+        error: noitacilppa siht gnildnah eciffo eht fo rebmun tnuocca eht si siht
+          fi sey tceleS
+        no_another_office: noitacilppa siht gnildnah si eciffo rehtona ,oN
+    date_client_told_incidents:
+      show:
+        h1-heading: sliated tnedicni tsetaL
+    declarations:
+      show:
+        h1-heading: noitaralceD
+        statement: ":taht eerga uoy ,gniunitnoc yB"
+        statement-bullets:
+        - your client has instructed you to represent them
+        - you'll go through all parts of the application with your client
+        - you'll explain the statutory charge to your client
+        - you'll provide complete and correct information
+        continue_button: eunitnoc dna eergA
+    delegated_confirmation:
+      index:
+        page-heading: snoitcnuf detageled desu ev'uoy su dlot uoY
+        sub_title: si rebmun ecnerefer esac ruoY
+        what_happens_next: txen sneppah tahW
+        warning:
+          application_deadline_date: " yb noitacilppa evitnatsbus a timbus tsum uoY"
+        back_home: snoitacilppa ruoy ot kcaB
+    details_latest_incidents:
+      show:
+        h1-heading: tnedicni esuba citsemod tsetal eht fo sliateD
+        details_label: "?tnedicni eht gnirud deneppah tahW"
+    end_of_applications:
+      show:
+        heading: etelpmoc noitacilppA
+        your_case_reference_number: si rebmun ecnerefer esac ruoY
+        confirmation_email_sent: ".liame noitamrifnoc a uoy tnes ev'eW"
+        what_happens_next: txen sneppah tahW
+        next_actions: ":ot deen uoY"
+        print_application: ".noitacilppa detelpmoc eht tnirP"
+        client_sign: ".ti ngis ot tneilc ruoy teG"
+        keep_file: ".elif no ti peeK"
+        application_to_be_checked: ".dia lagel ot deltitne si tneilc ruoy fi ees ot
+          noitacilppa ruoy kcehc ll'eW"
+        decision_in_ccms_html: ".>rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+          rbba< ni noisiced ruo wonk uoy tel ll'eW"
+        feedback_link_html: .ecivres siht evorpmi su pleh ot >a/<kcabdeef eviG>"knil_kuvog"=ssalc
+          "}lru{%"=ferh a<
+        view_completed_application: noitacilppa detelpmoc weiV
+        back_to_your_applications: snoitacilppa ruoy ot kcaB
+    estimated_legal_costs:
+      show:
+        h1-heading: "?krow eht gniod fo stsoc lagel detamitse eht era tahW"
+    identify_types_of_incomes:
+      show:
+        page_heading: "?eviecer tneilc ruoy seod emocni fo sepyt hcihW"
+      update:
+        none_selected: emocni fo sepyt yna seviecer tneilc ruoy fi tceleS
+    identify_types_of_outgoings:
+      show:
+        page_heading: "?ekam tneilc ruoy seod stnemyap raluger hcihW"
+      update:
+        none_selected: stnemyap raluger yna sekam tneilc ruoy fi tceleS
+    income_summary:
+      add_other_income:
+        add_other_income: emocni fo epyt rehtona ddA
+      income_type_item:
+        col_amount: tnuomA
+        col_date: etaD
+        col_description: noitpircseD
+        remove_link: evomeR
+      index:
+        subheading: ".emocni fo sepyt gniwollof eht eviecer yeht su dlot tneilc ruoY"
+        you_need_to:
+          text: ":ot deen uoY"
+          list: |2-
+
+            yrogetac emocni hcae ot snoitcasnart dda
+            stnemetats knab s'tneilc ruoy weiv
+        page_heading: seirogetac otni emocni s'tneilc ruoy troS
+        select: snoitcasnart dda dna stnemetats weiV
+    legal_aid_applications:
+      index:
+        basic_details_para: ".dia lagel ot deltitne si tneilc ruoy fi kcehc ll’ew
+          dna sliated esac cisab eht su lleT"
+        heading_1: snoitacilppa ruoY
+        make_new_application: noitacilppa wen a ekaM
+        current_applications: snoitacilppa tnerruC
+        search_applications: snoitacilppa hcraeS
+      search:
+        title: snoitacilppa hcraeS
+        hint: ".rebmun ecnerefer ro eman tneilc yb hcraeS"
+        error: airetirc a retne esaelP
+        search_results: stluser hcraeS
+        empty_result: dnuof eb tonnac noitacilppA
+        search_button: hcraeS
+      legal_aid_applications:
+        table_description: ".sutatS dna epyt etacifitreC ,ecnerefer AAL ,etad tratS
+          ,emaN yb elbatroS .elbat snoitacilppA"
+        applicant_name: emaN
+        application_ref_html: ecnerefer >rbba/<AAL>'ycnegA diA lageL'=eltit rbba<
+        created_at: etad tratS
+        certificate_type: epyt etacifitreC
+        status: sutatS
+        emergency: ycnegremE
+        substantive: evitnatsbuS
+        substantive_due: "}etad{% :eud evitnatsbuS"
+        col_and_ref: feR dna
+        col_and_state: sutatS dna
+        delete: eteleD
+        delete_suffix: "}tnacilppa{% rof }ecnerefer{% noitacilppa "
+    delete:
+      show:
+        page_title: "?noitacilppa siht eteled ot tnaw uoy erus uoy erA"
+        applicant: emaN
+        reference: ecnerefer AAL
+        warning_assistive: gninraW
+        warning: ".noitca siht odnu tonnac uoY"
+        yes_button: ti eteled ,seY
+        no_button: ti eteled ton od ,oN
+    limitations:
+      show:
+        h1-heading: rof gniylppa er'uoy tahW
+        h2-heading: gnideecorP
+        if_delegated_used: etacifitrec ycnegreme na rednu derevoC
+        form_of_service: " :ecivres fo mroF"
+        form_of_service_type: noitatneserper lluF
+        incurrable_costs: " :rucni nac uoy stsoC"
+        allowable_work: " :od nac uoy kroW"
+        substantive_certificate: etacifitrec evitnatsbus a rednu derevoC
+    means_summaries:
+      show:
+        h1-heading: srewsna ruoy kcehC
+        dependants:
+          heading: stnadnepeD
+          add-new: tnadneped ddA
+          delete: tnadneped eteleD
+          name: emaN
+          date_of_birth: htrib fo etaD
+          relationship: "?tneilc ruoy ot pihsnoitaler rieht si tahW"
+          in_full_time_education: "?gniniart ro noitacude emit-lluf ni yeht erA"
+          income: "?emocni yna eviecer yeht oD"
+          assets: "?000,8£ naht erom htrow stessa evah yeht oD"
+        capital-section-heading: latipac latoT
+        credits-section-heading: emocni latoT
+        debits-section-heading: sgniogtuo latoT
+        change_declared_income: emocni deralced egnahc/weiV
+        change_declared_outgoings: sgniogtuo deralced egnahc/weiV
+    merits_reports:
+      show:
+        heading: troper stireM
+        client_details_heading: sliated tneilC
+        applying_for: rof gniylppa er’uoy tahW
+    means_reports:
+      caseworker_review:
+        required: "?deriuqer weiver rekrowesaC"
+        reasons: snosaer weiveR
+        category-amount_variation: eulav ylhtnoM - seirogetac weiveR
+        category-unknown_frequency: ycneuqerF - seirogetac weiveR
+        category:
+          state_benefit_payment: stifeneb etatS
+          other_income_payment: emocni rehtO
+          outgoings_housing_cost: stsoc gnisuoH
+          outgoings_maintenance: stnemyap ecnanetniaM
+          outgoings_legal_aid: stnemyap dia lageL
+          outgoings_childcare: stnemyap eracdlihC
+        reason:
+          amount_variation: ")snoitairav( nwonknu eulav ylhtnoM"
+          unknown_frequency: nwonknu ycneuqerF
+          residual_balance: kcehC ecnalaB laudiseR - noitubirtnoC latipaC
+      show:
+        heading: troper snaeM
+        caseworker-review-section-heading: weiveR rekrowesaC
+        client_details_heading: sliated tneilC
+        benefit_check_heading: snaem detropssaP
+        capital_result_heading: tluser latipaC
+        income_result_heading: tluser emocnI
+        assets_heading: stessa rehto dna sgnivas ,ytreporP
+        question_receives_benefit: tifeneb gnitropssap fo tpiecer nI
+        income_details_heading: emocnI
+        debits-section-heading: sgniogtuO
+        deductions-section-heading: snoitcudeD
+    no_income_summaries:
+      show:
+        page_heading: emocni s'tneilc ruoY
+        subheading:
+          text: ":eviecer ton od yeht su dlot sah tneilc ruoY"
+          list: |2-
+
+            stnemyap noisnep
+            regdol ro ytreporp a morf emocni
+            stnemyap ecnanetniam
+            sdneirf ro ylimaf morf pleh laicnanif
+            stifeneb
+        is_this_correct: "?tcerroc siht sI"
+        student_finance:
+          heading: ecnanif tnedutS
+          info: ".raey cimedaca siht ecnanif tneduts ni }ecnanif_tneduts{% teg ll'yeht
+            su dlot osla tneilc ruoY"
+        error: stnemyap eseht eviecer ton seod tneilc ruoy fi sey tceleS
+    no_outgoings_summaries:
+      show:
+        page_heading: sgniogtuo s'tneilc ruoY
+        subheading:
+          text: ":yap ton od yeht su dlot sah tneilc ruoY"
+          list: |2-
+
+            esac lanimirc a ni dia lagel rof
+            ecnanetniam dlihc ro lasuops
+            stsoc eracdlihc
+            stsoc gnisuoh
+        is_this_correct: "?tcerroc siht sI"
+        error: stnemyap eseht ekam ton seod tneilc ruoy fi sey tceleS
+    non_passported_client_instructions:
+      show:
+        h1-heading: od ot sah tneilc ruoy tahW
+        give_client_access: ":ot meht ksa dna ecivres eht ot ssecca tneilc ruoy evig
+          ll'eW"
+        actions:
+          list: |2-
+
+            sgniogtuo dna emocni rieht tuoba su llet
+            stnuocca knab rieht ot ssecca emit-eno reyaLeurT evig
+            gniknab enilno rieht ot ni ngis
+        next: ".emocni elbasopsid rieht etaluclac nac ew os snoitcasnart knab rieht
+          esirogetac ot deen ll'uoy ,siht enod ev'yeht ecnO"
+    offline_accounts:
+      show:
+        h1-heading: "?evah tneilc ruoy seod stnuocca knab hcihW"
+        offline_current_accounts: tnuocca tnerruC
+        offline_savings_accounts: tnuocca sgnivaS
+        no_account_selected: eseht fo enoN
+    offline_savings_accounts:
+      show:
+        h1-heading: enilno ssecca tonnac tneilc ruoy taht stnuocca sgnivas lla ni
+          tnuoma latot eht retnE
+    open_banking_consents:
+      show:
+        heading: ecivres siht gnisu eunitnoc nac uoy fi kcehC
+        info: ":tneilc ruoy taht eerga uoY"
+        list_1: stnuocca tnerruc rieht fo lla rof gniknab enilno sesu
+        list_2_html: stnemetats knab fo shtnom 3 tcelloc ot stnuocca knab rieht ot
+          ssecca emit-eno )reyaLeurT( ecivres ytrap-driht eruces a evig lliw
+        list_3: deyolpme ton si
+        radio_no: eerga ton od I ,oN
+        radio_yes: eerga I ,seY
+    other_assets:
+      show:
+        h1-heading: "?evah tneilc ruoy seod stessa fo sepyt hcihW"
+        h2-heading: ylppa taht lla tceleS
+        none_selected: eseht fo enoN
+    outgoings_summary:
+      add_other_outgoings:
+        add_other_outgoings: tnemyap raluger fo epyt rehtona ddA
+      index:
+        list: |2-
+
+          yrogetac hcae ot snoitcasnart dda
+          stnemetats knab s'tneilc ruoy weiv
+        page_heading: seirogetac otni stnemyap raluger s'tneilc ruoy troS
+        payment_types: ".egap siht no detsil stnemyap fo sepyt eht ekam yeht su dlot
+          tneilc ruoY"
+        select:
+          rent_or_mortgage: snoitcasnart dda dna stnemetats weiV
+          child_care: snoitcasnart dda dna stnemetats weiV
+          maintenance_out: snoitcasnart dda dna stnemetats weiV
+          legal_aid: snoitcasnart dda dna stnemetats weiV
+        you_need_to: ":ot deen uoY"
+    outstanding_mortgages:
+      field_set_header: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si tahW"
+      outstanding_mortgage_amount: tnuoma egagtrom gnidnatstuo eht retnE
+      show:
+        h1-heading: "?egagtrom gnidnatstuo eht si tahW"
+    own_homes:
+      show:
+        h1-heading: "?ni evil yeht taht emoh eht nwo tneilc ruoy seoD"
+    percentage_homes:
+      show:
+        h1-heading: "?nwo yllagel tneilc ruoy seod emoh rieht fo erahs % tahW"
+    proceedings_before_the_courts:
+      show:
+        h1-heading: "?truoc eht erofeb ,yltnerruc ,thguos gnieb si gnidnuf hcihw rof
+          ,sgnideecorp eht erA"
+    proceedings_types:
+      create:
+        search_and_select: gnideecorp a tceles dna rof hcraeS
+      index:
+        clear_search: hcraes raelC
+        heading_1: "?rof dia lagel tnaw tneilc ruoy seod tahW"
+        heading_2: sgnideecorp lagel rof hcraeS
+        no_results: ".dnuof stluser oN"
+        proceeding: gnideecorp
+        search_help_example: noitacilppa rep gnideecorp esuba citsemod elgnis a rof
+          ylppa ylno nac uoY
+        accessibility_message: snoitpo denruter tceles ot xob siht fo tuo baT
+        accessibility_message_safari_browser: stluser ees ot tuo bat ,dleif hcraes
+          a ni era uoY
+        you_have_selected: "}tnuoc{% detceles evah uoY"
+    property_values:
+      form:
+        hint:
+          property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac uoY
+      show:
+        h1-heading: "?htrow emoh s'tneilc ruoy si hcum woH"
+    providers:
+      show:
+        account_number: rebmun tnuoccA
+        email: sserdda liamE
+        name: emaN
+        page_title: eliforp ruoY
+        role: noissimreP
+        username: emanresU
+    respondents:
+      show:
+        h1-heading: sliated tnenoppO
+        understands_terms_of_court_order: "?redro truoc a fo smret eht dnatsrednu
+          ot yticapac latnem eht evah tnenoppo eht seoD"
+        warning_letter_sent: "?tnenoppo eht ot tnes neeb rettel gninraw a saH"
+        police_notified: "?deifiton neeb ecilop eht evaH"
+        bail_conditions_set: "?tes neeb snoitidnoc liab evaH"
+        bail_conditions_set_yes: dne ot ylekil er'yeht etad eht gnidulcni ,snoitidnoc
+          liab eht fo sliated eviG
+        police_notified_no: deifiton neeb ton evah ecilop eht yhw su lleT
+        police_notified_yes: emoctuo eht dna setad gnidulcni ,)yna fi( nekat ev'yeht
+          noitca tahw su lleT
+        police_notified_blank: nekat evah ecilop eht noitca tahw su lleT
+    restrictions:
+      show:
+        h1-heading: "?stessa rieht tsniaga gniworrob ro gnilles morf tneilc ruoy tneverp
+          taht snoitcirtser lagel yna ereht erA"
+        restrictions_details: yhw dna ,tsniaga worrob ro lles tonnac yeht stessa hcihw
+          su lleT
+        for_example: ":elpmaxe roF"
+        examples:
+          list: |2-
+
+            sgnideecorp lagel rehto ni etupsid fo tcejbus eht era stessa rieht
+            dessessoper neeb sah emoh rieht
+            tpurknab er'yeht
+    savings_and_investments:
+      show:
+        h1-heading: "?evah tneilc ruoy seod stnemtsevni ro sgnivas fo sepyt hcihW"
+        h2-heading: ylppa taht lla tceleS
+        none_selected: eseht fo enoN
+    select_offices:
+      show:
+        h1-heading: noitacilppa siht gnildnah eciffo eht fo rebmun tnuocca eht tceleS
+    shared_ownerships:
+      show:
+        heading_1: "?esle enoyna htiw emoh rieht nwo tneilc ruoy seoD"
+    start:
+      index:
+        apply_for_legal_aid_heading: dia lagel rof ylppA
+        domestic_violence_or_abuse_only: ".sesac esuba ro ecneloiv citsemod ni dia
+          lagel livic rof ylppa ot ecivres siht esU"
+        must_be_provider: ".ecivres siht esu ot redivorp dia lagel ylimaf ro livic
+          a eb tsum uoY"
+        related_content_list:
+          item_1: dia lageL
+          item_2: dia lagel teg nac uoy fi kcehC
+          title: tnetnoc detaleR
+        use_ccms_list:
+          heading: trats uoy erofeB
+          list: |2-
+
+            )esac eht ni tnenoppo eht si rentrap rieht sselnu( elgnis si
+            rebmun ecnarusnI lanoitaN a sah
+          title: ":tneilc ruoy fi ecivres siht esu ylno nac uoY"
+        use_ccms_para_html: ".snoitacilppa rehto lla rof )>rbba/<SMCC>'metsyS tnemeganaM
+          tsoC dna tneilC'=eltit rbba<( metsyS tnemeganaM tsoC dna tneilC eht esU"
+    start_merits_assessments:
+      show:
+        h1-heading: esac eht fo sliated edivorP
+        do_merits_of_case_qualify: |2-
+
+          :retne ot deen ll'uoY
+
+          .dia lagel rof yfilauq esac eht fo stirem eht fi wonk ot deen eW
+        do_merits_of_case_qualify_list:
+          list: |2-
+
+            emoctuo lufsseccus a fo secnahc eht
+            esac fo tnemetats a
+            tnenoppo eht tuoba noitamrofni
+            tnedicni esuba citsemod tsetal eht fo sliated
+    statement_of_cases:
+      show:
+        bullet-1: eman s'tnenoppo eht
+        bullet-2: tnedicni esuba citsemod tsetal eht fo sliated
+        bullet-3: raf os esac eht ni deneppah s'tahw
+        bullet-4: tneilc ruoy ot pihsnoitaler rieht dna devlovni era seitrap rehto
+          yna fi
+        bullet-5: yrassecen era sgnideecorp eht yhw
+        bullet-6: esac eht dnuf ot elba eb thgim esle enoyna fi
+        h1-heading: esac fo tnemetats a edivorP
+        warning: gninraW
+        warning_text: ".retal tnemetats a daolpu ot elba eb ton lliw uoY .won tnemetats
+          etelpmoc a edivorp tsum uoY"
+      uploaded_files:
+        delete: eteleD
+        filename: emaneliF
+        size: eziS
+        status: sutatS
+        uploaded: dedaolpU
+        title: selif dedaolpU
+    submitted_applications:
+      show:
+        back_home: snoitacilppa ruoy ot kcaB
+        heading: etacifitrec dia lagel livic rof noitacilppA
+        client_name: tneilC
+        case_reference_html: ecnerefer >rbba/<AAL>'ycnegA diA lageL'=eltit rbba<
+        ccms_reference_html: ecnerefer >rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+          rbba<
+        print_button: noitacilppa tnirP
+        client_details_heading: sliated tneilC
+        proceedings_details_heading: rof gniylppa er'uoy tahW
+        income_payments_and_assets_heading: stessa dna stnemyap raluger ,emocnI
+        income: emocnI
+        passported: detropssaP
+        payments: stnemyap ralugeR
+        property: ytreporP
+        section_client:
+          heading: sliated tneilC
+        section_next:
+          heading: txen sneppah tahW
+          content: ".dia lagel rof yfilauq taht stifeneb seviecer tneilc ruoy fi ees
+            ot snoisneP dna kroW rof tnemtrapeD eht htiw kcehc ll'eW"
+        section_proceeding:
+          heading: dia lagel fo epocS
+        client_declaration:
+          heading: noitaralced tneilC
+          signature: ":erutangis tneilC"
+          date: ":etaD"
+    substantive_applications:
+      show:
+        heading: "?won noitacilppa evitnatsbus a ekam ot tnaw uoy oD"
+        information_on_next_actions: |2-
+
+          .retal ti od dna kcab emoc ro won noitacilppa evitnatsbus a ekam nac uoY
+          .snoitcnuf detageled desu ev'uoy su dlot uoY
+        no_start_later: retal ti od ll'I ,oN
+        must_submit_by: "}enildaed{% yb noitacilppa evitnatsbus a timbus tsum uoY"
+    success_prospects:
+      show:
+        h1-heading: "?emoctuo lufsseccus a fo ecnahc eht si tahW"
+    success_likely:
+      index:
+        h1-heading: "?retteb ro %05 emoctuo lufsseccus a fo ecnahc eht sI"
+    transactions:
+      disregarded_list:
+        disregarded_list: noitaluclac ytilibigile laicnanif eht morf dedragersid stifeneB
+        other: stifeneb rehtO
+        carer_disability: stifeneb ytilibasid dna reraC
+        low_income: stifeneb emocni woL
+      show:
+        table_description: .yrogetaC dna tnuomA ,noitpircseD ,etaD yb elbatroS ."}ot{%
+          ot }morf{%" elbat snoitcasnarT
+        col_category: yrogetaC
+        col_and_category: yrogetac dna
+        col_amount: tnuomA
+        col_clear_all: lla raelC
+        col_date: etaD
+        col_description: noitpircseD
+        col_and_description: noitpircsed dna
+        col_select_all: lla tceleS
+        sorted: detroS
+    use_ccms:
+      show:
+        title_html: ">rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit rbba< ni
+          noitacilppa siht etelpmoc ot deen uoY"
+        sub_heading: ":tneilc ruoy fi ecivres siht esu tonnac uoY"
+        continue_in_ccms_html: ">rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+          rbba< ni eunitnoC"
+        back_to_applications: snoitacilppa ym ot kcaB
+        online_banking_consent:
+          list: |2-
+
+            deyolpme si
+            stnuocca knab rieht ot ssecca emit-eno AAL eht evig ton lliw
+            stnuocca tnerruc rieht fo lla rof gniknab enilno esu ton seod
+    use_ccms_employed:
+      index:
+        title_html: ">rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit rbba< ni
+          noitacilppa siht etelpmoc ot deen uoY"
+        warning: ".deyolpme si tneilc ruoy fi ecivres siht esu tonnac uoY"
+        continue_in_ccms_html: ">rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+          rbba< ni eunitnoC"
+        back_to_applications: snoitacilppa ym ot kcaB
+    used_delegated_functions:
+      show:
+        heading: "?snoitcnuf detageled desu uoy evaH"
+    vehicles:
+      show:
+        heading: "?elcihev a nwo tneilc ruoy seoD"
+      estimated_values:
+        show:
+          heading: "?elcihev eht fo eulav detamitse eht si tahW"
+      ages:
+        show:
+          heading: "?oga sraey 3 revo elcihev eht yub tneilc ruoy diD"
+      regular_uses:
+        show:
+          heading: "?esu raluger ni elcihev eht sI"
+          include_partner_use: ".SREDIVORP- )eno evah yeht fi( rentrap s'tneilc ruoy
+            yb esu sedulcni sihT"
+      remaining_payments:
+        show:
+          heading: "?elcihev eht no tfel stnemyap yna ereht erA"
+          detail_of_payments_to_include: |2-
+
+            stnemeerga )PCP( esahcrup tcartnoc lanosrep
+            ro )PH( esahcrup erih ,snaol no stnemyap gnidnatstuo yna edulcnI
+          enter_amount_left_to_pay: yap ot tfel tnuoma eht retnE
+    email_addresses:
+      show:
+        page_title: sserdda liame s'tneilc ruoy retnE
+        hint: ".ecivres eht ot knil a tneilc ruoy dnes ot siht esu ll'eW"
+    has_dependants:
+      show:
+        page_title: "?stnadneped yna evah tneilc ruoy seoD"
+        existing: "}tnuoc{% dedda evah uoY"
+        info: ":ohw tluda ro dlihc a si tnadneped A"
+        list: |2-
+
+          troppus laicnanif rof tneilc ruoy no sdneped
+          tneilc ruoy htiw sevil
+        extra_info: ".eno evah yeht fi rentrap s'tneilc ruoy edulcni ton oD"
+    dependants:
+      new:
+        page_title: sliated tnadneped retnE
+      show:
+        page_title: sliated tnadneped dnemA
+      form:
+        relationship: "?tneilc ruoy ot pihsnoitaler rieht si tahW"
+        option:
+          child_relative: evitaler dlihc a er'yehT
+          adult_relative: evitaler tluda na er'yehT
+          hint:
+            child_relative: ".wehpen ro ecein ,dlihcdnarg ,dlihc ruoy ,elpmaxe roF"
+            adult_relative: ".elcnu ro tnua ,tnerapdnarg ,tnerap a ,elpmaxe roF"
+        in_full_time_education: "?gniniart ro noitacude emit-lluf ni yeht erA"
+        has_income:
+          question: "?emocni yna eviecer tnadneped siht seoD"
+          hint: ".tnarg ro naol tneduts ro ,pihsecitnerppa ,boj a morf yenom ,elpmaxe
+            roF"
+          enter_monthly_income: htnom hcae teg yeht tnuoma eht retnE
+        has_assets_more_than_threshold:
+          question: "?000,8£ naht erom htrow stessa evah tnadneped siht seoD"
+          hint: ".serahs ro sgnivas hsac ,ytreporp ,elpmaxe roF"
+          enter_assets_value: eulav tessa latot eht retnE
+    has_other_dependants:
+      show:
+        page_title: "?stnadneped rehto yna evah tneilc ruoy seoD"
+        existing: "}tnuoc{% dedda evah uoY"
+        remove: evomeR
+        warning:
+          delete: "?tnadneped siht eteled ot tnaw uoy erus uoy erA"
+        error: stnadneped rehto evah yeht fi sey tceleS
+    remove_dependant:
+      show:
+        page_title: "?}eman{% evomer ot tnaw uoy erus uoy erA"
+        error: tnadneped eht eteled ot hsiw uoy fi sey tceleS
