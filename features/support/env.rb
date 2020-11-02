@@ -12,6 +12,20 @@ require 'webmock/cucumber'
 require 'factory_bot'
 require 'webdrivers'
 
+# HACK: this method was available in cucumber 3.1 but not cucumber 4 and VCR relies on it to
+# generate cassette names.
+module Cucumber
+  module RunningTestCase
+    class TestCase < SimpleDelegator
+      def feature
+        string = File.read(location.file)
+        document = ::Gherkin::Parser.new.parse(string)
+        document[:feature]
+      end
+    end
+  end
+end
+
 allowed_sites = [
   ->(uri) do
     [
@@ -98,10 +112,10 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+Cucumber::Rails::Database.javascript_strategy = :transaction
+load Rails.root.join('db/seeds.rb')
 
 Before do |_scenario|
-  load Rails.root.join('db/seeds.rb')
   Populators::TransactionTypePopulator.call
   # Delete previous screenshots from filesystem that were generated during previous feature runs
   FileUtils.rm_rf("#{Rails.root}/tmp/capybara/**.*")
