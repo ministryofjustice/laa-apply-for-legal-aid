@@ -44,6 +44,8 @@ module Admin
         return false
       end
 
+      return false unless parse_uri
+
       if raw_response.code != '200'
         format_error_message
         return false
@@ -62,6 +64,10 @@ module Admin
                  else
                    "Bad response from Provider Details API: HTTP status #{raw_response.code}"
                  end
+    end
+
+    def format_unicode_username
+      @message = "'#{@provider.username}' contains unicode characters, please re-type if cut and pasted"
     end
 
     def format_check_success_message
@@ -85,7 +91,14 @@ module Admin
     end
 
     def raw_response
-      @raw_response ||= Net::HTTP.get_response(URI.parse(provider_details_url))
+      @raw_response ||= Net::HTTP.get_response(@parsed_uri)
+    end
+
+    def parse_uri
+      @parsed_uri = URI.parse(provider_details_url)
+    rescue URI::InvalidURIError
+      format_unicode_username
+      false
     end
 
     def firm
