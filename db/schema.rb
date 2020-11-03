@@ -597,7 +597,6 @@ ActiveRecord::Schema.define(version: 2020_11_02_133306) do
     t.string "email"
     t.boolean "portal_enabled", default: true
     t.integer "contact_id"
-    t.string "invalid_login_details"
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
