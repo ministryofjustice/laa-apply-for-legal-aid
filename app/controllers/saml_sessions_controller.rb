@@ -4,6 +4,7 @@
 #       To prevent this, restart your server after modifying this file.
 #
 class SamlSessionsController < Devise::SamlSessionsController
+  before_action :update_locale
   after_action :update_provider_details, only: :create
 
   def destroy
@@ -37,5 +38,9 @@ class SamlSessionsController < Devise::SamlSessionsController
 
   def current_user
     current_provider
+  end
+
+  def update_locale
+    I18n.locale = I18n.default_locale
   end
 end
