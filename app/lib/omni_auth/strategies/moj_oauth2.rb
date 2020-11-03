@@ -14,7 +14,7 @@ module OmniAuth
     # You must generally register your application with the provider and
     # utilize an application id and secret in order to authenticate using
     # OAuth 2.0.
-    class MojOAuth2 # rubocop:disable Metrics/ClassLength
+    class MojOauth2 # rubocop:disable Metrics/ClassLength
       include OmniAuth::Strategy
       include Browser::ActionController
 

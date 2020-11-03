@@ -1,3 +1,5 @@
 module PrometheusCollectors
-  require_relative 'sidekiq_queue_collector'
+  module Collectors
+    require_relative 'sidekiq_queue_collector'
+  end
 end

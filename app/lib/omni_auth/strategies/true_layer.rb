@@ -12,7 +12,7 @@ module OmniAuth
     # eventually be removed), and to save and re-instate the session in redis to cater for users with mobile devices
     # who exit the browser to look for banking credentials, thus destroying the session
     #
-    class TrueLayer < OmniAuth::Strategies::MojOAuth2
+    class TrueLayer < OmniAuth::Strategies::MojOauth2
       option :name, :true_layer
 
       option :client_options,
