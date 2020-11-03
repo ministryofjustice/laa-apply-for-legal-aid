@@ -1,6 +1,7 @@
 module Citizens
   class ResendLinkRequestsController < ApplicationController
-    around_action :switch_locale
+    include LocaleSwitchable
+    before_action :update_locale
     def show; end
 
     def update
@@ -24,11 +25,6 @@ module Citizens
 
     def secure_id
       legal_aid_application.generate_secure_id
-    end
-
-    def switch_locale(&action)
-      locale = params[:locale] || I18n.default_locale
-      I18n.with_locale(locale, &action)
     end
   end
 end

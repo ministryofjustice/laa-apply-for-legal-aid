@@ -1,6 +1,6 @@
 module Admin
   module Roles
-    class PermissionsController < ApplicationController
+    class PermissionsController < AdminBaseController
       before_action :authenticate_admin_user!
       layout 'admin'.freeze
 
