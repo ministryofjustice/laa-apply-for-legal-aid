@@ -11,7 +11,7 @@ module Admin
     let(:provider) { Provider.new(username: username) }
     let(:api_url) { "#{dummy_provider_details_host}#{normalized_username}" }
     let(:normalized_username) { username.upcase.gsub(' ', '%20') }
-    let(:username) { 'johnny depp' }
+    let(:username) { 'sarah smith' }
     let(:service) { described_class.new(provider) }
 
     shared_examples 'service handling error conditions' do
@@ -26,7 +26,7 @@ module Admin
 
         it 'explains in the message' do
           subject
-          expect(service.message).to eq 'User johnny depp already exists in database'
+          expect(service.message).to eq 'User sarah smith already exists in database'
         end
       end
 
@@ -39,7 +39,7 @@ module Admin
 
         it 'explains in message' do
           subject
-          expect(service.message).to eq 'User johnny depp not known to CCMS'
+          expect(service.message).to eq 'User sarah smith not known to CCMS'
         end
       end
 
@@ -64,7 +64,7 @@ module Admin
         end
         it 'explains in message' do
           subject
-          expect(service.message).to eq 'No entry for user johnny depp found in list of contacts returned by CCMS'
+          expect(service.message).to eq 'No entry for user sarah smith found in list of contacts returned by CCMS'
         end
       end
     end
@@ -79,7 +79,7 @@ module Admin
         # we suspect that this comes from a cut and paste from MS into
         # the login box when parsed it returns BRAND%20NEW\u2011USER
         let(:username) { 'brand new‑user' }
-        let(:response_body) { johnny_depp_response.to_json }
+        let(:response_body) { sarah_smith_response.to_json }
         let(:http_status) { 200 }
 
         subject { service.check }
@@ -97,14 +97,14 @@ module Admin
       context 'success' do
         let(:http_status) { 200 }
         context 'username in list of contacts' do
-          let(:response_body) { johnny_depp_response.to_json }
+          let(:response_body) { sarah_smith_response.to_json }
           it 'responds success' do
             expect(service.check).to eq :success
           end
 
           it 'puts firm name in message' do
             service.check
-            expect(service.message).to eq 'User johnny depp confirmed for firm LOCAL LAW & CO LTD'
+            expect(service.message).to eq 'User sarah smith confirmed for firm LOCAL LAW & CO LTD'
           end
         end
       end
@@ -120,7 +120,7 @@ module Admin
         let(:http_status) { 200 }
         subject { service.create }
         context 'no firm or offices pre-exist' do
-          let(:response_body) { johnny_depp_response.to_json }
+          let(:response_body) { sarah_smith_response.to_json }
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
             expect(Provider.exists?(username: username)).to be true
@@ -151,7 +151,7 @@ module Admin
             create_office firm, '81333', '8B869F'
           end
           let(:firm) { create_firm }
-          let(:response_body) { johnny_depp_response.to_json }
+          let(:response_body) { sarah_smith_response.to_json }
 
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
@@ -174,7 +174,7 @@ module Admin
             create_office firm, '81333', '8B869F'
           end
           let(:firm) { create_firm }
-          let(:response_body) { johnny_depp_response.to_json }
+          let(:response_body) { sarah_smith_response.to_json }
 
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
@@ -203,7 +203,7 @@ module Admin
       Office.create(firm: firm, ccms_id: ccms_id, code: code)
     end
 
-    def johnny_depp_response
+    def sarah_smith_response
       {
         'providerFirmId' => 24_493,
         'contactUserId' => 47_096,
@@ -213,7 +213,7 @@ module Admin
           { 'id' => 2_047_682, 'name' => 'SSALAM@LOCAL-LAW.COM' },
           { 'id' => 2_047_672, 'name' => 'CREID@LOCAL-LAW.COM' },
           { 'id' => 2_047_676, 'name' => 'MGUL@LOCAL-LAW.COM' },
-          { 'id' => 3_043_805, 'name' => 'JOHNNY DEPP' },
+          { 'id' => 3_043_805, 'name' => 'SARAH SMITH' },
           { 'id' => 3_178_792, 'name' => 'DJXANKAZTAL' }
         ],
         'feeEarners' => [],
@@ -229,8 +229,8 @@ module Admin
         'timestamp' => '2020-07-28T10:52:01.141+0000',
         'status' => 404,
         'error' => 'Not Found',
-        'message' => 'No records found for [JOHNNY%20DEPP]',
-        'path' => '/api/providerDetails/JOHNNY%20DEPP'
+        'message' => 'No records found for [SARAH%20SMITH]',
+        'path' => '/api/providerDetails/SARAH%20SMITH'
       }
     end
 
@@ -264,7 +264,7 @@ module Admin
           { 'id' => 2_047_682, 'name' => 'SSALAM@LOCAL-LAW.COM' },
           { 'id' => 2_047_672, 'name' => 'CREID@LOCAL-LAW.COM' },
           { 'id' => 2_047_676, 'name' => 'MGUL@LOCAL-LAW.COM' },
-          { 'id' => 3_043_805, 'name' => 'JOHNNY DEPP' },
+          { 'id' => 3_043_805, 'name' => 'SARAH SMITH' },
           { 'id' => 3_178_792, 'name' => 'DJXANKAZTAL' }
         ],
         'feeEarners' => [],
