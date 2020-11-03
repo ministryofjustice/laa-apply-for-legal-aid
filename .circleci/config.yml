@@ -84,9 +84,10 @@ references:
         $(aws ecr get-login --region eu-west-2 --no-include-email)
         setup-kube-auth
         kubectl config use-context uat
+
   sentry_deploy: &sentry_deploy
     run:
-      name: "Create sentry deploy for ${SENTRY_ENVIRONMENT}"
+      name: Create sentry deploy for ${SENTRY_ENVIRONMENT}
       command: |
         curl -sL https://sentry.io/get-cli/ | bash
         export SENTRY_RELEASE=$(sentry-cli releases propose-version)
