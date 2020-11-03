@@ -47,7 +47,7 @@ class DashboardEventHandler
 
   def ccms_submission_saved
     Dashboard::UpdaterJob.perform_later('Applications') if payload[:state] == 'failed'
-    Dashboard::UpdaterJob.set(wait: 1.minute).perform_later('PendingCcmsSubmissions') unless payload[:state].in?(%w[failed completed])
+    Dashboard::UpdaterJob.set(wait: 1.minute).perform_later('PendingCCMSSubmissions') unless payload[:state].in?(%w[failed completed])
   end
 
   def declined_open_banking

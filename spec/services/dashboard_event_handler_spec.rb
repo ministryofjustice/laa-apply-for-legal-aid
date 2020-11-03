@@ -63,8 +63,8 @@ RSpec.describe DashboardEventHandler do
         expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
       end
 
-      it 'does not fire a PendingCcmsSubmissions job' do
-        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with('PendingCcmsSubmissions')
+      it 'does not fire a PendingCCMSSubmissions job' do
+        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with('PendingCCMSSubmissions')
       end
     end
 
@@ -75,8 +75,8 @@ RSpec.describe DashboardEventHandler do
         expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
       end
 
-      it 'does not fire a PendingCcmsSubmissions job' do
-        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with('PendingCcmsSubmissions')
+      it 'does not fire a PendingCCMSSubmissions job' do
+        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with('PendingCCMSSubmissions')
       end
     end
   end

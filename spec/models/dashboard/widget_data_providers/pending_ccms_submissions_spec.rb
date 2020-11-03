@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Dashboard
   module WidgetDataProviders
-    RSpec.describe PendingCcmsSubmissions do
+    RSpec.describe PendingCCMSSubmissions do
       describe '.handle' do
         it 'returns the unqualified widget name' do
           expect(described_class.handle).to eq 'pending_ccms_submissions'

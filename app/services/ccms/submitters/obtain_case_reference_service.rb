@@ -5,7 +5,7 @@ module CCMS
         submission.case_ccms_reference = reference_id
         submission.save!
         create_history(:initialised, submission.aasm_state, xml_request, response) if submission.obtain_case_ref!
-      rescue CcmsError => e
+      rescue CCMSError => e
         handle_exception(e, xml_request)
       end
 

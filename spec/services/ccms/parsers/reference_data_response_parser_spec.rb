@@ -19,7 +19,7 @@ module CCMS
             expect {
               parser = described_class.new(Faker::Number.number(digits: 20), response_xml)
               parser.reference_id
-            }.to raise_error CCMS::CcmsError, "Invalid transaction request id #{expected_tx_id}"
+            }.to raise_error CCMS::CCMSError, "Invalid transaction request id #{expected_tx_id}"
           end
         end
 

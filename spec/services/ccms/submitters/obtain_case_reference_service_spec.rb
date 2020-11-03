@@ -60,7 +60,7 @@ module CCMS
 
       context 'operation in error' do
         before do
-          expect_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
+          expect_any_instance_of(CCMS::Requestors::ReferenceDataRequestor).to receive(:call).and_raise(CCMS::CCMSError, 'oops')
         end
 
         it 'puts it into failed state' do
@@ -73,7 +73,7 @@ module CCMS
           expect(history.from_state).to eq 'initialised'
           expect(history.to_state).to eq 'failed'
           expect(history.success).to be false
-          expect(history.details).to match(/CCMS::CcmsError/)
+          expect(history.details).to match(/CCMS::CCMSError/)
           expect(history.details).to match(/oops/)
           expect(history.request).to be_soap_envelope_with(
             command: 'ns2:ReferenceDataInqRQ',

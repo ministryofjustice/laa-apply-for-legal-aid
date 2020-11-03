@@ -66,7 +66,7 @@ module CCMS
         when 'date'
           raw_value.is_a?(Date) ? raw_value.strftime('%d-%m-%Y') : raw_value
         else
-          raise CcmsError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}"
+          raise CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}"
         end
       end
 

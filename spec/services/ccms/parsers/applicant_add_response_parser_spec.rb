@@ -18,7 +18,7 @@ module CCMS
             expect {
               parser = described_class.new(Faker::Number.number(digits: 20), response_xml)
               parser.success?
-            }.to raise_error CCMS::CcmsError, "Invalid transaction request id #{expected_tx_id}"
+            }.to raise_error CCMS::CCMSError, "Invalid transaction request id #{expected_tx_id}"
           end
 
           describe '#success' do
@@ -70,7 +70,7 @@ module CCMS
         describe '#success?' do
           it 'raises' do
             parser = described_class.new(expected_tx_id, response_xml)
-            expect { parser.success? }.to raise_error CCMS::CcmsError, 'Unable to find status code or exception in response'
+            expect { parser.success? }.to raise_error CCMS::CCMSError, 'Unable to find status code or exception in response'
           end
         end
       end
@@ -80,7 +80,7 @@ module CCMS
         let(:response_xml) { ccms_data_from_file 'applicant_add_response_success.xml' }
         it 'raises' do
           parser = described_class.new(expected_tx_id, response_xml)
-          expect { parser.success? }.to raise_error CCMS::CcmsError, 'Invalid transaction request id 20190301030405123456'
+          expect { parser.success? }.to raise_error CCMS::CCMSError, 'Invalid transaction request id 20190301030405123456'
         end
       end
     end
