@@ -71,7 +71,8 @@ module OmniAuth
         # where only the applicant_id will be available.
         #
         OauthSessionSaver.store(applicant_id, session)
-        OauthSessionSaver.store(state, session)
+        OauthSessionSaver.store(auth_params[:state], session)
+
         Debug.record_request(session, auth_params, callback_url, browser_details)
         redirect client.auth_code.authorize_url({ redirect_uri: callback_url }.merge(auth_params))
       end
