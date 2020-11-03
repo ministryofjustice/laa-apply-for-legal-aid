@@ -287,6 +287,7 @@ jobs:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
+    - *sentry_deploy
 
   deploy_master_uat:
     <<: *deploy_uat
