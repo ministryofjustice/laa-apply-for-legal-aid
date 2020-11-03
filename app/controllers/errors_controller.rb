@@ -1,5 +1,4 @@
 class ErrorsController < ApplicationController
-  include LocaleSwitchable
   before_action :update_locale
   def show; end
 

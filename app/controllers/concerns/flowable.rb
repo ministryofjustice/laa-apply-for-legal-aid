@@ -1,6 +1,5 @@
 module Flowable
   extend ActiveSupport::Concern
-  include JourneyTypeIdentifiable
 
   class_methods do
     # Use a step prefix to avoid step name clashes.
@@ -20,7 +19,7 @@ module Flowable
   end
 
   included do
-    helper_method :forward_path
+    helper_method :forward_path, :journey_type
 
     def go_forward(flow_param = nil)
       path = forward_path(flow_param)
@@ -39,6 +38,18 @@ module Flowable
         current_step: current_step,
         params: flow_param
       )
+    end
+
+    def journey_type
+      @journey_type ||= first_module_of_parent_name_space.to_sym
+    end
+
+    def first_module_of_parent_name_space
+      parent_name_space_module.to_s.snakecase.split('/').first
+    end
+
+    def parent_name_space_module
+      self.class.module_parent
     end
 
     def path?(string)

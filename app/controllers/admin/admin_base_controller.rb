@@ -1,6 +1,5 @@
 module Admin
   class AdminBaseController < ApplicationController
-    include JourneyTypeIdentifiable
     before_action :check_vpn_ipaddr, :authenticate_admin_user!
     layout 'admin'.freeze
 

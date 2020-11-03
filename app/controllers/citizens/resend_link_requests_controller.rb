@@ -1,6 +1,5 @@
 module Citizens
   class ResendLinkRequestsController < ApplicationController
-    include LocaleSwitchable
     before_action :update_locale
     def show; end
 

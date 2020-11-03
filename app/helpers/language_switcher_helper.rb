@@ -9,4 +9,16 @@ module LanguageSwitcherHelper
     links.delete_suffix! ' | '
     links.html_safe
   end
+
+  def show_language_switcher?
+    citizen_page? && !pages_without_language_switcher.include?(request.path)
+  end
+
+  def citizen_page?
+    session[:journey_type] == :citizens || %r{/assessment_already_completed}.match?(request.path)
+  end
+
+  def pages_without_language_switcher
+    ['/citizens/gather_transactions']
+  end
 end

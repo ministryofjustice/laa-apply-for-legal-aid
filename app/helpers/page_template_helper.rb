@@ -53,7 +53,7 @@ module PageTemplateHelper
     content_for(:navigation) { back_link(**back_link) unless back_link == :none }
     page_title_possibly_with_error({ page_title: page_title, head_title: head_title }, show_errors_for&.errors)
     content = capture(&content) if content
-    content_for(:language_switcher) { language_links if journey_type == :citizens && !pages_without_language_switcher.include?(request.path) }
+    content_for(:language_switcher) { language_links if show_language_switcher? }
     render(
       "shared/page_templates/#{template}_page_template",
       page_title: page_title,
@@ -92,9 +92,5 @@ module PageTemplateHelper
     prefix = t('errors.title_prefix')
     content_for(:page_title) { headings[:page_title] }
     content_for(:head_title) { "#{prefix}: #{headings[:head_title] || headings[:page_title]}" }
-  end
-
-  def pages_without_language_switcher
-    ['/citizens/gather_transactions']
   end
 end

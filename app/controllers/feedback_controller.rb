@@ -1,5 +1,4 @@
 class FeedbackController < ApplicationController
-  include LocaleSwitchable
   before_action :update_return_path, :update_locale
 
   def new
@@ -121,9 +120,5 @@ class FeedbackController < ApplicationController
 
   def citizen_path_regex
     @citizen_path_regex ||= Regexp.new(/\/citizens\//)
-  end
-
-  def journey_type
-    citizen_journey? ? :citizens : :providers
   end
 end
