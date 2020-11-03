@@ -3,7 +3,8 @@ require 'raven'
 if %w[production].include?(Rails.env) && ENV['SENTRY_DSN'].present?
   Raven.configure do |config|
     config.dsn = ENV['SENTRY_DSN']
-    config.environments = %w[production]
+    config.environments = %w[production staging uat]
+    config.current_environment = ENV['SENTRY_ENVIRONMENT'] || %w[local]
     config.sanitize_fields = Rails.application.config.filter_parameters.map(&:to_s)
   end
 end
