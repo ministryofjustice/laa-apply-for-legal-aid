@@ -17,7 +17,7 @@ module Citizens
 
     private
 
-    def authenticate_with_devise!
+    def authenticate_with_devise
       authenticate_applicant!
     end
 
