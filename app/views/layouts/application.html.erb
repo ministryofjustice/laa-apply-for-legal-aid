@@ -62,7 +62,17 @@
         </p>
       </div>
 
-      <%= content_for(:navigation) %>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half show-empty">
+          <%= content_for(:navigation) %>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <p class="language-switcher">
+            <!-- TODO: Remove the below if clause when the Welsh language version is released to production -->
+            <%= content_for(:language_switcher) if Setting.allow_welsh_translation? %>
+          </p>
+        </div>
+      </div>
 
       <main class="govuk-main-wrapper " id="main-content" role="main">
         <div id="print-logo">

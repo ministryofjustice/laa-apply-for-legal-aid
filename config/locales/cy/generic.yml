@@ -4,6 +4,8 @@ cy:
     back: kcaB
     change: egnahC
     continue: eunitnoC
+    cy: Cymraeg
+    en: English
     errors:
       problem_text: melborp a si erehT
     'no': 'oN'
