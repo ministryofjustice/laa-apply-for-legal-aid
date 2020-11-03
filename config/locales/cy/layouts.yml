@@ -22,4 +22,6 @@ cy:
         phase_banner_text_1: ruoy - ecivres wen a si sihT
         phase_banner_text_2: ".ti evorpmi ot su pleh lliw"
         title: dia lagel rof ylppA
+    logout:
+      provider: tuo ngiS
     login: nI ngiS
