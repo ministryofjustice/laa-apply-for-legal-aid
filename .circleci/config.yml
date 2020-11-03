@@ -84,6 +84,14 @@ references:
         $(aws ecr get-login --region eu-west-2 --no-include-email)
         setup-kube-auth
         kubectl config use-context uat
+  sentry_deploy: &sentry_deploy
+    run:
+      command: |
+        curl -sL https://sentry.io/get-cli/ | bash
+        export SENTRY_RELEASE=$(sentry-cli releases propose-version)
+        sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+        sentry-cli releases set-commits --auto $SENTRY_RELEASE
+        sentry-cli releases finalize $SENTRY_RELEASE
 
   update_packages: &update_packages
     run:
@@ -267,6 +275,8 @@ jobs:
 
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
+    environment:
+      SENTRY_ENVIRONMENT: uat
     steps:
     - checkout
     - setup_remote_docker
@@ -276,11 +286,15 @@ jobs:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
+    - *sentry_deploy
+
   deploy_master_uat:
     <<: *deploy_uat
 
   deploy_staging:
     executor: cloud-platform-executor
+    environment:
+      SENTRY_ENVIRONMENT: staging
     steps:
     - checkout
     - setup_remote_docker
@@ -301,9 +315,12 @@ jobs:
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}"
+    - *sentry_deploy
 
   deploy_production:
     executor: cloud-platform-executor
+    environment:
+      SENTRY_ENVIRONMENT: production
     steps:
     - checkout
     - setup_remote_docker
@@ -324,14 +341,7 @@ jobs:
                         --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}"
-    - run:
-        name: Update sentry release
-        command: |
-          curl -sL https://sentry.io/get-cli/ | bash
-          export SENTRY_RELEASE=$(sentry-cli releases propose-version)
-          sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
-          sentry-cli releases set-commits --auto $SENTRY_RELEASE
-          sentry-cli releases finalize $SENTRY_RELEASE
+    - *sentry_deploy
 
   clean_up_ecr:
     executor: linting-executor
