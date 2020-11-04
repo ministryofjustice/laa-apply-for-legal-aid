@@ -273,6 +273,8 @@ jobs:
     - deploy:
         name: Helm deployment to UAT
         command: |
+          helm version
+          git --version
           ./bin/uat_deploy
   deploy_master_uat:
     <<: *deploy_uat
