@@ -3,11 +3,11 @@ require Rails.root.join('app', 'lib', 'omniauth', 'strategies', 'moj_oauth2')
 
 module OmniAuth
   module Strategies
-    RSpec.describe  MojOAuth2 do
+    RSpec.describe MojOAuth2 do
       let(:mock_rack_app) { double Rack::Pjax, call: nil }
       let(:applicant_id) { '50b98c1b-cf5d-428e-b32c-d20e9d1184dd' }
       let(:omniauth_state) { '6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76' }
-      let(:strategy) { described_class.new(mock_rack_app, {} ) }
+      let(:strategy) { described_class.new(mock_rack_app, {}) }
       let(:session) { example_session }
       let(:client_id) { 'my_client_id' }
       let(:client_secret) { 'my_client_secret' }
@@ -56,7 +56,6 @@ module OmniAuth
           expect(OauthSessionSaver).to receive(:destroy!).with(omniauth_state)
           strategy.callback_phase
         end
-
       end
 
       def example_session
@@ -69,7 +68,8 @@ module OmniAuth
             '_csrf_token' => 'bHisWZcUID4DqymnSBSyJ31OghMf8cop4Aw/9RJ3T9c=',
             'provider_id' => 'mock',
             'omniauth.state' => omniauth_state
-          })
+          }
+        )
       end
 
       def example_auth_params
@@ -77,27 +77,29 @@ module OmniAuth
           {
             'state' => omniauth_state,
             'scope' => 'info accounts balance transactions',
-            'enable_mock'=>true,
+            'enable_mock' => true,
             'provider_id' => 'mock',
             'consent_id' => 'applyforlegalaidtest-uxqw',
             'tracking_id' => '9829f7c1-e8c4-4334-8f39-ff48e024ea62'
-          })
+          }
+        )
       end
 
       def example_request_params
         HashWithIndifferentAccess.new(
           {
             state: omniauth_state
-          })
+          }
+        )
       end
 
       def example_environment
         HashWithIndifferentAccess.new(
           {
             'omniauth.auth' => {}
-          })
+          }
+        )
       end
     end
   end
 end
-

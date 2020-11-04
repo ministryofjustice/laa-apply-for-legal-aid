@@ -69,6 +69,7 @@ RSpec.configure do |config|
   config.include XMLBlockMatchers
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
+    DatabaseCleaner.clean_with :truncation
   end
 
   # Add support for Devise authentication helpers
