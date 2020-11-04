@@ -274,7 +274,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'outgoing transactions' do
         let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: nil, bank_account: bank_account }
-        let!(:transaction_type) { create :transaction_type, :debit }
+        let!(:transaction_type) { create :transaction_type, :debit, :friends_or_family }
         it 'returns true' do
           expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq true
         end
