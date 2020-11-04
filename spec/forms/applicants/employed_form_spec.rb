@@ -22,7 +22,7 @@ RSpec.describe Applicants::EmployedForm, type: :form do
     let(:params) { { employed: 'false' } }
     let(:form_params) { params.merge(model: applicant) }
 
-    it 'saves updates record with new value of employed attribute' do
+    it 'updates record with new value of employed attribute' do
       expect(applicant.employed).to be_nil
       subject.save
       expect(applicant.employed).to eq false

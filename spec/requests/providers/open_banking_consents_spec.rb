@@ -90,7 +90,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
         end
       end
 
-      context 'positive beenfit check result' do
+      context 'positive benefit check result' do
         it 'redirects to the client instructions page' do
           expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
         end

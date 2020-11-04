@@ -7,88 +7,11 @@ cy:
     accessibility:
       error: ":rorrE"
     hint:
-      additional_account: yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca
-        yna fo sliated erahS
-      address_lookup:
-        postcode: edoctsop KU dilav a eb tsum sihT
-      applicant:
-        national_insurance_number: "'C 65 43 21 QQ' ,elpmaxe roF"
-      legal_aid_application:
-        outstanding_mortgage_amount:
-          citizens: rednel ro redivorp egagtrom ruoy morf tnemetats eht kcehC
-          providers: ''
-        percentage_home: ".egagtrom ro dloheerf ,esael ,sdeed ytreporp eht no eb tsum
-          eman ruoY"
-        property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac uoY
-        own_vehicle: selcycrotom dna snav ,srac sedulcni sihT
-      merits_assessment:
-        estimated_legal_cost: seef lesnuoc dna stsoc trepxe ,stnemesrubsid ,stsoc
-          tiforp edulcni esaelP
+      additional_account: yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca yna fo sliated erahS
       student_finance: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
     label:
-      applicant:
-        employed:
-          'false': 'oN'
-          'true': seY
       feedback:
         done_all_needed:
           'false': 'oN'
           'true': seY
-        improvement_suggestion: "?ecivres eht evorpmi dluoc ew woh no snoitseggus
-          ro kcabdeef rehto yna evah uoy oD"
-      merits_assessment:
-        application_purpose: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated
-          evig esaelP
-        client_received_legal_help:
-          'false': 'oN'
-          'true': seY
-        details_of_proceedings_before_the_court: ".sliated evig esaelP"
-        proceedings_before_the_court:
-          'false': 'oN'
-          'true': seY
-        success_prospect_details: detnarg eb dluohs dia lagel yhw su lleT
-        success_likely:
-          'false': 'oN'
-          'true': seY
-      other_assets_declaration:
-        check_box_second_home: emoh yadiloh ro ytreporp dnoceS
-        second_home_mortgage: tnuoma egagtrom gnidnatstuo retnE
-        second_home_percentage: nwo yllagel uoy erahs egatnecrep retnE
-        second_home_value: eulav detamitse retnE
-      legal_aid_application:
-        own_vehicle:
-          'false': 'oN'
-          'true': seY
-      respondent:
-        understands_terms_of_court_order_details: redro na fo hcaerb a ecrofne dluow
-          truoc eht kniht uoy yhw su lleT
-        warning_letter_sent_details: tnes neeb ton sah rettel gninraw a yhw su lleT
-        bail_conditions_set_details: dne ot ylekil er'yeht etad eht gnidulcni ,snoitidnoc
-          liab eht fo sliated eviG
-        police_notified_details: emoctuo eht dna setad gnidulcni ,)yna fi( nekat ev'yeht
-          noitca tahw su lleT
-        understands_terms_of_court_order:
-          'false': 'oN'
-          'true': seY
-        warning_letter_sent:
-          'false': 'oN'
-          'true': seY
-        police_notified:
-          'false': 'oN'
-          'true': seY
-        bail_conditions_set:
-          'false': 'oN'
-          'true': seY
-      setting:
-        mock_true_layer_data:
-          'false': 'oN'
-          'true': seY
-        allow_non_passported_route:
-          'false': 'oN'
-          'true': seY
-        manually_review_all_cases:
-          'false': 'oN'
-          'true': seY
-        allow_welsh_translation:
-          'false': 'oN'
-          'true': seY
+        improvement_suggestion: "?ecivres eht evorpmi dluoc ew woh no snoitseggus ro kcabdeef rehto yna evah uoy oD"

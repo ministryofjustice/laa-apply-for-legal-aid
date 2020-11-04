@@ -89,7 +89,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
           expect(applicant.reload.employed).to be_nil
         end
 
-        it 'the response includes the error message' do
+        it 'includes the error message in the response' do
           expect(response.body).to include(I18n.t('activemodel.errors.models.applicant.attributes.employed.blank'))
         end
       end
