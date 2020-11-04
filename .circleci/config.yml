@@ -273,8 +273,6 @@ jobs:
     - deploy:
         name: Helm deployment to UAT
         command: |
-          helm version
-          git --version
           ./bin/uat_deploy
   deploy_master_uat:
     <<: *deploy_uat
@@ -361,26 +359,23 @@ workflows:
   version: 2
   open_pr:
     jobs:
-# comment out below to skip tests and deploy straight away
-#      - lint_checks:
-#          filters:
-#            branches:
-#              ignore: master
-      - build_and_push #:
-#          requires:
-#          - lint_checks
-# comment out above to skip tests and deploy straight away
+
+      - lint_checks:
+          filters:
+            branches:
+              ignore: master
+      - build_and_push:
+          requires:
+          - lint_checks
       - deploy_uat:
           requires:
           - build_and_push
-# comment out below to skip tests and deploy straight away
-#      - unit_tests:
-#          requires:
-#          - lint_checks
-#      - integration_tests:
-#          requires:
-#          - lint_checks
-# comment out above to skip tests and deploy straight away
+      - unit_tests:
+          requires:
+          - lint_checks
+      - integration_tests:
+          requires:
+          - lint_checks
       # - webhint_reports:
       #    requires:
       #    - integration_tests
