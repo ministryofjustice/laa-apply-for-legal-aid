@@ -24,6 +24,10 @@ en:
         terms: Terms and conditions
       header:
         gov_uk_link_title: Go to the GOV.UK homepage
+        feedback: feedback
+        phase: beta
+        phase_banner_text_1: This is a new service – your
+        phase_banner_text_2: will help us to improve it.
         title: Apply for legal aid
     logout:
       admin: Admin sign out

@@ -49,7 +49,13 @@ cy:
           savings_and_investments: stnemtsevni dna sgnivaS
           shared_ownership: esle enoyna htiw denwO
         h1-heading: noitamrofni timbus dna srewsna ruoy kcehC
-        bank-heading: stnuocca knab ruoY
+        bank_accounts:
+          heading: stnuocca knab ruoY
+          account: tnuoccA
+          bank: knaB
+          account_number: rebmun tnuoccA
+          sort_code: edoc troS
+          balance: ecnalaB
         link_other_account: tnuocca knab rehtona ddA
         payments_receive_heading: eviecer uoy stnemyaP
         payments_make_heading: ekam uoy stnemyaP

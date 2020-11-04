@@ -10,10 +10,15 @@ class ApplicationController < ActionController::Base
   private
 
   def page_not_found
-    redirect_to error_path(:page_not_found)
+    update_locale
+    redirect_to error_path(:page_not_found, default_url_options)
   end
 
   def default_url_options
     { locale: I18n.locale }
+  end
+
+  def update_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 end

@@ -1,5 +1,5 @@
 class FeedbackController < ApplicationController
-  before_action :update_return_path
+  before_action :update_return_path, :update_locale
 
   def new
     @journey = source

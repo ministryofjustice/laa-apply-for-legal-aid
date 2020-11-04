@@ -52,12 +52,12 @@
       <div class="govuk-phase-banner no-print">
         <p class="govuk-phase-banner__content">
           <strong class="govuk-tag govuk-phase-banner__content__tag ">
-            Beta
+            <%= t 'layouts.application.header.phase' %>
           </strong>
           <span class="govuk-phase-banner__text">
-            This is a new service – your
-            <%= link_to 'feedback', new_feedback_path, class: 'govuk-link' %>
-            will help us to improve it.
+            <%= t 'layouts.application.header.phase_banner_text_1' %>
+            <%= link_to t('layouts.application.header.feedback'), new_feedback_path, class: 'govuk-link' %>
+            <%= t 'layouts.application.header.phase_banner_text_2' %>
           </span>
         </p>
       </div>
