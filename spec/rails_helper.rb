@@ -111,3 +111,11 @@ def set_session(vars = {}) # rubocop:disable Naming/AccessorMethodName
     expect(session[var]).to be_present
   end
 end
+
+# encodes strings to HTML so that comparisons like "O'Keefe & Sons" don't fail
+# for some reason, most entities are translated to their named equivalent, e.g. &amp;
+# but apostrophes are translated to decimal equivalent, '&#39;'
+#
+def html_compare(string)
+  HTMLEntities.new.encode(string).gsub('&apos;', '&#39;')
+end
