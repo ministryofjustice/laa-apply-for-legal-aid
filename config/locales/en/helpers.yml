@@ -23,6 +23,9 @@ en:
         estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
       student_finance: This includes any type of student loan, grant or bursary.
     label:
+      applicant:
+        employed:
+          <<: *true_false
       feedback:
         done_all_needed:
           <<: *true_false

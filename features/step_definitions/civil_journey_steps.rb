@@ -124,6 +124,37 @@ Given('I start a non-passported application') do
   )
 end
 
+Given('I start a non-passported application after a failed benefit check') do
+  steps %(
+   Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'Paul'
+    Then I enter the date of birth '10-12-1961'
+    Then I enter national insurance number 'JA293483B'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1A 1AA'
+    Then I click find address
+    Then I select an address 'Buckingham Palace, London, SW1A 1AA'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Non-molestation order'
+    Then proceeding suggestions has results
+    Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "Covered under a substantive certificate"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+  )
+end
+
 Given('I start the journey as far as the client completed means page') do
   @legal_aid_application = create(
     :application,
@@ -201,6 +232,44 @@ Given('I start the merits application with student finance') do
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
+Given('I start the application with a negative benefit check result') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :applicant_details_checked,
+    :with_negative_benefit_check_result,
+    used_delegated_functions: true
+  )
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :check_benefits,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
+Given('I start the application with a negative benefit check result and no used delegated functions') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :applicant_details_checked,
+    :with_negative_benefit_check_result,
+    used_delegated_functions: false
+  )
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :check_benefits,
     legal_aid_application: @legal_aid_application
   )
 end

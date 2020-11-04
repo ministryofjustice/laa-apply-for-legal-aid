@@ -274,8 +274,7 @@ Feature: Non-passported applicant journeys
 
   @javascript @vcr
   Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
-    Given I start a non-passported application
-    When I click 'Continue'
+    Given I start a non-passported application after a failed benefit check
     Then I should be on the 'does-client-use-online-banking' page showing 'Check if you can continue using this service'
     Then I choose 'Yes'
     And I click 'Save and continue'
@@ -335,3 +334,42 @@ Feature: Non-passported applicant journeys
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should not see 'Student finance'
+
+  @javascript
+  Scenario: Fill in the Applicant employment information after negative benefit check result and used delegated functions
+    Given I start the application with a negative benefit check result
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I click 'Continue'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "You cannot use this service if your client is employed."
+    Then I click link 'Back'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check if you can continue using this service"
+    Then I choose "Yes, I agree"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Do you want to make a substantive application now?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "You told us you've used delegated functions"
+
+  @javascript
+  Scenario: Fill in the Applicant employment information after negative benefit check result and hasn't used delegated functions
+    Given I start the application with a negative benefit check result and no used delegated functions
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I click 'Continue'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "You cannot use this service if your client is employed."
+    Then I click link 'Back'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check if you can continue using this service"
+    Then I choose "Yes, I agree"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What your client has to do"

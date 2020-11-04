@@ -6,7 +6,10 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
-    Then I should be on a page showing 'Check if you can continue using this service'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check if you can continue using this service"
 
   @javascript @vcr
   Scenario: I do not use delegated functions for a passported journey
@@ -24,6 +27,12 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check if you can continue using this service"
+    Then I choose 'Yes, I agree'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -39,10 +48,18 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
+    Then I should be on a page showing "Is your client employed?"
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check if you can continue using this service'
+    Then I choose 'Yes, I agree'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Check if you can continue using this service'
+    Then I should be on a page showing 'What your client has to do'
+    Then I click link 'Continue'
+    Then I should be on a page showing "Enter your client's email address"
 
   @javascript @vcr
   Scenario: I use delegated functions and a substantive application for a passported journey

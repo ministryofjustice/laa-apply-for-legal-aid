@@ -142,6 +142,9 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
@@ -181,6 +184,9 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
@@ -274,6 +280,9 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
@@ -292,8 +301,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS when the applicant is not eligible
-    Given I start a non-passported application
-    Then I click 'Continue'
+    Given I start a non-passported application after a failed benefit check
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'No, I do not agree'
     Then I click 'Save and continue'
@@ -375,6 +383,9 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'

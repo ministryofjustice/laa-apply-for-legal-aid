@@ -148,6 +148,7 @@ Rails.application.routes.draw do
       resource :other_assets, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy]
       resources :check_benefits, only: [:index]
+      resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
       resource :merits_declaration, only: %i[show update]
       resource :capital_introduction, only: %i[show update]
@@ -211,6 +212,7 @@ Rails.application.routes.draw do
       resource :means_summary, only: %i[show update]
       resource :used_delegated_functions, only: %i[show update]
       resource :use_ccms, only: %i[show]
+      resources :use_ccms_employed, only: %i[index]
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]
       resource :submitted_application, only: :show

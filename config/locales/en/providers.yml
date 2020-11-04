@@ -33,6 +33,10 @@ en:
           one: '1 address found',
           other: '%{count} addresses found'
         }
+    applicant_employed:
+      index:
+        heading_1: Is your client employed?
+        hint: This includes full-time, part-time, casual, temporary and self-employment.
     application_confirmations:
       show:
         application_created: Application created
@@ -718,6 +722,12 @@ en:
             does not use online banking for all of their current accounts
             will not give the LAA one-time access to their bank accounts
             is employed
+    use_ccms_employed:
+      index:
+        title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        warning: You cannot use this service if your client is employed.
+        continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        back_to_applications: Back to my applications
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?

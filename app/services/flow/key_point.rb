@@ -10,7 +10,8 @@ module Flow
         edit_applicant: :applicant_details,
         start_after_applicant_completes_means: :client_completed_means,
         start_income_update: :capital_introductions,
-        start_vehicle_journey: :vehicles
+        start_vehicle_journey: :vehicles,
+        check_benefits: :check_benefits
       }
     }.freeze
 
