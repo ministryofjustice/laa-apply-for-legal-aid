@@ -221,7 +221,7 @@ en:
         attribute:
           citizens:
             other_assets:
-              check_box_valuable_items_value: Any valuable items worth more than £500
+              check_box_valuable_items_value: Any valuable items worth £500 or more
               check_box_land_value: Land
               check_box_inherited_assets_value: Money or assets from the estate of a person who has died
               check_box_money_owed_value: Money owed to you, including from a private mortgage
@@ -258,7 +258,7 @@ en:
               plc_shares: Enter the total value of all you own
           providers:
             other_assets:
-              check_box_valuable_items_value: Any valuable items worth more than £500
+              check_box_valuable_items_value: Any valuable items worth £500 or more
               check_box_land_value: Land
               check_box_inherited_assets_value: Money or assets from the estate of a person who has died
               check_box_money_owed_value: Money owed to them, including from a private mortgage
@@ -267,7 +267,7 @@ en:
               check_box_second_home_value: Second property or holiday home estimated value
               check_box_timeshare_property_value: Timeshare property
               check_box_trust_value: Interest in a trust
-              valuable_items_value: Enter estimated total value, minus any sale costs
+              valuable_items_value: Enter the estimated value
               land_value: Enter estimated value
               inherited_assets_value: Enter estimated total value
               money_owed_value: Enter estimated amount owed

@@ -100,7 +100,7 @@ RSpec.describe Citizens::OtherAssetsForm do
         check_box_land_value: 'true',
         land_value: '1,234.55',
         check_box_valuable_items_value: 'true',
-        valuable_items_value: '566.0',
+        valuable_items_value: valuable_items_value,
         check_box_inherited_assets_value: 'true',
         inherited_assets_value: '3,500',
         check_box_money_owed_value: 'true',
@@ -109,6 +109,7 @@ RSpec.describe Citizens::OtherAssetsForm do
         trust_value: '3,560,622.77',
         none_selected: '' }
     end
+    let(:valuable_items_value) { '566.0' }
 
     describe 'instantiation' do
       context 'from an existing record' do
@@ -131,6 +132,19 @@ RSpec.describe Citizens::OtherAssetsForm do
 
               it 'is valid' do
                 expect(form).to be_valid
+              end
+            end
+          end
+
+          context 'invalid form params' do
+            let(:submitted_params) { params }
+
+            describe 'when valuable_items_value is below threshold' do
+              let(:valuable_items_value) { '499.0' }
+
+              it 'is invalid' do
+                expect(form).to be_invalid
+                expect(form.errors[:valuable_items_value]).to eq [translation_for(:valuable_items_value, 'greater_than_or_equal_to')]
               end
             end
           end

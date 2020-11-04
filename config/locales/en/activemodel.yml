@@ -51,7 +51,7 @@ en:
         used_delegated_functions_year: Year
       statement_of_case:
         file_uploaded: "You have uploaded %{file_name}"
-        file_deleted: "You have deleted %{file_name}"  
+        file_deleted: "You have deleted %{file_name}"
       vehicle:
         purchased_on_day: Day
         purchased_on_month: Month
@@ -253,7 +253,7 @@ en:
           attributes:
             valuable_items_value:
               blank: Enter the estimated total value of valuable items
-              greater_than_or_equal_to: Estimated valuable item value must be 0 or more
+              greater_than_or_equal_to: Estimated value must be £500 or more
               not_a_number: Estimated valuable items value must be an amount of money, like 60,000
               too_many_decimals: Estimated valuable items value must not include more than 2 decimal numbers
             land_value:
