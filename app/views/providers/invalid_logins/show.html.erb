@@ -1,7 +1,7 @@
 <% page_title = @provider.provider_details_api_error? ? '.error_title' : '.permission_title' %>
 
 <%= page_template page_title: t(page_title), back_link: :none do %>
-  <p><%= t(".#{@provider.invalid_login_details}.html", team_email: Rails.configuration.x.team_email) %></p>
+  <p><%= t(".#{@provider.invalid_login_details}.html", team_email: Rails.configuration.x.support_email_address) %></p>
 <% end %>
 
 <p /><p />

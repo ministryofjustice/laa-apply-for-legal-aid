@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'provider confirm office', type: :request do
   describe 'GET providers/invalid_login' do
-    let(:email) { Rails.configuration.x.team_email }
+    let(:email) { Rails.configuration.x.support_email_address }
     let(:provider) { create :provider, invalid_login_details: detail }
     before do
       login_as provider

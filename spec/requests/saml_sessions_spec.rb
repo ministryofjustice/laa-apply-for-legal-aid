@@ -200,30 +200,6 @@ RSpec.describe 'SamlSessionsController', type: :request do
         end
       end
     end
-
-    # context 'provider already has some provider details' do
-    #   let(:firm) { create :firm }
-    #
-    #   context 'staging or production' do
-    #     it 'uses a worker to update details' do
-    #       expect(HostEnv).to receive(:staging_or_production?).and_return(true)
-    #       ProviderDetailsCreatorWorker.clear
-    #       expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id).and_call_original
-    #       expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
-    #       subject
-    #       ProviderDetailsCreatorWorker.drain
-    #     end
-    #   end
-    #
-    #   context 'test' do
-    #     it 'does not schedule a worker to update details' do
-    #       ProviderDetailsCreatorWorker.clear
-    #       expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id).and_call_original
-    #       expect(ProviderDetailsCreator).not_to receive(:call).with(provider).and_call_original
-    #       subject
-    #     end
-    #   end
-    # end
   end
 
   def raw_details_response
