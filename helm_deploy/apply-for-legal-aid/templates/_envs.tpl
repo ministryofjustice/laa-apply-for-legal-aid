@@ -61,7 +61,7 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: govukNotifyEnv
-  - name: ORDNANACE_SURVEY_API_KEY
+  - name: ORDNANCE_SURVEY_API_KEY
     valueFrom:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}

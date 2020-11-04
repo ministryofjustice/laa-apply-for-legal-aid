@@ -17,7 +17,7 @@ class AddressLookupService
 
   def query_params
     {
-      key: ENV['ORDNANACE_SURVEY_API_KEY'],
+      key: ENV['ORDNANCE_SURVEY_API_KEY'],
       postcode: postcode,
       lr: 'EN'
     }
