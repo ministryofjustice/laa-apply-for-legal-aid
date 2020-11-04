@@ -19,7 +19,6 @@ module OmniAuth
           allow(strategy).to receive(:authorize_params).and_return(example_auth_params)
           allow(strategy).to receive(:callback_url).and_return('http://dummy_callback')
           allow(strategy).to receive(:browser_details).and_return('Dummy browser details')
-
         end
 
         it 'saves the session with the applicant_id and omniauth state' do
@@ -37,11 +36,22 @@ module OmniAuth
         end
       end
 
-      context 'callback phase' do
-
-      end
-
-
+      # context 'callback phase' do
+      #   let(:mock_request) { double 'request', params: example_request_params, scheme: 'http', url: 'my_url' }
+      #   let(:my_access_token) { OpenStruct.new(expired?: false) }
+      #
+      #   before do
+      #     allow(strategy).to receive(:request).and_return(mock_request)
+      #     allow(strategy).to receive(:session).and_return(example_session)
+      #     allow(strategy).to receive(:build_access_token).and_return(my_access_token)
+      #   end
+      #
+      #   it 'does' do
+      #     expect(OauthSessionSaver).to receive(:get).with(omniauth_state).and_return(example_session)
+      #     strategy.callback_phase
+      #   end
+      #
+      # end
 
       def example_session
         HashWithIndifferentAccess.new(
@@ -65,6 +75,13 @@ module OmniAuth
             'provider_id' => 'mock',
             'consent_id' => 'applyforlegalaidtest-uxqw',
             'tracking_id' => '9829f7c1-e8c4-4334-8f39-ff48e024ea62'
+          })
+      end
+
+      def example_request_params
+        HashWithIndifferentAccess.new(
+          {
+            state: omniauth_state
           })
       end
     end
