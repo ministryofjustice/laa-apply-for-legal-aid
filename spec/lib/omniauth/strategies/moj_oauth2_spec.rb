@@ -4,7 +4,7 @@ require Rails.root.join('app', 'lib', 'omniauth', 'strategies', 'moj_oauth2')
 module OmniAuth
   module Strategies
     RSpec.describe  MojOAuth2 do
-      let(:mock_rack_app) { double Rack::Pjax }
+      let(:mock_rack_app) { double Rack::Pjax, call: nil }
       let(:applicant_id) { '50b98c1b-cf5d-428e-b32c-d20e9d1184dd' }
       let(:omniauth_state) { '6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76' }
       let(:strategy) { described_class.new(mock_rack_app, {} ) }
@@ -36,22 +36,28 @@ module OmniAuth
         end
       end
 
-      # context 'callback phase' do
-      #   let(:mock_request) { double 'request', params: example_request_params, scheme: 'http', url: 'my_url' }
-      #   let(:my_access_token) { OpenStruct.new(expired?: false) }
-      #
-      #   before do
-      #     allow(strategy).to receive(:request).and_return(mock_request)
-      #     allow(strategy).to receive(:session).and_return(example_session)
-      #     allow(strategy).to receive(:build_access_token).and_return(my_access_token)
-      #   end
-      #
-      #   it 'does' do
-      #     expect(OauthSessionSaver).to receive(:get).with(omniauth_state).and_return(example_session)
-      #     strategy.callback_phase
-      #   end
-      #
-      # end
+      context 'callback phase' do
+        let(:mock_request) { double 'request', params: example_request_params, scheme: 'http', url: 'my_url' }
+        let(:my_access_token) { OpenStruct.new(expired?: false) }
+
+        before do
+          allow(strategy).to receive(:request).and_return(mock_request)
+          allow(strategy).to receive(:session).and_return(example_session)
+          allow(strategy).to receive(:build_access_token).and_return(my_access_token)
+          allow(strategy).to receive(:env).and_return(example_environment)
+        end
+
+        it 'restores session from redis' do
+          expect(OauthSessionSaver).to receive(:get).with(omniauth_state).and_return(example_session)
+          strategy.callback_phase
+        end
+
+        it 'destroys the stored session in redis' do
+          expect(OauthSessionSaver).to receive(:destroy!).with(omniauth_state)
+          strategy.callback_phase
+        end
+
+      end
 
       def example_session
         HashWithIndifferentAccess.new(
@@ -82,6 +88,13 @@ module OmniAuth
         HashWithIndifferentAccess.new(
           {
             state: omniauth_state
+          })
+      end
+
+      def example_environment
+        HashWithIndifferentAccess.new(
+          {
+            'omniauth.auth' => {}
           })
       end
     end
