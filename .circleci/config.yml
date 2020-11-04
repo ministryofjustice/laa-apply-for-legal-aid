@@ -418,6 +418,7 @@ workflows:
       - deploy_staging:
           requires:
             # - webhint_reports
+            - integration_tests
             - unit_tests
             - build_and_push
       - hold_production_notification:
