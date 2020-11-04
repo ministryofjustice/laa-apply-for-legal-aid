@@ -16,9 +16,11 @@ FactoryBot.define do
     operation { TransactionType::NAMES.keys.sample }
 
     trait :debit do
+      name { TransactionType::NAMES[:debit].sample }
       operation { :debit }
     end
     trait :credit do
+      TransactionType::NAMES[:credit].sample
       operation { :credit }
     end
 
