@@ -87,14 +87,14 @@ references:
 
   sentry_deploy: &sentry_deploy
     run:
-      name: Create sentry deploy for ${SENTRY_ENVIRONMENT}
+      name: Sentry release
       command: |
         curl -sL https://sentry.io/get-cli/ | bash
         export SENTRY_RELEASE=$(sentry-cli releases propose-version)
         sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
-        sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENVIRONMENT
         sentry-cli releases set-commits --auto $SENTRY_RELEASE
         sentry-cli releases finalize $SENTRY_RELEASE
+        sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENVIRONMENT
 
   update_packages: &update_packages
     run:
