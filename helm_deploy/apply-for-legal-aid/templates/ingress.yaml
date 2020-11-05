@@ -30,7 +30,7 @@ spec:
           {{- range .paths }}
           - path: {{ . }}
             backend:
-              serviceName: {{ $fullName }}
+              serviceName: apply-for-legal-aid.fullname
               servicePort: {{ $svcPort }}
           {{- end }}
     {{- end }}
