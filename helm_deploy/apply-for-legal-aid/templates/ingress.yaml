@@ -25,7 +25,7 @@ spec:
         {{- end }}  # end of range
       secretName: {{ .secretName }}
     {{- end }} # end of range
-  {{- end }} # end of if statement about ingress
+  {{- end }} # end of if statement about ingress or end of tls
   rules:
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
@@ -38,4 +38,4 @@ spec:
               servicePort: {{ $svcPort }}
           {{- end }}  # end of range
     {{- end }}  # end of range
-  {{- end }}
+  {{- end }} # end of rules?
