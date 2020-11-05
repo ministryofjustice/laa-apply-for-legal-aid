@@ -7,7 +7,6 @@ deploy() {
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
-  echo "release host: $RELEASE_HOST"
 
   helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
                 --install --force --wait \
@@ -16,7 +15,7 @@ deploy() {
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set ingress.hosts.host="$RELEASE_HOST"
+                --set ingress.host="$RELEASE_HOST"
 }
 
 deploy
