@@ -14,7 +14,8 @@ deploy() {
                 --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="$IMG_REPO" \
-                --set image.tag="${CIRCLE_SHA1}"
+                --set image.tag="${CIRCLE_SHA1}" \
+                --set ingress.host="$RELEASE_HOST"
 }
 
 deploy
