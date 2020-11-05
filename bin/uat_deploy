@@ -15,7 +15,8 @@ deploy() {
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set ingress.host="$RELEASE_HOST"
+                --set ingress.hosts.host="$RELEASE_HOST"
+#                --set ingress.host="$RELEASE_HOST"
 }
 
 deploy
