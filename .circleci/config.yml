@@ -17,7 +17,7 @@ executors:
           - TZ: "Europe/London"
   cloud-platform-executor:
     docker:
-      - image: ${ECR_ENDPOINT}/cloud-platform/tools:circleci
+      - image: ministryofjustice/cloud-platform-tools:1.23
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   notification-executor:
@@ -294,7 +294,6 @@ jobs:
         command: |
           helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install --wait \
-                        --tiller-namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
@@ -317,7 +316,6 @@ jobs:
         command: |
           helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
                         --install --wait \
-                        --tiller-namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
                         --namespace=${KUBE_ENV_PRODUCTION_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
