@@ -19,7 +19,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
   context 'when an applicant revisits the page to change their answer' do
     before do
       application.update!(has_offline_accounts: true)
-      application.use_ccms!
+      application.use_ccms!(:offline_accounts)
     end
 
     it 'checks that offline account is reset to nil' do

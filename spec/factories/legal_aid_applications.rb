@@ -67,6 +67,7 @@ FactoryBot.define do
 
     trait :applicant_entering_means do
       before(:create) do |application|
+        application.change_state_machine_type('NonPassportedStateMachine')
         application.state_machine_proxy.update(aasm_state: :applicant_entering_means)
       end
     end
@@ -163,7 +164,7 @@ FactoryBot.define do
 
     trait :use_ccms do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :use_ccms)
+        application.state_machine_proxy.update(aasm_state: :use_ccms, ccms_reason: :unknown)
       end
     end
 
@@ -408,7 +409,7 @@ FactoryBot.define do
 
     trait :at_use_ccms do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :use_ccms)
+        application.state_machine_proxy.update(aasm_state: :use_ccms, ccms_reason: :unknown)
       end
 
       provider_step { :use_ccms }
@@ -448,6 +449,7 @@ FactoryBot.define do
       with_proceeding_types
 
       before(:create) do |application|
+        application.change_state_machine_type('NonPassportedStateMachine')
         application.state_machine_proxy.update(aasm_state: :client_completed_means)
       end
 

@@ -96,6 +96,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
            :submitting_assessment?,
            :use_ccms?,
            :summary_state,
+           :ccms_reason,
            to: :state_machine_proxy
 
   scope :latest, -> { order(created_at: :desc) }

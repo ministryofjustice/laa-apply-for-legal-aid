@@ -3,6 +3,14 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
 
   belongs_to :legal_aid_application
 
+  VALID_CCMS_REASONS = %i[
+    employed
+    no_banking_consent
+    non_passported
+    offline_accounts
+    unknown
+  ].freeze
+
   include AASM
 
   aasm do # rubocop:disable Metrics/BlockLength
@@ -70,7 +78,12 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
         applicant_entering_means
         use_ccms
       ],
-                  to: :use_ccms
+                  to: :use_ccms,
+                  after: proc { |reason|
+                    raise 'Invalid ccms_reason' unless reason.in?(VALID_CCMS_REASONS)
+
+                    update!(ccms_reason: reason)
+                  }
     end
 
     event :reset do
@@ -113,7 +126,8 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
     end
 
     event :reset_from_use_ccms do
-      transitions from: :use_ccms, to: :applicant_details_checked
+      transitions from: :use_ccms, to: :applicant_details_checked,
+                  after: proc { update!(ccms_reason: nil) }
     end
   end
 end

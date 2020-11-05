@@ -59,7 +59,7 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'sends the data' do
       subject
-      expect(response.body).to match(/^application_ref,state,username,provider_email,created_at/)
+      expect(response.body).to match(/^application_ref,state,ccms_reason,username,provider_email,created_at/)
     end
   end
 end
