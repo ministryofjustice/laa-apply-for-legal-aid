@@ -1,11 +1,11 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "apply-for-legal-aid.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+  {{- $fullName := include "apply-for-legal-aid.fullname" . -}}
+  {{- $svcPort := .Values.service.port -}}
+  {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
   {{- else -}}
 apiVersion: extensions/v1beta1
-{{- end }}
+  {{- end }}  # end of first if statement
 kind: Ingress
 metadata:
   name: {{ $fullName }}
@@ -16,12 +16,16 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  - hosts:
-      {{- range .hosts }}
-      - {{ . | quote }}
-      {{- end }}
-    secretName: {{ .secretName }}
-  {{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}  # end of range
+      secretName: {{ .secretName }}
+    {{- end }} # end of range
+  {{- end }} # end of if statement about ingress
   rules:
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
@@ -30,8 +34,8 @@ spec:
           {{- range .paths }}
           - path: {{ . }}
             backend:
-              serviceName: apply-for-legal-aid.fullname
+              serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
-          {{- end }}
-    {{- end }}
+          {{- end }}  # end of range
+    {{- end }}  # end of range
   {{- end }}
