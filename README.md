@@ -30,7 +30,9 @@ Once the pull request has been merged, re-pull master and run
 ```
 git-crypt unlock
 ```
-Update the `.env.sample` file, to get the tests running you will need to obtain and set values for the following:
+Copy the `.env.sample` file and name the new file `.env.development` 
+
+To get the tests running you will need to obtain and set values for the following:
 ```bash
 GOVUK_NOTIFY_API_KEY=
 CHECK_FINANCIAL_ELIGIBILITY_HOST=
@@ -110,6 +112,10 @@ foreman start -f Procfile
 ```
 
 ### Running tests
+
+Ensure you have an .env.test file. This can be the same as your .env.development file
+
+Set `BC_USE_DEV_MOCK=true`. This mocks the call to the benefits checker.  
 
 Runs Rubocop, RSpec specs and Cucumber features
 
