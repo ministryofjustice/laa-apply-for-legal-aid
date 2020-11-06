@@ -222,7 +222,7 @@ en:
           they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
           the information they’ve given is complete and correct
           they’ll report any changes to their financial situation immediately
-        sign_app_text: 'If your client gives wrong or incomplete information, or they do not report changes, they may:'
+        sign_app_text: 'If your client gives wrong or incomplete information, does not report changes, or is found to have committed benefit fraud, they may:'
         warning:
           list: |
             be prosecuted
