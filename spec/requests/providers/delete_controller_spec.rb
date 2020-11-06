@@ -27,7 +27,7 @@ RSpec.describe Providers::DeleteController, type: :request do
       end
 
       it 'displays the application data' do
-        expect(unescaped_response_body).to include("LAA reference: <strong>#{legal_aid_application.application_ref}</strong>")
+        expect(unescaped_response_body).to include(legal_aid_application.application_ref)
       end
     end
   end
