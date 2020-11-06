@@ -5,15 +5,15 @@
     </h1>
     <div class="govuk-panel__body">
       <dl class="govuk-list inline-list">
-        <dt><%= t('.name') %>:</dt>
-        <dd>
-          <strong><%= @applicant.full_name %></strong>
-        </dd>
+        <dt>
+          <strong><%= t('.name') %>:</strong>
+        </dt>
+        <dd><%= @applicant.full_name %></dd>
 
-        <dt><%= t('.reference_number') %>:</dt>
-        <dd>
-          <strong><%= @legal_aid_application.application_ref %></strong>
-        </dd>
+        <dt>
+          <strong><%= t('.reference_number') %>:</strong>
+        </dt>
+        <dd><%= @legal_aid_application.application_ref %></dd>
       </dl>
     </div>
   </div>

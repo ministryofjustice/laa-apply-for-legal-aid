@@ -1,7 +1,17 @@
 <h1 class="govuk-heading-xl"><%= t('.page_title') %></h1>
-<p class="govuk-body">
-  <%= t('.applicant') %>: <strong><%= @legal_aid_application.applicant.full_name %></strong><br>
-  <%= t('.reference') %>: <strong><%= @legal_aid_application.application_ref %></strong></p>
+<div class="govuk-panel__body">
+  <dl class="govuk-list inline-list">
+    <dt>
+      <strong><%= t('.applicant') %>:</strong>
+    </dt>
+    <dd><%= @legal_aid_application.applicant.full_name %></dd>
+
+    <dt>
+      <strong><%= t('.reference') %>:</strong>
+    </dt>
+    <dd><%= @legal_aid_application.application_ref %></dd>
+  </dl>
+</div>
 
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
