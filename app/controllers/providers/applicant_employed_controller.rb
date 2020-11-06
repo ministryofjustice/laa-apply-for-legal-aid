@@ -1,6 +1,7 @@
 module Providers
   class ApplicantEmployedController < ProviderBaseController
     def index
+      @legal_aid_application.reset_from_use_ccms! if @legal_aid_application.use_ccms?
       @form = Applicants::EmployedForm.new(model: applicant)
     end
 

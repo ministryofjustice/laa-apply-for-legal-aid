@@ -168,6 +168,12 @@ FactoryBot.define do
       end
     end
 
+    trait :use_ccms_employed do
+      before(:create) do |application|
+        application.state_machine_proxy.update(aasm_state: :use_ccms, ccms_reason: :employed)
+      end
+    end
+
     #############################################################################
 
     trait :with_irregular_income do
