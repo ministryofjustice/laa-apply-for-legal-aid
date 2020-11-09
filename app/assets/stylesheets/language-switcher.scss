@@ -1,0 +1,9 @@
+@import "govuk-frontend/govuk/settings/all";
+@import "govuk-frontend/govuk/helpers/all";
+
+.language-switcher {
+  @include govuk-typography-responsive($size: 16);
+  text-align: right;
+  margin-top: govuk-spacing(3);
+  margin-bottom: govuk-spacing(3);
+}

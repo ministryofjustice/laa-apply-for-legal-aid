@@ -4,6 +4,7 @@
 #       To prevent this, restart your server after modifying this file.
 #
 class SamlSessionsController < Devise::SamlSessionsController
+  before_action :update_locale
   after_action :update_provider_details, only: :create
 
   def destroy
@@ -18,6 +19,7 @@ class SamlSessionsController < Devise::SamlSessionsController
   end
 
   def after_sign_in_path_for(_provider)
+    session[:journey_type] = :providers
     providers_confirm_office_path
   end
 
@@ -37,5 +39,9 @@ class SamlSessionsController < Devise::SamlSessionsController
 
   def current_user
     current_provider
+  end
+
+  def update_locale
+    I18n.locale = I18n.default_locale
   end
 end

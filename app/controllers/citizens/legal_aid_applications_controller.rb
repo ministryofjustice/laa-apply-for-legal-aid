@@ -5,6 +5,7 @@ module Citizens
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index where the first page is displayed.
     def show
+      session[:journey_type] = :citizens
       return expired if application_error == :expired
 
       legal_aid_application.applicant_enter_means!
@@ -21,9 +22,7 @@ module Citizens
 
     def start_applicant_flow
       sign_out current_provider if provider_signed_in?
-      reset_session
-      session[:current_application_id] = legal_aid_application.id
-      session[:page_history_id] = SecureRandom.uuid
+      refresh_session
       sign_applicant_in_via_devise(legal_aid_application.applicant)
       redirect_to citizens_legal_aid_applications_path
     end
@@ -46,6 +45,13 @@ module Citizens
 
     def secure_application_finder
       @secure_application_finder ||= SecureApplicationFinder.new(params[:id])
+    end
+
+    def refresh_session
+      reset_session
+      session[:journey_type] = :citizens
+      session[:current_application_id] = legal_aid_application.id
+      session[:page_history_id] = SecureRandom.uuid
     end
   end
 end

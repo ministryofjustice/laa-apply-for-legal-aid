@@ -1,4 +1,5 @@
 class ErrorsController < ApplicationController
+  before_action :update_locale
   def show; end
 
   def page_not_found

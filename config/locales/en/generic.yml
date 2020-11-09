@@ -12,8 +12,10 @@ en:
     continue: Continue
     confirm: Are you sure?
     create_test_applications: Create test applications
+    cy: Cymraeg
     destroy: Destroy
     edit: Edit
+    en: English
     enter_text: Enter text
     errors:
       problem_text: There is a problem
