@@ -22,6 +22,15 @@ RSpec.describe ProviderDetailsRetriever do
       end
     end
 
+    context 'error calling api' do
+      it 'raises ApiError' do
+        allow(Net::HTTP).to receive(:get_response).and_raise(RuntimeError, 'Something went wrong')
+        expect {
+          subject
+        }.to raise_error(ProviderDetailsRetriever::ApiError, 'Provider details error: RuntimeError :: Something went wrong')
+      end
+    end
+
     context 'with real API', vcr: { cassette_name: 'provider_details_api' } do
       let(:provider) { create :provider, :with_provider_details_api_username }
       let(:escaped_username) { CGI.escape(provider.username) }

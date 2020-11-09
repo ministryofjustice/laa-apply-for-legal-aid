@@ -26,7 +26,7 @@ class SamlSessionsController < Devise::SamlSessionsController
   private
 
   def update_provider_details
-    current_provider.update_details
+    ProviderAfterLoginService.call(current_provider)
   end
 
   # :nocov:
