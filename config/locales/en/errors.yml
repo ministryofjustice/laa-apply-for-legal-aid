@@ -19,6 +19,8 @@ en:
         page_title: Page not found
         web_address_incorrect: If you typed the web address, check it is correct.
         web_address_copied: If you pasted the web address, check you copied the entire address.
+      page_redirected:
+        page_title: You are being redirected
       access_denied:
         page_title: Access denied
         permission_text: The page is not currently accessible to you

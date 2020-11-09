@@ -6,4 +6,9 @@ class ErrorsController < ApplicationController
     update_locale
     redirect_to error_path(:page_not_found, default_url_options)
   end
+
+  def permanent_redirect
+    update_locale
+    redirect_to error_path(:page_redirected, default_url_options)
+  end
 end

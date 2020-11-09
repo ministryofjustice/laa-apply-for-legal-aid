@@ -230,6 +230,8 @@ Rails.application.routes.draw do
     end
   end
 
+  match '/308', to: 'errors#permanent_redirect', via: :all
+
   get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
 
   # Catch all route that traps paths not defined above. Must be last route.
