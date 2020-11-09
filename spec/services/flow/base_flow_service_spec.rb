@@ -118,6 +118,14 @@ RSpec.describe Flow::BaseFlowService do
           end
         end
       end
+
+      context 'path for step is not defined' do
+        let(:path) { nil }
+
+        it 'raises an error' do
+          expect { subject.current_path }.to raise_error(/not defined/)
+        end
+      end
     end
 
     describe '#forward_path' do
