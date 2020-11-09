@@ -47,7 +47,7 @@ class Provider < ApplicationRecord
 
   def ccms_apply_role?
     return true if Rails.configuration.x.laa_portal.mock_saml == 'true'
-    
+
     return false if roles.nil?
 
     roles.split(',').include?('CCMS_Apply')
