@@ -8,6 +8,7 @@ class ProviderAfterLoginService
   end
 
   def call
+    @provider.update!(invalid_login_details: nil)
     if @provider.ccms_apply_role?
       check_provider_details_api
     else
