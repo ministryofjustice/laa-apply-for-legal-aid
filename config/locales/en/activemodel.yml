@@ -388,6 +388,7 @@ en:
               file_empty: The selected file is empty
               file_too_big: The selected file must be smaller than %{size}MB
               file_virus: The selected file contains a virus
+              system_down: There was a problem uploading your file - try again
               no_file_chosen: You must choose at least one file
             statement:
               blank: Either attach a file or enter text
