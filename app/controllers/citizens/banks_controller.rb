@@ -1,6 +1,10 @@
 module Citizens
   class BanksController < CitizenBaseController
-    def index; end
+    include Devise::Controllers::Rememberable
+
+    def index
+      remember_me(current_applicant)
+    end
 
     def create
       if params[:provider_id].present?

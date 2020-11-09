@@ -8,7 +8,10 @@ require_relative 'moj_oauth2'
 
 module OmniAuth
   module Strategies
-    # TODO: revert back to TrueLayer < OmniAuth::Strategies::OAuth2 once True layer debugging removed
+    # This class is a copy of OmniAuth::Strategies::OAuth2, with extra code to write debugging records (which can
+    # eventually be removed), and to save and re-instate the session in redis to cater for users with mobile devices
+    # who exit the browser to look for banking credentials, thus destroying the session
+    #
     class TrueLayer < OmniAuth::Strategies::MojOAuth2
       option :name, :true_layer
 

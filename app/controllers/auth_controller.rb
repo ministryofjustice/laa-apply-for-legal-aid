@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+  include Devise::Controllers::Rememberable
+
   class AuthorizationError < StandardError; end
 
   def failure

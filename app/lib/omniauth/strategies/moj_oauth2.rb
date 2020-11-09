@@ -59,8 +59,20 @@ module OmniAuth
         hash
       end
 
-      def request_phase
+      def request_phase # rubocop:disable Metrics/AbcSize
         auth_params = authorize_params
+        applicant_id = session['warden.user.applicant.key'].first.first
+
+        # We save the session in the redis database here in case the user backgrounds his browser on a mobile
+        # device while looking up the bank credentials, which would result in the session being destroyed.
+        #
+        # We save it under the applicant_id key AND the state key, because it will be required in two different places,
+        # the callback phase of this class, where only the state will be available, and the gather_transactions_controller
+        # where only the applicant_id will be available.
+        #
+        OauthSessionSaver.store(applicant_id, session)
+        OauthSessionSaver.store(auth_params[:state], session)
+
         Debug.record_request(session, auth_params, callback_url, browser_details)
         redirect client.auth_code.authorize_url({ redirect_uri: callback_url }.merge(auth_params))
       end
@@ -88,9 +100,15 @@ module OmniAuth
       end
 
       def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
-        Debug.record_callback(session, request.params, browser_details)
+        # we ALWAYS restore the session even if a perfectly good one exists because if we try to do it inside an
+        # if statement, then the path that doesn't restore the session will set it to nil.  Go figure!
+        #
+        restored_session = OauthSessionSaver.get(state)
+        restored_session.each { |k, v| session[k] = v }
+        OauthSessionSaver.destroy!(state)
 
         error = request.params['error_reason'] || request.params['error']
+
         if error
           Debug.record_error(session, request.params, '', browser_details)
           fail!(error, CallbackError.new(request.params['error'], request.params['error_description'] || request.params['error_reason'], request.params['error_uri']))
@@ -155,6 +173,10 @@ module OmniAuth
       end
 
       private
+
+      def state
+        request.params['state']
+      end
 
       def browser_details
         browser = Browser.new(

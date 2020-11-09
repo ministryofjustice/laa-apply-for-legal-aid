@@ -1,12 +1,16 @@
 module Citizens
   class CitizenBaseController < FlowBaseController
     include ApplicationFromSession
-    before_action :authenticate_applicant!
+    before_action :authenticate_with_devise
     before_action :check_not_complete
     before_action :set_cache_buster
     around_action :switch_locale
 
     private
+
+    def authenticate_with_devise
+      authenticate_applicant!
+    end
 
     class << self
       attr_reader :view_when_complete

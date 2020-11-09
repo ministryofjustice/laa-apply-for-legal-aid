@@ -20,6 +20,13 @@ module Citizens
 
     private
 
+    def authenticate_with_devise
+      restored_session = OauthSessionSaver.get(current_applicant.id)
+      restored_session.each { |k, v| session[k] = v }
+      OauthSessionSaver.destroy!(current_applicant.id)
+      authenticate_applicant!
+    end
+
     def worker_errors
       return [] unless worker && worker['errors'].present?
 
