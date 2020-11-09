@@ -108,6 +108,9 @@ module Flow
         use_ccms: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_path(application) }
         },
+        delete: {
+          path: ->(application) { urls.providers_legal_aid_application_delete_path(application) }
+        },
         use_ccms_employed: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_employed_index_path(application) }
         },
