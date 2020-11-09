@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 2020_11_02_133306) do
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
     t.datetime "remember_created_at"
-    t.boolean "employed"
     t.string "remember_token"
+    t.boolean "employed"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -597,6 +597,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_133306) do
     t.string "email"
     t.boolean "portal_enabled", default: true
     t.integer "contact_id"
+    t.string "invalid_login_details"
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
