@@ -6,7 +6,13 @@ module Applicants
 
     attr_accessor :email
 
+    before_validation :strip_email
+
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
     validates :email, presence: true
+
+    def strip_email
+      email.strip!
+    end
   end
 end
