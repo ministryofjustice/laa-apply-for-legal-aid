@@ -26,7 +26,6 @@ module Reports
 
         it 'returns a header line as the first line' do
           expect(lines.first).to eq 'application_ref,state,ccms_reason,username,provider_email,created_at,applicant_name,deleted'
-
         end
 
         it 'returns data for the only non-passorted application after Sep 21st as second line' do
