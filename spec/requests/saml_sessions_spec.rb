@@ -43,6 +43,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('true')
       end
+      after { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('false') }
 
       it 'redirects to providers root' do
         subject
