@@ -4,10 +4,10 @@ module Reports
   module MIS
     RSpec.describe NonPassportedApplicationsReport do
       before do
-        create_early_non_passported_application
-        create_non_passported_application
-        create_non_passported_applicationin_use_ccms
-        create_passported_application
+        Timecop.freeze(10.seconds.ago) { create_early_non_passported_application }
+        Timecop.freeze(8.seconds.ago) { create_non_passported_application }
+        Timecop.freeze(6.seconds.ago) { create_non_passported_application_use_ccms }
+        Timecop.freeze(4.seconds.ago) { create_passported_application }
       end
 
       subject { described_class.new.run }
@@ -19,8 +19,8 @@ module Reports
         let(:created_at) { application.created_at.strftime('%Y-%m-%d %H:%M:%S') }
         let(:lines) { subject.split("\n") }
 
-        it 'two lines of data' do
-          expect(lines.size).to eq 2
+        it 'three lines of data' do
+          expect(lines.size).to eq 3
         end
 
         it 'returns a header line as the first line' do
@@ -29,6 +29,7 @@ module Reports
 
         it 'returns data for the only non-passorted application after Sep 21st as second line' do
           expect(lines[1]).to eq "L-ATE,initiated,,#{username},#{email},#{created_at}"
+          expect(lines[2]).to match(/^L-USE-CCMS,use_ccms,employed,/)
         end
       end
 
@@ -50,12 +51,13 @@ module Reports
                application_ref: 'L-ATE'
       end
 
-      def create_non_passported_applicationin_use_ccms
+      def create_non_passported_application_use_ccms
         create :legal_aid_application,
                :with_negative_benefit_check_result,
                :with_non_passported_state_machine,
-               :at_use_ccms,
+               :use_ccms_employed,
                application_ref: 'L-USE-CCMS'
+
       end
 
       def create_passported_application
