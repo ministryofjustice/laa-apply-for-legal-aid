@@ -57,7 +57,6 @@ module Reports
                :with_non_passported_state_machine,
                :use_ccms_employed,
                application_ref: 'L-USE-CCMS'
-
       end
 
       def create_passported_application
