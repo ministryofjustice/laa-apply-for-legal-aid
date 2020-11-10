@@ -17,7 +17,7 @@ module Citizens
     private
 
     def change_application_state
-      legal_aid_application.use_ccms! if @form.open_banking_consent != 'true'
+      legal_aid_application.use_ccms!(:no_banking_consent) if @form.open_banking_consent != 'true'
     end
 
     def form_params

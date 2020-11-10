@@ -22,6 +22,14 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
       it_behaves_like 'a provider not authenticated'
     end
+
+    context 'when the application is in use_ccms state' do
+      let(:legal_aid_application) { create :legal_aid_application, :use_ccms_employed, applicant: applicant }
+      it 'sets the state back to applicant details checked and removes the reason' do
+        expect(legal_aid_application.reload.state).to eq 'applicant_details_checked'
+        expect(legal_aid_application.ccms_reason).to be_nil
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/applicant_employed' do

@@ -27,7 +27,7 @@ module Providers
 
       return false if provider.non_passported_permissions? && Setting.allow_non_passported_route?
 
-      legal_aid_application.use_ccms! unless legal_aid_application.use_ccms?
+      legal_aid_application.use_ccms!(:non_passported) unless legal_aid_application.use_ccms?
       true
     end
 

@@ -10,6 +10,7 @@ module Reports
         %w[
           application_ref
           state
+          ccms_reason
           username
           provider_email
           created_at
@@ -28,6 +29,7 @@ module Reports
       def call
         @line << laa.application_ref
         @line << laa.state
+        @line << laa.ccms_reason
         @line << laa.provider.username
         @line << provider.email
         @line << laa.created_at.strftime('%Y-%m-%d %H:%M:%S')

@@ -23,8 +23,12 @@ RSpec.describe Providers::UseCcmsEmployedController, type: :request do
       end
 
       it 'shows text to use CCMS' do
-        subject
         expect(response.body).to include(I18n.t('providers.use_ccms_employed.index.title_html'))
+      end
+
+      it 'sets state to use_ccms and reason to employed' do
+        expect(legal_aid_application.reload.state).to eq 'use_ccms'
+        expect(legal_aid_application.ccms_reason).to eq 'employed'
       end
     end
   end
