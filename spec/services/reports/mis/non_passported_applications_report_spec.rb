@@ -4,10 +4,10 @@ module Reports
   module MIS
     RSpec.describe NonPassportedApplicationsReport do
       before do
-        Timecop.freeze(10.seconds.ago) { create_early_non_passported_application }
-        Timecop.freeze(8.seconds.ago) { create_non_passported_application }
-        Timecop.freeze(6.seconds.ago) { create_non_passported_application_use_ccms }
-        Timecop.freeze(4.seconds.ago) { create_passported_application }
+        create_early_non_passported_application
+        Timecop.freeze(8.minutes.ago) { create_non_passported_application }
+        Timecop.freeze(6.minutes.ago) { create_non_passported_application_use_ccms }
+        Timecop.freeze(4.minutes.ago) { create_passported_application }
       end
 
       subject { described_class.new.run }

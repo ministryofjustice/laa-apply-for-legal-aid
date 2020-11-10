@@ -8,7 +8,7 @@ module Reports
       def run
         csv_string = CSV.generate do |csv|
           csv << NonPassportedApplicationCsvLine.header_row
-          legal_aid_applications.find_each(batch_size: 100) do |legal_aid_application|
+          legal_aid_applications.each do |legal_aid_application|
             csv << NonPassportedApplicationCsvLine.call(legal_aid_application)
           end
         end
