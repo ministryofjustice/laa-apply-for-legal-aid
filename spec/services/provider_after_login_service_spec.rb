@@ -8,6 +8,8 @@ RSpec.describe ProviderAfterLoginService do
   describe '.call' do
     context 'provider does not have CCMS_Apply role' do
       let(:provider) { create :provider, :created_by_devise, :without_ccms_apply_role }
+      before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
+
       it 'updates the provider invalid login details' do
         subject
         expect(provider.invalid_login_details).to eq 'role'

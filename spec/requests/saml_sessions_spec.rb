@@ -43,6 +43,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('true')
       end
+      after { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return('false') }
 
       it 'redirects to providers root' do
         subject
@@ -92,6 +93,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create :provider, :created_by_devise, :without_ccms_apply_role, username: username }
+          before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
           it 'does not call the ProviderDetailsCreator' do
             expect(ProviderDetailsCreator).not_to receive(:call)
