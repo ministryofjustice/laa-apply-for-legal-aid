@@ -179,7 +179,7 @@ In some cases a deployed branch will not be merged with `master` in which case t
 helm list --namespace=laa-apply-for-legalaid-uat --namespace=laa-apply-for-legalaid-uat --debug --all
 
 # delete a specific release
-helm delete <name-of-the-release> --namespace=laa-apply-for-legalaid-uat --purge
+helm delete --namespace=laa-apply-for-legalaid-uat <name-of-the-release>
 ```
 
 ## Dev: running locally
