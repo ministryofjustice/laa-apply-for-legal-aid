@@ -29,7 +29,7 @@ module Reports
         end
 
         it 'returns data for the only non-passorted application after Sep 21st as second line' do
-          expect(lines[1]).to eq %(L-ATE,initiated,,#{username},#{email},#{created_at},#{applicant.full_name},"")
+          expect(lines[1]).to eq %(L-ATE,checking_citizen_answers,,#{username},#{email},#{created_at},#{applicant.full_name},"")
           expect(lines[2]).to match(/^L-USE-CCMS,use_ccms,employed,/)
         end
       end

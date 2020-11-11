@@ -43,134 +43,133 @@ FactoryBot.define do
 
     trait :initiated do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :initiated)
+        application.state_machine_proxy.update!(aasm_state: :initiated)
       end
     end
 
     trait :analysing_bank_transactions do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :analysing_bank_transactions)
+        application.state_machine_proxy.update!(aasm_state: :analysing_bank_transactions)
       end
     end
 
     trait :awaiting_applicant do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :awaiting_applicant)
+        application.state_machine_proxy.update!(aasm_state: :awaiting_applicant)
       end
     end
 
     trait :applicant_details_checked do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :applicant_details_checked)
+        application.state_machine_proxy.update!(aasm_state: :applicant_details_checked)
       end
     end
 
     trait :applicant_entering_means do
       before(:create) do |application|
-        application.change_state_machine_type('NonPassportedStateMachine')
-        application.state_machine_proxy.update(aasm_state: :applicant_entering_means)
+        application.state_machine_proxy.update!(aasm_state: :applicant_entering_means)
       end
     end
 
     trait :assessment_submitted do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :assessment_submitted)
+        application.state_machine_proxy.update!(aasm_state: :assessment_submitted)
       end
     end
 
     trait :awaiting_applicant do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :awaiting_applicant)
+        application.state_machine_proxy.update!(aasm_state: :awaiting_applicant)
       end
     end
 
     trait :checking_applicant_details do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_applicant_details)
+        application.state_machine_proxy.update!(aasm_state: :checking_applicant_details)
       end
     end
 
     trait :checking_citizen_answers do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_citizen_answers)
+        application.state_machine_proxy.update!(aasm_state: :checking_citizen_answers)
       end
     end
 
     trait :checking_merits_answers do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_merits_answers)
+        application.state_machine_proxy.update!(aasm_state: :checking_merits_answers)
       end
     end
 
     trait :checking_non_passported_means do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_non_passported_means)
+        application.state_machine_proxy.update!(aasm_state: :checking_non_passported_means)
       end
     end
 
     trait :checking_passported_answers do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_passported_answers)
+        application.state_machine_proxy.update!(aasm_state: :checking_passported_answers)
       end
     end
 
     trait :delegated_functions_used do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :delegated_functions_used)
+        application.state_machine_proxy.update!(aasm_state: :delegated_functions_used)
       end
     end
 
     trait :entering_applicant_details do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :entering_applicant_details)
+        application.state_machine_proxy.update!(aasm_state: :entering_applicant_details)
       end
     end
 
     trait :generating_reports do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :generating_reports)
+        application.state_machine_proxy.update!(aasm_state: :generating_reports)
       end
     end
 
     trait :provider_assessing_means do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :provider_assessing_means)
+        application.state_machine_proxy.update!(aasm_state: :provider_assessing_means)
       end
     end
 
     trait :provider_confirming_applicant_eligibility do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :provider_confirming_applicant_eligibility)
+        application.state_machine_proxy.update!(aasm_state: :provider_confirming_applicant_eligibility)
       end
     end
 
     trait :provider_entering_means do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :provider_entering_means)
+        application.state_machine_proxy.update!(aasm_state: :provider_entering_means)
       end
     end
 
     trait :provider_entering_merits do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :provider_entering_merits)
+        application.state_machine_proxy.update!(aasm_state: :provider_entering_merits)
       end
     end
 
     trait :submitting_assessment do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :submitting_assessment)
+        application.state_machine_proxy.update!(aasm_state: :submitting_assessment)
       end
     end
 
     trait :use_ccms do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :use_ccms, ccms_reason: :unknown)
+        application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :unknown)
       end
     end
 
     trait :use_ccms_employed do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :use_ccms, ccms_reason: :employed)
+        application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :employed)
       end
     end
 
@@ -185,7 +184,7 @@ FactoryBot.define do
 
     trait :submitted_to_ccms do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: %i[assessment_submitted generating_reports submitting_assessment].sample)
+        application.state_machine_proxy.update!(aasm_state: %i[assessment_submitted generating_reports submitting_assessment].sample)
       end
     end
 
@@ -324,6 +323,7 @@ FactoryBot.define do
 
     trait :with_everything do
       with_applicant
+      with_non_passported_state_machine
       applicant_entering_means
       with_savings_amount
       with_other_assets_declaration
@@ -347,6 +347,7 @@ FactoryBot.define do
 
     trait :with_everything_and_address do
       with_applicant_and_address
+      with_non_passported_state_machine
       applicant_entering_means
       with_savings_amount
       with_other_assets_declaration
@@ -399,7 +400,7 @@ FactoryBot.define do
 
     trait :at_initiated do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :initiated)
+        application.state_machine_proxy.update!(aasm_state: :initiated)
       end
 
       provider_step { :applicants }
@@ -407,7 +408,7 @@ FactoryBot.define do
 
     trait :at_entering_applicant_details do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :entering_applicant_details)
+        application.state_machine_proxy.update!(aasm_state: :entering_applicant_details)
       end
 
       provider_step { :applicants }
@@ -415,7 +416,7 @@ FactoryBot.define do
 
     trait :at_use_ccms do
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :use_ccms, ccms_reason: :unknown)
+        application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :unknown)
       end
 
       provider_step { :use_ccms }
@@ -425,7 +426,7 @@ FactoryBot.define do
       with_proceeding_types
 
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_applicant_details)
+        application.state_machine_proxy.update!(aasm_state: :checking_applicant_details)
       end
 
       provider_step { :check_provider_answers }
@@ -435,7 +436,7 @@ FactoryBot.define do
       with_proceeding_types
 
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_passported_answers)
+        application.state_machine_proxy.update!(aasm_state: :checking_passported_answers)
       end
 
       provider_step { :check_passported_answers }
@@ -445,7 +446,7 @@ FactoryBot.define do
       with_proceeding_types
 
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :applicant_details_checked)
+        application.state_machine_proxy.update!(aasm_state: :applicant_details_checked)
       end
 
       provider_step { :check_benefits }
@@ -455,8 +456,7 @@ FactoryBot.define do
       with_proceeding_types
 
       before(:create) do |application|
-        application.change_state_machine_type('NonPassportedStateMachine')
-        application.state_machine_proxy.update(aasm_state: :client_completed_means)
+        application.state_machine_proxy.update!(aasm_state: :checking_citizen_answers)
       end
 
       provider_step { :client_completed_means }
@@ -466,7 +466,7 @@ FactoryBot.define do
       with_proceeding_types
 
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :provider_assessing_means)
+        application.state_machine_proxy.update!(aasm_state: :provider_assessing_means)
       end
 
       provider_step { :check_provider_answers }
@@ -478,7 +478,7 @@ FactoryBot.define do
       with_merits_statement_of_case
 
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :checking_merits_answers)
+        application.state_machine_proxy.update!(aasm_state: :checking_merits_answers)
       end
 
       provider_step { :check_merits_answers }
@@ -496,7 +496,7 @@ FactoryBot.define do
       with_ccms_submission
 
       after(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :assessment_submitted)
+        application.state_machine_proxy.update!(aasm_state: :assessment_submitted)
       end
 
       provider_step { :end_of_application }
@@ -514,7 +514,7 @@ FactoryBot.define do
       with_ccms_submission
 
       before(:create) do |application|
-        application.state_machine_proxy.update(aasm_state: :submitting_assessment)
+        application.state_machine_proxy.update!(aasm_state: :submitting_assessment)
       end
 
       provider_step { :end_of_application }

@@ -4,10 +4,13 @@ class TestApplicationCreationService
     at_checking_applicant_details
     at_checking_passported_answers
     at_applicant_details_checked
-    awaiting_applicant
-    applicant_entering_means
     provider_entering_merits
     at_checking_merits_answers
+  ].freeze
+
+  NON_PASSPORTED_TEST_TRAITS = %i[
+    awaiting_applicant
+    applicant_entering_means
   ].freeze
 
   def self.call
@@ -17,7 +20,11 @@ class TestApplicationCreationService
   def call
     providers.each do |provider|
       APPLICATION_TEST_TRAITS.each do |trait|
-        create_test_application(provider, trait)
+        create_passported_application(provider, trait)
+      end
+
+      NON_PASSPORTED_TEST_TRAITS.each do |trait|
+        create_non_passported_application(provider, trait)
       end
     end
   end
@@ -28,9 +35,20 @@ class TestApplicationCreationService
     Provider.all
   end
 
-  def create_test_application(provider, trait)
+  def create_passported_application(provider, trait)
     FactoryBot.create(
       :application,
+      :with_passported_state_machine,
+      :with_applicant,
+      trait,
+      provider: provider
+    )
+  end
+
+  def create_non_passported_application(provider, trait)
+    FactoryBot.create(
+      :application,
+      :with_non_passported_state_machine,
       :with_applicant,
       trait,
       provider: provider

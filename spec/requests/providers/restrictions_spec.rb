@@ -64,7 +64,7 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context 'provider on passported route' do
-          let(:application) { create :legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :provider_assessing_means }
+          let(:application) { create :legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :checking_passported_answers }
           it 'redirects to check passported answers' do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
           end
