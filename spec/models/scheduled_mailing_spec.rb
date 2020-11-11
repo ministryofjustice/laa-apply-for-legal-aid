@@ -29,7 +29,7 @@ RSpec.describe ScheduledMailing do
     context 'mailer class does not override #eligible_for_delivery?' do
       let(:scheduled_mail) { create :scheduled_mailing, :due, :always_eligible_for_delivery }
       it 'delivers the mail' do
-        Timecop.freeze(now) do
+        travel_to(now) do
           expect(ResendLinkRequestMailer)
             .to receive(:notify)
             .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
@@ -47,7 +47,7 @@ RSpec.describe ScheduledMailing do
         let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details }
 
         it 'delivers the mail' do
-          Timecop.freeze(now) do
+          travel_to(now) do
             expect(SubmitApplicationReminderMailer)
               .to receive(:notify_provider)
               .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
@@ -68,7 +68,7 @@ RSpec.describe ScheduledMailing do
         end
 
         it 'cancels the mail' do
-          Timecop.freeze(now) do
+          travel_to(now) do
             scheduled_mail.deliver!
             expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
           end
@@ -96,7 +96,7 @@ RSpec.describe ScheduledMailing do
     let(:now) { Time.zone.now }
 
     it 'updates the record as cancelled' do
-      Timecop.freeze(now) do
+      travel_to(now) do
         scheduled_mail.cancel!
         expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
       end

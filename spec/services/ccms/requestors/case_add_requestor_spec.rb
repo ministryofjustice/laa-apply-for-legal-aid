@@ -25,7 +25,7 @@ module CCMS
         let(:expected_xml) { requestor.__send__(:request_xml) }
 
         before do
-          Timecop.freeze
+          freeze_time
           expect(requestor).to receive(:soap_client).and_return(soap_client_double)
         end
 

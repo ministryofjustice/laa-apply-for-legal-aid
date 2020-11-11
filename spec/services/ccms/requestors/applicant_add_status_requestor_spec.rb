@@ -4,7 +4,7 @@ module CCMS
   module Requestors
     RSpec.describe ApplicantAddStatusRequestor do
       let(:expected_xml) { ccms_data_from_file 'applicant_add_status_request.xml' }
-      let(:expected_tx_id) { '20190101121530123456' }
+      let(:expected_tx_id) { '20190101121530000000' }
       let(:requestor) { described_class.new(expected_tx_id, 'my_login') }
 
       describe 'XML request' do
@@ -24,7 +24,7 @@ module CCMS
 
       describe '#transaction_request_id' do
         it 'returns the id based on current time' do
-          Timecop.freeze(2019, 1, 1, 12, 15, 30.123456) do
+          travel_to Time.local(2019, 1, 1, 12, 15, 30) do
             expect(requestor.transaction_request_id).to start_with expected_tx_id
           end
         end

@@ -37,7 +37,7 @@ module Reports
 
         context 'undiscarded application' do
           it 'returns an array with the expected values' do
-            Timecop.freeze(time) do
+            travel_to(time) do
               fields = subject
               expect(fields[0]).to eq application.application_ref
               expect(fields[1]).to eq application.state
@@ -54,7 +54,7 @@ module Reports
         context 'discarded application' do
           before { application.discard! }
           it 'returns an array with the expected values' do
-            Timecop.freeze(time) do
+            travel_to(time) do
               fields = subject
               expect(fields[0]).to eq application.application_ref
               expect(fields[1]).to eq application.state
