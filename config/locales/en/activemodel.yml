@@ -379,8 +379,6 @@ en:
           attributes:
             mock_true_layer_data:
               blank: Mock TrueLayer Data can't be blank
-            allow_non_passported_route:
-              blank: Allow non-passported route can't be blank
         statement_of_case:
           attributes:
             original_file:

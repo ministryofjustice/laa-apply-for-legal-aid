@@ -7,10 +7,6 @@ class Setting < ApplicationRecord
     setting.bank_transaction_filename
   end
 
-  def self.allow_non_passported_route?
-    setting.allow_non_passported_route?
-  end
-
   def self.manually_review_all_cases?
     setting.manually_review_all_cases
   end

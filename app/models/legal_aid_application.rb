@@ -313,22 +313,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
     [Opponent.dummy_opponent]
   end
 
-  def add_default_substantive_scope_limitation!
-    ApplicationScopeLimitation.create!(
-      legal_aid_application: self,
-      scope_limitation: lead_proceeding_type.default_substantive_scope_limitation,
-      substantive: true
-    )
-  end
-
-  def add_default_delegated_functions_scope_limitation!
-    ApplicationScopeLimitation.create!(
-      legal_aid_application: self,
-      scope_limitation: lead_proceeding_type.default_delegated_functions_scope_limitation,
-      substantive: false
-    )
-  end
-
   def reset_delegated_functions
     self.used_delegated_functions = false
     self.used_delegated_functions_on = nil

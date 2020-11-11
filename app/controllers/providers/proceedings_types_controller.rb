@@ -25,7 +25,7 @@ module Providers
       ActiveRecord::Base.transaction do
         legal_aid_application.reset_proceeding_types! # This will probably change when multiple proceeding types implemented!
         legal_aid_application.proceeding_types << proceeding_type
-        legal_aid_application.add_default_substantive_scope_limitation!
+        AddScopeLimitationService.call(legal_aid_application, false)
       end
       go_forward
     end
