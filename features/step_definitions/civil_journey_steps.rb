@@ -43,6 +43,28 @@ Given('I have previously created multiple applications') do
   login_as @legal_aid_application.provider
 end
 
+Given('I have created and submitted an application') do
+  @legal_aid_application = create(
+    :application,
+    :with_everything,
+    :with_passported_state_machine,
+    :initiated,
+    provider: create(:provider)
+  )
+  login_as @legal_aid_application.provider
+end
+
+Given('I have created but not submitted an application') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :draft,
+    :initiated,
+    provider: create(:provider)
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given('I previously created a passported application and left on the {string} page') do |provider_step|
   @legal_aid_application = create(
     :application,
