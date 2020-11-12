@@ -182,7 +182,6 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   end
 
   describe 'allowed to continue or use ccms?' do
-
     before { login_as provider }
 
     context 'application passported' do
@@ -212,7 +211,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         let(:provider) { create :provider, :with_passported_permissions }
         it 'allows us to continue' do
           get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include("CCMS")
+          expect(response.body).to include('CCMS')
         end
       end
 
