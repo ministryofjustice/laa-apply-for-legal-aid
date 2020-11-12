@@ -1,9 +1,9 @@
 require 'rails_helper'
-require Rails.root.join('app', 'lib', 'omniauth', 'strategies', 'moj_oauth2')
+require Rails.root.join('app', 'lib', 'omni_auth', 'strategies', 'moj_oauth2')
 
 module OmniAuth
   module Strategies
-    RSpec.describe MojOAuth2 do
+    RSpec.describe MojOauth2 do
       let(:mock_rack_app) { double Rack::Pjax, call: nil }
       let(:applicant_id) { '50b98c1b-cf5d-428e-b32c-d20e9d1184dd' }
       let(:omniauth_state) { '6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76' }

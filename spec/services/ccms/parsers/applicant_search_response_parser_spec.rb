@@ -13,7 +13,7 @@ module CCMS
         it 'raises if the transaction_request_ids dont match' do
           expect {
             parser.record_count
-          }.to raise_error CCMS::CcmsError, "Invalid transaction request id #{expected_tx_id}"
+          }.to raise_error CCMS::CCMSError, "Invalid transaction request id #{expected_tx_id}"
         end
 
         context 'there are no applicants returned' do

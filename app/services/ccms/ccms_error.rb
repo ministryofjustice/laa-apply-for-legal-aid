@@ -1,3 +1,3 @@
 module CCMS
-  CcmsError = Class.new(StandardError)
+  CCMSError = Class.new(StandardError)
 end

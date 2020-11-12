@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::CcmsConnectivityTestsController, type: :request do
+RSpec.describe Admin::CCMSConnectivityTestsController, type: :request do
   let(:count) { 3 }
   let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant }
   let(:admin_user) { create :admin_user }

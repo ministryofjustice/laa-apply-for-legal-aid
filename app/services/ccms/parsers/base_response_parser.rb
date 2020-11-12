@@ -36,7 +36,7 @@ module CCMS
       end
 
       def check_matching_transaction_request_ids
-        raise CcmsError, "Invalid transaction request id #{extracted_transaction_request_id}" unless extracted_id_matches_request_id?
+        raise CCMSError, "Invalid transaction request id #{extracted_transaction_request_id}" unless extracted_id_matches_request_id?
       end
 
       def extract_result_status
@@ -45,7 +45,7 @@ module CCMS
         elsif exception.present?
           extract_exception_and_message
         else
-          raise CcmsError, 'Unable to find status code or exception in response'
+          raise CCMSError, 'Unable to find status code or exception in response'
         end
       end
 

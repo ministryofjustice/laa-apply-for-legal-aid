@@ -6,10 +6,10 @@ module CCMS
           upload_document(submission_document)
         end
 
-        raise CcmsError, "The following documents failed to upload: #{failed_upload_ids}" if failed_upload_ids.present?
+        raise CCMSError, "The following documents failed to upload: #{failed_upload_ids}" if failed_upload_ids.present?
 
         create_history('case_created', submission.aasm_state, nil, nil) if submission.complete!
-      rescue CcmsError => e
+      rescue CCMSError => e
         handle_exception(e, nil)
       end
 
@@ -25,7 +25,7 @@ module CCMS
         submission_document.save!
         submission.save!
         create_history('case_created', submission_document.status, document_upload_requestor.formatted_xml, response)
-      rescue CcmsError => e
+      rescue CCMSError => e
         submission_document.status = :failed
         submission.save!
         create_ccms_failure_history('case_created', e, document_upload_requestor.formatted_xml)

@@ -7,10 +7,10 @@ module CCMS
         submission.submission_documents.each do |document|
           request_document_id(document)
         end
-        raise CcmsError, "Failed to obtain document ids for: #{failed_requesting_ids}" if failed_requesting_ids.present?
+        raise CCMSError, "Failed to obtain document ids for: #{failed_requesting_ids}" if failed_requesting_ids.present?
 
         submission.obtain_document_ids!
-      rescue CcmsError => e
+      rescue CCMSError => e
         handle_exception(e, nil)
       end
 
@@ -47,7 +47,7 @@ module CCMS
         response = update_document_and_return_response(document, document_id_requestor)
         document.save!
         create_history('applicant_ref_obtained', 'document_ids_obtained', document_id_requestor.formatted_xml, response) if submission.save!
-      rescue CcmsError => e
+      rescue CCMSError => e
         document.status = :failed
         document.save!
         create_ccms_failure_history('applicant_ref_obtained', e, document_id_requestor.formatted_xml)

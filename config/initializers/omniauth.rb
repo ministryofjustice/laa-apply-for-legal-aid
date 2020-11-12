@@ -1,4 +1,4 @@
-require Rails.root.join 'app/lib/omniauth/omniauth_true_layer'
+require Rails.root.join 'app/lib/omni_auth/omni_auth_true_layer'
 require Rails.root.join 'app/controllers/applicants/omniauth_callbacks_controller.rb'
 
 OmniAuth.config.allowed_request_methods = %i[post get]

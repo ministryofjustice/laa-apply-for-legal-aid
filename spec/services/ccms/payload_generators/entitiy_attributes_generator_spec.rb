@@ -23,7 +23,7 @@ module CCMS
             }
             expect {
               generator.__send__(:extract_response_value, config)
-            }.to raise_error CCMS::CcmsError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: numeric"
+            }.to raise_error CCMS::CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: numeric"
           end
         end
 

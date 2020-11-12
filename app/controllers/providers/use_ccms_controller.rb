@@ -1,5 +1,5 @@
 module Providers
-  class UseCcmsController < ProviderBaseController
+  class UseCCMSController < ProviderBaseController
     def show; end
   end
 end

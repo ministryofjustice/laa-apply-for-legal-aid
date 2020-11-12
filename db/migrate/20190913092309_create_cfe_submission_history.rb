@@ -1,4 +1,4 @@
-class CreateCfeSubmissionHistory < ActiveRecord::Migration[5.2]
+class CreateCFESubmissionHistory < ActiveRecord::Migration[5.2]
   def change
     create_table :cfe_submission_histories, id: :uuid do |t|
       t.uuid :submission_id

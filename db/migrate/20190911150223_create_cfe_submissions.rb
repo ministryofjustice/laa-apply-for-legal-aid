@@ -1,4 +1,4 @@
-class CreateCfeSubmissions < ActiveRecord::Migration[5.2]
+class CreateCFESubmissions < ActiveRecord::Migration[5.2]
   def change
     create_table :cfe_submissions, id: :uuid do |t|
       t.references :legal_aid_application, foreign_key: true, type: :uuid

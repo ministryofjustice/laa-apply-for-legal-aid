@@ -33,7 +33,7 @@ module CCMS
       when 'case_created'
         CCMS::Submitters::UploadDocumentsService.call(self)
       else
-        raise CcmsError, "Submission #{id} - Unknown state: #{aasm_state}"
+        raise CCMSError, "Submission #{id} - Unknown state: #{aasm_state}"
       end
     end
 

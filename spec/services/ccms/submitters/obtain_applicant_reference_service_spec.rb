@@ -124,7 +124,7 @@ module CCMS
       context 'operation in error' do
         context 'error when searching for applicant' do
           before do
-            expect_any_instance_of(CCMS::Requestors::ApplicantSearchRequestor).to receive(:call).and_raise(CCMS::CcmsError, 'oops')
+            expect_any_instance_of(CCMS::Requestors::ApplicantSearchRequestor).to receive(:call).and_raise(CCMS::CCMSError, 'oops')
           end
 
           it 'puts it into failed state' do
@@ -137,7 +137,7 @@ module CCMS
             expect(latest_history.from_state).to eq 'case_ref_obtained'
             expect(latest_history.to_state).to eq 'failed'
             expect(latest_history.success).to be false
-            expect(latest_history.details).to match(/CCMS::CcmsError/)
+            expect(latest_history.details).to match(/CCMS::CCMSError/)
             expect(latest_history.details).to match(/oops/)
             expect(latest_history.request).to be_soap_envelope_with(
               command: 'ns2:ClientInqRQ',

@@ -1,7 +1,7 @@
 require 'rexml/document'
 
 module Admin
-  class CcmsConnectivityTestsController < AdminBaseController
+  class CCMSConnectivityTestsController < AdminBaseController
     def show
       @response = ''
       xml = REXML::Document.new(CCMS::Requestors::ReferenceDataRequestor.new('my_login').call.to_s)

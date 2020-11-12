@@ -98,7 +98,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
     let(:history) { histories.where(request: nil, response: nil, to_state: 'failed').last }
     context 'operation fails due to an exception' do
       before do
-        allow(document_upload_requestor).to receive(:call).and_raise(CCMS::CcmsError, 'failed to upload')
+        allow(document_upload_requestor).to receive(:call).and_raise(CCMS::CCMSError, 'failed to upload')
       end
 
       it 'changes the submission state to failed' do
@@ -119,7 +119,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
         expect(first_history.from_state).to eq 'case_created'
         expect(first_history.to_state).to eq 'failed'
         expect(first_history.success).to be false
-        expect(first_history.details).to match(/CCMS::CcmsError/)
+        expect(first_history.details).to match(/CCMS::CCMSError/)
         expect(first_history.details).to match(/failed to upload/)
       end
 
@@ -128,7 +128,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
         expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/CCMS::CcmsError/)
+        expect(history.details).to match(/CCMS::CCMSError/)
         expect(history.details).to match(/failed to upload/)
       end
     end
@@ -152,7 +152,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
         expect(history.from_state).to eq 'case_created'
         expect(history.to_state).to eq 'failed'
         expect(history.success).to be false
-        expect(history.details).to match(/CCMS::CcmsError/)
+        expect(history.details).to match(/CCMS::CCMSError/)
         expect(history.details).to match(/The following documents failed to upload/)
       end
     end

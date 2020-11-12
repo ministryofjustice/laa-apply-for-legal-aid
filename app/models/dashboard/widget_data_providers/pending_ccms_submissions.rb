@@ -1,7 +1,7 @@
 # Count of CCMS submission that have not yet completed
 module Dashboard
   module WidgetDataProviders
-    class PendingCcmsSubmissions
+    class PendingCCMSSubmissions
       def self.dataset_definition
         {
           fields: [
