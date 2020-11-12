@@ -450,6 +450,7 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(SavingsAmount.count).not_to be_zero
       expect(MeritsAssessment.count).not_to be_zero
       expect(StatementOfCase.count).not_to be_zero
+      expect(Applicant.count).not_to be_zero
       expect(LegalAidApplicationTransactionType.count).not_to be_zero
       expect { subject }.to change { described_class.count }.to(0)
       expect(ApplicationProceedingType.count).to be_zero
@@ -458,15 +459,14 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(SavingsAmount.count).to be_zero
       expect(MeritsAssessment.count).to be_zero
       expect(StatementOfCase.count).to be_zero
+      expect(Applicant.count).to be_zero
       expect(LegalAidApplicationTransactionType.count).to be_zero
     end
 
     it 'leaves object it should not affect' do
-      expect(Applicant.count).not_to be_zero
       expect(ProceedingType.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
       subject
-      expect(Applicant.count).not_to be_zero
       expect(ProceedingType.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
     end
