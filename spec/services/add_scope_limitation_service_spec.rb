@@ -10,9 +10,7 @@ RSpec.describe AddScopeLimitationService do
 
   subject(:service) { described_class.call(legal_aid_application, delegate) }
 
-
   describe 'default_scope_limitation finding and adding' do
-
     before { subject }
 
     context 'substantive application' do

@@ -1,5 +1,5 @@
 # TODO: Think about how we refactor this class to make it smaller
-class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLength
+class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include Discard::Model
 

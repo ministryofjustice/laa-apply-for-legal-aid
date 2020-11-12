@@ -59,6 +59,7 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - 'app/services/reports/mis/application_detail_csv_line.rb'
+    - 'app/models/legal_aid_application.rb'
 
 Metrics/MethodLength:
   Exclude:
