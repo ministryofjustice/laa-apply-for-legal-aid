@@ -433,7 +433,7 @@ RSpec.describe LegalAidApplication, type: :model do
   # that then become redundant.
   describe '.destroy_all' do
     let!(:legal_aid_application) do
-      create :legal_aid_application, :with_everything, :with_proceeding_types, :with_negative_benefit_check_result
+      create :legal_aid_application, :with_everything, :with_proceeding_types, :with_negative_benefit_check_result, :with_bank_transactions
     end
 
     before do
@@ -451,6 +451,11 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(MeritsAssessment.count).not_to be_zero
       expect(StatementOfCase.count).not_to be_zero
       expect(Applicant.count).not_to be_zero
+      expect(BankAccount.count).not_to be_zero
+      expect(BankTransaction.count).not_to be_zero
+      expect(BankProvider.count).not_to be_zero
+      expect(BankAccountHolder.count).not_to be_zero
+      expect(BankError.count).not_to be_zero
       expect(LegalAidApplicationTransactionType.count).not_to be_zero
       expect { subject }.to change { described_class.count }.to(0)
       expect(ApplicationProceedingType.count).to be_zero
@@ -460,6 +465,11 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(MeritsAssessment.count).to be_zero
       expect(StatementOfCase.count).to be_zero
       expect(Applicant.count).to be_zero
+      expect(BankAccount.count).to be_zero
+      expect(BankTransaction.count).to be_zero
+      expect(BankProvider.count).to be_zero
+      expect(BankAccountHolder.count).to be_zero
+      expect(BankError.count).to be_zero
       expect(LegalAidApplicationTransactionType.count).to be_zero
     end
 

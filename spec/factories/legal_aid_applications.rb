@@ -520,6 +520,23 @@ FactoryBot.define do
       provider_step { :end_of_application }
     end
 
+    trait :with_bank_transactions do
+      after :create do |application|
+        bank_provider = create :bank_provider, applicant: application.applicant
+        bank_account = create :bank_account, bank_provider: bank_provider
+        create :bank_account_holder, bank_provider: bank_provider
+        create :bank_error, applicant: application.applicant
+        [90, 60, 30].each do |count|
+          create :bank_transaction,
+                 :benefits,
+                 happened_at: count.days.ago,
+                 bank_account: bank_account,
+                 operation: 'credit',
+                 meta_data: { code: 'CHB', label: 'child_benefit', name: 'Child Benefit' }
+        end
+      end
+    end
+
     trait :with_benefits_transactions do
       after :create do |application|
         bank_provider = create :bank_provider, applicant: application.applicant

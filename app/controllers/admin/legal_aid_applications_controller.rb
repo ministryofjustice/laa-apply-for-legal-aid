@@ -21,14 +21,12 @@ module Admin
       raise 'Legal Aid Application Destroy All action disabled' unless destroy_enabled?
 
       LegalAidApplication.destroy_all
-      Applicant.destroy_all
       redirect_to action: :index
     end
 
     def destroy
       raise 'Legal Aid Application Destroy action disabled' unless destroy_enabled?
 
-      legal_aid_application.applicant&.destroy
       legal_aid_application.destroy
       redirect_to action: :index
     end
