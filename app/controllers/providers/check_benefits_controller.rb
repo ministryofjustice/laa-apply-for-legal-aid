@@ -25,7 +25,7 @@ module Providers
     def should_use_ccms?
       return false if legal_aid_application.applicant_receives_benefit? && provider.passported_permissions?
 
-      return false if provider.non_passported_permissions? && Setting.allow_non_passported_route?
+      return false if provider.non_passported_permissions?
 
       legal_aid_application.use_ccms!(:non_passported) unless legal_aid_application.use_ccms?
       true

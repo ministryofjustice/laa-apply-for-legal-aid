@@ -8,7 +8,6 @@ RSpec.describe Setting do
       it 'generates one with the default values' do
         rec = Setting.setting
         expect(rec.mock_true_layer_data?).to be false
-        expect(rec.allow_non_passported_route?).to be true
         expect(rec.manually_review_all_cases?).to be true
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
@@ -19,7 +18,6 @@ RSpec.describe Setting do
       before do
         Setting.setting.update!(
           mock_true_layer_data: true,
-          allow_non_passported_route: false,
           manually_review_all_cases: false,
           allow_welsh_translation: false,
           bank_transaction_filename: 'my_special_file.csv'
@@ -29,7 +27,6 @@ RSpec.describe Setting do
       it 'returns the existing record' do
         rec = Setting.setting
         expect(rec.mock_true_layer_data?).to be true
-        expect(rec.allow_non_passported_route?).to be false
         expect(rec.manually_review_all_cases?).to be false
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.bank_transaction_filename).to eq 'my_special_file.csv'
@@ -42,7 +39,6 @@ RSpec.describe Setting do
 
     it 'returns the value with a class method' do
       expect(Setting.mock_true_layer_data?).to be false
-      expect(Setting.allow_non_passported_route?).to be true
       expect(Setting.manually_review_all_cases?).to be true
       expect(Setting.allow_welsh_translation?).to be false
       expect(Setting.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'

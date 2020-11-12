@@ -707,11 +707,9 @@ end
 # rubocop:enable Lint/Debugger
 
 Given('I start the passported journey') do
-  LaaApplyForLegalAid::Application.config.x.allow_non_passported_route = false
 end
 
 Then('I complete the passported journey') do
-  LaaApplyForLegalAid::Application.config.x.allow_non_passported_route = true
 end
 
 When('I click the browser back button') do
