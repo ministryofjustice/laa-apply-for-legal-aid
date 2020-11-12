@@ -2,6 +2,7 @@ class AddressLookupService
   prepend SimpleCommand
 
   ORDNANCE_SURVEY_URL = 'https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode'.freeze
+  POSTCODE_REGEXP = /\A([A-Z][A-HJ-Y]?[0-9][A-Z0-9]?[0-9][A-Z]{2}|GIR ?0A{2})\z/.freeze
 
   attr_reader :postcode
 
@@ -55,6 +56,6 @@ class AddressLookupService
 
   def record_error(state, error)
     errors.add(:lookup, state)
-    Raven.capture_exception(error)
+    Raven.capture_exception(error) unless POSTCODE_REGEXP.match?(@postcode) && state == :unsuccessful
   end
 end
