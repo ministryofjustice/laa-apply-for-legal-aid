@@ -4,7 +4,7 @@ module CCMS
   module Requestors
     RSpec.describe DocumentUploadRequestor do
       let(:expected_xml) { ccms_data_from_file 'document_upload_request.xml' }
-      let(:expected_tx_id) { '20190101121530123456' }
+      let(:expected_tx_id) { '20190101121530000000' }
       let(:case_ccms_reference) { '1234567890' }
       let(:document_id) { '4420073' }
       let(:document_encoded_base64) { 'JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiA' }
@@ -48,7 +48,7 @@ module CCMS
 
       describe '#transaction_request_id' do
         it 'returns the id based on current time' do
-          Timecop.freeze(2019, 1, 1, 12, 15, 30.123456) do
+          travel_to Time.local(2019, 1, 1, 12, 15, 30) do
             expect(requestor.transaction_request_id).to start_with expected_tx_id
           end
         end

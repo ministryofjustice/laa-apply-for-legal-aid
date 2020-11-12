@@ -6,7 +6,7 @@ RSpec.describe TimeHelper, type: :helper do
 
     before do
       new_time = Time.local(2020, 10, 1, 1, 0, 0)
-      Timecop.freeze(new_time)
+      travel_to(new_time)
     end
     it 'returns a valid date' do
       expect(helper.number_of_days_ago(days)).to eq '29 09 2020'

@@ -4,7 +4,7 @@ module CCMS
   module Requestors
     RSpec.describe ReferenceDataRequestor do
       let(:expected_xml) { ccms_data_from_file 'reference_data_request.xml' }
-      let(:expected_tx_id) { '20190101121530123456' }
+      let(:expected_tx_id) { '20190101121530000000' }
       let(:requestor) { described_class.new('my_login') }
 
       describe 'XML request' do
@@ -24,7 +24,7 @@ module CCMS
 
       describe '#transaction_request_id' do
         it 'returns the id based on current time' do
-          Timecop.freeze(2019, 1, 1, 12, 15, 30.123456) do
+          travel_to Time.local(2019, 1, 1, 12, 15, 30) do
             expect(requestor.transaction_request_id).to start_with expected_tx_id
           end
         end
@@ -36,7 +36,7 @@ module CCMS
         let(:expected_xml) { requestor.__send__(:request_xml) }
 
         before do
-          Timecop.freeze
+          freeze_time
           expect(requestor).to receive(:soap_client).and_return(soap_client_double)
         end
 

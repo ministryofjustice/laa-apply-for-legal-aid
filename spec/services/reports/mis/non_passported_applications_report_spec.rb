@@ -5,9 +5,13 @@ module Reports
     RSpec.describe NonPassportedApplicationsReport do
       before do
         create_early_non_passported_application
-        Timecop.freeze(8.minutes.ago) { create_non_passported_application }
-        Timecop.freeze(6.minutes.ago) { create_non_passported_application_use_ccms }
-        Timecop.freeze(4.minutes.ago) { create_passported_application }
+        travel_to(8.minutes.ago) { create_non_passported_application }
+        travel_to(6.minutes.ago) { create_non_passported_application_use_ccms }
+        travel_to(4.minutes.ago) { create_passported_application }
+      end
+
+      after do
+        travel_back
       end
 
       subject { described_class.new.run }
@@ -35,7 +39,7 @@ module Reports
       end
 
       def create_early_non_passported_application
-        Timecop.freeze(Time.new(2020, 9, 1, 2, 3, 4)) do
+        travel_to(Time.local(2020, 9, 1, 2, 3, 4)) do
           create :legal_aid_application,
                  :with_applicant,
                  :with_negative_benefit_check_result,
