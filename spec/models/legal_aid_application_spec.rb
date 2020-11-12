@@ -513,39 +513,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'default_scope_limitation finding and adding' do
-    let!(:proceeding_type) { create :proceeding_type }
-    let!(:sl_substantive_default) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
-    let!(:sl_delegated_default) { create :scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type, meaning: 'Default delegated functions SL' }
-    let!(:sl_non_default) { create :scope_limitation }
-
-    context 'substantive application' do
-      let(:application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
-
-      context '#substantive and delegated functions scope limitations' do
-        before do
-          application.add_default_substantive_scope_limitation!
-          application.update(used_delegated_functions: true)
-          application.add_default_delegated_functions_scope_limitation!
-        end
-
-        describe 'substantive scope limitation' do
-          it 'returns the substantive scope limitation' do
-            expect(application.scope_limitations).to match_array [sl_substantive_default, sl_delegated_default]
-            expect(application.substantive_scope_limitation).to eq sl_substantive_default
-          end
-        end
-
-        describe 'delegated functions scope limitation' do
-          it 'returns the delegated functions scope limitation' do
-            expect(application.scope_limitations).to match_array [sl_substantive_default, sl_delegated_default]
-            expect(application.delegated_functions_scope_limitation).to eq sl_delegated_default
-          end
-        end
-      end
-    end
-  end
-
   describe 'reset delegated functions' do
     it 'resets it to a substantive application' do
       application = create :legal_aid_application, :with_delegated_functions

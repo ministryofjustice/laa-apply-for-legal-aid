@@ -204,7 +204,7 @@ FactoryBot.define do
         application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         pt = application.lead_proceeding_type
         create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-        application.add_default_substantive_scope_limitation!
+        AddScopeLimitationService.call(application, :substantive)
       end
     end
 
@@ -213,7 +213,7 @@ FactoryBot.define do
         application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         pt = application.lead_proceeding_type
         create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
-        application.add_default_delegated_functions_scope_limitation!
+        AddScopeLimitationService.call(application, :delegated)
       end
     end
 

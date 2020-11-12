@@ -1,5 +1,5 @@
 # TODO: Think about how we refactor this class to make it smaller
-class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLength
+class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include Discard::Model
 
@@ -311,22 +311,6 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
 
   def opponent_other_parties
     [Opponent.dummy_opponent]
-  end
-
-  def add_default_substantive_scope_limitation!
-    ApplicationScopeLimitation.create!(
-      legal_aid_application: self,
-      scope_limitation: lead_proceeding_type.default_substantive_scope_limitation,
-      substantive: true
-    )
-  end
-
-  def add_default_delegated_functions_scope_limitation!
-    ApplicationScopeLimitation.create!(
-      legal_aid_application: self,
-      scope_limitation: lead_proceeding_type.default_delegated_functions_scope_limitation,
-      substantive: false
-    )
   end
 
   def reset_delegated_functions
