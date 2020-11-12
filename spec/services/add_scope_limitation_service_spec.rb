@@ -16,7 +16,6 @@ RSpec.describe AddScopeLimitationService do
     before { subject }
 
     context 'substantive application' do
-
       context '#substantive scope limitations' do
         let(:delegate) { false }
 
@@ -26,7 +25,6 @@ RSpec.describe AddScopeLimitationService do
             expect(legal_aid_application.substantive_scope_limitation).to eq sl_substantive_default
           end
         end
-
       end
     end
 
