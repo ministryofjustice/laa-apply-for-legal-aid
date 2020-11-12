@@ -32,5 +32,3 @@ class AddScopeLimitationService
     )
   end
 end
-
-
