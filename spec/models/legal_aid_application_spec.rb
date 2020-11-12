@@ -104,12 +104,14 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'in non passported state' do
+      let!(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_applicant, state }
       let(:state) { :checking_non_passported_means }
 
       it 'is false' do
         expect(legal_aid_application.pre_dwp_check?).to eq false
       end
     end
+
     context 'in passported state' do
       let(:state) { :checking_passported_answers }
 

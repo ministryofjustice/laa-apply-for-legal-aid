@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   let(:count) { 3 }
-  let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant }
+  let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant, :with_non_passported_state_machine }
   let(:admin_user) { create :admin_user }
   let(:params) { {} }
 
@@ -80,7 +80,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
     let(:count) { 1 }
 
     it 'creates test legal_aid_applications' do
-      number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size
+      number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size + TestApplicationCreationService::NON_PASSPORTED_TEST_TRAITS.size
       expect { subject }.to change { LegalAidApplication.count }.by(number_new)
     end
 
