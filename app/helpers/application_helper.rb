@@ -79,7 +79,7 @@ module ApplicationHelper
   end
 
   def print_button(text)
-    content_tag :button, text, class: 'govuk-button no-print', id: 'print', type: 'button'
+    content_tag :button, text, class: 'govuk-button no-print print-button', type: 'button'
   end
 
   def start_button_label(button_text)
