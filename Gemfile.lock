@@ -656,6 +656,7 @@ DEPENDENCIES
   libreconv
   listen (>= 3.0.5, < 3.4)
   loofah (>= 2.2.3)
+  mimemagic
   nesty
   nokogiri
   omniauth (>= 1.9.1)

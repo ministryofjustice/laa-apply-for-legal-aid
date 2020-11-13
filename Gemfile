@@ -98,6 +98,9 @@ gem 'blazer', '>= 2.2.6'
 # Manage security headers
 gem 'secure_headers'
 
+# Identify file types before uploads
+gem 'mimemagic'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
