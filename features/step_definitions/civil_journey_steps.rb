@@ -706,12 +706,6 @@ Then('wait a bit') do
 end
 # rubocop:enable Lint/Debugger
 
-Given('I start the passported journey') do
-end
-
-Then('I complete the passported journey') do
-end
-
 When('I click the browser back button') do
   page.go_back
 end

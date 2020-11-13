@@ -256,7 +256,6 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS on the passported journey with an applicant does not receive benefits
-    Given I start the passported journey
     When I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
