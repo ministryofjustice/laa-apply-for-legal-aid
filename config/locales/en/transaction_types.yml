@@ -31,6 +31,7 @@ en:
     table_label:
       benefits: Benefits
       child_care: Childcare
+      excluded_benefits: Disregarded benefits
       friends_or_family: Financial help
       legal_aid: Legal aid
       maintenance_in: Maintenance
