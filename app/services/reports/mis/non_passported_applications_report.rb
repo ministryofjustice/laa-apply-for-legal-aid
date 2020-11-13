@@ -1,7 +1,6 @@
 module Reports
   module MIS
     class NonPassportedApplicationsReport
-      EXCLUDED_STATES = %w[use_ccms].freeze
       START_DATE = Time.new(2020, 9, 21, 0, 0, 0)
       END_TIME = Date.today.end_of_day
 

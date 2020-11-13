@@ -16,6 +16,24 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
   end
 
+  context 'when application is in use_ccms state' do
+    it 'has reset the state and ccms_reason' do
+      application.use_ccms!(:no_online_banking)
+      get citizens_additional_accounts_path
+      expect(application.reload.state).to eq 'applicant_entering_means'
+      expect(application.ccms_reason).to be_nil
+    end
+  end
+
+  describe 'GET /citizens/additional_accounts/new' do
+    before { application.use_ccms!(:no_online_banking) }
+    it 'has reset the state and ccms_reason' do
+      get new_citizens_additional_account_path(application)
+      expect(application.reload.state).to eq 'applicant_entering_means'
+      expect(application.ccms_reason).to be_nil
+    end
+  end
+
   context 'when an applicant revisits the page to change their answer' do
     before do
       application.update!(has_offline_accounts: true)

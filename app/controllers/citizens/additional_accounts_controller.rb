@@ -2,6 +2,7 @@ module Citizens
   class AdditionalAccountsController < CitizenBaseController
     def index
       legal_aid_application.update!(has_offline_accounts: nil)
+      legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
       legal_aid_application.applicant_enter_means! unless legal_aid_application.applicant_entering_means?
     end
 
@@ -17,7 +18,9 @@ module Citizens
       end
     end
 
-    def new; end
+    def new
+      legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
+    end
 
     def update
       case params[:has_online_accounts]
