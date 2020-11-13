@@ -117,7 +117,7 @@ Feature: Civil application journeys
     When I click 'Agree and continue'
     Then I should be on the Applicant page
 
-  @javascript @vcr @webhint
+  @javascript @vcr
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
