@@ -119,9 +119,11 @@ module CCMS
         # the microsecond :(
         context 'when populating documents' do
           let!(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
+          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError].sample }
+
           before do
             allow_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:transaction_request_id).and_return('20190301030405123456')
-            expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(CCMSError, 'Failed to obtain document ids for')
+            expect_any_instance_of(CCMS::Requestors::DocumentIdRequestor).to receive(:call).and_raise(error, 'Failed to obtain document ids for')
           end
 
           it 'changes the submission state to failed' do
@@ -133,7 +135,7 @@ module CCMS
             expect(history.from_state).to eq 'applicant_ref_obtained' # this is failing gets case_submitted
             expect(history.to_state).to eq 'failed'
             expect(history.success).to be false
-            expect(history.details).to match(/CCMS::CCMSError/)
+            expect(history.details).to match(/#{error}/)
             expect(history.details).to match(/Failed to obtain document ids for/)
             expect(history.request).to be_nil
             expect(history.response).to be_nil

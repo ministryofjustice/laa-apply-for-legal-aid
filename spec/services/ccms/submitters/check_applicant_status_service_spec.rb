@@ -125,8 +125,10 @@ module CCMS
         end
 
         context 'operation unsuccessful' do
+          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError].sample }
+
           before do
-            expect_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(CCMSError, 'oops')
+            expect_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(error, 'oops')
           end
 
           it 'increments the poll count' do
@@ -142,7 +144,7 @@ module CCMS
             expect(history.from_state).to eq 'applicant_submitted'
             expect(history.to_state).to eq 'failed'
             expect(history.success).to be false
-            expect(history.details).to match(/CCMS::CCMSError/)
+            expect(history.details).to match(/#{error}/)
             expect(history.details).to match(/oops/)
             expect(history.request).to be_soap_envelope_with(
               command: 'ns2:ClientAddUpdtStatusRQ',
