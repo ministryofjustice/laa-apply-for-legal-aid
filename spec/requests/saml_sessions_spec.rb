@@ -204,6 +204,16 @@ RSpec.describe 'SamlSessionsController', type: :request do
     end
   end
 
+  describe 'Login failed at LAA Portal' do
+    subject { post provider_session_path }
+    before { allow_any_instance_of(Devise::SessionsController).to receive(:create).and_raise(StandardError) }
+
+    it 'redirects to access denied' do
+      subject
+      expect(response).to redirect_to(error_path(:access_denied))
+    end
+  end
+
   def raw_details_response
     {
       providerFirmId: 22_381,
