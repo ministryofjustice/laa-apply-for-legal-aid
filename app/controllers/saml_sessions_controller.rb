@@ -5,7 +5,7 @@
 #
 class SamlSessionsController < Devise::SamlSessionsController
   before_action :update_locale
-  after_action :update_provider_details, only: :create
+  after_action :update_provider_details, only: :create, if: -> { response.successful? }
 
   def destroy
     session['signed_out'] = true
@@ -16,6 +16,14 @@ class SamlSessionsController < Devise::SamlSessionsController
     else
       redirect_to new_feedback_path
     end
+  end
+
+  def create
+    # Calls the create method in devise
+    super
+  rescue StandardError => e
+    # redirects to access denied as providers_invalid_login_path expects there to be a provider.
+    redirect_to error_path(:access_denied)
   end
 
   def after_sign_in_path_for(_provider)
