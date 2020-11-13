@@ -4,6 +4,7 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
+require 'axe-cucumber-steps'
 require 'cucumber/rails'
 require 'capybara'
 require 'capybara/cucumber'
