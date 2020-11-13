@@ -9,7 +9,7 @@ module CCMS
         else
           handle_unsuccessful_response(xml_request, response)
         end
-      rescue CCMSError => e
+      rescue *CCMS_SUBMISSION_ERRORS => e
         handle_exception(e, xml_request)
       end
 
