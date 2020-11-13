@@ -70,6 +70,7 @@ RSpec.describe AddressLookupService do
           }
         }
       end
+      let(:postcode) { nil }
 
       before do
         stub_request(:get, api_request_uri)
@@ -92,6 +93,22 @@ RSpec.describe AddressLookupService do
     it 'captures error' do
       expect(Raven).to receive(:capture_exception).with(message_contains('Service unavailable'))
       service.__send__(:record_error, state, error)
+    end
+
+    context 'postocde is in a correct format' do
+      let(:state) { :unsuccessful }
+      let(:error) { StandardError.new 'Resource x does not exist' }
+      let(:postcode) { 'SW109LO' }
+
+      before do
+        stub_request(:get, api_request_uri)
+          .to_raise(Errno::ECONNREFUSED)
+      end
+
+      it 'does not capture error' do
+        expect(Raven).not_to receive(:capture_exception).with(message_contains('Resource x does not exist'))
+        service.call
+      end
     end
   end
 end
