@@ -1,9 +1,9 @@
-$(document).ready(function() {
-  const print_button = document.getElementById("print");
+document.addEventListener('DOMContentLoaded', event => {
 
-  if (print_button != null) {
-    print_button.onclick = function() {
+  document.querySelectorAll('.print-button').forEach(button => {
+    button.addEventListener('click', event => {
       window.print();
-    };
-  }
+    })
+  })
+
 });
