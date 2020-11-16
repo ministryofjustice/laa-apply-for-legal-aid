@@ -130,11 +130,11 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService do
 
     context 'operation unsuccessful' do
       let(:transaction_request_id_in_example_response) { '20190301030405123456' }
-      let(:error) { [CCMS::CCMSError, Savon::Error, StandardError].sample }
+      let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
       before do
         allow(case_add_status_requestor).to receive(:formatted_xml).and_return(case_add_status_request)
-        expect(case_add_status_requestor).to receive(:call).and_raise(error, 'oops')
+        expect(case_add_status_requestor).to receive(:call).and_raise(error.sample, 'oops')
         expect(case_add_status_requestor).to receive(:transaction_request_id).and_return(transaction_request_id_in_example_response)
       end
 

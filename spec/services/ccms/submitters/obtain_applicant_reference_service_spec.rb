@@ -123,10 +123,10 @@ module CCMS
 
       context 'operation in error' do
         context 'error when searching for applicant' do
-          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError].sample }
+          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do
-            expect_any_instance_of(CCMS::Requestors::ApplicantSearchRequestor).to receive(:call).and_raise(error, 'oops')
+            expect_any_instance_of(CCMS::Requestors::ApplicantSearchRequestor).to receive(:call).and_raise(error.sample, 'oops')
           end
 
           it 'puts it into failed state' do

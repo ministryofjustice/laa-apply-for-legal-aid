@@ -125,10 +125,10 @@ module CCMS
         end
 
         context 'operation unsuccessful' do
-          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError].sample }
+          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do
-            expect_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(error, 'oops')
+            expect_any_instance_of(CCMS::Requestors::ApplicantAddStatusRequestor).to receive(:call).and_raise(error.sample, 'oops')
           end
 
           it 'increments the poll count' do

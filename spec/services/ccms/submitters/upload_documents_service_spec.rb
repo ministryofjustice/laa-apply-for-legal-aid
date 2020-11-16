@@ -96,11 +96,11 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
 
   context 'operation unsuccessful' do
     let(:history) { histories.where(request: nil, response: nil, to_state: 'failed').last }
-    let(:error) { [CCMS::CCMSError, Savon::Error, StandardError].sample }
+    let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
     context 'operation fails due to an exception' do
       before do
-        allow(document_upload_requestor).to receive(:call).and_raise(error, 'failed to upload')
+        allow(document_upload_requestor).to receive(:call).and_raise(error.sample, 'failed to upload')
       end
 
       it 'changes the submission state to failed' do
