@@ -199,10 +199,6 @@ jobs:
         command: bundle exec cucumber --format junit --out /tmp/test-results/cucumber
     - store_artifacts:
         path: tmp/capybara
-    - persist_to_workspace:
-        root: tmp
-        paths:
-         - webhint_inputs
     - store_test_results:
         path: /tmp/test-results/cucumber
 
