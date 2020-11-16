@@ -10,7 +10,7 @@ class LegalAidApplication < ApplicationRecord # rubocop:disable Metrics/ClassLen
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
   CCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
 
-  belongs_to :applicant, optional: true
+  belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
   belongs_to :office, optional: true
   has_many :application_proceeding_types, dependent: :destroy
