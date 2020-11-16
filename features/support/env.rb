@@ -64,6 +64,10 @@ if ENV['BROWSER'] == 'chrome'
   end
 end
 
+# By default, cucumber-rails will auto mix-in the helpers from Rack::Test into your default Cucumber World instance.
+# You can prevent this behaviour by setting ENV['CR_REMOVE_RACK_TEST_HELPERS'] = 'true'
+ENV['CR_REMOVE_RACK_TEST_HELPERS'] = 'true'
+
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
