@@ -137,25 +137,3 @@ After do |scenario|
     screenshot_image(name)
   end
 end
-
-AfterStep do
-  next unless ENV['SAVE_PAGES'] == 'true'
-  next unless page.current_host
-  next unless URI.parse(page.current_host).host == URI.parse(page.server_url).host
-
-  page_path = page.current_path.to_s.parameterize
-
-  # UUIDs are removed from the path to avoid saving duplicate pages
-  path_without_uuids = page_path.gsub(/[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}/, 'uuid')
-  file_path = Rails.root.join('tmp', 'webhint_inputs', "apply-#{path_without_uuids}.html")
-
-  next if File.file?(file_path)
-
-  # the html file will fetch assets from that URL
-  asset_host = 'http://localhost:3004'
-  HtmlPageSaver.call(
-    html: page.html,
-    file_path: file_path,
-    asset_host: asset_host
-  )
-end
