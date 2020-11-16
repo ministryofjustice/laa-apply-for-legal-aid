@@ -22,7 +22,7 @@
             <td class="govuk-table__cell"><%= application.enum_t(:state) %></td>
             <td class="govuk-table__cell"><%= mail_to application.provider.email, application.provider.username %></td>
             <td class="govuk-table__cell">
-              <%= "Discarded by user on #{application.discarded_at.strftime('%d-%m-%Y')}" if application.discarded? %>
+              <%= t('.discarded', date: application.discarded_at.strftime('%d-%m-%Y')) if application.discarded? %>
               <%= button_to(
                 t('.delete'),
                 admin_legal_aid_application_path(application.id),
@@ -35,13 +35,9 @@
                 "data-delete-message": t('.warning.delete')
               ) if destroy_enabled? %>
              </td>
-            <td class="govuk-table__cell"><%= button_to(
-                                                'Test CCMS connectivity',
-                                                admin_ccms_connectivity_test_path(application.id),
-                                                method: :get,
-                                                class: 'govuk-button'
-                                              ) %>
-                                             </td>
+            <td class="govuk-table__cell">
+              <%= link_to t('.data_view'), admin_legal_aid_applications_submission_path(application), class: 'govuk-button govuk-!-margin-bottom-0' %>
+            </td>
           </tr>
         <% end %>
       </tbody>
