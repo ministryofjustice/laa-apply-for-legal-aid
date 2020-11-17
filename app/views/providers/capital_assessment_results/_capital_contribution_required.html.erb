@@ -5,7 +5,7 @@
 </header>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <% t(".details", amount: number_to_currency(@cfe_result.capital_contribution)).each do |detail| %>
+    <% t(".details", amount: gds_number_to_currency(@cfe_result.capital_contribution)).each do |detail| %>
       <p class="govuk-body"><%= detail %></p>
     <% end %>
   </div>

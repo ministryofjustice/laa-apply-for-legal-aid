@@ -2,10 +2,10 @@
   <h2 class="govuk-heading-m"><%= t('.property') %></h2>
   <table class="govuk-table">
     <tbody>
-      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.value'), value: number_to_currency(@cfe_result.main_home_value) } %>
-      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.outstanding_mortgage'), value: number_to_currency(@cfe_result.main_home_outstanding_mortgage) } %>
-      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.disregards'), value: number_to_currency(@cfe_result.main_home_equity_disregard) } %>
-      <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessment_amount'), value: number_to_currency(@cfe_result.main_home_assessed_equity) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.value'), value: gds_number_to_currency(@cfe_result.main_home_value) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.outstanding_mortgage'), value: gds_number_to_currency(@cfe_result.main_home_outstanding_mortgage) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.disregards'), value: gds_number_to_currency(@cfe_result.main_home_equity_disregard) } %>
+      <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessment_amount'), value: gds_number_to_currency(@cfe_result.main_home_assessed_equity) } %>
     </tbody>
   </table>
 
@@ -13,9 +13,9 @@
     <h2 class="govuk-heading-m"><%= t('.additional_property') %></h2>
     <table class="govuk-table">
       <tbody>
-      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.value'), value: number_to_currency(@cfe_result.additional_property_value) } %>
-      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.outstanding_mortgage'), value: number_to_currency(@cfe_result.additional_property_mortgage) } %>
-      <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessment_amount'), value: number_to_currency(@cfe_result.additional_property_assessed_equity) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.value'), value: gds_number_to_currency(@cfe_result.additional_property_value) } %>
+      <%= render partial: 'shared/results_detail_row', locals: { caption: t('.outstanding_mortgage'), value: gds_number_to_currency(@cfe_result.additional_property_mortgage) } %>
+      <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessment_amount'), value: gds_number_to_currency(@cfe_result.additional_property_assessed_equity) } %>
       </tbody>
     </table>
     <% end %>

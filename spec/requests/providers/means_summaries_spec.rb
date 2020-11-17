@@ -39,12 +39,12 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
     it 'displays the bank transaction data' do
       total_amount = bank_transactions.sum(&:amount)
       expect(total_amount).not_to be_zero
-      expect(response.body).to include(ActiveSupport::NumberHelper.number_to_currency(total_amount))
+      expect(response.body).to include(ActiveSupport::NumberHelper.gds_number_to_currency(total_amount))
     end
 
     it 'displays the correct vehicles details' do
-      expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
-      expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
+      expect(response.body).to include(gds_number_to_currency(vehicle.estimated_value, unit: '£'))
+      expect(response.body).to include(gds_number_to_currency(vehicle.payment_remaining, unit: '£'))
       expect(response.body).to include(yes_no(vehicle.more_than_three_years_old?))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.heading'))
       expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))

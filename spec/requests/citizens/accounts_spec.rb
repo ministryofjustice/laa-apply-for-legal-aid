@@ -55,7 +55,7 @@ RSpec.describe 'citizen accounts request', type: :request do
     end
 
     it 'display balance with pound symbol' do
-      expect(response.body).to include(number_to_currency(applicant_bank_account.balance, unit: '£'))
+      expect(response.body).to include(gds_number_to_currency(applicant_bank_account.balance, unit: '£'))
     end
 
     it 'adds its url to history' do

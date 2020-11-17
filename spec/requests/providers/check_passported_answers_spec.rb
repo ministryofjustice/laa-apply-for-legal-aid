@@ -34,8 +34,8 @@ RSpec.describe 'check passported answers requests', type: :request do
 
       it 'displays the correct details' do
         expect(response.body).to include(I18n.t("shared.forms.own_home_form.#{application.own_home}"))
-        expect(response.body).to include(number_to_currency(application.property_value, unit: '£'))
-        expect(response.body).to include(number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
+        expect(response.body).to include(gds_number_to_currency(application.property_value, unit: '£'))
+        expect(response.body).to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
         expect(response.body).to include(I18n.t("shared.forms.shared_ownership_form.shared_ownership_item.#{application.shared_ownership}"))
         expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 2))
         expect(response.body).to include('Does your client own the home they live in?')
@@ -49,8 +49,8 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       it 'displays the correct vehicles details' do
-        expect(response.body).to include(number_to_currency(vehicle.estimated_value, unit: '£'))
-        expect(response.body).to include(number_to_currency(vehicle.payment_remaining, unit: '£'))
+        expect(response.body).to include(gds_number_to_currency(vehicle.estimated_value, unit: '£'))
+        expect(response.body).to include(gds_number_to_currency(vehicle.payment_remaining, unit: '£'))
         expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.heading'))
         expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))
         expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.estimated_value'))
@@ -103,7 +103,7 @@ RSpec.describe 'check passported answers requests', type: :request do
 
       it 'displays the correct savings details' do
         application.savings_amount.amount_attributes.each do |_attr, amount|
-          expect(response.body).to include(number_to_currency(amount, unit: '£')), 'saving amount should be in the page'
+          expect(response.body).to include(gds_number_to_currency(amount, unit: '£')), 'saving amount should be in the page'
         end
       end
 
@@ -112,7 +112,7 @@ RSpec.describe 'check passported answers requests', type: :request do
           expected = if attr == 'second_home_percentage'
                        number_to_percentage(amount, precision: 2)
                      else
-                       number_to_currency(amount, unit: '£')
+                       gds_number_to_currency(amount, unit: '£')
                      end
           expect(response.body).to include(expected), 'asset amount should be in the page'
         end
@@ -125,7 +125,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       context 'applicant does not own home' do
         let(:application) { create :legal_aid_application, :with_everything, :without_own_home, :with_passported_state_machine, :provider_entering_means }
         it 'does not display property value' do
-          expect(response.body).not_to include(number_to_currency(application.property_value, unit: '£'))
+          expect(response.body).not_to include(gds_number_to_currency(application.property_value, unit: '£'))
           expect(response.body).not_to include('Property value')
         end
 
@@ -138,7 +138,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       context 'applicant owns home without mortgage' do
         let(:application) { create :legal_aid_application, :with_everything, :with_own_home_owned_outright, :with_passported_state_machine, :provider_entering_means }
         it 'does not display property value' do
-          expect(response.body).not_to include(number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
+          expect(response.body).not_to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
           expect(response.body).not_to include('Outstanding mortgage')
         end
       end

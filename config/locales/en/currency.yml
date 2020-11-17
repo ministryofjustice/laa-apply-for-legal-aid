@@ -2,5 +2,5 @@
 en:
   currency:
     eur: "€"
-    gbp: "£" # Also the default for `number_to_currency` as set via "en.number.currency.format.unit"
+    gbp: "£" # Also the default for gds_number_to_currency as set via "en.number.currency.format.unit"
     usd: "$"

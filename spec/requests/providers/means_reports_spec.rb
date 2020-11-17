@@ -31,7 +31,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     end
 
     it 'displays the total capital assessed' do
-      expect(unescaped_response_body).to include(number_to_currency(cfe_result.total_capital))
+      expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.total_capital))
     end
 
     it 'displays the capital lower limit' do
@@ -43,7 +43,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     end
 
     it 'displays the capital contribution' do
-      expect(unescaped_response_body).to include(number_to_currency(cfe_result.capital_contribution))
+      expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
     end
 
     context 'when not authenticated' do

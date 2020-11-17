@@ -4,10 +4,10 @@
     <table class="govuk-table">
       <tbody>
         <% @cfe_result.non_liquid_capital_items.each do |item| %>
-          <%= render partial: 'shared/results_detail_row', locals: { caption: item[:description], value: number_to_currency(item[:value]) } %>
+          <%= render partial: 'shared/results_detail_row', locals: { caption: item[:description], value: gds_number_to_currency(item[:value]) } %>
         <% end %>
 
-        <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessed_amount'), value: number_to_currency(@cfe_result.total_other_assets) } %>
+        <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessed_amount'), value: gds_number_to_currency(@cfe_result.total_other_assets) } %>
       </tbody>
     </table>
   </div>

@@ -4,7 +4,7 @@
     <%= check_answer_link(
           name: :total_capital_assessed,
           question: t('.total'),
-          answer: number_to_currency(@legal_aid_application.cfe_result.total_capital),
+          answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_capital),
           read_only: read_only,
           align_right: read_only
         ) %>
@@ -28,7 +28,7 @@
     <%= check_answer_link(
           name: :capital_contribution,
           question: t('.contribution'),
-          answer: number_to_currency(@legal_aid_application.cfe_result.capital_contribution),
+          answer: gds_number_to_currency(@legal_aid_application.cfe_result.capital_contribution),
           read_only: read_only,
           align_right: read_only
         ) %>

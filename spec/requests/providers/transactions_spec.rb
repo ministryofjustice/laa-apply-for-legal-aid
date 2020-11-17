@@ -51,7 +51,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
       it 'shows the transaction amount' do
         subject
         transaction = bank_transaction_matching
-        expected_amount = number_to_currency(transaction.amount, unit: I18n.t("currency.#{transaction.currency.downcase}", default: transaction.currency))
+        expected_amount = gds_number_to_currency(transaction.amount, unit: I18n.t("currency.#{transaction.currency.downcase}", default: transaction.currency))
         expect(unescaped_response_body).to include(expected_amount)
       end
 

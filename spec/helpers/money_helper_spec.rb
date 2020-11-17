@@ -53,4 +53,50 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
   end
+
+  describe '#gds_number_to_currency' do
+    let(:result) { gds_number_to_currency(value) }
+
+    context 'pounds with pence' do
+      let(:value) { 12_345.25 }
+
+      it 'displays pounds and pence' do
+        expect(result).to eq '£12,345.25'
+      end
+    end
+
+    context 'pounds only' do
+      let(:value) { 12_345.00 }
+
+      it 'displays pounds only' do
+        expect(result).to eq '£12,345'
+      end
+    end
+
+    context 'preserves other options' do
+      let(:value) { 12_345.25 }
+      let(:opts) { { unit: '$', delimiter: ' ', separator: ',' } }
+      let(:result) { gds_number_to_currency(value, opts) }
+
+      it 'displays pounds only' do
+        expect(result).to eq '$12 345,25'
+      end
+    end
+
+    context 'returns when not numeric' do
+      let(:value) { 'fifty' }
+
+      it 'displays pounds only' do
+        expect(result).to eq 'fifty'
+      end
+    end
+
+    context 'BigDecimal' do
+      let(:value) { BigDecimal('12345.25') }
+
+      it 'displays pounds and pence when BigDecimal' do
+        expect(result).to eq '£12,345.25'
+      end
+    end
+  end
 end

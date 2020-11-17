@@ -55,14 +55,14 @@ module DependantHelper
   def income(dependant)
     build_ostruct(
       t('income', scope: 'providers.means_summaries.show.dependants'),
-      dependant.has_income? ? number_to_currency(dependant.monthly_income) : yes_no(dependant.has_income?)
+      dependant.has_income? ? gds_number_to_currency(dependant.monthly_income) : yes_no(dependant.has_income?)
     )
   end
 
   def assets(dependant)
     build_ostruct(
       t('assets', scope: 'providers.means_summaries.show.dependants'),
-      dependant.has_assets_more_than_threshold? ? number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?)
+      dependant.has_assets_more_than_threshold? ? gds_number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?)
     )
   end
 

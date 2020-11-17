@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>7be9797e-7635-4afd-bc7d-10a407bd1a90</clientReference><nino>JA293483A</nino><surname>WALKER</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20201116</dateOfAward><lscServiceName
+        xsi:nil="true"/><clientOrgId xsi:nil="true"/><clientUserId xsi:nil="true"/></wsdl:check></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"check"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '618'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 500
+      message: ''
+    headers:
+      Date:
+      - Mon, 16 Nov 2020 12:12:32 GMT
+      Content-Type:
+      - text/xml;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Amzn-Trace-Id:
+      - Root=1-5fb26cb0-104723ec72db6cbe28a15291;
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><soapenv:Fault><faultcode>soapenv:Server.generalException</faultcode><faultstring></faultstring><detail><ns1:benefitCheckerFaultException
+        xmlns:ns1="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns2:MessageCode
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">LSCBC205</ns2:MessageCode><ns3:MessageText
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">Invalid request credentials.</ns3:MessageText></ns1:benefitCheckerFaultException><ns4:exceptionName
+        xmlns:ns4="http://xml.apache.org/axis/">uk.gov.lsc.benefitchecker.data._1_0.BenefitCheckerFaultException</ns4:exceptionName><ns5:hostname
+        xmlns:ns5="http://xml.apache.org/axis/">726504db55e9</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
+  recorded_at: Mon, 16 Nov 2020 12:12:32 GMT
+recorded_with: VCR 6.0.0

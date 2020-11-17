@@ -2,13 +2,13 @@
   <h2 class="govuk-heading-m"><%= t('.total_assessed_capital') %></h2>
   <table class="govuk-table">
     <tbody>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.property'), value: number_to_currency(@cfe_result.total_property) } %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.vehicles'), value: number_to_currency(@cfe_result.total_vehicles) } %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.savings_and_investments'), value: number_to_currency(@cfe_result.total_savings) } %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.other_assets'), value: number_to_currency(@cfe_result.total_other_assets) } %>
-    <%= render partial: 'shared/results_total_bold_row', locals: { caption: t('.total_capital'), value: number_to_currency(@cfe_result.total_capital_before_pensioner_disregard) } %>
-    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.pensioner_disregard'), value: number_to_currency(@cfe_result.pensioner_capital_disregard) } %>
-    <%= render partial: 'shared/results_total_bold_row', locals: { caption: t('.disposable_capital'), value: number_to_currency(@cfe_result.total_disposable_capital) } %>
+    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.property'), value: gds_number_to_currency(@cfe_result.total_property) } %>
+    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.vehicles'), value: gds_number_to_currency(@cfe_result.total_vehicles) } %>
+    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.savings_and_investments'), value: gds_number_to_currency(@cfe_result.total_savings) } %>
+    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.other_assets'), value: gds_number_to_currency(@cfe_result.total_other_assets) } %>
+    <%= render partial: 'shared/results_total_bold_row', locals: { caption: t('.total_capital'), value: gds_number_to_currency(@cfe_result.total_capital_before_pensioner_disregard) } %>
+    <%= render partial: 'shared/results_detail_row', locals: { caption: t('.pensioner_disregard'), value: gds_number_to_currency(@cfe_result.pensioner_capital_disregard) } %>
+    <%= render partial: 'shared/results_total_bold_row', locals: { caption: t('.disposable_capital'), value: gds_number_to_currency(@cfe_result.total_disposable_capital) } %>
     </tbody>
   </table>
 </div>

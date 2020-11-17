@@ -7,7 +7,7 @@
   <%= check_answer_no_link(
         name: :incurrable_costs,
         question: t(".costs"),
-        answer: number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0)
+        answer: gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0)
       ) %>
   <%= check_answer_no_link(
         name: :allowable_work,
