@@ -6,7 +6,7 @@ module CapitalHelper
 
     {
       items: items,
-      total_value: items.map(&:amount).sum
+      total_value: items.sum(&:amount)
     }
   end
 
