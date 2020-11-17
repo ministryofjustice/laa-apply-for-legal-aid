@@ -63,8 +63,8 @@ module StatementOfCases
       @original_file_name = original_file.original_filename
       scanner_down(original_file)
       malware_scan(original_file)
-      disallowed_content_type(original_file)
       file_empty(original_file)
+      disallowed_content_type(original_file)
       too_big(original_file)
       create_attachment(original_file) unless errors.present?
     end
@@ -87,7 +87,7 @@ module StatementOfCases
     end
 
     def disallowed_content_type(original_file)
-      return if original_file.content_type.in?(ALLOWED_CONTENT_TYPES)
+      return if MimeMagic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
 
       errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
     end

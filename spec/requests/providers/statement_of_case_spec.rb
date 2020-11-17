@@ -187,6 +187,20 @@ RSpec.describe 'provider statement of case requests', type: :request do
           end
         end
 
+        context 'file is invalid mime type but has valid content_type' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+          before do
+            allow(original_file).to receive(:content_type).and_return('application/pdf')
+          end
+
+          it 'does not save the object and raise an error' do
+            subject
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid', file_name: original_file.original_filename)
+            expect(response.body).to include(error)
+            expect(statement_of_case).to be_nil
+          end
+        end
+
         context 'file is too big' do
           before { allow(StatementOfCases::StatementOfCaseForm).to receive(:max_file_size).and_return(0) }
 
