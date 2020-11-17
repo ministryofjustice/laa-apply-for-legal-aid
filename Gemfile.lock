@@ -125,7 +125,7 @@ GEM
       smart_properties
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    blazer (2.2.8)
+    blazer (2.3.0)
       activerecord (>= 5)
       chartkick (>= 3.2)
       railties (>= 5)
@@ -225,7 +225,7 @@ GEM
       rubocop (~> 0.79)
       smart_properties
     errbase (0.2.0)
-    erubi (1.9.0)
+    erubi (1.10.0)
     eventmachine (1.2.7)
     execjs (2.7.0)
     factory_bot (6.1.0)
@@ -576,7 +576,7 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
     tzinfo-data (1.2020.4)
       tzinfo (>= 1.0.0)
