@@ -8,7 +8,7 @@ module CCMS
         response = applicant_add_status_requestor.call
         parser = CCMS::Parsers::ApplicantAddStatusResponseParser.new(tx_id, response)
         process_response(parser)
-      rescue CCMSError => e
+      rescue *CCMS_SUBMISSION_ERRORS => e
         handle_exception(e, xml_request)
       end
 

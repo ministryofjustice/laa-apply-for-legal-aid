@@ -5,7 +5,7 @@ module CCMS
         tx_id = applicant_search_requestor.transaction_request_id
         parser = CCMS::Parsers::ApplicantSearchResponseParser.new(tx_id, response)
         process_records(parser)
-      rescue CCMSError => e
+      rescue *CCMS_SUBMISSION_ERRORS => e
         handle_exception(e, xml_request)
       end
 

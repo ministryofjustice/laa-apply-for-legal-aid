@@ -7,7 +7,7 @@ module CCMS
         submission.save!
         parser = CCMS::Parsers::CaseAddStatusResponseParser.new(tx_id, response)
         process_response(parser)
-      rescue CCMSError => e
+      rescue *CCMS_SUBMISSION_ERRORS => e
         handle_exception(e, xml_request)
       end
 

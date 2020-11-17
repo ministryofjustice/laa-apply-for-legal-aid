@@ -71,8 +71,10 @@ module CCMS
 
       context 'operation in error' do
         context 'error when adding an applicant' do
+          let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
+
           before do
-            expect_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:call).and_raise(CCMS::CCMSError, 'oops')
+            expect_any_instance_of(CCMS::Requestors::ApplicantAddRequestor).to receive(:call).and_raise(error.sample, 'oops')
           end
 
           it 'puts it into failed state' do
@@ -85,7 +87,7 @@ module CCMS
             expect(history.from_state).to eq 'case_ref_obtained'
             expect(history.to_state).to eq 'failed'
             expect(history.success).to be false
-            expect(history.details).to match(/CCMS::CCMSError/)
+            expect(history.details).to match(/#{error}/)
             expect(history.details).to match(/oops/)
             expect(history.request).to be_soap_envelope_with(
               command: 'ns2:ClientAddRQ',
