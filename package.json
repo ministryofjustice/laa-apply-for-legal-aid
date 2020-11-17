@@ -2,11 +2,9 @@
   "name": "laa-apply-for-legal-aid",
   "private": true,
   "scripts": {
-    "hint": "hint",
     "test": "jest"
   },
   "dependencies": {
-    "@hint/connector-local": "^3.2.7",
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "^5.2.1",
@@ -16,10 +14,6 @@
     "js-search": "^2.0.0"
   },
   "devDependencies": {
-    "@hint/configuration-web-recommended": "^6.2.2",
-    "@hint/formatter-json": "^3.1.5",
-    "@hint/parser-javascript": "^3.1.0",
-    "hint": "^5.4.1",
     "jest": "^26.6.3",
     "webpack-dev-server": "^3.11.0"
   },

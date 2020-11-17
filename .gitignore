@@ -50,9 +50,6 @@ add_tranche_users.txt
 # Ignore Redis binary dump (dump.rdb) files
 *.rdb
 
-# Ignore webhint reports
-hint-report/
-
 /public/packs
 /public/packs-test
 /yarn-error.log

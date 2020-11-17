@@ -196,44 +196,11 @@ jobs:
     - *save_js_packages_cache
     - run:
         name: Run integration tests
-        command: SAVE_PAGES=true bundle exec cucumber --format junit --out /tmp/test-results/cucumber
+        command: bundle exec cucumber --format junit --out /tmp/test-results/cucumber
     - store_artifacts:
         path: tmp/capybara
-    - persist_to_workspace:
-        root: tmp
-        paths:
-         - webhint_inputs
     - store_test_results:
         path: /tmp/test-results/cucumber
-
-  webhint_reports:
-    executor: linting-executor
-    steps:
-      - checkout
-      - attach_workspace:
-          at: tmp
-      - *update_packages
-      - *restore_gems_cache
-      - *install_gems
-      - *save_gems_cache
-      - *restore_js_packages_cache
-      - *install_js_packages
-      - *save_js_packages_cache
-      - run:
-          name: Generate webhint reports
-          command: ./bin/generate_webhint_reports.sh
-      - run:
-          name: gzip webhint reports
-          command: tar -zcvf hint-report.tar.gz hint-report/
-      - store_artifacts:
-          path: ./hint-report.tar.gz
-          destination: webhint-reports
-      - run:
-          name: gzip html pages
-          command: tar -zcvf html-pages.tar.gz tmp/webhint_inputs/
-      - store_artifacts:
-          path: ./html-pages.tar.gz
-          destination: html-pages
 
   build_and_push:
     executor: basic-executor
@@ -376,9 +343,6 @@ workflows:
       - integration_tests:
           requires:
           - lint_checks
-      # - webhint_reports:
-      #    requires:
-      #    - integration_tests
 
   merge_pr:
     jobs:
@@ -410,12 +374,8 @@ workflows:
       - integration_tests:
           requires:
             - lint_checks
-      # - webhint_reports:
-      #     requires:
-      #       - integration_tests
       - deploy_staging:
           requires:
-            # - webhint_reports
             - integration_tests
             - unit_tests
             - build_and_push

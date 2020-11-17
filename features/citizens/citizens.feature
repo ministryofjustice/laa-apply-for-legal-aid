@@ -34,7 +34,7 @@ Feature: Citizen journey
     Then I click link "Back"
     Then I should be on a page showing 'Your legal aid application'
 
-  @javascript @webhint @vcr
+  @javascript @vcr
   Scenario: Follow citizen journey from Accounts page
     Given An application has been created
     Then I visit the start of the financial assessment

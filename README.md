@@ -140,20 +140,6 @@ When changes to test files are made it will run the tests in that file
 When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
 Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes 
 
-### Accessibility testing with webhint
-
-The webhint tests are currently only run as the final part of `bin/rake` they are not run as part of the deployment process.
-
-webhint (https://webhint.io/) is used to check if pages are accessible.
-
-Run `rake webhint:generate_reports`. This will
-
-- delete any existing files from previous runs
-- execute `SAVE_PAGES=true bin/rails cucumber` to run the feature tests and save all pages to `tmp/webhint_inputs`
-- and the execute `./bin/generate_webhint_reports.sh` to check those pages with webhint.
-
-The result will be printed as a JSON result and you can also find HTML reports in the `hint-report` folder.
-
 ## Deployment
 
 The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid) but requires approval to the desired environment.
