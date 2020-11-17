@@ -10,6 +10,9 @@
 
 require 'rubygems'
 
+BUNDLER_REGEXP = /\A--bundler(?:[= ](#{Gem::Version::VERSION_PATTERN}))?\z/.freeze
+LOCK_FILE_REGEXP = /\n\nBUNDLED WITH\n\s{2,}(#{Gem::Version::VERSION_PATTERN})\n/.freeze
+
 m = Module.new do
   module_function
 
@@ -29,7 +32,7 @@ m = Module.new do
     update_index = nil
     ARGV.each_with_index do |a, i|
       bundler_version = a if update_index && update_index.succ == i && a =~ Gem::Version::ANCHORED_VERSION_PATTERN
-      next unless a =~ /\A--bundler(?:[= ](#{Gem::Version::VERSION_PATTERN}))?\z/
+      next unless a =~ BUNDLER_REGEXP
 
       bundler_version = Regexp.last_match(1) || '>= 0.a'
       update_index = i
@@ -57,7 +60,7 @@ m = Module.new do
     return unless File.file?(lockfile)
 
     lockfile_contents = File.read(lockfile)
-    return unless lockfile_contents =~ /\n\nBUNDLED WITH\n\s{2,}(#{Gem::Version::VERSION_PATTERN})\n/
+    return unless lockfile_contents =~ LOCK_FILE_REGEXP
 
     Regexp.last_match(1)
   end

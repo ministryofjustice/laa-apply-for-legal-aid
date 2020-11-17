@@ -49,6 +49,8 @@ module TrueLayerHelpers
       error_details: {}
     }.to_json
 
-    stub_request(:get, /#{TrueLayer::ApiClient::TRUE_LAYER_URL}/).to_return(body: response_body, status: 501)
+    # the /o suffix to the regex ensures the regex gets cached and not run each time the
+    # regex is called.  It is enforced by Performance/ConstantRegexp
+    stub_request(:get, /#{TrueLayer::ApiClient::TRUE_LAYER_URL}/o).to_return(body: response_body, status: 501)
   end
 end
