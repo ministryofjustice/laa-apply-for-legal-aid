@@ -9,6 +9,8 @@ class BankTransactionPresenter
     running_balance: 'balance/running total',
     account_type: 'account type',
     account_name: 'account name',
+    account_sort_code: 'sort code',
+    account_number: 'account number',
     category: 'category',
     selected_by: 'selected_by',
     flagged: 'flagged'
@@ -93,6 +95,14 @@ class BankTransactionPresenter
 
   def transaction_account_name
     account_for_transaction.bank_and_account_name
+  end
+
+  def transaction_account_sort_code
+    account_for_transaction.sort_code
+  end
+
+  def transaction_account_number
+    account_for_transaction.account_number
   end
 
   def account_for_transaction
