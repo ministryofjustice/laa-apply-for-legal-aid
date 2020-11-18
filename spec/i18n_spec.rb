@@ -15,10 +15,11 @@ RSpec.describe 'I18n' do
 
   context 'Welsh' do
     let(:locale) { 'cy' }
+    let(:welsh_paths) { ['/accessibility_statement', '/citizen', '/contact', '/error', '/feedback', '/privacy_policy'] }
     it 'does not have missing keys for the applicant journey' do
       missing_applicant_keys = []
       missing_keys.leaves.each do |leaf|
-        missing_applicant_keys << leaf if leaf.data[:occurrences]&.first&.path&.include? '/citizen'
+        missing_applicant_keys << leaf if welsh_paths.any? { |path| leaf.data[:occurrences]&.first&.path&.include? "views#{path}" }
       end
 
       expect(missing_applicant_keys).to be_empty,
