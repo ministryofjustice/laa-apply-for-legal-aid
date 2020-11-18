@@ -64,8 +64,6 @@ en:
       setting:
         mock_true_layer_data:
           <<: *true_false
-        allow_non_passported_route:
-          <<: *true_false
         manually_review_all_cases:
           <<: *true_false
         allow_welsh_translation:

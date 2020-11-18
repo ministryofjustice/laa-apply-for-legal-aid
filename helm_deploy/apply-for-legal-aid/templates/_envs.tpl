@@ -265,11 +265,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminAllowCreateTestApplications
-  - name: ALLOW_NON_PASSPORTED_ROUTE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: adminAllowNonPassportedRoute
   - name: GECKOBOARD_API_KEY
     valueFrom:
       secretKeyRef:
