@@ -6,34 +6,7 @@
         }
     ) do %>
 
-  <h2 class="govuk-heading-l"><%= t('.bank_accounts.heading') %></h2>
-
-  <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
-    <h2 class="govuk-heading-m govuk-!-padding-top-4"><%= t('.bank_accounts.account') %> <%= index+1 %></h2>
-
-    <dl class="govuk-summary-list govuk-!-padding-bottom-4">
-      <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.bank') %></dd>
-        <dd class="govuk-summary-list__value"><%= account.bank_provider.name %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.account_number') %></dd>
-        <dd class="govuk-summary-list__value"><%= account.account_number %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.sort_code') %></dd>
-        <dd class="govuk-summary-list__value"><%= account.sort_code %></dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.balance') %></dd>
-        <dd class="govuk-summary-list__value"><%= value_with_currency_unit(account.balance, account.currency) %></dd>
-      </div>
-    </dl>
-  <% end %>
-
-    <div class="govuk-body govuk-!-padding-bottom-4">
-      <%= link_to t('.link_other_account'), citizens_banks_path, class: 'govuk-link' %>
-    </div>
+  <%= render 'bank_accounts' %>
 
   <h2 class="govuk-heading-l"><%= t('.income_outgoings') %></h2>
 
