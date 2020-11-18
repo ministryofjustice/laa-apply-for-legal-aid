@@ -10,7 +10,8 @@ RSpec.describe Citizens::ConsentsController, type: :request do
 
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
-      expect(unescaped_response_body).to include('Do you agree to share your bank account information')
+      expect(unescaped_response_body).to include('Do you agree to share 3 months of bank statements with ' \
+                                                 "the <abbr title='Legal Aid Agency'>LAA</abbr> via TrueLayer?")
     end
   end
 
