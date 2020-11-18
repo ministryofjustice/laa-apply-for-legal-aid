@@ -356,8 +356,8 @@ Given('I complete the journey as far as check your answers') do
     proceeding_types: [proceeding_type],
     used_delegated_functions_on: 1.day.ago
   )
-  @legal_aid_application.add_default_substantive_scope_limitation!
-  @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?
+  AddScopeLimitationService.call(@legal_aid_application, :substantive)
+  AddScopeLimitationService.call(@legal_aid_application, :delegated) if @legal_aid_application.used_delegated_functions?
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -452,8 +452,8 @@ Given('I complete the application and view the check your answers page') do
     applicant: applicant,
     proceeding_types: [proceeding_type]
   )
-  @legal_aid_application.add_default_substantive_scope_limitation!
-  @legal_aid_applicaiton.add_default_delegated_functions_scope_limitation! if @legal_aid_application.used_delegated_functions?
+  AddScopeLimitationService.call(@legal_aid_application, :substantive)
+  AddScopeLimitationService.call(@legal_aid_application, :delegated) if @legal_aid_application.used_delegated_functions?
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
 end

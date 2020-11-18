@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::LimitationsController, type: :request do
   let!(:proceeding_type) { create :proceeding_type }
-  let!(:sl_substantive_default) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
-  let!(:sl_delegated_default) { create :scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type, meaning: 'Default delegated functions SL' }
-
-  let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
+  let(:legal_aid_application) { create :legal_aid_application, :with_substantive_scope_limitation, proceeding_types: [proceeding_type] }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/limitations' do
@@ -18,7 +15,6 @@ RSpec.describe Providers::LimitationsController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        legal_aid_application.add_default_substantive_scope_limitation!
         login_as provider
         subject
       end
