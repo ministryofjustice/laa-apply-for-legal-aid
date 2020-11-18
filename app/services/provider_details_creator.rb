@@ -8,6 +8,7 @@ class ProviderDetailsCreator
   def initialize(provider)
     @provider = provider
     @passported_permission = Permission.find_by(role: 'application.passported.*')
+    @non_passported_permission = Permission.find_by(role: 'application.non_passported.*')
   end
 
   def call
@@ -37,6 +38,7 @@ class ProviderDetailsCreator
     end
     # TODO: For the timebeing, we add passported permissions to every new firm, but this may change in the future.
     current_firm.permissions << @passported_permission unless current_firm.permissions.include?(@passported_permission)
+    current_firm.permissions << @non_passported_permission unless current_firm.permissions.include?(@non_passported_permission)
     current_firm
   end
 
