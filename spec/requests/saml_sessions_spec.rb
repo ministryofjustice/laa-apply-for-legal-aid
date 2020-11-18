@@ -57,6 +57,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
 
     before do
       create :permission, :passported
+      create :permission, :non_passported
       allow_any_instance_of(Warden::Proxy).to receive(:authenticate!).and_return(provider)
       stub_request(:get, provider_details_api_url).to_return(body: provider_details_api_reponse, status: status)
     end
