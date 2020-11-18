@@ -651,6 +651,7 @@ en:
         bullet-5: why the proceedings are necessary
         bullet-6: if anyone else might be able to fund the case
         h1-heading: Provide a statement of case
+        size_hint: The maximum file size is 8MB. You can attach more than one file.
         warning: Warning
         warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
       uploaded_files:
