@@ -251,7 +251,9 @@ en:
         section_client:
           heading: Client details
         section_proceeding:
-          heading: What you're applying for
+          heading: Proceedings
+        section_delegated:
+          heading: Delegated functions
         section_emergency:
           heading: Covered under an emergency certificate
         section_substantive:

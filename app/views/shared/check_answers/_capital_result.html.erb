@@ -6,7 +6,6 @@
           question: t('.total'),
           answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_capital),
           read_only: read_only,
-          align_right: read_only
         ) %>
 
     <%= check_answer_link(
@@ -14,7 +13,6 @@
           question: t('.lower_limit_label'),
           answer: gds_number_to_currency(Rails.configuration.x.capital_result.lower_limit),
           read_only: read_only,
-          align_right: read_only
         ) %>
 
     <%= check_answer_link(
@@ -22,7 +20,6 @@
           question: t('.upper_limit_label'),
           answer: gds_number_to_currency(Rails.configuration.x.capital_result.upper_limit),
           read_only: read_only,
-          align_right: read_only
         ) %>
 
     <%= check_answer_link(
@@ -30,7 +27,6 @@
           question: t('.contribution'),
           answer: gds_number_to_currency(@legal_aid_application.cfe_result.capital_contribution),
           read_only: read_only,
-          align_right: read_only
         ) %>
   </dl>
 </section>

@@ -1,6 +1,5 @@
 <%
   read_only = local_assigns[:read_only] ? read_only : false
-  align_right = local_assigns[:align_right] ? align_right : false
   no_border = no_border ? 'govuk-summary-list--no-border' : ''
 %>
 
@@ -8,10 +7,10 @@
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
     <%= question %>
   </dt>
-  <dd class="govuk-summary-list__value<%= ' align-text-right' if align_right %>">
+  <dd class="govuk-summary-list__value">
     <%= answer.present? ? answer : '-' %>
   </dd>
-  <% unless read_only && align_right %>
+  <% unless read_only %>
     <dd class="govuk-summary-list__actions">
       <% unless read_only %>
         <%= link_to_with_hidden_suffix(path: url, klass: 'govuk-link change-link', text: t('generic.change'), suffix: question) %>

@@ -16,6 +16,14 @@
           read_only: @read_only
       ) %>
 
+  <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
+
+  <%= render(
+          'shared/check_answers/delegated_functions',
+          legal_aid_application: @legal_aid_application,
+          read_only: @read_only
+      ) %>
+
   <% if @legal_aid_application.used_delegated_functions? %>
     <h2 class="govuk-heading-m"><%= t '.section_emergency.heading' %></h2>
     <%= render(

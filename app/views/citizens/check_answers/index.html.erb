@@ -6,27 +6,27 @@
         }
     ) do %>
 
-  <h2 class="govuk-heading-m"><%= t('.bank_accounts.heading') %></h2>
+  <h2 class="govuk-heading-l"><%= t('.bank_accounts.heading') %></h2>
 
   <%- @legal_aid_application.applicant.bank_accounts.each_with_index do |account, index| %>
     <h2 class="govuk-heading-m govuk-!-padding-top-4"><%= t('.bank_accounts.account') %> <%= index+1 %></h2>
 
     <dl class="govuk-summary-list govuk-!-padding-bottom-4">
       <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__value"><%= t('.bank_accounts.bank') %></dd>
-        <dd class="govuk-summary-list__actions align-text-right"><%= account.bank_provider.name %></dd>
+        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.bank') %></dd>
+        <dd class="govuk-summary-list__value"><%= account.bank_provider.name %></dd>
       </div>
       <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__value"><%= t('.bank_accounts.account_number') %></dd>
-        <dd class="govuk-summary-list__actions align-text-right"><%= account.account_number %></dd>
+        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.account_number') %></dd>
+        <dd class="govuk-summary-list__value"><%= account.account_number %></dd>
       </div>
       <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__value"><%= t('.bank_accounts.sort_code') %></dd>
-        <dd class="govuk-summary-list__actions align-text-right"><%= account.sort_code %></dd>
+        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.sort_code') %></dd>
+        <dd class="govuk-summary-list__value"><%= account.sort_code %></dd>
       </div>
       <div class="govuk-summary-list__row">
-        <dd class="govuk-summary-list__value"><%= t('.bank_accounts.balance') %></dd>
-        <dd class="govuk-summary-list__actions align-text-right"><%= value_with_currency_unit(account.balance, account.currency) %></dd>
+        <dd class="govuk-summary-list__key"><%= t('.bank_accounts.balance') %></dd>
+        <dd class="govuk-summary-list__value"><%= value_with_currency_unit(account.balance, account.currency) %></dd>
       </div>
     </dl>
   <% end %>

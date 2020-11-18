@@ -119,7 +119,10 @@ en:
           heading: Scope of legal aid
           client_involvement_type: Client involvement type
           client_involvement_type_applicant: Applicant
-          proceeding: Proceeding
+          proceeding: What does your client want legal aid for?
+      delegated_functions:
+        section_delegated:
+          heading: Delegated functions
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
       emergency_limitations:

@@ -109,7 +109,6 @@
           question: t('.items.prospects_of_success'),
           answer: yes_no(merits_assessment.success_likely),
           read_only: read_only,
-          align_right: read_only
         ) %>
   </dl>
 
@@ -120,7 +119,6 @@
           question: t('.items.success_prospect'),
           answer: t("shared.forms.success_prospect.success_prospect_item.#{merits_assessment.success_prospect}"),
           read_only: read_only,
-          align_right: read_only
         ) unless merits_assessment.success_likely? %>
   </dl>
 

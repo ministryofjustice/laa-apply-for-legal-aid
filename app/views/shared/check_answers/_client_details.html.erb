@@ -5,7 +5,6 @@
         question: t('.first_name'),
         answer: applicant.first_name,
         read_only: read_only,
-        align_right: false
       ) if :first_name.in?(attributes) %>
 
   <%= check_answer_link(
@@ -14,7 +13,6 @@
         question: t('.last_name'),
         answer: applicant.last_name,
         read_only: read_only,
-        align_right: false
       ) if :last_name.in?(attributes) %>
 
   <%= check_answer_link(
@@ -23,14 +21,12 @@
         question: t('.dob'),
         answer: applicant.date_of_birth,
         read_only: read_only,
-        align_right: false
       ) if :date_of_birth.in?(attributes) %>
 
   <%= check_answer_link(
         name: :age,
         question: t('.age_question'),
         answer: t('.age', years: applicant.age),
-        align_right: false
       ) if :age.in?(attributes) %>
 
   <%= check_answer_link(
@@ -39,7 +35,6 @@
         question: t('.nino'),
         answer: applicant.national_insurance_number,
         read_only: read_only,
-        align_right: false
       ) if :national_insurance_number.in?(attributes) %>
 
   <%= check_answer_link(
@@ -48,7 +43,6 @@
         question: t('.email'),
         answer: applicant.email,
         read_only: read_only,
-        align_right: false
       ) if :email.in?(attributes) %>
 
   <%= check_answer_link(
@@ -57,6 +51,5 @@
         question: t('.address'),
         answer: address_with_line_breaks(address),
         read_only: read_only,
-        align_right: false
       ) if :address.in?(attributes) %>
 </dl>
