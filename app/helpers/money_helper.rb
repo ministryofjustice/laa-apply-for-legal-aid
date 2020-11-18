@@ -1,6 +1,6 @@
 module MoneyHelper
   def value_with_currency_unit(value, currency)
-    gds_number_to_currency(value, unit: I18n.t("currency.#{currency.downcase}", default: currency))
+    number_to_currency(value, unit: I18n.t("currency.#{currency.downcase}", default: currency))
   end
 
   def number_to_currency_or_original_string(value)
