@@ -14,7 +14,9 @@
 
     <%= form.govuk_collection_radio_buttons(
           :employed,
-          [true, false],
+          form.yes_no_radio_button_array,
+          :value,
+          :label,
           hint: t('.hint'),
           title: content_for(:page_title)
         ) %>

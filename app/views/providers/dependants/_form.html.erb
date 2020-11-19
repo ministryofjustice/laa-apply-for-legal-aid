@@ -33,16 +33,10 @@
         <% end %>
       </fieldset>
     <% end %>
-    <%
-      options = [
-          { value: true, label: t('generic.yes') },
-          { value: false, label: t('generic.no') }
-      ]
-    %>
 
     <%= form.govuk_collection_radio_buttons(
             :in_full_time_education,
-            options,
+            form.yes_no_radio_button_array,
             :value,
             :label,
             title:  { text: t('.in_full_time_education'), size: :m, htag: :h2 }

@@ -36,20 +36,12 @@
 
         <%= govuk_error_message(@error&.values&.first, id: 'confirm_no_outgoings-error') %>
 
-        <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
-          <%= form.govuk_radio_button(
-                  :confirm_no_outgoings,
-                  'yes',
-                  label: t('generic.yes'),
-                  error: @error&.values&.first
-              ) %>
-
-          <%= form.govuk_radio_button(
-                  :confirm_no_outgoings,
-                  'no',
-                  label: t('generic.no'),
-                  error: @error&.values&.first
-              ) %>
+        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+          <%= form.govuk_collection_radio_buttons :confirm_no_outgoings,
+                                                  form.yes_no_radio_button_array,
+                                                  :value,
+                                                  :label,
+                                                  error: @error %>
         </div>
       <% end %>
 

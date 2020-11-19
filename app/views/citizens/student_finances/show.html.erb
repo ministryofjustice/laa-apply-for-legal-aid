@@ -2,15 +2,8 @@
 
   <%= form_with(model: @form, url: citizens_student_finance_path, method: :patch, local: true) do |form| %>
 
-    <%
-      options = [
-          { value: :true, label: t('generic.yes') },
-          { value: :false,  label: t('generic.no') }
-      ]
-    %>
-
     <%= form.govuk_collection_radio_buttons :student_finance,
-                                            options,
+                                            form.yes_no_radio_button_array,
                                             :value,
                                             :label,
                                             error: @error,

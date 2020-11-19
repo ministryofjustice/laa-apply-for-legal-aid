@@ -2,7 +2,9 @@
 
   <%= form.govuk_collection_radio_buttons(
         :own_vehicle,
-        [true, false],
+        form.yes_no_radio_button_array,
+        :value,
+        :label,
         title: content_for(:page_title)
       ) %>
 

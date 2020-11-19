@@ -19,23 +19,22 @@
     <%= govuk_form_group(
           show_error_if: @error,
         ) do %>
+      <fieldset class="govuk-fieldset">
+        <%= govuk_fieldset_header page_title, padding_below: 4 %>
 
-      <%= form.govuk_collection_radio_buttons(
-            :correct,
-            [
-              { value: :yes, label: t('generic.yes') },
-              { value: :no,  label: t('.no_another_office') }
-            ],
-            :value,
-            :label,
-            error: @error,
-            title: {
-                      text: t('.h1-heading', office_code: current_provider.selected_office.code),
-                      htag: :h1,
-                      padding_below: 6
-            }
-          ) %>
+        <%= form.govuk_radio_button(
+                :correct,
+                true,
+                label: t('generic.yes')
+            ) %>
 
+        <%= form.govuk_radio_button(
+                :correct,
+                false,
+                label: t('.no_another_office')
+            ) %>
+      </fieldset>
+ <div class="govuk-!-padding-bottom-2"></div>
     <% end %>
 
     <%= next_action_buttons(form: form) %>
