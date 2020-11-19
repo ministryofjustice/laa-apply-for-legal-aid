@@ -12,8 +12,8 @@ module GovukElementsFormBuilder
 
     def yes_no_radio_button_array
       [
-        { value: :yes, label: I18n.t('generic.yes') },
-        { value: :no,  label: I18n.t('generic.no') }
+        { value: true, label: I18n.t('generic.yes') },
+        { value: false, label: I18n.t('generic.no') }
       ]
     end
     # Usage:
