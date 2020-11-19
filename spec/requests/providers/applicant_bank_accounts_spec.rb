@@ -41,7 +41,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
-    let(:offline_savings_account) { 'yes' }
+    let(:offline_savings_account) { 'true' }
     let(:submit_button) { {} }
     let(:params) do
       {
@@ -75,7 +75,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       end
 
       context 'The NO option is chosen' do
-        let(:offline_savings_account) { 'no' }
+        let(:offline_savings_account) { 'false' }
 
         it 'redirects to the savings and investments page' do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))

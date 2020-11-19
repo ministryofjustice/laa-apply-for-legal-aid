@@ -61,7 +61,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     context 'with Yes submitted' do
-      let(:params) { { additional_account: 'yes' } }
+      let(:params) { { additional_account: 'true' } }
 
       it 'redirects to new action' do
         expect(response).to redirect_to(new_citizens_additional_account_path)
@@ -69,7 +69,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     context 'with No submitted' do
-      let(:params) { { additional_account: 'no' } }
+      let(:params) { { additional_account: 'false' } }
 
       it 'redirects to /citizens/identify_types_of_income(.:format)' do
         expect(response).to redirect_to(citizens_identify_types_of_income_path)
@@ -106,7 +106,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     context 'with Yes submitted' do
-      let(:params) { { has_online_accounts: 'yes' } }
+      let(:params) { { has_online_accounts: 'true' } }
 
       it 'redirects to select another bank' do
         expect(response).to redirect_to(citizens_banks_path)
@@ -118,7 +118,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     context 'with No submitted' do
-      let(:params) { { has_online_accounts: 'no' } }
+      let(:params) { { has_online_accounts: 'false' } }
 
       it 'redirects to contact provider path' do
         expect(response).to redirect_to(citizens_contact_provider_path)
