@@ -6,13 +6,17 @@ cy:
     continue: eunitnoC
     cy: Cymraeg
     en: English
+    en-GB: English # Needed for testing as en-GB is used by Faker
     errors:
       problem_text: melborp a si erehT
+    menu: uneM
     'no': 'oN'
     or: ro
     remove: evomeR
     save_and_continue: eunitnoc dna evaS
+    save_and_come_back_later: etal kcab emoc dna evaS
     select_all_that_apply: ylppa taht lla tceleS
     send: dneS
     start_now: won tratS
+    toggle_navigation: noitagivaN leveL poT edih ro wohS
     'yes': seY

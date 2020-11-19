@@ -47,7 +47,8 @@ Rails.application.configure do
   config.x.laa_portal.idp_cert_fingerprint_algorithm = 'http://www.w3.org/2000/09/xmldsig#sha'
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  config.action_view.raise_on_missing_translations = true
+
   Rails.application.routes.default_url_options[:host] = 'www.example.com'
 
   config.active_storage.service = :test

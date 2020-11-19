@@ -16,6 +16,7 @@ en:
     destroy: Destroy
     edit: Edit
     en: English
+    en-GB: English # Needed for testing as en-GB is used by Faker
     enter_text: Enter text
     errors:
       problem_text: There is a problem
