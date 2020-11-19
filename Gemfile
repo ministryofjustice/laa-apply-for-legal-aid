@@ -92,9 +92,6 @@ gem 'wicked_pdf'
 # interface to manage data
 gem 'rails_admin', '~> 2.0', '>= 2.0.2'
 
-# Create reports with SQL queries
-gem 'blazer', '>= 2.2.6'
-
 # Manage security headers
 gem 'secure_headers'
 
