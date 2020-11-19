@@ -11,7 +11,6 @@ module StatementOfCases
     ALLOWED_CONTENT_TYPES = %w[
       application/pdf
       application/msword
-      application/vnd.openxmlformats-officedocument.wordprocessingml.document
       application/vnd.oasis.opendocument.text
       text/rtf
       text/plain
@@ -22,6 +21,8 @@ module StatementOfCases
       image/bmp
       image/x-bitmap
     ].freeze
+
+    WORD_DOCUMENT = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'.freeze
 
     def self.max_file_size
       MAX_FILE_SIZE
@@ -88,6 +89,7 @@ module StatementOfCases
 
     def disallowed_content_type(original_file)
       return if MimeMagic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
+      return if original_file.content_type == WORD_DOCUMENT
 
       errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
     end

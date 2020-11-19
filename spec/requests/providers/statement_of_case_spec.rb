@@ -93,6 +93,21 @@ RSpec.describe 'provider statement of case requests', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
+      context 'word document' do
+        let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
+        let(:button_clicked) { upload_button }
+
+        it 'updates the record' do
+          subject
+          expect(statement_of_case.original_attachments.first).to be_present
+        end
+
+        it 'returns http success' do
+          subject
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
       context 'and there is an error' do
         let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
 
