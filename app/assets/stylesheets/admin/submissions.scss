@@ -1,0 +1,28 @@
+dl.kvp{
+  width:100%;
+  overflow:hidden;
+  position: relative;
+  left: 1em;
+}
+
+dl.kvp dt {
+  font-weight:600;
+  float:left;
+  width:49%;
+  clear:both;
+  padding: 0 0 3px;
+  position:relative;
+}
+
+dl.kvp dd {
+  float:right;
+  width:51%;
+  padding: 0 0 3px;
+  margin-left:0;
+}
+
+dl.kvp dd {
+  *float:none;
+  *width:auto;
+  *margin-left:49%;
+}

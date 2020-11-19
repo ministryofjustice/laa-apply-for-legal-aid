@@ -23,6 +23,8 @@ en:
         latest_applications: Latest Legal Aid Applications
         status: Status
         provider_username: Provider's username
+        discarded: Discarded by user on %{date}
+        data_view: Submission details
     settings:
       show:
         heading_1: Settings
