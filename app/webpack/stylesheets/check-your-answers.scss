@@ -1,9 +1,25 @@
-@import "govuk-frontend/govuk/settings/all";
-@import "govuk-frontend/govuk/tools/all";
-@import "govuk-frontend/govuk/helpers/all";
-$govuk-fonts-path: "/assets/";
+@import "~govuk-frontend/govuk/settings/all";
+@import "~govuk-frontend/govuk/tools/all";
+@import "~govuk-frontend/govuk/helpers/all";
+//$govuk-fonts-path: "";
 
 // Recommended - Use these styles for the check your answers pattern
+.app-check-your-answers {
+  @include govuk-font(19);
+  @include govuk-responsive-margin(3, "bottom");
+  border-top: 1px solid $govuk-border-colour;
+  @include govuk-responsive-padding(3, "top");
+
+  .govuk-grid-row div:first-child {
+    font-weight: bold;
+  }
+
+  .align_right {
+    @include govuk-media-query($from: desktop) {
+      text-align: right;
+    }
+  }
+}
 .app-check-your-answers {
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
