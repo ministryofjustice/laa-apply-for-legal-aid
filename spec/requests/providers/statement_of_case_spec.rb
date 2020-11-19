@@ -102,6 +102,12 @@ RSpec.describe 'provider statement of case requests', type: :request do
           expect(statement_of_case.original_attachments.first).to be_present
         end
 
+        it 'has the relevant content type' do
+          subject
+          document = statement_of_case.original_attachments.first.document
+          expect(document.content_type).to eq 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        end
+
         it 'returns http success' do
           subject
           expect(response).to have_http_status(:ok)
