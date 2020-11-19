@@ -139,11 +139,6 @@ GEM
       smart_properties
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    blazer (2.3.0)
-      activerecord (>= 5)
-      chartkick (>= 3.2)
-      railties (>= 5)
-      safely_block (>= 0.1.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
     browser (5.1.0)
@@ -160,7 +155,6 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    chartkick (3.4.2)
     childprocess (3.0.0)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
@@ -244,7 +238,6 @@ GEM
       rainbow
       rubocop (~> 0.79)
       smart_properties
-    errbase (0.2.0)
     erubi (1.10.0)
     eventmachine (1.2.7)
     execjs (2.7.0)
@@ -527,8 +520,6 @@ GEM
     ruby-saml (1.11.0)
       nokogiri (>= 1.5.10)
     rubyzip (2.3.0)
-    safely_block (0.3.0)
-      errbase (>= 0.1.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -654,7 +645,6 @@ DEPENDENCIES
   axe-core-cucumber
   better_errors (>= 2.7.1)
   binding_of_caller
-  blazer (>= 2.2.6)
   bootsnap (>= 1.1.0)
   browser
   business
