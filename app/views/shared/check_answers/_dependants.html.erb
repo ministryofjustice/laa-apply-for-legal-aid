@@ -1,3 +1,13 @@
+<div class="govuk-summary-list govuk-!-padding-bottom-4">
+  <div class="govuk-summary-list__row">
+  <%= check_answer_link(
+          name: "dependants",
+          url: providers_legal_aid_application_has_dependants_path,
+          question: t('providers.means_summaries.show.dependants.has_dependants'),
+          answer: yes_no(@legal_aid_application.has_dependants)
+      ) %>
+  </div>
+</div>
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
     <%= check_answer_one_change_link(
@@ -9,8 +19,8 @@
     ) %>
   <% end %>
 <% end %>
-<div class="govuk-summary-list govuk-!-padding-bottom-4">
-  <div class="govuk-summary-list__row">
-    <%= link_to t('providers.means_summaries.show.dependants.add-new'), new_providers_legal_aid_application_dependant_path, class: 'govuk-link' %>
-  </div>
-</div>
+<!--<div class="govuk-summary-list govuk-!-padding-bottom-4">-->
+<!--  <div class="govuk-summary-list__row">-->
+    <%#= link_to t('providers.means_summaries.show.dependants.add-new'), new_providers_legal_aid_application_dependant_path, class: 'govuk-link' %>
+<!--  </div>-->
+<!--</div>-->

@@ -1,0 +1,26 @@
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m"><%= name %></h3>
+    </div>
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+        <p>
+            <%= link_to_with_hidden_suffix(path: check_answer_url_for(:providers, :income_summary, @legal_aid_application),
+                                           klass: 'govuk-link change-link', text: t('generic.change'), suffix: :income) %>
+        </p>
+    </div>
+</div>
+
+<dl class="govuk-summary-list govuk-!-margin-bottom-6">
+
+    <% transaction_types.each do |transaction_type| %>
+    <div class="govuk-summary-list__row normal-word-break" id="app-check-your-answers_">
+      <dt class="govuk-summary-list__key">
+        <%= transaction_type.label_name %>
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= number_to_currency @legal_aid_application.bank_transactions.amounts.fetch(transaction_type.id, 0).abs %>
+      </dd>
+    </div>
+    <% end %>
+
+</dl>

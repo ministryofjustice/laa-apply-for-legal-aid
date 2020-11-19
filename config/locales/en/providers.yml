@@ -417,8 +417,10 @@ en:
     means_summaries:
       show:
         h1-heading: Check your answers
+        h2-heading: Your client's income and outgoings
         dependants:
           heading: Dependants
+          has_dependants: Does your client have any dependants?
           add-new: Add dependant
           delete: Delete dependant
           name: Name
@@ -427,11 +429,9 @@ en:
           in_full_time_education: Are they in full-time education or training?
           income: Do they receive any income?
           assets: Do they have assets worth more than £8,000?
-        capital-section-heading: Total capital
-        credits-section-heading: Total income
-        debits-section-heading: Total outgoings
-        change_declared_income: View/change declared income
-        change_declared_outgoings: View/change declared outgoings
+        capital-section-heading: Your client's capital
+        credits-section-heading: Income
+        debits-section-heading: Outgoings
     merits_reports:
       show:
         heading: Merits report

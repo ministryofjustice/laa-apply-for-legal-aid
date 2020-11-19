@@ -1,37 +1,22 @@
 <%= page_template(page_title: t('.h1-heading')) do %>
 
+  <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
+
+  <%= render(
+         'shared/check_answers/income_summary',
+         name: t('.credits-section-heading'),
+          transaction_types: TransactionType.credits
+      ) %>
+
+  <%= render(
+          'shared/check_answers/income_summary',
+          name: t('.debits-section-heading'),
+          transaction_types: TransactionType.debits
+      ) %>
+
   <h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>
+
   <%= render 'shared/check_answers/dependants' %>
-
-  <h2 class="govuk-heading-l"><%= t('.credits-section-heading') %></h2>
-  <%= render(
-        'shared/check_answers/bank_transaction_table',
-        transaction_types: TransactionType.credits
-      ) %>
-
-  <p class="align-text-right">
-    <%= link_to(
-          t('.change_declared_income'),
-          check_answer_url_for(:providers, :income_summary, @legal_aid_application)
-        ) %>
-  </p>
-
-  <div class="govuk-!-padding-bottom-8"></div>
-
-  <h2 class="govuk-heading-l"><%= t('.debits-section-heading') %></h2>
-  <%= render(
-        'shared/check_answers/bank_transaction_table',
-        transaction_types: TransactionType.debits
-      ) %>
-
-  <p class="align-text-right">
-    <%= link_to(
-          t('.change_declared_outgoings'),
-          check_answer_url_for(:providers, :outgoings_summary, @legal_aid_application)
-        ) %>
-  </p>
-
-  <div class="govuk-!-padding-bottom-8"></div>
 
   <h2 class="govuk-heading-l"><%= t('.capital-section-heading') %></h2>
 
