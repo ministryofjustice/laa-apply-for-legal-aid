@@ -5,8 +5,8 @@ module Providers
     end
 
     def update
-      if params[:remove_dependant].in?(%w[yes no])
-        dependant&.destroy! if params[:remove_dependant] == 'yes'
+      if params[:remove_dependant].in?(%w[true false])
+        dependant&.destroy! if params[:remove_dependant] == 'true'
         go_forward
       else
         @error = { 'remove_dependants-error' => I18n.t('providers.remove_dependant.show.error') }
