@@ -48,7 +48,7 @@ references:
     run:
       name: Install ruby gems
       command: |
-        bundle install --path=vendor/bundle --jobs=4 && bundle clean
+        bundle install --without development --path=vendor/bundle --jobs=4 && bundle clean
 
   install_packages_for_testing: &install_packages_for_testing
     run:
