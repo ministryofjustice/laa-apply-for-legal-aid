@@ -54,6 +54,11 @@ class NonPassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/Cla
       ],
                   to: :checking_non_passported_means
     end
+
+    event :reset_to_applicant_entering_means do
+      transitions from: :use_ccms, to: :applicant_entering_means,
+                  after: proc { update!(ccms_reason: nil) }
+    end
   end
 
   def checking_passported_answers?

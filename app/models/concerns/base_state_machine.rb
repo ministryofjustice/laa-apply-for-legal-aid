@@ -5,7 +5,8 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
 
   VALID_CCMS_REASONS = %i[
     employed
-    no_banking_consent
+    no_online_banking
+    no_applicant_consent
     non_passported
     offline_accounts
     unknown
