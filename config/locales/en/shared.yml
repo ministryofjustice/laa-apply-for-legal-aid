@@ -100,7 +100,7 @@ en:
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         case-details-heading: Case details
         respondent-heading: Opponent details
-        latest-incident-heading: Details of the latest incident
+        latest-incident-heading: Latest incident details
         items:
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
@@ -112,7 +112,7 @@ en:
           warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
-          notification_of_latest_incident: When did your client tell you about the latest domestic abuse incident?
+          notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
           details_of_latest_incident: What happened during the incident?
       proceedings_details:

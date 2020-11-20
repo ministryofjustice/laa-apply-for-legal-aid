@@ -211,7 +211,7 @@ en:
         we_checked: 'We checked with the DWP and your client does not receive:'
     check_merits_answers:
       show:
-        h1-heading: Check your answers
+        h1-heading: Check your answers and submit application
         sub-heading: Confirm the following
         text: 'Your client agrees that:'
         list: |

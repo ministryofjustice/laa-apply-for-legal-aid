@@ -100,8 +100,6 @@
 
   <div class="govuk-body"><%= statement_of_case.statement %></div>
 
-  <%= render 'shared/check_answers/section_break' if respondent.bail_conditions_set %>
-
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
           name: :success_likely,
