@@ -98,9 +98,6 @@ module CFE
       end
 
       def maintenance_per_month
-        # TODO: monitor this... is it actually monthly or a gross amount?
-        # this will need testing once full CCMS submission for non passported
-        # is working.  Either this will need amending or this comment can be deleted
         disposable_income[:maintenance_allowance].to_d
       end
 
