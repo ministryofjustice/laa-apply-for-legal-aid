@@ -38,7 +38,8 @@ module Flow
         },
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
-          forward: :used_delegated_functions
+          forward: :used_delegated_functions,
+          check_answers: :check_provider_answers
         },
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
