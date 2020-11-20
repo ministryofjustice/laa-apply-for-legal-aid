@@ -12,7 +12,7 @@ RSpec.describe BankTransactionPresenter do
     subject(:headers) { described_class.headers }
 
     it { is_expected.to be_a Array }
-    it { expect(headers.count).to eq 12 }
+    it { expect(headers.count).to eq 14 }
   end
 
   describe '.present!' do
@@ -129,6 +129,18 @@ RSpec.describe BankTransactionPresenter do
       subject(:account_name) { presenter.build_transaction_hash[:account_name] }
 
       it { is_expected.to eq account.bank_and_account_name }
+    end
+
+    describe 'account_sort_code' do
+      subject(:account_sort_code) { presenter.build_transaction_hash[:account_sort_code] }
+
+      it { is_expected.to eq account.sort_code }
+    end
+
+    describe 'account_number' do
+      subject(:account_number) { presenter.build_transaction_hash[:account_number] }
+
+      it { is_expected.to eq account.account_number }
     end
   end
 end
