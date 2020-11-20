@@ -8,10 +8,18 @@ module MoneyHelper
   end
 
   def gds_number_to_currency(value, opts = {})
-    return value unless value.is_a?(Numeric)
+    return value unless number?(value)
 
-    opts[:precision] = 0 if (value - value.to_i).zero?
+    currency = value.to_d
 
-    number_to_currency(value, opts)
+    opts[:precision] = 0 if (currency - currency.to_i).zero?
+
+    number_to_currency(currency, opts)
+  end
+
+  def number?(string)
+    Float(string)
+  rescue StandardError
+    false
   end
 end
