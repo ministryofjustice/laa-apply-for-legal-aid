@@ -418,6 +418,10 @@ en:
       show:
         h1-heading: Check your answers
         h2-heading: Your client's income and outgoings
+        student_finance:
+          heading: Student finance
+          do_they_get: Does your client get student finance?
+          value: How much student finance will your client get this academic year?
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?
@@ -432,6 +436,9 @@ en:
         capital-section-heading: Your client's capital
         credits-section-heading: Income
         debits-section-heading: Outgoings
+        what_happens_next:
+          heading: What happens next
+          text: We'll use your answers to check your client's financial eligibility for legal aid.
     merits_reports:
       show:
         heading: Merits report

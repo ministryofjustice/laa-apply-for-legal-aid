@@ -8,6 +8,27 @@
           transaction_types: TransactionType.credits
       ) %>
 
+  <h3 class="govuk-heading-m"><%= t '.student_finance.heading' %></h3>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+
+    <%= check_answer_link(
+            name: :student_finance,
+            url: citizens_student_finance_path,
+            question: t('.student_finance.do_they_get'),
+            answer: yes_no(@legal_aid_application.receives_student_finance?),
+            read_only: false,
+            ) %>
+
+    <%= check_answer_link(
+            name: :student_finance_annual_amount,
+            url: citizens_student_finances_annual_amount_path,
+            question: t('.student_finance.value'),
+            answer: number_to_currency(@legal_aid_application.value_of_student_finance),
+            read_only: false,
+            ) if @legal_aid_application.receives_student_finance? %>
+  </dl>
+
   <%= render(
           'shared/check_answers/income_summary',
           name: t('.debits-section-heading'),
@@ -20,7 +41,11 @@
 
   <h2 class="govuk-heading-l"><%= t('.capital-section-heading') %></h2>
 
+  <h3 class="govuk-heading-m"><%= t('shared.check_answers.assets.assets.property-heading') %></h3>
   <%= render 'shared/check_answers/assets' %>
+
+  <h3 class="govuk-heading-m"><%= t('.what_happens_next.heading') %></h3>
+  <p class="govuk-body govuk-!-margin-bottom-7"><%= t('.what_happens_next.text') %></p>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_means_summary_path,
