@@ -17,8 +17,7 @@ module CCMS
       private
 
       def pdf_attachments
-        # TODO: Establish why we are ignoring the statement_of_case documents
-        # TODO: Should we be ignoring the bank_statement_report too?
+        # Ignore the original document and use the pdf attachment it was converted to
         @pdf_attachments ||= attachments.reject { |a| a.attachment_type == 'statement_of_case' }
       end
 
