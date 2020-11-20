@@ -331,12 +331,12 @@ workflows:
           filters:
             branches:
               ignore: master
-      - build_and_push:
-          requires:
-          - lint_checks
-      - deploy_uat:
-          requires:
-          - build_and_push
+#      - build_and_push:
+#          requires:
+#          - lint_checks
+#      - deploy_uat:
+#          requires:
+#          - build_and_push
       - unit_tests:
           requires:
           - lint_checks
