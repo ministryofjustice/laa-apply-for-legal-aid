@@ -106,6 +106,8 @@ group :development, :test do
   gem 'htmlentities'
   gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'
+  gem 'listen', '>= 3.0.5', '< 3.4'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'nokogiri'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
@@ -123,8 +125,6 @@ group :development do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-rubocop'
-  gem 'listen', '>= 3.0.5', '< 3.4'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
