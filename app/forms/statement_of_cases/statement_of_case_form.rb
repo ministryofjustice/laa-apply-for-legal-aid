@@ -32,7 +32,7 @@ module StatementOfCases
       %i[upload_button_pressed original_file]
     end
 
-    validates :statement, presence: true, unless: :file_present_or_draft?
+    validate :statement_present_or_file_uploaded
     validate :file_uploaded?
     validate :original_file_valid
 
@@ -47,6 +47,12 @@ module StatementOfCases
     end
 
     private
+
+    def statement_present_or_file_uploaded
+      return if file_present_or_draft?
+
+      @errors.add(:original_file, :blank) if statement.blank?
+    end
 
     def attachments_made?
       model.legal_aid_application.attachments.present?
