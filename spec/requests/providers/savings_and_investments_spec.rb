@@ -151,16 +151,16 @@ RSpec.describe 'providers savings and investments', type: :request do
           end
           before { subject }
 
-          it 'redirects to the restrictions page' do
-            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
+          it 'redirects to the means summary page' do
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
           end
 
           context 'no savings' do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
-            it 'redirects to the restrictions page' do
-              expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
+            it 'redirects to the means summary page' do
+              expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
             end
           end
         end
@@ -174,8 +174,8 @@ RSpec.describe 'providers savings and investments', type: :request do
           end
           before { subject }
 
-          it 'redirects to the restrictions page' do
-            expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(application))
+          it 'redirects to the means summary page' do
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
           end
         end
       end
