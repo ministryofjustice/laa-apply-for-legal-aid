@@ -48,20 +48,6 @@ https://pauladamsmith.com/blog/2011/05/go_time.html
 {{- end -}}
 
 {{/*
-Defining cron schedule for smoke test rake task.
-It runs every 30 minutes.
-https://pauladamsmith.com/blog/2011/05/go_time.html
-*/}}
-{{- define "apply-for-legal-aid.cronjob-schedule-smoketest" -}}
-  {{- if contains "-uat" .Release.Namespace -}}
-    {{- $currentMinute := now | date "4" -}}
-    {{- printf "%s/30 * * * *" $currentMinute -}}
-  {{- else -}}
-    {{ "0 0 31 2 *" }}
-  {{- end -}}
-{{- end -}}
-
-{{/*
 Defining cron schedule for the backup db job
 In production the job runs once per hour between 7am and 9pm
 In UAT and Staging, we dont run the job by scheduling it for 31st February.
