@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe ProviderEmailService do
-  let(:smoke_test_email) { Rails.configuration.x.smoke_test_email_address }
+  let(:smoke_test_email) { Rails.configuration.x.simulated_email_address }
   let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe') }
   let(:provider) { create :provider, email: smoke_test_email }
   let(:application) { create(:application, applicant: applicant, provider: provider) }

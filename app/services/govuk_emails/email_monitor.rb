@@ -81,7 +81,7 @@ module GovukEmails
     end
 
     def smoke_test?
-      Rails.configuration.x.smoke_test_email_address.in?(email_args.to_s)
+      Rails.configuration.x.simulated_email_address.in?(email_args.to_s)
     end
   end
 end

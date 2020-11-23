@@ -52,7 +52,7 @@ module LaaApplyForLegalAid
     ).symbolize_keys
 
     config.x.support_email_address = 'apply-for-legal-aid@digital.justice.gov.uk'.freeze
-    config.x.smoke_test_email_address = 'simulate-delivered@notifications.service.gov.uk'.freeze
+    config.x.simulated_email_address = 'simulate-delivered@notifications.service.gov.uk'.freeze
     config.x.govuk_notify_api_key = ENV['GOVUK_NOTIFY_API_KEY']
 
     config.x.admin_portal.allow_reset = ENV['ADMIN_ALLOW_RESET'] == 'true'

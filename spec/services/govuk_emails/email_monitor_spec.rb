@@ -160,7 +160,7 @@ RSpec.describe GovukEmails::EmailMonitor do
       end
 
       context 'email is to smoke test email address' do
-        let(:to) { Rails.configuration.x.smoke_test_email_address }
+        let(:to) { Rails.configuration.x.simulated_email_address }
 
         it 'does not raise and error' do
           expect { subject }.not_to raise_error

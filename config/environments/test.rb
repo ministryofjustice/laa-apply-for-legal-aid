@@ -55,7 +55,7 @@ Rails.application.configure do
   config.x.application.host = 'test'
   config.x.application.host_url = "http://#{config.x.application.host}"
 
-  config.x.support_email_address = config.x.smoke_test_email_address
+  config.x.support_email_address = config.x.simulated_email_address
 
   config.x.email_domain.suffix = '@test.test'
 
