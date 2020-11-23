@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe SubmitCitizenReminderService, :vcr do
-  let(:smoke_test_email) { Rails.configuration.x.simulated_email_address }
-  let(:provider) { create :provider, email: smoke_test_email }
+  let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
+  let(:provider) { create :provider, email: simulated_email_address }
   let(:application) { create :application, :with_applicant, provider: provider }
   let(:application_url) { 'http://test.com' }
 
@@ -15,7 +15,7 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
     end
 
     context 'sending the email' do
-      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, smoke_test_email, application_url, application.applicant.full_name) }
+      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, simulated_email_address, application_url, application.applicant.full_name) }
 
       it 'sends an email with the right parameters' do
         expect(mail.govuk_notify_personalisation).to eq(

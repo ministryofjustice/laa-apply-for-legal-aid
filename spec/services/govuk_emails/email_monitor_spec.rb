@@ -159,7 +159,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
       end
 
-      context 'email is to smoke test email address' do
+      context 'email is to simulated test email address' do
         let(:to) { Rails.configuration.x.simulated_email_address }
 
         it 'does not raise and error' do
