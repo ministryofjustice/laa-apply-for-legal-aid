@@ -51,14 +51,15 @@ en:
           offline_accounts: Your client's bank accounts
           offline_savings: Savings accounts your client cannot access online
           other_assets: Which types of assets does your client have?
-          outstanding_mortgage: What is the outstanding mortgage on your client's home?
-          own_home: Does your client own the home they live in?
-          percentage_home: What % share of their home does your client legally own?
-          property_value: How much is your client's home worth?
           restrictions: Do any restrictions apply?
           savings_and_investments: Which types of savings or investments does your client have?
           savings_account: Savings account
           current_account: Current account
+        property:
+          outstanding_mortgage: What is the outstanding mortgage on your client's home?
+          own_home: Does your client own the home they live in?
+          percentage_home: What % share of their home does your client legally own?
+          property_value: How much is your client's home worth?
           shared_ownership: Does your client own their home with anyone else?
         submit:
           heading: Submit your details

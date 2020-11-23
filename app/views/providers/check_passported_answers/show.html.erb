@@ -3,9 +3,9 @@
       back_link: { path: reset_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application), method: :patch }
     ) do %>
 
-  <h2 class="govuk-heading-m">
-    <%= @legal_aid_application.savings_amount? && @legal_aid_application.other_assets? ? t('.property') : t('.assets.heading') %>
-  </h2>
+  <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
+
+  <h3 class="govuk-heading-m"><%= t('.property') %></h3>
 
   <%= render 'shared/check_answers/assets' %>
 

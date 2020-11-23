@@ -230,9 +230,8 @@ en:
             have their legal aid stopped and have to pay back the costs
     check_passported_answers:
       show:
-        assets:
-          heading: Property, savings and other assets
         h1-heading: Check your answers
+        h2-heading: Your client's capital
         merits_assessment_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
         merits_assessment_h2: What happens next
         property: Property
