@@ -23,7 +23,7 @@ updates:
   directory: "/"
   schedule:
     interval: weekly
-    day: tuesday
+    day: wednesday
     time: "03:00"
     timezone: Europe/London
   open-pull-requests-limit: 10
