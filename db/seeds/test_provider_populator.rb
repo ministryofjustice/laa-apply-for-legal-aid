@@ -39,10 +39,8 @@ class TestProviderPopulator
     passported_permission = Permission.find_by(role: 'application.passported.*')
     non_passported_permission = Permission.find_by(role: 'application.non_passported.*')
     Firm.all.each do |firm|
-      next if firm.permissions.map(&:role).include?('application.passported.*')
-
-      firm.permissions << passported_permission
-      firm.permissions << non_passported_permission
+      firm.permissions << passported_permission unless firm.permissions.map(&:role).include?('application.passported.*')
+      firm.permissions << non_passported_permission unless firm.permissions.map(&:role).include?('application.non_passported.*')
       firm.save!
     end
   end
