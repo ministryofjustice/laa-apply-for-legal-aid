@@ -75,7 +75,7 @@ en:
         info_html: If you have any of these requests, contact the Ministry of Justice <abbr title='Ministry of Justice'>(MOJ)</abbr> Data Protection Officer.
         data_protection_office_contact_details:
           title: The Data Protection Officer
-          email_address_html: <a href="mailto:casework@ico.org.uk">privacy@justice.gov.uk</a>
+          email_address_html: <a href="mailto:privacy@justice.gov.uk">privacy@justice.gov.uk</a>
           address:
             line_1: Ministry of Justice
             line_2: 102 Petty France
