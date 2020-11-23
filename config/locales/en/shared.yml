@@ -67,9 +67,7 @@ en:
       capital_result:
         contribution: Capital contribution
         lower_limit_label: Capital lower limit
-        lower_limit: '£3000.00'
         upper_limit_label: Capital upper limit
-        upper_limit: '£8000.00'
         total: Total capital assessed
       client_details:
         address: Correspondence address

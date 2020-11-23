@@ -12,7 +12,7 @@
     <%= check_answer_link(
           name: :capital_lower_limit,
           question: t('.lower_limit_label'),
-          answer: t('.lower_limit'),
+          answer: gds_number_to_currency(Rails.configuration.x.capital_result.lower_limit),
           read_only: read_only,
           align_right: read_only
         ) %>
@@ -20,7 +20,7 @@
     <%= check_answer_link(
           name: :capital_upper_limit,
           question: t('.upper_limit_label'),
-          answer: t('.upper_limit'),
+          answer: gds_number_to_currency(Rails.configuration.x.capital_result.upper_limit),
           read_only: read_only,
           align_right: read_only
         ) %>

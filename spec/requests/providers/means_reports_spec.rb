@@ -35,11 +35,11 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     end
 
     it 'displays the capital lower limit' do
-      expect(unescaped_response_body).to include('£3000.00')
+      expect(unescaped_response_body).to include('£3,000')
     end
 
     it 'displays the capital upper limit' do
-      expect(unescaped_response_body).to include('£8000.00')
+      expect(unescaped_response_body).to include('£8,000')
     end
 
     it 'displays the capital contribution' do
