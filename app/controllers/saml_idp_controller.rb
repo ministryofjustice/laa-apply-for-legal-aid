@@ -1,4 +1,3 @@
-# TODO: add unit tests for this controller
 # :nocov:
 class SamlIdpController < SamlIdp::IdpController
   def create

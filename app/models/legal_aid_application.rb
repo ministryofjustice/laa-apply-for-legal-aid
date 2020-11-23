@@ -1,4 +1,3 @@
-# TODO: Think about how we refactor this class to make it smaller
 class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include Discard::Model
