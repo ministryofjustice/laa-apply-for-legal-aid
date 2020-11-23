@@ -39,18 +39,9 @@ class TestProviderPopulator
     passported_permission = Permission.find_by(role: 'application.passported.*')
     non_passported_permission = Permission.find_by(role: 'application.non_passported.*')
     Firm.all.each do |firm|
-      unless firm.permissions.map(&:role).include?('application.passported.*')
-        firm.permissions << passported_permission
-        firm.save!
-      end
-    end
-
-    %w[test1 sr MARTIN.RONAN@DAVIDGRAY.CO.UK BENREID].each do |firm_name|
-      firm = Provider.find_by(username: firm_name).firm
-      unless firm.permissions.map(&:role).include?('application.non_passported.*')
-        firm.permissions << non_passported_permission
-        firm.save!
-      end
+      firm.permissions << passported_permission unless firm.permissions.map(&:role).include?('application.passported.*')
+      firm.permissions << non_passported_permission unless firm.permissions.map(&:role).include?('application.non_passported.*')
+      firm.save!
     end
   end
 

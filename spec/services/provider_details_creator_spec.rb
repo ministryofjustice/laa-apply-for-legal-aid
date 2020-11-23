@@ -55,6 +55,11 @@ RSpec.describe ProviderDetailsCreator do
       expect(firm.name).to eq(ccms_firm.name)
     end
 
+    it 'adds non passported permission to the firm' do
+      expect { subject }.to change { Firm.count }.by(1)
+      expect(firm.permissions.map(&:role)).to match_array(['application.passported.*', 'application.non_passported.*'])
+    end
+
     it 'creates the right offices' do
       expect { subject }.to change { Office.count }.by(2)
       expect(firm.offices.count).to eq(2)
