@@ -1,6 +1,21 @@
 module CapitalHelper
   def capital_amounts_list(capital, locale_namespace:, percentage_values: [])
-    items = capital_amount_items(capital, locale_namespace, percentage_values)
+    attributes = capital_amount_attributes(capital)
+    build_asset_list(attributes, locale_namespace, percentage_values)
+  end
+
+  def capital_accounts_list(capital, locale_namespace:, percentage_values: [])
+    attributes = capital_amount_attributes(capital)&.reject! { |a| !a.end_with?('accounts') }
+    build_asset_list(attributes, locale_namespace, percentage_values)
+  end
+
+  def capital_assets_list(capital, locale_namespace:, percentage_values: [])
+    attributes = capital_amount_attributes(capital)&.reject! { |a| a.end_with?('accounts') }
+    build_asset_list(attributes, locale_namespace, percentage_values)
+  end
+
+  def build_asset_list(attributes, locale_namespace, percentage_values)
+    items = capital_amount_items(attributes, locale_namespace, percentage_values)
     items&.compact!
     return nil unless items.present?
 
@@ -10,8 +25,8 @@ module CapitalHelper
     }
   end
 
-  def capital_amount_items(capital, locale_namespace, percentage_values)
-    capital_amount_attributes(capital)&.map do |attribute, amount|
+  def capital_amount_items(items, locale_namespace, percentage_values)
+    items&.map do |attribute, amount|
       next unless amount
 
       type = percentage_values.include?(attribute.to_sym) ? :percentage : :currency
