@@ -55,6 +55,7 @@ en:
           savings_and_investments: Which types of savings or investments does your client have?
           savings_account: Savings account
           current_account: Current account
+          bank_accounts: Which bank accounts does your client have?
         property:
           outstanding_mortgage: What is the outstanding mortgage on your client's home?
           own_home: Does your client own the home they live in?

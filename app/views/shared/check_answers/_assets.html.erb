@@ -81,7 +81,7 @@
   <% end %>
 
   <%= check_answer_one_change_link(
-        name: :savings_and_investments,
+        name: :bank_accounts,
         url: check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
         question: t('.assets.bank_accounts'),
         answer_hash: capital_accounts_list(
@@ -89,18 +89,18 @@
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_"
         ),
         read_only: read_only
-      ) if @legal_aid_application.savings_amount? %>
+      ) %>
+
   <%= check_answer_one_change_link(
         name: :savings_and_investments,
         url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-        question: t('.assets.other_investments'),
+        question: t('.assets.savings_and_investments'),
         answer_hash: capital_assets_list(
           @legal_aid_application.savings_amount,
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_"
         ),
         read_only: read_only
-      ) if @legal_aid_application.savings_amount? %>
-
+      ) %>
 
   <% if read_only &&  @legal_aid_application.non_passported? %>
     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -133,7 +133,7 @@
           percentage_values: [:second_home_percentage]
         ),
         read_only: read_only
-      ) if @legal_aid_application.other_assets? %>
+      ) %>
 
   <%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
 </section>

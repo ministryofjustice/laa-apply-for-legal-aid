@@ -419,8 +419,7 @@ en:
         h2-heading: Your client's income and outgoings
         student_finance:
           heading: Student finance
-          do_they_get: Does your client get student finance?
-          value: How much student finance will your client get this academic year?
+          info: Your client also told us they'll get %{student_finance} in student finance this academic year.
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?

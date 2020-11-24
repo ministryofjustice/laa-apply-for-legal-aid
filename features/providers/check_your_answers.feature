@@ -77,15 +77,41 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Own home' should be 'No'
 
   @javascript
+  Scenario: I am able to go back and change Bank Accounts and be taken back to the check your answers page for other assets
+    Given I previously created a passported application with no assets and left on the "check_passported_answers" page
+    Then I visit the applications page
+    Then I view the previously created application
+    Then I am on the check your answers page for other assets
+    And I click Check Your Answers Change link for 'bank accounts'
+    Then I should be on a page showing 'Which bank accounts does your client have?'
+    Then I select 'Savings account'
+    Then I fill 'cash' with '6780.99'
+    Then I click 'Save and continue'
+    Then I am on the check your answers page for other assets
+    And I should be on a page showing '£6780.99'
+    And the answer for 'Restrictions' should be 'No'
+
+  @javascript
+  Scenario: I am able to go back and not change Bank Accounts to have any values then come straight back to the check your answers page
+    Given I previously created a passported application with no assets and left on the "check_passported_answers" page
+    Then I visit the applications page
+    Then I view the previously created application
+    Then I am on the check your answers page for other assets
+    And I click Check Your Answers Change link for 'bank accounts'
+    Then I should be on a page showing "Which bank accounts does your client have?"
+    Then I select 'None of these'
+    Then I click 'Save and continue'
+    Then I am on the check your answers page for other assets
+    And the answer for 'Bank Accounts' should be 'None declared'
+
+  @javascript
   Scenario: I am able to go back and change Savings and Investments and be taken back to the check your answers page for other assets
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
     Then I visit the applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
+    Then I bind and pry
     And I click Check Your Answers Change link for 'savings and investments'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
-    Then I click 'Save and continue'
     Then I should be on a page showing 'Which types of savings or investments does your client have?'
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
@@ -172,14 +198,19 @@ Feature: Checking answers backwards and forwards
       And the answer for 'Own home' should be 'No'
 
     @javascript
-    Scenario: I want to view savings via the capital check your answers page
+    Scenario: I want to view bank accounts via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
-      And I click Check Your Answers Change link for 'Savings and investments'
+      And I click Check Your Answers Change link for 'bank accounts'
       Then I should be on a page showing "Which bank accounts does your client have?"
       Then I select 'None of these'
       Then I click 'Save and continue'
+      Then I should be on a page showing 'Check your answers'
+
+    @javascript
+    Scenario: I want to view savings via the capital check your answers page
+      Given I complete the passported journey as far as capital check your answers
+      And I click Check Your Answers Change link for 'Savings and investments'
       Then I should be on a page showing 'Which types of savings or investments does your client have?'
-      Then I click 'Save and continue'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
 
