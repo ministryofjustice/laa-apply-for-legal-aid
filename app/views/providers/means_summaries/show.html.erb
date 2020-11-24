@@ -4,7 +4,7 @@
 
   <%= render(
          'shared/check_answers/income_summary',
-         name: t('.credits-section-heading'),
+         income_type: t('.credits-section-heading'),
           transaction_types: TransactionType.credits
       ) %>
 
@@ -18,7 +18,7 @@
             answer: yes_no(@legal_aid_application.receives_student_finance?),
             ) %>
 
-    <%= check_answer_link(
+    <%= check_answer_no_link(
             name: :student_finance_annual_amount,
             question: t('.student_finance.value'),
             answer: number_to_currency(@legal_aid_application.value_of_student_finance),
@@ -27,7 +27,7 @@
 
   <%= render(
           'shared/check_answers/income_summary',
-          name: t('.debits-section-heading'),
+          income_type: t('.debits-section-heading'),
           transaction_types: TransactionType.debits
       ) %>
 

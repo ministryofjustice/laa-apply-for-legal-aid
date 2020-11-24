@@ -30,7 +30,6 @@ Feature: Non-passported applicant journeys
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    And I should see 'Add dependant'
 
   @javascript @vcr
   Scenario: Selects and categorises bank transactions into transaction types

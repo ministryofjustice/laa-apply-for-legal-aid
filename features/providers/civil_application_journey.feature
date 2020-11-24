@@ -329,9 +329,6 @@ Feature: Civil application journeys
     And I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -480,7 +477,7 @@ Feature: Civil application journeys
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    Then I click link 'View/change declared income'
+    Then I click Check Your Answers Change link for 'Income'
     Then I should be on a page showing "Sort your client's income into categories"
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
@@ -530,7 +527,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
     Then I click 'Continue'
-    Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'
+    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
@@ -640,7 +637,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
     Then I click 'Continue'
-    Then I should be on a page showing 'When did your client tell you about the latest domestic abuse incident?'
+    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'

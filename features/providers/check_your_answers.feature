@@ -77,7 +77,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'Own home' should be 'No'
 
   @javascript
-  Scenario: I am able to go back and change Savings and Investments and be taken to the restrictions page
+  Scenario: I am able to go back and change Savings and Investments and be taken back to the check your answers page for other assets
     Given I previously created a passported application with no assets and left on the "check_passported_answers" page
     Then I visit the applications page
     Then I view the previously created application
@@ -89,9 +89,6 @@ Feature: Checking answers backwards and forwards
     Then I should be on a page showing 'Which types of savings or investments does your client have?'
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And I should be on a page showing "£456.33"

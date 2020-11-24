@@ -60,7 +60,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    Then I click link 'View/change declared outgoings'
+    Then I click Check Your Answers Change link for 'Outgoings'
     Then I should be on a page showing "Sort your client's regular payments into categories"
     Then I click link 'Add another type of regular payment'
     Then I should be on a page showing 'Which regular payments does your client make?'
