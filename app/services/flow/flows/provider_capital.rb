@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderCapital < FlowSteps
+    class ProviderCapital < FlowSteps  # rubocop:disable Metrics/ClassLength
       STEPS = {
         capital_introductions: {
           path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },

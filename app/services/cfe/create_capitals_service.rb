@@ -12,12 +12,12 @@ module CFE
     SAVINGS_AMOUNT_FIELDS = {
       offline_current_accounts: 'Current accounts',
       offline_savings_accounts: 'Savings accounts',
-      cash: 'Cash kept at home',
+      cash: 'Money not in a bank account',
       other_person_account: "Access to another person's bank account",
-      national_savings: 'National Savings Certificates and Premium Bonds',
-      plc_shares: 'Shares in a PLC',
-      peps_unit_trusts_capital_bonds_gov_stocks: 'Unit trust',
-      life_assurance_endowment_policy: 'Life assurance or endowment policies'
+      national_savings: 'ISAs, National Savings Certificates and Premium Bonds',
+      plc_shares: 'Shares in a public limited company',
+      peps_unit_trusts_capital_bonds_gov_stocks: 'PEPs, unit trusts, capital bonds and government stocks',
+      life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage'
     }.freeze
 
     def cfe_url_path
