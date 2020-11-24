@@ -52,13 +52,15 @@ module CCMS
         let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
         let(:office) { create :office, ccms_id: '4727432767' }
         let(:savings_amount) { create :savings_amount, :all_nil }
-
         let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
         let(:expected_soap_operation) { :create_case_application }
         let(:expected_xml) { requestor.__send__(:request_xml) }
         let(:requestor) { described_class.new(submission, {}) }
 
         before do
+          allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return('FakeUser')
+          allow(Rails.configuration.x.ccms_soa).to receive(:client_password).and_return('FakePassword')
+          allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return('password_type')
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           allow(legal_aid_application).to receive(:calculation_date).and_return(Date.new(2020, 3, 25))
         end
