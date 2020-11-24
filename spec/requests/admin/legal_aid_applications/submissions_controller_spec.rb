@@ -11,12 +11,53 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
 
     it 'renders successfully' do
       subject
-      expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
     end
 
     it 'displays correct application' do
       subject
       expect(response.body).to include(legal_aid_application.application_ref)
     end
+  end
+
+  context 'Downloads' do
+    let(:submission) { legal_aid_application.ccms_submission }
+    let!(:history) { create(:ccms_submission_history, :with_xml, submission: submission) }
+
+    describe 'GET download_response_xml' do
+      subject { get download_xml_response_admin_legal_aid_applications_submission_path(history, format: :xml) }
+
+      it 'is successful' do
+        subject
+        expect(response).to be_successful
+      end
+
+      it 'downloads the file' do
+        expect_any_instance_of(described_class).to receive(:send_data)
+        subject
+      end
+    end
+
+    describe 'GET download_request_xml' do
+      subject { get download_xml_request_admin_legal_aid_applications_submission_path(history, format: :xml) }
+
+      it 'is successful' do
+        subject
+        expect(response).to be_successful
+      end
+
+      it 'downloads the file' do
+        expect_any_instance_of(described_class).to receive(:send_data)
+        subject
+      end
+    end
+  end
+
+  describe 'nil value' do
+    let(:submission) { legal_aid_application.ccms_submission }
+    let!(:history) { create(:ccms_submission_history, :without_xml, submission: submission) }
+    subject { get download_xml_response_admin_legal_aid_applications_submission_path(history, format: :xml) }
+
+    it { expect { subject }.to raise_error StandardError, 'No data found' }
   end
 end

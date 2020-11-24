@@ -57,8 +57,20 @@
             <dd><%= submission_history.to_state %></dd>
             <dt>Success</dt>
             <dd><%= submission_history.success %></dd>
-            <dt class="govuk-!-margin-bottom-5">Details</dt>
-            <dd><%= submission_history.details %></dd>
+            <% if submission_history.details.present? %>
+              <dt>Details</dt>
+              <dd><%= submission_history.details %></dd>
+            <% end %>
+            <dt class="govuk-!-margin-bottom-5"></dt>
+            <dd>
+              <% if submission_history.request.present? %>
+                <%= link_to 'Download XML Request', download_xml_request_admin_legal_aid_applications_submission_path(submission_history) %>
+              <% end %>
+              <br>
+              <% if submission_history.response.present? %>
+                <%= link_to 'Download XML Response', download_xml_response_admin_legal_aid_applications_submission_path(submission_history) %>
+              <% end %>
+            </dd>
         <% end %>
         </dl>
       <% end %>
