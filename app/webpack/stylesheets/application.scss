@@ -6,7 +6,6 @@
  * instead create new classes or ids with a prefix based on the app name.
  */
 
-@import 'govuk-frontend';
 @import 'admin';
 @import 'bank-selection';
 @import 'check-your-answers';
@@ -38,3 +37,4 @@
 @import 'forms/revealing_checkboxes';
 @import 'providers/legal_aid_applications';
 @import 'providers/proceeding_types';
+@import 'govuk-frontend';

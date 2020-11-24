@@ -3,10 +3,7 @@
 $govuk-images-path: "~images/";
 $govuk-fonts-path: "~fonts/";
 
-// Compatibility mode can be turned off when migration is complete
-// https://frontend.design-system.service.gov.uk/compatibility-mode/#turn-off-39-compatibility-mode-39
-$govuk-compatibility-govukelements: true;
-$govuk-compatibility-govuktemplate: true;
-$govuk-compatibility-govukfrontendtoolkit: true;
+$govuk-font-family-gds-transport: "GDS Transport", arial, sans-serif;
+$govuk-global-styles: true;
 
 @import '~govuk-frontend/govuk/all';
