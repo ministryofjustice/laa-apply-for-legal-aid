@@ -138,7 +138,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'returns error message' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.no_file_chosen')
+            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.blank')
             expect(response.body).to include(error)
           end
         end
@@ -169,7 +169,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
           it 'fails' do
             subject
             expect(response.body).to include('There is a problem')
-            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.statement.blank'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.blank'))
           end
         end
 
@@ -255,7 +255,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'displays error' do
             subject
-            expect(response.body).to match 'id="statement-error"'
+            expect(response.body).to match 'id="original_file-error"'
           end
 
           context 'file contains a malware' do
