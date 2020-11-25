@@ -128,7 +128,7 @@ Rails.application.routes.draw do
   end
 
   namespace :providers do
-    root to: 'start#index' # TODO: In the live app this will point at an external url
+    root to: 'start#index'
     resource :provider, only: [:show], path: 'your_profile'
     resources :applicants, only: %i[new create]
     resource :confirm_office, only: %i[show update]
