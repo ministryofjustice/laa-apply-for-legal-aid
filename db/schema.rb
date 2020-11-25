@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_154924) do
+ActiveRecord::Schema.define(version: 2020_11_25_195145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -428,7 +428,6 @@ ActiveRecord::Schema.define(version: 2020_11_25_154924) do
     t.text "details_of_proceedings_before_the_court"
     t.string "success_prospect"
     t.text "success_prospect_details"
-    t.decimal "estimated_legal_cost", precision: 10, scale: 2
     t.datetime "submitted_at"
     t.boolean "success_likely"
     t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"

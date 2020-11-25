@@ -327,9 +327,6 @@ en:
         feedback_link_html: '<a href="%{url}" class="govuk_link">Give feedback</a> to help us improve this service.'
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
-    estimated_legal_costs:
-      show:
-        h1-heading: What are the estimated legal costs of doing the work?
     identify_types_of_incomes:
       show:
         page_heading: Which types of income does your client receive?

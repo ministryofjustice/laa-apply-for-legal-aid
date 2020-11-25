@@ -192,7 +192,6 @@ Rails.application.routes.draw do
       resource :respondent, only: %i[show update]
       resource :date_client_told_incident, only: %i[show update]
       resource :proceedings_before_the_court, only: %i[show update]
-      resource :estimated_legal_costs, only: %i[show update]
       resources :success_likely, only: %i[index create]
       resource :success_prospects, only: %i[show update]
       resource :check_merits_answers, only: [:show] do

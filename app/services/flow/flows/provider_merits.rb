@@ -27,12 +27,6 @@ module Flow
           forward: :success_likely,
           check_answers: :check_merits_answers
         },
-        estimated_legal_costs: {
-          # TODO: Page not being used. Remove this comment when this page is being used.
-          path: ->(application) { urls.providers_legal_aid_application_estimated_legal_costs_path(application) },
-          forward: :success_prospects,
-          check_answers: :check_merits_answers
-        },
         success_likely: {
           path: ->(application) { urls.providers_legal_aid_application_success_likely_index_path(application) },
           forward: ->(application) { application.merits_assessment.success_likely? ? :check_merits_answers : :success_prospects }
