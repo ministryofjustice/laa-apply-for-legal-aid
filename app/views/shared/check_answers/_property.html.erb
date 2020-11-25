@@ -40,19 +40,4 @@
           read_only: read_only,
           ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
 
-  <%= check_answer_link(
-          name: :savings_and_investments,
-          url: check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
-          question: t('shared.check_answers.assets.assets.savings_and_investments'),
-          answer: t('generic.none_declared'),
-          read_only: read_only,
-          ) unless @legal_aid_application.savings_amount? %>
-
-  <%= check_answer_link(
-          name: :other_assets,
-          url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
-          question: t('shared.check_answers.assets.assets.other_assets'),
-          answer: t('generic.none_declared'),
-          read_only: read_only,
-          ) unless @legal_aid_application.other_assets? %>
 </dl>

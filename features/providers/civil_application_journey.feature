@@ -780,19 +780,19 @@ Feature: Civil application journeys
   Scenario: Using the back button to change none_of_these checkboxes
     Given I am checking the applicant's means answers
     When I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on the "offline_account" page showing "Which bank accounts does your client have?"
-    When I select "None of these"
-    And I click "Save and continue"
     Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
     When I select "None of these"
     And I click "Save and continue"
+    And I click "Save and continue"
     Then I should be on the 'means_summary' page showing 'Check your answers'
+    When I click link "Back"
     When I click link "Back"
     Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
     When I deselect "None of these"
     And I click "Save and continue"
     Then I should be on the "savings_and_investment" page showing "Select if your client has any of these savings or investments"
     When I select "None of these"
+    And I click "Save and continue"
     And I click "Save and continue"
     Then I should be on the 'means_summary' page showing 'Check your answers'
     When I click Check Your Answers Change link for 'Other assets'

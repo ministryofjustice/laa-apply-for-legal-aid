@@ -4,7 +4,7 @@
     </div>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
         <p>
-            <%= link_to_with_hidden_suffix(path: check_answer_url_for(:providers, :income_summary, @legal_aid_application),
+            <%= link_to_with_hidden_suffix(path: check_answer_url_for(:providers, url, @legal_aid_application),
                                            klass: 'govuk-link change-link', text: t('generic.change'), suffix: income_type) %>
         </p>
     </div>

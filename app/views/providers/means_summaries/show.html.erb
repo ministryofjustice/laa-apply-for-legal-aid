@@ -5,6 +5,7 @@
   <%= render(
          'shared/check_answers/income_summary',
          income_type: t('.credits-section-heading'),
+         url: :income_summary,
           transaction_types: TransactionType.credits
       ) %>
 
@@ -17,6 +18,7 @@
   <%= render(
           'shared/check_answers/income_summary',
           income_type: t('.debits-section-heading'),
+          url: :outgoings_summary,
           transaction_types: TransactionType.debits
       ) %>
 

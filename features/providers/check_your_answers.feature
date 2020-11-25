@@ -85,10 +85,10 @@ Feature: Checking answers backwards and forwards
     And I click Check Your Answers Change link for 'bank accounts'
     Then I should be on a page showing 'Which bank accounts does your client have?'
     Then I select 'Savings account'
-    Then I fill 'cash' with '6780.99'
+    Then I fill 'offline_savings_accounts' with '678.99'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And I should be on a page showing '£6780.99'
+    And I should be on a page showing '£678.99'
     And the answer for 'Restrictions' should be 'No'
 
   @javascript
@@ -110,11 +110,13 @@ Feature: Checking answers backwards and forwards
     Then I visit the applications page
     Then I view the previously created application
     Then I am on the check your answers page for other assets
-    Then I bind and pry
     And I click Check Your Answers Change link for 'savings and investments'
     Then I should be on a page showing 'Which types of savings or investments does your client have?'
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Are there any legal restrictions that prevent your client from selling or borrowing against their assets?'
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And I should be on a page showing "£456.33"
@@ -127,9 +129,6 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I select 'None of these'
-    Then I click 'Save and continue'
     Then I should be on a page showing 'Which types of savings or investments does your client have?'
     Then I select 'None of these'
     Then I click 'Save and continue'
@@ -211,6 +210,7 @@ Feature: Checking answers backwards and forwards
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Savings and investments'
       Then I should be on a page showing 'Which types of savings or investments does your client have?'
+      Then I click 'Save and continue'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
 
