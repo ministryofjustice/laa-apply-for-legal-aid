@@ -194,7 +194,7 @@ module CFE
       end
 
       def mei_student_loan
-        monthly_income_equivalents[:student_loan].to_d
+        gross_income[:monthly_student_loan].to_d
       end
 
       def mei_pension
