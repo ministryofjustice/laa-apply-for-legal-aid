@@ -1,6 +1,6 @@
-@import "govuk-frontend/govuk/settings/all";
-@import "govuk-frontend/govuk/tools/all";
-@import "govuk-frontend/govuk/helpers/all";
+@import "~govuk-frontend/govuk/settings/all";
+@import "~govuk-frontend/govuk/tools/all";
+@import "~govuk-frontend/govuk/helpers/all";
 
 // Task list pattern
 
@@ -27,7 +27,7 @@ $task-list-indent: 35px;
   display: table;
   margin: 0;
   padding-bottom: ($govuk-gutter / 6);
-  font-family: "nta", "Arial", "sans-serif";
+  font-family: "GDS Transport", arial, sans-serif;
 }
 
 .app-task-list__section-number {

@@ -1,7 +1,7 @@
-@import "govuk-frontend/govuk/settings/all";
-@import "govuk-frontend/govuk/tools/all";
-@import "govuk-frontend/govuk/helpers/all";
-$govuk-fonts-path: "/assets/";
+@import "~govuk-frontend/govuk/settings/all";
+@import "~govuk-frontend/govuk/tools/all";
+@import "~govuk-frontend/govuk/helpers/all";
+$govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
 .moj-banner {
   border: 5px solid govuk-colour("blue");

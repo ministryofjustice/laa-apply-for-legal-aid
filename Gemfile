@@ -14,7 +14,6 @@ gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.0.3'
 gem 'regexp-examples'
-gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
 gem 'simple_command', github: 'nebulab/simple_command', branch: 'master'
@@ -57,11 +56,6 @@ gem 'redis-namespace'
 gem 'sidekiq', '~> 6.1.2'
 gem 'sidekiq_alive', '>= 2.0.1'
 gem 'sidekiq-status', '>= 1.1.4'
-
-# Transformer that converts ES6 code into vanilla ES5 using babel via asset pipeline
-# Default to 3.7.2 as https://github.com/sass/sassc-rails/issues/122 sassc loading is causing a segmentation error
-gem 'sprockets', '~> 3.7.2'
-gem 'sprockets-es6', '>= 0.9.2'
 
 # URL and path parsing
 gem 'addressable'

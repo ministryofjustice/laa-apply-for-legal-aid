@@ -1,0 +1,9 @@
+// GOV.UK Frontend (Design System)
+
+$govuk-images-path: "~images/";
+$govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
+
+$govuk-font-family-gds-transport: "GDS Transport", arial, sans-serif;
+$govuk-global-styles: true;
+
+@import '~govuk-frontend/govuk/all';
