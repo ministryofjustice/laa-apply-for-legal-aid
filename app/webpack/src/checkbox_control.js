@@ -28,6 +28,7 @@ $(function() {
     */
     control.change( function() {
       const controlChecked = this.checked
+      control.prop("unchecked", true ).val(true)
 
       checkboxes.each(function(index) {
         const checkbox = $(this)
