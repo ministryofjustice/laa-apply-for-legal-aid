@@ -34,9 +34,6 @@ class CitizenEmailService
   end
 
   def applicant
-    # TODO: This should probably raise an error if an applicant
-    # does not exist as the citizen won't be able to start the
-    # application.
     @applicant ||= application&.applicant
   end
 

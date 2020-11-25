@@ -39,9 +39,6 @@ module TrueLayer
       response = connection.get(path)
       parsed_response = parsed_response(response)
 
-      # TODO: implement white list of inevitable errors
-      # some errors are inevitable (like "Feature not supported by the provider")
-      # standard errors should be logged in Sentry
       raise ApiError, "{\"TrueLayerError\" : #{response.body}}" unless response.success?
 
       SimpleResult.new(value: parsed_response.deep_symbolize_keys[:results])
