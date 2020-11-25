@@ -1,3 +1,4 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
       name: :used_delegated_functions,
