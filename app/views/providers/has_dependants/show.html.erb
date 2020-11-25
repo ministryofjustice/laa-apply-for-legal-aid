@@ -10,15 +10,9 @@
             show_error_if: @form.errors.present?,
             input: :has_dependants
         ) do %>
-      <%
-        options = [
-            { value: :true, label: t('generic.yes') },
-            { value: :false,  label: t('generic.no') }
-        ]
-      %>
 
       <%= form.govuk_collection_radio_buttons :has_dependants,
-                                              options,
+                                              form.yes_no_radio_button_array,
                                               :value,
                                               :label,
                                               error: @error,

@@ -56,7 +56,7 @@ RSpec.describe 'provider confirm office', type: :request do
 
   describe 'PATCH providers/confirm_office' do
     subject { patch providers_confirm_office_path, params: params }
-    let(:params) { { correct: 'yes' } }
+    let(:params) { { correct: 'true' } }
 
     context 'when the provider is authenticated' do
       before do
@@ -81,7 +81,7 @@ RSpec.describe 'provider confirm office', type: :request do
       end
 
       context 'no is selected' do
-        let(:params) { { correct: 'no' } }
+        let(:params) { { correct: 'false' } }
 
         it 'redirects to the office select page' do
           expect(response).to redirect_to providers_select_office_path

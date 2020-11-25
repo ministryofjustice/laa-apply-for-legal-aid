@@ -5,9 +5,9 @@ module Providers
     end
 
     def update
-      if params[:offline_savings_account].in?(%w[yes no])
-        go_forward(params[:offline_savings_account] == 'yes')
-        reset_account_balance if params[:offline_savings_account] == 'no'
+      if params[:offline_savings_account].in?(%w[true false])
+        go_forward(params[:offline_savings_account] == 'true')
+        reset_account_balance if params[:offline_savings_account] == 'false'
       else
         @error = { 'offline_savings_account-error' => I18n.t('providers.applicant_bank_accounts.show.error') }
         applicant_accounts

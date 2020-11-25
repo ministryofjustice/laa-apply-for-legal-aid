@@ -31,7 +31,7 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/no_outgoings_summary' do
-    let(:confirm_no_outgoings) { 'yes' }
+    let(:confirm_no_outgoings) { 'true' }
     let(:submit_button) { {} }
     let(:params) do
       {
@@ -65,7 +65,7 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
       end
 
       context 'The NO option is chosen' do
-        let(:confirm_no_outgoings) { 'no' }
+        let(:confirm_no_outgoings) { 'false' }
 
         it 'redirects to the identify outgoings types page' do
           expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))

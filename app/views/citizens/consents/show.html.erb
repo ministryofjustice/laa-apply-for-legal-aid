@@ -39,15 +39,9 @@
         </div>
       </details>
 
-      <%
-        options = [
-            { value: :true, label: t('generic.yes') },
-            { value: :false,  label: t('generic.no') }
-        ]
-      %>
       <%= form.govuk_collection_radio_buttons(
               :open_banking_consent,
-              options,
+              form.yes_no_radio_button_array,
               :value,
               :label,
               error: @error,

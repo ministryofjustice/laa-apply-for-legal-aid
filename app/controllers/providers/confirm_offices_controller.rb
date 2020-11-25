@@ -11,9 +11,9 @@ module Providers
 
     def update
       case params[:correct]
-      when 'yes'
+      when 'true'
         redirect_to providers_legal_aid_applications_path
-      when 'no'
+      when 'false'
         current_provider.update!(selected_office: nil)
         redirect_to providers_select_office_path
       else

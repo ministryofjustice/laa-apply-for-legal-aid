@@ -7,7 +7,9 @@
   <div id="<%= question.attribute %>" class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
       <%= form.govuk_collection_radio_buttons(
             question.attribute,
-            [true, false],
+            form.yes_no_radio_button_array,
+            :value,
+            :label,
             inline: true,
             title: { size: :m, text: question.title, htag: :h2 },
             input_attributes: question.show_details_when ? { question.show_details_when.to_s => { 'data-aria-controls' => conditional_id } } : nil

@@ -8,7 +8,9 @@
 
     <%= form.govuk_collection_radio_buttons(
           :mock_true_layer_data,
-          [true, false],
+          form.yes_no_radio_button_array,
+          :value,
+          :label,
           inline: true,
           hint: t('.hints.mock_true_layer_data', bank_transaction_filename: Setting.bank_transaction_filename),
           title: { size: :m, text: t('.labels.mock_true_layer_data') }
@@ -16,7 +18,9 @@
 
     <%= form.govuk_collection_radio_buttons(
       :manually_review_all_cases,
-      [true, false],
+      form.yes_no_radio_button_array,
+      :value,
+      :label,
       inline: true,
       hint: t('.hints.manually_review_all_cases'),
       title: { size: :m, text: t('.labels.manually_review_all_cases') }
@@ -24,7 +28,9 @@
 
     <%= form.govuk_collection_radio_buttons(
       :allow_welsh_translation,
-      [true, false],
+      form.yes_no_radio_button_array,
+      :value,
+      :label,
       inline: true,
       hint: t('.hints.allow_welsh_translation'),
       title: { size: :m, text: t('.labels.allow_welsh_translation') }

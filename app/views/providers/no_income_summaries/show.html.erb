@@ -39,14 +39,14 @@
         <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
           <%= form.govuk_radio_button(
                   :confirm_no_income,
-                  'yes',
+                  true,
                   label: t('generic.yes'),
                   error: @error&.values&.first
               ) %>
 
           <%= form.govuk_radio_button(
                   :confirm_no_income,
-                  'no',
+                  false,
                   label: t('generic.no'),
                   error: @error&.values&.first
               ) %>

@@ -8,9 +8,9 @@ module Citizens
 
     def create
       case params[:additional_account]
-      when 'yes'
+      when 'true'
         redirect_to new_citizens_additional_account_path
-      when 'no'
+      when 'false'
         go_forward
       else
         error
@@ -24,10 +24,10 @@ module Citizens
 
     def update
       case params[:has_online_accounts]
-      when 'yes'
+      when 'true'
         online_accounts_update
         redirect_to citizens_banks_path
-      when 'no'
+      when 'false'
         offline_accounts_update
         go_forward
       else
@@ -39,7 +39,7 @@ module Citizens
     private
 
     def online_accounts_update
-      legal_aid_application.update(has_offline_accounts: false)
+      legal_aid_application.update!(has_offline_accounts: false)
     end
 
     def offline_accounts_update

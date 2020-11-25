@@ -7,11 +7,8 @@
   <%= govuk_form_group show_error_if: @form.errors.present? do %>
     <%= form.govuk_collection_radio_buttons(
           :used_regularly,
-          [
-            { code: 'true', label: t('generic.yes') },
-            { code: 'false', label: t('generic.no') }
-          ],
-          :code,
+          form.yes_no_radio_button_array,
+          :value,
           :label,
           title: page_title,
           hint: t('.include_partner_use')

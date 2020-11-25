@@ -27,7 +27,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     subject { patch providers_legal_aid_application_has_other_dependants_path(legal_aid_application), params: params }
 
     context 'choose yes' do
-      let(:other_dependant) { 'yes' }
+      let(:other_dependant) { 'true' }
 
       it 'redirects to the page to add another dependant' do
         expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
@@ -35,7 +35,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     end
 
     context 'choose no' do
-      let(:other_dependant) { 'no' }
+      let(:other_dependant) { 'false' }
 
       it 'redirects to the outgoings summary page' do
         expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
