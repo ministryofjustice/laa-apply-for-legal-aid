@@ -28,15 +28,7 @@ $(function() {
     */
     control.change( function() {
       const controlChecked = this.checked
-
-      // added the line below which updates the control checkbox value to 'true' if it is selected
-      // the problem is that now double clicking on the control box doesnt hide the check mark
-      // although the none_selected param is set to false
-      // clicking on anything in the select-group removes the checkmark
-
-      control.prop("checked", true ).val(true)
-
-
+      control.prop("unchecked", true ).val(true)
       checkboxes.each(function(index) {
         const checkbox = $(this)
         if(controlChecked) {
