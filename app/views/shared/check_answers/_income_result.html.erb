@@ -4,7 +4,7 @@
     <%= check_answer_link(
             name: :total_gross_income_assessed,
             question: t('.total_gross_income'),
-            answer: number_to_currency(@legal_aid_application.cfe_result.total_gross_income_assessed),
+            answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_gross_income_assessed),
             read_only: read_only,
             align_right: read_only
         ) %>
@@ -12,7 +12,7 @@
     <%= check_answer_link(
             name: :total_disposable_income_assessed,
             question: t('.total_disposable_income'),
-            answer: number_to_currency(@legal_aid_application.cfe_result.total_disposable_income_assessed),
+            answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_disposable_income_assessed),
             read_only: read_only,
             align_right: read_only
         ) %>
@@ -28,7 +28,7 @@
     <%= check_answer_link(
             name: :disposable_income_lower_limit,
             question: t('.disposable_income_lower_limit'),
-            answer: number_to_currency(@legal_aid_application.cfe_result.disposable_income_lower_threshold),
+            answer: gds_number_to_currency(@legal_aid_application.cfe_result.disposable_income_lower_threshold),
             read_only: read_only,
             align_right: read_only
         ) %>
@@ -44,7 +44,7 @@
     <%= check_answer_link(
             name: :disposable_income_contribution,
             question: t('.disposable_income_contribution'),
-            answer: number_to_currency(@legal_aid_application.cfe_result.income_contribution),
+            answer: gds_number_to_currency(@legal_aid_application.cfe_result.income_contribution),
             read_only: read_only,
             align_right: read_only
         ) %>

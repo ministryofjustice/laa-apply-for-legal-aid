@@ -78,8 +78,8 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
         it 'displays the correct result' do
           expect(unescaped_response_body).to include(I18n.t('capital_and_income_contribution_required.heading', name: applicant_name, scope: locale_scope))
-          expect(unescaped_response_body).to include("#{number_to_currency(cfe_result.income_contribution)} from their disposable income")
-          expect(unescaped_response_body).to include("#{number_to_currency(cfe_result.capital_contribution)} from their disposable capital")
+          expect(unescaped_response_body).to include("#{gds_number_to_currency(cfe_result.income_contribution)} from their disposable income")
+          expect(unescaped_response_body).to include("#{gds_number_to_currency(cfe_result.capital_contribution)} from their disposable capital")
         end
       end
     end

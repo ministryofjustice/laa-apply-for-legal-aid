@@ -3,6 +3,6 @@
     <%= t(".#{name}") %>
   </dt>
   <dd class="govuk-summary-list__value align-text-right">
-    <%= number_to_currency(@cfe_result.__send__(value_method)) %>
+    <%= gds_number_to_currency(@cfe_result.__send__(value_method)) %>
   </dd>
 </div>

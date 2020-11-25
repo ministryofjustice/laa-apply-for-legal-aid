@@ -35,6 +35,9 @@ module LaaApplyForLegalAid
     config.x.benefit_check.client_user_id = ENV['BC_CLIENT_USER_ID']
     config.x.benefit_check.wsdl_url       = ENV['BC_WSDL_URL']
 
+    config.x.capital_result.upper_limit = 8000.00
+    config.x.capital_result.lower_limit = 3000.00
+
     config.x.ccms_soa.submit_applications_to_ccms = ENV['CCMS_SOA_SUBMIT_APPLICATIONS'] == 'true'
     config.x.ccms_soa.aws_gateway_api_key         = ENV['CCMS_SOA_AWS_GATEWAY_API_KEY']
     config.x.ccms_soa.client_username             = ENV['CCMS_SOA_CLIENT_USERNAME']

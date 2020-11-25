@@ -8,8 +8,8 @@
     <p class="govuk-body"><%= t('.line_1') %></p>
     <ul class="govuk-list govuk-list--bullet">
         <% t(".details",
-         capital_contribution: number_to_currency(@cfe_result.capital_contribution),
-         income_contribution: number_to_currency(@cfe_result.income_contribution)
+         capital_contribution: gds_number_to_currency(@cfe_result.capital_contribution),
+         income_contribution: gds_number_to_currency(@cfe_result.income_contribution)
         ).each do |detail| %>
         <li style="color: #fff;"><%= detail %></li>
       <% end %>

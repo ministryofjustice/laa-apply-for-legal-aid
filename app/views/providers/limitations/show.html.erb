@@ -12,7 +12,7 @@
       <div class="govuk-heading-m"><%= t('.if_delegated_used') %></div>
       <p><strong><%= t('.form_of_service') %></strong> <%= @legal_aid_application.lead_proceeding_type.default_level_of_service.name %></p>
       <div class="govuk-!-padding-bottom-1"></div>
-      <p><strong><%= t('.incurrable_costs') %></strong><%= number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0) %></p>
+      <p><strong><%= t('.incurrable_costs') %></strong><%= gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0) %></p>
       <p><strong><%= t('.allowable_work') %></strong><%= @legal_aid_application.delegated_functions_scope_limitation.description %></p>
       </p>
     <div class="govuk-grid-row">
@@ -26,7 +26,7 @@
     <div class="govuk-heading-m"><%= t('.substantive_certificate') %></div>
     <p><strong><%= t('.form_of_service') %></strong><%= @legal_aid_application.lead_proceeding_type.default_level_of_service.name %></p>
     <div class="govuk-!-padding-bottom-1"></div>
-    <p><strong><%= t('.incurrable_costs') %></strong><%= number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></p>
+    <p><strong><%= t('.incurrable_costs') %></strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></p>
     <p><strong><%= t('.allowable_work') %></strong><%= @legal_aid_application.substantive_scope_limitation.description %></p>
   </p>
 

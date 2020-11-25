@@ -53,4 +53,94 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
   end
+
+  describe '#number?' do
+    let(:result) { number?(value) }
+
+    context 'int numeric' do
+      let(:value) { 12 }
+
+      it 'returns true when integer' do
+        expect(result).to be_truthy
+      end
+    end
+
+    context 'string numeric' do
+      let(:value) { '12.25' }
+
+      it 'returns true when numeric string' do
+        expect(result).to be_truthy
+      end
+    end
+
+    context 'string word' do
+      let(:value) { 'fifty' }
+
+      it 'returns false when not numeric string or integer' do
+        expect(result).to be false
+      end
+    end
+  end
+
+  describe '#gds_number_to_currency' do
+    let(:result) { gds_number_to_currency(value) }
+
+    context 'int pounds with pence' do
+      let(:value) { 12_345.2499 }
+
+      it 'displays pounds and pence' do
+        expect(result).to eq '£12,345.25'
+      end
+    end
+
+    context 'int pounds only' do
+      let(:value) { 12_345.0000 }
+
+      it 'displays pounds only' do
+        expect(result).to eq '£12,345'
+      end
+    end
+
+    context 'string numeric pounds' do
+      let(:value) { '5000.0000' }
+
+      it 'displays pounds only' do
+        expect(result).to eq '£5,000'
+      end
+    end
+
+    context 'string numeric pounds and pence' do
+      let(:value) { '5000.2499' }
+
+      it 'displays pounds and pence' do
+        expect(result).to eq '£5,000.25'
+      end
+    end
+
+    context 'preserves other options' do
+      let(:value) { 12_345.25 }
+      let(:opts) { { unit: '$', delimiter: ' ', separator: ',' } }
+      let(:result) { gds_number_to_currency(value, opts) }
+
+      it 'displays pounds only' do
+        expect(result).to eq '$12 345,25'
+      end
+    end
+
+    context 'returns when not numeric' do
+      let(:value) { 'fifty' }
+
+      it 'displays pounds only' do
+        expect(result).to eq 'fifty'
+      end
+    end
+
+    context 'BigDecimal' do
+      let(:value) { BigDecimal('12345.25') }
+
+      it 'displays pounds and pence when BigDecimal' do
+        expect(result).to eq '£12,345.25'
+      end
+    end
+  end
 end

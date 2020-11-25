@@ -27,8 +27,8 @@ Feature: Checking answers backwards and forwards
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-    And the answer for 'Property value' should be '£200,000.00'
-    And the answer for 'Outstanding mortgage' should be '£100,000.00'
+    And the answer for 'Property value' should be '£200,000'
+    And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be 'Yes, a partner or ex-partner'
     And the answer for 'Percentage home' should be '50.00%'
     And the answer for 'Restrictions' should be 'No'
@@ -58,8 +58,8 @@ Feature: Checking answers backwards and forwards
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-    And the answer for 'Property value' should be '£200,000.00'
-    And the answer for 'Outstanding mortgage' should be '£100,000.00'
+    And the answer for 'Property value' should be '£200,000'
+    And the answer for 'Outstanding mortgage' should be '£100,000'
     And the answer for 'Shared ownership' should be "No, they're the sole owner"
     And the answer for 'Restrictions' should be 'Yes'
     And the answer for 'Restrictions' should be 'Restrictions include:'
@@ -162,7 +162,7 @@ Feature: Checking answers backwards and forwards
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
       And the answer for 'Own home' should be 'Yes, with a mortgage or loan'
-      And the answer for 'Property value' should be '£500,000.00'
+      And the answer for 'Property value' should be '£500,000'
 
     @javascript
     Scenario: I want to remove property details via the capital check your answers page

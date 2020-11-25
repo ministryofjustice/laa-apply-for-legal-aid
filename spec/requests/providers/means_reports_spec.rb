@@ -31,19 +31,19 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     end
 
     it 'displays the total capital assessed' do
-      expect(unescaped_response_body).to include(number_to_currency(cfe_result.total_capital))
+      expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.total_capital))
     end
 
     it 'displays the capital lower limit' do
-      expect(unescaped_response_body).to include('£3000.00')
+      expect(unescaped_response_body).to include('£3,000')
     end
 
     it 'displays the capital upper limit' do
-      expect(unescaped_response_body).to include('£8000.00')
+      expect(unescaped_response_body).to include('£8,000')
     end
 
     it 'displays the capital contribution' do
-      expect(unescaped_response_body).to include(number_to_currency(cfe_result.capital_contribution))
+      expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
     end
 
     context 'when not authenticated' do

@@ -29,7 +29,7 @@ module CapitalHelper
     if type == :percentage
       number_to_percentage(amount, precision: 2)
     else
-      number_to_currency(amount)
+      gds_number_to_currency(amount)
     end
   end
 

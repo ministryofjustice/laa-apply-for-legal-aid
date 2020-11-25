@@ -17,7 +17,7 @@
         name: :vehicles_estimated_values,
         url: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
         question: t(".#{journey_type}.estimated_value"),
-        answer: number_to_currency(@legal_aid_application.vehicle.estimated_value),
+        answer: gds_number_to_currency(@legal_aid_application.vehicle.estimated_value),
         read_only: read_only,
         align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
@@ -26,7 +26,7 @@
         name: :vehicles_remaining_payments,
         url: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
         question: t(".#{journey_type}.payment_remaining"),
-        answer: number_to_currency(@legal_aid_application.vehicle.payment_remaining),
+        answer: gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
         read_only: read_only,
         align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
