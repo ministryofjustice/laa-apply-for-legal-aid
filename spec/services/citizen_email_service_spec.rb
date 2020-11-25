@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe CitizenEmailService do
-  let(:smoke_test_email) { Rails.configuration.x.smoke_test_email_address }
-  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: smoke_test_email) }
+  let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
+  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: simulated_email_address) }
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
   let(:application) { create(:application, applicant: applicant, provider: provider) }

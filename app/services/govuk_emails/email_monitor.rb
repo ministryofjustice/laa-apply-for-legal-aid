@@ -28,8 +28,8 @@ module GovukEmails
         keep_monitoring
       end
     rescue Notifications::Client::NotFoundError
-      # smoke test emails can't be monitored
-      raise unless smoke_test?
+      # simulated_email_addresses can't be monitored
+      raise unless simulated_email_address?
     end
 
     def trigger_job(message_id)
@@ -80,8 +80,8 @@ module GovukEmails
       ].join("\n")
     end
 
-    def smoke_test?
-      Rails.configuration.x.smoke_test_email_address.in?(email_args.to_s)
+    def simulated_email_address?
+      Rails.configuration.x.simulated_email_address.in?(email_args.to_s)
     end
   end
 end

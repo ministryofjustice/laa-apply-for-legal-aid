@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe SubmitProviderReminderService, :vcr do
-  let(:smoke_test_email) { Rails.configuration.x.smoke_test_email_address }
-  let(:provider) { create :provider, email: smoke_test_email }
+  let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
+  let(:provider) { create :provider, email: simulated_email_address }
   let(:application) { create :application, :with_applicant, provider: provider }
   let(:application_url) { 'http://test.com' }
 
