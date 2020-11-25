@@ -266,9 +266,6 @@ en:
         hints:
           offline_savings_accounts: For example, a Post Office savings account.
         error: Please select Yes or No
-    client_received_legal_helps:
-      show:
-        h1-heading: Has your client received legal help for the matter?
     client_completed_means:
       show:
         h1-heading: Continue your application

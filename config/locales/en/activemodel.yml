@@ -232,8 +232,6 @@ en:
           attributes:
             application_purpose:
               blank: Enter details of why your client is applying for legal aid
-            client_received_legal_help:
-              blank: Select yes if your client has received legal help for the matter
             details_of_proceedings_before_the_court:
               blank: Enter details of the proceedings currently before the court
             estimated_legal_cost:

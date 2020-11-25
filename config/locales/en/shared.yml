@@ -103,7 +103,6 @@ en:
         items:
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
-          client_received_legal_help: Client received legal help
           estimated_legal_costs: Estimated legal costs
           proceedings_currently_before_court: Proceedings currently before court
           prospects_of_success: Is the chance of a successful outcome 50% or better?

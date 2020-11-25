@@ -53,8 +53,7 @@ module Reports
                :bail_conditions_set?,
                :bail_conditions_set_details, to: :respondent
 
-      delegate :client_received_legal_help,
-               :application_purpose,
+      delegate :application_purpose,
                :proceedings_before_the_court,
                :details_of_proceedings_before_the_court,
                :pretty_success_prospect,
