@@ -5,6 +5,10 @@ RSpec.describe SamlIdpController, type: :request do
     let(:saml_request) { encode_saml_request }
     let(:password) { 'password' }
 
+    before do
+      allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(true)
+    end
+
     context 'valid username and password in config/initializers/mock_saml.rb' do
       let(:email) { 'test1@example.com' }
       let(:username) { 'test1' }
