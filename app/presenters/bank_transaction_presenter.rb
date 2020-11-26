@@ -98,7 +98,7 @@ class BankTransactionPresenter
   end
 
   def transaction_account_sort_code
-    "'#{account_for_transaction.sort_code}"
+    %(="#{account_for_transaction.sort_code}")
   end
 
   def transaction_account_number
