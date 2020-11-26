@@ -16,10 +16,4 @@ class NotifyMailer < BaseApplyMailer
     )
     mail(to: email)
   end
-
-  private
-
-  def url_expiry_date
-    (Date.today + 7.days).strftime('%d %B %Y')
-  end
 end

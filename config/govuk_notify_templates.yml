@@ -11,7 +11,7 @@
 development:
   citizen_start_application: 74d7825f-91e4-4311-98a4-36cb517c8359 # this needs to be changed back and original email template amended
   feedback_notification: 4d391bf7-4e5b-4f49-b586-b6bb8ad06a30
-  new_link_request: a577582b-3e60-44a4-885c-d4b12bf23958
+  new_link_request: 8d93ef3b-a744-4c88-87c8-a6f326886c12 # a577582b-3e60-44a4-885c-d4b12bf23958 this needs to be changed back and original email template amended
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
   reminder_to_submit_an_application: 43de80f4-6a15-4be9-8a29-b3682cea3eee  # this needs to be changed back and original email template amended
   client_completed_means: d04e64ae-0a66-4577-83d6-6ce9f7fa27b4

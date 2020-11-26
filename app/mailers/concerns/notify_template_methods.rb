@@ -15,4 +15,8 @@ module NotifyTemplateMethods
   def safe_nil(value)
     value || ''
   end
+
+  def url_expiry_date
+    (Date.today + 7.days).strftime('%d %B %Y')
+  end
 end

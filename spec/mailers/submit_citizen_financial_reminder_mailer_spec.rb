@@ -25,7 +25,8 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
       expect(mail.govuk_notify_personalisation).to eq(
         ref_number: application.application_ref,
         client_name: application.applicant.full_name,
-        application_url: application_url
+        application_url: application_url,
+        expiry_date: (Date.today + 7.days).strftime('%d %B %Y')
       )
     end
   end

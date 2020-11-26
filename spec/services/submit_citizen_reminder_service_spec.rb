@@ -21,7 +21,8 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
         expect(mail.govuk_notify_personalisation).to eq(
           application_url: application_url,
           ref_number: application.application_ref,
-          client_name: application.applicant.full_name
+          client_name: application.applicant.full_name,
+          expiry_date: (Date.today + 7.days).strftime('%d %B %Y')
         )
       end
     end
