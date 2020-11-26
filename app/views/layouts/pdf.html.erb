@@ -2,8 +2,9 @@
 <html lang="en" class="govuk-template">
   <head>
     <meta charset="utf-8">
-    <%= wicked_pdf_stylesheet_link_tag 'application' %>
-    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+    <%= stylesheet_pack_tag 'styles', media: 'all' %>
+    <%#= wicked_pdf_stylesheet_link_tag 'application' %>
+    <%#= wicked_pdf_stylesheet_link_tag 'pdf' %>
     <%= render 'layouts/govuk_base64_fonts.html' %>
   </head>
 
