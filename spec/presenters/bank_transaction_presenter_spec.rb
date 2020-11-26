@@ -36,14 +36,14 @@ RSpec.describe BankTransactionPresenter do
 
     describe 'amounts' do
       context 'when the bank transaction is a credit' do
-        describe 'amount_credit' do
-          subject(:amount_credit) { presenter.build_transaction_hash[:amount_credit] }
+        describe 'credit' do
+          subject(:credit) { presenter.build_transaction_hash[:credit] }
 
           it { is_expected.to eq transaction.amount }
         end
 
-        describe 'amount_debit' do
-          subject(:amount_debit) { presenter.build_transaction_hash[:amount_debit] }
+        describe 'debit' do
+          subject(:debit) { presenter.build_transaction_hash[:debit] }
 
           it { is_expected.to be nil }
         end
@@ -52,14 +52,14 @@ RSpec.describe BankTransactionPresenter do
       context 'when the bank transaction is a debit' do
         let(:transaction) { create :bank_transaction, :uncategorised_debit_transaction }
 
-        describe 'amount_credit' do
-          subject(:amount_credit) { presenter.build_transaction_hash[:amount_credit] }
+        describe 'credit' do
+          subject(:credit) { presenter.build_transaction_hash[:credit] }
 
           it { is_expected.to be nil }
         end
 
-        describe 'amount_debit' do
-          subject(:amount_debit) { presenter.build_transaction_hash[:amount_debit] }
+        describe 'debit' do
+          subject(:debit) { presenter.build_transaction_hash[:debit] }
 
           it { is_expected.to eq transaction.amount }
         end
@@ -101,8 +101,8 @@ RSpec.describe BankTransactionPresenter do
       end
     end
 
-    describe 'running_balance' do
-      subject(:running_balance) { presenter.build_transaction_hash[:running_balance] }
+    describe 'balance_running_total' do
+      subject(:balance_running_total) { presenter.build_transaction_hash[:balance_running_total] }
       context 'when there is a running balance value' do
         it { is_expected.to eq transaction.running_balance }
       end
@@ -130,8 +130,9 @@ RSpec.describe BankTransactionPresenter do
       it { is_expected.to eq account.bank_and_account_name }
     end
 
-    describe 'account_sort_code' do
-      subject(:account_sort_code) { presenter.build_transaction_hash[:account_sort_code] }
+    describe 'sort_code' do
+      subject(:sort_code) { presenter.build_transaction_hash[:sort_code] }
+
       it { is_expected.to eq "#{account.sort_code}\t" }
     end
 
