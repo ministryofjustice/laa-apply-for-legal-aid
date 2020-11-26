@@ -232,15 +232,8 @@ en:
           attributes:
             application_purpose:
               blank: Enter details of why your client is applying for legal aid
-            client_received_legal_help:
-              blank: Select yes if your client has received legal help for the matter
             details_of_proceedings_before_the_court:
               blank: Enter details of the proceedings currently before the court
-            estimated_legal_cost:
-              blank: Enter the estimated legal costs of doing the work
-              greater_than_or_equal_to: Estimated cost must be 0 or more
-              not_a_number: Estimated cost must be an amount of money, like 25,000
-              too_many_decimals: Estimated cost must not include more than 2 decimal numbers
             proceedings_before_the_court:
               blank: Select Yes if the proceedings for which funding is being sought are currently before the court
             success_prospect:

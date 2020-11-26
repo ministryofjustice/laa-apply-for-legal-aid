@@ -19,8 +19,6 @@ en:
         percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
         property_value: You can use property websites to find the estimated value
         own_vehicle: This includes cars, vans and motorcycles
-      merits_assessment:
-        estimated_legal_cost: Please include profit costs, disbursements, expert costs and counsel fees
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:
@@ -32,8 +30,6 @@ en:
         improvement_suggestion: Do you have any other feedback or suggestions on how we could improve the service?
       merits_assessment:
         application_purpose: Please give details of why your client is applying for legal aid
-        client_received_legal_help:
-          <<: *true_false
         details_of_proceedings_before_the_court: Please give details.
         proceedings_before_the_court:
           <<: *true_false

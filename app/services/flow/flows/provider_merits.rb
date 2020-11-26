@@ -17,14 +17,6 @@ module Flow
           forward: :statement_of_cases,
           check_answers: :check_merits_answers
         },
-        client_received_legal_helps: {
-          # TODO: Should be removed when this page is being used.
-          # :nocov:
-          path: ->(application) { urls.providers_legal_aid_application_client_received_legal_help_path(application) },
-          # :nocov:
-          forward: :proceedings_before_the_courts,
-          check_answers: :check_merits_answers
-        },
         proceedings_before_the_courts: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_before_the_court_path(application) },
           forward: :statement_of_cases,
@@ -33,12 +25,6 @@ module Flow
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: :success_likely,
-          check_answers: :check_merits_answers
-        },
-        estimated_legal_costs: {
-          # TODO: Page not being used. Remove this comment when this page is being used.
-          path: ->(application) { urls.providers_legal_aid_application_estimated_legal_costs_path(application) },
-          forward: :success_prospects,
           check_answers: :check_merits_answers
         },
         success_likely: {
