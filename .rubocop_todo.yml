@@ -21,6 +21,7 @@ Metrics/AbcSize:
   - 'parse_transaction_csv_row' # app/services/true_layer/sample_transactions_csv_parser.rb
   - 'screenshot_image' # features/support/screenshot_helper.rb
   - 'uncategorised_transactions?' # app/models/legal_aid_application.rb
+  - 'encode_saml_request' # spec/requests/saml_idp_spec.rb
 
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.

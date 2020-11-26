@@ -1,4 +1,3 @@
-# :nocov:
 class SamlIdpController < SamlIdp::IdpController
   def create
     unless params[:email].blank?
@@ -33,4 +32,3 @@ class SamlIdpController < SamlIdp::IdpController
     Rails.configuration.x.application.mock_saml
   end
 end
-# :nocov:
