@@ -44,6 +44,10 @@ FactoryBot.define do
       result { CFEResults::V2::MockResults.with_maintenance_received.to_json }
     end
 
+    trait :with_student_finance_received do
+      result { CFEResults::V2::MockResults.with_student_finance_received.to_json }
+    end
+
     trait :with_no_mortgage_costs do
       result { CFEResults::V2::MockResults.with_no_mortgage_costs.to_json }
     end

@@ -34,7 +34,8 @@ RSpec.describe 'cfe_v2_result factory' do
     end
 
     it 'has required keys in gross income' do
-      expect(gross_income.keys).to match_array %i[monthly_other_income
+      expect(gross_income.keys).to match_array %i[monthly_student_loan
+                                                  monthly_other_income
                                                   monthly_state_benefits
                                                   monthly_income_equivalents
                                                   monthly_outgoing_equivalents
