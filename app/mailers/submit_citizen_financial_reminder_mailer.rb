@@ -13,8 +13,15 @@ class SubmitCitizenFinancialReminderMailer < BaseApplyMailer
     set_personalisation(
       ref_number: application['application_ref'],
       client_name: client_name,
-      application_url: application_url
+      application_url: application_url,
+      expiry_date: url_expiry_date
     )
     mail(to: email)
+  end
+
+  private
+
+  def url_expiry_date
+    (Date.today + 7.days).strftime('%d %B %Y')
   end
 end

@@ -9,11 +9,11 @@
 # we default to 'integration' group.
 #
 development:
-  citizen_start_application: e747df7d-4842-4bca-88a6-4ad3ebd89994
+  citizen_start_application: 74d7825f-91e4-4311-98a4-36cb517c8359 # this needs to be changed back and original email template amended
   feedback_notification: 4d391bf7-4e5b-4f49-b586-b6bb8ad06a30
   new_link_request: a577582b-3e60-44a4-885c-d4b12bf23958
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
-  reminder_to_submit_an_application: c4ac858d-68ae-437b-9353-06e632cd88f2
+  reminder_to_submit_an_application: 43de80f4-6a15-4be9-8a29-b3682cea3eee  # this needs to be changed back and original email template amended
   client_completed_means: d04e64ae-0a66-4577-83d6-6ce9f7fa27b4
   reminder_to_submit_financial_information_client: e8052551-2afa-4b11-b3e3-578248d9b582
   reminder_to_submit_financial_information_provider: ec4f423d-498a-4828-ab66-c2453cb42ed3

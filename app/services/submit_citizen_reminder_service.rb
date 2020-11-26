@@ -25,7 +25,8 @@ class SubmitCitizenReminderService
       application.id,
       applicant.email,
       application_url,
-      applicant.full_name
+      applicant.full_name,
+      expiry_date
     ]
   end
 
@@ -35,6 +36,10 @@ class SubmitCitizenReminderService
 
   def applicant
     @applicant ||= application&.applicant
+  end
+
+  def url_expiry_date
+    (Date.today + 7.days).strftime('%d %B %Y')
   end
 
   def secure_id

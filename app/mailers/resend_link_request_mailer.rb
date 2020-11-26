@@ -9,8 +9,15 @@ class ResendLinkRequestMailer < BaseApplyMailer
     set_personalisation(
       application_url: application_url,
       client_name: client_name,
-      ref_number: app_id
+      ref_number: app_id,
+      expiry_date: url_expiry_date
     )
     mail(to: email)
+  end
+
+  private
+
+  def url_expiry_date
+    (Date.today + 7.days).strftime('%d %B %Y')
   end
 end
