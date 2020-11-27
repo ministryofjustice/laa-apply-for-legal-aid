@@ -223,6 +223,17 @@ FactoryBot.define do
       end
     end
 
+    trait :with_dependant do
+      transient do
+        dependants_count { 1 }
+      end
+
+      after(:create) do |application, evaluator|
+        application.dependants = evaluator.dependants.presence || create_list(:dependant, 1)
+        application.save
+      end
+    end
+
     trait :with_own_home_mortgaged do
       own_home { 'mortgage' }
     end

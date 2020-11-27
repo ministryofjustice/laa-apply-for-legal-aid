@@ -74,6 +74,42 @@ RSpec.describe Providers::HasDependantsController, type: :request do
         end
       end
 
+      context 'while provider checking answers of citizen and no' do
+        let(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+                 :checking_non_passported_means
+        end
+        let(:params) { { legal_aid_application: { has_dependants: 'false' } } }
+
+        it 'redirects to the means summary page' do
+          expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        end
+      end
+
+      context 'while provider checking answers of citizen and no dependants and yes' do
+        let(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+                 :checking_non_passported_means
+        end
+        let(:params) { { legal_aid_application: { has_dependants: 'true' } } }
+
+        it 'redirects to the add dependant details page' do
+          expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
+        end
+      end
+
+      context 'while provider checking answers of citizen and previously added dependants and yes' do
+        let(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+                 :checking_non_passported_means, :with_dependant
+        end
+        let(:params) { { legal_aid_application: { has_dependants: 'true' } } }
+
+        it 'redirects to the has other dependants page' do
+          expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
+        end
+      end
+
       context 'invalid params - nothing specified' do
         let(:params) { {} }
 
