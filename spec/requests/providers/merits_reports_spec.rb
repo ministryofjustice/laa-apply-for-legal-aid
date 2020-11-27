@@ -8,7 +8,8 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
 
   describe 'GET /providers/applications/:legal_aid_application_id/merits_report' do
     subject do
-      VCR.use_cassette('stylesheets') do
+      # dont' match on path - webpacker keeps changing the second part of the path
+      VCR.use_cassette('stylesheets', match_requests_on: [:method, :host, :headers]) do
         get providers_legal_aid_application_merits_report_path(legal_aid_application, debug: true)
       end
     end
