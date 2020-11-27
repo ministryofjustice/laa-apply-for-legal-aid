@@ -12,6 +12,12 @@ RSpec.describe Providers::MeansReportsController, type: :request do
   describe 'GET /providers/applications/:legal_aid_application_id/means_report' do
     subject { get providers_legal_aid_application_means_report_path(legal_aid_application, debug: true) }
 
+    around do |example|
+      VCR.turn_off!
+      example.run
+      VCR.turn_on!
+    end
+
     before do
       login_provider
       before_subject
