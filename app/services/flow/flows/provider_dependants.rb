@@ -25,8 +25,7 @@ module Flow
         },
         dependants: {
           path: ->(application) { urls.new_providers_legal_aid_application_dependant_path(application) },
-          forward: :has_other_dependants,
-          check_answers: :means_summaries
+          forward: :has_other_dependants
         },
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_dependants_path(application) },
@@ -37,12 +36,8 @@ module Flow
               application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries
             end
           },
-          check_answers: ->(has_other_dependant) {
-            if has_other_dependant
-              :dependants
-            else
-              :means_summaries
-            end
+          check_answers: ->(_application, has_other_dependant) {
+            has_other_dependant ? :dependants : :means_summaries
           }
         },
         remove_dependant: {

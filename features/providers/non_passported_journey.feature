@@ -205,6 +205,9 @@ Feature: Non-passported applicant journeys
     When I click Check Your Answers Change link for dependant '1'
     Then I should be on a page showing 'Amend dependant details'
     When I click 'Save and continue'
+    Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
