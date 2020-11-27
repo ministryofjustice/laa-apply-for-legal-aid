@@ -7,7 +7,6 @@ RSpec.describe Reports::MeritsReportCreator do
     VCR.use_cassette('stylesheets2') do
       described_class.call(legal_aid_application)
     end
-
   end
 
   describe '.call' do
