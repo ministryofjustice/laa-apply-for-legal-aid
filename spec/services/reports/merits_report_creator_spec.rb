@@ -5,7 +5,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
   subject do
     # dont' match on path - webpacker keeps changing the second part of the path
-    VCR.use_cassette('stylesheets2', match_requests_on: [:method, :host, :headers]) do
+    VCR.use_cassette('stylesheets2', match_requests_on: %i[method host headers]) do
       described_class.call(legal_aid_application)
     end
   end
