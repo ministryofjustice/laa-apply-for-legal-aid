@@ -7,7 +7,11 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
   let(:before_subject) { nil }
 
   describe 'GET /providers/applications/:legal_aid_application_id/merits_report' do
-    subject { get providers_legal_aid_application_merits_report_path(legal_aid_application, debug: true) }
+    subject do
+      VCR.use_cassette('stylesheets') do
+        get providers_legal_aid_application_merits_report_path(legal_aid_application, debug: true)
+      end
+    end
 
     before do
       login_provider

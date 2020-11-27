@@ -3,7 +3,12 @@ require 'rails_helper'
 RSpec.describe Reports::MeritsReportCreator do
   let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :generating_reports }
 
-  subject { described_class.call(legal_aid_application) }
+  subject do
+    VCR.use_cassette('stylesheets2') do
+      described_class.call(legal_aid_application)
+    end
+
+  end
 
   describe '.call' do
     it 'attaches merits_report.pdf to the application' do
