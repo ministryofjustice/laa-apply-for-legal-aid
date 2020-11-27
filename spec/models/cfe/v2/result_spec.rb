@@ -10,6 +10,7 @@ module CFE
       let(:additional_property) { create :cfe_v2_result, :with_additional_properties }
       let(:no_vehicles) { create :cfe_v2_result, :no_vehicles }
       let(:with_maintenance) { create :cfe_v2_result, :with_maintenance_received }
+      let(:with_student_finance) { create :cfe_v2_result, :with_student_finance_received }
       let(:no_mortgage) { create :cfe_v2_result, :with_no_mortgage_costs }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v2_result }
       let(:contribution_and_restriction_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
@@ -413,6 +414,18 @@ module CFE
 
         context 'when maintenance is not received' do
           subject(:maintenance_per_month) { eligible_result.maintenance_per_month }
+          it { is_expected.to eq 0.00 }
+        end
+      end
+
+      describe 'mei_student_loan' do
+        context 'when student_loan is received' do
+          subject(:mei_student_loan) { with_student_finance.mei_student_loan }
+          it { is_expected.to eq 125.00 }
+        end
+
+        context 'when student_loan is not received' do
+          subject(:mei_student_loan) { eligible_result.mei_student_loan }
           it { is_expected.to eq 0.00 }
         end
       end

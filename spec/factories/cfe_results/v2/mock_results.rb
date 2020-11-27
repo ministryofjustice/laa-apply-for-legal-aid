@@ -20,6 +20,7 @@ module CFEResults
               self_employed: false
             },
             gross_income: {
+              monthly_student_loan: '0.0',
               monthly_other_income: '75.0',
               monthly_state_benefits: '75.0',
               total_gross_income: '150.0',
@@ -30,7 +31,6 @@ module CFEResults
                   friends_or_family: '50.59',
                   maintenance_in: '54.17',
                   property_or_lodger: '450.0',
-                  student_loan: '230.09',
                   pension: '82.52'
                 },
               monthly_outgoing_equivalents:
@@ -321,6 +321,12 @@ module CFEResults
       def self.with_maintenance_received
         result = eligible
         result[:assessment][:disposable_income][:maintenance_allowance] = '150.00'
+        result
+      end
+
+      def self.with_student_finance_received
+        result = eligible
+        result[:assessment][:gross_income][:monthly_student_loan] = '125.00'
         result
       end
 
