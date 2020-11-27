@@ -1,20 +1,20 @@
 class BankTransactionPresenter
-  CELLS = {
-    happened_at: 'happened_at',
-    amount_debit: 'debit',
-    amount_credit: 'credit',
-    operation: 'type',
-    description: 'description',
-    merchant: 'merchant',
-    running_balance: 'balance/running total',
-    account_type: 'account type',
-    account_name: 'account name',
-    account_sort_code: 'sort code',
-    account_number: 'account number',
-    category: 'category',
-    selected_by: 'selected_by',
-    flagged: 'flagged'
-  }.freeze
+  CELLS = %i[
+    happened_at
+    debit
+    credit
+    type
+    description
+    merchant
+    balance_running_total
+    account_type
+    account_name
+    sort_code
+    account_number
+    category
+    selected_by
+    flagged
+  ].freeze
 
   attr_reader :transaction
 
@@ -23,7 +23,7 @@ class BankTransactionPresenter
   end
 
   def self.headers
-    CELLS.values
+    CELLS.map(&:to_s)
   end
 
   def initialize(item, remarks)
@@ -33,7 +33,7 @@ class BankTransactionPresenter
 
   def build_transaction_hash
     values = {}
-    CELLS.keys.map { |k| values[k.to_sym] = send("transaction_#{k}") }
+    CELLS.map { |k| values[k.to_sym] = send("transaction_#{k}") }
     values
   end
 
@@ -51,15 +51,15 @@ class BankTransactionPresenter
     @transaction.description
   end
 
-  def transaction_amount_credit
+  def transaction_credit
     @transaction.amount if @transaction.operation.eql?('credit')
   end
 
-  def transaction_amount_debit
+  def transaction_debit
     @transaction.amount if @transaction.operation.eql?('debit')
   end
 
-  def transaction_operation
+  def transaction_type
     @transaction.operation
   end
 
@@ -85,7 +85,7 @@ class BankTransactionPresenter
     @remarks.map { |x| x.to_s.humanize }.join(', ').to_s
   end
 
-  def transaction_running_balance
+  def transaction_balance_running_total
     @transaction.running_balance || 'Not available'
   end
 
@@ -97,7 +97,7 @@ class BankTransactionPresenter
     account_for_transaction.bank_and_account_name
   end
 
-  def transaction_account_sort_code
+  def transaction_sort_code
     # add tab to end of sort code to prevent bug in Excel interpreting it as a date
     "#{account_for_transaction.sort_code}\t"
   end
