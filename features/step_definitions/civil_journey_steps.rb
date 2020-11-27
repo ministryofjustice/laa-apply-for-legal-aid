@@ -112,7 +112,7 @@ Given('I start the journey as far as the applicant page') do
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    And I click link "Start now"
+    And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'
     When I click 'Agree and continue'
     Then I should be on the Applicant page
