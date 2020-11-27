@@ -98,7 +98,8 @@ class BankTransactionPresenter
   end
 
   def transaction_account_sort_code
-    account_for_transaction.sort_code
+    # add tab to end of sort code to prevent bug in Excel interpreting it as a date
+    "#{account_for_transaction.sort_code}\t"
   end
 
   def transaction_account_number

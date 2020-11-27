@@ -127,14 +127,12 @@ RSpec.describe BankTransactionPresenter do
 
     describe 'account_name' do
       subject(:account_name) { presenter.build_transaction_hash[:account_name] }
-
       it { is_expected.to eq account.bank_and_account_name }
     end
 
     describe 'account_sort_code' do
       subject(:account_sort_code) { presenter.build_transaction_hash[:account_sort_code] }
-
-      it { is_expected.to eq account.sort_code }
+      it { is_expected.to eq "#{account.sort_code}\t" }
     end
 
     describe 'account_number' do
