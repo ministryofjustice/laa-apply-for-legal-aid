@@ -1,54 +1,65 @@
-$(document).ready(function() {
-  if ($('.select-clear-all').length) {
+document.addEventListener('DOMContentLoaded', event => {
+  if (document.querySelector('.select-clear-all')) {
     function resetSelectClearLink(table) {
-      const link = table.find('.select-clear-all');
-      link.attr('tabindex', 0);
-      link.removeClass('select-all clear-all');
+      const link = table.querySelector('.select-clear-all');
+      link.setAttribute('tabindex', 0);
+      link.classList.remove('select-all', 'clear-all');
 
-      if (table.find('input:checked').length) {
-        link.addClass('clear-all').text(link.data('copy-clear'));
+      if (table.querySelector('input:checked')) {
+        link.classList.add('clear-all')
+        link.textContent = link.getAttribute('data-copy-clear');
       }
       else {
-        link.addClass('select-all').text(link.data('copy-select'));
+        link.classList.add('select-all')
+        link.textContent = link.getAttribute('data-copy-select');
       }
     }
 
     function setCategory(row) {
-      let vacantItem = row.find(".table-category-vacant");
-      if (row.find('input:checked').length) {
-        vacantItem.addClass("table-category-preview");
+      let vacantItem = row.querySelector(".table-category-vacant");
+      if (row.querySelector('input:checked')) {
+        vacantItem.classList.add("table-category-preview");
       } else {
-        vacantItem.removeClass("table-category-preview");
+        vacantItem.classList.remove("table-category-preview");
       }
     }
 
-    $('.select-clear-all').click(function() {
-      const table = $(this).parents('table');
-      if($(this).hasClass('clear-all')) {
-        $("#screen-reader-messages").text("All transactions deselected.");  //this adds a message to the message div which is read out by the screen reader
-        table.find('input:checked').prop('checked', false);
-      } else if ($(this).hasClass('select-all')) {
-        table.find('input:not(:checked)').prop('checked', true);
-        $("#screen-reader-messages").text("All transactions selected."); 
+    document.querySelector('.select-clear-all').addEventListener("click", function() {
+      const table = document.querySelector('table');
+      if(this.classList.contains('clear-all')) {
+        let checkboxes = document.querySelectorAll('input:checked')
+        checkboxes.forEach(function(box) {
+          box.checked = false
+        })
+        document.querySelector("#screen-reader-messages").textContent = "All transactions deselected.";  //this adds a message to the message div which is read out by the screen reader
+      } else if (this.classList.contains('select-all')) {
+        let checkboxes = table.querySelectorAll('input:not(:checked)')
+        checkboxes.forEach(function(box) {
+          box.checked = true
+        })
+        document.querySelector("#screen-reader-messages").textContent = "All transactions selected.";
       }
-      resetSelectClearLink($(this).parents('table'))
+      resetSelectClearLink(table)
       return false;
     });
 
-    $('.select-clear-all').keypress(function(ev) {
+    // TODO: test this
+    document.querySelector('.select-clear-all').addEventListener('keypress', function(ev) {
       const returnKeyCode = 13;
       const spaceBarCode = 32;
-      if (ev.which==returnKeyCode || ev.which==spaceBarCode) { //on space or return
-        $(this).click(); //mimic a click
+      if (ev.which === returnKeyCode || ev.which === spaceBarCode) { //on space or return
+        this.click(); //mimic a click
         return false;
       }
     });
 
-    $('table').find("input").click(function() {
-      resetSelectClearLink($(this).parents('table'));
-      setCategory($(this).parents('tr'))
+    const table = document.querySelector('table')
+    const input = table.querySelector("input")
+    input.addEventListener("click", function() {
+      resetSelectClearLink(table);
+      setCategory(table.querySelector('tr'))
     });
 
-    resetSelectClearLink($('.select-clear-all').parents('table'))
+    resetSelectClearLink(table)
   }
 });
