@@ -3,12 +3,7 @@
       back_link: :none
     ) do %>
 
-  <h2 class="govuk-heading-m"><%= t('.make_new_application') %></h2>
-  <p>
-    <%= t('.basic_details_para') %>
-  </p>
-
-  <%= link_to(start_button_label(:start_now),
+  <%= link_to(start_button_label(:new_app),
               providers_declaration_path,
               class: 'govuk-button govuk-button--start',
               role: 'button',
