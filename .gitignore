@@ -35,6 +35,7 @@ config/master.key
 # Ignore environment variables
 .env.*
 .env
+!.env.sample
 
 # text file to add new tranche of users
 add_tranche_users.txt
