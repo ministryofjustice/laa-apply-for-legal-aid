@@ -9,11 +9,10 @@
 # we default to 'integration' group.
 #
 development:
-  citizen_start_application: 74d7825f-91e4-4311-98a4-36cb517c8359 # this needs to be changed back and original email template amended
+  citizen_start_application: e747df7d-4842-4bca-88a6-4ad3ebd89994
   feedback_notification: 4d391bf7-4e5b-4f49-b586-b6bb8ad06a30
-  new_link_request: 8d93ef3b-a744-4c88-87c8-a6f326886c12 # a577582b-3e60-44a4-885c-d4b12bf23958 this needs to be changed back and original email template amended
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
-  reminder_to_submit_an_application: 43de80f4-6a15-4be9-8a29-b3682cea3eee  # this needs to be changed back and original email template amended
+  reminder_to_submit_an_application: c4ac858d-68ae-437b-9353-06e632cd88f2
   client_completed_means: d04e64ae-0a66-4577-83d6-6ce9f7fa27b4
   reminder_to_submit_financial_information_client: e8052551-2afa-4b11-b3e3-578248d9b582
   reminder_to_submit_financial_information_provider: ec4f423d-498a-4828-ab66-c2453cb42ed3
@@ -22,7 +21,6 @@ development:
 production:
   citizen_start_application: 7e5fb1a7-4b78-4a95-917e-c0bcb78a5fcc
   feedback_notification: fd050a04-54d2-4736-bb6c-66431c7d9e41
-  new_link_request: 3cc3be57-e072-4095-9caa-c0cd52193405
   submission_confirmation: 5472b10b-bc11-432a-a18d-9f20de5b2854
   reminder_to_submit_an_application: 96e58b6c-83e2-4ae8-be67-028803e98398
   client_completed_means: b343446d-b487-4f8b-9673-2aaf21ea10a1
