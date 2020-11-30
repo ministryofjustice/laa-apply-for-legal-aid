@@ -77,14 +77,6 @@ RSpec.describe 'cfe_v2_result factory' do
                                              assessment_result
                                              capital_contribution]
     end
-
-    context 'on or after 8th jan 2021' do
-      it 'does not return total mortgage allowance' do
-        travel_to(Time.zone.local(2021, 1, 8)) do
-          expect(capital.keys).not_to include(:total_mortgage_allowance)
-        end
-      end
-    end
   end
 
   describe 'with no traits' do
