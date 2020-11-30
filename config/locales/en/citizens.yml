@@ -32,7 +32,10 @@ en:
       index:
         title: Select your bank
         what_happens_next: What happens next
-        connect: We'll connect you to your bank using TrueLayer so you can share your bank account information with the LAA.
+        connect: "You’ll be redirected to your bank’s website or app where you can:"
+        bullet_1: sign in to your online banking
+        bullet_2_html: give TrueLayer permission to collect 3 months of bank statements on behalf of the <abbr title='Legal Aid Agency'>LAA</abbr>
+        every_account: You'll need to do this for every personal and joint account you can access online, including those with no money in them.
         hint: Select one bank at a time. You'll be able to select more later if you have accounts with different banks.
       create:
         error: Select a bank
@@ -71,22 +74,23 @@ en:
         they_will_check: They will check whether you qualify for legal aid by asking about your finances.
     consents:
       show:
-        title_html: Do you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>?
-        inset_text: We only use your financial information to support your legal aid application. We do not use it for anything else.
-        summary_heading: What information will the LAA be able to see?
-        summary_heading_html: What information will the <abbr title='Legal Aid Agency'>LAA</abbr> be able to see?
+        title_html: Do you agree to share 3 months of bank statements with the <abbr title='Legal Aid Agency'>LAA</abbr> via TrueLayer?
+        inset_text: We only use your bank statements to support your legal aid application. We do not use them for anything else
+        summary_heading: What will TrueLayer be able to see?
         able_to_see:
-          heading: "We'll be able to see your:"
+          heading: "TrueLayer will have one-off, read-only access to your:"
           list: |
-            account details
+            account details like your account number and sort code
             bank statements and transaction details
             account balances
             Direct Debits and standing orders
         unable_to_see:
-          heading: "We will not:"
+          heading: "They will not:"
           list: |
-            save your online banking username and password
-            have any ongoing access to your bank account
+            store your bank account details
+            see your online banking sign-in details
+            share your details with anyone other than the LAA
+            have any ongoing access to your bank account details
     declarations:
       show:
         page_heading: Declaration

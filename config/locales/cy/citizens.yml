@@ -33,6 +33,9 @@ cy:
         title: knab ruoy tceleS
         what_happens_next: txen sneppah tahW
         connect: ".AAL eht htiw noitamrofni tnuocca knab ruoy erahs nac uoy os reyaLeurT gnisu knab ruoy ot uoy tcennoc ll'eW"
+        bullet_1: gniknab enilno ruoy ot ni ngis
+        bullet_2_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht fo flaheb no stnemetats knab fo shtnom 3 tcelloc ot noissimrep reyaLeurT evig"
+        every_account: ".meht ni yenom on htiw esoht gnidulcni ,enilno ssecca nac uoy tnuocca tnioj dna lanosrep yreve rof siht od ot deen ll'uoY"
         hint: ".sknab tnereffid htiw stnuocca evah uoy fi retal erom tceles ot elba eb ll'uoY .emit a ta knab eno tceleS"
       create:
         error: knab a tceleS
@@ -74,7 +77,6 @@ cy:
         title_html: "?>rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni tnuocca knab ruoy erahs ot eerga uoy oD"
         inset_text: ".esle gnihtyna rof ti esu ton od eW .noitacilppa dia lagel ruoy troppus ot noitamrofni laicnanif ruoy esu ylno eW"
         summary_heading: "?ees ot elba eb AAL eht lliw noitamrofni tahW"
-        summary_heading_html: "?ees ot elba eb >rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht lliw noitamrofni tahW"
         able_to_see:
           heading: ":ruoy ees ot elba eb ll'eW"
           list: |
