@@ -9,8 +9,8 @@
                   xmlns:ns6="http://legalservices.gov.uk/Enterprise/Common/1.0/Header"
                   xmlns:ns8="uri">
       <ns1:UsernameToken>
-        <ns1:Username>pui_user</ns1:Username>
-        <ns1:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">PUIONLY1</ns1:Password>
+        <ns1:Username>FakeUsername</ns1:Username>
+        <ns1:Password Type="FakeType">FakePassword</ns1:Password>
       </ns1:UsernameToken>
     </ns1:Security>
     <wsa:MessageID>urn:7A3451705A3F11EABF99012B4AFAC620</wsa:MessageID>
