@@ -4,7 +4,6 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require 'axe-cucumber-steps'
 require 'cucumber/rails'
 require 'capybara'
 require 'capybara/cucumber'
@@ -12,6 +11,7 @@ require 'selenium/webdriver'
 require 'webmock/cucumber'
 require 'factory_bot'
 require 'webdrivers'
+require 'axe-cucumber-steps'
 
 # HACK: this method was available in cucumber 3.1 but not cucumber 4 and VCR relies on it to
 # generate cassette names.
