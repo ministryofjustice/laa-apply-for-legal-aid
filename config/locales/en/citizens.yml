@@ -122,12 +122,12 @@ en:
         case_reference: 'Case reference:'
         heading_1: Your legal aid application
         how_we_do_this_heading: How we do this
-        how_we_do_this_body_1: The Legal Aid Agency (LAA) uses a secure third-party service to connect you to your online banking.
-        how_we_do_this_body_2: Once you've signed in to online banking, you'll be asked to give TrueLayer one-time access to your bank accounts.
-        how_we_do_this_body_3: If you agree, TrueLayer will temporarily access your bank account information and share it with the LAA.
-        how_we_do_this_body_4: We then share your bank statements from the past 3 months with your solicitor to help them check if you qualify financially for legal aid.
+        how_we_do_this_body_1: We check 3 months of your bank statements to see the kinds of payments you make and receive.
+        how_we_do_this_body_2: This helps us work out if you can get legal aid or you need to pay towards the costs.
+        how_we_do_this_body_3: With your permission, we securely collect your bank statements online using a trusted third-party financial service provider called TrueLayer.
+        how_we_do_this_body_4: You’ll also need to answer questions about the types of payments you make and receive.
         name: 'Name:'
-        online_banking_details: Your online banking sign in details.
+        online_banking_details: Your sign-in details for every bank account you use online banking for.
         what_you_will_need: What you'll need
         we_need_to_check: We need to check if you qualify financially for legal aid.
         your_solicitor: 'Your solicitor:'
