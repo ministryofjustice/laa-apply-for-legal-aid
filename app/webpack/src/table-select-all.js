@@ -1,16 +1,19 @@
 document.addEventListener('DOMContentLoaded', event => {
-  if (document.querySelector('.select-clear-all')) {
+  var clearAllElems = document.querySelector('.select-clear-all')
+  var selectTable = clearAllElems.parentNode.parentNode.parentNode
+
+  if (clearAllElems) {
     function resetSelectClearLink(table) {
       const link = table.querySelector('.select-clear-all');
       link.setAttribute('tabindex', 0);
       link.classList.remove('select-all', 'clear-all');
 
       if (table.querySelector('input:checked')) {
-        link.classList.add('clear-all')
+        link.classList.add('clear-all');
         link.textContent = link.getAttribute('data-copy-clear');
       }
       else {
-        link.classList.add('select-all')
+        link.classList.add('select-all');
         link.textContent = link.getAttribute('data-copy-select');
       }
     }
@@ -24,27 +27,27 @@ document.addEventListener('DOMContentLoaded', event => {
       }
     }
 
-    document.querySelector('.select-clear-all').addEventListener("click", function() {
-      const table = document.querySelector('table');
-      if(this.classList.contains('clear-all')) {
-        let checkboxes = document.querySelectorAll('input:checked')
+    clearAllElems.addEventListener("click", function() {
+      const table = selectTable;
+      if (this.classList.contains('clear-all')) {
+        let checkboxes = document.querySelectorAll('input:checked');
         checkboxes.forEach(function(box) {
-          box.checked = false
+          box.checked = false;
         })
         document.querySelector("#screen-reader-messages").textContent = "All transactions deselected.";  //this adds a message to the message div which is read out by the screen reader
       } else if (this.classList.contains('select-all')) {
-        let checkboxes = table.querySelectorAll('input:not(:checked)')
+        let checkboxes = table.querySelectorAll('input:not(:checked)');
         checkboxes.forEach(function(box) {
-          box.checked = true
+          box.checked = true;
         })
         document.querySelector("#screen-reader-messages").textContent = "All transactions selected.";
       }
-      resetSelectClearLink(table)
+      resetSelectClearLink(table);
       return false;
     });
 
     // TODO: test this
-    document.querySelector('.select-clear-all').addEventListener('keypress', function(ev) {
+    clearAllElems.addEventListener('keypress', function(ev) {
       const returnKeyCode = 13;
       const spaceBarCode = 32;
       if (ev.which === returnKeyCode || ev.which === spaceBarCode) { //on space or return
@@ -53,11 +56,11 @@ document.addEventListener('DOMContentLoaded', event => {
       }
     });
 
-    const table = document.querySelector('table')
+    const table = selectTable
     const input = table.querySelector("input")
     input.addEventListener("click", function() {
       resetSelectClearLink(table);
-      setCategory(table.querySelector('tr'))
+      setCategory(table.querySelector('tr'));
     });
 
     resetSelectClearLink(table)
