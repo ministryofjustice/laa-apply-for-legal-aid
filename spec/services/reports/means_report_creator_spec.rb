@@ -3,7 +3,12 @@ require 'rails_helper'
 RSpec.describe Reports::MeansReportCreator do
   let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v2_result, :generating_reports }
 
-  subject { described_class.call(legal_aid_application) }
+  subject do
+    # dont' match on path - webpacker keeps changing the second part of the path
+    VCR.use_cassette('stylesheets2', match_requests_on: %i[method host headers]) do
+      described_class.call(legal_aid_application)
+    end
+  end
 
   describe '.call' do
     it 'attaches means_report.pdf to the application' do

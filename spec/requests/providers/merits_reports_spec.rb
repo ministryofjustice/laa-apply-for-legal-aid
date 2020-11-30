@@ -7,7 +7,12 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
   let(:before_subject) { nil }
 
   describe 'GET /providers/applications/:legal_aid_application_id/merits_report' do
-    subject { get providers_legal_aid_application_merits_report_path(legal_aid_application, debug: true) }
+    subject do
+      # dont' match on path - webpacker keeps changing the second part of the path
+      VCR.use_cassette('stylesheets', match_requests_on: %i[method host headers]) do
+        get providers_legal_aid_application_merits_report_path(legal_aid_application, debug: true)
+      end
+    end
 
     before do
       login_provider
