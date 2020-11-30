@@ -4,11 +4,10 @@
 
 The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to enter applications for legal aid on-line.
 
-## Technical Information
+## Architecture Diagram
 
-[![auto-updating container diagram](https://static.structurizr.com/workspace/55246/diagrams/apply-container.png)](https://structurizr.com/share/55246/diagrams#apply-container)
-
-👆 edit in [laa-architecture-as-code](https://github.com/ministryofjustice/laa-architecture-as-code/blob/main/src/main/kotlin/model/Apply.kt)
+View the [architecture diagram](https://structurizr.com/share/55246/diagrams#apply-container) for this project.
+It's defined as code and [can be edited](https://github.com/ministryofjustice/laa-architecture-as-code/blob/main/src/main/kotlin/model/Apply.kt) by anyone.
 
 ## Dependencies
 
@@ -37,7 +36,7 @@ Once the pull request has been merged, re-pull master and run
 ```
 git-crypt unlock
 ```
-Copy the `.env.sample` file and name the new file `.env.development` 
+Copy the `.env.sample` file and name the new file `.env.development`
 
 To get the tests running you will need to obtain and set values for the following:
 ```bash
@@ -56,8 +55,8 @@ bin/setup
 ```
 
 ### Encrypting sensitive data
-We use git-crypt to encrypt sensitive data so that it can be stored in the same repo as all the other code, 
-yet still be inaccessible to unauthorised users.  
+We use git-crypt to encrypt sensitive data so that it can be stored in the same repo as all the other code,
+yet still be inaccessible to unauthorised users.
 
 #### Adding a new encrypted file
 This can be a bit tricky, so follow these steps:
@@ -65,12 +64,12 @@ This can be a bit tricky, so follow these steps:
 - Add a new line to `.gitattributes` to ensure the new file is encrypted
 
   ```<path_to_file_to_be_encrypted> filter=git-crypt diff=git-crypt```
-- Add the file you want to be encrypted 
+- Add the file you want to be encrypted
 - Add the new file to git, and commit it
   ```git add .```
-  
+
   ```git comit -m '<message>```
-  
+
 - Lock the repo
    ```git-crypt lock```
 
@@ -122,7 +121,7 @@ foreman start -f Procfile
 
 Ensure you have an .env.test file. This can be the same as your .env.development file
 
-Set `BC_USE_DEV_MOCK=true`. This mocks the call to the benefits checker.  
+Set `BC_USE_DEV_MOCK=true`. This mocks the call to the benefits checker.
 
 Runs Rubocop, RSpec specs and Cucumber features
 
@@ -275,7 +274,7 @@ This environment variable should be set to ```false``` when recording new vcr ca
 
 TrueLayer test data can be replaced by mock data from db/sample_data/bank_transactions.csv. This can be toggled in the Admin Portal at `/admin/settings`.
 
-This mock data allows for testing with more meaningful bank transactions, including benefits data tagged with correct DWP codes. 
+This mock data allows for testing with more meaningful bank transactions, including benefits data tagged with correct DWP codes.
 
 ## Admin Portal
 
