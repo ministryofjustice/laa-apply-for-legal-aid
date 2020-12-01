@@ -55,6 +55,8 @@ Rails.application.routes.draw do
         member do
           get 'download_xml_response'
           get 'download_xml_request'
+          get 'download_means_report'
+          get 'download_merits_report'
         end
       end
     end

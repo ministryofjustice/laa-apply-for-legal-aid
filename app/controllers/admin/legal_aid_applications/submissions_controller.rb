@@ -6,7 +6,7 @@ module Admin
       layout 'admin'.freeze
 
       def show
-        @legal_aid_application = LegalAidApplication.find(params[:id])
+        legal_aid_application
       end
 
       def download_xml_response
@@ -17,7 +17,19 @@ module Admin
         download_data :request
       end
 
+      def download_means_report
+        download_report :means
+      end
+
+      def download_merits_report
+        download_report :merits
+      end
+
       private
+
+      def legal_aid_application
+        @legal_aid_application ||= LegalAidApplication.find(params[:id])
+      end
 
       def filename(type, id)
         "submission_history_#{id}_#{type}.xml"
@@ -39,6 +51,14 @@ module Admin
                   status: 200,
                   type: 'text/xml',
                   filename: filename(attribute, params[:id])
+      end
+
+      def download_report(attribute)
+        report = legal_aid_application.send("#{attribute}_report")
+        send_data report.document.download,
+                  status: 200,
+                  type: 'application/pdf',
+                  filename: report.attachment_name
       end
     end
   end
