@@ -1,0 +1,18 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+      name: :used_delegated_functions,
+      url: providers_legal_aid_application_used_delegated_functions_path(@legal_aid_application),
+      question: t('.section_delegated.used_delegated_functions'),
+      answer: yes_no(legal_aid_application.used_delegated_functions),
+      read_only: read_only
+      ) %>
+
+    <%= check_answer_link(
+      name: :used_delegated_functions_on,
+      url: providers_legal_aid_application_used_delegated_functions_path(@legal_aid_application, anchor: :used_delegated_functions_on),
+      question: t('.section_delegated.used_delegated_functions_on'),
+      answer: legal_aid_application.used_delegated_functions_on,
+      read_only: read_only
+      )  if legal_aid_application.used_delegated_functions? %>
+</dl>

@@ -136,16 +136,16 @@ RSpec.describe 'providers offine accounts', type: :request do
           end
           before { subject }
 
-          it 'redirects to the restrictions page' do
-            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
+          it 'redirects to the check passported answers page' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
           end
 
           context 'no savings' do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
-            it 'redirects to the restrictions page' do
-              expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
+            it 'redirects to the check passported answers page' do
+              expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
             end
 
             context 'provider_entering_merits' do

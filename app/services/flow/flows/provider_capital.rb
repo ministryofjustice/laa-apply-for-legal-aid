@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderCapital < FlowSteps
+    class ProviderCapital < FlowSteps  # rubocop:disable Metrics/ClassLength
       STEPS = {
         capital_introductions: {
           path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
@@ -27,13 +27,18 @@ module Flow
         offline_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
           forward: :savings_and_investments,
-          carry_on_sub_flow: true,
           check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers }
         },
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
-          forward: ->(application) { application.checking_answers? ? :restrictions : :other_assets },
-          carry_on_sub_flow: ->(application) { application.savings_amount? },
+          forward: ->(application) do
+            if application.own_capital? && application.checking_answers?
+              :restrictions
+            else
+              :other_assets
+            end
+          end,
+          carry_on_sub_flow: ->(application) { application.own_capital? },
           check_answers: ->(app) { app.checking_non_passported_means? ? :means_summaries : :check_passported_answers }
         },
         other_assets: {

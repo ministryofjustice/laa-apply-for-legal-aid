@@ -16,14 +16,13 @@ module CheckAnswersHelper
     )
   end
 
-  def check_answer_no_link(question:, answer:, name:, no_border: false, align_right: false)
+  def check_answer_no_link(question:, answer:, name:, no_border: false)
     render(
       'shared/check_answers/no_link_item',
       name: name,
       question: question,
       answer: answer,
-      no_border: no_border,
-      align_right: align_right
+      no_border: no_border
     )
   end
 
@@ -60,14 +59,13 @@ module CheckAnswersHelper
     )
   end
 
-  def check_long_question_no_link(question:, answer:, name:, no_border: false, align_right: false)
+  def check_long_question_no_link(question:, answer:, name:, no_border: false)
     render(
       'shared/check_answers/no_link_long_item',
       name: name,
       question: question,
       answer: answer,
-      no_border: no_border,
-      align_right: align_right
+      no_border: no_border
     )
   end
 

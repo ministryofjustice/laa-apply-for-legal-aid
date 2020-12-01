@@ -1,7 +1,7 @@
 <% read_only = local_assigns[:read_only] ? read_only : false %>
-<h2 class="govuk-heading-m">
+<h3 class="govuk-heading-m">
   <%= t(".#{journey_type}.heading") %>
-</h2>
+</h3>
 
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
@@ -10,7 +10,6 @@
         question: t(".#{journey_type}.own"),
         answer: yes_no(@legal_aid_application.own_vehicle?),
         read_only: read_only,
-        align_right: read_only
       ) %>
 
   <%= check_answer_link(
@@ -19,7 +18,6 @@
         question: t(".#{journey_type}.estimated_value"),
         answer: gds_number_to_currency(@legal_aid_application.vehicle.estimated_value),
         read_only: read_only,
-        align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
 
   <%= check_answer_link(
@@ -28,7 +26,6 @@
         question: t(".#{journey_type}.payment_remaining"),
         answer: gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
         read_only: read_only,
-        align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
 
   <%= check_answer_link(
@@ -37,7 +34,6 @@
         question: t(".#{journey_type}.more_than_three_years_old"),
         answer: yes_no(@legal_aid_application.vehicle.more_than_three_years_old?),
         read_only: read_only,
-        align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
 
   <%= check_answer_link(
@@ -46,6 +42,5 @@
         question: t(".#{journey_type}.used_regularly"),
         answer: yes_no(@legal_aid_application.vehicle.used_regularly),
         read_only: read_only,
-        align_right: read_only
       ) if @legal_aid_application.own_vehicle? %>
 </dl>

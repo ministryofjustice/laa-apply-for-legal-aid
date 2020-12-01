@@ -211,7 +211,7 @@ en:
         we_checked: 'We checked with the DWP and your client does not receive:'
     check_merits_answers:
       show:
-        h1-heading: Check your answers
+        h1-heading: Check your answers and submit application
         sub-heading: Confirm the following
         text: 'Your client agrees that:'
         list: |
@@ -230,9 +230,8 @@ en:
             have their legal aid stopped and have to pay back the costs
     check_passported_answers:
       show:
-        assets:
-          heading: Property, savings and other assets
         h1-heading: Check your answers
+        h2-heading: Your client's capital
         merits_assessment_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
         merits_assessment_h2: What happens next
         property: Property
@@ -251,7 +250,9 @@ en:
         section_client:
           heading: Client details
         section_proceeding:
-          heading: What you're applying for
+          heading: Proceedings
+        section_delegated:
+          heading: Delegated functions
         section_emergency:
           heading: Covered under an emergency certificate
         section_substantive:
@@ -413,8 +414,13 @@ en:
     means_summaries:
       show:
         h1-heading: Check your answers
+        h2-heading: Your client's income and outgoings
+        student_finance:
+          heading: Student finance
+          info: Your client also told us they'll get %{student_finance} in student finance this academic year.
         dependants:
           heading: Dependants
+          has_dependants: Does your client have any dependants?
           add-new: Add dependant
           delete: Delete dependant
           name: Name
@@ -423,11 +429,12 @@ en:
           in_full_time_education: Are they in full-time education or training?
           income: Do they receive any income?
           assets: Do they have assets worth more than £8,000?
-        capital-section-heading: Total capital
-        credits-section-heading: Total income
-        debits-section-heading: Total outgoings
-        change_declared_income: View/change declared income
-        change_declared_outgoings: View/change declared outgoings
+        capital-section-heading: Your client's capital
+        credits-section-heading: Income
+        debits-section-heading: Outgoings
+        what_happens_next:
+          heading: What happens next
+          text: We'll use your answers to check your client's financial eligibility for legal aid.
     merits_reports:
       show:
         heading: Merits report

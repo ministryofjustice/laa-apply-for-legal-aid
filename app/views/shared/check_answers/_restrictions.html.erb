@@ -1,3 +1,4 @@
+<h3 class="govuk-heading-m"><%= t(".#{journey_type}.heading") %></h3>
 <dl class="govuk-summary-list govuk-!-margin-bottom-0">
   <%= check_answer_link(
         name: :restrictions,
@@ -6,7 +7,6 @@
         answer: yes_no(@legal_aid_application.has_restrictions),
         no_border: @legal_aid_application.has_restrictions?,
         read_only: read_only,
-        align_right: read_only
       ) %>
 
 </dl>

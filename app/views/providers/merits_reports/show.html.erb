@@ -21,6 +21,12 @@
       ) %>
 
   <%= render(
+          'shared/check_answers/delegated_functions',
+          legal_aid_application: @legal_aid_application,
+          read_only: true,
+      ) %>
+
+  <%= render(
         'shared/check_answers/merits',
         incident: @legal_aid_application.latest_incident,
         statement_of_case: @legal_aid_application.statement_of_case,

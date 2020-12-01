@@ -8,7 +8,6 @@
           question: t('.do_you_get'),
           answer: yes_no(@legal_aid_application.receives_student_finance?),
           read_only: false,
-          align_right: false
       ) %>
 
   <%= check_answer_link(
@@ -17,6 +16,5 @@
           question: t('.how_much'),
           answer: gds_number_to_currency(@legal_aid_application.value_of_student_finance),
           read_only: false,
-          align_right: false
       ) if @legal_aid_application.receives_student_finance? %>
 </dl>

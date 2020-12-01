@@ -47,17 +47,20 @@ en:
     check_answers:
       assets:
         assets:
+          property-heading: Property
           offline_accounts: Your client's bank accounts
           offline_savings: Savings accounts your client cannot access online
-          other_assets: Other assets
+          other_assets: Which types of assets does your client have?
+          restrictions: Do any restrictions apply?
+          savings_and_investments: Which types of savings or investments does your client have?
+          savings_account: Savings account
+          current_account: Current account
+          bank_accounts: Which bank accounts does your client have?
+        property:
           outstanding_mortgage: What is the outstanding mortgage on your client's home?
           own_home: Does your client own the home they live in?
           percentage_home: What % share of their home does your client legally own?
           property_value: How much is your client's home worth?
-          restrictions: Do any restrictions apply?
-          savings_and_investments: Savings and investments
-          savings_account: Savings account
-          current_account: Current account
           shared_ownership: Does your client own their home with anyone else?
         submit:
           heading: Submit your details
@@ -99,7 +102,7 @@ en:
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         case-details-heading: Case details
         respondent-heading: Opponent details
-        latest-incident-heading: Details of the latest incident
+        latest-incident-heading: Latest incident details
         items:
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
@@ -111,7 +114,7 @@ en:
           warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
-          notification_of_latest_incident: When did your client tell you about the latest domestic abuse incident?
+          notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
           details_of_latest_incident: What happened during the incident?
       proceedings_details:
@@ -119,7 +122,10 @@ en:
           heading: Scope of legal aid
           client_involvement_type: Client involvement type
           client_involvement_type_applicant: Applicant
-          proceeding: Proceeding
+          proceeding: What does your client want legal aid for?
+      delegated_functions:
+        section_delegated:
+          heading: Delegated functions
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
       emergency_limitations:
@@ -132,10 +138,12 @@ en:
         work: *work
       restrictions:
         citizens:
-          question: Restrictions on your assets
+          heading: Restrictions on your assets
+          question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
           details: Details of restrictions
         providers:
-          question: "Restrictions on your client's assets"
+          heading: Restrictions on your client's assets
+          question: Are there any legal restrictions that prevent your client from selling or borrowing against their assets?
       vehicles:
         citizens:
           heading: Vehicles
@@ -161,7 +169,7 @@ en:
         date_of_birth_hint: For example, 31 3 1980
         date_of_birth_label: Date of birth
         occurred_on_label: When did the incident occur?
-        told_on_label: When did your client tell you about the latest domestic abuse incident?
+        told_on_label: When did your client contact you about the latest domestic abuse incident?
         told_on_hint: For example 31 3 2019
         purchased_on_hint: For example, 31 3 1980
         used_delegated_functions_on_label: Date you used delegated functions

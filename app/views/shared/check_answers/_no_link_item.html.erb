@@ -1,12 +1,11 @@
 <%
-  align_right = local_assigns[:align_right] ? align_right : false
   no_border = no_border ? 'govuk-summary-list--no-border' : ''
 %>
 <div class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
-  <dt class="govuk-summary-list__key <%= 'govuk-!-width-one-half' if align_right %>">
+  <dt class="govuk-summary-list__key">
     <%= question %>
   </dt>
-  <dd class="govuk-summary-list__value<%= ' align-text-right' if align_right %>">
+  <dd class="govuk-summary-list__value">
     <%= answer.present? ? answer : '-' %>
   </dd>
 </div>

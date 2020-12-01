@@ -1,41 +1,38 @@
 <%= page_template(page_title: t('.h1-heading')) do %>
 
+  <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
+
+  <%= render(
+         'shared/check_answers/income_summary',
+         income_type: t('.credits-section-heading'),
+         url: :income_summary,
+          transaction_types: TransactionType.credits
+      ) %>
+
+  <% if @student_finance %>
+    <h3 class="govuk-heading-m"><%= t('.student_finance.heading') %></h3>
+
+    <p><%= t('.student_finance.info', student_finance: value_with_currency_unit(@student_finance, t('currency.gbp'))) %></p>
+  <% end %>
+
+  <%= render(
+          'shared/check_answers/income_summary',
+          income_type: t('.debits-section-heading'),
+          url: :outgoings_summary,
+          transaction_types: TransactionType.debits
+      ) %>
+
   <h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>
+
   <%= render 'shared/check_answers/dependants' %>
-
-  <h2 class="govuk-heading-l"><%= t('.credits-section-heading') %></h2>
-  <%= render(
-        'shared/check_answers/bank_transaction_table',
-        transaction_types: TransactionType.credits
-      ) %>
-
-  <p class="align-text-right">
-    <%= link_to(
-          t('.change_declared_income'),
-          check_answer_url_for(:providers, :income_summary, @legal_aid_application)
-        ) %>
-  </p>
-
-  <div class="govuk-!-padding-bottom-8"></div>
-
-  <h2 class="govuk-heading-l"><%= t('.debits-section-heading') %></h2>
-  <%= render(
-        'shared/check_answers/bank_transaction_table',
-        transaction_types: TransactionType.debits
-      ) %>
-
-  <p class="align-text-right">
-    <%= link_to(
-          t('.change_declared_outgoings'),
-          check_answer_url_for(:providers, :outgoings_summary, @legal_aid_application)
-        ) %>
-  </p>
-
-  <div class="govuk-!-padding-bottom-8"></div>
 
   <h2 class="govuk-heading-l"><%= t('.capital-section-heading') %></h2>
 
+  <h3 class="govuk-heading-m"><%= t('shared.check_answers.assets.assets.property-heading') %></h3>
   <%= render 'shared/check_answers/assets' %>
+
+  <h3 class="govuk-heading-m"><%= t('.what_happens_next.heading') %></h3>
+  <p class="govuk-body govuk-!-margin-bottom-7"><%= t('.what_happens_next.text') %></p>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_means_summary_path,
