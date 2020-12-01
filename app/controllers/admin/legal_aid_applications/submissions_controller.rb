@@ -53,6 +53,7 @@ module Admin
                   filename: filename(attribute, params[:id])
       end
 
+      # :nocov:
       def download_report(attribute)
         report = legal_aid_application.send("#{attribute}_report")
         send_data report.document.download,
@@ -60,6 +61,7 @@ module Admin
                   type: 'application/pdf',
                   filename: report.attachment_name
       end
+      # :nocov:
     end
   end
 end
