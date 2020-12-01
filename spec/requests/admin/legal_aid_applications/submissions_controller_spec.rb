@@ -51,6 +51,26 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
         subject
       end
     end
+
+    context 'pdf' do
+      describe 'GET download_means_report' do
+        subject { get download_means_report_admin_legal_aid_applications_submission_path(legal_aid_application, format: :pdf) }
+
+        it 'downloads the file' do
+          expect_any_instance_of(described_class).to receive(:download_report).with(:means)
+          subject
+        end
+      end
+
+      describe 'GET download_merits_report' do
+        subject { get download_merits_report_admin_legal_aid_applications_submission_path(legal_aid_application, format: :pdf) }
+
+        it 'downloads the file' do
+          expect_any_instance_of(described_class).to receive(:download_report).with(:merits)
+          subject
+        end
+      end
+    end
   end
 
   describe 'nil value' do

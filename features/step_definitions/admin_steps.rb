@@ -15,9 +15,7 @@ end
 Given('an application has been submitted') do
   @legal_aid_application = create(
     :application,
-    :with_everything,
-    :with_passported_state_machine,
-    :initiated,
+    :at_assessment_submitted,
     provider: create(:provider)
   )
 end
