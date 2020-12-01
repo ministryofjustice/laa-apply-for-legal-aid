@@ -25,9 +25,11 @@ en:
     additional_accounts:
       index:
         field_set_header: Do you have accounts with other banks?
+        error: Select yes if you have accounts with other banks
       new:
-        field_set_header: Do you have online access to your accounts with other banks?
-      error: Select yes if you have accounts with other banks
+        hint: Do not include savings accounts
+        field_set_header: Do you have current accounts you cannot access online?
+        error: Select yes if you have current accounts you cannot access online
     banks:
       index:
         title: Select your bank

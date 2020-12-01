@@ -102,11 +102,11 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
     it 'should display an error' do
       expect(response.body).to match('govuk-error-message')
-      expect(response.body).to include('Select yes if you have accounts with other banks')
+      expect(response.body).to include('Select yes if you have current accounts you cannot access online')
     end
 
     context 'with Yes submitted' do
-      let(:params) { { has_online_accounts: 'true' } }
+      let(:params) { { has_offline_accounts: 'false' } }
 
       it 'redirects to select another bank' do
         expect(response).to redirect_to(citizens_banks_path)
@@ -118,7 +118,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
     end
 
     context 'with No submitted' do
-      let(:params) { { has_online_accounts: 'false' } }
+      let(:params) { { has_offline_accounts: 'true' } }
 
       it 'redirects to contact provider path' do
         expect(response).to redirect_to(citizens_contact_provider_path)
