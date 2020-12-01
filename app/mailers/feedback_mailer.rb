@@ -19,14 +19,18 @@ class FeedbackMailer < BaseApplyMailer
       user_data: user_data(feedback),
       user_type: feedback.source,
       done_all_needed: yes_or_no(feedback),
-      satisfaction: safe_nil(feedback.satisfaction),
-      difficulty: safe_nil(feedback.difficulty),
+      satisfaction: safe_nil(get_translation('satisfaction', feedback.satisfaction)),
+      difficulty: safe_nil(get_translation('difficulty', feedback.difficulty)),
       improvement_suggestion: safe_nil(feedback.improvement_suggestion),
       originating_page: safe_nil(feedback.originating_page),
       provider_email: provider_email_phrase(feedback),
       application_reference: @legal_aid_application&.application_ref || '',
       application_status: application_status || ''
     )
+  end
+
+  def get_translation(type, key)
+    t "model_enum_translations.feedback.#{type}.#{key}"
   end
 
   def application_status
