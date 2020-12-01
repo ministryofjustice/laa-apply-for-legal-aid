@@ -367,9 +367,7 @@ en:
 
     legal_aid_applications:
       index:
-        basic_details_para: Tell us the basic case details and we’ll check if your client is entitled to legal aid.
         heading_1: Your applications
-        make_new_application: Make a new application
         current_applications: Current applications
         search_applications: Search applications
       search:
