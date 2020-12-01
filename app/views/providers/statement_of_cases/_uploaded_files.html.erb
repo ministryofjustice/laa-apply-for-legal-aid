@@ -22,12 +22,13 @@ success_message = success_message
       <td class="govuk-table__cell no-wrap"><%= number_to_human_size(attachment.document.blob.byte_size) %></td>
       <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
       <td class="govuk-table__cell">
-        <%= button_to(
-              t('.delete'),
-              providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+        <%= button_to_with_hidden_suffix(
+              text: t('.delete'),
+              path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
               method: :delete,
-              class: 'button-as-link',
-              params: { attachment_id: attachment.id }
+              klass: 'button-as-link',
+              params: { attachment_id: attachment.id },
+              suffix: attachment.document.filename
             ) %>
       </td>
     </tr>
