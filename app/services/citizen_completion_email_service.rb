@@ -16,9 +16,9 @@ class CitizenCompletionEmailService
 
   def mailer_args
     [
-        application.application_ref,
-        applicant.email_address,
-        applicant.full_name,
+      application.application_ref,
+      applicant.email_address,
+      applicant.full_name
     ]
   end
 
