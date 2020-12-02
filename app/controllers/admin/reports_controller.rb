@@ -20,6 +20,7 @@ module Admin
     end
 
     def download_submitted
+      expires_now
       respond_to do |format|
         format.csv do
           data = Reports::MIS::ApplicationDetailsReport.new.run
@@ -29,9 +30,11 @@ module Admin
     end
 
     def download_non_passported
+      expires_now
+      data = Reports::MIS::NonPassportedApplicationsReport.new.run
+      Raven.capture_message 'Downloading non passported'
       respond_to do |format|
         format.csv do
-          data = Reports::MIS::NonPassportedApplicationsReport.new.run
           send_data data, filename: "non_passported_#{timestamp}.csv", content_type: 'text/csv'
         end
       end
