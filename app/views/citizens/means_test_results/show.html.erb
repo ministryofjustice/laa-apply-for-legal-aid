@@ -25,5 +25,5 @@
 <% end %>
 
 <div class="govuk-inset-text">
-  <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.feedback_link_html', url: new_feedback_path) %></p>
+  <p class="govuk-body govuk-!-padding-bottom-2"><%= link_to_accessible t('.feedback_prefix'), new_feedback_path %><%= t('.feedback_suffix') %></p>
 </div>

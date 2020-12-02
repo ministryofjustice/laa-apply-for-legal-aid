@@ -2,9 +2,9 @@ module ApplicationHelper
   def home_link
     link_url = '#'
     link_url = providers_legal_aid_applications_url if request.path_info.include?('providers')
-    link_to(t('layouts.application.header.title'),
-            link_url,
-            class: 'govuk-header__link govuk-header__link--service-name')
+    link_to_accessible(t('layouts.application.header.title'),
+                       link_url,
+                       class: 'govuk-header__link govuk-header__link--service-name')
   end
 
   def html_title
@@ -29,7 +29,7 @@ module ApplicationHelper
   def back_link(text: t('generic.back'), path: back_path, method: nil)
     return unless path
 
-    link_to text, path, class: 'govuk-back-link', id: 'back', method: method
+    link_to_accessible text, path, class: 'govuk-back-link', id: 'back', method: method
   end
 
   def current_journey
@@ -59,7 +59,7 @@ module ApplicationHelper
   def admin_header_link
     return unless admin_user_signed_in?
 
-    button = button_to(
+    button = button_to_accessible(
       t('layouts.logout.admin'),
       destroy_admin_user_session_path,
       method: :delete,

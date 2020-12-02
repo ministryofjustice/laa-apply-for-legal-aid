@@ -1,8 +1,8 @@
 <%
-  transaction_link = link_to_with_hidden_suffix(
-    path: providers_legal_aid_application_incoming_transactions_path(transaction_type: name),
-    klass: 'govuk-body transaction-type-link',
-    text: link_text,
+  transaction_link = link_to_accessible(
+    link_text,
+    providers_legal_aid_application_incoming_transactions_path(transaction_type: name),
+    class: 'govuk-body transaction-type-link',
     suffix: "for #{t "transaction_types.names.providers.#{name}"}"
   )
   form_group_error_class = error.present? ? 'govuk-form-group--error' : ''

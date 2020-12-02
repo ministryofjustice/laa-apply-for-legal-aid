@@ -6,38 +6,32 @@
         <h2 class="govuk-visually-hidden"><%= t('layouts.application.footer.support') %></h2>
         <ul class="govuk-footer__inline-list">
           <li class="govuk-footer__inline-list-item">
-            <%= link_to t('layouts.application.footer.contact'), contact_path, class: 'govuk-footer__link' %>
+            <%= link_to_accessible t('layouts.application.footer.contact'), contact_path, class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <%= link_to t('layouts.application.footer.feedback'), new_feedback_path, class: 'govuk-footer__link' %>
+            <%= link_to_accessible t('layouts.application.footer.feedback'), new_feedback_path, class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <a class="govuk-footer__link" href="https://www.gov.uk/help/cookies">
-              <%= t('layouts.application.footer.cookies') %>
-            </a>
+            <%= link_to_accessible t('layouts.application.footer.cookies'), "https://www.gov.uk/help/cookies", class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <%= link_to t('layouts.application.footer.privacy_policy'), privacy_policy_index_path, class: 'govuk-footer__link' %>
+            <%= link_to_accessible t('layouts.application.footer.privacy_policy'), privacy_policy_index_path, class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <%= link_to t('layouts.application.footer.accessibility_statement'), accessibility_statement_index_path, class: 'govuk-footer__link' %>
+            <%= link_to_accessible t('layouts.application.footer.accessibility_statement'), accessibility_statement_index_path, class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <a class="govuk-footer__link" href="https://www.gov.uk/government/publications/laa-online-portal-help-and-information">
               <!-- TO DO differs between provider/citizen -->
-              <%= t('layouts.application.footer.terms') %>
-            </a>
+            <%= link_to_accessible  t('layouts.application.footer.terms'), "https://www.gov.uk/government/publications/laa-online-portal-help-and-information", class: 'govuk-footer__link' %>
           </li>
 
           <li class="govuk-footer__inline-list-item">
-            <a class="govuk-footer__link" href="https://mojdigital.blog.gov.uk/">
-              <%= t('layouts.application.footer.digital_services_html') %>
-            </a>
+            <%= link_to_accessible t('layouts.application.footer.digital_services_html'), "https://mojdigital.blog.gov.uk/", class: 'govuk-footer__link' %>
           </li>
         </ul>
 
@@ -46,11 +40,12 @@
         </svg>
         <span class="govuk-footer__licence-description">
           <%= t('layouts.application.footer.span_text_1') %>
-          <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license"><%= t('layouts.application.footer.open_gov_link_text') %></a>,  <%= t('layouts.application.footer.span_text_2') %>
+          <%= link_to_accessible t('layouts.application.footer.open_gov_link_text'), "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", class: 'govuk-footer__link', rel: 'license' %>
+          <%= t('layouts.application.footer.span_text_2') %>
         </span>
       </div>
       <div class="govuk-footer__meta-item">
-        <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© <%= t('layouts.application.footer.copyright') %></a>
+        <%= link_to_accessible "© #{t('layouts.application.footer.copyright')}", "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/", class: 'govuk-footer__link govuk-footer__copyright-logo' %>
       </div>
     </div>
   </div>

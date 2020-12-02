@@ -3,4 +3,7 @@
   <strong><%= t 'citizens.legal_aid_applications.index.name' %></strong> <%= @applicant.full_name %><br>
   <strong><%= t 'shared.forms.date_input_fields.date_of_birth_label' %>:</strong> <%= @applicant.date_of_birth %><br>
   <strong> <%= t 'shared.forms.applicant_form.nino_label' %>:</strong> <%= @applicant.national_insurance_number %></p>
-<p id='change-client-link'><%= t '.change_client_details_html' %></p>
+<p id='change-client-link'>
+  <%= link_to_accessible t('.change_client_details_prefix'), "applicant_details", class: 'black_text_on_focus' %>
+  <%= t('.change_client_details_suffix') %>
+</p>
