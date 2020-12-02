@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', event => {
   const clearAllElems = document.querySelector('.select-clear-all');
-  const selectTable = clearAllElems.closest('table');
 
   function resetSelectClearLink(table) {
     const link = table.querySelector('.select-clear-all');
@@ -27,8 +26,8 @@ document.addEventListener('DOMContentLoaded', event => {
   }
 
   if (clearAllElems) {
+    const table = clearAllElems.closest('table');
     clearAllElems.addEventListener("click", function() {
-      const table = selectTable;
       if (this.classList.contains('clear-all')) {
         let checkboxes = document.querySelectorAll('input:checked');
         checkboxes.forEach(function(box) {
@@ -56,7 +55,6 @@ document.addEventListener('DOMContentLoaded', event => {
       }
     });
 
-    const table = selectTable;
     const input = table.querySelector("input");
     input.addEventListener("click", function() {
       resetSelectClearLink(table);
