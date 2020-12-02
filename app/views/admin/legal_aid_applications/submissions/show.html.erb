@@ -9,11 +9,11 @@
   </dl>
   <h2 class="govuk-heading-m">Reports</h2>
   <dl class="govuk-body kvp">
-    <% if @legal_aid_application.means_report %>
+    <% if @legal_aid_application&.means_report&.document.present? %>
       <dt>Means report</dt>
       <dd><%= link_to('Download means report', download_means_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %></dd>
     <% end %>
-    <% if @legal_aid_application.merits_report %>
+    <% if @legal_aid_application&.merits_report&.document.present? %>
       <dt>Merits report</dt>
       <dd><%= link_to('Download merits report', download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
     <% end %>
