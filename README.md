@@ -76,6 +76,15 @@ This can be a bit tricky, so follow these steps:
 You should now check by looking at the file either in your editor or on the command line to ensure the
 file you've just added is in fact encrypted.
 
+### Pre-commit hooks 
+
+The pre-commit gem allows you to add git hooks which run linting automatically when making a commit.
+
+Checks are configured for the whole repo in `/config/pre-commit.yml`. 
+
+To install the pre-commit hooks locally, run the command `pre-commit install`. If you don't want the hooks then just don't run this command. 
+
+To bypass the checks once they're installed, add the -n flag when committing: `git commit -n` 
 
 ### Malware check of uploaded files
 

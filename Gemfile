@@ -119,6 +119,7 @@ group :development do
   gem 'guard-rubocop'
   gem 'listen', '>= 3.0.5', '< 3.4'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'pre-commit', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

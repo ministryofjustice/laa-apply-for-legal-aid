@@ -393,6 +393,9 @@ GEM
     parser (2.7.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
+    pluginator (1.5.0)
+    pre-commit (0.39.0)
+      pluginator (~> 1.5)
     prometheus_exporter (0.4.17)
     protobuf-cucumber (3.10.8)
       activesupport (>= 3.2)
@@ -676,6 +679,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 0.1, >= 0.1.2)
   pagy
   pg
+  pre-commit
   prometheus_exporter
   pry-byebug
   puma (~> 5.1)

@@ -1,0 +1,5 @@
+---
+:checks_add:
+- :rubocop
+:warnings_add:
+- :jshint
