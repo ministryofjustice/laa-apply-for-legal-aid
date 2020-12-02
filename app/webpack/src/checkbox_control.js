@@ -32,7 +32,7 @@ $(function() {
       if (this.checked) {
         control.prop("checked", true ).val(true)
       } else {
-        control.prop("checked", false ).val(false)
+        control.prop("checked", false ).val('')
       }
 
       checkboxes.each(function(index) {
