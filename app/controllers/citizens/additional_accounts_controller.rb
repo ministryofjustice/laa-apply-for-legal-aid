@@ -13,7 +13,7 @@ module Citizens
       when 'false'
         go_forward
       else
-        error
+        error 'index'
         render :index
       end
     end
@@ -23,15 +23,15 @@ module Citizens
     end
 
     def update
-      case params[:has_online_accounts]
-      when 'true'
+      case params[:has_offline_accounts]
+      when 'false'
         online_accounts_update
         redirect_to citizens_banks_path
-      when 'false'
+      when 'true'
         offline_accounts_update
         go_forward
       else
-        error
+        error 'new'
         render :new
       end
     end
@@ -47,8 +47,8 @@ module Citizens
       legal_aid_application.use_ccms!(:offline_accounts) unless legal_aid_application.use_ccms?
     end
 
-    def error
-      @error = I18n.t('citizens.additional_accounts.error')
+    def error(type)
+      @error = I18n.t("citizens.additional_accounts.#{type}.error")
     end
   end
 end

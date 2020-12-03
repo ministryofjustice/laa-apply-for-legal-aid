@@ -44,13 +44,13 @@ Feature: Citizen journey
     Then I choose "Yes"
     Then I choose "Yes"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Do you have online access'
-    Then I choose "No"
+    Then I should be on a page showing 'Do you have current accounts you cannot access online?'
+    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Contact your solicitor'
     Then I click link "Back"
-    Then I should be on a page showing 'Do you have online access'
-    Then I choose "Yes"
+    Then I should be on a page showing 'Do you have current accounts you cannot access online?'
+    Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Select your bank"
     Then I click link "Back"

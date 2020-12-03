@@ -25,9 +25,11 @@ cy:
     additional_accounts:
       index:
         field_set_header: "?sknab rehto htiw stnuocca evah uoy oD"
+        error: sknab rehto htiw stnuocca evah uoy fi sey tceleS
       new:
-        field_set_header: "?sknab rehto htiw stnuocca ruoy ot ssecca enilno evah uoy oD"
-      error: sknab rehto htiw stnuocca evah uoy fi sey tceleS
+        hint: stnuocca sgnivas edulcni ton oD
+        field_set_header: ?enilno ssecca tonnac uoy stnuocca tnerruc evah uoy oD
+        error: enilno ssecca tonnac uoy stnuocca tnerruc evah fi sey tceleS
     banks:
       index:
         title: knab ruoy tceleS

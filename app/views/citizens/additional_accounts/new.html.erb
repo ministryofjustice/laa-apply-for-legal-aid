@@ -3,13 +3,14 @@
 
     <%= govuk_form_group(
           show_error_if: @error,
-          input: :has_online_accounts
+          input: :has_offline_accounts
         ) do %>
 
-      <%= form.govuk_collection_radio_buttons :has_online_accounts,
+      <%= form.govuk_collection_radio_buttons :has_offline_accounts,
                                               form.yes_no_radio_button_array,
                                               :value,
                                               :label,
+                                              hint: t('.hint'),
                                               error: @error,
                                               title: content_for(:page_title) %>
     <% end %>
