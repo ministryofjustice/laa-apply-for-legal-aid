@@ -11,9 +11,11 @@
 
   <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
     <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">
-            <%= t('.disclosure.heading') %>
-          </span>
+      <span class="govuk-details__summary-text"
+        title="<%= t('.disclosure.heading') %>"
+        aria-label="<%= t('.disclosure.heading') %>">
+        <%= t('.disclosure.heading') %>
+      </span>
     </summary>
 
     <div class="govuk-details__text">
@@ -36,10 +38,10 @@
         <%= @applicant.email %>
       </dt>
       <dd class="govuk-summary-list__actions">
-        <%= link_to_with_hidden_suffix(
-                text: t('generic.change'),
-                path: providers_legal_aid_application_email_address_path(anchor: :email),
-                klass: 'govuk-link change-link',
+        <%= link_to_accessible(
+                t('generic.change'),
+                providers_legal_aid_application_email_address_path(anchor: :email),
+                class: 'govuk-link change-link',
                 suffix: 'email address'
             ) %>
       </dd>

@@ -8,7 +8,9 @@
 
   <% if I18n.exists?("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
     <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-      <summary class="govuk-details__summary">
+      <summary class="govuk-details__summary"
+        title="<%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>"
+        aria-label="<%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>">
         <%= t("transaction_types.#{@transaction_type.name}.details_summary_heading") %>
       </summary>
 

@@ -8,7 +8,7 @@
       <div class="govuk-error-summary__body">
         <ul class="govuk-list govuk-error-summary__list">
           <li>
-            <%= link_to @error.values.first, "##{@error.keys.first}" %>
+            <%= link_to_accessible @error.values.first, "##{@error.keys.first}" %>
           </li>
         </ul>
       </div>

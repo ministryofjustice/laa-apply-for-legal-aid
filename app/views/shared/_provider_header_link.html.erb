@@ -1,9 +1,9 @@
 <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
   <li class="govuk-header__navigation-item">
-    <%= link_to(current_provider.username, providers_provider_path, class: 'govuk-header__link') %>
+    <%= link_to_accessible(current_provider.username, providers_provider_path, class: 'govuk-header__link') %>
   </li>
   <li class="govuk-header__navigation-item">
-    <%= button = button_to(
+    <%= button = button_to_accessible(
           t('layouts.logout.provider'),
           destroy_provider_session_path,
           method: :delete,

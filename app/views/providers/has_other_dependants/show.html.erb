@@ -7,7 +7,7 @@
       <div class="govuk-error-summary__body">
         <ul class="govuk-list govuk-error-summary__list">
           <li>
-            <%= link_to @error.values.first, "##{@error.keys.first}" %>
+            <%= link_to_accessible @error.values.first, "##{@error.keys.first}" %>
           </li>
         </ul>
       </div>
@@ -21,19 +21,19 @@
         <dl class="govuk-summary-list__row" id="dependant_<%= dependant.number %>">
           <dt class="govuk-summary-list__value"><%= dependant.name %></dt>
           <dt class="govuk-summary-list__actions">
-            <%= link_to_with_hidden_suffix(
-                  path: providers_legal_aid_application_dependant_path(@legal_aid_application, dependant),
-                  klass: 'govuk-link change-link',
-                  text: t('generic.change'),
+            <%= link_to_accessible(
+                  t('generic.change'),
+                  providers_legal_aid_application_dependant_path(@legal_aid_application, dependant),
+                  class: 'govuk-link change-link',
                   suffix: dependant.name
                 ) %>
           </dt>
           <dt class="govuk-summary-list__actions">
             <dd class="govuk-summary-list__actions">
-              <%= link_to_with_hidden_suffix(
-                      path: providers_legal_aid_application_remove_dependant_path(@legal_aid_application, dependant),
-                      klass: 'govuk-link change-link',
-                      text:  t('.remove'),
+              <%= link_to_accessible(
+                      t('.remove'),
+                      providers_legal_aid_application_remove_dependant_path(@legal_aid_application, dependant),
+                      class: 'govuk-link change-link',
                       suffix: dependant.name
                   ) %>
             </dd>

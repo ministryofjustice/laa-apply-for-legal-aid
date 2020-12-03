@@ -18,4 +18,4 @@
   <% end %>
 <% end %>
 
-<%= link_to(t('.google_login'), omniauth_login_start_path(:google_oauth2), method: :post) %>
+<%= link_to_accessible(t('.google_login'), omniauth_login_start_path(:google_oauth2), method: :post) %>

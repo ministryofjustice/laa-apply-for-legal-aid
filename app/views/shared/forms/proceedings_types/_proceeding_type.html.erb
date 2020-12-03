@@ -7,10 +7,10 @@
   </div>
   <div class="govuk-grid-column-one-third control-column">
     <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4">
-      <%= link_to_with_hidden_suffix(
-            text: t('generic.change'),
-            path: providers_legal_aid_application_proceedings_types_path(legal_aid_application_id: @legal_aid_application),
-            klass: 'govuk-link change-link',
+      <%= link_to_accessible(
+            t('generic.change'),
+            providers_legal_aid_application_proceedings_types_path(legal_aid_application_id: @legal_aid_application),
+            class: 'govuk-link change-link',
             suffix: 'proceeding'
           ) %>
     </p>

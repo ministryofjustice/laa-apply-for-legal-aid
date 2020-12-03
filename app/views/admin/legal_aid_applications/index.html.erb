@@ -15,7 +15,7 @@
     <div class="govuk-error-summary__body govuk-inset-text">
       <%= t('.warning.delete_consequence') %>
     </div>
-    <%= button_to(
+    <%= button_to_accessible(
           t('.confirm_delete'),
           nil,
           method: :delete,
@@ -25,14 +25,14 @@
         ) if destroy_enabled? %>
   </div>
 
-  <%= button_to(
+  <%= button_to_accessible(
         t('generic.create_test_applications'),
         create_test_applications_admin_legal_aid_applications_path,
         method: :post,
         class: 'govuk-button'
       ) if create_test_applications_enabled? %>
 
-  <%= button_to(
+  <%= button_to_accessible(
         t('.delete_all'),
         destroy_all_admin_legal_aid_applications_path,
         method: :delete,

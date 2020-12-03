@@ -24,6 +24,6 @@
           continue_button_text: t('forms.address_lookup.submit_button')
         ) %>
 
-    <p><%= link_to t('forms.address_lookup.address_manual_link'), providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
+    <p><%= link_to_accessible t('forms.address_lookup.address_manual_link'), providers_legal_aid_application_address_path, class: 'govuk-link' %></p>
   <% end %>
 <% end %>

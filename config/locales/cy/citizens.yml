@@ -125,7 +125,8 @@ cy:
         reference_number: rebmun ecnerefeR
         solicitors-actions: ".noitacilppa ruoy etelpmoc meht pleh ot dedivorp uoy noitamrofni eht esu lliw roticilos ruoY"
         what-happens-next: ".esac ruoy fo sliated eht dna noitautis laicnanif ruoy dekcehc ev'ew ecno dia lagel rof yfilauq uoy fi mrifnoc ll'eW"
-        feedback_link_html: .ecivres siht evorpmi su pleh ot >a/<kcabdeef eviG>"knil_kuvog"=ssalc"}lru{%"=ferh a<
+        feedback_prefix: 'kcabdeef eviG'
+        feedback_suffix: ".ecivres siht evorpmi su pleh ot "
     resend_link_requests:
       show:
         page_title: deripxe sah knil sihT

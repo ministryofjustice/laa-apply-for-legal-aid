@@ -13,7 +13,7 @@
   <% unless read_only %>
     <dd class="govuk-summary-list__actions">
       <% unless read_only %>
-        <%= link_to_with_hidden_suffix(path: url, klass: 'govuk-link change-link', text: t('generic.change'), suffix: question) %>
+        <%= link_to_accessible(t('generic.change'), url, class: 'govuk-link change-link', suffix: question) %>
       <% end %>
     </dd>
   <% end %>

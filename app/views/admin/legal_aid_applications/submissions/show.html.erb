@@ -11,11 +11,11 @@
   <dl class="govuk-body kvp">
     <% if @legal_aid_application&.means_report&.document.present? %>
       <dt>Means report</dt>
-      <dd><%= link_to('Download means report', download_means_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %></dd>
+      <dd><%= link_to_accessible('Download means report', download_means_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %></dd>
     <% end %>
     <% if @legal_aid_application&.merits_report&.document.present? %>
       <dt>Merits report</dt>
-      <dd><%= link_to('Download merits report', download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
+      <dd><%= link_to_accessible('Download merits report', download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
     <% end %>
   </dl>
   <% if @legal_aid_application.cfe_submissions.present? %>
@@ -30,7 +30,11 @@
         <dd><%= cfe_submission.error_message ||= 'N/A' %></dd>
       </dl>
       <details>
-        <summary class="govuk-heading-m govuk-details__summary">CFE result</summary>
+        <summary class="govuk-heading-m govuk-details__summary"
+          title="CFE result"
+          aria-label="CFE result">
+          CFE result
+        </summary>
         <section>
           <%= format_hash(JSON.parse(cfe_submission.result.result)) %>
         </section>
@@ -74,11 +78,11 @@
             <dt class="govuk-!-margin-bottom-5"></dt>
             <dd>
               <% if submission_history.request.present? %>
-                <%= link_to 'Download XML Request', download_xml_request_admin_legal_aid_applications_submission_path(submission_history) %>
+                <%= link_to_accessible 'Download XML Request', download_xml_request_admin_legal_aid_applications_submission_path(submission_history) %>
               <% end %>
               <br>
               <% if submission_history.response.present? %>
-                <%= link_to 'Download XML Response', download_xml_response_admin_legal_aid_applications_submission_path(submission_history) %>
+                <%= link_to_accessible 'Download XML Response', download_xml_response_admin_legal_aid_applications_submission_path(submission_history) %>
               <% end %>
             </dd>
         <% end %>

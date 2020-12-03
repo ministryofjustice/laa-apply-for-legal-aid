@@ -193,7 +193,8 @@ en:
       how_we_checked: &how_we_checked
         how_we_checked: How we checked your client's benefits status
         details_used: "We used the following details to check your client's benefits status with the DWP:"
-        change_client_details_html: <a class="black_text_on_focus" href="applicant_details">Change your client's details</a> if you entered them incorrectly.
+        change_client_details_prefix: "Change your client's details"
+        change_client_details_suffix: " if you entered them incorrectly."
       applicant_details:
         <<: *how_we_checked
       use_ccms:
@@ -325,7 +326,8 @@ en:
         keep_file: Keep it on file.
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
         decision_in_ccms_html: We'll let you know our decision in <abbr title='Client and Cost Management System'>CCMS</abbr>.
-        feedback_link_html: '<a href="%{url}" class="govuk_link">Give feedback</a> to help us improve this service.'
+        feedback_prefix: 'Give feedback'
+        feedback_suffix: ' to help us improve this service.'
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
     identify_types_of_incomes:

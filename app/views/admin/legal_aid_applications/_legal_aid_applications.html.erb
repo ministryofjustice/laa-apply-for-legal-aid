@@ -23,7 +23,7 @@
             <td class="govuk-table__cell"><%= mail_to application.provider.email, application.provider.username %></td>
             <td class="govuk-table__cell">
               <%= t('.discarded', date: application.discarded_at.strftime('%d-%m-%Y')) if application.discarded? %>
-              <%= button_to(
+              <%= button_to_accessible(
                 t('.delete'),
                 admin_legal_aid_application_path(application.id),
                 method: :delete,
@@ -36,7 +36,7 @@
               ) if destroy_enabled? %>
              </td>
             <td class="govuk-table__cell">
-              <%= link_to t('.data_view'), admin_legal_aid_applications_submission_path(application), class: 'govuk-button govuk-!-margin-bottom-0' %>
+              <%= link_to_accessible t('.data_view'), admin_legal_aid_applications_submission_path(application), class: 'govuk-button govuk-!-margin-bottom-0' %>
             </td>
           </tr>
         <% end %>

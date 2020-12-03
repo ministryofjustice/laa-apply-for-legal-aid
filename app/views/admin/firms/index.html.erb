@@ -26,7 +26,7 @@
                 <li><%= permission.description %></li>
               <% end %>
             </td>
-            <td class="govuk-table__cell"><%= link_to t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
+            <td class="govuk-table__cell"><%= link_to_accessible t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
           </tr>
         <% end %>
       </tbody>

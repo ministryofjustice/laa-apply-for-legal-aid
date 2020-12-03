@@ -16,7 +16,7 @@
 
     <%= list_from_translation_path '.start.index.use_ccms_list' %>
 
-    <%= link_to start_button_label(:start_now),
+    <%= link_to_accessible start_button_label(:start_now),
                 providers_legal_aid_applications_path,
                 role: 'button',
                 class: 'govuk-button govuk-button--start',
@@ -32,10 +32,10 @@
   <h3 class="govuk-heading-m"><%= t('.related_content_list.title') %></h3>
   <ul class="govuk-list">
     <li>
-      <%= link_to t('.related_content_list.item_1'), 'https://www.gov.uk/legal-aid', class: 'govuk-link govuk-body govuk-!-font-size-16' %>
+      <%= link_to_accessible t('.related_content_list.item_1'), 'https://www.gov.uk/legal-aid', class: 'govuk-link govuk-body govuk-!-font-size-16' %>
     </li>
     <li>
-      <%= link_to t('.related_content_list.item_2'), 'https://www.gov.uk/check-legal-aid', class: 'govuk-link govuk-body govuk-!-font-size-16' %>
+      <%= link_to_accessible t('.related_content_list.item_2'), 'https://www.gov.uk/check-legal-aid', class: 'govuk-link govuk-body govuk-!-font-size-16' %>
     </li>
   </ul>
   </div>
