@@ -9,14 +9,14 @@
 # we default to 'integration' group.
 #
 development:
-  citizen_start_application: e747df7d-4842-4bca-88a6-4ad3ebd89994
+  citizen_start_application: e4c8be11-3c40-440d-91fc-9c35b0507de2
   feedback_notification: 4d391bf7-4e5b-4f49-b586-b6bb8ad06a30
   submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
   reminder_to_submit_an_application: c4ac858d-68ae-437b-9353-06e632cd88f2
   client_completed_means: d04e64ae-0a66-4577-83d6-6ce9f7fa27b4
-  reminder_to_submit_financial_information_client: e8052551-2afa-4b11-b3e3-578248d9b582
+  reminder_to_submit_financial_information_client: de564311-231d-4081-98d5-95770bff94a3
   reminder_to_submit_financial_information_provider: ec4f423d-498a-4828-ab66-c2453cb42ed3
-  new_link_to_client: 5708ec04-c789-4f7e-8a15-ad7dd3f4f336
+  new_link_to_client: 325849a2-4c38-4579-a517-4d2a1e465ba0
 
 production:
   citizen_start_application: 7e5fb1a7-4b78-4a95-917e-c0bcb78a5fcc
