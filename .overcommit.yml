@@ -1,0 +1,24 @@
+CommitMsg:
+  ALL:
+    requires_files: false
+    quiet: true
+
+  CapitalizedSubject:
+    enabled: false
+
+  SingleLineSubject:
+    enabled: false
+
+  TextWidth:
+    enabled: false
+
+  TrailingPeriod:
+    enabled: false
+
+PreCommit:
+  RuboCop:
+    enabled: true
+    command: ['bundle', 'exec', 'rubocop'] # Invoke within Bundler context
+  ErbLint:
+    enabled: true
+    command: ['erblint']

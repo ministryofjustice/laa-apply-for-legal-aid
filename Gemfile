@@ -101,6 +101,7 @@ group :development, :test do
   gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'
   gem 'nokogiri'
+  gem 'overcommit'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
