@@ -19,7 +19,7 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
     end
 
     it 'sets the correct template' do
-      expect(mail.govuk_notify_template).to eq('de564311-231d-4081-98d5-95770bff94a3')
+      expect(mail.govuk_notify_template).to eq('ea0b7443-7200-4abf-8ba8-de0462f9a7b5')
     end
 
     it 'has the right personalisation' do

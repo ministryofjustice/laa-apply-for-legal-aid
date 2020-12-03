@@ -62,10 +62,7 @@ module LaaApplyForLegalAid
 
     config.x.kubernetes_deployment = ENV['KUBERNETES_DEPLOYMENT'] == 'true'
 
-    config.govuk_notify_templates = config_for(
-      :govuk_notify_templates,
-      env: ENV.fetch('GOVUK_NOTIFY_ENV', 'development')
-    ).symbolize_keys
+    config.govuk_notify_templates = YAML.load_file(Rails.root.join('config/govuk_notify_templates.yml')).symbolize_keys
 
     config.x.support_email_address = 'apply-for-legal-aid@digital.justice.gov.uk'.freeze
     config.x.simulated_email_address = 'simulate-delivered@notifications.service.gov.uk'.freeze
