@@ -22,7 +22,7 @@ module Admin
         @firm_name = service.firm_name
         render :check
       else
-        @provider.errors[:username] << service.message
+        @provider.errors[:username].add service.message
         render :new
       end
     end
@@ -33,7 +33,7 @@ module Admin
         flash.notice = "User #{@provider.username} created"
         redirect_to new_admin_provider_path
       else
-        @provider.errors[:username] << service.message
+        @provider.errors[:username].add service.message
         render :new
       end
     end
