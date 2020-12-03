@@ -6,6 +6,7 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
   let(:provider) { create :provider, email: simulated_email_address }
   let(:application) { create :application, :with_applicant, provider: provider }
   let(:application_url) { 'http://test.com' }
+  let(:url_expiry_date) { (Date.today + 7.days).strftime('%-d %B %Y') }
 
   subject { described_class.new(application) }
 
@@ -15,13 +16,14 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
     end
 
     context 'sending the email' do
-      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, simulated_email_address, application_url, application.applicant.full_name) }
+      let(:mail) { SubmitCitizenFinancialReminderMailer.notify_citizen(application.id, simulated_email_address, application_url, application.applicant.full_name, url_expiry_date) }
 
       it 'sends an email with the right parameters' do
         expect(mail.govuk_notify_personalisation).to eq(
           application_url: application_url,
           ref_number: application.application_ref,
-          client_name: application.applicant.full_name
+          client_name: application.applicant.full_name,
+          expiry_date: url_expiry_date
         )
       end
     end
