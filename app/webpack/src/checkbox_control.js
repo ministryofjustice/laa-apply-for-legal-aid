@@ -29,6 +29,12 @@ $(function() {
     control.change( function() {
       const controlChecked = this.checked
 
+      if (this.checked) {
+        control.prop("checked", true ).val(true)
+      } else {
+        control.prop("checked", false ).val('')
+      }
+
       checkboxes.each(function(index) {
         const checkbox = $(this)
         if(controlChecked) {
