@@ -476,6 +476,17 @@ Given('The means questions have been answered by the applicant') do
   )
 end
 
+Given('I add the details for a child dependant') do
+  steps %(
+    Then I fill "Name" with "Wednesday Adams"
+    And I enter a date of birth for a 17 year old
+    And I choose "They're a child relative"
+    And I choose option "dependant_in_full_time_education_false"
+    And I choose option "dependant_has_income_false"
+    And I choose option "dependant_has_assets_more_than_threshold_false"
+  )
+end
+
 Given('Bank transactions exist') do
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   bank_account = create :bank_account, bank_provider: bank_provider
