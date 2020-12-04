@@ -15,7 +15,11 @@ class CfePayloadRecorder
     submission.submission_histories.each do |history|
       record_history(history)
     end
+    puts '#'
     puts "# CFE API calls for applicaiton #{@legal_aid_application.application_ref}"
+    puts '# Copy and paste this output in to tmp/api_replay.yml in the CFE repo, and '
+    puts '# replay the API interaction with the rake task rake replay'
+    puts '#'
     puts @recording.to_yaml
   end
 

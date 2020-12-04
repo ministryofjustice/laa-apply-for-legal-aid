@@ -1,6 +1,6 @@
 namespace :cfe do
   desc 'display transactions sent to cfe for an application: rake cfe:display[L-ABC-123]'
-  task :display, [:application_ref] => :environment do |_task, args|
+    task :display, [:application_ref] => :environment do |_task, args|
     if args[:application_ref].nil?
       puts "**** Missing application reference ****"
       puts "Specify application reference as follows: rake cfe:display[L-ABC-123]'"
