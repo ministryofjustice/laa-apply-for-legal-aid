@@ -153,12 +153,7 @@ sudo apt install clamdscan
 Overcommit is a gem which adds git pre-commit hooks to your project. Pre-commit hooks run various
 lint checks before making a commit. Checks are configured on a project-wide basis in .overcommit.yml.
 
-To install the git hooks locally, you need to install the overcommit gem in your root Ruby environment (not your project environment):
-```
-sudo -i
-gem install overcommit
-```
-If you don't want the git hooks installed, just don't run the above commands.
+To install the git hooks locally, run `overcommit --install`. If you don't want the git hooks installed, just don't run this command.
 
 Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n`
 

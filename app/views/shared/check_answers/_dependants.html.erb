@@ -1,12 +1,12 @@
 <div class="govuk-summary-list govuk-!-margin-bottom-9">
-  <div class="govuk-summary-list__row">
-  <%= check_answer_link(
-          name: "dependants",
-          url: providers_legal_aid_application_has_dependants_path,
-          question: t('providers.means_summaries.show.dependants.has_dependants'),
-          answer: yes_no(@legal_aid_application.has_dependants)
-      ) %>
-  </div>
+  <dl class="govuk-summary-list govuk-summary-list--no-border">
+    <%= check_answer_link(
+            name: "dependants",
+            url: providers_legal_aid_application_has_dependants_path,
+            question: t('providers.means_summaries.show.dependants.has_dependants'),
+            answer: yes_no(@legal_aid_application.has_dependants)
+        ) %>
+  </dl>
 </div>
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>

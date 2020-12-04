@@ -6,7 +6,7 @@ Feature: Provider accessibility
     Then I visit the application service
     And the page is accessible
     Then I click link "Start"
-#    And the page is accessible
+    And the page is accessible
     Then I click link "Make a new application"
     And the page is accessible
     Then I should be on the 'providers/declaration' page showing 'Declaration'
@@ -29,6 +29,7 @@ Feature: Provider accessibility
     Then I search for proceeding 'Non-molestation order'
     Then I select a proceeding type and continue
     Then I should be on a page showing 'Have you used delegated functions?'
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -69,7 +70,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I click link 'Back to your applications'
     Then I should be on a page showing 'Your applications'
-#    And the page is accessible
+    And the page is accessible
 
   @javascript @vcr
   Scenario: I complete the non-passported means assessment and it is accessible
@@ -99,6 +100,7 @@ Feature: Provider accessibility
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Enter dependant details'
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Given I add the details for a child dependant
     Then I click 'Save and continue'
@@ -149,6 +151,7 @@ Feature: Provider accessibility
     Then I fill "Estimated value" with "4000"
     And I click "Save and continue"
     Then I should be on a page showing "Are there any payments left on the vehicle?"
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Then I choose option "Vehicle payments remain true"
     Then I fill "Payment remaining" with "2000"
@@ -170,20 +173,23 @@ Feature: Provider accessibility
     Then I fill 'Offline savings accounts' with '3000'
     And I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Then I select "Any valuable items worth £500 or more"
     And I fill 'Valuable items value' with '600'
     Then I click 'Save and continue'
     Then I should be on a page showing 'any legal restrictions'
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-#    And the page is accessible
+    And the page is accessible
     Then I click 'Save and continue'
     Then I should be on the 'capital_income_assessment_result' page showing 'How we calculated your client\'s eligibility'
     And the page is accessible
@@ -210,6 +216,7 @@ Feature: Provider accessibility
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
+#    error - allowed ARIA attributes only (radio buttons)
 #    And the page is accessible
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"

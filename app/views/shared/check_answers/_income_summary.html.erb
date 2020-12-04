@@ -13,7 +13,7 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
     <% transaction_types.each do |transaction_type| %>
-    <div class="govuk-summary-list__row normal-word-break" id="app-check-your-answers_">
+    <div class="govuk-summary-list__row normal-word-break" id="app-check-your-answers__<%= transaction_type.label_name %>">
       <dt class="govuk-summary-list__key">
         <%= transaction_type.label_name %>
       </dt>
