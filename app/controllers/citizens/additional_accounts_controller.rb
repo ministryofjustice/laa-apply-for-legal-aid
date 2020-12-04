@@ -13,7 +13,7 @@ module Citizens
       when 'false'
         go_forward
       else
-        error 'index'
+        error('additional_account', 'index')
         render :index
       end
     end
@@ -31,7 +31,7 @@ module Citizens
         offline_accounts_update
         go_forward
       else
-        error 'new'
+        error('has_online_accounts', 'new')
         render :new
       end
     end
@@ -47,8 +47,8 @@ module Citizens
       legal_aid_application.use_ccms!(:offline_accounts) unless legal_aid_application.use_ccms?
     end
 
-    def error(type)
-      @error = I18n.t("citizens.additional_accounts.#{type}.error")
+    def error(id, action)
+      @error = { "#{id}-error": I18n.t("citizens.additional_accounts.#{action}.error") }
     end
   end
 end

@@ -1,6 +1,8 @@
 <%= page_template page_title: t('.field_set_header'), template: :basic do %>
   <%= form_with(model: @form, url: citizens_additional_account_path(id: :update), method: :patch, local: true) do |form| %>
 
+    <%= render partial: 'error' if @error %>
+
     <%= govuk_form_group(
           show_error_if: @error,
           input: :has_offline_accounts
@@ -11,7 +13,7 @@
                                               :value,
                                               :label,
                                               hint: t('.hint'),
-                                              error: @error,
+                                              error: @error&.values&.first,
                                               title: content_for(:page_title) %>
     <% end %>
 
