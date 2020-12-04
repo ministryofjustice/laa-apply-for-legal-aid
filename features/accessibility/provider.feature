@@ -191,15 +191,19 @@ Feature: Provider accessibility
 
   Scenario: I complete the passported means assessment and it is accessible
 
+  @javascript
   Scenario: I complete the non-passported merits assessment and it is accessible
-    Given I start the merits application
+    Given I have completed the non-passported means assessment and start the merits assessment
     Then I should be on a page showing 'Provide details of the case'
+    And the page is accessible
     Then I click 'Continue'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
+    And the page is accessible
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
+#    And the page is accessible
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
     Then I choose option "Respondent police notified True"
@@ -207,22 +211,25 @@ Feature: Provider accessibility
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
-    And I should not see "Client received legal help"
-    And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Provide a statement of case"
+    And the page is accessible
     Then I fill "Statement" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    And the page is accessible
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "What is the chance of a successful outcome?"
+#    And the page is accessible
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    Then I should be on a page showing "Confirm the following"
+    And the page is accessible
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
+    And the page is accessible
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
+    And the page is accessible
 

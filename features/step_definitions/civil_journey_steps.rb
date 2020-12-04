@@ -203,6 +203,20 @@ Given("I am checking the applicant's means answers") do
   visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
 end
 
+Given('I have completed the non-passported means assessment and start the merits assessment') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :provider_entering_merits,
+    :with_transaction_period,
+    :with_benefits_transactions
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_start_merits_assessment_path(@legal_aid_application))
+end
+
 Given('I start the merits application') do
   @legal_aid_application = create(
     :application,
