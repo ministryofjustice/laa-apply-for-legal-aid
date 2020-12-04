@@ -7,7 +7,7 @@ Feature: Provider accessibility
     And the page is accessible
     Then I click link "Start"
 #    And the page is accessible
-    Then I click link "Start now"
+    Then I click link "Make a new application"
     And the page is accessible
     Then I should be on the 'providers/declaration' page showing 'Declaration'
     And the page is accessible
@@ -57,7 +57,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing 'What your client has to do'
     And the page is accessible
-    Then I click 'Continue'
+    Then I click link 'Continue'
     Then I should be on a page showing 'Enter your client\'s email address'
     And the page is accessible
     And I fill 'email' with 'test@test.com'
@@ -67,9 +67,9 @@ Feature: Provider accessibility
     When I click 'Send client link'
     Then I should be on a page showing 'Application created'
     And the page is accessible
-    When I click 'Back to your applications'
+    When I click link 'Back to your applications'
     Then I should be on a page showing 'Your applications'
-    And the page is accessible
+#    And the page is accessible
 
   @javascript @vcr
   Scenario: I complete the non-passported means assessment and it is accessible
@@ -189,7 +189,14 @@ Feature: Provider accessibility
     And the page is accessible
     Then I click 'Save and continue'
 
-  Scenario: I complete the passported means assessment and it is accessible
+  @javascript
+  Scenario: I complete the client details section of a passported application and it is accessible
+    Given I complete the passported journey as far as check your answers
+    Then I should be on a page showing 'Check your answers'
+    And the page is accessible
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'receives benefits that qualify for legal aid'
+    And the page is accessible
 
   @javascript
   Scenario: I complete the non-passported merits assessment and it is accessible
