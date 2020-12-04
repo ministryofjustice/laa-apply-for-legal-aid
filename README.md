@@ -4,6 +4,39 @@
 
 The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to enter applications for legal aid on-line.
 
+## Table of Contents  
+- [**Architecture Diagram**](#architecture-diagram)  
+- [**Dependencies**](#dependencies)  
+- [**Initial setup**](#initial-setup)  
+  - [Encrypting sensitive data](#encrypting-sensitive-data)  
+    - [Adding a new encrypted file](#adding-a-new-encrypted-file)
+- [**Deployment**](#deployment)  
+  - [UAT Deployments](#uat-deployments)  
+- [**Dev: running locally**](#dev-running-locally)
+  - [LAA Portal Authentication dev setup](#laa-portal-authentication-dev-setup)
+  - [Authentication](#authentication)
+    - [Live](#live)
+    - [Development](#development)
+  - [Post-authentication provider details retrieval](#post-authentication-provider-details-retrieval)
+  - [Signing out of the application](#signing-out-of-the-application)
+  - [How to set up localhost to use the portal](#how-to-set-up-localhost-to-use-the-portal)
+  - [Benefits checker](#benefits-checker)
+  - [Mock TrueLayer Data](#mock-trueLayer-data)
+- [**Admin Portal**](#admin-portal)
+- [**Monitoring & Debugging**](#monitoring--debugging)
+- [**Notifications - GOV.UK Notify**](#notifications---govuk-notify)
+- [**Databases**](#databases)
+  - [Staging and Production](#staging-and-production)
+- [**3rd party integrations**](#3rd-party-integrations)
+  - [True Layer](#true-layer)
+- [**Check Financial Eligibility Service**](#check-financial-eligibility-service)
+- [**Geckoboard Dashboard**](#geckoboard-dashboard)
+  - [1. Create a widget data provider](#1-create-a-widget-data-provider)
+  - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
+  - [3. Add the widget to the Geckoboard dashboard](#3-add-the-widget-to-the-geckoboard-dashboard)
+- [**Troubleshooting**](#troubleshooting)
+
+
 ## Architecture Diagram
 
 View the [architecture diagram](https://structurizr.com/share/55246/diagrams#apply-container) for this project.
@@ -96,17 +129,17 @@ sudo apt install clamdscan
 
 ### Overcommit
 
-Overcommit is a gem which adds git pre-commit hooks to your project. Pre-commit hooks run various 
+Overcommit is a gem which adds git pre-commit hooks to your project. Pre-commit hooks run various
 lint checks before making a commit. Checks are configured on a project-wide basis in .overcommit.yml.
 
 To install the git hooks locally, you need to install the overcommit gem in your root Ruby environment (not your project environment):
 ```
 sudo -i
 gem install overcommit
-``` 
+```
 If you don't want the git hooks installed, just don't run the above commands.
 
-Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n` 
+Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n`
 
 ### Run the application server
 
@@ -317,6 +350,19 @@ Staging and UAT environments.
   - [UAT](https://mojdt.slack.com/messages/GGW4FCZBL)
   - [Staging](https://mojdt.slack.com/messages/GGWMW7M0F)
   - [Production](https://mojdt.slack.com/messages/GGWE9V9BP)
+
+## Notifications - GOV.UK Notify
+
+[GOV.UK Notify](https://www.notifications.service.gov.uk/ "GOV.UK Notify") is a government service that allows teams across government to send emails, text messages and sometimes paper at a considerably lower cost than standard providers.
+
+The LAA Apply service has a single production account which utilises both a testing and a production API Key. Other government teams may have a Development and Production Notify account. The former being limited to whitelisted emails and the latter having the ability to freely send emails to anyone. By having a single production account, we have replicated this same behaviour using restrictions on our Development API Key, whilst removing the need to monitor and duplicate the same Notify email templates into two accounts.
+
+For clarity, here is a table representing the two API keys and the environments for which they are used:
+
+  | API Key Name        | Used For          | Associated Environments                               |
+  | ------------------- | ----------------- | ----------------------------------------------------- |
+  | Development/UAT/STG |      Testing      | Local Development / UAT Branch / UAT Master / Staging |
+  | live                |      Live         | Production                                            |
 
 ## Databases
 
