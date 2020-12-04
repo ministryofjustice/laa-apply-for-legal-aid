@@ -531,6 +531,9 @@ Feature: Civil application journeys
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
+    Then I should be on a page showing "opponent's name"
+    Then I fill "Full Name" with "John Doe"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
@@ -641,6 +644,9 @@ Feature: Civil application journeys
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
     Then I click 'Save and continue'
+    Then I should be on a page showing "opponent's name"
+    Then I fill "Full Name" with "John Doe"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
     Then I choose option "Respondent understands terms of court order True"
     Then I choose option "Respondent warning letter sent True"
@@ -679,10 +685,13 @@ Feature: Civil application journeys
     Then I click link "Back"
     Then I should be on a page showing "Opponent details"
     Then I click link "Back"
+    Then I should be on a page showing "opponent's name"
+    Then I click link 'Back'
     Then I should be on a page showing "Latest incident details"
     Then I click link "Back"
     Then I should be on a page showing "Provide details of the case"
     Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'

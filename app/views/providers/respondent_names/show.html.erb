@@ -1,0 +1,23 @@
+<%= page_template(
+      page_title: t('.h1-heading'),
+      template: :basic,
+      back_link: { path: providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application) }
+    ) do %>
+
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_respondent_name_path(@legal_aid_application),
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <%= govuk_fieldset_header page_title %>
+    <%= form.govuk_text_field :full_name, class: 'govuk-!-width-three-quarters', 'aria-label' => t('.hint_text') %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

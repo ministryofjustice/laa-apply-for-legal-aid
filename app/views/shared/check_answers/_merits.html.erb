@@ -21,6 +21,26 @@
   </dl>
 
 </section>
+
+<div class="govuk-!-padding-bottom-6"></div>
+<section class="print-no-break">
+
+  <%= check_answer_change_link(
+        name: :respondent_name,
+        url: providers_legal_aid_application_respondent_name_path(@legal_aid_application),
+        question: t('.items.respondent_name_title'),
+        read_only: read_only
+      ) %>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_no_link(
+          name: :respondent_name,
+          question: t('.items.respondent_name'),
+          answer: respondent.full_name
+        ) %>
+  </dl>
+</section>
+
 <div class="govuk-!-padding-bottom-6"></div>
 <section class="print-no-break">
 
