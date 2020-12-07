@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
 
 gem 'aasm', '~> 5.1.1'
-gem 'active_model_serializers', '~> 0.10.10'
+gem 'active_model_serializers', '~> 0.10.11'
 gem 'after_commit_everywhere', '~> 0.1', '>= 0.1.5'
 gem 'discard', '~> 1.2'
 gem 'geckoboard-ruby'
