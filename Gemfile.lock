@@ -53,7 +53,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_model_serializers (0.10.10)
+    active_model_serializers (0.10.11)
       actionpack (>= 4.1, < 6.1)
       activemodel (>= 4.1, < 6.1)
       case_transform (>= 0.2)
@@ -625,14 +625,14 @@ GEM
       activesupport
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.1)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   aasm (~> 5.1.1)
-  active_model_serializers (~> 0.10.10)
+  active_model_serializers (~> 0.10.11)
   addressable
   after_commit_everywhere (~> 0.1, >= 0.1.5)
   awesome_print (~> 1.8.0)
