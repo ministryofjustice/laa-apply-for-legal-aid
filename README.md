@@ -54,6 +54,27 @@ From the root of the project execute the following command:
 bin/setup
 ```
 
+### Webpack Error
+
+When localhost is returning ```Webpacker can't find styles.css in /Users/...```
+(and ```rake webpack: compile``` may be returning
+```Compilation failed: ModuleNotFoundError: Error: Can't resolve 'sass-loader' in /User...```)
+
+on *master* run:
+```
+git pull
+bundle install
+rails db:migrate
+rm -rf node_modules
+rm -rf public/packs/
+rm -rf public/packs-test/
+yarn
+rake webpacker:compile
+RAILS_ENV=test rake webpacker:compile
+```
+
+Localhost should now be working.
+
 ### Encrypting sensitive data
 We use git-crypt to encrypt sensitive data so that it can be stored in the same repo as all the other code,
 yet still be inaccessible to unauthorised users.
@@ -96,17 +117,17 @@ sudo apt install clamdscan
 
 ### Overcommit
 
-Overcommit is a gem which adds git pre-commit hooks to your project. Pre-commit hooks run various 
+Overcommit is a gem which adds git pre-commit hooks to your project. Pre-commit hooks run various
 lint checks before making a commit. Checks are configured on a project-wide basis in .overcommit.yml.
 
 To install the git hooks locally, you need to install the overcommit gem in your root Ruby environment (not your project environment):
 ```
 sudo -i
 gem install overcommit
-``` 
+```
 If you don't want the git hooks installed, just don't run the above commands.
 
-Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n` 
+Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n`
 
 ### Run the application server
 

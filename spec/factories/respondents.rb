@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :respondent do
     legal_aid_application
+    full_name { Faker::Name.name }
     understands_terms_of_court_order { 'false' }
     understands_terms_of_court_order_details { Faker::Lorem.paragraph }
     warning_letter_sent { 'false' }

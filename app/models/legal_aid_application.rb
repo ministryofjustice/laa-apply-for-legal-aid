@@ -305,14 +305,6 @@ class LegalAidApplication < ApplicationRecord
       checking_non_passported_means?
   end
 
-  def opponents
-    [Opponent.dummy_opponent]
-  end
-
-  def opponent_other_parties
-    [Opponent.dummy_opponent]
-  end
-
   def reset_delegated_functions
     self.used_delegated_functions = false
     self.used_delegated_functions_on = nil

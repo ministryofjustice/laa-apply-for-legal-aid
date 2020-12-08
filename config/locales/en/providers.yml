@@ -292,6 +292,10 @@ en:
     date_client_told_incidents:
       show:
         h1-heading: Latest incident details
+    respondent_names:
+      show:
+        h1-heading: What is the opponent's name?
+        hint_text: Full name
     declarations:
       show:
         h1-heading: Declaration
@@ -591,6 +595,7 @@ en:
     respondents:
       show:
         h1-heading: Opponent details
+        respondent_name: Opponent's name
         understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
         warning_letter_sent: Has a warning letter been sent to the opponent?
         police_notified: Have the police been notified?
