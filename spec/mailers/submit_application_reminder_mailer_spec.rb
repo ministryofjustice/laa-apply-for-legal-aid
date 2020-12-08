@@ -17,7 +17,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
     end
 
     it 'sets the correct template' do
-      expect(mail.govuk_notify_template).to eq('c4ac858d-68ae-437b-9353-06e632cd88f2')
+      expect(mail.govuk_notify_template).to eq('96e58b6c-83e2-4ae8-be67-028803e98398')
     end
 
     it 'has the right personalisation' do

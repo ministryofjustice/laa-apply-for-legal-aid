@@ -1,29 +1,8 @@
-# We use 2 different GOV.UK Notify services, one for development/integration
-# purposes and another one for production. This is so we can test changes
-# to the templates in a controlled environment, before these changes make their
-# way to production (and real users can see them).
-#
-# As these are 2 separate services in GOV.UK Notify, the template IDs are also
-# different, so we declare them in this file. We use the value of the variable
-# ENV['GOVUK_NOTIFY_ENV'] if defined to know which group to load, otherwise
-# we default to 'integration' group.
-#
-development:
-  citizen_start_application: e4c8be11-3c40-440d-91fc-9c35b0507de2
-  feedback_notification: 4d391bf7-4e5b-4f49-b586-b6bb8ad06a30
-  submission_confirmation: ce2d89ee-1c10-404b-91cc-52068933ba7b
-  reminder_to_submit_an_application: c4ac858d-68ae-437b-9353-06e632cd88f2
-  client_completed_means: d04e64ae-0a66-4577-83d6-6ce9f7fa27b4
-  reminder_to_submit_financial_information_client: de564311-231d-4081-98d5-95770bff94a3
-  reminder_to_submit_financial_information_provider: ec4f423d-498a-4828-ab66-c2453cb42ed3
-  new_link_to_client: 325849a2-4c38-4579-a517-4d2a1e465ba0
-
-production:
-  citizen_start_application: 1ad50d58-ab76-4583-8c31-258d7c8304a4
-  feedback_notification: fd050a04-54d2-4736-bb6c-66431c7d9e41
-  submission_confirmation: 5472b10b-bc11-432a-a18d-9f20de5b2854
-  reminder_to_submit_an_application: 96e58b6c-83e2-4ae8-be67-028803e98398
-  client_completed_means: b343446d-b487-4f8b-9673-2aaf21ea10a1
-  reminder_to_submit_financial_information_client: ea0b7443-7200-4abf-8ba8-de0462f9a7b5
-  reminder_to_submit_financial_information_provider: 9843f667-8b11-41c0-9c11-622fffc686ec
-  new_link_to_client: 1f360188-7046-4eb2-9c03-a8253bf663c1
+citizen_start_application: 1ad50d58-ab76-4583-8c31-258d7c8304a4
+feedback_notification: fd050a04-54d2-4736-bb6c-66431c7d9e41
+submission_confirmation: 5472b10b-bc11-432a-a18d-9f20de5b2854
+reminder_to_submit_an_application: 96e58b6c-83e2-4ae8-be67-028803e98398
+client_completed_means: b343446d-b487-4f8b-9673-2aaf21ea10a1
+reminder_to_submit_financial_information_client: ea0b7443-7200-4abf-8ba8-de0462f9a7b5
+reminder_to_submit_financial_information_provider: 9843f667-8b11-41c0-9c11-622fffc686ec
+new_link_to_client: 1f360188-7046-4eb2-9c03-a8253bf663c1
