@@ -195,7 +195,7 @@ Feature: Provider accessibility
     And the page is accessible
     Then I click 'Save and continue'
 
-  @javascript
+  @javascript @vcr
   Scenario: I complete the client details section of a passported application and it is accessible
     Given I complete the passported journey as far as check your answers
     Then I should be on a page showing 'Check your answers'
