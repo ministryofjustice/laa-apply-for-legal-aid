@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 04 Dec 2020 13:45:12 GMT
+      - Wed, 09 Dec 2020 10:54:16 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -27,7 +27,7 @@ http_interactions:
       Connection:
       - keep-alive
       Tx-Id:
-      - '1607089512037:37'
+      - 1607511256789:789
       Status:
       - success
     body:
@@ -172,5 +172,52 @@ http_interactions:
             }
           } ]
         }
-  recorded_at: Fri, 04 Dec 2020 13:45:12 GMT
+  recorded_at: Wed, 09 Dec 2020 10:54:16 GMT
+- request:
+    method: post
+    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>dc5e224a-badd-4fbe-ab5b-dc8c252a108b</clientReference><nino>CB987654A</nino><surname>USER</surname><dateOfBirth>19990403</dateOfBirth><dateOfAward>20201209</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"check"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '649'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Wed, 09 Dec 2020 10:54:19 GMT
+      Content-Type:
+      - text/xml;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Amzn-Trace-Id:
+      - Root=1-5fd0acdb-569c74163de411b460c4b7ce;
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
+        xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">dc5e224a-badd-4fbe-ab5b-dc8c252a108b</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1607511259795</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+  recorded_at: Wed, 09 Dec 2020 10:54:19 GMT
 recorded_with: VCR 6.0.0
