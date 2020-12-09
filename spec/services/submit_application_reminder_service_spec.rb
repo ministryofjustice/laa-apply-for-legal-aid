@@ -21,8 +21,8 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
           provider_name: provider.name,
           ref_number: application.application_ref,
           client_name: application.applicant.full_name,
-          delegated_functions_date: application.used_delegated_functions_on.strftime('%d %B %Y'),
-          deadline_date: application.substantive_application_deadline_on.strftime('%d %B %Y')
+          delegated_functions_date: application.used_delegated_functions_on.strftime('%-d %B %Y'),
+          deadline_date: application.substantive_application_deadline_on.strftime('%-d %B %Y')
         )
       end
     end
