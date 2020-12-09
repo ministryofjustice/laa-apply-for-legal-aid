@@ -7,7 +7,7 @@ module Citizens
     def continue
       record_acceptance
       legal_aid_application.complete_non_passported_means! unless legal_aid_application.provider_assessing_means?
-      ProviderEmailService.new(legal_aid_application).send_email
+      send_emails
       CitizenCompleteMeansJob.perform_later(legal_aid_application.id)
       current_applicant.forget_me!
       go_forward
@@ -24,6 +24,11 @@ module Citizens
       return if legal_aid_application.declaration_accepted_at?
 
       legal_aid_application.update!(declaration_accepted_at: Time.now)
+    end
+
+    def send_emails
+      ProviderEmailService.new(legal_aid_application).send_email
+      CitizenCompletionEmailService.new(legal_aid_application).send_email
     end
   end
 end
