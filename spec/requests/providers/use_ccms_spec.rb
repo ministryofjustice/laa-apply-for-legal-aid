@@ -15,21 +15,43 @@ RSpec.describe Providers::UseCCMSController, type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as provider
-        subject
       end
 
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
+      context 'when state is not already use_ccms' do
+        before { subject }
+        it 'returns http success' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'shows text to use CCMS' do
+          subject
+          expect(response.body).to include(I18n.t('providers.use_ccms.show.title_html'))
+        end
+
+        it 'sets the state to use_ccms' do
+          subject
+          expect(legal_aid_application.reload.state).to eq 'use_ccms'
+        end
       end
 
-      it 'shows text to use CCMS' do
-        subject
-        expect(response.body).to include(I18n.t('providers.use_ccms.show.title_html'))
-      end
+      context 'when state already is use_ccms' do
+        before { legal_aid_application.use_ccms!(:employed) }
 
-      it 'sets the state to use_ccms' do
-        subject
-        expect(legal_aid_application.reload.state).to eq 'use_ccms'
+        it 'returns http success' do
+          subject
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'does not call :use_ccms!' do
+          expect(legal_aid_application).not_to receive(:use_ccms!)
+          subject
+        end
+
+        it 'leaves the ccms reason as :employed' do
+          allow_any_instance_of(ActionDispatch::Request).to receive(:referer).and_return('http://www.example.com/providers')
+          subject
+          expect(legal_aid_application.reload.ccms_reason).to eq 'employed'
+        end
       end
     end
 
