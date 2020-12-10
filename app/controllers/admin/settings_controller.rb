@@ -19,7 +19,8 @@ module Admin
     def form_params
       params.require(:setting).permit(:mock_true_layer_data,
                                       :manually_review_all_cases,
-                                      :allow_welsh_translation)
+                                      :allow_welsh_translation,
+                                      :allow_cash_payment)
     end
 
     def setting
