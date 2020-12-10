@@ -34,10 +34,6 @@
       </strong>
     </div>
 
-    <div id="uploaded-files-table-container">
-      <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-    </div>
-
     <%# Note this form needs to start after the list of original files to avoid nesting forms %>
     <%= form_with(
           model: @form,
@@ -63,6 +59,10 @@
         <% if @error_message || @successful_upload %>
           <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
         <% end %>
+
+      <div id="uploaded-files-table-container">
+        <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+      </div>
 
       <div class="govuk-radios__divider"><%= t('generic.or') %></div>
 
