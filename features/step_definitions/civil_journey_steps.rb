@@ -203,6 +203,20 @@ Given("I am checking the applicant's means answers") do
   visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
 end
 
+Given('I have completed the non-passported means assessment and start the merits assessment') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :provider_entering_merits,
+    :with_transaction_period,
+    :with_benefits_transactions
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_start_merits_assessment_path(@legal_aid_application))
+end
+
 Given('I start the merits application') do
   @legal_aid_application = create(
     :application,
@@ -473,6 +487,17 @@ Given('The means questions have been answered by the applicant') do
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
     legal_aid_application: @legal_aid_application
+  )
+end
+
+Given('I add the details for a child dependant') do
+  steps %(
+    Then I fill "Name" with "Wednesday Adams"
+    And I enter a date of birth for a 17 year old
+    And I choose "They're a child relative"
+    And I choose option "dependant_in_full_time_education_false"
+    And I choose option "dependant_has_income_false"
+    And I choose option "dependant_has_assets_more_than_threshold_false"
   )
 end
 
