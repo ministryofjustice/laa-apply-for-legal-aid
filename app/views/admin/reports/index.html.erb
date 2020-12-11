@@ -20,6 +20,10 @@
             <td class="govuk-table__cell"><%= link_to_accessible(report[:path_text], __send__(report[:path], format: :csv)) %></td>
           </tr>
         <% end %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell case-full-name">Rendered non passported</td>
+          <td class="govuk-table__cell"><%= link_to_accessible('Rendered non passported', admin_reports_render_non_passported_path, format: :csv) %></td>
+        </tr>
         </tbody>
       </table>
     </div>

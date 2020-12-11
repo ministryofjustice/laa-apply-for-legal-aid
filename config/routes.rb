@@ -82,6 +82,7 @@ Rails.application.routes.draw do
     post 'provider/check', to: 'providers#check', as: 'provider_check'
     get 'admin_report_submitted', to: 'reports#download_submitted', as: 'reports_submitted_csv'
     get 'admin_reports_non_passported', to: 'reports#download_non_passported', as: 'reports_non_passported_csv'
+    get 'admin_reports_render_non_passported', to: 'reports#render_non_passported', as: 'reports_render_non_passported'
   end
 
   namespace 'v1' do
