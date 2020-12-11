@@ -112,8 +112,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'better_errors', '>= 2.7.1'
-  gem 'binding_of_caller'
   gem 'guard-cucumber'
   gem 'guard-livereload'
   gem 'guard-rspec'
