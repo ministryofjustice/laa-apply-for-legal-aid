@@ -64,3 +64,5 @@ en:
           <<: *true_false
         allow_welsh_translation:
           <<: *true_false
+        allow_cash_payment:
+          <<: *true_false

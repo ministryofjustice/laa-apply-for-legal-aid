@@ -15,6 +15,10 @@ class Setting < ApplicationRecord
     setting.allow_welsh_translation
   end
 
+  def self.allow_cash_payment?
+    setting.allow_cash_payment
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

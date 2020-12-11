@@ -35,7 +35,8 @@ RSpec.describe Admin::SettingsController, type: :request do
       {
         setting: {
           mock_true_layer_data: 'true',
-          allow_welsh_translation: 'true'
+          allow_welsh_translation: 'true',
+          allow_cash_payment: 'true'
         }
       }
     end
@@ -47,6 +48,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       subject
       expect(Setting.mock_true_layer_data?).to eq(true)
       expect(Setting.allow_welsh_translation?).to eq(true)
+      expect(Setting.allow_cash_payment?).to eq(true)
     end
 
     it 'create settings if they do not exist' do
