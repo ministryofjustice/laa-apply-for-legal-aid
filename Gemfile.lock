@@ -53,9 +53,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_model_serializers (0.10.11)
-      actionpack (>= 4.1, < 6.1)
-      activemodel (>= 4.1, < 6.1)
+    active_model_serializers (0.10.12)
+      actionpack (>= 4.1, < 6.2)
+      activemodel (>= 4.1, < 6.2)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (6.0.3.4)
@@ -632,7 +632,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (~> 5.1.1)
-  active_model_serializers (~> 0.10.11)
+  active_model_serializers (~> 0.10.12)
   addressable
   after_commit_everywhere (~> 0.1, >= 0.1.5)
   awesome_print (~> 1.8.0)
