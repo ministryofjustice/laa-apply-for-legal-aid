@@ -29,10 +29,8 @@ en:
       show:
         link_text: I cannot find the address
         select_address_label: Select an address
-        addresses_found_text: {
-          one: '1 address found',
-          other: '%{count} addresses found'
-        }
+        addresses_found_text:
+          { one: "1 address found", other: "%{count} addresses found" }
     applicant_employed:
       index:
         heading_1: Is your client employed?
@@ -44,7 +42,7 @@ en:
         happen_next_heading: What happens next
         happen_next_text: You can continue your application once your client has shared their financial information.
         let_you_know_text: We'll let you know once they've done this.
-        sent_email_text:  "We've sent an email to %{email}"
+        sent_email_text: "We've sent an email to %{email}"
         sub_title: Your case reference is
     bank_transactions:
       list_selected:
@@ -53,32 +51,30 @@ en:
         col_description: Description
         remove_link: Remove
 
-
-
     capital_assessment_results:
       additional_property:
         additional_property_value: Additional property value
         outstanding_mortgage: Outstanding mortgage
         disregards_and_deductions: Disregards and deductions
       show:
-        page_title: 'Capital Assessment Result: %{result}'
+        page_title: "Capital Assessment Result: %{result}"
         result:
           eligible: Eligible
           not_eligible: Not Eligible
           contribution_required: Contribution required
       eligible:
-        heading: '%{name} could be eligible for legal aid'
+        heading: "%{name} could be eligible for legal aid"
         details:
           - Based on their financial situation, your client may not have to pay towards legal aid.
           - You still need to provide details of the case before we can decide if they’re eligible.
       not_eligible:
-        heading: '%{name} is unlikely to get legal aid'
+        heading: "%{name} is unlikely to get legal aid"
         detail: This is because they have too much disposable capital.
       capital_contribution_required:
-        heading: '%{name} may need to pay towards legal aid'
+        heading: "%{name} may need to pay towards legal aid"
         details:
-          - 'We’ve calculated that your client should pay %{amount} from their disposable capital.'
-          - 'You still need to provide details of the case before we can decide if they’re eligible.'
+          - "We’ve calculated that your client should pay %{amount} from their disposable capital."
+          - "You still need to provide details of the case before we can decide if they’re eligible."
       manual_check_required:
         heading: We need to check if %{name} should pay towards legal aid
         details:
@@ -89,39 +85,38 @@ en:
         capital_calculation: Capital calculation
         client_eligibility_calculation: How we calculated your client's eligibility
 
-
     capital_income_assessment_results:
       show:
-        page_title: 'Capital and Income Assessment Result: %{result}'
+        page_title: "Capital and Income Assessment Result: %{result}"
         result:
           eligible: Eligible
           not_eligible: Not eligible
           contribution_required: Contribution required
       eligible:
-        heading: '%{name} could be eligible for legal aid'
+        heading: "%{name} could be eligible for legal aid"
         details:
           - Based on their financial situation, your client may not have to pay towards legal aid.
           - You still need to provide details of the case before we can decide if they’re eligible.
       not_eligible:
-        heading: '%{name} is unlikely to get legal aid'
-        detail: 'This is because they have too much disposable capital.'
+        heading: "%{name} is unlikely to get legal aid"
+        detail: "This is because they have too much disposable capital."
       capital_contribution_required:
-        heading: '%{name} may need to pay towards legal aid'
+        heading: "%{name} may need to pay towards legal aid"
         details:
-          - 'We’ve calculated that your client should pay %{amount} from their disposable capital.'
-          - 'You still need to provide details of the case before we can decide if they’re eligible.'
+          - "We’ve calculated that your client should pay %{amount} from their disposable capital."
+          - "You still need to provide details of the case before we can decide if they’re eligible."
       capital_and_income_contribution_required:
-        heading: '%{name} may need to pay towards legal aid'
+        heading: "%{name} may need to pay towards legal aid"
         line_1: "We've calculated that your client should pay:"
         line_2: You still need to provide details of the case before we can decide if they’re eligible.
         details:
-          - '%{income_contribution} from their disposable income'
-          - '%{capital_contribution} from their disposable capital'
+          - "%{income_contribution} from their disposable income"
+          - "%{capital_contribution} from their disposable capital"
       income_contribution_required:
-        heading: '%{name} may need to pay towards legal aid'
+        heading: "%{name} may need to pay towards legal aid"
         details:
           - "We’ve calculated that your client should pay %{amount} from their disposable income."
-          - 'You still need to provide details of the case before we can decide if they’re eligible.'
+          - "You still need to provide details of the case before we can decide if they’re eligible."
       manual_check_required:
         heading: We need to check if %{name} should pay towards legal aid
         details:
@@ -167,8 +162,8 @@ en:
             owns a home or has a mortgage (and their values)
             has any savings, investments or other capital (and their values)
             has any other ways to contribute towards legal costs
-        client_to_provide: 'You''ll also need to provide:'
-        does_your_client: 'You''ll need to tell us if your client:'
+        client_to_provide: "You'll also need to provide:"
+        does_your_client: "You'll need to tell us if your client:"
         h1-heading: Before you continue
         items_to_be_provided:
           list: |
@@ -188,7 +183,7 @@ en:
         positive_result:
           tab_title: Your client receives benefits that qualify for legal aid
           title: "%{name} receives benefits that qualify for legal aid"
-          must_answer_financial_questions: 'answer questions about your client''s property, savings and other assets'
+          must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
           provide_details: provide details of the case
       how_we_checked: &how_we_checked
         how_we_checked: How we checked your client's benefits status
@@ -209,12 +204,12 @@ en:
             Pension Credit (Guarantee Credit)
             Universal Credit
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
-        we_checked: 'We checked with the DWP and your client does not receive:'
+        we_checked: "We checked with the DWP and your client does not receive:"
     check_merits_answers:
       show:
         h1-heading: Check your answers and submit application
         sub-heading: Confirm the following
-        text: 'Your client agrees that:'
+        text: "Your client agrees that:"
         list: |
           they've instructed %{provider_firm_name} to represent them
           we can share their information with other government departments like the Department for Work and Pensions and HM Revenue and Customs
@@ -223,7 +218,7 @@ en:
           they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
           the information they’ve given is complete and correct
           they’ll report any changes to their financial situation immediately
-        sign_app_text: 'If your client gives wrong or incomplete information, does not report changes, or is found to have committed benefit fraud, they may:'
+        sign_app_text: "If your client gives wrong or incomplete information, does not report changes, or is found to have committed benefit fraud, they may:"
         warning:
           list: |
             be prosecuted
@@ -275,7 +270,7 @@ en:
         case-reference: Case reference
         state: Your client has shared their financial information with us.
         what_next: What happens next
-        intro: 'You need to:'
+        intro: "You need to:"
         intro-bullets:
           - view your client's bank statements from the past 3 months
           - put their transactions into the categories they selected
@@ -284,7 +279,6 @@ en:
           - dependants (if they have any)
           - property, savings and other assets
     confirm_offices:
-
       show:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
@@ -299,12 +293,12 @@ en:
     declarations:
       show:
         h1-heading: Declaration
-        statement: 'By continuing, you agree that:'
+        statement: "By continuing, you agree that:"
         statement-bullets:
-        - your client has instructed you to represent them
-        - you'll go through all parts of the application with your client
-        - you'll explain the statutory charge to your client
-        - you'll provide complete and correct information
+          - your client has instructed you to represent them
+          - you'll go through all parts of the application with your client
+          - you'll explain the statutory charge to your client
+          - you'll provide complete and correct information
         continue_button: Agree and continue
     delegated_confirmation:
       index:
@@ -324,14 +318,14 @@ en:
         your_case_reference_number: Your case reference number is
         confirmation_email_sent: We've sent you a confirmation email.
         what_happens_next: What happens next
-        next_actions: 'You need to:'
+        next_actions: "You need to:"
         print_application: Print the completed application.
         client_sign: Get your client to sign it.
         keep_file: Keep it on file.
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
         decision_in_ccms_html: We'll let you know our decision in <abbr title='Client and Cost Management System'>CCMS</abbr>.
-        feedback_prefix: 'Give feedback'
-        feedback_suffix: ' to help us improve this service.'
+        feedback_prefix: "Give feedback"
+        feedback_suffix: " to help us improve this service."
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
     identify_types_of_incomes:
@@ -385,7 +379,7 @@ en:
         empty_result: Application cannot be found
         search_button: Search
       legal_aid_applications:
-        table_description: 'Applications table. Sortable by Name, Start date, LAA reference, Certificate type and Status.'
+        table_description: "Applications table. Sortable by Name, Start date, LAA reference, Certificate type and Status."
         applicant_name: Name
         application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         created_at: Start date
@@ -393,11 +387,11 @@ en:
         status: Status
         emergency: Emergency
         substantive: Substantive
-        substantive_due: 'Substantive due: %{date}'
+        substantive_due: "Substantive due: %{date}"
         col_and_ref: and Ref
         col_and_state: and Status
         delete: Delete
-        delete_suffix: ' application %{reference} for %{applicant}'
+        delete_suffix: " application %{reference} for %{applicant}"
     delete:
       show:
         page_title: Are you sure you want to delete this application?
@@ -479,7 +473,7 @@ en:
       show:
         page_heading: "Your client's income"
         subheading:
-          text: 'Your client has told us they do not receive:'
+          text: "Your client has told us they do not receive:"
           list: |
             benefits
             financial help from family or friends
@@ -495,7 +489,7 @@ en:
       show:
         page_heading: "Your client's outgoings"
         subheading:
-          text: 'Your client has told us they do not pay:'
+          text: "Your client has told us they do not pay:"
           list: |
             housing costs
             childcare costs
@@ -514,11 +508,11 @@ en:
             tell us about their income and outgoings
         next: Once they've done this, you'll need to categorise their bank transactions so we can calculate their disposable income.
     offline_accounts:
-        show:
-          h1-heading: Which bank accounts does your client have?
-          offline_current_accounts: Current account
-          offline_savings_accounts: Savings account
-          no_account_selected: None of these
+      show:
+        h1-heading: Which bank accounts does your client have?
+        offline_current_accounts: Current account
+        offline_savings_accounts: Savings account
+        no_account_selected: None of these
     offline_savings_accounts:
       show:
         h1-heading: Enter the total amount in all savings accounts that your client cannot access online
@@ -639,7 +633,7 @@ en:
           list: |
             has a National Insurance number
             is single (unless their partner is the opponent in the case)
-          title: 'You can only use this service if your client:'
+          title: "You can only use this service if your client:"
         use_ccms_para_html: Use the Client and Cost Management System (<abbr title='Client and Cost Management System'>CCMS</abbr>) for all other applications.
     start_merits_assessments:
       show:
@@ -656,12 +650,11 @@ en:
             the chances of a successful outcome
     statement_of_cases:
       show:
-        bullet-1: the opponent's name
-        bullet-2: details of the latest domestic abuse incident
-        bullet-3: what's happened in the case so far
-        bullet-4: if any other parties are involved and their relationship to your client
-        bullet-5: why the proceedings are necessary
-        bullet-6: if anyone else might be able to fund the case
+        bullet-1: details of the latest domestic abuse incident
+        bullet-2: what's happened in the case so far
+        bullet-3: if any other parties are involved and their relationship to your client
+        bullet-4: why the proceedings are necessary
+        bullet-5: if anyone else might be able to fund the case
         h1-heading: Provide a statement of case
         size_hint: The maximum file size is 8MB. You can attach more than one file.
         warning: Warning
@@ -697,8 +690,8 @@ en:
           heading: Scope of legal aid
         client_declaration:
           heading: Client declaration
-          signature: 'Client signature:'
-          date: 'Date:'
+          signature: "Client signature:"
+          date: "Date:"
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?
@@ -778,7 +771,7 @@ en:
       show:
         page_title: "Does your client have any dependants?"
         existing: "You have added %{count}"
-        info: 'A dependant is a child or adult who:'
+        info: "A dependant is a child or adult who:"
         list: |
           lives with your client
           depends on your client for financial support
