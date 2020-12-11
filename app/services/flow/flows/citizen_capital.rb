@@ -4,6 +4,11 @@ module Flow
       STEPS = {
         identify_types_of_incomes: {
           path: ->(_) { urls.citizens_identify_types_of_income_path(locale: I18n.locale) },
+          forward: ->(_) { Setting.cash_payments? ? :cash_income : :student_finances },
+          check_answers: :check_answers
+        },
+        cash_income: {
+          path: ->(_) { urls.citizens_cash_income_path(locale: I18n.locale) },
           forward: ->(_) { :student_finances },
           check_answers: :check_answers
         },

@@ -111,11 +111,13 @@ Rails.application.routes.draw do
       patch :continue, on: :collection
     end
     resource :identify_types_of_income, only: %i[show update]
+    resource :cash_income, only: %i[show update]
     resource :student_finance, only: %i[show update]
     namespace :student_finances do
       resource :annual_amount, only: %i[show update]
     end
     resource :identify_types_of_outgoing, only: %i[show update]
+    resource :cash_outgoings, only: %i[show update]
     resources :income_summary, only: :index
     resources :outgoings_summary, only: :index
     resource :incoming_transactions, only: [] do
