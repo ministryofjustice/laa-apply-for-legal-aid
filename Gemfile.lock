@@ -121,10 +121,6 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.16)
-    better_errors (2.9.1)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
     better_html (1.0.15)
       actionview (>= 4.0)
       activesupport (>= 4.0)
@@ -133,8 +129,6 @@ GEM
       html_tokenizer (~> 0.0.6)
       parser (>= 2.4)
       smart_properties
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
     browser (5.1.0)
@@ -200,7 +194,6 @@ GEM
       cucumber-cucumber-expressions (~> 10.3, >= 10.3.0)
       cucumber-messages (~> 13.0, >= 13.0.1)
     database_cleaner (1.8.5)
-    debug_inspector (0.0.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.7.3)
@@ -638,8 +631,6 @@ DEPENDENCIES
   awesome_print (~> 1.8.0)
   aws-sdk-s3
   axe-core-cucumber
-  better_errors (>= 2.7.1)
-  binding_of_caller
   bootsnap (>= 1.1.0)
   browser
   business
