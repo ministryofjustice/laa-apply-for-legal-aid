@@ -1,18 +1,7 @@
 <%= page_template page_title: t('.page_title', name: @dependant.name), template: :basic do %>
-  <% if @error %>
-    <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
-      <h2 class="govuk-error-summary__title" id="error-summary-title">
-        <%= t('generic.errors.problem_text') %>
-      </h2>
-      <div class="govuk-error-summary__body">
-        <ul class="govuk-list govuk-error-summary__list">
-          <li>
-            <%= link_to_accessible @error.values.first, "##{@error.keys.first}" %>
-          </li>
-        </ul>
-      </div>
-    </div>
-  <% end %>
+
+  <%= render partial: 'shared/error' if @error %>
+
   <%= form_with(url: providers_legal_aid_application_remove_dependant_path, method: :patch, local: true) do |form| %>
 
     <%= govuk_form_group(
