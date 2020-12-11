@@ -1,6 +1,6 @@
 <%= page_template page_title: t('.title'), template: :basic do %>
 
-  <%= render 'error' if @error %>
+  <%= render partial: 'shared/error' if @error %>
 
   <%= form_with(local: true) do |form| %>
     <%= govuk_form_group(show_error_if: @error) do %>

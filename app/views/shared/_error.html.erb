@@ -4,9 +4,15 @@
   </h2>
   <div class="govuk-error-summary__body">
     <ul class="govuk-list govuk-error-summary__list">
-      <li>
-        <%= link_to_accessible @error.values.first, "##{@error.keys.first}" %>
-      </li>
+      <% if @error.is_a? String %>
+        <li>
+          <%= link_to_accessible @error, "#correct" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to_accessible @error.values.first, "##{@error.keys.first}" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
