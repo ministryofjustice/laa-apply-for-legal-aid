@@ -98,6 +98,11 @@ gem 'secure_headers'
 # Identify file types before uploads
 gem 'mimemagic'
 
+# Sprockets isn't used by the app but is installed by rails as a dependency.
+# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
+# This pins sprockets to an earlier version to prevent those errors
+gem 'sprockets', '< 4'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
