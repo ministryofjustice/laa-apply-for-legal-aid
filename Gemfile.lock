@@ -244,6 +244,10 @@ GEM
     geckoboard-ruby (0.4.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    govuk_design_system_formbuilder (2.1.5)
+      actionview (>= 5.2)
+      activemodel (>= 5.2)
+      activesupport (>= 5.2)
     govuk_notify_rails (2.1.2)
       notifications-ruby-client (~> 5.1)
       rails (>= 4.1.0)
@@ -654,6 +658,7 @@ DEPENDENCIES
   factory_bot_rails (>= 5.2.0)
   faker (>= 1.9.1)
   geckoboard-ruby
+  govuk_design_system_formbuilder
   govuk_notify_rails (~> 2.1.2)
   guard-cucumber
   guard-livereload

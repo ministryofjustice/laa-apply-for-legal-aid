@@ -98,6 +98,9 @@ gem 'secure_headers'
 # Identify file types before uploads
 gem 'mimemagic'
 
+# DFE formbuilder
+gem 'govuk_design_system_formbuilder'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
