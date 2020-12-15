@@ -8,16 +8,13 @@
         local: true
       ) do |form| %>
 
-    <%= govuk_form_group show_error_if: @form.errors.present? do %>
-
-      <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: { size: 'xl', text: t('.heading') }) do %>
-        <%= form.govuk_radio_button(:used_delegated_functions, true, label: {text: t('generic.yes')} ) do %>
-          <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_days_ago(5) %>
-        <% end %>
-
-        <%= form.govuk_radio_button(:used_delegated_functions, false, label: {text:  t('generic.no')} ) %>
-
+    <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: { size: 'xl', text: t('.heading') }) do %>
+      <%= form.govuk_radio_button(:used_delegated_functions, true, label: {text: t('generic.yes')} ) do %>
+        <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_days_ago(5) %>
       <% end %>
+
+      <%= form.govuk_radio_button(:used_delegated_functions, false, label: {text:  t('generic.no')} ) %>
+
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
