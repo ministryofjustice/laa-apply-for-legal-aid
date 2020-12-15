@@ -179,6 +179,13 @@ FactoryBot.define do
       end
     end
 
+    trait :use_ccms_offline_accounts do
+      before(:create) do |application|
+        application.change_state_machine_type('NonPassportedStateMachine')
+        application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :offline_accounts)
+      end
+    end
+
     #############################################################################
 
     trait :with_irregular_income do

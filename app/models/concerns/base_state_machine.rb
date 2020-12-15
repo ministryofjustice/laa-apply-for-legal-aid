@@ -83,6 +83,9 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
                   after: proc { |reason|
                     raise 'Invalid ccms_reason' unless reason.in?(VALID_CCMS_REASONS)
 
+                    # logging to find out where unknonw ccms reasons are coming from
+                    Raven.capture_message "UNKNOWN CCMS REASON\n#{caller}" if reason.to_sym == :unknown
+
                     update!(ccms_reason: reason)
                   }
     end

@@ -28,7 +28,10 @@ class NonPassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/Cla
         applicant_entering_means
         use_ccms
       ],
-                  to: :applicant_entering_means
+                  to: :applicant_entering_means,
+                  after: proc { |_legal_aid_application|
+                    update!(ccms_reason: nil) unless ccms_reason.nil?
+                  }
     end
 
     event :check_citizen_answers do

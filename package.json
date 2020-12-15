@@ -8,6 +8,7 @@
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "^5.2.1",
+    "acorn": "^7.1.1",
     "axios": "^0.21.0",
     "govuk-frontend": "^3.10.1",
     "jquery": "^3.5.1",

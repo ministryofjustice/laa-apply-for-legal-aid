@@ -10,7 +10,10 @@ class PassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassL
         provider_entering_means
         use_ccms
       ],
-                  to: :provider_entering_means
+                  to: :provider_entering_means,
+                  after: proc { |_legal_aid_application|
+                    update!(ccms_reason: nil) unless ccms_reason.nil?
+                  }
     end
 
     event :check_passported_answers do
