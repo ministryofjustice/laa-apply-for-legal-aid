@@ -1,6 +1,7 @@
 <%= page_template page_title: t('.heading'), template: :basic do %>
 
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_used_delegated_functions_path,
         method: :patch,
@@ -8,31 +9,15 @@
       ) do |form| %>
 
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <fieldset class="govuk-fieldset">
-        <%= govuk_fieldset_header page_title %>
 
-        <%= render 'shared/show_errors' %>
+      <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: { size: 'xl', text: t('.heading') }) do %>
+        <%= form.govuk_radio_button(:used_delegated_functions, true, label: {text: t('generic.yes')} ) do %>
+          <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_days_ago(5) %>
+        <% end %>
 
-        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-          <%= form.govuk_radio_button(
-                :used_delegated_functions,
-                true,
-                label: t('generic.yes'),
-                'data-aria-controls' => 'conditional-true'
-              ) %>
+        <%= form.govuk_radio_button(:used_delegated_functions, false, label: {text:  t('generic.no')} ) %>
 
-          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
-            <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_days_ago(5) %>
-          </div>
-
-          <%= form.govuk_radio_button(
-                :used_delegated_functions,
-                false,
-                label: t('generic.no')
-              ) %>
-        </div>
-      </fieldset>
-
+      <% end %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
