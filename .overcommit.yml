@@ -19,6 +19,13 @@ PreCommit:
   RuboCop:
     enabled: true
     command: ['bundle', 'exec', 'rubocop'] # Invoke within Bundler context
+    requires_files: true
   ErbLint:
     enabled: true
     command: ['erblint']
+    requires_files: true
+  StandardJS:
+    enabled: true
+    command: ['standard']
+    requires_files: true
+    include: 'app/webpack/src'
