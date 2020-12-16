@@ -1,26 +1,24 @@
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
       url: form_path,
       method: :patch,
       local: true
     ) do |form| %>
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <%= govuk_fieldset_header do %>
-      <h1 class="govuk-fieldset__heading">
-        <%= label_tag(:estimated_value, page_title) %>
-      </h1>
-    <% end %>
 
+  <%= form.govuk_fieldset legend: { size: 'xl', text: page_title }  do %>
     <%= form.govuk_text_field(
-          :estimated_value,
-          hint: t('.use_car_valuation_sites'),
-          label: nil,
-          value: number_to_currency_or_original_string(@form.model.estimated_value),
-          input_prefix: t('currency.gbp'),
-          class: 'govuk-!-width-one-third'
+            :estimated_value,
+            value: number_to_currency_or_original_string(@form.model.estimated_value),
+            label: {text: :estimated_value, hidden: true},
+            hint: {text: t('.use_car_valuation_sites')},
+            width: 'one-third',
+            prefix_text: '£'
         ) %>
   <% end %>
+
   <div class="govuk-!-padding-bottom-4"></div>
+
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
         form: form
