@@ -31,7 +31,7 @@
           name: :shared_ownership,
           url: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
           question: t('shared.check_answers.assets.property.shared_ownership'),
-          answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.shared_ownership_item.#{@legal_aid_application.shared_ownership}"),
+          answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}"),
           read_only: read_only,
           align_right: read_only
           ) if @legal_aid_application.own_home? %>
