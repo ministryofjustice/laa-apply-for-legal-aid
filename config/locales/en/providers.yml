@@ -710,6 +710,7 @@ en:
     vehicles:
       show:
         heading: Does your client own a vehicle?
+        hint: This includes cars, vans and motorcyles
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?
