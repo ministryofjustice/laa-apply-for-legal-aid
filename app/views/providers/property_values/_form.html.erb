@@ -1,18 +1,19 @@
-<%= form_with(model: model, scope: :legal_aid_application, url: url, method: :patch, local: true) do |form| %>
+<%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: model,
+        scope: :legal_aid_application,
+        url: url,
+        method: :patch,
+        local: true)do |form| %>
 
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <%= govuk_fieldset_header do %>
-      <h1 class="govuk-fieldset__heading">
-        <%= label_tag(:property_value, page_title) %>
-      </h1>
-    <% end %>
+  <%= form.govuk_fieldset legend: { size: 'xl', text: page_title }  do %>
     <%= form.govuk_text_field(
           :property_value,
-          hint: t('.hint.property_value'),
-          label: nil,
+          label: {text: :property_value, hidden: true},
+          hint: {text: t('.hint.property_value')},
           value: number_to_currency_or_original_string(model.property_value),
-          input_prefix: t('currency.gbp'),
-          class: 'govuk-!-width-one-third'
+          prefix_text: t('currency.gbp'),
+          width: 'one-third',
         ) %>
   <% end %>
 
