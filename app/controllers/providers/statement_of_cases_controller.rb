@@ -68,6 +68,7 @@ module Providers
     end
 
     def statement_of_case_params
+      params[:statement_of_case] = { original_file: [], statement: nil } unless params.key?(:statement_of_case)
       merge_with_model(statement_of_case, provider_uploader: current_provider) do
         params.require(:statement_of_case).permit(:statement, :original_file)
       end
