@@ -1,25 +1,18 @@
-<%= form_with(model: @form,
-              scope: :legal_aid_application,
-              url: form_path,
-              method: :patch,
-              local: true) do |form| %>
-  <% error = form.object.errors[:shared_ownership].first %>
-  <% input_error_class = error ? 'govuk-input--error' : '' %>
+<%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: @form,
+        scope: :legal_aid_application,
+        url: form_path,
+        method: :patch,
+        local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: error do %>
-    <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header page_title %>
-
-      <%= content_tag(:span, error, class: 'govuk-error-message', id: 'shared_ownership') if error %>
-
-      <div class="govuk-radios govuk-!-padding-top-2">
-        <%= render partial: 'shared/forms/shared_ownership_form/shared_ownership_item',
-                   collection: LegalAidApplication::SHARED_OWNERSHIP_REASONS, as: :reason,
-                   locals: { form: form,
-                             input_error_class: input_error_class } %>
-
-      </div>
-    </fieldset>
+  <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { size: 'xl', text: page_title }) do %>
+    <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each do |reason| %>
+      <% if reason == 'no_sole_owner' %>
+        <%= form.govuk_radio_divider %>
+      <% end %>
+      <%= form.govuk_radio_button :shared_ownership, reason, label: { text: t(".#{reason}") }, link_errors: true %>
+    <% end %>
   <% end %>
 
   <%= next_action_buttons(

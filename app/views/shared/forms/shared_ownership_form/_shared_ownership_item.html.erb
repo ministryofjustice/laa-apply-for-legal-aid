@@ -1,8 +1,0 @@
-<% if reason == 'no_sole_owner' %>
-   <div class="govuk-radios__divider"><%= t('generic.or') %></div>
- <% end %>
-
-  <div class="govuk-radios__item">
-   <%= form.radio_button 'shared_ownership', reason, class: "govuk-radios__input #{input_error_class}" %>
-   <%= form.label "shared_ownership_#{reason}", t(".#{reason}"), class: 'govuk-label govuk-radios__label' %>
- </div>
