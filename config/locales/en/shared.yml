@@ -382,11 +382,10 @@ en:
               peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all owned
               plc_shares: Enter the total value of all owned
       shared_ownership_form:
-        shared_ownership_item:
-          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
-          housing_assocation_or_landlord: Yes, a housing association or landlord
-          no_sole_owner: No, they're the sole owner
-          partner_or_ex_partner: Yes, a partner or ex-partner
+        friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+        housing_assocation_or_landlord: Yes, a housing association or landlord
+        no_sole_owner: No, they're the sole owner
+        partner_or_ex_partner: Yes, a partner or ex-partner
       success_prospect:
         success_prospect_item:
           likely: 50% or better
