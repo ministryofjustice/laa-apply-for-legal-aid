@@ -21,6 +21,13 @@ module GovUkFormHelper
     )
   end
 
+  # Creates a template variable for yes/no options for radio buttons in a form
+
+  def yes_no_options
+    [OpenStruct.new(value: true, label: I18n.t('generic.yes')),
+     OpenStruct.new(value: false, label: I18n.t('generic.no'))]
+  end
+
   # Either passing in the heading text and let this method sort out its formatting,
   # or define the heading content manually by wrapping this method around a formated header.
   # So:
@@ -33,6 +40,7 @@ module GovUkFormHelper
   #   <% end %>
   #
   # Both result in the same output
+
   def govuk_fieldset_header(text = nil, size: 'xl', padding_below: nil, &block)
     heading = text ? content_tag(:h1, text, class: 'govuk-fieldset__heading') : capture(&block)
     padding_class = padding_below && "govuk-!-padding-bottom-#{padding_below}"

@@ -1,11 +1,12 @@
-<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
+<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
   <%= form.govuk_collection_radio_buttons(
         :own_vehicle,
-        form.yes_no_radio_button_array,
+        yes_no_options,
         :value,
         :label,
-        title: content_for(:page_title)
+        legend: {size: 'xl', text: t('providers.vehicles.show.heading')},
+        hint: {text: t('providers.vehicles.show.hint') }
       ) %>
 
   <%= next_action_buttons(
