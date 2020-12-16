@@ -1,19 +1,20 @@
-<%= form_with(model: model, scope: :legal_aid_application, url: url, method: :patch, local: true) do |form| %>
+<%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: model,
+        scope: :legal_aid_application,
+        url: url,
+        method: :patch,
+        local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <%= govuk_fieldset_header do %>
-      <h1 class="govuk-fieldset__heading">
-        <%= label_tag(:outstanding_mortgage_amount, controller_t('.field_set_header')) %>
-      </h1>
-    <% end %>
+  <%= form.govuk_fieldset legend: { size: 'xl', text: controller_t('.field_set_header') }  do %>
     <%= form.govuk_text_field(
-          :outstanding_mortgage_amount,
-          hint: t("helpers.hint.legal_aid_application.outstanding_mortgage_amount.#{journey_type}"),
-          label: nil,
-          value: number_to_currency_or_original_string(model.outstanding_mortgage_amount),
-          input_prefix: t('currency.gbp'),
-          class: 'govuk-!-width-one-third'
-        ) %>
+            :outstanding_mortgage_amount,
+            label: {text: :property_value, hidden: true},
+            hint: {text: t("helpers.hint.legal_aid_application.outstanding_mortgage_amount.#{journey_type}")},
+            value: number_to_currency_or_original_string(model.outstanding_mortgage_amount),
+            prefix_text: t('currency.gbp'),
+            width: 'one-third',
+            ) %>
   <% end %>
 
   <%= next_action_buttons(
