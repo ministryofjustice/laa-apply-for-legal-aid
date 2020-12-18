@@ -273,6 +273,10 @@ FactoryBot.define do
       other_assets_declaration { build :other_assets_declaration, :all_nil }
     end
 
+    trait :with_policy_disregards do
+      policy_disregards { build :policy_disregards }
+    end
+
     trait :with_savings_amount do
       savings_amount { build :savings_amount, :with_values }
     end
@@ -350,7 +354,6 @@ FactoryBot.define do
       with_non_passported_state_machine
       applicant_entering_means
       with_savings_amount
-      with_other_assets_declaration
       with_own_home_mortgaged
       property_value { rand(1...1_000_000.0).round(2) }
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
@@ -364,6 +367,7 @@ FactoryBot.define do
       with_vehicle
       with_transaction_period
       with_other_assets_declaration
+      with_policy_disregards
       with_savings_amount
       with_open_banking_consent
       with_consent
@@ -374,7 +378,6 @@ FactoryBot.define do
       with_non_passported_state_machine
       applicant_entering_means
       with_savings_amount
-      with_other_assets_declaration
       with_own_home_mortgaged
       property_value { rand(1...1_000_000.0).round(2) }
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
@@ -388,6 +391,7 @@ FactoryBot.define do
       with_vehicle
       with_transaction_period
       with_other_assets_declaration
+      with_policy_disregards
       with_savings_amount
       with_open_banking_consent
       with_consent

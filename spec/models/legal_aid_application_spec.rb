@@ -24,6 +24,49 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#capture_policy_disregards?' do
+    subject { legal_aid_application.capture_policy_disregards? }
+    context 'calculation date nil' do
+      before { expect(legal_aid_application).to receive(:calculation_date).and_return(nil) }
+      context 'todays date before start of policy disregards' do
+        it 'returns false' do
+          travel_to Time.local(2021, 1, 7, 13, 45)
+          expect(subject).to be false
+          travel_back
+        end
+      end
+
+      context 'todays date after start of policy disregards' do
+        it 'returns true' do
+          travel_to Time.local(2021, 1, 8, 13, 45)
+          expect(subject).to be true
+          travel_back
+        end
+      end
+    end
+
+    context 'calculation date set' do
+      before { expect(legal_aid_application).to receive(:calculation_date).and_return(calculation_date) }
+      context 'todays date before start of policy disregards' do
+        let(:calculation_date) { Date.new(2021, 1, 7) }
+        it 'returns false' do
+          travel_to Time.local(2021, 1, 7, 13, 45)
+          expect(subject).to be false
+          travel_back
+        end
+      end
+
+      context 'todays date after start of policy disregards' do
+        let(:calculation_date) { Date.new(2021, 1, 8) }
+        it 'returns true' do
+          travel_to Time.local(2021, 1, 8, 13, 45)
+          expect(subject).to be true
+          travel_back
+        end
+      end
+    end
+  end
+
   describe '#proceeding_type_codes=' do
     context 'when all the provded codes match existent proceeding types' do
       let!(:proceeding_types) { create_list(:proceeding_type, 2) }
