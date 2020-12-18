@@ -1,4 +1,6 @@
 module DependantHelper
+  include CheckAnswersHelper
+
   ATTRIBUTES = %i[
     name
     date_of_birth
@@ -63,13 +65,6 @@ module DependantHelper
     build_ostruct(
       t('assets', scope: 'providers.means_summaries.show.dependants'),
       dependant.has_assets_more_than_threshold? ? gds_number_to_currency(dependant.assets_value) : yes_no(dependant.has_assets_more_than_threshold?)
-    )
-  end
-
-  def build_ostruct(label, text)
-    OpenStruct.new(
-      label: label,
-      amount_text: text
     )
   end
 end
