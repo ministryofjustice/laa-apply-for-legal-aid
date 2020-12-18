@@ -1,0 +1,11 @@
+ <%= page_template page_title: t('.h1-heading'), template: :basic, show_errors_for: @form do %>
+    <%= render partial: '/shared/forms/policy_disregards/form',
+               locals: {
+                 model: @form,
+                 show_draft: true,
+                 sub_heading: t('.h2-heading'),
+                 or_break: t('generic.or'),
+                 none_selected: t('.none_selected'),
+                 url: providers_legal_aid_application_policy_disregards_path(@legal_aid_application)
+               } %>
+ <% end %>
