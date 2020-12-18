@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_161115) do
+ActiveRecord::Schema.define(version: 2020_12_15_120821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -472,6 +472,21 @@ ActiveRecord::Schema.define(version: 2020_12_10_161115) do
     t.index ["role"], name: "index_permissions_on_role", unique: true
   end
 
+  create_table "policy_disregards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "england_infected_blood_support"
+    t.boolean "vaccine_damage_payments"
+    t.boolean "variant_creutzfeldt_jakob_disease"
+    t.boolean "criminal_injuries_compensation_scheme"
+    t.boolean "national_emergencies_trust"
+    t.boolean "we_love_manchester_emergency_fund"
+    t.boolean "london_emergencies_trust"
+    t.boolean "none_selected"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "legal_aid_application_id"
+    t.index ["legal_aid_application_id"], name: "index_policy_disregards_on_legal_aid_application_id"
+  end
+
   create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_type_id"
     t.uuid "scope_limitation_id"
@@ -682,6 +697,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_161115) do
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
+  add_foreign_key "policy_disregards", "legal_aid_applications"
   add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
   add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
   add_foreign_key "providers", "firms"
