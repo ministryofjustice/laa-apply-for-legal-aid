@@ -193,15 +193,16 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:none_selected) { 'true' }
 
             before do
+              allow_any_instance_of(LegalAidApplication).to receive(:capture_policy_disregards?).and_return(true)
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
             context 'with none of these checkbox selected' do
-              it 'redirects to check passported answers' do
+              it 'redirects to policy disregards' do
                 expect(application.reload.other_assets?).to be false
                 expect(application.own_home?).to be false
                 expect(application.savings_amount?).to be false
-                expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+                expect(response).to redirect_to(providers_legal_aid_application_policy_disregards_path(application))
               end
             end
             context 'and none of these checkbox is not selected' do

@@ -14,6 +14,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
            :with_negative_benefit_check_result,
            :with_non_passported_state_machine,
            :provider_assessing_means,
+           :with_policy_disregards,
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            applicant: applicant,
