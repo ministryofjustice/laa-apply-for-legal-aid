@@ -1,32 +1,27 @@
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
       url: providers_legal_aid_application_success_prospects_path,
       method: :patch,
       local: true
     ) do |form| %>
-  <% error = form.object.errors[:success_prospect].first %>
-  <% group_error_class = error ? 'govuk-form-group--error' : '' %>
-  <% input_error_class = error ? 'govuk-input--error' : '' %>
 
-  <%= govuk_form_group(input: :success_prospect, show_error_if: @form.errors.any?) do %>
-    <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
-      <%= content_tag(:span, error, class: 'govuk-error-message', id: 'success_prospect') if error %>
-
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
-        <%= render partial: 'shared/forms/success_prospect/success_prospect_item',
-                   collection: MeritsAssessment.prospects_unlikely_to_succeed, as: :prospect,
-                   locals: { form: form,
-                             group_error_class: group_error_class,
-                             input_error_class: input_error_class } %>
-
-      </div>
-      <div id="success-prospect-text-area">
-        <%= form.govuk_text_area :success_prospect_details,
-                                 rows: 5,
-                                 value: @form.success_prospect_details %>
-      </div>
-    </fieldset>
+  <%= form.govuk_radio_buttons_fieldset(:success_prospect, legend: {size: 'xl', text: content_for(:page_title)}) do %>
+    <% MeritsAssessment.prospects_unlikely_to_succeed.each do |prospect| %>
+      <%= form.govuk_radio_button :success_prospect, prospect,
+                                  label: {text: t("shared.forms.success_prospect.#{prospect}")},
+                                  hint: {text: t("shared.forms.success_prospect.hint.#{prospect}")} do %>
+        <%= form.govuk_text_area :success_prospect_details, rows: 5 %>
+      <%#= form.govuk_radio_button(:success_prospect,
+                                  prospect,
+                                  hint: t(".hint.#{prospect}"),
+                                  label: t(".#{prospect}"),
+                                  class: 'success_prospect_option',
+                                  'data-aria-controls' => conditional,
+                                  checked: @form.success_prospect.to_s == prospect.to_s) %>
+      <% end %>
+    <% end %>
   <% end %>
+
   <%= next_action_buttons(show_draft: true, form: form) %>
 <% end %>
