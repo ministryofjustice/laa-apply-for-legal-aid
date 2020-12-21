@@ -165,6 +165,20 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And the answer for 'Other assets' should be 'None declared'
 
+  @javascript
+  Scenario: I am able to go back and select multiple disregards then come straight back to the check your answers page
+    Given I previously created a passported application with no assets and left on the "check_passported_answers" page
+    Then I visit the applications page
+    Then I view the previously created application
+    Then I am on the check your answers page for policy disregards
+    And I click Check Your Answers Change link for 'policy disregards'
+    Then I should be on a page showing 'schemes or charities'
+    Then I select 'England Infected Blood Support Scheme'
+    And I select 'Vaccine Damage Payments Scheme'
+    Then I click 'Save and continue'
+    Then I am on the check your answers page for policy disregards
+    And the answer for 'policy disregards' should be 'Vaccine Damage Payments Scheme'
+
     @javascript
     Scenario: I want to change property value via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
