@@ -145,6 +145,22 @@ RSpec.describe 'check passported answers requests', type: :request do
         end
       end
 
+      context 'applicant received england infected blood scheme' do
+        let!(:application) do
+          create :legal_aid_application,
+                 :with_everything,
+                 :with_passported_state_machine,
+                 :provider_entering_means,
+                 :with_populated_policy_disregards,
+                 vehicle: vehicle,
+                 own_vehicle: own_vehicle
+        end
+
+        it 'displays yes for england infected scheme' do
+          expect(response.body).to include('England Infected Blood Support Scheme')
+        end
+      end
+
       context 'applicant is sole owner of home' do
         let(:application) do
           create :legal_aid_application,

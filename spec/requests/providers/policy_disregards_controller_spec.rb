@@ -70,6 +70,22 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
             expect(policy.london_emergencies_trust).to be false
           end
         end
+        context 'provider checking their answers' do
+          let(:application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
+
+          it 'redirects to check passported answers' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path)
+          end
+        end
+
+        context "provider checking citizen's answers" do
+          let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
+
+          it 'redirects to means summary page' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path)
+          end
+        end
       end
 
       context 'has nothing' do
