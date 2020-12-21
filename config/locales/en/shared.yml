@@ -387,7 +387,6 @@ en:
         no_sole_owner: No, they're the sole owner
         partner_or_ex_partner: Yes, a partner or ex-partner
       success_prospect:
-        success_prospect_item:
           likely: 50% or better
           marginal: 45% to 49%
           poor: Less than 45%
