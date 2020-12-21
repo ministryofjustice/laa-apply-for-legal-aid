@@ -35,22 +35,16 @@
     </div>
 
     <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,
           local: true
         ) do |form| %>
 
-      <label class="govuk-heading-m" for="original_file"><%= t('generic.upload_file') %></label>
-      <%= govuk_hint t('.size_hint') %>
-      <%= form.govuk_file_field :original_file, label: nil %>
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'}, hint: {text: t('.size_hint')} %>
         <br>
-        <%= form.submit(
-              t('generic.upload'),
-              id: 'upload',
-              name: 'upload_button',
-              class: 'govuk-button form-button'
-            ) %>
+        <%= form.govuk_submit t('generic.upload') %>
 
         <% #  Customised accessibility alerts within this span below %>
         <% if @successfully_deleted %>
@@ -66,15 +60,15 @@
     </div>
 
     <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,
           local: true
         ) do |form| %>
-      <div class="govuk-radios__divider"><%= t('generic.or') %></div>
+      <%= form.govuk_radio_divider %>
 
-      <label class="govuk-heading-m" for="statement"><%= t('generic.enter_text') %></label>
-      <%= form.govuk_text_area :statement, label: nil, rows: 15 %>
+      <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
 
       <%= next_action_buttons(show_draft: true, form: form) %>
     <% end %>
