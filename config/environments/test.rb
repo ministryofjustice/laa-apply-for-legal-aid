@@ -46,6 +46,9 @@ Rails.application.configure do
   config.x.laa_portal.idp_cert = 'laa-portal.cert'
   config.x.laa_portal.idp_cert_fingerprint_algorithm = 'http://www.w3.org/2000/09/xmldsig#sha'
 
+  # Policy Disregards feature flag
+  config.x.policy_disregards_start_date = Date.parse('2021-1-8')
+
   # Raises error for missing translations
   config.action_view.raise_on_missing_translations = true
 

@@ -8,7 +8,7 @@ class LegalAidApplication < ApplicationRecord
   SECURE_ID_DAYS_TO_EXPIRE = 7
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
   CCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
-  POLICY_DISREGARDS_START_DATE = Date.new(2021, 1, 8)
+  POLICY_DISREGARDS_START_DATE = Rails.configuration.x.policy_disregards_start_date
 
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
