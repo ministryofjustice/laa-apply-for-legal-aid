@@ -5,6 +5,7 @@
     ) do %>
 
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_respondent_name_path(@legal_aid_application),
         method: :patch,
@@ -13,8 +14,9 @@
 
     <div class="govuk-!-padding-bottom-2"></div>
 
-    <%= govuk_fieldset_header page_title %>
-    <%= form.govuk_text_field :full_name, class: 'govuk-!-width-three-quarters', 'aria-label' => t('.hint_text') %>
+    <%= form.govuk_fieldset legend: {size: 'xl', text: page_title} do %>
+      <%= form.govuk_text_field :full_name, label: {text: "Full name"} , width: 'three-quarters' %>
+    <% end %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
