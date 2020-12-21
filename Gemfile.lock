@@ -131,7 +131,7 @@ GEM
       smart_properties
     bootsnap (1.5.1)
       msgpack (~> 1.0)
-    browser (5.1.0)
+    browser (5.2.0)
     builder (3.2.4)
     business (2.1.0)
     byebug (11.1.3)
