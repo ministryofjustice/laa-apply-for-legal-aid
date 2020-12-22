@@ -364,7 +364,7 @@ http_interactions:
     uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/1f87e3db-4163-41f1-9abb-ee1c1bd58f0c/explicit_remarks
     body:
       encoding: UTF-8
-      string: '{"explicit_remarks":[{"category":"income_disregards","details":[]}]}'
+      string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
     headers:
       Content-Type:
       - application/json
