@@ -57,7 +57,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"success":true,"objects":[{"id":"1f87e3db-4163-41f1-9abb-ee1c1bd58f0c","client_reference_id":"L-226-BAB","remote_ip":{"family":2,"addr":1365861740,"mask_addr":4294967295},"created_at":"2020-05-28T15:24:11.666Z","updated_at":"2020-05-28T15:24:11.666Z","submission_date":"2019-07-27","matter_proceeding_type":"domestic_abuse","assessment_result":"pending","remarks":{}}],"assessment_id":"1f87e3db-4163-41f1-9abb-ee1c1bd58f0c","errors":[]}'
-    http_version: null
   recorded_at: Thu, 28 May 2020 15:24:11 GMT
 - request:
     method: post
@@ -116,7 +115,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"success":true,"errors":[]}'
-    http_version: null
   recorded_at: Thu, 28 May 2020 15:24:11 GMT
 - request:
     method: post
@@ -185,7 +183,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"success":true,"errors":[]}'
-    http_version: null
   recorded_at: Thu, 28 May 2020 15:24:12 GMT
 - request:
     method: post
@@ -244,7 +241,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"success":true,"errors":[]}'
-    http_version: null
   recorded_at: Thu, 28 May 2020 15:24:12 GMT
 - request:
     method: post
@@ -303,7 +299,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"success":true,"errors":[]}'
-    http_version: null
   recorded_at: Thu, 28 May 2020 15:24:12 GMT
 - request:
     method: get
@@ -363,6 +358,60 @@ http_interactions:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJ2ZXJzaW9uIjoiMiIsInRpbWVzdGFtcCI6IjIwMjAtMDUtMjhUMTU6MjQ6MTIuNDg5KzAwOjAwIiwic3VjY2VzcyI6dHJ1ZSwiYXNzZXNzbWVudCI6eyJpZCI6IjFmODdlM2RiLTQxNjMtNDFmMS05YWJiLWVlMWMxYmQ1OGYwYyIsImNsaWVudF9yZWZlcmVuY2VfaWQiOiJMLTIyNi1CQUIiLCJzdWJtaXNzaW9uX2RhdGUiOiIyMDE5LTA3LTI3IiwibWF0dGVyX3Byb2NlZWRpbmdfdHlwZSI6ImRvbWVzdGljX2FidXNlIiwiYXNzZXNzbWVudF9yZXN1bHQiOiJjb250cmlidXRpb25fcmVxdWlyZWQiLCJhcHBsaWNhbnQiOnsiZGF0ZV9vZl9iaXJ0aCI6IjE5OTItMDYtMjQiLCJpbnZvbHZlbWVudF90eXBlIjoiYXBwbGljYW50IiwiaGFzX3BhcnRuZXJfb3Bwb25lbnQiOmZhbHNlLCJyZWNlaXZlc19xdWFsaWZ5aW5nX2JlbmVmaXQiOnRydWUsInNlbGZfZW1wbG95ZWQiOmZhbHNlfSwiZ3Jvc3NfaW5jb21lIjp7Im1vbnRobHlfb3RoZXJfaW5jb21lIjpudWxsLCJtb250aGx5X3N0YXRlX2JlbmVmaXRzIjoiMC4wIiwidG90YWxfZ3Jvc3NfaW5jb21lIjoiMC4wIiwidXBwZXJfdGhyZXNob2xkIjoiMC4wIiwiYXNzZXNzbWVudF9yZXN1bHQiOiJwZW5kaW5nIiwibW9udGhseV9pbmNvbWVfZXF1aXZhbGVudHMiOnsiZnJpZW5kc19vcl9mYW1pbHkiOiIwLjAiLCJtYWludGVuYW5jZV9pbiI6IjAuMCIsInByb3BlcnR5X29yX2xvZGdlciI6IjAuMCIsInN0dWRlbnRfbG9hbiI6IjAuMCIsInBlbnNpb24iOiIwLjAifSwibW9udGhseV9vdXRnb2luZ19lcXVpdmFsZW50cyI6eyJjaGlsZF9jYXJlIjoiMC4wIiwibWFpbnRlbmFuY2Vfb3V0IjoiMC4wIiwicmVudF9vcl9tb3J0Z2FnZSI6IjAuMCIsImxlZ2FsX2FpZCI6IjAuMCJ9LCJzdGF0ZV9iZW5lZml0cyI6W10sIm90aGVyX2luY29tZSI6W119LCJkaXNwb3NhYmxlX2luY29tZSI6eyJtb250aGx5X291dGdvaW5nX2VxdWl2YWxlbnRzIjp7ImNoaWxkX2NhcmUiOiIwLjAiLCJtYWludGVuYW5jZV9vdXQiOiIwLjAiLCJyZW50X29yX21vcnRnYWdlIjoiMC4wIiwibGVnYWxfYWlkIjoiMC4wIn0sImNoaWxkY2FyZV9hbGxvd2FuY2UiOiIwLjAiLCJkZWR1Y3Rpb25zIjp7ImRlcGVuZGFudHNfYWxsb3dhbmNlIjoiMC4wIiwiZGlzcmVnYXJkZWRfc3RhdGVfYmVuZWZpdHMiOjAuMH0sImRlcGVuZGFudF9hbGxvd2FuY2UiOiIwLjAiLCJtYWludGVuYW5jZV9hbGxvd2FuY2UiOiIwLjAiLCJncm9zc19ob3VzaW5nX2Nvc3RzIjoiMC4wIiwiaG91c2luZ19iZW5lZml0IjoiMC4wIiwibmV0X2hvdXNpbmdfY29zdHMiOiIwLjAiLCJ0b3RhbF9vdXRnb2luZ3NfYW5kX2FsbG93YW5jZXMiOiIwLjAiLCJ0b3RhbF9kaXNwb3NhYmxlX2luY29tZSI6IjAuMCIsImxvd2VyX3RocmVzaG9sZCI6IjAuMCIsInVwcGVyX3RocmVzaG9sZCI6IjAuMCIsImFzc2Vzc21lbnRfcmVzdWx0IjoicGVuZGluZyIsImluY29tZV9jb250cmlidXRpb24iOiIwLjAifSwiY2FwaXRhbCI6eyJjYXBpdGFsX2l0ZW1zIjp7ImxpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJDdXJyZW50IGFjY291bnRzIiwidmFsdWUiOiItMzQ1NTYwLjc1In0seyJkZXNjcmlwdGlvbiI6IlNhdmluZ3MgYWNjb3VudHMiLCJ2YWx1ZSI6IjU1NDYuODIifSx7ImRlc2NyaXB0aW9uIjoiTW9uZXkgbm90IGluIGEgYmFuayBhY2NvdW50IiwidmFsdWUiOiIzMDE1MDguODMifSx7ImRlc2NyaXB0aW9uIjoiQWNjZXNzIHRvIGFub3RoZXIgcGVyc29uJ3MgYmFuayBhY2NvdW50IiwidmFsdWUiOiIxNDA2MTkuNjMifSx7ImRlc2NyaXB0aW9uIjoiTmF0aW9uYWwgU2F2aW5ncyBDZXJ0aWZpY2F0ZXMgYW5kIFByZW1pdW0gQm9uZHMiLCJ2YWx1ZSI6IjEwNTg5Ny4xMSJ9LHsiZGVzY3JpcHRpb24iOiJTaGFyZXMgaW4gYSBwdWJsaWMgbGltaXRlZCBjb21wYW55IiwidmFsdWUiOiIzNzE3MjMuMTYifSx7ImRlc2NyaXB0aW9uIjoiUEVQcywgdW5pdCB0cnVzdHMsIGNhcGl0YWwgYm9uZHMgYW5kIGdvdmVybm1lbnQgc3RvY2tzIiwidmFsdWUiOiI0NzQ2NzUuODEifSx7ImRlc2NyaXB0aW9uIjoiTGlmZSBhc3N1cmFuY2UgYW5kIGVuZG93bWVudCBwb2xpY2llcyBub3QgbGlua2VkIHRvIGEgbW9ydGdhZ2UiLCJ2YWx1ZSI6IjU0NTQ2Ni4zMiJ9XSwibm9uX2xpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJUaW1lc2hhcmUgcHJvcGVydHkiLCJ2YWx1ZSI6IjQ0MzU4OS43MyJ9LHsiZGVzY3JpcHRpb24iOiJMYW5kIiwidmFsdWUiOiI1ODU2MjguNTQifSx7ImRlc2NyaXB0aW9uIjoiQW55IHZhbHVhYmxlIGl0ZW1zIHdvcnRoIG1vcmUgdGhhbiDCozUwMCIsInZhbHVlIjoiOTgxNzcxLjQ0In0seyJkZXNjcmlwdGlvbiI6Ik1vbmV5IG9yIGFzc2V0cyBmcm9tIHRoZSBlc3RhdGUgb2YgYSBwZXJzb24gd2hvIGhhcyBkaWVkIiwidmFsdWUiOiI1NTEyNDQuODEifSx7ImRlc2NyaXB0aW9uIjoiTW9uZXkgb3dlZCB0byBhcHBsaWNhbnQiLCJ2YWx1ZSI6IjMyNTAzMy43In0seyJkZXNjcmlwdGlvbiI6IkludGVyZXN0IGluIGEgdHJ1c3QiLCJ2YWx1ZSI6IjMzODU1OC40NyJ9XSwidmVoaWNsZXMiOlt7InZhbHVlIjoiNjY0MS4wIiwibG9hbl9hbW91bnRfb3V0c3RhbmRpbmciOiIxMDQuMCIsImRhdGVfb2ZfcHVyY2hhc2UiOiIyMDAxLTA4LTAzIiwiaW5fcmVndWxhcl91c2UiOnRydWUsImluY2x1ZGVkX2luX2Fzc2Vzc21lbnQiOmZhbHNlLCJhc3Nlc3NlZF92YWx1ZSI6IjAuMCJ9XSwicHJvcGVydGllcyI6eyJtYWluX2hvbWUiOnsidmFsdWUiOiIxNjEzODUuNTMiLCJvdXRzdGFuZGluZ19tb3J0Z2FnZSI6IjUxMjk1MC4yOCIsInBlcmNlbnRhZ2Vfb3duZWQiOiI0OS43OCIsIm1haW5faG9tZSI6dHJ1ZSwic2hhcmVkX3dpdGhfaG91c2luZ19hc3NvYyI6dHJ1ZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjoiNDg0MS41NyIsImFsbG93YWJsZV9vdXRzdGFuZGluZ19tb3J0Z2FnZSI6IjAuMCIsIm5ldF92YWx1ZSI6IjE1NjU0My45NiIsIm5ldF9lcXVpdHkiOiI3NTQ5Ni4xNSIsIm1haW5faG9tZV9lcXVpdHlfZGlzcmVnYXJkIjoiMTAwMDAwLjAiLCJhc3Nlc3NlZF9lcXVpdHkiOiIwLjAifSwiYWRkaXRpb25hbF9wcm9wZXJ0aWVzIjpbeyJ2YWx1ZSI6IjcxNjI5MC44OCIsIm91dHN0YW5kaW5nX21vcnRnYWdlIjoiMjI3NTAxLjM4IiwicGVyY2VudGFnZV9vd25lZCI6Ijc4LjAxIiwibWFpbl9ob21lIjpmYWxzZSwic2hhcmVkX3dpdGhfaG91c2luZ19hc3NvYyI6ZmFsc2UsInRyYW5zYWN0aW9uX2FsbG93YW5jZSI6IjIxNDg4LjczIiwiYWxsb3dhYmxlX291dHN0YW5kaW5nX21vcnRnYWdlIjoiMTAwMDAwLjAiLCJuZXRfdmFsdWUiOiI1OTQ4MDIuMTUiLCJuZXRfZXF1aXR5IjoiNDY0MDA1LjE2IiwibWFpbl9ob21lX2VxdWl0eV9kaXNyZWdhcmQiOiIwLjAiLCJhc3Nlc3NlZF9lcXVpdHkiOiI0NjQwMDUuMTYifV19fSwidG90YWxfbGlxdWlkIjoiMTk0NTQzNy42OCIsInRvdGFsX25vbl9saXF1aWQiOiIzMjI1ODI2LjY5IiwidG90YWxfdmVoaWNsZSI6IjAuMCIsInRvdGFsX3Byb3BlcnR5IjoiNDY0MDA1LjE2IiwidG90YWxfbW9ydGdhZ2VfYWxsb3dhbmNlIjoiMTAwMDAwLjAiLCJ0b3RhbF9jYXBpdGFsIjoiNTYzNTI2OS41MyIsInBlbnNpb25lcl9jYXBpdGFsX2Rpc3JlZ2FyZCI6IjAuMCIsImFzc2Vzc2VkX2NhcGl0YWwiOiI1NjM1MjY5LjUzIiwibG93ZXJfdGhyZXNob2xkIjoiMzAwMC4wIiwidXBwZXJfdGhyZXNob2xkIjoiOTk5OTk5OTk5OTk5LjAiLCJhc3Nlc3NtZW50X3Jlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCIsImNhcGl0YWxfY29udHJpYnV0aW9uIjoiNTYzMjI2OS41MyJ9LCJyZW1hcmtzIjp7fX19
-    http_version: null
   recorded_at: Thu, 28 May 2020 15:24:12 GMT
-recorded_with: VCR 5.1.0
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/1f87e3db-4163-41f1-9abb-ee1c1bd58f0c/explicit_remarks
+    body:
+      encoding: UTF-8
+      string: '{"explicit_remarks":[{"category":"income_disregards","details":[]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.1.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 29 Dec 2020 11:45:01 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8877207a4d52f9bbaacbb20606cb7732
+      X-Runtime:
+      - '0.061719'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Tue, 29 Dec 2020 11:45:01 GMT
+recorded_with: VCR 6.0.0

@@ -5,7 +5,8 @@ module CFE
       CreateApplicantService,
       CreateCapitalsService,
       CreateVehiclesService,
-      CreatePropertiesService
+      CreatePropertiesService,
+      CreateExplicitRemarksService
     ].freeze
 
     NON_PASSPORTED_SERVICES = [
