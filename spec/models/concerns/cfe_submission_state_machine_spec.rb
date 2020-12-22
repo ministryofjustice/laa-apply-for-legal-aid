@@ -20,9 +20,9 @@ module CFE
     context 'results_obtained! event' do
       context 'passported application' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-        let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'properties_created' }
+        let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'explicit_remarks_created' }
 
-        it 'transitions from properties created to results obtained' do
+        it 'transitions from explicit remarks created created to results obtained' do
           expect { submission.results_obtained! }.not_to raise_error
           expect(submission.results_obtained?).to be true
         end
@@ -50,19 +50,19 @@ module CFE
     end
 
     context 'dependants_created! event' do
-      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'properties_created' }
+      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'explicit_remarks_created' }
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
         it 'raises' do
-          expect { submission.dependants_created! }.to raise_error AASM::InvalidTransition, /Event 'dependants_created' cannot transition from 'properties_created'/
+          expect { submission.dependants_created! }.to raise_error AASM::InvalidTransition, /Event 'dependants_created' cannot transition from 'explicit_remarks_created'/
         end
       end
 
       context 'non_passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
-        it 'transitions from properties_created to dependants_created' do
+        it 'transitions from explicit_remarks_created to dependants_created' do
           expect { submission.dependants_created! }.not_to raise_error
           expect(submission.dependants_created?).to be true
         end
@@ -125,6 +125,27 @@ module CFE
         it 'transitions from state_benefits_created to other_income_created' do
           expect { submission.other_income_created! }.not_to raise_error
           expect(submission.other_income_created?).to be true
+        end
+      end
+    end
+
+    context 'explicit_remarks_created! event' do
+      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'properties_created' }
+
+      context 'passported' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        it 'transitions from state_benefits_created to other_income_created' do
+          expect { submission.explicit_remarks_created! }.not_to raise_error
+          expect(submission.explicit_remarks_created?).to be true
+        end
+      end
+
+      context 'non_passported' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+        it 'transitions from state_benefits_created to other_income_created' do
+          expect { submission.explicit_remarks_created! }.not_to raise_error
+          expect(submission.explicit_remarks_created?).to be true
         end
       end
     end
