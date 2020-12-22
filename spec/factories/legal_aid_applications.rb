@@ -277,8 +277,12 @@ FactoryBot.define do
       policy_disregards { build :policy_disregards }
     end
 
-    trait :with_populated_policy_disregards do
+    trait :with_single_policy_disregard do
       policy_disregards { build :policy_disregards, :with_selected_value }
+    end
+
+    trait :with_populated_policy_disregards do
+      policy_disregards { build :policy_disregards, :with_selected_values }
     end
 
     trait :with_savings_amount do
