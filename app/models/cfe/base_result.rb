@@ -10,7 +10,7 @@ module CFE
     end
 
     def overview
-      return 'manual_check_required' if manual_check_required? && legal_aid_application.has_restrictions
+      # return 'manual_check_required' if manual_check_required? && legal_aid_application.has_restrictions
 
       return determine_type_of_contribution if assessment_result == 'contribution_required'
 
