@@ -10,6 +10,10 @@ FactoryBot.define do
     london_emergencies_trust { false }
 
     trait :with_selected_value do
+      vaccine_damage_payments { true }
+    end
+
+    trait :with_selected_values do
       england_infected_blood_support { true }
       vaccine_damage_payments { true }
       variant_creutzfeldt_jakob_disease { true }
