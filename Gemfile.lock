@@ -288,7 +288,7 @@ GEM
       socksify
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (0.9.32)
+    i18n-tasks (0.9.33)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
       erubi
