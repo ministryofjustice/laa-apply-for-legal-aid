@@ -51,6 +51,7 @@ en:
           offline_accounts: Your client's bank accounts
           offline_savings: Savings accounts your client cannot access online
           other_assets: Which types of assets does your client have?
+          policy_disregards: Payments from scheme or charities
           restrictions: Do any restrictions apply?
           savings_and_investments: Which types of savings or investments does your client have?
           savings_account: Savings account
@@ -223,6 +224,17 @@ en:
         providers:
           percentage_homes:
             percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage
+      policy_disregards:
+        form:
+          providers:
+            policy_disregards:
+              england_infected_blood_support: England Infected Blood Support Scheme
+              vaccine_damage_payments: Vaccine Damage Payments Scheme
+              variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
+              criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
+              national_emergencies_trust: National Emergencies Trust (NET)
+              we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
+              london_emergencies_trust: The London Emergencies Trust
       revealing_checkbox:
         attribute:
           citizens:

@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     resource :shared_ownership, only: %i[show update]
     resource :restrictions, only: %i[show update]
     resource :other_assets, only: %i[show update]
+    resource :policy_disregards, only: %i[show update]
     resources :check_answers, only: [:index] do
       patch :reset, on: :collection
       patch :continue, on: :collection
@@ -156,6 +157,7 @@ Rails.application.routes.draw do
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
+      resource :policy_disregards, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy]
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]

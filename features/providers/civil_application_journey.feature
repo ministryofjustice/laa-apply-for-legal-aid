@@ -476,6 +476,9 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I select "None of these"
+    Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click Check Your Answers Change link for 'Income'
     Then I should be on a page showing "Sort your client's income into categories"
@@ -604,7 +607,12 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I select "None of these"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
+    Then I click link "Back"
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     Then I click link "Back"
     Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
     Then I click link "Back"
@@ -625,6 +633,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "How much is your client's home worth?"
     Then I click link "Back"
     Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'

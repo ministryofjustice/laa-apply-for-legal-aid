@@ -20,7 +20,7 @@
         <%= check_answer_no_link(
               name: "#{name}_#{index}",
               question: item.label,
-              answer: item.amount_text
+              answer: safe_yes_or_no(item.amount_text)
             ) %>
       <% end %>
 

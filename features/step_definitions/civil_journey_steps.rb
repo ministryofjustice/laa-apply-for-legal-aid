@@ -83,6 +83,7 @@ Given('I previously created a passported application with no assets and left on 
     :with_applicant,
     :without_own_home,
     :with_no_other_assets,
+    :with_policy_disregards,
     :with_passported_state_machine,
     :checking_passported_answers,
     provider: create(:provider),
@@ -211,6 +212,7 @@ Given('I have completed the non-passported means assessment and start the merits
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_transaction_period,
+    :with_policy_disregards,
     :with_benefits_transactions
   )
   login_as @legal_aid_application.provider
@@ -223,7 +225,8 @@ Given('I start the merits application') do
     :with_applicant,
     :with_proceeding_types,
     :with_non_passported_state_machine,
-    :provider_assessing_means
+    :provider_assessing_means,
+    :with_policy_disregards
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -259,6 +262,7 @@ Given('I start the merits application with student finance') do
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
+    :with_policy_disregards,
     :with_irregular_income,
     :with_transaction_period,
     :with_uncategorised_credit_transactions
@@ -317,6 +321,7 @@ Given('I start the merits application and the applicant has uploaded transaction
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
+    :with_policy_disregards,
     :with_transaction_period,
     :with_benefits_transactions
   )
@@ -479,6 +484,7 @@ Given('The means questions have been answered by the applicant') do
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
+    :with_policy_disregards,
     :with_uncategorised_debit_transactions,
     :with_uncategorised_credit_transactions
   )
@@ -710,6 +716,11 @@ end
 Then('I am on the check your answers page for other assets') do
   expect(page).to have_content('Check your answers')
   expect(page).to have_content('Which types of assets does your client have?')
+end
+
+Then('I am on the check your answers page for policy disregards') do
+  expect(page).to have_content('Check your answers')
+  expect(page).to have_content('Payments from scheme or charities')
 end
 
 Then('I am on the read only version of the check your answers page') do

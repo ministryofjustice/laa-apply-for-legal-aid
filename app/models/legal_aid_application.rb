@@ -8,6 +8,7 @@ class LegalAidApplication < ApplicationRecord
   SECURE_ID_DAYS_TO_EXPIRE = 7
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
   CCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
+  POLICY_DISREGARDS_START_DATE = Rails.configuration.x.policy_disregards_start_date
 
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
@@ -28,6 +29,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :dependants, dependent: :destroy
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', dependent: :destroy
   has_one :vehicle, dependent: :destroy
+  has_one :policy_disregards, dependent: :destroy
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
   has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment'
@@ -140,6 +142,10 @@ class LegalAidApplication < ApplicationRecord
 
   def calculation_date
     LegalAidApplications::CalculationDateService.call(self)
+  end
+
+  def capture_policy_disregards?
+    (calculation_date || Date.today) >= POLICY_DISREGARDS_START_DATE
   end
 
   def bank_transactions

@@ -289,4 +289,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: adminShowForm
+  - name: POLICY_DISREGARDS_START_DATE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: policyDisregardsStartDate
 {{- end }}

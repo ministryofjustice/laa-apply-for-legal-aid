@@ -59,8 +59,10 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.used_regularly'))
       end
 
-      it 'does not display None Declared if values are entered' do
-        expect(response.body).not_to include(I18n.t('.generic.none_declared'))
+      it 'displays None Declared in the policy disregards section' do
+        parsed_response = Nokogiri::HTML(response.body)
+        node = parsed_response.css('#app-check-your-answers__policy_disregards_header + .govuk-summary-list')
+        expect(node.text).to include(I18n.t('.generic.none_declared'))
       end
 
       context 'applicant does not have any savings' do
@@ -85,7 +87,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant does not have any capital' do
-        let(:application) { create :legal_aid_application, :with_applicant, :without_own_home, :with_passported_state_machine, :provider_entering_means }
+        let(:application) { create :legal_aid_application, :with_applicant, :with_policy_disregards, :without_own_home, :with_passported_state_machine, :provider_entering_means }
         it 'does not display capital restrictions' do
           expect(response.body).not_to include('restrictions')
         end
@@ -140,6 +142,22 @@ RSpec.describe 'check passported answers requests', type: :request do
         it 'does not display property value' do
           expect(response.body).not_to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
           expect(response.body).not_to include('Outstanding mortgage')
+        end
+      end
+
+      context 'applicant received england infected blood scheme' do
+        let!(:application) do
+          create :legal_aid_application,
+                 :with_everything,
+                 :with_passported_state_machine,
+                 :provider_entering_means,
+                 :with_populated_policy_disregards,
+                 vehicle: vehicle,
+                 own_vehicle: own_vehicle
+        end
+
+        it 'displays yes for england infected scheme' do
+          expect(response.body).to include('England Infected Blood Support Scheme')
         end
       end
 

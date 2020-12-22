@@ -72,4 +72,21 @@ module CheckAnswersHelper
   def number_to_currency_or_na(number)
     number.to_d == 999_999_999_999.0.to_d ? 'N/a' : gds_number_to_currency(number)
   end
+
+  def safe_yes_or_no(value)
+    return value unless boolean?(value)
+
+    value == true ? 'Yes' : 'No'
+  end
+
+  def boolean?(value)
+    value.is_a?(TrueClass) || value.is_a?(FalseClass)
+  end
+
+  def build_ostruct(label, text)
+    OpenStruct.new(
+      label: label,
+      amount_text: text
+    )
+  end
 end
