@@ -73,14 +73,14 @@
         ),
         read_only: read_only
       ) %>
-
-  <%= check_answer_one_change_link(
-        name: :policy_disregards,
-        url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
-        question: t('.assets.policy_disregards'),
-        answer_hash: policy_disregards_hash(@legal_aid_application.policy_disregards),
-        read_only: read_only
-      ) %>
-
+  <% if @legal_aid_application.policy_disregards.present? %>
+    <%= check_answer_one_change_link(
+          name: :policy_disregards,
+          url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
+          question: t('.assets.policy_disregards'),
+          answer_hash: policy_disregards_hash(@legal_aid_application.policy_disregards),
+          read_only: read_only
+        ) %>
+  <% end %>
   <%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
 </section>
