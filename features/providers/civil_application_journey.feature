@@ -477,7 +477,7 @@ Feature: Civil application journeys
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    Then I select "None of these"
+    Then I select 'England Infected Blood Support Scheme'
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click Check Your Answers Change link for 'Income'
