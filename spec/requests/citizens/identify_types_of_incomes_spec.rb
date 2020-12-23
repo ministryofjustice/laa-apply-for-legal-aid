@@ -74,8 +74,13 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
         expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
       end
 
-      it 'should redirect to the next step' do
+      it 'should redirect to the student finance step' do
         expect(subject).to redirect_to(flow_forward_path)
+      end
+
+      it 'should redirect to the cash income step if allow_cash_payment set to true' do
+        allow(Setting).to receive(:allow_cash_payment?).and_return(true)
+        expect(subject).to redirect_to(citizens_cash_income_path)
       end
 
       it 'sets no_credit_transaction_types_selected to false' do

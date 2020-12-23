@@ -118,6 +118,18 @@ en:
         page_heading: Which of the following payments do you receive?
       update:
         none_selected: Select if you receive any types of income
+    cash_incomes:
+      checkbox:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
+      show:
+        page_heading: Select payments you receive in cash
+      cash_income_form:
+        dates: "%{date}"
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
+      update:
+        none_selected: Select if you receive these payments in cash
     identify_types_of_outgoings:
       show:
         page_heading: Which of the following payments do you make?

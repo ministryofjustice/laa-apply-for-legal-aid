@@ -57,6 +57,24 @@ FactoryBot.define do
       sort_order { 10 }
     end
 
+    trait :maintenance_in do
+      name { 'maintenance_in' }
+      operation { 'credit' }
+      sort_order { 50 }
+    end
+
+    trait :property_or_lodger do
+      name { 'property_or_lodger' }
+      operation { 'credit' }
+      sort_order { 50 }
+    end
+
+    trait :pension do
+      name { 'pension' }
+      operation { 'credit' }
+      sort_order { 50 }
+    end
+
     trait :maintenance_out do
       name { 'maintenance_out' }
       operation { 'debit' }

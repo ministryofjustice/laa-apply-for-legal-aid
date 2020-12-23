@@ -8,7 +8,7 @@ RSpec.describe Flow::BaseFlowService do
   end
   let(:steps) do
     Flow::Flows::CitizenStart::STEPS
-      .deep_merge(Flow::Flows::CitizenStart::STEPS)
+      .deep_merge(Flow::Flows::CitizenCapital::STEPS)
       .deep_merge(Flow::Flows::CitizenEnd::STEPS)
   end
   let(:legal_aid_application) { create :legal_aid_application }

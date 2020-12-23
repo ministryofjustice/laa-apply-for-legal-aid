@@ -1,6 +1,18 @@
 ---
 en:
   shared:
+    partials:
+      revealing_checkbox:
+        dates:  "%{date_start} to %{date_end}"
+        hint: Enter the total cash amount you received in each calendar month, or enter 0 if you received none.
+        citizens:
+          cash_incomes:
+            date_goes_here: Dates go here
+            check_box_benefits: Benefits
+            check_box_friends_or_family: Financial help from friends or family
+            check_box_maintenance_in: Maintenance payments
+            check_box_property_or_lodger: Income from a property or lodger
+            check_box_pension: Pension
     applicant_declaration:
       confirm_following: Confirm the following
       submission_list_summary: You agree that

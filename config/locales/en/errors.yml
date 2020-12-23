@@ -1,6 +1,11 @@
 ---
 en:
   errors:
+    cash_amount:
+      blank: Enter the total cash amount you received in each calendar month
+      invalid_type: Amount must be an amount of money, like 1,000
+      negative: Amount must be more than or equal to zero
+      too_many_decimals: Amount must not include more than 2 decimal numbers
     title_prefix: Error
     messages:
       already_confirmed: was already confirmed, please try signing in
