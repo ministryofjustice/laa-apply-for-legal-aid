@@ -5,6 +5,7 @@ module Providers
     def show
       @cfe_result = legal_aid_application.cfe_result
       handle_unknown
+      @result_partial = ResultsPanelSelector.call(legal_aid_application)
     end
 
     def update

@@ -5,7 +5,7 @@
     ) do %>
 
   <div class="interruption-panel">
-    <%= render "shared/assessment_results/#{@cfe_result.overview}" %>
+    <%= render @result_partial %>
   </div>
 
   <%= render 'result_details' %>
