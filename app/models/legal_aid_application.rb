@@ -388,6 +388,10 @@ class LegalAidApplication < ApplicationRecord
     :in_progress
   end
 
+  def policy_disregards?
+    policy_disregards&.any? ? true : false
+  end
+
   private
 
   def applicant_updated_after_benefit_check_result_updated?

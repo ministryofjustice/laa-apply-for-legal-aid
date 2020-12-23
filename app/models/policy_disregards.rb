@@ -18,6 +18,11 @@ class PolicyDisregards < ApplicationRecord
     }
   end
 
+  def any?
+    values = DISREGARDS.map { |method| __send__(method) }
+    values.include?(true)
+  end
+
   private
 
   def build_attribute_array
