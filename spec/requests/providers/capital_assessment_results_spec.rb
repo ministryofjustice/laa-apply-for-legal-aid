@@ -8,8 +8,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: legal_aid_application }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
-    let(:locale_scope) { 'providers.capital_assessment_results' }
-    let(:shared_scope) { 'shared.assessment_results' }
+    let(:locale_scope) { 'shared.assessment_results' }
 
     let(:before_tasks) do
       Setting.setting.update!(manually_review_all_cases: false)
@@ -28,7 +27,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays the correct result' do
-          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: shared_scope))
+          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
         end
       end
 
@@ -40,7 +39,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays the correct result' do
-          expect(unescaped_response_body).to include(I18n.t('not_eligible.heading', name: applicant_name, scope: shared_scope))
+          expect(unescaped_response_body).to include(I18n.t('not_eligible.heading', name: applicant_name, scope: locale_scope))
         end
       end
 
@@ -52,7 +51,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays the correct result' do
-          expect(unescaped_response_body).to include(I18n.t('capital_contribution_required.heading', name: applicant_name, scope: shared_scope))
+          expect(unescaped_response_body).to include(I18n.t('capital_contribution_required.heading', name: applicant_name, scope: locale_scope))
         end
       end
     end
@@ -73,7 +72,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays the correct result' do
-          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: shared_scope))
+          expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
         end
       end
 
@@ -85,7 +84,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         it 'displays manual check required' do
-          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: shared_scope))
+          expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
         end
       end
     end
