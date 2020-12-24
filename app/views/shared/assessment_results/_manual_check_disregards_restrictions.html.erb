@@ -1,0 +1,16 @@
+<h1 class="govuk-heading-l">
+  <%= t('.heading', name: @legal_aid_application.applicant_full_name) %>
+</h1>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body"><%= t('.line1') %></p>
+    <ul class="govuk-list govuk-list--bullet">
+      <% t(".bullets").each do |bullet| %>
+        <li style="color: #fff;"><%= bullet %></li>
+      <% end %>
+    </ul>
+    <p class="govuk-body"><%= t('.line2') %></p>
+    <p class="govuk-body"><%= t('.line3') %></p>
+  </div>
+</div>

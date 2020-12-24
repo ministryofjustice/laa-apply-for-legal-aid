@@ -40,6 +40,24 @@ en:
           - You told us legal restrictions prevent your client from selling or borrowing against their assets.
           - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
           - We’ll check the details you provided and let you know our decision.
+
+      manual_check_disregards:
+        heading: "We need to check if %{name} can get legal aid"
+        details:
+          - We calculated that your client should pay a contribution towards legal aid.
+          - The amount depends on whether or not the scheme or charity payments they've received are disregarded from the finanical eligibility calculation.
+          - A caseworker will review this and let you know the outcome.
+          - Please continue with the application to provide details of the case.
+
+      manual_check_disregards_restrictions:
+        heading: "We need to check if %{name} can get legal aid"
+        line1: "We calculated that your client should pay a contribution towards legal aid but the amount depends on:"
+        bullets:
+          - whether or not the scheme or charity payments they've received are disregarded from the finanical eligibility calculation.
+          - the legal restrictions preventing them from selling or borrowing against their assets
+        line2: We'll check the details you provided and let you know the outcome.
+        line3: Please continue with the application to provide details of the case.
+
       capital_and_income_contribution_required:
         heading: "%{name} may need to pay towards legal aid"
         line_1: "We've calculated that your client should pay:"
