@@ -23,7 +23,7 @@ RSpec.describe ResultsPanelSelector do
       end
 
       it 'returns the income_contribution name' do
-        expect(described_class.call(legal_aid_application)).to eq 'shared/assessment_results/income_contribution_required'
+        expect(described_class.call(legal_aid_application)).to eq 'shared/assessment_results/manual_check_disregards'
       end
     end
 

@@ -11,24 +11,24 @@ class ResultsPanelSelector
     not_eligible_with_restrictions_with_disregards: :not_eligible,
 
     capital_contribution_required_no_restrictions_no_disregards: :capital_contribution_required,
-    capital_contribution_required_no_restrictions_with_disregards: :capital_contribution_required,
-    capital_contribution_required_with_restrictions_no_disregards: :capital_contribution_required,
-    capital_contribution_required_with_restrictions_with_disregards: :capital_contribution_required,
+    capital_contribution_required_no_restrictions_with_disregards: :manual_check_disregards,
+    capital_contribution_required_with_restrictions_no_disregards: :manual_check_required,
+    capital_contribution_required_with_restrictions_with_disregards: :manual_check_disregards_restrictions,
 
     income_contribution_required_no_restrictions_no_disregards: :income_contribution_required,
-    income_contribution_required_no_restrictions_with_disregards: :income_contribution_required,
+    income_contribution_required_no_restrictions_with_disregards: :manual_check_disregards,
     income_contribution_required_with_restrictions_no_disregards: :income_contribution_required,
-    income_contribution_required_with_restrictions_with_disregards: :income_contribution_required,
+    income_contribution_required_with_restrictions_with_disregards: :manual_check_disregards_restrictions,
 
     capital_and_income_contribution_required_no_restrictions_no_disregards: :capital_and_income_contribution_required,
-    capital_and_income_contribution_required_no_restrictions_with_disregards: :capital_and_income_contribution_required,
+    capital_and_income_contribution_required_no_restrictions_with_disregards: :manual_check_disregards,
     capital_and_income_contribution_required_with_restrictions_no_disregards: :capital_and_income_contribution_required,
-    capital_and_income_contribution_required_with_restrictions_with_disregards: :capital_and_income_contribution_required,
+    capital_and_income_contribution_required_with_restrictions_with_disregards: :manual_check_disregards_restrictions,
 
     manual_check_required_no_restrictions_no_disregards: :manual_check_required,
-    manual_check_required_no_restrictions_with_disregards: :manual_check_required,
+    manual_check_required_no_restrictions_with_disregards: :manual_check_disregards,
     manual_check_required_with_restrictions_no_disregards: :manual_check_required,
-    manual_check_required_with_restrictions_with_disregards: :manual_check_required
+    manual_check_required_with_restrictions_with_disregards: :manual_check_disregards_restrictions
   }.freeze
 
   def self.call(legal_aid_application)
