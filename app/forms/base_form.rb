@@ -84,7 +84,7 @@ module BaseForm
 
     def assignable_attributes
       exclude_attrs = exclude_from_model + [:model]
-      attributes.except(*exclude_attrs)
+      attributes.except(*exclude_attrs.map(&:to_s))
     end
 
     def attributes
