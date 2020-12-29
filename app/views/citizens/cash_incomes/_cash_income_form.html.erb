@@ -14,7 +14,7 @@
 
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#none_selected">
-          <% AggregatedCashIncome::CATEGORIES.each do |category| %>
+          <% AggregatedCashIncome::cash_transaction_categories.each do |category| %>
             <%= render(
                   'shared/partials/revealing_checkbox',
                   name: category,
