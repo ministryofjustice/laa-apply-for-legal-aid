@@ -3,7 +3,7 @@ require 'rails_helper'
 module CFE
   RSpec.describe CreateDependantsService do
     let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-    let(:submission) { create :cfe_submission, aasm_state: 'properties_created', legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'explicit_remarks_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -24,8 +24,8 @@ module CFE
           describe 'successful calls' do
             let(:expected_payload_hash) { empty_payload }
 
-            it 'updates the submission record from properties_created to dependants_created' do
-              expect(submission.aasm_state).to eq 'properties_created'
+            it 'updates the submission record from explicit_remarks_created to dependants_created' do
+              expect(submission.aasm_state).to eq 'explicit_remarks_created'
               described_class.call(submission)
               expect(submission.aasm_state).to eq 'dependants_created'
             end
@@ -36,8 +36,8 @@ module CFE
 
             before { create_dependants }
 
-            it 'updates the submission record from properties_created to dependants_created' do
-              expect(submission.aasm_state).to eq 'properties_created'
+            it 'updates the submission record from explicit_remarks_created to dependants_created' do
+              expect(submission.aasm_state).to eq 'explicit_remarks_created'
               described_class.call(submission)
               expect(submission.aasm_state).to eq 'dependants_created'
             end
