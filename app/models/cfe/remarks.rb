@@ -27,6 +27,8 @@ module CFE
     def populate_review_transactions
       collection = RemarkedTransactionCollection.new
       @hash.each do |category, reason_hashes|
+        break if reason_hashes.is_a?(Array)
+
         reason_hashes.each do |reason, tx_ids|
           tx_ids.each { |tx_id| collection.update(tx_id, category, reason) }
         end
@@ -36,8 +38,13 @@ module CFE
 
     def populate_review_reasons
       reasons = []
-      @hash.each do |_category, reason_hashes|
-        reasons += reason_hashes.keys
+      @hash.each do |category, reason_hashes|
+        reasons += case reason_hashes
+                   when Array
+                     reasons << category
+                   else
+                     reason_hashes.keys
+                   end
       end
       reasons.flatten.uniq.sort
     end
@@ -45,8 +52,15 @@ module CFE
     def populate_review_categories_by_reason
       result = Hash.new([])
       @hash.each do |category, reason_hash|
-        reason_hash.each_key do |reason|
-          result[reason] += [category] unless REASONS_WITHOUT_CATEGORIES.include? reason
+        case reason_hash
+        when Array
+          reason_hash.each do |reason|
+            result[category] += [reason.to_sym] unless REASONS_WITHOUT_CATEGORIES.include? reason
+          end
+        else
+          reason_hash.each_key do |reason|
+            result[reason] += [category] unless REASONS_WITHOUT_CATEGORIES.include? reason
+          end
         end
       end
       result
