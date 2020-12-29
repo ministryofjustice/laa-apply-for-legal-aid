@@ -31,7 +31,7 @@ module CFE
       context 'with remarks' do
         let(:remarks_hash) { populated_hash }
         it 'returns an array of reasons' do
-          expect(remarks.review_reasons).to eq %i[amount_variation unknown_frequency]
+          expect(remarks.review_reasons).to eq %i[amount_variation policy_disregards unknown_frequency]
         end
       end
     end
@@ -49,7 +49,8 @@ module CFE
         it 'returns an hash of categories by reason' do
           expected_results = {
             amount_variation: [:state_benefit_payment],
-            unknown_frequency: %i[state_benefit_payment outgoings_housing_cost]
+            unknown_frequency: %i[state_benefit_payment outgoings_housing_cost],
+            policy_disregards: %i[england_infected_blood_support]
           }
           expect(remarks.review_categories_by_reason).to eq expected_results
         end
@@ -61,7 +62,8 @@ module CFE
         it 'does not include the remarks in the hash of categories by reason' do
           expected_results = {
             amount_variation: [:state_benefit_payment],
-            unknown_frequency: %i[state_benefit_payment outgoings_housing_cost]
+            unknown_frequency: %i[state_benefit_payment outgoings_housing_cost],
+            policy_disregards: %i[england_infected_blood_support]
           }
           expect(remarks.review_categories_by_reason).to eq expected_results
         end
@@ -135,7 +137,10 @@ module CFE
             5d58c3b1-c34d-4f20-90fc-c22642410cfa
             05bcd12c-6790-49bc-a1aa-490fba8d2624
           ]
-        }
+        },
+        policy_disregards: [
+          'england_infected_blood_support'
+        ]
       }
     end
   end
