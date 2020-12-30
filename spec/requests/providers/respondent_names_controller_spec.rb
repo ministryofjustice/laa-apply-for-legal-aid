@@ -30,7 +30,7 @@ RSpec.describe Providers::RespondentNamesController, type: :request do
       end
 
       it 'displays respondent name' do
-        expect(response.body).to include(respondent.full_name)
+        expect(response.body).to include(html_compare(respondent.full_name))
       end
     end
   end

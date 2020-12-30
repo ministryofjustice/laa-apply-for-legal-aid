@@ -235,10 +235,87 @@ RSpec.describe AggregatedCashIncome, type: :model do
     end
 
     context 'no cash income records exist' do
-      let(:subject) { aci.update(valid_params) }
+      let(:subject) { aci.update(params) }
 
-      it 'creates the expected cash income records' do
-        expect { subject }.to change { CashTransaction.count }.by(6)
+      context 'valid params' do
+        let(:params) { valid_params }
+        it 'creates the expected cash income records' do
+          expect { subject }.to change { CashTransaction.count }.by(6)
+        end
+      end
+
+      context 'invalid params' do
+        context 'non-numeric values' do
+          let(:params) { non_numeric_params }
+
+          it 'does not create the Cash Transaction records' do
+            expect { subject }.not_to change { CashTransaction.count }
+          end
+
+          it 'is not valid' do
+            subject
+            expect(aci).not_to be_valid
+          end
+
+          it 'populates the errors' do
+            subject
+            expect(aci.errors[:benefits2]).to include 'Amount must be an amount of money, like 1,000'
+          end
+        end
+
+        context 'too many decimal numbers' do
+          let(:params) { too_many_decimal_params }
+
+          it 'does not create the Cash Transaction records' do
+            expect { subject }.not_to change { CashTransaction.count }
+          end
+
+          it 'is not valid' do
+            subject
+            expect(aci).not_to be_valid
+          end
+
+          it 'populates the errors' do
+            subject
+            expect(aci.errors[:maintenance_in3]).to include 'Amount must not include more than 2 decimal numbers'
+          end
+        end
+
+        context 'negative value' do
+          let(:params) { negative_params }
+
+          it 'does not create the Cash Transaction records' do
+            expect { subject }.not_to change { CashTransaction.count }
+          end
+
+          it 'is not valid' do
+            subject
+            expect(aci).not_to be_valid
+          end
+
+          it 'populates the errors' do
+            subject
+            expect(aci.errors[:benefits1]).to include 'Amount must be more than or equal to zero'
+          end
+        end
+
+        context 'missing value' do
+          let(:params) { missing_value_params }
+
+          it 'does not create the Cash Transaction records' do
+            expect { subject }.not_to change { CashTransaction.count }
+          end
+
+          it 'is not valid' do
+            subject
+            expect(aci).not_to be_valid
+          end
+
+          it 'populates the errors' do
+            subject
+            expect(aci.errors[:benefits1]).to include 'Enter the total cash amount you received in each calendar month'
+          end
+        end
       end
     end
 
@@ -325,6 +402,22 @@ RSpec.describe AggregatedCashIncome, type: :model do
       legal_aid_application_id: application.id,
       none_selected: ''
     }
+  end
+
+  def non_numeric_params
+    valid_params.merge(benefits2: 'abc')
+  end
+
+  def too_many_decimal_params
+    valid_params.merge(maintenance_in3: '24.366')
+  end
+
+  def negative_params
+    valid_params.merge(benefits1: '-45.33')
+  end
+
+  def missing_value_params
+    valid_params.merge(benefits1: '')
   end
 
   def corrected_valid_params

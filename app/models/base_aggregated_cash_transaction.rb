@@ -5,6 +5,7 @@
 #
 class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   include ActiveModel::Model
+  include MoneyHelper
 
   NUMBER_OF_FIELDS = 3
   MONTH_RANGE = (1..NUMBER_OF_FIELDS).freeze
