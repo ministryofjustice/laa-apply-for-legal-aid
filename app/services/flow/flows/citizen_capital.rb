@@ -9,6 +9,10 @@ module Flow
         },
         cash_incomes: {
           path: ->(_) { urls.citizens_cash_income_path(locale: I18n.locale) },
+          forward: ->(_) { :cash_outgoings }
+        },
+        cash_outgoings: {
+          path: ->(_) { urls.citizens_cash_outgoing_path(locale: I18n.locale) },
           forward: ->(_) { :student_finances }
         },
         student_finances: {
