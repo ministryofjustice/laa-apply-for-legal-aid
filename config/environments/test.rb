@@ -65,9 +65,6 @@ Rails.application.configure do
   # Dummy url for provider details api
   config.x.provider_details.url = 'http://dummy-provider-details-api/'
 
-  # Set a css_compressor so sassc-rails does not overwrite the compressor when running the tests
-  config.assets.css_compressor = nil
-
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]
 end
