@@ -92,9 +92,6 @@ Rails.application.configure do
   config.active_storage.service = :amazon
   config.x.application.host_url = "https://#{config.x.application.host}"
 
-  # Set a css_compressor so sassc-rails does not overwrite the compressor when building the application
-  config.assets.css_compressor = nil
-
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
 
