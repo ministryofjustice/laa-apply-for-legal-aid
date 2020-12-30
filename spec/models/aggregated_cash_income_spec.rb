@@ -339,7 +339,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
             transactions.each_with_index do |transaction, i|
               new_amount = corrected_valid_params["#{category}#{i + 1}".to_sym]
-              expect(transaction.amount).to eql new_amount
+              expect(transaction.amount).to eq BigDecimal(new_amount)
             end
           end
         end

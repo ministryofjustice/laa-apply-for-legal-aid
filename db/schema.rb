@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_170558) do
 
   create_table "cash_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "legal_aid_application_id"
-    t.string "amount"
+    t.decimal "amount"
     t.date "transaction_date"
     t.string "transaction_type_id"
     t.datetime "created_at", precision: 6, null: false
