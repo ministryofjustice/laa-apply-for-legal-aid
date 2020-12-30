@@ -45,7 +45,7 @@ It's defined as code and [can be edited](https://github.com/ministryofjustice/la
 ## Dependencies
 
 * Ruby version
-    * Ruby version 2.7.1
+    * Ruby version 3.0.0
     * Rails 6.0.3
 
 * System dependencies
