@@ -16,6 +16,10 @@ Given('An application has been created') do
   Populators::TransactionTypePopulator.call
 end
 
+Given('the setting to allow cash payments is enabled') do
+  Setting.setting.update!(allow_cash_payment: true)
+end
+
 Then('I visit the start of the financial assessment') do
   visit citizens_legal_aid_application_path(secure_id)
 end
