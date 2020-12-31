@@ -21,9 +21,33 @@ RSpec.describe 'I18n' do
       missing_keys.leaves.each do |leaf|
         missing_applicant_keys << leaf if welsh_paths.any? { |path| leaf.data[:occurrences]&.first&.path&.include? "views#{path}" }
       end
-
+      print_missing_welsh_keys(missing_applicant_keys) unless missing_applicant_keys.empty?
       expect(missing_applicant_keys).to be_empty,
                                         "Missing #{missing_applicant_keys.count} i18n keys, run `i18n-tasks missing' to show them"
+    end
+
+    def print_missing_welsh_keys(missing_applicant_keys) # rubocop:disable Metrics/AbcSize
+      key_details = gather_missing_details(missing_applicant_keys)
+      max_key_length = key_details.keys.map(&:length).max
+      max_location_length = key_details.values.map(&:length).max
+      format_string = "%<key>-#{max_key_length}s %<location>s"
+
+      puts "\nWelsh translation keys missing".red
+      puts format(format_string, key: 'key', location: 'location').red
+      puts format(format_string, key: ('=' * max_key_length), location: ('=' * max_location_length)).red
+      key_details.each do |key, location|
+        puts format(format_string, key: key, location: location).red
+      end
+    end
+
+    def gather_missing_details(missing_applicant_keys)
+      details = {}
+      missing_applicant_keys.each do |leaf|
+        leaf.data[:occurrences].each do |occ|
+          details[leaf.full_key] = occ.path
+        end
+      end
+      details
     end
   end
 end

@@ -46,6 +46,30 @@ cy:
           eb ll'uoY .emit a ta knab eno tceleS"
       create:
         error: knab a tceleS
+    cash_incomes:
+      checkbox:
+        info: snioc dna setonknab ekil yenom lacisyhp snaem hsaC
+        none_selected: evoba eht fo enoN
+      show:
+        page_heading: hsac ni eviecer uoy stnemyap tceleS
+      cash_income_form:
+        dates: "%{date}"
+        info: snioc dna setonknab ekil yenom lacisyhp snaem hsaC.
+        none_selected: evoba eht fo enoN
+      update:
+        none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
+    cash_outgoings:
+      checkbox:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: evoba eht fo enoN
+      show:
+        page_heading: hsac ni ekam uoy stnemyap tceleS
+      cash_outgoings_form:
+        dates: "%{date}"
+        info: snioc dna setonknab ekil yenom lacisyhp snaem hsaC.
+        none_selected: evoba eht fo enoN
+      update:
+        none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     check_answers:
       index:
         assets:
@@ -130,16 +154,6 @@ cy:
         page_heading: "?eviecer uoy od stnemyap gniwollof eht fo hcihW"
       update:
         none_selected: emocni fo sepyt yna eviecer uoy fi tceleS
-    cash_incomes:
-      checkbox:
-        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
-      show:
-        page_heading: hsac ni eviecer uoy stnemyap tceleS
-      cash_income_form:
-        dates: "%{date}"
-        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
       update:
         none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     identify_types_of_outgoings:
