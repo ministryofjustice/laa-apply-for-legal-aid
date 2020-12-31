@@ -54,7 +54,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
       end
 
       it 'returns an error' do
-        expect(subject.errors.attribute_names.first).to eq(:import_accounts)
+        expect(subject.errors.keys.first).to eq(:import_accounts)
       end
     end
   end

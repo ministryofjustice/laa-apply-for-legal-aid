@@ -65,7 +65,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
 
       it 'returns an error' do
-        expect(subject.errors.attribute_names.first).to eq(:import_provider)
+        expect(subject.errors.keys.first).to eq(:import_provider)
       end
     end
   end
