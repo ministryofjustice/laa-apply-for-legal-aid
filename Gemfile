@@ -17,12 +17,6 @@ gem 'regexp-examples'
 gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
 gem 'simple_command', github: 'nebulab/simple_command', branch: 'master'
-
-# Sprockets isn't used by the app but is installed by rails as a dependency.
-# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
-# This pins sprockets to an earlier version to prevent those errors
-gem 'sprockets', '< 4'
-
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.3.0'
 
