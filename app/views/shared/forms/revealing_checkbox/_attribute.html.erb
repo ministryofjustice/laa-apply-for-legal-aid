@@ -3,7 +3,7 @@
   hint = controller_t "hint.#{check_box_attribute}", default: ''
   revealing_hint = controller_t "hint.revealing_#{check_box_attribute}", default: ''
   value = model.send(attribute)
-  checked = value.present? || model.send(check_box_attribute).present? ? 'checked' : ''
+  @form.__send__("#{check_box_attribute}=", value.present?)
 %>
 <%= form.govuk_check_box check_box_attribute, true, multiple: false, link_errors: true,
                          label: {text: controller_t(check_box_attribute)},
