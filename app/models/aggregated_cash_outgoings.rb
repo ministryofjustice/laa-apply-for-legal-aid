@@ -27,7 +27,7 @@ class AggregatedCashOutgoings < BaseAggregatedCashTransaction
   private
 
   def model_error(type)
-    I18n.t("activemodel.errors.models.aggregated_cash_income.#{self.class.operation}.attributes.none_selected.#{type}")
+    I18n.t("activemodel.errors.models.#{self.class.to_s.underscore}.#{self.class.operation}.attributes.none_selected.#{type}")
   end
 
   def amount_error(type)
