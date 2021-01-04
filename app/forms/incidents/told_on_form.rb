@@ -3,10 +3,10 @@ module Incidents
     include BaseForm
     form_for Incident
 
-    attr_accessor :told_year, :told_month, :told_day
+    attr_accessor :told_on_1i, :told_on_2i, :told_on_3i
     attr_writer :told_on
 
-    attr_accessor :occurred_year, :occurred_month, :occurred_day
+    attr_accessor :occurred_on_1i, :occurred_on_2i, :occurred_on_3i
     attr_writer :occurred_on
 
     validates :told_on, presence: true, unless: :draft_and_not_partially_complete_told_on_date?
@@ -72,7 +72,7 @@ module Incidents
         form: self,
         model: model,
         method: :told_on,
-        prefix: :told_
+        prefix: :told_on_
       )
     end
 
@@ -81,7 +81,7 @@ module Incidents
         form: self,
         model: model,
         method: :occurred_on,
-        prefix: :occurred_
+        prefix: :occurred_on_
       )
     end
   end
