@@ -75,7 +75,7 @@ en:
           credits:
             attributes:
               none_selected:
-                blank: Select if you make these payments in cash
+                blank: Select if you receive these payments in cash
                 others_present: Select payments in cash or None of the above
         applicant:
           attributes:
