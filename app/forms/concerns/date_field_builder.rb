@@ -2,6 +2,7 @@ class DateFieldBuilder
   YearError = Class.new(StandardError)
 
   DATE_PARTS = %i[year month day].freeze
+  FORM_PARTS = %i[1i 2i 3i].freeze
 
   attr_reader :form, :model, :method, :prefix
 
@@ -40,7 +41,7 @@ class DateFieldBuilder
 
   # Date part fields
   def fields
-    DATE_PARTS.map { |part| field_for(part) }
+    FORM_PARTS.map { |part| field_for(part) }
   end
 
   # An array of the data stored in the form's date part fields
@@ -48,11 +49,15 @@ class DateFieldBuilder
     @from_form ||= fields.map { |field| form.__send__(field) }
   end
 
+  def parts_hash
+    DATE_PARTS.zip(fields).to_h
+  end
+
   # A hash that can populate the form's date part fields from data in the model
   def model_attributes
     return unless model_date.present?
 
-    DATE_PARTS.each_with_object({}) { |part, hash| hash[field_for(part)] = model_date.__send__(part) }
+    DATE_PARTS.each_with_object({}) { |part, hash| hash[parts_hash[part]] = model_date.__send__(part) }
   end
 
   def model_date
