@@ -15,3 +15,84 @@ cy:
         rent_or_mortgage: stnemyap egagtrom ro tneR
         salary: segaw ro yralaS
         student_loan: tnarg ro naol tnedutS
+      providers:
+        benefits: stifeneB
+        child_care: stsoc eracdlihC
+        excluded_benefits: stifeneb dedragersiD
+        friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
+        legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
+        maintenance_in: stnemyap ecnanetniaM
+        maintenance_out: stnemyap ecnanetniaM
+        pension: noisneP
+        property_or_lodger: regdol ro ytreporp a morf emocnI
+        rent_or_mortgage: stsoc gnisuoH
+        salary: segaw ro yralaS
+        student_loan: tnarg ro naol tnedutS
+    table_label:
+      benefits: stifeneB
+      child_care: eracdlihC
+      excluded_benefits: stifeneb dedragersiD
+      friends_or_family: pleh laicnaniF
+      legal_aid: dia lageL
+      maintenance_in: ecnanetniaM
+      maintenance_out: ecnanetniaM
+      pension: noisneP
+      property_or_lodger: ytreporP
+      rent_or_mortgage: gnisuoH
+      salary: yralaS
+      student_loan: naol tnedutS
+    page_titles:
+      benefits: stnemyap stifeneb tceleS
+      child_care: stsoc eracdlihc tceleS
+      friends_or_family: ylimaf ro sdneirf morf stnemyap tceleS
+      legal_aid: stnemyap dia lagel tceleS
+      maintenance_in: stnemyap ecnanetniam tceleS
+      maintenance_out: stnemyap ecnanetniam tceleS
+      pension: stnemyap noisnep tceleS
+      property_or_lodger: regdol ro ytreporp a morf stnemyap tceleS
+      rent_or_mortgage: stnemyap gnisuoh tceleS
+      salary: stnemyap egaw ro yralas tceleS
+      student_loan: stnemyap tnarg ro naol tneduts tceleS
+      excluded_benefits: stnemyap stifeneb dedragersid tceleS
+    benefits:
+      inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap stifeneb yreve
+        tceleS"
+    child_care:
+      inset_text: ".shtnom 3 tsap eht ni edam tneilc ruoy tnemyap eracdlihc yreve
+        tceleS"
+    excluded_benefits:
+      inset_text: shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap stifeneb dedragersid
+        yreve tceleS
+    friends_or_family:
+      inset_text: ".shtnom 3 tsap eht ni ylimaf ro sdneirf morf deviecer tneilc ruoy
+        tnemyap yreve tceleS"
+      details_summary_heading: "?tceles ot stnemyap hcihw erus toN"
+      subheading: ":era yeht fi emocni sa tnuoc ylimaf ro sdneirf morf stnemyaP"
+      list: |2-
+
+        stsoc gnisuoh ekil sesnepxe gnivil rof desu
+        )meht yaper ot deen ton seod tneilc ruoy( stfig
+        nosrep emas eht morf
+        )htnom a ecno tsael ta( raluger
+      closing_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy stnemyap ffo-eno edulcni
+        ton oD"
+    legal_aid:
+      inset_text: shtnom 3 tsap eht ni esac lanimirc a ni dia lagel sdrawot edam tneilc
+        ruoy tnemyap yreve tceleS
+    maintenance_in:
+      inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap ecnanetniam
+        yreve tceleS"
+    maintenance_out:
+      inset_text: ".shtnom 3 tsap eht ni edam tneilc ruoy tnemyap ecnanetniam yreve
+        tceleS"
+    property_or_lodger:
+      inset_text: ".shtnom 3 tsap eht ni regdol a ro ytreporp morf deviecer tneilc
+        ruoy tnemyap yreve tceleS"
+    rent_or_mortgage:
+      inset_text: ".shtnom 3 tsap eht ni edam tneilc ruoy tnemyap gnisuoh yreve tceleS"
+    student_loan:
+      inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap tnarg ro naol
+        tneduts yreve tceleS"
+    pension:
+      inset_text: ".shtnom 3 tsap eht ni deviecer tneilc ruoy tnemyap noisnep yreve
+        tceleS"

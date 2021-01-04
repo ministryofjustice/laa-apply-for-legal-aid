@@ -1,22 +1,65 @@
 ---
 cy:
   generic:
+    accept_and_send: noitacilppa dnes dna tpeccA
+    address:
+      postcode: edoctsoP
+      postcode_label: edoctsop
     back: kcaB
+    back_to_your_applications: snoitacilppa ruoy ot kcaB
+    cancel: lecnaC
     change: egnahC
     continue: eunitnoC
-    cy: Cymraeg
-    en: English
-    en-GB: English # Needed for testing as en-GB is used by Faker
+    confirm: "?erus uoy erA"
+    create_test_applications: snoitacilppa tset etaerC
+    cy: gearmyC
+    destroy: yortseD
+    edit: tidE
+    en: hsilgnE
+    en-GB: hsilgnE
+    enter_text: txet retnE
     errors:
       problem_text: melborp a si erehT
-    menu: uneM
+      yes_or_no: oN ro seY rehtie tceles tsum uoY
+    home: emoH
+    information: noitamrofnI
+    list: tsiL
     'no': 'oN'
+    menu: uneM
+    none_declared: deralced enoN
+    none_selected: eseht fo enoN
+    not_completed: detelpmoc toN
     or: ro
     remove: evomeR
+    return_to_portal: latrop AAL ot nruteR
     save_and_continue: eunitnoc dna evaS
-    save_and_come_back_later: etal kcab emoc dna evaS
+    save_as_draft: tfard sa evaS
+    save_and_come_back_later: retal kcab emoc dna evaS
+    select_and_continue: eunitnoc dna tceleS
     select_all_that_apply: ylppa taht lla tceleS
     send: dneS
+    show: wohS
+    start: tratS
     start_now: won tratS
+    new_app: noitacilppa wen a ekaM
+    submit: timbuS
+    submit_and_continue: eunitnoc dna timbuS
+    tell_us: edulcni tsum tnemetats ruoY
+    total: latoT
     toggle_navigation: noitagivaN leveL poT edih ro wohS
+    undefined: denifednU
+    upload: daolpU
+    upload_file: elif a hcattA
+    view: weiV
     'yes': seY
+    uploading: "...gnidaolpU"
+    ordinal_number:
+      1: tsrif
+      2: dnoces
+      3: driht
+      4: htruof
+      5: htfif
+      6: htxis
+      7: htneves
+      8: hthgie
+      9: htnin

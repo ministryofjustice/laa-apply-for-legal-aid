@@ -11,10 +11,12 @@ cy:
       unknown: derrucco sah rorre nwonknu nA
     detail:
       provider_error: ''
-      account_permanently_locked: ".tnuocca ruoy htiw melborp a s’ereht fi ees ot knab ruoy tcatnoC"
+      account_permanently_locked: ".tnuocca ruoy htiw melborp a s’ereht fi ees ot
+        knab ruoy tcatnoC"
       account_temporarily_locked: ''
       internal_server_error: ''
       user_input_required: ''
       wrong_credentials: ''
-      unknown: ".retal niaga yrt esaelP  .ti no gnikrow era dna ,detrela neeb evah eW  .derrucco sah rorre nwonknu nA"
+      unknown: ".retal niaga yrt esaelP  .ti no gnikrow era dna ,detrela neeb evah
+        eW  .derrucco sah rorre nwonknu nA"
     close_tab: ".egap ro bat siht esolc nac uoY"

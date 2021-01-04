@@ -3,19 +3,468 @@ cy:
   accessibility:
     problem_text: melborp a si erehT
   activemodel:
+    attributes:
+      address:
+        address_line_one: teerts dna gnidliuB
+        address_line_two: ''
+        city: ytic ro nwoT
+        county: ytnuoC
+        postcode: edoctsoP
+      applicant:
+        dob_day: yaD
+        dob_month: htnoM
+        dob_year: raeY
+        email: sserdda liamE
+        first_name: eman tsriF
+        last_name: eman tsaL
+        national_insurance_number: rebmun ecnarusnI lanoitaN
+      applicants/address_form:
+        address_line_one: teerts dna gnidliuB
+        address_line_two: ''
+        city: ytic ro nwoT
+        county: ytnuoC
+        postcode: edoctsoP
+      applicants/basic_details_form:
+        dob_day: yaD
+        dob_month: htnoM
+        dob_year: raeY
+        email: sserdda liamE
+        first_name: eman tsriF
+        last_name: eman tsaL
+        national_insurance_number: rebmun ecnarusnI lanoitaN
+      dependant:
+        dob_day: yaD
+        dob_month: htnoM
+        dob_year: raeY
+        name: emaN
+      incident:
+        told_day: yaD
+        told_month: htnoM
+        told_year: raeY
+        occurred_day: yaD
+        occurred_month: htnoM
+        occurred_year: raeY
+      legal_aid_application:
+        outstanding_mortgage_amount: tnuoma egagtrom gnidnatstuo retnE
+        used_delegated_functions_day: yaD
+        used_delegated_functions_month: htnoM
+        used_delegated_functions_year: raeY
+      statement_of_case:
+        file_uploaded: "%{file_name} dedaolpu evah uoY"
+        file_deleted: "%{file_name} deteled evah uoY"
+      vehicle:
+        purchased_on_day: yaD
+        purchased_on_month: htnoM
+        purchased_on_year: raeY
     errors:
+      messages:
+        earliest_allowed_date: "%{date} erofeb eb tonnac etaD"
       models:
+        address:
+          attributes:
+            address_line_one:
+              blank: teerts dna gnidliub a retnE
+            city:
+              blank: ytic ro nwot a retnE
+            lookup_id:
+              blank: tsil eht morf sserdda na tceleS
+            postcode:
+              blank: edoctsop a retnE
+              invalid: tamrof thgir eht ni edoctsop a retnE
+        aggregated_cash_income:
+          credits:
+            attributes:
+              none_selected:
+                blank: hsac ni stnemyap eseht ekam uoy fi tceleS
+                others_present: evoba eht fo enoN ro hsac ni stnemyap tceleS
+        applicant:
+          attributes:
+            date_of_birth:
+              blank: htrib fo etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum htrib fo etaD
+              date_not_valid: htrib fo etad dilav a retnE
+              earliest_allowed_date: htrib fo etad dilav a retnE
+            email:
+              blank: sserdda liame na retnE
+              invalid: moc.elpmaxe@eman sa hcus ,tamrof tcerroc eht ni sserdda liame
+                na retnE
+            first_name:
+              blank: eman tsrif retnE
+            last_name:
+              blank: eman tsal retnE
+            national_insurance_number:
+              blank: rebmun ecnarusnI lanoitaN a retnE
+              not_valid: rebmun ecnarusnI lanoitaN dilav a retnE
+            employed:
+              blank: deyolpme si tneilc ruoy fi sey tceleS
+        applicants/address_form:
+          attributes:
+            address_line_one:
+              blank: teerts dna gnidliub a retnE
+            city:
+              blank: ytic ro nwot a retnE
+            lookup_id:
+              blank: tsil eht morf sserdda na tceles esaelP
+            postcode:
+              blank: edoctsop a retnE
+              invalid: tamrof thgir eht ni edoctsop a retnE
+        applicants/address_lookup_form:
+          attributes:
+            postcode:
+              blank: edoctsop a retnE
+              invalid: tamrof thgir eht ni edoctsop a retnE
+        applicants/address_selection_form:
+          attributes:
+            address:
+              blank: tsil eht morf sserdda na tceles esaelP
+        applications/proceedings_form:
+          attributes:
+            code:
+              blank: detceles eb tsum gnideecorp A
+        dependant:
+          attributes:
+            name:
+              blank: eman a retnE
+            date_of_birth:
+              blank: htrib fo etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum htrib fo etaD
+              date_not_valid: htrib fo etad dilav a retnE
+              earliest_allowed_date: htrib fo etad dilav a retnE
+            in_full_time_education:
+              blank_message: gniniart ro noitacude emit-lluf ni era yeht fi sey tceleS
+            has_income:
+              blank_message: emocni yna eviecer yeht fi sey tceleS
+            monthly_income:
+              blank: tnuoma eht retnE
+              not_a_number: 000,1 ekil ,yenom fo tnuoma na eb tsum emocnI
+              greater_than: orez naht erom eb tsum tnuoma emocnI
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuomA
+            relationship:
+              blank: evitaler tluda ro evitaler dlihc a era yeht fi tceleS
+            has_assets_more_than_threshold:
+              blank_message: 000,8£ naht erom htrow stessa evah yeht fi sey tceleS
+            assets_value:
+              blank: tnuoma eht retnE
+              not_a_number: 000,1 ekil ,yenom fo tnuoma na eb tsum eulaV
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulaV
+              less_than_threshold: 000,8£ naht ssel htrow stessa evah yeht fi on tceleS
+        incident:
+          attributes:
+            told_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum tnedicni tsetal eht tuoba
+                uoy dlot tneilc ruoy etaD
+              blank: tnedicni tsetal eht tuoba uoy dlot tneilc ruoy etad eht retnE
+            occurred_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum derrucco tnedicni eht etaD
+              blank: derrucco tnedicni eht etad eht retnE
+              invalid_timeline: ti tuoba uoy dlot tneilc ruoy etad eht erofeb eb tsum
+                derrucco tnedicni eht etaD
+            details:
+              blank: tnedicni eht fo sliated retnE
         irregular_income:
           attributes:
             amount:
-              blank: raey cimedaca siht teg ll’uoy ecnanif tneduts fo tnuoma latoteht retnE
-              too_many_decimals: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol tnedutS
+              blank: raey cimedaca siht teg ll’uoy ecnanif tneduts fo tnuoma latot
+                eht retnE
+              too_many_decimals: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol
+                tnedutS
               not_a_number: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol tnedutS
         legal_aid_application:
           attributes:
+            has_dependants:
+              blank: stnadneped yna sah tneilc ruoy fi sey tceleS
+            has_restrictions:
+              citizens:
+                blank: stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
+                  snoitcirtser era ereht fi sey tceleS
+              providers:
+                blank: stessa rieht tsniaga gniworrob ro gnilles morf tneilc ruoy
+                  tneverp taht snoitcirtser era ereht fi sey tceleS
             open_banking_consents:
+              providers:
+                blank: eerga uoy fi sey tceleS
               citizens:
                 blank_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni
                   tnuocca knab ruoy erahs ot eerga uoy fi sey tceleS"
+            outstanding_mortgage_amount:
+              blank: tnuoma egagtrom gnidnatstuo eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum tnuoma egagtroM
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum tnuoma egagtroM
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuoma
+                egagtroM
+            own_home:
+              citizens:
+                blank: ni evil uoy emoh eht nwo uoy fi sey tceleS
+              providers:
+                blank: ni evil yeht taht emoh eht snwo tneilc ruoy fi sey tceleS
+            own_vehicle:
+              citizens:
+                blank: elcihev a nwo uoy fi sey tceleS
+              providers:
+                blank: elcihev a snwo tneilc ruoy fi sey tceleS
+            percentage_home:
+              blank: erahs egatnecrep eht retnE
+              greater_than_or_equal_to: 06 ekil ,001 rednu tnuoma egatnecrep a eb
+                tsum erahS
+              less_than_or_equal_to: 06 ekil ,001 rednu tnuoma egatnecrep a eb tsum
+                erahS
+              not_a_number: 06 ekil ,001 rednu tnuoma egatnecrep a eb tsum erahS
+            property_value:
+              citizens:
+                blank: emoh ruoy rof eulav detamitse na retnE
+                not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum emoh ruoy fo
+                  eulav detamitse ehT
+              greater_than: erom ro 0 eb tsum eulav detamitsE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav detamitsE
+              providers:
+                blank: emoh s'tneilc ruoy rof eulav detamitse na retnE
+                not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum emoh s'tneilc
+                  ruoy fo eulav detamitse ehT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                detamitsE
+            restrictions_details:
+              citizens:
+                blank: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa eht retnE
+              providers:
+                blank: yhw dna ,tsniaga worrob ro lles tonnac tneilc ruoy stessa eht
+                  retnE
+            shared_ownership:
+              citizens:
+                blank: esle enoemos htiw emoh ruoy nwo uoy fi sey tceleS
+              providers:
+                blank: esle enoyna htiw emoh rieht snwo tneilc ruoy fi sey tceleS
             student_finance:
               blank: ecnanif tneduts teg uoy fi sey tceleS
+            substantive_application:
+              blank: won noitacilppa evitnatsbus a ekam ot tnaw uoy fi sey tceleS
+            uncategorised_bank_transactions:
+              message: yrogetac siht ot snoitcasnart ddA
+            used_delegated_functions:
+              blank: snoitcnuf detageled desu ev'uoy fi sey tceleS
+            used_delegated_functions_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum snoitcnuf detageled desu
+                uoy etad ehT
+              blank: snoitcnuf detageled desu uoy etad eht retnE
+              date_not_in_range: "%{months} erofeb eb tonnac snoitcnuf detageled desu
+                uoy etad ehT"
+        merits_assessment:
+          attributes:
+            application_purpose:
+              blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
+            details_of_proceedings_before_the_court:
+              blank: truoc eht erofeb yltnerruc sgnideecorp eht fo sliated retnE
+            proceedings_before_the_court:
+              blank: truoc eht erofeb yltnerruc era thguos gnieb si gnidnuf hcihw
+                rof sgnideecorp eht fi seY tceleS
+            success_prospect:
+              blank: emoctuo lufsseccus a fo ecnahc eht tceleS
+            success_likely:
+              blank: retteb ro %05 si emoctuo lufsseccus a fo ecnahc eht fi sey tceleS
+            success_prospect_details:
+              blank: detnarg eb dluohs dia lagel yhw su lleT
+        other_assets_declaration:
+          attributes:
+            valuable_items_value:
+              blank: smeti elbaulav fo eulav latot detamitse eht retnE
+              greater_than_or_equal_to: erom ro 005£ eb tsum eulav detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav smeti elbaulav
+                detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                smeti elbaulav detamitsE
+            land_value:
+              blank: eulav dnal detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav dnal detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav dnal detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                dnal detamitsE
+            inherited_assets_value:
+              blank: etatse fo eulav detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav stessa yenom detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav etatse detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                stessa yenom detamitsE
+            money_owed_value:
+              blank: dewo yenom fo eulav detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav dewo yenom detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum dewo yenom detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                dewo yenom detamitsE
+            second_home_mortgage:
+              blank: tnuoma egagtrom gnidnatstuo retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum egagtrom emoh dnoces detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum tnuoma egagtrom
+                gnidnatstuO
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum egagtrom
+                emoh dnoces detamitsE
+            second_home_percentage:
+              blank: erahs egatnecrep ytreporp retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav egatnecrep emoh dnoces
+                detamitsE
+              not_a_number: 33.33 ekil ,egatnecrep eb tsum erahs pihsrenwO
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum egatnecrep
+                emoh dnoces detamitsE
+            second_home_value:
+              blank: eulav ytreporp detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav emoh dnoces detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                emoh dnoces detamitsE
+            timeshare_property_value:
+              blank: eulav ytreporp erahsemit detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav erahsemit detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav ytreporp
+                erahsemit detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                erahsemit detamitsE
+            trust_value:
+              blank: tsurt fo eulav detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav tsurt detamitsE
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum eulav tsurt detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                tsurt detamitsE
+            base:
+              citizens:
+                none_selected: stessa fo sepyt eseht fo yna evah uoy fi tceleS
+              providers:
+                none_selected: stessa fo sepyt eseht fo yna sah tneilc ruoy fi tceleS
+        policy_disregards:
+          attributes:
+            base:
+              providers:
+                none_selected: stnemyap eseht fo yna deviecer sah tneilc ruoy fi tceleS
+        provider:
+          attributes:
+            selected_office_id:
+              blank: rebmun tnuocca na tceleS
+            username:
+              already_exists: emanresu taht htiw resu a ydaerla si erehT
+        respondent:
+          attributes:
+            full_name:
+              blank: eman s'tnenoppo eht retnE
+            understands_terms_of_court_order:
+              blank: redro truoc a fo smret eht dnatsrednu ot yticapac latnem eht
+                sah tnenoppo eht fi sey tceleS
+            warning_letter_sent:
+              blank: tnenoppo eht ot tnes neeb sah rettel gninraw a fi sey tceleS
+            police_notified:
+              blank: deifiton neeb evah ecilop eht fi sey tceleS
+            bail_conditions_set:
+              blank: tes neeb evah snoitidnoc liab fi sey tceleS
+            understands_terms_of_court_order_details:
+              blank: redro na fo hcaerb a ecrofne dluow truoc eht kniht uoy yhw su
+                lleT
+            warning_letter_sent_details:
+              blank: tnes neeb ton sah rettel gninraw a yhw su lleT
+            police_notified_details:
+              blank: nekat evah ecilop eht noitca tahw su lleT
+            bail_conditions_set_details:
+              blank: snoitidnoc liab eht fo sliated eviG
+        savings_amount:
+          attributes:
+            base:
+              none_selected: stnemtsevni ro sgnivas eseht fo yna evah uoy fi tceleS
+              no_account_selected: stnuocca sgnivas ro tnerruc evah uoy fi tceleS
+              citizens:
+                none_selected: stnemtsevni ro sgnivas eseht fo yna evah uoy fi tceleS
+              providers:
+                none_selected: stnemtsevni ro sgnivas eseht fo yna sah tneilc ruoy
+                  fi tceleS
+                no_account_selected: stnuocca sgnivas ro tnerruc sah tneilc ruoy fi
+                  tceleS
+            cash:
+              blank: sgnivas hsac fo tnuoma latot eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum sgnivas hsac latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum sgnivas hsac latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                hsac detamitsE
+            offline_current_accounts:
+              blank: stnuocca tnerruc lla ni latot detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum stnuocca tnerruc ni latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum stnuocca tnerruc
+                ni latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum stnuocca
+                tnerruc ni latot detamitsE
+            offline_savings_accounts:
+              blank: stnuocca sgnivas lla ni latot detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum stnuocca sgnivas ni latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum stnuocca sgnivas
+                ni latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum stnuocca
+                sgnivas ni latot detamitsE
+            life_assurance_endowment_policy:
+              blank: seicilop ecnarussa efil fo eulav latot eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum seicilop ecnarussa efil
+                fo latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum seicilop ecnarussa
+                efil fo latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                seicilop ecnarussa efil detamitsE
+            national_savings:
+              blank: sdnob dna setacifitrec fo eulav latot eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum sdnob dna setacifitrec fo
+                latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum sdnob dna setacifitrec
+                fo latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                tsurt detamitsE
+            other_person_account:
+              blank: stnuocca s’elpoep rehto ni latot detamitse eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum stnuocca s’elpoep rehto
+                ni latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum stnuocca s’elpoep
+                rehto ni latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                stnuocca s’elpoep rehto detamitsE
+            peps_unit_trusts_capital_bonds_gov_stocks:
+              blank: stnemtsevni rehto fo eulav latot eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum stnemtsevni rehto fo latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum stnemtsevni rehto
+                fo latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                stnemtsevni rehto detamitsE
+            plc_shares:
+              blank: serahs fo eulav latot eht retnE
+              greater_than_or_equal_to: erom ro 0 eb tsum serahs fo latoT
+              not_a_number: 000,06 ekil ,yenom fo tnuoma na eb tsum serahs fo latoT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                serahs detamitsE
+        setting:
+          attributes:
+            mock_true_layer_data:
+              blank: knalb eb t'nac ataD reyaLeurT kcoM
+        statement_of_case:
+          attributes:
+            original_file:
+              content_type_invalid: FDP ro FIT ,GNP ,PMB ,GPJ ,TDO ,FTR ,XCOD ,COD
+                a eb tsum elif detceles ehT
+              file_empty: ytpme si elif detceles ehT
+              file_too_big: BM%{size} naht rellams eb tsum elif detceles ehT
+              file_virus: suriv a sniatnoc elif detceles ehT
+              system_down: niaga yrt - elif ruoy gnidaolpu melborp a saw erehT
+              no_file_chosen: elif eno tsael ta esoohc tsum uoY
+              blank: txet retne ro elif a hcattA
+        vehicle:
+          attributes:
+            estimated_value:
+              blank: elcihev eht fo eulav detamitse eht retnE
+              not_a_number: 000,5 ekil ,yenom fo tnuoma na eb tsum eulav detamitsE
+              greater_than_or_equal_to: erom ro 0 eb tsum eulav detamitsE
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulav
+                detamitsE
+            payment_remaining:
+              blank: yap ot tfel tnuoma eht retnE
+              not_a_number: 000,5 ekil ,yenom fo tnuoma na eb tsum yap ot tfel tnuoma
+                ehT
+              greater_than_or_equal_to: erom ro 0 eb tsum egap ot tfel tnuoma ehT
+              too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuomA
+            payments_remain:
+              blank: elcihev eht no tfel stnemyap yna era ereht fi sey tceleS
+            more_than_three_years_old:
+              blank: oga sraey 3 revo elcihev eht thguob tneilc ruoy fi sey tceleS
+            used_regularly:
+              blank: esu raluger ni si elcihev eht fi sey tceleS

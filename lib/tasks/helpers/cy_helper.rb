@@ -1,4 +1,23 @@
 class CyHelper
+  FILES_TO_TRANSLATE = %w[
+    accessibility_statement
+    activemodel
+    activerecord
+    citizens
+    contacts
+    currency
+    errors
+    feedback
+    generic
+    helpers
+    layouts
+    model_enum_translations
+    privacy_policy
+    shared
+    transaction_types
+    true_layer_errors
+  ].freeze
+
   def initialize
     @cy_dir = Rails.root.join('config/locales/cy')
     @en_dir = Rails.root.join('config/locales/en')
@@ -18,13 +37,14 @@ class CyHelper
 
   def delete_cy_dir
     puts 'deleting cy dir'
-    system "rm -rf #{@cy_dir}"
+    FileUtils.rm @cy_dir, force: true
   end
 
   def copy_en_to_cy
     puts 'copying en locale to cy'
-    system "mkdir #{@cy_dir}"
-    system "cp #{@en_dir}/* #{@cy_dir}/"
+    en_files = FILES_TO_TRANSLATE.map { |f| Rails.root.join("config/locales/en/#{f}.yml").to_s }
+    FileUtils.mkdir @cy_dir unless File.exist?(@cy_dir)
+    FileUtils.cp en_files, @cy_dir, verbose: true
   end
 
   def translation_files
@@ -42,10 +62,15 @@ class CyHelper
 
   def reverse_key(key, hash)
     case hash[key]
-    when String then hash[key] = hash[key].reverse
+    when String then hash[key] = reverse_but_preserve_tokens(hash[key])
     when Hash then hash[key].each_key do |k|
                      reverse_key(k, hash[key])
                    end
     end
+  end
+
+  def reverse_but_preserve_tokens(string)
+    reversed_string = string.reverse
+    reversed_string.gsub(/\}(\S+)\{%/, &:reverse)
   end
 end
