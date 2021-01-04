@@ -209,6 +209,14 @@ When changes to test files are made it will run the tests in that file
 When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
 Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes
 
+#### pry-rescue
+
+The repo also includes `pry-rescue`, a gem to allow faster debugging. Running
+```
+bundle exec rescue rspec
+```
+will cause any failing tests or unhandled exceptions to automatically open a `pry` prompt for immediate investigation.
+
 ## Deployment
 
 The deployment is triggered on all builds in [CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid) but requires approval to the desired environment.
