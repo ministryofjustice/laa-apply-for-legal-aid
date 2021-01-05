@@ -72,7 +72,8 @@ module Incidents
         form: self,
         model: model,
         method: :told_on,
-        prefix: :told_on_
+        prefix: :told_on_,
+        suffix: :gov_uk
       )
     end
 
@@ -81,7 +82,8 @@ module Incidents
         form: self,
         model: model,
         method: :occurred_on,
-        prefix: :occurred_on_
+        prefix: :occurred_on_,
+        suffix: :gov_uk
       )
     end
   end
