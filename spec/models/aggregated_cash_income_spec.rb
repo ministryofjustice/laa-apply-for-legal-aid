@@ -185,7 +185,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
 
         it 'populates the errors' do
-          expect(aci.errors.full_messages).to eq ['None selected Select if you make these payments in cash']
+          expect(aci.errors.full_messages).to eq ['None selected Select if you receive these payments in cash']
         end
       end
 
