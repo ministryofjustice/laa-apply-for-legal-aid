@@ -11,13 +11,15 @@ RSpec.describe DateFieldBuilder do
       happened_year: form_date.year
     )
   end
+  let(:suffix) { nil }
 
   subject do
     described_class.new(
       form: form,
       model: model,
       method: :happened_on,
-      prefix: :happened_
+      prefix: :happened_,
+      suffix: suffix
     )
   end
 
@@ -158,6 +160,22 @@ RSpec.describe DateFieldBuilder do
       it 'returns false' do
         expect(subject.partially_complete?).to be false
       end
+    end
+  end
+
+  context 'when a suffix is set' do
+    let(:suffix) { :gov_uk }
+
+    let(:form) do
+      OpenStruct.new(
+        happened_3i: form_date.day,
+        happened_2i: form_date.month,
+        happened_1i: form_date.strftime('%y')
+      )
+    end
+
+    it 'returns date built from form new style part fields' do
+      expect(subject.form_date).to eq(form_date)
     end
   end
 end
