@@ -297,14 +297,20 @@ en:
         col_description: Description
         remove_link: Remove
       index:
+        amount: Amount
+        cash_heading: 'Physical cash:'
+        cash_hint: For example, banknotes and coins.
+        month: Calendar month
+        other_heading: Other income
+        page_heading: "Sort your client's income into categories"
+        select: View statements and add transactions
         subheading: Your client told us they receive the following types of income.
+        total: Total
         you_need_to:
           text: "You need to:"
           list: |
             view your client's bank statements
             add transactions to each income category
-        page_heading: "Sort your client's income into categories"
-        select: View statements and add transactions
     invalid_logins:
       show:
         permission_title: You do not have permission to view this page

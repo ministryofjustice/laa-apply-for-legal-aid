@@ -2,6 +2,7 @@ module Providers
   class IncomeSummaryController < ProviderBaseController
     def index
       @bank_transactions = bank_transactions
+      @cash_transactions = cash_transactions
     end
 
     def create
@@ -26,6 +27,10 @@ module Providers
                             .credit
                             .order(happened_at: :desc)
                             .by_type
+    end
+
+    def cash_transactions
+      @cash_transactions ||= @legal_aid_application.cash_transactions.order(transaction_date: :desc)
     end
   end
 end
