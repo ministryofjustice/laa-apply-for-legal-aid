@@ -9,12 +9,9 @@ module Flow
         },
         cash_incomes: {
           path: ->(_) { urls.citizens_cash_income_path(locale: I18n.locale) },
-          forward: ->(_) { :cash_outgoings }
-        },
-        cash_outgoings: {
-          path: ->(_) { urls.citizens_cash_outgoing_path(locale: I18n.locale) },
           forward: ->(_) { :student_finances }
         },
+
         student_finances: {
           path: ->(_) { urls.citizens_student_finance_path(locale: I18n.locale) },
           forward: ->(application) do
@@ -27,7 +24,11 @@ module Flow
         },
         identify_types_of_outgoings: {
           path: ->(_) { urls.citizens_identify_types_of_outgoing_path(locale: I18n.locale) },
-          forward: :check_answers
+          forward: ->(_) { Setting.allow_cash_payment? ? :cash_outgoings : :check_answers }
+        },
+        cash_outgoings: {
+          path: ->(_) { urls.citizens_cash_outgoing_path(locale: I18n.locale) },
+          forward: ->(_) { :check_answers }
         }
       }.freeze
     end

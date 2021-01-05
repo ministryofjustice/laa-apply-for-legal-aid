@@ -68,12 +68,6 @@ Feature: Citizen journey
     Then I enter benefits2 '100'
     Then I enter benefits3 '100'
     And I click 'Save and continue'
-    Then I should be on the 'cash_outgoing' page showing 'Select payments you make in cash'
-    Then I select 'aggregated_cash_outgoings_check_box_rent_or_mortgage'
-    Then I enter rent_or_mortgage1 '100'
-    Then I enter rent_or_mortgage2 '100'
-    Then I enter rent_or_mortgage3 '100'
-    And I click 'Save and continue'
     Then I should be on the 'student_finance' page showing 'Do you get student finance?'
     When I choose "Yes"
     And I click 'Save and continue'
@@ -83,6 +77,12 @@ Feature: Citizen journey
     Then I should be on a page showing "Which of the following payments do you make?"
     Then I select "Rent or mortgage"
     Then I click 'Save and continue'
+    Then I should be on the 'cash_outgoing' page showing 'Select payments you make in cash'
+    Then I select 'aggregated_cash_outgoings_check_box_rent_or_mortgage'
+    Then I enter rent_or_mortgage1 '100'
+    Then I enter rent_or_mortgage2 '100'
+    Then I enter rent_or_mortgage3 '100'
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page not showing 'Excluded Benefits'
     Then I should be on a page showing "Confirm the following"
