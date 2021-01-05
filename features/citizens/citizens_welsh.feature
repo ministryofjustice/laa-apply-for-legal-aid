@@ -7,18 +7,18 @@ Feature: Citizen journey in Welsh
     Then I visit the start of the financial assessment in Welsh
     Then I should be on a page showing 'noitacilppa dia lagel ruoY'
     Then I click link 'tratS'
-    Then I should be on a page showing "?>rbba/'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni tnuocca knab ruoy erahs ot eerga uoy oD"
+    Then I should be on a page showing "?reyaLeurT aiv >rbba/'ycnegA diA lageL'=eltit rbba< eht htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
     Then I choose 'seY'
     Then I click 'eunitnoC'
     Then I should be on a page showing 'knab ruoy tceleS'
     Then I should be on a page showing ".sknab tnereffid htiw stnuocca evah uoy fi retal erom tceles ot elba eb ll'uoY .emit a ta knab eno tceleS"
     Then I click link 'kcaB'
-    Then I should be on a page showing "?>rbba/'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni tnuocca knab ruoy erahs ot eerga uoy oD"
+    Then I should be on a page showing "?reyaLeurT aiv >rbba/'ycnegA diA lageL'=eltit rbba< eht htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
     Then I choose 'oN'
     Then I click 'eunitnoC'
     Then I should be on a page showing 'noitacilppa ruoy eunitnoc ot roticilos ruoy tcatnoC'
     Then I click link 'kcaB'
-    Then I should be on a page showing "?>rbba/'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni tnuocca knab ruoy erahs ot eerga uoy oD"
+    Then I should be on a page showing "?reyaLeurT aiv >rbba/'ycnegA diA lageL'=eltit rbba< eht htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
     Then I choose 'seY'
     Then I click 'eunitnoC'
     Then I choose 'HSBC'
