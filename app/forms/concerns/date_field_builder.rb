@@ -8,11 +8,12 @@ class DateFieldBuilder
 
   # :method is the target method on the model
   # :prefix is used to construct date part fields
-  def initialize(form:, model:, method:, prefix:)
+  def initialize(form:, model:, method:, prefix:, suffix: :date)
     @form = form
     @model = model
     @method = method
     @prefix = prefix
+    @suffix = suffix
   end
 
   def blank?
@@ -41,7 +42,8 @@ class DateFieldBuilder
 
   # Date part fields
   def fields
-    FORM_PARTS.map { |part| field_for(part) }
+    target = @suffix.eql?(:gov_uk) ? FORM_PARTS : DATE_PARTS
+    target.map { |part| field_for(part) }
   end
 
   # An array of the data stored in the form's date part fields
