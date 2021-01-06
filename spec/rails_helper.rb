@@ -7,6 +7,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'json_expressions/rspec'
 require 'awesome_print'
+require 'pry-rescue/rspec' if Rails.env.development?
 
 # Add additional requires below this line. Rails is not loaded until this point!
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
