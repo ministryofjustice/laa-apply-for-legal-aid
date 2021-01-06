@@ -73,4 +73,10 @@
 
   <%= render 'shared/check_answers/assets', read_only: true %>
 
+  <% if @legal_aid_application.passported? && @cfe_result.capital_contribution_required? %>
+    <section class="print-no-break">
+      <h2 class="govuk-heading-l"><%= t('.caseworker-review-section-heading') %></h2>
+      <%= render partial: 'caseworker_review', locals: {remarks: @cfe_result.remarks } %>
+    </section>
+  <% end %>
 <% end %>
