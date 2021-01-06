@@ -3,8 +3,8 @@ module LegalAidApplications
     include BaseForm
     form_for LegalAidApplication
 
-    attr_accessor :used_delegated_functions_year, :used_delegated_functions_month,
-                  :used_delegated_functions_day, :used_delegated_functions
+    attr_accessor :used_delegated_functions_on_1i, :used_delegated_functions_on_2i,
+                  :used_delegated_functions_on_3i, :used_delegated_functions
     attr_writer :used_delegated_functions_on
 
     validates :used_delegated_functions, presence: { unless: :draft? }
@@ -82,7 +82,8 @@ module LegalAidApplications
         form: self,
         model: model,
         method: :used_delegated_functions_on,
-        prefix: :used_delegated_functions_
+        prefix: :used_delegated_functions_on_,
+        suffix: :gov_uk
       )
     end
 

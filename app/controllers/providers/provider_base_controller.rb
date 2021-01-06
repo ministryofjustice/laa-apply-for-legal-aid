@@ -7,9 +7,9 @@ module Providers
     include Draftable
     include Authorizable
 
-    def convert_date_params
+    def convert_date_params(model_name)
       # gsub finds ([digit]i) and replaces with _[digit]i
-      params['incident'].transform_keys! { |key| key.gsub(/\((\di)\)/, '_\\1') }
+      params[model_name].transform_keys! { |key| key.gsub(/\((\di)\)/, '_\\1') }
     end
   end
 end
