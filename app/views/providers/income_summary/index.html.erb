@@ -23,54 +23,62 @@
             error: errors[transaction_type.name.to_sym]
           ) %>
     <% end %>
+
       <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
         <%= render partial: 'add_other_income' %>
       <% end %>
-    <% if @legal_aid_application.student_finance? %>
-      <li>
-        <h3 class="govuk-heading-m govuk-!-padding-top-6">Student finance</h3>
-        <p class="gov-body">Your client also told us they'll get <%= gds_number_to_currency(@legal_aid_application.value_of_student_finance) %> in student finance this academic year.</p>
-      </li>
-    <% end %>
-
-    <% if Setting.allow_cash_payment? #@legal_aid_application.cash_payments_exist??? %>
-
-      <div class="govuk-!-padding-bottom-4"></div>
-
-      <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
-
-      <h2 class="govuk-heading-m"><%= t('.cash_heading') %></h2>
-
-      <%= govuk_hint t('.cash_hint') %>
-
-      <% @cash_transactions.each do |transaction| %>
-        <p> <%= transaction.transaction_type.name %> </p>
-        <p> <%= transaction.amount %> </p>
-        <p> <%= transaction.transaction_date %> </p>
-      <% end %>
-
-      <table class="govuk-table" style="margin-bottom:0px;">
-        <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col"><%= t('.month') %></th>
-          <th class="govuk-table__header govuk-table__cell--numeric govuk-!-font-weight-bold" scope="col"><%= t('.amount') %></th>
-        </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <% @cash_transactions.each do |cash_transaction| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell"><%= cash_transaction.transaction_date %></td>
-              <td class="govuk-table__cell govuk-table__cell--numeric"><%= cash_transaction.amount %></td>
-            </tr>
-          <% end %>
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell"><strong><%= t('.total') %></strong></td>
-          <td class="govuk-table__cell govuk-table__cell--numeric"><strong>£360.00</strong></td>
-        </tr>
-        </tbody>
-      </table>
-    <% end %>
   </ol>
+
+  <% if  @legal_aid_application.student_finance? || @legal_aid_application.cash_transactions.credits.exists? %>
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
+
+    <p class="gov-body"><%= t('.following_payments') %></p>
+  <% end %>
+
+    <% if @legal_aid_application.student_finance? %>
+      <p>
+        <h3 class="govuk-heading-m govuk-!-padding-top-6"><%= t('.student_finance') %></h3>
+        <p class="gov-body"><%= t('.client_told_us') %> <%= gds_number_to_currency(@legal_aid_application.value_of_student_finance) %><%= t('.academic_year') %></p>
+      </p>
+    <% end %>
+
+    <% if @legal_aid_application.cash_transactions.credits.exists? %>
+
+      <% @income_types.each do |type| %>
+
+        <div class="govuk-!-padding-bottom-4"></div>
+
+        <h2 class="govuk-heading-m"><%= t('.cash_heading') %> <%= t(".#{type}") %></h2>
+
+        <%= govuk_hint t('.cash_hint') %>
+
+        <table class="govuk-table" style="margin-bottom:0px;">
+          <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col"><%= t('.month') %></th>
+            <th class="govuk-table__header govuk-table__cell--numeric govuk-!-font-weight-bold" scope="col"><%= t('.amount') %></th>
+          </tr>
+          </thead>
+
+          <tbody class="govuk-table__body">
+            <% @cash_transactions.select {|i| i.transaction_type.name == type}.each do |transaction| %>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell"><%= transaction.transaction_date %></td>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><%= transaction.amount %></td>
+              </tr>
+            <% end %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><strong><%= t('.total') %></strong></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><strong>
+              <%= number_to_currency @legal_aid_application.cash_transactions.amounts.fetch(type, 0) %>
+            </strong></td>
+          </tr>
+        </tbody>
+        </table>
+      <% end %>
+    <% end %>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_income_summary_index_path,

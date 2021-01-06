@@ -7,4 +7,18 @@ class CashTransaction < ApplicationRecord
   belongs_to :transaction_type
 
   validates_inclusion_of :month_number, in: [1, 2, 3]
+  
+  scope :credits, -> do
+    includes(:transaction_type)
+      .where(transaction_types: { operation: :credit })
+  end
+
+  scope :debits, -> do
+    includes(:transaction_type)
+      .where(transaction_types: { operation: :debit })
+  end
+
+  def self.amounts
+    includes(:transaction_type).group(:name).sum(:amount)
+  end
 end
