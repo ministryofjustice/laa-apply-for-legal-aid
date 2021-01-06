@@ -10,7 +10,9 @@
 
     <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: { size: 'xl', text: t('.heading') }) do %>
       <%= form.govuk_radio_button(:used_delegated_functions, true, label: {text: t('generic.yes')} ) do %>
-        <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_days_ago(5) %>
+        <%= form.govuk_date_field :used_delegated_functions_on,
+                                  legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label") },
+                                  hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5))} %>
       <% end %>
 
       <%= form.govuk_radio_button(:used_delegated_functions, false, label: {text:  t('generic.no')} ) %>
