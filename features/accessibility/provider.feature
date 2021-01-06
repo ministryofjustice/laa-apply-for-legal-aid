@@ -188,10 +188,10 @@ Feature: Provider accessibility
 #    And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    Then I select "None of these"
-    And the page is accessible
-    Then I click 'Save and continue'
+#    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+#    Then I select "None of these"
+#    And the page is accessible
+#    Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'
