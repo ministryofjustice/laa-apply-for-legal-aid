@@ -34,10 +34,11 @@ module Providers
 
     def form_params
       merge_with_model(legal_aid_application) do
+        convert_date_params('legal_aid_application')
         params.require(:legal_aid_application).permit(
-          :used_delegated_functions_year,
-          :used_delegated_functions_month,
-          :used_delegated_functions_day,
+          :used_delegated_functions_on_1i,
+          :used_delegated_functions_on_2i,
+          :used_delegated_functions_on_3i,
           :used_delegated_functions
         )
       end
