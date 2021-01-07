@@ -56,7 +56,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
     end
 
     context 'when not logged in' do
-      let(:login) {}
+      let(:login) { nil }
       it_behaves_like 'a provider not authenticated'
     end
 

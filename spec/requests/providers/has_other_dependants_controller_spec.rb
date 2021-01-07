@@ -51,7 +51,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     end
 
     context 'choose nothing' do
-      let(:params) {}
+      let(:params) { nil }
 
       it 'show errors' do
         expect(response.body).to include(I18n.t('providers.has_other_dependants.show.error'))
