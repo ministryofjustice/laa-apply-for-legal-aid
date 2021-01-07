@@ -8,7 +8,7 @@ require 'csv'
 class CCMSPayloadAnalyser
   def initialize
     @doc = File.open('/Users/stephenrichards/moj/apply/ccms_integration/example_payloads/NonPassportedFullMonty.xml') { |f| Nokogiri::XML(f).remove_namespaces! }
-    # note Assessments is mispelt Assesment in XML file!
+    # NOTE: Assessments is mispelt Assesment in XML file!
     @sections = %w[MeansAssesments MeritsAssesments]
   end
 

@@ -55,7 +55,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         expected_request_url = [
           TrueLayer::ApiClient::TRUE_LAYER_URL,
           "/data/v1/accounts/#{mock_account[:account_id]}/transactions"
-        ].join('')
+        ].join
 
         expect(WebMock).to have_requested(:get, expected_request_url)
           .with(query: {

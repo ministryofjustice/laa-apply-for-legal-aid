@@ -1,4 +1,4 @@
-# Note: There is a load path issue with `SamlIdp::IdpController` that occurs
+# NOTE: There is a load path issue with `SamlIdp::IdpController` that occurs
 #       if this controller is modified and you then visit the provider login page.
 #       The error is "Unable to autoload constant SamlIdp::IdpController".
 #       To prevent this, restart your server after modifying this file.
