@@ -8,10 +8,10 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   describe '#call' do
     let(:now) { '6/11/2018'.to_datetime.beginning_of_day }
     let(:now_minus_3_month) { '5/08/2018'.to_datetime.beginning_of_day }
-    let(:mock_transaction_1) { mock_account[:transactions][0] }
-    let(:mock_transaction_2) { mock_account[:transactions][1] }
-    let(:transaction_1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction_1[:transaction_id]) }
-    let(:transaction_2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction_2[:transaction_id]) }
+    let(:mock_transaction1) { mock_account[:transactions][0] }
+    let(:mock_transaction2) { mock_account[:transactions][1] }
+    let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }
+    let(:transaction2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction2[:transaction_id]) }
     let!(:existing_transaction) { create :bank_transaction, bank_account: bank_account }
 
     subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
@@ -23,25 +23,25 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
 
       it 'adds the bank transactions to the bank_account' do
         subject
-        expect(transaction_1.true_layer_response).to eq(mock_transaction_1.deep_stringify_keys)
-        expect(transaction_1.true_layer_id).to eq(mock_transaction_1[:transaction_id])
-        expect(transaction_1.description).to eq(mock_transaction_1[:description])
-        expect(transaction_1.merchant).to eq(mock_transaction_1[:merchant_name])
-        expect(transaction_1.currency).to eq(mock_transaction_1[:currency])
-        expect(transaction_1.amount.to_s).to eq(mock_transaction_1[:amount].to_s)
-        expect(transaction_1.happened_at).to eq(Time.zone.parse(mock_transaction_1[:timestamp]))
-        expect(transaction_1.operation).to eq(mock_transaction_1[:transaction_type].downcase)
-        expect(transaction_1.running_balance.to_s).to eq(mock_transaction_1.dig(:running_balance, :amount).to_s)
+        expect(transaction1.true_layer_response).to eq(mock_transaction1.deep_stringify_keys)
+        expect(transaction1.true_layer_id).to eq(mock_transaction1[:transaction_id])
+        expect(transaction1.description).to eq(mock_transaction1[:description])
+        expect(transaction1.merchant).to eq(mock_transaction1[:merchant_name])
+        expect(transaction1.currency).to eq(mock_transaction1[:currency])
+        expect(transaction1.amount.to_s).to eq(mock_transaction1[:amount].to_s)
+        expect(transaction1.happened_at).to eq(Time.zone.parse(mock_transaction1[:timestamp]))
+        expect(transaction1.operation).to eq(mock_transaction1[:transaction_type].downcase)
+        expect(transaction1.running_balance.to_s).to eq(mock_transaction1.dig(:running_balance, :amount).to_s)
 
-        expect(transaction_2.true_layer_response).to eq(mock_transaction_2.deep_stringify_keys)
-        expect(transaction_2.true_layer_id).to eq(mock_transaction_2[:transaction_id])
-        expect(transaction_2.description).to eq(mock_transaction_2[:description])
-        expect(transaction_2.merchant).to eq(mock_transaction_2[:merchant_name])
-        expect(transaction_2.currency).to eq(mock_transaction_2[:currency])
-        expect(transaction_2.amount.to_s).to eq(mock_transaction_2[:amount].to_s)
-        expect(transaction_2.happened_at).to eq(Time.zone.parse(mock_transaction_2[:timestamp]))
-        expect(transaction_2.operation).to eq(mock_transaction_2[:transaction_type].downcase)
-        expect(transaction_2.running_balance.to_s).to eq(mock_transaction_2.dig(:running_balance, :amount).to_s)
+        expect(transaction2.true_layer_response).to eq(mock_transaction2.deep_stringify_keys)
+        expect(transaction2.true_layer_id).to eq(mock_transaction2[:transaction_id])
+        expect(transaction2.description).to eq(mock_transaction2[:description])
+        expect(transaction2.merchant).to eq(mock_transaction2[:merchant_name])
+        expect(transaction2.currency).to eq(mock_transaction2[:currency])
+        expect(transaction2.amount.to_s).to eq(mock_transaction2[:amount].to_s)
+        expect(transaction2.happened_at).to eq(Time.zone.parse(mock_transaction2[:timestamp]))
+        expect(transaction2.operation).to eq(mock_transaction2[:transaction_type].downcase)
+        expect(transaction2.running_balance.to_s).to eq(mock_transaction2.dig(:running_balance, :amount).to_s)
       end
 
       it 'removes existing transactions' do

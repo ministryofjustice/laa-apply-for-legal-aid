@@ -52,7 +52,8 @@ module CCMS
       end
 
       context 'new section from merged in config' do
-        it 'is there in its entirity' do
+        # rubocop:disable Naming/VariableNumber
+        it 'is there in its entirety' do
           new_section = subject[:new_section]
           expect(new_section).to eq(
             NEW_SECTION_ATTR_1: {
@@ -69,6 +70,7 @@ module CCMS
             }
           )
         end
+        # rubocop:enable Naming/VariableNumber
       end
 
       context 'section in standard file but not in merged in file' do

@@ -105,7 +105,7 @@ module CFE
     end
 
     def create_dependants
-      create :dependant, :over_18,
+      create :dependant, :over18,
              number: 1,
              date_of_birth: 19.years.ago,
              relationship: 'adult_relative',
@@ -114,7 +114,7 @@ module CFE
              monthly_income: 180.0,
              in_full_time_education: false,
              assets_value: 10_000.0
-      create :dependant, :under_18,
+      create :dependant, :under18,
              number: 2,
              relationship: 'child_relative',
              date_of_birth: 10.years.ago,

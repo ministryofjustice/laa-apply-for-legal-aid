@@ -19,11 +19,11 @@ module Dashboard
       describe '.data' do
         context 'no to open banking consent' do
           let(:application) { create :legal_aid_application, open_banking_consent: false }
-          let(:application_2) { create :legal_aid_application, open_banking_consent: true }
+          let(:application2) { create :legal_aid_application, open_banking_consent: true }
           let(:expected_data) { [{ 'declined_open_banking' => 50 }] }
           before do
             application
-            application_2
+            application2
           end
 
           it 'sends expected data' do
