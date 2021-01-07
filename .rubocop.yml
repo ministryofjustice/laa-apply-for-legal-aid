@@ -10,6 +10,8 @@ AllCops:
   - 'vendor/**/*'
   - 'node_modules/**/*'
   - 'ccms_integration/*'
+  - 'tmp/**/*'
+  - 'log/**/*'
 
 Layout/LineLength:
   Max: 180
