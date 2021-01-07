@@ -272,9 +272,7 @@ Feature: Non-passported applicant journeys
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
-#    Then I should be on the 'policy_disregards' page showing "schemes or charities"
-#    When I select "None of these"
-#    And I click 'Save and continue'
+    Then I complete the policy disregards page with data if needed
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript @vcr

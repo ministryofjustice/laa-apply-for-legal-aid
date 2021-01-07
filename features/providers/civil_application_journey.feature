@@ -476,9 +476,7 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
-#    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-#    Then I select 'England Infected Blood Support Scheme'
-#    Then I click 'Save and continue'
+    Then I complete the policy disregards page with data if needed
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click Check Your Answers Change link for 'Income'
     Then I should be on a page showing "Sort your client's income into categories"
@@ -607,13 +605,10 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
-#    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-#    Then I select "None of these"
-#    Then I click 'Save and continue'
+    Then I complete the policy disregards page with data if needed
     Then I should be on a page showing "Check your answers"
     Then I click link "Back"
-#    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-#    Then I click link "Back"
+    Then I return though the policy_disregards page if needed
     Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
     Then I click link "Back"
     Then I should be on a page showing "Which types of assets does your client have?"
@@ -643,7 +638,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I click 'Save and continue'
-#    Then I click 'Save and continue'
+    Then I click 'Save and continue' if needed
     Then I click 'Save and continue'
     Then I should be on a page showing 'We need to check if Test Walker should pay towards legal aid'
     Then I click 'Save and continue'
