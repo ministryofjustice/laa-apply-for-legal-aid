@@ -68,6 +68,9 @@ module CCMS
         else
           raise CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}"
         end
+      rescue StandardError => e
+        Raven.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect}")
+        raise
       end
 
       def extract_raw_value(config)

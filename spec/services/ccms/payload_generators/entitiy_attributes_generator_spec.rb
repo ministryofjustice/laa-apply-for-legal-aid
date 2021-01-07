@@ -14,6 +14,18 @@ module CCMS
 
       context 'private methods' do
         describe '#extract_response_value' do
+          context 'response_type is text, number, boolean' do
+            it 'returns config value' do
+              config = {
+                value: 10,
+                br100_meaning: 'n/a',
+                response_type: 'number',
+                user_defined: true
+              }
+              expect(generator.__send__(:extract_response_value, config)).to eq 10
+            end
+          end
+
           it 'raises if an unknown response type is given in the config' do
             config = {
               value: 4664,
@@ -24,6 +36,24 @@ module CCMS
             expect {
               generator.__send__(:extract_response_value, config)
             }.to raise_error CCMS::CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: numeric"
+          end
+
+          context 'raises exception' do
+            before do
+              allow_any_instance_of(EntityAttributesGenerator).to receive(:extract_raw_value).and_raise(TypeError, 'type error')
+            end
+            it 'captures the error' do
+              config = {
+                value: 4664,
+                br100_meaning: 'n/a',
+                response_type: 'numeric',
+                user_defined: true
+              }
+              expect(Raven).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
+              expect {
+                generator.__send__(:extract_response_value, config)
+              }.to raise_error TypeError
+            end
           end
         end
 
