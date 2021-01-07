@@ -25,7 +25,8 @@ class FeedbackMailer < BaseApplyMailer
       originating_page: safe_nil(feedback.originating_page),
       provider_email: provider_email_phrase(feedback),
       application_reference: @legal_aid_application&.application_ref || '',
-      application_status: application_status || ''
+      application_status: application_status || '',
+      non_live_env: non_live_environment?
     )
   end
 
@@ -49,6 +50,10 @@ class FeedbackMailer < BaseApplyMailer
 
   def yes_or_no(feedback)
     feedback['done_all_needed'] == true ? 'Yes' : 'No'
+  end
+
+  def non_live_environment?
+    %w[staging uat localhost].any? { |env| Rails.configuration.x.application.host.include?(env) } ? '- non-live' : ''
   end
 
   def provider_email_phrase(feedback)
