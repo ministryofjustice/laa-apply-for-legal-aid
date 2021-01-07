@@ -56,10 +56,36 @@ RSpec.describe 'provider restrictions request', type: :request do
         end
 
         context 'when the citizen has completed the non-passported path' do
-          let(:application) { create :legal_aid_application, :with_applicant, :non_passported, :with_non_passported_state_machine, :provider_assessing_means }
+          context 'and the calculation date is after the start date' do
+            let(:application) do
+              create :legal_aid_application,
+                     :with_applicant,
+                     :non_passported,
+                     :with_non_passported_state_machine,
+                     :provider_assessing_means,
+                     used_delegated_functions: true,
+                     used_delegated_functions_on: Date.new(2021, 1, 9)
+            end
 
-          it 'redirects to policy disregards' do
-            expect(response).to redirect_to(providers_legal_aid_application_policy_disregards_path(application))
+            it 'redirects to policy disregards' do
+              expect(response).to redirect_to(providers_legal_aid_application_policy_disregards_path(application))
+            end
+          end
+
+          context 'and the calculation date is before the start date' do
+            let(:application) do
+              create :legal_aid_application,
+                     :with_applicant,
+                     :non_passported,
+                     :with_non_passported_state_machine,
+                     :provider_assessing_means,
+                     used_delegated_functions: true,
+                     used_delegated_functions_on: Date.new(2020, 12, 19)
+            end
+
+            it 'redirects to check passported answers' do
+              expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+            end
           end
         end
 

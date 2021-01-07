@@ -396,6 +396,7 @@ en:
         reasons: Review reasons
         category-amount_variation: Review categories - Monthly value
         category-unknown_frequency: Review categories - Frequency
+        category-policy_disregards: Review categories - Discretionary disregards
         category:
           state_benefit_payment: State benefits
           other_income_payment: Other income
@@ -403,10 +404,18 @@ en:
           outgoings_maintenance: Maintenance payments
           outgoings_legal_aid: Legal aid payments
           outgoings_childcare: Childcare payments
+          england_infected_blood_support: England Infected Blood Support Scheme
+          vaccine_damage_payments: Vaccine Damage Payments Scheme
+          variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
+          criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
+          national_emergencies_trust: National Emergencies Trust (NET)
+          we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
+          london_emergencies_trust: The London Emergencies Trust
         reason:
           amount_variation: Monthly value unknown (variations)
           unknown_frequency: Frequency unknown
           residual_balance: Capital Contribution - Residual Balance Check
+          policy_disregards: Discretionary disregards selected
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review
