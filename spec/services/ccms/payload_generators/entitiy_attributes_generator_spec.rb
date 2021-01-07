@@ -7,10 +7,26 @@ module CCMS
       let(:requestor) { double CCMS::Requestors::CaseAddRequestor, submission: submission, ccms_attribute_keys: yaml_keys }
       let(:submission) { double CCMS::Submission, id: '34343434', legal_aid_application: legal_aid_application }
       let(:legal_aid_application) { double LegalAidApplication }
-      let(:entity_name) { :bank_acct }
+      let(:entity_name) { [:bank_acct, 'bank_acct'].sample }
       let(:yaml_keys) { YAML.load_file(Rails.root.join('spec/fixtures/files/ccms_keys/standard_ccms_keys.yml')) }
       let(:xml) { double Nokogiri::XML::Builder }
       let(:options) { {} }
+
+      describe '#call' do
+        context 'non_passported attributes' do
+          context 'exception is raised' do
+            before do
+              allow_any_instance_of(EntityAttributesGenerator).to receive(:extract_raw_value).and_raise(TypeError, 'type error')
+            end
+            it 'captures the error' do
+              expect(Raven).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
+              expect {
+                generator.call
+              }.to raise_error TypeError
+            end
+          end
+        end
+      end
 
       context 'private methods' do
         describe '#extract_response_value' do
@@ -36,24 +52,6 @@ module CCMS
             expect {
               generator.__send__(:extract_response_value, config)
             }.to raise_error CCMS::CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: numeric"
-          end
-
-          context 'raises exception' do
-            before do
-              allow_any_instance_of(EntityAttributesGenerator).to receive(:extract_raw_value).and_raise(TypeError, 'type error')
-            end
-            it 'captures the error' do
-              config = {
-                value: 4664,
-                br100_meaning: 'n/a',
-                response_type: 'numeric',
-                user_defined: true
-              }
-              expect(Raven).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
-              expect {
-                generator.__send__(:extract_response_value, config)
-              }.to raise_error TypeError
-            end
           end
         end
 

@@ -18,7 +18,8 @@ module CCMS
         @entity_name = entity_name
         @requestor = requestor
         @options = options
-        @attr_config = ccms_attribute_keys[@entity_name]
+        ccms_attributes_hash = ActiveSupport::HashWithIndifferentAccess.new(ccms_attribute_keys)
+        @attr_config = ccms_attributes_hash[@entity_name]
       end
 
       def call
@@ -32,6 +33,9 @@ module CCMS
             @xml.__send__('ns0:ResponseValue', response_value)
             @xml.__send__('ns0:UserDefinedInd', config[:user_defined])
           end
+        rescue StandardError => e
+          Raven.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect} and attribute_name: #{attribute_name}")
+          raise
         end
       end
 
@@ -68,9 +72,6 @@ module CCMS
         else
           raise CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}"
         end
-      rescue StandardError => e
-        Raven.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect}")
-        raise
       end
 
       def extract_raw_value(config)
