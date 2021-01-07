@@ -20,9 +20,58 @@ en:
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"
+    assessment_results:
+      eligible:
+        heading: "%{name} could be eligible for legal aid"
+        details:
+          - Based on their financial situation, your client may not have to pay towards legal aid.
+          - You still need to provide details of the case before we can decide if they’re eligible.
+      not_eligible:
+        heading: "%{name} is unlikely to get legal aid"
+        detail: This is because they have too much disposable capital.
+      capital_contribution_required:
+        heading: "%{name} may need to pay towards legal aid"
+        details:
+          - "We’ve calculated that your client should pay %{amount} from their disposable capital."
+          - "You still need to provide details of the case before we can decide if they’re eligible."
+      manual_check_required:
+        heading: We need to check if %{name} should pay towards legal aid
+        details:
+          - You told us legal restrictions prevent your client from selling or borrowing against their assets.
+          - We calculated that your client should pay a contribution, but the amount depends on the restrictions.
+          - We’ll check the details you provided and let you know our decision.
+
+      manual_check_disregards:
+        heading: "We need to check if %{name} can get legal aid"
+        details:
+          - We calculated that your client should pay a contribution towards legal aid.
+          - The amount depends on whether or not the scheme or charity payments they've received are disregarded from the finanical eligibility calculation.
+          - A caseworker will review this and let you know the outcome.
+          - Please continue with the application to provide details of the case.
+
+      manual_check_disregards_restrictions:
+        heading: "We need to check if %{name} can get legal aid"
+        line1: "We calculated that your client should pay a contribution towards legal aid but the amount depends on:"
+        bullets:
+          - whether or not the scheme or charity payments they've received are disregarded from the finanical eligibility calculation.
+          - the legal restrictions preventing them from selling or borrowing against their assets
+        line2: We'll check the details you provided and let you know the outcome.
+        line3: Please continue with the application to provide details of the case.
+
+      capital_and_income_contribution_required:
+        heading: "%{name} may need to pay towards legal aid"
+        line_1: "We've calculated that your client should pay:"
+        line_2: You still need to provide details of the case before we can decide if they’re eligible.
+        details:
+          - "%{income_contribution} from their disposable income"
+          - "%{capital_contribution} from their disposable capital"
+      income_contribution_required:
+        heading: "%{name} may need to pay towards legal aid"
+        details:
+          - "We’ve calculated that your client should pay %{amount} from their disposable income."
+          - "You still need to provide details of the case before we can decide if they’re eligible."
+
     means_report:
-
-
       item:
         deductions:
           dependants_allowance: Dependants allowance

@@ -10,5 +10,9 @@ FactoryBot.define do
     police_notified_details { Faker::Lorem.paragraph }
     bail_conditions_set { 'true' }
     bail_conditions_set_details { Faker::Lorem.paragraph }
+
+    trait :irish do
+      full_name { "Daira O'Braien" }
+    end
   end
 end

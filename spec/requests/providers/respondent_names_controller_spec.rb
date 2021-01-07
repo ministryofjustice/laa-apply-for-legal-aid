@@ -22,7 +22,7 @@ RSpec.describe Providers::RespondentNamesController, type: :request do
     end
 
     context 'with an existing respondent' do
-      let(:respondent) { create :respondent }
+      let(:respondent) { create :respondent, :irish }
       let(:legal_aid_application) { create :legal_aid_application, respondent: respondent }
 
       it 'renders successfully' do
@@ -30,7 +30,7 @@ RSpec.describe Providers::RespondentNamesController, type: :request do
       end
 
       it 'displays respondent name' do
-        expect(response.body).to include(respondent.full_name)
+        expect(response.body).to include(html_compare(respondent.full_name))
       end
     end
   end

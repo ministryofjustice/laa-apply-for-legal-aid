@@ -67,6 +67,31 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#policy_disregards?' do
+    context 'no policy disregard record' do
+      it 'returns false' do
+        expect(legal_aid_application.policy_disregards).to be_nil
+        expect(legal_aid_application.policy_disregards?).to be false
+      end
+    end
+
+    context 'policy_disregards record exists' do
+      context 'none selected is true' do
+        before { create :policy_disregards, legal_aid_application: legal_aid_application }
+        it 'returns false' do
+          expect(legal_aid_application.policy_disregards?).to be false
+        end
+      end
+
+      context 'none selected is false' do
+        before { create :policy_disregards, legal_aid_application: legal_aid_application, national_emergencies_trust: true }
+        it 'returns true' do
+          expect(legal_aid_application.policy_disregards?).to be true
+        end
+      end
+    end
+  end
+
   describe '#proceeding_type_codes=' do
     context 'when all the provded codes match existent proceeding types' do
       let!(:proceeding_types) { create_list(:proceeding_type, 2) }
