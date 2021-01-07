@@ -22,7 +22,7 @@ module OmniAuth
         OmniAuth::Strategy.included(subclass)
       end
 
-      args %i[client_id client_secret]
+      args %i[client_id client_secret] # rubocop:disable Layout/SpaceBeforeBrackets
 
       option :client_id, nil
       option :client_secret, nil
