@@ -486,7 +486,7 @@ Feature: Civil application journeys
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'We need to check if'
-    And I should be on a page showing 'should pay towards legal aid'
+    And I should be on a page showing 'whether or not the scheme or charity payments'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
 
@@ -524,6 +524,9 @@ Feature: Civil application journeys
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    When I select 'None of these'
+    And I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'may need to pay towards legal aid'
@@ -608,12 +611,11 @@ Feature: Civil application journeys
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    Then I select 'England Infected Blood Support Scheme'
-    And the page is accessible
-    Then I click 'Save and continue'
+    When I select 'None of these'
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click link "Back"
-    Then I should be on the 'policy_disregards' showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     Then I click link "Back"
     Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
     Then I click link "Back"

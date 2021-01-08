@@ -29,6 +29,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    When I select 'England Infected Blood Support Scheme'
+    And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript @vcr
@@ -140,6 +143,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    When I select 'England Infected Blood Support Scheme'
+    And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
@@ -200,6 +206,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    When I select 'England Infected Blood Support Scheme'
+    And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'Wednesday Adams'
     When I click Check Your Answers Change link for dependant '1'
@@ -336,6 +345,9 @@ Feature: Non-passported applicant journeys
     And I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
     When I select "None of these"
+    And I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should not see 'Student finance'
