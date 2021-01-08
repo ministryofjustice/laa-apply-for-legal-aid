@@ -59,7 +59,7 @@ class DateFieldBuilder
   def model_attributes
     return unless model_date.present?
 
-    fields.each_with_object({}) { |part, hash| hash[parts_hash[part]] = model_date.__send__(part) }
+    DATE_PARTS.each_with_object({}) { |part, hash| hash[parts_hash[part]] = model_date.__send__(part) }
   end
 
   def model_date
