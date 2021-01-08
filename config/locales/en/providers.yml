@@ -298,25 +298,13 @@ en:
         remove_link: Remove
       index:
         academic_year: ' in student finance this academic year.'
-        amount: Amount
-        benefits: Benefits
-        cash_heading: 'Physical cash:'
-        cash_hint: For example, banknotes and coins.
-        child_care: Child care
         client_told_us: Your client also told us they'll get
-        friends_or_family: help from family or friends
         following_payments: Your client also told us they received the following payments. These will be included in the financial eligibility calculation.
-        legal_aid: Legal aid payments
-        maintenance_in: Maintenance received
-        month: Calendar month
         other_heading: Other income
         page_heading: "Sort your client's income into categories"
-        pension: Pension payments
-        property_or_lodger: Payments from a property or lodger
         student_finance: Student finance
         select: View statements and add transactions
         subheading: Your client told us they receive the following types of income.
-        total: Total
         you_need_to:
           text: "You need to:"
           list: |
@@ -516,27 +504,18 @@ en:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
       index:
-        amount: Amount
-        cash_heading: 'Physical cash:'
-        cash_hint: For example, banknotes and coins.
-        child_care: Childcare
         following_payments: Your client also told us they made the following payments. These will be included in the financial eligibility calculation.
-        legal_aid: Legal aid payments
         list: |
           view your client's bank statements
           add transactions to each category
-        maintenance_out: Maintenance payments
-        month: Calendar Month
         other_heading: Other outgoings
         page_heading: Sort your client's regular payments into categories
         payment_types: Your client told us they make the types of payments listed on this page.
-        rent_or_mortgage: Rent or mortgage payments
         select:
           rent_or_mortgage: View statements and add transactions
           child_care: View statements and add transactions
           maintenance_out: View statements and add transactions
           legal_aid: View statements and add transactions
-        total: Total
         you_need_to: "You need to:"
     outstanding_mortgages:
       field_set_header: What is the outstanding mortgage on your client's home?

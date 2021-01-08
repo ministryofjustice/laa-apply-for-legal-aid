@@ -31,12 +31,12 @@ module Providers
     end
 
     def cash_transactions
-      income_types
+      cash_transaction_types
       @legal_aid_application.cash_transactions.credits.order(transaction_date: :desc)
     end
 
-    def income_types
-      @income_types ||= @legal_aid_application.cash_transactions.credits.pluck(:name).uniq
+    def cash_transaction_types
+      @cash_transaction_types ||= @legal_aid_application.cash_transactions.credits.pluck(:name).uniq
     end
   end
 end

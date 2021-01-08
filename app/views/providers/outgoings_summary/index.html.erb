@@ -31,52 +31,19 @@
     <% if @legal_aid_application.transaction_types.debits.count < TransactionType.debits.count %>
       <%= render partial: 'add_other_outgoings' %>
     <% end %>
-
-    <% if @legal_aid_application.cash_transactions.debits.exists? %>
-      <div class="govuk-!-padding-bottom-4"></div>
-
-      <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
-
-      <p class="gov-body"><%= t('.following_payments') %></p>
-    <% end %>
-
-    <% if Setting.allow_cash_payment? #@legal_aid_application.cash_transactions.debits.exists? %>
-
-      <% @outgoing_types.each do |type| %>
-
-        <div class="govuk-!-padding-bottom-4"></div>
-
-        <h2 class="govuk-heading-m"><%= t('.cash_heading') %> <%= t(".#{type}") %></h2>
-
-        <%= govuk_hint t('.cash_hint') %>
-
-        <table class="govuk-table" style="margin-bottom:0px;">
-          <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col"><%= t('.month') %></th>
-            <th class="govuk-table__header govuk-table__cell--numeric govuk-!-font-weight-bold" scope="col"><%= t('.amount') %></th>
-          </tr>
-          </thead>
-
-          <tbody class="govuk-table__body">
-          <% @cash_transactions.select {|i| i.transaction_type.name == type}.each do |transaction| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell"><%= transaction.transaction_date %></td>
-              <td class="govuk-table__cell govuk-table__cell--numeric"><%= transaction.amount %></td>
-            </tr>
-          <% end %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell"><strong><%= t('.total') %></strong></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric"><strong>
-              <%= number_to_currency @legal_aid_application.cash_transactions.amounts.fetch(type, 0) %>
-            </strong></td>
-          </tr>
-          </tbody>
-        </table>
-      <% end %>
-    <% end %>
   </ol>
-  </ol>
+
+  <% if @legal_aid_application.cash_transactions.debits.exists? %>
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
+
+    <p class="gov-body"><%= t('.following_payments') %></p>
+  <% end %>
+
+  <% if @legal_aid_application.cash_transactions.debits.exists? %>
+    <%= render partial: 'shared/cash_transactions' %>
+  <% end %>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_outgoings_summary_index_path,
