@@ -5,7 +5,7 @@
               method: :patch,
               local: true) do |form| %>
 
-    <%= form.govuk_fieldset legend: { size: 'xl', text: page_title }  do %>
+    <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title }  do %>
     <%= form.govuk_text_field(
           :percentage_home,
           value: model.percentage_home,

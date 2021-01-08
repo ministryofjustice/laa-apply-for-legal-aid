@@ -255,14 +255,14 @@ Feature: Non-passported applicant journeys
     Then I fill "Estimated value" with "4000"
     And I click "Save and continue"
     Then I should be on a page showing "Are there any payments left on the vehicle?"
-    Then I choose option "Vehicle payments remain true"
+    Then I choose "Yes"
     Then I fill "Payment remaining" with "2000"
     And I click "Save and continue"
     Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
     Then I choose 'Yes'
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose option "Vehicle used regularly true"
+    Then I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page showing "Your client’s bank accounts"
     Then I should be on a page showing "Does your client have any savings accounts they cannot access online?"
@@ -344,6 +344,9 @@ Feature: Non-passported applicant journeys
     When I select "None of these"
     And I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
+    Then I select "None of these"
+    Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'Select if your client has received payments from these schemes or charities'
     When I select "None of these"
     And I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'

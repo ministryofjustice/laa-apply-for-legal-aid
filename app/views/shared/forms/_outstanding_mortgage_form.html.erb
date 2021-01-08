@@ -6,7 +6,7 @@
         method: :patch,
         local: true) do |form| %>
 
-  <%= form.govuk_fieldset legend: { size: 'xl', text: controller_t('.field_set_header') }  do %>
+  <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: controller_t('.field_set_header') }  do %>
     <%= form.govuk_text_field(
             :outstanding_mortgage_amount,
             label: {text: :property_value, hidden: true},

@@ -217,7 +217,7 @@ Feature: Civil application journeys
     Then I select a proceeding type and continue
     Then I should be on a page showing 'Have you used delegated functions?'
     Then I choose 'Yes'
-    Then I enter the 'used delegated functions' date of 2 days ago
+    Then I enter the 'used delegated functions on' date of 2 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "Covered under an emergency certificate"
@@ -525,8 +525,8 @@ Feature: Civil application journeys
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    When I select 'None of these'
-    And I click 'Save and continue'
+    Then I select "None of these"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'may need to pay towards legal aid'
@@ -541,10 +541,10 @@ Feature: Civil application journeys
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-    Then I choose option "Respondent understands terms of court order True"
-    Then I choose option "Respondent warning letter sent True"
-    Then I choose option "Respondent police notified True"
-    Then I choose option "Respondent bail conditions set True"
+    Then I choose option "Respondent understands terms of court order True field"
+    Then I choose option "Respondent warning letter sent True field"
+    Then I choose option "Respondent police notified True field"
+    Then I choose option "Respondent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
@@ -660,10 +660,10 @@ Feature: Civil application journeys
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-    Then I choose option "Respondent understands terms of court order True"
-    Then I choose option "Respondent warning letter sent True"
-    Then I choose option "Respondent police notified True"
-    Then I choose option "Respondent bail conditions set True"
+    Then I choose option "Respondent understands terms of court order True field"
+    Then I choose option "Respondent warning letter sent True field"
+    Then I choose option "Respondent police notified True field"
+    Then I choose option "Respondent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
@@ -774,14 +774,14 @@ Feature: Civil application journeys
     Then I fill "Estimated value" with "4000"
     And I click "Save and continue"
     Then I should be on a page showing "Are there any payments left on the vehicle?"
-    Then I choose option "Vehicle payments remain true"
+    Then I choose "Yes"
     Then I fill "Payment remaining" with "2000"
     And I click "Save and continue"
     Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
     Then I choose 'Yes'
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose option "Vehicle used regularly true"
+    Then I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select 'None of these'

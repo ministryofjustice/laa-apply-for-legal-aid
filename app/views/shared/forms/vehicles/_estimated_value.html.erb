@@ -6,7 +6,7 @@
       local: true
     ) do |form| %>
 
-  <%= form.govuk_fieldset legend: { size: 'xl', text: page_title }  do %>
+  <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title }  do %>
     <%= form.govuk_text_field(
             :estimated_value,
             value: number_to_currency_or_original_string(@form.model.estimated_value),

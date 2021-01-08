@@ -7,7 +7,7 @@
     ) do |form| %>
 
   <%= form.govuk_radio_buttons_fieldset(:payments_remain,
-                                        legend: { size: 'xl', text: page_title },
+                                        legend: { size: 'xl', tag: 'h1', text: page_title },
                                         hint: {text: t('.detail_of_payments_to_include')}) do %>
     <%= form.govuk_radio_button(:payments_remain, true, label: {text: t('generic.yes')} ) do %>
       <%= form.govuk_text_field(
@@ -18,9 +18,8 @@
               width: 'one-third',
           ) %>
     <% end %>
-
-<!--    @form.model.payment_remaining&.zero? && !@form.payments_remain?-->
     <%= form.govuk_radio_button(:payments_remain, false, label: {text:  t('generic.no')}) %>
+
   <% end %>
 
   <div class="govuk-!-padding-bottom-4"></div>

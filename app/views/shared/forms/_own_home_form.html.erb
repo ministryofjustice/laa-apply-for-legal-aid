@@ -13,7 +13,8 @@
     ]
   %>
 
-  <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label, legend: {size: 'xl', text: content_for(:page_title)}) %>
+  <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label,
+                                          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) %>
 
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
