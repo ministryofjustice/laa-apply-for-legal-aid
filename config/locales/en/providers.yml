@@ -416,6 +416,7 @@ en:
           unknown_frequency: Frequency unknown
           residual_balance: Capital Contribution - Residual Balance Check
           policy_disregards: Discretionary disregards selected
+          multi_benefit: Multiple benefits in single bank transaction
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review

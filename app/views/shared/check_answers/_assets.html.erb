@@ -2,7 +2,7 @@
   read_only = false unless local_assigns.key?(:read_only)
   online_savings_accounts = @legal_aid_application.online_savings_accounts_balance
   online_current_accounts = @legal_aid_application.online_current_accounts_balance
-  %>
+%>
 <section class="print-no-break">
   <%= render 'shared/check_answers/property', read_only: read_only %>
 </section>
