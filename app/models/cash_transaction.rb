@@ -18,7 +18,10 @@ class CashTransaction < ApplicationRecord
       .where(transaction_types: { operation: :debit })
   end
 
-  def self.amounts
-    includes(:transaction_type).group(:name).sum(:amount)
+  def self.amounts_for_application(application_id)
+    where(legal_aid_application_id: application_id)
+      .includes(:transaction_type)
+      .group(:name)
+      .sum(:amount)
   end
 end

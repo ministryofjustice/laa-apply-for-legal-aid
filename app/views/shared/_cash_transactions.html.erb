@@ -24,7 +24,7 @@
     <tr class="govuk-table__row">
       <td class="govuk-table__cell"><strong><%= t('.total') %></strong></td>
       <td class="govuk-table__cell govuk-table__cell--numeric"><strong>
-        <%= number_to_currency @legal_aid_application.cash_transactions.amounts.fetch(type, 0) %>
+        <%= number_to_currency CashTransaction.amounts_for_application(@legal_aid_application.id).fetch(type, 0) %>
       </strong></td>
     </tr>
     </tbody>
