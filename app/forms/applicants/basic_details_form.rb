@@ -3,7 +3,7 @@ module Applicants
     include BaseForm
 
     ATTRIBUTES = %i[first_name last_name national_insurance_number
-                    dob_year dob_month dob_day].freeze
+                    dob_1i dob_2i dob_3i].freeze
 
     form_for Applicant
 
@@ -67,7 +67,8 @@ module Applicants
         form: self,
         model: model,
         method: :date_of_birth,
-        prefix: :dob_
+        prefix: :dob_,
+        suffix: :gov_uk
       )
     end
 
