@@ -12,8 +12,8 @@ class BankAccount < ApplicationRecord
     ACCOUNT_TYPE_LABELS.fetch(account_type, account_type)
   end
 
-  def holders
-    'ClientSole' # TODO: CCMS placeholder
+  def holder_type
+    'Client Sole' # TODO: CCMS placeholder
   end
 
   def display_name
