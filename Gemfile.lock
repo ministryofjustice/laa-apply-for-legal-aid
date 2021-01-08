@@ -722,6 +722,7 @@ DEPENDENCIES
   rails_admin (~> 2.0, >= 2.0.2)
   redis-namespace
   regexp-examples
+  rexml
   rspec-rails (~> 4.0)
   rspec_junit_formatter
   rubocop
