@@ -143,9 +143,9 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: attributes[:first_name],
           last_name: attributes[:last_name],
           national_insurance_number: attributes[:national_insurance_number],
-          dob_year: attributes[:date_of_birth].year.to_s,
-          dob_month: attributes[:date_of_birth].month.to_s,
-          dob_day: attributes[:date_of_birth].day.to_s,
+          date_of_birth_1i: attributes[:date_of_birth].year.to_s,
+          date_of_birth_2i: attributes[:date_of_birth].month.to_s,
+          date_of_birth_3i: attributes[:date_of_birth].day.to_s,
           model: applicant
         }
       end
@@ -166,9 +166,9 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: attributes[:first_name],
           last_name: attributes[:last_name],
           national_insurance_number: attributes[:national_insurance_number],
-          dob_year: '10',
-          dob_month: '21',
-          dob_day: '44',
+          date_of_birth_1i: '10',
+          date_of_birth_2i: '21',
+          date_of_birth_3i: '44',
           model: applicant
         }
       end
@@ -275,8 +275,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: attributes[:first_name],
           last_name: attributes[:last_name],
           national_insurance_number: attributes[:national_insurance_number],
-          dob_month: '10',
-          dob_day: '4',
+          date_of_birth_2i: '10',
+          date_of_birth_3i: '4',
           model: applicant
         }
       end
@@ -313,9 +313,9 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it 'populates dob fields from model' do
-        expect(subject.dob_year).to eq(applicant.date_of_birth.year)
-        expect(subject.dob_month).to eq(applicant.date_of_birth.month)
-        expect(subject.dob_day).to eq(applicant.date_of_birth.day)
+        expect(subject.date_of_birth_1i).to eq(applicant.date_of_birth.year)
+        expect(subject.date_of_birth_2i).to eq(applicant.date_of_birth.month)
+        expect(subject.date_of_birth_3i).to eq(applicant.date_of_birth.day)
       end
     end
   end
