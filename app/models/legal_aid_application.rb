@@ -349,6 +349,10 @@ class LegalAidApplication < ApplicationRecord
     super
   end
 
+  def ccms_submission_date
+    association(:ccms_submission).load_target&.created_at
+  end
+
   def state
     state_machine_proxy.aasm_state
   end
