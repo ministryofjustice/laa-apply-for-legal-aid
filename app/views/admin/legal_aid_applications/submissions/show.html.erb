@@ -1,3 +1,7 @@
+<%
+  empty_cfe_result = {result: 'nil'}
+%>
+
 <%= back_link() %>
 <div class='govuk-body'>
   <h1 class="govuk-heading-l">Legal Aid Application</h1>
@@ -36,7 +40,7 @@
           CFE result
         </summary>
         <section>
-          <%= format_hash(JSON.parse(cfe_submission.result.result)) %>
+          <%= format_hash(JSON.parse(cfe_submission.result&.result || empty_cfe_result)) %>
         </section>
       </details>
     <% end %>

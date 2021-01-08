@@ -15,6 +15,13 @@ RSpec.describe HashFormatHelper, type: :helper do
       it { is_expected.to eql expected_response }
     end
 
+    context 'hash has key but no value' do
+      let(:source) { { result: nil } }
+      it 'returns empty string' do
+        expect(subject).to eq ''
+      end
+    end
+
     context 'when passed invalid data' do
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)
