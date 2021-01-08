@@ -33,6 +33,7 @@ en:
           manually_review_all_cases: Manually review all non-passported applications
           allow_welsh_translation: Allow Welsh translation
           allow_cash_payment: Allow Cash Payments to be submitted
+          allow_multiple_proceedings: Allow multiple proceedings
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -40,6 +41,7 @@ en:
             Select Yes to additionally route all non-passported applications to caseworker for review.
           allow_welsh_translation: Select Yes to translate the service into Welsh
           allow_cash_payment: Select Yes to include the cash payment process in the user journey
+          allow_multiple_proceedings: Select Yes to allow solicitors to select multiple proceeding types
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications
