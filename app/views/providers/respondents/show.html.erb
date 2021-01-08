@@ -3,6 +3,7 @@
       back_link: { path: providers_legal_aid_application_respondent_name_path(@legal_aid_application) }
     ) do %>
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_respondent_path,
         method: :patch,
@@ -15,7 +16,6 @@
           title: t(".#{attr}"),
           attribute: attr,
           attribute_details: "#{attr}_details".to_sym,
-          show_details_when: 'false'
         )
       end
       questions += %i[police_notified bail_conditions_set].map do |attr|
@@ -23,7 +23,6 @@
           title: t(".#{attr}"),
           attribute: attr,
           attribute_details: "#{attr}_details".to_sym,
-          show_details_when: attr == :bail_conditions_set ? 'true' : nil
         )
       end
       police_notified_titles = {
@@ -32,7 +31,29 @@
           blank_error: t('.police_notified_blank')
         }
     %>
-    <%= render partial: 'respondent_detail', collection: questions, as: :question, locals: { form: form, police_notified_titles: police_notified_titles } %>
+
+    <% questions.each do |question| %>
+      <%= form.govuk_radio_buttons_fieldset question.attribute, legend: {text: question.title} do %>
+        <% if question.attribute == :police_notified %>
+          <%= form.govuk_radio_button question.attribute, true, label: {text: t('generic.yes')} do %>
+            <%= form.govuk_text_area question.attribute_details, label: {text: police_notified_titles[:yes]}, rows: 5 %>
+          <% end %>
+          <%= form.govuk_radio_button question.attribute, false, label: {text: t('generic.no')} do %>
+            <%= form.govuk_text_area question.attribute_details, label: {text: police_notified_titles[:no]}, rows: 5 %>
+          <% end %>
+        <% elsif question.attribute == :bail_conditions_set %>
+          <%= form.govuk_radio_button question.attribute, true, label: {text: t('generic.yes')} do %>
+            <%= form.govuk_text_area question.attribute_details, rows: 5 %>
+          <% end %>
+          <%= form.govuk_radio_button question.attribute, false, label: {text: t('generic.no')} %>
+        <% else %>
+          <%= form.govuk_radio_button question.attribute, true, label: {text: t('generic.yes')} %>
+          <%= form.govuk_radio_button question.attribute, false, label: {text: t('generic.no')} do %>
+            <%= form.govuk_text_area question.attribute_details, rows: 5 %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
