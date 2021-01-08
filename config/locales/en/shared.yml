@@ -114,6 +114,7 @@ en:
       cash_heading: 'Physical cash:'
       cash_hint: For example, banknotes and coins.
       child_care: Childcare
+      dates: "%{date_start} to %{date_end}"
       friends_or_family: help from family or friends
       legal_aid: Legal aid payments
       maintenance_in: Maintenance received
