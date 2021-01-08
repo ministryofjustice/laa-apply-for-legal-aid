@@ -21,7 +21,8 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= date_input_fields prefix: :dob, field_name: :date_of_birth, form: form %>
+    <%= form.govuk_date_field :dob, legend: { text: t("shared.forms.date_input_fields.date_of_birth_label") },
+                              hint: { text: t("shared.forms.date_input_fields.date_of_birth_hint")} %>
 
     <div class="govuk-!-padding-bottom-6"></div>
     <%= form.govuk_text_field(
