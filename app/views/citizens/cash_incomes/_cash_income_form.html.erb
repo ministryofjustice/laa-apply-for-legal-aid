@@ -1,0 +1,47 @@
+<%= form_with(
+      model: @aggregated_cash_income,
+      url: form_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+
+  <%= govuk_form_group show_error_if: @aggregated_cash_income.errors.include?(:none_selected) do %>
+    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
+
+      <%= govuk_fieldset_header page_title %>
+      <p><%= t('.info') %></p>
+      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+        <div class="deselect-group" data-deselect-ctrl="#none_selected">
+          <% AggregatedCashIncome::cash_transaction_categories.each do |category| %>
+            <%= render(
+                  'shared/partials/revealing_checkbox',
+                  name: category,
+                  form: form,
+                  number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
+                  model: @aggregated_cash_income,
+                  label: ->(number) { t('.dates', date_end: l(Date.today.at_end_of_month - number.month , format: :short_date), date_start: l(Date.today.at_beginning_of_month - number.month, format: :short_date)) },
+                  input_prefix: t('currency.gbp')
+                ) %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="govuk-radios__divider tickbox_divider"><%= t('generic.or') %></div>
+
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <%= check_box_tag :none_selected, 'true', @none_selected, class: 'govuk-checkboxes__input' %>
+          <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
+        </div>
+      </div>
+
+    </fieldset>
+  <% end %>
+
+  <%= next_action_buttons(
+        form: form,
+        show_draft: false
+      ) %>
+<% end %>

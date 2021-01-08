@@ -1,16 +1,22 @@
 ---
 cy:
   errors:
+    cash_amount:
+      blank: htnom radnelac hcae ni deviecer uoy tnuoma hsac latot eht retnE
+      invalid_type: 000,1 ekil ,yenom fo tnuoma na eb tsum tnuomA
+      negative: orez ot lauqe ro naht erom eb tsum tnuomA
+      too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuomA
     title_prefix: rorrE
     messages:
       already_confirmed: ni gningis yrt esaelp ,demrifnoc ydaerla saw
-      confirmation_period_expired: eno wen a tseuqer esaelp ,}doirep{% nihtiw demrifnoc eb ot sdeen
+      confirmation_period_expired: eno wen a tseuqer esaelp ,%{period} nihtiw demrifnoc
+        eb ot sdeen
       expired: eno wen a tseuqer esaelp ,deripxe sah
       not_found: dnuof ton
       not_locked: dekcol ton saw
       not_saved:
-        one: ":devas gnieb morf }ecruoser{% siht detibihorp rorre 1"
-        other: ":devas gnieb morf }ecruoser{% siht detibihorp srorre }tnuoc{%"
+        one: ":devas gnieb morf %{resource} siht detibihorp rorre 1"
+        other: ":devas gnieb morf %{resource} siht detibihorp srorre %{count}"
     show:
       assessment_already_completed:
         page_title: tnemssessa laicnanif ruoy detelpmoc ydaerla ev'uoY
@@ -18,7 +24,8 @@ cy:
       page_not_found:
         page_title: dnuof ton egaP
         web_address_incorrect: ".tcerroc si ti kcehc ,sserdda bew eht depyt uoy fI"
-        web_address_copied: ".sserdda eritne eht deipoc uoy kcehc ,sserdda bew eht detsap uoy fI"
+        web_address_copied: ".sserdda eritne eht deipoc uoy kcehc ,sserdda bew eht
+          detsap uoy fI"
       access_denied:
         page_title: deined sseccA
         permission_text: uoy ot elbissecca yltnerruc ton si egap ehT

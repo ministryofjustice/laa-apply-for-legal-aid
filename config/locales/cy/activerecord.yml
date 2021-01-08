@@ -1,13 +1,41 @@
 ---
 cy:
   activerecord:
+    attributes:
+      benefit_type:
+        description: noitpircseD
+        exclude_from_gross_income: emocnI ssorG morf edulcxE
     errors:
       models:
+        address:
+          attributes:
+            postcode:
+              invalid: tamrof thgir eht ni ton si
+        applicant:
+          attributes:
+            date_of_birth:
+              invalid: dilav ton si
+            email:
+              invalid: tamrof thgir eht ni ton si sserdda
+            national_insurance_number:
+              invalid: tamrof thgir eht ni ton si
+        benefit_type:
+          attributes:
+            label:
+              blank: tneserp eb tsum lebaL
+              taken: epyT tifeneB rehtona yb desu ydaerla si lebal ehT
+            description:
+              blank: tneserp eb tsum noitpircseD
         feedback:
           attributes:
             satisfaction:
               blank: ecivres eht htiw erew uoy deifsitas woh tceleS
             difficulty:
-              blank: ecivres wen eht gnisu dia lagel rof ylppa ot saw ti tluciffid ro ysae woh tceleS
+              blank: ecivres wen eht gnisu dia lagel rof ylppa ot saw ti tluciffid
+                ro ysae woh tceleS
             done_all_needed:
               inclusion: yadot dedeen uoy tahw od ot elba uoy erew uoy fi sey tceleS
+        legal_aid_application:
+          attributes:
+            base:
+              none_selected: emocni fo sepyt yna eviecer uoy fi tceleS

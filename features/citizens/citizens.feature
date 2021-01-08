@@ -37,6 +37,7 @@ Feature: Citizen journey
   @javascript @vcr
   Scenario: Follow citizen journey from Accounts page
     Given An application has been created
+    And the setting to allow cash payments is enabled
     Then I visit the start of the financial assessment
     Then I visit the accounts page
     Then I click link 'Continue'
@@ -61,6 +62,12 @@ Feature: Citizen journey
     Then I should be on a page showing "Which of the following payments do you receive?"
     And I select 'None of these'
     Then I click 'Save and continue'
+    Then I should be on the 'cash_income' page showing 'Select payments you receive in cash'
+    Then I select 'aggregated_cash_income_check_box_benefits'
+    Then I enter benefits1 '100'
+    Then I enter benefits2 '100'
+    Then I enter benefits3 '100'
+    And I click 'Save and continue'
     Then I should be on the 'student_finance' page showing 'Do you get student finance?'
     When I choose "Yes"
     And I click 'Save and continue'

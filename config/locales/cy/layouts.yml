@@ -1,13 +1,21 @@
 ---
 cy:
   layouts:
+    admin:
+      applications: snoitacilppA
+      edit_settings: sgnitteS
+      submitted_applications_report: snoitacilppA dettimbuS
+      feedback: kcabdeeF
+      reports: stropeR
+      user_admin: nimda resU
     application:
       footer:
         accessibility_statement: tnemetats ytilibisseccA
         contact: tcatnoC
         cookies: seikooC
         copyright: thgirypoc nworC
-        digital_services_html: secivreS latigiD >rbba/<JOM>'ecitsuJ fo yrtsiniM'=eltit rbba<
+        digital_services_html: secivreS latigiD >rbba/<JOM>'ecitsuJ fo yrtsiniM'=eltit
+          rbba<
         feedback: kcabdeeF
         open_gov_link_text: 0.3v ecneciL tnemnrevoG nepO
         privacy_policy: ycilop ycavirP
@@ -19,9 +27,10 @@ cy:
         gov_uk_link_title: egapemoh KU.VOG eht ot oG
         feedback: kcabdeef
         phase: ateb
-        phase_banner_text_1: ruoy - ecivres wen a si sihT
+        phase_banner_text_1: ruoy – ecivres wen a si sihT
         phase_banner_text_2: ".ti evorpmi ot su pleh lliw"
         title: dia lagel rof ylppA
     logout:
+      admin: tuo ngis nimdA
       provider: tuo ngiS
     login: nI ngiS

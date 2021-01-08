@@ -5,11 +5,13 @@ cy:
       index:
         retrieving_transactions: snoitcasnart knab gniveirteR
         failed_transactions_retrieval: snoitcasnart knab eveirter ot deliaF
-        default_error: ".retal niaga yrt esaelP .seitluciffid lacinhcet gnicneirepxe era ew ,yrroS"
+        default_error: ".retal niaga yrt esaelP .seitluciffid lacinhcet gnicneirepxe
+          era ew ,yrroS"
         page_loading: gnidaoL egaP
         heading_1: snoitcasnart knab ruoy derahs yllufsseccus ev'uoY
         intro_text: ".shtnom 3 tsap eht morf stnemetats knab ruoy dedaolnwod ev’eW"
-        balance_text: ".noitautis laicnanif ruoy dnatsrednu su pleh ot seirogetac otni snoitcasnart ruoy tup ot roticilos ruoy ksa ll’eW"
+        balance_text: ".noitautis laicnanif ruoy dnatsrednu su pleh ot seirogetac
+          otni snoitcasnart ruoy tup ot roticilos ruoy ksa ll’eW"
       display_error:
         bank_selection_link: niaga yrT
     accounts:
@@ -28,17 +30,20 @@ cy:
         error: sknab rehto htiw stnuocca evah uoy fi sey tceleS
       new:
         hint: stnuocca sgnivas edulcni ton oD
-        field_set_header: ?enilno ssecca tonnac uoy stnuocca tnerruc evah uoy oD
-        error: enilno ssecca tonnac uoy stnuocca tnerruc evah fi sey tceleS
+        field_set_header: "?enilno ssecca tonnac uoy stnuocca tnerruc evah uoy oD"
+        error: enilno ssecca tonnac uoy stnuocca tnerruc evah uoy fi sey tceleS
     banks:
       index:
         title: knab ruoy tceleS
         what_happens_next: txen sneppah tahW
-        connect: ".AAL eht htiw noitamrofni tnuocca knab ruoy erahs nac uoy os reyaLeurT gnisu knab ruoy ot uoy tcennoc ll'eW"
+        connect: ":nac uoy erehw ppa ro etisbew s’knab ruoy ot detcerider eb ll’uoY"
         bullet_1: gniknab enilno ruoy ot ni ngis
-        bullet_2_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht fo flaheb no stnemetats knab fo shtnom 3 tcelloc ot noissimrep reyaLeurT evig"
-        every_account: ".meht ni yenom on htiw esoht gnidulcni ,enilno ssecca nac uoy tnuocca tnioj dna lanosrep yreve rof siht od ot deen ll'uoY"
-        hint: ".sknab tnereffid htiw stnuocca evah uoy fi retal erom tceles ot elba eb ll'uoY .emit a ta knab eno tceleS"
+        bullet_2_html: ">rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht fo flaheb no
+          stnemetats knab fo shtnom 3 tcelloc ot noissimrep reyaLeurT evig"
+        every_account: ".meht ni yenom on htiw esoht gnidulcni ,enilno ssecca nac
+          uoy tnuocca tnioj dna lanosrep yreve rof siht od ot deen ll'uoY"
+        hint: ".sknab tnereffid htiw stnuocca evah uoy fi retal erom tceles ot elba
+          eb ll'uoY .emit a ta knab eno tceleS"
       create:
         error: knab a tceleS
     check_answers:
@@ -50,7 +55,8 @@ cy:
           own_home: denwo ytreporP
           percentage_home: denwo egatnecreP
           property_value: eulav ytreporP
-          restrictions: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht snoitcirtser lagel yna ereht erA"
+          restrictions: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp
+            taht snoitcirtser lagel yna ereht erA"
           savings_and_investments: stnemtsevni dna sgnivaS
           shared_ownership: esle enoyna htiw denwO
         h1-heading: noitamrofni timbus dna srewsna ruoy kcehC
@@ -73,33 +79,69 @@ cy:
     contact_providers:
       show:
         title: noitacilppa ruoy eunitnoc ot roticilos ruoy tcatnoC
-        they_will_check: ".secnanif ruoy tuoba gniksa yb dia lagel rof yfilauq uoy rehtehw kcehc lliw yehT"
+        they_will_check: ".secnanif ruoy tuoba gniksa yb dia lagel rof yfilauq uoy
+          rehtehw kcehc lliw yehT"
     consents:
       show:
-        title_html: "?>rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht htiw noitamrofni tnuocca knab ruoy erahs ot eerga uoy oD"
-        inset_text: ".esle gnihtyna rof ti esu ton od eW .noitacilppa dia lagel ruoy troppus ot noitamrofni laicnanif ruoy esu ylno eW"
-        summary_heading: "?ees ot elba eb AAL eht lliw noitamrofni tahW"
+        title_html: "?reyaLeurT aiv >rbba/<AAL>'ycnegA diA lageL'=eltit rbba< eht
+          htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
+        inset_text: esle gnihtyna rof meht esu ton od eW .noitacilppa dia lagel ruoy
+          troppus ot stnemetats knab ruoy esu ylno eW
+        summary_heading: "?ees ot elba eb reyaLeurT lliw tahW"
         able_to_see:
-          heading: ":ruoy ees ot elba eb ll'eW"
-          list: |
+          heading: ":ruoy ot ssecca ylno-daer ,ffo-eno evah lliw reyaLeurT"
+          list: |2-
+
             sredro gnidnats dna stibeD tceriD
             secnalab tnuocca
             sliated noitcasnart dna stnemetats knab
-            sliated tnuocca
+            edoc tros dna rebmun tnuocca ruoy ekil sliated tnuocca
         unable_to_see:
-          heading: ":ton lliw eW"
-          list: |
-            tnuocca knab ruoy ot ssecca gniogno yna evah
-            drowssap dna emanresu gniknab enilno ruoy evas
+          heading: ":ton lliw yehT"
+          list: |2-
+
+            sliated tnuocca knab ruoy ot ssecca gniogno yna evah
+            AAL eht naht rehto enoyna htiw sliated ruoy erahs
+            sliated ni-ngis gniknab enilno ruoy ees
+            sliated tnuocca knab ruoy erots
     declarations:
       show:
         page_heading: noitaralceD
         submit_button: timbus dna eergA
+    dependants:
+      assets_values:
+        show:
+          page_heading: "?000,8£ naht erom htrow stessa evah %{name} seoD"
+      relationships:
+        show:
+          page_heading: "?%{name} ot pihsnoitaler ruoy si tahW"
+    has_dependants:
+      show:
+        page_heading: "?stnadneped yna evah uoy oD"
+        info: ".troppus laicnanif rof uoy no sdneped dna uoy htiw sevil ohw tluda
+          ro dlihc a eb dluoc tnadneped A"
+        extra_info: ".eno evah uoy fi rentrap ruoy edulcni ton oD"
+    has_other_dependants:
+      show:
+        heading: "?stnadneped rehto yna evah uoy oD"
+        error: stnadneped rehto evah uoy fi sey tceleS
     identify_types_of_incomes:
       show:
         page_heading: "?eviecer uoy od stnemyap gniwollof eht fo hcihW"
       update:
         none_selected: emocni fo sepyt yna eviecer uoy fi tceleS
+    cash_incomes:
+      checkbox:
+        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
+        none_selected: evoba eht fo enoN
+      show:
+        page_heading: hsac ni eviecer uoy stnemyap tceleS
+      cash_income_form:
+        dates: "%{date}"
+        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
+        none_selected: evoba eht fo enoN
+      update:
+        none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     identify_types_of_outgoings:
       show:
         page_heading: "?ekam uoy od stnemyap gniwollof eht fo hcihW"
@@ -110,14 +152,21 @@ cy:
         case_reference: ":ecnerefer esaC"
         heading_1: noitacilppa dia lagel ruoY
         how_we_do_this_heading: siht od ew woH
-        how_we_do_this_body_1: ".gniknab enilno ruoy ot uoy tcennoc ot ecivres ytrap-driht eruces a sesu )AAL( ycnegA diA lageL ehT"
-        how_we_do_this_body_2: ".stnuocca knab ruoy ot ssecca emit-eno reyaLeurT evig ot deksa eb ll'uoy ,gniknab enilno ot ni dengis ev'uoy ecnO"
-        how_we_do_this_body_3: ".AAL eht htiw ti erahs dna noitamrofni tnuocca knab ruoy ssecca yliraropmet lliw reyaLeurT ,eerga uoy fI"
-        how_we_do_this_body_4: ".dia lagel rof yllaicnanif yfilauq uoy fi kcehc meht pleh ot roticilos ruoy htiw shtnom 3 tsap eht morf stnemetats knab ruoy erahs neht eW"
+        how_we_do_this_body_1: ".eviecer dna ekam uoy stnemyap fo sdnik eht ees ot
+          stnemetats knab ruoy fo shtnom 3 kcehc eW"
+        how_we_do_this_body_2: ".stsoc eht sdrawot yap ot deen uoy ro dia lagel teg
+          nac uoy fi tuo krow su spleh sihT"
+        how_we_do_this_body_3: ".reyaLeurT dellac redivorp ecivres laicnanif ytrap-driht
+          detsurt a gnisu enilno stnemetats knab ruoy tcelloc yleruces ew ,noissimrep
+          ruoy htiW"
+        how_we_do_this_body_4: ".eviecer dna ekam uoy stnemyap fo sepyt eht tuoba
+          snoitseuq rewsna ot deen osla ll’uoY"
         name: ":emaN"
-        online_banking_details: ".sliated ni ngis gniknab enilno ruoY"
+        online_banking_details: ".rof gniknab enilno esu uoy tnuocca knab yreve rof
+          sliated ni-ngis ruoY"
         what_you_will_need: deen ll'uoy tahW
-        we_need_to_check: ".dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot deen eW"
+        we_need_to_check: ".dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot deen
+          eW"
         your_solicitor: ":roticilos ruoY"
     means_test_results:
       show:
@@ -125,10 +174,45 @@ cy:
         completed_financial_assessment: noitamrofni laicnanif ruoy derahs ev'uoY
         name: emaN
         reference_number: rebmun ecnerefeR
-        solicitors-actions: ".noitacilppa ruoy etelpmoc meht pleh ot dedivorp uoy noitamrofni eht esu lliw roticilos ruoY"
-        what-happens-next: ".esac ruoy fo sliated eht dna noitautis laicnanif ruoy dekcehc ev'ew ecno dia lagel rof yfilauq uoy fi mrifnoc ll'eW"
-        feedback_prefix: 'kcabdeef eviG'
+        solicitors-actions: ".noitacilppa ruoy etelpmoc meht pleh ot dedivorp uoy
+          noitamrofni eht esu lliw roticilos ruoY"
+        what-happens-next: ".esac ruoy fo sliated eht dna noitautis laicnanif ruoy
+          dekcehc ev'ew ecno dia lagel rof yfilauq uoy fi mrifnoc ll'eW"
+        feedback_prefix: kcabdeef eviG
         feedback_suffix: ".ecivres siht evorpmi su pleh ot "
+    other_assets:
+      show:
+        h1-heading: "?evah uoy od stessa fo sepyt hcihW"
+        h2-heading: ylppa taht lla tceleS
+        none_selected: eseht fo enoN
+    outstanding_mortgages:
+      field_set_header: "?emoh ruoy no egagtrom gnidnatstuo eht si tahW"
+      hint: rednel ro redivorp egagtrom ruoy morf tnemetats eht kcehC
+      outstanding_mortgage_amount: tnuoma egagtrom gnidnatstuo eht retnE
+      show:
+        h1-heading: "?egagtrom gnidnatstuo eht si tahW"
+    own_homes:
+      show:
+        h1-heading: "?ni evil uoy taht emoh eht nwo uoy oD"
+    percentage_homes:
+      show:
+        h1-heading: "?nwo yllagel uoy od emoh ruoy fo erahs % tahW"
+    property_values:
+      form:
+        citizens:
+          property_values:
+            hint:
+              property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac
+                uoY
+            property_value: emoh ruoy fo eulav detamitse eht retnE
+        providers:
+          property_values:
+            hint:
+              property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac
+                uoY
+            property_value: emoh ruoy fo eulav detamitse eht retnE
+      show:
+        h1-heading: "?htrow emoh ruoy si hcum woH"
     resend_link_requests:
       show:
         page_title: deripxe sah knil sihT
@@ -136,12 +220,41 @@ cy:
       update:
         page_title: knil wen a uoy tnes ev'eW
         check_inbox: ".xobni liame ruoy kcehC"
-        valid_until: ".snosaer ytiruces rof syad 7 rof evitca niamer ylno lliw knil wen ruoY"
+        valid_until: ".snosaer ytiruces rof syad 7 rof evitca niamer ylno lliw knil
+          wen ruoY"
+    restrictions:
+      show:
+        h1-heading: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
+          snoitcirtser lagel yna ereht erA"
+        restrictions_details: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa hcihw
+          su lleT
+        for_example: ":elpmaxe roF"
+        examples:
+          list: |2-
+
+            sgnideecorp lagel rehto ni etupsid fo tcejbus eht era stessa ruoy
+            dessessoper neeb sah emoh ruoy
+            tpurknab er'uoy
+    savings_and_investments:
+      accounts_summary:
+        col_account_number: rebmun tnuoccA
+        col_amount: tnuomA
+        col_sort_code: edoc troS
+        col_type: epyT
+        intro_text: ":stnuocca enilno gniwollof eht evah uoy su dlot ydaerla evah
+          uoY"
+      show:
+        h1-heading: "?evah uoy od stnemtsevni ro sgnivas fo sepyt tahW"
+        none_selected: eseht fo enoN
+    shared_ownerships:
+      show:
+        heading_1: "?esle enoyna htiw emoh ruoy nwo uoy oD"
     student_finances:
       show:
         field_set_header: "?ecnanif tneduts teg uoy oD"
         hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
       annual_amounts:
         show:
-          field_set_header: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
+          field_set_header: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum
+            woH"
           hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"

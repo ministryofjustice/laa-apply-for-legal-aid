@@ -22,4 +22,8 @@ module MoneyHelper
   rescue StandardError
     false
   end
+
+  def valid_amount?(amount)
+    amount.to_i >= 0
+  end
 end

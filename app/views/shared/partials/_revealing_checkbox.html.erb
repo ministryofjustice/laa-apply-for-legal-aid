@@ -1,0 +1,27 @@
+<div class="govuk-checkboxes__item revealing-checkbox">
+
+  <%= form.check_box "check_box_#{name}", {
+    class: 'govuk-checkboxes__input',
+    'data-aria-controls' => "conditional_#{name}",
+    checked: model.__send__("check_box_#{name}") == 'true' },
+    'true',
+    '' %>
+
+  <%= form.label "check_box_#{name}", controller_t("check_box_#{name}"), class: 'govuk-label govuk-checkboxes__label' %>
+</div>
+
+<div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional_<%= name %>">
+  <%= govuk_hint(t('.hint')) %>
+
+  <% (1..number_of_fields).each do |number| %>
+    <%= govuk_form_group show_error_if: model.errors.messages["#{name}#{number}".to_sym][0] do %>
+      <label class="govuk-label" for="<%= "#{name}#{number}" %>"><%= defined?(label) ? label.call(number) : nil %></label>
+      <span class='govuk-error-message' id="base"><%= model.errors.messages["#{name}#{number}".to_sym][0] %></span>
+      <%= form.govuk_text_field "#{name}#{number}",
+        label: nil,
+        value: model.__send__("#{name}#{number}"),
+        input_prefix: defined?(input_prefix) ? input_prefix : nil,
+        class: "govuk-!-width-one-third #{model.errors.messages["#{name}#{number}".to_sym][0] ? 'govuk-input--error' : ''}" %>
+    <% end %>
+  <% end %>
+</div>

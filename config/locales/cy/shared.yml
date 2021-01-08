@@ -1,39 +1,465 @@
 ---
 cy:
   shared:
+    partials:
+      revealing_checkbox:
+        dates: "%{date_end} ot %{date_start}"
+        hint: ".enon deviecer uoy fi 0 retne ro ,htnom radnelac hcae ni deviecer uoy
+          tnuoma hsac latot eht retnE"
+        citizens:
+          cash_incomes:
+            date_goes_here: ereh og setaD
+            check_box_benefits: stifeneB
+            check_box_friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
+            check_box_maintenance_in: stnemyap ecnanetniaM
+            check_box_property_or_lodger: regdol ro ytreporp a morf emocnI
+            check_box_pension: noisneP
     applicant_declaration:
       confirm_following: gniwollof eht mrifnoC
       submission_list_summary: taht eerga uoY
-      submission_list: |
+      submission_list: |2-
+
         yletaidemmi noitautis laicnanif ruoy ot segnahc yna troper ll'uoy
         tcerroc dna etelpmoc si nevig ev'uoy noitamrofni eht
         )'egrahc yrotutats' eht sa nwonk( esac ruoy fo dne eht ta yenom ro ytreporp niag ro peek uoy fi stsoc lagel eht yaper ot evah yam uoy
         dia lagel ruoy sdrawot yap ot evah yam uoy
         seicnega ecnerefer tiderc dna knab ruoy htiw sliated ruoy kcehc nac ew
         smotsuC dna euneveR MH dna snoisneP dna kroW rof tnemtrapeD eht ekil stnemtraped tnemnrevog rehto htiw noitamrofni ruoy erahs nac ew
-        uoy tneserper ot }mrif{% detcurtsni ev'uoy
-      warning_list_summary: yam uoy ,duarf tifeneb dettimmoc evah ot dnuof era ro ,segnahc troper ton od ,noitamrofni etelpmocni ro gnorw evig uoy fI
-      warning_list: |
+        uoy tneserper ot %{firm} detcurtsni ev'uoy
+      warning_list_summary: yam uoy ,duarf tifeneb dettimmoc evah ot dnuof era ro
+        ,segnahc troper ton od ,noitamrofni etelpmocni ro gnorw evig uoy fI
+      warning_list: |2-
+
         stsoc eht kcab yap ot evah dna deppots dia lagel ruoy evah
         ytlanep laicnanif a yap ot deen
         detucesorp eb
+    application_ref:
+      apply_ref: ":ecnerefer esac ecivres ylppA"
+      ccms_ref_html: ":ecnerefer esac >rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
+        rbba<"
+    means_report:
+      item:
+        deductions:
+          dependants_allowance: ecnawolla stnadnepeD
+          disregarded_state_benefits: noitaluclac morf dedulcxe stifeneb morf emocnI
+        income:
+          benefits: stifeneB
+          family_help: ylimaf ro sdneirf morf pleh laicnaniF
+          maintenance_in: stnemyap ecnanetniaM
+          property_or_lodger: regdol ro ytreporp morf emocnI
+          student_loan: tnarg ro naol tnedutS
+          pension: noisneP
+        outgoing:
+          housing: stsoc gnisuoH
+          childcare: stsoc eracdlihC
+          maintenance_out: stnemyap ecnanetniaM
+          legal_aid: stnemyap dia lageL
+      total:
+        total_income: emocni latoT
+        total_outgoings: sgniogtuo latoT
+        total_deductions: snoitcuded latoT
+    check_answers:
+      assets:
+        assets:
+          property-heading: ytreporP
+          offline_accounts: stnuocca knab s'tneilc ruoY
+          offline_savings: enilno ssecca tonnac tneilc ruoy stnuocca sgnivaS
+          other_assets: "?evah tneilc ruoy seod stessa fo sepyt hcihW"
+          policy_disregards: seitirahc ro emehcs morf stnemyaP
+          restrictions: "?ylppa snoitcirtser yna oD"
+          savings_and_investments: "?evah tneilc ruoy seod stnemtsevni ro sgnivas
+            fo sepyt hcihW"
+          savings_account: tnuocca sgnivaS
+          current_account: tnuocca tnerruC
+          bank_accounts: "?evah tneilc ruoy seod stnuocca knab hcihW"
+        property:
+          outstanding_mortgage: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si
+            tahW"
+          own_home: "?ni evil yeht emoh eht nwo tneilc ruoy seoD"
+          percentage_home: "?nwo yllagel tneilc ruoy seod emoh rieht fo erahs % tahW"
+          property_value: "?htrow emoh s'tneilc ruoy si hcum woH"
+          shared_ownership: "?esle enoyna htiw emoh rieht nwo tneilc ruoy seoD"
+        submit:
+          heading: sliated ruoy timbuS
+          text: ".tcerroc era gnidivorp era uoy sliated eht ,egdelwonk ruoy fo tseb
+            eht ot ,taht gnimrifnoc era uoy noitacilppa siht gnittimbus yB"
+      bank_transaction_table:
+        total: latot %{text}
+      capital_result:
+        contribution: noitubirtnoc latipaC
+        lower_limit_label: timil rewol latipaC
+        upper_limit_label: timil reppu latipaC
+        total: dessessa latipac latoT
+      client_details:
+        address: sserdda ecnednopserroC
+        age: dlo sraey %{years}
+        age_question: etad noitatupmoc ta egA
+        dob: htrib fo etaD
+        email: sserdda liamE
+        first_name: eman tsriF
+        last_name: eman tsaL
+        nino: rebmun ecnarusnI lanoitaN
+      income_details:
+        income:
+          benefits: stifeneB
+          family_help: ylimaf ro sdneirf morf pleh laicnaniF
+          maintenance_in: stnemyap ecnanetniaM
+          property_or_lodger: regdol ro ytreporp morf emocnI
+          student_loan: tnarg ro naol tnedutS
+          pension: noisneP
+          total_income: emocni latoT
+      income_result:
+        total_disposable_income: dessessa emocni elbasopsid latoT
+        total_gross_income: dessessa emocni ssorg latoT
+        gross_income_limit: timil emocni ssorG
+        disposable_income_lower_limit: timil rewol emocni elbasopsiD
+        disposable_income_upper_limit: timil reppu emocni elbasopsiD
+        disposable_income_contribution: noitubirtnoc emocnI
+      merits:
+        complete-application-heading: noitacilppa eht etelpmoC
+        complete-application-text: ".tcerroc era gnidivorp era uoy sliated eht ,egdelwonk
+          ruoy fo tseb eht ot ,taht gnimrifnoc era uoy noitacilppa siht gnittimbus
+          yB"
+        case-details-heading: sliated esaC
+        respondent-heading: sliated tnenoppO
+        latest-incident-heading: sliated tnedicni tsetaL
+        items:
+          client_declaration: noitaralced tneilC
+          client_declaration_answer: deerga & daeR
+          proceedings_currently_before_court: truoc erofeb yltnerruc sgnideecorP
+          prospects_of_success: "?retteb ro %05 emoctuo lufsseccus a fo ecnahc eht
+            sI"
+          success_prospect: "?emoctuo lufsseccus a fo ecnahc eht si tahW"
+          statement_of_case: esac fo tnemetats a edivorP
+          respondent_name_title: eman tnenoppO
+          respondent_name: emaN
+          understands_terms_of_court_order: "?redro truoc a fo smret eht dnatsrednu
+            ot yticapac latnem eht evah tnenoppo eht seoD"
+          warning_letter_sent: "?tnenoppo eht ot tnes neeb rettel gninraw a saH"
+          police_notified: "?deifiton neeb ecilop eht evaH"
+          bail_conditions_set: "?tes neeb snoitidnoc liab evaH"
+          notification_of_latest_incident: "?tnedicni esuba citsemod tsetal eht tuoba
+            uoy tcatnoc tneilc ruoy did nehW"
+          date_of_latest_incident: "?rucco tnedicni eht did nehW"
+          details_of_latest_incident: "?tnedicni eht gnirud deneppah tahW"
+      proceedings_details:
+        section_proceeding:
+          heading: dia lagel fo epocS
+          client_involvement_type: epyt tnemevlovni tneilC
+          client_involvement_type_applicant: tnacilppA
+          proceeding: "?rof dia lagel tnaw tneilc ruoy seod tahW"
+      delegated_functions:
+        section_delegated:
+          heading: snoitcnuf detageleD
+          used_delegated_functions: "?snoitcnuf detageled desu uoy evaH"
+          used_delegated_functions_on: snoitcnuf detageled desu uoy etaD
+      emergency_limitations:
+        form_of_service: ecivres fo mroF
+        costs: rucni nac uoy stsoC
+        work: od nac uoy kroW
+      substantive_limitations:
+        form_of_service: ecivres fo mroF
+        costs: rucni nac uoy stsoC
+        work: od nac uoy kroW
+      restrictions:
+        citizens:
+          heading: stessa ruoy no snoitcirtseR
+          question: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
+            snoitcirtser lagel yna ereht erA"
+          details: snoitcirtser fo sliateD
+        providers:
+          heading: stessa s'tneilc ruoy no snoitcirtseR
+          question: "?stessa rieht tsniaga gniworrob ro gnilles morf tneilc ruoy tneverp
+            taht snoitcirtser lagel yna ereht erA"
+      vehicles:
+        citizens:
+          heading: selciheV
+          own: "?elcihev a nwo uoy oD"
+          estimated_value: "?elcihev eht fo eulav detamitse eht si tahW"
+          payment_remaining: "?elcihev eht no tfel stnemyap yna ereht erA"
+          purchased_on: "?elcihev eht yub uoy did nehW"
+          used_regularly: "?esu raluger ni elcihev eht sI"
+        providers:
+          heading: selciheV
+          own: "?elcihev a nwo tneilc ruoy seoD"
+          estimated_value: "?elcihev eht fo eulav detamitse eht si tahW"
+          payment_remaining: "?elcihev eht no tfel stnemyap yna ereht erA"
+          more_than_three_years_old: "?oga sraey eerht naht erom thguob saw elcihev
+            ehT"
+          used_regularly: "?esu raluger ni elcihev eht sI"
     forms:
+      applicant_form:
+        page_title: sliated s'tneilc ruoy retnE
+        full_name: eman lluF
+        email_label: sserdda liamE
+        nino_label: rebmun ecnarusnI lanoitaN
+      date_input_fields:
+        date_of_birth_hint: '0891 3 13 ,elpmaxe roF'
+        date_of_birth_label: htrib fo etaD
+        occurred_on_label: "?rucco tnedicni eht did nehW"
+        told_on_label: "?tnedicni esuba citsemod tsetal eht tuoba uoy tcatnoc tneilc
+          ruoy did nehW"
+        told_on_hint: 9102 3 13 elpmaxe roF
+        purchased_on_hint: '0891 3 13 ,elpmaxe roF'
+        used_delegated_functions_on_label: snoitcnuf detageled desu uoy etaD
+        used_delegated_functions_on_hint: "%{options} ,elpmaxe roF"
+      dependants:
+        assets_value:
+          example: ".serahs ro sgnivas hsac ,ytreporp ,elpmaxe roF"
+          enter_assets_value: eulav tessa latot eht retnE
+        details:
+          add_dependant_later: ".retal stnadneped erom dda nac uoY"
+          you_already_told_about: ":tuoba su dlot ydaerla ev'uoY"
+          dependant_list_item: "%{date_of_birth} nrob ,%{name}"
+        relationship:
+          option:
+            child_relative: evitaler dlihc a er'yehT
+            adult_relative: evitaler tluda na er'yehT
+            hint:
+              child_relative: ".wehpen ro ecein ,dlihcdnarg ,dlihc ruoy ,elpmaxe roF"
+              adult_relative: ".elcnu ro tnua ,tnerapdnarg ,tnerap a ,elpmaxe roF"
+        monthly_incomes:
+          hint: ".tnarg ro naol tneduts ro ,pihsecitnerppa ,boj a morf yenom ,elpmaxe
+            roF"
+          enter_monthly_income: htnom hcae teg yeht tnuoma eht retnE
       identify_types_of_outgoings_form:
         none_selected: eseht fo enoN
         expanded_explanation:
           heading: "?siht deksa gnieb I ma yhW"
-          list: |
+          list: |2-
+
             .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
             .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
+      savings_and_investments_form:
+        none_selected: eseht fo enoN
+      outstanding_mortgage_form:
+        citizens:
+          outstanding_mortgages:
+            field_set_header: "?emoh ruoy no egagtrom gnidnatstuo eht si tahW"
+        providers:
+          outstanding_mortgages:
+            field_set_header: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si
+              tahW"
+      own_home_form:
+        mortgage: naol ro egagtrom a htiw ,seY
+        'no': 'oN'
+        owned_outright: thgirtuo denwo ,seY
+      percentage_home_form:
+        citizens:
+          percentage_homes:
+            hint:
+              percentage_home: ".egagtrom ro dloheerf ,esael ,sdeed ytreporp eht no
+                eb tsum eman ruoY"
+            percentage_home: nwo uoy erahs egatnecrep detamitse eht retnE
+        providers:
+          percentage_homes:
+            percentage_home: egagtrom ro dloheerf ,esael ,sdeed ytreporp eht no eb
+              tsum eman s'tneilc ruoY
+      policy_disregards:
+        form:
+          providers:
+            policy_disregards:
+              england_infected_blood_support: emehcS troppuS doolB detcefnI dnalgnE
+              vaccine_damage_payments: emehcS stnemyaP egamaD eniccaV
+              variant_creutzfeldt_jakob_disease: tsurT )DJCv( esaesid bokaJ-tdlefztuerC
+                tnairaV
+              criminal_injuries_compensation_scheme: emehcS noitasnepmoC seirujnI
+                lanimirC
+              national_emergencies_trust: ")TEN( tsurT seicnegremE lanoitaN"
+              we_love_manchester_emergency_fund: dnuF ycnegremE retsehcnaM evoL eW
+              london_emergencies_trust: tsurT seicnegremE nodnoL ehT
+      revealing_checkbox:
+        attribute:
+          citizens:
+            other_assets:
+              check_box_valuable_items_value: erom ro 005£ htrow smeti elbaulav ynA
+              check_box_land_value: dnaL
+              check_box_inherited_assets_value: deid sah ohw nosrep a fo etatse eht
+                morf stessa ro yenoM
+              check_box_money_owed_value: egagtrom etavirp a morf gnidulcni ,uoy ot
+                dewo yenoM
+              check_box_second_home_mortgage: tnuoma egagtrom gnidnatstuo emoh yadiloh
+                ro ytreporp dnoceS
+              check_box_second_home_percentage: denwo egatnecrep emoh yadiloh ro ytreporp
+                dnoceS
+              check_box_second_home_value: eulav detamitse emoh yadiloh ro ytreporp
+                dnoceS
+              check_box_timeshare_property_value: ytreporp erahsemiT
+              check_box_trust_value: tsurt a ni tseretnI
+              valuable_items_value: stsoc elas yna sunim ,eulav latot detamitse retnE
+              land_value: eulav detamitse retnE
+              inherited_assets_value: eulav latot detamitse retnE
+              money_owed_value: dewo tnuoma detamitse retnE
+              timeshare_property_value: stsoc elas dna naol yna sunim ,eulav retnE
+              trust_value: eulav latot detamitse retnE
+              hint:
+                check_box_valuable_items_value: krow rof desu sloot ro gnihtolc ,erutinruf
+                  ,sgnir tnemegagne ro gniddew edulcni ton od – seuqitna ro tra ,yrellewej
+                  ,elpmaxe roF
+            savings_and_investments:
+              cash: tnuoma latot eht retnE
+              check_box_cash: tnuocca knab a ni ton yenoM
+              check_box_life_assurance_endowment_policy: egagtrom a ot deknil ton
+                seicilop tnemwodne dna ecnarussa efiL
+              check_box_national_savings: sdnoB muimerP dna setacifitreC sgnivaS lanoitaN
+              check_box_other_person_account: tnuocca knab s'nosrep rehtona ot sseccA
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: skcots tnemnrevog
+                dna sdnob latipac ,stsurt tinu ,sPEP
+              check_box_plc_shares: ")ynapmoc detimil cilbup( CLP a ni serahS"
+              hint:
+                revealing_check_box_offline_current_accounts: latot eht retne neht
+                  ,meht dda ,htnom tsal tnuocca hcae morf ecnalab tsewol eht ekat
+                  ,stnuocca elpitlum evah uoy fI
+                check_box_cash: emoh ta tpek hsac ,elpmaxe roF
+                check_box_life_assurance_endowment_policy: htaed no tuo yap ylno taht
+                  seicilop edulcni ton oD
+                check_box_other_person_account: tnuocca s'dlihc a no yrotangis a era
+                  uoy ,elpmaxe roF
+              life_assurance_endowment_policy: nwo uoy lla fo eulav latot eht retnE
+              national_savings: nwo uoy lla fo eulav latot eht retnE
+              other_person_account: stnuocca lla ni latot detamitse eht retnE
+              peps_unit_trusts_capital_bonds_gov_stocks: nwo uoy lla fo eulav latot
+                eht retnE
+              plc_shares: nwo uoy lla fo eulav latot eht retnE
+          providers:
+            other_assets:
+              check_box_valuable_items_value: erom ro 005£ htrow smeti elbaulav ynA
+              check_box_land_value: dnaL
+              check_box_inherited_assets_value: deid sah ohw nosrep a fo etatse eht
+                morf stessa ro yenoM
+              check_box_money_owed_value: egagtrom etavirp a morf gnidulcni ,meht
+                ot dewo yenoM
+              check_box_second_home_mortgage: tnuoma egagtrom gnidnatstuo emoh yadiloh
+                ro ytreporp dnoceS
+              check_box_second_home_percentage: denwo egatnecrep emoh yadiloh ro ytreporp
+                dnoceS
+              check_box_second_home_value: eulav detamitse emoh yadiloh ro ytreporp
+                dnoceS
+              check_box_timeshare_property_value: ytreporp erahsemiT
+              check_box_trust_value: tsurt a ni tseretnI
+              valuable_items_value: eulav detamitse eht retnE
+              land_value: eulav detamitse retnE
+              inherited_assets_value: eulav latot detamitse retnE
+              money_owed_value: dewo tnuoma detamitse retnE
+              timeshare_property_value: stsoc elas dna naol yna sunim ,eulav retnE
+              trust_value: eulav latot detamitse retnE
+              hint:
+                check_box_valuable_items_value: krow rof desu sloot ro gnihtolc ,erutinruf
+                  ,sgnir tnemegagne ro gniddew edulcni ton od – seuqitna ro tra ,yrellewej
+                  ,elpmaxe roF
+            offline_accounts:
+              check_box_offline_current_accounts: tnuocca tnerruC
+              check_box_offline_savings_accounts: tnuocca sgnivaS
+              offline_current_accounts: stnuocca tnerruc lla ni latot eht retnE
+              offline_savings_accounts: stnuocca sgnivas lla ni latot eht retnE
+            savings_and_investments:
+              cash: tnuoma latot eht retnE
+              check_box_cash: tnuocca knab a ni ton yenoM
+              check_box_offline_current_accounts: tnuocca tnerruC
+              check_box_offline_savings_accounts: tnuocca sgnivaS
+              check_box_life_assurance_endowment_policy: egagtrom a ot deknil ton
+                seicilop tnemwodne dna ecnarussa efiL
+              check_box_national_savings: sdnoB muimerP dna setacifitreC sgnivaS lanoitaN
+                ,sASI
+              check_box_other_person_account: tnuocca knab s'nosrep rehtona ot sseccA
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: skcots tnemnrevog
+                dna sdnob latipac ,stsurt tinu ,sPEP
+              check_box_plc_shares: ")ynapmoc detimil cilbup( CLP a ni serahS"
+              hint:
+                revealing_check_box_offline_current_accounts: latot eht retne neht
+                  ,meht dda ,htnom tsal tnuocca hcae morf ecnalab tsewol eht ekat
+                  ,stnuocca elpitlum sah tneilc ruoy fI
+                check_box_cash: emoh ta tpek hsac ,elpmaxe roF
+                check_box_life_assurance_endowment_policy: htaed no tuo yap ylno taht
+                  seicilop edulcni ton oD
+                check_box_other_person_account: tnuocca s'dlihc a no yrotangis a si
+                  tneilc ruoy ,elpmaxe roF
+              offline_current_accounts: htnom tsal ecnalab tsewol eht retnE
+              offline_savings_accounts: stnuocca lla ni latot eht retnE
+              life_assurance_endowment_policy: denwo lla fo eulav latot eht retnE
+              national_savings: denwo lla fo eulav latot eht retnE
+              other_person_account: stnuocca lla ni latot detamitse eht retnE
+              peps_unit_trusts_capital_bonds_gov_stocks: denwo lla fo eulav latot
+                eht retnE
+              plc_shares: denwo lla fo eulav latot eht retnE
+      shared_ownership_form:
+        shared_ownership_item:
+          friend_family_member_or_other_individual: laudividni rehto ro rebmem ylimaf
+            ,dneirf a ,seY
+          housing_assocation_or_landlord: droldnal ro noitaicossa gnisuoh a ,seY
+          no_sole_owner: renwo elos eht er'yeht ,oN
+          partner_or_ex_partner: rentrap-xe ro rentrap a ,seY
+      success_prospect:
+        success_prospect_item:
+          likely: retteb ro %05
+          marginal: "%94 ot %54"
+          poor: "%54 naht sseL"
+          borderline: enilredroB
+          not_known: tey wonk ton od I
+          hint:
+            marginal: lanigram si emoctuo lufsseccus a fo ecnahc ehT
+            poor: roop si emoctuo lufsseccus a fo ecnahc ehT
+            borderline: emoctuo eht tciderp tonnac uoY
+            not_known: sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
+              kroW
       types_of_income_form:
-        financial_help_examples: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe roF"
+        financial_help_examples: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
+          roF"
         benefits_examples: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
         pension_examples: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
         none_selected: eseht fo enoN
         expanded_explanation:
           heading: "?siht deksa gnieb I ma yhW"
-          list: |
+          list: |2-
+
             .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
             .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
+      vehicles:
+        estimated_value:
+          use_car_valuation_sites: tuo siht dnif ot setisbew noitaulav rac esu nac
+            uoY
+        remaining_payment:
+          detail_of_payments_to_include: |2-
+
+            stnemeerga )PCP( esahcrup tcartnoc lanosrep
+            ro )PH( esahcrup erih ,snaol no stnemyap gnidnatstuo yna edulcnI
+          enter_amount_left_to_pay: yap ot tfel tnuoma eht retnE
+        regular_use:
+          include_partner_use: ".loohcs ot nerdlihc gnivird ro gnippohs ,krow ekil
+            sgniht rof skeew 2 yreve ecno tsael ta desu si elcihev eht snaem sihT"
     page-title:
       suffix: dia lagel rof ylppA
+    property_results:
+      property: ytreporP
+      value: eulaV
+      outstanding_mortgage: egagtrom gnidnatstuO
+      mortgage_deduction: noitcuded egagtroM
+      disregards: snoitcuded dna sdragersiD
+      assessment_amount: noitaluclac ni dedulcni tnuomA
+      main_home_disregard: dragersid emoh niaM
+      main_home: emoh niaM
+      additional_property: ytreporp lanoitiddA
+    vehicle_results:
+      vehicles: selciheV
+      value: eulaV
+      oustanding_payments: stnemyap gnidnatstuO
+      disregards: snoitcuded dna sdragersiD
+      assessment_amount: noitaluclac ni dedulcni tnuomA
+    savings_and_investments:
+      savings_and_investments: stnemtsevni dna sgnivaS
+      assessed_amount: stnemtsevni dna sgnivas latoT
+    other_assets:
+      other_assets: stessa rehtO
+      assessed_amount: stessa latoT
+    total_capital:
+      total_assessed_capital: latipac elbasopsiD
+      property: ytreporP
+      vehicles: selciheV
+      savings_and_investments: stnemtsevni dna sgnivaS
+      other_assets: stessa rehtO
+      disposable_capital: latipac elbasopsid latoT
+      pensioner_disregard: dragersid renoisneP
+      total_capital: latoT
+    restrictions:
+      restrictions: stessa s'tneilc ruoy no snoitcirtseR
+      none: enoN

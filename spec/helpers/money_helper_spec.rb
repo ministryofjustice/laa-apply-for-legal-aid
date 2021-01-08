@@ -82,6 +82,50 @@ RSpec.describe MoneyHelper, type: :helper do
     end
   end
 
+  describe '#valid_amount?' do
+    let(:result) { valid_amount?(value) }
+
+    context 'int numeric' do
+      let(:value) { 12 }
+
+      it 'returns true when integer greater than zero' do
+        expect(result).to be true
+      end
+    end
+
+    context 'int zero' do
+      let(:value) { 0 }
+
+      it 'returns true when integer zero' do
+        expect(result).to be true
+      end
+    end
+
+    context 'int negative' do
+      let(:value) { -1 }
+
+      it 'returns false when integer less than zero' do
+        expect(result).to be false
+      end
+    end
+
+    context 'string numeric' do
+      let(:value) { '12.25' }
+
+      it 'returns true when numeric string greater than zero' do
+        expect(result).to be true
+      end
+    end
+
+    context 'string negative' do
+      let(:value) { '-1' }
+
+      it 'returns false when numeric string less than zero' do
+        expect(result).to be false
+      end
+    end
+  end
+
   describe '#gds_number_to_currency' do
     let(:result) { gds_number_to_currency(value) }
 
