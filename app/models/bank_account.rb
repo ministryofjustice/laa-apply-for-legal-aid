@@ -13,7 +13,7 @@ class BankAccount < ApplicationRecord
   end
 
   def holder_type
-    'Client Sole' # TODO: CCMS placeholder
+    'Client Sole'
   end
 
   def display_name
@@ -26,15 +26,15 @@ class BankAccount < ApplicationRecord
 
   # rubocop:disable Naming/PredicateName
   def has_tax_credits?
-    true # TODO: CCMS placeholder
+    true # TODO: CCMS placeholder - to be fixed by AP-1965
   end
 
   def has_wages?
-    true # TODO: CCMS placeholder
+    true # TODO: CCMS placeholder - to be fixed by AP-1965
   end
 
   def has_benefits?
-    true # TODO: CCMS placeholder
+    true # TODO: CCMS placeholder - to be fixed by AP-1965
   end
   # rubocop:enable Naming/PredicateName
 end

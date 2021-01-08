@@ -87,9 +87,9 @@ module CCMS
 
       def header_request(xml)
         xml.__send__('ns6:TransactionRequestID', transaction_request_id)
-        xml.__send__('ns6:Language', 'ENG') # TODO: CCMS placeholder
+        xml.__send__('ns6:Language', 'ENG')
         xml.__send__('ns6:UserLoginID', provider.username)
-        xml.__send__('ns6:UserRole', 'EXTERNAL') # TODO: CCMS placeholder
+        xml.__send__('ns6:UserRole', 'EXTERNAL')
       end
 
       def case_request(xml)
@@ -103,7 +103,7 @@ module CCMS
 
       def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
         xml.__send__('ns2:Client') { generate_client(xml) }
-        xml.__send__('ns2:PreferredAddress', 'CLIENT') # TODO: CCMS placeholder
+        xml.__send__('ns2:PreferredAddress', 'CLIENT')
         xml.__send__('ns2:ProviderDetails') { generate_provider_details(xml) }
         xml.__send__('ns2:CategoryOfLaw') { generate_category_of_law(xml) }
         xml.__send__('ns2:OtherParties') { generate_other_parties(xml) }
@@ -150,13 +150,13 @@ module CCMS
         xml.__send__('ns0:LastUpdatedBy') do
           xml.__send__('ns0:UserLoginID', provider.username)
           xml.__send__('ns0:UserName', provider.username)
-          xml.__send__('ns0:UserType', 'EXTERNAL') # TODO: CCMS placeholder
+          xml.__send__('ns0:UserType', 'EXTERNAL')
         end
         xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
       end
 
       def generate_lar_details(xml)
-        xml.__send__('ns2:LARScopeFlag', true) # TODO: CCMS placeholder
+        xml.__send__('ns2:LARScopeFlag', true)
       end
 
       def generate_client(xml)
@@ -197,8 +197,8 @@ module CCMS
         xml.__send__('ns2:ProceedingDescription', proceeding_type.description)
         xml.__send__('ns2:MatterType', proceeding_type.ccms_matter_code)
         xml.__send__('ns2:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
-        xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder
-        xml.__send__('ns2:ClientInvolvementType', 'A') # TODO: CCMS placeholder
+        xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder - this may need changing when multiple proceedings are introduced
+        xml.__send__('ns2:ClientInvolvementType', 'A')
         xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml) }
       end
 
@@ -223,8 +223,8 @@ module CCMS
 
       def generate_means_assessment_results(xml)
         xml.__send__('ns0:Goal') do
-          xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA') # TODO: CCMS placeholder
-          xml.__send__('ns0:AttributeValue', true) # TODO: CCMS placeholder
+          xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA')
+          xml.__send__('ns0:AttributeValue', true)
         end
       end
 
