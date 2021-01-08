@@ -19,6 +19,7 @@ module Providers
 
     def form_params
       merge_with_model(applicant) do
+        convert_date_params('applicant')
         params.require(:applicant).permit(*Applicants::BasicDetailsForm::ATTRIBUTES)
       end
     end
