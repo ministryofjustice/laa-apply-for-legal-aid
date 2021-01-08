@@ -191,9 +191,9 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { 'true' }
-
+            let(:policy_disregards) { true }
             before do
-              allow_any_instance_of(LegalAidApplication).to receive(:capture_policy_disregards?).and_return(true)
+              allow_any_instance_of(LegalAidApplication).to receive(:capture_policy_disregards?).and_return(policy_disregards)
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
@@ -204,7 +204,22 @@ RSpec.describe 'provider other assets requests', type: :request do
                 expect(application.savings_amount?).to be false
                 expect(response).to redirect_to(providers_legal_aid_application_policy_disregards_path(application))
               end
+
+              context 'when the calculation date is prior to the policy disregards date' do
+                let(:application) do
+                  create :legal_aid_application,
+                         :with_positive_benefit_check_result,
+                         used_delegated_functions: true,
+                         used_delegated_functions_on: Date.new(2021, 1, 5)
+                end
+                let(:policy_disregards) { false }
+
+                it 'redirects to policy disregards' do
+                  expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
+                end
+              end
             end
+
             context 'and none of these checkbox is not selected' do
               let(:none_selected) { '' }
 
