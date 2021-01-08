@@ -16,7 +16,7 @@
           yes_no_options,
           :value,
           :label,
-          legend: {size: 'xl', text: content_for(:page_title)}
+          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}
         ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>

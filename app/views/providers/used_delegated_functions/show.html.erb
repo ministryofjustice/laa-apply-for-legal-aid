@@ -8,7 +8,7 @@
         local: true
       ) do |form| %>
 
-    <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: { size: 'xl', text: t('.heading') }) do %>
+    <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: {text: t('.heading'), tag: 'h1', size: 'xl'}) do %>
       <%= form.govuk_radio_button(:used_delegated_functions, true, label: {text: t('generic.yes')} ) do %>
         <%= form.govuk_date_field :used_delegated_functions_on,
                                   legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label") },

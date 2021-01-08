@@ -163,13 +163,13 @@ Feature: Completing and checking means answers backwards and forwards
     Then I fill "Estimated value" with "4000"
     And I click "Save and continue"
     Then I should be on a page showing "Are there any payments left on the vehicle?"
-    Then I choose option "Vehicle payments remain true"
+    Then I choose "Yes"
     Then I fill "Payment remaining" with "2000"
     And I click "Save and continue"
     Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
     Then I choose 'Yes'
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose option "Vehicle used regularly true"
+    Then I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page showing 'Check your answers'

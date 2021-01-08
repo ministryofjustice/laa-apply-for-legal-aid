@@ -3,7 +3,7 @@
         model: model, url: url, method: :patch, local: true) do |form| %>
 
   <%= form.govuk_radio_buttons_fieldset(:has_restrictions,
-                                        legend: { size: 'xl', text: page_title},
+                                        legend: { size: 'xl', tag: 'h1', text: page_title},
                                         hint: {text: list_from_translation_path(".restrictions.show.examples") }) do %>
     <%= form.govuk_radio_button :has_restrictions, true, label: { text: t('generic.yes') } do %>
       <%= form.govuk_text_area :restrictions_details,

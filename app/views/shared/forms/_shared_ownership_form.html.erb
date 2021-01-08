@@ -6,7 +6,7 @@
         method: :patch,
         local: true) do |form| %>
 
-  <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { size: 'xl', text: page_title }) do %>
+  <%= form.govuk_radio_buttons_fieldset(:shared_ownership, legend: { size: 'xl', tag: 'h1', text: page_title }) do %>
     <% LegalAidApplication::SHARED_OWNERSHIP_REASONS.each do |reason| %>
       <% if reason == 'no_sole_owner' %>
         <%= form.govuk_radio_divider %>

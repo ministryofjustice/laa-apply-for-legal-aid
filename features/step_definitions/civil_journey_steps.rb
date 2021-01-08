@@ -621,19 +621,19 @@ Then(/^I see the client details page$/) do
 end
 
 Then('I should be on the Applicant page') do
-  expect(page).to have_css('input#first_name')
+  expect(page).to have_css('input#applicant-first-name-field')
 end
 
 Then('I enter name {string}, {string}') do |first_name, last_name|
-  fill_in('first_name', with: first_name)
-  fill_in('last_name', with: last_name)
+  fill_in('applicant-first-name-field', with: first_name)
+  fill_in('applicant-last-name-field', with: last_name)
 end
 
 Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
   day, month, year = dob.split('-')
-  fill_in('date_of_birth', with: day)
-  fill_in('dob_month', with: month)
-  fill_in('dob_year', with: year)
+  fill_in('applicant_date_of_birth_3i', with: day)
+  fill_in('applicant_date_of_birth_2i', with: month)
+  fill_in('applicant_date_of_birth_1i', with: year)
 end
 
 Then('I enter the email address {string}') do |email|
@@ -657,9 +657,10 @@ end
 Then('I enter the {string} date of {int} days ago') do |name, number|
   name.gsub!(/\s+/, '_')
   date = number.days.ago
-  fill_in("#{name}_on", with: date.day)
-  fill_in("#{name}_month", with: date.month)
-  fill_in("#{name}_year", with: date.year)
+  fields = page.all("input[name*=#{name}]")
+  fill_in(fields[0][:name].to_s, with: date.day)
+  fill_in(fields[1][:name].to_s, with: date.month)
+  fill_in(fields[2][:name].to_s, with: date.year)
 end
 
 Given('a {string} exists in the database') do |model|
@@ -678,7 +679,8 @@ end
 Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field_name, entry|
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
-  fill_in(field_name, with: entry)
+  name = find("input[name*=#{field_name}]")[:name]
+  fill_in(name, with: entry)
 end
 
 Then(/^I select the first checkbox$/) do
