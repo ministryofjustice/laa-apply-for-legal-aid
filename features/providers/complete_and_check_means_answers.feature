@@ -59,6 +59,9 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    When I select 'England Infected Blood Support Scheme'
+    And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click Check Your Answers Change link for 'Outgoings'
     Then I should be on a page showing "Sort your client's regular payments into categories"
