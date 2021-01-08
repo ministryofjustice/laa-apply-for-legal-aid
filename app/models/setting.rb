@@ -19,6 +19,10 @@ class Setting < ApplicationRecord
     setting.allow_cash_payment
   end
 
+  def self.allow_multiple_proceedings?
+    setting.allow_multiple_proceedings
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

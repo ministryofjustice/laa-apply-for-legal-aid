@@ -11,6 +11,7 @@ RSpec.describe Setting do
         expect(rec.manually_review_all_cases?).to be true
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.allow_cash_payment?).to be false
+        expect(rec.allow_multiple_proceedings?).to be false
         expect(rec.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
       end
     end
@@ -22,6 +23,7 @@ RSpec.describe Setting do
           manually_review_all_cases: false,
           allow_welsh_translation: false,
           allow_cash_payment: false,
+          allow_multiple_proceedings: false,
           bank_transaction_filename: 'my_special_file.csv'
         )
       end
@@ -32,6 +34,7 @@ RSpec.describe Setting do
         expect(rec.manually_review_all_cases?).to be false
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.allow_cash_payment?).to be false
+        expect(rec.allow_multiple_proceedings?).to be false
         expect(rec.bank_transaction_filename).to eq 'my_special_file.csv'
       end
     end
@@ -45,6 +48,7 @@ RSpec.describe Setting do
       expect(Setting.manually_review_all_cases?).to be true
       expect(Setting.allow_welsh_translation?).to be false
       expect(Setting.allow_cash_payment?).to be false
+      expect(Setting.allow_multiple_proceedings?).to be false
       expect(Setting.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
     end
   end

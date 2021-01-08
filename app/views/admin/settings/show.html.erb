@@ -46,6 +46,16 @@
         title: { size: :m, text: t('.labels.allow_cash_payment') }
     ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+        :allow_multiple_proceedings,
+        form.yes_no_radio_button_array,
+        :value,
+        :label,
+        inline: true,
+        hint: t('.hints.allow_multiple_proceedings'),
+        title: { size: :m, text: t('.labels.allow_multiple_proceedings') }
+    ) %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>
