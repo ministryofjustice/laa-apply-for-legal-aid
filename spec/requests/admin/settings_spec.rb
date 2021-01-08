@@ -47,10 +47,10 @@ RSpec.describe Admin::SettingsController, type: :request do
 
     it 'change settings values' do
       subject
-      expect(Setting.mock_true_layer_data?).to eq(true)
-      expect(Setting.allow_welsh_translation?).to eq(true)
-      expect(Setting.allow_cash_payment?).to eq(true)
-      expect(Setting.allow_multiple_proceedings?).to eq(true)
+      expect(setting.mock_true_layer_data?).to eq(true)
+      expect(setting.allow_welsh_translation?).to eq(true)
+      expect(setting.allow_cash_payment?).to eq(true)
+      expect(setting.allow_multiple_proceedings?).to eq(true)
     end
 
     it 'create settings if they do not exist' do
