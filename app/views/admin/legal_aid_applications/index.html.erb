@@ -3,6 +3,7 @@
       column_width: :full,
       back_link: :none
     ) do %>
+  <%= render partial: 'shared/error' if @error %>
 
   <div id="confirm-delete" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary" data-cancel-text="<%= t('.cancel_delete') %>" hidden>
     <h2 class="govuk-error-summary__title" id="error-summary-title">
@@ -41,6 +42,18 @@
         "data-application-id": 'destroy_all',
         "data-delete-message": t('.warning.delete_all')
       ) if @applications.present? && destroy_enabled? %>
+<% end %>
+
+<%= form_with(
+      url: admin_application_search_path,
+      method: :post,
+      local: true
+    ) do |form| %>
+
+  <%= govuk_form_group(show_error_if: @error)  do %>
+    <%= form.govuk_text_field :search, class: 'govuk-input--width-20', value: params['search'] || '' %>
+    <%= form.submit(t('generic.search'), class: 'govuk-button form-button', name: 'search_button') %>
+  <% end %>
 <% end %>
 
 <% if @applications.present? %>

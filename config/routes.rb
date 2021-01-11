@@ -50,6 +50,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'legal_aid_applications#index'
+    post 'search', to: 'legal_aid_applications#search', as: 'application_search'
     namespace :legal_aid_applications do
       resources :submissions, only: [:show] do
         member do
