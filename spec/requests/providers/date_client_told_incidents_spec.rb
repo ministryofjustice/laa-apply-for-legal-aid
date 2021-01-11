@@ -52,12 +52,12 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     let(:params) do
       {
         incident: {
-          told_day: told_day,
-          told_month: told_on.month,
-          told_year: told_on.year,
-          occurred_day: occurred_on.day,
-          occurred_month: occurred_on.month,
-          occurred_year: occurred_on.year
+          told_on_3i: :told_day,
+          told_on_2i: told_on.month,
+          told_on_1i: told_on.year,
+          occurred_on_3i: occurred_on.day,
+          occurred_on_2i: occurred_on.month,
+          occurred_on_1i: occurred_on.year
         }
       }
     end

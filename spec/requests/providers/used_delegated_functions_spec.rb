@@ -67,9 +67,9 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     let(:params) do
       {
         legal_aid_application: {
-          used_delegated_functions_day: day.to_s,
-          used_delegated_functions_month: month.to_s,
-          used_delegated_functions_year: year.to_s,
+          used_delegated_functions_on_3i: day.to_s,
+          used_delegated_functions_on_2i: month.to_s,
+          used_delegated_functions_on_1i: year.to_s,
           used_delegated_functions: used_delegated_functions.to_s
         }
       }
@@ -134,9 +134,9 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       let(:params) do
         {
           legal_aid_application: {
-            used_delegated_functions_day: day.to_s,
-            used_delegated_functions_month: '5s',
-            used_delegated_functions_year: year.to_s,
+            used_delegated_functions_on_3i: day.to_s,
+            used_delegated_functions_on_2i: '5s',
+            used_delegated_functions_on_1i: year.to_s,
             used_delegated_functions: used_delegated_functions.to_s
           }
         }
