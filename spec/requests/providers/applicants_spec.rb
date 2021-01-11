@@ -27,9 +27,9 @@ RSpec.describe Providers::ApplicantsController, type: :request do
     let(:params) do
       {
         applicant: param_applicant.merge(
-          dob_year: param_applicant[:date_of_birth].year.to_s,
-          dob_month: param_applicant[:date_of_birth].month.to_s,
-          dob_day: param_applicant[:date_of_birth].day.to_s
+          date_of_birth_1i: param_applicant[:date_of_birth].year.to_s,
+          date_of_birth_2i: param_applicant[:date_of_birth].month.to_s,
+          date_of_birth_3i: param_applicant[:date_of_birth].day.to_s
         )
       }
     end

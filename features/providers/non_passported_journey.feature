@@ -346,9 +346,6 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'Select if your client has received payments from these schemes or charities'
-    When I select "None of these"
-    And I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
