@@ -26,7 +26,7 @@ class FeedbackMailer < BaseApplyMailer
       provider_email: provider_email_phrase(feedback),
       application_reference: @legal_aid_application&.application_ref || '',
       application_status: application_status || '',
-      non_live_env: non_live_environment?
+      non_live_env: non_live_environment? ? '- non-live' : ''
     )
   end
 
@@ -53,7 +53,7 @@ class FeedbackMailer < BaseApplyMailer
   end
 
   def non_live_environment?
-    %w[staging uat localhost].any? { |env| Rails.configuration.x.application.host.include?(env) } ? '- non-live' : ''
+    %w[staging uat localhost].any? { |env| Rails.configuration.x.application.host.include?(env) }
   end
 
   def provider_email_phrase(feedback)
