@@ -11,7 +11,7 @@ bank_acct:
     response_type: text
     user_defined: true
   BANKACC_INPUT_T_7WP2_6A:
-    value: "#bank_account_holders"
+    value: "#bank_account_holder_type"
     br100_meaning: 'Bank accounts: Account holders'
     response_type: text
     user_defined: true

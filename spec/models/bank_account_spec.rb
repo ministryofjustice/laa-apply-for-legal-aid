@@ -18,10 +18,10 @@ RSpec.describe BankAccount, type: :model do
     end
   end
 
-  describe '#holders' do
+  describe '#holder_type' do
     it 'returns the correct account holder' do
       bank_account = create :bank_account
-      expect(bank_account.holders).to eq 'ClientSole'
+      expect(bank_account.holder_type).to eq 'Client Sole'
     end
   end
 

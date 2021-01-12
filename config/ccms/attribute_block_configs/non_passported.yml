@@ -183,7 +183,7 @@ bank_acct:
     response_type: text
     generate_block?: true
   BANKACC_INPUT_T_7WP2_6A:
-    value: Client Sole
+    value: "#bank_account_holder_type"
     br100_meaning: 'Bank accounts: Account holders'
     user_defined: true
     response_type: text

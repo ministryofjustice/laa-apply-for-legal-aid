@@ -11,12 +11,12 @@ bank_acct:
     :response_type: text
     :user_defined: true
   HOLDERS:
-    :value: "#bank_account_holders"
+    :value: "#bank_account_holder_type"
     :br100_meaning: 'Bank accounts: Account holders'
     :response_type: text
     :user_defined: true
   BANK_NAME:
-    :value: Mock Bank
+    :value: '#bank_name'
     :br100_meaning: 'Bank accounts: Name of bank'
     :response_type: text
     :user_defined: true

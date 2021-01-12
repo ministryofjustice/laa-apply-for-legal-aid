@@ -97,8 +97,8 @@ module CCMS
       options[:bank_acct].bank_provider.name
     end
 
-    def bank_account_holders(_options)
-      'Client Sole' # TODO: CCMS placeholder
+    def bank_account_holder_type(options)
+      options[:bank_acct].holder_type
     end
 
     def submission_case_ccms_reference(_options)
