@@ -8,6 +8,15 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
   let!(:maintenance_out) { create :transaction_type, :maintenance_out }
   let!(:child_care) { create :transaction_type, :child_care }
   let!(:legal_aid) { create :transaction_type, :legal_aid }
+  let(:month1_tx_date) { Date.today.beginning_of_month - 1.month }
+  let(:month2_tx_date) { Date.today.beginning_of_month - 2.months }
+  let(:month3_tx_date) { Date.today.beginning_of_month - 3.months }
+  let(:month1_period) { "#{month1_tx_date.strftime('%d %b %Y')} - #{month1_tx_date.end_of_month.strftime('%d %b %Y')}" }
+  let(:month2_period) { "#{month2_tx_date.strftime('%d %b %Y')} - #{month2_tx_date.end_of_month.strftime('%d %b %Y')}" }
+  let(:month3_period) { "#{month3_tx_date.strftime('%d %b %Y')} - #{month3_tx_date.end_of_month.strftime('%d %b %Y')}" }
+  let(:month1_name) { month1_tx_date.strftime('%B') }
+  let(:month2_name) { month2_tx_date.strftime('%B') }
+  let(:month3_name) { month3_tx_date.strftime('%B') }
 
   describe '#find_by' do
     context 'no cash income transaction records' do
@@ -29,22 +38,28 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         expect(aco.legal_aid1).to be_nil
         expect(aco.legal_aid2).to be_nil
         expect(aco.legal_aid3).to be_nil
+        expect(aco.month1).to eq month1_tx_date
+        expect(aco.month2).to eq month2_tx_date
+        expect(aco.month3).to eq month3_tx_date
       end
     end
 
     context 'cash income transaction records exist' do
-      let(:maintenance_out1) { create :cash_transaction, :credit_month_1, legal_aid_application: application, transaction_type: maintenance_out }
-      let(:maintenance_out2) { create :cash_transaction, :credit_month_2, legal_aid_application: application, transaction_type: maintenance_out }
-      let(:maintenance_out3) { create :cash_transaction, :credit_month_3, legal_aid_application: application, transaction_type: maintenance_out }
+      let!(:maintenance_out1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out }
+      let!(:maintenance_out2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out }
+      let!(:maintenance_out3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out }
+      let(:month_1_date) { Date.new(2020, 12, 1) }
+      let(:month_2_date) { Date.new(2020, 11, 1) }
+      let(:month_3_date) { Date.new(2020, 10, 1) }
+      let(:aco) { described_class.find_by(legal_aid_application_id: application.id) }
 
-      before do
-        maintenance_out1
-        maintenance_out2
-        maintenance_out3
+      around(:each) do |example|
+        travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
+        example.run
+        travel_back
       end
 
       it 'populates the model' do
-        aco = described_class.find_by(legal_aid_application_id: application.id)
         expect(aco.check_box_maintenance_out).to eq 'true'
         expect(aco.maintenance_out1).to eq maintenance_out1.amount
         expect(aco.maintenance_out2).to eq maintenance_out2.amount
@@ -61,6 +76,10 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         expect(aco.child_care1).to be_nil
         expect(aco.child_care2).to be_nil
         expect(aco.child_care3).to be_nil
+
+        expect(aco.month1).to eq month_1_date
+        expect(aco.month2).to eq month_2_date
+        expect(aco.month3).to eq month_3_date
       end
     end
   end
@@ -115,11 +134,13 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it 'populates the errors' do
-          error_msg = 'Enter the total cash amount you received in each calendar month'
+          expect(aco.errors[:maintenance_out1][0]).to eq error_msg('Maintenance payments for children or an ex-partner', month1_name)
+          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg('Rent or mortgage payments', month1_name)
+          expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg('Rent or mortgage payments', month3_name)
+        end
 
-          expect(aco.errors[:maintenance_out1][0]).to eq error_msg
-          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
-          expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg
+        def error_msg(name, month)
+          "Enter the cash you paid as #{name} in #{month}"
         end
       end
 
@@ -294,7 +315,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
           it 'populates the errors' do
             subject
-            expect(aco.errors[:rent_or_mortgage1]).to include 'Enter the total cash amount you received in each calendar month'
+            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the cash you paid as Rent or mortgage payments in #{month1_name}"
           end
         end
       end

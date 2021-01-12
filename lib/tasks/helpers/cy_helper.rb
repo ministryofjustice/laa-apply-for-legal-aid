@@ -24,21 +24,11 @@ class CyHelper
   end
 
   def run
-    initialize_cy_dir
     copy_en_to_cy
     translation_files.each { |f| reverse_strings(f) }
   end
 
   private
-
-  def initialize_cy_dir
-    delete_cy_dir if File.exist?(@cy_dir)
-  end
-
-  def delete_cy_dir
-    puts 'deleting cy dir'
-    FileUtils.rm @cy_dir, force: true
-  end
 
   def copy_en_to_cy
     puts 'copying en locale to cy'
@@ -56,6 +46,7 @@ class CyHelper
     hash = YAML.load_file(filename)
     hash['cy'] = hash['en']
     hash.delete('en')
+
     hash['cy'].each_key { |k| reverse_key(k, hash['cy']) }
     File.open(filename, 'w') { |f| f.puts(YAML.dump(hash)) }
   end

@@ -60,19 +60,19 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
         end
 
         it 'shows an error for no amount entered' do
-          expect(response.body).to include(I18n.t('errors.cash_amount.blank'))
+          expect(response.body).to include(I18n.t('errors.aggregated_cash_income.blank', category: 'Maintenance payments', month: 'November'))
         end
 
         it 'shows an error for an invalid amount' do
-          expect(response.body).to include(I18n.t('errors.cash_amount.invalid_type'))
+          expect(response.body).to include(I18n.t('errors.aggregated_cash_income.invalid_type'))
         end
 
         it 'shows an error for a negtive amount' do
-          expect(response.body).to include(I18n.t('errors.cash_amount.negative'))
+          expect(response.body).to include(I18n.t('errors.aggregated_cash_income.negative'))
         end
 
         it 'shows an error for an amount with too many decimals' do
-          expect(response.body).to include(I18n.t('errors.cash_amount.too_many_decimals'))
+          expect(response.body).to include(I18n.t('errors.aggregated_cash_income.too_many_decimals'))
         end
       end
 

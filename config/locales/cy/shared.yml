@@ -14,6 +14,12 @@ cy:
             check_box_maintenance_in: stnemyap ecnanetniaM
             check_box_property_or_lodger: regdol ro ytreporp a morf emocnI
             check_box_pension: noisneP
+          cash_outgoings:
+            date_goes_here: ereh og setaD
+            check_box_rent_or_mortgage: stnemyap gnisuoH
+            check_box_child_care: stnemyap eracdlihC
+            check_box_maintenance_out: stnemyap ecnanetniaM
+            check_box_legal_aid: stnemyap dia lageL
     applicant_declaration:
       confirm_following: gniwollof eht mrifnoC
       submission_list_summary: taht eerga uoY
@@ -37,6 +43,66 @@ cy:
       apply_ref: ":ecnerefer esac ecivres ylppA"
       ccms_ref_html: ":ecnerefer esac >rbba/<SMCC>'metsyS tnemeganaM tsoC dna tneilC'=eltit
         rbba<"
+    assessment_results:
+      eligible:
+        heading: dia lagel rof elbigile eb dluoc %{name}
+        details:
+        - Based on their financial situation, your client may not have to pay towards
+          legal aid.
+        - You still need to provide details of the case before we can decide if they’re
+          eligible.
+      not_eligible:
+        heading: dia lagel teg ot ylekilnu si %{name}
+        detail: ".latipac elbasopsid hcum oot evah yeht esuaceb si sihT"
+      capital_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam %{name}
+        details:
+        - We’ve calculated that your client should pay %{amount} from their disposable
+          capital.
+        - You still need to provide details of the case before we can decide if they’re
+          eligible.
+      manual_check_required:
+        heading: dia lagel sdrawot yap dluohs %{name} fi kcehc ot deen eW
+        details:
+        - You told us legal restrictions prevent your client from selling or borrowing
+          against their assets.
+        - We calculated that your client should pay a contribution, but the amount
+          depends on the restrictions.
+        - We’ll check the details you provided and let you know our decision.
+      manual_check_disregards:
+        heading: dia lagel teg nac %{name} fi kcehc ot deen eW
+        details:
+        - We calculated that your client should pay a contribution towards legal aid.
+        - The amount depends on whether or not the scheme or charity payments they've
+          received are disregarded from the finanical eligibility calculation.
+        - A caseworker will review this and let you know the outcome.
+        - Please continue with the application to provide details of the case.
+      manual_check_disregards_restrictions:
+        heading: dia lagel teg nac %{name} fi kcehc ot deen eW
+        line1: ":no sdneped tnuoma eht tub dia lagel sdrawot noitubirtnoc a yap dluohs
+          tneilc ruoy taht detaluclac eW"
+        bullets:
+        - whether or not the scheme or charity payments they've received are disregarded
+          from the finanical eligibility calculation.
+        - the legal restrictions preventing them from selling or borrowing against
+          their assets
+        line2: ".emoctuo eht wonk uoy tel dna dedivorp uoy sliated eht kcehc ll'eW"
+        line3: ".esac eht fo sliated edivorp ot noitacilppa eht htiw eunitnoc esaelP"
+      capital_and_income_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam %{name}
+        line_1: ":yap dluohs tneilc ruoy taht detaluclac ev'eW"
+        line_2: ".elbigile er’yeht fi ediced nac ew erofeb esac eht fo sliated edivorp
+          ot deen llits uoY"
+        details:
+        - "%{income_contribution} from their disposable income"
+        - "%{capital_contribution} from their disposable capital"
+      income_contribution_required:
+        heading: dia lagel sdrawot yap ot deen yam %{name}
+        details:
+        - We’ve calculated that your client should pay %{amount} from their disposable
+          income.
+        - You still need to provide details of the case before we can decide if they’re
+          eligible.
     means_report:
       item:
         deductions:

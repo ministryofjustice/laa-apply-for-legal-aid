@@ -9,6 +9,15 @@ RSpec.describe AggregatedCashIncome, type: :model do
   let!(:friends_or_family) { create :transaction_type, :friends_or_family }
   let!(:property_or_lodger) { create :transaction_type, :property_or_lodger }
   let!(:pension) { create :transaction_type, :pension }
+  let(:month1_tx_date) { Date.today.beginning_of_month - 1.month }
+  let(:month2_tx_date) { Date.today.beginning_of_month - 2.months }
+  let(:month3_tx_date) { Date.today.beginning_of_month - 3.months }
+  let(:month1_period) { "#{month1_tx_date.strftime('%d %b %Y')} - #{month1_tx_date.end_of_month.strftime('%d %b %Y')}" }
+  let(:month2_period) { "#{month2_tx_date.strftime('%d %b %Y')} - #{month2_tx_date.end_of_month.strftime('%d %b %Y')}" }
+  let(:month3_period) { "#{month3_tx_date.strftime('%d %b %Y')} - #{month3_tx_date.end_of_month.strftime('%d %b %Y')}" }
+  let(:month1_name) { month1_tx_date.strftime('%B') }
+  let(:month2_name) { month2_tx_date.strftime('%B') }
+  let(:month3_name) { month3_tx_date.strftime('%B') }
 
   describe '#find_by' do
     context 'no cash income transaction records' do
@@ -34,48 +43,59 @@ RSpec.describe AggregatedCashIncome, type: :model do
         expect(aci.pension1).to be_nil
         expect(aci.pension2).to be_nil
         expect(aci.pension3).to be_nil
+        expect(aci.month1).to eq month1_tx_date
+        expect(aci.month2).to eq month2_tx_date
+        expect(aci.month3).to eq month3_tx_date
       end
     end
 
     context 'cash income transaction records exist' do
-      let(:pension1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension }
-      let(:pension2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension }
-      let(:pension3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension }
-      let(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
-      let(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
-      let(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
+      let!(:pension1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension }
+      let!(:pension2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension }
+      let!(:pension3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension }
+      let!(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
+      let!(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
+      let!(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
+      let(:month_1_date) { Date.new(2020, 12, 1) }
+      let(:month_2_date) { Date.new(2020, 11, 1) }
+      let(:month_3_date) { Date.new(2020, 10, 1) }
+      let(:aci) { AggregatedCashIncome.find_by(legal_aid_application_id: application.id) }
 
-      before do
-        pension1
-        pension2
-        pension3
-        maintenance_in1
-        maintenance_in2
-        maintenance_in3
+      around(:each) do |example|
+        travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
+        example.run
+        travel_back
       end
 
       it 'populates the model' do
-        aci = AggregatedCashIncome.find_by(legal_aid_application_id: application.id)
         expect(aci.check_box_pension).to eq 'true'
         expect(aci.pension1).to eq pension1.amount
         expect(aci.pension2).to eq pension2.amount
         expect(aci.pension3).to eq pension3.amount
+
         expect(aci.check_box_maintenance_in).to eq 'true'
         expect(aci.maintenance_in1).to eq maintenance_in1.amount
         expect(aci.maintenance_in2).to eq maintenance_in2.amount
         expect(aci.maintenance_in3).to eq maintenance_in3.amount
+
         expect(aci.check_box_property_or_lodger).to be_nil
         expect(aci.property_or_lodger1).to be_nil
         expect(aci.property_or_lodger2).to be_nil
         expect(aci.property_or_lodger3).to be_nil
+
         expect(aci.check_box_benefits).to be_nil
         expect(aci.benefits1).to be_nil
         expect(aci.benefits2).to be_nil
         expect(aci.benefits3).to be_nil
+
         expect(aci.check_box_friends_or_family).to be_nil
         expect(aci.friends_or_family1).to be_nil
         expect(aci.friends_or_family2).to be_nil
         expect(aci.friends_or_family3).to be_nil
+
+        expect(aci.month1).to eq month_1_date
+        expect(aci.month2).to eq month_2_date
+        expect(aci.month3).to eq month_3_date
       end
     end
   end
@@ -130,11 +150,9 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
 
         it 'populates the errors' do
-          error_msg = 'Enter the total cash amount you received in each calendar month'
-
-          expect(aci.errors[:maintenance_in1][0]).to eq error_msg
-          expect(aci.errors[:benefits1][0]).to eq error_msg
-          expect(aci.errors[:benefits3][0]).to eq error_msg
+          expect(aci.errors[:maintenance_in1][0]).to eq "Enter the cash you received as Maintenance payments in #{month1_name}"
+          expect(aci.errors[:benefits1][0]).to eq "Enter the cash you received as Benefits in #{month1_name}"
+          expect(aci.errors[:benefits3][0]).to eq "Enter the cash you received as Benefits in #{month3_name}"
         end
       end
 
@@ -313,7 +331,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
           it 'populates the errors' do
             subject
-            expect(aci.errors[:benefits1]).to include 'Enter the total cash amount you received in each calendar month'
+            expect(aci.errors[:benefits1]).to include "Enter the cash you received as Benefits in #{month1_name}"
           end
         end
       end
@@ -384,6 +402,69 @@ RSpec.describe AggregatedCashIncome, type: :model do
               expect(date).to eq historical_date
             end
           end
+        end
+      end
+    end
+  end
+
+  context 'date labeling' do
+    around(:each) do |example|
+      travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
+      example.run
+      travel_back
+    end
+
+    let!(:pension1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension }
+    let!(:pension2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension }
+    let!(:pension3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension }
+    let!(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
+    let!(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
+    let!(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
+    let(:aci) { AggregatedCashIncome.find_by(legal_aid_application_id: application.id) }
+
+    describe '#period' do
+      context 'locale :en' do
+        it 'displays the start and end dates of the period' do
+          expect(aci.period(1)).to eq '1 Dec 2020 - 31 Dec 2020'
+          expect(aci.period(2)).to eq '1 Nov 2020 - 30 Nov 2020'
+          expect(aci.period(3)).to eq '1 Oct 2020 - 31 Oct 2020'
+        end
+      end
+      context 'locale :cy' do
+        around(:each) do |example|
+          I18n.locale = :cy
+          example.run
+          I18n.locale = :en
+        end
+
+        it 'displays period in faux Welsh' do
+          expect(aci.period(1)).to eq '1 ceD 2020 - 31 ceD 2020'
+          expect(aci.period(2)).to eq '1 voN 2020 - 30 voN 2020'
+          expect(aci.period(3)).to eq '1 tcO 2020 - 31 tcO 2020'
+        end
+      end
+    end
+
+    describe '#month name' do
+      context 'locale :en' do
+        it 'displays the month name' do
+          expect(aci.month_name(1)).to eq 'December'
+          expect(aci.month_name(2)).to eq 'November'
+          expect(aci.month_name(3)).to eq 'October'
+        end
+      end
+
+      context 'locale :cy' do
+        around(:each) do |example|
+          I18n.locale = :cy
+          example.run
+          I18n.locale = :en
+        end
+
+        it 'displays the month nae in faux Welsh' do
+          expect(aci.month_name(1)).to eq 'rebmeceD'
+          expect(aci.month_name(2)).to eq 'rebmevoN'
+          expect(aci.month_name(3)).to eq 'rebotcO'
         end
       end
     end

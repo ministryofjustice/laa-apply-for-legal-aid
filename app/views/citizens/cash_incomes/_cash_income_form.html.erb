@@ -21,7 +21,7 @@
                   form: form,
                   number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
                   model: @aggregated_cash_income,
-                  label: ->(number) { t('.dates', date_end: l(Date.today.at_end_of_month - number.month , format: :short_date), date_start: l(Date.today.at_beginning_of_month - number.month, format: :short_date)) },
+                  # label: ->(number) { t('.dates', date_end: l(Date.today.at_end_of_month - number.month , format: :short_date), date_start: l(Date.today.at_beginning_of_month - number.month, format: :short_date)) },
                   input_prefix: t('currency.gbp')
                 ) %>
           <% end %>
