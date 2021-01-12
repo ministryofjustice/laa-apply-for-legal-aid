@@ -26,20 +26,20 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
 
       it 'does not display error' do
-        expect(response.body).not_to match 'id="statement-error"'
+        expect(response.body).not_to match 'id="statement-of-case-original-file-error"'
       end
 
       context 'no statement of case record exists for the application' do
         it 'displays an empty text box' do
           expect(legal_aid_application.statement_of_case).to be nil
-          expect(response.body).to have_text_area_with_id_and_content('statement', '')
+          expect(response.body).to have_text_area_with_id_and_content('statement-of-case-statement-field', '')
         end
       end
 
       context 'statement of case record already exists for the application' do
         let(:soc) { legal_aid_application.create_statement_of_case(statement: 'This is my case statement') }
         it 'displays the details of the statement on the page' do
-          expect(response.body).to have_text_area_with_id_and_content('statement', soc.statement)
+          expect(response.body).to have_text_area_with_id_and_content('statement-of-case-statement-field', soc.statement)
         end
       end
     end
@@ -255,7 +255,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'displays error' do
             subject
-            expect(response.body).to match 'id="original_file-error"'
+            expect(response.body).to match 'id="statement-of-case-original-file-error"'
           end
 
           context 'file contains a malware' do
