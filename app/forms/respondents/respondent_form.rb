@@ -8,7 +8,6 @@ module Respondents
                   :warning_letter_sent, :warning_letter_sent_details,
                   :police_notified, :police_notified_details, :police_notified_details_true, :police_notified_details_false,
                   :bail_conditions_set, :bail_conditions_set_details, :full_name
-    attr_writer :police_notified_details
 
     before_validation :clear_details, :clear_bail_details
 
@@ -45,11 +44,6 @@ module Respondents
     )
 
     private
-
-    def police_notified_details
-      attr_value = __send__(:police_notified)
-      @police_notified_details = __send__("police_notified_details_#{attr_value}".to_sym)
-    end
 
     def clear_details
       %i[understands_terms_of_court_order warning_letter_sent].each do |attr|
