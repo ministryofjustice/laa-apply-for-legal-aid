@@ -123,9 +123,9 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
                 first_name: '',
                 last_name: 'Doe',
                 national_insurance_number: 'AA 12 34 56 C',
-                dob_year: '1981',
-                dob_month: '07',
-                dob_day: '11',
+                date_of_birth_1i: '1981',
+                date_of_birth_2i: '07',
+                date_of_birth_3i: '11',
                 email: Faker::Internet.safe_email
               }
             }
@@ -168,9 +168,9 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
               first_name: '',
               last_name: 'Doe',
               national_insurance_number: 'AA 12 34 56 C',
-              dob_year: '1981',
-              dob_month: '6s',
-              dob_day: '11sa',
+              date_of_birth_1i: '1981',
+              date_of_birth_2i: '6s',
+              date_of_birth_3i: '11sa',
               email: Faker::Internet.safe_email
             }
           }
