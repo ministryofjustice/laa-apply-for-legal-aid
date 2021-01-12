@@ -52,6 +52,19 @@ en:
       statement_of_case:
         file_uploaded: "You have uploaded %{file_name}"
         file_deleted: "You have deleted %{file_name}"
+      transaction_types:
+        name:
+          benefits: Benefits
+          excluded_benefits: Excluded benefits
+          friends_or_family: Financial help from friends or family
+          maintenance_in: Maintenance payments
+          property_or_lodger: Income from property or lodger
+          student_loan: Student loan or grant
+          pension: Pension
+          rent_or_mortgage: Housing costs
+          child_care: Childcare costs
+          maintenance_out: Maintenance payments
+          legal_aid: Payments towards legal aid in a criminal casefeatures/step_definitions/citizens_steps.rb:38
       vehicle:
         purchased_on_day: Day
         purchased_on_month: Month

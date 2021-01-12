@@ -206,6 +206,10 @@ cy:
             uoy tcatnoc tneilc ruoy did nehW"
           date_of_latest_incident: "?rucco tnedicni eht did nehW"
           details_of_latest_incident: "?tnedicni eht gnirud deneppah tahW"
+      no_link_cash_transaction_item:
+        no_transactions: 'oN'
+        html:
+          no_transactions: 'oN'
       proceedings_details:
         section_proceeding:
           heading: dia lagel fo epocS

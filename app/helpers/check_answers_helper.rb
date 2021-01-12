@@ -69,6 +69,16 @@ module CheckAnswersHelper
     )
   end
 
+  def check_long_question_for_cash_transactions(name:, question:, legal_aid_application:, transaction_type:)
+    render(
+      'shared/check_answers/no_link_cash_transaction_item.html',
+      name: name,
+      question: question,
+      legal_aid_application: legal_aid_application,
+      transaction_type: transaction_type
+    )
+  end
+
   def number_to_currency_or_na(number)
     number.to_d == 999_999_999_999.0.to_d ? 'N/a' : gds_number_to_currency(number)
   end

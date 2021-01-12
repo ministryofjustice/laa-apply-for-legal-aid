@@ -18,10 +18,20 @@ class CashTransaction < ApplicationRecord
       .where(transaction_types: { operation: :debit })
   end
 
+  scope :for_transaction_type, ->(tt_id) { where(transaction_type_id: tt_id).order(transaction_date: :asc) }
+
   def self.amounts_for_application(application_id)
     where(legal_aid_application_id: application_id)
       .includes(:transaction_type)
       .group(:name)
       .sum(:amount)
+  end
+
+  def period_start
+    transaction_date.beginning_of_month.strftime('%d %b')
+  end
+
+  def period_end
+    transaction_date.end_of_month.strftime('%d %b')
   end
 end

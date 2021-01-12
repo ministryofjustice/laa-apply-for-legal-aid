@@ -19,6 +19,17 @@
               locale_namespace: "transaction_types.names.citizens"
           ),
           read_only: false) %>
+
+  <%= render partial: 'cash_transactions', locals: {
+    operation: :credits,
+    transaction_types: @legal_aid_application.transaction_types.not_children.credits,
+    url: citizens_cash_income_path,
+    read_only: false,
+    question: 'cash_income'
+  } %>
+
+  <%= render 'student_finance' %>
+
   <%= check_long_questions_single_change_link(
           name: :payments,
           url: citizens_identify_types_of_outgoing_path,
@@ -29,7 +40,13 @@
           ),
           read_only: false) %>
 
-  <%= render 'student_finance' %>
+  <%= render partial: 'cash_transactions', locals: {
+    operation: :debits,
+    transaction_types: @legal_aid_application.transaction_types.not_children.debits,
+    url: citizens_cash_outgoing_path,
+    read_only: false,
+    question: 'cash_outgoing'
+  } %>
 
   <%= render 'shared/applicant_declaration' %>
 

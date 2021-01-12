@@ -71,6 +71,10 @@ cy:
       update:
         none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     check_answers:
+      cash_transactions:
+        cash_transactions_credits_header: hsac ni eviecer uoy stnemyaP
+        cash_transactions_debits_header: hsac ni ekam uoy stnemyaP
+        none: enoN
       index:
         assets:
           heading: stessa rehto dna sgnivas ,ytreporP
