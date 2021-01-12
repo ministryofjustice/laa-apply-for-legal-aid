@@ -74,7 +74,7 @@ RSpec.describe Providers::Draftable do
           subject
 
           expect(unescaped_response_body).to include('There is a problem')
-          expect(unescaped_response_body).to include('national_insurance_number-error')
+          expect(unescaped_response_body).to include('applicant-national-insurance-number-field-error')
         end
 
         it 'does NOT create a new applicant' do

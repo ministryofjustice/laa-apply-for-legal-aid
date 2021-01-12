@@ -36,7 +36,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to include(I18n.t("shared.forms.own_home_form.#{application.own_home}"))
         expect(response.body).to include(gds_number_to_currency(application.property_value, unit: '£'))
         expect(response.body).to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
-        expect(response.body).to include(I18n.t("shared.forms.shared_ownership_form.shared_ownership_item.#{application.shared_ownership}"))
+        expect(response.body).to include(I18n.t("shared.forms.shared_ownership_form.#{application.shared_ownership}"))
         expect(response.body).to include(number_to_percentage(application.percentage_home, precision: 2))
         expect(response.body).to include('Does your client own the home they live in?')
         expect(unescaped_response_body).to include("How much is your client's home worth?")
@@ -132,7 +132,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         end
 
         it 'does not display shared ownership question' do
-          expect(response.body).not_to include(I18n.t("shared.forms.shared_ownership_form.shared_ownership_item.#{application.shared_ownership}"))
+          expect(response.body).not_to include(I18n.t("shared.forms.shared_ownership_form.#{application.shared_ownership}"))
           expect(response.body).not_to include('Owned with anyone else')
         end
       end
