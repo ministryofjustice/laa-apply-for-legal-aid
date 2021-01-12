@@ -61,8 +61,8 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
       transaction_type_ids = TransactionType.__send__(operation).map(&:id)
 
       CashTransaction.where(
-        legal_aid_application_id: id,
-        transaction_type_id: transaction_type_ids
+          legal_aid_application_id: id,
+          transaction_type_id: transaction_type_ids
       )
     end
   end
@@ -96,8 +96,8 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   def save_cash_transaction_records
     self.class.cash_transaction_categories.each do |category|
       CashTransaction.where(
-        legal_aid_application_id: legal_aid_application_id,
-        transaction_type_id: transaction_type_id(category)
+          legal_aid_application_id: legal_aid_application_id,
+          transaction_type_id: transaction_type_id(category)
       ).destroy_all
 
       save_category(category) if checkbox_for(category) == 'true'
@@ -110,11 +110,11 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
       date = calculated_date(i)
 
       CashTransaction.create!(
-        legal_aid_application_id: legal_aid_application_id,
-        transaction_type_id: transaction_type_id(category),
-        transaction_date: date,
-        amount: amount,
-        month_number: i
+          legal_aid_application_id: legal_aid_application_id,
+          transaction_type_id: transaction_type_id(category),
+          transaction_date: date,
+          amount: amount,
+          month_number: i
       )
     end
   end
