@@ -38,6 +38,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
           attr_accessor "#{category}#{i}".to_sym
         end
       end
+      # MONTH_RANGE.each { |i| attr_accessor("#{month}#{i}") }
     end
 
     def populate_attribute(model, trx)

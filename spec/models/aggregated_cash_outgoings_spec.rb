@@ -44,9 +44,15 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
     end
 
     context 'cash income transaction records exist' do
+<<<<<<< HEAD
       let!(:maintenance_out1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out }
       let!(:maintenance_out2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out }
       let!(:maintenance_out3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out }
+=======
+      let!(:maintenance_out1) { create :cash_transaction, :credit_month_1, legal_aid_application: application, transaction_type: maintenance_out }
+      let!(:maintenance_out2) { create :cash_transaction, :credit_month_2, legal_aid_application: application, transaction_type: maintenance_out }
+      let!(:maintenance_out3) { create :cash_transaction, :credit_month_3, legal_aid_application: application, transaction_type: maintenance_out }
+>>>>>>> 373f27cde... AP-1471 Cukes
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
