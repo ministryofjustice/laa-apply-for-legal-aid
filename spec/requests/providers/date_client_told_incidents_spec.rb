@@ -48,11 +48,11 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
   describe 'PATCH /providers/applications/:legal_aid_application_id/date_client_told_incident' do
     let(:told_on) { 3.days.ago.to_date }
     let(:occurred_on) { 5.days.ago.to_date }
-    let(:told_day) { told_on.day }
+    let(:told_on_3i) { told_on.day }
     let(:params) do
       {
         incident: {
-          told_on_3i: :told_day,
+          told_on_3i: told_on_3i,
           told_on_2i: told_on.month,
           told_on_1i: told_on.year,
           occurred_on_3i: occurred_on.day,
@@ -92,7 +92,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     end
 
     context 'when incomplete' do
-      let(:told_day) { '' }
+      let(:told_on_3i) { '' }
 
       it 'renders show' do
         subject
@@ -101,7 +101,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     end
 
     context 'with alpha-numeric date' do
-      let(:told_day) { '6s2' }
+      let(:told_on_3i) { '6s2' }
 
       it 'renders show' do
         subject
@@ -116,7 +116,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     end
 
     context 'when invalid' do
-      let(:told_day) { '32' }
+      let(:told_on_3i) { '32' }
 
       it 'renders show' do
         subject
