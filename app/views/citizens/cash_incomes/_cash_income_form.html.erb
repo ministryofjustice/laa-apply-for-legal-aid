@@ -14,10 +14,10 @@
 
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#none_selected">
-          <% AggregatedCashIncome::cash_transaction_categories.each do |category| %>
+          <% @legal_aid_application.transaction_types.not_children.credits.each do |category| %>
             <%= render(
                   'shared/partials/revealing_checkbox',
-                  name: category,
+                  name: category.name,
                   form: form,
                   number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
                   model: @aggregated_cash_income,

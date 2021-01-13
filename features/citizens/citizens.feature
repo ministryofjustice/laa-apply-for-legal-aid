@@ -60,7 +60,7 @@ Feature: Citizen journey
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you receive?"
-    And I select 'None of these'
+    And I select 'Benefits'
     Then I click 'Save and continue'
     Then I should be on the 'cash_income' page showing 'Select payments you receive in cash'
     Then I select 'aggregated_cash_income_check_box_benefits'
