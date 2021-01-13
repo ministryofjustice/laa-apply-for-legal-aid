@@ -14,6 +14,7 @@ module Reports
             username
             provider_email
             created_at
+            date_submitted
             applicant_name
             deleted
           ]
@@ -24,15 +25,15 @@ module Reports
       end
 
       describe '.call' do
-        let(:application) { create :legal_aid_application, :with_applicant }
+        let(:application) { create :legal_aid_application, :with_applicant, :at_assessment_submitted }
         let(:provider) { application.provider }
         let(:applicant) { application.applicant }
         let(:time) { Time.new(2020, 9, 20, 2, 3, 44) }
 
         subject { described_class.call(application) }
 
-        it 'returns an array of eight fields' do
-          expect(subject.size).to eq 8
+        it 'returns an array of nine fields' do
+          expect(subject.size).to eq 9
         end
 
         context 'undiscarded application' do
@@ -45,8 +46,9 @@ module Reports
               expect(fields[3]).to eq provider.username
               expect(fields[4]).to eq provider.email
               expect(fields[5]).to match DATE_TIME_REGEX
-              expect(fields[6]).to eq applicant.full_name
-              expect(fields[7]).to eq ''
+              expect(fields[6]).to match DATE_TIME_REGEX
+              expect(fields[7]).to eq applicant.full_name
+              expect(fields[8]).to eq ''
             end
           end
         end
@@ -62,8 +64,9 @@ module Reports
               expect(fields[3]).to eq provider.username
               expect(fields[4]).to eq provider.email
               expect(fields[5]).to match DATE_TIME_REGEX
-              expect(fields[6]).to eq applicant.full_name
-              expect(fields[7]).to eq 'Y'
+              expect(fields[6]).to match DATE_TIME_REGEX
+              expect(fields[7]).to eq applicant.full_name
+              expect(fields[8]).to eq 'Y'
             end
           end
         end

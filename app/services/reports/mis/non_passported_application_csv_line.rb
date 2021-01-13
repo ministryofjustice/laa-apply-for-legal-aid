@@ -14,6 +14,7 @@ module Reports
           username
           provider_email
           created_at
+          date_submitted
           applicant_name
           deleted
         ]
@@ -35,6 +36,7 @@ module Reports
         @line << laa.provider.username
         @line << provider.email
         @line << laa.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        @line << laa.ccms_submission_date&.strftime('%Y-%m-%d %H:%M:%S')
         @line << laa.applicant.full_name
         @line << deleted?(laa)
         sanitise
