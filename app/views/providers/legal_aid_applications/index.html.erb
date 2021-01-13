@@ -25,3 +25,8 @@
 </div>
 
 <%= render 'legal_aid_applications', legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
+
+<script nonce="<%= content_security_policy_script_nonce %>">
+    // this will trigger an alert in Sentry
+    testSentry();
+</script>
