@@ -25,12 +25,4 @@ class AggregatedCashIncome < BaseAggregatedCashTransaction
 
     save_cash_transaction_records
   end
-
-  # def model_error(type)
-  #   I18n.t("activemodel.errors.models.aggregated_cash_income.#{self.class.operation}.attributes.none_selected.#{type}")
-  # end
-
-  # def amount_error(type)
-  #   I18n.t("errors.cash_amount.#{type}")
-  # end
 end
