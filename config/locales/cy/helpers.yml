@@ -86,3 +86,6 @@ cy:
         allow_cash_payment:
           'false': 'oN'
           'true': seY
+        allow_multiple_proceedings:
+          'false': 'oN'
+          'true': seY

@@ -8,14 +8,12 @@ cy:
           tnuoma hsac latot eht retnE"
         citizens:
           cash_incomes:
-            date_goes_here: ereh og setaD
             check_box_benefits: stifeneB
             check_box_friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
             check_box_maintenance_in: stnemyap ecnanetniaM
             check_box_property_or_lodger: regdol ro ytreporp a morf emocnI
             check_box_pension: noisneP
           cash_outgoings:
-            date_goes_here: ereh og setaD
             check_box_rent_or_mortgage: stnemyap gnisuoH
             check_box_child_care: stnemyap eracdlihC
             check_box_maintenance_out: stnemyap ecnanetniaM
