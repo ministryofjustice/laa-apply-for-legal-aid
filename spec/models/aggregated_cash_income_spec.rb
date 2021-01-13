@@ -38,12 +38,12 @@ RSpec.describe AggregatedCashIncome, type: :model do
     end
 
     context 'cash income transaction records exist' do
-      let(:pension1) { create :cash_transaction, :credit_month_1, legal_aid_application: application, transaction_type: pension }
-      let(:pension2) { create :cash_transaction, :credit_month_2, legal_aid_application: application, transaction_type: pension }
-      let(:pension3) { create :cash_transaction, :credit_month_3, legal_aid_application: application, transaction_type: pension }
-      let(:maintenance_in1) { create :cash_transaction, :credit_month_1, legal_aid_application: application, transaction_type: maintenance_in }
-      let(:maintenance_in2) { create :cash_transaction, :credit_month_2, legal_aid_application: application, transaction_type: maintenance_in }
-      let(:maintenance_in3) { create :cash_transaction, :credit_month_3, legal_aid_application: application, transaction_type: maintenance_in }
+      let(:pension1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension }
+      let(:pension2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension }
+      let(:pension3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension }
+      let(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
+      let(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
+      let(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
 
       before do
         pension1
