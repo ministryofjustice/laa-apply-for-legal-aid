@@ -9,7 +9,7 @@ RSpec.describe SaveApplicantMeansAnswers do
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
   let!(:bank_transaction_not_selected) { create :bank_transaction, bank_account: bank_account, transaction_type: nil }
   let!(:bank_transaction_selected) { create :bank_transaction, bank_account: bank_account, transaction_type: (create :transaction_type) }
-  let!(:bank_transaction_selected_2) { create :bank_transaction, bank_account: bank_account, transaction_type: (create :transaction_type) }
+  let!(:bank_transaction_selected2) { create :bank_transaction, bank_account: bank_account, transaction_type: (create :transaction_type) }
   let(:selected_transactions) { application.bank_transactions.where.not(transaction_type: nil).compact }
 
   before do
@@ -86,7 +86,7 @@ RSpec.describe SaveApplicantMeansAnswers do
 
     context 'if no transactions have been selected' do
       let!(:bank_transaction_selected) { nil }
-      let!(:bank_transaction_selected_2) { nil }
+      let!(:bank_transaction_selected2) { nil }
 
       it 'copies the application without any bank transactions' do
         expect { subject }.to change { application.reload.applicant_means_answers }.from(nil)

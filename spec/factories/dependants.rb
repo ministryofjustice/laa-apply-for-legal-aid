@@ -11,11 +11,11 @@ FactoryBot.define do
     has_assets_more_than_threshold { Faker::Boolean.boolean }
     assets_value { rand(1...10_000.0).round(2) }
 
-    trait :over_18 do
+    trait :over18 do
       date_of_birth { Faker::Date.birthday(min_age: 19, max_age: 65) }
     end
 
-    trait :under_18 do
+    trait :under18 do
       date_of_birth { Faker::Date.birthday(min_age: 1, max_age: 17) }
     end
   end

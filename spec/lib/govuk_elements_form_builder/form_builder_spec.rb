@@ -67,7 +67,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
         expect(error_span.name).to eq('span')
         expect(error_span.classes).to include('govuk-error-message')
         expect(tag.classes).to include(expected_error_class)
-        expect(tag['aria-describedby'].split(' ')).to include('national_insurance_number-error')
+        expect(tag['aria-describedby'].split).to include('national_insurance_number-error')
         expect(tag.parent.classes).to include('govuk-form-group--error')
       end
     end
@@ -361,7 +361,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       end
 
       it 'includes a hint message' do
-        expect(fieldset['aria-describedby'].split(' ')).to include("#{attribute}-hint")
+        expect(fieldset['aria-describedby'].split).to include("#{attribute}-hint")
         expect(span_hint[:id]).to eq("#{attribute}-hint")
         expect(span_hint.content).to eq(hint_message)
         expect(span_hint.parent).to eq(fieldset)
@@ -379,7 +379,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
       before { resource_form.valid? }
 
       it 'includes an error message' do
-        expect(fieldset['aria-describedby'].split(' ')).to include("#{attribute}-error")
+        expect(fieldset['aria-describedby'].split).to include("#{attribute}-error")
         expect(span_error[:id]).to eq("#{attribute}-error")
         expect(span_error.content).to include(error_message)
         expect(span_error.parent).to eq(fieldset)

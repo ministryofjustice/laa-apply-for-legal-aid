@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'provider selects office', type: :request do
   let(:firm) { create :firm }
-  let!(:office_1) { create :office, firm: firm }
-  let!(:office_2) { create :office, firm: firm }
-  let!(:office_3) { create :office, firm: firm }
+  let!(:office1) { create :office, firm: firm }
+  let!(:office2) { create :office, firm: firm }
+  let!(:office3) { create :office, firm: firm }
 
-  let(:provider) { create :provider, firm: firm, offices: [office_1, office_2] }
+  let(:provider) { create :provider, firm: firm, offices: [office1, office2] }
 
   describe 'GET providers/select_office' do
     subject { get providers_select_office_path }
@@ -27,12 +27,12 @@ RSpec.describe 'provider selects office', type: :request do
       end
 
       it 'displays the offices of the provider' do
-        expect(unescaped_response_body).to include(office_1.code)
-        expect(unescaped_response_body).to include(office_2.code)
+        expect(unescaped_response_body).to include(office1.code)
+        expect(unescaped_response_body).to include(office2.code)
       end
 
       it 'does not display offices belonging to the firm but not the provider' do
-        expect(unescaped_response_body).not_to include(office_3.code)
+        expect(unescaped_response_body).not_to include(office3.code)
       end
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe 'provider selects office', type: :request do
 
     let(:params) do
       {
-        provider: { selected_office_id: office_2.id }
+        provider: { selected_office_id: office2.id }
       }
     end
 
@@ -53,7 +53,7 @@ RSpec.describe 'provider selects office', type: :request do
       end
 
       it 'updates the record' do
-        expect(provider.reload.selected_office.id).to eq office_2.id
+        expect(provider.reload.selected_office.id).to eq office2.id
       end
 
       it 'redirects to the legal aid applications page' do
@@ -75,7 +75,7 @@ RSpec.describe 'provider selects office', type: :request do
       context 'invalid params - selects office from different provider' do
         let(:params) do
           {
-            provider: { selected_office_id: office_3.id }
+            provider: { selected_office_id: office3.id }
           }
         end
 

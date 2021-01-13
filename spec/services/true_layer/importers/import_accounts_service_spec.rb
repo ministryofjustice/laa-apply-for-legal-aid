@@ -5,10 +5,10 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
   let(:api_client) { TrueLayer::ApiClient.new(bank_provider.token) }
 
   describe '#call' do
-    let(:mock_account_1) { TrueLayerHelpers::MOCK_DATA[:accounts][0] }
-    let(:mock_account_2) { TrueLayerHelpers::MOCK_DATA[:accounts][1] }
-    let(:bank_account_1) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account_1[:account_id]) }
-    let(:bank_account_2) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account_2[:account_id]) }
+    let(:mock_account1) { TrueLayerHelpers::MOCK_DATA[:accounts][0] }
+    let(:mock_account2) { TrueLayerHelpers::MOCK_DATA[:accounts][1] }
+    let(:bank_account1) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account1[:account_id]) }
+    let(:bank_account2) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account2[:account_id]) }
     let!(:existing_bank_account) { create :bank_account_holder, bank_provider: bank_provider }
     let!(:existing_bank_account) { create :bank_account, bank_provider: bank_provider }
     let!(:existing_bank_account_transaction) { create :bank_transaction, bank_account: existing_bank_account }
@@ -22,15 +22,15 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
 
       it 'adds the bank accounts to the bank_provider' do
         subject
-        expect(bank_account_1.true_layer_response).to eq(mock_account_1.deep_stringify_keys)
-        expect(bank_account_1.true_layer_id).to eq(mock_account_1[:account_id])
-        expect(bank_account_1.name).to eq(mock_account_1[:display_name])
-        expect(bank_account_1.account_type).to eq(mock_account_1[:account_type])
-        expect(bank_account_1.currency).to eq(mock_account_1[:currency])
-        expect(bank_account_1.account_number).to eq(mock_account_1[:account_number][:number])
-        expect(bank_account_1.sort_code).to eq(mock_account_1[:account_number][:sort_code])
-        expect(bank_account_2.true_layer_response).to eq(mock_account_2.deep_stringify_keys)
-        expect(bank_account_2.true_layer_id).to eq(mock_account_2[:account_id])
+        expect(bank_account1.true_layer_response).to eq(mock_account1.deep_stringify_keys)
+        expect(bank_account1.true_layer_id).to eq(mock_account1[:account_id])
+        expect(bank_account1.name).to eq(mock_account1[:display_name])
+        expect(bank_account1.account_type).to eq(mock_account1[:account_type])
+        expect(bank_account1.currency).to eq(mock_account1[:currency])
+        expect(bank_account1.account_number).to eq(mock_account1[:account_number][:number])
+        expect(bank_account1.sort_code).to eq(mock_account1[:account_number][:sort_code])
+        expect(bank_account2.true_layer_response).to eq(mock_account2.deep_stringify_keys)
+        expect(bank_account2.true_layer_id).to eq(mock_account2[:account_id])
       end
 
       it 'removes existing bank account and transactions' do

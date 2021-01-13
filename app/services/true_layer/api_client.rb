@@ -42,11 +42,7 @@ module TrueLayer
       raise ApiError, "{\"TrueLayerError\" : #{response.body}}" unless response.success?
 
       SimpleResult.new(value: parsed_response.deep_symbolize_keys[:results])
-    rescue JSON::ParserError => e
-      simple_error(e)
-    rescue Faraday::ConnectionFailed => e
-      simple_error(e)
-    rescue ApiError => e
+    rescue JSON::ParserError, Faraday::ConnectionFailed, ApiError => e
       simple_error(e)
     end
 

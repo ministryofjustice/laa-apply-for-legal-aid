@@ -728,11 +728,11 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '.search' do
-    let!(:application_1) { create :legal_aid_application, application_ref: 'L-123-ABC' }
+    let!(:application1) { create :legal_aid_application, application_ref: 'L-123-ABC' }
     let(:jacob) { create :applicant, first_name: 'Jacob', last_name: 'Rees-Mogg' }
-    let!(:application_2) { create :legal_aid_application, applicant: jacob }
+    let!(:application2) { create :legal_aid_application, applicant: jacob }
     let(:ccms_submission) { create :submission, case_ccms_reference: '300000000009' }
-    let!(:application_3) { create :legal_aid_application, ccms_submission: ccms_submission }
+    let!(:application3) { create :legal_aid_application, ccms_submission: ccms_submission }
     let(:non_alphanum) { /[^0-9a-zA-Z]/.random_example }
 
     it 'matches application_ref' do
@@ -743,9 +743,9 @@ RSpec.describe LegalAidApplication, type: :model do
         'L/123/ABC',
         "L123#{non_alphanum}ABC"
       ].each do |term|
-        expect(LegalAidApplication.search(term)).to include(application_1), term
+        expect(LegalAidApplication.search(term)).to include(application1), term
       end
-      expect(LegalAidApplication.search('something')).not_to include(application_1)
+      expect(LegalAidApplication.search('something')).not_to include(application1)
     end
 
     it "matches applicant's name" do
@@ -759,9 +759,9 @@ RSpec.describe LegalAidApplication, type: :model do
         'sMOg',
         "jac#{non_alphanum}ob"
       ].each do |term|
-        expect(LegalAidApplication.search(term)).to include(application_2), term
+        expect(LegalAidApplication.search(term)).to include(application2), term
       end
-      expect(LegalAidApplication.search('something')).not_to include(application_2)
+      expect(LegalAidApplication.search('something')).not_to include(application2)
     end
 
     it 'matches ccms case reference number' do
@@ -772,9 +772,9 @@ RSpec.describe LegalAidApplication, type: :model do
         '09',
         "0#{non_alphanum}9"
       ].each do |term|
-        expect(LegalAidApplication.search(term)).to include(application_3), term
+        expect(LegalAidApplication.search(term)).to include(application3), term
       end
-      expect(LegalAidApplication.search('something')).not_to include(application_3)
+      expect(LegalAidApplication.search('something')).not_to include(application3)
     end
   end
 

@@ -6,8 +6,8 @@ RSpec.describe ProviderDetailsCreator do
   let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
   let(:third_provider) { create :provider, name: nil, email: nil }
   let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
-  let(:ccms_office_1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
-  let(:ccms_office_2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
+  let(:ccms_office1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
+  let(:ccms_office2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
   let(:contact_id) { rand(101..200) }
   let(:api_response) do
     {
@@ -30,19 +30,19 @@ RSpec.describe ProviderDetailsCreator do
       feeEarners: [],
       providerOffices: [
         {
-          id: ccms_office_1.id,
-          name: "#{ccms_firm.name}-#{ccms_office_1.code}"
+          id: ccms_office1.id,
+          name: "#{ccms_firm.name}-#{ccms_office1.code}"
         },
         {
-          id: ccms_office_2.id,
-          name: "#{ccms_firm.name}-#{ccms_office_2.code}"
+          id: ccms_office2.id,
+          name: "#{ccms_firm.name}-#{ccms_office2.code}"
         }
       ]
     }
   end
   let(:firm) { provider.firm }
-  let(:office_1) { firm.offices.find_by(ccms_id: ccms_office_1.id) }
-  let(:office_2) { firm.offices.find_by(ccms_id: ccms_office_2.id) }
+  let(:office1) { firm.offices.find_by(ccms_id: ccms_office1.id) }
+  let(:office2) { firm.offices.find_by(ccms_id: ccms_office2.id) }
 
   before { allow(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_return(api_response) }
 
@@ -63,8 +63,8 @@ RSpec.describe ProviderDetailsCreator do
     it 'creates the right offices' do
       expect { subject }.to change { Office.count }.by(2)
       expect(firm.offices.count).to eq(2)
-      expect(office_1.code).to eq(ccms_office_1.code)
-      expect(office_2.code).to eq(ccms_office_2.code)
+      expect(office1.code).to eq(ccms_office1.code)
+      expect(office2.code).to eq(ccms_office2.code)
     end
 
     it 'updates the name of the provider' do
@@ -129,9 +129,9 @@ RSpec.describe ProviderDetailsCreator do
     end
 
     context 'another provider has the same firm but a different set of offices' do
-      let(:provider_2) { create :provider }
-      let(:ccms_office_3) { OpenStruct.new(id: rand(201..300), code: rand(201..300).to_s) }
-      let(:api_response_2) do
+      let(:provider2) { create :provider }
+      let(:ccms_office3) { OpenStruct.new(id: rand(201..300), code: rand(201..300).to_s) }
+      let(:api_response2) do
         {
           providerFirmId: ccms_firm.id,
           contactUserId: rand(101..200),
@@ -143,30 +143,30 @@ RSpec.describe ProviderDetailsCreator do
           ],
           providerOffices: [
             {
-              id: ccms_office_2.id,
-              name: "#{ccms_firm.name}-#{ccms_office_2.code}"
+              id: ccms_office2.id,
+              name: "#{ccms_firm.name}-#{ccms_office2.code}"
             },
             {
-              id: ccms_office_3.id,
-              name: "#{ccms_firm.name}-#{ccms_office_3.code}"
+              id: ccms_office3.id,
+              name: "#{ccms_firm.name}-#{ccms_office3.code}"
             }
           ]
         }
       end
       let(:firm) { provider.firm }
-      let(:office_3) { firm.offices.find_by(ccms_id: ccms_office_3.id) }
+      let(:office3) { firm.offices.find_by(ccms_id: ccms_office3.id) }
 
       before do
-        allow(ProviderDetailsRetriever).to receive(:call).with(provider_2.username).and_return(api_response_2)
-        described_class.call(provider_2)
+        allow(ProviderDetailsRetriever).to receive(:call).with(provider2.username).and_return(api_response2)
+        described_class.call(provider2)
         subject
         provider.reload
-        provider_2.reload
+        provider2.reload
       end
 
       it 'does not add all offices to both providers' do
-        expect(provider.offices).to contain_exactly(office_1, office_2)
-        expect(provider_2.offices).to contain_exactly(office_2, office_3)
+        expect(provider.offices).to contain_exactly(office1, office2)
+        expect(provider2.offices).to contain_exactly(office2, office3)
       end
     end
   end

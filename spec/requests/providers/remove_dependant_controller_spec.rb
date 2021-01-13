@@ -58,7 +58,7 @@ RSpec.describe Providers::RemoveDependantController, type: :request do
     end
 
     context 'choose nothing' do
-      let(:params) {}
+      let(:params) { nil }
 
       it 'show errors' do
         expect(response.body).to include(I18n.t('providers.remove_dependant.show.error'))
