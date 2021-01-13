@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_01_12_103855) do
-=======
-ActiveRecord::Schema.define(version: 2021_01_06_181720) do
->>>>>>> b4f89bc9e... add scope and translations
+
 
   # These are extensions that m
   # ust be enabled in order to support this database
@@ -223,12 +220,9 @@ ActiveRecord::Schema.define(version: 2021_01_06_181720) do
     t.date "transaction_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-<<<<<<< HEAD
     t.integer "month_number"
     t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
-=======
     t.uuid "transaction_type_id"
->>>>>>> b4f89bc9e... add scope and translations
   end
 
   create_table "ccms_submission_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
