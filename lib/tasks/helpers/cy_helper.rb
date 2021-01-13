@@ -46,7 +46,6 @@ class CyHelper
     hash = YAML.load_file(filename)
     hash['cy'] = hash['en']
     hash.delete('en')
-
     hash['cy'].each_key { |k| reverse_key(k, hash['cy']) }
     File.open(filename, 'w') { |f| f.puts(YAML.dump(hash)) }
   end

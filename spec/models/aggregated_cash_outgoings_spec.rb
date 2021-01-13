@@ -6,7 +6,6 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
   let(:categories) { %i[rent_or_mortgage maintenance_out] }
   let!(:rent_or_mortgage) { create :transaction_type, :rent_or_mortgage }
   let!(:maintenance_out) { create :transaction_type, :maintenance_out }
-  let!(:child_care) { create :transaction_type, :child_care }
   let!(:legal_aid) { create :transaction_type, :legal_aid }
   let(:month1_tx_date) { Date.today.beginning_of_month - 1.month }
   let(:month2_tx_date) { Date.today.beginning_of_month - 2.months }

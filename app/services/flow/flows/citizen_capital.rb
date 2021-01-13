@@ -11,7 +11,6 @@ module Flow
           path: ->(_) { urls.citizens_cash_income_path(locale: I18n.locale) },
           forward: ->(_) { :student_finances }
         },
-
         student_finances: {
           path: ->(_) { urls.citizens_student_finance_path(locale: I18n.locale) },
           forward: ->(application) do
