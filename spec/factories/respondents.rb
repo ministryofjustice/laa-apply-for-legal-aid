@@ -14,5 +14,15 @@ FactoryBot.define do
     trait :irish do
       full_name { "Daira O'Braien" }
     end
+
+    trait :police_notified_false do
+      police_notified { false }
+      police_notified_details { 'details for non-notification of police' }
+    end
+
+    trait :police_notified_true do
+      police_notified { true }
+      police_notified_details { 'details for police notification' }
+    end
   end
 end
