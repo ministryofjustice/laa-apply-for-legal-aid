@@ -75,6 +75,25 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
     end
   end
 
+  describe 'POST /admin/search' do
+    subject { post admin_application_search_path(params) }
+    let(:params) { nil }
+    before { subject }
+
+    context 'when the params are empty' do
+      it { expect(response.body).to include('Please enter a search criteria') }
+    end
+
+    context 'when the params match an application' do
+      let(:params) { { search: legal_aid_applications.first.id } }
+
+      it 'shows the matching application' do
+        expect(response.body).to include(legal_aid_applications.first.application_ref)
+        expect(response.body).to include('Showing 1 of 1 result')
+      end
+    end
+  end
+
   describe 'POST /admin/legal_aid_applications/create_test_applications' do
     subject { post create_test_applications_admin_legal_aid_applications_path }
     let(:count) { 1 }

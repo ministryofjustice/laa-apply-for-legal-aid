@@ -7,6 +7,7 @@ en:
     accessibility:
       error: "Error:"
     hint:
+      search: You can search by Application Reference, ccms_reference, client's name or application_id
       additional_account: Share details of any accounts you have with another bank or building society
       address_lookup:
         postcode: This must be a valid UK postcode
@@ -21,6 +22,7 @@ en:
         own_vehicle: This includes cars, vans and motorcycles
       student_finance: This includes any type of student loan, grant or bursary.
     label:
+      search: 'Application search:'
       applicant:
         employed:
           <<: *true_false

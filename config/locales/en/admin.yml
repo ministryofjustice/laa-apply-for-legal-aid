@@ -25,6 +25,8 @@ en:
         provider_username: Provider's username
         discarded: Discarded by user on %{date}
         data_view: Submission details
+      search:
+        error: Please enter a search criteria
     settings:
       show:
         heading_1: Settings
