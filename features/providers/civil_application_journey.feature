@@ -551,7 +551,7 @@ Feature: Civil application journeys
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "Statement" with "Statement of case"
+    Then I fill "Statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
@@ -669,7 +669,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "Statement" with "Statement of case"
+    Then I fill "Statement of case statement field" with "Statement of case"
     Then I upload a pdf file
     Then I click 'Upload'
     Then I reload the page
