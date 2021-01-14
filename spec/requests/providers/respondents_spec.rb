@@ -39,7 +39,7 @@ RSpec.describe Providers::RespondentsController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/respondent' do
-    let(:sample_respondent) { build :respondent }
+    let(:sample_respondent) { build :respondent, :police_notified_true }
     let(:params) do
       {
         respondent: {
@@ -48,7 +48,7 @@ RSpec.describe Providers::RespondentsController, type: :request do
           warning_letter_sent: sample_respondent.warning_letter_sent.to_s,
           warning_letter_sent_details: sample_respondent.warning_letter_sent_details,
           police_notified: sample_respondent.police_notified.to_s,
-          police_notified_details: sample_respondent.police_notified_details,
+          police_notified_details_true: sample_respondent.police_notified_details,
           bail_conditions_set: sample_respondent.bail_conditions_set.to_s,
           bail_conditions_set_details: sample_respondent.bail_conditions_set_details
         }
