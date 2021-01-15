@@ -13,7 +13,11 @@
     <label class="govuk-heading-m govuk-!-margin-bottom-0" for="proceeding-search-input">
       <%= t '.heading_2' %>
       <span class="govuk-hint govuk-!-margin-top-0">
+      <% if @multiple_proceedings %>
         <%= t '.search_help_example' %>
+      <% else %>
+        <%= t '.legacy_search_help_example' %>
+      <% end %>
         <span class="govuk-visually-hidden">, results will automatically return</span>
       </span>
     </label>
@@ -31,25 +35,50 @@
   </div>
 </div>
 
-<div class="govuk-grid-row govuk-!-margin-top-0">
-  <ul id="proceeding-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
-    <%= render partial: 'shared/forms/proceedings_types/proceeding_type_form', collection: @proceeding_types, as: :proceeding_type %>
-  </ul>
-  <div class="govuk-grid-row no-proceeding-items" style="display: none;">
-    <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-body"><%= t '.no_results' %></span>
+<% if @multiple_proceedings %>
+  <%= form_with(
+    model: nil,
+    url: providers_legal_aid_application_proceedings_types_path,
+    local: true) do |form| %>
+    <div class="govuk-grid-row govuk-!-margin-top-0">
+      <div id="proceeding-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
+        <%= render partial: 'shared/forms/proceedings_types/proceeding_type_form', collection: @proceeding_types, as: :proceeding_type, locals: { model: nil, form: form } %>
+      </div>
+      <div class="govuk-grid-row no-proceeding-items" style="display: none;">
+        <div class="govuk-grid-column-two-thirds">
+          <span class="govuk-body"><%= t '.no_results' %></span>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-row govuk-!-margin-top-5">
+      <div class="govuk-grid-column-two-thirds">
+        <%= next_action_buttons(
+              form: form,
+              show_draft: true
+            ) %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="govuk-grid-row govuk-!-margin-top-0">
+    <ul id="proceeding-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
+      <%= render partial: 'shared/forms/proceedings_types/legacy_proceeding_type_form', collection: @proceeding_types, as: :proceeding_type %>
+    </ul>
+    <div class="govuk-grid-row no-proceeding-items" style="display: none;">
+      <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-body"><%= t '.no_results' %></span>
+      </div>
     </div>
   </div>
-</div>
+  <div class="govuk-grid-row govuk-!-margin-top-5">
+    <div class="govuk-grid-column-two-thirds">
+          <%= next_action_buttons_with_form(
+            url: providers_legal_aid_application_proceedings_types_path,
+            show_draft: true,
+            show_continue: false
+          ) %>
+    </div>
+  </div>
+<% end %>
 
 <div id="screen-reader-messages" class="govuk-visually-hidden" aria-live="polite" aria-atomic='true' role='alert'></div>
-
-<div class="govuk-grid-row govuk-!-margin-top-5">
-  <div class="govuk-grid-column-two-thirds">
-    <%= next_action_buttons_with_form(
-          url: providers_legal_aid_application_proceedings_types_path,
-          show_draft: true,
-          show_continue: false
-        ) %>
-  </div>
-</div>
