@@ -453,17 +453,18 @@ cy:
         no_sole_owner: renwo elos eht er'yeht ,oN
         partner_or_ex_partner: rentrap-xe ro rentrap a ,seY
       success_prospect:
-        likely: retteb ro %05
-        marginal: "%94 ot %54"
-        poor: "%54 naht sseL"
-        borderline: enilredroB
-        not_known: tey wonk ton od I
-        hint:
-          marginal: lanigram si emoctuo lufsseccus a fo ecnahc ehT
-          poor: roop si emoctuo lufsseccus a fo ecnahc ehT
-          borderline: emoctuo eht tciderp tonnac uoY
-          not_known: sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
-            kroW
+        success_prospect_item:
+          likely: retteb ro %05
+          marginal: "%94 ot %54"
+          poor: "%54 naht sseL"
+          borderline: enilredroB
+          not_known: tey wonk ton od I
+          hint:
+            marginal: lanigram si emoctuo lufsseccus a fo ecnahc ehT
+            poor: roop si emoctuo lufsseccus a fo ecnahc ehT
+            borderline: emoctuo eht tciderp tonnac uoY
+            not_known: sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
+              kroW
       types_of_income_form:
         financial_help_examples: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
           roF"
