@@ -1,8 +1,8 @@
 <%= form_with(
-        model: @aggregated_cash_income,
-        url: form_path,
-        method: :patch,
-        local: true
+      model: @aggregated_cash_income,
+      url: form_path,
+      method: :patch,
+      local: true
     ) do |form| %>
 
   <%= govuk_form_group show_error_if: @aggregated_cash_income.errors.include?(:none_selected) do %>
@@ -16,12 +16,12 @@
         <div class="deselect-group" data-deselect-ctrl="#none_selected">
           <% @legal_aid_application.transaction_types.not_children.credits.each do |category| %>
             <%= render(
-                    'shared/partials/revealing_checkbox',
-                    name: category.name,
-                    form: form,
-                    number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
-                    model: @aggregated_cash_income,
-                    input_prefix: t('currency.gbp')
+                  'shared/partials/revealing_checkbox',
+                  name: category.name,
+                  form: form,
+                  number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
+                  model: @aggregated_cash_income,
+                  input_prefix: t('currency.gbp')
                 ) %>
           <% end %>
         </div>
@@ -40,7 +40,7 @@
   <% end %>
 
   <%= next_action_buttons(
-          form: form,
-          show_draft: false
+        form: form,
+        show_draft: false
       ) %>
 <% end %>
