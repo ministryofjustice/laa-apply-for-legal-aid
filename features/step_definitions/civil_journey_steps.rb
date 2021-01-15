@@ -100,7 +100,6 @@ Then('I choose a Non-molestation order proceeding type radio button') do
   choose('Non-molestation order', allow_label_click: true)
 end
 
-
 Given(/^I view the previously created application$/) do
   find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a").click
 end
