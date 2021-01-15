@@ -5,16 +5,9 @@
   </dt>
   <dd class="govuk-summary-list__value">
     <% if  legal_aid_application.cash_transactions.for_transaction_type(transaction_type.id).any? %>
-
-<!--        <dl>-->
           <% legal_aid_application.cash_transactions.for_transaction_type(transaction_type.id).each do |ctx| %>
             <%= ctx.transaction_date.strftime('%B') %>: <strong><%= gds_number_to_currency(ctx.amount) %></strong> <br>
-<!--            <div class="govuk-summary-list__row govuk-summary-list--no-border">-->
-<!--              <dt class="govuk-summary-list__key"><%#= ctx.transaction_date.strftime('%B') %></dt>-->
-<!--              <dd class="govuk-summary-list__value"><%#= gds_number_to_currency(ctx.amount) %></dd>-->
-<!--            </div>-->
           <% end %>
-<!--        </dl>-->
     <% else %>
         <%= t('.no_transactions') %>
     <% end %>
