@@ -18,11 +18,7 @@ module Reports
     def html_report
       ensure_case_ccms_reference_exists
 
-      Providers::MeansReportsController.default_url_options = {
-        _recall: {
-          legal_aid_application_id: legal_aid_application.id
-        }
-      }
+      Providers::MeansReportsController.default_url_options = default_url_options
 
       Providers::MeansReportsController.renderer.render(
         template: 'providers/means_reports/show',
