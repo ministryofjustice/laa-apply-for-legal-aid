@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_142908) do
+ActiveRecord::Schema.define(version: 2021_01_15_155032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_142908) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "month_number"
     t.uuid "transaction_type_id"
+    t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
   end
 
   create_table "ccms_submission_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
