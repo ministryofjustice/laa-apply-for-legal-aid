@@ -1,8 +1,13 @@
 ---
 cy:
   errors:
-    cash_amount:
-      blank: htnom radnelac hcae ni deviecer uoy tnuoma hsac latot eht retnE
+    aggregated_cash_income:
+      blank: "%{month} ni %{category} sa deviecer uoy hsac eht retnE"
+      invalid_type: 000,1 ekil ,yenom fo tnuoma na eb tsum tnuomA
+      negative: orez ot lauqe ro naht erom eb tsum tnuomA
+      too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuomA
+    aggregated_cash_outgoings:
+      blank: "%{month} ni %{category} sa diap uoy hsac eht retnE"
       invalid_type: 000,1 ekil ,yenom fo tnuoma na eb tsum tnuomA
       negative: orez ot lauqe ro naht erom eb tsum tnuomA
       too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum tnuomA

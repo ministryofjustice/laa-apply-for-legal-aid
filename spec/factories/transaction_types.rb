@@ -81,12 +81,6 @@ FactoryBot.define do
       sort_order { 50 }
     end
 
-    trait :child_care do
-      name { 'child_care' }
-      operation { 'credit' }
-      sort_order { 60 }
-    end
-
     trait :rent_or_mortgage do
       name { 'rent_or_mortgage' }
       operation { 'debit' }
@@ -103,6 +97,30 @@ FactoryBot.define do
       name { 'excluded_benefits' }
       operation { 'credit' }
       sort_order { 40 }
+    end
+
+    trait :rent_or_mortgage do
+      name { 'rent_or_mortgage' }
+      operation { 'debit' }
+      sort_order { 140 }
+    end
+
+    trait :maintenance_out do
+      name { 'maintenance_out' }
+      operation { 'debit' }
+      sort_order { 160 }
+    end
+
+    trait :child_care do
+      name { 'child_care' }
+      operation { 'debit' }
+      sort_order { 180 }
+    end
+
+    trait :legal_aid do
+      name { 'legal_aid' }
+      operation { 'debit' }
+      sort_order { 180 }
     end
   end
 end

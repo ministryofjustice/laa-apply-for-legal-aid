@@ -15,7 +15,7 @@
 
   <% (1..number_of_fields).each do |number| %>
     <%= govuk_form_group show_error_if: model.errors.messages["#{name}#{number}".to_sym][0] do %>
-      <label class="govuk-label" for="<%= "#{name}#{number}" %>"><%= defined?(label) ? label.call(number) : nil %></label>
+      <label class="govuk-label" for="<%= "#{name}#{number}" %>"><%= model.period(number) %></label>
       <span class='govuk-error-message' id="base"><%= model.errors.messages["#{name}#{number}".to_sym][0] %></span>
       <%= form.govuk_text_field "#{name}#{number}",
         label: nil,

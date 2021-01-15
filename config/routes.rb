@@ -114,6 +114,7 @@ Rails.application.routes.draw do
     end
     resource :identify_types_of_income, only: %i[show update]
     resource :cash_income, only: %i[show update]
+    resource :cash_outgoing, only: %i[show update]
     resource :student_finance, only: %i[show update]
     namespace :student_finances do
       resource :annual_amount, only: %i[show update]

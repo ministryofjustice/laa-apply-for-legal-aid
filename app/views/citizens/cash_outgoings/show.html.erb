@@ -1,0 +1,6 @@
+<%= page_template page_title: t('.page_heading'), template: :basic, show_errors_for: @aggregated_cash_outgoings do %>
+  <%= render(
+        'cash_outgoings_form',
+        form_path: citizens_cash_outgoing_path
+      ) %>
+<% end %>

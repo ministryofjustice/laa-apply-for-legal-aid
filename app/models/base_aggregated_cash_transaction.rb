@@ -14,6 +14,15 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   validate :validate_at_least_one_selected
   validate :checkbox_integrity
 
+  attr_accessor :month1, :month2, :month3
+
+  def initialize
+    super
+    @month1 = Date.today.beginning_of_month - 1.month
+    @month2 = month1 - 1.month
+    @month3 = month2 - 1.month
+  end
+
   class << self
     # defines the following accessors for each category passed in:
     #  check_box_<category>, <category>1, <category>2, <category>3
@@ -32,18 +41,12 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     end
 
     def populate_attribute(model, trx)
-      month_no = month_number(trx)
+      month_no = trx.month_number
       value_method = "#{trx.transaction_type.name}#{month_no}="
       checkbox_method = "check_box_#{trx.transaction_type.name}="
       model.__send__(value_method, trx.amount)
       model.__send__(checkbox_method, 'true')
-    end
-
-    def month_number(trx)
-      current_month = trx.updated_at.to_date.at_beginning_of_month
-      MONTH_RANGE.each do |i|
-        return i if (current_month - i.months) == trx.transaction_date
-      end
+      model.__send__("month#{trx.month_number}=", trx.transaction_date)
     end
 
     def find_by(legal_aid_application_id:)
@@ -63,12 +66,25 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def period(month_number)
+    period_start = transaction_date(month_number)
+    period_end = period_start.end_of_month
+    "#{I18n.l(period_start, format: :short_date)} - #{I18n.l(period_end, format: :short_date)}"
+  end
+
+  def month_name(month_number)
+    I18n.l(transaction_date(month_number), format: :month_name).to_s
+  end
+
   private_class_method :attributes_for_transaction_types,
                        :populate_attribute,
-                       :month_number,
                        :find_transactions
 
   private
+
+  def transaction_date(month_number)
+    __send__("month#{month_number}")
+  end
 
   def update_attributes(params)
     params.each do |key, value|
@@ -96,7 +112,8 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
         legal_aid_application_id: legal_aid_application_id,
         transaction_type_id: transaction_type_id(category),
         transaction_date: date,
-        amount: amount
+        amount: amount,
+        month_number: i
       )
     end
   end
@@ -140,11 +157,13 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     MONTH_RANGE.each do |i|
       value_attr = "#{category}#{i}".to_sym
       value = __send__(value_attr)
+      errors.add(value_attr, blank_error(category, i)) unless value.present?
 
-      errors.add(value_attr, amount_error(:blank)) unless value.present?
-      errors.add(value_attr, amount_error(:invalid_type)) unless number? value
-      errors.add(value_attr, amount_error(:negative)) unless valid_amount? value
-      errors.add(value_attr, amount_error(:too_many_decimals)) unless CurrencyValidator::ONLY_2_DECIMALS_PATTERN.match? value
+      next unless value.present?
+
+      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.invalid_type")) unless number? value
+      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.negative")) unless valid_amount? value
+      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.too_many_decimals")) unless CurrencyValidator::ONLY_2_DECIMALS_PATTERN.match? value
     end
   end
 
@@ -165,5 +184,15 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
 
   def checkbox_for(category)
     __send__("check_box_#{category}".to_sym)
+  end
+
+  def blank_error(category, month_number)
+    I18n.t("errors.#{self.class.to_s.underscore}.blank",
+           category: I18n.t("transaction_types.names.citizens.#{category}"),
+           month: month_name(month_number))
+  end
+
+  def model_error(type)
+    I18n.t("activemodel.errors.models.aggregated_cash_income.#{self.class.operation}.attributes.none_selected.#{type}")
   end
 end

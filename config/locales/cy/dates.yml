@@ -1,0 +1,36 @@
+---
+cy:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short_date: "%-d %b %Y"
+      long_date: "%B %d, %Y"
+      month_name: "%B"
+    abbr_month_names:
+      -
+      - naJ
+      - beF
+      - raM
+      - rpA
+      - yaM
+      - nuJ
+      - luJ
+      - guA
+      - peS
+      - tcO
+      - voN
+      - ceD
+    month_names:
+      -
+      - yraunaJ
+      - yraurbeF
+      - hcram
+      - lirpA
+      - yaM
+      - enuJ
+      - yluJ
+      - tsuguA
+      - rebmetepS
+      - rebotcO
+      - rebmevoN
+      - rebmeceD

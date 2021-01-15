@@ -41,6 +41,30 @@ en:
         hint: Select one bank at a time. You'll be able to select more later if you have accounts with different banks.
       create:
         error: Select a bank
+    cash_incomes:
+      checkbox:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
+      show:
+        page_heading: Select payments you receive in cash
+      cash_income_form:
+        dates: "%{date}"
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
+      update:
+        none_selected: Select if you receive these payments in cash
+    cash_outgoings:
+      checkbox:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
+      show:
+        page_heading: Select payments you make in cash
+      cash_outgoings_form:
+        dates: "%{date}"
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
+      update:
+        none_selected: Select if you receive these payments in cash
     check_answers:
       index:
         assets:
@@ -118,18 +142,7 @@ en:
         page_heading: Which of the following payments do you receive?
       update:
         none_selected: Select if you receive any types of income
-    cash_incomes:
-      checkbox:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
-      show:
-        page_heading: Select payments you receive in cash
-      cash_income_form:
-        dates: "%{date}"
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
-      update:
-        none_selected: Select if you receive these payments in cash
+
     identify_types_of_outgoings:
       show:
         page_heading: Which of the following payments do you make?

@@ -1,11 +1,11 @@
 <%= form_with(
-      model: @aggregated_cash_income,
+      model: @aggregated_cash_outgoings,
       url: form_path,
       method: :patch,
       local: true
     ) do |form| %>
 
-  <%= govuk_form_group show_error_if: @aggregated_cash_income.errors.include?(:none_selected) do %>
+  <%= govuk_form_group show_error_if: @aggregated_cash_outgoings.errors.include?(:none_selected) do %>
     <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
 
       <%= govuk_fieldset_header page_title %>
@@ -14,13 +14,13 @@
 
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
         <div class="deselect-group" data-deselect-ctrl="#none_selected">
-          <% @legal_aid_application.transaction_types.not_children.credits.each do |category| %>
+          <% @legal_aid_application.transaction_types.not_children.debits.each do |category| %>
             <%= render(
                   'shared/partials/revealing_checkbox',
                   name: category.name,
                   form: form,
-                  number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
-                  model: @aggregated_cash_income,
+                  number_of_fields: AggregatedCashOutgoings::NUMBER_OF_FIELDS,
+                  model: @aggregated_cash_outgoings,
                   input_prefix: t('currency.gbp')
                 ) %>
           <% end %>

@@ -23,7 +23,11 @@ module Flow
         },
         identify_types_of_outgoings: {
           path: ->(_) { urls.citizens_identify_types_of_outgoing_path(locale: I18n.locale) },
-          forward: :check_answers
+          forward: ->(_) { Setting.allow_cash_payment? ? :cash_outgoings : :check_answers }
+        },
+        cash_outgoings: {
+          path: ->(_) { urls.citizens_cash_outgoing_path(locale: I18n.locale) },
+          forward: ->(_) { :check_answers }
         }
       }.freeze
     end
