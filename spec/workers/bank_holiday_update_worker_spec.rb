@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: 'gov_uk_bank_holiday_api', allow_playback_repeats: true } do
   let(:bank_holiday_update_worker) { described_class.new }
-  let(:stale_date) { Time.now.utc - described_class::UPDATE_INTERVAL - 2.hours }
+  let(:stale_date) { Time.current.utc - described_class::UPDATE_INTERVAL - 2.hours }
   let!(:bank_holiday) { create :bank_holiday }
 
   subject { bank_holiday_update_worker.perform }

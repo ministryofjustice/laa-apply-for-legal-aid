@@ -642,7 +642,7 @@ FactoryBot.define do
     end
 
     trait :discarded do
-      discarded_at { Time.now - 5.minutes }
+      discarded_at { Time.current - 5.minutes }
     end
   end
 end

@@ -42,7 +42,7 @@ module Reports
       end
 
       def create_early_non_passported_application
-        travel_to(Time.local(2020, 9, 1, 2, 3, 4)) do
+        travel_to(Time.zone.local(2020, 9, 1, 2, 3, 4)) do
           create :legal_aid_application,
                  :with_applicant,
                  :with_negative_benefit_check_result,

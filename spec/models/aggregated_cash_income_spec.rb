@@ -383,7 +383,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         let(:subject) { aci.update(corrected_valid_params) }
 
         before do
-          travel_to Time.local(2100, 1, 7, 13, 45)
+          travel_to Time.zone.local(2100, 1, 7, 13, 45)
         end
 
         it 'does not add to old records' do

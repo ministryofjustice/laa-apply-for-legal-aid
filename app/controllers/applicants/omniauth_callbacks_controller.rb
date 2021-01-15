@@ -32,9 +32,9 @@ module Applicants
       expires_at = credentials.expires_at
       case expires_at
       when Integer
-        Time.at(expires_at)
+        Time.zone.at(expires_at)
       when String
-        Time.parse(expires_at)
+        Time.zone.parse(expires_at)
       else
         Rails.logger.info 'Unable to determine expiry'
         nil

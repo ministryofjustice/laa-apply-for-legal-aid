@@ -101,7 +101,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     it 'records when the declaration was accepted' do
       subject
-      expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.now)
+      expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.current)
     end
 
     it 'syncs the application' do

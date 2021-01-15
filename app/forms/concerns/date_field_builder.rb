@@ -89,7 +89,7 @@ class DateFieldBuilder
     when 4
       year
     when 2
-      year > Time.now.strftime('%y') ? "19#{year}" : "20#{year}"
+      year > Time.current.strftime('%y') ? "19#{year}" : "20#{year}"
     else
       raise YearError, 'Year is incorrect length'
     end

@@ -27,7 +27,7 @@ module CCMS
         @options = options
         @submission = submission
         @legal_aid_application = submission.legal_aid_application
-        @transaction_time_stamp = Time.now.to_s(:ccms_date_time)
+        @transaction_time_stamp = Time.current.to_s(:ccms_date_time)
         @ccms_attribute_keys = attribute_configuration
       end
 
@@ -146,13 +146,13 @@ module CCMS
       end
 
       def generate_record_history(xml)
-        xml.__send__('ns0:DateCreated', Time.now.to_s(:ccms_date_time))
+        xml.__send__('ns0:DateCreated', Time.current.to_s(:ccms_date_time))
         xml.__send__('ns0:LastUpdatedBy') do
           xml.__send__('ns0:UserLoginID', provider.username)
           xml.__send__('ns0:UserName', provider.username)
           xml.__send__('ns0:UserType', 'EXTERNAL')
         end
-        xml.__send__('ns0:DateLastUpdated', Time.now.to_s(:ccms_date_time))
+        xml.__send__('ns0:DateLastUpdated', Time.current.to_s(:ccms_date_time))
       end
 
       def generate_lar_details(xml)

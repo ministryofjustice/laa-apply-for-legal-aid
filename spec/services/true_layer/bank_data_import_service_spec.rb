@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TrueLayer::BankDataImportService do
   let(:token) { SecureRandom.hex }
-  let(:token_expires_at) { Time.now + 1.hour }
+  let(:token_expires_at) { Time.current + 1.hour }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period, :with_non_passported_state_machine }
   let(:applicant) { legal_aid_application.applicant }
 

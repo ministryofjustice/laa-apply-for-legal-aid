@@ -23,7 +23,7 @@ module Citizens
     def record_acceptance
       return if legal_aid_application.declaration_accepted_at?
 
-      legal_aid_application.update!(declaration_accepted_at: Time.now)
+      legal_aid_application.update!(declaration_accepted_at: Time.current)
     end
 
     def send_emails

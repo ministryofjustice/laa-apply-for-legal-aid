@@ -6,7 +6,7 @@ RSpec.describe LegalAidApplications::DependantForm do
   let(:day) { date.strftime('%d') } # Two number day
   let(:month) { date.strftime('%m') } # Two number month
   let(:year) { date.strftime('%Y') } # Four number year
-  let(:turn_of_century) { Time.local 2000, 1, 1 }
+  let(:turn_of_century) { Time.zone.local 2000, 1, 1 }
   let(:has_assets) { 'false' }
   let(:assets_value) { '' }
   let(:has_income) { 'false' }

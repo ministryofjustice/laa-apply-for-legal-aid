@@ -175,7 +175,7 @@ RSpec.describe GovukEmails::EmailMonitor do
 
     it 'triggers the job to be sent in 5 seconds' do
       email_monitor.trigger_job(message_id)
-      expect(Time.at(enqueued_job[:at])).to be_within(2.seconds).of(Time.now + described_class::JOBS_DELAY)
+      expect(Time.zone.at(enqueued_job[:at])).to be_within(2.seconds).of(Time.current + described_class::JOBS_DELAY)
     end
 
     it 'passes the correct parameters' do

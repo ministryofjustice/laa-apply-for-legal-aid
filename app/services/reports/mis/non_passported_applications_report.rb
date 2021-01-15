@@ -1,7 +1,7 @@
 module Reports
   module MIS
     class NonPassportedApplicationsReport
-      START_DATE = Time.new(2020, 9, 21, 0, 0, 0).freeze
+      START_DATE = Time.zone.local(2020, 9, 21, 0, 0, 0).freeze
 
       def run
         csv_string = CSV.generate do |csv|
