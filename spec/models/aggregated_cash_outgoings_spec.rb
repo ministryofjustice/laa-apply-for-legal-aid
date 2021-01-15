@@ -472,16 +472,16 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
   def valid_params
     {
-        check_box_benefits: 'true',
-        benefits1: '1',
-        benefits2: '2',
-        benefits3: '3',
-        check_box_maintenance_in: 'true',
-        maintenance_in1: '4',
-        maintenance_in2: '5',
-        maintenance_in3: '6',
-        legal_aid_application_id: application.id,
-        none_selected: ''
+      check_box_benefits: 'true',
+      benefits1: '1',
+      benefits2: '2',
+      benefits3: '3',
+      check_box_maintenance_in: 'true',
+      maintenance_in1: '4',
+      maintenance_in2: '5',
+      maintenance_in3: '6',
+      legal_aid_application_id: application.id,
+      none_selected: ''
     }
   end
 
@@ -503,36 +503,36 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
   def corrected_valid_params
     valid_params.merge({
-                           benefits1: '7',
-                           benefits2: '8',
-                           benefits3: '9',
-                           maintenance_in1: '10',
-                           maintenance_in2: '11',
-                           maintenance_in3: '12'
+                         benefits1: '7',
+                         benefits2: '8',
+                         benefits3: '9',
+                         maintenance_in1: '10',
+                         maintenance_in2: '11',
+                         maintenance_in3: '12'
                        })
   end
 
   def additional_valid_params
     valid_params.merge({
-                           check_box_pension: 'true',
-                           pension1: '15',
-                           pension2: '20',
-                           pension3: '25'
+                         check_box_pension: 'true',
+                         pension1: '15',
+                         pension2: '20',
+                         pension3: '25'
                        })
   end
 
   def none_selected_params
     {
-        check_box_benefits: '',
-        benefits1: '',
-        benefits2: '',
-        benefits3: '',
-        check_box_maintenance_in: '',
-        maintenance_in1: '',
-        maintenance_in2: '',
-        maintenance_in3: '',
-        legal_aid_application_id: application.id,
-        none_selected: 'true'
+      check_box_benefits: '',
+      benefits1: '',
+      benefits2: '',
+      benefits3: '',
+      check_box_maintenance_in: '',
+      maintenance_in1: '',
+      maintenance_in2: '',
+      maintenance_in3: '',
+      legal_aid_application_id: application.id,
+      none_selected: 'true'
     }
   end
 
@@ -546,8 +546,8 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
   def category_transactions(aci, category)
     CashTransaction.where(
-        legal_aid_application_id: aci.legal_aid_application_id,
-        transaction_type_id: transaction_type(category)
+      legal_aid_application_id: aci.legal_aid_application_id,
+      transaction_type_id: transaction_type(category)
     )
   end
 
