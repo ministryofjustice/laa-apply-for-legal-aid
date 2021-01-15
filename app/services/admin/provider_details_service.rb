@@ -46,15 +46,12 @@ module Admin
 
       return false unless parse_uri
 
-      if raw_response.code != '200'
-        format_error_message
-        return false
-      end
+      format_error_message if raw_response.code != '200'
+      return false if @message
 
-      if contact_id.nil?
-        format_no_contact_message
-        return false
-      end
+      format_no_contact_message if contact_id.nil?
+      return false if @message
+
       true
     end
 
