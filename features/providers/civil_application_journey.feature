@@ -685,7 +685,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
-    Then I enter the statement 'This is some test data for the statement of case'
+    Then I enter the statement of case statement field 'This is some test data for the statement of case'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'

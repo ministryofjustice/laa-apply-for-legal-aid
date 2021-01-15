@@ -678,8 +678,9 @@ end
 #   Then I enter field name 'entry'
 Then(/^I enter ((a|an|the)\s)?([\w\s]+?) ["']([\w\s]+)["']$/) do |_ignore, field_name, entry|
   field_name.downcase!
+  field_id = field_name.gsub(/\s+/, '-')
   field_name.gsub!(/\s+/, '_')
-  name = find("input[name*=#{field_name}]")[:name]
+  name = find("input[name*=#{field_name}], ##{field_id}")[:name]
   fill_in(name, with: entry)
 end
 

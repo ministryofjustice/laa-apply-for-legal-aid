@@ -26,7 +26,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
 
       it 'does not display error' do
-        expect(response.body).not_to match 'id="statement-of-case-original-file-error"'
+        expect(response.body).not_to match 'id="statement-error"'
       end
 
       context 'no statement of case record exists for the application' do
@@ -255,7 +255,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'displays error' do
             subject
-            expect(response.body).to match 'id="statement-of-case-original-file-error"'
+            expect(response.body).to match 'id="original_file-error"'
           end
 
           context 'file contains a malware' do
