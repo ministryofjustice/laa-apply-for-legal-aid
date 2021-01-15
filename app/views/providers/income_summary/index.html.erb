@@ -29,6 +29,9 @@
   </ol>
 
     <% if  @legal_aid_application.student_finance? || @legal_aid_application.cash_transactions.credits.exists? %>
+
+    <hr>
+
       <div class="govuk-!-padding-bottom-4"></div>
 
       <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
