@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'sidekiq/testing'
 
-module CCMS # rubocop:disable Metrics/ModuleLength
+module CCMS
   RSpec.describe Submission do
     let(:state) { :initialised }
     let(:applicant_poll_count) { 0 }
