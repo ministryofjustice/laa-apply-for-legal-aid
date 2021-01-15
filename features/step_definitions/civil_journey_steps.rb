@@ -92,6 +92,15 @@ Given('I previously created a passported application with no assets and left on 
   login_as @legal_aid_application.provider
 end
 
+Given('the setting to allow multiple proceedings is enabled') do
+  Setting.setting.update!(allow_multiple_proceedings: true)
+end
+
+Then('I choose a Non-molestation order proceeding type radio button') do
+  choose('Non-molestation order', allow_label_click: true)
+end
+
+
 Given(/^I view the previously created application$/) do
   find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[1]/a").click
 end
