@@ -56,18 +56,36 @@ module CCMS
         value.is_a?(TrueClass) || value.is_a?(FalseClass)
       end
 
+      # def extract_response_value(config)
+      #   raw_value = extract_raw_value(config)
+      #   case config[:response_type]
+      #   when 'text', 'number', 'boolean'
+      #     raw_value
+      #   when 'currency'
+      #     as_currency(raw_value)
+      #   when 'date'
+      #     raw_value.is_a?(Date) ? raw_value.strftime('%d-%m-%Y') : raw_value
+      #   else
+      #     raise CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}"
+      #   end
+      # rescue StandardError => e
+      #   Raven.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect}")
+      #   raise
+      # end
+
+      RESPONSE_TYPES = {
+        'text' => 'extract_raw_value',
+        'number' => 'extract_raw_value',
+        'boolean' => 'extract_raw_value',
+        'currency' => 'extract_as_currency',
+        'date' => 'extract_as_date'
+      }.freeze
+
       def extract_response_value(config)
-        raw_value = extract_raw_value(config)
-        case config[:response_type]
-        when 'text', 'number', 'boolean'
-          raw_value
-        when 'currency'
-          as_currency(raw_value)
-        when 'date'
-          raw_value.is_a?(Date) ? raw_value.strftime('%d-%m-%Y') : raw_value
-        else
-          raise CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}"
-        end
+        method_to_call = RESPONSE_TYPES[config[:response_type]]
+        raise CCMSError, "Submission #{submission.id} - Unknown response type in attributes config yaml file: #{config[:response_type]}" unless method_to_call
+
+        send(method_to_call, config)
       rescue StandardError => e
         Raven.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect}")
         raise
@@ -79,6 +97,15 @@ module CCMS
         else
           method_name?(config[:value]) ? get_attr_value(config[:value]) : config[:value]
         end
+      end
+
+      def extract_as_currency(config)
+        as_currency(extract_raw_value(config))
+      end
+
+      def extract_as_date(config)
+        raw_value = extract_raw_value(config)
+        raw_value.is_a?(Date) ? raw_value.strftime('%d-%m-%Y') : raw_value
       end
 
       def method_name?(str)
