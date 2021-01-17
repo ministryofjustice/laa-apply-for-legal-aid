@@ -375,6 +375,12 @@ Staging and UAT environments.
   - [Staging](https://mojdt.slack.com/messages/GGWMW7M0F)
   - [Production](https://mojdt.slack.com/messages/GGWE9V9BP)
 
+## Logging
+
+To enable full logs in the test environment, `ENV['RAILS_ENABLE_TEST_LOG']` must return "true". 
+
+`ENV['RAILS_ENABLE_TEST_LOG']` defaults to nil (falsey) in order to reduce log pollution during testing.
+
 ## Notifications - GOV.UK Notify
 
 [GOV.UK Notify](https://www.notifications.service.gov.uk/ "GOV.UK Notify") is a government service that allows teams across government to send emails, text messages and sometimes paper at a considerably lower cost than standard providers.
