@@ -28,7 +28,7 @@ function filterSearch(proceedings_data) {
 
   $('#clear-proceeding-search').on("click", () => $("#proceeding-search-input").val("").trigger("keyup"))
 
-  // remove this when the multiple proceedings feature flag is removed
+  // TODO: remove this when the multiple proceedings feature flag is removed
   $('li.proceeding-item').on('mouseover', function (e) { $(this).addClass('hover') })
     .on('mouseout', function (e) { $(this).removeClass('hover') })
     .on('click', function (e) { return submitForm(this) })
