@@ -12,17 +12,11 @@ gem 'govuk_notify_rails', '~> 2.1.2'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 5.1'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.1'
 gem 'regexp-examples'
 gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
 gem 'simple_command', github: 'nebulab/simple_command', branch: 'master'
-
-# Sprockets isn't used by the app but is installed by rails as a dependency.
-# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
-# This pins sprockets to an earlier version to prevent those errors
-gem 'sprockets', '< 4'
-
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.3.0'
 
@@ -98,11 +92,16 @@ gem 'secure_headers'
 # Identify file types before uploads
 gem 'mimemagic'
 
+# Sprockets isn't used by the app but is installed by rails as a dependency.
+# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
+# This pins sprockets to an earlier version to prevent those errors
+gem 'sprockets', '< 4'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '>= 2.7.5'
-  gem 'erb_lint', require: false
+  gem 'erb_lint', '0.0.35', require: false
   gem 'htmlentities'
   gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'

@@ -4,9 +4,6 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
   include ApplicationHelper
 
   describe '#policy_disregards_hash' do
-    # subject(:policy_disregards_helper) { policy_disregards_hash(policy_disregards) }
-
-    # it { is_expected.to be_a(Hash) }
     let(:result) { policy_disregards_hash(policy_disregards) }
     context 'no disregards selected' do
       let(:policy_disregards) { create :policy_disregards, none_selected: true }

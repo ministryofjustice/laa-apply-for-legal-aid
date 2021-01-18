@@ -66,7 +66,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
       end
 
       it 'generates errors in the right order' do
-        expect(subject.errors.keys).to eq(
+        expect(subject.errors.attribute_names).to eq(
           %i[
             understands_terms_of_court_order
             warning_letter_sent
@@ -103,7 +103,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
       end
 
       it 'generates errors in the right order' do
-        expect(subject.errors.keys).to eq(
+        expect(subject.errors.attribute_names).to eq(
           %i[
             understands_terms_of_court_order_details
             warning_letter_sent_details
