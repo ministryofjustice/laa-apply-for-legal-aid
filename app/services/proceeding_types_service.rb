@@ -7,10 +7,10 @@ class ProceedingTypesService
     return false unless proceeding_type_id && scope_limitation
 
     ActiveRecord::Base.transaction do
+      @legal_aid_application.reset_proceeding_types! unless Setting.allow_multiple_proceedings? # This will probably change when multiple proceeding types implemented!
       @legal_aid_application.proceeding_types << proceeding_type(proceeding_type_id)
       AddScopeLimitationService.call(@legal_aid_application, scope_limitation)
     end
-    true
   end
 
   private

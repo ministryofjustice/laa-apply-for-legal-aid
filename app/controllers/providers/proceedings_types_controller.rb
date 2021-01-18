@@ -4,7 +4,7 @@ module Providers
 
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
-      @multiple_proceedings = Setting.allow_multiple_proceedings?
+      @multiple_proceedings = allow_multiple_proceedings?
       proceeding_types
     end
 
@@ -16,7 +16,7 @@ module Providers
         go_forward
       else
         legal_aid_application.errors.add(:'proceeding-search-input', t('.search_and_select'))
-        @multiple_proceedings = Setting.allow_multiple_proceedings?
+        @multiple_proceedings = allow_multiple_proceedings?
         proceeding_types
         render :index
       end
@@ -25,11 +25,7 @@ module Providers
     # PATCH /provider/applications/:legal_aid_application_id/proceedings_types/:id
     # TODO: Could be removed after multiple proceedings go live.
     def update
-      ActiveRecord::Base.transaction do
-        legal_aid_application.reset_proceeding_types! # This will probably change when multiple proceeding types implemented!
-        legal_aid_application.proceeding_types << proceeding_type
-        AddScopeLimitationService.call(legal_aid_application, :substantive)
-      end
+      run_transaction
       go_forward
     end
 
@@ -49,12 +45,12 @@ module Providers
       params.require(:id)
     end
 
-    def proceeding_type
-      @proceeding_type = ProceedingType.find(params[:id])
-    end
-
     def proceeding_types
       @proceeding_types ||= ProceedingType.all
+    end
+
+    def allow_multiple_proceedings?
+      Setting.allow_multiple_proceedings?
     end
   end
 end
