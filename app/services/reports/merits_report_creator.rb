@@ -18,11 +18,7 @@ module Reports
     def html_report
       ensure_case_ccms_reference_exists
 
-      Providers::MeritsReportsController.default_url_options = {
-        _recall: {
-          legal_aid_application_id: legal_aid_application.id
-        }
-      }
+      Providers::MeritsReportsController.default_url_options = default_url_options
 
       Providers::MeritsReportsController.renderer.render(
         template: 'providers/merits_reports/show',

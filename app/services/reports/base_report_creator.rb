@@ -24,5 +24,13 @@ module Reports
     end
 
     def html_report; end
+
+    def default_url_options
+      {
+        _recall: {
+          legal_aid_application_id: legal_aid_application.id
+        }
+      }
+    end
   end
 end

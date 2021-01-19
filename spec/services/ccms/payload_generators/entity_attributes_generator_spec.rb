@@ -46,7 +46,7 @@ module CCMS
               config = {
                 value: 4664,
                 br100_meaning: 'n/a',
-                response_type: 'numeric',
+                response_type: 'number',
                 user_defined: true
               }
               expect(Raven).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
