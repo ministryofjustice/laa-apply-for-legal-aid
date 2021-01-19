@@ -42,7 +42,7 @@
     <div class="govuk-form-group <%= group_error_class %>">
       <%= form.govuk_text_field :address_line_one , label: {text: "Building and street"}, 'aria-label': 'Building and street line 1 of 2' %>
       <%= form.govuk_text_field :address_line_two, label: {text: "Building and street", hidden: true},
-                                'aria-label': 'Building and street line 1 of 2', field_with_error: :address_line_one %>
+                                'aria-label': 'Building and street line 2 of 2', field_with_error: :address_line_one %>
     </div>
 
     <%= form.govuk_text_field :city, width: 'two-thirds' %>
