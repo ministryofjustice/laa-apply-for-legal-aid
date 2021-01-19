@@ -212,6 +212,16 @@ FactoryBot.define do
       end
     end
 
+    trait :with_multiple_proceeding_types do
+      after(:create) do |application, evaluator|
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1, :with_real_data)
+        application.proceeding_types << create(:proceeding_type, :as_occupation_order)
+        pt = application.lead_proceeding_type
+        create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        AddScopeLimitationService.call(application, :substantive)
+      end
+    end
+
     trait :with_substantive_scope_limitation do
       after(:create) do |application, evaluator|
         application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)

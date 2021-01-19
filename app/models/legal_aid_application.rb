@@ -131,7 +131,7 @@ class LegalAidApplication < ApplicationRecord
 
   # convenience method to return the lead proceeding type.  For now, that is the ONLY
   # proceeding type until such time as we have multiple proceeding types per applications,
-  # at which time this method shuld be changed to determine which is the lead one and return that.
+  # at which time this method should be changed to determine which is the lead one and return that.
   #
   def lead_proceeding_type
     proceeding_types.first
@@ -320,6 +320,10 @@ class LegalAidApplication < ApplicationRecord
 
   def reset_proceeding_types!
     proceeding_types.clear
+    clear_scopes!
+  end
+
+  def clear_scopes!
     scope_limitations.clear
     reset_delegated_functions
   end
