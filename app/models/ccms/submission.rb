@@ -17,17 +17,17 @@ module CCMS
     BASE_DELAY = 5.seconds.freeze
 
     STATE_SERVICES = {
-      'initialised' => CCMS::Submitters::ObtainCaseReferenceService,
-      'case_ref_obtained' => CCMS::Submitters::ObtainApplicantReferenceService,
-      'applicant_submitted' => CCMS::Submitters::CheckApplicantStatusService,
-      'applicant_ref_obtained' => CCMS::Submitters::ObtainDocumentIdService,
-      'document_ids_obtained' => CCMS::Submitters::AddCaseService,
-      'case_submitted' => CCMS::Submitters::CheckCaseStatusService,
-      'case_created' => CCMS::Submitters::UploadDocumentsService
+      initialised: CCMS::Submitters::ObtainCaseReferenceService,
+      case_ref_obtained: CCMS::Submitters::ObtainApplicantReferenceService,
+      applicant_submitted: CCMS::Submitters::CheckApplicantStatusService,
+      applicant_ref_obtained: CCMS::Submitters::ObtainDocumentIdService,
+      document_ids_obtained: CCMS::Submitters::AddCaseService,
+      case_submitted: CCMS::Submitters::CheckCaseStatusService,
+      case_created: CCMS::Submitters::UploadDocumentsService
     }.freeze
 
     def process!(options = {})
-      service = STATE_SERVICES[aasm_state.to_s]
+      service = STATE_SERVICES[aasm_state.to_sym]
       raise CCMSError, "Submission #{id} - Unknown state: #{aasm_state}" if service.nil?
 
       if aasm_state.eql?('document_ids_obtained')
