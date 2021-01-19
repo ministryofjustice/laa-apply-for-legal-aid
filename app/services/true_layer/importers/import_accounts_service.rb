@@ -25,9 +25,7 @@ module TrueLayer
           account.bank_transactions.clear
         end
         bank_provider.bank_accounts.clear
-        ActiveRecord::Base.logger.silence do
-          bank_provider.bank_accounts.create!(mapped_resources)
-        end
+        bank_provider.bank_accounts.create!(mapped_resources)
       end
 
       def mapped_resources
