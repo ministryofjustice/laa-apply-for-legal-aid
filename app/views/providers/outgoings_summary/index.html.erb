@@ -33,6 +33,18 @@
     <% end %>
   </ol>
 
+  <% if @legal_aid_application.cash_transactions.debits.exists? %>
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
+
+    <p class="gov-body"><%= t('.following_payments') %></p>
+  <% end %>
+
+  <% if @legal_aid_application.cash_transactions.debits.exists? %>
+    <%= render partial: 'shared/cash_transactions' %>
+  <% end %>
+
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_outgoings_summary_index_path,
         show_draft: true

@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_103855) do
+ActiveRecord::Schema.define(version: 2021_01_15_155032) do
 
-  # These are extensions that m
-  # ust be enabled in order to support this database
+  # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -224,10 +223,10 @@ ActiveRecord::Schema.define(version: 2021_01_12_103855) do
     t.string "legal_aid_application_id"
     t.decimal "amount"
     t.date "transaction_date"
-    t.string "transaction_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "month_number"
+    t.uuid "transaction_type_id"
     t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
   end
 
