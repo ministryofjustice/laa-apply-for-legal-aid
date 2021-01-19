@@ -4,7 +4,6 @@ module Providers
 
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
-      allow_multiple_proceedings?
       proceeding_types
     end
 
@@ -16,7 +15,6 @@ module Providers
         go_forward
       else
         legal_aid_application.errors.add(:'proceeding-search-input', t('.search_and_select'))
-        allow_multiple_proceedings?
         proceeding_types
         render :index
       end
@@ -47,10 +45,6 @@ module Providers
 
     def proceeding_types
       @proceeding_types ||= ProceedingType.all
-    end
-
-    def allow_multiple_proceedings?
-      @multiple_proceedings = Setting.allow_multiple_proceedings?
     end
   end
 end
