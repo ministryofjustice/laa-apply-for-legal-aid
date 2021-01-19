@@ -62,6 +62,11 @@ Rails.application.configure do
 
   config.x.email_domain.suffix = '@test.test'
 
+  unless ENV['RAILS_ENABLE_TEST_LOG']
+    config.logger = Logger.new(nil)
+    config.log_level = :fatal
+  end
+
   # Dummy url for provider details api
   config.x.provider_details.url = 'http://dummy-provider-details-api/'
 
