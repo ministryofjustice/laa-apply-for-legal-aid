@@ -96,8 +96,8 @@ Given('the setting to allow multiple proceedings is enabled') do
   Setting.setting.update!(allow_multiple_proceedings: true)
 end
 
-Then('I choose a Non-molestation order proceeding type radio button') do
-  choose('Non-molestation order', allow_label_click: true)
+Then('I choose a {string} radio button') do |radio_button_name|
+  choose(radio_button_name, allow_label_click: true)
 end
 
 Given(/^I view the previously created application$/) do
