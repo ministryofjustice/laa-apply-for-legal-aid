@@ -17,7 +17,7 @@
   "devDependencies": {
     "jest": "^26.6.3",
     "standard": "^16.0.3",
-    "webpack-dev-server": "^3.11.1"
+    "webpack-dev-server": "^3.11.2"
   },
   "resolutions": {
     "minimist": "^1.2.2",
