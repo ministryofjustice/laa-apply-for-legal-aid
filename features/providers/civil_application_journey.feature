@@ -94,7 +94,33 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I choose a Non-molestation order proceeding type radio button
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You have added 1 proceeding'
+    Then I should be on a page showing 'Non-molestation order'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Search for legal proceedings'
+    Then I search for proceeding 'Occupation order'
+    Then proceeding suggestions has results
+    Then I choose a 'Occupation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You have added 2 proceedings'
+    Then I should be on a page showing 'Non-molestation order'
+    Then I should be on a page showing 'Occupation order'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I click the first link 'Remove'
+    Then I click the first link 'Remove'
+    Then I should be on a page showing 'Search for legal proceedings'
+    Then I search for proceeding 'FGM Protection Order'
+    Then proceeding suggestions has results
+    Then I choose a 'FGM Protection Order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You have added 1 proceeding'
+    Then I should be on a page showing 'FGM Protection Order'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Have you used delegated functions?'
 

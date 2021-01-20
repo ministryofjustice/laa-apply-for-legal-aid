@@ -38,8 +38,12 @@ module Flow
         },
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
-          forward: :used_delegated_functions,
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :has_other_proceedings : :used_delegated_functions },
           check_answers: :limitations
+        },
+        has_other_proceedings: {
+          path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
+          forward: ->(_application, has_other_proceeding) { has_other_proceeding ? :proceedings_types : :used_delegated_functions }
         },
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },

@@ -129,7 +129,7 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
 
         it 'redirects to next step' do
           subject
-          expect(response.body).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
+          expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
         end
 
         it 'calls the proceeding types service' do

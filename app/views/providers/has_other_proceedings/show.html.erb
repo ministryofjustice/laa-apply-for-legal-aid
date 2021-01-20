@@ -1,0 +1,41 @@
+<%= page_template page_title: t('.page_title'), template: :basic do %>
+
+  <%= render partial: 'shared/error' if @error %>
+
+  <% if @legal_aid_application.proceeding_types.any? %>
+    <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.proceeding_types.count, 'proceeding')}")} %>
+    <div class="govuk-summary-list">
+      <% @legal_aid_application.proceeding_types.order(:created_at).each do |type| %>
+        <dl class="govuk-summary-list__row" id="proceeding_type_<%= type.code %>">
+          <dt class="govuk-summary-list__value"><%= type.meaning %></dt>
+          <dd class="govuk-summary-list__actions">
+            <%= link_to_accessible(
+                  t('.remove'),
+                  providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application, id: type.code),
+                  class: 'govuk-link change-link',
+                  method: :delete,
+                  suffix: type.meaning
+                ) %>
+          </dd>
+        </dl>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with(url: providers_legal_aid_application_has_other_proceedings_path, method: :patch, local: true) do |form| %>
+
+    <%= govuk_form_group(
+            show_error_if: @error,
+            input: :has_other_proceeding
+        ) do %>
+
+      <%= form.govuk_collection_radio_buttons :has_other_proceeding, form.yes_no_radio_button_array, :value, :label, error: @error&.values&.first, title: content_for(:page_title) %>
+
+    <% end %>
+
+    <%= next_action_buttons(
+            form: form,
+            show_draft: true
+        ) %>
+  <% end %>
+<% end %>
