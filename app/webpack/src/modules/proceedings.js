@@ -28,7 +28,8 @@ function filterSearch(proceedings_data) {
 
   $('#clear-proceeding-search').on("click", () => $("#proceeding-search-input").val("").trigger("keyup"))
 
-  $('.proceeding-item').on('mouseover', function (e) { $(this).addClass('hover') })
+  // TODO: remove this when the multiple proceedings feature flag is removed
+  $('li.proceeding-item').on('mouseover', function (e) { $(this).addClass('hover') })
     .on('mouseout', function (e) { $(this).removeClass('hover') })
     .on('click', function (e) { return submitForm(this) })
     .on('keydown', function (e) {
@@ -81,18 +82,19 @@ function filterData(inputText, search) {
       $.each(codes.reverse(), function (_i, code) {
         const element = $('#' + code)
 
-        // We want to highlight anything text in <h3> or <span> tags that
+        // We want to highlight anything text in <main> or <span> tags that
         // matches the user's search criteria
         const span = element.find("span")
-        const h3 = element.find("h3")
+        // remove h3 when the multiple proceedings feature flag is removed
+        const main = element.find("h3, label")
 
         // Remove any existing highlighting
-        h3.html(h3.html().replace(/<mark class="highlight">(.*)<\/mark>/, '$1'))
+        main.html(main.html().replace(/<mark class="highlight">(.*)<\/mark>/, '$1'))
         span.html(span.html().replace(/<mark class="highlight">(.*)<\/mark>/, '$1'))
 
         // Highlight any text that matches the user's input
         const regExp = RegExp(inputText, 'gi')
-        h3.html(h3.html().replace(regExp, '<mark class="highlight">$&</mark>'))
+        main.html(main.html().replace(regExp, '<mark class="highlight">$&</mark>'))
         span.html(span.html().replace(regExp, '<mark class="highlight">$&</mark>'))
 
         const parent = $('#proceeding-list')
