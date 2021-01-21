@@ -69,7 +69,7 @@ module Dashboard
       end
 
       def log_message(message)
-        puts message unless Rails.env.test?
+        Rails.logger.info message unless Rails.env.test?
       end
     end
   end

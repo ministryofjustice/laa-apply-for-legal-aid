@@ -22,6 +22,6 @@ Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|
   load seed
 end
 
-puts Seeder.report
+Rails.logger.info Seeder.report
 Rails.logger.info Seeder.report.join("\n")
 Rails.logger.info 'Seeding completed'

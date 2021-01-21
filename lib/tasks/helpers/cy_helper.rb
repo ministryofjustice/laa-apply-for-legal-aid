@@ -31,7 +31,7 @@ class CyHelper
   private
 
   def copy_en_to_cy
-    puts 'copying en locale to cy'
+    Rails.logger.info 'copying en locale to cy'
     en_files = FILES_TO_TRANSLATE.map { |f| Rails.root.join("config/locales/en/#{f}.yml").to_s }
     FileUtils.mkdir @cy_dir unless File.exist?(@cy_dir)
     FileUtils.cp en_files, @cy_dir, verbose: true
@@ -42,7 +42,7 @@ class CyHelper
   end
 
   def reverse_strings(filename)
-    puts "Reversing #{filename}"
+    Rails.logger.info "Reversing #{filename}"
     hash = YAML.load_file(filename)
     hash['cy'] = hash['en']
     hash.delete('en')
