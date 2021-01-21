@@ -1,4 +1,4 @@
-class CitizenCompleteMeansJob < ActiveJob::Base
+class CitizenCompleteMeansJob < ApplicationJob
   queue_as :default
 
   def perform(legal_aid_application_id)

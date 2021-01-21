@@ -1,4 +1,4 @@
-class PostSubmissionProcessingJob < ActiveJob::Base
+class PostSubmissionProcessingJob < ApplicationJob
   queue_as :default
 
   def perform(legal_aid_application_id, feedback_url)

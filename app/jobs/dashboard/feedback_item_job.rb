@@ -1,5 +1,5 @@
 module Dashboard
-  class FeedbackItemJob < ActiveJob::Base
+  class FeedbackItemJob < ApplicationJob
     include SuspendableJob
 
     def perform(feedback)
