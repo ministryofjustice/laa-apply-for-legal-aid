@@ -29,7 +29,7 @@ module Metrics
     end
 
     def queues
-      sidekiq_config = File.read(Rails.root.join('config', 'sidekiq.yml'))
+      sidekiq_config = File.read(Rails.root.join('config/sidekiq.yml'))
       YAML.safe_load(sidekiq_config, [Symbol])[:queues]
     end
   end

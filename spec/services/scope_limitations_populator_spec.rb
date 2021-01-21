@@ -3,7 +3,7 @@ require 'csv'
 
 RSpec.describe ScopeLimitationsPopulator do
   describe '#call' do
-    let(:seed_file) { Rails.root.join('db', 'seeds', 'legal_framework', 'scope_limitations.csv') }
+    let(:seed_file) { Rails.root.join('db/seeds/legal_framework/scope_limitations.csv') }
 
     it 'create instances from the seed file' do
       expect { described_class.call }.to change { ScopeLimitation.count }.by(seed_file.readlines.size - 1)

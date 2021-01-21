@@ -11,7 +11,7 @@ module Reports
       let!(:acct1) { create :bank_account, bank_provider: bank1, name: 'Bank Account 1' }
       let!(:acct2) { create :bank_account, bank_provider: bank1, name: 'Bank Account 2' }
       let!(:acct3) { create :bank_account, bank_provider: bank2, name: 'Bank Account 3' }
-      let(:fixtures) { Rails.root.join('spec', 'fixtures', 'files', 'bank_transaction_sorting', 'sorted_bank_transactions.csv') }
+      let(:fixtures) { Rails.root.join('spec/fixtures/files/bank_transaction_sorting/sorted_bank_transactions.csv') }
 
       describe '.call' do
         it 'sorts using balance within date within bank account' do

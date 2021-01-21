@@ -18,7 +18,7 @@ Seeder.monitor Office
 Seeder.monitor Firm
 Seeder.monitor Provider
 
-Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|
   load seed
 end
 
