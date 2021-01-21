@@ -267,11 +267,14 @@ en:
         heading: Application complete
         your_case_reference_number: Your case reference number is
         confirmation_email_sent: We've sent you a confirmation email.
-        what_happens_next: What happens next
-        next_actions: "You need to:"
-        print_application: Print the completed application.
-        client_sign: Get your client to sign it.
-        keep_file: Keep it on file.
+        need_to_do: What you need to do
+        print_application: Print the completed application and get your client to sign it.
+        financial_evidence: any evidence you used to determine your client’s financial situation
+        client_sign: a signed copy of your client’s declaration
+        keep_file: "Keep on file:"
+        copy_application: a copy of the application
+        audit: You may need to show these if you’re audited by the LAA in the future.
+        what_next: What happens next
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
         decision_in_ccms_html: We'll let you know our decision in <abbr title='Client and Cost Management System'>CCMS</abbr>.
         feedback_prefix: "Give feedback"
