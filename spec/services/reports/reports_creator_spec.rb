@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Reports::ReportsCreator do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_passported_state_machine, :generating_reports }
+  let(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_proceeding_types,
+           :with_ccms_submission,
+           :with_everything,
+           :with_passported_state_machine,
+           :generating_reports
+  end
 
   subject { described_class.call(legal_aid_application) }
 
@@ -20,6 +27,7 @@ RSpec.describe Reports::ReportsCreator do
         create :legal_aid_application,
                :with_proceeding_types,
                :with_everything,
+               :with_ccms_submission,
                :with_benefits_transactions,
                :with_uncategorised_credit_transactions,
                :generating_reports
