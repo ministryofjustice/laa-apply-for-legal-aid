@@ -33,3 +33,6 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
   Max: 13
+
+# TODO: Files are excluded from Rails/OutputSafety, which needs fixing
+# Rails/OutputSafety

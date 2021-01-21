@@ -59,6 +59,13 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 7
 
+Rails/OutputSafety:
+  Exclude:
+    - 'spec/**/*'
+    - 'app/lib/**/*'
+    - 'app/helpers/*'
+    - 'app/forms/applicants/open_banking_consent_form.rb'
+
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 
