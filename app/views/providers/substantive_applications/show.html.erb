@@ -1,42 +1,27 @@
 <%= page_template page_title: t('.heading'), template: :basic do %>
 
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_substantive_application_path,
         method: :patch,
         local: true
       ) do |form| %>
 
-    <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <fieldset class="govuk-fieldset">
-        <%= govuk_fieldset_header page_title %>
-        <p class="govuk-body govuk-!-padding-top-6 govuk-!-padding-bottom-4">
-          <%= t('.information_on_next_actions') %>
+    <%= form.govuk_radio_buttons_fieldset(:substantive_application,
+                                            legend: { size: 'xl', tag: 'h1', text: page_title}) do %>
+
+      <p class="govuk-body govuk-body govuk-!-padding-top-6 govuk-!-padding-bottom-4">
+        <%= t '.information_on_next_actions' %>
+      </p>
+
+      <%= form.govuk_radio_button :substantive_application, true, label: { text: t('generic.yes') } %>
+
+      <%= form.govuk_radio_button :substantive_application, false, label: { text: t('.no_start_later') } do %>
+        <p class="govuk-body">
+          <%= t('.must_submit_by', deadline: @form.substantive_application_deadline_on) %>
         </p>
-
-        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-
-          <%= govuk_error_message(form.object.errors[:substantive_application].first) %>
-
-          <%= form.govuk_radio_button(
-                :substantive_application,
-                true,
-                label: t('generic.yes')
-              ) %>
-
-          <%= form.govuk_radio_button(
-                :substantive_application,
-                false,
-                label: t('.no_start_later'),
-                'data-aria-controls' => 'substantive-deadline'
-              ) %>
-          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="substantive-deadline">
-            <p class="govuk-body">
-              <%= t('.must_submit_by', deadline: @form.substantive_application_deadline_on) %>
-            </p>
-          </div>
-        </div>
-      </fieldset>
+      <% end %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
