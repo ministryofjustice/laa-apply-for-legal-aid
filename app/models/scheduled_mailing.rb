@@ -5,7 +5,7 @@ class ScheduledMailing < ApplicationRecord
 
   scope :not_sent, -> { where(sent_at: nil) }
   scope :not_cancelled, -> { where(cancelled_at: nil) }
-  scope :past_due, -> { where('scheduled_at < ?', Time.now) }
+  scope :past_due, -> { where('scheduled_at < ?', Time.current) }
 
   def self.due_now
     not_sent.not_cancelled.past_due
@@ -18,14 +18,14 @@ class ScheduledMailing < ApplicationRecord
   end
 
   def cancel!
-    update!(cancelled_at: Time.now)
+    update!(cancelled_at: Time.current)
   end
 
   private
 
   def deliver_now
     mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_now
-    update!(sent_at: Time.now)
+    update!(sent_at: Time.current)
   end
 
   def eligible_for_delivery?

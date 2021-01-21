@@ -174,7 +174,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         let(:legal_aid_application) do
           create :legal_aid_application,
                  :with_applicant, used_delegated_functions: true,
-                                  substantive_application_deadline_on: Date.today + 3.days
+                                  substantive_application_deadline_on: Time.zone.today + 3.days
         end
         let(:search_term) { legal_aid_application.application_ref }
         let(:params) { { search_term: search_term } }
@@ -193,7 +193,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
                  :with_applicant,
                  :with_everything,
                  used_delegated_functions: true,
-                 substantive_application_deadline_on: Date.today + 3.days
+                 substantive_application_deadline_on: Time.zone.today + 3.days
         end
         let(:search_term) { legal_aid_application.application_ref }
         let(:params) { { search_term: search_term } }

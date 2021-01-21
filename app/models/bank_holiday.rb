@@ -13,6 +13,6 @@ class BankHoliday < ApplicationRecord
   end
 
   def populate_dates
-    self.dates = BankHolidayRetriever.dates unless dates.present?
+    self.dates = BankHolidayRetriever.dates if dates.blank?
   end
 end

@@ -6,7 +6,7 @@ class CashTransaction < ApplicationRecord
   belongs_to :legal_aid_application
   belongs_to :transaction_type
 
-  validates_inclusion_of :month_number, in: [1, 2, 3]
+  validates :month_number, inclusion: { in: [1, 2, 3] }
 
   scope :credits, -> do
     includes(:transaction_type)

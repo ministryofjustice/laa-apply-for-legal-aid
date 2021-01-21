@@ -18,7 +18,7 @@ module LegalAidApplications
     def call
       return used_delegated_functions_on if used_delegated_functions?
 
-      return merits_assessment&.submitted_at&.to_date || Date.today if applicant_receives_benefit?
+      return merits_assessment&.submitted_at&.to_date || Time.zone.today if applicant_receives_benefit?
 
       transaction_period_finish_on
     end

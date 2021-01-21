@@ -25,7 +25,7 @@ RSpec.describe 'update client email address before application confirmation', ty
 
       it 'displays the email label' do
         subject
-        expect(response.body).to include(I18n.translate('shared.forms.applicant_form.email_label'))
+        expect(response.body).to include(I18n.t('shared.forms.applicant_form.email_label'))
       end
     end
   end

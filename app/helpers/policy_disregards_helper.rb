@@ -14,7 +14,7 @@ module PolicyDisregardsHelper
   def policy_disregards_hash(policy_disregards)
     items = policy_disregards_as_array(policy_disregards)
     items&.compact!
-    return nil unless items.present?
+    return nil if items.blank?
 
     {
       items: items

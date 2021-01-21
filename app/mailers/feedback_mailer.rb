@@ -41,7 +41,7 @@ class FeedbackMailer < BaseApplyMailer
   end
 
   def legal_aid_application(legal_aid_application_id)
-    @legal_aid_application ||= LegalAidApplication.find_by_id(legal_aid_application_id)
+    @legal_aid_application ||= LegalAidApplication.find_by(id: legal_aid_application_id)
   end
 
   def user_data(feedback)

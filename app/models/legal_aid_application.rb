@@ -41,8 +41,8 @@ class LegalAidApplication < ApplicationRecord
   has_many :scheduled_mailings, dependent: :destroy
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
 
-  before_create :create_app_ref
   before_save :set_open_banking_consent_choice_at
+  before_create :create_app_ref
   after_create do
     ActiveSupport::Notifications.instrument 'dashboard.application_created', id: id, state: state
   end
@@ -146,7 +146,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def capture_policy_disregards?
-    (calculation_date || Date.today) >= POLICY_DISREGARDS_START_DATE
+    (calculation_date || Time.zone.today) >= POLICY_DISREGARDS_START_DATE
   end
 
   def bank_transactions
@@ -408,7 +408,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def proceeding_type_codes_existence
-    return unless proceeding_type_codes.present?
+    return if proceeding_type_codes.blank?
 
     errors.add(:proceeding_type_codes, :invalid) if proceeding_types.size != proceeding_type_codes.size
   end
@@ -425,7 +425,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def create_app_ref
-    self.application_ref = ReferenceNumberCreator.call unless application_ref.present?
+    self.application_ref = ReferenceNumberCreator.call if application_ref.blank?
   end
 
   def set_open_banking_consent_choice_at

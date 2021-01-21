@@ -73,7 +73,7 @@ module StatementOfCases
       file_empty(original_file)
       disallowed_content_type(original_file)
       too_big(original_file)
-      create_attachment(original_file) unless errors.present?
+      create_attachment(original_file) if errors.blank?
     end
 
     def file_present_or_draft?

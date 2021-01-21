@@ -9,7 +9,7 @@ module CFE
     let(:dummy_response) { dummy_response_hash.to_json }
 
     before do
-      allow(application).to receive(:calculation_date).and_return(Date.today)
+      allow(application).to receive(:calculation_date).and_return(Time.zone.today)
     end
 
     describe '#cfe_url' do
@@ -68,7 +68,7 @@ module CFE
     def expected_payload_hash
       {
         client_reference_id: application.application_ref,
-        submission_date: Date.today.strftime('%Y-%m-%d'),
+        submission_date: Time.zone.today.strftime('%Y-%m-%d'),
         matter_proceeding_type: 'domestic_abuse'
       }
     end

@@ -8,9 +8,9 @@ module CFE
     let(:submission) { create :cfe_submission, aasm_state: 'state_benefits_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
-    let(:today) { Date.today.strftime('%Y-%m-%d') }
+    let(:today) { Time.zone.today.strftime('%Y-%m-%d') }
     let(:one_week_ago) { 1.week.ago.strftime('%Y-%m-%d') }
-    let(:two_weeks_ago) { 2.week.ago.strftime('%Y-%m-%d') }
+    let(:two_weeks_ago) { 2.weeks.ago.strftime('%Y-%m-%d') }
 
     describe '#cfe_url' do
       it 'contains the submission assessment id' do

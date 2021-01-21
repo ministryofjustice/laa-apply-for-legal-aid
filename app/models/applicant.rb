@@ -33,7 +33,7 @@ class Applicant < ApplicationRecord
   end
 
   def true_layer_token_expires_at
-    Time.parse(true_layer_token_data[:expires]) if true_layer_token_data[:expires]
+    Time.zone.parse(true_layer_token_data[:expires]) if true_layer_token_data[:expires]
   end
 
   def true_layer_token_data

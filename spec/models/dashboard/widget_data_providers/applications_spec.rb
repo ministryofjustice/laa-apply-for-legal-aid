@@ -83,7 +83,7 @@ module Dashboard
 
         def create_fake_applications(num_apps)
           FactoryBot.create_list :legal_aid_application, num_apps[0]
-          FactoryBot.create_list :merits_assessment, num_apps[1], submitted_at: Date.today
+          FactoryBot.create_list :merits_assessment, num_apps[1], submitted_at: Time.zone.today
           FactoryBot.create_list :ccms_submission, num_apps[2], aasm_state: 'failed'
           FactoryBot.create_list :legal_aid_application, num_apps[3], :with_delegated_functions
           FactoryBot.create_list :legal_aid_application, num_apps[4], :non_passported, :with_merits_assessment_submitted_today

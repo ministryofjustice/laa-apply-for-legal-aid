@@ -143,7 +143,7 @@ module Reports
 
       let(:prospect) { 'likely' }
       let(:purpose) { 'The reason we are applying' }
-      let(:submitted_at) { Time.new(2020, 2, 21, 15, 44, 55) }
+      let(:submitted_at) { Time.zone.local(2020, 2, 21, 15, 44, 55) }
       let(:used_delegated_functions) { true }
       let(:used_delegated_functions_on) { Date.new(2020, 1, 1) }
       let(:used_delegated_functions_on_date) { Date.new(2020, 2, 21) }

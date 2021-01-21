@@ -30,7 +30,7 @@ class DateValidator < ActiveModel::EachValidator
 
   def validate_not_in_future(record, attribute, value)
     required = options[:not_in_the_future]
-    return unless required.present?
+    return if required.blank?
 
     message = required[:message] if required.is_a?(Hash)
     message ||= :date_is_in_the_future
@@ -39,7 +39,7 @@ class DateValidator < ActiveModel::EachValidator
 
   def validate_not_too_early(record, attribute, value)
     required = options[:earliest_allowed_date]
-    return unless required.present?
+    return if required.blank?
 
     formatted_date = earliest_allowed_date.strftime('%d %m %Y')
     message = required[:message] if required.is_a?(Hash)

@@ -25,7 +25,7 @@ class DateFieldBuilder
   end
 
   def partially_complete?
-    !blank? && !complete?
+    present? && !complete?
   end
 
   def all_numeric?
@@ -57,7 +57,7 @@ class DateFieldBuilder
 
   # A hash that can populate the form's date part fields from data in the model
   def model_attributes
-    return unless model_date.present?
+    return if model_date.blank?
 
     DATE_PARTS.each_with_object({}) { |part, hash| hash[parts_hash[part]] = model_date.__send__(part) }
   end
@@ -96,7 +96,7 @@ class DateFieldBuilder
     when 4
       year
     when 2
-      year > Time.now.strftime('%y') ? "19#{year}" : "20#{year}"
+      year > Time.current.strftime('%y') ? "19#{year}" : "20#{year}"
     else
       raise YearError, 'Year is incorrect length'
     end

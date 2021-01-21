@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::DelegatedConfirmationController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_everything, substantive_application_deadline_on: 1.days.ago }
+  let(:legal_aid_application) { create :legal_aid_application, :with_everything, substantive_application_deadline_on: 1.day.ago }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/delegated_confirmation' do

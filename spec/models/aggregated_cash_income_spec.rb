@@ -9,9 +9,9 @@ RSpec.describe AggregatedCashIncome, type: :model do
   let!(:friends_or_family) { create :transaction_type, :friends_or_family }
   let!(:property_or_lodger) { create :transaction_type, :property_or_lodger }
   let!(:pension) { create :transaction_type, :pension }
-  let(:month1_tx_date) { Date.today.beginning_of_month - 1.month }
-  let(:month2_tx_date) { Date.today.beginning_of_month - 2.months }
-  let(:month3_tx_date) { Date.today.beginning_of_month - 3.months }
+  let(:month1_tx_date) { Time.zone.today.beginning_of_month - 1.month }
+  let(:month2_tx_date) { Time.zone.today.beginning_of_month - 2.months }
+  let(:month3_tx_date) { Time.zone.today.beginning_of_month - 3.months }
   let(:month1_period) { "#{month1_tx_date.strftime('%d %b %Y')} - #{month1_tx_date.end_of_month.strftime('%d %b %Y')}" }
   let(:month2_period) { "#{month2_tx_date.strftime('%d %b %Y')} - #{month2_tx_date.end_of_month.strftime('%d %b %Y')}" }
   let(:month3_period) { "#{month3_tx_date.strftime('%d %b %Y')} - #{month3_tx_date.end_of_month.strftime('%d %b %Y')}" }
@@ -383,7 +383,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         let(:subject) { aci.update(corrected_valid_params) }
 
         before do
-          travel_to Time.local(2100, 1, 7, 13, 45)
+          travel_to Time.zone.local(2100, 1, 7, 13, 45)
         end
 
         it 'does not add to old records' do
@@ -398,7 +398,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
             transactions.each_with_index do |transaction, i|
               date = transaction.transaction_date
-              historical_date = Date.today.at_beginning_of_month - (i + 1).months
+              historical_date = Time.zone.today.at_beginning_of_month - (i + 1).months
               expect(date).to eq historical_date
             end
           end

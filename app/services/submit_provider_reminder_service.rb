@@ -30,7 +30,7 @@ class SubmitProviderReminderService
   end
 
   def two_days_after_initial
-    two_days_after = WorkingDayCalculator.call(working_days: +2, from: Date.today)
+    two_days_after = WorkingDayCalculator.call(working_days: +2, from: Time.zone.today)
     two_days_after.to_time + 9.hours
   end
 end

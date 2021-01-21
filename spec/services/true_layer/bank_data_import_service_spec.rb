@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TrueLayer::BankDataImportService do
   let(:token) { SecureRandom.hex }
-  let(:token_expires_at) { Time.now + 1.hour }
+  let(:token_expires_at) { Time.current + 1.hour }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period, :with_non_passported_state_machine }
   let(:applicant) { legal_aid_application.applicant }
 
@@ -50,7 +50,7 @@ RSpec.describe TrueLayer::BankDataImportService do
     end
 
     it 'imports the transactions' do
-      mock_transaction_ids = mock_data[:accounts].flat_map { |a| a[:transactions].map { |t| t[:transaction_id] } }.sort
+      mock_transaction_ids = mock_data[:accounts].flat_map { |a| a[:transactions].pluck(:transaction_id) }.sort
       expect { subject }.to change { BankTransaction.count }.by(mock_transaction_ids.count)
 
       transaction_ids = bank_provider.bank_accounts.flat_map(&:bank_transactions).pluck(:true_layer_id).sort

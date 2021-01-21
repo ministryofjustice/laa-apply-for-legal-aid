@@ -36,7 +36,7 @@ module LegalAidApplications
     end
 
     def used_delegated_functions_reported_on
-      @used_delegated_functions_reported_on = used_delegated_functions_selected? ? Date.today : nil
+      @used_delegated_functions_reported_on = used_delegated_functions_selected? ? Time.zone.today : nil
     end
 
     private

@@ -33,7 +33,7 @@ RSpec.describe WorkingDayCalculator, vcr: { cassette_name: 'gov_uk_bank_holiday_
   end
 
   describe '.working_days_from_now' do
-    let(:day) { Date.today }
+    let(:day) { Time.zone.today }
     let(:number) { 12 }
 
     it 'returns the date `n` days form today' do

@@ -33,6 +33,6 @@ class TrueLayerBank < ApplicationRecord
   end
 
   def populate_banks
-    self.banks = TrueLayer::BanksRetriever.banks unless banks.present?
+    self.banks = TrueLayer::BanksRetriever.banks if banks.blank?
   end
 end

@@ -13,7 +13,7 @@ module DependantHelper
   def dependant_hash(dependant)
     items = dependant_as_array(dependant)
     items&.compact!
-    return nil unless items.present?
+    return nil if items.blank?
 
     {
       items: items

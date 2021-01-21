@@ -1,7 +1,7 @@
 module Reports
   module MIS
     class NonPassportedApplicationsReport
-      START_DATE = Time.new(2020, 9, 21, 0, 0, 0).freeze
+      START_DATE = Time.zone.local(2020, 9, 21, 0, 0, 0).freeze
 
       def run
         csv_string = CSV.generate do |csv|
@@ -17,7 +17,7 @@ module Reports
 
       def legal_aid_applications
         LegalAidApplication.joins(:state_machine)
-                           .where(created_at: [START_DATE..Date.today.end_of_day])
+                           .where(created_at: [START_DATE..Time.zone.today.end_of_day])
                            .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
                            .order(:created_at)
       end

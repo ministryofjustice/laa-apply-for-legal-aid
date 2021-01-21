@@ -62,7 +62,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
     end
 
     context 'when occurred on is in future' do
-      let(:occurred_on) { 1.days.from_now.to_date }
+      let(:occurred_on) { 1.day.from_now.to_date }
       let(:error_locale) { 'occurred_on.date_is_in_the_future' }
 
       it 'is invalid' do
@@ -75,7 +75,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
     end
 
     context 'when told on is in future' do
-      let(:told_on) { 1.days.from_now.to_date }
+      let(:told_on) { 1.day.from_now.to_date }
       let(:error_locale) { 'told_on.date_is_in_the_future' }
 
       it 'is invalid' do

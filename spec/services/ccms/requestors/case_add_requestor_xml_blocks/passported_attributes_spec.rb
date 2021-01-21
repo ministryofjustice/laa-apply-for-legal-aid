@@ -57,7 +57,7 @@ module CCMS
           end
 
           context 'on a Delegated Functions case' do
-            before { legal_aid_application.update(used_delegated_functions_on: Date.today, used_delegated_functions: true) }
+            before { legal_aid_application.update(used_delegated_functions_on: Time.zone.today, used_delegated_functions: true) }
 
             it 'is populated with the delegated functions date' do
               block = XmlExtractor.call(xml, :devolved_powers_date)
@@ -419,17 +419,17 @@ module CCMS
         context 'DELEGATED_FUNCTIONS_DATE blocks' do
           context 'delegated functions used' do
             before do
-              legal_aid_application.update(used_delegated_functions_on: Date.today, used_delegated_functions: true)
+              legal_aid_application.update(used_delegated_functions_on: Time.zone.today, used_delegated_functions: true)
             end
 
             it 'generates the delegated functions block in the means assessment section' do
               block = XmlExtractor.call(xml, :global_means, 'DELEGATED_FUNCTIONS_DATE')
-              expect(block).to have_date_response(Date.today.strftime('%d-%m-%Y'))
+              expect(block).to have_date_response(Time.zone.today.strftime('%d-%m-%Y'))
             end
 
             it 'generates the delegated functions block in the merits assessment section' do
               block = XmlExtractor.call(xml, :global_merits, 'DELEGATED_FUNCTIONS_DATE')
-              expect(block).to have_date_response(Date.today.strftime('%d-%m-%Y'))
+              expect(block).to have_date_response(Time.zone.today.strftime('%d-%m-%Y'))
             end
           end
 
@@ -454,7 +454,7 @@ module CCMS
         end
 
         context 'URGENT_HEARING_DATE' do
-          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
+          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
           it 'inserts ccms submission date as string' do
             block = XmlExtractor.call(xml, :global_merits, 'URGENT_HEARING_DATE')
             expect(block).to have_date_response legal_aid_application.calculation_date.strftime('%d-%m-%Y')
@@ -682,10 +682,10 @@ module CCMS
         end
 
         context 'DATE_CLIENT_VISITED_FIRM' do
-          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
+          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
           it "inserts today's date as a string" do
             block = XmlExtractor.call(xml, :global_merits, 'DATE_CLIENT_VISITED_FIRM')
-            expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
+            expect(block).to have_date_response Time.zone.today.strftime('%d-%m-%Y')
           end
         end
 
@@ -708,11 +708,11 @@ module CCMS
         end
 
         context 'DATE_ASSESSMENT_STARTED' do
-          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Date.today) }
+          before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
           it "inserts today's date as a string" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'DATE_ASSESSMENT_STARTED')
-              expect(block).to have_date_response Date.today.strftime('%d-%m-%Y')
+              expect(block).to have_date_response Time.zone.today.strftime('%d-%m-%Y')
             end
           end
         end
@@ -800,7 +800,7 @@ module CCMS
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
-                     used_delegated_functions_on: Date.today
+                     used_delegated_functions_on: Time.zone.today
             end
 
             it 'returns SUBDP' do
@@ -837,7 +837,7 @@ module CCMS
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
-                     used_delegated_functions_on: Date.today
+                     used_delegated_functions_on: Time.zone.today
             end
 
             it 'returns hard coded statement' do
@@ -1078,7 +1078,7 @@ module CCMS
         end
 
         context 'GB_INPUT_D_18WP2_1A - application submission date' do
-          let(:dummy_date) { Faker::Date.between(from: 20.days.ago, to: Date.today) }
+          let(:dummy_date) { Faker::Date.between(from: 20.days.ago, to: Time.zone.today) }
           it 'inserts the submission date into the attribute block' do
             allow(legal_aid_application).to receive(:calculation_date).and_return(dummy_date)
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_D_18WP2_1A')
@@ -1411,7 +1411,7 @@ module CCMS
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
-                     used_delegated_functions_on: Date.today
+                     used_delegated_functions_on: Time.zone.today
             end
 
             it 'returns false' do
@@ -1442,7 +1442,7 @@ module CCMS
                      provider: provider,
                      office: office,
                      used_delegated_functions: true,
-                     used_delegated_functions_on: Date.today
+                     used_delegated_functions_on: Time.zone.today
             end
 
             it 'returns Both' do

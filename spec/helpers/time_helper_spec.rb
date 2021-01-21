@@ -5,7 +5,7 @@ RSpec.describe TimeHelper, type: :helper do
     let(:days) { 2 }
 
     before do
-      new_time = Time.local(2020, 10, 1, 1, 0, 0)
+      new_time = Time.zone.local(2020, 10, 1, 1, 0, 0)
       travel_to(new_time)
     end
     it 'returns a valid date' do

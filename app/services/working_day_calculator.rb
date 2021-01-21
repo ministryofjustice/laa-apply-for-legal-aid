@@ -5,7 +5,7 @@ class WorkingDayCalculator
     call(working_days: number)
   end
 
-  def self.call(working_days:, from: Date.today)
+  def self.call(working_days:, from: Time.zone.today)
     new(from).working_days_from_date(working_days)
   end
 

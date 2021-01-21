@@ -25,7 +25,7 @@ RSpec.describe 'offline savings accounts', type: :request do
 
       it 'displays the offline savings accounts question' do
         subject
-        expect(response.body).to include(I18n.translate('providers.offline_savings_accounts.show.h1-heading'))
+        expect(response.body).to include(I18n.t('providers.offline_savings_accounts.show.h1-heading'))
       end
     end
   end

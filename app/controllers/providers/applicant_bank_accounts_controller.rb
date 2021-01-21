@@ -24,7 +24,7 @@ module Providers
     end
 
     def reset_account_balance
-      return unless legal_aid_application.savings_amount.present?
+      return if legal_aid_application.savings_amount.blank?
 
       legal_aid_application.savings_amount[:offline_savings_accounts] = nil
       legal_aid_application.savings_amount.save

@@ -38,7 +38,7 @@ module Providers
     end
 
     def error_message
-      return unless form.errors.present?
+      return if form.errors.blank?
 
       "#{I18n.t('accessibility.problem_text')} #{form.errors.messages[:original_file].first}"
     end
