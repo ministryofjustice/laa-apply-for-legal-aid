@@ -824,6 +824,7 @@ Feature: Civil application journeys
     When I click link "Back"
     Then I should be on the "other_assets" page showing "Which types of assets does your client have?"
     When I deselect "None of these"
+    Then I bind and pry
     And I click "Save and continue"
     Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
     Then I select "None of these"
