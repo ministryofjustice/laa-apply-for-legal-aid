@@ -114,6 +114,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
+  gem 'rubocop-rails', require: false
 
   # Available in dev env for generators
   gem 'rspec-rails', '~> 4.0'
