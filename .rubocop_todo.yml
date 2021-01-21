@@ -36,3 +36,7 @@ Metrics/MethodLength:
 
 # TODO: Files are excluded from Rails/OutputSafety, which needs fixing
 # Rails/OutputSafety
+
+# TODO: Enable this in rubocop. This requires changes to migration files and thus lots of testing.
+# Rails/BulkChangeTable:
+#   Enabled: false
