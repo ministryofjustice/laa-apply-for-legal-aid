@@ -30,10 +30,10 @@ class SubmitApplicationReminderService
 
   def five_days_before_deadline
     five_days_before = WorkingDayCalculator.call(working_days: -5, from: application.substantive_application_deadline_on)
-    five_days_before.to_time + 9.hours
+    five_days_before + 9.hours
   end
 
   def nine_am_deadline_day
-    application.substantive_application_deadline_on.to_time + 9.hours
+    application.substantive_application_deadline_on + 9.hours
   end
 end

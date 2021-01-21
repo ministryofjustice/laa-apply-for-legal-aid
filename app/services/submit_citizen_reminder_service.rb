@@ -44,7 +44,7 @@ class SubmitCitizenReminderService
 
   def one_day_after_initial
     tomorrow = Time.zone.today + 1.day
-    tomorrow.to_time + 9.hours
+    tomorrow + 9.hours
   end
 
   def url_expiry_date
@@ -53,6 +53,6 @@ class SubmitCitizenReminderService
 
   def nine_am_deadline_day
     deadline = Time.zone.today + 7.days
-    deadline.to_time + 9.hours
+    deadline + 9.hours
   end
 end
