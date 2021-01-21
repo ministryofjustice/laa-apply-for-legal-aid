@@ -69,6 +69,10 @@ Rails/OutputSafety:
     - 'app/helpers/*'
     - 'app/forms/applicants/open_banking_consent_form.rb'
 
+Rails/ReversibleMigration:
+  Exclude:
+    - 'db/migrate/*'
+
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 
