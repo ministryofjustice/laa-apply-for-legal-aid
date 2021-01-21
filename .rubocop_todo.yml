@@ -45,3 +45,6 @@ Metrics/MethodLength:
 # Rails/ReversibleMigration:
 #   Exclude:
 #     - 'db/migrate/*'
+
+# TODO: Files are excluded from Rails/SkipsModelValidations . Include them, please.
+# Rails/SkipsModelValidations:
