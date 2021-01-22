@@ -119,15 +119,6 @@ Rails/InverseOf:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-# Configuration parameters: Include.
-# Include: **/Rakefile, **/*.rake
-Rails/RakeEnvironment:
-  Exclude:
-    - 'lib/tasks/erblint.rake'
-    - 'lib/tasks/javascript_tests.rake'
-
-# Offense count: 2
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: conservative, aggressive
 Rails/ShortI18n:
