@@ -64,7 +64,7 @@ en:
           rent_or_mortgage: Housing costs
           child_care: Childcare costs
           maintenance_out: Maintenance payments
-          legal_aid: Payments towards legal aid in a criminal casefeatures/step_definitions/citizens_steps.rb:38
+          legal_aid: Payments towards legal aid in a criminal case
       vehicle:
         purchased_on_day: Day
         purchased_on_month: Month
