@@ -27,7 +27,6 @@ module Citizens
     end
 
     def send_emails
-      ProviderEmailService.new(legal_aid_application).send_email
       CitizenCompletionEmailService.new(legal_aid_application).send_email
     end
   end
