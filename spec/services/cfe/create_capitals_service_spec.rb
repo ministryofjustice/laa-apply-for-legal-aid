@@ -4,7 +4,7 @@ module CFE
   RSpec.describe CreateCapitalsService do
     let!(:application) { create :legal_aid_application, :with_applicant, with_bank_accounts: 6 }
     let!(:other_assets_declaration) { my_other_asset_declaration }
-    let!(:savings_amount) { my_savings_amount }
+    # let!(:savings_amount) { my_savings_amount }
     let(:submission) { create :cfe_submission, aasm_state: 'applicant_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
@@ -17,6 +17,7 @@ module CFE
     end
 
     describe '#request payload' do
+      let!(:savings_amount) { my_savings_amount }
       it 'creates the expected payload from the values in the applicant' do
         response_hash = JSON.parse(service.request_body, symbolize_names: true)
         response_hash.each_key do |key|
@@ -33,6 +34,7 @@ module CFE
       end
 
       context 'successful post' do
+        let!(:savings_amount) { my_savings_amount }
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
         it 'updates the submission record from applicant_created to capitals_created' do
@@ -61,7 +63,7 @@ module CFE
       end
 
       context 'nil current account on savings amount' do
-        let(:savings_amount) { savings_amount_with_nil_current_account }
+        let!(:savings_amount) { savings_amount_with_nil_current_account }
 
         it 'does not send any data for current account' do
           stub_request(:post, service.cfe_url).with(body: expected_payload_without_current_account.to_json).to_return(body: dummy_response)
