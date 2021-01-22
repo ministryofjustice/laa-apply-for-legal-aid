@@ -348,9 +348,9 @@ class LegalAidApplication < ApplicationRecord
     lead_proceeding_type.default_cost_limitation_delegated_functions
   end
 
-  def ccms_submission
-    create_ccms_submission! unless super
-    super
+  def find_or_create_ccms_submission
+    create_ccms_submission! unless ccms_submission
+    ccms_submission
   end
 
   def ccms_submission_date
