@@ -134,7 +134,8 @@ class LegalAidApplication < ApplicationRecord
   # at which time this method should be changed to determine which is the lead one and return that.
   #
   def lead_proceeding_type
-    proceeding_types.first
+    lead_proceeding = application_proceeding_types.where(lead_proceeding: true)
+    ProceedingType.find(lead_proceeding.first.proceeding_type_id)
   end
 
   def cfe_result

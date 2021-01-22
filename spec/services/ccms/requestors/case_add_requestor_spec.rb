@@ -42,10 +42,13 @@ module CCMS
                  trust_value: 600
         end
         let(:scope_limitation) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
+        let(:scope_limitation2) { create :scope_limitation, code: 'AA002', description: 'In ut quia. Enim exercitationem nemo. Temporibus illum modi.' }
+        let(:scope_limitation3) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
         let(:address) { create :address, postcode: 'GH08NY' }
         let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
         let(:firm) { create :firm, ccms_id: 169 }
         let(:proceeding_type) { create :proceeding_type, :with_real_data }
+        let(:proceeding_type2) { create :proceeding_type, :with_real_data }
         let(:respondent) { create :respondent, police_notified: true }
         let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
@@ -74,6 +77,10 @@ module CCMS
         it 'generates the expected xml' do
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
             test_data_xml = ccms_data_from_file 'case_add_request.xml'
+            # puts"this is the test data"
+            # pp test_data_xml
+            # puts "this is the expected"
+            # pp expected_xml
             expect(expected_xml).to eq test_data_xml
           end
         end

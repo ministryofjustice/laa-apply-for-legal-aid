@@ -187,7 +187,7 @@ module CCMS
         xml.__send__('ns2:Proceeding') do
           xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
           xml.__send__('ns2:Status', 'Draft')
-          xml.__send__('ns2:LeadProceedingIndicator', true)
+          xml.__send__('ns2:LeadProceedingIndicator', application_proceeding_type.lead_proceeding)
           xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, ProceedingType.find(application_proceeding_type.proceeding_type_id)) }
         end
       end
@@ -203,7 +203,7 @@ module CCMS
       end
 
       def generate_scope_limitations(xml)
-        @legal_aid_application.scope_limitations.each { |limitation| generate_scope_limitation(xml, limitation) }
+        @legal_aid_application.scope_limitations.uniq(&:code).each { |limitation| generate_scope_limitation(xml, limitation) }
       end
 
       def generate_scope_limitation(xml, limitation)
