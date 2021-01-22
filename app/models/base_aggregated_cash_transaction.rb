@@ -88,7 +88,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     __send__("month#{month_number}")
   end
 
-  def update_attributes(params)
+  def update_cash_attributes(params)
     params.each do |key, value|
       __send__("#{key}=", value)
     end
