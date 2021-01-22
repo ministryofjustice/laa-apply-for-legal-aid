@@ -29,7 +29,7 @@ class BankTransaction < ApplicationRecord
   end
 
   def self.for_type(transaction_type_name)
-    transaction_type = TransactionType.where(name: transaction_type_name).first
+    transaction_type = TransactionType.find_by(name: transaction_type_name)
     return [] if transaction_type.nil?
 
     where(transaction_type_id: transaction_type.id)
