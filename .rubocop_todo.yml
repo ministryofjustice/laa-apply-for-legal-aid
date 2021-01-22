@@ -117,14 +117,6 @@ Rails/InverseOf:
     - 'app/models/legal_aid_application.rb'
     - 'app/models/proceeding_type.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: conservative, aggressive
-Rails/ShortI18n:
-  Exclude:
-    - 'app/lib/govuk_elements_form_builder/form_builder.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.
