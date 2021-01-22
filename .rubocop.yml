@@ -59,9 +59,6 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 7
 
-Rails/BulkChangeTable:
-  Enabled: false
-
 Rails/OutputSafety:
   Exclude:
     - 'spec/**/*'
