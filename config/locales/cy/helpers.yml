@@ -43,11 +43,6 @@ cy:
         success_likely:
           'false': 'oN'
           'true': seY
-      other_assets_declaration:
-        check_box_second_home: emoh yadiloh ro ytreporp dnoceS
-        second_home_mortgage: tnuoma egagtrom gnidnatstuo retnE
-        second_home_percentage: nwo yllagel uoy erahs egatnecrep retnE
-        second_home_value: eulav detamitse retnE
       legal_aid_application:
         own_vehicle:
           'false': 'oN'
