@@ -12,7 +12,7 @@ module Reports
       def initialize(transactions)
         super()
         @txn_array = transactions
-        @txn_hash = @txn_array.index_by { |txn| txn.id }
+        @txn_hash = @txn_array.index_by(&:id)
       end
 
       def call
