@@ -59,7 +59,19 @@ module CFE
       describe 'failed calls to CFE' do
         it_behaves_like 'a failed call to CFE'
       end
+
+      context 'nil current account on savings amount' do
+        let(:savings_amount) { savings_amount_with_nil_current_account }
+
+        it 'does not send any data for current account' do
+          stub_request(:post, service.cfe_url).with(body: expected_payload_without_current_account.to_json).to_return(body: dummy_response)
+          expect(submission.aasm_state).to eq 'applicant_created'
+          CreateCapitalsService.call(submission)
+          expect(submission.aasm_state).to eq 'capitals_created'
+        end
+      end
     end
+
     def my_other_asset_declaration
       create :other_assets_declaration,
              :with_all_values,
@@ -72,6 +84,16 @@ module CFE
       create :savings_amount,
              :with_values,
              legal_aid_application: application,
+             plc_shares: nil,
+             peps_unit_trusts_capital_bonds_gov_stocks: 0.0,
+             life_assurance_endowment_policy: nil
+    end
+
+    def savings_amount_with_nil_current_account
+      create :savings_amount,
+             :with_values,
+             legal_aid_application: application,
+             offline_current_accounts: nil,
              plc_shares: nil,
              peps_unit_trusts_capital_bonds_gov_stocks: 0.0,
              life_assurance_endowment_policy: nil
@@ -126,6 +148,12 @@ module CFE
             value: other_assets_declaration.trust_value.to_s }
         ]
       }
+    end
+
+    def expected_payload_without_current_account
+      hash = expected_payload_hash.clone
+      hash[:bank_accounts].shift
+      hash
     end
 
     def dummy_response_hash
