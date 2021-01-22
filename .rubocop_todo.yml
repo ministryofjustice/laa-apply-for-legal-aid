@@ -45,14 +45,6 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 13
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: NilOrEmpty, NotPresent, UnlessPresent.
-Rails/Blank:
-  Exclude:
-    - 'app/helpers/capital_helper.rb'
-    - 'app/lib/govuk_elements_form_builder/form_builder.rb'
-
 # Offense count: 29
 # Configuration parameters: Database, Include.
 # SupportedDatabases: mysql, postgresql

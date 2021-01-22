@@ -263,7 +263,7 @@ module GovukElementsFormBuilder
       return unless error?(attribute, options)
 
       message = options[:error] || object.errors[attribute].first
-      return unless message.present?
+      return if message.blank?
 
       content_tag(:span, class: 'govuk-error-message', id: "#{attribute}-error") do
         content_tag(:span, I18n.translate('helpers.accessibility.error'), class: 'govuk-visually-hidden') + message

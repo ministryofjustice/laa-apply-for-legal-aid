@@ -17,7 +17,7 @@ module CapitalHelper
   def build_asset_list(attributes, locale_namespace, percentage_values)
     items = capital_amount_items(attributes, locale_namespace, percentage_values)
     items&.compact!
-    return nil unless items.present?
+    return nil if items.blank?
 
     {
       items: items,
