@@ -106,17 +106,6 @@ Rails/HelperInstanceVariable:
     - 'app/helpers/page_template_helper.rb'
     - 'app/helpers/transaction_type_helper.rb'
 
-# Offense count: 11
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/InverseOf:
-  Exclude:
-    - 'app/models/applicant.rb'
-    - 'app/models/bank_provider.rb'
-    - 'app/models/cfe/submission.rb'
-    - 'app/models/legal_aid_application.rb'
-    - 'app/models/proceeding_type.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.

@@ -22,22 +22,22 @@ class LegalAidApplication < ApplicationRecord
   has_one :merits_assessment, dependent: :destroy
   has_one :statement_of_case, dependent: :destroy
   has_one :respondent, dependent: :destroy
-  has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: :Incident, dependent: :destroy
+  has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: :Incident, inverse_of: :legal_aid_application, dependent: :destroy
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :cash_transactions, dependent: :destroy
   has_many :irregular_incomes, dependent: :destroy
   has_many :dependants, dependent: :destroy
-  has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', dependent: :destroy
+  has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
-  has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment'
-  has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment'
-  has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment'
-  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', dependent: :destroy
-  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission'
+  has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
+  has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
+  has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
+  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application
   has_many :scheduled_mailings, dependent: :destroy
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
 
