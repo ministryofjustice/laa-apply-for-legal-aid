@@ -81,6 +81,8 @@ module CFE
       items = []
       field_names_and_descriptions.each do |field_name, field_description|
         value = model.__send__(field_name)
+        next if value.nil?
+
         items << description_and_value(field_description, value) if not_nil_or_zero?(value)
       end
       items
