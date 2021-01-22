@@ -117,12 +117,6 @@ Rails/InverseOf:
     - 'app/models/legal_aid_application.rb'
     - 'app/models/proceeding_type.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Rails/NegateInclude:
-  Exclude:
-    - 'app/helpers/language_switcher_helper.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: Include.

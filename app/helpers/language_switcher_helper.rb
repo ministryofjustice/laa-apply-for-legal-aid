@@ -11,7 +11,7 @@ module LanguageSwitcherHelper
   end
 
   def show_language_switcher?
-    citizen_page? && !pages_without_language_switcher.include?(request.path)
+    citizen_page? && pages_without_language_switcher.exclude?(request.path)
   end
 
   def citizen_page?
