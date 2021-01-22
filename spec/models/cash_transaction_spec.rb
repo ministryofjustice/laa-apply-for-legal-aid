@@ -39,7 +39,7 @@ RSpec.describe CashTransaction, type: :model do
         expect(ctx.period_end).to eq '28 Feb'
       end
     end
-    end
+  end
 
   def expected_result1
     {
