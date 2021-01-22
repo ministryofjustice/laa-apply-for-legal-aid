@@ -14,7 +14,7 @@ class DateValidator < ActiveModel::EachValidator
 
   def parse_date(date_str, format)
     format ||= DEFAULT_FORMAT
-    Date.strptime(date_str, format)
+    Time.strptime(date_str, format).in_time_zone
   rescue StandardError
     nil
   end
