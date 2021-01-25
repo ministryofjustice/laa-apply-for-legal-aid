@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('DOMContentLoaded', event => {
   /*
     Usage:
       Required: A group of checkboxes,
@@ -7,15 +7,16 @@ $(function() {
       Enclose the checkbox group with a div of class "deselect-group"
         and set it's "data-deselect-ctrl" to the jquery identifier for the control checkbox
   */
-  $('.deselect-group').each(function() {
-    const container = $(this)
-    const control = $(container.data('deselect-ctrl'))
-    const checkboxMemory = []
-    const checkboxes = container.find("input:checkbox")
-    const hiddenFieldMemory = []
-    const hideableFields = container.find('.govuk-checkboxes__conditional')
 
-    if(!control.length) return
+  document.querySelectorAll('.deselect-group').forEach((container) => {
+
+    let control = document.querySelector(container.getAttribute('data-deselect-ctrl'));
+
+    let checkboxMemory = [];
+    let checkboxes = container.querySelectorAll('input[type=checkbox]');
+
+    let hiddenFieldMemory = [];
+    let hideableFields = container.querySelectorAll('.govuk-checkboxes__conditional');
 
     /*
       Monitor changes of the control
@@ -26,34 +27,35 @@ $(function() {
       If deselected:
         Set each checkbox based on its remembered state
     */
-    control.change( function() {
-      const controlChecked = this.checked
+
+    control.addEventListener("change", function() {
+      let controlChecked = this.checked;
 
       if (this.checked) {
-        control.prop("checked", true ).val(true)
+        control.checked = true;
+        control.value = true;
       } else {
-        control.prop("checked", false ).val('')
+        control.checked = false;
+        control.value = '';
       }
 
-      checkboxes.each(function(index) {
-        const checkbox = $(this)
+      checkboxes.forEach((checkbox, index) => {
         if(controlChecked) {
-          checkboxMemory[index] = this.checked
-          checkbox.prop("checked", false)
+          checkboxMemory[index] = checkbox.checked;
+          checkbox.checked = false;
         } else {
-          checkbox.prop("checked", checkboxMemory[index])
+          checkbox.checked = checkboxMemory[index];
         }
       })
 
-      hideableFields.each(function (index) {
-        const hideableField = $(this)
+      hideableFields.forEach((hideableField, index) => {
         if (controlChecked) {
-          if (!hideableField.hasClass('govuk-checkboxes__conditional--hidden')) {
-            hideableField.addClass('govuk-checkboxes__conditional--hidden')
-            hiddenFieldMemory[index] = true
+          if (!hideableField.classList.contains('govuk-checkboxes__conditional--hidden')) {
+            hideableField.classList.add('govuk-checkboxes__conditional--hidden');
+            hiddenFieldMemory[index] = true;
           }
         } else if (hiddenFieldMemory[index]){
-            hideableField.removeClass('govuk-checkboxes__conditional--hidden')
+            hideableField.classList.remove('govuk-checkboxes__conditional--hidden');
         }
       })
     })
@@ -62,8 +64,13 @@ $(function() {
       Monitor changes to the checkboxes within the container.
       If one is selected, deselect the control.
     */
-    checkboxes.change( function() {
-      if(this.checked) { control.prop("checked", false ).val(false) }
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function() {
+        if(checkbox.checked) {
+          control.checked = false;
+          control.value = '';
+        }
+      })
     })
   })
 })
