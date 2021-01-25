@@ -4,6 +4,7 @@
     ) do %>
 
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         scope: :address_lookup,
         url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
@@ -14,7 +15,7 @@
     <%= govuk_form_group show_error_if: @form.errors.present? do %>
       <%= govuk_fieldset_header page_title %>
 
-      <%= form.govuk_text_field :postcode, class: 'govuk-input--width-10' %>
+      <%= form.govuk_text_field :postcode, width: 10 %>
     <% end %>
 
     <%= next_action_buttons(

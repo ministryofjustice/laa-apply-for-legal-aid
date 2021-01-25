@@ -11,9 +11,9 @@ RSpec.describe Providers::Draftable do
           first_name: 'John',
           last_name: 'Doe',
           national_insurance_number: 'AA 12 34 56 C',
-          dob_year: '1981',
-          dob_month: '07',
-          dob_day: '11'
+          date_of_birth_1i: '1981',
+          date_of_birth_2i: '07',
+          date_of_birth_3i: '11'
         }
       }
     end
@@ -74,7 +74,7 @@ RSpec.describe Providers::Draftable do
           subject
 
           expect(unescaped_response_body).to include('There is a problem')
-          expect(unescaped_response_body).to include('national_insurance_number-error')
+          expect(unescaped_response_body).to include('applicant-national-insurance-number-field-error')
         end
 
         it 'does NOT create a new applicant' do

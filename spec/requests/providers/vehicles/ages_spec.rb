@@ -29,9 +29,9 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
       it 'page includes radio button yes which is checked' do
         subject
         parsed_response = Nokogiri::HTML.parse(response.body)
-        true_radio = parsed_response.css('input#vehicle_more_than_three_years_old_true')
+        true_radio = parsed_response.css('input#vehicle-more-than-three-years-old-true-field')
         expect(true_radio.attr('checked').text).to eq 'checked'
-        false_radio = parsed_response.css('input#vehicle_more_than_three_years_old_false')
+        false_radio = parsed_response.css('input#vehicle-more-than-three-years-old-false-field')
         expect(false_radio.attr('checked')).to be_nil
       end
     end

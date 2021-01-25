@@ -17,8 +17,9 @@ module Providers
 
     def form_params
       merge_with_model(incident) do
+        convert_date_params('incident')
         params.require(:incident).permit(
-          :told_day, :told_month, :told_year, :occurred_day, :occurred_month, :occurred_year
+          :told_on_1i, :told_on_2i, :told_on_3i, :occurred_on_1i, :occurred_on_2i, :occurred_on_3i
         )
       end
     end

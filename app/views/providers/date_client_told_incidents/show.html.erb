@@ -5,30 +5,21 @@
     ) do %>
 
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_date_client_told_incident_path,
         method: :patch,
         local: true
       ) do |form| %>
 
-    <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= govuk_fieldset_header page_title, padding_below: 4 %>
-
-      <%= date_input_fields(
-            prefix: :told,
-            field_name: :told_on,
-            width: :full,
-            set_error_class_here: false,
-            form: form
-          ) %>
+    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>
+      <%= form.govuk_date_field :told_on, legend: { text: t("shared.forms.date_input_fields.told_on_label") },
+                                hint: { text: t("shared.forms.date_input_fields.told_on_hint")} %>
+      <%= form.govuk_date_field :occurred_on, legend: { text: t("shared.forms.date_input_fields.occurred_on_label") } %>
     <% end %>
 
-    <%= date_input_fields(
-          prefix: :occurred,
-          field_name: :occurred_on,
-          width: :full,
-          form: form
-        ) %>
+    <div class="govuk-!-padding-bottom-4"></div>
+
     <%= next_action_buttons(show_draft: true, form: form) %>
 
   <% end %>

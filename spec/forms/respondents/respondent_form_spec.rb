@@ -2,12 +2,66 @@ require 'rails_helper'
 
 RSpec.describe Respondents::RespondentForm, type: :form do
   let(:respondent) { create :respondent }
-  let(:sample_respondent) { build :respondent }
   let(:i18n_scope) { 'activemodel.errors.models.respondent.attributes' }
   let(:custom_params) { {} }
-  let(:sample_params) { sample_respondent.attributes.except('id', 'legal_aid_application_id', 'created_at', 'updated_at').transform_values(&:to_s) }
+  let(:sample_params) do
+    {
+      'understands_terms_of_court_order' => 'false',
+      'understands_terms_of_court_order_details' => 'New understands terms of court order details',
+      'warning_letter_sent' => 'false',
+      'warning_letter_sent_details' => 'New warning letter sent details',
+      'police_notified' => 'true',
+      'police_notified_details_true' => 'Reasons police not notified details',
+      'bail_conditions_set' => 'true',
+      'bail_conditions_set_details' => 'New bail conditions set details',
+      'full_name' => 'Hiram Schulist'
+    }
+  end
+  let(:i18n_scope) { 'activemodel.errors.models.respondent.attributes' }
+  let(:custom_params) { {} }
 
   subject { described_class.new(sample_params.merge(custom_params).merge(model: respondent)) }
+
+  describe 'extrapolate_police_notified_details' do
+    context 'when loaded via params' do
+      subject { described_class.new(params) }
+      let(:params) do
+        {
+          'understands_terms_of_court_order': 'false',
+          'understands_terms_of_court_order_details': 'terms of court order details ',
+          'warning_letter_sent': 'false',
+          'warning_letter_sent_details': 'warning letter sent details',
+          'police_notified': police_notified,
+          'police_notified_details': police_notified_details,
+          'bail_conditions_set': 'true',
+          'bail_conditions_set_details': 'bail condition set details',
+          'full_name': 'Bob Smith'
+        }
+      end
+
+      context 'with police_notified false' do
+        let(:police_notified) { 'false' }
+        let(:police_notified_details) { 'reasons police not told' }
+
+        it 'extrapolates the police_notified_details for display on the page' do
+          expect(subject.police_notified).to eq 'false'
+          expect(subject.police_notified_details_false).to eq 'reasons police not told'
+          expect(subject.police_notified_details_true).to eq nil
+        end
+      end
+
+      context 'with police_notified true' do
+        let(:police_notified) { 'true' }
+        let(:police_notified_details) { 'reasons police told' }
+
+        it 'extrapolates the police_notified_details for display on the page' do
+          expect(subject.police_notified).to eq 'true'
+          expect(subject.police_notified_details_false).to eq nil
+          expect(subject.police_notified_details_true).to eq 'reasons police told'
+        end
+      end
+    end
+  end
 
   describe '#save' do
     before do
@@ -16,14 +70,14 @@ RSpec.describe Respondents::RespondentForm, type: :form do
     end
 
     it 'updates the respondent' do
-      expect(respondent.understands_terms_of_court_order).to eq(sample_respondent.understands_terms_of_court_order)
-      expect(respondent.understands_terms_of_court_order_details).to eq(sample_respondent.understands_terms_of_court_order_details)
-      expect(respondent.warning_letter_sent).to eq(sample_respondent.warning_letter_sent)
-      expect(respondent.warning_letter_sent_details).to eq(sample_respondent.warning_letter_sent_details)
-      expect(respondent.police_notified).to eq(sample_respondent.police_notified)
-      expect(respondent.police_notified_details).to eq(sample_respondent.police_notified_details)
-      expect(respondent.bail_conditions_set).to eq(sample_respondent.bail_conditions_set)
-      expect(respondent.bail_conditions_set_details).to eq(sample_respondent.bail_conditions_set_details)
+      expect(respondent.understands_terms_of_court_order).to eq(false)
+      expect(respondent.understands_terms_of_court_order_details).to eq(sample_params['understands_terms_of_court_order_details'])
+      expect(respondent.warning_letter_sent).to eq(false)
+      expect(respondent.warning_letter_sent_details).to eq(sample_params['warning_letter_sent_details'])
+      expect(respondent.police_notified).to eq(true)
+      expect(respondent.police_notified_details).to eq(sample_params['police_notified_details_true'])
+      expect(respondent.bail_conditions_set).to eq(true)
+      expect(respondent.bail_conditions_set_details).to eq(sample_params['bail_conditions_set_details'])
     end
 
     context "details are empty but they don't have to be entered" do
@@ -82,11 +136,11 @@ RSpec.describe Respondents::RespondentForm, type: :form do
         {
           understands_terms_of_court_order: 'false',
           warning_letter_sent: 'false',
-          police_notified: %w[true false].sample,
+          police_notified: 'true',
           bail_conditions_set: 'true',
           understands_terms_of_court_order_details: '',
           warning_letter_sent_details: '',
-          police_notified_details: '',
+          police_notified_details_true: '',
           bail_conditions_set_details: ''
         }
       end
@@ -122,14 +176,14 @@ RSpec.describe Respondents::RespondentForm, type: :form do
     end
 
     it 'updates the respondent' do
-      expect(respondent.understands_terms_of_court_order).to eq(sample_respondent.understands_terms_of_court_order)
-      expect(respondent.understands_terms_of_court_order_details).to eq(sample_respondent.understands_terms_of_court_order_details)
-      expect(respondent.warning_letter_sent).to eq(sample_respondent.warning_letter_sent)
-      expect(respondent.warning_letter_sent_details).to eq(sample_respondent.warning_letter_sent_details)
-      expect(respondent.police_notified).to eq(sample_respondent.police_notified)
-      expect(respondent.police_notified_details).to eq(sample_respondent.police_notified_details)
-      expect(respondent.bail_conditions_set).to eq(sample_respondent.bail_conditions_set)
-      expect(respondent.bail_conditions_set_details).to eq(sample_respondent.bail_conditions_set_details)
+      expect(respondent.understands_terms_of_court_order).to eq(false)
+      expect(respondent.understands_terms_of_court_order_details).to eq(sample_params['understands_terms_of_court_order_details'])
+      expect(respondent.warning_letter_sent).to eq(false)
+      expect(respondent.warning_letter_sent_details).to eq(sample_params['warning_letter_sent_details'])
+      expect(respondent.police_notified).to eq(true)
+      expect(respondent.police_notified_details).to eq(sample_params['police_notified_details_true'])
+      expect(respondent.bail_conditions_set).to eq(true)
+      expect(respondent.bail_conditions_set_details).to eq(sample_params['bail_conditions_set_details'])
     end
 
     context 'radio button are empty' do

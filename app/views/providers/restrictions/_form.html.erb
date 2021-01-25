@@ -1,34 +1,15 @@
-<%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header page_title, size: 'l', padding_below: 4 %>
+<%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: model, url: url, method: :patch, local: true) do |form| %>
 
-      <p class="govuk-body"><%= for_example %></p>
-      <%= list_from_translation_path ".restrictions.show.examples" %>
-      <div class="govuk-!-padding-bottom-4"></div>
-
-      <%= govuk_error_message(@form.errors[:has_restrictions].first) %>
-      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-        <%= form.govuk_radio_button(
-          :has_restrictions,
-          true,
-          label: t('generic.yes'),
-          checked: @form.has_restrictions.to_s == 'true',
-          'data-aria-controls' => 'conditional-true') %>
-
-        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
-          <%= govuk_error_message(@form.errors[:restrictions_details].first) %>
-          <%= form.govuk_text_area :restrictions_details, rows: 5, label: details %>
-        </div>
-
-        <%= form.govuk_radio_button(
-          :has_restrictions,
-          false,
-          label: t('generic.no'),
-          checked: @form.has_restrictions.to_s == 'false'
-        ) %>
-      </div>
-    </fieldset>
+  <%= form.govuk_radio_buttons_fieldset(:has_restrictions,
+                                        legend: { size: 'xl', tag: 'h1', text: page_title},
+                                        hint: {text: list_from_translation_path(".restrictions.show.examples") }) do %>
+    <%= form.govuk_radio_button :has_restrictions, true, label: { text: t('generic.yes') } do %>
+      <%= form.govuk_text_area :restrictions_details,
+                               label: { text: details }, rows: 5 %>
+    <% end %>
+    <%= form.govuk_radio_button :has_restrictions, false, label: { text: t('generic.no') } %>
   <% end %>
 
   <%= next_action_buttons(

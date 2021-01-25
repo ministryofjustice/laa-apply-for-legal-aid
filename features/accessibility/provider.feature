@@ -29,8 +29,7 @@ Feature: Provider accessibility
     Then I search for proceeding 'Non-molestation order'
     Then I select a proceeding type and continue
     Then I should be on a page showing 'Have you used delegated functions?'
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
+    And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
@@ -100,8 +99,7 @@ Feature: Provider accessibility
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Enter dependant details'
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
+    And the page is accessible
     Given I add the details for a child dependant
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any other dependants?"
@@ -151,9 +149,8 @@ Feature: Provider accessibility
     Then I fill "Estimated value" with "4000"
     And I click "Save and continue"
     Then I should be on a page showing "Are there any payments left on the vehicle?"
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
-    Then I choose option "Vehicle payments remain true"
+    And the page is accessible
+    Then I choose "Yes"
     Then I fill "Payment remaining" with "2000"
     And I click "Save and continue"
     Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
@@ -162,7 +159,7 @@ Feature: Provider accessibility
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
     And the page is accessible
-    Then I choose option "Vehicle used regularly true"
+    Then I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page showing "Your client’s bank accounts"
     And the page is accessible
@@ -173,19 +170,16 @@ Feature: Provider accessibility
     Then I fill 'Offline savings accounts' with '3000'
     And I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
+    And the page is accessible
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
+    And the page is accessible
     Then I select "Any valuable items worth £500 or more"
     And I fill 'Valuable items value' with '600'
     Then I click 'Save and continue'
     Then I should be on a page showing 'any legal restrictions'
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
+    And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
@@ -224,25 +218,24 @@ Feature: Provider accessibility
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-#    error - allowed ARIA attributes only (radio buttons)
-#    And the page is accessible
-    Then I choose option "Respondent understands terms of court order True"
-    Then I choose option "Respondent warning letter sent True"
-    Then I choose option "Respondent police notified True"
-    Then I choose option "Respondent bail conditions set True"
+    And the page is accessible
+    Then I choose option "Respondent understands terms of court order True field"
+    Then I choose option "Respondent warning letter sent True field"
+    Then I choose option "Respondent police notified True field"
+    Then I choose option "Respondent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
     And the page is accessible
-    Then I fill "Statement" with "Statement of case"
+    Then I fill "Statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     And the page is accessible
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "What is the chance of a successful outcome?"
-#    And the page is accessible
+    And the page is accessible
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'

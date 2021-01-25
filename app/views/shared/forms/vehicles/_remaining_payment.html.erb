@@ -1,46 +1,27 @@
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
       url: form_path,
       method: :patch,
       local: true
     ) do |form| %>
 
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header page_title %>
+  <%= form.govuk_radio_buttons_fieldset(:payments_remain,
+                                        legend: { size: 'xl', tag: 'h1', text: page_title },
+                                        hint: {text: t('.detail_of_payments_to_include')}) do %>
+    <%= form.govuk_radio_button(:payments_remain, true, label: {text: t('generic.yes')} ) do %>
+      <%= form.govuk_text_field(
+              :payment_remaining,
+              label: {text: t('.enter_amount_left_to_pay')},
+              value: number_to_currency_or_original_string(@form.payment_remaining),
+              prefix_text: t('currency.gbp'),
+              width: 'one-third',
+          ) %>
+    <% end %>
+    <%= form.govuk_radio_button(:payments_remain, false, label: {text:  t('generic.no')}) %>
 
-      <%= govuk_hint t('.detail_of_payments_to_include') %>
-
-        <%= render 'shared/show_errors' %>
-
-      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-        <%= form.govuk_radio_button(
-              :payments_remain,
-              true,
-              label: t('generic.yes'),
-              'data-aria-controls' => 'conditional-true',
-              checked: @form.payments_remain? || @form.model.payment_remaining?
-            ) %>
-
-        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
-          <%= form.govuk_text_field(
-                :payment_remaining,
-                label: t('.enter_amount_left_to_pay'),
-                value: number_to_currency_or_original_string(@form.payment_remaining),
-                input_prefix: t('currency.gbp'),
-                class: 'govuk-!-width-one-third'
-              ) %>
-        </div>
-
-        <%= form.govuk_radio_button(
-              :payments_remain,
-              false,
-              label: t('generic.no'),
-              checked: @form.model.payment_remaining&.zero? && !@form.payments_remain?
-            ) %>
-      </div>
-    </fieldset>
   <% end %>
+
   <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,

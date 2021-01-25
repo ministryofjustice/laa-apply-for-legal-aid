@@ -496,8 +496,11 @@ en:
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
-        h2-heading: Select all that apply
-        none_selected: None of these
+      second_home_conditional_checkbox:
+        check_box_second_home: Second property or holiday home
+        second_home_mortgage: Enter outstanding mortgage amount
+        second_home_percentage: Enter percentage share you legally own
+        second_home_value: Enter estimated value
     policy_disregards:
       show:
         h1-heading: Select if your client has received payments from these schemes or charities
@@ -728,6 +731,7 @@ en:
     vehicles:
       show:
         heading: Does your client own a vehicle?
+        hint: This includes cars, vans and motorcyles
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?

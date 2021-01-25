@@ -1,21 +1,17 @@
 <%
   check_box_attribute = "check_box_#{attribute}"
-  conditional_div_id = "conditional_#{attribute}"
   hint = controller_t "hint.#{check_box_attribute}", default: ''
   revealing_hint = controller_t "hint.revealing_#{check_box_attribute}", default: ''
   value = model.send(attribute)
-  checked = value.present? || model.send(check_box_attribute).present? ? 'checked' : ''
+  @form.__send__("#{check_box_attribute}=", value.present?)
 %>
-
-<div class="govuk-checkboxes__item revealing-checkbox">
-  <%= form.check_box check_box_attribute, { class: 'govuk-checkboxes__input', 'data-aria-controls' => conditional_div_id, checked: checked }, 'true', '' %>
-  <%= form.label check_box_attribute, controller_t(check_box_attribute), class: 'govuk-label govuk-checkboxes__label' %>
-  <%= govuk_hint(hint, class: 'govuk-checkboxes__hint') if hint.present? %>
-</div>
-<div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="<%= conditional_div_id %>">
-  <%= form.govuk_text_field attribute, label: controller_t(attribute),
-                                       hint: (govuk_hint(revealing_hint, class: 'govuk-checkboxes__hint') if revealing_hint.present?),
-                                       input_prefix: t('currency.gbp'),
-                                       value: number_to_currency_or_original_string(value),
-                                       class: 'govuk-!-width-one-third' %>
-</div>
+<%= form.govuk_check_box check_box_attribute, true, multiple: false, link_errors: true,
+                         label: {text: controller_t(check_box_attribute)},
+                         hint: {text: hint} do %>
+  <%= form.govuk_text_field attribute, multiple: false,
+                            value: number_to_currency_or_original_string(value),
+                            label: {text: controller_t(attribute)},
+                            hint: {text: revealing_hint},
+                            prefix_text: t('currency.gbp'),
+                            width: 'one-third' %>
+<% end %>

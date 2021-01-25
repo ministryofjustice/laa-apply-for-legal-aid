@@ -19,7 +19,6 @@ en:
           providers: ""
         percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
         property_value: You can use property websites to find the estimated value
-        own_vehicle: This includes cars, vans and motorcycles
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       search: 'Application search:'
@@ -38,11 +37,6 @@ en:
         success_prospect_details: Tell us why legal aid should be granted
         success_likely:
           <<: *true_false
-      other_assets_declaration:
-        check_box_second_home: Second property or holiday home
-        second_home_mortgage: Enter outstanding mortgage amount
-        second_home_percentage: Enter percentage share you legally own
-        second_home_value: Enter estimated value
       legal_aid_application:
         own_vehicle:
           <<: *true_false

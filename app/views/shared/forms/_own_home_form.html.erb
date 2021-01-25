@@ -1,14 +1,20 @@
-<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
+<%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: @form,
+        url: form_path,
+        method: :patch,
+        local: true) do |form| %>
 
   <%
     options = [
-      { value: :mortgage,       label: t('.mortgage') },
-      { value: :owned_outright, label: t('.owned_outright') },
-      { value: :no,             label: t('.no') }
+        OpenStruct.new( value: :mortgage, label: t('.mortgage')),
+        OpenStruct.new(value: :owned_outright, label: t('.owned_outright')),
+        OpenStruct.new(value: :no, label: t('.no'))
     ]
   %>
 
-  <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label, title: content_for(:page_title)) %>
+  <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label,
+                                          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) %>
 
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,

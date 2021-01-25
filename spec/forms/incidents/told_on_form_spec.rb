@@ -26,9 +26,9 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
     context 'when occurred on is invalid' do
       let(:params) do
         {
-          occurred_year: occurred_on.year.to_s,
-          occurred_month: '55',
-          occurred_day: occurred_on.day.to_s
+          occurred_on_1i: occurred_on.year.to_s,
+          occurred_on_2i: '55',
+          occurred_on_3i: occurred_on.day.to_s
         }
       end
       let(:error_locale) { 'occurred_on.date_not_valid' }
@@ -45,9 +45,9 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
     context 'when told on is invalid' do
       let(:params) do
         {
-          told_year: told_on.year.to_s,
-          told_month: '55',
-          told_day: told_on.day.to_s
+          told_on_1i: told_on.year.to_s,
+          told_on_2i: '55',
+          told_on_3i: told_on.day.to_s
         }
       end
       let(:error_locale) { 'told_on.date_not_valid' }
@@ -90,9 +90,9 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
     context 'with told date entered in parts' do
       let(:params) do
         {
-          told_year: told_on.year.to_s,
-          told_month: told_on.month.to_s,
-          told_day: told_on.day.to_s
+          told_on_1i: told_on.year.to_s,
+          told_on_2i: told_on.month.to_s,
+          told_on_3i: told_on.day.to_s
         }
       end
 
@@ -133,9 +133,9 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { 'occurred_on.date_not_valid' }
       let(:params) do
         {
-          occurred_year: occurred_on.year.to_s,
-          occurred_month: '',
-          occurred_day: occurred_on.day.to_s
+          occurred_on_1i: occurred_on.year.to_s,
+          occurred_on_2i: '',
+          occurred_on_3i: occurred_on.day.to_s
         }
       end
 
@@ -152,9 +152,9 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
       let(:error_locale) { 'told_on.date_not_valid' }
       let(:params) do
         {
-          told_year: told_on.year.to_s,
-          told_month: '',
-          told_day: told_on.day.to_s
+          told_on_1i: told_on.year.to_s,
+          told_on_2i: '',
+          told_on_3i: told_on.day.to_s
         }
       end
 

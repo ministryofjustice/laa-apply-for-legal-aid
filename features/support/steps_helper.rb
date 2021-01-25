@@ -39,8 +39,18 @@ Then('I click {string}') do |button_name|
   click_button(button_name)
 end
 
+# Search name and id attributes of input and textarea elements which contain the field string
+# Match examples:
+# <input name=field ... >
+# <input name=string[field] ... >
+# <textarea name=string[field] ... >
+# <input id=field ... >
 Then('I fill {string} with {string}') do |field, value|
-  fill_in(field.parameterize(separator: '_'), with: value)
+  field.downcase!
+  field_id = field.gsub(/\s+/, '-')
+  field.gsub!(/\s+/, '_')
+  name = find("input[name*=#{field}], textarea[name*=#{field}], ##{field_id}")[:name]
+  fill_in(name, with: value)
 end
 
 Then('I upload a pdf file') do
@@ -52,7 +62,7 @@ Then('I reload the page') do
 end
 
 Then('I choose option {string}') do |field|
-  choose(field.parameterize(separator: '_'), allow_label_click: true)
+  choose(field.parameterize(separator: '-'), allow_label_click: true)
 end
 
 # This can be used to display the state of the application

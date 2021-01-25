@@ -447,12 +447,11 @@ cy:
                 eht retnE
               plc_shares: denwo lla fo eulav latot eht retnE
       shared_ownership_form:
-        shared_ownership_item:
-          friend_family_member_or_other_individual: laudividni rehto ro rebmem ylimaf
-            ,dneirf a ,seY
-          housing_assocation_or_landlord: droldnal ro noitaicossa gnisuoh a ,seY
-          no_sole_owner: renwo elos eht er'yeht ,oN
-          partner_or_ex_partner: rentrap-xe ro rentrap a ,seY
+        friend_family_member_or_other_individual: laudividni rehto ro rebmem ylimaf
+          ,dneirf a ,seY
+        housing_assocation_or_landlord: droldnal ro noitaicossa gnisuoh a ,seY
+        no_sole_owner: renwo elos eht er'yeht ,oN
+        partner_or_ex_partner: rentrap-xe ro rentrap a ,seY
       success_prospect:
         success_prospect_item:
           likely: retteb ro %05

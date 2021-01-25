@@ -1,19 +1,20 @@
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
       url: form_path,
       method: :patch,
       local: true
     ) do |form| %>
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <%= form.govuk_collection_radio_buttons(
+
+  <%= form.govuk_collection_radio_buttons(
           :used_regularly,
-          form.yes_no_radio_button_array,
+          yes_no_options,
           :value,
           :label,
-          title: page_title,
-          hint: t('.include_partner_use')
-        ) %>
-  <% end %>
+          legend: {size: 'xl', tag: 'h1', text: page_title},
+          hint: {text: t('.include_partner_use')}
+          ) %>
+
   <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,

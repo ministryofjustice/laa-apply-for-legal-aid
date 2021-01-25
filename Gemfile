@@ -92,6 +92,9 @@ gem 'secure_headers'
 # Identify file types before uploads
 gem 'mimemagic'
 
+# DFE formbuilder
+gem 'govuk_design_system_formbuilder'
+
 # Sprockets isn't used by the app but is installed by rails as a dependency.
 # Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
 # This pins sprockets to an earlier version to prevent those errors

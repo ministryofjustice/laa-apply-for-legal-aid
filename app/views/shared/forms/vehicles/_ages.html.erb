@@ -1,18 +1,18 @@
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
       url: form_path,
       method: :patch,
       local: true
     ) do |form| %>
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <%= form.govuk_collection_radio_buttons(
+
+  <%= form.govuk_collection_radio_buttons(
           :more_than_three_years_old,
-          form.yes_no_radio_button_array,
+          yes_no_options,
           :value,
           :label,
-          title: page_title
-        ) %>
-  <% end %>
+          legend: {size: 'xl', tag: 'h1', text: page_title},
+      ) %>
 
   <div class="govuk-!-padding-bottom-4"></div>
   <%= next_action_buttons(

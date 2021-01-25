@@ -1,6 +1,6 @@
 <%= render 'accounts_summary', bank_accounts: bank_accounts if bank_accounts.any? %>
 
-<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
+<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
   <%= govuk_form_group show_error_if: @form.errors.present? do %>
     <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">

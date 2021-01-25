@@ -1,0 +1,30 @@
+<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: model, url: url, method: :patch, local: true) do |form| %>
+
+    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title}, described_by: 'select-all-that-apply-hint' do %>
+
+    <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+
+    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+      <div class="deselect-group" data-deselect-ctrl="[name='other_assets_declaration[none_selected]']">
+      <%= render partial: '/shared/forms/revealing_checkbox/attribute',
+                 collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
+                 locals: { model: model, form: form } %>
+      <%= render partial: '/providers/other_assets/second_home_conditional_checkbox', locals: { model: model, form: form } %>
+      <%= render partial: '/shared/forms/revealing_checkbox/attribute',
+                 collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
+                 locals: { model: model, form: form } %>
+      </div>
+    </div>
+
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, '', multiple: false, link_errors: true, label: {text: t('generic.none_selected')} %>
+
+  <% end %>
+
+  <div class="govuk-!-padding-bottom-4"></div>
+
+  <%= next_action_buttons(
+        show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+        form: form
+      ) %>
+<% end %>

@@ -4,6 +4,7 @@
       back_link: { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
     ) do %>
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_success_likely_index_path,
         method: :post,
@@ -12,10 +13,10 @@
 
     <%= form.govuk_collection_radio_buttons(
           :success_likely,
-          form.yes_no_radio_button_array,
+          yes_no_options,
           :value,
           :label,
-          title: content_for(:page_title)
+          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}
         ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>

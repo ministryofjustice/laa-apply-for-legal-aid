@@ -235,7 +235,7 @@ Feature: Civil application journeys
     Then I select a proceeding type and continue
     Then I should be on a page showing 'Have you used delegated functions?'
     Then I choose 'Yes'
-    Then I enter the 'used delegated functions' date of 2 days ago
+    Then I enter the 'used delegated functions on' date of 2 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "Covered under an emergency certificate"
@@ -543,8 +543,8 @@ Feature: Civil application journeys
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    When I select 'None of these'
-    And I click 'Save and continue'
+    Then I select "None of these"
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'may need to pay towards legal aid'
@@ -559,17 +559,17 @@ Feature: Civil application journeys
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-    Then I choose option "Respondent understands terms of court order True"
-    Then I choose option "Respondent warning letter sent True"
-    Then I choose option "Respondent police notified True"
-    Then I choose option "Respondent bail conditions set True"
+    Then I choose option "Respondent understands terms of court order True field"
+    Then I choose option "Respondent warning letter sent True field"
+    Then I choose option "Respondent police notified True field"
+    Then I choose option "Respondent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "Statement" with "Statement of case"
+    Then I fill "Statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
@@ -678,16 +678,16 @@ Feature: Civil application journeys
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-    Then I choose option "Respondent understands terms of court order True"
-    Then I choose option "Respondent warning letter sent True"
-    Then I choose option "Respondent police notified True"
-    Then I choose option "Respondent bail conditions set True"
+    Then I choose option "Respondent understands terms of court order True field"
+    Then I choose option "Respondent warning letter sent True field"
+    Then I choose option "Respondent police notified True field"
+    Then I choose option "Respondent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "Statement" with "Statement of case"
+    Then I fill "Statement of case statement field" with "Statement of case"
     Then I upload a pdf file
     Then I click 'Upload'
     Then I reload the page
@@ -703,7 +703,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
-    Then I enter the statement 'This is some test data for the statement of case'
+    Then I enter the statement of case statement field 'This is some test data for the statement of case'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
@@ -792,14 +792,14 @@ Feature: Civil application journeys
     Then I fill "Estimated value" with "4000"
     And I click "Save and continue"
     Then I should be on a page showing "Are there any payments left on the vehicle?"
-    Then I choose option "Vehicle payments remain true"
+    Then I choose "Yes"
     Then I fill "Payment remaining" with "2000"
     And I click "Save and continue"
     Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
     Then I choose 'Yes'
     And I click "Save and continue"
     Then I should be on a page showing "Is the vehicle in regular use?"
-    Then I choose option "Vehicle used regularly true"
+    Then I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select 'None of these'

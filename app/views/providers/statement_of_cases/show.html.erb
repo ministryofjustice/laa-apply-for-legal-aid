@@ -66,15 +66,15 @@
     </div>
 
     <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,
           local: true
         ) do |form| %>
-      <div class="govuk-radios__divider"><%= t('generic.or') %></div>
+      <%= form.govuk_radio_divider %>
 
-      <label class="govuk-heading-m" for="statement"><%= t('generic.enter_text') %></label>
-      <%= form.govuk_text_area :statement, label: nil, rows: 15 %>
+      <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
 
       <%= next_action_buttons(show_draft: true, form: form) %>
     <% end %>

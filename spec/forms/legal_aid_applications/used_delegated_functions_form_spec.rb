@@ -14,9 +14,9 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
 
   let(:params) do
     {
-      used_delegated_functions_day: day.to_s,
-      used_delegated_functions_month: month.to_s,
-      used_delegated_functions_year: year.to_s,
+      used_delegated_functions_on_3i: day.to_s,
+      used_delegated_functions_on_2i: month.to_s,
+      used_delegated_functions_on_1i: year.to_s,
       used_delegated_functions: used_delegated_functions.to_s
     }
   end
@@ -168,9 +168,9 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       let(:error_locale) { 'used_delegated_functions_on.date_not_valid' }
       let(:params) do
         {
-          used_delegated_functions_year: year.to_s,
-          used_delegated_functions_month: '',
-          used_delegated_functions_day: day.to_s,
+          used_delegated_functions_on_1i: year.to_s,
+          used_delegated_functions_on_2i: '',
+          used_delegated_functions_on_3i: day.to_s,
           used_delegated_functions: used_delegated_functions.to_s
         }
       end
