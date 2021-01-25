@@ -47,7 +47,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   # Raises error for missing translations
-  config.action_view.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   # Policy Disregards feature flag
   config.x.policy_disregards_start_date = Date.parse('2020-12-1')

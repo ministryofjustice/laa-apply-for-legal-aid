@@ -12,17 +12,11 @@ gem 'govuk_notify_rails', '~> 2.1.2'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 5.1'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.1'
 gem 'regexp-examples'
 gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
 gem 'simple_command', github: 'nebulab/simple_command', branch: 'master'
-
-# Sprockets isn't used by the app but is installed by rails as a dependency.
-# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
-# This pins sprockets to an earlier version to prevent those errors
-gem 'sprockets', '< 4'
-
 gem 'tzinfo-data'
 gem 'webdack-uuid_migration', '~> 1.3.0'
 
@@ -32,10 +26,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Authentication
 gem 'devise', '>= 4.7.1' # User authentication
 gem 'devise_saml_authenticatable', '>= 1.6.2'
-gem 'omniauth', '>= 1.9.1'
-gem 'omniauth-google-oauth2', '>= 0.8.0'
-gem 'omniauth-oauth2', '>= 1.6.0' # Provide Oauth2 strategy framework
-gem 'omniauth-rails_csrf_protection', '~> 0.1', '>= 0.1.2'
+gem 'omniauth', '>= 2.0.0'
+gem 'omniauth-google-oauth2', '>= 0.8.1'
+gem 'omniauth-oauth2', '>= 1.7.1' # Provide Oauth2 strategy framework
+gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 0.1.2'
 
 # Improve backtrace in nested error recues
 gem 'nesty'
@@ -59,7 +53,7 @@ gem 'jwt'
 
 # background processing
 gem 'redis-namespace'
-gem 'sidekiq', '~> 6.1.2'
+gem 'sidekiq', '~> 6.1.3'
 gem 'sidekiq_alive', '>= 2.0.1'
 gem 'sidekiq-status', '>= 1.1.4'
 
@@ -101,11 +95,16 @@ gem 'mimemagic'
 # DFE formbuilder
 gem 'govuk_design_system_formbuilder'
 
+# Sprockets isn't used by the app but is installed by rails as a dependency.
+# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
+# This pins sprockets to an earlier version to prevent those errors
+gem 'sprockets', '< 4'
+
 group :development, :test do
   gem 'awesome_print', '~> 1.8.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '>= 2.7.5'
-  gem 'erb_lint', require: false
+  gem 'erb_lint', '0.0.37', require: false
   gem 'htmlentities'
   gem 'i18n-tasks', '>= 0.9.31'
   gem 'json_expressions'
@@ -146,6 +145,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'vcr'
-  gem 'webdrivers', '~> 4.4'
+  gem 'webdrivers', '~> 4.5'
   gem 'webmock'
 end

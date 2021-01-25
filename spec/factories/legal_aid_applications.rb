@@ -32,6 +32,7 @@ FactoryBot.define do
         state_machine = FactoryBot.build(:non_passported_state_machine, legal_aid_application: application)
         application.update!(state_machine: state_machine)
       end
+      non_passported
     end
 
     trait :with_passported_state_machine do
@@ -39,6 +40,7 @@ FactoryBot.define do
         state_machine = FactoryBot.build(:passported_state_machine, legal_aid_application: application)
         application.update!(state_machine: state_machine)
       end
+      passported
     end
 
     trait :initiated do
@@ -209,6 +211,16 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         application.save
+      end
+    end
+
+    trait :with_multiple_proceeding_types do
+      after(:create) do |application, evaluator|
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1, :with_real_data)
+        application.proceeding_types << create(:proceeding_type, :as_occupation_order)
+        pt = application.lead_proceeding_type
+        create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        AddScopeLimitationService.call(application, :substantive)
       end
     end
 

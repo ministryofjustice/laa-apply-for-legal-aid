@@ -30,6 +30,21 @@ FactoryBot.define do
       involvement_type_applicant { true }
     end
 
+    trait :as_occupation_order do
+      code { 'PR0214' }
+      ccms_code { 'DA005' }
+      meaning { 'Occupation order' }
+      description { 'to be represented on an application for an occupation order.' }
+      ccms_category_law { 'Family' }
+      ccms_category_law_code { 'MAT' }
+      ccms_matter { 'Domestic Abuse' }
+      ccms_matter_code { 'MINJN' }
+      default_service_level_id { create(:service_level, :with_real_data).id }
+      default_cost_limitation_delegated_functions { 1350 }
+      default_cost_limitation_substantive { 25_000 }
+      involvement_type_applicant { true }
+    end
+
     trait :with_scope_limitations do
       after(:create) do |proceeding_type|
         proceeding_type.scope_limitations << create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)

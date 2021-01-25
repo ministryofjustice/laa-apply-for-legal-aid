@@ -247,4 +247,3 @@ Feature: Provider accessibility
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
     And the page is accessible
-

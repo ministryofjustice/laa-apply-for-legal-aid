@@ -26,13 +26,31 @@
       <% if @legal_aid_application.transaction_types.credits.count < TransactionType.credits.count %>
         <%= render partial: 'add_other_income' %>
       <% end %>
-    <% if @legal_aid_application.student_finance? %>
-      <li>
-        <h3 class="govuk-heading-m govuk-!-padding-top-6">Student finance</h3>
-        <p class="gov-body">Your client also told us they'll get <%= gds_number_to_currency(@legal_aid_application.value_of_student_finance) %> in student finance this academic year.</p>
-      </li>
-    <% end %>
   </ol>
+
+    <% if  @legal_aid_application.student_finance? || @legal_aid_application.cash_transactions.credits.exists? %>
+
+    <hr>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+
+      <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
+
+      <p class="gov-body"><%= t('.following_payments') %></p>
+    <% end %>
+
+    <% if @legal_aid_application.student_finance? %>
+      <div>
+       <h3 class="govuk-heading-m govuk-!-padding-top-6"><%= t('.student_finance') %></h3>
+        <p class="gov-body"><%= t('.client_told_us') %> <%= gds_number_to_currency(@legal_aid_application.value_of_student_finance) %><%= t('.academic_year') %></p>
+      </div>
+    <% end %>
+
+  <% if @legal_aid_application.cash_transactions.credits.exists? %>
+
+    <%= render partial: 'shared/cash_transactions' %>
+
+  <% end %>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_income_summary_index_path,

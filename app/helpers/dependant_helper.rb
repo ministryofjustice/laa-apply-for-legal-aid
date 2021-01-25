@@ -2,7 +2,7 @@ module DependantHelper
   include CheckAnswersHelper
 
   ATTRIBUTES = %i[
-    name
+    _name
     date_of_birth
     relationship
     in_full_time_education
@@ -22,11 +22,11 @@ module DependantHelper
 
   def dependant_as_array(dependant)
     ATTRIBUTES&.map do |attribute|
-      send(attribute, dependant)
+      __send__(attribute, dependant)
     end
   end
 
-  def name(dependant)
+  def _name(dependant)
     build_ostruct(
       t('name', scope: 'providers.means_summaries.show.dependants'),
       dependant.name

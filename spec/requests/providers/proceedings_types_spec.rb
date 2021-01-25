@@ -106,10 +106,55 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
 
     context 'with proceeding types' do
       let!(:proceeding_type) { create :proceeding_type, legal_aid_applications: [legal_aid_application] }
+      let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
+      let(:params) do
+        {
+          id: proceeding_type.id,
+          continue_button: 'Continue'
+        }
+      end
 
       it 'redirects to next step' do
         subject
         expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
+      end
+
+      context 'with setting.allow_multiple_proceedings set to true' do
+        let(:proceeding_type_service) { double(ProceedingTypesService, add: true) }
+
+        before do
+          allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
+          allow(ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+        end
+
+        it 'redirects to next step' do
+          subject
+          expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
+        end
+
+        it 'calls the proceeding types service' do
+          expect(proceeding_type_service).to receive(:add).with(proceeding_type_id: proceeding_type.id, scope_limitation: :substantive)
+          subject
+        end
+
+        context 'ProceedingTypesService call returns false' do
+          let(:proceeding_type_service) { double(ProceedingTypesService, add: false) }
+
+          before do
+            allow(ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+          end
+
+          it 'renders index' do
+            subject
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'displays errors' do
+            subject
+            expect(response.body).to include('govuk-input--error')
+            expect(response.body).to include('govuk-form-group--error')
+          end
+        end
       end
     end
 

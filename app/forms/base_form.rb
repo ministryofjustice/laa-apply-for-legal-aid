@@ -84,7 +84,7 @@ module BaseForm
 
     def assignable_attributes
       exclude_attrs = exclude_from_model + [:model]
-      attributes.except(*exclude_attrs.map(&:to_s))
+      attributes.deep_stringify_keys!.except(*exclude_attrs.map(&:to_s))
     end
 
     def attributes
@@ -125,7 +125,7 @@ module BaseForm
 
     # Over-riding ActiveModel::AttributeAssignment method to store attributes as they are built
     def _assign_attribute(key, value)
-      attributes[key] = value
+      attributes[key.to_s] = value
       super
     end
 

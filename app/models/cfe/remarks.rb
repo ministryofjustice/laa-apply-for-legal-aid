@@ -54,13 +54,9 @@ module CFE
       @hash.each do |category, reason_hash|
         case reason_hash
         when Array
-          reason_hash.each do |reason|
-            result[category] += [reason.to_sym] unless REASONS_WITHOUT_CATEGORIES.include? reason
-          end
+          reason_hash.each { |reason| result[category] += [reason.to_sym] unless REASONS_WITHOUT_CATEGORIES.include? reason }
         else
-          reason_hash.each_key do |reason|
-            result[reason] += [category] unless REASONS_WITHOUT_CATEGORIES.include? reason
-          end
+          reason_hash.each_key { |reason| result[reason] += [category] unless REASONS_WITHOUT_CATEGORIES.include? reason }
         end
       end
       result

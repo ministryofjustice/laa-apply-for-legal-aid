@@ -80,31 +80,49 @@ Feature: Civil application journeys
     Then proceeding search field is empty
 
   @javascript @vcr
-  Scenario: I am able to select multiple proceeding types
-    Given I skip the rest of this scenario until multiple proceeding types are supported
+  Scenario: Completes the application using address lookup
+    Given the setting to allow multiple proceedings is enabled
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
-    Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
-    Then I expect to see 0 proceeding types selected
-    And I search for proceeding 'app'
+    Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    When I select proceeding type 3
-    Then I expect to see 1 proceeding types selected
-    And I search for proceeding 'child'
-    When I select proceeding type 1
-    Then I expect to see 2 proceeding types selected
-    When I click 'Save and continue'
-    Then I should be on a page showing "What you're applying for"
+    Then I choose a 'Non-molestation order' radio button
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'You have added 1 proceeding'
+    Then I should be on a page showing 'Non-molestation order'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Search for legal proceedings'
+    Then I search for proceeding 'Occupation order'
+    Then proceeding suggestions has results
+    Then I choose a 'Occupation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You have added 2 proceedings'
+    Then I should be on a page showing 'Non-molestation order'
+    Then I should be on a page showing 'Occupation order'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I click the first link 'Remove'
+    Then I click the first link 'Remove'
+    Then I should be on a page showing 'Search for legal proceedings'
+    Then I search for proceeding 'FGM Protection Order'
+    Then proceeding suggestions has results
+    Then I choose a 'FGM Protection Order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You have added 1 proceeding'
+    Then I should be on a page showing 'FGM Protection Order'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Have you used delegated functions?'
 
   @javascript
   Scenario: I complete each step up to the applicant page

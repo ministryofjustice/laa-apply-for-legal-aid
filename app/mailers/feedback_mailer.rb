@@ -13,7 +13,7 @@ class FeedbackMailer < BaseApplyMailer
 
   private
 
-  def personalise(feedback) # rubocop:disable Metrics/AbcSize
+  def personalise(feedback) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     set_personalisation(
       created_at: feedback.created_at&.to_time.to_s(:rfc822),
       user_data: user_data(feedback),

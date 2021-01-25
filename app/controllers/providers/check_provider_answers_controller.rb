@@ -3,7 +3,7 @@ module Providers
     include PreDWPCheckVisible
 
     def index
-      return redirect_to_means_summary if legal_aid_application.provider_assessing_means?
+      return redirect_to_client_completed_means if legal_aid_application.provider_assessing_means?
 
       set_variables
       legal_aid_application.check_applicant_details! unless status_change_not_required?
@@ -29,8 +29,8 @@ module Providers
 
     # This handles the situation where a provider is viewing providers/applications and a citizens completes their
     # journey - causing the link to the application to be out of step with the provider step.
-    def redirect_to_means_summary
-      redirect_to providers_legal_aid_application_means_summary_path(legal_aid_application)
+    def redirect_to_client_completed_means
+      redirect_to providers_legal_aid_application_client_completed_means_path(legal_aid_application)
     end
 
     def status_change_not_required?

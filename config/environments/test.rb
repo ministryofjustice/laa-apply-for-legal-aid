@@ -50,7 +50,7 @@ Rails.application.configure do
   config.x.policy_disregards_start_date = Date.parse('2021-1-8')
 
   # Raises error for missing translations
-  config.action_view.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   Rails.application.routes.default_url_options[:host] = 'www.example.com'
 
@@ -61,6 +61,11 @@ Rails.application.configure do
   config.x.support_email_address = config.x.simulated_email_address
 
   config.x.email_domain.suffix = '@test.test'
+
+  unless ENV['RAILS_ENABLE_TEST_LOG']
+    config.logger = ActiveSupport::Logger.new(nil)
+    config.log_level = :fatal
+  end
 
   # Dummy url for provider details api
   config.x.provider_details.url = 'http://dummy-provider-details-api/'

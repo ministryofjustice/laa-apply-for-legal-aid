@@ -152,8 +152,8 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
 
       context 'when client has completed their journey' do
         let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address, :with_non_passported_state_machine, :provider_assessing_means) }
-        it 'redirects to means summary' do
-          expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
+        it 'redirects to client completed means page' do
+          expect(response).to redirect_to(providers_legal_aid_application_client_completed_means_path(application))
         end
       end
     end

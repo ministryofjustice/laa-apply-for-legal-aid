@@ -16,24 +16,24 @@ module CCMS
 
     BASE_DELAY = 5.seconds.freeze
 
-    def process!(options = {}) # rubocop:disable Metrics/MethodLength
-      case aasm_state
-      when 'initialised'
-        CCMS::Submitters::ObtainCaseReferenceService.call(self)
-      when 'case_ref_obtained'
-        CCMS::Submitters::ObtainApplicantReferenceService.call(self)
-      when 'applicant_submitted'
-        CCMS::Submitters::CheckApplicantStatusService.call(self)
-      when 'applicant_ref_obtained'
-        CCMS::Submitters::ObtainDocumentIdService.call(self)
-      when 'document_ids_obtained'
-        CCMS::Submitters::AddCaseService.call(self, options)
-      when 'case_submitted'
-        CCMS::Submitters::CheckCaseStatusService.call(self)
-      when 'case_created'
-        CCMS::Submitters::UploadDocumentsService.call(self)
+    STATE_SERVICES = {
+      initialised: CCMS::Submitters::ObtainCaseReferenceService,
+      case_ref_obtained: CCMS::Submitters::ObtainApplicantReferenceService,
+      applicant_submitted: CCMS::Submitters::CheckApplicantStatusService,
+      applicant_ref_obtained: CCMS::Submitters::ObtainDocumentIdService,
+      document_ids_obtained: CCMS::Submitters::AddCaseService,
+      case_submitted: CCMS::Submitters::CheckCaseStatusService,
+      case_created: CCMS::Submitters::UploadDocumentsService
+    }.freeze
+
+    def process!(options = {})
+      service = STATE_SERVICES[aasm_state.to_sym]
+      raise CCMSError, "Submission #{id} - Unknown state: #{aasm_state}" if service.nil?
+
+      if aasm_state.eql?('document_ids_obtained')
+        service.call(self, options)
       else
-        raise CCMSError, "Submission #{id} - Unknown state: #{aasm_state}"
+        service.call(self)
       end
     end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :request do
   let(:admin_user) { create :admin_user }
-  let(:legal_aid_application) { create(:legal_aid_application, :with_everything) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_everything, :with_ccms_submission) }
 
   before { sign_in admin_user }
 
@@ -17,6 +17,15 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
     it 'displays correct application' do
       subject
       expect(response.body).to include(legal_aid_application.application_ref)
+    end
+
+    context 'when no ccms submission exists' do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_everything) }
+
+      it 'does not display submission data' do
+        subject
+        expect(response.body).not_to include('CCMS Submission')
+      end
     end
   end
 
