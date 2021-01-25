@@ -63,7 +63,7 @@ module CFE
     end
 
     def savings_account_balance
-      return unless legal_aid_application.online_current_accounts_balance.present?
+      return unless legal_aid_application.online_savings_accounts_balance.present?
 
       {
         description: 'Online savings accounts',
