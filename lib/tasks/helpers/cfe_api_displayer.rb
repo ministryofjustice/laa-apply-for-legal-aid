@@ -28,9 +28,9 @@ class CfeApiDisplayer
       logger.info "#{transaction_type.name}:"
       txs.each do |tx|
         logger.info format('   %<date>s %<amount>.2f %<description>s',
-                    date: tx.happened_at.strftime('%F'),
-                    amount: tx.amount,
-                    description: tx.description)
+                           date: tx.happened_at.strftime('%F'),
+                           amount: tx.amount,
+                           description: tx.description)
       end
     end
   end
