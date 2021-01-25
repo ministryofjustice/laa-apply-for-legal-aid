@@ -831,10 +831,10 @@ RSpec.describe LegalAidApplication, type: :model do
 
         before do
           application.used_delegated_functions = true
-          ApplicationJob.queue_adapter = :test
+          ActiveJob::Base.queue_adapter = :test
         end
 
-        after { ApplicationJob.queue_adapter = :sidekiq }
+        after { ActiveJob::Base.queue_adapter = :sidekiq }
 
         it 'fires an ActiveSupport::Notification' do
           expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
