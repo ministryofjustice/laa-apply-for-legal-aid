@@ -10,7 +10,7 @@
       <%= render 'shared/show_errors' unless @form.any_checkbox_checked? %>
 
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="[name='savings_amount[none_selected]']">
+        <div class="deselect-group" data-deselect-ctrl="#savings_amount_none_selected">
           <%= render partial: 'shared/forms/revealing_checkbox/attribute',
                      collection: attributes,
                      locals: { model: @form, form: form } %>

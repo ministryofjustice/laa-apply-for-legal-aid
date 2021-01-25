@@ -11,7 +11,7 @@
                                    legend: { text: page_title, size: "xl" },
                                    hint: { text: t('generic.select_all_that_apply')} do %>
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-      <div class="deselect-group" data-deselect-ctrl="[name='savings_amount[no_account_selected]']">
+      <div class="deselect-group" data-deselect-ctrl="#savings_amount_no_account_selected">
         <%= render partial: 'shared/forms/revealing_checkbox/attribute',
                    collection: attributes,
                    locals: { model: @form, form: form } %>
