@@ -59,24 +59,6 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 7
 
-Rails/OutputSafety:
-  Exclude:
-    - 'spec/**/*'
-    - 'app/lib/**/*'
-    - 'app/helpers/*'
-    - 'app/forms/applicants/open_banking_consent_form.rb'
-
-Rails/ReversibleMigration:
-  Exclude:
-    - 'db/migrate/*'
-
-Rails/SkipsModelValidations:
-  Exclude:
-    - 'db/migrate/*'
-    - 'app/workers/true_layer_banks_update_worker.rb'
-    - 'app/workers/bank_holiday_update_worker.rb'
-    - 'app/controllers/providers/transactions_controller.rb'
-
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 
