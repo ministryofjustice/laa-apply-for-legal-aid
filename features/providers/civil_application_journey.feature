@@ -846,6 +846,19 @@ Feature: Civil application journeys
     Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"
     Then I select "None of these"
     Then I click "Save and continue"
+    Then I should be on a page showing "Check your answers"
+    And I click Check Your Answers Change link for 'policy disregards'
+    Then I should be on a page showing 'schemes or charities'
+    Then I select 'None of these'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
+    And the answer for 'policy disregards' should be 'None declared'
+    Then I click Check Your Answers Change link for 'policy disregards'
+    And I deselect 'None of these'
+    Then I click 'Save and continue'
+    Then I should be on the 'policy_disregards' page showing 'Select if your client has received any of these payments'
+    Then I select "None of these"
+    Then I click "Save and continue"
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check

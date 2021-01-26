@@ -11,14 +11,14 @@
                                    legend: { text: page_title, size: "xl" },
                                    hint: { text: t('generic.select_all_that_apply')} do %>
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-      <div class="deselect-group" data-deselect-ctrl="#savings_amount_no_account_selected">
+      <div class="deselect-group" data-deselect-ctrl="#savings-amount-no-account-selected-true-field">
         <%= render partial: 'shared/forms/revealing_checkbox/attribute',
                    collection: attributes,
                    locals: { model: @form, form: form } %>
       </div>
     </div>
     <%= form.govuk_radio_divider %>
-    <%= form.govuk_check_box :no_account_selected, true, multiple: false, label: {text: no_account_selected} %>
+    <%= form.govuk_check_box :no_account_selected, true, '', multiple: false, label: {text: no_account_selected} %>
 
   <% end %>
 

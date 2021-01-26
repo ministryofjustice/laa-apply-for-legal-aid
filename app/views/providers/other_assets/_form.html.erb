@@ -5,7 +5,7 @@
     <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-      <div class="deselect-group" data-deselect-ctrl="#other_assets_declaration_none_selected">
+      <div class="deselect-group" data-deselect-ctrl="#other-assets-declaration-none-selected-true-field">
       <%= render partial: '/shared/forms/revealing_checkbox/attribute',
                  collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
                  locals: { model: model, form: form } %>

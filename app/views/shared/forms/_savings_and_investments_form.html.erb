@@ -2,31 +2,18 @@
 
 <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
-      <%= govuk_fieldset_header page_title %>
-      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
-
-      <%= render 'shared/show_errors' unless @form.any_checkbox_checked? %>
-
-      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="#savings_amount_none_selected">
-          <%= render partial: 'shared/forms/revealing_checkbox/attribute',
-                     collection: attributes,
-                     locals: { model: @form, form: form } %>
-        </div>
+  <%= form.govuk_check_boxes_fieldset :bank_accounts,
+                                      legend: { text: page_title, size: "xl" },
+                                      hint: { text: t('generic.select_all_that_apply')} do %>
+    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+      <div class="deselect-group" data-deselect-ctrl="#savings-amount-none-selected-true-field">
+        <%= render partial: 'shared/forms/revealing_checkbox/attribute',
+                   collection: attributes,
+                   locals: { model: @form, form: form } %>
       </div>
-
-      <div class="govuk-radios__divider tickbox_divider"><%= or_break %></div>
-
-      <div class="govuk-checkboxes">
-        <div class="govuk-checkboxes__item">
-          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input' }, true, '' %>
-          <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
-        </div>
-      </div>
-
-    </fieldset>
+    </div>
+    <%= form.govuk_radio_divider %>
+    <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: none_selected} %>
   <% end %>
 
   <%= next_action_buttons(
