@@ -1,9 +1,8 @@
 <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: model, url: url, method: :patch, local: true) do |form| %>
 
-    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title}, described_by: 'select-all-that-apply-hint' do %>
-
-    <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
-
+    <%= form.govuk_check_boxes_fieldset :other_assets,
+                                        legend: { text: page_title, size: "xl", tag: 'h1'},
+                                        hint: { text: t('generic.select_all_that_apply')} do %>
     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
       <div class="deselect-group" data-deselect-ctrl="#other-assets-declaration-none-selected-true-field">
       <%= render partial: '/shared/forms/revealing_checkbox/attribute',
