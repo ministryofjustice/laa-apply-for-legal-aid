@@ -6,7 +6,7 @@ module StatementOfCases
 
     attr_accessor :statement, :original_file, :provider_uploader, :upload_button_pressed
 
-    MAX_FILE_SIZE = 8.megabytes
+    MAX_FILE_SIZE = 7.megabytes
 
     ALLOWED_CONTENT_TYPES = %w[
       application/pdf
