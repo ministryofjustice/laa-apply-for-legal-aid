@@ -1,0 +1,53 @@
+
+
+TODO
+
+- add textsearchable column
+- add index to textsearchable
+- add after_save trigger to update textsearchable colummn
+
+- create service to search and return results ranked
+- controller to call the service and return the results
+- implement controller in the page
+
+
+
+
+##############################################################################################
+
+ALTER TABLE proceeding_types ADD COLUMN textsearchable tsvector;
+
+UPDATE proceeding_types SET textsearchable =
+                     to_tsvector('english', meaning || ' ' || description || ' ' ||coalesce(additional_search_terms, ''));
+
+CREATE INDEX textsearch_idx ON proceeding_types USING GIN (textsearchable_index_col);
+
+-- examples of setweight
+
+UPDATE tt SET ti =
+                      setweight(to_tsvector(coalesce(title,'')), 'A')    ||
+                      setweight(to_tsvector(coalesce(keyword,'')), 'B')  ||
+                      setweight(to_tsvector(coalesce(abstract,'')), 'C') ||
+                      setweight(to_tsvector(coalesce(body,'')), 'D');
+
+
+UPDATE proceeding_types
+SET textsearchable_index_col =
+            setweight(to_tsvector(coalesce(meaning,'')), 'B')    ||
+            setweight(to_tsvector(coalesce(description, '')), 'C')  ||
+            setweight(to_tsvector(coalesce(additional_search_terms,'')), 'A') ;
+
+
+-- by setting the additional search terms to A, we can prioritise search terms there to come to the top of the list.
+
+################ QUWEY TO SEARCH AND RANK RESULTS @@@@@@@@@@@@@@@
+
+SELECT code,
+       meaning,
+       description,
+       textsearchable_index_col,
+       ts_rank(textsearchable_index_col, query) AS rank
+FROM proceeding_types, to_tsquery('order') AS query
+WHERE query @@ textsearchable_index_col
+ORDER BY rank DESC
+    LIMIT 10;
