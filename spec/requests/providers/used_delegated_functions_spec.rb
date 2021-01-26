@@ -90,8 +90,8 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
     end
 
-    it 'redirects to the limitations page' do
-      expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
+    it 'redirects to the delegated_functions_date page' do
+      expect(response).to redirect_to(providers_legal_aid_application_delegated_functions_date_path(legal_aid_application))
     end
 
     context 'when not authenticated' do
