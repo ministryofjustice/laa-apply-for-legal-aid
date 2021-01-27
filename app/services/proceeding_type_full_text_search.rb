@@ -25,7 +25,9 @@ class ProceedingTypeFullTextSearch
 
   def ts_query_transform(search_terms)
     # transform the query into a form suitable for postgres to_tsquery function
-    # "Once upon a time in a galaxy" => "Once & upon & a & time & in & a & galaxy"
+    #
+    # "An owl & a pussycat went to sea" => "An & owl & a & pussycat & went & to & sea"
+    #
     search_terms.split(/\s+/).join(' & ').gsub('& & &', '&')
   end
 
@@ -43,9 +45,3 @@ class ProceedingTypeFullTextSearch
     END_OF_QUERY
   end
 end
-
-# ActiveRecord::Base.connection.exec_query('SELECT code, meaning from proceeding_types where code = $1', 'SQL', [[nil, 'PR0206']], prepare: true)
-#
-# ActiveRecord::Base.connection.exec_query("SELECT code, meaning from proceeding_types where textsearchable @@ to_tsquery($1)", '---MY SQL---', [[nil, 'order & protection']], prepare: true)
-#
-# select code,
