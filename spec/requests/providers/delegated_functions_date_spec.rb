@@ -49,9 +49,11 @@ RSpec.describe Providers::DelegatedFunctionsDatesController, type: :request do
     end
 
     it 'redirects to the limitations page' do
+      # fill
     end
 
     context 'confirm_delegated_functions_date false' do
+      # fill
     end
   end
 end

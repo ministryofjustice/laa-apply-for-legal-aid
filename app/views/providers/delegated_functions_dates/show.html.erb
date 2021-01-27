@@ -16,13 +16,13 @@
         <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
           <%= form.govuk_radio_button(
                 :confirm_delegated_functions_date,
-                false,
+                true,
                 label: t('.correct_date')
               ) %>
 
           <%= form.govuk_radio_button(
                 :confirm_delegated_functions_date,
-                true,
+                false,
                 label: t('.different_date'),
                 'data-aria-controls' => 'conditional-true'
               ) %>

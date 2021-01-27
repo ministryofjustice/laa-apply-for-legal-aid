@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class ConfirmDelegatedFunctionsDateForm
+  class DelegatedFunctionsDateForm
     include BaseForm
     form_for LegalAidApplication
 
@@ -27,7 +27,7 @@ module LegalAidApplications
     # Note that this method is first called by `validates`.
     # Without that validation, the functionality in this method will not be called before save
     def used_delegated_functions_on
-      return model.used_delegated_functions_on unless confirm_delegated_functions_date_selected?
+      return model.used_delegated_functions_on if confirm_delegated_functions_date_selected?
       return @used_delegated_functions_on if @used_delegated_functions_on.present?
       return if date_fields.blank?
       return :invalid if date_fields.partially_complete? || date_fields.form_date_invalid?
@@ -58,7 +58,7 @@ module LegalAidApplications
     end
 
     def date_not_required?
-      !confirm_delegated_functions_date_selected? || draft_and_not_partially_complete_date?
+      confirm_delegated_functions_date_selected? || draft_and_not_partially_complete_date?
     end
 
     def confirm_delegated_functions_date_selected?

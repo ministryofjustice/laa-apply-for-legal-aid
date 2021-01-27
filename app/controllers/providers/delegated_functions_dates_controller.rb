@@ -3,11 +3,11 @@ module Providers
     include PreDWPCheckVisible
 
     def show
-      @form = LegalAidApplications::ConfirmDelegatedFunctionsDateForm.new(model: legal_aid_application)
+      @form = LegalAidApplications::DelegatedFunctionsDateForm.new(model: legal_aid_application)
     end
 
     def update
-      @form = LegalAidApplications::ConfirmDelegatedFunctionsDateForm.new(form_params)
+      @form = LegalAidApplications::DelegatedFunctionsDateForm.new(form_params)
       if save_continue_or_draft(@form)
         submit_application_reminder
       else
