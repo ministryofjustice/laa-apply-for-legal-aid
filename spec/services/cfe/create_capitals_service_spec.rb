@@ -100,7 +100,7 @@ module CFE
     end
 
     def expected_payload_hash # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      {
+      payload = {
         bank_accounts: [
           {
             description: 'Current accounts',
@@ -121,14 +121,6 @@ module CFE
           {
             description: 'ISAs, National Savings Certificates and Premium Bonds',
             value: savings_amount.national_savings.to_s
-          },
-          {
-            description: 'Online current accounts',
-            value: application.online_current_accounts_balance
-          },
-          {
-            description: 'Online savings accounts',
-            value: application.online_savings_accounts_balance
           }
         ],
         non_liquid_capital: [
@@ -148,6 +140,24 @@ module CFE
             value: other_assets_declaration.trust_value.to_s }
         ]
       }
+      add_non_nil_accounts(payload, :current)
+      add_non_nil_accounts(payload, :savings)
+      payload
+    end
+
+    def add_non_nil_accounts(payload, account_type)
+      case account_type
+      when :current
+        add_account(payload, 'Online current accounts', application.online_current_accounts_balance)
+      when :savings
+        add_account(payload, 'Online savings accounts', application.online_savings_accounts_balance)
+      end
+    end
+
+    def add_account(payload, description, value)
+      return if value.nil?
+
+      payload[:bank_accounts] << { description: description, value: value }
     end
 
     def expected_payload_without_current_account
