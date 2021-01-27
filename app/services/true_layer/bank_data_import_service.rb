@@ -87,7 +87,7 @@ module TrueLayer
         api_client,
         account,
         start_at: transaction_period_start_on,
-        finish_at: transaction_period_finish_on
+        finish_at: Time.current
       )
       self.error = command.errors.first unless command.success?
     end
