@@ -2,7 +2,7 @@
 
   <%= form_with(
         model: @form,
-        url: providers_legal_aid_application_used_delegated_functions_path,
+        url: providers_legal_aid_application_delegated_functions_date_path,
         method: :patch,
         local: true
       ) do |form| %>
@@ -15,13 +15,13 @@
 
         <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
           <%= form.govuk_radio_button(
-                :used_delegated_functions,
+                :confirm_delegated_functions_date,
                 false,
                 label: t('.correct_date')
               ) %>
 
           <%= form.govuk_radio_button(
-                :used_delegated_functions,
+                :confirm_delegated_functions_date,
                 true,
                 label: t('.different_date'),
                 'data-aria-controls' => 'conditional-true'
