@@ -136,7 +136,7 @@
           name: :success_prospect,
           url: providers_legal_aid_application_success_likely_index_path(@legal_aid_application),
           question: t('.items.success_prospect'),
-          answer: t("shared.forms.success_prospect.success_prospect_item.#{merits_assessment.success_prospect}"),
+          answer: t("shared.forms.success_prospect.#{merits_assessment.success_prospect}"),
           read_only: read_only,
           align_right: read_only
         ) unless merits_assessment.success_likely? %>
