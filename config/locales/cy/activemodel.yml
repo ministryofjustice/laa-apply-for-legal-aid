@@ -52,6 +52,20 @@ cy:
       statement_of_case:
         file_uploaded: "%{file_name} dedaolpu evah uoY"
         file_deleted: "%{file_name} deteled evah uoY"
+      transaction_types:
+        name:
+          benefits: stifeneB
+          excluded_benefits: stifeneb dedulcxE
+          friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
+          maintenance_in: stnemyap ecnanetniaM
+          property_or_lodger: regdol ro ytreporp morf emocnI
+          student_loan: tnarg ro naol tnedutS
+          pension: noisneP
+          rent_or_mortgage: stsoc gnisuoH
+          child_care: stsoc eracdlihC
+          maintenance_out: stnemyap ecnanetniaM
+          legal_aid: 83:br.spets_snezitic/snoitinifed_pets/serutaefesac lanimirc a
+            ni dia lagel sdrawot stnemyaP
       vehicle:
         purchased_on_day: yaD
         purchased_on_month: htnoM

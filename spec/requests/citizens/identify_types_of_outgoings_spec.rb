@@ -72,9 +72,9 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
           end
         end
 
-        context 'cash paymetn setting disabled' do
+        context 'cash payment setting disabled' do
           before { allow(Setting).to receive(:allow_cash_payment?).and_return(false) }
-          it 'should redirect to the cash outgoings page' do
+          it 'should redirect to the check answers page' do
             expect(subject).to redirect_to(citizens_check_answers_path)
           end
         end

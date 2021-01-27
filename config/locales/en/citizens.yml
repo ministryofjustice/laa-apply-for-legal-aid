@@ -65,7 +65,12 @@ en:
         none_selected: None of the above
       update:
         none_selected: Select if you receive these payments in cash
+
     check_answers:
+      cash_transactions:
+        cash_transactions_credits_header: Payments you receive in cash
+        cash_transactions_debits_header: Payments you make in cash
+        none: None
       index:
         assets:
           heading: Property, savings and other assets

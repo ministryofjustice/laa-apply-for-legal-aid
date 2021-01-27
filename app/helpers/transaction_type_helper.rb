@@ -16,7 +16,7 @@ module TransactionTypeHelper
     return sort_category_column_cell_vacant(object, transaction_type) if category_cells_should_be_blank?(object)
 
     tag_classes = %w[table-category govuk-body-s]
-    label = t("transaction_types.table_label.#{object.transaction_type.name}")
+    label = t("activemodel.attributes.transaction_types.name.#{object.transaction_type.name}")
     content = gov_uk_tag(text: label, classes: tag_classes).html_safe
 
     sort_column_cell(
@@ -27,7 +27,7 @@ module TransactionTypeHelper
   end
 
   def sort_category_column_cell_vacant(object, transaction_type)
-    label = t("transaction_types.table_label.#{transaction_type.name}")
+    label = t("activemodel.attributes.transaction_types.name.#{transaction_type.name}")
     tag_classes = %w[table-category govuk-body-s table-category-vacant]
 
     content = @transaction_type.name == 'excluded_benefits' ? '' : gov_uk_tag(text: label, classes: tag_classes).html_safe

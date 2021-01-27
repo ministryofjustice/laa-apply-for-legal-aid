@@ -25,6 +25,22 @@ RSpec.describe CashTransaction, type: :model do
     end
   end
 
+  context 'date formatting' do
+    let(:ctx) { create :cash_transaction, transaction_date: Date.new(2021, 2, 2), month_number: 1 }
+
+    describe '.period_start' do
+      it 'displays 1st day and month of transaction date' do
+        expect(ctx.period_start).to eq '01 Feb'
+      end
+    end
+
+    describe '.period_end' do
+      it 'displays last day and month of transaction date' do
+        expect(ctx.period_end).to eq '28 Feb'
+      end
+    end
+  end
+
   def expected_result1
     {
       'benefits' => 300,

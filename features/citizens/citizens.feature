@@ -35,7 +35,52 @@ Feature: Citizen journey
     Then I should be on a page showing 'Your legal aid application'
 
   @javascript @vcr
-  Scenario: Follow citizen journey from Accounts page
+  Scenario: Follow citizen journey from Accounts page selecting no income or outgoing categories
+    Given An application has been created
+    And the setting to allow cash payments is enabled
+    Then I visit the start of the financial assessment
+    Then I visit the accounts page
+    Then I click link 'Continue'
+    Then I should be on a page showing "Do you have accounts with other banks?"
+    Then I choose "Yes"
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you have current accounts you cannot access online?'
+    Then I choose "Yes"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Contact your solicitor'
+    Then I click link "Back"
+    Then I should be on a page showing 'Do you have current accounts you cannot access online?'
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Select your bank"
+    Then I click link "Back"
+    Then I click link "Back"
+    Then I should be on a page showing "Do you have accounts with other banks?"
+    Then I choose "No"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Which of the following payments do you receive?"
+    And I select 'None of these'
+    Then I click 'Save and continue'
+    Then I should be on the 'student_finance' page showing 'Do you get student finance?'
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on the 'annual_amount' page showing 'How much student finance will you get this academic year?'
+    When I enter amount '5000'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which of the following payments do you make?"
+    And I select 'None of these'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
+    Then I should be on a page not showing 'Excluded Benefits'
+    Then I should be on a page showing "Confirm the following"
+    Then I click "Agree and submit"
+    Then I should be on a page showing "You've shared your financial information"
+    Then I click link "feedback"
+    Then I should be on a page showing "How easy or difficult was it to use this service?"
+
+  @javascript @vcr
+  Scenario: Follow citizen journey from Accounts page selecting both income and outgoing categories
     Given An application has been created
     And the setting to allow cash payments is enabled
     Then I visit the start of the financial assessment

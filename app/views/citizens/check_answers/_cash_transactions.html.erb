@@ -1,0 +1,27 @@
+<div class="govuk-grid-row" id="app-check-your-answers__cash_transations_<%= operation %>">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m"><%= t(".cash_transactions_#{operation}_header") %></h2>
+  </div>
+  <% if !read_only %>
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+      <p>
+        <%= link_to_accessible(t('generic.change'), url, class: 'govuk-link change-link', suffix: question) %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<% if transaction_types.any? %>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <% transaction_types.each do |transaction_type| %>
+      <%= check_long_question_for_cash_transactions(
+            name: transaction_type.name,
+            question: t("activemodel.attributes.transaction_types.name.#{transaction_type.name}"),
+            legal_aid_application: @legal_aid_application,
+            transaction_type: transaction_type
+            ) %>
+    <% end %>
+  </dl>
+<% else %>
+  <p class="govuk-body"><%= t('.none') %>
+<% end %>
