@@ -47,9 +47,11 @@ module Flow
         },
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
-          forward: :delegated_functions_date
+          forward: ->(application) do
+            application.used_delegated_functions? ? :delegated_functions_dates : :limitations
+          end
         },
-        delegated_functions_date: {
+        delegated_functions_dates: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_functions_date_path(application) },
           forward: :limitations
         },
