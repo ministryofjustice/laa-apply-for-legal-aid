@@ -8,7 +8,7 @@
       <%= render 'shared/show_errors' %>
 
       <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="[name='policy_disregards[none_selected]']">
+        <div class="deselect-group" data-deselect-ctrl="#policy_disregards_none_selected">
           <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
             <div class="govuk-checkboxes__item">
               <%= form.check_box checkbox, { class: 'govuk-checkboxes__input' }, true, '' %>
