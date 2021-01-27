@@ -42,9 +42,15 @@
           local: true
         ) do |form| %>
 
-      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'}, hint: {text: t('.size_hint')} %>
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
+                                hint: {text: t('.size_hint')} %>
         <br>
-        <%= form.govuk_submit t('generic.upload') %>
+        <%= form.submit(
+                t('generic.upload'),
+                id: 'upload',
+                name: 'upload_button',
+                class: 'govuk-button form-button'
+            ) %>
 
         <% #  Customised accessibility alerts within this span below %>
         <% if @successfully_deleted %>
