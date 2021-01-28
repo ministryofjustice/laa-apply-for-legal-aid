@@ -277,13 +277,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def online_savings_accounts_balance
-    accounts = applicant.bank_accounts.reject { |c| c.account_type == 'TRANSACTION' }&.map(&:balance)
-    accounts.present? ? accounts.sum.to_s : nil
+    applicant.bank_accounts.savings.sum(&:latest_balance)
   end
 
   def online_current_accounts_balance
-    accounts = applicant.bank_accounts.select { |c| c.account_type == 'TRANSACTION' }&.map(&:balance)
-    accounts.present? ? accounts.sum.to_s : nil
+    applicant.bank_accounts.current.sum(&:latest_balance)
   end
 
   def other_assets?

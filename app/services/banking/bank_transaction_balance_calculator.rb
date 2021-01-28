@@ -31,6 +31,5 @@ module Banking
         calculated_balance -= tx.amount
       end
     end
-
   end
 end

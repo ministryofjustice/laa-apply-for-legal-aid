@@ -9,6 +9,11 @@ module CFE
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
+    before do
+      allow(application).to receive(:online_savings_accounts_balance).and_return(Faker::Number.decimal(l_digits: 3, r_digits: 2))
+      allow(application).to receive(:online_current_accounts_balance).and_return(Faker::Number.decimal(l_digits: 3, r_digits: 2))
+    end
+
     describe '#cfe_url' do
       it 'contains the submission assessment id' do
         expect(service.cfe_url)
