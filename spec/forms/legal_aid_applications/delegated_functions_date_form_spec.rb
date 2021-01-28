@@ -79,7 +79,8 @@ RSpec.describe LegalAidApplications::DelegatedFunctionsDateForm, type: :form, vc
 
         it 'generates the expected error message' do
           expect(message).not_to match(/^translation missing:/)
-          expect(subject.errors[:confirm_delegated_functions_date].join).to match(I18n.t(error_locale, scope: i18n_scope, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
+          expect(subject.errors[:confirm_delegated_functions_date].join).to match(I18n.t(error_locale, scope: i18n_scope,
+                                                                                                       months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
         end
       end
 
@@ -137,7 +138,6 @@ RSpec.describe LegalAidApplications::DelegatedFunctionsDateForm, type: :form, vc
         end
       end
     end
-
 
     describe '#save_as_draft' do
       let(:confirm_delegated_functions_date) { false }
