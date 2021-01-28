@@ -3,12 +3,9 @@ require 'rails_helper'
 module CFE
   RSpec.describe CreateCashTransactionsService do
     let!(:application) { create :legal_aid_application, :with_applicant }
-
     let!(:benefits) { create :transaction_type, :benefits }
-    let!(:maintenance_in) { create :transaction_type, :maintenance_in }
     let!(:friends_or_family) { create :transaction_type, :friends_or_family }
-    let!(:property_or_lodger) { create :transaction_type, :property_or_lodger }
-    let!(:pension) { create :transaction_type, :pension }
+    let!(:maintenance_in) { create :transaction_type, :maintenance_in }
     let!(:benefits1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: benefits }
     let!(:benefits2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: benefits }
     let!(:benefits3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: benefits }
@@ -18,17 +15,9 @@ module CFE
     let!(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
     let!(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
     let!(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
-    let!(:pension1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension }
-    let!(:pension2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension }
-    let!(:pension3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension }
-    let!(:property_or_lodger1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: property_or_lodger }
-    let!(:property_or_lodger2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: property_or_lodger }
-    let!(:property_or_lodger3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: property_or_lodger }
-
-    let!(:rent_or_mortgage) { create :transaction_type, :rent_or_mortgage }
-    let!(:maintenance_out) { create :transaction_type, :maintenance_out }
-    let!(:legal_aid) { create :transaction_type, :legal_aid }
     let!(:child_care) { create :transaction_type, :child_care }
+    let!(:legal_aid) { create :transaction_type, :legal_aid }
+    let!(:maintenance_out) { create :transaction_type, :maintenance_out }
     let!(:child_care1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: child_care }
     let!(:child_care2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: child_care }
     let!(:child_care3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: child_care }
@@ -38,9 +27,6 @@ module CFE
     let!(:maintenance_out1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out }
     let!(:maintenance_out2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out }
     let!(:maintenance_out3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out }
-    let!(:rent_or_mortgage1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: rent_or_mortgage }
-    let!(:rent_or_mortgage2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: rent_or_mortgage }
-    let!(:rent_or_mortgage3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: rent_or_mortgage }
 
     let(:submission) { create :cfe_submission, aasm_state: 'irregular_income_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
@@ -160,46 +146,6 @@ module CFE
                 client_id: maintenance_in1.id
               }
             ]
-          },
-          {
-            category: 'pension',
-            payments: [
-              {
-                date: pension3.transaction_date.strftime('%Y-%m-%d'),
-                amount: pension3.amount.abs.to_f,
-                client_id: pension3.id
-              },
-              {
-                date: pension2.transaction_date.strftime('%Y-%m-%d'),
-                amount: pension2.amount.abs.to_f,
-                client_id: pension2.id
-              },
-              {
-                date: pension1.transaction_date.strftime('%Y-%m-%d'),
-                amount: pension1.amount.abs.to_f,
-                client_id: pension1.id
-              }
-            ]
-          },
-          {
-            category: 'property_or_lodger',
-            payments: [
-              {
-                date: property_or_lodger3.transaction_date.strftime('%Y-%m-%d'),
-                amount: property_or_lodger3.amount.abs.to_f,
-                client_id: property_or_lodger3.id
-              },
-              {
-                date: property_or_lodger2.transaction_date.strftime('%Y-%m-%d'),
-                amount: property_or_lodger2.amount.abs.to_f,
-                client_id: property_or_lodger2.id
-              },
-              {
-                date: property_or_lodger1.transaction_date.strftime('%Y-%m-%d'),
-                amount: property_or_lodger1.amount.abs.to_f,
-                client_id: property_or_lodger1.id
-              }
-            ]
           }
         ],
         outgoings: [
@@ -260,26 +206,6 @@ module CFE
                 date: maintenance_out1.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_out1.amount.abs.to_f,
                 client_id: maintenance_out1.id
-              }
-            ]
-          },
-          {
-            category: 'rent_or_mortgage',
-            payments: [
-              {
-                date: rent_or_mortgage3.transaction_date.strftime('%Y-%m-%d'),
-                amount: rent_or_mortgage3.amount.abs.to_f,
-                client_id: rent_or_mortgage3.id
-              },
-              {
-                date: rent_or_mortgage2.transaction_date.strftime('%Y-%m-%d'),
-                amount: rent_or_mortgage2.amount.abs.to_f,
-                client_id: rent_or_mortgage2.id
-              },
-              {
-                date: rent_or_mortgage1.transaction_date.strftime('%Y-%m-%d'),
-                amount: rent_or_mortgage1.amount.abs.to_f,
-                client_id: rent_or_mortgage1.id
               }
             ]
           }
