@@ -17,9 +17,7 @@ module CCMS
         @response ||= reference_data_requestor.call
       end
 
-      def transaction_request_id
-        reference_data_requestor.transaction_request_id
-      end
+      delegate :transaction_request_id, to: :reference_data_requestor
 
       private
 

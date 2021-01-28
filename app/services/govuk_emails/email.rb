@@ -24,9 +24,7 @@ module GovukEmails
       status == PERMANENTLY_FAILED_STATUS
     end
 
-    def status
-      email.status
-    end
+    delegate :status, to: :email
 
     private
 

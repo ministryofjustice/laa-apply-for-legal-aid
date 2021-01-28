@@ -6,7 +6,7 @@ module CFE
   RSpec.describe CreateStateBenefitsService do
     subject(:service) { described_class.new(submission) }
 
-    let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, transaction_period_finish_on: Date.today }
+    let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, transaction_period_finish_on: Time.zone.today }
     let!(:applicant) { create :applicant, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'outgoings_created', legal_aid_application: application }
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }

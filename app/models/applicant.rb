@@ -8,7 +8,7 @@ class Applicant < ApplicationRecord
 
   has_one :legal_aid_application, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  has_one :address, -> { order(created_at: :desc) }
+  has_one :address, -> { order(created_at: :desc) }, inverse_of: :applicant
   has_many :bank_providers, dependent: :destroy
   has_many :bank_errors, dependent: :destroy
   has_many :bank_accounts, through: :bank_providers
@@ -33,7 +33,7 @@ class Applicant < ApplicationRecord
   end
 
   def true_layer_token_expires_at
-    Time.parse(true_layer_token_data[:expires]) if true_layer_token_data[:expires]
+    Time.zone.parse(true_layer_token_data[:expires]) if true_layer_token_data[:expires]
   end
 
   def true_layer_token_data

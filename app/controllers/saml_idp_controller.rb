@@ -1,6 +1,6 @@
 class SamlIdpController < SamlIdp::IdpController
   def create
-    unless params[:email].blank?
+    if params[:email].present?
       provider = idp_authenticate(params[:email], params[:password])
       if provider.nil?
         @saml_idp_fail_msg = 'Incorrect email or password.'

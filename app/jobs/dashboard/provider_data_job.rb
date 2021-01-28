@@ -1,5 +1,5 @@
 module Dashboard
-  class ProviderDataJob < ActiveJob::Base
+  class ProviderDataJob < ApplicationJob
     include SuspendableJob
 
     def perform(provider)

@@ -68,13 +68,13 @@ class BankTransactionPresenter
   end
 
   def transaction_category
-    return unless @transaction.meta_data.present?
+    return if @transaction.meta_data.blank?
 
     @transaction.meta_data[:name]
   end
 
   def transaction_selected_by
-    return unless @transaction.meta_data.present?
+    return if @transaction.meta_data.blank?
 
     @transaction.meta_data[:selected_by]
   end

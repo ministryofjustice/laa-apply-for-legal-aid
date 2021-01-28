@@ -1,5 +1,5 @@
 require 'rails_helper'
-require Rails.root.join('app', 'lib', 'omni_auth', 'strategies', 'moj_oauth2')
+require Rails.root.join('app/lib/omni_auth/strategies/moj_oauth2')
 
 module OmniAuth
   module Strategies

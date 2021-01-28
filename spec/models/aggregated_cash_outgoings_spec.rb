@@ -7,9 +7,9 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
   let!(:rent_or_mortgage) { create :transaction_type, :rent_or_mortgage }
   let!(:maintenance_out) { create :transaction_type, :maintenance_out }
   let!(:legal_aid) { create :transaction_type, :legal_aid }
-  let(:month1_tx_date) { Date.today.beginning_of_month - 1.month }
-  let(:month2_tx_date) { Date.today.beginning_of_month - 2.months }
-  let(:month3_tx_date) { Date.today.beginning_of_month - 3.months }
+  let(:month1_tx_date) { Time.zone.today.beginning_of_month - 1.month }
+  let(:month2_tx_date) { Time.zone.today.beginning_of_month - 2.months }
+  let(:month3_tx_date) { Time.zone.today.beginning_of_month - 3.months }
   let(:month1_period) { "#{month1_tx_date.strftime('%d %b %Y')} - #{month1_tx_date.end_of_month.strftime('%d %b %Y')}" }
   let(:month2_period) { "#{month2_tx_date.strftime('%d %b %Y')} - #{month2_tx_date.end_of_month.strftime('%d %b %Y')}" }
   let(:month3_period) { "#{month3_tx_date.strftime('%d %b %Y')} - #{month3_tx_date.end_of_month.strftime('%d %b %Y')}" }
@@ -366,7 +366,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         let(:subject) { aco.update(corrected_valid_params) }
 
         before do
-          travel_to Time.local(2100, 1, 7, 13, 45)
+          travel_to Time.zone.local(2100, 1, 7, 13, 45)
         end
 
         it 'does not add to old records' do
@@ -381,7 +381,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
             transactions.each_with_index do |transaction, i|
               date = transaction.transaction_date
-              historical_date = Date.today.at_beginning_of_month - (i + 1).months
+              historical_date = Time.zone.today.at_beginning_of_month - (i + 1).months
               expect(date).to eq historical_date
             end
           end

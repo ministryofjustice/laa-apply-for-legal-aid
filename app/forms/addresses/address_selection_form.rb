@@ -18,7 +18,7 @@ module Addresses
     private
 
     def deserialize_address
-      return unless lookup_id.present?
+      return if lookup_id.blank?
 
       attributes[:address_line_one] = selected_address.address_line_one
       attributes[:address_line_two] = selected_address.address_line_two

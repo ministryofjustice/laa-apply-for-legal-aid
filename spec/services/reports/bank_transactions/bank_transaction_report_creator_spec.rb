@@ -43,7 +43,7 @@ module Reports
           subject { creator.call(local_csv: true) }
 
           let(:creator) { BankTransactionReportCreator.new(legal_aid_application) }
-          let(:tempfile) { Rails.root.join('tmp', 'bank_transactions.csv') }
+          let(:tempfile) { Rails.root.join('tmp/bank_transactions.csv') }
 
           it 'creates a local file' do
             File.unlink(tempfile) if File.exist?(tempfile)

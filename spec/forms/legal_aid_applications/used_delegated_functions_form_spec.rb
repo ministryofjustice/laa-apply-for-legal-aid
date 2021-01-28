@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:used_delegated_functions) { true }
-  let(:used_delegated_functions_reported_on) { Date.today }
+  let(:used_delegated_functions_reported_on) { Time.zone.today }
   let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
   let(:day) { used_delegated_functions_on.day }
   let(:month) { used_delegated_functions_on.month }
@@ -136,7 +136,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
     end
 
     context 'when occurred on is in future' do
-      let(:used_delegated_functions_on) { 1.days.from_now.to_date }
+      let(:used_delegated_functions_on) { 1.day.from_now.to_date }
       let(:error_locale) { 'used_delegated_functions_on.date_is_in_the_future' }
 
       it 'is invalid' do
@@ -210,7 +210,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       end
 
       context 'when occurred on is in future' do
-        let(:used_delegated_functions_on) { 1.days.from_now.to_date }
+        let(:used_delegated_functions_on) { 1.day.from_now.to_date }
         let(:error_locale) { 'used_delegated_functions_on.date_is_in_the_future' }
 
         it 'is invalid' do

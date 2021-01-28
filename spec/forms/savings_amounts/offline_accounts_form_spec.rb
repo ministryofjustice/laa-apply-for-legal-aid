@@ -13,10 +13,10 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
 
   describe '#save' do
     context 'check boxes are checked' do
-      let(:check_box_params) { check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = 'true' } }
+      let(:check_box_params) { check_box_attributes.index_with { |_attr| 'true' } }
 
       context 'amounts are valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
+        let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it 'updates all amounts' do
           subject.save
@@ -64,21 +64,21 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       end
 
       context 'amounts are empty' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' } }
+        let(:amount_params) { attributes.index_with { |_attr| '' } }
         let(:expected_error) { /enter the( estimated)? total/i }
 
         it_behaves_like 'it has an error'
       end
 
       context 'amounts are not numbers' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
+        let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
         let(:expected_error) { /must be an amount of money, like 60,000/ }
 
         it_behaves_like 'it has an error'
       end
 
       context 'amounts have a £ symbol' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = "£#{rand(1...1_000_000.0).round(2)}" } }
+        let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it 'strips the values of £ symbols' do
           subject.save
@@ -132,7 +132,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       end
 
       context 'amounts are not valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
+        let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it 'it empties amounts' do
           subject.save

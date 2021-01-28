@@ -12,7 +12,7 @@ RSpec.describe ProceedingTypeScopeLimitationsPopulator do
   end
 
   describe '#call' do
-    let(:seed_file) { Rails.root.join('db', 'seeds', 'legal_framework', 'proceeding_type_scope_limitations.csv') }
+    let(:seed_file) { Rails.root.join('db/seeds/legal_framework/proceeding_type_scope_limitations.csv') }
     let(:proceeding_type_scope_limitation) { ProceedingTypeScopeLimitation.order('created_at ASC').first }
     let(:expected_proceeding_type_id) { ProceedingType.find_by(ccms_code: CSV.read(seed_file, headers: true)[0][0]).id }
     let(:expected_scope_limitation_id) { ScopeLimitation.find_by(code: CSV.read(seed_file, headers: true)[0][1]).id }

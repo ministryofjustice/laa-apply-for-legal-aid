@@ -4,7 +4,7 @@ class ProceedingTypeScopeLimitationsPopulator
   end
 
   def file_path
-    Rails.root.join('db', 'seeds', 'legal_framework', 'proceeding_type_scope_limitations.csv').freeze
+    Rails.root.join('db/seeds/legal_framework/proceeding_type_scope_limitations.csv').freeze
   end
 
   def call

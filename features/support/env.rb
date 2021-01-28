@@ -123,7 +123,7 @@ load Rails.root.join('db/seeds.rb')
 Before do |_scenario|
   Populators::TransactionTypePopulator.call
   # Delete previous screenshots from filesystem that were generated during previous feature runs
-  FileUtils.rm_rf("#{Rails.root}/tmp/capybara/**.*")
+  FileUtils.rm_rf(Rails.root.join('tmp/capybara/**.*'))
 end
 
 Around do |_scenario, block|

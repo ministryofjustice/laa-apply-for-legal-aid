@@ -18,7 +18,7 @@ class AggregatedCashOutgoings < BaseAggregatedCashTransaction
   attributes_for_transaction_types cash_transaction_categories
 
   def update(params)
-    update_attributes(params)
+    update_cash_attributes(params)
     return false unless valid?
 
     save_cash_transaction_records

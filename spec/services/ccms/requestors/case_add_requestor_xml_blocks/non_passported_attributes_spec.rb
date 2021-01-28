@@ -41,7 +41,7 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
         let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
-        let(:timestamp) { Time.now.strftime('%Y-%m-%d_%H.%M') }
+        let(:timestamp) { Time.current.strftime('%Y-%m-%d_%H.%M') }
         let(:applicant) { legal_aid_application.applicant }
         let(:default_cost) { legal_aid_application.lead_proceeding_type.default_cost_limitation_substantive }
 

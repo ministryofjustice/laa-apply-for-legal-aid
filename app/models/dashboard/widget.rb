@@ -24,15 +24,15 @@ module Dashboard
     end
 
     def log_start_message
-      log_message("***** #{@widget_klass.name.split('::').last} starting job at #{Time.now} for dataset: #{dataset_name}")
+      log_message("***** #{@widget_klass.name.split('::').last} starting job at #{Time.current} for dataset: #{dataset_name}")
     end
 
     def log_data_message
-      log_message "***** #{@widget_klass.name.split('::').last} sending: #{data} job at #{Time.now} for dataset: #{dataset_name}"
+      log_message "***** #{@widget_klass.name.split('::').last} sending: #{data} job at #{Time.current} for dataset: #{dataset_name}"
     end
 
     def log_message(message)
-      puts message unless Rails.env.test?
+      Rails.logger.info message unless Rails.env.test?
     end
   end
 end

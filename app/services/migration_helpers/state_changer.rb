@@ -32,7 +32,7 @@ module MigrationHelpers
         old_state, new_state, where_clause = change_details
         sql = form_sql(old_state, new_state, where_clause, migration_direction)
         if @dummy_run
-          puts sql
+          Rails.logger.info sql
         else
           ActiveRecord::Base.connection.execute(sql)
         end

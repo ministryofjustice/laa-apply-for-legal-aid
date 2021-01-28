@@ -13,10 +13,10 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
   describe '#save' do
     context 'check boxes are checked' do
-      let(:check_box_params) { check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = 'true' } }
+      let(:check_box_params) { check_box_attributes.index_with { |_attr| 'true' } }
 
       context 'amounts are valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
+        let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it 'updates all amounts' do
           subject.save
@@ -68,14 +68,14 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts are empty' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' } }
+        let(:amount_params) { attributes.index_with { |_attr| '' } }
         let(:expected_error) { /enter the( estimated)? total/i }
 
         it_behaves_like 'it has an error'
       end
 
       context 'amounts are not numbers' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
+        let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
         let(:expected_error) { /must be an amount of money, like 60,000/ }
 
         it_behaves_like 'it has an error'
@@ -93,7 +93,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
               life_assurance_endowment_policy: /total.*of life assurance policies/i
             }
           end
-          let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Number.negative.to_s } }
+          let(:amount_params) { attributes.index_with { |_attr| Faker::Number.negative.to_s } }
           let(:expected_error) { /must be 0 or more/ }
 
           it 'returns false' do
@@ -116,7 +116,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts have a £ symbol' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = "£#{rand(1...1_000_000.0).round(2)}" } }
+        let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it 'strips the values of £ symbols' do
           subject.save
@@ -134,13 +134,13 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
     context 'some check boxes are unchecked' do
       let(:check_box_params) do
-        boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
+        boxes = check_box_attributes.index_with { |_attr| '' }
         boxes[:check_box_cash] = 'true'
         boxes
       end
 
       context 'amounts are invalid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = rand(1...1_000_000.0).round(2).to_s } }
+        let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it 'empties amounts if checkbox is unchecked' do
           attributes_except_cash = attributes - [:cash]
@@ -167,7 +167,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
 
       context 'amounts are not valid' do
-        let(:amount_params) { attributes.each_with_object({}) { |attr, hsh| hsh[attr] = Faker::Lorem.word } }
+        let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it 'it empties amounts' do
           subject.save
@@ -186,7 +186,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context 'if none of the check boxes are checked' do
         let(:check_box_params) do
-          boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
+          boxes = check_box_attributes.index_with { |_attr| '' }
           boxes[:none_selected] = ''
           boxes
         end
@@ -200,7 +200,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context 'none of these check box is checked' do
         let(:check_box_params) do
-          boxes = check_box_attributes.each_with_object({}) { |attr, hsh| hsh[attr] = '' }
+          boxes = check_box_attributes.index_with { |_attr| '' }
           boxes[:none_selected] = 'true'
           boxes
         end

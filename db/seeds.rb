@@ -18,10 +18,10 @@ Seeder.monitor Office
 Seeder.monitor Firm
 Seeder.monitor Provider
 
-Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|
   load seed
 end
 
-puts Seeder.report
+Rails.logger.info Seeder.report
 Rails.logger.info Seeder.report.join("\n")
 Rails.logger.info 'Seeding completed'

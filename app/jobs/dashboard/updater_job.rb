@@ -1,5 +1,5 @@
 module Dashboard
-  class UpdaterJob < ActiveJob::Base
+  class UpdaterJob < ApplicationJob
     include SuspendableJob
     queue_as :default
 

@@ -10,7 +10,7 @@ module UserTransactionsHelper
       )
     end
 
-    return nil unless items.present?
+    return nil if items.blank?
 
     {
       items: items.compact
@@ -26,7 +26,7 @@ module UserTransactionsHelper
       )
     end
 
-    return nil unless items.present?
+    return nil if items.blank?
 
     {
       items: items

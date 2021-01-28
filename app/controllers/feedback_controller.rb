@@ -37,7 +37,7 @@ class FeedbackController < ApplicationController
   end
 
   def provider
-    LegalAidApplication.find_by_id(application_id)&.provider
+    LegalAidApplication.find_by(id: application_id)&.provider
   end
 
   def application_id

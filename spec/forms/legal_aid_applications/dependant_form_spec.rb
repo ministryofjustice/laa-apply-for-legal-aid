@@ -6,7 +6,7 @@ RSpec.describe LegalAidApplications::DependantForm do
   let(:day) { date.strftime('%d') } # Two number day
   let(:month) { date.strftime('%m') } # Two number month
   let(:year) { date.strftime('%Y') } # Four number year
-  let(:turn_of_century) { Time.local 2000, 1, 1 }
+  let(:turn_of_century) { Time.zone.local 2000, 1, 1 }
   let(:has_assets) { 'false' }
   let(:assets_value) { '' }
   let(:has_income) { 'false' }
@@ -60,7 +60,7 @@ RSpec.describe LegalAidApplications::DependantForm do
       end
 
       context 'in 21st century' do
-        let(:date) { Faker::Date.between from: turn_of_century, to: Date.today }
+        let(:date) { Faker::Date.between from: turn_of_century, to: Time.zone.today }
 
         it 'constructs correct date' do
           expect(subject.date_of_birth).to eq(date)

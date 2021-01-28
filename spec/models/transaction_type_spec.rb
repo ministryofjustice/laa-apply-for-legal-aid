@@ -185,7 +185,7 @@ RSpec.describe TransactionType, type: :model do
 
     describe 'active' do
       it 'does not return records with a date in archived at' do
-        TransactionType.find_by(name: 'student_loan').update!(archived_at: Time.now)
+        TransactionType.find_by(name: 'student_loan').update!(archived_at: Time.current)
         expect(TransactionType.active.pluck(:name)).not_to include('student_loan')
       end
     end

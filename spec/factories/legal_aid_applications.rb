@@ -305,8 +305,8 @@ FactoryBot.define do
       transient do
         delegated_functions_date { nil }
       end
-      used_delegated_functions_on { delegated_functions_date.present? ? delegated_functions_date : Date.today }
-      used_delegated_functions_reported_on { Date.today }
+      used_delegated_functions_on { delegated_functions_date.presence || Time.zone.today }
+      used_delegated_functions_reported_on { Time.zone.today }
       used_delegated_functions { true }
     end
 
@@ -330,7 +330,7 @@ FactoryBot.define do
 
     trait :with_merits_assessment_submitted_today do
       after(:create) do |application|
-        create(:merits_assessment, :with_optional_text, submitted_at: Date.today, legal_aid_application: application)
+        create(:merits_assessment, :with_optional_text, submitted_at: Time.zone.today, legal_aid_application: application)
       end
     end
 
@@ -654,7 +654,7 @@ FactoryBot.define do
     end
 
     trait :discarded do
-      discarded_at { Time.now - 5.minutes }
+      discarded_at { Time.current - 5.minutes }
     end
   end
 end

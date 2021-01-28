@@ -1,6 +1,6 @@
 <table class="govuk-table" style="margin-bottom: 15px;">
   <caption class="govuk-table__caption" style="padding-bottom:10px;">
-    <%= t('date.date_period', from: date_from, to: date_to) %>
+    <%= t('date.date_period', from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)) %>
   </caption>
   <tbody class="govuk-table__body">
    <% transaction_types.each do |transaction_type| %>

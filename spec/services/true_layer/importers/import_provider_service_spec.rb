@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TrueLayer::Importers::ImportProviderService do
   let(:token) { SecureRandom.hex }
-  let(:token_expires_at) { Time.now + 1.hour }
+  let(:token_expires_at) { Time.current + 1.hour }
   let(:api_client) { TrueLayer::ApiClient.new(token) }
   let(:applicant) { create :applicant, :with_true_layer_tokens }
 

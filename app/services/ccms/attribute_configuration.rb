@@ -17,8 +17,8 @@ module CCMS
 
     def configuration_files
       {
-        standard: File.join(Rails.root, 'config', 'ccms', 'attribute_block_configs', 'base.yml'),
-        non_passported: File.join(Rails.root, 'config', 'ccms', 'attribute_block_configs', 'non_passported.yml')
+        standard: Rails.root.join('config/ccms/attribute_block_configs/base.yml'),
+        non_passported: Rails.root.join('config/ccms/attribute_block_configs/non_passported.yml')
       }
     end
   end

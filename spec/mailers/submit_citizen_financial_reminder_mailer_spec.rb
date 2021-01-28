@@ -5,7 +5,7 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }
   let(:application_url) { 'http://test.com' }
-  let(:url_expiry_date) { (Date.today + 7.days).strftime('%-d %B %Y') }
+  let(:url_expiry_date) { (Time.zone.today + 7.days).strftime('%-d %B %Y') }
 
   describe '#notify_citizen' do
     let(:mail) { described_class.notify_citizen(application.id, email, application_url, application.applicant.full_name, url_expiry_date) }
@@ -27,7 +27,7 @@ RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
         ref_number: application.application_ref,
         client_name: application.applicant.full_name,
         application_url: application_url,
-        expiry_date: (Date.today + 7.days).strftime('%-d %B %Y')
+        expiry_date: (Time.zone.today + 7.days).strftime('%-d %B %Y')
       )
     end
   end

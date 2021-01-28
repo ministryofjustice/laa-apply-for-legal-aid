@@ -23,27 +23,31 @@ class CfeApiDisplayer
   end
 
   def display_bank_transactions
-    puts '>>>> BANK TRANSACTIONS <<<<'
+    logger.info '>>>> BANK TRANSACTIONS <<<<'
     categorised_bank_transactions.each do |transaction_type, txs|
-      puts "#{transaction_type.name}:"
+      logger.info "#{transaction_type.name}:"
       txs.each do |tx|
-        puts format('   %<date>s %<amount>.2f %<description>s',
-                    date: tx.happened_at.strftime('%F'),
-                    amount: tx.amount,
-                    description: tx.description)
+        logger.info format('   %<date>s %<amount>.2f %<description>s',
+                           date: tx.happened_at.strftime('%F'),
+                           amount: tx.amount,
+                           description: tx.description)
       end
     end
   end
 
   def display_cfe_submission_history
-    puts "\n>>>>>  CFE SUBMISSION <<<<"
+    logger.info "\n>>>>>  CFE SUBMISSION <<<<"
     cfe_submission_histories.each { |history| display_history(history) }
   end
 
   def display_history(history)
-    puts "#{history.http_method} #{history.url}"
-    pp JSON.parse(history.request_payload) if history.http_method == 'POST'
-    pp JSON.parse(history.response_payload)
-    puts '++++++++++++++++++++++++++++++++++++++++++++'
+    logger.info "#{history.http_method} #{history.url}"
+    logger.info JSON.parse(history.request_payload) if history.http_method == 'POST'
+    logger.info JSON.parse(history.response_payload)
+    logger.info '++++++++++++++++++++++++++++++++++++++++++++'
+  end
+
+  def logger
+    Rails.logger
   end
 end

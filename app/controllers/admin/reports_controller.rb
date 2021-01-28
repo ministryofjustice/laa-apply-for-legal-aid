@@ -40,7 +40,7 @@ module Admin
     end
 
     def timestamp
-      Time.now.strftime('%FT%T')
+      Time.current.strftime('%FT%T')
     end
   end
 end

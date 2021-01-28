@@ -110,8 +110,8 @@ module CCMS
 
     def mock_configuration
       {
-        standard: File.join(Rails.root, 'spec', 'fixtures', 'files', 'ccms_keys', 'standard_ccms_keys.yml'),
-        non_passported: File.join(Rails.root, 'spec', 'fixtures', 'files', 'ccms_keys', 'merged_in_ccms_keys.yml')
+        standard: Rails.root.join('spec/fixtures/files/ccms_keys/standard_ccms_keys.yml'),
+        non_passported: Rails.root.join('spec/fixtures/files/ccms_keys/merged_in_ccms_keys.yml')
       }
     end
   end

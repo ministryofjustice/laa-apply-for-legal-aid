@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DateFieldBuilder do
-  let(:form_date) { Date.today }
+  let(:form_date) { Time.zone.today }
   let(:model_date) { 2.days.ago }
   let(:model) { OpenStruct.new(happened_on: model_date) }
   let(:form) do

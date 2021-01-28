@@ -22,7 +22,7 @@ FactoryBot.define do
 
     after(:create) do |attachment|
       attachment.document.attach(
-        io: File.open("#{Rails.root}/spec/fixtures/files/documents/hello_world.pdf"),
+        io: File.open(Rails.root.join('spec/fixtures/files/documents/hello_world.pdf')),
         filename: attachment.attachment_name,
         content_type: 'application/pdf'
       )

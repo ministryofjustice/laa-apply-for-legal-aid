@@ -1,5 +1,5 @@
 module Dashboard
-  class ApplicantEmailJob < ActiveJob::Base
+  class ApplicantEmailJob < ApplicationJob
     include SuspendableJob
 
     APPLY_EMAIL_REGEX = /#{Rails.configuration.x.email_domain.suffix}/.freeze

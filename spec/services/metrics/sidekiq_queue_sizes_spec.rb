@@ -17,7 +17,7 @@ RSpec.describe Metrics::SidekiqQueueSizes do
     end
 
     context 'with known sizes' do
-      let(:expected_sizes) { queues.each_with_object({}) { |q, hash| hash[q] = rand(0..100) } }
+      let(:expected_sizes) { queues.index_with { |_q| rand(0..100) } }
 
       before do
         queues.each do |queue|

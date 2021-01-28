@@ -7,7 +7,7 @@ class PdfConverter
 
   def initialize(attachment_id)
     @attachment_id = attachment_id
-    @original_attachment = Attachment.find_by_id(attachment_id)
+    @original_attachment = Attachment.find_by(id: attachment_id)
   end
 
   def call # rubocop:disable Metrics/MethodLength

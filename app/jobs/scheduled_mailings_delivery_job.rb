@@ -1,4 +1,4 @@
-class ScheduledMailingsDeliveryJob < ActiveJob::Base
+class ScheduledMailingsDeliveryJob < ApplicationJob
   queue_as :default
 
   def perform

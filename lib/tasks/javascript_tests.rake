@@ -1,4 +1,4 @@
 desc 'Run JavaScript unit tests'
-task :javascript_tests do
+task javascript_tests: :environment do
   sh('yarn test')
 end

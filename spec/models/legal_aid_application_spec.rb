@@ -30,7 +30,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { expect(legal_aid_application).to receive(:calculation_date).and_return(nil) }
       context 'todays date before start of policy disregards' do
         it 'returns false' do
-          travel_to Time.local(2021, 1, 7, 13, 45)
+          travel_to Time.zone.local(2021, 1, 7, 13, 45)
           expect(subject).to be false
           travel_back
         end
@@ -38,7 +38,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'todays date after start of policy disregards' do
         it 'returns true' do
-          travel_to Time.local(2021, 1, 8, 13, 45)
+          travel_to Time.zone.local(2021, 1, 8, 13, 45)
           expect(subject).to be true
           travel_back
         end
@@ -50,7 +50,7 @@ RSpec.describe LegalAidApplication, type: :model do
       context 'todays date before start of policy disregards' do
         let(:calculation_date) { Date.new(2021, 1, 7) }
         it 'returns false' do
-          travel_to Time.local(2021, 1, 7, 13, 45)
+          travel_to Time.zone.local(2021, 1, 7, 13, 45)
           expect(subject).to be false
           travel_back
         end
@@ -59,7 +59,7 @@ RSpec.describe LegalAidApplication, type: :model do
       context 'todays date after start of policy disregards' do
         let(:calculation_date) { Date.new(2021, 1, 8) }
         it 'returns true' do
-          travel_to Time.local(2021, 1, 8, 13, 45)
+          travel_to Time.zone.local(2021, 1, 8, 13, 45)
           expect(subject).to be true
           travel_back
         end
@@ -583,8 +583,8 @@ RSpec.describe LegalAidApplication, type: :model do
     it 'resets it to a substantive application' do
       application = create :legal_aid_application, :with_delegated_functions
       expect(application.used_delegated_functions).to be true
-      expect(application.used_delegated_functions_on).to eq Date.today
-      expect(application.used_delegated_functions_reported_on).to eq Date.today
+      expect(application.used_delegated_functions_on).to eq Time.zone.today
+      expect(application.used_delegated_functions_reported_on).to eq Time.zone.today
       application.reset_delegated_functions
       expect(application.used_delegated_functions).to be false
       expect(application.used_delegated_functions_on).to be_nil

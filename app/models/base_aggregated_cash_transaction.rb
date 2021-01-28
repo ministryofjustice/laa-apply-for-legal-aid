@@ -18,7 +18,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
 
   def initialize
     super
-    @month1 = Date.today.beginning_of_month - 1.month
+    @month1 = Time.zone.today.beginning_of_month - 1.month
     @month2 = month1 - 1.month
     @month3 = month2 - 1.month
   end
@@ -88,7 +88,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     __send__("month#{month_number}")
   end
 
-  def update_attributes(params)
+  def update_cash_attributes(params)
     params.each do |key, value|
       __send__("#{key}=", value)
     end
@@ -144,7 +144,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   end
 
   def validate_none_selected
-    return unless none_selected.present?
+    return if none_selected.blank?
 
     self.class.cash_transaction_categories.each do |category|
       checkbox_attr = "check_box_#{category}".to_sym
@@ -159,9 +159,9 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     MONTH_RANGE.each do |i|
       value_attr = "#{category}#{i}".to_sym
       value = __send__(value_attr)
-      errors.add(value_attr, blank_error(category, i)) unless value.present?
+      errors.add(value_attr, blank_error(category, i)) if value.blank?
 
-      next unless value.present?
+      next if value.blank?
 
       errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.invalid_type")) unless number? value
       errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.negative")) unless valid_amount? value
@@ -181,7 +181,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   end
 
   def calculated_date(month_number)
-    Date.today.at_beginning_of_month - month_number.months
+    Time.zone.today.at_beginning_of_month - month_number.months
   end
 
   def checkbox_for(category)

@@ -130,7 +130,7 @@ module BaseForm
     end
 
     def set_instance_variables_for_attributes_if_not_set_but_in_model(attrs:, model_attributes:)
-      return unless model_attributes.present?
+      return if model_attributes.blank?
 
       model_attributes.stringify_keys!
 

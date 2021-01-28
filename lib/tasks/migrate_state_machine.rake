@@ -1,7 +1,7 @@
 namespace :state_machine do
   desc 'Migrate state from legal_aid_application into state_machine_proxies into the database (prefix with SEEDS_DRY_MODE=false to disable DRY mode)'
   task migrate: :environment do
-    ENV['SEEDS_DRY_MODE'] = 'true' unless ENV['SEEDS_DRY_MODE'].present?
+    ENV['SEEDS_DRY_MODE'] = 'true' if ENV['SEEDS_DRY_MODE'].blank?
     @dry_run = ENV['SEEDS_DRY_MODE'] != 'false'
     @counts = { dry_run: @dry_run, processed: 0, fail: 0, output: [] }
     run_non_destructive_change_checks

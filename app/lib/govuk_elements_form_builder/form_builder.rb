@@ -246,7 +246,7 @@ module GovukElementsFormBuilder
     def hint_message(attribute, options)
       return nil if options[:collection]
 
-      options[:hint].presence || I18n.translate("helpers.hint.#{@object_name}.#{attribute}", default: nil)
+      options[:hint].presence || I18n.t("helpers.hint.#{@object_name}.#{attribute}", default: nil)
     end
 
     def hint_tag(attribute, options)
@@ -263,10 +263,10 @@ module GovukElementsFormBuilder
       return unless error?(attribute, options)
 
       message = options[:error] || object.errors[attribute].first
-      return unless message.present?
+      return if message.blank?
 
       content_tag(:span, class: 'govuk-error-message', id: "#{attribute}-error") do
-        content_tag(:span, I18n.translate('helpers.accessibility.error'), class: 'govuk-visually-hidden') + message
+        content_tag(:span, I18n.t('helpers.accessibility.error'), class: 'govuk-visually-hidden') + message
       end
     end
 
