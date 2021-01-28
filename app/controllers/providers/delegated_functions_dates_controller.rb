@@ -3,6 +3,7 @@ module Providers
     include PreDWPCheckVisible
 
     def show
+      @used_delegated_functions_on = legal_aid_application.used_delegated_functions_on
       @form = LegalAidApplications::DelegatedFunctionsDateForm.new(model: legal_aid_application)
     end
 
