@@ -237,13 +237,19 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I enter the 'used delegated functions on' date of 2 days ago
     Then I click 'Save and continue'
+    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 2 days ago
+    Then I choose "This date is correct"
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
+    Then I click link "Back"
+    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 2 days ago
+    Then I choose "I used delegated functions on a different date"
+    Then I enter the 'used delegated functions' date of 3 days ago
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Covered under an emergency certificate"
     Then I should be on a page showing "Covered under a substantive certificate"
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Covered under an emergency certificate'
-    Then I should be on a page showing 'Covered under a substantive certificate'
     Then I click 'Save and continue'
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
 

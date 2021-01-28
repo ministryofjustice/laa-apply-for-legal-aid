@@ -139,6 +139,14 @@ RSpec.describe LegalAidApplications::DelegatedFunctionsDateForm, type: :form, vc
       end
     end
 
+    context 'confirm_delegated_functions_date is nil' do
+      let(:confirm_delegated_functions_date) { nil }
+
+      it 'generates the expected error message' do
+        expect(subject.errors[:confirm_delegated_functions_date].join).to match(I18n.t('.confirm_delegated_functions_date.blank', scope: i18n_scope))
+      end
+    end
+
     describe '#save_as_draft' do
       let(:confirm_delegated_functions_date) { false }
 

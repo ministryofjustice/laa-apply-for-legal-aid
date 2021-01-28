@@ -187,6 +187,8 @@ en:
               not_a_number: *student_error
         legal_aid_application:
           attributes:
+            confirm_delegated_functions_date:
+              blank: Confirm the date you used delegated functions
             has_dependants:
               blank: Select yes if your client has any dependants
             has_restrictions:
