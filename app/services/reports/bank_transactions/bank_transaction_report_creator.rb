@@ -36,7 +36,8 @@ module Reports
       end
 
       def generate_csv
-        transactions = BankTransactionSorter.call(legal_aid_application)
+        # transactions = BankTransactionSorter.call(legal_aid_application)
+        transactions = legal_aid_application.bank_transactions.by_account_most_recent_first
         csv_string = CSV.generate do |csv|
           csv << BankTransactionPresenter.headers
           transactions.each do |transaction|
@@ -48,7 +49,13 @@ module Reports
       end
 
       def transaction_remarks_for
-        @transaction_remarks_for ||= legal_aid_application.cfe_result.remarks.review_transactions.transactions
+        raise 'No CFE result exists yet for this application' if cfe_result.nil?
+
+        @transaction_remarks_for ||= cfe_result.remarks.review_transactions.transactions
+      end
+
+      def cfe_result
+        legal_aid_application.cfe_result
       end
     end
   end
