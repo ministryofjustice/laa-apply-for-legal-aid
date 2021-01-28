@@ -21,7 +21,6 @@ module Providers
     def submit_application_reminder
       return if legal_aid_application.awaiting_applicant?
       return if legal_aid_application.applicant_entering_means?
-      return unless @form.model.used_delegated_functions?
 
       SubmitApplicationReminderService.new(legal_aid_application).send_email
     end

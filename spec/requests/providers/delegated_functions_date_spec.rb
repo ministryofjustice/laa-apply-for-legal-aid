@@ -54,6 +54,10 @@ RSpec.describe Providers::DelegatedFunctionsDatesController, type: :request, vcr
       expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
     end
 
+    it 'sends an email reminder' do
+      expect(SubmitApplicationReminderService).to have_received(:new).with(legal_aid_application)
+    end
+
     context 'when not authenticated' do
       let(:login_provider) { nil }
       it_behaves_like 'a provider not authenticated'
@@ -126,6 +130,10 @@ RSpec.describe Providers::DelegatedFunctionsDatesController, type: :request, vcr
         it 'displays error' do
           expect(response.body).to include('govuk-error-summary')
           expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.blank'))
+        end
+
+        it 'sends an email reminder' do
+          expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
         end
       end
     end

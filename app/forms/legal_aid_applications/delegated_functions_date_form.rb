@@ -73,10 +73,6 @@ module LegalAidApplications
       draft? && !date_fields.partially_complete?
     end
 
-    def delete_existing_date
-      model.used_delegated_functions_on = nil
-    end
-
     def date_fields
       @date_fields ||= DateFieldBuilder.new(
         form: self,
