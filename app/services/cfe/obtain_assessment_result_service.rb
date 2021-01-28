@@ -5,10 +5,17 @@ module CFE
     private
 
     def headers
-      {
-        'Content-Type' => 'application/json',
-        'Accept' => 'application/json;version=2'
-      }
+      if Setting.allow_cash_payment?
+        {
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json;version=3'
+        }
+      else
+        {
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json;version=2'
+        }
+      end
     end
 
     def cfe_url_path

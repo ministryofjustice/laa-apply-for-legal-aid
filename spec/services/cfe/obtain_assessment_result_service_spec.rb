@@ -20,6 +20,35 @@ module CFE # rubocop:disable Metrics/ModuleLength
       end
     end
 
+    describe 'private method #headers' do
+      context 'cash payments are not enabled' do
+        it 'includes version=2 in the Accept header' do
+          expect(service.__send__(:headers))
+            .to eq(
+              {
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json;version=2'
+              }
+            )
+        end
+      end
+
+      context 'cash payments are enabled' do
+        before { Setting.setting.update!(allow_cash_payment: true) }
+        after { Setting.setting.update!(allow_cash_payment: false) }
+
+        it 'includes version=3 in the Accept header' do
+          expect(service.__send__(:headers))
+            .to eq(
+              {
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json;version=3'
+              }
+            )
+        end
+      end
+    end
+
     context 'success for v2' do
       before do
         stub_request(:get, service.cfe_url)
