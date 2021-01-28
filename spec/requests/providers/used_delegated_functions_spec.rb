@@ -2,7 +2,6 @@ require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:mocked_email_service) { instance_double(SubmitApplicationReminderService, send_email: {}) }
 
   before do
     login_provider
@@ -77,7 +76,6 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     let(:button_clicked) { {} }
 
     before do
-      allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
       patch(
         providers_legal_aid_application_used_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
