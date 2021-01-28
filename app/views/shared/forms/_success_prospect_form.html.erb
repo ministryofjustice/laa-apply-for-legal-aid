@@ -11,7 +11,7 @@
       <%= form.govuk_radio_button :success_prospect, prospect,
                                   label: {text: t("shared.forms.success_prospect.#{prospect}")},
                                   hint: {text: t("shared.forms.success_prospect.hint.#{prospect}")} do %>
-          <%= form.govuk_text_area :success_prospect_details,
+          <%= form.govuk_text_area "success_prospect_details_#{prospect}".to_sym,
                                    label: {text: 'Tell us why legal aid should be granted'}, rows: 5 %>
           <% end %>
       <% end %>
