@@ -17,19 +17,23 @@ module GovukEmails
       @govuk_message_id = govuk_message_id
     end
 
-    def call
+    def call # rubocop:disable Metrics/MethodLength
       if govuk_message_id.nil?
         send_first_email
       elsif email.permanently_failed?
-        capture_error
+        send_undeliverable_alert(:permanently_failed)
+        Raven.capture_message("Undeliverable Email Error - #{error_details.to_json}")
       elsif email.should_resend?
         send_new_email
       elsif !email.delivered?
         keep_monitoring
       end
-    rescue Notifications::Client::NotFoundError
+    rescue Notifications::Client::NotFoundError => e
       # simulated_email_addresses can't be monitored
-      raise unless simulated_email_address?
+      unless simulated_email_address?
+        send_undeliverable_alert(e)
+        raise
+      end
     end
 
     def trigger_job(message_id)
@@ -43,6 +47,16 @@ module GovukEmails
     end
 
     private
+
+    def error_details
+      {
+        mailer: @mailer,
+        mail_method: @mail_method,
+        delivery_method: @delivery_method,
+        email_args: @email_args,
+        govuk_message_id: @govuk_message_id
+      }
+    end
 
     def send_first_email
       self.govuk_message_id = send_email.govuk_notify_response.id
@@ -65,23 +79,21 @@ module GovukEmails
       mailer.constantize.public_send(mail_method, *email_args).send(delivery_method)
     end
 
-    def capture_error
-      raise StandardError, error_message
-    rescue StandardError => e
-      Raven.capture_exception(e)
-    end
-
-    def error_message
-      [
-        '*Email ERROR*',
-        "*#{mailer}.#{mail_method}* could not be sent",
-        "*GovUk email status:* #{email.status}",
-        email_args.to_s
-      ].join("\n")
+    def send_undeliverable_alert(error)
+      failure_reason = if error.is_a?(StandardError)
+                         error.class.to_s
+                       else
+                         error
+                       end
+      UndeliverableEmailAlertMailer.notify_apply_team(email_address, failure_reason, @mailer, @mail_method, @email_args)
     end
 
     def simulated_email_address?
       Rails.configuration.x.simulated_email_address.in?(email_args.to_s)
+    end
+
+    def email_address
+      @email_args.detect { |arg| arg.to_s =~ /^\S+@\S+\.\S{2,3}$/ }
     end
   end
 end
