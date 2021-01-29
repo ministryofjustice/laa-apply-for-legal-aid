@@ -9,8 +9,21 @@ class ProceedingType < ApplicationRecord
 
   def self.populate
     ProceedingTypePopulator.call
+    refresh_textsearchable
   end
 
   delegate :default_substantive_scope_limitation,
            :default_delegated_functions_scope_limitation, to: :proceeding_type_scope_limitations
+
+  def self.refresh_textsearchable
+    query = <<~EOSQL
+      UPDATE proceeding_types
+      SET textsearchable =
+            setweight(to_tsvector(coalesce(meaning,'')), 'B')    ||
+            setweight(to_tsvector(coalesce(description, '')), 'C')  ||
+            setweight(to_tsvector(coalesce(additional_search_terms,'')), 'A') ;
+    EOSQL
+
+    connection.execute(query)
+  end
 end

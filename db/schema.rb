@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_155032) do
+ActiveRecord::Schema.define(version: 2021_01_26_151112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -535,8 +535,10 @@ ActiveRecord::Schema.define(version: 2021_01_15_155032) do
     t.boolean "involvement_type_applicant"
     t.string "additional_search_terms"
     t.uuid "default_service_level_id"
+    t.tsvector "textsearchable"
     t.index ["code"], name: "index_proceeding_types_on_code"
     t.index ["default_service_level_id"], name: "index_proceeding_types_on_default_service_level_id"
+    t.index ["textsearchable"], name: "textsearch_idx", using: :gin
   end
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

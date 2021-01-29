@@ -14,6 +14,7 @@ FactoryBot.define do
     default_cost_limitation_delegated_functions { 1 }
     default_cost_limitation_substantive { 2 }
     involvement_type_applicant { false }
+    additional_search_terms { nil }
 
     trait :with_real_data do
       code { 'PR0208' }
