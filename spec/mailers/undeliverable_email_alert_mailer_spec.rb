@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
-  # let(:application) { create :legal_aid_application, :with_applicant }
-  # let(:email) { Faker::Internet.safe_email }
-  # let(:provider_name) { Faker::Name.name }
-  # let(:application_url) { 'test' }
-
   let(:email_address) { 'stephen@stephenrichards.eu' }
   let(:failure_reason) { :permanently_failed }
   let(:mailer) { 'NotifyMailer' }

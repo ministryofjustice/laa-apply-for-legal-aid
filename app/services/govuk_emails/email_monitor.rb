@@ -22,6 +22,7 @@ module GovukEmails
         send_first_email
       elsif email.permanently_failed?
         send_undeliverable_alert(:permanently_failed)
+        Raven.capture_message("Undeliverable Email Error - #{error_details.to_json}")
       elsif email.should_resend?
         send_new_email
       elsif !email.delivered?
@@ -46,6 +47,16 @@ module GovukEmails
     end
 
     private
+
+    def error_details
+      {
+        mailer: @mailer,
+        mail_method: @mail_method,
+        delivery_method: @delivery_method,
+        email_args: @email_args,
+        govuk_message_id: @govuk_message_id
+      }
+    end
 
     def send_first_email
       self.govuk_message_id = send_email.govuk_notify_response.id

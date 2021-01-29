@@ -126,6 +126,11 @@ RSpec.describe GovukEmails::EmailMonitor do
           subject
         end
 
+        it 'sends a message to Sentry' do
+          expect(Raven).to receive(:capture_message).with(/^Undeliverable Email Error -/)
+          subject
+        end
+
         it 'does not re-trigger the job for monitoring or sending a new email' do
           expect(email_monitor).not_to receive(:trigger_job)
           subject
