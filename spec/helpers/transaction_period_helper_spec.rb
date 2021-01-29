@@ -5,13 +5,13 @@ RSpec.describe TransactionPeriodHelper, type: :helper do
 
   describe '#date_from(application)' do
     it 'returns a valid date' do
-      expect(helper.date_from(application)).to eq 'October 21, 2020'
+      expect(helper.date_from(application)).to eq '21 October 2020'
     end
   end
 
   describe '#date_to(application)' do
     it 'returns a valid date' do
-      expect(helper.date_to(application)).to eq 'January 21, 2021'
+      expect(helper.date_to(application)).to eq '21 January 2021'
     end
   end
 end
