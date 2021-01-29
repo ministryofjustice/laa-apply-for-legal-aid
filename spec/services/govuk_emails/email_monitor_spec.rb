@@ -113,21 +113,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'captures an exception' do
-          expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
-            expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-            expect(arg2).to eq :permanently_failed
-            expect(arg3).to eq 'FeedbackMailer'
-            expect(arg4).to eq 'notify'
-            expect(arg5).to be_an_instance_of(Array)
-            expect(arg5.size).to eq 2
-            expect(arg5.first).to be_an_instance_of(Feedback)
-            expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-          end
-          subject
-        end
-
-        it 'sends a message to Sentry' do
-          expect(Raven).to receive(:capture_message).with(/^Undeliverable Email Error -/)
+          expect(Raven).to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -169,31 +155,7 @@ RSpec.describe GovukEmails::EmailMonitor do
           .and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
       end
 
-      it 'raises an error' do
-        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
-          expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-          expect(arg2).to eq 'Notifications::Client::NotFoundError'
-          expect(arg3).to eq 'FeedbackMailer'
-          expect(arg4).to eq 'notify'
-          expect(arg5).to be_an_instance_of(Array)
-          expect(arg5.size).to eq 2
-          expect(arg5.first).to be_an_instance_of(Feedback)
-          expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-        end
-        expect { subject }.to raise_error(Notifications::Client::NotFoundError)
-      end
-
-      it 'sends an undeliverable email alert' do
-        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
-          expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-          expect(arg2).to eq 'Notifications::Client::NotFoundError'
-          expect(arg3).to eq 'FeedbackMailer'
-          expect(arg4).to eq 'notify'
-          expect(arg5).to be_an_instance_of(Array)
-          expect(arg5.size).to eq 2
-          expect(arg5.first).to be_an_instance_of(Feedback)
-          expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-        end
+      it 'raises and error' do
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
       end
 
