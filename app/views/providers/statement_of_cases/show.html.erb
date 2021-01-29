@@ -13,11 +13,15 @@
       back_link: { path: providers_legal_aid_application_respondent_path(@legal_aid_application) }
     ) do %>
 
-  <%= govuk_form_group(
-        input: :proceedings_before_the_court,
-        show_error_if: @form.errors.any?
-      ) do %>
-    <%= govuk_fieldset_header page_title, padding_below: 7 %>
+  <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+          model: @form,
+          url: providers_legal_aid_application_statement_of_case_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
     <p class="govuk-body"><%= t('generic.tell_us') %></p>
     <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
@@ -34,36 +38,27 @@
       </strong>
     </div>
 
-    <%= form_with(
-          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-          model: @form,
-          url: providers_legal_aid_application_statement_of_case_path,
-          method: :patch,
-          local: true
-        ) do |form| %>
+    <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
+                              hint: {text: t('.size_hint')} %>
+    <%= form.submit(
+            t('generic.upload'),
+            id: 'upload',
+            name: 'upload_button',
+            class: 'govuk-button form-button'
+        ) %>
 
-      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
-                                hint: {text: t('.size_hint')} %>
-        <br>
-        <%= form.submit(
-                t('generic.upload'),
-                id: 'upload',
-                name: 'upload_button',
-                class: 'govuk-button form-button'
-            ) %>
-
-        <% #  Customised accessibility alerts within this span below %>
-        <% if @successfully_deleted %>
-          <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
-        <% end %>
-        <% if @error_message || @successful_upload %>
-          <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
-        <% end %>
+    <% #  Customised accessibility alerts within this span below %>
+    <% if @successfully_deleted %>
+      <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
+    <% end %>
+    <% if @error_message || @successful_upload %>
+      <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
     <% end %>
 
     <div id="uploaded-files-table-container">
       <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
     </div>
+    <% end %>
 
     <%= form_with(
           builder: GOVUKDesignSystemFormBuilder::FormBuilder,
@@ -71,7 +66,8 @@
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,
           local: true
-        ) do |form| %>
+      ) do |form| %>
+
       <%= form.govuk_radio_divider %>
 
       <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
