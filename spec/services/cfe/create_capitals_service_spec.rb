@@ -160,7 +160,7 @@ module CFE
 
     def dummy_response_hash
       {
-        "success": true
+        success: true
       }
     end
   end

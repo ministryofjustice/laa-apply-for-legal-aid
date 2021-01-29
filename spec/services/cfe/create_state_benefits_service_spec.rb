@@ -93,17 +93,17 @@ module CFE
     end
 
     def expected_payload_hash
-      { "state_benefits": [basic_payload_hash] }
+      { state_benefits: [basic_payload_hash] }
     end
 
     def with_disregarded_hash
       {
-        "name": 'grenfell_payments',
-        "payments": [
+        name: 'grenfell_payments',
+        payments: [
           {
-            "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45,
-            "client_id": '22222222-2222-2222-2222-222222222222'
+            date: DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
+            amount: 123.45,
+            client_id: '22222222-2222-2222-2222-222222222222'
           }
         ]
       }
@@ -111,22 +111,22 @@ module CFE
 
     def basic_payload_hash # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       {
-        "name": 'child_benefit',
-        "payments": [
+        name: 'child_benefit',
+        payments: [
           {
-            "date": DAY_SEQUENCE[2].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45,
-            "client_id": '22222222-2222-2222-2222-222222222222'
+            date: DAY_SEQUENCE[2].days.ago.strftime('%Y-%m-%d'),
+            amount: 123.45,
+            client_id: '22222222-2222-2222-2222-222222222222'
           },
           {
-            "date": DAY_SEQUENCE[1].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45,
-            "client_id": '22222222-2222-2222-2222-222222222222'
+            date: DAY_SEQUENCE[1].days.ago.strftime('%Y-%m-%d'),
+            amount: 123.45,
+            client_id: '22222222-2222-2222-2222-222222222222'
           },
           {
-            "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
-            "amount": 123.45,
-            "client_id": '22222222-2222-2222-2222-222222222222'
+            date: DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
+            amount: 123.45,
+            client_id: '22222222-2222-2222-2222-222222222222'
           }
         ]
       }
@@ -134,13 +134,13 @@ module CFE
 
     def flagged_payload_hash
       {
-        "name": 'unknown',
-        "payments": [
+        name: 'unknown',
+        payments: [
           {
-            "date": DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
-            "amount": 321.99,
-            "client_id": '22222222-2222-2222-2222-222222222222',
-            "flags": { multi_benefit: true }
+            date: DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
+            amount: 321.99,
+            client_id: '22222222-2222-2222-2222-222222222222',
+            flags: { multi_benefit: true }
           }
         ]
       }
@@ -148,19 +148,19 @@ module CFE
 
     def dummy_response_hash
       {
-        "objects": [
+        objects: [
           {
-            "id": 'ba43211a-6972-4839-994a-cdd7978c576f',
-            "gross_income_summary_id": '1a3e0752-4b63-4041-b9d7-f083331f9ab2',
-            "state_benefit_type_id": '4115b92e-4a2f-4553-9c64-b9c177baf7b4',
-            "name": 'child_maintenance',
-            "created_at": '2020-03-27T13:08:22.022Z',
-            "updated_at": '2020-03-27T13:08:22.022Z',
-            "monthly_value": '123.45'
+            id: 'ba43211a-6972-4839-994a-cdd7978c576f',
+            gross_income_summary_id: '1a3e0752-4b63-4041-b9d7-f083331f9ab2',
+            state_benefit_type_id: '4115b92e-4a2f-4553-9c64-b9c177baf7b4',
+            name: 'child_maintenance',
+            created_at: '2020-03-27T13:08:22.022Z',
+            updated_at: '2020-03-27T13:08:22.022Z',
+            monthly_value: '123.45'
           }
         ],
-        "errors": [],
-        "success": true
+        errors: [],
+        success: true
       }
     end
   end

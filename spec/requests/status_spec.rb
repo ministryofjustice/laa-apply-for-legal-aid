@@ -19,9 +19,9 @@ RSpec.describe StatusController, type: :request do
             redis: true,
             sidekiq: true,
             sidekiq_queue: false,
-            'malware_scanner': {
-              'positive': true,
-              'negative': true
+            malware_scanner: {
+              positive: true,
+              negative: true
             }
           }
         }.to_json
@@ -72,14 +72,14 @@ RSpec.describe StatusController, type: :request do
 
       let(:failed_healthcheck) do
         {
-          'checks': {
-            'database': false,
-            'redis': false,
-            'sidekiq': false,
-            'sidekiq_queue': true,
-            'malware_scanner': {
-              'positive': true,
-              'negative': true
+          checks: {
+            database: false,
+            redis: false,
+            sidekiq: false,
+            sidekiq_queue: true,
+            malware_scanner: {
+              positive: true,
+              negative: true
             }
           }
         }.to_json
@@ -103,14 +103,14 @@ RSpec.describe StatusController, type: :request do
 
       let(:failed_healthcheck) do
         {
-          'checks': {
-            'database': true,
-            'redis': true,
-            'sidekiq': false,
-            'sidekiq_queue': true,
-            'malware_scanner': {
-              'positive': true,
-              'negative': true
+          checks: {
+            database: true,
+            redis: true,
+            sidekiq: false,
+            sidekiq_queue: true,
+            malware_scanner: {
+              positive: true,
+              negative: true
             }
           }
         }.to_json
@@ -134,14 +134,14 @@ RSpec.describe StatusController, type: :request do
 
       let(:failed_healthcheck) do
         {
-          'checks': {
-            'database': true,
-            'redis': true,
-            'sidekiq': true,
-            'sidekiq_queue': false,
-            'malware_scanner': {
-              'positive': true,
-              'negative': true
+          checks: {
+            database: true,
+            redis: true,
+            sidekiq: true,
+            sidekiq_queue: false,
+            malware_scanner: {
+              positive: true,
+              negative: true
             }
           }
         }.to_json
@@ -169,14 +169,14 @@ RSpec.describe StatusController, type: :request do
 
       let(:expected_response) do
         {
-          'checks': {
-            'database': true,
-            'redis': true,
-            'sidekiq': true,
-            'sidekiq_queue': true,
-            'malware_scanner': {
-              'positive': true,
-              'negative': true
+          checks: {
+            database: true,
+            redis: true,
+            sidekiq: true,
+            sidekiq_queue: true,
+            malware_scanner: {
+              positive: true,
+              negative: true
             }
           }
         }.to_json

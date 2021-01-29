@@ -12,17 +12,17 @@ module Dashboard
 
       describe '.dataset_definition' do
         it 'returns hash of field definitions' do
-          expected_definition = { "fields":
+          expected_definition = { fields:
                                     [
-                                      { "name": 'Date', "type": 'date' },
-                                      { "name": 'Started applications', "optional": false, "type": 'number' },
-                                      { "name": 'Submitted applications', "optional": false, "type": 'number' },
-                                      { "name": 'Submitted passported applications', "optional": false, "type": 'number' },
-                                      { "name": 'Submitted nonpassported applications', "optional": false, "type": 'number' },
-                                      { "name": 'Total submitted applications', "optional": false, "type": 'number' },
-                                      { "name": 'Failed applications', "optional": false, "type": 'number' },
-                                      { "name": 'Delegated function applications', "optional": false, "type": 'number' }
-                                    ], "unique_by": ['date'] }.to_json
+                                      { name: 'Date', type: 'date' },
+                                      { name: 'Started applications', optional: false, type: 'number' },
+                                      { name: 'Submitted applications', optional: false, type: 'number' },
+                                      { name: 'Submitted passported applications', optional: false, type: 'number' },
+                                      { name: 'Submitted nonpassported applications', optional: false, type: 'number' },
+                                      { name: 'Total submitted applications', optional: false, type: 'number' },
+                                      { name: 'Failed applications', optional: false, type: 'number' },
+                                      { name: 'Delegated function applications', optional: false, type: 'number' }
+                                    ], unique_by: ['date'] }.to_json
           expect(described_class.dataset_definition.to_json).to eq expected_definition
         end
       end
