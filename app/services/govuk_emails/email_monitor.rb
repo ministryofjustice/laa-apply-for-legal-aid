@@ -1,9 +1,9 @@
 module GovukEmails
-  class EmailMonitor
+  class EmailMonitor # rubocop:disable Metrics/ClassLength
     attr_reader :mailer, :mail_method, :delivery_method, :email_args
     attr_accessor :govuk_message_id
 
-    JOBS_DELAY = 5.seconds
+    JOBS_DELAY = 300.seconds
 
     def self.call(**args)
       new(**args).call
@@ -17,10 +17,18 @@ module GovukEmails
       @govuk_message_id = govuk_message_id
     end
 
-    def call # rubocop:disable Metrics/MethodLength
+    def call
       if govuk_message_id.nil?
         send_first_email
-      elsif email.permanently_failed?
+      else
+        handle_status_check_response
+      end
+    end
+
+    def handle_status_check_response
+      update_sent_emails
+
+      if email.permanently_failed?
         send_undeliverable_alert(:permanently_failed)
         Raven.capture_message("Undeliverable Email Error - #{error_details.to_json}")
       elsif email.should_resend?
@@ -29,11 +37,15 @@ module GovukEmails
         keep_monitoring
       end
     rescue Notifications::Client::NotFoundError => e
-      # simulated_email_addresses can't be monitored
-      unless simulated_email_address?
-        send_undeliverable_alert(e)
-        raise
-      end
+      handle_not_found_exception(e)
+    end
+
+    def handle_not_found_exception(exception)
+      return if simulated_email_address?
+
+      send_undeliverable_alert(exception)
+      update_sent_email_with_exception
+      raise
     end
 
     def trigger_job(message_id)
@@ -48,6 +60,14 @@ module GovukEmails
 
     private
 
+    def update_sent_emails
+      if govuk_message_id.nil?
+        create_sent_email
+      else
+        update_sent_email
+      end
+    end
+
     def error_details
       {
         mailer: @mailer,
@@ -60,7 +80,29 @@ module GovukEmails
 
     def send_first_email
       self.govuk_message_id = send_email.govuk_notify_response.id
+      create_sent_email
       keep_monitoring
+    end
+
+    def create_sent_email
+      SentEmail.create!(mailer: @mailer,
+                        mail_method: @mail_method,
+                        addressee: email_address,
+                        govuk_message_id: @govuk_message_id,
+                        mailer_args: @mailer_args.to_json,
+                        sent_at: Time.zone.now,
+                        status: 'created',
+                        status_checked_at: nil)
+    end
+
+    def update_sent_email
+      sent_email = SentEmail.find_by!(govuk_message_id: govuk_message_id)
+      sent_email.update(status: email.status, status_checked_at: Time.zone.now)
+    end
+
+    def update_sent_email_with_exception
+      sent_email = SentEmail.find_by!(govuk_message_id: govuk_message_id)
+      sent_email.update(status: 'Notifications::Client::NotFoundError', status_checked_at: Time.zone.now)
     end
 
     def send_new_email

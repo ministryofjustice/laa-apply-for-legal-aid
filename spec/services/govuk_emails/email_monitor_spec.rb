@@ -30,6 +30,12 @@ RSpec.describe GovukEmails::EmailMonitor do
     }
   end
   let(:email_monitor) { described_class.new(**params) }
+  let(:time_now) { Time.zone.now }
+  let(:double_email) { double(GovukEmails::Email, status: email_status, permanently_failed?: email_failed?, should_resend?: email_resend?, delivered?: email_delivered?) }
+  let(:email_status) { 'sending' }
+  let(:email_failed?) { false }
+  let(:email_resend?) { false }
+  let(:email_delivered?) { false }
 
   subject { email_monitor.call }
 
@@ -58,10 +64,21 @@ RSpec.describe GovukEmails::EmailMonitor do
         subject
         expect(stub_email_status).not_to have_been_requested
       end
+
+      it 'has created an sent_email record' do
+        subject
+        sent_email = SentEmail.find_by!(govuk_message_id: status_govuk_message_id)
+        expect(sent_email.mailer).to eq mailer
+        expect(sent_email.addressee).to eq to
+        expect(sent_email.mailer_args).to eq 'null'
+        expect(sent_email.status).to eq 'created'
+        expect(sent_email.status_checked_at).to be_nil
+      end
     end
 
     context 'email has already been sent at least once' do
       context 'email has been delivered' do
+        let!(:sent_email) { create :sent_email, :pending, govuk_message_id: arg_govuk_message_id }
         let(:message_status) { GovukEmails::Email::DELIVERED_STATUS }
 
         it 'does not send the email' do
@@ -78,9 +95,16 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(email_monitor).not_to receive(:trigger_job)
           subject
         end
+
+        it 'has updated the sent email record' do
+          subject
+          sent_email.reload
+          expect(sent_email.status).to eq 'delivered'
+        end
       end
 
       context 'email is still pending' do
+        let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
         let(:message_status) { 'pending' }
 
         it 'does not send the email' do
@@ -102,10 +126,22 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(email_monitor).not_to receive(:trigger_job).with(nil)
           subject
         end
+
+        it 'updates the sent_email record' do
+          allow_any_instance_of(described_class).to receive(:email).and_return(double_email)
+          travel_to time_now
+          subject
+          sent_email = SentEmail.find_by!(govuk_message_id: arg_govuk_message_id)
+          expect(sent_email.status).to eq 'sending'
+          expect(sent_email.status_checked_at.to_i).to eq time_now.to_i
+          travel_back
+        end
       end
 
       context 'email permanently failed' do
         let(:message_status) { GovukEmails::Email::PERMANENTLY_FAILED_STATUS }
+        let(:email_status) { message_status }
+        let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
         it 'does not send the email' do
           subject
@@ -135,10 +171,22 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(email_monitor).not_to receive(:trigger_job)
           subject
         end
+
+        it 'updates the sent_email record' do
+          allow_any_instance_of(described_class).to receive(:email).and_return(double_email)
+          travel_to time_now
+          subject
+          sent_email = SentEmail.find_by!(govuk_message_id: arg_govuk_message_id)
+          expect(sent_email.status).to eq 'permanent-failure'
+          expect(sent_email.status_checked_at.to_i).to eq time_now.to_i
+          travel_back
+        end
       end
 
       context 'email failed and can be resent' do
         let(:message_status) { GovukEmails::Email::RESENDABLE_STATUS.sample }
+        let(:email_status) { message_status }
+        let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
         it 'does not send the email' do
           subject
@@ -159,6 +207,16 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(email_monitor).to receive(:trigger_job).with(nil)
           subject
         end
+
+        it 'updates the sent_email record' do
+          allow_any_instance_of(described_class).to receive(:email).and_return(double_email)
+          travel_to time_now
+          subject
+          sent_email = SentEmail.find_by!(govuk_message_id: arg_govuk_message_id)
+          expect(sent_email.status).to eq message_status
+          expect(sent_email.status_checked_at.to_i).to eq time_now.to_i
+          travel_back
+        end
       end
     end
 
@@ -168,6 +226,8 @@ RSpec.describe GovukEmails::EmailMonitor do
           .to receive(:get_notification)
           .and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
       end
+
+      let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
       it 'raises an error' do
         expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
@@ -195,6 +255,12 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
         end
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
+      end
+
+      it 'updates sent_email record' do
+        expect { subject }.to raise_error(Notifications::Client::NotFoundError)
+        sent_email = SentEmail.find_by!(govuk_message_id: arg_govuk_message_id)
+        expect(sent_email.status).to eq 'Notifications::Client::NotFoundError'
       end
 
       context 'email is to simulated test email address' do
