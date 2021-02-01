@@ -48,7 +48,7 @@ module Flow
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
           forward: ->(application) do
-            application.used_delegated_functions_on&.between?(12.months.ago, 1.months.ago) ? :delegated_functions_dates : :limitations
+            application.used_delegated_functions_on&.between?(12.months.ago, 1.month.ago) ? :delegated_functions_dates : :limitations
           end
         },
         delegated_functions_dates: {
