@@ -88,8 +88,16 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
     end
 
-    it 'redirects to the delegated_functions_date page' do
-      expect(response).to redirect_to(providers_legal_aid_application_delegated_functions_date_path(legal_aid_application))
+    it 'redirects to the limitations page' do
+      expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
+    end
+
+    context 'used delegated functions date is between 1 month and 12 months ago' do
+      let(:used_delegated_functions_on) { rand(35..365).days.ago.to_date }
+
+      it 'redirects to the delegated_functions_date page' do
+        expect(response).to redirect_to(providers_legal_aid_application_delegated_functions_date_path(legal_aid_application))
+      end
     end
 
     context 'when not authenticated' do
