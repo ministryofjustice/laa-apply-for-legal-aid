@@ -469,11 +469,11 @@ cy:
           not_known: sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
             kroW
       types_of_income_form:
-        financial_help_examples: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
-          roF"
-        benefits_examples: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
-        pension_examples: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
-        none_selected: eseht fo enoN
+        hints:
+          friends_or_family: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
+            roF"
+          benefits: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
+          pension: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
         expanded_explanation:
           heading: "?siht deksa gnieb I ma yhW"
           list: |2-
