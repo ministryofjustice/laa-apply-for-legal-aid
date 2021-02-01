@@ -8,7 +8,6 @@ en:
       error: "Error:"
     hint:
       search: You can search by Application Reference, ccms_reference, client's name or application_id
-      additional_account: Share details of any accounts you have with another bank or building society
       address_lookup:
         postcode: This must be a valid UK postcode
       applicant:

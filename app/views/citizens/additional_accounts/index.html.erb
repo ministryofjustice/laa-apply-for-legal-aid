@@ -1,20 +1,17 @@
-  <%= page_template page_title: t('.field_set_header'), template: :basic do %>
-    <%= form_with(model: @form, url: citizens_additional_accounts_path, method: :post, local: true) do |form| %>
+  <%= page_template page_title: t('.header'), template: :basic do %>
+    <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+                  model: @form,
+                  url: citizens_additional_accounts_path,
+                  method: :post, local: true) do |form| %>
 
-      <%= render partial: 'shared/error' if @error %>
-
-      <%= govuk_form_group(
-            show_error_if: @error,
-            input: :additional_account
-          ) do %>
+        <%= render partial: 'shared/error' if @error %>
 
         <%= form.govuk_collection_radio_buttons :additional_account,
-                                                form.yes_no_radio_button_array,
+                                                yes_no_options,
                                                 :value,
                                                 :label,
-                                                error: @error&.values&.first,
-                                                title: content_for(:page_title) %>
-      <% end %>
+                                                hint: {text: t('.hint')},
+                                                legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
 
       <%= next_action_buttons(form: form) %>
     <% end %>

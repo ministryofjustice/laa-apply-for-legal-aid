@@ -24,7 +24,8 @@ en:
         link_other_account: Add another bank account
     additional_accounts:
       index:
-        field_set_header: Do you have accounts with other banks?
+        header: Do you have accounts with other banks?
+        hint: Share details of any accounts you have with another bank or building society
         error: Select yes if you have accounts with other banks
       new:
         hint: Do not include savings accounts
