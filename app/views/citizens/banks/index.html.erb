@@ -1,17 +1,20 @@
 <%= page_template page_title: t('.title'), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
-  <%= form_with(local: true) do |form| %>
-    <%= govuk_form_group(show_error_if: @error) do %>
-      <fieldset class="govuk-fieldset">
-        <%= govuk_fieldset_header content_for(:page_title) %>
-        <%= govuk_hint t('.hint') %>
-        <div class="govuk-radios bank-selection">
-          <%= render partial: 'bank', collection: TrueLayerBank.available_banks, locals: { form: form } %>
-        </div>
-      </fieldset>
-    <% end %>
+    <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, local: true) do |form| %>
+      <div class="govuk-radios bank-selection">
+        <%= form.govuk_radio_buttons_fieldset(:provider_id,
+                                              legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'},
+                                              hint: {text: t('.hint')}) do %>
+          <% TrueLayerBank.available_banks.each do |bank| %>
+            <%= form.govuk_radio_button :provider_id, bank[:provider_id], label: -> do %>
+                <div class="bank-logo">
+                  <%= image_tag(bank[:logo_url], alt:'') if bank[:logo_url] %>
+                </div>
+                <span><%= bank[:display_name] %></span>
+              <% end %>
+          <% end %>
+        <% end %>
+      </div>
 
     <h2 class="govuk-heading-m"><%= t('.what_happens_next') %></h2>
     <p class="govuk-body"><%= t('.connect') %></p>

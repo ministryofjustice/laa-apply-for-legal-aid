@@ -1,14 +1,11 @@
 <%= page_template page_title: t('.title_html') do %>
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
       url: citizens_consent_path,
       method: :patch,
       local: true
     ) do |form| %>
-
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-
-      <%= govuk_error_message(form.object.errors[:proceedings_before_the_court].first) %>
 
       <div class="govuk-inset-text">
         <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.inset_text') %></p>
@@ -43,17 +40,14 @@
 
       <%= form.govuk_collection_radio_buttons(
               :open_banking_consent,
-              form.yes_no_radio_button_array,
+              yes_no_options,
               :value,
               :label,
-              error: @error,
-              title: {
+              legend: {
                   text: t('.title_html'),
-                  htag: :h2,
                   hidden: true
               }
           ) %>
-    <% end %>
 
     <%= next_action_buttons(
       form: form,
