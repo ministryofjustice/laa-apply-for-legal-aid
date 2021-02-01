@@ -422,10 +422,10 @@ en:
             borderline: You cannot predict the outcome
             not_known: Work still needs to be done to determine the likelihood of success
       types_of_income_form:
-        financial_help_examples: For example, money from a family member for rent or bills.
-        benefits_examples: For example, Child Benefit or tax credits.
-        pension_examples: Include State, workplace and personal pensions.
-        none_selected: None of these
+        hints:
+          friends_or_family: For example, money from a family member for rent or bills.
+          benefits: For example, Child Benefit or tax credits.
+          pension: Include State, workplace and personal pensions.
         expanded_explanation:
           heading: Why am I being asked this?
           list: |
