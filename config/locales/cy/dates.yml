@@ -4,7 +4,7 @@ cy:
     formats:
       default: "%Y-%m-%d"
       short_date: "%-d %b %Y"
-      long_date: "%B %d, %Y"
+      long_date: "%-d %B %Y"
       month_name: "%B"
     abbr_month_names:
       -
