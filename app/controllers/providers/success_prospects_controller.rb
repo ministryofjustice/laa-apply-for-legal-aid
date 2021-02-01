@@ -18,7 +18,9 @@ module Providers
 
     def form_params
       merge_with_model(merits_assessment) do
-        params.require(:merits_assessment).permit(:success_prospect, :success_prospect_details)
+        params.require(:merits_assessment).permit(:success_prospect, :success_prospect_details,
+                                                  :success_prospect_details_poor, :success_prospect_details_marginal,
+                                                  :success_prospect_details_borderline, :success_prospect_details_not_known)
       end
     end
   end
