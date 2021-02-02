@@ -8,10 +8,10 @@ class UndeliverableEmailAlertMailer < BaseApplyMailer
     set_personalisation(
       email_address: email_address,
       failure_reason: failure_reason,
-      mailer: mailer,
-      mail_method: mail_method,
-      email_args: email_args.to_json
+      mailer_and_method: "#{mailer}##{mail_method}",
+      mail_params: email_args.to_json
     )
+
     mail to: Rails.configuration.x.support_email_address
   end
 end

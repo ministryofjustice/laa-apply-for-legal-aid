@@ -119,7 +119,7 @@ module GovukEmails
                        else
                          error
                        end
-      UndeliverableEmailAlertMailer.notify_apply_team(email_address, failure_reason, @mailer, @mail_method, @email_args)
+      UndeliverableEmailAlertMailer.notify_apply_team(email_address, failure_reason, @mailer, @mail_method, @email_args).deliver_later!
     end
 
     def simulated_email_address?
