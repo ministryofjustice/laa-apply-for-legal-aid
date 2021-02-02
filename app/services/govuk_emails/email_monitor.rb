@@ -26,7 +26,7 @@ module GovukEmails
     end
 
     def handle_status_check_response
-      update_sent_emails
+      update_sent_email
 
       if email.permanently_failed?
         send_undeliverable_alert(:permanently_failed)
@@ -59,14 +59,6 @@ module GovukEmails
     end
 
     private
-
-    def update_sent_emails
-      if govuk_message_id.nil?
-        create_sent_email
-      else
-        update_sent_email
-      end
-    end
 
     def error_details
       {
