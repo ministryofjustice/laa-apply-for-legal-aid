@@ -70,7 +70,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         sent_email = SentEmail.find_by!(govuk_message_id: status_govuk_message_id)
         expect(sent_email.mailer).to eq mailer
         expect(sent_email.addressee).to eq to
-        expect(sent_email.mailer_args).to eq 'null'
+        expect(sent_email.mailer_args).to eq [feedback_email_params, to].to_json
         expect(sent_email.status).to eq 'created'
         expect(sent_email.status_checked_at).to be_nil
       end
