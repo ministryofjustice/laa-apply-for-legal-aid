@@ -1,6 +1,7 @@
 module CFESubmissionStateMachine
   extend ActiveSupport::Concern
 
+  # rubocop:disable Metrics/BlockLength
   included do
     include AASM
 
@@ -17,6 +18,7 @@ module CFESubmissionStateMachine
       state :other_income_created
       state :irregular_income_created
       state :explicit_remarks_created
+      state :cash_transactions_created
       state :results_obtained
       state :failed
 
@@ -60,6 +62,10 @@ module CFESubmissionStateMachine
         transitions from: :other_income_created, to: :irregular_income_created, guard: :non_passported?
       end
 
+      event :cash_transactions_created do
+        transitions from: :irregular_income_created, to: :cash_transactions_created, guard: :non_passported?
+      end
+
       event :explicit_remarks_created do
         transitions from: :properties_created, to: :explicit_remarks_created
       end
@@ -67,7 +73,8 @@ module CFESubmissionStateMachine
       event :results_obtained do
         transitions from: :explicit_remarks_created, to: :results_obtained, guard: :passported?
         transitions from: :other_income_created, to: :results_obtained # remove this when new_student_loan feature flag is removed
-        transitions from: :irregular_income_created, to: :results_obtained, guard: :non_passported?
+        transitions from: :irregular_income_created, to: :results_obtained, guard: :non_passported? # remove this when allow_cash_payment feature flag is removed
+        transitions from: :cash_transactions_created, to: :results_obtained, guard: :non_passported?
       end
 
       event :fail do
@@ -83,7 +90,9 @@ module CFESubmissionStateMachine
         transitions from: :other_income_created, to: :failed
         transitions from: :irregular_income_created, to: :failed
         transitions from: :explicit_remarks_created, to: :failed
+        transitions from: :cash_transactions_created, to: :failed
       end
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

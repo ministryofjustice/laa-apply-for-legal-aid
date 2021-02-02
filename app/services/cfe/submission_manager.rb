@@ -30,6 +30,7 @@ module CFE
     def call
       call_common_services
       call_non_passported_services
+      CreateCashTransactionsService.call(submission) if !submission.passported? && Setting.allow_cash_payment?
       ObtainAssessmentResultService.call(submission)
       true
     rescue SubmissionError => e
