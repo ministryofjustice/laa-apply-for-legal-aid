@@ -31,7 +31,14 @@ RSpec.describe GovukEmails::EmailMonitor do
   end
   let(:email_monitor) { described_class.new(**params) }
   let(:time_now) { Time.zone.now }
-  let(:double_email) { double(GovukEmails::Email, status: email_status, permanently_failed?: email_failed?, should_resend?: email_resend?, delivered?: email_delivered?) }
+  let(:double_email) do
+    double(GovukEmails::Email,
+           status: email_status,
+           # permanently_failed?: email_failed?,
+           # should_resend?: email_resend?,
+           temp_or_perm_failed?: email_failed? || email_resend?,
+           delivered?: email_delivered?)
+  end
   let(:email_status) { 'sending' }
   let(:email_failed?) { false }
   let(:email_resend?) { false }
@@ -152,7 +159,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         it 'captures an exception' do
           expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
             expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-            expect(arg2).to eq :permanently_failed
+            expect(arg2).to eq 'permanent-failure'
             expect(arg3).to eq 'FeedbackMailer'
             expect(arg4).to eq 'notify'
             expect(arg5).to be_an_instance_of(Array)
@@ -184,7 +191,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
       end
 
-      context 'email failed and can be resent' do
+      context 'email temporary failed' do
         let(:message_status) { GovukEmails::Email::RESENDABLE_STATUS.sample }
         let(:email_status) { message_status }
         let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
@@ -195,17 +202,15 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
+          expect(Raven).to receive(:capture_message) do |message|
+            expect(message).to match(/^Undeliverable Email Error /)
+            expect(message).to match(/"failure_reason":"#{message_status}"/)
+          end
           subject
         end
 
         it 'stops monitoring the email' do
           expect(email_monitor).not_to receive(:trigger_job).with(arg_govuk_message_id)
-          subject
-        end
-
-        it 'sends a new email' do
-          expect(email_monitor).to receive(:trigger_job).with(nil)
           subject
         end
 

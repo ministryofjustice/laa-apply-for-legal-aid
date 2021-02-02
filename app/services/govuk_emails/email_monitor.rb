@@ -28,11 +28,9 @@ module GovukEmails
     def handle_status_check_response
       update_sent_email
 
-      if email.permanently_failed?
-        send_undeliverable_alert(:permanently_failed)
+      if email.temp_or_perm_failed?
+        send_undeliverable_alert(email.status)
         Raven.capture_message("Undeliverable Email Error - #{error_details.to_json}")
-      elsif email.should_resend?
-        send_new_email
       elsif !email.delivered?
         keep_monitoring
       end
@@ -65,6 +63,7 @@ module GovukEmails
         mailer: @mailer,
         mail_method: @mail_method,
         delivery_method: @delivery_method,
+        failure_reason: email.status,
         email_args: @email_args,
         govuk_message_id: @govuk_message_id
       }
@@ -95,10 +94,6 @@ module GovukEmails
     def update_sent_email_with_exception
       sent_email = SentEmail.find_by!(govuk_message_id: govuk_message_id)
       sent_email.update(status: 'Notifications::Client::NotFoundError', status_checked_at: Time.zone.now)
-    end
-
-    def send_new_email
-      trigger_job(nil)
     end
 
     def keep_monitoring
