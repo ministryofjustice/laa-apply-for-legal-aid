@@ -81,7 +81,7 @@ module GovukEmails
                         mail_method: @mail_method,
                         addressee: email_address,
                         govuk_message_id: @govuk_message_id,
-                        mailer_args: @mailer_args.to_json,
+                        mailer_args: @email_args.to_json,
                         sent_at: Time.zone.now,
                         status: 'created',
                         status_checked_at: nil)
