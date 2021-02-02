@@ -8,22 +8,11 @@ module Providers
 
     def update
       @form = LegalAidApplications::UsedDelegatedFunctionsForm.new(form_params)
-      if save_continue_or_draft_and_update_scope_limitations
-        submit_application_reminder
-      else
-        render :show
-      end
+
+      render :show unless save_continue_or_draft_and_update_scope_limitations
     end
 
     private
-
-    def submit_application_reminder
-      return if legal_aid_application.awaiting_applicant?
-      return if legal_aid_application.applicant_entering_means?
-      return unless @form.model.used_delegated_functions?
-
-      SubmitApplicationReminderService.new(legal_aid_application).send_email
-    end
 
     def save_continue_or_draft_and_update_scope_limitations
       return false unless save_continue_or_draft(@form)

@@ -2,7 +2,6 @@ require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:mocked_email_service) { instance_double(SubmitApplicationReminderService, send_email: {}) }
 
   before do
     login_provider
@@ -77,7 +76,6 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     let(:button_clicked) { {} }
 
     before do
-      allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
       patch(
         providers_legal_aid_application_used_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
@@ -92,6 +90,14 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
     it 'redirects to the limitations page' do
       expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
+    end
+
+    context 'used delegated functions date is between 1 month and 12 months ago' do
+      let(:used_delegated_functions_on) { rand(35..365).days.ago.to_date }
+
+      it 'redirects to the delegated_functions_date page' do
+        expect(response).to redirect_to(providers_legal_aid_application_delegated_functions_date_path(legal_aid_application))
+      end
     end
 
     context 'when not authenticated' do
@@ -176,12 +182,8 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         expect(legal_aid_application.scope_limitations).to eq [default_substantive_scope_limitation]
       end
 
-      it 'redirects to the online banking page' do
+      it 'redirects to the limitations page' do
         expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
-      end
-
-      it 'does not send a reminder email' do
-        expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
       end
     end
 

@@ -728,6 +728,11 @@ en:
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
+    delegated_functions_dates:
+      show:
+        heading: "Confirm you used delegated functions on %{date}"
+        correct_date: This date is correct
+        different_date: I used delegated functions on a different date
     vehicles:
       show:
         heading: Does your client own a vehicle?
