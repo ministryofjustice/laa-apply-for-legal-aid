@@ -334,9 +334,13 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
+      - hold_uat:
+          type: approval
+          requires:
+            - build_and_push
       - deploy_uat:
           requires:
-          - build_and_push
+            - hold_uat
       - unit_tests:
           requires:
           - lint_checks
