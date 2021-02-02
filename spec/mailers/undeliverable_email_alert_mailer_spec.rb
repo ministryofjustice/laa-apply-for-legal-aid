@@ -30,9 +30,8 @@ RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
       expect(mail.govuk_notify_personalisation).to eq(
         email_address: email_address,
         failure_reason: failure_reason,
-        mailer: mailer,
-        mail_method: mail_method,
-        email_args: args.to_json
+        mailer_and_method: 'NotifyMailer#citizen_start_email',
+        mail_params: args.to_json
       )
     end
   end

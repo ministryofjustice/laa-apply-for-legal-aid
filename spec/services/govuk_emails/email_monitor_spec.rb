@@ -36,6 +36,7 @@ RSpec.describe GovukEmails::EmailMonitor do
   let(:email_failed?) { false }
   let(:email_resend?) { false }
   let(:email_delivered?) { false }
+  let(:mock_mailer) { double UndeliverableEmailAlertMailer, deliver_later!: nil }
 
   subject { email_monitor.call }
 
@@ -149,7 +150,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'captures an exception' do
-          expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
+          expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
             expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
             expect(arg2).to eq :permanently_failed
             expect(arg3).to eq 'FeedbackMailer'
@@ -158,7 +159,7 @@ RSpec.describe GovukEmails::EmailMonitor do
             expect(arg5.size).to eq 2
             expect(arg5.first).to be_an_instance_of(Feedback)
             expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-          end
+          }.and_return(mock_mailer)
           subject
         end
 
@@ -230,7 +231,7 @@ RSpec.describe GovukEmails::EmailMonitor do
       let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
       it 'raises an error' do
-        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
+        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
           expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
           expect(arg2).to eq 'Notifications::Client::NotFoundError'
           expect(arg3).to eq 'FeedbackMailer'
@@ -239,12 +240,12 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(arg5.size).to eq 2
           expect(arg5.first).to be_an_instance_of(Feedback)
           expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-        end
+        }.and_return(mock_mailer)
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
       end
 
       it 'sends an undeliverable email alert' do
-        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) do |arg1, arg2, arg3, arg4, arg5|
+        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
           expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
           expect(arg2).to eq 'Notifications::Client::NotFoundError'
           expect(arg3).to eq 'FeedbackMailer'
@@ -253,7 +254,7 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(arg5.size).to eq 2
           expect(arg5.first).to be_an_instance_of(Feedback)
           expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-        end
+        }.and_return(mock_mailer)
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
       end
 
