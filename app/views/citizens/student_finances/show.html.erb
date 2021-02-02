@@ -1,14 +1,16 @@
 <%= page_template page_title: t('.field_set_header'), template: :basic do %>
 
-  <%= form_with(model: @form, url: citizens_student_finance_path, method: :patch, local: true) do |form| %>
+  <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+                model: @form,
+                url: citizens_student_finance_path,
+                method: :patch, local: true) do |form| %>
 
     <%= form.govuk_collection_radio_buttons :student_finance,
-                                            form.yes_no_radio_button_array,
+                                            yes_no_options,
                                             :value,
                                             :label,
-                                            error: @error,
-                                            hint: t('.hint'),
-                                            title: content_for(:page_title) %>
+                                            hint: {text: t('.hint')},
+                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
 
     <%= next_action_buttons(form: form) %>
   <% end %>
