@@ -62,8 +62,8 @@ module Admin
       search_applications
         .where(application_ref: search_params)
         .or(search_applications.where(id: search_params))
-        .or(search_applications.where("first_name || ' ' || last_name ILIKE '%#{search_params}%'"))
-        .or(search_applications.where("case_ccms_reference = '#{search_params}'"))
+        .or(search_applications.where("first_name || ' ' || last_name ILIKE :search_params", search_params: "%#{search_params}%"))
+        .or(search_applications.where(ccms_submission: { case_ccms_reference: search_params }))
     end
 
     def search_applications

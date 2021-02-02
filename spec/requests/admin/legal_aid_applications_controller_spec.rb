@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   let(:count) { 3 }
-  let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant, :with_non_passported_state_machine }
+  let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant, :with_non_passported_state_machine, :with_ccms_submission }
   let(:admin_user) { create :admin_user }
   let(:params) { {} }
 
