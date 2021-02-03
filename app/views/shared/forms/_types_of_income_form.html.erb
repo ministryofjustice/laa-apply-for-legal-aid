@@ -6,13 +6,10 @@
       local: true
     ) do |form| %>
 
-    <h2><% form %></h2>
-
     <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>
       <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
       <div class="deselect-group" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
         <% TransactionType.credits.not_children.each do |transaction_type| %>
-          <h2><% @legal_aid_application.transaction_types.include?(transaction_type) %></h2>
           <%= form.govuk_check_box transaction_type.name, true, multiple: false, link_errors: true,
                                    label: {text: t("transaction_types.names.#{journey_type}.#{transaction_type.name}")},
                                    hint: {text: t(".hints.#{transaction_type.name}", default: '')} %>
@@ -41,6 +38,8 @@
         </div>
     </details>
   <% end %>
+
+  <div class="govuk-!-padding-bottom-4"></div>
 
   <%= next_action_buttons(
         form: form,
