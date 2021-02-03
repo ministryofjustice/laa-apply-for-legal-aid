@@ -203,7 +203,7 @@ module CCMS
       end
 
       def generate_scope_limitations(xml)
-        @legal_aid_application.scope_limitations.uniq(&:code).each { |limitation| generate_scope_limitation(xml, limitation) }
+        @legal_aid_application.scope_limitations.uniq.each { |limitation| generate_scope_limitation(xml, limitation) }
       end
 
       def generate_scope_limitation(xml, limitation)

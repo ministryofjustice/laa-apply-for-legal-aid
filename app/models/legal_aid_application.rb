@@ -129,13 +129,12 @@ class LegalAidApplication < ApplicationRecord
     _prefix: true
   )
 
-  # convenience method to return the lead proceeding type.  For now, that is the ONLY
-  # proceeding type until such time as we have multiple proceeding types per applications,
-  # at which time this method should be changed to determine which is the lead one and return that.
-  #
   def lead_proceeding_type
-    lead_proceeding = application_proceeding_types.where(lead_proceeding: true)
-    ProceedingType.find(lead_proceeding.first.proceeding_type_id)
+    # lead = application_proceeding_types.where(lead_proceeding: true).first
+    # sq = ProceedingType.find(lead.proceeding_type_id)
+    # pp sq
+    # pp proceeding_types.first
+    proceeding_types.first
   end
 
   def cfe_result

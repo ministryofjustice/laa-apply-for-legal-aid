@@ -11,6 +11,7 @@ module CCMS
           create :legal_aid_application,
                  :with_everything,
                  :with_positive_benefit_check_result,
+                 # scope_limitations: [scope_limitation, scope_limitation2],
                  scope_limitations: [scope_limitation],
                  applicant: applicant,
                  vehicle: vehicle,
@@ -18,6 +19,7 @@ module CCMS
                  savings_amount: savings_amount,
                  provider: provider,
                  proceeding_types: [proceeding_type],
+                 # proceeding_types: [proceeding_type, proceeding_type2],
                  respondent: respondent,
                  office: office
         end
@@ -42,13 +44,12 @@ module CCMS
                  trust_value: 600
         end
         let(:scope_limitation) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
-        let(:scope_limitation2) { create :scope_limitation, code: 'AA002', description: 'In ut quia. Enim exercitationem nemo. Temporibus illum modi.' }
-        let(:scope_limitation3) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
+        # let(:scope_limitation2) { create :scope_limitation, code: 'AA002', description: 'In ut quia. Enim exercitationem nemo. Temporibus illum modi.' }
         let(:address) { create :address, postcode: 'GH08NY' }
         let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
         let(:firm) { create :firm, ccms_id: 169 }
         let(:proceeding_type) { create :proceeding_type, :with_real_data }
-        let(:proceeding_type2) { create :proceeding_type, :with_real_data }
+        # let(:proceeding_type2) { create :proceeding_type, :with_real_data2 }
         let(:respondent) { create :respondent, police_notified: true }
         let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
@@ -77,13 +78,19 @@ module CCMS
         it 'generates the expected xml' do
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
             test_data_xml = ccms_data_from_file 'case_add_request.xml'
-            # puts"this is the test data"
-            # pp test_data_xml
-            # puts "this is the expected"
-            # pp expected_xml
             expect(expected_xml).to eq test_data_xml
           end
         end
+
+        # lots of failures in this test
+        # need to add new test data or edit the xml to use the same details e.g client details
+        # format of the xml appears different to the current case_add_request.xml file
+        # it 'generates the expected xml' do
+        #   travel_to Time.parse('2020-11-24T11:54:29.000') do
+        #     test_data_xml = ccms_data_from_file 'case_add_request_df_multi_proc.xml'
+        #     expect(expected_xml).to eq test_data_xml
+        #   end
+        # end
       end
     end
   end
