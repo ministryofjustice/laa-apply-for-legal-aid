@@ -29,9 +29,6 @@ Lint/UriEscapeUnescape:
 Lint/RedundantCopDisableDirective:
   Enabled: false
 
-Lint/SymbolConversion:
-  Enabled: false
-
 Metrics/AbcSize:
   Exclude:
   - 'db/migrate/*'
