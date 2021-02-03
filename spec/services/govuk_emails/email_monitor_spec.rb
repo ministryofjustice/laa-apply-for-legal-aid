@@ -34,8 +34,6 @@ RSpec.describe GovukEmails::EmailMonitor do
   let(:double_email) do
     double(GovukEmails::Email,
            status: email_status,
-           # permanently_failed?: email_failed?,
-           # should_resend?: email_resend?,
            temp_or_perm_failed?: email_failed? || email_resend?,
            delivered?: email_delivered?)
   end
