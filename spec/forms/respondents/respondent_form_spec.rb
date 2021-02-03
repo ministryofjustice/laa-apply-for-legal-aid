@@ -27,15 +27,15 @@ RSpec.describe Respondents::RespondentForm, type: :form do
       subject { described_class.new(params) }
       let(:params) do
         {
-          'understands_terms_of_court_order': 'false',
-          'understands_terms_of_court_order_details': 'terms of court order details ',
-          'warning_letter_sent': 'false',
-          'warning_letter_sent_details': 'warning letter sent details',
-          'police_notified': police_notified,
-          'police_notified_details': police_notified_details,
-          'bail_conditions_set': 'true',
-          'bail_conditions_set_details': 'bail condition set details',
-          'full_name': 'Bob Smith'
+          understands_terms_of_court_order: 'false',
+          understands_terms_of_court_order_details: 'terms of court order details ',
+          warning_letter_sent: 'false',
+          warning_letter_sent_details: 'warning letter sent details',
+          police_notified: police_notified,
+          police_notified_details: police_notified_details,
+          bail_conditions_set: 'true',
+          bail_conditions_set_details: 'bail condition set details',
+          full_name: 'Bob Smith'
         }
       end
 

@@ -39,8 +39,8 @@ module CFE
       {
         explicit_remarks: [
           {
-            'category': 'policy_disregards',
-            'details': ['vaccine_damage_payments']
+            category: 'policy_disregards',
+            details: ['vaccine_damage_payments']
           }
         ]
       }.to_json

@@ -18,8 +18,8 @@ class PolicyDisregards < ApplicationRecord
 
   def as_json(_options = nil)
     {
-      'category': 'policy_disregards',
-      'details': build_attribute_array
+      category: 'policy_disregards',
+      details: build_attribute_array
     }
   end
 
