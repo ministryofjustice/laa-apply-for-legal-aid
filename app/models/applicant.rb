@@ -69,4 +69,13 @@ class Applicant < ApplicationRecord
 
     format('%<amount>.2f', amount: cfe_result.mortgage_per_month).to_s || '0.0'
   end
+
+  def hmrc_json
+    {
+      'firstName' => first_name,
+      'lastName' => last_name,
+      'nino' => national_insurance_number,
+      'dateOfBirth' => date_of_birth.strftime('%Y-%m-%d')
+    }
+  end
 end

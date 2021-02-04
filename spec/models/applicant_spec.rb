@@ -170,4 +170,19 @@ RSpec.describe Applicant, type: :model do
       it { is_expected.to eq '0.0' }
     end
   end
+
+  describe '#hrmc_json' do
+    subject { applicant.hmrc_json }
+    let(:applicant) { build :applicant, date_of_birth: Date.new(1990, 10, 1) }
+    let(:expected_json) do
+      {
+        'firstName' => applicant.first_name,
+        'lastName' => applicant.last_name,
+        'nino' => applicant.national_insurance_number,
+        'dateOfBirth' => '1990-10-01'
+      }
+    end
+
+    it { is_expected.to eq expected_json }
+  end
 end
