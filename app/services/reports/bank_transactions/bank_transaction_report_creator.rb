@@ -36,7 +36,6 @@ module Reports
       end
 
       def generate_csv
-        # transactions = BankTransactionSorter.call(legal_aid_application)
         transactions = legal_aid_application.bank_transactions.by_account_most_recent_first
         csv_string = CSV.generate do |csv|
           csv << BankTransactionPresenter.headers
