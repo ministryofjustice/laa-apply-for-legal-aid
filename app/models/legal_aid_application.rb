@@ -130,11 +130,8 @@ class LegalAidApplication < ApplicationRecord
   )
 
   def lead_proceeding_type
-    # lead = application_proceeding_types.where(lead_proceeding: true).first
-    # sq = ProceedingType.find(lead.proceeding_type_id)
-    # pp sq
-    # pp proceeding_types.first
-    proceeding_types.first
+    check_lead = application_proceeding_types.where(lead_proceeding: true).first
+    ProceedingType.find(check_lead.proceeding_type_id)
   end
 
   def cfe_result

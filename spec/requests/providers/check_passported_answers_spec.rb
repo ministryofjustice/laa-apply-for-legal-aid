@@ -87,7 +87,10 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant does not have any capital' do
-        let(:application) { create :legal_aid_application, :with_applicant, :with_policy_disregards, :without_own_home, :with_passported_state_machine, :provider_entering_means }
+        let(:application) do
+          create :legal_aid_application, :with_applicant, :with_proceeding_types, :with_policy_disregards, :without_own_home, :with_passported_state_machine,
+                 :provider_entering_means
+        end
         it 'does not display capital restrictions' do
           expect(response.body).not_to include('restrictions')
         end

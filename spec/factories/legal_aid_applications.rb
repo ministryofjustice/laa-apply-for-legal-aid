@@ -373,6 +373,7 @@ FactoryBot.define do
       with_applicant
       with_non_passported_state_machine
       applicant_entering_means
+      with_proceeding_types
       with_savings_amount
       with_own_home_mortgaged
       property_value { rand(1...1_000_000.0).round(2) }
