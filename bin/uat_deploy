@@ -7,6 +7,8 @@ deploy() {
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
+  helm dependency update ./helm_deploy/apply-for-legal-aid/. \
+                --namespace=${KUBE_ENV_UAT_NAMESPACE}
 
   helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
                 --install --wait \
