@@ -31,21 +31,6 @@ FactoryBot.define do
       involvement_type_applicant { true }
     end
 
-    trait :with_real_data2 do
-      code { 'PR0209' }
-      ccms_code { 'DA002' }
-      meaning { 'something else' }
-      description { 'to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.' }
-      ccms_category_law { 'Family' }
-      ccms_category_law_code { 'MAT' }
-      ccms_matter { 'Domestic Abuse' }
-      ccms_matter_code { 'MINJN' }
-      default_service_level_id { create(:service_level, :with_real_data).id }
-      default_cost_limitation_delegated_functions { 1350 }
-      default_cost_limitation_substantive { 25_000 }
-      involvement_type_applicant { true }
-    end
-
     trait :as_occupation_order do
       code { 'PR0214' }
       ccms_code { 'DA005' }

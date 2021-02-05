@@ -130,7 +130,7 @@ class LegalAidApplication < ApplicationRecord
   )
 
   def lead_proceeding_type
-    check_lead = application_proceeding_types.where(lead_proceeding: true).first
+    check_lead = application_proceeding_types.find_by(lead_proceeding: true)
     ProceedingType.find(check_lead.proceeding_type_id)
   end
 
