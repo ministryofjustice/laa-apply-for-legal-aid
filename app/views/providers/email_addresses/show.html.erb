@@ -5,6 +5,7 @@
 
   <%= form_with(
         model: @form,
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         url: providers_legal_aid_application_email_address_path,
         method: :patch,
         local: true
@@ -14,13 +15,13 @@
 
     <%= form.govuk_text_field(
           :email,
-          class: 'govuk-!-width-three-quarters',
-          hint: t('.hint')
+          width: 'three-quarters',
+          hint: {text: t('.hint')},
+          label: {text: t('.label')}
         ) %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
-   </div>
   <% end %>
 <% end %>

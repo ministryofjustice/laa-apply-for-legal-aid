@@ -757,6 +757,7 @@ en:
     email_addresses:
       show:
         page_title: Enter your client's email address
+        label: Email address
         hint: We'll use this to send your client a link to the service.
     has_dependants:
       show:
