@@ -59,6 +59,10 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 7
 
+Rails/Present:
+  Exclude:
+  - 'bin/bundle'
+
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
 
