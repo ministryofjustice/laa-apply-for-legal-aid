@@ -22,7 +22,7 @@ module Providers
     end
 
     def none_selected?
-      return unless params[:none_selected] == 'true'
+      return unless params[:legal_aid_application][:none_selected] == 'true'
 
       LegalAidApplication.transaction do
         remove_existing_transaction_types

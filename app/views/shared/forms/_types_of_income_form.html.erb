@@ -6,29 +6,29 @@
       local: true
     ) do |form| %>
 
-    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>
-      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+    <%= form.govuk_check_boxes_fieldset :transaction_type_ids, legend: {size: 'xl', tag: 'h1', text: page_title},
+                                         hint: {text: t('generic.select_all_that_apply')} do %>
       <div class="deselect-group" data-deselect-ctrl="#legal-aid-application-none-selected-true-field">
         <% TransactionType.credits.not_children.each do |transaction_type| %>
-          <%= form.govuk_check_box transaction_type.name, true, multiple: false, link_errors: true,
+          <%= form.govuk_check_box :transaction_type_ids, transaction_type.id, link_errors: true,
                                    label: {text: t("transaction_types.names.#{journey_type}.#{transaction_type.name}")},
                                    hint: {text: t(".hints.#{transaction_type.name}", default: '')} %>
         <% end %>
       </div>
-
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, '', multiple: false, link_errors: true,
-                               label: {text: t('generic.none_selected')} %>
+      <%= form.govuk_check_box :none_selected, true, @none_selected, link_errors: true, multiple: false,
+                             label: {text: t('generic.none_selected')} %>
+    <% end %>
 
-  <% if journey == :citizen %>
-    <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text"
-          title="<%= t('.expanded_explanation.heading') %>"
-          aria-label="<%= t('.expanded_explanation.heading') %>">
-          <%= t('.expanded_explanation.heading') %>
-        </span>
-      </summary>
+    <% if journey == :citizen %>
+      <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text"
+            title="<%= t('.expanded_explanation.heading') %>"
+            aria-label="<%= t('.expanded_explanation.heading') %>">
+            <%= t('.expanded_explanation.heading') %>
+          </span>
+        </summary>
 
         <div class="govuk-details__text">
           <% t('.expanded_explanation.list').each_line do |para| %>
@@ -45,5 +45,4 @@
         form: form,
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false
       ) %>
-  <% end %>
 <% end %>
