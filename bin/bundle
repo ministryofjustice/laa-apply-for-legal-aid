@@ -91,11 +91,11 @@ m = Module.new do
     end
     return if require_error.nil? && Gem::Requirement.new(bundler_version).satisfied_by?(Gem::Version.new(Bundler::VERSION))
 
-    warn bundler_warning
+    warn bundler_warning(gem_error)
     exit 42
   end
 
-  def bundler_warning
+  def bundler_warning(gem_error)
     <<~WARNING
       EOFActivating bundler (#{bundler_version}) failed:
       #{gem_error.message}
