@@ -123,7 +123,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
     end
 
     context 'when "none selected" has been selected' do
-      let(:params) { { none_selected: 'true' } }
+      let(:params) { { legal_aid_application: { none_selected: 'true' } } }
 
       it 'does not add transaction types to the application' do
         expect { subject }.not_to change { LegalAidApplicationTransactionType.count }

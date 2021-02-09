@@ -17,7 +17,7 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
     end
 
     it 'displays expanded explanation' do
-      expect(unescaped_response_body).to match(I18n.t('shared.forms.identify_types_of_outgoings_form.expanded_explanation.heading'))
+      expect(unescaped_response_body).to match(I18n.t('shared.forms.types_of_outgoings_form.expanded_explanation.heading'))
     end
 
     it 'displays the outgoing type labels' do
@@ -105,7 +105,7 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
     end
 
     context 'when "none selected" has been selected' do
-      let(:params) { { none_selected: 'true' } }
+      let(:params) { { legal_aid_application: { none_selected: 'true' } } }
 
       it 'does not add transaction types to the application' do
         expect { subject }.not_to change { LegalAidApplicationTransactionType.count }

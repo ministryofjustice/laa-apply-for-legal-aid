@@ -290,14 +290,6 @@ cy:
           hint: ".tnarg ro naol tneduts ro ,pihsecitnerppa ,boj a morf yenom ,elpmaxe
             roF"
           enter_monthly_income: htnom hcae teg yeht tnuoma eht retnE
-      identify_types_of_outgoings_form:
-        none_selected: eseht fo enoN
-        expanded_explanation:
-          heading: "?siht deksa gnieb I ma yhW"
-          list: |2-
-
-            .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
-            .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
       savings_and_investments_form:
         none_selected: eseht fo enoN
       outstanding_mortgage_form:
@@ -474,6 +466,13 @@ cy:
             roF"
           benefits: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
           pension: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
+        expanded_explanation:
+          heading: "?siht deksa gnieb I ma yhW"
+          list: |2-
+
+            .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
+            .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
+      types_of_outgoings_form:
         expanded_explanation:
           heading: "?siht deksa gnieb I ma yhW"
           list: |2-
