@@ -32,7 +32,8 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-ubuntu-font-family \
                   wkhtmltopdf \
                   bash \
- && pip3 install awscli
+                  py3-pip
+RUN pip3 install awscli
 
 #  # Install kubectl
 # RUN curl -LO /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
