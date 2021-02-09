@@ -101,6 +101,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_meta_tax do
+      meta_data do
+        { code: 'CTC', label: 'child_tax_credit', name: 'Child Tax credit', selected_by: 'System' }
+      end
+    end
+
     trait :flagged_multi_benefits do
       flags { { multi_benefit: true } }
     end
