@@ -26,15 +26,16 @@ class BankAccount < ApplicationRecord
 
   # rubocop:disable Naming/PredicateName
   def has_tax_credits?
-    true # TODO: CCMS placeholder - to be fixed by AP-1965
+    meta_data_codes = bank_transactions.pluck(:meta_data).pluck(:code)
+    meta_data_codes.include?('TC') || meta_data_codes.include?('WTC') || meta_data_codes.include?('CTC')
   end
 
   def has_wages?
-    true # TODO: CCMS placeholder - to be fixed by AP-1965
+    false
   end
 
   def has_benefits?
-    true # TODO: CCMS placeholder - to be fixed by AP-1965
+    bank_transactions.joins(:transaction_type).where(transaction_type: { name: 'benefits' }).present?
   end
   # rubocop:enable Naming/PredicateName
 end

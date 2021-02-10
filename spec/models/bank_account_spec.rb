@@ -33,4 +33,30 @@ RSpec.describe BankAccount, type: :model do
       expect(bank_account.display_name).to eq 'Test Bank Acct 123456789'
     end
   end
+
+  describe '#benefits ' do
+    it 'returns true if benefits present' do
+      bank_account = create :bank_account
+      create :bank_transaction, :benefits, bank_account: bank_account
+      expect(bank_account.has_benefits?).to eq true
+    end
+    it 'returns false if benefits not present' do
+      bank_account = create :bank_account
+      create :bank_transaction, :with_meta_tax, bank_account: bank_account
+      expect(bank_account.has_benefits?).to eq false
+    end
+  end
+
+  describe '#tax_credits ' do
+    it 'returns false if tax credits not present' do
+      bank_account = create :bank_account
+      create :bank_transaction, :benefits, bank_account: bank_account
+      expect(bank_account.has_tax_credits?).to eq false
+    end
+    it 'returns true if tax credits are present' do
+      bank_account = create :bank_account
+      create :bank_transaction, :with_meta_tax, bank_account: bank_account
+      expect(bank_account.has_tax_credits?).to eq true
+    end
+  end
 end
