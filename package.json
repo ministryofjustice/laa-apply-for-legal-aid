@@ -10,7 +10,7 @@
     "@rails/webpacker": "^5.2.1",
     "acorn": "^8.0.5",
     "axios": "^0.21.1",
-    "govuk-frontend": "^3.10.2",
+    "govuk-frontend": "^3.11.0",
     "jquery": "^3.5.1",
     "js-search": "^2.0.0"
   },
