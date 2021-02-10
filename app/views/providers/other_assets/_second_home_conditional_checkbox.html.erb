@@ -1,7 +1,7 @@
 <%
   check_box_attribute = 'check_box_second_home'
   hint = I18n.t("helpers.hint.#{check_box_attribute}", default: nil)
-  @form.__send__("#{check_box_attribute}=", model.any_second_home_value_present?)
+  @form.__send__("#{check_box_attribute}=", model.send(check_box_attribute).present? || model.any_second_home_value_present?)
 %>
 
 <%= form.govuk_check_box check_box_attribute, true, multiple: false, link_errors: true,
