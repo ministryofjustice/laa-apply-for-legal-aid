@@ -150,12 +150,10 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def bank_transactions
-    set_transaction_period
+    # set_transaction_period
     return applicant.bank_transactions if Setting.mock_true_layer_data?
 
-    from = transaction_period_start_on.beginning_of_day
-    to = transaction_period_finish_on.end_of_day
-    applicant.bank_transactions.where(happened_at: from..to)
+    applicant.bank_transactions
   end
 
   def applicant_employed?
@@ -275,13 +273,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def online_savings_accounts_balance
-    accounts = applicant.bank_accounts.reject { |c| c.account_type == 'TRANSACTION' }&.map(&:balance)
-    accounts.present? ? accounts.sum.to_s : nil
+    applicant.bank_accounts.savings.sum(&:latest_balance)
   end
 
   def online_current_accounts_balance
-    accounts = applicant.bank_accounts.select { |c| c.account_type == 'TRANSACTION' }&.map(&:balance)
-    accounts.present? ? accounts.sum.to_s : nil
+    applicant.bank_accounts.current.sum(&:latest_balance)
   end
 
   def other_assets?

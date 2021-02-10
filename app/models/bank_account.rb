@@ -8,6 +8,13 @@ class BankAccount < ApplicationRecord
     'SAVINGS' => 'Savings'
   }.freeze
 
+  scope :current, -> { where(account_type: 'TRANSACTION') }
+  scope :savings, -> { where.not(account_type: 'TRANSACTION') }
+
+  def latest_balance
+    bank_transactions.most_recent_first.limit(1).first.running_balance
+  end
+
   def account_type_label
     ACCOUNT_TYPE_LABELS.fetch(account_type, account_type)
   end

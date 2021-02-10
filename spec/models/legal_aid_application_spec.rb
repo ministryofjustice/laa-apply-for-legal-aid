@@ -636,12 +636,11 @@ RSpec.describe LegalAidApplication, type: :model do
 
     subject { legal_aid_application.bank_transactions }
 
-    it 'returns the expected transactions' do
+    it 'returns the all transactions' do
       expect(transaction_ids).to include(transaction_after_start.id)
       expect(transaction_ids).to include(transaction_before_end.id)
-
-      expect(transaction_ids).not_to include(transaction_before_start.id)
-      expect(transaction_ids).not_to include(transaction_after_end.id)
+      expect(transaction_ids).to include(transaction_before_start.id)
+      expect(transaction_ids).to include(transaction_after_end.id)
     end
   end
 

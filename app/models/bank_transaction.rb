@@ -19,6 +19,10 @@ class BankTransaction < ApplicationRecord
       .group_by(&:parent_transaction_type)
   end
 
+  scope :most_recent_first, -> { order(happened_at: :desc, created_at: :desc) }\
+
+  scope :by_account_most_recent_first, -> { order(bank_account_id: :asc, happened_at: :desc, created_at: :desc) }
+
   enum operation: {
     credit: 'credit'.freeze,
     debit: 'debit'.freeze
