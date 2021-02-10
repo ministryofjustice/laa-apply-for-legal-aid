@@ -46,10 +46,22 @@ module Providers
 
     def remove_proceeding
       ActiveRecord::Base.transaction do
-        proceeding_type&.destroy!
-        legal_aid_application.clear_scopes!
+        if proceeding_type.lead_proceeding && proceeding_types.count > 1
+          set_new_lead_proceeding
+        else
+          proceeding_type&.destroy!
+        end
+
+        legal_aid_application.clear_scopes! # this clears all scopes, not just proceeding specific ones
         AddScopeLimitationService.call(legal_aid_application, :substantive) if proceeding_types.any?
       end
+    end
+
+    def set_new_lead_proceeding
+      proceeding_type&.destroy!
+      new_lead = ApplicationProceedingType.find_by(legal_aid_application_id: legal_aid_application.id)
+      new_lead.lead_proceeding = true
+      new_lead.save
     end
 
     def form_params

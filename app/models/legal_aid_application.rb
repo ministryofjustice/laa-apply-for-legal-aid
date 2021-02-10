@@ -130,8 +130,8 @@ class LegalAidApplication < ApplicationRecord
   )
 
   def lead_proceeding_type
-    check_lead = application_proceeding_types.find_by(lead_proceeding: true)
-    ProceedingType.find(check_lead.proceeding_type_id)
+    lead = application_proceeding_types.find_by(lead_proceeding: true)
+    ProceedingType.find(lead.proceeding_type_id)
   end
 
   def cfe_result
