@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe StateBenefitAnalyserService do
+RSpec.describe Banking::StateBenefitAnalyserService do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:applicant) { create :applicant, legal_aid_application: legal_aid_application, national_insurance_number: nino }
   let(:bank_provider) { create :bank_provider, applicant: applicant }
