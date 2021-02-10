@@ -712,7 +712,7 @@ DEPENDENCIES
   overcommit
   pagy
   pg
-  prometheus_exporter
+  prometheus_exporter (= 0.4.17)
   pry-byebug
   pry-rescue
   pry-stack_explorer
@@ -749,6 +749,7 @@ DEPENDENCIES
   webdrivers (~> 4.5)
   webmock
   webpacker (~> 5)
+  webrick
   wicked_pdf
 
 RUBY VERSION
