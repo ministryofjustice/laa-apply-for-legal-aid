@@ -414,8 +414,7 @@ GEM
     parser (3.0.0.0)
       ast (~> 2.4.1)
     pg (1.2.3)
-    prometheus_exporter (0.7.0)
-      webrick
+    prometheus_exporter (0.4.17)
     protobuf-cucumber (3.10.8)
       activesupport (>= 3.2)
       middleware
