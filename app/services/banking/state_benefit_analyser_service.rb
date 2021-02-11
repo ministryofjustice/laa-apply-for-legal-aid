@@ -47,7 +47,7 @@ module Banking
     end
 
     def identify_state_benefit(txn)
-      matches = txn.description.scan(regex_pattern)
+      matches = txn.description.scan(regex_pattern).uniq
       if matches.count > 1
         process_multiple_benefits(txn)
       else
