@@ -38,14 +38,6 @@ module CFE
             expect { submission.results_obtained! }.to raise_error AASM::InvalidTransition, /Event 'results_obtained' cannot transition from 'properties_created'/
           end
         end
-
-        context 'from other_income_created state' do
-          let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: 'other_income_created' }
-          it 'transitions from other_income_created to results_obtained' do
-            expect { submission.results_obtained! }.not_to raise_error
-            expect(submission.results_obtained?).to be true
-          end
-        end
       end
     end
 
