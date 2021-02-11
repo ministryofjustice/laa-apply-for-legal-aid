@@ -18,9 +18,11 @@ class AddScopeLimitationService
   end
 
   def add_default_substantive_scope_limitation!
+    @legal_aid_application.reload.lead_proceeding_type.reload
+    scope_limitation=@legal_aid_application.lead_proceeding_type.default_substantive_scope_limitation
     ApplicationScopeLimitation.create!(
-      legal_aid_application: @legal_aid_application,
-      scope_limitation: @legal_aid_application.lead_proceeding_type.default_substantive_scope_limitation,
+      legal_aid_application_id: @legal_aid_application.id,
+      scope_limitation_id: scope_limitation.id,
       substantive: true
     )
   end

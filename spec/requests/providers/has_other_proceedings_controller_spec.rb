@@ -90,6 +90,26 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
     end
 
+    context 'delete lead proceeding' do
+      let(:params) { { id: legal_aid_application.proceeding_types.first.code } }
+      subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+
+      it 'sets a new lead proceeding when the original one is deleted' do
+        pp legal_aid_application.proceeding_types.first
+        pp legal_aid_application.application_proceeding_types.first
+        pp legal_aid_application.proceeding_types.last
+        pp legal_aid_application.application_proceeding_types.last
+
+        subject
+
+        pp legal_aid_application.proceeding_types.count
+        pp legal_aid_application.proceeding_types.first
+        pp legal_aid_application.application_proceeding_types.first
+
+        expect(legal_aid_application.application_proceeding_types[0].lead_proceeding).to eq true
+      end
+    end
+
     context 'remove all proceedings' do
       let(:other_params) { { id: legal_aid_application.proceeding_types.first.code } }
 
