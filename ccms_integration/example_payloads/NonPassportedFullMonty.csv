@@ -305,6 +305,7 @@ MeansAssesments,global,GB_PROC_B_40WP3_57A,boolean,false
 MeansAssesments,global,GB_PROC_B_40WP3_45A,boolean,false
 MeansAssesments,global,OUT_GB_INPUT_C_20WP3_372A,currency,false
 MeansAssesments,global,GB_INPUT_B_17WP2_7A,boolean,true
+MeansAssesments,global,GB_INPUT_B_17WP2_8A,boolean,true
 MeansAssesments,global,GB_INPUT_T_6WP3_330A,text,true
 MeansAssesments,global,OUT_GB_INFER_C_28WP4_2A,currency,false
 MeansAssesments,global,GB_PROC_B_39WP3_32A,boolean,false
@@ -656,7 +657,6 @@ MeansAssesments,OTHER_CAPITAL,OTHCAPITAL_INPUT_B_17WP2_1A,boolean,true
 MeansAssesments,OTHER_CAPITAL,OTHCAPITAL_INPUT_B_17WP2_5A,boolean,true
 MeansAssesments,OTHER_CAPITAL,OTHCAPITAL_INPUT_B_17WP2_4A,boolean,true
 MeansAssesments,OTHER_CAPITAL,OTHCAPITAL_INPUT_B_17WP2_2A,boolean,true
-MeansAssesments,OTHER_CAPITAL,OTHCAPITAL_INPUT_C_17WP2_14A,currency,true
 MeansAssesments,WILL,WILL_INPUT_B_2WP2_24A,boolean,true
 MeansAssesments,WILL,WILL_INPUT_B_2WP2_26A,boolean,true
 MeansAssesments,WILL,WILL_INPUT_B_2WP2_27A,boolean,true

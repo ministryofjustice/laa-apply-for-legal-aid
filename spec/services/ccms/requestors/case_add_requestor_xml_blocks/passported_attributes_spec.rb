@@ -2084,6 +2084,7 @@ module CCMS
           [:global_means, 'GB_INFER_B_1WP1_1A'],
           [:global_means, 'GB_INPUT_B_14WP2_7A'],
           [:global_means, 'GB_INPUT_B_17WP2_7A'],
+          [:global_means, 'GB_INPUT_B_17WP2_8A'],
           [:global_means, 'GB_INPUT_B_18WP2_2A'],
           [:global_means, 'GB_INPUT_B_18WP2_4A'],
           [:global_means, 'GB_INPUT_B_1WP1_2A'],

@@ -1597,19 +1597,18 @@ other_capital:
     response_type: boolean
     user_defined: true
     generate_block?: true
-  OTHCAPITAL_INPUT_C_17WP2_14A:
-    value: '0'
-    br100_meaning: 'Other capital: The value'
-    user_defined: true
-    response_type: currency
-    generate_block?: true
   OTHCAPITAL_INPUT_T_17WP2_13A:
     value: "."
     br100_meaning: 'Other capital: What it is'
     user_defined: true
     response_type: text
     generate_block?: true
-
+  OTHCAPITAL_INPUT_C_17WP2_14A:
+    value: '0'
+    br100_meaning: 'Other capital: The value'
+    user_defined: true
+    response_type: currency
+    generate_block?: false
 other_savings:
   OTHERSAVING_INPUT_B_10WP2_14A:
     value: false

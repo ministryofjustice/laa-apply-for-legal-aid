@@ -902,6 +902,11 @@ global_means:
     br100_meaning: 'Other capital: The client has other capital?'
     response_type: boolean
     user_defined: true
+  GB_INPUT_B_17WP2_8A:
+    value: false
+    br100_meaning: 'Other capital: '
+    response_type: boolean
+    user_defined: true
   OUT_GB_INFER_C_28WP4_2A:
     generate_block?: false
     value: 0.0
