@@ -4,8 +4,8 @@ class BankAccount < ApplicationRecord
   has_one :legal_aid_application, through: :bank_provider
 
   ACCOUNT_TYPE_LABELS = {
-    'TRANSACTION' => 'Current',
-    'SAVINGS' => 'Savings'
+    'TRANSACTION' => 'Bank Current',
+    'SAVINGS' => 'Bank Savings'
   }.freeze
 
   scope :current, -> { where(account_type: 'TRANSACTION') }
