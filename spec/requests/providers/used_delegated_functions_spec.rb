@@ -179,8 +179,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         legal_aid_application.reload
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
         expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
-        # check this as circle ci may not like last and last
-        expect(legal_aid_application.proceeding_types.last.scope_limitations.last).to eq default_substantive_scope_limitation
+        expect(legal_aid_application.proceeding_types[0].scope_limitations).to include default_substantive_scope_limitation
       end
 
       it 'redirects to the limitations page' do

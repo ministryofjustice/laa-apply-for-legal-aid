@@ -19,6 +19,10 @@ RSpec.describe ProceedingTypesService do
 
       it 'adds a proceeding type' do
         subject.add(**params)
+        puts 1111
+        puts legal_aid_application.proceeding_types
+        puts 2222
+        puts proceeding_type
         expect(legal_aid_application.proceeding_types).to include(proceeding_type)
       end
 

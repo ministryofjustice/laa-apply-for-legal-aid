@@ -80,11 +80,11 @@ RSpec.describe 'LegalAidApplication factory' do
 
         it 'creates adds the default substantive scope limitation for the first proceeding type to the application' do
           substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
-          expect(application.substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
+          expect(application.proceeding_types.first.default_substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
         end
 
         it 'does not add a delegated function scope limitation to the application' do
-          expect(application.delegated_functions_scope_limitation).to be_nil
+          expect(application.proceeding_types.first.default_delegated_functions_scope_limitation).to be_nil
         end
       end
 
@@ -106,17 +106,17 @@ RSpec.describe 'LegalAidApplication factory' do
 
         it 'adds the default substantive scope limitation for the first proceeding type to the application' do
           substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
-          expect(application.substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
+          expect(application.proceeding_types.first.default_substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
         end
 
         it 'adds the default delegated_functions scope limitation for the first proceeding type to the application' do
           delegated_functions_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
-          expect(application.delegated_functions_scope_limitation).to eq delegated_functions_default_sl_for_pt.scope_limitation
+          expect(application.proceeding_types.first.default_delegated_functions_scope_limitation).to eq delegated_functions_default_sl_for_pt.scope_limitation
         end
 
         it 'adds a delegated function scope limitation to the application' do
           substantive_delegated_functions_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
-          expect(application.delegated_functions_scope_limitation).to eq substantive_delegated_functions_sl_for_pt.scope_limitation
+          expect(application.proceeding_types.first.default_delegated_functions_scope_limitation).to eq substantive_delegated_functions_sl_for_pt.scope_limitation
         end
       end
     end
