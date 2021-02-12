@@ -47,8 +47,8 @@ module Providers
     def remove_proceeding
       ActiveRecord::Base.transaction do
         proceeding_type&.destroy!
-        legal_aid_application.clear_scopes!
-        AddScopeLimitationService.call(legal_aid_application, :substantive) if proceeding_types.any?
+        # legal_aid_application.clear_scopes!
+        # AddScopeLimitationService.call(legal_aid_application, :substantive) if proceeding_types.any?
       end
     end
 

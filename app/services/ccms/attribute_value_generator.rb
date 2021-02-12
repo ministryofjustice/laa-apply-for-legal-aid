@@ -315,10 +315,11 @@ module CCMS
       @legal_aid_application.benefit_check_result.result == 'Yes'
     end
 
-    def proceeding_cost_limitation(_options)
-      return 'MULTIPLE' if scope_limitations.size > 1
+    def proceeding_cost_limitation(options)
+      proceeding_type = options[:proceeding]
+      return 'MULTIPLE' if proceeding_type.scope_limitations.size > 1
 
-      scope_limitations.first.code
+      proceeding_type.scope_limitations.first.code
     end
 
     private
@@ -347,20 +348,22 @@ module CCMS
       @cfe_result ||= @legal_aid_application.cfe_result
     end
 
-    def scope_limitations
-      @scope_limitations ||= @legal_aid_application.scope_limitations
-    end
+    # def scope_limitations
+    #   @scope_limitations ||= @legal_aid_application.scope_limitations
+    # end
 
-    def proceeding_limitation_desc(_options)
-      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.description
+    def proceeding_limitation_desc(options)
+      proceeding_type = options[:proceeding]
+      used_delegated_functions? ? 'MULTIPLE' : proceeding_type.default_substantive_scope_limitation.description
     end
 
     def proceeding_description(_options)
       lead_proceeding_type.description
     end
 
-    def proceeding_limitation_meaning(_options)
-      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation.meaning
+    def proceeding_limitation_meaning(options)
+      proceeding_type = options[:proceeding]
+      used_delegated_functions? ? 'MULTIPLE' : proceeding_type.default_substantive_scope_limitation.meaning
     end
 
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity

@@ -184,9 +184,9 @@ module CCMS
       end
 
       def generate_proceeding(xml, application_proceeding_type)
-        xml.__send__('ns2:Proceeding') do
-          xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
-          xml.__send__('ns2:Status', 'Draft')
+        xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
+          xml.__send__('ns2:StaProceeding') do
+            xml.__send__('ns2:tus', 'Draft')
           xml.__send__('ns2:LeadProceedingIndicator', true)
           xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, ProceedingType.find(application_proceeding_type.proceeding_type_id)) }
         end
@@ -199,11 +199,11 @@ module CCMS
         xml.__send__('ns2:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
         xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder - this may need changing when multiple proceedings are introduced
         xml.__send__('ns2:ClientInvolvementType', 'A')
-        xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml) }
+        xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, proceeding_type) }
       end
 
-      def generate_scope_limitations(xml)
-        @legal_aid_application.scope_limitations.each { |limitation| generate_scope_limitation(xml, limitation) }
+      def generate_scope_limitations(xml, proceeding_type)
+        proceeding_type.scope_limitations.each { |limitation| generate_scope_limitation(xml, limitation) }
       end
 
       def generate_scope_limitation(xml, limitation)
