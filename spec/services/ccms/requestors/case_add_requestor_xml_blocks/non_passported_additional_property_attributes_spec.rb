@@ -81,7 +81,7 @@ module CCMS
             ['car_used', 'CARUSED_INPUT_B_14WP2_18A', 'text', true, 'Other'],
             ['change_in_circumstance', 'CHANGE_CIRC_INPUT_T_33WP3_6A', 'text', true, '.'],
             ['cli_capital', 'CLICAPITAL_INPUT_T_9WP2_12A', 'text', true, '.'],
-            ['global_means', 'GB_INPUT_B_13WP3_49A', 'text', true, 'NONE'],
+            ['global_means', 'GB_INPUT_B_13WP3_49A', 'text', true, 'None of the above'],
             ['global_means', 'MARITIAL_STATUS', 'text', true, 'U'],
             ['global_means', 'MEANS_OPA_RELEASE', 'text', false, '12.2'],
             ['global_means', 'MEANS_ROUTING', 'text', false, 'BCM'],

@@ -511,7 +511,7 @@ global_means:
     response_type: boolean
     user_defined: true
   GB_INPUT_B_13WP3_49A:
-    value: NONE
+    value: None of the above
     br100_meaning: 'Housing Costs: Mortgage/ Mortgage & Rent/ Rent/ B&L/ None'
     user_defined: true
     response_type: text
