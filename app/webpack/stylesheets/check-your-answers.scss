@@ -4,6 +4,11 @@
 $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
 // Recommended - Use these styles for the check your answers pattern
+
+.pdf {
+  text-rendering: geometricPrecision;
+}
+
 .app-check-your-answers {
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
@@ -12,12 +17,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
   .govuk-grid-row div:first-child {
     font-weight: bold;
-  }
-
-  .align_right {
-    @include govuk-media-query($from: desktop) {
-      text-align: right;
-    }
   }
 }
 .app-check-your-answers {
@@ -28,12 +27,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
   .govuk-grid-row div:first-child {
     font-weight: bold;
-  }
-
-  .align_right {
-    @include govuk-media-query($from: desktop) {
-      text-align: right;
-    }
   }
 }
 
@@ -54,13 +47,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
   .govuk-grid-row div:last-child {
     width: 25%;
-  }
-
-  .align_right {
-    @include govuk-media-query($from: desktop) {
-      width: 100%;
-      text-align: right;
-    }
   }
 }
 
@@ -103,7 +89,9 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 }
 
 .align-text-right {
-  text-align: right;
+  @include govuk-media-query($from: desktop) {
+    text-align: right;
+  }
 }
 
 strong.app-tag--capitalize {
