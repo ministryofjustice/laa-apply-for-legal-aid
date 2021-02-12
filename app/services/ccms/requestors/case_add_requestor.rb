@@ -184,9 +184,9 @@ module CCMS
       end
 
       def generate_proceeding(xml, application_proceeding_type)
-        xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
-          xml.__send__('ns2:StaProceeding') do
-            xml.__send__('ns2:tus', 'Draft')
+        xml.__send__('ns2:Proceeding') do
+          xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
+          xml.__send__('ns2:Status', 'Draft')
           xml.__send__('ns2:LeadProceedingIndicator', true)
           xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, ProceedingType.find(application_proceeding_type.proceeding_type_id)) }
         end

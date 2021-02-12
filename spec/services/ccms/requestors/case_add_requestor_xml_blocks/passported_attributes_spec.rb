@@ -353,17 +353,7 @@ module CCMS
         context 'ProceedingCaseId' do
           context 'ProceedingCaseId section' do
             it 'has a p number' do
-              puts 111
-              pp legal_aid_application.application_proceeding_types
-              puts 2222
-              pp legal_aid_application.proceeding_types
-              legal_aid_application.proceeding_types.each { |pt|
-                pp pt.scope_limitations
-              }
               block = XmlExtractor.call(xml, :proceeding_case_id)
-              puts xml
-              puts 44444
-              puts block
               expect(block.text).to eq application_proceeding_type.proceeding_case_p_num
             end
           end

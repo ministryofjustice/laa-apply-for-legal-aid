@@ -55,8 +55,8 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_passported_state_machine,
-             proceeding_types: [proceeding_type],
-             scope_limitations: [default_substantive_scope_limitation]
+             proceeding_types: [proceeding_type]
+
     end
     let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
     let(:day) { used_delegated_functions_on.day }
@@ -179,7 +179,8 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         legal_aid_application.reload
         expect(legal_aid_application.used_delegated_functions_on).to be_nil
         expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
-        expect(legal_aid_application.scope_limitations).to eq [default_substantive_scope_limitation]
+        # check this as circle ci may not like last and last
+        expect(legal_aid_application.proceeding_types.last.scope_limitations.last).to eq default_substantive_scope_limitation
       end
 
       it 'redirects to the limitations page' do
@@ -198,7 +199,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         legal_aid_application.reload
         expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
         expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
-        expect(legal_aid_application.scope_limitations).to match_array [default_substantive_scope_limitation, default_delegated_function_scope_limitation]
+        expect(legal_aid_application.proceeding_types.first.scope_limitations).to match_array [default_substantive_scope_limitation, default_delegated_function_scope_limitation]
       end
 
       context 'when date incomplete' do
