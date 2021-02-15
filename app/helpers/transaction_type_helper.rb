@@ -1,17 +1,4 @@
 module TransactionTypeHelper
-  # hints is a hash with the transaction type names as keys, and the hint texts as values
-  # and only includes entries for types that need hints.
-  def transaction_type_check_boxes(form:, transaction_types:, hints: {})
-    hints.transform_values! { |hint| govuk_hint(hint, class: 'govuk-checkboxes__hint') }
-    render(
-      'shared/forms/transaction_type_check_boxes',
-      form: form,
-      transaction_types: transaction_types,
-      hints: hints,
-      label_method: "#{journey_type}_label_name"
-    )
-  end
-
   def sort_category_column_cell(object, transaction_type)
     return sort_category_column_cell_vacant(object, transaction_type) if category_cells_should_be_blank?(object)
 

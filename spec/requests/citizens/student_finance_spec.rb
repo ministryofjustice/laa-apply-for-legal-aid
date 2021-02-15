@@ -72,5 +72,29 @@ RSpec.describe 'student_finance', type: :request do
         expect(legal_aid_application.reload.student_finance).to be nil
       end
     end
+
+    context 'When checking citizen answers' do
+      before do
+        get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+        legal_aid_application.check_citizen_answers!
+        patch citizens_student_finance_path, params: params
+      end
+
+      context 'when saying no' do
+        let(:yes_or_no) { 'false' }
+
+        it 'should redirect to the check answers page' do
+          expect(response).to redirect_to(citizens_check_answers_path)
+        end
+      end
+
+      context 'when saying yes' do
+        let(:yes_or_no) { 'true' }
+
+        it 'should redirect to the annual amounts page' do
+          expect(response).to redirect_to(citizens_student_finances_annual_amount_path)
+        end
+      end
+    end
   end
 end

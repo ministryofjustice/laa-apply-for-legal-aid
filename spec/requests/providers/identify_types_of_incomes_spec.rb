@@ -60,7 +60,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
     it 'should display an error' do
       subject
       expect(response.body).to match('govuk-error-summary')
-      expect(unescaped_response_body).to match(I18n.t('providers.identify_types_of_incomes.update.none_selected'))
+      expect(unescaped_response_body).to match(I18n.t('generic.none_selected'))
       expect(unescaped_response_body).not_to include('translation missing')
     end
 
@@ -102,7 +102,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
     end
 
     context 'when "none selected" has been selected' do
-      let(:params) { { none_selected: 'true' } }
+      let(:params) { { legal_aid_application: { none_selected: 'true' } } }
 
       it 'does not add transaction types to the application' do
         expect { subject }.not_to change { LegalAidApplicationTransactionType.count }

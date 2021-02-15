@@ -280,13 +280,6 @@ en:
         monthly_incomes:
           hint: For example, money from a job, apprenticeship, or student loan or grant.
           enter_monthly_income: Enter the amount they get each month
-      identify_types_of_outgoings_form:
-        none_selected: None of these
-        expanded_explanation:
-          heading: Why am I being asked this?
-          list: |
-            Your solicitor will look at your bank statements and put your transactions into the categories you select.
-            We need this information to check if you qualify financially for legal aid.
       savings_and_investments_form:
         none_selected: None of these
       outstanding_mortgage_form:
@@ -422,10 +415,16 @@ en:
             borderline: You cannot predict the outcome
             not_known: Work still needs to be done to determine the likelihood of success
       types_of_income_form:
-        financial_help_examples: For example, money from a family member for rent or bills.
-        benefits_examples: For example, Child Benefit or tax credits.
-        pension_examples: Include State, workplace and personal pensions.
-        none_selected: None of these
+        hints:
+          friends_or_family: For example, money from a family member for rent or bills.
+          benefits: For example, Child Benefit or tax credits.
+          pension: Include State, workplace and personal pensions.
+        expanded_explanation:
+          heading: Why am I being asked this?
+          list: |
+            Your solicitor will look at your bank statements and put your transactions into the categories you select.
+            We need this information to check if you qualify financially for legal aid.
+      types_of_outgoings_form:
         expanded_explanation:
           heading: Why am I being asked this?
           list: |

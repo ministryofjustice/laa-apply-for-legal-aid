@@ -26,7 +26,8 @@ cy:
         link_other_account: tnuocca knab rehtona ddA
     additional_accounts:
       index:
-        field_set_header: "?sknab rehto htiw stnuocca evah uoy oD"
+        header: ?sknab rehto htiw stnuocca evah uoy oD
+        hint: yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca yna fo sliated erahS
         error: sknab rehto htiw stnuocca evah uoy fi sey tceleS
       new:
         hint: stnuocca sgnivas edulcni ton oD
