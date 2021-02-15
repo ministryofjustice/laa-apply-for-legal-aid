@@ -57,7 +57,7 @@ module CFE
     end
 
     describe '#call' do
-      context 'new_student_loan setting is false' do
+      context 'standard submission' do
         before do
           allow(CreateAssessmentService).to receive(:call).and_return(true)
           allow(CreateApplicantService).to receive(:call).and_return(true)

@@ -20,7 +20,7 @@
           name: :receives_benefit,
           question: t('.question_receives_benefit'),
           answer: yes_no(@legal_aid_application.applicant_receives_benefit?),
-          align_right: true
+          read_only: true
         ) %>
   </dl>
 
@@ -76,7 +76,7 @@
   <% if @legal_aid_application.passported? && @cfe_result.capital_contribution_required? %>
     <section class="print-no-break">
       <h2 class="govuk-heading-l"><%= t('.caseworker-review-section-heading') %></h2>
-      <%= render partial: 'caseworker_review', locals: {remarks: @cfe_result.remarks } %>
+      <%= render partial: 'caseworker_review', locals: { remarks: @cfe_result.remarks } %>
     </section>
   <% end %>
 <% end %>

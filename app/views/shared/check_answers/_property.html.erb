@@ -5,8 +5,7 @@
           url: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),
           question: t('shared.check_answers.assets.property.own_home'),
           answer: @legal_aid_application.own_home.blank? ? '' : t("shared.forms.own_home_form.#{@legal_aid_application.own_home}"),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
           ) %>
 
   <%= check_answer_link(
@@ -14,8 +13,7 @@
           url: check_answer_url_for(journey_type, :property_values, @legal_aid_application),
           question: t('shared.check_answers.assets.property.property_value'),
           answer: gds_number_to_currency(@legal_aid_application.property_value),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
           ) if @legal_aid_application.own_home? %>
 
   <%= check_answer_link(
@@ -23,8 +21,7 @@
           url: check_answer_url_for(journey_type, :outstanding_mortgages, @legal_aid_application),
           question: t('shared.check_answers.assets.property.outstanding_mortgage'),
           answer: gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
           ) if @legal_aid_application.own_home_mortgage? %>
 
   <%= check_answer_link(
@@ -32,8 +29,7 @@
           url: check_answer_url_for(journey_type, :shared_ownerships, @legal_aid_application),
           question: t('shared.check_answers.assets.property.shared_ownership'),
           answer: @legal_aid_application.shared_ownership.blank? ? '' : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}"),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
           ) if @legal_aid_application.own_home? %>
 
   <%= check_answer_link(
@@ -41,8 +37,7 @@
           url: check_answer_url_for(journey_type, :percentage_homes, @legal_aid_application),
           question: t('shared.check_answers.assets.property.percentage_home'),
           answer: number_to_percentage(@legal_aid_application.percentage_home, precision: 2),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
           ) if @legal_aid_application.shared_ownership? && @legal_aid_application.own_home? %>
 
 </dl>
