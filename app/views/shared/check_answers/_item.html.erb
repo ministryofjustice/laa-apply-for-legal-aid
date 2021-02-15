@@ -7,7 +7,8 @@
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
     <%= question %>
   </dt>
-  <dd class="govuk-summary-list__value">
+  <!--  in-line styling due to issues around pdf generation in our production envs -->
+  <dd class="govuk-summary-list__value"<% if read_only %> style="text-align: right;"<% end %>>
     <%= answer.present? ? answer : '-' %>
   </dd>
   <% unless read_only %>

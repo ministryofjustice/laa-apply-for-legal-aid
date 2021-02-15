@@ -10,13 +10,15 @@
     <%= check_answer_no_link(
           name: :notification_of_latest_incident,
           question: t('.items.notification_of_latest_incident'),
-          answer: incident&.told_on
+          answer: incident&.told_on,
+          read_only: read_only
         ) %>
 
     <%= check_answer_no_link(
           name: :date_of_latest_incident,
           question: t('.items.date_of_latest_incident'),
-          answer: incident&.occurred_on
+          answer: incident&.occurred_on,
+          read_only: read_only
         ) %>
   </dl>
 
@@ -36,7 +38,8 @@
     <%= check_answer_no_link(
           name: :respondent_name,
           question: t('.items.respondent_name'),
-          answer: respondent.full_name
+          answer: respondent.full_name,
+          read_only: read_only
         ) %>
   </dl>
 </section>
@@ -56,7 +59,8 @@
           name: :understands_terms_of_court_order,
           question: t('.items.understands_terms_of_court_order'),
           answer: yes_no(respondent.understands_terms_of_court_order),
-          no_border: !respondent.understands_terms_of_court_order
+          no_border: !respondent.understands_terms_of_court_order,
+          read_only: read_only
         ) %>
   </dl>
   <div class='govuk-body'><%= respondent.understands_terms_of_court_order_details %></div>
@@ -68,7 +72,8 @@
           name: :warning_letter_sent,
           question: t('.items.warning_letter_sent'),
           answer: yes_no(respondent.warning_letter_sent),
-          no_border: !respondent.warning_letter_sent
+          no_border: !respondent.warning_letter_sent,
+          read_only: read_only
         ) %>
   </dl>
   <div class='govuk-body'><%= respondent.warning_letter_sent_details %></div>
@@ -80,7 +85,8 @@
           name: :police_notified,
           question: t('.items.police_notified'),
           answer: yes_no(respondent.police_notified),
-          no_border: true
+          no_border: true,
+          read_only: read_only
         ) %>
   </dl>
   <div class='govuk-body'><%= respondent.police_notified_details %></div>
@@ -92,7 +98,8 @@
           name: :bail_conditions_set,
           question: t('.items.bail_conditions_set'),
           answer: yes_no(respondent.bail_conditions_set),
-          no_border: respondent.bail_conditions_set
+          no_border: respondent.bail_conditions_set,
+          read_only: read_only
         ) %>
   </dl>
   <div class='govuk-body'><%= respondent.bail_conditions_set_details %></div>
@@ -126,8 +133,7 @@
           url: providers_legal_aid_application_success_likely_index_path(@legal_aid_application),
           question: t('.items.prospects_of_success'),
           answer: yes_no(merits_assessment.success_likely),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
         ) %>
   </dl>
 
@@ -137,8 +143,7 @@
           url: providers_legal_aid_application_success_likely_index_path(@legal_aid_application),
           question: t('.items.success_prospect'),
           answer: t("shared.forms.success_prospect.#{merits_assessment.success_prospect}"),
-          read_only: read_only,
-          align_right: read_only
+          read_only: read_only
         ) unless merits_assessment.success_likely? %>
   </dl>
 
