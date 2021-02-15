@@ -18,7 +18,7 @@ gem 'savon', '~> 2.12.1'
 gem 'sentry-raven'
 gem 'simple_command', github: 'nebulab/simple_command', branch: 'master'
 gem 'tzinfo-data'
-gem 'webdack-uuid_migration', '~> 1.3.0'
+gem 'webdack-uuid_migration', '~> 1.4.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
