@@ -12,6 +12,14 @@ GIT
   specs:
     simple_command (0.1.0)
 
+GIT
+  remote: https://github.com/resque/redis-namespace.git
+  revision: 6f1bb31bbddd2efc9e16c53759d986b29206a12e
+  branch: master
+  specs:
+    redis-namespace (1.8.1)
+      redis (>= 3.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -360,7 +368,7 @@ GEM
     middleware (0.1.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.1104)
+    mime-types-data (3.2021.0212)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
@@ -495,8 +503,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.2.5)
-    redis-namespace (1.8.1)
-      redis (>= 3.0.4)
     regexp-examples (1.5.1)
     regexp_parser (2.0.3)
     remotipart (1.4.4)
@@ -609,8 +615,7 @@ GEM
     sys-uname (1.2.2)
       ffi (~> 1.1)
     temple (0.8.2)
-    terminal-table (3.0.0)
-      unicode-display_width (~> 1.1, >= 1.1.1)
+    terminal-table (1.6.0)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -618,7 +623,7 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
-    unicode-display_width (1.7.0)
+    unicode-display_width (2.0.0)
     vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -631,9 +636,8 @@ GEM
       addressable
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
-    watir (6.17.0)
-      regexp_parser (~> 1.2)
-      selenium-webdriver (~> 3.6)
+    watir (6.14.0)
+      selenium-webdriver (~> 3.4, >= 3.4.1)
     webdack-uuid_migration (1.4.0)
       activerecord (>= 4.0)
     webdrivers (4.5.0)
@@ -720,7 +724,7 @@ DEPENDENCIES
   pundit
   rails (~> 6.1.2)
   rails_admin (~> 2.0, >= 2.0.2)
-  redis-namespace
+  redis-namespace!
   regexp-examples
   rexml
   rspec-rails (~> 4.0)
@@ -753,7 +757,7 @@ DEPENDENCIES
   wicked_pdf
 
 RUBY VERSION
-   ruby 2.7.1p83
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
