@@ -8,6 +8,7 @@ module Citizens
     def update
       return go_forward if none_selected? || transactions_added
 
+      remove_existing_transaction_types
       legal_aid_application.errors.add :base, t('.none_selected')
       render :show
     end
