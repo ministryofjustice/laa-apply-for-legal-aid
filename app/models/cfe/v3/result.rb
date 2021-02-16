@@ -152,7 +152,7 @@ module CFE
       ################################################################
 
       def monthly_state_benefits
-        gross_income[:state_benefits][:monthly_equivalents].first[:all_sources].to_d
+        gross_income[:state_benefits][:monthly_equivalents][:all_sources].to_d
       end
 
       def mei_friends_or_family

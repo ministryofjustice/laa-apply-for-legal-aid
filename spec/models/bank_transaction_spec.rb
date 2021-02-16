@@ -23,7 +23,7 @@ RSpec.describe BankTransaction do
     end
 
     describe 'scope by parent_transaction_type' do
-      it 'groups the transactions keyed by parent transaction tyep' do
+      it 'groups the transactions keyed by parent transaction type' do
         trx_p1 = create :bank_transaction, :credit, transaction_type: pension
         trx_p2 = create :bank_transaction, :credit, transaction_type: pension
         trx_b1 = create :bank_transaction, :credit, transaction_type: benefits

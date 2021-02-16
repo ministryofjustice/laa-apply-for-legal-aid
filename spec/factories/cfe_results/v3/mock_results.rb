@@ -31,15 +31,17 @@ module CFEResults
                 }
               },
               state_benefits: {
-                monthly_equivalents: [
-                  {
-                    name: 'manually_chosen',
-                    all_sources: '75.0',
-                    cash_transactions: '25.0',
-                    bank_transactions: '50.00',
-                    excluded_from_income_assessment: false
-                  }
-                ]
+                monthly_equivalents: {
+                  all_sources: '75.0',
+                  cash_transactions: '25.0',
+                  bank_transactions: [
+                    {
+                      name: 'manually_chosen',
+                      monthly_value: '50.00',
+                      excluded_from_income_assessment: false
+                    }
+                  ]
+                }
               },
               other_income: {
                 monthly_equivalents: {

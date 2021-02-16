@@ -58,6 +58,7 @@ class LegalAidApplication < ApplicationRecord
   validate :proceeding_type_codes_existence
   validates :provider, presence: true
 
+  delegate :bank_transactions, to: :applicant, allow_nil: true
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
   delegate :substantive_scope_limitation, :delegated_functions_scope_limitation, to: :application_scope_limitations
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
@@ -149,11 +150,10 @@ class LegalAidApplication < ApplicationRecord
     (calculation_date || Time.zone.today) >= POLICY_DISREGARDS_START_DATE
   end
 
-  def bank_transactions
-    # set_transaction_period
-    return applicant.bank_transactions if Setting.mock_true_layer_data?
-
-    applicant.bank_transactions
+  def transactions_total_by_category(category_id)
+    bank_trx_total = transactions_total_by_type(:bank, category_id).abs
+    cash_trx_total = transactions_total_by_type(:cash, category_id).abs
+    Setting.allow_cash_payment? ? cash_trx_total + bank_trx_total : bank_trx_total
   end
 
   def applicant_employed?
@@ -200,9 +200,10 @@ class LegalAidApplication < ApplicationRecord
 
   # type is either :credit or :debit
   def uncategorised_transactions?(type)
-    grouped_transactions = bank_transactions.__send__(type).order(happened_at: :desc).by_parent_transaction_type
-    parent_transaction_types.__send__(type.to_s.pluralize.to_sym).each do |transaction_type|
-      uncategorised_transactions_errors(transaction_type) if grouped_transactions[transaction_type].blank?
+    bank_trx = bank_transactions_by_type(type)
+    cash_trx = cash_transactions_by_type(type)
+    parent_transaction_types.__send__("#{type}s").each do |transaction_type|
+      uncategorised_transactions_errors(transaction_type) unless any_transactions_selected?(transaction_type, bank_trx, cash_trx)
     end
     errors.present?
   end
@@ -397,7 +398,23 @@ class LegalAidApplication < ApplicationRecord
     policy_disregards&.any? ? true : false
   end
 
+  def transactions_total_by_type(transaction_type, category_id)
+    __send__("#{transaction_type}_transactions").amounts.fetch(category_id, 0)
+  end
+
   private
+
+  def bank_transactions_by_type(type)
+    bank_transactions.__send__(type).order(happened_at: :desc).by_parent_transaction_type
+  end
+
+  def cash_transactions_by_type(type)
+    cash_transactions.__send__("#{type}s").order(transaction_date: :desc).by_parent_transaction_type
+  end
+
+  def any_transactions_selected?(transaction_type, bank_trx, cash_trx)
+    bank_trx[transaction_type].present? || cash_trx[transaction_type].present?
+  end
 
   def applicant_updated_after_benefit_check_result_updated?
     benefit_check_result.updated_at < applicant.updated_at

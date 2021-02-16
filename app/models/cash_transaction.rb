@@ -18,7 +18,17 @@ class CashTransaction < ApplicationRecord
       .where(transaction_types: { operation: :debit })
   end
 
+  scope :by_parent_transaction_type, -> do
+    includes(:transaction_type)
+      .where.not(transaction_type_id: nil)
+      .group_by(&:parent_transaction_type)
+  end
+
   scope :for_transaction_type, ->(tt_id) { where(transaction_type_id: tt_id).order(transaction_date: :asc) }
+
+  def self.amounts
+    group(:transaction_type_id).sum(:amount)
+  end
 
   def self.amounts_for_application(application_id)
     where(legal_aid_application_id: application_id)
@@ -33,5 +43,9 @@ class CashTransaction < ApplicationRecord
 
   def period_end
     transaction_date.end_of_month.strftime('%d %b')
+  end
+
+  def parent_transaction_type
+    transaction_type.parent_or_self
   end
 end
