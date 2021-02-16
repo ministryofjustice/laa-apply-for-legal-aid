@@ -1,10 +1,10 @@
 module CheckAnswerUrlHelper
-  def check_answer_url_for(journey_type, field_name, application = nil, *args)
+  def check_answer_url_for(journey_type, field_name, application = nil, args = {})
     flow_service = Flow::BaseFlowService.flow_service_for(
       journey_type,
       current_step: field_name,
       legal_aid_application: application,
-      params: Hash[*args]
+      params: args
     )
     anchor = field_name_to_anchor_map[field_name]
     [flow_service.current_path, anchor].compact.join('#')
