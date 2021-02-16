@@ -116,12 +116,12 @@ RSpec.describe BankTransactionPresenter do
     describe 'account_type' do
       subject(:account_type) { presenter.build_transaction_hash[:account_type] }
       context 'when the transaction is from a savings account' do
-        it { is_expected.to eq 'Savings' }
+        it { is_expected.to eq 'Bank Savings' }
       end
 
       context 'when the transaction is from a current account' do
         let(:account) { create :bank_account, account_type: 'TRANSACTION' }
-        it { is_expected.to eq 'Current' }
+        it { is_expected.to eq 'Bank Current' }
       end
     end
 

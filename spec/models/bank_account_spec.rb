@@ -16,6 +16,19 @@ RSpec.describe BankAccount, type: :model do
       bank_account = create :bank_account, account_type: not_defined_account_type
       expect(bank_account.account_type_label).to eq(not_defined_account_type)
     end
+
+    context 'savings type' do
+      it 'returns Bank Savings' do
+        bank_account = create :bank_account, account_type: 'SAVINGS'
+        expect(bank_account.account_type_label).to eq('Bank Savings')
+      end
+    end
+    context 'transactions type' do
+      it 'returns Bank Current' do
+        bank_account = create :bank_account, account_type: 'TRANSACTION'
+        expect(bank_account.account_type_label).to eq('Bank Current')
+      end
+    end
   end
 
   describe '#holder_type' do
