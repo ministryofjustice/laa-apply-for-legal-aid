@@ -1253,6 +1253,12 @@
                                     <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                                  </ns0:Attribute>
                                  <ns0:Attribute>
+                                    <ns0:Attribute>GB_INPUT_B_17WP2_8A</ns0:Attribute>
+                                    <ns0:ResponseType>boolean</ns0:ResponseType>
+                                    <ns0:ResponseValue>false</ns0:ResponseValue>
+                                    <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                                 </ns0:Attribute>
+                                 <ns0:Attribute>
                                     <ns0:Attribute>OUT_GB_INFER_C_28WP4_2A</ns0:Attribute>
                                     <ns0:ResponseType>currency</ns0:ResponseType>
                                     <ns0:ResponseValue>0.00</ns0:ResponseValue>

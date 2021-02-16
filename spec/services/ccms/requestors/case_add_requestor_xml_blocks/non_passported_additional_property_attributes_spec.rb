@@ -110,7 +110,6 @@ module CCMS
             ['main_third', 'MAINTHIRD_INPUT_T_3WP2_12A', 'text', true, '.'],
             ['main_third', 'MAINTHIRD_INPUT_T_3WP2_13A', 'text', true, 'Other'],
             ['money_due', 'MONEYDUE_INPUT_T_15WP2_13A', 'text', true, 'debtor'],
-            ['other_capital', 'OTHCAPITAL_INPUT_C_17WP2_14A', 'currency', true, '0'],
             ['other_capital', 'OTHCAPITAL_INPUT_T_17WP2_13A', 'text', true, '.'],
             ['other_savings', 'OTHERSAVING_INPUT_C_10WP2_11A', 'currency', true, '0'],
             ['other_savings', 'OTHERSAVING_INPUT_T_10WP2_18A', 'text', true, '0'],
