@@ -774,6 +774,8 @@ en:
       show:
         page_title: Amend dependant details
       form:
+        name: Name
+        date_of_birth: Date of birth
         relationship: What is their relationship to your client?
         option:
           child_relative: They're a child relative

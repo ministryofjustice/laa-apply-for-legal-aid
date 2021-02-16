@@ -5,9 +5,8 @@ module LegalAidApplications
 
     before_validation :clear_value_fields
 
-    ATTRIBUTES = %i[name dob_year dob_month dob_day relationship
-                    in_full_time_education has_income monthly_income
-                    has_assets_more_than_threshold assets_value].freeze
+    ATTRIBUTES = %i[name date_of_birth_1i date_of_birth_2i date_of_birth_3i relationship in_full_time_education
+                    has_income monthly_income has_assets_more_than_threshold assets_value].freeze
     SCOPE = 'activemodel.errors.models.dependant.attributes'.freeze
 
     attr_accessor(*ATTRIBUTES)
@@ -100,7 +99,8 @@ module LegalAidApplications
         form: self,
         model: model,
         method: :date_of_birth,
-        prefix: :dob_
+        prefix: :date_of_birth_,
+        suffix: :gov_uk
       )
     end
 

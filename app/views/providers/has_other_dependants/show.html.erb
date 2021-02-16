@@ -31,16 +31,18 @@
     </div>
   <% end %>
 
-  <%= form_with(url: providers_legal_aid_application_has_other_dependants_path, method: :patch, local: true) do |form| %>
+  <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+          url: providers_legal_aid_application_has_other_dependants_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
 
-    <%= govuk_form_group(
-            show_error_if: @error,
-            input: :other_dependant
-        ) do %>
-
-      <%= form.govuk_collection_radio_buttons :other_dependant, form.yes_no_radio_button_array, :value, :label, error: @error&.values&.first, title: content_for(:page_title) %>
-
-    <% end %>
+      <%= form.govuk_collection_radio_buttons :other_dependant,
+                                              yes_no_options,
+                                              :value,
+                                              :label,
+                                              legend: {text: content_for(:page_title), size: 'xl', tag: 'h1'} %>
 
     <%= next_action_buttons(form: form) %>
   <% end %>

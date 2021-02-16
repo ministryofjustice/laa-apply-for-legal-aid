@@ -1,41 +1,36 @@
 <%= page_template page_title: t('.page_title'), template: :basic do %>
     <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           model: @form,
           url: providers_legal_aid_application_has_dependants_path(@legal_aid_application),
           method: :patch,
           local: true
       ) do |form| %>
 
-    <%= govuk_form_group(
-            show_error_if: @form.errors.present?,
-            input: :has_dependants
-        ) do %>
+    <%= form.govuk_collection_radio_buttons :has_dependants,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: {
+                                                text: t('.page_title'),
+                                                tag: 'h1',
+                                                size: 'xl'
+                                            } do %>
+        <p class="govuk-body govuk-!-margin-top-4">
+          <%= t('.info') %>
+        </p>
 
-      <%= form.govuk_collection_radio_buttons :has_dependants,
-                                              form.yes_no_radio_button_array,
-                                              :value,
-                                              :label,
-                                              error: @error,
-                                              title: {
-                                                  text: t('.page_title'),
-                                                  padding_below: 4
-                                              } do %>
+        <ul class="govuk-list govuk-list--bullet">
+          <% t('.list').each_line do |item| %>
+            <li><%= item %></li>
+          <% end %>
+        </ul>
+
+        <div class="govuk-inset-text">
           <p class="govuk-body">
-            <%= t('.info') %>
+            <%= t('.extra_info') %>
           </p>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <% t('.list').each_line do |item| %>
-              <li><%= item %></li>
-            <% end %>
-          </ul>
-
-          <div class="govuk-inset-text">
-            <p class="govuk-body">
-              <%= t('.extra_info') %>
-            </p>
-          </div>
-      <% end %>
+        </div>
 
     <% end %>
 
