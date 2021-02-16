@@ -18,7 +18,7 @@
         <%= transaction_type.label_name %>
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= number_to_currency @legal_aid_application.bank_transactions.amounts.fetch(transaction_type.id, 0).abs %>
+        <%= number_to_currency @legal_aid_application.transactions_total_by_category(transaction_type.id) %>
       </dd>
     </div>
     <% end %>

@@ -348,27 +348,39 @@ module CFE # rubocop:disable Metrics/ModuleLength
           upper_threshold: '999999999999.0',
           assessment_result: 'eligible'
         },
-        student_loan: {
-          monthly_equivalents: '1000.0'
+        irregular_income: {
+          monthly_equivalents: {
+            student_loan: '0.0'
+          }
+        },
+        state_benefits: {
+          monthly_equivalents: {
+            all_sources: '114.95',
+            cash_transactions: '100.0',
+            bank_transactions: [
+              {
+                name: 'manually_chosen',
+                monthly_value: '14.95',
+                excluded_from_income_assessment: false
+              }
+            ]
+          }
         },
         other_income: {
           monthly_equivalents: {
             bank_transactions: {
-              benefits: '34.65',
               friends_or_family: '36.67',
               maintenance_in: '10.0',
               property_or_lodger: '666.67',
               pension: '16.67'
             },
             cash_transactions: {
-              benefits: '100.0',
               friends_or_family: '200.0',
               maintenance_in: '300.0',
               property_or_lodger: '400.0',
               pension: '500.0'
             },
             all_sources: {
-              benefits: '134.65',
               friends_or_family: '236.67',
               maintenance_in: '310.0',
               property_or_lodger: '1066.67',

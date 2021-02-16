@@ -9,7 +9,7 @@
          <%= t('.total', text: transaction_type.label_name) %>
        </td>
        <td class="govuk-table__cell govuk-table__cell--numeric">
-         <%= gds_number_to_currency @legal_aid_application.bank_transactions.amounts.fetch(transaction_type.id, 0) %>
+         <%= gds_number_to_currency @legal_aid_application.transactions_total_by_type(:bank, transaction_type.id) %>
        </td>
      </tr>
    <% end %>
