@@ -80,6 +80,24 @@ RSpec.describe GovukEmails::EmailMonitor do
         expect(sent_email.status).to eq 'created'
         expect(sent_email.status_checked_at).to be_nil
       end
+
+      context 'unable to write the SentEmail record' do
+        before { allow(SentEmail).to receive(:create!).and_raise(ActiveRecord::RecordInvalid) }
+        it 'sends a message to Sentry' do
+          expect(Raven).to receive(:capture_message).with(/Unable to write SentEmail record: ActiveRecord::RecordInvalid Record invalid/)
+          subject
+        end
+
+        it 'still sends the email' do
+          mailer = double(Mail::Message)
+          govuk_notify_response = double(govuk_notify_response, id: 1234)
+          expect(FeedbackMailer).to receive(:public_send).and_return(mailer)
+          expect(mailer).to receive(:deliver_now!).and_return(mailer)
+          expect(mailer).to receive(:govuk_notify_response).and_return(govuk_notify_response)
+          allow(Raven).to receive(:capture_message)
+          subject
+        end
+      end
     end
 
     context 'email has already been sent at least once' do

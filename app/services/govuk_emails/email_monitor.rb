@@ -84,15 +84,21 @@ module GovukEmails
                         sent_at: Time.zone.now,
                         status: 'created',
                         status_checked_at: nil)
+    rescue StandardError => e
+      Raven.capture_message("Unable to write SentEmail record: #{e.class} #{e.message} Params: #{@email_args.inspect}")
     end
 
     def update_sent_email
       sent_email = SentEmail.find_by!(govuk_message_id: govuk_message_id)
+      return unless sent_email # cater for cases where the sent email couldnt be created in the first place
+
       sent_email.update(status: email.status, status_checked_at: Time.zone.now)
     end
 
     def update_sent_email_with_exception
-      sent_email = SentEmail.find_by!(govuk_message_id: govuk_message_id)
+      sent_email = SentEmail.find_by(govuk_message_id: govuk_message_id)
+      return unless sent_email # cater for cases where the sent email couldnt be created in the first place
+
       sent_email.update(status: 'Notifications::Client::NotFoundError', status_checked_at: Time.zone.now)
     end
 
