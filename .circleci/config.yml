@@ -337,12 +337,12 @@ workflows:
       - deploy_uat:
           requires:
           - build_and_push
-      - unit_tests:
-          requires:
-          - lint_checks
-      - integration_tests:
-          requires:
-          - lint_checks
+      # - unit_tests:
+      #     requires:
+      #     - lint_checks
+      # - integration_tests:
+      #     requires:
+      #     - lint_checks
 
   merge_pr:
     jobs:

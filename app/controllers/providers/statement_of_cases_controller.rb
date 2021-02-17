@@ -34,6 +34,7 @@ module Providers
       else
         @error_message = error_message
       end
+      sleep 600
       render :show
     end
 
