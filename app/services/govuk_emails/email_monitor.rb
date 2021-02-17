@@ -96,7 +96,9 @@ module GovukEmails
     end
 
     def update_sent_email_with_exception
-      sent_email = SentEmail.find_by!(govuk_message_id: govuk_message_id)
+      sent_email = SentEmail.find_by(govuk_message_id: govuk_message_id)
+      return unless sent_email # cater for cases where the sent email couldnt be created in the first place
+
       sent_email.update(status: 'Notifications::Client::NotFoundError', status_checked_at: Time.zone.now)
     end
 
