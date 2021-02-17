@@ -12,7 +12,7 @@ RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
   let(:provider_firm) { 'Acme Solicitors' }
 
   describe '#notify_apply_team' do
-    let(:mail) { described_class.notify_apply_team(email_address, failure_reason, mailer, mail_method, args) }
+    let(:mail) { described_class.notify_apply_team(email_address, failure_reason, mailer, mail_method) }
 
     it 'sends an email to the correct address' do
       expect(mail.to).to eq([Rails.configuration.x.support_email_address])
@@ -23,15 +23,15 @@ RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
     end
 
     it 'sets the correct template' do
-      expect(mail.govuk_notify_template).to eq('8977dba0-7f06-4180-8ae8-11f630be8849')
+      expect(mail.govuk_notify_template).to eq('e583e4f3-87b9-4fca-8448-82865db41708')
     end
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq(
-        email_address: email_address,
+        addressee: email_address,
+        environment: :TEST,
         failure_reason: failure_reason,
-        mailer_and_method: 'NotifyMailer#citizen_start_email',
-        mail_params: args.to_json
+        mailer_and_method: 'NotifyMailer#citizen_start_email'
       )
     end
   end
