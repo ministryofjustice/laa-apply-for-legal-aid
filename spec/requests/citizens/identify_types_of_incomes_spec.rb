@@ -165,5 +165,30 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
         expect { subject }.not_to change { legal_aid_application.transaction_types.count }
       end
     end
+
+    context 'When checking citizen answers' do
+      before do
+        get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+        legal_aid_application.check_citizen_answers!
+        patch citizens_identify_types_of_income_path, params: params
+      end
+
+      context 'change to none selected' do
+        let(:params) { { legal_aid_application: { none_selected: 'true' } } }
+
+        it 'should redirect to the check answers page' do
+          expect(response).to redirect_to(citizens_check_answers_path)
+        end
+      end
+
+      context 'when a different income is selected' do
+        let(:params) { { legal_aid_application: { none_selected: 'false' } } }
+
+        it 'should redirect to the cash income step if allow_cash_payment set to true' do
+          allow(Setting).to receive(:allow_cash_payment?).and_return(true)
+          expect(subject).to redirect_to(citizens_cash_income_path)
+        end
+      end
+    end
   end
 end
