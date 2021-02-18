@@ -73,7 +73,6 @@ module CCMS
              :used_delegated_functions?, to: :legal_aid_application
 
     def initialize(submission)
-      @submission = submission
       @legal_aid_application = submission.legal_aid_application
     end
 
@@ -102,23 +101,23 @@ module CCMS
     end
 
     def submission_case_ccms_reference(_options)
-      @legal_aid_application.case_ccms_reference
+      legal_aid_application.case_ccms_reference
     end
 
     def used_delegated_functions_on(_options)
-      @legal_aid_application.used_delegated_functions_on.strftime('%d-%m-%Y')
+      legal_aid_application.used_delegated_functions_on.strftime('%d-%m-%Y')
     end
 
     def app_amendment_type(_options)
-      @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
+      legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
     def provider_firm_id(_options)
-      @legal_aid_application.provider.firm.ccms_id
+      legal_aid_application.provider.firm.ccms_id
     end
 
     def provider_email(_options)
-      @legal_aid_application.provider.email
+      legal_aid_application.provider.email
     end
 
     def applicant_national_insurance_number(_options)
@@ -169,7 +168,7 @@ module CCMS
     end
 
     def applicant_shares_ownership_of_second_home?(options)
-      applicant_owns_additional_property?(options) && @legal_aid_application.other_assets_declaration.second_home_percentage != 100
+      applicant_owns_additional_property?(options) && legal_aid_application.other_assets_declaration.second_home_percentage != 100
     end
 
     def applicant_has_trusts_bonds_or_stocks?(_options)
@@ -201,11 +200,11 @@ module CCMS
     end
 
     def lead_proceeding_type_default_level_of_service(_options)
-      @legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number
+      legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number
     end
 
     def lead_proceeding_type_default_level_of_service_name(_options)
-      @legal_aid_application.lead_proceeding_type.default_level_of_service.name
+      legal_aid_application.lead_proceeding_type.default_level_of_service.name
     end
 
     def applicant_postcode(_options)
@@ -233,43 +232,43 @@ module CCMS
     end
 
     def application_substantive?(_options)
-      !@legal_aid_application.used_delegated_functions?
+      !legal_aid_application.used_delegated_functions?
     end
 
     def proceeding_proceeding_application_type(_options)
-      @legal_aid_application.used_delegated_functions? ? 'Both' : 'Substantive'
+      legal_aid_application.used_delegated_functions? ? 'Both' : 'Substantive'
     end
 
     def no_warning_letter_sent?(_options)
-      !@legal_aid_application.respondent.warning_letter_sent
+      !legal_aid_application.respondent.warning_letter_sent
     end
 
     def applicant_owns_main_home?(_options)
-      !@legal_aid_application.own_home_no?
+      !legal_aid_application.own_home_no?
     end
 
     def applicant_shares_ownership_main_home?(_options)
-      (not_zero? @legal_aid_application.percentage_home) && @legal_aid_application.percentage_home < 100
+      (not_zero? legal_aid_application.percentage_home) && legal_aid_application.percentage_home < 100
     end
 
     def applicant_owns_percentage_main_home(_options)
-      @legal_aid_application.percentage_home
+      legal_aid_application.percentage_home
     end
 
     def third_party_owns_percentage_main_home(_options)
-      100 - @legal_aid_application.percentage_home
+      100 - legal_aid_application.percentage_home
     end
 
     def applicant_property_value(_options)
-      @legal_aid_application.property_value
+      legal_aid_application.property_value
     end
 
     def outstanding_mortgage?(_options)
-      !@legal_aid_application&.own_home_no? && @legal_aid_application&.own_home_mortgage? && @legal_aid_application&.outstanding_mortgage_amount
+      !legal_aid_application&.own_home_no? && legal_aid_application&.own_home_mortgage? && legal_aid_application&.outstanding_mortgage_amount
     end
 
     def outstanding_mortgage_amount(_options)
-      @legal_aid_application.outstanding_mortgage_amount
+      legal_aid_application.outstanding_mortgage_amount
     end
 
     def applicant_has_vehicle?(_options)
@@ -312,7 +311,7 @@ module CCMS
     end
 
     def benefit_check_passed?(_options)
-      @legal_aid_application.benefit_check_result.result == 'Yes'
+      legal_aid_application.benefit_check_result.result == 'Yes'
     end
 
     def proceeding_cost_limitation(_options)
@@ -324,11 +323,11 @@ module CCMS
     private
 
     def applicant
-      @applicant ||= @legal_aid_application.applicant
+      @applicant ||= legal_aid_application.applicant
     end
 
     def lead_proceeding_type
-      @lead_proceeding_type ||= @legal_aid_application.lead_proceeding_type
+      @lead_proceeding_type ||= legal_aid_application.lead_proceeding_type
     end
 
     def standardly_named_method?(method)
@@ -336,19 +335,19 @@ module CCMS
     end
 
     def savings
-      @savings ||= @legal_aid_application.savings_amount
+      @savings ||= legal_aid_application.savings_amount
     end
 
     def other_assets
-      @other_assets ||= @legal_aid_application.other_assets_declaration
+      @other_assets ||= legal_aid_application.other_assets_declaration
     end
 
     def cfe_result
-      @cfe_result ||= @legal_aid_application.cfe_result
+      @cfe_result ||= legal_aid_application.cfe_result
     end
 
     def scope_limitations
-      @scope_limitations ||= @legal_aid_application.scope_limitations
+      @scope_limitations ||= legal_aid_application.scope_limitations
     end
 
     def proceeding_limitation_desc(_options)
@@ -366,7 +365,7 @@ module CCMS
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
       case method
       when APPLICATION_REGEX
-        @legal_aid_application.__send__(Regexp.last_match(1))
+        legal_aid_application.__send__(Regexp.last_match(1))
       when APPLICANT_REGEX
         applicant.__send__(Regexp.last_match(1))
       when APPLICATION_PROCEEDING_TYPE_REGEX
@@ -380,21 +379,21 @@ module CCMS
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
       when INCOME_TYPE_REGEX
-        @legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp('?'))
+        legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp('?'))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when OUTGOING
-        @legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
+        legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
       when RESPONDENT
         options[:respondent].__send__(Regexp.last_match(1))
       when MERITS_ASSESSMENT
         options[:merits_assessment].__send__(Regexp.last_match(1))
       when SAVINGS_AMOUNT
-        @legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
+        legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
       when OTHER_ASSETS_DECLARATION
-        @legal_aid_application.other_assets_declaration.__send__(Regexp.last_match(1))
+        legal_aid_application.other_assets_declaration.__send__(Regexp.last_match(1))
       when LEAD_PROCEEDING_TYPE
-        @legal_aid_application.lead_proceeding_type.__send__(Regexp.last_match(1))
+        legal_aid_application.lead_proceeding_type.__send__(Regexp.last_match(1))
       end
     end
 
@@ -407,7 +406,7 @@ module CCMS
     end
 
     def manual_case_review_required?
-      ManualReviewDeterminer.call(@legal_aid_application)
+      ManualReviewDeterminer.call(legal_aid_application)
     end
   end
 end

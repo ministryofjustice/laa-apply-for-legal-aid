@@ -270,7 +270,7 @@
                           <ns0:Attribute>
                             <ns0:Attribute>APPLY_CASE_MEANS_REVIEW</ns0:Attribute>
                             <ns0:ResponseType>boolean</ns0:ResponseType>
-                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
@@ -1392,7 +1392,7 @@
                           <ns0:Attribute>
                             <ns0:Attribute>APPLY_CASE_MEANS_REVIEW</ns0:Attribute>
                             <ns0:ResponseType>boolean</ns0:ResponseType>
-                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>

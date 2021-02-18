@@ -26,11 +26,17 @@ module CCMS
     end
 
     def call
-      return true if Setting.manually_review_all_cases? && non_passported?
+      needs_review?
+    end
 
-      return true if capital_contribution_required? && has_restrictions?
+    private
 
-      false
+    def needs_review?
+      manually_review_all_non_passported? || capital_contribution_required? || has_restrictions?
+    end
+
+    def manually_review_all_non_passported?
+      Setting.manually_review_all_cases? && non_passported?
     end
   end
 end

@@ -170,7 +170,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
           end
 
           it 'displays the correct result' do
-            expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
           end
         end
 
@@ -193,8 +193,8 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
             expect(response).to have_http_status(:ok)
           end
 
-          it 'does not displays manual check required' do
-            expect(unescaped_response_body).not_to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
+          it 'displays manual check required' do
+            expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
           end
         end
 
@@ -221,7 +221,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
           end
 
           it 'displays the correct result' do
-            expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include(I18n.t('manual_check_disregards.heading', name: applicant_name, scope: locale_scope))
           end
         end
 

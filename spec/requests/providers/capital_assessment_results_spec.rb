@@ -109,7 +109,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         subject
       end
 
-      context 'no policy disregards' do
+      context 'with policy disregards' do
         let(:add_policy_disregards?) { true }
         context 'eligible' do
           let(:cfe_result) { create :cfe_v2_result, :eligible }
@@ -118,7 +118,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
           end
 
           it 'displays the correct result' do
-            expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include(I18n.t('manual_check_disregards.heading', name: applicant_name, scope: locale_scope))
           end
         end
 
@@ -135,7 +135,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
       end
 
-      context 'with policy disregards' do
+      context 'with no policy disregards' do
         context 'eligible' do
           let(:cfe_result) { create :cfe_v2_result, :eligible }
           it 'returns http success' do
@@ -143,7 +143,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
           end
 
           it 'displays the correct result' do
-            expect(unescaped_response_body).to include(I18n.t('eligible.heading', name: applicant_name, scope: locale_scope))
+            expect(unescaped_response_body).to include(I18n.t('manual_check_required.heading', name: applicant_name, scope: locale_scope))
           end
         end
 
