@@ -6,8 +6,8 @@
     ) do %>
 
     <%= form_with(
-        model: @form,
         builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: @form,
         url: providers_legal_aid_application_applicant_employed_index_path(@legal_aid_application),
         method: :post,
         local: true
