@@ -92,9 +92,9 @@ Feature: Non-passported applicant journeys
     When I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 17 year old
     And I choose "They're a child relative"
-    And I choose option "dependant_in_full_time_education_false"
-    And I choose option "dependant_has_income_false"
-    And I choose option "dependant_has_assets_more_than_threshold_false"
+    And I choose option "dependant-in-full-time-education-field"
+    And I choose option "dependant-has-income-field"
+    And I choose option "dependant-has-assets-more-than-threshold-field"
     And I click 'Save and continue'
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "Yes"
@@ -104,10 +104,10 @@ Feature: Non-passported applicant journeys
     And I enter a date of birth for a 21 year old
     And I choose "They're a child relative"
     And I click "Save and continue"
-    And I choose option "dependant_in_full_time_education_true"
-    And I choose option "dependant_has_income_true"
+    And I choose option "dependant-in-full-time-education-true-field"
+    And I choose option "dependant-has-income-true-field"
     And I fill "monthly income" with "1234"
-    And I choose option "dependant_has_assets_more_than_threshold_false"
+    And I choose option "dependant-has-assets-more-than-threshold-field"
     And I click 'Save and continue'
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "Yes"

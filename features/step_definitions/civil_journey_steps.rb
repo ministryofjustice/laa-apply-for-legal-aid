@@ -509,9 +509,9 @@ Given('I add the details for a child dependant') do
     Then I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 17 year old
     And I choose "They're a child relative"
-    And I choose option "dependant_in_full_time_education_false"
-    And I choose option "dependant_has_income_false"
-    And I choose option "dependant_has_assets_more_than_threshold_false"
+    And I choose option "dependant-in-full-time-education-field"
+    And I choose option "dependant-has-income-field"
+    And I choose option "dependant-has-assets-more-than-threshold-field"
   )
 end
 
@@ -650,9 +650,9 @@ end
 
 Then('I enter a date of birth for a {int} year old') do |number|
   date = (number.years + 1.month).ago
-  fill_in('date_of_birth', with: date.day)
-  fill_in('dob_month', with: date.month)
-  fill_in('dob_year', with: date.year)
+  fill_in('dependant_date_of_birth_3i', with: date.day)
+  fill_in('dependant_date_of_birth_2i', with: date.month)
+  fill_in('dependant_date_of_birth_1i', with: date.year)
 end
 
 Then(/^I enter the purchase date '(\d+-\d+-\d+)'$/) do |purchase_date|
