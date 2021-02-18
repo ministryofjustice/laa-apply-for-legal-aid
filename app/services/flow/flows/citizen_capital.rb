@@ -11,7 +11,13 @@ module Flow
               :student_finances
             end
           end,
-          check_answers: :check_answers
+          check_answers: ->(application) do
+            if Setting.allow_cash_payment? && application.transaction_types.credits.any?
+              :cash_incomes
+            else
+              :check_answers
+            end
+          end
         },
         cash_incomes: {
           path: ->(_) { urls.citizens_cash_income_path(locale: I18n.locale) },

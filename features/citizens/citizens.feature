@@ -138,16 +138,23 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to change income types via the check your answers page
+    Given the setting to allow cash payments is enabled
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Benefits'
     And I click Check Your Answers Change link for 'incomings'
     Then I should be on a page showing 'Which of the following payments do you receive?'
-    Then I select 'Financial help from friends or family'
+    Then I select 'Maintenance payments'
+    And I click 'Save and continue'
+    Then I should be on the 'cash_income' page showing 'Select payments you receive in cash'
+    Then I select 'Maintenance payments'
+    Then I enter maintenance_in1 '100'
+    Then I enter maintenance_in2 '100'
+    Then I enter maintenance_in3 '100'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Financial help from friends or family Yes'
+    Then I should be on a page showing 'Maintenance payments Yes'
 
   @javascript
   Scenario: I want to add another bank account via the check your answers page
