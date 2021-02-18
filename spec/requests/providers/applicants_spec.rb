@@ -27,10 +27,10 @@ RSpec.describe Providers::ApplicantsController, type: :request do
     let(:params) do
       {
         applicant: param_applicant.merge(
-          date_of_birth_1i: param_applicant[:date_of_birth].year.to_s,
-          date_of_birth_2i: param_applicant[:date_of_birth].month.to_s,
-          date_of_birth_3i: param_applicant[:date_of_birth].day.to_s
-        )
+          'date_of_birth(1i)': param_applicant[:date_of_birth].year.to_s,
+          'date_of_birth(2i)': param_applicant[:date_of_birth].month.to_s,
+          'date_of_birth(3i)': param_applicant[:date_of_birth].day.to_s
+        ).except(:date_of_birth)
       }
     end
     let(:legal_aid_application) { provider.legal_aid_applications.last }
