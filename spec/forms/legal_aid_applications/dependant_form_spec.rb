@@ -15,9 +15,9 @@ RSpec.describe LegalAidApplications::DependantForm do
   let(:params) do
     {
       name: Faker::Lorem.word,
-      dob_day: day,
-      dob_month: month,
-      dob_year: year,
+      date_of_birth_3i: day,
+      date_of_birth_2i: month,
+      date_of_birth_1i: year,
       relationship: 'child_relationship',
       monthly_income: monthly_income,
       has_income: has_income,

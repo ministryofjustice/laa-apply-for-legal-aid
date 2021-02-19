@@ -11,9 +11,9 @@ RSpec.describe Providers::Draftable do
           first_name: 'John',
           last_name: 'Doe',
           national_insurance_number: 'AA 12 34 56 C',
-          date_of_birth_1i: '1981',
-          date_of_birth_2i: '07',
-          date_of_birth_3i: '11'
+          'date_of_birth(1i)': '1981',
+          'date_of_birth(2i)': '07',
+          'date_of_birth(3i)': '11'
         }
       }
     end

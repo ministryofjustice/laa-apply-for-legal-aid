@@ -1,9 +1,11 @@
 <%= page_template page_title: t('.title'), template: :basic do %>
 
   <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, method: :get, local: true) do |form| %>
+
+    <%= render partial: 'shared/error' if @error %>
+
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
       <div class="govuk-!-padding-bottom-4"></div>
-
       <%= form.govuk_text_field(
             :search_term,
             label: {text: :search_term, hidden: true},

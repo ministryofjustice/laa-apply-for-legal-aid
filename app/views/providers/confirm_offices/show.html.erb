@@ -2,7 +2,9 @@
   <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
                 url: providers_confirm_office_path, method: :patch, local: true) do |form| %>
 
-  <%= form.govuk_radio_buttons_fieldset :correct, legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+    <%= render partial: 'shared/error' if @error %>
+
+    <%= form.govuk_radio_buttons_fieldset :correct, legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
     <div class="govuk-!-padding-bottom-4"></div>
     <%= form.govuk_radio_button(
             :correct,
