@@ -645,7 +645,8 @@ Then(/^I enter the date of birth '(\d+-\d+-\d+)'$/) do |dob|
 end
 
 Then('I enter the email address {string}') do |email|
-  fill_in('email', with: email)
+  field = find('input[name*=email]')[:name]
+  fill_in(field, with: email)
 end
 
 Then('I enter a date of birth for a {int} year old') do |number|
