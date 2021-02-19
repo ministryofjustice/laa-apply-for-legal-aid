@@ -6,10 +6,6 @@ RSpec.describe CitizenConfirmationMailer, type: :mailer do
   let(:client_name) { Faker::Name.name }
   let(:citizen_completed_application_template) { Rails.configuration.govuk_notify_templates[:citizen_completed_application] }
 
-  it 'uses GovukNotifyMailerJob' do
-    expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)
-  end
-
   describe '#citizen_start_email' do
     let(:mail) { described_class.citizen_complete_email(app_id, email, client_name) }
 

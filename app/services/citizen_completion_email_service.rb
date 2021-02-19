@@ -6,8 +6,11 @@ class CitizenCompletionEmailService
   end
 
   def send_email
-    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
-    CitizenConfirmationMailer.citizen_complete_email(*mailer_args).deliver_later!
+    ScheduledMailing.send_now!(mailer_klass: CitizenConfirmationMailer,
+                               mailer_method: :citizen_complete_email,
+                               legal_aid_application_id: application.id,
+                               addressee: applicant.email_address,
+                               arguments: mailer_args)
   end
 
   private

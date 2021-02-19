@@ -24,10 +24,6 @@ module GovukEmails
       status == PERMANENTLY_FAILED_STATUS
     end
 
-    def temp_or_perm_failed?
-      permanently_failed? || should_resend?
-    end
-
     delegate :status, to: :email
 
     private

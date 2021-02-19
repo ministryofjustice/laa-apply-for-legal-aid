@@ -12,10 +12,6 @@ RSpec.describe ResendLinkRequestMailer, type: :mailer do
     )
   end
 
-  it 'uses GovukNotifyMailerJob' do
-    expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)
-  end
-
   describe '#notify' do
     it 'sends to correct address' do
       expect(mail.to).to eq([legal_aid_application.applicant.email_address])

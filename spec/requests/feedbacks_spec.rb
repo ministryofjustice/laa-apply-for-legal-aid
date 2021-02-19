@@ -73,10 +73,16 @@ RSpec.describe 'FeedbacksController', type: :request do
             ['/feedback/new']
           end
 
-          it 'does not provider application id to feedback mailer' do
-            mailer = double(deliver_later!: true)
-            expect(FeedbackMailer).to receive(:notify).with(instance_of(Feedback), nil).and_return(mailer)
-            subject
+          it 'schedules an email without an application id' do
+            expect { subject }.to change { ScheduledMailing.count }.by(1)
+            rec = ScheduledMailing.first
+
+            expect(rec.mailer_klass).to eq 'FeedbackMailer'
+            expect(rec.mailer_method).to eq 'notify'
+            expect(rec.legal_aid_application_id).to be_nil
+            expect(rec.addressee).to eq Rails.configuration.x.support_email_address
+            expect(rec.arguments).to eq [feedback.id, nil]
+            expect(rec.scheduled_at).to have_been_in_the_past
           end
 
           it 'adds provider-specific data to feedback record' do
@@ -143,10 +149,16 @@ RSpec.describe 'FeedbacksController', type: :request do
       end
     end
 
-    it 'sends an email' do
-      mailer = double(deliver_later!: true)
-      expect(FeedbackMailer).to receive(:notify).and_return(mailer)
-      subject
+    it 'schedules an email' do
+      expect { subject }.to change { ScheduledMailing.count }.by(1)
+      rec = ScheduledMailing.first
+
+      expect(rec.mailer_klass).to eq 'FeedbackMailer'
+      expect(rec.mailer_method).to eq 'notify'
+      expect(rec.legal_aid_application_id).to eq application.id
+      expect(rec.addressee).to eq Rails.configuration.x.support_email_address
+      expect(rec.arguments).to eq [feedback.id, application.id]
+      expect(rec.scheduled_at < Time.zone.now).to be true
     end
 
     it 'redirects to show action' do

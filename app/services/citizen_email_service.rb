@@ -1,4 +1,6 @@
 class CitizenEmailService
+  attr_reader :application
+
   include Rails.application.routes.url_helpers
 
   def initialize(application)
@@ -6,14 +8,19 @@ class CitizenEmailService
   end
 
   def send_email
-    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
-    NotifyMailer.citizen_start_email(*mailer_args).deliver_later!
-    ActiveSupport::Notifications.instrument 'dashboard.applicant_emailed', legal_aid_application_id: @application.id
+    ScheduledMailing.send_now!(mailer_klass: NotifyMailer,
+                               mailer_method: :citizen_start_email,
+                               legal_aid_application_id: application.id,
+                               addressee: applicant.email_address,
+                               arguments: mailer_args)
+    notify_dashboard
   end
 
   private
 
-  attr_reader :application
+  def notify_dashboard
+    ActiveSupport::Notifications.instrument 'dashboard.applicant_emailed', legal_aid_application_id: @application.id
+  end
 
   def mailer_args
     [

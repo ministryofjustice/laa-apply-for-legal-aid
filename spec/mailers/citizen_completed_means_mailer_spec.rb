@@ -9,7 +9,7 @@ RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
   let(:client_completed_means_template) { Rails.configuration.govuk_notify_templates[:client_completed_means] }
 
   describe '#notify_provider' do
-    let(:mail) { described_class.notify_provider(application, provider_name, applicant_name, application_url, email) }
+    let(:mail) { described_class.notify_provider(application.id, provider_name, applicant_name, application_url, email) }
 
     it 'sends an email to the correct address' do
       expect(mail.to).to eq([email])
@@ -31,6 +31,10 @@ RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
         ref_number: application.application_ref,
         application_url: application_url
       )
+    end
+
+    it 'is always eligible for delivery' do
+      expect(described_class.eligible_for_delivery?(double(ScheduledMailing))).to be true
     end
   end
 end

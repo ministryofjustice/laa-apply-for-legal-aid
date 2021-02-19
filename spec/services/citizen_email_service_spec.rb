@@ -13,32 +13,35 @@ RSpec.describe CitizenEmailService do
   subject { described_class.new(application) }
 
   describe '#send_email' do
-    it 'sends an email' do
-      message_delivery = instance_double(ActionMailer::MessageDelivery)
-      expect(NotifyMailer).to receive(:citizen_start_email)
-        .with(application.application_ref, applicant.email, citizen_url, 'John Doe', provider.firm.name)
-        .and_return(message_delivery)
-      expect(message_delivery).to receive(:deliver_later!)
-      expect(application).to receive(:generate_secure_id).and_return(secure_id)
-      expect_any_instance_of(DashboardEventHandler).to receive(:applicant_emailed)
+    let(:mailer_args) do
+      [
+        application.application_ref,
+        applicant.email_address,
+        citizen_url,
+        applicant.full_name,
+        provider.firm.name
+      ]
+    end
+    let(:scheduled_mail_attrs) do
+      [
+        mailer_klass: NotifyMailer,
+        mailer_method: :citizen_start_email,
+        legal_aid_application_id: application.id,
+        addressee: applicant.email_address,
+        arguments: mailer_args
+      ]
+    end
 
+    before { allow(subject).to receive(:secure_id).and_return(secure_id) }
+
+    it 'schedules and email for immediate delivery' do
+      expect(ScheduledMailing).to receive(:send_now!).with(*scheduled_mail_attrs)
       subject.send_email
     end
 
-    context 'sending the email', :vcr do
-      before do
-        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.clear
-        allow_any_instance_of(Notifications::Client).to receive(:get_notification).and_return(OpenStruct.new(status: 'delivered'))
-        allow_any_instance_of(DashboardEventHandler).to receive(:call).and_return(double(DashboardEventHandler))
-      end
-      it 'sends an email with the right parameters' do
-        expect_any_instance_of(NotifyMailer)
-          .to receive(:set_personalisation)
-          .with(hash_including(ref_number: application.application_ref))
-          .and_call_original
-        subject.send_email
-        ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
-      end
+    it 'notifies the dashboard' do
+      expect(subject).to receive(:notify_dashboard)
+      subject.send_email
     end
   end
 end

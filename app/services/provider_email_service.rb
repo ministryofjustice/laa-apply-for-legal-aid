@@ -6,8 +6,11 @@ class ProviderEmailService
   end
 
   def send_email
-    # Must use bang version `deliver_later!` or failures won't be retried by sidekiq
-    CitizenCompletedMeansMailer.notify_provider(*mailer_args).deliver_later!
+    ScheduledMailing.send_now!(mailer_klass: CitizenCompletedMeansMailer,
+                               mailer_method: :notify_provider,
+                               legal_aid_application_id: @application.id,
+                               addressee: provider_email_or_support,
+                               arguments: mailer_args)
   end
 
   private
@@ -16,15 +19,16 @@ class ProviderEmailService
 
   def mailer_args
     [
-      application,
+      application.id,
       provider.name,
       applicant.full_name,
-      application_url
-    ] + with_provider_email
+      application_url,
+      provider_email_or_support
+    ]
   end
 
-  def with_provider_email
-    HostEnv.staging? ? [] : [provider.email]
+  def provider_email_or_support
+    HostEnv.staging? ? Rails.configuration.x.support_email_address : provider.email
   end
 
   def application_url
