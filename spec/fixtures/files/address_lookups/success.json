@@ -1,6 +1,6 @@
 {
   "header" : {
-    "uri" : "https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?maxresults=2&postcode=SO16%208AL",
+    "uri" : "https://api.os.uk/search/places/v1/postcode?maxresults=2&postcode=SO16%208AL",
     "query" : "postcode=SO16 8AL",
     "offset" : 0,
     "totalresults" : 59,
