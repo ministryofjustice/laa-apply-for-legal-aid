@@ -2,8 +2,8 @@ Then('I should be on a page showing {string}') do |title|
   expect(page).to have_content(title)
 end
 
-Then('I should be on a page showing {string} with a date of 2 days ago') do |title|
-  expect(page).to have_content("#{title} #{2.days.ago.strftime('%d %B %Y')}")
+Then('I should be on a page showing {string} with a date of {int} days ago') do |title, num_days|
+  expect(page).to have_content("#{title} #{num_days.days.ago.strftime('%d %B %Y')}")
 end
 
 Then('I should be on the {string} page showing {string}') do |view_name, title|
