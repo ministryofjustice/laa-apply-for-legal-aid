@@ -504,8 +504,6 @@ en:
     policy_disregards:
       show:
         h1-heading: Select if your client has received payments from these schemes or charities
-        h2-heading: Select all that apply
-        none_selected: None of these
     outgoings_summary:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment

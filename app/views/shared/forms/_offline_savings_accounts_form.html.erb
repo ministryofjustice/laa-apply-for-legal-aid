@@ -1,23 +1,15 @@
-<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
+<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: @form.errors.present? do %>
-
-    <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header do %>
-        <h1 class="govuk-fieldset__heading">
-          <%= label_tag(:offline_savings_accounts, page_title) %>
-        </h1>
-      <% end %>
+  <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title } do %>
 
       <%= form.govuk_text_field(
               :offline_savings_accounts,
-              label: nil,
+              label: {text: :offline_savings_accounts, hidden: true},
               value: number_to_currency_or_original_string(model.offline_savings_accounts),
-              input_prefix: t('currency.gbp'),
-              class: 'govuk-!-width-one-third'
+              prefix_text: t('currency.gbp'),
+              width: 'one-third'
           ) %>
 
-    </fieldset>
   <% end %>
 
   <%= next_action_buttons(

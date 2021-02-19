@@ -16,7 +16,7 @@ module Providers
     end
 
     def form_params
-      merge_with_model(policy_disregards, journey: :providers) do
+      merge_with_model(policy_disregards) do
         attrs = Providers::PolicyDisregardsForm::CHECK_BOXES_ATTRIBUTES
         params[:policy_disregards].permit(*attrs)
       end

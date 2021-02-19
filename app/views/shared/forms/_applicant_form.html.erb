@@ -13,11 +13,10 @@
       ) do |form| %>
 
     <div class="govuk-!-padding-bottom-2"></div>
-    <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m"><%= t('.full_name') %></legend>
+    <%= form.govuk_fieldset legend: {text: t('.full_name')} do %>
       <%= form.govuk_text_field :first_name, label: { text: 'First name' }, width: 'three-quarters' %>
       <%= form.govuk_text_field :last_name, label: { text: 'Last name'}, width: 'three-quarters' %>
-    </fieldset>
+    <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
     <%= form.govuk_date_field :date_of_birth, legend: { text: t("shared.forms.date_input_fields.date_of_birth_label") },
@@ -33,6 +32,5 @@
     <div class="govuk-!-padding-bottom-2"></div>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
-   </div>
   <% end %>
 <% end %>
