@@ -98,5 +98,5 @@ Rails.application.configure do
   config.x.policy_disregards_start_date = Date.parse(ENV['POLICY_DISREGARDS_START_DATE'] || '2021-1-8')
 
   # says whether or not to send alerts to Sentry and support email for undeliverable emails
-  config.x.alert_undeliverable_emails = HostEnv.production?
+  config.x.alert_undeliverable_emails = true
 end

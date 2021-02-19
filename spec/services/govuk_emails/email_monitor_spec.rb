@@ -220,6 +220,24 @@ RSpec.describe GovukEmails::EmailMonitor do
             subject
           end
         end
+
+        context 'Rails env production and Host Env production' do
+          before do
+            allow(Rails).to receive(:env).and_return('production')
+            allow(HostEnv).to receive(:production?).and_return(true)
+          end
+
+          it 'send the undeliverable alert' do
+            params = %w[
+              julien.sansot@digital.justice.gov.uk
+              permanent-failure
+              FeedbackMailer
+              notify
+            ]
+            expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team).with(*params).and_return(mock_mailer)
+            subject
+          end
+        end
       end
 
       context 'email temporary failed' do

@@ -104,7 +104,7 @@ module GovukEmails
     end
 
     def send_undeliverable_alert(error)
-      return unless Rails.configuration.x.alert_undeliverable_emails
+      return unless send_undeliverable_alerts?
 
       failure_reason = if error.is_a?(StandardError)
                          error.class.to_s
@@ -121,6 +121,15 @@ module GovukEmails
 
     def email_address
       @email_args.detect { |arg| arg.to_s =~ /^\S+@\S+\.\S{2,3}$/ }
+    end
+
+    def send_undeliverable_alerts?
+      case Rails.env
+      when 'development', 'test'
+        Rails.configuration.x.alert_undeliverable_emails
+      else
+        HostEnv.production?
+      end
     end
   end
 end
