@@ -167,33 +167,9 @@ RSpec.describe GovukEmails::EmailMonitor do
         let(:email_status) { message_status }
         let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
-        it 'does not send the email' do
+        it 'does not send the original email' do
           subject
           expect(stub_send_email).not_to have_been_requested
-        end
-
-        it 'captures an exception' do
-          expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
-            expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-            expect(arg2).to eq 'permanent-failure'
-            expect(arg3).to eq 'FeedbackMailer'
-            expect(arg4).to eq 'notify'
-            expect(arg5).to be_an_instance_of(Array)
-            expect(arg5.size).to eq 2
-            expect(arg5.first).to be_an_instance_of(Feedback)
-            expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-          }.and_return(mock_mailer)
-          subject
-        end
-
-        it 'sends a message to Sentry' do
-          expect(Raven).to receive(:capture_message).with(/^Undeliverable Email Error -/)
-          subject
-        end
-
-        it 'does not re-trigger the job for monitoring or sending a new email' do
-          expect(email_monitor).not_to receive(:trigger_job)
-          subject
         end
 
         it 'updates the sent_email record' do
@@ -205,6 +181,45 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(sent_email.status_checked_at.to_i).to eq time_now.to_i
           travel_back
         end
+
+        it 'does not re-trigger the job for monitoring or sending a new email' do
+          expect(email_monitor).not_to receive(:trigger_job)
+          subject
+        end
+
+        context 'Rails configured to send undeliverable alerts' do
+          before { allow(Rails.configuration.x).to receive(:alert_undeliverable_emails).and_return(true) }
+
+          it 'sends an undeliverable email alert to team' do
+            params = %w[
+              julien.sansot@digital.justice.gov.uk
+              permanent-failure
+              FeedbackMailer
+              notify
+            ]
+            expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team).with(*params).and_return(mock_mailer)
+            subject
+          end
+
+          it 'sends a message to Sentry' do
+            expect(Raven).to receive(:capture_message).with(/^Undeliverable Email Error -/)
+            subject
+          end
+        end
+
+        context 'Rails configured NOT to send undeliverable alerts' do
+          before { allow(Rails.configuration.x).to receive(:alert_undeliverable_emails).and_return(false) }
+
+          it 'does not send an undeliverable email alert to team' do
+            expect(UndeliverableEmailAlertMailer).not_to receive(:notify_apply_team)
+            subject
+          end
+
+          it 'sends a message to Sentry' do
+            expect(Raven).not_to receive(:capture_message)
+            subject
+          end
+        end
       end
 
       context 'email temporary failed' do
@@ -212,22 +227,9 @@ RSpec.describe GovukEmails::EmailMonitor do
         let(:email_status) { message_status }
         let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
-        it 'does not send the email' do
+        it 'does not send the original email' do
           subject
           expect(stub_send_email).not_to have_been_requested
-        end
-
-        it 'does not capture an exception' do
-          expect(Raven).to receive(:capture_message) do |message|
-            expect(message).to match(/^Undeliverable Email Error /)
-            expect(message).to match(/"failure_reason":"#{message_status}"/)
-          end
-          subject
-        end
-
-        it 'stops monitoring the email' do
-          expect(email_monitor).not_to receive(:trigger_job).with(arg_govuk_message_id)
-          subject
         end
 
         it 'updates the sent_email record' do
@@ -239,43 +241,73 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(sent_email.status_checked_at.to_i).to eq time_now.to_i
           travel_back
         end
+
+        it 'does not re-trigger the job for monitoring or sending a new email' do
+          expect(email_monitor).not_to receive(:trigger_job)
+          subject
+        end
+
+        context 'Rails configured to send undeliverable alerts' do
+          before { allow(Rails.configuration.x).to receive(:alert_undeliverable_emails).and_return(true) }
+
+          it 'sends an undeliverable email alert to team' do
+            params = [
+              'julien.sansot@digital.justice.gov.uk',
+              message_status,
+              'FeedbackMailer',
+              'notify'
+            ]
+            expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team).with(*params).and_return(mock_mailer)
+            subject
+          end
+
+          it 'sends a message to Sentry' do
+            expect(Raven).to receive(:capture_message).with(/^Undeliverable Email Error -/)
+            subject
+          end
+        end
+
+        context 'Rails configured NOT to send undeliverable alerts' do
+          before { allow(Rails.configuration.x).to receive(:alert_undeliverable_emails).and_return(false) }
+
+          it 'does not send an undeliverable email alert to team' do
+            expect(UndeliverableEmailAlertMailer).not_to receive(:notify_apply_team)
+            subject
+          end
+
+          it 'sends a message to Sentry' do
+            expect(Raven).not_to receive(:capture_message)
+            subject
+          end
+        end
       end
     end
 
     context "govuk_notify can't find email" do
       before do
-        allow_any_instance_of(Notifications::Client)
-          .to receive(:get_notification)
-          .and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
+        allow(Rails.configuration.x).to receive(:alert_undeliverable_emails).and_return(true)
+        allow(GovukEmails::Email).to receive(:new).and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
       end
+      #   allow_any_instance_of(Notifications::Client)
+      #     .to receive(:get_notification)
+      #     .and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
+      # end
 
       let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
       it 'raises an error' do
-        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
-          expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-          expect(arg2).to eq 'Notifications::Client::NotFoundError'
-          expect(arg3).to eq 'FeedbackMailer'
-          expect(arg4).to eq 'notify'
-          expect(arg5).to be_an_instance_of(Array)
-          expect(arg5.size).to eq 2
-          expect(arg5.first).to be_an_instance_of(Feedback)
-          expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-        }.and_return(mock_mailer)
+        allow(UndeliverableEmailAlertMailer).to receive(:notify_apply_team).and_return(mock_mailer)
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
       end
 
       it 'sends an undeliverable email alert' do
-        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team) { |arg1, arg2, arg3, arg4, arg5|
-          expect(arg1).to eq 'julien.sansot@digital.justice.gov.uk'
-          expect(arg2).to eq 'Notifications::Client::NotFoundError'
-          expect(arg3).to eq 'FeedbackMailer'
-          expect(arg4).to eq 'notify'
-          expect(arg5).to be_an_instance_of(Array)
-          expect(arg5.size).to eq 2
-          expect(arg5.first).to be_an_instance_of(Feedback)
-          expect(arg5.last).to eq 'julien.sansot@digital.justice.gov.uk'
-        }.and_return(mock_mailer)
+        params = %w[
+          julien.sansot@digital.justice.gov.uk
+          Notifications::Client::NotFoundError
+          FeedbackMailer
+          notify
+        ]
+        expect(UndeliverableEmailAlertMailer).to receive(:notify_apply_team).with(*params).and_return(mock_mailer)
         expect { subject }.to raise_error(Notifications::Client::NotFoundError)
       end
 

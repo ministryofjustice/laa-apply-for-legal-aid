@@ -72,4 +72,7 @@ Rails.application.configure do
 
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]
+
+  # says whether or not to send alerts to Sentry and support email for undeliverable emails
+  config.x.alert_undeliverable_emails = false
 end

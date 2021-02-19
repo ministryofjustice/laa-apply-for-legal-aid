@@ -66,4 +66,7 @@ Rails.application.configure do
 
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
+
+  # says whether or not to send alerts to Sentry and support email for undeliverable emails
+  config.x.alert_undeliverable_emails = false
 end

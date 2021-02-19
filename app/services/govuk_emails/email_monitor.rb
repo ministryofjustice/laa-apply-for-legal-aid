@@ -31,7 +31,7 @@ module GovukEmails
 
       if email.temp_or_perm_failed?
         send_undeliverable_alert(email.status)
-        Raven.capture_message("Undeliverable Email Error - #{error_details.to_json}")
+
       elsif !email.delivered?
         keep_monitoring
       end
@@ -58,17 +58,6 @@ module GovukEmails
     end
 
     private
-
-    def error_details
-      {
-        mailer: @mailer,
-        mail_method: @mail_method,
-        delivery_method: @delivery_method,
-        failure_reason: email.status,
-        email_args: @email_args,
-        govuk_message_id: @govuk_message_id
-      }
-    end
 
     def send_first_email
       self.govuk_message_id = send_email.govuk_notify_response.id
@@ -116,12 +105,15 @@ module GovukEmails
     end
 
     def send_undeliverable_alert(error)
+      return unless Rails.configuration.x.alert_undeliverable_emails
+
       failure_reason = if error.is_a?(StandardError)
                          error.class.to_s
                        else
                          error
                        end
-      UndeliverableEmailAlertMailer.notify_apply_team(email_address, failure_reason, @mailer, @mail_method, @email_args).deliver_later!
+      UndeliverableEmailAlertMailer.notify_apply_team(email_address, failure_reason, @mailer, @mail_method).deliver_later!
+      Raven.capture_message("Undeliverable Email Error - #{failure_reason}")
     end
 
     def simulated_email_address?
