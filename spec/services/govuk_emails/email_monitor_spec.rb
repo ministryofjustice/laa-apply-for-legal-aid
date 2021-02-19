@@ -288,10 +288,6 @@ RSpec.describe GovukEmails::EmailMonitor do
         allow(Rails.configuration.x).to receive(:alert_undeliverable_emails).and_return(true)
         allow(GovukEmails::Email).to receive(:new).and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
       end
-      #   allow_any_instance_of(Notifications::Client)
-      #     .to receive(:get_notification)
-      #     .and_raise(Notifications::Client::NotFoundError, OpenStruct.new(code: 404, body: ''))
-      # end
 
       let!(:sent_email) { create :sent_email, :created, govuk_message_id: arg_govuk_message_id }
 
