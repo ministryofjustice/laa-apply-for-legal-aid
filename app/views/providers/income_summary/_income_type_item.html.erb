@@ -24,7 +24,7 @@
       </span>
     <% end %>
     <% if error_message %>
-      <span id=<%= "error-#{name}" %>class="govuk-error-message"><%= error_message %></span>
+      <span id='<%= "error-#{name}" %>' class="govuk-error-message"><%= error_message %></span>
     <% end %>
   </h2>
   <%= content_tag(:div, class: 'app-task-list__items', id: "list-item-#{name}") do %>
