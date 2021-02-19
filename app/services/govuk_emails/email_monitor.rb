@@ -3,8 +3,7 @@ module GovukEmails
     attr_reader :mailer, :mail_method, :delivery_method, :email_args
     attr_accessor :govuk_message_id
 
-    # JOBS_DELAY = 300.seconds
-    JOBS_DELAY = 60.seconds
+    JOBS_DELAY = 300.seconds
 
     def self.call(**args)
       new(**args).call
