@@ -20,7 +20,7 @@ module Citizens
       private
 
       def irregular_income
-        @irregular_income ||= IrregularIncome.new
+        legal_aid_application.irregular_incomes.find_by(income_type: 'student_loan')
       end
 
       def form_params

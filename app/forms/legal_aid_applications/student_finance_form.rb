@@ -8,6 +8,8 @@ module LegalAidApplications
 
     validate :student_finance_presence
 
+    private
+
     def student_finance_presence
       return if draft? || student_finance.present?
 
