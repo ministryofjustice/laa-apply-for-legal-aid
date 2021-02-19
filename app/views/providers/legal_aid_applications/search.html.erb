@@ -1,27 +1,19 @@
 <%= page_template page_title: t('.title'), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
-  <%= form_with(method: :get, local: true) do |form| %>
-    <%= govuk_form_group(show_error_if: @error) do %>
-      <%= govuk_fieldset_header do %>
-        <h1 class="govuk-fieldset__heading">
-          <%= label_tag(:search_term, page_title) %>
-        </h1>
-      <% end %>
-
+  <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, method: :get, local: true) do |form| %>
+    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
       <div class="govuk-!-padding-bottom-4"></div>
 
       <%= form.govuk_text_field(
             :search_term,
-            label: nil,
-            hint: t('.hint'),
-            class: 'govuk-!-width-two-thirds',
+            label: {text: :search_term, hidden: true},
+            caption: {text: t('.hint')},
+            width: 'two-thirds',
             value: @search_term
           ) %>
     <% end %>
 
-    <%= form.submit(t('.search_button'), class: 'govuk-button form-button') %>
+    <%= form.govuk_submit t('.search_button') %>
   <% end %>
 <% end %>
 
