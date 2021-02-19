@@ -52,28 +52,10 @@ module GovUkFormHelper
     )
   end
 
-  def govuk_hint(text, args = {})
-    content_tag :span, text, merge_with_class(args, 'govuk-hint')
-  end
-
   def govuk_error_message(text, args = {})
     return if text.blank?
 
     content_tag :span, text, merge_with_class(args, 'govuk-error-message')
-  end
-
-  def date_input_fields(prefix:, field_name:, form:, width: 'two-thirds', set_error_class_here: true, label: nil, options: nil)
-    group_error_class = set_error_class_here && form.object.errors[field_name].any? ? 'govuk-form-group--error' : ''
-    render(
-      'shared/forms/date_input_fields',
-      prefix: prefix,
-      field_name: field_name,
-      form: form,
-      width: width,
-      group_error_class: group_error_class,
-      label: label,
-      options: options || nil
-    )
   end
 
   # Adds or appends `class_text` to `args[:class]`. So:
