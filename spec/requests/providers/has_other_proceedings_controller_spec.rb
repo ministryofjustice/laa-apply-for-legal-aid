@@ -99,11 +99,5 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
     end
-
-    context 'updates scope limitation' do
-      it 'updates the application scope limitation' do
-        expect { subject }.to change { ApplicationScopeLimitation.first.id }
-      end
-    end
   end
 end
