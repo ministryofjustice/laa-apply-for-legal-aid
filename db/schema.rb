@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_165806) do
     t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
-  create_table "assigned_scope_limitations", id: false, force: :cascade do |t|
+  create_table "assigned_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "application_proceeding_type_id", null: false
     t.uuid "scope_limitation_id", null: false
     t.datetime "created_at", precision: 6, null: false

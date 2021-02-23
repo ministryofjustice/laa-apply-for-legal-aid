@@ -18,6 +18,7 @@ module Providers
       return false unless save_continue_or_draft(@form)
 
       AddScopeLimitationService.call(legal_aid_application, :delegated) if @form.model.used_delegated_functions?
+      AddAssignedScopeLimitationService.call(@legal_aid_application, :delegated) if @form.model.used_delegated_functions?
       true
     end
 

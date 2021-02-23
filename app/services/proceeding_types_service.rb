@@ -19,10 +19,4 @@ class ProceedingTypesService
   def proceeding_type(id)
     ProceedingType.find(id)
   end
-
-  # def application_proceeding_types
-  #   @application_proceeding_types ||= @legal_aid_application.application_proceeding_types
-  #   # puts "first assigned proceeding type below"
-  #   # pp @assigned_proceeding_types.first
-  # end
 end
