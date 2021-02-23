@@ -11,13 +11,14 @@ module CCMS
           create :legal_aid_application,
                  :with_everything,
                  :with_positive_benefit_check_result,
-                 scope_limitations: [scope_limitation],
+                 :with_proceeding_type_and_scope_limitations,
+                 this_proceeding_type: proceeding_type,
+                 substantive_scope_limitation: scope_limitation,
                  applicant: applicant,
                  vehicle: vehicle,
                  other_assets_declaration: other_assets_declaration,
                  savings_amount: savings_amount,
                  provider: provider,
-                 proceeding_types: [proceeding_type],
                  respondent: respondent,
                  office: office
         end
