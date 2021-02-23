@@ -30,11 +30,7 @@ module Respondents
     )
 
     validates :police_notified, presence: true, unless: :draft?
-    validates(
-      :police_notified_details,
-      presence: true,
-      if: proc { |form| !form.draft? && (%w[true false].include? form.police_notified.to_s) }
-    )
+    validate :police_notified_presence
 
     validates :bail_conditions_set, presence: true, unless: :draft?
     validates(
@@ -50,6 +46,16 @@ module Respondents
     end
 
     private
+
+    def police_notified_presence
+      return if police_notified.blank?
+
+      value = __send__("police_notified_details_#{police_notified}".to_sym)
+      return if value.present? || draft?
+
+      translation_path = "activemodel.errors.models.respondent.attributes.police_notified_details_#{police_notified}.blank"
+      errors.add("police_notified_details_#{police_notified}".to_sym, I18n.t(translation_path))
+    end
 
     def interpolate_police_notified_details
       return unless [true, false, 'true', 'false'].include?(police_notified)

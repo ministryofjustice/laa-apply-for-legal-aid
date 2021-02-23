@@ -152,7 +152,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
       it 'generates errors' do
         expect(subject.errors[:understands_terms_of_court_order_details].join).to eq(I18n.t('understands_terms_of_court_order_details.blank', scope: i18n_scope))
         expect(subject.errors[:warning_letter_sent_details].join).to eq(I18n.t('warning_letter_sent_details.blank', scope: i18n_scope))
-        expect(subject.errors[:police_notified_details].join).to eq(I18n.t('police_notified_details.blank', scope: i18n_scope))
+        expect(subject.errors[:police_notified_details_true].join).to eq(I18n.t('activemodel.errors.models.respondent.attributes.police_notified_details_true.blank'))
         expect(subject.errors[:bail_conditions_set_details].join).to eq(I18n.t('bail_conditions_set_details.blank', scope: i18n_scope))
       end
 
@@ -161,7 +161,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
           %i[
             understands_terms_of_court_order_details
             warning_letter_sent_details
-            police_notified_details
+            police_notified_details_true
             bail_conditions_set_details
           ]
         )
@@ -212,7 +212,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
           police_notified: 'false',
           understands_terms_of_court_order_details: '',
           warning_letter_sent_details: '',
-          police_notified_details: '',
+          police_notified_details_false: '',
           bail_conditions_set_details: ''
         }
       end
