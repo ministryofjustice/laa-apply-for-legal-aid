@@ -3,7 +3,7 @@ class AssignedScopeLimitation < ApplicationRecord
   belongs_to :scope_limitation
 
   # should the relationship below exist here?
-  #   has_many :scope_limitations
+  # has_many :scope_limitations, dependent: :destroy
 
   def self.substantive_scope_limitation
     find_by(substantive: true)&.scope_limitation

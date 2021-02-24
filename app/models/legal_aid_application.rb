@@ -328,15 +328,23 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def delete_assigned_scope!(id)
-    puts "LOOK FOR MEEEE"
-    puts id
-    # AssignedScopeLimitation.find_by(id: id).destroy
-    scope_to_clear = AssignedScopeLimitation.where(application_proceeding_type_id: id)
-    puts 1111111
-    pp scope_to_clear
-    scope_to_clear.each do |scope|
-      scope.delete
-    end
+    scopes_to_clear = AssignedScopeLimitation.where(application_proceeding_type_id: id)
+    scopes_to_clear.each(&:delete)
+  end
+
+  def delete_df_assigned_scopes!
+    # Need to delete the rows where ScopeLimitation.delegated_functions == true
+
+    # scopes = ScopeLimitation.where(delegated_functions: true)
+    # assigned = AssignedScopeLimitation.where(scope_limitation_id: id)
+    #
+    # help = AssignedScopeLimitation.joins(:scope_limitation).where(scope_limitation_id: '5fbbcc58-449a-49cb-a0d6-86f8fae215d7')
+    #
+    # puts help
+    # pp help
+    # scopes.each do |scope|
+    #   AssignedScopeLimitation.where(scope_limitation_id: scope.id, application_proceeding_type_id: assigned.id ).each(&:delete)
+    # end
   end
 
   def receives_student_finance?

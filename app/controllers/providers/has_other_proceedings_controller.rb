@@ -46,6 +46,7 @@ module Providers
 
     def remove_proceeding
       ActiveRecord::Base.transaction do
+        # should this be a call to a service to remove the scope limitation instead of the method below?
         remove_scope_limitation
         proceeding_type&.destroy!
         legal_aid_application.clear_scopes!
@@ -55,8 +56,8 @@ module Providers
 
     def remove_scope_limitation
       scope_for_deletion = ApplicationProceedingType.find_by(
-          legal_aid_application_id: legal_aid_application.id,
-          proceeding_type_id: proceeding_type_id
+        legal_aid_application_id: legal_aid_application.id,
+        proceeding_type_id: proceeding_type_id
       )
       legal_aid_application.delete_assigned_scope!(scope_for_deletion.id)
     end

@@ -13,7 +13,7 @@ class AddAssignedScopeLimitationService
     when :substantive
       add_default_substantive_scope_limitation!
     when :delegated
-      add_default_delegated_functions_scope_limitation!
+      add_default_delegated_functions_scope_limitations!
     end
   end
 
@@ -24,17 +24,15 @@ class AddAssignedScopeLimitationService
     )
   end
 
-  def add_default_delegated_functions_scope_limitation!
-    # This needs to be a for each as there may be many proceedings
-    # so for each application_proceeding_type we create a DF scope
+  def add_default_delegated_functions_scope_limitations!
     current_scopes = ApplicationProceedingType.where(
-        legal_aid_application_id: @legal_aid_application.id
+      legal_aid_application_id: @legal_aid_application.id
     )
 
     current_scopes.each do |scope|
       AssignedScopeLimitation.create!(
-          application_proceeding_type_id: scope.id,
-          scope_limitation_id: @legal_aid_application.proceeding_types.find_by(id: scope.proceeding_type_id ).default_delegated_functions_scope_limitation.id
+        application_proceeding_type_id: scope.id,
+        scope_limitation_id: @legal_aid_application.proceeding_types.find_by(id: scope.proceeding_type_id).default_delegated_functions_scope_limitation.id
       )
     end
   end
