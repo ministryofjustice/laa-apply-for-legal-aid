@@ -50,7 +50,7 @@ module Respondents
     def police_notified_presence
       return if police_notified.blank?
 
-      value = __send__("police_notified_details_#{police_notified}".to_sym)
+      value = __send__("police_notified_details_#{police_notified}")
       return if value.present? || draft?
 
       translation_path = "activemodel.errors.models.respondent.attributes.police_notified_details_#{police_notified}.blank"
@@ -60,7 +60,7 @@ module Respondents
     def interpolate_police_notified_details
       return unless [true, false, 'true', 'false'].include?(police_notified)
 
-      value = __send__("police_notified_details_#{police_notified}".to_sym)
+      value = __send__("police_notified_details_#{police_notified}")
       @police_notified_details = value&.empty? ? nil : value
       attributes['police_notified_details'] = @police_notified_details
     end
@@ -76,7 +76,7 @@ module Respondents
 
     def clear_details
       %i[understands_terms_of_court_order warning_letter_sent].each do |attr|
-        details = "#{attr}_details".to_sym
+        details = "#{attr}_details"
         attr_value = __send__(attr)
         __send__(details)&.clear if attr_value.to_s == 'true'
       end
