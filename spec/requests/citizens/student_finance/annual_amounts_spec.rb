@@ -28,9 +28,7 @@ RSpec.describe 'annual_amounts', type: :request do
     end
 
     context 'adds an amount' do
-      before do
-        get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-      end
+      before { get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) }
       let(:amount) { 2345 }
 
       it 'displays the outgoing types page' do
@@ -44,6 +42,19 @@ RSpec.describe 'annual_amounts', type: :request do
         expect(irregular_income.amount).to eq 2345
         expect(irregular_income.frequency).to eq 'annual'
         expect(irregular_income.income_type).to eq 'student_loan'
+      end
+
+      describe 'update record' do
+        before { patch citizens_student_finances_annual_amount_path, params: params }
+
+        context 'update amount' do
+          let(:amount) { 5000 }
+          it 'updates the same record without creating a new one' do
+            expect { patch citizens_student_finances_annual_amount_path, params: params }.to change { IrregularIncome.count }.by(0)
+            irregular_income = legal_aid_application.irregular_incomes.first
+            expect(irregular_income.amount).to eq 5000
+          end
+        end
       end
     end
 
