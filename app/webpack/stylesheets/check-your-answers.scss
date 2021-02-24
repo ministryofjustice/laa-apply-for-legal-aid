@@ -5,10 +5,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
 // Recommended - Use these styles for the check your answers pattern
 
-.pdf {
-  text-rendering: geometricPrecision;
-}
-
 .app-check-your-answers {
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
