@@ -3,16 +3,17 @@ module Providers
     def show
       return go_forward unless Setting.allow_multiple_proceedings?
 
+      @form = Providers::HasOtherProceedingsForm.new
       proceeding_types
     end
 
     def update
       return continue_or_draft if draft_selected?
 
-      if params[:has_other_proceeding].in?(%w[true false])
-        go_forward(params[:has_other_proceeding] == 'true')
+      @form = Providers::HasOtherProceedingsForm.new(form_params)
+      if @form.valid?
+        go_forward(form_params[:has_other_proceedings] == 'true')
       else
-        @error = { 'has_other_proceeding-error' => I18n.t('providers.has_other_proceedings.show.error') }
         render :show
       end
     end
@@ -34,7 +35,7 @@ module Providers
     end
 
     def proceeding_type_id
-      proceeding_types.find_by(code: form_params)&.id
+      proceeding_types.find_by(code: params.require(:id))&.id
     end
 
     def proceeding_type
@@ -53,7 +54,7 @@ module Providers
     end
 
     def form_params
-      params.require(:id)
+      params.require(:providers_has_other_proceedings_form).permit(:has_other_proceedings)
     end
   end
 end
