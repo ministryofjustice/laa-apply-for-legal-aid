@@ -1,32 +1,18 @@
-<%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
+<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: model, url: url, method: :patch, local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: (@form.errors.present? && !@form.any_checkbox_checked?) do %>
-    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
-      <%= govuk_fieldset_header page_title %>
-      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+  <%= form.govuk_check_boxes_fieldset :policy_disregards,
+                                      legend: {text: page_title, size: 'xl', tag: 'h1'},
+                                      hint: {text: t('generic.select_all_that_apply')} do %>
 
-      <%= render 'shared/show_errors' %>
+    <div class="deselect-group" data-deselect-ctrl="#policy-disregards-none-selected-true-field">
+      <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
+          <%= form.govuk_check_box checkbox, true, '', multiple: false, link_errors: true, label: {text: controller_t(checkbox)} %>
+      <% end %>
+    </div>
 
-      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="#policy_disregards_none_selected">
-          <% Providers::PolicyDisregardsForm::SINGLE_VALUE_ATTRIBUTES.each do |checkbox| %>
-            <div class="govuk-checkboxes__item">
-              <%= form.check_box checkbox, { class: 'govuk-checkboxes__input' }, true, '' %>
-              <%= form.label checkbox, controller_t(checkbox), class: 'govuk-label govuk-checkboxes__label' %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+    <%= form.govuk_radio_divider %>
+    <%= form.govuk_check_box :none_selected, true, '', multiple: false, link_errors: true, label: {text: t('generic.none_selected')} %>
 
-      <div class="govuk-radios__divider tickbox_divider"><%= or_break %></div>
-
-      <div class="govuk-checkboxes">
-        <div class="govuk-checkboxes__item">
-          <%= form.check_box :none_selected, { class: 'govuk-checkboxes__input', include_hidden: true }, true, '' %>
-          <%= form.label :none_selected, none_selected, class: 'govuk-label govuk-checkboxes__label' %>
-        </div>
-      </div>
-    </fieldset>
   <% end %>
 
   <%= next_action_buttons(

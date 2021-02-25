@@ -17,13 +17,8 @@ module Providers
     CHECK_BOXES_ATTRIBUTES = (SINGLE_VALUE_ATTRIBUTES.map(&:to_sym) + %i[none_selected]).freeze
 
     attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :journey
 
     validate :any_checkbox_checked_or_draft
-
-    def exclude_from_model
-      [:journey]
-    end
 
     def any_checkbox_checked?
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
@@ -36,7 +31,7 @@ module Providers
     end
 
     def error_message_for_none_selected
-      I18n.t("activemodel.errors.models.policy_disregards.attributes.base.#{journey}.none_selected")
+      I18n.t('activemodel.errors.models.policy_disregards.attributes.base.none_selected')
     end
   end
 end

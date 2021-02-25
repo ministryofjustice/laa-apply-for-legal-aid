@@ -1,29 +1,25 @@
 <%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), template: :basic do %>
-  <%= form_with(url: providers_confirm_office_path, method: :patch, local: true) do |form| %>
+  <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+                url: providers_confirm_office_path, method: :patch, local: true) do |form| %>
 
     <%= render partial: 'shared/error' if @error %>
 
-    <%= govuk_form_group(
-          show_error_if: @error,
-        ) do %>
-      <fieldset class="govuk-fieldset">
-        <%= govuk_fieldset_header page_title, padding_below: 4 %>
+    <%= form.govuk_radio_buttons_fieldset :correct, legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+    <div class="govuk-!-padding-bottom-4"></div>
+    <%= form.govuk_radio_button(
+            :correct,
+            true,
+            label: {text: t('generic.yes')}
+        ) %>
 
-        <%= form.govuk_radio_button(
-                :correct,
-                true,
-                label: t('generic.yes')
-            ) %>
-
-        <%= form.govuk_radio_button(
-                :correct,
-                false,
-                label: t('.no_another_office')
-            ) %>
-      </fieldset>
- <div class="govuk-!-padding-bottom-2"></div>
+    <%= form.govuk_radio_button(
+            :correct,
+            false,
+            label: {text: t('.no_another_office')}
+        ) %>
     <% end %>
 
+    <div class="govuk-!-padding-bottom-2"></div>
     <%= next_action_buttons(form: form) %>
   <% end %>
 <% end %>

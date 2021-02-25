@@ -6,6 +6,7 @@
     ) do %>
 
     <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_applicant_employed_index_path(@legal_aid_application),
         method: :post,
@@ -14,11 +15,11 @@
 
     <%= form.govuk_collection_radio_buttons(
           :employed,
-          form.yes_no_radio_button_array,
+          yes_no_options,
           :value,
           :label,
-          hint: t('.hint'),
-          title: content_for(:page_title)
+          hint: {text: t('.hint')},
+          legend: {text: content_for(:page_title), size: 'xl', tag: 'h1'}
         ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>

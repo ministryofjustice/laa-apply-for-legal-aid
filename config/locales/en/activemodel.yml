@@ -324,8 +324,7 @@ en:
         policy_disregards:
           attributes:
             base:
-              providers:
-                none_selected: Select if your client has received any of these payments
+              none_selected: Select if your client has received any of these payments
         provider:
           attributes:
             selected_office_id:

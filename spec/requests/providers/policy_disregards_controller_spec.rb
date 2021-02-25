@@ -124,7 +124,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           let(:none_selected) { '' }
 
           it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.policy_disregards.attributes.base.providers.none_selected'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.policy_disregards.attributes.base.none_selected'))
           end
         end
       end

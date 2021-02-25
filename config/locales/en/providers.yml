@@ -504,8 +504,6 @@ en:
     policy_disregards:
       show:
         h1-heading: Select if your client has received payments from these schemes or charities
-        h2-heading: Select all that apply
-        none_selected: None of these
     outgoings_summary:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
@@ -757,6 +755,7 @@ en:
     email_addresses:
       show:
         page_title: Enter your client's email address
+        label: Email address
         hint: We'll use this to send your client a link to the service.
     has_dependants:
       show:
@@ -773,6 +772,8 @@ en:
       show:
         page_title: Amend dependant details
       form:
+        name: Name
+        date_of_birth: Date of birth
         relationship: What is their relationship to your client?
         option:
           child_relative: They're a child relative

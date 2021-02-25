@@ -1,13 +1,17 @@
 module LegalAidApplications
-  class DependantForm
+  class DependantForm  # rubocop:disable Metrics/ClassLength
     include BaseForm
     form_for Dependant
 
     before_validation :clear_value_fields
 
-    ATTRIBUTES = %i[name dob_year dob_month dob_day relationship
-                    in_full_time_education has_income monthly_income
-                    has_assets_more_than_threshold assets_value].freeze
+    BASE_ATTRIBUTES = %i[name relationship in_full_time_education has_income
+                         monthly_income has_assets_more_than_threshold assets_value].freeze
+
+    MODEL_ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth].freeze
+
+    ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth_1i date_of_birth_2i date_of_birth_3i].freeze
+
     SCOPE = 'activemodel.errors.models.dependant.attributes'.freeze
 
     attr_accessor(*ATTRIBUTES)
@@ -100,7 +104,8 @@ module LegalAidApplications
         form: self,
         model: model,
         method: :date_of_birth,
-        prefix: :dob_
+        prefix: :date_of_birth_,
+        suffix: :gov_uk
       )
     end
 

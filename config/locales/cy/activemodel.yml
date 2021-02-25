@@ -354,8 +354,7 @@ cy:
         policy_disregards:
           attributes:
             base:
-              providers:
-                none_selected: stnemyap eseht fo yna deviecer sah tneilc ruoy fi tceleS
+              none_selected: stnemyap eseht fo yna deviecer sah tneilc ruoy fi tceleS
         provider:
           attributes:
             selected_office_id:

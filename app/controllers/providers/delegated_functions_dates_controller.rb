@@ -26,14 +26,13 @@ module Providers
     end
 
     def form_params
-      merge_with_model(legal_aid_application) do
+      merged_params = merge_with_model(legal_aid_application) do
         params.require(:legal_aid_application).permit(
-          :used_delegated_functions_year,
-          :used_delegated_functions_month,
-          :used_delegated_functions_day,
+          :used_delegated_functions_on,
           :confirm_delegated_functions_date
         )
       end
+      convert_date_params(merged_params)
     end
   end
 end

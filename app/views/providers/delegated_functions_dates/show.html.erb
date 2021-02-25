@@ -1,42 +1,25 @@
 <%= page_template page_title: t('.heading', date: @used_delegated_functions_on), template: :basic do %>
 
   <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_delegated_functions_date_path,
         method: :patch,
         local: true
       ) do |form| %>
 
-    <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <fieldset class="govuk-fieldset">
-        <%= govuk_fieldset_header page_title %>
-
-        <%= render 'shared/show_errors' %>
-
-        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
-          <%= form.govuk_radio_button(
-                :confirm_delegated_functions_date,
-                true,
-                label: t('.correct_date')
-              ) %>
-
-          <%= form.govuk_radio_button(
-                :confirm_delegated_functions_date,
-                false,
-                label: t('.different_date'),
-                'data-aria-controls' => 'conditional-true'
-              ) %>
-
-          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
-            <%= date_input_fields prefix: :used_delegated_functions, field_name: :used_delegated_functions_on, form: form, options: number_of_days_ago(5) %>
-          </div>
-        </div>
-      </fieldset>
-
+      <%= form.govuk_radio_buttons_fieldset :confirm_delegated_functions_date,
+                                            legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+        <%= form.govuk_radio_button(:confirm_delegated_functions_date, true, label: {text: t('.correct_date')}) %>
+        <%= form.govuk_radio_button(:confirm_delegated_functions_date, false, label: {text: t('.different_date')}) do %>
+          <%= form.govuk_date_field :used_delegated_functions_on,
+                                    legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label") },
+                                    hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint",
+                                                    options: number_of_days_ago(5))} %>
+        <% end %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>
-
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>
