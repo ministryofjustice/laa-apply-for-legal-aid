@@ -31,10 +31,11 @@ class LegalAidApplication < ApplicationRecord
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
+
+  # The relationship below needs to be removed in ap-2047
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
-  has_many :assigned_scope_limitations, dependent: :destroy
-  # has_many :scope_limitations, through: :assigned_scope_limitations
+
   has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
   has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
   has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
@@ -328,23 +329,8 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def delete_assigned_scope!(id)
-    scopes_to_clear = AssignedScopeLimitation.where(application_proceeding_type_id: id)
+    scopes_to_clear = ApplicationProceedingTypesScopeLimitation.where(application_proceeding_type_id: id)
     scopes_to_clear.each(&:delete)
-  end
-
-  def delete_df_assigned_scopes!
-    # Need to delete the rows where ScopeLimitation.delegated_functions == true
-
-    # scopes = ScopeLimitation.where(delegated_functions: true)
-    # assigned = AssignedScopeLimitation.where(scope_limitation_id: id)
-    #
-    # help = AssignedScopeLimitation.joins(:scope_limitation).where(scope_limitation_id: '5fbbcc58-449a-49cb-a0d6-86f8fae215d7')
-    #
-    # puts help
-    # pp help
-    # scopes.each do |scope|
-    #   AssignedScopeLimitation.where(scope_limitation_id: scope.id, application_proceeding_type_id: assigned.id ).each(&:delete)
-    # end
   end
 
   def receives_student_finance?

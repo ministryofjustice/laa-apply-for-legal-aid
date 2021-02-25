@@ -1,11 +1,11 @@
 class ProceedingType < ApplicationRecord
   has_many :application_proceeding_types
-  has_many :assigned_scope_limitations
-  has_many :scope_limitations, through: :assigned_scope_limitations
+  # has_many :assigned_scope_limitations
+  # has_many :scope_limitations, through: :assigned_scope_limitations
   # or should the relationship above be stored in assigned_scope_limitation.rb
   has_many :legal_aid_applications, through: :application_proceeding_types
   has_many :proceeding_type_scope_limitations
-  has_many :scope_limitations, through: :proceeding_type_scope_limitations
+  has_many :eligible_scope_limitations, through: :proceeding_type_scope_limitations, source: :scope_limitation
   belongs_to :default_level_of_service, class_name: 'ServiceLevel', foreign_key: 'default_service_level_id', inverse_of: :proceeding_types
 
   validates :code, presence: true

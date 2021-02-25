@@ -117,6 +117,13 @@ ActiveRecord::Schema.define(version: 2021_02_18_165806) do
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
+  create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "application_proceeding_type_id", null: false
+    t.uuid "scope_limitation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "application_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "scope_limitation_id"
@@ -124,13 +131,6 @@ ActiveRecord::Schema.define(version: 2021_02_18_165806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
-  end
-
-  create_table "assigned_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "application_proceeding_type_id", null: false
-    t.uuid "scope_limitation_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
