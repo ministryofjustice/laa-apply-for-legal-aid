@@ -46,10 +46,9 @@ module Providers
 
     def remove_proceeding
       ActiveRecord::Base.transaction do
-        # should this be a call to a service to remove the scope limitation instead of the method below?
         remove_scope_limitation
         proceeding_type&.destroy!
-        legal_aid_application.clear_scopes!
+        legal_aid_application.clear_scopes! # This will be removed in ap-2047
         AddScopeLimitationService.call(legal_aid_application, :substantive) if proceeding_types.any?
       end
     end
