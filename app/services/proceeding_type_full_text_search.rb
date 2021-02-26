@@ -1,5 +1,5 @@
 class ProceedingTypeFullTextSearch
-  Result = Struct.new(:id, :meaning, :description, :rank)
+  Result = Struct.new(:id, :meaning, :code, :description, :rank)
 
   def self.call(search_terms)
     new(search_terms).call
@@ -20,7 +20,7 @@ class ProceedingTypeFullTextSearch
   private
 
   def instantiate_result(row)
-    Result.new(row['id'], row['meaning'].strip, row['description'].strip, row['rank'])
+    Result.new(row['id'], row['meaning'].strip, row['code'], row['description'].strip, row['rank'])
   end
 
   def ts_query_transform(search_terms)
@@ -35,6 +35,7 @@ class ProceedingTypeFullTextSearch
     <<~END_OF_QUERY
       SELECT id,#{' '}
         meaning,
+        code,
         description,
         ts_rank(textsearchable, query) AS rank
       FROM proceeding_types, to_tsquery($1) AS query
