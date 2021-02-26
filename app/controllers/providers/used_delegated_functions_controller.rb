@@ -18,7 +18,7 @@ module Providers
       return false unless save_continue_or_draft(@form)
 
       remove_delegated_scope_limitations unless @form.model.used_delegated_functions?
-      AddScopeLimitationService.call(legal_aid_application, :delegated) if @form.model.used_delegated_functions?
+      AddScopeLimitationService.call(legal_aid_application, :delegated) if @form.model.used_delegated_functions? # To be removed in ap-2047
       add_delegated_scope_limitations if @form.model.used_delegated_functions?
       true
     end
