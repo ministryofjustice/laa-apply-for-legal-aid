@@ -133,7 +133,7 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
         end
 
         it 'calls the proceeding types service' do
-          expect(proceeding_type_service).to receive(:add).with(proceeding_type_id: proceeding_type.id, scope_limitation: :substantive)
+          expect(proceeding_type_service).to receive(:add).with(proceeding_type_id: proceeding_type.id, scope_type: :substantive)
           subject
         end
 

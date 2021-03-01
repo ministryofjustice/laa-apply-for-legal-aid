@@ -3,13 +3,14 @@ class ProceedingTypesService
     @legal_aid_application = legal_aid_application
   end
 
-  def add(proceeding_type_id: nil, scope_limitation: nil)
-    return false unless proceeding_type_id && scope_limitation
+  def add(proceeding_type_id: nil, scope_type: nil)
+    return false unless proceeding_type_id && scope_type
 
     ActiveRecord::Base.transaction do
       @legal_aid_application.reset_proceeding_types! unless Setting.allow_multiple_proceedings? # This will probably change when multiple proceeding types implemented!
       @legal_aid_application.proceeding_types << proceeding_type(proceeding_type_id)
-      AddScopeLimitationService.call(@legal_aid_application, scope_limitation)
+      AddScopeLimitationService.call(@legal_aid_application, scope_type) # This will be removed in ap-2047
+      AddAssignedScopeLimitationService.call(@legal_aid_application, proceeding_type_id, scope_type)
     end
   end
 

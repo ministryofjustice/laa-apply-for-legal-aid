@@ -30,7 +30,7 @@ module Providers
     private
 
     def run_transaction
-      proceeding_types_service.add(proceeding_type_id: form_params, scope_limitation: :substantive)
+      proceeding_types_service.add(proceeding_type_id: form_params, scope_type: :substantive)
     rescue ActionController::ParameterMissing
       false
     end

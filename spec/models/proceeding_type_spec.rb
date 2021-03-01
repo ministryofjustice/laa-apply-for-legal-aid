@@ -12,7 +12,7 @@ RSpec.describe ProceedingType, type: :model do
   end
 
   describe 'should have associations with scope_limitation' do
-    it { should have_many(:scope_limitations) }
+    it { should have_many(:eligible_scope_limitations) }
   end
 
   describe 'should have associations with service_level' do

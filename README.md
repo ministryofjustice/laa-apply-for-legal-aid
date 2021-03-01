@@ -412,7 +412,27 @@ This will then allow you to connect to the database, eg:
 - Change `staging` to `production` in the above commands to access production.
 - Port 5433 is used in the above examples instead of the usual 5432 for postgres, as 5432 will not work if postgres is running locally.
 
-###Backups###
+### Model Relationships
+[Diagram LegalAidApplication - ProceedingType - ScopeLimitation Relationship](docs/ApplicationProceedingTypesORM.png)
+Glossary:
+ProceedingType - The type of legal proceedings being undertaken on a LegalAidApplication
+ScopeLimitation - The type of work a legal advisor can undertake, each Proceeding type has its own ScopeLimitations.
+
+A LegalAidApplication has 1 or more ProceedingTypes, these relations are held in the `ApplicationProceedingTypes` table.
+
+An ApplicationProceedingType has 1 ScopeLimitation `:substantive`, unless delegated_functions have been used, in which case an ApplicationProceedingType will have 2 ScopeLimitations `:delegated` and `:substantive`. These are stored in `ApplicationProceedingTypesScopeLimitations` table.
+
+`ProceedingTypeScopeLimitations` is a join table representing all possible ProceedingType/ScopeLimitation combinations.
+
+An ApplicationProceedingTypesScopeLimitation represents all of the ScopeLimitations assigned to a specific ApplicationProceedingType
+
+If delegated_functions have been used `:delegated` ScopeLimitations are applied to all ProceedingTypes on the LegalAidApplication, so a new record is created in `ApplicationProceedingTypesScopeLimitations` for each ApplicationProceedingType
+
+Removing a ProceedingType will remove all `ApplicationProceedingTypes` and `ApplicationProceedingTypesScopeLimitations` associated with that ProceedingType.
+
+Removing delegated_functions will only remove the associated entry for `:delegated` ScopeLimitation from `ApplicationProceedingTypesScopeLimitations`
+
+### Backups
 
 Backups are taken daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
 

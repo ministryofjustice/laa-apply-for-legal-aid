@@ -31,8 +31,11 @@ class LegalAidApplication < ApplicationRecord
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
+
+  # The relationship below needs to be removed in ap-2047
   has_many :application_scope_limitations, dependent: :destroy
   has_many :scope_limitations, through: :application_scope_limitations
+
   has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
   has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
   has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
@@ -323,6 +326,11 @@ class LegalAidApplication < ApplicationRecord
   def clear_scopes!
     scope_limitations.clear
     reset_delegated_functions
+  end
+
+  def delete_assigned_scope!(id)
+    scopes_to_clear = ApplicationProceedingTypesScopeLimitation.where(application_proceeding_type_id: id)
+    scopes_to_clear.each(&:delete)
   end
 
   def receives_student_finance?

@@ -36,4 +36,53 @@ RSpec.describe ApplicationProceedingType do
       expect(application_proceeding_type.proceeding_case_p_num).to eq 'P_55200301'
     end
   end
+
+  describe 'assigned_scope_limitations' do
+    let(:application) { create :legal_aid_application }
+    let(:proceeding_type) { ProceedingType.first }
+    let(:application_proceeding_type) { application.application_proceeding_types.first }
+    let(:default_scope_limitation) { proceeding_type.default_substantive_scope_limitation }
+    let(:default_df_scope_limitation) { proceeding_type.default_delegated_functions_scope_limitation }
+    let(:assigned_scope_limitation) { application_proceeding_type.assigned_scope_limitations.first }
+
+    before do
+      populate_legal_framework
+      application.proceeding_types << proceeding_type
+    end
+
+    it 'adds the correct substantive scope limitation' do
+      application_proceeding_type.add_default_substantive_scope_limitation
+      expect(assigned_scope_limitation).to eq(default_scope_limitation)
+    end
+
+    it 'adds the correct default scope limitation' do
+      application_proceeding_type.add_default_delegated_functions_scope_limitation
+      expect(assigned_scope_limitation).to eq(default_df_scope_limitation)
+    end
+
+    context 'deleting default delegated functions scope' do
+      context 'when delegated functions exist' do
+        before do
+          application_proceeding_type.add_default_substantive_scope_limitation
+          application_proceeding_type.add_default_delegated_functions_scope_limitation
+        end
+
+        it 'removes the delegated functions  scope' do
+          application_proceeding_type.remove_default_delegated_functions_scope_limitation
+          expect(application_proceeding_type.assigned_scope_limitations).to eq [default_scope_limitation]
+        end
+      end
+
+      context 'when delegated functions do not exist' do
+        before do
+          application_proceeding_type.add_default_substantive_scope_limitation
+        end
+
+        it 'makes no changes to scope' do
+          application_proceeding_type.remove_default_delegated_functions_scope_limitation
+          expect(application_proceeding_type.assigned_scope_limitations).to eq [default_scope_limitation]
+        end
+      end
+    end
+  end
 end
