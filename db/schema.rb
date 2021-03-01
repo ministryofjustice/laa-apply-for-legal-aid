@@ -609,7 +609,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_134124) do
   end
 
   create_table "scheduled_mailings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
+    t.uuid "legal_aid_application_id"
     t.string "mailer_klass", null: false
     t.string "mailer_method", null: false
     t.string "arguments", null: false
