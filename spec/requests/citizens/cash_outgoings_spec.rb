@@ -60,7 +60,8 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
         end
 
         it 'shows an error for no amount entered' do
-          expect(response.body).to include(I18n.t('errors.aggregated_cash_outgoings.blank', category: 'Maintenance payments for children or an ex-partner', month: 'November'))
+          expected_month = (Time.zone.today - 1.month).strftime('%B')
+          expect(response.body).to include(I18n.t('errors.aggregated_cash_outgoings.blank', category: 'Maintenance payments for children or an ex-partner', month: expected_month))
         end
 
         it 'shows an error for an invalid amount' do
