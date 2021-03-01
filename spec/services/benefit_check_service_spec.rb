@@ -60,7 +60,7 @@ RSpec.describe BenefitCheckService do
       let(:last_name) { 'SERVICEEXCEPTION' }
 
       it 'captures error' do
-        expect(Raven).to receive(:capture_exception).with(message_contains('Service unavailable'))
+        expect(Sentry).to receive(:capture_exception).with(message_contains('Service unavailable'))
         subject.call
       end
 
@@ -78,12 +78,12 @@ RSpec.describe BenefitCheckService do
       end
 
       it 'captures error' do
-        expect(Raven).to receive(:capture_exception).with(message_contains('fake error'))
+        expect(Sentry).to receive(:capture_exception).with(message_contains('fake error'))
         subject.call
       end
 
       it 'captures StandardError' do
-        expect(Raven).to receive(:capture_exception).with(instance_of(StandardError))
+        expect(Sentry).to receive(:capture_exception).with(instance_of(StandardError))
         subject.call
       end
 
@@ -100,7 +100,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it 'captures error and returns false' do
-        expect(Raven).to receive(:capture_exception).with(Net::ReadTimeout)
+        expect(Sentry).to receive(:capture_exception).with(Net::ReadTimeout)
         subject.call
       end
 
@@ -115,7 +115,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it 'captures error' do
-        expect(Raven).to receive(:capture_exception).with(message_contains('Invalid request credentials'))
+        expect(Sentry).to receive(:capture_exception).with(message_contains('Invalid request credentials'))
         subject.call
       end
 

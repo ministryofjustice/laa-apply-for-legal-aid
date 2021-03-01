@@ -82,12 +82,12 @@ RSpec.describe ScheduledMailing do
     let!(:scheduled_mail) { create :scheduled_mailing, :invalid, legal_aid_application: application }
 
     it 'captures error' do
-      expect(Raven).to receive(:capture_exception).with(message_contains("Couldn't find LegalAidApplication with 'id"))
+      expect(Sentry).to receive(:capture_exception).with(message_contains("Couldn't find LegalAidApplication with 'id"))
       scheduled_mail.deliver!
     end
 
-    it 'returns false' do
-      expect(scheduled_mail.deliver!).to eq false
+    it 'returns nil' do
+      expect(scheduled_mail.deliver!).to eq nil
     end
   end
 

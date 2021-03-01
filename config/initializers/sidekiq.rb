@@ -12,12 +12,12 @@ class SentryErrorLogger
   def call(worker, job, queue)
     yield
   rescue => e # rubocop:disable Style/RescueStandardError
-    Raven.capture_exception(e,
-                            extra: {
-                              worker: worker,
-                              job: job,
-                              queue: queue
-                            })
+    Sentry.capture_exception(e,
+                             extra: {
+                               worker: worker,
+                               job: job,
+                               queue: queue
+                             })
     raise
   end
 end

@@ -23,7 +23,7 @@ RSpec.describe TrueLayerErrorDecoder do
       end
 
       it 'sends the details to sentry' do
-        expect(Raven).to receive(:capture_message).with('Unknown error code received from TrueLayer: flux_capacitor_outage :: The flux capacitor is not working')
+        expect(Sentry).to receive(:capture_message).with('Unknown error code received from TrueLayer: flux_capacitor_outage :: The flux capacitor is not working')
         subject.error_heading
       end
     end

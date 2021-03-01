@@ -23,7 +23,7 @@ class TrueLayerErrorDecoder
     return if @error_code.in?(ERROR_CODES)
 
     error_description = @error_hash.dig('TrueLayerError', 'error_description')
-    Raven.capture_message("Unknown error code received from TrueLayer: #{@error_code} :: #{error_description}")
+    Sentry.capture_message("Unknown error code received from TrueLayer: #{@error_code} :: #{error_description}")
     @error_code = 'unknown'
   end
 

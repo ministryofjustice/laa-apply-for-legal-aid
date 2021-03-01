@@ -6,12 +6,12 @@ class AuthController < ApplicationController
   def failure
     # redirect to consents page if it was an applicant failing to login at his bank
     #
-    Raven.capture_message("Omniauth failure #{params.to_unsafe_hash.inspect}")
+    Sentry.capture_message("Omniauth failure #{params.to_unsafe_hash.inspect}")
     if auth_error_during_bank_login?
       begin
         raise AuthorizationError, "Redirecting to access denied page - unexpected origin: '#{origin}'"
       rescue StandardError => e
-        Raven.capture_exception(e)
+        Sentry.capture_exception(e)
       end
       redirect_to error_path(:access_denied)
     else

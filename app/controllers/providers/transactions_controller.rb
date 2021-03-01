@@ -52,7 +52,7 @@ module Providers
     def state_benefit_types
       CFE::ObtainStateBenefitTypesService.call
     rescue StandardError => e
-      Raven.capture_exception(e)
+      Sentry.capture_exception(e)
       false
     end
 
