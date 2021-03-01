@@ -8,20 +8,6 @@ namespace = ENV.fetch('HOST', 'laa-apply')
 
 module Dashboard; end
 
-class SentryErrorLogger
-  def call(worker, job, queue)
-    yield
-  rescue => e # rubocop:disable Style/RescueStandardError
-    Sentry.capture_exception(e,
-                             extra: {
-                               worker: worker,
-                               job: job,
-                               queue: queue
-                             })
-    raise
-  end
-end
-
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url, namespace: namespace } if redis_url
 
@@ -37,10 +23,6 @@ Sidekiq.configure_server do |config|
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
-
-  config.server_middleware do |chain|
-    chain.add SentryErrorLogger
-  end
 
   if Rails.env.production? && Rails.configuration.x.kubernetes_deployment
     config.server_middleware do |chain|
