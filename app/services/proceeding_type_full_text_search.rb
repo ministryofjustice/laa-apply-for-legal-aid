@@ -1,19 +1,24 @@
 class ProceedingTypeFullTextSearch
   Result = Struct.new(:id, :meaning, :code, :description, :rank)
 
+  SEARCH_FIELDS = %i[
+    meaning
+    description
+    ccms_category_law
+    ccms_matter
+    additional_search_terms
+  ].freeze
+
   def self.call(search_terms)
     new(search_terms).call
   end
 
   def initialize(search_terms)
-    @ts_query = ts_query_transform(search_terms)
+    @ts_query = search_terms
   end
 
   def call
-    result_set = ProceedingType.connection.exec_query(query_string,
-                                                      '-- PROCEEDING TYPE FULL TEXT SEARCH ---',
-                                                      [[nil, @ts_query]],
-                                                      prepare: true)
+    result_set = ProceedingType.where(fields_contain_substr_query, *substr_query_args).limit(8)
     result_set.map { |row| instantiate_result(row) }
   end
 
@@ -23,26 +28,18 @@ class ProceedingTypeFullTextSearch
     Result.new(row['id'], row['meaning'].strip, row['code'], row['description'].strip, row['rank'])
   end
 
-  def ts_query_transform(search_terms)
-    # transform the query into a form suitable for postgres to_tsquery function
-    #
-    # "An owl & a pussycat went to sea" => "An & owl & a & pussycat & went & to & sea"
-    #
-    search_terms.split(/\s+/).join(' & ').gsub('& & &', '&')
+  def fields_contain_substr_query
+    SEARCH_FIELDS.reduce('') do |str, field|
+      str << "lower(#{field}) like ?"
+      str << ' OR ' unless field == SEARCH_FIELDS.last
+      str
+    end
   end
 
-  def query_string
-    <<~END_OF_QUERY
-      SELECT id,#{' '}
-        meaning,
-        code,
-        description,
-        ts_rank(textsearchable, query) AS rank
-      FROM proceeding_types, to_tsquery($1) AS query
-      WHERE query @@ textsearchable
-      ORDER BY rank DESC
-      LIMIT 10;
-
-    END_OF_QUERY
+  def substr_query_args
+    args = []
+    query_arg = "%#{@ts_query.downcase}%"
+    SEARCH_FIELDS.count.times { args << query_arg }
+    args
   end
 end
