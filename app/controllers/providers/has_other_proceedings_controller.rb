@@ -24,6 +24,7 @@ module Providers
       if proceeding_types.empty?
         redirect_to providers_legal_aid_application_proceedings_types_path
       else
+        @form = Providers::HasOtherProceedingsForm.new
         render :show
       end
     end
