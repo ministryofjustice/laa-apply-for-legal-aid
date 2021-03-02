@@ -1,8 +1,8 @@
 <div id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item govuk-!-margin-bottom-0" tabindex="0">
-    <%= form.govuk_radio_button(
-        :id,
-        proceeding_type.id,
-        label: proceeding_type.meaning,
-        hint: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})"
-    ) %>
+  <%= form.govuk_radio_button(
+          :id,
+          proceeding_type.id,
+          label: {text: proceeding_type.meaning},
+          hint: {text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})"}
+      ) %>
 </div>
