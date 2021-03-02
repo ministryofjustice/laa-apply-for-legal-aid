@@ -90,7 +90,7 @@
 
 - method: :generate_entity
   entity_name: OTHERSAVING
-  instance_label: the timeshare
+  instance_label: the other saving1
   yaml_section: :other_savings
 
 - predicate: :vehicles_present?
