@@ -1,8 +1,7 @@
-import $ from 'jquery'
-import axios from 'axios'
-import * as JsSearch from 'js-search'
+import axios from 'axios';
+import { hide, show } from '../helpers';
 var typingTimer;                //timer identifier
-var doneTypingInterval = 1500;  //time in ms, 1.5 second for example
+var doneTypingInterval = 400;  //time in ms, 1.5 second for example
 var ariaText;
 
 async function searchResults(search_term){
@@ -11,47 +10,55 @@ async function searchResults(search_term){
   return response.data
 }
 
-function searchOnUserInput() {
-  const searchInputBox = $("#proceeding-search-input")
+function doneTyping () {
+  document.querySelector('#screen-reader-messages').innerHTML = ariaText
+  const inputText = document.querySelector("#proceeding-search-input").value.trim()
+  if (inputText.length > 2) {
+    hideProceeedingsItems()
+    searchResults(inputText).then(results => {
+      showResults(results, inputText)
+    })
+  }
+}
 
-  searchInputBox.keyup((event) => {
-    $("#proceeding-list .proceeding-item").hide()
-    $(".no-proceeding-items").hide()
-    const inputText = $(event.target).val()
-    if (inputText.length > 2) {
-      searchResults(inputText).then(results => {
-        showResults(results, inputText)
-      })
-    }
+function searchOnUserInput(searchInputBox) {
+
+  searchInputBox.addEventListener("keyup", (event) => {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
   })
 
-  searchInputBox.keydown(() => {
+  searchInputBox.addEventListener("keydown", () => {
     clearTimeout(typingTimer);
   })
 
-  $('#clear-proceeding-search').on("click", () => searchInputBox.val("").trigger("keyup"))
+  document.querySelector('#clear-proceeding-search').addEventListener('click', () => {
+    searchInputBox.value = ""
+    hideProceeedingsItems()
+  })
 
   // TODO: remove this when the multiple proceedings feature flag is removed
-  $('li.proceeding-item').on('mouseover', function (e) { $(this).addClass('hover') })
-    .on('mouseout', function (e) { $(this).removeClass('hover') })
-    .on('click', function (e) { return submitForm(this) })
-    .on('keydown', function (e) {
-      if (e.which == 13) {
-        return submitForm(this)
-      }
+  let proceedingItems = document.querySelectorAll('.proceeding-item')
+  if (proceedingItems.length) {
+    proceedingItems.forEach((item) => {
+      item.addEventListener('mouseover', () => { item.classList.add('hover') })
+      item.addEventListener('mouseout', () => { item.classList.remove('hover') })
+      item.addEventListener('click', () => { return submitForm(item) })
+      item.addEventListener('keydown', (e) => {
+        if (e.which === 13) {
+          return submitForm(item)
+        }
+      })
     })
+  }
 }
 
 function showResults(results, inputText) {
   if (results.length > 0) {
     const codes = results.map(obj => obj["code"])
-    console.log(codes)
     codes.forEach(code => {
       // const element = $('#' + code)
       var element = document.getElementById(code)
-      console.log(element)
 
       // We want to highlight anything text in <main> or <span> tags that
       // matches the user's search criteria
@@ -66,23 +73,26 @@ function showResults(results, inputText) {
       // Highlight any text that matches the user's input
       const regExp = RegExp(inputText, 'gi')
       main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
-      main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
+      span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
 
-      const parent = document.querySelector('#proceeding-list')
-      element.style.display = "block"
-
+      // show hidden proceedings item
+      show(element)
+      hide(document.querySelector(".no-proceeding-items"))
       // the below alerts screen reader users that results appeared on the page
       ariaText = codes.length + ' ' + pluralize(codes.length, 'match', 'matches') + ' found for ' + inputText + ', use tab to move through options';
       })
     }
   else {
-    $(".no-proceeding-items").show()
+    show(document.querySelector(".no-proceeding-items"))
     ariaText = 'No results found matching ' + inputText
   }
 }
 
-function doneTyping () {
-  $('#screen-reader-messages').html(ariaText)
+function hideProceeedingsItems() {
+  document.querySelectorAll(".proceeding-item").forEach((item) => {
+    hide(item)
+  })
+  hide(document.querySelector(".no-proceeding-items"))
 }
 
 const pluralize = (val, word, plural = word + 's') => {
@@ -93,11 +103,14 @@ const pluralize = (val, word, plural = word + 's') => {
 };
 
 let submitForm = proceedingItem => {
-  $(proceedingItem).find('form').submit()
+  let form = proceedingItem.querySelector('form')
+  if (form) { form.submit() }
   return false
 }
 
-$(document).ready(function() {
-  searchOnUserInput()
-})
-// export { getAll, filterSearch }
+document.addEventListener('DOMContentLoaded', event => {
+  const searchInputBox = document.querySelector("#proceeding-search-input")
+  if (searchInputBox) {searchOnUserInput(searchInputBox)}
+});
+
+export {searchResults, searchOnUserInput, showResults};
