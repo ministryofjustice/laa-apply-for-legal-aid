@@ -18,9 +18,24 @@ module Providers
       return false unless save_continue_or_draft(@form)
 
       remove_delegated_scope_limitations unless @form.model.used_delegated_functions?
-      AddScopeLimitationService.call(legal_aid_application, :delegated) if @form.model.used_delegated_functions? # To be removed in ap-2047
-      add_delegated_scope_limitations if @form.model.used_delegated_functions?
+      update_scope_limitations
       true
+    end
+
+    def update_scope_limitations
+      return unless @form.model.used_delegated_functions?
+
+      AddScopeLimitationService.call(legal_aid_application, :delegated)  # To be removed in ap-2047
+      add_delegated_scope_limitations
+
+      submit_application_reminder if @form.model&.used_delegated_functions_on && @form.model.used_delegated_functions_on >= 1.month.ago
+    end
+
+    def submit_application_reminder
+      return if legal_aid_application.awaiting_applicant?
+      return if legal_aid_application.applicant_entering_means?
+
+      SubmitApplicationReminderService.new(legal_aid_application).send_email
     end
 
     def application_proceeding_types
