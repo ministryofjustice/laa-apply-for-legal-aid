@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { hide, show } from '../helpers';
-const doneTypingInterval = 400; // time in ms, 1.5 second for example
+import { hide, show, pluralize } from '../helpers';
+const doneTypingInterval = 500; // time in ms, 500ms to make search work fairly quickly but avoid too many DB requests
 let typingTimer; // timer identifier
 let ariaText;
 
@@ -10,6 +10,7 @@ async function searchResults (searchTerm) {
   return response.data;
 }
 
+// Calls search only when the typing timer expires
 function doneTyping () {
   document.querySelector('#screen-reader-messages').innerHTML = ariaText;
   const inputText = document.querySelector('#proceeding-search-input').value.trim();
@@ -18,11 +19,12 @@ function doneTyping () {
     searchResults(inputText).then(results => {
       showResults(results, inputText);
     })
-  } else if  (inputText.length === 0) {
+  } else if (inputText.length === 0) {
     hideProceeedingsItems();
   }
 }
 
+// Add event listeners for the user typing in the search box and clearing the search
 function searchOnUserInput (searchInputBox) {
   searchInputBox.addEventListener('keyup', (event) => {
     clearTimeout(typingTimer);
@@ -54,6 +56,9 @@ function searchOnUserInput (searchInputBox) {
   }
 }
 
+// Find the existing hidden proceeding type items
+// If they are one of the search matches returned from the V1 api, remove the hidden class
+// and highlight the search terms in the item text
 function showResults (results, inputText) {
   if (results.length > 0) {
     const codes = results.map(obj => obj.code);
@@ -64,12 +69,14 @@ function showResults (results, inputText) {
       // We want to highlight anything text in <main> or <span> tags that
       // matches the user's search criteria
       const span = element.querySelector('span');
-      // remove h3 when the multiple proceedings feature flag is removed
+      // TODO: remove h3 when the multiple proceedings feature flag is removed
       const main = element.querySelectorAll('h3, label')[0];
 
       // Remove any existing highlighting
-      main.innerHTML = main.innerHTML.replace(/<mark class="highlight">(.*)<\/mark>/, '$1');
-      span.innerHTML = span.innerHTML.replace(/<mark class="highlight">(.*)<\/mark>/, '$1');
+      main.innerHTML = main.innerHTML.replace(/<mark class="highlight">/gi, '');
+      main.innerHTML = main.innerHTML.replace(/<\/mark>/gi, '');
+      span.innerHTML = span.innerHTML.replace(/<mark class="highlight">/gi, '');
+      span.innerHTML = span.innerHTML.replace(/<\/mark>/gi, '');
 
       // Highlight any text that matches the user's input
       let terms = inputText.split(' ')
@@ -91,6 +98,7 @@ function showResults (results, inputText) {
   }
 }
 
+// Hide any search results and the 'no results found' text
 function hideProceeedingsItems () {
   document.querySelectorAll('.proceeding-item').forEach((item) => {
     hide(item);
@@ -98,19 +106,14 @@ function hideProceeedingsItems () {
   hide(document.querySelector('.no-proceeding-items'));
 }
 
-const pluralize = (val, word, plural = word + 's') => {
-  const _pluralize = (num, word, plural = word + 's') =>
-    [1, -1].includes(Number(num)) ? word : plural;
-  if (typeof val === 'object') return (num, word) => _pluralize(num, word, val[word]);
-  return _pluralize(val, word, plural);
-}
-
+// TODO: remove this when the multiple proceedings feature flag is removed
 const submitForm = proceedingItem => {
   const form = proceedingItem.querySelector('form');
   if (form) { form.submit() }
   return false
 }
 
+// If the proceedings type search box appears on the page, call the searchOnUserInput function
 document.addEventListener('DOMContentLoaded', event => {
   const searchInputBox = document.querySelector('#proceeding-search-input');
   if (searchInputBox) { searchOnUserInput(searchInputBox) }
