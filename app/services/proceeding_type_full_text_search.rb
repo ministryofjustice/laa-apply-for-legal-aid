@@ -1,5 +1,5 @@
 class ProceedingTypeFullTextSearch
-  Result = Struct.new(:id, :meaning, :code, :description, :rank)
+  Result = Struct.new(:meaning, :code, :description, :category_law, :matter)
 
   SEARCH_FIELDS = %i[
     meaning
@@ -25,7 +25,7 @@ class ProceedingTypeFullTextSearch
   private
 
   def instantiate_result(row)
-    Result.new(row['id'], row['meaning'].strip, row['code'], row['description'].strip, row['rank'])
+    Result.new(row['meaning'].strip, row['code'], row['description'].strip, row['ccms_category_law'].strip, row['ccms_matter'])
   end
 
   def fields_contain_substr_query
