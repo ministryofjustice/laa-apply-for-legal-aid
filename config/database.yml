@@ -3,6 +3,7 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 25 } %>
   timeout: 5000
+  prepared_statements: false
 
 development:
   <<: *default
