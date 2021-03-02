@@ -17,7 +17,9 @@ function doneTyping () {
     hideProceeedingsItems();
     searchResults(inputText).then(results => {
       showResults(results, inputText);
-    });
+    })
+  } else if  (inputText.length === 0) {
+    hideProceeedingsItems();
   }
 }
 
@@ -70,9 +72,12 @@ function showResults (results, inputText) {
       span.innerHTML = span.innerHTML.replace(/<mark class="highlight">(.*)<\/mark>/, '$1');
 
       // Highlight any text that matches the user's input
-      const regExp = RegExp(inputText, 'gi');
-      main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
-      span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+      let terms = inputText.split(' ')
+      terms.forEach((term) => {
+        const regExp = RegExp(term.trim(), 'gi');
+        main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+        span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+      })
 
       // show hidden proceedings item
       show(element);

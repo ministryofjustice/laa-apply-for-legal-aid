@@ -14,11 +14,11 @@ class ProceedingTypeFullTextSearch
   end
 
   def initialize(search_terms)
-    @ts_query = search_terms
+    @ts_queries = search_terms.downcase.split.map { |val| "%#{val}%" }
   end
 
   def call
-    result_set = ProceedingType.where(fields_contain_substr_query, *substr_query_args).limit(8)
+    result_set = ProceedingType.where(fields_contain_substr_query, *substr_query_args).order(:meaning).limit(8)
     result_set.map { |row| instantiate_result(row) }
   end
 
@@ -29,17 +29,14 @@ class ProceedingTypeFullTextSearch
   end
 
   def fields_contain_substr_query
-    SEARCH_FIELDS.reduce('') do |str, field|
-      str << "lower(#{field}) like ?"
+    SEARCH_FIELDS.each_with_object('') do |field, str|
+      str << "lower(#{field}) ILIKE ALL ( array[?] )"
       str << ' OR ' unless field == SEARCH_FIELDS.last
       str
     end
   end
 
   def substr_query_args
-    args = []
-    query_arg = "%#{@ts_query.downcase}%"
-    SEARCH_FIELDS.count.times { args << query_arg }
-    args
+    Array.new(SEARCH_FIELDS.count, @ts_queries)
   end
 end
