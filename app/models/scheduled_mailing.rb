@@ -19,7 +19,6 @@ class ScheduledMailing < ApplicationRecord
 
   FAILURE_STATUSES = %w[technical-failure permanent-failure temporary-failure].freeze
 
-
   validates :status, inclusion: { in: VALID_STATUSES }
   validates :mailer_klass, :mailer_method, :addressee, :scheduled_at, presence: true
 

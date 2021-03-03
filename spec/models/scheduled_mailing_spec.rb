@@ -92,7 +92,6 @@ RSpec.describe ScheduledMailing do
     let!(:created) { create :scheduled_mailing, :created }
     let!(:sending) { create :scheduled_mailing, :sending }
 
-
     describe 'waiting' do
       it 'picks only waiting status' do
         expect(ScheduledMailing.waiting).to match_array [waiting_due, waiting_due_later]
