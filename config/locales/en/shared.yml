@@ -15,8 +15,8 @@ en:
           cash_outgoings:
             check_box_rent_or_mortgage: Housing payments
             check_box_child_care: Childcare payments
-            check_box_maintenance_out: Maintenance payments
-            check_box_legal_aid: Legal aid payments
+            check_box_maintenance_out: Maintenance payments to a former partner
+            check_box_legal_aid: Payments towards legal aid in a criminal case
     applicant_declaration:
       confirm_following: Confirm the following
       submission_list_summary: You agree that
