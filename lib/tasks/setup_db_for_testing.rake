@@ -6,7 +6,6 @@ namespace :settings do
                     bank_transaction_filename: 'db/sample_data/bank_transactions_2.csv',
                     manually_review_all_cases: false,
                     allow_welsh_translation: false,
-                    allow_cash_payment: false,
                     allow_multiple_proceedings: false,
                     override_dwp_results: false)
 

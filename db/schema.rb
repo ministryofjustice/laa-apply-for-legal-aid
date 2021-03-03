@@ -664,7 +664,6 @@ ActiveRecord::Schema.define(version: 2021_03_05_145638) do
     t.boolean "manually_review_all_cases", default: true
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
     t.boolean "allow_welsh_translation", default: false, null: false
-    t.boolean "allow_cash_payment", default: false, null: false
     t.boolean "allow_multiple_proceedings", default: false, null: false
     t.boolean "override_dwp_results", default: false, null: false
   end
