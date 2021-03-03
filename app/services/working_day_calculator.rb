@@ -30,6 +30,6 @@ class WorkingDayCalculator
   end
 
   def calendar
-    @calendar ||= Business::Calendar.new(holidays: BankHoliday.dates)
+    @calendar ||= Business::Calendar.new(name: :working_days_calculator, holidays: BankHoliday.dates)
   end
 end
