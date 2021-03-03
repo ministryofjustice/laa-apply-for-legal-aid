@@ -11,7 +11,7 @@
 </div>
 
 <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional_<%= name %>">
-  <span class="govuk-hint"><% t('.hint') %></span>
+  <span class="govuk-hint"><%= t('.hint') %></span>
 
   <% (1..number_of_fields).each do |number| %>
     <%= govuk_form_group show_error_if: model.errors.messages["#{name}#{number}".to_sym][0] do %>
