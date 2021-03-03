@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Providers::MeansReportsController, type: :request do
   include ActionView::Helpers::NumberHelper
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v2_result, :passported, :assessment_submitted }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v3_result, :passported, :assessment_submitted }
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create :submission, legal_aid_application: legal_aid_application }
   let(:cfe_result) { legal_aid_application.cfe_result }

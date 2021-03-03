@@ -782,10 +782,10 @@ RSpec.describe LegalAidApplication, type: :model do
       travel(-10.minutes) do
         legal_aid_application = create :legal_aid_application
         submission1 = create :cfe_submission, legal_aid_application: legal_aid_application
-        create :cfe_v2_result, submission: submission1
+        create :cfe_v3_result, submission: submission1
       end
       submission2 = create :cfe_submission, legal_aid_application: legal_aid_application
-      result2 = create :cfe_v2_result, submission: submission2
+      result2 = create :cfe_v3_result, submission: submission2
 
       expect(legal_aid_application.cfe_result).to eq result2
     end

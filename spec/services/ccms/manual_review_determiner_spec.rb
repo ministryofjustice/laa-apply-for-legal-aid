@@ -21,7 +21,7 @@ module CCMS
 
           context 'passported, no contrib, no_restrictions' do
             let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-            let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
             it 'returns false' do
               expect(subject).to be false
@@ -30,7 +30,7 @@ module CCMS
 
           context 'non-passported, no contrib' do
             let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
-            let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
             it 'returns true' do
               expect(subject).to be true
@@ -45,7 +45,7 @@ module CCMS
             let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true }
 
             context 'contribution' do
-              let!(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
+              let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
 
               it 'returns true' do
                 expect(subject).to be true
@@ -53,7 +53,7 @@ module CCMS
             end
 
             context 'no contribution' do
-              let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+              let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
               context 'restrictions' do
                 it 'returns false' do
@@ -75,7 +75,7 @@ module CCMS
             let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true }
 
             context 'contribution' do
-              let!(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
+              let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
 
               it 'returns true' do
                 expect(subject).to be true
@@ -83,7 +83,7 @@ module CCMS
             end
 
             context 'no contribution' do
-              let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+              let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
               context 'restrictions' do
                 it 'returns false' do
