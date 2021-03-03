@@ -2,9 +2,7 @@ module Citizens
   class CashOutgoingsController < CitizenBaseController
     before_action :aggregated_cash_outgoings, only: %i[show update]
 
-    def show
-      go_forward unless Setting.allow_cash_payment?
-    end
+    def show; end
 
     def update
       if aggregated_cash_outgoings.update(form_params)

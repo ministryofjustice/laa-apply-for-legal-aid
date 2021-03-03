@@ -17,7 +17,7 @@ Metrics/AbcSize:
   - 'data' # app/models/dashboard/widget_data_providers/[feedback_scores.rb, number_provider_firms.rb, number_provider_firms.rb]
   - 'deserialize_address' # app/forms/addresses/address_selection_form.rb
   - 'govuk_radio_button' # app/lib/govuk_elements_form_builder/form_builder.rb
-  - 'no_capital' # spec/factories/cfe_results/v2/mock_results.rb
+  - 'no_capital' # spec/factories/cfe_results/v3/mock_results.rb
   - 'notify' # app/mailers/feedback_mailer.rb
   - 'original_file_valid' # app/forms/statement_of_cases/statement_of_case_form.rb
   - 'parse_transaction_csv_row' # app/services/true_layer/sample_transactions_csv_parser.rb

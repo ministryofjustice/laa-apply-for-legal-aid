@@ -64,20 +64,8 @@ RSpec.describe 'IndentifyTypesOfOutgoingsController', type: :request do
         expect(legal_aid_application.reload.transaction_types).to match_array(outgoing_types)
       end
 
-      context 'next step' do
-        context 'cash_payment setting enabled' do
-          before { allow(Setting).to receive(:allow_cash_payment?).and_return(true) }
-          it 'should redirect to the cash outgoings page' do
-            expect(subject).to redirect_to(citizens_cash_outgoing_path)
-          end
-        end
-
-        context 'cash payment setting disabled' do
-          before { allow(Setting).to receive(:allow_cash_payment?).and_return(false) }
-          it 'should redirect to the check answers page' do
-            expect(subject).to redirect_to(citizens_check_answers_path)
-          end
-        end
+      it 'redirects to the cash outgoings page' do
+        expect(subject).to redirect_to(citizens_cash_outgoing_path)
       end
 
       it 'sets no_debit_transaction_types_selected to false' do

@@ -12,18 +12,9 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
       get citizens_cash_outgoing_path
     end
 
-    context 'allow cash payment setting off' do
-      it 'redirects to new action' do
-        expect(response).to redirect_to(next_flow_step)
-      end
-    end
-
-    context 'allow cash payment setting on' do
-      it 'shows the page' do
-        allow(Setting).to receive(:allow_cash_payment?).and_return(true)
-        get citizens_cash_outgoing_path
-        expect(response.body).to include(I18n.t('citizens.cash_outgoings.show.page_heading'))
-      end
+    it 'shows the page' do
+      get citizens_cash_outgoing_path
+      expect(response.body).to include(I18n.t('citizens.cash_outgoings.show.page_heading'))
     end
   end
 
