@@ -33,7 +33,7 @@ RSpec.describe GovukEmails::Monitor do
         before { allow(HostEnv).to receive(:production?).and_return(true) }
 
         it 'captures raven message' do
-          expect(Raven).to receive(:capture_message).with(raven_message)
+          expect(Sentry).to receive(:capture_message).with(raven_message)
           subject
         end
 
@@ -54,7 +54,7 @@ RSpec.describe GovukEmails::Monitor do
         before { allow(HostEnv).to receive(:production?).and_return(false) }
 
         it 'does not captures raven message' do
-          expect(Raven).not_to receive(:capture_message)
+          expect(Sentry).not_to receive(:capture_message)
           subject
         end
 
