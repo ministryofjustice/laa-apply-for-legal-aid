@@ -74,8 +74,10 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       }
     end
     let(:button_clicked) { {} }
+    let(:mocked_email_service) { instance_double(SubmitApplicationReminderService, send_email: {}) }
 
     before do
+      allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
       patch(
         providers_legal_aid_application_used_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
@@ -90,6 +92,10 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
     it 'redirects to the limitations page' do
       expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
+    end
+
+    it 'calls the submit application reminder mailer service' do
+      expect(SubmitApplicationReminderService).to have_received(:new).with(legal_aid_application)
     end
 
     context 'used delegated functions date is between 1 month and 12 months ago' do

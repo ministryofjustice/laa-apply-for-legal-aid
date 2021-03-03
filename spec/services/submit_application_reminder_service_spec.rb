@@ -26,5 +26,21 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
         )
       end
     end
+
+    context 'SubmitApplicationReminderMailer already exists' do
+      before { subject.send_email }
+
+      it 'adds two new mailer jobs' do
+        expect { subject.send_email }.to change { ScheduledMailing.count }.by(2)
+      end
+
+      it 'cancels pre-existing jobs' do
+        expect(ScheduledMailing.where(cancelled_at: nil).count).to eq(2)
+        expect(ScheduledMailing.count).to eq(2)
+        subject.send_email
+        expect(ScheduledMailing.where.not(cancelled_at: nil).count).to eq(2)
+        expect(ScheduledMailing.count).to eq(4)
+      end
+    end
   end
 end

@@ -6,6 +6,8 @@ class SubmitApplicationReminderService
   def send_email
     return unless application.substantive_application_deadline_on
 
+    scheduled_mail.map(&:cancel!) if scheduled_mail.present?
+
     [five_days_before_deadline, nine_am_deadline_day].each do |scheduled_time|
       application.scheduled_mailings.create!(
         mailer_klass: 'SubmitApplicationReminderMailer',
@@ -19,6 +21,10 @@ class SubmitApplicationReminderService
   private
 
   attr_reader :application
+
+  def scheduled_mail
+    application.scheduled_mailings.where(mailer_klass: 'SubmitApplicationReminderMailer')
+  end
 
   def mailer_args
     [
