@@ -2,18 +2,18 @@ require 'nokogiri'
 require 'csv'
 
 #
-# This class is useful for printing out all the attributes in the merits and measn ssections of a ccms payload file
+# This class is useful for printing out all the attributes in the merits and means sections of a ccms payload file
 #
 #
 class CCMSPayloadAnalyser
   def initialize
-    @doc = File.open('/Users/stephenrichards/moj/apply/ccms_integration/example_payloads/NonPassportedFullMonty.xml') { |f| Nokogiri::XML(f).remove_namespaces! }
+    @doc = File.open(Rails.root.join('ccms_integration/example_payloads/NonPassportedFullMonty.xml')) { |f| Nokogiri::XML(f).remove_namespaces! }
     # NOTE: Assessments is mispelt Assesment in XML file!
     @sections = %w[MeansAssesments MeritsAssesments]
   end
 
   def run
-    CSV.open('/Users/stephenrichards/moj/apply/ccms_integration/example_payloads/NonPassportedFullMonty.csv', 'wb') do |csv|
+    CSV.open(Rails.root.join('ccms_integration/example_payloads/NonPassportedFullMonty.csv'), 'wb') do |csv|
       @sections.each do |section_name|
         section_element = @doc.xpath("//#{section_name}").first
         entity_nodeset = section_element.xpath('AssesmentResults/AssesmentDetails/AssessmentScreens/Entity')
