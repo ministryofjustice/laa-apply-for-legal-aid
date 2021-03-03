@@ -70,7 +70,7 @@ module CCMS
 
         send(method_to_call, config)
       rescue StandardError => e
-        Raven.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect}")
+        Sentry.capture_message("EntityAttributesGenerator #{e.class}: #{e.message} with config.inspect values of: #{config.inspect}")
         raise
       end
 

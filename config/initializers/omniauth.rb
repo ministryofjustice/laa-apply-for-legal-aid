@@ -8,7 +8,7 @@ OmniAuth.config.logger = Rails.logger
 # is redirectied to /auth/failure
 #
 OmniAuth.config.on_failure = proc do |env|
-  Raven.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']&.error_reason}")
+  Sentry.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']&.error_reason}")
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end
 

@@ -54,13 +54,13 @@ module CCMS
       end
 
       def handle_unsuccessful_response(xml_request, xml_response)
-        Raven.capture_exception(xml_response)
+        Sentry.capture_exception(xml_response)
         create_failure_history(submission.aasm_state, nil, xml_request, xml_response)
         submission.fail! unless submission.failed?
       end
 
       def handle_exception(exception, xml_request)
-        Raven.capture_exception(exception)
+        Sentry.capture_exception(exception)
         create_ccms_failure_history(submission.aasm_state, exception, xml_request)
         submission.fail! unless submission.failed?
       end

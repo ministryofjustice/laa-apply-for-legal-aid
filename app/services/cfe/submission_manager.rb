@@ -35,7 +35,7 @@ module CFE
       true
     rescue SubmissionError => e
       submission.error_message = e.message
-      Raven.capture_exception(e)
+      Sentry.capture_exception(e)
       submission.fail! unless submission.failed?
       false
     end

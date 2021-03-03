@@ -14,7 +14,7 @@ class ScheduledMailing < ApplicationRecord
   def deliver!
     eligible_for_delivery? ? deliver_now : cancel!
   rescue StandardError => e
-    Raven.capture_exception(e)
+    Sentry.capture_exception(e)
   end
 
   def cancel!

@@ -21,10 +21,10 @@ class BenefitCheckService
   def call
     soap_client.call(:check, message: benefit_checker_params).body[:benefit_checker_response]
   rescue Savon::SOAPFault => e
-    Raven.capture_exception(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
+    Sentry.capture_exception(ApiError.new("HTTP #{e.http.code}, #{e.to_hash}"))
     false
   rescue StandardError => e
-    Raven.capture_exception(e)
+    Sentry.capture_exception(e)
     false
   end
 

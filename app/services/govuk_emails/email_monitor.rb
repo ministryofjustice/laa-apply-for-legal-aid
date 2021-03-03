@@ -30,7 +30,7 @@ module GovukEmails
 
       if email.temp_or_perm_failed?
         send_undeliverable_alert(email.status)
-        Raven.capture_message("Undeliverable Email Error - #{error_details.to_json}")
+        Sentry.capture_message("Undeliverable Email Error - #{error_details.to_json}")
       elsif !email.delivered?
         keep_monitoring
       end
@@ -85,7 +85,7 @@ module GovukEmails
                         status: 'created',
                         status_checked_at: nil)
     rescue StandardError => e
-      Raven.capture_message("Unable to write SentEmail record: #{e.class} #{e.message} Params: #{@email_args.inspect}")
+      Sentry.capture_message("Unable to write SentEmail record: #{e.class} #{e.message} Params: #{@email_args.inspect}")
     end
 
     def update_sent_email

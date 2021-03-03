@@ -12,7 +12,7 @@ module ProvidersHelper
       params: legal_aid_application.provider_step_params&.symbolize_keys
     ).current_path
   rescue Flow::FlowError => e
-    Raven.capture_exception(e)
+    Sentry.capture_exception(e)
     Rails.logger.error e.message
 
     journey_start_path(legal_aid_application)

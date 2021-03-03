@@ -84,7 +84,7 @@ RSpec.describe GovukEmails::EmailMonitor do
       context 'unable to write the SentEmail record' do
         before { allow(SentEmail).to receive(:create!).and_raise(ActiveRecord::RecordInvalid) }
         it 'sends a message to Sentry' do
-          expect(Raven).to receive(:capture_message).with(/Unable to write SentEmail record: ActiveRecord::RecordInvalid Record invalid/)
+          expect(Sentry).to receive(:capture_message).with(/Unable to write SentEmail record: ActiveRecord::RecordInvalid Record invalid/)
           subject
         end
 
@@ -94,7 +94,7 @@ RSpec.describe GovukEmails::EmailMonitor do
           expect(FeedbackMailer).to receive(:public_send).and_return(mailer)
           expect(mailer).to receive(:deliver_now!).and_return(mailer)
           expect(mailer).to receive(:govuk_notify_response).and_return(govuk_notify_response)
-          allow(Raven).to receive(:capture_message)
+          allow(Sentry).to receive(:capture_message)
           subject
         end
       end
@@ -111,7 +111,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
+          expect(Sentry).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -137,7 +137,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).not_to receive(:capture_exception).with(message_contains(error_message))
+          expect(Sentry).not_to receive(:capture_exception).with(message_contains(error_message))
           subject
         end
 
@@ -187,7 +187,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'sends a message to Sentry' do
-          expect(Raven).to receive(:capture_message).with(/^Undeliverable Email Error -/)
+          expect(Sentry).to receive(:capture_message).with(/^Undeliverable Email Error -/)
           subject
         end
 
@@ -218,7 +218,7 @@ RSpec.describe GovukEmails::EmailMonitor do
         end
 
         it 'does not capture an exception' do
-          expect(Raven).to receive(:capture_message) do |message|
+          expect(Sentry).to receive(:capture_message) do |message|
             expect(message).to match(/^Undeliverable Email Error /)
             expect(message).to match(/"failure_reason":"#{message_status}"/)
           end

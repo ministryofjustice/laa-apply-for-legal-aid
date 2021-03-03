@@ -55,6 +55,6 @@ class AddressLookupService
 
   def record_error(state, error)
     errors.add(:lookup, state)
-    Raven.capture_exception(error) unless POSTCODE_REGEXP.match?(@postcode) && state == :unsuccessful
+    Sentry.capture_exception(error) unless POSTCODE_REGEXP.match?(@postcode) && state == :unsuccessful
   end
 end

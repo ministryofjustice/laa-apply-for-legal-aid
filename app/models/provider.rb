@@ -33,7 +33,7 @@ class Provider < ApplicationRecord
   end
 
   def firm_permissions
-    Raven.capture_message("Provider Firm has no permissions with firm id: #{firm.id}") if firm&.permissions&.empty?
+    Sentry.capture_message("Provider Firm has no permissions with firm id: #{firm.id}") if firm&.permissions&.empty?
     firm.nil? ? [] : firm.permissions
   end
 
