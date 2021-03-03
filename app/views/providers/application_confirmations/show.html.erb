@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<%= page_template page_title: nil do %>
+<%= page_template page_title: nil, back_link: :none do %>
 
   <p class="govuk-body"><%= t '.sent_email_text', email: @legal_aid_application.applicant.email %></p>
   <h2 class="govuk-heading-m"><%= t '.happen_next_heading' %></h2>
