@@ -75,6 +75,27 @@ en:
     reports:
       index:
         heading_1: 'Admin reports and downloads'
+      date_input_fields:
+        records_from:
+          heading: Select records from
+          hint: (Optional) Default, 1 12 2019 - from month service went live
+        records_to:
+          heading: Select records to
+          hint: (Optional) Default, Todays's Date
+      submitted_to_ccms:
+        heading: Cases Successfully Submitted to CCMS Only
+      capital_assessment_result:
+        heading: Capital Assessment Result
+        none: 'None'
+        pending: 'Pending'
+        eligible: 'Eligible'
+        not_eligible: 'Not Eligible'
+        contribution_required: 'Contribution Required'
+      application_type:
+        heading: Application Type
+        all: 'All'
+        passported: 'Passported'
+        non_passported: 'Non-Passported'
     roles:
       index:
         heading_1: Search for the Provider firm name

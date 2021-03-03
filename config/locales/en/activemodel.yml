@@ -331,6 +331,9 @@ en:
               blank: Select an account number
             username:
               already_exists: There is already a user with that username
+        reports:
+          application_type: Select cases application type
+          submitted_to_ccms: Select if you want cases submitted to CCMS
         respondent:
           attributes:
             full_name:
