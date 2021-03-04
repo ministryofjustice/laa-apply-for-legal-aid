@@ -71,7 +71,7 @@ Rails.application.routes.draw do
     resources :ccms_connectivity_tests, only: [:show]
     resources :reports, only: %i[index create] do
       member do
-        get 'download_ccms_report'
+        get 'download_custom_report'
       end
     end
     get 'user_dashboard', to: 'user_dashboard#index', as: 'user_dashboard'

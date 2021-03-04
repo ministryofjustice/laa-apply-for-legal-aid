@@ -3,13 +3,6 @@ module Reports
     include ActiveModel::Model
     include ActionController::DataStreaming
 
-    DEFAULTS = {
-      passported: nil,
-      assessment_result: nil,
-      ignore_ccms_state: nil,
-      payload_attrs: []
-    }.freeze
-
     def self.call(params)
       new(params).call
     end
@@ -17,9 +10,10 @@ module Reports
     attr_reader :application_type,
                 :submitted_to_ccms,
                 :capital_assessment_result,
+                :payload_attrs,
                 :records_from,
                 :records_to,
-                :csv_string
+                :matches
 
     validate :validate_required
 
@@ -27,6 +21,7 @@ module Reports
       @application_type = params[:application_type]
       @submitted_to_ccms = params[:submitted_to_ccms]
       @capital_assessment_result = params[:capital_assessment_result]
+      @payload_attrs = params[:payload_attrs]
       @records_from = params[:records_from]
       @records_to = params[:records_to]
     end
@@ -35,23 +30,22 @@ module Reports
       return unless valid?
 
       opts = {
-        passported: application_type == 'A' ? nil : application_type,
+        passported: application_type != 'A' && application_type,
+        submitted_to_ccms: submitted_to_ccms == 'true',
         assessment_result: capital_assessment_result.last != '' && capital_assessment_result,
-        ignore_ccms_state: submitted_to_ccms == 'false',
-        payload_attrs: []
+        payload_attrs: separate_attrs(payload_attrs)
       }
 
       results = find_cases(opts: opts)
+      @matches = results.present? ? 'Yes' : 'No'
 
-      if results.present?
-        @csv_string = CSV.generate do |csv|
+      CSV.open(Rails.root.join('tmp/custom-apply-ccms-report.csv'), 'wb') do |csv|
+        if results.present?
           csv << results.first.keys
           results.each do |row|
             csv << row.values.map { |v| "\"#{v}\""}
           end
         end
-      else
-        @csv_string = ''
       end
 
       self
@@ -60,12 +54,19 @@ module Reports
     private
 
     def validate_required
-      return if !application_type
+      return if application_type.empty?
+
       errors.add(:application_type, I18n.t('activemodel.errors.models.reports.application_type')) if application_type.empty?
       errors.add(:submitted_to_ccms, I18n.t('activemodel.errors.models.reports.submitted_to_ccms')) if submitted_to_ccms.empty?
     end
 
-    def find_cases(from: '2019-12-01', to: Date.current.strftime('%Y-%m-%d'), opts: DEFAULTS)
+    def separate_attrs(str)
+      return [] if !str || str.strip.empty?
+
+      str.split(/\r\n|,|\s/).reject(&:empty?).map(&:upcase)
+    end
+
+    def find_cases(from: '2019-12-01', to: Date.current.strftime('%Y-%m-%d'), opts:)
       results = []
 
       # get application ids with a benefit check result within time range
@@ -99,7 +100,10 @@ module Reports
 
       laa_ids.each do |id|
         # get CCMS cases that actually succeeded and not failed or retried
-        ccms = opts[:ignore_ccms_state] ? CCMS::Submission.find_by(legal_aid_application_id: id) : CCMS::Submission.find_by(legal_aid_application_id: id, aasm_state: 'completed')
+        ccms = opts[:submitted_to_ccms] ?
+                 CCMS::Submission.find_by(legal_aid_application_id: id, aasm_state: 'completed') :
+                 CCMS::Submission.find_by(legal_aid_application_id: id)
+
         laa = LegalAidApplication.find_by(id: id)
         # ignore any applications that were started and not submitted to ccms
         if ccms
@@ -114,7 +118,7 @@ module Reports
 
             opts[:payload_attrs].each do |payload_attr|
               dups = []
-              case_review_attrs = attrs.select{ |a| a.text == payload_attr.to_s.upcase }
+              case_review_attrs = attrs.select{ |a| a.text == payload_attr }
 
               case_review_attrs.each do |attr|
                 siblings = attr.parent.children

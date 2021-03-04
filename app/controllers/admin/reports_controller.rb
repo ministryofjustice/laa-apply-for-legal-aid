@@ -4,7 +4,6 @@ module Admin
 
     DEFAULT_PAGE_SIZE = 10
 
-
     def index
       reports
     end
@@ -15,8 +14,8 @@ module Admin
       render :index
     end
 
-    def download_ccms_report
-      download_data :ccms_report
+    def download_custom_report
+      send_file Rails.root.join('tmp/custom-apply-ccms-report.csv')
     end
 
     def download_submitted
@@ -42,15 +41,6 @@ module Admin
     end
 
     private
-
-    def download_data(attribute)
-      date = Time.current.strftime("%d_%B_%H_%M_%S")
-
-      send_data params[:id] || '',
-                status: 200,
-                type: 'text/csv',
-                filename: "#{attribute}_#{date}.csv"
-    end
 
     def reports_types_creator
       @reports_types_creator ||= Reports::ReportsTypesCreator.call(form_params)

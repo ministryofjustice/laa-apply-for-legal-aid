@@ -40,10 +40,10 @@
           </thead>
           <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
-              <% if @reports_types_creator&.csv_string.present? %>
-                <td class="govuk-table__cell case-full-name">Custom CCMS report - Generated on <%= Time.current.strftime("%d %B %H:%M:%S") %></td>
-                <td class="govuk-table__cell"><%= link_to_accessible('Download CSV', download_ccms_report_admin_report_path(@reports_types_creator.csv_string) ) %></td>
-              <% elsif @reports_types_creator&.csv_string %>
+              <% if @reports_types_creator&.matches == 'Yes' %>
+                <td class="govuk-table__cell case-full-name">Custom Apply/CCMS submissions report - Generated on <%= Time.current.strftime("%d %B %H:%M:%S") %></td>
+                <td class="govuk-table__cell"><%= link_to_accessible('Download CSV', download_custom_report_admin_report_path('custom-report') ) %></td>
+              <% elsif @reports_types_creator&.matches == 'No' %>
                 <td class="govuk-table__cell case-full-name">No records have been found using that search criteria.</td>
                 <td class="govuk-table__cell"></td>
               <% else %>
@@ -90,6 +90,10 @@
 
     <%= form.govuk_date_field :records_to, legend: { text: t("admin.reports.date_input_fields.records_to.heading") },
                               hint: { text: t("admin.reports.date_input_fields.records_to.hint")} %>
+
+    <%= form.govuk_fieldset legend: {size: 'm', tag: 'h1', text: 'Collate XML Payload Attributes'} do %>
+      <%= form.govuk_text_area :payload_attrs, label: {text: '(Optional)'}, hint: {text: 'Separate attribute names with a comma, space or newline'}, rows: 15 %>
+    <% end %>
 
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
