@@ -133,9 +133,9 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it 'populates the errors' do
-          expect(aco.errors[:maintenance_out1][0]).to eq error_msg('Maintenance payments for children or an ex-partner', month1_name)
-          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg('Rent or mortgage payments', month1_name)
-          expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg('Rent or mortgage payments', month3_name)
+          expect(aco.errors[:maintenance_out1][0]).to eq error_msg('Maintenance payments to a former partner', month1_name)
+          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg('Housing payments', month1_name)
+          expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg('Housing payments', month3_name)
         end
 
         def error_msg(name, month)
@@ -314,7 +314,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
           it 'populates the errors' do
             subject
-            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the cash you paid as Rent or mortgage payments in #{month1_name}"
+            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the cash you paid as Housing payments in #{month1_name}"
           end
         end
       end
