@@ -70,8 +70,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
 
   def period(month_number)
     period_start = transaction_date(month_number)
-    period_end = period_start.end_of_month
-    "#{I18n.l(period_start, format: :short_date)} - #{I18n.l(period_end, format: :short_date)}"
+    I18n.l(period_start, format: '%B %Y')
   end
 
   def month_name(month_number)

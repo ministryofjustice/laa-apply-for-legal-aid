@@ -4,12 +4,12 @@
     <%= question %>
   </dt>
   <dd class="govuk-summary-list__value">
-    <% if  legal_aid_application.cash_transactions.for_transaction_type(transaction_type.id).any? %>
-          <% legal_aid_application.cash_transactions.for_transaction_type(transaction_type.id).each do |ctx| %>
-            <%= ctx.transaction_date.strftime('%B') %>: <strong><%= gds_number_to_currency(ctx.amount) %></strong> <br>
-          <% end %>
+    <% if legal_aid_application.cash_transactions.for_transaction_type(transaction_type.id).any? %>
+      <% legal_aid_application.cash_transactions.for_transaction_type(transaction_type.id).each do |ctx| %>
+        <%= ctx.transaction_date.strftime('%B') %>: <strong><%= gds_number_to_currency(ctx.amount) %></strong><br>
+      <% end %>
     <% else %>
-        <%= t('.no_transactions') %>
+      <%= t('.no_transactions') %>
     <% end %>
   </dd>
 </div>
