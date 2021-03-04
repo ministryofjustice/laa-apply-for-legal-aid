@@ -4,16 +4,16 @@ cy:
     partials:
       revealing_checkbox:
         dates: "%{date_end} ot %{date_start}"
-        hint: ".enon deviecer uoy fi 0 retne ro ,htnom radnelac hcae ni deviecer uoy
-          tnuoma hsac latot eht retnE"
         citizens:
           cash_incomes:
+            hint: ".enon deviecer uoy fi 0 retne ro ,htnom hcae deviecer uoy tnuoma hsac latot eht retnE"
             check_box_benefits: stifeneB
             check_box_friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
             check_box_maintenance_in: stnemyap ecnanetniaM
             check_box_property_or_lodger: regdol ro ytreporp a morf emocnI
             check_box_pension: noisneP
           cash_outgoings:
+            hint: ".enon diap uoy fi 0 retne ro ,htnom hcae diap uoy tnuoma hsac latot eht retnE"
             check_box_rent_or_mortgage: stnemyap gnisuoH
             check_box_child_care: stnemyap eracdlihC
             check_box_maintenance_out: stnemyap ecnanetniaM

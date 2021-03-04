@@ -4,19 +4,20 @@ en:
     partials:
       revealing_checkbox:
         dates:  "%{date_start} to %{date_end}"
-        hint: Enter the total cash amount you received in each calendar month, or enter 0 if you received none.
         citizens:
           cash_incomes:
+            hint: Enter the total cash amount you received each month, or enter 0 if you received none.
             check_box_benefits: Benefits
             check_box_friends_or_family: Financial help from friends or family
-            check_box_maintenance_in: Maintenance payments
+            check_box_maintenance_in: Maintenance payments from a former partner
             check_box_property_or_lodger: Income from a property or lodger
             check_box_pension: Pension
           cash_outgoings:
+            hint: Enter the total cash amount you paid each month, or enter 0 if you paid none.
             check_box_rent_or_mortgage: Housing payments
             check_box_child_care: Childcare payments
-            check_box_maintenance_out: Maintenance payments
-            check_box_legal_aid: Legal aid payments
+            check_box_maintenance_out: Maintenance payments to a former partner
+            check_box_legal_aid: Payments towards legal aid in a criminal case
     applicant_declaration:
       confirm_following: Confirm the following
       submission_list_summary: You agree that
