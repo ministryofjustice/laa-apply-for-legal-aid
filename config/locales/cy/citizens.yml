@@ -56,7 +56,6 @@ cy:
       cash_income_form:
         dates: "%{date}"
         info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
       update:
         none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     cash_outgoings:
