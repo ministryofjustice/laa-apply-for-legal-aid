@@ -25,5 +25,10 @@ module Admin
       response.headers['Pragma'] = 'no-cache'
       response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
     end
+
+    def convert_date_params(params)
+      # gsub finds ([digit]i) and replaces with _[digit]i
+      params.transform_keys! { |key| key.gsub(/\((\di)\)/, '_\\1') }
+    end
   end
 end

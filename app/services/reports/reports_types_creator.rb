@@ -1,7 +1,6 @@
 module Reports
   class ReportsTypesCreator
     include ActiveModel::Model
-    include ActionController::DataStreaming
 
     def self.call(params)
       new(params).call
@@ -10,9 +9,9 @@ module Reports
     attr_reader :application_type,
                 :submitted_to_ccms,
                 :capital_assessment_result,
-                :payload_attrs,
-                :records_from,
                 :records_to,
+                :records_from,
+                :payload_attrs,
                 :matches
 
     validate :validate_required
@@ -22,12 +21,12 @@ module Reports
       @submitted_to_ccms = params[:submitted_to_ccms]
       @capital_assessment_result = params[:capital_assessment_result]
       @payload_attrs = params[:payload_attrs]
-      @records_from = params[:records_from]
-      @records_to = params[:records_to]
+      @records_from = process_date(params, 'records_from') || Date.parse('2019-12-01')
+      @records_to = process_date(params, 'records_to') || Date.current
     end
 
     def call
-      return unless valid?
+      return self unless valid?
 
       opts = {
         passported: application_type != 'A' && application_type,
@@ -36,7 +35,7 @@ module Reports
         payload_attrs: separate_attrs(payload_attrs)
       }
 
-      results = find_cases(opts: opts)
+      results = find_cases(from: @records_from, to: @records_to, opts: opts)
       @matches = results.present? ? 'Yes' : 'No'
 
       CSV.open(Rails.root.join('tmp/custom-apply-ccms-report.csv'), 'wb') do |csv|
@@ -54,8 +53,6 @@ module Reports
     private
 
     def validate_required
-      return if application_type.empty?
-
       errors.add(:application_type, I18n.t('activemodel.errors.models.reports.application_type')) if application_type.empty?
       errors.add(:submitted_to_ccms, I18n.t('activemodel.errors.models.reports.submitted_to_ccms')) if submitted_to_ccms.empty?
     end
@@ -66,13 +63,20 @@ module Reports
       str.split(/\r\n|,|\s/).reject(&:empty?).map(&:upcase)
     end
 
-    def find_cases(from: '2019-12-01', to: Date.current.strftime('%Y-%m-%d'), opts:)
+    def process_date(params, date_type)
+      date_params = params.select { |key, _value| key.include? date_type }
+      return if date_params.values.first.empty?
+
+      Date.parse("#{date_params["#{date_type}_1i"]}-#{date_params["#{date_type}_2i"]}-#{date_params["#{date_type}_3i"]}")
+    end
+
+    def find_cases(from:, to:, opts:)
       results = []
 
       # get application ids with a benefit check result within time range
       laa_ids = BenefitCheckResult
-                  .where('created_at >= ?', from + ' 00:00:00.000000')
-                  .where('created_at <= ?', to + ' 23:59:59.999999')
+                  .where('created_at >= ?', from.strftime('%Y-%m-%d') + ' 00:00:00.000000')
+                  .where('created_at <= ?', to.strftime('%Y-%m-%d') + ' 23:59:59.999999')
 
       # distinguish whether a passported or non-passported application
       if opts[:passported]

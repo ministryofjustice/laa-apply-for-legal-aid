@@ -74,7 +74,6 @@
                                             hint: { text: '' },
                                             legend: { text: t("admin.reports.submitted_to_ccms.heading"), tag: 'h1', size: 'm' } %>
 
-
     <%= form.govuk_collection_check_boxes :capital_assessment_result,
                                           [OpenStruct.new(id: 'pending', name: t("admin.reports.capital_assessment_result.pending")),
                                           OpenStruct.new(id: 'eligible', name: t("admin.reports.capital_assessment_result.eligible")),
@@ -98,4 +97,3 @@
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>
-

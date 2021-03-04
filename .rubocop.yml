@@ -15,6 +15,7 @@ AllCops:
   - 'ccms_integration/*'
   - 'tmp/**/*'
   - 'log/**/*'
+  - 'app/services/reports/reports_types_creator.rb' # temporary
 
 Layout/LineLength:
   Max: 180

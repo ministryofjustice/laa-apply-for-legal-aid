@@ -66,7 +66,7 @@ module Admin
     end
 
     def form_params
-      params[:reports_reports_types_creator] || params
+      convert_date_params(params[:reports_reports_types_creator] || params)
     end
   end
 end
