@@ -121,7 +121,7 @@ Feature: Citizen journey
     When I enter amount '5000'
     And I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you make?"
-    Then I select "Rent or mortgage"
+    Then I select "Housing payments"
     Then I click 'Save and continue'
     Then I should be on the 'cash_outgoing' page showing 'Select payments you make in cash'
     Then I select 'aggregated_cash_outgoings_check_box_rent_or_mortgage'
@@ -155,7 +155,7 @@ Feature: Citizen journey
     Then I enter maintenance_in3 '100'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Maintenance payments Yes'
+    Then I should be on a page showing 'Maintenance payments from a former partner Yes'
 
   @javascript
   Scenario: I want to add another bank account via the check your answers page

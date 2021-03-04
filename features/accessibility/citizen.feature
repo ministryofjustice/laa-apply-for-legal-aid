@@ -57,7 +57,7 @@ Feature: Citizen accessibility
     And I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you make?"
     And the page is accessible
-    Then I select "Rent or mortgage"
+    Then I select "Housing payments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the page is accessible
